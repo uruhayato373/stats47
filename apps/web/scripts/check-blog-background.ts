@@ -3,7 +3,7 @@
  * 送り箱の記事に、今の内容に合う背景があるかを判定して JSON を 1 行出す (読み取り専用)。
  * quality-gate.mjs が push 前に呼ぶ。判定の規則は lib/blog-background-status.ts。
  *
- *   npx tsx apps/web/scripts/check-blog-background.ts --article docs/21_ブログ記事原稿/<slug>/article.md
+ *   npx tsx apps/web/scripts/check-blog-background.ts --article contents/blog/<slug>/article.md
  *
  * R2 は公開 URL を読むだけで、書き込みも認証情報も使わない。
  */

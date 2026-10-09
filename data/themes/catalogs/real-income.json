@@ -496,26 +496,6 @@
       ]
     },
     {
-      "key": "candidate-73-1",
-      "title": "可処分所得と生活費｜可処分所得",
-      "rankingKeys": [
-        "disposable-income-worker-households"
-      ],
-      "defaultCheckedKeys": [
-        "disposable-income-worker-households"
-      ]
-    },
-    {
-      "key": "candidate-73-2",
-      "title": "実収入",
-      "rankingKeys": [
-        "actual-income-worker-households-per-month"
-      ],
-      "defaultCheckedKeys": [
-        "actual-income-worker-households-per-month"
-      ]
-    },
-    {
       "key": "candidate-77-1",
       "title": "消費支出（全費目）",
       "rankingKeys": [
@@ -663,14 +643,6 @@
       "chartKeys": [
         "real-income-cpi-breakdown",
         "real-income-cpi-breakdown-expenses"
-      ]
-    },
-    {
-      "key": "candidate-73",
-      "title": "可処分所得と生活費",
-      "metricGroupKeys": [
-        "candidate-73-1",
-        "candidate-73-2"
       ]
     },
     {

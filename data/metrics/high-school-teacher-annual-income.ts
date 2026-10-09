@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const highSchoolTeacherAnnualIncome: MetricConfig = {
   "key": "high-school-teacher-annual-income",
   "title": "高等学校教員の平均年収",
-  "description": "高等学校教員の都道府県別平均年収。賃金構造基本統計調査に基づく。",
+  "description": "高等学校教員の都道府県別平均年収。賃金構造基本統計調査に基づく。対象は一般労働者・男女計。",
   "unit": "万円",
   "category": "economy",
   "source": {

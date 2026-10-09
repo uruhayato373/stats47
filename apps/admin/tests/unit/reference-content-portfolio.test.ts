@@ -197,6 +197,50 @@ describe('reference content portfolio', () => {
     expect(withAreaRole([], ['ranking'])).toBe('not-applicable');
   });
 
+  it('展開先に載せないと決めた記録は、県ページを対象外・日本全体を停止中として数え、採用済みを上書きしない', () => {
+    const stageOf = (
+      channel: 'area' | 'japan',
+      placementDecisions: Array<{ channel: 'area' | 'japan'; metricKey: string; status: 'rejected' | 'blocked'; reason: string }>,
+      areaDatabookMetricKeys: string[] = []
+    ) =>
+      buildReferenceContentPortfolio(
+        fixture({
+          areaDatabookMetricKeys,
+          placementDecisions,
+          inventories: [
+            {
+              sourceKey: 'book-a',
+              edition: '2026',
+              sourcePath: 'data/source-inventory/book-a/2026/inventory.json',
+              items: [
+                {
+                  id: 'metric-evidence',
+                  resolution: 'reuse-existing-metric',
+                  primarySource: { url: 'https://example.go.jp/stat' },
+                  mapping: { metricKeys: ['sample-metric'], contentRoles: ['ranking', 'area', 'japan'] },
+                },
+              ],
+            },
+          ],
+          expectedSourceKeys: ['book-a'],
+        })
+      ).units
+        .find((unit) => unit.id === 'metric:sample-metric')!
+        .channels.find((c) => c.channel === channel)!;
+
+    expect(stageOf('area', []).stage).toBe('ready');
+    const rejected = stageOf('area', [{ channel: 'area', metricKey: 'sample-metric', status: 'rejected', reason: '重複' }]);
+    expect(rejected.stage).toBe('not-applicable');
+    expect(rejected.detail).toContain('重複');
+    expect(stageOf('japan', [{ channel: 'japan', metricKey: 'sample-metric', status: 'blocked', reason: '生成器が未対応' }]).stage).toBe('blocked');
+    // 別の展開先の記録は効かない
+    expect(stageOf('japan', [{ channel: 'area', metricKey: 'sample-metric', status: 'rejected', reason: 'x' }]).stage).toBe('ready');
+    // テンプレートに載っていれば、記録があっても採用済みが勝つ
+    expect(
+      stageOf('area', [{ channel: 'area', metricKey: 'sample-metric', status: 'rejected', reason: 'x' }], ['sample-metric']).stage
+    ).toBe('integrated');
+  });
+
   it('非公開metricから下流制作をreadyにしない', () => {
     const input = fixture({
       metrics: [

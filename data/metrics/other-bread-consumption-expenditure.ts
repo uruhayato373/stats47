@@ -5,6 +5,8 @@ export const otherBreadConsumptionExpenditure: MetricConfig = {
   "key": "other-bread-consumption-expenditure",
   "title": "他のパン消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間他のパン消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。",
+  "description": "家計調査（二人以上の世帯）の食パン以外のパンへの年間支出額。",
   "unit": "円",
   "category": "economy",
   "source": {

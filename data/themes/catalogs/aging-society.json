@@ -245,6 +245,23 @@
       }
     },
     {
+      "rankingKey": "elderly-living-alone-rate",
+      "shortLabel": "高齢者の一人暮らしの割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系（総務省統計局）の国勢調査由来の 2 項目、65歳以上の世帯員のいる単独世帯数と65歳以上人口の比",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-10-08",
+        "rationale": "65歳以上人口のうち一人で暮らす人の割合（高齢者本人の独居率）。2010・2015・2020年の47都道府県で国勢調査の表の値と一致することを確かめた。既存の高齢単独世帯の割合は一般世帯が分母で、2020年は高知が1位だが、本指標は東京が1位（26.1%）・山形が最下位（12.1%）と顔ぶれが変わるため、同じ章で並べて分母の違いを示す。GSC 2026-W40（28日）で「高齢者 一人暮らし 割合」系の5クエリが計293表示。",
+        "adoptionCriteria": [
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "65歳以上の人のうち一人で暮らしている人は何%で、県によってどう違うか。",
+        "targetReaderOrDecision": "離れて暮らす高齢の親の見守りや住まい方を考える読者の目安。"
+      }
+    },
+    {
       "rankingKey": "elderly-couple-only-household-ratio",
       "shortLabel": "高齢夫婦のみの世帯の割合",
       "role": "secondary",
@@ -331,6 +348,11 @@
         "readerQuestion": "65歳以上のうち働いている人の割合は、県によってどう違うか。",
         "targetReaderOrDecision": "高齢期の就労や再雇用、移住先の就業環境を検討する読者。"
       }
+    },
+    {
+      "rankingKey": "mothers-age-at-first-birth",
+      "shortLabel": "第1子出生時の母の平均年齢",
+      "role": "context"
     }
   ],
   "charts": [
@@ -698,7 +720,7 @@
     {
       "key": "elderly-households",
       "title": "高齢者はどの世帯で暮らすか",
-      "description": "高齢単独世帯の割合は一般世帯に対する割合です。高齢者本人の独居率とは異なります。",
+      "description": "高齢者の一人暮らしの割合は65歳以上人口に対する割合（高齢者本人の独居率）です。高齢単独世帯の割合は一般世帯に対する割合で、分母が違うため値も順位も一致しません。",
       "metricGroupKeys": [
         "elderly-households"
       ],
@@ -794,12 +816,13 @@
       "title": "高齢者はどの世帯で暮らすか",
       "rankingKeys": [
         "household-ratio-with-65plus",
+        "elderly-living-alone-rate",
         "single-person-household-old-population-ratio",
         "elderly-couple-only-household-ratio"
       ],
       "defaultCheckedKeys": [
         "household-ratio-with-65plus",
-        "single-person-household-old-population-ratio"
+        "elderly-living-alone-rate"
       ]
     },
     {

@@ -197,45 +197,69 @@
     {
       "rankingKey": "fishery-species-catch-tuna",
       "shortLabel": "マグロ類",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "海面漁業生産統計調査（農林水産省）の累年統計と年次表「大海区都道府県振興局別統計 魚種別漁獲量」",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "マグロ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "surveyedAt": "2026-10-08",
+        "rationale": "魚種別の漁獲量は検索需要が魚種に集まっている（GSC 2026-W40・28日でこの魚種のランキングページが202表示）。需要の多い5魚種（サンマ・イワシ・サバ・カツオ・マグロ）を「主な魚種と産地」の章にまとめる。累年統計（〜2015年）と年次表（2016〜2018・2023年）は魚種名と海のない8県を除く39都道府県の範囲が同じで、全国値も一致する。",
+        "adoptionCriteria": [
+          "readerValue",
+          "complementarity"
+        ],
+        "readerQuestion": "この魚はどの県で多くとれ、その順位は年とともにどう変わったか。",
+        "targetReaderOrDecision": "好きな魚の産地を知りたい読者や、地元の漁業の特色を全国と比べたい読者。"
       }
     },
     {
       "rankingKey": "fishery-species-catch-bonito",
       "shortLabel": "カツオ",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "海面漁業生産統計調査（農林水産省）の累年統計と年次表「大海区都道府県振興局別統計 魚種別漁獲量」",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "カツオは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "surveyedAt": "2026-10-08",
+        "rationale": "魚種別の漁獲量は検索需要が魚種に集まっている（GSC 2026-W40・28日でこの魚種のランキングページが214表示）。需要の多い5魚種（サンマ・イワシ・サバ・カツオ・マグロ）を「主な魚種と産地」の章にまとめる。累年統計（〜2015年）と年次表（2016〜2018・2023年）は魚種名と海のない8県を除く39都道府県の範囲が同じで、全国値も一致する。",
+        "adoptionCriteria": [
+          "readerValue",
+          "complementarity"
+        ],
+        "readerQuestion": "この魚はどの県で多くとれ、その順位は年とともにどう変わったか。",
+        "targetReaderOrDecision": "好きな魚の産地を知りたい読者や、地元の漁業の特色を全国と比べたい読者。"
       }
     },
     {
       "rankingKey": "fishery-species-catch-mackerel",
       "shortLabel": "サバ類",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "海面漁業生産統計調査（農林水産省）の累年統計と年次表「大海区都道府県振興局別統計 魚種別漁獲量」",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "サバ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "surveyedAt": "2026-10-08",
+        "rationale": "魚種別の漁獲量は検索需要が魚種に集まっている（GSC 2026-W40・28日でこの魚種のランキングページが426表示）。需要の多い5魚種（サンマ・イワシ・サバ・カツオ・マグロ）を「主な魚種と産地」の章にまとめる。累年統計（〜2015年）と年次表（2016〜2018・2023年）は魚種名と海のない8県を除く39都道府県の範囲が同じで、全国値も一致する。",
+        "adoptionCriteria": [
+          "readerValue",
+          "complementarity"
+        ],
+        "readerQuestion": "この魚はどの県で多くとれ、その順位は年とともにどう変わったか。",
+        "targetReaderOrDecision": "好きな魚の産地を知りたい読者や、地元の漁業の特色を全国と比べたい読者。"
       }
     },
     {
       "rankingKey": "fishery-species-catch-pacific-saury",
       "shortLabel": "サンマ",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "海面漁業生産統計調査（農林水産省）の累年統計と年次表「大海区都道府県振興局別統計 魚種別漁獲量」",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "サンマは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "surveyedAt": "2026-10-08",
+        "rationale": "魚種別の漁獲量は検索需要が魚種に集まっている（GSC 2026-W40・28日でこの魚種のランキングページが612表示）。需要の多い5魚種（サンマ・イワシ・サバ・カツオ・マグロ）を「主な魚種と産地」の章にまとめる。累年統計（〜2015年）と年次表（2016〜2018・2023年）は魚種名と海のない8県を除く39都道府県の範囲が同じで、全国値も一致する。",
+        "adoptionCriteria": [
+          "readerValue",
+          "complementarity"
+        ],
+        "readerQuestion": "この魚はどの県で多くとれ、その順位は年とともにどう変わったか。",
+        "targetReaderOrDecision": "好きな魚の産地を知りたい読者や、地元の漁業の特色を全国と比べたい読者。"
       }
     },
     {
@@ -252,12 +276,18 @@
     {
       "rankingKey": "fishery-species-catch-sardine",
       "shortLabel": "イワシ類",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "海面漁業生産統計調査（農林水産省）の累年統計と年次表「大海区都道府県振興局別統計 魚種別漁獲量」",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "イワシ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "surveyedAt": "2026-10-08",
+        "rationale": "魚種別の漁獲量は検索需要が魚種に集まっている（GSC 2026-W40・28日でこの魚種のランキングページが530表示）。需要の多い5魚種（サンマ・イワシ・サバ・カツオ・マグロ）を「主な魚種と産地」の章にまとめる。累年統計（〜2015年）と年次表（2016〜2018・2023年）は魚種名と海のない8県を除く39都道府県の範囲が同じで、全国値も一致する。",
+        "adoptionCriteria": [
+          "readerValue",
+          "complementarity"
+        ],
+        "readerQuestion": "この魚はどの県で多くとれ、その順位は年とともにどう変わったか。",
+        "targetReaderOrDecision": "好きな魚の産地を知りたい読者や、地元の漁業の特色を全国と比べたい読者。"
       }
     },
     {
@@ -430,6 +460,15 @@
       "chartKeys": []
     },
     {
+      "key": "species",
+      "title": "主な魚種と産地",
+      "description": "魚種別の漁獲量は2018年までと2023年の値です。2019〜2022年は都道府県の値がそろって公表されていないため、推移は2018年の次が2023年になります。海のない8県は対象外で、0ではありません。",
+      "metricGroupKeys": [
+        "species"
+      ],
+      "chartKeys": []
+    },
+    {
       "key": "output-workers",
       "title": "漁業・養殖業の産出額",
       "description": "海面漁業・養殖業産出額は2017年から、海面漁業だけの産出額は1975年からの系列で、対象が違います。どちらも名目の金額で、魚の価格の変動を含みます。",
@@ -485,6 +524,22 @@
       "defaultCheckedKeys": [
         "inland-fishery-catch",
         "inland-aquaculture-harvest"
+      ]
+    },
+    {
+      "key": "species",
+      "title": "主な魚種の漁獲量",
+      "rankingKeys": [
+        "fishery-species-catch-pacific-saury",
+        "fishery-species-catch-sardine",
+        "fishery-species-catch-mackerel",
+        "fishery-species-catch-bonito",
+        "fishery-species-catch-tuna"
+      ],
+      "defaultCheckedKeys": [
+        "fishery-species-catch-pacific-saury",
+        "fishery-species-catch-sardine",
+        "fishery-species-catch-mackerel"
       ]
     },
     {

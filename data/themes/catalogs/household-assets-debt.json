@@ -74,6 +74,16 @@
         "surveyedAt": "2026-09-09",
         "rationale": "住宅・土地負債が金融負債に占める割合を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "financial-literacy-correct-rate",
+      "shortLabel": "金融リテラシー調査 正誤問題の正答率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "securities-balance",
+      "shortLabel": "有価証券保有額",
+      "role": "context"
     }
   ],
   "charts": [],

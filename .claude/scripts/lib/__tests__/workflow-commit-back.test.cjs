@@ -24,15 +24,15 @@ const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
 
 // 実 workflow の shell を fixture 上で実行する。R2 書込・生成・本文ゲートだけを stub 化し、
-// 既知の背景不足は次の slug へ進み、未知の失敗は公開を止めることを検証する。
-for (const thumbnailExit of [20, 1]) {
+// 既知の背景不足 (20) とメタデータだけが古い背景 (21) は次の slug へ進み、未知の失敗は公開を止めることを検証する。
+for (const thumbnailExit of [20, 21, 1]) {
   test(`blog publish: thumbnail exit ${thumbnailExit} の公開境界`, () => {
     const dir = fs.mkdtempSync(path.join(tmpdir(), 'stats47-blog-publish-test-'));
     try {
       const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-auto-publish.yml'), 'utf8'));
       const step = doc.jobs['auto-publish'].steps.find((s) => s.name.includes('Gate + Stage'));
       for (const slug of ['missing', 'ready']) {
-        const draft = path.join(dir, 'docs/21_ブログ記事原稿', slug);
+        const draft = path.join(dir, 'contents/blog', slug);
         fs.mkdirSync(draft, { recursive: true });
         fs.writeFileSync(path.join(draft, 'article.md'), '---\npublished: true\npublishedAt: 2026-09-07\n---\n本文\n');
       }
@@ -60,14 +60,15 @@ npx() {
         encoding: 'utf8',
         env: { ...process.env, TARGET_SLUGS: 'missing ready', GITHUB_ENV: path.join(dir, 'env'), GITHUB_STEP_SUMMARY: path.join(dir, 'summary'), PUBLISH_LOG: path.join(dir, 'published') },
       });
-      assert.equal(result.status, thumbnailExit === 20 ? 0 : 1, result.stdout + result.stderr);
+      const skips = thumbnailExit === 20 || thumbnailExit === 21;
+      assert.equal(result.status, skips ? 0 : 1, result.stdout + result.stderr);
       // 末尾の app/blog 一括 sync にも未完成記事を混入させない。
       assert.equal(fs.existsSync(path.join(dir, '.local/r2/app/blog/missing')), false);
-      if (thumbnailExit === 20) {
+      if (skips) {
         assert.match(fs.readFileSync(path.join(dir, 'published'), 'utf8'), /--prefix app\/blog\/ready/);
         assert.match(fs.readFileSync(path.join(dir, 'env'), 'utf8'), /PUBLISHED= ready/);
         assert.match(fs.readFileSync(path.join(dir, 'env'), 'utf8'), /SKIPPED= missing/);
-        assert.match(fs.readFileSync(path.join(dir, 'summary'), 'utf8'), /missing.*背景未生成/);
+        assert.match(fs.readFileSync(path.join(dir, 'summary'), 'utf8'), thumbnailExit === 20 ? /missing.*背景未生成/ : /missing.*背景のメタデータが古い/);
       } else {
         assert.equal(fs.existsSync(path.join(dir, 'published')), false);
       }

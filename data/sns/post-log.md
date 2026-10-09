@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**605 件** (最終更新: 2026-10-07)
+**608 件** (最終更新: 2026-10-08)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-08 | 📸 Instagram | ranking-quiz/curry-roux-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeOrTTqFnCN/) |
+| 2026-10-08 | 🧵 Threads | area/area-15000-profile | あなたの知る新潟は、データでも同じ姿ですか？ ユキツバキや塩引き鮭から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeOhrFWDs5M) |
+| 2026-10-08 | 🧵 Threads | ranking/sweet-potato-consumption-expenditure | さつまいもに最もお金を使う県は？  1位は徳島で2,466円。2位鹿児島2,210円、3位滋賀1,872円。 産地として… | [🔗](https://www.threads.com/@stats47jp/post/DeNyxTyiTFK) |
 | 2026-10-07 | 📸 Instagram | correlation-carousel/average-temperature--kerosene-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeM4zvokTTA/) |
 | 2026-10-07 | 📸 Instagram | bar-chart-race/marriages |  | [🔗](https://www.instagram.com/reel/DeMFNCvANLS/) |
 | 2026-10-07 | 🧵 Threads | area/area-14000-profile | 神奈川の「らしさ」をデータでたどる。 県花ヤマユリ、曽我の梅とワカサギ、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DeL6qWfgkft) |

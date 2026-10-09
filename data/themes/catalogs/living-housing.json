@@ -543,6 +543,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "都市公園面積を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "three-generation-household-members",
+      "shortLabel": "3世代世帯人員",
+      "role": "context"
     }
   ],
   "charts": [
@@ -813,7 +818,6 @@
       "description": "2023年10月1日の空き家を賃貸用・売却用・二次的住宅・それ以外に分けて比較します。標本調査の推計値は100戸単位に丸められ、内訳の合計と総数が一致しない場合があります。二次的住宅には別荘等を含み、それ以外の空き家を管理不全空家の認定件数とはみなしません。",
       "metricGroupKeys": [
         "candidate-8-1",
-        "candidate-8-2",
         "candidate-8-3",
         "candidate-8-4",
         "candidate-8-5",
@@ -826,8 +830,7 @@
       "description": "2020年国勢調査の単独世帯を男女・年齢別に比較します。65歳以上の人数と単独世帯全体の割合は分母が異なります。年齢不詳を独立した区分として残し、施設等の世帯は含めません。",
       "metricGroupKeys": [
         "candidate-44-1",
-        "candidate-44-2",
-        "candidate-44-3"
+        "candidate-44-2"
       ],
       "embeddedSectionKeys": [
         "single-households-demographics"
@@ -998,16 +1001,6 @@
       ]
     },
     {
-      "key": "candidate-8-2",
-      "title": "空き家の用途と住宅ストック｜一般世帯数",
-      "rankingKeys": [
-        "households"
-      ],
-      "defaultCheckedKeys": [
-        "households"
-      ]
-    },
-    {
       "key": "candidate-8-3",
       "title": "賃貸・売却用及び二次的住宅を除く空き家",
       "rankingKeys": [
@@ -1068,18 +1061,8 @@
       ]
     },
     {
-      "key": "candidate-44-3",
-      "title": "単独世帯割合",
-      "rankingKeys": [
-        "single-person-household-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "single-person-household-ratio"
-      ]
-    },
-    {
       "key": "candidate-45-1",
-      "title": "世帯構成の変化｜一般世帯数",
+      "title": "一般世帯数",
       "rankingKeys": [
         "households"
       ],

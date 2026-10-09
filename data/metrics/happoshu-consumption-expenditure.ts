@@ -5,6 +5,8 @@ export const happoshuConsumptionExpenditure: MetricConfig = {
   "key": "happoshu-consumption-expenditure",
   "title": "発泡酒・ビール風アルコール飲料消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間発泡酒・ビール風アルコール飲料消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。",
+  "description": "家計調査（二人以上の世帯）の発泡酒・ビール風アルコール飲料への年間支出額。",
   "unit": "円",
   "category": "economy",
   "source": {

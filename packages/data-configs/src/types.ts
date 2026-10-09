@@ -122,6 +122,11 @@ export interface EstatSource {
   areaAxis?: {
     axis: 'cat01' | 'cat02' | 'cat03' | 'cat04' | 'cat05';
     scheme: 'seq-pref' | 'name';
+    /**
+     * 表が対象とする県の範囲。`coastal` は海面漁業統計のように海のない 8 県の行を持たない表で、
+     * その 8 県ちょうどが欠けることを許す (それ以外の欠けは従来どおり fail)。未指定は 47 県。
+     */
+    coverage?: 'coastal';
   };
   /**
    * 時間軸の粒度を年計に限定する。
@@ -249,13 +254,16 @@ export type CalculationFormula =
   | { op: 'per_population'; numerator: string };
 
 /** 取得対象年 */
-/** `MetricConfig.supplementalSources` の 1 件。軸の pin だけを持つ単発クエリに限る。 */
+/**
+ * `MetricConfig.supplementalSources` の 1 件。軸の pin だけを持つ単発クエリに限る。
+ * 年によって都道府県が分類軸に入っている表 (海面漁業生産統計の年次表など) は `areaAxis` で写像する。
+ */
 export interface SupplementalSource {
   /** 補完側の値を採る年 (4 桁) */
   years: readonly number[];
   source: Pick<
     EstatSource,
-    'kind' | 'statsDataId' | 'cdCat01' | 'cdCat02' | 'cdCat03' | 'cdCat04' | 'cdCat05' | 'cdTab' | 'displayName' | 'url'
+    'kind' | 'statsDataId' | 'cdCat01' | 'cdCat02' | 'cdCat03' | 'cdCat04' | 'cdCat05' | 'cdTab' | 'areaAxis' | 'displayName' | 'url'
   >;
   /** 主出典で足りない理由 (監査で読む説明) */
   reason: string;

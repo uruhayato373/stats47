@@ -63,14 +63,14 @@ export interface RecipeOps {
    */
   valueScale?: number;
   /** 地域が area 軸ではなく cat 軸に入っている表の写像 */
-  areaAxis?: { axis: EstatAxis; scheme: "seq-pref" | "name" };
+  areaAxis?: { axis: EstatAxis; scheme: "seq-pref" | "name"; coverage?: "coastal" };
   /** 家計調査の県庁所在市 → 都道府県 写像 */
   areaRemap?: "kakei-capital-city";
   /**
    * 指定年を別表から補う (`MetricConfig.supplementalSources`)。
    * 主出典の単発クエリではその年が取れないので、あれば derived になる。
    */
-  supplements?: ReadonlyArray<{ years: readonly number[]; estatParams: EstatQueryParams }>;
+  supplements?: ReadonlyArray<{ years: readonly number[]; estatParams: EstatQueryParams; areaAxis?: AreaAxisOp }>;
   /**
    * 他 metric から計算して作る値 (`fetcherKey:"calculated"`)。
    *
@@ -209,6 +209,30 @@ function pickString(source: Record<string, unknown>, key: string): string | unde
   return typeof v === "string" && v.length > 0 ? v : undefined;
 }
 
+/** 地域を cat 軸に持つ表の写像 (レシピの正準形)。coverage は宣言したときだけ載せる */
+type AreaAxisOp = NonNullable<RecipeOps["areaAxis"]>;
+
+/**
+ * coverage は宣言したときだけ載せる。未宣言の既存 metric の configHash を動かさないため
+ * (`valueScale: 1` をレシピに載せないのと同じ理由)。
+ */
+function buildAreaAxisOp(areaAxis: {
+  axis: EstatAxis;
+  scheme: "seq-pref" | "name";
+  coverage?: "coastal";
+}): AreaAxisOp {
+  return areaAxis.coverage
+    ? { axis: areaAxis.axis, scheme: areaAxis.scheme, coverage: areaAxis.coverage }
+    : { axis: areaAxis.axis, scheme: areaAxis.scheme };
+}
+
+function parseAreaAxisOp(value: Record<string, unknown>): AreaAxisOp | undefined {
+  const axis = parseAxis(value.axis);
+  const scheme = value.scheme;
+  if (!axis || (scheme !== "seq-pref" && scheme !== "name")) return undefined;
+  return buildAreaAxisOp({ axis, scheme, coverage: value.coverage === "coastal" ? "coastal" : undefined });
+}
+
 function buildEstatParams(
   src: Partial<Record<string, unknown>> & { statsDataId?: unknown },
 ): EstatQueryParams | undefined {
@@ -276,7 +300,7 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
     if (typeof s.valueScale === "number" && Number.isFinite(s.valueScale) && s.valueScale !== 1) {
       ops.valueScale = s.valueScale;
     }
-    if (s.areaAxis) ops.areaAxis = { axis: s.areaAxis.axis, scheme: s.areaAxis.scheme };
+    if (s.areaAxis) ops.areaAxis = buildAreaAxisOp(s.areaAxis);
   }
 
   if (s.kind === "kakei-chousa") {
@@ -295,9 +319,13 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
   const supplements = (config.supplementalSources ?? [])
     .map((sup) => {
       const estatParams = buildEstatParams(sup.source as unknown as Record<string, unknown>);
-      return estatParams ? { years: [...sup.years].sort((a, b) => a - b), estatParams } : undefined;
+      if (!estatParams) return undefined;
+      const years = [...sup.years].sort((a, b) => a - b);
+      return sup.source.areaAxis
+        ? { years, estatParams, areaAxis: buildAreaAxisOp(sup.source.areaAxis) }
+        : { years, estatParams };
     })
-    .filter((sup): sup is { years: number[]; estatParams: EstatQueryParams } => sup !== undefined);
+    .filter((sup): sup is { years: number[]; estatParams: EstatQueryParams; areaAxis?: AreaAxisOp } => sup !== undefined);
   if (supplements.length > 0) ops.supplements = supplements;
 
   // 計算型 (fetcherKey:"calculated") — 分子・分母から作る値。
@@ -442,26 +470,21 @@ function parseOps(value: unknown): RecipeOps | undefined {
   }
 
   if (isRecord(value.areaAxis)) {
-    const axis = parseAxis(value.areaAxis.axis);
-    const scheme = value.areaAxis.scheme;
-    if (axis && (scheme === "seq-pref" || scheme === "name")) {
-      ops.areaAxis = { axis, scheme };
-    }
+    const areaAxis = parseAreaAxisOp(value.areaAxis);
+    if (areaAxis) ops.areaAxis = areaAxis;
   }
 
   if (value.areaRemap === "kakei-capital-city") ops.areaRemap = "kakei-capital-city";
 
   if (Array.isArray(value.supplements)) {
-    const supplements = value.supplements
-      .filter(isRecord)
-      .map((sup) => ({
-        years: Array.isArray(sup.years) ? sup.years.filter((y): y is number => typeof y === "number") : [],
-        estatParams: isRecord(sup.estatParams) ? buildEstatParams(sup.estatParams) : undefined,
-      }))
-      .filter(
-        (sup): sup is { years: number[]; estatParams: EstatQueryParams } =>
-          sup.years.length > 0 && sup.estatParams !== undefined,
-      );
+    const supplements: Array<{ years: number[]; estatParams: EstatQueryParams; areaAxis?: AreaAxisOp }> = [];
+    for (const sup of value.supplements.filter(isRecord)) {
+      const years = Array.isArray(sup.years) ? sup.years.filter((y): y is number => typeof y === "number") : [];
+      const estatParams = isRecord(sup.estatParams) ? buildEstatParams(sup.estatParams) : undefined;
+      if (years.length === 0 || !estatParams) continue;
+      const areaAxis = isRecord(sup.areaAxis) ? parseAreaAxisOp(sup.areaAxis) : undefined;
+      supplements.push(areaAxis ? { years, estatParams, areaAxis } : { years, estatParams });
+    }
     if (supplements.length > 0) ops.supplements = supplements;
   }
 

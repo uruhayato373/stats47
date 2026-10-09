@@ -46,7 +46,7 @@ export const elementarySchoolLongAbsenceRatioNonattendanceOver30daysPer1000: Met
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "不登校による小学校長期欠席児童比率ランキング都道府県【2023年】｜1位沖縄県（32.69‐）",
-  "seoDescription": "2023年の不登校による小学校長期欠席児童比率の都道府県別ランキング。1位沖縄県（32.69‐）、最下位福井県（14.5‐）で2.3倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "不登校による小学校長期欠席児童比率ランキング都道府県【2023年】｜1位沖縄県（32.69）",
+  "seoDescription": "2023年の不登校による小学校長期欠席児童比率の都道府県別ランキング。1位沖縄県（32.69）、最下位福井県（14.5）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

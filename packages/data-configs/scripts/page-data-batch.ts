@@ -37,6 +37,7 @@ import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
 import { buildRecipe, type MetricRecipe } from "../src/recipe.js";
 import {
+  hasExpectedCoverage,
   resolveAreaAxis,
   surveyYearFromDate,
   type AreaAxisMember,
@@ -507,7 +508,7 @@ async function fetchEstatAreaAxis(
     );
   }
 
-  if (mapping.missingPrefectures.length > 0) {
+  if (!hasExpectedCoverage(mapping.missingPrefectures, areaAxis.coverage)) {
     throw new Error(
       `areaAxis (${areaAxis.axis}/${areaAxis.scheme}) が ${mapping.byCode.size} 県しか解決できません。` +
         `未解決: ${mapping.missingPrefectures.slice(0, 5).join(",")}${mapping.missingPrefectures.length > 5 ? "…" : ""}` +

@@ -1,13 +1,13 @@
 {
-  "total": 1609,
+  "total": 1610,
   "staged": false,
   "byStatus": {
-    "both": 1525,
+    "both": 1526,
     "jsonOnly": 0,
     "neither": 84
   },
   "byMethod": {
-    "done": 1525,
+    "done": 1526,
     "manual": 34,
     "ssot-restore": 22,
     "ssot-restore-new": 28
@@ -1754,8 +1754,8 @@
     },
     {
       "slug": "cc-estat-09-radar-prefecture",
-      "base": "tokyo-radar-findings",
-      "chartType": "findings",
+      "base": "tokyo-radar",
+      "chartType": "unknown",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -1765,8 +1765,8 @@
     },
     {
       "slug": "cc-estat-09-radar-prefecture",
-      "base": "tokyo-kyoto-overlay-findings",
-      "chartType": "findings",
+      "base": "tokyo-kyoto-radar",
+      "chartType": "unknown",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -4616,6 +4616,17 @@
       "slug": "fishery-catch-aquaculture-shift",
       "base": "fishery-workers-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fishery-species-prefecture-specialty",
+      "base": "sardine-national-timeseries",
+      "chartType": "line",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -13743,8 +13754,19 @@
       "residualCard": null
     },
     {
-      "slug": "school-teacher-annual-income-prefecture-gap",
-      "base": "school-teacher-annual-income-prefecture-gap-prefecture-rankings",
+      "slug": "school-teacher-annual-income",
+      "base": "school-teacher-annual-income-2022-2023-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "base": "teacher-coverage-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -13754,19 +13776,8 @@
       "residualCard": null
     },
     {
-      "slug": "school-teacher-annual-income-prefecture-gap",
-      "base": "school-teacher-annual-income-prefecture-gap-map",
-      "chartType": "tilemap",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "school-teacher-annual-income-prefecture-gap",
-      "base": "school-teacher-annual-income-2022-2023-scatter",
+      "slug": "school-teacher-annual-income",
+      "base": "teacher-age-income-change-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,

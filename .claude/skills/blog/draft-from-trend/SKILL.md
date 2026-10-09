@@ -1,7 +1,7 @@
 ---
 name: draft-from-trend
 domain: site
-description: metric/トレンドから記事下書きを R2 観測値直 fetch で一気通貫生成 (metric 選定 → fetch-ranking-data-r2 → article.md(archetype) → generate-article-charts → factual-check)。docs/21 は ephemeral outbox。Use when user says "下書き生成", "ドラフト", "記事を作って", "draft-from-trend"。
+description: metric/トレンドから記事下書きを R2 観測値直 fetch で一気通貫生成 (metric 選定 → fetch-ranking-data-r2 → article.md(archetype) → generate-article-charts → factual-check)。contents/blog は ephemeral outbox。Use when user says "下書き生成", "ドラフト", "記事を作って", "draft-from-trend"。
 primary_agent: article-writer
 ---
 
@@ -12,7 +12,7 @@ primary_agent: article-writer
 ## データ層の前提 (完全DBレス / R2 直)
 
 - 観測値の正典は **R2 `app/stats/<metricKey>/values.json`** (公開 URL `https://storage.stats47.jp`、認証不要)。
-- 記事の正典は **R2 `app/blog/<slug>`**。`docs/21_ブログ記事原稿/<slug>` は **ephemeral outbox** (公開前ドラフトの一時置き場。公開後は CI が自動削除 → 常に空)。
+- 記事の正典は **R2 `app/blog/<slug>`**。`contents/blog/<slug>` は **ephemeral outbox** (公開前ドラフトの一時置き場。公開後は CI が自動削除 → 常に空)。
 - 旧 `fetch-article-data.mjs` (D1 + docs/20 backlog 依存) は廃止。データ接地は **`fetch-ranking-data-r2.mjs`** (R2 直) を使う。
 
 ## 用途
@@ -60,7 +60,7 @@ primary_agent: article-writer
 node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricKey>[,<metricKey2>]
 ```
 
-- 出力: `docs/21_ブログ記事原稿/<slug>/data/<key>-prefecture-rankings.json` (R2 公開 URL から取得・value 降順で rank 再計算・統一スキーマ `{areaName,rank,value,unit,label}`)。
+- 出力: `contents/blog/<slug>/data/<key>-prefecture-rankings.json` (R2 公開 URL から取得・value 降順で rank 再計算・統一スキーマ `{areaName,rank,value,unit,label}`)。
 - 時系列が必要なら R2 `values.json` の全年を集計して `<name>-timeseries.json` を作る (全国合計/平均は本文の主張と一致させる)。
 - **散布図 (archetype B) は専用ヘルパーで生成** (相関 snapshot の scatterData を変換、手 join 不要):
 
@@ -77,9 +77,9 @@ node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metric
   対象県の転出先/転入元を集計して `<name>-ranking.json` にする。
 - **本文の数値・rank はこの data の値のみ使う** (捏造防止)。e-Stat 規約は `.claude/rules/estat-api.md`。
 
-### Step 3: article.md 生成 (docs/21 outbox)
+### Step 3: article.md 生成 (contents/blog outbox)
 
-`docs/21_ブログ記事原稿/<slug>/article.md` を新規作成。**`.claude/rules/blog-quality-standards.md` が品質の正典**。要点:
+`contents/blog/<slug>/article.md` を新規作成。**`.claude/rules/blog-quality-standards.md` が品質の正典**。要点:
 
 - **frontmatter**: `title`(curiosity-gap・N位/X倍差で終わらない) / `seoTitle` / `subtitle` / `slug` / `description`(緊張感セットアップ) / `archetype` / `category` / `tags` / `publishedAt` / `published: false`(作成時は false、公開時に true)。
 - **文体は ですます調**で統一 (である調 copula 混在は gate blocker)。
@@ -102,7 +102,7 @@ node .claude/scripts/blog/generate-article-charts.ts --slug <slug>
 ### Step 5: Factual cross-check ★必須
 
 ```bash
-node .claude/scripts/lib/article-factual-check.mjs "docs/21_ブログ記事原稿/<slug>/article.md" "docs/21_ブログ記事原稿/<slug>/data"
+node .claude/scripts/lib/article-factual-check.mjs "contents/blog/<slug>/article.md" "contents/blog/<slug>/data"
 ```
 
 - exit 0 で次へ。`RANK_MISMATCH`/数値捏造の blocker があれば data の正しい値で本文を Edit して再実行。framing 自体が data と矛盾するなら draft を破棄して metric/角度を選び直す。
@@ -110,7 +110,7 @@ node .claude/scripts/lib/article-factual-check.mjs "docs/21_ブログ記事原�
 ### Step 6: 品質ゲート + critic
 
 ```bash
-node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/article.md
+node .claude/scripts/blog/quality-gate.mjs contents/blog/<slug>/article.md
 ```
 
 - **公開する記事は `blog-critic` (別 agent) の `review.md` (verdict: PASS) が必須** (自己採点禁止)。`/blog-review --mode expert` で生成し、PASS になるまで本文を直す。
@@ -118,7 +118,7 @@ node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/
 
 ### Step 7: 公開 (R2)
 
-- `published: true` にして commit → **develop に push** すると `blog-auto-publish.yml` が R2 へ公開し、**docs/21 のドラフトを自動削除** (ephemeral outbox)。
+- `published: true` にして commit → **develop に push** すると `blog-auto-publish.yml` が R2 へ公開し、**contents/blog のドラフトを自動削除** (ephemeral outbox)。
 - 公開後は `https://stats47.jp/blog/<slug>` をライブで確認 → 改善は `/brushup-blog`（R2 の記事を取得して是正）で反復する。
 
 ## 規約
@@ -169,6 +169,6 @@ node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|
 
 ## 完了条件
 
-- `docs/21_ブログ記事原稿/<slug>/article.md` (frontmatter + ですます + 上位5+下位5 SVG + callout + source-link インライン) が揃う
-- `docs/21_ブログ記事原稿/<slug>/data/*.json` と `data/*.svg` が揃い、未置換 placeholder/インライン svg なし
+- `contents/blog/<slug>/article.md` (frontmatter + ですます + 上位5+下位5 SVG + callout + source-link インライン) が揃う
+- `contents/blog/<slug>/data/*.json` と `data/*.svg` が揃い、未置換 placeholder/インライン svg なし
 - `article-factual-check.mjs` exit 0 / `quality-gate.mjs` exit 0 / (公開時) `review.md` verdict: PASS

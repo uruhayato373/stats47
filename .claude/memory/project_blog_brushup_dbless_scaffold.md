@@ -9,14 +9,14 @@ metadata:
 
 公開済みブログ記事を `/brushup-blog --target queue` で是正したとき (2026-06-07 wave、consumer-price/curry/doctor 3記事) に判明した、DBレス cloud-first 環境固有の落とし穴。次回 brushup で同じところで躓くため記録。
 
-## 0. ★公開後の docs/21 削除は「自分の記事を slug 指定」で消す (`git rm -r docs/21/` は禁止)
-2026-06-07 事故: 公開済み 3 記事の docs/21 を消すつもりで `git rm -rq docs/21_ブログ記事原稿/` を実行し、
+## 0. ★公開後の contents/blog 削除は「自分の記事を slug 指定」で消す (`git rm -r contents/blog/` は禁止)
+2026-06-07 事故: 公開済み 3 記事の contents/blog を消すつもりで `git rm -rq contents/blog/` を実行し、
 直前の `git pull --rebase` で取り込んだ **週次cron `feat(blog): 週次自動生成 N本` の未公開ドラフト10本を
 巻き込み削除 → push** してしまった (commit ae34ca4b)。全10本が R2 404(未公開)を確認し 7734164e から
 `git checkout <commit> -- docs/21_…/<slug>` で復元 (commit 67395d42)。教訓:
-- **docs/21 には週次cronが未公開ドラフトを継続追加する**。`rebase`/`pull` で他者の未公開ドラフトが working tree に入る。
-- 公開後の掃除は **自分が公開した slug を名指しで `git rm -r docs/21_…/<slug>`** する。ディレクトリ丸ごと消さない。
-- 削除前に必ず **`find docs/21 -maxdepth 1 -type d` で中身を確認**し、自分が作っていない dir があれば触らない
+- **contents/blog には週次cronが未公開ドラフトを継続追加する**。`rebase`/`pull` で他者の未公開ドラフトが working tree に入る。
+- 公開後の掃除は **自分が公開した slug を名指しで `git rm -r contents/blog/<slug>`** する。ディレクトリ丸ごと消さない。
+- 削除前に必ず **`find contents/blog -maxdepth 1 -type d` で中身を確認**し、自分が作っていない dir があれば触らない
   (CLAUDE.md「削除/上書き前に対象を見る・自分が作っていないものは surface する」)。各 slug の R2 公開状況
   (`curl storage.stats47.jp/app/blog/<slug>/article.md` が 200 か 404 か) で公開済み(消してよい)/未公開(残す)を判定。
 
@@ -39,11 +39,11 @@ brushup での変換は article-writer に「文体だけ変える」と指示�
 連結破損した (2026-06-08、10本)。frontmatter の値だけ変えるなら **`\s*$` を使わず** `s/^published: false$/published: true/`
 (アンカーは `$` のみ) か、次行を保持する置換にする。一括編集後は必ず frontmatter 末尾を目視確認。
 
-## 1. docs/21 は毎回 R2 から復元する (削除済みが正常)
-公開済み記事の docs/21 ドラフトは公開後に削除される lifecycle (`check-published-drafts.cjs` が exit 1 でブロック)。是正対象は **公開 R2 `storage.stats47.jp/app/blog/<slug>/article.md` から docs/21 に復元 → 編集 → publish-blog.yml で再公開 → docs/21 を再削除**。これが正規フロー。[[project_blog_publish_cloud_first]]
+## 1. contents/blog は毎回 R2 から復元する (削除済みが正常)
+公開済み記事の contents/blog ドラフトは公開後に削除される lifecycle (`check-published-drafts.cjs` が exit 1 でブロック)。是正対象は **公開 R2 `storage.stats47.jp/app/blog/<slug>/article.md` から contents/blog に復元 → 編集 → publish-blog.yml で再公開 → contents/blog を再削除**。これが正規フロー。[[project_blog_publish_cloud_first]]
 
 ## 2. fetch-article-data.mjs は使えない (ローカル D1 + docs/20 backlog 依存で陳腐化)
-チャート用 data/*.json を作る公式スクリプト `fetch-article-data.mjs` は `docs/20_ブログ記事企画/backlog/<slug>` の ranking_key 表 + ローカル D1 を読む前提で、DBレス cloud-first では機能しない。代替: **R2 `app/ranking/<key>/values.json` を直接 fetch** し `{title, unit, year, data:[{pref,value,rank}]}` 形式で書く (chart generator が読む形式)。汎用 scaffold は `/tmp/scaffold-brushup.mjs` に実装した (R2→docs/21 復元 + data 生成)。
+チャート用 data/*.json を作る公式スクリプト `fetch-article-data.mjs` は `docs/20_ブログ記事企画/backlog/<slug>` の ranking_key 表 + ローカル D1 を読む前提で、DBレス cloud-first では機能しない。代替: **R2 `app/ranking/<key>/values.json` を直接 fetch** し `{title, unit, year, data:[{pref,value,rank}]}` 形式で書く (chart generator が読む形式)。汎用 scaffold は `/tmp/scaffold-brushup.mjs` に実装した (R2→contents/blog 復元 + data 生成)。
 
 ## 3. R2 values.json の rank は 0 (未計算) → value 降順で再計算必須
 `app/ranking/<key>/values.json` の各 item の `rank` フィールドは **0 のまま** (snapshot 時に未付与)。これをそのまま data/*.json に入れると `article-factual-check.mjs` が全件 RANK_MISMATCH (data=0位) で blocker。対策: data 生成時に **value 降順で 1-based rank を自前計算**して埋める (3記事とも記事の rank と完全一致した)。

@@ -35,7 +35,7 @@ primary_agent: chart-author
 npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix blog
 ```
 
-> ドラフトのみ監査する場合は pull 不要 (`--base docs/21_ブログ記事原稿`)。
+> ドラフトのみ監査する場合は pull 不要 (`--base contents/blog`)。
 
 ### 2. 監査実行
 
@@ -44,7 +44,7 @@ npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix blog
 node .claude/scripts/blog/audit-chart-quality.mjs
 
 # ドラフト
-node .claude/scripts/blog/audit-chart-quality.mjs --base docs/21_ブログ記事原稿
+node .claude/scripts/blog/audit-chart-quality.mjs --base contents/blog
 ```
 
 出力:

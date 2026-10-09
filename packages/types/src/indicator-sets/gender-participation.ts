@@ -49,6 +49,11 @@ export const GENDER_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "prefectural-assembly-female-share",
       "shortLabel": "都道府県議会議員に占める女性の割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "husband-childcare-rate",
+      "shortLabel": "夫の育児参加率",
+      "role": "context"
     }
   ],
   "keywords": [

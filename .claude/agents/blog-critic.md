@@ -3,6 +3,7 @@ name: blog-critic
 domain: site
 description: ブログ記事の expert / panel review 専任。記事は read-only、判定は review.md に書き出す。 修正は呼び元 agent (blog-editor / article-writer) が行う。
 model: sonnet
+effort: high
 ---
 
 # Blog Critic Agent
@@ -85,10 +86,10 @@ model: sonnet
 
 ## 触る state / files
 
-- `docs/21_ブログ記事原稿/<slug>/article.md` + `data/` — **read only** (記事本文・data は触らない)
+- `contents/blog/<slug>/article.md` + `data/` — **read only** (記事本文・data は触らない)
 - `.local/r2/app/blog/<slug>/` — read only (data JSON)
 - `data/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
-- `docs/21_ブログ記事原稿/<slug>/review.md` — **write (本 agent の唯一の書き込み先)**
+- `contents/blog/<slug>/review.md` — **write (本 agent の唯一の書き込み先)**
 - `data/blog/critic-findings.jsonl` — append (`record-critic-findings.mjs` 経由でのみ。指摘の台帳)
 
 ## File Boundary (並行衝突回避)
@@ -98,7 +99,7 @@ model: sonnet
 
 ## Output Contract (★review.md が公開ゲートの必須成果物)
 
-レビュー結果を必ず `docs/21_ブログ記事原稿/<slug>/review.md` に書き出す。`quality-gate.mjs` は
+レビュー結果を必ず `contents/blog/<slug>/review.md` に書き出す。`quality-gate.mjs` は
 `published:true` の記事で `review.md` (verdict: PASS・実体200字以上) が無いと公開を blocker で止める。
 
 ```markdown
@@ -121,7 +122,7 @@ date: YYYY-MM-DD
   source / causal / correlation / region / related-link / title-promise / chart-text / code / structure / style /
   reader-value / other)。型ごとに数え、繰り返す型を writer の規約か gate に格上げするため (正典
   `blog-quality-standards.md`「critic の指摘の型と格上げ」)。
-- **review.md を書いた直後に** `node .claude/scripts/blog/record-critic-findings.mjs docs/21_ブログ記事原稿/<slug>` を実行して
+- **review.md を書いた直後に** `node .claude/scripts/blog/record-critic-findings.mjs contents/blog/<slug>` を実行して
   指摘を台帳に残す (REVISE の指摘は再審で上書きされるため、その前に残す。二重に実行しても行は増えない)。
 - BLOCK 級の指摘が 1 つでもあれば `verdict: REVISE`。呼び元 (article-writer) が修正 → 再 review で PASS に更新。
 - 呼び元への返答 (chat) は **Template A** (table-only: `Slug | Section | Issue Type | Severity | Recommendation`)。前置き文禁止。

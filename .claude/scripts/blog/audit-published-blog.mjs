@@ -3,7 +3,7 @@
  * audit-published-blog.mjs — 公開済みブログ全記事の表現品質を一括棚卸し (cloud 可)
  *
  * 既存の audit-article-structure / audit-chart-quality / quality-gate はローカル FS
- * (.local/r2 or docs/21) 前提で、クラウド環境からは全公開記事を見られない。本スクリプトは
+ * (.local/r2 or contents/blog) 前提で、クラウド環境からは全公開記事を見られない。本スクリプトは
  * R2 公開 URL (https://storage.stats47.jp) から all.json + 各 article.md を取得し、
  * quality-gate と同じ【決定的な表現チェック】を全 published 記事へ適用して棚卸し表を出す。
  *

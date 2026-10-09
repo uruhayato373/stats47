@@ -14,7 +14,7 @@ export const meta = {
 //   定型ループ (1 セッション 1 バッチ):
 //     1. node .claude/scripts/blog/build-remediation-queue.mjs --next 15   # pending 上位15 slug
 //     2. Workflow({scriptPath:".../blog-mass-rewrite.js", args:[その15 slug]})
-//     3. node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id <date>-N  # docs/21→queue 記録
+//     3. node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id <date>-N  # contents/blog→queue 記録
 //        (PASS=done / rewrite済未PASS=in-progress。--next は pending しか返さない=再リライトしない)
 //     4. 次セッションで 1 に戻る
 //   正典: .claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md
@@ -76,11 +76,11 @@ OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
 ${hint}
 ## 手順
 1. 作業域を用意し R2 公開URLから記事を取得 (記事の SSOT は R2):
-   mkdir -p docs/21_ブログ記事原稿/${e.slug}/data
-   curl -fsS "https://storage.stats47.jp/app/blog/${e.slug}/article.md" -o docs/21_ブログ記事原稿/${e.slug}/article.md
+   mkdir -p contents/blog/${e.slug}/data
+   curl -fsS "https://storage.stats47.jp/app/blog/${e.slug}/article.md" -o contents/blog/${e.slug}/article.md
    既存の data/*.json / *.svg があれば同様に取得 (記事本文の ![](data/<name>.svg) 参照名から判断)。
    取得後すぐ quality-gate を実行して**現在の blocker を確定**する (キュー記録より優先):
-   node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/${e.slug}/article.md
+   node .claude/scripts/blog/quality-gate.mjs contents/blog/${e.slug}/article.md
 2. .claude/rules/blog-quality-standards.md と blog-svg-chart-standards.md / blog-data-schema.md を読み、検出された blocker を全て解消する。以下を厳守:
    - 記事内の「## 関連ランキング」「## 関連記事」等の見出しは削除 (ページ側コンポーネントが正典)。
    - callout は記事固有で 2 個以上 ([!NOTE] 定義 / [!WARNING] 限界 / [!TIP] 読み筋。定型コピペ禁止)。
@@ -89,12 +89,12 @@ ${hint}
        ランキングデータを R2 から取得して data/*.json を作る:
          node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${e.slug} --keys <rankingKey> --data-name <name>
        (rankingKey は記事の <source-link href="/ranking/KEY"> や本文から特定。app/ranking/<key>/values.json が 200 で実在するキーを使う。命名ゆれに注意し実在確認する)
-       SVG を生成: npx tsx .claude/scripts/blog/generate-article-charts.ts --base docs/21_ブログ記事原稿 --slug ${e.slug}
+       SVG を生成: npx tsx .claude/scripts/blog/generate-article-charts.ts --base contents/blog --slug ${e.slug}
        本文に ![alt](data/<name>.svg) で埋め込み、各図の直下に <source-link href="/ranking/<key>"> をインライン配置 (末尾集約禁止)。
    - internalLinks を 3 個以上 (/ranking/ /areas/ /blog/ /category/ のいずれか。本文中に自然に)。
    - 地の文は「ですます調」に完全統一 (である調は copula「だ。である。」だけでなく動詞終止形「〜する。〜なる。」も全て直す。機械置換禁止・文単位で書き換える)。
    - 数値・順位・出典は改変しない (data/*.json と本文を突合。捏造禁止)。frontmatter の published は触らない。
-3. 検証 (決定的): node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/${e.slug}/article.md
+3. 検証 (決定的): node .claude/scripts/blog/quality-gate.mjs contents/blog/${e.slug}/article.md
    blocker が出たら修正を反復 (最大3回)。blocker 0 を目指す。
 4. StructuredOutput で gatePassed / remainingBlockers / blockerDetail / fixed / chartsGenerated / notes を返す。
 
@@ -107,11 +107,11 @@ function criticPrompt(slug) {
 OUTPUT は StructuredOutput tool で返す。
 
 あなたは blog-critic。対象記事をリライト後の読者価値の観点で **mode: full** でレビューする (初回審査)。
-記事: docs/21_ブログ記事原稿/${slug}/article.md
+記事: contents/blog/${slug}/article.md
 
 1. 記事を読み、.claude/rules/blog-quality-standards.md の品質3層モデル②(意味レビュー)に従い評価:
    curiosity gap の真正性 / 図あたりの解釈の厚み / 冗長・図表重複の有無 / callout の情報量 / ですます調の一貫性 / 内部リンクの妥当性。
-2. review.md を docs/21_ブログ記事原稿/${slug}/review.md に書き出す (frontmatter: slug/reviewer:blog-critic/verdict/date 無しでよいが verdict は明記。評価サマリ + 指摘[blocker/major/minor] + 判定理由)。
+2. review.md を contents/blog/${slug}/review.md に書き出す (frontmatter: slug/reviewer:blog-critic/verdict/date 無しでよいが verdict は明記。評価サマリ + 指摘[blocker/major/minor] + 判定理由)。
 3. StructuredOutput で verdict(PASS/REVISE) / blockers(致命的指摘数) / summary(≤30字) を返す。
    実体のある分析で読者価値が十分なら PASS、水増し・図表重複・薄い解釈が残るなら REVISE。`
 }

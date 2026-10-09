@@ -1,0 +1,103 @@
+name: 🖼 Ranking OGP for new known keys (develop)
+
+# develop への push で既知キー (known-ranking-keys.ts) に足されたランキングの OGP とリンクカードを、
+# main へのマージ (デプロイ) より前に R2 へ作る。
+#
+# なぜ要るか (DEPLOY-SMOKE-NEW-KEY-OGP-01): デプロイ後スモークは、この push で増えたキーの og:image を
+# 実際に取得する。OGP は sync-snapshots の sync-ranking-keys job が keys PR を作るときにしか作られないので、
+# 既知キーを develop で手で再生成して出したデプロイは、OGP が無いまま必ずスモークで落ちていた
+# (2026-10-08 に PR #1100 の 13 キーと PR #1104 の 31 キーで 2 回。手で sync-snapshots を代理起動して直した)。
+# スモークの検査は緩めず、画像を作る時点をデプロイ前へ動かす。
+#
+# 生成するのは足されたキーの欠落分だけ (generate-ogp-images.ts の exact publish plan)。
+# 1 回 50 件まで。超えた分は generate-ogp-images.yml を ranking_keys 付きで手動実行する。
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'packages/ranking/src/config/known-ranking-keys.ts'
+      - '.github/workflows/ranking-ogp-new-keys.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  # 全 R2 writer と共通ロック。snapshot / blog / 画像の同時上書きを防ぐ。
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  SITE_ORIGIN: https://stats47.jp
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      # 抽出の規則はデプロイ後スモーク (.github/scripts/smoke-test-routes.sh) と同じ。
+      # force-push や初回 push で before が無いときは何もしない (スモーク側も同じく従来動作に戻る)。
+      - name: 🔍 Keys added in this push
+        id: keys
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          KNOWN_KEYS_FILE="packages/ranking/src/config/known-ranking-keys.ts"
+          if [ -z "$BEFORE" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "比較元の commit が無い (force-push / 初回 push) — 生成しない"
+            echo "keys=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          NEW_KEYS="$(git diff "${BEFORE}..HEAD" -- "$KNOWN_KEYS_FILE" \
+            | grep -E '^\+[[:space:]]*"[a-z0-9-]+",?[[:space:]]*$' \
+            | sed -E 's/^\+[[:space:]]*"([a-z0-9-]+)".*$/\1/' | sort -u || true)"
+          COUNT=$(printf '%s\n' "$NEW_KEYS" | sed '/^$/d' | wc -l | tr -d ' ')
+          echo "足されたキー: ${COUNT} 件"
+          if [ "$COUNT" -gt 50 ]; then
+            echo "::warning::足されたキーが ${COUNT} 件で上限 50 件を超える。先頭 50 件だけ作り、残りは generate-ogp-images.yml を ranking_keys 付きで手動実行する"
+          fi
+          KEYS="$(printf '%s\n' "$NEW_KEYS" | sed '/^$/d' | head -50 | paste -sd, -)"
+          echo "keys=${KEYS}" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 足された既知キー"
+            echo "- 件数: ${COUNT}"
+            echo "- 生成対象: ${KEYS:-なし}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🟢 Setup Node.js
+        if: steps.keys.outputs.keys != ''
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        if: steps.keys.outputs.keys != ''
+        run: npm ci
+
+      # sync-snapshots の sync-ranking-keys job と同じ生成・反映 (exact publish plan を必須にする)。
+      # 生成・反映の失敗は run を止める (画像なしのランキングを黙って main へ出さない)。
+      - name: 🖼 Generate OGP / cards for the added keys
+        if: steps.keys.outputs.keys != ''
+        env:
+          RANKING_KEYS: ${{ steps.keys.outputs.keys }}
+        run: |
+          TSC="apps/web/scripts/tsconfig.ogp.json"
+          SC="apps/web/scripts/generate-ogp-images.ts"
+          ARGS=(--source known --key "$RANKING_KEYS" --limit 50 --max-generate 50)
+          for TYPE in ranking ranking-cards; do
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" "${ARGS[@]}"
+            PLAN=".local/image-generation-publish-plan-${TYPE}.json"
+            test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+          done

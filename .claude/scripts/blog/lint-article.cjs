@@ -76,7 +76,7 @@ function lintFile(filePath, slug) {
 function resolveArticlePath(slug) {
   const candidates = [
     path.join(BLOG_DIR, slug, "article.md"),
-    path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿", slug, "article.md"),
+    path.join(PROJECT_ROOT, "contents/blog", slug, "article.md"),
   ];
   return candidates.find((p) => fs.existsSync(p)) ?? null;
 }
@@ -116,7 +116,7 @@ function main() {
 
   // 見つからない記事を「問題なし」と数えない (2026-10-07: 存在しない slug でも exit 0 になり、検査したように見えていた)
   if (missing.length > 0) {
-    console.error(`❌ 記事が見つかりません (.local/r2/app/blog と docs/21 の両方に無い): ${missing.join(", ")}`);
+    console.error(`❌ 記事が見つかりません (.local/r2/app/blog と contents/blog の両方に無い): ${missing.join(", ")}`);
     process.exit(2);
   }
 

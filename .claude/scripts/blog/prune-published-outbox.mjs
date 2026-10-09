@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 /**
- * docs/21 (ephemeral outbox) の自動掃除。
+ * contents/blog (ephemeral outbox) の自動掃除。
  *
  * 「published:true かつ R2 (正典) の article.md と内容が一致」するドラフトを git rm する。
- * R2 が唯一の真実源 (SSOT = app/blog/<slug>) なので、公開済みと完全一致のドラフトを docs/21 に
+ * R2 が唯一の真実源 (SSOT = app/blog/<slug>) なので、公開済みと完全一致のドラフトを contents/blog に
  * 残す理由はない (削除は可逆: git 履歴 + R2 に実体)。published:false の作業中ドラフトは残す。
  *
- * ★安全装置 (内容一致を要求する理由): brushup (既 live 記事の改稿) は docs/21 に published:true の
+ * ★安全装置 (内容一致を要求する理由): brushup (既 live 記事の改稿) は contents/blog に published:true の
  *   まま新版を置き R2 には旧版が live。「存在」だけで消すと改稿中の新版を誤削除する (2026-06-21 監査で
  *   検出した統合バグ)。publish は cp -R で verbatim コピーなので、完全一致 = 公開済みの取り残しと確定できる。
  *
- * なぜ必要か: blog-auto-publish.yml は公開後に docs/21 を git rm するが、その後の広い
+ * なぜ必要か: blog-auto-publish.yml は公開後に contents/blog を git rm するが、その後の広い
  * `git add` (統合コミット等) が掃除済みドラフトを git に出戻りさせて outbox に残骸が溜まる
  * (2026-06-21 発生)。本スクリプトを日次 cron で回すことで、出戻りしても翌日には自動で
  * 消える = 残骸が原理的に溜まらない。
  *
- * 正典: .claude/rules/blog-data-schema.md §0 (docs/21 = ephemeral outbox / R2 = SSOT)
+ * 正典: .claude/rules/blog-data-schema.md §0 (contents/blog = ephemeral outbox / R2 = SSOT)
  * 関連: .claude/memory/feedback_shared_working_copy_git_race.md (出戻り落とし穴)
  *
  * 使い方:
@@ -40,7 +40,7 @@ import {
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
-const OUTBOX_REL = "docs/21_ブログ記事原稿";
+const OUTBOX_REL = "contents/blog";
 const OUTBOX = join(PROJECT_ROOT, OUTBOX_REL);
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const APPLY = process.argv.includes("--apply");
@@ -144,7 +144,7 @@ async function main() {
         return { slug, relDir, action: "keep", reason: `published:${pub} (作業中ドラフト) → 保持` };
       }
       // published:true → R2 (正典) と内容一致するときだけ削除する。
-      // ★安全装置: brushup (既 live 記事の改稿) は docs/21 に published:true のまま新版を置き、
+      // ★安全装置: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き、
       //   R2 には旧版が live。内容が一致しない = 再公開待ちの改稿中なので消してはならない。
       const r2 = await fetchR2Article(slug);
       if (r2 == null) {
@@ -210,7 +210,7 @@ async function main() {
   // --check: 検出のみ。取り残しがあれば exit 1 (deploy / publish 前ガード用)。
   if (CHECK) {
     console.error(
-      `\n[prune-outbox] ❌ 公開済み (R2 と内容一致) なのに docs/21 に取り残しが ${candidates.length} 件あります。\n` +
+      `\n[prune-outbox] ❌ 公開済み (R2 と内容一致) なのに contents/blog に取り残しが ${candidates.length} 件あります。\n` +
         `  → node .claude/scripts/blog/prune-published-outbox.mjs --apply で掃除 (または日次 cron が翌朝処理)。`,
     );
     process.exit(1);

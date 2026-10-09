@@ -142,6 +142,31 @@ describe("validateMetricGroups — warn", () => {
     expect(warns.some((w) => w.startsWith("[group-default-many]"))).toBe(true);
   });
 
+  it("同じ指標が 2 枚のカードに出ていたら warn し、1 枚なら言わない (同じ推移を 1 ページに 2 回出さない)", () => {
+    const twice = run(
+      catalog(
+        [
+          { key: "a", title: "A", rankingKeys: [YEN, PERCENT], defaultCheckedKeys: [YEN] },
+          { key: "candidate-1", title: "B", rankingKeys: [YEN], defaultCheckedKeys: [YEN] },
+        ],
+        [YEN, PERCENT],
+      ),
+    );
+    expect(twice.warns.filter((w) => w.startsWith("[group-dup-metric]"))).toEqual([
+      `[group-dup-metric] test-theme: rankingKey "${YEN}" が 2 枚のカードに出ている (a / candidate-1)`,
+    ]);
+    const once = run(
+      catalog(
+        [
+          { key: "a", title: "A", rankingKeys: [YEN], defaultCheckedKeys: [YEN] },
+          { key: "b", title: "B", rankingKeys: [PERCENT], defaultCheckedKeys: [PERCENT] },
+        ],
+        [YEN, PERCENT],
+      ),
+    );
+    expect(once.warns.some((w) => w.startsWith("[group-dup-metric]"))).toBe(false);
+  });
+
   it("metricGroups 未定義なら何も言わない (カタログ未登録テーマを壊さない)", () => {
     const { errors, warns } = run(catalog(undefined, [YEN, PERCENT]));
     expect(errors).toEqual([]);

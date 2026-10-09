@@ -2,6 +2,49 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "elementary-school-teachers",
+      "pageId": "ranking:elementary-school-teachers",
+      "title": "小学校教員数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010105",
+          "filters": {
+            "cdCat01": "E2401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010105",
+          "cdCat01": "E2401"
+        },
+        "derived": false,
+        "configHash": "3acfca92a6d03809"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:elementary-school-teachers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:elementary-school-teachers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "elementary-school-teachers-ratio-female",
       "pageId": "ranking:elementary-school-teachers-ratio-female",
       "title": "小学校教員割合",
@@ -979,11 +1022,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:emergency-hospital-general-clinic-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "healthcare"
+      ]
     },
     {
       "metricKey": "employed-outside-the-prefecture",
@@ -8476,11 +8713,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:financial-literacy-correct-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-assets-debt",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-assets-debt"
+      ]
     },
     {
       "metricKey": "fire-affected-persons-count",
@@ -10751,9 +11182,7 @@
         "configHash": "05f916a623164aa9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:fiscal-strength-index",
@@ -11316,50 +11745,6 @@
       "themes": [
         "fishery-marine"
       ]
-    },
-    {
-      "metricKey": "fish-paste-consumption-expenditure",
-      "pageId": "ranking:fish-paste-consumption-expenditure",
-      "title": "かまぼこ消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010230030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010230030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b507262ff24a027c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:miyagi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:fish-paste-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

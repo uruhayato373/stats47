@@ -19,7 +19,7 @@
  *
  * Usage:
  *   node .claude/scripts/blog/fetch-migration-flow.mjs --slug <slug> --pref <5桁コード>
- *     [--year <最新年>] [--from-year <開始年>] [--base-dir docs/21_ブログ記事原稿] [--data-name <name>]
+ *     [--year <最新年>] [--from-year <開始年>] [--base-dir contents/blog] [--data-name <name>]
  *
  * exit: 0 = ok / 1 = 引数不正 / 3 = R2 取得失敗・データ不整合
  */
@@ -45,7 +45,7 @@ const SLUG = getArg("--slug");
 const PREF = getArg("--pref");
 const YEAR = getArg("--year", "2025");
 const FROM_YEAR = Number(getArg("--from-year", "2020"));
-const BASE_DIR = getArg("--base-dir", "docs/21_ブログ記事原稿");
+const BASE_DIR = getArg("--base-dir", "contents/blog");
 if (!SLUG || !PREF) {
   console.error("usage: --slug <slug> --pref <5桁コード> [--year YYYY] [--from-year YYYY] [--base-dir <dir>] [--data-name <name>]");
   process.exit(1);

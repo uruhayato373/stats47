@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nurseryTeacherAnnualIncome: MetricConfig = {
   "key": "nursery-teacher-annual-income",
   "title": "保育士の平均年収",
-  "description": "賃金構造基本統計調査の保育士について、きまって支給する現金給与額を12倍し年間賞与その他特別給与額を加えた年収換算額です。税・社会保険料を差し引く前の金額で、賞与の対象期間は月額給与の調査時点と異なります。",
+  "description": "賃金構造基本統計調査の保育士について、きまって支給する現金給与額を12倍し年間賞与その他特別給与額を加えた年収換算額です。税・社会保険料を差し引く前の金額で、賞与の対象期間は月額給与の調査時点と異なります。対象は一般労働者・男女計です。",
   "unit": "万円",
   "category": "laborwage",
   "source": {

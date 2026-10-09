@@ -15,7 +15,7 @@
  *     --links "/areas/20000|長野県のデータ,/themes/population-dynamics|人口動態のテーマ"
  *     [--source-links "moving-in-excess-rate|転入超過率ランキング"]
  *     [--figures "file.svg|alt,file2.svg|alt2"]   図の順と説明 (省略時は data/ の SVG を名前順)
- *     [--chars 2800-3400] [--base-dir docs/21_ブログ記事原稿]
+ *     [--chars 2800-3400] [--base-dir contents/blog]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -38,7 +38,7 @@ const LINKS = getArg("--links", "");
 const SOURCE_LINKS = getArg("--source-links", "");
 const FIGURES = getArg("--figures", "");
 const CHARS = getArg("--chars", "2800-3400");
-const BASE_DIR = getArg("--base-dir", "docs/21_ブログ記事原稿");
+const BASE_DIR = getArg("--base-dir", "contents/blog");
 if (!SLUG || !ARCHETYPE) {
   console.error("usage: --slug <slug> --archetype <F|G|E> --title-hint <t> --links <a|b,...> [--source-links ...] [--figures ...] [--chars 2800-3400]");
   process.exit(1);

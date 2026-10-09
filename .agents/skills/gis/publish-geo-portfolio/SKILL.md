@@ -24,7 +24,7 @@ Geo企画を一度きりの作業にせず、git TSカタログから無料閲�
 - 企画、順序、読者価値、停止条件: `packages/data-configs/src/business-plan/geo-content-lifecycle.ts`
 - 分析入力、演算、canonical: `packages/data-configs/src/business-plan/m1.ts`
 - Geo証拠: `.local/r2/app/geo/<slug>/{item,manifest,pref/<NN>}.json`
-- ブログoutbox: `docs/21_ブログ記事原稿/<slug>/`
+- ブログoutbox: `contents/blog/<slug>/`
 - X draft台帳: `data/sns/posts.json`
 - 商品成果物: `.local/geo-products/<product-id>/`
 - note商品企画: `.claude/scripts/note/catalog/data/stats47-note.ts`
@@ -64,7 +64,7 @@ context-only混入、canonical不在の分析は、後続のブログ・X・note
 5. `--publish`時だけ`blog-auto-publish.yml`または`publish-blog.yml`でR2へ公開する。
 
 ```bash
-node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/article.md
+node .claude/scripts/blog/quality-gate.mjs contents/blog/<slug>/article.md
 ```
 
 執筆者の自己レビュー、Geo表の丸ごと複製、未検証の数値、markdown表は公開不可。

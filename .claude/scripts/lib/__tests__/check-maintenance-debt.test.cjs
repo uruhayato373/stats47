@@ -155,3 +155,38 @@ test("チェッカーが変わったらローカルの stat キャッシュを�
   assert.equal(result.status, 1, result.stdout + result.stderr);
   assert.ok(JSON.parse(result.stdout).newFindings.some((item) => item.code === "SITE_IDENTITY_LITERAL"));
 });
+// DEBT-CHECK-GITIGNORED-SCAN-01: 走査対象は git が見ているファイルに限る。
+// gitignore 済みのファイル (commit されない生成物・ローカル専用) で止めず、追跡中のファイルでは今までどおり止める。
+function gitFixture() {
+  const root = fixture("export const source = true;\n");
+  const git = (...args) => {
+    const r = spawnSync("git", ["-C", root, ...args], { encoding: "utf8" });
+    assert.equal(r.status, 0, r.stderr);
+  };
+  git("init", "-q");
+  fs.writeFileSync(path.join(root, ".gitignore"), "apps/web/src/ignored.ts\n");
+  git("add", ".gitignore", "apps/web/src/sample.ts");
+  return { root, git };
+}
+const LEGACY_LINE = "// " + "depre" + "cated helper, still used\n";
+test("gitignore 済みのファイルに書かれた debt は検出しない", (t) => {
+  const { root } = gitFixture();
+  fs.writeFileSync(path.join(root, "apps/web/src/ignored.ts"), LEGACY_LINE);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+test("追跡中のファイルと未追跡 (ignore されていない) ファイルの debt は git 走査でも検出する", (t) => {
+  const { root, git } = gitFixture();
+  fs.writeFileSync(path.join(root, "apps/web/src/tracked.ts"), LEGACY_LINE);
+  git("add", "apps/web/src/tracked.ts");
+  fs.writeFileSync(path.join(root, "apps/web/src/untracked.ts"), LEGACY_LINE);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const files = JSON.parse(result.stdout).newFindings.map((item) => item.file).sort();
+  assert.deepEqual(files, ["apps/web/src/tracked.ts", "apps/web/src/untracked.ts"]);
+});
+test("git repo でないときは従来どおりディスクを辿って検出する", (t) => {
+  const root = fixture(LEGACY_LINE);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+});

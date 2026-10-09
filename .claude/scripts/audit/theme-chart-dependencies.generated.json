@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalMetricRefs": 154,
-  "distinctMetricRefs": 139,
+  "totalMetricRefs": 162,
+  "distinctMetricRefs": 147,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -26,6 +26,14 @@
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "1684e28e68ac51e9"
+    },
+    {
+      "metricKey": "beer-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "2bd4dbfedcdda4b1"
     },
     {
       "metricKey": "births",
@@ -65,7 +73,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "90660d2492bda6a7"
+      "expectedConfigHash": "d9e017aadf31b365"
     },
     {
       "metricKey": "consumer-price-difference-index-culture-recreation",
@@ -73,7 +81,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "5700c10845b3dd4b"
+      "expectedConfigHash": "50768d91880b7ec2"
     },
     {
       "metricKey": "consumer-price-difference-index-education",
@@ -81,7 +89,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "07650d37c5658b28"
+      "expectedConfigHash": "962edb7628f7cc19"
     },
     {
       "metricKey": "consumer-price-difference-index-food",
@@ -89,7 +97,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "e0b5be5333016bc8"
+      "expectedConfigHash": "6383b567f12f6e90"
     },
     {
       "metricKey": "consumer-price-difference-index-furniture-household",
@@ -97,7 +105,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "d8c0606404e4a4df"
+      "expectedConfigHash": "6aa01bc7ec0a5398"
     },
     {
       "metricKey": "consumer-price-difference-index-healthcare",
@@ -105,7 +113,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "eb1f0e35e738ea6a"
+      "expectedConfigHash": "a25b816a38bfd59d"
     },
     {
       "metricKey": "consumer-price-difference-index-housing",
@@ -113,7 +121,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2b662b62d6c94605"
+      "expectedConfigHash": "84480ccf50801358"
     },
     {
       "metricKey": "consumer-price-difference-index-miscellaneous",
@@ -121,7 +129,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "335850c9080d981e"
+      "expectedConfigHash": "bbcf8fcdee10d89e"
     },
     {
       "metricKey": "consumer-price-difference-index-overall",
@@ -129,7 +137,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "93d60411ab991b6e"
+      "expectedConfigHash": "c0dc50dcf01f3a5f"
     },
     {
       "metricKey": "consumer-price-difference-index-overall-excl-rent",
@@ -137,7 +145,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "dd8dddb07b680abb"
+      "expectedConfigHash": "164de623c2186218"
     },
     {
       "metricKey": "consumer-price-difference-index-transport-communication",
@@ -145,7 +153,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2da1ab465cf5ffdd"
+      "expectedConfigHash": "a5fe462e280c2ad9"
     },
     {
       "metricKey": "consumer-price-difference-index-utilities",
@@ -153,7 +161,7 @@
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "396a1b756af4b462"
+      "expectedConfigHash": "b8d7011778907468"
     },
     {
       "metricKey": "cook-annual-income",
@@ -306,6 +314,14 @@
       "componentType": "line-chart",
       "expectedUnit": "施設",
       "expectedConfigHash": "d7f892596eeb8a82"
+    },
+    {
+      "metricKey": "happoshu-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "276f71870b430a78"
     },
     {
       "metricKey": "household-survey-clothing-footwear-expenditure",
@@ -572,6 +588,14 @@
       "expectedConfigHash": "7b0539006210bcdb"
     },
     {
+      "metricKey": "other-bread-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "3425ac66c4e76cfd"
+    },
+    {
       "metricKey": "owner-occupied-housing-ratio",
       "themeKey": "living-housing",
       "componentKey": "vacancy-ownership-rate-trend",
@@ -620,6 +644,14 @@
       "expectedConfigHash": "17c063fa3045cce5"
     },
     {
+      "metricKey": "rice-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "9094842e2aabc0d5"
+    },
+    {
       "metricKey": "road-expressway-length",
       "themeKey": "roads",
       "componentKey": "roads-length-trend",
@@ -634,6 +666,14 @@
       "componentType": "line-chart",
       "expectedUnit": "km",
       "expectedConfigHash": "27f624a5d853d6ae"
+    },
+    {
+      "metricKey": "sake-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "3a3ce380d8de5333"
     },
     {
       "metricKey": "school-teacher-annual-income",
@@ -658,6 +698,14 @@
       "componentType": "donut-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "92902c64386c13f7"
+    },
+    {
+      "metricKey": "shochu-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "83d8fea3edfcbbac"
     },
     {
       "metricKey": "single-mother-households-income-100to199",
@@ -1114,6 +1162,22 @@
       "componentType": "donut-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "cc2edd2f61d737f4"
+    },
+    {
+      "metricKey": "white-bread-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "5c07db8d7a4fca46"
+    },
+    {
+      "metricKey": "wine-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "f9379ab47379871f"
     }
   ]
 }

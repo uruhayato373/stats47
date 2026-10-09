@@ -112,6 +112,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:aichi-food-culture",
           "kind": "blog"
         },
@@ -134,9 +322,15 @@
         {
           "pageId": "ranking:clam-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "clam-consumption-quantity",
@@ -1282,6 +1476,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:black-tea-income-gap",
           "kind": "blog"
         },
@@ -1300,9 +1682,15 @@
         {
           "pageId": "ranking:coffee-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "coffee-consumption-quantity",
@@ -1338,6 +1726,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:coffee-consumption-prefecture-gap",
           "kind": "blog"
         },
@@ -1348,9 +1924,15 @@
         {
           "pageId": "ranking:coffee-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "coffee-drink-consumption-expenditure",
@@ -1426,15 +2008,209 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:coffee-shop-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "ranking:coffee-shop-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "cold-medicine-consumption-expenditure",
@@ -3437,6 +4213,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "municipality-ranking:commuters-total",
           "kind": "municipality-ranking"
         },
@@ -3447,9 +4411,15 @@
         {
           "pageId": "ranking:commuters-total",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-transport"
+      ]
     },
     {
       "metricKey": "company-housing-rent-consumption-expenditure",
@@ -3554,10 +4524,7 @@
         "configHash": "69a87ad72678f0cc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:complainant-count",
@@ -3699,11 +4666,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:confectionery-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "consolidated-real-deficit-ratio-municipal",
@@ -5924,6 +7085,17 @@
           "filters": {
             "cdCat01": "#L04420"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00060"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -5932,8 +7104,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04420"
         },
-        "derived": false,
-        "configHash": "90660d2492bda6a7"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00060",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "d9e017aadf31b365"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -6154,6 +7340,17 @@
           "filters": {
             "cdCat01": "#L04424"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00100"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -6162,8 +7359,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04424"
         },
-        "derived": false,
-        "configHash": "5700c10845b3dd4b"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00100",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "50768d91880b7ec2"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -6384,6 +7595,17 @@
           "filters": {
             "cdCat01": "#L04423"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00090"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -6392,8 +7614,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04423"
         },
-        "derived": false,
-        "configHash": "07650d37c5658b28"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00090",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "962edb7628f7cc19"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -6614,6 +7850,17 @@
           "filters": {
             "cdCat01": "#L04416"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00020"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -6622,8 +7869,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04416"
         },
-        "derived": false,
-        "configHash": "e0b5be5333016bc8"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00020",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "6383b567f12f6e90"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -7041,6 +8302,17 @@
           "filters": {
             "cdCat01": "#L04419"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00050"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -7049,8 +8321,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04419"
         },
-        "derived": false,
-        "configHash": "d8c0606404e4a4df"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00050",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "6aa01bc7ec0a5398"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -7271,6 +8557,17 @@
           "filters": {
             "cdCat01": "#L04421"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00070"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -7279,8 +8576,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04421"
         },
-        "derived": false,
-        "configHash": "eb1f0e35e738ea6a"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00070",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "a25b816a38bfd59d"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -7501,6 +8812,17 @@
           "filters": {
             "cdCat01": "#L04417"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00030"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -7509,8 +8831,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04417"
         },
-        "derived": false,
-        "configHash": "2b662b62d6c94605"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00030",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "84480ccf50801358"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -7892,6 +9228,194 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
           "pageId": "blog:consumer-price-regional-gap",
           "kind": "blog"
         },
@@ -7924,6 +9448,17 @@
           "filters": {
             "cdCat01": "#L04425"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00110"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -7932,8 +9467,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04425"
         },
-        "derived": false,
-        "configHash": "335850c9080d981e"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00110",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "bbcf8fcdee10d89e"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -8154,6 +9703,17 @@
           "filters": {
             "cdCat01": "#L04414"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00010"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -8162,8 +9722,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04414"
         },
-        "derived": false,
-        "configHash": "93d60411ab991b6e"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00010",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "c0dc50dcf01f3a5f"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -8545,6 +10119,194 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
           "pageId": "blog:consumer-price-regional-gap",
           "kind": "blog"
         },
@@ -8597,6 +10359,17 @@
           "filters": {
             "cdCat01": "#L04415"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00120"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -8605,8 +10378,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04415"
         },
-        "derived": false,
-        "configHash": "dd8dddb07b680abb"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00120",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "164de623c2186218"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -9016,6 +10803,17 @@
           "filters": {
             "cdCat01": "#L04422"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00080"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -9024,8 +10822,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04422"
         },
-        "derived": false,
-        "configHash": "2da1ab465cf5ffdd"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00080",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "a5fe462e280c2ad9"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -9246,6 +11058,17 @@
           "filters": {
             "cdCat01": "#L04418"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0003441258",
+          "filters": {
+            "cdTab": "40",
+            "cdCat01": "00040"
+          },
+          "years": [
+            2025
+          ]
         }
       ],
       "recipe": {
@@ -9254,8 +11077,22 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L04418"
         },
-        "derived": false,
-        "configHash": "396a1b756af4b462"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2025
+              ],
+              "estatParams": {
+                "statsDataId": "0003441258",
+                "cdCat01": "00040",
+                "cdTab": "40"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "b8d7011778907468"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -9722,6 +11559,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:real-income",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:consumption-expenditure-multi-person-households-per-month",
           "kind": "ranking"
         }
@@ -9759,6 +11600,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:dining-out-expenditure-ranking",
           "kind": "blog"
         },
@@ -9769,9 +11798,15 @@
         {
           "pageId": "ranking:consumption-expenditure-total",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "contact-lens-consumption-expenditure",

@@ -10,7 +10,9 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  * 2 段階の重大度:
  *   - error (exit 1 / CI・pre-commit をブロック):
  *       無効 category キー / title への年混入・注釈(※)混入 /
- *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし。
+ *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし /
+ *       seoTitle・seoDescription の数字の直後の "‐" (seo-unit-dash)。
+ *       換算単位 normalizationOptions[].unit の「‐/…」(normalization-unit-dash)。
  *     ※ 旧 warn だった 5 系統 (title-year/title-note, subtitle-note/redundant, unit, dup-title) は
  *       Phase 3 のデータ是正で warn=0 を達成 (2026-06) → error に昇格済。これにより量産時の再混入を CI/pre-commit で阻止する。
  *       category は型 (CategoryKey union) でもコンパイル時にブロックされ、本 lint はその runtime backstop。
@@ -28,17 +30,18 @@ import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from '@stats47/types';
 
 import { CATEGORY_KEYS } from '../src/types';
 import { moneyUnitExponent } from '../src/money-unit';
-import { METRICS_REGISTRY } from '../src/registry';
+import { METRICS_REGISTRY, getMetricConfig } from '../src/registry';
 import {
   THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
   collectThemeMetricContentCoverage,
   listThemeCatalogs,
   validateThemeMetricContentCoverage,
 } from '../src/theme-catalog';
+import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
 import { parseUnit } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const METRICS_DIR = resolve(__dirname, "../../..", METRIC_DEFINITIONS_DIR);
+const METRICS_DIR = resolve(__dirname, '../../..', METRIC_DEFINITIONS_DIR);
 const STRICT = process.argv.includes('--strict');
 
 const VALID_CATEGORIES = new Set<string>(CATEGORY_KEYS);
@@ -70,6 +73,10 @@ interface Row {
   isActive: boolean | null;
   colorScheme: string | null;
   valueScale: number | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  /** 換算単位 (normalizationOptions[].unit) が「‐/10万人」のように「‐」で始まる件数 */
+  normalizationUnitDash: number;
 }
 
 /**
@@ -113,15 +120,29 @@ function main() {
 
   const rows: Row[] = [];
   for (const f of files) {
-    const metric = METRICS_REGISTRY[f.slice(0, -3)];
+    const metric = getMetricConfig(f.slice(0, -3));
     if (!metric) throw new Error('Metric registry missing: ' + f);
     const source = metric.source;
-    rows.push({ file: f, key: metric.key, title: metric.title, subtitle: metric.subtitle ?? null, unit: metric.unit, category: metric.category, surveyId: metric.surveyId ?? null, surveyScope: metric.surveyScope ?? null, surveyScopeReason: metric.surveyScopeReason ?? null,
+    rows.push({
+      file: f,
+      key: metric.key,
+      title: metric.title,
+      subtitle: metric.subtitle ?? null,
+      unit: metric.unit,
+      category: metric.category,
+      surveyId: metric.surveyId ?? null,
+      surveyScope: metric.surveyScope ?? null,
+      surveyScopeReason: metric.surveyScopeReason ?? null,
       resourceId: source.kind === 'mlit' ? source.resourceId : null,
       statsDataId: source.kind === 'estat' ? source.statsDataId : null,
       isActive: metric.isActive ?? false,
       colorScheme: metric.visualization.colorScheme,
-      valueScale: source.kind === 'estat' ? source.valueScale ?? null : null,
+      valueScale: source.kind === 'estat' ? (source.valueScale ?? null) : null,
+      seoTitle: metric.seoTitle ?? null,
+      seoDescription: metric.seoDescription ?? null,
+      normalizationUnitDash: (
+        metric.calculation?.normalizationOptions ?? []
+      ).filter((option) => option.unit.startsWith('‐/')).length,
     });
   }
 
@@ -235,6 +256,32 @@ function main() {
       r.unit.trim() === '-'
     ) {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+    }
+  }
+
+  // error: seoTitle / seoDescription の数字の直後に「‐」(単位のプレースホルダ) が残っている
+  // (「1位秋田県（417.4‐）」。2026-10-09 に 41 指標を是正。判定は seo-meta-facts.ts)
+  for (const r of rows) {
+    for (const [field, text] of [
+      ['seoTitle', r.seoTitle],
+      ['seoDescription', r.seoDescription],
+    ] as const) {
+      const hits = text ? findDigitDashPlaceholders(text) : [];
+      if (hits.length > 0) {
+        errors.push(
+          `[seo-unit-dash] ${r.file}: ${field} の数字の直後に「‐」(${hits.length} 箇所)。「‐」は単位ではないので外す`
+        );
+      }
+    }
+  }
+
+  // error: 換算単位が「‐/10万人」(元の単位が「‐」のまま)。割合・指数の指標に人口・面積あたりの換算を付けた形で、
+  // 二重の正規化になる (2026-10-09 に 10 指標から normalizationOptions を外した。METRIC-NORMALIZATION-UNIT-DASH-01)
+  for (const r of rows) {
+    if (r.normalizationUnitDash > 0) {
+      errors.push(
+        `[normalization-unit-dash] ${r.file}: 換算単位が「‐/…」(${r.normalizationUnitDash} 箇所)。割合・指数の指標なら normalizationOptions を外し、実数なら元の単位を書く`
+      );
     }
   }
 
@@ -375,10 +422,7 @@ function main() {
     const refs: Array<string | undefined> = [];
     const calc = cfg.calculation as Record<string, unknown> | undefined;
     if (calc) {
-      for (const f of [
-        'numeratorKey',
-        'denominatorKey',
-      ]) {
+      for (const f of ['numeratorKey', 'denominatorKey']) {
         refs.push(calc[f] as string | undefined);
       }
     }
@@ -407,8 +451,7 @@ function main() {
       src?.kind === 'external' &&
       (src as { fetcherKey?: string }).fetcherKey === 'calculated';
     if (isCalculatedFetcher) {
-      const calcType = (calc?.type) as
-        string | undefined;
+      const calcType = calc?.type as string | undefined;
       if (calcType === 'subtraction' && !calc?.periodAlign) {
         errors.push(
           `[calc-period] ${key}: subtraction は calculation.periodAlign の宣言が必須` +

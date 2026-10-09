@@ -1,6 +1,6 @@
 # e-Stat 年カバレッジ監査 (LATEST)
 
-- 生成: 2026-10-08T01:40:41.396Z
+- 生成: 2026-10-08T11:42:16.036Z
 - 対象母集団: 単年設定の active e-Stat metric 551 件 (今回確認 0 件)
 - 判定: 都道府県1件 (北海道) をサンプルに `getStatsData` を実測し、値が non-null な年の件数を
   config の `years` と比較する。全 47 都道府県の精査ではなく代表 1 件によるスクリーニング
@@ -8,11 +8,12 @@
 ## サマリ
 
 - **要拡張候補 (extend-candidate)**: 169 件
-- 単年で確定 (confirmed-single-year): 105 件
+- 単年で確定 (confirmed-single-year): 97 件
 - 複数年の config が実在年を含む (config-covers): 28 件
+- 監査の取得では値が無く判定できない (no-sample-values): 8 件 — `dairy-cattle-count`, `fishery-household-sex-age`, `fishery-management-orgs`, `fishery-workers-coastal-offshore`, `fishing-port-count-by-type`, `fishing-vessel-crew`, `fishing-vessel-tonnage-class`, `inpatient-rate-per-100k`
 - 取得失敗 (fetch-failed・次回再試行): 0 件
 - 未確認 (次回以降のバッチで確認): 277 件
-- 全 47 都道府県で確認した記録 (`--metrics`、年ごとの都道府県数つき): 13 件
+- 全 47 都道府県で確認した記録 (`--metrics`、年ごとの都道府県数つき): 21 件
 
 ## 要拡張候補 (config の years を広げて再取り込みする)
 
@@ -146,4 +147,6 @@
   `data-refresh.yml` に再取り込みさせる。正典: `.claude/rules/metric-config-standards.md`
 - `confirmed-single-year`: 対応不要。この指標は本当に単年しかない
 - `config-covers`: 対応不要。config の years が記録した実在年をすべて含む
+- `no-sample-values`: 監査の取得条件では値のある年が無いので、単年かどうか判断できない。
+  `areaAxis` (都道府県が分類軸にある表) などを監査が再現できていない。R2 の values.json と e-Stat の実在年の台帳で年を確かめる
 - `fetch-failed`: 次回のバッチで自動的に再試行される (checkedAt が更新されないため優先度が高い)

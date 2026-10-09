@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "period": {
-    "periodStart": "2026-09-29",
-    "periodEnd": "2026-10-05",
+    "periodStart": "2026-09-30",
+    "periodEnd": "2026-10-06",
     "windowDays": 7
   },
-  "inputHash": "683cbc9a2c0f90b68ea76c3c7911b152593632856a4a4d0b401e63f015f15953",
+  "inputHash": "40d526340f1e4f8277fcb82e3773ace6f7aa874910b5a96491bf8045b0b44b1a",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
@@ -16,6 +16,15 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": -58
+    },
+    {
+      "keyword": "日照時間 ランキング",
+      "targetPath": "/blog/sunshine-pacific-vs-nihonkai",
+      "before": 70,
+      "after": 12,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 58
     },
     {
       "keyword": "かつお 産地",
@@ -45,40 +54,22 @@
       "change": 46
     },
     {
-      "keyword": "地方 債 利率 ランキング",
-      "targetPath": "/blog/local-government-debt-burden",
-      "before": 49,
-      "after": 3,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 46
-    },
-    {
       "keyword": "食料自給率 日本 ランキング",
       "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
       "before": 3,
       "after": 48,
-      "beforeImpressions": 3,
+      "beforeImpressions": 2,
       "impressions": 1,
       "change": -45
     },
     {
-      "keyword": "高校 教員 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 45,
-      "after": 10.666666666666666,
-      "beforeImpressions": 2,
-      "impressions": 6,
-      "change": 34.333333333333336
-    },
-    {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 55,
-      "after": 21.166666666666668,
-      "beforeImpressions": 2,
-      "impressions": 6,
-      "change": 33.83333333333333
+      "keyword": "日本 空港 数",
+      "targetPath": "/blog/airport-count-prefecture-gap",
+      "before": 43,
+      "after": 3,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 40
     },
     {
       "keyword": "警察 官 年収 ランキング",
@@ -90,13 +81,22 @@
       "change": 32
     },
     {
-      "keyword": "都 道府県 財政 ランキング 2025",
-      "targetPath": "/blog/fiscal-self-reliance-gap",
-      "before": 1,
-      "after": 28,
-      "beforeImpressions": 4,
+      "keyword": "水道統計",
+      "targetPath": "/survey/waterworks-statistics",
+      "before": 37,
+      "after": 6,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 31
+    },
+    {
+      "keyword": "鳥取県 小売",
+      "targetPath": "/areas/31000/retail-commerce",
+      "before": 11.4,
+      "after": 42,
+      "beforeImpressions": 5,
       "impressions": 1,
-      "change": -27
+      "change": -30.6
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "日照時間 ランキング",
-    "targetPath": "/ranking/annual-sunshine-duration",
-    "rank": 5.177664974619289,
-    "impressions": 197,
-    "clicks": 12,
+    "keyword": "介護サービス施設・事業所調査",
+    "targetPath": "/survey/care-service-facility-survey",
+    "rank": 9.191489361702128,
+    "impressions": 188,
+    "clicks": 0,
     "group": 5,
     "previousMethod": null,
-    "editableFile": "packages/data-configs/src/metrics/annual-sunshine-duration.ts"
+    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
   },
   "observing": [
     {

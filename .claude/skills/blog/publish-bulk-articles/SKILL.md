@@ -10,7 +10,7 @@ co_agents: [article-writer, image-prompt-curator]
 
 # Publish Bulk Articles
 
-`docs/21_ブログ記事原稿/<slug>/` の複数記事を `.local/r2/app/blog/<slug>/` へstageし、
+`contents/blog/<slug>/` の複数記事を `.local/r2/app/blog/<slug>/` へstageし、
 記事・画像bundle・`all.json`をR2へ反映する。永続D1は使わない。
 
 ## 前提
@@ -27,8 +27,8 @@ co_agents: [article-writer, image-prompt-curator]
 ```bash
 node .claude/scripts/blog/quality-gate.mjs <slug>
 node .claude/scripts/lib/article-factual-check.mjs \
-  "docs/21_ブログ記事原稿/<slug>/article.md" \
-  "docs/21_ブログ記事原稿/<slug>/data"
+  "contents/blog/<slug>/article.md" \
+  "contents/blog/<slug>/data"
 ```
 
 frontmatterの`title`, `seoTitle`, `description`, `category`, `tags`, `publishedAt`も確認する。

@@ -10,7 +10,7 @@ import {
 // 書き直しでタイトルを変えた記事を push 前に止めることを固定する (2026-10-07 に公開 run で初めて止まった)。
 const base = {
   slug: 'example',
-  articlePath: 'docs/21_ブログ記事原稿/example/article.md',
+  articlePath: 'contents/blog/example/article.md',
   hasArticleAsset: false,
   hasCodexCatalog: false,
   publishedBackground: { source: 'ai', promptHash: 'sha256-current' } as Record<string, unknown>,
@@ -34,7 +34,7 @@ describe('decideBlogBackgroundStatus', () => {
     expect(status.kind).toBe('stale-ai');
     expect(status.ok).toBe(false);
     expect(status.ok === false && status.message).toContain(
-      'request-article --slug example --article docs/21_ブログ記事原稿/example/article.md'
+      'request-article --slug example --article contents/blog/example/article.md'
     );
     expect(status.ok === false && status.message).not.toContain('--ai-background');
   });

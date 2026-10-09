@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * docs/21 outbox から **公開 (新規 or 再公開) が要る slug** を stdout に 1 行ずつ出す。
+ * contents/blog outbox から **公開 (新規 or 再公開) が要る slug** を stdout に 1 行ずつ出す。
  *
  * blog-auto-publish.yml の reconcile から呼ばれる。旧実装は「配信 all.json に
  * 未掲載か」だけを見ており、**改稿版 (既 live の記事を brushup した新版) を
@@ -35,7 +35,7 @@ import {
 } from "./lib/outbox-r2.mjs";
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const OUTBOX_REL = "docs/21_ブログ記事原稿";
+const OUTBOX_REL = "contents/blog";
 const OUTBOX = join(PROJECT_ROOT, OUTBOX_REL);
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || DEFAULT_R2_BASE;
 const CONCURRENCY = 6;

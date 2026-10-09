@@ -1,6 +1,6 @@
 ---
 paths:
-  - "docs/21_ブログ記事原稿/**"
+  - "contents/blog/**"
   - ".claude/{scripts/blog,skills/blog,workflows}/**"
   - "data/blog/**"
   - "apps/web/src/features/blog/**"
@@ -17,16 +17,16 @@ Phase A (2026-05-27) で `recursive-purring-planet.md` plan の一環として�
 
 ```
 metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
-  → fetch-ranking-data-r2.mjs (R2 app/stats/<key> 直 fetch → docs/21/<slug>/data/*.json)
-  → article.md 生成 (docs/21 = ephemeral outbox) + generate-article-charts.ts
+  → fetch-ranking-data-r2.mjs (R2 app/stats/<key> 直 fetch → contents/blog/<slug>/data/*.json)
+  → article.md 生成 (contents/blog = ephemeral outbox) + generate-article-charts.ts
   → factual-check + quality-gate + blog-critic(review.md PASS)
-  → published:true で develop push → blog-auto-publish.yml が R2 公開 + docs/21 ドラフトを自動削除
+  → published:true で develop push → blog-auto-publish.yml が R2 公開 + contents/blog ドラフトを自動削除
      (公開対象の選定は `select-republish-slugs.mjs`。**新規記事だけでなく改稿版も対象**)
   → 公開後はライブ (stats47.jp/blog/<slug>) で確認 → /brushup-blog (R2 取得→是正) で反復
 ```
 
-- **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`docs/21_ブログ記事原稿` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
-  - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② `blog-remediation-daily.yml` (日次 JST 08:00) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は docs/21 に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。docs/21 を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので docs/21 は必要)。
+- **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`contents/blog` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
+  - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② `blog-remediation-daily.yml` (日次 JST 08:00) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。contents/blog を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので contents/blog は必要)。
 - **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
 - **置換**: 企画 → `/draft-from-trend` の metric 選定に統合 / データ接地 → `fetch-ranking-data-r2.mjs` (R2直) / brushup キュー → `data/blog/remediation-queue.json` (`brushup-queue.md` は廃止)。
 - **ランキング以外の接地 (2026-08-30)**: `fetch-ranking-data-r2.mjs` は「1 metric = 47 県の 1 本のランキング」しか
@@ -103,7 +103,7 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 | `data/<name>.json`                                      | 型付きデータ（§1 統一 schema） | ✅   |
 | `data/<name>.svg`（横長）+ `data/<name>-ig.svg`（縦長） | データから決定的生成           | ✅   |
 
-- **永続SSOT = R2 `app/blog/<slug>/data/`**（作業中は docs/21、公開後は R2 のみ）。3点とも R2 に残す。
+- **永続SSOT = R2 `app/blog/<slug>/data/`**（作業中は contents/blog、公開後は R2 のみ）。3点とも R2 に残す。
 - **basename はドリフトさせない**。SVG は必ず data JSON から再生成し、SVG だけ改名しない。
 
 ### 出典 manifest の schema（SSOT配慮: e-Stat 生 param を複製しない）
@@ -292,7 +292,7 @@ SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat 
   `fetch-ranking-data-r2.mjs` は SSOT 確定版 (rankingKey 確定) を出力。**復元 (backfill) は過去負債の処理であり、
   新規は発生源で防ぐのが先決** (場当たりに「絵だけ」を作らない)。
 - **outbox 掃除の安全装置 (2026-07-29 追加)**: `prune-published-outbox.mjs` は article.md の内容一致だけでなく
-  **「ローカルにあるファイルが全て R2 に載っているか」**を確認してから `docs/21` を削除する。
+  **「ローカルにあるファイルが全て R2 に載っているか」**を確認してから `contents/blog` を削除する。
   data/_.json・_.source.json は**ローカルにしか無い場合がある**（実例: `library-museum-cultural-capital` は
   ローカルに json+source があるのに R2 は svg のみ 404）。article.md だけ見て消すと元データが永久に失われるため、
   R2 に無いものが 1 つでもあれば保持する（保持側の誤りは翌日また判定されるので無害、削除側の誤りは不可逆）。

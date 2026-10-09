@@ -111,7 +111,9 @@ jobs:
       - name: 🛡️ GitHub Actions Policy Audit
         # permissions / timeout / schedule concurrency / action SHA pin を必須化。
         # actionは `@40桁commit SHA # vN`で固定し、サプライチェーン回帰を止める。
-        run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+        run: |
+          node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+          node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs
         continue-on-error: false
 
       - name: 🧯 Quality Gate Ratchet Contracts
@@ -136,7 +138,7 @@ jobs:
 
       - name: Metric and Content Identity Contracts
         run: |
-          npm run metrics:check
+          npx tsx packages/data-configs/scripts/check-metric-contract.ts
           npm run content:check
         continue-on-error: false
 
@@ -547,12 +549,15 @@ jobs:
           node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
           node .claude/scripts/lib/__tests__/stats-table-id-lint.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
+          node --test .claude/scripts/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
+          node --test .claude/scripts/lib/__tests__/latest-partition.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.responsive-bar.test.mjs
           # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
@@ -1135,6 +1140,7 @@ jobs:
         run: |
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
           npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
           npm run metrics:verify-snapshots
 
       - name: Start generated metadata overlay for build
@@ -1181,6 +1187,7 @@ jobs:
           path: |
             .local/r2/app/ranking/
             .local/r2/app/ranking-items/
+            .local/r2/app/home/
             .local/r2/app/municipalities/ranking/
           include-hidden-files: true
           retention-days: 1

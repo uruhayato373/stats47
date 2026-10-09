@@ -99,6 +99,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:academic-achievement-test-prefecture-ranking",
           "kind": "blog"
         },
@@ -117,9 +305,15 @@
         {
           "pageId": "ranking:academic-achievement-test-average-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "education-culture"
+      ]
     },
     {
       "metricKey": "accessories-consumption-expenditure",
@@ -459,15 +653,209 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:accommodation-expenditure-ranking",
           "kind": "blog"
         },
         {
           "pageId": "ranking:accommodation-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "accountant-annual-income",
@@ -4873,11 +5261,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-beer",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "alcohol-sales-per-adult-sake",
@@ -4897,11 +5479,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-sake",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "alcohol-sales-per-adult-shochu",
@@ -4921,11 +5697,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-shochu",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "alcohol-sales-per-adult-total",
@@ -4945,11 +5915,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-total",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "alcohol-sales-per-adult-whisky",
@@ -4969,11 +6133,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-whisky",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "alcohol-sales-per-adult-wine",
@@ -4993,11 +6351,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-wine",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "health-checkups"
+      ]
     },
     {
       "metricKey": "ambulance-hospital-arrival-time",
@@ -5203,6 +6755,194 @@
         {
           "pageId": "area-theme:47000:healthcare",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
         },
         {
           "pageId": "ranking:ambulance-hospital-arrival-time",
@@ -7455,11 +9195,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:amusement-park-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "anma-massage-count",
@@ -8396,6 +10330,194 @@
         {
           "pageId": "area-theme:47000:real-income",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
         },
         {
           "pageId": "blog:black-tea-income-gap",
@@ -10185,6 +12307,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
@@ -10199,9 +12509,15 @@
         {
           "pageId": "ranking:apple-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "aquaculture-harvest",
@@ -12161,11 +14477,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:athletics-stadium-count-public",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "auto-insurance-penetration-bodily-injury-actual",

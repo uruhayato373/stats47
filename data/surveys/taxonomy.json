@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T06:06:53.814Z",
+  "generatedAt": "2026-10-08T19:59:03.178Z",
   "masterSurveyCount": 151,
   "ranking": {
-    "metrics": 2598,
-    "activeMetrics": 2455,
-    "applicableMetrics": 2509,
-    "activeApplicableMetrics": 2367,
+    "metrics": 2599,
+    "activeMetrics": 2456,
+    "applicableMetrics": 2510,
+    "activeApplicableMetrics": 2368,
     "notApplicable": 89,
     "activeNotApplicable": 88,
-    "resolved": 2509,
+    "resolved": 2510,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2367,
+    "activeResolved": 2368,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -119,7 +119,7 @@
       "boj-statistics": 5,
       "buried-cultural-property-statistics": 1,
       "care-service-facility-survey": 7,
-      "census": 312,
+      "census": 313,
       "childcare-related-status-report": 2,
       "city-planning-survey": 8,
       "closed-school-facility-survey": 1,
@@ -259,32 +259,38 @@
     }
   },
   "theme": {
-    "themes": 55,
+    "themes": 56,
     "metricGroups": {
-      "total": 524,
+      "total": 540,
       "byStatus": {
-        "resolved": 438,
+        "resolved": 457,
         "unresolved": 0,
-        "not-applicable": 86,
+        "not-applicable": 83,
         "missing-lineage": 0
       },
       "coveragePct": 100,
       "unresolved": []
     },
-    "charts": 65,
-    "applicableCharts": 51,
+    "charts": 68,
+    "applicableCharts": 53,
     "byStatus": {
-      "resolved": 51,
+      "resolved": 53,
       "unresolved": 0,
-      "not-applicable": 14,
+      "not-applicable": 15,
       "missing-lineage": 0
     },
     "coveragePct": 100,
     "unresolvedCharts": [],
     "perSurveyThemes": {
+      "academic-achievement-survey": [
+        "education-culture"
+      ],
       "accommodation-survey": [
         "foreign-residents",
         "tourism"
+      ],
+      "age-adjusted-mortality-statistics": [
+        "healthcare"
       ],
       "agricultural-income-statistics": [
         "agriculture-production",
@@ -365,6 +371,7 @@
       "economic-census-activity": [
         "business-demography",
         "construction-industry",
+        "education-culture",
         "information-industry",
         "local-economy",
         "local-services",
@@ -382,6 +389,7 @@
         "regional-energy"
       ],
       "employment-structure-survey": [
+        "gender-participation",
         "labor-mobility",
         "labor-wages",
         "single-parent-households"
@@ -391,6 +399,9 @@
       ],
       "factory-location-survey": [
         "manufacturing"
+      ],
+      "financial-literacy-survey": [
+        "household-assets-debt"
       ],
       "fire-annual-report": [
         "safety"
@@ -446,8 +457,12 @@
         "labor-mobility",
         "labor-wages"
       ],
+      "junior-high-athletics-membership-survey": [
+        "sports-participation"
+      ],
       "kakei-chousa": [
         "earthquake-exposure",
+        "household-food-spending",
         "living-housing",
         "local-services",
         "real-income"
@@ -553,6 +568,9 @@
       "nature-park-visitor-survey": [
         "natural-environment"
       ],
+      "nta-annual-statistics": [
+        "health-checkups"
+      ],
       "passenger-regional-flow-survey": [
         "ports",
         "railway",
@@ -643,7 +661,8 @@
       ],
       "school-basic-survey": [
         "education-culture",
-        "population-dynamics"
+        "population-dynamics",
+        "sports-participation"
       ],
       "social-education-survey": [
         "community-participation",
@@ -652,6 +671,7 @@
         "sports-participation"
       ],
       "social-life-basic-survey": [
+        "communication-access",
         "community-participation",
         "cultural-participation",
         "daily-time-use",
@@ -669,6 +689,9 @@
       ],
       "sports-facilities-survey": [
         "sports-participation"
+      ],
+      "student-guidance-issues-survey": [
+        "education-culture"
       ],
       "telecommunications-contract-share-quarterly": [
         "communication-access"
@@ -730,13 +753,13 @@
     }
   },
   "blog": {
-    "articles": 607,
+    "articles": 606,
     "charts": 1607,
-    "applicableCharts": 1483,
+    "applicableCharts": 1481,
     "byStatus": {
-      "resolved": 1483,
+      "resolved": 1481,
       "unresolved": 0,
-      "not-applicable": 124,
+      "not-applicable": 126,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -1900,6 +1923,7 @@
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
+        "school-teacher-annual-income",
         "students-per-teacher-class-size-gap",
         "tutoring-cost-university-advancement-gap",
         "university-advancement-capacity",
@@ -2021,7 +2045,6 @@
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
-        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",
@@ -2081,7 +2104,9 @@
     {
       "surveyId": "academic-achievement-survey",
       "rankingCount": 5,
-      "themeKeys": [],
+      "themeKeys": [
+        "education-culture"
+      ],
       "blogSlugs": [
         "academic-achievement-test-prefecture-ranking",
         "advancement-plus-employment-rate-prefecture",
@@ -2121,7 +2146,9 @@
     {
       "surveyId": "age-adjusted-mortality-statistics",
       "rankingCount": 1,
-      "themeKeys": [],
+      "themeKeys": [
+        "healthcare"
+      ],
       "blogSlugs": []
     },
     {
@@ -2237,7 +2264,7 @@
     },
     {
       "surveyId": "census",
-      "rankingCount": 312,
+      "rankingCount": 313,
       "themeKeys": [
         "aging-society",
         "childcare-services",
@@ -2502,6 +2529,7 @@
       "themeKeys": [
         "business-demography",
         "construction-industry",
+        "education-culture",
         "information-industry",
         "local-economy",
         "local-services",
@@ -2592,6 +2620,7 @@
       "surveyId": "employment-structure-survey",
       "rankingCount": 22,
       "themeKeys": [
+        "gender-participation",
         "labor-mobility",
         "labor-wages",
         "single-parent-households"
@@ -2645,7 +2674,9 @@
     {
       "surveyId": "financial-literacy-survey",
       "rankingCount": 1,
-      "themeKeys": [],
+      "themeKeys": [
+        "household-assets-debt"
+      ],
       "blogSlugs": []
     },
     {
@@ -2937,7 +2968,9 @@
     {
       "surveyId": "junior-high-athletics-membership-survey",
       "rankingCount": 10,
-      "themeKeys": [],
+      "themeKeys": [
+        "sports-participation"
+      ],
       "blogSlugs": []
     },
     {
@@ -2945,6 +2978,7 @@
       "rankingCount": 716,
       "themeKeys": [
         "earthquake-exposure",
+        "household-food-spending",
         "living-housing",
         "local-services",
         "real-income"
@@ -3596,7 +3630,9 @@
     {
       "surveyId": "nta-annual-statistics",
       "rankingCount": 8,
-      "themeKeys": [],
+      "themeKeys": [
+        "health-checkups"
+      ],
       "blogSlugs": [
         "alcohol-prefecture-map"
       ]
@@ -4066,7 +4102,8 @@
       "rankingCount": 74,
       "themeKeys": [
         "education-culture",
-        "population-dynamics"
+        "population-dynamics",
+        "sports-participation"
       ],
       "blogSlugs": [
         "advancement-plus-employment-rate-prefecture",
@@ -4079,6 +4116,7 @@
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
+        "school-teacher-annual-income",
         "students-per-teacher-class-size-gap",
         "tutoring-cost-university-advancement-gap",
         "university-advancement-capacity",
@@ -4148,6 +4186,7 @@
       "surveyId": "social-life-basic-survey",
       "rankingCount": 116,
       "themeKeys": [
+        "communication-access",
         "community-participation",
         "cultural-participation",
         "daily-time-use",
@@ -4215,7 +4254,9 @@
     {
       "surveyId": "student-guidance-issues-survey",
       "rankingCount": 7,
-      "themeKeys": [],
+      "themeKeys": [
+        "education-culture"
+      ],
       "blogSlugs": [
         "school-nonattendance-pattern",
         "students-per-teacher-class-size-gap"
@@ -4356,7 +4397,6 @@
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
-        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",

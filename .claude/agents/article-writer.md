@@ -3,6 +3,7 @@ name: article-writer
 domain: site
 description: 1つのmetricを受け取って統計記事1本を完成させる専門エージェント。YouTube通常動画pilotでは既存ランキング・ブログ・テーマを根拠に構成・台本・出典表を作る。成果物はslug単位で分離し、並行実行が必要な場合は別worktreeで最大3体まで。
 model: sonnet
+effort: high
 ---
 
 # Article Writer Agent
@@ -14,7 +15,7 @@ model: sonnet
 - metric データの取得 (**公開 R2 URL** `https://storage.stats47.jp/app/ranking/<key>/values.json` から TOP10 + 最下位 + 倍率を抽出。認証不要)
 - 記事タイトル・subtitle・seo_title の生成 (**curiosity gap** ルール準拠 → `.claude/rules/blog-quality-standards.md`)
 - 原稿執筆 (callout・内部リンク・source-link をルール準拠で配置)
-- **`docs/21_ブログ記事原稿/<slug>/article.md` へのドラフト書き出し** (完全DBレス: article.md frontmatter が SSOT。公開は CI)
+- **`contents/blog/<slug>/article.md` へのドラフト書き出し** (完全DBレス: article.md frontmatter が SSOT。公開は CI)
 - 一括リライト (`/brushup-blog --target batch`) — GSC 中位記事の rewrite を担当 (ユーザー指示時のみ、publish は blog-editor 経由)
 - **YouTube 通常動画 pilot (EXP-006) の構成・台本・出典表** — 既存コンテンツを根拠に6〜12分へ再構成。動画編集・公開は担当しない
 
@@ -73,8 +74,8 @@ article.md 書き出し後、以下を実行:
 
 ```bash
 node .claude/scripts/lib/article-factual-check.mjs \
-  "docs/21_ブログ記事原稿/<slug>/article.md" \
-  "docs/21_ブログ記事原稿/<slug>/data"
+  "contents/blog/<slug>/article.md" \
+  "contents/blog/<slug>/data"
 ```
 
 - exit 1 (RANK_MISMATCH / INVERSE_RANK_MISMATCH) なら必ず data を再 Read して修正、pass するまで繰り返す
@@ -92,7 +93,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
 > PATH が壊れている環境があるので **curl は絶対パス `/usr/bin/curl`** で叩く。
 
 1. ランキング値を**公開 R2 URL**から取得: `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<metric_key>/values.json`
-2. `partitions[partitions.length - 1]` (最新年) を使う
+2. 最新年は **`yearCode` が最大の partition** を使う (並びは values.json ごとに違い、新しい順のものもあるので末尾や先頭を最新年としない。script では `.claude/scripts/lib/latest-partition.mjs` の `latestPartition`)
 3. TOP 10 と BOTTOM 5、最大値/最小値、倍率を計算
 4. metric メタ (title・unit・category・subtitle) は **git TS が SSOT**: `data/metrics/<key>.ts` を Read、
    もしくは `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<key>/item.json`。**D1/sqlite3 は使わない**
@@ -213,13 +214,13 @@ ogImage: /blog/<slug>/og.png
 
 ### Phase 5: 書き出し (ドラフト = 正本)
 
-`docs/21_ブログ記事原稿/<slug>/article.md` に Write tool で保存。これがドラフトの正本。
-data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/data/*.json` も同じディレクトリに置く (factual-check が参照)。
-**`.local/r2/app/blog/` には書かない** (公開フォルダ。docs/21 → R2 のコピーは CI が行う)。
+`contents/blog/<slug>/article.md` に Write tool で保存。これがドラフトの正本。
+data ファイルを使った場合は `contents/blog/<slug>/data/*.json` も同じディレクトリに置く (factual-check が参照)。
+**`.local/r2/app/blog/` には書かない** (公開フォルダ。contents/blog → R2 のコピーは CI が行う)。
 
 ### Phase 5.5: ogp.json の生成 (推奨)
 
-`docs/21_ブログ記事原稿/<slug>/ogp/ogp.json` に以下を Write:
+`contents/blog/<slug>/ogp/ogp.json` に以下を Write:
 
 ```json
 {
@@ -237,12 +238,12 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 1. factual gate を通す (上記「Factual cross-check を必ず通す」)。pass するまで data を再 Read して修正
 2. **意味レビューを別 agent に依頼する (★必須・自己採点禁止)**: `blog-critic` を Agent tool で起動し、
    読者価値の観点 (冗長・図表重複・truncated 表・CTA過多・curiosity gap の真正性) で review してもらう。
-   blog-critic が `docs/21_ブログ記事原稿/<slug>/review.md` (`verdict: PASS`) を出すまで、指摘を修正して反復する。
+   blog-critic が `contents/blog/<slug>/review.md` (`verdict: PASS`) を出すまで、指摘を修正して反復する。
    **自分 (article-writer) が書いた記事を自分で採点して公開してはならない。**
-3. 呼び元へ Output Contract の1表で返す (Files に `docs/21_ブログ記事原稿/<slug>/` を含める)
+3. 呼び元へ Output Contract の1表で返す (Files に `contents/blog/<slug>/` を含める)
 4. **公開は CI / develop push で行う (本 agent はやらない)**。`quality-gate.mjs` は `published:true` かつ
    `review.md` (verdict: PASS) が無いと公開を blocker で止める (自己採点公開を構造的に防止)。
-5. 公開確認後、`docs/21` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
+5. 公開確認後、`contents/blog` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
 
 ## 決定的品質ゲート
 
@@ -256,7 +257,7 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
       `quality-gate.mjs` が blocker で検出する)
 - [ ] 仮説には `[仮説]` 表記 + 検証必要の明記
 - [ ] 既存記事と slug が重複していない (`/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` で確認)
-- [ ] ドラフトを `docs/21_ブログ記事原稿/<slug>/article.md` に書き出した (`.local/r2` ではない)
+- [ ] ドラフトを `contents/blog/<slug>/article.md` に書き出した (`.local/r2` ではない)
 - [ ] factual gate (`node .claude/scripts/lib/article-factual-check.mjs ".../article.md" ".../data"`) が pass
 - [ ] callout 3-4 個 (記事固有の「読み違い防止の知識」、定型反復でない) + source-link をインライン配置した
 - [ ] アーキタイプを 1 つ選び frontmatter `archetype:` に宣言、その型の必須分析視点を満たした
@@ -274,7 +275,7 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 ## 関連
 
 - `/fetch-gsc-data` + `/draft-from-trend` — GSC 起点の企画ドラフト生成 (本 agent の入力源)
-- `publish-blog.yml` (CI) — 本 agent の出力 (docs/21 ドラフト) を R2 に公開する cloud-first パイプライン
+- `publish-blog.yml` (CI) — 本 agent の出力 (contents/blog ドラフト) を R2 に公開する cloud-first パイプライン
 - `.claude/rules/blog-quality-standards.md` — タイトル/本文の品質基準 (正典)
 - `.claude/skills/blog/draft-from-trend/SKILL.md` — カテゴリ起点企画 (本 agent と相補)
 

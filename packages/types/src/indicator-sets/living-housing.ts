@@ -194,6 +194,11 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "rankingKey": "urban-parks-area",
       "shortLabel": "都市公園面積",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "three-generation-household-members",
+      "shortLabel": "3世代世帯人員",
+      "role": "context"
     }
   ],
   "keywords": [

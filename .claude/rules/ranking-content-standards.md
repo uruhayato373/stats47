@@ -230,7 +230,7 @@ dispatch が skip され、**通過していた N-1 件も公開されずに捨�
 verify セマンティクス (日次 CI と対話セッションの共通規律):
 
 - **通過分だけ publish する**。失敗キーは outbox (`data/ai-content-staging/<key>.json` /
-  `docs/21_ブログ記事原稿/<slug>/`) を drop して次回生成へ繰り越す。
+  `contents/blog/<slug>/`) を drop して次回生成へ繰り越す。
 - **公開対象が 0 件なら「成功」と報告しない** (silent-green 防止)。
 - 失敗は握り潰さず、どのキーがなぜ落ちたかを残す。
 - 1 件の gate 失敗で残りの処理を止めない。

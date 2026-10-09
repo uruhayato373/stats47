@@ -106,7 +106,7 @@ test("backlog ledgerの完了時点コマンドは現行docs参照として走�
   fs.mkdirSync(ledgerDir, { recursive: true });
   fs.writeFileSync(
     path.join(ledgerDir, "ledger.json"),
-    JSON.stringify({ command: "check docs/21_ブログ記事原稿/published/article.md" }),
+    JSON.stringify({ command: "check contents/blog/published/article.md" }),
   );
   fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
 

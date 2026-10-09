@@ -79,6 +79,26 @@ describe("classifyYearCoverage", () => {
     expect(r.estatNonNullYears).toBe(1);
   });
 
+  it("標本に値のある年が 1 つも無いときは単年と判定せず no-sample-values にする", () => {
+    // 空の集合は config の年に「含まれる」ので、この分岐が無いと confirmed-single-year (対応不要) になる
+    const r = classifyYearCoverage({
+      key: "k",
+      statsDataId: "0000000000",
+      configYears: 1,
+      nonNullYearCodes: [],
+    });
+    expect(r.verdict).toBe("no-sample-values");
+    expect(r.estatNonNullYears).toBe(0);
+    const withCodes = classifyYearCoverage({
+      key: "k",
+      statsDataId: "0000000000",
+      configYears: 1,
+      configYearCodes: ["2025"],
+      nonNullYearCodes: [],
+    });
+    expect(withCodes.verdict).toBe("no-sample-values");
+  });
+
   it("取得失敗 (null) は fetch-failed", () => {
     const r = classifyYearCoverage({
       key: "k",

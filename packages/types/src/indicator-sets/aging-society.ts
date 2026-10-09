@@ -101,6 +101,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "elderly-living-alone-rate",
+      "shortLabel": "高齢者の一人暮らしの割合",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "elderly-couple-only-household-ratio",
       "shortLabel": "高齢夫婦のみの世帯の割合",
       "role": "secondary"
@@ -124,6 +129,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "rankingKey": "elderly-workers-ratio",
       "shortLabel": "高齢就業者割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "mothers-age-at-first-birth",
+      "shortLabel": "第1子出生時の母の平均年齢",
+      "role": "context"
     }
   ],
   "keywords": [

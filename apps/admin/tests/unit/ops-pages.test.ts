@@ -191,6 +191,11 @@ describe("quality server", () => {
         }),
       },
     });
+    // テーマカタログの完全性監査は本物の 56 テーマを毎回検証して 15 秒を超えることがあった (2026-10-09 実測)。
+    // このテストはキューの集計を見るので、監査は固定値に差し替える (監査そのものは catalog-audit のテストが見る)。
+    vi.doMock("@/lib/server/catalog-audit", () => ({
+      catalogAuditSummary: () => ({ themeCount: 56, totalErrorCount: 0, totalWarnCount: 0, harmThemes: [] }),
+    }));
     const { qualitySummary } = await load(root, "@/lib/server/quality");
     const d = qualitySummary();
 
@@ -199,9 +204,8 @@ describe("quality server", () => {
     // 撒いていないキューは存在しないと分かる形で返る (throw しない)
     expect(d.queues.filter((q: any) => !q.exists).length).toBeGreaterThan(0);
     expect(d.queuesWithDefects).toBe(1);
-    // catalogAuditQueue() が ThemeCatalog 全件を毎回検証するため既定 5000ms を超えることがある
-    // (ローカル単独実行で 3.4s 実測・CI 並列実行では超過してタイムアウトした)。
-  }, 15000);
+    vi.doUnmock("@/lib/server/catalog-audit");
+  });
 });
 
 describe("ops-ledger server", () => {

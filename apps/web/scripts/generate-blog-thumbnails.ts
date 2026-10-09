@@ -77,6 +77,11 @@ const R2_STORE = createS3ImageObjectStoreFromEnv();
 // Auto-publish で既知の入力不足だけを skip できるよう、通信/SHA/生成失敗と分離する。
 // CLI exit 20 は「記事固有背景未生成」専用。その他のエラーは従来どおり exit 1。
 class MissingArticleBackgroundError extends Error {}
+// CLI exit 21: 背景の本体は記録 (generation の sha256) と一致し、R2 の HEAD メタデータ (stats47-sha256) だけが
+// 欠けているか古い。本体は壊れていないので、その記事だけ skip して後ろの記事の公開を止めない
+// (2026-10-08 に bonito-catch-prefecture の 1 件で公開待ち 27 件のうち 24 件が試されずに run が止まった)。
+// 本体の SHA が記録と合わないとき (中身の改ざん・取り違え) は従来どおり exit 1 で run を止める。
+class StaleBackgroundMetadataError extends Error {}
 
 interface CliOptions {
   slugs: string[] | null;
@@ -338,7 +343,7 @@ async function readReusableAiBackground(options: {
     throw new MissingArticleBackgroundError(
       `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
         '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください: ' +
-        `npm run blog-images:codex -- request-article --slug ${options.slug} --article docs/21_ブログ記事原稿/${options.slug}/article.md`
+        `npm run blog-images:codex -- request-article --slug ${options.slug} --article contents/blog/${options.slug}/article.md`
     );
   }
   const remoteBackground = await readRemoteObjectWithIdentity(keys.background);
@@ -362,7 +367,12 @@ async function readReusableAiBackground(options: {
     (backgroundSource === 'common' && remoteSha !== digest) ||
     (remoteSha !== null && remoteSha !== digest)
   ) {
-    throw new Error(`${options.slug}: AI背景SHAがHEAD metadataと一致しません`);
+    // ここに来るのは本体の SHA が記録と一致したあと (上の declaredSha の検査) なので、食い違いはメタデータ側にある
+    throw new StaleBackgroundMetadataError(
+      `${options.slug}: AI背景SHAがHEAD metadataと一致しません (本体は記録と一致 sha256=${digest}、` +
+        `HEAD の stats47-sha256=${remoteSha ?? 'なし'})。本体を変えずに ${keys.background} のメタデータを付け直す ` +
+        '(S3 CopyObject・MetadataDirective REPLACE・Content-Type を保持)'
+    );
   }
   return {
     buffer: remoteBackground.body,
@@ -581,5 +591,11 @@ main().catch((error) => {
   console.error(
     `Fatal: ${error instanceof Error ? error.message : String(error)}`
   );
-  process.exit(error instanceof MissingArticleBackgroundError ? 20 : 1);
+  process.exit(
+    error instanceof MissingArticleBackgroundError
+      ? 20
+      : error instanceof StaleBackgroundMetadataError
+        ? 21
+        : 1
+  );
 });

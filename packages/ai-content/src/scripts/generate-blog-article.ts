@@ -7,7 +7,7 @@ import "dotenv/config";
  *   入力  : topic-queue (何を書くか) + R2 観測値 (数値の出どころ)
  *   生成  : Claude Code Base Action / 対話セッション。ここは prompt を渡すだけ
  *   ゲート: quality-gate.mjs で blocker 0 のものだけ採用。**ゲートを緩めて通すことはしない**
- *   出力  : docs/21_ブログ記事原稿/<slug>/ (git outbox)。R2 直書きしない
+ *   出力  : contents/blog/<slug>/ (git outbox)。R2 直書きしない
  *           → develop へ push すると blog-auto-publish.yml が再検証して R2 公開まで実行する
  *
  * ## なぜ本スクリプト自身は LLM 呼び出しを持たないか
@@ -64,7 +64,7 @@ import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const OUTBOX = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
+const OUTBOX = path.join(PROJECT_ROOT, "contents/blog");
 const QUEUE = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/topic-queue.json`);
 const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 

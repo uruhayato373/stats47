@@ -645,6 +645,8 @@ function checkOrphanScripts(findings) {
     ".github/workflows",
     "scripts",
     "docs",
+    // ブログの公開待ち原稿 (2026-10-08 に docs/ から移した)。図の source.json が生成スクリプトを指す
+    "contents",
     // CLAUDE.md / AGENTS.md はリポジトリ直下にあり、運用ツールの実行手順がここに書かれている
     // (例: setup-memory-symlink.sh)。ディレクトリ走査だけだと拾えない。
     ".",

@@ -38,7 +38,7 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 | commit-back の出所 | いつ HEAD になるか |
 |---|---|
 | `workflow-dispatch-proxy.yml` の request 消費 | proxy で sync-snapshots 等を代理起動した直後 (PR #733) |
-| `blog-auto-publish.yml` の docs/21 outbox 掃除 | 記事を公開した直後 (PR #734) |
+| `blog-auto-publish.yml` の contents/blog outbox 掃除 | 記事を公開した直後 (PR #734) |
 
 **対処**: PR 作成後に `get_check_runs` が 0 件なら、まず develop の HEAD が `[skip ci]` かを疑う
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
@@ -242,6 +242,8 @@ Derived (area_profiles/相関)          : R2 観測値をエフェメラル計�
 ```
 
 ### R2 反映は `main` のコードで動く — 生成ロジックを変えたら**デプロイが先**
+
+指標の表示契約を変更する場合は `deploy-workers.yml` が同じ main の指標・市区町村・home/master・page-componentsを生成して検証し、SHAを固定したexact manifestでR2へ反映してからアプリをbuild/deployする。旧形式を新しいreaderへ渡さないための順序であり、別のsyncを後追いで起動する必要はない。観測値取得の通信エラー・生成・検証・反映の失敗はアプリ公開を止める。生の観測値・記事・画像はこの反映に含めない。
 
 `sync-snapshots.yml` の sync job は **`ref: main` を checkout する**。`workflow_dispatch` の
 `ref` にも proxy の `ref` にも従わない (`ref: develop` を指定しても main で動く)。

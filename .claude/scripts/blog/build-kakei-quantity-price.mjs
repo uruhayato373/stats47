@@ -16,7 +16,7 @@
  *
  * Usage:
  *   node .claude/scripts/blog/build-kakei-quantity-price.mjs --slug <slug> --pref <5桁 or 2桁コード>
- *     [--base-dir docs/21_ブログ記事原稿] [--data-name <name>] [--threshold 120] [--top 4] [--all-items]
+ *     [--base-dir contents/blog] [--data-name <name>] [--threshold 120] [--top 4] [--all-items]
  *   既定は食料 (品目コード 01 系 = 125 ペア) のみ。--all-items で被服・家電なども含める。
  *   node .claude/scripts/blog/build-kakei-quantity-price.mjs --list   # 対象ペアと共通年だけ表示
  */
@@ -41,7 +41,7 @@ const getArg = (flag, fallback = null) => {
 const LIST_ONLY = args.includes("--list");
 const SLUG = getArg("--slug");
 const PREF_RAW = getArg("--pref");
-const BASE_DIR = getArg("--base-dir", "docs/21_ブログ記事原稿");
+const BASE_DIR = getArg("--base-dir", "contents/blog");
 const THRESHOLD = Number(getArg("--threshold", "120"));
 const TOP = Number(getArg("--top", "4"));
 // 既定は食料 (e-Stat 家計調査の品目コード 01 系) だけ。被服・家電などまで含めるときは --all-items。

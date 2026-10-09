@@ -66,7 +66,7 @@ test("note 記事原稿は読者環境の例示なので対象外", (t) => {
   assert.deepEqual(hits, []);
 });
 
-test("ブログ記事原稿 (公開待ちの outbox) も読者環境の例示なので対象外", (t) => {
-  const hits = fixture(t, { "docs/21_ブログ記事原稿/x/article.md": "`.claude/skills/search-estat/SKILL.md` と `npm run build:cf`" });
+test("ブログ記事原稿 (contents/blog の outbox) は docs/ の外なので走査しない", (t) => {
+  const hits = fixture(t, { "contents/blog/x/article.md": "`.claude/skills/search-estat/SKILL.md` と `npm run build:cf`" });
   assert.deepEqual(hits, []);
 });

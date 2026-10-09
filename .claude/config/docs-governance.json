@@ -47,7 +47,7 @@
       "docs/01_技術設計",
       "docs/02_実装計画",
       "docs/10_SNS戦略",
-      "docs/21_ブログ記事原稿",
+      "contents/blog",
       "docs/30_note記事企画",
       "docs/31_note記事原稿",
       "assets/page-heroes"
@@ -131,7 +131,7 @@
   },
   "contentRootsExcludedFromGovernedNaming": [
     "docs/10_SNS戦略",
-    "docs/21_ブログ記事原稿",
+    "contents/blog",
     "docs/30_note記事企画",
     "docs/31_note記事原稿",
     "assets/page-heroes"

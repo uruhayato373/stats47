@@ -59,7 +59,7 @@ if (!arg) {
   process.exit(1);
 }
 
-// arg が .md ファイルパス (docs/21 ドラフト等) ならそのまま検査する。
+// arg が .md ファイルパス (contents/blog ドラフト等) ならそのまま検査する。
 // それ以外は slug とみなし .local/r2/app/blog/<slug>/ を解決する (CI publish パイプライン用)。
 const looksLikePath = arg.endsWith('.md') || arg.includes('/');
 let articlePath;
@@ -677,7 +677,7 @@ checks.criticReviewed = hasCriticPass;
 // 2026-10-07: 書き直しでタイトルを変えた 5 記事は、公開済みの AI 背景の prompt が合わなくなり、
 // push 後の公開 run のサムネイル検査で初めて止まった (公開時は skip される)。判定は公開時と同じ
 // 規則 (apps/web/scripts/lib/blog-background-status.ts) を TS の CLI で呼ぶ。R2 を読めないときは warning。
-const isOutboxDraft = articlePath.split(path.sep).includes('21_ブログ記事原稿');
+const isOutboxDraft = /(?:^|\/)contents\/blog\//.test(articlePath.split(path.sep).join('/'));
 if (isPublished && isOutboxDraft) {
   const run = spawnSync(
     'npx',

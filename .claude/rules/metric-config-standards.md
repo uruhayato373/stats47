@@ -119,7 +119,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 
 | レベル                               | 対象                                                                                                                                                                                                                                          | 挙動   |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) | exit 1 |
+| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) / seoTitle・seoDescription の数字の直後の「‐」(`seo-unit-dash`) / 換算単位の「‐/…」= 割合・指数への人口・面積換算 (`normalization-unit-dash`) | exit 1 |
 | **warn** (表示のみ)                  | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存)                                                                                                                                                                                | exit 0 |
 
 > **2026-06 昇格済**: 旧 warn だった 5 系統 (title-year/title-note・subtitle-note/redundant・unit・dup-title) は Phase 3 のデータ是正で warn=0 を達成 → **error に昇格**。量産時の再混入を CI/pre-commit でブロックする。新規 cleanup を warn から始めたい場合のみ warn tier を再利用する。

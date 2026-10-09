@@ -303,8 +303,10 @@ jobs:
             data/content/pages
             packages/data-configs/src/prominence/ranking-prominence.generated.ts
           )
-          if git diff --quiet -- "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"; then
-            echo "ranking / tag keys 差分なし — PR 不要"
+          # 生成器はキーが同じでも先頭コメントの「最終生成日」を書き換える。その 1 行だけの差分では
+          # PR を作らない (2026-10-08 の #1110 は unpublished-blog-slugs.ts の日付 1 行だけの PR だった)。
+          if git diff --quiet -I '最終生成日' -- "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"; then
+            echo "ranking / tag keys 差分なし (生成日の行だけの変更を含む) — PR 不要"
             exit 0
           fi
           # ★キー数の増減を Step Summary と PR 本文に出す。減少 = 生きているページの削除に

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T01:40:41.396Z",
+  "generatedAt": "2026-10-08T11:42:16.036Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -5679,8 +5679,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:21.554Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:11.682Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "daytime-population-ratio": {
       "key": "daytime-population-ratio",
@@ -6669,8 +6671,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:38.715Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:13.164Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "fishery-management-orgs": {
       "key": "fishery-management-orgs",
@@ -6678,8 +6682,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:40.152Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:14.100Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "fishery-workers-coastal-offshore": {
       "key": "fishery-workers-coastal-offshore",
@@ -6687,8 +6693,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:40.996Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:15.104Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "fishing-port-count-by-type": {
       "key": "fishing-port-count-by-type",
@@ -6696,8 +6704,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:41.901Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:16.050Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "fishing-vessel-crew": {
       "key": "fishing-vessel-crew",
@@ -6705,8 +6715,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:42.837Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:16.799Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "fishing-vessel-tonnage-class": {
       "key": "fishing-vessel-tonnage-class",
@@ -6714,8 +6726,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:43.667Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:41:18.181Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "five-year-residence-other-prefecture": {
       "key": "five-year-residence-other-prefecture",
@@ -7888,8 +7902,10 @@
       "configYears": 1,
       "estatNonNullYears": 0,
       "availableYearCodes": [],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:50:15.181Z"
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-08T11:42:15.736Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {}
     },
     "inpatients-per-fulltime-physician-per-day": {
       "key": "inpatients-per-fulltime-physician-per-day",

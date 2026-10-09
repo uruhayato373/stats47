@@ -69,24 +69,8 @@ export const workAccidentSeverity: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "‐/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "‐/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
-  "seoTitle": "労働災害の重さの程度ランキング都道府県【2023年】｜1位香川県（1.08‐）",
-  "seoDescription": "2023年の労働災害の重さの程度の都道府県別ランキング。1位香川県（1.08‐）、最下位徳島県（0.02‐）で54.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "労働災害の重さの程度ランキング都道府県【2023年】｜1位香川県（1.08）",
+  "seoDescription": "2023年の労働災害の重さの程度の都道府県別ランキング。1位香川県（1.08）、最下位徳島県（0.02）で54.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

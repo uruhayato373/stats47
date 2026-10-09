@@ -101,12 +101,12 @@ function main() {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-money-unit-'));
   const output = path.join(temp, 'audit.json');
   const audit = spawnSync(
-    'npx',
-    ['tsx', 'packages/data-configs/scripts/audit-money-unit-scale.ts', '--json', output],
+    process.platform === 'win32' ? process.execPath : 'npx',
+    [...(process.platform === 'win32' ? [path.join(path.dirname(process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js')), 'npx-cli.js')] : []), 'tsx', 'packages/data-configs/scripts/audit-money-unit-scale.ts', '--json', output],
     { cwd: ROOT, encoding: 'utf8' },
   );
   if (audit.status !== 0 || !fs.existsSync(output)) {
-    errors.push(`money-unit collector failed: ${audit.stderr.trim() || `exit ${audit.status}`}`);
+    errors.push(`money-unit collector failed: ${audit.error?.message || audit.stderr?.trim() || `exit ${audit.status}`}`);
   } else {
     const summary = summarizeRows(JSON.parse(fs.readFileSync(output, 'utf8')).rows || []);
     errors.push(...compareToRuntime(summary, baseline));

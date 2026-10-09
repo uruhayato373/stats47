@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const electricianAnnualIncome: MetricConfig = {
   "key": "electrician-annual-income",
   "title": "電気工事従事者の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の電気工事従事者について、きまって支給する現金給与額を12倍し、年間賞与その他特別給与額を加えた推計年収。",
   "unit": "万円",
   "category": "construction",
   "source": {

@@ -730,6 +730,83 @@
             "windowDays": 7
           },
           "snapshotHash": "683cbc9a2c0f90b68ea76c3c7911b152593632856a4a4d0b401e63f015f15953"
+        },
+        {
+          "date": "2026-10-08",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-29",
+            "periodEnd": "2026-10-05",
+            "windowDays": 7
+          },
+          "snapshotHash": "5c8689b864bf955742e119a0628e960fb6305923c8281bab82a1cd78ce7c648a"
+        },
+        {
+          "date": "2026-10-08",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-29",
+            "periodEnd": "2026-10-05",
+            "windowDays": 7
+          },
+          "snapshotHash": "abc328170e531bf89a9e5263c4f938cc05de3dfb1107574be78f2ec14c0d11b4"
+        },
+        {
+          "date": "2026-10-08",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-29",
+            "periodEnd": "2026-10-05",
+            "windowDays": 7
+          },
+          "snapshotHash": "823787450b199865b7adced382aa068b4a78d59cdca36a896f8b45449f3dec9b"
+        },
+        {
+          "date": "2026-10-09",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-10-06",
+            "windowDays": 7
+          },
+          "snapshotHash": "5f9aead8c9d64521529a089e20700058b29d45788cfbaf3827b44cb373bc17c3"
+        },
+        {
+          "date": "2026-10-09",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-10-06",
+            "windowDays": 7
+          },
+          "snapshotHash": "7f9fe1bfa7bd180bd82c9d978e67ca1dc24ff9dd840658a59097519f47ea1e57"
+        },
+        {
+          "date": "2026-10-09",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-10-06",
+            "windowDays": 7
+          },
+          "snapshotHash": "6a652ccc13f0d780404ece47852e8bb3e71c7d2a0647e37c4ac2b782830426e1"
+        },
+        {
+          "date": "2026-10-09",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-10-06",
+            "windowDays": 7
+          },
+          "snapshotHash": "40d526340f1e4f8277fcb82e3773ace6f7aa874910b5a96491bf8045b0b44b1a"
         }
       ]
     }

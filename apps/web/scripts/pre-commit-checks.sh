@@ -398,7 +398,7 @@ fi
 
 # 8. ブログ記事の Factual cross-check (2026-05-25 追加)
 echo -e "${GREEN}📊 ブログ記事 factual cross-check...${NC}"
-STAGED_ARTICLES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^docs/21_ブログ記事原稿/[^/]+/article\.md$" || true)
+STAGED_ARTICLES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^contents/blog/[^/]+/article\.md$" || true)
 
 if [ -n "$STAGED_ARTICLES" ]; then
   FACTUAL_FAILED=0

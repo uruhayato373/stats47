@@ -26,6 +26,10 @@ function checkPresentation(key: string, presentation: unknown): void {
     );
 }
 const all = parseRankingItemsSnapshot(read('app/ranking-items/all.json'));
+const home = parseRankingItemsSnapshot(read('app/home/featured.json'));
+if (!home.count) throw new Error('Home featured metadata is empty');
+for (const item of home.items)
+  checkPresentation(item.rankingKey, item.visualization);
 let prefectures = 0;
 for (const dir of fs.readdirSync(path.join(root, 'app/ranking'), {
   withFileTypes: true,

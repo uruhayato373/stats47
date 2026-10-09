@@ -7,7 +7,7 @@
  *
  * ## ソース
  * - `--source local` (既定): `.local/r2/app/blog/<slug>/data/*.svg` +
- *   `docs/21_ブログ記事原稿/<slug>/data/*.svg` を走査
+ *   `contents/blog/<slug>/data/*.svg` を走査
  * - `--source r2`: R2 公開 URL (https://storage.stats47.jp) から
  *   blog manifest → 各 article.md の SVG 参照 → SVG を取得
  *
@@ -84,7 +84,7 @@ async function fetchText(url) {
 function collectLocal() {
   const roots = [
     path.join(PROJECT_ROOT, ".local/r2/app/blog"),
-    path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿"),
+    path.join(PROJECT_ROOT, "contents/blog"),
   ];
   const bySlug = new Map();
   for (const root of roots) {

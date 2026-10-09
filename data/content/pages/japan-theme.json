@@ -13,7 +13,8 @@
         "average-age-of-first-marriage-wife",
         "population-growth-rate",
         "natural-increase-rate",
-        "social-increase-rate"
+        "social-increase-rate",
+        "late-elderly-medical-expense-per-insured"
       ],
       "published": true
     },
@@ -29,7 +30,8 @@
         "junior-high-school-count-per-100km2-habitable",
         "high-school-count-per-100km2-habitable",
         "public-hall-count-per-million",
-        "final-education-university-graduate-school-ratio"
+        "final-education-university-graduate-school-ratio",
+        "education-cost-all-households"
       ],
       "published": true
     },
@@ -150,6 +152,7 @@
         "marriages",
         "divorces",
         "households",
+        "general-households",
         "population-density-per-km2-inhabitable-area",
         "habitable-area-ratio",
         "densely-inhabited-district-population-density"
@@ -272,7 +275,10 @@
         "disposable-income-worker-households",
         "actual-income-worker-households-per-month",
         "per-capita-prefectural-income-h27",
-        "annual-income-per-household"
+        "annual-income-per-household",
+        "consumption-expenditure-multi-person-households-per-month",
+        "avg-propensity-to-consume-worker-households",
+        "current-liabilities-balance-multi-person-households-per-household"
       ],
       "published": true
     },

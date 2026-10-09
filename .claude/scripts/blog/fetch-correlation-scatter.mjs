@@ -11,7 +11,7 @@
  *
  * Usage:
  *   node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug <slug> --base <baseKey> --pair <pairKey>
- *   [--base-dir docs/21_ブログ記事原稿] [--data-name <name>]
+ *   [--base-dir contents/blog] [--data-name <name>]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -34,7 +34,7 @@ const getArg = (flag, fallback = null) => {
 const SLUG = getArg("--slug");
 const BASE = getArg("--base");
 const PAIR = getArg("--pair");
-const BASE_DIR = getArg("--base-dir", "docs/21_ブログ記事原稿");
+const BASE_DIR = getArg("--base-dir", "contents/blog");
 if (!SLUG || !BASE || !PAIR) {
   console.error("usage: --slug <slug> --base <baseKey> --pair <pairKey> [--base-dir <dir>] [--data-name <name>]");
   process.exit(1);

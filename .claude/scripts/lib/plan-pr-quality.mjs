@@ -26,7 +26,7 @@ export function classifyPrQualityPaths(inputPaths) {
   const source = paths.some(
     (path) =>
       CODE_EXTENSION.test(path) &&
-      !matchesAny(path, [/^docs\//, /^\.claude\/(?:state|todo)\//])
+      !matchesAny(path, [/^docs\//, /^contents\//, /^\.claude\/(?:state|todo)\//])
   );
   // data/themes は @stats47/data-configs が import するテーマ定義 (表示の SSOT) なので、data-configs の変更と同じ扱いにする
   const themeDefinitions = paths.some((path) => /^data\/(?:themes|metrics|metric-sources)\//.test(path));
@@ -61,7 +61,7 @@ export function classifyPrQualityPaths(inputPaths) {
     matchesAny(path, [
       /^apps\/web\/scripts\/.*(?:image|ogp|thumbnail)/,
       /^apps\/web\/src\/features\/ogp\//,
-      /^docs\/21_.*\/.*\/images\//,
+      /^contents\/blog\/.*\/images\//,
       /^packages\/(?:r2-storage|svg-builder)\//,
     ])
   );

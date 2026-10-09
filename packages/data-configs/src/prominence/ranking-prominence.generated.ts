@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 156,
+    "count": 157,
     "representatives": [
       {
         "rankingKey": "births",
@@ -182,24 +182,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 75,
     "representatives": [
       {
-        "rankingKey": "fishery-workers",
-        "title": "漁業就業者数",
-        "readerLabel": "漁業就業者数",
-        "hook": "漁業就業者数が最も多い県は？"
-      },
-      {
-        "rankingKey": "agricultural-output",
-        "title": "農業産出額",
-        "readerLabel": "農業産出額",
-        "hook": "農業産出額が最も多い県は？"
-      },
-      {
-        "rankingKey": "aquaculture-harvest",
-        "title": "養殖収獲量",
-        "readerLabel": "養殖収獲量",
-        "hook": "養殖収獲量が最も多い県は？"
-      },
-      {
         "rankingKey": "fishery-species-catch-mackerel",
         "title": "サバ類漁獲量",
         "readerLabel": "サバ類漁獲量",
@@ -216,6 +198,24 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "イワシ類漁獲量",
         "readerLabel": "イワシ類漁獲量",
         "hook": "イワシ類漁獲量が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-workers",
+        "title": "漁業就業者数",
+        "readerLabel": "漁業就業者数",
+        "hook": "漁業就業者数が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-species-catch-bonito",
+        "title": "カツオ漁獲量",
+        "readerLabel": "カツオ漁獲量",
+        "hook": "カツオ漁獲量が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-species-catch-pollock",
+        "title": "スケトウダラ漁獲量",
+        "readerLabel": "スケトウダラ漁獲量",
+        "hook": "スケトウダラ漁獲量が最も多い県は？"
       }
     ]
   },
@@ -848,10 +848,10 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "order": 6
   },
   {
-    "rankingKey": "fishery-workers",
-    "title": "漁業就業者数",
-    "readerLabel": "漁業就業者数",
-    "hook": "漁業就業者数が最も多い県は？",
+    "rankingKey": "fishery-species-catch-mackerel",
+    "title": "サバ類漁獲量",
+    "readerLabel": "サバ類漁獲量",
+    "hook": "サバ類漁獲量が最も多い県は？",
     "categoryKey": "agriculture",
     "order": 7
   },
@@ -893,12 +893,12 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "meal-avg-time-male",
   "relaxation-avg-time-male",
   "software-engineer-annual-income",
-  "fishery-workers",
-  "agricultural-output",
-  "aquaculture-harvest",
   "fishery-species-catch-mackerel",
   "fishery-species-catch-pacific-saury",
   "fishery-species-catch-sardine",
+  "fishery-workers",
+  "fishery-species-catch-bonito",
+  "fishery-species-catch-pollock",
   "manufacturing-shipment-amount",
   "manufacturing-industry-added-value",
   "manufacturing-employees",
@@ -984,6 +984,8 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   {
   "active-job-opening-ratio": 0.35,
   "agricultural-output": 0.775,
+  "ambulance-hospital-arrival-time": 0.575,
+  "annual-income-per-household": 0.5188,
   "annual-precipitation": 0.55,
   "annual-sunshine-duration": 1,
   "average-age-of-first-marriage-husband": 0.26,
@@ -1001,6 +1003,8 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "chicken-consumption-expenditure": 0.6555,
   "chinese-noodles-consumption-expenditure": 0.8242,
   "cleaning-shop-count-per-100k": 0.5188,
+  "consumer-price-difference-index-housing": 0.62,
+  "consumer-price-difference-index-overall": 0.5637,
   "consumption-expenditure-multi-person-households-per-month": 0.8534,
   "criminal-arrest-rate": 0.55,
   "crude-birth-rate": 0.8313,
@@ -1026,8 +1030,11 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "future-population-change-rate-2050": 0.5188,
   "gas-station-count-per-100km": 0.5721,
   "general-clinic-count-per-100k": 0.48,
+  "general-hospital-bed-count-per-100k": 0.48,
   "general-hospital-count-per-100k": 0.48,
   "green-tea-consumption-expenditure": 0.5992,
+  "healthy-life-expectancy-female": 0.4651,
+  "healthy-life-expectancy-male": 0.5913,
   "households": 0.7404,
   "households-on-public-assistance-per-1000": 0.28,
   "kindergarten-count-per-100k-3-5": 0.55,
@@ -1042,6 +1049,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "manufacturing-shipment-amount-per-employee": 0.48,
   "marine-aquaculture-harvest": 0.55,
   "marine-fishery-catch": 0.55,
+  "minimum-wage-by-region": 0.35,
   "museum-count-per-million": 0.7324,
   "nature-park-area-ratio": 0.55,
   "owner-occupied-housing-ratio": 0.7779,
@@ -1054,13 +1062,18 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "post-office-count-per-100km2": 0.48,
   "residential-land-price-change-rate": 0.4063,
   "rice-harvest-volume": 0.4063,
+  "room-utilization-rate": 0.5351,
   "sake-consumption-expenditure": 0.768,
+  "salt-intake-female-age-adjusted": 0.4425,
+  "salt-intake-male-age-adjusted": 0.33,
   "self-financing-ratio": 0.55,
   "sewage-treatment-coverage-rate": 0.6875,
+  "sex-ratio-total": 0.35,
   "single-person-household-ratio": 0.6842,
   "suicide-rate-per-100k": 0.5308,
   "taxpayer-ratio-per-pref-resident": 0.55,
   "total-area-excluding-northern-territories-and-takeshima": 0.775,
+  "total-fertility-rate": 0.775,
   "total-overnight-guests": 0.7601,
   "total-overnight-guests-foreign": 0.5351,
   "total-population": 0.55,
@@ -1068,5 +1081,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "traffic-accident-count": 0.55,
   "transport-communication-expenditure-ratio-multi-person-households": 0.6284,
   "unemployment-rate": 0.6449,
+  "vegetable-intake-female-age-adjusted": 0.4425,
+  "vegetable-intake-male-age-adjusted": 0.4425,
   "water-supply-population-ratio-2012on": 0.35
 };

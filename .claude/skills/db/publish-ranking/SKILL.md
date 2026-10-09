@@ -42,10 +42,12 @@ primary_agent: ranking-publisher
 - **コードを書かない** (orchestrator)。公開ロジックは ranking-publisher agent に閉じる。
 - **デプロイ規律**: keys PR のマージ = 本番反映。ユーザー承認を得てまとめてマージする (`.claude/rules/branch-workflow.md`)。
 - **実証ベース**: 本番 200 を Googlebot UA で実測してから「公開済み」と言う (`.claude/rules/evidence-based-judgment.md`)。
-- **KNOWN を手で再生成して develop 経由で出す場合**: `sync-ranking-keys` job の画像生成段を通らないため、main マージ前に
-  `gh workflow run generate-ogp-images.yml --ref main -f type=ranking -f ranking_keys=<key,...> -f apply=true` と
-  `type=ranking-cards` を**順に** (前の run の完了後に) 起動する。省くとデプロイ後の route smoke が `og:image 404` で落ちる
-  (2026-10-08 に 31 指標で発生)。2 本を続けて起動すると、R2 書き込みの concurrency group で待機中の run が後発に置き換えられて取り消される。
+- **KNOWN を手で再生成して develop 経由で出す場合**: `sync-ranking-keys` job の画像生成段は通らないが、develop への push で
+  `ranking-ogp-new-keys.yml` が動き、その push で `known-ranking-keys.ts` に足されたキー (最大 50 件) の OGP とリンクカードを R2 に作る
+  (2026-10-08 に追加。それまでは手で作り忘れると、デプロイ後の route smoke が `og:image 404` で落ちていた)。main へマージする前に、
+  この run が成功したことを確かめる。50 件を超えたときと、run が取り消されたとき (R2 書き込みの concurrency group では、待機中の run が
+  後から来た run に置き換えられる) だけ、`gh workflow run generate-ogp-images.yml --ref main -f type=ranking -f ranking_keys=<key,...> -f apply=true`
+  と `type=ranking-cards` を**順に** (前の run の完了後に) 起動する。
 
 ## 参照
 

@@ -452,6 +452,11 @@
           "readerValue"
         ]
       }
+    },
+    {
+      "rankingKey": "sex-ratio-age-20-39",
+      "shortLabel": "人口性比（20〜39歳）",
+      "role": "context"
     }
   ],
   "metricGroups": [

@@ -15,7 +15,7 @@ co_agents: [article-writer, blog-editor]
 
 ## 前提
 
-- `docs/21_ブログ記事原稿/<slug>/data/` に JSON データファイルが配置済みであること
+- `contents/blog/<slug>/data/` に JSON データファイルが配置済みであること
 - 記事の `article.md` にチャート仕様（種類・軸・データソース）が記載されていること
 
 ## 引数
@@ -42,7 +42,7 @@ co_agents: [article-writer, blog-editor]
 import fs from "fs";
 import path from "path";
 
-const dataDir = "docs/21_ブログ記事原稿/<SLUG>/data";
+const dataDir = "contents/blog/<SLUG>/data";
 // JSON 読み込み
 const data = JSON.parse(fs.readFileSync(path.join(dataDir, "national-timeseries.json"), "utf8"));
 const pref = JSON.parse(fs.readFileSync(path.join(dataDir, "prefecture-rankings.json"), "utf8"));

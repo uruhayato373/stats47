@@ -2,6 +2,235 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "public-assistance-facility-capacity-per-1000",
+      "pageId": "ranking:public-assistance-facility-capacity-per-1000",
+      "title": "生活保護施設定員数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J04101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J04101"
+        },
+        "derived": false,
+        "configHash": "32be7fb61ded05cd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:public-assistance-facility-capacity-per-1000",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:public-assistance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "public-assistance"
+      ]
+    },
+    {
       "metricKey": "public-assistance-facility-residents-per-1000",
       "pageId": "ranking:public-assistance-facility-residents-per-1000",
       "title": "生活保護施設在所者数",
@@ -1010,6 +1239,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:sports-facility-regional-divide",
           "kind": "blog"
         },
@@ -1020,9 +1437,15 @@
         {
           "pageId": "ranking:public-gymnasium-count-per-million",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "public-hall-count",
@@ -2493,11 +2916,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:public-swimming-pool-count-per-million",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "public-university-consumption-expenditure",
@@ -4483,6 +5100,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:food-consumption-prefecture-battle",
           "kind": "blog"
         },
@@ -4501,9 +5306,15 @@
         {
           "pageId": "ranking:ramen-dining-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "ratio-65-plus",
@@ -10731,250 +11542,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "researcher-annual-income",
-      "pageId": "ranking:researcher-annual-income",
-      "title": "研究者の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1051"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1051"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "e20493ae07ea472d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:researcher-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
     }
   ]
 }

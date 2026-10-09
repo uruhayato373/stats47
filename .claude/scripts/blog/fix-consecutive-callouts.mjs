@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node .claude/scripts/blog/fix-consecutive-callouts.mjs
- *   node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply
+ *   node .claude/scripts/blog/fix-consecutive-callouts.mjs --base contents/blog --apply
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -23,7 +23,7 @@ const argValue = (name, fallback) => {
   const index = args.indexOf(name);
   return index >= 0 && args[index + 1] ? args[index + 1] : fallback;
 };
-const base = path.resolve(projectRoot, argValue("--base", "docs/21_ブログ記事原稿"));
+const base = path.resolve(projectRoot, argValue("--base", "contents/blog"));
 const apply = args.includes("--apply");
 
 if (!fs.existsSync(base)) {

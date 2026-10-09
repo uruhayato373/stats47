@@ -211,6 +211,10 @@
                           "seq-pref",
                           "name"
                         ]
+                      },
+                      "coverage": {
+                        "type": "string",
+                        "const": "coastal"
                       }
                     },
                     "required": [
@@ -261,6 +265,35 @@
                           },
                           "required": [
                             "statsDataId"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "areaAxis": {
+                          "type": "object",
+                          "properties": {
+                            "axis": {
+                              "enum": [
+                                "cat01",
+                                "cat02",
+                                "cat03",
+                                "cat04",
+                                "cat05"
+                              ]
+                            },
+                            "scheme": {
+                              "enum": [
+                                "seq-pref",
+                                "name"
+                              ]
+                            },
+                            "coverage": {
+                              "type": "string",
+                              "const": "coastal"
+                            }
+                          },
+                          "required": [
+                            "axis",
+                            "scheme"
                           ],
                           "additionalProperties": false
                         }

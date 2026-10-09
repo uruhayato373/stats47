@@ -96,7 +96,7 @@ lane = blockers>0 ? "must-fix" : staleData あり ? "data-refresh" : expectedLif
 CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間が **Claude Pro セッション**で agent に回させる運用。
 
 - **毎朝 JST08:00**: `blog-remediation-daily.yml` (cron) が ① キューを最新化 (公開R2 audit + 最新GSC) して
-  develop へ commit-back ② **docs/21 (ephemeral outbox) を自動掃除** (`prune-published-outbox.mjs --apply`:
+  develop へ commit-back ② **contents/blog (ephemeral outbox) を自動掃除** (`prune-published-outbox.mjs --apply`:
   「published:true かつ R2 の article.md と内容完全一致」の公開済みドラフトを git rm。広い `git add` で出戻りした残骸も翌日自動消去。
   published:false の作業中ドラフトは保持。内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置) ③ pending 上位 10 件を GitHub Actions の **Workflow Summary** に出す。
 - **人間の作業 (1 セッション/日)**: Workflow Summary を見て Claude セッションで `/brushup-blog --target queue --next 10`
@@ -148,7 +148,7 @@ SSOT (remediation-queue) で進捗記録しながら順次回す。**リライ�
 node .claude/scripts/blog/build-remediation-queue.mjs --next 15
 # ② Workflow で rewrite→quality-gate→critic (args は slug 配列のみ)
 #    Workflow({scriptPath:".claude/workflows/blog-mass-rewrite.js", args:["slug1",...]})
-# ③ 進捗を SSOT に記録 (docs/21 走査 → queue upsert)
+# ③ 進捗を SSOT に記録 (contents/blog 走査 → queue upsert)
 node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id 2026-06-21-N
 #    review.md verdict:PASS=done(remediated_at) / rewrite済未PASS=in-progress / article.md無=pending据置
 # ④ 次セッションで ① に戻る (--next は pending のみ返す = done/in-progress は再リライトされない)
@@ -167,7 +167,7 @@ node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id 2026-06-21-N
 ```bash
 # review.md 無し (critic 未実施) の rewrite 済み記事を 15-18 件ずつ
 #   Workflow({scriptPath:".claude/workflows/blog-critic-followup.js", args:["slug1",...]})
-#     → blog-critic が docs/21 の記事を read-only レビュー → review.md (PASS/REVISE) 生成
+#     → blog-critic が contents/blog の記事を read-only レビュー → review.md (PASS/REVISE) 生成
 node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id <date>-criticN  # PASS=done 昇格
 ```
 

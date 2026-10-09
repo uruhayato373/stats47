@@ -26,23 +26,26 @@ import {
   type MetricConfig,
   type MetricRegistry,
   yearInSpec,
-} from "@stats47/data-configs";
-import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
-import { isKsjPublicStructuredOutputBlocked } from "@stats47/r2-storage/tooling";
-import { readStatsValues } from "@stats47/stats-r2/readers";
+} from '@stats47/data-configs';
+import { assertR2WriteAllowed, saveToR2 } from '@stats47/r2-storage/server';
+import { isKsjPublicStructuredOutputBlocked } from '@stats47/r2-storage/tooling';
+import { readStatsValues } from '@stats47/stats-r2/readers';
 
 import {
   buildRankingItemFromMetric,
   type ValuesContext,
-} from "../builders/build-ranking-item-from-metric";
-import { GONE_RANKING_KEYS } from "../config/gone-ranking-keys";
-import { deriveFeaturedTop } from "../exporters/home-featured";
-import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
+} from '../builders/build-ranking-item-from-metric';
+import { GONE_RANKING_KEYS } from '../config/gone-ranking-keys';
+import { deriveFeaturedTop } from '../exporters/home-featured';
+import {
+  RANKING_ITEMS_SNAPSHOT_KEY,
+  rankingItemKeyPath,
+} from '../types/snapshot';
 // 順位規則の正典 (値の降順・同値は同順位)。script 間 import だが main() は invokedDirectly で
 // ガードされているので副作用は無い。二重実装を避けるためこちらを再利用する。
-import { deriveRanks } from "./generate-ranking-values";
+import { deriveRanks } from './generate-ranking-values';
 
-import type { RankingItem } from "../types/ranking-item";
+import type { RankingItem } from '../types/ranking-item';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve, sep } from 'node:path';
 
@@ -55,16 +58,23 @@ interface Args {
 }
 
 function parseArgs(argv: string[]): Args {
-  const dryRun = argv.includes("--dry-run");
-  const onlyIdx = argv.indexOf("--only");
+  const dryRun = argv.includes('--dry-run');
+  const onlyIdx = argv.indexOf('--only');
   const only =
     onlyIdx >= 0 && argv[onlyIdx + 1]
-      ? new Set(argv[onlyIdx + 1].split(",").map((s) => s.trim()).filter(Boolean))
+      ? new Set(
+          argv[onlyIdx + 1]
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        )
       : null;
   const stageIndex = argv.indexOf('--stage-dir');
-  if (stageIndex >= 0 && !argv[stageIndex + 1]) throw new Error('--stage-dir requires a directory');
+  if (stageIndex >= 0 && !argv[stageIndex + 1])
+    throw new Error('--stage-dir requires a directory');
   const stageDir = stageIndex >= 0 ? resolve(argv[stageIndex + 1]) : null;
-  if (stageDir && dryRun) throw new Error('--stage-dir and --dry-run are mutually exclusive');
+  if (stageDir && dryRun)
+    throw new Error('--stage-dir and --dry-run are mutually exclusive');
   return { dryRun, only, stageDir };
 }
 
@@ -72,11 +82,13 @@ function parseArgs(argv: string[]): Args {
  * app/stats/<key>/values.json から config.years でフィルタした yearCodes (降順) と、
  * 最新年の「1 位」(latestTop) を 1 回の read で導出する。追加の R2 fetch は無い。
  */
-async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | null> {
+async function loadValuesContext(
+  config: MetricConfig
+): Promise<ValuesContext | null> {
   // 観測値を持たない種別 (計算・外部) は values 無しで latestYear/latestTop=null にする
-  if (config.source.kind === "calculated") return null;
+  if (config.source.kind === 'calculated') return null;
   try {
-    const payload = await readStatsValues(config.key, "prefecture");
+    const payload = await readStatsValues(config.key, 'prefecture');
     if (!payload || payload.rows.length === 0) return null;
     const years = [...new Set(payload.rows.map((r) => r.yearCode))]
       .filter((yc) => yearInSpec(yc, config.years))
@@ -105,15 +117,17 @@ async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | 
     const latestTop = deriveFeaturedTop(latestRows);
 
     return { yearCodes: years, latestTop };
-  } catch {
-    return null;
+  } catch (error) {
+    throw new Error(
+      `Cannot derive metric metadata from observations: ${config.key}: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
 async function mapWithConcurrency<T, R>(
   items: T[],
   limit: number,
-  fn: (item: T) => Promise<R>,
+  fn: (item: T) => Promise<R>
 ): Promise<R[]> {
   const results: R[] = new Array(items.length);
   let cursor = 0;
@@ -123,7 +137,9 @@ async function mapWithConcurrency<T, R>(
       results[i] = await fn(items[i]);
     }
   }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, worker)
+  );
   return results;
 }
 
@@ -134,25 +150,43 @@ async function main() {
   // 都道府県を持つ全 metric (active/inactive 問わず item.json を生成。
   // isActive の絞り込みは all.json reader / known-keys 側で行う)
   const allMetrics = listAllMetrics();
-  for (const key of args.only ?? []) if (!allMetrics.some(m => m.key === key && m.entities.includes("prefecture"))) throw new Error(`Unknown prefecture metric: ${key}`);
-  const metrics = allMetrics.filter((c) => c.entities?.includes("prefecture") && (!args.stageDir || !args.only || args.only.has(c.key)));
+  for (const key of args.only ?? [])
+    if (
+      !allMetrics.some(
+        (m) => m.key === key && m.entities.includes('prefecture')
+      )
+    )
+      throw new Error(`Unknown prefecture metric: ${key}`);
+  const metrics = allMetrics.filter(
+    (c) =>
+      c.entities?.includes('prefecture') &&
+      (!args.stageDir || !args.only || args.only.has(c.key))
+  );
   // calculated metric の分子/分母から survey を辿るための registry (survey 紐付け導出用)
-  const registry: MetricRegistry = Object.fromEntries(allMetrics.map((m) => [m.key, m]));
-  console.log(`prefecture metrics: ${metrics.length} (only=${args.only ? [...args.only].join(",") : "all"}, dryRun=${args.dryRun})`);
+  const registry: MetricRegistry = Object.fromEntries(
+    allMetrics.map((m) => [m.key, m])
+  );
+  console.log(
+    `prefecture metrics: ${metrics.length} (only=${args.only ? [...args.only].join(',') : 'all'}, dryRun=${args.dryRun})`
+  );
 
   if (!args.dryRun && !args.stageDir) {
-    assertR2WriteAllowed({ op: "generate ranking item.json" });
+    assertR2WriteAllowed({ op: 'generate ranking item.json' });
   }
 
   // 全件 build (all.json 用に全 RankingItem が要る)
-  const items: RankingItem[] = await mapWithConcurrency(metrics, CONCURRENCY, async (config) => {
-    const values = await loadValuesContext(config);
-    return buildRankingItemFromMetric(config, {
-      values,
-      now,
-      registry,
-    });
-  });
+  const items: RankingItem[] = await mapWithConcurrency(
+    metrics,
+    CONCURRENCY,
+    async (config) => {
+      const values = await loadValuesContext(config);
+      return buildRankingItemFromMetric(config, {
+        values,
+        now,
+        registry,
+      });
+    }
+  );
 
   // per-key item.json を書く (--only 指定時はその key のみ)
   //
@@ -165,7 +199,7 @@ async function main() {
   // **公開してよいデータ**の話。そもそも公開できない原典の構造化データは R2 に置かない。
   // 既に R2 にある分の撤去は retention の license-remediation-* が承認フローで扱う。
   const publishable = items.filter(
-    (it) => !isKsjPublicStructuredOutputBlocked(it.rankingKey),
+    (it) => !isKsjPublicStructuredOutputBlocked(it.rankingKey)
   );
   const ksjBlocked = items.length - publishable.length;
   if (ksjBlocked > 0) {
@@ -174,7 +208,7 @@ async function main() {
         `(${items
           .filter((it) => isKsjPublicStructuredOutputBlocked(it.rankingKey))
           .map((it) => it.rankingKey)
-          .join(", ")})`,
+          .join(', ')})`
     );
   }
 
@@ -185,20 +219,28 @@ async function main() {
   await mapWithConcurrency(targets, CONCURRENCY, async (item) => {
     const body = JSON.stringify({ generatedAt: now, item });
     if (args.stageDir) {
-      const target = resolve(args.stageDir, rankingItemKeyPath(item.rankingKey));
-      if (!target.startsWith(args.stageDir + sep)) throw new Error('Snapshot path escaped staging directory');
+      const target = resolve(
+        args.stageDir,
+        rankingItemKeyPath(item.rankingKey)
+      );
+      if (!target.startsWith(args.stageDir + sep))
+        throw new Error('Snapshot path escaped staging directory');
       mkdirSync(dirname(target), { recursive: true });
       writeFileSync(target, body);
     } else if (!args.dryRun) {
       await saveToR2(rankingItemKeyPath(item.rankingKey), body, {
-        contentType: "application/json; charset=utf-8",
+        contentType: 'application/json; charset=utf-8',
       });
     }
     written++;
   });
-  console.log(`✅ item.json: ${written} 件 ${args.dryRun ? "(dry-run)" : args.stageDir ? "local stage" : "push"}`);
+  console.log(
+    `✅ item.json: ${written} 件 ${args.dryRun ? '(dry-run)' : args.stageDir ? 'local stage' : 'push'}`
+  );
   if (args.stageDir && args.only) {
-    console.log(`Local staging: ${written} per-metric snapshots. A partial all.json is never produced.`);
+    console.log(
+      `Local staging: ${written} per-metric snapshots. A partial all.json is never produced.`
+    );
     return;
   }
 
@@ -214,7 +256,9 @@ async function main() {
   //
   // 410 判定自体は GONE_RANKING_KEYS (コード) が middleware で行うので、ここから消しても
   // 404 に落ちない。
-  const goneInInventory = items.filter((it) => GONE_RANKING_KEYS.has(it.rankingKey));
+  const goneInInventory = items.filter((it) =>
+    GONE_RANKING_KEYS.has(it.rankingKey)
+  );
   const inventory = items.filter((it) => !GONE_RANKING_KEYS.has(it.rankingKey));
 
   // GONE かつ isActive:true は config の矛盾 (410 を返すのに公開扱い)。除外で見えなくなる
@@ -224,7 +268,7 @@ async function main() {
     console.warn(
       `⚠️  GONE なのに isActive:true が ${contradictory.length} 件: ${contradictory
         .map((it) => it.rankingKey)
-        .join(", ")}`,
+        .join(', ')}`
     );
   }
 
@@ -235,21 +279,22 @@ async function main() {
   });
   if (args.stageDir) {
     const target = resolve(args.stageDir, RANKING_ITEMS_SNAPSHOT_KEY);
-    if (!target.startsWith(args.stageDir + sep)) throw new Error('Snapshot path escaped staging directory');
+    if (!target.startsWith(args.stageDir + sep))
+      throw new Error('Snapshot path escaped staging directory');
     mkdirSync(dirname(target), { recursive: true });
     writeFileSync(target, allBody);
   } else if (!args.dryRun) {
     await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, allBody, {
-      contentType: "application/json; charset=utf-8",
+      contentType: 'application/json; charset=utf-8',
     });
   }
   const active = inventory.filter((it) => it.isActive).length;
   console.log(
-    `✅ all.json: items=${inventory.length} active=${active} gone除外=${goneInInventory.length} bytes=${allBody.length} ${args.dryRun ? "(dry-run)" : args.stageDir ? "local stage" : "push"}`,
+    `✅ all.json: items=${inventory.length} active=${active} gone除外=${goneInInventory.length} bytes=${allBody.length} ${args.dryRun ? '(dry-run)' : args.stageDir ? 'local stage' : 'push'}`
   );
 }
 
 main().catch((err) => {
-  console.error("Fatal:", err);
+  console.error('Fatal:', err);
   process.exit(1);
 });

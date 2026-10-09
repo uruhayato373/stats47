@@ -2,6 +2,42 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "hobby-participation-rate-japanese-dance",
+      "pageId": "ranking:hobby-participation-rate-japanese-dance",
+      "title": "邦舞・おどりの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456573",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "13"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456573",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "13"
+        },
+        "derived": false,
+        "configHash": "cd85e70faa0b5d16"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:hobby-participation-rate-japanese-dance",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "hobby-participation-rate-japanese-music",
       "pageId": "ranking:hobby-participation-rate-japanese-music",
       "title": "邦楽の行動者率",
@@ -67,11 +103,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-karaoke",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "daily-time-use"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-knitting",
@@ -103,11 +333,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-knitting",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "cultural-participation"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-manga",
@@ -211,15 +635,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:pachinko-participation-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "ranking:hobby-participation-rate-pachinko",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "daily-time-use"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-painting",
@@ -481,11 +1099,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-photography",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "cultural-participation"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-popular-music",
@@ -589,11 +1401,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-reading",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "cultural-participation"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-sewing",
@@ -661,11 +1667,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-shogi",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "cultural-participation"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-sports-spectating",
@@ -927,11 +2127,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-tea-ceremony",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "cultural-participation"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-theater",
@@ -1422,11 +2816,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-video-games",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "daily-time-use"
+      ]
     },
     {
       "metricKey": "hobby-participation-rate-western-dance",
@@ -2749,6 +4337,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:ehime-food-culture",
           "kind": "blog"
         },
@@ -2811,9 +4587,15 @@
         {
           "pageId": "ranking:horse-mackerel-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "horse-mackerel-consumption-quantity",
@@ -9491,15 +11273,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:dual-income-childcare-dilemma",
           "kind": "blog"
         },
         {
           "pageId": "ranking:husband-childcare-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:gender-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "gender-participation"
+      ]
     },
     {
       "metricKey": "hydroelectric-power-plant-count",
@@ -13616,6 +15592,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:hospital-bed-utilization-map",
           "kind": "blog"
         },
@@ -13634,9 +15798,15 @@
         {
           "pageId": "ranking:inpatient-rate-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "healthcare"
+      ]
     },
     {
       "metricKey": "inpatients-per-fulltime-physician-per-day",
@@ -13743,54 +15913,6 @@
       "consumers": [
         {
           "pageId": "ranking:insecticide-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "instant-noodles-consumption-expenditure",
-      "pageId": "ranking:instant-noodles-consumption-expenditure",
-      "title": "即席麺消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010130060",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010130060",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "1dfc954915db89a6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:chinese-noodles-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:instant-noodles-consumption-expenditure",
           "kind": "ranking"
         }
       ],

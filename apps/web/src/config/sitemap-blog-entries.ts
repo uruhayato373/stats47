@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-10-08
- * 件数: blog 606 / tag 67 / survey 147
+ * 件数: blog 605 / tag 67 / survey 147
  */
 
 export interface SitemapBlogEntry {
@@ -496,7 +496,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "school-lunch-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "school-nonattendance-pattern", lastModified: "2026-03-09" },
   { slug: "school-teacher-annual-income", lastModified: "2026-06-07" },
-  { slug: "school-teacher-annual-income-prefecture-gap", lastModified: "2026-08-31" },
   { slug: "sea-bream-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "self-financing-ratio-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "semiconductor-electronics-regional-map", lastModified: "2026-03-06" },
@@ -688,7 +687,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "観光", lastModified: "2026-08-30" },
   { tagKey: "財政", lastModified: "2026-08-28" },
   { tagKey: "賃金", lastModified: "2026-06-15" },
-  { tagKey: "賃金構造基本統計調査", lastModified: "2026-08-31" },
+  { tagKey: "賃金構造基本統計調査", lastModified: "2026-06-13" },
   { tagKey: "転職", lastModified: "2026-06-15" },
   { tagKey: "農業", lastModified: "2026-07-16" },
   { tagKey: "都道府県", lastModified: "2026-09-05" },

@@ -779,6 +779,26 @@ describe('parseRecipe — 壊れた ops を部分採用しない', () => {
     });
   });
 
+  it('areaAxis の coverage は宣言したときだけ載せる (未宣言の既存 metric の configHash を動かさない)', () => {
+    expect(
+      parseOpsOf({
+        areaAxis: { axis: 'cat01', scheme: 'name', coverage: 'coastal' },
+      })?.areaAxis
+    ).toEqual({
+      axis: 'cat01',
+      scheme: 'name',
+      coverage: 'coastal',
+    });
+    expect(
+      parseOpsOf({
+        areaAxis: { axis: 'cat01', scheme: 'name', coverage: 'inland' },
+      })?.areaAxis
+    ).toEqual({
+      axis: 'cat01',
+      scheme: 'name',
+    });
+  });
+
   it('areaAxis は未知の scheme を捨てる (地域軸の取り違えは全県の値がずれる)', () => {
     expect(
       parseOpsOf({ areaAxis: { axis: 'cat03', scheme: 'unknown-scheme' } })
@@ -874,5 +894,44 @@ describe('buildRecipe / parseRecipe — supplementalSources (年の補完)', () 
     expect(parsed?.ops?.supplements).toEqual([
       { years: [2025], estatParams: { statsDataId: '0004065933' } },
     ]);
+  });
+
+  it('都道府県を分類軸に持つ補完表は写像と対象範囲もレシピに載せ、宣言を変えると configHash が動く', () => {
+    const coastal = metric(
+      { kind: 'estat', statsDataId: '0003238633', cdCat01: '0250' },
+      {
+        supplementalSources: [
+          {
+            years: [2023],
+            source: {
+              kind: 'estat',
+              statsDataId: '0004043248',
+              cdCat02: '1016',
+              areaAxis: { axis: 'cat01', scheme: 'name', coverage: 'coastal' },
+            },
+            reason: '年次表',
+          },
+        ],
+      }
+    );
+    const recipe = buildRecipe(coastal);
+    expect(recipe.ops?.supplements).toEqual([
+      {
+        years: [2023],
+        estatParams: { statsDataId: '0004043248', cdCat02: '1016' },
+        areaAxis: { axis: 'cat01', scheme: 'name', coverage: 'coastal' },
+      },
+    ]);
+    expect(
+      parseRecipe(JSON.parse(JSON.stringify(recipe)))?.ops?.supplements
+    ).toEqual(recipe.ops?.supplements);
+
+    const withoutCoverage = structuredClone(coastal);
+    delete (
+      withoutCoverage.supplementalSources![0].source.areaAxis as {
+        coverage?: string;
+      }
+    ).coverage;
+    expect(buildRecipe(withoutCoverage).configHash).not.toBe(recipe.configHash);
   });
 });

@@ -113,7 +113,7 @@ use-case に応じて以下の推奨パスを出力する:
 |---|---|
 | note-header | `docs/31_note記事原稿/<slug>/header.png` |
 | x-banner | `.local/r2/sns/brand/x-banner.png` |
-| blog-hero | `docs/21_ブログ記事原稿/<slug>/hero.png` |
+| blog-hero | `contents/blog/<slug>/hero.png` |
 | sns-supporting | `.local/r2/sns/ranking/<ranking_key>/supporting.png` |
 | brand-asset | `.local/r2/brand/` |
 

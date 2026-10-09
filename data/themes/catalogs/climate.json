@@ -210,7 +210,6 @@
       "key": "candidate-96",
       "title": "雪国の暮らしと除雪",
       "metricGroupKeys": [
-        "candidate-96-1",
         "candidate-96-2"
       ]
     },
@@ -220,8 +219,7 @@
       "description": "熱中症救急搬送は2025年5〜9月の確定値です。搬送人員は発症者の全数ではありません。気温・日照は代表観測地点の年間値なので、期間と地理の違いを保って読み、同期間の比較や対策の効果を示すものとは扱いません。",
       "metricGroupKeys": [
         "candidate-104-1",
-        "candidate-104-2",
-        "candidate-104-3"
+        "candidate-104-2"
       ]
     }
   ],
@@ -267,16 +265,6 @@
       ]
     },
     {
-      "key": "candidate-96-1",
-      "title": "雪国の暮らしと除雪｜年間雪日数",
-      "rankingKeys": [
-        "annual-snow-days"
-      ],
-      "defaultCheckedKeys": [
-        "annual-snow-days"
-      ]
-    },
-    {
       "key": "candidate-96-2",
       "title": "最深積雪",
       "rankingKeys": [
@@ -304,16 +292,6 @@
       ],
       "defaultCheckedKeys": [
         "maximum-temperature"
-      ]
-    },
-    {
-      "key": "candidate-104-3",
-      "title": "年間日照時間",
-      "rankingKeys": [
-        "annual-sunshine-duration"
-      ],
-      "defaultCheckedKeys": [
-        "annual-sunshine-duration"
       ]
     }
   ]

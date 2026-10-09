@@ -22,6 +22,11 @@
  * 値レベル検証)。詳細は `.claude/todo/backlog.md` の GEO-SCOPE-SEPARATION-01 WP6 完了note。
  * 2026-08-28 に unknown-non-estat 9件を追加審査し、加算可能な4件を採用した。
  * 判断SSOTは `japan-derived-metrics.ts`。
+ * 2026-10-09 に参考文献由来の「日本全体ページへ採用判断が可能」66指標を同じ
+ * `verify-japan-candidates.ts` で値レベル検証し、通った estat 7件を既存テーマへ追加した
+ * (live-audit は R2 監査形式へ変わり hasNational を持たないため、00000 行の存在は
+ * generateOneMetric の e-Stat 実応答で確認)。kakei-chousa/external は生成器が
+ * official で扱えないため不採用、事業所数(経済センサス)は製造業事業所数と意味が重なるため不採用。
  */
 
 export interface JapanCatalogMetric {
@@ -64,6 +69,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "final-education-university-graduate-school-ratio",
         shortLabel: "大学・大学院卒の割合",
       },
+      {
+        metricKey: "education-cost-all-households",
+        shortLabel: "教育費（全世帯・月平均）",
+      },
     ],
   },
   "aging-society": {
@@ -93,6 +102,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       {
         metricKey: "social-increase-rate",
         shortLabel: "社会増減率",
+      },
+      {
+        metricKey: "late-elderly-medical-expense-per-insured",
+        shortLabel: "後期高齢者医療費（被保険者1人当たり）",
       },
     ],
   },
@@ -313,6 +326,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         shortLabel: "世帯数",
       },
       {
+        metricKey: "general-households",
+        shortLabel: "一般世帯数",
+      },
+      {
         metricKey: "population-density-per-km2-inhabitable-area",
         shortLabel: "可住地面積１km2当たり人口密度",
       },
@@ -484,6 +501,18 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       {
         metricKey: "annual-income-per-household",
         shortLabel: "年間収入",
+      },
+      {
+        metricKey: "consumption-expenditure-multi-person-households-per-month",
+        shortLabel: "消費支出（二人以上の世帯・月平均）",
+      },
+      {
+        metricKey: "avg-propensity-to-consume-worker-households",
+        shortLabel: "平均消費性向（勤労者世帯）",
+      },
+      {
+        metricKey: "current-liabilities-balance-multi-person-households-per-household",
+        shortLabel: "負債現在高（二人以上の世帯）",
       },
     ],
   },

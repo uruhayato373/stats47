@@ -37,7 +37,7 @@ pending の上位から <N> 件を対象にします。status が done / in-prog
 
 これで各 slug に次が揃います。`article.md` はまだありません。それを書くのがあなたの仕事です。
 
-    docs/21_ブログ記事原稿/<slug>/
+    contents/blog/<slug>/
       ├── article.prompt.txt   型・ルール・接地済み ground truth
       ├── data/*.json          R2 観測値（数値の出どころ）
       ├── data/*.source.json   出典 manifest
@@ -50,7 +50,7 @@ pending の上位から <N> 件を対象にします。status が done / in-prog
 
 対象一覧:
 
-    find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' \
+    find "contents/blog" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' \
       | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|'
 
 各 slug について `article.prompt.txt` を読み、そこに書かれた型と ground truth に従って
@@ -78,7 +78,7 @@ review.md がまだ無い段階では「critic の審査待ち」で止まりま
 
 ### 5. critic に審査させる（別コンテキスト・必須）
 
-`blog-critic` agent を起動して `docs/21_ブログ記事原稿/<slug>/review.md` を書かせます。
+`blog-critic` agent を起動して `contents/blog/<slug>/review.md` を書かせます。
 
 **自分が書いた記事を自分で採点しないでください。** critic には記事本文だけを渡し、
 ground truth も型の指示も再試行履歴も渡さないでください。verdict が REVISE なら
@@ -91,9 +91,9 @@ ground truth も型の指示も再試行履歴も渡さないでください。v
 
 critic が PASS していれば published: true が立ち、公開待ちになります。
 develop へ push すると CI が factual / quality ゲートを再検証して R2 に公開し、
-docs/21 のドラフトを自動削除します。
+contents/blog のドラフトを自動削除します。
 
-    git add docs/21_ブログ記事原稿/<slug>
+    git add contents/blog/<slug>
     git commit -m "feat(blog): <slug> を公開"
     git push origin develop
 
@@ -102,7 +102,7 @@ docs/21 のドラフトを自動削除します。
 ## 失敗したときの扱い
 
 1 本が落ちても残りを止めないでください。通った分だけ push し、落ちた分は
-docs/21 のドラフトを残したまま（published: false）次回に繰り越します。
+contents/blog のドラフトを残したまま（published: false）次回に繰り越します。
 
 **公開対象が 0 件のときに「成功」と報告しないでください。** どの slug がなぜ落ちたかを
 必ず書いてください。

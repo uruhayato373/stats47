@@ -488,9 +488,7 @@
       "key": "work-style",
       "title": "就業の状態と働き方",
       "description": "働き方と昼夜間人口を確認します。昼夜間人口比率には通勤だけでなく通学も含まれます。",
-      "metricGroupKeys": [
-        "work-style"
-      ],
+      "metricGroupKeys": [],
       "chartKeys": [],
       "embeddedSectionKeys": [
         "commute-flow"
@@ -505,13 +503,6 @@
       ],
       "chartKeys": [
         "theme-lm-employment-mobility-trend"
-      ]
-    },
-    {
-      "key": "candidate-33",
-      "title": "人手不足と求人",
-      "metricGroupKeys": [
-        "candidate-33-1"
       ]
     },
     {
@@ -606,18 +597,6 @@
       ]
     },
     {
-      "key": "work-style",
-      "title": "就業の状態と働き方",
-      "rankingKeys": [
-        "telework-rate",
-        "day-time-population-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "telework-rate",
-        "day-time-population-ratio"
-      ]
-    },
-    {
       "key": "employment-mobility",
       "title": "就業異動率を詳しく見る",
       "rankingKeys": [
@@ -625,16 +604,6 @@
       ],
       "defaultCheckedKeys": [
         "employment-mobility-rate"
-      ]
-    },
-    {
-      "key": "candidate-33-1",
-      "title": "人手不足と求人｜有効求人倍率",
-      "rankingKeys": [
-        "active-job-opening-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "active-job-opening-ratio"
       ]
     },
     {

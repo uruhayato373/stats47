@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fisherySpeciesCatchPollock: MetricConfig = {
   "key": "fishery-species-catch-pollock",
   "title": "スケトウダラ漁獲量",
-  "description": "海面漁業によるすけとうだらの漁獲量。1956年以降の長期累年データ。北海道がほぼ独占。 本データは海面漁業による漁獲量で、内陸県（栃木・群馬・埼玉・山梨・長野・岐阜・滋賀・奈良）は対象外（40都道府県）。1956年〜2015年の60年分。",
+  "description": "海面漁業によるすけとうだらの漁獲量。1956年以降の長期累年データ。北海道がほぼ独占。 本データは海面漁業による漁獲量で、内陸県（栃木・群馬・埼玉・山梨・長野・岐阜・滋賀・奈良）は対象外（39都道府県）。1956〜2018年と2023年の値で、2019〜2022年は都道府県の値がそろって公表されていないため載せていません。",
   "unit": "トン",
   "category": "agriculture",
   "source": {
@@ -19,8 +19,56 @@ export const fisherySpeciesCatchPollock: MetricConfig = {
   ],
   "years": {
     "from": 1956,
-    "to": 2015,
+    "to": 2023,
   },
+  "supplementalSources": [
+    {
+      "years": [2016],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0003216642",
+        "cdCat01": "040",
+        "displayName": "海面漁業生産統計調査",
+        "url": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+      },
+      "reason": "累年統計 (0003238633) は2015年で終わるため、海面漁業生産統計調査の年次表「大海区都道府県振興局別統計 魚種別漁獲量」から取る。魚種名と海のない8県を除く39都道府県の範囲は同じで、全国値は2014〜2016年の12魚種すべてで累年統計・年次別全国表と一致 (2026-10-08 確認)",
+    },
+    {
+      "years": [2017],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0003322129",
+        "cdCat01": "040",
+        "displayName": "海面漁業生産統計調査",
+        "url": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+      },
+      "reason": "累年統計 (0003238633) は2015年で終わるため、海面漁業生産統計調査の年次表「大海区都道府県振興局別統計 魚種別漁獲量」から取る。魚種名と海のない8県を除く39都道府県の範囲は同じで、全国値は2014〜2016年の12魚種すべてで累年統計・年次別全国表と一致 (2026-10-08 確認)",
+    },
+    {
+      "years": [2018],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0001803958",
+        "cdCat01": "040",
+        "areaAxis": { "axis": "cat02", "scheme": "name", "coverage": "coastal" },
+        "displayName": "海面漁業生産統計調査",
+        "url": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+      },
+      "reason": "累年統計 (0003238633) は2015年で終わるため、海面漁業生産統計調査の年次表「大海区都道府県振興局別統計 魚種別漁獲量」から取る。魚種名と海のない8県を除く39都道府県の範囲は同じで、全国値は2014〜2016年の12魚種すべてで累年統計・年次別全国表と一致 (2026-10-08 確認)",
+    },
+    {
+      "years": [2023],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0004043248",
+        "cdCat02": "1040",
+        "areaAxis": { "axis": "cat01", "scheme": "name", "coverage": "coastal" },
+        "displayName": "海面漁業生産統計調査",
+        "url": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+      },
+      "reason": "累年統計 (0003238633) は2015年で終わるため、海面漁業生産統計調査の年次表「大海区都道府県振興局別統計 魚種別漁獲量」から取る。魚種名と海のない8県を除く39都道府県の範囲は同じで、全国値は2014〜2016年の12魚種すべてで累年統計・年次別全国表と一致 (2026-10-08 確認)",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
@@ -51,7 +99,7 @@ export const fisherySpeciesCatchPollock: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "スケトウダラ漁獲量ランキング｜なぜ北海道に集中?【2015】",
-  "seoDescription": "スケトウダラの漁獲量は北海道が167,158トンで圧倒的1位──なぜ北海道にこれほど集中するのか。寒流域の漁場と加工産業の関係、47都道府県の分布を2015年データで解説します。",
+  "seoTitle": "スケトウダラ漁獲量ランキング｜なぜ北海道に集中?【2023】",
+  "seoDescription": "スケトウダラの漁獲量は北海道が113,731トンで圧倒的1位──なぜ北海道にこれほど集中するのか。寒流域の漁場と加工産業の関係、39都道府県の分布を2023年データで解説します。",
   "isActive": true,
 };

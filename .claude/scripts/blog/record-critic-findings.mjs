@@ -17,7 +17,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import { parseReview, toLedgerRows } from "./lib/critic-findings.mjs";
+import { parseReview, reviewProblems, toLedgerRows } from "./lib/critic-findings.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const LEDGER = path.join(PROJECT_ROOT, datasetDir("blog.operations"), "critic-findings.jsonl");
@@ -40,6 +40,7 @@ const existing = new Set(
 );
 
 const added = [];
+const failures = [];
 for (const target of targets) {
   const file = fs.existsSync(target) && fs.statSync(target).isDirectory() ? path.join(target, "review.md") : target;
   if (!fs.existsSync(file)) {
@@ -50,6 +51,11 @@ for (const target of targets) {
     slug: path.basename(path.dirname(path.resolve(file))),
     knownTypes: Object.keys(TYPES.types),
   });
+  const problems = reviewProblems(review);
+  if (problems.length > 0) {
+    failures.push(...problems.map((problem) => `${file}: ${problem}`));
+    continue;
+  }
   for (const row of toLedgerRows(review)) {
     if (existing.has(row.key)) continue;
     existing.add(row.key);
@@ -65,3 +71,7 @@ const unclassified = added.filter((row) => row.type === "unclassified").length;
 console.log(
   `[ok] 追記 ${added.length} 件${unclassified ? ` (型の無い指摘 ${unclassified} 件: review.md の指摘に [型:<key>] を付けると数えられる)` : ""}`,
 );
+if (failures.length > 0) {
+  for (const failure of failures) console.error(`[fail] ${failure}`);
+  process.exit(1);
+}

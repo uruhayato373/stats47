@@ -62,6 +62,7 @@ import sportsParticipationJson from "../../../../../data/themes/catalogs/sports-
 import localGovernmentDigitalJson from "../../../../../data/themes/catalogs/local-government-digital.json";
 import genderParticipationJson from "../../../../../data/themes/catalogs/gender-participation.json";
 import communityParticipationJson from "../../../../../data/themes/catalogs/community-participation.json";
+import householdFoodSpendingJson from "../../../../../data/themes/catalogs/household-food-spending.json";
 
 // JSON の import は文字列リテラルの union 型 (componentType 等) を string に広げるため、
 // 型の一致は schema と validator で担保し、ここでは ThemeCatalog として扱う。
@@ -121,6 +122,7 @@ const THEME_CATALOG_JSON: unknown[] = [
   localGovernmentDigitalJson,
   genderParticipationJson,
   communityParticipationJson,
+  householdFoodSpendingJson,
 ];
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */

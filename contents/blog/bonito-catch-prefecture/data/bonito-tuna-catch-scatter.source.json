@@ -1,0 +1,27 @@
+{
+  "kind": "scatter",
+  "xKey": "fishery-species-catch-bonito",
+  "yKey": "fishery-species-catch-tuna",
+  "year": "2023",
+  "transform": "カツオ・マグロ類とも2023年の値がある31都道府県を県名で突合",
+  "excludedAreas": [
+    "栃木県",
+    "群馬県",
+    "埼玉県",
+    "山梨県",
+    "長野県",
+    "岐阜県",
+    "滋賀県",
+    "奈良県",
+    "京都府",
+    "大阪府",
+    "兵庫県",
+    "岡山県",
+    "広島県",
+    "愛知県",
+    "佐賀県",
+    "熊本県"
+  ],
+  "exclusionReason": "内陸8県は海面漁業統計の対象外。京都・大阪・兵庫・岡山・広島はカツオの2023年の行がなく、愛知・佐賀・熊本はマグロ類の2023年の行がないため、2指標がそろう31県だけを描く。",
+  "restore": "r2:app/ranking/fishery-species-catch-bonito/values.json と r2:app/ranking/fishery-species-catch-tuna/values.json の 2023 年を県名で突合"
+}

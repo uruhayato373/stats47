@@ -147,12 +147,12 @@ describe("blog slug リスト集合整合性 (410/301/outbox の排他: G4-blog)
     ).toEqual([]);
   });
 
-  it("[H] GONE slug が docs/21 outbox に再出現しない（410 URL の再公開防止）", async () => {
+  it("[H] GONE slug が contents/blog outbox に再出現しない（410 URL の再公開防止）", async () => {
     const { GONE_BLOG_SLUGS } = await import("@/config/gone-blog-slugs");
     const fs = await import("node:fs");
     const path = await import("node:path");
     // vitest の cwd は apps/web。outbox は publish 後に CI が自動削除する ephemeral のため不在は正常
-    const outbox = path.resolve(process.cwd(), "../../docs/21_ブログ記事原稿");
+    const outbox = path.resolve(process.cwd(), "../../contents/blog");
     const drafts = fs.existsSync(outbox)
       ? fs
           .readdirSync(outbox, { withFileTypes: true })
