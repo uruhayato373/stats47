@@ -69,7 +69,8 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 | **--caption** | - | - | 任意キャプションファイルパス（`--media` または `--quote-url` と併用） |
 | **--quote-url** | - | - | **引用RTモード**。引用元ツイート URL を caption 末尾に付与し X が引用カードを生成。`--media` は opt-in（無指定ならテキストのみ）。成功時 `post_type='quote_rt'` で sns_posts へ INSERT |
 | **--skip-db** | - | - | DB 更新をスキップ（rankingKey 紐付けの無い任意動画用） |
-| **--from-queue** | - | - | 予約日時付きdraftを予約。`--filter-domain` / `--content-prefix`で対象を限定可能 |
+| **--approve** | - | - | 直接指定・引用RT の本番実行で必須。この実行をオーナーの承認として台帳に記録する |
+| **--from-queue** | - | - | 予約日時付き・**承認済み**のdraftを予約。`--filter-domain` / `--content-prefix`で対象を限定可能 |
 | **--filter-domain** | - | - | queueをdomain完全一致で限定（例: `geo`） |
 | **--content-prefix** | - | - | queueをcontent key前方一致で限定（例: `geo-001-x-`） |
 
@@ -95,6 +96,8 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
   --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 --domain gis-cross
 ```
 引用RTでも初回 / セレクタ更新後は `--dry-run` を先に通すこと（誤即時投稿の fail-safe は引用RT経路にも適用される）。
+
+**承認 (2026-10-09〜)**: 直接指定・引用RT の本番実行には `--approve` を付ける (オーナーの指示をこの実行で台帳に承認として記録する。`--dry-run` は不要)。`--from-queue` は承認済みの draft だけを予約する (承認: `node .claude/scripts/sns/approve-posts.cjs --list` → `--ids`)。予約・投稿した行の素材は最後に Google Drive へ自動保全される。正典 `.claude/rules/sns-content-standards.md` §3-1。
 
 ## 前提条件
 

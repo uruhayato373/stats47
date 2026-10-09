@@ -387,6 +387,35 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 - メトリクスは投稿後に `/update-sns-metrics` が UPDATE。時系列 snapshot は
   `data/sns/metric-snapshots/` が SSOT
 
+### 3-1. 1 投稿 = 1 id から全部たどる (2026-10-09 オーナー決定)
+
+`posts.json` の整数 `id` が唯一の投稿 ID。id は**予約・下書きを作った時点**で決め (X/Threads は下書き登録、
+Instagram は予約表のエントリを `register-ig-schedule.cjs` で登録して `post_id` を書き戻す)、投稿後に別 id を作らない。
+形の契約は `data/sns/posts.schema.json`、検査は `npm run sns:trace:check` (PR CI blocking・`--verify-drive` は Mac で Drive 実体の sha256 照合)。
+
+| たどる先 | 置き場 |
+|---|---|
+| 台本 | 短文・カルーセル = 行の `caption`。長尺 (YouTube) = `script_path` → `data/sns/scripts/<id>.json` (`scripts.schema.json`) |
+| 状態 | `status` (draft / scheduled / posted / deleted。store が語彙外を拒否) |
+| 承認 | `approval` = `{state: pending/approved/rejected/unrecorded, by, at, via, note}` |
+| 外部 ID | `store.externalIdOf(row)` が `post_url` から導出。導出できない Instagram の media_id だけ `external_id` に保存 |
+| 素材 | `assets[]` = `{role, order, state: archived/missing, drive_path, sha256, bytes, mime, source, reason}`。実体は Google Drive `マイドライブ/stats47/SNS素材/<platform>/<id>/<role>-<order>.<ext>` |
+| 観測値 | 最新値は行の `impressions` 等。時系列は `metric-snapshots` を `sns_post_id = id` で引く (Instagram は週次 CI の `link-ig-media.cjs` が media_id で結ぶ) |
+| 確認画面 | 管理画面 `http://127.0.0.1:4747/sns/<id>` (読み取り専用) |
+
+- **新規投稿は承認必須**。承認は `node .claude/scripts/sns/approve-posts.cjs --list` で一覧し、オーナーの指示で
+  `--ids` / `--schedule instagram-wNN` / `--content-key` を記録する (承認できるのは draft だけ)。予約・投稿の道具
+  (`publish-x --from-queue` / `publish-threads` / IG cron `post-from-schedule.cjs`) は承認済みの行だけを外へ出し、
+  IG cron は投稿時刻の来たエントリが承認待ち・未登録なら exit 3 で止まる。直接指定の `publish-x` / `post-instagram` は
+  `--approve` を承認の明示として台帳に記録する。`scheduled → posted` (実際に出たことの記録) は止めない。
+  2026-10-10 より前に作られた行は承認の記録が無いので `unrecorded` (approved に読み替えない)。
+- **素材は Drive が正本**。Git には相対パス・sha256・bytes だけを書き、Drive の fileId・URL・端末のマウント先は書かない。
+  `archive-sns-assets.mjs` が取得元 (`media_path` → IG 予約表の slides と R2 命名規約 → `.local/r2`) から複製し、読み戻して
+  sha256 を照合する。`publish-x` / `publish-threads` (`--sync-ledger` を含む) / `post-instagram` は予約・投稿後に自動で呼ぶ。
+  CI 投稿の Instagram は `/sns-weekly-plan` で Mac から `--since` 実行する。取得元が消えた素材は `state: "missing"` と理由を残す。
+- 過去分の補完は `backfill-post-trace.mjs` (2026-10-09 実行済み。YouTube の予約 30 件を oEmbed で公開確認、台帳に無い公開動画 7 本を追加)。
+  URL の無い YouTube posted 42 行と content_key 不明の 2 本はオーナーの Studio 確認待ち
+
 ---
 
 ## 4. UTM 規則 (旧 generate-utm-url を吸収)
@@ -434,11 +463,11 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 | チャネル | 企画 | 生成 | 投稿 | 計測 |
 |---|---|---|---|---|
-| **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
+| **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) → `approve-posts.cjs` (オーナー承認) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル・承認済みだけ) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **X (Geo地域分析)** | `operate-geo-content` (問い・layer・operation・role契約) | `GeoX-InsightCard` → PNG/source SHA監査 → draft同期 | ユーザー明示時だけagentが`publish-x` | `update-sns-metrics` + Geo landing events |
-| **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `record-posted.cjs` | `update-sns-metrics` |
-| **YouTube pilot** | EXP-006 の brief → `article-writer` が構成・台本・出典表 | NLE で通常動画を編集 (`chart-author` / Remotion は図表素材のみ) | 人間が事実確認 → YouTube Studio へ手動投稿 → `sns-posts-store.cjs` で記録 | Studio の 30秒維持率・平均視聴率・視聴数を14日後に手動記録 + GA4 YouTube UTM |
+| **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) → `register-ig-schedule.cjs` (台帳登録) → `approve-posts.cjs --schedule` | `render-sns-stills` | `post-instagram` (GHA cron・承認済みだけ) → `record-posted.cjs` | `update-sns-metrics` |
+| **YouTube pilot** | EXP-006 の brief → draft 行 + `article-writer` が台本 `data/sns/scripts/<id>.json` (構成・出典表) → 承認 | NLE で通常動画を編集 (`chart-author` / Remotion は図表素材のみ) | 人間が事実確認 → YouTube Studio へ手動投稿 → `sns-posts-store.cjs` で記録 | Studio の 30秒維持率・平均視聴率・視聴数を14日後に手動記録 + GA4 YouTube UTM |
 | **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | agentが`prepare-buzz-map-batch.ts` (landing contract+isPostable→R2→draft)を実行。adminは閲覧のみ | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
@@ -499,6 +528,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 (`cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml` weekly)。
 
 - サムネイル (.png) / caption.txt / posts.json の投稿記録・メトリクスは**永続**
+- **台帳の `assets[]` に Drive へ保全済みの動画 (role=video, state=archived) が無い content_key の mp4 は削除しない** (§3-1。2026-10-09〜)
 - YouTube pilot の通常動画 master は再編集可能なソース資産のため `video/<slug>/master.mp4` に保持し、30日削除の対象外とする
 - draft / scheduled が残る content_key の素材は削除しない (再投稿予定を守る)
 - 削除済み動画を再投稿したい場合は **Remotion で再レンダー**する (素材は再生成可能な派生物)

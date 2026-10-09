@@ -19,6 +19,10 @@ X の予約から 1 日 2 件を Threads に転用し、Threads Web の予約機
 node .claude/skills/sns/publish-threads/plan-from-x.cjs --from 2026-09-24 --to 2026-10-31 --dry-run
 node .claude/skills/sns/publish-threads/plan-from-x.cjs --from 2026-09-24 --to 2026-10-31
 
+# ①' オーナーの承認を記録する (承認済みの下書きだけが予約される。正典 sns-content-standards.md §3-1)
+node .claude/scripts/sns/approve-posts.cjs --list --platform threads
+node .claude/scripts/sns/approve-posts.cjs --ids <id,...>   # オーナーが承認を指示したときだけ
+
 # ② 予約モード到達の確認 (送信しない)
 npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run
 

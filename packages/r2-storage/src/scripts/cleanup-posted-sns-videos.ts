@@ -11,6 +11,8 @@
  * - 対象は status=posted かつ posted_at <= now - RETENTION_DAYS の content_key のみ
  * - 同一 (domain, content_key) に draft / scheduled が残る場合はスキップ (再投稿予定を守る)
  * - 削除は `sns/<domain>/<content_key>/` prefix 配下の **.mp4 のみ**
+ * - 投稿台帳の assets[] に Drive へ保全済みの動画 (role=video, state=archived) が無いキーは削除しない
+ *   (R2 の mp4 は投稿した実体の唯一のコピーになりうる。保全は archive-sns-assets.mjs、契約は sns-content-standards.md §3)
  * - assertR2WriteAllowed で CI/認証環境以外の誤実行を防止
  * - posts.json への書き戻しはしない (冪等 — 毎回 list して判定できる)
  *
@@ -43,6 +45,7 @@ interface SnsPost {
   content_key: string | null;
   status: string;
   posted_at: string | null;
+  assets?: Array<{ role: string; state: string }>;
 }
 
 async function main() {
@@ -74,6 +77,8 @@ async function main() {
     candidates.get(key)!.push(p);
   }
   console.log(`対象 (domain/content_key): ${candidates.size} 件 (保護スキップ: ${protectedKeys.size} キー)`);
+  const isVideoArchived = (rows: SnsPost[]) =>
+    rows.some((p) => (p.assets ?? []).some((a) => a.role === "video" && a.state === "archived"));
 
   let totalMp4 = 0;
   let totalBytes = 0;
@@ -89,6 +94,10 @@ async function main() {
     }
     const mp4s = objects.filter((o) => o.key.endsWith(".mp4"));
     if (mp4s.length === 0) continue;
+    if (!isVideoArchived(candidates.get(key)!)) {
+      console.log(`  ${prefix}: Drive に動画を保全していないので削除しない (archive-sns-assets.mjs --id ${candidates.get(key)!.map((p) => p.id).join(",")})`);
+      continue;
+    }
     const bytes = mp4s.reduce((s, o) => s + o.size, 0);
     totalMp4 += mp4s.length;
     totalBytes += bytes;

@@ -92,4 +92,53 @@ function parsePostedLog(text) {
   return out;
 }
 
-module.exports = { decideLedgerAction, parsePostedLog };
+const SHORTCODE = /\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/;
+const shortcodeOf = (url) => (String(url || "").match(SHORTCODE) || [])[1] ?? null;
+const normCaption = (s) => String(s || "").replace(/\r\n/g, "\n").trim();
+
+/**
+ * Graph API の media 一覧 ({id, permalink, caption}) と台帳の Instagram 行を結び付ける。
+ * Instagram の permalink の shortcode は media_id ではなく、相互に変換できないため API の一覧で照合する。
+ *   1. 台帳に post_url がある行: permalink の shortcode が一致する media の id を external_id にする
+ *   2. post_url の無い posted 行: 本文が完全一致し、台帳側・media 側とも 1 件だけのときに限り
+ *      external_id と post_url を入れる (同じ本文が複数あると取り違えるので推定しない)
+ * 既に別の external_id を持つ行は上書きせず conflicts に出す。
+ * 戻り値: { patches: [{id, patch}], mediaToId: Map<media_id, 台帳 id>, conflicts, unmatchedRows }
+ */
+function matchIgMediaToLedger(posts, media) {
+  const igRows = posts.filter((p) => p.platform === "instagram");
+  const byShortcode = new Map(media.map((m) => [shortcodeOf(m.permalink), m]).filter(([k]) => k));
+  const mediaToId = new Map();
+  const patches = [];
+  const conflicts = [];
+  const take = (row, m, extra = {}) => {
+    if (row.external_id && row.external_id !== m.id) {
+      conflicts.push({ id: row.id, external_id: row.external_id, media_id: m.id });
+      return;
+    }
+    mediaToId.set(m.id, row.id);
+    if (!row.external_id || Object.keys(extra).length) patches.push({ id: row.id, patch: { external_id: m.id, ...extra } });
+  };
+
+  for (const row of igRows) {
+    const m = byShortcode.get(shortcodeOf(row.post_url));
+    if (m) take(row, m);
+  }
+
+  const used = new Set(mediaToId.keys());
+  const freeMedia = media.filter((m) => !used.has(m.id) && normCaption(m.caption));
+  const orphanRows = igRows.filter((r) => !r.post_url && r.status === "posted" && !r.deleted_at && normCaption(r.caption));
+  const countBy = (items, key) => items.reduce((acc, x) => acc.set(key(x), (acc.get(key(x)) ?? 0) + 1), new Map());
+  const mediaCount = countBy(freeMedia, (m) => normCaption(m.caption));
+  const rowCount = countBy(orphanRows, (r) => normCaption(r.caption));
+  const unmatchedRows = [];
+  for (const row of orphanRows) {
+    const c = normCaption(row.caption);
+    const m = mediaCount.get(c) === 1 && rowCount.get(c) === 1 ? freeMedia.find((x) => normCaption(x.caption) === c) : null;
+    if (m) take(row, m, { post_url: m.permalink });
+    else unmatchedRows.push(row.id);
+  }
+  return { patches, mediaToId, conflicts, unmatchedRows };
+}
+
+module.exports = { decideLedgerAction, parsePostedLog, matchIgMediaToLedger, shortcodeOf };

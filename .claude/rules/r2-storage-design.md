@@ -173,7 +173,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | `archive/kindle-encrypted/` | KDP送信版の復元・rollback証跡。manifest署名とplain/cipher SHAが一致するrevisionを保持 |
 | `media/note-backgrounds/` | 承認済みのnote生成AI背景。`render-spec.json`のSHAが指す間は削除しない (作り直せない入力。`--verify-r2`が実在を監視) |
 | `media/kindle-cover-assets/` | 目視承認済みKDP表紙asset。内容ハッシュ付きrevisionを保持し、Gitへ画像本体を戻さない |
-| `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材 |
+| `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材。投稿した素材の正本は Google Drive `stats47/SNS素材/` (台帳 `assets[]`。`sns-content-standards.md` §3-1)。投稿済み mp4 は Drive 保全済みの場合だけ 30 日で削除 |
 | `estat-catalog/` | 再取得可能だが月次crawl(150分予算×複数run)を要し再生成コストが高い。writerは`estat-catalog-monthly.yml`のみ |
 
 ### 削除ポリシー (削除してよいもの)

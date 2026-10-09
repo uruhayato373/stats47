@@ -164,6 +164,40 @@ function readByRange(start, end) {
 }
 
 /**
+ * 全スナップショットの sns_post_id を後から台帳の id へ結び付ける (投稿 id から指標をたどるため)。
+ * resolve(row) が台帳 id (number) を返した行だけを書き換え、null なら触らない。
+ * 同じファイルに同じ (sns_post_id, fetched_at) の行が既にある場合は二重にしないよう書き換えない。
+ * 戻り値: { relinked, skippedDuplicate }
+ */
+function relinkPostIds(resolve) {
+  let relinked = 0;
+  let skippedDuplicate = 0;
+  if (!fs.existsSync(BASE_DIR)) return { relinked, skippedDuplicate };
+  const dates = fs.readdirSync(BASE_DIR).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d));
+  for (const d of dates) {
+    const file = path.join(BASE_DIR, d, "metrics.csv");
+    const rows = readCsv(file);
+    const taken = new Set(rows.filter((r) => r.sns_post_id).map((r) => `${r.sns_post_id}|${r.fetched_at}`));
+    let changed = false;
+    for (const r of rows) {
+      const id = resolve(r);
+      if (id == null || String(id) === r.sns_post_id) continue;
+      const key = `${id}|${r.fetched_at}`;
+      if (taken.has(key)) {
+        skippedDuplicate++;
+        continue;
+      }
+      taken.add(key);
+      r.sns_post_id = String(id);
+      relinked++;
+      changed = true;
+    }
+    if (changed) writeCsv(file, rows);
+  }
+  return { relinked, skippedDuplicate };
+}
+
+/**
  * 全スナップショット行数を返す（互換用。旧 `SELECT COUNT(*) FROM sns_metrics` の置換）。
  */
 function countAll() {
@@ -201,4 +235,5 @@ module.exports = {
   countAll,
   maxFetchedAt,
   csvPathFor,
+  relinkPostIds,
 };

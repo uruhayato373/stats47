@@ -11,6 +11,8 @@
  *   --domain ranking|compare|correlation|blog (デフォルト: ranking)
  *   --type image|carousel|reels (デフォルト: ディレクトリ構造から自動判定)
  *   --dry-run  API を叩かずに payload と public URL 到達確認のみ
+ *   --approve  この実行をオーナーの承認として台帳に記録する (実投稿に必須。2026-10-09 オーナー決定:
+ *              新規投稿は承認必須)。投稿後は media_id を external_id に残し、素材を Google Drive へ保全する
  *
  * 設計:
  *   - 即時投稿のみ（Content Publishing API は予約非対応）
@@ -21,6 +23,7 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as dotenv from "dotenv";
+import { execFileSync } from "child_process";
 import store from "../../../scripts/lib/sns-posts-store.cjs";
 import { R2_PUBLIC_BASE_URL } from "../../../scripts/lib/site-config.cjs";
 import { datasetPath } from "../../../../config/datasets.mjs";
@@ -56,11 +59,12 @@ interface PostSpec {
 }
 
 // ─── 引数パース ─────────────────────────────────────
-function parseArgs(): { keys: string[]; domain: string; forceType: PostType | null; dryRun: boolean } {
+function parseArgs(): { keys: string[]; domain: string; forceType: PostType | null; dryRun: boolean; approve: boolean } {
   const args = process.argv.slice(2);
   let domain = "ranking";
   let forceType: PostType | null = null;
   let dryRun = false;
+  let approve = false;
   const keys: string[] = [];
 
   for (let i = 0; i < args.length; i++) {
@@ -68,6 +72,7 @@ function parseArgs(): { keys: string[]; domain: string; forceType: PostType | nu
     if (a === "--domain") domain = args[++i];
     else if (a === "--type") forceType = args[++i] as PostType;
     else if (a === "--dry-run") dryRun = true;
+    else if (a === "--approve") approve = true;
     else if (a.startsWith("--")) {
       console.error(`❌ 不明な引数: ${a}`);
       process.exit(1);
@@ -80,7 +85,7 @@ function parseArgs(): { keys: string[]; domain: string; forceType: PostType | nu
     console.error("使い方: post-instagram.ts <rankingKey> [...] [--domain <d>] [--type <t>] [--dry-run]");
     process.exit(1);
   }
-  return { keys, domain, forceType, dryRun };
+  return { keys, domain, forceType, dryRun, approve };
 }
 
 // ─── コンテンツ読み込み・タイプ判定 ─────────────────────
@@ -282,17 +287,24 @@ function recordPublish(spec: PostSpec, mediaId: string, permalink: string): void
         (p.status === "draft" || p.status === "scheduled")
     )[0] as { id: number } | undefined; // LIMIT 1 相当 (先頭一致)
 
+    const approval = { state: "approved", by: "owner", at: postedAt, via: "post-instagram --approve", note: null };
+    let rowId: number;
     if (existing) {
       store.updateById(existing.id, {
+        approval,
         status: "posted",
         post_url: permalink,
+        external_id: mediaId,
         posted_at: postedAt,
         caption: spec.caption,
         updated_at: postedAt,
       });
+      rowId = existing.id;
       console.log(`  💾 sns_posts UPDATE (id=${existing.id})`);
     } else {
-      store.insert({
+      rowId = store.insert({
+        approval,
+        external_id: mediaId,
         platform: "instagram",
         post_type: postType,
         domain: spec.domain,
@@ -303,8 +315,14 @@ function recordPublish(spec: PostSpec, mediaId: string, permalink: string): void
         status: "posted",
         created_at: postedAt,
         updated_at: postedAt,
-      });
+      }).id;
       console.log(`  💾 sns_posts INSERT`);
+    }
+    // 素材を Drive へ保全する (失敗しても投稿は取り消さない。check-post-trace.mjs が未保全を知らせる)
+    try {
+      execFileSync(process.execPath, [path.join(PROJECT_ROOT, ".claude/scripts/sns/archive-sns-assets.mjs"), "--id", String(rowId)], { stdio: "inherit" });
+    } catch (e) {
+      console.warn(`  ⚠️ 素材の Drive 保全に失敗 (id=${rowId}): ${(e as Error).message}`);
     }
   } catch (e) {
     console.warn(`  ⚠️ sns_posts write error: ${(e as Error).message}`);
@@ -313,7 +331,11 @@ function recordPublish(spec: PostSpec, mediaId: string, permalink: string): void
 
 // ─── メイン ─────────────────────────────────────
 async function main(): Promise<void> {
-  const { keys, domain, forceType, dryRun } = parseArgs();
+  const { keys, domain, forceType, dryRun, approve } = parseArgs();
+  if (!dryRun && !approve) {
+    console.error("❌ 実投稿は承認が必要です。オーナーの指示で実行する場合は --approve を付けてください (台帳に承認として記録します)。");
+    process.exit(1);
+  }
   console.log(`🎯 Instagram 投稿: ${keys.length} 件 (domain=${domain}${forceType ? `, type=${forceType}` : ""})`);
 
   for (const key of keys) {

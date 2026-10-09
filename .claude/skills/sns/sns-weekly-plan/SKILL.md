@@ -26,6 +26,13 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 
 ## 手順
 
+### Step 0: 投稿の素材を Drive へ保全する (Mac・Drive マウントがある端末)
+
+```bash
+node .claude/scripts/sns/archive-sns-assets.mjs --since <先週月曜 YYYY-MM-DD>   # CI 投稿の Instagram など未保全の行
+npm run sns:trace:check                                                     # 未保全・missing・承認の件数
+```
+
 ### Step 1: 先週の実績を確認
 
 ```bash

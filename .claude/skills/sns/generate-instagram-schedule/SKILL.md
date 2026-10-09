@@ -56,14 +56,22 @@ node .claude/scripts/instagram/generate-schedule.cjs \
    エントリに `time` "HH:MM" JST を持たせると 08:03/12:03/19:03 の該当 cron 枠で配信、
    未指定は 08:00 扱い。同一日に複数エントリ可 — 各 cron 実行が未投稿の最早 1 件を消化)。
 
-2. schedule JSON を commit → **main へ反映** (cron は main checkout で動くため):
+2. 各エントリを投稿台帳へ下書きとして登録し (`post_id` を書き戻す)、オーナーの承認を記録する。
+   IG cron は `post_id` が承認済みのエントリだけを投稿し、投稿時刻が来ても承認待ちなら exit 3 で止まる
+   (正典 `.claude/rules/sns-content-standards.md` §3-1):
+   ```bash
+   node .claude/scripts/instagram/register-ig-schedule.cjs --schedule instagram-wXX
+   node .claude/scripts/sns/approve-posts.cjs --schedule instagram-wXX   # オーナーが承認を指示したときだけ
+   ```
+
+3. schedule JSON を commit → develop へ push (IG cron は develop を checkout して予約表を読む):
    ```bash
    git add data/sns/instagram-wXX-schedule.json
    git commit -m "feat(instagram): WXX スケジュール追加"
    # develop 経由で develop→main PR (通常デプロイフローに同乗)
    ```
 
-3. 不足アセットがある場合:
+4. 不足アセットがある場合:
    - ranking 画像: `/render-sns-stills` → `/push-r2 sns/ranking/<key>`
    - bar-chart-race リール: `/bar-chart-race --step render` → `/push-r2 sns/bar-chart-race/<key>`
 

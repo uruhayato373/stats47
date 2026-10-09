@@ -14,6 +14,11 @@
  * utm_url / status / scheduled_at / posted_at / impressions / likes / reposts / replies /
  * bookmarks / metrics_updated_at / deleted_at / template / metric_keys / parent_post_id /
  * source_timecode / survey_ids / provenance_urls / created_at / updated_at
+ *
+ * 1 投稿 = 1 行 = 1 id。id から台本 (caption / script_path)・状態 (status)・承認 (approval)・
+ * 外部 ID (externalIdOf)・素材 (assets[] → Google Drive)・観測値 (metric-snapshots の sns_post_id)・
+ * 確認画面 (管理画面 /sns/<id>) をたどる。形の契約は data/sns/posts.schema.json、
+ * 検査は .claude/scripts/sns/check-post-trace.mjs。
  */
 
 const fs = require("node:fs");
@@ -25,6 +30,10 @@ const { datasetPath } = require("../../../config/datasets.mjs");
 const ROOT = path.resolve(__dirname, "../../..");
 const STORE_PATH = path.join(ROOT, datasetPath("sns.posts"));
 const LOG_PATH = path.join(ROOT, datasetPath("sns.post-log"));
+
+const STATUSES = ["draft", "scheduled", "posted", "deleted"];
+// unrecorded = 承認の記録を始める前の行。承認された証拠が無いので approved に読み替えない
+const APPROVAL_STATES = ["pending", "approved", "rejected", "unrecorded"];
 
 const PLATFORM_LABEL = {
   instagram: "📸 Instagram",
@@ -79,6 +88,14 @@ function isVerifiedThreadsPostUrl(postUrl) {
 }
 
 function assertRecordIntegrity(record) {
+  if (!STATUSES.includes(record.status)) {
+    throw new Error(`status は ${STATUSES.join(" / ")} のいずれかです (id=${record.id ?? "new"}, status=${record.status})`);
+  }
+  if (record.approval !== undefined && !APPROVAL_STATES.includes(record.approval?.state)) {
+    throw new Error(
+      `approval.state は ${APPROVAL_STATES.join(" / ")} のいずれかです (id=${record.id ?? "new"})`,
+    );
+  }
   if (
     record.platform === "x" &&
     record.status === "posted" &&
@@ -116,6 +133,9 @@ function read() {
 }
 
 function write(data) {
+  // 旧形式の最上位 nextId / total_count は誰も読まず、_meta と食い違ったまま残っていた
+  delete data.nextId;
+  delete data.total_count;
   data._meta = data._meta || {};
   data._meta.count = data.posts.length;
   data._meta.nextId = Math.max(data._meta.nextId || 1, maxId(data.posts) + 1);
@@ -154,6 +174,7 @@ function insert(record) {
   const row = {
     id,
     status: "draft",
+    approval: { state: "pending" },
     created_at: now,
     updated_at: now,
     ...record,
@@ -184,14 +205,77 @@ function updateById(id, patch) {
   return row;
 }
 
+/**
+ * 複数行を 1 回の書込で更新する (backfill・一括承認用)。patches は [{ id, patch }]。
+ * 1 件でも id が無い・検査に落ちる場合は何も書かずに例外を出す。更新後の行を返す。
+ */
+function updateMany(patches) {
+  const data = read();
+  const now = new Date().toISOString();
+  const byId = new Map(data.posts.map((p) => [p.id, p]));
+  const nextRows = patches.map(({ id, patch }) => {
+    const row = byId.get(id);
+    if (!row) throw new Error(`updateMany: id=${id} の行がありません`);
+    const next = { ...row, ...patch, updated_at: patch.updated_at ?? now };
+    assertRecordIntegrity(next);
+    return [row, next];
+  });
+  for (const [row, next] of nextRows) Object.assign(row, next);
+  write(data);
+  return nextRows.map(([row]) => row);
+}
+
+/**
+ * 予約・投稿を外部へ出す直前に呼ぶ。承認済みでなければ例外 (2026-10-09 オーナー決定: 新規投稿は承認必須)。
+ * scheduled → posted (実際に出たことの記録) には使わない。
+ */
+function assertApprovedForPublish(row) {
+  const state = row?.approval?.state ?? "pending";
+  if (state !== "approved") {
+    throw new Error(
+      `未承認の投稿は予約・投稿できません (id=${row?.id}, approval=${state})。` +
+        "承認は node .claude/scripts/sns/approve-posts.cjs --ids <id>",
+    );
+  }
+}
+
+function isApproved(row) {
+  return row?.approval?.state === "approved";
+}
+
+const EXTERNAL_ID_PATTERNS = {
+  x: /\/status\/(\d+)/,
+  threads: /\/post\/([A-Za-z0-9_-]+)/,
+  youtube: /(?:[?&]v=|youtu\.be\/|\/shorts\/)([A-Za-z0-9_-]{11})/,
+  tiktok: /\/video\/(\d+)/,
+  note: /\/n\/([A-Za-z0-9]+)/,
+};
+
+/**
+ * 外部 (各媒体側) の投稿 ID。post_url から導出できる媒体は導出し (二重保存しない)、
+ * 導出できない Instagram の media_id だけ行の external_id を返す。無ければ null。
+ */
+function externalIdOf(row) {
+  if (row.platform === "instagram") return row.external_id ?? null;
+  const pattern = EXTERNAL_ID_PATTERNS[row.platform];
+  const match = pattern && (row.post_url || "").match(pattern);
+  return match ? match[1] : null;
+}
+
 module.exports = {
   STORE_PATH,
+  STATUSES,
+  APPROVAL_STATES,
   loadAll,
   query,
   getById,
   isVerifiedXPostUrl,
   isVerifiedThreadsPostUrl,
   assertRecordIntegrity,
+  assertApprovedForPublish,
+  isApproved,
+  externalIdOf,
   insert,
   updateById,
+  updateMany,
 };

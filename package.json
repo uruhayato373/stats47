@@ -93,6 +93,8 @@
     "note:covers:audit": "node .claude/scripts/note/audit-note-covers.mjs",
     "note:assets": "node .claude/scripts/note/cover-assets.mjs",
     "note:assets:validate": "node .claude/scripts/note/cover-assets.mjs validate",
+    "sns:trace:check": "node .claude/scripts/sns/check-post-trace.mjs",
+    "sns:trace:test": "node --test .claude/scripts/sns/__tests__/post-trace-core.test.mjs .claude/scripts/lib/__tests__/sns-posts-store.test.cjs",
     "note:assets:test": "node --test .claude/scripts/note/__tests__/cover-assets.test.mjs .claude/scripts/note/__tests__/question-cover-data.test.mjs",
     "note:images:audit": "node .claude/scripts/note/audit-note-image-assets.mjs",
     "note:images:regen": "node .claude/scripts/note/regen-derived-png.mjs",

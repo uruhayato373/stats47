@@ -24,11 +24,16 @@
  *               無人の定期実行が git の作業ツリーを触らないため。台帳へは --sync-ledger でまとめて反映する
  *
  * 初回・画面変更後は --limit 1 --dry-run で予約モード到達を確認してから本番に回す。
+ *
+ * 承認済み (approval.state=approved) の下書きだけを予約する (2026-10-09 オーナー決定: 新規投稿は承認必須。
+ * 承認は .claude/scripts/sns/approve-posts.cjs)。台帳を書いた行 (--no-ledger でない予約・--sync-ledger) は
+ * 最後に archive-sns-assets.mjs で素材を Google Drive へ保全する (無人の --no-ledger 実行は git を触らないので保全しない)。
  */
 import { chromium, type BrowserContext, type Page } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { execFileSync } from "node:child_process";
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../../../..");
@@ -98,6 +103,7 @@ function loadQueue(limit: number, offset = 0): QueueItem[] {
   return store
     .loadAll()
     .filter((p: any) => p.platform === "threads" && p.status === "draft" && p.scheduled_at && !p.deleted_at)
+    .filter((p: any) => store.isApproved(p))
     .filter((p: any) => !logged.has(p.id))
     .filter((p: any) => Date.parse(p.scheduled_at) > now + 15 * 60_000) // 15 分以内は予約できないので除外
     .sort((a: any, b: any) => String(a.scheduled_at).localeCompare(String(b.scheduled_at)))
@@ -109,6 +115,25 @@ function loadQueue(limit: number, offset = 0): QueueItem[] {
       mediaPath: p.media_path ? (path.isAbsolute(p.media_path) ? p.media_path : path.join(PROJECT_ROOT, p.media_path)) : null,
       scheduledAt: new Date(p.scheduled_at),
     }));
+}
+
+/** 承認待ちの Threads 下書き (予約しないが件数を知らせる) */
+function pendingApprovalIds(): number[] {
+  return store
+    .loadAll()
+    .filter((p: any) => p.platform === "threads" && p.status === "draft" && !p.deleted_at && !store.isApproved(p))
+    .map((p: any) => p.id);
+}
+
+/** 台帳を書いた行の素材を Drive へ保全する。失敗しても予約は取り消さず警告だけ出す */
+function archiveAssets(ids: number[]) {
+  for (const id of ids) {
+    try {
+      execFileSync(process.execPath, [path.join(PROJECT_ROOT, ".claude/scripts/sns/archive-sns-assets.mjs"), "--id", String(id)], { stdio: "inherit" });
+    } catch (e) {
+      console.warn(`⚠ 素材の Drive 保全に失敗 (id=${id})。あとで archive-sns-assets.mjs --id ${id} を実行してください: ${e}`);
+    }
+  }
 }
 
 function jstParts(d: Date) {
@@ -279,15 +304,16 @@ async function publishOne(page: Page, item: QueueItem, dryRun: boolean, noLedger
 async function main() {
   const { fromQueue, dryRun, limit, offset, fill, noLedger, syncLedger } = args();
   if (syncLedger) {
-    let n = 0;
+    const synced: number[] = [];
     for (const e of readLog()) {
       const row = store.getById(e.id);
       if (row && row.platform === "threads" && row.status === "draft") {
         store.updateById(e.id, { status: "scheduled" });
-        n++;
+        synced.push(e.id);
       }
     }
-    console.log(`📝 記録ファイル → posts.json: ${n} 件を scheduled に更新`);
+    console.log(`📝 記録ファイル → posts.json: ${synced.length} 件を scheduled に更新`);
+    archiveAssets(synced);
     return;
   }
   if (!fromQueue) {
@@ -302,6 +328,10 @@ async function main() {
     max = Math.min(limit, free);
   }
   const queue = loadQueue(max, offset);
+  const pending = pendingApprovalIds();
+  if (pending.length) {
+    console.log(`⏸  承認待ちの下書き ${pending.length} 件は予約しません (承認: node .claude/scripts/sns/approve-posts.cjs --ids ${pending.join(",")})`);
+  }
   console.log(`🧵 Threads 予約${dryRun ? " (dry-run)" : ""}: ${queue.length} 件`);
   if (!queue.length) return;
 
@@ -316,6 +346,7 @@ async function main() {
   const page = context.pages()[0] || (await context.newPage());
   let ok = 0;
   let full = false;
+  const scheduledIds: number[] = [];
   try {
     await ensureLogin(page);
     for (const item of queue) {
@@ -324,8 +355,10 @@ async function main() {
         full = true;
         break;
       }
-      if (r) ok++;
-      else if (!dryRun) {
+      if (r) {
+        ok++;
+        if (!dryRun && !noLedger) scheduledIds.push(item.id);
+      } else if (!dryRun) {
         // 1 件でも予約を確認できなければ、画面の変化を疑って残りを止める
         console.error("⛔ 失敗したので残りを止めます");
         break;
@@ -337,6 +370,7 @@ async function main() {
     await page.waitForTimeout(2000);
     await context.close();
   }
+  archiveAssets(scheduledIds);
   // 満杯で止まったのは失敗ではない (次回の補充で続きを入れる)
   if (!full && ok !== queue.length) process.exitCode = 1;
 }
