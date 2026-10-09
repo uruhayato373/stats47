@@ -251,7 +251,7 @@ jobs:
         # カットオーバー以降の投稿は承認必須。契約: .claude/rules/sns-content-standards.md §3
         run: |
           npm run sns:trace:test
-          npm run sns:trace:check
+          node .claude/scripts/sns/check-post-trace.mjs
         continue-on-error: false
 
       - name: 🗒️ note Image Asset Contract Guard
