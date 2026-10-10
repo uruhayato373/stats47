@@ -79,7 +79,7 @@ jobs:
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           CLOUDFLARE_R2_BUCKET_NAME: stats47
         run: |
-          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --concurrency 16 --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)"
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)" --concurrency 16
 
       - name: 🔐 Verify Cloudflare authentication
         env:

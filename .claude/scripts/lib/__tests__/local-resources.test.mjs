@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { LOCAL_RESOURCES } from '../../../../config/paths.mjs';
 import {
   assertInside,
   assertNoLinks,
@@ -411,7 +412,7 @@ test('容量上限を超えたパスを over にする', (t) => {
 });
 
 test('設定の契約: 会話記録の DB と memory は保持期限の対象外、.local/r2 はフォルダ単位で古さを判定する', () => {
-  const config = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../../config/local-resources.json'), 'utf8'));
+  const config = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../..', LOCAL_RESOURCES), 'utf8'));
   for (const e of config.fileRetention) {
     assert.ok(e.ageDays >= 7, `${e.root} の期限が短すぎる`);
     assert.ok(!/thread_history|\.sqlite/.test(`${e.root} ${e.match}`), 'Codex の内部 DB を消さない');
