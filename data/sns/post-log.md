@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**695 件** (最終更新: 2026-10-09)
+**698 件** (最終更新: 2026-10-10)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-10 | 📸 Instagram | area-carousel/03000 | 【都道府県データ】岩手県、全国で何位？  全国トップクラス: 年平均相対湿度 1位（77％・2024年） 乳用牛飼養頭数… | [🔗](https://www.instagram.com/p/DeUch2EkeJe/) |
+| 2026-10-10 | 🧵 Threads | area/area-17000-profile | 旅先では見えにくい石川の輪郭。 県木アテと特産のとてまり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/DeTqLPLEzlO) |
+| 2026-10-10 | 🧵 Threads | ranking/general-hospital-bed-count-per-100k | 「病床数は都市部が多いはず」と思われがちですが、データは真逆の傾向です。  1位 高知県 2,056.3床 47位 神奈… | [🔗](https://www.threads.com/@stats47jp/post/DeS71Opj-W3) |
 | 2026-10-09 | 📸 Instagram | compare-carousel/23000-vs-40000 | 【県どうしの比較】愛知県 vs 福岡県  製造品出荷額等（総額）: 愛知県が大きい（2023年・出典: 社会・人口統計体… | [🔗](https://www.instagram.com/p/DeRQY84G5tI/) |
 | 2026-10-09 | 🧵 Threads | area/area-16000-profile | 富山を数字と地域文化の両方から見る。 県鳥ライチョウ、特産ホタルイカ、全国順位をまとめた県別ページです。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeRDEEPjntQ) |
 | 2026-10-09 | 🧵 Threads | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://www.threads.com/@stats47jp/post/DeQVTBMjF6G) |
