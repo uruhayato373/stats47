@@ -2,7 +2,7 @@ import "server-only";
 
 import { listCategories } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { carryTimestamp, readPublishedSnapshot, writeR2Staging } from "@stats47/r2-storage/server";
 
 import type { Category } from "../types/category";
 import {
@@ -33,12 +33,16 @@ export async function exportCategoriesSnapshot(): Promise<ExportCategoriesSnapsh
     displayOrder: c.displayOrder,
   }));
 
-  const snapshot = buildCategoriesSnapshot(categories);
+  // 中身が前回配信した版と同じなら generatedAt を引き継ぎ、同じバイト列にする (差分反映で送らない)
+  const previous = await readPublishedSnapshot<{ generatedAt?: string }>(CATEGORIES_SNAPSHOT_KEY);
+  const { value: snapshot } = carryTimestamp(
+    (generatedAt) => buildCategoriesSnapshot(categories, generatedAt),
+    previous ? { value: previous, timestamp: previous.generatedAt } : null,
+    new Date().toISOString(),
+  );
 
   const body = JSON.stringify(snapshot);
-  const result = await saveToR2(CATEGORIES_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  const result = await writeR2Staging(CATEGORIES_SNAPSHOT_KEY, body);
 
   const durationMs = Date.now() - startedAt;
   logger.info(

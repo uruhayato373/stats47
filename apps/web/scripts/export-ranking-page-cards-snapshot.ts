@@ -15,7 +15,7 @@ import { resolve } from "node:path";
 
 import dotenv from "dotenv";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 import { rankingPageCardsKeyPath } from "../src/features/ranking/components/RankingPageCards/snapshot-reader";
 
@@ -42,9 +42,7 @@ async function main() {
     const batch = entries.slice(i, i + CONCURRENCY);
     await Promise.all(
       batch.map(async ({ rankingKey, body }) => {
-        await saveToR2(rankingPageCardsKeyPath(rankingKey), body, {
-          contentType: "application/json; charset=utf-8",
-        });
+        await writeR2Staging(rankingPageCardsKeyPath(rankingKey), body);
         files++;
       }),
     );

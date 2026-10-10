@@ -264,21 +264,6 @@ updated: 2026-10-06
   束ね、同じ指標の「選択県」と「全国」を R2 の 1 回の読み込みから作るようにした (リクエスト 48 → 2、R2 読み込みは指標数分)。
   [仮説] テーマページ 1 表示あたりの Workers CPU 時間が減る。検証: リリース後の日次 snapshot の cpu_p50 / p99 を前週と比べる。
 
-### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [領域:管理]
-
-- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
-- **症状 (実測)**: `data/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
-- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
-  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
-- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
-- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
-- **比較の断絶 (2026-09-25)**: LCP 要素である背景タイルを CARTO (同一 origin の /tiles プロキシ・30 日エッジキャッシュ) から地理院タイル (cyberjapandata.gsi.go.jp を直接取得) へ切り替えた (commit 871096e46、main 95a9971)。9/25 以降の PSI はタイル配信元が別物なので、ベースライン 9,347ms との比較は 9/25 以降の 3 週で改めて判定し、それ以前の推移とつなげない。
-- **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
-- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
-- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
-
 ### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ後に古い HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [進行中] [領域:サイト]
 
@@ -311,7 +296,95 @@ updated: 2026-10-06
 - **次**: CSS のハッシュが変わる次のデプロイで、reset step のログが新しいハッシュを確認してから全パージしたこと、route smoke の
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
+### [DEPS-NEXT16-UPGRADE-01] Next.js の high 脆弱性 (SSG/ISR のキャッシュ汚染) を解消する。修正は 16 系にしか無い
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=high] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10 のリリース (PR #1119) 後も、本番依存の `npm audit --omit=dev` に high が 1 件残る。next `<=16.3.0-preview.10` の GHSA-4jqv-mc3x-m676 / GHSA-mcj8-r9mp-w47p (self-hosted の SSG・ISR ページのキャッシュ汚染。利用者をまたいだ内容の差し替えと継続的なサービス停止)。npm audit の提案は next 16.4.0 で、15 系 (現在 15.5.27) には修正版が無い。Security Scan は main への push と全 PR で赤のまま。
+- **[仮説] 該当性**: stats47 は OpenNext (`@opennextjs/cloudflare` ^1.20.2) で Workers に自前配信し、ISR キャッシュを R2 (`incremental-cache/`) に置くので、advisory の「self-hosted の SSG/ISR」に当たる可能性が高い。検証: 2 件の advisory の影響条件 (リクエストのどの値でキャッシュキーが汚れるか) を公式ページで読み、OpenNext のキャッシュ経路で再現条件が成り立つかを確かめる。成り立たないと確定できたら期限付きの例外として扱い、🟡 へ下げる。
+- **手順**: ①OpenNext の対応表で Next 16 に対応した版を確認する (未対応なら上流待ちとして日付を書く) ②作業ブランチで next 16.4 系・`eslint-config-next`・OpenNext を上げ、ルートの overrides も同じ版にする (overrides だけ古いと next が 2 つの版で入り、本番ビルドの /404 が落ちる。2026-10-10 の PR #1119 で実際に起きた) ③Next 16 の破壊的変更 (`next lint` の扱い・キャッシュ・params の非同期化など) を移行ガイドで確認して直す ④`npm run build --workspace=web`・`npm run type-check`・代表 URL の表示確認・`npm audit --omit=dev --audit-level=high` を通す ⑤デプロイ後に Googlebot UA で代表 URL が 200 を返すことを実測する。
+- **停止条件**: OpenNext が Next 16 に対応していない状態で上げない (本番が配信できなくなる)。見た目・ルーティングの差分が出た状態でデプロイしない。デプロイはオーナー確認後に 1 回だけ行う。
+- **完了条件**: `npm audit --omit=dev --audit-level=high` が exit 0 で、本番の代表 URL が 200。または該当しないと確定し、例外の理由と再評価日をこのカードに書いて 🟡 へ下げた。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [DEPS-OVERRIDES-DRIFT-GATE-01] ルートの overrides と各 workspace の依存の版の食い違いを push 前に止める
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run preflight:pr] [起票:2026-10-10] [領域:管理]
+
+- **事象**: dependabot は `apps/web` などの package.json だけを上げ、ルートの `overrides` (next 15.5.24・sharp 0.35.4) は古いまま残った。next が 2 つの版で入り、PR #1119 の本番ビルドの /404 事前描画が `<Html> should not be imported outside of pages/_document` で落ちた (2026-10-10。overrides を揃えて解消)。CI の Build Check が本番前に止めたが、ビルド 5 分と CI 往復 1 回を使った。
+- **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
+- **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
+
+### [AI-CONTENT-GEMINI-PREFLIGHT-01] ai-content-gemini-daily が 12 日連続で Gemini の構造化出力の事前確認に失敗している
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 横断監視 #763 で `ai-content-gemini-daily.yml` が 12 回連続失敗 (2026-09-28〜10-09、例: run 37873064516)。ログの終わりは「Gemini structured-output preflight に失敗しました」。#763 には他に cron 異常が計 7 件ある。
+- **次**: 失敗 run のログで preflight が何を送って何が返ったか (認証・モデル名・スキーマ) を確かめ、原因を直す。止めると決めたなら `gh workflow disable` で止め、main からも消す。#763 の残り 6 件も同じ表で原因と行き先を付ける。
+- **完了条件**: 次の定時実行が成功するか、意図して止めたことが workflow と #763 で確認できる。
+
+### [RANKING-RATIO-RANK-MISMATCH-01] 比率指標 4 件で配信中の順位が再計算と食い違う
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: ランキング整合性の週次監査 #679 (2026-10-03) で、`business-closure-rate` (順位差 30)・`business-opening-rate` (26)・`engel-coefficient` (13)・`information-communication-coefficient` (27) の 4 件が、R2 の values と再計算で順位が一致しない (件数は一致)。監査は「DB レス回帰の疑い」と出している。
+- **次**: 4 件の values.json の rank と `calculateRankingValues` の結果を並べ、どちらが正しいか (昇順・降順の向き、同率の扱い、元データの年) を確かめてから再生成する。
+- **完了条件**: 次の週次監査で rank 不一致が 0 件。
+
+### [BLOG-LINK-410-REMAP-01] ブログ本文の 410 になったランキングへのリンク 5 件を置き換える
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/fix-broken-internal-links.mjs] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: リンク監査 #752 (2026-10-03) でブログ本文に HTTP 410 のリンクが 5 件 (`/ranking/elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`・`prefectural-income-per-capita`・`tourism-resource-count`、各 1 記事)。
+- **手順**: #752 本文の是正手順どおり、`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (無ければ `to: null`) を足し、`fix-broken-internal-links.mjs --apply` で置き換えて公開する。
+- **完了条件**: 次の週次リンク監査で 410 が 0 件になり #752 が自動で閉じる。
+
+### [OGP-NOTE-COVER-MISSING-01] OGP 監査で note カバー画像 103 件が欠落のまま残る
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
+
+- **事象**: OGP 画像の週次監査 #814 (2026-10-03) で、自動修復後も note-cover が 103 件 missing (例: 12-fiscal-peer-comparison ほか公務員シリーズ)。note カバーの正本は 2026-10-02 に `data/note/cover-assets.json` へ移っており (`note-image-assets.md`)、監査が旧経路の画像を探している可能性がある。
+- **次**: [仮説] 監査の参照先が旧経路のまま。検証: `ogp-image-audit` が note-cover をどこで探すかを読み、`cover-assets.json` の版と突き合わせる。監査側の誤りなら監査を直し、実際の欠落なら `note:assets` の手順で補う。
+- **完了条件**: 次の週次 OGP 監査で note-cover の missing が 0 件。
+
+### [PAGE-QUALITY-ERROR-BACKLOG-01] ページ品質の週次監査の error 3,149 件を種類ごとに振り分ける
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: #1014 (2026-10-03) で error=3,149・warning=7,885 (6,475 URL)。種類の内訳 (HTML/RSC 肥大・DOM 過剰・リンク重複・広告重複・構造化データ・画像切れ) を誰も振り分けていない。リンク重複は [SITEWIDE-DUPLICATE-LINK-RATIO-01] が扱う。
+- **次**: `/quality/page-audit` か R2 `state/page-quality/latest.json` で error を種類別に数え、既存カードに載るものは振り分け、載らない種類はカードにする。誤検知なら閾値を直す。
+- **完了条件**: error の各種類に行き先 (カード ID か閾値修正) があり、#1014 にその表がコメントされている。
+
+### [NOTE-PRODUCT-CARD-MISMATCH-01] note 記事の商品カードの題名が実商品の題名と食い違う
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
+
+- **事象**: note 商品カードの週次監査 #1064 (2026-10-03) で a-kakei 系の記事 (fukui・fukuoka・fukushima・gifu・gunma ほか) のカードが「消費量日本一の食卓 — …」を表示し、実商品 (storefront.generated.ts) の「食卓の支出と購入数量 — 家計調査の地域差を読む」と一致しない。
+- **次**: 商品の題名を変えたのが先か、カードが古いのかを確かめる。カードはマガジンではなく実商品の正本から解決する (memory `feedback_note_product_card_ssot`)。直すときは公開済み記事のカードを PUT で差し替える手順を使う。
+- **完了条件**: 次の週次監査で不一致 0 件。
+
+### [NSM-GUARD-EMPTY-CSV-01] 週次収益 (NSM) のガードが GA4 の CSV 0 行で失敗した原因を確かめる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: #1065 (2026-10-04)。ガードの実行 (run 37213549127) で `overview.csv`・`daily.csv`・`devices.csv`・`units.csv` がすべて 0 行 (error)。前の 2 回 (09-20・09-27) は成功している。
+- **次**: 10-11 の実行結果を確かめる。成功していれば一時的な取得失敗として #1065 に記録して閉じ、続いていれば GA4 の取得 (認証・プロパティ・期間) を調べる。
+- **完了条件**: 週次収益の計測が 2 週続けて成功し、#1065 が閉じている。
+
+### [THEME-CPI-503-01] テーマ品質監査で consumer-prices ページが 503・タイムアウトになる
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: テーマ品質監査 #1069 (2026-10-05) で `/themes/consumer-prices` (幅 1440) が HTTP 503・h1 の待機タイムアウト・チャート 2 つ欠落 (theme-cpi-heatmap・theme-cpi-profile)。
+- **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
+- **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
+
+### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [領域:管理]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (実測)**: `data/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
+  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
+- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
+- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
+- **比較の断絶 (2026-09-25)**: LCP 要素である背景タイルを CARTO (同一 origin の /tiles プロキシ・30 日エッジキャッシュ) から地理院タイル (cyberjapandata.gsi.go.jp を直接取得) へ切り替えた (commit 871096e46、main 95a9971)。9/25 以降の PSI はタイル配信元が別物なので、ベースライン 9,347ms との比較は 9/25 以降の 3 週で改めて判定し、それ以前の推移とつなげない。
+- **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
+- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
+- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
+
 
 ### [UNPUSHED-COMMIT-STOP-01] セッションが develop にコミットしたまま push せずに終わるのを Stop hook で差し戻す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-10] [領域:管理]
@@ -3355,9 +3428,53 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **2026-10-09 実測と判定の抜け**: 90 分にした後、PR #1118 のデプロイ (run 37922790127) は `Detect metric snapshot changes` が直前の push との差分だけを見るため反映段を skip した (前回の反映が途中で止まっていても補わない)。workflow_dispatch (run 37924050596) で全件反映し、反映 53 分 (11:32-12:25)・全体成功・スモーク成功。40 分では原理的に収まらない量。次の対策では、途中で止まった反映を次のデプロイが検知して再実行する判定 (前回成功した release の記録との比較など) も足す。
 - **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
   反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
+- **2026-10-10 原因の特定と対策 (実装済み・develop)**: PR #1119 のデプロイ (run 38007536371) は 85 分で上限の直前だった。原因は 2 つ。
+  ①生成物に生成時刻 (item の `generatedAt`・`createdAt`・`updatedAt`、一覧・カテゴリ・調査・市区町村の `generatedAt`) が入り、毎回 3,219 件すべてが「変更あり」になっていた。
+  さらに `app/ranking/<key>/item.json` をランキング生成とマスター出力 (`exportRankingItemsPerUrl`) の 2 つが書いていた。
+  ②反映 (`publishExactR2Manifest`) が 1 件ずつ直列で、1 件約 1 秒かかっていた。
+  対策: 中身が前回配信と同じなら時刻を引き継ぐ (`packages/r2-storage/src/lib/operations/stable-snapshot.ts`)。デプロイ時は item.json の書き手をランキング生成だけにした。
+  反映は段ごとに並列 (`--concurrency 16`) にした。差分判定をやめて毎回生成・反映する形にし、途中で止まった反映を次のデプロイが補うようにした。
+  手元でデプロイと同じ生成を 2 回流し、リリース対象 3,219 件の一致を確認した。次のデプロイは外側の `generatedAt` をそろえるため一度だけ全件を書き換える。
+- **次 (2026-10-10 以降)**: 次のデプロイで反映の所要時間と `uploaded` 件数を run のログで実測する。その次のデプロイで `uploaded` が変わった分だけになることを確かめる。90 分の上限は、実測で余裕が確認できてから縮める。
 - **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [R2-LOCAL-ROOT-UNIFY-01] r2-storage の listFromR2・deleteFromR2 のローカル経路を writeR2Staging と同じルート解決にする
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npx vitest run packages/r2-storage] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10 に書き込み (`writeR2Staging`) はリポジトリ直下の `.local/r2` に固定したが、`list.ts`・`delete.ts` のローカル経路 (`NODE_ENV=development` かつ S3 資格情報なしのとき) は `findLocalR2Root()` でカレントディレクトリから既存の `.local/r2` を探し、無ければその場を見る。書いた場所と読む・消す場所が実行場所によってずれうる。`packages/r2-storage/README.md` の「環境検出」節も現在の判定 (`detect-environment.ts`) と合っていない。
+- **trigger**: ローカル経路の list / delete を使う作業が出たとき、または r2-storage を次に触るとき。
+- **次**: `write-staging.ts` のルート解決を共通関数に切り出して list / delete から使い、`find-local-r2-root.ts` を消す (`push-r2-wrangler.ts` も同じ関数へ)。README の環境検出節を `detectEnvironment()` の実際の条件に直す。
+- **完了条件**: `findLocalR2Root` の参照が 0 件、r2-storage のテストと `npm run type-check` が通る。
+
+### [DATA-SOURCE-NEWS-TOPICS-01] 新聞記事から拾った統計ネタ 3 件 (国勢調査確定値・日銀短観・DV 相談) を企画に回す
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-10-10] [領域:SNS]
+
+- **trigger**: 週次の SNS・ブログの題材選び (`/sns-weekly-plan`・`/plan-article-queue`) のとき。
+- **元**: GitHub Issue の運用規則 (機能改修・バグ・自動アラートだけ) から外れていた `data-source` ラベルの Issue を 2026-10-10 に閉じてここへ移した。詳細と原本の場所は各 Issue に残っている。
+  - #1071 2025 年国勢調査の確定値 (総人口 317 万人減・高齢化率 29.4%)。都道府県別の増減率・高齢化率の地図 2 枚
+  - #1072 日銀短観 9 月 (景況感 6 期連続改善)。県別の業況判断 DI が 47 そろうかは要調査
+  - #816 DV 相談件数 (兵庫 1 万 8774 件・5 年ぶり増)。内閣府の都道府県別件数を人口 10 万人あたりで地図化
+- **完了条件**: 3 件それぞれ、投稿・記事にしたか見送ったかが決まり、このカードを消している。
+
+### [DEPS-DEPENDABOT-GROUP-01] dependabot の next・sharp の更新を、ルートの overrides と同じ PR で上げる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **trigger**: 次に dependabot が next または sharp の更新 PR を作ったとき (それまでは [DEPS-OVERRIDES-DRIFT-GATE-01] の検査が食い違いを止める)。
+- **事象**: 2026-10-10 は next の更新が 2 本 (#1102 ルート・#1117 apps/web)、sharp が 1 本 (#1087) に分かれ、どれもルートの overrides を上げなかった。
+- **手順**: `.github/dependabot.yml` で next・sharp を `groups` にまとめる。dependabot が overrides を書き換えない場合は、更新 PR に overrides を足す手順を `/deploy` の依存更新の節に書く。
+- **完了条件**: 次の next / sharp の更新が 1 本の PR になり、overrides も同じ版に上がっている。
+
+### [SNS-LEDGER-ID-RACE-01] 投稿台帳の id を CI とローカルが同時に採番して衝突する経路を塞ぐ
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-10] [領域:SNS]
+
+- **trigger**: 台帳の id 衝突がもう一度起きたとき。
+- **事象**: 2026-10-10 のリリースで、IG cron (CI) が `data/sns/posts.json` に新しい行を id 1076 で足した。同じ時期にローカルでも 1076 以降の行を追加していたため、マージで衝突した (行単位の 3-way マージで解消)。store の採番は手元の台帳の最大 id + 1 なので、別々の場所で同時に足すと必ず重なる。2026-07-07 の id 575 重複と同じ原因。
+- **緩和済み**: Instagram は予約表の登録時に id を決める形にした (`register-ig-schedule.cjs`)。CI が新しい行を作るのは、予約表に無い投稿を記録するときだけになった。
+- **手順 (案)**: CI が書く行は採番せず、ローカルで登録済みの id だけを更新する。登録の無い投稿は CI では記録を保留し、検査で知らせる。どうしても足す場合は、id の範囲を CI とローカルで分ける。
+- **完了条件**: CI の workflow が新しい id を採番する経路が 0 本になり、`sns:trace:check` に検査が入っている。
+
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
@@ -3626,6 +3743,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は knip 6 への更新で、tailwindcss 3 の経路 (runtime 側) は tailwindcss 4 への移行で 2026-10-06 に外した。残るのは `eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
 - **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
 - **追記 (2026-10-07)**: braces とは別に、sharp `<0.35.5` (CVE-2026-96889 / GHSA-wq5f-xc86-pv6w, high) が加わった。PR #1099 の run 37597838232 と、main への push の run 37554632545 で検出。直接依存は Dependabot PR #1087 (sharp 0.35.5) で上がる。ただし next・miniflare・wrangler が内部で持つ sharp が残り、#1087 自身の Security Scan も失敗している。`npm audit fix --force` は `@cloudflare/vitest-pool-workers` の版変更を伴う破壊的な更新を提案する。sharp は runtime 経路 (next) にも乗るので、例外の対象にはしない。
+- **追記 (2026-10-10)**: PR #1119 で tailwindcss 4 移行 (#1082) と sharp 0.35.5 (overrides も含む) を本番に入れた。runtime 依存に残る high は next だけで、[DEPS-NEXT16-UPGRADE-01] が扱う。braces は dev 依存の経路だけが残る。
 - **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
 - **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
 

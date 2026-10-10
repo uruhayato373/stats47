@@ -24,7 +24,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve } from "node:path";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 import dotenv from "dotenv";
 
 import { RUNTIME_PRODUCT_KEYWORDS } from "../src/config/runtime-metric-summaries.generated";
@@ -94,7 +94,7 @@ async function put(key: string, items: RakutenSnapshotItem[], generatedAt: strin
     return;
   }
   if (DRY_RUN) return;
-  await saveToR2(key, JSON.stringify(payload), { contentType: "application/json" });
+  await writeR2Staging(key, JSON.stringify(payload));
 }
 
 async function main() {

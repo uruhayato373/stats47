@@ -4,7 +4,7 @@ vi.mock('server-only', () => ({}));
 vi.mock('@stats47/logger/server', () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
 }));
-vi.mock('@stats47/r2-storage/server', () => ({ saveToR2: vi.fn() }));
+vi.mock('@stats47/r2-storage/server', () => ({ writeR2Staging: vi.fn() }));
 vi.mock('@stats47/visualization/server', () => ({
   generateRankingThumbnailMapSvg: vi.fn(),
 }));

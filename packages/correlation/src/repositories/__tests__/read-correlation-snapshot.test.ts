@@ -34,7 +34,7 @@ vi.mock("@stats47/r2-storage/server", () => ({
       }
     },
   }),
-  saveToR2: vi.fn(),
+  writeR2Staging: vi.fn(),
 }));
 
 import {

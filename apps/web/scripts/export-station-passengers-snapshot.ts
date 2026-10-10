@@ -19,7 +19,7 @@ import path from "path";
 
 import dotenv from "dotenv";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 dotenv.config({ path: ".env.local" });
 
@@ -67,16 +67,13 @@ async function main() {
     const stationsRaw = fs.readFileSync(stationsPath, "utf8");
     const stationsJson = JSON.parse(stationsRaw) as StationJson;
 
-    await saveToR2(`app/station-passengers/${code}/stations.json`, stationsRaw, {
-      contentType: "application/json; charset=utf-8",
-    });
+    await writeR2Staging(`app/station-passengers/${code}/stations.json`, stationsRaw);
     filesWritten++;
 
     if (fs.existsSync(linesPath)) {
-      await saveToR2(
+      await writeR2Staging(
         `app/station-passengers/${code}/lines.json`,
         fs.readFileSync(linesPath, "utf8"),
-        { contentType: "application/json; charset=utf-8" },
       );
       filesWritten++;
     } else {
@@ -105,10 +102,9 @@ async function main() {
     latestYear: LATEST_YEAR,
     prefectures: summaries,
   };
-  await saveToR2(
+  await writeR2Staging(
     "app/station-passengers/index.json",
     JSON.stringify(index),
-    { contentType: "application/json; charset=utf-8" },
   );
   filesWritten++;
 

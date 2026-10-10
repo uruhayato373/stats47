@@ -9,7 +9,7 @@ import { AREA_HIGHLIGHT_PROMINENCE } from "@stats47/data-configs/ranking-promine
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import { readRankingItemFromR2, listRankingValues } from "@stats47/ranking/server";
 import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 import { assertAreaHighlightsHealthy } from "../highlights/check-area-highlights";
 import {
@@ -163,10 +163,9 @@ export async function exportAreaDatabookSnapshot(): Promise<ExportAreaDatabookSn
   let files = 0;
   await Promise.all(
     snapshots.map(async (snapshot) => {
-      const result = await saveToR2(
+      const result = await writeR2Staging(
         areaDatabookKeyPath(snapshot.areaCode),
         JSON.stringify(snapshot),
-        { contentType: "application/json; charset=utf-8" },
       );
       totalSizeBytes += result.size;
       files += 1;

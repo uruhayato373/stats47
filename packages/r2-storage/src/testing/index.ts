@@ -167,7 +167,7 @@ export const getR2Client = vi.fn(() => Promise.resolve(mockR2Bucket));
 export const fetchFromR2 = vi.fn(() => Promise.resolve(null));
 
 /**
- * saveToR2のモック実装
+ * writeR2Stagingのモック実装
  */
-export const saveToR2 = vi.fn(() => Promise.resolve());
+export const writeR2Staging = vi.fn(() => Promise.resolve());
 

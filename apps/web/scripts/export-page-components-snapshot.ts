@@ -14,7 +14,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 import dotenv from "dotenv";
 
 
@@ -63,9 +63,7 @@ async function main() {
     const batch = entries.slice(i, i + CONCURRENCY);
     await Promise.all(
       batch.map(async ({ pageType, pageKey, body }) => {
-        await saveToR2(pageComponentsKeyPath(pageType, pageKey), body, {
-          contentType: "application/json; charset=utf-8",
-        });
+        await writeR2Staging(pageComponentsKeyPath(pageType, pageKey), body);
         files++;
       }),
     );
@@ -77,10 +75,9 @@ async function main() {
     .filter((e) => e.pageType === "city-category")
     .map((e) => e.pageKey)
     .sort();
-  await saveToR2(
+  await writeR2Staging(
     CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
     JSON.stringify(cityCategoryKeys),
-    { contentType: "application/json; charset=utf-8" },
   );
 
   console.log(

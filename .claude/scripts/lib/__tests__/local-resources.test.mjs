@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { LOCAL_RESOURCES } from '../../../../config/paths.mjs';
 import {
   assertInside,
   assertNoLinks,
@@ -337,4 +338,99 @@ test('worktreeStatus: メインの working tree は root=true で stale 判定�
   });
   assert.equal(status.root, true);
   assert.equal(status.stale, false, 'target===root は stale 条件から除外する');
+});
+
+// ---- ファイル単位の保持期限と容量上限 (2026-10-10: 会話記録・生成画像・.local/r2 の肥大化対策) ----
+import { planFileRetention, pruneFiles, checkFootprint } from '../local-resources.mjs';
+
+const DAY = 86400000;
+function homeFixture(t) {
+  const home = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-retention-test-')));
+  t.after(() => fs.rmSync(home, { recursive: true, force: true }));
+  const put = (rel, ageDays, body = 'x') => {
+    const file = path.join(home, rel);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, body);
+    const when = new Date(Date.now() - ageDays * DAY);
+    fs.utimesSync(file, when, when);
+    return file;
+  };
+  return { home, put };
+}
+
+test('ファイル単位の保持期限は期限切れで名前の合うファイルだけを消し、空になったフォルダも片付ける', (t) => {
+  const { home, put } = homeFixture(t);
+  const oldSub = put('.claude/projects/p1/s1/subagents/agent-a.jsonl', 10);
+  const recent = put('.claude/projects/p1/s2.jsonl', 2);
+  const otherKind = put('.claude/projects/p1/notes.md', 30);
+  const entries = [{ root: '~/.claude/projects', match: '*.jsonl', ageDays: 7 }];
+  const plan = planFileRetention(entries, { home });
+  assert.deepEqual(plan[0].files.map((f) => f.file), [oldSub]);
+  const result = pruneFiles(plan, entries, { home });
+  assert.equal(result.removedFiles, 1);
+  assert.equal(fs.existsSync(oldSub), false);
+  assert.equal(fs.existsSync(path.join(home, '.claude/projects/p1/s1')), false, '空になったフォルダは消す');
+  assert.equal(fs.existsSync(recent), true, '期限内は残す');
+  assert.equal(fs.existsSync(otherKind), true, 'match に合わないファイルは残す');
+  assert.equal(fs.existsSync(path.join(home, '.claude/projects')), true, 'root は消さない');
+});
+
+test('memory など excludeDirs と symlink の先には入らない (repo の .claude/memory を消さない)', (t) => {
+  const { home, put } = homeFixture(t);
+  const inMemory = put('.claude/projects/p1/memory/old.jsonl', 40);
+  const outside = put('repo-memory/MEMORY.jsonl', 40);
+  fs.symlinkSync(path.dirname(outside), path.join(home, '.claude/projects/p1/linked'));
+  const entries = [{ root: '~/.claude/projects', match: '*.jsonl', ageDays: 7, excludeDirs: ['memory'] }];
+  const plan = planFileRetention(entries, { home });
+  assert.deepEqual(plan[0].files, []);
+  pruneFiles(plan, entries, { home });
+  assert.equal(fs.existsSync(inMemory), true);
+  assert.equal(fs.existsSync(outside), true);
+});
+
+test('計画後に書き換わったファイル・設定に無い root・7 日未満の期限は消さない', (t) => {
+  const { home, put } = homeFixture(t);
+  const file = put('.codex/sessions/2026/old.jsonl', 40);
+  const entries = [{ root: '~/.codex/sessions', match: '*', ageDays: 30 }];
+  const plan = planFileRetention(entries, { home });
+  fs.writeFileSync(file, 'appended after planning');
+  assert.equal(pruneFiles(plan, entries, { home }).removedFiles, 0);
+  assert.equal(fs.existsSync(file), true);
+  assert.throws(() => pruneFiles(plan, [], { home }), /not configured/);
+  assert.equal(planFileRetention([{ root: '~/.codex/sessions', ageDays: 1 }], { home })[0].skipped, 'ageDays must be >= 7');
+});
+
+test('容量上限を超えたパスを over にする', (t) => {
+  const { home } = homeFixture(t);
+  fs.mkdirSync(path.join(home, '.codex/generated_images'), { recursive: true });
+  const GiB = 2 ** 30;
+  const result = checkFootprint(
+    [{ path: '~/.codex/generated_images', maxGiB: 2 }, { path: '~/missing', maxGiB: 1 }],
+    { home, measureFn: () => 3 * GiB }
+  );
+  assert.deepEqual(result.map((r) => [r.path, r.over]), [['~/.codex/generated_images', true], ['~/missing', false]]);
+});
+
+test('設定の契約: 会話記録の DB と memory は保持期限の対象外、.local/r2 はフォルダ単位で古さを判定する', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../..', LOCAL_RESOURCES), 'utf8'));
+  for (const e of config.fileRetention) {
+    assert.ok(e.ageDays >= 7, `${e.root} の期限が短すぎる`);
+    assert.ok(!/thread_history|\.sqlite/.test(`${e.root} ${e.match}`), 'Codex の内部 DB を消さない');
+  }
+  const claude = config.fileRetention.find((e) => e.root === '~/.claude/projects');
+  assert.ok(claude.excludeDirs.includes('memory'));
+  const paths = config.cachePaths.map((e) => (typeof e === 'string' ? e : e.path));
+  assert.ok(!paths.includes('.local/r2'), '.local/r2 全体の最新時刻で判定すると毎日の書き込みで永遠に古くならない');
+  assert.ok(paths.includes('.local/r2/*'));
+  const r2 = config.cachePaths.find((e) => e.path === '.local/r2/*');
+  assert.ok(r2.exclude.includes('sns'), '未投稿の X / Threads 画像の唯一の置き場を自動で消さない');
+  assert.ok(config.footprintBudgets.length >= 4);
+});
+
+test('cachePaths の exclude に合う名前は wildcard で広げても対象にしない', (t) => {
+  const { root } = fixture(t);
+  for (const name of ['gis', 'sns']) fs.mkdirSync(path.join(root, '.local/r2', name), { recursive: true });
+  const config = { cacheAgeDays: 7, cachePaths: [{ path: '.local/r2/*', ageDays: 7, exclude: ['sns'] }], scratchRoots: {} };
+  const targets = allowedTargets([root], config).map((x) => path.basename(x.target));
+  assert.deepEqual(targets, ['gis']);
 });

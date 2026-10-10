@@ -303,8 +303,8 @@ function expandPattern(base, relative) {
 function cacheEntries(config) {
   return config.cachePaths.map((entry) =>
     typeof entry === 'string'
-      ? { path: entry, ageDays: config.cacheAgeDays }
-      : { path: entry.path, ageDays: entry.ageDays ?? config.cacheAgeDays }
+      ? { path: entry, ageDays: config.cacheAgeDays, exclude: [] }
+      : { path: entry.path, ageDays: entry.ageDays ?? config.cacheAgeDays, exclude: entry.exclude ?? [] }
   );
 }
 
@@ -329,9 +329,14 @@ export function allowedTargets(
   const targets = [];
   const resolvedRoots = roots.map((r) => path.resolve(r));
   for (const root of roots)
-    for (const entry of cacheEntries(config))
-      for (const target of expandPattern(root, entry.path))
+    for (const entry of cacheEntries(config)) {
+      // exclude: wildcard で広げた対象のうち、名前が合うものは消さない (例: 未投稿の SNS 画像の唯一の置き場 .local/r2/sns)
+      const excluded = entry.exclude.map(globToRegExp);
+      for (const target of expandPattern(root, entry.path)) {
+        if (excluded.some((re) => re.test(path.basename(target)))) continue;
         targets.push({ root, target, ageDays: entry.ageDays, kind: 'cache' });
+      }
+    }
   const prefix = config.scratchPrefix ?? '';
   const excludes = (config.scratchExclude ?? []).map(globToRegExp);
   for (const root of scratchRoots(config, platform)) {
@@ -454,6 +459,91 @@ export function removeCache(item, roots, sample, config = CONFIG) {
   // Only this exact, validated generated-cache directory may be removed.
   fs.rmSync(item.target, { recursive: true, force: false });
   return fresh.bytes;
+}
+
+/** "~/" で始まる設定のパスはホーム、それ以外は repo 起点 */
+export function resolveConfigPath(p, home = os.homedir()) {
+  return p.startsWith('~/') ? path.join(home, p.slice(2)) : path.join(ROOT, p);
+}
+
+/**
+ * ファイル単位の保持期限 (会話記録・生成画像など、フォルダに毎日書き足されて「フォルダの最新時刻」が
+ * 古くならない場所用)。root 配下を辿り、match に合う ageDays 超のファイルだけを候補にする。
+ * symlink・junction は辿らない (Claude の projects/<p>/memory は repo の .claude/memory を指すリンク)。
+ * excludeDirs の名前のフォルダには入らない。root 自体が symlink・別の場所への転送なら何もしない。
+ */
+export function planFileRetention(
+  entries = CONFIG.fileRetention ?? [],
+  { now = Date.now(), home = os.homedir() } = {}
+) {
+  return entries.map((entry) => {
+    const root = resolveConfigPath(entry.root, home);
+    const item = { root, ageDays: entry.ageDays, files: [], bytes: 0 };
+    if (!fs.existsSync(root)) return { ...item, skipped: 'missing' };
+    if (!Number.isFinite(entry.ageDays) || entry.ageDays < 7)
+      return { ...item, skipped: 'ageDays must be >= 7' };
+    if (fs.lstatSync(root).isSymbolicLink() || path.relative(root, fs.realpathSync(root)))
+      return { ...item, skipped: 'linked-root' };
+    const matcher = globToRegExp(entry.match ?? '*');
+    const exclude = new Set(entry.excludeDirs ?? []);
+    const cutoff = now - entry.ageDays * 86400000;
+    const visit = (dir) => {
+      for (const name of fs.readdirSync(dir)) {
+        const full = path.join(dir, name);
+        const stat = fs.lstatSync(full);
+        if (stat.isSymbolicLink()) continue;
+        if (stat.isDirectory()) {
+          if (!exclude.has(name)) visit(full);
+        } else if (stat.isFile() && matcher.test(name) && stat.mtimeMs < cutoff) {
+          item.files.push({ file: full, mtimeMs: stat.mtimeMs, bytes: stat.size });
+          item.bytes += stat.size;
+        }
+      }
+    };
+    visit(root);
+    return item;
+  });
+}
+
+/** planFileRetention の候補を消す。消す直前に場所・種類・更新時刻を確かめ直し、空になったフォルダも片付ける */
+export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = os.homedir() } = {}) {
+  const roots = new Set(entries.map((e) => resolveConfigPath(e.root, home)));
+  let removedBytes = 0;
+  let removedFiles = 0;
+  for (const item of plan) {
+    if (!roots.has(item.root)) throw new Error(`Retention root is not configured: ${item.root}`);
+    const touched = new Set();
+    for (const { file, mtimeMs, bytes } of item.files) {
+      assertNoLinks(item.root, file);
+      const stat = fs.lstatSync(file);
+      if (!stat.isFile() || stat.mtimeMs !== mtimeMs || stat.size !== bytes)
+        continue; // 計画後に書き換わったファイルは消さない
+      fs.unlinkSync(file);
+      removedBytes += bytes;
+      removedFiles += 1;
+      touched.add(path.dirname(file));
+    }
+    // 消したファイルの親から root の手前まで、空になったフォルダだけを消す
+    for (let dir of [...touched].sort((a, b) => b.length - a.length)) {
+      while (dir !== item.root && dir.startsWith(item.root + path.sep)) {
+        if (fs.readdirSync(dir).length) break;
+        fs.rmdirSync(dir);
+        dir = path.dirname(dir);
+      }
+    }
+  }
+  return { removedBytes, removedFiles };
+}
+
+/** footprintBudgets の各パスの容量を測り、上限を超えたものを warning にする (肥大化の機械検知) */
+export function checkFootprint(budgets = CONFIG.footprintBudgets ?? [], { home = os.homedir(), measureFn } = {}) {
+  const measure = measureFn ?? ((p) => scanTree(p).bytes);
+  return budgets.map((b) => {
+    const target = resolveConfigPath(b.path, home);
+    if (!fs.existsSync(target)) return { path: b.path, bytes: 0, maxGiB: b.maxGiB, over: false };
+    const bytes = measure(target);
+    return { path: b.path, bytes, maxGiB: b.maxGiB, over: bytes / GiB > b.maxGiB };
+  });
 }
 
 function record(name, value) {
@@ -588,11 +678,29 @@ export async function main(args = process.argv.slice(2)) {
         plan,
         removedBytes: 0,
       };
+      const gisOnly = args.includes('--gis-only');
+      const retention = gisOnly ? [] : planFileRetention();
+      result.fileRetention = retention.map(({ files, ...rest }) => ({ ...rest, fileCount: files.length }));
       if (result.apply) {
         assertIdle(sample);
         for (const item of plan.filter((p) => p.eligible))
           result.removedBytes += removeCache(item, roots, measure());
+        const pruned = pruneFiles(retention);
+        result.removedBytes += pruned.removedBytes;
+        result.removedFiles = pruned.removedFiles;
         result.after = measure();
+      }
+      if (!gisOnly) {
+        result.footprint = checkFootprint();
+        const over = result.footprint.filter((f) => f.over);
+        // 容量上限の超過は日次の記録 (latest.json の warnings) に載せ、点検の通知に乗せる
+        const target = result.after ?? sample;
+        target.warnings = [
+          ...(target.warnings ?? []),
+          ...over.map((f) => ({ key: `footprint:${f.path}`, level: 'warning', bytes: f.bytes, maxGiB: f.maxGiB })),
+        ];
+        for (const f of over)
+          console.error(`[local-resources] 容量上限超過: ${f.path} ${(f.bytes / GiB).toFixed(1)}GiB > ${f.maxGiB}GiB`);
       }
     }
     if (args.includes('--record')) {

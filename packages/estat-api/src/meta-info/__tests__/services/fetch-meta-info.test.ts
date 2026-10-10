@@ -17,8 +17,10 @@ vi.mock("../../repositories/cache/find-cache", () => ({
 }));
 
 vi.mock("../../repositories/cache/save-cache", () => ({
-  saveMetaInfoCache: (id: string, data: any) => saveCacheMock(id, data),
+  saveMetaInfoCache: (storage: unknown, id: string, data: unknown) => saveCacheMock(storage, id, data),
 }));
+
+const storage = { put: vi.fn() } as never;
 
 describe("fetchMetaInfo", () => {
   beforeEach(() => {
@@ -36,17 +38,26 @@ describe("fetchMetaInfo", () => {
     expect(saveCacheMock).not.toHaveBeenCalled();
   });
 
-  it("キャッシュミス時はAPIから取得し、キャッシュに保存すること", async () => {
+  it("キャッシュミス時はAPIから取得し、渡されたR2ストレージに保存すること", async () => {
     findCacheMock.mockResolvedValue(null);
     fetchFromApiMock.mockResolvedValue(mockMetaInfoResponse);
     saveCacheMock.mockResolvedValue(undefined);
 
-    const result = await fetchMetaInfo("0000010101");
+    const result = await fetchMetaInfo("0000010101", storage);
 
     expect(result).toBe(mockMetaInfoResponse);
     expect(findCacheMock).toHaveBeenCalled();
     expect(fetchFromApiMock).toHaveBeenCalledWith("0000010101");
-    expect(saveCacheMock).toHaveBeenCalledWith("0000010101", mockMetaInfoResponse);
+    expect(saveCacheMock).toHaveBeenCalledWith(storage, "0000010101", mockMetaInfoResponse);
+  });
+
+  it("R2ストレージを渡さないときはキャッシュに保存しないこと", async () => {
+    findCacheMock.mockResolvedValue(null);
+    fetchFromApiMock.mockResolvedValue(mockMetaInfoResponse);
+
+    await fetchMetaInfo("0000010101");
+
+    expect(saveCacheMock).not.toHaveBeenCalled();
   });
 
   it("キャッシュ取得エラー時はAPI取得にフォールバックすること", async () => {
@@ -71,11 +82,9 @@ describe("fetchMetaInfo", () => {
     fetchFromApiMock.mockResolvedValue(mockMetaInfoResponse);
     saveCacheMock.mockRejectedValue(new Error("Save Error"));
 
-    const result = await fetchMetaInfo("0000010101");
+    const result = await fetchMetaInfo("0000010101", storage);
 
     expect(result).toBe(mockMetaInfoResponse);
     expect(saveCacheMock).toHaveBeenCalled();
-     // 保存は非同期で待たないが、このテストではawaitしないので
-     // 実際にはsaveCache呼び出しを確認すればOK
   });
 });

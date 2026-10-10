@@ -7,7 +7,7 @@ const { mockLoadSnapshot } = vi.hoisted(() => ({ mockLoadSnapshot: vi.fn() }));
 
 vi.mock('@stats47/r2-storage/server', () => ({
   createSnapshotReader: () => mockLoadSnapshot,
-  saveToR2: vi.fn(),
+  writeR2Staging: vi.fn(),
 }));
 
 vi.mock('@stats47/logger/server', () => ({

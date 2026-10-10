@@ -1,13 +1,13 @@
 {
-  "total": 1610,
+  "total": 1617,
   "staged": false,
   "byStatus": {
-    "both": 1526,
+    "both": 1533,
     "jsonOnly": 0,
     "neither": 84
   },
   "byMethod": {
-    "done": 1526,
+    "done": 1533,
     "manual": 34,
     "ssot-restore": 22,
     "ssot-restore-new": 28
@@ -260,6 +260,50 @@
       "slug": "aging-solo-living-crisis",
       "base": "aging-solo-summary-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "base": "agricultural-output-2014-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "base": "agricultural-employment-2014-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "base": "agricultural-output-employment-2014-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "base": "agricultural-output-per-worker-2014-ranking",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6618,6 +6662,39 @@
       "slug": "household-spending-prefecture-gap",
       "base": "clothing-footwear-expenditure-ratio-multi-person-households-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-structure-daytime-population-gap",
+      "base": "day-time-population-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-structure-daytime-population-gap",
+      "base": "nuclear-family-households-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-structure-daytime-population-gap",
+      "base": "nuclear-family-households-ratio--day-time-population-ratio-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",

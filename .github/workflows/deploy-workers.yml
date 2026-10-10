@@ -41,23 +41,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Detect metric snapshot changes
-        id: metric-snapshots
-        env:
-          BEFORE_SHA: ${{ github.event.before }}
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] || [ -z "$BEFORE_SHA" ] || ! git cat-file -e "$BEFORE_SHA^{commit}"; then
-            echo 'changed=true' >> "$GITHUB_OUTPUT"
-          else
-            git diff --name-only "$BEFORE_SHA" HEAD > /tmp/metric-release-changed-files.txt
-            if grep -Eq '^(data/metrics/|data/metric-sources/|packages/types/src/metric-presentation|packages/data-configs/src/|packages/ranking/src/(builders/|exporters/|scripts/|repositories/schemas/)|apps/web/scripts/(data/page-components/|export-page-components-snapshot))' /tmp/metric-release-changed-files.txt; then
-              echo 'changed=true' >> "$GITHUB_OUTPUT"
-            fi
-          fi
-
+      # 指標スナップショットは毎回生成して反映する (2026-10-10)。中身が前回配信と同じファイルは
+      # バイト列も同じになる (生成時刻を引き継ぐ。packages/r2-storage/src/lib/operations/stable-snapshot.ts) ので、
+      # 反映は SHA が一致した分を送らず、変わった分だけになる。以前は直前の push との差分で反映を省いていたため、
+      # 反映が途中で止まった次のデプロイがそれを補わなかった (DEPLOY-METRIC-RELEASE-TIMEOUT-01)。
       - name: Generate and verify metric release snapshots
-        if: steps.metric-snapshots.outputs.changed == 'true'
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: |
@@ -85,14 +73,13 @@ jobs:
           '
 
       - name: Publish verified metric snapshots before app build
-        if: steps.metric-snapshots.outputs.changed == 'true'
         env:
           R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           CLOUDFLARE_R2_BUCKET_NAME: stats47
         run: |
-          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)"
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)" --concurrency 16
 
       - name: 🔐 Verify Cloudflare authentication
         env:

@@ -43,7 +43,7 @@ import {
   findExpectedEmpty,
   yearInSpec,
 } from "@stats47/data-configs";
-import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
+import { assertR2WriteAllowed, writeR2Staging } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import { rankingValuesKeyPath } from "../types/snapshot";
@@ -214,9 +214,7 @@ async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outco
     };
 
     if (!dryRun) {
-      await saveToR2(rankingValuesKeyPath(config.key, AREA_TYPE), JSON.stringify(snapshot), {
-        contentType: "application/json; charset=utf-8",
-      });
+      await writeR2Staging(rankingValuesKeyPath(config.key, AREA_TYPE), JSON.stringify(snapshot));
     }
 
     return {

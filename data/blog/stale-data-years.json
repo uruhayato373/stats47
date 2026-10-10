@@ -1,8 +1,19 @@
 {
-  "generatedAt": "2026-10-09T02:42:27.980Z",
-  "published": 606,
-  "withRankingRefs": 568,
+  "generatedAt": "2026-10-10T02:02:09.154Z",
+  "published": 608,
+  "withRankingRefs": 570,
   "stale": [
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "title": "農業就業人口が多い県ほど産出額は大きい?",
+      "stale": [
+        {
+          "rankingKey": "agricultural-output",
+          "articleYear": "2014",
+          "latestYear": "2024"
+        }
+      ]
+    },
     {
       "slug": "bonito-catch-prefecture",
       "title": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",

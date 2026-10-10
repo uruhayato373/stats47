@@ -19,7 +19,7 @@ import {
   fetchKsjTopologyFromLocal,
   listKsjFiles,
 } from "../../../packages/gis/src/mlit-ksj/adapters/fetch-ksj-from-local";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 import {
   DEPOPULATION_MEDICAL_SUMMARY_KEY,
@@ -273,9 +273,7 @@ async function main(): Promise<void> {
     };
     const detailBody = JSON.stringify(detail);
     totalDetailBytes += detailBody.length;
-    await saveToR2(depopulationMedicalPrefKey(nn), detailBody, {
-      contentType: "application/json; charset=utf-8",
-    });
+    await writeR2Staging(depopulationMedicalPrefKey(nn), detailBody);
 
     console.log(
       `  ✓ ${nn} ${PREF_NAMES[nn]}: 過疎内 ${depopulationCount} / 全 ${total} (${(summary.ratio * 100).toFixed(1)}%) detail=${(detailBody.length / 1024).toFixed(0)}KB`,
@@ -288,9 +286,7 @@ async function main(): Promise<void> {
     prefectures: summaries,
   };
   const summaryBody = JSON.stringify(snapshot);
-  await saveToR2(DEPOPULATION_MEDICAL_SUMMARY_KEY, summaryBody, {
-    contentType: "application/json; charset=utf-8",
-  });
+  await writeR2Staging(DEPOPULATION_MEDICAL_SUMMARY_KEY, summaryBody);
 
   console.log(`\n✅ 完了`);
   console.log(`   summary.json: ${(summaryBody.length / 1024).toFixed(1)}KB (${summaries.length} 県)`);

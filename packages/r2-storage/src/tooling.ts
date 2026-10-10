@@ -13,6 +13,8 @@ export {
   type ExactAssetCandidate,
 } from "./scripts/push-exact-r2-assets-core";
 export { assertR2WriteAllowed } from "./scripts/_assert-ci-write";
+// 配信 snapshot を中身が同じなら同じバイト列にする部品 (生成スクリプト用。server-only の入口を通さない)
+export { carryTimestamp, latestTimestamp, readPublishedSnapshot } from "./lib/operations/stable-snapshot";
 // 生成側が「この ranking は公開構造化データにできない」を publisher と同じ判定で知るため。
 // 生成してから push で落とすと 1 件で task 全体が止まる (gis-data.md の公開構造化データ禁止)。
 export {

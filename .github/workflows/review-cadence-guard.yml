@@ -1,6 +1,6 @@
 name: 🗓️ Review Cadence Guard (daily)
 
-# 週次・月次レビューと計画の期限切れ・本文の契約違反・配線の切れを毎朝検査し、問題があれば
+# 週次・月次レビューと計画の期限切れ・本文の契約違反・配線の切れと、自動アラート Issue の回収漏れを毎朝検査し、問題があれば
 # review-cadence-alert Issue を 1 件だけ作って更新し、直ったら自動で閉じる。
 #
 # 計測 (fetch-metrics-weekly.yml) と無人記録 (improvement-cycle-weekly.yml) は自動で回るが、
@@ -46,8 +46,18 @@ jobs:
           node .claude/scripts/management/check-review-cadence.mjs --body-out /tmp/review-cadence.md
           cat /tmp/review-cadence.md >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 🚨 Check alert triage
+        # 14 日を過ぎて「→ 振り分け:」のコメントが無い自動アラート Issue を数える (判定: lib/alert-triage.mjs)
+        id: triage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node .claude/scripts/management/check-alert-triage.mjs --body-out /tmp/alert-triage.md
+          cat /tmp/alert-triage.md >> "$GITHUB_STEP_SUMMARY"
+          { echo ""; cat /tmp/alert-triage.md; } >> /tmp/review-cadence.md
+
       - name: 🚨 Upsert alert issue
-        if: steps.check.outputs.errors != '0'
+        if: steps.check.outputs.errors != '0' || steps.triage.outputs.errors != '0'
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -69,7 +79,7 @@ jobs:
           fi
 
       - name: 🧹 Close resolved issue
-        if: steps.check.outputs.errors == '0'
+        if: steps.check.outputs.errors == '0' && steps.triage.outputs.errors == '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

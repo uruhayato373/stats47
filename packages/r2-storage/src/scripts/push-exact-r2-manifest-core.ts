@@ -34,11 +34,13 @@ export function parseExactManifestArgs(args: readonly string[]): {
   manifestSha256: string;
   dryRun: boolean;
   verifyOnly: boolean;
+  concurrency: number;
 } {
   let manifestPath = '';
   let manifestSha256 = '';
   let dryRun = false;
   let verifyOnly = false;
+  let concurrency = 1;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === '--verify-only' && !verifyOnly && !dryRun) {
@@ -55,11 +57,16 @@ export function parseExactManifestArgs(args: readonly string[]): {
     if (name === '--manifest' && !manifestPath) manifestPath = value;
     else if (name === '--manifest-sha256' && !manifestSha256)
       manifestSha256 = value;
+    else if (name === '--concurrency' && concurrency === 1) {
+      concurrency = Number(value);
+      if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > MAX_CONCURRENCY)
+        throw new Error(`--concurrency は 1〜${MAX_CONCURRENCY} の整数`);
+    }
     else throw new Error(`不明・重複・併用できないmanifest引数: ${name}`);
   }
   if (!manifestPath || !/^[a-f0-9]{64}$/.test(manifestSha256))
     throw new Error('--manifest と固定 --manifest-sha256 が必要です');
-  return { manifestPath, manifestSha256, dryRun, verifyOnly };
+  return { manifestPath, manifestSha256, dryRun, verifyOnly, concurrency };
 }
 
 export function readExactR2Manifest(
@@ -117,6 +124,38 @@ export function exactManifestPublishPhase(key: string): number {
   return 2;
 }
 
+function groupByPhase(files: readonly ManifestFile[]): ManifestFile[][] {
+  const groups: ManifestFile[][] = [];
+  let current = -1;
+  for (const file of files) {
+    const phase = exactManifestPublishPhase(file.key);
+    if (phase !== current) {
+      groups.push([]);
+      current = phase;
+    }
+    groups[groups.length - 1].push(file);
+  }
+  return groups;
+}
+
+/** 同時 limit 件まで実行する。最初の失敗で新しい実行を止め、実行中の分を待ってから例外にする */
+async function runPool<T>(items: readonly T[], limit: number, task: (item: T) => Promise<void>) {
+  let next = 0;
+  let failure: unknown = null;
+  const worker = async () => {
+    while (failure === null && next < items.length) {
+      const item = items[next++];
+      try {
+        await task(item);
+      } catch (error) {
+        failure ??= error;
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  if (failure !== null) throw failure;
+}
+
 function pinnedCandidate(projectRoot: string, file: ManifestFile) {
   const [candidate] = resolveExactAssetCandidates(projectRoot, {
     keys: [file.key],
@@ -144,12 +183,22 @@ export function preflightExactR2Manifest(
   assertBlogPublicAssetsAllowed([...files.keys()], readBody);
 }
 
-/** One release invocation; existing per-object CAS/HEAD is retained. */
+/** 同時に送る上限。R2 の S3 API に過剰な同時接続を張らない */
+export const MAX_CONCURRENCY = 32;
+
+/**
+ * One release invocation; existing per-object CAS/HEAD is retained.
+ * concurrency > 1 のときは同じ段 (exactManifestPublishPhase) の中だけを並列に送り、段の順序は守る
+ * (原典・個別ファイルを先に、manifest・一覧・参照を後に)。1 件でも失敗したら新しい送信を止め、
+ * 送信中の分を待ってから例外にする (次の段へ進まない)。既定は 1 件ずつ (従来どおり)。
+ * 2026-10-09 のデプロイは 3,219 件を 1 件約 1 秒で直列に送り 53 分かかった。
+ */
 export async function publishExactR2Manifest(options: {
   projectRoot: string;
   manifest: ExactR2Manifest;
   store: ImageObjectStore;
   dryRun: boolean;
+  concurrency?: number;
 }) {
   preflightExactR2Manifest(options.projectRoot, options.manifest);
   const files = [...options.manifest.files].sort(
@@ -163,7 +212,7 @@ export async function publishExactR2Manifest(options: {
     uploaded: 0,
     skipped: 0,
   };
-  for (const file of files) {
+  const publishOne = async (file: ManifestFile) => {
     // Re-read and re-pin immediately before publishing. Never retain a 2GB batch.
     const candidate = pinnedCandidate(options.projectRoot, file);
     const result = await publishExactR2Assets({
@@ -174,6 +223,12 @@ export async function publishExactR2Manifest(options: {
     totals.changed += result.changed;
     totals.uploaded += result.uploaded;
     totals.skipped += result.skipped;
+  };
+  const concurrency = options.concurrency ?? 1;
+  if (concurrency <= 1) {
+    for (const file of files) await publishOne(file);
+  } else {
+    for (const phase of groupByPhase(files)) await runPool(phase, concurrency, publishOne);
   }
   return {
     ...totals,

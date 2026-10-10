@@ -24,7 +24,7 @@ import {
   fetchFromR2AsJson,
   fetchFromR2AsString,
   listFromR2,
-  saveToR2,
+  writeR2Staging,
 } from '@stats47/r2-storage/server';
 import dotenv from 'dotenv';
 import yaml from 'js-yaml';
@@ -292,9 +292,7 @@ async function main() {
   };
 
   const body = JSON.stringify(snapshot);
-  const result = await saveToR2(BLOG_SNAPSHOT_KEY, body, {
-    contentType: 'application/json; charset=utf-8',
-  });
+  const result = await writeR2Staging(BLOG_SNAPSHOT_KEY, body);
 
   const publishedCount = articles.filter((a) => a.published).length;
   console.log(
