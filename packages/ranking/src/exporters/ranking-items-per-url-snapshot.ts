@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { logger } from '@stats47/logger/server';
-import { saveToR2 } from '@stats47/r2-storage/server';
+import { latestTimestamp, saveToR2 } from '@stats47/r2-storage/server';
 import { generateRankingThumbnailMapSvg } from '@stats47/visualization/server';
 
 import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
@@ -173,7 +173,9 @@ export async function exportRankingItemsPerUrl(
   }
   const surveyIdSet = new Set(itemsBySurvey.keys());
 
-  const generatedAt = new Date().toISOString();
+  // 各ファイルの generatedAt は、そのファイルに含まれるランキングの更新日時の最大値にする。
+  // 生成時刻を入れると中身が同じでも毎回バイト列が変わり、差分反映が全件を送る (stable-snapshot.ts)
+  const fallbackAt = new Date().toISOString();
   const uploads: Promise<{ key: string; size: number }>[] = [];
 
   // ── home/featured.json ──────────────────────────────────────────────────────
@@ -237,7 +239,7 @@ export async function exportRankingItemsPerUrl(
   );
 
   const featuredBody = JSON.stringify({
-    generatedAt,
+    generatedAt: latestTimestamp(featuredResolved.map((r) => r.item), fallbackAt),
     count: featuredBaked.length,
     items: featuredBaked,
   });
@@ -344,7 +346,7 @@ export async function exportRankingItemsPerUrl(
       }));
 
     const body = JSON.stringify({
-      generatedAt,
+      generatedAt: latestTimestamp(matched, fallbackAt),
       categoryKey,
       count: categoryItems.length,
       items: categoryItems,
@@ -370,7 +372,9 @@ export async function exportRankingItemsPerUrl(
     }
   }
 
-  for (const [rankingKey, keyItems] of byRankingKey) {
+  // デプロイ (stagedItems あり) では item.json の書き手は generate-ranking-items だけにする。
+  // ここでも書くと、直前に生成した item.json を別の時刻で上書きしていた (2026-10-10 に実測)。
+  for (const [rankingKey, keyItems] of stagedItems ? [] : byRankingKey) {
     // Use the first item as the canonical item for the file
     const item = keyItems[0];
     // 出典表記 (2 階層: 編成統計 + 原典調査)。ranking 詳細ページが統一表示に使う。
@@ -379,7 +383,7 @@ export async function exportRankingItemsPerUrl(
     //   builder 側が焼かなかった stale item への安全網としてのみ再解決する)。
     const attribution = item.attribution ?? resolveItemAttribution(item);
     const body = JSON.stringify({
-      generatedAt,
+      generatedAt: item.updatedAt,
       item: { ...item, attribution },
     });
     uploads.push(
@@ -395,7 +399,7 @@ export async function exportRankingItemsPerUrl(
       buildSurveyItemsSnapshot(
         surveyId,
         itemsBySurvey.get(surveyId) ?? [],
-        generatedAt
+        latestTimestamp(itemsBySurvey.get(surveyId) ?? [], fallbackAt)
       )
     );
     uploads.push(
@@ -411,7 +415,7 @@ export async function exportRankingItemsPerUrl(
   const durationMs = Date.now() - startedAt;
 
   const categoriesFiles = categoryKeySet.size;
-  const itemsFiles = byRankingKey.size;
+  const itemsFiles = stagedItems ? 0 : byRankingKey.size;
   const surveysFiles = surveyIdSet.size;
 
   // category アイテム数合計（全カテゴリの matched 合計は重複あるため items.length を代替とする）

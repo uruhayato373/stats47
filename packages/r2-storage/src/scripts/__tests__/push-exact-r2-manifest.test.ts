@@ -100,6 +100,7 @@ describe('fixed release manifest publication', () => {
       manifestSha256: 'a'.repeat(64),
       dryRun: false,
       verifyOnly: true,
+      concurrency: 1,
     });
     expect(parseExactManifestArgs([...args, '--dry-run']).dryRun).toBe(true);
     for (const suffix of [
@@ -295,5 +296,37 @@ describe('fixed release manifest publication', () => {
       })
     ).rejects.toThrow('local bytesが不一致');
     expect(s.puts).toEqual(['app/geo/a/pref/01.json']);
+  });
+
+  it('並列でも段の順序を守る (個別の item.json を全部送ってから一覧を送る)', async () => {
+    const items = Array.from({ length: 12 }, (_, i) => `app/ranking/k${String(i).padStart(2, '0')}/item.json`);
+    const keys = [...items, 'app/ranking-items/all.json', 'app/page-components/theme/x.json'];
+    const f = fixture(keys), s = store();
+    const result = await publishExactR2Manifest({
+      projectRoot: f.root, manifest: f.manifest(), store: s.api, dryRun: false, concurrency: 8,
+    });
+    expect(result).toMatchObject({ candidates: 14, uploaded: 14 });
+    expect(new Set(s.puts.slice(0, 12))).toEqual(new Set(items));
+    expect(s.puts.slice(12)).toEqual(['app/ranking-items/all.json', 'app/page-components/theme/x.json']);
+  });
+
+  it('並列で 1 件でも失敗したら次の段 (一覧) を送らずに例外にする', async () => {
+    const keys = ['app/ranking/a/item.json', 'app/ranking/b/item.json', 'app/ranking-items/all.json'];
+    const f = fixture(keys), s = store(), put = s.api.put;
+    s.api.put = async (options) => {
+      if (options.key === 'app/ranking/b/item.json') throw new Error('R2 write failed');
+      await put(options);
+    };
+    await expect(
+      publishExactR2Manifest({ projectRoot: f.root, manifest: f.manifest(), store: s.api, dryRun: false, concurrency: 4 })
+    ).rejects.toThrow('R2 write failed');
+    expect(s.puts).not.toContain('app/ranking-items/all.json');
+  });
+
+  it('--concurrency は 1〜32 の整数だけを受け付け、既定は 1', () => {
+    const sha = 'a'.repeat(64);
+    expect(parseExactManifestArgs(['--manifest', 'm.json', '--manifest-sha256', sha]).concurrency).toBe(1);
+    expect(parseExactManifestArgs(['--manifest', 'm.json', '--manifest-sha256', sha, '--concurrency', '16']).concurrency).toBe(16);
+    expect(() => parseExactManifestArgs(['--manifest', 'm.json', '--manifest-sha256', sha, '--concurrency', '64'])).toThrow('1〜32');
   });
 });

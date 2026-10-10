@@ -27,7 +27,13 @@ import {
   type MetricRegistry,
   yearInSpec,
 } from '@stats47/data-configs';
-import { assertR2WriteAllowed, saveToR2 } from '@stats47/r2-storage/server';
+import {
+  assertR2WriteAllowed,
+  carryTimestamp,
+  latestTimestamp,
+  readPublishedSnapshot,
+  saveToR2,
+} from '@stats47/r2-storage/server';
 import { isKsjPublicStructuredOutputBlocked } from '@stats47/r2-storage/tooling';
 import { readStatsValues } from '@stats47/stats-r2/readers';
 
@@ -175,17 +181,39 @@ async function main() {
   }
 
   // 全件 build (all.json 用に全 RankingItem が要る)
+  // 中身が前回配信した item.json と同じなら createdAt / updatedAt を引き継ぎ、同じバイト列にする。
+  // 生成時刻を毎回入れると全件が「変更あり」になり、差分反映が全件を送っていた (2026-10-09 に 3,219 件・53 分)。
+  // updatedAt は「データが変わった日時」になり、サイトマップの lastmod もデプロイのたびに進まなくなる。
+  const changedKeys: string[] = [];
   const items: RankingItem[] = await mapWithConcurrency(
     metrics,
     CONCURRENCY,
     async (config) => {
       const values = await loadValuesContext(config);
-      return buildRankingItemFromMetric(config, {
-        values,
-        now,
-        registry,
-      });
+      const previous = await readPublishedSnapshot<{ item?: RankingItem }>(
+        rankingItemKeyPath(config.key)
+      );
+      const build = (timestamp: string) =>
+        buildRankingItemFromMetric(config, {
+          values,
+          now: timestamp,
+          registry,
+          existing: previous?.item,
+        });
+      const result = carryTimestamp(
+        build,
+        previous?.item
+          ? { value: previous.item, timestamp: previous.item.updatedAt }
+          : null,
+        now
+      );
+      if (result.changed) changedKeys.push(config.key);
+      return result.value;
     }
+  );
+  console.log(
+    `前回の配信から中身が変わった item: ${changedKeys.length} / ${metrics.length} 件` +
+      (changedKeys.length && changedKeys.length <= 20 ? ` (${changedKeys.sort().join(', ')})` : '')
   );
 
   // per-key item.json を書く (--only 指定時はその key のみ)
@@ -217,7 +245,8 @@ async function main() {
     : publishable;
   let written = 0;
   await mapWithConcurrency(targets, CONCURRENCY, async (item) => {
-    const body = JSON.stringify({ generatedAt: now, item });
+    // 外側の generatedAt は item の更新日時と同じにする (時刻の意味を 1 つにする)
+    const body = JSON.stringify({ generatedAt: item.updatedAt, item });
     if (args.stageDir) {
       const target = resolve(
         args.stageDir,
@@ -273,7 +302,7 @@ async function main() {
   }
 
   const allBody = JSON.stringify({
-    generatedAt: now,
+    generatedAt: latestTimestamp(inventory, now),
     count: inventory.length,
     items: inventory,
   });

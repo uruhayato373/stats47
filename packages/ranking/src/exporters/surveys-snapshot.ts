@@ -5,7 +5,7 @@ import path from "node:path";
 
 import type { Source } from "../types/snapshot";
 import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { carryTimestamp, readPublishedSnapshot, saveToR2 } from "@stats47/r2-storage/server";
 
 import {
   buildSurveysSnapshot,
@@ -50,7 +50,13 @@ export async function exportSurveysSnapshot(
     itemCounts?.[s.id] !== undefined ? { ...s, itemCount: itemCounts[s.id] } : s,
   );
 
-  const snapshot = buildSurveysSnapshot(surveys);
+  // 中身が前回配信した版と同じなら generatedAt を引き継ぎ、同じバイト列にする (差分反映で送らない)
+  const previous = await readPublishedSnapshot<{ generatedAt?: string }>(SURVEYS_SNAPSHOT_KEY);
+  const { value: snapshot } = carryTimestamp(
+    (generatedAt) => buildSurveysSnapshot(surveys, generatedAt),
+    previous ? { value: previous, timestamp: previous.generatedAt } : null,
+    new Date().toISOString(),
+  );
 
   const body = JSON.stringify(snapshot);
   const result = await saveToR2(SURVEYS_SNAPSHOT_KEY, body, {

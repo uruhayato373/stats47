@@ -30,7 +30,7 @@ async function main(): Promise<void> {
   if (
     args.some((arg) => arg === '--manifest' || arg.startsWith('--manifest='))
   ) {
-    const { manifestPath, manifestSha256, dryRun, verifyOnly } =
+    const { manifestPath, manifestSha256, dryRun, verifyOnly, concurrency } =
       parseExactManifestArgs(args);
     const manifest = readExactR2Manifest(
       PROJECT_ROOT,
@@ -59,8 +59,9 @@ async function main(): Promise<void> {
       manifest,
       store,
       dryRun,
+      concurrency,
     });
-    console.log(JSON.stringify(result));
+    console.log(JSON.stringify({ ...result, concurrency }));
     return;
   }
   const { selection, dryRun } = parseExactAssetArgs(process.argv.slice(2));

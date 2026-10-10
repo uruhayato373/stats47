@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import { buildMunicipalityEntityPolicy } from '@stats47/area';
 import { getMetricConfig, resolveMetricSource } from '@stats47/data-configs';
+import { carryTimestamp, readPublishedSnapshot } from '@stats47/r2-storage/tooling';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   getMunicipalityMetricAvailability,
@@ -150,7 +151,16 @@ async function generateForKey(
     );
   }
 
-  const snapshots = buildMunicipalityRankingSnapshots({
+  // item と values の中身が前回配信した版と同じなら generatedAt を引き継ぎ、同じバイト列にする
+  // (生成時刻を毎回入れると差分反映が全件を送る。stable-snapshot.ts)
+  const [previousItem, previousValues] = await Promise.all([
+    readPublishedSnapshot<{ generatedAt?: string }>(municipalityRankingItemKeyPath(rankingKey), r2Base),
+    readPublishedSnapshot<{ generatedAt?: string }>(municipalityRankingValuesKeyPath(rankingKey), r2Base),
+  ]);
+  // 型の絞り込みは closure の中に持ち越されないので、検査済みの値を先に取り出す
+  const sourceDisplayName = source.displayName;
+  const sourceUrl = source.url;
+  const build = (generatedAt: string) => buildMunicipalityRankingSnapshots({
     metric: {
       key: metric.key,
       title: metric.title,
@@ -159,15 +169,25 @@ async function generateForKey(
       unit: metric.unit,
       visualization: metric.visualization,
       source: {
-        displayName: source.displayName,
-        url: source.url,
+        displayName: sourceDisplayName,
+        url: sourceUrl,
       },
       valuePolicy: availability.valuePolicy,
     },
     rows: payload.rows,
     entityPolicy: buildMunicipalityEntityPolicy(),
-    generatedAt: new Date().toISOString(),
+    generatedAt,
   });
+  const { value: snapshots } = carryTimestamp(
+    (generatedAt) => {
+      const built = build(generatedAt);
+      return { item: built.item, values: built.values };
+    },
+    previousItem && previousValues
+      ? { value: { item: previousItem, values: previousValues }, timestamp: previousItem.generatedAt }
+      : null,
+    new Date().toISOString()
+  );
 
   const itemBody = JSON.stringify(snapshots.item);
   const valuesBody = JSON.stringify(snapshots.values);

@@ -370,6 +370,14 @@ updated: 2026-10-06
 - **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
 - **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
 
+### [R2-SAVE-STAGING-RENAME-01] R2 に書かない `saveToR2` を実態どおりの名前にし、書き込み先を明示する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run type-check] [起票:2026-10-10] [領域:管理]
+
+- **事象**: `packages/r2-storage/src/lib/operations/save.ts` の `saveToR2` は R2 に書かず、手元の `.local/r2` (カレントディレクトリから上へ探し、無ければその場に作る) に書くだけ。呼び出し元は 25 ファイル。名前から「R2 に保存した」と思い込み、送る手順を忘れても成功のログが出る (memory `project_kakei_expansion_pipeline_gotchas` に踏んだ記録あり)。書き込み先が実行場所で変わる。
+- **本番コードの誤用**: e-Stat のメタ情報キャッシュ (`packages/estat-api/src/meta-info/repositories/cache/save-cache.ts`) が `saveToR2` で「R2 に保存」しており、実際には R2 に一度も書かれていない (`estat-api/meta-info/0000010101.json` は 404)。統計データのキャッシュは R2 binding の `storage.put` で正しく書いている。2026-10-10 時点で `apps/web` から呼ばれていないので実害は無い。
+- **手順**: ①関数を `writeR2Staging(root, key, body)` のように名前と書き込み先の引数を明示した形にし、25 か所を移す (旧名は残さない) ②e-Stat のメタ情報キャッシュは統計データのキャッシュと同じ R2 binding の書き込みにする ③デプロイ (`deploy-workers.yml`) の生成→検査→反映の順は変えない。
+- **完了条件**: `saveToR2` の呼び出しが 0 件、`npm run type-check` が通り、デプロイの生成手順を 2 回流してリリース対象の全ファイルが一致する。
+
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [領域:管理]
@@ -3428,6 +3436,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **2026-10-09 実測と判定の抜け**: 90 分にした後、PR #1118 のデプロイ (run 37922790127) は `Detect metric snapshot changes` が直前の push との差分だけを見るため反映段を skip した (前回の反映が途中で止まっていても補わない)。workflow_dispatch (run 37924050596) で全件反映し、反映 53 分 (11:32-12:25)・全体成功・スモーク成功。40 分では原理的に収まらない量。次の対策では、途中で止まった反映を次のデプロイが検知して再実行する判定 (前回成功した release の記録との比較など) も足す。
 - **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
   反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
+- **2026-10-10 原因の特定と対策 (実装済み・develop)**: PR #1119 のデプロイ (run 38007536371) は 85 分で上限の直前だった。原因は 2 つ。
+  ①生成物に生成時刻 (item の `generatedAt`・`createdAt`・`updatedAt`、一覧・カテゴリ・調査・市区町村の `generatedAt`) が入り、毎回 3,219 件すべてが「変更あり」になっていた。
+  さらに `app/ranking/<key>/item.json` をランキング生成とマスター出力 (`exportRankingItemsPerUrl`) の 2 つが書いていた。
+  ②反映 (`publishExactR2Manifest`) が 1 件ずつ直列で、1 件約 1 秒かかっていた。
+  対策: 中身が前回配信と同じなら時刻を引き継ぐ (`packages/r2-storage/src/lib/operations/stable-snapshot.ts`)。デプロイ時は item.json の書き手をランキング生成だけにした。
+  反映は段ごとに並列 (`--concurrency 16`) にした。差分判定をやめて毎回生成・反映する形にし、途中で止まった反映を次のデプロイが補うようにした。
+  手元でデプロイと同じ生成を 2 回流し、リリース対象 3,219 件の一致を確認した。次のデプロイは外側の `generatedAt` をそろえるため一度だけ全件を書き換える。
+- **次 (2026-10-10 以降)**: 次のデプロイで反映の所要時間と `uploaded` 件数を run のログで実測する。その次のデプロイで `uploaded` が変わった分だけになることを確かめる。90 分の上限は、実測で余裕が確認できてから縮める。
 - **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
