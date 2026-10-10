@@ -101,6 +101,12 @@ function planAheadAllowed(day, planConf = {}) {
   return mondayOffset(day.getUTCDay()) >= mondayOffset(planConf.earliestWeekday ?? 0);
 }
 
+/** 週次計画 (weekly.md の week) として受け付ける週。今週、earliestWeekday 以降は来週も。docs:check の DG032 も使う */
+export function acceptedWeeklyPlanWeeks(day, planConf = {}) {
+  const cal = calendar(day);
+  return planAheadAllowed(day, planConf) ? [cal.currentWeek, cal.nextWeek] : [cal.currentWeek];
+}
+
 /**
  * 週 X のレビューの申し送りを拾う週次計画の週。期限日に来週の計画を先に書ける運用 (土曜にレビューと計画) なら
  * 期限日の翌週、そうでなければ期限日の週 (月曜にレビューしてその週の計画を書く運用)。
@@ -381,7 +387,7 @@ export function reviewCadence(root, now = new Date()) {
   // 計画
   const weeklyPlanWeek = frontmatterValue(readText(root, wiring.plans.weekly.file), "week");
   const planAhead = planAheadAllowed(day, wiring.plans.weekly);
-  const acceptedWeeks = planAhead ? [cal.currentWeek, cal.nextWeek] : [cal.currentWeek];
+  const acceptedWeeks = acceptedWeeklyPlanWeeks(day, wiring.plans.weekly);
   const weeklyPlanOk = acceptedWeeks.includes(weeklyPlanWeek);
   status.push({
     kind: "weekly-plan",

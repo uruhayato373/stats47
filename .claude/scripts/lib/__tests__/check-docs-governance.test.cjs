@@ -251,6 +251,17 @@ test("frontmatter parser and ISO week are deterministic", () => {
   assert.deepEqual(acceptedWeeklyPlanWeeks("2026-09-21"), ["2026-W39"]);
 });
 
+test("週次計画の受け付け週はレビューの期限検査と同じ正本 (review-wiring.json) に従う", (t) => {
+  // 本物の正本は土曜から来週分を許す (2026-10-10〜。土曜にレビューと来週の計画を書く)
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-10-10"), ["2026-W41", "2026-W42"]);
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-10-09"), ["2026-W41"]);
+  // 正本の無いリポジトリは既定 (日曜からだけ来週分)
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "dg032-"));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-10-10", root), ["2026-W41"]);
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-10-11", root), ["2026-W41", "2026-W42"]);
+});
+
 test("日曜に先行作成した翌週計画はDG032にしない", (t) => {
   const { root, config } = fixture(t);
   write(root, ".claude/todo/weekly.md", markdown({
