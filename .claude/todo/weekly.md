@@ -113,11 +113,12 @@ Tier は improvements.md に列が無いので「—」とした。
   10 指標を除いた GSC 表示の多い順に 5 指標を取る (10-03 版の順なら `designated-difficult-disease` から)。各指標で公式の最新公表を
   一次資料で確かめてから基準 1〜4 のどれかに決める。5 指標すべての処置と根拠がカードに記録され、更新するものは config 変更と
   data-refresh の dryRun まで済み、第 2・3 週の「更新」の R2 反映を 1 回の承認依頼にまとめていれば完了。使用: `/inspect-estat-meta`、data-ingester
-- [ ] **BLOG-WAVE 7 件を終了するか、事前 target つきで測り直すかを確定する** [S] — `EFFECT-TARGET-MARKERS-01`（🔴 6 番目・管理領域・月次計画の W42 Must）。
+- [x] **BLOG-WAVE 7 件を終了するか、事前 target つきで測り直すかを確定する** [S] — `EFFECT-TARGET-MARKERS-01`（🔴 6 番目・管理領域・月次計画の W42 Must）。
   W41 にカードへ書いた (a) 終了 / (b) 事前 target つき再計測 をオーナーに選んでもらい、improvement-triage が 7 行を
   理由付きで終了するか、根拠のある `[target:]` を付けて新しい窓で測り直す。10-16（金）の計測サイクルで
   「GSC 施策 N 件中、機械判定できるのは M 件」の残りがすべて終了か目印付きになっていれば完了。
   10-14（水）までにオーナーの判断が無ければ、判断待ちの理由をカードに書く (この場合は未達)。
+  **結果 (2026-10-10)**: オーナーが (a) 終了を選んだ。7 件を理由付きで `data/improvement/gsc-improvement/closed-waves.json` に記録し、閾値エンジンの対象から外した (判定エンジンの dry-run は 0 件)。改善ログの 7 節は「終了 (判定不能のまま)」。GSC 運用サイクルの effect-target-ratchet は WARN → PASS。理由付きの「効果判定エンジン対象外」は計測サイクルで欠落に数えないようにし、目印の欠けた GSC 施策は 0 件 (対象外 1 件)。カードは完了として削除。
 
 ### Should（できればやる、3件）
 
@@ -146,7 +147,6 @@ Tier は improvements.md に列が無いので「—」とした。
 
 ## オーナー作業
 
-- **`EFFECT-TARGET-MARKERS-01`**: BLOG-WAVE 7 件を (a) 終了するか (b) 事前 target つきで測り直すかを選んでほしい (推奨は (a)、10-14 まで)。
 - **`AUTH-CREDENTIAL-REGISTER-01`**: KDP・ココナラ・もしもの再認証 (どれも `auth_required` で停止中)。
 - **`MEASUREMENT-AUTH-RESTORE-01`**: 再認証後に `npm run measurement:status -- --check` が通るか確認してほしい（Due 10-19）。
 - **`PERF-WORKER-P99-01`**: Workers Observability で route 別 CPU の内訳を確認してほしい（Due 10-12）。

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-09T21:46:20.705Z",
+  "updatedAt": "2026-10-10T03:29:27.489Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7197,6 +7197,76 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-09T21:46:20.705Z"
+    },
+    "EFFECT-TARGET-MARKERS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-10T03:28:05.771Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/metrics/__tests__/measurement-cycle.test.mjs .claude/scripts/metrics/__tests__/gsc-improvements-adapter.test.mjs",
+              "node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run",
+              "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-10 オーナー判断 (a) 終了。BLOG-WAVE 7 件を data/improvement/gsc-improvement/closed-waves.json に理由付きで記録し閾値エンジンの対象外へ (dry-run 0 件)。GSC 運用サイクルの effect-target-ratchet は WARN→PASS。理由付きの効果判定エンジン対象外は計測サイクルで欠落に数えない: 目印の欠けた GSC 施策 0 件 (対象外 1 件 THEME-EXPANSION-EFFECT-01)。テスト 15+26 件 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-10T03:28:05.771Z"
+    },
+    "DEPLOY-METRIC-RELEASE-TIMEOUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-10T03:29:27.489Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 38018651388 (deploy success 16m・exact publish uploaded=2606 skipped=613 2m45s)",
+              "gh run view 38019243297 (deploy success・uploaded=0 skipped=3219 51s)",
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "全件に近い反映 (2,606/3,219) のデプロイが全体 16 分で完了し、変更なしのデプロイは送信 0 件・反映 51 秒。完了条件 (全件の反映が要るリリースでも時間制限内に余裕を持って終わる) を実測で満たした。deploy job の制限を 90→40 分に戻した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-10T03:29:27.489Z"
     }
   }
 }

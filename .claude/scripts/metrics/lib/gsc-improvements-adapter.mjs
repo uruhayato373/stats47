@@ -22,6 +22,8 @@ import { datasetDir } from "../../../../config/datasets.mjs";
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 
 const PAGE_MARKER = /\[gsc-page:\s*([^\]\s]+)\s*\]/g;
+/** 機械判定から外した行の記法 (理由と代わりの判定手順を同じ行に書く) */
+const OUT_OF_SCOPE_MARKER = /効果判定エンジン対象外\*{0,2}\s*[:：]\s*\S/;
 
 export function extractGscPages(text) {
   return [...new Set(Array.from(String(text ?? "").matchAll(PAGE_MARKER), (m) => m[1]))];
@@ -144,5 +146,7 @@ export function judgeability(entry) {
     hasPage: extractGscPages(title).length > 0,
     hasDeploy: extractDeployDate(title) != null,
     hasTarget: extractTarget(title) != null,
+    // 「**効果判定エンジン対象外**: <理由と代わりの判定手順>」はオーナー判断で機械判定から外した行 (2026-09-26・EFFECT-TARGET-MARKERS-01 ③)
+    outOfScope: OUT_OF_SCOPE_MARKER.test(title),
   };
 }

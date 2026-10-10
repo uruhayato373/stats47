@@ -429,7 +429,8 @@ test("CLI: verdict JSON を書き、summary と thresholdsVersion を含む", ()
     execFileSync(
       "node",
       [path.join(PROJECT_ROOT, ".claude/scripts/lib/effect-verdict/cli.mjs"), "--week", "2026-W31", "--out", out],
-      { encoding: "utf-8" },
+      // 判定不能のまま終了した wave (closed-waves.json) は対象外になる。ここでは空の台帳を指して実データの wave を測る
+      { encoding: "utf-8", env: { ...process.env, EFFECT_VERDICT_CLOSED_WAVES: path.join(dir, "no-closures.json") } },
     );
     const j = JSON.parse(fs.readFileSync(out, "utf8"));
     assert.equal(j.schemaVersion, 1);

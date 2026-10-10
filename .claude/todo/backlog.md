@@ -144,46 +144,6 @@ updated: 2026-10-06
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 - **観測 (2026-10-08)**: run 37695475962 (develop への push で起動) で、もしもが `auth_required` (`blockedSince` 2026-10-07T16:31:27Z、新規)、KDP も `auth_required` (`blockedSince` 2026-09-30T08:35:08Z のまま)。どちらも `collectionAttempted:false` で、本人の再認証待ち。同じ run でココナラも `auth_required` (`blockedSince` 2026-10-01T12:39:06Z。自動ログイン対象外なので専用プロファイルからの `bootstrap-session.mjs coconala --from-profile --publish` 待ち)。
 
-### [EFFECT-TARGET-MARKERS-01] 効果判定エンジンが GSC 施策 10 件を 1 件も判定できない状態を解消する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:管理]
-
-- **根拠 (2026-W38 の計測サイクル)**: `improvements.md` の GSC 施策 10 件 (`SEARCH-GROWTH-CYCLE-01` / `COVERAGE-LOOP-01` /
-  `RANKING-REINDEX-01` / `BLOG-SEO-TYPES-01` / `BLOG-SEO-QUEUE-01` / `BLOG-SEO-PACE-01` / `BLOG-LINKROT-01` / `SITE-LINKROT-01` /
-  `THEME-EXPANSION-EFFECT-01` / `STP-AI-WATCH-01`) は、機械判定の目印 (`[gsc-page: /path]`・デプロイ済日・`[target: …]`) が欠けていて
-  機械判定 0 件。測っても判定まで閉じないので、改善サイクルの「記録 → 改善」が回っていない。
-- **次**: improvement-triage (improvements.md の排他 writer) が 1 行ずつ、根拠のある目印を足すか、目標値を後付けせず終了または
-  事前 target 付きの新規計測へ移すかを決める (`evidence-based-judgment.md` 状況 4: 根拠のない想定値を書かない)。
-- **一次処理 済 (2026-09-26・未コミット・improvement-triage)**: 10 行のうち 4 行を理由付きで終了した。
-  内訳は `SEARCH-GROWTH-CYCLE-01` (承認の運用でページ効果ではない)、`BLOG-SEO-PACE-01` (公開ペースの規律でGSC効果ではない)、
-  `SITE-LINKROT-01` (`BLOG-LINKROT-01` と同じ監査の重複で統合)、`COVERAGE-LOOP-01` (9/24 に終了済み)。
-  残る 6 行は、根拠のある目標値を今は書けない。理由は、単一ページで測れないコホート比較 (BLOG-SEO-TYPES/QUEUE)、対象 56 キーが未特定 (RANKING-REINDEX)、
-  是正デプロイ前 (BLOG-LINKROT)、独自の d7/d28/d56 計測体系 (THEME-EXPANSION-EFFECT・STP-AI-WATCH)。
-  目標値の後付けはしていない。`cli.mjs --dry-run` は exit 0 で、存在しないページが判定対象に紛れ込んでいないことも確認済み。
-- **次 (残り)**: ① `BLOG-LINKROT-01` は是正デプロイ後に対象ページと事前 target を付ける。② RANKING-REINDEX は 56 キーを特定してから目印を付ける。
-  ③ 済 (2026-09-26・オーナー判断): コホート比較 (BLOG-SEO-TYPES/QUEUE) と独自計測 (THEME-EXPANSION-EFFECT・STP-AI-WATCH) の 4 行は
-  improvements.md に「効果判定エンジン対象外」と代わりの判定手順を明記した (dry-run で subject に現れないことを確認)。
-- **完了条件**: 計測サイクルの「GSC 施策 N 件中、機械判定できるのは M 件」で、残る行がすべて理由付きで終了または目印付きになる。
-- **BLOG-WAVE 7 件の判断材料 (2026-10-05・W41 Should 3。判断は W42 Must でオーナーが行う)**: 判定エンジンを 10-05 に取り直した
-  W40 の GSC (`693877eaf`、直近 28 日の合計) で再実行した値。7 件とも `insufficient-target` で effect/pending のまま。
-
-  | wave | ページ数 | before (週) clicks / imp | after (W40) clicks / imp | clicks の伸び | 経過週 | ガード |
-  |---|---|---|---|---|---|---|
-  | 05-23-manual | 10 | W20: 89 / 7,141 | 78 / 10,135 | 0.88 倍 | 19 | insufficient-target |
-  | 05-25-auto | 53 | W21: 127 / 11,300 | 597 / 52,549 | 4.7 倍 | 18 | insufficient-target |
-  | 05-29-auto | 4 | W21: 7 / 1,258 | 34 / 8,075 | 4.9 倍 | 18 | insufficient-target |
-  | 06-07-manual | 3 | W22: 0 / 207 | 38 / 1,933 | (before 0) | 17 | insufficient-target |
-  | 06-07-manual-2 | 3 | W22: 69 / 2,614 | 614 / 13,937 | 8.9 倍 | 17 | insufficient-target |
-  | 06-07-manual-3 | 3 | W22: 26 / 889 | 288 / 12,918 | 11.1 倍 | 17 | insufficient-target |
-  | 06-10-manual | 6 | W23: 0 / 37 | 67 / 5,226 | (before 0) | 16 | insufficient-target, insufficient-sample |
-
-  同じ期間のサイト全体の直近 28 日クリック (`data/gsc/history.csv`) は W20 832 → W40 11,023 (13.2 倍)、
-  W21 1,110 (9.9 倍)、W22 1,309 (8.4 倍)、W23 1,349 (8.2 倍)。どの wave の伸びもサイト全体の伸び以下なので、
-  この before/after からは wave の効果を切り分けられない。再現: `node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run`。
-  選択肢は 2 つ: **(a) 終了** — 16〜19 週が経ち、サイト全体の成長と分離できず、目標値の後付けは状況 4 で書けないので、
-  7 件を「判定不能のまま終了」として理由付きで閉じる。**(b) 事前 target つき再計測** — 対照群 (同時期の非 wave 記事) を
-  決めてから target を書き、W42 から新しい窓で測り直す。推奨は (a)。(b) は対照群の定義から作る必要があり、
-  得られるのは 5〜6 月公開分の効果で、今後の公開判断には効きにくい。
-
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -3415,30 +3375,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   `blog-data-schema.md` は禁止も許可もしておらず、先例はこの 1 件。critic は規約違反ではないと判断した。
 - **判断すること**: data/ に置くのは JSON の中間結果だけにするか、実行コードも許すか。許すなら置き方 (名前・R2 へ上げるか) を決める。
 - **完了条件**: `blog-data-schema.md` に置き方が書かれている。
-
-### [DEPLOY-METRIC-RELEASE-TIMEOUT-01] デプロイの「指標スナップショットを R2 へ反映」段が 40 分の時間制限で止まり、R2 が途中まで新しい状態になる
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
-
-- **観測 (2026-10-09)**: PR #1116 のデプロイ (run 37909376740) が `deploy-workers.yml` の `Publish verified metric snapshots before app build`
-  (`push-exact-r2-assets.ts --manifest .local/metric-release-plan.json`) の途中で job の `timeout-minutes: 40` に達して cancelled になった。
-  アプリは旧版のまま、R2 は `app/home/featured.json` だけ更新され `app/ranking-items/all.json` は旧版、という途中の状態になった。
-  本番の主要ページは 200 で壊れていないことを確認した。差分のある分だけ送る作りなので、同じ run を再実行した。
-- **2026-10-09 暫定対処 (オーナー判断)**: 再実行 (attempt 2) も同じ段で 37 分走って cancelled。差分だけ送る作りでも時間内に終わらなかった。`deploy-workers.yml` の deploy job を `timeout-minutes: 90` にした。この job は concurrency `r2-write` を握るため、その間は他の R2 書き込み workflow が待つ。
-- **2026-10-09 実測と判定の抜け**: 90 分にした後、PR #1118 のデプロイ (run 37922790127) は `Detect metric snapshot changes` が直前の push との差分だけを見るため反映段を skip した (前回の反映が途中で止まっていても補わない)。workflow_dispatch (run 37924050596) で全件反映し、反映 53 分 (11:32-12:25)・全体成功・スモーク成功。40 分では原理的に収まらない量。次の対策では、途中で止まった反映を次のデプロイが検知して再実行する判定 (前回成功した release の記録との比較など) も足す。
-- **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
-  反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
-- **2026-10-10 原因の特定と対策 (実装済み・develop)**: PR #1119 のデプロイ (run 38007536371) は 85 分で上限の直前だった。原因は 2 つ。
-  ①生成物に生成時刻 (item の `generatedAt`・`createdAt`・`updatedAt`、一覧・カテゴリ・調査・市区町村の `generatedAt`) が入り、毎回 3,219 件すべてが「変更あり」になっていた。
-  さらに `app/ranking/<key>/item.json` をランキング生成とマスター出力 (`exportRankingItemsPerUrl`) の 2 つが書いていた。
-  ②反映 (`publishExactR2Manifest`) が 1 件ずつ直列で、1 件約 1 秒かかっていた。
-  対策: 中身が前回配信と同じなら時刻を引き継ぐ (`packages/r2-storage/src/lib/operations/stable-snapshot.ts`)。デプロイ時は item.json の書き手をランキング生成だけにした。
-  反映は段ごとに並列 (`--concurrency 16`) にした。差分判定をやめて毎回生成・反映する形にし、途中で止まった反映を次のデプロイが補うようにした。
-  手元でデプロイと同じ生成を 2 回流し、リリース対象 3,219 件の一致を確認した。次のデプロイは外側の `generatedAt` をそろえるため一度だけ全件を書き換える。
-- **次 (2026-10-10 以降)**: 次のデプロイで反映の所要時間と `uploaded` 件数を run のログで実測する。その次のデプロイで `uploaded` が変わった分だけになることを確かめる。90 分の上限は、実測で余裕が確認できてから縮める。
-- **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
-
-## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [R2-LOCAL-ROOT-UNIFY-01] r2-storage の listFromR2・deleteFromR2 のローカル経路を writeR2Staging と同じルート解決にする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npx vitest run packages/r2-storage] [起票:2026-10-10] [領域:管理]

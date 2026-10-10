@@ -113,7 +113,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-06-10-manual]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target, insufficient-sample)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-06-10-manual / **記事数**: 6
 - **remediated_at**: 2026-06-10 (週 2026-W24)
 - **before**: 2026-W23 → **after**: 2026-W40 (経過 16 週)
@@ -132,6 +132,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 16 週。before の clicks が 0 (W23 0 → W40 67) で伸び率を出せず、標本も不足 (insufficient-sample)。同じ期間のサイト全体は 8.2 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target, insufficient-sample により判定不能
 - **[根拠データ]** clicks (6 記事合計) 0→51 (delta +51 / 相対 +∞% / 想定値未登録) / window 2026-W23→2026-W40 (16 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -141,7 +142,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-06-07-manual-3]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-06-07-manual-3 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W40 (経過 17 週)
@@ -157,6 +158,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 17 週。clicks の伸び 11.1 倍 (W22 26 → W40 288) は 3 ページだけの小標本で、同じ期間のサイト全体 8.4 倍と対照群なしでは区別できない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (3 記事合計) 26→251 (delta +225 / 相対 865.4% / 想定値未登録) / window 2026-W22→2026-W40 (17 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -166,7 +168,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-06-07-manual-2]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-06-07-manual-2 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W40 (経過 17 週)
@@ -182,6 +184,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 17 週。clicks の伸び 8.9 倍 (W22 69 → W40 614) は同じ期間のサイト全体 8.4 倍とほぼ同じで、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (3 記事合計) 69→584 (delta +515 / 相対 746.4% / 想定値未登録) / window 2026-W22→2026-W40 (17 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -191,7 +194,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-06-07-manual]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-06-07-manual / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W40 (経過 17 週)
@@ -207,6 +210,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 17 週。before の clicks が 0 (W22 0 → W40 38) で伸び率を出せず、同じ期間のサイト全体は 8.4 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (3 記事合計) 0→33 (delta +33 / 相対 +∞% / 想定値未登録) / window 2026-W22→2026-W40 (17 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -216,7 +220,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-05-29-auto]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-05-29-auto / **記事数**: 4
 - **remediated_at**: 2026-05-29 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W40 (経過 18 週)
@@ -233,6 +237,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 18 週。clicks の伸び 4.9 倍 (W21 7 → W40 34) は同じ期間のサイト全体 9.9 倍以下で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (4 記事合計) 7→33 (delta +26 / 相対 371.4% / 想定値未登録) / window 2026-W21→2026-W40 (18 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -242,7 +247,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-05-25-auto]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-05-25-auto / **記事数**: 53
 - **remediated_at**: 2026-05-25 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W40 (経過 18 週)
@@ -308,6 +313,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 18 週。clicks の伸び 4.7 倍 (W21 127 → W40 597) は同じ期間のサイト全体 9.9 倍以下で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (53 記事合計) 127→548 (delta +421 / 相対 331.5% / 想定値未登録) / window 2026-W21→2026-W40 (18 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
@@ -317,7 +323,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ## [BLOG-WAVE-2026-05-23-manual]
 
-- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
+- **status**: 終了 (判定不能のまま。2026-10-10 オーナー判断 = `EFFECT-TARGET-MARKERS-01` の (a)。台帳 `closed-waves.json`。effect ラベルは付けていない)
 - **wave_id**: 2026-05-23-manual / **記事数**: 10
 - **remediated_at**: 2026-05-23 (週 2026-W21)
 - **before**: 2026-W20 → **after**: 2026-W40 (経過 19 週)
@@ -340,6 +346,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 ### 判定
 
+- **[終了]** 2026-10-10 — 是正から 19 週。clicks の伸び 0.88 倍 (W20 89 → W40 78) に対し、同じ期間のサイト全体の直近 28 日クリックは 13.2 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない。以後は閾値エンジンの対象外 (再開するときは台帳から行を消し、事前の target を付けて新しい wave として測る)
 - **[判定] effect/pending** — ガード insufficient-target により判定不能
 - **[根拠データ]** clicks (10 記事合計) 89→68 (delta -21 / 相対 -23.6% / 想定値未登録) / window 2026-W20→2026-W40 (19 週)
 - **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)

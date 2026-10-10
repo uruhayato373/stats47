@@ -137,7 +137,8 @@ export function summarizeOverdue(entries, asOf) {
 
 /**
  * 閾値エンジンの今週の判定と、GSC 施策が機械判定に必要な目印を持っているか。
- * @param {{ verdicts: object|null, gscRows: Array<{id:string, hasPage:boolean, hasDeploy:boolean, hasTarget:boolean}> }} input
+ * 「効果判定エンジン対象外」と理由を書いた行 (outOfScope) は欠落に数えず、対象外として別に出す。
+ * @param {{ verdicts: object|null, gscRows: Array<{id:string, hasPage:boolean, hasDeploy:boolean, hasTarget:boolean, outOfScope?:boolean}> }} input
  */
 export function summarizeEngine({ verdicts, gscRows }) {
   const byDomain = {};
@@ -146,7 +147,9 @@ export function summarizeEngine({ verdicts, gscRows }) {
     d.subjects += 1;
     d.byLabel[v.label] = (d.byLabel[v.label] ?? 0) + 1;
   }
-  const missing = gscRows
+  const inScope = gscRows.filter((r) => !r.outOfScope);
+  const outOfScope = gscRows.filter((r) => r.outOfScope).map((r) => r.id);
+  const missing = inScope
     .map((r) => ({
       id: r.id,
       missing: [!r.hasPage && "[gsc-page: /path]", !r.hasDeploy && "デプロイ済 YYYY-MM-DD", !r.hasTarget && "[target: +N clicks]"].filter(Boolean),
@@ -155,7 +158,7 @@ export function summarizeEngine({ verdicts, gscRows }) {
   return {
     verdictsWeek: verdicts?.week ?? null,
     byDomain,
-    gsc: { active: gscRows.length, judgeable: gscRows.length - missing.length, missing },
+    gsc: { active: inScope.length, judgeable: inScope.length - missing.length, missing, outOfScope },
   };
 }
 
@@ -555,10 +558,17 @@ export function renderCycleMarkdown(state) {
     const domains = Object.entries(e.byDomain);
     lines.push(`**効果判定エンジン**（${e.verdictsWeek ?? "verdict 未生成"}）: ${domains.length === 0 ? "判定対象なし" : domains.map(([d, s]) => `${d} ${s.subjects} 件 ${JSON.stringify(s.byLabel)}`).join(" / ")}`);
     lines.push("");
-    lines.push(`GSC 施策 ${e.gsc.active} 件中、機械判定できるのは ${e.gsc.judgeable} 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:`);
-    lines.push("");
-    for (const r of e.gsc.missing) lines.push(`- \`${r.id}\`: ${r.missing.join("・")}`);
-    lines.push("");
+    const outOfScope = e.gsc.outOfScope ?? [];
+    const scopeNote = outOfScope.length ? ` (理由付きで対象外 ${outOfScope.length} 件: ${outOfScope.map((id) => `\`${id}\``).join(", ")})` : "";
+    if (e.gsc.missing.length === 0) {
+      lines.push(`GSC 施策 ${e.gsc.active} 件中、機械判定できるのは ${e.gsc.judgeable} 件。目印の欠けた施策は無い${scopeNote}。`);
+      lines.push("");
+    } else {
+      lines.push(`GSC 施策 ${e.gsc.active} 件中、機械判定できるのは ${e.gsc.judgeable} 件${scopeNote}。残りは目印が欠けている（目標値は根拠があるときだけ書く）:`);
+      lines.push("");
+      for (const r of e.gsc.missing) lines.push(`- \`${r.id}\`: ${r.missing.join("・")}`);
+      lines.push("");
+    }
   }
   if (state.operations) {
     const { psi, cloudflare, sns, improvements } = state.operations;

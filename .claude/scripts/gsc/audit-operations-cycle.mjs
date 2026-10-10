@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
 import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../management/lib/review-cadence.mjs';
+import { loadClosedWaveIds } from '../blog/measure-gsc-impact.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -296,8 +297,15 @@ export function auditOperationsCycle({
       'pass',
       `${measurementWeek} verdict ${verdictDoc.summary?.total ?? 0}件を記録済み`
     );
-    const missingTargets = (verdictDoc.verdicts ?? []).filter((verdict) =>
-      verdict.guards?.some((guard) => guard.code === 'insufficient-target')
+    // 判定不能のまま終了した wave (closed-waves.json・オーナー判断) は欠落に数えない。
+    // 終了より前の週の verdict には残るので、ここで外さないと終了後も既知欠落の警告が続く。
+    const closedWaves = loadClosedWaveIds(
+      path.join(root, datasetPath('improvement.closed-waves'))
+    );
+    const missingTargets = (verdictDoc.verdicts ?? []).filter(
+      (verdict) =>
+        verdict.guards?.some((guard) => guard.code === 'insufficient-target') &&
+        !closedWaves.has(String(verdict.subjectId ?? '').replace(/^BLOG-WAVE-/, ''))
     );
     const legacy = new Set(policy.legacyMissingTargetSubjectIds ?? []);
     const unknown = missingTargets.filter(
