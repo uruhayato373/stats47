@@ -3440,6 +3440,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [R2-LOCAL-ROOT-UNIFY-01] r2-storage の listFromR2・deleteFromR2 のローカル経路を writeR2Staging と同じルート解決にする
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npx vitest run packages/r2-storage] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10 に書き込み (`writeR2Staging`) はリポジトリ直下の `.local/r2` に固定したが、`list.ts`・`delete.ts` のローカル経路 (`NODE_ENV=development` かつ S3 資格情報なしのとき) は `findLocalR2Root()` でカレントディレクトリから既存の `.local/r2` を探し、無ければその場を見る。書いた場所と読む・消す場所が実行場所によってずれうる。`packages/r2-storage/README.md` の「環境検出」節も現在の判定 (`detect-environment.ts`) と合っていない。
+- **trigger**: ローカル経路の list / delete を使う作業が出たとき、または r2-storage を次に触るとき。
+- **次**: `write-staging.ts` のルート解決を共通関数に切り出して list / delete から使い、`find-local-r2-root.ts` を消す (`push-r2-wrangler.ts` も同じ関数へ)。README の環境検出節を `detectEnvironment()` の実際の条件に直す。
+- **完了条件**: `findLocalR2Root` の参照が 0 件、r2-storage のテストと `npm run type-check` が通る。
+
 ### [DATA-SOURCE-NEWS-TOPICS-01] 新聞記事から拾った統計ネタ 3 件 (国勢調査確定値・日銀短観・DV 相談) を企画に回す
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-10-10] [領域:SNS]
 
