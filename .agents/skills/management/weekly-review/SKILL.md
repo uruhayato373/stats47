@@ -145,6 +145,17 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 node .claude/scripts/management/check-review-cadence.mjs
 ```
 
+### 自動アラートの回収
+
+開いている自動アラート Issue (label `auto-generated`) を 1 件ずつ見て、**Issue のコメントに**
+「→ 振り分け: <カード ID / EXP-NNN / #Issue / 見送り (理由)>」を付ける。直したならその場で閉じる。
+行き先が無いものは先に backlog へカードを起票してから振り分ける。本文は各 workflow が毎回書き換えるのでコメントに書く。
+14 日を過ぎて振り分けの無いアラートが残る間は完了と報告しない (同じ検査が毎朝の `review-cadence-guard.yml` でも走る)。
+
+```bash
+node .claude/scripts/management/check-alert-triage.mjs
+```
+
 ## Phase 4: 次週計画
 
 レビュー保存後、ユーザーの依頼範囲に週次計画が含まれる場合だけ`/weekly-plan`を実行する。

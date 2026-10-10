@@ -314,6 +314,62 @@ updated: 2026-10-06
 - **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
 - **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
 
+### [AI-CONTENT-GEMINI-PREFLIGHT-01] ai-content-gemini-daily が 12 日連続で Gemini の構造化出力の事前確認に失敗している
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 横断監視 #763 で `ai-content-gemini-daily.yml` が 12 回連続失敗 (2026-09-28〜10-09、例: run 37873064516)。ログの終わりは「Gemini structured-output preflight に失敗しました」。#763 には他に cron 異常が計 7 件ある。
+- **次**: 失敗 run のログで preflight が何を送って何が返ったか (認証・モデル名・スキーマ) を確かめ、原因を直す。止めると決めたなら `gh workflow disable` で止め、main からも消す。#763 の残り 6 件も同じ表で原因と行き先を付ける。
+- **完了条件**: 次の定時実行が成功するか、意図して止めたことが workflow と #763 で確認できる。
+
+### [RANKING-RATIO-RANK-MISMATCH-01] 比率指標 4 件で配信中の順位が再計算と食い違う
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: ランキング整合性の週次監査 #679 (2026-10-03) で、`business-closure-rate` (順位差 30)・`business-opening-rate` (26)・`engel-coefficient` (13)・`information-communication-coefficient` (27) の 4 件が、R2 の values と再計算で順位が一致しない (件数は一致)。監査は「DB レス回帰の疑い」と出している。
+- **次**: 4 件の values.json の rank と `calculateRankingValues` の結果を並べ、どちらが正しいか (昇順・降順の向き、同率の扱い、元データの年) を確かめてから再生成する。
+- **完了条件**: 次の週次監査で rank 不一致が 0 件。
+
+### [BLOG-LINK-410-REMAP-01] ブログ本文の 410 になったランキングへのリンク 5 件を置き換える
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/fix-broken-internal-links.mjs] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: リンク監査 #752 (2026-10-03) でブログ本文に HTTP 410 のリンクが 5 件 (`/ranking/elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`・`prefectural-income-per-capita`・`tourism-resource-count`、各 1 記事)。
+- **手順**: #752 本文の是正手順どおり、`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (無ければ `to: null`) を足し、`fix-broken-internal-links.mjs --apply` で置き換えて公開する。
+- **完了条件**: 次の週次リンク監査で 410 が 0 件になり #752 が自動で閉じる。
+
+### [OGP-NOTE-COVER-MISSING-01] OGP 監査で note カバー画像 103 件が欠落のまま残る
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
+
+- **事象**: OGP 画像の週次監査 #814 (2026-10-03) で、自動修復後も note-cover が 103 件 missing (例: 12-fiscal-peer-comparison ほか公務員シリーズ)。note カバーの正本は 2026-10-02 に `data/note/cover-assets.json` へ移っており (`note-image-assets.md`)、監査が旧経路の画像を探している可能性がある。
+- **次**: [仮説] 監査の参照先が旧経路のまま。検証: `ogp-image-audit` が note-cover をどこで探すかを読み、`cover-assets.json` の版と突き合わせる。監査側の誤りなら監査を直し、実際の欠落なら `note:assets` の手順で補う。
+- **完了条件**: 次の週次 OGP 監査で note-cover の missing が 0 件。
+
+### [PAGE-QUALITY-ERROR-BACKLOG-01] ページ品質の週次監査の error 3,149 件を種類ごとに振り分ける
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: #1014 (2026-10-03) で error=3,149・warning=7,885 (6,475 URL)。種類の内訳 (HTML/RSC 肥大・DOM 過剰・リンク重複・広告重複・構造化データ・画像切れ) を誰も振り分けていない。リンク重複は [SITEWIDE-DUPLICATE-LINK-RATIO-01] が扱う。
+- **次**: `/quality/page-audit` か R2 `state/page-quality/latest.json` で error を種類別に数え、既存カードに載るものは振り分け、載らない種類はカードにする。誤検知なら閾値を直す。
+- **完了条件**: error の各種類に行き先 (カード ID か閾値修正) があり、#1014 にその表がコメントされている。
+
+### [NOTE-PRODUCT-CARD-MISMATCH-01] note 記事の商品カードの題名が実商品の題名と食い違う
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
+
+- **事象**: note 商品カードの週次監査 #1064 (2026-10-03) で a-kakei 系の記事 (fukui・fukuoka・fukushima・gifu・gunma ほか) のカードが「消費量日本一の食卓 — …」を表示し、実商品 (storefront.generated.ts) の「食卓の支出と購入数量 — 家計調査の地域差を読む」と一致しない。
+- **次**: 商品の題名を変えたのが先か、カードが古いのかを確かめる。カードはマガジンではなく実商品の正本から解決する (memory `feedback_note_product_card_ssot`)。直すときは公開済み記事のカードを PUT で差し替える手順を使う。
+- **完了条件**: 次の週次監査で不一致 0 件。
+
+### [NSM-GUARD-EMPTY-CSV-01] 週次収益 (NSM) のガードが GA4 の CSV 0 行で失敗した原因を確かめる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: #1065 (2026-10-04)。ガードの実行 (run 37213549127) で `overview.csv`・`daily.csv`・`devices.csv`・`units.csv` がすべて 0 行 (error)。前の 2 回 (09-20・09-27) は成功している。
+- **次**: 10-11 の実行結果を確かめる。成功していれば一時的な取得失敗として #1065 に記録して閉じ、続いていれば GA4 の取得 (認証・プロパティ・期間) を調べる。
+- **完了条件**: 週次収益の計測が 2 週続けて成功し、#1065 が閉じている。
+
+### [THEME-CPI-503-01] テーマ品質監査で consumer-prices ページが 503・タイムアウトになる
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
+
+- **事象**: テーマ品質監査 #1069 (2026-10-05) で `/themes/consumer-prices` (幅 1440) が HTTP 503・h1 の待機タイムアウト・チャート 2 つ欠落 (theme-cpi-heatmap・theme-cpi-profile)。
+- **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
+- **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
+
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [領域:管理]
@@ -3375,6 +3431,16 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [DATA-SOURCE-NEWS-TOPICS-01] 新聞記事から拾った統計ネタ 3 件 (国勢調査確定値・日銀短観・DV 相談) を企画に回す
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-10-10] [領域:SNS]
+
+- **trigger**: 週次の SNS・ブログの題材選び (`/sns-weekly-plan`・`/plan-article-queue`) のとき。
+- **元**: GitHub Issue の運用規則 (機能改修・バグ・自動アラートだけ) から外れていた `data-source` ラベルの Issue を 2026-10-10 に閉じてここへ移した。詳細と原本の場所は各 Issue に残っている。
+  - #1071 2025 年国勢調査の確定値 (総人口 317 万人減・高齢化率 29.4%)。都道府県別の増減率・高齢化率の地図 2 枚
+  - #1072 日銀短観 9 月 (景況感 6 期連続改善)。県別の業況判断 DI が 47 そろうかは要調査
+  - #816 DV 相談件数 (兵庫 1 万 8774 件・5 年ぶり増)。内閣府の都道府県別件数を人口 10 万人あたりで地図化
+- **完了条件**: 3 件それぞれ、投稿・記事にしたか見送ったかが決まり、このカードを消している。
 
 ### [DEPS-DEPENDABOT-GROUP-01] dependabot の next・sharp の更新を、ルートの overrides と同じ PR で上げる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-10] [領域:管理]

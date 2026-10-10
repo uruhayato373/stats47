@@ -117,6 +117,13 @@ node .claude/scripts/management/check-review-cadence.mjs
 <読んだ state・レビュー・コミットのパス>
 ```
 
+「点検と Issue」は、各アラート Issue のコメントに付いた「→ 振り分け:」を写す (振り分けの正本は Issue のコメント)。
+振り分けの無いアラートは、このとき Issue にコメントで付けてから表に載せる。検査:
+
+```bash
+node .claude/scripts/management/check-alert-triage.mjs
+```
+
 「来月への申し送り」の各項目は末尾に `→ 振り分け:` と行き先を必ず書く。カード ID は backlog / improvements に
 実在するもの。行き先が無い項目は先にカードを起票する (未分類なら 🟡 で起票してよい)。
 
