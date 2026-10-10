@@ -152,7 +152,7 @@
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
     "metrics:adsense-diagnostics": "node .claude/scripts/metrics/adsense-diagnostics-run.mjs",
     "metrics:test": "node --test .claude/scripts/metrics/__tests__/*.test.mjs",
-    "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs",
+    "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs .claude/scripts/lib/__tests__/check-dependency-audit.test.mjs",
     "psi:test": "node --test .claude/scripts/psi/__tests__/*.test.mjs",
     "model-usage:collect": "node .claude/scripts/model-usage/collect-local-usage.mjs",
     "model-usage:report": "node .claude/scripts/model-usage/build-model-usage-report.mjs",

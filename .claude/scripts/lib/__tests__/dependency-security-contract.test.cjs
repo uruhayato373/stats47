@@ -108,14 +108,28 @@ test('the lockfile includes every native binding used by Linux CI', () => {
   }
 });
 
+test('the lockfile has no nested entry whose parent package is gone', () => {
+  // 2026-10-10: 重複していた apps/*/node_modules/next を 1 つにした後も、その下の postcss 8.4.31 の行だけが残り、
+  // npm audit が runtime の high (postcss <=8.5.22) として数え続けた。親の無い入れ子は npm がもう使わない行。
+  const lockfile = readJson('package-lock.json');
+  const keys = new Set(Object.keys(lockfile.packages));
+  const orphans = [...keys].filter((key) => {
+    const at = key.lastIndexOf('/node_modules/');
+    return at > 0 && !keys.has(key.slice(0, at));
+  });
+  assert.deepEqual(orphans, []);
+});
+
 test('CI rejects high-risk development findings and every runtime finding', () => {
   const workflow = fs.readFileSync(
     path.join(ROOT, '.github/workflows/security-scan.yml'),
     'utf8'
   );
 
-  assert.match(workflow, /npm audit --audit-level=high/);
+  // high/critical は期限付きの dev 例外だけを許すゲートで止める (check-dependency-audit.mjs)。runtime は例外なしの全件ゲート
+  assert.match(workflow, /node \.claude\/scripts\/lib\/check-dependency-audit\.mjs/);
   assert.match(workflow, /npm audit --omit=dev --audit-level=low/);
+  assert.doesNotMatch(workflow, /check-dependency-audit\.mjs[^\n]*\n\s*continue-on-error:\s*true/);
   assert.doesNotMatch(
     workflow,
     /npm audit[^\n]*\n\s*continue-on-error:\s*true/

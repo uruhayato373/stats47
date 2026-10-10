@@ -39,8 +39,10 @@ jobs:
       - name: 🔍 Enforce dependency security contracts
         run: npm run test:dependency-security
 
+      # high/critical を止める。上流に修正版が無い dev 依存の advisory だけを、理由と期限付きの例外として通す
+      # (正本 .claude/config/dependency-audit-exceptions.json・DEPS-BRACES-GATE-01)。runtime の advisory は例外にしない
       - name: 🔍 Reject critical/high dependency vulnerabilities
-        run: npm audit --audit-level=high
+        run: node .claude/scripts/lib/check-dependency-audit.mjs
 
       - name: 🔍 Reject every runtime vulnerability
         run: npm audit --omit=dev --audit-level=low
