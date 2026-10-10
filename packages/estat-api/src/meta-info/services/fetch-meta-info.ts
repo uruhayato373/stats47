@@ -1,4 +1,5 @@
 import { logger } from "@stats47/logger";
+import type { R2Bucket } from "@stats47/r2-storage";
 import { EstatMetaInfoFetchError } from "../errors";
 import { fetchMetaInfoFromApi } from "../repositories/api/fetch-from-api";
 import { findMetaInfoCache } from "../repositories/cache/find-cache";
@@ -7,9 +8,13 @@ import type { EstatMetaInfoResponse } from "../types";
 
 /**
  * メタ情報を取得（キャッシュ優先）
+ *
+ * @param statsDataId - 統計表ID
+ * @param storage - R2ストレージ（オプション）。渡したときだけキャッシュへ保存する
  */
 export async function fetchMetaInfo(
-  statsDataId: string
+  statsDataId: string,
+  storage?: R2Bucket
 ): Promise<EstatMetaInfoResponse> {
   // 1. キャッシュ確認
   try {
@@ -25,11 +30,16 @@ export async function fetchMetaInfo(
   try {
     const data = await fetchMetaInfoFromApi(statsDataId);
 
-    // 3. キャッシュ保存（非同期）
-    // void演算子でPromiseを無視することを明示
-    void saveMetaInfoCache(statsDataId, data).catch((err) =>
-      logger.warn({ statsDataId, error: err }, "キャッシュ保存失敗")
-    );
+    // 3. キャッシュ保存
+    //    stats-data と同じく await する (fire-and-forget は Workers でレスポンス確定後に中断されうる)。
+    //    保存失敗はデータ取得の失敗ではないので、ログに残して続行する。
+    if (storage) {
+      try {
+        await saveMetaInfoCache(storage, statsDataId, data);
+      } catch (err) {
+        logger.warn({ statsDataId, error: err }, "キャッシュ保存失敗");
+      }
+    }
 
     return data;
   } catch (error) {

@@ -33,7 +33,7 @@
 import { writeFileSync } from "node:fs";
 
 import { buildRecipe, listAllMetrics, type MetricConfig } from "@stats47/data-configs";
-import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
+import { assertR2WriteAllowed, writeR2Staging } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 import { statsR2Key } from "@stats47/stats-r2";
 
@@ -128,9 +128,7 @@ async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outco
     );
 
     if (!dryRun) {
-      await saveToR2(statsR2Key(config.key, ENTITY_KIND), JSON.stringify(payload), {
-        contentType: "application/json",
-      });
+      await writeR2Staging(statsR2Key(config.key, ENTITY_KIND), JSON.stringify(payload));
     }
     return {
       key: config.key,

@@ -370,14 +370,6 @@ updated: 2026-10-06
 - **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
 - **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
 
-### [R2-SAVE-STAGING-RENAME-01] R2 に書かない `saveToR2` を実態どおりの名前にし、書き込み先を明示する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run type-check] [起票:2026-10-10] [領域:管理]
-
-- **事象**: `packages/r2-storage/src/lib/operations/save.ts` の `saveToR2` は R2 に書かず、手元の `.local/r2` (カレントディレクトリから上へ探し、無ければその場に作る) に書くだけ。呼び出し元は 25 ファイル。名前から「R2 に保存した」と思い込み、送る手順を忘れても成功のログが出る (memory `project_kakei_expansion_pipeline_gotchas` に踏んだ記録あり)。書き込み先が実行場所で変わる。
-- **本番コードの誤用**: e-Stat のメタ情報キャッシュ (`packages/estat-api/src/meta-info/repositories/cache/save-cache.ts`) が `saveToR2` で「R2 に保存」しており、実際には R2 に一度も書かれていない (`estat-api/meta-info/0000010101.json` は 404)。統計データのキャッシュは R2 binding の `storage.put` で正しく書いている。2026-10-10 時点で `apps/web` から呼ばれていないので実害は無い。
-- **手順**: ①関数を `writeR2Staging(root, key, body)` のように名前と書き込み先の引数を明示した形にし、25 か所を移す (旧名は残さない) ②e-Stat のメタ情報キャッシュは統計データのキャッシュと同じ R2 binding の書き込みにする ③デプロイ (`deploy-workers.yml`) の生成→検査→反映の順は変えない。
-- **完了条件**: `saveToR2` の呼び出しが 0 件、`npm run type-check` が通り、デプロイの生成手順を 2 回流してリリース対象の全ファイルが一致する。
-
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [領域:管理]

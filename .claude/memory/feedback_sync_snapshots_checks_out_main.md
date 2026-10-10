@@ -23,6 +23,6 @@ main へマージ後に 3 回目を実行して初めて反映された。
   をローカル（= develop の最新ファイル）から実行**して判定する。CI 内の verify は checkout した main と比較するため、
   develop の変更が反映されているかの判定には使えない。
 - 「push 成功なのに R2 が旧内容」に見えたら、まず `.github/workflows/<wf>.yml` の checkout `ref:` を疑う。
-  CDN キャッシュや `saveToR2` / `diff-push-r2` の順序を疑う前にここを見る（今回そこで時間を使った）。
+  CDN キャッシュや `writeR2Staging` (旧 `saveToR2`) / `diff-push-r2` の順序を疑う前にここを見る（今回そこで時間を使った）。
 
 関連: [[project_r2_writes_ci_only]] / [[feedback_fetch_origin_before_implementing]]

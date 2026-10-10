@@ -2,7 +2,7 @@ import "server-only";
 
 import { listCategories } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
-import { carryTimestamp, readPublishedSnapshot, saveToR2 } from "@stats47/r2-storage/server";
+import { carryTimestamp, readPublishedSnapshot, writeR2Staging } from "@stats47/r2-storage/server";
 
 import type { Category } from "../types/category";
 import {
@@ -42,9 +42,7 @@ export async function exportCategoriesSnapshot(): Promise<ExportCategoriesSnapsh
   );
 
   const body = JSON.stringify(snapshot);
-  const result = await saveToR2(CATEGORIES_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  const result = await writeR2Staging(CATEGORIES_SNAPSHOT_KEY, body);
 
   const durationMs = Date.now() - startedAt;
   logger.info(

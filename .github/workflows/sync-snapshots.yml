@@ -146,7 +146,7 @@ jobs:
       #   "development" を立てる。development だと listFromR2 が S3 ではなく .local/r2 を列挙し、
       #   item-metadata-refresh --apply が一部キーだけ staging した状態で master が走ると
       #   「部分集合を全件と誤認」して featured/category/survey snapshot を空・欠損で上書きする。
-      #   saveToR2 は常にローカル FS 書き込みなので、production にしても staging→push フローは不変。
+      #   writeR2Staging は常にローカル FS 書き込みなので、production にしても staging→push フローは不変。
       - name: 🗂️ Regenerate snapshots + push to R2
         env:
           NODE_ENV: production

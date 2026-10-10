@@ -11,7 +11,7 @@ export {
     getR2Client,
     listFromR2,
     listFromR2WithSize,
-    saveToR2,
+    writeR2Staging,
     carryTimestamp,
     latestTimestamp,
     readPublishedSnapshot,

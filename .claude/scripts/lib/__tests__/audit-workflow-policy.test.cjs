@@ -364,7 +364,7 @@ jobs:
 
 test('metric local staging needs no production push, while normal writers still do', () => {
   const writer = 'packages/ranking/src/scripts/generate-ranking-items.ts';
-  const files = {[writer]: 'import {saveToR2} from "@stats47/r2-storage/server"; async function main(){ await saveToR2("x", "y"); }'};
+  const files = {[writer]: 'import {writeR2Staging} from "@stats47/r2-storage/server"; async function main(){ await writeR2Staging("x", "y"); }'};
   const workflow = (command) => 'name: test\non: { pull_request: {} }\npermissions: { contents: read }\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 5\n    steps:\n      - run: '+command+'\n';
   const local = run(workflow('npx tsx '+writer+' --stage-dir .local/r2'), [], files);
   assert.ok(!local.output.details.some(f=>f.code === 'R2_WRITE_WITHOUT_PUSH'));

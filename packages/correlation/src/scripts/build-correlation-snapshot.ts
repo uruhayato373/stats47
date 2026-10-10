@@ -48,7 +48,7 @@ import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   assertR2WriteAllowed,
   fetchFromR2AsJson,
-  saveToR2,
+  writeR2Staging,
 } from '@stats47/r2-storage/server';
 import { readStatsValues } from '@stats47/stats-r2/readers';
 
@@ -1061,16 +1061,11 @@ export async function buildCorrelationSnapshot(
   let emptyKeyFiles = 0;
   let themeFiles = 0;
   if (!opts.dryRun) {
-    await saveToR2(
+    await writeR2Staging(
       CORRELATION_TOP_PAIRS_KEY,
-      JSON.stringify(topPairsSnapshot),
-      {
-        contentType: 'application/json; charset=utf-8',
-      }
+      JSON.stringify(topPairsSnapshot)
     );
-    await saveToR2(CORRELATION_STATS_KEY, JSON.stringify(statsSnapshot), {
-      contentType: 'application/json; charset=utf-8',
-    });
+    await writeR2Staging(CORRELATION_STATS_KEY, JSON.stringify(statsSnapshot));
 
     for (const key of pairKeys) {
       const snapshot: CorrelationByKeySnapshot = {
@@ -1078,9 +1073,7 @@ export async function buildCorrelationSnapshot(
         rankingKey: key,
         pairs: queryByKey(db, key, CORRELATION_BY_KEY_LIMIT, metaMap),
       };
-      await saveToR2(correlationByKeyPath(key), JSON.stringify(snapshot), {
-        contentType: 'application/json; charset=utf-8',
-      });
+      await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
       perKeyFiles++;
     }
     // 計算できない有効指標 (除外キー・観測値なし・最新年が 30 県未満) にも空の by-key を書く。
@@ -1091,9 +1084,7 @@ export async function buildCorrelationSnapshot(
       for (const key of activePrefectureKeys) {
         if (computed.has(key)) continue;
         const snapshot: CorrelationByKeySnapshot = { generatedAt, rankingKey: key, pairs: [] };
-        await saveToR2(correlationByKeyPath(key), JSON.stringify(snapshot), {
-          contentType: 'application/json; charset=utf-8',
-        });
+        await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
         emptyKeyFiles++;
       }
       // テーマ単位の関連指標。該当なしのテーマも空で書き、古い一覧を残さない
@@ -1103,9 +1094,7 @@ export async function buildCorrelationSnapshot(
           themeKey,
           items: buildThemeLinks(members, perKeyTop, metaMap),
         };
-        await saveToR2(correlationByThemePath(themeKey), JSON.stringify(snapshot), {
-          contentType: 'application/json; charset=utf-8',
-        });
+        await writeR2Staging(correlationByThemePath(themeKey), JSON.stringify(snapshot));
         themeFiles++;
       }
     }

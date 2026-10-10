@@ -10,7 +10,7 @@ Cloudflare R2ストレージとの連携を提供するパッケージ。ファ�
 
 ### 1. ファイル操作
 
-- **保存**: JSON、文字列、バッファをR2に保存
+- **staging への書き込み**: 文字列・バッファを `.local/r2/` に書く (R2 への反映は push 段が行う)
 - **取得**: JSON、文字列、バイナリデータとして取得
 - **削除**: 単一または複数ファイルの削除
 - **一覧取得**: プレフィックスを指定してファイル一覧を取得
@@ -25,25 +25,23 @@ Cloudflare R2ストレージとの連携を提供するパッケージ。ファ�
 
 ## 使い方
 
-### ファイルの保存
+### staging への書き込み
+
+`writeR2Staging` は R2 へ直接は書かない。リポジトリ直下の `.local/r2/<key>` に書き、R2 への反映は
+`push-exact-r2-assets.ts` / `diff-push-r2.ts` が行う (2 段構成)。push 段を持たない workflow は
+`audit-workflow-policy.cjs` の `R2_WRITE_WITHOUT_PUSH` が検出する。
 
 ```typescript
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
-// JSONオブジェクトを保存
-await saveToR2({
-  key: "ranking/prefecture/annual-sales/metadata.json",
-  body: { title: "年間売上", unit: "億円" },
-  contentType: "application/json"
-});
+// .local/r2/app/survey/all.json に書く。戻り値は { key, size, path }
+await writeR2Staging("app/survey/all.json", JSON.stringify(snapshot));
 
-// 文字列を保存
-await saveToR2({
-  key: "data/report.txt",
-  body: "レポート内容",
-  contentType: "text/plain"
-});
+// 書き込み先を変える場合 (優先順: options.root → 環境変数 R2_STAGING_DIR → リポジトリ直下の .local/r2)
+await writeR2Staging("app/survey/all.json", body, { root: "/tmp/stage" });
 ```
+
+リポジトリの外で実行してルートが決まらないときは例外になる (カレントディレクトリに `.local/r2` を作らない)。
 
 ### ファイルの取得
 
@@ -118,27 +116,13 @@ packages/r2-storage/
 - **Production**: Cloudflare R2バケットを使用
 - **Development**: ローカルの `.wrangler/state/v3/r2/` を使用
 
-### エラーハンドリング
-
-すべての操作は統一されたエラーハンドリングを提供:
-
-```typescript
-import { handleR2Error } from "@stats47/r2-storage/server";
-
-try {
-  await saveToR2({ key: "test.json", body: data });
-} catch (error) {
-  handleR2Error(error, "test.json", "saveToR2");
-}
-```
-
 ## API リファレンス
 
 ### 通常バケット操作
 
 | 関数 | 説明 | 戻り値 |
 |:-----|:-----|:-------|
-| `saveToR2(options)` | ファイルを保存 | `Promise<void>` |
+| `writeR2Staging(key, body, options?)` | `.local/r2/` へ書く (R2 へは push 段が反映) | `Promise<{ key, size, path }>` |
 | `fetchFromR2(key)` | バイナリデータとして取得 | `Promise<ArrayBuffer \| null>` |
 | `fetchFromR2AsJson<T>(key)` | JSONとして取得 | `Promise<T \| null>` |
 | `fetchFromR2AsString(key)` | 文字列として取得 | `Promise<string \| null>` |

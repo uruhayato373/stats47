@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { logger } from '@stats47/logger/server';
-import { latestTimestamp, saveToR2 } from '@stats47/r2-storage/server';
+import { latestTimestamp, writeR2Staging } from '@stats47/r2-storage/server';
 import { generateRankingThumbnailMapSvg } from '@stats47/visualization/server';
 
 import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
@@ -244,9 +244,7 @@ export async function exportRankingItemsPerUrl(
     items: featuredBaked,
   });
   uploads.push(
-    saveToR2(homeFeaturedKeyPath(), featuredBody, {
-      contentType: 'application/json; charset=utf-8',
-    })
+    writeR2Staging(homeFeaturedKeyPath(), featuredBody)
   );
 
   // ── category/{categoryKey}/items.json ────────────────────────────────────────
@@ -354,9 +352,7 @@ export async function exportRankingItemsPerUrl(
       ...(topics ? { topics } : {}),
     });
     uploads.push(
-      saveToR2(categoryItemsKeyPath(categoryKey), body, {
-        contentType: 'application/json; charset=utf-8',
-      })
+      writeR2Staging(categoryItemsKeyPath(categoryKey), body)
     );
   }
 
@@ -387,9 +383,7 @@ export async function exportRankingItemsPerUrl(
       item: { ...item, attribution },
     });
     uploads.push(
-      saveToR2(rankingItemKeyPath(rankingKey), body, {
-        contentType: 'application/json; charset=utf-8',
-      })
+      writeR2Staging(rankingItemKeyPath(rankingKey), body)
     );
   }
 
@@ -403,9 +397,7 @@ export async function exportRankingItemsPerUrl(
       )
     );
     uploads.push(
-      saveToR2(surveyItemsKeyPath(surveyId), body, {
-        contentType: 'application/json; charset=utf-8',
-      })
+      writeR2Staging(surveyItemsKeyPath(surveyId), body)
     );
   }
 

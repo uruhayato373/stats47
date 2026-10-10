@@ -1,5 +1,5 @@
 import { listAllMetrics } from "@stats47/data-configs";
-import { fetchFromR2AsJson, saveToR2 } from "@stats47/r2-storage/server";
+import { fetchFromR2AsJson, writeR2Staging } from "@stats47/r2-storage/server";
 
 import { rankingItemKeyPath } from "../types/snapshot";
 
@@ -26,7 +26,7 @@ import type { RankingItem } from "../types/ranking-item";
  *   master が更新後の categoryKey/title で category items.json を再グループ化するため。
  *
  * 完全DBレス (docs/01_技術設計/19)。読みは公開 URL 経由可、
- * 書き (saveToR2) は CI 専用ガード (`_assert-ci-write.ts`) の下でのみ通る。
+ * 書きは `.local/r2` の staging (writeR2Staging) までで、R2 への反映は後段の push が行う。
  */
 
 /** item.json のラッパ構造 (`{ generatedAt, item }`)。 */
@@ -150,9 +150,7 @@ export async function refreshRankingItemMetadata(
           },
         });
         uploads.push(
-          saveToR2(keyPath, body, {
-            contentType: "application/json; charset=utf-8",
-          }),
+          writeR2Staging(keyPath, body),
         );
       }),
     );

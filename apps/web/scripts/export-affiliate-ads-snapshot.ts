@@ -11,7 +11,7 @@
 
 import dotenv from "dotenv";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 import {
   AFFILIATE_VERTICALS,
@@ -148,9 +148,7 @@ async function main() {
   };
 
   const body = JSON.stringify(snapshot);
-  const result = await saveToR2(AFFILIATE_ADS_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  const result = await writeR2Staging(AFFILIATE_ADS_SNAPSHOT_KEY, body);
 
   console.log(`✅ affiliate-ads: ads=${AFFILIATE_ADS.length} bytes=${result.size}`);
 }

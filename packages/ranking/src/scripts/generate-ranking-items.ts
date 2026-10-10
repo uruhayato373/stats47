@@ -32,7 +32,7 @@ import {
   carryTimestamp,
   latestTimestamp,
   readPublishedSnapshot,
-  saveToR2,
+  writeR2Staging,
 } from '@stats47/r2-storage/server';
 import { isKsjPublicStructuredOutputBlocked } from '@stats47/r2-storage/tooling';
 import { readStatsValues } from '@stats47/stats-r2/readers';
@@ -257,9 +257,7 @@ async function main() {
       mkdirSync(dirname(target), { recursive: true });
       writeFileSync(target, body);
     } else if (!args.dryRun) {
-      await saveToR2(rankingItemKeyPath(item.rankingKey), body, {
-        contentType: 'application/json; charset=utf-8',
-      });
+      await writeR2Staging(rankingItemKeyPath(item.rankingKey), body);
     }
     written++;
   });
@@ -313,9 +311,7 @@ async function main() {
     mkdirSync(dirname(target), { recursive: true });
     writeFileSync(target, allBody);
   } else if (!args.dryRun) {
-    await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, allBody, {
-      contentType: 'application/json; charset=utf-8',
-    });
+    await writeR2Staging(RANKING_ITEMS_SNAPSHOT_KEY, allBody);
   }
   const active = inventory.filter((it) => it.isActive).length;
   console.log(

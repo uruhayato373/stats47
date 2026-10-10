@@ -275,10 +275,10 @@ Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<
 
 ```typescript
 // ❌ app/ プレフィックスなし（旧形式）
-saveToR2("ranking-items/all.json", ...);
-saveToR2("surveys/all.json", ...);
-saveToR2("area-profile/47000.json", ...);
-saveToR2("ranking/key/values.json", ...);
+writeR2Staging("ranking-items/all.json", ...);
+writeR2Staging("surveys/all.json", ...);
+writeR2Staging("area-profile/47000.json", ...);
+writeR2Staging("ranking/key/values.json", ...);
 
 // ❌ module-level メモリキャッシュ
 let cached: RankingItem[] | null = null;
@@ -292,14 +292,14 @@ async function loadAll() {
 const rows = await db.select().from(statsPrefecture).where(...);
 
 // ❌ stats 観測値を独自スキーマで R2 化 (app/stats namespace を使う)
-saveToR2("metrics/japanese-population/data.json", ...);
-saveToR2("observations/<metric>.json", ...);
+writeR2Staging("metrics/japanese-population/data.json", ...);
+writeR2Staging("observations/<metric>.json", ...);
 
 // ✅ app/ プレフィックス付き URL 対応パス
-saveToR2("app/category/medical/items.json", ...);
-saveToR2("app/survey/all.json", ...);
-saveToR2("app/areas/47000/profile.json", ...);
-saveToR2("app/ranking/key/values.json", ...);
+writeR2Staging("app/category/medical/items.json", ...);
+writeR2Staging("app/survey/all.json", ...);
+writeR2Staging("app/areas/47000/profile.json", ...);
+writeR2Staging("app/ranking/key/values.json", ...);
 
 // ✅ キャッシュなし・直接 fetch
 async function readCategoryItemsFromR2(categoryKey: string) {

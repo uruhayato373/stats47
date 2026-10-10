@@ -2,7 +2,7 @@ import "server-only";
 
 import { getMetricConfig, getMetricMeta, listMetricKeysByEntity, yearInSpec } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 import type { SingleEntityRow } from "@stats47/stats-r2/types";
 
@@ -136,10 +136,9 @@ export async function exportCityProfileSnapshot(): Promise<ExportCityProfileSnap
           strengths,
           weaknesses: [],
         };
-        const result = await saveToR2(
+        const result = await writeR2Staging(
           cityProfileKeyPath(prefCode, cityCode),
           JSON.stringify(profile),
-          { contentType: "application/json; charset=utf-8" },
         );
         totalSizeBytes += result.size;
         rowCount += cityRows.length;

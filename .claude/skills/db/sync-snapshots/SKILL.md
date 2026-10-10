@@ -119,7 +119,7 @@ CI 配線は `npm run test:workflow-commit-back`。
 
 ### ranking-items → master の read-after-write 境界
 
-`saveToR2` は remote へ即時保存せず `.local/r2` へ staging する一方、metadata refresh と master は
+`writeR2Staging` は remote へ即時保存せず `.local/r2` へ staging する一方、metadata refresh と master は
 remote R2 を読む。2026-08-27 の full refresh では、ranking-items が正しく生成した4件の最新年を
 master が旧 remote item で上書きした。このため `run.sh` は ranking-items 成功直後に
 `diff-push-r2 --prefix app/ranking` を実行し、CI reader は公開CDNよりS3を優先する。

@@ -45,7 +45,7 @@ import {
   findExpectedEmpty,
 } from "@stats47/data-configs";
 import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
-import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
+import { assertR2WriteAllowed, writeR2Staging } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import { resolveDenominator } from "../services/normalize-core";
@@ -223,10 +223,9 @@ async function generateOne(
       }
 
       if (!dryRun) {
-        await saveToR2(
+        await writeR2Staging(
           rankingNormalizedValuesKeyPath(config.key, normType),
           JSON.stringify(snapshot),
-          { contentType: "application/json; charset=utf-8" },
         );
       }
       writtenTypes.push(normType);
@@ -259,9 +258,7 @@ async function generateOne(
       series: series.filter((s) => s.points.length > 0),
     };
     if (!dryRun) {
-      await saveToR2(rankingNationalTrendPath(config.key), JSON.stringify(trend), {
-        contentType: "application/json; charset=utf-8",
-      });
+      await writeR2Staging(rankingNationalTrendPath(config.key), JSON.stringify(trend));
     }
 
     return {

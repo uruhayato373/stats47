@@ -24,14 +24,14 @@ function hasSchedule(onValue) {
 }
 
 /**
- * saveToR2 を import しているスクリプトの相対パスを集める。
+ * writeR2Staging を import しているスクリプトの相対パスを集める。
  *
  * ★リストをハードコードしない。新しい writer が増えたとき更新を忘れて検査が素通りするため、
  *   実ファイルを走査して都度求める (対象は workflow が実行しうる scripts ディレクトリのみ)。
  */
-let saveToR2ScriptsCache = null;
-function collectSaveToR2Scripts() {
-  if (saveToR2ScriptsCache) return saveToR2ScriptsCache;
+let writeR2StagingScriptsCache = null;
+function collectWriteR2StagingScripts() {
+  if (writeR2StagingScriptsCache) return writeR2StagingScriptsCache;
   const roots = [
     path.join(ROOT, 'apps/web/scripts'),
     path.join(ROOT, '.claude/scripts'),
@@ -60,15 +60,15 @@ function collectSaveToR2Scripts() {
       } catch {
         continue;
       }
-      // saveToR2 を import して呼ぶファイルだけを writer とみなす
-      // (定義元 packages/r2-storage/src/lib/operations/save.ts は import しないので除外される)
-      if (/\bsaveToR2\b/.test(src) && /from\s+["'][^"']*r2-storage/.test(src)) {
+      // writeR2Staging を import して呼ぶファイルだけを writer とみなす
+      // (定義元 packages/r2-storage/src/lib/operations/write-staging.ts は import しないので除外される)
+      if (/\bwriteR2Staging\b/.test(src) && /from\s+["'][^"']*r2-storage/.test(src)) {
         out.push(path.relative(ROOT, full).split(path.sep).join('/'));
       }
     }
   };
   for (const r of roots) walk(r);
-  saveToR2ScriptsCache = out;
+  writeR2StagingScriptsCache = out;
   return out;
 }
 
@@ -504,12 +504,12 @@ function auditFile(file) {
     }
   }
 
-  // R2_WRITE_WITHOUT_PUSH: saveToR2 は **.local/r2/ に書くだけ**で、実 R2 への反映は
+  // R2_WRITE_WITHOUT_PUSH: writeR2Staging は **.local/r2/ に書くだけ**で、実 R2 への反映は
   // diff-push-r2.ts (S3 API) が行う 2 段構成。push 段を書き忘れると workflow は success する
   // のに本番へ何も届かない (2026-08-04 の sync-rakuten-catalog で実発生。公開 URL を
-  // 叩くまで気づけなかった)。saveToR2 を使うスクリプトを実行する step があるなら、
+  // 叩くまで気づけなかった)。writeR2Staging を使うスクリプトを実行する step があるなら、
   // 同じ job に push 段 (diff-push-r2 / push-generated-image-set / sync-snapshots の run.sh) が要る。
-  const R2_WRITER_SCRIPTS = collectSaveToR2Scripts();
+  const R2_WRITER_SCRIPTS = collectWriteR2StagingScripts();
   if (R2_WRITER_SCRIPTS.length > 0) {
     for (const [jobId, job] of Object.entries(jobs)) {
       if (!job || typeof job !== 'object' || !Array.isArray(job.steps)) continue;
@@ -524,16 +524,16 @@ function auditFile(file) {
         .map((s) => (typeof s?.run === 'string' ? stripShellComments(s.run) : ''))
         .join('\n');
       if (!runs) continue;
-      const writesViaSaveToR2 = R2_WRITER_SCRIPTS.some((rel) =>
+      const writesViaWriteR2Staging = R2_WRITER_SCRIPTS.some((rel) =>
         runs.split(/[\n;&|]/).some((line) => {
           if (!line.includes(rel)) return false;
-          // This generator's explicit staging mode never calls saveToR2 and is used for PR artifacts.
+          // This generator's explicit staging mode never calls writeR2Staging and is used for PR artifacts.
           const localMetricStage = rel === 'packages/ranking/src/scripts/generate-ranking-items.ts' &&
             /\s--stage-dir\s+\.local\/r2(?:\s|$)/.test(line);
           return !localMetricStage;
         })
       );
-      if (!writesViaSaveToR2) continue;
+      if (!writesViaWriteR2Staging) continue;
       const hasPush =
         runs.includes('diff-push-r2') ||
         runs.includes('push-generated-image-set') ||
@@ -543,7 +543,7 @@ function auditFile(file) {
         findings.push({
           code: 'R2_WRITE_WITHOUT_PUSH',
           file: relative,
-          message: `job ${jobId}: saveToR2 を使うスクリプトを実行しているが push 段 (diff-push-r2 等) が無い。.local/r2 に書くだけで本番に届かない`,
+          message: `job ${jobId}: writeR2Staging を使うスクリプトを実行しているが push 段 (diff-push-r2 等) が無い。.local/r2 に書くだけで本番に届かない`,
         });
       }
     }

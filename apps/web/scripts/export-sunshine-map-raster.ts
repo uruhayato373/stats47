@@ -20,7 +20,7 @@
 import fs from "node:fs";
 import sharp from "sharp";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { writeR2Staging } from "@stats47/r2-storage/server";
 
 const INPUT = "/tmp/g02-sunshine-all.json";
 const RASTER_KEY = "app/gis-cross/sunshine-map/raster.png";
@@ -146,7 +146,7 @@ async function main(): Promise<void> {
     .png({ compressionLevel: 9 })
     .toBuffer();
 
-  await saveToR2(RASTER_KEY, png, { contentType: "image/png" });
+  await writeR2Staging(RASTER_KEY, png);
 
   const vals = meshes.map((m) => m[1]).sort((a, b) => a - b);
   const meta = {
@@ -170,9 +170,7 @@ async function main(): Promise<void> {
       highHours: COLOR_MAX / 10,
     },
   };
-  await saveToR2(META_KEY, JSON.stringify(meta), {
-    contentType: "application/json; charset=utf-8",
-  });
+  await writeR2Staging(META_KEY, JSON.stringify(meta));
 
   console.log(`✅ 完了`);
   console.log(`   raster.png: ${(png.length / 1024).toFixed(0)}KB (描画メッシュ ${painted.toLocaleString()})`);

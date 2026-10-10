@@ -12,12 +12,12 @@ vi.mock('@stats47/logger/server', () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
 }));
 
-// ── R2: saveToR2 は呼び出しを記録、fetch は all.json メタを返す ──────────────────
+// ── R2: writeR2Staging は呼び出しを記録、fetch は all.json メタを返す ──────────────────
 const saved = new Map<string, string>();
 const fetchFromR2AsJsonMock = vi.fn();
 vi.mock('@stats47/r2-storage/server', () => ({
   assertR2WriteAllowed: vi.fn(),
-  saveToR2: vi.fn(async (key: string, body: string) => {
+  writeR2Staging: vi.fn(async (key: string, body: string) => {
     saved.set(key, body);
     return { key, size: body.length };
   }),
