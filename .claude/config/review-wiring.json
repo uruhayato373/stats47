@@ -18,6 +18,9 @@
       "dir": "data/reviews/weekly",
       "periodPattern": "^(\\d{4}-W\\d{2})\\.md$",
       "contractFrom": "2026-W40",
+      "_dueComment": "金曜 (fetch-metrics-weekly) に前週 (月〜日) を計測し、土曜にレビューする (2026-10-10 オーナー決定・doboku-note と同じ曜日)。dueWeekday は getUTCDay の値 (6 = 土曜) で、週 X のレビューは翌週の土曜に必須になる。graceDays の間 (土曜当日) は催促 (warn) だけで、毎朝のガードは日曜から Issue にする",
+      "dueWeekday": 6,
+      "graceDays": 1,
       "requiredSections": [
         "サマリー",
         "計画 vs 実績",
@@ -219,7 +222,9 @@
     "weekly": {
       "label": "週次計画",
       "file": ".claude/todo/weekly.md",
-      "command": "/weekly-plan"
+      "command": "/weekly-plan",
+      "_earliestComment": "earliestWeekday 以降は来週分の計画を先に書いてよい (6 = 土曜。土曜のレビューと同じ日に来週の計画を書く)。今週分は月曜から必須",
+      "earliestWeekday": 6
     },
     "monthly": {
       "label": "月次計画",

@@ -15,6 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
+import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../management/lib/review-cadence.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -230,9 +231,14 @@ export function auditOperationsCycle({
   const snapshotWeeks = listIsoWeeks(paths.snapshots);
   const measurementWeek = week ?? snapshotWeeks.at(-1) ?? null;
   const expectedCompletedWeek = completedIsoWeek(now);
+  // 計測週のレビューの申し送りを拾う計画の週。曜日の運用 (金曜計測・土曜にレビューと来週の計画) は
+  // review-wiring.json が正本で、レビューの期限検査と同じ関数で決める (土曜運用では計測週の 2 週先)。
+  const wiring = loadWiring(fs.existsSync(path.join(root, WIRING_PATH)) ? root : PROJECT_ROOT);
   const expectedPlanWeek = measurementWeek
-    ? addIsoWeeks(measurementWeek, 1)
+    ? handoffPlanWeek(measurementWeek, wiring)
     : null;
+  // レビューと候補判断を行う週 (計測週の翌週。土曜運用ではその週の土曜にレビューする)
+  const reviewWeek = measurementWeek ? addIsoWeeks(measurementWeek, 1) : null;
   const currentMonth = monthInTokyo(now);
 
   if (!measurementWeek) {
@@ -339,7 +345,7 @@ export function auditOperationsCycle({
   const candidateDoc = readJson(paths.candidates);
   const candidateGeneratedAge = ageDays(candidateDoc?.generatedAt, now);
   const validCandidateWeeks = new Set(
-    [measurementWeek, expectedPlanWeek].filter(Boolean)
+    [measurementWeek, reviewWeek, expectedPlanWeek].filter(Boolean)
   );
   const candidateFresh =
     validCandidateWeeks.has(candidateDoc?.week) &&
@@ -377,7 +383,7 @@ export function auditOperationsCycle({
   );
 
   const validDecisionWeeks = new Set(
-    [measurementWeek, expectedPlanWeek].filter(Boolean)
+    [measurementWeek, reviewWeek, expectedPlanWeek].filter(Boolean)
   );
   const decisions = (candidateDoc?.candidates ?? []).filter((candidate) =>
     validDecisionWeeks.has(decisionWeek(candidate))

@@ -1,67 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-05-18T12:36:00.000Z",
+  "updated_at": "2026-10-10T00:00:00.000Z",
   "triggers": [
-    {
-      "id": "trig_01QBPsFMqaxHdfaSqsjuzCDW",
-      "name": "stats47 weekly PDCA",
-      "cron": "3 0 * * 1",
-      "cron_note": "毎週月曜 0:03 UTC = 9:03 JST（ジッターで 9:10 頃発火）",
-      "created_at": "2026-04-17T11:14:43.523972Z",
-      "purpose": "毎週 /weekly-review（前週）→ /weekly-plan（今週）を自動実行し PR を develop に作成",
-      "repo": "https://github.com/uruhayato373/stats47",
-      "model": "claude-sonnet-4-6",
-      "notes": [
-        "session_context.persist_session=false なので毎回新規セッション",
-        "認証鍵 stats47-*.json が実行環境にない場合、metrics-reader は失敗するが skill はメトリクス抜きで続行する",
-        "停止するときは RemoteTrigger({action: 'update', trigger_id, body: {enabled: false}})"
-      ]
-    },
-    {
-      "id": "trig_01RaPLqZrP4i7wAnCzQjifWJ",
-      "name": "stats47 daily trend pipeline",
-      "cron": "0 0 * * *",
-      "cron_note": "毎日 0:00 UTC = 9:00 JST (ジッターで 9:08 頃発火)。launchd の discover-trends (07:23 JST) 完了後に走る設計 (Phase 3)",
-      "created_at": "2026-05-18T12:30:33.916Z",
-      "purpose": "Phase 3: discover-trends → plan-blog-trends → draft-from-trend → PR 起票 を半自動化。GATE 1 = 人手 PR レビュー 1 回 (~15 min)、月 5-7 本ペース上限",
-      "repo": "https://github.com/uruhayato373/stats47",
-      "model": "claude-opus-4-7",
-      "enabled": true,
-      "environment_id": "env_01DyBoX8qdC86ZEdncmFwqx6",
-      "anthropic_registration_status": "registered",
-      "notes": [
-        "2026-05-18: /schedule skill 経由で Anthropic Cloud 登録成功 (trig_01RaPLqZrP4i7wAnCzQjifWJ)。初回発火 2026-05-19 09:08 JST。",
-        "実装スキル: /discover-trends (launchd 07:23 既存) → /plan-blog-trends → /draft-from-trend → gh pr create",
-        "下書き品質 < quality_score 70 は warning 表示のみ、close は人手 GATE 1",
-        "ラベル `trend-auto` は事前 `gh label create trend-auto --color 00CED1 --description \"トレンド記事自動生成 PR\"` で作成済",
-        "関連 plan: .claude/todo/improvements.md Phase 3",
-        "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01RaPLqZrP4i7wAnCzQjifWJ', body: {enabled: false}})",
-        "詳細確認: https://claude.ai/code/routines/trig_01RaPLqZrP4i7wAnCzQjifWJ"
-      ]
-    },
-    {
-      "id": "trig_01J26XQsDbdBM3ggTQ8gcBta",
-      "name": "stats47 weekly CWV PR",
-      "cron": "0 1 * * 1",
-      "cron_note": "毎週月曜 1:00 UTC = 10:00 JST (ジッターで 10:03 頃発火)。最新 [PSI Alert] Issue から違反 URL 1 件取得 → LCP 改修案 draft PR 起票",
-      "created_at": "2026-05-18T12:35:56.109Z",
-      "purpose": "Sprint 5: PSI alert → suggest-cwv-candidates → LCP 改修案 (Claude セッション推論) → draft PR 起票。週 1 本ペース、GATE 1 = 人手 PR レビュー必須",
-      "repo": "https://github.com/uruhayato373/stats47",
-      "model": "claude-opus-4-7",
-      "enabled": true,
-      "environment_id": "env_01DyBoX8qdC86ZEdncmFwqx6",
-      "anthropic_registration_status": "registered",
-      "notes": [
-        "2026-05-18: cwv-improvement-pr-weekly.yml (GitHub Actions + @anthropic-ai/sdk + GitHub Secrets ANTHROPIC_API_KEY) を廃止して Routine 化。API key 不要、Anthropic billing 内で完結",
-        "実装: PSI Alert Issue 抽出 → suggest-cwv-candidates.mjs (--format json) → Edit ツール直編集 → gh pr create",
-        "scope: LCP / dynamic import のみ (CLS/FCP は次フェーズ)",
-        "ラベル `cwv-auto` は既存 (FFD700)",
-        "関連 plan: .claude/todo/improvements.md Sprint 5",
-        "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01J26XQsDbdBM3ggTQ8gcBta', body: {enabled: false}})",
-        "詳細確認: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta",
-        "ローカル開発用に .claude/scripts/psi/generate-cwv-pr.mjs (ANTHROPIC_API_KEY 必要) は残存 — 通常使用は Routine 経由"
-      ]
-    },
     {
       "id": "PENDING-MANUAL-REGISTRATION",
       "name": "stats47 daily blog conformance",
@@ -81,5 +21,6 @@
         "2026-09-24: 3か月以上未登録・無効のまま。前提の .claude/scripts/blog/select-conformance-candidates.mjs は SCRIPT-ORPHAN-DELETE-01 で削除した。再開する場合は git 履歴から復元する。"
       ]
     }
-  ]
+  ],
+  "note": "2026-10-10: 週次 PDCA・日次トレンド・週次 CWV の 3 ルーティンは RemoteTrigger API で 404 (登録が無い) と確認して記録から外した。週次レビューは土曜に人が /weekly-review を起動する運用 (.claude/config/review-wiring.json)。"
 }

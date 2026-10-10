@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 
 import { appendRun } from "../../metrics/record-monthly-job.mjs";
-import { classifyRoute, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
+import { classifyRoute, handoffPlanWeek, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
 
 // 実リポジトリの state に依存しないよう、配線の正本と台帳を持つ小さなリポジトリを毎回組み立てる。
 const WEEKLY_SECTIONS = ["サマリー", "計画 vs 実績", "来週への申し送り"];
@@ -22,7 +22,7 @@ function review(sections, handoffHeading, handoffLines) {
     .join("\n");
 }
 
-function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan = "2026-10", skillText, improvements = "", ledger } = {}) {
+function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan = "2026-10", skillText, improvements = "", ledger, weeklyConf = {}, planConf = {} } = {}) {
   const root = mkdtempSync(join(tmpdir(), "review-cadence-"));
   write(
     root,
@@ -43,6 +43,7 @@ function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan
             { label: "契約検査", run: "node tools/check.mjs" },
             { label: "計画", read: "plans/weekly.md" },
           ],
+          ...weeklyConf,
         },
         monthly: {
           label: "月次レビュー",
@@ -58,7 +59,7 @@ function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan
         },
       },
       plans: {
-        weekly: { label: "週次計画", file: "plans/weekly.md", command: "/weekly-plan" },
+        weekly: { label: "週次計画", file: "plans/weekly.md", command: "/weekly-plan", ...planConf },
         monthly: { label: "月次計画", file: "plans/monthly.md", command: "/monthly-plan", dueDay: 3 },
       },
     }),
@@ -93,6 +94,51 @@ test("週次レビューは週が終わった翌日 (月曜) から必須にな�
   const monday = reviewCadence(root, at("2026-10-12"));
   assert.deepEqual(monday.status.find((s) => s.kind === "weekly-review").missing, ["2026-W41"]);
   assert.ok(codes(monday, "error").includes("review-missing"));
+});
+
+// 2026-10-10 からの本番の設定: 金曜に前週を計測し、土曜にレビューと来週の計画を書く
+const SATURDAY = { weeklyConf: { dueWeekday: 6, graceDays: 1 }, planConf: { earliestWeekday: 6 } };
+
+test("土曜期限: 週 X のレビューは翌週の土曜から求め、土曜当日は催促 (warn)、日曜から error にする", () => {
+  const root = fixture({ ...SATURDAY, weeks: { "2026-W39": okWeek(), "2026-W40": okWeek() }, months: { "2026-09": okMonth }, weeklyPlan: "2026-W42" });
+  // 2026-10-12 (月)〜10-16 (金): W41 は終わっているが計測 (金曜) 前なので、期限はまだ W40
+  for (const date of ["2026-10-12", "2026-10-16"]) {
+    const r = reviewCadence(root, at(date));
+    assert.equal(r.reviewDueWeek, "2026-W40", date);
+    assert.deepEqual(r.status.find((s) => s.kind === "weekly-review").missing, [], date);
+  }
+  // 10-17 (土): W41 が期限。当日はガードが Issue にしない warn
+  const saturday = reviewCadence(root, at("2026-10-17"));
+  assert.equal(saturday.reviewDueWeek, "2026-W41");
+  assert.deepEqual(saturday.status.find((s) => s.kind === "weekly-review").missing, ["2026-W41"]);
+  assert.deepEqual(codes(saturday, "error").filter((c) => c.startsWith("review")), []);
+  assert.ok(codes(saturday, "warn").includes("review-due"));
+  // 10-18 (日): 猶予を過ぎたので error
+  const sunday = reviewCadence(root, at("2026-10-18"));
+  assert.ok(codes(sunday, "error").includes("review-missing"));
+  // 期限が来る前の回は「期限前」、期限後に無ければ「未実施」
+  assert.equal(reviewRun(root, "weekly", "2026-W41", at("2026-10-12")).verdict, "upcoming");
+  assert.equal(reviewRun(root, "weekly", "2026-W41", at("2026-10-18")).verdict, "missing");
+});
+
+test("土曜期限: 来週の計画は土曜から先に書いてよく、金曜までは今週分だけを認める", () => {
+  const ahead = fixture({ ...SATURDAY, weeks: { "2026-W40": okWeek() }, weeklyPlan: "2026-W43" });
+  assert.equal(reviewCadence(ahead, at("2026-10-16")).status.find((s) => s.kind === "weekly-plan").ok, false);
+  for (const date of ["2026-10-17", "2026-10-18"]) {
+    assert.ok(reviewCadence(ahead, at(date)).status.find((s) => s.kind === "weekly-plan").ok, date);
+  }
+  // 今週分のままでも週末は欠落にしない (来週分は月曜から必須)
+  const current = fixture({ ...SATURDAY, weeks: { "2026-W40": okWeek() }, weeklyPlan: "2026-W42" });
+  assert.ok(reviewCadence(current, at("2026-10-17")).status.find((s) => s.kind === "weekly-plan").ok);
+  assert.equal(reviewCadence(current, at("2026-10-19")).status.find((s) => s.kind === "weekly-plan").ok, false);
+});
+
+test("申し送りを拾う計画の週: 土曜にレビューと計画を書く運用は 2 週先、月曜の運用は翌週", () => {
+  const wiring = (weekly, plans) => ({ cadences: { weekly }, plans: { weekly: plans } });
+  assert.equal(handoffPlanWeek("2026-W41", wiring({ dueWeekday: 6 }, { earliestWeekday: 6 })), "2026-W43");
+  assert.equal(handoffPlanWeek("2026-W41", wiring({}, {})), "2026-W42");
+  // 年をまたぐ週
+  assert.equal(handoffPlanWeek("2026-W52", wiring({ dueWeekday: 6 }, { earliestWeekday: 6 })), "2027-W01");
 });
 
 test("月次レビューは dueDay (3 日) から前月分を必須にし、それより前は次の期限だけを出す", () => {

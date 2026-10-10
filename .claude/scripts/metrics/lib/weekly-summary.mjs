@@ -451,7 +451,7 @@ export function renderGa4Latest({ summary, legacyRows, week }) {
     lines.push(`| Sessions | ${latest.sessions} | ${latest.basis} |`);
     lines.push(`| Pageviews | ${latest.pageviews} | ${latest.basis} |`);
     lines.push("");
-    lines.push("> basis=jp-calendar-week は Japan-only カレンダー週 (日曜実行時は末日未確定)、");
+    lines.push("> basis=jp-calendar-week は Japan-only カレンダー週 (2026-10-10 以前の日曜実行分は末日未確定。金曜に前週を取る現行は確定済み)、");
     lines.push("> basis=raw-rolling28d は無フィルタ 28 日合計 (overseas/(not set) 汚染あり)。KPI は上段の確定7日を使う。");
   } else {
     lines.push("_legacy 履歴なし_");

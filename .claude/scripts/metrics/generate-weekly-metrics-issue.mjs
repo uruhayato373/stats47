@@ -385,7 +385,7 @@ function cycleSection(week) {
     const md = readFileSync(join(dir, "LATEST.md"), "utf-8").split("\n").slice(1).join("\n").trim();
     lines.push(md);
   } else {
-    lines.push(`⚠️ ${week} の計測 state が未生成（最新: ${cycle?.week ?? "なし"}）。日曜の fetch-metrics-weekly の「Build measurement cycle state」を確認する。`);
+    lines.push(`⚠️ ${week} の計測 state が未生成（最新: ${cycle?.week ?? "なし"}）。金曜の fetch-metrics-weekly の「Build measurement cycle state」を確認する。`);
   }
   lines.push("");
   let triage = null;

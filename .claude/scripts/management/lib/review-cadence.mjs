@@ -9,9 +9,10 @@
  *   - 管理画面 /strategy/reviews/{weekly,monthly} と週次メトリクス Issue の「サイクルの健全性」節
  *
  * 判定の考え方 (doboku-note の移植。2026-10-01):
- *   - 週次レビュー: 完了した週 (日曜まで) ごとに 1 本。今日が日曜なら今週はまだ対象外
+ *   - 週次レビュー: 完了した週 (日曜まで) ごとに 1 本。週 X のレビューは翌週の dueWeekday (正本の weekly) に必須になり、
+ *     期限日から graceDays の間は催促 (warn) に留める。2026-10-10 から金曜に前週を計測し土曜に書く (dueWeekday 6)
  *   - 月次レビュー: 毎月 dueDay 日から前月分を必須にする
- *   - 計画: 週次は今週分 (日曜は来週分の先行作成も可)、月次は dueDay 日から今月分
+ *   - 計画: 週次は今週分 (plans.weekly.earliestWeekday 以降は来週分の先行作成も可)、月次は dueDay 日から今月分
  *   - 契約: contractFrom 以降のレビューだけ、必須見出しと申し送りの振り分け (→ 振り分け: <行き先>) を検査する。
  *     行き先のカード ID の実在は最新のレビューだけで見る (古いレビューの行き先は完了して消えるのが正常)
  */
@@ -75,6 +76,39 @@ export function calendar(day) {
     dayOfMonth: day.getUTCDate(),
     monthStart: addMonths(day, 0),
   };
+}
+
+/** 月曜=0〜日曜=6 の曜日 (getUTCDay は日曜=0) */
+const mondayOffset = (jsWeekday) => (jsWeekday + 6) % 7;
+const mondayOf = (day) => addDays(day, -mondayOffset(day.getUTCDay()));
+
+/**
+ * 週次レビューの期限。週 X のレビューは翌週の dueWeekday (getUTCDay の値。既定 1 = 月曜) に必須になる。
+ * 期限日から graceDays 日の間 (既定 0) は、期限の週が欠けていても催促 (warn) に留める。
+ * @returns {{week: string, lastSunday: Date, dueDate: Date, inGrace: boolean}} week は今日の時点で期限が来ている最新の週
+ */
+export function weeklyDue(day, conf = {}) {
+  const monday = mondayOf(day);
+  const thisWeekDue = addDays(monday, mondayOffset(conf.dueWeekday ?? 1));
+  const reached = day >= thisWeekDue;
+  const dueDate = reached ? thisWeekDue : addDays(thisWeekDue, -7);
+  const lastSunday = addDays(monday, reached ? -1 : -8);
+  return { week: isoWeekLabel(lastSunday), lastSunday, dueDate, inGrace: day < addDays(dueDate, conf.graceDays ?? 0) };
+}
+
+/** 来週の週次計画を先に書いてよい曜日に達したか (plans.weekly.earliestWeekday。既定 0 = 日曜) */
+function planAheadAllowed(day, planConf = {}) {
+  return mondayOffset(day.getUTCDay()) >= mondayOffset(planConf.earliestWeekday ?? 0);
+}
+
+/**
+ * 週 X のレビューの申し送りを拾う週次計画の週。期限日に来週の計画を先に書ける運用 (土曜にレビューと計画) なら
+ * 期限日の翌週、そうでなければ期限日の週 (月曜にレビューしてその週の計画を書く運用)。
+ * GSC 運用サイクルの監査 (audit-operations-cycle.mjs) も同じ関数で「計測週 → 次の計画」を決める。
+ */
+export function handoffPlanWeek(week, wiring) {
+  const dueDate = addDays(new Date(`${weekRange(week).end}T00:00:00Z`), 1 + mondayOffset(wiring.cadences.weekly.dueWeekday ?? 1));
+  return isoWeekLabel(addDays(dueDate, planAheadAllowed(dueDate, wiring.plans.weekly) ? 7 : 0));
 }
 
 // ---------- 読み込み ----------
@@ -230,12 +264,12 @@ export function checkWiring(root, wiring) {
 
 // ---------- 期限 ----------
 
-function weeklyExpected(cal, reviews) {
+function weeklyExpected(due, reviews) {
   const present = new Set(reviews.map((r) => r.period));
   if (present.size === 0) return [];
   const earliest = [...present].sort()[0];
   const want = [];
-  for (let i = 0; i < LOOKBACK_WEEKS; i++) want.push(isoWeekLabel(addDays(cal.lastSunday, -7 * i)));
+  for (let i = 0; i < LOOKBACK_WEEKS; i++) want.push(isoWeekLabel(addDays(due.lastSunday, -7 * i)));
   return [...new Set(want)].filter((w) => w >= earliest && !present.has(w)).sort();
 }
 
@@ -284,7 +318,9 @@ function monthlyJobFindings(root, wiring, cal) {
 
 export function reviewCadence(root, now = new Date()) {
   const wiring = loadWiring(root);
-  const cal = calendar(jstDay(now));
+  const day = jstDay(now);
+  const cal = calendar(day);
+  const due = weeklyDue(day, wiring.cadences.weekly);
   const ids = loadIdIndex(root);
   const marker = wiring.handoffRouting.marker;
   const findings = [];
@@ -294,8 +330,8 @@ export function reviewCadence(root, now = new Date()) {
   for (const [cadence, conf] of Object.entries(wiring.cadences)) {
     const list = listReviews(root, conf);
     reviews[cadence] = list.map((r, i) => checkReview(r, conf, { marker, ids, checkIds: i === 0 }));
-    const missing = cadence === "weekly" ? weeklyExpected(cal, list) : monthlyExpected(cal, list, conf);
-    const expected = cadence === "weekly" ? cal.lastCompletedWeek : cal.dayOfMonth >= conf.dueDay ? cal.previousMonth : null;
+    const missing = cadence === "weekly" ? weeklyExpected(due, list) : monthlyExpected(cal, list, conf);
+    const expected = cadence === "weekly" ? due.week : cal.dayOfMonth >= conf.dueDay ? cal.previousMonth : null;
     status.push({
       kind: `${cadence}-review`,
       label: conf.label,
@@ -307,10 +343,12 @@ export function reviewCadence(root, now = new Date()) {
       ok: missing.length === 0,
     });
     for (const p of missing) {
+      // 期限当日 (graceDays の間) は催促だけ。毎朝のガードは error だけを Issue にするので、期限日の朝に Issue を出さない
+      const dueToday = cadence === "weekly" && p === due.week && due.inGrace;
       findings.push({
-        severity: "error",
-        code: "review-missing",
-        message: `${conf.label} ${p} が無い`,
+        severity: dueToday ? "warn" : "error",
+        code: dueToday ? "review-due" : "review-missing",
+        message: dueToday ? `${conf.label} ${p} の期限は今日 (${ymd(due.dueDate)})` : `${conf.label} ${p} が無い`,
         fix: `${conf.command} ${p} を実行し ${conf.dir}/${p}.md に保存する`,
       });
     }
@@ -342,16 +380,17 @@ export function reviewCadence(root, now = new Date()) {
 
   // 計画
   const weeklyPlanWeek = frontmatterValue(readText(root, wiring.plans.weekly.file), "week");
-  const acceptedWeeks = cal.isSunday ? [cal.currentWeek, cal.nextWeek] : [cal.currentWeek];
+  const planAhead = planAheadAllowed(day, wiring.plans.weekly);
+  const acceptedWeeks = planAhead ? [cal.currentWeek, cal.nextWeek] : [cal.currentWeek];
   const weeklyPlanOk = acceptedWeeks.includes(weeklyPlanWeek);
   status.push({
     kind: "weekly-plan",
     label: wiring.plans.weekly.label,
     command: wiring.plans.weekly.command,
     latest: weeklyPlanWeek,
-    expected: cal.isSunday ? cal.nextWeek : cal.currentWeek,
+    expected: planAhead ? cal.nextWeek : cal.currentWeek,
     nextDue: null,
-    missing: weeklyPlanOk ? [] : [cal.isSunday ? cal.nextWeek : cal.currentWeek],
+    missing: weeklyPlanOk ? [] : [planAhead ? cal.nextWeek : cal.currentWeek],
     ok: weeklyPlanOk,
   });
   const monthlyPlan = wiring.plans.monthly;
@@ -390,7 +429,7 @@ export function reviewCadence(root, now = new Date()) {
     });
   }
 
-  return { ...omitInternal(cal), status, reviews, wiring: wiringRows, findings, marker };
+  return { ...omitInternal(cal), reviewDueWeek: due.week, reviewDueDate: ymd(due.dueDate), status, reviews, wiring: wiringRows, findings, marker };
 }
 
 function omitInternal(cal) {
@@ -401,7 +440,7 @@ function omitInternal(cal) {
 /** 人間向け・Issue 本文用の Markdown */
 export function formatCadence(result) {
   const lines = ["## 週次・月次レビューの状態", ""];
-  lines.push(`今日 ${result.today} / 完了済みの最新週 ${result.lastCompletedWeek} / 今月 ${result.currentMonth}`, "");
+  lines.push(`今日 ${result.today} / 完了済みの最新週 ${result.lastCompletedWeek} / 期限が来ている週次レビュー ${result.reviewDueWeek} (期限 ${result.reviewDueDate}) / 今月 ${result.currentMonth}`, "");
   lines.push("| 対象 | 期待 | 最新 | 状態 |", "|---|---|---|---|");
   for (const s of result.status) {
     const state = s.ok ? (s.nextDue ? `✅ (次の期限 ${s.nextDue})` : "✅") : `⚠️ 欠落 ${s.missing.join(", ")} → \`${s.command}\``;
@@ -414,7 +453,7 @@ export function formatCadence(result) {
     lines.push("✅ 期限・本文の契約・申し送りの振り分け・配線に問題なし。");
     return lines.join("\n");
   }
-  for (const [title, list] of [["要対応", errors], ["注意 (過去のレビュー)", warns]]) {
+  for (const [title, list] of [["要対応", errors], ["注意 (期限当日・過去のレビュー)", warns]]) {
     if (!list.length) continue;
     lines.push(`### ${title} (${list.length})`, "");
     for (const f of list) {
@@ -504,7 +543,7 @@ export function reviewRun(root, cadence, period, now = new Date()) {
   const steps = [];
   if (cadence === "weekly") {
     const ms = weekState(period);
-    steps.push(step("計測", "日曜の fetch-metrics-weekly が計測→記録→改善サイクルの state を作る", ms, ms === "unknown" ? `計測履歴は ${firstMeasured} から` : MEASUREMENT_HISTORY));
+    steps.push(step("計測", "金曜の fetch-metrics-weekly が前週の計測→記録→改善サイクルの state を作る", ms, ms === "unknown" ? `計測履歴は ${firstMeasured} から` : MEASUREMENT_HISTORY));
     steps.push(step("効果判定", "閾値エンジンがその週の施策の効果を判定する", verdictExists(period) ? "done" : "missing", `${VERDICT_DIR}/verdicts-${period}.json`));
   } else {
     const weeks = weeksOfMonth(period);
@@ -543,7 +582,7 @@ export function reviewRun(root, cadence, period, now = new Date()) {
   const plan = wiring.plans[cadence];
   const planText = readText(root, plan.file) ?? "";
   const planPeriod = frontmatterValue(planText, cadence === "weekly" ? "week" : "month");
-  const nextPeriod = cadence === "weekly" ? isoWeekLabel(addDays(new Date(`${range.end}T00:00:00Z`), 1)) : monthLabel(addMonths(new Date(`${period}-01T00:00:00Z`), 1));
+  const nextPeriod = cadence === "weekly" ? handoffPlanWeek(period, wiring) : monthLabel(addMonths(new Date(`${period}-01T00:00:00Z`), 1));
   const routedIds = (check?.handoff ?? []).flatMap((h) => h.routes ?? []).filter((r) => CARD_ID.test(r) || EXP_ID.test(r));
   if (planPeriod !== nextPeriod) {
     steps.push(step("次の計画へ引き継ぎ", `${plan.command} が ${nextPeriod} の計画で申し送りの行き先を拾う`, planPeriod && planPeriod > nextPeriod ? "unknown" : "missing", planPeriod && planPeriod > nextPeriod ? "計画は上書き済みで過去分は判定できない" : `${plan.file} は ${planPeriod ?? "なし"}`));
@@ -555,7 +594,7 @@ export function reviewRun(root, cadence, period, now = new Date()) {
   }
 
   // 期限前の回 (月次は 3 日まで) は未実施ではなく「期限前」
-  const notYetDue = !file && !(statusRow?.missing ?? []).includes(period) && (cadence === "monthly" ? Boolean(statusRow?.nextDue) : period > result.lastCompletedWeek);
+  const notYetDue = !file && !(statusRow?.missing ?? []).includes(period) && (cadence === "monthly" ? Boolean(statusRow?.nextDue) : period > result.reviewDueWeek);
   const verdict = !file ? (notYetDue ? "upcoming" : "missing") : steps.some((s) => s.state === "missing" || s.state === "partial") ? "partial" : "ok";
   const options = [...new Set([period, ...list.map((r) => r.period), ...(statusRow?.missing ?? [])])]
     .sort((a, b) => b.localeCompare(a))
@@ -588,5 +627,5 @@ export function reviewRun(root, cadence, period, now = new Date()) {
 export function defaultRun(root, cadence, now = new Date()) {
   const result = reviewCadence(root, now);
   const s = result.status.find((x) => x.kind === `${cadence}-review`);
-  return s.expected ?? s.latest ?? (cadence === "weekly" ? result.lastCompletedWeek : result.previousMonth);
+  return s.expected ?? s.latest ?? (cadence === "weekly" ? result.reviewDueWeek : result.previousMonth);
 }

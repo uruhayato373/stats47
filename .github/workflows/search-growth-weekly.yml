@@ -19,7 +19,7 @@ on:
     types: [completed]
   workflow_dispatch: {}
   schedule:
-    - cron: "30 12 * * 0" # 日 21:30 JST = 12:30 UTC (weekly fetch 20:00 JST の後)
+    - cron: "0 23 * * 4" # 金 08:00 JST = 木 23:00 UTC (金曜 05:00 の weekly fetch が workflow_run で起動しなかったときの予備)
 
 permissions:
   contents: write

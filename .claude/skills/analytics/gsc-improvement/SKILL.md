@@ -18,7 +18,7 @@ active 一覧と append-only の詳細ログに責務分離して追跡するス
 | 目標しきい値設定 | git: `.claude/config/budgets/gsc-improvement/budgets.json` | プロジェクト設定 |
 | 詳細ログ (agent 用) | git: `data/improvement/gsc-improvement/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
 | 要約 (人間向け) | git: `.claude/todo/improvements.md` | active 施策の ID・要約・status・期日を俯瞰 |
-| 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が日曜 JST 20:00 に自動更新 |
+| 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が金曜 JST 05:00 に前週分を自動更新 |
 | 運用サイクル監査 | `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` | 計測→review→候補判断→plan→月次集約の接続状態 |
 
 ## 引数
@@ -144,7 +144,7 @@ GSC メトリクス取得の優先順:
 - **数値はソース明示** — "snapshots/2026-W17/queries.csv" のような相対パス
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
-- **週次の正典** — 日曜 `fetch-metrics-weekly` がsnapshot+effect verdictを生成し、`/weekly-review`が候補判断を記録、月曜20:30の`gsc-operations-cycle-weekly`が接続を監査する
+- **週次の正典** — 金曜 `fetch-metrics-weekly` が前週のsnapshot+effect verdictを生成し、土曜の`/weekly-review`が候補判断を記録、日曜20:30の`gsc-operations-cycle-weekly`が接続を監査する
 - **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、data/improvement/gsc-improvement/improvement-log.md は判定履歴
 
 ## 参照パターン

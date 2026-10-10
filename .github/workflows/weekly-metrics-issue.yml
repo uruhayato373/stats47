@@ -2,7 +2,7 @@ name: 📊 Weekly Metrics Summary
 
 on:
   schedule:
-    - cron: "0 0 * * 1" # Monday JST 09:00 (UTC Mon 00:00)
+    - cron: "0 9 * * 5" # 金曜 JST 18:00 (UTC 09:00)。金曜の計測 05:00・無人 triage 12:00 の後、土曜のレビューの前
   workflow_dispatch:
     inputs:
       week:
@@ -41,8 +41,9 @@ jobs:
           if [ -n "$INPUT_WEEK" ]; then
             echo "week=$INPUT_WEEK" >> "$GITHUB_OUTPUT"
           else
-            # 月曜朝に回すと「昨日 = 前週の日曜」でその ISO 週を取る
-            WEEK=$(date -u -d "1 day ago" +%G-W%V)
+            # 直近に終わった ISO 週 (月〜日・JST)。金曜に回すと前週 = 金曜の計測が取った週
+            DOW=$(TZ=Asia/Tokyo date +%w)
+            WEEK=$(TZ=Asia/Tokyo date -d "$(( DOW == 0 ? 7 : DOW )) days ago" +%G-W%V)
             echo "week=$WEEK" >> "$GITHUB_OUTPUT"
           fi
 

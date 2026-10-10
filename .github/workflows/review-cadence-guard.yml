@@ -13,7 +13,7 @@ name: 🗓️ Review Cadence Guard (daily)
 
 on:
   schedule:
-    - cron: "30 23 * * *" # 毎日 08:30 JST。月曜は週次メトリクス Issue (09:00) の直前に先週分の欠落を出す
+    - cron: "30 23 * * *" # 毎日 08:30 JST。週次レビューの期限は土曜で、土曜当日は催促 (warn) だけ。日曜の朝から欠落を Issue にする
   workflow_dispatch: {}
 
 permissions:

@@ -2,7 +2,7 @@ name: 🔄 GSC Operations Cycle (weekly)
 
 on:
   schedule:
-    - cron: '30 11 * * 1' # JST Monday 20:30。Sunday 20:00 metrics 後のレビュー猶予を確保
+    - cron: '30 11 * * 0' # JST 日曜 20:30。金曜の計測・土曜のレビューと来週の計画の後 (土曜を丸 1 日の猶予にする)
   workflow_dispatch: {}
 
 permissions:

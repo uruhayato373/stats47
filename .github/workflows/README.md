@@ -18,7 +18,7 @@
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 | Affiliate inventory (`affiliate-dashboard-refresh.yml`) | 毎週日曜21時JST、develop対象push、手動 | 在庫/compliance/配置mapとread-only HTMLをartifact化。git/R2/ASPへ書かない |
 | Affiliate metrics (`affiliate-ga4-weekly.yml`) | 毎週日曜22時JST、手動 | GA4 schema v3、二層portfolio、operations、pilot readinessを生成してartifact化。候補提示までで広告変更・winner・pushをしない |
-| GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週月曜20時30分JST、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
+| GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週日曜20時30分JST (土曜のレビュー・来週の計画の後)、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
 | Visualization Render Golden (`visualization-render-weekly.yml`) | 毎週日曜6時30分JST、手動 | 共有チャート9種をgolden PNGと比較。失敗差分をartifact保存し、PR必須render gateの実行経路も静的契約で監査 |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
 

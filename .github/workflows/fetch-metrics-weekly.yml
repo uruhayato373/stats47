@@ -2,11 +2,14 @@ name: 📈 Fetch weekly metrics (GSC + GA4 + AdSense)
 
 on:
   schedule:
-    - cron: "0 11 * * 0" # JST 20:00 Sunday (UTC 11:00)
+    # 金曜 05:00 JST に前週 (月〜日) を計測し、土曜にレビューする (2026-10-10 オーナー決定)。
+    # 日曜に当週を取ると GSC の取得遅延 (約 3 日) で直近数日が欠け、W40 は 9/30・10/1 が欠落して取り直した。
+    # GitHub の schedule は数時間遅れて発火する (実測で最大 4.5 時間) ので、無人 triage (12:00) まで余裕を置く。
+    - cron: "0 20 * * 4" # JST 05:00 Friday (UTC 20:00 Thursday)
   workflow_dispatch:
     inputs:
       week:
-        description: "ISO week (YYYY-Www). Empty = current week"
+        description: "ISO week (YYYY-Www). Empty = 直近に終わった週 (JST の前の日曜を含む週)"
         required: false
         default: ""
 
@@ -50,10 +53,10 @@ jobs:
           if [ -n "$INPUT_WEEK" ]; then
             echo "week=$INPUT_WEEK" >> "$GITHUB_OUTPUT"
           else
-            # GitHub Actions ubuntu-latest は UTC。JST 20:00 日曜 = UTC 11:00 日曜。
-            # ISO 週は ISO-8601 基準（月曜始まり）。日曜の UTC 時点で前週扱いになる場合があるため、
-            # JST の日曜日でない可能性も考慮する。ここは UTC の date で ISO 週を取る。
-            WEEK=$(date -u +%G-W%V)
+            # 直近に終わった ISO 週 (月〜日・JST)。金曜に走らせると前週になる。
+            # 日曜に手動で走らせても当週 (未完了) ではなく前週を取る。
+            DOW=$(TZ=Asia/Tokyo date +%w)
+            WEEK=$(TZ=Asia/Tokyo date -d "$(( DOW == 0 ? 7 : DOW )) days ago" +%G-W%V)
             echo "week=$WEEK" >> "$GITHUB_OUTPUT"
           fi
           echo "Week: $(cat "$GITHUB_OUTPUT")"
@@ -204,9 +207,9 @@ jobs:
         continue-on-error: true # 台帳更新の失敗で週次計測本体を止めない
         run: node .claude/scripts/lib/write-past-effects.mjs
 
-      # 計測→記録→改善サイクルの週次 state。月曜 06:00 の improvement-cycle-weekly.yml (無人 triage) が
+      # 計測→記録→改善サイクルの週次 state。金曜 12:00 の improvement-cycle-weekly.yml (無人 triage) が
       # 同じスクリプトで作り直し (後から入る SNS を反映)、09:00 の週次メトリクス Issue が読む。
-      # state が作れなくても週次計測本体は commit する。失敗は warning に出し、月曜の
+      # state が作れなくても週次計測本体は commit する。失敗は warning に出し、金曜 12:00 の
       # improvement-cycle-weekly が「state の週が対象週と違う」で止まって improvement-cycle-alert を起票する。
       - name: 🔁 Build measurement cycle state (計測→記録→改善)
         env:
@@ -216,7 +219,7 @@ jobs:
           if bash .claude/scripts/metrics/refresh-measurement-cycle.sh "${{ steps.week.outputs.week }}"; then
             cat data/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "::warning::build-measurement-cycle が失敗した (月曜の improvement-cycle-weekly が週の不一致で止まり alert を出す)"
+            echo "::warning::build-measurement-cycle が失敗した (金曜 12:00 の improvement-cycle-weekly が週の不一致で止まり alert を出す)"
           fi
 
       # コード側 slot 定数 (apps/web/src/lib/google-adsense/constants.ts) と AdSense 側 ad unit の

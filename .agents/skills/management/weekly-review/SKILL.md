@@ -12,7 +12,9 @@ primary_agent: strategy-advisor
 
 ## 引数
 
-`$ARGUMENTS`は`YYYY-Www`。省略時は現在のISO週。未来週は受け付けない。
+`$ARGUMENTS`は`YYYY-Www`。省略時は期限が来ている週 (`node .claude/scripts/management/check-review-cadence.mjs` の「期限が来ている週次レビュー」。土曜からは直前に終わった週)。終わっていない週は受け付けない。
+
+**毎週土曜に実行する** (2026-10-10 オーナー決定)。金曜 05:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、12:00 に無人 triage、18:00 に週次メトリクス Issue が出たあとに書く。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
 
 ## Phase 0: NSM snapshot
 

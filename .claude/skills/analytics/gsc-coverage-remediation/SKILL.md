@@ -182,7 +182,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 ## cadence (週次)
 
-**自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
+**自動 (CI)**: `fetch-metrics-weekly.yml` (金曜 05:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `--sync-inspection` → `data/gsc/coverage-remediation/` を develop へ commit-back)。
 **判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
 `sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、対話セッション (2026-09-27 まで `backlog-loop-daily.yml` の日次実行) が

@@ -610,7 +610,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 運用ルール
 
-- **毎週日曜〜月曜に実行**する想定。`/weekly-plan`は依頼範囲に含まれる場合だけレビュー後に実行する
+- **毎週土曜に実行**する想定 (金曜の計測・無人 triage・週次メトリクス Issue の後)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
 - `.claude/todo/weekly.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
 - 週次レビュー履歴は本skill referenceへ蓄積し、批判的レビュー全文は蓄積しない
 - `/weekly-plan` の Phase 1 Track D が前週のskill referenceレビューを参照する
