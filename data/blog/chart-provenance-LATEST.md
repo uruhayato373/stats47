@@ -1,9 +1,9 @@
 # ブログチャート出典 (source.json) 再取得可能性 (LATEST)
 
-検査対象: 1609 件 (source.json を持つチャート)
+検査対象: 1616 件 (source.json を持つチャート)
 
 ## 判定
-- `restorable`: **1547**
+- `restorable`: **1554**
 - `out-of-scope`: **62**
 
 **欠陥計: 0 件**
