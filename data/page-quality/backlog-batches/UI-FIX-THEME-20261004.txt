@@ -1,2 +1,0 @@
-machine|theme|internal_jargon_terms
-machine|theme|unit_symbol_mixing

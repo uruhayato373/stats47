@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-03T21:11:00.526Z",
-  "auditGeneratedAt": "2026-10-03T20:37:21.080Z",
+  "generatedAt": "2026-10-10T22:13:17.710Z",
+  "auditGeneratedAt": "2026-10-10T21:10:57.964Z",
   "reviewStatus": "reviewed",
   "reviewError": null,
   "reviewedPages": [],
   "readCoverage": {
-    "expectedTiles": 185,
-    "readTiles": 14,
+    "expectedTiles": 190,
+    "readTiles": 20,
     "unreadScreens": [
       "home|mobile-390",
       "home|tablet-768",
@@ -17,24 +17,27 @@
       "geo-analysis|mobile-390",
       "geo-analysis|tablet-768",
       "geo-analysis|desktop-1440",
-      "geo-analysis--compare|mobile-390",
-      "geo-analysis--compare|tablet-768",
-      "geo-analysis--compare|desktop-1440",
-      "other--products|mobile-390",
-      "other--products|tablet-768",
-      "other--products|desktop-1440",
+      "geo-analysis--dataset|mobile-390",
+      "geo-analysis--dataset|tablet-768",
+      "geo-analysis--dataset|desktop-1440",
+      "other--about|mobile-390",
+      "other--about|tablet-768",
+      "other--about|desktop-1440",
       "theme|mobile-390",
       "theme|tablet-768",
       "theme|desktop-1440",
+      "prefecture-detail--hokkaido|mobile-390",
+      "prefecture-detail--hokkaido|tablet-768",
+      "prefecture-detail--hokkaido|desktop-1440",
       "prefecture-detail|mobile-390",
       "prefecture-detail|tablet-768",
       "prefecture-detail|desktop-1440",
-      "prefecture-detail--theme-geo|mobile-390",
-      "prefecture-detail--theme-geo|tablet-768",
-      "prefecture-detail--theme-geo|desktop-1440",
-      "ranking--long-title|mobile-390",
-      "ranking--long-title|tablet-768",
-      "ranking--long-title|desktop-1440",
+      "prefecture-detail--theme-population|mobile-390",
+      "prefecture-detail--theme-population|tablet-768",
+      "prefecture-detail--theme-population|desktop-1440",
+      "ranking--negative|mobile-390",
+      "ranking--negative|tablet-768",
+      "ranking--negative|desktop-1440",
       "ranking|mobile-390",
       "ranking|tablet-768",
       "ranking|desktop-1440",
@@ -44,24 +47,21 @@
       "blog-article|mobile-390",
       "blog-article|tablet-768",
       "blog-article|desktop-1440",
-      "blog-article--charts|mobile-390",
-      "blog-article--charts|tablet-768",
-      "blog-article--charts|desktop-1440",
+      "category--landweather|mobile-390",
+      "category--landweather|tablet-768",
+      "category--landweather|desktop-1440",
       "category|mobile-390",
       "category|tablet-768",
       "category|desktop-1440",
-      "survey--index|mobile-390",
-      "survey--index|tablet-768",
-      "survey--index|desktop-1440",
       "survey|mobile-390",
       "survey|tablet-768",
       "survey|desktop-1440",
-      "municipality--village|mobile-390",
-      "municipality--village|tablet-768",
-      "municipality--village|desktop-1440",
-      "other--municipalities|mobile-390",
-      "other--municipalities|tablet-768",
-      "other--municipalities|desktop-1440",
+      "survey--police|mobile-390",
+      "survey--police|tablet-768",
+      "survey--police|desktop-1440",
+      "other--municipalities-ranking|mobile-390",
+      "other--municipalities-ranking|tablet-768",
+      "other--municipalities-ranking|desktop-1440",
       "municipality|mobile-390",
       "municipality|tablet-768",
       "municipality|desktop-1440",
@@ -71,98 +71,108 @@
     ],
     "fullyReadPages": []
   },
-  "summary": "3幅で15ページ前後のタイルを確認しました。致命的な崩れはありません。目立ったのは、市区町村ページの「奈良県」重複と「0人」が上位表示される点、ランキング地図の海外地名と枠のずれ、タイトルの重複、テーマ地域ページの案内バナーの窮屈な折り返しです。確認できなかったページや幅は機械検査に任せています。",
+  "summary": "3幅 (mobile-390 / tablet-768 / desktop-1440) のタイルから、主要ページ (home・ranking・theme・prefecture-detail・municipality・geo・blog) の約 20 枚を確認しました。全ページ・全タイルを見たわけではありません。目的を果たせなくなる重大な崩れは見つかりませんでした。主な指摘は、ランキング表の右端の列の切れ、地図の凡例と切替ボタンの重なり、ページ内ナビ文字の切れ、合計特殊出生率の「1 人」という表記、人口の軸が負の値から始まる点です。",
   "findings": [
     {
-      "template": "municipality--village",
-      "device": "mobile-390",
+      "template": "ranking",
+      "device": "desktop-1440",
       "severity": "high",
-      "location": "スマホ1枚目、「田原本町の特徴(県内ランキング上位)」カードの各行(身体障害者更生援護施設設定員数など)。デスクトップ1枚目の同カードも同じ",
-      "issue": "値が「0人(2011年度)」「0施設」の指標が「3位」「4位」「5位」と上位として並び、読者は特徴や強みと誤読する。同率0の順位で、見出しの「上位」と内容が合わない",
-      "suggestion": "値が0の指標は特徴リストから外すか、「0(同率)」と明示し、上位表示は意味のある値のある指標だけにする"
+      "location": "デスクトップ 1 枚目下部、地図の右隣の順位表。右端の「偏差値」列",
+      "issue": "順位表の右端の列が切れています。見出し「偏差値」が半分しか見えず、各行の値も「9」「7」「6」のように先頭の 1 文字だけが見えます。読者は偏差値を読めません。",
+      "suggestion": "表を横スクロール可能なコンテナに入れるか、列幅を詰めて偏差値列が枠内に収まるようにする。"
     },
     {
-      "template": "municipality--village",
+      "template": "ranking",
       "device": "mobile-390",
       "severity": "medium",
-      "location": "スマホ1枚目、H1直下の小見出し「奈良県 奈良県 田原本町」と、下の市区町村一覧の「奈良県 奈良市」などの表記。デスクトップ1枚目も同じ",
-      "issue": "県名が二重に表示され、一覧の各リンクにも毎回「奈良県」が付いていて冗長で読みにくい。カード見出しと説明文にも「奈良県 田原本町」が繰り返される",
-      "suggestion": "小見出しの県名重複を直し、同じ県内の一覧では市区町村名だけを表示する"
+      "location": "スマホ 2 枚目、地図左下の「淡色地図 / 標準地図」切替ボタン (デスクトップ 2 枚目の地図左下でも同様)",
+      "issue": "地図の凡例カード (分位区分) が、地図の切替ボタンの上に重なっています。ボタンの文字が一部隠れて読みにくく、押しにくそうです。",
+      "suggestion": "凡例を切替ボタンと重ならない位置 (地図の外、または右下) に移す。"
     },
     {
-      "template": "ranking--long-title",
+      "template": "ranking",
+      "device": "desktop-1440",
+      "severity": "medium",
+      "location": "デスクトップ 1 枚目、「上位3件と最下位」カードの横軸ラベル (スマホ 1 枚目でも同様)",
+      "issue": "総人口の軸の下端が「-162,605」と負の値で表示されています。人口は負にならないので、読者が意味を取り違えたり、軸が誤っていると感じたりします。",
+      "suggestion": "件数や人口のように負にならない指標では、軸の下端を 0 以上にする。"
+    },
+    {
+      "template": "prefecture-detail",
       "device": "mobile-390",
       "severity": "medium",
-      "location": "スマホ1枚目、「地図」タブ内の日本地図(「2021年度」セレクトの下)",
-      "issue": "地図の外側にハバロフスク・上海・ソウルなど海外の地名が多数出て、日本の都道府県の色分けより目立つ。地図の枠が地図本体とずれ、左と下に余白の帯が見え、画面下まで地図が広がって凡例が切れている",
-      "suggestion": "海外の地名ラベルを消すか薄くし、地図の枠と表示範囲を日本列島に合わせる"
+      "location": "スマホ 3 枚目、指標一覧の「合計特殊出生率」行 (東京都)",
+      "issue": "合計特殊出生率が「1 人」と表示されています。同じページ上部の特徴欄では「0.99人」なので、値の丸めが食い違っています。単位「人」も紛らわしく、小数が失われて 47 位との差が分かりません。",
+      "suggestion": "小数 2 桁で表示し、単位表記を他の欄と揃える。"
     },
     {
-      "template": "ranking--long-title",
+      "template": "prefecture-detail",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "スマホ 3 枚目、「年齢3区分人口の推移」の積み上げ面グラフ",
+      "issue": "グラフの縦軸・横軸の目盛り文字が極端に小さく、スマホではほぼ判読できません。",
+      "suggestion": "スマホでは目盛りの数を減らしてフォントサイズを大きくする。"
+    },
+    {
+      "template": "prefecture-detail--theme-population",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ1枚目上部、パンくず最後の項目とその下のH1",
-      "issue": "パンくずの最後に長いタイトルがH1と同じ文言で全文入っている。3行に折り返し、H1の前に同じ長文が2回続く",
-      "suggestion": "パンくずの最後の項目は短縮するか省き、カテゴリ名までにする"
-    },
-    {
-      "template": "prefecture-detail--theme-geo",
-      "device": "mobile-390",
-      "severity": "medium",
-      "location": "スマホ1枚目の中ほど、青い案内バナー「青森県の視点 — 47都道府県チャートで青森県をハイライト表示しています」",
-      "issue": "狭い幅で文章と右端の「青森県プロフィールへ →」が3列に分かれて詰まり、文が1〜2文字ずつ折り返して読みにくい。リンクも小さく折り返されて見つけにくい",
-      "suggestion": "スマホではバナーを縦積みにして文章を全幅で出し、リンクは次の行に独立して置く"
-    },
-    {
-      "template": "prefecture-detail--theme-geo",
-      "device": "mobile-390",
-      "severity": "low",
-      "location": "スマホ1枚目、「ページ内」ボックス",
-      "issue": "「ページ内」の目次に項目が1つ(「土砂災害を都道府県別に見る」)だけで、すぐ下に「全指標・出典調査」の開閉行が続き、同じ種類の枠が重なって主要データが下に押される",
-      "suggestion": "項目が1つだけの目次は出さないか、開閉行とまとめて1つにする"
-    },
-    {
-      "template": "home",
-      "device": "mobile-390",
-      "severity": "medium",
-      "location": "スマホ1枚目下部、「注目のランキング」カードと「新着ブログ」カード",
-      "issue": "カード右端が切れた横スクロールで、2枚目のタイトルと値(「公衆…」「東…」「10,7…」)が途中で見切れ、スクロールできることが「>」ボタン以外に分かりにくい。ランキングカードの値の左に大きな空白があり、地図が小さく情報量が少ない",
-      "suggestion": "2枚目のカードが見える幅を残していることを示す余白かフェードを付け、カードの地図と値の配置を詰める"
+      "location": "スマホ 2 枚目、「総人口」カードの推移グラフ",
+      "issue": "グラフの軸の年ラベル (1975 / 2025) が極小で、縦軸の目盛りもありません。値の範囲が分かりません。",
+      "suggestion": "軸ラベルを読めるサイズにし、最小値と最大値を添える。"
     },
     {
       "template": "home",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ2枚目、「都道府県から探す」のタイル地図",
-      "issue": "北海道・東北が右端に寄り、左上に大きな空白があり、九州の右端付近は画面外に切れそうに見える。10px級の都道府県名が縦書きで折り返されて読みにくい",
-      "suggestion": "タイル地図の列幅を幅に合わせて詰め、県名は折り返さず略称か横書きで表示する"
+      "location": "スマホ 1 枚目、「注目のランキング」「新着ブログ」の見出し下",
+      "issue": "カルーセルの「>」ボタンだけが見出しとカードの間の独立した行にあり、行が余分に空いています。カード群が画面の下にずれ、最初の画面で見えるカードが減っています。",
+      "suggestion": "ボタンを見出し行の右側に置いて余白を詰める。"
     },
     {
-      "template": "blog",
+      "template": "home",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ1枚目、「人気のタグ」のチップ列",
-      "issue": "タグの件数(169など)が10pxで小さく、右端のチップが切れてスクロールできることが分かりにくい。同じ先頭画面でCookieバナーがボタン領域を覆って記事一覧を隠す",
-      "suggestion": "件数の文字を大きくし、チップ列の右端に切れを示すフェードを付ける"
+      "location": "スマホ 2 枚目、「都道府県から探す」のタイル地図",
+      "issue": "北海道のタイルの上や、九州・関東の周りに大きな空白があります。タイルの文字が小さく、隣のタイルと詰まっています。",
+      "suggestion": "タイル地図の余白を詰め、スマホではタイルを大きくするか一覧形式に切り替える。"
     },
     {
-      "template": "blog-article--charts",
-      "device": "mobile-390",
-      "severity": "low",
-      "location": "スマホ1枚目、パンくずとH1の間の「ホーム > ブログ」帯と、その下の「stats47 データジャーナル / 統計で読む地域ニュース / PR を含む場合があります」の行",
-      "issue": "パンくずが灰色の帯に入って記事の導入前に2層の見出し行が続き、「PRを含む場合があります」が細かい文字で他の肩書きと並び、意味の違う3項目が区切りの / だけでつながって読みにくい",
-      "suggestion": "PR表記は独立した行にして肩書きと分け、パンくず帯と肩書き行の余白を詰める"
+      "template": "municipality",
+      "device": "tablet-768",
+      "severity": "medium",
+      "location": "タブレット 1 枚目、「千代田区の特徴」カード",
+      "issue": "千代田区の上位指標がすべて「2006年度」のデータです。読者は最新の特徴だと受け取りかねません。年が古いことを知らせる注記がありません。",
+      "suggestion": "古い年度の指標には「古い年度のデータ」の注記を付けるか、新しい年度の指標を優先して出す。"
     },
     {
-      "template": "other",
+      "template": "municipality",
+      "device": "tablet-768",
+      "severity": "low",
+      "location": "タブレット 1 枚目下部、「東京都の市区町村」一覧",
+      "issue": "一覧の最終行 (日の出町・檜原村など) が枠の下端で文字の途中で切れています。スクロール領域だと分かりません。",
+      "suggestion": "枠の下端にフェードやスクロールの手がかりを付けるか、全件を表示する。"
+    },
+    {
+      "template": "geo-analysis",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ1枚目、タグ一覧の各記事カード(「一般世帯数の県差は何を映すのか」など)",
-      "issue": "タイトルと抜粋のあとにカード内で区切り線が引かれているが、その下に何も続かず、空の領域が見える。タイトルが左に寄ったカードの左右余白と線の位置がそろっていない",
-      "suggestion": "カード下部の使われていない区切り線を消すか、そこに更新日などの情報を置く"
+      "location": "スマホ 1 枚目、各分析カード左側のサムネイル",
+      "issue": "サムネイルの地図が小さすぎ、内部のラベルが重なって読めません。何の分析か画像からは分かりません。",
+      "suggestion": "サムネイルを判読できる大きさにするか、ラベルを省略した簡易図にする。"
+    },
+    {
+      "template": "home",
+      "device": "desktop-1440",
+      "severity": "low",
+      "location": "デスクトップ 1 枚目、カルーセルの「>」ボタンの行",
+      "issue": "スマホ同様、「>」ボタンが見出しの下の独立した行にあり、見出しとカードの間が空きすぎています。",
+      "suggestion": "ボタンを見出し行の右端に移す。"
     }
   ],
-  "rejected": [],
-  "newViolationCount": 3199,
+  "rejected": [
+    "撮影していない画面を指す指摘: theme--prefecture-detail|mobile-390"
+  ],
+  "newViolationCount": 91,
   "firstRun": false
 }

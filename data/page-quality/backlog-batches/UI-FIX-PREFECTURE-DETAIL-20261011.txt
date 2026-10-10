@@ -1,0 +1,5 @@
+agent|prefecture-detail
+machine|https://stats47.jp/areas/01000|small_text_count
+machine|https://stats47.jp/areas/13000|small_text_count
+machine|https://stats47.jp/areas/47000|small_text_count
+machine|prefecture-detail|unit_symbol_mixing

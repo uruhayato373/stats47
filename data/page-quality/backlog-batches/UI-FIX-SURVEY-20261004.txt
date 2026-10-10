@@ -1,2 +1,0 @@
-machine|survey|internal_jargon_terms
-machine|survey|unit_symbol_mixing
