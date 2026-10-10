@@ -19,8 +19,8 @@ export const cpiChangeRateExclFreshFoodEnergy: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
-    "to": 2023,
+    "from": 2016,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

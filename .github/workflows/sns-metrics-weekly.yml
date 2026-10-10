@@ -41,7 +41,7 @@ jobs:
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ vars.INSTAGRAM_BUSINESS_ACCOUNT_ID || secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
-        run: node .claude/scripts/instagram/fetch-metrics-ci.cjs
+        run: node .claude/scripts/instagram/fetch-metrics-ci.cjs --media-out /tmp/ig-media.json
 
       - name: 📤 Commit snapshot to develop
         run: |
@@ -52,8 +52,14 @@ jobs:
           git checkout develop
           git pull --rebase origin develop
 
+          # 台帳との結び付け (external_id・指標行の sns_post_id) は develop の台帳とコードで行う。
+          # main で台帳を書き換えて持ち込むと develop の台帳を巻き戻すため (memory feedback_ci_foreign_tree_overlay)
+          if [ -f /tmp/ig-media.json ]; then
+            node .claude/scripts/instagram/link-ig-media.cjs --media /tmp/ig-media.json
+          fi
+
           SNAPSHOT_DIR="data/sns/metric-snapshots"
-          git add "$SNAPSHOT_DIR"
+          git add "$SNAPSHOT_DIR" data/sns/posts.json data/sns/post-log.md
 
           if git diff --cached --quiet; then
             echo "変更なし、コミットをスキップ"

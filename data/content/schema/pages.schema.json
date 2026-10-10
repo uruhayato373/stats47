@@ -42,7 +42,7 @@
           },
           "href": {
             "type": "string",
-            "pattern": "^/"
+            "pattern": "^(/|https://)"
           },
           "published": {
             "type": "boolean"

@@ -7,7 +7,7 @@ import { regionStyle } from "../constants/region-styles.palette";
 import type { AreaRegionGroup } from "../utils";
 
 const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 interface AreaDirectoryListProps {
   regionGroups: AreaRegionGroup[];

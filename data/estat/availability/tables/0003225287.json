@@ -1,0 +1,16 @@
+{
+  "statsDataId": "0003225287",
+  "statName": "社会教育調査",
+  "title": "設置者別指定管理者別公民館数",
+  "updatedDate": "2018-07-12",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "010"
+      },
+      "fetchedAt": "2026-10-07T01:47:23.315Z",
+      "years": { "2015": 47 },
+      "rawRows": 48
+    }
+  ]
+}

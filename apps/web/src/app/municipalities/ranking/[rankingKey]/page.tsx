@@ -285,7 +285,7 @@ export default async function MunicipalityRankingPage({
             name="q"
             defaultValue={query}
             placeholder="例：神戸市"
-            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
           />
         </label>
         <label
@@ -298,7 +298,7 @@ export default async function MunicipalityRankingPage({
               id="municipality-prefecture"
               name="pref"
               defaultValue={prefectureCode}
-              className="mt-1 h-10 w-full appearance-none border border-input bg-background px-3 pr-9 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              className="mt-1 h-10 w-full appearance-none border border-input bg-background px-3 pr-9 text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
             >
               <option value="">すべて</option>
               {fetchPrefectures().map((prefecture) => (

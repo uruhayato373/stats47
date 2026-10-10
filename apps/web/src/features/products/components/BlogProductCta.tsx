@@ -36,7 +36,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
             href={href}
             label={`${product.id}:${product.title}`}
             surface="blog_product"
-            className="mt-4 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="mt-4 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             内容と価格を確認する →
           </TrackedProductLink>

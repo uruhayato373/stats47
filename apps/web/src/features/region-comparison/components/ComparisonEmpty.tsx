@@ -14,7 +14,7 @@ export function ComparisonEmpty() {
                 <div className="h-24 w-24 rounded-full bg-info-soft flex items-center justify-center text-info">
                     <MapPin size={48} />
                 </div>
-                <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-warning text-background shadow-sm">
+                <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-warning text-background shadow-xs">
                     <span className="text-xl font-bold">?</span>
                 </div>
             </div>

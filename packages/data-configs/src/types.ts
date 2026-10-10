@@ -272,6 +272,14 @@ export interface SupplementalSource {
 export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
+/** `MetricConfig.yearExclusions` の 1 件。 */
+export interface YearExclusion {
+  /** 外す年 (4 桁) */
+  years: readonly number[];
+  /** 外す理由 (読み手が年を戻すかどうかを判断できる文) */
+  reason: string;
+}
+
 /** 可視化 */
 export type VisualizationConfig = MetricPresentation;
 
@@ -405,8 +413,19 @@ export interface MetricConfig {
   supplementalSources?: readonly SupplementalSource[];
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */
   entities: EntityKind[];
-  /** 取得年範囲 */
+  /**
+   * 取得年範囲。e-Stat (estat / kakei-chousa) で県の値を取る metric は、全県の値がある年を
+   * e-Stat の実在年の台帳 (`data/estat/availability/`) から `sync-estat-years.ts` が足し、
+   * 値の無い年を外す。外したい年は手で消さず `yearExclusions` に理由付きで書く。
+   */
   years: YearSpec;
+  /**
+   * 台帳に全県の値があるのに `years` に入れない年と、その理由。
+   * 例: 基準年の切り替え前の旧系列、5 年おきに揃えた系列の中間年。
+   * reason が `YEAR_EXCLUSION_INHERITED` の除外は、2026-10 の移行時に当時の `years` から引き継いだだけで
+   * まだ誰も判断していない (`.claude/todo/backlog.md` ESTAT-YEAR-AVAILABILITY-01)。
+   */
+  yearExclusions?: readonly YearExclusion[];
   yearFormat?: 'fiscal' | 'calendar' | 'plain';
   visualization: VisualizationConfig;
   display?: DisplayConfig;

@@ -246,6 +246,14 @@ jobs:
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 
+      - name: 🧾 SNS Post Trace Contract
+        # 投稿台帳 data/sns/posts.json の 1 id から台本・状態・承認・外部 ID・素材・観測値をたどれること。
+        # カットオーバー以降の投稿は承認必須。契約: .claude/rules/sns-content-standards.md §3
+        run: |
+          npm run sns:trace:test
+          node .claude/scripts/sns/check-post-trace.mjs
+        continue-on-error: false
+
       - name: 🗒️ note Image Asset Contract Guard
         # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
         # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md
@@ -714,6 +722,11 @@ jobs:
           # 「2009100000 問題」(年フィルタ 0件・年セレクタ崩れ) の再発防止。
           # 規約: .claude/rules/estat-api.md「年の正規化」
           npm run validate:years --workspace=@stats47/data-configs
+          # e-Stat の実在年の台帳 (data/estat/availability/) に全県の値がある年が、years にも
+          # yearExclusions にも無い metric と、除外した年が years に残っている metric を止める。
+          # 年を手で消すと次の同期で戻るので、外す年は yearExclusions に理由付きで書く。
+          # 規約: .claude/rules/metric-config-standards.md「years は台帳から合わせる」
+          npm run sync:estat-years --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
       - name: 🧱 Metric Config Gate

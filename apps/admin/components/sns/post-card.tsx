@@ -142,6 +142,12 @@ export function PostCard({ item }: { item: GalleryItem }) {
           ) : null}
         </div>
 
+        {hasId(item) ? (
+          <a href={`/sns/${item.id}`} className="text-console-accent hover:underline">
+            詳細 #{item.id} (台本・承認・素材・指標)
+          </a>
+        ) : null}
+
         {postUrl ? (
           <a
             href={postUrl}

@@ -1,0 +1,346 @@
+{
+  "statsDataId": "0004026105",
+  "statName": "患者調査",
+  "title": "第３７表　受療率（人口10万対），入院－外来・施設の種類 × 傷病分類 × 都道府県別",
+  "updatedDate": "2025-03-21",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "15",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:37.438Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "15",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:38.200Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "16",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:39.048Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "16",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:39.407Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "17",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:42.118Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "17",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:42.167Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "18",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:39.413Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "18",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:39.856Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "19",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:40.688Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "19",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:41.295Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "24",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:37.364Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "24",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:37.394Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "25",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:38.212Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "25",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:38.566Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "28",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:36.598Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "28",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:36.641Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "34",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:34.615Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "34",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:35.413Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "42",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:40.095Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "42",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:40.147Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "44",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:34.614Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "44",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:34.615Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "46",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:41.349Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "46",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:41.507Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "8",
+        "cdCat03": "1",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:35.486Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "8",
+        "cdCat03": "4",
+        "areaAxis": {
+          "axis": "cat02",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:36.229Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    }
+  ]
+}

@@ -20,8 +20,18 @@ export const nationalMedicalExpenseInpatient: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
-    "to": 2022,
+    "years": [
+      2011,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

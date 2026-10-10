@@ -66,7 +66,7 @@ export function ScrollableRow({
         disabled={!canScrollLeft}
         className={`${
           controlsMode === "overlay"
-            ? "absolute left-1 top-1/2 z-10 -translate-y-1/2 shadow-sm"
+            ? "absolute left-1 top-1/2 z-10 -translate-y-1/2 shadow-xs"
             : "shrink-0"
         } flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background transition-opacity ${canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         aria-label="左にスクロール"
@@ -88,7 +88,7 @@ export function ScrollableRow({
         disabled={!canScrollRight}
         className={`${
           controlsMode === "overlay"
-            ? "absolute right-1 top-1/2 z-10 -translate-y-1/2 shadow-sm"
+            ? "absolute right-1 top-1/2 z-10 -translate-y-1/2 shadow-xs"
             : "shrink-0"
         } flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background transition-opacity ${canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         aria-label="右にスクロール"

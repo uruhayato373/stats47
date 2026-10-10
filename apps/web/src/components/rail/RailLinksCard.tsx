@@ -72,7 +72,7 @@ function trackLink(
 
 /** タグ用ピル。PC は高密度 (sm:min-h-7)、モバイルは 44px のタップ領域 (min-h-11) */
 export const RAIL_CHIP_CLASS =
-  'inline-flex min-h-11 shrink-0 snap-start items-center gap-1 rounded-full border border-muted-foreground/40 bg-muted px-2 text-[11px] font-medium leading-none text-foreground transition-colors hover:border-primary/50 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-7';
+  'inline-flex min-h-11 shrink-0 snap-start items-center gap-1 rounded-full border border-muted-foreground/40 bg-muted px-2 text-[11px] font-medium leading-none text-foreground transition-colors hover:border-primary/50 hover:bg-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring sm:min-h-7';
 
 function RailLinks({
   items,
@@ -102,11 +102,11 @@ function RailLinks({
             data-nav-label={item.contentId}
             data-nav-surface={item.contentId ? trackingSurface : undefined}
             aria-label={item.ariaLabel}
-            className="group flex min-h-14 items-center gap-3 border-b border-border py-2.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group flex min-h-14 items-center gap-3 border-b border-border py-2.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => trackLink(item, trackingSurface)}
           >
             {item.thumbnail && (
-              <span className="relative aspect-[40/21] w-20 shrink-0 overflow-hidden border border-border bg-muted">
+              <span className="relative aspect-40/21 w-20 shrink-0 overflow-hidden border border-border bg-muted">
                 <ThemeAwareImage
                   lightSrc={item.thumbnail.lightSrc}
                   darkSrc={item.thumbnail.darkSrc}
@@ -143,11 +143,11 @@ function RailLinks({
             <Link
               href={item.href}
               aria-label={item.ariaLabel}
-              className="group flex min-h-12 items-center gap-3 py-2.5 text-sm leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="group flex min-h-12 items-center gap-3 py-2.5 text-sm leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => trackLink(item, trackingSurface)}
             >
               {item.thumbnail ? (
-                <span className="relative aspect-[40/21] w-20 shrink-0 overflow-hidden border border-border bg-muted">
+                <span className="relative aspect-40/21 w-20 shrink-0 overflow-hidden border border-border bg-muted">
                   <ThemeAwareImage
                     lightSrc={item.thumbnail.lightSrc}
                     darkSrc={item.thumbnail.darkSrc}
@@ -202,7 +202,7 @@ function RailLinks({
         'flex flex-wrap gap-1.5',
         horizontalOnMobile &&
           // 右端を薄くして「続きがある」ことを示す (スクロールバーを隠すため。2026-10-04 週次 UI 検査)
-          '-mx-1 flex-nowrap snap-x overflow-x-auto overscroll-x-contain px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,black_85%,transparent)]'
+          '-mx-1 flex-nowrap snap-x overflow-x-auto overscroll-x-contain px-1 pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,black_85%,transparent)]'
       )}
       aria-label="カード内リンク"
     >
@@ -253,7 +253,7 @@ export function RailLinksCard({
       {moreLink && (
         <Link
           href={moreLink.href}
-          className="mt-3 inline-flex min-h-11 items-center text-xs sm:min-h-6 font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:text-foreground"
+          className="mt-3 inline-flex min-h-11 items-center text-xs sm:min-h-6 font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring dark:text-foreground"
           onClick={() =>
             trackLink(
               {

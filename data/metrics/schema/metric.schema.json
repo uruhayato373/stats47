@@ -670,6 +670,28 @@
         }
       ]
     },
+    "yearExclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "years": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "years",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
     "yearFormat": {
       "enum": [
         "fiscal",

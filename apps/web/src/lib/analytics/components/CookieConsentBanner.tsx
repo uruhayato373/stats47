@@ -76,7 +76,7 @@ export function CookieConsentBanner() {
   return (
     <>
     <div aria-hidden="true" className={BANNER_HEIGHT_CLASS} />
-    <div className={cn("fixed bottom-0 left-0 right-0 z-50 flex items-center bg-background/95 backdrop-blur-sm border-t shadow-sm", BANNER_HEIGHT_CLASS)}>
+    <div className={cn("fixed bottom-0 left-0 right-0 z-50 flex items-center bg-background/95 backdrop-blur-xs border-t shadow-xs", BANNER_HEIGHT_CLASS)}>
       <div className={cn(SHELL_WIDTH_CLASS, "flex flex-row items-center justify-between gap-2 text-xs text-muted-foreground")}>
         <p className="min-w-0 leading-snug">
           当サイトでは、利用状況の分析のために Cookie を使用しています。

@@ -11,7 +11,8 @@
       "slide-3-answer-1080x1350.png",
       "slide-4-table-1080x1350.png",
       "slide-5-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1086
   },
   {
     "date": "2026-10-13",
@@ -25,14 +26,16 @@
       "slide-3-bottom-1080x1350.png",
       "slide-4-sources-1080x1350.png",
       "slide-5-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1087
   },
   {
     "date": "2026-10-14",
     "time": "12:00",
     "type": "reels",
     "domain": "ranking-quiz-reel",
-    "content_key": "ramen-dining-consumption-expenditure"
+    "content_key": "ramen-dining-consumption-expenditure",
+    "post_id": 1088
   },
   {
     "date": "2026-10-14",
@@ -46,7 +49,8 @@
       "slide-3-highlights-1080x1350.png",
       "slide-4-caution-1080x1350.png",
       "slide-5-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1089
   },
   {
     "date": "2026-10-15",
@@ -60,7 +64,8 @@
       "slide-3-answer-1080x1350.png",
       "slide-4-table-1080x1350.png",
       "slide-5-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1090
   },
   {
     "date": "2026-10-16",
@@ -73,7 +78,8 @@
       "slide-2-duel-1080x1350.png",
       "slide-3-summary-1080x1350.png",
       "slide-4-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1091
   },
   {
     "date": "2026-10-17",
@@ -87,7 +93,8 @@
       "slide-3-bottom-1080x1350.png",
       "slide-4-sources-1080x1350.png",
       "slide-5-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1092
   },
   {
     "date": "2026-10-18",
@@ -100,6 +107,7 @@
       "slide-2-choropleth-1080x1350.png",
       "slide-3-topbottom-1080x1350.png",
       "slide-4-outro-1080x1350.png"
-    ]
+    ],
+    "post_id": 1093
   }
 ]

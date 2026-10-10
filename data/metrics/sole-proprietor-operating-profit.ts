@@ -22,7 +22,7 @@ export const soleProprietorOperatingProfit: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2025,
+    "from": 2019,
     "to": 2025,
   },
   "yearFormat": "calendar",

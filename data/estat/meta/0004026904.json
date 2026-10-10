@@ -1,0 +1,2062 @@
+{
+ "statsDataId": "0004026904",
+ "title": "難病・小児慢性特定疾病 特定医療費（指定難病）受給者証所持者数，対象疾患・都道府県－指定都市（再掲）別",
+ "statName": "衛生行政報告例",
+ "govOrg": "厚生労働省",
+ "surveyDate": "202004-202103",
+ "overallTotalNumber": 22712,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "1480",
+     "name": "受給者証所持者数",
+     "unit": "人"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "指定難病対象疾患",
+   "valueCount": 334,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "球脊髄性筋萎縮症",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "筋萎縮性側索硬化症",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "脊髄性筋萎縮症",
+     "unit": null
+    },
+    {
+     "code": "140",
+     "name": "原発性側索硬化症",
+     "unit": null
+    },
+    {
+     "code": "150",
+     "name": "進行性核上性麻痺",
+     "unit": null
+    },
+    {
+     "code": "160",
+     "name": "パーキンソン病",
+     "unit": null
+    },
+    {
+     "code": "170",
+     "name": "大脳皮質基底核変性症",
+     "unit": null
+    },
+    {
+     "code": "180",
+     "name": "ハンチントン病",
+     "unit": null
+    },
+    {
+     "code": "190",
+     "name": "神経有棘赤血球症",
+     "unit": null
+    },
+    {
+     "code": "200",
+     "name": "シャルコー・マリー・トゥース病",
+     "unit": null
+    },
+    {
+     "code": "210",
+     "name": "重症筋無力症",
+     "unit": null
+    },
+    {
+     "code": "220",
+     "name": "先天性筋無力症候群",
+     "unit": null
+    },
+    {
+     "code": "230",
+     "name": "多発性硬化症／視神経脊髄炎",
+     "unit": null
+    },
+    {
+     "code": "240",
+     "name": "慢性炎症性脱髄性多発神経炎／多巣性運動ニューロパチー",
+     "unit": null
+    },
+    {
+     "code": "250",
+     "name": "封入体筋炎",
+     "unit": null
+    },
+    {
+     "code": "260",
+     "name": "クロウ・深瀬症候群",
+     "unit": null
+    },
+    {
+     "code": "270",
+     "name": "多系統萎縮症",
+     "unit": null
+    },
+    {
+     "code": "280",
+     "name": "脊髄小脳変性症（多系統萎縮症を除く。）",
+     "unit": null
+    },
+    {
+     "code": "290",
+     "name": "ライソゾーム病",
+     "unit": null
+    },
+    {
+     "code": "300",
+     "name": "副腎白質ジストロフィー",
+     "unit": null
+    },
+    {
+     "code": "310",
+     "name": "ミトコンドリア病",
+     "unit": null
+    },
+    {
+     "code": "320",
+     "name": "もやもや病",
+     "unit": null
+    },
+    {
+     "code": "330",
+     "name": "プリオン病",
+     "unit": null
+    },
+    {
+     "code": "340",
+     "name": "亜急性硬化性全脳炎",
+     "unit": null
+    },
+    {
+     "code": "350",
+     "name": "進行性多巣性白質脳症",
+     "unit": null
+    },
+    {
+     "code": "360",
+     "name": "HTLV-1関連脊髄症",
+     "unit": null
+    },
+    {
+     "code": "370",
+     "name": "特発性基底核石灰化症",
+     "unit": null
+    },
+    {
+     "code": "380",
+     "name": "全身性アミロイドーシス",
+     "unit": null
+    },
+    {
+     "code": "390",
+     "name": "ウルリッヒ病",
+     "unit": null
+    },
+    {
+     "code": "400",
+     "name": "遠位型ミオパチー",
+     "unit": null
+    },
+    {
+     "code": "410",
+     "name": "ベスレムミオパチー",
+     "unit": null
+    },
+    {
+     "code": "420",
+     "name": "自己貪食空胞性ミオパチー",
+     "unit": null
+    },
+    {
+     "code": "430",
+     "name": "シュワルツ・ヤンペル症候群",
+     "unit": null
+    },
+    {
+     "code": "440",
+     "name": "神経線維腫症",
+     "unit": null
+    },
+    {
+     "code": "450",
+     "name": "天疱瘡",
+     "unit": null
+    },
+    {
+     "code": "460",
+     "name": "表皮水疱症",
+     "unit": null
+    },
+    {
+     "code": "470",
+     "name": "膿疱性乾癬（汎発型）",
+     "unit": null
+    },
+    {
+     "code": "480",
+     "name": "スティーヴンス・ジョンソン症候群",
+     "unit": null
+    },
+    {
+     "code": "490",
+     "name": "中毒性表皮壊死症",
+     "unit": null
+    },
+    {
+     "code": "500",
+     "name": "高安動脈炎",
+     "unit": null
+    },
+    {
+     "code": "510",
+     "name": "巨細胞性動脈炎",
+     "unit": null
+    },
+    {
+     "code": "520",
+     "name": "結節性多発動脈炎",
+     "unit": null
+    },
+    {
+     "code": "530",
+     "name": "顕微鏡的多発血管炎",
+     "unit": null
+    },
+    {
+     "code": "540",
+     "name": "多発血管炎性肉芽腫症",
+     "unit": null
+    },
+    {
+     "code": "550",
+     "name": "好酸球性多発血管炎性肉芽腫症",
+     "unit": null
+    },
+    {
+     "code": "560",
+     "name": "悪性関節リウマチ",
+     "unit": null
+    },
+    {
+     "code": "570",
+     "name": "バージャー病",
+     "unit": null
+    },
+    {
+     "code": "580",
+     "name": "原発性抗リン脂質抗体症候群",
+     "unit": null
+    },
+    {
+     "code": "590",
+     "name": "全身性エリテマトーデス",
+     "unit": null
+    },
+    {
+     "code": "600",
+     "name": "皮膚筋炎／多発性筋炎",
+     "unit": null
+    },
+    {
+     "code": "610",
+     "name": "全身性強皮症",
+     "unit": null
+    },
+    {
+     "code": "620",
+     "name": "混合性結合組織病",
+     "unit": null
+    },
+    {
+     "code": "630",
+     "name": "シェーグレン症候群",
+     "unit": null
+    },
+    {
+     "code": "640",
+     "name": "成人スチル病",
+     "unit": null
+    },
+    {
+     "code": "650",
+     "name": "再発性多発軟骨炎",
+     "unit": null
+    },
+    {
+     "code": "660",
+     "name": "ベーチェット病",
+     "unit": null
+    },
+    {
+     "code": "670",
+     "name": "特発性拡張型心筋症",
+     "unit": null
+    },
+    {
+     "code": "680",
+     "name": "肥大型心筋症",
+     "unit": null
+    },
+    {
+     "code": "690",
+     "name": "拘束型心筋症",
+     "unit": null
+    },
+    {
+     "code": "700",
+     "name": "再生不良性貧血",
+     "unit": null
+    },
+    {
+     "code": "710",
+     "name": "自己免疫性溶血性貧血",
+     "unit": null
+    },
+    {
+     "code": "720",
+     "name": "発作性夜間ヘモグロビン尿症",
+     "unit": null
+    },
+    {
+     "code": "730",
+     "name": "特発性血小板減少性紫斑病",
+     "unit": null
+    },
+    {
+     "code": "740",
+     "name": "血栓性血小板減少性紫斑病",
+     "unit": null
+    },
+    {
+     "code": "750",
+     "name": "原発性免疫不全症候群",
+     "unit": null
+    },
+    {
+     "code": "760",
+     "name": "IgＡ腎症",
+     "unit": null
+    },
+    {
+     "code": "770",
+     "name": "多発性嚢胞腎",
+     "unit": null
+    },
+    {
+     "code": "780",
+     "name": "黄色靱帯骨化症",
+     "unit": null
+    },
+    {
+     "code": "790",
+     "name": "後縦靱帯骨化症",
+     "unit": null
+    },
+    {
+     "code": "800",
+     "name": "広範脊柱管狭窄症",
+     "unit": null
+    },
+    {
+     "code": "810",
+     "name": "特発性大腿骨頭壊死症",
+     "unit": null
+    },
+    {
+     "code": "820",
+     "name": "下垂体性ADH分泌異常症",
+     "unit": null
+    },
+    {
+     "code": "830",
+     "name": "下垂体性TSH分泌亢進症",
+     "unit": null
+    },
+    {
+     "code": "840",
+     "name": "下垂体性PRL分泌亢進症",
+     "unit": null
+    },
+    {
+     "code": "850",
+     "name": "クッシング病",
+     "unit": null
+    },
+    {
+     "code": "860",
+     "name": "下垂体性ゴナドトロピン分泌亢進症",
+     "unit": null
+    },
+    {
+     "code": "870",
+     "name": "下垂体性成長ホルモン分泌亢進症",
+     "unit": null
+    },
+    {
+     "code": "880",
+     "name": "下垂体前葉機能低下症",
+     "unit": null
+    },
+    {
+     "code": "890",
+     "name": "家族性高コレステロール血症（ホモ接合体）",
+     "unit": null
+    },
+    {
+     "code": "900",
+     "name": "甲状腺ホルモン不応症",
+     "unit": null
+    },
+    {
+     "code": "910",
+     "name": "先天性副腎皮質酵素欠損症",
+     "unit": null
+    },
+    {
+     "code": "920",
+     "name": "先天性副腎低形成症",
+     "unit": null
+    },
+    {
+     "code": "930",
+     "name": "アジソン病",
+     "unit": null
+    },
+    {
+     "code": "940",
+     "name": "サルコイドーシス",
+     "unit": null
+    },
+    {
+     "code": "950",
+     "name": "特発性間質性肺炎",
+     "unit": null
+    },
+    {
+     "code": "960",
+     "name": "肺動脈性肺高血圧症",
+     "unit": null
+    },
+    {
+     "code": "970",
+     "name": "肺静脈閉塞症／肺毛細血管腫症",
+     "unit": null
+    },
+    {
+     "code": "980",
+     "name": "慢性血栓塞栓性肺高血圧症",
+     "unit": null
+    },
+    {
+     "code": "990",
+     "name": "リンパ脈管筋腫症",
+     "unit": null
+    },
+    {
+     "code": "1000",
+     "name": "網膜色素変性症",
+     "unit": null
+    },
+    {
+     "code": "1010",
+     "name": "バッド・キアリ症候群",
+     "unit": null
+    },
+    {
+     "code": "1020",
+     "name": "特発性門脈圧亢進症",
+     "unit": null
+    },
+    {
+     "code": "1030",
+     "name": "原発性胆汁性胆管炎",
+     "unit": null
+    },
+    {
+     "code": "1040",
+     "name": "原発性硬化性胆管炎",
+     "unit": null
+    },
+    {
+     "code": "1050",
+     "name": "自己免疫性肝炎",
+     "unit": null
+    },
+    {
+     "code": "1060",
+     "name": "クローン病",
+     "unit": null
+    },
+    {
+     "code": "1070",
+     "name": "潰瘍性大腸炎",
+     "unit": null
+    },
+    {
+     "code": "1080",
+     "name": "好酸球性消化管疾患",
+     "unit": null
+    },
+    {
+     "code": "1090",
+     "name": "慢性特発性偽性腸閉塞症",
+     "unit": null
+    },
+    {
+     "code": "1100",
+     "name": "巨大膀胱短小結腸腸管蠕動不全症",
+     "unit": null
+    },
+    {
+     "code": "1110",
+     "name": "腸管神経節細胞僅少症",
+     "unit": null
+    },
+    {
+     "code": "1120",
+     "name": "ルビンシュタイン・テイビ症候群",
+     "unit": null
+    },
+    {
+     "code": "1130",
+     "name": "CFC症候群",
+     "unit": null
+    },
+    {
+     "code": "1140",
+     "name": "コステロ症候群",
+     "unit": null
+    },
+    {
+     "code": "1150",
+     "name": "チャージ症候群",
+     "unit": null
+    },
+    {
+     "code": "1160",
+     "name": "クリオピリン関連周期熱症候群",
+     "unit": null
+    },
+    {
+     "code": "1170",
+     "name": "若年性特発性関節炎",
+     "unit": null
+    },
+    {
+     "code": "1180",
+     "name": "TNF受容体関連周期性症候群",
+     "unit": null
+    },
+    {
+     "code": "1190",
+     "name": "非典型溶血性尿毒症症候群",
+     "unit": null
+    },
+    {
+     "code": "1200",
+     "name": "ブラウ症候群",
+     "unit": null
+    },
+    {
+     "code": "1210",
+     "name": "先天性ミオパチー",
+     "unit": null
+    },
+    {
+     "code": "1220",
+     "name": "マリネスコ・シェーグレン症候群",
+     "unit": null
+    },
+    {
+     "code": "1230",
+     "name": "筋ジストロフィー",
+     "unit": null
+    },
+    {
+     "code": "1240",
+     "name": "非ジストロフィー性ミオトニー症候群",
+     "unit": null
+    },
+    {
+     "code": "1250",
+     "name": "遺伝性周期性四肢麻痺",
+     "unit": null
+    },
+    {
+     "code": "1260",
+     "name": "アトピー性脊髄炎",
+     "unit": null
+    },
+    {
+     "code": "1270",
+     "name": "脊髄空洞症",
+     "unit": null
+    },
+    {
+     "code": "1280",
+     "name": "脊髄髄膜瘤",
+     "unit": null
+    },
+    {
+     "code": "1290",
+     "name": "アイザックス症候群",
+     "unit": null
+    },
+    {
+     "code": "1300",
+     "name": "遺伝性ジストニア",
+     "unit": null
+    },
+    {
+     "code": "1310",
+     "name": "神経フェリチン症",
+     "unit": null
+    },
+    {
+     "code": "1320",
+     "name": "脳表ヘモジデリン沈着症",
+     "unit": null
+    },
+    {
+     "code": "1330",
+     "name": "禿頭と変形性脊椎症を伴う常染色体劣性白質脳症",
+     "unit": null
+    },
+    {
+     "code": "1340",
+     "name": "皮質下梗塞と白質脳症を伴う常染色体優性脳動脈症",
+     "unit": null
+    },
+    {
+     "code": "1350",
+     "name": "神経軸索スフェロイド形成を伴う遺伝性びまん性白質脳症",
+     "unit": null
+    },
+    {
+     "code": "1360",
+     "name": "ペリー症候群",
+     "unit": null
+    },
+    {
+     "code": "1370",
+     "name": "前頭側頭葉変性症",
+     "unit": null
+    },
+    {
+     "code": "1380",
+     "name": "ビッカースタッフ脳幹脳炎",
+     "unit": null
+    },
+    {
+     "code": "1390",
+     "name": "痙攣重積型（二相性）急性脳症",
+     "unit": null
+    },
+    {
+     "code": "1400",
+     "name": "先天性無痛無汗症",
+     "unit": null
+    },
+    {
+     "code": "1410",
+     "name": "アレキサンダー病",
+     "unit": null
+    },
+    {
+     "code": "1420",
+     "name": "先天性核上性球麻痺",
+     "unit": null
+    },
+    {
+     "code": "1430",
+     "name": "メビウス症候群",
+     "unit": null
+    },
+    {
+     "code": "1440",
+     "name": "中隔視神経形成異常症／ドモルシア症候群",
+     "unit": null
+    },
+    {
+     "code": "1450",
+     "name": "アイカルディ症候群",
+     "unit": null
+    },
+    {
+     "code": "1460",
+     "name": "片側巨脳症",
+     "unit": null
+    },
+    {
+     "code": "1470",
+     "name": "限局性皮質異形成",
+     "unit": null
+    },
+    {
+     "code": "1480",
+     "name": "神経細胞移動異常症",
+     "unit": null
+    },
+    {
+     "code": "1490",
+     "name": "先天性大脳白質形成不全症",
+     "unit": null
+    },
+    {
+     "code": "1500",
+     "name": "ドラベ症候群",
+     "unit": null
+    },
+    {
+     "code": "1510",
+     "name": "海馬硬化を伴う内側側頭葉てんかん",
+     "unit": null
+    },
+    {
+     "code": "1520",
+     "name": "ミオクロニー欠神てんかん",
+     "unit": null
+    },
+    {
+     "code": "1530",
+     "name": "ミオクロニー脱力発作を伴うてんかん",
+     "unit": null
+    },
+    {
+     "code": "1540",
+     "name": "レノックス・ガストー症候群",
+     "unit": null
+    },
+    {
+     "code": "1550",
+     "name": "ウエスト症候群",
+     "unit": null
+    },
+    {
+     "code": "1560",
+     "name": "大田原症候群",
+     "unit": null
+    },
+    {
+     "code": "1570",
+     "name": "早期ミオクロニー脳症",
+     "unit": null
+    },
+    {
+     "code": "1580",
+     "name": "遊走性焦点発作を伴う乳児てんかん",
+     "unit": null
+    },
+    {
+     "code": "1590",
+     "name": "片側痙攣・片麻痺・てんかん症候群",
+     "unit": null
+    },
+    {
+     "code": "1600",
+     "name": "環状20番染色体症候群",
+     "unit": null
+    },
+    {
+     "code": "1610",
+     "name": "ラスムッセン脳炎",
+     "unit": null
+    },
+    {
+     "code": "1620",
+     "name": "ＰＣＤＨ19関連症候群",
+     "unit": null
+    },
+    {
+     "code": "1630",
+     "name": "難治頻回部分発作重積型急性脳炎",
+     "unit": null
+    },
+    {
+     "code": "1640",
+     "name": "徐波睡眠期持続性棘徐波を示すてんかん性脳症",
+     "unit": null
+    },
+    {
+     "code": "1650",
+     "name": "ランドウ・クレフナー症候群",
+     "unit": null
+    },
+    {
+     "code": "1660",
+     "name": "レット症候群",
+     "unit": null
+    },
+    {
+     "code": "1670",
+     "name": "スタージ・ウェーバー症候群",
+     "unit": null
+    },
+    {
+     "code": "1680",
+     "name": "結節性硬化症",
+     "unit": null
+    },
+    {
+     "code": "1690",
+     "name": "色素性乾皮症",
+     "unit": null
+    },
+    {
+     "code": "1700",
+     "name": "先天性魚鱗癬",
+     "unit": null
+    },
+    {
+     "code": "1710",
+     "name": "家族性良性慢性天疱瘡",
+     "unit": null
+    },
+    {
+     "code": "1720",
+     "name": "類天疱瘡（後天性表皮水疱症を含む。）",
+     "unit": null
+    },
+    {
+     "code": "1730",
+     "name": "特発性後天性全身性無汗症",
+     "unit": null
+    },
+    {
+     "code": "1740",
+     "name": "眼皮膚白皮症",
+     "unit": null
+    },
+    {
+     "code": "1750",
+     "name": "肥厚性皮膚骨膜症",
+     "unit": null
+    },
+    {
+     "code": "1760",
+     "name": "弾性線維性仮性黄色腫",
+     "unit": null
+    },
+    {
+     "code": "1770",
+     "name": "マルファン症候群",
+     "unit": null
+    },
+    {
+     "code": "1780",
+     "name": "エーラス・ダンロス症候群",
+     "unit": null
+    },
+    {
+     "code": "1790",
+     "name": "メンケス病",
+     "unit": null
+    },
+    {
+     "code": "1800",
+     "name": "オクシピタル・ホーン症候群",
+     "unit": null
+    },
+    {
+     "code": "1810",
+     "name": "ウィルソン病",
+     "unit": null
+    },
+    {
+     "code": "1820",
+     "name": "低ホスファターゼ症",
+     "unit": null
+    },
+    {
+     "code": "1830",
+     "name": "ＶＡＴＥＲ症候群",
+     "unit": null
+    },
+    {
+     "code": "1840",
+     "name": "那須・ハコラ病",
+     "unit": null
+    },
+    {
+     "code": "1850",
+     "name": "ウィーバー症候群",
+     "unit": null
+    },
+    {
+     "code": "1860",
+     "name": "コフィン・ローリー症候群",
+     "unit": null
+    },
+    {
+     "code": "1870",
+     "name": "ジュベール症候群関連疾患",
+     "unit": null
+    },
+    {
+     "code": "1880",
+     "name": "モワット・ウィルソン症候群",
+     "unit": null
+    },
+    {
+     "code": "1890",
+     "name": "ウィリアムズ症候群",
+     "unit": null
+    },
+    {
+     "code": "1900",
+     "name": "ＡＴＲ－Ｘ症候群",
+     "unit": null
+    },
+    {
+     "code": "1910",
+     "name": "クルーゾン症候群",
+     "unit": null
+    },
+    {
+     "code": "1920",
+     "name": "アペール症候群",
+     "unit": null
+    },
+    {
+     "code": "1930",
+     "name": "ファイファー症候群",
+     "unit": null
+    },
+    {
+     "code": "1940",
+     "name": "アントレー・ビクスラー症候群",
+     "unit": null
+    },
+    {
+     "code": "1950",
+     "name": "コフィン・シリス症候群",
+     "unit": null
+    },
+    {
+     "code": "1960",
+     "name": "ロスムンド・トムソン症候群",
+     "unit": null
+    },
+    {
+     "code": "1970",
+     "name": "歌舞伎症候群",
+     "unit": null
+    },
+    {
+     "code": "1980",
+     "name": "多脾症候群",
+     "unit": null
+    },
+    {
+     "code": "1990",
+     "name": "無脾症候群",
+     "unit": null
+    },
+    {
+     "code": "2000",
+     "name": "鰓耳腎症候群",
+     "unit": null
+    },
+    {
+     "code": "2010",
+     "name": "ウェルナー症候群",
+     "unit": null
+    },
+    {
+     "code": "2020",
+     "name": "コケイン症候群",
+     "unit": null
+    },
+    {
+     "code": "2030",
+     "name": "プラダー・ウィリ症候群",
+     "unit": null
+    },
+    {
+     "code": "2040",
+     "name": "ソトス症候群",
+     "unit": null
+    },
+    {
+     "code": "2050",
+     "name": "ヌーナン症候群",
+     "unit": null
+    },
+    {
+     "code": "2060",
+     "name": "ヤング・シンプソン症候群",
+     "unit": null
+    },
+    {
+     "code": "2070",
+     "name": "１ｐ36欠失症候群",
+     "unit": null
+    },
+    {
+     "code": "2080",
+     "name": "４ｐ欠失症候群",
+     "unit": null
+    },
+    {
+     "code": "2090",
+     "name": "５ｐ欠失症候群",
+     "unit": null
+    },
+    {
+     "code": "2100",
+     "name": "第14番染色体父親性ダイソミー症候群",
+     "unit": null
+    },
+    {
+     "code": "2110",
+     "name": "アンジェルマン症候群",
+     "unit": null
+    },
+    {
+     "code": "2120",
+     "name": "スミス・マギニス症候群",
+     "unit": null
+    },
+    {
+     "code": "2130",
+     "name": "22ｑ11.2欠失症候群",
+     "unit": null
+    },
+    {
+     "code": "2140",
+     "name": "エマヌエル症候群",
+     "unit": null
+    },
+    {
+     "code": "2150",
+     "name": "脆弱Ｘ症候群関連疾患",
+     "unit": null
+    },
+    {
+     "code": "2160",
+     "name": "脆弱Ｘ症候群",
+     "unit": null
+    },
+    {
+     "code": "2170",
+     "name": "総動脈幹遺残症",
+     "unit": null
+    },
+    {
+     "code": "2180",
+     "name": "修正大血管転位症",
+     "unit": null
+    },
+    {
+     "code": "2190",
+     "name": "完全大血管転位症",
+     "unit": null
+    },
+    {
+     "code": "2200",
+     "name": "単心室症",
+     "unit": null
+    },
+    {
+     "code": "2210",
+     "name": "左心低形成症候群",
+     "unit": null
+    },
+    {
+     "code": "2220",
+     "name": "三尖弁閉鎖症",
+     "unit": null
+    },
+    {
+     "code": "2230",
+     "name": "心室中隔欠損を伴わない肺動脈閉鎖症",
+     "unit": null
+    },
+    {
+     "code": "2240",
+     "name": "心室中隔欠損を伴う肺動脈閉鎖症",
+     "unit": null
+    },
+    {
+     "code": "2250",
+     "name": "ファロー四徴症",
+     "unit": null
+    },
+    {
+     "code": "2260",
+     "name": "両大血管右室起始症",
+     "unit": null
+    },
+    {
+     "code": "2270",
+     "name": "エプスタイン病",
+     "unit": null
+    },
+    {
+     "code": "2280",
+     "name": "アルポート症候群",
+     "unit": null
+    },
+    {
+     "code": "2290",
+     "name": "ギャロウェイ・モワト症候群",
+     "unit": null
+    },
+    {
+     "code": "2300",
+     "name": "急速進行性糸球体腎炎",
+     "unit": null
+    },
+    {
+     "code": "2310",
+     "name": "抗糸球体基底膜腎炎",
+     "unit": null
+    },
+    {
+     "code": "2320",
+     "name": "一次性ネフローゼ症候群",
+     "unit": null
+    },
+    {
+     "code": "2330",
+     "name": "一次性膜性増殖性糸球体腎炎",
+     "unit": null
+    },
+    {
+     "code": "2340",
+     "name": "紫斑病性腎炎",
+     "unit": null
+    },
+    {
+     "code": "2350",
+     "name": "先天性腎性尿崩症",
+     "unit": null
+    },
+    {
+     "code": "2360",
+     "name": "間質性膀胱炎（ハンナ型）",
+     "unit": null
+    },
+    {
+     "code": "2370",
+     "name": "オスラー病",
+     "unit": null
+    },
+    {
+     "code": "2380",
+     "name": "閉塞性細気管支炎",
+     "unit": null
+    },
+    {
+     "code": "2390",
+     "name": "肺胞蛋白症（自己免疫性又は先天性）",
+     "unit": null
+    },
+    {
+     "code": "2400",
+     "name": "肺胞低換気症候群",
+     "unit": null
+    },
+    {
+     "code": "2410",
+     "name": "α1－アンチトリプシン欠乏症",
+     "unit": null
+    },
+    {
+     "code": "2420",
+     "name": "カーニー複合",
+     "unit": null
+    },
+    {
+     "code": "2430",
+     "name": "ウォルフラム症候群",
+     "unit": null
+    },
+    {
+     "code": "2440",
+     "name": "ペルオキシソーム病（副腎白質ジストロフィーを除く。）",
+     "unit": null
+    },
+    {
+     "code": "2450",
+     "name": "副甲状腺機能低下症",
+     "unit": null
+    },
+    {
+     "code": "2460",
+     "name": "偽性副甲状腺機能低下症",
+     "unit": null
+    },
+    {
+     "code": "2470",
+     "name": "副腎皮質刺激ホルモン不応症",
+     "unit": null
+    },
+    {
+     "code": "2480",
+     "name": "ビタミンＤ抵抗性くる病／骨軟化症",
+     "unit": null
+    },
+    {
+     "code": "2490",
+     "name": "ビタミンＤ依存性くる病／骨軟化症",
+     "unit": null
+    },
+    {
+     "code": "2500",
+     "name": "フェニルケトン尿症",
+     "unit": null
+    },
+    {
+     "code": "2510",
+     "name": "高チロシン血症1型",
+     "unit": null
+    },
+    {
+     "code": "2520",
+     "name": "高チロシン血症2型",
+     "unit": null
+    },
+    {
+     "code": "2530",
+     "name": "高チロシン血症3型",
+     "unit": null
+    },
+    {
+     "code": "2540",
+     "name": "メープルシロップ尿症",
+     "unit": null
+    },
+    {
+     "code": "2550",
+     "name": "プロピオン酸血症",
+     "unit": null
+    },
+    {
+     "code": "2560",
+     "name": "メチルマロン酸血症",
+     "unit": null
+    },
+    {
+     "code": "2570",
+     "name": "イソ吉草酸血症",
+     "unit": null
+    },
+    {
+     "code": "2580",
+     "name": "グルコーストランスポーター1欠損症",
+     "unit": null
+    },
+    {
+     "code": "2590",
+     "name": "グルタル酸血症1型",
+     "unit": null
+    },
+    {
+     "code": "2600",
+     "name": "グルタル酸血症2型",
+     "unit": null
+    },
+    {
+     "code": "2610",
+     "name": "尿素サイクル異常症",
+     "unit": null
+    },
+    {
+     "code": "2620",
+     "name": "リジン尿性蛋白不耐症",
+     "unit": null
+    },
+    {
+     "code": "2630",
+     "name": "先天性葉酸吸収不全",
+     "unit": null
+    },
+    {
+     "code": "2640",
+     "name": "ポルフィリン症",
+     "unit": null
+    },
+    {
+     "code": "2650",
+     "name": "複合カルボキシラーゼ欠損症",
+     "unit": null
+    },
+    {
+     "code": "2660",
+     "name": "筋型糖原病",
+     "unit": null
+    },
+    {
+     "code": "2670",
+     "name": "肝型糖原病",
+     "unit": null
+    },
+    {
+     "code": "2680",
+     "name": "ガラクトース－１－リン酸ウリジルトランスフェラーゼ欠損症",
+     "unit": null
+    },
+    {
+     "code": "2690",
+     "name": "レシチンコレステロールアシルトランスフェラーゼ欠損症",
+     "unit": null
+    },
+    {
+     "code": "2700",
+     "name": "シトステロール血症",
+     "unit": null
+    },
+    {
+     "code": "2710",
+     "name": "タンジール病",
+     "unit": null
+    },
+    {
+     "code": "2720",
+     "name": "原発性高カイロミクロン血症",
+     "unit": null
+    },
+    {
+     "code": "2730",
+     "name": "脳腱黄色腫症",
+     "unit": null
+    },
+    {
+     "code": "2740",
+     "name": "無βリポタンパク血症",
+     "unit": null
+    },
+    {
+     "code": "2750",
+     "name": "脂肪萎縮症",
+     "unit": null
+    },
+    {
+     "code": "2760",
+     "name": "家族性地中海熱",
+     "unit": null
+    },
+    {
+     "code": "2770",
+     "name": "高IgＤ症候群",
+     "unit": null
+    },
+    {
+     "code": "2780",
+     "name": "中條・西村症候群",
+     "unit": null
+    },
+    {
+     "code": "2790",
+     "name": "化膿性無菌性関節炎・壊疽性膿皮症・アクネ症候群",
+     "unit": null
+    },
+    {
+     "code": "2800",
+     "name": "慢性再発性多発性骨髄炎",
+     "unit": null
+    },
+    {
+     "code": "2810",
+     "name": "強直性脊椎炎",
+     "unit": null
+    },
+    {
+     "code": "2820",
+     "name": "進行性骨化性線維異形成症",
+     "unit": null
+    },
+    {
+     "code": "2830",
+     "name": "肋骨異常を伴う先天性側弯症",
+     "unit": null
+    },
+    {
+     "code": "2840",
+     "name": "骨形成不全症",
+     "unit": null
+    },
+    {
+     "code": "2850",
+     "name": "タナトフォリック骨異形成症",
+     "unit": null
+    },
+    {
+     "code": "2860",
+     "name": "軟骨無形成症",
+     "unit": null
+    },
+    {
+     "code": "2870",
+     "name": "リンパ管腫症／ゴーハム病",
+     "unit": null
+    },
+    {
+     "code": "2880",
+     "name": "巨大リンパ管奇形（頚部顔面病変）",
+     "unit": null
+    },
+    {
+     "code": "2890",
+     "name": "巨大静脈奇形（頚部口腔咽頭びまん性病変）",
+     "unit": null
+    },
+    {
+     "code": "2900",
+     "name": "巨大動静脈奇形（頚部顔面又は四肢病変）",
+     "unit": null
+    },
+    {
+     "code": "2910",
+     "name": "クリッペル・トレノネー・ウェーバー症候群",
+     "unit": null
+    },
+    {
+     "code": "2920",
+     "name": "先天性赤血球形成異常性貧血",
+     "unit": null
+    },
+    {
+     "code": "2930",
+     "name": "後天性赤芽球癆",
+     "unit": null
+    },
+    {
+     "code": "2940",
+     "name": "ダイアモンド・ブラックファン貧血",
+     "unit": null
+    },
+    {
+     "code": "2950",
+     "name": "ファンコニ貧血",
+     "unit": null
+    },
+    {
+     "code": "2960",
+     "name": "遺伝性鉄芽球性貧血",
+     "unit": null
+    },
+    {
+     "code": "2970",
+     "name": "エプスタイン症候群",
+     "unit": null
+    },
+    {
+     "code": "2980",
+     "name": "自己免疫性後天性凝固因子欠乏症",
+     "unit": null
+    },
+    {
+     "code": "2990",
+     "name": "クロンカイト・カナダ症候群",
+     "unit": null
+    },
+    {
+     "code": "3000",
+     "name": "非特異性多発性小腸潰瘍症",
+     "unit": null
+    },
+    {
+     "code": "3010",
+     "name": "ヒルシュスプルング病（全結腸型又は小腸型）",
+     "unit": null
+    },
+    {
+     "code": "3020",
+     "name": "総排泄腔外反症",
+     "unit": null
+    },
+    {
+     "code": "3030",
+     "name": "総排泄腔遺残",
+     "unit": null
+    },
+    {
+     "code": "3040",
+     "name": "先天性横隔膜ヘルニア",
+     "unit": null
+    },
+    {
+     "code": "3050",
+     "name": "乳幼児肝巨大血管腫",
+     "unit": null
+    },
+    {
+     "code": "3060",
+     "name": "胆道閉鎖症",
+     "unit": null
+    },
+    {
+     "code": "3070",
+     "name": "アラジール症候群",
+     "unit": null
+    },
+    {
+     "code": "3080",
+     "name": "遺伝性膵炎",
+     "unit": null
+    },
+    {
+     "code": "3090",
+     "name": "嚢胞性線維症",
+     "unit": null
+    },
+    {
+     "code": "3100",
+     "name": "IgＧ４関連疾患",
+     "unit": null
+    },
+    {
+     "code": "3110",
+     "name": "黄斑ジストロフィー",
+     "unit": null
+    },
+    {
+     "code": "3120",
+     "name": "レーベル遺伝性視神経症",
+     "unit": null
+    },
+    {
+     "code": "3130",
+     "name": "アッシャー症候群",
+     "unit": null
+    },
+    {
+     "code": "3140",
+     "name": "若年発症型両側性感音難聴",
+     "unit": null
+    },
+    {
+     "code": "3150",
+     "name": "遅発性内リンパ水腫",
+     "unit": null
+    },
+    {
+     "code": "3160",
+     "name": "好酸球性副鼻腔炎",
+     "unit": null
+    },
+    {
+     "code": "3170",
+     "name": "カナバン病",
+     "unit": null
+    },
+    {
+     "code": "3180",
+     "name": "進行性白質脳症",
+     "unit": null
+    },
+    {
+     "code": "3190",
+     "name": "進行性ミオクローヌスてんかん",
+     "unit": null
+    },
+    {
+     "code": "3200",
+     "name": "先天異常症候群",
+     "unit": null
+    },
+    {
+     "code": "3210",
+     "name": "先天性三尖弁狭窄症",
+     "unit": null
+    },
+    {
+     "code": "3220",
+     "name": "先天性僧帽弁狭窄症",
+     "unit": null
+    },
+    {
+     "code": "3230",
+     "name": "先天性肺静脈狭窄症",
+     "unit": null
+    },
+    {
+     "code": "3240",
+     "name": "左肺動脈右肺動脈起始症",
+     "unit": null
+    },
+    {
+     "code": "3250",
+     "name": "ネイルパテラ症候群（爪膝蓋骨症候群）／ＬＭＸ１Ｂ関連腎症",
+     "unit": null
+    },
+    {
+     "code": "3260",
+     "name": "カルニチン回路異常症",
+     "unit": null
+    },
+    {
+     "code": "3270",
+     "name": "三頭酵素欠損症",
+     "unit": null
+    },
+    {
+     "code": "3280",
+     "name": "シトリン欠損症",
+     "unit": null
+    },
+    {
+     "code": "3290",
+     "name": "セピアプテリン還元酵素（SR）欠損症",
+     "unit": null
+    },
+    {
+     "code": "3300",
+     "name": "先天性グリコシルホスファチジルイノシトール（GPI）欠損症",
+     "unit": null
+    },
+    {
+     "code": "3310",
+     "name": "非ケトーシス型高グリシン血症",
+     "unit": null
+    },
+    {
+     "code": "3320",
+     "name": "β－ケトチオラーゼ欠損症",
+     "unit": null
+    },
+    {
+     "code": "3330",
+     "name": "芳香族L-アミノ酸脱炭酸酵素欠損症",
+     "unit": null
+    },
+    {
+     "code": "3340",
+     "name": "メチルグルタコン酸尿症",
+     "unit": null
+    },
+    {
+     "code": "3350",
+     "name": "遺伝性自己炎症疾患",
+     "unit": null
+    },
+    {
+     "code": "3360",
+     "name": "大理石骨病",
+     "unit": null
+    },
+    {
+     "code": "3370",
+     "name": "特発性血栓症（遺伝性血栓性素因によるものに限る。）",
+     "unit": null
+    },
+    {
+     "code": "3380",
+     "name": "前眼部形成異常",
+     "unit": null
+    },
+    {
+     "code": "3390",
+     "name": "無虹彩症",
+     "unit": null
+    },
+    {
+     "code": "3400",
+     "name": "先天性気管狭窄症／先天性声門下狭窄症",
+     "unit": null
+    },
+    {
+     "code": "3410",
+     "name": "特発性多中心性キャッスルマン病",
+     "unit": null
+    },
+    {
+     "code": "3420",
+     "name": "膠様滴状角膜ジストロフィー",
+     "unit": null
+    },
+    {
+     "code": "3430",
+     "name": "ハッチンソン・ギルフォード症候群",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "area",
+   "name": "都道府県－指定都市",
+   "valueCount": 68,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "01000",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "02000",
+     "name": "青森県",
+     "unit": null
+    },
+    {
+     "code": "03000",
+     "name": "岩手県",
+     "unit": null
+    },
+    {
+     "code": "04000",
+     "name": "宮城県",
+     "unit": null
+    },
+    {
+     "code": "05000",
+     "name": "秋田県",
+     "unit": null
+    },
+    {
+     "code": "06000",
+     "name": "山形県",
+     "unit": null
+    },
+    {
+     "code": "07000",
+     "name": "福島県",
+     "unit": null
+    },
+    {
+     "code": "08000",
+     "name": "茨城県",
+     "unit": null
+    },
+    {
+     "code": "09000",
+     "name": "栃木県",
+     "unit": null
+    },
+    {
+     "code": "10000",
+     "name": "群馬県",
+     "unit": null
+    },
+    {
+     "code": "11000",
+     "name": "埼玉県",
+     "unit": null
+    },
+    {
+     "code": "12000",
+     "name": "千葉県",
+     "unit": null
+    },
+    {
+     "code": "13000",
+     "name": "東京都",
+     "unit": null
+    },
+    {
+     "code": "14000",
+     "name": "神奈川県",
+     "unit": null
+    },
+    {
+     "code": "15000",
+     "name": "新潟県",
+     "unit": null
+    },
+    {
+     "code": "16000",
+     "name": "富山県",
+     "unit": null
+    },
+    {
+     "code": "17000",
+     "name": "石川県",
+     "unit": null
+    },
+    {
+     "code": "18000",
+     "name": "福井県",
+     "unit": null
+    },
+    {
+     "code": "19000",
+     "name": "山梨県",
+     "unit": null
+    },
+    {
+     "code": "20000",
+     "name": "長野県",
+     "unit": null
+    },
+    {
+     "code": "21000",
+     "name": "岐阜県",
+     "unit": null
+    },
+    {
+     "code": "22000",
+     "name": "静岡県",
+     "unit": null
+    },
+    {
+     "code": "23000",
+     "name": "愛知県",
+     "unit": null
+    },
+    {
+     "code": "24000",
+     "name": "三重県",
+     "unit": null
+    },
+    {
+     "code": "25000",
+     "name": "滋賀県",
+     "unit": null
+    },
+    {
+     "code": "26000",
+     "name": "京都府",
+     "unit": null
+    },
+    {
+     "code": "27000",
+     "name": "大阪府",
+     "unit": null
+    },
+    {
+     "code": "28000",
+     "name": "兵庫県",
+     "unit": null
+    },
+    {
+     "code": "29000",
+     "name": "奈良県",
+     "unit": null
+    },
+    {
+     "code": "30000",
+     "name": "和歌山県",
+     "unit": null
+    },
+    {
+     "code": "31000",
+     "name": "鳥取県",
+     "unit": null
+    },
+    {
+     "code": "32000",
+     "name": "島根県",
+     "unit": null
+    },
+    {
+     "code": "33000",
+     "name": "岡山県",
+     "unit": null
+    },
+    {
+     "code": "34000",
+     "name": "広島県",
+     "unit": null
+    },
+    {
+     "code": "35000",
+     "name": "山口県",
+     "unit": null
+    },
+    {
+     "code": "36000",
+     "name": "徳島県",
+     "unit": null
+    },
+    {
+     "code": "37000",
+     "name": "香川県",
+     "unit": null
+    },
+    {
+     "code": "38000",
+     "name": "愛媛県",
+     "unit": null
+    },
+    {
+     "code": "39000",
+     "name": "高知県",
+     "unit": null
+    },
+    {
+     "code": "40000",
+     "name": "福岡県",
+     "unit": null
+    },
+    {
+     "code": "41000",
+     "name": "佐賀県",
+     "unit": null
+    },
+    {
+     "code": "42000",
+     "name": "長崎県",
+     "unit": null
+    },
+    {
+     "code": "43000",
+     "name": "熊本県",
+     "unit": null
+    },
+    {
+     "code": "44000",
+     "name": "大分県",
+     "unit": null
+    },
+    {
+     "code": "45000",
+     "name": "宮崎県",
+     "unit": null
+    },
+    {
+     "code": "46000",
+     "name": "鹿児島県",
+     "unit": null
+    },
+    {
+     "code": "47000",
+     "name": "沖縄県",
+     "unit": null
+    },
+    {
+     "code": "01100",
+     "name": "札幌市",
+     "unit": null
+    },
+    {
+     "code": "04100",
+     "name": "仙台市",
+     "unit": null
+    },
+    {
+     "code": "11100",
+     "name": "さいたま市",
+     "unit": null
+    },
+    {
+     "code": "12100",
+     "name": "千葉市",
+     "unit": null
+    },
+    {
+     "code": "14100",
+     "name": "横浜市",
+     "unit": null
+    },
+    {
+     "code": "14130",
+     "name": "川崎市",
+     "unit": null
+    },
+    {
+     "code": "14150",
+     "name": "相模原市",
+     "unit": null
+    },
+    {
+     "code": "15100",
+     "name": "新潟市",
+     "unit": null
+    },
+    {
+     "code": "22100",
+     "name": "静岡市",
+     "unit": null
+    },
+    {
+     "code": "22130",
+     "name": "浜松市",
+     "unit": null
+    },
+    {
+     "code": "23100",
+     "name": "名古屋市",
+     "unit": null
+    },
+    {
+     "code": "26100",
+     "name": "京都市",
+     "unit": null
+    },
+    {
+     "code": "27100",
+     "name": "大阪市",
+     "unit": null
+    },
+    {
+     "code": "27140",
+     "name": "堺市",
+     "unit": null
+    },
+    {
+     "code": "28100",
+     "name": "神戸市",
+     "unit": null
+    },
+    {
+     "code": "33100",
+     "name": "岡山市",
+     "unit": null
+    },
+    {
+     "code": "34100",
+     "name": "広島市",
+     "unit": null
+    },
+    {
+     "code": "40100",
+     "name": "北九州市",
+     "unit": null
+    },
+    {
+     "code": "40130",
+     "name": "福岡市",
+     "unit": null
+    },
+    {
+     "code": "43100",
+     "name": "熊本市",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年度次）",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "2020100000",
+     "name": "2020年度",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

@@ -97,7 +97,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
   --media  .local/r2/sns/ranking/<key>/x/stills/<key>.png \
   --caption .local/r2/sns/ranking/<key>/x/caption.txt \
   --dry-run
-# dry-run で予約モード確認できたら --dry-run を外して本番予約
+# dry-run で予約モード確認できたら --dry-run を --approve に替えて本番予約 (オーナー指示時のみ・台帳に承認を記録)
 ```
 
 - `<key>` が実在 ranking key なら DB (`sns_posts`) 連携は自動 (`--skip-db` 不要)。

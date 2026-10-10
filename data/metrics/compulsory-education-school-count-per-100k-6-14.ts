@@ -17,7 +17,7 @@ export const compulsoryEducationSchoolCountPer100k614: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2018,
     "to": 2024,
   },
   "yearFormat": "fiscal",

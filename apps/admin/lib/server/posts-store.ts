@@ -39,14 +39,46 @@ export interface Post {
   metric_keys: string | null;
   created_at: string;
   updated_at: string;
+  /** 承認 (契約: data/sns/posts.schema.json)。unrecorded = 承認の記録を始める前の行 */
+  approval?: PostApproval;
+  /** Instagram の media_id (post_url から導出できない外部 ID だけを保存する) */
+  external_id?: string | null;
+  /** 長尺投稿の台本 (data/sns/scripts/<id>.json) */
+  script_path?: string | null;
+  /** Google Drive へ保全した素材。未保全の行は undefined */
+  assets?: PostAsset[];
   // store は任意の追加フィールドを保持しうる
   [key: string]: unknown;
+}
+
+export interface PostApproval {
+  state: "pending" | "approved" | "rejected" | "unrecorded";
+  by?: string | null;
+  at?: string | null;
+  via?: string | null;
+  note?: string | null;
+}
+
+export interface PostAsset {
+  role: "image" | "slide" | "video" | "thumbnail";
+  order: number;
+  state: "archived" | "missing";
+  drive_path?: string;
+  sha256?: string;
+  bytes?: number;
+  mime?: string;
+  width?: number;
+  height?: number;
+  source?: string | null;
+  reason?: string;
 }
 
 interface Store {
   STORE_PATH: string;
   loadAll(): Post[];
   query(predicate: (p: Post) => boolean): Post[];
+  getById(id: number): Post | null;
+  externalIdOf(p: Post): string | null;
 }
 
 // .cjs を実行時の素の Node require で読み込む。`createRequire(...)(path)` や `require(path)` を
@@ -75,4 +107,13 @@ export function loadAll(): Post[] {
 
 export function query(predicate: (p: Post) => boolean): Post[] {
   return store().query(predicate);
+}
+
+export function getById(id: number): Post | null {
+  return store().getById(id);
+}
+
+/** 外部 (各媒体側) の投稿 ID。導出規則は sns-posts-store.cjs の externalIdOf が正本 */
+export function externalIdOf(p: Post): string | null {
+  return store().externalIdOf(p);
 }

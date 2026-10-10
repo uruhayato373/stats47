@@ -17,7 +17,7 @@ export const intellectualDisabilitySupportFacilityStaffPer100k: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2011,
+    "from": 2002,
     "to": 2011,
   },
   "yearFormat": "fiscal",

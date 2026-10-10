@@ -28,12 +28,19 @@
  * type: "image" (既定) | "reels" | "carousel" (2026-09-23〜)。carousel は
  * slides (instagram/stills/ 直下のファイル名、表示順) を必須とする。R2 は公開 URL で
  * 一覧できないため、枚数と順序はエントリが明示する。
+ *
+ * 承認 (2026-10-09 オーナー決定: 新規投稿は承認必須): エントリの post_id (register-ig-schedule.cjs が
+ * 台帳へ登録して書き戻す) が承認済みのものだけを投稿する。投稿すべき時刻のエントリが承認待ち・未登録なら
+ * 投稿せず exit 3 で止める (Actions の失敗通知で気づけるように。黙って空振りさせない)。
+ * 投稿後は台帳の post_id 行へ media_id (external_id)・permalink・posted_at を書く。台帳の書き込みに
+ * 失敗しても投稿は取り消せないので警告に留め、record-posted.cjs と週次の link-ig-media.cjs が補う。
  */
 
 const fs = require("node:fs");
 const path = require("node:path");
 const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
+const store = require("../lib/sns-posts-store.cjs");
 
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
@@ -113,18 +120,27 @@ function loadScheduleEntries(dates) {
  *   (2026-09 に 3 週で 3 回、00:44〜01:24 JST に発火)。拾うのは前日まで (それより古いものは出さない)
  * - 当日は time (既定 "08:00") が現在時刻以前のものだけ
  * - 未投稿 = posted に `date|content_key` が無い。古い日付・早い時刻を先に出す
+ * - isApproved(entry) が false のものは投稿せず blocked に分ける (承認待ち・台帳未登録)
  */
-function selectDueEntry(entries, { today, yesterday, nowTime, posted }) {
+function selectDueEntry(entries, { today, yesterday, nowTime, posted, isApproved = () => true }) {
   const normalized = entries
     .map((e) => ({ ...e, time: e.time || "08:00" })) // time 無しの旧形式は朝枠 (08:03 cron) で配信
     .filter((e) => !posted.has(`${e.date}|${e.content_key}`));
-  const due = normalized
+  const dueAll = normalized
     .filter((e) => e.date === yesterday || (e.date === today && e.time <= nowTime))
     .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+  const due = dueAll.filter((e) => isApproved(e));
+  const blocked = dueAll.filter((e) => !isApproved(e));
   const upcoming = normalized
     .filter((e) => e.date === today && e.time > nowTime)
     .sort((a, b) => a.time.localeCompare(b.time));
-  return { next: due[0] ?? null, upcoming };
+  return { next: due[0] ?? null, upcoming, blocked };
+}
+
+/** エントリの post_id が台帳で承認済みか */
+function isEntryApproved(entry) {
+  if (!Number.isInteger(entry.post_id)) return false;
+  return store.isApproved(store.getById(entry.post_id));
 }
 
 function getJstTime() {
@@ -157,7 +173,24 @@ async function findTodayEntry() {
   console.log(`[post-from-schedule] today (JST): ${today} ${nowTime}`);
   const entries = loadScheduleEntries([yesterday, today]);
   if (!entries.length) return null;
-  const { next, upcoming } = selectDueEntry(entries, { today, yesterday, nowTime, posted: loadPostedSet() });
+  const { next, upcoming, blocked } = selectDueEntry(entries, {
+    today,
+    yesterday,
+    nowTime,
+    posted: loadPostedSet(),
+    isApproved: isEntryApproved,
+  });
+  for (const e of blocked) {
+    const why = Number.isInteger(e.post_id) ? `承認待ち (post_id=${e.post_id})` : "台帳に未登録 (post_id なし)";
+    console.error(`⏸  [post-from-schedule] ${e.date} ${e.time} ${e.domain}/${e.content_key} は${why}のため投稿しません`);
+  }
+  if (!next && blocked.length) {
+    console.error(
+      "承認: node .claude/scripts/instagram/register-ig-schedule.cjs --all && node .claude/scripts/sns/approve-posts.cjs --ids " +
+        blocked.map((e) => e.post_id ?? "?").join(","),
+    );
+    process.exit(3);
+  }
   if (!next && upcoming.length) {
     console.log(
       `[post-from-schedule] 未投稿 ${upcoming.length} 件はすべて time > ${nowTime} (次: ${upcoming[0].time})、skip`,
@@ -473,16 +506,35 @@ async function main() {
     return;
   }
 
+  let result;
   if (entry.type === "reels") {
-    await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl, domain: entry.domain });
+    result = await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl, domain: entry.domain });
   } else if (entry.type === "carousel") {
-    await postCarousel({ caption, imageUrls: mediaUrls });
+    result = await postCarousel({ caption, imageUrls: mediaUrls });
   } else {
-    await postImage({ contentKey: entry.content_key, caption, imageUrl: mediaUrl });
+    result = await postImage({ contentKey: entry.content_key, caption, imageUrl: mediaUrl });
+  }
+  recordToLedger(entry, result, caption);
+}
+
+/** 投稿した post_id 行へ外部 ID・URL・本文を書く。投稿は取り消せないので失敗しても止めない */
+function recordToLedger(entry, { mediaId, permalink }, caption) {
+  try {
+    store.updateById(entry.post_id, {
+      status: "posted",
+      posted_at: new Date().toISOString(),
+      post_url: permalink,
+      external_id: mediaId,
+      post_type: ledgerPostTypeFor(entry) === "carousel" ? "carousel" : entry.type === "reels" ? "reel" : "original",
+      caption,
+    });
+    console.log(`📝 台帳 id=${entry.post_id} を posted に更新 (media_id=${mediaId})`);
+  } catch (e) {
+    console.error(`⚠ 台帳の更新に失敗 (id=${entry.post_id})。record-posted.cjs と週次の link-ig-media.cjs が補う: ${e.message || e}`);
   }
 }
 
-module.exports = { carouselUrlsFor, ledgerPostTypeFor, selectDueEntry, shiftDate };
+module.exports = { carouselUrlsFor, ledgerPostTypeFor, selectDueEntry, shiftDate, isEntryApproved };
 
 if (require.main === module) {
   main().catch((err) => {

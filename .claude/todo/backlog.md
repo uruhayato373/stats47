@@ -313,6 +313,36 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UNPUSHED-COMMIT-STOP-01] セッションが develop にコミットしたまま push せずに終わるのを Stop hook で差し戻す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10、別のセッションが checker-wiring の修正 c4d0bc03a を本体の作業ツリーの develop にコミットしたまま push せずに離れた。その間 origin/develop の Develop Quality Gate は落ち続け (run 37998239267 ほか)、別のセッションが気づいて pull と push をするまで残った。いまの Stop hook 5 本 (`check-consistency-on-stop.js` / `check-docs-on-stop.js` / `check-findings-on-stop.js` / `check-weekly-cadence-on-stop.js` / `session-guard.js`) は、ローカルの develop が origin より先にある状態を見ていない。
+- **次**: Stop hook で、`git log origin/develop..develop` にそのセッションが作ったコミットがあれば 1 回だけ差し戻し、push するか、push しない理由を返答に書くよう促す。他のセッションのコミットで誤って止めないよう、セッションの開始時刻以降の自分の author のコミットに限る。fetch はしない (hook を遅くしない)。
+- **優先度の根拠**: 起きると develop の検査が赤のまま残り、後の作業者が原因の切り分けに時間を使う。ただし CI 自体は検出しているので、🔴 ではなく 🟡 とする。
+- **完了条件**: 未 push のコミットがある状態で Stop すると 1 回差し戻され、push 後は差し戻されないことをテストで固定した。
+
+### [CHECKER-WIRING-PRECOMMIT-01] 配線されていない検査スクリプトを push 前に止めるため、pre-commit でも check-checker-wiring を走らせる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10、`.claude/scripts/sns/check-post-trace.mjs` が CI に blocking でつながれないまま develop に push され (5c08d6c0a)、Develop Quality Gate が `[NON_BLOCKING_GATE]` / `[MISSING_GATE_TRIGGER]` で落ちた。`check-checker-wiring.cjs --baseline` は `pr-quality-check.yml` / `backlog-loop-daily.yml` / `agent-consistency-weekly.yml` と develop の Quality Gate でしか動かず、pre-commit (`apps/web/scripts/pre-commit-checks.sh`) では動かない。
+- **次**: staged に検査スクリプト (`check-*` / `audit-*`) か `.github/workflows/*.yml` が含まれるときだけ、pre-commit で `check-checker-wiring.cjs --baseline` を走らせる。所要時間を測り、遅ければ対象を staged ファイルに絞る。
+- **優先度の根拠**: CI では検出できているので被害は「push 後に赤になる」までに限られる。🟡 とする。
+- **完了条件**: 未配線の検査スクリプトを staged にすると commit が止まり、配線済みなら通ることを確認した。
+
+### [SNS-TRACE-YT-LEGACY-01] YouTube の URL の無い投稿 42 行と content_key 不明の 2 本を Studio で確定する
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-09] [領域:SNS]
+
+- **事象**: 投稿台帳を「1 id から全部たどれる」形へ補完した (2026-10-09・`backfill-post-trace.mjs`) が、YouTube の posted 行 42 件 (id 83〜429、2026-03 投稿) は URL も本文も無く、外部 ID をたどれない。指標の時系列に残る未知の動画 ID 94 本のうち公開中は 7 本だけで、残り 87 本は削除済みか非公開 (oEmbed が返らない)。追加した公開動画 7 本のうち `bi2UqZu_vOQ`・`z0cfD_rCgEI` は説明欄にランキング URL が無く content_key が空。
+- **次**: オーナーが YouTube Studio の動画一覧 (非公開・削除済みを含む) と照合し、42 行に `post_url` を入れるか、存在しない投稿なら `deleted_at` を記録する。2 本の content_key をタイトルから決める。書き込みは store 経由 (`sns-posts-store.cjs`)。
+- **完了条件**: `npm run sns:trace:check` の「外部 ID をたどれない posted 行」から YouTube が消える。
+
+### [SNS-YT-STALE-RECORDS-01] YouTube 保留判断に EXP-006 と古い memory を合わせ、未追跡の古い state を消す
+タグ: [SNS・マーケ] [種類:改善] [実行:sweep] [起票:2026-10-09] [領域:SNS]
+
+- **事象**: YouTube は 2026-09-23 から保留 (`sns-content-standards.md` §0) だが、`data/business/experiments.json` の EXP-006 は `status: "running"` のまま。memory `project_youtube_mass_experiment_2026_07.md` は撤去済みの CI 投稿経路 (2026-07-27 `437b81d83` / `794ce84d4` で削除) を現役として書き、`reference_publish_youtube_47_summary.md` は作業ツリーにも履歴にも無いスキルを指す。`data/sns/metric-discovery-index.json` の古いコピーが旧置き場に未追跡のまま残っている (2026-10-06 の data/ への移動前の残り)。
+- **次**: EXP-006 を保留状態と次の確認日に更新、2 つの memory を事実に合わせて直すか削除、未追跡の古いコピーを削除する。
+
+
 ### [CRITIC-PATTERN-CHART-TEXT] critic の指摘「図と本文」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:サイト]
 
@@ -857,16 +887,6 @@ updated: 2026-10-06
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
 
-### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
-
-- **事象**: Security Scan の 2 ゲート (`npm audit --audit-level=high` と `npm audit --omit=dev --audit-level=low`) が braces (GHSA-vfj7-8cjw-p6xm, high) で失敗する。braces は `<=3.0.3` が該当で、最新 3.0.3 も脆弱なため override では直せない (2026-10-06 時点で修正版は未公開)。katex と postcss-selector-parser は同日に root の `overrides` で解消済み。
-- **runtime 側の経路**: apps/web の `dependencies` にある `@tailwindcss/container-queries` が tailwindcss 3 を peer で要求するため、tailwindcss 3.4.19 → chokidar / fast-glob → micromatch → braces が runtime 扱いになる。`npm audit fix --force` が提案するのは tailwindcss 4.3.3 へのメジャー更新。
-- **影響範囲**: `apps/web/tailwind.config.ts` (121 行、typography と container-queries の 2 plugin) を v4 の CSS 設定 (`@theme` / `@plugin`) へ移す。`apps/web/postcss.config.mjs` は `@tailwindcss/postcss` へ置き換える。`apps/web/src/app/globals.css` (487 行、`@apply` 18 箇所) を書き換える。container-queries は v4 本体に入っているので依存から外す。`@tailwindcss/typography` は v4 対応版へ上げる。v4 で名前や既定値が変わったユーティリティ (shadow / rounded / ring の段階名など) は全 tsx を走査して置き換える。apps/admin は既に v4.3.3 なので設定の参照例になる。
-- **手順**: ①`npx @tailwindcss/upgrade` を作業ブランチで実行して差分を確認する ②移行前後で代表 URL のスクリーンショットを比較する (`.claude/rules/page-quality-standards.md` の代表 URL) ③`npm run build --workspace=web`・`npm run type-check`・`npm audit --omit=dev --audit-level=low` を通す。
-- **停止条件**: 見た目の差分が意図せず出た状態で本番デプロイしない。デプロイはオーナー確認後にまとめて 1 回だけ行う。
-- **完了条件**: `npm audit --omit=dev --audit-level=low` が exit 0 になり、代表 URL の表示差分が無いか意図どおりである。dev 側に残る経路は [DEPS-BRACES-GATE-01] が扱う。
-- **観測 (2026-10-08)**: develop→main の PR #1104 でも Security Scan が同じ braces で失敗した。必須チェック (`Code Quality Check` のみ) ではないためデプロイは止めていない。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -1734,17 +1754,10 @@ updated: 2026-10-06
 ### [RANKING-FIRST-VIEW-RELEASE-01] ランキングページを「最初の画面で答えを出す」形に改修し、既存 3 件とまとめて 1 回のリリースで測る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
-- **指標SSOT・サマリUI実装 (2026-10-09、ローカル実装済み・本番未反映)**:
-  - 2,638指標の定義・取得元・単位・計算・表示方針を data/metrics/ へ移行。旧metricsディレクトリと生e-Statパラメータのテーマ互換読取を削除。指標IDをランキング・55テーマ・area・全国・市区町村・原典逆引きへ接続。
-  - 平均・中央値・最小・最大・分位・有効件数は観測値から計算し、設定に手入力しない。共通表示方針と指標別の例外でコロプレスの配色・階級・基準値・数値domain、推移・比較のY軸を管理。総人口は5分位、男女賃金格差は100基準。
-  - 型からJSON Schemaを生成。全指標・テーマのスキーマ、分類条件、ID参照、依存循環、利用ページ逆引きと生成鮮度を npm run metrics:check で検査。配信metadataでも同じpresentation契約を必須にし、都道府県・市区町村とも旧形式を受理しない。
-  - 地図と凡例は共通resolverのdomain・境界値・色を使用。市区町村地図とD3都道府県地図も同じ解決結果で描画。正規化時は対象単位に応じた方針を使い、未対応の正規化URLは受理しない。
-  - 上位3件と最下位を、共通の実値目盛りと単純平均の線を持つドット図へ変更。1位と2位の差と同順位を明示。平均推移にY軸・暦年のX軸・選択年の目印を追加。単年時の空枠を縮め、値と単位の折返しを防止。全幅でタイトル→計算方法→要約→地図の順に統一。
-  - 検証: 2,638指標/55テーマの契約、content 9,116ページ/44route/928tag、移行前後の単位/取得条件、都道府県2,589個別item/2,499集約itemと市区町村171 item/valuesの整合がPASS。旧minValueType/presetは拒否し、生成処理も共通表示方針を参照する。全25package+8script型検査、web本番相当build(1,627ページ生成)、変更web 46file lint(エラー/警告0)、直近17file/158test、CI中継13test/政策15test、生成定義2件のschema検証がPASS。変更sourceのsecret検査は2,787file/検出0。390/768/1440px・負値・単年・年切替・正規化・100基準・5分位・darkのランキング11ケースと市区町村/全国の計13画面をlocalhostで確認し、200・JSエラー0・横overflow0。撮影と観測結果はCodex visualizations内 ranking-summary-review-20261009/ の final-observations.json / extended-observations.json とPNG。ローカルのみ、本番未反映。
-  - 保存時ゲートの是正: 原典/利用ページ逆引きを100指標ずつ27 shardへ分割（最大363,336byte、全2,638IDの欠落/重複0）。旧単一indexは削除。凡例・推移軸・複数系列の最新値を共通数値整形へ揃え、追加対象15test、ファイルサイズ/数値整形/保守負債の新規違反0、修正後25package+8script型検査を確認。検証用buildは一時領域へ保全し、設定の検査対象から除く。
-  - 実画面で分位配色の偏りを検出・是正: 区間の実値中点ではなく階級順から配色し、発散色の基準を維持。偏った分布でも同じ階級色になる性質を含む13test、visualization型検査、人口密度390pxの再撮影(200/JSエラー0/横overflow0)、最終本番相当build(1,627ページ生成)PASSを確認。
-  - **本番反映条件**: 同じコードから都道府県の全itemと集約索引、市区町村の全item/valuesを再生成・検査してR2へ先に反映し、その後アプリをまとめて1回デプロイする。ローカルmetadataは .local/r2/。旧形式の補完はしない。
-  - **残る本カードの範囲**: 下記の地図/表統合・出典整理等の既存リリース範囲と本番計測は、この実装だけでは完了扱いにしない。アクセス改善の効果は未計測。
+- **現在地 (2026-10-10)**: 指標SSOT・表示契約と要約UIは本番確認済み。2,639指標/56テーマをdata/の定義・原典と指標IDで接続し、平均・分位・軸範囲は観測値から解決する。旧形式の互換読取は削除。上位3件/最下位は実値軸・単純平均線・順位差を示し、推移は数値Y軸・暦年X軸と選択年を示す。実装・検査の証拠は [PR #1116](https://github.com/uruhayato373/stats47/pull/1116)、必須CI [37908326854](https://github.com/uruhayato373/stats47/actions/runs/37908326854)。
+- **配信検証**: [Deploy 37924050596](https://github.com/uruhayato373/stats47/actions/runs/37924050596) (main 8bff690216、[PR #1118](https://github.com/uruhayato373/stats47/pull/1118)) で、都道府県2,590個別item/2,500集約item・市区町村171 item/values組・home/master/page-componentsの計3,219 JSONを同じコードから再生成・契約検査・SHA固定manifestで反映してからアプリを公開。全件反映・build・キャッシュ更新・スモーク・sitemap検査が成功。公開R2でも全2,500集約itemと代表指標/市区町村の表示契約を検証済み。途中停止の再実行判定と53分の反映時間の対策は DEPLOY-METRIC-RELEASE-TIMEOUT-01 が所有する。
+- **本番画面の受入**: 390/768/1440px、2020年切替、人口密度、100基準、市区町村、home/theme/area/geo/blog/全国と追加3タグの計17ケースが200・JSエラー0・横overflow0。日照時間2024年の平均2,034.6時間/首位差23.6時間、2020年の平均1,969.1時間、人口密度の人/100km²と5分位色を確認。スクショと observations.json は Codex visualizations の ranking-summary-review-20261009/production/。年・単位の切替は取得完了後を確認する。
+- **本カードで残る範囲**: 以下の地図/表統合・出典整理等と公開後の回遊/アクセス計測。今回のSSOT・要約UI反映だけで親カードを完了扱いにしない。アクセス改善の効果は未計測。依存関係のSecurity Scanは既存のDEPS-BRACES-GATE-01の対象で、今回も未解消 (必須品質検査は成功)。
 - **結論 (2026-09-25 壁打ち・オーナー合意)**: UI はランキングページを最優先にする。ランキングは PV 19,040 (国内 28 日、全体の約半分)・
   検索クリック 3,861 (GSC W38) の最大の面で、1 人あたり PV は 2.00。
 - **問題 (2026-09-25 localhost 778px で確認)**: `/ranking/national-pension-full-exemption-rate` の最初の画面はタイトルと地図だけで、
@@ -2532,24 +2545,14 @@ updated: 2026-10-06
 - **前提**: `japan-zue`の解決済みinventoryは論点発見だけに使う。記事・テーマへ載せる定義、年度、単位、値は、各metricの一次資料とR2観測値で再検証する。原文、OCR、書籍値、内部cropは公開しない。
 - **テーマ企画**: 参考文献で`theme`対象になり、既存ThemeCatalogまたはIndicatorSetへ未統合の制作単位だけを保持する。`draft`は採択・チャート設計待ち、`blocked`はactiveな公開metricが無いため停止中。
 
-<!-- reference-theme-plans:start -->
-| metricKey | title | targetTheme | status | hypothesis |
-| --- | --- | --- | --- | --- |
-| projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
-| gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
-| students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
-| general-households | 一般世帯数 | population-dynamics | draft | [却下 2026-09-14] 人口動態=増減メカニズムと無関係、世帯構造は別テーマ向き |
-| area-ratio-of-total | 面積割合 | climate | draft | [却下 2026-09-14] 面積割合は気候(気象)と直接関係せず地理指標 |
-| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | [却下 2026-09-14] 登録済みmanufacturing-establishmentsと同一statsDataId重複、年度が古い |
-| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | [却下 2026-09-14] subtitle年齢欠落・値63年が0歳時点と矛盾、metric要修正が先 |
-<!-- reference-theme-plans:end -->
+(2026-10-10 に `packages/data-configs/src/evidence-inventory/placement-decisions.ts` の channel=theme へ移した。企画中・停止・見送りはそこが正本で、管理画面 `/content/references` が読む)
 
 - **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
 - **ブログ下書き**: `contents/blog/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
 - **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
 - **2026-10-09 ワークフロー (wf_d880dc8a-bab) の結果**: `agriculture-output-employment-productivity-gap` と `household-structure-daytime-population-gap` は データ接地・SVG・quality-gate・独立 critic PASS まで完了 (published:false のまま)。公開に残るのは記事固有の背景画像 (Codex の担当、`npm run blog-images:codex -- request-article --slug <slug>`)。世帯構成の記事は指標を核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) に組み直した。`electricity-generation-manufacturing-establishments-gap` は 2 指標の相関 snapshot が無く停止 (2023 年の 47 県結合で r≈0.30。snapshot 外の散布図を例外として許すか、snapshot に実在する工業用水・港湾貨物の組へ企画を替えるかはオーナー判断)。`household-spending-debt-propensity-gap` は 3 指標に共通する年が無く停止 (負債現在高は 2019 年のみ、消費支出は 2019 年が無い)。
-- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。本番ページは公開記事一覧 (sitemap-blog-entries.ts) が main に入るまで 410 のため、PR #1116 のデプロイで表示される。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
+- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。PR #1116/#1118 と Deploy 37924050596で公開一覧を本番へ反映し、2026-10-10に2記事とも実ページ200・JSエラー0・横overflow0を確認した。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
 - **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
@@ -3349,6 +3352,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   アプリは旧版のまま、R2 は `app/home/featured.json` だけ更新され `app/ranking-items/all.json` は旧版、という途中の状態になった。
   本番の主要ページは 200 で壊れていないことを確認した。差分のある分だけ送る作りなので、同じ run を再実行した。
 - **2026-10-09 暫定対処 (オーナー判断)**: 再実行 (attempt 2) も同じ段で 37 分走って cancelled。差分だけ送る作りでも時間内に終わらなかった。`deploy-workers.yml` の deploy job を `timeout-minutes: 90` にした。この job は concurrency `r2-write` を握るため、その間は他の R2 書き込み workflow が待つ。
+- **2026-10-09 実測と判定の抜け**: 90 分にした後、PR #1118 のデプロイ (run 37922790127) は `Detect metric snapshot changes` が直前の push との差分だけを見るため反映段を skip した (前回の反映が途中で止まっていても補わない)。workflow_dispatch (run 37924050596) で全件反映し、反映 53 分 (11:32-12:25)・全体成功・スモーク成功。40 分では原理的に収まらない量。次の対策では、途中で止まった反映を次のデプロイが検知して再実行する判定 (前回成功した release の記録との比較など) も足す。
 - **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
   反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
 - **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
@@ -3619,7 +3623,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 ### [DEPS-BRACES-GATE-01] 修正版が無い braces 脆弱性で落ち続ける Security Scan の high ゲートをどう扱うか決める
 タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [検証:npm audit --audit-level=high] [起票:2026-10-06] [領域:管理]
 
-- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は 2026-10-06 に knip 6 へ更新して外した。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、`eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
+- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は knip 6 への更新で、tailwindcss 3 の経路 (runtime 側) は tailwindcss 4 への移行で 2026-10-06 に外した。残るのは `eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
 - **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
 - **追記 (2026-10-07)**: braces とは別に、sharp `<0.35.5` (CVE-2026-96889 / GHSA-wq5f-xc86-pv6w, high) が加わった。PR #1099 の run 37597838232 と、main への push の run 37554632545 で検出。直接依存は Dependabot PR #1087 (sharp 0.35.5) で上がる。ただし next・miniflare・wrangler が内部で持つ sharp が残り、#1087 自身の Security Scan も失敗している。`npm audit fix --force` は `@cloudflare/vitest-pool-workers` の版変更を伴う破壊的な更新を提案する。sharp は runtime 経路 (next) にも乗るので、例外の対象にはしない。
 - **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
@@ -3837,7 +3841,7 @@ stats47 で培ったデータ加工を、受託・販売などの形で収入に
 - **観測 (2026-10-08)**: 参考文献由来の公開指標 `child-abuse-consultation-cases` (児童虐待相談対応件数) を既存 55 テーマのどれにも採用できなかった
   (theme-designer の判断。保育の需給・ひとり親の主題とは別)。
 - **判断すること**: 児童相談・不登校・子どもの貧困などを束ねるテーマを作るか、指標をランキング単体のまま置くか。
-- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら参考文献のテーマ企画の表の行に理由を残す。
+- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら `placement-decisions.ts` の child-abuse-consultation-cases (channel=theme) を rejected と理由に書き換える。
 
 ### [KOUMUIN-AI-ENV-SERIES-01] 公務員AIノートに「職場のAI環境別」（庁内AIあり／なし）の記事を足すか決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-09] [領域:商品]

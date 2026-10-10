@@ -1,0 +1,68 @@
+{
+  "statsDataId": "0003456093",
+  "statName": "社会生活基本調査",
+  "title": "男女,頻度,旅行・行楽の種類別行動者率(10歳以上)－全国，都道府県",
+  "updatedDate": "2026-09-03",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "1"
+      },
+      "fetchedAt": "2026-10-07T01:54:48.036Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "2"
+      },
+      "fetchedAt": "2026-10-07T01:54:49.189Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "21"
+      },
+      "fetchedAt": "2026-10-07T01:54:48.038Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "211"
+      },
+      "fetchedAt": "2026-10-07T01:54:48.037Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "212"
+      },
+      "fetchedAt": "2026-10-07T01:54:49.164Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "22"
+      },
+      "fetchedAt": "2026-10-07T01:54:49.382Z",
+      "years": { "2021": 47 },
+      "rawRows": 50
+    }
+  ]
+}

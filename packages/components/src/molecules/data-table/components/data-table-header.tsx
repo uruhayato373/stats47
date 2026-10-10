@@ -19,7 +19,7 @@ export function DataTableHeader<TData>({
     enableSorting = true,
 }: DataTableHeaderProps<TData>) {
     return (
-        <TableHeader className="sticky top-0 z-10 bg-background shadow-sm">
+        <TableHeader className="sticky top-0 z-10 bg-background shadow-xs">
             {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (

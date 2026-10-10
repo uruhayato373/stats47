@@ -1,6 +1,374 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss' source(none);
+
+@config '../../tailwind.config.ts';
+
+/* v3 の行の高さ (固定の rem) を保つ。v4 既定は比率 (calc(1.75 / 1.25) 等) のため、
+   text-xl の中の text-[11px] のように子へ継承される行の高さが縮み、カードの高さが変わる */
+@theme {
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+}
+
+/* v3 の theme.containers (30 / 48 / 64rem) を保つ。v4 は @sm/@md/@lg と max-w-sm/md/lg が
+   --container-* を共有するため、テーマ値ではなく variant を上書きして max-w-* を v3 と同じ既定値に残す */
+@custom-variant @sm (@container (width >= 30rem));
+@custom-variant @md (@container (width >= 48rem));
+@custom-variant @lg (@container (width >= 64rem));
+
+/* v3 の safelist の置き換え。DashboardGridLayout が col-span-N を動的に組み立てる */
+@source inline("{,sm:,md:,lg:,xl:,@sm:,@md:,@lg:}col-span-{1,2,3,4,5,6,7,8,9,10,11,12}");
+
+/* v3 の theme.container (中央寄せ・padding 1rem・2xl で最大 1700px)。v4 は container の設定を持たない */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1700px) {
+    max-width: 1700px;
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* v4 の preflight の変更を v3 に戻す (公式アップグレードガイドの互換スタイル)。
+     placeholder は v4 で文字色の 50% に、ボタンのカーソルは default になった */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ===== Blog Article Typography (Soft Editorial — doboku-note 移植) =====
+ * 本文 16px / 行間 1.8 / 字間 0.03em、見出しは palt 詰め + 0.02em。
+ * H2 装飾なし・H3 アクセント左バー 4px・H4 グレー左バー 2px (バーは CSS 側で持つ)。 */
+
+@utility font-news-article {
+  font-family:
+    'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo,
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* @utility にすると .prose と同じ層・同じ詳細度になり、後に出力される .prose の行の高さ等が勝つ。
+   v3 と同じく本文の指定を prose より優先させるため、層の末尾に通常の CSS として置く */
+@layer utilities {
+  .blog-news-article {
+    font-family:
+      'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo,
+      'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+  
+    /* コード・数式はトラッキングをリセット (等幅・記号の整列を崩さない) */
+    & :not(pre) > code {
+      letter-spacing: normal;
+    }
+    & pre {
+      letter-spacing: normal;
+    }
+    & pre code {
+      letter-spacing: normal;
+    }
+  
+    & p {
+      margin-top: 1.25em;
+      margin-bottom: 1.25em;
+      line-height: 1.8;
+    }
+  
+    & p + p {
+      margin-top: 1.5em;
+    }
+  
+    & h2 {
+      font-feature-settings: 'palt' 1;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+  
+    & h3 {
+      font-feature-settings: 'palt' 1;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+  
+    & h4 {
+      font-feature-settings: 'palt' 1;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+  
+    & h2 {
+      margin: 2.8em 0 0.8em;
+      font-size: 22px;
+      font-weight: 700;
+    }
+  
+    & h3 {
+      margin: 3rem 0 1rem;
+      padding: 0.25rem 0 0.25rem 1rem;
+      border-left: 4px solid hsl(var(--article-accent, var(--primary)));
+      font-size: 19px;
+      font-weight: 700;
+    }
+  
+    & h4 {
+      margin: 2rem 0 0.75rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid hsl(var(--border));
+      font-size: 17px;
+      font-weight: 600;
+    }
+  
+    /* 見出し直後の段落はほぼ密着させる */
+    & h2 + p {
+      margin-top: 0.3em;
+    }
+    & h3 + p {
+      margin-top: 0.3em;
+    }
+    & h4 + p {
+      margin-top: 0.3em;
+    }
+  
+    & ul {
+      margin: 1.4rem 0;
+      line-height: 1.7;
+    }
+  
+    & ol {
+      margin: 1.4rem 0;
+      line-height: 1.7;
+    }
+  
+    & ul {
+      padding-left: 1.8em;
+    }
+  
+    & ol {
+      padding-left: 1.7em;
+    }
+  
+    & li {
+      margin: 0.4rem 0;
+      line-height: 1.7;
+    }
+  
+    & ul ul {
+      margin: 0.2em 0;
+    }
+  
+    & ul ol {
+      margin: 0.2em 0;
+    }
+  
+    & ol ul {
+      margin: 0.2em 0;
+    }
+  
+    & ol ol {
+      margin: 0.2em 0;
+    }
+  
+    & blockquote {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid hsl(var(--border));
+      padding-left: 1rem;
+      color: hsl(var(--muted-foreground));
+      font-style: normal;
+    }
+  
+    /* リンク: editorial アンダーライン (半透明 accent + offset 4px、hover で濃く) */
+    & a {
+      color: hsl(var(--article-accent, var(--primary)));
+      text-decoration: underline;
+      text-decoration-color: hsl(var(--article-accent, var(--primary)) / 0.38);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+  
+    & a:hover {
+      text-decoration-color: hsl(var(--article-accent, var(--primary)));
+    }
+  
+    & .not-prose {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  
+    @media (max-width: 639px) {
+      & h2 {
+        font-size: 20px;
+      }
+  
+      & h3 {
+        margin-top: 2.25rem;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@utility article-title {
+  /* 記事ページタイトル (h1): palt 詰め + ゆるいトラッキング (doboku H1 仕様) */
+  font-feature-settings: 'palt' 1;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+@utility not-prose {
+  .blog-news-article & {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+@utility blog-article {
+  @apply text-foreground leading-relaxed text-base;
+
+  & h2 {
+    @apply text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
+  }
+
+  & h3 {
+    @apply text-xl font-bold mt-9 mb-2 scroll-mt-20;
+  }
+
+  & p {
+    @apply my-4 leading-[1.9];
+  }
+
+  & ul {
+    @apply my-4 pl-6;
+  }
+
+  & ol {
+    @apply my-4 pl-6;
+  }
+
+  & li {
+    @apply my-1 leading-7;
+  }
+
+  & ul > li {
+    @apply list-disc;
+  }
+
+  & ol > li {
+    @apply list-decimal;
+  }
+
+  & a {
+    @apply text-primary underline underline-offset-2 hover:opacity-80;
+  }
+
+  & strong {
+    @apply font-bold;
+  }
+
+  & blockquote {
+    @apply border-l-4 border-border pl-4 my-4 text-muted-foreground italic;
+  }
+
+  & hr {
+    @apply my-8 border-border;
+  }
+
+  & code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm;
+  }
+
+  & pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto my-4;
+  }
+
+  & pre code {
+    @apply bg-transparent p-0;
+  }
+}
+
+@utility pb-safe {
+  /* Safe Area Utilities */
+  padding-bottom: var(--safe-area-bottom);
+}
+
+@utility pt-safe {
+  padding-top: var(--safe-area-top);
+}
+
+@utility pl-safe {
+  padding-left: var(--safe-area-left);
+}
+
+@utility pr-safe {
+  padding-right: var(--safe-area-right);
+}
+
+@utility shadow-soft-sm {
+  /* Soft Shadows */
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+@utility shadow-soft-md {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.05),
+    0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+@utility shadow-soft-lg {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.05),
+    0 4px 6px -4px rgb(0 0 0 / 0.05);
+}
+
+@utility glass {
+  /* Glassmorphism Utilities */
+  @apply bg-background/80 backdrop-blur-md border-b border-border/50;
+}
+
+@utility touch-feedback {
+  /* Touch Feedback */
+  @apply active:scale-[0.98] active:opacity-90 transition-transform duration-100;
+}
 
 /* ===== Modern Sophistication Theme (Indigo/Slate) ===== */
 @layer base {
@@ -100,8 +468,9 @@
 
 /* Coconala の Playwright 実測 font stack と同じ順序を使用する。 */
 .portal-header {
-  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
-    Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:
+    'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo,
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -221,240 +590,7 @@
   }
 }
 
-/* ===== Blog Article Typography (Soft Editorial — doboku-note 移植) =====
- * 本文 16px / 行間 1.8 / 字間 0.03em、見出しは palt 詰め + 0.02em。
- * H2 装飾なし・H3 アクセント左バー 4px・H4 グレー左バー 2px (バーは CSS 側で持つ)。 */
-@layer components {
-  .font-news-article,
-  .blog-news-article {
-    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
-      Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-
-  .blog-news-article {
-    font-size: 16px;
-    line-height: 1.8;
-    letter-spacing: 0.03em;
-  }
-
-  /* 記事ページタイトル (h1): palt 詰め + ゆるいトラッキング (doboku H1 仕様) */
-  .article-title {
-    font-feature-settings: "palt" 1;
-    letter-spacing: 0.02em;
-    line-height: 1.4;
-  }
-
-  /* コード・数式はトラッキングをリセット (等幅・記号の整列を崩さない) */
-  .blog-news-article :not(pre) > code,
-  .blog-news-article pre,
-  .blog-news-article pre code {
-    letter-spacing: normal;
-  }
-
-  .blog-news-article p {
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    line-height: 1.8;
-  }
-
-  .blog-news-article p + p {
-    margin-top: 1.5em;
-  }
-
-  .blog-news-article h2,
-  .blog-news-article h3,
-  .blog-news-article h4 {
-    font-feature-settings: "palt" 1;
-    letter-spacing: 0.02em;
-    line-height: 1.4;
-  }
-
-  .blog-news-article h2 {
-    margin: 2.8em 0 0.8em;
-    font-size: 22px;
-    font-weight: 700;
-  }
-
-  .blog-news-article h3 {
-    margin: 3rem 0 1rem;
-    padding: 0.25rem 0 0.25rem 1rem;
-    border-left: 4px solid hsl(var(--article-accent, var(--primary)));
-    font-size: 19px;
-    font-weight: 700;
-  }
-
-  .blog-news-article h4 {
-    margin: 2rem 0 0.75rem;
-    padding-left: 0.75rem;
-    border-left: 2px solid hsl(var(--border));
-    font-size: 17px;
-    font-weight: 600;
-  }
-
-  /* 見出し直後の段落はほぼ密着させる */
-  .blog-news-article h2 + p,
-  .blog-news-article h3 + p,
-  .blog-news-article h4 + p {
-    margin-top: 0.3em;
-  }
-
-  .blog-news-article ul,
-  .blog-news-article ol {
-    margin: 1.4rem 0;
-    line-height: 1.7;
-  }
-
-  .blog-news-article ul {
-    padding-left: 1.8em;
-  }
-
-  .blog-news-article ol {
-    padding-left: 1.7em;
-  }
-
-  .blog-news-article li {
-    margin: 0.4rem 0;
-    line-height: 1.7;
-  }
-
-  .blog-news-article ul ul,
-  .blog-news-article ul ol,
-  .blog-news-article ol ul,
-  .blog-news-article ol ol {
-    margin: 0.2em 0;
-  }
-
-  .blog-news-article blockquote {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-left: 3px solid hsl(var(--border));
-    padding-left: 1rem;
-    color: hsl(var(--muted-foreground));
-    font-style: normal;
-  }
-
-  /* リンク: editorial アンダーライン (半透明 accent + offset 4px、hover で濃く) */
-  .blog-news-article a {
-    color: hsl(var(--article-accent, var(--primary)));
-    text-decoration: underline;
-    text-decoration-color: hsl(var(--article-accent, var(--primary)) / 0.38);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
-  }
-
-  .blog-news-article a:hover {
-    text-decoration-color: hsl(var(--article-accent, var(--primary)));
-  }
-
-  .blog-news-article .not-prose {
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-
-  @media (max-width: 639px) {
-    .blog-news-article h2 {
-      font-size: 20px;
-    }
-
-    .blog-news-article h3 {
-      margin-top: 2.25rem;
-      font-size: 18px;
-    }
-  }
-
-  .blog-article {
-    @apply text-foreground leading-relaxed text-base;
-  }
-
-  .blog-article h2 {
-    @apply text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
-  }
-
-  .blog-article h3 {
-    @apply text-xl font-bold mt-9 mb-2 scroll-mt-20;
-  }
-
-  .blog-article p {
-    @apply my-4 leading-[1.9];
-  }
-
-  .blog-article ul,
-  .blog-article ol {
-    @apply my-4 pl-6;
-  }
-
-  .blog-article li {
-    @apply my-1 leading-7;
-  }
-
-  .blog-article ul > li {
-    @apply list-disc;
-  }
-
-  .blog-article ol > li {
-    @apply list-decimal;
-  }
-
-  .blog-article a {
-    @apply text-primary underline underline-offset-2 hover:opacity-80;
-  }
-
-  .blog-article strong {
-    @apply font-bold;
-  }
-
-  .blog-article blockquote {
-    @apply border-l-4 border-border pl-4 my-4 text-muted-foreground italic;
-  }
-
-  .blog-article hr {
-    @apply my-8 border-border;
-  }
-
-  .blog-article code {
-    @apply bg-muted px-1.5 py-0.5 rounded text-sm;
-  }
-
-  .blog-article pre {
-    @apply bg-muted p-4 rounded-lg overflow-x-auto my-4;
-  }
-
-  .blog-article pre code {
-    @apply bg-transparent p-0;
-  }
-}
-
 @layer utilities {
-  /* Safe Area Utilities */
-  .pb-safe {
-    padding-bottom: var(--safe-area-bottom);
-  }
-  .pt-safe {
-    padding-top: var(--safe-area-top);
-  }
-  .pl-safe {
-    padding-left: var(--safe-area-left);
-  }
-  .pr-safe {
-    padding-right: var(--safe-area-right);
-  }
-
-  /* Soft Shadows */
-  .shadow-soft-sm {
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  }
-  .shadow-soft-md {
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  }
-  .shadow-soft-lg {
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-  }
-  
-  /* Glassmorphism Utilities */
-  .glass {
-    @apply bg-background/80 backdrop-blur-md border-b border-border/50;
-  }
-
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -478,10 +614,5 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
-  }
-  
-  /* Touch Feedback */
-  .touch-feedback {
-    @apply active:scale-[0.98] active:opacity-90 transition-transform duration-100;
   }
 }

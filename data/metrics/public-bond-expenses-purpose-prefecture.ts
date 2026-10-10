@@ -18,8 +18,8 @@ export const publicBondExpensesPurposePrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
-    "to": 2021,
+    "from": 1975,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "visualization": {

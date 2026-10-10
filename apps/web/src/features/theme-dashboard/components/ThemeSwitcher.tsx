@@ -110,7 +110,7 @@ export function ThemeSwitcher({
           </span>
           <Link
             href="/themes"
-            className="text-xs font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="text-xs font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
           >
             テーマ一覧
           </Link>

@@ -17,8 +17,18 @@ export const tatamiPerPersonRented: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
-    "to": 2023,
+    "years": [
+      1978,
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
+      2008,
+      2013,
+      2018,
+      2023,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

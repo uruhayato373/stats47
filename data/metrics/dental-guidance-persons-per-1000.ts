@@ -18,7 +18,7 @@ export const dentalGuidancePersonsPer1000: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 2021,
     "to": 2023,
   },
   "yearFormat": "fiscal",

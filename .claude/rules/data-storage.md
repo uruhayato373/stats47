@@ -32,7 +32,10 @@ paths:
 
 ページ・タグIDと回遊契約も例外として `data/content/{routes,tags,navigation}.json` + JSON Schemaを正本にする
 （2026-10-08 オーナー指示）。`entities.json` と `pages/*.json` は既存の定義とR2記事からの分割生成物で、手編集しない。
-全ルートのID網羅と参照整合は `npm run content:check`。観測値・本文・Geo途中artifactは従来の正本に残す。
+全ルートのID網羅と参照整合は `npm run content:check`。stats47 の外の公開物 (note 記事 `note:<key>`・SNS の投稿 `sns:<投稿ID>`) も
+外部 URL のまま `data/content/external.json` に載せ、指標・記事への関係 (`uses`) を張る (2026-10-10)。サイトの台帳 (`entities.json`・`pages/`) と
+指標の逆引き索引には混ぜない (SNS の投稿台帳は CI が随時書き換えるため)。`content:check` は形と参照だけを見て鮮度は問わない。
+下書き・予約は各正本 (note のカタログ・`data/sns/posts.json`) に残す。観測値・本文・Geo途中artifactは従来の正本に残す。
 
 `.claude/` はエージェント運用の置き場で、事業の台帳・記録・素材を置かない。git で管理するファイルは次の 6 つに分ける
 (`config/`・`data/` は doboku-note と同じ区分)。アプリが読む配信データは従来どおり git TS → R2 で、これとは別である。
@@ -226,7 +229,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | Cloudflare 日次 usage と月次・週次コスト | `data/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生 JSON は 30 件。日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issue）、`data/cloudflare/{monthly,weekly}-snapshots/` / 閾値 `.claude/config/budgets/cloudflare-cost-improvement/` |
 | （凍結記録）AdSense | `data/adsense/`。2026-09-20 の恒久停止で更新されない。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）を見る |
 | アフィリエイトの成果・提携・実験 | `data/affiliate/`（A8・もしも・楽天の成果、提携台帳 `{a8,affiliate}-catalog.json`、実験台帳 `experiments.json` (書込は `/manage-affiliate-experiment` のみ)、GA4 実測の週次集約 `ga4-affiliate-history.csv`）。GA4 実測の生 snapshot は 2026-09-14 から R2 `state/ads/ga4-affiliate/` (ローカルは `npm run state:pull -- ads/ga4-affiliate`)。在庫棚卸し・compliance などの最新状態は `data/affiliate/{inventory-*,*-latest}.json` |
-| **SNS 投稿台帳 (投稿履歴の SSOT)** | `data/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない） |
+| **SNS 投稿台帳 (投稿履歴の SSOT)** | `data/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない）。形は `posts.schema.json`、長尺の台本は `data/sns/scripts/<id>.json`、画像・動画の実体は Google Drive `stats47/SNS素材/` (台帳は相対パス・sha256 だけ。契約 `sns-content-standards.md` §3-1) |
 | SNS 投稿メトリクス時系列 | `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | 商品の販売台帳・受領記録・生成と販売準備の状態 | `data/products/`（状態は `*-status.json`） |
 | 計測→記録→改善サイクルの週次まとめ | `data/measurement-cycle/{latest.json,LATEST.md,history.csv,triage-latest.json}`（`build-measurement-cycle.mjs` が日曜の `fetch-metrics-weekly.yml` と月曜の `improvement-cycle-weekly.yml` で作る。週次メトリクス Issue と `/weekly-review` が読む） |

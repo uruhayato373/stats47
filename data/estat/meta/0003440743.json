@@ -1,0 +1,417 @@
+{
+ "statsDataId": "0003440743",
+ "title": "所得のジニ係数 全国・都市階級・地方・４大都市圏・都道府県別等価所得のジニ係数－全国・都市階級・地方・４大都市圏・都道府県",
+ "statName": "全国家計構造調査（旧全国消費実態調査）",
+ "govOrg": "総務省",
+ "surveyDate": "201901-201912",
+ "overallTotalNumber": 670,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "25-2019",
+     "name": "ジニ係数",
+     "unit": null
+    },
+    {
+     "code": "06-2019",
+     "name": "集計世帯数（概数）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "等価所得構成5区分",
+   "valueCount": 5,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "等価可処分所得（ＯＥＣＤ新基準準拠）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "等価可処分所得（従来型算定）",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "等価第一次所得（ＯＥＣＤ新基準準拠）",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "等価市場所得（ＯＥＣＤ新基準準拠）",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "等価粗所得（ＯＥＣＤ新基準準拠）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域（全国・都市階級・地方・４大都市圏・都道府県）",
+   "valueCount": 67,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "00101",
+     "name": "大都市",
+     "unit": null
+    },
+    {
+     "code": "00102",
+     "name": "中都市",
+     "unit": null
+    },
+    {
+     "code": "00103",
+     "name": "小都市Ａ",
+     "unit": null
+    },
+    {
+     "code": "00104",
+     "name": "小都市Ｂ",
+     "unit": null
+    },
+    {
+     "code": "00105",
+     "name": "町村",
+     "unit": null
+    },
+    {
+     "code": "00201",
+     "name": "北海道地方",
+     "unit": null
+    },
+    {
+     "code": "00202",
+     "name": "東北地方",
+     "unit": null
+    },
+    {
+     "code": "00203",
+     "name": "関東地方",
+     "unit": null
+    },
+    {
+     "code": "00204",
+     "name": "北陸地方",
+     "unit": null
+    },
+    {
+     "code": "00205",
+     "name": "東海地方",
+     "unit": null
+    },
+    {
+     "code": "00206",
+     "name": "近畿地方",
+     "unit": null
+    },
+    {
+     "code": "00207",
+     "name": "中国地方",
+     "unit": null
+    },
+    {
+     "code": "00208",
+     "name": "四国地方",
+     "unit": null
+    },
+    {
+     "code": "00209",
+     "name": "九州地方",
+     "unit": null
+    },
+    {
+     "code": "00210",
+     "name": "沖縄地方",
+     "unit": null
+    },
+    {
+     "code": "00303",
+     "name": "関東大都市圏",
+     "unit": null
+    },
+    {
+     "code": "00306",
+     "name": "中京大都市圏",
+     "unit": null
+    },
+    {
+     "code": "00307",
+     "name": "近畿大都市圏",
+     "unit": null
+    },
+    {
+     "code": "00310",
+     "name": "北九州・福岡大都市圏",
+     "unit": null
+    },
+    {
+     "code": "01000",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "02000",
+     "name": "青森県",
+     "unit": null
+    },
+    {
+     "code": "03000",
+     "name": "岩手県",
+     "unit": null
+    },
+    {
+     "code": "04000",
+     "name": "宮城県",
+     "unit": null
+    },
+    {
+     "code": "05000",
+     "name": "秋田県",
+     "unit": null
+    },
+    {
+     "code": "06000",
+     "name": "山形県",
+     "unit": null
+    },
+    {
+     "code": "07000",
+     "name": "福島県",
+     "unit": null
+    },
+    {
+     "code": "08000",
+     "name": "茨城県",
+     "unit": null
+    },
+    {
+     "code": "09000",
+     "name": "栃木県",
+     "unit": null
+    },
+    {
+     "code": "10000",
+     "name": "群馬県",
+     "unit": null
+    },
+    {
+     "code": "11000",
+     "name": "埼玉県",
+     "unit": null
+    },
+    {
+     "code": "12000",
+     "name": "千葉県",
+     "unit": null
+    },
+    {
+     "code": "13000",
+     "name": "東京都",
+     "unit": null
+    },
+    {
+     "code": "14000",
+     "name": "神奈川県",
+     "unit": null
+    },
+    {
+     "code": "15000",
+     "name": "新潟県",
+     "unit": null
+    },
+    {
+     "code": "16000",
+     "name": "富山県",
+     "unit": null
+    },
+    {
+     "code": "17000",
+     "name": "石川県",
+     "unit": null
+    },
+    {
+     "code": "18000",
+     "name": "福井県",
+     "unit": null
+    },
+    {
+     "code": "19000",
+     "name": "山梨県",
+     "unit": null
+    },
+    {
+     "code": "20000",
+     "name": "長野県",
+     "unit": null
+    },
+    {
+     "code": "21000",
+     "name": "岐阜県",
+     "unit": null
+    },
+    {
+     "code": "22000",
+     "name": "静岡県",
+     "unit": null
+    },
+    {
+     "code": "23000",
+     "name": "愛知県",
+     "unit": null
+    },
+    {
+     "code": "24000",
+     "name": "三重県",
+     "unit": null
+    },
+    {
+     "code": "25000",
+     "name": "滋賀県",
+     "unit": null
+    },
+    {
+     "code": "26000",
+     "name": "京都府",
+     "unit": null
+    },
+    {
+     "code": "27000",
+     "name": "大阪府",
+     "unit": null
+    },
+    {
+     "code": "28000",
+     "name": "兵庫県",
+     "unit": null
+    },
+    {
+     "code": "29000",
+     "name": "奈良県",
+     "unit": null
+    },
+    {
+     "code": "30000",
+     "name": "和歌山県",
+     "unit": null
+    },
+    {
+     "code": "31000",
+     "name": "鳥取県",
+     "unit": null
+    },
+    {
+     "code": "32000",
+     "name": "島根県",
+     "unit": null
+    },
+    {
+     "code": "33000",
+     "name": "岡山県",
+     "unit": null
+    },
+    {
+     "code": "34000",
+     "name": "広島県",
+     "unit": null
+    },
+    {
+     "code": "35000",
+     "name": "山口県",
+     "unit": null
+    },
+    {
+     "code": "36000",
+     "name": "徳島県",
+     "unit": null
+    },
+    {
+     "code": "37000",
+     "name": "香川県",
+     "unit": null
+    },
+    {
+     "code": "38000",
+     "name": "愛媛県",
+     "unit": null
+    },
+    {
+     "code": "39000",
+     "name": "高知県",
+     "unit": null
+    },
+    {
+     "code": "40000",
+     "name": "福岡県",
+     "unit": null
+    },
+    {
+     "code": "41000",
+     "name": "佐賀県",
+     "unit": null
+    },
+    {
+     "code": "42000",
+     "name": "長崎県",
+     "unit": null
+    },
+    {
+     "code": "43000",
+     "name": "熊本県",
+     "unit": null
+    },
+    {
+     "code": "44000",
+     "name": "大分県",
+     "unit": null
+    },
+    {
+     "code": "45000",
+     "name": "宮崎県",
+     "unit": null
+    },
+    {
+     "code": "46000",
+     "name": "鹿児島県",
+     "unit": null
+    },
+    {
+     "code": "47000",
+     "name": "沖縄県",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸(年次)",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "2019000000",
+     "name": "2019年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

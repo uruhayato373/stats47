@@ -197,7 +197,7 @@ function makeMdComponents(
 
         pre: ({ children, ...props }: ComponentProps) => (
             <pre
-                className="my-4 overflow-x-auto rounded-content border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-sm"
+                className="my-4 overflow-x-auto rounded-content border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-xs"
                 {...props}
             >
                 {children}
@@ -223,13 +223,15 @@ function makeMdComponents(
             );
         },
 
+        // 本文の .blog-news-article li (上下 0.4rem) より強い詳細度で項目間を 4px にする。
+        // v4 の space-y は :where() で詳細度が低く、本文の li 指定に負けて項目間が広がる
         ul: ({ children, ...props }: ComponentProps) => (
-            <ul className="my-4 list-disc space-y-1 pl-6" {...props}>
+            <ul className="my-4 list-disc pl-6 [&>li+li]:mt-1 [&>li+li]:mb-0" {...props}>
                 {children}
             </ul>
         ),
         ol: ({ children, ...props }: ComponentProps) => (
-            <ol className="my-4 list-decimal space-y-1 pl-6" {...props}>
+            <ol className="my-4 list-decimal pl-6 [&>li+li]:mt-1 [&>li+li]:mb-0" {...props}>
                 {children}
             </ol>
         ),
@@ -567,7 +569,7 @@ export function MDContent({
     );
     return (
         <article
-            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-muted prose-pre:text-foreground prose-pre:border prose-pre:border-border prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-muted prose-pre:text-foreground prose-pre:border prose-pre:border-border prose-pre:shadow-xs prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown

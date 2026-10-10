@@ -18,7 +18,7 @@ export const japanHealthInsuranceSocietyMedicalExpenseInsuredPerPerson: MetricCo
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 2009,
     "to": 2023,
   },
   "yearFormat": "fiscal",

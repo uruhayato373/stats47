@@ -17,8 +17,15 @@ export const pcOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2014,
-    "to": 2014,
+    "years": [
+      1984,
+      1989,
+      1994,
+      1999,
+      2004,
+      2009,
+      2014,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

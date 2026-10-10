@@ -17,8 +17,13 @@ export const establishmentRatio59EmployeesPrivate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
-    "to": 2021,
+    "years": [
+      2009,
+      2011,
+      2014,
+      2016,
+      2021,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

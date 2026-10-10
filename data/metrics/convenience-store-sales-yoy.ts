@@ -18,7 +18,7 @@ export const convenienceStoreSalesYoy: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2019,
+    "from": 2013,
     "to": 2019,
   },
   "yearFormat": "fiscal",

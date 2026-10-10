@@ -7,7 +7,10 @@
  * D1 DB への書き込みは行わない（sns_post_id = "" でも CSV に記録可能）。
  *
  * 使い方:
- *   INSTAGRAM_ACCESS_TOKEN=xxx INSTAGRAM_BUSINESS_ACCOUNT_ID=yyy node fetch-metrics-ci.cjs
+ *   INSTAGRAM_ACCESS_TOKEN=xxx INSTAGRAM_BUSINESS_ACCOUNT_ID=yyy node fetch-metrics-ci.cjs [--media-out <file>]
+ *
+ * --media-out: media 一覧 ({id, permalink, caption, timestamp}) を書き出す。台帳との結び付け
+ *   (external_id・指標行の sns_post_id) は develop へ切り替えたあとに link-ig-media.cjs が行う。
  */
 
 const fs = require("fs");
@@ -65,6 +68,13 @@ async function main() {
   console.log("Instagram メトリクス取得開始...");
   const media = await fetchAllMedia();
   console.log(`取得: ${media.length} 件`);
+  const mediaOutIdx = process.argv.indexOf("--media-out");
+  if (mediaOutIdx >= 0) {
+    const out = process.argv[mediaOutIdx + 1];
+    const list = media.map(({ id, permalink, caption, timestamp }) => ({ id, permalink, caption, timestamp }));
+    fs.writeFileSync(out, JSON.stringify(list));
+    console.log(`media 一覧を書き出し: ${out}`);
+  }
 
   let saved = 0;
   for (const m of media) {

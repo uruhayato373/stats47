@@ -94,7 +94,7 @@ export function RankingHeaderControls({
           <div
             role="radiogroup"
             aria-label="計算方法"
-            className="hidden sm:inline-flex rounded-full border border-border bg-background p-1 shadow-sm"
+            className="hidden sm:inline-flex rounded-full border border-border bg-background p-1 shadow-xs"
           >
             {pills.map((p) => {
               const active = normalizationValue === p.type;
@@ -108,7 +108,7 @@ export function RankingHeaderControls({
                   disabled={normalizationDisabled}
                   onClick={() => onNormalizationChange(p.type)}
                   className={
-                    "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:opacity-50 " +
+                    "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 disabled:opacity-50 " +
                     (active
                       ? "bg-primary font-semibold text-primary-foreground"
                       : "font-medium text-muted-foreground hover:text-foreground")

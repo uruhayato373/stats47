@@ -17,8 +17,15 @@ export const bathroomHousingRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2008,
-    "to": 2008,
+    "years": [
+      1978,
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
+      2008,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

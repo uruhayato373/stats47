@@ -19,11 +19,22 @@ export const movingInRate: MetricConfig = {
     "city",
   ],
   "years": {
-    "years": [
-      2020,
-      2024,
-    ],
+    "from": 2020,
+    "to": 2024,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

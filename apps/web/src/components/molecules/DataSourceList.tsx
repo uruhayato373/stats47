@@ -115,7 +115,7 @@ export function DataSourceList({ sources, surface, className }: DataSourceListPr
         {sources.map((entry) => (
           <li
             key={entry.surveyId ?? `${entry.label}::${entry.url ?? ""}`}
-            className="break-words text-sm leading-6 text-muted-foreground"
+            className="wrap-break-word text-sm leading-6 text-muted-foreground"
           >
             {entry.note && (
               <span className="mr-1.5 text-xs text-muted-foreground">{entry.note}:</span>

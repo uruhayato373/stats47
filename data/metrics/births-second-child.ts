@@ -25,7 +25,7 @@ export const birthsSecondChild: MetricConfig = {
     "colorSchemeType": "sequential",
   },
   years: {
-    from: 2024,
+    from: 2015,
     to: 2024,
   },
   yearFormat: 'calendar',

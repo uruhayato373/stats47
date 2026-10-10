@@ -17,8 +17,12 @@ export const floodDamageRoad: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2014,
-    "to": 2014,
+    "years": [
+      2007,
+      2012,
+      2013,
+      2014,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -17,7 +17,7 @@ export const bankPersonalDeposit: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 1979,
     "to": 2024,
   },
   "yearFormat": "fiscal",

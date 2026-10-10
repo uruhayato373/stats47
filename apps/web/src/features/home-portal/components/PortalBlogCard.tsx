@@ -49,7 +49,7 @@ export function PortalBlogCard({
         width={640}
         height={336}
         sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 640px) 50vw, 85vw"
-        className="pointer-events-none absolute -bottom-2 -right-4 h-[77%] w-[74%] object-cover object-[64%_center] [mask-image:linear-gradient(to_right,transparent_0%,black_24%)] transition-transform duration-200 group-hover:scale-[1.01]"
+        className="pointer-events-none absolute -bottom-2 -right-4 h-[77%] w-[74%] object-cover object-[64%_center] mask-[linear-gradient(to_right,transparent_0%,black_24%)] transition-transform duration-200 group-hover:scale-[1.01]"
       />
       <p className={`${PORTAL_CARD_TITLE_CLASS} w-[60%]`}>{title}</p>
       <span className="absolute bottom-3 left-3 z-10 text-[11px] leading-none text-muted-foreground">

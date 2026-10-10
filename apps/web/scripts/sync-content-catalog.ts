@@ -13,6 +13,7 @@ import {
   CONTENT_ROUTES,
   CONTENT_TAGS,
   CONTENT_NAVIGATION,
+  contentIdFromHref,
   contentTagIds,
   resolveContentTag,
   type ContentPage,
@@ -28,6 +29,8 @@ import { collectChartDependencies } from '../../../packages/data-configs/src/the
 import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
+import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
+import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../packages/area/src/data/cities.json';
 import prefectures from '../../../packages/area/src/data/prefectures.json';
@@ -342,8 +345,28 @@ async function run() {
         'ページID索引が古い状態です。npm run content:sync を実行してください。'
       );
   } else fs.writeFileSync(catalogPath, serialized);
+  // stats47 の外の公開物 (note・SNS) は別ファイルに置く。SNS の投稿台帳は CI が投稿のたびに書き換えるので、
+  // サイトの台帳 (entities.json / pages/) と鮮度の検査に混ぜない。--check では書かず、形と参照の整合は
+  // validate-content-catalog.ts が見る (2026-10-10)。
+  const externalPath = path.join(root, datasetPath('content.external'));
+  const snsPosts = (JSON.parse(fs.readFileSync(path.join(root, datasetPath('sns.posts')), 'utf8')) as { posts: ExternalSnsSource[] }).posts;
+  const external = buildExternalContentPages({
+    notes: NOTE_ARTICLES,
+    posts: snsPosts,
+    isKnownMetric: (key) => Boolean(METRICS_REGISTRY[key]),
+    idFromHref: contentIdFromHref,
+  });
+  const externalLinks = external.links
+    .filter((edge) => allIds.has(edge.to))
+    .sort((a, b) => `${a.from}:${a.to}`.localeCompare(`${b.from}:${b.to}`));
+  if (!check)
+    fs.writeFileSync(
+      externalPath,
+      JSON.stringify({ version: 1, pages: external.pages.sort((a, b) => a.id.localeCompare(b.id)), links: externalLinks }, null, 2) + '\n'
+    );
   console.log(
-    `content catalog: ${pages.length} pages, ${CONTENT_ROUTES.length} routes, ${CONTENT_TAGS.length} tags, ${generatedLinks.length} relations (${check ? 'checked' : 'generated'})`
+    `content catalog: ${pages.length} pages, ${CONTENT_ROUTES.length} routes, ${CONTENT_TAGS.length} tags, ${generatedLinks.length} relations (${check ? 'checked' : 'generated'})` +
+      `; external: ${external.pages.length} (note・SNS)${check ? ' (鮮度は見ない)' : ''}`
   );
 }
 void run().catch((error) => {

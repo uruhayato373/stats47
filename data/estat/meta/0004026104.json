@@ -1,0 +1,415 @@
+{
+ "statsDataId": "0004026104",
+ "title": "第３６表　受療率（人口10万対），入院－外来・施設の種類 × 性・年齢階級（10歳） × 都道府県別",
+ "statName": "患者調査",
+ "govOrg": "厚生労働省",
+ "surveyDate": "202301-202312",
+ "overallTotalNumber": 14112,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "9",
+     "name": "受療率（人口10万対）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "年齢階級_002",
+   "valueCount": 14,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "０～４歳",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "５～１４歳",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "１５～２４歳",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "２５～３４歳",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "３５～４４歳",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "４５～５４歳",
+     "unit": null
+    },
+    {
+     "code": "8",
+     "name": "５５～６４歳",
+     "unit": null
+    },
+    {
+     "code": "9",
+     "name": "６５～７４歳",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "７５～８４歳",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "８５歳以上",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "６５歳以上（再掲）",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "７０歳以上（再掲）",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "７５歳以上（再掲）",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "性別_001",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "男",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "女",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat03",
+   "name": "都道府県_003",
+   "valueCount": 48,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "青森",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "岩手",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "宮城",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "秋田",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "山形",
+     "unit": null
+    },
+    {
+     "code": "8",
+     "name": "福島",
+     "unit": null
+    },
+    {
+     "code": "9",
+     "name": "茨城",
+     "unit": null
+    },
+    {
+     "code": "10",
+     "name": "栃木",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "群馬",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "埼玉",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "千葉",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "東京",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "神奈川",
+     "unit": null
+    },
+    {
+     "code": "16",
+     "name": "新潟",
+     "unit": null
+    },
+    {
+     "code": "17",
+     "name": "富山",
+     "unit": null
+    },
+    {
+     "code": "18",
+     "name": "石川",
+     "unit": null
+    },
+    {
+     "code": "19",
+     "name": "福井",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "山梨",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "長野",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "岐阜",
+     "unit": null
+    },
+    {
+     "code": "23",
+     "name": "静岡",
+     "unit": null
+    },
+    {
+     "code": "24",
+     "name": "愛知",
+     "unit": null
+    },
+    {
+     "code": "25",
+     "name": "三重",
+     "unit": null
+    },
+    {
+     "code": "26",
+     "name": "滋賀",
+     "unit": null
+    },
+    {
+     "code": "27",
+     "name": "京都",
+     "unit": null
+    },
+    {
+     "code": "28",
+     "name": "大阪",
+     "unit": null
+    },
+    {
+     "code": "29",
+     "name": "兵庫",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "奈良",
+     "unit": null
+    },
+    {
+     "code": "31",
+     "name": "和歌山",
+     "unit": null
+    },
+    {
+     "code": "32",
+     "name": "鳥取",
+     "unit": null
+    },
+    {
+     "code": "33",
+     "name": "島根",
+     "unit": null
+    },
+    {
+     "code": "34",
+     "name": "岡山",
+     "unit": null
+    },
+    {
+     "code": "35",
+     "name": "広島",
+     "unit": null
+    },
+    {
+     "code": "36",
+     "name": "山口",
+     "unit": null
+    },
+    {
+     "code": "37",
+     "name": "徳島",
+     "unit": null
+    },
+    {
+     "code": "38",
+     "name": "香川",
+     "unit": null
+    },
+    {
+     "code": "39",
+     "name": "愛媛",
+     "unit": null
+    },
+    {
+     "code": "40",
+     "name": "高知",
+     "unit": null
+    },
+    {
+     "code": "41",
+     "name": "福岡",
+     "unit": null
+    },
+    {
+     "code": "42",
+     "name": "佐賀",
+     "unit": null
+    },
+    {
+     "code": "43",
+     "name": "長崎",
+     "unit": null
+    },
+    {
+     "code": "44",
+     "name": "熊本",
+     "unit": null
+    },
+    {
+     "code": "45",
+     "name": "大分",
+     "unit": null
+    },
+    {
+     "code": "46",
+     "name": "宮崎",
+     "unit": null
+    },
+    {
+     "code": "47",
+     "name": "鹿児島",
+     "unit": null
+    },
+    {
+     "code": "48",
+     "name": "沖縄",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat04",
+   "name": "施設の種類_003",
+   "valueCount": 7,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "入院（総数）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "入院（病院）",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "入院（一般診療所）",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "外来（総数）",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "外来（病院）",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "外来（一般診療所）",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "外来（歯科診療所）",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  }
+ ]
+}

@@ -72,6 +72,8 @@ fetch(\`https://graph.instagram.com/v21.0/me?access_token=\${process.env.INSTAGR
 npx tsx .claude/skills/sns/post-instagram/post-instagram.ts <rankingKey> [<rankingKey> ...] [flags]
 ```
 
+実投稿は `--approve` 必須 (オーナーの指示を台帳に承認として記録する)。投稿後は media_id を `external_id` に残し、素材を Google Drive へ保全する (正典 `.claude/rules/sns-content-standards.md` §3-1)。
+
 ### Step 3: API フロー（スクリプト内部）
 
 #### image（単一画像）

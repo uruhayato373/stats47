@@ -17,8 +17,18 @@ export const agriculturalEmploymentPopulation: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2014,
-    "to": 2014,
+    "years": [
+      1989,
+      1994,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2009,
+      2014,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

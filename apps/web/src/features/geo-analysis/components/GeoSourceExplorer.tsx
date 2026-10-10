@@ -140,7 +140,7 @@ export function GeoSourceExplorer({
             )}
           </div>
           {selection ? (
-            <p className="break-words text-xs text-muted-foreground">
+            <p className="wrap-break-word text-xs text-muted-foreground">
               選択中：{selection.asset.label}／約
               {(selection.asset.bytes / 1024 / 1024).toFixed(1)}{' '}
               MB。複数の区画を一度に読み込まず、選んだ区画を表示します。

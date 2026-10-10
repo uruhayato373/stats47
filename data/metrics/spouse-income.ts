@@ -17,8 +17,8 @@ export const spouseIncome: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
-    "to": 2024,
+    "from": 1975,
+    "to": 2025,
   },
   "yearFormat": "fiscal",
   "visualization": {

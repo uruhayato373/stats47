@@ -99,6 +99,11 @@
       "types": "./src/content/pages.ts",
       "import": "./src/content/pages.ts",
       "require": "./src/content/pages.ts"
+    },
+    "./content/external": {
+      "types": "./src/content/external.ts",
+      "import": "./src/content/external.ts",
+      "require": "./src/content/external.ts"
     }
   },
   "scripts": {
@@ -121,6 +126,8 @@
     "type-check": "tsc --noEmit",
     "validate:polarity": "tsx scripts/validate-polarity.ts",
     "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
+    "build:estat-availability": "tsx scripts/build-estat-availability.ts",
+    "sync:estat-years": "tsx scripts/sync-estat-years.ts",
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts",
     "validate:business-plan": "tsx scripts/validate-business-plan.ts",
     "build:business-plan-state": "tsx scripts/build-business-plan-state.ts",

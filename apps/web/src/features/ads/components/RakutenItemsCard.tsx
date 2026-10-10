@@ -95,7 +95,7 @@ export async function RakutenItemsCard({
             adId={adId}
             label={item.name}
             position={position}
-            className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             {item.image && (
               <div className="flex aspect-square items-center justify-center overflow-hidden bg-muted">

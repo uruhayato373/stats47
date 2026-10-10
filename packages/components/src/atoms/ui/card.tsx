@@ -8,7 +8,7 @@ import { cn } from "../../lib/cn";
  * 各アプリの tailwind config に borderRadius.card と colors.card.outline が必要。
  */
 export const CARD_SURFACE_CLASS =
-  "rounded-card border border-card-outline bg-card text-card-foreground shadow-sm";
+  "rounded-card border border-card-outline bg-card text-card-foreground shadow-xs";
 
 const Card = React.forwardRef<
   HTMLDivElement,

@@ -18,8 +18,8 @@ export const pneumoniaDeathRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
-    "to": 2023,
+    "from": 2015,
+    "to": 2024,
   },
   "yearFormat": "calendar",
   "visualization": {

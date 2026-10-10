@@ -17,7 +17,7 @@ export const wasteRecyclingRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 1999,
     "to": 2023,
   },
   "yearFormat": "fiscal",

@@ -1,0 +1,622 @@
+{
+ "statsDataId": "0004026105",
+ "title": "第３７表　受療率（人口10万対），入院－外来・施設の種類 × 傷病分類 × 都道府県別",
+ "statName": "患者調査",
+ "govOrg": "厚生労働省",
+ "surveyDate": "202301-202312",
+ "overallTotalNumber": 20160,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "9",
+     "name": "受療率（人口10万対）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "傷病分類_004",
+   "valueCount": 60,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "１　感染症及び寄生虫症",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "１　感染症及び寄生虫症(腸管感染症（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "１　感染症及び寄生虫症(結核（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "１　感染症及び寄生虫症(皮膚及び粘膜の病変を伴うウイルス性疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "１　感染症及び寄生虫症(真菌症（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "２　新生物＜腫瘍＞",
+     "unit": null
+    },
+    {
+     "code": "8",
+     "name": "２　新生物＜腫瘍＞(（悪性新生物＜腫瘍＞）（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "9",
+     "name": "２　新生物＜腫瘍＞(胃の悪性新生物＜腫瘍＞（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "10",
+     "name": "２　新生物＜腫瘍＞(結腸及び直腸の悪性新生物＜腫瘍＞（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "２　新生物＜腫瘍＞(気管，気管支及び肺の悪性新生物＜腫瘍＞（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "３　血液及び造血器の疾患並びに免疫機構の障害",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "４　内分泌，栄養及び代謝疾患",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "４　内分泌，栄養及び代謝疾患(甲状腺障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "４　内分泌，栄養及び代謝疾患(糖尿病（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "16",
+     "name": "５　精神及び行動の障害",
+     "unit": null
+    },
+    {
+     "code": "17",
+     "name": "５　精神及び行動の障害(統合失調症，統合失調症型障害及び妄想性障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "18",
+     "name": "５　精神及び行動の障害(気分［感情］障害（躁うつ病を含む）（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "19",
+     "name": "５　精神及び行動の障害(神経症性障害，ストレス関連障害及び身体表現性障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "６　神経系の疾患",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "７　眼及び付属器の疾患",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "７　眼及び付属器の疾患(白内障（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "23",
+     "name": "８　耳及び乳様突起の疾患",
+     "unit": null
+    },
+    {
+     "code": "24",
+     "name": "９　循環器系の疾患",
+     "unit": null
+    },
+    {
+     "code": "25",
+     "name": "９　循環器系の疾患(高血圧性疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "26",
+     "name": "９　循環器系の疾患(（心疾患（高血圧性のものを除く））（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "27",
+     "name": "９　循環器系の疾患(虚血性心疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "28",
+     "name": "９　循環器系の疾患(脳血管疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "29",
+     "name": "１０　呼吸器系の疾患",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "１０　呼吸器系の疾患(急性上気道感染症（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "31",
+     "name": "１０　呼吸器系の疾患(肺炎（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "32",
+     "name": "１０　呼吸器系の疾患(急性気管支炎及び急性細気管支炎（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "33",
+     "name": "１０　呼吸器系の疾患(気管支炎及び慢性閉塞性肺疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "34",
+     "name": "１０　呼吸器系の疾患(喘息（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "35",
+     "name": "１１　消化器系の疾患",
+     "unit": null
+    },
+    {
+     "code": "36",
+     "name": "１１　消化器系の疾患(う蝕（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "37",
+     "name": "１１　消化器系の疾患(歯肉炎及び歯周疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "38",
+     "name": "１１　消化器系の疾患(胃潰瘍及び十二指腸潰瘍（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "39",
+     "name": "１１　消化器系の疾患(胃炎及び十二指腸炎（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "40",
+     "name": "１１　消化器系の疾患(肝疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "41",
+     "name": "１２　皮膚及び皮下組織の疾患",
+     "unit": null
+    },
+    {
+     "code": "42",
+     "name": "１３　筋骨格系及び結合組織の疾患",
+     "unit": null
+    },
+    {
+     "code": "43",
+     "name": "１３　筋骨格系及び結合組織の疾患(炎症性多発性関節障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "44",
+     "name": "１３　筋骨格系及び結合組織の疾患(関節症（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "45",
+     "name": "１３　筋骨格系及び結合組織の疾患(脊柱障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "46",
+     "name": "１３　筋骨格系及び結合組織の疾患(骨の密度及び構造の障害（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "47",
+     "name": "１４　腎尿路生殖器系の疾患",
+     "unit": null
+    },
+    {
+     "code": "48",
+     "name": "１４　腎尿路生殖器系の疾患(糸球体疾患，腎尿細管間質性疾患及び腎不全（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "49",
+     "name": "１４　腎尿路生殖器系の疾患(前立腺肥大（症）（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "50",
+     "name": "１４　腎尿路生殖器系の疾患(乳房及び女性生殖器の疾患（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "51",
+     "name": "１５　妊娠，分娩及び産じょく",
+     "unit": null
+    },
+    {
+     "code": "52",
+     "name": "１５　妊娠，分娩及び産じょく(妊娠高血圧症候群（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "53",
+     "name": "１６　周産期に発生した病態",
+     "unit": null
+    },
+    {
+     "code": "54",
+     "name": "１７　先天奇形，変形及び染色体異常",
+     "unit": null
+    },
+    {
+     "code": "55",
+     "name": "１８　症状，徴候及び異常臨床所見・異常検査所見で他に分類されないもの",
+     "unit": null
+    },
+    {
+     "code": "56",
+     "name": "１９　損傷，中毒及びその他の外因の影響",
+     "unit": null
+    },
+    {
+     "code": "57",
+     "name": "１９　損傷，中毒及びその他の外因の影響(骨折（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "58",
+     "name": "２１　健康状態に影響を及ぼす要因及び保健サービスの利用",
+     "unit": null
+    },
+    {
+     "code": "59",
+     "name": "２１　健康状態に影響を及ぼす要因及び保健サービスの利用(歯の補てつ（再掲）)",
+     "unit": null
+    },
+    {
+     "code": "60",
+     "name": "２２　特殊目的用コード",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "都道府県_003",
+   "valueCount": 48,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "青森",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "岩手",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "宮城",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "秋田",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "山形",
+     "unit": null
+    },
+    {
+     "code": "8",
+     "name": "福島",
+     "unit": null
+    },
+    {
+     "code": "9",
+     "name": "茨城",
+     "unit": null
+    },
+    {
+     "code": "10",
+     "name": "栃木",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "群馬",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "埼玉",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "千葉",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "東京",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "神奈川",
+     "unit": null
+    },
+    {
+     "code": "16",
+     "name": "新潟",
+     "unit": null
+    },
+    {
+     "code": "17",
+     "name": "富山",
+     "unit": null
+    },
+    {
+     "code": "18",
+     "name": "石川",
+     "unit": null
+    },
+    {
+     "code": "19",
+     "name": "福井",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "山梨",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "長野",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "岐阜",
+     "unit": null
+    },
+    {
+     "code": "23",
+     "name": "静岡",
+     "unit": null
+    },
+    {
+     "code": "24",
+     "name": "愛知",
+     "unit": null
+    },
+    {
+     "code": "25",
+     "name": "三重",
+     "unit": null
+    },
+    {
+     "code": "26",
+     "name": "滋賀",
+     "unit": null
+    },
+    {
+     "code": "27",
+     "name": "京都",
+     "unit": null
+    },
+    {
+     "code": "28",
+     "name": "大阪",
+     "unit": null
+    },
+    {
+     "code": "29",
+     "name": "兵庫",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "奈良",
+     "unit": null
+    },
+    {
+     "code": "31",
+     "name": "和歌山",
+     "unit": null
+    },
+    {
+     "code": "32",
+     "name": "鳥取",
+     "unit": null
+    },
+    {
+     "code": "33",
+     "name": "島根",
+     "unit": null
+    },
+    {
+     "code": "34",
+     "name": "岡山",
+     "unit": null
+    },
+    {
+     "code": "35",
+     "name": "広島",
+     "unit": null
+    },
+    {
+     "code": "36",
+     "name": "山口",
+     "unit": null
+    },
+    {
+     "code": "37",
+     "name": "徳島",
+     "unit": null
+    },
+    {
+     "code": "38",
+     "name": "香川",
+     "unit": null
+    },
+    {
+     "code": "39",
+     "name": "愛媛",
+     "unit": null
+    },
+    {
+     "code": "40",
+     "name": "高知",
+     "unit": null
+    },
+    {
+     "code": "41",
+     "name": "福岡",
+     "unit": null
+    },
+    {
+     "code": "42",
+     "name": "佐賀",
+     "unit": null
+    },
+    {
+     "code": "43",
+     "name": "長崎",
+     "unit": null
+    },
+    {
+     "code": "44",
+     "name": "熊本",
+     "unit": null
+    },
+    {
+     "code": "45",
+     "name": "大分",
+     "unit": null
+    },
+    {
+     "code": "46",
+     "name": "宮崎",
+     "unit": null
+    },
+    {
+     "code": "47",
+     "name": "鹿児島",
+     "unit": null
+    },
+    {
+     "code": "48",
+     "name": "沖縄",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "施設の種類_003",
+   "valueCount": 7,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "入院（総数）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "入院（病院）",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "入院（一般診療所）",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "外来（総数）",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "外来（病院）",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "外来（一般診療所）",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "外来（歯科診療所）",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  }
+ ]
+}

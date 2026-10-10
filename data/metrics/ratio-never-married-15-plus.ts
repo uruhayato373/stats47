@@ -21,8 +21,10 @@ export const ratioNeverMarried15Plus: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 2020,
-    "to": 2020,
+    "years": [
+      2015,
+      2020,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

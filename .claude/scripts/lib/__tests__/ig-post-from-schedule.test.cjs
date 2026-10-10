@@ -97,3 +97,32 @@ test("日付の繰り下げは月・年をまたぐ", () => {
   assert.equal(shiftDate("2026-10-01", -1), "2026-09-30");
   assert.equal(shiftDate("2027-01-01", -1), "2026-12-31");
 });
+
+// ---- 承認ゲート (2026-10-09 オーナー決定: 新規投稿は承認必須) ----
+const { selectDueEntry: selectDue } = require("../../instagram/post-from-schedule.cjs");
+
+test("承認されていないエントリは時刻が来ても投稿せず blocked に分け、承認済みの次のエントリを選ぶ", () => {
+  const entries = [
+    { date: "2026-10-10", time: "08:00", domain: "ranking-quiz", content_key: "a", post_id: 1 },
+    { date: "2026-10-10", time: "12:00", domain: "ranking-quiz", content_key: "b", post_id: 2 },
+    { date: "2026-10-10", time: "19:00", domain: "ranking-quiz", content_key: "c" },
+  ];
+  const approved = new Set([2]);
+  const r = selectDue(entries, {
+    today: "2026-10-10",
+    yesterday: "2026-10-09",
+    nowTime: "20:00",
+    posted: new Set(),
+    isApproved: (e) => approved.has(e.post_id),
+  });
+  assert.equal(r.next.content_key, "b");
+  assert.deepEqual(r.blocked.map((e) => e.content_key), ["a", "c"], "承認待ちと台帳未登録 (post_id なし) は投稿しない");
+});
+
+test("承認の判定を渡さない呼び出しは従来どおり全エントリを対象にする (既存の選定を壊さない)", () => {
+  const r = selectDue([{ date: "2026-10-10", time: "08:00", content_key: "a" }], {
+    today: "2026-10-10", yesterday: "2026-10-09", nowTime: "09:00", posted: new Set(),
+  });
+  assert.equal(r.next.content_key, "a");
+  assert.deepEqual(r.blocked, []);
+});

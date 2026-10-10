@@ -28,6 +28,15 @@ export interface ContentPage {
   tagIds?: string[];
 }
 export type ContentRelation = keyof typeof navigationJson.relations;
+/**
+ * stats47 の外にある公開物の種別。ID 台帳で指標・記事とつなぐが、サイトのルートを持たないので
+ * href は外部 URL (https) で、URL からの ID 逆算 (contentIdFromHref) の対象外 (2026-10-10)。
+ * note = note.com の公開記事 (正本は note のカタログ)、sns = SNS の投稿 (正本は data/sns/posts.json の id)。
+ */
+export const EXTERNAL_CONTENT_KINDS = ['note', 'sns'] as const;
+export function isExternalContentKind(kind: string): boolean {
+  return (EXTERNAL_CONTENT_KINDS as readonly string[]).includes(kind);
+}
 export interface ContentLink { from: string; to: string; relation: ContentRelation }
 export const CONTENT_TAGS: readonly ContentTag[] = tagsJson.tags;
 export const CONTENT_ROUTES: readonly ContentRoute[] = routesJson.routes;

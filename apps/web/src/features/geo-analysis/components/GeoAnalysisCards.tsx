@@ -75,9 +75,9 @@ export async function GeoAnalysisCards() {
               key={slug}
               href={`/geo/${slug}`}
               aria-label={`${copy.question} ${config.eyebrow}の地図を見る`}
-              className="group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] overflow-hidden p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 @sm:grid-cols-[148px_minmax(0,1fr)] @md:flex @md:flex-col"
+              className="group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 @sm:grid-cols-[148px_minmax(0,1fr)] @md:flex @md:flex-col"
             >
-              <div className="relative min-h-36 overflow-hidden border-r bg-muted @md:aspect-[16/7] @md:min-h-0 @md:w-full @md:shrink-0 @md:border-b @md:border-r-0">
+              <div className="relative min-h-36 overflow-hidden border-r bg-muted @md:aspect-16/7 @md:min-h-0 @md:w-full @md:shrink-0 @md:border-b @md:border-r-0">
                 {preview ? (
                   <svg
                     viewBox="0 0 640 360"
@@ -164,7 +164,7 @@ export async function GeoAnalysisCards() {
                 <p className="text-xs font-semibold text-primary">
                   {config.eyebrow}
                 </p>
-                <h3 className="mt-1 text-base font-bold leading-relaxed group-hover:text-primary @md:text-lg">
+                <h3 className="mt-1 text-base font-bold leading-relaxed group-hover:text-primary @md:text-lg @md:leading-7">
                   {copy.question}
                 </h3>
                 <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground @md:line-clamp-none">

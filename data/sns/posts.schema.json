@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 SNS 投稿台帳",
+  "description": "1 投稿 = 1 行 = 1 id。id から台本・状態・承認・外部 ID・素材・観測値・確認画面をたどる。契約は .claude/rules/sns-content-standards.md §3。旧来の項目は残したまま、ここで形を決めた項目だけを厳密に検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["_meta", "posts"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "nextId"],
+      "properties": {
+        "description": { "type": "string" },
+        "count": { "type": "integer", "minimum": 0 },
+        "nextId": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "posts": { "type": "array", "items": { "$ref": "#/definitions/post" } }
+  },
+  "definitions": {
+    "post": {
+      "type": "object",
+      "required": ["id", "platform", "post_type", "domain", "status", "created_at", "updated_at", "approval"],
+      "properties": {
+        "id": { "type": "integer", "minimum": 1 },
+        "platform": { "enum": ["x", "instagram", "threads", "youtube", "tiktok", "note"] },
+        "post_type": { "type": "string", "minLength": 1 },
+        "domain": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "scheduled", "posted", "deleted"] },
+        "created_at": { "type": "string", "minLength": 10 },
+        "updated_at": { "type": "string", "minLength": 10 },
+        "post_url": { "type": ["string", "null"], "pattern": "^https://" },
+        "external_id": {
+          "description": "post_url から導出できない外部 ID だけを持つ (Instagram の media_id)。他の媒体は externalIdOf() が post_url から導出する",
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+$"
+        },
+        "script_path": {
+          "description": "長尺 (YouTube 等) の台本。短文・カルーセルの台本は caption",
+          "type": ["string", "null"],
+          "pattern": "^data/sns/scripts/[0-9]+\\.json$"
+        },
+        "approval": { "$ref": "#/definitions/approval" },
+        "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "description": "unrecorded = 承認の記録を始める前の行 (承認された証拠が無いので approved にしない)",
+          "enum": ["pending", "approved", "rejected", "unrecorded"]
+        },
+        "by": { "type": ["string", "null"] },
+        "at": { "type": ["string", "null"] },
+        "via": { "type": ["string", "null"] },
+        "note": { "type": ["string", "null"] }
+      },
+      "if": { "properties": { "state": { "enum": ["approved", "rejected"] } } },
+      "then": {
+        "required": ["by", "at"],
+        "properties": { "by": { "type": "string", "minLength": 1 }, "at": { "type": "string", "minLength": 10 } }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "order", "state"],
+      "properties": {
+        "role": { "enum": ["image", "slide", "video", "thumbnail"] },
+        "order": { "type": "integer", "minimum": 1 },
+        "state": { "enum": ["archived", "missing"] },
+        "drive_path": {
+          "description": "Google Drive の stats47 フォルダ起点の相対パス。fileId・URL・端末のマウント先は書かない",
+          "type": "string",
+          "pattern": "^SNS素材/(x|instagram|threads|youtube|tiktok)/[0-9]+/[A-Za-z0-9._-]+$"
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "mime": { "type": "string", "pattern": "^(image|video)/[a-z0-9.+-]+$" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "source": {
+          "description": "保全したときの取得元 (repo 相対パス・R2 key・公開 URL)。絶対パスは書かない",
+          "type": ["string", "null"],
+          "pattern": "^(?!/)(?![A-Za-z]:)"
+        },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "if": { "properties": { "state": { "const": "archived" } } },
+      "then": { "required": ["drive_path", "sha256", "bytes", "mime"] },
+      "else": { "required": ["reason"] }
+    }
+  }
+}

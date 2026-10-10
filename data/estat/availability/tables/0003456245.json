@@ -1,0 +1,108 @@
+{
+  "statsDataId": "0003456245",
+  "statName": "社会生活基本調査",
+  "title": "男女,学習・自己啓発・訓練の種類別行動者率(10歳以上)－全国，都道府県",
+  "updatedDate": "2026-09-03",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "1"
+      },
+      "fetchedAt": "2026-10-07T01:54:52.941Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "11"
+      },
+      "fetchedAt": "2026-10-07T01:54:52.339Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "12"
+      },
+      "fetchedAt": "2026-10-07T01:54:53.649Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "2"
+      },
+      "fetchedAt": "2026-10-07T01:54:52.179Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "21"
+      },
+      "fetchedAt": "2026-10-07T01:54:52.262Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "22"
+      },
+      "fetchedAt": "2026-10-07T01:54:51.412Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "3"
+      },
+      "fetchedAt": "2026-10-07T01:54:53.061Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "4"
+      },
+      "fetchedAt": "2026-10-07T01:54:53.008Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "5"
+      },
+      "fetchedAt": "2026-10-07T01:54:51.411Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "6"
+      },
+      "fetchedAt": "2026-10-07T01:54:51.412Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    }
+  ]
+}
