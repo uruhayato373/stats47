@@ -267,20 +267,6 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [DEPS-BRACES-GATE-01] braces 脆弱性は dev 依存に限り期限付きの例外で通す (判断済み) — CI の Security Scan が green になることを確かめる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-dependency-audit.mjs] [起票:2026-10-06] [領域:管理]
-
-- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は knip 6 への更新で、tailwindcss 3 の経路 (runtime 側) は tailwindcss 4 への移行で 2026-10-06 に外した。残るのは `eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
-- **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
-- **追記 (2026-10-07)**: braces とは別に、sharp `<0.35.5` (CVE-2026-96889 / GHSA-wq5f-xc86-pv6w, high) が加わった。PR #1099 の run 37597838232 と、main への push の run 37554632545 で検出。直接依存は Dependabot PR #1087 (sharp 0.35.5) で上がる。ただし next・miniflare・wrangler が内部で持つ sharp が残り、#1087 自身の Security Scan も失敗している。`npm audit fix --force` は `@cloudflare/vitest-pool-workers` の版変更を伴う破壊的な更新を提案する。sharp は runtime 経路 (next) にも乗るので、例外の対象にはしない。
-- **追記 (2026-10-10)**: PR #1119 で tailwindcss 4 移行 (#1082) と sharp 0.35.5 (overrides も含む) を本番に入れた。runtime 依存に残る high は next だけで、[DEPS-NEXT16-UPGRADE-01] が扱う。braces は dev 依存の経路だけが残る。
-- **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
-- **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
-- **判断と実装 (2026-10-10・オーナー判断で (b))**: Security Scan の high ゲートを `npm audit --audit-level=high` から `node .claude/scripts/lib/check-dependency-audit.mjs` に替えた。例外の正本は `.claude/config/dependency-audit-exceptions.json` (GHSA-vfj7-8cjw-p6xm・scope dev・期限 2027-01-10)。例外の advisory が runtime に出たら失敗、期限を過ぎたら失敗、別の advisory が混ざった行は止める (テスト `check-dependency-audit.test.mjs`)。runtime 全件ゲート (`--omit=dev --audit-level=low`) は変えていない。
-- **同時に見つけて直したこと**: CI の high には postcss <=8.5.22 (runtime) も出ていた。原因は lockfile に残った `apps/{web,admin}/node_modules/next/node_modules/postcss` 8.4.31 の 2 行で、親の next の行は 10-10 の重複解消で消えていた。2 行を消して runtime の audit は 0 件。親の無い入れ子を lockfile に残さない検査を `dependency-security-contract.test.cjs` に足した (修正前の lockfile で落ちることを確認)。
-- **次**: 次の develop → main の PR で Security Scan が green になるのを確かめてカードを消す。期限の 2027-01-10 には例外のゲートが失敗するので、その日に braces / Next.js の ESLint 設定の新版を確かめて外すか、理由を書き直して延ばす。
-
-
 ### [DEPS-OVERRIDES-DRIFT-GATE-01] ルートの overrides と各 workspace の依存の版の食い違いを push 前に止める
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run preflight:pr] [起票:2026-10-10] [領域:管理]
 
