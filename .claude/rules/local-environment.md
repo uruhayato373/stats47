@@ -490,8 +490,10 @@ R2成果物・provenanceと原典URLの再取得可能性を確認して処理�
 | 対象 | 寿命 | 消す主体 |
 |---|---|---|
 | `.next/cache`・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
-| `.local/verification/*`・`.local/geo-source-*` | 30日 | 同上 |
-| `.local/r2` (push staging。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる) | 7日 | 同上 |
+| `.local/verification/{release,seo,x-visuals}/*`・`.local/geo-source-*` | 30日 (実行ごとのフォルダ単位) | 同上 |
+| `.local/r2/*` (push staging。上位フォルダごとに判定。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる。**`sns` は未投稿の X / Threads 画像の唯一の置き場なので除外**) | 7日 | 同上 |
+| `~/.claude/projects/**/*.jsonl` (Claude Code の会話記録。`cleanupPeriodDays: 7` が残すサブエージェント分を回収。`memory` とリンク先は対象外) | 7日 (ファイル単位) | 同上 (`fileRetention`) |
+| `~/.codex/{sessions,archived_sessions,generated_images}` (Codex の会話記録と生成画像。`thread_history_*.sqlite` は Codex の内部 DB なので対象外) | 30日 (ファイル単位) | 同上 (`fileRetention`) |
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
 | 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
 | git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
@@ -515,6 +517,13 @@ sharp のデコードや検査ロジックではない (`--cpu-prof` で `readFi
 tsc だけ並列になる。vitest の残り 86 秒はテスト自身のモジュール import (sharp / next) で、project 絞り込みでは縮まない。
 容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
 メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
+
+**ディレクトリの最新時刻で判定する規則は、毎日書き足される場所では永遠に古くならない** (2026-10-10 に `.local/r2` が 8.5GB、
+`.local/verification/release` が 1.7GB、会話記録 6GB まで溜まっていた)。書き足され続ける場所は上位フォルダ単位 (`.local/r2/*`) か
+ファイル単位 (`fileRetention`) で期限を切る。**会話記録は知見の正本ではない**: 残す知見は `.claude/rules`・スキル・agent 定義・
+`.claude/memory`・バックログへ書き、記録は直近の再開と確認にだけ使う (モデル使用量の集計は週ごとに `local-mac.json` へ積み上げるので、
+元の記録を消しても数字は残る)。肥大化の検知は `footprintBudgets` (`.local` 8GiB・`apps/web/.next` 4GiB・`~/.claude/projects` 5GiB・
+Codex の記録と画像 各 2〜3GiB) で、日次の `cleanup` が超過を `latest.json` の warnings に載せる。境界の契約は `npm run local:resources:test`。
 
 WIPのあるworktree、認証profile、参考文献、成果物や運用台帳は年齢だけで消さない。
 `.local/r2` は R2 への push staging で、秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため常駐させない

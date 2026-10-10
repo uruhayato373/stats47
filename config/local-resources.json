@@ -16,11 +16,22 @@
       "ageDays": 7
     },
     {
-      "path": ".local/r2",
-      "ageDays": 7
+      "path": ".local/r2/*",
+      "ageDays": 7,
+      "exclude": [
+        "sns"
+      ]
     },
     {
-      "path": ".local/verification/*",
+      "path": ".local/verification/release/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/verification/seo/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/verification/x-visuals/*",
       "ageDays": 30
     },
     {
@@ -106,5 +117,60 @@
     "docs/books",
     ".claude/pdfs",
     ".local/affiliate-status"
+  ],
+  "fileRetention": [
+    {
+      "root": "~/.claude/projects",
+      "match": "*.jsonl",
+      "ageDays": 7,
+      "excludeDirs": [
+        "memory"
+      ],
+      "why": "Claude Code の会話記録。cleanupPeriodDays: 7 がサブエージェントの記録を残すため回収する。memory は repo の .claude/memory を指すリンクで対象外"
+    },
+    {
+      "root": "~/.codex/sessions",
+      "match": "*",
+      "ageDays": 30,
+      "why": "Codex の会話記録。知見は repo (.claude/rules・skills・memory・backlog) に残す運用で、記録は直近の再開用"
+    },
+    {
+      "root": "~/.codex/archived_sessions",
+      "match": "*",
+      "ageDays": 30,
+      "why": "Codex のアーカイブ済み会話記録"
+    },
+    {
+      "root": "~/.codex/generated_images",
+      "match": "*",
+      "ageDays": 30,
+      "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則"
+    }
+  ],
+  "footprintBudgets": [
+    {
+      "path": ".local",
+      "maxGiB": 8
+    },
+    {
+      "path": "apps/web/.next",
+      "maxGiB": 4
+    },
+    {
+      "path": "~/.claude/projects",
+      "maxGiB": 5
+    },
+    {
+      "path": "~/.codex/sessions",
+      "maxGiB": 3
+    },
+    {
+      "path": "~/.codex/archived_sessions",
+      "maxGiB": 2
+    },
+    {
+      "path": "~/.codex/generated_images",
+      "maxGiB": 2
+    }
   ]
 }
