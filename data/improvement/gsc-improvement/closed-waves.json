@@ -1,0 +1,62 @@
+{
+  "_comment": "効果判定を「判定不能のまま終了」したブログ是正 wave の台帳。ここに載った wave は閾値エンジン (measure-gsc-impact.mjs の createGscBlogWaveAdapter) の対象から外れ、毎週 effect/pending を出し続けない。終了は人の判断で、effect ラベル (full/partial/none/adverse) を付けたことにはならない。再開するときは行を消し、事前の target を付けて新しい wave として測る。正典: .claude/rules/evidence-based-judgment.md 状況 4・5、backlog EFFECT-TARGET-MARKERS-01。",
+  "closures": [
+    {
+      "waveId": "2026-05-23-manual",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 19 週。clicks の伸び 0.88 倍 (W20 89 → W40 78) に対し、同じ期間のサイト全体の直近 28 日クリックは 13.2 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W20 clicks 89 / imp 7,141", "after": "W40 clicks 78 / imp 10,135", "siteGrowth": "W20 832 → W40 11,023 (13.2 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-05-25-auto",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 18 週。clicks の伸び 4.7 倍 (W21 127 → W40 597) は同じ期間のサイト全体 9.9 倍以下で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W21 clicks 127 / imp 11,300", "after": "W40 clicks 597 / imp 52,549", "siteGrowth": "W21 1,110 → W40 11,023 (9.9 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-05-29-auto",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 18 週。clicks の伸び 4.9 倍 (W21 7 → W40 34) は同じ期間のサイト全体 9.9 倍以下で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W21 clicks 7 / imp 1,258", "after": "W40 clicks 34 / imp 8,075", "siteGrowth": "W21 1,110 → W40 11,023 (9.9 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-06-07-manual",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 17 週。before の clicks が 0 (W22 0 → W40 38) で伸び率を出せず、同じ期間のサイト全体は 8.4 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W22 clicks 0 / imp 207", "after": "W40 clicks 38 / imp 1,933", "siteGrowth": "W22 1,309 → W40 11,023 (8.4 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-06-07-manual-2",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 17 週。clicks の伸び 8.9 倍 (W22 69 → W40 614) は同じ期間のサイト全体 8.4 倍とほぼ同じで、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W22 clicks 69 / imp 2,614", "after": "W40 clicks 614 / imp 13,937", "siteGrowth": "W22 1,309 → W40 11,023 (8.4 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-06-07-manual-3",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 17 週。clicks の伸び 11.1 倍 (W22 26 → W40 288) は 3 ページだけの小標本で、同じ期間のサイト全体 8.4 倍と対照群なしでは区別できない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W22 clicks 26 / imp 889", "after": "W40 clicks 288 / imp 12,918", "siteGrowth": "W22 1,309 → W40 11,023 (8.4 倍)", "guards": ["insufficient-target"] }
+    },
+    {
+      "waveId": "2026-06-10-manual",
+      "closedAt": "2026-10-10",
+      "decidedBy": "owner",
+      "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
+      "reason": "是正から 16 週。before の clicks が 0 (W23 0 → W40 67) で伸び率を出せず、標本も不足 (insufficient-sample)。同じ期間のサイト全体は 8.2 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
+      "evidence": { "before": "W23 clicks 0 / imp 37", "after": "W40 clicks 67 / imp 5,226", "siteGrowth": "W23 1,349 → W40 11,023 (8.2 倍)", "guards": ["insufficient-target", "insufficient-sample"] }
+    }
+  ],
+  "reproduce": "node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run (終了前の値。数値の出典は backlog EFFECT-TARGET-MARKERS-01 の 2026-10-05 の表と data/gsc/history.csv)"
+}

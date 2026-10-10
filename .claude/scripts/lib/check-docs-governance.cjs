@@ -157,12 +157,20 @@ function isoWeek(dateText) {
   return `${year}-W${String(week).padStart(2, "0")}`;
 }
 
-function acceptedWeeklyPlanWeeks(dateText) {
-  const currentWeek = isoWeek(dateText);
-  const date = new Date(`${dateText}T00:00:00Z`);
-  if (date.getUTCDay() !== 0) return [currentWeek];
-  date.setUTCDate(date.getUTCDate() + 7);
-  return [currentWeek, isoWeek(date.toISOString().slice(0, 10))];
+/**
+ * 週次計画として受け付ける週。判定はレビューの期限検査と同じ関数 (review-cadence.mjs) で、
+ * 来週分を先に書いてよい曜日は root の review-wiring.json の plans.weekly.earliestWeekday (無ければ日曜) が決める。
+ * 2026-10-10 に土曜へ変えたとき、ここだけ日曜固定のまま残っていた (土曜に書いた来週の計画を DG032 が警告した)。
+ */
+function acceptedWeeklyPlanWeeks(dateText, root = DEFAULT_ROOT) {
+  const { acceptedWeeklyPlanWeeks: accepted } = require("../management/lib/review-cadence.mjs");
+  let planConf = {};
+  try {
+    planConf = JSON.parse(fs.readFileSync(path.join(root, ".claude/config/review-wiring.json"), "utf8")).plans?.weekly ?? {};
+  } catch {
+    // 配線の正本が無いリポジトリ (テストの fixture 等) は既定 (日曜から来週分を許す)
+  }
+  return accepted(new Date(`${dateText}T00:00:00Z`), planConf);
 }
 
 function escapeTable(value) {
@@ -576,7 +584,7 @@ function inspectRepository({
   const monthFile = config.todo.monthFile;
   const weekFile = config.todo.weekFile;
   const expectedMonth = now.slice(0, 7);
-  const acceptedWeeks = acceptedWeeklyPlanWeeks(now);
+  const acceptedWeeks = acceptedWeeklyPlanWeeks(now, root);
   const actualMonth = frontmatters.get(monthFile)?.values.month;
   const actualWeek = frontmatters.get(weekFile)?.values.week;
   if (actualMonth && actualMonth !== expectedMonth) {

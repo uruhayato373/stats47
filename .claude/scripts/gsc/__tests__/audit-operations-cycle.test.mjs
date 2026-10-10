@@ -230,6 +230,27 @@ test('土曜運用: 金曜に作った候補と土曜の判断を計測週のサ
   assert.equal(stale.checks.find((item) => item.code === 'weekly-plan')?.level, 'fail');
 });
 
+test('判定不能のまま終了した wave (closed-waves.json) は想定効果値の欠落に数えない', (t) => {
+  const root = fixture({ targetSubject: 'BLOG-WAVE-2026-05-23-manual' });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const policy = { ...POLICY, legacyMissingTargetSubjectIds: [] };
+  // 終了の台帳が無ければ新規の欠落として fail
+  const before = auditOperationsCycle({ root, now: NOW, stage: 'monitor', policy });
+  assert.equal(before.checks.find((item) => item.code === 'effect-target-ratchet')?.level, 'fail');
+  // 理由付きで終了すると数えない
+  write(root, 'data/improvement/gsc-improvement/closed-waves.json', {
+    closures: [{ waveId: '2026-05-23-manual', closedAt: '2026-10-10', decidedBy: 'owner', reason: '切り分け不能' }],
+  });
+  const after = auditOperationsCycle({ root, now: NOW, stage: 'monitor', policy });
+  assert.equal(after.checks.find((item) => item.code === 'effect-target-ratchet')?.level, 'pass');
+  // 理由の無い行は終了として扱わない
+  write(root, 'data/improvement/gsc-improvement/closed-waves.json', {
+    closures: [{ waveId: '2026-05-23-manual', closedAt: '2026-10-10' }],
+  });
+  const noReason = auditOperationsCycle({ root, now: NOW, stage: 'monitor', policy });
+  assert.equal(noReason.checks.find((item) => item.code === 'effect-target-ratchet')?.level, 'fail');
+});
+
 test('最新計測に対応するreviewと次週planの欠落をfailにする', (t) => {
   const root = fixture();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));

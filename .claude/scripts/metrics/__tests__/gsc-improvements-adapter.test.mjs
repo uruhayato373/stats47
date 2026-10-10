@@ -77,8 +77,11 @@ test('a subject without a deploy date stays pending instead of guessing a window
 
 test('judgeability reports which of the three markers a row is missing', () => {
   assert.deepEqual(judgeability(entry('A-01', '[gsc-page: /a] デプロイ済 2026-08-01')), {
-    id: 'A-01', metric: 'gsc', hasPage: true, hasDeploy: true, hasTarget: false,
+    id: 'A-01', metric: 'gsc', hasPage: true, hasDeploy: true, hasTarget: false, outOfScope: false,
   });
+  // 理由付きの「効果判定エンジン対象外」は対象外。理由の無い言及だけでは外さない
+  assert.equal(judgeability(entry('B-01', '**効果判定エンジン対象外**: 独自の d28 で判定する')).outOfScope, true);
+  assert.equal(judgeability(entry('C-01', '効果判定エンジン対象外かを検討する')).outOfScope, false);
 });
 
 test('gsc-query accepts only operators the Search Console API has', () => {

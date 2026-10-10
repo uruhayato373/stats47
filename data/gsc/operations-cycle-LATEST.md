@@ -1,8 +1,8 @@
 # GSC Operations Cycle — 2026-W40
 
-**Status**: WARN / **Stage**: monitor / **Generated**: 2026-10-05T19:41:47.246Z
+**Status**: WARN / **Stage**: plan / **Generated**: 2026-10-10T03:03:44.483Z
 
-計測週: 2026-W40 / 次週計画: 2026-W41 / 月次: 2026-10
+計測週: 2026-W40 / 次週計画: 2026-W42 / 月次: 2026-10
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -11,14 +11,12 @@
 | effect-verdict | PASS | 2026-W40 verdict 7件を記録済み |
 | effect-target-ratchet | WARN | 既知の過去欠落 7件（新規欠落0） |
 | effect-backlog-reconciliation | PASS | 確定 verdict と active 一覧の不整合0 |
-| search-growth-freshness | PASS | week=2026-W40, age=2d |
+| search-growth-freshness | PASS | week=2026-W40, age=6d |
 | search-growth-sources | PASS | gsc/coverage/inspection は利用可能 |
 | search-growth-decision | PASS | 2026-W40 の承認/却下 1件（必要 1件以上） |
-| url-inspection-freshness | PASS | latest=2026-10-05, age=1d |
+| url-inspection-freshness | PASS | latest=2026-10-10, age=0d |
 | weekly-review | PASS | 2026-W40 review の search-growth 節=あり |
-| weekly-plan | PASS | plan=2026-W41, expected=2026-W41 |
-| monthly-plan | PASS | month=2026-10, GSC運用サイクル節=あり |
-| monthly-review-coverage | PASS | 直近4週レビュー 4/4（必要 3以上） |
+| weekly-plan | PASS | plan=2026-W42, expected=2026-W42 |
 
 ## 次のアクション
 

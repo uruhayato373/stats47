@@ -304,6 +304,7 @@ export const DATASETS = [
   // ── data/ : 改善ログ・計測スナップショット・レビュー ──
   d("improvement.logs", "data/improvement/{name}/improvement-log.md", "ledger", "strategy", "data", "改善施策の詳細ログ (検証コマンド・仮説・判定)"),
   d("improvement.log-archives", "data/improvement/{name}/archive/{**}", "ledger", "strategy", "data", "改善ログの過去分"),
+  d("improvement.closed-waves", "data/improvement/gsc-improvement/closed-waves.json", "ledger", "strategy", "data", "効果判定を判定不能のまま終了したブログ是正 wave (オーナー判断・理由付き)。閾値エンジンの対象から外す"),
   d("improvement.budgets", ".claude/config/budgets/{name}/budgets{name}", "config", "site", "agent-config", "計測値の警告閾値"),
   d("gsc.snapshots", "data/gsc/snapshots/{week}/{**}", "series", "site", "data", "GSC の週次生 CSV", { retain: "analytics-gsc" }),
   d("ga4.snapshots", "data/ga4/snapshots/{week}/{**}", "series", "site", "data", "GA4 の週次生 CSV", { retain: "analytics-ga4" }),

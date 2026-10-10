@@ -1,0 +1,14 @@
+{
+  "_comment": "依存の脆弱性ゲート (check-dependency-audit.mjs) の例外。上流に修正版が無い dev 依存の advisory だけを、理由と期限付きで載せる。runtime 依存に現れる advisory は載せても通らない。期限を過ぎると Security Scan が失敗するので、その日に上流の修正版を確かめて外すか、理由を書き直して期限を延ばす。2026-10-10 オーナー判断 (DEPS-BRACES-GATE-01 の (b))。",
+  "exceptions": [
+    {
+      "id": "GHSA-vfj7-8cjw-p6xm",
+      "package": "braces",
+      "scope": "dev",
+      "path": "eslint-config-next → @next/eslint-plugin-next → fast-glob 3.3.1 → micromatch → braces",
+      "reason": "braces <=3.0.3 の深い入れ子パターンでスタックを使い切る DoS。修正版が無く (2026-10-10)、残る経路は Next.js の ESLint 設定 (開発時だけ動く lint) が fast-glob 3.3.1 を固定している dev 依存だけ。lint は自分たちのソースにしか掛けず、外部入力のパターンを受けない。npm audit fix --force の提案は @next/eslint-plugin-next 14.2.35 への後退で採らない",
+      "decidedAt": "2026-10-10",
+      "expiresAt": "2027-01-10"
+    }
+  ]
+}

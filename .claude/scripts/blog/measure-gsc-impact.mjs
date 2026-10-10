@@ -36,7 +36,7 @@ import { decideVerdict, formatVerdictSection, extractTarget } from "../lib/effec
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekDiff, weekLt } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,6 +54,19 @@ const HISTORY_PATH = path.join(
   PROJECT_ROOT,
   `${datasetDir("blog.operations")}/auto-brushup-history.json`,
 );
+// EFFECT_VERDICT_CLOSED_WAVES は台帳の場所の上書き (テストが空の台帳で実データの wave を測るため)
+const CLOSED_WAVES_PATH =
+  process.env.EFFECT_VERDICT_CLOSED_WAVES ?? path.join(PROJECT_ROOT, datasetPath("improvement.closed-waves"));
+
+/**
+ * 判定不能のまま終了した wave (オーナー判断・理由付き)。閾値エンジンの対象から外し、毎週 effect/pending を出し続けない。
+ * 終了は effect ラベルを付けたことにはならない (台帳と改善ログの節に理由を残す)。台帳が無ければ空。
+ */
+export function loadClosedWaveIds(file = CLOSED_WAVES_PATH) {
+  if (!fs.existsSync(file)) return new Set();
+  const doc = JSON.parse(fs.readFileSync(file, "utf8"));
+  return new Set((doc.closures ?? []).filter((c) => c.waveId && c.reason).map((c) => c.waveId));
+}
 
 // ====== 利用可能 snapshot 週 ======
 function listAvailableWeeks() {
@@ -132,6 +145,7 @@ export function createGscBlogWaveAdapter(opts = {}) {
   const availableWeeks = listAvailableWeeks();
   const latestWeek = opts.afterWeek || availableWeeks[availableWeeks.length - 1] || null;
   const waves = loadWaves();
+  const closed = opts.closedWaveIds ?? loadClosedWaveIds();
 
   return {
     domainId: "gsc-blog-wave",
@@ -141,7 +155,9 @@ export function createGscBlogWaveAdapter(opts = {}) {
     latestWeek,
 
     listSubjects() {
-      const all = [...waves.entries()].sort((a, b) => (a[1].date < b[1].date ? -1 : 1));
+      const all = [...waves.entries()]
+        .filter(([id]) => !closed.has(id))
+        .sort((a, b) => (a[1].date < b[1].date ? -1 : 1));
       const picked = opts.onlyWave ? all.filter(([id]) => id === opts.onlyWave) : all;
       return picked.map(([id, info]) => ({
         id,

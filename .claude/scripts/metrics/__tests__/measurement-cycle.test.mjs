@@ -80,7 +80,13 @@ test('engine summary counts verdicts per domain and lists GSC rows by the marker
     ],
   });
   assert.deepEqual(engine.byDomain['gsc-improvement'], { subjects: 1, byLabel: { 'effect/full': 1 } });
-  assert.deepEqual(engine.gsc, { active: 2, judgeable: 1, missing: [{ id: 'B-01', missing: ['デプロイ済 YYYY-MM-DD', '[target: +N clicks]'] }] });
+  assert.deepEqual(engine.gsc, { active: 2, judgeable: 1, missing: [{ id: 'B-01', missing: ['デプロイ済 YYYY-MM-DD', '[target: +N clicks]'] }], outOfScope: [] });
+  // 理由付きで対象外にした行は欠落に数えず、対象外として別に出す
+  const scoped = summarizeEngine({ verdicts: null, gscRows: [
+    { id: 'A-01', hasPage: true, hasDeploy: true, hasTarget: true },
+    { id: 'T-01', hasPage: false, hasDeploy: false, hasTarget: false, outOfScope: true },
+  ] });
+  assert.deepEqual(scoped.gsc, { active: 1, judgeable: 1, missing: [], outOfScope: ['T-01'] });
   // verdict が無い週は 0 件ではなく「未生成」と区別できる
   assert.equal(summarizeEngine({ verdicts: null, gscRows: [] }).verdictsWeek, null);
 });
