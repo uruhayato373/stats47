@@ -11,6 +11,9 @@
  * 決定的 (LLM 呼ばない)。欠落が無ければ黙る。
  *
  * 出力: 欠落があれば JSON { decision:"block", reason } を stdout。Stop hook は exit 0 必須。
+ *
+ * --session-start (SessionStart hook): 期限が来た週次レビューが未作成なら 1 行だけ出す (doboku-note の
+ * check-weekly-review-due と同じ役割)。週次レビューは土曜が期限 (2026-10-10〜) なので、土曜にセッションを開くと気づける。
  */
 
 const { execFileSync } = require("child_process");
@@ -27,7 +30,34 @@ function readStdin() {
   }
 }
 
+function runCheck() {
+  const script = path.join(PROJECT_ROOT, ".claude/scripts/management/check-review-cadence.mjs");
+  const out = execFileSync("node", [script, "--json"], { cwd: PROJECT_ROOT, encoding: "utf8", timeout: 10000 });
+  return JSON.parse(out);
+}
+
+/** SessionStart: 期限が来た週次レビューの未作成だけを 1 行で知らせる (会話の文脈に入る) */
+function sessionStart() {
+  let result;
+  try {
+    result = runCheck();
+  } catch {
+    return; // 検知に失敗しても起動は止めない
+  }
+  const weekly = (result.status || []).find((s) => s.kind === "weekly-review");
+  if (!weekly || !weekly.missing || weekly.missing.length === 0) return;
+  const overdue = result.reviewDueDate && result.today > result.reviewDueDate;
+  process.stdout.write(
+    `📅 週次レビュー ${weekly.missing.join(", ")} が未作成です (期限 ${result.reviewDueDate}${overdue ? "・超過" : "・今日"})。` +
+      ` 土曜に前週を振り返り来週の計画を書く → \`${weekly.command} ${weekly.missing[0]}\` のあと \`/weekly-plan\`\n`,
+  );
+}
+
 function main() {
+  if (process.argv.includes("--session-start")) {
+    sessionStart();
+    process.exit(0);
+  }
   const input = readStdin();
   if (input.stop_hook_active) process.exit(0); // 無限ループ防止
 
@@ -45,15 +75,9 @@ function main() {
   }
 
   // 検知スクリプトを JSON で実行
-  const script = path.join(PROJECT_ROOT, ".claude/scripts/management/check-review-cadence.mjs");
   let result;
   try {
-    const out = execFileSync("node", [script, "--json"], {
-      cwd: PROJECT_ROOT,
-      encoding: "utf8",
-      timeout: 10000,
-    });
-    result = JSON.parse(out);
+    result = runCheck();
   } catch {
     process.exit(0); // 検知に失敗しても作業は止めない
   }

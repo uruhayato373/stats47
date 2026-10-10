@@ -28,7 +28,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 | `/indexing-api-submit` | Indexing API 即時送信 |
 | `/submit-sitemap` | sitemap 提出 |
 | `/gsc-coverage-remediation` | GSC カバレッジ是正ループ (404/soft404/5xx の ingest→本番実測 A/B 分類→是正→経過観測)。content-check の薄さ/描画判定を担当。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`。co: improvement-triage |
-| `audit-operations-cycle.mjs` | 日曜計測後の週次レビュー・候補判断・次週計画・月次集約の接続監査。FAILは`gsc-cycle-alert`へ通知 |
+| `audit-operations-cycle.mjs` | 金曜計測後の週次レビュー・候補判断・来週の計画 (土曜)・月次集約の接続監査。FAILは`gsc-cycle-alert`へ通知 |
 | `/analyze-winning-patterns` | ブログ勝ち要因分析 (CTR×構造特徴→featureSignals、順位交絡統制付き)。co: blog-critic / trend-scout |
 
 ## 担当外

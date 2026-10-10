@@ -114,7 +114,7 @@ CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間
 
 ## 自動化の現行仕様 (2026-06-08〜 稼働中)
 
-①〜④ の自動化が `fetch-metrics-weekly.yml` (日曜 JST20:00 cron) に配線済みで稼働中。
+①〜④ の自動化が `fetch-metrics-weekly.yml` (金曜 JST05:00 cron) に配線済みで稼働中。
 
 - **週次 cron でキュー再構築 + commit-back**: GSC snapshot fetch 直後、develop の最新 history + fresh GSC +
   公開 R2 audit を入力に `build-remediation-queue.mjs` を回し `remediation-queue.json` を develop へ commit-back。

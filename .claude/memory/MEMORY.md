@@ -99,8 +99,8 @@
 - [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=data/note/note-published-urls.json
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [feedback_ga4_journey_referrer_over_navclick.md](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
-- [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。日曜計測→月曜06:00無人triage(ゲート付き)→09:00週次Issue。schedule/取得段はmain定義で動く。無人ClaudeはdontAskで.claude/を書けない→提案JSONを決定的適用
-- [project_review_cadence_wiring.md](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。正本review-wiring.json・判定review-cadence.mjsをCLI/Stop hook/review-cadence-guard.yml/DG084/管理画面/週次Issueが共有。月次は/monthly-review独立・申し送りは「→ 振り分け:」必須
+- [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。2026-10-10から金曜05:00に前週を計測→12:00無人triage(ゲート付き)→18:00週次Issue→土曜にレビューと来週の計画。schedule/取得段はmain定義で動く。無人Claudeは.claude/を書けない→提案JSONを決定的適用
+- [project_review_cadence_wiring.md](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。週次は土曜期限(10-10〜・当日warn/日曜Issue)。正本review-wiring.json・判定review-cadence.mjsをCLI/Stop hook/review-cadence-guard.yml/DG084/管理画面/週次Issueが共有。月次は/monthly-review独立・申し送りは「→ 振り分け:」必須
 - [project_r2_s3_token_expired_2026_05_29.md](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)
 - [feedback_sync_snapshots_checks_out_main.md](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は --ref を渡しても常に main を checkout。develop の git TS 変更はマージ後に実行しないと R2 に反映されない (しかも success + verify 一致と報告するので失敗に見えない)
 - [project_r2_writes_ci_only.md](project_r2_writes_ci_only.md) — 2026-06-20: ローカル/CI両方からremote R2読み書き可。remoteが唯一の真実源。ローカルミラー廃止。ローカル書込はR2 S3 creds要

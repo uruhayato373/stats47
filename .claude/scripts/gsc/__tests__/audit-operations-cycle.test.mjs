@@ -134,7 +134,8 @@ function fixture({
   write(
     root,
     '.claude/todo/weekly.md',
-    '---\ntype: weekly-plan\nweek: 2026-W35\n---\n'
+    // 2026-10-10 から土曜にレビューと来週の計画を書く。W34 の計測を受けた計画は W35 の土曜に書く W36
+    '---\ntype: weekly-plan\nweek: 2026-W36\n---\n'
   );
   write(
     root,
@@ -181,7 +182,7 @@ test('全工程が接続されていれば monitor は pass', (t) => {
   });
   assert.equal(result.status, 'pass');
   assert.equal(result.measurementWeek, '2026-W34');
-  assert.equal(result.expectedPlanWeek, '2026-W35');
+  assert.equal(result.expectedPlanWeek, '2026-W36');
   assert.match(renderMarkdown(result), /Status\*\*: PASS/);
 });
 
@@ -199,6 +200,34 @@ test('月曜に再構築した次週cadenceの候補も前週レビュー入力�
       ?.level,
     'pass'
   );
+});
+
+test('土曜運用: 金曜に作った候補と土曜の判断を計測週のサイクルとして扱い、次の計画は 2 週先を求める', (t) => {
+  const root = fixture();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  // 金曜 06:30 JST に候補を作り直し (週ラベルは実行週 W35)、土曜にレビューで判断した
+  write(root, 'data/search-growth/candidates.json', {
+    generatedAt: '2026-08-27T21:30:00.000Z',
+    week: '2026-W35',
+    sourceHealth: {
+      gsc: { status: 'success', freshness: 'fresh' },
+      coverage: { status: 'success', freshness: 'fresh' },
+      inspection: { status: 'success', freshness: 'fresh' },
+    },
+    candidates: [{ id: 'C-1', status: 'dismissed', dismissedAt: '2026-08-29T03:00:00.000Z' }],
+  });
+  write(root, 'data/gsc/url-inspection/LATEST.md', '# GSC URL Inspection — 2026-08-29\n');
+  // 日曜 20:30 JST の monitor
+  const now = new Date('2026-08-30T11:30:00.000Z');
+  const result = auditOperationsCycle({ root, now, stage: 'monitor', policy: POLICY });
+  assert.equal(result.expectedPlanWeek, '2026-W36');
+  for (const code of ['search-growth-freshness', 'search-growth-decision', 'weekly-plan']) {
+    assert.equal(result.checks.find((item) => item.code === code)?.level, 'pass', code);
+  }
+  // 計画が計測週の翌週 (W35) のままなら、土曜の計画が書かれていないので fail
+  write(root, '.claude/todo/weekly.md', '---\nweek: 2026-W35\n---\n');
+  const stale = auditOperationsCycle({ root, now, stage: 'monitor', policy: POLICY });
+  assert.equal(stale.checks.find((item) => item.code === 'weekly-plan')?.level, 'fail');
 });
 
 test('最新計測に対応するreviewと次週planの欠落をfailにする', (t) => {

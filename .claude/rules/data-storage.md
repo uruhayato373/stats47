@@ -222,7 +222,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | データ | 保存先 |
 |---|---|
-| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が日曜 JST 20:00 に自動更新。26 週を保持）。`data/adsense/snapshots/` は 2026-09-20 の恒久停止に伴う凍結記録 |
+| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が金曜 JST 05:00 に前週分を自動更新。26 週を保持）。`data/adsense/snapshots/` は 2026-09-20 の恒久停止に伴う凍結記録 |
 | GSC / GA4 の週次集約と要約 | `data/{gsc,ga4}/{history.csv,history-finalized7d.csv,LATEST.md}`（人間は LATEST.md を見れば 10 秒で把握） |
 | GSC カバレッジ | ドリルダウン `data/gsc/coverage-drilldown/<YYYY-Www>/`、件数推移 `data/gsc/coverage-totals-history.csv`、URL Inspection `data/gsc/url-inspection/`（日次 7 件を保持）。是正キュー (状態) は `data/gsc/coverage-remediation/{coverage-remediation-queue.json,LATEST.md}`（`build-coverage-queue.mjs` が生成。正典 `/gsc-coverage-remediation`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `data/psi/{psi-batch-*.json,history.csv,LATEST.md}`（生 JSON は最新 1 件。日次 JST 02:00、閾値違反時 `[PSI Alert]` Issue）/ URL リスト `config/psi-urls.txt` / 閾値 `.claude/skills/analytics/performance-improvement/budgets.json` |
@@ -232,7 +232,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `data/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない）。形は `posts.schema.json`、長尺の台本は `data/sns/scripts/<id>.json`、画像・動画の実体は Google Drive `stats47/SNS素材/` (台帳は相対パス・sha256 だけ。契約 `sns-content-standards.md` §3-1) |
 | SNS 投稿メトリクス時系列 | `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | 商品の販売台帳・受領記録・生成と販売準備の状態 | `data/products/`（状態は `*-status.json`） |
-| 計測→記録→改善サイクルの週次まとめ | `data/measurement-cycle/{latest.json,LATEST.md,history.csv,triage-latest.json}`（`build-measurement-cycle.mjs` が日曜の `fetch-metrics-weekly.yml` と月曜の `improvement-cycle-weekly.yml` で作る。週次メトリクス Issue と `/weekly-review` が読む） |
+| 計測→記録→改善サイクルの週次まとめ | `data/measurement-cycle/{latest.json,LATEST.md,history.csv,triage-latest.json}`（`build-measurement-cycle.mjs` が金曜 05:00 の `fetch-metrics-weekly.yml` と金曜 12:00 の `improvement-cycle-weekly.yml` で作る。週次メトリクス Issue と `/weekly-review` が読む） |
 | 改善施策の詳細ログ・効果判定・実験 | `data/improvement/<施策>/improvement-log.md`、`data/effect-verdict/verdicts-<week>.json`、`data/business/experiments.json` |
 | NSM 週次 JSON snapshot・レビュー | `data/nsm/weekly-snapshots/YYYY-Www.json`、`data/reviews/{weekly,monthly}/` |
 | e-Stat 年カバレッジ監査キュー | `data/estat/year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で巡回生成） |
