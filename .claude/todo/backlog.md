@@ -275,6 +275,16 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SNS-DATA-CARD-COMMIT-GATES-01] SNS データカード (render-data-card.ts) をコミットする前に、環境変数登録・Codex ミラー・依存宣言を揃える
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:SNS]
+
+- **事実 (2026-10-11、別セッションの未コミット作業を読み取りで監査)**: `.claude/scripts/sns/render-data-card.ts` と `lib/data-card-{input,shape}.ts`、`apps/remotion/src/features/data-cards/` は skill `render-sns-stills`・`post-x`・`post-x-batch` と `sns-content-standards.md` §2-9 から参照され、`Root.tsx` に composition が登録されている。次の 3 点が未解消。
+  1. `process.env.CHROME_PATH` が `.claude/config/env-registry.json` に無く、pre-commit と preflight:pr の env registry が落ちる
+  2. SNS skill 3 本の Codex ミラー (`.agents/skills/sns/{post-x,post-x-batch,render-sns-stills}/SKILL.md`) が未同期で、整合性検査 E12 が落ちる
+  3. `@remotion/bundler` をどの package.json も宣言しておらず、Remotion の推移依存の巻き上げで動いている (`topojson-client` は root が宣言済み)
+- **次**: 作業したセッションが、①を env-registry に登録する、②を `node .claude/scripts/lib/sync-codex-mirror.cjs` で同期する、③を root の package.json に宣言する、の 3 つを済ませてからコミットする。
+- **完了条件**: `npm run preflight:pr` と `node .claude/scripts/lib/check-agent-skill-consistency.cjs` が通る状態でデータカードがコミットされている。
+
 ### [AI-CONTENT-GEMINI-KEY-01] Gemini 日次のキーが無料枠で通るかを確かめ、通れば定期実行を戻す
 タグ: [コンテンツ品質] [種類:不具合] [実行:ユーザー] [起票:2026-10-11] [領域:データ]
 
@@ -1281,6 +1291,7 @@ updated: 2026-10-06
 
 - **正典**: 記事ごとの承認済みタグは `config/note-hashtags/<slug>.json` (git・全286件そろい済み)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
 - **現状 (2026-10-03 停止時点)**: 承認済みと一致 94 件、未反映 190 件、下書きで停止 2 件。棚卸し: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid --audit-only`
+- **再棚卸し (2026-10-11)**: 一致 94・未反映 190・失敗 2 で 10-03 から変化なし (`data/note/evidence/note-hashtag-audit-2026-10-11.json`)。反映は再開されていない。
 - **下書きで停止**: `a-late-elderly-medical-expense-per-insured` は一括反映を途中で止めたときに残った下書き (無料記事なので `--slugs a-late-elderly-medical-expense-per-insured --allow-free-draft` で片付く)。`paid-nfe2c65e669a8` (有料) は以前からの下書きで、内容を確認してから扱いを決める。
 - **実行**: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid` (承認済みと一致する記事は飛ばすので、途中で止めても再実行でよい)。headless `claude` と note のログイン (browser-use Profile 5) が必要。1 件 約40秒。
 - **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
@@ -1385,7 +1396,7 @@ updated: 2026-10-06
   3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
   4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
 - **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
-- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。CIの初回結果は未確認。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
+- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。**CIは一度も完了していない (2026-10-11 確認)**: 10-01 (dispatch)・10-03・10-10 (schedule) の 3 回とも `timeout-minutes: 30` で cancelled (run 36909292510 / 37160611864 / 38095490764)。commit `00c5a44f0` の時間切れ対策後も再発しているので、286 記事の browser-verify を 30 分に収める分割か上限の見直しが要る。確認: `gh run list --workflow note-circulation-audit-weekly.yml --limit 3`。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
 - **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
 - **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
 
