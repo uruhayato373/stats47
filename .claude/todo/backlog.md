@@ -3883,21 +3883,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
-### [SIMPLIFY-PORTFOLIO-CUT-01] 収益につながらない部分系統 (SNS・テーマ/Geo/調査・商品ファクトリー・残置 package) を止めるかを決める
-タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-10-11] [領域:戦略]
-
-- **事実 (2026-10-11 実測)**: 規模は 61 agent / 165 skill / `.claude/scripts` 1,033 本 / workflow 79 本 (定期 49) / npm script 214 / 21 package + 4 app / TS 約 42 万行 / 追跡 13,817 ファイル / `.git` 635 MB。流入は W40 GSC クリック 11,179 のうち blog 5,268・ranking 4,786・areas 450・municipalities 408 で 97%。themes 60・survey 80・category 28・geo 18・japan 5 で合計 1.7%。GA4 W40 セッション 23,496 のうち Organic Social 98 (0.4%)。収益は A8 / もしも / afb / 楽天 ¥0、ココナラ累計 ¥0、KDP・note 判定不能、AdSense は W31〜W33 に週 ¥118〜146 で 08-29 停止・10-11 に手動枠で再開。費用はローカル agent 4 週 $452 (`model-usage/latest.json`。主ループは別に opus 中心で 4 週 $1,300 超)、CI Claude は 8 月 $1,556・9 月 $62・10 月 $4、R2 33.6 GB。
-- **止める候補と根拠**:
-  - (a) SNS 系統 — apps/remotion 35,252 行・sns skill 23・agent 4 (x-strategist / instagram-strategist / sns-renderer / sns-metrics-sync)・定期 workflow 4 本 (IG 日次・Threads 確認・SNS Port Bubble・投稿済み動画の R2 掃除)・sns-renderer 4 週 $52。直近 60 日で 309 投稿に対し、流入 0.4%・収益 0。
-  - (b) themes / geo / survey / japan — 55 テーマ・theme skill 7 + agent 4、gis skill 2 + agent 3、survey skill 1 + agent 1、packages/gis 17,302 行。合計クリック 1.5%。
-  - (c) 商品ファクトリー (ココナラ / KDP / note 商品) — packages/product-factory 36,294 行・skill 4 + note 9・agent 5。売上 ¥0 で計測も auth_required。
-  - (d) 残置 — apps/ges 455 行 (orphan skill ges/render-ges-ports だけが使う)、packages/database 2,779 行 (DB レス後は apps/web の test setup と correlation の未使用 dep だけが参照)、packages/{area,category,station-passengers,migration-flow} 各 2,000 行未満。
-- **残す本線 (証拠)**: blog + ranking + areas / municipalities (流入 97%) と、その上の AdSense + アフィリエイトの計測・配置。管理画面は 40 ページが 42 の `lib/server` 経由で台帳を読んでおり配線は健全なので、止める系統のページだけ落とす。
-- **やるなら**: 止める系統ごとに (1) workflow の schedule を外す → (2) agent / skill / script / package を削除 → (3) `datasets.mjs` の行を `RETIRED` へ → (4) `npm run check-datasets`・`docs:check`・`type-check` の順で、1 系統 1 PR。公開ページ (themes 等) を消すなら 410 と sitemap を `url-policy.ts` で揃え、`middleware.test.ts` を通す。
-- **停止した系統で一緒に外すもの (`SIMPLIFY-UNUSED-CODE-01` から引き継ぎ、2026-10-11 の knip)**: (a) なら apps/remotion の依存 better-sqlite3・clsx・dotenv・sharp・tailwind-merge と skill `sns/generate-compare`。(d) なら apps/ges の better-sqlite3 と skill `ges/render-ges-ports`。root の http-proxy-agent (会社 PC の proxy preload) と image-size (依存を無効化する shim、`overrides` が参照) は意図的なので外さない。
-- **停止条件**: この決定が無いまま止める系統の掃除を先に進めない (削る対象に掃除を施すのは無駄になる)。
-- **完了条件**: オーナーが (a)〜(d) ごとに「継続 / 停止」を決め、停止分が実行カードへ分割されている。
-
 ### [AFF-LEAD-COPY-AB-01] 画像バナーの前に文脈をつなぐ一文を置くかを A/B で決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-08] [領域:アフィリエイト]
 

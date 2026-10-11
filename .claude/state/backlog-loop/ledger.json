@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T10:25:05.584Z",
+  "updatedAt": "2026-10-11T10:51:18.413Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7442,6 +7442,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-11T10:25:05.584Z"
+    },
+    "SIMPLIFY-PORTFOLIO-CUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:51:18.413Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git grep importer count per workspace (ges/database/area/category/station-passengers/migration-flow)"
+            ],
+            "pass": true
+          },
+          "evidence": "オーナー判断 (2026-10-11 チャット): SNS・Remotion は残す、テーマ/Geo/調査と商品ファクトリーも継続、残置パッケージは停止を選択。実測で残置 6 件はすべて使用中 (area/category/station-passengers/migration-flow は web・Remotion が import、apps/ges は SNS 動画の道具、packages/database は web のテスト基盤で CLAUDE.md が残置可) のため削除対象 0。判断は memory feedback_portfolio_k",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:51:18.413Z"
     }
   }
 }
