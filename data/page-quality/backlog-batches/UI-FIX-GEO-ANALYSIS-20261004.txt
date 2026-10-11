@@ -1,1 +1,0 @@
-machine|geo-analysis|internal_jargon_terms

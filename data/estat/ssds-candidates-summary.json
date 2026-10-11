@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-03T23:15:17.149Z",
+  "generatedAt": "2026-10-10T23:44:21.240Z",
   "ssdsTablesProbed": 26,
   "ssdsTablesFound": 26,
   "totalSsdsIndicators": 5356,
-  "existingPairs": 2200,
-  "newCandidates": 4067,
+  "existingPairs": 2206,
+  "newCandidates": 4065,
   "topUnits": [
     [
       "人",
-      1703
+      1702
     ],
     [
       "％",
-      220
+      219
     ],
     [
       "分",
@@ -128,7 +128,7 @@
       "statsDataId": "0000010107",
       "title": "Ｇ　文化・スポーツ",
       "indicators": 248,
-      "newCandidates": 223
+      "newCandidates": 221
     },
     {
       "statsDataId": "0000010108",

@@ -658,17 +658,18 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > (`.claude/rules/evidence-based-judgment.md`)。impression を増やすのは
 > **計装の網羅と枠の追加だけ**で行う。
 
-> **AdSense は 2026-09-20 に恒久停止した**ので rollback 手順は持たない
-> (正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1)。本文書に残る「AdSense 停止中」という
-> 表現は暫定状態ではなく確定状態を指す。`ADSENSE_DISPLAY_ENABLED` は `false` 固定で、
-> 再開するなら収益化戦略の改訂を伴う新しいオーナー判断であり、その時点で配置を設計し直す。
+> **AdSense は 2026-10-11 に手動枠だけで再開した** (正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1・
+> backlog `ADSENSE-RESTART-01`)。`ADSENSE_DISPLAY_ENABLED` は `true`。本文書に残る「AdSense 停止中」の枠
+> (ranking 本文中段の banner・右レール上段への移設・areas 県の本文中段) は、再開で AdSense に戻った。
+> 再開日を境に、これらの枠を含むアフィリエイトの効果判定は前後の窓を比べない。止めるときは
+> `ADSENSE_DISPLAY_ENABLED` を `false` に戻せば停止中の配置に戻る。
 >
 > **★AdSense の広告インテントは禁止**:
 > AdSense 管理画面の `広告 > stats47.jp > 編集 > インテント重視のフォーマット` で
 > 「広告インテント」をオフに保つ。加えて `app/layout.tsx` と `app/global-error.tsx` の
 > `<body>` に Google 公式の `google-anno-skip` を常設し、管理画面の設定が変わっても
-> リンク・アンカー・チップを全ページで挿入させない。恒久停止後もこの class は外さない
-> (スクリプトが何かの拍子に復活したときの二重防御として残す)。
+> リンク・アンカー・チップを全ページで挿入させない。この class は外さない
+> (自動広告や広告インテントが管理画面で誤ってオンになったときの二重防御)。
 > 公式仕様: https://support.google.com/adsense/answer/13844047
 >
 > **★再開したら必ず本文書き換えの smoke も回す**:

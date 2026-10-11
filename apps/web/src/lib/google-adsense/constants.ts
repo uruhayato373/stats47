@@ -10,11 +10,16 @@ import type { AdFormat } from "./types";
 /**
  * AdSense表示の全体スイッチ。
  *
- * 2026-08-16のオーナー判断で一時停止。falseの間は環境変数がtrueでも、
- * script / preconnect / Auto ads / 手動枠 / AdSense fallbackを一切描画しない。
- * 再開時は効果測定を完了してから、この1箇所だけをtrueへ戻す。
+ * 2026-08-16に一時停止し、2026-10-11に新アカウント (pub-9055416085403520) の
+ * 審査承認を受けて再開した (backlog ADSENSE-RESTART-01)。自動広告はオフで手動枠だけ。
+ * falseの間は環境変数がtrueでも、script / preconnect / 手動枠 / AdSense fallbackを
+ * 一切描画しない。止めるときはこの1箇所だけをfalseへ戻す。
  */
-export const ADSENSE_DISPLAY_ENABLED: boolean = false;
+export const ADSENSE_DISPLAY_ENABLED: boolean = true;
+
+// 以下の slotId はすべて新アカウントで 2026-10-11 に発行した広告ユニット。配置ごとに 1 ユニットを
+// 割り当て、AdSense の広告ユニット別レポートで枠ごとの収益・視認率を比べられるようにしている
+// (ユニット名は stats47-<配置>)。旧アカウント (pub-7995274743017484) の slotId は使えない。
 
 export interface AdSlotConfig {
   /** 広告スロットID（AdSense 管理画面で発行）。空文字 = 未発行プレースホルダ（slot 部品は描画しない） */
@@ -23,21 +28,32 @@ export interface AdSlotConfig {
   format: AdFormat;
 }
 
-/** ランキングページ: データテーブル横（PC）/ テーブル下（モバイル） */
+/** ランキングページ: データテーブル横（PC）/ テーブル下（モバイル）。AdSense ユニット名: stats47-ranking-table-side */
 export const RANKING_PAGE_TABLE_SIDE: AdSlotConfig = {
-  slotId: "3604399166",
+  slotId: "5182030050",
   format: "rectangle",
 };
 
-/** ランキングページ: 右サイドバー上部 */
+/**
+ * 右レールのアフィリエイト枠 (AffiliateAdSlot position="sidebar") の AdSense フォールバック。
+ * 意図が解決せずバナーもテキストも出ないページ (気候・身長など) で出る。ランキングでは
+ * RANKING_PAGE_TABLE_SIDE と同じページに並ぶので、2026-10-11 の再開時に別ユニットへ分けた。
+ * AdSense ユニット名: stats47-sidebar-affiliate-fallback
+ */
+export const SIDEBAR_AFFILIATE_FALLBACK: AdSlotConfig = {
+  slotId: "4607314986",
+  format: "rectangle",
+};
+
+/** ランキングページ: 右サイドバー上部。AdSense ユニット名: stats47-ranking-rail-top */
 export const RANKING_SIDEBAR_TOP: AdSlotConfig = {
-  slotId: "6180558947",
+  slotId: "8897913786",
   format: "rectangle",
 };
 
-/** ランキングページ: 右サイドバー */
+/** ランキングページ: 右サイドバー。AdSense ユニット名: stats47-ranking-rail-bottom */
 export const RANKING_PAGE_SIDEBAR: AdSlotConfig = {
-  slotId: "1047042956",
+  slotId: "2308454706",
   format: "skyscraper",
 };
 
@@ -47,9 +63,10 @@ export const RANKING_PAGE_SIDEBAR: AdSlotConfig = {
  * ADSENSE-SLOT-DEDUPE-01: 同一ページ内で slot を二重使用していた不具合
  * （category は 6137206504 を rail+本文で重複、areas は 6180558947 を 3 回）を、
  * 右レール専用の独立スロットに寄せて解消するためのユニット。
+ * AdSense ユニット名: stats47-hub-rail
  */
 export const RAIL_RECT: AdSlotConfig = {
-  slotId: "7716393084",
+  slotId: "9435960671",
   format: "rectangle",
 };
 
@@ -57,16 +74,16 @@ export const RAIL_RECT: AdSlotConfig = {
  * ランキングページ: メインコンテンツ最下部
  * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 2607536637・W26 viewability 26.2%) を
  * Multiplex (関連コンテンツ型グリッド・横長) に差し替え。読了後の全幅フッターに適した形式。
- * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
+ * AdSense ユニット: stats47-ranking-footer-multiplex（Multiplex / autorelaxed）
  */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
-  slotId: "6137206504",
+  slotId: "2439393208",
   format: "multiplex",
 };
 
-/** ブログ記事内インライン広告（記事内 / fluid） */
+/** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
-  slotId: "5610987738",
+  slotId: "6809797335",
   format: "article",
 };
 
@@ -76,20 +93,20 @@ export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
  * モバイルはサイドバー広告が非表示で、収益のあるユニットが実質テーブル直後の
  * フッター 1 枠のみだった（W21 実測: Mobile Impressions/PV 0.32 / RPM ¥20）。
  * 解析セクションを読み進める層に中盤で 1 枠出すための専用スロット。
- * AdSense ユニット名: ranking-incontent-mobile（記事内 / fluid）
+ * AdSense ユニット名: stats47-ranking-incontent-mobile（記事内 / fluid）
  */
 export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
-  slotId: "5555350674",
+  slotId: "2894688778",
   format: "article",
 };
 
 /**
  * テーマダッシュボードページ: ダッシュボード下のディスプレイ広告
  * 17 テーマページ共通（ThemePageLayout）。
- * AdSense ユニット名: themes-content（ディスプレイ広告 / auto）
+ * AdSense ユニット名: stats47-themes-content（ディスプレイ広告 / auto）
  */
 export const THEMES_CONTENT: AdSlotConfig = {
-  slotId: "4317152551",
+  slotId: "8298138821",
   format: "rectangle",
 };
 
@@ -98,12 +115,10 @@ export const THEMES_CONTENT: AdSlotConfig = {
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
  * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。
  * ranking 詳細の RANKING_INCONTENT_MOBILE とは別ユニットにして units.csv で効果を分離する。
- *
- * ★人間タスク: AdSense 管理画面で「stats47-hub-incontent」記事内/fluid ユニットを 1 件発行し
- *   slotId を記入する。空文字の間は InContentAdSlot が描画されない（graceful degradation）。
+ * AdSense ユニット名: stats47-hub-incontent（記事内 / fluid）
  */
 export const HUB_INCONTENT: AdSlotConfig = {
-  slotId: "8185387982",
+  slotId: "9995373035",
   format: "article",
 };
 
@@ -112,10 +127,11 @@ export const HUB_INCONTENT: AdSlotConfig = {
  * 地域別カテゴリ・市区町村ページ・各一覧ページ（/blog, /survey, /ports 等）・/search の
  * メインコンテンツ最下部に配置する汎用スロット。
  * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 6635359989・W26 viewability 49.1%) を
- * Multiplex に差し替え。RANKING_PAGE_FOOTER と同一 slot を共用（同一ページに同時表示されない）。
+ * Multiplex に差し替え。2026-10-11 の再開時に RANKING_PAGE_FOOTER との slot 共用をやめ、
+ * ランキング末尾とそれ以外の末尾を別ユニットで計測する。
  * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
  */
 export const CONTENT_FOOTER: AdSlotConfig = {
-  slotId: "6137206504",
+  slotId: "2005202370",
   format: "multiplex",
 };

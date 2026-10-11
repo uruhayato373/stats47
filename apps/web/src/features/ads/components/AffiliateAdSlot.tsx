@@ -3,7 +3,7 @@ import { SurfaceCard } from "@/components/surface";
 import {
   ADSENSE_DISPLAY_ENABLED,
   RANKING_PAGE_FOOTER,
-  RANKING_PAGE_TABLE_SIDE,
+  SIDEBAR_AFFILIATE_FALLBACK,
 } from "@/lib/google-adsense";
 
 import { CATEGORY_AFFILIATE_MAP, type AffiliateVertical } from "../constants/affiliate-category";
@@ -157,7 +157,7 @@ export async function AffiliateAdSlot({
   if (!ADSENSE_DISPLAY_ENABLED) return null;
 
   const adSlot =
-    position === "footer" ? RANKING_PAGE_FOOTER : RANKING_PAGE_TABLE_SIDE;
+    position === "footer" ? RANKING_PAGE_FOOTER : SIDEBAR_AFFILIATE_FALLBACK;
 
   return (
     <SurfaceCard className="p-3">

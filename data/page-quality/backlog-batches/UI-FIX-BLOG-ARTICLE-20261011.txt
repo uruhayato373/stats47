@@ -1,0 +1,10 @@
+machine|blog-article|abnormal_value_strings
+machine|blog-article|internal_jargon_terms
+machine|blog-article|same_shop_ad_duplicates
+machine|blog-article|title_changed
+machine|blog-article|unit_symbol_mixing
+machine|https://stats47.jp/blog/cc-estat-04-aging-heatmap|blog_svg_text_issues
+machine|https://stats47.jp/blog/cc-estat-17-edu-slope-graph|blog_svg_text_issues
+machine|https://stats47.jp/blog/child-height-regional-gap|blog_svg_text_issues
+machine|https://stats47.jp/blog/commercial-land-price-trend|blog_svg_text_issues
+machine|https://stats47.jp/blog/communication-cost-burden|blog_svg_text_issues

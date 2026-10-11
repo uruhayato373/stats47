@@ -1,0 +1,3 @@
+machine|https://stats47.jp/|clipped_text
+machine|https://stats47.jp/|responsive_layout_issues
+agent|home

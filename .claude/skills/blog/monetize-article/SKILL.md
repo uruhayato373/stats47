@@ -1,14 +1,14 @@
 ---
 name: monetize-article
 domain: site
-description: 既存ブログ記事に <affiliate-banner> を適切な位置に挿入する。<ad-slot> は 2026-09-20 の AdSense 恒久停止で無効になったため配置しない。Use when user says "/monetize-article", "広告挿入", "記事に広告を入れて". スラッグを引数として受け取る.
+description: 既存ブログ記事に <affiliate-banner> を適切な位置に挿入する。<ad-slot> は表示側が自動で入れるため手で配置しない。Use when user says "/monetize-article", "広告挿入", "記事に広告を入れて". スラッグを引数として受け取る.
 primary_agent: article-writer
 ---
 
-> **2026-09-20: `<ad-slot>` は配置しない。** AdSense を恒久停止したため
-> (`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1)、`ADSENSE_DISPLAY_ENABLED=false` で何も
-> 描画されない。このスキルで扱うのは `<affiliate-banner>` だけとし、以下の ad-slot 配置手順は
-> 凍結記録として残す。
+> **`<ad-slot>` は配置しない。** AdSense は 2026-10-11 に再開したが
+> (`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1)、本文中段と記事末尾の枠は表示側
+> (`md-content.tsx` の `injectAdSlots`) が自動で入れる。手で書くと自動挿入が止まる。
+> このスキルで扱うのは `<affiliate-banner>` だけとし、以下の ad-slot 配置手順は凍結記録として残す。
 
 既存ブログ記事の markdown に `<affiliate-banner>` を適切な位置に挿入する。
 

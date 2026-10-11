@@ -1,2 +1,4 @@
+agent|ranking
 machine|ranking|same_shop_ad_duplicates
+machine|ranking|title_changed
 machine|ranking|unit_symbol_mixing

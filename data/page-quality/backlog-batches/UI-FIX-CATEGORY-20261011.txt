@@ -1,0 +1,4 @@
+machine|https://stats47.jp/category/landweather|clipped_text
+machine|https://stats47.jp/category/landweather|responsive_layout_issues
+machine|https://stats47.jp/category/population|clipped_text
+machine|https://stats47.jp/category/population|responsive_layout_issues
