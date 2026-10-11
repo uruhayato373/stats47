@@ -34,6 +34,17 @@ export const RANKING_PAGE_TABLE_SIDE: AdSlotConfig = {
   format: "rectangle",
 };
 
+/**
+ * 右レールのアフィリエイト枠 (AffiliateAdSlot position="sidebar") の AdSense フォールバック。
+ * 意図が解決せずバナーもテキストも出ないページ (気候・身長など) で出る。ランキングでは
+ * RANKING_PAGE_TABLE_SIDE と同じページに並ぶので、2026-10-11 の再開時に別ユニットへ分けた。
+ * AdSense ユニット名: stats47-sidebar-affiliate-fallback
+ */
+export const SIDEBAR_AFFILIATE_FALLBACK: AdSlotConfig = {
+  slotId: "4607314986",
+  format: "rectangle",
+};
+
 /** ランキングページ: 右サイドバー上部。AdSense ユニット名: stats47-ranking-rail-top */
 export const RANKING_SIDEBAR_TOP: AdSlotConfig = {
   slotId: "8897913786",
