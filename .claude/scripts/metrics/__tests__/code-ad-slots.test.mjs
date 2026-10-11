@@ -118,7 +118,8 @@ test("実 constants.ts をパースできる (0 件ならパーサが空振り�
       `${s.exportName} の slotId が想定形でない: ${JSON.stringify(s.slotId)}`,
     );
   }
-  // 実データで共用 slot (6137206504) が 2 件あることを固定する
-  const shared = idx.bySlotId.get("6137206504");
-  assert.ok(shared && shared.length === 2, "RANKING_PAGE_FOOTER と CONTENT_FOOTER の slot 共用が崩れている");
+  // 2026-10-11 の再開で配置ごとに別ユニットにした (旧アカウントでは RANKING_PAGE_FOOTER と
+  // CONTENT_FOOTER が 6137206504 を共用していた)。共用の扱いは上の SAMPLE のテストが固定する。
+  const shared = [...idx.bySlotId.entries()].filter(([, entries]) => entries.length > 1);
+  assert.deepEqual(shared.map(([slotId]) => slotId), [], "同じ slot を複数の配置が共用している");
 });
