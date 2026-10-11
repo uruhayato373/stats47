@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T10:05:17.552Z",
+  "updatedAt": "2026-10-11T10:25:05.584Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7405,6 +7405,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-11T10:05:17.552Z"
+    },
+    "SIMPLIFY-UNUSED-CODE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:25:05.584Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx knip --include dependencies",
+              "devDependencies",
+              "npm run type-check",
+              "vitest ranking/category/correlation/area-profile",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "import 0 件の依存 9 件を外した (root d3/topojson-simplify/youtube-transcript、ranking csv-parse/iconv-lite、correlation drizzle-orm と社内 2 件、category zod と社内 1 件、area-profile 社内 1 件、components react-toggle、remotion generative-ai)。knip の image-size は overrides の shim で誤検出と判明し戻した。type-check 25",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:25:05.584Z"
     }
   }
 }

@@ -379,3 +379,5 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - 根拠データ: `.claude/state/ads/ga4-affiliate-history.csv` の `ranking-incontent` の7日窓は、2026-09-26週が economy 128・education 97・energy 25・furusato 106・housing 24・labor 26・mobility 52・travel 27 の計485 imp、2026-10-03週が economy 134・education 120・energy 14・furusato 116・housing 26・labor 58・mobility 64・travel 38 の計570 imp。clickはどちらの週も全verticalで0。
 - 再現コマンド: `awk -F, '$1=="2026-09-26" || $1=="2026-10-03"' .claude/state/ads/ga4-affiliate-history.csv | grep ranking-incontent`
 - 次の検証: 期日2026-10-25に、2026-10-10・10-17・10-24週の7日窓を加えた4週分で、ranking系position (`ranking-incontent` / `ranking-native` / `ranking-sidebar` / `rakuten-native`) の週次imp合計の水準とclick累計を確認する。集計は上の再現コマンドの grep を `grep -E 'ranking-|rakuten-native'` に替え、列5 (impressions) と列6 (clicks) を週ごとに合算する。click累計が10件未満ならinsufficient-sampleとして扱い、枠の継続可否は意思決定カードへ回す。
+
+- **2026-10-11 注 (置き場の移動)**: 上の再現コマンドの `.claude/state/ads/ga4-affiliate-history.csv` は 2026-10-06 に `data/affiliate/ga4-affiliate-history.csv` へ移った。10-25 の判定では次を使う: `awk -F, '$1=="2026-09-26" || $1=="2026-10-03"' data/affiliate/ga4-affiliate-history.csv | grep ranking-incontent`

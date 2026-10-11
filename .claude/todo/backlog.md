@@ -276,14 +276,6 @@ updated: 2026-10-06
 - **止めたままにするなら**: 363 件は `ranking-content-standards.md`「ローカル量産は headless claude -p 経路」で量と時期を月次計画が決めて消化する。
 - **完了条件**: Gemini の手動 run が PASS ≥ 1 で schedule が戻っている、またはオーナーが Gemini 経路の廃止を決めて workflow と規約の節が削除されている。
 
-### [SIMPLIFY-UNUSED-CODE-01] knip と孤児スクリプトの結果を、残す系統に限って削る
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npx knip --no-progress] [起票:2026-10-11] [領域:管理]
-
-- **事実 (2026-10-11、`npx knip --reporter json`)**: 未使用 export 798・未使用型 303・未使用依存 21 (root の d3 / http-proxy-agent / image-size / topojson-client / topojson-simplify、apps/remotion の @google/generative-ai / sharp / better-sqlite3 / dotenv ほか。better-sqlite3 は 4 package で未使用)・unlisted 203。`.claude/scripts` 732 本のうちファイル名が他のどこからも参照されない script 63 本 (themes/ingest-*.mjs 25・note/ 13・coconala/ 3 ほか。`lib/` 配下の相対 import は basename 検索の偽陽性)。skill 165 のうち未参照 9 (dev/audit-consistency・dev/strategic-compact・ges/render-ges-ports・sns/generate-compare・area/databook-editorial・content/generate-csv・archive/sns 2 件。task-router は内部用で意図どおり)。
-- **禁止**: knip の「未使用依存」を鵜呑みにして外さない。http-proxy-agent は会社 PC の `node --import` proxy preload が使う (memory `proxy-preload-for-fetch-scripts`)。themes/ingest-* は非 e-Stat 指標の再現経路になりうるので、消す前に `data/metrics` の provenance から参照されているかを見て、参照されていれば provenance 側にリンクを足す (`data-provenance-standards.md`)。
-- **次**: `SIMPLIFY-PORTFOLIO-CUT-01` の決定後に、残す系統だけ (1) 未使用依存を 1 package ずつ外して `npm run type-check` と該当 package の test、(2) 未参照 skill 9 件を削除するか呼び元へ結線、(3) 孤児 script を削除するか provenance へリンク。1 系統 1 PR。
-- **完了条件**: knip の dependencies / devDependencies が 0、未参照 skill 0、孤児 script が 0 か provenance から参照されている。
-
 ### [SIMPLIFY-FAILING-AUTOMATION-01] 1 週間で失敗が続く定期 workflow を、直すか止めるか 1 本ずつ決める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-10-25] [領域:管理]
 
@@ -3900,7 +3892,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   - (d) 残置 — apps/ges 455 行 (orphan skill ges/render-ges-ports だけが使う)、packages/database 2,779 行 (DB レス後は apps/web の test setup と correlation の未使用 dep だけが参照)、packages/{area,category,station-passengers,migration-flow} 各 2,000 行未満。
 - **残す本線 (証拠)**: blog + ranking + areas / municipalities (流入 97%) と、その上の AdSense + アフィリエイトの計測・配置。管理画面は 40 ページが 42 の `lib/server` 経由で台帳を読んでおり配線は健全なので、止める系統のページだけ落とす。
 - **やるなら**: 止める系統ごとに (1) workflow の schedule を外す → (2) agent / skill / script / package を削除 → (3) `datasets.mjs` の行を `RETIRED` へ → (4) `npm run check-datasets`・`docs:check`・`type-check` の順で、1 系統 1 PR。公開ページ (themes 等) を消すなら 410 と sitemap を `url-policy.ts` で揃え、`middleware.test.ts` を通す。
-- **停止条件**: この決定が無いまま 🟡 の `SIMPLIFY-*` の掃除を先に進めない (削る対象に掃除を施すのは無駄になる)。
+- **停止した系統で一緒に外すもの (`SIMPLIFY-UNUSED-CODE-01` から引き継ぎ、2026-10-11 の knip)**: (a) なら apps/remotion の依存 better-sqlite3・clsx・dotenv・sharp・tailwind-merge と skill `sns/generate-compare`。(d) なら apps/ges の better-sqlite3 と skill `ges/render-ges-ports`。root の http-proxy-agent (会社 PC の proxy preload) と image-size (依存を無効化する shim、`overrides` が参照) は意図的なので外さない。
+- **停止条件**: この決定が無いまま止める系統の掃除を先に進めない (削る対象に掃除を施すのは無駄になる)。
 - **完了条件**: オーナーが (a)〜(d) ごとに「継続 / 停止」を決め、停止分が実行カードへ分割されている。
 
 ### [AFF-LEAD-COPY-AB-01] 画像バナーの前に文脈をつなぐ一文を置くかを A/B で決める

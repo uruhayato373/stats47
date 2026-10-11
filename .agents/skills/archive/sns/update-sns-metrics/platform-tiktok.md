@@ -1,1 +1,0 @@
-../../../../../.claude/skills/archive/sns/update-sns-metrics/platform-tiktok.md
