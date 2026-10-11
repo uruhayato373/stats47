@@ -23,7 +23,7 @@ const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 
 const PAGE_MARKER = /\[gsc-page:\s*([^\]\s]+)\s*\]/g;
 /** 機械判定から外した行の記法 (理由と代わりの判定手順を同じ行に書く) */
-const OUT_OF_SCOPE_MARKER = /効果判定エンジン対象外\*{0,2}\s*[:：]\s*\S/;
+export const OUT_OF_SCOPE_MARKER = /効果判定エンジン対象外\*{0,2}\s*[:：]\s*\S/;
 
 export function extractGscPages(text) {
   return [...new Set(Array.from(String(text ?? "").matchAll(PAGE_MARKER), (m) => m[1]))];

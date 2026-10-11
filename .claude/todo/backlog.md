@@ -285,10 +285,13 @@ updated: 2026-10-06
 - **完了条件**: knip の dependencies / devDependencies が 0、未参照 skill 0、孤児 script が 0 か provenance から参照されている。
 
 ### [SIMPLIFY-FAILING-AUTOMATION-01] 1 週間で失敗が続く定期 workflow を、直すか止めるか 1 本ずつ決める
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:管理]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-10-25] [領域:管理]
 
 - **事実 (2026-10-04〜10-11、`gh run list --limit 400` で 55 workflow)**: 失敗率 100% が 4 本 — Authenticated measurement 8/8・Health Check 3/3・Ranking AI Content / Gemini daily 3/3。Security Scan 25/35、Develop Quality Gate 12/46、Blog remediation daily 2/3、SEO keyword seven-day cycle 6/15、Pull Request Quality Check 7/23。計測の鮮度 7/14 の直接原因は Authenticated measurement の全失敗 (kdp / coconala / moshimo が auth_required)。workflow は 79 本 (定期 49 本)。
 - **次**: 失敗率 100% の 4 本を先に。直せないもの、`SIMPLIFY-PORTFOLIO-CUT-01` で止める系統のものは schedule を外して workflow を削除し、`docs/01_技術設計/06_自動化インベントリ.md` を同じ差分で更新する。
+- **2026-10-11 進捗 (develop `88b6d5c90`、main 未反映)**: 原因を特定して 4 本を直した。SEO keyword は検証 step の `NODE_ENV=production` で vitest が落ちていた (手元で再現)。ブログ是正日次は散布図の正典再描画器が `labelPoints` を渡していなかった (修正後 167/167 一致)。Gemini 日次は導入以来生成 0 件のため schedule を外した (`AI-CONTENT-GEMINI-KEY-01`)。アフィリエイト週次は集約 state を git へ書き戻すようにした (Health Check の portfolio 20 日 stale の原因)。Security Scan と Develop Quality Gate は 10-11 に回復済み。
+- **残り (コードでは直らない)**: Authenticated measurement の全失敗は KDP・ココナラの auth_required と note の report_incomplete (`AUTH-CREDENTIAL-REGISTER-01`)。アフィリエイト週次の成果ゲート blocked は A8 の 10 月分 program-detail が未取得 (W41 Must 2 のカード)。Health Check はこの 2 つが直るまで落ち続ける。定期実行は main の定義で動くので、上の修正も develop→main のマージまで効かない。
+- **判定日**: main へのマージから 7 日後に `gh run list --created ">=<マージ日>"` で失敗率を数え直す。
 - **完了条件**: 直近 7 日の run で失敗率 50% 超の定期 workflow が 0 本。
 
 ### [SIMPLIFY-REVIEW-LOOP-EXECUTION-01] 週次レビューを「書く」から「Must を実行する」側へ寄せ、active 施策を上限 10 件まで減らす
