@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T10:02:31.839Z",
+  "updatedAt": "2026-10-11T10:05:17.552Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7369,6 +7369,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-11T10:02:31.839Z"
+    },
+    "SIMPLIFY-EVIDENCE-INVENTORY-TS-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:05:17.552Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run evidence:check",
+              "npm run check-datasets",
+              "turbo type-check data-configs+admin",
+              "vitest admin japan-zue+reference-expansion-plans"
+            ],
+            "pass": true
+          },
+          "evidence": "生成 TS 4 本 (63,296 行) を data/source-inventory/japan-zue/2025-26/items.{0,1,2}.json へ移し package export を撤去。evidence-inventory の TS は 1,401 行。sync 検査をハッシュ見出しから中身比較へ強化し、旧 TS が 5 件古かったのを再生成で解消。改変 1 件で generated items drift を確認。人が書く analyses.json 8 本は Authored/設定として package に残す",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:05:17.552Z"
     }
   }
 }

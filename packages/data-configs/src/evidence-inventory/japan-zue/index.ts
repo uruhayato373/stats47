@@ -9,7 +9,6 @@ export {
   type JapanZueManualOverride,
   type MetricLineage,
 } from "./policy";
-export { JAPAN_ZUE_EVIDENCE_ITEMS } from "./items.generated";
 export {
   JAPAN_ZUE_MASTER_CONTENT,
   JAPAN_ZUE_PILOT_ITEMS,

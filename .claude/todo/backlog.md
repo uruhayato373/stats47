@@ -275,13 +275,6 @@ updated: 2026-10-06
 - **次**: `SIMPLIFY-PORTFOLIO-CUT-01` の決定後に、残す系統だけ (1) 未使用依存を 1 package ずつ外して `npm run type-check` と該当 package の test、(2) 未参照 skill 9 件を削除するか呼び元へ結線、(3) 孤児 script を削除するか provenance へリンク。1 系統 1 PR。
 - **完了条件**: knip の dependencies / devDependencies が 0、未参照 skill 0、孤児 script が 0 か provenance から参照されている。
 
-### [SIMPLIFY-EVIDENCE-INVENTORY-TS-01] packages/data-configs の evidence-inventory (TS 64,713 行) を data/ の JSON へ移す
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-11] [領域:データ]
-
-- **事実**: `packages/data-configs/src/evidence-inventory/` は 16 ファイル 64,713 行で、packages/data-configs 121,116 行の 53% を占める。中身は参考文献 (日本国勢図会・家計調査本など) から起こした根拠台帳で、読むのは apps/admin (`lib/server/japan-zue.ts`・`reference-expansion-plans.ts`) と `packages/data-configs/scripts/evidence/` だけ。apps/web の実行時には要らない記録を、web がバンドルする package の `index.ts` から export している。`data-storage.md` の区分では「事業の記録」= `data/<取得元>/`。
-- **次**: JSON + JSON Schema にして `data/source-inventory/` (既存の参考文献の解決台帳) へ置き、台帳 `datasets.mjs` に行を足す。admin と scripts は `datasetPath(id)` で読む。TS 型は data-configs に残してよい (型だけ)。
-- **完了条件**: data-configs の `src/` に evidence-inventory のデータ本体が無く、admin の参考文献画面と `evidence:check` が JSON を読んで通る。
-
 ### [SIMPLIFY-FAILING-AUTOMATION-01] 1 週間で失敗が続く定期 workflow を、直すか止めるか 1 本ずつ決める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:管理]
 
