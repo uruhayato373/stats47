@@ -64,7 +64,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: weekly-web-coverage
           path: apps/web/coverage/
@@ -103,7 +103,7 @@ jobs:
           NODE_ENV: production
       - name: Upload Admin Playwright evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: weekly-admin-playwright-report
           path: |
@@ -165,7 +165,7 @@ jobs:
         run: kill "$(cat /tmp/weekly-next.pid)" 2>/dev/null || true
       - name: Upload Playwright evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: weekly-playwright-report
           path: |
