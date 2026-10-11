@@ -198,6 +198,8 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > ## ✅ 解消: `ad_impression` の衝突 → `affiliate_impression` へ改名 (2026-07-28)
 >
 > **改名日: 2026-07-28。** 以下は改名前の実測記録 (経緯として保持する)。
+> **★2026-10-11 追記**: AdSense を新アカウントで再開した。GA4 との AdSense 連携を張り直すと `ad_impression` が
+> 再び AdSense から自動生成されるので、改名 (`affiliate_impression`) はそのまま必要である。
 > **★2026-09-20 追記**: AdSense を恒久停止したので衝突源そのものが消えた。ただし改名は戻さない
 > (時系列の連続性を壊さないため)。`affiliate_impression` が引き続き唯一のイベント名である。改名後は
 > `affiliate_impression` が自前 impression の唯一のイベント名で、AdSense が生成する
