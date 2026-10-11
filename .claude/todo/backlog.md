@@ -21,6 +21,14 @@ updated: 2026-10-06
 
 ## 🔴 高 — 今月中に着手したい
 
+### [RELEASE-1125-MERGE-01] 定期 workflow の修正を含む PR #1125 を CI 通過後にマージし、反映後の run を確かめる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-10-14] [領域:管理]
+
+- **状態 (2026-10-11)**: develop→main の PR https://github.com/uruhayato373/stats47/pull/1125 を作成済み。オーナーは本番反映を承認済み (同日チャット)。Static Gates の actionlint 指摘 (SC2209) は `d706c79de` で直し、手元の actionlint 1.7.7 + shellcheck で全 workflow 0 件。残りの CI は実行中だった。マージはまだしていない。
+- **次**: CI が全件 success ならマージする。定期実行は main の定義で動くので、マージ後に次を確かめる。① `seo-keyword-cycle-daily` の検証 step が通る ② `blog-remediation-daily` の散布図ゲートが 167/167 一致 ③ `affiliate-ga4-weekly` が `affiliate-portfolio-latest.json` を develop へ書き戻し、Health Check の portfolio stale が消える ④ `ai-content-gemini-daily` が定期発火しない。
+- **注意**: 作業ツリーに別セッションの未コミットの SNS データカード作業 (`render-data-card.ts` の `CHROME_PATH` 未登録、SNS skill 3 本の Codex ミラー未同期) があり、pre-commit と preflight:pr はそれで落ちる。コミット済みの内容は develop の CI で全 success。
+- **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
+
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
 
 ### [STATE-OVERLAY-MAIN-01] 計測 workflow の「develop を直接 checkout する」修正を main へ反映し、次の run で state が巻き戻らないことを確かめる
