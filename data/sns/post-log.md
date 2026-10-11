@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**698 件** (最終更新: 2026-10-10)
+**701 件** (最終更新: 2026-10-11)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-11 | 📸 Instagram | map-carousel/beef-consumption-expenditure | 【都道府県ランキング】牛肉への支出  1位: 奈良県 34474円 47位: 岩手県 9474円  出典: 家計調査（2… | [🔗](https://www.instagram.com/p/DeXENZAiRWG/) |
+| 2026-10-11 | 🧵 Threads | area/area-18000-profile | 福井のデータブックを公開中。 つぐみと越前うに（塩うに）、若狭かれい（一夜干し）を入口に、人口・産業・消費の数字を県別に… | [🔗](https://www.threads.com/@stats47jp/post/DeWQqq_gK68) |
+| 2026-10-11 | 🧵 Threads | ranking/persimmon-consumption-quantity | 柿を最も多く買う県は岐阜。  1世帯あたり8,596gで、2位奈良（4,531g）のほぼ2倍。 最下位の岡山（653g）… | [🔗](https://www.threads.com/@stats47jp/post/DeViQ40DwnF) |
 | 2026-10-10 | 📸 Instagram | area-carousel/03000 | 【都道府県データ】岩手県、全国で何位？  全国トップクラス: 年平均相対湿度 1位（77％・2024年） 乳用牛飼養頭数… | [🔗](https://www.instagram.com/p/DeUch2EkeJe/) |
 | 2026-10-10 | 🧵 Threads | area/area-17000-profile | 旅先では見えにくい石川の輪郭。 県木アテと特産のとてまり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/DeTqLPLEzlO) |
 | 2026-10-10 | 🧵 Threads | ranking/general-hospital-bed-count-per-100k | 「病床数は都市部が多いはず」と思われがちですが、データは真逆の傾向です。  1位 高知県 2,056.3床 47位 神奈… | [🔗](https://www.threads.com/@stats47jp/post/DeS71Opj-W3) |
