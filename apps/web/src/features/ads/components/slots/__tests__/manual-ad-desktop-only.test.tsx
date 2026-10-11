@@ -107,6 +107,21 @@ describe("AdSense再開後の契約", () => {
     expect(ins?.getAttribute("data-ad-slot")).toBe(slotConstants.BLOG_ARTICLE_INLINE.slotId);
   });
 
+  it("全フォーマットの広告タグが外枠の幅いっぱいに広がる", () => {
+    // 外枠は flex-col + items-center。幅を明示しない ins は 0 幅に縮み、AdSense が
+    // 「No slot size for availableWidth=0」を投げて枠ごと消える (記事内広告で本番に出た)。
+    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
+
+    for (const format of ["article", "multiplex", "rectangle"] as const) {
+      const { container, unmount } = render(
+        <AdSenseAd format={format} slotId="1234567890" lazyLoad={false} />,
+      );
+      const ins = container.querySelector<HTMLElement>("ins.adsbygoogle");
+      expect(ins?.style.width, format).toBe("100%");
+      unmount();
+    }
+  });
+
   it("配置ごとに別の広告ユニットを使う", () => {
     const slotIds = Object.values(slotConstants)
       .filter((value): value is slotConstants.AdSlotConfig =>
