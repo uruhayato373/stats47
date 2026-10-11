@@ -1,0 +1,167 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "端末の容量予算・掃除対象・保持日数",
+  "description": "config/local-resources.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "diskWarnGiB": {
+      "type": "number"
+    },
+    "diskCriticalGiB": {
+      "type": "number"
+    },
+    "memoryWarnGiB": {
+      "type": "number"
+    },
+    "memoryCriticalGiB": {
+      "type": "number"
+    },
+    "cacheAgeDays": {
+      "type": "number"
+    },
+    "historyDays": {
+      "type": "number"
+    },
+    "scanTimeoutSeconds": {
+      "type": "number"
+    },
+    "cachePaths": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "ageDays": {
+                "type": "number"
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scratchRoots": {
+      "type": "object",
+      "properties": {
+        "win32": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "darwin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scratchPrefix": {
+      "type": "string"
+    },
+    "scratchAgeDays": {
+      "type": "number"
+    },
+    "scratchCachePaths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "ageDays": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "scratchExclude": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "protectedPaths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fileRetention": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string"
+          },
+          "match": {
+            "type": "string"
+          },
+          "ageDays": {
+            "type": "number"
+          },
+          "excludeDirs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "footprintBudgets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "maxGiB": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "diskWarnGiB",
+    "diskCriticalGiB",
+    "memoryWarnGiB",
+    "memoryCriticalGiB",
+    "cacheAgeDays",
+    "historyDays",
+    "scanTimeoutSeconds",
+    "cachePaths",
+    "scratchRoots",
+    "scratchPrefix",
+    "scratchAgeDays",
+    "scratchCachePaths",
+    "scratchExclude",
+    "protectedPaths",
+    "fileRetention",
+    "footprintBudgets"
+  ]
+}

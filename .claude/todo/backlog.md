@@ -267,6 +267,35 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SIMPLIFY-UNUSED-CODE-01] knip と孤児スクリプトの結果を、残す系統に限って削る
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npx knip --no-progress] [起票:2026-10-11] [領域:管理]
+
+- **事実 (2026-10-11、`npx knip --reporter json`)**: 未使用 export 798・未使用型 303・未使用依存 21 (root の d3 / http-proxy-agent / image-size / topojson-client / topojson-simplify、apps/remotion の @google/generative-ai / sharp / better-sqlite3 / dotenv ほか。better-sqlite3 は 4 package で未使用)・unlisted 203。`.claude/scripts` 732 本のうちファイル名が他のどこからも参照されない script 63 本 (themes/ingest-*.mjs 25・note/ 13・coconala/ 3 ほか。`lib/` 配下の相対 import は basename 検索の偽陽性)。skill 165 のうち未参照 9 (dev/audit-consistency・dev/strategic-compact・ges/render-ges-ports・sns/generate-compare・area/databook-editorial・content/generate-csv・archive/sns 2 件。task-router は内部用で意図どおり)。
+- **禁止**: knip の「未使用依存」を鵜呑みにして外さない。http-proxy-agent は会社 PC の `node --import` proxy preload が使う (memory `proxy-preload-for-fetch-scripts`)。themes/ingest-* は非 e-Stat 指標の再現経路になりうるので、消す前に `data/metrics` の provenance から参照されているかを見て、参照されていれば provenance 側にリンクを足す (`data-provenance-standards.md`)。
+- **次**: `SIMPLIFY-PORTFOLIO-CUT-01` の決定後に、残す系統だけ (1) 未使用依存を 1 package ずつ外して `npm run type-check` と該当 package の test、(2) 未参照 skill 9 件を削除するか呼び元へ結線、(3) 孤児 script を削除するか provenance へリンク。1 系統 1 PR。
+- **完了条件**: knip の dependencies / devDependencies が 0、未参照 skill 0、孤児 script が 0 か provenance から参照されている。
+
+### [SIMPLIFY-EVIDENCE-INVENTORY-TS-01] packages/data-configs の evidence-inventory (TS 64,713 行) を data/ の JSON へ移す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-11] [領域:データ]
+
+- **事実**: `packages/data-configs/src/evidence-inventory/` は 16 ファイル 64,713 行で、packages/data-configs 121,116 行の 53% を占める。中身は参考文献 (日本国勢図会・家計調査本など) から起こした根拠台帳で、読むのは apps/admin (`lib/server/japan-zue.ts`・`reference-expansion-plans.ts`) と `packages/data-configs/scripts/evidence/` だけ。apps/web の実行時には要らない記録を、web がバンドルする package の `index.ts` から export している。`data-storage.md` の区分では「事業の記録」= `data/<取得元>/`。
+- **次**: JSON + JSON Schema にして `data/source-inventory/` (既存の参考文献の解決台帳) へ置き、台帳 `datasets.mjs` に行を足す。admin と scripts は `datasetPath(id)` で読む。TS 型は data-configs に残してよい (型だけ)。
+- **完了条件**: data-configs の `src/` に evidence-inventory のデータ本体が無く、admin の参考文献画面と `evidence:check` が JSON を読んで通る。
+
+### [SIMPLIFY-FAILING-AUTOMATION-01] 1 週間で失敗が続く定期 workflow を、直すか止めるか 1 本ずつ決める
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:管理]
+
+- **事実 (2026-10-04〜10-11、`gh run list --limit 400` で 55 workflow)**: 失敗率 100% が 4 本 — Authenticated measurement 8/8・Health Check 3/3・Ranking AI Content / Gemini daily 3/3。Security Scan 25/35、Develop Quality Gate 12/46、Blog remediation daily 2/3、SEO keyword seven-day cycle 6/15、Pull Request Quality Check 7/23。計測の鮮度 7/14 の直接原因は Authenticated measurement の全失敗 (kdp / coconala / moshimo が auth_required)。workflow は 79 本 (定期 49 本)。
+- **次**: 失敗率 100% の 4 本を先に。直せないもの、`SIMPLIFY-PORTFOLIO-CUT-01` で止める系統のものは schedule を外して workflow を削除し、`docs/01_技術設計/06_自動化インベントリ.md` を同じ差分で更新する。
+- **完了条件**: 直近 7 日の run で失敗率 50% 超の定期 workflow が 0 本。
+
+### [SIMPLIFY-REVIEW-LOOP-EXECUTION-01] 週次レビューを「書く」から「Must を実行する」側へ寄せ、active 施策を上限 10 件まで減らす
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-10-11] [領域:計画]
+
+- **事実 (2026-10-11 実測)**: 配線は健全 (`review-cadence` 4/4 ✅、週次 W31〜W40 連続、月次 2026-09 あり、Friday 計測 → Saturday レビューの CI)。一方で実行は W37〜W39 の Must が 1/3・0/3・0/3 (W40 は 2/2)、NSM 週次収益は全週「判定不能」、active 施策 25 (上限 10)、`[target:]` なし 21/25、無人 triage は W40 で失敗 (Issue #1068)。週あたり non-merge commit 216〜599 (bot 30〜45%) に対し、計画の Must は週 2〜3 件しか消化されていない。
+- **次**: (1) improvements.md を月次で上限 10 件まで削る (improvement-triage の排他 write)。削除基準は「`[target:]` が無い」「KPI が measurement-freshness / paid-purchases で、計器が止まっていて判定できない」。(2) 週次 Must を「収益の計器を 1 つ動かす」1 件に固定する (10 月重点と同じ)。(3) `review-wiring.json` の requiredSections 6 を「サマリー / 計画 vs 実績 / 申し送り」の 3 に減らしてよいか、`/weekly-review` の所要時間を 1 回測ってから決める。
+- **完了条件**: active ≤ 10、`[target:]` なし 0、4 週連続で Must ≥ 2/3。
+
 ### [UI-FIX-THEME-20261011] UI 是正: theme の週次 UI 検査の指摘 1 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-THEME-20261011.txt] [起票:2026-10-11] [領域:サイト]
@@ -3854,6 +3883,20 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 体と code-reviewer それぞれについて、据え置くか戻すかを決めて記録している。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [SIMPLIFY-PORTFOLIO-CUT-01] 収益につながらない部分系統 (SNS・テーマ/Geo/調査・商品ファクトリー・残置 package) を止めるかを決める
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-10-11] [領域:戦略]
+
+- **事実 (2026-10-11 実測)**: 規模は 61 agent / 165 skill / `.claude/scripts` 1,033 本 / workflow 79 本 (定期 49) / npm script 214 / 21 package + 4 app / TS 約 42 万行 / 追跡 13,817 ファイル / `.git` 635 MB。流入は W40 GSC クリック 11,179 のうち blog 5,268・ranking 4,786・areas 450・municipalities 408 で 97%。themes 60・survey 80・category 28・geo 18・japan 5 で合計 1.7%。GA4 W40 セッション 23,496 のうち Organic Social 98 (0.4%)。収益は A8 / もしも / afb / 楽天 ¥0、ココナラ累計 ¥0、KDP・note 判定不能、AdSense は W31〜W33 に週 ¥118〜146 で 08-29 停止・10-11 に手動枠で再開。費用はローカル agent 4 週 $452 (`model-usage/latest.json`。主ループは別に opus 中心で 4 週 $1,300 超)、CI Claude は 8 月 $1,556・9 月 $62・10 月 $4、R2 33.6 GB。
+- **止める候補と根拠**:
+  - (a) SNS 系統 — apps/remotion 35,252 行・sns skill 23・agent 4 (x-strategist / instagram-strategist / sns-renderer / sns-metrics-sync)・定期 workflow 4 本 (IG 日次・Threads 確認・SNS Port Bubble・投稿済み動画の R2 掃除)・sns-renderer 4 週 $52。直近 60 日で 309 投稿に対し、流入 0.4%・収益 0。
+  - (b) themes / geo / survey / japan — 55 テーマ・theme skill 7 + agent 4、gis skill 2 + agent 3、survey skill 1 + agent 1、packages/gis 17,302 行。合計クリック 1.5%。
+  - (c) 商品ファクトリー (ココナラ / KDP / note 商品) — packages/product-factory 36,294 行・skill 4 + note 9・agent 5。売上 ¥0 で計測も auth_required。
+  - (d) 残置 — apps/ges 455 行 (orphan skill ges/render-ges-ports だけが使う)、packages/database 2,779 行 (DB レス後は apps/web の test setup と correlation の未使用 dep だけが参照)、packages/{area,category,station-passengers,migration-flow} 各 2,000 行未満。
+- **残す本線 (証拠)**: blog + ranking + areas / municipalities (流入 97%) と、その上の AdSense + アフィリエイトの計測・配置。管理画面は 40 ページが 42 の `lib/server` 経由で台帳を読んでおり配線は健全なので、止める系統のページだけ落とす。
+- **やるなら**: 止める系統ごとに (1) workflow の schedule を外す → (2) agent / skill / script / package を削除 → (3) `datasets.mjs` の行を `RETIRED` へ → (4) `npm run check-datasets`・`docs:check`・`type-check` の順で、1 系統 1 PR。公開ページ (themes 等) を消すなら 410 と sitemap を `url-policy.ts` で揃え、`middleware.test.ts` を通す。
+- **停止条件**: この決定が無いまま 🟡 の `SIMPLIFY-*` の掃除を先に進めない (削る対象に掃除を施すのは無駄になる)。
+- **完了条件**: オーナーが (a)〜(d) ごとに「継続 / 停止」を決め、停止分が実行カードへ分割されている。
 
 ### [AFF-LEAD-COPY-AB-01] 画像バナーの前に文脈をつなぐ一文を置くかを A/B で決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-08] [領域:アフィリエイト]

@@ -1,0 +1,295 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "A8 レポート収集の設定と programIdMap",
+  "description": "config/a8-report-automation.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "_note": {
+      "type": "string"
+    },
+    "a8": {
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "type": "string"
+        },
+        "homePath": {
+          "type": "string"
+        },
+        "reAuthPattern": {
+          "type": "string"
+        },
+        "targetSite": {
+          "type": "string"
+        },
+        "_targetSiteNote": {
+          "type": "string"
+        },
+        "mediaId": {
+          "type": "string"
+        },
+        "_accountNote": {
+          "type": "string"
+        },
+        "_isolationNote": {
+          "type": "string"
+        },
+        "_periodNote": {
+          "type": "string"
+        },
+        "reports": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "readyText": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "siteScope": {
+                "type": "string"
+              },
+              "_note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "periodForm": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string"
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  }
+                }
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  }
+                }
+              },
+              "applyButtonLabel": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "exportButtonLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "_exportButtonNote": {
+          "type": "string"
+        },
+        "csvEncoding": {
+          "type": "string"
+        },
+        "_csvEncodingNote": {
+          "type": "string"
+        },
+        "columnAliases": {
+          "type": "object",
+          "properties": {
+            "site": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "programId": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "programName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "date": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "month": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "impressions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "clicks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "conversions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "grossRevenueYen": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "approved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "revenueYen": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cancelledCount": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cancelledYen": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pendingCount": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pendingRevenueYen": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "programId",
+            "date",
+            "month"
+          ]
+        },
+        "_columnAliasesNote": {
+          "type": "string"
+        },
+        "programIdMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "_sharedWithDobokuNote": {
+          "type": "object",
+          "properties": {
+            "_note": {
+              "type": "string"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "_otherSiteProgramIds": {
+          "type": "object",
+          "properties": {
+            "_note": {
+              "type": "string"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "browser": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string"
+        },
+        "headless": {
+          "type": "boolean"
+        },
+        "profileDir": {
+          "type": "string"
+        },
+        "stateFile": {
+          "type": "string"
+        },
+        "debugDir": {
+          "type": "string"
+        },
+        "timeoutMs": {
+          "type": "number"
+        },
+        "statusIntervalMs": {
+          "type": "number"
+        },
+        "loginMaxWaitMs": {
+          "type": "number"
+        },
+        "_profileNote": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "_note",
+    "a8",
+    "browser"
+  ]
+}

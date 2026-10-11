@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品の販売台帳",
+  "description": "data/products/sales-ledger.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "productId": {
+            "type": "string"
+          },
+          "periodStart": {
+            "type": "string"
+          },
+          "periodEnd": {
+            "type": "string"
+          },
+          "orders": {
+            "type": "number"
+          },
+          "units": {
+            "type": "number"
+          },
+          "netRevenueYen": {
+            "type": "number"
+          },
+          "refunds": {
+            "type": "number"
+          },
+          "evidencePath": {
+            "type": "string"
+          },
+          "evidenceSha256": {
+            "type": "string"
+          },
+          "recordedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "productId"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "observations"
+  ]
+}

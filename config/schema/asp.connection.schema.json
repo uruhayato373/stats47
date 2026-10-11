@@ -1,0 +1,236 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "A8 / もしも / afb の接続設定とサイト帰属",
+  "description": "config/affiliate-asp.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "_note": {
+      "type": "string"
+    },
+    "_siteAttributionNote": {
+      "type": "string"
+    },
+    "targetSiteName": {
+      "type": "string"
+    },
+    "targetSiteLabel": {
+      "type": "string"
+    },
+    "_targetSiteLabelNote": {
+      "type": "string"
+    },
+    "forbiddenSiteText": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "_forbiddenNote": {
+      "type": "string"
+    },
+    "asps": {
+      "type": "object",
+      "properties": {
+        "a8": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "baseUrl": {
+              "type": "string"
+            },
+            "homePath": {
+              "type": "string"
+            },
+            "reAuthPattern": {
+              "type": "string"
+            },
+            "siteSeparation": {
+              "type": "string"
+            },
+            "_siteSeparationNote": {
+              "type": "string"
+            },
+            "accountId": {
+              "type": "string"
+            },
+            "accountIdPattern": {
+              "type": "string"
+            },
+            "partneredPath": {
+              "type": "string"
+            },
+            "applyingPath": {
+              "type": "string"
+            },
+            "browser": {
+              "type": "object",
+              "properties": {
+                "profileDir": {
+                  "type": "string"
+                },
+                "stateFile": {
+                  "type": "string"
+                },
+                "debugDir": {
+                  "type": "string"
+                },
+                "channel": {
+                  "type": "string"
+                },
+                "headless": {
+                  "type": "boolean"
+                },
+                "sessionPersistsAcrossProcesses": {
+                  "type": "boolean"
+                },
+                "timeoutMs": {
+                  "type": "number"
+                },
+                "loginMaxWaitMs": {
+                  "type": "number"
+                }
+              }
+            },
+            "rowSelector": {}
+          }
+        },
+        "moshimo": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "stats47": {
+                    "type": "string"
+                  },
+                  "doboku-note": {
+                    "type": "string"
+                  },
+                  "profileDir": {
+                    "type": "string"
+                  },
+                  "stateFile": {
+                    "type": "string"
+                  },
+                  "debugDir": {
+                    "type": "string"
+                  },
+                  "channel": {
+                    "type": "string"
+                  },
+                  "headless": {
+                    "type": "boolean"
+                  },
+                  "sessionPersistsAcrossProcesses": {
+                    "type": "boolean"
+                  },
+                  "timeoutMs": {
+                    "type": "number"
+                  },
+                  "loginMaxWaitMs": {
+                    "type": "number"
+                  }
+                }
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        },
+        "afb": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "partnerId": {
+                    "type": "string"
+                  },
+                  "specUrl": {
+                    "type": "string"
+                  },
+                  "specUpdated": {
+                    "type": "string"
+                  },
+                  "stats47": {
+                    "type": "string"
+                  },
+                  "doboku-note": {
+                    "type": "string"
+                  },
+                  "profileDir": {
+                    "type": "string"
+                  },
+                  "stateFile": {
+                    "type": "string"
+                  },
+                  "debugDir": {
+                    "type": "string"
+                  },
+                  "channel": {
+                    "type": "string"
+                  },
+                  "headless": {
+                    "type": "boolean"
+                  },
+                  "_headlessNote": {
+                    "type": "string"
+                  },
+                  "sessionPersistsAcrossProcesses": {
+                    "type": "boolean"
+                  },
+                  "_sessionNote": {
+                    "type": "string"
+                  },
+                  "timeoutMs": {
+                    "type": "number"
+                  },
+                  "siteSwitchWaitMs": {
+                    "type": "number"
+                  },
+                  "_timeoutNote": {
+                    "type": "string"
+                  },
+                  "loginMaxWaitMs": {
+                    "type": "number"
+                  }
+                }
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "_note",
+    "_siteAttributionNote",
+    "targetSiteName",
+    "targetSiteLabel",
+    "_targetSiteLabelNote",
+    "forbiddenSiteText",
+    "_forbiddenNote",
+    "asps"
+  ]
+}

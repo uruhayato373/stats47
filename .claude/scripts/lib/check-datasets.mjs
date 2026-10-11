@@ -13,6 +13,8 @@
  *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
  *   - コード (ts・tsx・mjs・cjs・js) が台帳の data/ のパスを直書きしている (datasetPath(id) / datasetDir(id) で引く)。
  *     テスト・コメント行・import 行・DATA_LITERAL_EXEMPT に理由を書いたファイルは除く
+ *   - kind が config / ledger で path が .json の行に schema (JSON Schema のパス) が無い / schema のファイルが無い /
+ *     当たるファイルが schema に合わない (SCHEMA_REQUIRED_KINDS。台帳の正本が形の契約を持たないと、書き手の差分で黙って壊れる)
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
@@ -20,7 +22,9 @@
  *   npm run check-datasets -- --moves  # 移行対象の行も一覧する
  */
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+
+import Ajv from "ajv";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -52,6 +56,55 @@ export function fixedPrefix(path) {
 }
 
 const AGENT_STATE_DIR = ".claude/state/";
+
+/** 人やスクリプトが判断して書く台帳・設定は、形の契約 (JSON Schema) を必ず持つ */
+export const SCHEMA_REQUIRED_KINDS = new Set(["config", "ledger"]);
+const SCHEMA_FILE = /\.schema\.json$/;
+
+/** schema が要る行か (JSON Schema 自身は除く) */
+export function needsSchema(ds) {
+  return SCHEMA_REQUIRED_KINDS.has(ds.kind) && /\.json$/.test(ds.path) && !SCHEMA_FILE.test(ds.path);
+}
+
+/**
+ * 行ごとに schema の宣言・実在・当たるファイルの形を検査する。readJson(path) は repo root 相対で JSON を返す。
+ * 当たるファイルの選び方は台帳の照合と同じ patternToRegExp を使う。
+ */
+export function checkSchemas({ datasets, files, readJson, exists }) {
+  const errors = [];
+  const ajv = new Ajv({ allErrors: true });
+  for (const ds of datasets) {
+    if (ds.schema !== undefined && !SCHEMA_FILE.test(ds.schema)) errors.push(`${ds.id}: schema は *.schema.json を指す (${ds.schema})`);
+    if (!needsSchema(ds)) continue;
+    if (!ds.schema) {
+      errors.push(`${ds.id}: config / ledger の JSON に schema (JSON Schema のパス) が無い (${ds.path})`);
+      continue;
+    }
+    if (!exists(ds.schema)) {
+      errors.push(`${ds.id}: schema のファイルが無い (${ds.schema})`);
+      continue;
+    }
+    let validate;
+    try {
+      validate = ajv.compile(readJson(ds.schema));
+    } catch (e) {
+      errors.push(`${ds.id}: schema を読めない (${ds.schema}): ${e.message}`);
+      continue;
+    }
+    const re = patternToRegExp(ds.path);
+    for (const file of files.filter((f) => re.test(f))) {
+      let doc;
+      try {
+        doc = readJson(file);
+      } catch (e) {
+        errors.push(`${ds.id}: JSON として読めない ${file}: ${e.message}`);
+        continue;
+      }
+      if (!validate(doc)) errors.push(`${ds.id}: ${file} が schema に合わない (${ds.schema}): ${ajv.errorsText(validate.errors, { dataVar: "" }).slice(0, 300)}`);
+    }
+  }
+  return errors;
+}
 
 export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null, agentState = null }) {
   const errors = [];
@@ -240,6 +293,12 @@ function main() {
     imageExt: IMAGE_EXT,
     agentState: AGENT_STATE,
   });
+  result.errors.push(...checkSchemas({
+    datasets: DATASETS,
+    files: trackedFiles(),
+    readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
+    exists: (p) => existsSync(resolve(ROOT, p)),
+  }));
   result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
   const tops = dataTops(DATASETS);
   result.errors.push(...findDataPathLiterals(tops, dataLiteralHits(tops)));

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-10T04:39:26.116Z",
+  "updatedAt": "2026-10-11T10:02:31.839Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7301,6 +7301,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-10T04:39:26.116Z"
+    },
+    "NSM-SNAPSHOT-INDEX-STALE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T09:59:19.753Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "node .claude/scripts/snapshot-weekly-metrics.mjs --dry-run"
+            ],
+            "pass": true
+          },
+          "evidence": "読み手 0 件の index.json を削除し、snapshot-weekly-metrics.mjs の index 追記を撤去。check-datasets error 0、dry-run 正常",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T09:59:19.753Z"
+    },
+    "SIMPLIFY-DATASET-SCHEMA-COLUMN-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:02:31.839Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "台帳 33 行に schema を宣言 (既存 7 + config/schema 26 本を実データから推論)。check-datasets が schema 欠落・不在・不一致を error 化。red-green: sales-ledger の schemaVersion を文字列に変えると不一致で落ち、schema 宣言を外すと欠落で落ちることを実測。テスト 19/19",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:02:31.839Z"
     }
   }
 }

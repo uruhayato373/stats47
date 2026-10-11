@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdSense 施策の効果判定 (凍結記録)",
+  "description": "data/adsense/past-effects.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "note": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "candidates": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  "required": [
+    "note",
+    "source",
+    "candidates"
+  ]
+}

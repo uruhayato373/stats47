@@ -111,6 +111,9 @@ paths:
     経緯の行は除く (2026-10-07 に手順書から全 Markdown へ広げた。作業カードの完了条件が旧パスを指したまま残っていたため)
   - 画像が `IMAGE_ROOTS` の外にある
   - `.claude/state/` を指す行が許可リスト `AGENT_STATE` に無い
+  - kind が config / ledger の JSON の行に `schema` (JSON Schema のパス) が無い、schema のファイルが無い、当たるファイルが schema に合わない
+    (2026-10-11。既存の schema を持たない台帳の schema は `config/schema/<台帳の id>.schema.json` に置く。実データから推論して作ったもので、
+    整数と小数を区別せず、必須はルートの項目と識別子 (`id`・`week` など) に限る。台帳の形を変えたら同じ差分で schema を直す)
   - コード (ts・tsx・mjs・cjs・js) が台帳の `data/` のパスを直書きしている。テスト・コメント行・import 行と、
     `DATA_LITERAL_EXEMPT` に理由付きで載せたファイル (web の実行時バンドルに入る `packages/data-configs/src` など) は除く
 - 新しい記録・素材は、先に台帳へ 1 行足してから書く。日付付きファイルの寿命は `prune-state-snapshots.mjs` の

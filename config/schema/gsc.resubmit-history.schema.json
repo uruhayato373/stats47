@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "カバレッジ是正の再送信の記録",
+  "description": "data/gsc/resubmit-history.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "timestamp": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "coverageState": {
+        "type": "string"
+      },
+      "error": {
+        "type": "string"
+      }
+    }
+  }
+}

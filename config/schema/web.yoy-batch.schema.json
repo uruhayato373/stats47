@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "前年比時系列のバッチ設定",
+  "description": "config/yoy-batch.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "metricKey": {
+        "type": "string"
+      },
+      "output": {
+        "type": "string"
+      }
+    }
+  }
+}
