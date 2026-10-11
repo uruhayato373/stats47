@@ -155,10 +155,12 @@ export function AdSenseAd({
       )}
       {isVisible ? (
         isArticleFormat ? (
-          // 記事内広告（fluid / in-article）: Google 推奨の属性構成
+          // 記事内広告（fluid / in-article）: Google 推奨の属性構成。
+          // 外枠 (AD_CONTAINER_CLASS) は flex-col + items-center なので、幅を明示しないと ins が
+          // 内容幅 0 に縮み「No slot size for availableWidth=0」で配信されない (2026-10-11 本番で実測)。
           <ins
             className="adsbygoogle"
-            style={{ display: "block", textAlign: "center" }}
+            style={{ display: "block", width: "100%", textAlign: "center" }}
             data-ad-layout="in-article"
             data-ad-format="fluid"
             data-ad-client={clientId}
