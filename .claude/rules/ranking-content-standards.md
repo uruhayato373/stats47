@@ -250,7 +250,12 @@ quarantine は持たない。
 
 ### Gemini 無料枠の日次 CI を正典にする
 
-`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する。既定 3 件、並列数 1、
+> **2026-10-11 から定期実行を停止中。** 導入 (2026-08-30) から 48 run 中 44 run が preflight の billing / HTTP 402 で止まり、
+> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。キーの project が無料枠で通ることを
+> `AI-CONTENT-GEMINI-KEY-01` で確かめるまで手動起動だけにする。その間の未生成 (2026-10-11 時点で 363 件) は
+> 次節の headless `claude -p` 経路で、量と時期を週次・月次計画で決めて消化する。
+
+`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (上の停止中を除く)。既定 3 件、並列数 1、
 `gemini-2.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。

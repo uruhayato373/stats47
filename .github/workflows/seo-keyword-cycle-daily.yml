@@ -145,7 +145,8 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         run: |
           npm run type-check
-          npm run test:run --workspace apps/web -- src/features/survey
+          # step の NODE_ENV=production は build 用。vitest が React の本番ビルドを読むと React.act が無く落ちる (2026-10-10〜11 の 6 run)
+          NODE_ENV=test npm run test:run --workspace apps/web -- src/features/survey
           npm run validate:config
           npm run validate:catalog
           npm run build --workspace apps/web

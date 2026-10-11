@@ -267,6 +267,15 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [AI-CONTENT-GEMINI-KEY-01] Gemini 日次のキーが無料枠で通るかを確かめ、通れば定期実行を戻す
+タグ: [コンテンツ品質] [種類:不具合] [実行:ユーザー] [起票:2026-10-11] [領域:データ]
+
+- **事実 (2026-10-11)**: `ai-content-gemini-daily.yml` は導入 (2026-08-30) から 48 run 中 44 run が preflight で止まり、解説を 1 件も生成していない (`data/ai-content/history.csv`: billing 18 run・bad-request 23 run。直近は `gemini-3.7-flash` で HTTP 402)。2026-10-11 に schedule を外し、手動起動だけを残した。未生成のランキング解説は 363 件 (missing 289・stale-year 73・incomplete 1、`data/ai-content/remediation/remediation-queue.json`)。
+- **次 (オーナー)**: Google AI Studio で `GEMINI_API_KEY` の project に課金が無く無料枠があるかを確かめる。リポジトリ変数 `GEMINI_TEXT_MODEL` (現在 `gemini-3.7-flash`) が無料枠のモデルかも確かめる。直したら `gh workflow run ai-content-gemini-daily.yml -f limit=1` を 1 回回す。
+- **戻すとき**: preflight が通り PASS 1 件以上なら、workflow に cron を戻し、`gemini-workflow-contract.test.mjs` の「schedule を持たない」assert と `ranking-content-standards.md` の停止中の注記を同じ差分で外す。
+- **止めたままにするなら**: 363 件は `ranking-content-standards.md`「ローカル量産は headless claude -p 経路」で量と時期を月次計画が決めて消化する。
+- **完了条件**: Gemini の手動 run が PASS ≥ 1 で schedule が戻っている、またはオーナーが Gemini 経路の廃止を決めて workflow と規約の節が削除されている。
+
 ### [SIMPLIFY-UNUSED-CODE-01] knip と孤児スクリプトの結果を、残す系統に限って削る
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npx knip --no-progress] [起票:2026-10-11] [領域:管理]
 

@@ -23,7 +23,7 @@ test(`${files[0]}は観測artifactだけで外部変更しない`, () => {
 // restore した ASP 成果 (restore の許可リストにある集計値 5 ファイル) だけに限定する (2026-09-27 に成果を追加、
 // 2026-10-01 に楽天を追加)。
 // Issue mutationは運用異常のalert/recoveryだけに使い、広告配信自体は変更しない。
-test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、広告配信を変更しない`, () => {
+test(`${files[1]}はgit書き戻しを週次集約CSV・ASP成果・集約stateに限定し、広告配信を変更しない`, () => {
   const source = readFileSync(files[1], "utf8");
   assert.match(source, /permissions:\s*\n\s*contents: write/);
   assert.match(source, /^\s*issues: write/m);
@@ -35,12 +35,16 @@ test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、
   ]);
   const outcomeBlock = source.match(/FILES=\(\n([\s\S]*?)\n\s*\)/);
   assert.ok(outcomeBlock, "ASP 成果の書き戻し対象 FILES=( … ) が無い");
-  assert.deepEqual(outcomeBlock[1].split("\n").map((l) => l.trim()).filter(Boolean), [
+  assert.deepEqual(outcomeBlock[1].split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#")), [
     "data/affiliate/a8-results.json",
     "data/affiliate/a8-report-log.json",
     "data/affiliate/a8-ui-last-run.json",
     "data/affiliate/moshimo-results.json",
     "data/affiliate/rakuten-results.json",
+    // 管理画面とヘルスチェックが git 上の値を読む集約 state (2026-10-11 から書き戻す)
+    "data/affiliate/affiliate-portfolio-latest.json",
+    "data/affiliate/affiliate-operations-latest.json",
+    "data/affiliate/affiliate-pilot-readiness-latest.json",
   ]);
   // 書き戻す成果は restore (consumer-paths の許可リスト) が書くものに限る。生 snapshot は含めない
   assert.doesNotMatch(outcomeBlock[1], /ga4-affiliate-\d|\.local\//);
