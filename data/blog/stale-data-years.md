@@ -1,6 +1,6 @@
 # 図の年が古い公開記事 (stale-data-years)
 
-- 生成: 2026-10-10T02:02:09.154Z
+- 生成: 2026-10-11T01:26:55.191Z
 - 公開記事 608 件のうち、使う指標を snapshot から読めた記事 570 件を判定
 - 図の年が指標の最新年より古い記事: **24 件**。遅れの大きい順
 - 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。本文がその年そのものを主題にした図だけ、取り直さず source.json に `yearPinnedReason` を書く (本文が図の年を語っていない図は図だけの食い違いなので取り直す)
