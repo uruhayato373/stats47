@@ -32426,7 +32426,7 @@
     },
     {
       "id": 1085,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32435,13 +32435,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:52.947Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-11T16:16:01.245Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
       "content_key": "beef-consumption-expenditure",
       "caption": "【都道府県ランキング】牛肉への支出\n\n1位: 奈良県 34474円\n47位: 岩手県 9474円\n\n出典: 家計調査（2024年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県ランキング #牛肉への支出 #日本地図 #統計 #都道府県 #地図 #ランキング #暮らし #雑学 #stats47",
-      "scheduled_at": "2026-10-11T10:00:00.000Z"
+      "scheduled_at": "2026-10-11T10:00:00.000Z",
+      "posted_at": "2026-10-11T16:16:01.234Z",
+      "post_url": "https://www.instagram.com/p/DeXENZAiRWG/",
+      "external_id": "18146175838603331"
     },
     {
       "id": 1086,
