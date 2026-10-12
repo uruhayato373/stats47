@@ -138,7 +138,7 @@ const run = promisify(execFile),
     path.join(os.homedir(), '.browser-use-env/bin/browser-use');
 const session = `note-covers-${process.pid}-${Date.now()}`;
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
-const usePlaywright = process.platform === 'win32' || unattended();
+const usePlaywright = process.platform === 'win32' || unattended() || process.env.NOTE_COVER_BROWSER === 'playwright';
 let playwrightContext, playwrightPage;
 async function browser(command, ...args) {
   if (usePlaywright) {

@@ -60,7 +60,7 @@ export const GOVERNED = [
  *   packages/*\/src/・packages/*\/data/  パッケージに同梱する画像・図形 (コードが import する・GIS の県形状など)
  *   config/coconala/assets/  ココナラのプロフィール・商品画像 (出品台帳と一緒に人が判断して変える)
  *   .claude/skills/**\/examples/ (と Codex 用ミラー .agents/)  スキルの説明に使う作例
- *   contents/blog/・docs/31_note記事原稿/  公開待ちの原稿 outbox (公開後に CI が消す)
+ *   contents/blog/  ブログの公開待ち原稿 outbox (公開後に CI が消す)。note の原稿は git に置かない (正本は R2)
  */
 export const IMAGE_ROOTS = [
   /^assets\//,
@@ -69,7 +69,6 @@ export const IMAGE_ROOTS = [
   /^config\/coconala\/assets\//,
   /^\.(?:claude|agents)\/skills\/(?:[^/]+\/)+examples\//,
   /^contents\/blog\//,
-  /^docs\/31_note記事原稿\//,
 ];
 export const IMAGE_EXT = /\.(?:png|jpe?g|webp|gif|avif|svg|ico)$/i;
 
@@ -129,6 +128,12 @@ export const DATASETS = [
   d("web.yoy-batch", P.YOY_BATCH, "config", "data", "config", "前年比時系列のバッチ設定", { schema: "config/schema/web.yoy-batch.schema.json" }),
 
   // ── data/ : 事業の記録 ──
+  d("note.articles", "data/note/articles.json", "ledger", "product", "data", "note 記事の ID 台帳 (編集メタ・本文の所在とマニフェストの SHA)。本文と画像の実体は R2", { schema: "data/note/articles.schema.json" }),
+  d("note.articles-schema", "data/note/articles.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.magazines", "data/note/magazines.json", "ledger", "product", "data", "note マガジンの台帳 (記事台帳の magazine が参照するキーの正本)", { schema: "data/note/magazines.schema.json" }),
+  d("note.magazines-schema", "data/note/magazines.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.paid-landing", "data/note/paid-landing/{name}.json", "config", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),
+  d("note.paid-landing-schema", "data/note/paid-landing.schema.json", "config", "product", "data", "上の文言の JSON Schema"),
   d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの生成版・採用版・公開版の台帳", { schema: "data/note/cover-assets.schema.json" }),
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.hashtags", "config/note-hashtags/{name}.json", "config", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", { schema: "config/schema/note.hashtags.schema.json" }),
@@ -234,6 +239,8 @@ export const DATASETS = [
   d("kindle.verification", "data/products/kindle-{name}-verification.json", "evidence", "product", "data", "Kindle 版ごとの検証記録"),
   d("sns.posts", "data/sns/posts.json", "ledger", "sns", "data", "SNS 投稿台帳 (投稿履歴の正本)", { schema: "data/sns/posts.schema.json" }),
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
+  d("sns.image-replacements", "data/sns/image-replacements/{name}.json", "evidence", "sns", "data", "予約済み投稿の画像差し替えの記録 (決定・対象 ID・差し替え前後)"),
+  d("sns.material-reconciliation", "data/sns/material-reconciliation-{date}.json", "series", "sns", "data", "素材キーから投稿IDへの照合証跡。候補の正本はposts.json", { planned: true }),
   d("sns.posts-schema", "data/sns/posts.schema.json", "config", "sns", "data", "SNS 投稿台帳の JSON Schema"),
   d("sns.scripts", "data/sns/scripts/{name}.json", "ledger", "sns", "data", "長尺投稿 (YouTube 等) の台本。台帳の script_path から参照", { planned: true, schema: "data/sns/scripts.schema.json" }),
   d("sns.scripts-schema", "data/sns/scripts.schema.json", "config", "sns", "data", "長尺投稿の台本の JSON Schema"),

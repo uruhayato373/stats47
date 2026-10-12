@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-12",
+  "drafts": [
+    {
+      "id": 1037,
+      "old_media_path": ".local/r2/sns/ranking/care-worker-annual-income/x/stills/care-worker-annual-income.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/care-worker-annual-income/all47.png",
+      "sha256": "9ad3086488e6152e652238c8f23fb37c7c03ad85b389d3f100c15fedfaf95238"
+    },
+    {
+      "id": 1039,
+      "old_media_path": ".local/r2/sns/ranking/pet-food-consumption-expenditure/x/stills/pet-food-consumption-expenditure.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/pet-food-consumption-expenditure/all47.png",
+      "sha256": "dbe8e2a5eedbafbaf333c5899ec3c733f039aabd6302ccbaa0333d61ddf99ccc"
+    },
+    {
+      "id": 1041,
+      "old_media_path": ".local/r2/sns/ranking/final-energy-consumption-per-capita/x/stills/final-energy-consumption-per-capita.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/final-energy-consumption-per-capita/all47.png",
+      "sha256": "72d73b68b851b6fd2134dc6f5768986f02be0d1ee9c3f473410f986f65449ec4"
+    },
+    {
+      "id": 1043,
+      "old_media_path": ".local/r2/sns/ranking/cleaning-shop-count-per-100k/x/stills/cleaning-shop-count-per-100k.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/cleaning-shop-count-per-100k/all47.png",
+      "sha256": "6de7ced55bfee04253dd29d719f71828c5ad5badf9091b4947832fdafdbb2473"
+    },
+    {
+      "id": 1045,
+      "old_media_path": ".local/r2/sns/ranking/life-expectancy-0-female/x/stills/life-expectancy-0-female.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/life-expectancy-0-female/all47.png",
+      "sha256": "25769eda6e09bf1cb6049c1344829f0aae04e0a6acfd95075090cd3f41a293f5"
+    },
+    {
+      "id": 1047,
+      "old_media_path": ".local/r2/sns/ranking/manufacturing-shipment-amount-per-employee/x/stills/manufacturing-shipment-amount-per-employee.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/manufacturing-shipment-amount-per-employee/all47.png",
+      "sha256": "ab548646cdc03e40986bdf1f75525c317db5a01b98d153b93f334d0b58ad637b"
+    },
+    {
+      "id": 1049,
+      "old_media_path": ".local/r2/sns/ranking/sports-participation-rate-skiing/x/stills/sports-participation-rate-skiing.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/sports-participation-rate-skiing/all47.png",
+      "sha256": "9d0a67b5b0d65dbf174a0921905d5b89fa7f52374d858ade0a1e4ef5083d6c05"
+    },
+    {
+      "id": 1139,
+      "old_media_path": ".local/r2/sns/ranking/agricultural-output/x/stills/agricultural-output.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/agricultural-output/all47.png",
+      "sha256": "07bf971260a925dbe3bf8677c4ef5947d00806c1be6acb523533a8c2b8d88080"
+    },
+    {
+      "id": 1151,
+      "old_media_path": ".local/r2/sns/ranking/employed-outside-the-prefecture/x/stills/employed-outside-the-prefecture.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/employed-outside-the-prefecture/all47.png",
+      "sha256": "3a85bf881d37b0e99bc7c9dac2f70d81ddbc30efa590f97497df05d37175c73b"
+    },
+    {
+      "id": 1153,
+      "old_media_path": ".local/r2/sns/ranking/future-population-change-rate-2050/x/stills/future-population-change-rate-2050.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/future-population-change-rate-2050/all47.png",
+      "sha256": "93d55943fed2270dc28f775e9a20fb489132c1b14080dbbac3f2929bbf7079ac"
+    },
+    {
+      "id": 1156,
+      "old_media_path": ".local/r2/sns/ranking/intellectual-crime-per-100k/x/stills/intellectual-crime-per-100k.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/intellectual-crime-per-100k/all47.png",
+      "sha256": "2c1b1b578b6c7f198a8a963bf08e5e6d8613bbd047568490e9a9844b5e38d37d"
+    }
+  ],
+  "notes": "本文・日時・承認状態を維持。予約枠の自動補充も新画像を利用する。18県のみの航空機操縦士ID1163は47県へ補完せず、未承認のまま。"
+}

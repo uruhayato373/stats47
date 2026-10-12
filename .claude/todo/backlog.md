@@ -275,15 +275,70 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [SNS-DATA-CARD-COMMIT-GATES-01] SNS データカード (render-data-card.ts) をコミットする前に、環境変数登録・Codex ミラー・依存宣言を揃える
-タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:SNS]
+### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-11、別セッションの未コミット作業を読み取りで監査)**: `.claude/scripts/sns/render-data-card.ts` と `lib/data-card-{input,shape}.ts`、`apps/remotion/src/features/data-cards/` は skill `render-sns-stills`・`post-x`・`post-x-batch` と `sns-content-standards.md` §2-9 から参照され、`Root.tsx` に composition が登録されている。次の 3 点が未解消。
-  1. `process.env.CHROME_PATH` が `.claude/config/env-registry.json` に無く、pre-commit と preflight:pr の env registry が落ちる
-  2. SNS skill 3 本の Codex ミラー (`.agents/skills/sns/{post-x,post-x-batch,render-sns-stills}/SKILL.md`) が未同期で、整合性検査 E12 が落ちる
-  3. `@remotion/bundler` をどの package.json も宣言しておらず、Remotion の推移依存の巻き上げで動いている (`topojson-client` は root が宣言済み)
-- **次**: 作業したセッションが、①を env-registry に登録する、②を `node .claude/scripts/lib/sync-codex-mirror.cjs` で同期する、③を root の package.json に宣言する、の 3 つを済ませてからコミットする。
-- **完了条件**: `npm run preflight:pr` と `node .claude/scripts/lib/check-agent-skill-consistency.cjs` が通る状態でデータカードがコミットされている。
+- **事実 (2026-10-13)**: 記事台帳で `body.store: "note-only"` の公開記事が 73 本 (`recovered-*` / `paid-*` の大半)。R2 にも git にも本文が無く、
+  note.com が唯一の実体。リライト・カバー再生成・リンク修復の作業コピーを作れない。
+- **次**: 所有者 API (`/api/v3/notes/<id>` の body。有料は所有者のセッションが要る) から本文を取り、作業コピー (draft.md + 画像) を組み立てて
+  `body.store` を `r2-public` (無料) か `r2-private` (有料) に変え、`npm run note:article -- save <key>` で保存する。既存の
+  `catalog/restore-from-notecom.py` の出力形式を確かめて使う。公開 API は大量取得で 403 になるので、1 回 10 本程度に区切る (`feedback_note_editor_autosave_drafts`)。
+- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。
+
+### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:商品]
+
+- **事実 (2026-10-13)**: 廃止した `publish-paid-note-private-r2.ts` は、Geo 商品の ZIP (`.local/geo-products/`) を private R2 の記事 prefix に
+  `product/<name>.zip` として写していた。新しい `note:article save` は記事ディレクトリ (docs/31 の作業コピー) だけを保存するので、
+  `.local/note-product-archives/P-NN-*.zip` や `.local/geo-products/` の ZIP は、この Mac にしか無い。添付は note 上にあるが、こちらの控えが端末依存になる。
+- **次**: ZIP を記事の作業コピー (`product/<name>.zip`) に置いて `save` する (R2 の 1 オブジェクト上限 16MB を超えるものは分ける) か、
+  Kindle と同じ暗号化 archive (`kindle-archives.json` の方式) を note 商品にも広げるかを決めて実装する。product-factory の `_noteDelivery` の SHA と照合できるようにする。
+- **完了条件**: 公開済み・公開予定の有料記事の添付 ZIP が private R2 にあり、別の端末から SHA 照合付きで取り出せる。
+
+### [NOTE-PROVENANCE-BACKFILL-MANIFEST-01] backfill-note-data-provenance を旧 manifest.json ではなく台帳のマニフェストで読む
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:商品]
+
+- **事実**: `.claude/scripts/note/catalog/backfill-note-data-provenance.mjs` は R2 の記事ディレクトリにある旧形式の `manifest.json`
+  (廃止した sync-note-r2 が作っていたファイル一覧) を読んでチャート画像を探す。新しい記事にはこのファイルが無く、移行で残した旧ファイルは更新されない。
+  また staging (`.local/r2/note/**`) を `diff-push-r2` で反映する手順になっており、台帳を通らない書き込みになる。
+- **次**: ファイル一覧は台帳の `body.manifest` が指す private R2 のマニフェスト (`note-archive/manifests/<key>/<sha>.json`) から取り、
+  出力は作業コピーへ置いて `note:article save` で保存する形にする。
+- **完了条件**: スクリプトが旧 `manifest.json` を読まず、R2 への書き込みが `note:article save` だけになる。
+
+### [PRODUCT-PACK-CONTENT-MISMATCH-01] データパックの目的文・出品文・見本画像が中身と食い違っている
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:商品]
+
+- **事象 (2026-10-12、note 販売記事の執筆中に v3-20261012-mac-r2 の実物と照合して判明)**: (1) パックの目的文 (`packs.ts` 由来・準備原稿の「この資料の目的」) にある内容が実データに無い: P-02 県民所得 / P-03 観光消費額 / P-04 類似団体比較 / P-06 出生 / P-07 人口移動。(2) 見本の県別地図 `assets/choropleth-map.png` の題名が長いと左右で切れる (P-04 実収入・P-14 アクセサリー消費支出額)。(3) 全パックの `listing/listing.md` が「使い方マニュアル」を同梱と書くが databook.pdf に無い (使い方は PowerPoint の説明スライドと Excel の「使い方」シートだけ)。(4) ライセンスの食い違い: P-08/09/10/12/14 の listing.md は「クライアント納品物への組み込み不可」、LICENSE-ja.txt は「1法人内の業務利用可」のみ。P-06 は教育機関限定・P-07 は購入者本人のみで、listing の想定購入者 (自治体・移住支援) と合わない。(5) P-05 の見本指標が人工妊娠中絶実施率で、見本として扱いにくい。
+- **生成器の不具合 (2026-10-12 の独立レビューで追加判明・同日に修正を着手)**: (6) SOURCES.csv の注意事項と LICENSE-ja.txt が e-Stat 以外の出典 (全日遊連・水産庁・消防庁・中体連など) にも「e-Stat を基に stats47 作成」と書く (7) PowerPoint の使い方スライドが「data.csv を貼れば47県分差し替え」と書くがグラフは A1:B11 の上位10件しか参照しない (8) SOURCES の statsDataId が指標定義と違う (総人口2025 を 0000010101 と書くが定義は国勢調査 0004065881) (9) 47県同値の重複列を別指標に数える (P-12 で15組)。v3-20261012-mac-r3 で修正予定。修正後はココナラの `_delivery` 版 (v2-20260906-r1) にも同じ誤りがあるかを確かめる。
+- **見本画像の選び方 (2026-10-12)**: `assets/choropleth-map.png` はデータの先頭列を描くため、P-03 (観光) の見本が航空貨物輸送量になるなどパックの主題と合わない。題名切れは r4 でも P-04・P-14 で残る (note 記事は data.csv から作った題名なしの地図 `images/sample-map.png` で代用)。
+- **SOURCES.csv の残り (2026-10-12 再レビュー)**: 職種別平均年収 (`0003445758`) の行の調査名欄に指標名が入り、URL が社会・人口統計体系の案内ページを指す (P-09 ほか)。調査名欄に指標名が入る行は P-01「腎不全による死亡者数」・P-05「患者調査 第37表…」など多数。P-07「家賃差引の参考額（月額）」は 2 表を組み合わせた値なのに加工式が「R2 から抽出」だけ (§3 の加工式要件を満たさない)。P-04・P-11 の LICENSE は地方公務員給与実態調査の URL を 1 件しか載せない。
+- **次**: 目的文を実データに合わせて直すか指標を足す (packs.ts)、見本画像の題名を折り返す (生成器)、listing.md とライセンスの記載を揃える。ココナラの出品文 (`config/coconala-listings.json`) にも同じ記載があれば同時に直す (outward はオーナー承認)。
+- **完了条件**: 14 パックの目的文・listing・LICENSE・見本画像が実物と一致し、note 販売記事の「収録外」の断り書きが不要になる。
+
+### [CI-DEVELOP-INHERITED-GATES-20261012] Codex ミラーとテーマ件数の検査不整合を直す
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-12] [領域:管理]
+
+- **追加確認 (2026-10-12、6件予約後)**: `63837dcbb7` の [Develop Quality Gate](https://github.com/uruhayato373/stats47/actions/runs/38200967468) は Fast Gates成功、Catalog Gates失敗、packages/web tests実行中。run未完了のためログ取得できず、今回のCatalog失敗原因が既存2系統と同じかは未確認。完了後のログを確認する。6件の予約・2件取消・公開素材・台帳・管理画面の照合は成功済みで、配信スケジュールはdevelopに保存済み。
+- **証拠**: SNS44件予約の保存コミット `358dd18884` の [Develop Quality Gate](https://github.com/uruhayato373/stats47/actions/runs/38187837335) で2系統が失敗。① `.claude/skills/sns/sns-weekly-report/reference/reports/2026-W40.md` の Codex ミラーリンクが未登録 (E12)。② `packages/ranking/src/survey/__tests__/theme-redesign-ratchet.test.ts` の baseline が chart=期待51/実53、metric-group=期待438/実457。両系統の対象は親コミットから差分なし。PR Quality Check `38187839993` の Contract / Type Check も①で停止 (25 workspace の型検査自体は合格)。SNS台帳・予約・素材の検査は合格し、既存のInstagram自動投稿はdevelopの予約表を読むため、このCI失敗による投稿待ちはない。
+- **実行順**: ① `node .claude/scripts/lib/sync-codex-mirror.cjs` で正本からミラーを再生成し、必要な差分だけ保存 ② テーマ変更の履歴と `survey-taxonomy-ratchet.json` の追加・統合記録を突合 ③ 記録とテスト契約を整合させ、関連単体テスト・`npm run type-check`・`npm run preflight:pr` を実行する。
+- **停止条件**: テーマ件数の変化を裏付ける変更が特定できなければ期待値だけを緩めない。他セッションの未コミット差分をまとめて取り込まない。
+- **完了条件**: ミラー検査とテーマの該当4テストが成功し、Develop Quality GateおよびContract / Type Checkが成功する。
+
+### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:管理]
+
+- **実測**: SNS #1145/#1146 のコンビニ販売額47県は e-Stat `0004032502` の `cdTime=2025000101`（2025年1月）に全件一致するが、git定義のsubtitleは年間販売額、配信itemは2025年度。`post-office-count-per-100km2` の原表 `#H06302` は「可住地面積100km²当たり」、`cleaning-shop-count-per-100k` の `#H06119` は「クリーニング業数・施設」。SNS画像・本文は是正済み。証拠はDriveの `SNS素材/instagram/1145/production-2026-10-12/sources/` と同IDのmanifest、原表メタ `getMetaInfo`（0000010208）で再取得可。
+- **実行順**: ① 指標configと時間粒度の取得・正規化契約を確認 ② 月間と年間の混在を防ぐfixtureを追加 ③ 原表の期間/単位に沿って派生snapshotを再生成し、サイト・県データブック・今後のSNS生成で表示が一致するか確認。
+- **停止条件**: 正しい期間の原表、または可住地面積の分母が確認できなければ推測で値を変更しない。
+- **完了条件**: 3指標の対象期間・分母・単位が原表と一致し、該当ランキングと県データブックの回帰検証を通過する。本番反映は既存の承認済み公開工程にまとめる。
+
+### [NOTE-DRAFT-DUPLICATE-CATALOG-01] note カタログの下書き 14 件が公開済み記事と同じ題名のまま残っている
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:商品]
+
+- **事象 (2026-10-11)**: カタログ `NOTE_ARTICLES` で `status: "draft"` の記事のうち 14 件は、題名が公開済み記事と完全に一致する (題名の 2 文字単位の一致率 1.00)。`koumuin-claude-code` の 22〜30 の 9 件 (`paid-n2207f3039fd3`・`paid-nbead1fe772c7`・`paid-n68eafab07946`・`paid-nfd3ab8213e1f`・`paid-n2c2df066e865`・`paid-n9f666946d105`・`paid-ncab0d7b04228`・`recovered-nc18fa33ec65e`・`paid-n8558c1a6503a` と同じ) と、`a-number-of-hotel-rooms`・`a-overseas-travel-annual-participation-rate-10plus`・`a-population-density-per-km2-total-area`・`a-volunteer-activity-annual-participation-rate-15plus`・`d1-kakei-prefecture-consumption` の 5 件。オーナー判断で公開しない。下書き一覧から公開候補を数えると重複を投稿しかける。
+- **次**: 各件で、公開済み記事と本文まで同じか (公開済み側が同じ原稿の投稿か) を確かめ、同じなら下書き側をカタログから外すか公開済み記事へ統合する。本文が新しい版なら、公開済み記事の更新として扱う。
+- **停止条件**: note 上の記事の削除・非公開化はしない (オーナー判断)。
+- **完了条件**: 公開済み記事と同じ題名の下書きがカタログに 0 件。
 
 ### [AI-CONTENT-GEMINI-KEY-01] Gemini 日次のキーが無料枠で通るかを確かめ、通れば定期実行を戻す
 タグ: [コンテンツ品質] [種類:不具合] [実行:ユーザー] [起票:2026-10-11] [領域:データ]
@@ -813,13 +868,15 @@ updated: 2026-10-06
 - **判断すること**: URL を変えるか。変えるなら metric の改名と 301 (ranking・blog) と被リンク・GSC の引き継ぎを同時に行う。変えないなら理由をこのカードに書いて閉じる。
 - **完了条件**: どちらかに決まり、変える場合は旧 URL が 301 で新 URL を返す。
 
-### [NOTE-INDEX-DRIFT-01] note の公開済みインデックスがカタログとずれている (65 件の r2_body・status)
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts] [起票:2026-10-08] [領域:商品]
+### [NOTE-INDEX-DRIFT-01] note 記事台帳の題名が公開中の題名と食い違う記事を揃える
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run note:catalog:check] [起票:2026-10-08] [領域:商品]
 
-- **事象 (2026-10-08)**: カタログを変えずに `generate-note-catalog.ts --apply` を実行すると、コミット済みの `data/note/note-published-urls.json` (10-06 更新) から 65 件が `r2_body: true → false`・`status: r2_ready → note_only` に変わる。生成器かカタログのどちらが正しいかは未確認。
-- **次**: 65 件の R2 `note/<vertical>/<id>/draft.md` が実在するかを確かめ、正しい側に合わせる。このインデックスを読む `publish-paid-note-private-r2.ts` などへの影響を先に読む。
-- **停止条件**: 原因が分かるまで `--apply` の結果をコミットしない。
-- **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
+- **解決済み (2026-10-13)**: 公開済みインデックスと下書き索引は、記事台帳 `data/note/articles.json` から `generate-note-catalog.ts` が作る派生物になり、
+  `npm run note:catalog:check` (PR・pre-commit) が手編集と再生成漏れを止める。65 件の r2_body のずれは、台帳の `body.manifest` (R2 に保存して読み戻せた版の SHA) で置き換えた。
+- **残り**: 台帳の `title` が公開中の題名と食い違う記事がある。`d-geo-flood-population-mesh` は台帳が「8,235メッシュ」、note の API
+  (`/api/v3/notes/nfe50fb61efc0` の `name`) と非公開 R2 の原稿は「29,737メッシュ」。`d-geo-land-price-future-population` は台帳「人口減少×住宅地価格を再現できるデータにする」、
+  公開中は「地価上昇地点と周囲の人口減少を照合する」。全件の照合は、台帳の `title` と note API の `name` を記事ごとに比べれば取れる (公開 API の取得は間隔を空ける。`feedback_note_editor_autosave_drafts`)。
+- **完了条件**: 公開済み全記事で台帳の `title` と note API の `name` が一致し、`note:catalog:check` が通る。
 
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
@@ -1178,6 +1235,8 @@ updated: 2026-10-06
 
 タグ: [収益化] [種類:制作] [実行:別環境] [起票:2026-09-29] [期日:2026-10-06] [領域:商品]
 
+- **現在地 (2026-10-13)**: 2 本とも 2026-10-12 に公開済み (#12 `n527e817995e9`・#13 `n20299fc77b17`、各 ¥300)。有料境界は screenshot で確認済み。
+  残りは完了条件の最後の 1 点 (公開日 + 28 日 = 2026-11-09 の売上比較を `improvements.md` 側へ引き渡す) だけ。
 - **owner**: オーナー (Mac で `/publish-note` を実行・有料境界を目視承認) / note-manager (公開後の state 記録)
 - **対象**: `koumuin-estat-claude-code` の `12-fiscal-peer-comparison` (有料 ¥300・e-Stat API + Python) と `13-fiscal-peer-no-code` (有料 ¥300・Claude / ChatGPT にプロンプトを貼るだけ)。原稿は commit `328a498ee` で develop の `docs/31_note記事原稿/koumuin-estat-claude-code/<slug>/` に入っている。有料原稿は `sync-drafts-r2.mjs` が公開側 R2 への移送を拒否する設計なので、公開までは git に残る (R2 は 404 を確認済み)。note-critic は 2 本とも PASS。
 - **なぜ Mac か**: `publish-new-note.sh` が Mac のパスと osascript を前提にしており、Windows には browser-use も無い (2026-09-29 確認)。
@@ -1188,8 +1247,8 @@ updated: 2026-10-06
   3. **#12 を先に公開する**: `/publish-note 12-fiscal-peer-comparison`。有料境界は「手順 2: 「－」を正しく処理する」の見出しの直前にあることを screenshot で目視してから確定する。マガジンはシリーズ「公務員のための e-Stat × Claude Code 実務ガイド」に入れ、note 上の既存マガジン「自治体財政」にも入れるかはその場で決める。
   4. #13 の本文にあるシリーズ内リンク `../12-fiscal-peer-comparison/draft.md` と `../08-benchmark-table-5min/draft.md` を、それぞれの note の URL に置き換える (#12 の原稿にある `../06`・`../07`・`../08`・`../09`・`../10` のリンクも公開前に同じく置き換える。URL の対応表は `data/note/note-published-urls.json`)。
   5. `/publish-note 13-fiscal-peer-no-code` で公開する。有料境界は「手順 2: AI に渡す前に知っておく 3 つの約束事」の直前。
-  6. 公開後、SKILL の「Phase 8 後」に従い、`migrate-note-frontmatter.mjs` → `build-note-published-index.mjs` で `note_url` を記録し、`data/note/note-draft-index.json` から 2 件を消す。
-  7. 公開後、SKILL の Phase 8.5 に従い `npx tsx .claude/scripts/note/publish-paid-note-private-r2.ts <slug> --commit` で完全原稿を非公開の R2 へ移し、docs/31 から 2 本を消す。そのとき `.claude/config/asset-policy-baseline.json` に仮登録した `MISSING_REFERENCE:...fiscal-peer-...` の 6 件も外す (PNG を git に入れない規則と、原稿が .png を参照することの衝突を一時的に許容している)。
+  6. (2026-10-13 済) 公開記録は記事台帳 `data/note/articles.json` に書き、派生インデックスを再生成した。
+  7. (2026-10-13 済) 完全原稿は `note:article save` で private R2 に保存し、docs/31 は git から外した (旧 `publish-paid-note-private-r2.ts` は廃止)。
   8. 図の位置を `node .claude/scripts/note/audit-note-figure-split.mjs` で確かめる。`ins_img` は見出し直前の段落をアンカーにすると画像が 1 ブロック後ろにずれる既知の不具合がある (`NOTE-INS-IMG-HEADING-PLACEMENT-01`)。
 - **禁止**: 有料境界を目視せずに確定しない (有料部分が無料で見える)。予約・即時の別はオーナーが決める。
 - **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
@@ -1276,12 +1335,16 @@ updated: 2026-10-06
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
 
 ### [NOTE-COVER-ROLLOUT-20260928] noteカバーの未回収版を回収し、分類別にレビューして公開する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:商品]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/note/verify-cover-refresh.mjs] [起票:2026-09-28] [領域:商品]
+
+- **完了 (2026-10-11)**: 未採用 149 件を分類別の新しい図案で作り直し (ranking-story 70・practitioner 52・explainer 14・dataset-geo 6・palette 6・intro 1)、縮小表示で全件を目視してから SHA 指定でレビューし、note へ反映した。`verify-cover-refresh.mjs` が 286/286 pass、台帳は公開 286 件すべてで採用版＝公開版。反映中に note が保存画像の下部へ色付きの帯を入れたものが 6 件あり、すべて別版を上げ直して合格 (経緯と手順は `note-image-assets.md`「分類別のカバー」)。残るのは本カードの削除だけ。
 
 - **正典・owner**: 記事メタはTSカタログ、画像と採用/公開の対応は `data/note/cover-assets.json` + JSON Schema。実体はprivate R2のSHA付き版。契約は `.claude/rules/note-image-assets.md`。owner: note-manager / 管理画面担当。
 - **残る不足**: 9/28-v4の候補PNG・入力・レビュー実体がこのPCには無い。旧記録は70件pass・216件needs-revisionだったが、回収してSHAを照合するまで承認を引き継がない。未回収版は各記事の `missingVersions` に記録する。生成環境から元実体を回収するか、分類別の根拠から別版として再制作する。
 - **運用基盤**: 画像はprivate R2のSHA付き版に保管し、管理画面は共通台帳から表示する。家計47件の別版 `2026-10-02-household-r1` はレビュー・採用・公開反映と記事保全の照合まで完了。旧public R2版も過去版として保全。公開286件と保管版の全件照合、実測・検査結果の正典は `data/note/cover-operations-latest.json` と `cover-lifecycle-latest.json`。
 - **反映済み (2026-10-03)**: 問い型90件の採用版 `2026-10-02-ranking-question-v1` をnoteへ反映し、`verify-cover-refresh.mjs` で90/90 pass。採用済み137件はすべて公開ポインタと一致。
+- **9/28-v4 の実体はオーナーの Mac にあった (2026-10-11 確認)**: `.local/note-cover-refresh/2026-09-28/` に 286 件分の PNG・SVG・`production-manifest.json` (SHA は実体と一致)・`audit/classification.json` がある。未採用 149 件の当時の判定は、自己紹介 1 件が pass、残り 148 件が needs-revision (ranking-story 70「順位・値が消える」/ practitioner 52「シリーズの違いが伝わらない」/ explainer 14・dataset-geo 6「記事固有の図版が無い」/ palette 6「色見本が消える」)。自己紹介の pass も、10-11 に見直すと日本地図が横倒しに引き伸ばされていて採用できない。つまり 9/28-v4 から採れる候補は 0 件。
+- **台帳の制約**: `reviewCoverRevision` は `kind: candidate` しか承認できず、保全済みの現行公開画像 (`published-original`) を採用版にする経路が無い。現行画像は 149 件とも非公開 R2 に保全済みで、題名・年・論点が読める品質。148 件を作り直すか、現行画像を採用版として認める経路を台帳に足すかはオーナー判断。
 - **一時領域の残作業**: 問い型制作フォルダーの削除が実行環境の自動審査で拒否されたため未完了。保存済みR2を正本として扱い、環境で許可された方法で一時ファイルを整理する。
 - **実行順**: ①未制作・未採用の残る149件は旧版の実体と入力を回収し `note:assets import` で保管する。回収不能は分類別の根拠から別版として作り直す。②公開画像と比較し、ランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を維持した上で、画像SHAを指定してレビュー・採用・dry-run・公開後検証を通す。
 - **停止条件**: 9/28版を回収済みと扱わず、旧レビューや新生成を公開済みに読み替えない。未判定/要修正を一括差し替えしない。記事対応・画像SHA・認証口座が不一致、POST応答不明、本文/タイトル/価格/有料境界が変化した場合は停止する。
@@ -1291,7 +1354,9 @@ updated: 2026-10-06
 
 - **正典**: 記事ごとの承認済みタグは `config/note-hashtags/<slug>.json` (git・全286件そろい済み)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
 - **現状 (2026-10-03 停止時点)**: 承認済みと一致 94 件、未反映 190 件、下書きで停止 2 件。棚卸し: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid --audit-only`
-- **再棚卸し (2026-10-11)**: 一致 94・未反映 190・失敗 2 で 10-03 から変化なし (`data/note/evidence/note-hashtag-audit-2026-10-11.json`)。反映は再開されていない。
+- **再棚卸し (2026-10-11)**: 一致 94・未反映 190・失敗 2 で 10-03 から変化なし (`data/note/evidence/note-hashtag-audit-2026-10-11.json`)。反映は再開されていない。同日に再開を試みたが、Claude デスクトップアプリ (Bash ツール・アプリ内ターミナルとも、サンドボックスの外でも) から `~/Library/Application Support/Google/Chrome/Profile 5` が `Operation not permitted` で読めず (macOS のプライバシー保護)、browser-use が起動しない。Claude.app にフルディスクアクセスを付けるか、Terminal.app からオーナーが実行する。カード修復・カバー反映が使う Playwright プロファイル (`.local/playwright-note-profile`) は影響を受けない。
+- **2026-10-12 再開 (ログイン済み Playwright プロファイルの Chrome へ `NOTE_BU_CDP` で接続)**: 1 回目で 189 件中 14 件以上が `published free body changed before update` で止まり、止まった記事に下書き (`has_draft=true`) が残った。原因はエディタがリンクカードの題名・説明文を現在の OGP で描き直すこと。比較からカード内の文字 (`<a …><strong>…</strong><em>…</em></a>`) を外す修正を入れ、2 回目を `--allow-free-draft` 付きで流している (無料記事の下書きは上書きで解消)。有料で下書きが残った `paid-n92b846280d1a` は自動では触らない。
+- **2026-10-12 結果**: 承認済みと一致 280/286。残り 6 件はすべて下書きが残って停止 (`draft_blocked`): 有料 `paid-n92b846280d1a` (今回の停止で発生)・`paid-nfe2c65e669a8` (以前から) と、無料 4 件 `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`。無料 4 件はエディタがリンクカードの href を旧ブログURLの転送先 (例: `fertility-rate-prefecture-gap` → `birth-rate-fertility-ranking`) に書き換えるため、本文一致の安全装置で止まる。リンク先の書き換えを許すかはオーナー判断 (許すなら比較で href の転送先を正規化する)。下書きは note の編集画面で破棄すれば解消する。
 - **下書きで停止**: `a-late-elderly-medical-expense-per-insured` は一括反映を途中で止めたときに残った下書き (無料記事なので `--slugs a-late-elderly-medical-expense-per-insured --allow-free-draft` で片付く)。`paid-nfe2c65e669a8` (有料) は以前からの下書きで、内容を確認してから扱いを決める。
 - **実行**: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid` (承認済みと一致する記事は飛ばすので、途中で止めても再実行でよい)。headless `claude` と note のログイン (browser-use Profile 5) が必要。1 件 約40秒。
 - **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
@@ -1385,6 +1450,13 @@ updated: 2026-10-06
   「2 週連続未達は分割か降格」「完了済み ID を計画に残さない」を入れる。
 - **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
 
+### [NOTE-COVER-ASSETS-SPLIT-01] note カバー台帳 cover-assets.json を 1MB 未満に分割する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-repo-hygiene.cjs --baseline] [起票:2026-10-13] [領域:商品]
+
+- **現在地 (2026-10-13)**: `data/note/cover-assets.json` は記事 403 本分の採用版と操作履歴を持ち 1,721,164 bytes (HEAD 前は 859,190)。改行を詰めても約 1.2MB で、repo hygiene の上限 1MB を超える。コミットを通すため `.claude/config/repo-hygiene-baseline.json` に既知の違反として 1 件登録した。
+- **やること**: 完了・superseded の操作履歴を `data/note/evidence/` の月別ファイルへ移すなど、正本 (採用版と未完了の操作) と履歴を分ける。読み手 (`lib/cover-update.mjs`・`generate-cover-refresh.ts`・`verify-cover-refresh.mjs`・管理画面) を同時に直し、JSON Schema も更新する。
+- **完了条件**: 正本が 1MB 未満になり、baseline から `data/note/cover-assets.json` の行を消しても `check-repo-hygiene.cjs --baseline` が通る。`node --test .claude/scripts/note/__tests__/cover-update.test.mjs` が通る。
+
 ### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27] [領域:商品]
 
@@ -1396,6 +1468,11 @@ updated: 2026-10-06
   3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
   4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
 - **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
+- **2026-10-11 再開**: 全量再監査は空白 720 枚・206 記事・未確認 0・空段落 83 (`data/note/card-visibility-latest.json`、11:56Z)。修復ループを再開した。`repair-note-blank-card.mjs` は挿入直後のカードの `data-src` が空のまま比較して落ちていたので、全カードの URL が入るまで最大 20 秒待つようにした。
+- **オーナー作業 (下書きの破棄)**: `recovered-n03e45e40d3a7` (`https://note.com/stats47/n/n03e45e40d3a7`、KML×Google マップ) は、リンク先 `n686dcc017bbe` のカードが 20 秒待っても埋め込まれず、エディタの自動保存で `has_draft=true` が残った (公開本文は不変)。note の編集画面で下書きを破棄するまで、この記事の空白 6 枚は journal で `repair_failed` / `blocked_by_draft` にして修復対象から外している。破棄後は journal の該当 6 件を消してから再実行する。
+- **2026-10-12 の進捗と停止**: 全量監査 (17:22) は 304 記事・空白 689 枚・空段落 107。修復は 75 枚 verified。修復手順を 2 回直した: (1) 右矢印でカードを選べない場合のクリック経路を足したが、非表示の空白カードはクリックできず、その間に「カード未選択のまま押した Delete」が自動保存されて下書きを 3 件作った → (2) Delete はカードが選択状態 (`ProseMirror-selectednode`) のときだけ押し、未選択なら編集せず止める形に直した。その後 note の公開 API が 403 を返し始め (短時間の大量操作による制限とみられる)、`recovered-n3a4efa70c02a` は「更新する」が出ずタイムアウトした (下書きが残った可能性あり・403 で未確認)。自動処理はすべて停止。
+- **オーナー作業 (下書きの破棄、2026-10-12 時点で 9〜10 本)**: 修復やタグ更新の停止で未公開の下書きが残った記事 — `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`・`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29`・(未確認) `n3a4efa70c02a`、有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8`。`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29` の下書きには意図しない削除が入っているので**公開せず破棄**する。破棄後に journal の当該記事の `blocked_by_draft` を消して再開する。
+- **再開手順**: 数時間おいて `curl -s -o /dev/null -w "%{http_code}" https://note.com/api/v3/notes/n3a4efa70c02a` が 200 に戻ったことを確かめ、journal の `repair_failed` を下書きの無い記事だけ消してから修復ループを流す。1 回の連続処理を短く区切る。
 - **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。**CIは一度も完了していない (2026-10-11 確認)**: 10-01 (dispatch)・10-03・10-10 (schedule) の 3 回とも `timeout-minutes: 30` で cancelled (run 36909292510 / 37160611864 / 38095490764)。commit `00c5a44f0` の時間切れ対策後も再発しているので、286 記事の browser-verify を 30 分に収める分割か上限の見直しが要る。確認: `gh run list --workflow note-circulation-audit-weekly.yml --limit 3`。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
 - **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
 - **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
@@ -1682,6 +1759,7 @@ updated: 2026-10-06
 - **S2/S3/S4 の販売中 10 冊は 2026-09-19 に KDP で出版停止を実行済み** (オーナー指示 → `kdp-unpublish.mjs --all-withdrawn --commit`。本棚 read-back 10/10 が「下書き」、listing は `status: "withdrawn"` + `withdrawal.unpublishedAt/readBack/evidence`)。ストアの商品ページ消滅は数時間〜72 時間後に `curl` か本棚で確認する。
 - **残るオーナー工程 (2026-09-19 時点の `verify-publishable` 全冊の blocker と同じ)**: ①R2 暗号化保全 `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <版>` → `--audit --deep --record` (鍵のある環境。これが無いと `kdp-publish --update` の archive gate で止まる) ②Kindle Previewer で対象 EPUB (SHA) の表示確認 ③`kdp-publish --update --id K-S1-NN` ×12 (S1-01 は書名変更を含む・入稿提案 `.local/kindle-listing-revisions/`) → 承認後 `--commit` ④kdpreports.amazon.co.jp の冊別 export → `products:sales` ⑤ブログ側の同一誤り是正 (上記) と図データ再生成。
 - **ランキング再利用の境界**: S2-01旧版全章レビューでDID可住地分母、死亡率/件数、従属人口指数/就労者、都道府県率の合算、単純平均/全国値、相関からの因果・算術誤りを検出。商品版のランキング章は未レビューAI解説を外して同順位の全県表・決定的集計へ再構成した。公開サイト本文は未変更のため、原典再計算とサイトownerへの是正引渡しが必要。旧版レビューを新版PASSへ流用しない。
+- **note 販売記事 (教材展開) の現状 (2026-10-12、オーナーが「55本すべて公開」を指示)**: `docs/31_note記事原稿/product-sales/` の 55 本は 2026-07 の v1 から生成した旧原稿で使わない。現行は 14 パックから `note/cli.ts revision` で作るが、このMacには各パックの `_delivery` (`.local/coconala-products/P-NN/v2-20260906-r1`) が無く、`revision --revision 2026-10-12-r1 --all` は ENOENT で `readyToPublish:false`。14 パックとも `officeValidation: owner-pending`。進めるには (a) 納品物をWindowsから持ってくるか新しい版を生成し (b) オーナーがOffice実機で確認し (c) revision→レビュー→1日数本ずつ公開 (添付は1日10回まで)。
 - **停止条件**: 生成/形式検査だけで販売準備完了にしない。内部30%をAmazonの合法性・受理保証と説明しない。字数水増し・収録指標の黙った削減をしない。税務・銀行・本人認証・規約同意を代行せず、KDP Select独占を他チャネル展開と両立済みと扱わない。旧公開版・原稿を上書きしない。公開stateを機械品質の結果で書き換えない。
 - **完了条件**: 全offerが対象版の実検証・独立レビュー・必要な人間確認を満たすか、採用見送り理由と再開条件が明記される。販売を選んだofferは価格・納品物・権利・公開証跡が一致する。未完了が1件でもあれば「全商品販売可能」と報告しない。
 
@@ -3725,11 +3803,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - **owner**: note-manager
 - **背景**: 2026-09-20 に `patch-note-paid-landing.mjs` で d-kakei / d-geo 4 本 / 財政 ¥200 の無料部分を live で直接更新した。
-  変更内容は `catalog/data/paid-landing/<key>.json` (git) にあるが、private R2 (`stats47-private/note/…/draft.md`) の原稿は改稿前のまま。
-  d-kakei は `note-published-urls.json` に無く `publish-paid-note-private-r2.ts` の対象外 (index 漏れ)。
+  変更内容は `data/note/paid-landing/<key>.json` (git) にあるが、private R2 (`stats47-private/note/…/draft.md`) の原稿は改稿前のまま。
 - **trigger**: 有料記事の原稿を private R2 から復元して再公開する作業が発生したとき、または paid-landing spec を持つ記事が 10 本を超えたとき。
-- **次**: `publish-paid-note-private-r2.ts` に `--from-live <key>` (所有者 API の全文を draft.md 相当として保存) を足すか、
-  spec 適用後の本文を原稿として書き戻す。d-kakei を published index へ登録する。
+- **次**: `npm run note:article -- checkout <key>` で原稿を取り出し、spec 適用後の無料部分を draft.md に反映して `save` する
+  (所有者 API の全文から作る `--from-live` が要るなら note-article.mjs に足す)。d-kakei は 2026-10-13 に台帳と private R2 へ入った。
 - **完了条件**: spec を持つ全記事について private R2 の原稿 SHA が live 本文から再現できる。
 
 ### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
@@ -3901,6 +3978,18 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 体と code-reviewer それぞれについて、据え置くか戻すかを決めて記録している。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [NOTE-PAID-HISTORY-EXPOSURE-01] 公開リポジトリの git 履歴に残る有料 note 原稿の扱いを決める
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-13] [領域:商品]
+
+- **事実 (2026-10-13)**: `uruhayato373/stats47` は PUBLIC。旧方式では有料記事を公開 R2 に置けず、原稿を `docs/31_note記事原稿/` (git) に置いていたため、
+  有料本文が GitHub で読めた。対象は git に入っていた有料記事 (koumuin-claude-code 15 本・koumuin-estat-claude-code 11 本・d-kakei-category-dataset・
+  販売記事の下書き 62 本など。2026-10-13 時点の台帳で有料は計 151 本)。同日の変更で docs/31 は git から外れ、本文は private R2 へ移った (main へ反映すれば最新版からは消える)。
+  ただし過去のコミットには残る。例: `git show 8ce8358c41 --stat` (koumuin-claude-code の原稿追加)。
+- **選択肢**: (a) 履歴はそのまま (既に公開済みと割り切る) / (b) `git filter-repo` で `docs/31_note記事原稿/` を全履歴から消して force push
+  (全クローン・フォーク・CI キャッシュに影響し取り消せない。GitHub のキャッシュ削除依頼も要る) / (c) リポジトリを private にする (Cloudflare 連携・公開前提の仕組みへの影響を先に調べる)。
+- **禁止**: オーナーの決定なしに履歴を書き換えない・force push しない。
+- **完了条件**: 選んだ方針を実行し、(b)(c) なら GitHub 上で有料原稿が読めないことを確認する。(a) なら理由をこのカードの代わりに収益化戦略へ記録する。
 
 ### [AFF-LEAD-COPY-AB-01] 画像バナーの前に文脈をつなぐ一文を置くかを A/B で決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-08] [領域:アフィリエイト]
@@ -4111,6 +4200,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 各組で「どれを正本として残すか」を決める (後継記事があるものは後継を仕上げて
   公開し、旧stubを非公開化する方針が有力)。どの note 投稿を非公開/削除するかは
   公開済みコンテンツへの不可逆操作なのでオーナー判断が必要。
+- **追加の組 (2026-10-11、カバー作り直しの文言作成で判明)**: 最高気温 2024 は `a-maximum-temperature` を含め 4 本が同じ題名で公開中 (`recovered-n6f8a367906d1`・`n863f429319ca`・`nb2d65c42c28b`)。火災死傷者数 2022 の有料 2 本は、題名の比較が食い違う (`paid-n7290144784d4`「鳥取と神奈川で2.5倍」、`paid-nb17d039bc1aa`「鳥取と滋賀で約1.9倍」)。どちらかが誤りなら本文の是正も要る。
 - **完了条件**: 各組が1本に統合される、またはそれぞれ独立して残す理由が記録される。
 
 ### [TAG-FEATURE-NEED-01] タグ機能は本当に必要か決める

@@ -16,7 +16,7 @@
  *   .local/r2/note/<vertical>/<slug>/data-provenance.json   (staging = R2 レイアウトのミラー)
  *   /tmp/.../note-provenance-backfill.json                  (triage レポート)
  *
- * R2 反映は creds を持つ CI / セッションで push-note-provenance.mjs (別途) が行う。
+ * R2 への反映は記事の作業コピーへ置いて `npm run note:article -- save <key>` で行う (台帳を通す。旧 push-note-provenance.yml は 2026-10-13 に廃止。移行は NOTE-PROVENANCE-BACKFILL-MANIFEST-01)。
  *
  * Usage:
  *   node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]

@@ -17,7 +17,7 @@
  *
  * 出力: docs/31_note記事原稿/<vertical>/<NN-slug>/images/cover-1280x670.{svg,png}
  *   ※ docs/31 は ephemeral outbox。実行前に対象を復元する:
- *        bash .claude/scripts/note/restore-from-r2.sh <slug>
+ *        npm run note:article -- checkout <slug>
  *
  * Usage:
  *   node .claude/scripts/note/generate-koumuin-covers.cjs                 # 全 45 本
@@ -603,7 +603,7 @@ async function main() {
 
   const articles = collectArticles(filterSlug, filterVertical);
   if (!articles.length) {
-    console.error("対象記事なし (docs/31 に復元済みか確認: restore-from-r2.sh)");
+    console.error("対象記事なし (docs/31 に復元済みか確認: note:article checkout)");
     process.exit(1);
   }
 

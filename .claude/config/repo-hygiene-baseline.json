@@ -287,6 +287,11 @@
       "code": "LARGE_FILE",
       "file": "packages/gis/data/geoshape/prefecture.topojson",
       "message": "1917623 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "data/note/cover-assets.json",
+      "message": "1721164 bytes exceeds 1048576 bytes"
     }
   ]
 }

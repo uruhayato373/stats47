@@ -94,19 +94,18 @@ function runPromote(): number {
     console.log(
       `${apply ? "✅ promote" : "ℹ️ dry-run"}: ${e.key} (${article.access}) → docs/31_note記事原稿/product-sales/${e.key}/`,
     );
-    if (!apply) console.log("   --apply で docs/31 + note catalog data を書き込みます (公開はしません)。");
-    else console.log("   ⚠️ --apply では slug 単位で catalog data (product-sales.ts) を再生成しません。全件は `promote --all --apply` を使ってください。");
+    if (!apply) console.log("   --apply で docs/31 へ書き込みます (公開・台帳追加はしません)。");
     return 0;
   }
   if (flags.has("--all")) {
     const res = promoteAllNoteArticles(undefined, undefined, { dryRun: !apply });
     if (apply) {
       console.log(`✅ promote --all: ${res.entries.length} 記事を docs/31_note記事原稿/product-sales/ へ draft 展開`);
-      console.log(`   note catalog data 生成: ${res.catalogDataPath}`);
+      console.log(`   記事台帳へ追加するレコード: ${res.ledgerArticles.length} 件 (台帳 id note.articles)`);
       console.log("   status=draft・published:false。note.com 公開・R2 push はしていません (人間工程)。");
-      console.log("   → 次: catalog/index.ts に product-sales を配線 → validate-note-catalog.ts で確認。");
+      console.log("   → 次: 記事台帳へ追加 → note:article save で R2 へ保存 → validate-note-catalog.ts で確認。");
     } else {
-      console.log(`ℹ️ dry-run: ${res.entries.length} 記事を docs/31 + note catalog へ draft 展開する予定 (書き込みなし)。`);
+      console.log(`ℹ️ dry-run: ${res.entries.length} 記事を docs/31 へ draft 展開する予定 (書き込みなし)。`);
       console.log("   実行するには: promote --all --apply");
     }
     return 0;

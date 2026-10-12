@@ -29,7 +29,7 @@ outer: for (const d of baseDirs) {
 if (!articleDir) {
   console.error("ERROR: not found " + slug);
   console.error("  docs/31_note記事原稿 に記事がありません。先に復元してください:");
-  console.error("  bash .claude/scripts/note/restore-from-r2.sh " + slug);
+  console.error("  npm run note:article -- checkout " + slug);
   process.exit(1);
 }
 const raw = fs.readFileSync(path.join(articleDir, articleFile), "utf8");
@@ -46,9 +46,10 @@ const productAttachmentAfter = fmF("product_attachment_after");
 let productAttachment = null;
 if (productArchiveField) {
   const archivePath = path.resolve(projectRoot, productArchiveField);
-  const productRoot = path.join(projectRoot, ".local/geo-products") + path.sep;
-  if (!archivePath.startsWith(productRoot) || path.extname(archivePath).toLowerCase() !== ".zip") {
-    console.error("ERROR: product_archive must be a ZIP under .local/geo-products");
+  // Geo products and the data packs zipped for note sales (2026-10-12) are the only allowed attachment roots.
+  const productRoots = [".local/geo-products", ".local/note-product-archives"].map((dir) => path.join(projectRoot, dir) + path.sep);
+  if (!productRoots.some((root) => archivePath.startsWith(root)) || path.extname(archivePath).toLowerCase() !== ".zip") {
+    console.error("ERROR: product_archive must be a ZIP under .local/geo-products or .local/note-product-archives");
     process.exit(1);
   }
   if (!fs.existsSync(archivePath)) {
@@ -59,8 +60,10 @@ if (productArchiveField) {
     console.error("ERROR: product_archive exceeds note 50MB limit: " + productArchiveField);
     process.exit(1);
   }
-  if (!isPaid || !productAttachmentAfter) {
-    console.error("ERROR: product_archive requires is_paid=true and product_attachment_after");
+  // A free article may carry an attachment only when it is the declared free sample (2026-10-12, P-13).
+  const freeSample = fmF("free_sample") === "true";
+  if ((!isPaid && !freeSample) || !productAttachmentAfter) {
+    console.error("ERROR: product_archive requires (is_paid=true or free_sample=true) and product_attachment_after");
     process.exit(1);
   }
   productAttachment = {

@@ -44,7 +44,7 @@ const PPTX_HIGHLIGHT = 30;
  */
 export function resolveDatabook(product: ProductDefinition): Databook | null {
   const snap = loadPackSnapshotDatasets(product.id);
-  if (snap) return { title: snap.title, datasets: snap.datasets };
+  if (snap) return { title: snap.title, datasets: snap.datasets, excluded: snap.excluded };
   return DATABOOKS[product.id] ?? null;
 }
 
@@ -70,6 +70,14 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
       ? [`- 注記: pptx は先頭 ${PPTX_HIGHLIGHT} 指標のハイライト版です（全 ${n} 指標のデータ本体は xlsx / csv / pdf に収録）。`]
       : []),
     `- ライセンス: ${lic.name}`,
+    ...(databook.excluded && databook.excluded.length > 0
+      ? [
+          "",
+          `## 権利状態が要確認のため収録から除外した指標（${databook.excluded.length} 件）`,
+          "- metric config の license 欄が「[要確認]」（再配布・商用利用の許諾が確認できない）の指標は有料パックに入れません。",
+          ...databook.excluded.map((e) => `  - ${e.indicator}（${e.rankingKey}）: ${e.reason}`),
+        ]
+      : []),
     "",
     "## 自動で満たした項目（生成パイプライン）",
     "- [x] 実データ収録（架空サンプルではない）",
@@ -123,7 +131,7 @@ export async function buildDatabook(
   // 常時同梱: 出典 (全指標) / 許諾 / 販売文 / データ本体 (横並び csv) / サムネイル
   writeFileSync(join(outDir, "SOURCES.csv"), serializeSourcesCsv(datasets.map((d) => d.source)));
   files.push("SOURCES.csv");
-  writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId));
+  writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId, datasets.map((d) => d.source)));
   files.push("LICENSE-ja.txt");
   writeFileSync(join(outDir, "listing", "listing.md"), renderListing(product, datasets));
   files.push("listing/listing.md");

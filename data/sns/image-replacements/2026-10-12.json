@@ -1,0 +1,1364 @@
+{
+  "decision": "上位・下位5県チャートは新規生成から外す。予約分の画像を全47地域へ差し替え、公開済みは残す。",
+  "date": "2026-10-12",
+  "newDraftIds": [
+    1182,
+    1183,
+    1184
+  ],
+  "replacements": [
+    {
+      "id": 1011,
+      "platform": "threads",
+      "content_key": "solar-panel-housing-rate",
+      "scheduled_at": "2026-10-12T01:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/solar-panel-housing-rate/x/stills/solar-panel-housing-rate.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1011/image-1.png",
+          "sha256": "a4e23938a77cebb015ed7065370009aa35bd2975151964cfb88bf648fb265b3e",
+          "bytes": 243099,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/solar-panel-housing-rate/x/stills/solar-panel-housing-rate.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/solar-panel-housing-rate/all47.png",
+      "new_sha256": "35410c4fa379aece42ab1f4168bb32dddaea68ef24fdfc96362666821e4c7163",
+      "verified_at": "2026-10-12T01:09:42.542Z",
+      "external_count": 25
+    },
+    {
+      "id": 1013,
+      "platform": "threads",
+      "content_key": "nurse-annual-income",
+      "scheduled_at": "2026-10-13T01:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/nurse-annual-income/x/stills/nurse-annual-income.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1013/image-1.png",
+          "sha256": "de5c59150a2740f516fc941cf725c1c25a6a3332ac4601247d90f671f87f1a0e",
+          "bytes": 248820,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/nurse-annual-income/x/stills/nurse-annual-income.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/nurse-annual-income/all47.png",
+      "new_sha256": "f496189a7a64adb0523277e7dfdea7b28864e72d575970bf113d5adccdebcf3e",
+      "verified_at": "2026-10-12T01:12:11.785Z",
+      "external_count": 25
+    },
+    {
+      "id": 1015,
+      "platform": "threads",
+      "content_key": "drinking-out-consumption-expenditure",
+      "scheduled_at": "2026-10-14T01:30:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/drinking-out-consumption-expenditure/x/stills/drinking-out-consumption-expenditure.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1015/image-1.png",
+          "sha256": "0f4c67421d6504596fbf52048d261faa346aa97d8b0d1dcf31df59902868e7a0",
+          "bytes": 234613,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/drinking-out-consumption-expenditure/x/stills/drinking-out-consumption-expenditure.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/drinking-out-consumption-expenditure/all47.png",
+      "new_sha256": "0790818c31226ab159300b350f575e930ee5c3c50af865e4ff8b199fba92c564",
+      "verified_at": "2026-10-12T01:13:01.774Z",
+      "external_count": 25
+    },
+    {
+      "id": 1017,
+      "platform": "threads",
+      "content_key": "passport-issuance-count-per-thousand",
+      "scheduled_at": "2026-10-15T01:45:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/passport-issuance-count-per-thousand/x/stills/passport-issuance-count-per-thousand.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1017/image-1.png",
+          "sha256": "4c9aa573a5ef690180ddd904ad272e19b0e072f995cd3abf93037fa00b0ba81b",
+          "bytes": 232410,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/passport-issuance-count-per-thousand/x/stills/passport-issuance-count-per-thousand.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/passport-issuance-count-per-thousand/all47.png",
+      "new_sha256": "ea98a84a53e97a17df130c4590f71a1fda85ab791747ea627d9582c95bca83a4",
+      "verified_at": "2026-10-12T01:16:38.848Z",
+      "external_count": 25
+    },
+    {
+      "id": 1019,
+      "platform": "threads",
+      "content_key": "apple-consumption-quantity",
+      "scheduled_at": "2026-10-16T02:00:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/apple-consumption-quantity/x/stills/apple-consumption-quantity.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1019/image-1.png",
+          "sha256": "3f4a015bc2a3aca6a8bb69f4572271027d1834cd146b0f6eff950d07c1c50a46",
+          "bytes": 223342,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/apple-consumption-quantity/x/stills/apple-consumption-quantity.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/apple-consumption-quantity/all47.png",
+      "new_sha256": "0510bc227aa75fcdee7d19eb7ffd476c8ac4486fc9ffa679e12a0d2e02a5bf5e",
+      "verified_at": "2026-10-12T01:16:58.025Z",
+      "external_count": 25
+    },
+    {
+      "id": 1021,
+      "platform": "threads",
+      "content_key": "dental-clinic-count-per-100k",
+      "scheduled_at": "2026-10-17T01:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/dental-clinic-count-per-100k/x/stills/dental-clinic-count-per-100k.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1021/image-1.png",
+          "sha256": "91c44e2496337b926af4c156e9ed929b8f2d6e2b46c99a9b09e188e10f899bf1",
+          "bytes": 262034,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/dental-clinic-count-per-100k/x/stills/dental-clinic-count-per-100k.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/dental-clinic-count-per-100k/all47.png",
+      "new_sha256": "18985130df7e566ed69773b87cf2c1ec3d9a3c1aba27cfd065173f6fb84b0118",
+      "verified_at": "2026-10-12T01:17:18.231Z",
+      "external_count": 25
+    },
+    {
+      "id": 1023,
+      "platform": "threads",
+      "content_key": "residential-land-price-change-rate",
+      "scheduled_at": "2026-10-18T01:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/residential-land-price-change-rate/x/stills/residential-land-price-change-rate.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1023/image-1.png",
+          "sha256": "1712f23292bdb7056f3f823debb0305ed3ca3b03f6d8c0b785c764876dd22b55",
+          "bytes": 224052,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/residential-land-price-change-rate/x/stills/residential-land-price-change-rate.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/residential-land-price-change-rate/all47.png",
+      "new_sha256": "f37503b11e6250a167bf3d2961058ce52be884393da99bafe9c1ac1f1cbb940b",
+      "verified_at": "2026-10-12T01:17:50.605Z",
+      "external_count": 25
+    },
+    {
+      "id": 1025,
+      "platform": "threads",
+      "content_key": "travel-participation-rate-domestic",
+      "scheduled_at": "2026-10-19T01:30:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/travel-participation-rate-domestic/x/stills/travel-participation-rate-domestic.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1025/image-1.png",
+          "sha256": "024cecc9b18f403a5cd29d5dd6d6eea3d264075415562642ecdbdea3b0fe343e",
+          "bytes": 242019,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/travel-participation-rate-domestic/x/stills/travel-participation-rate-domestic.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/travel-participation-rate-domestic/all47.png",
+      "new_sha256": "fdd979c62b15f667836ae0885841e8d99ccf12c0b3fce6640eab302be6e18cfd",
+      "verified_at": "2026-10-12T01:18:35.591Z",
+      "external_count": 25
+    },
+    {
+      "id": 1027,
+      "platform": "threads",
+      "content_key": "post-office-count-per-100km2",
+      "scheduled_at": "2026-10-20T01:45:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/post-office-count-per-100km2/x/stills/post-office-count-per-100km2.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1027/image-1.png",
+          "sha256": "054c6a9a8b173e24260b7ddca154e93b215d8c9a4eeca9e5f19cc0cfc4b21937",
+          "bytes": 229354,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/post-office-count-per-100km2/x/stills/post-office-count-per-100km2.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/post-office-count-per-100km2/all47.png",
+      "new_sha256": "6d7f46f001e74bc59c6aed87e2cca651efc6bf35927a3cdbc6a0aa2c41be31e0",
+      "verified_at": "2026-10-12T01:19:40.206Z",
+      "external_count": 25
+    },
+    {
+      "id": 1029,
+      "platform": "threads",
+      "content_key": "average-age-of-first-marriage-wife",
+      "scheduled_at": "2026-10-21T02:00:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/average-age-of-first-marriage-wife/x/stills/average-age-of-first-marriage-wife.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/threads/1029/image-1.png",
+          "sha256": "98fb8b2cd2aa430851406544f17237efe1cb2cff3759eb5432d8b0d4504e2565",
+          "bytes": 241121,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/average-age-of-first-marriage-wife/x/stills/average-age-of-first-marriage-wife.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/average-age-of-first-marriage-wife/all47.png",
+      "new_sha256": "75e77632c9d608e24bcf16cb0c330b9fb8b5924740159078373d9759cf5d5fb6",
+      "verified_at": "2026-10-12T01:20:40.004Z",
+      "external_count": 25
+    },
+    {
+      "id": 948,
+      "platform": "x",
+      "content_key": "nurse-annual-income",
+      "scheduled_at": "2026-10-12T22:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/nurse-annual-income/x/stills/nurse-annual-income.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/948/image-1.png",
+          "sha256": "de5c59150a2740f516fc941cf725c1c25a6a3332ac4601247d90f671f87f1a0e",
+          "bytes": 248820,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/nurse-annual-income/x/stills/nurse-annual-income.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/nurse-annual-income/all47.png",
+      "new_sha256": "f496189a7a64adb0523277e7dfdea7b28864e72d575970bf113d5adccdebcf3e",
+      "verified_at": "2026-10-12T01:25:19.002Z",
+      "external_count": 76
+    },
+    {
+      "id": 949,
+      "platform": "x",
+      "content_key": "drinking-out-consumption-expenditure",
+      "scheduled_at": "2026-10-13T23:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/drinking-out-consumption-expenditure/x/stills/drinking-out-consumption-expenditure.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/949/image-1.png",
+          "sha256": "0f4c67421d6504596fbf52048d261faa346aa97d8b0d1dcf31df59902868e7a0",
+          "bytes": 234613,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/drinking-out-consumption-expenditure/x/stills/drinking-out-consumption-expenditure.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/drinking-out-consumption-expenditure/all47.png",
+      "new_sha256": "0790818c31226ab159300b350f575e930ee5c3c50af865e4ff8b199fba92c564",
+      "verified_at": "2026-10-12T01:27:17.709Z",
+      "external_count": 76
+    },
+    {
+      "id": 1031,
+      "platform": "threads",
+      "content_key": "private-auto-insurance-penetration-rate-vehicle",
+      "scheduled_at": "2026-10-22T01:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/private-auto-insurance-penetration-rate-vehicle/x/stills/private-auto-insurance-penetration-rate-vehicle.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/private-auto-insurance-penetration-rate-vehicle/all47.png",
+      "new_sha256": "68e16377b3a09ef63d8c1338056a5dd8f7680be5f67022d0c2d0b400102da4b7",
+      "verified_at": "2026-10-12T01:26:00.768Z",
+      "external_count": 25
+    },
+    {
+      "id": 1033,
+      "platform": "threads",
+      "content_key": "grilled-eel-consumption-expenditure",
+      "scheduled_at": "2026-10-23T01:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/grilled-eel-consumption-expenditure/x/stills/grilled-eel-consumption-expenditure.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/grilled-eel-consumption-expenditure/all47.png",
+      "new_sha256": "b376ffa3f528d7333111184a9c55e7716f6d81802466c82c2c86fafcda290334",
+      "verified_at": "2026-10-12T01:26:33.493Z",
+      "external_count": 25
+    },
+    {
+      "id": 1035,
+      "platform": "threads",
+      "content_key": "annual-precipitation",
+      "scheduled_at": "2026-10-24T01:30:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/annual-precipitation/x/stills/annual-precipitation.png",
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/annual-precipitation/all47.png",
+      "new_sha256": "48b9e9945ad18212b6b96bc31be47e84ca894cc7657ac4f0edeee80db8b78b38",
+      "verified_at": "2026-10-12T01:26:58.567Z",
+      "external_count": 25
+    },
+    {
+      "id": 950,
+      "platform": "x",
+      "content_key": "urban-park-area-per-person",
+      "scheduled_at": "2026-11-03T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/urban-park-area-per-person/x/stills/urban-park-area-per-person.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/950/image-1.png",
+          "sha256": "3a693e956d7be7410307d1848c3dccc732f09487ddfb200c7aa8f39dedea62d4",
+          "bytes": 230408,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/urban-park-area-per-person/x/stills/urban-park-area-per-person.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/urban-park-area-per-person/all47.png",
+      "new_sha256": "9d9394b7cc0068c90a81d869555e23c312b8f4ecd09963f34dd9b308867fde08",
+      "verified_at": "2026-10-12T01:43:08.030Z",
+      "external_count": 76
+    },
+    {
+      "id": 951,
+      "platform": "x",
+      "content_key": "passport-issuance-count-per-thousand",
+      "scheduled_at": "2026-10-14T22:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/passport-issuance-count-per-thousand/x/stills/passport-issuance-count-per-thousand.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/951/image-1.png",
+          "sha256": "4c9aa573a5ef690180ddd904ad272e19b0e072f995cd3abf93037fa00b0ba81b",
+          "bytes": 232410,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/passport-issuance-count-per-thousand/x/stills/passport-issuance-count-per-thousand.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/passport-issuance-count-per-thousand/all47.png",
+      "new_sha256": "ea98a84a53e97a17df130c4590f71a1fda85ab791747ea627d9582c95bca83a4",
+      "verified_at": "2026-10-12T01:43:23.801Z",
+      "external_count": 76
+    },
+    {
+      "id": 952,
+      "platform": "x",
+      "content_key": "apple-consumption-quantity",
+      "scheduled_at": "2026-10-15T22:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/apple-consumption-quantity/x/stills/apple-consumption-quantity.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/952/image-1.png",
+          "sha256": "3f4a015bc2a3aca6a8bb69f4572271027d1834cd146b0f6eff950d07c1c50a46",
+          "bytes": 223342,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/apple-consumption-quantity/x/stills/apple-consumption-quantity.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/apple-consumption-quantity/all47.png",
+      "new_sha256": "0510bc227aa75fcdee7d19eb7ffd476c8ac4486fc9ffa679e12a0d2e02a5bf5e",
+      "verified_at": "2026-10-12T01:43:38.781Z",
+      "external_count": 76
+    },
+    {
+      "id": 953,
+      "platform": "x",
+      "content_key": "single-person-household-ratio",
+      "scheduled_at": "2026-10-16T12:25:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/single-person-household-ratio/x/stills/single-person-household-ratio.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/953/image-1.png",
+          "sha256": "e6300e556d2f56afb6c6af2f7ee1f73da90ea53b031fcc460500f9c33d3eb01d",
+          "bytes": 239946,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/single-person-household-ratio/x/stills/single-person-household-ratio.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/single-person-household-ratio/all47.png",
+      "new_sha256": "3895a370df39bbd24df27930300fe514b9f2f63a483ae6eb4d47d661a76c544f",
+      "verified_at": "2026-10-12T01:43:53.738Z",
+      "external_count": 76
+    },
+    {
+      "id": 954,
+      "platform": "x",
+      "content_key": "dental-clinic-count-per-100k",
+      "scheduled_at": "2026-10-16T23:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/dental-clinic-count-per-100k/x/stills/dental-clinic-count-per-100k.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/954/image-1.png",
+          "sha256": "91c44e2496337b926af4c156e9ed929b8f2d6e2b46c99a9b09e188e10f899bf1",
+          "bytes": 262034,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/dental-clinic-count-per-100k/x/stills/dental-clinic-count-per-100k.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/dental-clinic-count-per-100k/all47.png",
+      "new_sha256": "18985130df7e566ed69773b87cf2c1ec3d9a3c1aba27cfd065173f6fb84b0118",
+      "verified_at": "2026-10-12T01:44:07.860Z",
+      "external_count": 76
+    },
+    {
+      "id": 955,
+      "platform": "x",
+      "content_key": "residential-land-price-change-rate",
+      "scheduled_at": "2026-10-17T22:20:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/residential-land-price-change-rate/x/stills/residential-land-price-change-rate.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/955/image-1.png",
+          "sha256": "1712f23292bdb7056f3f823debb0305ed3ca3b03f6d8c0b785c764876dd22b55",
+          "bytes": 224052,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/residential-land-price-change-rate/x/stills/residential-land-price-change-rate.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/residential-land-price-change-rate/all47.png",
+      "new_sha256": "f37503b11e6250a167bf3d2961058ce52be884393da99bafe9c1ac1f1cbb940b",
+      "verified_at": "2026-10-12T01:44:21.954Z",
+      "external_count": 76
+    },
+    {
+      "id": 956,
+      "platform": "x",
+      "content_key": "black-tea-consumption-quantity",
+      "scheduled_at": "2026-10-18T11:30:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/black-tea-consumption-quantity/x/stills/black-tea-consumption-quantity.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/956/image-1.png",
+          "sha256": "e4556d5fe3928dfc0e70498b7e716cd92f1619bbe6ea42820bae9d603972c0a9",
+          "bytes": 216178,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/black-tea-consumption-quantity/x/stills/black-tea-consumption-quantity.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/black-tea-consumption-quantity/all47.png",
+      "new_sha256": "16905e293a2985884c5b6b5c61f20de8201b00731d26777ee311607396dc8075",
+      "verified_at": "2026-10-12T01:45:39.286Z",
+      "external_count": 76
+    },
+    {
+      "id": 957,
+      "platform": "x",
+      "content_key": "travel-participation-rate-domestic",
+      "scheduled_at": "2026-10-18T23:35:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/travel-participation-rate-domestic/x/stills/travel-participation-rate-domestic.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/957/image-1.png",
+          "sha256": "024cecc9b18f403a5cd29d5dd6d6eea3d264075415562642ecdbdea3b0fe343e",
+          "bytes": 242019,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/travel-participation-rate-domestic/x/stills/travel-participation-rate-domestic.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/travel-participation-rate-domestic/all47.png",
+      "new_sha256": "fdd979c62b15f667836ae0885841e8d99ccf12c0b3fce6640eab302be6e18cfd",
+      "verified_at": "2026-10-12T01:45:52.884Z",
+      "external_count": 76
+    },
+    {
+      "id": 958,
+      "platform": "x",
+      "content_key": "post-office-count-per-100km2",
+      "scheduled_at": "2026-10-19T22:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/post-office-count-per-100km2/x/stills/post-office-count-per-100km2.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/958/image-1.png",
+          "sha256": "054c6a9a8b173e24260b7ddca154e93b215d8c9a4eeca9e5f19cc0cfc4b21937",
+          "bytes": 229354,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/post-office-count-per-100km2/x/stills/post-office-count-per-100km2.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/post-office-count-per-100km2/all47.png",
+      "new_sha256": "6d7f46f001e74bc59c6aed87e2cca651efc6bf35927a3cdbc6a0aa2c41be31e0",
+      "verified_at": "2026-10-12T01:46:06.112Z",
+      "external_count": 76
+    },
+    {
+      "id": 959,
+      "platform": "x",
+      "content_key": "public-bath-consumption-expenditure",
+      "scheduled_at": "2026-10-20T12:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/public-bath-consumption-expenditure/x/stills/public-bath-consumption-expenditure.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/959/image-1.png",
+          "sha256": "f0b6b3cd7513e3f7a584b8d0a307103498798785aeca052a818f5c8a2ac92e0e",
+          "bytes": 231529,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/public-bath-consumption-expenditure/x/stills/public-bath-consumption-expenditure.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/public-bath-consumption-expenditure/all47.png",
+      "new_sha256": "ae9aacfa4eaa9eb33fbdbb780a166a9ad462deb7f60ba779bca64fe4e6b2db1b",
+      "verified_at": "2026-10-12T01:46:19.990Z",
+      "external_count": 76
+    },
+    {
+      "id": 960,
+      "platform": "x",
+      "content_key": "average-age-of-first-marriage-wife",
+      "scheduled_at": "2026-10-20T23:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/average-age-of-first-marriage-wife/x/stills/average-age-of-first-marriage-wife.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/960/image-1.png",
+          "sha256": "98fb8b2cd2aa430851406544f17237efe1cb2cff3759eb5432d8b0d4504e2565",
+          "bytes": 241121,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/average-age-of-first-marriage-wife/x/stills/average-age-of-first-marriage-wife.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/average-age-of-first-marriage-wife/all47.png",
+      "new_sha256": "75e77632c9d608e24bcf16cb0c330b9fb8b5924740159078373d9759cf5d5fb6",
+      "verified_at": "2026-10-12T01:46:33.629Z",
+      "external_count": 76
+    },
+    {
+      "id": 961,
+      "platform": "x",
+      "content_key": "private-auto-insurance-penetration-rate-vehicle",
+      "scheduled_at": "2026-10-21T22:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/private-auto-insurance-penetration-rate-vehicle/x/stills/private-auto-insurance-penetration-rate-vehicle.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/961/image-1.png",
+          "sha256": "4ec4a6ef85f86faf339afdcdf5344d8369c34068f946da250d588cc562fa580f",
+          "bytes": 241590,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/private-auto-insurance-penetration-rate-vehicle/x/stills/private-auto-insurance-penetration-rate-vehicle.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/private-auto-insurance-penetration-rate-vehicle/all47.png",
+      "new_sha256": "68e16377b3a09ef63d8c1338056a5dd8f7680be5f67022d0c2d0b400102da4b7",
+      "verified_at": "2026-10-12T01:46:47.744Z",
+      "external_count": 76
+    },
+    {
+      "id": 962,
+      "platform": "x",
+      "content_key": "grilled-eel-consumption-expenditure",
+      "scheduled_at": "2026-10-22T22:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/grilled-eel-consumption-expenditure/x/stills/grilled-eel-consumption-expenditure.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/962/image-1.png",
+          "sha256": "7fae39c8c2409ff339649331e934fd88b33853e50915ac29fd02783a4894fc30",
+          "bytes": 235635,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/grilled-eel-consumption-expenditure/x/stills/grilled-eel-consumption-expenditure.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/grilled-eel-consumption-expenditure/all47.png",
+      "new_sha256": "b376ffa3f528d7333111184a9c55e7716f6d81802466c82c2c86fafcda290334",
+      "verified_at": "2026-10-12T01:47:00.994Z",
+      "external_count": 76
+    },
+    {
+      "id": 963,
+      "platform": "x",
+      "content_key": "certified-childcare-center-count-per-100k-0-5",
+      "scheduled_at": "2026-10-23T12:25:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/certified-childcare-center-count-per-100k-0-5/x/stills/certified-childcare-center-count-per-100k-0-5.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/963/image-1.png",
+          "sha256": "56f4bb2ff78f0b1f6f538df414dc62b255fb5065545c55a012532ef783db0858",
+          "bytes": 231497,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/certified-childcare-center-count-per-100k-0-5/x/stills/certified-childcare-center-count-per-100k-0-5.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/certified-childcare-center-count-per-100k-0-5/all47.png",
+      "new_sha256": "9f31db7890b4c42affe48959ab69aa4a11fdb667e140822e3bd7e2816691d7ea",
+      "verified_at": "2026-10-12T01:47:14.353Z",
+      "external_count": 76
+    },
+    {
+      "id": 964,
+      "platform": "x",
+      "content_key": "annual-precipitation",
+      "scheduled_at": "2026-10-23T23:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/annual-precipitation/x/stills/annual-precipitation.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/964/image-1.png",
+          "sha256": "234e919e8b3ee94e4dfc25574af22639b56562977ab6cc4a879655a634c49166",
+          "bytes": 233811,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/annual-precipitation/x/stills/annual-precipitation.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/annual-precipitation/all47.png",
+      "new_sha256": "48b9e9945ad18212b6b96bc31be47e84ca894cc7657ac4f0edeee80db8b78b38",
+      "verified_at": "2026-10-12T01:47:27.326Z",
+      "external_count": 76
+    },
+    {
+      "id": 965,
+      "platform": "x",
+      "content_key": "care-worker-annual-income",
+      "scheduled_at": "2026-10-24T22:20:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/care-worker-annual-income/x/stills/care-worker-annual-income.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/965/image-1.png",
+          "sha256": "ae5898b98c80c6217ec9393daddebda6ad6bc6a41e54f8ff9601694951a7bbbd",
+          "bytes": 256990,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/care-worker-annual-income/x/stills/care-worker-annual-income.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/care-worker-annual-income/all47.png",
+      "new_sha256": "9ad3086488e6152e652238c8f23fb37c7c03ad85b389d3f100c15fedfaf95238",
+      "verified_at": "2026-10-12T01:47:40.388Z",
+      "external_count": 76
+    },
+    {
+      "id": 966,
+      "platform": "x",
+      "content_key": "public-phone-count-per-1000",
+      "scheduled_at": "2026-10-25T11:30:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/public-phone-count-per-1000/x/stills/public-phone-count-per-1000.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/966/image-1.png",
+          "sha256": "909046835a478024cf0c62fa66d665e059cf70169d0601644191510b13d33542",
+          "bytes": 227029,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/public-phone-count-per-1000/x/stills/public-phone-count-per-1000.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/public-phone-count-per-1000/all47.png",
+      "new_sha256": "6884b596a66fbd7391e37deb481ef2f701d9e788d46db4a225c295c9369bf208",
+      "verified_at": "2026-10-12T01:47:53.586Z",
+      "external_count": 76
+    },
+    {
+      "id": 967,
+      "platform": "x",
+      "content_key": "pet-food-consumption-expenditure",
+      "scheduled_at": "2026-10-25T23:35:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/pet-food-consumption-expenditure/x/stills/pet-food-consumption-expenditure.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/967/image-1.png",
+          "sha256": "61a6a291e2d1fcfd8d4cc49147c26949ade9e9ca777ce033e43b54db4cfe50e9",
+          "bytes": 231418,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/pet-food-consumption-expenditure/x/stills/pet-food-consumption-expenditure.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/pet-food-consumption-expenditure/all47.png",
+      "new_sha256": "dbe8e2a5eedbafbaf333c5899ec3c733f039aabd6302ccbaa0333d61ddf99ccc",
+      "verified_at": "2026-10-12T01:48:07.187Z",
+      "external_count": 76
+    },
+    {
+      "id": 968,
+      "platform": "x",
+      "content_key": "final-energy-consumption-per-capita",
+      "scheduled_at": "2026-10-26T22:50:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/final-energy-consumption-per-capita/x/stills/final-energy-consumption-per-capita.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/968/image-1.png",
+          "sha256": "d753adeca9156957020ad60ad753c78753100187c52b3899f7977a5334cc20f6",
+          "bytes": 248909,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/final-energy-consumption-per-capita/x/stills/final-energy-consumption-per-capita.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/final-energy-consumption-per-capita/all47.png",
+      "new_sha256": "72d73b68b851b6fd2134dc6f5768986f02be0d1ee9c3f473410f986f65449ec4",
+      "verified_at": "2026-10-12T01:48:20.337Z",
+      "external_count": 76
+    },
+    {
+      "id": 969,
+      "platform": "x",
+      "content_key": "voter-turnout-council-proportional",
+      "scheduled_at": "2026-10-27T12:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/voter-turnout-council-proportional/x/stills/voter-turnout-council-proportional.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/969/image-1.png",
+          "sha256": "607961042aaea08c78007e57a80e082e9e655e121c10bb46c4a6a9c67a50deb6",
+          "bytes": 257083,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/voter-turnout-council-proportional/x/stills/voter-turnout-council-proportional.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/voter-turnout-council-proportional/all47.png",
+      "new_sha256": "7ecf4c6517918f530f74f53503b0028392bcf5a27862a21dc60a209c84a8a45a",
+      "verified_at": "2026-10-12T01:48:34.456Z",
+      "external_count": 76
+    },
+    {
+      "id": 970,
+      "platform": "x",
+      "content_key": "cleaning-shop-count-per-100k",
+      "scheduled_at": "2026-10-27T23:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/cleaning-shop-count-per-100k/x/stills/cleaning-shop-count-per-100k.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/970/image-1.png",
+          "sha256": "b59b49802ec2c10f84e3250d24174657150a1503f4647620ff5e13bf198e2a02",
+          "bytes": 227258,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/cleaning-shop-count-per-100k/x/stills/cleaning-shop-count-per-100k.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/cleaning-shop-count-per-100k/all47.png",
+      "new_sha256": "6de7ced55bfee04253dd29d719f71828c5ad5badf9091b4947832fdafdbb2473",
+      "verified_at": "2026-10-12T01:48:47.997Z",
+      "external_count": 76
+    },
+    {
+      "id": 971,
+      "platform": "x",
+      "content_key": "life-expectancy-0-female",
+      "scheduled_at": "2026-10-28T22:05:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/life-expectancy-0-female/x/stills/life-expectancy-0-female.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/971/image-1.png",
+          "sha256": "af88bfcdf1f8a79062d6c554aee498e754e0d8ae7ffb620ab23b99de12840fa7",
+          "bytes": 234976,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/life-expectancy-0-female/x/stills/life-expectancy-0-female.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/life-expectancy-0-female/all47.png",
+      "new_sha256": "25769eda6e09bf1cb6049c1344829f0aae04e0a6acfd95075090cd3f41a293f5",
+      "verified_at": "2026-10-12T01:49:01.131Z",
+      "external_count": 76
+    },
+    {
+      "id": 972,
+      "platform": "x",
+      "content_key": "mandarin-consumption-quantity",
+      "scheduled_at": "2026-10-29T11:10:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/mandarin-consumption-quantity/x/stills/mandarin-consumption-quantity.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/972/image-1.png",
+          "sha256": "54fb562e68597e19b967d486fc7964f9e4efe5d4ebf98d0ba922b973233f77d8",
+          "bytes": 229724,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/mandarin-consumption-quantity/x/stills/mandarin-consumption-quantity.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/mandarin-consumption-quantity/all47.png",
+      "new_sha256": "680a5e03ef81187ade9faf87166a0851d354b84ffeddd5d41442fc58367d50fa",
+      "verified_at": "2026-10-12T01:49:14.735Z",
+      "external_count": 76
+    },
+    {
+      "id": 973,
+      "platform": "x",
+      "content_key": "manufacturing-shipment-amount-per-employee",
+      "scheduled_at": "2026-10-29T22:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/manufacturing-shipment-amount-per-employee/x/stills/manufacturing-shipment-amount-per-employee.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/973/image-1.png",
+          "sha256": "4381e79dee7ab7322326fc5455b305941722c0a3e83b1f3e9333c411f2689858",
+          "bytes": 246352,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/manufacturing-shipment-amount-per-employee/x/stills/manufacturing-shipment-amount-per-employee.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/manufacturing-shipment-amount-per-employee/all47.png",
+      "new_sha256": "ab548646cdc03e40986bdf1f75525c317db5a01b98d153b93f334d0b58ad637b",
+      "verified_at": "2026-10-12T01:49:28.359Z",
+      "external_count": 76
+    },
+    {
+      "id": 974,
+      "platform": "x",
+      "content_key": "sports-participation-rate-skiing",
+      "scheduled_at": "2026-10-30T23:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/sports-participation-rate-skiing/x/stills/sports-participation-rate-skiing.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/974/image-1.png",
+          "sha256": "d01e1d812e0b9823a270a5ac645b894357a38711d8442de1b38c55e77a0a6b45",
+          "bytes": 237498,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/sports-participation-rate-skiing/x/stills/sports-participation-rate-skiing.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/sports-participation-rate-skiing/all47.png",
+      "new_sha256": "9d0a67b5b0d65dbf174a0921905d5b89fa7f52374d858ade0a1e4ef5083d6c05",
+      "verified_at": "2026-10-12T01:49:41.706Z",
+      "external_count": 76
+    },
+    {
+      "id": 1062,
+      "platform": "x",
+      "content_key": "spouse-income",
+      "scheduled_at": "2026-10-31T22:40:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/spouse-income/x/stills/spouse-income.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1062/image-1.png",
+          "sha256": "bfc382243daf47a09adf22098039150bc01682ebe751d1aaed9733e8dfab3151",
+          "bytes": 246533,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/spouse-income/x/stills/spouse-income.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/spouse-income/all47.png",
+      "new_sha256": "a845f0a579786c8268cb20995543e885816a7da13338fee3e5540dc49dee8a5e",
+      "verified_at": "2026-10-12T01:49:54.880Z",
+      "external_count": 76
+    },
+    {
+      "id": 1063,
+      "platform": "x",
+      "content_key": "roadside-station-count",
+      "scheduled_at": "2026-11-01T12:25:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/roadside-station-count/x/stills/roadside-station-count.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1063/image-1.png",
+          "sha256": "fbd14e23210ae22bd0acd4f462eb0c21accd26e963846fe243a7f9354ad87ac0",
+          "bytes": 242846,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/roadside-station-count/x/stills/roadside-station-count.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/roadside-station-count/all47.png",
+      "new_sha256": "fe81fb442e1265488db8d287e1babebe667e620b15a9fda052e8ee1ee998cc57",
+      "verified_at": "2026-10-12T01:50:08.084Z",
+      "external_count": 76
+    },
+    {
+      "id": 1064,
+      "platform": "x",
+      "content_key": "other-mushroom-consumption-quantity",
+      "scheduled_at": "2026-11-01T22:20:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/other-mushroom-consumption-quantity/x/stills/other-mushroom-consumption-quantity.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1064/image-1.png",
+          "sha256": "2d0a2711b4ac54f3adacae8b3085f0dacbe8eb56a67820a4444a8bb73f64b504",
+          "bytes": 227520,
+          "mime": "image/png",
+          "width": 3840,
+          "height": 1616,
+          "source": ".local/r2/sns/ranking/other-mushroom-consumption-quantity/x/stills/other-mushroom-consumption-quantity.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/other-mushroom-consumption-quantity/all47.png",
+      "new_sha256": "331b08c96ee5d6c6be4ec5d0e4689c58b851057902d010e483ad3bcd07634a61",
+      "verified_at": "2026-10-12T01:50:21.994Z",
+      "external_count": 76
+    },
+    {
+      "id": 1142,
+      "platform": "x",
+      "content_key": "avg-propensity-to-consume-worker-households",
+      "scheduled_at": "2026-11-08T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/avg-propensity-to-consume-worker-households/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1142/image-1.png",
+          "sha256": "90c353bf0c061e3ab211c7b03941ab1c985265dfd11b7c18afdd755eb26ea6a7",
+          "bytes": 91872,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/avg-propensity-to-consume-worker-households/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/avg-propensity-to-consume-worker-households/all47.png",
+      "new_sha256": "65d553398e068ec62cfe2ebd96586234b1aa58ec4788820ab42a9d648be6dd4f",
+      "verified_at": "2026-10-12T01:50:35.056Z",
+      "external_count": 76
+    },
+    {
+      "id": 1144,
+      "platform": "x",
+      "content_key": "consumption-expenditure-multi-person-households-per-month",
+      "scheduled_at": "2026-11-02T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/consumption-expenditure-multi-person-households-per-month/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1144/image-1.png",
+          "sha256": "d0d7cdf08807a6a203808d97cd5679cc8f5bd5cf8bec7b43ecdd7cc14437ab3c",
+          "bytes": 99087,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/consumption-expenditure-multi-person-households-per-month/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/consumption-expenditure-multi-person-households-per-month/all47.png",
+      "new_sha256": "4b9d836b98fd389fee4f495c2887e7c65b33abdaa4256b3a9494ed2b565bb6d4",
+      "verified_at": "2026-10-12T01:50:48.675Z",
+      "external_count": 76
+    },
+    {
+      "id": 1146,
+      "platform": "x",
+      "content_key": "convenience-store-sales",
+      "scheduled_at": "2026-11-05T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/convenience-store-sales/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1146/image-1.png",
+          "sha256": "d7214d80855a66c6ebe2dc947142f1e04c5c885f24b419b90c5136df23801c70",
+          "bytes": 99243,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/convenience-store-sales/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/convenience-store-sales/all47.png",
+      "new_sha256": "08c42fdefd4b00283c7e10f3bcefd915a19b08fbfc3cb300fbdfda860b893987",
+      "verified_at": "2026-10-12T01:51:02.540Z",
+      "external_count": 76
+    },
+    {
+      "id": 1148,
+      "platform": "x",
+      "content_key": "current-liabilities-balance-multi-person-households-per-household",
+      "scheduled_at": "2026-11-10T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/current-liabilities-balance-multi-person-households-per-household/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1148/image-1.png",
+          "sha256": "c81e2b486f2e9cf46135466651a6dc347a0174084a64f6b580ad74110215564e",
+          "bytes": 95204,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/current-liabilities-balance-multi-person-households-per-household/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/current-liabilities-balance-multi-person-households-per-household/all47.png",
+      "new_sha256": "82d13984f79c2ab8adfda998343017722d0aa65041f0c436f3f6e450689007d8",
+      "verified_at": "2026-10-12T01:51:16.804Z",
+      "external_count": 76
+    },
+    {
+      "id": 1150,
+      "platform": "x",
+      "content_key": "day-time-population",
+      "scheduled_at": "2026-11-11T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/day-time-population/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1150/image-1.png",
+          "sha256": "dc9e2cfbd07e76956296fb1f48d38d0ac3f66a70306f9cf39ec66b4e23058457",
+          "bytes": 89502,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/day-time-population/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/day-time-population/all47.png",
+      "new_sha256": "e0c0c98b58517da1c7a610d745d3c495e2426620759a2220b93c4124665c9d1a",
+      "verified_at": "2026-10-12T01:51:31.306Z",
+      "external_count": 76
+    },
+    {
+      "id": 1155,
+      "platform": "x",
+      "content_key": "general-households",
+      "scheduled_at": "2026-11-12T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/general-households/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1155/image-1.png",
+          "sha256": "f048281bd687b730fafc765c135820f556fa9035d5b78b98a85d89399f52184c",
+          "bytes": 84869,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/general-households/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/general-households/all47.png",
+      "new_sha256": "8b852ad318b628065bc6abd5945023e89627f8ac8d36e3b8e10ae18a8f867eb5",
+      "verified_at": "2026-10-12T01:51:45.798Z",
+      "external_count": 76
+    },
+    {
+      "id": 1158,
+      "platform": "x",
+      "content_key": "late-elderly-medical-expense-per-insured",
+      "scheduled_at": "2026-11-04T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/late-elderly-medical-expense-per-insured/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1158/image-1.png",
+          "sha256": "577f1c8f5cac5c270b032ae873b006d82bd4390010a4652d43854cbf8c8ab5f0",
+          "bytes": 101727,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/late-elderly-medical-expense-per-insured/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/late-elderly-medical-expense-per-insured/all47.png",
+      "new_sha256": "e7b0b0b2a8244ba68c6f14af75fcfa8283b85ec9442f7c68db639a807c8c2d74",
+      "verified_at": "2026-10-12T01:52:00.035Z",
+      "external_count": 76
+    },
+    {
+      "id": 1162,
+      "platform": "x",
+      "content_key": "number-of-establishments-manufacturing",
+      "scheduled_at": "2026-11-06T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/number-of-establishments-manufacturing/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1162/image-1.png",
+          "sha256": "5f26cd614cd5e1d66294c9fa8e5a647c4e402f82da0f5d62067151492847041f",
+          "bytes": 93771,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/number-of-establishments-manufacturing/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/number-of-establishments-manufacturing/all47.png",
+      "new_sha256": "f8d542537e7acc978a37d50f08619c661b9643d3c0d62d3d5f9c1ad2f8a7a70b",
+      "verified_at": "2026-10-12T01:52:14.262Z",
+      "external_count": 76
+    },
+    {
+      "id": 1166,
+      "platform": "x",
+      "content_key": "railway-station-count",
+      "scheduled_at": "2026-11-03T03:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/railway-station-count/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1166/image-1.png",
+          "sha256": "c616b4dd61288a97ed7387d749e46235f579d03f3154fa13a0f100a687e92300",
+          "bytes": 87311,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/railway-station-count/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/railway-station-count/all47.png",
+      "new_sha256": "5c192c257a30c13146f63e3ced8df1e5d549db02c0287c0fa84e357e9c1b35fe",
+      "verified_at": "2026-10-12T01:53:13.100Z",
+      "external_count": 76
+    },
+    {
+      "id": 1168,
+      "platform": "x",
+      "content_key": "road-total-length",
+      "scheduled_at": "2026-11-09T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/road-total-length/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1168/image-1.png",
+          "sha256": "eecc824294f546d4de670f1e5c63be69849e257b25d4d401be8126eaf3066ae9",
+          "bytes": 99130,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/road-total-length/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/road-total-length/all47.png",
+      "new_sha256": "2a680229db7ef4ee6d8689f2a898eb1904838cf477cd0e799108cc0e456e19a4",
+      "verified_at": "2026-10-12T01:53:28.071Z",
+      "external_count": 76
+    },
+    {
+      "id": 1171,
+      "platform": "x",
+      "content_key": "vacant-housing-rate",
+      "scheduled_at": "2026-11-07T10:15:00.000Z",
+      "old_media_path": ".local/r2/sns/ranking/vacant-housing-rate/x/stills/chart-x-1200x630.png",
+      "old_assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1171/image-1.png",
+          "sha256": "6cdb427a03b975950cc46116de8624725877802420a4db713ab77ff944681ac5",
+          "bytes": 89652,
+          "mime": "image/png",
+          "width": 1200,
+          "height": 630,
+          "source": ".local/r2/sns/ranking/vacant-housing-rate/x/stills/chart-x-1200x630.png"
+        }
+      ],
+      "new_media_path": ".local/r2/sns/_replacements/2026-10-12/vacant-housing-rate/all47.png",
+      "new_sha256": "d0ea807371e1924c6f0b4f10f62e07aa2b4c74c2a08e1b7119ec647b9106b1b3",
+      "verified_at": "2026-10-12T01:53:42.497Z",
+      "external_count": 76
+    }
+  ],
+  "newInstagramDraftIds": [
+    1185,
+    1186,
+    1187
+  ],
+  "completed_at": "2026-10-12T01:54:28.547Z",
+  "summary": {
+    "scheduledXReplaced": 41,
+    "scheduledThreadsReplaced": 13,
+    "unscheduledDraftImagesUpdated": 11,
+    "newXDraftIds": [
+      1182,
+      1183,
+      1184
+    ],
+    "newInstagramDraftIds": [
+      1185,
+      1186,
+      1187
+    ],
+    "publishedPostsChanged": 0,
+    "scheduledCaptionOrDateChanges": 0
+  },
+  "verification": {
+    "nativeXCountBefore": 76,
+    "nativeXCountAfter": 76,
+    "nativeThreadsCountAtReplacement": 25,
+    "all47InputSets": 46,
+    "imageDimensions": "1080x1350",
+    "newCardTests": {
+      "passed": 20,
+      "failed": 0
+    },
+    "typeCheck": {
+      "packages": 25,
+      "scripts": 8,
+      "errors": 0
+    },
+    "docs": {
+      "errors": 0,
+      "warnings": 2
+    },
+    "archivedAssetsChecked": 77,
+    "archivedAssetsErrors": 0
+  }
+}

@@ -34,7 +34,7 @@ Office・データ商品の生成基盤は `.claude/rules/coconala-product-stand
 | metricメタ | `data/metrics/` | 商品の定義・単位・調査根拠 |
 | 観測値 | R2 `app/stats/` 等 | 図表・分析の原料 |
 | blog | R2 + article outbox | 無料需要、章素材、landing |
-| note | note catalog git TS + R2 | 無料・有料記事、マガジン候補 |
+| note | 記事台帳 `data/note/articles.json` + R2 (本文・画像) | 無料・有料記事、マガジン候補 |
 | SNS | posts.json + metrics snapshots | 無料需要テスト |
 | 地図・チャート | buzz-map / chart / Remotion | 表紙、図解、動画、教材 |
 | Office商品 | `packages/product-factory/` | PPTX/XLSX/PDF/CSV商品 |

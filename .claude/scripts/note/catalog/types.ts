@@ -1,14 +1,9 @@
 /**
- * note 記事カタログの型定義 (git TS SSOT)
+ * note 記事台帳の型定義。正本は data/note/articles.json と data/note/magazines.json (JSON Schema 付き)。
  *
- * note コーパス全体 (公開済み + ドラフト) の editorial メタを 1 箇所に束ねる SSOT。
- * 従来バラバラだった真実源 (R2 draft.md frontmatter / note-published-urls.json /
- * note-draft-index.json / docs/30 note戦略.md のシリーズ表 / マガジンフッタースクリプト) を
- * ここに統合する。
- *
- * 派生物 (手編集しない):
- *   - data/note/note-published-urls.json  ← generate-note-catalog.ts が生成
- *   - マガジン割当 / フッター注入の入力        ← (次段) downstream 移行で接続
+ * 派生物 (手編集しない。generate-note-catalog.ts が台帳から作る):
+ *   - data/note/note-published-urls.json
+ *   - data/note/note-draft-index.json
  *
  * 正典ルール: .claude/scripts/note/catalog/README.md
  */
@@ -33,6 +28,16 @@ export type NoteSeries =
   | "D"; // 深掘り分析
 
 export type NoteArticleStatus = "draft" | "published";
+
+/** r2-public = 無料記事を公開 R2 / r2-private = 有料記事を private R2 / note-only = 本文が note.com にしか無い */
+export type NoteBodyStore = "r2-public" | "r2-private" | "note-only";
+
+export interface NoteArticleBody {
+  store: NoteBodyStore;
+  /** private R2 の note-archive/manifests/<key>/<sha256>.json。null は未取り込み */
+  manifest: { sha256: string; files: number; bytes: number; savedAt: string } | null;
+  verifiedAt?: string;
+}
 
 export type PublishedLinkRepair =
   | {
@@ -79,15 +84,15 @@ export interface NoteArticle {
   profiled?: boolean;
   /** 無料記事を有料マガジン内でも一般公開するために保持すべき既存境界ID。 */
   publishedSeparator?: string;
-  /** R2 上の格納パス (draft.md / images はこの下) */
+  /** R2 上の格納パス (draft.md / images はこの下)。無料は公開 R2、有料は private R2 の同じパス */
   r2Path: string;
+  /** 本文の所在と、最後に保存したファイル一覧のマニフェスト (data/note/articles.json が正本) */
+  body: NoteArticleBody;
   /**
-   * R2 に記事本体 (draft.md / 画像) が実在するか。
-   * false = note.com 上にのみ存在する回収スタブ (recovered-* / paid-*)。r2Path は
-   * note ID から機械生成しただけで実体が無く 404 になる。省略時は true とみなす。
-   * 本文復元 (note.com → R2) 後に true へ更新する。
+   * 台帳には書かない派生値。body.manifest があり、R2 に本文を保存済みと確認できたときだけ true。
+   * false = 回収前の note-only か、まだ save していない記事。
    */
-  r2Body?: boolean;
+  readonly r2Body: boolean;
   /**
    * 送客先 stats47 パス (例: "/ranking/annual-sunshine-duration")。
    * ranking キーの実在を validate-note-catalog.ts が検証する。

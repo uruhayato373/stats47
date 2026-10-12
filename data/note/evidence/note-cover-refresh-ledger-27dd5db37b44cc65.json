@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-27dd5db37b44cc65",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "sunshine-solar-housing",
+      "sha256": "dd4206923c377b17e147d67d7e74f9734d891f802e87765aa8fa9efdfbd8a798"
+    }
+  ],
+  "startedAt": "2026-10-12T06:52:26.511Z",
+  "articles": [
+    {
+      "key": "sunshine-solar-housing",
+      "noteId": "n2fffce0e2320",
+      "action": "create",
+      "sourceSha256": "dd4206923c377b17e147d67d7e74f9734d891f802e87765aa8fa9efdfbd8a798",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "26d9b3c505f3cc34c9298900e9b3cf6e95b7fe27c79200ba55cfd0b0da74dd05",
+        "key": "50fe47b6c867d1a3c9f244d1c293ef879f7719e572790db4f4b5041cf81f2cc8",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "0dbc855969ab64872e5765503e4be5ce1d7563a892e999bcc6348fce2632fa71",
+        "body": "8056cfa3df206c3b1f37ba0c161e641371dc409b3b64b0d89f08bc5132e2a7ce",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "8b652b424baa98ca46605e64b7b6953cbdc06cf095a873810bfc3c95d93fd999",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "ddd152b23db3b78459ce783aa99c754f9607d34179e27ac1df1b9f70cd7d6e46",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T06:52:29.483Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323552395/rectangle_large_type_2_53b922153ce0e0bf052c4a944e01d5c4.png",
+      "uploadedAt": "2026-10-12T06:52:33.007Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "10138fde56cc7c7f3ae1ffd2c1eaac779121f12c958fcd048cc3f5be45c8b41c",
+        "meanPixelError": 0.5068528451492538
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323552395/rectangle_large_type_2_53b922153ce0e0bf052c4a944e01d5c4.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T06:52:33.306Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T06:52:33.306Z"
+}

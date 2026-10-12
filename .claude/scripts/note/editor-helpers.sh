@@ -10,7 +10,9 @@
 #       /tmp/note-data-<slug>.json を生成済みであること（build-body.cjs は process_article 内で呼ぶ）。
 # 詳細フロー・ハザードは .claude/skills/note/publish-note/references/editor-operations.md を参照。
 
-BU(){ browser-use --headed --profile "Profile 5" "$@"; }
+# NOTE_BU_CDP=http://127.0.0.1:<port> drives an already-running Chrome (e.g. the logged-in Playwright note profile)
+# instead of Profile 5, for hosts where Profile 5 cannot be read (macOS privacy protection, 2026-10-12).
+BU(){ if [ -n "${NOTE_BU_CDP:-}" ]; then browser-use --cdp-url "$NOTE_BU_CDP" "$@"; else browser-use --headed --profile "Profile 5" "$@"; fi; }
 
 # ---- 画像挿入: 本文中のアンカーテキストへ eval-scroll → 直後段落に画像を挿入 ----
 # 見出しでなくサブ見出し・コード行アンカーでも startsWith/includes で拾う。svg は呼び出し側で png に置換する。
@@ -21,7 +23,7 @@ ins_img(){
   # が含まれると decodeURIComponent が URIError で無言失敗し、anchor scroll failed になった。
   # 2026-09-15 実測: 教育dominant県で全国順位の値が24字境界に % を落とす県 (chiba/kyoto/
   # saitama/shimane/tokyo/toyama) で再現。node の encodeURIComponent で全文字を安全に符号化する。
-  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" "$H")
+  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" -- "$H")
   local R=$(BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t,hit=null;const target=decodeURIComponent('$ESC');while((t=w.nextNode())){if(t.textContent&&t.textContent.trim().startsWith(target)){hit=t;break;}}if(!hit){const w2=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);while((t=w2.nextNode())){if(t.textContent&&t.textContent.includes(target)){hit=t;break;}}}if(!hit)return 'not-found';(hit.parentElement||e).scrollIntoView({block:'center'});return 'scrolled';})();" 2>&1 | grep -oiE "scrolled|not-found|no-editor" | head -1)
   if [ "$R" != "scrolled" ]; then echo "  [WARN] anchor scroll failed ($R): $H"; return 1; fi
   sleep 1.2
@@ -68,7 +70,7 @@ ins_file(){
   if [ ! -f "$FILE" ]; then echo "  [FAIL] attachment missing: $FILE"; return 1; fi
   local BYTES=$(stat -f%z "$FILE" 2>/dev/null || stat -c%s "$FILE" 2>/dev/null)
   if [ "${BYTES:-0}" -gt 52428800 ]; then echo "  [FAIL] attachment exceeds note 50MB: $FILE"; return 1; fi
-  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" "$H")
+  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" -- "$H")
   local R=$(BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t,hit=null;const target=decodeURIComponent('$ESC');while((t=w.nextNode())){if(t.textContent&&t.textContent.trim().startsWith(target)){hit=t;break;}}if(!hit)return 'not-found';(hit.parentElement||e).scrollIntoView({block:'center'});return 'scrolled';})();" 2>&1 | grep -oiE "scrolled|not-found|no-editor" | head -1)
   if [ "$R" != "scrolled" ]; then echo "  [FAIL] attachment anchor scroll failed ($R): $H"; return 1; fi
   sleep 1.2
@@ -174,7 +176,7 @@ paid_setline_from_settings(){
   [ -n "$SET" ] || { echo "  [FAIL] 有料エリア設定 not found"; return 1; }
   BU click "$SET" >/dev/null 2>&1; sleep 2.5
   local HSTRIP=$(printf '%s' "$HEAD" | tr -d '\140')
-  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" "$HSTRIP")
+  local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" -- "$HSTRIP")
   # 同名の説明文ではなく、H1-H4見出しと完全一致する位置だけを対象にする。
   local CLICKED=$(BU eval "(function(){const norm=s=>(s||'').replace(/[\s　\140#]/g,'');const target=norm(decodeURIComponent('$ESC'));const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const hidx=all.findIndex(e=>/^H[1-4]$/.test(e.tagName)&&norm(e.textContent)===target);if(hidx<0)return 'heading-nf';for(let i=hidx;i>=0&&i>hidx-300;i--){const e=all[i];if(e.tagName==='BUTTON'&&(e.textContent||'').trim()==='ラインをこの場所に変更'){e.click();return 'clicked';}}return 'button-nf';})();" 2>&1)
   # heading-nf は本文に見出しが無いので即 FAIL。button-nf は「ラインが既にその見出しの直前にある」
@@ -207,19 +209,8 @@ do_update(){
   sleep 5
   BU state 2>&1 > /tmp/ps.txt
   if grep -qE "記事が公開されました" /tmp/ps.txt; then
-    SLUG="$SLUG" python3 - << 'PY'
-import json,os
-from datetime import date
-slug=os.environ['SLUG']
-p='data/note/note-published-urls.json'
-d=json.load(open(p))
-if slug in d['articles']:
-    d['articles'][slug]['updated_at']=date.today().isoformat()
-    json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
-    print('  [PUBLISHED] %s  updated_at recorded'%slug)
-else:
-    print('  [PUBLISHED] %s  (not in state map!)'%slug)
-PY
+    # 公開記録の正本は記事台帳 data/note/articles.json。派生インデックス (note-published-urls.json) へは書かない。
+    echo "  [PUBLISHED] $SLUG — 作業コピーを変えたなら npm run note:article -- save $SLUG で R2 へ保存する"
   else
     # WARN false negative: 「記事が公開されました」モーダルは timing で検出を外すことがあり、
     # 更新自体は成功している場合がある（2026-07-10 に #13/estat01/estat11 で発生）。
@@ -318,6 +309,11 @@ new_post_cover_title(){
   COVER_FILE=$(node /Users/minamidaisuke/stats47/.claude/scripts/note/materialize-cover.mjs "$SLUG") || { echo "  [FAIL] 台帳に確認済みのカバーがありません"; return 1; }
   BU open "https://editor.note.com/new" >/dev/null 2>&1; sleep 5
   BU state 2>&1 > /tmp/ns.txt
+  # The editor can take longer than 5 s to mount (2026-10-12: /new had redirected but the textbox was not yet there).
+  local WAIT=0
+  while ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt && [ "$WAIT" -lt 4 ]; do
+    sleep 4; WAIT=$((WAIT+1)); BU state 2>&1 > /tmp/ns.txt
+  done
   if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"; echo "  [FAIL] /new not loaded (login?)"; return 1; fi
   if [ -f "$COVER_FILE" ]; then
     local ADD=$(grep -oE '\[[0-9]+\]<button aria-label=画像を追加' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
@@ -332,8 +328,8 @@ new_post_cover_title(){
   fi
   BU state 2>&1 > /tmp/ns.txt
   local TITLE_ENCODED TITLE_LENGTH TV
-  TITLE_ENCODED=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]).replace(/'/g,'%27'))" "$TITLE")
-  TITLE_LENGTH=$(node -e "process.stdout.write(String([...process.argv[1]].length))" "$TITLE")
+  TITLE_ENCODED=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]).replace(/'/g,'%27'))" -- "$TITLE")
+  TITLE_LENGTH=$(node -e "process.stdout.write(String([...process.argv[1]].length))" -- "$TITLE")
   TV=$(BU eval "(function(){const t=document.querySelector('textarea[placeholder=記事タイトル]');if(!t)return 'not-found';const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;setter.call(t,decodeURIComponent('$TITLE_ENCODED'));t.dispatchEvent(new Event('input',{bubbles:true}));t.dispatchEvent(new Event('change',{bubbles:true}));t.dispatchEvent(new Event('blur',{bubbles:true}));return 'set:'+Array.from(t.value).length;})();" 2>&1)
   echo "$TV" | grep -q "set:$TITLE_LENGTH" || { echo "  [FAIL] title was not set exactly: $TV"; return 1; }
   sleep 1

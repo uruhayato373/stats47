@@ -15,34 +15,39 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - `/post-note-ranking` で生成した A シリーズ記事を投稿
 - 複数記事をバッチで一括予約投稿
 
-## 記事ディレクトリの運用ルール (2026-06-19 更新)
+## 記事ディレクトリの運用ルール (2026-10-13 更新)
 
 ### 未公開ドラフト
-`docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` で管理。git が SSOT。
+本文と画像の正本は R2 だけにある (無料記事は公開 R2、有料記事は private R2 の `note/<vertical>/<slug>/`)。
+所在とマニフェストの SHA は記事台帳 `data/note/articles.json` が持つ。
+`docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` は git に何も置かない作業場で、
+`npm run note:article -- checkout <slug>` で取り出し、`npm run note:article -- save <slug>` で R2 へ戻す。
+置き場と手順の正典は `.claude/scripts/note/catalog/README.md`。
 
 ### 画像 (PNG) の扱い
 カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `note:assets prepare` →
 `generate-cover-refresh.ts` → `note:assets review` で確認済みのremote候補を用意してから公開する。
 `editor-helpers.sh` は `materialize-cover.mjs <articleKey>` でSHA検証済みの採用版を一時領域へ復元し、アップロード後に削除する。
-公開後はTSカタログへURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
+公開後は記事台帳 `data/note/articles.json` へURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
 以下のPNG再生成は本文画像の準備であり、カバー採用の代用にしない。正典は `.claude/rules/note-image-assets.md`。
-SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員シリーズ)。clone 直後や公開・更新の前に PNG が無ければ
+SVG から作れる PNG は作業コピーで作り直してよい (`note:article save` で保存すると R2 の正本になる)。checkout 直後や公開・更新の前に PNG が無ければ
 `npm run note:images:regen -- --slug <slug>` で復元する。ランキング記事 (a-<rankingKey>) の 4 枚は
 `node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` で `chart-data.json` から作り直す。契約と機械検査は `.claude/rules/note-image-assets.md`。
 
 ### 公開済み記事
-**公開後は R2 (`note/<vertical>/<slug>/`) に同期し、docs/31 から削除する**（ローカル容量最適化）。
+**公開後も本文の正本は R2 (`note/<vertical>/<slug>/`) に置き、作業コピーは `note:article save` が消す。**
 
-- **同期トリガー**: note.com 公開後に R2 `draft.md` の frontmatter を更新（下記「Phase 8 後」手順）→ develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
-- **公開状態の真実源**: **R2 `draft.md` の frontmatter**（`note_url` フィールド）。`note-published-urls.json` は `build-note-published-index.mjs` が再構築する派生インデックス
-- **更新 (update モード) の前に復元が必要**:
+- **保存**: note.com 公開後、作業コピーに変更があれば `npm run note:article -- save <slug>` で R2 へ保存する (読み戻した SHA を照合し、台帳の `body.manifest` を更新してから作業コピーを消す)
+- **公開状態の真実源**: **記事台帳 `data/note/articles.json`** の `status` / `noteUrl` / `publishedAt` (下記「Phase 8 後」手順)。`note-published-urls.json` と `note-draft-index.json` は `generate-note-catalog.ts --apply` が台帳から作る派生インデックスで、手編集しない
+- **更新 (update モード) の前に取り出しが必要**:
   ```bash
-  bash .claude/scripts/note/restore-from-r2.sh <slug>
-  # → docs/31 に draft.md + images/ を復元 (R2 公開 URL 経由・認証不要)
-  # 更新完了後は次の develop push で自動的に再同期・削除される
+  npm run note:article -- checkout <slug>
+  # → R2 (有料記事は private R2) から作業コピーへ記事ディレクトリの全ファイルを取り出す
+  #   作業コピーに未保存の変更があれば止まる (捨てるなら --force)
+  # 更新完了後は npm run note:article -- save <slug> で R2 へ戻す
   ```
 
-**画像**: `--update` 時は restore 後に `npm run note:images:regen -- --slug <slug>` (どの OS でも動く。mac 専用の `.claude/scripts/note/regenerate-svg-png.sh` は旧来の代替) で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
+**画像**: `--update` 時は checkout 後に `npm run note:images:regen -- --slug <slug>` (どの OS でも動く。mac 専用の `.claude/scripts/note/regenerate-svg-png.sh` は旧来の代替) で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
 
 ## 引数（バッチ対応）
 
@@ -118,10 +123,10 @@ PCごとにChromeのProfile番号が違うため、Windowsでは番号を投稿�
 投稿前に **カバー SVG** と **ハッシュタグ** を生成する。どちらも欠けたまま投稿しない。
 
 ```bash
-# 1. ドラフトが docs/31 に無ければ R2 から復元
-bash .claude/scripts/note/restore-from-r2.sh <slug>
+# 1. 作業コピーが docs/31 に無ければ R2 から取り出す
+npm run note:article -- checkout <slug>
 
-# 1.5. SVG 由来の PNG は git に無い (契約 .claude/rules/note-image-assets.md)。無ければ SVG から作り直す
+# 1.5. SVG 由来の PNG が作業コピーに無ければ SVG から作り直す (契約 .claude/rules/note-image-assets.md)
 npm run note:images:regen -- --slug <slug>
 #     ランキング記事 (a-<rankingKey>) の画像 4 枚は chart-data.json から作る (約 15 秒)
 # node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
@@ -149,7 +154,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 
 1. browser-use CLI がインストール済み
 2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`
-   （存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
+   （存在しない場合は先に `npm run note:article -- checkout <slug>` で R2 から取り出す）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **ダウンロード商品の場合**: `product_archive` に `.local/geo-products/` 配下の50MB以下のZIP、`product_attachment_after` に有料本文内の見出しを指定する。`prepare-article.cjs` はパス・拡張子・容量・有料設定をfail-closedで検証する
@@ -259,8 +264,8 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - **Phase 4-3（URL カード化・自動）**: paste 後に plain text の URL 行を OGP リンクカードへ自動変換する。各 URL の text node を eval(Selection API) で発見 → 行末にキャレット → 実 Enter キー送出 → 4 秒待機（既知の手動レシピを自動再現）。詳細・フォールバックは [references/editor-operations.md](references/editor-operations.md) §4-3。**初回 live で 1 記事のカード化を検証**（DOM 変更時はカード要素セレクタを更新）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
 - **Phase 5.5（商品添付）**: `product_archive` がある場合だけ`ins_file`を使う。指定見出し直後へZIPを置き、ファイル名・容量・本文表示を確認する。添付失敗時は有料記事を公開しない
-- **Phase 8.5（有料原稿保全）**: 公開済み有料原稿はpublic Git/R2へcommitしない。catalog派生stateを生成後、`npx tsx .claude/scripts/note/publish-paid-note-private-r2.ts <slug> --commit`で完全原稿を`stats47-private`へ保存し、公開R2には販売メタ`public.json`だけを置く。private実体検証後にcatalogの`r2Body:true`へ進める
-- **有料原稿の復元**: `bash .claude/scripts/note/restore-from-r2.sh <slug>`。派生stateの`r2_access:private`を検出し、private R2から全ファイルをSHA-256検証して復元する
+- **Phase 8.5（有料原稿保全）**: 公開済み有料原稿はgitにも公開R2にも置かない。台帳の`body.store`が`r2-private`の記事は、`npm run note:article -- save <slug>`が記事ディレクトリの全ファイル（原稿・画像）を`stats47-private`へ保存し、読み戻したSHAを照合してから台帳の`body.manifest`を更新する。公開R2には販売メタ`public.json`も新規に作らない。`product_archive`が指す商品ZIP（`.local/geo-products/`）は記事ディレクトリの外にあるため、`save`の保存対象に含まれない
+- **有料原稿の取り出し**: `npm run note:article -- checkout <slug>`。台帳の`body.store`が`r2-private`なら private R2 から全ファイルを作業コピーへ取り出す
 
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
@@ -306,52 +311,36 @@ node .claude/scripts/note/update-published-hashtags.mjs --slugs <slug1,slug2> --
 - 有料記事は既存境界が選択済みであることを検証し、`/tmp/stats47-note-hashtag-boundaries/` に screenshot を保存する
 - 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開タグの集合が承認済みと一致しなければ失敗とする
 
-### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
+### Phase 8 後: 公開記録を記事台帳に書く（★真実源への書き込み）
 
-記事を公開（即時公開 or 予約投稿）したら、**R2 `draft.md` の frontmatter に `note_url` を追加**する。
-これが doboku-note と同じ方式の SSOT 管理。
+記事を公開（即時公開 or 予約投稿）したら、**記事台帳 `data/note/articles.json` の該当レコードに
+`status: "published"` / `noteUrl` / `publishedAt` を書く**。書き込みは `lib/article-ledger.mjs` の
+`updateArticleLedger` を通す（Schema・キー重複・マガジン参照を検査してから書く）。
+公開記録を R2 `draft.md` の frontmatter に書き戻す旧手順（`migrate-note-frontmatter.mjs`）と、
+`build-note-published-index.mjs` による索引の再構築は 2026-10-13 に廃止した。
 
 ```bash
 # 1. 公開 URL を取得（Phase 8 のブラウザ URL バー or 確認画面から）
 NOTE_URL="https://note.com/stats47/n/nXXXXX"
 SLUG="<slug>"
+PUBLISHED_AT="YYYY-MM-DD"
 
-# 2. docs/31 の draft.md が存在しない場合は R2 から復元
-bash .claude/scripts/note/restore-from-r2.sh "$SLUG"
+# 2. 記事台帳の該当レコードに公開記録を書く
+NOTE_URL="$NOTE_URL" SLUG="$SLUG" PUBLISHED_AT="$PUBLISHED_AT" node --input-type=module -e '
+import { updateArticleLedger, findLedgerArticle } from "./.claude/scripts/note/lib/article-ledger.mjs";
+updateArticleLedger((l) => Object.assign(findLedgerArticle(l, process.env.SLUG),
+  { status: "published", noteUrl: process.env.NOTE_URL, publishedAt: process.env.PUBLISHED_AT }));'
 
-# 3. frontmatter に note_url / published / published_at を追加（migrate スクリプト転用）
-NOTE_URL="$NOTE_URL" DRY_RUN=false \
-  node .claude/scripts/note/migrate-note-frontmatter.mjs --slug "$SLUG"
-# ↑ note-published-urls.json に URL が入っていれば自動取得。
-#   新規公開で未登録の場合は下記の手動追記を先に行う。
+# 3. 派生インデックス (note-published-urls.json / note-draft-index.json) を台帳から作り直す
+npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
 
-# 4. note-published-urls.json に追記（派生インデックスの仮登録）
-# → migrate 実行後に build-note-published-index.mjs で再構築する方が正確
-node .claude/scripts/note/build-note-published-index.mjs
-
-# 5. R2 に反映（S3 API 経由 or develop push → sync-note-r2.yml）
-# ローカルに S3 creds があれば:
-node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委ねる
+# 4. 作業コピーに変更があれば R2 へ保存する (台帳の body.manifest も更新される)
+npm run note:article -- save "$SLUG"
 ```
-
-**新規公開時の追加手順** (note-published-urls.json にまだ存在しない場合):
-```javascript
-// data/note/note-published-urls.json の articles に手動追記
-"<slug>": {
-  "vertical": "<vertical>",
-  "title": "<title>",
-  "url": "<NOTE_URL>",
-  "is_paid": false,
-  "published_at": "YYYY-MM-DD",
-  "r2_path": "note/<vertical>/<slug>",
-  "status": "r2_ready"
-}
-```
-追記後に `migrate-note-frontmatter.mjs --slug <slug>` → `build-note-published-index.mjs` を実行する。
 
 - **下書き保存のみ**（公開していない）の場合は上記不要
-- **ドラフト管理中だった場合**: `data/note/note-draft-index.json` の `drafts` から同 slug を削除する
-  （公開後は frontmatter の `note_url` が真実源になるため）
+- 台帳に無い記事は `findLedgerArticle` が止める。新しい記事は公開前に台帳へレコードを足しておく（手順は `.claude/scripts/note/catalog/README.md`「作業手順」）
+- `note-published-urls.json` と `note-draft-index.json` は手編集しない。下書きから公開への移動も台帳の `status` を変えて `--apply` するだけで反映され、`npm run note:catalog:check` がずれを止める
 
 - **ClipboardEvent 制約**: 最初の1セグメントのみ ClipboardEvent でペースト可能。2回目以降は `type` コマンドを使う
 - **URL カード変換待機**: URL 入力後は **4秒待機**必須。カード変換完了前に次の入力をするとレイアウトが壊れる
@@ -395,5 +384,5 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --slug <key>          # dr
 node .claude/scripts/note/patch-note-paid-landing.mjs --slug <key> --commit # 画像 upload → PUT → live 9 項目検証
 ```
 
-spec は `.claude/scripts/note/catalog/data/paid-landing/<key>.json`。LLM に書かせた場合も、spec の数値が本文に無いと
+spec は `data/note/paid-landing/<key>.json` (形の契約は `data/note/paid-landing.schema.json`)。LLM に書かせた場合も、spec の数値が本文に無いと
 `findUnsupportedNumbers` が止める。

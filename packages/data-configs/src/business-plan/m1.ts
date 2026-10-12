@@ -793,7 +793,7 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
       title: '15商品をnoteカタログへ登録',
       status: 'ready',
       owner: 'note-manager',
-      deliverablePath: '.claude/scripts/note/catalog/data/stats47-note.ts',
+      deliverablePath: 'data/note/articles.json',
       doneWhen:
         '15件の価格・記事key・本文有無・公開ゲートを管理画面で確認できる',
     },

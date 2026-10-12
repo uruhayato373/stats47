@@ -46,6 +46,16 @@ test('changing the selected batch cannot hide an uncertain cover upload', () => 
   assert.throws(() => findCoverOperation([{ ...journal, account: 'dobokunote' }], article), /account/);
   assert.throws(() => findCoverOperation([journal, journal], article), /multiple/);
 });
+test('a failed upload is released only by a superseded record that names its inspection and replacement', () => {
+  const article = { key: '05-pandas-duckdb-derived-metrics', sha256: 'palette-v2' };
+  const failed = { key: article.key, sourceSha256: 'rgba-v1', status: 'uploaded' };
+  const journal = (operation) => ({ account: 'stats47', articles: [operation] });
+  assert.equal(findCoverOperation([journal(failed)], article), failed);
+  assert.equal(findCoverOperation([journal({ ...failed, status: 'superseded' })], article)?.status, 'superseded');
+  assert.equal(findCoverOperation([journal({ ...failed, status: 'superseded', supersededBy: 'palette-v2' })], article)?.status, 'superseded');
+  assert.equal(findCoverOperation([journal({ ...failed, status: 'superseded', supersededBy: 'palette-v2',
+    inspection: 'live colours inverted by note quantisation; replaced by palette PNG' })], article), null);
+});
 test('Windows uses the dedicated authenticated browser and closes it without a POSIX daemon lookup', () => {
   const source = fs.readFileSync(new URL('../update-note-covers.mjs', import.meta.url), 'utf8');
   assert.match(source, /process\.platform === 'win32' \|\| unattended\(\)/);

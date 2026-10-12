@@ -39,6 +39,19 @@ export interface EditorialNoteCover {
     comparison: string;
     value: string;
   };
+  /** Ranking stories keep the article's own rank/value/gap claim; the map is decorative, not data. */
+  rankingStory?: {
+    kicker: string;
+    subjectLines: string[];
+    highlight: string;
+    detail: string;
+  };
+  /** Practitioner series: the series name, episode and accent tell the series apart. */
+  series?: { label: string; episode: string | null; accent: string };
+  /** Explainer / dataset covers show one figure from the article itself (mapImage holds the figure). */
+  figure?: { caption: string; aspect: number };
+  /** Palette guides show swatches rendered from the D3 schemes the chapter covers (mapImage holds them). */
+  swatches?: { caption: string };
 }
 
 /** note公開用1280×670。地理・数値は呼出元の検証済み入力から固定描画する。 */
@@ -205,6 +218,9 @@ export function buildEditorialNoteCoverElement(data: EditorialNoteCover) {
 /** 一覧の小さい表示でも主題が読める、地図付きの太字カバー。 */
 export function buildBoldNoteCoverElement(data: EditorialNoteCover) {
   if (data.questionRanking) return buildQuestionRankingNoteCoverElement(data);
+  if (data.rankingStory) return buildRankingStoryNoteCoverElement(data);
+  if (data.series) return buildSeriesNoteCoverElement(data);
+  if (data.figure || data.swatches) return buildFigureNoteCoverElement(data);
   const hh = data.household;
   const text = (value: string, style: Record<string, string | number> = {}) =>
     h('div', { style: { display: 'flex', whiteSpace: 'pre-wrap', ...style } }, value);
@@ -332,4 +348,94 @@ export function buildQuestionRankingNoteCoverElement(data: EditorialNoteCover) {
     text('stats47', 63, 582, 29, '#53657f'),
     text('沖縄県', 1076, 536, 16, '#9d714d'),
     text(`${copy.year}年版`, 1080, 589, 23, '#53657f'));
+}
+
+const coverUnits = (value: string) =>
+  [...value].reduce((sum, ch) => sum + (/^[\x00-\x7f]$/.test(ch) ? 0.65 : 1), 0);
+const positioned = (value: string, left: number, top: number, size: number,
+  color: string, extra: Record<string, string | number> = {}) =>
+  h('div', { style: { position: 'absolute', display: 'flex', whiteSpace: 'pre', left, top,
+    fontSize: size, fontWeight: 900, color, lineHeight: 1.12, ...extra } }, value);
+
+/** Same paper family as question covers; the map is a neutral backdrop and carries no values. */
+export function buildRankingStoryNoteCoverElement(data: EditorialNoteCover) {
+  const copy = data.rankingStory;
+  // An explainer without its own figure reuses this layout with no highlight and up to three headline lines.
+  const maxLines = copy?.highlight ? 2 : 3;
+  if (!copy || copy.subjectLines.length < 1 || copy.subjectLines.length > maxLines)
+    throw new Error('ranking story subject must have one or two lines (three without a highlight)');
+  const lines = copy.subjectLines.length;
+  const subjectSize = Math.min(118, Math.floor(700 / Math.max(...copy.subjectLines.map(coverUnits))),
+    Math.floor((copy.highlight ? 230 : 300) / (lines * 1.12)));
+  const highlightSize = copy.highlight ? Math.min(84, Math.floor(720 / coverUnits(copy.highlight))) : 0;
+  const detailSize = Math.min(38, Math.floor(720 / coverUnits(copy.detail)));
+  if (subjectSize < 64 || (copy.highlight && highlightSize < 50) || detailSize < 28)
+    throw new Error('ranking story cover needs shorter editorial copy');
+  const highlightTop = 128 + Math.round(lines * subjectSize * 1.12) + 30;
+  const detailTop = copy.highlight ? highlightTop + Math.round(highlightSize * 1.2) + 16 : highlightTop;
+  return h('div', { style: { width: 1280, height: 670, display: 'flex', position: 'relative',
+    overflow: 'hidden', background: '#faf9f5', fontFamily: 'Noto Sans JP' } },
+    h('img', { src: data.mapImage, width: 1280, height: 670,
+      style: { position: 'absolute', left: 0, top: 0, opacity: 0.6 } }),
+    positioned(copy.kicker, 64, 52, 29, '#53657f'),
+    positioned(copy.subjectLines.join('\n'), 55, 128, subjectSize, '#0b2152'),
+    copy.highlight ? positioned(copy.highlight, 60, highlightTop, highlightSize, '#aa421b') : null,
+    positioned(copy.detail, 63, detailTop, detailSize, '#0b2152', { fontWeight: 800 }),
+    positioned('stats47', 63, 582, 29, '#53657f'),
+    positioned('沖縄県', 1076, 536, 16, '#7d8ea3'));
+}
+
+/** Dark series cover: label, episode number and accent colour distinguish the practitioner series. */
+export function buildSeriesNoteCoverElement(data: EditorialNoteCover) {
+  const series = data.series;
+  if (!series) throw new Error('series cover needs series');
+  const lines = data.headline.split('\n');
+  const size = Math.min(104, Math.floor(1000 / Math.max(...lines.map(coverUnits))),
+    Math.floor(300 / (lines.length * 1.14)));
+  if (size < 52 || lines.length > 3) throw new Error('series cover headline needs editorial shortening');
+  const headlineTop = lines.length === 3 ? 150 : 178;
+  const ruleTop = headlineTop + Math.round(lines.length * size * 1.14) + 26;
+  return h('div', { style: { width: 1280, height: 670, display: 'flex', position: 'relative',
+    overflow: 'hidden', background: '#0f1a2b', fontFamily: 'Noto Sans JP' } },
+    h('div', { style: { position: 'absolute', left: 860, top: -260, width: 720, height: 720,
+      borderRadius: 360, background: series.accent, opacity: 0.07 } }),
+    h('div', { style: { position: 'absolute', left: 0, top: 0, width: 1280, height: 10,
+      background: series.accent } }),
+    h('div', { style: { position: 'absolute', left: 60, top: 64, width: 10, height: 40,
+      background: series.accent } }),
+    positioned(series.label, 86, 62, 30, series.accent, { fontWeight: 800 }),
+    series.episode ? positioned(series.episode, 1010, 40, 120, series.accent, { opacity: 0.85 }) : null,
+    positioned(data.headline, 58, headlineTop, size, '#ffffff', { lineHeight: 1.14 }),
+    h('div', { style: { position: 'absolute', left: 62, top: ruleTop, width: 120, height: 8,
+      background: series.accent } }),
+    positioned('stats47', 62, 584, 30, '#c9d4e6'),
+    positioned(data.footnote ?? '手順と注意点は記事本文へ', 830, 592, 22, '#8c9bb3', { fontWeight: 700 }));
+}
+
+/** Paper cover with one figure from the article (or rendered palette swatches) on the right. */
+export function buildFigureNoteCoverElement(data: EditorialNoteCover) {
+  const lines = data.headline.split('\n');
+  const size = Math.min(80, Math.floor(520 / Math.max(...lines.map(coverUnits))),
+    Math.floor(290 / (lines.length * 1.14)));
+  if (size < 44 || lines.length > 3) throw new Error('figure cover headline needs editorial shortening');
+  const caption = data.figure?.caption ?? data.swatches?.caption ?? '';
+  const aspect = data.figure?.aspect ?? 1;
+  const imageWidth = Math.min(560, Math.floor(470 * aspect));
+  const imageHeight = Math.round(imageWidth / aspect);
+  const sublineTop = 140 + Math.round(lines.length * size * 1.14) + 28;
+  return h('div', { style: { width: 1280, height: 670, display: 'flex', position: 'relative',
+    overflow: 'hidden', background: '#faf9f5', fontFamily: 'Noto Sans JP' } },
+    h('div', { style: { position: 'absolute', left: 54, top: 56, width: 8, height: 36,
+      background: data.accent ?? '#ed623d' } }),
+    positioned(data.kicker, 76, 54, 28, '#53657f', { fontWeight: 800 }),
+    positioned(data.headline, 54, 140, size, '#0b2152', { lineHeight: 1.14 }),
+    data.subline ? h('div', { style: { position: 'absolute', display: 'flex', left: 58, top: sublineTop,
+      width: 540, fontSize: 28, fontWeight: 700, color: '#33445e', lineHeight: 1.35 } }, data.subline) : null,
+    h('div', { style: { position: 'absolute', left: 640, top: 52, width: 592, height: 540,
+      borderRadius: 18, background: '#ffffff', border: '2px solid #e4dfd3' } }),
+    h('img', { src: data.mapImage, width: imageWidth, height: imageHeight,
+      style: { position: 'absolute', left: 656 + Math.round((560 - imageWidth) / 2),
+        top: 68 + Math.round((470 - imageHeight) / 2), objectFit: 'contain' } }),
+    positioned(caption, 664, 548, 20, '#7d8ea3', { fontWeight: 700 }),
+    positioned('stats47', 58, 584, 29, '#53657f'));
 }

@@ -1,26 +1,18 @@
 /**
- * note-catalog 集約入口 (git TS SSOT)
+ * note 記事台帳の読み込み口。
  *
- * 全 vertical の NoteArticle[] を束ね、マガジンレジストリと合わせて公開する。
- * validate / generate スクリプトと (次段の) downstream 消費者はここから読む。
+ * 正本は data/note/articles.json と data/note/magazines.json (JSON Schema 付き)。
+ * ここは台帳を読んで型を付けるだけで、記事のデータを持たない。書き込みは lib/article-ledger.mjs。
  */
 import type { NoteArticle } from "./types";
-import { stats47NoteArticles } from "./data/stats47-note";
-import { koumuinClaudeCodeArticles } from "./data/koumuin-claude-code";
-import { koumuinEstatClaudeCodeArticles } from "./data/koumuin-estat-claude-code";
-import { koumuinGisArticles } from "./data/koumuin-gis";
-import { productSalesArticles } from "./data/product-sales";
+import { readArticleLedger, hasStoredBody } from "../lib/article-ledger.mjs";
 
-export const NOTE_ARTICLES: NoteArticle[] = [
-  ...stats47NoteArticles,
-  ...koumuinClaudeCodeArticles,
-  ...koumuinEstatClaudeCodeArticles,
-  ...koumuinGisArticles,
-  ...productSalesArticles,
-];
+export const NOTE_ARTICLES: NoteArticle[] = readArticleLedger().articles.map(
+  (article: Omit<NoteArticle, "r2Body">) => ({ ...article, r2Body: hasStoredBody(article) }),
+);
 
 export { NOTE_MAGAZINES, NOTE_MAGAZINE_KEYS, getMagazine } from "./magazines";
-export type { NoteArticle, NoteMagazine, NoteVertical, NoteSeries } from "./types";
+export type { NoteArticle, NoteMagazine, NoteVertical, NoteSeries, NoteArticleBody, NoteBodyStore } from "./types";
 
 export function getArticle(key: string): NoteArticle | undefined {
   return NOTE_ARTICLES.find((a) => a.key === key);

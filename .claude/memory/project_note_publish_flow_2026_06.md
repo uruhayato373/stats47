@@ -1,6 +1,6 @@
 ---
 name: project_note_publish_flow_2026_06
-description: note.com 公開フロー確立+R2 ephemeral化(2026-06-19)。※2026-07 現在 docs/31 は公務員シリーズ (koumuin-claude-code/estat) の git 管理 SSOT として現役 (680ファイル)。R2 ephemeral 運用は旧 vertical のみ
+description: note.comエディタの公開手順(editor-helpers.sh)とgotchas。保存場所は2026-10-13から台帳+R2 (project_note_article_ledger)
 metadata: 
   node_type: memory
   type: project
@@ -9,20 +9,9 @@ metadata:
 
 note.com 記事公開の現行像（2026-06-16 確立、2026-06-19 R2 ephemeral 化完了）。
 
-**完全DBレス**: note に D1 `note_articles` テーブルは無い（廃止済）。
-
-**ストレージ設計 (2026-06-19 時点: docs/31 完全削除)**:
-
-> ⚠️ **2026-07-11 訂正**: docs/31 は「完全削除」ではない。公務員向けシリーズ (koumuin-claude-code / koumuin-estat、106 記事 + カバー画像) は **git 管理の SSOT として docs/31 に現役で存在**する (docs/INDEX.md「note 記事ソースの単一管理・公開しても移動しない」)。下記の R2 ephemeral 運用は旧 vertical (A-D シリーズ等) にのみ適用。
-- **全記事 (公開済み + ドラフト)** → R2 `note/<vertical>/<slug>/` が SSOT
-  - 公開済み: `data/note/note-published-urls.json` (slug→url/r2_path/is_paid)
-  - ドラフト: `data/note/note-draft-index.json` (slug→vertical/r2_path)
-  - コンテナメタ (MAGAZINE.md / INDEX.md / カバー画像) → `.claude/skills/note/<vertical>/`
-- **docs/31 は ephemeral outbox** (編集時のみ存在、push 後 CI 自動削除)
-  - 同期 CI: `sync-note-r2.yml` が note-published-urls.json / note-draft-index.json の push で発火
-- **編集フロー**: `restore-from-r2.sh <slug>` で docs/31 に復元 → 編集 → develop push → CI 再同期・削除
-- **cloud Claude Code**: R2 公開 URL から draft.md 直接取得 → 編集 → docs/31 経由で push
-- note.com への実際の投稿は browser-use (ローカルのみ)
+**保存場所 (2026-10-13 改訂)**: 記事の台帳は `data/note/articles.json`、本文と画像は R2 だけ (無料=公開・有料=private)。
+docs/31 は gitignore された作業場で、`npm run note:article -- checkout <key>` で取り出し、公開・編集後に `save <key>` で戻す。
+旧方式 (docs/31 を git に置く・`sync-note-r2.yml` が push で R2 へ移す・`restore-from-r2.sh`) は廃止した。詳細は [[project_note_article_ledger]]。
 
 **実体は `.claude/scripts/note/editor-helpers.sh`**（手書きしない。`source` して使う）:
 - Phase0: `prepare-article.cjs <slug>` → `/tmp/note-data-<slug>.json`、`build-body.cjs <slug>` → 本文txt

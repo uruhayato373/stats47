@@ -6,7 +6,7 @@
  *
  * 契約: .claude/rules/sns-content-standards.md §2-7b。検査: audit-note-circulation.mjs の paid_*。
  *
- * 仕様 (spec) は記事ごとに .claude/scripts/note/catalog/data/paid-landing/<key>.json:
+ * 仕様 (spec) は記事ごとに data/note/paid-landing/<key>.json (形は paid-landing.schema.json):
  *   {
  *     "key": "d-kakei-category-dataset",
  *     "audienceHeading": "こんな人のためのデータです", "audience": [{ "strong": "…", "text": "…" }, ...],
@@ -34,10 +34,11 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { randomUUID } from "node:crypto";
 import { externalCard } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
-const SPEC_DIR = join(ROOT, ".claude/scripts/note/catalog/data/paid-landing");
+const SPEC_DIR = join(ROOT, datasetDir("note.paid-landing"));
 const IMAGE_WIDTH = 620;
 
 function parseArgs(argv) {

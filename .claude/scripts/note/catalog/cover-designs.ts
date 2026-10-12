@@ -451,3 +451,123 @@ Object.assign(NOTE_COVER_COPY, {
     kicker: '家計調査・五分位階級別',
   },
 });
+
+/** 2026-10-11: practitioner series covers. Series = vertical; label/accent tell the series apart. */
+export const PRACTITIONER_SERIES: Record<string, { label: string; accent: string; numbered: boolean }> = {
+  'koumuin-claude-code': { label: '公務員 × Claude Code 実務活用', accent: '#f5a524', numbered: true },
+  'koumuin-estat-claude-code': { label: 'e-Stat × Claude Code', accent: '#2bb3a3', numbered: true },
+  'koumuin-gis': { label: '自治体職員のためのGIS入門', accent: '#5fbf6f', numbered: true },
+  'stats47-note': { label: '公務員のための実務ガイド', accent: '#6aa7ff', numbered: false },
+};
+export const PRACTITIONER_LABEL_OVERRIDES: Record<string, string> = {
+  'paid-n8558c1a6503a': '公務員のキャリア',
+  'recovered-n03e45e40d3a7': '地図の実務ガイド',
+};
+export const EXTRA_COVER_HEADLINES: Record<string, { kicker: string; headline: string; subline: string }> = {
+  'recovered-n3908e5981967': { kicker: '家計調査の読み方', headline: '家計調査で\nわかること', subline: '47都道府県のお金の使い方を比べる' },
+  '12-fiscal-peer-comparison': { kicker: '', headline: '財政指標を\n同規模の市と比べる', subline: '' },
+  '13-fiscal-peer-no-code': { kicker: '', headline: 'コードなしで\n財政指標を比べる', subline: '' },
+  "prefecture-population-household-pack": { kicker: "都道府県データパック", headline: "人口・世帯の\n県別データ集", subline: "47都道府県×134指標の実データ" },
+  "prefecture-income-wage-hiring-pack": { kicker: "都道府県データパック", headline: "賃金・求人の\n県別データ集", subline: "47都道府県×107指標の実データ" },
+  "prefecture-tourism-lodging-pack": { kicker: "都道府県データパック", headline: "宿泊・交通の\n県別データ集", subline: "47都道府県×44指標の実データ" },
+  "prefecture-municipal-finance-pack": { kicker: "都道府県データパック", headline: "自治体財政の\n県別データ集", subline: "47都道府県×119指標の実データ" },
+  "prefecture-healthcare-nursing-pack": { kicker: "都道府県データパック", headline: "医療・介護の\n県別データ集", subline: "47都道府県×237指標の実データ" },
+  "prefecture-education-childcare-pack": { kicker: "都道府県データパック", headline: "学校・保育の\n県別データ集", subline: "47都道府県×244指標の実データ" },
+  "prefecture-migration-living-pack": { kicker: "都道府県データパック", headline: "住まい・物価の\n県別データ集", subline: "47都道府県×76指標の実データ" },
+  "prefecture-retail-trade-area-pack": { kicker: "都道府県データパック", headline: "商業・小売の\n県別データ集", subline: "47都道府県×69指標の実データ" },
+  "prefecture-industry-economy-pack": { kicker: "都道府県データパック", headline: "産業・農業の\n県別データ集", subline: "47都道府県×132指標の実データ" },
+  "prefecture-disaster-infrastructure-pack": { kicker: "都道府県データパック", headline: "防災・インフラの\n県別データ集", subline: "47都道府県×230指標の実データ" },
+  "prefecture-map-chart-assets-pack": { kicker: "都道府県データパック", headline: "都道府県の\n地図・グラフ素材", subline: "47都道府県×28指標の実データ" },
+  "prefecture-all-in-one-pack": { kicker: "都道府県データパック", headline: "2,073指標の\n総合データ集", subline: "47都道府県×2,073指標の実データ" },
+  "prefecture-free-trial-pack": { kicker: "無料お試しサンプル", headline: "無料の\nお試しデータ", subline: "47都道府県×1指標の実データ" },
+  "prefecture-household-consumption-pack": { kicker: "都道府県データパック", headline: "家計消費の\n県別データ集", subline: "47都道府県×685指標の実データ" },
+  "b-expenditure-structure": {"kicker": "2022年度・県の歳出構造", "headline": "教育重視？\n産業重視？", "subline": "教育費1位は滋賀22.0%、商工費1位は大阪22.8%"},
+  "b-hotel-rooms-nara": {"kicker": "ホテル客室数で比較", "headline": "奈良にホテルが\n少ない理由", "subline": "奈良は客室数46位の4,409室。京都は12位"},
+  "b-hottest-prefecture": {"kicker": "2024年・最高気温", "headline": "最高気温1位は\n沖縄でなく熊本", "subline": "熊本36.2度。沖縄は33.9度で26位"},
+  "b-local-tax-vs-allocation-tax": {"kicker": "2022年度・地方税と交付税", "headline": "自力で稼ぐ県、\n国に頼る県", "subline": "東京は地方税63.4%で交付税0%、高知は交付税37.4%"},
+  "b-pharmacy-density": {"kicker": "2023年・薬局密度", "headline": "人口あたり薬局数\n日本一は佐賀", "subline": "10万人あたり64.5軒。最下位沖縄は39.4軒"},
+  "b-rich-spending-patterns": {"kicker": "2024年・家計調査", "headline": "お金持ちが\n使うもの、\n使わないもの", "subline": "補習教育は56.1倍、光熱・水道は1.16倍"},
+  "c-tokyo-vs-osaka-fiscal": {"kicker": "2022年度・財政構造", "headline": "東京と大阪\n財政はどう違う？", "subline": "財政力指数は東京1.064で1位、大阪0.742で5位"},
+  "d-education-income-gap": {"kicker": "2024年・家計調査", "headline": "塾代の差は\n56.1倍", "subline": "年収差は4.74倍、塾代はQ1月138円・Q5月7,747円"},
+  "d-engel-coefficient-income": {"kicker": "2024年・五分位階級", "headline": "年収差4.74倍、\nエンゲル係数差は\n8ポイント", "subline": "Q1は33.1%、Q5は25.0%。補習教育は56.1倍"},
+  "d-kakei-spending-personality": {"kicker": "家計調査・690品目", "headline": "ラーメン外食の\n1位は山形", "subline": "冷凍ぎょうざは宮崎、焼肉は高知が1位"},
+  "koumuin-shigoto-kouritsuka-ai": {"kicker": "", "headline": "公務員の事務作業\nAIで半日仕事が\n数分に", "subline": ""},
+};
+
+/** Explainer covers: one figure that the article itself publishes (public R2 `<r2Path>/<image>`). */
+export const EXPLAINER_COVER_FIGURES: Record<string, { image: string; caption: string }> = {
+  'recovered-n023501038bd5': { image: 'images/image-01.png', caption: '記事の図: 年間日照時間ランキング（2023年）' },
+  'recovered-n03844512d58a': { image: 'images/image-01.png', caption: '記事の図: 月間消費支出 Q1とQ5（2024年）' },
+  'recovered-n144d350fc14e': { image: 'images/image-01.png', caption: '記事の図: 合計特殊出生率ランキング（2023年）' },
+  'recovered-n3908e5981967': { image: 'images/image-02.png', caption: '記事の図: 消費支出の都道府県ランキング' },
+  'recovered-n68f5e09c8d62': { image: 'images/image-03.png', caption: '記事の図: 酒類の支出額1位（2024年）' },
+  'recovered-nded2d34fc978': { image: 'images/image-01.png', caption: '記事の図: 財政力指数×地方債現在高比率' },
+  'b-kakei-academic-food': { image: 'images/spinach-quantity-ranking.png', caption: '記事の図: ほうれんそう消費量のランキング' },
+  'b-kakei-advancement-employment': { image: 'images/combined-index-ranking.png', caption: '記事の図: 進学率＋就職者割合の合成指数' },
+  'b-kakei-beer-peak-month': { image: 'images/beer-months-by-year-timeseries.png', caption: '記事の図: ビール支出額の月別パターン' },
+  'b-kakei-bread-giffen': { image: 'images/bread-quantity-index-timeseries.png', caption: '記事の図: 食パン・米・他のパンの購入数量指数' },
+  'b-kakei-gyoza-counting': { image: 'images/frozen-gyoza-spending-prefecture-gap-map.png', caption: '記事の図: ぎょうざ消費支出額の都道府県マップ' },
+  'b-kakei-necktie-decline': { image: 'images/accessory-quantity-timeseries.png', caption: '記事の図: ネクタイ・ストッキング・帽子の購入数量' },
+  'b-kakei-quantity-price': { image: 'images/hokkaido-quantity-price-findings.png', caption: '記事の図: 北海道の食卓を数量×価格で分解' },
+  'b-kakei-winter-bargain': { image: 'images/coat-quantity-timeseries.png', caption: '記事の図: 婦人用コートの月別購入数量' },
+  "d-education-income-gap": {"image": "images/ratio-chart.png", "caption": "記事の図: 教育費の品目別Q5/Q1倍率"},
+  "d-engel-coefficient-income": {"image": "images/gap-spectrum.png", "caption": "記事の図: 品目別Q5/Q1支出倍率"},
+  "d-kakei-spending-personality": {"image": "images/food-champions.png", "caption": "記事の図: 食の全国1位コレクション"},
+};
+
+/** Palette guides: swatches drawn from the d3-scale-chromatic schemes each chapter covers. */
+export const PALETTE_COVER_SWATCHES: Record<string, { kicker: string; subline: string; caption: string;
+  rows: Array<{ name: string; kind: 'continuous' | 'categorical' }> }> = {
+  'paid-nfe2c65e669a8': { kicker: 'D3.js 配色ガイド 第2章', subline: '順序データの配色とTypeScript実装', caption: 'D3 の順序配色から 7 種',
+    rows: ['Blues', 'Greens', 'YlOrRd', 'YlGnBu', 'Viridis', 'Magma', 'Cividis'].map((name) => ({ name, kind: 'continuous' as const })) },
+  'paid-n02da130aae01': { kicker: 'D3.js 配色ガイド 第3章', subline: '発散データの配色を選ぶ', caption: 'D3 の発散配色から 7 種',
+    rows: ['RdBu', 'BrBG', 'PiYG', 'PRGn', 'PuOr', 'RdYlBu', 'Spectral'].map((name) => ({ name, kind: 'continuous' as const })) },
+  'paid-n79fefdbd4d4c': { kicker: 'D3.js 配色ガイド 第4章', subline: 'カテゴリ・循環データの配色', caption: 'カテゴリ配色 5 種と循環配色 2 種',
+    rows: [...['Category10', 'Tableau10', 'Set2', 'Dark2', 'Paired'].map((name) => ({ name, kind: 'categorical' as const })),
+      ...['Rainbow', 'Sinebow'].map((name) => ({ name, kind: 'continuous' as const }))] },
+  'paid-n66ffb10aa41b': { kicker: 'D3.js 配色ガイド 第5章', subline: '実践テクニック編', caption: '凡例で確かめる 5 種の配色',
+    rows: [...['Viridis', 'Cividis', 'Inferno', 'PuOr'].map((name) => ({ name, kind: 'continuous' as const })),
+      { name: 'Set2', kind: 'categorical' as const }] },
+  'paid-n823d76c5cbac': { kicker: 'D3.js 配色ガイド 第6章・完結', subline: 'パレット辞書と実装チートシート', caption: '全98種から 8 種を抜粋',
+    rows: [...['Blues', 'Viridis', 'Turbo', 'RdBu', 'Spectral', 'Rainbow'].map((name) => ({ name, kind: 'continuous' as const })),
+      ...['Tableau10', 'Set3'].map((name) => ({ name, kind: 'categorical' as const }))] },
+  'paid-nf80da34b28c3': { kicker: 'D3.js × 地図の配色', subline: 'データ可視化の配色理論', caption: '順序・発散・カテゴリの配色',
+    rows: [...['YlOrRd', 'Blues', 'RdBu', 'PuOr'].map((name) => ({ name, kind: 'continuous' as const })),
+      ...['Tableau10', 'Set2'].map((name) => ({ name, kind: 'categorical' as const }))] },
+};
+
+/** Dataset / Geo covers: a choropleth of the article's own published aggregate, or the stats47 figure that shows its headline claim. */
+export type DatasetCoverFigure =
+  | { kind: 'geo-item'; source: string; metric: string; invert?: boolean; caption: string }
+  | { kind: 'stats-values'; source: string; year: string; invert?: boolean; caption: string }
+  | { kind: 'image'; source: string; caption: string }
+  // pack-csv: a column of the pack's own data.csv (local .local/coconala-products build) drawn as a choropleth.
+  | { kind: 'pack-csv'; source: string; column: string; caption: string };
+export const DATASET_COVER_FIGURES: Record<string, DatasetCoverFigure> = {
+  'd-geo-ipss-prefecture-map': { kind: 'stats-values', source: 'app/stats/future-population-change-rate-2050/values.json', year: '2050', invert: true,
+    caption: '2050年の人口増減率（2020年比）濃いほど減少' },
+  'd-geo-flood-population-mesh': { kind: 'geo-item', source: 'app/geo/population-flood-risk/item.json', metric: 'floodExposureShare2050',
+    caption: '2050年 浸水想定区域の人口比率 濃いほど高い' },
+  'd-geo-land-price-future-population': { kind: 'geo-item', source: 'app/geo/population-land-price/item.json', metric: 'risingDecliningPointShare',
+    caption: '地価上昇×人口減少の地点比率 濃いほど高い' },
+  'd-geo-station-access-analysis': { kind: 'geo-item', source: 'app/geo/population-station-access/item.json', metric: 'stationAccessShare2050',
+    caption: '2050年 駅800m圏の人口比率 濃いほど高い' },
+  'paid-n92b846280d1a': { kind: 'image', source: 'note/stats47-note/n03844512d58a/images/image-03.png',
+    caption: '家計調査 五分位階級別の品目格差（2024年）' },
+  'd-kakei-category-dataset': { kind: 'image', source: 'note/stats47-note/n68f5e09c8d62/images/image-04.png',
+    caption: '家計調査の教育費 1位と47位（2024年）' },
+  "prefecture-population-household-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-01/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-income-wage-hiring-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-02/v3-20261012-mac-r4/data.csv", column: "有効求人倍率（倍・2022）", caption: "収録データの例: 有効求人倍率" },
+  "prefecture-tourism-lodging-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-03/v3-20261012-mac-r4/data.csv", column: "延べ宿泊者数（人泊・2024）", caption: "収録データの例: 延べ宿泊者数" },
+  "prefecture-municipal-finance-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-04/v3-20261012-mac-r4/data.csv", column: "財政力指数（都道府県財政）（指数・2022）", caption: "収録データの例: 財政力指数" },
+  "prefecture-healthcare-nursing-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-05/v3-20261012-mac-r4/data.csv", column: "医師数（人・2022）", caption: "収録データの例: 医師数" },
+  "prefecture-education-childcare-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-06/v3-20261012-mac-r4/data.csv", column: "図書館数（人口100万人当たり）（館・2021）", caption: "収録データの例: 図書館数" },
+  "prefecture-migration-living-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-07/v3-20261012-mac-r4/data.csv", column: "年平均気温（℃・2024）", caption: "収録データの例: 年平均気温" },
+  "prefecture-retail-trade-area-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-08/v3-20261012-mac-r4/data.csv", column: "商業年間商品販売額（卸売業＋小売業）（百万円・2022）", caption: "収録データの例: 商業年間商品販売額" },
+  "prefecture-industry-economy-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-09/v3-20261012-mac-r4/data.csv", column: "耕地放棄面積（ｈａ・2014）", caption: "収録データの例: 耕地放棄面積" },
+  "prefecture-disaster-infrastructure-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-10/v3-20261012-mac-r4/data.csv", column: "道路実延長（高速道路）（km・2023）", caption: "収録データの例: 道路実延長" },
+  "prefecture-map-chart-assets-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-11/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-all-in-one-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-12/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-free-trial-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-13/v3-20261012-mac-r4/data.csv", column: "総人口（人・2024）", caption: "収録データの例: 総人口" },
+  "prefecture-household-consumption-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-14/v3-20261012-mac-r4/data.csv", column: "りんご消費支出額（都道府県庁所在市の二人以上世帯の年間りんご消費支出額）（円・2024）", caption: "収録データの例: りんご消費支出額" },
+};

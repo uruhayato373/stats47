@@ -12,11 +12,13 @@ SNS 投稿ギャラリー管理画面 + IG cron 修正 + R2 コスト対策 (fea
 ## 統合メディアコンソール (ローカル専用・2026-07-07 に SNS 単機能→全メディア横断に拡張)
 - 起動: `npm run admin` → http://127.0.0.1:4747/ (skill `/admin-console`。`PORT=` で上書き可)
 - **実装は独立 Next.js アプリ `apps/admin`** (App Router・127.0.0.1 bind 固定。**2026-07-16 に旧 node:http + vanilla JS 実装 `.claude/scripts/gallery/` から完全移管・旧実装と `sns:gallery` alias は削除**。構成・安全ガードは `apps/admin/README.md`)
-- **4 セクション**: `/` ホーム(件数サマリ) / `/sns` SNS投稿 / `/assets` 画像資産(OGP・リンクカード light/dark・note カバー・note記事内画像・動画master。欠落チェック=HEAD probe / 再生成=kind ホワイトリストで generate系 spawn) / `/svg` ブログSVGカタログ(6カタログ分類)
+- **主要画面**: `/` ホーム(件数サマリ) / `/sns` SNS投稿 / `/assets` 画像資産(OGP・リンクカード light/dark・note カバー・note記事内画像・動画master) / `/svg` ブログSVGカタログ(6カタログ分類)
 - **共有 collector**: `.claude/scripts/lib/gallery-collectors.mjs`(列挙 buildTab/note-image/video)+`svg-classify.mjs`(分類)を CI 静的ギャラリー `ogp/build-image-gallery.mjs`(--audit 週次ゲート)と共用。R2 list 不可 → sitemap/all.json/note state/archive-manifest 起点+HEAD probe
-- SNS: X/IG/YT タブ × status フィルタ。動画は `<video>` 再生、caption 編集 (PATCH ホワイトリスト caption/scheduled_at のみ)、残枠バッジ (X週2-3/IG週3/YT月1)
-- 投稿はハイブリッド: X=publish-x spawn (dry-run/予約/即時・同時1・7日ぶりは dry-run 強制428) / IG=予約登録のみ (schedule JSON + posts.json 同時、実投稿は cron) / YT=upload.js spawn (月1+重複ガード内蔵・confirm必須)
-- 素材は R2、ローカル無ければ R2 公開URL直参照。R2 list 不可 → 「R2探索」HEAD probe で発見→draft登録
+- SNS: `/sns` は投稿ID台帳。画像一覧/表、ID・本文検索、型/状態フィルタ、予約順・JST表示、Drive保全素材のプレビュー。2026-10-11 オーナー指示で下書き本文編集を追加。保存時は版を検査し承認待ちへ戻す。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」
+- 管理画面の書込は下書き本文だけ。予約・投稿・生成はowner agent/skillが担う。予約済み・公開済みの本文は閲覧用
+- SNS素材は投稿IDに紐づくDrive保全素材を優先し、ローカル/R2へフォールバック。家計レシート・県図鑑・順位乗換も一覧と型フィルタに対応
+- 展開候補: `/sns?scope=candidates`。`planning` に企画名・出どころ・確認事項、`material_keys` に元素材の別名を保持。既存/削除済みへの紐付けを優先する `reconcile-materials.mjs` で重複登録を防止。確認用プレビューはthumbnailで投稿素材と区別
+- 2026-10-12: 確認用44件を同じIDで投稿用140枚＋本文へ更新（X11件、IG33件）。`preview_only=false`。画像はDriveの各ID配下、再現用props/manifest/入力は同じIDの`production-2026-10-12/`、投稿用コピーは`.local/r2/sns/<domain>/<key>/<platform>/{stills,caption.txt,props.json}`。2026-10-12にオーナーが44件の予約を指示。X11本は11/2〜11/12（11/3のみ12:15、他19:15 JST）、IG33本は11/1〜12/5の19:00（11/18・11/30は同型連日を避けて空ける）。IG配信は`instagram-w44`〜`w49`の予約表＋承認済みIDをdevelopから既存cronが読む。予約表だけのローカル保存では実予約にならないため、画像/本文のR2公開URL/SHA照合・全33件dry-run・develop反映まで確認する。#1133/#1134は現行相関gateで元ペアが不採用となり、収入×消費支出／第2次産業就業割合×共働き割合に差替え（元素材キーは保持）。
 - 台帳 SSOT は posts.json のまま (新DBなし)。書込は sns-posts-store.cjs 経由のみ。正典 `.claude/rules/sns-content-standards.md` §5.5
 
 ## ★IG cron バグ (約1ヶ月 IG 自動投稿が空振りしていた・2026-07-07 修正)

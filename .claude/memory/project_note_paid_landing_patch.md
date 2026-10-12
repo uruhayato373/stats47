@@ -26,7 +26,7 @@ metadata:
 - 本文 HTML の型: `<p name=id id=id>` / `<h2 name id>` / `<ul name id><li><p name id>…</p></li></ul>` /
   カードは `externalCard()` (navigation-footer.mjs)。note は送った HTML をそのまま返す (bodySignature 一致で検証できる)。
 
-**実装**: `.claude/scripts/note/patch-note-paid-landing.mjs` (spec = `catalog/data/paid-landing/<key>.json`)、
+**実装**: `.claude/scripts/note/patch-note-paid-landing.mjs` (spec = `data/note/paid-landing/<key>.json`、2026-10-13 に catalog/data から移設)、
 サンプル表画像は `build-csv-sample-image.mjs` (viewBox 幅 ≥1280 は PNG が等倍になるので止める)。
 LLM に spec を書かせるときは `findUnsupportedNumbers` (spec の数値が本文に無いと止める) が事故を防ぐ
 (実際に「237,810 人」を「23.8万人」に丸めた 1 件を弾いた)。

@@ -2,12 +2,11 @@
 paths:
   - "data/note/**"
   - "apps/admin/lib/server/note-covers.ts"
-  - "docs/31_note記事原稿/**"
   - ".claude/scripts/note/**"
   - ".claude/skills/note/**"
   - ".claude/agents/note-manager.md"
 ---
-# note 原稿の画像・データ資産の置き場 (2026-09-29)
+# note 記事の画像・データ資産の置き場 (2026-09-29・2026-10-13 改訂)
 
 ## 正本の保管と画像台帳 (2026-10-02 オーナー決定)
 
@@ -16,7 +15,7 @@ paths:
 「再生成できる」はレビューした版を保存しなくてよい理由にしない。
 
 - noteカバーの生成候補・採用版・noteに登録した実体は、版ごとに非公開R2へ保存する。公開サイトが直接読む画像だけpublic R2へ配信する。生成AIの元画像・候補をDriveへ置く既存契約は維持し、同じ画像の正本を複数持たない。
-- 画像台帳とJSON Schemaは **`data/note/`** に置き、gitで共有・レビューする。記事メタの既存TSカタログとは記事keyで結び、タイトル・分類を二重管理しない。監査の記録 (`data/note/evidence/`) を画像台帳の代用にしない。
+- 画像台帳とJSON Schemaは **`data/note/`** に置き、gitで共有・レビューする。記事台帳 `data/note/articles.json` とは記事keyで結び、タイトル・分類を二重管理しない。監査の記録 (`data/note/evidence/`) を画像台帳の代用にしない。
 - 台帳は画像の版ID、storage/providerと相対key、SHA-256、bytes、寸法、生成日時、生成元・テンプレート版、レビュー状態、候補版・採用版の参照、note公開URL・公開画像URL・最終確認日時・対応版を持つ。公開画像だけ観測でき、版を照合できない場合は対応版をnullとする。
 - JSON Schemaで形・語彙・必須項目を検査し、専用validatorで記事key・版参照・承認状態・保存実体とSHAを検査する。ローカル絶対パス、署名付きURL、認証情報を台帳へ保存しない。
 - 生成・レビュー・公開・監査・両管理画面は同じ台帳を参照する。版を上書きせず、採用版の切替を明示する。端末に画像がなくても共有ストレージから表示し、「未取得」「未生成」「未承認」「未公開」「確認が古い」を区別する。
@@ -64,75 +63,86 @@ paths:
 private R2の制作入力に固定する。最新年への自動切替・公開原稿一式の無断上書きは行わない。
 文字検査はSatoriの `textContent` を読む。空の検査結果をPASSにせず、境界・重なりを検査してから登録する。
 
-note 記事の画像は、記事で使ったデータと設定から作り直せる**派生物**である。派生物を git に置くと
-リポジトリが肥大する (2026-09-29 の実測: `docs/31_note記事原稿/` の追跡 PNG 682 枚で約 153MB。
-うち 519 枚 (約 140MB) は同名 SVG から再生成できた)。次の 3 層に分けて持つ。
+### 分類別のカバー (2026-10-11)
 
-| 層 | 置き場 | 中身 | 理由 |
-|---|---|---|---|
-| ① 原稿とデータ | git | `draft.md` / `chart-data.json` / `data-provenance.json` / `render-spec.json` / `tags.txt` / SVG | 小さく、差分をレビューでき、画像を作り直す入力になる |
-| ② 派生画像 | git に置かない (gitignore) | SVG から作る PNG、ランキング記事の Remotion 画像 4 枚 | 再生成できる。復元コマンドがある |
-| ②' 作り方の記録 | git | `render-spec.json` (ランキング記事) | `chart-data.json` の SHA・テンプレート版・色スケールを固定し、作り直しの根拠にする |
-| ③ 公開時点の固定版 | R2 `note/<vertical>/<slug>/` (既存の `sync-note-r2`) | 公開した原稿一式 | 公開後の再現用。書込は CI のみ |
+問い型・家計以外の分類も `generate-cover-refresh.ts` の `categoryCover` が分類ごとに描く。文言と図の対応は git TS
+(`catalog/cover-designs.ts`・`catalog/ranking-story-cover-copy.ts`) が正本で、部品は `lib/cover-visuals.ts`。
+
+- ranking-story・intro: 記事の題名 (一部は無料本文) にある順位・値・格差だけを大きく出す。地図は値を持たない背景。
+- practitioner: シリーズ (vertical) ごとの名前・話数・色で見分ける暗色の型。
+- explainer: 記事が公開R2に載せている図を1枚入れる。dataset-geo: 記事のGeo集計 (`app/geo/<slug>/item.json`) か公開ランキングの47県値で塗った県別地図。
+- palette: 章が扱うD3配色を `d3-scale-chromatic` から描いた色見本。
+- 書き出しは自前で256色に減色したPNGを既定にする。noteは受け取ったPNGを256色に変換し、暗い地に半透明を重ねたRGBA画像では
+  色が反転した (平均画素差17.6/255)。自前の減色は元画像との差0.005。
+- これとは別に、noteは保存時にまれに画像の下部へ色付きの帯を入れる (2026-10-11 実測: 減色版66件中2件・フルカラー版17件中1件)。
+  形式によらないので、公開後検証で落ちた記事は下の手順で別版を上げ直す (上げ直した版はすべて合格)。
+- 登録前に `--local-review` で描画だけ行い縮小表示で全件を見る。描画は決定的なので、登録後のSHAが確認版と一致することを再描画で確かめてからレビューを付ける。
+- macOS で `update-note-covers.mjs` を Profile 5 (browser-use) ではなく Playwright の専用プロファイルで動かすときは
+  `NOTE_COVER_BROWSER=playwright` を付ける (Claude アプリから Chrome の Profile 5 が読めない環境向け)。
+- 公開後の検証で画像差が出た操作は再実行しない。公開画像を点検し、新しい版を作ったうえで作業記録の操作を
+  `status: superseded` + `supersededBy` + `inspection` で閉じる (点検記録の無い superseded は閉じたことにならない)。
+  上げ直しは、もう一方の形式 (`NOTE_COVER_PNG=truecolor` で透過なしフルカラー、無指定で減色) で別版を作り、
+  確認済み版との平均画素差 (0.5/255 以下) を測ってからレビューし、`archive` で公開ポインタを合わせて反映する。
+
+## 記事の本文と画像の置き場 (2026-10-13 オーナー決定)
+
+記事の本文・画像・データ (draft.md・SVG・PNG・chart-data.json・render-spec.json など記事ディレクトリの全ファイル) の
+**正本は R2 だけ**に置く。無料記事は公開 R2、有料記事は private R2 の `note/<vertical>/<slug>/`。
+所在とファイル一覧のマニフェストの SHA は記事台帳 `data/note/articles.json` が持つ。
+`docs/31_note記事原稿/` は git に何も置かない作業場で、`npm run note:article -- checkout <key>` で取り出し、`save <key>` で戻す。
+置き場と手順の正典は [catalog/README.md](../scripts/note/catalog/README.md)。
+
+それまでの「原稿と SVG は git、派生 PNG は gitignore、公開時点の版は CI が R2 へ」という 3 層は廃止した。
+git に置くと有料記事の行き場が無く (公開 R2 に置けない)、docs/31 に 123 本・861 ファイルが溜まり、R2 と git のどちらが新しいかが
+記事ごとに食い違っていた (2026-10-13 の移行時の実測: 54 本で内容が異なり、うち 1 本は R2 の方が新しかった)。
 
 ## 契約
 
-1. **SVG から再生成できる PNG を追跡しない。** `docs/31_note記事原稿/` の PNG は、同名 SVG が追跡されていれば `.gitignore` の
-   系列パターン (`a-kakei-*` / `b-kakei-*` / `koumuin-*`) が除外する。復元は
+1. **docs/31 に追跡ファイルを置かない。** 作業コピーは `.gitignore` 済み。保存は `note:article save` だけで、R2 へ読み戻して SHA を照合し、
+   台帳のマニフェストを更新してから作業コピーを消す。旧版は private R2 の `note-archive/` に残る (git の履歴の代わり)。
+2. **派生 PNG は作業コピーで作り直してよいが、保存すると R2 の正本になる。** SVG から作る PNG の復元は
    `npm run note:images:regen -- --slug <記事ディレクトリ名>` (変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化)。
-   公開 (`/publish-note`) と `sync-note-r2` の前に、PNG が無ければ復元してから使う。
-2. **無視される PNG には必ず再生成元を置く。** 再生成元は同名 SVG か、ランキング記事の `render-spec.json` + `chart-data.json`。
-   どちらも無い PNG が無視されると git に載らず失われる。再生成元を持たない画像 (`product-sales`) は追跡のままにする。
+   公開 (`/publish-note`) の前に PNG が無ければ復元してから使う。SVG は手作りの図版 (koumuin シリーズの 268 枚など) を含む正本で、
+   PNG と一緒に R2 に置く。
 3. **ランキング記事は `chart-data.json` と `data-provenance.json` だけでデータを復元できる。**
    `chart-data.json` は 47 行 (rank 1..47 の連番・area_code 47 種・数値 value)、`copy.{canonicalTitle,readerLabel,hook}`、
    `summary.{mean,stddev,topBottomRatio}`、**`unit`** (画像の再描画に必要。単位なしは空文字を明示) を持つ。
    `data-provenance.json` は `source` が R2 の `app/stats/<key>/values.json` を指し、`restore` を持つ。
    観測値の本体は R2 が SSOT で、ここはその記事が使った値の**固定コピー** (R2 の値が後で更新されても、公開時の数値を辿れる)。
-4. **再生成元を持たない追跡 PNG は増やさない。** 追跡 PNG の総量は `.claude/config/note-image-assets-budget.json` の予算を超えない。
-   予算は縮小専用で、下げるときは `npm run note:images:audit -- --write-budget`。増やす場合だけ `--allow-increase` を付け、理由をコミットに残す。
-5. **画像の作り方を変えたら、既存記事の画像も作り直す。** テンプレートだけ直して過去記事を放置しない。
-
-6. **「R2 に本文がある」はカタログの申告でなく実在で確かめる。** 2026-09-29 の実測で、`note-published-urls.json` が
-   `r2_body:true` とする a-* 14 本の `draft.md` が R2 (`storage.stats47.jp/note/…`) に無く、git の `docs/31` が唯一の実体だった。
-   原因は、カタログの `r2Body` 既定が `true` (「R2 に本体あり」) で、登録しただけで同期されないまま「保存済み」になっていたこと。
-   該当 65 記事は `r2Body: false` にして `sync-note-r2` (CI) の対象へ戻した。以後は週次の `--verify-r2` が新しい欠落を止める。
-   `r2BodyMissingKnown` (予算ファイル) は、直せない既知の欠落を一時的に許す縮小専用の一覧 (現在は空)。
-
-7. **生成 AI (imagegen / Codex) の画像は「作り直せない入力」なので保管する。** 同じ指示でも毎回別の絵になり、時間も枠も使うため。
+   `note:article save` が保存前に検査して警告を出す (旧記事の不備で保存を止めない)。
+4. **画像の作り方を変えたら、既存記事の画像も作り直す。** テンプレートだけ直して過去記事を放置しない。
+5. **「R2 に本文がある」は台帳の申告でなく実在で確かめる。** 台帳の `body.manifest` は保存して読み戻せたときだけ書かれる。
+   週次の `--verify-r2` が公開 R2 の配信を、`note:article verify` が private を含む全ファイルを照合する。
+   (2026-09-29 に、カタログの `r2Body` 既定が `true` で、登録しただけで「保存済み」になっていた a-* 14 本が R2 に無かった。)
+6. **生成 AI (imagegen / Codex) の画像は「作り直せない入力」なので保管する。** 同じ指示でも毎回別の絵になり、時間も枠も使うため。
    二層で持つ (Kindle の表紙背景と同じ考え方。`.claude/rules/coconala-product-standards.md`「カバー画像は二層」)。
    - **Drive (非公開・人が見る)**: 候補・元画像 `stats47/note画像/<slug>/candidates/`。
    - **R2 (承認した最終版だけ)**: `media/note-backgrounds/<slug>/<sha12>/background.jpg` (1280x670 JPEG)。
-   - **git (`render-spec.json` の `background`)**: `sha256` / `r2Key` / 寸法 / `model` / `prompt` / `status: "approved"` だけ。画像本体は置かない。
+   - **記事の `render-spec.json` の `background`**: `sha256` / `r2Key` / 寸法 / `model` / `prompt` / `status: "approved"` だけ。画像本体は置かない。
    - 文字・数値・地図は生成画像に含めず、テンプレートが実テキスト/実データで重ねる (家ルール。`ogp-image-standards.md` §5)。
    手順は `node .claude/scripts/note/ingest-note-background.mjs` の先頭コメントに従う (候補を Drive へ `--stash` → 採用を正規化して
    `--write-spec` → R2 反映 → `render-ranking-images.mjs`)。`render-ranking-images.mjs` は背景を取得して SHA を検証し、合わなければ
    画像を作らず止まる (別の背景で焼かない)。生成 AI は再実行しない。現状、背景を使うのはカバーだけ。
-8. **SVG は git に置く。** SVG は画像の正本で、テキスト・小さく (追跡分の合計は約 1.5MB)・差分が読める。koumuin シリーズの 268 枚は
-   手作りの図版で作り直せない。PNG のように外すと正本を失うので外さない。
-
-9. **画像の生成口は 1 つ、公開前に必ず揃える。** ランキング記事の 4 枚は `render-ranking-images.mjs` だけが作る
+7. **画像の生成口は 1 つ、公開前に必ず揃える。** ランキング記事の 4 枚は `render-ranking-images.mjs` だけが作る
    (`apps/remotion` の `pipeline:sns` は note 画像を作らない。`--note-only` は廃止して呼ぶと止まる。二つの経路で作ると内容が食い違う)。
    公開・更新の入口 (`publish-new-note.sh` / `editor-helpers.sh`) は `ensure-note-images.mjs` で PNG を作り直し、足りなければ止まる
    (カバー無しのまま黙って公開しない)。
-10. **決定的であることを保つ。** 同じ入力から `render-ranking-images.mjs` は同じバイト列を作る (2026-09-30 に同一 SHA を実測)。
-    テンプレートに時刻・乱数・外部取得を入れない。入れるなら入力として spec に固定する。
+8. **決定的であることを保つ。** 同じ入力から `render-ranking-images.mjs` は同じバイト列を作る (2026-09-30 に同一 SHA を実測)。
+   テンプレートに時刻・乱数・外部取得を入れない。入れるなら入力として spec に固定する。
 
 ## 機械検査 (`npm run note:images:audit`)
 
 | コード | 意味 |
 |---|---|
-| `DERIVED_PNG_TRACKED` | 同名 SVG から再生成できる PNG を追跡している |
-| `IGNORED_PNG_WITHOUT_SVG` | gitignore された PNG に再生成元の SVG が無い (作業ツリーでのみ検出) |
-| `RANKING_CHART_DATA_INVALID` / `RANKING_PROVENANCE_INVALID` | 契約 3 の欠落 |
+| `DOCS31_TRACKED` | docs/31 に git の追跡ファイルがある (契約 1) |
+| `RANKING_CHART_DATA_INVALID` / `RANKING_PROVENANCE_INVALID` | 契約 3 の欠落 (`note:article save` が保存前に警告) |
 | `RENDER_SPEC_INVALID` | `render-spec.json` が無い・`chart-data.json` の SHA やテンプレート版が現行と不一致 (画像を作り直していない) |
-| `TRACKED_PNG_OVER_BUDGET` | 追跡 PNG が予算を超えた |
 | `NOTE_BACKGROUND_MISSING` | `render-spec.json` の背景が R2 に無い (`--verify-r2`・週次。作り直せない入力が失われている) |
-| `NOTE_R2_BODY_MISSING` | `r2_body:true` の記事が R2 に無い (`--verify-r2`・ネットワーク要・週次のみ。通信失敗は 0 件扱いにせず exit 2) |
+| `NOTE_R2_BODY_MISSING` | 台帳が保存済みとする公開本文が R2 に無い / 公開済みなのに未保存 (`--verify-r2`・週次。通信失敗は 0 件扱いにせず exit 2) |
 
 配線: pre-commit (`apps/web/scripts/pre-commit-checks.sh`)・PR (`pr-quality-check.yml`)・`.claude/config/quality-gates.json` の
 `note-image-assets`・週次 (`note-circulation-audit-weekly.yml` の artifact `note-image-assets.json`)。
 `/weekly-review` は `npm run note:images:audit -- --json` の `summary` を読む。
-既存の `check-asset-policy.cjs` は、`docs/31` の派生 PNG が CI checkout に無いことを欠落 (`MISSING_REFERENCE`) と扱わない。
 
 ## ランキング記事の画像 4 枚 (cover / choropleth / chart / boxplot)
 

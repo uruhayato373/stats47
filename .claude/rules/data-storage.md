@@ -19,9 +19,9 @@ paths:
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
 
-**note画像の運用台帳は例外として `data/note/` のgit管理JSON + JSON Schemaを採用する
-(2026-10-02 オーナー決定)。** 生成版・採用版・公開版と共有ストレージの所在を一元管理する。
-記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
+**note画像の運用台帳と記事台帳は例外として `data/note/` のgit管理JSON + JSON Schemaを採用する
+(画像 2026-10-02・記事 2026-10-13 オーナー決定)。** 記事の ID・編集メタ・本文の所在は `data/note/articles.json`、本文と画像の実体は R2。 生成版・採用版・公開版と共有ストレージの所在を一元管理する。
+記事台帳や監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
 詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
 
 **テーマの指標・チャート定義 (ThemeCatalog) も例外として `data/themes/catalogs/<key>.json` のgit管理JSON + JSON Schema
@@ -45,7 +45,7 @@ paths:
 | `config/` | 事業の台帳と設定。人またはオペレーター用スクリプトが判断して変える値 | 出品台帳とアカウント、ASP の接続設定、管理画面の領域 (`domains.json`)、PSI の計測対象、端末資源、参考文献 vault、note の承認済みハッシュタグ (`note-hashtags/`)、ココナラのプロフィール文面と画像 (`coconala/assets/`) |
 | `data/<取得元>/` | 事業の記録 — 計測の生データと集約、追記で増える台帳、改善ログ、レビュー、監査・是正のキューと最新の検査結果 | エージェントの運用をやめても事業として見返すもの。取得元・対象ごとに 1 ディレクトリ (下の表)。CI が書き戻すのもここ |
 | `assets/<用途>/` | 画像などの素材の原本 — 生成の入力・出力の原本と、その生成の説明・マニフェスト | ブログ・OGP の背景、特産品イラスト、ヒーロー画像の原本、note の背景・見出し・表紙、バナー |
-| `contents/<媒体>/` | 公開待ちの原稿 (outbox)。公開すると CI が消し、公開した記事の正本は R2 に置く | ブログ記事の原稿と図のデータ (`contents/blog/<slug>/`。2026-10-08 に `docs/` から移した。note の原稿は `docs/31_note記事原稿/` のまま) |
+| `contents/<媒体>/` | 公開待ちの原稿 (outbox)。公開すると CI が消し、公開した記事の正本は R2 に置く | ブログ記事の原稿と図のデータ (`contents/blog/<slug>/`。2026-10-08 に `docs/` から移した)。note の記事は git に置かない (台帳 `data/note/articles.json` + 本文は R2。`docs/31_note記事原稿/` は gitignore された作業場) |
 | `.claude/state/` | エージェント運用の状態だけ (下の「`.claude/state/` に置いてよいもの」の許可リスト) | エージェントの運用をやめたら不要になるもの。バックログ自動処理の台帳、整合性監査の印、Claude のトークン実績・モデル使用量・プロンプト評価、RemoteTrigger の記録 |
 | `.claude/config/` | 品質ゲートの基準・許可リスト・閾値、エージェント運用の方針 | `*-baseline.json`、`quality-gates.json`、計測値の警告閾値 (`budgets/<施策>/`) |
 
@@ -56,7 +56,7 @@ paths:
 |---|---|
 | `data/gsc/` `data/ga4/` `data/psi/` `data/cloudflare/` `data/adsense/` | 各取得元の週次生 CSV (`snapshots/<週>/`)・集約 (`history*.csv`)・要約 (`LATEST.md`)。GSC はカバレッジ是正キュー (`coverage-remediation/`) と運用サイクルの監査も持つ。AdSense は 2026-09-20 停止後の凍結記録 |
 | `data/affiliate/` | A8・もしも・楽天の成果、提携台帳、アフィリエイト実験の台帳と推移、GA4 のアフィリエイト実測、在庫・compliance の監査結果 |
-| `data/sns/` `data/note/` `data/products/` | 投稿台帳 (`posts.json`)・投稿の指標・Instagram の予約表と二重投稿防止ログ、note のダッシュボード指標・カバー台帳・下書き索引・運用の証跡 (`evidence/`)、商品の販売台帳・受領記録と生成・販売準備の状態 |
+| `data/sns/` `data/note/` `data/products/` | 投稿台帳 (`posts.json`)・投稿の指標・Instagram の予約表と二重投稿防止ログ、note の記事台帳 (`articles.json`・`magazines.json`・有料記事の無料部分の文言 `paid-landing/`)・ダッシュボード指標・カバー台帳・台帳から生成する索引・運用の証跡 (`evidence/`)、商品の販売台帳・受領記録と生成・販売準備の状態 |
 | `data/measurement-cycle/` `data/authenticated/` `data/nsm/` | 週次の計測→記録→改善のまとめ、認証付き CI の売上計測、週次収益 (NSM) |
 | `data/improvement/<施策>/` `data/effect-verdict/` `data/business/` | 改善施策の詳細ログ、効果判定、実験 (PDCA) の台帳 |
 | `data/reviews/{weekly,monthly}/` | 週次・月次レビュー |
@@ -94,7 +94,7 @@ paths:
 | `packages/*/src/`・`packages/*/data/` | パッケージに同梱する画像・図形 (コードが import する) |
 | `config/coconala/assets/` | ココナラのプロフィール・商品画像 (出品台帳と一緒に人が判断して変える) |
 | `.claude/skills/**/examples/` | スキルの説明に使う作例 (Codex 用ミラー `.agents/` を含む) |
-| `contents/blog/`・`docs/31_note記事原稿/` | 公開待ちの原稿 outbox (公開後に CI が消す) |
+| `contents/blog/` | ブログの公開待ちの原稿 outbox (公開後に CI が消す)。note の記事の画像は R2 だけに置く |
 
 公開する画像の正本は R2 (ブログの図・OGP・特産品イラスト)。生成した派生 PNG を git に足さない
 (`note-image-assets.md`・`ogp-image-standards.md`)。

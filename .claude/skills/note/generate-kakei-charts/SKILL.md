@@ -54,7 +54,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/generate-charts.js" --all
 
 ### Phase 2: SVG → PNG 変換
 
-> **ephemeral outbox**: docs/31 が存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
+> **作業場**: docs/31 は git に何も置かない作業場（本文と画像の正本は R2）。存在しない場合は先に `npm run note:article -- checkout <slug>` で R2 から取り出し、作業後に `npm run note:article -- save <slug>` で R2 へ戻す。
 
 ```bash
 # 1記事分
@@ -131,7 +131,7 @@ generate-charts.js が例外で止まる (監査に見えない `…` 切り詰�
 
 ```bash
 S=a-kakei-kumamoto
-bash .claude/scripts/note/restore-from-r2.sh $S                                   # docs/31 に無ければ復元
+npm run note:article -- checkout $S                                              # docs/31 に無ければ R2 から取り出す
 node .claude/scripts/note/build-kakei-note-chart-data.mjs --pref 43000            # chart-data.json
 node .claude/scripts/note/build-kakei-note-evidence-data.mjs --slug $S            # evidence-data.json + data/*.json
 npx tsx .claude/scripts/blog/generate-article-charts.ts --slug $S --base docs/31_note記事原稿   # data/*.svg (blog 契約)
@@ -150,11 +150,12 @@ node .claude/scripts/note/audit-note-figure-split.mjs $S                        
 node .claude/scripts/note/audit-kakei-note-content.mjs $S --live                   # figure 5 / リンク 200 / OGP 200
 node .claude/scripts/note/build-kakei-related-picks.mjs --write                    # 次に読む (同費目・同向きで倍率が近い県)
 node .claude/scripts/note/update-published-navigation.mjs --slug $S --commit      # フッタ再付与
+npm run note:article -- save $S                                                  # 作業コピーを R2 へ保存 (台帳の manifest を更新し作業コピーを消す)
 ```
 
 - `--all` は build-kakei-note-{evidence-data,draft}.mjs と generate-charts.js が対応。公開は 1 本ずつ (Profile 5 排他ロック)。
 - 監査の不変条件と定型文は `.claude/scripts/note/lib/kakei-note-{body,audit}.mjs`。テストは `__tests__/kakei-note-*.test.mjs`。
-- 根拠 3 枚の PNG は SVG から再生成可能なので git に追跡しない (asset policy)。R2 復元後は svg-to-png で作り直す。
+- 根拠 3 枚の PNG は SVG から再生成できる (asset policy)。checkout 後に PNG が無ければ svg-to-png で作り直す。
 - 根拠ランキング2枚の note 用 canonical は `data/*-prefecture-rankings-ig.svg` (1080x1350)。横長の通常版はブログ用で、note の `images/` へはコピーしない。
 - 商品カード (Kindle) は `/products/<slug>` の固有 OGP (`app/products/<slug>/ogp/ogp.png`、`generate-ogp-images.ts --type products`) が前提。
 

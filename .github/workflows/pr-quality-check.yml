@@ -255,8 +255,8 @@ jobs:
         continue-on-error: false
 
       - name: 🗒️ note Image Asset Contract Guard
-        # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
-        # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md
+        # docs/31 (note 記事の作業場) に git の追跡ファイルを置かない。本文・画像の正本は R2、
+        # 所在は data/note/articles.json。契約: .claude/rules/note-image-assets.md
         run: |
           node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
@@ -500,11 +500,14 @@ jobs:
         continue-on-error: false
 
       - name: 🗒️ note Catalog Contract Gate
-        # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
+        # 記事台帳 data/note/articles.json の Schema・参照整合・title重複、派生インデックス (公開URL・下書き索引) が
+        # 台帳から再生成した内容と一致すること、R2 保存の衝突検査を決定的に検査する。
         # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
         run: |
           npm run check:product-storefront --workspace apps/web
           npm run note:catalog:validate
+          npm run note:catalog:check
+          npm run note:article:test
         continue-on-error: false
 
       - name: 🧭 Business Plan SSOT Contract Gate

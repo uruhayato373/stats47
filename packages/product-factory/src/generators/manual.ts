@@ -10,6 +10,7 @@ import { dirname, resolve } from "node:path";
 import { createRequire } from "node:module";
 import type { ProductDefinition } from "../catalog/types";
 import { LICENSE_REGISTRY, type LicenseId } from "../catalog/licenses";
+import { CHART_DATA_REPLACE_PARAGRAPH } from "./usage-text";
 
 const localRequire = createRequire(import.meta.url);
 
@@ -79,7 +80,7 @@ export async function buildManualPdf(product: ProductDefinition, outPath: string
     { text: "地図の各都道府県は独立した図形です。クリックで選択し、「図形の塗りつぶし」から任意の色に変更できます。複数県を選択して一括変更もできます。", size: 11 },
     { text: " ", size: 8 },
     { text: "4. グラフのデータを差し替える", size: 14 },
-    { text: "グラフを選択し「グラフのデザイン → データの編集」で埋め込み Excel を開き、数値を書き換えると自動で更新されます。data.csv を貼り付けると 47 県を一括で差し替えられます。", size: 11 },
+    { text: CHART_DATA_REPLACE_PARAGRAPH, size: 11 },
     { text: " ", size: 8 },
     { text: "5. 対応環境", size: 14 },
     { text: product.compatibility.join(" / "), size: 11 },

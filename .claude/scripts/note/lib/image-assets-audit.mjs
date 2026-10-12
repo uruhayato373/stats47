@@ -1,32 +1,26 @@
 /**
- * note 原稿 (docs/31_note記事原稿) の画像資産契約を検査する純関数。
+ * note 記事の画像・データ資産の契約を検査する純関数。
  *
  * 契約の正典は .claude/rules/note-image-assets.md。ここは判定だけを持ち、I/O は CLI が渡す。
- *   1. 再生成できる PNG (同名 SVG が追跡されている) を git に載せない
- *   2. 無視 (gitignore) されている PNG には再生成元の SVG が要る (無ければ実体を失う)
- *   3. ランキング記事 (a-<rankingKey>) は、記事で使ったデータを chart-data.json と
- *      data-provenance.json だけで復元できる形で持つ
- *   4. 追跡中 PNG の総量は縮小専用の予算を超えない
+ *   1. docs/31_note記事原稿 は作業場で、git に何も置かない (本文・画像の正本は R2、所在は data/note/articles.json)
+ *   2. ランキング記事 (a-<rankingKey>) は、記事で使ったデータを chart-data.json と
+ *      data-provenance.json だけで復元できる形で持つ (note:article save が保存前に警告する)
+ *   3. 台帳が R2 に保存済みとする公開本文が実在する / 生成 AI の背景が R2 に実在する (週次)
  */
 
-import { NOTE_RANKING_IMAGES, validateRenderSpec } from "./note-render-spec.mjs";
+import { validateRenderSpec } from "./note-render-spec.mjs";
 
 export const DOCS31 = "docs/31_note記事原稿/";
 export const RANKING_ARTICLE_POINTS = 47;
 export const CODES = {
-  DERIVED_PNG_TRACKED: "DERIVED_PNG_TRACKED",
-  IGNORED_PNG_WITHOUT_SVG: "IGNORED_PNG_WITHOUT_SVG",
+  DOCS31_TRACKED: "DOCS31_TRACKED",
   RANKING_CHART_DATA_INVALID: "RANKING_CHART_DATA_INVALID",
   RANKING_PROVENANCE_INVALID: "RANKING_PROVENANCE_INVALID",
-  TRACKED_PNG_OVER_BUDGET: "TRACKED_PNG_OVER_BUDGET",
   RENDER_SPEC_INVALID: "RENDER_SPEC_INVALID",
   NOTE_R2_BODY_MISSING: "NOTE_R2_BODY_MISSING",
   NOTE_BACKGROUND_MISSING: "NOTE_BACKGROUND_MISSING",
 };
 
-const isPng = (file) => /\.png$/i.test(file);
-const svgSibling = (file) => file.replace(/\.png$/i, ".svg");
-const articleSlug = (file) => file.slice(DOCS31.length).split("/")[0];
 
 /** ランキング記事 (Aシリーズ単一指標)。家計 (a-kakei-*) は別の生成系なので含めない */
 export function isRankingArticleSlug(slug) {
@@ -86,110 +80,68 @@ export function validateRankingProvenance(slug, provenance, chartData) {
  * @param {(file: string) => unknown | null} input.readJson repo 相対パスの JSON (無い・壊れていれば null)
  * @param {{ trackedPngBytes?: number, trackedPngCount?: number } | null} input.budget
  */
-export function auditImageAssets({ tracked, ignoredUntracked = [], pngBytes = new Map(), readJson, readText = () => null, budget = null }) {
-  const findings = [];
-  const add = (code, file, message) => findings.push({ code, file, message });
-  const trackedSet = new Set(tracked);
-  const pngs = tracked.filter(isPng);
+/** docs/31 に作業場の説明 README.md 以外の追跡ファイルがあれば違反 (作業コピーは gitignore 済みで、正本は R2)。 */
+export const DOCS31_README = `${DOCS31}README.md`;
 
-  // ランキング記事の 4 枚は、追跡された render-spec.json + chart-data.json から作り直せる (SVG は要らない)
-  const renderableFromSpec = (file) => {
-    const slug = articleSlug(file);
-    if (!isRankingArticleSlug(slug)) return false;
-    const dir = `${DOCS31}${slug}/`;
-    return trackedSet.has(`${dir}render-spec.json`) && trackedSet.has(`${dir}chart-data.json`) && NOTE_RANKING_IMAGES.some((image) => dir + image.file === file);
-  };
-  const regenerable = (file) => trackedSet.has(svgSibling(file)) || renderableFromSpec(file);
-
-  for (const file of pngs) {
-    if (trackedSet.has(svgSibling(file))) add(CODES.DERIVED_PNG_TRACKED, file, `${svgSibling(file).split("/").pop()} から再生成できる。PNG を追跡しない`);
-    else if (renderableFromSpec(file)) add(CODES.DERIVED_PNG_TRACKED, file, "render-spec.json と chart-data.json から再生成できる (render-ranking-images.mjs)。PNG を追跡しない");
-  }
-
-  for (const file of ignoredUntracked.filter(isPng)) {
-    if (!regenerable(file)) add(CODES.IGNORED_PNG_WITHOUT_SVG, file, "gitignore された PNG に再生成元 (同名 SVG、またはランキング記事の render-spec.json) が無い。git に載らず失われる");
-  }
-
-  const slugs = [...new Set(tracked.map(articleSlug))].filter(isRankingArticleSlug);
-  let rankingArticles = 0;
-  for (const slug of slugs) {
-    const dir = `${DOCS31}${slug}`;
-    if (!trackedSet.has(`${dir}/chart-data.json`) && !trackedSet.has(`${dir}/draft.md`)) continue;
-    rankingArticles += 1;
-    const chartData = readJson(`${dir}/chart-data.json`);
-    const provenance = readJson(`${dir}/data-provenance.json`);
-    for (const message of validateRankingChartData(slug, chartData)) add(CODES.RANKING_CHART_DATA_INVALID, `${dir}/chart-data.json`, message);
-    // 画像を作り直せる根拠。chart-data.json の SHA とテンプレート版が現行と一致していること
-    const specText = readText(`${dir}/render-spec.json`);
-    if (specText === null) add(CODES.RENDER_SPEC_INVALID, `${dir}/render-spec.json`, "render-spec.json が無い。node .claude/scripts/note/render-ranking-images.mjs で作る");
-    else {
-      let spec = null;
-      try {
-        spec = JSON.parse(specText);
-      } catch {
-        /* validateRenderSpec が読めない旨を返す */
-      }
-      for (const message of validateRenderSpec(slug, spec, readText(`${dir}/chart-data.json`))) add(CODES.RENDER_SPEC_INVALID, `${dir}/render-spec.json`, message);
-    }
-    for (const message of validateRankingProvenance(slug, provenance, chartData)) add(CODES.RANKING_PROVENANCE_INVALID, `${dir}/data-provenance.json`, message);
-  }
-
-  const trackedPngBytes = pngs.reduce((sum, file) => sum + (pngBytes.get(file) ?? 0), 0);
-  if (budget) {
-    if (finite(budget.trackedPngBytes) && trackedPngBytes > budget.trackedPngBytes) {
-      add(CODES.TRACKED_PNG_OVER_BUDGET, DOCS31, `追跡中 PNG が ${trackedPngBytes} bytes で予算 ${budget.trackedPngBytes} bytes を超えた`);
-    }
-    if (finite(budget.trackedPngCount) && pngs.length > budget.trackedPngCount) {
-      add(CODES.TRACKED_PNG_OVER_BUDGET, DOCS31, `追跡中 PNG が ${pngs.length} 枚で予算 ${budget.trackedPngCount} 枚を超えた`);
-    }
-  }
-
-  // 再生成元を持たない追跡 PNG の内訳。ここが「実体を git が唯一保持している画像」
-  const sourceless = pngs.filter((file) => !regenerable(file));
-  const sourcelessByClass = {};
-  for (const file of sourceless) {
-    const slug = articleSlug(file);
-    const cls = isRankingArticleSlug(slug) ? "ranking-article" : slug.startsWith("product-") ? "product-sales" : "other";
-    sourcelessByClass[cls] = (sourcelessByClass[cls] ?? 0) + 1;
-  }
-
-  return {
-    findings,
-    summary: {
-      trackedPngCount: pngs.length,
-      trackedPngBytes,
-      derivedPngTracked: findings.filter((f) => f.code === CODES.DERIVED_PNG_TRACKED).length,
-      sourcelessTrackedPng: sourceless.length,
-      sourcelessByClass,
-      rankingArticles,
-      rankingArticlesInvalid: new Set(findings.filter((f) => f.code.startsWith("RANKING_") || f.code === CODES.RENDER_SPEC_INVALID).map((f) => f.file.split("/")[2])).size,
-    },
-  };
+export function auditImageAssets({ tracked }) {
+  const findings = tracked.filter((file) => file !== DOCS31_README).map((file) => ({
+    code: CODES.DOCS31_TRACKED,
+    file,
+    message: "docs/31 は作業場で git に置かない。npm run note:article -- save <key> で R2 へ保存し、git rm --cached で外す",
+  }));
+  return { findings, summary: { docs31Tracked: findings.length } };
 }
 
 /**
- * カタログが「R2 に本文がある (r2_body)」と言う記事が、実際に R2 にあるかを突き合わせる (ネットワーク要・週次のみ)。
- * 2026-09-29 の実測で、r2_body:true の a-* 14 本が R2 に無く、git の docs/31 が唯一の実体だった。
- * この状態で「r2_body:true だから docs/31 を消してよい」と判断すると原稿が失われる。
- *
- * @param {Record<string, {r2_body?: boolean, r2_path?: string, is_paid?: boolean}>} articles note-published-urls.json の articles
- * @param {Map<string, number>} statusByPath r2_path -> draft.md の HTTP status (取得失敗は 0)
- * @param {string[]} known 既知の欠落 slug (縮小専用。ここに無い欠落だけを新規違反とする)
+ * ランキング記事の作業コピーを保存する前の検査。readText(name) は記事ディレクトリ内の相対名で中身 (無ければ null) を返す。
+ * @returns {{code: string, file: string, message: string}[]}
  */
-export function auditR2BodyPresence(articles, statusByPath, known = []) {
+export function validateRankingArticleFiles(slug, readText) {
+  if (!isRankingArticleSlug(slug)) return [];
+  const findings = [];
+  const add = (code, file, message) => findings.push({ code, file: `${slug}/${file}`, message });
+  const parse = (text) => {
+    try {
+      return text === null ? null : JSON.parse(text);
+    } catch {
+      return null;
+    }
+  };
+  const chartText = readText("chart-data.json");
+  const chartData = parse(chartText);
+  for (const message of validateRankingChartData(slug, chartData)) add(CODES.RANKING_CHART_DATA_INVALID, "chart-data.json", message);
+  const specText = readText("render-spec.json");
+  if (specText === null) add(CODES.RENDER_SPEC_INVALID, "render-spec.json", "render-spec.json が無い。node .claude/scripts/note/render-ranking-images.mjs で作る");
+  else for (const message of validateRenderSpec(slug, parse(specText), chartText)) add(CODES.RENDER_SPEC_INVALID, "render-spec.json", message);
+  for (const message of validateRankingProvenance(slug, parse(readText("data-provenance.json")), chartData))
+    add(CODES.RANKING_PROVENANCE_INVALID, "data-provenance.json", message);
+  return findings;
+}
+
+/**
+ * 台帳 (data/note/articles.json) が公開 R2 に保存済みとする本文が、実際に配信されているかを突き合わせる (ネットワーク要・週次)。
+ * 公開済みなのに本文を一度も保存していない記事 (note のみの回収待ちを除く) も違反にする。
+ *
+ * @param {Array<{key: string, status: string, r2Path: string, body: {store: string, manifest: object|null}}>} articles
+ * @param {Map<string, number>} statusByPath r2Path -> draft.md の HTTP status (取得失敗は 0)
+ */
+export function auditR2BodyPresence(articles, statusByPath) {
   const findings = [];
   const unknown = [];
   let checked = 0;
-  for (const [slug, article] of Object.entries(articles)) {
-    if (!article.r2_body || !article.r2_path || article.is_paid) continue;
-    checked += 1;
-    const status = statusByPath.get(article.r2_path);
-    if (status === 200) continue;
-    if (!status) {
-      unknown.push(slug);
+  for (const article of articles) {
+    if (article.body.store === "note-only") continue;
+    if (!article.body.manifest) {
+      if (article.status === "published")
+        findings.push({ code: CODES.NOTE_R2_BODY_MISSING, file: article.r2Path, message: `${article.key}: 公開済みなのに本文が R2 に未保存 (台帳の body.manifest が null)` });
       continue;
     }
-    if (!known.includes(slug)) findings.push({ code: CODES.NOTE_R2_BODY_MISSING, file: article.r2_path, message: `r2_body:true だが R2 の draft.md が HTTP ${status}。docs/31 (git) が唯一の実体の可能性` });
+    if (article.body.store !== "r2-public") continue;
+    checked += 1;
+    const status = statusByPath.get(article.r2Path);
+    if (status === 200) continue;
+    if (!status) unknown.push(article.key);
+    else findings.push({ code: CODES.NOTE_R2_BODY_MISSING, file: article.r2Path, message: `${article.key}: 台帳は保存済みだが公開 R2 の draft.md が HTTP ${status}` });
   }
   return { findings, unknown, checked };
 }

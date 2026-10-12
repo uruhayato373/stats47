@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-bcd6d879858acd5d",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "c-engel-food-gap",
+      "sha256": "cb33b1f5b11ab59bd59616fc5537a7287923c2d29c941ef02222c4230410a9df"
+    }
+  ],
+  "startedAt": "2026-10-12T06:21:56.793Z",
+  "articles": [
+    {
+      "key": "c-engel-food-gap",
+      "noteId": "n28d03969fa6d",
+      "action": "create",
+      "sourceSha256": "cb33b1f5b11ab59bd59616fc5537a7287923c2d29c941ef02222c4230410a9df",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "0ee58f33c9ef2f22b6ec80b18e848d34d7de6f75b54a1a4c7014402a58f1b76b",
+        "key": "6e4e9a470a24eb56882f3a0f12553a1aaddc313b8c2a7dcde8888214451ef577",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "aa1ec9d07b52ad44c95ed00d214aabeaf29bca8043e274eafe43cb5c653bf252",
+        "body": "18183c99ee64a6595ec4261276c85f56448ddda1837db5c11deb98334e8afd0b",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "7a79865cd3ee8ca6b8944245ee9fd58c9054dc2691526929dcd492f11216b0bd",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "33800ea0ce3485315c76b591759c84f3413f1b660ea665123d64ea788ef78749",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T06:21:59.147Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323542726/rectangle_large_type_2_7db5762e7e30be8aa71c6735ca77a249.png",
+      "uploadedAt": "2026-10-12T06:22:02.706Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "e3320fefb33e3907a19504bcd89da4f628eff698c07c5160bfede559441a704a",
+        "meanPixelError": 0.7078229944029851
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323542726/rectangle_large_type_2_7db5762e7e30be8aa71c6735ca77a249.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T06:22:03.110Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T06:22:03.110Z"
+}

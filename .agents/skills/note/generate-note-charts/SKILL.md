@@ -31,8 +31,8 @@ docs/31_note記事原稿/<slug>/images/
 └── cover.png        ← カバー画像（1280×670）
 ```
 
-> **ephemeral outbox**: docs/31 は作業時のみ存在（push後CI自動削除）。
-> ディレクトリが存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
+> **作業場**: docs/31 は git に何も置かない作業場（本文と画像の正本は R2、所在は記事台帳 `data/note/articles.json`）。
+> ディレクトリが存在しない場合は先に `npm run note:article -- checkout <slug>` で R2 から取り出し、作業後に `npm run note:article -- save <slug>` で R2 へ戻す。
 
 ## 手順
 

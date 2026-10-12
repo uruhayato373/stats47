@@ -20,7 +20,15 @@ import {
   KEEP_EXISTING_COVER_KEYS,
   BOLD_COVER_HEADLINES,
   NOTE_COVER_COPY,
+  PRACTITIONER_SERIES,
+  PRACTITIONER_LABEL_OVERRIDES,
+  EXTRA_COVER_HEADLINES,
+  EXPLAINER_COVER_FIGURES,
+  PALETTE_COVER_SWATCHES,
+  DATASET_COVER_FIGURES,
 } from './catalog/cover-designs';
+import { RANKING_STORY_COVER_COPY } from './catalog/ranking-story-cover-copy';
+import { neutralJapanMap, swatchPanel, figureImage, choroplethPanel } from './lib/cover-visuals';
 import { NOTE_ARTICLES } from './catalog';
 import { noteCoverCategory } from './catalog/cover-categories';
 import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
@@ -33,8 +41,9 @@ async function main() {
     '../../..'
   );
   const args = process.argv.slice(2);
-  if (args.length !== 4 || args[0] !== '--output' || args[2] !== '--version' || !/^[\w-]+$/.test(args[3]))
-    throw Error('Usage: generate-cover-refresh.ts --output TEMP_INPUT_DIR --version VERSION (prepare with note:assets first)');
+  const localReview = args[4] === '--local-review';
+  if (args.length !== (localReview ? 5 : 4) || args[0] !== '--output' || args[2] !== '--version' || !/^[\w-]+$/.test(args[3]))
+    throw Error('Usage: generate-cover-refresh.ts --output TEMP_INPUT_DIR --version VERSION [--local-review] (prepare with note:assets first)');
   const OUT = path.resolve(args[1]);
   const version = args[3];
   const isTemporary = [os.tmpdir(), 'C:/tmp', '/tmp'].some((dir) => {
@@ -441,6 +450,108 @@ async function main() {
       },
     };
   }
+  // 2026-10-11 category renderers: ranking-story / intro / practitioner / explainer / palette.
+  const neutralMap = await neutralJapanMap(ROOT);
+  const rendererFiles = ['.claude/scripts/note/generate-cover-refresh.ts', '.claude/scripts/note/lib/cover-visuals.ts',
+    'apps/web/scripts/lib/note-cover-render.ts', '.claude/scripts/note/catalog/cover-designs.ts',
+    '.claude/scripts/note/catalog/ranking-story-cover-copy.ts'];
+  const rendererSha256 = sha(Buffer.concat(rendererFiles.map((file) => fs.readFileSync(path.join(ROOT, file)))));
+  const intro = { kicker: 'はじめまして、stats47です', subjectLines: ['あなたの県は、', '何位？'],
+    highlight: '47都道府県を比べる', detail: '元県庁職員がつくった統計サイト', source: 'title' as const };
+  const headlineOf = (key: string) => BOLD_COVER_HEADLINES[key] ?? NOTE_COVER_COPY[key]?.headline
+    ?? EXTRA_COVER_HEADLINES[key]?.headline;
+  async function categoryCover(a: any, meta: (typeof NOTE_ARTICLES)[number], category: string) {
+    const base = { title: a.title, originalCoverSha256: a.cover?.url ? sha(fs.readFileSync(path.join(OUT, 'before', a.noteKey + '.image'))) : null,
+      category, rendererSha256, rendererFiles };
+    if (category === 'ranking-story' || category === 'intro') {
+      const copy = category === 'intro' ? intro : RANKING_STORY_COVER_COPY[a.catalogKey];
+      if (!copy) throw Error('ranking story copy missing ' + a.catalogKey);
+      const { source, ...rankingStory } = copy;
+      return { design: { kicker: '', headline: '', subline: '', mapImage: neutralMap, rankingStory } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'ranking-story-note-cover-v1', copy, copySource: source,
+          map: 'neutral backdrop (no values)' } };
+    }
+    if (category === 'practitioner') {
+      const series = PRACTITIONER_SERIES[meta.vertical];
+      const headline = headlineOf(a.catalogKey);
+      if (!series || !headline) throw Error('practitioner series/headline missing ' + a.catalogKey);
+      const number = a.catalogKey.match(/^(?:koumuin-gis-)?(\d{2})-/)?.[1];
+      const label = PRACTITIONER_LABEL_OVERRIDES[a.catalogKey] ?? series.label;
+      return { design: { kicker: '', headline, subline: '', mapImage: '',
+        series: { label, episode: series.numbered && number ? `#${number}` : null, accent: series.accent } } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'series-note-cover-v1', label, headline, episode: number ?? null } };
+    }
+    if (category === 'explainer' && !EXPLAINER_COVER_FIGURES[a.catalogKey] && EXTRA_COVER_HEADLINES[a.catalogKey]) {
+      // The article publishes no figure of its own: headline + supporting fact on the neutral backdrop.
+      const copy = EXTRA_COVER_HEADLINES[a.catalogKey];
+      const rankingStory = { kicker: copy.kicker, subjectLines: copy.headline.split('\n'), highlight: '', detail: copy.subline };
+      return { design: { kicker: '', headline: '', subline: '', mapImage: neutralMap, rankingStory } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'ranking-story-note-cover-v1', variant: 'explainer-without-figure', copy,
+          map: 'neutral backdrop (no values)' } };
+    }
+    if (category === 'explainer') {
+      const figure = EXPLAINER_COVER_FIGURES[a.catalogKey];
+      const headline = headlineOf(a.catalogKey);
+      if (!figure || !headline || !meta.r2Path) throw Error('explainer figure/headline missing ' + a.catalogKey);
+      const url = `${R2_PUBLIC_BASE_URL}/${meta.r2Path}/${figure.image}`;
+      const name = `${a.catalogKey}-figure${path.extname(figure.image)}`;
+      const file = path.join(OUT, 'sources', name);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      if (!fs.existsSync(file)) fs.writeFileSync(file, await fetchCoverSource(url));
+      const { image, aspect } = await figureImage(fs.readFileSync(file));
+      const fallback = general(a);
+      const copy = EXTRA_COVER_HEADLINES[a.catalogKey] ?? NOTE_COVER_COPY[a.catalogKey];
+      return { design: { kicker: copy?.kicker ?? fallback.kicker, headline,
+        subline: copy?.subline ?? fallback.subline, mapImage: image, figure: { caption: figure.caption, aspect } } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'figure-note-cover-v1', figureSource: url,
+          figureSha256: sha(fs.readFileSync(file)), caption: figure.caption } };
+    }
+    if (category === 'dataset-geo') {
+      const spec = DATASET_COVER_FIGURES[a.catalogKey];
+      const copy = NOTE_COVER_COPY[a.catalogKey] ?? EXTRA_COVER_HEADLINES[a.catalogKey];
+      if (!spec || !copy) throw Error('dataset figure/copy missing ' + a.catalogKey);
+      const isPack = spec.kind === 'pack-csv';
+      if (isPack && !path.resolve(ROOT, spec.source).startsWith(path.join(ROOT, '.local/coconala-products') + path.sep))
+        throw Error('pack-csv source must be a local product build ' + a.catalogKey);
+      const url = isPack ? spec.source : `${R2_PUBLIC_BASE_URL}/${spec.source}`;
+      const name = `${a.catalogKey}-figure${path.extname(spec.source)}`;
+      const file = path.join(OUT, 'sources', name);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      if (!fs.existsSync(file)) fs.writeFileSync(file, isPack ? fs.readFileSync(path.join(ROOT, spec.source)) : await fetchCoverSource(url));
+      let figure: { image: string; aspect: number };
+      if (spec.kind === 'pack-csv') {
+        // data.csv: code, name, indicators..., notes. 47 rows in prefecture-code order (checked by the pack inspector).
+        const parsed = fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').trim().split(/\r?\n/).map((line) => line.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((cell) => cell.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"')));
+        const index = parsed[0].indexOf(spec.column);
+        const rows = parsed.slice(1).map((r) => ({ areaCode: r[0], value: Number(r[index]) }));
+        if (index < 2 || rows.length !== 47 || rows.some((r) => !/^\d{5}$/.test(r.areaCode) || !Number.isFinite(r.value)))
+          throw Error('pack-csv needs 47 numeric prefecture values ' + a.catalogKey);
+        figure = await choroplethPanel(ROOT, new Map(rows.map((r) => [r.areaCode.slice(0, 2), r.value])));
+      } else if (spec.kind === 'image') figure = await figureImage(fs.readFileSync(file));
+      else {
+        const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+        const rows: Array<{ areaCode: string; value: number }> = spec.kind === 'geo-item'
+          ? data.rows.map((r: any) => ({ areaCode: r.areaCode, value: r.values[spec.metric] }))
+          : data.rows.filter((r: any) => String(r.yearCode) === spec.year);
+        if (rows.length !== 47 || rows.some((r) => !Number.isFinite(r.value)))
+          throw Error('dataset figure needs 47 prefecture values ' + a.catalogKey);
+        figure = await choroplethPanel(ROOT, new Map(rows.map((r) => [r.areaCode.slice(0, 2), r.value])), spec.invert);
+      }
+      return { design: { kicker: copy.kicker, headline: copy.headline, subline: copy.subline, mapImage: figure.image,
+        figure: { caption: spec.caption, aspect: figure.aspect } } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'figure-note-cover-v1', figureSource: url, figureKind: spec.kind,
+          figureSha256: sha(fs.readFileSync(file)), caption: spec.caption } };
+    }
+    if (category === 'palette') {
+      const palette = PALETTE_COVER_SWATCHES[a.catalogKey];
+      const headline = headlineOf(a.catalogKey);
+      if (!palette || !headline) throw Error('palette swatches/headline missing ' + a.catalogKey);
+      return { design: { kicker: palette.kicker, headline, subline: palette.subline,
+        mapImage: await swatchPanel(palette.rows), accent: '#5b6cff', swatches: { caption: palette.caption } } as EditorialNoteCover,
+        evidence: { ...base, renderer: 'palette-note-cover-v1', schemes: palette.rows, source: 'd3-scale-chromatic' } };
+    }
+    return null;
+  }
   const reports: Array<
     { action: 'keep' | 'create' | 'improve' } & Record<string, unknown>
   > = [];
@@ -485,6 +596,9 @@ async function main() {
     if (isQuestionRanking) ({ design, evidence } = await questionRanking(meta));
     if (a.catalogKey.startsWith('a-kakei-'))
       ({ design, evidence } = await household(a));
+    const categorized = isQuestionRanking || a.catalogKey.startsWith('a-kakei-')
+      ? null : await categoryCover(a, meta, noteCoverCategory(meta));
+    if (categorized) ({ design, evidence } = categorized);
     let element;
     try {
       element = buildBoldNoteCoverElement(design);
@@ -530,7 +644,12 @@ async function main() {
       }
     const file = path.join(OUT, 'after', a.catalogKey + '.png');
     fs.writeFileSync(file.replace(/\.png$/, '.svg'), svg);
-    await sharp(Buffer.from(svg)).png().toFile(file);
+    // note re-encodes uploads as 256-colour PNG; a palette we choose ourselves survives that unchanged
+    // (2026-10-11: note's own quantisation of a dark translucent cover gave MAE 17.6, our palette 0.005).
+    // NOTE_COVER_PNG=truecolor re-issues one cover whose upload note stored damaged (opaque RGB, distinct bytes).
+    const flat = sharp(Buffer.from(svg)).flatten({ background: '#ffffff' });
+    await (process.env.NOTE_COVER_PNG === 'truecolor' ? flat.png()
+      : flat.png({ palette: true, colours: 256, dither: 0, effort: 10 })).toFile(file);
     const m = await sharp(file).metadata();
     if (m.width !== 1280 || m.height !== 670) throw Error('dimensions');
     const { mapImage, mapInsetImage, ...copy } = design;
@@ -574,6 +693,11 @@ async function main() {
       2
     ) + '\n'
   );
+  if (localReview) {
+    // Look at after/*.png before anything is stored; rerun without the flag to register the reviewed renderer output.
+    console.log('Local review only: nothing registered; images are in', path.join(OUT, 'after'));
+    return;
+  }
   const store = createCoverStore();
   for (const report of reports.filter((r) => r.action !== 'keep')) {
     if (typeof report.file !== 'string') throw Error('candidate file missing');

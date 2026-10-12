@@ -1,15 +1,16 @@
 /**
- * note-catalog → 派生インデックス生成
+ * 記事台帳 (data/note/articles.json) → 派生インデックス 2 つを生成する。手編集しない。
+ *   - data/note/note-published-urls.json  公開済み記事の URL と本文の所在
+ *   - data/note/note-draft-index.json     下書きの一覧と本文の所在
  *
- * カタログ (git TS SSOT) から data/note/note-published-urls.json を再生成する。
- * これで「カタログが真実源、note-published-urls.json は派生物」が成立する
- * (従来 build-note-published-index.mjs が R2 frontmatter を fetch していたのを置換)。
+ * 内容は台帳だけで決まる (日付を入れない) ので、--check で手編集や再生成漏れを検出できる。
  *
  * Usage:
  *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts            # scratchpad へ (非破壊)
- *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply    # 本番 state を上書き
+ *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply    # data/note へ書き込む
+ *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check    # data/note と一致しなければ exit 1
  */
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { NOTE_ARTICLES } from "./index";
@@ -18,17 +19,12 @@ import { datasetPath } from "../../../../config/datasets.mjs";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
 const APPLY = process.argv.includes("--apply");
+const CHECK = process.argv.includes("--check");
 
-const published = NOTE_ARTICLES.filter(
-  (a) => a.status === "published" && a.noteUrl,
-).sort((a, b) => a.key.localeCompare(b.key));
+const access = { "r2-public": "public", "r2-private": "private", "note-only": "none" } as const;
 
-const articles: Record<string, unknown> = {};
-for (const a of published) {
-  // 本体が R2 に無い回収スタブ (r2Body===false) は "note_only"。
-  // R2 に本体が実在するものだけ "r2_ready" と正直に記録する
-  // (旧実装は全件無条件 "r2_ready" で 404 の r2_path を「保存済み」と偽っていた)。
-  const hasBody = a.r2Body !== false;
+const published: Record<string, unknown> = {};
+for (const a of NOTE_ARTICLES.filter((x) => x.status === "published" && x.noteUrl).sort((x, y) => x.key.localeCompare(y.key))) {
   const entry: Record<string, unknown> = {
     vertical: a.vertical,
     title: a.title,
@@ -36,31 +32,62 @@ for (const a of published) {
     is_paid: a.isPaid,
     published_at: a.publishedAt || "",
     r2_path: a.r2Path,
-    r2_body: hasBody,
-    r2_access: hasBody ? (a.isPaid ? "private" : "public") : "none",
-    status: hasBody ? "r2_ready" : "note_only",
+    r2_body: a.r2Body,
+    r2_access: a.r2Body ? access[a.body.store] : "none",
+    status: a.r2Body ? "r2_ready" : "note_only",
   };
   if (a.priceJpy && a.priceJpy > 0) entry.price_jpy = a.priceJpy;
-  articles[a.key] = entry;
+  published[a.key] = entry;
 }
 
-const output = {
-  _meta: {
-    generated_by: "generate-note-catalog.ts",
-    generated_at: new Date().toISOString().slice(0, 10),
-    source: "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
-    note: "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。",
+const drafts: Record<string, unknown> = {};
+for (const a of NOTE_ARTICLES.filter((x) => x.status === "draft").sort((x, y) => x.key.localeCompare(y.key))) {
+  drafts[a.key] = { vertical: a.vertical, r2_path: a.r2Body ? a.r2Path : null, status: "draft" };
+}
+
+const outputs = [
+  {
+    id: "note.published-urls",
+    body: {
+      _meta: {
+        generated_by: "generate-note-catalog.ts",
+        source: datasetPath("note.articles"),
+        note: "派生インデックス。正本は記事台帳 (source)。手編集しない (--check が検出する)。",
+      },
+      articles: published,
+    },
   },
-  articles,
-};
+  {
+    id: "note.draft-index",
+    body: {
+      _meta: { generated_by: "generate-note-catalog.ts", source: datasetPath("note.articles"), note: "派生インデックス。手編集しない。" },
+      drafts,
+    },
+  },
+];
 
+let drift = 0;
 const scratchpad = process.env.SCRATCHPAD || "/tmp";
-if (!APPLY) mkdirSync(scratchpad, { recursive: true });
-const outPath = APPLY
-  ? join(ROOT, datasetPath("note.published-urls"))
-  : join(scratchpad, "note-published-urls.generated.json");
-
-writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n", "utf8");
-console.log(`=== generate-note-catalog ${APPLY ? "(apply)" : "(dry)"} ===`);
-console.log(`公開済み ${published.length} 件 → ${outPath}`);
-if (!APPLY) console.log("本番反映: --apply");
+for (const { id, body } of outputs) {
+  const text = `${JSON.stringify(body, null, 2)}\n`;
+  const target = join(ROOT, datasetPath(id));
+  if (CHECK) {
+    let current = "";
+    try {
+      current = readFileSync(target, "utf8");
+    } catch {
+      /* missing counts as drift */
+    }
+    if (current !== text) {
+      drift++;
+      console.error(`✗ ${datasetPath(id)} が台帳から生成した内容と違う。npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply で作り直す`);
+    }
+    continue;
+  }
+  const outPath = APPLY ? target : join(scratchpad, `${id}.generated.json`);
+  if (!APPLY) mkdirSync(scratchpad, { recursive: true });
+  writeFileSync(outPath, text, "utf8");
+  console.log(`${APPLY ? "apply" : "dry"}: ${id} → ${outPath}`);
+}
+console.log(`公開 ${Object.keys(published).length} 件 / 下書き ${Object.keys(drafts).length} 件`);
+if (drift) process.exit(1);

@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 note 記事台帳",
+  "description": "data/note/articles.json の形の契約。1 記事 1 レコードで、記事 ID (key)・編集メタ・本文の所在を持つ。本文と画像の実体は R2 にだけ置き、ここには所在とマニフェストの SHA だけを書く (.claude/scripts/note/catalog/README.md)。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "account", "articles"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "account": { "const": "stats47" },
+    "articles": { "type": "array", "items": { "$ref": "#/definitions/article" } }
+  },
+  "definitions": {
+    "noteUrl": { "type": "string", "pattern": "^https://note\\.com/stats47/n/n[a-f0-9]+$" },
+    "linkRepair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "fromUrl", "toUrl"],
+      "properties": {
+        "mode": { "enum": ["replace-url", "replace-card"] },
+        "fromUrl": { "type": "string", "minLength": 1 },
+        "toUrl": { "type": "string", "minLength": 1 },
+        "linkText": { "type": "string" },
+        "headingFrom": { "type": "string" },
+        "headingTo": { "type": "string" }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "files", "bytes", "savedAt"],
+      "properties": {
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "files": { "type": "integer", "minimum": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "savedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["store", "manifest"],
+      "properties": {
+        "store": {
+          "description": "r2-public = 無料記事の本文を公開 R2 に置く / r2-private = 有料記事の本文を private R2 に置く / note-only = 本文が note.com にしか無い (回収待ち)",
+          "enum": ["r2-public", "r2-private", "note-only"]
+        },
+        "manifest": {
+          "description": "最後に保存したファイル一覧のマニフェスト。private R2 の note-archive/manifests/<key>/<sha256>.json に不変保存する。null は未取り込み",
+          "oneOf": [{ "type": "null" }, { "$ref": "#/definitions/manifest" }]
+        },
+        "verifiedAt": { "type": "string", "format": "date-time" }
+      },
+      "if": { "properties": { "store": { "const": "note-only" } } },
+      "then": { "properties": { "manifest": { "type": "null" } } }
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "vertical", "title", "magazine", "isPaid", "status", "r2Path", "body"],
+      "properties": {
+        "key": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$" },
+        "vertical": { "enum": ["stats47-note", "koumuin-claude-code", "koumuin-estat-claude-code", "koumuin-gis", "product-sales", "membership"] },
+        "series": { "enum": ["A", "B", "C", "D"] },
+        "title": { "type": "string", "minLength": 1 },
+        "magazine": { "type": ["string", "null"] },
+        "isPaid": { "type": "boolean" },
+        "priceJpy": { "type": "integer", "minimum": 0 },
+        "status": { "enum": ["draft", "published"] },
+        "noteUrl": { "$ref": "#/definitions/noteUrl" },
+        "publishedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "pinned": { "type": "boolean" },
+        "profiled": { "type": "boolean" },
+        "publishedSeparator": { "type": "string", "minLength": 1 },
+        "r2Path": { "type": "string", "pattern": "^note/[a-z0-9-]+/[A-Za-z0-9][A-Za-z0-9_-]*$" },
+        "body": { "$ref": "#/definitions/body" },
+        "stats47Targets": { "type": "array", "items": { "type": "string", "pattern": "^/" } },
+        "nextBestArticle": { "type": "string", "minLength": 1 },
+        "publishedLinkRepairs": { "type": "array", "items": { "$ref": "#/definitions/linkRepair" } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "published" } } },
+          "then": { "required": ["noteUrl"] }
+        },
+        {
+          "description": "有料記事の本文を公開 R2 に置かない",
+          "if": { "properties": { "isPaid": { "const": true } } },
+          "then": { "properties": { "body": { "properties": { "store": { "not": { "const": "r2-public" } } } } } }
+        }
+      ]
+    }
+  }
+}

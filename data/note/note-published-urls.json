@@ -1,9 +1,8 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-09-29",
-    "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
-    "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
+    "source": "data/note/articles.json",
+    "note": "派生インデックス。正本は記事台帳 (source)。手編集しない (--check が検出する)。"
   },
   "articles": {
     "00-claude-code-intro-for-public-servants": {
@@ -298,6 +297,30 @@
       "status": "r2_ready",
       "price_jpy": 300
     },
+    "12-fiscal-peer-comparison": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+      "url": "https://note.com/stats47/n/n527e817995e9",
+      "is_paid": true,
+      "published_at": "2026-10-12",
+      "r2_path": "note/koumuin-estat-claude-code/12-fiscal-peer-comparison",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "13-fiscal-peer-no-code": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "財政指標の同規模比較を Claude・ChatGPT で作る — プログラミングなし、プロンプトを貼るだけ",
+      "url": "https://note.com/stats47/n/n20299fc77b17",
+      "is_paid": true,
+      "published_at": "2026-10-12",
+      "r2_path": "note/koumuin-estat-claude-code/13-fiscal-peer-no-code",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
     "13-ollama-offline-local-llm": {
       "vertical": "koumuin-claude-code",
       "title": "ローカル LLM (Ollama) × Claude Code で完全オフライン業務",
@@ -433,9 +456,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-employment-population",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-agricultural-output": {
       "vertical": "stats47-note",
@@ -444,9 +467,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-output",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-average-temperature": {
       "vertical": "stats47-note",
@@ -455,9 +478,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-average-temperature",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-avg-propensity-to-consume-worker-households": {
       "vertical": "stats47-note",
@@ -466,9 +489,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-consumption-expenditure-multi-person-households-per-month": {
       "vertical": "stats47-note",
@@ -477,9 +500,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-convenience-store-sales": {
       "vertical": "stats47-note",
@@ -499,9 +522,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-day-time-population": {
       "vertical": "stats47-note",
@@ -510,9 +533,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-day-time-population",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-electricity-demand": {
       "vertical": "stats47-note",
@@ -532,9 +555,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-electricity-generation-capacity",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-final-energy-consumption-per-capita": {
       "vertical": "stats47-note",
@@ -554,9 +577,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-general-households",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-aichi": {
       "vertical": "stats47-note",
@@ -576,9 +599,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-akita",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-aomori": {
       "vertical": "stats47-note",
@@ -598,9 +621,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-chiba",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-ehime": {
       "vertical": "stats47-note",
@@ -609,9 +632,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ehime",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-fukui": {
       "vertical": "stats47-note",
@@ -620,9 +643,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukui",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-fukuoka": {
       "vertical": "stats47-note",
@@ -631,9 +654,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukuoka",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-fukushima": {
       "vertical": "stats47-note",
@@ -642,9 +665,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukushima",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-gifu": {
       "vertical": "stats47-note",
@@ -653,9 +676,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-gifu",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-gunma": {
       "vertical": "stats47-note",
@@ -664,9 +687,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-gunma",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-hiroshima": {
       "vertical": "stats47-note",
@@ -697,9 +720,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hyogo",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-ibaraki": {
       "vertical": "stats47-note",
@@ -708,9 +731,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ibaraki",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-ishikawa": {
       "vertical": "stats47-note",
@@ -719,9 +742,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ishikawa",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-iwate": {
       "vertical": "stats47-note",
@@ -730,9 +753,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-iwate",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kagawa": {
       "vertical": "stats47-note",
@@ -741,9 +764,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kagawa",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kagoshima": {
       "vertical": "stats47-note",
@@ -752,9 +775,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kagoshima",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kanagawa": {
       "vertical": "stats47-note",
@@ -763,9 +786,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kanagawa",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kochi": {
       "vertical": "stats47-note",
@@ -774,9 +797,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kochi",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kumamoto": {
       "vertical": "stats47-note",
@@ -785,9 +808,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kumamoto",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-kyoto": {
       "vertical": "stats47-note",
@@ -796,9 +819,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kyoto",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-mie": {
       "vertical": "stats47-note",
@@ -807,9 +830,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-mie",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-miyagi": {
       "vertical": "stats47-note",
@@ -818,9 +841,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-miyagi",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-miyazaki": {
       "vertical": "stats47-note",
@@ -829,9 +852,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-miyazaki",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-nagano": {
       "vertical": "stats47-note",
@@ -840,9 +863,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nagano",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-nagasaki": {
       "vertical": "stats47-note",
@@ -851,9 +874,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nagasaki",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-nara": {
       "vertical": "stats47-note",
@@ -862,9 +885,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nara",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-niigata": {
       "vertical": "stats47-note",
@@ -873,9 +896,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-niigata",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-oita": {
       "vertical": "stats47-note",
@@ -884,9 +907,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-oita",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-okayama": {
       "vertical": "stats47-note",
@@ -895,9 +918,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-okayama",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-okinawa": {
       "vertical": "stats47-note",
@@ -906,9 +929,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-okinawa",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-osaka": {
       "vertical": "stats47-note",
@@ -917,9 +940,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-osaka",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-saga": {
       "vertical": "stats47-note",
@@ -928,9 +951,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-saga",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-saitama": {
       "vertical": "stats47-note",
@@ -939,9 +962,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-saitama",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-shiga": {
       "vertical": "stats47-note",
@@ -950,9 +973,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shiga",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-shimane": {
       "vertical": "stats47-note",
@@ -961,9 +984,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shimane",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-shizuoka": {
       "vertical": "stats47-note",
@@ -972,9 +995,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shizuoka",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-tochigi": {
       "vertical": "stats47-note",
@@ -983,9 +1006,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tochigi",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-tokushima": {
       "vertical": "stats47-note",
@@ -994,9 +1017,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tokushima",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-tokyo": {
       "vertical": "stats47-note",
@@ -1005,9 +1028,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tokyo",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-tottori": {
       "vertical": "stats47-note",
@@ -1016,9 +1039,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tottori",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-toyama": {
       "vertical": "stats47-note",
@@ -1027,9 +1050,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-toyama",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-wakayama": {
       "vertical": "stats47-note",
@@ -1038,9 +1061,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-wakayama",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-yamagata": {
       "vertical": "stats47-note",
@@ -1049,9 +1072,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamagata",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-yamaguchi": {
       "vertical": "stats47-note",
@@ -1060,9 +1083,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamaguchi",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-kakei-yamanashi": {
       "vertical": "stats47-note",
@@ -1071,9 +1094,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamanashi",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-late-elderly-medical-expense-per-insured": {
       "vertical": "stats47-note",
@@ -1082,9 +1105,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-maximum-temperature": {
       "vertical": "stats47-note",
@@ -1104,9 +1127,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-minimum-wage-by-region",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-number-of-establishments-manufacturing": {
       "vertical": "stats47-note",
@@ -1115,8 +1138,19 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-number-of-establishments-manufacturing",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-overseas-travel-annual-participation-rate-15plus": {
+      "vertical": "stats47-note",
+      "title": "【2001年版・15歳以上】海外旅行をした人が多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n70ff6efcb571",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/a-overseas-travel-annual-participation-rate-15plus",
+      "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-private-rental-housing-rent-per-3-3m2": {
@@ -1159,9 +1193,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-room-utilization-rate",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-total-fertility-rate": {
       "vertical": "stats47-note",
@@ -1170,9 +1204,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-total-fertility-rate",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-total-overnight-guests": {
       "vertical": "stats47-note",
@@ -1196,6 +1230,50 @@
       "r2_access": "none",
       "status": "note_only"
     },
+    "a-volunteer-activity-annual-participation-rate-10plus": {
+      "vertical": "stats47-note",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nc7e84c5ccfa4",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-10plus",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-expenditure-structure": {
+      "vertical": "stats47-note",
+      "title": "あなたの県は教育重視？産業重視？都道府県の「歳出構造」で見えるお金の使い方",
+      "url": "https://note.com/stats47/n/ne19e85f088bf",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-expenditure-structure",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-hotel-rooms-nara": {
+      "vertical": "stats47-note",
+      "title": "奈良にホテルが少ない本当の理由 ── 客室数ワースト常連県の観光戦略",
+      "url": "https://note.com/stats47/n/nd4f523eab511",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-hotel-rooms-nara",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-hottest-prefecture": {
+      "vertical": "stats47-note",
+      "title": "日本一暑い県はどこか ── 最高気温・平均気温・日照時間で見る暑さの正体",
+      "url": "https://note.com/stats47/n/n995a5b3d3e87",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-hottest-prefecture",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-kakei-academic-food": {
       "vertical": "stats47-note",
       "title": "学力テスト上位の県は何を食べているのか ── 符合を相関で終わらせないために",
@@ -1203,9 +1281,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-academic-food",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-advancement-employment": {
       "vertical": "stats47-note",
@@ -1214,9 +1292,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-advancement-employment",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-beer-peak-month": {
       "vertical": "stats47-note",
@@ -1225,9 +1303,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-beer-peak-month",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-bread-giffen": {
       "vertical": "stats47-note",
@@ -1236,9 +1314,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-bread-giffen",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-gyoza-counting": {
       "vertical": "stats47-note",
@@ -1247,9 +1325,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-gyoza-counting",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-necktie-decline": {
       "vertical": "stats47-note",
@@ -1258,9 +1336,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-necktie-decline",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-quantity-price": {
       "vertical": "stats47-note",
@@ -1269,9 +1347,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-quantity-price",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "b-kakei-winter-bargain": {
       "vertical": "stats47-note",
@@ -1280,8 +1358,96 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-winter-bargain",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-local-tax-vs-allocation-tax": {
+      "vertical": "stats47-note",
+      "title": "自力で稼ぐ県、国に頼る県｜「地方税」と「地方交付税」で見える47都道府県の自立度",
+      "url": "https://note.com/stats47/n/ne8f39a64c5f0",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-local-tax-vs-allocation-tax",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-pharmacy-density": {
+      "vertical": "stats47-note",
+      "title": "なぜ佐賀県は人口あたりの薬局数が日本一なのか｜「薬局密度」で見える地方医療の実態",
+      "url": "https://note.com/stats47/n/n4056bcc5457e",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-pharmacy-density",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-rich-spending-patterns": {
+      "vertical": "stats47-note",
+      "title": "お金持ちが使うもの、使わないもの ── 所得トップ20%と底辺20%の家計を比較した",
+      "url": "https://note.com/stats47/n/nd9bfdd519d2f",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/b-rich-spending-patterns",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "c-engel-food-gap": {
+      "vertical": "stats47-note",
+      "title": "食費28.6%時代──エンゲル係数で見る都道府県の「食の格差」",
+      "url": "https://note.com/stats47/n/n28d03969fa6d",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/c-engel-food-gap",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "c-kita-kanto-fiscal": {
+      "vertical": "stats47-note",
+      "title": "北関東3県はなぜ「財政優等生」なのか｜茨城8位・栃木11位・群馬12位の秘密",
+      "url": "https://note.com/stats47/n/n56eb35145c32",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/c-kita-kanto-fiscal",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "c-tokyo-vs-osaka-fiscal": {
+      "vertical": "stats47-note",
+      "title": "東京vs大阪｜数字で比べる二大都市の「財政構造」は驚くほど違った",
+      "url": "https://note.com/stats47/n/n0eb7e589b1ba",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/c-tokyo-vs-osaka-fiscal",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "d-education-income-gap": {
+      "vertical": "stats47-note",
+      "title": "塾代56倍の衝撃 ── 年収別に見る教育格差のリアル",
+      "url": "https://note.com/stats47/n/n7c8391d4c639",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/d-education-income-gap",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "d-engel-coefficient-income": {
+      "vertical": "stats47-note",
+      "title": "エンゲル係数で見える日本の階層構造 ── 補習教育56倍、外食5倍、しかし光熱費は1.16倍",
+      "url": "https://note.com/stats47/n/n392f0f3cb374",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/d-engel-coefficient-income",
+      "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "d-geo-flood-population-mesh": {
@@ -1344,6 +1510,17 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-kakei-spending-personality": {
+      "vertical": "stats47-note",
+      "title": "690品目でわかる「47都道府県の消費グセ」── 家計調査ランキングが暴く食の県民性",
+      "url": "https://note.com/stats47/n/n94cd84139a45",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/d-kakei-spending-personality",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
@@ -1351,6 +1528,17 @@
       "is_paid": false,
       "published_at": "2026-06-06",
       "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "koumuin-shigoto-kouritsuka-ai": {
+      "vertical": "stats47-note",
+      "title": "公務員の事務作業、AI で「半日仕事」が「数分」になる時代の話",
+      "url": "https://note.com/stats47/n/na451784fbbca",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/koumuin-shigoto-kouritsuka-ai",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
@@ -1471,7 +1659,7 @@
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n2ed31d721531",
       "r2_body": true,
-      "r2_access": "private",
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "paid-n317c673b1e81": {
@@ -1542,7 +1730,7 @@
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/n67de9d45c426",
       "r2_body": true,
-      "r2_access": "private",
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "paid-n68eafab07946": {
@@ -1781,7 +1969,7 @@
       "published_at": "2025-12-11",
       "r2_path": "note/stats47-note/nba8bf272cc2b",
       "r2_body": true,
-      "r2_access": "private",
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "paid-nbead1fe772c7": {
@@ -1959,6 +2147,17 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/pinned-intro",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "prefecture-free-trial-pack": {
+      "vertical": "product-sales",
+      "title": "都道府県データの無料お試しサンプル 総人口2024",
+      "url": "https://note.com/stats47/n/n584098246188",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/product-sales/prefecture-free-trial-pack",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
@@ -3224,6 +3423,17 @@
       "is_paid": false,
       "published_at": "2026-02-09",
       "r2_path": "note/stats47-note/nfe69996fb5c9",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "sunshine-solar-housing": {
+      "vertical": "stats47-note",
+      "title": "日が照る県ほど太陽光発電が盛んなのか ── 日照時間ランキングの続編",
+      "url": "https://note.com/stats47/n/n2fffce0e2320",
+      "is_paid": false,
+      "published_at": "2026-10-12",
+      "r2_path": "note/stats47-note/sunshine-solar-housing",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"

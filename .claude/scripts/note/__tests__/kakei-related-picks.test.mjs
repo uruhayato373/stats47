@@ -73,58 +73,43 @@ test("choosePick never returns self, and returns null when there is nothing else
   assert.equal(choosePick(self, [self]), null);
 });
 
-const CATALOG_FIXTURE = `export const NOTE_ARTICLES = [
+const ARTICLES_FIXTURE = [
   {
-    key: "a-kakei-aichi",
-    vertical: "stats47-note",
-    series: "A",
-    title: "愛知県の家計は何にお金が偏っているか",
-    magazine: "s47-kakei-reading",
-    isPaid: false,
-    status: "published",
-    noteUrl: "https://note.com/stats47/n/na1",
-    publishedAt: "2026-09-06",
-    r2Path: "note/stats47-note/a-kakei-aichi",
+    key: "a-kakei-aichi", vertical: "stats47-note", series: "A", title: "愛知県の家計は何にお金が偏っているか",
+    magazine: "s47-kakei-reading", isPaid: false, status: "published", noteUrl: "https://note.com/stats47/n/na1",
+    publishedAt: "2026-09-06", r2Path: "note/stats47-note/a-kakei-aichi", body: { store: "r2-public", manifest: null },
     stats47Targets: ["/blog/aichi-food-culture", "/areas/23000"],
   },
   {
-    key: "a-kakei-akita",
-    vertical: "stats47-note",
-    series: "A",
-    title: "秋田県の家計は何にお金が偏っているか",
-    magazine: "s47-kakei-reading",
-    isPaid: false,
-    status: "draft",
-    r2Path: "note/stats47-note/a-kakei-akita",
-    stats47Targets: [],
+    key: "a-kakei-akita", vertical: "stats47-note", series: "A", title: "秋田県の家計は何にお金が偏っているか",
+    magazine: "s47-kakei-reading", isPaid: false, status: "draft", r2Path: "note/stats47-note/a-kakei-akita",
+    body: { store: "r2-public", manifest: null }, stats47Targets: [],
   },
 ];
-`;
 
-test("parseCatalogEntries extracts only published a-kakei-* blocks", () => {
-  const entries = parseCatalogEntries(CATALOG_FIXTURE);
+test("parseCatalogEntries extracts only published a-kakei-* articles", () => {
+  const entries = parseCatalogEntries(ARTICLES_FIXTURE);
   assert.equal(entries.length, 1);
   assert.equal(entries[0].key, "a-kakei-aichi");
   assert.equal(entries[0].r2Path, "note/stats47-note/a-kakei-aichi");
   assert.equal(entries[0].existingNextBest, null);
 });
 
-test("patchCatalog inserts nextBestArticle before the closing brace, idempotently", () => {
-  const picks = new Map([["a-kakei-aichi", "a-kakei-akita"]]);
-  const once = patchCatalog(CATALOG_FIXTURE, picks);
-  assert.match(once, /nextBestArticle: "a-kakei-akita",\n  \},/);
+test("patchCatalog sets nextBestArticle on published articles only, idempotently", () => {
+  const picks = new Map([["a-kakei-aichi", "a-kakei-akita"], ["a-kakei-akita", "a-kakei-aichi"]]);
+  const once = patchCatalog(ARTICLES_FIXTURE, picks);
+  assert.equal(once.changed, 1);
+  assert.equal(once.articles[0].nextBestArticle, "a-kakei-akita");
+  assert.equal(once.articles[1].nextBestArticle, undefined, "drafts are not patched");
+  assert.equal(ARTICLES_FIXTURE[0].nextBestArticle, undefined, "input is not mutated");
 
-  const twice = patchCatalog(once, picks);
-  assert.equal(once, twice, "re-running with the same picks must not change the file again");
+  const twice = patchCatalog(once.articles, picks);
+  assert.equal(twice.changed, 0, "re-running with the same picks must not change the ledger again");
 });
 
-test("patchCatalog replaces an existing nextBestArticle value in place (no duplicate field)", () => {
-  const withExisting = CATALOG_FIXTURE.replace(
-    'stats47Targets: ["/blog/aichi-food-culture", "/areas/23000"],',
-    'stats47Targets: ["/blog/aichi-food-culture", "/areas/23000"],\n    nextBestArticle: "a-kakei-old",',
-  );
-  const picks = new Map([["a-kakei-aichi", "a-kakei-new"]]);
-  const patched = patchCatalog(withExisting, picks);
-  const matches = patched.match(/nextBestArticle: "[^"]+"/g);
-  assert.deepEqual(matches, ['nextBestArticle: "a-kakei-new"']);
+test("patchCatalog replaces an existing nextBestArticle value", () => {
+  const withExisting = [{ ...ARTICLES_FIXTURE[0], nextBestArticle: "a-kakei-old" }];
+  const patched = patchCatalog(withExisting, new Map([["a-kakei-aichi", "a-kakei-new"]]));
+  assert.equal(patched.changed, 1);
+  assert.equal(patched.articles[0].nextBestArticle, "a-kakei-new");
 });

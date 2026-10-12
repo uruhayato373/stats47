@@ -3,9 +3,9 @@
  *
  * - 本文 (draft.md) は既存 note フロー形式 (`type: note-draft` frontmatter) へ変換して
  *   `docs/31_note記事原稿/product-sales/<slug>/` へ書き出す (ephemeral outbox・published:false)。
- * - editorial メタは note catalog SSOT `.claude/scripts/note/catalog/data/product-sales.ts` を生成する
- *   (別カタログを作らない = 仕様 §5)。
- * - note.com 公開・R2 push はしない (人間工程・CI)。r2Body:false = R2 未反映。
+ * - editorial メタは note 記事台帳 `data/note/articles.json` のレコードとして返す
+ *   (別カタログを作らない = 仕様 §5)。台帳への追加は記事台帳の書き込み口が行う。
+ * - note.com 公開・R2 保存はしない (人間工程)。本文は note:article save で private/公開 R2 へ保存する。
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
@@ -22,12 +22,7 @@ import { renderReview } from "../generators/review";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
 const DOCS31_ROOT_DEFAULT = resolve(REPO_ROOT, "docs/31_note記事原稿/product-sales");
-const CATALOG_DATA_DEFAULT = resolve(
-  REPO_ROOT,
-  ".claude/scripts/note/catalog/data/product-sales.ts",
-);
-
-/** note catalog `product-sales.ts` に書き出す 1 エントリ (NoteArticle 相当)。 */
+/** note 記事台帳 (data/note/articles.json) に追加する 1 記事の元になるエントリ。 */
 export interface NoteCatalogEntry {
   readonly key: string;
   readonly title: string;
@@ -108,52 +103,34 @@ export function promoteNoteArticle(
   };
 }
 
-/** catalog data ファイル (product-sales.ts) の内容を生成する。 */
-export function renderCatalogDataFile(entries: readonly NoteCatalogEntry[]): string {
-  const header = [
-    "/**",
-    " * note-catalog データ: product-sales (商品販売記事)",
-    " *",
-    " * ⚠️ このファイルは product-factory の `products:note:promote --apply` が生成する派生物。",
-    " *    手編集せず、canonical 記事プラン (packages/product-factory/src/channels/note/article-plan.ts) を",
-    " *    編集して再生成する。本文 SSOT は docs/31 outbox → R2 note/product-sales/<slug>/。",
-    " *    status=draft・published:false。公開 (note.com) は月1-2本・人間承認後の別工程。",
-    " */",
-    'import type { NoteArticle } from "../types";',
-    "",
-    "export const productSalesArticles: NoteArticle[] = [",
-  ];
-  const body = entries.map((e) => {
-    const lines = [
-      "  {",
-      `    key: ${JSON.stringify(e.key)},`,
-      '    vertical: "product-sales",',
-      `    title: ${JSON.stringify(e.title)},`,
-      "    magazine: null,",
-      `    isPaid: ${e.isPaid},`,
-    ];
-    if (e.isPaid) lines.push(`    priceJpy: ${e.priceJpy},`);
-    lines.push(`    status: ${JSON.stringify(e.status)},`);
-    lines.push(`    r2Path: ${JSON.stringify(e.r2Path)},`);
-    lines.push("    r2Body: false,");
-    lines.push("  },");
-    return lines.join("\n");
-  });
-  return header.join("\n") + "\n" + body.join("\n") + "\n];\n";
+/** 記事台帳のレコード (data/note/articles.schema.json の article) に変換する。本文は未保存 (manifest null)。 */
+export function toLedgerArticle(e: NoteCatalogEntry) {
+  return {
+    key: e.key,
+    vertical: "product-sales" as const,
+    title: e.title,
+    magazine: null,
+    isPaid: e.isPaid,
+    ...(e.isPaid ? { priceJpy: e.priceJpy } : {}),
+    status: e.status,
+    r2Path: e.r2Path,
+    body: { store: e.isPaid ? ("r2-private" as const) : ("r2-public" as const), manifest: null },
+  };
 }
 
 export interface PromoteAllResult {
   readonly entries: NoteCatalogEntry[];
-  readonly catalogDataPath: string;
+  /** 記事台帳へ追加するレコード (書き込みは呼び出し側。promote は台帳を直接書かない) */
+  readonly ledgerArticles: ReturnType<typeof toLedgerArticle>[];
   readonly docsWritten: number;
   readonly dryRun: boolean;
 }
 
-/** 全 canonical 記事を docs/31 へ展開し product-sales.ts を生成する。 */
+/** 全 canonical 記事を docs/31 へ展開し、記事台帳へ追加するレコードを返す。 */
 export function promoteAllNoteArticles(
   articles: readonly NoteArticlePlan[] = CANONICAL_ARTICLES,
   products: readonly ProductDefinition[] = ALL_PRODUCTS,
-  opts: PromoteOptions & { catalogDataPath?: string } = {},
+  opts: PromoteOptions = {},
 ): PromoteAllResult {
   if (opts.dryRun !== true) throw new Error('promote --apply is blocked: existing catalog/drafts must not be overwritten; use a reviewed pinned revision');
   const entries: NoteCatalogEntry[] = [];
@@ -162,10 +139,5 @@ export function promoteAllNoteArticles(
     entries.push(promoteNoteArticle(article, products, opts));
     if (!opts.dryRun) docsWritten += 1;
   }
-  const catalogDataPath = opts.catalogDataPath ?? CATALOG_DATA_DEFAULT;
-  if (!opts.dryRun) {
-    mkdirSync(dirname(catalogDataPath), { recursive: true });
-    writeFileSync(catalogDataPath, renderCatalogDataFile(entries));
-  }
-  return { entries, catalogDataPath, docsWritten, dryRun: !!opts.dryRun };
+  return { entries, ledgerArticles: entries.map(toLedgerArticle), docsWritten, dryRun: !!opts.dryRun };
 }

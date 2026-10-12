@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "note 有料記事の無料部分の文言",
+  "description": "data/note/paid-landing/<key>.json の形の契約。patch-note-paid-landing.mjs が公開済み有料記事の無料部分を組み立てる入力。数値は本文に実在するものだけを使う (スクリプトが検査する)。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["key", "audienceHeading", "audience", "learnHeading", "learn", "appliedAt"],
+  "definitions": {
+    "point": {
+      "type": "object", "additionalProperties": false, "required": ["strong", "text"],
+      "properties": { "strong": { "type": "string", "minLength": 1 }, "text": { "type": "string", "minLength": 1 } }
+    }
+  },
+  "properties": {
+    "key": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$" },
+    "audienceHeading": { "type": "string", "minLength": 1 },
+    "audience": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/point" } },
+    "audienceNote": { "type": "string" },
+    "learnHeading": { "type": "string", "minLength": 1 },
+    "learn": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/point" } },
+    "sampleHeading": { "type": "string" },
+    "sampleLead": { "type": "string" },
+    "samples": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["file", "alt", "caption"],
+        "properties": {
+          "file": { "type": "string", "minLength": 1 }, "alt": { "type": "string" }, "caption": { "type": "string" },
+          "uploadedUrl": { "type": ["string", "null"] }, "width": { "type": "integer" }, "height": { "type": "integer" }
+        }
+      }
+    },
+    "sourceHeading": { "type": "string" },
+    "source": { "type": "string" },
+    "siteLink": {
+      "type": "object", "additionalProperties": false, "required": ["url"],
+      "properties": { "url": { "type": "string" }, "lead": { "type": "string" }, "title": { "type": "string" }, "description": { "type": "string" } }
+    },
+    "siteLinkTail": { "type": "string" },
+    "appliedAt": { "type": ["string", "null"] }
+  }
+}

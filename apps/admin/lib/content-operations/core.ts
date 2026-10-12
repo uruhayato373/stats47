@@ -103,7 +103,7 @@ export interface ContentOperationsInput {
 const SOURCES: Record<ContentChannelDTO, string> = {
   x: datasetPath("sns.posts"),
   instagram: datasetPath("sns.posts"),
-  note: ".claude/scripts/note/catalog/ (git TS) + R2本文",
+  note: `${datasetPath("note.articles")} (記事台帳) + R2本文`,
   kindle:
     `packages/product-factory/src/channels/kindle/book-catalog.ts + ${KDP_LISTINGS}`,
 };
@@ -446,7 +446,7 @@ export function buildContentOperations(
       stats47Targets: article.stats47Targets ?? [],
       nextAction,
       sourcePaths: [
-        `.claude/scripts/note/catalog/data/${article.vertical}.ts#${article.key}`,
+        `${datasetPath("note.articles")}#${article.key}`,
         article.r2Path,
       ],
     };

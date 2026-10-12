@@ -3,6 +3,19 @@
  * 各成果物に版・基準年・出典・利用許諾・対応環境を入れる要件 (仕様 §共通仕様) の出典部分を担う。
  * 日本語 Excel で文字化けしないよう **UTF-8 BOM + CRLF** で出力する (Phase 0 判定)。
  */
+/** 出典の種類。e-Stat の統計表を基にした指標か、それ以外の提供元 (全日遊連・水産庁・消防庁など) か。 */
+export type SourceOrigin = "estat" | "other";
+
+const ESTAT_STATS_DATA_ID = /^\d{10}$/;
+
+/**
+ * 出典の種類。`origin` が明示されていればそれ、無ければ e-Stat の statsDataId (10 桁) を持つかで判定する。
+ * LICENSE-ja.txt の出典表示と SOURCES.csv の注意事項が、e-Stat 以外の出典に e-Stat と書かないために使う。
+ */
+export function sourceOrigin(row: SourceRow): SourceOrigin {
+  return row.origin ?? (ESTAT_STATS_DATA_ID.test(row.statsDataId) ? "estat" : "other");
+}
+
 export interface SourceRow {
   /** 調査名 (例「国勢調査」)。 */
   readonly surveyName: string;
@@ -20,6 +33,8 @@ export interface SourceRow {
   readonly transform: string;
   /** 欠損・秘匿・年次差などの注意事項。 */
   readonly notes: string;
+  /** 出典の種類 (SOURCES.csv の列にはしない)。未指定は statsDataId から判定する。 */
+  readonly origin?: SourceOrigin;
 }
 
 /** UTF-8 BOM (日本語 Excel の Shift-JIS 誤判定=文字化けを防ぐ)。 */

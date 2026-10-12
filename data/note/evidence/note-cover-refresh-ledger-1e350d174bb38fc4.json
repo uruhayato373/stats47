@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-1e350d174bb38fc4",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "sha256": "2037cad68441ad5ed9d8979ee21bac005442abaa0c8910673a198e7baa88e140"
+    }
+  ],
+  "startedAt": "2026-10-12T05:57:15.303Z",
+  "articles": [
+    {
+      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "noteId": "nc7e84c5ccfa4",
+      "action": "create",
+      "sourceSha256": "2037cad68441ad5ed9d8979ee21bac005442abaa0c8910673a198e7baa88e140",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "1a78f578102d442200aa40e6405c4672df3e6f4ad0a9594cd0d9eef197b77882",
+        "key": "82e20aed72961ad8cd3020d123780c91711ae012d64215884e0bc82b3687dec5",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "5d7d90118c30bac585d28f18aa47bc8e504834bda6367fb3097f2bca347ec7e6",
+        "body": "9e5c67e96509f295001a0072513157d8211cbecb67108eecae1841a0a8a3caaf",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "ae00161aafd5ec0ed8c5637a037a3d0b5c2423d25680c4919564b9bbb3495234",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "2b033c120595c0f3687f54c4fee17344335cf1de3f3902f4bab18d64447e0040",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T05:57:17.633Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323534115/rectangle_large_type_2_db74c6f70a254c4ab8e7d02e2d9b9eb5.png",
+      "uploadedAt": "2026-10-12T05:57:20.687Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "29f3796761e8fe0ad6c11200943a7042c27e14f3089c51980f90e0ad9f823142",
+        "meanPixelError": 0.5563102456467661
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323534115/rectangle_large_type_2_db74c6f70a254c4ab8e7d02e2d9b9eb5.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T05:57:20.998Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T05:57:20.999Z"
+}

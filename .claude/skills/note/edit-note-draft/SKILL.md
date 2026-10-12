@@ -26,7 +26,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 ## 引数
 
 - **原稿ファイル**: `docs/31_note記事原稿/<slug>/draft.md`
-  （docs/31 になければ先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する）
+  （docs/31 になければ先に `npm run note:article -- checkout <slug>` で R2 から取り出す）
 - **シリーズ**: B / C / D
 - **トーン**: 会話的 / 権威的 / データドリブン
 - **ターゲット読者レベル**: 初心者 / 中級者 / 上級者
@@ -150,7 +150,8 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ### 1. メタデータ（完全DBレス: DB 登録はしない）
 
-> 記事の状態は **draft.md の frontmatter** と **`data/note/note-published-urls.json`** で表す。
+> 記事の状態（下書き / 公開・note URL・有料・価格）は **記事台帳 `data/note/articles.json`** が持つ。
+> `data/note/note-published-urls.json` と `note-draft-index.json` は台帳から生成する派生インデックスで、手編集しない。
 
 編集完了したら draft.md の frontmatter を整える（`title` / `is_paid` / `price_jpy` / `published: false`）。
 ハッシュタグは同ディレクトリ `hashtags.txt`。DB への登録・INSERT は一切不要。
@@ -159,13 +160,13 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 `docs/30_note記事企画/note戦略.md` の進捗サマリーテーブルで、該当記事の「執筆」列を更新する。
 
-### 3. 公開状態の扱い（ephemeral outbox）
+### 3. 公開状態の扱い（作業場）
 
-**docs/31 は ephemeral outbox（2026-06-19 正典）**。記事の SSOT は R2 `note/<vertical>/<slug>/`。
+**docs/31 は git に何も置かない作業場（2026-10-13 正典）**。記事の本文と画像の正本は R2 `note/<vertical>/<slug>/`（無料記事は公開 R2、有料記事は private R2）で、所在は記事台帳 `data/note/articles.json` が持つ。
 
-- 編集完了後は `develop push` → `sync-note-r2.yml` が R2 再同期 + docs/31 自動削除
-- 記事 SSOT（draft.md / images / hashtags.txt）は **R2 が保持**する
-- 運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」を参照
+- 編集完了後は `npm run note:article -- save <slug>` で R2 へ保存する（読み戻した SHA を照合し、台帳の `body.manifest` を更新してから作業コピーを消す。続けて公開する場合は `--keep-local` で作業コピーを残せる）
+- 記事の本文（draft.md / images / hashtags.txt）は **R2 が保持**する
+- 運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」と `.claude/scripts/note/catalog/README.md` を参照
 
 ### 4. note.com への投稿手順
 
@@ -174,7 +175,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 1. `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` で Phase 0 を生成
 2. `editor-helpers.sh` を `source` し、新規は `new_post_*` 系、既存更新は `process_article <slug> <noteId> <vertical>` → screenshot 目視 → `do_update`
 3. `images/` の画像は `ins_img` が再挿入（`.svg` は同名 `.png` に置換）。表は `images/table-N.png` で画像化（markdown 表は note でリテラルパイプ表示になる）
-4. 公開後は **`data/note/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
+4. 公開後は **記事台帳 `data/note/articles.json`** に `status: "published"` / `noteUrl` / `publishedAt` を記録し、`npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply` で派生インデックスを作り直す（手順は `/publish-note`「Phase 8 後」。**D1 更新は無い**）
 5. note 戦略の進捗があれば `docs/30_note記事企画/` 配下を更新
 
 ## 参照

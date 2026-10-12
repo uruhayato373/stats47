@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:55:00.292Z",
+  "generatedAt": "2026-10-12T08:22:03.362Z",
   "account": "stats47",
   "summary": {
-    "catalogArticles": 286,
-    "checked": 286,
+    "catalogArticles": 304,
+    "checked": 304,
     "fetchFailed": 0,
     "browserVerifyFailedArticles": 0,
     "affectedArticles": 206,
-    "emptyCards": 785,
+    "emptyCards": 689,
     "unknownCards": 0,
+    "unverifiableCards": 0,
     "missingCards": 0,
     "footerWithoutCards": 0,
-    "spacingIssues": 29
+    "spacingIssues": 107
   },
   "articles": [
     {
@@ -57,34 +58,24 @@
       "renderedCards": 12,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n0642ad7f7fdd",
-          "service": "note",
-          "key": "emb3be46893925b"
+          "key": "emb135abf41a1b9"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/md6aa26278129",
-          "service": "external-article",
-          "key": "embefd68c4af13c"
+          "key": "emb6ee52a6bed17"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-09/from/note/ne6c7d221803a",
-          "service": "external-article",
-          "key": "emb2943a6a2bfef"
+          "key": "emb3424a43acd38"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n44bedb732274",
-          "service": "note",
-          "key": "emb65cc6e368ed2"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n772ff041af18",
-          "service": "note",
-          "key": "embf6dca9072dff"
+          "key": "emb6ab364eee678"
         }
       ]
     },
@@ -95,28 +86,19 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nf962c6702b93",
-          "service": "note",
-          "key": "emb6b9ff690efdc"
+          "key": "emb7688195a3aa6"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/me574f67ac47f",
-          "service": "external-article",
-          "key": "emb34595a5bc121"
+          "key": "emba9eabc0c9991"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-07/from/note/n97ddfadff36a",
-          "service": "external-article",
-          "key": "embe57877b8770d"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nd54b2958dc0e",
-          "service": "note",
-          "key": "emb527f7fd2c837"
+          "key": "embf48e6d5d4a89"
         }
       ]
     },
@@ -127,28 +109,19 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n80e58a01f660",
-          "service": "note",
-          "key": "emb613390de83af"
+          "key": "embd7e2d10cd4c3"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m2604e003aac4",
-          "service": "external-article",
-          "key": "emb4a4b7a5988d6"
+          "key": "emb9c78c4471979"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n76446d252957",
-          "service": "external-article",
-          "key": "emb466e3e66ef04"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n92b846280d1a",
-          "service": "note",
-          "key": "emb106a644d95e2"
+          "key": "embebf02f22913e"
         }
       ]
     },
@@ -159,28 +132,19 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n80e58a01f660",
-          "service": "note",
-          "key": "embffeba9e16405"
+          "key": "emb23f67616b9fe"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m2604e003aac4",
-          "service": "external-article",
-          "key": "emb1685fcbafa6f"
+          "key": "embdb3c3eafd914"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n89f8035eb53d",
-          "service": "external-article",
-          "key": "emb065332db58a1"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n317c673b1e81",
-          "service": "note",
-          "key": "emb793ef9bf966b"
+          "key": "embf09b755b56d4"
         }
       ]
     },
@@ -191,28 +155,19 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n80e58a01f660",
-          "service": "note",
-          "key": "embb8963c6a017a"
+          "key": "emb2830d252a092"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m2604e003aac4",
-          "service": "external-article",
-          "key": "emb3ee7bdcf4c09"
+          "key": "embf6537d94df7d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/nbdbde1672cc0",
-          "service": "external-article",
-          "key": "emb8b57ba7a6f4c"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n92b846280d1a",
-          "service": "note",
-          "key": "emb55a9610955f3"
+          "key": "emb89e428f2668d"
         }
       ]
     },
@@ -223,40 +178,29 @@
       "renderedCards": 13,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n93a6656b2096",
-          "service": "note",
-          "key": "emb484c62253eba"
+          "key": "embd41ca2b81f28"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "service": "external-article",
-          "key": "emb08710adbb994"
+          "key": "emb97d0e7395e1c"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/n7a494830e01d",
-          "service": "external-article",
-          "key": "emb4189965d86b3"
+          "key": "emb9c8938c6401d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n137cfc540d23",
-          "service": "note",
-          "key": "emb3aec3231bd83"
+          "key": "emb5a0c7e72e75d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nd2fd5adb4bed",
-          "service": "note",
-          "key": "emb65a0b7c8fd01"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nafcc04dcd988",
-          "service": "note",
-          "key": "emb07421ecac454"
+          "key": "embc5a4743b4172"
         }
       ]
     },
@@ -267,22 +211,19 @@
       "renderedCards": 8,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/mc659ce45528f",
-          "service": "external-article",
-          "key": "emb001f43c41e29"
+          "key": "emb75f33e4a9139"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n71b4f712bea4",
-          "service": "note",
-          "key": "emb04eca654adf0"
+          "key": "embc031f8205deb"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-08/from/note/n5b3dbb6c7cef",
-          "service": "external-article",
-          "key": "emb359f69bb1e9e"
+          "key": "emb4bef1288f65e"
         }
       ]
     },
@@ -293,46 +234,34 @@
       "renderedCards": 19,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n93a6656b2096",
-          "service": "note",
-          "key": "emb2df5e182b1f6"
+          "key": "emb4d6d58668f5e"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "service": "external-article",
-          "key": "emb636c6c8fcaca"
+          "key": "embb2db22265f6d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/nd93084c0cb0c",
-          "service": "external-article",
-          "key": "emb548877c26d43"
+          "key": "embe9c3fa08805b"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n137cfc540d23",
-          "service": "note",
-          "key": "emb47932e40b8fe"
+          "key": "emb501487de45a1"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nafcc04dcd988",
-          "service": "note",
-          "key": "emb74124da36f42"
+          "key": "embe5dc4b698f8d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nef7e875ba364",
-          "service": "note",
-          "key": "emb74965cf2d8f0"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nba8bf272cc2b",
-          "service": "note",
-          "key": "emb676e6806fb54"
+          "key": "emb03fd17229df2"
         }
       ]
     },
@@ -343,34 +272,24 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n48a11cea7b31",
-          "service": "note",
-          "key": "embd6ed96b994fb"
+          "key": "embdedd634dd5d1"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m83c357247e0c",
-          "service": "external-article",
-          "key": "emb774fb09c2cb8"
+          "key": "embb2596e450599"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-04/from/note/ncd0aea7cd435",
-          "service": "external-article",
-          "key": "embb9f0f21d7127"
+          "key": "embd24d03cd114f"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n066d8687ef00",
-          "service": "note",
-          "key": "emb89cd38c3e240"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/na76caacd17c3",
-          "service": "note",
-          "key": "emb20062cdf073c"
+          "key": "emb2d13af3ad815"
         }
       ]
     },
@@ -381,28 +300,19 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/neecba2a1752d",
-          "service": "note",
-          "key": "embe975becdec37"
+          "key": "embe9a36c1d094c"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m4709a61adf77",
-          "service": "external-article",
-          "key": "emb41565d531b62"
+          "key": "emb322f9e9e1694"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-02/from/note/n2a465fecbdec",
-          "service": "external-article",
-          "key": "emb51beb3b730a2"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nd5edff320928",
-          "service": "note",
-          "key": "embc985c1fefd80"
+          "key": "embce9a4fdc4182"
         }
       ]
     },
@@ -413,22 +323,19 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n3f65c01be9a8",
-          "service": "note",
-          "key": "emb2999e9c8f31d"
+          "key": "emb3b4771fc59a3"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m8c84e9e6e4bd",
-          "service": "external-article",
-          "key": "emb03772dd85a74"
+          "key": "emb7ccda9ed7403"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-09/from/note/nf28da95897e0",
-          "service": "external-article",
-          "key": "embaf8d3afb47f4"
+          "key": "emb331d1308c652"
         }
       ]
     },
@@ -439,22 +346,19 @@
       "renderedCards": 9,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n91e82ac3b13c",
-          "service": "note",
-          "key": "emb2a55e841a942"
+          "key": "embdfe62c53dbad"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m87e6a79d821b",
-          "service": "external-article",
-          "key": "emb46cbc4f20c96"
+          "key": "embe880b237d568"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-07/from/note/na895280512fc",
-          "service": "external-article",
-          "key": "emb05ec1cd80100"
+          "key": "embb14e1aaf2299"
         }
       ]
     },
@@ -465,40 +369,29 @@
       "renderedCards": 12,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n93a6656b2096",
-          "service": "note",
-          "key": "emb0801be97e763"
+          "key": "emb374061b9ce7f"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "service": "external-article",
-          "key": "embac8c3667bef4"
+          "key": "emb9e6aaee8da92"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/nf4b16d26f6e8",
-          "service": "external-article",
-          "key": "emb35a692d9e783"
+          "key": "emb30943b722a6a"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n137cfc540d23",
-          "service": "note",
-          "key": "emb03a4c9613412"
+          "key": "embd90b9a6d71ac"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nba8bf272cc2b",
-          "service": "note",
-          "key": "embcce5cbda650f"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nd2fd5adb4bed",
-          "service": "note",
-          "key": "embbaeafa0cada9"
+          "key": "emb8e04974946fd"
         }
       ]
     },
@@ -509,36 +402,131 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nf962c6702b93",
-          "service": "note",
-          "key": "embaa8873b9d807"
+          "key": "emb624217c98167"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/me574f67ac47f",
-          "service": "external-article",
-          "key": "embfeb69cff9b10"
+          "key": "emb3a65546131ad"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-07/from/note/n91e96edf3950",
-          "service": "external-article",
-          "key": "embcb9f524444a6"
+          "key": "embb8d6b943754a"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nd54b2958dc0e",
-          "service": "note",
-          "key": "emb502f7c8454be"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://stats47.jp",
-          "service": "external-article",
-          "key": "emb15dccc16c297"
+          "key": "emb8e2fb440ab48"
         }
       ]
+    },
+    {
+      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "noteUrl": "https://note.com/stats47/n/n70ff6efcb571",
+      "storedCards": 7,
+      "renderedCards": 7,
+      "issues": []
+    },
+    {
+      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "noteUrl": "https://note.com/stats47/n/nc7e84c5ccfa4",
+      "storedCards": 7,
+      "renderedCards": 7,
+      "issues": []
+    },
+    {
+      "key": "b-expenditure-structure",
+      "noteUrl": "https://note.com/stats47/n/ne19e85f088bf",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "b-hotel-rooms-nara",
+      "noteUrl": "https://note.com/stats47/n/nd4f523eab511",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "b-hottest-prefecture",
+      "noteUrl": "https://note.com/stats47/n/n995a5b3d3e87",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "b-local-tax-vs-allocation-tax",
+      "noteUrl": "https://note.com/stats47/n/ne8f39a64c5f0",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "b-pharmacy-density",
+      "noteUrl": "https://note.com/stats47/n/n4056bcc5457e",
+      "storedCards": 7,
+      "renderedCards": 7,
+      "issues": []
+    },
+    {
+      "key": "b-rich-spending-patterns",
+      "noteUrl": "https://note.com/stats47/n/nd9bfdd519d2f",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "c-engel-food-gap",
+      "noteUrl": "https://note.com/stats47/n/n28d03969fa6d",
+      "storedCards": 5,
+      "renderedCards": 5,
+      "issues": []
+    },
+    {
+      "key": "c-kita-kanto-fiscal",
+      "noteUrl": "https://note.com/stats47/n/n56eb35145c32",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "c-tokyo-vs-osaka-fiscal",
+      "noteUrl": "https://note.com/stats47/n/n0eb7e589b1ba",
+      "storedCards": 6,
+      "renderedCards": 6,
+      "issues": []
+    },
+    {
+      "key": "d-education-income-gap",
+      "noteUrl": "https://note.com/stats47/n/n7c8391d4c639",
+      "storedCards": 11,
+      "renderedCards": 11,
+      "issues": []
+    },
+    {
+      "key": "d-engel-coefficient-income",
+      "noteUrl": "https://note.com/stats47/n/n392f0f3cb374",
+      "storedCards": 7,
+      "renderedCards": 7,
+      "issues": []
+    },
+    {
+      "key": "d-kakei-spending-personality",
+      "noteUrl": "https://note.com/stats47/n/n94cd84139a45",
+      "storedCards": 4,
+      "renderedCards": 4,
+      "issues": []
+    },
+    {
+      "key": "koumuin-shigoto-kouritsuka-ai",
+      "noteUrl": "https://note.com/stats47/n/na451784fbbca",
+      "storedCards": 2,
+      "renderedCards": 2,
+      "issues": []
     },
     {
       "key": "paid-n0135c75ca76c",
@@ -599,8 +587,8 @@
     {
       "key": "paid-n2ed31d721531",
       "noteUrl": "https://note.com/stats47/n/n2ed31d721531",
-      "storedCards": 4,
-      "renderedCards": 4,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
@@ -641,8 +629,8 @@
     {
       "key": "paid-n67de9d45c426",
       "noteUrl": "https://note.com/stats47/n/n67de9d45c426",
-      "storedCards": 2,
-      "renderedCards": 2,
+      "storedCards": 3,
+      "renderedCards": 3,
       "issues": []
     },
     {
@@ -774,8 +762,8 @@
     {
       "key": "paid-nba8bf272cc2b",
       "noteUrl": "https://note.com/stats47/n/nba8bf272cc2b",
-      "storedCards": 2,
-      "renderedCards": 2,
+      "storedCards": 3,
+      "renderedCards": 3,
       "issues": []
     },
     {
@@ -876,10 +864,9 @@
       "renderedCards": 9,
       "issues": [
         {
-          "code": "card_blank_in_browser",
-          "url": "https://stats47.jp",
-          "service": "external-article",
-          "key": "embcc39c9a2ee9d"
+          "code": "card_extra_blank_paragraph",
+          "url": "https://stats47.jp/",
+          "key": "embe3ea5b19f7a2"
         }
       ]
     },
@@ -891,33 +878,24 @@
       "issues": [
         {
           "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nf962c6702b93",
-          "service": "note",
-          "key": "embd5270df92370"
-        },
-        {
-          "code": "card_blank_in_browser",
           "url": "https://note.com/stats47/m/me574f67ac47f",
           "service": "external-article",
           "key": "embf4bf74e742aa"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
+          "url": "https://note.com/stats47/n/nf962c6702b93",
+          "key": "emb32f6aa343f03"
+        },
+        {
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-07/from/note/n023501038bd5",
-          "service": "external-article",
-          "key": "emb4ee7f9d6d683"
+          "key": "emba221b9211481"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nd54b2958dc0e",
-          "service": "note",
-          "key": "emb3faa1825ba5d"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://stats47.jp",
-          "service": "external-article",
-          "key": "emb9e358a9320a5"
+          "key": "embc272b08b7b58"
         }
       ]
     },
@@ -928,28 +906,19 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/na21015ac366d",
-          "service": "note",
-          "key": "emb3a938e13ee70"
+          "key": "embc6dc27f97eb6"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "service": "external-article",
-          "key": "emb7bfa4c5fa7ca"
+          "key": "emb0d7909d03016"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-06/from/note/n026bb22ad4eb",
-          "service": "external-article",
-          "key": "emb03f271ac277e"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n67de9d45c426",
-          "service": "note",
-          "key": "emb904611bc5f87"
+          "key": "embcff840a86696"
         }
       ]
     },
@@ -960,28 +929,19 @@
       "renderedCards": 15,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n80e58a01f660",
-          "service": "note",
-          "key": "emb2eee16f3e72a"
+          "key": "embeb14ad3ab6bc"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m2604e003aac4",
-          "service": "external-article",
-          "key": "emb21fb481592b1"
+          "key": "emb83d7df4d9c61"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n03844512d58a",
-          "service": "external-article",
-          "key": "embf49c089cfbf3"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n317c673b1e81",
-          "service": "note",
-          "key": "embea5474367b77"
+          "key": "embe16e030cf18c"
         }
       ]
     },
@@ -1036,28 +996,19 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/na21015ac366d",
-          "service": "note",
-          "key": "embdd36ddabb134"
+          "key": "emb4c01c594fb3e"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "service": "external-article",
-          "key": "emba98c1112bf21"
+          "key": "emb29be3dffa728"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-06/from/note/n04c2737daf2c",
-          "service": "external-article",
-          "key": "emb30109e16e89e"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nead1c21768b5",
-          "service": "note",
-          "key": "emb86544524849c"
+          "key": "emb0d784b9dc373"
         }
       ]
     },
@@ -1068,40 +1019,29 @@
       "renderedCards": 10,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nded2d34fc978",
-          "service": "note",
-          "key": "embff579c139f24"
+          "key": "embd347c62d30cb"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/m30bb1cee28f7",
-          "service": "external-article",
-          "key": "embaf9620926b84"
+          "key": "emb42ded03779bb"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/kindle-k-s1-06/from/note/n04d95ae14bc1",
-          "service": "external-article",
-          "key": "emb3fe3920d2f8e"
+          "key": "emb653bf6f822ef"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n2406ded99484",
-          "service": "note",
-          "key": "embf9cc3a52d1ef"
+          "key": "embace2d6b90977"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/nefecfbe76bd2",
-          "service": "note",
-          "key": "emb49a34cc8f812"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nb8f3e05d244b",
-          "service": "note",
-          "key": "emb41ab246dd429"
+          "key": "emb48ed1d0f73e4"
         }
       ]
     },
@@ -1112,28 +1052,19 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n28943c36410a",
-          "service": "note",
-          "key": "emb318f69b85049"
+          "key": "emb869ed1dfc4c2"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "service": "external-article",
-          "key": "emb384f2d7742ca"
+          "key": "emb70cb99092180"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-06/from/note/n0654ddf27920",
-          "service": "external-article",
-          "key": "embdd4b28fcef9d"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/n67de9d45c426",
-          "service": "note",
-          "key": "emb5ed441818380"
+          "key": "embf49b5b9694da"
         }
       ]
     },
@@ -1144,28 +1075,19 @@
       "renderedCards": 11,
       "issues": [
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/n/n28943c36410a",
-          "service": "note",
-          "key": "emb73892198375f"
+          "key": "emb6f3e3c20e93d"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "service": "external-article",
-          "key": "emb7580007bb0c0"
+          "key": "emb58ca826e5ea1"
         },
         {
-          "code": "card_blank_in_browser",
+          "code": "card_extra_blank_paragraph",
           "url": "https://stats47.jp/products/data-p-06/from/note/n08eb33492a93",
-          "service": "external-article",
-          "key": "emb3c0ac5f544c1"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/nead1c21768b5",
-          "service": "note",
-          "key": "embf3f30593f1e0"
+          "key": "emb8f9580fc83bc"
         }
       ]
     },
@@ -1177,18 +1099,6 @@
       "issues": [
         {
           "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/n/na21015ac366d",
-          "service": "note",
-          "key": "embc1db5fe45a3e"
-        },
-        {
-          "code": "card_blank_in_browser",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "service": "external-article",
-          "key": "embcb90675c5c50"
-        },
-        {
-          "code": "card_blank_in_browser",
           "url": "https://stats47.jp/products/data-p-06/from/note/n0b7373c9648a",
           "service": "external-article",
           "key": "embfd9e89f99b81"
@@ -1198,6 +1108,16 @@
           "url": "https://note.com/stats47/n/n67de9d45c426",
           "service": "note",
           "key": "emb54a26b0feaaa"
+        },
+        {
+          "code": "card_extra_blank_paragraph",
+          "url": "https://note.com/stats47/n/na21015ac366d",
+          "key": "embaf1227271841"
+        },
+        {
+          "code": "card_extra_blank_paragraph",
+          "url": "https://note.com/stats47/m/mef7c42c1c86c",
+          "key": "emb391d42a33810"
         }
       ]
     },
@@ -4883,6 +4803,13 @@
       ]
     },
     {
+      "key": "sunshine-solar-housing",
+      "noteUrl": "https://note.com/stats47/n/n2fffce0e2320",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
       "key": "a-kakei-aichi",
       "noteUrl": "https://note.com/stats47/n/nda72a0bed2c4",
       "storedCards": 4,
@@ -7002,6 +6929,20 @@
     {
       "key": "11-mcp-sqlite-search",
       "noteUrl": "https://note.com/stats47/n/n347f923606f1",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "12-fiscal-peer-comparison",
+      "noteUrl": "https://note.com/stats47/n/n527e817995e9",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "13-fiscal-peer-no-code",
+      "noteUrl": "https://note.com/stats47/n/n20299fc77b17",
       "storedCards": 0,
       "renderedCards": 0,
       "issues": []

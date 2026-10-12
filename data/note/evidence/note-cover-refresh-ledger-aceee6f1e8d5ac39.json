@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-aceee6f1e8d5ac39",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "paid-neecba2a1752d",
+      "sha256": "662fba51834971b442586cf976c87c412417f777841c5d51db133d358882108a"
+    },
+    {
+      "key": "paid-nef7e875ba364",
+      "sha256": "d6ddeca645a1ea8aac4af2c6f644f4f53e617db0d71548f64f1b848b389402d6"
+    },
+    {
+      "key": "paid-nefecfbe76bd2",
+      "sha256": "1f4cf1885f0eb7800d0f7c046e69d68e989e9b666c531e517cf0ac84c6d1c6bf"
+    },
+    {
+      "key": "paid-nf0c82ce9cee0",
+      "sha256": "9a7c7ab702aeb05aa0bf3c9413954a7982f42e0e3f598dafc3444bbe3a6a61cf"
+    },
+    {
+      "key": "paid-nf80da34b28c3",
+      "sha256": "851f0941736df0f900ee6029fcb428df17cbf5eb44b7f98d73dc66eae5c045eb"
+    },
+    {
+      "key": "paid-nfd3ab8213e1f",
+      "sha256": "767add49fc02b4def5b156cdd307b8cf97c5ec10f18d25a8352979a5019b3650"
+    },
+    {
+      "key": "paid-nfe2c65e669a8",
+      "sha256": "6d09ec1411f3b87810c6ca8f8157eacdd57b6b7c34ad821b5770ca63879b7fb5"
+    },
+    {
+      "key": "pinned-intro",
+      "sha256": "1ef763a841baec0901826623f13d46a9594c4de8ddfd383f0eae2fea4adccbd0"
+    },
+    {
+      "key": "recovered-n023501038bd5",
+      "sha256": "c2758fa1e5b3ba39d38efda8badfff64b2f27242c39bbb797cfafb03818a8efe"
+    },
+    {
+      "key": "recovered-n03844512d58a",
+      "sha256": "55588271aa6deea9286972f8f7b10a522b0e8dbf68ce0d8f570c644f565c76b3"
+    },
+    {
+      "key": "recovered-n03e45e40d3a7",
+      "sha256": "57ed2872e881e055f718277e65889e5239296ba46f830c77cf294d3b61b90372"
+    },
+    {
+      "key": "recovered-n04d95ae14bc1",
+      "sha256": "8da47aeece88a15eb26d04fa723a3c2d7d6abff615759be56d9c7752608af6fd"
+    },
+    {
+      "key": "recovered-n0e8fd0068d4e",
+      "sha256": "61d0e63ddba873f1c1be79fd0a7e691fc8252fa3985b477285973648b97cef6c"
+    },
+    {
+      "key": "recovered-n144d350fc14e",
+      "sha256": "a9d80c7dacde6cf5d6a36ef962f1021236fd76620c03888e6b0801bd9837795b"
+    },
+    {
+      "key": "recovered-n15ee88b5169d",
+      "sha256": "3a005e076d3e636a2969d8e0b72c6af12afbe8ea7b557ccdd9743cbfb1c72dfb"
+    },
+    {
+      "key": "recovered-n16950238dfd8",
+      "sha256": "6941e0733e50cc534cc8d568bc96de074a406edc2acfdd0ecc6b47fe8937a656"
+    },
+    {
+      "key": "recovered-n1b943c7d414d",
+      "sha256": "ca2ac1ff0ea3e1dede0acc96a8bf9d5d430729e764d4fc19b4a6ad0820d86f9e"
+    },
+    {
+      "key": "recovered-n1e63abcfba72",
+      "sha256": "9e21c9898e963b6c626f1a4d0e0cae7178dbd4b89fecee94c398f90192355c43"
+    },
+    {
+      "key": "recovered-n218588ef2f67",
+      "sha256": "d03dd6cf2fcc21edc363e07f7354351347ab6599280f4d00336cacf928b87f88"
+    },
+    {
+      "key": "recovered-n21cb13582fe6",
+      "sha256": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca"
+    },
+    {
+      "key": "recovered-n24b5000d587f",
+      "sha256": "023e1f4b5a5ec21fcd450fefc1284297f76b77c96cfd940665d4a0ce263291f4"
+    },
+    {
+      "key": "recovered-n2b4298e9ac07",
+      "sha256": "9e2b9908c0b3e7689f6ae309549ebe1bee90e795a09364e362e262c020ccf987"
+    },
+    {
+      "key": "recovered-n3908e5981967",
+      "sha256": "e8b2a1d0a834767d89f16f3eac2430cc10b69bde76786e62fcf684badf4afcf9"
+    },
+    {
+      "key": "recovered-n391d3ef70d29",
+      "sha256": "f35e54f60455e419e7608866fc0ffdde52bf180f5651ce9b0b45298ea6b16e13"
+    },
+    {
+      "key": "recovered-n3a4efa70c02a",
+      "sha256": "95e53d66e04fa471a4b383a4a5bc410f512519345358d9aec9f1cc10d345866a"
+    },
+    {
+      "key": "recovered-n46a8eb03072b",
+      "sha256": "fa08422553a5176e8896fdf1cb4a49052894124b4d894b3c69089a184f9eae99"
+    },
+    {
+      "key": "recovered-n48dff1df249f",
+      "sha256": "bbc7c4e8d425f42356ea67523f10fb9ca54950a16f9e7b9d5c10930c07b4ee3e"
+    },
+    {
+      "key": "recovered-n4dae901ea3e8",
+      "sha256": "a8fcb12ea6a006a8e465a840c90ad483533f7b7219f46423265a0de9470e0079"
+    },
+    {
+      "key": "recovered-n5158c5766a07",
+      "sha256": "0512716918ab0d3f7348cf35a2b73be33a4659aa8b80a618d11e5b629e276710"
+    },
+    {
+      "key": "recovered-n567416b632f6",
+      "sha256": "41bc2ff0c31830053c7619fa94df2efe8a86b30d1895c8b6bf748b515b564d35"
+    },
+    {
+      "key": "recovered-n581a1409b2c9",
+      "sha256": "97cad6183bafa3e1b9448c62a9a165dd9addd55aac0b7b9a885a68f3c59ab81b"
+    },
+    {
+      "key": "recovered-n5f183fcf5b97",
+      "sha256": "27321fa40cbb522ce8d31fc3a9c5d7ca8522be6c092e1fc081255dde9df19a30"
+    },
+    {
+      "key": "recovered-n68f5e09c8d62",
+      "sha256": "d4102e1289274d0bf5497a26db9cb3f815cf97a9f7216b2d338f180804632964"
+    },
+    {
+      "key": "recovered-n6f8a367906d1",
+      "sha256": "1905efe1d9d0287ae9ef0c65e27bcbc3c0e756c1ed5523cb1a828f3938117631"
+    },
+    {
+      "key": "recovered-n73a4d300e045",
+      "sha256": "6d83530df37ac6e62874e2823c2bc18c02b66d95819ba91086d1d34d5cbdc667"
+    },
+    {
+      "key": "recovered-n80e58a01f660",
+      "sha256": "e2995911981e19a58eec1398f63d56e270782b99b7d5a68f12b873a1a46e3aae"
+    },
+    {
+      "key": "recovered-n863f429319ca",
+      "sha256": "1905efe1d9d0287ae9ef0c65e27bcbc3c0e756c1ed5523cb1a828f3938117631"
+    },
+    {
+      "key": "recovered-n91e82ac3b13c",
+      "sha256": "86bef700bd98347c9d66ec014c4750072a6ed62ae849a6e190f191bceeeb36a6"
+    },
+    {
+      "key": "recovered-n93a6656b2096",
+      "sha256": "e897b8d6c38a438f2ecb3cc1c90c623737f7873a0ccf93220968bf788d128f07"
+    },
+    {
+      "key": "recovered-n99561600d4fe",
+      "sha256": "c7c4bee3852e8d353abfe5a24301642312180b2dae65ed9f4bde815ff91b32de"
+    },
+    {
+      "key": "recovered-n99f53e7a1f33",
+      "sha256": "d85a28a4b87c85f9495be65454fd30e0103a33c45f692b575201a2bf3fa11548"
+    },
+    {
+      "key": "recovered-nb2d65c42c28b",
+      "sha256": "1905efe1d9d0287ae9ef0c65e27bcbc3c0e756c1ed5523cb1a828f3938117631"
+    },
+    {
+      "key": "recovered-nc18fa33ec65e",
+      "sha256": "5077693f4d8412ab1d2c8f73af3365ef0ef858c2c11bb3a5dfffa1d252d3bc6e"
+    },
+    {
+      "key": "recovered-ncbed56eb7c3d",
+      "sha256": "26b3e796134f43f92465a5b1e42e1a15202b7a2a16f973b6132d33871a1eaa38"
+    },
+    {
+      "key": "recovered-nd5f8b5072cdb",
+      "sha256": "9d01b7b4b356549694d130a5db019105fad890a27a60558714dc3c501094e9b1"
+    },
+    {
+      "key": "recovered-ndc600ddb7c44",
+      "sha256": "7ed9cea114669f97ccb0ac52b86781a1a3705bebaecf53f03e54225cb6ede4ed"
+    },
+    {
+      "key": "recovered-nddd927386fce",
+      "sha256": "164f11d286b971d3ab344fa650f8f84a1bc9f00a65591af4ce6576bc610a78a8"
+    },
+    {
+      "key": "recovered-nded2d34fc978",
+      "sha256": "b18cc24a9a6e79322ac321ef4fc926ef291c98e9cbcb8ff1f38e08b77eaeba41"
+    },
+    {
+      "key": "recovered-ne0d53bfef7ed",
+      "sha256": "f73cbefe352da32974e035e1a9c0869e34e43d73771adb37b461fd86fa35e0a3"
+    },
+    {
+      "key": "recovered-ne31a2574e231",
+      "sha256": "a362c5da8542dfb0d7fecbfe77efda960cdba306135295dbf8905918845a87e5"
+    },
+    {
+      "key": "recovered-ne82a6c83ed45",
+      "sha256": "061c3e1e45daccc8a0b6838feb086191663c3ac5a545d840898d81b8bdd06681"
+    },
+    {
+      "key": "recovered-ned30a382334d",
+      "sha256": "97cad6183bafa3e1b9448c62a9a165dd9addd55aac0b7b9a885a68f3c59ab81b"
+    },
+    {
+      "key": "recovered-nf962c6702b93",
+      "sha256": "6736c4654c63c2eac7317b2c315e61cf622b40c41620e3503e01f59d25d05a0f"
+    },
+    {
+      "key": "recovered-nfe69996fb5c9",
+      "sha256": "ef15ca11bca7fea47a07cf58c46de3109e1b02c6db3684d0277233dc05622138"
+    }
+  ],
+  "startedAt": "2026-10-11T12:42:09.158Z",
+  "articles": [
+    {
+      "key": "paid-neecba2a1752d",
+      "noteId": "neecba2a1752d",
+      "action": "improve",
+      "sourceSha256": "662fba51834971b442586cf976c87c412417f777841c5d51db133d358882108a",
+      "previousUrl": "https://assets.st-note.com/production/uploads/images/320256685/rectangle_large_type_2_238ff9e68ee9d6e75798de1f05ae7539.png?fit=bounds&quality=85&width=1280",
+      "contentFingerprint": {
+        "id": "42893b48b35ab6ac343a565c2664a10a916f87efa425c44798986eed8e9d0a65",
+        "key": "ddf0a2dd01be25f962e8f2ceae79b6d73f1ce8b57d109d243f206281fe629bfa",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "e5bc8a8a1f9bf4740eed7d26aff4c16c98b020cf06100c3e00db2f941ce16fd5",
+        "body": "799830e34da95ff739806637f1504df9ec102e7543c649a86cb89a1d27440c4e",
+        "separator": "f3d440a36acde7c324ff246320c1afde635f3ba09d852e50470014830f3999ac",
+        "price": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "hashtag_notes": "d7ca40b7b49df278d32b483b9ea235b7d7e0f6e810051a062fd60d6e1c54d061",
+        "belonging_magazine_keys": "dfce9d3c46ce48f6e071caafdbefbc4c4b4c385533137869c554544f665cfb96",
+        "publish_at": "292930090e91b70fb7b4e34b61423ef57dbbb07c9a26bc5224cc33a5a36ba839",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-11T12:42:15.763Z",
+      "status": "superseded",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323284981/rectangle_large_type_2_3cb8dc4e6a8030db582263a2328d5dea.png",
+      "uploadedAt": "2026-10-11T12:42:20.869Z",
+      "error": "public image differs 4.589858519900497",
+      "supersededBy": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89",
+      "inspection": {
+        "inspectedAt": "2026-10-11T12:42:33.415Z",
+        "liveUrl": "https://assets.st-note.com/production/uploads/images/323284981/rectangle_large_type_2_3cb8dc4e6a8030db582263a2328d5dea.png",
+        "finding": "note stored the uploaded cover with a tinted rectangular band over the lower background (MAE above 3/255; checked by eye). Article fingerprint was preserved before upload. Re-issued as a new revision with identical appearance."
+      }
+    }
+  ],
+  "updatedAt": "2026-10-11T12:42:33.416Z"
+}

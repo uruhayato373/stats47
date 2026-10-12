@@ -27,13 +27,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { readArticleLedger, writeArticleLedger } from "./lib/article-ledger.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
-const CATALOG_PATH = path.join(ROOT, ".claude/scripts/note/catalog/data/stats47-note.ts");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
-const BLOCK_RE = /\{\n(?:[^{}]*\n)*?\s*key: "(a-kakei-[a-z]+)",[\s\S]*?\n  \},/g;
+const KAKEI_KEY = /^a-kakei-[a-z]+$/;
 
 export function pickDominant(categoryBreakdown) {
   return categoryBreakdown.reduce((best, cur) => {
@@ -43,27 +43,11 @@ export function pickDominant(categoryBreakdown) {
   }, categoryBreakdown[0]);
 }
 
-function extractField(block, field) {
-  const m = block.match(new RegExp(`${field}: "(.+?)"`));
-  return m ? m[1] : null;
-}
-
-/** catalog から published な a-kakei-* エントリを block ごと抽出する。 */
-export function parseCatalogEntries(src) {
-  const entries = [];
-  let m;
-  const re = new RegExp(BLOCK_RE);
-  while ((m = re.exec(src))) {
-    const block = m[0];
-    if (!/status: "published"/.test(block)) continue;
-    entries.push({
-      key: m[1],
-      block,
-      r2Path: extractField(block, "r2Path"),
-      existingNextBest: extractField(block, "nextBestArticle"),
-    });
-  }
-  return entries;
+/** 記事台帳から published な a-kakei-* を抽出する。 */
+export function parseCatalogEntries(articles) {
+  return articles
+    .filter((a) => KAKEI_KEY.test(a.key) && a.status === "published")
+    .map((a) => ({ key: a.key, r2Path: a.r2Path ?? null, existingNextBest: a.nextBestArticle ?? null }));
 }
 
 async function loadChartData(entry) {
@@ -105,23 +89,22 @@ export function choosePick(self, records) {
   return others.slice().sort((a, b) => (a.key < b.key ? -1 : 1))[0].key;
 }
 
-export function patchCatalog(src, picks) {
-  return src.replace(new RegExp(BLOCK_RE), (block, key) => {
-    if (!/status: "published"/.test(block) || !picks.has(key)) return block;
-    const pick = picks.get(key);
-    if (/nextBestArticle: "/.test(block)) {
-      return block.replace(/nextBestArticle: "(.+?)",/, `nextBestArticle: "${pick}",`);
-    }
-    // stats47Targets が最後尾フィールドの想定。無い block にも対応するため、
-    // 閉じ括弧 "\n  }," の直前に挿入する。
-    return block.replace(/\n(\s*)\},$/, `\n    nextBestArticle: "${pick}",\n$1},`);
+/** picks を published な a-kakei-* の nextBestArticle に反映した新しい配列と、変わった件数を返す。 */
+export function patchCatalog(articles, picks) {
+  let changed = 0;
+  const next = articles.map((a) => {
+    if (!KAKEI_KEY.test(a.key) || a.status !== "published" || !picks.has(a.key)) return a;
+    if (a.nextBestArticle === picks.get(a.key)) return a;
+    changed++;
+    return { ...a, nextBestArticle: picks.get(a.key) };
   });
+  return { articles: next, changed };
 }
 
 async function main() {
   const write = process.argv.includes("--write");
-  const src = fs.readFileSync(CATALOG_PATH, "utf8");
-  const entries = parseCatalogEntries(src);
+  const ledger = readArticleLedger();
+  const entries = parseCatalogEntries(ledger.articles);
 
   const records = [];
   for (const entry of entries) {
@@ -154,12 +137,12 @@ async function main() {
   console.log(`[done] ${picks.size}/${records.length} picks resolved`);
 
   if (write) {
-    const next = patchCatalog(src, picks);
-    if (next === src) {
+    const { articles, changed } = patchCatalog(ledger.articles, picks);
+    if (changed === 0) {
       console.log("[ok] no changes (already up to date)");
     } else {
-      fs.writeFileSync(CATALOG_PATH, next);
-      console.log("[ok] catalog updated");
+      writeArticleLedger({ ...ledger, articles });
+      console.log(`[ok] ledger updated (${changed} articles)`);
     }
   }
 }

@@ -44,7 +44,7 @@ await Promise.all(Array.from({ length: Math.min(4, selected.length) }, async () 
 await updateCoverLedger(current => { for (const observation of observations) recordCoverObservation(current, observation); });
 const report = { schemaVersion: 1, account: 'stats47', generatedAt: new Date().toISOString(),
   status: checks.some(a => a.status === 'fail') ? 'fail' : 'pass', articles: checks };
-const output = path.join(state, 'note/cover-lifecycle-latest.json');
+const output = path.join(COVER_ROOT, datasetDir("note.cover-rollout"), 'cover-lifecycle-latest.json');
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ status: report.status, checked: checks.length, failures: checks.filter(a => a.status === 'fail') }));

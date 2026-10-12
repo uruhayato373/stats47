@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-8def075dda983119",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "b-pharmacy-density",
+      "sha256": "cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5"
+    }
+  ],
+  "startedAt": "2026-10-12T06:13:41.598Z",
+  "articles": [
+    {
+      "key": "b-pharmacy-density",
+      "noteId": "n4056bcc5457e",
+      "action": "create",
+      "sourceSha256": "cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "0bae38be252b2a8065a7a8e5d5bde2f26d3b4f38020eec730926c85b35e01870",
+        "key": "178d37ba00f33fcea258906421f663dce0a8074bdcd18f3add2a411e350ec9fb",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "bc4a81b58fbfc913b6f1793958801c1b2772e1f87a4d2bb930e3135304aed523",
+        "body": "a2b9b55ccd64915b86b9761f1b48f9c09b24f918ad0e14716aff20ec8c177dc5",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "3c74623af385c0ae4adcd7e123f73a1dc172a6c05030f0ca1977d2788f4acc29",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "a51e015bee3764573f69b31acf4863461652961caf409eaad98fa22ebc9f3dc2",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T06:13:43.897Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323540147/rectangle_large_type_2_0959c4c08b2ead69f304d2a3fad53f5d.png",
+      "uploadedAt": "2026-10-12T06:13:47.455Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "1ca6a8aad76e0a874d42a2e7edee96a006f37d5ec4169d07d1cc86b918db2313",
+        "meanPixelError": 0.6727110541044776
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323540147/rectangle_large_type_2_0959c4c08b2ead69f304d2a3fad53f5d.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T06:13:47.815Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T06:13:47.815Z"
+}

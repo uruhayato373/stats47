@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-c329296131266b79",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "sha256": "e496142085e679f8f30df8bb19e2b446df3de40f22c159c11b8f60d58528fedc"
+    }
+  ],
+  "startedAt": "2026-10-12T05:52:26.362Z",
+  "articles": [
+    {
+      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "noteId": "n70ff6efcb571",
+      "action": "create",
+      "sourceSha256": "e496142085e679f8f30df8bb19e2b446df3de40f22c159c11b8f60d58528fedc",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "fe2080fb6021d54fbf127ddea73e9bc2bab2e9c2ef0c0dd46a6ecb569cd23ccd",
+        "key": "0560dcc1be131463e5663d2976d75f3945f0163aeccdae59d193892a490a51f2",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "157d46cca670287c2087e806e78fbe6792b16adc6b617fa00b132e3fa93f9c8d",
+        "body": "4bc10504cd344c63b052aada0a52af81015582cc14f30f04cf69ea82ebe6614a",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "b72da8b9bd20a935511b91b909c3635cbb7986d9bef11d94943d16aabc0f5648",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "9d722007d82a176f5ea9b1403b064d4bf8cd0515234ff24c3576edf1eb0ec51a",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T05:52:28.794Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323532367/rectangle_large_type_2_46f42e9da09a1e6649cf19ac39633b98.png",
+      "uploadedAt": "2026-10-12T05:52:32.346Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "da7c2b44438da962244822ee27d795aa8c9724e74b77f4566fcd8f45733aca20",
+        "meanPixelError": 0.5773293687810945
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323532367/rectangle_large_type_2_46f42e9da09a1e6649cf19ac39633b98.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T05:52:32.737Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T05:52:32.737Z"
+}

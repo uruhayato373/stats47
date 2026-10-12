@@ -15,13 +15,15 @@ function step(name) {
   return STEPS.find((candidate) => candidate.name === name);
 }
 
-test("weekly circulation workflow remains read-only except issue lifecycle", () => {
-  // actions: read は前回 run の artifact (カード表示の前回結果) を gh run download で読むため (2026-09-27)。書き込みは issues だけ
-  assert.deepEqual(WORKFLOW.permissions, { contents: "read", actions: "read", issues: "write" });
+test("weekly circulation workflow writes only the cover observations and the issue lifecycle", () => {
+  // actions: read は前回 run の artifact (カード表示の前回結果) を gh run download で読むため (2026-09-27)。
+  // contents: write はカバー台帳の観測 (data/note/cover-assets.json) を develop へ書き戻すため (b74d0effa)。それ以外は書かない
+  assert.deepEqual(WORKFLOW.permissions, { contents: "write", actions: "read", issues: "write" });
+  assert.deepEqual([...SOURCE.matchAll(/git add -- (\S+)/g)].map((m) => m[1]), ["data/note/cover-assets.json"]);
   assert.equal(WORKFLOW.jobs.audit["timeout-minutes"], 30);
   assert.equal(WORKFLOW.jobs.audit.runsOn ?? WORKFLOW.jobs.audit["runs-on"], "ubuntu-latest");
   assert.match(SOURCE, /cron:\s*['"]15 20 \* \* 6['"]/);
-  assert.doesNotMatch(SOURCE, /git\s+push|wrangler\s+r2|note-magazine\.mjs.+--commit/);
+  assert.doesNotMatch(SOURCE, /wrangler\s+r2|note-magazine\.mjs.+--commit/);
 });
 
 test("catalog, unit and live audits feed one strict status", () => {

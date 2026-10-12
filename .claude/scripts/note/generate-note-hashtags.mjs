@@ -11,7 +11,7 @@
  * --all: note-draft-index.json の全ドラフトを対象
  *
  * 生成先: docs/31_note記事原稿/<vertical>/<slug>/hashtags.txt
- * (存在しない場合は restore-from-r2.sh で復元してから実行)
+ * (存在しない場合は note:article checkout で復元してから実行)
  */
 
 import fs from 'fs';
@@ -24,7 +24,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
 
 function resolveSlugDir(draftRoot, vertical, slug) {
-  // stats47-note は vertical ディレクトリなし (restore-from-r2.sh の挙動に合わせる)
+  // stats47-note は vertical ディレクトリなし (note:article checkout の挙動に合わせる)
   if (vertical === 'stats47-note') {
     const flat = path.join(draftRoot, slug);
     if (fs.existsSync(flat)) return flat;
@@ -38,7 +38,7 @@ async function processSlug(slug, info, draftRoot) {
 
   if (!fs.existsSync(slugDir)) {
     console.log(`  SKIP (docs/31 に未展開): ${slug}`);
-    console.log(`    → bash .claude/scripts/note/restore-from-r2.sh ${slug}`);
+    console.log(`    → npm run note:article -- checkout ${slug}`);
     return { status: 'skip', slug };
   }
 
@@ -104,7 +104,7 @@ async function main() {
   console.log(`\n完了: OK=${ok}件, SKIP(未展開)=${skip}件, FAIL=${fail}件`);
   if (fail > 0) process.exitCode = 1;
   if (skip > 0) {
-    console.log('  未展開のドラフトは restore-from-r2.sh で展開後に再実行してください');
+    console.log('  未展開のドラフトは note:article checkout で展開後に再実行してください');
   }
 }
 

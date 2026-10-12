@@ -100,7 +100,7 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 `images/*.png`はgitに載らず、`render-spec.json`（`chart-data.json`のSHA・テンプレート版）が作り直しの根拠になる。
 
-生成AI（imagegen/Codex）の背景をカバーに使う場合は、作り直せない入力なので保管する（契約7・`.claude/rules/note-image-assets.md`）。
+生成AI（imagegen/Codex）の背景をカバーに使う場合は、作り直せない入力なので保管する（契約6・`.claude/rules/note-image-assets.md`）。
 
 ```bash
 node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --input <画像> --stash          # 候補をDrive(非公開)へ
@@ -121,7 +121,7 @@ node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --inp
 ## 公開への引き渡し
 
 ユーザーがR2同期または公開も明示した場合だけ`reference/runbook.md`の
-「生成後: R2同期」を読み、`.claude/rules/branch-workflow.md`の承認境界に従う。
+「生成後: R2 へ保存」を読み、`.claude/rules/branch-workflow.md`の承認境界に従う。
 
 ## Output Contract
 

@@ -20,6 +20,9 @@ import type { Dataset, PrefectureDatum } from "./dataset";
 import type { SourceRow } from "./sources";
 import { fetchRankingValues } from "./load-ranking-values";
 import { productIndicatorLabel } from "./product-indicator-label";
+import { buildSourceRow, unconfirmedLicense, type MetricRegistry } from "./metric-source";
+import type { ExcludedIndicator } from "./databook";
+import { METRICS_REGISTRY } from "@stats47/data-configs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const PACK_SNAPSHOT_DIR = resolve(HERE, "pack-snapshots");
@@ -41,37 +44,6 @@ export interface PackSnapshot {
   readonly generatedAt: string;
   readonly indicatorCount: number;
   readonly indicators: readonly SnapshotIndicator[];
-}
-
-const R2_TOP = "https://www.stat.go.jp/data/ssds/index.htm";
-
-/** metric config (registry) から出典行を導く。基準年・単位は fetch 実測を優先する。 */
-function toSourceRow(
-  cfg: Record<string, unknown>,
-  key: string,
-  year: string,
-  unit: string,
-  retrievedAt: string,
-): SourceRow {
-  const src = (cfg.source ?? {}) as Record<string, unknown>;
-  const filter = (src.filter ?? {}) as Record<string, unknown>;
-  const statsDataId = String(src.statsDataId ?? filter.statsDataId ?? "-");
-  const displayName = String(src.displayName ?? cfg.title ?? key);
-  const url = typeof src.url === "string" && src.url ? src.url : R2_TOP;
-  const note = typeof cfg.note === "string" ? cfg.note : "";
-  return {
-    surveyName: displayName,
-    tableName: productIndicatorLabel(key, cfg),
-    statsDataId,
-    url,
-    year,
-    retrievedAt,
-    unit,
-    transform: `都道府県別・基準年（${year}）を stats47 が R2 (app/ranking/${key}/values.json) から抽出。`,
-    notes: note
-      ? `${note} 基準年固定（${year}）。e-Stat の数値・表を基に stats47 作成。公認・推奨を示すものではありません。`
-      : `基準年固定（${year}）。e-Stat の数値・表を基に stats47 作成。公認・推奨を示すものではありません。`,
-  };
 }
 
 /** null 値に missing 理由を付与して 47 県 datum を作る (0 埋めしない)。 */
@@ -109,7 +81,7 @@ async function fetchOne(
       unit,
       category: String(cfg.category ?? "?"),
       year: fetched.year,
-      source: toSourceRow(cfg, key, fetched.year, unit, retrievedAt),
+      source: buildSourceRow(cfg, key, fetched.year, unit, retrievedAt, productIndicatorLabel(key, cfg), registry),
       values: toDatums(fetched.values),
     };
     return { key, ok: true, indicator };
@@ -199,22 +171,81 @@ export async function buildPackSnapshots(
   return results;
 }
 
-/** snapshot JSON があれば読み込み、build 用の Dataset[] に変換する (無ければ null)。 */
-export function loadPackSnapshotDatasets(packId: string): { title: string; datasets: Dataset[] } | null {
+/** 値が完全に同じ (47 県すべて同値・欠損理由も同じ) 列を見分ける署名。 */
+function valueSignature(values: readonly PrefectureDatum[]): string {
+  return JSON.stringify(values.map((v) => [v.value, v.missing ?? null]));
+}
+
+/**
+ * 47 県すべてで値が同じ列を 1 つにまとめる。先に現れた指標を残し、統合した指標キーを
+ * `mergedRankingKeys` と SOURCES の注意事項に残す (同じ数値を別指標として数えない)。
+ */
+export function mergeIdenticalDatasets(datasets: readonly Dataset[]): Dataset[] {
+  const kept: Dataset[] = [];
+  const bySignature = new Map<string, number>();
+  const merged = new Map<number, Dataset[]>();
+  for (const ds of datasets) {
+    const sig = valueSignature(ds.values);
+    const at = bySignature.get(sig);
+    if (at === undefined) {
+      bySignature.set(sig, kept.length);
+      kept.push(ds);
+    } else {
+      merged.set(at, [...(merged.get(at) ?? []), ds]);
+    }
+  }
+  return kept.map((ds, i) => {
+    const dups = merged.get(i);
+    if (!dups) return ds;
+    const labels = dups.map((d) => `${d.indicator}（${d.rankingKey ?? d.indicator}）`).join("・");
+    return {
+      ...ds,
+      mergedRankingKeys: dups.map((d) => d.rankingKey ?? d.indicator),
+      source: {
+        ...ds.source,
+        notes: `${ds.source.notes} 同じ値の指標（${labels}）は 47 都道府県すべてで値が同一のため、この列に統合しています。`,
+      },
+    };
+  });
+}
+
+/**
+ * snapshot JSON があれば読み込み、build 用の Dataset[] に変換する (無ければ null)。
+ * 出典 (SOURCES 行) は焼き込み済みの値ではなく、指標定義 (metric config) の取得元から導き直す:
+ * 補完出典で取った年の statsDataId・調査名、e-Stat 以外の提供元の注意事項を正しくするため。
+ * 観測値・単位・年・表名は snapshot のまま使う (再取得しない)。
+ */
+export function loadPackSnapshotDatasets(
+  packId: string,
+  registry: MetricRegistry = METRICS_REGISTRY as unknown as MetricRegistry,
+): { title: string; datasets: Dataset[]; excluded: ExcludedIndicator[] } | null {
   const path = join(PACK_SNAPSHOT_DIR, `${packId}.json`);
   if (!existsSync(path)) return null;
   const snap = JSON.parse(readFileSync(path, "utf8")) as PackSnapshot;
   if (!snap.indicators || snap.indicators.length === 0) return null;
-  const datasets: Dataset[] = snap.indicators.map((ind) => ({
-    indicator: ind.indicator,
-    unit: ind.unit,
-    year: ind.year,
-    category: ind.category,
-    source: ind.source,
-    isSample: false,
-    values: ind.values,
-  }));
-  return { title: snap.title, datasets };
+  const excluded: ExcludedIndicator[] = [];
+  const datasets: Dataset[] = [];
+  for (const ind of snap.indicators) {
+    const cfg = registry[ind.rankingKey];
+    if (!cfg) throw new Error(`pack snapshot ${packId}: 指標定義が見つかりません: ${ind.rankingKey}`);
+    // 権利状態が要確認 (再配布・商用利用の許諾が確認できない) の指標は有料パックに入れない
+    const license = unconfirmedLicense(cfg, registry);
+    if (license) {
+      excluded.push({ rankingKey: ind.rankingKey, indicator: ind.indicator, reason: `権利状態が要確認のため除外: ${license}` });
+      continue;
+    }
+    datasets.push({
+      indicator: ind.indicator,
+      unit: ind.unit,
+      year: ind.year,
+      category: ind.category,
+      source: buildSourceRow(cfg, ind.rankingKey, ind.year, ind.unit, ind.source.retrievedAt, ind.source.tableName, registry),
+      isSample: false,
+      rankingKey: ind.rankingKey,
+      values: ind.values,
+    });
+  }
+  return { title: snap.title, datasets: mergeIdenticalDatasets(datasets), excluded };
 }
 
 // ---- CLI ----
