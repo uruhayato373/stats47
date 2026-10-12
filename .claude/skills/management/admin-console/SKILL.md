@@ -1,13 +1,14 @@
 ---
 name: admin-console
 domain: ops
-description: 統合メディア管理コンソール (ローカル) を起動する。X/Instagram/note/Kindleの原稿・公開状態、参考文献の展開状況、Geo契約、画像資産、SVG、調査、収益、品質、TODOを読み取り専用で横断確認する。Use when the user wants to open or browse the local admin console (管理画面・メディアコンソール) for content, publishing state, assets, references, revenue, quality or TODO.
+description: 統合メディア管理コンソール (ローカル) を起動する。X/Instagram/note/Kindleの原稿・公開状態、参考文献の展開状況、Geo契約、画像資産、SVG、調査、収益、品質、TODOを横断確認し、SNS下書き本文を編集する。Use when the user wants to open or browse the local admin console (管理画面・メディアコンソール) for content, publishing state, assets, references, revenue, quality or TODO.
 primary_agent: sns-metrics-sync
 co_agents: [note-manager, kindle-publisher, kdp-operator]
 ---
 
-全コンテンツ運用とメディア資産を 1 つの localhost 画面で横断管理する読み取り専用コンソール。
-書き込み・投稿・生成は各 owner agent / skill が担う。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
+全コンテンツ運用とメディア資産を 1 つの localhost 画面で横断管理するコンソール。
+2026-10-11 オーナー指示によりSNS下書き本文の編集・保存だけを許可する。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
+下書き本文以外の書き込み・投稿・生成は各 owner agent / skill が担う。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
 2026-07-16 に旧 node:http 実装から完全移管)。
 
 ## 起動 / 停止
@@ -33,7 +34,7 @@ PORT=5000 npm run admin    # ポート変更
 | `/content/note` | note運用 | git TS catalog + R2本文所在 + 公開URL/準備状態。読み取り専用 |
 | `/content/kindle` | Kindle運用 | book catalog + manuscripts + `.local`成果物 + R2暗号化archive + KDP審査/販売状態・価格・ロイヤリティ・KU。読み取り専用 |
 | `/content/references` | 参考文献展開 | 制作単位×12チャネルとcontext-only補強プールを、既存SSOTから全件派生。読み取り専用 |
-| `/sns` | SNS 投稿ギャラリー | X/IG 素材の再生・caption・投稿状態・メトリクス・残枠を読み取り専用表示。YouTube は過去実績とpilot台帳を表示 |
+| `/sns` | SNS 投稿ギャラリー | ID検索・画像一覧/台帳・caption・投稿状態・残枠を表示し、下書き本文を編集。YouTube は過去実績とpilot台帳を表示 |
 | `/assets` | 画像資産 | OGP / リンクカード(light/dark) / note カバー / note 記事内画像 / 動画 masterを閲覧 |
 | `/strategy` | 事業戦略 | 事業計画とM1 Geo分析のレイヤー・空間演算・metric・X role 3/9/2/1・機械契約を表示 |
 | `/svg` | ブログ SVG カタログ | 記事内 SVG を 6 カタログ + table + unknown に機械分類して一覧 |
@@ -53,22 +54,22 @@ PORT=5000 npm run admin    # ポート変更
 | `GET /api/dashboard/summary` | プロジェクト現況の集約 JSON (state/md ライブ読み・TTL 60 秒、collector は `dashboard-data.mjs`) |
 | `GET /api/content` | 4運用チャネルの共通stage・note/Kindle詳細・参考文献12チャネル展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
 
-**API routeはGETだけ**。POST/PATCH/PUT/DELETEを追加すると
-`apps/admin/tests/unit/read-only-contract.test.ts` が失敗する。
+APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存だけ。
+許可範囲は `apps/admin/tests/unit/read-only-contract.test.ts` と下書き保存テストで固定する。
 
 ## できること
 
 | 操作 | 実装 |
 |---|---|
-| SNS 素材ギャラリー閲覧 (動画再生・画像) | ローカル `.local/r2/sns/` 優先、無ければ R2 公開 URL 直参照 |
-| caption / 予約日時 / 投稿状態の確認 | `/content/{x,instagram}` と `/sns` |
+| SNS 素材ギャラリー閲覧 (動画再生・画像) | 投稿IDに紐づくDrive保全素材を優先し、ローカル/R2へフォールバック |
+| caption / 予約日時 / 投稿状態の確認・下書き本文編集 | `/content/{x,instagram}` と `/sns` |
 | Geo role・分析ID・claim metricの確認 | `/content/x` と `/strategy` |
 | 画像資産の所在・欠落状態の確認 | `/assets` |
 | SVG カタログの分類確認 | `/svg` (dark 対応の厳密確認は静的 `build-svg-gallery-tabbed.mjs`) |
 
 ## 規約 (正典: `.claude/rules/sns-content-standards.md` §5.5 / `.claude/rules/ogp-image-standards.md`)
 
-- 投稿台帳 SSOT は `data/sns/posts.json`。adminはread-onlyで、書込はadmin外のagent/skillが `sns-posts-store.cjs` 経由で行う
+- 投稿台帳 SSOT は `data/sns/posts.json`。adminの下書き本文保存と、owner agent/skillの書込は `sns-posts-store.cjs` 経由で行う
 - note は git TS catalog + R2本文、Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の新規台帳を作らない
 - 参考文献展開は `data/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。制作可能単位は12チャネル、context-onlyは補強専用として全件集約し、別台帳・Drive ID・原本/OCR/cropを保持しない
 - `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityはbuild + lint + audit + 参考文献E2Eをblocking実行
@@ -93,3 +94,9 @@ PORT=5000 npm run admin    # ポート変更
 - 台帳ストア (admin外のwriter用): `.claude/scripts/lib/sns-posts-store.cjs`
 - R2 削除: `packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml`
 - X 投稿: `.claude/skills/sns/publish-x/` / IG cron: `.claude/scripts/instagram/post-from-schedule.cjs`
+
+### 展開候補と未登録素材の整理
+
+`/sns?scope=candidates` で予約前の候補を画像付きで確認する。`origin=new-format` は新しい型の追加企画、`origin=material-import` は既存素材から整理した候補。準備状況と型で絞り込める。
+未登録ディレクトリを既存IDに照合・候補登録する入口は `node .claude/scripts/sns/reconcile-materials.mjs --input /tmp/materials.json --report /tmp/plan.json`（既定dry-run、適用は `--apply`）。入力・保全・削除済みの扱いは `apps/admin/README.md`「SNSのID台帳」。
+画像・本文・承認・素材の別名は `posts.json` の同じIDに紐付く。確認用プレビューと投稿用画像を区別し、候補整理だけで予約・公開しない。

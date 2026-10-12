@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatNumber } from '@stats47/utils';
+import { scaleLinear } from 'd3-scale';
 
 import { IG_FONT, IG_SERIES, IgSeriesCard, IgSeriesFrame } from '@/features/ig-series';
 
@@ -12,7 +13,7 @@ interface CorrelationScatterSlideProps {
 const SERIES = 'correlation' as const;
 const PLOT_W = 900;
 const PLOT_H = 620;
-const INSET = 26;
+const PLOT_MARGIN = { top: 70, right: 30, bottom: 65, left: 125 };
 /**
  * カードの marginBottom に使う下端クリアランス。IgSeriesFrame はスワイプ誘導 (bottom:110 付近) と
  * フッター (bottom:44 付近) を絶対配置で重ねるため、flex:1 のカードがそこまで伸び切ると
@@ -33,17 +34,16 @@ function domainWithPadding(values: number[]): Domain {
   return { min: min - pad, max: max + pad };
 }
 
-function scale(value: number, domain: Domain, size: number): number {
-  if (domain.max === domain.min) return size / 2;
-  return INSET + ((value - domain.min) / (domain.max - domain.min)) * (size - INSET * 2);
-}
-
 /** 2/5枚目: 47都道府県の散布図。軸ラベル・単位・年、r と人口の影響を除いた r を表示する */
 export const CorrelationScatterSlide: React.FC<CorrelationScatterSlideProps> = ({ resolved }) => {
   const { spec } = resolved;
   const palette = IG_SERIES[SERIES];
   const xDomain = domainWithPadding(spec.points.map((p) => p.x));
   const yDomain = domainWithPadding(spec.points.map((p) => p.y));
+  const xScale = scaleLinear().domain([xDomain.min, xDomain.max]).nice(4)
+    .range([PLOT_MARGIN.left, PLOT_W - PLOT_MARGIN.right]);
+  const yScale = scaleLinear().domain([yDomain.min, yDomain.max]).nice(4)
+    .range([PLOT_H - PLOT_MARGIN.bottom, PLOT_MARGIN.top]);
 
   return (
     <IgSeriesFrame series={SERIES} tag="47都道府県" swipeLabel="目立つ県の解説へ" sourceLabel={combinedSourceLabel(spec)}>
@@ -52,6 +52,11 @@ export const CorrelationScatterSlide: React.FC<CorrelationScatterSlideProps> = (
       </div>
       <div style={{ marginTop: 4, fontSize: 22, fontWeight: IG_FONT.weight.bold, lineHeight: 1.5 }}>
         横軸: {spec.x.label}（{spec.x.unit}・{spec.x.year}年）
+      </div>
+      <div style={{ marginTop: 8, fontSize: 18, lineHeight: 1.5 }}>
+        横軸の対象：{spec.x.scopeNote ?? '都道府県全域'}
+        <br />
+        縦軸の対象：{spec.y.scopeNote ?? '都道府県全域'}
       </div>
       <IgSeriesCard
         style={{
@@ -64,13 +69,23 @@ export const CorrelationScatterSlide: React.FC<CorrelationScatterSlideProps> = (
         }}
       >
         <svg viewBox={`0 0 ${PLOT_W} ${PLOT_H}`} style={{ width: '100%', height: '100%' }}>
-          <line x1={INSET} y1={PLOT_H - INSET} x2={PLOT_W - INSET} y2={PLOT_H - INSET} stroke="#CBD5E1" strokeWidth={2} />
-          <line x1={INSET} y1={INSET} x2={INSET} y2={PLOT_H - INSET} stroke="#CBD5E1" strokeWidth={2} />
+          {xScale.ticks(4).map((tick) => (
+            <g key={`x-${tick}`}>
+              <line x1={xScale(tick)} x2={xScale(tick)} y1={PLOT_MARGIN.top} y2={PLOT_H - PLOT_MARGIN.bottom} stroke="#E2E8F0" />
+              <text x={xScale(tick)} y={PLOT_H - PLOT_MARGIN.bottom + 32} textAnchor="middle" fill="#475569" fontSize={22}>{formatNumber(tick)}</text>
+            </g>
+          ))}
+          {yScale.ticks(4).map((tick) => (
+            <g key={`y-${tick}`}>
+              <line x1={PLOT_MARGIN.left} x2={PLOT_W - PLOT_MARGIN.right} y1={yScale(tick)} y2={yScale(tick)} stroke="#E2E8F0" />
+              <text x={PLOT_MARGIN.left - 14} y={yScale(tick) + 7} textAnchor="end" fill="#475569" fontSize={22}>{formatNumber(tick)}</text>
+            </g>
+          ))}
           {spec.points.map((p) => (
             <circle
               key={p.prefCode}
-              cx={scale(p.x, xDomain, PLOT_W)}
-              cy={PLOT_H - scale(p.y, yDomain, PLOT_H)}
+              cx={xScale(p.x)}
+              cy={yScale(p.y)}
               r={10}
               fill={palette.accent}
               fillOpacity={0.82}
@@ -93,7 +108,7 @@ export const CorrelationScatterSlide: React.FC<CorrelationScatterSlideProps> = (
         >
           r = {formatR(spec.r)}
           <br />
-          人口の影響を除くと r = {formatR(spec.rPopulationAdjusted)}
+          人口を制御した偏相関 r = {formatR(spec.rPopulationAdjusted)}
           <br />
           n = {formatNumber(spec.n)}都道府県
         </div>

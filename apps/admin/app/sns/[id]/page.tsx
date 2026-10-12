@@ -5,6 +5,8 @@ import { Cell, DataTable, PanelCard, Row, StatusBadge, type Tone } from "@/compo
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { MediaPreview } from "@/components/media-preview";
 import { PageHeading } from "@/components/ops/primitives";
+import { Button } from "@/components/ui/button";
+import { formatJst } from "@/lib/sns-ledger";
 import { buildPostTrace } from "@/lib/server/post-trace";
 import type { Post } from "@/lib/server/posts-store";
 import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
@@ -40,8 +42,8 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
     ["媒体 / 種類", `${post.platform} / ${post.post_type ?? "-"}`],
     ["題材", `${post.domain ?? "-"} / ${post.content_key ?? "-"}`],
     ["状態", <StatusBadge key="s" tone={STATUS_TONE[post.status] ?? "neutral"}>{post.status}</StatusBadge>],
-    ["予約日時", post.scheduled_at ?? "-"],
-    ["投稿日時", post.posted_at ?? "-"],
+    ["予約日時 (JST)", formatJst(post.scheduled_at)],
+    ["投稿日時 (JST)", formatJst(post.posted_at)],
     ["外部 ID", externalId ?? "たどれない (URL・media_id が未記録)"],
     [
       "投稿 URL",
@@ -55,7 +57,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
     ],
     ["着地 URL (UTM)", post.utm_url ?? "-"],
     ["型 (template)", post.template ?? "-"],
-    ["作成 / 更新", `${post.created_at} / ${post.updated_at}`],
+    ["作成 / 更新 (JST)", `${formatJst(post.created_at)} / ${formatJst(post.updated_at)}`],
   ];
 
   return (
@@ -67,6 +69,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
           <StatusBadge tone={APPROVAL_TONE[approval.state] ?? "neutral"}>{APPROVAL_LABEL[approval.state] ?? approval.state}</StatusBadge>
         </div>
       </PageHeading>
+      <div><Button asChild variant="outline"><Link href={`/sns?q=${post.id}`}>画像一覧で確認・下書き編集</Link></Button></div>
 
       <Grid min="lg">
         <PanelCard title="状態と外部 ID">

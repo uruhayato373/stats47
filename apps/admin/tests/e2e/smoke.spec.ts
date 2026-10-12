@@ -17,7 +17,7 @@ const PAGES = [
   { path: "/content/note", heading: "note運用" },
   { path: "/content/kindle", heading: "Kindle運用" },
   { path: "/content/references", heading: "参考文献の活用・展開管理" },
-  { path: "/sns", heading: "SNS 投稿ギャラリー" },
+  { path: "/sns", heading: "SNS 投稿台帳" },
   { path: "/buzz-map", heading: null },
   { path: "/assets", heading: null },
   { path: "/svg", heading: null },

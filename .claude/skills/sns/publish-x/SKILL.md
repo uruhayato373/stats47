@@ -22,6 +22,15 @@ npx tsx .claude/skills/sns/publish-x/delete-x-scheduled.ts --match "<本文の�
 取り消したら台帳 (`posts.json`) の該当行を `sns-posts-store.cjs` の `updateById(id, { status: "deleted" })` で更新する。
 直接指定 (`--media` / `--caption`・キー指定) の投稿は、同じキーの下書きがあればその 1 件を、無ければ新しい行を台帳に自動で記録する (予約・即時投稿とも。既に scheduled / posted の行は別の投稿なので上書きしない。判定は `.claude/scripts/sns/lib/x-direct-ledger.cjs`)。
 
+## 予約画像だけを差し替えるとき (2026-10-12 実測)
+
+同じ投稿の画像更新は予約一覧の対象を開き、既存予約を編集する。ID・本文・予約日時を維持し、更新後に一覧の全カードの本文と日時が不変かを照合する。対象を開き直して画像・全文・予約表示を確認してから、Drive素材とID台帳を更新する。公開済みと共有する元画像は上書きしない。
+
+- 可視の `scheduledTweetIndicator` を待ち、その直近の `role=dialog` 内の `tweetTextarea_0` に操作を限定する。ハッシュタグ候補も `role=dialog` なので、dialogの最初・最後という位置指定は使わない。
+- 「メディアを削除」「予約設定」は要素の `click()` で操作する。キーボードの Enter はハッシュタグ候補を確定して本文を書き換える場合がある。画像アップロード後・保存前にも全文一致を確認する。
+- 保存前に `scheduledTweetIndicator` の日時と、ボタンが「予約設定」であることを確認する。可視セレクタは保存後に背景の別の編集欄を指すため、消失待ちは保存前に取得したElementHandleに対して行う。
+- Xの保存後画像は1080×1350から960×1200へ縮小された。アップロードしたファイルのSHAに加えて、開き直した画像の縦横比・本文・日時・一覧件数を確認する。保存結果が不明なときは再送せず、まず予約一覧を読み直す。
+
 ## ログインの維持
 
 専用プロファイル `.local/playwright-x-profile` のログインは、launchd (毎日 17:30 + ログイン時) の `refresh-session.mjs x` が確認し、

@@ -1,3 +1,4 @@
+import { DataCardCompositions } from './features/data-cards/Compositions';
 import { CANVAS, getBarChartRaceTimeline } from '@/shared';
 import { RankingShort, getShortTimeline } from '@/shared';
 import React from 'react';
@@ -158,12 +159,12 @@ export const RemotionRoot: React.FC = () => {
 
       <Folder name="Ranking">
         <Folder name="X">
-          {/* X用チャート (1200x630) */}
+          {/* X用全47県タイル (1080x1350) */}
           <Composition
             id="RankingX-Chart"
             component={RankingChartXPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
+            width={1080}
+            height={1350}
             fps={1}
             durationInFrames={1}
             schema={CommonPreviewSchema}
@@ -1326,6 +1327,8 @@ export const RemotionRoot: React.FC = () => {
           defaultProps={{ ratio: '916' as const }}
         />
       </Folder>
+
+      <DataCardCompositions />
 
       {/* ===== Site Intro ===== */}
       <Folder name="SiteIntro">

@@ -219,7 +219,7 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          {SITE.name}
+          {meta.sourceLabel ? `出典：${meta.sourceLabel}` : SITE.name}
         </div>
       </div>
     </AbsoluteFill>

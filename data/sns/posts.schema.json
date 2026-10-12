@@ -41,6 +41,18 @@
           "type": ["string", "null"],
           "pattern": "^data/sns/scripts/[0-9]+\\.json$"
         },
+        "material_keys": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^(x|instagram)/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+$" } },
+        "planning": {
+          "type": "object", "additionalProperties": false,
+          "required": ["origin", "batch", "title", "preview_only", "note"],
+          "properties": {
+            "origin": { "enum": ["material-import", "new-format"] },
+            "batch": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+            "title": { "type": "string", "minLength": 1 },
+            "preview_only": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        },
         "approval": { "$ref": "#/definitions/approval" },
         "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } }
       }

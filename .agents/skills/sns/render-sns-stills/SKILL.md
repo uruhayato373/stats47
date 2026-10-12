@@ -44,6 +44,32 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 - **rankingKeyX**: X軸ランキングキー（必須）
 - **rankingKeyY**: Y軸ランキングキー（必須）
 
+## 家計レシート・県の図鑑・順位の乗り換え図
+
+この4型は事前の手編集data.jsonやキャプションを必要としない。次のCLIがgitの指標定義とR2から
+実データを取得し、検査・描画・投稿用ファイル生成まで行う。新規提案ではSNS規約§2-9aに従い優先候補に含める。
+
+```bash
+npx tsx .claude/scripts/sns/render-data-card.ts --kind household-receipt --area 28 --year 2024 --platform both
+npx tsx .claude/scripts/sns/render-data-card.ts --kind area-atlas --area 28 --platform both
+npx tsx .claude/scripts/sns/render-data-card.ts --kind rank-routes --key bread-consumption-expenditure --from 2014 --to 2024 --areas 28,27,33,26 --platform both
+npx tsx .claude/scripts/sns/render-data-card.ts --kind tile-change --key total-population --from 1975 --to 2025 --platform both
+```
+
+- `--area`: 都道府県コード（1〜47 / 01〜47 / 5桁）。図鑑は4指標それぞれの最新年、家計レシートは2024年に対応。
+- 順位図は家計調査の品目別年間支出額に対応。`--areas`は2〜4地域、省略時は旧1位と新上位から4地域を選定する。
+  世帯区分・期間・都市の母集団を固定し、同順位も47地域での順位を保持する。
+- `--platform x|instagram|both`（既定x）。Xは1080×1350の1枚、IGは同サイズの表紙・本体・出典/案内の3枚。
+- 出力は `.local/r2/sns/<kind>/<contentKey>/`。`props.json`、`manifest.json`、入力`sources/`、媒体別`stills/`と
+  `caption.txt`、Xは`draft.json`を持つ。contentKeyはCLI出力を使用し、rankingKeyと混同しない。
+- 既存成果物には上書きしない。再試行は新しい`--out <directory>`を指定する。`--prepare-only`は接地検査とprops生成のみ。
+  `CHROME_PATH`でChrome実行ファイルを指定できる。
+- Xは`x/draft.json`のキャプションを§2-0に沿って編集し、投稿日時を`scheduledAt`に設定する。
+  `mediaPath` / `domain` / `canonicalUrl` / `campaign` / `metricKeys`を維持したまま、`post-x-batch`のlint→draft登録へ渡す。
+  新型の画像がない場合にranking-cardを代用しない。同じCLI引数で再生成して画像パスを同期する。
+- IGは既存の`post-instagram`へ`--domain <kind>`とcontentKeyを渡す。公開・予約・R2反映は既存の投稿手順で行う。
+- PNGを実寸・縮小で確認し、`manifest.json`の出典・期間・丸め差・抽出条件も確認する。
+
 ## ドメイン別コンポジション
 
 ### ranking ドメイン
@@ -259,3 +285,5 @@ Remotion は `rankingKey` だけではデータを取得できない。必ず `-
 - キャプション生成: `/post-x` / `/post-ig-6angles` / `/bar-chart-race --step captions`
 - Remotion レンダ入口の正典: 静止画/動画 = 本スキル、BCR = `/bar-chart-race`、プレビュー = `/preview-remotion` (`.claude/rules/sns-content-standards.md` §5)
 - Remotion 設定: `apps/remotion/remotion.config.js`
+
+タイル長期変化は `--kind tile-change --key total-population|households|births --from <年> --to <年>`。同じ定義・単位の47県で計算し、人口2025年は国勢調査確定値を使う。新規の上位・下位5県チャート生成は廃止。`quick-still` と `RankingX-Chart` は1080×1350の全47県タイルを生成する（過去のファイル名は互換維持）。予約の差し替えでも公開済みの共有素材を上書きしない。

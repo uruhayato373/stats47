@@ -29,6 +29,11 @@ export const CorrelationCoverSlide: React.FC<CorrelationCoverSlideProps> = ({ re
       <p style={{ fontSize: 30, fontWeight: IG_FONT.weight.bold, marginTop: 40, lineHeight: 1.6 }}>
         {spec.x.label} × {spec.y.label}
       </p>
+      <p style={{ fontSize: 22, fontWeight: IG_FONT.weight.bold, lineHeight: 1.7 }}>
+        横軸：{spec.x.year}年・{spec.x.scopeNote ?? '都道府県全域'}
+        <br />
+        縦軸：{spec.y.year}年・{spec.y.scopeNote ?? '都道府県全域'}
+      </p>
     </IgSeriesFrame>
   );
 };

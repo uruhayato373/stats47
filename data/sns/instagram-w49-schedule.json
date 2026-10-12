@@ -1,0 +1,71 @@
+[
+  {
+    "date": "2026-12-01",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "agricultural-employment-population",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1137
+  },
+  {
+    "date": "2026-12-02",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "10000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1118
+  },
+  {
+    "date": "2026-12-03",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "general-households",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1154
+  },
+  {
+    "date": "2026-12-04",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "29000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1123
+  },
+  {
+    "date": "2026-12-05",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "day-time-population",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1149
+  }
+]

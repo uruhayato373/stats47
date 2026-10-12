@@ -2,7 +2,7 @@
 
 stats47 のローカル統合メディアコンソール。X / Instagram / note / Kindle の原稿・公開状態、
 private Google Drive参考文献から既存コンテンツへの展開状況、
-SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を読み取り専用で横断管理する。
+SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。SNS下書き本文のみ画面から編集でき、それ以外は読み取り専用。
 2026-07-16 に旧 node:http + Vanilla JS 実装 (`.claude/scripts/gallery/`) から**完全移管** (旧実装は削除済み)。
 
 **公開サイト `apps/web` とは独立**。Cloudflare 等へデプロイしない。リモート公開・認証・DB なし。
@@ -66,7 +66,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 
 | データ | SSOT | 扱い |
 |---|---|---|
-| SNS 投稿台帳 | `data/sns/posts.json` | adminは`loadAll/query`だけを公開。書込はadmin外のagent/skillがstore経由で実行 |
+| SNS 投稿台帳 | `data/sns/posts.json` | ID台帳・画像一覧から確認。下書き本文の保存だけadminから既存store経由で実行。予約・投稿はowner agent/skill |
 | note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
 | Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `config/kdp-listings.json` / `data/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
 | 参考文献展開 | `data/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `contents/blog/`・`docs/31_note記事原稿/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
@@ -79,10 +79,23 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 | 事業計画 | `packages/data-configs/src/business-plan/` + `data/business-plan/latest.json` | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`) |
 | 資産列挙 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs` | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import |
 
+## SNSのID台帳
+
+`/sns` と `/content/{x,instagram}` で画像一覧 / 台帳表示を切り替える。IDは既存の `posts.json` を使い、別台帳を作らない。
+ID検索 (`#1109`、`1109,1110,1111`)、本文・キー・template検索、媒体・投稿状態・画像の型の絞り込み、予約順、24件ごとのページ送りに対応。表示条件はURLに保持し、日時はJSTに統一する。
+「展開候補」 (`/sns?scope=candidates`) は予約前の下書きを表示。出どころ（新しい型の追加企画 / 既存素材）、準備状況、型で絞り込み、企画名も検索できる。
+候補の `planning`（企画名・出どころ・整理日・確認用画像の区別・確認事項）と `material_keys`（媒体/ドメイン/元ディレクトリキー）は同じ投稿IDの行に保存する。
+確認用プレビューは `assets.role=thumbnail` で保全し、投稿用 `media_path` には設定しない。公開前に投稿用画像・本文・出典を確認する。
+未登録素材の整理は `node .claude/scripts/sns/reconcile-materials.mjs --input /tmp/materials.json --report /tmp/plan.json`（dry-run）、適用は `--apply`。
+入力は `{platform, domain, content_key, batch:"YYYY-MM-DD"}` の配列で、`title/caption/origin/note` は任意。正確なファイル・既知の別名・素材キーで既存IDへ紐付け、曖昧なら停止。
+削除済み素材も元IDへの所属を維持し復活させない。新規行は承認待ち・日時なしで登録し、Driveに実体とSHAを保全する。既存本文・状態・予約日時は変更しない。
+画像と本文を開くと下書きだけ編集できる。未保存で閉じる際は確認し、保存エラーでも入力を残す。予約済み・投稿済みは閲覧用。
+素材は投稿IDに紐づくGoogle Drive保全素材を優先し、ローカル/R2候補へフォールバックする。家計レシート・県図鑑・順位乗換も型で絞り込める。
+
 ## 安全ガード
 
-- API routeはGETだけ。書き込みmethodは `tests/unit/read-only-contract.test.ts` が拒否する
-- server層の子プロセス起動・ファイル書き込みadapterも同じ契約テストが拒否する
+- APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存だけ (2026-10-11 オーナー指示)。同一origin・loopback・JSON限定、ID/本文/版を検査し、予約/公開/削除済み・古い版の更新を拒否する。変更後は承認待ちへ戻す
+- `posts-store.ts` の `saveDraftCaption` のみ既存storeのwriterを呼べる。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
 - **ファイル配信**: decode → resolve → relative 検査 → **realpath 後再検査** (symlink 脱出拒否) → regular file のみ。Range 200/206/416
 - 個別制作物をTODOへ二重登録しない。`audit:content-operations` が `K-Sx-xx` / `NOTE-ARTICLE-*` /
   `SNS-POST-*` 等の個別カードを拒否し、システム課題・自動化・横断意思決定だけをbacklogに残す

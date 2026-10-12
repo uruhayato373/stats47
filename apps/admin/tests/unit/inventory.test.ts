@@ -27,6 +27,13 @@ describe("inventory", () => {
   }
 
   describe("mediaCandidates", () => {
+    it("投稿IDのDrive素材を優先し、従来のローカル候補をfallbackに残す", async () => {
+      const { mediaCandidates } = await load({ posts: [], localSnsFiles: ["household-receipt/28000/x/stills/28000.png"] });
+      const cands = mediaCandidates({ id: 1109, platform: "x", domain: "household-receipt", content_key: "28000", assets: [{ role: "image", order: 1, state: "archived", drive_path: "SNS素材/x/1109/image-1.png" }] });
+      expect(cands[0]).toEqual({ url: "/sns-asset/1109/image-1.png", source: "drive" });
+      expect(cands[1]).toEqual({ url: "/media/household-receipt/28000/x/stills/28000.png", source: "local" });
+    });
+
     it("ローカルに素材があれば /media/ URL (local)、無ければ R2 URL (r2)", async () => {
       const { mediaCandidates } = await load({
         posts: [],
@@ -62,6 +69,12 @@ describe("inventory", () => {
       expect(cands[0].source).toBe("local");
     });
 
+    it("旧台帳のR2キーもローカル画像へ解決する", async () => {
+      const { mediaCandidates } = await load({ posts: [], localSnsFiles: ["buzz-map/example/x/stills/custom.png"] });
+      const candidates = mediaCandidates({ platform: "x", domain: "buzz-map", content_key: "example", media_path: "sns/buzz-map/example/x/stills/custom.png" });
+      expect(candidates[0]).toEqual({url: "/media/buzz-map/example/x/stills/custom.png", source: "local"});
+    });
+
     it("content_key が無ければ platform 候補を出さない", async () => {
       const { mediaCandidates } = await load({ posts: [] });
       const cands = mediaCandidates({ platform: "x", domain: "ranking" });
@@ -83,6 +96,19 @@ describe("inventory", () => {
       const reelUrls = cands.filter((c) => c.url === "/media/ranking/dup/instagram/reel.mp4");
       expect(reelUrls.length).toBe(1);
     });
+  });
+
+  it("素材の別名は元IDへ所属し、soft delete済みを再表示しない", async () => {
+    const { buildInventory } = await load({
+      posts: [
+        { id: 1, platform: "x", status: "draft", domain: "area", content_key: "area-01000-profile", material_keys: ["x/area/01000"] },
+        { id: 2, platform: "x", status: "posted", domain: "ranking", content_key: "gone", deleted_at: "2026-10-10" },
+      ],
+      localSnsFiles: ["area/01000/x/stills/a.png", "ranking/gone/x/stills/a.png"],
+    });
+    const inventory = buildInventory();
+    expect(inventory.posts.map(p => p.id)).toEqual([1]);
+    expect(inventory.extras).toEqual([]);
   });
 
   describe("scanLocalMaterials", () => {

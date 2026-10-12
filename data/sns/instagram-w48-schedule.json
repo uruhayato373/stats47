@@ -1,0 +1,99 @@
+[
+  {
+    "date": "2026-11-23",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "avg-propensity-to-consume-worker-households",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1141
+  },
+  {
+    "date": "2026-11-24",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "41000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1126
+  },
+  {
+    "date": "2026-11-25",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "road-total-length",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1167
+  },
+  {
+    "date": "2026-11-26",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "09000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1117
+  },
+  {
+    "date": "2026-11-27",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "convenience-store-sales",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1145
+  },
+  {
+    "date": "2026-11-28",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "32000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1124
+  },
+  {
+    "date": "2026-11-29",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "private-rental-housing-rent-per-3-3m2",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1164
+  }
+]

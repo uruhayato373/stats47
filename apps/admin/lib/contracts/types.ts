@@ -9,7 +9,17 @@ export interface MediaCandidateDTO {
   note?: string;
 }
 
+export interface PostPlanning {
+  origin: 'material-import' | 'new-format';
+  batch: string;
+  title: string;
+  preview_only: boolean;
+  note: string;
+}
+
 export interface PostDTO {
+  material_keys?: string[];
+  planning?: PostPlanning;
   id: number;
   platform: string;
   post_type: string | null;
@@ -27,6 +37,16 @@ export interface PostDTO {
   bookmarks: number | null;
   template: string | null;
   media_candidates: MediaCandidateDTO[];
+  revision?: string;
+  approval?: { state: 'pending' | 'approved' | 'rejected' | 'unrecorded' };
+  assets?: Array<{
+    role: string;
+    order: number;
+    state: string;
+    drive_path?: string;
+    width?: number;
+    height?: number;
+  }>;
   [key: string]: unknown;
 }
 

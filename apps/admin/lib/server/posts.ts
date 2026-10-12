@@ -1,10 +1,12 @@
 import "server-only";
 
+import { matchesPostQuery } from "@/lib/sns-ledger";
+
 import { loadAll } from "./posts-store";
 import { decorate, type DecoratedPost } from "./inventory";
 
 /**
- * 投稿台帳の読み取りと filter。管理画面は台帳を更新しない。
+ * 投稿台帳の読み取りと filter。本文編集は posts-store の専用関数へ。
  */
 export interface PostsFilter {
   platform?: string;
@@ -22,7 +24,7 @@ export function filterPosts(f: PostsFilter): { count: number; posts: DecoratedPo
   if (f.q) {
     const q = f.q;
     posts = posts.filter(
-      (x) => (x.content_key || "").includes(q) || (x.caption || "").includes(q),
+      (x) => matchesPostQuery(x, q),
     );
   }
   posts.sort((a, b) =>

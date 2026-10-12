@@ -55,7 +55,19 @@ export const CarouselPreview: React.FC<CarouselPreviewProps> = ({
         />
       );
     case "cta":
-      return <CTASlide theme={theme} />;
+      return (
+        <CTASlide
+          theme={theme}
+          headline={resolved.sourceLabel ? "保存して、47地域を見比べよう" : undefined}
+          subtext={resolved.sourceLabel ? [
+            displayTitle ?? resolved.title,
+            [resolved.yearName, resolved.demographicAttr, resolved.normalizationBasis].filter(Boolean).join("・"),
+            `出典：${resolved.sourceLabel}`,
+            resolved.note,
+            "プロフィールのリンクから詳しいデータへ",
+          ].filter(Boolean).join("\n\n") : undefined}
+        />
+      );
     default:
       return (
         <CoverSlide
