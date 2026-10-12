@@ -73,7 +73,7 @@ jobs:
           fetch-depth: 2
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20"
           cache: "npm"
@@ -127,7 +127,7 @@ jobs:
       - name: 🛠️ Process backlog entries with Claude Code
         id: claude
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
-        uses: anthropics/claude-code-base-action@57607815d5d9678acb18dae0e5033d87d4dd4177 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@0adbfaf05435b2e2b7150cb122ba44727b98bf12 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: "20.x"
         with:
