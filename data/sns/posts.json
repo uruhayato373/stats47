@@ -30019,9 +30019,9 @@
     },
     {
       "id": 1011,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.109Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-12T22:19:13.682Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30048,13 +30048,15 @@
           "height": 1616,
           "source": ".local/r2/sns/ranking/solar-panel-housing-rate/x/stills/solar-panel-housing-rate.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeYE3fBD7F9",
+      "posted_at": "2026-10-12T01:40:49.000Z"
     },
     {
       "id": 1012,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.116Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-12T22:19:13.713Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30081,7 +30083,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/19000/x/stills/19000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeYyoPij0s0",
+      "posted_at": "2026-10-12T08:20:42.000Z"
     },
     {
       "id": 1013,

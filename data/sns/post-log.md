@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**701 件** (最終更新: 2026-10-11)
+**704 件** (最終更新: 2026-10-12)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-12 | 📸 Instagram | ranking-quiz/whitebait-consumption-quantity | 【都道府県クイズ】しらす干しをいちばん多く買う県は？  A 静岡県 B 和歌山県 C 京都府  ヒントは2枚目、答えは3… | [🔗](https://www.instagram.com/p/DeY_9shld4R/) |
+| 2026-10-12 | 🧵 Threads | area/area-19000-profile | 山梨を1位・47位だけで語らない。 県木はカエデ、県鳥はウグイス。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeYyoPij0s0) |
+| 2026-10-12 | 🧵 Threads | ranking/solar-panel-housing-rate | 太陽光パネルのある家が最も多い県は？  1位佐賀11.2％、2位長野10％、3位山梨9.7％。 最も低い東京は1.9％で… | [🔗](https://www.threads.com/@stats47jp/post/DeYE3fBD7F9) |
 | 2026-10-11 | 📸 Instagram | map-carousel/beef-consumption-expenditure | 【都道府県ランキング】牛肉への支出  1位: 奈良県 34474円 47位: 岩手県 9474円  出典: 家計調査（2… | [🔗](https://www.instagram.com/p/DeXENZAiRWG/) |
 | 2026-10-11 | 🧵 Threads | area/area-18000-profile | 福井のデータブックを公開中。 つぐみと越前うに（塩うに）、若狭かれい（一夜干し）を入口に、人口・産業・消費の数字を県別に… | [🔗](https://www.threads.com/@stats47jp/post/DeWQqq_gK68) |
 | 2026-10-11 | 🧵 Threads | ranking/persimmon-consumption-quantity | 柿を最も多く買う県は岐阜。  1世帯あたり8,596gで、2位奈良（4,531g）のほぼ2倍。 最下位の岡山（653g）… | [🔗](https://www.threads.com/@stats47jp/post/DeViQ40DwnF) |
