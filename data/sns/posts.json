@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 996,
-    "nextId": 1182
+    "count": 1002,
+    "nextId": 1188
   },
   "posts": [
     {
@@ -32885,7 +32885,7 @@
     },
     {
       "id": 1093,
-      "status": "draft",
+      "status": "deleted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32894,13 +32894,14 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.950Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-12T03:43:45.323Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
       "content_key": "beer-consumption-quantity",
       "caption": "【都道府県ランキング】ビール消費量\n\n1位: 岩手県 33.17l\n47位: 三重県 14.2l\n\n出典: 家計調査（2024年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県ランキング #ビール消費量 #日本地図 #統計 #都道府県 #地図 #ランキング #暮らし #雑学 #stats47",
-      "scheduled_at": "2026-10-18T10:00:00.000Z"
+      "scheduled_at": "2026-10-18T10:00:00.000Z",
+      "deleted_at": "2026-10-12T03:43:45.289Z"
     },
     {
       "id": 1094,
@@ -33037,7 +33038,7 @@
     },
     {
       "id": 1101,
-      "status": "draft",
+      "status": "deleted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33046,13 +33047,14 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:58.044Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-12T03:43:45.323Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
       "content_key": "soba-udon-dining-consumption-expenditure",
       "caption": "【都道府県ランキング】日本そば・うどんへの支出\n\n1位: 香川県 16156円\n47位: 沖縄県 2647円\n\n出典: 家計調査（2024年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県ランキング #日本そば・うどんへの支出 #日本地図 #統計 #都道府県 #地図 #ランキング #暮らし #雑学 #stats47",
-      "scheduled_at": "2026-10-25T10:00:00.000Z"
+      "scheduled_at": "2026-10-25T10:00:00.000Z",
+      "deleted_at": "2026-10-12T03:43:45.289Z"
     },
     {
       "id": 1102,
@@ -37735,6 +37737,369 @@
           "width": 1080,
           "height": 1350,
           "source": ".local/r2/sns/rank-routes/rice-consumption-expenditure-2014-2024-22-45-15-18/x/stills/rice-consumption-expenditure-2014-2024-22-45-15-18.png"
+        }
+      ]
+    },
+    {
+      "id": 1182,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T00:56:34.918Z",
+      "updated_at": "2026-10-12T03:34:37.653Z",
+      "platform": "x",
+      "post_type": "original",
+      "domain": "tile-change",
+      "content_key": "total-population-1975-2025",
+      "caption": "50年前と比べて、あなたの県の人口は？\n1975→2025年。増加21県、減少26県。47県の合計は9.9%増でした。\n※国勢調査。2025年は確定値。\n\nhttps://stats47.jp/ranking/total-population?utm_source=x&utm_medium=social&utm_campaign=total-population-1975-2025&utm_content=tile-change\n\n#統計 #都道府県",
+      "media_path": ".local/r2/sns/tile-change/total-population-1975-2025/x/stills/total-population-1975-2025.png",
+      "scheduled_at": "2026-11-02T23:15:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"total-population\"]",
+      "has_link": 1,
+      "utm_url": "https://stats47.jp/ranking/total-population?utm_source=x&utm_medium=social&utm_campaign=total-population-1975-2025&utm_content=tile-change",
+      "provenance_urls": "[\"https://www.stat.go.jp/data/ssds/index.htm\",\"https://www.e-stat.go.jp/dbview?sid=0004065881\"]",
+      "material_keys": [
+        "x/tile-change/total-population-1975-2025"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "50年で、人口はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1182/image-1.png",
+          "sha256": "4213f4f7d57c58323d1b58381d2e8802f06d8081258c7ee7b0ed0ef62d024416",
+          "bytes": 286782,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/total-population-1975-2025/x/stills/total-population-1975-2025.png"
+        }
+      ]
+    },
+    {
+      "id": 1183,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T00:56:36.420Z",
+      "updated_at": "2026-10-12T03:34:37.785Z",
+      "platform": "x",
+      "post_type": "original",
+      "domain": "tile-change",
+      "content_key": "households-1980-2020",
+      "caption": "人口だけでは見えない、世帯数の変化。\n1980→2020年、総世帯数は全47県で増加。47県の合計では55.0%増でした。\n※国勢調査の総世帯数。各年10月1日。\n\nhttps://stats47.jp/ranking/households?utm_source=x&utm_medium=social&utm_campaign=households-1980-2020&utm_content=tile-change\n\n#統計 #都道府県",
+      "media_path": ".local/r2/sns/tile-change/households-1980-2020/x/stills/households-1980-2020.png",
+      "scheduled_at": "2026-11-04T03:15:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"households\"]",
+      "has_link": 1,
+      "utm_url": "https://stats47.jp/ranking/households?utm_source=x&utm_medium=social&utm_campaign=households-1980-2020&utm_content=tile-change",
+      "provenance_urls": "[\"https://www.stat.go.jp/data/ssds/index.htm\"]",
+      "material_keys": [
+        "x/tile-change/households-1980-2020"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "40年で、世帯数はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1183/image-1.png",
+          "sha256": "11d744493adaab8a44b3bb0b20f3942d30bc3392fe721ef7a2c9a6acc630ef42",
+          "bytes": 279390,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/households-1980-2020/x/stills/households-1980-2020.png"
+        }
+      ]
+    },
+    {
+      "id": 1184,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T00:56:36.679Z",
+      "updated_at": "2026-10-12T03:34:37.907Z",
+      "platform": "x",
+      "post_type": "original",
+      "domain": "tile-change",
+      "content_key": "births-1995-2023",
+      "caption": "出生数は、28年間でどう変わった？\n1995→2023年、全47県で減少。47県の合計では38.7%減でした。\n※日本における日本人の年間出生数。出生率ではありません。\n\nhttps://stats47.jp/ranking/births?utm_source=x&utm_medium=social&utm_campaign=births-1995-2023&utm_content=tile-change\n\n#統計 #都道府県",
+      "media_path": ".local/r2/sns/tile-change/births-1995-2023/x/stills/births-1995-2023.png",
+      "scheduled_at": "2026-11-04T23:15:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"births\"]",
+      "has_link": 1,
+      "utm_url": "https://stats47.jp/ranking/births?utm_source=x&utm_medium=social&utm_campaign=births-1995-2023&utm_content=tile-change",
+      "provenance_urls": "[\"https://www.mhlw.go.jp/toukei/list/81-1.html\"]",
+      "material_keys": [
+        "x/tile-change/births-1995-2023"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "28年で、出生数はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/x/1184/image-1.png",
+          "sha256": "a35a46779ae9480e74e81272bf8323cb9b33be7078624fe9b38a1f05422661c1",
+          "bytes": 272042,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/births-1995-2023/x/stills/births-1995-2023.png"
+        }
+      ]
+    },
+    {
+      "id": 1185,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T01:54:01.705Z",
+      "updated_at": "2026-10-12T03:43:45.280Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "tile-change",
+      "content_key": "total-population-1975-2025",
+      "caption": "50年で、人口はどう変わった？\n1975→2025年。増加 21県 ／ 減少 26県。全47県を地図に。\n全47都道府県・総人口（各年10月1日）\n\n出典：社会・人口統計体系、国勢調査\n両年の国勢調査人口を比較。2025年は2026年9月29日公表の確定値。\n増減率＝（終年の値÷始年の値−1）×100。丸める前の値で計算。\nタイルの大きさは同一。面積や人口規模を表しません。各年の都道府県集計値を比較。\n\n保存して見比べよう。詳しくはプロフィールのリンクから。\n\n#統計 #地域 #暮らし #都道府県 #データ #日本 #地域比較 #stats47",
+      "media_path": ".local/r2/sns/tile-change/total-population-1975-2025/instagram/stills/slide-1-cover-1080x1350.png",
+      "scheduled_at": "2026-10-18T10:00:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"total-population\"]",
+      "has_link": 0,
+      "provenance_urls": "[\"https://www.stat.go.jp/data/ssds/index.htm\",\"https://www.e-stat.go.jp/dbview?sid=0004065881\"]",
+      "material_keys": [
+        "instagram/tile-change/total-population-1975-2025"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "50年で、人口はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。 Instagram用は表紙・タイル地図・出典の3枚組。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1185/image-1.png",
+          "sha256": "36d0e88fec500e1d9fc142da212879d98c56eb85bb2d1aabbbae53d12e99e571",
+          "bytes": 113616,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/total-population-1975-2025/instagram/stills/slide-1-cover-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 2,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1185/image-2.png",
+          "sha256": "4213f4f7d57c58323d1b58381d2e8802f06d8081258c7ee7b0ed0ef62d024416",
+          "bytes": 286782,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/total-population-1975-2025/instagram/stills/slide-2-detail-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 3,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1185/image-3.png",
+          "sha256": "8e968f5ea9d262755c18e260deea5655006454536d846911999c36ee27d6fda6",
+          "bytes": 168362,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/total-population-1975-2025/instagram/stills/slide-3-source-1080x1350.png"
+        }
+      ]
+    },
+    {
+      "id": 1186,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T01:54:01.899Z",
+      "updated_at": "2026-10-12T03:43:45.280Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "tile-change",
+      "content_key": "households-1980-2020",
+      "caption": "40年で、世帯数はどう変わった？\n1980→2020年。増加 47県 ／ 減少 0県。全47県を地図に。\n全47都道府県・総世帯数（各年10月1日）\n\n出典：社会・人口統計体系\n一般世帯と施設等の世帯を含む総世帯数。世帯の人数の変化ではありません。\n増減率＝（終年の値÷始年の値−1）×100。丸める前の値で計算。\nタイルの大きさは同一。面積や人口規模を表しません。各年の都道府県集計値を比較。\n\n保存して見比べよう。詳しくはプロフィールのリンクから。\n\n#統計 #地域 #暮らし #都道府県 #データ #日本 #地域比較 #stats47",
+      "media_path": ".local/r2/sns/tile-change/households-1980-2020/instagram/stills/slide-1-cover-1080x1350.png",
+      "scheduled_at": "2026-10-25T10:00:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"households\"]",
+      "has_link": 0,
+      "provenance_urls": "[\"https://www.stat.go.jp/data/ssds/index.htm\"]",
+      "material_keys": [
+        "instagram/tile-change/households-1980-2020"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "40年で、世帯数はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。 Instagram用は表紙・タイル地図・出典の3枚組。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1186/image-1.png",
+          "sha256": "8638fcb5694e4e9d7f4746dc6f26ef16761a9de9ea1d82f1a6aec097c88ca693",
+          "bytes": 117823,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/households-1980-2020/instagram/stills/slide-1-cover-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 2,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1186/image-2.png",
+          "sha256": "11d744493adaab8a44b3bb0b20f3942d30bc3392fe721ef7a2c9a6acc630ef42",
+          "bytes": 279390,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/households-1980-2020/instagram/stills/slide-2-detail-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 3,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1186/image-3.png",
+          "sha256": "771f662d6774023f0f6f57e6fdaf4a6fde9c0705c453aa361f839d543254a948",
+          "bytes": 168414,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/households-1980-2020/instagram/stills/slide-3-source-1080x1350.png"
+        }
+      ]
+    },
+    {
+      "id": 1187,
+      "status": "scheduled",
+      "approval": {
+        "state": "approved",
+        "by": "owner",
+        "at": "2026-10-12T03:29:53.280Z",
+        "via": "approve-posts",
+        "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
+      },
+      "created_at": "2026-10-12T01:54:01.936Z",
+      "updated_at": "2026-10-12T03:43:45.280Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "tile-change",
+      "content_key": "births-1995-2023",
+      "caption": "28年で、出生数はどう変わった？\n1995→2023年。増加 0県 ／ 減少 47県。全47県を地図に。\n日本における日本人・全47都道府県の年間出生数\n\n出典：人口動態統計\n人口動態統計の出生数を比較。出生率や合計特殊出生率ではありません。\n増減率＝（終年の値÷始年の値−1）×100。丸める前の値で計算。\nタイルの大きさは同一。面積や人口規模を表しません。各年の都道府県集計値を比較。\n\n保存して見比べよう。詳しくはプロフィールのリンクから。\n\n#統計 #地域 #暮らし #都道府県 #データ #日本 #地域比較 #stats47",
+      "media_path": ".local/r2/sns/tile-change/births-1995-2023/instagram/stills/slide-1-cover-1080x1350.png",
+      "scheduled_at": "2026-11-18T10:00:00.000Z",
+      "template": "tile-change",
+      "metric_keys": "[\"births\"]",
+      "has_link": 0,
+      "provenance_urls": "[\"https://www.mhlw.go.jp/toukei/list/81-1.html\"]",
+      "material_keys": [
+        "instagram/tile-change/births-1995-2023"
+      ],
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-12",
+        "title": "28年で、出生数はどう変わった？",
+        "preview_only": false,
+        "note": "実データで完成。47県の2時点・単位・定義を検証、入力/画像SHAをmanifestに保存。地域の長期変化を理解する無料コンテンツ。集客・支払意向の効果は未検証。新規予約は未設定。 Instagram用は表紙・タイル地図・出典の3枚組。"
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1187/image-1.png",
+          "sha256": "45e4fbc09914abb5a360b969a964335bfca94f5709a838262a77b2e16c987079",
+          "bytes": 118896,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/births-1995-2023/instagram/stills/slide-1-cover-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 2,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1187/image-2.png",
+          "sha256": "a35a46779ae9480e74e81272bf8323cb9b33be7078624fe9b38a1f05422661c1",
+          "bytes": 272042,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/births-1995-2023/instagram/stills/slide-2-detail-1080x1350.png"
+        },
+        {
+          "role": "image",
+          "order": 3,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1187/image-3.png",
+          "sha256": "2e025cbd5eb0a1b4a9cda7fe12fa2dbc9d025c40cab218ad25a974e1291819b8",
+          "bytes": 167578,
+          "mime": "image/png",
+          "width": 1080,
+          "height": 1350,
+          "source": ".local/r2/sns/tile-change/births-1995-2023/instagram/stills/slide-3-source-1080x1350.png"
         }
       ]
     }

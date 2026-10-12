@@ -28,6 +28,19 @@
     "post_id": 1161
   },
   {
+    "date": "2026-11-18",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "tile-change",
+    "content_key": "births-1995-2023",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-detail-1080x1350.png",
+      "slide-3-source-1080x1350.png"
+    ],
+    "post_id": 1187
+  },
+  {
     "date": "2026-11-19",
     "time": "19:00",
     "type": "carousel",
