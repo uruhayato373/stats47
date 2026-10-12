@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T10:51:18.413Z",
+  "updatedAt": "2026-10-12T03:46:08.935Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7475,6 +7475,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-11T10:51:18.413Z"
+    },
+    "SNS-SIX-SCHEDULE-20261012": {
+      "class": "manual",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-12T03:46:08.935Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node /tmp/tile6-validate.cjs",
+              "node .claude/scripts/sns/check-post-trace.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "develop 63837dcbb7: X1182-1184 native予約・本文画像日時一致、既存75不変。IG1093/1101は上位下位5県の公開R2 SHAを確認し予約表から取消。IG1185/1186/1187は10/18・10/25・11/18 19:00 JST、3本dryrun成功。全6件scheduled・取消2件deletedをremoteと管理画面で確認。証拠.local/r2/sns/_queue/tile-six-20261012/。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-12T03:46:08.935Z"
     }
   }
 }
