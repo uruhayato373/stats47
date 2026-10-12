@@ -1,31 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "period": {
-    "periodStart": "2026-10-02",
-    "periodEnd": "2026-10-08",
+    "periodStart": "2026-10-03",
+    "periodEnd": "2026-10-09",
     "windowDays": 7
   },
-  "inputHash": "4148fe3476c7f91fac08f760268b2c653afd62247cee0ac56b8a1dacbe67ab91",
+  "inputHash": "3478ba220cbdb8f803f6713f4f1930fb8ae32d9af90a9a16d0456ddc8c701c98",
   "movements": [
-    {
-      "keyword": "看護師 年収 平均",
-      "targetPath": "/blog/nurse-income-prefecture-gap",
-      "before": 70,
-      "after": 6,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 64
-    },
-    {
-      "keyword": "水戸 人流",
-      "targetPath": "/areas/08000/cities/08201",
-      "before": 62,
-      "after": 2,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 60
-    },
     {
       "keyword": "日照時間 ランキング",
       "targetPath": "/blog/sunshine-pacific-vs-nihonkai",
@@ -36,22 +18,13 @@
       "change": 58
     },
     {
-      "keyword": "かつお 産地",
-      "targetPath": "/blog/bonito-catch-prefecture",
-      "before": 1,
-      "after": 56,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -55
-    },
-    {
       "keyword": "都道府県",
       "targetPath": "/",
       "before": 59,
-      "after": 8.857142857142858,
+      "after": 9.266666666666667,
       "beforeImpressions": 2,
-      "impressions": 7,
-      "change": 50.14285714285714
+      "impressions": 15,
+      "change": 49.733333333333334
     },
     {
       "keyword": "日本 に 原発は いくつ ある",
@@ -63,22 +36,13 @@
       "change": 42
     },
     {
-      "keyword": "日本 空港 数",
-      "targetPath": "/blog/airport-count-prefecture-gap",
-      "before": 43,
-      "after": 3,
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
+      "before": 50,
+      "after": 10,
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 40
-    },
-    {
-      "keyword": "介護人材不足 2040年",
-      "targetPath": "/blog/nursing-care-shortage-2040",
-      "before": 10,
-      "after": 43,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -33
     },
     {
       "keyword": "水道統計",
@@ -90,13 +54,49 @@
       "change": 32
     },
     {
-      "keyword": "鳥取県 小売",
-      "targetPath": "/areas/31000/retail-commerce",
-      "before": 11,
-      "after": 42,
-      "beforeImpressions": 3,
+      "keyword": "長野 物価",
+      "targetPath": "/areas/20000/consumer-prices",
+      "before": 1,
+      "after": 31,
+      "beforeImpressions": 4,
+      "impressions": 3,
+      "change": -30
+    },
+    {
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
+      "before": 32,
+      "after": 4,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": -31
+      "change": 28
+    },
+    {
+      "keyword": "学力全国ランキング",
+      "targetPath": "/blog/academic-achievement-test-prefecture-ranking",
+      "before": 2,
+      "after": 30,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -28
+    },
+    {
+      "keyword": "個人事業主 廃業率",
+      "targetPath": "/themes/business-demography",
+      "before": 46,
+      "after": 18.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 27.5
+    },
+    {
+      "keyword": "都 道府県 財政 ランキング 2025",
+      "targetPath": "/blog/fiscal-self-reliance-gap",
+      "before": 1,
+      "after": 28,
+      "beforeImpressions": 4,
+      "impressions": 1,
+      "change": -27
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "介護サービス施設・事業所調査",
-    "targetPath": "/survey/care-service-facility-survey",
-    "rank": 9.302631578947368,
-    "impressions": 304,
-    "clicks": 0,
+    "keyword": "病院数が最も少ない都道府県はどこ",
+    "targetPath": "/ranking/general-hospital-count",
+    "rank": 7.127545551982851,
+    "impressions": 1866,
+    "clicks": 29,
     "group": 5,
     "previousMethod": null,
-    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
+    "editableFile": null
   },
   "observing": [
     {
