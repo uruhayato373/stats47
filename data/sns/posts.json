@@ -32752,7 +32752,7 @@
     },
     {
       "id": 1086,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32761,13 +32761,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.142Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-12T10:17:25.688Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
       "content_key": "whitebait-consumption-quantity",
       "caption": "【都道府県クイズ】しらす干しをいちばん多く買う県は？\n\nA 静岡県\nB 和歌山県\nC 京都府\n\nヒントは2枚目、答えは3枚目👉\n予想をコメントで教えてください💬\n\n保存して、食卓の小ネタに📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間購入量（2024年））\n\n#都道府県クイズ #都道府県ランキング #しらす #しらす干し #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-12T10:00:00.000Z"
+      "scheduled_at": "2026-10-12T10:00:00.000Z",
+      "posted_at": "2026-10-12T10:17:25.676Z",
+      "post_url": "https://www.instagram.com/p/DeY_9shld4R/",
+      "external_id": "18115468055047770"
     },
     {
       "id": 1087,
