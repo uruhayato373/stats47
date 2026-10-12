@@ -1,0 +1,86 @@
+[
+  {
+    "date": "2026-11-16",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "19000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1122
+  },
+  {
+    "date": "2026-11-17",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "number-of-establishments-manufacturing",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1161
+  },
+  {
+    "date": "2026-11-19",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "vacant-housing-rate",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1170
+  },
+  {
+    "date": "2026-11-20",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "16000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1120
+  },
+  {
+    "date": "2026-11-21",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "final-energy-consumption-per-capita",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1152
+  },
+  {
+    "date": "2026-11-22",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "correlation-carousel",
+    "content_key": "employed-people-ratio-secondary--dual-income-household-ratio",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-scatter-1080x1350.png",
+      "slide-3-highlights-1080x1350.png",
+      "slide-4-caution-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1134
+  }
+]
