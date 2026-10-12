@@ -1,13 +1,22 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "period": {
-    "periodStart": "2026-10-03",
-    "periodEnd": "2026-10-09",
+    "periodStart": "2026-10-04",
+    "periodEnd": "2026-10-10",
     "windowDays": 7
   },
-  "inputHash": "3478ba220cbdb8f803f6713f4f1930fb8ae32d9af90a9a16d0456ddc8c701c98",
+  "inputHash": "9b8db0996a3433572d165757914c0417c79ca23c16f62daae5675dd21d53145d",
   "movements": [
+    {
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
+      "before": 73,
+      "after": 7,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 66
+    },
     {
       "keyword": "日照時間 ランキング",
       "targetPath": "/blog/sunshine-pacific-vs-nihonkai",
@@ -18,13 +27,22 @@
       "change": 58
     },
     {
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
+      "before": 61,
+      "after": 4,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 57
+    },
+    {
       "keyword": "都道府県",
       "targetPath": "/",
       "before": 59,
-      "after": 9.266666666666667,
+      "after": 9.375,
       "beforeImpressions": 2,
-      "impressions": 15,
-      "change": 49.733333333333334
+      "impressions": 16,
+      "change": 49.625
     },
     {
       "keyword": "日本 に 原発は いくつ ある",
@@ -63,15 +81,6 @@
       "change": -30
     },
     {
-      "keyword": "うどん消費量ランキング",
-      "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
-      "before": 32,
-      "after": 4,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 28
-    },
-    {
       "keyword": "学力全国ランキング",
       "targetPath": "/blog/academic-achievement-test-prefecture-ranking",
       "before": 2,
@@ -88,15 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 2,
       "change": 27.5
-    },
-    {
-      "keyword": "都 道府県 財政 ランキング 2025",
-      "targetPath": "/blog/fiscal-self-reliance-gap",
-      "before": 1,
-      "after": 28,
-      "beforeImpressions": 4,
-      "impressions": 1,
-      "change": -27
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "病院数が最も少ない都道府県はどこ",
     "targetPath": "/ranking/general-hospital-count",
-    "rank": 7.127545551982851,
-    "impressions": 1866,
+    "rank": 7.131156316916488,
+    "impressions": 1868,
     "clicks": 29,
     "group": 5,
     "previousMethod": null,
