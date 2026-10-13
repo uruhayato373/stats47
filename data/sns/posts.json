@@ -30089,9 +30089,9 @@
     },
     {
       "id": 1013,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.121Z",
-      "updated_at": "2026-10-12T01:18:57.407Z",
+      "updated_at": "2026-10-13T20:27:40.470Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30118,13 +30118,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/nurse-annual-income/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeaquZ-Chrz",
+      "posted_at": "2026-10-13T01:50:07.000Z"
     },
     {
       "id": 1014,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.128Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-13T20:27:40.499Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30151,7 +30153,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/20000/x/stills/20000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DebZt_UCsoU",
+      "posted_at": "2026-10-13T08:40:45.000Z"
     },
     {
       "id": 1015,
