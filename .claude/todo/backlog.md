@@ -26,7 +26,14 @@ updated: 2026-10-06
 
 - **状態 (2026-10-11)**: develop→main の PR https://github.com/uruhayato373/stats47/pull/1125 を作成済み。オーナーは本番反映を承認済み (同日チャット)。Static Gates の actionlint 指摘 (SC2209) は `d706c79de` で直し、手元の actionlint 1.7.7 + shellcheck で全 workflow 0 件。残りの CI は実行中だった。マージはまだしていない。
 - **次**: CI が全件 success ならマージする。定期実行は main の定義で動くので、マージ後に次を確かめる。① `seo-keyword-cycle-daily` の検証 step が通る ② `blog-remediation-daily` の散布図ゲートが 167/167 一致 ③ `affiliate-ga4-weekly` が `affiliate-portfolio-latest.json` を develop へ書き戻し、Health Check の portfolio stale が消える ④ `ai-content-gemini-daily` が定期発火しない。
-- **注意**: 作業ツリーに別セッションの未コミットの SNS データカード作業 (`render-data-card.ts` の `CHROME_PATH` 未登録、SNS skill 3 本の Codex ミラー未同期) があり、pre-commit と preflight:pr はそれで落ちる。コミット済みの内容は develop の CI で全 success。
+- **状態 (2026-10-13)**: develop に note 記事管理の作り直し (`84d6ac273`)・SNS データカード (`b44839190`)・dependabot 5 本を足して PR を更新し、
+  GitHub の auto-merge (merge commit) を有効にした。CI 10 件が実行中。`preflight:pr` 50/50 と pre-commit は通過済み。別セッションの SNS 作業はコミット済みで、上の注意は解消した。
+- **マージ後に追加で確かめること (2026-10-13 分)**: ⑤ `deploy-workers` の本番反映と post-deploy smoke が success ⑥ main から `sync-note-r2.yml`・`push-note-provenance.yml` が消え、
+  `gh workflow list --all` で該当 workflow が無効または消えている ⑦ 次の `note-circulation-audit-weekly` (土曜) が `note:circulation:test` を通り、`note-image-assets.json` の
+  `--verify-r2` が合格する ⑧ ローカルの main を `git fetch && git switch main && git merge --ff-only origin/main` で合わせ、develop との差 (`git rev-list --count origin/develop..origin/main`) が
+  マージコミット以外に無いことを確かめる。
+- **別の端末 (Windows PC) の注意**: このマージを pull すると docs/31 の追跡ファイル 861 件が作業ツリーから消える。pull の前にその端末の docs/31 に未コミットの編集が無いかを確かめ、
+  あれば先に `npm run note:article -- save <key>` で R2 へ保存する (台帳 `data/note/articles.json` を pull してから)。
 - **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
@@ -274,6 +281,31 @@ updated: 2026-10-06
 - **完了条件**: `npm audit --omit=dev --audit-level=high` が exit 0 で、本番の代表 URL が 200。または該当しないと確定し、例外の理由と再評価日をこのカードに書いて 🟡 へ下げた。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
+
+- **背景**: 2026-10-13 に note 記事の正本を台帳 `data/note/articles.json` + R2 に移した (`84d6ac273`。規約 `.claude/scripts/note/catalog/README.md`)。移行は終わったが、次が残っている。
+- **やること**:
+  1. **定期照合**: `npm run note:article -- verify` は private R2 も見るので S3 認証が要り、今はローカルでしか動かない。週次の `note-circulation-audit-weekly.yml` に
+     R2 の secrets (`CLOUDFLARE_R2_ACCESS_KEY_ID` など。`push-note-provenance.yml` が使っていた組) を渡して verify を足すか、別の週次 job にする。公開 R2 の配信確認 (`note:images:audit --verify-r2`) は既に週次にある。
+  2. **R2 の取り残し**: どのマニフェストにも載らない `note/` 配下のオブジェクトを数える。既知の例は、公開 R2 の `note/a-maximum-temperature/` (vertical の無い旧パス・7 件)、
+     有料記事の公開 R2 に残る旧 `public.json` (75 件・読み手なし)。削除するなら `r2-storage-design.md` の手順 (`r2-maintenance.yml` の allowlist) に従う。
+     旧 `manifest.json` は `backfill-note-data-provenance.mjs` が読むので、`NOTE-PROVENANCE-BACKFILL-MANIFEST-01` が済むまで消さない。
+  3. **控えの削除**: 移行前の作業コピーの控え `.local/note-migration-backup-20261013.tar.gz` (14MB・この Mac のみ) は、verify --deep が 2 回続けて合格したら削除する。
+  4. **カバーの観測記録**: `verify-cover-refresh.mjs` の出力先を `data/note/cover-lifecycle-latest.json` に直した (以前は台帳に無いパスへ書いていた)。中身は 2026-10-03 の全件版のままなので、
+     全件 (`--keys` なし) で 1 回流して更新する。
+- **完了条件**: 週次で private を含む verify が動き、取り残しの件数と扱いが決まり、控えを消し、cover-lifecycle-latest.json が全件の最新になっている。
+
+### [SNS-SCRIPT-TS-TESTS-WIRING-01] SNS スクリプトの TS テスト 10 本と素材照合テストを CI で実行する
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:node --import tsx --test .claude/scripts/sns/__tests__/*.test.ts] [起票:2026-10-13] [領域:SNS]
+
+- **事実 (2026-10-13)**: `.claude/scripts/sns/__tests__/` の `*.test.ts` 10 本 (今回コミットした `data-card-input` / `all47-svg` / `tile-change` を含む) と
+  `material-reconciliation.test.mjs` は、どの npm script・workflow からも実行されていない。ルートの vitest workspace も `.claude/scripts` を含まない。
+  CI で走るのは `post-trace-core.test.mjs` と `x-direct-ledger.test.cjs` だけ。手元では `node --import tsx --test` で 20 件、`node --test` で 14 件が合格した。
+- **次**: `package.json` に `sns:test` (例: `node --import tsx --test .claude/scripts/sns/__tests__/*.test.ts .claude/scripts/sns/__tests__/*.test.mjs`) を足し、
+  `pr-quality-check.yml` の SNS の step から呼ぶ。全件が通ることを先に確かめ、落ちるものは原因を直してから配線する。
+- **完了条件**: PR CI で SNS の全テストが実行され、1 件壊すと CI が落ちることを確かめた。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
@@ -1760,6 +1792,10 @@ updated: 2026-10-06
 - **残るオーナー工程 (2026-09-19 時点の `verify-publishable` 全冊の blocker と同じ)**: ①R2 暗号化保全 `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <版>` → `--audit --deep --record` (鍵のある環境。これが無いと `kdp-publish --update` の archive gate で止まる) ②Kindle Previewer で対象 EPUB (SHA) の表示確認 ③`kdp-publish --update --id K-S1-NN` ×12 (S1-01 は書名変更を含む・入稿提案 `.local/kindle-listing-revisions/`) → 承認後 `--commit` ④kdpreports.amazon.co.jp の冊別 export → `products:sales` ⑤ブログ側の同一誤り是正 (上記) と図データ再生成。
 - **ランキング再利用の境界**: S2-01旧版全章レビューでDID可住地分母、死亡率/件数、従属人口指数/就労者、都道府県率の合算、単純平均/全国値、相関からの因果・算術誤りを検出。商品版のランキング章は未レビューAI解説を外して同順位の全県表・決定的集計へ再構成した。公開サイト本文は未変更のため、原典再計算とサイトownerへの是正引渡しが必要。旧版レビューを新版PASSへ流用しない。
 - **note 販売記事 (教材展開) の現状 (2026-10-12、オーナーが「55本すべて公開」を指示)**: `docs/31_note記事原稿/product-sales/` の 55 本は 2026-07 の v1 から生成した旧原稿で使わない。現行は 14 パックから `note/cli.ts revision` で作るが、このMacには各パックの `_delivery` (`.local/coconala-products/P-NN/v2-20260906-r1`) が無く、`revision --revision 2026-10-12-r1 --all` は ENOENT で `readyToPublish:false`。14 パックとも `officeValidation: owner-pending`。進めるには (a) 納品物をWindowsから持ってくるか新しい版を生成し (b) オーナーがOffice実機で確認し (c) revision→レビュー→1日数本ずつ公開 (添付は1日10回まで)。
+- **note 販売記事の置き場 (2026-10-13 改訂)**: 14 パックの販売記事の原稿は git (docs/31) から外れ、記事台帳 `data/note/articles.json` と R2 に移った。
+  有料 13 本は private R2 (`body.store: r2-private`)、P-13 見本 (無料・公開済み) は公開 R2。公開するときは `npm run note:article -- checkout <slug>` で作業コピーを取り出し、
+  公開後に台帳の status / noteUrl / publishedAt を書いて `generate-note-catalog.ts --apply`、作業コピーを変えたら `save`。残りの前提は変わらない (Office 実機確認・添付 1 日 10 回・一括公開しない)。
+  添付 ZIP (`.local/note-product-archives/P-NN-v3-20261012-mac-r4.zip`) はこの Mac にしか無い (保全は `NOTE-PRODUCT-ZIP-ARCHIVE-01`)。
 - **停止条件**: 生成/形式検査だけで販売準備完了にしない。内部30%をAmazonの合法性・受理保証と説明しない。字数水増し・収録指標の黙った削減をしない。税務・銀行・本人認証・規約同意を代行せず、KDP Select独占を他チャネル展開と両立済みと扱わない。旧公開版・原稿を上書きしない。公開stateを機械品質の結果で書き換えない。
 - **完了条件**: 全offerが対象版の実検証・独立レビュー・必要な人間確認を満たすか、採用見送り理由と再開条件が明記される。販売を選んだofferは価格・納品物・権利・公開証跡が一致する。未完了が1件でもあれば「全商品販売可能」と報告しない。
 
