@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "38364328759-1",
+  "status": "implementation-needed",
+  "keyword": "病院数が最も少ない都道府県はどこ",
+  "targetPath": "/ranking/general-hospital-count",
+  "needs": "日本で病院の数が最も少ない都道府県を一言で知りたい人が、病院の総数(実数)で答えを探している。人口あたりや精神科を除いた集計ではなく、どの県が最少かと、その数を出典つきで確かめたい。",
+  "gap": "対象ページは「一般病院数」(社会・人口統計体系)の順位で、最下位を島根県37施設としている。「一般病院」の定義(精神科病院などを含むか)はページ本文に無い。検索者が想定する病院総数とは別の集計で、答えがずれる恐れがある。他の資料では2021年の総数は鳥取県43が最少。2023年の総数はMHLW動態調査(2023年12月末概数)で鳥取43・島根46との検索要約を得たが、PDFを読めず未確認。",
+  "done": "自動で適用できる編集対象ファイル(editableFile)が無く、既存文字列の置換では直せないため、パッチは出さない。残る実装は次の通り。一次資料は厚生労働省「医療施設調査」2023年の都道府県別表(病院総数・一般病院・精神科病院)で、これを読んで最少県を確認する。確認後、data/metrics/general-hospital-count.ts の note か description に一般病院の範囲と病院総数との違いを書き、seoDescription は事実照合を通す。完了条件は、公開本文に定義と総数での最少県が出典つきで載り、npm run validate:config が通ること。",
+  "method": "content",
+  "competitors": [
+    {
+      "url": "https://grading.jpn.org/y2120003.html",
+      "findings": "一般病院数の都道府県ランキング(2011年)。47位を鳥取県40施設と明記し、最少県を一言で直接答える。出典機関と定義の説明は無く、データも古い。全47都道府県の実数表の形式。"
+    },
+    {
+      "url": "https://region-case.com/rank-r3-facility-hospital/",
+      "findings": "病院数の都道府県ランキング(令和3年・厚生労働省医療施設調査)。全47都道府県の表に実数と人口10万人あたりを載せる。表では鳥取県が43施設で実数最少だが、本文は最下位を人口あたりの神奈川県3.6と書き、実数の最少は明示しない。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/ranking/general-hospital-count",
+      "status": 200,
+      "fetchedAt": "2026-10-13T07:43:24.186Z",
+      "inputHash": "8a0a1db3b82f092c9a9b28fa465915d4c59051bbabfd6a23675625344a0e05d7",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "ed833bc6777c85fa81296315beaeb73b14a239ff7dcad367a0f8afa5ae865df7",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "03831febb8c8ac34921d7adace965e848ec92bd8ebb70698a96e060a177ef887"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "病院数が最も少ない都道府県はどこ"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/ranking/general-hospital-count"
+      },
+      {
+        "name": "WebSearch",
+        "target": "都道府県別 病院数 少ない 順位 医療施設調査 令和5年 鳥取県 島根県 病院数"
+      },
+      {
+        "name": "WebSearch",
+        "target": "病院数 都道府県別 ランキング 少ない 鳥取県 島根県 2023"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/ranking/general-hospital-count"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://grading.jpn.org/y2120003.html"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/m23/dl/is2312_01.pdf"
+      },
+      {
+        "name": "WebSearch",
+        "target": "令和5年 医療施設調査 都道府県別 病院数 鳥取県 43 島根県 一般病院 精神科病院"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://region-case.com/rank-r3-facility-hospital/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/ranking/general-hospital-count?page=5"
+      }
+    ]
+  },
+  "selectedAt": "2026-10-13",
+  "inputHash": "8a0a1db3b82f092c9a9b28fa465915d4c59051bbabfd6a23675625344a0e05d7",
+  "methods": [],
+  "files": []
+}
