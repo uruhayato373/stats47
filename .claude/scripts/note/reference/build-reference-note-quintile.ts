@@ -18,7 +18,7 @@ import { generateBarChartSvg } from '../../../../packages/svg-builder/src/charts
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
 import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, registerArticle } from './build-reference-note';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -218,7 +218,10 @@ async function build(a: Analysis) {
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note-quintile.ts --analysis ${a.id}`,
     images: built.map((i) => ({ file: `images/${i.key}-quintile.png`, generator: 'packages/svg-builder generateBarChartSvg', year: latest })),
   }, null, 2)}\n`);
-  if (!existsSync(path.join(dir, 'draft.md'))) writeFileSync(path.join(dir, 'draft.md'), draftOf(a, built, years, household as Record<string, Quintile>));
+  {
+    const draftPath = path.join(dir, 'draft.md'), fresh = draftOf(a, built, years, household as Record<string, Quintile>);
+    writeFileSync(draftPath, existsSync(draftPath) ? mergeWritten(readFileSync(draftPath, 'utf8'), fresh) : fresh);
+  }
   if (register) registerArticle(a, key, 's47-kakei-reading', []);
   return { key, items: built.map((i) => i.key), skipped: skipped.length };
 }

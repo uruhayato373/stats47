@@ -8,12 +8,12 @@
  *   npx tsx .claude/scripts/note/reference/build-reference-note-region.ts --analysis <企画ID> [--register]
  *   npx tsx .claude/scripts/note/reference/build-reference-note-region.ts --pending [--register]
  */
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { selectAreaHighlights, type AreaHighlight } from '../../../../packages/area-profile/src/highlights/select-area-highlights.ts';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, registerArticle } from './build-reference-note';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 import { qualifyLabel } from './lib/estat-denominator';
 
 const ROOT = path.resolve(__dirname, '../../../..');
@@ -106,7 +106,10 @@ async function build(a: Analysis) {
     selection: 'packages/area-profile selectAreaHighlights perGroup=3',
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note-region.ts --analysis ${a.id}`,
   }, null, 2)}\n`);
-  if (!existsSync(path.join(dir, 'draft.md'))) writeFileSync(path.join(dir, 'draft.md'), draftOf(a, name, prefs));
+  {
+    const draftPath = path.join(dir, 'draft.md'), fresh = draftOf(a, name, prefs);
+    writeFileSync(draftPath, existsSync(draftPath) ? mergeWritten(readFileSync(draftPath, 'utf8'), fresh) : fresh);
+  }
   if (register) registerArticle(a, key, 's47-population', prefs.map((p) => `/areas/${p.areaCode}`));
   return { key, prefs: prefs.length };
 }

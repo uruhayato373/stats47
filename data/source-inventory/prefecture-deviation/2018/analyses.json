@@ -281,6 +281,17 @@
         },
         {
           "organization": "総務省統計局",
+          "publicationOrDataset": "全国家計構造調査 (全国消費実態調査の後継。年間収入の2019年値の原調査)",
+          "url": "https://www.stat.go.jp/data/zenkokukakei/2019/index.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2019"
+          ],
+          "checkedAt": "2026-10-13",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
           "publicationOrDataset": "全国消費実態調査",
           "url": "https://www.stat.go.jp/data/zensho/",
           "termsUrl": "https://www.digital.go.jp/resources/open_data",

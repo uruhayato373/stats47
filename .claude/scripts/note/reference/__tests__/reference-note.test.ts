@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { articleKeyOf, areaLabel, rankRows, spearman } from '../build-reference-note';
+import { articleKeyOf, areaLabel, magnitudeWords, mergeWritten, rankRows, spearman } from '../build-reference-note';
 import { checkArticle } from '../check-reference-note.mjs';
 import { denominatorFromName } from '../lib/estat-denominator';
 
@@ -61,4 +61,20 @@ test('the check rejects numbers not in the data, leftover markers, copied questi
   assert.match(checkArticle(article(draft('<!-- WRITE:intro -->'))).join(), /執筆の印/);
   assert.match(checkArticle(article(draft('本文', '問い'))).join(), /問いの写し/);
   assert.match(checkArticle(article(draft('![x](images/none.png)'))).join(), /画像が無い/);
+});
+
+test('rates, ages and times are described as high/long, counts and amounts as many', () => {
+  assert.deepEqual(magnitudeWords('完全失業率', '％'), ['高い', '低い']);
+  assert.deepEqual(magnitudeWords('平均余命', '年'), ['高い', '低い']);
+  assert.deepEqual(magnitudeWords('通学時間', '分'), ['長い', '短い']);
+  assert.deepEqual(magnitudeWords('博物館数', '館'), ['多い', '少ない']);
+});
+
+test('rebuilding keeps the written title, description, intro and answer and replaces only generated sections', () => {
+  const fresh = '---\ntitle: "<!-- WRITE:title -->"\ndescription: "<!-- WRITE:description -->"\n---\n\n<!-- WRITE:intro x -->\n\n## 指標 (2024年)\n\n新しい生成文\n\n<!-- WRITE:answer y -->\n\n## 読むときの注意\n\n新しい注意\n';
+  const old = '---\ntitle: "書いた題名"\ndescription: "書いた説明"\n---\n\n書いた導入\n\n## 指標 (2023年)\n\n古い生成文\n\n## この問いへの答え\n\n書いた答え\n\n## 読むときの注意\n\n古い注意\n';
+  const merged = mergeWritten(old, fresh);
+  for (const kept of ['書いた題名', '書いた説明', '書いた導入', '書いた答え', '新しい生成文', '新しい注意']) assert.ok(merged.includes(kept), kept);
+  for (const gone of ['古い生成文', '古い注意', 'WRITE:']) assert.ok(!merged.includes(gone), gone);
+  assert.equal(mergeWritten(fresh, fresh), fresh, 'an unwritten draft is simply replaced');
 });

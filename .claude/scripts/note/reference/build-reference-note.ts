@@ -28,7 +28,9 @@ import {
 } from '../../source-vault/lib/reference-expansion.mjs';
 import { readArticleLedger, updateArticleLedger } from '../lib/article-ledger.mjs';
 import { qualifyLabel } from './lib/estat-denominator';
+import SSDS_PROVENANCE from '../../../../packages/data-configs/src/ssds/ssds-provenance.generated.json';
 import { datasetPath } from '../../../../config/datasets.mjs';
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -159,7 +161,7 @@ async function loadMetric(key: string): Promise<Metric> {
     key, name: await qualifyLabel(item.rankingName ?? item.title, recipe), label: await qualifyLabel(item.readerLabel ?? item.title, recipe),
     subtitle: item.subtitle ?? '',
     unit: item.unit ?? '', year, decimals, categoryKey: item.categoryKey, surveyIds: item.surveyIds ?? [],
-    capitalCity: /県庁所在市/.test(item.subtitle ?? ''),
+    capitalCity: isCapitalCityMetric(key, item),
     source: item.sourceConfig?.source?.name ? { name: item.sourceConfig.source.name, url: item.sourceConfig.source.url ?? '' } : null,
     rows: ranked,
     summary: {
@@ -181,26 +183,67 @@ function magazineOf(metrics: Metric[]) {
 }
 
 const withUnit = (m: Metric, v: number) => `${fmt(v, m.decimals)}${m.unit}`;
+/**
+ * 県庁所在市の値か。家計調査の品目、指標定義 (subtitle・description・note) に「県庁所在市」とある指標、
+ * 社会・人口統計体系のうち原調査が家計調査の系列 (ssds-provenance) を県庁所在市の値として扱う
+ */
+export function isCapitalCityMetric(key: string, item: Item): boolean {
+  if (item.sourceConfig?.recipe?.kind === 'kakei-chousa' || /県庁所在市/.test(item.subtitle ?? '')) return true;
+  const file = path.join(ROOT, METRIC_DEFINITIONS_DIR, `${key}.ts`);
+  if (existsSync(file) && /"(?:description|note|subtitle)":\s*"[^"]*県庁所在市/.test(readFileSync(file, 'utf8'))) return true;
+  const code = item.sourceConfig?.recipe?.estatParams?.cdCat01?.replace(/^#/, '');
+  return Boolean(code && (SSDS_PROVENANCE as Record<string, { originalSurveys?: { id: string }[] }>)[code]?.originalSurveys?.some((s) => s.id === 'household-survey'));
+}
+
 /** 県庁所在市の値 (家計調査など) は、県名に市名を添えて県全体の値と読まれないようにする */
 export const areaLabel = (m: Pick<Metric, 'capitalCity'>, r: Pick<Ranked, 'areaCode' | 'areaName'>) =>
   m.capitalCity ? `${r.areaName}(${r.areaCode === '13000' ? '東京都区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name})` : r.areaName;
 
+/** 値の大小を表す言葉。率・年齢・指数は高い/低い、時間は長い/短い、件数や金額は多い/少ない */
+export function magnitudeWords(label: string, unit: string): [string, string] {
+  if (/(分|時間)$/.test(unit)) return ['長い', '短い'];
+  if (/^(％|%|‰|倍|歳|年|点|ポイント|℃)$/.test(unit) || /率|割合|寿命|余命|指数|係数|気温|湿度/.test(label)) return ['高い', '低い'];
+  return ['多い', '少ない'];
+}
+
+/** 同じ値の地域を 1 つにまとめる。多いときは件数で書く */
+function sameValue(m: Metric, rows: Ranked[]) {
+  const names = rows.map((r) => areaLabel(m, r));
+  return names.length > 4 ? `${names.slice(0, 3).join('・')}など${names.length}${m.capitalCity ? '市' : '都道府県'}` : names.join('・');
+}
+
 function metricSection(m: Metric) {
-  const top = m.rows.slice(0, 3), bottom = m.rows.slice(-3).reverse();
+  const [big, small] = magnitudeWords(m.label, m.unit);
+  const groups: Ranked[][] = [];
+  for (const r of m.rows) {
+    const last = groups.at(-1);
+    if (last && last[0].value === r.value) last.push(r);
+    else groups.push([r]);
+  }
+  const top = groups.slice(0, 3);
+  const bottom = groups.at(-1)!;
   const unitWord = m.capitalCity ? '市' : '県';
+  const tie = (g: Ranked[]) => (g.length > 1 ? '(同じ値)' : '');
+  const regionTop = m.regions.filter((r) => r.mean === m.regions[0].mean);
+  const regionBottom = m.regions.filter((r) => r.mean === m.regions.at(-1)!.mean);
+  // 地方名は「九州・沖縄」のように中黒を含むので「と」でつなぐ
+  const regionText = (rs: { region: string; mean: number }[]) => `${rs.map((r) => r.region).join('と')}(${withUnit(m, rs[0].mean)})`;
+  const adverb = (w: string) => w.replace(/い$/, 'く');
   const lines = [
     `## ${m.label} (${m.year}年)`,
     '',
     ...(m.summary.count === 47 ? [`![${m.label}の47都道府県タイル地図](images/${m.key}.png)`, ''] : []),
-    `${m.label}が最も多いのは${areaLabel(m, top[0])}の${withUnit(m, top[0].value)}で、2位は${areaLabel(m, top[1])}の${withUnit(m, top[1].value)}、3位は${areaLabel(m, top[2])}の${withUnit(m, top[2].value)}と続きます。` +
-      `最も少ないのは${areaLabel(m, bottom[0])}の${withUnit(m, bottom[0].value)}です。` +
-      (m.summary.ratio ? `最も多い${unitWord}は最も少ない${unitWord}の${fmt(m.summary.ratio, 2)}倍で、` : '') +
-      `${m.summary.count === 47 ? '47都道府県' : `値のある${m.summary.count}都道府県`}の単純平均は${withUnit(m, m.summary.mean)}です。`,
+    `${m.label}が最も${big}のは${sameValue(m, top[0])}の${withUnit(m, top[0][0].value)}${tie(top[0])}で、` +
+      top.slice(1).map((g) => `${g[0].rank}位は${sameValue(m, g)}の${withUnit(m, g[0].value)}${tie(g)}`).join('、') + 'と続きます。' +
+      `最も${small}のは${sameValue(m, bottom)}の${withUnit(m, bottom[0].value)}${tie(bottom)}です。` +
+      (m.summary.ratio ? `最も${big}${unitWord}の値は最も${small}${unitWord}の${fmt(m.summary.ratio, 2)}倍で、` : '') +
+      `${m.capitalCity ? (m.summary.count === 47 ? '47市' : `値のある${m.summary.count}市`) : m.summary.count === 47 ? '47都道府県' : `値のある${m.summary.count}都道府県`}の単純平均は${withUnit(m, m.summary.mean)}です。`,
     '',
-    `地方別の平均では${m.regions[0].region}(${withUnit(m, m.regions[0].mean)})が最も高く、${m.regions.at(-1)!.region}(${withUnit(m, m.regions.at(-1)!.mean)})が最も低くなります。` +
+    `地方別の平均では${regionText(regionTop)}が最も${adverb(big)}、${regionText(regionBottom)}が最も${adverb(small)}なります。` +
       `47都道府県の順位は[stats47の${m.label}ランキング](https://stats47.jp/ranking/${m.key})で確認できます。`,
   ];
   if (m.subtitle) lines.push('', `この指標は「${m.subtitle}」です。`);
+  if (m.capitalCity) lines.push('', `値は県全体ではなく、各都道府県の県庁所在市 (東京都は区部) の世帯の値です。`);
   if (m.summary.count < 47) lines.push('', `${m.year}年に値があるのは${m.summary.count}都道府県で、値の無い県は順位の対象外です。`);
   return lines.join('\n');
 }
@@ -211,8 +254,9 @@ function relationSection(metrics: Metric[]) {
   for (let i = 0; i < metrics.length; i++)
     for (let j = i + 1; j < metrics.length; j++) {
       const { rho } = spearman(metrics[i].rows, metrics[j].rows);
-      const strength = Math.abs(rho) >= 0.7 ? '強い' : Math.abs(rho) >= 0.4 ? 'ある程度の' : 'ほとんど';
-      const dir = Math.abs(rho) < 0.4 ? '関係は見られません' : rho > 0 ? '正の関係があります' : '負の関係があります';
+      const a = Math.abs(rho);
+      const strength = a >= 0.7 ? '強い' : a >= 0.4 ? 'ある程度の' : a >= 0.2 ? '弱い' : 'ほとんど';
+      const dir = a < 0.2 ? '関係は見られません' : rho > 0 ? '正の関係があります' : '負の関係があります';
       pairs.push(`- ${metrics[i].label}と${metrics[j].label}: 順位相関係数${fmt(rho, 2)}で、${strength}${dir}`);
     }
   const topCount = new Map<string, number>();

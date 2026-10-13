@@ -14,7 +14,7 @@ import { generateBarChartSvg } from '../../../../packages/svg-builder/src/charts
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
 import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
 import { loadAnalyses } from '../../source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, registerArticle } from './build-reference-note';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -115,6 +115,8 @@ async function build(a: Analysis) {
     '',
     `エンゲル係数は、消費支出に占める食料費の割合です。${year}年の二人以上の世帯で世帯主の年齢別に見ると、${list(engel, '%', 1)}です。`,
     '',
+    `係数の分子にあたる年間の食料費は${list(food, '円')}、分母にあたる年間の消費支出は${list(consumption, '円')}です。`,
+    '',
     ...built.flatMap((b) => [
       `## ${b.label}の購入単価`,
       '',
@@ -137,9 +139,9 @@ async function build(a: Analysis) {
     '',
   ].join('\n');
   const draftPath = path.join(dir, 'draft.md');
-  if (!existsSync(draftPath) || readFileSync(draftPath, 'utf8').includes('<!-- WRITE:intro'))
-    writeFileSync(draftPath, ['---', 'title: "<!-- WRITE:title -->"', 'description: "<!-- WRITE:description -->"', 'status: draft',
-      'published: false', `analysis: ${a.id}`, 'tags:', '  - 家計調査', '  - エンゲル係数', '  - 統計データ', '  - stats47', '---', '', body].join('\n'));
+  const fresh = ['---', 'title: "<!-- WRITE:title -->"', 'description: "<!-- WRITE:description -->"', 'status: draft',
+      'published: false', `analysis: ${a.id}`, 'tags:', '  - 家計調査', '  - エンゲル係数', '  - 統計データ', '  - stats47', '---', '', body].join('\n');
+  writeFileSync(draftPath, existsSync(draftPath) ? mergeWritten(readFileSync(draftPath, 'utf8'), fresh) : fresh);
   if (process.argv.includes('--register')) registerArticle(a, key, 's47-kakei-reading', []);
   return key;
 }
