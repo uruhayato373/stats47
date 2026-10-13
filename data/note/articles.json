@@ -8900,7 +8900,13 @@
       "r2Path": "note/stats47-note/b-ref-inc-a05",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "6a953efe8c54fe27d76d4875e951e11ad18a68c438de099f44e7a6c2160fce10",
+          "files": 8,
+          "bytes": 1892314,
+          "savedAt": "2026-10-13T02:45:52.611Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:52.611Z"
       },
       "stats47Targets": [
         "/ranking/male-scheduled-earnings",
@@ -8921,7 +8927,13 @@
       "r2Path": "note/stats47-note/b-ref-inc-a06",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "51188c5dd2e2cc59dde46939a9d39985d5819cf4aaaf0e3a8f378f6561cedda5",
+          "files": 10,
+          "bytes": 2733783,
+          "savedAt": "2026-10-13T02:46:00.372Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:00.372Z"
       },
       "stats47Targets": [
         "/ranking/real-disposable-income",
@@ -8944,7 +8956,13 @@
       "r2Path": "note/stats47-note/b-ref-inc-a55",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "c90505bb9210388f81061ae3c02beb0e8e86393d7c37bca1d3f618904d357391",
+          "files": 7,
+          "bytes": 1602004,
+          "savedAt": "2026-10-13T02:46:08.937Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:08.937Z"
       },
       "stats47Targets": [
         "/ranking/male-scheduled-earnings",
@@ -8964,7 +8982,13 @@
       "r2Path": "note/stats47-note/b-ref-gis-a33",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "7fc1dbeeef2036bb123af73e1c8e899cc5b7076f41035c1aa92b194034dc8623",
+          "files": 4,
+          "bytes": 418986,
+          "savedAt": "2026-10-13T02:45:49.488Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:49.488Z"
       },
       "stats47Targets": [
         "/ranking/low-elevation-population-ratio-5m"
@@ -8981,7 +9005,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a01-04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "b8aa42989836edadc2cec3091cccb6e3cc1e441d3852768c0095da56b176fae8",
+          "files": 10,
+          "bytes": 3015334,
+          "savedAt": "2026-10-13T02:46:19.003Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:19.003Z"
       },
       "stats47Targets": [
         "/ranking/public-university-consumption-expenditure",
@@ -9004,7 +9034,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a04-03",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "75a2d5fe753a062a762454fea352fed96c7e0310499db2470cb2b4be66fbe344",
+          "files": 7,
+          "bytes": 1597788,
+          "savedAt": "2026-10-13T02:48:26.430Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:26.430Z"
       },
       "stats47Targets": [
         "/ranking/engel-coefficient",
@@ -9024,7 +9060,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a05-06",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "59e68b2b41ab9df8b0ae77a490d78732df6d3f988ce061f060af8425ddcad423",
+          "files": 21,
+          "bytes": 7309886,
+          "savedAt": "2026-10-13T02:48:59.523Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:59.523Z"
       },
       "stats47Targets": [
         "/ranking/tuna-consumption-expenditure",
@@ -9058,7 +9100,13 @@
       "r2Path": "note/stats47-note/b-ref-mh-a04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "19e023c2248391f9a3b8d05aed6cb8ade8f3bb172e41a8a6c206ad7d8bdcd393",
+          "files": 12,
+          "bytes": 3356925,
+          "savedAt": "2026-10-13T02:49:18.589Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:18.589Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household",
@@ -9083,7 +9131,13 @@
       "r2Path": "note/stats47-note/b-ref-mh-a07",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "071d28a0d14bbdc973841fc88cfafb1632301ec0253207d1f527f81b912e0019",
+          "files": 6,
+          "bytes": 1122658,
+          "savedAt": "2026-10-13T02:49:28.513Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:28.513Z"
       },
       "stats47Targets": [
         "/ranking/current-securities-balance-ratio-multi-person-households",
@@ -9102,7 +9156,13 @@
       "r2Path": "note/stats47-note/b-ref-mh-a08",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "00ee513dbd4512a621161e4f1b666963a824668df4884bd7baf31e079fa26466",
+          "files": 7,
+          "bytes": 1493258,
+          "savedAt": "2026-10-13T02:49:33.635Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:33.635Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household",
@@ -9139,7 +9199,13 @@
       "r2Path": "note/stats47-note/b-ref-mh-a10",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "6c1727c0278997fc81c7c86e5d8fe5a901d7e0d5ed325b530cbfcc59bc5d72e7",
+          "files": 9,
+          "bytes": 2289174,
+          "savedAt": "2026-10-13T02:49:39.198Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:39.198Z"
       },
       "stats47Targets": [
         "/ranking/life-expectancy-0-male",
@@ -9161,7 +9227,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a03",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "4387b9e0f71c29dc4239b875578e8a9a6d55df976b31a01eb8eed77663c0fdc5",
+          "files": 5,
+          "bytes": 786922,
+          "savedAt": "2026-10-13T02:44:19.748Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:19.748Z"
       },
       "stats47Targets": [
         "/ranking/katsuobushi-consumption-expenditure",
@@ -9179,7 +9251,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e4140fd4e6f457373e2ca82b76b0a629350af84f86b293cc047677a37c2b3c0d",
+          "files": 7,
+          "bytes": 1477897,
+          "savedAt": "2026-10-13T02:44:24.803Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:24.803Z"
       },
       "stats47Targets": [
         "/ranking/marriages",
@@ -9199,7 +9277,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a05",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "d064222cd8324163d24bd94cb2cc80a38b4f00acc689c6b2323299b0514c3f30",
+          "files": 4,
+          "bytes": 377090,
+          "savedAt": "2026-10-13T02:44:31.088Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:31.088Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household"
@@ -9216,7 +9300,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a06",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ee8ad0fe7255119c5df838a2b6ee928d923ddefb2a20d21a5d21ef13fea1fe21",
+          "files": 5,
+          "bytes": 764792,
+          "savedAt": "2026-10-13T02:44:34.068Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:34.068Z"
       },
       "stats47Targets": [
         "/ranking/husband-childcare-rate",
@@ -9234,7 +9324,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a07",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "f86d0fea20ca0adc239b5506f5d199896dd38fe4ad6b9a8774075ad28f21cec6",
+          "files": 5,
+          "bytes": 747357,
+          "savedAt": "2026-10-13T02:44:38.418Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:38.418Z"
       },
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate",
@@ -9252,7 +9348,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a08",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "339fc141d2253f862783282764b9020c572365a2f0844f3c36a670e90f0b64f4",
+          "files": 6,
+          "bytes": 1223728,
+          "savedAt": "2026-10-13T02:44:43.071Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:43.071Z"
       },
       "stats47Targets": [
         "/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
@@ -9271,7 +9373,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a09",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "44421c9b627df48fd88a3ead6789a02c992c188a391b96989936f45e431d113d",
+          "files": 4,
+          "bytes": 381096,
+          "savedAt": "2026-10-13T02:44:48.575Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:48.575Z"
       },
       "stats47Targets": [
         "/ranking/education-cost-all-households"
@@ -9288,7 +9396,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a11",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "292d7f8da97756bed914475eeec0f793b3e48c0fcb19d693559d5c1fc3f2e35e",
+          "files": 4,
+          "bytes": 447387,
+          "savedAt": "2026-10-13T02:44:51.576Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:51.576Z"
       },
       "stats47Targets": [
         "/ranking/domestic-student-remittance-consumption-expenditure"
@@ -9305,7 +9419,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a13",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "8f04ad6defff1f80280262970753b259915788f99502044ced9b86c90946d7b6",
+          "files": 5,
+          "bytes": 771547,
+          "savedAt": "2026-10-13T02:44:54.614Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:54.614Z"
       },
       "stats47Targets": [
         "/ranking/beauty-salon-count",
@@ -9323,7 +9443,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a15",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "4bf21ce03a976ca1d7cfcaf91d398127e0d300949b44afc8231db484b6eaed4f",
+          "files": 4,
+          "bytes": 371420,
+          "savedAt": "2026-10-13T02:44:58.937Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:58.937Z"
       },
       "stats47Targets": [
         "/ranking/current-savings-balance-multi-person-households"
@@ -9340,7 +9466,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a17",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "a69605d68bbf5a847b4150f540611190115ef159b7bbcd5f149cb8ca6f7ed09d",
+          "files": 4,
+          "bytes": 359191,
+          "savedAt": "2026-10-13T02:45:01.891Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:01.891Z"
       },
       "stats47Targets": [
         "/ranking/owner-occupied-housing-ratio"
@@ -9357,7 +9489,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a19",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ed0a47bfad884c47c505ef9747b9f9a94344368cc6a24d23f6263db38ca8205c",
+          "files": 6,
+          "bytes": 1135158,
+          "savedAt": "2026-10-13T02:45:05.959Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:05.959Z"
       },
       "stats47Targets": [
         "/ranking/nuclear-family-households-ratio",
@@ -9376,7 +9514,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a21",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "4a60930b50f22a7301ae1f3a29acef346745120e1ec7268f9187401eca37dc5d",
+          "files": 4,
+          "bytes": 373448,
+          "savedAt": "2026-10-13T02:45:11.163Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:11.163Z"
       },
       "stats47Targets": [
         "/ranking/sex-ratio-age-20-39"
@@ -9393,7 +9537,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a26",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "195b93387fbaccb3cad5c1d7b0a1547ff7e676ec36345b0d70d34b34712e7bfd",
+          "files": 4,
+          "bytes": 354775,
+          "savedAt": "2026-10-13T02:45:15.157Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:15.157Z"
       },
       "stats47Targets": [
         "/ranking/heatstroke-deaths"
@@ -9410,7 +9560,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a31",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e780a6560760692ed0eb44f7c4067569571f9a8d87b188f7dbd3ba2a38e12c2a",
+          "files": 4,
+          "bytes": 424003,
+          "savedAt": "2026-10-13T02:45:18.364Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:18.364Z"
       },
       "stats47Targets": [
         "/ranking/nonprimary-enterprises-count"
@@ -9427,7 +9583,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a36",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "795a1d784238508b23a51510b3f104221918843c8db4949b2306f3a3d6704c57",
+          "files": 5,
+          "bytes": 760033,
+          "savedAt": "2026-10-13T02:45:26.031Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:26.031Z"
       },
       "stats47Targets": [
         "/ranking/habitable-area-ratio",
@@ -9445,7 +9607,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a40",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "3b999c2a833d17b00dbb8ed61eff841c1239cb8447745511ca308b9c67a76825",
+          "files": 5,
+          "bytes": 778610,
+          "savedAt": "2026-10-13T02:45:30.464Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:30.464Z"
       },
       "stats47Targets": [
         "/ranking/commute-by-car",
@@ -9463,7 +9631,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a42",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "9eece5c607217c9eb58b41ad7d9159333474b16f4e2c187bdc8e40b93d6b0840",
+          "files": 4,
+          "bytes": 369793,
+          "savedAt": "2026-10-13T02:45:34.917Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:34.917Z"
       },
       "stats47Targets": [
         "/ranking/mothers-age-at-first-birth"
@@ -9480,7 +9654,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a45",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e6dd11654393202ed13c1fe58187f5ca56028cbcc569502362571f232e1fd26c",
+          "files": 4,
+          "bytes": 420476,
+          "savedAt": "2026-10-13T02:45:37.969Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:37.969Z"
       },
       "stats47Targets": [
         "/ranking/child-abuse-consultation-cases"
@@ -9497,7 +9677,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a49",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "60a6197e054f7a46b158024fa6958b26754a2bee32d7f550de3ad6b67a410e95",
+          "files": 4,
+          "bytes": 373589,
+          "savedAt": "2026-10-13T02:45:40.972Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:40.972Z"
       },
       "stats47Targets": [
         "/ranking/deaths-cerebral-infarction-per-100k"
@@ -9514,7 +9700,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a51",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "0815b0d0c318929653b0e4e4a1844e5e892b90e32ae0d7f4a9eedaff86d71eea",
+          "files": 5,
+          "bytes": 700096,
+          "savedAt": "2026-10-13T02:45:44.283Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:44.283Z"
       },
       "stats47Targets": [
         "/ranking/suicide-count",
@@ -9532,7 +9724,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a07",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "b58c82fd67cb74d966fe0e07f9c593daf0db35ec6f9353278db7b2256ae40079",
+          "files": 13,
+          "bytes": 3792934,
+          "savedAt": "2026-10-13T02:49:47.341Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:47.341Z"
       },
       "stats47Targets": [
         "/ranking/junior-high-club-per100-soccer",
@@ -9558,7 +9756,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a09",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "686f0f19504dfb2e2121c11df734cb8a0878c2c98881aa376b1f4e00313472d3",
+          "files": 4,
+          "bytes": 388568,
+          "savedAt": "2026-10-13T02:49:59.760Z"
+        },
+        "verifiedAt": "2026-10-13T02:49:59.760Z"
       },
       "stats47Targets": [
         "/ranking/high-school-club-per100-rugby-male"
@@ -9575,7 +9779,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a10",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e1ea82efa19a01b2b2414b480c39c25f9982966a5a0429cea9d631a7b0e93715",
+          "files": 6,
+          "bytes": 1050620,
+          "savedAt": "2026-10-13T02:50:03.255Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:03.255Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-cycling",
@@ -9594,7 +9804,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a12",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "6978666d2d5aa03c48d03667e34d3c503c5aa0b07ea12f9667eccb348d3bef7a",
+          "files": 6,
+          "bytes": 1071055,
+          "savedAt": "2026-10-13T02:50:09.225Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:09.225Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-golf",
@@ -9613,7 +9829,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a13",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ba48821797c407ac435226225a8bd21d40cbc5053f7992531b9887fc163d90a1",
+          "files": 9,
+          "bytes": 2190307,
+          "savedAt": "2026-10-13T02:50:15.420Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:15.420Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-sports-spectating",
@@ -9635,7 +9857,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a14",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "bb45cad422966d99474fcbd9f69a8f48651655456c23fe1ffd1583b3854d6791",
+          "files": 6,
+          "bytes": 1093001,
+          "savedAt": "2026-10-13T02:50:23.096Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:23.096Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-gardening",
@@ -9654,7 +9882,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a15",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "f7ff5a56c324eb2c2b6e0796f1fbf7ab269b7abc3419f4faef3a68ec7ddbc3f9",
+          "files": 10,
+          "bytes": 2464071,
+          "savedAt": "2026-10-13T02:50:28.320Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:28.320Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-calligraphy",
@@ -9677,7 +9911,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a16",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "35a68c38cd2c620b77a6df8f9376e113d2afb3dca0749493b26386440563ea3a",
+          "files": 5,
+          "bytes": 717590,
+          "savedAt": "2026-10-13T02:50:35.490Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:35.490Z"
       },
       "stats47Targets": [
         "/ranking/public-swimming-pool-count-per-million",
@@ -9695,7 +9935,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a17",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "cd0992f5d293bcfa2b6a4cbc2879e10160b3a1b895133e86150996f86e9fa922",
+          "files": 5,
+          "bytes": 719837,
+          "savedAt": "2026-10-13T02:50:39.861Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:39.861Z"
       },
       "stats47Targets": [
         "/ranking/athletics-stadium-count-public",
@@ -9713,7 +9959,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a18",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "76c6274813519b375601f28a062f9c4547e29255fb7be57591d5d84b72d47745",
+          "files": 4,
+          "bytes": 371013,
+          "savedAt": "2026-10-13T02:50:43.936Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:43.936Z"
       },
       "stats47Targets": [
         "/ranking/public-gymnasium-count-per-million"
@@ -9730,7 +9982,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a19",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "39baca02989cbe4cccbabd523dc49e4132f7d934a442a1c1a4a64793c14fe98d",
+          "files": 5,
+          "bytes": 684981,
+          "savedAt": "2026-10-13T02:50:47.687Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:47.687Z"
       },
       "stats47Targets": [
         "/ranking/meal-avg-time-female",
@@ -9748,7 +10006,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a20",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e6f44e4a1b9cef4c692806e53b2baa09c3205e82f4e47840533f5b03dad70ccd",
+          "files": 4,
+          "bytes": 369267,
+          "savedAt": "2026-10-13T02:50:52.213Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:52.213Z"
       },
       "stats47Targets": [
         "/ranking/broadcast-media-time-all"
@@ -9765,7 +10029,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a21",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "bf2bd2aec421c9284928b10bac0f56f9f7db6174ab2dd111536c767190dfa0b3",
+          "files": 10,
+          "bytes": 2466334,
+          "savedAt": "2026-10-13T02:50:56.359Z"
+        },
+        "verifiedAt": "2026-10-13T02:50:56.359Z"
       },
       "stats47Targets": [
         "/ranking/housework-avg-time-female",
@@ -9788,7 +10058,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a22",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "1eac927ef447d12c4823f426331702b03c4f1a0f509c792de790b011e487255d",
+          "files": 6,
+          "bytes": 1181897,
+          "savedAt": "2026-10-13T02:51:04.172Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:04.172Z"
       },
       "stats47Targets": [
         "/ranking/commute-by-train",
@@ -9807,7 +10083,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a24",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ec347984aaa06b7705dd74ca6fc000d0068baae55dbc0e2545398e48c71e8bd3",
+          "files": 4,
+          "bytes": 377856,
+          "savedAt": "2026-10-13T02:51:09.420Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:09.420Z"
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
@@ -9824,7 +10106,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a25",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "87e574794ddb261b88adf69da851eef28a0c16eb48f4fc7107d59e3586b04119",
+          "files": 5,
+          "bytes": 787099,
+          "savedAt": "2026-10-13T02:51:12.759Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:12.759Z"
       },
       "stats47Targets": [
         "/ranking/national-assessment-elementary-tutoring-rate",
@@ -9842,7 +10130,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a26",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "5821dd15e73b00ae810e9b3f317ec7fcad2a86421c08fddb5ff4b4a94465ea30",
+          "files": 4,
+          "bytes": 366199,
+          "savedAt": "2026-10-13T02:51:16.730Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:16.730Z"
       },
       "stats47Targets": [
         "/ranking/primary-school-commute-time-weekday"
@@ -9859,7 +10153,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a27",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "0086dd4587710fc89801b791fa0f6841618aa9317d2a21cce3b5bf56919b7189",
+          "files": 5,
+          "bytes": 781194,
+          "savedAt": "2026-10-13T02:51:20.649Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:20.649Z"
       },
       "stats47Targets": [
         "/ranking/national-assessment-elementary-breakfast-rate",
@@ -9877,7 +10177,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a28",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "7d0344cefe7d330c9a6fb9f42fac35c02819c616db65278896dd130b23cd5a5b",
+          "files": 4,
+          "bytes": 410752,
+          "savedAt": "2026-10-13T02:51:25.479Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:25.479Z"
       },
       "stats47Targets": [
         "/ranking/engel-coefficient"
@@ -9894,7 +10200,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a29",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "893cad9bdd77a2794a7acde4ee1e76a2a7363bdd93c0f999907ff4d7e6e3f7b9",
+          "files": 5,
+          "bytes": 839139,
+          "savedAt": "2026-10-13T02:51:28.613Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:28.613Z"
       },
       "stats47Targets": [
         "/ranking/rice-consumption-quantity",
@@ -9912,7 +10224,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a30",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "347ffd78ce3bc14491295b16c1ca5cebac9912c7d7804a6772339e1f86f4e886",
+          "files": 4,
+          "bytes": 430718,
+          "savedAt": "2026-10-13T02:51:32.467Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:32.467Z"
       },
       "stats47Targets": [
         "/ranking/fresh-vegetables-consumption-quantity"
@@ -9929,7 +10247,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a31",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "7f4ef9d7fde85146286ab4e9880b65dad3c8e1707f1b7bea8798ccd43ff0215f",
+          "files": 13,
+          "bytes": 4160765,
+          "savedAt": "2026-10-13T02:51:35.281Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:35.281Z"
       },
       "stats47Targets": [
         "/ranking/cabbage-consumption-quantity",
@@ -9955,7 +10279,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a32",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "2b2632c08c8d2cbf1f93932c9ce870bc988cf339cfd167bbb1a313b3709b683d",
+          "files": 4,
+          "bytes": 420438,
+          "savedAt": "2026-10-13T02:51:47.939Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:47.939Z"
       },
       "stats47Targets": [
         "/ranking/fresh-fruit-consumption-quantity"
@@ -9972,7 +10302,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a33",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e47bf7d1ebaf7f15a6a814e082302c60887ba590b9a4ed15d66e2d34d37c1350",
+          "files": 8,
+          "bytes": 2072280,
+          "savedAt": "2026-10-13T02:44:02.972Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:02.972Z"
       },
       "stats47Targets": [
         "/ranking/banana-consumption-quantity",
@@ -9993,7 +10329,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a34",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "da1852d01b7030af87ea5572eb33daeee4b8c8e4c13ca2f68905ac80e1580612",
+          "files": 4,
+          "bytes": 422337,
+          "savedAt": "2026-10-13T02:51:52.222Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:52.222Z"
       },
       "stats47Targets": [
         "/ranking/fresh-seafood-consumption-quantity"
@@ -10010,7 +10352,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a35",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "394565f0f9107f50e8c3b4eab3293752be2af60faff7102958c70fbc644e3367",
+          "files": 6,
+          "bytes": 1190154,
+          "savedAt": "2026-10-13T02:51:55.032Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:55.032Z"
       },
       "stats47Targets": [
         "/ranking/saury-consumption-quantity",
@@ -10029,7 +10377,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a36",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "bea84adbc5519d5984d9ab64549733bb4d838042b0695ca2e01cefb527ed219e",
+          "files": 4,
+          "bytes": 401717,
+          "savedAt": "2026-10-13T02:51:59.337Z"
+        },
+        "verifiedAt": "2026-10-13T02:51:59.337Z"
       },
       "stats47Targets": [
         "/ranking/shellfish-consumption-quantity"
@@ -10046,7 +10400,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a37",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "bd787677df5164a6afa9a31f518b2eee43481634ec0107d092ef4bcd79e944cc",
+          "files": 7,
+          "bytes": 1665787,
+          "savedAt": "2026-10-13T02:52:02.846Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:02.846Z"
       },
       "stats47Targets": [
         "/ranking/table-salt-consumption-quantity",
@@ -10066,7 +10426,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a38",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "d8183bd16a2e5de3566e9e0b2b118d81f60f53338cd76bfc60a2cd30a08d858d",
+          "files": 6,
+          "bytes": 1205727,
+          "savedAt": "2026-10-13T02:52:09.550Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:09.550Z"
       },
       "stats47Targets": [
         "/ranking/green-tea-consumption-quantity",
@@ -10085,7 +10451,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a39",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ae93ea3d9bf00a93a8fd7cf5b157be9ff8c150f6611fd9ee6049b5f5120ee2dc",
+          "files": 5,
+          "bytes": 858580,
+          "savedAt": "2026-10-13T02:52:15.148Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:15.148Z"
       },
       "stats47Targets": [
         "/ranking/carbonated-drink-consumption-expenditure",
@@ -10103,7 +10475,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a40",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "32de3413f09af210086d0e9f947de88fc96f39a1eba54835f6b48f9b1f89eb24",
+          "files": 4,
+          "bytes": 414033,
+          "savedAt": "2026-10-13T02:52:19.536Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:19.536Z"
       },
       "stats47Targets": [
         "/ranking/milk-consumption-quantity"
@@ -10120,7 +10498,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a42",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "849d336b2120efbd4e0767818350bc7a6b703f4f718b3bca5d5f96a8f718c0be",
+          "files": 4,
+          "bytes": 429543,
+          "savedAt": "2026-10-13T02:52:25.714Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:25.714Z"
       },
       "stats47Targets": [
         "/ranking/confectionery-consumption-expenditure"
@@ -10137,7 +10521,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a43",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "1f452ed0dfad6beac307311417239d02f3c8cee519e70a42dcc6534ae248237c",
+          "files": 4,
+          "bytes": 420355,
+          "savedAt": "2026-10-13T02:52:29.289Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:29.289Z"
       },
       "stats47Targets": [
         "/ranking/natto-consumption-expenditure"
@@ -10154,7 +10544,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a44",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e295275bfb8a19a4f203d99f24f9fa716ba559282ea5a0b63a379cbf2a36f91a",
+          "files": 4,
+          "bytes": 422909,
+          "savedAt": "2026-10-13T02:52:33.375Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:33.375Z"
       },
       "stats47Targets": [
         "/ranking/instant-noodles-consumption-quantity"
@@ -10171,7 +10567,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a45",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "2c8ed41aacefb6f8de460361a7c117aa7780fb2c79e319c05a2941636d703ed8",
+          "files": 4,
+          "bytes": 418278,
+          "savedAt": "2026-10-13T02:52:36.509Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:36.509Z"
       },
       "stats47Targets": [
         "/ranking/bread-consumption-quantity"
@@ -10188,7 +10590,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a02",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "874fc83617026374dcb7de599aab09ddc346e654641a945b2921f0ec4e40fec9",
+          "files": 5,
+          "bytes": 779512,
+          "savedAt": "2026-10-13T02:44:15.316Z"
+        },
+        "verifiedAt": "2026-10-13T02:44:15.316Z"
       },
       "stats47Targets": [
         "/ranking/konbu-consumption-expenditure",
@@ -10206,7 +10614,13 @@
       "r2Path": "note/stats47-note/b-ref-dev-a32",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "f463e3fec6ebb183aeb2b13fbaf34121b39469be008d90d15dff19a5bc69e706",
+          "files": 5,
+          "bytes": 714735,
+          "savedAt": "2026-10-13T02:45:21.601Z"
+        },
+        "verifiedAt": "2026-10-13T02:45:21.601Z"
       },
       "stats47Targets": [
         "/ranking/unemployment-rate"
@@ -10223,7 +10637,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a41",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "cf5b6ba6f396ef3d4364a2d22a6a021d032e87cb4ad9362ba51ba58665887eeb",
+          "files": 3,
+          "bytes": 63864,
+          "savedAt": "2026-10-13T02:52:22.863Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:22.863Z"
       },
       "stats47Targets": [
         "/ranking/alcohol-sales-per-adult-total",
@@ -10245,7 +10665,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a47",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "3d1237e14f85b85910fffb8e234f97eec9e009c424b7b8a4adc2ce983937d83d",
+          "files": 3,
+          "bytes": 30143,
+          "savedAt": "2026-10-13T02:52:40.337Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:40.337Z"
       },
       "stats47Targets": [
         "/areas/01000",
@@ -10268,7 +10694,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a48",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "798dc4ce29dfb3f32b6c26c700520ec5e3270b6765efabf1185b6514db22e84d",
+          "files": 3,
+          "bytes": 30485,
+          "savedAt": "2026-10-13T02:52:42.668Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:42.668Z"
       },
       "stats47Targets": [
         "/areas/08000",
@@ -10291,7 +10723,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a49",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "7cb336020e235fb07bc206c4b2e41e0aa5bad5cc7d21fe505cf7c3df4875c654",
+          "files": 3,
+          "bytes": 37334,
+          "savedAt": "2026-10-13T02:52:45.099Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:45.099Z"
       },
       "stats47Targets": [
         "/areas/15000",
@@ -10316,7 +10754,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a50",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "5e9ae369f70779e66cc1c98be2ed2a7cfd91cca17a0075cf08f4fe1f9f1cb37b",
+          "files": 3,
+          "bytes": 30480,
+          "savedAt": "2026-10-13T02:52:47.645Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:47.645Z"
       },
       "stats47Targets": [
         "/areas/24000",
@@ -10339,7 +10783,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a51",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e21247b6290ea43f24e2f20ff8d5a1d7efaa6c98d60fe1add3c21b94e9d4db4e",
+          "files": 3,
+          "bytes": 38071,
+          "savedAt": "2026-10-13T02:52:50.519Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:50.519Z"
       },
       "stats47Targets": [
         "/areas/31000",
@@ -10364,7 +10814,13 @@
       "r2Path": "note/stats47-note/b-ref-prc-a52",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "d1a94753ab57d17fd53258ed876b61c140c491352952e477789de891eaedfaa9",
+          "files": 3,
+          "bytes": 34115,
+          "savedAt": "2026-10-13T02:52:53.330Z"
+        },
+        "verifiedAt": "2026-10-13T02:52:53.330Z"
       },
       "stats47Targets": [
         "/areas/40000",
@@ -10388,7 +10844,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a01-05",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "5e94b4c96dc6b5299d10a67556c850ac59895cc237f03e96719df8f511c784ed",
+          "files": 9,
+          "bytes": 347945,
+          "savedAt": "2026-10-13T02:46:27.354Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:27.354Z"
       },
       "stats47Targets": []
     },
@@ -10403,7 +10865,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-02",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "78f9728cc6143c2f8809145a2763f9f3dccf89bfa748c572c4422e4d4d6296d4",
+          "files": 11,
+          "bytes": 498881,
+          "savedAt": "2026-10-13T02:46:34.457Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:34.457Z"
       },
       "stats47Targets": []
     },
@@ -10418,7 +10886,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "6ba841db5c8e02d0c4bffa15944fec2922fcab28a3d840e50f57071db1ca6a8e",
+          "files": 17,
+          "bytes": 854135,
+          "savedAt": "2026-10-13T02:46:42.565Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:42.565Z"
       },
       "stats47Targets": []
     },
@@ -10433,7 +10907,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-05",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "5dc2d3292ea55b46f1dc0a16a35463189cd378a599d66119b5e8066b49fa0cd7",
+          "files": 17,
+          "bytes": 807929,
+          "savedAt": "2026-10-13T02:46:56.391Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:56.391Z"
       },
       "stats47Targets": []
     },
@@ -10448,7 +10928,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-06",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "13eb0843085e7d6e5718349562a4b93bf1f7243a85152013a71415de9842f38e",
+          "files": 9,
+          "bytes": 376480,
+          "savedAt": "2026-10-13T02:47:09.330Z"
+        },
+        "verifiedAt": "2026-10-13T02:47:09.330Z"
       },
       "stats47Targets": []
     },
@@ -10463,7 +10949,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-07",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "c20df2b562cd39e6ef42508aad94c5494f03f2321514f20dfe27ec1ae32619d5",
+          "files": 23,
+          "bytes": 1208912,
+          "savedAt": "2026-10-13T02:47:15.415Z"
+        },
+        "verifiedAt": "2026-10-13T02:47:15.415Z"
       },
       "stats47Targets": []
     },
@@ -10478,7 +10970,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-08",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "b8f39f7860c1ab196c311686db8fec78195d47af2a22fa6121364df5ca98cee8",
+          "files": 23,
+          "bytes": 1170475,
+          "savedAt": "2026-10-13T02:47:31.533Z"
+        },
+        "verifiedAt": "2026-10-13T02:47:31.533Z"
       },
       "stats47Targets": []
     },
@@ -10493,7 +10991,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a02-09",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "a1bd76e9d4f4d5bfd1938717ca140e49356275a63e6dbd8828d1f22cbed98e0b",
+          "files": 9,
+          "bytes": 373223,
+          "savedAt": "2026-10-13T02:47:46.062Z"
+        },
+        "verifiedAt": "2026-10-13T02:47:46.062Z"
       },
       "stats47Targets": []
     },
@@ -10508,7 +11012,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a03-01",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "41e1423c60b060fa3ac9785c78f0064b7c4233dbad88779671e45f98159b9856",
+          "files": 21,
+          "bytes": 1058096,
+          "savedAt": "2026-10-13T02:47:53.185Z"
+        },
+        "verifiedAt": "2026-10-13T02:47:53.185Z"
       },
       "stats47Targets": []
     },
@@ -10523,7 +11033,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a03-04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "1fa000bb699ee4b807e6708594d0f2679c7cc981eb29b557e5b92515d54c1576",
+          "files": 9,
+          "bytes": 335968,
+          "savedAt": "2026-10-13T02:48:07.011Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:07.011Z"
       },
       "stats47Targets": []
     },
@@ -10538,7 +11054,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a04-01",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "4c0605b59d68912e8def0146ad2c3f8ea028cf5093867b34a5a08f4037e1050f",
+          "files": 7,
+          "bytes": 268499,
+          "savedAt": "2026-10-13T02:48:13.952Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:13.952Z"
       },
       "stats47Targets": []
     },
@@ -10553,7 +11075,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a04-04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "d486b4d947867d32daa122f3f80433d9833eb8f34923e4d95878e403c1642b1e",
+          "files": 17,
+          "bytes": 878739,
+          "savedAt": "2026-10-13T02:48:31.868Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:31.868Z"
       },
       "stats47Targets": []
     },
@@ -10568,7 +11096,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a05-04",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "5c0e489ea282a68ae19feab2602787a829b6b67a8be2c7e6cd62dab95757d3d5",
+          "files": 23,
+          "bytes": 1160949,
+          "savedAt": "2026-10-13T02:48:43.305Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:43.305Z"
       },
       "stats47Targets": []
     },
@@ -10583,7 +11117,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a01-01",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "ef09aa302bb476b72c1f818b2d8f2f2ea3d4bc520b0138a7cd6bf95f4b36156c",
+          "files": 4,
+          "bytes": 395651,
+          "savedAt": "2026-10-13T02:46:15.806Z"
+        },
+        "verifiedAt": "2026-10-13T02:46:15.806Z"
       },
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate"
@@ -10600,7 +11140,13 @@
       "r2Path": "note/stats47-note/b-ref-kakei-a04-02",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "644c4e1fedcf10df51ff6ffd253e66578f8531529e248ca2eaa7f2e0b365a497",
+          "files": 9,
+          "bytes": 357381,
+          "savedAt": "2026-10-13T02:48:19.633Z"
+        },
+        "verifiedAt": "2026-10-13T02:48:19.633Z"
       },
       "stats47Targets": []
     }
