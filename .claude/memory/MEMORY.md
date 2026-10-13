@@ -4,6 +4,7 @@
 
 - [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note画像契約。カバーはdata/note JSON+Schema・private R2のSHA版。ランキング画像はchart-data+render-specから再生成
 - [project_note_article_ledger.md](project_note_article_ledger.md) — note記事は台帳data/note/articles.json+本文はR2だけ(有料はprivate)。docs/31はgitignoreの作業場、note:article checkout/save
+- [feedback_authored_ledgers_in_data.md](feedback_authored_ledgers_in_data.md) — 判断して書く台帳はdata/かconfig/にJSON+Schemaで置きdatasets.mjsへ登録。packages/だと検査と担当の視界外 (教材の企画376件)
 
 - [project_model_usage_cycle.md](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
@@ -33,7 +34,7 @@
 - [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開は不可能(生候補17万)。需要ファースト拡充ループ。発見入口はR2 estat-catalogで絞らず出口だけ絞る
 - [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube量産実験(2026-07-11〜)。ガード緩和=youtube-experiment.json(削除で月1復帰)。CI投稿経路実証済み
 - [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
-- [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の罠: kakei @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須 / writeR2Staging(旧saveToR2)はローカルstagingのみ→diff-push-r2
+- [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充の罠: @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須
 - [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run admin`→localhost:4747、apps/admin)。/snsは画像付きID台帳・下書き本文編集。IG自動投稿の空振りcron修正。正典sns-content-standards.md §5.5
 - [project_survey_linkage_ssot.md](project_survey_linkage_ssot.md) — ranking↔調査紐付けSSOT再設計(2026-07-06,PR#535)。/survey空prerenderをforce-dynamicで解消。item.jsonにsurveyIds焼き込み。orphan調査8件削除(83→75)。管理=survey-curator+/audit-survey-linkage
 - [project_blog_topic_queue_seo_expansion.md](project_blog_topic_queue_seo_expansion.md) — 新規ブログSEO拡充(2026-07-05)。「次に何を書くか」=topic-queue.json(build-topic-queue.mjs)。型8種に拡張(D2食品/F市区町村/G移動)。タイトル~17字・gap1要素。/plan-article-queue。戦略正典=docs/02_実装計画/15
@@ -56,7 +57,7 @@
 - [project_blog_brushup_dbless_scaffold.md](project_blog_brushup_dbless_scaffold.md) — brushupのDBレス落とし穴。R2 values直fetch、rank=0で再計算、NG_PATTERNが旧title遡及blocker、publish-blogは直列dispatch、未参照費目json残す
 - [project_blog_mass_rewrite_lessons.md](project_blog_mass_rewrite_lessons.md) — ブログ大量リライト教訓。である調はcopula置換禁止→article-writer必須。一括はsession limit→1バッチ15-20本。進捗SSOT=remediation-queue、sync-rewrite-progress.mjs。--nextはpendingのみ
 - [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。KNOWN/SITEMAP/R2 values/OGPが必要。画像のbounded batchは新規manifest欠落を旧manifest移行より優先（2026-08-26のOGP 404再発防止）
-- [project_estat_backfill_lessons.md](project_estat_backfill_lessons.md) — e-Stat backfillはUPSERT必須。DELETE+INSERTは他ソース年度喪失(2026-05-27事故)。year_code正規化+全年度取得
+- [project_estat_backfill_lessons.md](project_estat_backfill_lessons.md) — e-Stat backfillはUPSERT必須 (DELETE+INSERTで他ソース年度喪失)
 - [project_blog_brushup_risk_2026_05_25.md](project_blog_brushup_risk_2026_05_25.md) — AI auto-brushupは13%FAIL+27%WARN。quality-gate.mjsは形式のみでfactual不足。data/*.jsonと本文数値の突合step必須
 - [project_blog_publish_cloud_first.md](project_blog_publish_cloud_first.md) — ブログ公開はpublish-blog.yml(contents/blog→CI→R2)。新規workflowは--ref develop、直列ディスパッチ必須
 - [project_sns_10k_roadmap.md](project_sns_10k_roadmap.md) — SNS 10K戦略(2026-05-24)。IG 10Kを9ヶ月、Xは1-2K維持。数字対比・意外性で引く/IG Reels集中
@@ -122,7 +123,7 @@
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
 - [project_affiliate_banner_text_asymmetry.md](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
 - [project_source_vault_expanded_layout.md](project_source_vault_expanded_layout.md) — 参考文献vaultは2026-09-10にtar bundle廃止→Drive版folderへ展開配置(PDF+pages/+md/+figures/)。マウントは`マイドライブ`を自動解決、upload差分+readback、S4未到達はpending、_移行前は削除済み、不完全スキャン2冊
-- [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vaultで保全・全307ページ解決済。展開はbacklog KAKEI-MARKETING-CONTENT-01
+- [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vaultで保全・全307ページ解決済。企画はdata/source-inventory/.../analyses.json、note展開はNOTE-REFERENCE-EXPANSION-01
 
 - [feedback_ssds_denominator_evidence.md](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法

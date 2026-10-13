@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetPath } from "../../../../config/datasets.mjs";
 import {
   MIN_BODY_CHARS,
   buildDescription,
@@ -20,10 +21,7 @@ import {
 } from "./kakei-note-body.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
-const SSOT_PATH = path.join(
-  ROOT,
-  "packages/data-configs/src/evidence-inventory/kakei-note/expense-evidence.json",
-);
+const SSOT_PATH = path.join(ROOT, datasetPath("note.kakei-expense-evidence"));
 const KNOWN_RANKING_KEYS_PATH = path.join(
   ROOT,
   "packages/ranking/src/config/known-ranking-keys.ts",

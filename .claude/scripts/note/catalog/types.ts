@@ -99,6 +99,11 @@ export interface NoteArticle {
    */
   stats47Targets?: string[];
   /**
+   * この記事の元になった参考文献 (教材) の分析企画 ID。data/source-inventory/<sourceKey>/<edition>/analyses.json の
+   * analyses[].id を指し、その企画の contentRoles に "note" があること (台帳の書き込み時に検査する)。
+   */
+  sourceAnalyses?: string[];
+  /**
    * 記事末の「次に読む」主 CTA。NOTE_ARTICLES.key を参照する。
    * 全記事へ機械的な前後リンクを付けず、実測で選んだ記事だけに設定する。
    */

@@ -32,10 +32,13 @@ npm run note:article -- checkout <key>             # R2 → docs/31 の作業コ
 npm run note:article -- save <key>                 # 作業コピー → R2 (読み戻し SHA 照合) → 台帳の manifest 更新 → 作業コピー削除
 npm run note:article -- verify [--keys a,b] [--deep] [--record]   # 台帳と R2 の照合 (--deep は全ファイルの SHA)
 npm run note:article -- adopt <key>                # 台帳の外で R2 に置かれた本文を、そのまま台帳に取り込む
+npm run note:article -- sources [--unlinked]       # 教材 (参考文献) の note 企画と記事の結び付きを教材ごとに数える
 ```
 
 - **新しい記事**: 台帳に 1 レコード足す (状態 `draft`・`body: {store, manifest: null}`) → 作業コピーを作る → `save`。
   家計シリーズは `build-kakei-catalog-entries.mjs`、商品の販売記事は product-factory の `promote` が台帳レコードを作る。
+- **教材 (参考文献) の企画から作るとき**: 記事レコードの `sourceAnalyses` に企画 ID (`data/source-inventory/<sourceKey>/<edition>/analyses.json` の
+  `analyses[].id`) を書く。書き込み時に ID の実在と、企画の `contentRoles` に note があることを検査する。見送る企画は企画側の `contentRoles` から note を外す。
 - **公開したとき**: 台帳の `status: "published"`・`noteUrl`・`publishedAt` を書き、作業コピーに変更があれば `save`。
   公開記録を R2 の draft.md frontmatter に書き戻す旧手順 (`migrate-note-frontmatter.mjs`) は廃止した。
 - **有料記事**: `save` が最初から private R2 に保存する。公開 R2 には何も置かない

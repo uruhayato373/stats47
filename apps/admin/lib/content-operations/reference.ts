@@ -104,7 +104,7 @@ export interface ReferenceContentInput {
   areas: ReferenceAreaSource[];
   /** 47 県共通の県データブック・テンプレートに載っている指標 (県ページへの統合の実在証跡) */
   areaDatabookMetricKeys?: string[];
-  /** 展開先に「載せない」と決めた記録 (packages/data-configs/src/evidence-inventory/placement-decisions.ts) */
+  /** 展開先ごとの判断の記録 (data/source-inventory/placement-decisions.json) */
   placementDecisions?: Array<{
     channel: ReferenceProductionChannelDTO;
     metricKey: string;

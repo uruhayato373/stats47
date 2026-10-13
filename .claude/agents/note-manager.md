@@ -31,6 +31,7 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 - 公開ワークフロー（投稿確認 → state 記録 → メモリ更新）
 - 記事ステータスの把握（記事台帳の `status` と `body.store` / `body.manifest` で判定。作業コピーの状態は `npm run note:article -- status`）
 - 管理画面 `/content/note` でcatalog / R2本文所在 / 公開状態 / 監査結果を突合確認
+- 教材 (参考文献) の note 企画と記事の結び付き。企画から記事を作ったら記事台帳の `sourceAnalyses` に企画 ID を書く。進み具合は `npm run note:article -- sources` (未着手の一覧は `--unlinked`)。企画の正本は `data/source-inventory/<sourceKey>/<edition>/analyses.json`
 
 ## 担当外（各スキルが担当）
 
@@ -122,6 +123,7 @@ npm run admin  # http://127.0.0.1:4747/content/note
 | 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（記事台帳にレコードがあり、`note:article save` で R2 に保存済みか） |
 | 編集 | `/edit-note-draft` | 編集完了の確認（DB 更新は無い） |
 | 投稿 | `/publish-note` | 投稿完了後にcatalog更新 + 派生index再生成 + メモリ更新 |
+| 教材からの企画 | `/process-reference-source` (open-data-curator) | 分析企画の `contentRoles` に note がある企画を受け取り、記事にするか見送るかを決める。記事は `sourceAnalyses` で結び、見送りは企画の `contentRoles` から note を外して理由を `resolutionReason` に追記する (`reference-source-standards.md` §5) |
 
 ## 参照
 

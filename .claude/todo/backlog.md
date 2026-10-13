@@ -282,20 +282,43 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NOTE-REFERENCE-EXPANSION-01] 参考文献由来の note 制作候補 325 件 (未着手) を企画・見送りに振り分ける
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference] [起票:2026-10-13] [領域:商品]
+### [NOTE-REFERENCE-EXPANSION-01] 教材 (参考文献) の note 企画 162 件を、記事にする・見送るに振り分けて記事台帳と結ぶ
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run note:article -- sources] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-13 実測)**: 参考文献 7 冊の解決済み inventory (`data/source-inventory/*/inventory.json`) で展開先に note を含む採択項目は 688 件
-  (既存指標の再利用 217・掛け合わせ分析 458・新指標 13。context-only 810 件は規約で単独の制作単位にしない)。指標・地域ごとに重複を除いた **note の制作単位は 380**、
-  記事台帳 `data/note/articles.json` の `stats47Targets` が既に覆うのは 55、**未着手 325**。内訳: 家計調査マーケティング本 149・都道府県ランキング消費 149・偏差値の本 55・
-  日本国勢図会 17・お金と健康 17・平均所得 12・GIS 1 (重複あり)。`placement-decisions.ts` の channel=note の判断は 0 件で、全件が管理画面 `/content/references` で「着手できる」のまま。
-  集計の再現: 管理画面 `/content/references` の note 列 (数え方は `apps/admin/lib/content-operations/reference.ts`)。
-- **次**: ① 325 件を note の読み手 (広い検索意図・悩み起点・県の暮らしを読む型。`sns-content-standards.md` §2-7) で振り分け、載せないものは `placement-decisions.ts` に
-  channel=note の rejected (理由付き)、企画するものは planned (target に記事 key) を書く。同じ指標の単一ランキング記事を量産しない (1 位が東京の指標は止める規約)。
-  ② planned から記事台帳へ draft を足し、`post-note-ranking` / `write-note-section` で原稿を作って `note:article save`。家計調査マーケティング本は分析 80 件
-  (`packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json`) の展開 `KAKEI-MARKETING-CONTENT-01` と重ねて進める。
-- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない候補は公開しない。書籍の本文・数値・図を記事に使わない (`reference-source-standards.md`)。
-- **完了条件**: note の未着手が 0 (すべて planned・rejected・blocked・制作済みのいずれか) になり、planned は記事台帳の draft と結び付いている。
+- **事実 (2026-10-13)**: 教材 9 冊の分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`、計 376 件) のうち、展開先 (`contentRoles`) に
+  note を含む企画は 162 件 (家計調査マーケティング本 80・都道府県ランキング消費 45・偏差値の本 25・お金と健康 5・GIS 4・平均所得 3)。
+  記事台帳と企画 ID で結ばれたものは 0 件 (`npm run note:article -- sources`)。家計調査マーケティング本の展開カード
+  `KAKEI-MARKETING-CONTENT-01` は 2026-09-14 (6a4de050e1) に完了記録なしで backlog から消えており、企画が誰にも引き渡されていなかった。
+- **次**: ① `npm run note:article -- sources --unlinked` の一覧を、note の読み手 (広い検索意図・悩み起点・県の暮らしを読む型。
+  `sns-content-standards.md` §2-7) で振り分ける。既存の記事が既に扱っている企画は、その記事レコードの `sourceAnalyses` に企画 ID を足して結ぶ
+  (指標の一致だけで機械的に結ばず、記事の主張と企画の問いが同じかを読んで決める)。
+  ② 見送る企画は、企画の `contentRoles` から note を外し、`resolutionReason` に理由を追記する。
+  ③ 記事にする企画は記事台帳に draft を足して `sourceAnalyses` を書き、`post-note-ranking` / `write-note-section` で原稿を作って `note:article save`。
+  1 位が東京都になる単一ランキング記事は作らない規約に従う。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を記事に使わない (`reference-source-standards.md`)。
+- **完了条件**: `note:article -- sources` の未着手が 0 (すべての note 企画が記事と結ばれるか、note を外して見送り理由が残る)。
+
+### [REFERENCE-LEDGER-DATA-MOVE-01] 参考文献の残りの authored 台帳を data/ へ移し、管理画面の展開状況を企画単位でも数える
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-datasets.mjs] [起票:2026-10-13] [領域:データ]
+
+- **背景 (2026-10-13)**: 教材の分析企画 9 冊・展開判断・家計の根拠表は `packages/data-configs/src/evidence-inventory/` から `data/` へ移した
+  (JSON Schema 付き・置き場の台帳に登録)。packages/ に置くと置き場の台帳 (`config/datasets.mjs`) の検査範囲から外れ、note の担当からも見えなかった。
+- **残り**: ① `reference-sources.ts` の `REFERENCE_SOURCE_POLICIES` (資料ごとの解決方針) と `CLAUDE_SKILLS_GUIDE_ADOPTIONS`、
+  japan-zue の `policy.ts` (`JAPAN_ZUE_SOURCE_POLICIES`・`JAPAN_ZUE_MANUAL_OVERRIDES`) と `pilot.ts` (`JAPAN_ZUE_PILOT_ITEMS`・`JAPAN_ZUE_MASTER_CONTENT`) は、
+  データと関数が同じファイルにある。データだけを `data/source-inventory/` の JSON + Schema へ移し、関数は packages に残す。
+  ② 管理画面 `/content/references` の note 列は指標単位 (`stats47Targets` の一致) で数えている。記事台帳の `sourceAnalyses` を使い、企画単位の進み具合も出す
+  (`apps/admin/lib/content-operations/reference.ts`)。
+- **完了条件**: `packages/data-configs/src/evidence-inventory/` にデータの配列・表が残らず (型・読み込み・判定関数だけ)、管理画面に企画単位の note の進み具合が出る。
+
+### [PRODUCT-PACK-SNAPSHOT-CI-01] 商品パックの実データ検査 (除外・納品物の 4 不具合) を CI でも実行する
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-13] [領域:商品]
+
+- **事実 (2026-10-13)**: `packages/product-factory/tests/{license-exclusion,delivery-integrity}.test.ts` は、R2 から作るパックの固定データ
+  (`src/data/pack-snapshots/P-NN.json`、9.1MB・git 管理外) を読む。CI の checkout には無く、PR #1125 の Unit Tests を null 参照で落とした。
+  同日、固定データが無い環境では実データの検査 16 件を飛ばす (`skipIf`) ようにした。いまはこの Mac でしか検査されない。
+- **次**: CI で固定データを作る (`pack-snapshot.ts` の生成を R2 公開 URL から実行する step を Unit Tests の前に置く) か、検査に要る指標だけの小さな固定データを
+  `tests/fixtures/` に置くかを決めて実装する。
+- **完了条件**: PR CI で 18 件がすべて実行され (飛ばされず) 合格する。
 
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
@@ -379,7 +402,7 @@ updated: 2026-10-06
 - **停止条件**: 正しい期間の原表、または可住地面積の分母が確認できなければ推測で値を変更しない。
 - **完了条件**: 3指標の対象期間・分母・単位が原表と一致し、該当ランキングと県データブックの回帰検証を通過する。本番反映は既存の承認済み公開工程にまとめる。
 
-### [NOTE-DRAFT-DUPLICATE-CATALOG-01] note カタログの下書き 14 件が公開済み記事と同じ題名のまま残っている
+### [NOTE-CATALOG-DUPLICATE-DRAFTS-01] note 記事台帳の下書き 14 件が公開済み記事と同じ題名のまま残っている
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-11] [領域:商品]
 
 - **事象 (2026-10-11)**: カタログ `NOTE_ARTICLES` で `status: "draft"` の記事のうち 14 件は、題名が公開済み記事と完全に一致する (題名の 2 文字単位の一致率 1.00)。`koumuin-claude-code` の 22〜30 の 9 件 (`paid-n2207f3039fd3`・`paid-nbead1fe772c7`・`paid-n68eafab07946`・`paid-nfd3ab8213e1f`・`paid-n2c2df066e865`・`paid-n9f666946d105`・`paid-ncab0d7b04228`・`recovered-nc18fa33ec65e`・`paid-n8558c1a6503a` と同じ) と、`a-number-of-hotel-rooms`・`a-overseas-travel-annual-participation-rate-10plus`・`a-population-density-per-km2-total-area`・`a-volunteer-activity-annual-participation-rate-15plus`・`d1-kakei-prefecture-consumption` の 5 件。オーナー判断で公開しない。下書き一覧から公開候補を数えると重複を投稿しかける。
@@ -2930,7 +2953,7 @@ updated: 2026-10-06
 - **owner**: 台帳は`open-data-curator`、metricKey実在検証は`estat-researcher`、投入は`data-ingester`。
 - **現状証拠**: profile `prefecture-deviation` (Drive `参考文献/47都道府県の偏差値/2018年版`、6分冊PDF・103ページ)を
   全ページOCR (jpn+eng, rotate 90, psm 4)。一律`rights-hold`103件だった旧判定 (書誌確定前の暫定placeholder) を撤去し、
-  `packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json` に章単位の分析・論点53件を authored
+  `data/source-inventory/prefecture-deviation/2018/analyses.json` に章単位の分析・論点53件を authored
   (kakei-marketingと同じ形式)。`data/source-inventory/prefecture-deviation/2018/`はcoverage 100%
   (`combined-analysis` 25 / `primary-source-unavailable` 20 / `context-only` 5 / `not-applicable` 3)。
   書籍の偏差値・数値そのものは転記せず、章の着想だけを一次資料 (総務省家計調査・人口動態調査・国勢調査・
@@ -2952,7 +2975,7 @@ updated: 2026-10-06
 - **前提**: `japan-zue`の解決済みinventoryは論点発見だけに使う。記事・テーマへ載せる定義、年度、単位、値は、各metricの一次資料とR2観測値で再検証する。原文、OCR、書籍値、内部cropは公開しない。
 - **テーマ企画**: 参考文献で`theme`対象になり、既存ThemeCatalogまたはIndicatorSetへ未統合の制作単位だけを保持する。`draft`は採択・チャート設計待ち、`blocked`はactiveな公開metricが無いため停止中。
 
-(2026-10-10 に `packages/data-configs/src/evidence-inventory/placement-decisions.ts` の channel=theme へ移した。企画中・停止・見送りはそこが正本で、管理画面 `/content/references` が読む)
+(2026-10-10 に `data/source-inventory/placement-decisions.json` の channel=theme へ移した。企画中・停止・見送りはそこが正本で、管理画面 `/content/references` が読む)
 
 - **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
 - **ブログ下書き**: `contents/blog/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
@@ -3693,7 +3716,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - **観測 (2026-10-09)**: 参考文献由来の /japan 候補 66 件のうち 55 件は家計調査の品目で、全国値はあるが
   `packages/stats-r2/src/scripts/generate-japan-series.ts` の official モードが `source.kind=kakei-chousa` に未対応 (`verify-japan-candidates.ts` で verified-unsupported)。
-  `packages/data-configs/src/evidence-inventory/placement-decisions.ts` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
+  `data/source-inventory/placement-decisions.json` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
 - **次**: 生成器に家計調査のレシピ (全国の行) を足し、値レベルで検証してから japan-catalog.ts へ載せ、placement-decisions.ts の該当行を消す。
 - **完了条件**: 55 件が /japan に載るか、載せないと判断して placement-decisions.ts に rejected と理由が残る。
 

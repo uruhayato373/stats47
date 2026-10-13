@@ -170,16 +170,21 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   `primary-source-unavailable`、`not-applicable`は制作キューへ入れない。metricまたはareaへの公開可能な接続を持つ
   `reuse-existing-metric`、`new-metric`、`combined-analysis`だけを制作単位にする。
 - 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログはページID台帳
-  `data/content/pages/blog.json` の公開記事の`rankingKeys` (手元のR2の写しは読まない)、noteはcatalogの`stats47Targets`、
+  `data/content/pages/blog.json` の公開記事の`rankingKeys` (手元のR2の写しは読まない)、noteは記事台帳`data/note/articles.json`の`stats47Targets`、
   Kindleはbook catalogの`rankingKeys`または`blogSlug`、note と X / Instagram / YouTube はページID台帳の外部公開物
   (`data/content/external.json`。note のカタログと投稿台帳`data/sns/posts.json`から`content:sync`が作り、URL のある公開物だけを載せる)。
   集計は同じ関数 (`packages/data-configs/src/content/external.ts`) で正本の最新の中身から作り、台帳ファイルの更新待ちで遅れない。ブログの「着手できる」には
   候補キュー`data/blog/topic-queue.json`の未着手の候補を添える (2026-10-10)。
 - 展開先に「載せない・企画中・停止」と決めた判断は、全展開先とも
-  `packages/data-configs/src/evidence-inventory/placement-decisions.ts` (planned / rejected / blocked と理由) を正本にし、
+  `data/source-inventory/placement-decisions.json` (planned / rejected / blocked と理由。JSON Schema 付き) を正本にし、
   集計は済みでない展開先にだけ当てる。backlog の表や作業カードの本文に判断を置かない (テーマの企画表は 2026-10-10 に移した)。
-  制作中はブログ`contents/blog/`、note`docs/31_note記事原稿/`、Kindle catalogのstatusを読む。
+  制作中はブログ`contents/blog/`、noteは記事台帳の`status: "draft"`、Kindle catalogのstatusを読む。
   推測による「制作中」「制作済み」判定は禁止する。
+- 教材ごとの分析企画 (問い・主張・採否・展開先) は`data/source-inventory/<sourceKey>/<edition>/analyses.json`
+  (JSON Schema `data/source-inventory/analyses.schema.json`) を正本にする。企画から作った note 記事は、記事台帳の
+  `sourceAnalyses`に企画 ID を書いて結ぶ (書き込み時に ID の実在と企画の`contentRoles`の note を検査する)。
+  教材ごとの note 企画の進み具合は`npm run note:article -- sources` (未着手の一覧は`--unlinked`) で数える。
+  note を作らないと決めた企画は`contentRoles`から note を外し、`resolutionReason`に見送りの理由を追記する。
 
 ## 6. 関連
 

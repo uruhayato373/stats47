@@ -125,7 +125,7 @@ generate-charts.js が例外で止まる (監査に見えない `…` 切り詰�
 
 本文を LLM で書かない。数字はすべて `chart-data.json` と `evidence-data.json` から差し込み、
 図 5 枚 (十大費目・費目割合の 47 県タイルマップ・特徴品目 10+10・根拠ランキング 2 本) を付ける。
-根拠指標の SSOT は `packages/data-configs/src/evidence-inventory/kakei-note/expense-evidence.json`
+根拠指標の SSOT は `data/note/kakei-expense-evidence.json`
 (費目 → shareMetricKey + 根拠 metric の priority / direction / 閾値)。verdict は順位から機械判定し
 「整合する / 中位で弱い / 逆方向で説明できない」の 3 分岐で書く (相関であり因果ではない旨を固定文で付す)。
 
