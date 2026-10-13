@@ -139,7 +139,8 @@ mutation前に次をすべてAPIで確認する。
 3. GSCに`sc-domain:stats47.jp`が存在する。
 4. live inventoryから再計算したplan tokenが承認値と一致する。
 
-AdSenseは2026-09-20に恒久停止したため、`accounts.list`をidentityに含めない（2026-09-26変更）。
+AdSenseの`accounts.list`はidentityに含めない（2026-09-26変更）。当時の理由は2026-09-20の停止だった。2026-10-11に再開した新アカウントは
+stats47専用のGoogleアカウントが所有し、GA4/GSCの認証とは別の主体なので、再開後も含めない。
 AdSenseの監査は参考表示として残すが、失敗してもGA4のmutationを止めない。
 
 未取得、複数、別account、権限不足、API version driftはすべてfail closedとする。

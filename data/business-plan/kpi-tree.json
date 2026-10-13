@@ -53,9 +53,9 @@
       "label": "広告収益効率 (AdSense)",
       "tier": "driver",
       "cadence": "weekly",
-      "measurementStatus": "not-instrumented",
+      "measurementStatus": "measured",
       "unit": "円/1,000 GA4 Japan PV",
-      "source": "AdSense 収益 + data/ga4/history-finalized7d.csv"
+      "source": "data/adsense/history.csv + data/ga4/history-finalized7d.csv"
     },
     {
       "id": "site-circulation-rate",

@@ -161,7 +161,7 @@
 
 | 組 | 扱い | 境界 |
 |---|---|---|
-| adsense-analyst → affiliate-manager | 統合 (廃止) | AdSense は 2026-09-20 に恒久停止。残っていたアフィリエイト収益の計測分析と停止の維持確認を affiliate-manager へ |
+| adsense-analyst → affiliate-manager | 統合 (廃止) | AdSense は 2026-09-20 に恒久停止。残っていたアフィリエイト収益の計測分析と停止の維持確認を affiliate-manager へ。2026-10-11 の AdSense 再開後は、停止の維持確認を AdSense の配置改善 (`/adsense-improvement`) に置き換えて affiliate-manager が持つ |
 | asp-scout / affiliate-operator | 維持 | A8 の新規開拓 (探索・申請・コード取得) は asp-scout。3 ASP の状態照合、もしも・afb の申請、afb のコード取得は affiliate-operator |
 | ui-reviewer / ui-consistency-reviewer / code-reviewer | 維持 | デザイン規約への準拠と専門家評価 / ページをまたぐ一貫性とデザイン SSOT のずれ / コードの品質と安全性 |
 | theme-ui-manager / ranking-ui-manager / site-ux-manager | 維持 | 担当ファイルで分ける (テーマページ / ランキングページ / サイト共通の枠) |
@@ -178,7 +178,7 @@
 | `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
 | `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
 | `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `chart-author` + `blog-critic` (企画は article-writer に統合) |
-| `adsense-analyst` | **削除済 (2026-09-30)** | `affiliate-manager` (アフィリエイト収益の計測分析・AdSense 停止の維持確認)。AdSense は 2026-09-20 に恒久停止 |
+| `adsense-analyst` | **削除済 (2026-09-30)** | `affiliate-manager` (アフィリエイト収益の計測分析・AdSense の配置改善)。AdSense は 2026-09-20 に停止し、2026-10-11 に手動枠で再開 |
 | `seo-auditor` | **削除済 (2026-07-03)** | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` (skill 参照の差し替え完了) |
 | `sns-renderer` | 役割縮退 (render 専任) | `sns-metrics-sync`, `image-prompt-curator` に分離 |
 | `theme-enhancer` | **リネーム済** | `theme-component-builder` |

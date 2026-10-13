@@ -1,9 +1,10 @@
-# AdSense 改善ログ (凍結記録)
+# AdSense 改善ログ
 
-> **2026-09-20: AdSense は恒久停止した。このログは凍結記録で、新しい施策を追記しない。**
-> 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は
-> `.claude/memory/project_monetization_contract.md`。広告レーンの改善は
-> `.claude/skills/analytics/affiliate-improvement/` で行う。
+> **2026-10-11: 新アカウント (`pub-9055416085403520`) の手動枠 11 ユニットで再開し、このログの凍結を解除した。**
+> 2026-09-20〜10-10 は「恒久停止」の凍結記録だった。再開後の施策は末尾に追記する。正典は
+> `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は `.claude/memory/project_monetization_contract.md`、
+> 運用は `/adsense-improvement`、再開の手順は backlog `ADSENSE-RESTART-01`。
+> **再開前の施策と snapshot は旧アカウント・自動広告ありの時期の記録**で、手動枠だけの今の前後比較の基準にしない。
 
 一覧・status の真実源は `.claude/todo/improvements.md`。ここは検証コマンド・仮説・期日の詳細ログ。
 記入テンプレ: `.claude/rules/evidence-based-judgment.md` §改善ログ記入テンプレ。

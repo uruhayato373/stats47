@@ -165,16 +165,18 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      真実源は `data/gsc/coverage-remediation/coverage-remediation-queue.json`。今週実行する場合だけ
      `.claude/todo/weekly.md` から参照し、完了済みの旧改善IDをTODOへ戻さない。
 
-4.5. AdSense snapshot 取得
-   `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
+4.5. 週次収益 (NSM) と AdSense
    `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <当週 YYYY-Www>` を実行し、
    「週次収益 (NSM)」節をレビューへ載せる。NSM は AdSense 確定額 + アフィリエイト発生額 + 商品の実売額で、
    **欠測は 0 円ではなく「判定不能」と出る**。判定不能が出たらその原因（多くは週次 cron の停止）を
    レビューの課題欄に書き、放置しない。
 
-   **AdSense は 2026-09-20 に恒久停止した**（正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1）。
-   `/fetch-adsense-data` と `/adsense-improvement` は運用しない。過去の snapshot は
-   `.claude/skills/analytics/adsense-improvement/reference/` に凍結記録として残す。
+   **AdSense は 2026-10-11 に新アカウントの手動枠 11 ユニットで再開した**（正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、
+   残りの手順は backlog `ADSENSE-RESTART-01`）。snapshot は `fetch-metrics-weekly.yml` が金曜に `data/adsense/snapshots/<週>/` へ取得し、
+   `history.csv` / `history-units.csv` / `LATEST.md` / `impact-LATEST.md` を更新する。レビューでは下の「AdSense」節を埋め、
+   KPI `ad-yield` (`data/measurement-cycle/LATEST.md` の KPI ツリー) を 1 行書く。`manifest.json` の `status` が `error`
+   (権限切れ等) なら 0 行なので、数値を書かず Blockers に載せる。改善の判断は `/adsense-improvement`。
+   再開後 4 週 (2026-W42〜W45) はベースライン期間で、配置を変える提案を出さない。
 
    **アフィリエイトの週次観測**: `data/affiliate/ga4-affiliate-history.csv` と
    `data/affiliate/affiliate-operations-latest.json` を見る。評価の主指標は
@@ -522,7 +524,8 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ### AdSense（過去 7 日） — snapshot CSV: `data/adsense/snapshots/YYYY-Www/`
 
-`.env.local` に AdSense OAuth 未設定の場合は本節を省略し「AdSense OAuth 未設定」と 1 行記載。
+snapshot の `manifest.json` が `status: error` の週は本節の数値を書かず「AdSense 取得失敗 (理由)」と 1 行記載する。
+2026-W35〜W41 は配信停止中なので「配信停止」と書く。Page RPM は AdSense 自身の PV が分母なので、効率の判断は KPI `ad-yield` (GA4 PV が分母) で行う。
 
 | 指標 | 今週 | 前週 | 差分 |
 |---|---|---|---|

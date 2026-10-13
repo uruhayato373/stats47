@@ -71,7 +71,7 @@ git log --oneline --since="7 days ago" | wc -l     # 直近7日のコミット�
 
 - `apps/web/src/middleware.ts` のリダイレクト設定
 - `apps/web/src/app/sitemap.ts` の動的生成状況
-- 収益チャネルの設定状況（アフィリエイト配信と計測。AdSense は 2026-09-20 に恒久停止）
+- 収益チャネルの設定状況（アフィリエイト配信と計測。AdSense は 2026-10-11 に手動枠で再開し、週次取得と KPI `ad-yield` で追う）
 - 実際に稼働している仕組み（自動投稿パイプライン等）の有無
 
 ### Phase 2: 失敗シナリオを生成（前半セクション）

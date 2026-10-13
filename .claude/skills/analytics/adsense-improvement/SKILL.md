@@ -1,15 +1,22 @@
 ---
 name: adsense-improvement
 domain: affiliate
-description: 【凍結】AdSense は 2026-09-20 に恒久停止したため、この改善ループは運用しない。reference/ の過去ログは読み取り専用の記録として残す。
+description: AdSense の週次メトリクスを広告ユニット別に追い、配置の改善施策を立てて効果を判定する。2026-10-11 に新アカウントの手動枠 11 ユニットで再開した。配置を変える・外す・効果を判定するときに使う。
 primary_agent: affiliate-manager
 ---
 
-> **2026-09-20: AdSense は恒久停止した。このループは回さない。** 正典は
-> `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は
-> `.claude/memory/project_monetization_contract.md`。新しい AdSense 施策を
-> `.claude/todo/improvements.md` へ追加しないこと。広告レーンの改善は
-> `/affiliate-improvement` で行う。以下は凍結記録として残す。
+> **2026-10-11: 新アカウント (`pub-9055416085403520`) の手動枠 11 ユニットで再開した** (自動広告・広告インテントはオフ)。
+> 2026-09-20 の「恒久停止」で凍結していたこのループを、再開に合わせて戻した。経緯と残りの手順は backlog `ADSENSE-RESTART-01`、
+> 恒久事実は `.claude/memory/project_monetization_contract.md`、収益モデルの正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1。
+>
+> - **ベースライン期間**: 再開後 4 週 (2026-W42〜W45 = 10-11〜11-07) は配置を変えない。表示の不具合 (0 幅・TagError 等) の修正だけ行う。
+>   最初の判定は W45 の週次計測 (2026-11-13 実行) のあとで、施策 ID は `ADSENSE-PLACEMENT-01`。
+>   改善台帳の active が上限 10 件で埋まっていたので (2026-10-13)、行は判定時に載せ、それまでは backlog `ADSENSE-RESTART-01` の手順⑥で追う。
+> - **主指標**: KPI `ad-yield` = AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000 (`.claude/scripts/metrics/lib/adsense-revenue.mjs`)。
+>   AdSense 自身の page views を分母にしない (GA4 の 54〜78% しか数えていない)。配置の判断はユニット別の収益・視認率 (`history-units.csv`) で行う。
+> - **週次収益 (NSM)**: 週次 Issue の「週次収益 (NSM)」節が AdSense の確定 7 日を出す。再開後に行が無い週は「判定不能」と書き、0 円にしない。
+> - **旧記録との比較**: 2026-08-29 以前の snapshot と improvement-log の旧施策は、旧アカウント・自動広告ありの時期のもの。手動枠だけの今とは条件が違うので、
+>   前後比較の基準にしない (参考値は W30〜W33 の ¥22/1,000 GA4 PV、W31 の手動枠分だけなら ¥6.7)。
 
 AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を snapshot と詳細ログで時系列追跡し、active 施策だけを `.claude/todo/improvements.md` で管理するスキル。
 
@@ -154,7 +161,7 @@ AdSense メトリクス取得の優先順:
 
 AdSense 特有の改善パターン:
 - 広告配置最適化（First Viewable Impression を意識）
-- Auto ads ON/OFF 実験
+- Auto ads ON/OFF 実験 (現在はオフ。2026-08 に自動広告が出典の文言をリンクへ書き換えた事故があるため、戻すなら原因が自動広告そのものか広告インテントだけかを AdSense 公式ヘルプで確かめ、オーナー承認を得てから。`affiliate-ads-standards.md` §12)
 - フォーマット変更（ディスプレイ → インフィード / 関連コンテンツ）
 - ページ速度改善（Core Web Vitals との相乗効果）
 - CLS 対策（AdSense は CLS の主要因になりがち）
@@ -220,5 +227,5 @@ cat data/improvement/adsense-improvement/improvement-log.md
   `.env.local` には置かない。
   そのため **snapshot 取得と unit inventory はローカルで実行できない** — `fetch-metrics-weekly.yml`
   が生成して develop に commit-back したものを読む
-- Publisher ID: `ca-pub-7995274743017484`
+- Publisher ID: `ca-pub-9055416085403520` (2026-10-11 から。所有者は stats47 専用の Google アカウント。旧 `ca-pub-7995274743017484` は使えない)
 - 本番 URL: `https://stats47.jp`
