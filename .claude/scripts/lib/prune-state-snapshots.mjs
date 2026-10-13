@@ -44,6 +44,12 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^note-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
+  // note のハッシュタグ反映の棚卸し (update-published-hashtags --audit-only)。比べるのは直近の数回だけ
+  "note-hashtag-audit": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-hashtag-audit-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
   "note-navigation": {
     directory: datasetDir("note.navigation-pilot"),
     pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,

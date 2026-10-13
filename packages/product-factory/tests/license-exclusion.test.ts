@@ -18,6 +18,9 @@ const registry = METRICS_REGISTRY as unknown as Record<string, Record<string, an
 // テスト側の独立した検出: source 配下のどこかに「[要確認]」がある指標
 const flagged = new Set(Object.keys(registry).filter((k) => JSON.stringify(registry[k].source ?? {}).includes("[要確認]")));
 
+// パックの固定データ (src/data/pack-snapshots/、git 管理外) がある環境でだけ実データの検査を実行する。CI での実行は PRODUCT-PACK-SNAPSHOT-CI-01
+const SNAPSHOTS_READY = PACK_IDS.every((id) => loadPackSnapshotDatasets(id) !== null);
+
 describe("権利要確認の指標を有料パックから除く", () => {
   it("検出対象 (定義側) が実在する: テスト自体が空振りしない", () => {
     expect(flagged.has("pachinko-shop-density-per-10k")).toBe(true);
@@ -25,14 +28,14 @@ describe("権利要確認の指標を有料パックから除く", () => {
     expect(flagged.size).toBeGreaterThanOrEqual(11);
   });
 
-  it("全パックの収録指標に、権利要確認の指標が 0 件", () => {
+  it.skipIf(!SNAPSHOTS_READY)("全パックの収録指標に、権利要確認の指標が 0 件", () => {
     for (const id of PACK_IDS) {
       const bad = loadPackSnapshotDatasets(id)!.datasets.filter((d) => flagged.has(d.rankingKey!));
       expect(bad.map((d) => d.rankingKey), id).toEqual([]);
     }
   });
 
-  it("除外件数: P-06 中体連 10 件 / P-08 パチンコ 1 件 / P-12 11 件、その他のパックは 0 件", () => {
+  it.skipIf(!SNAPSHOTS_READY)("除外件数: P-06 中体連 10 件 / P-08 パチンコ 1 件 / P-12 11 件、その他のパックは 0 件", () => {
     const expected: Record<string, number> = { "P-06": 10, "P-08": 1, "P-12": 11 };
     for (const id of PACK_IDS) {
       const loaded = loadPackSnapshotDatasets(id)!;
@@ -43,7 +46,7 @@ describe("権利要確認の指標を有料パックから除く", () => {
     expect(loadPackSnapshotDatasets("P-12")!.datasets.length).toBe(2073);
   });
 
-  it("除外記録には指標キー・指標名・理由 (license 欄の「要確認」) が入る", () => {
+  it.skipIf(!SNAPSHOTS_READY)("除外記録には指標キー・指標名・理由 (license 欄の「要確認」) が入る", () => {
     const ex = loadPackSnapshotDatasets("P-08")!.excluded!;
     expect(ex).toHaveLength(1);
     expect(ex[0].rankingKey).toBe("pachinko-shop-density-per-10k");
@@ -65,7 +68,7 @@ describe("権利要確認の指標を有料パックから除く", () => {
     expect(unconfirmedLicense(reg.none, reg)).toBeNull();
   });
 
-  it("除外した指標名と理由を READINESS.md に残す。無料パック P-13 は除外なし", async () => {
+  it.skipIf(!SNAPSHOTS_READY)("除外した指標名と理由を READINESS.md に残す。無料パック P-13 は除外なし", async () => {
     const dir = mkdtempSync(join(tmpdir(), "pf-excl-"));
     try {
       const product = ALL_PRODUCTS.find((p) => p.id === "P-08")!;
