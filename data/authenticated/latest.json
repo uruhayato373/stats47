@@ -1,28 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T17:01:49.525Z",
-  "runId": "38434697275",
+  "generatedAt": "2026-10-13T22:06:44.696Z",
+  "runId": "38474932850",
   "sources": [
     {
       "source": "moshimo",
       "capability": "outcomes",
-      "observedAt": "2026-10-13T17:00:13.619Z",
+      "observedAt": "2026-10-13T22:04:22.234Z",
       "activated": true,
-      "status": "failed",
-      "code": "auth_required",
-      "runId": "38434697275",
+      "status": "pass",
+      "code": null,
+      "runId": "38474932850",
       "runAttempt": 1,
-      "metricsAvailable": false,
+      "metricsAvailable": true,
       "inventoryAvailable": false,
-      "collectionAttempted": false,
-      "relogin": "login_failed",
-      "recovery": {
-        "state": "awaiting_reauthentication",
-        "blockedSince": "2026-10-13T17:00:13.619Z"
-      },
+      "collectionAttempted": true,
+      "relogin": "session_valid",
+      "recovery": null,
       "evidence": {
-        "sha256": "4dfd04539290070ad3005a12dc07107573857051e3b93515bf4500f01654d54c",
-        "bytes": 160
+        "sha256": "138eb8aa6b8353da074354f08758df65d869dcdc57b5a68d41619f78c8c6078c",
+        "bytes": 24010
       },
       "quality": null,
       "knownIncomplete": null,
@@ -31,11 +28,11 @@
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-10-13T17:00:07.912Z",
+      "observedAt": "2026-10-13T22:04:12.369Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -43,8 +40,8 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "92a0858f17089dc21c0f66f63c7b4b150bc06aebad8108fdf171aa0548de7aa4",
-        "bytes": 210108
+        "sha256": "695cca436bad01c3955eb24a5d74bed7a837bd10e65e9bc75ba5d2b5bf99016b",
+        "bytes": 210112
       },
       "quality": null,
       "knownIncomplete": null,
@@ -53,11 +50,11 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-10-13T16:59:56.791Z",
+      "observedAt": "2026-10-13T22:04:24.007Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -65,7 +62,7 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "d9bc649d22717c8a0173cf69dad3d258f4c65a64d59b6aeb7a617f4c4431a9da",
+        "sha256": "92df138a0efdaed363c307f0aa6a97767b1389912024a33c3060d7e3a3eff730",
         "bytes": 1409
       },
       "quality": {
@@ -79,11 +76,11 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-10-13T16:59:34.532Z",
+      "observedAt": "2026-10-13T22:05:17.442Z",
       "activated": true,
       "status": "failed",
       "code": "report_incomplete",
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -91,12 +88,12 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "e19a03924c88d5415fc79745f5f85a07da4c3626b6893420a7de4da8cad7557f",
-        "bytes": 1274921
+        "sha256": "4bab2b21b9bfc6ff85fd65be1533882a231ad94039e8035f52fa1b1b9275dc10",
+        "bytes": 1313868
       },
       "quality": {
         "expectedRows": 306,
-        "observedRows": 326,
+        "observedRows": 335,
         "missingRows": 0,
         "totalsMatched": true,
         "paginationComplete": true,
@@ -109,11 +106,11 @@
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": "2026-10-13T17:00:29.146Z",
+      "observedAt": "2026-10-13T22:04:51.398Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -121,7 +118,7 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "cdd56e36a1efdd07ce21ee1375c382e61c1f71a6aaa06c875ebb58c1b1019e47",
+        "sha256": "6a43958c7da06bff6ac71c19625d2f70cd219b7a600717d549953fc3e42d2e8e",
         "bytes": 3027490
       },
       "quality": null,
@@ -131,11 +128,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-13T17:00:39.369Z",
+      "observedAt": "2026-10-13T22:05:00.044Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -146,7 +143,7 @@
         "blockedSince": "2026-09-30T08:35:08.183Z"
       },
       "evidence": {
-        "sha256": "a8262843f3d96c8a69cef70c5da672e5dfc2fa08fd0138e85c6f398489be9c4a",
+        "sha256": "fb3281a93f3af32ec5c8b57f38245188e416783deb773aecc7607e40055ea968",
         "bytes": 159
       },
       "quality": null,
@@ -156,11 +153,11 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-10-13T16:59:38.698Z",
+      "observedAt": "2026-10-13T22:05:05.227Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -168,7 +165,7 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "274248c91c8e09e3726176adcb9991ff65203fb8218bffd2449c52f23a254dc2",
+        "sha256": "63b7c300bd26eaa18e72d37a9fff5137a2eb20b9603d664f1b85567bbfd4bbcf",
         "bytes": 1045
       },
       "quality": null,
@@ -178,11 +175,11 @@
     {
       "source": "coconala",
       "capability": "marketplace-metrics",
-      "observedAt": "2026-10-13T17:00:35.082Z",
+      "observedAt": "2026-10-13T22:05:16.479Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "38434697275",
+      "runId": "38474932850",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -193,7 +190,7 @@
         "blockedSince": "2026-10-01T12:39:06.962Z"
       },
       "evidence": {
-        "sha256": "5dc4ac8e7e941ba510d1d50a6670c3dbb0207d8e75bf309123c0312c3a62623b",
+        "sha256": "6d25976d12c23a912ed2a3f40cb7a66a3f66f2f117ee72ef1194b50c40f51d16",
         "bytes": 164
       },
       "quality": null,
