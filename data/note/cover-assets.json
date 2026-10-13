@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-13T03:10:57.955Z",
+  "updatedAt": "2026-10-13T12:14:16.051Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13116,225 +13116,1225 @@
     {
       "articleKey": "b-ref-dev-a02",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a02/revisions/3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81.png"
+          },
+          "bytes": 33775,
+          "id": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:09.152Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:11:56.929Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a02/inputs/c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676.json"
+              },
+              "bytes": 1287
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
+      "approvedRevisionId": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a03",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a03/revisions/b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9.png"
+          },
+          "bytes": 39079,
+          "id": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:12.766Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:11:58.552Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a03/inputs/9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e.json"
+              },
+              "bytes": 1339
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
+      "approvedRevisionId": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a04/revisions/5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917.png"
+          },
+          "bytes": 37965,
+          "id": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:17.181Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:11:59.938Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a04/inputs/ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef.json"
+              },
+              "bytes": 1266
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
+      "approvedRevisionId": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a05",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a05/revisions/881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a.png"
+          },
+          "bytes": 36322,
+          "id": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:20.946Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:01.505Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a05/inputs/e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2.json"
+              },
+              "bytes": 1318
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
+      "approvedRevisionId": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a06",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a06/revisions/e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b.png"
+          },
+          "bytes": 37341,
+          "id": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:25.075Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:03.108Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a06/inputs/3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19.json"
+              },
+              "bytes": 1297
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
+      "approvedRevisionId": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a07",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a07/revisions/2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f.png"
+          },
+          "bytes": 34346,
+          "id": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:29.073Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:05.934Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a07/inputs/a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca.json"
+              },
+              "bytes": 1315
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
+      "approvedRevisionId": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a08",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a08/revisions/27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3.png"
+          },
+          "bytes": 34912,
+          "id": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:33.063Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:07.804Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a08/inputs/e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546.json"
+              },
+              "bytes": 1346
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
+      "approvedRevisionId": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a09",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a09/revisions/db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102.png"
+          },
+          "bytes": 35955,
+          "id": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:37.203Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:09.758Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a09/inputs/67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607.json"
+              },
+              "bytes": 1242
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
+      "approvedRevisionId": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a11",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a11/revisions/a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0.png"
+          },
+          "bytes": 35933,
+          "id": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:41.986Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:11.247Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a11/inputs/66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e.json"
+              },
+              "bytes": 1313
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
+      "approvedRevisionId": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a13",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a13/revisions/6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579.png"
+          },
+          "bytes": 36472,
+          "id": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:46.318Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:12.735Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a13/inputs/01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687.json"
+              },
+              "bytes": 1292
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
+      "approvedRevisionId": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a15",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a15/revisions/3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a.png"
+          },
+          "bytes": 33780,
+          "id": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:51.428Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:14.201Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a15/inputs/a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a.json"
+              },
+              "bytes": 1353
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
+      "approvedRevisionId": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a17",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a17/revisions/e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155.png"
+          },
+          "bytes": 35669,
+          "id": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:55.502Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:15.659Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a17/inputs/4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2.json"
+              },
+              "bytes": 1255
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
+      "approvedRevisionId": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a19",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a19/revisions/1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3.png"
+          },
+          "bytes": 38414,
+          "id": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:59.860Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:17.345Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a19/inputs/72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1.json"
+              },
+              "bytes": 1313
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
+      "approvedRevisionId": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a21",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a21/revisions/b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0.png"
+          },
+          "bytes": 33388,
+          "id": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:04.789Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:18.693Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a21/inputs/89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c.json"
+              },
+              "bytes": 1271
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
+      "approvedRevisionId": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a26",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a26/revisions/04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1.png"
+          },
+          "bytes": 36314,
+          "id": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:09.226Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:20.174Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a26/inputs/af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa.json"
+              },
+              "bytes": 1294
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
+      "approvedRevisionId": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a31",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a31/revisions/e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3.png"
+          },
+          "bytes": 39580,
+          "id": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:13.586Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:21.648Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a31/inputs/e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381.json"
+              },
+              "bytes": 1338
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
+      "approvedRevisionId": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a32",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a32/revisions/2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd.png"
+          },
+          "bytes": 39600,
+          "id": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:15.288Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:23.122Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a32/inputs/82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396.json"
+              },
+              "bytes": 1324
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
+      "approvedRevisionId": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a36",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a36/revisions/5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa.png"
+          },
+          "bytes": 35632,
+          "id": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:17.785Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:24.674Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a36/inputs/310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e.json"
+              },
+              "bytes": 1284
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
+      "approvedRevisionId": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a40",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a40/revisions/f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868.png"
+          },
+          "bytes": 36061,
+          "id": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:22.641Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:25.968Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a40/inputs/306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d.json"
+              },
+              "bytes": 1304
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
+      "approvedRevisionId": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a42",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a42/revisions/5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c.png"
+          },
+          "bytes": 34011,
+          "id": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:27.041Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:27.473Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a42/inputs/446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb.json"
+              },
+              "bytes": 1269
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
+      "approvedRevisionId": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a45",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a45/revisions/efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e.png"
+          },
+          "bytes": 39865,
+          "id": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:31.207Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:28.817Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a45/inputs/e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a.json"
+              },
+              "bytes": 1325
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
+      "approvedRevisionId": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a49",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a49/revisions/706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8.png"
+          },
+          "bytes": 34743,
+          "id": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:36.254Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:30.354Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a49/inputs/7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4.json"
+              },
+              "bytes": 1282
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
+      "approvedRevisionId": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-dev-a51",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a51/revisions/500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2.png"
+          },
+          "bytes": 31950,
+          "id": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:41.196Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:31.953Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-dev-a51/inputs/2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd.json"
+              },
+              "bytes": 1233
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
+      "approvedRevisionId": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-gis-a33",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-gis-a33/revisions/33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9.png"
+          },
+          "bytes": 37526,
+          "id": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:37.759Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:33.256Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-gis-a33/inputs/b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef.json"
+              },
+              "bytes": 1362
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
+      "approvedRevisionId": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-inc-a05",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a05/revisions/4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5.png"
+          },
+          "bytes": 41019,
+          "id": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:28.651Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:34.681Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-inc-a05/inputs/f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df.json"
+              },
+              "bytes": 1362
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
+      "approvedRevisionId": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
       "published": null,
       "missingVersions": []
     },
@@ -13390,90 +14390,490 @@
     {
       "articleKey": "b-ref-inc-a55",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a55/revisions/14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b.png"
+          },
+          "bytes": 38280,
+          "id": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:33.659Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:36.120Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-inc-a55/inputs/2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7.json"
+              },
+              "bytes": 1342
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
+      "approvedRevisionId": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a01-01",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-01/revisions/dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257.png"
+          },
+          "bytes": 36730,
+          "id": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:43.408Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:37.771Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a01-01/inputs/3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56.json"
+              },
+              "bytes": 1322
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
+      "approvedRevisionId": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a01-04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-04/revisions/15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c.png"
+          },
+          "bytes": 38171,
+          "id": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:42.664Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:39.138Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a01-04/inputs/9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a.json"
+              },
+              "bytes": 1329
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
+      "approvedRevisionId": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a01-05",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-05/revisions/cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47.png"
+          },
+          "bytes": 45951,
+          "id": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:50.511Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:40.623Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a01-05/inputs/36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce.json"
+              },
+              "bytes": 1307
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
+      "approvedRevisionId": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-02",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-02/revisions/f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df.png"
+          },
+          "bytes": 45922,
+          "id": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:55.020Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:42.531Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-02/inputs/b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592.json"
+              },
+              "bytes": 1284
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
+      "approvedRevisionId": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-04/revisions/3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd.png"
+          },
+          "bytes": 43308,
+          "id": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:00.034Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:44.819Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-04/inputs/5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091.json"
+              },
+              "bytes": 1291
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
+      "approvedRevisionId": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-05",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-05/revisions/ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1.png"
+          },
+          "bytes": 45285,
+          "id": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:05.521Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:46.200Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-05/inputs/1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1.json"
+              },
+              "bytes": 1304
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
+      "approvedRevisionId": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-06",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-06/revisions/c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200.png"
+          },
+          "bytes": 41660,
+          "id": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:09.967Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:47.585Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-06/inputs/231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331.json"
+              },
+              "bytes": 1296
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
+      "approvedRevisionId": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-07",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-07/revisions/e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473.png"
+          },
+          "bytes": 45664,
+          "id": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:13.967Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:48.982Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-07/inputs/cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0.json"
+              },
+              "bytes": 1299
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
+      "approvedRevisionId": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a02-08",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-08/revisions/f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a.png"
+          },
+          "bytes": 48012,
+          "id": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:17.955Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:50.532Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a02-08/inputs/1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336.json"
+              },
+              "bytes": 1346
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
+      "approvedRevisionId": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
       "published": null,
       "missingVersions": []
     },
@@ -13529,27 +14929,147 @@
     {
       "articleKey": "b-ref-kakei-a03-01",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-01/revisions/b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30.png"
+          },
+          "bytes": 42996,
+          "id": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:22.792Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:52.196Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a03-01/inputs/5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba.json"
+              },
+              "bytes": 1288
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
+      "approvedRevisionId": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a03-04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-04/revisions/1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f.png"
+          },
+          "bytes": 44859,
+          "id": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:26.807Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:53.563Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a03-04/inputs/8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1.json"
+              },
+              "bytes": 1286
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
+      "approvedRevisionId": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a04-01",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-01/revisions/25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c.png"
+          },
+          "bytes": 47731,
+          "id": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:30.659Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:55.171Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a04-01/inputs/bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02.json"
+              },
+              "bytes": 1326
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
+      "approvedRevisionId": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
       "published": null,
       "missingVersions": []
     },
@@ -13605,63 +15125,343 @@
     {
       "articleKey": "b-ref-kakei-a04-03",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-03/revisions/78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe.png"
+          },
+          "bytes": 39925,
+          "id": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:46.613Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:56.693Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a04-03/inputs/a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1.json"
+              },
+              "bytes": 1282
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
+      "approvedRevisionId": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a04-04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-04/revisions/259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8.png"
+          },
+          "bytes": 46690,
+          "id": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:34.835Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:58.373Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a04-04/inputs/f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50.json"
+              },
+              "bytes": 1327
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
+      "approvedRevisionId": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a05-04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-04/revisions/265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74.png"
+          },
+          "bytes": 47602,
+          "id": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:11:38.968Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:12:59.852Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a05-04/inputs/a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b.json"
+              },
+              "bytes": 1287
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
+      "approvedRevisionId": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-kakei-a05-06",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-06/revisions/74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc.png"
+          },
+          "bytes": 37767,
+          "id": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:50.404Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:02.206Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-kakei-a05-06/inputs/ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591.json"
+              },
+              "bytes": 1306
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
+      "approvedRevisionId": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-mh-a04",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a04/revisions/591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d.png"
+          },
+          "bytes": 37587,
+          "id": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:54.564Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:04.416Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-mh-a04/inputs/7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977.json"
+              },
+              "bytes": 1331
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
+      "approvedRevisionId": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-mh-a07",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a07/revisions/a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa.png"
+          },
+          "bytes": 32596,
+          "id": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:05:59.377Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:06.046Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-mh-a07/inputs/b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662.json"
+              },
+              "bytes": 1299
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
+      "approvedRevisionId": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-mh-a08",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a08/revisions/309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e.png"
+          },
+          "bytes": 38235,
+          "id": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:03.587Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:07.456Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-mh-a08/inputs/14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f.json"
+              },
+              "bytes": 1352
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
+      "approvedRevisionId": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
       "published": null,
       "missingVersions": []
     },
@@ -13677,216 +15477,1176 @@
     {
       "articleKey": "b-ref-mh-a10",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a10/revisions/b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c.png"
+          },
+          "bytes": 39880,
+          "id": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:06:08.285Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:09.057Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-mh-a10/inputs/7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff.json"
+              },
+              "bytes": 1383
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
+      "approvedRevisionId": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a07",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a07/revisions/a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c.png"
+          },
+          "bytes": 39161,
+          "id": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:45.459Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:10.881Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a07/inputs/b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30.json"
+              },
+              "bytes": 1371
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
+      "approvedRevisionId": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a09",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a09/revisions/3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf.png"
+          },
+          "bytes": 38683,
+          "id": "3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:49.592Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3469d251cc133dac885a045121996f65bce56d24d9bd039ed23ad64e4665f302"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:12.754Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3469d251cc133dac885a045121996f65bce56d24d9bd039ed23ad64e4665f302",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a09/inputs/3469d251cc133dac885a045121996f65bce56d24d9bd039ed23ad64e4665f302.json"
+              },
+              "bytes": 1389
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf",
+      "approvedRevisionId": "3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a10",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a10/revisions/162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a.png"
+          },
+          "bytes": 36003,
+          "id": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:54.590Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:14.203Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a10/inputs/c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29.json"
+              },
+              "bytes": 1356
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
+      "approvedRevisionId": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a12",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a12/revisions/3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263.png"
+          },
+          "bytes": 34991,
+          "id": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:07:58.203Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:15.821Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a12/inputs/ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539.json"
+              },
+              "bytes": 1301
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
+      "approvedRevisionId": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a13",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a13/revisions/be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d.png"
+          },
+          "bytes": 37696,
+          "id": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:02.218Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:17.158Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a13/inputs/aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52.json"
+              },
+              "bytes": 1379
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
+      "approvedRevisionId": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a14",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a14/revisions/5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130.png"
+          },
+          "bytes": 34749,
+          "id": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:06.167Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:18.579Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a14/inputs/94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99.json"
+              },
+              "bytes": 1336
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
+      "approvedRevisionId": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a15",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a15/revisions/bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71.png"
+          },
+          "bytes": 36733,
+          "id": "bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:10.522Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5be553429de7f5253cd54843ecdc8a224605550dd32c03038bcb00b6e7a17b22"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:19.968Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5be553429de7f5253cd54843ecdc8a224605550dd32c03038bcb00b6e7a17b22",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a15/inputs/5be553429de7f5253cd54843ecdc8a224605550dd32c03038bcb00b6e7a17b22.json"
+              },
+              "bytes": 1373
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71",
+      "approvedRevisionId": "bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a16",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a16/revisions/5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f.png"
+          },
+          "bytes": 37545,
+          "id": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:14.430Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:21.447Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a16/inputs/e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2.json"
+              },
+              "bytes": 1374
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
+      "approvedRevisionId": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a17",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a17/revisions/2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a.png"
+          },
+          "bytes": 37074,
+          "id": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:18.141Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:22.997Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a17/inputs/e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b.json"
+              },
+              "bytes": 1301
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
+      "approvedRevisionId": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a18",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a18/revisions/b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8.png"
+          },
+          "bytes": 36856,
+          "id": "b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:22.226Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e478033d1857cad769d9c487d8bb0faf7db1e3c05916a8ac2ad09bcb3645210a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:24.442Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e478033d1857cad769d9c487d8bb0faf7db1e3c05916a8ac2ad09bcb3645210a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a18/inputs/e478033d1857cad769d9c487d8bb0faf7db1e3c05916a8ac2ad09bcb3645210a.json"
+              },
+              "bytes": 1316
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8",
+      "approvedRevisionId": "b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a19",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a19/revisions/4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11.png"
+          },
+          "bytes": 34273,
+          "id": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:26.041Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:25.929Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a19/inputs/79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03.json"
+              },
+              "bytes": 1317
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
+      "approvedRevisionId": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a20",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a20/revisions/dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863.png"
+          },
+          "bytes": 34135,
+          "id": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:30.636Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:27.697Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a20/inputs/47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2.json"
+              },
+              "bytes": 1337
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
+      "approvedRevisionId": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a21",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a21/revisions/d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b.png"
+          },
+          "bytes": 34101,
+          "id": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:34.600Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:29.098Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a21/inputs/b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245.json"
+              },
+              "bytes": 1334
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
+      "approvedRevisionId": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a22",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a22/revisions/430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208.png"
+          },
+          "bytes": 38758,
+          "id": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:38.416Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:30.574Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a22/inputs/bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015.json"
+              },
+              "bytes": 1353
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
+      "approvedRevisionId": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a24",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a24/revisions/67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f.png"
+          },
+          "bytes": 34781,
+          "id": "67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:42.315Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8f5091b502deb4d5e7696d5c77483b071d8af130916ae50ba11a9f6454440da4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:32.105Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8f5091b502deb4d5e7696d5c77483b071d8af130916ae50ba11a9f6454440da4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a24/inputs/8f5091b502deb4d5e7696d5c77483b071d8af130916ae50ba11a9f6454440da4.json"
+              },
+              "bytes": 1302
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f",
+      "approvedRevisionId": "67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a25",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a25/revisions/7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1.png"
+          },
+          "bytes": 37150,
+          "id": "7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:46.130Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "92c69720e876be123878cef59debac9d7a1a04d4f8b37cabfa3d5061f2d9ee13"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:33.643Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "92c69720e876be123878cef59debac9d7a1a04d4f8b37cabfa3d5061f2d9ee13",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a25/inputs/92c69720e876be123878cef59debac9d7a1a04d4f8b37cabfa3d5061f2d9ee13.json"
+              },
+              "bytes": 1325
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1",
+      "approvedRevisionId": "7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a26",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a26/revisions/6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca.png"
+          },
+          "bytes": 31736,
+          "id": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:53.039Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:35.095Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a26/inputs/7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133.json"
+              },
+              "bytes": 1295
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
+      "approvedRevisionId": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a27",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a27/revisions/c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04.png"
+          },
+          "bytes": 39034,
+          "id": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:08:56.927Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:36.371Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a27/inputs/be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b.json"
+              },
+              "bytes": 1362
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
+      "approvedRevisionId": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a28",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a28/revisions/560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9.png"
+          },
+          "bytes": 37518,
+          "id": "560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:00.550Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a9c42e574878f486d183a46199159ccf4dc595fd9f46cb5dcefe0d5a1fdb1955"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:38.034Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a9c42e574878f486d183a46199159ccf4dc595fd9f46cb5dcefe0d5a1fdb1955",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a28/inputs/a9c42e574878f486d183a46199159ccf4dc595fd9f46cb5dcefe0d5a1fdb1955.json"
+              },
+              "bytes": 1312
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9",
+      "approvedRevisionId": "560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a29",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a29/revisions/264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751.png"
+          },
+          "bytes": 36933,
+          "id": "264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:06.107Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "88de6690edf11953013a4aede35346f5a06ed8ce6d7919fd9a7088bbe879f5a1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:39.684Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "88de6690edf11953013a4aede35346f5a06ed8ce6d7919fd9a7088bbe879f5a1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a29/inputs/88de6690edf11953013a4aede35346f5a06ed8ce6d7919fd9a7088bbe879f5a1.json"
+              },
+              "bytes": 1281
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751",
+      "approvedRevisionId": "264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a30",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a30/revisions/b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece.png"
+          },
+          "bytes": 35924,
+          "id": "b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:09.956Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "eda3aa8e017fe734ad30cf7981d45458233b4d22c6b3e380e65a2582dd0ac377"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:41.126Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "eda3aa8e017fe734ad30cf7981d45458233b4d22c6b3e380e65a2582dd0ac377",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a30/inputs/eda3aa8e017fe734ad30cf7981d45458233b4d22c6b3e380e65a2582dd0ac377.json"
+              },
+              "bytes": 1301
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece",
+      "approvedRevisionId": "b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a31",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a31/revisions/02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597.png"
+          },
+          "bytes": 34927,
+          "id": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:13.864Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:42.509Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a31/inputs/56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b.json"
+              },
+              "bytes": 1297
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
+      "approvedRevisionId": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a32",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a32/revisions/7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3.png"
+          },
+          "bytes": 36073,
+          "id": "7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:17.636Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "468fe14b256b39511b532249aaeddca66b4559e93741b2ed6329ec57a7846e49"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:43.980Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "468fe14b256b39511b532249aaeddca66b4559e93741b2ed6329ec57a7846e49",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a32/inputs/468fe14b256b39511b532249aaeddca66b4559e93741b2ed6329ec57a7846e49.json"
+              },
+              "bytes": 1301
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3",
+      "approvedRevisionId": "7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3",
       "published": null,
       "missingVersions": []
     },
@@ -13947,36 +16707,196 @@
     {
       "articleKey": "b-ref-prc-a34",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a34/revisions/c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f.png"
+          },
+          "bytes": 39609,
+          "id": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:21.787Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:45.544Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a34/inputs/3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636.json"
+              },
+              "bytes": 1322
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
+      "approvedRevisionId": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a35",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a35/revisions/8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc.png"
+          },
+          "bytes": 34901,
+          "id": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:25.623Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:47.053Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a35/inputs/2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e.json"
+              },
+              "bytes": 1278
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
+      "approvedRevisionId": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a36",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a36/revisions/45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57.png"
+          },
+          "bytes": 33685,
+          "id": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:29.553Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:48.415Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a36/inputs/e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a.json"
+              },
+              "bytes": 1273
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
+      "approvedRevisionId": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a37",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a37/revisions/78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f.png"
+          },
+          "bytes": 35531,
+          "id": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:33.550Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:49.829Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a37/inputs/af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6.json"
+              },
+              "bytes": 1277
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
+      "approvedRevisionId": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
       "published": null,
       "missingVersions": []
     },
@@ -14032,117 +16952,637 @@
     {
       "articleKey": "b-ref-prc-a39",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a39/revisions/ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b.png"
+          },
+          "bytes": 36786,
+          "id": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:37.700Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:51.269Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a39/inputs/d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb.json"
+              },
+              "bytes": 1293
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
+      "approvedRevisionId": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a40",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a40/revisions/da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7.png"
+          },
+          "bytes": 37361,
+          "id": "da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:42.063Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f10180ed718e8a930536c4dd78d843fdb9a8c3d96fc0657cc2bda9c783394e90"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:52.705Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f10180ed718e8a930536c4dd78d843fdb9a8c3d96fc0657cc2bda9c783394e90",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a40/inputs/f10180ed718e8a930536c4dd78d843fdb9a8c3d96fc0657cc2bda9c783394e90.json"
+              },
+              "bytes": 1283
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7",
+      "approvedRevisionId": "da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a41",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a41/revisions/317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028.png"
+          },
+          "bytes": 46172,
+          "id": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:19.189Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:54.097Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a41/inputs/2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0.json"
+              },
+              "bytes": 1209
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
+      "approvedRevisionId": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a42",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a42/revisions/5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2.png"
+          },
+          "bytes": 38981,
+          "id": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:46.406Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:55.707Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a42/inputs/f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9.json"
+              },
+              "bytes": 1322
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
+      "approvedRevisionId": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a43",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a43/revisions/6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26.png"
+          },
+          "bytes": 34899,
+          "id": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:50.829Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:57.055Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a43/inputs/1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454.json"
+              },
+              "bytes": 1286
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
+      "approvedRevisionId": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a44",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a44/revisions/d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f.png"
+          },
+          "bytes": 34571,
+          "id": "d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:55.614Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2ff39496d7c87749d39e5da1b7c360c8948e01dfab39de7745059f1d64f38e95"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:13:58.463Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2ff39496d7c87749d39e5da1b7c360c8948e01dfab39de7745059f1d64f38e95",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a44/inputs/2ff39496d7c87749d39e5da1b7c360c8948e01dfab39de7745059f1d64f38e95.json"
+              },
+              "bytes": 1290
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f",
+      "approvedRevisionId": "d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a45",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a45/revisions/97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00.png"
+          },
+          "bytes": 38848,
+          "id": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:09:59.723Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:00.225Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a45/inputs/fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce.json"
+              },
+              "bytes": 1314
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
+      "approvedRevisionId": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a47",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a47/revisions/d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde.png"
+          },
+          "bytes": 40766,
+          "id": "d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:25.981Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "963e9a07a80cb8982e754db451f8052c978f4c8d9e8a679d4d143044c8fa256c"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:01.778Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "963e9a07a80cb8982e754db451f8052c978f4c8d9e8a679d4d143044c8fa256c",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a47/inputs/963e9a07a80cb8982e754db451f8052c978f4c8d9e8a679d4d143044c8fa256c.json"
+              },
+              "bytes": 1182
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde",
+      "approvedRevisionId": "d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a48",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a48/revisions/a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277.png"
+          },
+          "bytes": 41264,
+          "id": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:30.553Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:03.429Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a48/inputs/a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4.json"
+              },
+              "bytes": 1178
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
+      "approvedRevisionId": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a49",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a49/revisions/69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32.png"
+          },
+          "bytes": 39166,
+          "id": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:34.214Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:05.102Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a49/inputs/d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0.json"
+              },
+              "bytes": 1174
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
+      "approvedRevisionId": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a50",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a50/revisions/eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268.png"
+          },
+          "bytes": 41353,
+          "id": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:38.863Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:06.817Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a50/inputs/163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496.json"
+              },
+              "bytes": 1186
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
+      "approvedRevisionId": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a51",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a51/revisions/aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da.png"
+          },
+          "bytes": 38035,
+          "id": "aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:42.731Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "df35ad037a78f9ce7e2bec9e50d7ce9d6d473e57965374d8bfdcf1a12a3c8c23"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:08.191Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "df35ad037a78f9ce7e2bec9e50d7ce9d6d473e57965374d8bfdcf1a12a3c8c23",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a51/inputs/df35ad037a78f9ce7e2bec9e50d7ce9d6d473e57965374d8bfdcf1a12a3c8c23.json"
+              },
+              "bytes": 1229
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da",
+      "approvedRevisionId": "aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da",
       "published": null,
       "missingVersions": []
     },
     {
       "articleKey": "b-ref-prc-a52",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a52/revisions/7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da.png"
+          },
+          "bytes": 42096,
+          "id": "7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-13T12:10:46.458Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9c56205d42c881f08e439efa657040e3fe2313c063d9c032a952db76e190769a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+            "reviewedAt": "2026-10-13T12:14:16.051Z"
+          },
+          "provenance": {
+            "renderer": "ranking-story-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9c56205d42c881f08e439efa657040e3fe2313c063d9c032a952db76e190769a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-prc-a52/inputs/9c56205d42c881f08e439efa657040e3fe2313c063d9c032a952db76e190769a.json"
+              },
+              "bytes": 1234
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da",
+      "approvedRevisionId": "7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da",
       "published": null,
       "missingVersions": []
     },
