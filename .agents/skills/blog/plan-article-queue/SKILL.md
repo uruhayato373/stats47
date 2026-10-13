@@ -24,6 +24,15 @@ primary_agent: trend-scout
 
 ## 手順
 
+### Step 0: 教材 (参考文献) の未着手企画を読む
+
+```bash
+npm run reference:expansion -- pending --channel blog
+```
+
+書籍の問いから作るブログ候補。同じ指標の公開記事が候補に出るので、問いが同じなら `record --status done --target blog:<slug>`、
+キューに入れて書くなら書いたあとに `done`、書かないなら `declined --reason` を記録する (正典 `.claude/rules/reference-source-standards.md` §5「分析企画の展開」)。
+
 ### Step 1: キューを最新化
 
 ```bash

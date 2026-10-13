@@ -180,11 +180,30 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   集計は済みでない展開先にだけ当てる。backlog の表や作業カードの本文に判断を置かない (テーマの企画表は 2026-10-10 に移した)。
   制作中はブログ`contents/blog/`、noteは記事台帳の`status: "draft"`、Kindle catalogのstatusを読む。
   推測による「制作中」「制作済み」判定は禁止する。
-- 教材ごとの分析企画 (問い・主張・採否・展開先) は`data/source-inventory/<sourceKey>/<edition>/analyses.json`
-  (JSON Schema `data/source-inventory/analyses.schema.json`) を正本にする。企画から作った note 記事は、記事台帳の
-  `sourceAnalyses`に企画 ID を書いて結ぶ (書き込み時に ID の実在と企画の`contentRoles`の note を検査する)。
-  教材ごとの note 企画の進み具合は`npm run note:article -- sources` (未着手の一覧は`--unlinked`) で数える。
-  note を作らないと決めた企画は`contentRoles`から note を外し、`resolutionReason`に見送りの理由を追記する。
+### 分析企画の展開 (2026-10-13)
+
+教材ごとの分析企画 (問い・主張・採否・展開先) は`data/source-inventory/<sourceKey>/<edition>/analyses.json`
+(JSON Schema `analyses.schema.json`) を正本にする。採択した企画 (`reuse-existing-metric`・`new-metric`・`combined-analysis`) の
+`contentRoles` が展開先の宛先で、企画 × 展開先ごとの結果は展開記録`data/source-inventory/expansion.json` (JSON Schema 付き) に置く。
+
+| 状態 | 決まり方 |
+|---|---|
+| 済み (記録) | `status: "done"` + `target` に公開中のページ ID (`data/content` の id 体系。`blog:<slug>`・`note:<記事key>`・`sns:<投稿ID>`・`theme:<key>`・`area-theme:<code>:<theme>` など) |
+| 済み (自動) | ランキング・調査・テーマ・全国だけ。企画の指標がすべて公開中のランキング / テーマ / 全国ページに、調査がすべて公開中の調査ページに載っていれば記録なしで済み |
+| 企画中 | `status: "planned"` (`target` は下書きのページ ID でもよい) |
+| 見送り | `status: "declined"` + `reason` (読み手にとって載せる価値が無い・一次資料で再検証できない等) |
+| 未着手 | 上のどれでもない |
+
+- ブログ・note・SNS・県は、同じ指標を使う公開物があっても自動では済みにしない (問いが違えば別のコンテンツ)。候補は`pending`が出すので、
+  問いを読んで同じなら`done`で結ぶ。
+- 入口は`npm run reference:expansion -- <status|pending|record|check>`。記録は`record`だけで書き、`check`が PR・pre-commit で
+  企画の実在・展開先・ページ ID の種類・SNS の媒体・公開状態を検査する。
+- 担当: ブログ = blog-seo-strategist (`/plan-article-queue`)・note = note-manager・X / Threads = x-strategist (`/post-x-batch`)・
+  Instagram = instagram-strategist・YouTube = strategy-advisor (pilot 保留中)・テーマと全国 = theme-designer・県 = area-curator・
+  ランキング = ranking-expander・調査 = survey-curator。各担当は企画・制作の前に自分の展開先の`pending`を読み、作ったら`done`、
+  作らないと決めたら`declined`を記録する。週次は`/weekly-review`が`status --json`の未着手数を読む。
+- 指標単位の判断 (テーマ・県・全国に載せる指標の planned / rejected / blocked) は従来どおり`placement-decisions.json`に置く。
+  企画単位の展開記録と混ぜない。
 
 ## 6. 関連
 

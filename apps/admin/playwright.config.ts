@@ -15,6 +15,9 @@ export default defineConfig({
   retries: 0,
   // Next dev の初回コンパイルを同時に叩きすぎると Windows で30秒を超えるため上限を固定する。
   workers: isCI ? 1 : 4,
+  // .mjs は常に ESM なので変換せず Node にそのまま読ませる。変換すると import.meta や JSON の import 属性を使う
+  // 部品 (note の記事台帳 article-ledger.mjs) が CommonJS 化されて読み込み時に落ちる (2026-10-13 PR #1125)。
+  build: { external: ["**/*.mjs"] },
 
   reporter: [
     ["html", { outputFolder: "playwright-report", open: "never" }],

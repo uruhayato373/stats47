@@ -210,9 +210,11 @@ jobs:
 
       - name: 📚 Private Reference Source Guard
         # repo内cacheを拒否し、全profileのmanifest・利用仕様・非公開派生物契約・解決台帳100%を照合する。
+        # 分析企画の展開記録 (data/source-inventory/expansion.json) が企画・展開先・公開中のページIDと合うことも検査する。
         run: |
           npm run source-vault:check
           npm run source-vault:test
+          npm run reference:expansion -- check
         continue-on-error: false
 
       - name: 🚧 Web e-Stat Import Boundary Guard

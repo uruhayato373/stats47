@@ -282,23 +282,65 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NOTE-REFERENCE-EXPANSION-01] 教材 (参考文献) の note 企画 162 件を、記事にする・見送るに振り分けて記事台帳と結ぶ
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run note:article -- sources] [起票:2026-10-13] [領域:商品]
+### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画のうち note が展開先の 149 件を、記事にする・結ぶ・見送るに振り分ける
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-13)**: 教材 9 冊の分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`、計 376 件) のうち、展開先 (`contentRoles`) に
-  note を含む企画は 162 件 (家計調査マーケティング本 80・都道府県ランキング消費 45・偏差値の本 25・お金と健康 5・GIS 4・平均所得 3)。
-  記事台帳と企画 ID で結ばれたものは 0 件 (`npm run note:article -- sources`)。家計調査マーケティング本の展開カード
-  `KAKEI-MARKETING-CONTENT-01` は 2026-09-14 (6a4de050e1) に完了記録なしで backlog から消えており、企画が誰にも引き渡されていなかった。
-- **次**: ① `npm run note:article -- sources --unlinked` の一覧を、note の読み手 (広い検索意図・悩み起点・県の暮らしを読む型。
-  `sns-content-standards.md` §2-7) で振り分ける。既存の記事が既に扱っている企画は、その記事レコードの `sourceAnalyses` に企画 ID を足して結ぶ
-  (指標の一致だけで機械的に結ばず、記事の主張と企画の問いが同じかを読んで決める)。
-  ② 見送る企画は、企画の `contentRoles` から note を外し、`resolutionReason` に理由を追記する。
-  ③ 記事にする企画は記事台帳に draft を足して `sourceAnalyses` を書き、`post-note-ranking` / `write-note-section` で原稿を作って `note:article save`。
-  1 位が東京都になる単一ランキング記事は作らない規約に従う。
-- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を記事に使わない (`reference-source-standards.md`)。
-- **完了条件**: `note:article -- sources` の未着手が 0 (すべての note 企画が記事と結ばれるか、note を外して見送り理由が残る)。
+- **事実 (2026-10-13)**: 教材 9 冊の分析企画 376 件 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`) のうち、採択済みで展開先に note を含むものが 149 件。
+  展開記録 (`data/source-inventory/expansion.json`) は 0 件で、全件が未着手。家計調査マーケティング本の展開カード `KAKEI-MARKETING-CONTENT-01` は
+  2026-09-14 (6a4de050e1) に完了記録なしで backlog から消えており、企画が誰にも引き渡されていなかった。
+- **担当**: note-manager (記事台帳 `data/note/articles.json`)。読み手は広い検索意図・悩み起点・県の暮らしを読む型 (`sns-content-standards.md` §2-7)。
+  既存の記事が同じ問いを扱っていれば `note:<記事key>` で済みにし、新しく作るなら記事台帳に draft を足して planned で記録し、公開後に done へ更新する。
+  1 位が東京都になる単一ランキング記事は作らない。
+- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
+  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
+  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
+  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
+- **完了条件**: `reference:expansion -- status --channel note` の未着手が 0。
 
-### [REFERENCE-LEDGER-DATA-MOVE-01] 参考文献の残りの authored 台帳を data/ へ移し、管理画面の展開状況を企画単位でも数える
+### [REFERENCE-EXPANSION-BLOG-01] 教材の分析企画のうちブログが展開先の 215 件を、記事にする・結ぶ・見送るに振り分ける
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel blog] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: 採択済みでブログを展開先に含む企画が 215 件、記録は 0 件。
+- **担当**: blog-seo-strategist。`/plan-article-queue` の Step 0 で未着手を読み、topic-queue の候補に入れるか、公開中の記事 (`blog:<slug>`) と結ぶか、見送るかを決める。
+  記事の制作は article-writer、公開前は blog-critic の PASS が要る (`blog-quality-standards.md`)。
+  `REFERENCE-CONTENT-DRAFTS-01` の下書き 4 本は、公開した時点で該当企画を done で記録する。
+- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
+  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
+  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
+  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
+- **完了条件**: `reference:expansion -- status --channel blog` の未着手が 0。
+
+### [REFERENCE-EXPANSION-SNS-01] 教材の分析企画のうち X (153 件)・Instagram (130 件) が展開先のものを、投稿にする・結ぶ・見送るに振り分ける
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel x] [起票:2026-10-13] [領域:SNS]
+
+- **事実 (2026-10-13)**: 採択済みで X を展開先に含む企画が 153 件、Instagram が 130 件。記録は 0 件。
+- **担当**: X / Threads は x-strategist (`/post-x-batch` の候補追加)、Instagram は instagram-strategist (`/generate-instagram-schedule`)。
+  投稿は投稿台帳 `data/sns/posts.json` の投稿 ID で `sns:<ID>` として結ぶ。済みは posted の投稿だけで、予約・下書きは planned。
+  頻度上限・承認は `sns-content-standards.md` §1・§3-1 に従い、同じ指標を型違いで量産しない。
+- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
+  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
+  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
+  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
+- **完了条件**: `status --channel x` と `status --channel instagram` の未着手が 0。
+
+### [REFERENCE-EXPANSION-SITE-01] 教材の分析企画のうち県 (62 件)・テーマ (19 件)・全国 (10 件)・ランキング (5 件)・調査 (5 件) の未着手を振り分ける
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: ランキング 100 件・調査 85 件・テーマ 73 件は、指標・調査が公開ページに載っているので自動で済み。残りは記録が要る。
+  県 (area) は自動判定が無いので 62 件すべてが未着手。
+- **担当**: 県は area-curator (`area:<code>`・`area-theme:<code>:<theme>`)、テーマと全国は theme-designer (`theme:<key>`・`japan-theme:<key>`)、
+  ランキングは ranking-expander、調査は survey-curator。ランキング・調査の未着手 5 件ずつは、指標の公開・調査の紐付けが済めば自動で済みになる。
+- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
+  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
+  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
+  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
+- **完了条件**: `reference:expansion -- status` で area・theme・japan・ranking・survey の未着手が 0。
+
+### [REFERENCE-LEDGER-DATA-MOVE-01] 参考文献の残りの authored 台帳 (資料ごとの方針・japan-zue の方針と試行) を data/ へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-datasets.mjs] [起票:2026-10-13] [領域:データ]
 
 - **背景 (2026-10-13)**: 教材の分析企画 9 冊・展開判断・家計の根拠表は `packages/data-configs/src/evidence-inventory/` から `data/` へ移した
@@ -306,9 +348,8 @@ updated: 2026-10-06
 - **残り**: ① `reference-sources.ts` の `REFERENCE_SOURCE_POLICIES` (資料ごとの解決方針) と `CLAUDE_SKILLS_GUIDE_ADOPTIONS`、
   japan-zue の `policy.ts` (`JAPAN_ZUE_SOURCE_POLICIES`・`JAPAN_ZUE_MANUAL_OVERRIDES`) と `pilot.ts` (`JAPAN_ZUE_PILOT_ITEMS`・`JAPAN_ZUE_MASTER_CONTENT`) は、
   データと関数が同じファイルにある。データだけを `data/source-inventory/` の JSON + Schema へ移し、関数は packages に残す。
-  ② 管理画面 `/content/references` の note 列は指標単位 (`stats47Targets` の一致) で数えている。記事台帳の `sourceAnalyses` を使い、企画単位の進み具合も出す
-  (`apps/admin/lib/content-operations/reference.ts`)。
-- **完了条件**: `packages/data-configs/src/evidence-inventory/` にデータの配列・表が残らず (型・読み込み・判定関数だけ)、管理画面に企画単位の note の進み具合が出る。
+  (企画単位の展開状況は 2026-10-13 に展開記録 `expansion.json` と管理画面 `/content/references#analyses` で出した。)
+- **完了条件**: `packages/data-configs/src/evidence-inventory/` と japan-zue の `policy.ts`・`pilot.ts` にデータの配列・表が残らず (型・読み込み・判定関数だけ)、`check-datasets` が通る。
 
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]

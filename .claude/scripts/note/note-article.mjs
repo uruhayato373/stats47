@@ -9,7 +9,6 @@
  *   adopt    <key...> | --all           台帳ができる前から R2 にある本文を、そのまま台帳に取り込む
  *   verify   [--keys a,b] [--deep] [--record]
  *                                       台帳と R2 を照合する (--deep は全ファイルの SHA。--record は合格日時を台帳へ書く)
- *   sources  [--unlinked]               教材 (参考文献) の note 企画と記事の結び付き (sourceAnalyses) を教材ごとに数える (通信なし)
  *
  * 規約: .claude/scripts/note/catalog/README.md「記事の保存場所と作業手順」
  */
@@ -17,7 +16,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import { LEDGER_ROOT, findLedgerArticle, readArticleLedger, updateArticleLedger } from './lib/article-ledger.mjs';
-import { datasetDir } from '../../../config/datasets.mjs';
 import {
   buildManifest, createArticleStores, listRemoteFiles, loadArticleFiles, readLocalFiles, saveArticleFiles,
   verifyArticleStorage, workingDir,
@@ -160,33 +158,9 @@ async function verify() {
   if (problems.length) process.exitCode = 1;
 }
 
-async function sources() {
-  const linked = new Map();
-  for (const article of readArticleLedger().articles)
-    for (const id of article.sourceAnalyses ?? []) linked.set(id, [...(linked.get(id) ?? []), article.key]);
-  const base = path.join(LEDGER_ROOT, datasetDir('source-inventory.analyses'));
-  const rows = [];
-  const unlinked = [];
-  for (const sourceKey of fs.readdirSync(base).sort()) {
-    const dir = path.join(base, sourceKey);
-    if (!fs.statSync(dir).isDirectory()) continue;
-    for (const edition of fs.readdirSync(dir)) {
-      const file = path.join(dir, edition, 'analyses.json');
-      if (!fs.existsSync(file)) continue;
-      const noteAnalyses = JSON.parse(fs.readFileSync(file, 'utf8')).analyses.filter((a) => a.contentRoles.includes('note'));
-      const done = noteAnalyses.filter((a) => linked.has(a.id));
-      rows.push(`${`${sourceKey}/${edition}`.padEnd(40)} note 企画 ${String(noteAnalyses.length).padStart(3)} / 記事あり ${String(done.length).padStart(3)} / 未着手 ${String(noteAnalyses.length - done.length).padStart(3)}`);
-      unlinked.push(...noteAnalyses.filter((a) => !linked.has(a.id)).map((a) => `${a.id}  ${a.question}`));
-    }
-  }
-  console.log(rows.join('\n'));
-  console.log(`合計: 未着手 ${unlinked.length} 件 (企画の contentRoles に note があり、記事台帳の sourceAnalyses から結ばれていない)`);
-  if (flags.has('--unlinked')) console.log(unlinked.map((line) => `  ${line}`).join('\n'));
-}
-
-const commands = { status, checkout, save, adopt, verify, sources };
+const commands = { status, checkout, save, adopt, verify };
 if (!commands[command]) {
-  console.error('使い方: note:article -- <status|checkout|save|adopt|verify|sources> ... (詳細はファイル先頭)');
+  console.error('使い方: note:article -- <status|checkout|save|adopt|verify> ... (詳細はファイル先頭)');
   process.exit(2);
 }
 await commands[command]();

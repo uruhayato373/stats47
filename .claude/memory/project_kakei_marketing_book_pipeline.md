@@ -12,7 +12,7 @@ metadata:
 `kakei-marketing-2015` profile で Drive `stats47/参考文献/マーケティングに使える家計調査/2015年版/` へ bundle 化 (r1) し、
 分析・論点 33 件 + 県庁所在市 47 件を `data/source-inventory/kakei-marketing/2015/analyses.json` に authored (2026-10-13 に packages/ から移した)。
 inventory は coverage 100%。展開 (new-metric 2 件・記事 wave・県別食文化シリーズ) は `.claude/todo/backlog.md` の
-`NOTE-REFERENCE-EXPANSION-01` (旧 `KAKEI-MARKETING-CONTENT-01` は 2026-09-14 に完了記録なしで消えていた)、契約は doc 46 §4.4。
+`REFERENCE-EXPANSION-{NOTE,BLOG,SNS,SITE}-01` と展開記録 `data/source-inventory/expansion.json` (旧 `KAKEI-MARKETING-CONTENT-01` は 2026-09-14 に完了記録なしで消えていた)、契約は doc 46 §4.4。
 
 **Why:** 書籍の論点は既存 kakei-chousa metric (694 件) でほぼ再現できるが、全国集計 (年収五分位・年齢階級・月次) は都道府県値ではないので
 /ranking へ載せない、という境界を台帳側で固定する必要があった。

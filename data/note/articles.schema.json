@@ -236,16 +236,6 @@
           "items": {
             "$ref": "#/definitions/linkRepair"
           }
-        },
-        "sourceAnalyses": {
-          "description": "この記事の元になった参考文献 (教材) の分析企画 ID (data/source-inventory/<sourceKey>/<edition>/analyses.json の analyses[].id)。企画の contentRoles に note が要る",
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*-a[0-9]+(-[0-9]+)?$"
-          }
         }
       },
       "allOf": [

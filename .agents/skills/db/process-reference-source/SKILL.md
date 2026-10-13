@@ -100,9 +100,14 @@ npm run source-vault:inventory -- coverage --profile <profile> --check
 
 ### S5 展開先への引き渡し
 分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`。形は `analyses.schema.json`) の `contentRoles` が展開先の宛先になる。
-note を含む企画は `note-manager` が記事台帳 `data/note/articles.json` の `sourceAnalyses` で結ぶ。進み具合は
-`npm run note:article -- sources` で数え、企画を足した・変えたときに未着手が増えていないかを確かめる。
-テーマ・県・全国・ブログなど指標単位の判断は `data/source-inventory/placement-decisions.json` に書く (`reference-source-standards.md` §5)。
+企画を足した・変えたら次を実行し、展開先ごとの未着手を担当へ渡す。記録の仕方と担当の一覧は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
+```bash
+npm run reference:expansion -- check
+npm run reference:expansion -- status
+```
+
+テーマ・県・全国に載せる指標単位の判断は `data/source-inventory/placement-decisions.json` に書く。
 
 ### 後片付け
 ```bash
@@ -123,7 +128,7 @@ npm run source-vault:check
 | Markdown 文字起こし・図の意味付け・crop spec | `open-data-curator` (資料ごとの利用実装仕様書で別 owner を指定できる) |
 | render / OCR / crop / parity / manifest / Drive 複製 | CLI (`source-processing.mjs` / `source-vault.mjs`) |
 | 台帳から metric / theme / content への展開 | 利用実装仕様書の owner (`data-ingester` / `theme-designer` / `article-writer` 等) |
-| 分析企画の note への展開 (記事にする・見送る) | `note-manager` (記事台帳の `sourceAnalyses`) |
+| 分析企画の各展開先への展開 (作る・見送る) | 展開先の担当 (`reference-source-standards.md` §5 の一覧)。記録は `npm run reference:expansion -- record` |
 
 ## 関連
 - 規約: `.claude/rules/reference-source-standards.md`

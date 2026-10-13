@@ -16,7 +16,7 @@ tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 本書は、日本国勢図会以外でprivate Google Driveへ保全済みの資料 (2026-09-10 時点で 11 資料) を、検証付きで一時復元し、文字抽出、
 OCR、ページ画像化、内部照合用クロップを行った後、既存のstats47 SSOTへ安全に展開するための資料別契約である。
 保存、復元、権利、一次資料への昇格条件は`.claude/rules/reference-source-standards.md`を正典とし、進捗は
-`.claude/todo/backlog.md`で管理する。note への展開は`NOTE-REFERENCE-EXPANSION-01`、テーマ・ブログは`REFERENCE-CONTENT-DRAFTS-01`（旧`REFERENCE-SOURCE-EXPANSION-01`・`KAKEI-MARKETING-CONTENT-01`は 2026-09 に完了記録なしで backlog から消えていた）。
+`.claude/todo/backlog.md`で管理する。分析企画の展開先ごとの振り分けは`REFERENCE-EXPANSION-{NOTE,BLOG,SNS,SITE}-01` (記録は`data/source-inventory/expansion.json`)、テーマ・ブログの下書きは`REFERENCE-CONTENT-DRAFTS-01`（旧`REFERENCE-SOURCE-EXPANSION-01`・`KAKEI-MARKETING-CONTENT-01`は 2026-09 に完了記録なしで backlog から消えていた）。
 
 この契約は原本画像やOCRを公開してよいという許可ではない。クロップは内部照合専用で、公開物は一次資料から
 再取得した事実・数値とstats47独自の文章・図表だけで構成する。Drive 版 folder の file 差し替え、remote R2 write、

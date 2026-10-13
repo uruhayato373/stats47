@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "参考文献 (教材) の分析企画",
-  "description": "data/source-inventory/<sourceKey>/<edition>/analyses.json の形の契約。書籍 1 冊・1 版の問い・主張・採否・一次資料・展開先を 1 企画 1 レコードで持つ。source-inventory CLI がページ単位の inventory.json を生成する入力で、note 記事は data/note/articles.json の sourceAnalyses から企画 ID で結ぶ。書籍の本文・数値・図は書かない (reference-source-standards.md)。",
+  "description": "data/source-inventory/<sourceKey>/<edition>/analyses.json の形の契約。書籍 1 冊・1 版の問い・主張・採否・一次資料・展開先を 1 企画 1 レコードで持つ。source-inventory CLI がページ単位の inventory.json を生成する入力で、展開先ごとの結果 (済み・企画中・見送り) は data/source-inventory/expansion.json に企画 ID で記録する。書籍の本文・数値・図は書かない (reference-source-standards.md)。",
   "type": "object",
   "additionalProperties": false,
   "required": [

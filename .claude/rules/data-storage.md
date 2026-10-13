@@ -62,7 +62,7 @@ paths:
 | `data/reviews/{weekly,monthly}/` | 週次・月次レビュー |
 | `data/seo/` `data/search-growth/` `data/blog/` `data/ai-content/` `data/ai-content-staging/` | キーワード改善サイクル、検索成長の候補と計測、ブログの監査・是正キューと推移、AI 解説の推移と是正キュー (`remediation/`)、AI 解説の公開待ち |
 | `data/ranking/` `data/provenance/` `data/page-quality/` `data/site/` `data/ogp/` | ランキングの整合監査、出典の是正キュー、ページ品質の週次監査 (`metrics/`) と UI 指摘キュー、サイト内リンク監査、OGP 画像の在庫 |
-| `data/estat/` `data/data-quality/` `data/surveys/` `data/themes/` `data/geo/` `data/municipalities/` `data/source-inventory/` | e-Stat の探索結果と年カバレッジ監査 (`year-coverage/`)、データ品質の検査、調査・テーマ・Geo のポートフォリオと監査 (テーマはアプリが読む指標・チャート定義 `catalogs/<key>.json` + JSON Schema も持つ。上の例外)、市区町村の拡充調査、参考文献 (教材) の分析企画 `analyses.json`・展開判断 `placement-decisions.json` (どちらも JSON Schema 付きの正本) と、そこから生成する解決台帳 |
+| `data/estat/` `data/data-quality/` `data/surveys/` `data/themes/` `data/geo/` `data/municipalities/` `data/source-inventory/` | e-Stat の探索結果と年カバレッジ監査 (`year-coverage/`)、データ品質の検査、調査・テーマ・Geo のポートフォリオと監査 (テーマはアプリが読む指標・チャート定義 `catalogs/<key>.json` + JSON Schema も持つ。上の例外)、市区町村の拡充調査、参考文献 (教材) の分析企画 `analyses.json`・企画 × 展開先の展開記録 `expansion.json`・指標単位の展開判断 `placement-decisions.json` (いずれも JSON Schema 付きの正本) と、そこから生成する解決台帳 |
 | `data/ci/` `data/releases/` `data/content-operations/` | workflow の健全性・R2 の鮮度・月次ジョブ、リリースの検証証跡、コンテンツ公開の運用記録 |
 | `data/business-plan/` `data/goals/` | 事業計画の状態と KPI ツリー、目標の進捗 |
 

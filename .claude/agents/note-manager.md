@@ -31,7 +31,7 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 - 公開ワークフロー（投稿確認 → state 記録 → メモリ更新）
 - 記事ステータスの把握（記事台帳の `status` と `body.store` / `body.manifest` で判定。作業コピーの状態は `npm run note:article -- status`）
 - 管理画面 `/content/note` でcatalog / R2本文所在 / 公開状態 / 監査結果を突合確認
-- 教材 (参考文献) の note 企画と記事の結び付き。企画から記事を作ったら記事台帳の `sourceAnalyses` に企画 ID を書く。進み具合は `npm run note:article -- sources` (未着手の一覧は `--unlinked`)。企画の正本は `data/source-inventory/<sourceKey>/<edition>/analyses.json`
+- 教材 (参考文献) の note 企画の受け取り (下の節)
 
 ## 担当外（各スキルが担当）
 
@@ -123,7 +123,7 @@ npm run admin  # http://127.0.0.1:4747/content/note
 | 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（記事台帳にレコードがあり、`note:article save` で R2 に保存済みか） |
 | 編集 | `/edit-note-draft` | 編集完了の確認（DB 更新は無い） |
 | 投稿 | `/publish-note` | 投稿完了後にcatalog更新 + 派生index再生成 + メモリ更新 |
-| 教材からの企画 | `/process-reference-source` (open-data-curator) | 分析企画の `contentRoles` に note がある企画を受け取り、記事にするか見送るかを決める。記事は `sourceAnalyses` で結び、見送りは企画の `contentRoles` から note を外して理由を `resolutionReason` に追記する (`reference-source-standards.md` §5) |
+| 教材からの企画 | `/process-reference-source` (open-data-curator) | 未着手の note 企画を読み、記事にしたら `done`、見送るなら `declined` を展開記録に書く (下の節) |
 
 ## 参照
 
@@ -152,6 +152,13 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
 - **note 内チャート** → `chart-author`（`/generate-note-charts` / `/generate-kakei-charts`、Remotion ベース）
 - **note 内の表（データ）** → **markdown 表を本文に書かない**。note は markdown 表をリテラルなパイプ（`| … |`）で表示してしまうため、`images/table-N.png` に画像化して `![](...)` で貼る（`prepare-article.cjs` の `pipeTable:true` は本文に markdown 表が残っている警告）。
+
+## 教材 (参考文献) の企画の受け取り
+
+note 記事の企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel note`)。
+各企画には同じ指標を使う公開物が候補として付く。問いが同じ公開物があれば `record --status done --target <ページID>`、
+新しく作るなら作ったあとに `done`、作らないと決めたら `record --status declined --reason <理由>` を記録する (`--by` に自分の名前)。
+企画は書籍の問いの手掛かりで、数値・本文は一次資料と R2 で取り直す。正典は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
 
 ## Output Contract
 

@@ -57,6 +57,12 @@ node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [
 `domain` / `mediaPath` / `canonicalUrl` / `campaign` / `metricKeys` は維持する（県のカードをランキングURLへ送らない）。
 4型の画像は専用CLIで生成済みのPNGを使用し、欠落時は同じ型を再生成する。
 
+### 教材 (参考文献) の企画の候補追加
+
+`npm run reference:expansion -- pending --channel x` の未着手の企画も候補に加える (書籍の問いを X の 1 投稿で答えられるものだけ)。
+同じ指標の投稿が既にあり問いも同じなら `record --status done --target sns:<投稿ID>`、投稿にしたら登録後の投稿 ID で `done`
+(予約・下書きの段階は `planned`)、X に向かないなら `declined --reason` を記録する。正典 `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
 ### ② 画像バッチ (決定的)
 
 各候補の `imageKind` に応じて画像を生成する。**既定 `ranking-card` は quick-still で数秒生成**:

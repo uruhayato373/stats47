@@ -78,6 +78,13 @@ export const KOCHI_EDITORIAL: AreaEditorial = {
 - 読むのみ: OS一時領域へ復元した書籍 PDF / area-databook-standards.md / web (一次情報)。
 - template (area-databook-designer) と編集ファイルが分離しているため並列起動で衝突しない。
 
+## 教材 (参考文献) の企画の受け取り
+
+県のページ (データブック・県別テーマ)の企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel area`)。
+各企画には同じ指標を使う公開物が候補として付く。問いが同じ公開物があれば `record --status done --target <ページID>`、
+新しく作るなら作ったあとに `done`、作らないと決めたら `record --status declined --reason <理由>` を記録する (`--by` に自分の名前)。
+企画は書籍の問いの手掛かりで、数値・本文は一次資料と R2 で取り直す。正典は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
 ## Output Contract
 
 chat は `Prefecture | Changed file | Sources | Gates | Unverified` の1表のみ。事実は一次資料URLへ
