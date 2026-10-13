@@ -11,8 +11,7 @@
   **「AdSense は恒久停止」と答えない** (2026-10-07 に古い記述だけを見てそう答え、オーナーの決定と食い違った)。
 - **アカウントの所在**: AdSense の所有者は **stats47 専用の Google アカウント** (uruhayato373 ではない)。内部ブラウザでは
   uruhayato373 が `authuser=0` で AdSense に権限が無く、stats47 アカウントは `authuser=1`。uruhayato373 は GA4 にも
-  権限が無い (GA4 プロパティ 463218070 の管理者は別アカウント)。GA4 は作り直さず、stats47 アカウントを管理者に足して
-  AdSense とリンクする方針 (オーナーへ推奨済み)。週次取得の API は Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を 2026-10-13 に新 ID へ替えたが、refresh token も 2026-10-13 に stats47 アカウントで再発行して Secret を差し替えた。
+  権限が無い (GA4 プロパティ 463218070 の管理者は別アカウント)。2026-10-13 に stats47 アカウントを GA4 の管理者に足し、GA4 と新 AdSense をリンクした (GA4 は作り直していない)。週次取得の API は Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を 2026-10-13 に新 ID へ替えたが、refresh token も 2026-10-13 に stats47 アカウントで再発行して Secret を差し替えた。
 - **改善サイクル (2026-10-13 凍結解除)**: 再開後も NSM が「恒久停止で ¥0」固定、KPI `ad-yield` 未接続、`/adsense-improvement` 凍結、
   週次計画が AdSense 候補を不採用のままだった。同日に全部戻した (backlog `ADSENSE-RESTART-01`)。`ad-yield` は AdSense 確定 7 日 × 4 週 ÷
   GA4 Japan PV 28 日 × 1,000 (`.claude/scripts/metrics/lib/adsense-revenue.mjs`)、最初の値は 2026-W45。W42〜W45 はベースラインで配置を変えない。
