@@ -282,6 +282,21 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-REFERENCE-EXPANSION-01] 参考文献由来の note 制作候補 325 件 (未着手) を企画・見送りに振り分ける
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference] [起票:2026-10-13] [領域:商品]
+
+- **事実 (2026-10-13 実測)**: 参考文献 7 冊の解決済み inventory (`data/source-inventory/*/inventory.json`) で展開先に note を含む採択項目は 688 件
+  (既存指標の再利用 217・掛け合わせ分析 458・新指標 13。context-only 810 件は規約で単独の制作単位にしない)。指標・地域ごとに重複を除いた **note の制作単位は 380**、
+  記事台帳 `data/note/articles.json` の `stats47Targets` が既に覆うのは 55、**未着手 325**。内訳: 家計調査マーケティング本 149・都道府県ランキング消費 149・偏差値の本 55・
+  日本国勢図会 17・お金と健康 17・平均所得 12・GIS 1 (重複あり)。`placement-decisions.ts` の channel=note の判断は 0 件で、全件が管理画面 `/content/references` で「着手できる」のまま。
+  集計の再現: 管理画面 `/content/references` の note 列 (数え方は `apps/admin/lib/content-operations/reference.ts`)。
+- **次**: ① 325 件を note の読み手 (広い検索意図・悩み起点・県の暮らしを読む型。`sns-content-standards.md` §2-7) で振り分け、載せないものは `placement-decisions.ts` に
+  channel=note の rejected (理由付き)、企画するものは planned (target に記事 key) を書く。同じ指標の単一ランキング記事を量産しない (1 位が東京の指標は止める規約)。
+  ② planned から記事台帳へ draft を足し、`post-note-ranking` / `write-note-section` で原稿を作って `note:article save`。家計調査マーケティング本は分析 80 件
+  (`packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json`) の展開 `KAKEI-MARKETING-CONTENT-01` と重ねて進める。
+- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない候補は公開しない。書籍の本文・数値・図を記事に使わない (`reference-source-standards.md`)。
+- **完了条件**: note の未着手が 0 (すべて planned・rejected・blocked・制作済みのいずれか) になり、planned は記事台帳の draft と結び付いている。
+
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
 
