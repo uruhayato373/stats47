@@ -165,6 +165,7 @@ function main() {
     asOf,
     gscHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.history"))),
     ga4Finalized: readCsvIfExists(join(PROJECT_ROOT, datasetPath("ga4.history-finalized"))),
+    adsenseHistory: readCsvIfExists(join(PROJECT_ROOT, datasetDir("adsense.history"), "history.csv")),
     cycleHistory: history,
     journey,
     workContext,

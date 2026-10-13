@@ -2,7 +2,9 @@ export type ExpansionChannel = 'ranking' | 'survey' | 'theme' | 'area' | 'japan'
 export type ExpansionState = 'done' | 'derived' | 'planned' | 'declined' | 'pending';
 export interface ReferenceAnalysis {
   id: string; sourceKey: string; edition: string; chapter: number; question: string; thesis: string; resolution: string;
-  metricKeys: string[]; surveyIds: string[]; contentRoles: ExpansionChannel[]; nextAction: string;
+  metricKeys: string[]; surveyIds: string[]; geoScopes: string[]; contentRoles: ExpansionChannel[]; nextAction: string;
+  resolutionReason?: string;
+  primarySources?: { organization: string; publicationOrDataset: string; url: string; dataYears?: string[] }[];
 }
 export interface ExpansionRecord {
   analysis: string; channel: ExpansionChannel; status: 'done' | 'planned' | 'declined'; target?: string; reason?: string; decidedAt: string; decidedBy: string;

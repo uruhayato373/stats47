@@ -116,7 +116,15 @@ if [ "$NIMG" -gt 0 ]; then
     # above the image (afterText) keeps draft order; a heading anchor stacks every figure of a section
     # right under the heading (2026-10-12, #12 fiscal: 3 figures stacked). Code-fence / empty → heading.
     HEAD=$(jq -r ".imgRefs[$i] | if ((.afterText // \"\") | length) > 0 and ((.afterText | startswith(\"\`\`\`\")) | not) and .afterText != .afterHeading then .afterText[0:20] else .afterHeading end" "$J")
-    ins_img "$HEAD" "$ADIR/images/$FILE" || { echo "FAIL image insert: $FILE"; exit 1; }
+    # Retry once only when ins_img stopped before uploading (anchor lookup). Right after the previous
+    # upload the editor state can be read mid-render and miss the paragraph (2026-10-13, b-ref-prc-a33).
+    # A failure after the upload is not retried, so a figure is never inserted twice.
+    OUT=$(ins_img "$HEAD" "$ADIR/images/$FILE" 2>&1); RC=$?; echo "$OUT"
+    if [ $RC -ne 0 ] && echo "$OUT" | grep -qE "anchor para not found|anchor scroll failed"; then
+      sleep 4; echo "    retry: $HEAD"
+      OUT=$(ins_img "$HEAD" "$ADIR/images/$FILE" 2>&1); RC=$?; echo "$OUT"
+    fi
+    [ $RC -eq 0 ] || { echo "FAIL image insert: $FILE"; exit 1; }
   done
 fi
 

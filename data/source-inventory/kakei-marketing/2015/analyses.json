@@ -82,8 +82,10 @@
         14
       ],
       "resolution": "new-metric",
-      "resolutionReason": "国立教育政策研究所が都道府県別正答率を公開しており(政府標準利用規約)、47県値を再取得して独立指標にできる",
-      "metricKeys": [],
+      "resolutionReason": "国立教育政策研究所が都道府県別正答率を公開しており(政府標準利用規約)、47県値を再取得して独立指標にできる。2026-10-13時点で academic-achievement-test-average-rate として2025年分だけを収載しており、過去年は未収載",
+      "metricKeys": [
+        "academic-achievement-test-average-rate"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"

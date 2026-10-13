@@ -154,7 +154,7 @@ Tier は improvements.md に列が無いので「—」とした。
 - **`DEPS-RENOVATE-01`**: 依存更新の方針の確認（Due 10-12）。
 - **`DATA-QUALITY-LOOP-01`**: 第 2・3 週の「更新」をまとめた R2 反映を承認してほしい (Must 1 で 1 回の依頼にまとめる)。
 - **`EXP-006`**: YouTube Studio のチャンネル所有確認。済むまで制作と計測日を進めない。
-- **`ADSENSE-RESTART-01`**: 旧アカウントが停止状態かを確かめ、uruhayato373 で新規申請し、発行された `pub-…` を伝えてほしい。
+- **`ADSENSE-RESTART-01`**: (申請・審査・本番反映は 10-11 に済み) **stats47 専用の Google アカウント**で `.claude/scripts/adsense/oauth-setup.js` を実行して refresh token を発行し、`gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN` で差し替えてほしい。済むまで週次の AdSense 取得は権限エラーで 0 行のまま (Variable `GOOGLE_ADSENSE_ACCOUNT_ID` は 10-13 に新 ID へ替え済み)。あわせて GA4 プロパティ 463218070 に stats47 アカウントを管理者として追加。
 - **`NOTE-FREE-DEFAULT-01`**: 雑学・ランキングの有料記事を閲覧の多い順に数本だけ無料に戻す (note へのログインが必要)。
 - **`AMAZON-ASSOCIATE-PILOT-01`**: `stats47-22` が有効かを Amazon アソシエイトの管理画面で確かめ、PR #1099 を本番に出すか決めてほしい。
 

@@ -281,6 +281,17 @@
         },
         {
           "organization": "総務省統計局",
+          "publicationOrDataset": "全国家計構造調査 (全国消費実態調査の後継。年間収入の2019年値の原調査)",
+          "url": "https://www.stat.go.jp/data/zenkokukakei/2019/index.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2019"
+          ],
+          "checkedAt": "2026-10-13",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
           "publicationOrDataset": "全国消費実態調査",
           "url": "https://www.stat.go.jp/data/zensho/",
           "termsUrl": "https://www.digital.go.jp/resources/open_data",
@@ -1249,7 +1260,7 @@
       "resolution": "combined-analysis",
       "resolutionReason": "内閣府県民経済計算、総務省労働力調査はいずれも公式統計 県民所得・完全失業率は既存metricで充足済み。",
       "metricKeys": [
-        "prefectural-income-per-capita",
+        "per-capita-prefectural-income-h27",
         "unemployment-rate"
       ],
       "surveyIds": [],

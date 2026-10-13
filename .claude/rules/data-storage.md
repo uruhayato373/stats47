@@ -225,12 +225,12 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | データ | 保存先 |
 |---|---|
-| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が金曜 JST 05:00 に前週分を自動更新。26 週を保持）。`data/adsense/snapshots/` は 2026-09-20 の恒久停止に伴う凍結記録 |
+| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が金曜 JST 05:00 に前週分を自動更新。26 週を保持）。`data/adsense/snapshots/` も同じ週次 workflow が取得する (2026-08-29〜10-10 の配信停止中は 0 行、2026-10-11 に手動枠で再開) |
 | GSC / GA4 の週次集約と要約 | `data/{gsc,ga4}/{history.csv,history-finalized7d.csv,LATEST.md}`（人間は LATEST.md を見れば 10 秒で把握） |
 | GSC カバレッジ | ドリルダウン `data/gsc/coverage-drilldown/<YYYY-Www>/`、件数推移 `data/gsc/coverage-totals-history.csv`、URL Inspection `data/gsc/url-inspection/`（日次 7 件を保持）。是正キュー (状態) は `data/gsc/coverage-remediation/{coverage-remediation-queue.json,LATEST.md}`（`build-coverage-queue.mjs` が生成。正典 `/gsc-coverage-remediation`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `data/psi/{psi-batch-*.json,history.csv,LATEST.md}`（生 JSON は最新 1 件。日次 JST 02:00、閾値違反時 `[PSI Alert]` Issue）/ URL リスト `config/psi-urls.txt` / 閾値 `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 日次 usage と月次・週次コスト | `data/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生 JSON は 30 件。日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issue）、`data/cloudflare/{monthly,weekly}-snapshots/` / 閾値 `.claude/config/budgets/cloudflare-cost-improvement/` |
-| （凍結記録）AdSense | `data/adsense/`。2026-09-20 の恒久停止で更新されない。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）を見る |
+| AdSense | `data/adsense/`（snapshots・`history*.csv`・`LATEST.md`・`impact-LATEST.md`・`candidates-latest.json`）。週次 workflow が更新する。2026-10-11 の再開前の行は旧アカウント・自動広告ありの記録。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）、効率は KPI `ad-yield` を見る |
 | アフィリエイトの成果・提携・実験 | `data/affiliate/`（A8・もしも・楽天の成果、提携台帳 `{a8,affiliate}-catalog.json`、実験台帳 `experiments.json` (書込は `/manage-affiliate-experiment` のみ)、GA4 実測の週次集約 `ga4-affiliate-history.csv`）。GA4 実測の生 snapshot は 2026-09-14 から R2 `state/ads/ga4-affiliate/` (ローカルは `npm run state:pull -- ads/ga4-affiliate`)。在庫棚卸し・compliance などの最新状態は `data/affiliate/{inventory-*,*-latest}.json` |
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `data/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない）。形は `posts.schema.json`、長尺の台本は `data/sns/scripts/<id>.json`、画像・動画の実体は Google Drive `stats47/SNS素材/` (台帳は相対パス・sha256 だけ。契約 `sns-content-standards.md` §3-1) |
 | SNS 投稿メトリクス時系列 | `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |

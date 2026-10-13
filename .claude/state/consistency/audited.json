@@ -1,23 +1,11 @@
 {
-  "hash": "a41aa296d28abe35b04d0fc2468b0235ea483b2af54c4a7066b691041078c86a",
-  "audited_at": "2026-10-13T01:05:36",
+  "hash": "4759f54179f388549a36c8c047ddcb3f7918fea974425caa8ec3ab470a17f31c",
+  "audited_at": "2026-10-13T03:12:14",
   "files": [
-    ".agents/skills/db/process-reference-source/SKILL.md",
-    ".agents/skills/note/generate-kakei-charts/SKILL.md",
-    ".claude/agents/note-manager.md",
-    ".claude/rules/data-storage.md",
-    ".claude/rules/reference-source-standards.md",
-    ".claude/scripts/lib/prune-state-snapshots.mjs",
-    ".claude/scripts/note/__tests__/article-ledger.test.mjs",
-    ".claude/scripts/note/__tests__/kakei-note-evidence.test.mjs",
-    ".claude/scripts/note/build-kakei-note-evidence-data.mjs",
-    ".claude/scripts/note/catalog/README.md",
-    ".claude/scripts/note/catalog/types.ts",
-    ".claude/scripts/note/lib/article-ledger.mjs",
-    ".claude/scripts/note/lib/kakei-note-audit.mjs",
-    ".claude/scripts/note/note-article.mjs",
-    ".claude/scripts/source-vault/source-inventory.mjs",
-    ".claude/skills/db/process-reference-source/SKILL.md",
-    ".claude/skills/note/generate-kakei-charts/SKILL.md"
+    ".claude/scripts/note/catalog/cover-designs.ts",
+    ".claude/scripts/note/catalog/reference-cover-copy.ts",
+    ".claude/scripts/note/catalog/reference-cover-figures.ts",
+    ".claude/scripts/note/editor-helpers.sh",
+    ".claude/scripts/note/publish-new-note.sh"
   ]
 }

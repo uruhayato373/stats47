@@ -32,6 +32,8 @@ updated: 2026-10-06
   `gh workflow list --all` で該当 workflow が無効または消えている ⑦ 次の `note-circulation-audit-weekly` (土曜) が `note:circulation:test` を通り、`note-image-assets.json` の
   `--verify-r2` が合格する ⑧ ローカルの main を `git fetch && git switch main && git merge --ff-only origin/main` で合わせ、develop との差 (`git rev-list --count origin/develop..origin/main`) が
   マージコミット以外に無いことを確かめる。
+- **状態 (2026-10-13 11:20 JST)**: PR #1125 は CI 24 件合格でマージ済み (main `427b80974`)。⑥ main から 2 本が消えたことを `git ls-tree origin/main` で確認。⑧ ローカル main を早送りで合わせ、develop との差はマージコミットだけ。
+  ⑤ `deploy-workers` は R2 書き込みの排他 (`r2-write`) で `geo-source-publish` (22:26 UTC 開始、過去の成功例は 3.5〜4 時間) の終了待ち。終わり次第デプロイと smoke を確かめる。①〜④・⑦ は次の定期実行で確かめる。
 - **別の端末 (Windows PC) の注意**: このマージを pull すると docs/31 の追跡ファイル 861 件が作業ツリーから消える。pull の前にその端末の docs/31 に未コミットの編集が無いかを確かめ、
   あれば先に `npm run note:article -- save <key>` で R2 へ保存する (台帳 `data/note/articles.json` を pull してから)。
 - **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
@@ -282,21 +284,30 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画のうち note が展開先の 149 件を、記事にする・結ぶ・見送るに振り分ける
+### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画から作った note の下書き 92 本を、意味のレビュー・R2 保存・公開まで進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-13)**: 教材 9 冊の分析企画 376 件 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`) のうち、採択済みで展開先に note を含むものが 149 件。
-  展開記録 (`data/source-inventory/expansion.json`) は 0 件で、全件が未着手。家計調査マーケティング本の展開カード `KAKEI-MARKETING-CONTENT-01` は
-  2026-09-14 (6a4de050e1) に完了記録なしで backlog から消えており、企画が誰にも引き渡されていなかった。
-- **担当**: note-manager (記事台帳 `data/note/articles.json`)。読み手は広い検索意図・悩み起点・県の暮らしを読む型 (`sns-content-standards.md` §2-7)。
-  既存の記事が同じ問いを扱っていれば `note:<記事key>` で済みにし、新しく作るなら記事台帳に draft を足して planned で記録し、公開後に done へ更新する。
-  1 位が東京都になる単一ランキング記事は作らない。
-- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
-  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
-  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
-- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
-  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
-- **完了条件**: `reference:expansion -- status --channel note` の未着手が 0。
+- **状態 (2026-10-13)**: note が展開先の採択企画 149 件のうち 57 件は公開済みの記事と問いが同じことを本文で確かめて結んだ
+  (家計調査の県別 47 件 = `a-kakei-<県>`、ほか `b-kakei-*`・`b-rich-spending-patterns`・`d-kakei-spending-personality`)。
+  残り 92 件は `/expand-reference-notes` の生成器 (都道府県・年収五分位・世帯主の年齢・地方別の 4 種) で下ごしらえし、
+  執筆して `check-reference-note.mjs` の数値照合に通し、記事台帳に下書き (`b-ref-*`)・展開記録に企画中 (planned) を書いた。
+  本文は作業場 `docs/31_note記事原稿/b-ref-*/` にあり、まだ R2 に保存していない。
+- **次**: ① `note-critic` で意味のレビュー (問いに答えているか・言い過ぎ・定義の取り違え)。REVISE は直す ② `npm run note:article -- save <key...>` で公開 R2 へ保存
+  ③ 公開の本数と日程をオーナーに確認し、`/publish-note` で分けて公開 (同じセッションで大量に連続投稿しない)。カバーは `cover-assets.json` の手順で用意
+  ④ 公開したら台帳に `noteUrl` を書き、`reference:expansion -- record --status done` で済みにする。
+- **公開の状況 (2026-10-13 12:30 JST)**: オーナー決定は「91 本を公開 R2 へ保存し、1 日 5 本ずつ公開」(mh-a09 は承諾確認まで保存・公開しない)。
+  91 本は公開 R2 へ保存し `--deep` で照合済み。1 日目は `b-ref-prc-a33` を公開 (https://note.com/stats47/n/nb16d150ee313、カバーは `update-note-covers` で付けて検証済み)。
+  残り 4 本 (`b-ref-kakei-a04-02`・`b-ref-kakei-a02-09`・`b-ref-prc-a38`・`b-ref-inc-a06`) はカバー採用・タグ・本文の前処理まで済み。
+  専用プロファイル `.local/playwright-note-profile` が note からログアウトしたため止めている (オーナーが `node .claude/scripts/note/login-note-profile.mjs` でログインしたら、
+  Chrome を `--remote-debugging-port=9333` で起動し `NOTE_BU_CDP=http://127.0.0.1:9333 bash .claude/scripts/note/publish-new-note.sh <key> stats47-note --publish "<マガジン名>"` で公開)。
+  1 回目の失敗で残った下書き `n706d8699fcd7` (同じ果物の記事) はオーナーが削除する。カバーは 1 本ずつ `prepare → generate-cover-refresh --local-review → 確認 → 登録 → review` で採用する。
+- **公開スクリプトの修正 (2026-10-13)**: note の画面の変更で「画像を追加」が `<svg>` になり、`new_post_cover_title` がカバーを黙って飛ばしていた (公開した 1 本目がカバー無し)。
+  親のボタンを押すよう直し、保存後にカバーが付いたことを確かめて付かなければ止める。画像の挿入は、アップロードより前で見出しの次の段落を取りこぼしたときだけ 1 回やり直す。
+- **公開前に確かめること (2026-10-13 の執筆で判明)**: `b-ref-mh-a09` (金融リテラシー調査の正答率) は、企画台帳に「商用目的の転載・複製には事前承諾が要り、承諾の確認は未了」とある。
+  承諾を確かめるまで公開しない。`b-ref-dev-a05`・`a09`・`a15`・`a40` は問いが求める指標 (子育て世帯の貧困率・通学時間と進学率・最新年の貯蓄・自家用車で通う人の割合) が無く、
+  答えの一部を「このデータでは判断できない」としている。指標を足すか、このまま公開するかを決める。
+- **停止条件**: 検査と意味のレビューに通らない本文を保存しない。公開はオーナーの確認なしに行わない。
+- **完了条件**: `reference:expansion -- status --channel note` の企画中と未着手が 0。
 
 ### [REFERENCE-EXPANSION-BLOG-01] 教材の分析企画のうちブログが展開先の 215 件を、記事にする・結ぶ・見送るに振り分ける
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel blog] [起票:2026-10-13] [領域:データ]
@@ -339,6 +350,27 @@ updated: 2026-10-06
 - **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
   指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
 - **完了条件**: `reference:expansion -- status` で area・theme・japan・ranking・survey の未着手が 0。
+
+### [METRIC-DENOMINATOR-LABEL-01] 人口当たりなどの指標で、表示名と単位から分母が落ちている (博物館数 = 人口100万人当たりなのに「博物館数」「館」)
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: キーに `per-million`・`per-100k`・`per-1000` などを持つ指標のうち約 90 件は、`data/metrics/<key>.ts` の `title`・`subtitle` に分母が無い。
+  例: `museum-count-per-million` は e-Stat の項目名が「博物館数（人口100万人当たり）」なのに、title「博物館数」・unit「館」。R2 の `item.json`、県データブック (`databook.json` の highlight.label)、
+  SNS のタイル画像 (`quick-still.ts` は item の title を描く) が実数のように読める。`certified-childcare-center-count-per-100k-0-5` (認定こども園数 687.1 園) も同じ。
+- **分母は推測しない**: per-1000 は人口・世帯・出生など分母が指標ごとに違う。正典は e-Stat の項目名 (`data/estat/meta/<統計表ID>.json` の cat01 の name)。
+  note の教材企画の生成器は `.claude/scripts/note/reference/lib/estat-denominator.ts` で項目名から分母を補っている (同じ方法で config を直せる)。
+- **次**: ① e-Stat の項目名に「当たり」があり title/subtitle に無い指標を一覧にする ② subtitle (または title) に分母を書き、単位は「館」のまま subtitle で分母を示すか unit を変えるかを決める
+  (ランキングの見出し・SEO に影響するので `metric-config-standards.md` に従う) ③ item.json・県データブックを作り直して反映する。
+- **完了条件**: 項目名に分母がある SSDS 由来の指標で、title か subtitle に分母が無いものが 0 件。
+
+### [ACADEMIC-TEST-YEARS-01] 全国学力テストの都道府県別平均正答率が 2025 年の 1 年分しか無い
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: `academic-achievement-test-average-rate` の R2 values は 2025 年の 47 行だけ。教材の企画 `kakei-marketing-2015-a01-01`
+  (「継続して上位に入る県はどこか」) の note 記事 `b-ref-kakei-a01-01` は、継続性を確かめられないと書いて 2025 年だけで答えている。
+- **次**: 国立教育政策研究所の公表 (https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html) から過去の年の都道府県別正答率を取り込む (`data-provenance-standards.md` の 9 点セット)。
+  取り込んだら記事の答えを複数年で書き直す。
+- **完了条件**: 3 年以上の 47 都道府県の値が R2 にあり、記事が複数年で答えている。
 
 ### [REFERENCE-LEDGER-DATA-MOVE-01] 参考文献の残りの authored 台帳 (資料ごとの方針・japan-zue の方針と試行) を data/ へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-datasets.mjs] [起票:2026-10-13] [領域:データ]
@@ -1432,6 +1464,15 @@ updated: 2026-10-06
 - **現在地 (2026-10-11)**: 審査が承認された。**AdSense の所有者は stats47 専用の Google アカウント**で、上の方針 (uruhayato373 だけ) とは違う (内部ブラウザでは uruhayato373 が `authuser=0`、stats47 が `authuser=1`)。同日、AdSense の画面で自動広告がオフ (インテント重視のフォーマットも無効表示) を確認し、手動の広告ユニットを配置ごとに 11 個作った (右レールのアフィリエイト枠が意図なしページで AdSense に切り替わるときの専用ユニットを含む) (`stats47-<配置>`。ID と配置の対応は `apps/web/src/lib/google-adsense/constants.ts`)。コードは全 slotId を新 ID に替え、ランキング末尾とその他末尾の Multiplex を別ユニットに分け、`ADSENSE_DISPLAY_ENABLED` を true にした。配置はオーナーの指示 (「色々と試しながら計測記録改善」) で停止直前の手動枠をそのまま戻し、ユニット別の実測で外す・動かすを決める。10-08 の方針案 (1 枠 1 担当・アフィリエイトは意図が解決する本文中・AdSense はアフィリエイトの弱い右レールと意図の無いページ・モバイル手動枠は戻さない) は、実測後の改善候補として扱う。収益化戦略 §3.1・関連 rules・メモリを再開後の記述へ改訂した。**本番反映: 2026-10-11 15:43 JST に PR #1123 を main へマージ** (merge commit `cd80b60`、Deploy run 38118994278)。**アフィリエイト実験の比較窓の境界は 2026-10-11** (この日を含めずに前後を分ける)。デプロイ前の本番は `adsbygoogle` 0 件 (ranking・home・blog の 3 ページで実測)。AdSense の「サイト」画面で stats47.jp は「準備完了」、ads.txt は「承認済み」(2026-10-11 確認)。
 - **デプロイ後の本番確認 (2026-10-11)**: Deploy run 38118994278 は 15:59 に success。ヘッドレス Chromium でランキングページを開くと `adsbygoogle.js` が新 publisher ID で読み込まれ、デスクトップで 4 ユニット (table-side・rail-top・sidebar-affiliate-fallback・ranking-footer-multiplex)、モバイルで 3 ユニットが広告リクエストを出した。直後の状態は全ユニット `data-ad-status="unfilled"` (新ユニット直後・ヘッドレスのため、配信の有無は実ブラウザと AdSense のレポートで後日確かめる)。本文書き換えの smoke (apps/web で `PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts third-party-dom-injection`) は 3/3 緑。**記事内広告 (in-article) は全枠が `No slot size for availableWidth=0` で消えていた** (外枠が flex の items-center で ins が 0 幅)。`ins` に `width:100%` を足す修正を PR #1124 で出した。
 - **残り (実行順)**: ① ~~デプロイ~~ 済み (上記) ② ~~本番の広告タグと smoke の確認~~ 済み (上記)。PR #1124 は 2026-10-11 16:12 JST にマージ (merge commit `bca0286`、Deploy run 38120604593)。デプロイ後、ブログ (デスクトップ 3 枠)・テーマ (stats47-hub-incontent)・ランキングのモバイル中段 (stats47-ranking-incontent-mobile) の記事内広告が TagError 0 件で広告リクエストを出すことを確かめ、本文書き換えの smoke も 3/3 緑で再確認した。11 ユニットすべてが本番で広告リクエストを出すことを観測した (ranking・blog・themes・home・`/municipalities`・`/areas/13000`。直後は全て unfilled で、配信が始まったかは AdSense の広告ユニット別レポートで確かめる) ③ (オーナー) 今の GA4 の管理者アカウント (uruhayato373 は GA4 に権限が無い) で、プロパティ 463218070 に stats47 アカウントを管理者として追加する。GA4 は作り直さない (履歴・測定 ID・CI の権限・カスタムディメンションを失う) ④ (Claude) stats47 アカウントで AdSense の「Google アナリティクスとの統合」からプロパティ 463218070 をリンクする ⑤ (オーナー) 週次取得の API を戻す: stats47 アカウントで `.claude/scripts/adsense/oauth-setup.js` を実行して refresh token を発行し、GitHub の Secret と Variable `GOOGLE_ADSENSE_ACCOUNT_ID` (今は旧 `pub-7995274743017484`) を新アカウントへ替える ⑥ 4 週の実測 (ユニット別の収益・視認率、GA4 の PV で割った `ad-yield`、CWV) で効かない枠を外す・動かす。モバイルの手動枠 (W31 に外した記事内・フッター) を戻すかもここで決める。候補: home のレール枠 (stats47-hub-rail) は 2026-10-11 の実測で幅 262px しかなく 300×250 が入らない (ランキングのレールは 300px 以上)。ユニット別の表示単価が低ければ幅の確保か撤去を比べる。
+- **2026-10-13 改善サイクルの凍結解除**: 再開後も計測と改善の仕組みが 9/20 の「恒久停止」の前提のまま凍結されていたので、次を直した。
+  ① 週次収益 (NSM): `generate-weekly-metrics-issue.mjs` が AdSense を「恒久停止で ¥0」と固定で出していたのを、`.claude/scripts/metrics/lib/adsense-revenue.mjs` に置き換えた。停止中 (W35〜W41) は ¥0、再開後は `data/adsense/history.csv` の確定 7 日収益を出し、行が無い週は「判定不能」と書く。
+  ② KPI `ad-yield`: `measurement-cycle.mjs` で「AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000」として接続した。再開前の週を含む窓は `pending` (値なし)、AdSense の行が 1 週でも欠ければ `missing`。最初の値は W42〜W45 がそろう 2026-W45 (2026-11-13 金曜の週次計測)。事業計画 catalog の `ad-yield` を `measured` にして kpi-tree を再生成した。
+  ③ 週次 workflow: 9/26 に外した AdSense 施策の before/after (`npm run metrics:adsense-impact`) を `fetch-metrics-weekly.yml` に戻した (出力 `data/adsense/impact-LATEST.md`)。取得・ユニット突き合わせ・候補生成の段は止まっていなかった。
+  ④ 運用文書: `/adsense-improvement` と `/fetch-adsense-data` の凍結注記、週次計画の「AdSense の候補は採用しない」、週次レビューの NSM・AdSense 節、affiliate-manager の「AdSense 停止の維持確認」、improvement-triage の受け取り元、pre-mortem・growth-loops・monetization-strategy、`data-storage.md`・データ台帳 `config/datasets.mjs`・改善ログ冒頭・収益化戦略 §3.1/§3.2・docs/02/42 を再開後の記述に改めた。
+  ⑤ GitHub の Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を `pub-9055416085403520` に替えた (refresh token は旧アカウントのままなので、手順⑤のオーナー作業が済むまで取得は権限エラーのまま)。
+  **進捗 (2026-10-13 夕)**: 上の変更は develop→main の PR https://github.com/uruhayato373/stats47/pull/1133 で出した (CI の書き戻しコミットが先頭になり必須の Code Quality Check が起動しなかったので、この追記のコミットで起動し直した)。refresh token は Console の OAuth クライアント `1044264339032-22l15n9…` で Client Secret を追加し、`oauth-setup.js` を stats47 アカウントで認可して発行する。1 回目は Client ID を Secret 欄に入れて `invalid_client` になった (Secret は `GOCSPX-` で始まる)。
+  **運用の決め事**: 再開後 4 週 (W42〜W45 = 10-11〜11-07) はベースライン期間で配置を変えない (表示の不具合の修正だけ)。W46 以降、週次レビューで審査した人間承認済みの配置変更を最大 1 件/週。施策 ID は `ADSENSE-PLACEMENT-01` だが、改善台帳 `improvements.md` の active が上限 10 件で埋まっていたので (2026-10-13 improvement-triage 確認)、行は W45 の判定時に載せ、それまではこのカードの手順⑥で追う。
+  **残り**: 手順⑤ (オーナー: stats47 アカウントで refresh token を発行し Secret を差し替える。済んだら `gh workflow run fetch-metrics-weekly.yml --ref main -f week=2026-W42` で再開初週を取り直し、`data/adsense/snapshots/2026-W42/manifest.json` の `status` が error でないことを確かめる)・手順③④ (GA4 との連携)・週次 workflow とスクリプトの変更は main の定義で動くので、develop→main のマージ後に効く。
 - **追記 (2026-10-07)**: オーナーは回収経路の一つを「アクセス集客で AdSense」と整理した (収益化戦略 §3.5)。同日、§3.1 の冒頭とメモリ `project_monetization_contract` に 9/28 の再開決定 (審査待ち) を書き足した。全面改訂は引き続き承認後に行う。見込みの注意: 再開後は手動枠だけなので、2026-W31 の実測 (手動枠は 1,000 表示あたり ¥8〜13、自動広告は ¥107〜114) から、停止前のページ RPM ¥37 を下回る可能性がある。**ページ RPM ¥37 は AdSense 自身が数えた PV (GA4 の 54〜78%) が分母**なので、GA4 の PV に換算すると停止前 W30〜W33 は 1,000 PV あたり ¥22 (AdSense 収益 ¥523 ÷ GA4 Japan PV 23,787)。今の閲覧 (月約 4.7 万 PV) では自動広告ありでも月約 ¥1,000、手動枠だけ (W31 の手動枠分 ¥6.7/1,000 PV) なら月約 ¥300 で、どちらも Cloudflare の請求 (月 ¥1,556〜1,846) に届かない。月 ¥1 万には月約 45 万 PV (手動枠だけなら約 150 万 PV) が要る (2026-10-07 訂正。前日までの「月 27 万 PV」は分母の違う ¥37 で計算していた)。承認後は AdSense 収益の週次取得を再開し、計測サイクルの KPI `ad-yield` (`.claude/scripts/metrics/lib/measurement-cycle.mjs`) に接続して、4 週の効率と月額を Cloudflare の請求と並べて判定する。自動広告を使うかどうかは効率を約 3 倍動かすので、書き換え事故の原因 (自動広告そのものか、広告インテントだけか) を AdSense の公式ヘルプで確かめてから決める。 承認後の改訂では、`.claude/rules/analytics-event-standards.md` と `.claude/rules/affiliate-ads-standards.md` に残る「2026-09-20 に恒久停止」の記述も合わせて直す。
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
 

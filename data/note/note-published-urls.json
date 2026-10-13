@@ -1384,6 +1384,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "b-ref-prc-a33": {
+      "vertical": "stats47-note",
+      "title": "りんごは盛岡、みかんは和歌山、いちごは宇都宮 ── 果物5品目の購入量を47市で比べる",
+      "url": "https://note.com/stats47/n/nb16d150ee313",
+      "is_paid": false,
+      "published_at": "2026-10-13",
+      "r2_path": "note/stats47-note/b-ref-prc-a33",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-rich-spending-patterns": {
       "vertical": "stats47-note",
       "title": "お金持ちが使うもの、使わないもの ── 所得トップ20%と底辺20%の家計を比較した",

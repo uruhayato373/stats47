@@ -1,18 +1,21 @@
 ---
 name: fetch-adsense-data
 domain: affiliate
-description: 【停止中】AdSense は 2026-09-20 に恒久停止したため、このスキルは週次運用から外した。過去データの参照や、停止の確認で明示的に求められたときだけ使う。
+description: AdSense Management API から広告ユニット別・ページ別・デバイス別の実績を取得する。週次 snapshot は fetch-metrics-weekly.yml が金曜に自動取得する。ad hoc の分析や取得失敗の調査で使う。
 primary_agent: affiliate-manager
 ---
 
-> **2026-09-20: AdSense は恒久停止した。** 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1。
-> 配信が無いので取得しても実績は 0 行で、週次運用から外している。呼ぶのは過去データの参照時だけ。
+> **2026-10-11: AdSense を新アカウント (`pub-9055416085403520`) の手動枠で再開した** (2026-08-29〜10-10 は配信停止)。
+> 週次 snapshot は `fetch-metrics-weekly.yml` が取得し、改善ループは `/adsense-improvement` が回す。
+> **新アカウントの所有者は stats47 専用の Google アカウント**で、uruhayato373 は AdSense に権限が無い。refresh token は
+> stats47 アカウントで認可して発行する (下の「初回セットアップ」)。旧アカウントの token のままだと
+> `The caller does not have permission` で 0 行になる (2026-W35〜W40 の manifest がこの状態)。
 
 Google AdSense Management API からサイトの広告パフォーマンスデータを取得する。
 
 2 つのモードがある:
 - **ad hoc モード** (デフォルト) — 指定期間/ディメンションで取得して結果を整形表示する
-- **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する（`/weekly-review` からの週次呼び出しは 2026-09-20 に停止した）
+- **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する（週次は `fetch-metrics-weekly.yml` が自動で呼ぶ）
 
 ## 用途
 
@@ -39,10 +42,10 @@ AdSense Management API は **OAuth 2.0** が必須（サービスアカウント
   - Repository Variable `GOOGLE_ADSENSE_CLIENT_ID`
   - `GOOGLE_ADSENSE_CLIENT_SECRET`
   - `GOOGLE_ADSENSE_REFRESH_TOKEN`（`adsense.readonly`）
-  - Repository Variable `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-7995274743017484`）
+  - Repository Variable `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-9055416085403520`。2026-10-13 に旧 `pub-7995274743017484` から替えた）
 - ローカルで ad hoc 実行する場合のみ、同じ 4 変数を shell env か `.env.local` に置く（`.claude/scripts/google-admin/audit-adsense.mjs` が `.env.local` から自己ロードする）。値は git へ commit しない。
 - npm パッケージ: `googleapis`（既にインストール済み）
-- AdSense 管理画面: `ca-pub-7995274743017484` の審査通過・広告配信中
+- AdSense 管理画面: `ca-pub-9055416085403520` (stats47 専用の Google アカウントが所有。内部ブラウザでは `authuser=1`)
 
 ## 初回セットアップ: リフレッシュトークン取得
 
@@ -54,7 +57,8 @@ AdSense Management API は **OAuth 2.0** が必須（サービスアカウント
 cd ~/stats47 && read -r CID && read -rs CSEC && \
   GOOGLE_ADSENSE_CLIENT_ID="$CID" GOOGLE_ADSENSE_CLIENT_SECRET="$CSEC" \
   node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
-# → ブラウザで認可 → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
+# → ブラウザで認可 (★ stats47 専用の Google アカウントを選ぶ) → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
+# Client ID は既存の Variable の値を使い回せる。Client Secret を手元に持っていなければ Console で「クライアント シークレットを追加」して新しい値を使う
 ```
 
 取得後は Client ID の Variable と 2 つの Secret を更新する

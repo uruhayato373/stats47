@@ -95,6 +95,461 @@
       "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
       "status": "draft"
     },
+    "b-ref-dev-a02": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a02",
+      "status": "draft"
+    },
+    "b-ref-dev-a03": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a03",
+      "status": "draft"
+    },
+    "b-ref-dev-a04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a04",
+      "status": "draft"
+    },
+    "b-ref-dev-a05": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a05",
+      "status": "draft"
+    },
+    "b-ref-dev-a06": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a06",
+      "status": "draft"
+    },
+    "b-ref-dev-a07": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a07",
+      "status": "draft"
+    },
+    "b-ref-dev-a08": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a08",
+      "status": "draft"
+    },
+    "b-ref-dev-a09": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a09",
+      "status": "draft"
+    },
+    "b-ref-dev-a11": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a11",
+      "status": "draft"
+    },
+    "b-ref-dev-a13": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a13",
+      "status": "draft"
+    },
+    "b-ref-dev-a15": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a15",
+      "status": "draft"
+    },
+    "b-ref-dev-a17": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a17",
+      "status": "draft"
+    },
+    "b-ref-dev-a19": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a19",
+      "status": "draft"
+    },
+    "b-ref-dev-a21": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a21",
+      "status": "draft"
+    },
+    "b-ref-dev-a26": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a26",
+      "status": "draft"
+    },
+    "b-ref-dev-a31": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a31",
+      "status": "draft"
+    },
+    "b-ref-dev-a32": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a32",
+      "status": "draft"
+    },
+    "b-ref-dev-a36": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a36",
+      "status": "draft"
+    },
+    "b-ref-dev-a40": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a40",
+      "status": "draft"
+    },
+    "b-ref-dev-a42": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a42",
+      "status": "draft"
+    },
+    "b-ref-dev-a45": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a45",
+      "status": "draft"
+    },
+    "b-ref-dev-a49": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a49",
+      "status": "draft"
+    },
+    "b-ref-dev-a51": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-dev-a51",
+      "status": "draft"
+    },
+    "b-ref-gis-a33": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-gis-a33",
+      "status": "draft"
+    },
+    "b-ref-inc-a05": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-inc-a05",
+      "status": "draft"
+    },
+    "b-ref-inc-a06": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-inc-a06",
+      "status": "draft"
+    },
+    "b-ref-inc-a55": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-inc-a55",
+      "status": "draft"
+    },
+    "b-ref-kakei-a01-01": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a01-01",
+      "status": "draft"
+    },
+    "b-ref-kakei-a01-04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a01-04",
+      "status": "draft"
+    },
+    "b-ref-kakei-a01-05": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a01-05",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-02": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-02",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-04",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-05": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-05",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-06": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-06",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-07": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-07",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-08": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-08",
+      "status": "draft"
+    },
+    "b-ref-kakei-a02-09": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a02-09",
+      "status": "draft"
+    },
+    "b-ref-kakei-a03-01": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a03-01",
+      "status": "draft"
+    },
+    "b-ref-kakei-a03-04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a03-04",
+      "status": "draft"
+    },
+    "b-ref-kakei-a04-01": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a04-01",
+      "status": "draft"
+    },
+    "b-ref-kakei-a04-02": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a04-02",
+      "status": "draft"
+    },
+    "b-ref-kakei-a04-03": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a04-03",
+      "status": "draft"
+    },
+    "b-ref-kakei-a04-04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a04-04",
+      "status": "draft"
+    },
+    "b-ref-kakei-a05-04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a05-04",
+      "status": "draft"
+    },
+    "b-ref-kakei-a05-06": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-kakei-a05-06",
+      "status": "draft"
+    },
+    "b-ref-mh-a04": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-mh-a04",
+      "status": "draft"
+    },
+    "b-ref-mh-a07": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-mh-a07",
+      "status": "draft"
+    },
+    "b-ref-mh-a08": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-mh-a08",
+      "status": "draft"
+    },
+    "b-ref-mh-a09": {
+      "vertical": "stats47-note",
+      "r2_path": null,
+      "status": "draft"
+    },
+    "b-ref-mh-a10": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-mh-a10",
+      "status": "draft"
+    },
+    "b-ref-prc-a07": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a07",
+      "status": "draft"
+    },
+    "b-ref-prc-a09": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a09",
+      "status": "draft"
+    },
+    "b-ref-prc-a10": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a10",
+      "status": "draft"
+    },
+    "b-ref-prc-a12": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a12",
+      "status": "draft"
+    },
+    "b-ref-prc-a13": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a13",
+      "status": "draft"
+    },
+    "b-ref-prc-a14": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a14",
+      "status": "draft"
+    },
+    "b-ref-prc-a15": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a15",
+      "status": "draft"
+    },
+    "b-ref-prc-a16": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a16",
+      "status": "draft"
+    },
+    "b-ref-prc-a17": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a17",
+      "status": "draft"
+    },
+    "b-ref-prc-a18": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a18",
+      "status": "draft"
+    },
+    "b-ref-prc-a19": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a19",
+      "status": "draft"
+    },
+    "b-ref-prc-a20": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a20",
+      "status": "draft"
+    },
+    "b-ref-prc-a21": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a21",
+      "status": "draft"
+    },
+    "b-ref-prc-a22": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a22",
+      "status": "draft"
+    },
+    "b-ref-prc-a24": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a24",
+      "status": "draft"
+    },
+    "b-ref-prc-a25": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a25",
+      "status": "draft"
+    },
+    "b-ref-prc-a26": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a26",
+      "status": "draft"
+    },
+    "b-ref-prc-a27": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a27",
+      "status": "draft"
+    },
+    "b-ref-prc-a28": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a28",
+      "status": "draft"
+    },
+    "b-ref-prc-a29": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a29",
+      "status": "draft"
+    },
+    "b-ref-prc-a30": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a30",
+      "status": "draft"
+    },
+    "b-ref-prc-a31": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a31",
+      "status": "draft"
+    },
+    "b-ref-prc-a32": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a32",
+      "status": "draft"
+    },
+    "b-ref-prc-a34": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a34",
+      "status": "draft"
+    },
+    "b-ref-prc-a35": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a35",
+      "status": "draft"
+    },
+    "b-ref-prc-a36": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a36",
+      "status": "draft"
+    },
+    "b-ref-prc-a37": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a37",
+      "status": "draft"
+    },
+    "b-ref-prc-a38": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a38",
+      "status": "draft"
+    },
+    "b-ref-prc-a39": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a39",
+      "status": "draft"
+    },
+    "b-ref-prc-a40": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a40",
+      "status": "draft"
+    },
+    "b-ref-prc-a41": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a41",
+      "status": "draft"
+    },
+    "b-ref-prc-a42": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a42",
+      "status": "draft"
+    },
+    "b-ref-prc-a43": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a43",
+      "status": "draft"
+    },
+    "b-ref-prc-a44": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a44",
+      "status": "draft"
+    },
+    "b-ref-prc-a45": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a45",
+      "status": "draft"
+    },
+    "b-ref-prc-a47": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a47",
+      "status": "draft"
+    },
+    "b-ref-prc-a48": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a48",
+      "status": "draft"
+    },
+    "b-ref-prc-a49": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a49",
+      "status": "draft"
+    },
+    "b-ref-prc-a50": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a50",
+      "status": "draft"
+    },
+    "b-ref-prc-a51": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a51",
+      "status": "draft"
+    },
+    "b-ref-prc-a52": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/b-ref-prc-a52",
+      "status": "draft"
+    },
     "d-geo-analysis-template-compendium": {
       "vertical": "stats47-note",
       "r2_path": null,

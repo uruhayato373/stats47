@@ -1,3 +1,5 @@
+import { REFERENCE_COVER_EXTRA, REFERENCE_COVER_HEADLINES } from './reference-cover-copy';
+import { REFERENCE_COVER_FIGURES } from './reference-cover-figures';
 /** noteカバーの制作判断。実測値は入力JSON、地図は既存GIS、画像は派生物。 */
 export const NOTE_COVER_REFRESH_VERSION = '2026-09-28-v4';
 /** v4 は日本地図を横置きにし、実測値が47県そろうランキングをコロプレス化する。 */
@@ -65,6 +67,7 @@ export const BOLD_COVER_HEADLINES: Record<string, string> = {
   'paid-n66ffb10aa41b': '凡例と\nアクセシビリティ',
   'recovered-n03e45e40d3a7': 'KMLを\nGoogleマップで',
   'recovered-ne4a6ec30706a': 'マンガを読む人\n多い県は？',
+  ...REFERENCE_COVER_HEADLINES,
 };
 export type NoteCoverCopy = {
   headline: string;
@@ -492,6 +495,7 @@ export const EXTRA_COVER_HEADLINES: Record<string, { kicker: string; headline: s
   "d-engel-coefficient-income": {"kicker": "2024年・五分位階級", "headline": "年収差4.74倍、\nエンゲル係数差は\n8ポイント", "subline": "Q1は33.1%、Q5は25.0%。補習教育は56.1倍"},
   "d-kakei-spending-personality": {"kicker": "家計調査・690品目", "headline": "ラーメン外食の\n1位は山形", "subline": "冷凍ぎょうざは宮崎、焼肉は高知が1位"},
   "koumuin-shigoto-kouritsuka-ai": {"kicker": "", "headline": "公務員の事務作業\nAIで半日仕事が\n数分に", "subline": ""},
+  ...REFERENCE_COVER_EXTRA,
 };
 
 /** Explainer covers: one figure that the article itself publishes (public R2 `<r2Path>/<image>`). */
@@ -513,6 +517,7 @@ export const EXPLAINER_COVER_FIGURES: Record<string, { image: string; caption: s
   "d-education-income-gap": {"image": "images/ratio-chart.png", "caption": "記事の図: 教育費の品目別Q5/Q1倍率"},
   "d-engel-coefficient-income": {"image": "images/gap-spectrum.png", "caption": "記事の図: 品目別Q5/Q1支出倍率"},
   "d-kakei-spending-personality": {"image": "images/food-champions.png", "caption": "記事の図: 食の全国1位コレクション"},
+  ...REFERENCE_COVER_FIGURES,
 };
 
 /** Palette guides: swatches drawn from the d3-scale-chromatic schemes each chapter covers. */

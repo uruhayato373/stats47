@@ -159,6 +159,7 @@ note 記事の企画・制作の前に、教材の分析企画のうち自分の
 各企画には同じ指標を使う公開物が候補として付く。問いが同じ公開物があれば `record --status done --target <ページID>`、
 新しく作るなら作ったあとに `done`、作らないと決めたら `record --status declined --reason <理由>` を記録する (`--by` に自分の名前)。
 企画は書籍の問いの手掛かりで、数値・本文は一次資料と R2 で取り直す。正典は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+記事にする手順 (R2 の観測値からの下ごしらえ・問いへの答えの執筆・数値照合の検査・R2 への保存) は `/expand-reference-notes`。
 
 ## Output Contract
 

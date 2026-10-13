@@ -18,7 +18,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 ## 担当範囲
 
 - **アフィリエイト収益の計測分析** (2026-09-30 に adsense-analyst を廃止して移管) — imp / click / CTR / 確定収益を分析する。評価の主指標は**確定収益 / 1,000 viewable impression**で、クリック数ではない。実測値の取得は `ga4-analyst`、A8 のレポート収集は `a8-report-collector` に委譲する。
-- **AdSense 停止の維持確認** (同上) — 本番に AdSense スクリプトが復活していないことを `curl -s https://stats47.jp/ | grep -c "adsbygoogle\|pagead2"` が 0 であることで確かめる。再開はオーナー判断で、提案しない。
+- **AdSense の配置改善** (2026-10-11 の再開で、停止の維持確認から置き換えた) — `/adsense-improvement` の主担当。新アカウント `pub-9055416085403520` の手動枠 11 ユニット (`apps/web/src/lib/google-adsense/constants.ts`) を、週次 snapshot のユニット別の収益・視認率と KPI `ad-yield` (GA4 Japan PV あたりの AdSense 収益) で評価する。再開後 4 週 (2026-W42〜W45) はベースライン期間で配置を変えない。自動広告・広告インテントはオフのままにし、戻す提案はオーナー承認を前提にする (`affiliate-ads-standards.md` §12)。アフィリエイト枠と同じ面を同じ週に変えない (交絡)。
 - **意図ハブ保守** — `affiliate-category.ts` の `AffiliateVertical` (10 軸) と 3 map の整合。theme/category 追加時の写像更新。
 - **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。`direct` = 直接属性方式の台帳登録。
 - **直接配置の inventory ownership** — 直接属性方式 (`<affiliate-banner>` / note 生 HTML) の台帳 SSOT `apps/web/scripts/affiliate-direct-placements-data.ts` を単一所有。配置と台帳登録をセットで守らせる。
