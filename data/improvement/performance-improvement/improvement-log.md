@@ -638,3 +638,5 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
   `open` 状態は **0 件**。ローカル `npm audit` (dev込み) も moderate 4 件 (qs パッケージ由来、fix
   available) のみで critical/major は残存しない。当時記録された「Dependabot 残 76 件・critical 19」は
   すでに Dependabot 自身の自動 PR/security update で解消されていた。完了条件達成。
+
+- **2026-10-13**: PERF-WORKER-P99-01 を期限超過のまま上限 10 件を塞いでいたため、オーナー指示で improvements.md の active から外し backlog `PERF-WORKER-P99-01` へ移した。effect ラベルは付けていない (未確定)。
