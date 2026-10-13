@@ -7,8 +7,9 @@ import {
   REFERENCE_PLACEMENT_DECISIONS,
   type ReferencePlacementDecision,
 } from "../../../../packages/data-configs/src/evidence-inventory/placement-decisions";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
-const PLACEMENT_DECISIONS_PATH = "packages/data-configs/src/evidence-inventory/placement-decisions.ts";
+const PLACEMENT_DECISIONS_PATH = datasetPath("source-inventory.placement-decisions");
 
 export type ReferenceExpansionPlanStatus = "draft" | "blocked";
 
@@ -30,7 +31,7 @@ function frontmatterValue(body: string, key: string): string | null {
 }
 
 /**
- * テーマ企画は見送りの記録 (packages/data-configs/src/evidence-inventory/placement-decisions.ts) の
+ * テーマ企画は展開判断の記録 (data/source-inventory/placement-decisions.json) の
  * channel=theme の planned / blocked から作る (2026-10-10 に backlog の表から移した)。rejected は企画ではないので出さない。
  */
 export function referenceThemePlans(

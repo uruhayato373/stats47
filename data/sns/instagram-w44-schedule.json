@@ -95,5 +95,18 @@
       "slide-5-outro-1080x1350.png"
     ],
     "post_id": 1108
+  },
+  {
+    "date": "2026-11-01",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "consumption-expenditure-multi-person-households-per-month",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1143
   }
 ]

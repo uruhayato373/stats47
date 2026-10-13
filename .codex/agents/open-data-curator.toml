@@ -143,6 +143,12 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 - GIS/metric/ThemeCatalogの既存SSOTと二重管理していない
 - 実データ未取得を「利用可能確認済み」と誤報告しない
 
+## 教材 (参考文献) の企画の引き渡し
+
+分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`) を足した・変えたら、`npm run reference:expansion -- check` と
+`status` を実行し、展開先ごとの未着手を各担当へ渡す (担当の一覧と記録の仕方は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」)。企画の `contentRoles` は展開先の宛先なので、
+載せる見込みの無い展開先を入れない。
+
 ## Output Contract
 
 chat は `Source | Dataset | Reproducibility class | Evidence | Next owner` の1表のみ。候補と取得可能性を

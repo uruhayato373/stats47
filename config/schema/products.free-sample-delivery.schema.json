@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "無料見本の配布の記録",
+  "description": "data/products/free-sample-delivery.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "productId": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "publicationStatus": {
+      "type": "string"
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "_delivery": {
+          "type": "object",
+          "properties": {
+            "artifactDirectory": {
+              "type": "string"
+            },
+            "manifestSha256": {
+              "type": "string"
+            },
+            "indicatorCount": {
+              "type": "number"
+            },
+            "pptxIndicatorCount": {
+              "type": "number"
+            },
+            "hasXlsx": {
+              "type": "boolean"
+            },
+            "officeValidation": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "productId",
+    "generatedAt",
+    "publicationStatus",
+    "delivery"
+  ]
+}

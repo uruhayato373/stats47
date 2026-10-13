@@ -6,13 +6,13 @@ import type {
   EvidenceResolution,
 } from "../types";
 
-import analysesJson from "./analyses.json";
+import analysesJson from "../../../../../data/source-inventory/prefecture-deviation/2018/analyses.json";
 
-export const PREFECTURE_DEVIATION_EDITION = "2018";
-export const PREFECTURE_DEVIATION_REVIEWED_AT = "2026-09-15";
+export const PREFECTURE_DEVIATION_EDITION = analysesJson.edition;
+export const PREFECTURE_DEVIATION_REVIEWED_AT = analysesJson.reviewedAt;
 
 /**
- * 久保哲朗『47都道府県の偏差値』(小学館, 2018) の分析・論点単位の authored SSOT。
+ * 久保哲朗『47都道府県の偏差値』(小学館, 2018) の分析・論点単位の authored SSOT。正本は data/source-inventory/prefecture-deviation/2018/analyses.json。
  * 書籍の文章・図表・偏差値の数値は保持せず、問い・ページ範囲・stats47 側の lineage だけを持つ。
  * kakei-marketing と同じ形 (chapter = 分析トピック単位) で source-inventory CLI が同じ JSON を読み、
  * ページ範囲 → 解決結果を決定的に展開する (範囲の重複・未知resolutionはbuildが拒否)。

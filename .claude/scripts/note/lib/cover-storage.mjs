@@ -1,4 +1,4 @@
-/** Private R2 cover objects. S3 credentials or the user's existing Wrangler OAuth session. */
+/** R2 objects for note covers and article bodies. S3 credentials or the user's existing Wrangler OAuth session. */
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -7,7 +7,7 @@ import { rootCertificates } from 'node:tls';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
 import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 
@@ -154,32 +154,58 @@ export async function fetchNoteDetail(noteId) {
   return data;
 }
 
-export function createCoverStore() {
+const CONTENT_TYPES = {
+  '.md': 'text/markdown; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.csv': 'text/csv; charset=utf-8',
+  '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp', '.gif': 'image/gif', '.pdf': 'application/pdf', '.html': 'text/html; charset=utf-8',
+};
+export const r2ContentType = (key) => CONTENT_TYPES[path.extname(key).toLowerCase()] ?? 'application/octet-stream';
+
+/**
+ * One R2 bucket. writeOnce refuses to replace an existing object (covers and archives are immutable).
+ * Listing needs S3 credentials; the Wrangler fallback can read, write and delete single objects only.
+ */
+export function createR2Store({ bucket, writeOnce = false }) {
   const endpoint = process.env.R2_S3_ENDPOINT;
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (endpoint && accessKeyId && secretAccessKey) {
     const client = new S3Client({ region: 'auto', endpoint, credentials: { accessKeyId, secretAccessKey } });
     return {
+      bucket,
       async get(key) {
         try {
-          const out = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
+          const out = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
           const bytes = Buffer.from(await out.Body.transformToByteArray());
-          if (bytes.length > LIMIT) throw Error('cover exceeds size limit');
+          if (bytes.length > LIMIT) throw Error('R2 object exceeds size limit');
           return bytes;
         } catch (error) {
           if (error.$metadata?.httpStatusCode === 404 || error.name === 'NoSuchKey') return null;
-          throw Error('private cover storage unavailable');
+          throw Error(`R2 read unavailable (${bucket})`);
         }
       },
       async put(key, bytes) {
-        await client.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: bytes,
-          ContentType: key.endsWith('.json') ? 'application/json' : 'image/png', IfNoneMatch: '*' }));
+        await client.send(new PutObjectCommand({ Bucket: bucket, Key: key, Body: bytes,
+          ContentType: r2ContentType(key), ...(writeOnce ? { IfNoneMatch: '*' } : {}) }));
+      },
+      async delete(key) {
+        if (writeOnce) throw Error('write-once R2 store refuses deletes');
+        await client.send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
+      },
+      async list(prefix) {
+        const objects = [];
+        let token;
+        do {
+          const out = await client.send(new ListObjectsV2Command({ Bucket: bucket, Prefix: prefix, ContinuationToken: token }));
+          for (const o of out.Contents ?? []) objects.push({ key: o.Key, size: o.Size, lastModified: o.LastModified?.toISOString() ?? null });
+          token = out.NextContinuationToken;
+        } while (token);
+        return objects;
       },
     };
   }
   const config = wranglerConfigFile();
-  if (!fs.existsSync(config)) throw Error('private R2 authentication unavailable (S3 or wrangler login required)');
+  if (!fs.existsSync(config)) throw Error('R2 authentication unavailable (S3 or wrangler login required)');
   const token = wranglerTokenProvider(config);
   // Authorization is confined to the Cloudflare API; never persisted in the ledger or returned to the UI.
   let account = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -196,22 +222,35 @@ export function createCoverStore() {
       if (!Array.isArray(accounts) || accounts.length !== 1) throw Error('CLOUDFLARE_ACCOUNT_ID is required for multiple accounts');
       account = accounts[0].id;
     }
-    return `/accounts/${account}/r2/buckets/${BUCKET}/objects/${key.split('/').map(encodeURIComponent).join('/')}`;
+    return `/accounts/${account}/r2/buckets/${bucket}/objects/${key.split('/').map(encodeURIComponent).join('/')}`;
   }
   return {
+    bucket,
     async get(key) {
       const out = await api(await objectPath(key));
       if (out.status === 404) return null;
-      if (out.status !== 200) throw Error(`private cover read HTTP ${out.status}`);
+      if (out.status !== 200) throw Error(`R2 read HTTP ${out.status} (${bucket})`);
       return out.body;
     },
     async put(key, bytes) {
       const out = await api(await objectPath(key), { method: 'PUT', body: bytes,
-        headers: { 'content-type': key.endsWith('.json') ? 'application/json' : 'image/png',
-          'if-none-match': '*', 'content-length': String(bytes.length) } });
-      if (![200, 201].includes(out.status)) throw Error(`private cover write HTTP ${out.status}`);
+        headers: { 'content-type': r2ContentType(key), ...(writeOnce ? { 'if-none-match': '*' } : {}),
+          'content-length': String(bytes.length) } });
+      if (![200, 201].includes(out.status)) throw Error(`R2 write HTTP ${out.status} (${bucket})`);
+    },
+    async delete(key) {
+      if (writeOnce) throw Error('write-once R2 store refuses deletes');
+      const out = await api(await objectPath(key), { method: 'DELETE' });
+      if (![200, 204, 404].includes(out.status)) throw Error(`R2 delete HTTP ${out.status} (${bucket})`);
+    },
+    async list() {
+      throw Error('R2 listing requires S3 credentials (R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY)');
     },
   };
+}
+
+export function createCoverStore() {
+  return createR2Store({ bucket: BUCKET, writeOnce: true });
 }
 
 export async function readStoredCover(revision, store = createCoverStore()) {

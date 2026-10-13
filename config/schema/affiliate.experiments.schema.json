@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "アフィリエイト実験の台帳",
+  "description": "data/affiliate/experiments.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "_comment": {
+      "type": "string"
+    },
+    "_kinds": {
+      "type": "object",
+      "properties": {
+        "creative": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "impressions": {
+                          "type": "number"
+                        },
+                        "clicks": {
+                          "type": "number"
+                        },
+                        "ctr": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "banner": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "impressions": {
+                          "type": "number"
+                        },
+                        "clicks": {
+                          "type": "number"
+                        },
+                        "ctr": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "end-banner": {
+                  "type": "string"
+                },
+                "observedAt": {
+                  "type": "string"
+                },
+                "discovery-registration": {
+                  "type": "string"
+                },
+                "decision-consultation": {
+                  "type": "string"
+                },
+                "offer": {
+                  "type": "boolean"
+                },
+                "page": {
+                  "type": "boolean"
+                },
+                "push": {
+                  "type": "boolean"
+                }
+              }
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "_comment",
+    "_kinds",
+    "experiments"
+  ]
+}

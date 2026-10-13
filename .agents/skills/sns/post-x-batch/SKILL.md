@@ -48,6 +48,21 @@ node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [
   (正典は metric config の導出規則。`build-discovery-index.ts` が解決する)。
   **指標の呼び方はこの 2 つを使い、`title` の調査名をそのまま本文に書かない**。
 
+### 新4型の候補追加
+
+新規バッチではSNS規約§2-9aの家計レシート・県の図鑑・順位の乗り換え図を候補に含める。
+題材が合えば `/render-sns-stills` の `render-data-card.ts` を使い、生成された `x/draft.json` を③の入力へ加える。
+この4型は県・複数費目・2時点を必要とするため、①の単一指標スコアによる自動割当とは別に対象を決める。
+追加分も本数枠・既存投稿との重複・予約日時を検査し、同じ③④⑤で登録する。
+`domain` / `mediaPath` / `canonicalUrl` / `campaign` / `metricKeys` は維持する（県のカードをランキングURLへ送らない）。
+4型の画像は専用CLIで生成済みのPNGを使用し、欠落時は同じ型を再生成する。
+
+### 教材 (参考文献) の企画の候補追加
+
+`npm run reference:expansion -- pending --channel x` の未着手の企画も候補に加える (書籍の問いを X の 1 投稿で答えられるものだけ)。
+同じ指標の投稿が既にあり問いも同じなら `record --status done --target sns:<投稿ID>`、投稿にしたら登録後の投稿 ID で `done`
+(予約・下書きの段階は `planned`)、X に向かないなら `declined --reason` を記録する。正典 `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
 ### ② 画像バッチ (決定的)
 
 各候補の `imageKind` に応じて画像を生成する。**既定 `ranking-card` は quick-still で数秒生成**:
@@ -71,7 +86,7 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 例: `npx tsx .claude/scripts/sns/quick-still.ts --key waste-recycling-rate --year 2023 --layout spotlight --out .local/verification/x-visuals/spotlight --require-png`。
 型の実装は `.claude/scripts/sns/lib/ranking-story-card.ts`、再現用のlayoutと年は生成先の`source.json`に記録する。
 単位・年度・出典は保持し、中央値を全国平均と呼ばず、同値の最大/最小は同順位を明記する。
-`--layout`省略時は既存の`columns`。この比較生成は台帳・予約添付・カタログの既定割当を変更しない。
+`--layout`省略時は全47県タイルの`all47`。この比較生成は台帳・予約添付・カタログの既定割当を変更しない。
 既定割当の採択はSNS規約§2-10で扱う。表示した事実と本文の主張が合う画像を選ぶ。
 検証: `node --import tsx --test .claude/scripts/sns/__tests__/ranking-story-card.test.ts`。
 
@@ -148,3 +163,5 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予
 - 投稿 (ローカル): `.claude/skills/sns/publish-x/`
 - 勝ちパターン: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`
 - オーナー agent: `.claude/agents/x-strategist.md`
+
+タイル長期変化は `--kind tile-change --key total-population|households|births --from <年> --to <年>`。同じ定義・単位の47県で計算し、人口2025年は国勢調査確定値を使う。新規の上位・下位5県チャート生成は廃止。`quick-still` と `RankingX-Chart` は1080×1350の全47県タイルを生成する（過去のファイル名は互換維持）。予約の差し替えでも公開済みの共有素材を上書きしない。

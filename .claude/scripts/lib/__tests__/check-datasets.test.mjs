@@ -5,14 +5,14 @@
  */
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
-import { checkDatasets, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
+import { checkDatasets, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -231,4 +231,31 @@ test("実リポジトリのコードに data/ の直書きが残っていない"
   const tops = dataTops(DATASETS);
   assert.ok(tops.includes("gsc") && tops.includes("sns"), "台帳から data/ の第 1 階層を取れていない");
   assert.deepEqual(findDataPathLiterals(tops, dataLiteralHits(tops)), []);
+});
+
+test("config / ledger の JSON は schema の宣言・実在・形の一致が無ければ落ち、それ以外の kind は問わない", () => {
+  const schema = { type: "object", required: ["id"], properties: { id: { type: "string" } } };
+  const store = { "s/x.schema.json": schema, "data/a.json": { id: "a" }, "data/b.json": { id: 1 }, "data/c.json": {} };
+  const run = (datasets, files) => checkSchemas({ datasets, files, readJson: (p) => store[p], exists: (p) => p in store });
+  const row = (id, path, kind, opts = {}) => ({ id, path, kind, domain: "site", target: "data", description: id, ...opts });
+
+  assert.deepEqual(run([row("ok", "data/a.json", "ledger", { schema: "s/x.schema.json" })], ["data/a.json"]), []);
+  assert.deepEqual(run([row("series", "data/c.json", "series")], ["data/c.json"]), [], "series は schema を求めない");
+  assert.deepEqual(run([row("sch", "s/x.schema.json", "config")], ["s/x.schema.json"]), [], "schema 自身は対象外");
+  assert.match(run([row("none", "data/a.json", "config")], ["data/a.json"])[0], /schema \(JSON Schema のパス\) が無い/);
+  assert.match(run([row("gone", "data/a.json", "ledger", { schema: "s/missing.schema.json" })], ["data/a.json"])[0], /schema のファイルが無い/);
+  assert.match(run([row("type", "data/b.json", "ledger", { schema: "s/x.schema.json" })], ["data/b.json"])[0], /schema に合わない/);
+  assert.match(run([row("req", "data/c.json", "ledger", { schema: "s/x.schema.json" })], ["data/c.json"])[0], /schema に合わない/);
+  assert.match(run([row("bad", "data/c.json", "series", { schema: "s/x.json" })], ["data/c.json"])[0], /\*\.schema\.json を指す/);
+});
+
+test("実リポジトリの config / ledger の JSON はすべて schema を持ち、形が合う", () => {
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).split("\0").filter(Boolean);
+  const errors = checkSchemas({
+    datasets: DATASETS,
+    files,
+    readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
+    exists: (p) => existsSync(resolve(ROOT, p)),
+  });
+  assert.deepEqual(errors, []);
 });

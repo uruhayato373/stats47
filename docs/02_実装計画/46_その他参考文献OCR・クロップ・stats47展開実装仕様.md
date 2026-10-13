@@ -16,7 +16,7 @@ tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 本書は、日本国勢図会以外でprivate Google Driveへ保全済みの資料 (2026-09-10 時点で 11 資料) を、検証付きで一時復元し、文字抽出、
 OCR、ページ画像化、内部照合用クロップを行った後、既存のstats47 SSOTへ安全に展開するための資料別契約である。
 保存、復元、権利、一次資料への昇格条件は`.claude/rules/reference-source-standards.md`を正典とし、進捗は
-`.claude/todo/backlog.md`の`REFERENCE-SOURCE-EXPANSION-01`（3資料）と`KAKEI-MARKETING-CONTENT-01`（家計調査書籍）で管理する。
+`.claude/todo/backlog.md`で管理する。分析企画の展開先ごとの振り分けは`REFERENCE-EXPANSION-{NOTE,BLOG,SNS,SITE}-01` (記録は`data/source-inventory/expansion.json`)、テーマ・ブログの下書きは`REFERENCE-CONTENT-DRAFTS-01`（旧`REFERENCE-SOURCE-EXPANSION-01`・`KAKEI-MARKETING-CONTENT-01`は 2026-09 に完了記録なしで backlog から消えていた）。
 
 この契約は原本画像やOCRを公開してよいという許可ではない。クロップは内部照合専用で、公開物は一次資料から
 再取得した事実・数値とstats47独自の文章・図表だけで構成する。Drive 版 folder の file 差し替え、remote R2 write、
@@ -34,7 +34,7 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 奥付ページが Kindle のレビュー画面で終わるため刊行年・ISBN を確認できず、版は `unknown` / Drive folder `版不明` とする。
 その後 S2 (Markdown 文字起こし) と S4 台帳まで到達したが、台帳は論点の台帳を持たず、重複・出典記述に当たらない本文ページまで
 既定の「判別不能」へ落ちていた。2026-10-08 のオーナー判断で 7 冊ともサイトのネタ元として扱い、`kakei-marketing` と同じ形の
-論点台帳 `packages/data-configs/src/evidence-inventory/<sourceKey>/analyses.json` で全ページをページ範囲ごとに解決する。
+論点台帳 `data/source-inventory/<sourceKey>/<edition>/analyses.json` (JSON Schema `data/source-inventory/analyses.schema.json`。2026-10-13 に packages/ から移した) で全ページをページ範囲ごとに解決する。
 表紙・目次・奥付・重複スキャンも範囲と理由を台帳に書き、範囲に入らないページがあれば `source-inventory build` が止まる。
 数値は書籍から取らず一次資料で再取得し、一次資料に辿れない項目 (民間調査・独自集計・俗説) は `primary-source-unavailable` に留める。
 
@@ -173,7 +173,7 @@ OCRとクロップは、掲載テーマ、統計名、調査主体、調査年�
 ### 4.4 マーケティングに使える「家計調査」（吉本佳生・講談社 2015）
 
 第1部（経済理論をくつがえすデータ分析編・5章）と第2部（47都道府県庁所在市別食生活データ編）、はじめに・おわりにを、
-**分析・論点単位のauthored inventory** `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json`
+**分析・論点単位のauthored inventory** `data/source-inventory/kakei-marketing/2015/analyses.json`
 （TS入口は同ディレクトリ`index.ts`、型は`KakeiMarketingAnalysis`）で解決する。source-inventory CLIは同じJSONを読み、
 ページ範囲→解決結果を決定的に展開する（範囲の重複・未知resolutionはbuildが拒否）。各項目は書籍の文章・図表・数値を
 持たず、stats47として検証する独立した問い・ページ範囲・既存metric・一次資料・次の制作単位だけを持つ。

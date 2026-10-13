@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)",
+  "description": "config/theme-selection-viewpoints.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "$comment": {
+      "type": "string"
+    },
+    "version": {
+      "type": "number"
+    },
+    "adoptionCriteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          },
+          "check": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "$comment",
+    "version",
+    "adoptionCriteria",
+    "rules"
+  ]
+}

@@ -1,0 +1,690 @@
+{
+  "generated_at": "2026-10-11T11:19:05.198Z",
+  "account": "stats47",
+  "audit_only": false,
+  "total_indexed": 286,
+  "selected": 286,
+  "summary": {
+    "compliant": 94,
+    "pending": 190,
+    "updated": 0,
+    "skipped_paid": 0,
+    "failed": 2
+  },
+  "articles": [
+    {
+      "slug": "00-claude-code-intro-for-public-servants",
+      "key": "n455ec72c5d62",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "00-estat-claude-code-intro",
+      "key": "n258277f96f88",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "01-claude-code-setup-complete",
+      "key": "nc5126820c00d",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "01-estat-api-key-setup",
+      "key": "nc5a1358141a5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "02-search-estat-statsdataid",
+      "key": "n7e4572d23a1b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "03-fetch-prefecture-ranking",
+      "key": "n914ee28ff773",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "03-it-dept-security-doc",
+      "key": "nedcf6ded5c36",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "04-excel-download-and-parse",
+      "key": "n23262330a5e5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "04-meeting-minutes-30min-to-5min",
+      "key": "n967644e00ad9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "05-assembly-answer-prompts",
+      "key": "ne4e746d2b0cf",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "05-pandas-duckdb-derived-metrics",
+      "key": "n0477d544669b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "06-ordinance-revision-review",
+      "key": "ne23e18ce9289",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "06-prefecture-code-and-merge",
+      "key": "n7ba7ee560bbb",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "07-official-doc-skills",
+      "key": "n1c78ab40901f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "07-year-on-year-diff",
+      "key": "n0bd95dda8588",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "08-benchmark-table-5min",
+      "key": "nd4afc48385a3",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "08-proposal-doc-checklist-20",
+      "key": "n59c27bbc973e",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "09-assembly-chart-generation",
+      "key": "nce1681932f40",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "09-assembly-question-points",
+      "key": "nc276079a5317",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "10-ai-without-personal-info",
+      "key": "n9b2109c9f964",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "10-claude-skills-routinize",
+      "key": "n53c16adaf2c7",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "11-hooks-personal-info-masking",
+      "key": "ne54920337944",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "11-mcp-sqlite-search",
+      "key": "n347f923606f1",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "12-audit-ready-settings",
+      "key": "nc53fa60114f8",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "13-ollama-offline-local-llm",
+      "key": "n1e72ba0b4a43",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "14-excel-budget-aggregation",
+      "key": "nc6e02fbe6073",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "15-data-preprocessing-intro",
+      "key": "naf04e81afb7b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "16-subsidy-doc-consistency",
+      "key": "nb62db0d2826f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "17-year-on-year-analysis",
+      "key": "n5afa58e8e1e4",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "18-pr-magazine-rewrite",
+      "key": "nef4df902db37",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "19-faq-auto-generation",
+      "key": "nb149e4940b5f",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "20-complaint-reply-patterns",
+      "key": "n311eeeba660b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "21-disaster-sns-multilang",
+      "key": "nf01a62d2dc16",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "31-claude-code-how-to-ask",
+      "key": "n159230eb514c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "32-claude-skills-getting-started",
+      "key": "nac5e44284865",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-agricultural-employment-population",
+      "key": "n66a286b5211b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-agricultural-output",
+      "key": "ne6c7d221803a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-average-temperature",
+      "key": "n97ddfadff36a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-avg-propensity-to-consume-worker-households",
+      "key": "n76446d252957",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-consumption-expenditure-multi-person-households-per-month",
+      "key": "n89f8035eb53d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-convenience-store-sales",
+      "key": "n86ef06aa91dc",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-current-liabilities-balance-multi-person-households-per-household",
+      "key": "nbdbde1672cc0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-day-time-population",
+      "key": "n7a494830e01d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-electricity-demand",
+      "key": "n71b4f712bea4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-electricity-generation-capacity",
+      "key": "n5b3dbb6c7cef",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-final-energy-consumption-per-capita",
+      "key": "n1374350f7172",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-general-households",
+      "key": "nd93084c0cb0c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-aichi",
+      "key": "nda72a0bed2c4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-akita",
+      "key": "n5e9502c6507c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-aomori",
+      "key": "n85831c0c47aa",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-chiba",
+      "key": "n1d5481680c03",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-ehime",
+      "key": "nb627534c8b66",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-fukui",
+      "key": "n18bb5a58060c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-fukuoka",
+      "key": "nb7cfd81af156",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-fukushima",
+      "key": "n4c363c356b63",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-gifu",
+      "key": "n6136c0f13156",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-gunma",
+      "key": "n1b9bf465327d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-hiroshima",
+      "key": "n0be24c40b88d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-hokkaido",
+      "key": "n39016e5f0002",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-hyogo",
+      "key": "n6f5ab18ba6ff",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-ibaraki",
+      "key": "n65d95575f7a5",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-ishikawa",
+      "key": "ndf2afaef16c0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-iwate",
+      "key": "na3020a08cef7",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kagawa",
+      "key": "ne69b740f702e",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kagoshima",
+      "key": "n555435ada7ed",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kanagawa",
+      "key": "nd0326279977a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kochi",
+      "key": "n29417de32c83",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kumamoto",
+      "key": "n7e98a46bf791",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-kyoto",
+      "key": "n2a18f8e7098c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-mie",
+      "key": "n8113876eaeab",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-miyagi",
+      "key": "nb479aff3cf05",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-miyazaki",
+      "key": "n7f0be4fef37c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-nagano",
+      "key": "nb6061a164201",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-nagasaki",
+      "key": "nd547ff50cbe6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-nara",
+      "key": "n366d898d8107",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-niigata",
+      "key": "ndd0bb1c14aa4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-oita",
+      "key": "n37ab621d01ad",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-okayama",
+      "key": "ne788feae75bf",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-okinawa",
+      "key": "n757284230786",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-osaka",
+      "key": "n7ac1079b6f20",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-saga",
+      "key": "n1972caf5203d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-saitama",
+      "key": "ne760e2866251",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-shiga",
+      "key": "ne5569b417135",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-shimane",
+      "key": "n75d68c2bb7e9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-shizuoka",
+      "key": "n35ce2a1b9248",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-tochigi",
+      "key": "n0fd0305a6b8c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-tokushima",
+      "key": "ne2abc0fc7530",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-tokyo",
+      "key": "n9d384a674462",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-tottori",
+      "key": "n24d6b689079d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-toyama",
+      "key": "n13bca568c98a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-wakayama",
+      "key": "ncc56ff8990d0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-yamagata",
+      "key": "na3d645a7d50c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-yamaguchi",
+      "key": "n88dde65e0774",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-yamanashi",
+      "key": "n3416a225e0c6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-late-elderly-medical-expense-per-insured",
+      "key": "ncd0aea7cd435",
+      "status": "draft_blocked",
+      "count": 99,
+      "paid": false,
+      "error": "未公開下書きがあるため、下書き保全のためタグ更新を停止しました"
+    },
+    {
+      "slug": "paid-nfe2c65e669a8",
+      "key": "nfe2c65e669a8",
+      "status": "draft_blocked",
+      "count": 99,
+      "paid": true,
+      "error": "未公開下書きがあるため、下書き保全のためタグ更新を停止しました"
+    }
+  ]
+}

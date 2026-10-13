@@ -178,8 +178,13 @@ if [ -n "$STAGED_ANY" ]; then
     echo -e "${RED}❌ 置き場の台帳違反 (台帳に無い記録・旧置き場の参照・画像の置き場違反・コードの data/ 直書き)。.claude/rules/data-storage.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
-  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate; then
-    echo -e "${RED}❌ note 画像資産の契約違反 (派生 PNG の追跡・ランキング記事のデータ欠落)。.claude/rules/note-image-assets.md を参照。${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/source-vault/reference-expansion.mjs" check; then
+    echo -e "${RED}❌ 教材の展開記録の契約違反 (企画・展開先・ページ ID・公開状態)。.claude/rules/reference-source-standards.md「分析企画の展開」を参照。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate \
+    || ! (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check >/dev/null); then
+    echo -e "${RED}❌ note の台帳・資産の契約違反 (docs/31 の追跡・カバー台帳・記事台帳から生成した索引のずれ)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   if ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-shadcn-parity.mjs" || ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-admin-ui-debt.mjs"; then

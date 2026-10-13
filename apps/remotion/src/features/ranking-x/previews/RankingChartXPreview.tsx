@@ -1,6 +1,12 @@
-import { type RankingEntry, type RankingMeta, type ThemeName, resolveRankingData } from "@/shared";
-import { RankingChartX } from "../RankingChartX";
-import React from "react";
+import {
+  type RankingEntry,
+  type RankingMeta,
+  type ThemeName,
+  resolveRankingData,
+} from '@/shared';
+import { renderAll47TileSvg } from '../../data-cards/all47-svg';
+import { useBuzzMapFonts } from '../../buzz-map/useBuzzMapFonts';
+import React from 'react';
 
 interface RankingChartXPreviewProps {
   theme?: ThemeName;
@@ -10,23 +16,32 @@ interface RankingChartXPreviewProps {
 }
 
 export const RankingChartXPreview: React.FC<RankingChartXPreviewProps> = ({
-  theme = "light",
   meta,
   allEntries,
   displayTitle,
 }) => {
-  const { meta: resolved, entries, precision } = resolveRankingData({ meta, allEntries });
-  const topEntries = entries.slice(0, 5);
-  const bottomEntries = [...entries].sort((a, b) => a.rank - b.rank).slice(-5);
-
+  useBuzzMapFonts();
+  const { meta: resolved, entries } = resolveRankingData({ meta, allEntries });
+  const svg = renderAll47TileSvg(entries, {
+    title: displayTitle || resolved.title,
+    year: resolved.yearName || '',
+    unit: resolved.unit,
+    source: resolved.sourceLabel || 'e-Stat',
+    capitalCities: /県庁所在市/.test([resolved.subtitle, resolved.note].filter(Boolean).join('・')),
+    note:
+      [
+        resolved.subtitle,
+        resolved.demographicAttr,
+        resolved.normalizationBasis,
+        resolved.note,
+      ]
+        .filter(Boolean)
+        .join('・') || undefined,
+  });
   return (
-    <RankingChartX
-      meta={resolved}
-      topEntries={topEntries}
-      bottomEntries={bottomEntries}
-      precision={precision}
-      theme={theme}
-      displayTitle={displayTitle}
+    <div
+      style={{ width: 1080, height: 1350 }}
+      dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
 };

@@ -63,8 +63,17 @@ import { TOTAL_REVENUE_PREFECTURE_2022 } from "./datasets/total-revenue-prefectu
 import { TRAVEL_PARTICIPATION_RATE_OVERNIGHT_2021 } from "./datasets/travel-participation-rate-overnight";
 import { WATER_SUPPLY_ANNUAL_VOLUME_2022 } from "./datasets/water-supply-annual-volume";
 
+/** 権利状態が要確認のため有料パックに入れなかった指標。 */
+export interface ExcludedIndicator {
+  readonly rankingKey: string;
+  readonly indicator: string;
+  readonly reason: string;
+}
+
 export interface Databook {
   readonly title: string;
+  /** 権利状態が要確認で収録から除いた指標 (READINESS.md に記録する)。 */
+  readonly excluded?: readonly ExcludedIndicator[];
   /** 収録データセット。先頭を代表 (プレビュー地図) に使う。全て実データ・基準年固定。 */
   readonly datasets: readonly Dataset[];
 }

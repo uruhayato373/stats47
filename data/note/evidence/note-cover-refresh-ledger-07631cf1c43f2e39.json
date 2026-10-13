@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-07631cf1c43f2e39",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "d-kakei-spending-personality",
+      "sha256": "f9cb43b914ebf9d5a6cf48ae6960823799bfc86f1ee598a0e272104b95b2db3c"
+    }
+  ],
+  "startedAt": "2026-10-12T06:44:13.966Z",
+  "articles": [
+    {
+      "key": "d-kakei-spending-personality",
+      "noteId": "n94cd84139a45",
+      "action": "create",
+      "sourceSha256": "f9cb43b914ebf9d5a6cf48ae6960823799bfc86f1ee598a0e272104b95b2db3c",
+      "previousUrl": null,
+      "contentFingerprint": {
+        "id": "fa36e031ec7d442376bc947e6649b6356a284c975c36c180fe008ef2b4afd11b",
+        "key": "a4b8b035daca10b1e55585f600bd536c6a0caf7c38736e079ee0a9d7581cfb55",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "2b458eb7b395d300702da180b93edec317be7bf6eaea4bbced235c90687b78b9",
+        "body": "1d359a26141ea4c5521a5a1137bf1b4f3aba457bae2c06c765a9d2495d5b8be4",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "df2a3029443640d8c38ee704c397da91c906d6e1ab523a5175c621e6b48ee22b",
+        "belonging_magazine_keys": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "publish_at": "4d95b570f57dc6f2f7df6018a463930cac6e0e8f76c2efac500fe56ba3d9c3be",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-12T06:44:16.222Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/323549967/rectangle_large_type_2_6c8421a6e9b839a2f3437d21e2568e1d.png",
+      "uploadedAt": "2026-10-12T06:44:19.787Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "ecc2b416105ce935b374aa578244ea4c705ca2f1e958353694eceefccd117655",
+        "meanPixelError": 1.313739505597015
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/323549967/rectangle_large_type_2_6c8421a6e9b839a2f3437d21e2568e1d.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-12T06:44:20.179Z"
+    }
+  ],
+  "updatedAt": "2026-10-12T06:44:20.179Z"
+}

@@ -190,7 +190,7 @@ note 記事の stats47.jp リンクには UTM パラメータを付けない。�
 - note の運用上限は **99 個**。公開後に 95 個以上を確保する
 - `#キーワード` 形式で、1 行 1 タグとする
 - 記事のテーマ・登場する都道府県・関連する統計指標・一般的な発見系ワードを網羅する
-- 参考: R2 の任意記事を `bash .claude/scripts/note/restore-from-r2.sh b2-sunshine-duration` で復元して確認
+- 参考: R2 に保存済みの任意記事を `npm run note:article -- checkout b-hottest-prefecture` で取り出して確認する（確認だけなら保存せず、作業コピーを消す）
 
 ## 出力
 
@@ -201,22 +201,26 @@ docs/31_note記事原稿/<slug>/hashtags.txt
 
 全セクション書き終えたら `/edit-note-draft` へ進む（**必ず別チャットで**）。
 
-## 生成後: R2 同期 (ephemeral outbox フロー)
+## 生成後: R2 へ保存
 
-docs/31 は ephemeral outbox。生成後に note-draft-index.json に登録して push する:
+docs/31 は git に何も置かない作業場で、本文と画像の正本は R2 にある。新しい記事は記事台帳 `data/note/articles.json` に
+レコードを足してから `note:article save` で R2 へ保存する（正典 `.claude/scripts/note/catalog/README.md`「作業手順」）:
 
 ```bash
-node -e "
-const fs=require('fs');
-const f='data/note/note-draft-index.json';
-const d=JSON.parse(fs.readFileSync(f,'utf8'));
-d.drafts['<slug>']={vertical:'<vertical>',r2_path:null};
-fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
-"
-git add data/note/note-draft-index.json docs/31_note記事原稿/<slug>
-git commit -m "note: <slug> ドラフト生成"
-git push origin develop
-# → CI が R2 同期 + docs/31 削除。復元は restore-from-r2.sh <slug>
+# 1. 台帳に下書きレコードを足す (書き込みは article-ledger.mjs 経由。項目と制約は data/note/articles.schema.json。
+#    magazine は data/note/magazines.json の登録キー。有料記事は isPaid: true・priceJpy・body.store: "r2-private")
+node --input-type=module -e '
+import { updateArticleLedger } from "./.claude/scripts/note/lib/article-ledger.mjs";
+updateArticleLedger((l) => { l.articles.push({ key: "<slug>", vertical: "<vertical>", title: "<title>",
+  magazine: "<magazine>", isPaid: false, status: "draft", r2Path: "note/<vertical>/<slug>",
+  body: { store: "r2-public", manifest: null } }); });'
+
+# 2. 派生インデックス (note-draft-index.json) を台帳から作り直す
+npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
+
+# 3. 作業コピーを R2 へ保存する (読み戻し SHA 照合 → 台帳の body.manifest 更新 → 作業コピー削除)
+npm run note:article -- save <slug>
+# → git に入るのは台帳 (data/note/articles.json) と派生インデックスだけ。取り出しは note:article -- checkout <slug>
 ```
 
 ## 参照

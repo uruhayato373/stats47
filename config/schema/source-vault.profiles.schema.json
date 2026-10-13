@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "参考文献 vault の資料 profile",
+  "description": "config/source-vault.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "driveRootFolder": {
+      "type": "string"
+    },
+    "driveCollectionFolder": {
+      "type": "string"
+    },
+    "defaultProfile": {
+      "type": "string"
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "sourceKey": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "sourceRootName": {
+            "type": "string"
+          },
+          "driveSourceFolderName": {
+            "type": "string"
+          },
+          "driveEditionFolderName": {
+            "type": "string"
+          },
+          "manifestPath": {
+            "type": "string"
+          },
+          "processing": {
+            "type": "object",
+            "properties": {
+              "usageSpecPath": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "ocrLanguages": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ocrRotationDegrees": {
+                "type": "number"
+              },
+              "ocrPageSegmentationMode": {
+                "type": "number"
+              },
+              "internalArtifacts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "publicOriginalReuse": {
+                "type": "string"
+              },
+              "stats47Targets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "pageImage": {
+                "type": "object",
+                "properties": {
+                  "dpi": {
+                    "type": "number"
+                  },
+                  "format": {
+                    "type": "string"
+                  },
+                  "quality": {
+                    "type": "number"
+                  },
+                  "contentCrop": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "2400x3090": {
+                            "type": "string"
+                          },
+                          "4800x5436": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "bibliography": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              },
+              "publisher": {
+                "type": "string"
+              },
+              "published": {
+                "type": "string"
+              },
+              "isbn": {
+                "type": "string"
+              },
+              "verifiedAt": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sourceKey"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "driveRootFolder",
+    "driveCollectionFolder",
+    "defaultProfile",
+    "profiles"
+  ]
+}

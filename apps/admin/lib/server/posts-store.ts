@@ -1,6 +1,9 @@
 import "server-only";
 
 import path from "node:path";
+import { createHash } from "node:crypto";
+
+import type { PostPlanning } from "../contracts/types";
 
 import { projectRoot } from "./project-root";
 
@@ -10,9 +13,11 @@ import { projectRoot } from "./project-root";
  * ★ webpack にバンドルさせない: `.cjs` は `__dirname` 相対で STORE_PATH
  * (data/sns/posts.json) を解決するため、bundle されると __dirname が
  * .next の出力先になり STORE_PATH が壊れる。createRequire で実行時に絶対パス require し、
- * webpack の静的解析対象から外す。管理画面では読み取りメソッドだけを公開する。
+ * webpack の静的解析対象から外す。書込は下書き本文の保存だけを公開する。
  */
 export interface Post {
+  material_keys?: string[];
+  planning?: PostPlanning;
   id: number;
   platform: string;
   post_type: string | null;
@@ -79,6 +84,7 @@ interface Store {
   query(predicate: (p: Post) => boolean): Post[];
   getById(id: number): Post | null;
   externalIdOf(p: Post): string | null;
+  updateById(id: number, patch: Partial<Post>): Post | null;
 }
 
 // .cjs を実行時の素の Node require で読み込む。`createRequire(...)(path)` や `require(path)` を
@@ -116,4 +122,38 @@ export function getById(id: number): Post | null {
 /** 外部 (各媒体側) の投稿 ID。導出規則は sns-posts-store.cjs の externalIdOf が正本 */
 export function externalIdOf(p: Post): string | null {
   return store().externalIdOf(p);
+}
+
+/** 秒単位の updated_at が同じでも変更を検出する、投稿全体の版。台帳には保存しない。 */
+export function postRevision(post: Post): string {
+  return createHash("sha256").update(JSON.stringify(post)).digest("hex");
+}
+
+export class DraftEditError extends Error {
+  constructor(message: string, public readonly status: number) { super(message); }
+}
+
+/** ユーザー操作による唯一の書込。外部予約・公開の状態や素材は変更しない。 */
+export function saveDraftCaption(id: number, caption: string, revision: string): Post {
+  const post = getById(id);
+  if (!post || post.deleted_at || post.status === "deleted") {
+    throw new DraftEditError("投稿が見つかりません。", 404);
+  }
+  if (post.status !== "draft" || post.scheduled_at || post.posted_at || post.post_url || post.external_id) {
+    throw new DraftEditError("編集できるのは未予約・未公開の下書きだけです。", 409);
+  }
+  if (postRevision(post) !== revision) {
+    throw new DraftEditError("別の操作で更新されています。入力内容を控え、再読込してから保存してください。", 409);
+  }
+  if (!caption.trim() || caption.length > 10000) {
+    throw new DraftEditError("本文は1〜10,000文字で入力してください。", 400);
+  }
+  if (caption === post.caption) return post;
+  // 検査から保存までは同期処理。投稿条件と版を再読込してから、既存の唯一の writer を使う。
+  const updated = store().updateById(id, {
+    caption,
+    approval: { state: "pending", note: "管理画面で本文を変更したため再承認待ち" },
+  });
+  if (!updated) throw new DraftEditError("投稿が見つかりません。", 404);
+  return updated;
 }

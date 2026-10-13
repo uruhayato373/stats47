@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "note の公開 URL 台帳",
+  "description": "data/note/note-published-urls.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "generated_by": {
+          "type": "string"
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "articles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "r2_path": {
+            "type": "string"
+          },
+          "r2_body": {
+            "type": "boolean"
+          },
+          "r2_access": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "price_jpy": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "_meta",
+    "articles"
+  ]
+}

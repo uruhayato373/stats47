@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-10T04:39:26.116Z",
+  "updatedAt": "2026-10-12T03:46:08.935Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7301,6 +7301,214 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-10T04:39:26.116Z"
+    },
+    "NSM-SNAPSHOT-INDEX-STALE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T09:59:19.753Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "node .claude/scripts/snapshot-weekly-metrics.mjs --dry-run"
+            ],
+            "pass": true
+          },
+          "evidence": "読み手 0 件の index.json を削除し、snapshot-weekly-metrics.mjs の index 追記を撤去。check-datasets error 0、dry-run 正常",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T09:59:19.753Z"
+    },
+    "SIMPLIFY-DATASET-SCHEMA-COLUMN-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:02:31.839Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "台帳 33 行に schema を宣言 (既存 7 + config/schema 26 本を実データから推論)。check-datasets が schema 欠落・不在・不一致を error 化。red-green: sales-ledger の schemaVersion を文字列に変えると不一致で落ち、schema 宣言を外すと欠落で落ちることを実測。テスト 19/19",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:02:31.839Z"
+    },
+    "SIMPLIFY-EVIDENCE-INVENTORY-TS-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:05:17.552Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run evidence:check",
+              "npm run check-datasets",
+              "turbo type-check data-configs+admin",
+              "vitest admin japan-zue+reference-expansion-plans"
+            ],
+            "pass": true
+          },
+          "evidence": "生成 TS 4 本 (63,296 行) を data/source-inventory/japan-zue/2025-26/items.{0,1,2}.json へ移し package export を撤去。evidence-inventory の TS は 1,401 行。sync 検査をハッシュ見出しから中身比較へ強化し、旧 TS が 5 件古かったのを再生成で解消。改変 1 件で generated items drift を確認。人が書く analyses.json 8 本は Authored/設定として package に残す",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:05:17.552Z"
+    },
+    "SIMPLIFY-UNUSED-CODE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:25:05.584Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx knip --include dependencies",
+              "devDependencies",
+              "npm run type-check",
+              "vitest ranking/category/correlation/area-profile",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "import 0 件の依存 9 件を外した (root d3/topojson-simplify/youtube-transcript、ranking csv-parse/iconv-lite、correlation drizzle-orm と社内 2 件、category zod と社内 1 件、area-profile 社内 1 件、components react-toggle、remotion generative-ai)。knip の image-size は overrides の shim で誤検出と判明し戻した。type-check 25",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:25:05.584Z"
+    },
+    "SIMPLIFY-PORTFOLIO-CUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-11T10:51:18.413Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git grep importer count per workspace (ges/database/area/category/station-passengers/migration-flow)"
+            ],
+            "pass": true
+          },
+          "evidence": "オーナー判断 (2026-10-11 チャット): SNS・Remotion は残す、テーマ/Geo/調査と商品ファクトリーも継続、残置パッケージは停止を選択。実測で残置 6 件はすべて使用中 (area/category/station-passengers/migration-flow は web・Remotion が import、apps/ges は SNS 動画の道具、packages/database は web のテスト基盤で CLAUDE.md が残置可) のため削除対象 0。判断は memory feedback_portfolio_k",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-11T10:51:18.413Z"
+    },
+    "SNS-SIX-SCHEDULE-20261012": {
+      "class": "manual",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-12T03:46:08.935Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node /tmp/tile6-validate.cjs",
+              "node .claude/scripts/sns/check-post-trace.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "develop 63837dcbb7: X1182-1184 native予約・本文画像日時一致、既存75不変。IG1093/1101は上位下位5県の公開R2 SHAを確認し予約表から取消。IG1185/1186/1187は10/18・10/25・11/18 19:00 JST、3本dryrun成功。全6件scheduled・取消2件deletedをremoteと管理画面で確認。証拠.local/r2/sns/_queue/tile-six-20261012/。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-12T03:46:08.935Z"
     }
   }
 }

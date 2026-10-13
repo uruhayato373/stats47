@@ -22,6 +22,10 @@ primary_agent: x-strategist
 | `--template <id>` | - | 相性表の既定 | §2-0 の template id (`shock`/`versus`/`question`/`paradox`/`number`/`angle-experience`/`angle-howto`) |
 | `--date YYYY-MM-DDThh:mm` | - | 翌日の best_time | 予約日時 (JST) |
 
+家計レシート・県の図鑑・順位の乗り換え図を使う場合は、`/render-sns-stills` の専用CLIで対象の県・品目・年から生成する。
+生成された`x/draft.json`を手順3〜5へ渡し、`domain`・画像パス・県/ランキングの着地URLを維持する。
+これらの型に`quick-still`を使用しない。
+
 ## 手順 (post-x-batch の 5 フェーズを 1 件で回す)
 
 1. **候補 1 件を作る**: `--template` 未指定なら、その key の category を metric 索引で引き、§2-8 相性表の
@@ -48,3 +52,5 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --limit 1
 - 量産版: `.claude/skills/sns/post-x-batch/SKILL.md`
 - 型・画像・頻度 SSOT: `.claude/rules/sns-content-standards.md` §1/§2
 - オーナー agent: `.claude/agents/x-strategist.md`
+
+タイル長期変化は `--kind tile-change --key total-population|households|births --from <年> --to <年>`。同じ定義・単位の47県で計算し、人口2025年は国勢調査確定値を使う。新規の上位・下位5県チャート生成は廃止。`quick-still` と `RankingX-Chart` は1080×1350の全47県タイルを生成する（過去のファイル名は互換維持）。予約の差し替えでも公開済みの共有素材を上書きしない。

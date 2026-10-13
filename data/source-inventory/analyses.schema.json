@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "参考文献 (教材) の分析企画",
+  "description": "data/source-inventory/<sourceKey>/<edition>/analyses.json の形の契約。書籍 1 冊・1 版の問い・主張・採否・一次資料・展開先を 1 企画 1 レコードで持つ。source-inventory CLI がページ単位の inventory.json を生成する入力で、展開先ごとの結果 (済み・企画中・見送り) は data/source-inventory/expansion.json に企画 ID で記録する。書籍の本文・数値・図は書かない (reference-source-standards.md)。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sourceKey",
+    "edition",
+    "reviewedAt",
+    "publicOriginalReuse",
+    "analyses"
+  ],
+  "definitions": {
+    "primarySource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organization",
+        "publicationOrDataset",
+        "url",
+        "checkedAt",
+        "rights"
+      ],
+      "properties": {
+        "organization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publicationOrDataset": {
+          "type": "string",
+          "minLength": 1
+        },
+        "datasetId": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "termsUrl": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "dataYears": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checkedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "rights": {
+          "enum": [
+            "allowed",
+            "needs-review",
+            "rights-hold"
+          ]
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "chapter",
+        "question",
+        "thesis",
+        "pages",
+        "resolution",
+        "resolutionReason",
+        "metricKeys",
+        "surveyIds",
+        "geoScopes",
+        "contentRoles",
+        "primarySources",
+        "nextAction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*-a[0-9]+(-[0-9]+)?$"
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thesis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "resolution": {
+          "enum": [
+            "reuse-existing-metric",
+            "new-metric",
+            "combined-analysis",
+            "context-only",
+            "primary-source-unavailable",
+            "rights-hold",
+            "not-applicable"
+          ]
+        },
+        "resolutionReason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metricKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "surveyIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "geoScopes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "japan",
+              "prefecture",
+              "prefecture-set",
+              "municipality-set"
+            ]
+          }
+        },
+        "contentRoles": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ranking",
+              "survey",
+              "theme",
+              "area",
+              "japan",
+              "blog",
+              "note",
+              "x",
+              "instagram",
+              "youtube"
+            ]
+          }
+        },
+        "primarySources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/primarySource"
+          }
+        },
+        "nextAction": {
+          "type": "string"
+        },
+        "existing": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "blogSlugs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "areaCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\d{5}$"
+          }
+        },
+        "themeSlugs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "description": "採択した企画は次の行動を必ず書く",
+          "if": {
+            "properties": {
+              "resolution": {
+                "enum": [
+                  "reuse-existing-metric",
+                  "new-metric",
+                  "combined-analysis",
+                  "context-only"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "nextAction": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "sourceKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "edition": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "reviewedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "publicOriginalReuse": {
+      "const": "forbidden"
+    },
+    "analyses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/analysis"
+      }
+    }
+  }
+}

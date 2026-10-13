@@ -1,0 +1,101 @@
+[
+  {
+    "date": "2026-11-02",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "14000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1119
+  },
+  {
+    "date": "2026-11-03",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "railway-station-count",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1165
+  },
+  {
+    "date": "2026-11-04",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "02000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1115
+  },
+  {
+    "date": "2026-11-05",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "agricultural-output",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1138
+  },
+  {
+    "date": "2026-11-06",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "34000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1125
+  },
+  {
+    "date": "2026-11-07",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "late-elderly-medical-expense-per-insured",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1157
+  },
+  {
+    "date": "2026-11-08",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "18000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1121
+  }
+]

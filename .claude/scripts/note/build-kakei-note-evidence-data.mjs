@@ -4,7 +4,7 @@
  *
  * ★なぜ要るか (2026-09-15):
  *   chart-data.json は十大費目の対全国平均比率までは出すが「なぜその費目が突出しているか」の
- *   根拠は無かった。本スクリプトが SSOT (`packages/data-configs/src/evidence-inventory/kakei-note`)
+ *   根拠は無かった。本スクリプトが SSOT (`data/note/kakei-expense-evidence.json`)
  *   を読み、突出費目 (dominant) を裏付け指標の都道府県順位と対応付けて後段の本文生成器へ渡す。
  *
  * 出力 (docs/31_note記事原稿/<slug>/ 配下):
@@ -26,16 +26,14 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { latestPartition } from "../lib/latest-partition.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const OUT_BASE = path.join(ROOT, "docs/31_note記事原稿");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const FETCH_RANKING_SCRIPT = path.join(ROOT, ".claude/scripts/blog/fetch-ranking-data-r2.mjs");
 const CAPITALS_PATH = path.join(ROOT, ".claude/scripts/note/data/kakei-capital-cities.json");
-const SSOT_PATH = path.join(
-  ROOT,
-  "packages/data-configs/src/evidence-inventory/kakei-note/expense-evidence.json",
-);
+const SSOT_PATH = path.join(ROOT, datasetPath("note.kakei-expense-evidence"));
 
 const arg = (name) => {
   const i = process.argv.indexOf(name);

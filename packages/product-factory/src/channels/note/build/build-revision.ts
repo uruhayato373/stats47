@@ -17,7 +17,7 @@ interface Delivery {
   artifactDirectory: string; manifestSha256: string; indicatorCount: number;
   pptxIndicatorCount: number; hasXlsx: boolean; officeValidation: string;
 }
-interface Listing { title: string; serviceUrl?: string; _delivery?: Delivery }
+interface Listing { title: string; serviceUrl?: string; _delivery?: Delivery; _noteDelivery?: Delivery }
 interface PackEvidence {
   manifest: { productId: string; version: string; year: string; files: FileEvidence[] };
   manifestSha256: string; rows: string[][]; sources: Record<string, string>[];
@@ -27,7 +27,10 @@ interface PackEvidence {
 function preparationListings(root: string): Record<string, Listing> {
   const listings = JSON.parse(readFileSync(join(root, COCONALA_LISTINGS), 'utf8')) as { listings: Record<string, Listing> };
   const free = readFreeSampleDelivery(root);
-  return { ...listings.listings, ...(free ? { 'P-13': free } : {}) };
+  // _noteDelivery: a note-only build (2026-10-12, regenerated on another PC). The Coconala _delivery promise is left as is.
+  const note = Object.fromEntries(Object.entries(listings.listings).map(([id, listing]) =>
+    [id, listing._noteDelivery ? { ...listing, _delivery: listing._noteDelivery } : listing]));
+  return { ...note, ...(free ? { 'P-13': free } : {}) };
 }
 export interface NoteRevisionItem {
   productId: string; slug: string; access: string; proposedPriceYen: number;

@@ -25,6 +25,10 @@ export interface Dataset {
   readonly source: SourceRow;
   /** 架空サンプルなら true (実データ商品は false)。生成物の注記に反映する。 */
   readonly isSample: boolean;
+  /** pack snapshot 由来の指標キー (metric config の key)。手記の datasets では未設定。 */
+  readonly rankingKey?: string;
+  /** 47 県すべて同値のため、この列へ統合した他の指標キー。 */
+  readonly mergedRankingKeys?: readonly string[];
   /** 47 県ぶん (PREFECTURE_CODES5 と同じ並び)。 */
   readonly values: readonly PrefectureDatum[];
 }

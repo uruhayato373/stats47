@@ -14,12 +14,10 @@
     "./server": "./src/server.ts"
   },
   "dependencies": {
-    "@stats47/area": "*",
     "@stats47/data-configs": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",
-    "@stats47/types": "*",
-    "zod": "^3.23.8"
+    "@stats47/types": "*"
   },
   "peerDependencies": {
     "server-only": "^0.0.1"

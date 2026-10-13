@@ -15,7 +15,9 @@ ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
 [ -d "$ADIR" ] || ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
 # PNG は git に無い。無ければ作り直し、足りなければ公開前に止める (契約: .claude/rules/note-image-assets.md)
 node "$ROOT/.claude/scripts/note/ensure-note-images.mjs" "$ADIR" || { echo "FAIL: 画像が揃っていない"; exit 1; }
-BU(){ browser-use --headed --profile "Profile 5" "$@"; }
+# NOTE_BU_CDP=http://127.0.0.1:<port> drives an already-running Chrome (e.g. the logged-in Playwright note profile)
+# instead of Profile 5, for hosts where Profile 5 cannot be read (macOS privacy protection, 2026-10-12).
+BU(){ if [ -n "${NOTE_BU_CDP:-}" ]; then browser-use --cdp-url "$NOTE_BU_CDP" "$@"; else browser-use --headed --profile "Profile 5" "$@"; fi; }
 
 LOCK_DIR="${TMPDIR:-/tmp}/stats47-note-profile5.lock"
 acquire_note_profile_lock(){
@@ -110,7 +112,10 @@ NIMG=$(jq -r '.imgRefs | length' "$J")
 if [ "$NIMG" -gt 0 ]; then
   for i in $(seq 0 $((NIMG-1))); do
     FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
-    HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
+    # ins_img puts the image before the paragraph that follows its anchor. Anchoring on the paragraph just
+    # above the image (afterText) keeps draft order; a heading anchor stacks every figure of a section
+    # right under the heading (2026-10-12, #12 fiscal: 3 figures stacked). Code-fence / empty → heading.
+    HEAD=$(jq -r ".imgRefs[$i] | if ((.afterText // \"\") | length) > 0 and ((.afterText | startswith(\"\`\`\`\")) | not) and .afterText != .afterHeading then .afterText[0:20] else .afterHeading end" "$J")
     ins_img "$HEAD" "$ADIR/images/$FILE" || { echo "FAIL image insert: $FILE"; exit 1; }
   done
 fi

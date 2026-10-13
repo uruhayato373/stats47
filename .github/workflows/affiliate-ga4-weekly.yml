@@ -63,7 +63,7 @@ jobs:
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20"
           cache: "npm"
@@ -307,6 +307,11 @@ jobs:
             data/affiliate/a8-ui-last-run.json
             data/affiliate/moshimo-results.json
             data/affiliate/rakuten-results.json
+            # 管理画面 /affiliate とヘルスチェックの鮮度判定が git 上のこれを読む。artifact だけに残していた間
+            # (2026-09-20〜) は人が手で入れた版のまま古くなり、Health Check が毎日 stale で落ちていた
+            data/affiliate/affiliate-portfolio-latest.json
+            data/affiliate/affiliate-operations-latest.json
+            data/affiliate/affiliate-pilot-readiness-latest.json
           )
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -315,7 +320,7 @@ jobs:
             echo "ASP 成果に変更なし"
             exit 0
           fi
-          git commit -m "chore(ads): restore ASP outcomes from authenticated measurement [skip ci]"
+          git commit -m "chore(ads): restore ASP outcomes and portfolio state [skip ci]"
           PUSHED=false
           for ATTEMPT in 1 2 3; do
             if git pull --rebase --autostash origin develop && git push origin HEAD:develop; then
@@ -328,7 +333,7 @@ jobs:
 
       - name: 📤 Upload read-only portfolio state
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: affiliate-portfolio-state
           path: |

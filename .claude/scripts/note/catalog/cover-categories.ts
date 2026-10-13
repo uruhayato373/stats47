@@ -21,6 +21,7 @@ const PALETTE_KEYS = new Set([
 
 /** 回収記事の一部は vertical が stats47-note のままなので、内容で補正する。 */
 const PRACTITIONER_KEYS = new Set([
+  'koumuin-shigoto-kouritsuka-ai',
   'paid-n8558c1a6503a', 'paid-ncab0d7b04228', 'paid-n2c2df066e865',
   'paid-nfd3ab8213e1f', 'paid-n68eafab07946', 'paid-nbead1fe772c7',
   'paid-n2207f3039fd3', 'paid-naf942acdbe59', 'paid-nf0c82ce9cee0',
@@ -31,13 +32,15 @@ const EXPLAINER_KEYS = new Set([
   'recovered-n68f5e09c8d62', 'recovered-n03844512d58a',
   'recovered-n3908e5981967', 'recovered-n144d350fc14e',
   'recovered-n023501038bd5', 'recovered-nded2d34fc978',
+  // 2026-10-12: older D/C-series explainers (not datasets) published from drafts
+  'c-tokyo-vs-osaka-fiscal', 'd-education-income-gap', 'd-engel-coefficient-income', 'd-kakei-spending-personality',
 ]);
 
 export function noteCoverCategory(article: Pick<NoteArticle, 'key' | 'title' | 'vertical'>): NoteCoverCategory {
   if (article.key === 'pinned-intro') return 'intro';
   if (article.key.startsWith('a-kakei-')) return 'household';
   if (article.key.startsWith('b-') || EXPLAINER_KEYS.has(article.key)) return 'explainer';
-  if (article.key.startsWith('d-') || article.key === 'paid-n92b846280d1a') return 'dataset-geo';
+  if (article.key.startsWith('d-') || article.key === 'paid-n92b846280d1a' || article.vertical === 'product-sales') return 'dataset-geo';
   if (PALETTE_KEYS.has(article.key)) return 'palette';
   if (article.vertical.startsWith('koumuin') || PRACTITIONER_KEYS.has(article.key)) return 'practitioner';
   if (/[？?]\s*1位は/.test(article.title)) return 'ranking-question';

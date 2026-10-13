@@ -177,7 +177,7 @@ async function loadDrafts(docsRoot, vertical) {
     if (slugs.length === 0) {
       throw new Error(
         `vertical directory not found: ${verticalDir}\n` +
-        `  docs/31 が ephemeral outbox 化されています。restore-from-r2.sh <slug> で復元するか、\n` +
+        `  docs/31 は作業場で、本文の正本は R2 です。npm run note:article -- checkout <slug> で復元するか、\n` +
         `  note-published-urls.json / note-draft-index.json を確認してください。`
       );
     }

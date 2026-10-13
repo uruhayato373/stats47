@@ -1,0 +1,532 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "実験の台帳 (PDCA)",
+  "description": "data/business/experiments.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "hypothesis": {
+            "type": "string"
+          },
+          "target_metric": {
+            "type": "string"
+          },
+          "target_delta": {
+            "type": "string"
+          },
+          "rubric": {
+            "type": "object",
+            "properties": {
+              "impact": {
+                "type": "number"
+              },
+              "effort": {
+                "type": "number"
+              },
+              "learning": {
+                "type": "number"
+              },
+              "certainty": {
+                "type": "number"
+              },
+              "weighted": {
+                "type": "number"
+              },
+              "verdict": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          },
+          "baseline": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "gsc_not_found_404": {
+                "type": "number"
+              },
+              "gsc_server_error_5xx": {
+                "type": "number"
+              },
+              "gsc_crawled_not_indexed": {
+                "type": "number"
+              },
+              "gsc_soft_404": {
+                "type": "number"
+              },
+              "gsc_total_errors": {
+                "type": "number"
+              },
+              "ga4_weekly_engaged_sessions_2026_w15": {
+                "type": "number"
+              },
+              "gsc_weekly_clicks_2026_w15": {
+                "type": "number"
+              },
+              "psi_lcp_future_population_2050_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_agricultural_output_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_annual_sunshine_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_total_population_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_mobile_ranking_avg": {
+                "type": "number"
+              },
+              "html_size_bytes": {
+                "type": "number"
+              },
+              "psi_lcp_home_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_home_desktop": {
+                "type": "number"
+              },
+              "psi_fcp_home_mobile": {
+                "type": "number"
+              },
+              "psi_tbt_home_mobile": {
+                "type": "number"
+              },
+              "psi_perf_score_home_mobile": {
+                "type": "number"
+              },
+              "lcp_element": {
+                "type": "string"
+              },
+              "crux_lcp_p75": {
+                "type": "number"
+              },
+              "crux_ttfb_p75": {
+                "type": "number"
+              },
+              "psi_lcp_ms_homepage_mobile": {
+                "type": "number"
+              },
+              "psi_perf_homepage_mobile": {
+                "type": "number"
+              },
+              "note": {
+                "type": "string"
+              },
+              "psi_lcp_ms_ranking_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_ms_blog_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_ms_search_mobile": {
+                "type": "number"
+              },
+              "psi_lcp_ms_areas_mobile": {
+                "type": "number"
+              },
+              "ga4_period": {
+                "type": "string"
+              },
+              "ga4_total_sessions": {
+                "type": "number"
+              },
+              "ga4_total_engaged_sessions": {
+                "type": "number"
+              },
+              "ga4_organic_social_sessions": {
+                "type": "number"
+              },
+              "ga4_organic_social_engaged_sessions": {
+                "type": "number"
+              },
+              "youtube_current_baseline": {},
+              "youtube_baseline_note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "date"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "result": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "learnings": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "closed_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pending_user_actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_check_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "measuring_observations": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "elapsed_days": {
+                "type": "number"
+              },
+              "gsc_not_found_404_current": {
+                "type": "number"
+              },
+              "gsc_server_error_5xx_current": {
+                "type": "number"
+              },
+              "gsc_crawled_not_indexed_current": {
+                "type": "number"
+              },
+              "gsc_soft_404_current": {
+                "type": "number"
+              },
+              "gsc_total_errors_current": {
+                "type": "number"
+              },
+              "gsc_total_errors_baseline": {
+                "type": "number"
+              },
+              "total_errors_delta_pct": {
+                "type": "number"
+              },
+              "gsc_weekly_clicks_w19": {
+                "type": "number"
+              },
+              "gsc_weekly_clicks_baseline_w15": {
+                "type": "number"
+              },
+              "clicks_delta_pct": {
+                "type": "number"
+              },
+              "source": {
+                "type": "string"
+              },
+              "confounding_note": {
+                "type": "string"
+              },
+              "psi_lcp_home_mobile_current": {
+                "type": "number"
+              },
+              "psi_lcp_home_mobile_baseline": {
+                "type": "number"
+              },
+              "lcp_delta_ms": {
+                "type": "number"
+              },
+              "lcp_delta_pct": {
+                "type": "number"
+              },
+              "systemwide_degradation": {
+                "type": "string"
+              },
+              "psi_api_status": {
+                "type": "string"
+              },
+              "psi_lcp_ms_homepage_mobile_current": {
+                "type": "number"
+              },
+              "psi_lcp_ms_homepage_mobile_baseline": {
+                "type": "number"
+              },
+              "variance_note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "date"
+            ]
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "date"
+              ]
+            }
+          },
+          "verification_command": {
+            "type": "string"
+          },
+          "fail_criteria": {
+            "type": "string"
+          },
+          "success_criteria": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "masters_published": {
+                    "type": "number"
+                  },
+                  "videos_with_100_views_min": {
+                    "type": "string"
+                  },
+                  "median_intro_retention_30s_min": {
+                    "type": "number"
+                  },
+                  "average_percentage_viewed_min_internal_hypothesis": {
+                    "type": "number"
+                  },
+                  "ga4_youtube_engaged_sessions_total_min": {
+                    "type": "number"
+                  },
+                  "derivatives_per_master_per_platform": {
+                    "type": "string"
+                  },
+                  "derivative_success": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "next_check": {
+            "type": "string"
+          },
+          "deployed_at": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object",
+            "properties": {
+              "root_cause_analysis": {
+                "type": "string"
+              },
+              "implementation": {
+                "type": "string"
+              },
+              "psi_quota_note": {
+                "type": "string"
+              }
+            }
+          },
+          "related_experiments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "experiment_window": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "last_publish_target": {
+                "type": "string"
+              },
+              "final_measurement": {
+                "type": "string"
+              }
+            }
+          },
+          "pilot_videos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "number"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "archetype": {
+                  "type": "string"
+                },
+                "master_format": {
+                  "type": "string"
+                },
+                "primary_url": {
+                  "type": "string"
+                },
+                "source_domains": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "metric_keys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "survey_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "lineage_status": {
+                  "type": "string"
+                },
+                "outline": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "derivative_angles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "target_publish_date": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "related_urls": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "demand_evidence": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "slug"
+              ]
+            }
+          },
+          "stop_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lineage_gate": {
+            "type": "object",
+            "properties": {
+              "rule": {
+                "type": "string"
+              },
+              "checked_at": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "updated_at",
+    "experiments"
+  ]
+}

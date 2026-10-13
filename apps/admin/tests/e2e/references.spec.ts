@@ -38,6 +38,13 @@ test.describe('/content/references 参考文献の活用・展開管理', () => 
         name: channelRowPattern('youtube', 'YouTube動画'),
       })
     ).toBeVisible();
+    const analyses = page.locator('section#analyses');
+    await expect(
+      analyses.getByRole('heading', { name: /分析企画の展開/ })
+    ).toBeVisible();
+    await expect(
+      analyses.getByRole('row', { name: /note .*note-manager/ })
+    ).toBeVisible();
     await expect(
       page.getByRole('heading', { name: /企画・下書き/ })
     ).toBeVisible();

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CODES, DOCS31, auditBackgroundPresence, auditImageAssets, validateRankingChartData } from "../lib/image-assets-audit.mjs";
+import { CODES, DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence, validateRankingArticleFiles, validateRankingChartData } from "../lib/image-assets-audit.mjs";
 import { NOTE_RENDER_TEMPLATE_VERSION, buildRenderProps, buildRenderSpec, noteBackgroundR2Key, validateBackground, validateRenderSpec } from "../lib/note-render-spec.mjs";
 
 const D = DOCS31;
@@ -17,45 +17,29 @@ const chartData = (over = {}) => ({
 const provenance = (over = {}) => ({ slug: "a-foo", rankingKey: "foo", year: "2024", source: "r2:app/stats/foo/values.json", restore: "curl -sf x", ...over });
 const chartText = JSON.stringify(chartData());
 const specText = () => JSON.stringify(buildRenderSpec("a-foo", chartText));
-const run = (tracked, extra = {}) =>
-  auditImageAssets({
-    tracked,
-    readJson: (file) => extra.json?.[file] ?? null,
-    readText: (file) => extra.text?.[file] ?? null,
-    pngBytes: new Map(tracked.filter((f) => f.endsWith(".png")).map((f) => [f, 1000])),
-    ...extra,
-  });
-const codes = (result) => result.findings.map((f) => f.code);
-
-test("SVG から再生成できる PNG を追跡していると違反になる", () => {
-  const r = run([`${D}a-kakei-x/images/a.svg`, `${D}a-kakei-x/images/a.png`]);
-  assert.deepEqual(codes(r), [CODES.DERIVED_PNG_TRACKED]);
+const codes = (findings) => findings.map((f) => f.code);
+const files = (map) => (name) => map[name] ?? null;
+const rankingFiles = (over = {}) => ({
+  "chart-data.json": chartText,
+  "data-provenance.json": JSON.stringify(provenance()),
+  "render-spec.json": specText(),
+  ...over,
 });
 
-test("SVG を持たない PNG は追跡していてよく、再生成元なしとして数えられる", () => {
-  const r = run([`${D}product-sales/p/images/a.png`]);
-  assert.deepEqual(codes(r), []);
-  assert.deepEqual(r.summary.sourcelessByClass, { "product-sales": 1 });
+test("docs/31 に git の追跡ファイルが 1 つでもあれば違反 (作業場で、正本は R2)", () => {
+  assert.deepEqual(codes(auditImageAssets({ tracked: [] }).findings), []);
+  assert.deepEqual(codes(auditImageAssets({ tracked: [`${D}README.md`] }).findings), [], "作業場の説明だけは置いてよい");
+  const r = auditImageAssets({ tracked: [`${D}a-foo/draft.md`, `${D}product-sales/p/images/a.png`] });
+  assert.deepEqual(codes(r.findings), [CODES.DOCS31_TRACKED, CODES.DOCS31_TRACKED]);
+  assert.equal(r.summary.docs31Tracked, 2);
 });
 
-test("gitignore された PNG に SVG が無いと、git に載らず失われるので違反になる", () => {
-  const withSvg = run([`${D}a-kakei-x/images/a.svg`], { ignoredUntracked: [`${D}a-kakei-x/images/a.png`] });
-  assert.deepEqual(codes(withSvg), []);
-  const withoutSvg = run([], { ignoredUntracked: [`${D}a-kakei-x/images/b.png`] });
-  assert.deepEqual(codes(withoutSvg), [CODES.IGNORED_PNG_WITHOUT_SVG]);
-});
-
-test("ランキング記事は chart-data.json と data-provenance.json で復元できなければ違反", () => {
-  const tracked = [`${D}a-foo/draft.md`, `${D}a-foo/chart-data.json`, `${D}a-foo/data-provenance.json`];
-  const ok = run(tracked, {
-    json: { [`${D}a-foo/chart-data.json`]: chartData(), [`${D}a-foo/data-provenance.json`]: provenance() },
-    text: { [`${D}a-foo/chart-data.json`]: chartText, [`${D}a-foo/render-spec.json`]: specText() },
-  });
-  assert.deepEqual(codes(ok), []);
-  const noFiles = run(tracked);
-  assert.ok(codes(noFiles).includes(CODES.RENDER_SPEC_INVALID));
-  assert.ok(codes(noFiles).includes(CODES.RANKING_CHART_DATA_INVALID));
-  assert.ok(codes(noFiles).includes(CODES.RANKING_PROVENANCE_INVALID));
+test("ランキング記事は chart-data.json・data-provenance.json・render-spec.json で復元できなければ保存前に警告", () => {
+  assert.deepEqual(codes(validateRankingArticleFiles("a-foo", files(rankingFiles()))), []);
+  const none = codes(validateRankingArticleFiles("a-foo", files({})));
+  assert.ok(none.includes(CODES.RENDER_SPEC_INVALID));
+  assert.ok(none.includes(CODES.RANKING_CHART_DATA_INVALID));
+  assert.ok(none.includes(CODES.RANKING_PROVENANCE_INVALID));
 });
 
 test("単位・47行・連番・年・出典の欠落を個別に検出する", () => {
@@ -70,70 +54,39 @@ test("単位・47行・連番・年・出典の欠落を個別に検出する", 
     assert.ok(validateRankingChartData("a-foo", data).length > 0, `${name} を検出できない`);
   }
   assert.deepEqual(validateRankingChartData("a-foo", chartData()), []);
-  const badSource = run([`${D}a-foo/draft.md`], {
-    json: { [`${D}a-foo/chart-data.json`]: chartData(), [`${D}a-foo/data-provenance.json`]: provenance({ source: "r2:app/stats/bar/values.json" }) },
-    text: { [`${D}a-foo/chart-data.json`]: chartText, [`${D}a-foo/render-spec.json`]: specText() },
-  });
+  const badSource = validateRankingArticleFiles("a-foo", files(rankingFiles({ "data-provenance.json": JSON.stringify(provenance({ source: "r2:app/stats/bar/values.json" })) })));
   assert.deepEqual(codes(badSource), [CODES.RANKING_PROVENANCE_INVALID]);
 });
 
 test("家計 (a-kakei-*) は単一指標のランキング記事契約の対象外", () => {
-  const r = run([`${D}a-kakei-aichi/draft.md`]);
-  assert.equal(r.summary.rankingArticles, 0);
-  assert.deepEqual(codes(r), []);
+  assert.deepEqual(validateRankingArticleFiles("a-kakei-aichi", files({})), []);
 });
 
-test("追跡中 PNG が予算を超えると違反、予算内なら通る", () => {
-  const tracked = [`${D}product-sales/p/images/a.png`, `${D}product-sales/p/images/b.png`];
-  assert.deepEqual(codes(run(tracked, { budget: { trackedPngBytes: 2000, trackedPngCount: 2 } })), []);
-  assert.deepEqual(codes(run(tracked, { budget: { trackedPngBytes: 1999, trackedPngCount: 2 } })), [CODES.TRACKED_PNG_OVER_BUDGET]);
-  assert.deepEqual(codes(run(tracked, { budget: { trackedPngBytes: 5000, trackedPngCount: 1 } })), [CODES.TRACKED_PNG_OVER_BUDGET]);
-});
-
-test("catalog が r2_body:true でも R2 に無い記事を検出し、既知の一覧は新規違反にしない", async () => {
-  const { auditR2BodyPresence } = await import("../lib/image-assets-audit.mjs");
-  const articles = {
-    "a-present": { r2_body: true, r2_path: "note/x/a-present" },
-    "a-missing": { r2_body: true, r2_path: "note/x/a-missing" },
-    "a-known": { r2_body: true, r2_path: "note/x/a-known" },
-    "a-paid": { r2_body: true, r2_path: "note/x/a-paid", is_paid: true },
-    "a-unsynced": { r2_body: false, r2_path: "note/x/a-unsynced" },
-    "a-flaky": { r2_body: true, r2_path: "note/x/a-flaky" },
-  };
-  const status = new Map([
-    ["note/x/a-present", 200],
-    ["note/x/a-missing", 404],
-    ["note/x/a-known", 404],
-    ["note/x/a-flaky", 0],
-  ]);
-  const r = auditR2BodyPresence(articles, status, ["a-known"]);
-  assert.deepEqual(r.findings.map((f) => f.file), ["note/x/a-missing"]);
+test("台帳が公開 R2 に保存済みとする本文の欠落を検出し、未保存の公開記事も違反、通信失敗は判定不能", () => {
+  const art = (key, status, store, saved) => ({ key, status, r2Path: `note/x/${key}`, body: { store, manifest: saved ? { sha256: "a".repeat(64) } : null } });
+  const articles = [
+    art("a-present", "published", "r2-public", true),
+    art("a-missing", "published", "r2-public", true),
+    art("a-flaky", "published", "r2-public", true),
+    art("a-paid", "published", "r2-private", true),
+    art("a-unsaved", "published", "r2-public", false),
+    art("a-planned", "draft", "r2-private", false),
+    art("a-recovered", "published", "note-only", false),
+  ];
+  const status = new Map([["note/x/a-present", 200], ["note/x/a-missing", 404], ["note/x/a-flaky", 0]]);
+  const r = auditR2BodyPresence(articles, status);
+  assert.deepEqual(r.findings.map((f) => f.file), ["note/x/a-missing", "note/x/a-unsaved"]);
   assert.deepEqual(r.unknown, ["a-flaky"]);
-  assert.equal(r.checked, 4);
+  assert.equal(r.checked, 3);
 });
 
 test("render-spec は chart-data.json の変更とテンプレート版の更新で古くなる", () => {
-  const tracked = [`${D}a-foo/draft.md`, `${D}a-foo/chart-data.json`, `${D}a-foo/data-provenance.json`, `${D}a-foo/render-spec.json`];
-  const json = { [`${D}a-foo/chart-data.json`]: chartData(), [`${D}a-foo/data-provenance.json`]: provenance() };
-  const base = { json, text: { [`${D}a-foo/chart-data.json`]: chartText, [`${D}a-foo/render-spec.json`]: specText() } };
-  assert.deepEqual(codes(run(tracked, base)), []);
-  const changedData = { ...base, text: { ...base.text, [`${D}a-foo/chart-data.json`]: chartText.replace("指標", "別の指標") } };
-  assert.deepEqual(codes(run(tracked, changedData)), [CODES.RENDER_SPEC_INVALID]);
+  assert.deepEqual(codes(validateRankingArticleFiles("a-foo", files(rankingFiles()))), []);
+  const changedData = rankingFiles({ "chart-data.json": chartText.replace("指標", "別の指標") });
+  assert.deepEqual(codes(validateRankingArticleFiles("a-foo", files(changedData))), [CODES.RENDER_SPEC_INVALID]);
   const oldSpec = JSON.parse(specText());
   oldSpec.renderer.templateVersion = `${NOTE_RENDER_TEMPLATE_VERSION}-old`;
-  const stale = { ...base, text: { ...base.text, [`${D}a-foo/render-spec.json`]: JSON.stringify(oldSpec) } };
-  assert.deepEqual(codes(run(tracked, stale)), [CODES.RENDER_SPEC_INVALID]);
-});
-
-test("render-spec を持つランキング記事の PNG は追跡すると違反、無視されるのは正常", () => {
-  const spec = [`${D}a-foo/draft.md`, `${D}a-foo/chart-data.json`, `${D}a-foo/render-spec.json`];
-  const img = `${D}a-foo/images/cover-1280x670.png`;
-  assert.ok(codes(run([...spec, img])).includes(CODES.DERIVED_PNG_TRACKED));
-  assert.ok(!codes(run(spec, { ignoredUntracked: [img] })).includes(CODES.IGNORED_PNG_WITHOUT_SVG));
-  // render-spec が無ければ再生成元が無いので、無視された PNG は失われる
-  assert.ok(codes(run([`${D}a-foo/draft.md`, `${D}a-foo/chart-data.json`], { ignoredUntracked: [img] })).includes(CODES.IGNORED_PNG_WITHOUT_SVG));
-  // 4 枚以外の PNG は spec では作れない
-  assert.ok(codes(run(spec, { ignoredUntracked: [`${D}a-foo/images/other.png`] })).includes(CODES.IGNORED_PNG_WITHOUT_SVG));
+  assert.deepEqual(codes(validateRankingArticleFiles("a-foo", files(rankingFiles({ "render-spec.json": JSON.stringify(oldSpec) })))), [CODES.RENDER_SPEC_INVALID]);
 });
 
 const SHA = "a".repeat(64);

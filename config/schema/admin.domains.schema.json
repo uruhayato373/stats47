@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "領域の正本 (管理画面のメニュー・backlog の領域タグ)",
+  "description": "config/domains.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "_doc": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "manages": {
+            "type": "string"
+          },
+          "nav": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "href": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "children": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "href": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "channels": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    "documents": {
+      "type": "object",
+      "properties": {
+        "docs/00_プロジェクト管理/": {
+          "type": "string"
+        },
+        "docs/01_技術設計/": {
+          "type": "string"
+        },
+        "docs/02_実装計画/": {
+          "type": "string"
+        },
+        "docs/10_SNS戦略/": {
+          "type": "string"
+        },
+        "contents/blog/": {
+          "type": "string"
+        },
+        "docs/30_note記事企画/": {
+          "type": "string"
+        },
+        "docs/31_note記事原稿/": {
+          "type": "string"
+        },
+        ".claude/todo/": {
+          "type": "string"
+        },
+        "docs/INDEX.md": {
+          "type": "string"
+        },
+        "assets/page-heroes/": {
+          "type": "string"
+        }
+      }
+    },
+    "navKinds": {
+      "type": "object",
+      "properties": {
+        "inventory": {
+          "type": "string"
+        },
+        "results": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "string"
+        }
+      }
+    },
+    "navRules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "version",
+    "_doc",
+    "description",
+    "domains",
+    "documents",
+    "navKinds",
+    "navRules"
+  ]
+}

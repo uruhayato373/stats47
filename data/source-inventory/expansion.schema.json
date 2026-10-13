@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "教材 (参考文献) の分析企画の展開記録",
+  "description": "data/source-inventory/expansion.json の形の契約。分析企画 (analyses.json の analyses[].id) × 展開先ごとに、済み (公開中のページ ID)・企画中・見送り (理由) を記録する。書き込みは npm run reference:expansion -- record。ランキング・調査・テーマ・全国は、指標・調査が公開ページに載っていれば記録なしで済みと判定する (規約 reference-source-standards.md §5)。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "records"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["analysis", "channel", "status", "decidedAt", "decidedBy"],
+        "properties": {
+          "analysis": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*-a[0-9]+(-[0-9]+)?$" },
+          "channel": { "enum": ["ranking", "survey", "theme", "area", "japan", "blog", "note", "x", "instagram", "youtube"] },
+          "status": { "enum": ["done", "planned", "declined"] },
+          "target": { "type": "string", "pattern": "^[a-z-]+:.+$", "description": "ページ ID (data/content の id 体系。note:<key>・sns:<投稿ID>・blog:<slug> など)" },
+          "reason": { "type": "string", "minLength": 1 },
+          "decidedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "decidedBy": { "type": "string", "minLength": 1 }
+        },
+        "allOf": [
+          { "if": { "properties": { "status": { "const": "done" } } }, "then": { "required": ["target"] } },
+          { "if": { "properties": { "status": { "const": "declined" } } }, "then": { "required": ["reason"] } }
+        ]
+      }
+    }
+  }
+}

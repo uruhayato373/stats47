@@ -12,6 +12,7 @@
  */
 import ExcelJS from "exceljs";
 import type { Dataset } from "../data/dataset";
+import { sourceOrigin } from "../data/sources";
 import { PREFECTURE_CODES5, PREFECTURE_BY_CODE5 } from "../data/prefectures";
 
 const nameOf = (code5: string): string => PREFECTURE_BY_CODE5.get(code5)?.name ?? code5;
@@ -39,6 +40,16 @@ const CATEGORY_LABEL: Readonly<Record<string, string>> = {
   safetyenvironment: "安全・環境",
   ict: "情報通信",
 };
+
+/** 使い方シートの出典注記。収録指標の出典の種類 (e-Stat の統計表 / それ以外の提供元) に従う。 */
+function originNotice(datasets: readonly Dataset[]): string {
+  const hasEstat = datasets.some((d) => sourceOrigin(d.source) === "estat");
+  const hasOther = datasets.some((d) => sourceOrigin(d.source) === "other");
+  const base = "※ 国・府省・自治体や e-Stat の公認・推奨を示すものではありません。";
+  if (hasEstat && hasOther) return `${base}e-Stat の数値・表を基にした指標と、e-Stat 以外の提供元の公表値を基にした指標を含みます（提供元は「出典」シートの調査名・URL を参照）。いずれも stats47 が加工・作成しました。`;
+  if (hasOther) return `${base}各指標の提供元の公表値を基に stats47 が加工・作成しました（提供元は「出典」シートの調査名・URL を参照）。`;
+  return `${base}e-Stat の数値・表を基に stats47 が作成しました。`;
+}
 
 /** シート名を Excel 制約 (31 文字・記号除去) に丸める。重複は連番で回避する。 */
 function safeSheetName(raw: string, used: Set<string>): string {
@@ -93,7 +104,7 @@ export async function buildDatabookXlsx(title: string, datasets: readonly Datase
     "4. 出典・基準年・statsDataId・加工方法は「出典」シートを参照してください。",
     "※ すべて実データ・基準年固定です（自動更新はありません）。欠損・秘匿・非該当は空セルで、0 埋めはしていません。",
     "※ 県名は対応する県コードの表示です。県庁所在市・特定世帯・観測地点の値を含み、県全体を表さない指標があります。出典シートの対象範囲を確認してください。",
-    "※ 国・府省・自治体や e-Stat の公認・推奨を示すものではありません。e-Stat の数値・表を基に stats47 が作成しました。",
+    originNotice(datasets),
   ];
   lines.forEach((t, i) => {
     const cell = readme.getCell(i + 1, 1);

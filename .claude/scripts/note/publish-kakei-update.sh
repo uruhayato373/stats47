@@ -14,7 +14,7 @@ ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
 source "$ROOT/.claude/scripts/note/note-publish-lib.sh"
 source "$ROOT/.claude/scripts/note/editor-helpers.sh" >/dev/null 2>&1
 
-[ -f "$ADIR/draft.md" ] || { echo "FAIL $SLUG draft.md not found (restore-from-r2.sh first)"; exit 2; }
+[ -f "$ADIR/draft.md" ] || { echo "FAIL $SLUG draft.md not found (note:article checkout first)"; exit 2; }
 NOTE_URL=$(sed -n 's/^note_url: *"\(.*\)"/\1/p' "$ADIR/draft.md" | head -1)
 [ -n "$NOTE_URL" ] || { echo "FAIL $SLUG has no note_url (not published)"; exit 2; }
 KEY=$(basename "$NOTE_URL")

@@ -76,7 +76,7 @@ export async function buildProduct(
   // 常時同梱 (出典・許諾・販売文・差し替え用データ・サムネイル)
   writeFileSync(join(outDir, "SOURCES.csv"), serializeSourcesCsv([ds.source]));
   files.push("SOURCES.csv");
-  writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId));
+  writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId, ds.isSample ? undefined : [ds.source]));
   files.push("LICENSE-ja.txt");
   writeFileSync(join(outDir, "listing", "listing.md"), renderListing(product, [ds]));
   files.push("listing/listing.md");

@@ -119,6 +119,10 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | `angle-howto` | このデータを使う3ステップ→試して | ranking-card | 160 | weekend-09-11 | 実用価値。週末に保存・試行 |
 | `theme-lens` | 1順位では見えない論点→複数指標を横断→テーマページ誘導 | theme-overview-card | 150 | weekday-18-20 | 複数指標を同じ主題で読む。テーマ集客専用 |
 | `area-profile` | 県名→固有のシンボル/特産→県データブック誘導 | area-profile-card | 150 | weekday-12-13 | 1県を多面的に読む。エリア集客専用 |
+| `household-receipt` | 県の家計総額→内訳の特徴→対象期間→県データブック誘導 | household-receipt | 140 | weekday-12-13 | 全国家計構造調査の10費目。県を指定して生成 |
+| `area-atlas` | 県名→4つの代表指標→対象年の違い→県データブック誘導 | area-atlas | 140 | weekday-12-13 | 人口・面積・世帯数・森林割合で県を読む |
+| `rank-routes` | 品目と2時点→都市の順位変化→年間支出額の比較→ランキング誘導 | rank-routes | 140 | weekday-18-20 | 家計調査の品目別年間支出額。2〜4都市を抜粋 |
+| `tile-change` | 指標と2時点→増減した県数→全47県の増減率→指標ページ誘導 | tile-change | 140 | weekday-18-20 | 人口・世帯数・出生数の長期変化。47県・定義・単位を固定 |
 | `quote-rt` | 引用元の主張を統計で肯定/否定/深掘り1-2文 | none | 140 | any | 引用RT (find-quote-rt 経由。バッチ対象外) |
 <!-- x-catalog:templates:end -->
 
@@ -280,11 +284,11 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | 出典 | 統計局の記載形式「出典：総務省統計局「◯◯調査」（URL）を加工して作成」を無料側に書く。有料側だけに置かない (無料部分の数値も加工値なので利用規約上の記載義務は無料側に生じる) | `paid_free_missing_source` (価格を問わず error) |
 | 対象読者・わかること | 「こんな人のためのデータです」「このデータでわかること」を見出し付きで各 3 点以上 | `paid_free_missing_intro` |
 | サンプル画像 | 添付ファイルの先頭行や集計図を実データから生成した画像で見せる (手書きしない。kakei は `build-kakei-dataset-sample-images.mjs`) | `paid_free_missing_image` |
-| 流入導線 | 同マガジンの無料記事の末尾カード (`magazines.ts` の `datasetArticles`) と note マガジン所属で、他記事からのリンクを 1 本以上持つ | `paid_no_inbound_note_link` |
+| 流入導線 | 同マガジンの無料記事の末尾カード (記事台帳 `data/note/articles.json` で同じ無料マガジンに属する有料記事から `update-published-navigation.mjs` が導出) と note マガジン所属で、他記事からのリンクを 1 本以上持つ | `paid_no_inbound_note_link` |
 
 **既存の有料記事へ後から足すときは editor を使わない。** `patch-note-paid-landing.mjs` が公開版の本文 HTML を所有者 API から取り、
 無料部分だけを組み直して PUT に差し込む (添付 figure と有料本文は温存、画像は presigned S3 post で API アップロード)。
-記事ごとの文言は `catalog/data/paid-landing/<key>.json` (spec) に置き、spec の数値が本文に無ければ止まる。
+記事ごとの文言は `data/note/paid-landing/<key>.json` (spec。形の契約は `data/note/paid-landing.schema.json`) に置き、spec の数値が本文に無ければ止まる。
 
 ```bash
 node .claude/scripts/note/build-csv-sample-image.mjs --csv <analysis.csv> --out .local/paid-landing/<key>/sample-analysis.svg --rows 6 [--expand-json values --keys a,b]
@@ -339,13 +343,17 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 <!-- x-catalog:imagekinds:start -->
 | image_kind | size | generator | out_path | 備考 |
 |---|---|---|---|---|
-| ranking-card | 960x404 | `.claude/scripts/sns/quick-still.ts --key <key>` | `.local/r2/sns/ranking/<key>/x/stills/<key>.png` | 上位5+下位5 カード (横長)。X の既定 |
+| ranking-card | 1080x1350 | `.claude/scripts/sns/quick-still.ts --key <key>` | `.local/r2/sns/ranking/<key>/x/stills/<key>.png` | 全47県タイル図。X / Threads の単年指標の既定 |
 | tile-map | 1080x1080 | Remotion `RankingX-ChoroplethMap` (render-sns-stills) | `.local/r2/sns/ranking/<key>/x/stills/choropleth-map-1200x630.png` | ★既知の不整合: ラベルは 1200x630 だが実 canvas 1080x1080。修正は別タスク |
 | scatter | 1200x630 | Remotion `CorrelationX-Scatter` (render-sns-stills) | `.local/r2/sns/correlation/<x>--<y>/x/stills/scatter-1200x630.png` | 相関散布図 (correlation domain のみ) |
 | compare | 1200x630 | Remotion `CompareX-Post` (render-sns-stills) | `.local/r2/sns/compare/<a>-vs-<b>/x/stills/comparison-1200x630.png` | 2地域比較 (compare domain のみ) |
 | geo-insight-card | 1080x1350 | Remotion `GeoX-InsightCard` (`/operate-geo-content`) | `.local/r2/sns/geo/<key>/x/stills/<key>.png` | Geo空間分析専用。地図主役・layer×operation・出典SHA必須 |
 | theme-overview-card | 1200x630 | theme Open Graph route (`/themes/<key>/opengraph-image`) | `.local/r2/sns/theme/<key>/x/stills/<key>.png` | テーマ専用。複数指標を束ねる着地ページの画像 |
 | area-profile-card | 1200x630 | area Open Graph asset (`app/areas/<code>/ogp/ogp.png`) | `.local/r2/sns/area/<key>/x/stills/<key>.png` | エリア専用。1県のデータブック着地画像 |
+| household-receipt | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind household-receipt --area <prefCode> --platform x` | `.local/r2/sns/household-receipt/<key>/x/stills/<key>.png` | keyは県5桁-年。2024年10〜11月の月平均・県全域・二人以上世帯 |
+| area-atlas | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind area-atlas --area <prefCode> --platform x` | `.local/r2/sns/area-atlas/<key>/x/stills/<key>.png` | keyは県5桁。4指標それぞれの最新年・正確な県境 |
+| rank-routes | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind rank-routes --key <rankingKey> --from <year> --to <year> --platform x` | `.local/r2/sns/rank-routes/<key>/x/stills/<key>.png` | keyは指標-始年-終年-抽出県コード列。家計調査の年間支出額専用 |
+| tile-change | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind tile-change --key <key> --from <year> --to <year>` | `.local/r2/sns/tile-change/<key>/x/stills/<key>.png` | 47県の2時点増減率。keyは指標-始年-終年 |
 | none | — | — | — | 画像なし (quote-rt 等テキスト投稿) |
 <!-- x-catalog:imagekinds:end -->
 
@@ -354,6 +362,47 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 - **Geoは一般量産の対象外**。`domain=geo`は`/operate-geo-content`だけで生成し、ranking-card/tile-mapを
   流用しない。15件構成はbaseline 3 / spatial cross 9 / method 2 / decision 1を機械検証する。
 - SVG→PNG 変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
+
+### 2-9a. SNS画像の構図提案と実データ制作 (2026-10-11 オーナー指定)
+
+X / Threads / Instagram の画像を新規提案するときは、題材に適した**構図の異なる3案**を提示する。
+配色・背景・見出しだけの変更は別の構図に数えず、比較する対象、情報の並べ方、読者が読み取れることを変える。
+選定済みの型を使う単発制作・量産は、その型で実行する。下表の4型を優先候補とし、
+地図・散布図・クイズなどの既存型もデータと問いに合わせて選ぶ。
+
+| 制作型 | 向いている題材・構図 | データ上の条件 |
+|---|---|---|
+| 家計レシート | 支出の内訳を明細、総額を合計欄に置く。家計・費目比較を身近に読む | 同一調査・地域・期間・世帯区分の値を使う。費目の重複を避け、公表総額と内訳合計の差は値を改変せず注記する。抜粋なら「掲載費目の小計」とする |
+| 県の図鑑カード | 県名・正確な県シルエット・異なる側面の代表指標を一枚にまとめる | 各指標に単位と対象年を併記する。県全域と県庁所在市の値を区別し、年の異なる数値を同年の姿として扱わない |
+| 順位の乗り換え図 | 同じ指標の2時点を線で結び、順位の変化を読む | 比較母集団・指標定義・単位・順位方向を揃える。同順位は元の規則を保つ。一部地域を抜粋しても元の母集団の順位を維持し、対象数と抜粋を明記する |
+
+| タイル地図・長期変化 | 47県を同じ大きさのタイルに置き、2時点の増減率を表示 | 人口・総世帯数・出生数の検証済み契約を使う。始年・終年の47県、単位・定義を固定。始年0や欠測を推測で埋めない。割合指標の差は別途ポイント差を設計する |
+
+**2026-10-12 オーナー決定**: 上位・下位5県だけのチャートを今後の生成から外す。単年は全47県タイル、長期は `tile-change` を使う。予約分は本文・日時・IDを保って画像を差し替え、公開済み投稿と素材は残す。旧 `columns` 指定も全47県へ解決する。旧コンポジションは過去画像の再現用途のみ。
+
+実データで制作するときは、次を共通の完了条件とする。
+
+1. **接地**: git TS の指標定義・出典と R2 の観測値 / snapshot を読む。値・年・単位・地域を照合し、
+   架空値を実データへ混ぜない。構図だけの仮データ見本は画像内に「架空データ」と明記する。
+2. **画像単体で意味を通す**: 出典名、対象年 / 期間、単位、対象地域、必要な母集団・世帯区分を画像内に載せる。
+   年間額・月平均・特定月の平均を区別する。家計調査の県庁所在市の値は市名で表示し、
+   県全域の値としない。名目支出額の変化を購入量や物価の変化と言い換えない。
+3. **描画**: 数値・文字・チャート・地図は Remotion 等の決定的 renderer で生成する。
+   県シルエットは既存の境界データを使う。色・書体・発行元表現は
+   [OGP画像規約のブランド表現ゲート](ogp-image-standards.md#ブランド表現の共通ゲート)に従う。
+4. **照合・目視**: 集計と順位を確認し、実寸と縮小表示で文字欠け・重なり・出典の可読性を確認する。
+   入力の出典 URL / R2 key、取得時点、計算・抜粋条件、入力と出力の SHA-256 を制作物の manifest に残す。
+   観測値の保存先は既存の R2 契約に従い、試作の手編集 JSON を新しい SSOT にしない。
+5. **見せる**: 3型の比較試作は 1080×1350px の PNG を基準にし、完成画像をチャット内で見せる。
+   配信用は媒体ごとの既存寸法・安全域へ再構成する。Instagram は §2-3c のカルーセル構成に組み込む。
+
+4型は §2-0 / §2-9 に登録済み。`render-data-card.ts` で git定義とR2のrecipe・単位・47地域・順位を検査し、
+画像・props・入力/出力SHA付きmanifest・X下書き受け渡しJSONを生成する。手順は `/render-sns-stills`。
+X新規バッチの企画では4型を候補へ含め、対応する題材があれば採用する。単一指標の候補選定だけでは
+家計の10費目や県の4指標を決められないため、県・品目・年を決めて専用CLIへ渡す。
+Instagramは同じ入力から表紙・データ本体・出典/案内の3枚を生成する。ThreadsにはX用PNGを使用できる。
+投稿頻度・予約・承認は既存規約に従う。画像の多様化による効果は未検証として、
+投稿後の保存・返信・リンククリック等を既存型と比較して判断する。
 
 ### 2-10. カタログ改訂手順 (人間承認ゲート)
 
@@ -492,7 +541,8 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 素材・caption・投稿状態・メトリクス・Geo分析契約は
 **ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で読み取れる。
-コンソールは完全read-onlyで、caption編集・draft登録・予約・即時投稿・dry-run・レンダ・R2 push・再生成を行わない
+コンソールはSNS下書き本文の編集・保存に対応する (2026-10-11 オーナー指示)。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
+draft登録・予約・即時投稿・dry-run・レンダ・R2 push・再生成はowner agent/skillが担う
 (skill `.agents/skills/management/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
 全チャネルの制作・公開状態は `/content`、参考文献からサイト・ブログ・note・Kindleへの展開状況は
@@ -502,9 +552,9 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
 現況 collector は `apps/admin/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。
 
-- **管理画面からは投稿しない**: posts.jsonへの書込、投稿、予約、素材生成はowner agent/skillだけが行う。
-  admin serverはread methodだけを公開し、API routeはGETだけに固定する。§1の残枠は表示し、enforceは投稿agentが担う
-- **コンテンツ運用画面は派生 read model**: `/content` はposts.json、note git TS catalog + R2本文、Kindle
+- **管理画面からは投稿しない**: 下書き本文保存を除くposts.jsonへの書込、投稿、予約、素材生成はowner agent/skillが行う。
+  APIは原則GET、例外は下書き本文PATCHだけ。§1の残枠は表示し、enforceは投稿agentが担う
+- **コンテンツ運用画面は派生 read model**: `/content` はposts.json、note 記事台帳 (`data/note/articles.json`) + R2本文、Kindle
   book-catalog/manuscripts + kdp-listingsをライブ突合する。`/content/references`は解決済み参考文献inventoryを
   metric / area単位へ重複排除し、各コンテンツSSOTの実在証跡と突合する。統合用の別SSOTや永続DBを作らない。
   `npm run audit:content-operations` をPRでblocking実行し、個別制作物をTODOカードへ複製しない

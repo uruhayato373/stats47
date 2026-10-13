@@ -1,0 +1,1200 @@
+{
+  "generated_at": "2026-10-11T14:31:42.339Z",
+  "applied": true,
+  "input_sha256": "fbbacd5c41e6535a86dd8256ec09b5069d7dc3d92d3eae592728a23f51ba1112",
+  "total": 170,
+  "linked": 100,
+  "registered": 70,
+  "rows": [
+    {
+      "material_key": "x/area/01000",
+      "id": 858,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/02000",
+      "id": 859,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/03000",
+      "id": 860,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/04000",
+      "id": 861,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/05000",
+      "id": 862,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/06000",
+      "id": 863,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/07000",
+      "id": 864,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/08000",
+      "id": 865,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/09000",
+      "id": 866,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/10000",
+      "id": 867,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/11000",
+      "id": 868,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/12000",
+      "id": 869,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/13000",
+      "id": 870,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/14000",
+      "id": 871,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/15000",
+      "id": 872,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/16000",
+      "id": 873,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/17000",
+      "id": 874,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/18000",
+      "id": 875,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/19000",
+      "id": 876,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/20000",
+      "id": 877,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/21000",
+      "id": 878,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/22000",
+      "id": 879,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/23000",
+      "id": 880,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/24000",
+      "id": 881,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/25000",
+      "id": 882,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/26000",
+      "id": 883,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/27000",
+      "id": 884,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/28000",
+      "id": 885,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/29000",
+      "id": 886,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/30000",
+      "id": 887,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/31000",
+      "id": 888,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/32000",
+      "id": 889,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/33000",
+      "id": 890,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/34000",
+      "id": 891,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/35000",
+      "id": 892,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/36000",
+      "id": 893,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/37000",
+      "id": 894,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/38000",
+      "id": 895,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/39000",
+      "id": 896,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/40000",
+      "id": 897,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/41000",
+      "id": 898,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/42000",
+      "id": 899,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/43000",
+      "id": 900,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/44000",
+      "id": 901,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/45000",
+      "id": 902,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/46000",
+      "id": 903,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area/47000",
+      "id": 904,
+      "action": "linked-existing",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area-atlas/13000",
+      "id": 1112,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/area-atlas/28000",
+      "id": 1113,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area-atlas/28000",
+      "id": 1114,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/area-carousel/02000",
+      "id": 1115,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/07000",
+      "id": 1116,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/09000",
+      "id": 1117,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/10000",
+      "id": 1118,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/14000",
+      "id": 1119,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/16000",
+      "id": 1120,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/18000",
+      "id": 1121,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/19000",
+      "id": 1122,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/29000",
+      "id": 1123,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/32000",
+      "id": 1124,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/34000",
+      "id": 1125,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/41000",
+      "id": 1126,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/area-carousel/46000",
+      "id": 1127,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/buzz-map/highway-network-growth",
+      "id": 1128,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/buzz-map/migration-inflow-top-decile-muni",
+      "id": 1129,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/buzz-map/migration-x-highway",
+      "id": 1130,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/buzz-map/tani-vs-sawa-place-names",
+      "id": 1131,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/buzz-map/tani-vs-sawa-place-names",
+      "id": 1132,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/correlation-carousel/actual-income-worker-households-per-month--disposable-income-after-rent",
+      "id": 1133,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/correlation-carousel/employed-people-ratio-secondary--employment-location-quotient-manufacturing",
+      "id": 1134,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/geo/geo-001-x-13",
+      "id": 835,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/geo/geo-001-x-14",
+      "id": 836,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/household-receipt/28000-2024",
+      "id": 1135,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/rank-routes/bread-consumption-expenditure-2014-2024-28-27-33-26",
+      "id": 1136,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/agricultural-employment-population",
+      "id": 1137,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/agricultural-land-conversion-area",
+      "id": 626,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/agricultural-output",
+      "id": 1138,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/agricultural-output",
+      "id": 1139,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/average-height-middle-school-second-grade-male",
+      "id": 661,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/average-temperature",
+      "id": 1140,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/avg-propensity-to-consume-worker-households",
+      "id": 1141,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/avg-propensity-to-consume-worker-households",
+      "id": 1142,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/boys-school-uniform-consumption-quantity",
+      "id": 606,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/consumption-expenditure-multi-person-households-per-month",
+      "id": 1143,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/consumption-expenditure-multi-person-households-per-month",
+      "id": 1144,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/convenience-store-sales",
+      "id": 1145,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/convenience-store-sales",
+      "id": 1146,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/current-liabilities-balance-multi-person-households-per-household",
+      "id": 1147,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/current-liabilities-balance-multi-person-households-per-household",
+      "id": 1148,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/day-time-population",
+      "id": 1149,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/day-time-population",
+      "id": 1150,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/disaster-damage-amount-per-person",
+      "id": 608,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/earthquake-retrofit-housing",
+      "id": 644,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/employed-outside-the-prefecture",
+      "id": 1151,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/employee-ratio-100-299-employee-establishments-private",
+      "id": 664,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/employment-insurance-daily-basic-benefit-average",
+      "id": 663,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/final-energy-consumption-per-capita",
+      "id": 1152,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/fruit-vegetable-juice-consumption-expenditure",
+      "id": 642,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/future-population-change-rate-2050",
+      "id": 1153,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/general-households",
+      "id": 1154,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/general-households",
+      "id": 1155,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/gloves-consumption-expenditure",
+      "id": 625,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/grade-separated-pedestrian-crossings-per-1000-km",
+      "id": 624,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/hospital-staff-by-occupation",
+      "id": 666,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/intellectual-crime-per-100k",
+      "id": 1156,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/large-retail-store-count-per-100k",
+      "id": 665,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/late-elderly-medical-expense-per-insured",
+      "id": 1157,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/late-elderly-medical-expense-per-insured",
+      "id": 1158,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/marine-fishery-aquaculture-output-value",
+      "id": 604,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/minimum-wage-by-region",
+      "id": 1159,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/natto-consumption-expenditure",
+      "id": 1160,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/nuclear-power-plant-count",
+      "id": 636,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/number-of-establishments-manufacturing",
+      "id": 1161,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/number-of-establishments-manufacturing",
+      "id": 1162,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/other-ceremony-expense-consumption-expenditure",
+      "id": 603,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-grains-consumption-expenditure",
+      "id": 662,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-grains-consumption-quantity",
+      "id": 630,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-household-durables-consumption-expenditure",
+      "id": 643,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-mens-shirt-consumption-expenditure",
+      "id": 670,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-mens-shirt-consumption-quantity",
+      "id": 609,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/other-prepared-food-consumption-expenditure",
+      "id": 627,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/pilot-annual-income",
+      "id": 1163,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/private-rental-housing-rent-per-3-3m2",
+      "id": 1164,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/public-nursery-student-ratio",
+      "id": 667,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/public-rent-consumption-expenditure",
+      "id": 620,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/railway-station-count",
+      "id": 1165,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/railway-station-count",
+      "id": 1166,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/recorded-media-consumption-expenditure",
+      "id": 645,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/road-total-length",
+      "id": 1167,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/road-total-length",
+      "id": 1168,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "instagram/ranking/room-utilization-rate",
+      "id": 1169,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/scallop-consumption-quantity",
+      "id": 610,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/shochu-consumption-expenditure",
+      "id": 648,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/sports-participation-rate-cycling",
+      "id": 607,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/total-assessed-land-area-ratio-field",
+      "id": 647,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/tourism-resource-count",
+      "id": 592,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking/vacant-housing-rate",
+      "id": 1170,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/vacant-housing-rate",
+      "id": 1171,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": true
+    },
+    {
+      "material_key": "x/ranking/wakame-consumption-quantity",
+      "id": 646,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/ranking/wind-power-plant-count-facility",
+      "id": 632,
+      "action": "linked-existing",
+      "status": "deleted",
+      "preview_only": false
+    },
+    {
+      "material_key": "instagram/ranking-quiz-reel/shochu-consumption-expenditure",
+      "id": 1172,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/aging-society",
+      "id": 838,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/consumer-prices",
+      "id": 839,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/education-culture",
+      "id": 840,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/fishery-marine",
+      "id": 841,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/foreign-residents",
+      "id": 842,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/healthcare",
+      "id": 843,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/labor-mobility",
+      "id": 844,
+      "action": "linked-existing",
+      "status": "posted",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/labor-wages",
+      "id": 845,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/living-housing",
+      "id": 846,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/local-economy",
+      "id": 847,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/local-finance",
+      "id": 848,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/manufacturing",
+      "id": 849,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/occupation-salary",
+      "id": 850,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/population-dynamics",
+      "id": 851,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/ports",
+      "id": 852,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/railway",
+      "id": 853,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/real-income",
+      "id": 854,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/roads",
+      "id": 855,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/safety",
+      "id": 856,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/theme/tourism",
+      "id": 857,
+      "action": "linked-existing",
+      "status": "scheduled",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/household-receipt/13000-2024",
+      "id": 1173,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/household-receipt/27000-2024",
+      "id": 1174,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/household-receipt/01000-2024",
+      "id": 1175,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area-atlas/47000",
+      "id": 1176,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area-atlas/40000",
+      "id": 1177,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/area-atlas/20000",
+      "id": 1178,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/rank-routes/beer-consumption-expenditure-2014-2024-04-05-02-03",
+      "id": 1179,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/rank-routes/coffee-consumption-expenditure-2014-2024-26-28-25-06",
+      "id": 1180,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    },
+    {
+      "material_key": "x/rank-routes/rice-consumption-expenditure-2014-2024-22-45-15-18",
+      "id": 1181,
+      "action": "registered",
+      "status": "draft",
+      "preview_only": false
+    }
+  ]
+}

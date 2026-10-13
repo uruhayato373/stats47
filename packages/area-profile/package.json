@@ -31,7 +31,6 @@
     "@stats47/r2-storage": "*",
     "@stats47/ranking": "*",
     "@stats47/stats-r2": "*",
-    "@stats47/types": "*",
     "server-only": "^0.0.1"
   },
   "devDependencies": {

@@ -8,7 +8,7 @@
  *   node .claude/scripts/note/regen-derived-png.mjs --slug <s> --force           # 既存も作り直す
  *   node .claude/scripts/note/regen-derived-png.mjs --all --check                # 作らず「無い PNG」の件数だけ数える
  *
- * 公開前 (publish-note / sync-note-r2) と、clone 直後に本文の画像を見たいときに使う。
+ * 公開前 (publish-note)・note:article save の前と、clone 直後に本文の画像を見たいときに使う。
  */
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { createRequire } from "node:module";

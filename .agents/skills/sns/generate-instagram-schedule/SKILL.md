@@ -49,6 +49,11 @@ node .claude/scripts/instagram/generate-schedule.cjs \
 | `--out` | - | stdout のみ | 出力ファイルパス |
 | `--dry-run` | - | false | 候補一覧のみ表示 |
 
+## 教材 (参考文献) の企画
+
+予約表を作る前に `npm run reference:expansion -- pending --channel instagram` を読み、カルーセルの切り口 (§2-3c) に合う企画を題材に入れる。
+台帳登録後の投稿 ID で `record --status planned` (投稿されたら `done`)、Instagram に向かないものは `declined --reason`。正典 `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
 ## 生成後の手順
 
 1. 出力された schedule JSON を確認する。**スクリプト側の編集は不要**

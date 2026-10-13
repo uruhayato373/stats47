@@ -1,1 +1,0 @@
-../../../../../.claude/skills/archive/sns/schedule-instagram-mbs/schedule-instagram-mbs.ts

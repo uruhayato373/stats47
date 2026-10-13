@@ -89,9 +89,10 @@ note 戦略（`docs/30_note記事企画/note戦略.md`）の骨子に基づき�
 docs/31_note記事原稿/<slug>/_data/plan.md
 ```
 
-> **ephemeral outbox**: docs/31 は編集時のみ存在する作業域（push後CI自動削除）。
-> 存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
-> 完了後は `note-draft-index.json` に登録 → push → CI が R2 同期・削除する。
+> **作業場**: docs/31 は git に何も置かない作業場（本文と画像の正本は R2、所在は記事台帳 `data/note/articles.json`）。
+> 既存記事のディレクトリが存在しない場合は先に `npm run note:article -- checkout <slug>` で R2 から取り出す。
+> 新しい記事は記事台帳にレコード（`status: "draft"`・`body.manifest: null`）を足し、`/write-note-section` で draft.md を書いた後に
+> `npm run note:article -- save <slug>` で R2 へ保存する（`save` は draft.md の無い作業コピーを受け付けない。手順は `.claude/scripts/note/catalog/README.md`「作業手順」）。
 
 ## 注意
 

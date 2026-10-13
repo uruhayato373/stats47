@@ -7,6 +7,7 @@ import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
 import { NativeSelect } from "@/components/ui/native-select";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 import { Input } from "@/components/ui/input";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "note運用 — stats47 admin" };
@@ -48,10 +49,10 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
     <div className="space-y-8">
       <PageHeading
         title="note運用"
-        source=".claude/scripts/note/catalog/ (編集メタ) + R2 note/<vertical>/<slug>/ (本文)"
+        source={`${datasetPath("note.articles")} (記事台帳) + R2 note/<vertical>/<slug>/ (本文)`}
       >
         <p className="text-xs text-console-muted">
-          原稿本文を複製せず、git TSの編集メタとR2本文の所在、note.com公開状態をまとめて確認します。
+          原稿本文を複製せず、記事台帳の編集メタとR2本文の所在、note.com公開状態をまとめて確認します。
         </p>
         <Link href="/content/note/covers" className="text-xs text-console-accent hover:underline">カバー画像を分類別に確認する →</Link>
       </PageHeading>

@@ -3,7 +3,7 @@
 # note 記事の SVG → PNG 再生成スクリプト
 #
 # note 記事は R2 `note/<vertical>/<slug>/` が SSOT（ephemeral outbox 化済）。
-# 更新時は restore-from-r2.sh <slug> で docs/31 に復元してから本スクリプトを使う。
+# 更新時は npm run note:article -- checkout <slug> で docs/31 に復元してから本スクリプトを使う。
 # PNG が必要なとき (publish-note --update での再アップロード等) に再生成する。
 #
 # 各 .svg から、同じ basename の .png を同じディレクトリに生成する。

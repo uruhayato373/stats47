@@ -37,13 +37,17 @@ paths:
 - 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと（通知のため）。
 - 詳細: `.claude/rules/local-environment.md` の「R2 読み書き」。
 
-### 有料noteの非公開保存
+### note 記事の本文 (2026-10-13〜)
 
-- 配信用bucket `stats47` の `note/<vertical>/<slug>/` は、無料記事の本文または有料記事の販売メタ `public.json` だけを置く。
-- 有料本文、画像、商品ZIP、検証manifestはprivate bucket `stats47-private` の同一prefixへ置く。公開custom domainを設定しない。
-- writerは `.claude/scripts/note/publish-paid-note-private-r2.ts`、reader/復元は `restore-paid-note-private-r2.ts` に限定する。全objectをSHA-256とbytesで検証する。
-- note catalogの `r2Body:true` はprivate保存の検証後だけ設定し、派生stateでは `r2_access:"private"` とする。
-- `sync-note-r2.yml` と `sync-note-r2.mjs` は有料記事を公開R2へ書こうとした時点でfail-closedに停止する。
+- 記事の本文・画像の正本は R2。無料記事は配信用bucket `stats47`、有料記事は private bucket `stats47-private` の
+  `note/<vertical>/<slug>/` に置く。有料記事の本文・画像・商品ZIPを配信用bucketへ置かない (台帳の Schema が強制)。
+  配信用bucketに残る有料記事の `public.json` (旧 writer の販売メタ) は読み手が無く、新規には作らない。
+- 所在とファイル一覧のマニフェストの SHA は `data/note/articles.json` が持つ。マニフェストと、上書き・削除で置き換わる旧ファイルは
+  private bucket の `note-archive/manifests/<key>/<sha>.json`・`note-archive/blobs/<sha>` に不変保存する (削除しない)。
+- **writer は `.claude/scripts/note/note-article.mjs` (`save` / `adopt`) だけ。** 記事自身の prefix 内のファイルを置き換え・削除するのは、
+  旧ファイルを `note-archive/blobs/` へ退避し読み戻して SHA を照合したあとに限る。R2 の実体が台帳の記録と違えば書かずに止まる。
+  記事本文を `diff-push-r2`・`wrangler r2 object put`・独自スクリプトで直接書かない。reader は `checkout` (全ファイルを SHA 照合)。
+- docs/31 は git に置かない作業場。旧 `sync-note-r2.yml` / `publish-paid-note-private-r2.ts` / `restore-*.{sh,ts}` は廃止した。
 
 ## URL → R2 キーパス 対応表
 
@@ -168,7 +172,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | prefix | 理由 |
 |---|---|
 | `app/**` | 本番配信データ (SSOT / snapshot)。§「URL → R2 キーパス対応表」参照 |
-| `gis/` / `ges/` / `video/` / `note/` | 正規保持 (§「ルート直下に置くもの」) |
+| `gis/` / `ges/` / `video/` / `note/` | 正規保持 (§「ルート直下に置くもの」)。private の `note-archive/` は note 記事の保存履歴で削除しない |
 | `staging/image-cache/` | AI 背景の再課金防止 cache (`ogp-image-standards.md` §5)。無期限 |
 | `archive/kindle-encrypted/` | KDP送信版の復元・rollback証跡。manifest署名とplain/cipher SHAが一致するrevisionを保持 |
 | `media/note-backgrounds/` | 承認済みのnote生成AI背景。`render-spec.json`のSHAが指す間は削除しない (作り直せない入力。`--verify-r2`が実在を監視) |

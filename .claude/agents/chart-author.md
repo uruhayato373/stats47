@@ -63,7 +63,7 @@ model: sonnet
 | `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON・source.json 3点セット） |
 | `data/blog/svg-lineage-queue.json` | run/read（系譜復元キュー、`build-lineage-queue.mjs` が生成） |
 | `contents/blog/<slug>/` | read 主体（chart 参照） |
-| `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `restore-from-r2.sh <slug>` 先行必須） |
+| `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `npm run note:article -- checkout <slug>` 先行必須。編集後は `save <slug>`） |
 | `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |
 | `.claude/scripts/blog/build-svg-gallery.mjs` | run（目視レビュー用 HTML ギャラリー生成） |
 

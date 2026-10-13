@@ -35,3 +35,9 @@ hit していれば `effect/pending` に留まり、確定ラベルは付かな�
 - **判定**: stats47の診断工程は完了。無制限ISR蓄積は再現せず、アカウント超過は別siteScopeを含む。
   stats47側の削除可能量は22.7MBで解消に足りない。`R2-STORAGE-01`は、doboku-note-archiveの
   保持方針をオーナーが判断するまでactiveに維持する。
+
+### [R2-STORAGE-01] 容量の再実測 (2026-10-11)
+
+- **実測**: `data/cloudflare/history.csv` の r2_storage_gb は 2026-09-26 33.368、10-02 33.338、10-09 33.635 GB。2 週間の増加は +0.27 GB
+- **再現コマンド**: `awk -F, '$1>="2026-09-26"{print $1,$13}' data/cloudflare/history.csv`
+- **判定**: 判定しない。doboku-note-archive の保持方針 (許容か削減か) をオーナーが決めるまで想定効果値を置けない。削減なら削除量を根拠に `[target: -N GB]` 付きの別行で起票し、許容なら理由と見直し期日をここに書く

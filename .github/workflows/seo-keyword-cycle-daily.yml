@@ -41,7 +41,7 @@ jobs:
           ref: develop
           fetch-depth: 0
       - name: Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: npm
@@ -96,7 +96,7 @@ jobs:
         id: review
         if: steps.plan.outputs.review == 'true'
         timeout-minutes: 15
-        uses: anthropics/claude-code-base-action@57607815d5d9678acb18dae0e5033d87d4dd4177 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@0adbfaf05435b2e2b7150cb122ba44727b98bf12 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -145,7 +145,8 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         run: |
           npm run type-check
-          npm run test:run --workspace apps/web -- src/features/survey
+          # step の NODE_ENV=production は build 用。vitest が React の本番ビルドを読むと React.act が無く落ちる (2026-10-10〜11 の 6 run)
+          env NODE_ENV=test npm run test:run --workspace apps/web -- src/features/survey
           npm run validate:config
           npm run validate:catalog
           npm run build --workspace apps/web
@@ -171,7 +172,7 @@ jobs:
           fi
       - name: Preserve observations and review evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: seo-keyword-evidence
           path: .local/seo-rank-watch/

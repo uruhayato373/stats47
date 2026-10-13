@@ -20,6 +20,16 @@ Studio で表示されるデータは `src/utils/preview-data.ts` が提供す�
 
 各 Preview コンポーネントは `resolveRankingData({ meta, allEntries })` を使用し、props が未指定の場合に `previewData` にフォールバックする。
 
+## SNSデータカード（4型）
+
+`src/features/data-cards/`の`SNS-HouseholdReceipt`（家計レシート）、`SNS-AreaAtlas`（県の図鑑）、
+`SNS-RankRoutes`（順位の乗り換え図）、`SNS-TileChange`（タイル地図・長期変化）は1080×1350px。Studioの`DataCards`フォルダと軽量CLI入口は
+同じ`Compositions.tsx`を使用する。観測値の既定モックは持たず、生成した`props.json`を渡す。
+
+実データ生成と投稿への受け渡しは[render-sns-stills](../../.claude/skills/sns/render-sns-stills/SKILL.md)が正典。
+データ接地・欠測・単位・recipeの更新漏れ・同順位・都市名の検査は
+`node --import tsx --test .claude/scripts/sns/__tests__/data-card-input.test.ts`（リポジトリルート）で検証する。
+
 ## コンポジション一覧
 
 ### RankingShorts
@@ -191,3 +201,5 @@ src/
     ├── mock-data.ts           モックデータ変換ユーティリティ
     └── preview-data.ts        Studio プレビュー用データ
 ```
+
+タイル長期変化は `--kind tile-change --key total-population|households|births --from <年> --to <年>`。同じ定義・単位の47県で計算し、人口2025年は国勢調査確定値を使う。新規の上位・下位5県チャート生成は廃止。`quick-still` と `RankingX-Chart` は1080×1350の全47県タイルを生成する（過去のファイル名は互換維持）。予約の差し替えでも公開済みの共有素材を上書きしない。

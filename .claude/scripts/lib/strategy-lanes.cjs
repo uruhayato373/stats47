@@ -21,6 +21,8 @@ const path = require('node:path');
 const backlogLib = require('./backlog-lib.cjs');
 const { DOMAINS } = require('../../../config/paths.mjs');
 const { datasetDir } = require("../../../config/datasets.mjs");
+// 「効果判定エンジン対象外: <理由>」の記法は計測サイクルと同じ判定を使う (別に正規表現を書くと片方だけ変わる)
+const { OUT_OF_SCOPE_MARKER } = require("../metrics/lib/gsc-improvements-adapter.mjs");
 
 const STRATEGY_DOC = 'docs/00_プロジェクト管理/02_収益化戦略.md';
 const STANCES = ['攻める', '維持', '凍結'];
@@ -232,6 +234,7 @@ function parseImprovementRows(text) {
       metric: cells[5],
       kpis: parseKpiMarker(cells[1]),
       hasTarget: TARGET_MARKER.test(cells[1]),
+      outOfScope: OUT_OF_SCOPE_MARKER.test(cells[1]),
       line: i + 1,
     });
   });
@@ -323,7 +326,8 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   if (improvementRows.length > MAX_ACTIVE_IMPROVEMENTS) {
     issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `active 施策 ${improvementRows.length} 件が上限 ${MAX_ACTIVE_IMPROVEMENTS} 件を超えている。新しい施策を足さず、月次計画で判定・backlog 降格して削る` });
   }
-  const noTarget = improvementRows.filter((r) => !r.hasTarget).map((r) => r.id);
+  // 理由付きで機械判定から外した行は欠落に数えない (計測サイクルの「理由付きで対象外」と同じ扱い。2026-10-11)
+  const noTarget = improvementRows.filter((r) => !r.hasTarget && !r.outOfScope).map((r) => r.id);
   if (noTarget.length) {
     issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `[target:] の無い施策 ${noTarget.length} 件 (効果を機械判定できない): ${noTarget.join(', ')}` });
   }

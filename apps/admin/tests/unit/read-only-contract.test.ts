@@ -24,11 +24,17 @@ const CHILD_PROCESS_EXCEPTIONS: Record<string, RegExp> = {
 };
 
 describe("admin read-only contract", () => {
-  it("API routeはGETだけを公開する", () => {
+  it("API routeは下書き本文PATCH以外はGETだけを公開する", () => {
     const violations = filesUnder(path.join(adminRoot, "app/api"))
       .filter((file) => file.endsWith("route.ts"))
       .flatMap((file) => {
         const source = fs.readFileSync(file, "utf8");
+        const rel = path.relative(adminRoot, file).replaceAll("\\", "/");
+        if (rel === "app/api/posts/[id]/caption/route.ts") {
+          expect(source).toMatch(/export async function PATCH/);
+          expect(source).not.toMatch(/export\s+(?:async\s+)?function\s+(POST|PUT|DELETE)/);
+          return [];
+        }
         return /export\s+(?:async\s+)?function\s+(POST|PATCH|PUT|DELETE)|export\s+const\s+(POST|PATCH|PUT|DELETE)/.test(
           source,
         )
@@ -59,7 +65,17 @@ describe("admin read-only contract", () => {
       /node:child_process|from\s+["']child_process["']|\bspawn\s*\(|\bexecFile\s*\(|\bwriteFile(?:Sync)?\s*\(|\bappendFile(?:Sync)?\s*\(|\bupdateById\s*\(|\binsert\s*\(/;
     const violations = serverFiles
       .filter((file) => !Object.hasOwn(CHILD_PROCESS_EXCEPTIONS, path.relative(adminRoot, file).replaceAll("\\", "/")))
-      .flatMap((file) => (forbidden.test(fs.readFileSync(file, "utf8")) ? [path.relative(adminRoot, file)] : []));
+      .flatMap((file) => {
+        let source = fs.readFileSync(file, "utf8");
+        if (path.relative(adminRoot, file).replaceAll("\\", "/") === "lib/server/posts-store.ts") {
+          // 2026-10-11 ユーザー指定: draft captionだけ既存store経由で保存する。
+          expect(source.match(/store\(\)\.updateById\(/g)).toHaveLength(1);
+          expect(source).toContain('post.status !== "draft"');
+          expect(source).toContain('postRevision(post) !== revision');
+          source = source.replace(/\bupdateById\s*\(/g, "allowedDraftWrite(");
+        }
+        return forbidden.test(source) ? [path.relative(adminRoot, file)] : [];
+      });
     expect(violations).toEqual([]);
   });
 

@@ -13,6 +13,7 @@ import { PREFECTURE_BY_CODE5, REGIONS } from "../data/prefectures";
 import { BRAND } from "../design/tokens";
 import { SEMANTIC_COLORS } from "../design/tokens";
 import { SITE } from "@stats47/data-configs";
+import { CHART_DATA_REPLACE_LINES } from "./usage-text";
 
 type PptxPoint = { x: number; y: number; moveTo?: boolean } | { close: true };
 
@@ -144,7 +145,7 @@ function addScatterSlide(pptx: PptxGenJS, ds: Dataset, title: string, subtitle: 
 
 function addTableSlide(pptx: PptxGenJS, ds: Dataset, title: string): void {
   const slide = pptx.addSlide();
-  addTitle(slide, title, "全 47 都道府県（差し替え用データは data.csv）");
+  addTitle(slide, title, "全 47 都道府県（同梱の data.csv にも収録）");
   const ranked = rankItems(ds, "desc");
   const cols = 3;
   const per = Math.ceil(ranked.length / cols);
@@ -242,12 +243,7 @@ export async function buildProductPptx(
     "複数県を選んで一括で色を変えることもできます。",
     "凡例の色は本文の配色に合わせて調整してください。",
   ]);
-  addTextSlide(pptx, "使い方②：グラフのデータを差し替える", [
-    "グラフを選び「グラフのデザイン → データの編集」で埋め込み Excel を開きます。",
-    "数値を書き換えるとグラフが自動で更新されます。",
-    "同梱の data.csv を貼り付けると 47 県分を一括で差し替えられます。",
-    "基準年・出典は SOURCES.csv を参照してください。",
-  ]);
+  addTextSlide(pptx, "使い方②：グラフのデータを差し替える", [...CHART_DATA_REPLACE_LINES]);
 
   // 14. 出典
   addTextSlide(
@@ -332,12 +328,7 @@ export async function buildDatabookPptx(
     "複数県を選んで一括で色を変えることもできます。",
     "凡例の色は本文の配色に合わせて調整してください。",
   ]);
-  addTextSlide(pptx, "使い方②：グラフのデータを差し替える", [
-    "グラフを選び「グラフのデザイン → データの編集」で埋め込み Excel を開きます。",
-    "数値を書き換えるとグラフが自動で更新されます。",
-    "同梱の data.csv を貼り付けると 47 県分を一括で差し替えられます。",
-    "基準年・出典は SOURCES.csv を参照してください。",
-  ]);
+  addTextSlide(pptx, "使い方②：グラフのデータを差し替える", [...CHART_DATA_REPLACE_LINES]);
 
   // 出典
   addTextSlide(

@@ -9,17 +9,19 @@
  * 冪等: 表を画像埋め込みに置換するため、再実行しても残った表だけ処理する。
  * コードフェンス (``` ... ```) 内の `|` 行は表として扱わない。
  *
- * Usage: node .claude/scripts/note/render-md-tables.cjs
+ * Usage: node .claude/scripts/note/render-md-tables.cjs [series]
  */
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
 // docs/31 は ephemeral outbox (push後CI自動削除)。実行前に記事を復元する:
-//   bash .claude/scripts/note/restore-from-r2.sh <slug>
+//   npm run note:article -- checkout <slug>
+// 第1引数でシリーズ名を指定できる (例: koumuin-estat-claude-code)。省略時は従来どおり koumuin-claude-code。
 const SERIES = path.resolve(
   __dirname,
-  "../../../docs/31_note記事原稿/koumuin-claude-code",
+  "../../../docs/31_note記事原稿",
+  process.argv[2] || "koumuin-claude-code",
 );
 
 const FS = 15;
@@ -207,7 +209,8 @@ async function processArticle(dir) {
 (async () => {
   const dirs = fs
     .readdirSync(SERIES)
-    .filter((d) => /^\d{2}-/.test(d))
+    // 第2引数で記事ディレクトリを1つに絞れる (シリーズ外の記事は第1引数に "." を渡す)
+    .filter((d) => (process.argv[3] ? d === process.argv[3] : /^\d{2}-/.test(d)))
     .sort();
   let total = 0;
   for (const d of dirs) {

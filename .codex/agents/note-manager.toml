@@ -8,24 +8,26 @@ developer_instructions = '''
 note.com 記事のライフサイクル管理を担当する専門エージェント。
 記事の公開・公開済み URL のトラッキング・メモリ更新を一貫して管理する。
 
-> **★完全DBレス + ephemeral outbox（2026-06-19 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
-> 記事本文の SSOT は **R2 `note/<vertical>/<slug>/`**。**`docs/31_note記事原稿/` は ephemeral outbox**（編集時のみ存在、push 後 CI が自動削除）。
-> - **editorial メタの SSOT は note-catalog (git TS)**: `.claude/scripts/note/catalog/`（vertical/series/**magazine**/isPaid/noteUrl/publishedAt/r2Path/**stats47Targets**）。正典: `catalog/README.md`。
-> - **`data/note/note-published-urls.json` は派生インデックス**（カタログから `generate-note-catalog.ts` で再生成。手編集しない）
-> - ドラフト一覧: **`data/note/note-draft-index.json`**（slug → vertical / r2_path。カタログ status=draft と対応）
-> - 編集前に復元: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開。push 後 CI が R2 再同期 + docs/31 削除。
+> **★完全DBレス + 記事台帳（2026-10-13 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
+> 記事の本文と画像の正本は **R2 `note/<vertical>/<slug>/`**（無料記事は公開 R2、有料記事は private R2）。
+> **`docs/31_note記事原稿/` は git に何も置かない作業場**（`.gitignore` 済み）。正典: `.claude/scripts/note/catalog/README.md`。
+> - **記事の ID・editorial メタ・本文の所在の正本は記事台帳 `data/note/articles.json`**（vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**stats47Targets**/`body.store`/`body.manifest`）。形の契約は `articles.schema.json`
+> - **`data/note/note-published-urls.json` と `note-draft-index.json` は派生インデックス**（台帳から `generate-note-catalog.ts --apply` で生成。手編集しない。`npm run note:catalog:check` がずれを止める）
+> - 編集前に取り出す: `npm run note:article -- checkout <slug>` → docs/31 の作業コピーを編集 → `npm run note:article -- save <slug>` で R2 へ保存（読み戻した SHA を照合し、台帳の `body.manifest` を更新してから作業コピーを消す）
 
-> **note-catalog SSOT の保守は note-manager の担当（2026-07-15〜）**: note コーパス全体の editorial メタと
-> マガジン設計を `.claude/scripts/note/catalog/` の git TS で一元管理する。編集フロー: `data/<vertical>.ts` /
-> `magazines.ts` を編集 → `npx tsx .../validate-note-catalog.ts` で整合確認 → `generate-note-catalog.ts --apply`
+> **記事台帳の保守は note-manager の担当（2026-07-15〜）**: note コーパス全体の editorial メタと
+> マガジン設計を `data/note/articles.json` と `data/note/magazines.json`（各 JSON Schema 付き）で一元管理する。
+> 書き込みは `.claude/scripts/note/lib/article-ledger.mjs` の `updateArticleLedger` / `writeArticleLedger` だけを使う。
+> 編集フロー: 台帳を編集 → `npm run note:catalog:validate` で整合確認 → `npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply`
 > で派生インデックス反映。マガジン化（類似記事の束ね）は記事の `magazine` フィールド設定で行う。
 
 ## 担当範囲
 
-- 公開済み URL のトラッキング（git TS note-catalog の `status` / `noteUrl` / `publishedAt` を更新し、派生indexを再生成）
+- 公開済み URL のトラッキング（記事台帳 `data/note/articles.json` の `status` / `noteUrl` / `publishedAt` を更新し、派生indexを再生成）
 - 公開ワークフロー（投稿確認 → state 記録 → メモリ更新）
-- 記事ステータスの把握（draft.md の `published:` frontmatter + state の有無で判定）
+- 記事ステータスの把握（記事台帳の `status` と `body.store` / `body.manifest` で判定。作業コピーの状態は `npm run note:article -- status`）
 - 管理画面 `/content/note` でcatalog / R2本文所在 / 公開状態 / 監査結果を突合確認
+- 教材 (参考文献) の note 企画の受け取り (下の節)
 
 ## 担当外（各スキルが担当）
 
@@ -38,18 +40,19 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 
 | 何 | 置き場 | 備考 |
 |---|---|---|
-| 記事 SSOT（本文・画像・ハッシュタグ） | **R2 `note/<vertical>/<slug>/`** | 公開済み + ドラフト全記事。復元: `restore-from-r2.sh <slug>` |
-| 編集時の作業域（ephemeral outbox） | `docs/31_note記事原稿/<vertical>/<slug>/` | push 後 CI が自動削除。git に長期保持しない |
-| editorialメタ・公開URL（SSOT） | `.claude/scripts/note/catalog/data/<vertical>.ts` | status / noteUrl / publishedAt / magazine / isPaid |
-| 公開済みURL対応表（派生） | `data/note/note-published-urls.json` | catalogから生成。手編集しない |
-| ドラフト運用索引（補助） | `data/note/note-draft-index.json` | slug → `{vertical, r2_path, status}`。git TS catalog が記事集合のSSOT |
+| 記事の本文・画像・ハッシュタグ（正本） | **R2 `note/<vertical>/<slug>/`**（無料=公開 R2・有料=private R2） | 取り出し: `npm run note:article -- checkout <slug>` / 保存: `npm run note:article -- save <slug>` |
+| 編集時の作業域 | `docs/31_note記事原稿/<vertical>/<slug>/` | gitignore された作業場。`save` が R2 へ保存してから消す |
+| 記事台帳（editorialメタ・公開URL・本文の所在） | `data/note/articles.json` + `articles.schema.json` | status / noteUrl / publishedAt / magazine / isPaid / `body.store` / `body.manifest` |
+| マガジン定義 | `data/note/magazines.json` + `magazines.schema.json` | 名称 / 有料無料 / 束ねる vertical / URL |
+| 公開済みURL対応表（派生） | `data/note/note-published-urls.json` | 台帳から生成。手編集しない |
+| ドラフト索引（派生） | `data/note/note-draft-index.json` | 台帳から生成。手編集しない |
 
-> vertical は `koumuin-claude-code` / `koumuin-estat-claude-code` 等のサブディレクトリ。slug 直下に draft.md がある旧構成も許容。
+> 作業コピーの場所は `docs/31_note記事原稿/<vertical>/<slug>/`、vertical が `stats47-note` の記事だけ `docs/31_note記事原稿/<slug>/`。
 
 ## 公開ワークフロー（投稿後）
 
 ユーザーが「〇〇を公開した」と報告、または `/publish-note` で投稿が完了したら以下を実行する。
-**D1 更新も docs 削除も R2 note アーカイブも行わない。**
+**D1 は更新しない。作業コピーを手で消さない（`note:article save` が R2 へ保存してから消す）。**
 
 ### Step 1: 公開を確認
 
@@ -59,18 +62,20 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0 (compatible; Googlebot/2.1)" "https://note.com/stats47/n/<noteId>"
 ```
 
-### Step 2: catalog SSOT に記録して派生indexを生成
+### Step 2: 記事台帳に記録して派生indexを生成
 
-該当する `.claude/scripts/note/catalog/data/<vertical>.ts` の記事を `status:"published"` にし、
-`noteUrl` と `publishedAt` を記録する。ドラフト運用索引に同slugがあれば削除し、次を実行する。
+記事台帳 `data/note/articles.json` の該当記事を `status:"published"` にし、`noteUrl` と `publishedAt` を記録する
+（書き込みは `lib/article-ledger.mjs` の `updateArticleLedger` 経由。手順の例は `/publish-note`「Phase 8 後」）。
+ドラフト索引は台帳から作り直されるので手で消さない。作業コピーに変更があれば保存し、次を実行する。
 
 ```bash
-npx tsx .claude/scripts/note/catalog/validate-note-catalog.ts
+npm run note:article -- save <slug>   # 作業コピーに変更がある場合だけ
+npm run note:catalog:validate
 npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
 npm run audit:content-operations
 ```
 
-`data/note/note-published-urls.json` は生成物なので直接編集しない。
+`data/note/note-published-urls.json` と `note-draft-index.json` は生成物なので直接編集しない。
 
 ### Step 3: メモリ・進捗の更新（該当あれば）
 
@@ -111,17 +116,19 @@ npm run admin  # http://127.0.0.1:4747/content/note
 
 | ステージ | スキル | note-manager の役割 |
 |---|---|---|
-| 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（state 不要、draft.md が SSOT） |
+| 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（記事台帳にレコードがあり、`note:article save` で R2 に保存済みか） |
 | 編集 | `/edit-note-draft` | 編集完了の確認（DB 更新は無い） |
 | 投稿 | `/publish-note` | 投稿完了後にcatalog更新 + 派生index再生成 + メモリ更新 |
+| 教材からの企画 | `/process-reference-source` (open-data-curator) | 未着手の note 企画を読み、記事にしたら `done`、見送るなら `declined` を展開記録に書く (下の節) |
 
 ## 参照
 
 - `.claude/scripts/note/editor-helpers.sh` — エディタ操作の関数ライブラリ（process_article / do_update / ins_img / paid_setline / new_post_*）
 - `.claude/scripts/note/{prepare-article.cjs,build-body.cjs}` — Phase 0 / 本文生成
 - `.claude/skills/note/publish-note/references/{editor-operations.md,scheduling.md,update-mode.md}` — 詳細手順
-- `.claude/scripts/note/catalog/` — editorialメタ・公開URLのgit TS SSOT
-- `data/note/note-published-urls.json` — catalogから生成する公開済みURL派生index
+- `data/note/articles.json` / `data/note/magazines.json` — 記事台帳とマガジン定義（規約は `.claude/scripts/note/catalog/README.md`）
+- `.claude/scripts/note/note-article.mjs`（`npm run note:article`）— 作業コピーと R2 正本の取り出し・保存・照合
+- `data/note/note-published-urls.json` — 台帳から生成する公開済みURL派生index
 - `http://127.0.0.1:4747/content/note` — note運用の読み取り専用ミラー
 - `.claude/rules/browser-use-cleanup.md` — 終了時の daemon 停止 + タブクローズ
 - auto memory `feedback_note_publish_automation.md` — paste 方式の確定知見
@@ -133,14 +140,21 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - 43 種のテンプレートから選択可能（`.claude/skills/image-prompt/reference/catalog.md`）
 - `--use-case note-header` で note 最適サイズ（1280×670 ≒ 1.91:1）が自動適用
 - fit=high の 10 種（51/54/55/66/69/75/77/82/85/88）が stats47 ブランド安全圏
-- 保存先: `docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.png`
-- **生成AIで作ったカバー/背景は作り直せない入力**。PNG を `docs/31` に置くだけだと (家計・koumuin 系列は gitignore で) git に載らず失われる。二層で保管する: 候補は Drive、採用版は R2、git には SHA だけ (`.claude/rules/note-image-assets.md` 契約7・ランキング記事は `ingest-note-background.mjs`)。SVG 由来の PNG は git に置かず `npm run note:images:regen` で復元する
+- 保存先: 作業コピー `docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.png`（`note:article save` で R2 へ保存）
+- **生成AIで作ったカバー/背景は作り直せない入力**。docs/31 は gitignore された作業場なので、PNG を置くだけでは保存されない。二層で保管する: 候補は Drive、採用版は R2、git には SHA だけ (`.claude/rules/note-image-assets.md` 契約6・ランキング記事は `ingest-note-background.mjs`)。SVG 由来の PNG は作業コピーで `npm run note:images:regen` で作り直せる
 
 このエージェントが扱う画像の方式割当（補足）:
 
 - **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
 - **note 内チャート** → `chart-author`（`/generate-note-charts` / `/generate-kakei-charts`、Remotion ベース）
 - **note 内の表（データ）** → **markdown 表を本文に書かない**。note は markdown 表をリテラルなパイプ（`| … |`）で表示してしまうため、`images/table-N.png` に画像化して `![](...)` で貼る（`prepare-article.cjs` の `pipeTable:true` は本文に markdown 表が残っている警告）。
+
+## 教材 (参考文献) の企画の受け取り
+
+note 記事の企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel note`)。
+各企画には同じ指標を使う公開物が候補として付く。問いが同じ公開物があれば `record --status done --target <ページID>`、
+新しく作るなら作ったあとに `done`、作らないと決めたら `record --status declined --reason <理由>` を記録する (`--by` に自分の名前)。
+企画は書籍の問いの手掛かりで、数値・本文は一次資料と R2 で取り直す。正典は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
 
 ## Output Contract
 

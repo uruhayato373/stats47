@@ -439,27 +439,30 @@ node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒
 - [ ] `tags.txt` が生成されている（最大99個、1行1タグ）
 - [ ] **数値情報に（）を使っていない — 文中に自然に組み込まれている**
 
-## 生成後: R2 同期 (ephemeral outbox フロー)
+## 生成後: R2 へ保存
 
-生成した記事を R2 SSOT に登録し、docs/31 を CI に削除させる:
+生成した記事を記事台帳 `data/note/articles.json` に登録し、`note:article save` で R2 (公開 R2) へ保存する。
+docs/31 は git に何も置かない作業場で、`save` が読み戻した SHA を照合してから作業コピーを消す
+(正典 `.claude/scripts/note/catalog/README.md`「作業手順」):
 
 ```bash
-# 1. note-draft-index.json に slug を追記 (vertical は stats47-note)
-node -e "
-const fs=require('fs');
-const f='data/note/note-draft-index.json';
-const d=JSON.parse(fs.readFileSync(f,'utf8'));
-d.drafts['a-<RANKING_KEY>']={vertical:'stats47-note',r2_path:null};
-fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
-console.log('追記完了');
-"
-# 2. develop に push → sync-note-r2.yml が R2 同期 + docs/31 削除
-git add data/note/note-draft-index.json docs/31_note記事原稿/a-<RANKING_KEY>
-git commit -m "note: a-<RANKING_KEY> ドラフト生成 + R2 同期キュー"
-git push origin develop
+# 1. 台帳に下書きレコードを足す (vertical は stats47-note。書き込みは article-ledger.mjs 経由。
+#    magazine は data/note/magazines.json の s47-* カテゴリマガジンのキー)
+node --input-type=module -e '
+import { updateArticleLedger } from "./.claude/scripts/note/lib/article-ledger.mjs";
+updateArticleLedger((l) => { l.articles.push({ key: "a-<RANKING_KEY>", vertical: "stats47-note", series: "A",
+  title: "<title>", magazine: "<s47-マガジン>", isPaid: false, status: "draft",
+  r2Path: "note/stats47-note/a-<RANKING_KEY>", body: { store: "r2-public", manifest: null } }); });'
+
+# 2. 派生インデックス (note-draft-index.json) を台帳から作り直す
+npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
+
+# 3. 作業コピーを R2 へ保存する (chart-data.json / data-provenance.json の不備は保存前に警告される)
+npm run note:article -- save a-<RANKING_KEY>
 ```
 
-cloud Claude Code で編集を続ける場合は `restore-from-r2.sh a-<RANKING_KEY>` で復元する。
+git に入るのは台帳と派生インデックスだけである。別の端末やクラウドの Claude Code で編集を続ける場合は、
+`git pull` で台帳を合わせてから `npm run note:article -- checkout a-<RANKING_KEY>` で取り出す。
 
 ## 量産のコツ
 

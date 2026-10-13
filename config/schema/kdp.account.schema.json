@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KDP の期待アカウント (個人情報は .local 側)",
+  "description": "config/kdp-account.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "accountEmail": {
+      "type": "string"
+    },
+    "accountName": {
+      "type": "string"
+    },
+    "marketplace": {
+      "type": "string"
+    },
+    "publishedAt": {},
+    "_note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "accountEmail",
+    "accountName",
+    "marketplace",
+    "publishedAt",
+    "_note"
+  ]
+}

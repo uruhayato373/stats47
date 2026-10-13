@@ -33,7 +33,7 @@ tags: [koumuin, claude-code, draft-index]
 
 2026-05-21 追加 (スクリーンショット脱プレースホルダー): 実画面キャプチャの代替だったスクリーンショット SVG 35 枚を整理。端末・コマンド出力・コード系 25 枚は内容を本文と一致させた「端末風図版」として確定 (本文マーカーを `screenshot`→`terminal` に変更)。第三者アプリ GUI 系 (Anthropic コンソール / VS Code / iPhone / Excel / 財務システム / 文書・スライド) 10 枚は実キャプチャ必須で代替不能のため削除し本文を調整。結果、**全 33 本がプレースホルダー画像ゼロ・壊れリンクゼロ・孤立ファイルゼロ**で投稿可能。**これに伴い下記『次のアクション』『Phase 5』のスクリーンショット撮影・撮影ガイド・SVG→PNG 変換に関する手順は無効** (撮影工程は廃止、画像は全て生成・変換済)。
 
-2026-07-09 追加 (読者ガイド + §8 是正 + R2 SSOT 再同期): 全記事に導入ブロック (「こんな方に向けた記事です」+「この記事でわかること」) を追加、`## TL;DR` セクションを削除 (公務員読者に英語ジャーゴンが不明瞭なため)。守秘・倫理ガード §8 違反 (著者一人称: 01/03、煽り表現: 07/08/25/27/28/30) を第三者視点へ是正。校正で 6 記事に外科的修正 (00 重複統合・02/32 である→ですます・06 重複語・15 太字・23 重複)。**編集後の draft.md 45 本 (koumuin-claude-code 33 + koumuin-estat-claude-code 12) を `push-fixed-articles.mjs` で R2 (`note/<vertical>/<slug>/draft.md`) に再同期済** — docs/31 は ephemeral outbox のため git 編集だけでは durable SSOT (R2) が stale になり、outbox prune / restore-from-r2 で編集が silent revert される。R2 への書き戻しで SSOT を一致させた (02 記事: R2 に導入ブロック反映確認、28 記事: R2↔docs/31 diff 0)。note.com への投稿はユーザーが別途 (browser-use)。
+2026-07-09 追加 (読者ガイド + §8 是正 + R2 SSOT 再同期): 全記事に導入ブロック (「こんな方に向けた記事です」+「この記事でわかること」) を追加、`## TL;DR` セクションを削除 (公務員読者に英語ジャーゴンが不明瞭なため)。守秘・倫理ガード §8 違反 (著者一人称: 01/03、煽り表現: 07/08/25/27/28/30) を第三者視点へ是正。校正で 6 記事に外科的修正 (00 重複統合・02/32 である→ですます・06 重複語・15 太字・23 重複)。**編集後の draft.md 45 本 (koumuin-claude-code 33 + koumuin-estat-claude-code 12) を `push-fixed-articles.mjs` で R2 (`note/<vertical>/<slug>/draft.md`) に再同期済** — docs/31 は ephemeral outbox のため git 編集だけでは durable SSOT (R2) が stale になり、outbox prune / restore-from-r2 で編集が silent revert される。R2 への書き戻しで SSOT を一致させた (02 記事: R2 に導入ブロック反映確認、28 記事: R2↔docs/31 diff 0)。note.com への投稿はユーザーが別途 (browser-use)。 (`push-fixed-articles.mjs` と `restore-from-r2.sh` は当時の手順で、2026-10-13 に廃止した。現在の保存は `note:article save`、取り出しは `note:article checkout`。)
 
 ## 親計画
 
@@ -92,14 +92,16 @@ tags: [koumuin, claude-code, draft-index]
 
 > **基礎編 #31 / #32 について (2026-05-21 追加)**: シリーズが「業務ごとのレシピ集」に偏り、横断的な「頼み方・スキル設計」の土台記事が欠けていたため新設。番号は採番の都合で末尾だが、**推奨読書順は #00 → #31 → #32 → use-case 群**。両記事とも無料 (集客上流)。#31 は #04/#05 等の prompt 解説へ、#32 は #07/#22/#23 の skill 解説へ送客する。両記事とも `ready-to-publish`: SVG 3 個 + カバー 2 枚生成済 (cover 重なり検証 pass)、SS は不要 (0 ショット)。note 投稿のみ残。
 
-## ストレージ (2026-06-19 更新)
+## ストレージ (2026-10-13 更新)
 
-**docs/31_note記事原稿/ は ephemeral outbox**。記事の SSOT は R2 `note/koumuin-claude-code/<slug>/`。
+**docs/31_note記事原稿/ は git に何も置かない作業場**。記事の本文と画像の正本は R2 `note/koumuin-claude-code/<slug>/`
+(無料記事は公開 R2、有料記事は private R2) で、所在とマニフェストの SHA は記事台帳 `data/note/articles.json` が持つ。
 このファイル (INDEX.md) と MAGAZINE.md は `.claude/skills/note/koumuin-claude-code/` に移動済み。
 
-- 記事編集: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開 → push → CI 削除
-- ドラフト一覧: `data/note/note-draft-index.json`
-- 公開済み一覧: `data/note/note-published-urls.json`
+- 記事編集: `npm run note:article -- checkout <slug>` で docs/31 に取り出す → 作業コピーを編集 → `npm run note:article -- save <slug>` で R2 へ保存 (作業コピーは消える)
+- 記事台帳 (下書き・公開・note URL の正本): `data/note/articles.json`
+- ドラフト一覧 (台帳から生成する派生インデックス): `data/note/note-draft-index.json`
+- 公開済み一覧 (台帳から生成する派生インデックス): `data/note/note-published-urls.json`
 
 ## ディレクトリ構成 (R2 上)
 
@@ -161,7 +163,7 @@ note マガジンに 31 本をまとめれば、note 側が一覧と記事間導
 |---|---|
 | `.claude/scripts/note/add-koumuin-magazine-footer.cjs` | 全 31 本に v2 フッタを付与 (v1 があれば置換、冪等) |
 | `.claude/scripts/note/inject-magazine-url.cjs` | `{{MAGAZINE_URL}}` を実マガジン URL に一括置換 |
-| `data/note/note-published-urls.json` | 公開済み記事の slug→URL 真実源 (publish-note が自動追記) |
+| `data/note/articles.json` | 公開済み記事の slug→URL の正本 (公開後に台帳へ記録する。`note-published-urls.json` は `generate-note-catalog.ts --apply` が台帳から生成する派生インデックス) |
 
 旧 `add-koumuin-circulation-footer.cjs` (v1) は使用しない。
 

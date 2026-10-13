@@ -406,7 +406,7 @@ account assert後は本棚を直前取得し、`下書き + レビュー中 + �
 `packages/product-factory/src/channels/note/` は、商品カタログから note の無料・有料記事候補、
 添付manifest、画像計画、ハッシュタグを生成するチャネルとする。商品定義を複製せず、
 商品側は `src/catalog/products/packs.ts`、note editorial メタは
-`.claude/scripts/note/catalog/` の git TS を SSOT とし、mapping で結合する。
+記事台帳 `data/note/articles.json`（git の JSON + `articles.schema.json`。規約は `.claude/scripts/note/catalog/README.md`）を SSOT とし、mapping で結合する。
 
 > **現在の実装**: article-planとmappingはP-01〜P-14から導出し、TypeScript/Vitestの対象。
 > 販売準備は `note/cli.ts revision --revision <NEW_REVISION> --all` を使い、出品台帳の

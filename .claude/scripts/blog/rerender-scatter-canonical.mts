@@ -732,6 +732,9 @@ function renderScatter(data: any): string {
     title,
     xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
     yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
+    // generate-article-charts.ts の genScatterChartSvg と同じく、本文が名指しする点の県名ラベルを描く。
+    // 渡さないと labelPoints を持つ公開図を「正規でない」と誤判定する (2026-10-10〜11 の日次 cron が 1 枚で失敗)
+    labelNames: Array.isArray(data.labelPoints) ? data.labelPoints : undefined,
   });
 }
 

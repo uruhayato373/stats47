@@ -113,12 +113,17 @@ function tagSet(note) {
 
 const sameTags = (snapshot, tags) => snapshot.hashtagSet === keySet(tags);
 
+// The editor re-renders link cards with the current OGP title/description, so the card text inside
+// <a …><strong>title</strong><em>…</em></a> is left out of the body comparison (2026-10-12: 14 articles blocked).
+const CARD_TEXT = /(<a [^>]*>)\s*<strong>[\s\S]*?<\/strong>(?:\s*<em>[\s\S]*?<\/em>)*\s*<\/a>/g;
+const withoutCardText = (html) => (html || '').replace(CARD_TEXT, '$1</a>');
+
 function noteSnapshot(note) {
   return {
     status: note.status,
     price: Number(note.price || 0),
     separator: note.separator || null,
-    bodySignature: fnv1a(note.body || ''),
+    bodySignature: fnv1a(withoutCardText(note.body)),
     bodyLength: (note.body || '').length,
     hashtagCount: Array.isArray(note.hashtag_notes) ? note.hashtag_notes.length : 0,
     hashtagSet: tagSet(note),
@@ -150,7 +155,9 @@ function releaseProfileLock() {
 function bu(args, { allowFailure = false } = {}) {
   if (args[0] !== 'close') browserSessionStarted = true;
   try {
-    return execFileSync('browser-use', ['--headed', '--profile', 'Profile 5', ...args], {
+    // NOTE_BU_CDP drives an already-running logged-in Chrome instead of Profile 5 (same switch as publish-new-note.sh).
+    const target = process.env.NOTE_BU_CDP ? ['--cdp-url', process.env.NOTE_BU_CDP] : ['--headed', '--profile', 'Profile 5'];
+    return execFileSync('browser-use', [...target, ...args], {
       cwd: PROJECT_ROOT,
       env: { ...process.env, PATH: BROWSER_USE_PATHS },
       encoding: 'utf8',
@@ -245,7 +252,7 @@ function installTagPatch(tags, before) {
     })};
     const signature=value=>{
       let hash=0x811c9dc5;
-      const text=value||'';
+      const text=(value||'').replace(/(<a [^>]*>)\\s*<strong>[\\s\\S]*?<\\/strong>(?:\\s*<em>[\\s\\S]*?<\\/em>)*\\s*<\\/a>/g,'$1</a>');
       for(let index=0;index<text.length;index+=1)hash=Math.imul(hash^text.charCodeAt(index),0x01000193);
       return (hash>>>0).toString(16);
     };

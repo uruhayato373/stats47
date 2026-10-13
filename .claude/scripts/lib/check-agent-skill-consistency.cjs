@@ -662,6 +662,9 @@ function checkOrphanScripts(findings) {
     "apps/admin/lib",
     "apps/admin/app",
     "apps/remotion/src",
+    // web のデータ生成スクリプトも .claude/scripts の部品をパスで起動する (2026-10-11 に export-yoy-timeseries.ts が
+    // build-yoy-timeseries.cjs を resolve で呼んでいるのに orphan と誤報した)
+    "apps/web/scripts",
   ];
   // パッケージ直下の README は docs と同じく運用手順の置き場 (例: product-factory README の
   // coconala 改訂版の再生成・検査コマンド)。パッケージのソース全体は読まない (重く、参照の根拠にならない)

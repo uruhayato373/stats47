@@ -6,7 +6,9 @@ const daily = readFileSync(".github/workflows/ai-content-gemini-daily.yml", "utf
 const publisher = readFileSync(".github/workflows/publish-ai-content.yml", "utf8");
 
 test("Gemini日次は少量・直列・structured preflight・独立criticを固定する", () => {
-  assert.match(daily, /cron: "15 22 \* \* \*"/);
+  // preflight が無料枠で通るまで定期実行しない (2026-10-11。導入から 44/48 run が billing / 402 で失敗)。戻すときは cron と一緒にこの行を変える
+  assert.doesNotMatch(daily, /^\s*schedule:/m);
+  assert.match(daily, /AI-CONTENT-GEMINI-KEY-01/);
   assert.match(daily, /GEMINI_TEXT_MODEL:.*gemini-2\.5-flash-lite/);
   assert.match(daily, /default: "3"/);
   assert.match(daily, /--model gemini-api/);

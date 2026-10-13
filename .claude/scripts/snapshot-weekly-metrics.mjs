@@ -4,7 +4,8 @@
  *
  * metrics-reader から週次 NSM メトリクスを取得して
  * data/nsm/weekly-snapshots/YYYY-Www.json に保存する。
- * index.json を追記して時系列トラッキング可能にする。
+ * 週の一覧は同ディレクトリの YYYY-Www.json を列挙して得る (index.json は 2026-10-11 に廃止。
+ * 保持で消えた週と旧パスを列挙したまま残り、読み手もいなかったため)。
  *
  * 記録先の統一原則（.claude/rules/data-storage.md）:
  *   計測蓄積は .claude/ 配下のファイル。旧パス docs/03_レビュー/weekly-metrics/ は 2026-04-17 に廃止。
@@ -20,12 +21,7 @@
  *   node .claude/scripts/snapshot-weekly-metrics.mjs --dry-run    # 書き込まず表示
  */
 
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   fetchWeeklyNsmMetrics,
@@ -36,7 +32,6 @@ import { datasetDir } from "../../config/datasets.mjs";
 
 const OUT_DIR =
   datasetDir("business.nsm-weekly");
-const INDEX_PATH = join(OUT_DIR, "index.json");
 
 // ── ISO 8601 週番号 ────────────────────────────────────────────
 
@@ -61,31 +56,6 @@ function parseArgs() {
     else if (/^\d{4}-W\d{2}$/.test(a)) args.weekId = a;
   }
   return args;
-}
-
-// ── index.json の更新 ──────────────────────────────────────────
-
-function updateIndex(weekId, snapshotPath) {
-  let index = { version: 1, generated_at: null, weeks: [] };
-  if (existsSync(INDEX_PATH)) {
-    try {
-      index = JSON.parse(readFileSync(INDEX_PATH, "utf-8"));
-    } catch {
-      // 壊れていたら再生成
-    }
-  }
-  const existingIdx = index.weeks.findIndex((w) => w.week_id === weekId);
-  const entry = {
-    week_id: weekId,
-    path: snapshotPath.replace(/\\/g, "/"),
-    generated_at: new Date().toISOString(),
-  };
-  if (existingIdx >= 0) index.weeks[existingIdx] = entry;
-  else index.weeks.push(entry);
-  index.weeks.sort((a, b) => a.week_id.localeCompare(b.week_id));
-  index.generated_at = new Date().toISOString();
-  writeFileSync(INDEX_PATH, JSON.stringify(index, null, 2) + "\n", "utf-8");
-  return index;
 }
 
 // ── メイン ──────────────────────────────────────────────────────
@@ -129,10 +99,6 @@ async function main() {
   writeFileSync(outPath, JSON.stringify(snapshot, null, 2) + "\n", "utf-8");
   console.log(`[snapshot] ✓ ${outPath} に保存`);
 
-  const index = updateIndex(weekId, outPath);
-  console.log(
-    `[snapshot] ✓ index.json 更新 (total ${index.weeks.length} 週分)`,
-  );
 
   if (metrics.ga4?.total) {
     const t = metrics.ga4.total;

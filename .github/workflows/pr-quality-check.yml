@@ -67,7 +67,7 @@ jobs:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -210,9 +210,11 @@ jobs:
 
       - name: 📚 Private Reference Source Guard
         # repo内cacheを拒否し、全profileのmanifest・利用仕様・非公開派生物契約・解決台帳100%を照合する。
+        # 分析企画の展開記録 (data/source-inventory/expansion.json) が企画・展開先・公開中のページIDと合うことも検査する。
         run: |
           npm run source-vault:check
           npm run source-vault:test
+          npm run reference:expansion -- check
         continue-on-error: false
 
       - name: 🚧 Web e-Stat Import Boundary Guard
@@ -255,8 +257,8 @@ jobs:
         continue-on-error: false
 
       - name: 🗒️ note Image Asset Contract Guard
-        # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
-        # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md
+        # docs/31 (note 記事の作業場) に git の追跡ファイルを置かない。本文・画像の正本は R2、
+        # 所在は data/note/articles.json。契約: .claude/rules/note-image-assets.md
         run: |
           node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
@@ -423,7 +425,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -500,11 +502,14 @@ jobs:
         continue-on-error: false
 
       - name: 🗒️ note Catalog Contract Gate
-        # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
+        # 記事台帳 data/note/articles.json の Schema・参照整合・title重複、派生インデックス (公開URL・下書き索引) が
+        # 台帳から再生成した内容と一致すること、R2 保存の衝突検査を決定的に検査する。
         # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
         run: |
           npm run check:product-storefront --workspace apps/web
           npm run note:catalog:validate
+          npm run note:catalog:check
+          npm run note:article:test
         continue-on-error: false
 
       - name: 🧭 Business Plan SSOT Contract Gate
@@ -657,7 +662,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -847,7 +852,7 @@ jobs:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -889,7 +894,7 @@ jobs:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -959,7 +964,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1010,7 +1015,7 @@ jobs:
 
       - name: 📊 Upload Admin Playwright report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: admin-playwright-e2e-report
           path: |
@@ -1031,7 +1036,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1077,7 +1082,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1108,7 +1113,7 @@ jobs:
 
       - name: 📊 Upload render differences
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: visualization-render-diff
           path: /tmp/stats47-render-artifacts/
@@ -1129,7 +1134,7 @@ jobs:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1188,7 +1193,7 @@ jobs:
         continue-on-error: false # ビルドエラーで失敗させる
 
       - name: 📦 Share verified Next.js build
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: pr-web-next-build
           path: |
@@ -1198,7 +1203,7 @@ jobs:
           retention-days: 1
 
       - name: Share verified metric metadata
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: pr-metric-metadata
           path: |
@@ -1227,7 +1232,7 @@ jobs:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1269,7 +1274,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -1365,7 +1370,7 @@ jobs:
 
       - name: 📊 Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: playwright-e2e-report
           path: |

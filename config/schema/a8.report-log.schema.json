@@ -1,0 +1,362 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "A8 の月次レポート (成果・報酬)",
+  "description": "data/affiliate/a8-report-log.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "_comment": {
+      "type": "string"
+    },
+    "_siteScopeNote": {
+      "type": "string"
+    },
+    "site": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "lastRun": {
+      "type": "string"
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "raw": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "granularity": {
+          "type": "string"
+        },
+        "singleMonth": {
+          "type": "string"
+        }
+      }
+    },
+    "siteSummary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "site": {
+            "type": "string"
+          },
+          "impressions": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "conversions": {
+            "type": "number"
+          },
+          "grossRevenueYen": {
+            "type": "number"
+          },
+          "approved": {
+            "type": "number"
+          },
+          "revenueYen": {
+            "type": "number"
+          },
+          "cancelledCount": {
+            "type": "number"
+          },
+          "cancelledYen": {
+            "type": "number"
+          },
+          "pendingCount": {
+            "type": "number"
+          },
+          "pendingRevenueYen": {
+            "type": "number"
+          },
+          "fetchedAt": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "monthly": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "string"
+          },
+          "accountWide": {
+            "type": "boolean"
+          },
+          "impressions": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "conversions": {
+            "type": "number"
+          },
+          "grossRevenueYen": {
+            "type": "number"
+          },
+          "approved": {
+            "type": "number"
+          },
+          "revenueYen": {
+            "type": "number"
+          },
+          "cancelledCount": {
+            "type": "number"
+          },
+          "cancelledYen": {
+            "type": "number"
+          },
+          "pendingCount": {
+            "type": "number"
+          },
+          "pendingRevenueYen": {
+            "type": "number"
+          },
+          "fetchedAt": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "month"
+        ]
+      }
+    },
+    "daily": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "month": {
+            "type": "string"
+          },
+          "accountWide": {
+            "type": "boolean"
+          },
+          "impressions": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "conversions": {
+            "type": "number"
+          },
+          "grossRevenueYen": {
+            "type": "number"
+          },
+          "approved": {
+            "type": "number"
+          },
+          "revenueYen": {
+            "type": "number"
+          },
+          "cancelledCount": {
+            "type": "number"
+          },
+          "cancelledYen": {
+            "type": "number"
+          },
+          "pendingCount": {
+            "type": "number"
+          },
+          "pendingRevenueYen": {
+            "type": "number"
+          },
+          "fetchedAt": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "month"
+        ]
+      }
+    },
+    "programPeriod": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programId": {
+            "type": "string"
+          },
+          "programRaw": {
+            "type": "string"
+          },
+          "program": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accountWide": {
+            "type": "boolean"
+          },
+          "impressions": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "conversions": {
+            "type": "number"
+          },
+          "grossRevenueYen": {
+            "type": "number"
+          },
+          "approved": {
+            "type": "number"
+          },
+          "revenueYen": {
+            "type": "number"
+          },
+          "cancelledCount": {
+            "type": "number"
+          },
+          "cancelledYen": {
+            "type": "number"
+          },
+          "pendingCount": {
+            "type": "number"
+          },
+          "pendingRevenueYen": {
+            "type": "number"
+          },
+          "fetchedAt": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "programId"
+        ]
+      }
+    },
+    "crossCheck": {
+      "type": "object",
+      "properties": {
+        "comparable": {
+          "type": "boolean"
+        },
+        "exceeded": {
+          "type": "boolean"
+        },
+        "hasShortfall": {
+          "type": "boolean"
+        },
+        "withinBounds": {
+          "type": "boolean"
+        },
+        "shortfall": {
+          "type": "object",
+          "properties": {
+            "clicks": {
+              "type": "number"
+            },
+            "revenueYen": {
+              "type": "number"
+            }
+          }
+        },
+        "deltas": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "site": {
+                "type": "number"
+              },
+              "picked": {
+                "type": "number"
+              },
+              "exclusive": {
+                "type": "number"
+              },
+              "shared": {
+                "type": "number"
+              },
+              "lowerBound": {
+                "type": "number"
+              },
+              "upperBound": {
+                "type": "number"
+              },
+              "delta": {
+                "type": "number"
+              },
+              "tolerance": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "unmapped": {
+      "type": "array"
+    },
+    "notAttributable": {
+      "type": "array"
+    },
+    "missingProgramCandidates": {
+      "type": "array"
+    },
+    "unmappedCount": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "_comment",
+    "_siteScopeNote",
+    "site",
+    "updatedAt",
+    "lastRun",
+    "period",
+    "siteSummary",
+    "monthly",
+    "daily",
+    "programPeriod",
+    "crossCheck",
+    "unmapped",
+    "notAttributable",
+    "missingProgramCandidates",
+    "unmappedCount"
+  ]
+}

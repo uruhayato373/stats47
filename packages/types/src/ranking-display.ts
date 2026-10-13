@@ -21,6 +21,10 @@ export interface RankingDisplayMeta {
   yearName?: string;
   demographicAttr?: string;
   normalizationBasis?: string;
+  /** SNS画像内に載せる出典名。URL・詳しい定義は投稿本文と入力manifestに保持する。 */
+  sourceLabel?: string;
+  /** 出典スライドに載せる、対象・期間・解釈上の注意。 */
+  note?: string;
 }
 
 /** ランキング表示コンポーネントへの入力データ一式 */

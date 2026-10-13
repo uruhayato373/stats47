@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 import {
   computeRanks,
@@ -12,10 +13,7 @@ import {
 
 const NOTE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ROOT = join(NOTE_DIR, "..", "..", "..");
-const SSOT_PATH = join(
-  ROOT,
-  "packages/data-configs/src/evidence-inventory/kakei-note/expense-evidence.json",
-);
+const SSOT_PATH = join(ROOT, datasetPath("note.kakei-expense-evidence"));
 const KNOWN_RANKING_KEYS_SRC = readFileSync(
   join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
   "utf8",

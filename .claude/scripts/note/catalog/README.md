@@ -1,55 +1,95 @@
-# note-catalog (note 記事カタログ SSOT)
+# note 記事の管理 (台帳・本文・作業場)
 
-note コーパス全体 (公開済み + ドラフト) の **editorial メタの単一ソース (SSOT)**。
-従来バラバラだった真実源を git TS 1 箇所に束ねる。管理者は **note-manager** agent。
+note の全記事 (公開済み + 下書き) を、**記事 ID (key) の台帳 1 つ**と **R2 の本文**で管理する。
+管理者は **note-manager** agent。2026-10-13 に TS カタログ・docs/31 の git 管理・CI 同期を廃止してこの形にした。
 
-> 決定 (2026-07-15): カタログの SSOT は **git TS** (theme-catalog / survey-editorial と同型)。
-> 記事本文の SSOT は従来どおり **R2 `note/<vertical>/<slug>/draft.md`** (変更しない)。
-> つまり「本文 = R2」「editorial メタ (vertical/series/magazine/有料無料/送客先/公開URL) = このカタログ」。
+## 何がどこにあるか
 
-## 何が SSOT で、何が派生か
-
-| データ | SSOT | 派生 (手編集しない) |
+| データ | 正本 | 形 |
 |---|---|---|
-| 記事本文・本文画像 | R2 `note/<vertical>/<slug>/` | — |
-| カバー画像・候補/採用/公開の対応 | private R2 + `data/note/cover-assets.json` (JSON Schema付き) | 管理画面・画像一覧 |
-| editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
-| マガジン定義 (名称/有料無料/束ねる vertical/URL/商品導線) | **`catalog/magazines.ts`** | 商品導線は記事別 clean path に変換し、サイト到着時だけGA4標準UTMへ転送 |
-| 公開済みインデックス | (派生) | `data/note/note-published-urls.json` ← `generate-note-catalog.ts` |
+| 記事の ID と編集メタ (vertical / series / magazine / 有料・価格 / 状態 / noteUrl / 公開日 / 送客先) と**本文の所在** | `data/note/articles.json` | git の JSON + `articles.schema.json` |
+| マガジン定義 (名称 / 有料無料 / 束ねる vertical / URL / 商品導線) | `data/note/magazines.json` | git の JSON + `magazines.schema.json` |
+| 本文と画像 (draft.md・SVG・PNG・chart-data.json など記事ディレクトリの全ファイル) | **無料 = 公開 R2・有料 = private R2** の `<r2Path>/` | R2 |
+| 保存の履歴 (ファイル名→SHA のマニフェスト・上書き前の旧ファイル) | private R2 `note-archive/manifests/<key>/<sha>.json`・`note-archive/blobs/<sha>` | R2 (不変) |
+| カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` | 下の「公開カバー」 |
+| 有料記事の無料部分の文言 | `data/note/paid-landing/<key>.json` + `paid-landing.schema.json` | git の JSON |
+| 公開 URL の索引・下書き索引 | (派生) `data/note/note-published-urls.json`・`note-draft-index.json` | `generate-note-catalog.ts` が台帳から作る |
 
-## ファイル
+- **docs/31_note記事原稿 は作業場**で、git に何も置かない (`.gitignore` 済み)。作業コピーは `checkout` で取り出し、
+  `save` で R2 へ戻すと消える。git には台帳 (所在とマニフェストの SHA) だけが残る。
+- 本文の所在 `body.store` は 3 種類。`r2-public` (無料記事)・`r2-private` (有料記事)・`note-only` (本文が note.com にしか無い回収待ち)。
+  **有料記事を `r2-public` にする台帳は Schema が拒否する。** `body.manifest` が null なのは「まだ保存していない」記事
+  (本文未作成の下書きなど)。公開済みで null は検査が止める。
+- `catalog/index.ts`・`magazines.ts` は台帳を読んで型を付けるだけの層。`NOTE_ARTICLES[].r2Body` は台帳に書かない派生値
+  (`body.manifest` があれば true)。
 
-| ファイル | 役割 |
-|---|---|
-| `types.ts` | `NoteArticle` / `NoteMagazine` / `NoteVertical` / `NoteSeries` |
-| `magazines.ts` | マガジンレジストリ (`NOTE_MAGAZINES`)。マガジン追加・有料/無料はここ |
-| `data/<vertical>.ts` | 記事エントリ (SSOT)。手編集してよいのは editorial メタのみ |
-| `index.ts` | 集約入口 + helper (`NOTE_ARTICLES` / `articlesByMagazine` 等) |
-| `validate-note-catalog.ts` | 決定的 lint (参照整合性)。error で exit 1 |
-| `generate-note-catalog.ts` | カタログ → `note-published-urls.json` 再生成 |
-| `assign-magazines-by-title.mjs` | 公開済み stats47-note (回収スタブ = key 不透明) の `magazine` をタイトル分類で一括割当 (dry-run 既定・`--apply` で書換)。誤 vertical / 未解決は null 保持で flag |
-| `bootstrap-from-indices.mjs` | 一回限りの移行 (既存インデックス → data/*.ts)。初版生成済・通常再実行しない |
-
-## 使い方
+## 作業手順 (`npm run note:article -- <command>`)
 
 ```bash
-# 検証 (参照整合性)
-npx tsx .claude/scripts/note/catalog/validate-note-catalog.ts [--strict]
-# 派生インデックス再生成 (非破壊は scratchpad、--apply で本番 state 上書き)
-npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
+npm run note:article -- status                     # 台帳の所在と、作業コピーが保存済みと同じか (通信なし)
+npm run note:article -- checkout <key>             # R2 → docs/31 の作業コピー (未保存の変更があれば止まる。捨てるなら --force)
+# … 作業コピーを編集・画像を生成・note へ公開 …
+npm run note:article -- save <key>                 # 作業コピー → R2 (読み戻し SHA 照合) → 台帳の manifest 更新 → 作業コピー削除
+npm run note:article -- verify [--keys a,b] [--deep] [--record]   # 台帳と R2 の照合 (--deep は全ファイルの SHA)
+npm run note:article -- adopt <key>                # 台帳の外で R2 に置かれた本文を、そのまま台帳に取り込む
 ```
 
+- **新しい記事**: 台帳に 1 レコード足す (状態 `draft`・`body: {store, manifest: null}`) → 作業コピーを作る → `save`。
+  家計シリーズは `build-kakei-catalog-entries.mjs`、商品の販売記事は product-factory の `promote` が台帳レコードを作る。
+- **教材 (参考文献) の企画から作るとき**: `npm run reference:expansion -- pending --channel note` で未着手の企画を読み、記事にしたら
+  `record --status done --target note:<key>`、見送るなら `declined --reason` を記録する (正典 `reference-source-standards.md` §5)。
+- **公開したとき**: 台帳の `status: "published"`・`noteUrl`・`publishedAt` を書き、作業コピーに変更があれば `save`。
+  公開記録を R2 の draft.md frontmatter に書き戻す旧手順 (`migrate-note-frontmatter.mjs`) は廃止した。
+- **有料記事**: `save` が最初から private R2 に保存する。公開 R2 には何も置かない
+  (旧 `publish-paid-note-private-r2.ts` が置いていた `public.json` は読み手が無く、新規には作らない。既存分は検査が許容する)。
+- **別の端末**: `git pull` で台帳を合わせてから `checkout`。他の端末が先に保存していて R2 の実体が台帳の記録と違うと、
+  `save` は上書きせずに止まる。
+- 書き込みは `lib/article-ledger.mjs` の `updateArticleLedger` / `writeArticleLedger` だけ (Schema・キー重複・マガジン参照を検査してから書く)。
+  派生インデックスは台帳を変えたら `npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply`。
+  PR と pre-commit は `--check` で台帳とのずれを止める。
+
+## 検査
+
+| 検査 | 入口 | 場所 |
+|---|---|---|
+| 台帳の Schema・参照整合・title 重複 | `npm run note:catalog:validate` | PR (note Catalog Contract Gate) |
+| 派生インデックスが台帳と一致 | `npm run note:catalog:check` | PR・pre-commit |
+| docs/31 に追跡ファイルが無い | `npm run note:images:audit` | PR・pre-commit |
+| 公開 R2 の本文・生成 AI 背景の実在 | `npm run note:images:audit -- --verify-r2` | 週次 (`note-circulation-audit-weekly.yml`) |
+| 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | ローカル (R2 の S3 認証が要る) |
+| 保存・衝突・退避の仕組み | `npm run note:article:test` | PR |
+
+`validate-note-catalog.ts` の規則: **error** は key 重複 / 未登録マガジンキー / マガジンの vertical 不一致 / published なのに noteUrl 無し、
+**warn** は title 重複の疑い / 有料マガジンに無料記事 / isPaid だが priceJpy 未設定 / stats47Targets が KNOWN_RANKING_KEYS に不在。
+
+## 本文が note.com にしか無い記事 (`body.store: "note-only"`)
+
+`recovered-*` / `paid-*` の多くは、note.com から URL だけ回収した記事で、R2 に本文が無い (2026-10-13 時点 73 本)。
+`r2Path` は note ID から機械生成した予定地で、実体は無い。本文を note.com から取得して作業コピーに置き、
+`body.store` を `r2-public` (無料) か `r2-private` (有料) に変えてから `save` する。回収は `NOTE-BODY-RECOVERY-01`。
+同題の記事が 2 本あれば同一記事の再投稿の疑いがある (`validate` の title 重複 warn)。本文を照合して統廃合する。
+
 ## マガジン運用 (「類似記事を無料マガジンに束ねる」)
+
+- 無料キュレーション (`isPaid: false`) は回遊導線で、有料記事を含めてよい。有料メンバーシップ (`isPaid: true`) は有料記事を束ねる収益ライン。
+  koumuin 系の有料マガジンは note.com の buy-once 型で無料記事も束ねる (validate の「有料マガジンに無料記事」warn は想定内)。
+  `koumuin-claude-code` は stats47-note に回収された旧 URL の有料メンバーも販売継続中。
+- stats47-note は e-Stat 17 カテゴリに 1:1 対応する `s47-*` マガジン + 行動者率クラスタ `s47-sports-culture` で束ねる。
+  新しい記事は既存のカテゴリマガジンに足す。一括割当は `assign-magazines-by-title.mjs` (タイトル分類・決定的)。
+- `s47-kakei-reading` (2026-09-06 新設) は軸が違う「方法のマガジン」で、家計調査の支出額の読み方 (県別プロファイル 47 本と
+  読み違いを正す論点記事) を束ねる。分類側 (`s47-economy`) は県別ランキング型の記事を持ち続け、粒度を壊さない。
+- 手順: `magazines.json` に定義 → 記事レコードの `magazine` を設定 → `validate` → note.com でマガジンを作ったら `noteUrl` を書き戻す。
 
 公開記事のカバー状態は`npm run note:covers:audit`で測定する。カタログと公開一覧の和集合を
 v3記事詳細APIで確認し、一覧サムネイルに代用された本文画像を設定済みと誤認しない。
 `data/note/evidence/note-cover-audit-latest.json`が最新の観測結果（時刻・完全性付き）であり、
-カバー状態をカタログに手入力して同期しない。終了コードは0=合格、1=未設定/集合差分、2=不完全。
+カバー状態を記事台帳に手入力して同期しない。終了コードは0=合格、1=未設定/集合差分、2=不完全。
 
 カバーと新しいインプレッション/PVの突合は`npm run note:metrics:fetch`を使う。
 `data/note/dashboard/cover-metrics-latest.{json,csv}`へ公開記事の棚卸しを出力する。
 期間内に一覧行がない記事は指標nullで残し、全体をincompleteとする。旧viewsへ変換しない。
 収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
+
 
 ## カバー制作・画像専用更新の実装
 
@@ -65,7 +105,7 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 再生成すると目視判定はpendingへ戻る。PNGを手修正してもhashが変わり反映ゲートで止まる。
 
 `../update-note-covers.mjs`は採用済みremote版と現在の公開画像を検査する。`--commit`で実際に変更し、
-`--keys`/`--limit`で範囲を絞れる。stats47アカウント・git TSの記事URL・公開前の内容を照合した後、
+`--keys`/`--limit`で範囲を絞れる。stats47アカウント・記事台帳の記事URL・公開前の内容を照合した後、
 実際のエディタで観測した`POST /api/v1/image_upload/note_eyecatch`へ画像だけを送る。
 `note_id`はv3詳細の数値`id`であり、`n...`形式のkeyではない。FormDataはnote_id/file/width/heightの4項目、
 `X-Requested-With: XMLHttpRequest`が必要。note側のPNG減色を許容し、取得した配信画像も1280×670へ正規化して画素差を照合する。
@@ -75,36 +115,15 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 仕上げに`../verify-cover-refresh.mjs [--keys <key>]`で共通画像台帳からカバー監査と前後照合を実行する。
 改修は`cover-remediation`として記録し、KPI改善の実験成功とは区別する。
 
-### マガジンの登録と割り当て
-
-1. `magazines.ts` にマガジンを定義 (無料キュレーション or 有料メンバーシップ)。
-2. 束ねたい記事の `data/<vertical>.ts` の `magazine` を該当キーに設定する。
-   stats47-note の一括割当は `assign-magazines-by-title.mjs`(タイトル分類・決定的)を使う
-   (公開スタブは key が不透明なためタイトルからカテゴリを導出する)。
-3. `validate` で整合 (キー実在・vertical 一致) を確認。
-4. note.com でマガジンを作成し URL が出たら `magazines.ts` の `noteUrl` に書き戻す
-   (フッター注入 `inject-magazine-url.cjs` への接続は downstream 移行 = 次段)。
-
-- koumuin-* 系は初版で各 vertical マガジンに自動割当済。
-- stats47-note は e-Stat 17 カテゴリ + 行動者率クラスタ = 18 の `s47-*` マガジンに細分化済み
-  (`s47-fiscal` / `s47-health` / `s47-sports-culture` …)。`assign-magazines-by-title.mjs --apply`
-  で公開済み 159 件中 143 件を割当済み。残りは誤 vertical 16 件 (Claude Code/商品章の混入) +
-  未公開ドラフト。全体設計とフェーズは `.claude/todo/backlog.md` `[NOTE-MAGAZINE-REORG-01]`。
-
-## 検証ルール (validate-note-catalog.ts)
-
-- **error**: key 重複 / 未登録マガジンキー / マガジンの vertical 不一致 / published なのに noteUrl 無し
-- **warn**: title 重複の疑い (実質重複記事の surface) / 有料マガジンに無料記事 / isPaid だが priceJpy 未設定 /
-  stats47Targets が KNOWN_RANKING_KEYS に不在
 
 ## 公開カバーの制作と差し替え
 
 画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
-公開済み記事もドラフトも記事keyで結び、タイトルや分類はTSカタログから読む。
+公開済み記事もドラフトも記事keyで結び、タイトルや分類は記事台帳から読む。
 管理画面の `/content/note/covers` と `/assets` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
 
 1. 新規catalog登録後は `npm run note:assets -- seed`。現在の公開画像は `archive --keys <key>` で保全する。
-2. `prepare --keys <key1,key2> --output /tmp/<task>` で一時入力を取得する。draftはdocs/31の原稿を使う。
+2. `prepare --keys <key1,key2> --output /tmp/<task>` で一時入力を取得する。draftは `note:article checkout` で取り出した作業コピーを使う。
 3. `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <版>`。
    文字境界/重なり/数値を検算し、private R2へ保存・読み戻しSHAを確認する。成功後は一時入力を削除する。
 4. 管理画面で320px相当の縮小表示を確認後、`npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>`。
@@ -119,30 +138,15 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 旧manifestの絶対パスは入力にだけ使用し、旧レビューは自動採用せず未判定で登録する。未回収の版は `missingVersions` に残す。
 認証は既存S3環境変数または `wrangler login` のセッション。署名URLや認証情報を台帳に保存しない。
 
-## カタログの禁止事項
+## 禁止事項
 
 | NG | OK |
 |---|---|
-| `note-published-urls.json` を手編集して真実源化 | `data/*.ts` を編集 → `generate` で再生成 |
-| 記事本文を git に長期保持 (docs/31 は ephemeral outbox) | 本文は R2、メタはカタログ |
-| マガジンキーを data/*.ts に直書きで増やす | `magazines.ts` に登録してから参照 |
-
-## R2 未保存の回収スタブ (`r2Body: false`) — 要本文復元
-
-`recovered-*` / `paid-*` エントリは **note.com に公開済みだが R2 に記事本体 (draft.md/画像) が無い**
-回収スタブ。r2Path は note ID から機械生成しただけで実体が無く **404 になる** (docs/31 にもローカル本文なし)。
-これらを `r2Body: false` で正直にマークする (省略時 = `true` = R2 に本体あり)。
-
-- **派生インデックス `note-published-urls.json`** は `r2Body===false` を `status: "note_only"` +
-  `r2_body: false` で出力する。R2 に本体があるものだけ `status: "r2_ready"`
-  (旧 `generate-note-catalog.ts` は全公開記事を無条件 `r2_ready` にし、404 の r2Path を「保存済み」と偽っていた)。
-- **一覧 (要本文復元)**: `data/note/r2-missing-inventory.md` (カタログから再生成する派生物)。
-  実測 2026-07-15: 165 件 (stats47-note 159 / koumuin 6, 有料 50)。
-- **復元手順**: note.com からの本文取得は browser-use + note ログイン (有料は所有者アカウント) が必要で、
-  creds/ブラウザを持つローカルセッションで実施する。復元 (note.com → R2 push) 後に該当エントリを
-  `r2Body: true` へ更新 → `generate-note-catalog.ts --apply` で再生成する。
-- **title 重複 warn** (`validate` が surface): proper (R2 本体あり) と recovered/paid スタブが同題の場合は
-  同一記事の再投稿疑い。noteUrl が異なるため機械では断定できない → 本文照合の上で統廃合 (次段)。
+| docs/31 の原稿・画像を git に追加する | `note:article save` で R2 へ保存し、台帳にマニフェストを記録する |
+| R2 の記事本文を `diff-push-r2`・`wrangler r2 object put`・独自スクリプトで直接書く | `note:article save` (衝突検査と旧版の退避を通る) |
+| `note-published-urls.json` / `note-draft-index.json` を手編集する | 台帳を編集 → `generate-note-catalog.ts --apply` |
+| 有料記事の本文を公開 R2 に置く | `body.store: "r2-private"` (Schema が強制) |
+| マガジンキーを記事レコードに直書きで増やす | `magazines.json` に登録してから参照 |
 
 ## データ復元マニフェスト (data-provenance.json) — リライト系譜
 
@@ -152,7 +156,7 @@ note ランキング記事の**リライトを楽にする**ため、記事ご�
 (二重 SSOT を作らない / 完全DBレス準拠)。リライト時に「どの ranking の何年か」を辿って
 チャート再生成・数値検算ができる。
 
-- **新規記事**: `post-note-ranking` の Step 7.5 が `data-provenance.json` を生成 → 既存 sync で R2 へ。
+- **新規記事**: `post-note-ranking` の Step 7.5 が作業コピーに `data-provenance.json` を生成し、`note:article save` で R2 へ保存する。
 - **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs`
   - slug (`a-<key>`) + draft.md の `stats47.jp/ranking/<key>` リンク + values.json の rank1/47 値照合で
     rankingKey/年を**決定的に導出** (捏造しない)。`.local/r2/note/<vertical>/<slug>/data-provenance.json` に staging。
@@ -160,12 +164,5 @@ note ランキング記事の**リライトを楽にする**ため、記事ご�
   - **実測 (2026-07-15)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
     no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**
     (published index の実態。カタログ+backfill で初めて可視化)。実 backfill 対象は R2 本体を持つ生成記事。
-- **R2 反映**: staging (`.local/r2/note/**`) → S3 push は **creds を持つ CI / セッション**で
-  `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note` (R2 書き込みは CI 専任)。
-
-## 次段 (downstream 移行・今回スコープ外)
-
-- `build-note-published-index.mjs` (R2 fetch 版) を `generate-note-catalog.ts` に置換
-- `inject-magazine-url.cjs` / `add-koumuin-magazine-footer.cjs` をカタログ駆動化
-- `validate` を pre-commit / CI に配線
-- 既存コーパスの重複 (`recovered-*` / `paid-*` の title 重複) の統廃合
+- **R2 反映**: backfill の staging を記事の作業コピーへ置き、`note:article save <key>` で保存する
+  (台帳のマニフェストが更新される。`diff-push-r2` で記事本文を直接書かない。旧 `manifest.json` 依存は NOTE-PROVENANCE-BACKFILL-MANIFEST-01)。

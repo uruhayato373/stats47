@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "metricDefinition": "note-dashboard-2026-09-08",
+  "account": "stats47",
+  "fetchedAt": "2026-10-12T00:15:18.089Z",
+  "period": {
+    "start": "2026-09-14",
+    "end": "2026-10-11"
+  },
+  "status": "incomplete",
+  "coverage": {
+    "complete": false
+  },
+  "articles": [],
+  "issues": [
+    {
+      "code": "collection_failed",
+      "message": "browser_open_failed: \"[Errno 1] Operation not permitted: '/Users/minamidaisuke/Library/Application Support/Google/Chrome/Profile 5'\""
+    }
+  ]
+}

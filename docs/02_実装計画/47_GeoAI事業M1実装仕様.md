@@ -156,7 +156,7 @@ spatial crossは失敗とする。隣接`source.json`に観測値snapshot SHAと
 
 ## 5. note商品15件
 
-15商品は `.claude/scripts/note/catalog/data/stats47-note.ts` に有料draftとして登録する。
+15商品は記事台帳 `data/note/articles.json` に有料draftとして登録する (本文は private R2。`npm run note:article -- save`)。
 価格、記事key、読者成果、必要deliverable、制作開始条件はM1カタログで管理する。
 
 `r2Body: false` は「商品企画と記事枠は登録済みだが、本文は未作成」を意味する。管理画面はこれを公開可能と

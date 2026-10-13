@@ -1,195 +1,100 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { StatusBadge } from '@/components/admin-ui/status-badge';
+import { MediaPreview } from '@/components/media-preview';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import {
+  candidatesFor,
+  candidateStage,
+  isCandidate,
+  CANDIDATE_STAGES,
+  canEditDraft,
+  formatJst,
+  formatLabel,
+  mediaAspect,
+  PLATFORM_LABELS,
+  statusLabel,
+  statusTone,
+  type GalleryItem,
+} from '@/lib/sns-ledger';
 
-import { cn } from "@/lib/cn";
-import { Badge } from "@/components/ui/badge";
-
-import { MediaPreview } from "@/components/media-preview";
-import type { PostDTO } from "@/lib/contracts/types";
-
-import { Card } from "@/components/ui/card";
-type ExtraItem = Record<string, unknown> & {
-  id?: null;
-  platform: string;
-  domain?: string | null;
-  content_key?: string | null;
-  post_type?: string | null;
-  caption?: string | null;
-  media_candidates?: Array<{ url: string | null; source: string }>;
-  status?: string;
-  scheduled_at?: string | null;
-  utm_url?: string | null;
-  _source?: string;
-  geo_role?: string | null;
-  analysis_ids?: string | null;
-  claim_metric_key?: string | null;
-};
-
-type GalleryItem = PostDTO | ExtraItem;
-
-const DOMAIN_CONTRACT: Record<string, string> = {
-  ranking: "単一指標の47都道府県比較",
-  theme: "複数指標を同じ主題で横断",
-  area: "1県のデータブック",
-  geo: "複数GISレイヤー×空間演算",
-  "buzz-map": "地理分布を一目で比較",
-};
-
-const STATUS_BADGE_CLASS: Record<string, string> = {
-  posted: "border-green-500/50 bg-green-500/10 text-console-good",
-  scheduled: "border-amber-500/50 bg-amber-500/10 text-console-warn",
-  draft: "border-console-accent/50 bg-console-accent/10 text-console-accent",
-};
-
-function statusBadgeClass(status: string | undefined) {
+export function PostCard({
+  item,
+  onPreview,
+}: {
+  item: GalleryItem;
+  onPreview: () => void;
+}) {
   return (
-    STATUS_BADGE_CLASS[status ?? ""] ??
-    "border-console-border bg-console-border/30 text-console-muted"
-  );
-}
-
-function hasId(item: GalleryItem): item is PostDTO {
-  return item.id !== null && item.id !== undefined;
-}
-
-export function PostCard({ item }: { item: GalleryItem }) {
-  const [captionOpen, setCaptionOpen] = useState(false);
-  const usesMapFeedAspect =
-    item.platform === "x" && (item.domain === "geo" || item.domain === "buzz-map");
-  const isSquareRankingMap =
-    item.domain === "ranking" && String(item.media_path || "").includes("choropleth-map");
-  const mediaAspect = usesMapFeedAspect
-    ? "aspect-4/5"
-    : isSquareRankingMap
-      ? "aspect-square"
-      : item.domain === "ranking"
-        ? "aspect-240/101"
-        : "aspect-40/21";
-  const mediaCandidates = ((item.media_candidates ?? []) as Array<{
-    url: string | null;
-    source: string;
-  }>)
-    .filter((candidate): candidate is { url: string; source: string } =>
-      Boolean(candidate.url),
-    )
-    .map((candidate) => ({ url: candidate.url, source: candidate.source }));
-  const postUrl = hasId(item) && typeof item.post_url === "string" ? item.post_url : null;
-  const landingUrl = typeof item.utm_url === "string" ? item.utm_url : null;
-  const engagement =
-    hasId(item) && item.impressions && item.impressions > 0
-      ? (
-          (((item.likes || 0) + (item.reposts || 0) + (item.replies || 0)) /
-            item.impressions) *
-          100
-        ).toFixed(1) + "%"
-      : "-";
-
-  return (
-    <Card className="flex-col gap-0 overflow-hidden py-0">
-      <div className="relative">
-        <MediaPreview
-          candidates={mediaCandidates}
-          aspectClassName={mediaAspect}
-        />
-        <Badge
-          variant="outline"
-          className={cn(
-            "absolute left-1.5 top-1.5 z-10 text-[10px]",
-            statusBadgeClass(item.status),
-          )}
-        >
-          {item.status || "未登録"}
-        </Badge>
+    <Card className="gap-0 overflow-hidden py-0">
+      <div className="flex items-center justify-between gap-2 p-3">
+        {item.id ? (
+          <a
+            className="font-mono font-semibold text-console-accent hover:underline"
+            href={`/sns/${item.id}`}
+          >
+            #{item.id}
+          </a>
+        ) : (
+          <span className="text-sm text-console-muted">ID未登録</span>
+        )}
+        <StatusBadge tone={statusTone(item.status)}>
+          {statusLabel(item.status)}
+        </StatusBadge>
       </div>
-
-      <div className="flex flex-1 flex-col gap-2 p-2.5 text-xs">
-        <div className="break-all text-[13px] font-semibold text-console-fg">
-          {item.content_key || "(no key)"}
+      <MediaPreview
+        candidates={candidatesFor(item)}
+        aspectClassName={mediaAspect(item)}
+        alt={`投稿 ${item.id ? `#${item.id}` : item.content_key} の画像`}
+      />
+      <div className="flex flex-1 flex-col gap-3 p-3 text-sm">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-semibold">{formatLabel(item.domain)}</span>
+          <span className="text-console-muted">
+            {PLATFORM_LABELS[item.platform] ?? item.platform}
+          </span>
         </div>
-        <div className="flex flex-wrap gap-2 text-console-muted">
-          <span>{item.platform}</span>
-          <span>{item.domain || "domain未設定"}</span>
-          <span>{item.post_type || ""}</span>
-          {item._source ? <span>{String(item._source)}</span> : null}
-        </div>
-
-        {item.domain ? (
-          <p className="border-l-2 border-console-accent pl-2 text-[11px] text-console-muted">
-            {DOMAIN_CONTRACT[item.domain] ?? "ドメイン契約未定義"}
-          </p>
-        ) : null}
-
-        {item.domain === "geo" ? (
-          <div className="rounded-md border border-console-good/30 bg-console-good/5 px-2 py-1.5 text-[11px] text-console-muted">
-            <div><b className="text-console-good">{String(item.geo_role || "Geo")}</b> · {String(item.claim_metric_key || "metric未同期")}</div>
-            {item.analysis_ids ? <div className="mt-0.5 break-all">analysis: {String(item.analysis_ids)}</div> : null}
-          </div>
-        ) : null}
-
-        <div className="flex flex-wrap gap-3 text-console-muted">
-          {item.scheduled_at ? (
-            <span>予定 <b className="text-console-fg">{item.scheduled_at}</b></span>
-          ) : null}
-          {hasId(item) && item.posted_at ? (
-            <span>投稿 <b className="text-console-fg">{item.posted_at}</b></span>
-          ) : null}
-          {hasId(item) && item.status === "posted" ? (
-            <>
-              <span>👁 <b className="text-console-fg">{item.impressions ?? "-"}</b></span>
-              <span>eng <b className="text-console-fg">{engagement}</b></span>
-            </>
-          ) : null}
-        </div>
-
-        {hasId(item) ? (
-          <a href={`/sns/${item.id}`} className="text-console-accent hover:underline">
-            詳細 #{item.id} (台本・承認・素材・指標)
-          </a>
-        ) : null}
-
-        {postUrl ? (
-          <a
-            href={postUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-console-accent hover:underline"
-          >
-            投稿を見る ↗
-          </a>
-        ) : null}
-
-        {landingUrl ? (
-          <a
-            href={landingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-console-accent hover:underline"
-          >
-            着地ページを見る ↗
-          </a>
-        ) : null}
-
-        {item.caption ? (
+        {item.planning && (
+          <h3 className="font-semibold">{item.planning.title}</h3>
+        )}
+        {isCandidate(item) && (
           <div>
-            <button
-              type="button"
-              onClick={() => setCaptionOpen((open) => !open)}
-              className="cursor-pointer text-console-muted hover:text-console-fg"
-            >
-              caption {captionOpen ? "▲" : "▼"}
-            </button>
-            {captionOpen ? (
-              <div className="mt-1.5 whitespace-pre-wrap text-console-fg">{item.caption}</div>
-            ) : null}
+            <StatusBadge tone="info">
+              {CANDIDATE_STAGES[candidateStage(item)]}
+            </StatusBadge>
           </div>
-        ) : null}
-
-        {!hasId(item) ? (
-          <p className="rounded-md border border-console-border bg-console-bg px-2 py-1.5 text-[11px] text-console-muted">
-            台帳未登録の素材です。登録・生成は担当agent/skillから実行します。
+        )}
+        <p className="line-clamp-3 whitespace-pre-wrap break-words">
+          {item.caption || '本文はまだ登録されていません'}
+        </p>
+        <p className="break-all text-xs text-console-muted">
+          {item.content_key}
+        </p>
+        {item.scheduled_at && (
+          <p className="text-xs">予約 {formatJst(item.scheduled_at)} JST</p>
+        )}
+        {item.posted_at && (
+          <p className="text-xs text-console-muted">
+            投稿 {formatJst(item.posted_at)} JST · 表示{' '}
+            {item.impressions ?? '—'}
           </p>
-        ) : null}
+        )}
+        {item.approval?.state === 'pending' && (
+          <div>
+            <StatusBadge tone="warn">承認待ち</StatusBadge>
+          </div>
+        )}
+        <div className="mt-auto">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onPreview}
+            aria-label={`投稿 ${item.id ? `#${item.id}` : item.content_key} の画像と本文を開く`}
+          >
+            {canEditDraft(item) ? '画像を確認・本文を編集' : '画像・本文を確認'}
+          </Button>
+        </div>
       </div>
     </Card>
   );

@@ -13,7 +13,9 @@ export const coverOperationVersion = (articles) =>
 export function findCoverOperation(journals, article) {
   const operations = journals.flatMap((journal) => {
     if (journal.account !== 'stats47') throw Error('journal account mismatch');
+    // 'superseded' closes an operation only after inspection is recorded (supersededBy + inspection).
     return journal.articles.filter((a) => a.key === article.key
+      && !(a.status === 'superseded' && a.supersededBy && a.inspection)
       && (a.sourceSha256 === article.sha256 || a.status !== 'verified'));
   });
   if (operations.length > 1) throw Error('multiple cover operations require inspection ' + article.key);

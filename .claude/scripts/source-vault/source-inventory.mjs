@@ -72,14 +72,10 @@ const OFFICIAL_SOURCES = [
 ];
 const PRIVATE_SOURCE_PATTERN =
   /協会|連合会|研究所|新聞|通信社|株式会社|有限会社|財団|記念会|民間|推計社/;
-const KAKEI_MARKETING_ANALYSES_PATH = path.join(
-  PROJECT_ROOT,
-  'packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json'
-);
-const PREFECTURE_DEVIATION_ANALYSES_PATH = path.join(
-  PROJECT_ROOT,
-  'packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json'
-);
+// 分析企画 (authored) は生成する解決台帳と同じ資料・版のディレクトリに置く (2026-10-13 に packages/ から移した)
+const analysesPath = (sourceKey, edition) => path.join(STATE_ROOT, sourceKey, edition, 'analyses.json');
+const KAKEI_MARKETING_ANALYSES_PATH = analysesPath('kakei-marketing', '2015');
+const PREFECTURE_DEVIATION_ANALYSES_PATH = analysesPath('prefecture-deviation', '2018');
 // 全ページを analyses.json のページ範囲で解決する単一PDFの資料 (Kindle 画面スキャン 7 冊)。
 // 2026-10-08 まで台帳が無く、重複・出典記述に当たらない本文ページまで既定の「判別不能」へ黙って落ちていた。
 // 再発防止として、台帳の範囲に入らないページがあれば既定値へ落とさず build を止める。
@@ -549,16 +545,11 @@ async function prefectureDeviationAnalyses() {
   return loadPageRangeAnalyses(PREFECTURE_DEVIATION_ANALYSES_PATH);
 }
 
-async function fullCoverageAnalyses(sourceKey, documents) {
+async function fullCoverageAnalyses({ sourceKey, edition }, documents) {
   if (documents.length !== 1) {
     throw new Error(`${sourceKey} analyses assume a single PDF, workspace has ${documents.length}`);
   }
-  const analyses = await loadPageRangeAnalyses(path.join(
-    PROJECT_ROOT,
-    'packages/data-configs/src/evidence-inventory',
-    sourceKey,
-    'analyses.json'
-  ));
+  const analyses = await loadPageRangeAnalyses(analysesPath(sourceKey, edition));
   const lastPage = Math.max(...analyses.map((analysis) => analysis.pages[1]));
   if (lastPage > documents[0].pages) {
     throw new Error(`${sourceKey} analyses reach p.${lastPage}, PDF has ${documents[0].pages} pages`);
@@ -646,7 +637,7 @@ async function buildPageSource(context) {
     ? resolvePrefectureDeviationOffsets(workspace.documents)
     : null;
   const authoredAnalyses = FULL_COVERAGE_ANALYSES_SOURCES.has(context.profile.sourceKey)
-    ? await fullCoverageAnalyses(context.profile.sourceKey, workspace.documents)
+    ? await fullCoverageAnalyses(context.profile, workspace.documents)
     : null;
   const seenPageImages = new Set();
   const items = pages.map(({ document, page, text }) => {

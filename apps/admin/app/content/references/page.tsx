@@ -21,6 +21,7 @@ import type {
 import { contentOperations } from '@/lib/server/content-operations';
 import { projectRoot } from '@/lib/server/project-root';
 import { referenceExpansionPlans } from '@/lib/server/reference-expansion-plans';
+import { referenceExpansionView } from '@/lib/server/reference-expansion';
 import { hasError } from '@/lib/server/state-io';
 import {
   REFERENCE_PRODUCTION_CHANNEL_LABELS,
@@ -179,6 +180,7 @@ export default async function ReferenceContentPage({
       .map((unit) => [unit.id.replace(/^metric:/, ''), unit.label])
   );
   const plans = referenceExpansionPlans(projectRoot());
+  const expansion = referenceExpansionView();
   const themePlans = plans.filter((plan) => plan.kind === 'theme');
   const blogDrafts = plans.filter((plan) => plan.kind === 'blog');
   const kind = KINDS.includes(query.kind as ReferenceProductionKindDTO)
@@ -466,6 +468,51 @@ export default async function ReferenceContentPage({
               </Row>
             );
           })}
+        </DataTable>
+      </Section>
+
+      <Section
+        id="analyses"
+        title="分析企画の展開"
+        count={expansion.summary.length}
+      >
+        <p className="mb-3 text-xs text-console-muted">
+          教材から採択した分析企画を展開先ごとに数えます。記録は展開記録
+          (expansion.json。書き込みは npm run reference:expansion --
+          record)。ランキング・調査・テーマ・全国は、指標が公開ページに載っていれば自動で済みにします。
+        </p>
+        {expansion.errors.length > 0 && (
+          <Alert className="mb-3">
+            <AlertDescription>
+              展開記録の検査エラー {expansion.errors.length} 件:{' '}
+              {expansion.errors.slice(0, 3).join(' / ')}
+            </AlertDescription>
+          </Alert>
+        )}
+        <DataTable
+          columns={[
+            '展開先',
+            '済み (記録)',
+            '済み (自動)',
+            '企画中',
+            '見送り',
+            '未着手',
+            '担当',
+          ]}
+        >
+          {expansion.summary.map((row) => (
+            <Row key={row.channel}>
+              <Cell>
+                <span className="font-medium">{row.channel}</span>
+              </Cell>
+              <Cell nowrap>{row.counts.done}</Cell>
+              <Cell nowrap>{row.counts.derived}</Cell>
+              <Cell nowrap>{row.counts.planned}</Cell>
+              <Cell nowrap>{row.counts.declined}</Cell>
+              <Cell nowrap>{row.counts.pending}</Cell>
+              <Cell nowrap>{row.owner}</Cell>
+            </Row>
+          ))}
         </DataTable>
       </Section>
 

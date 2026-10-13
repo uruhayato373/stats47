@@ -1,12 +1,13 @@
-import "server-only";
+import 'server-only';
 
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs';
+import path from 'node:path';
 
-import { localSnsDir, R2_BASE } from "./project-root";
-import { loadAll, type Post } from "./posts-store";
-import { igScheduleEntries } from "./instagram";
-import { jstDateStr } from "./time";
+import { localSnsDir, R2_BASE } from './project-root';
+import { loadAll, postRevision, type Post } from './posts-store';
+import { assetUrl } from './post-trace';
+import { igScheduleEntries } from './instagram';
+import { jstDateStr } from './time';
 
 /**
  * インベントリ (posts ∪ ローカル素材 ∪ IG schedule) と表示候補メディア URL 解決。
@@ -26,22 +27,39 @@ export type DecoratedPost = Post & { media_candidates: MediaCandidate[] };
  */
 export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
   const out: MediaCandidate[] = [];
+  // 投稿IDに紐づく保全済み素材を優先。ローカルミラーの掃除後も投稿時の画像を見られる。
+  if (p.id) {
+    for (const asset of [...(p.assets ?? [])].sort(
+      (a, b) => a.order - b.order
+    )) {
+      const url = assetUrl(p.id, asset);
+      if (url) out.push({ url, source: 'drive' });
+    }
+  }
   const base = localSnsDir();
   const push = (rel: string) => {
     const local = path.join(base, rel);
-    if (fs.existsSync(local)) out.push({ url: `/media/${rel}`, source: "local" });
-    else out.push({ url: `${R2_BASE}/sns/${rel}`, source: "r2" });
+    if (fs.existsSync(local))
+      out.push({ url: `/media/${rel}`, source: 'local' });
+    else out.push({ url: `${R2_BASE}/sns/${rel}`, source: 'r2' });
   };
-  // media_path が具体パスならそれを最優先
+  // 保全素材が使えない場合は media_path、次に既知の命名規約へフォールバック
   if (p.media_path) {
-    const m = String(p.media_path).replace(/^\.?\/?\.local\/r2\/sns\//, "");
+    const value = String(p.media_path);
+    const prefixes = ['.local/r2/sns/', './.local/r2/sns/', 'sns/', `${R2_BASE}/sns/`, `${base}/`];
+    const prefix = prefixes.find(p => value.startsWith(p));
+    const m = prefix ? value.slice(prefix.length) : value;
     if (m && m !== p.media_path) push(m);
     else if (fs.existsSync(String(p.media_path))) {
       // .local/r2/sns 外のローカル絶対パス (YT 動画等) — /media では配信不可なので R2 化しない
-      out.push({ url: null, source: "local-outside", note: String(p.media_path) });
+      out.push({
+        url: null,
+        source: 'local-outside',
+        note: String(p.media_path),
+      });
     }
   }
-  const d = p.domain || "ranking";
+  const d = p.domain || 'ranking';
   const k = p.content_key;
   if (!k) return out;
   const plat = p.platform;
@@ -52,6 +70,9 @@ export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
       `${d}/${k}/instagram/stills/main-1080x1080.png`,
     ],
     x: [
+      ...(['household-receipt', 'area-atlas', 'rank-routes', 'tile-change'].includes(d)
+        ? [`${d}/${k}/x/stills/${k}.png`]
+        : []),
       `${d}/${k}/x/stills/chart-x-1200x630.png`,
       `${d}/${k}/x/stills/choropleth-map-1200x630.png`,
       `${d}/${k}/x/reel.mp4`,
@@ -61,14 +82,20 @@ export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
   // 重複除去
   const seen = new Set<string>();
   return out.filter((c) =>
-    c.url && !seen.has(c.url) ? (seen.add(c.url), true) : false,
+    c.url && !seen.has(c.url) ? (seen.add(c.url), true) : false
   );
 }
 
 export function decorate<T extends Record<string, unknown>>(
-  p: T,
-): T & { media_candidates: MediaCandidate[] } {
-  return { ...p, media_candidates: mediaCandidates(p as Partial<Post>) };
+  p: T
+): T & { media_candidates: MediaCandidate[]; revision?: string } {
+  return {
+    ...p,
+    media_candidates: mediaCandidates(p as Partial<Post>),
+    ...(typeof p.id === 'number'
+      ? { revision: postRevision(p as unknown as Post) }
+      : {}),
+  };
 }
 
 /** .local/r2/sns/<domain>/<key>/<platform> のローカル素材を列挙。 */
@@ -77,7 +104,8 @@ export function scanLocalMaterials(): Array<{
   content_key: string;
   platform: string;
 }> {
-  const out: Array<{ domain: string; content_key: string; platform: string }> = [];
+  const out: Array<{ domain: string; content_key: string; platform: string }> =
+    [];
   const base = localSnsDir();
   if (!fs.existsSync(base)) return out;
   for (const domain of fs.readdirSync(base)) {
@@ -87,7 +115,7 @@ export function scanLocalMaterials(): Array<{
       const kDir = path.join(dDir, key);
       if (!fs.statSync(kDir).isDirectory()) continue;
       for (const plat of fs.readdirSync(kDir)) {
-        if (!["x", "instagram"].includes(plat)) continue;
+        if (!['x', 'instagram'].includes(plat)) continue;
         out.push({ domain, content_key: key, platform: plat });
       }
     }
@@ -112,14 +140,21 @@ export function buildInventory(): {
   posts: DecoratedPost[];
   extras: Array<InventoryExtra & { media_candidates: MediaCandidate[] }>;
 } {
-  const posts = loadAll().filter((p) => p.status !== "deleted");
-  const known = new Set(posts.map((p) => `${p.platform}/${p.domain}/${p.content_key}`));
+  const allPosts = loadAll();
+  const posts = allPosts.filter((p) => p.status !== 'deleted' && !p.deleted_at);
+  // Deleted posts retain ownership of their files; aliases do not create new candidates.
+  const known = new Set(
+    allPosts.flatMap((p) => [
+      `${p.platform}/${p.domain}/${p.content_key}`,
+      ...(p.material_keys ?? []),
+    ])
+  );
   const extras: InventoryExtra[] = [];
   // ローカル素材で台帳未登録のもの
   for (const m of scanLocalMaterials()) {
     const id = `${m.platform}/${m.domain}/${m.content_key}`;
     if (!known.has(id)) {
-      extras.push({ ...m, _source: "local-material", status: "unregistered" });
+      extras.push({ ...m, _source: 'local-material', status: 'unregistered' });
       known.add(id);
     }
   }
@@ -130,13 +165,13 @@ export function buildInventory(): {
     const id = `instagram/${e.domain}/${e.content_key}`;
     if (!known.has(id)) {
       extras.push({
-        platform: "instagram",
+        platform: 'instagram',
         domain: e.domain,
         content_key: e.content_key,
         post_type: e.type,
-        scheduled_at: `${e.date} ${e.time || "08:00"}`,
+        scheduled_at: `${e.date} ${e.time || '08:00'}`,
         _source: `ig-schedule (${e._file})`,
-        status: "scheduled-json-only",
+        status: 'scheduled-json-only',
       });
       known.add(id);
     }

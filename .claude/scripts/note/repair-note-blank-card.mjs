@@ -108,13 +108,43 @@ try {
       selection.addRange(range);
       element.parentElement.focus();
     });
+    // Press Delete only when the card node itself is selected. A Delete with the caret elsewhere edits the
+    // article, and the editor autosaves that into a draft (2026-10-12: drafts left on 3 articles).
+    const target = editor.locator(`figure[embedded-content-key="${oldCard.key}"]`);
+    const cardSelected = () => target.evaluate((element) => element.classList.contains("ProseMirror-selectednode"));
     await page.keyboard.press("ArrowRight");
+    if (!(await cardSelected())) {
+      // Cards reached by ArrowRight fail for some magazine/product cards; click those, but only when visible.
+      const box = await target.boundingBox();
+      if (box && box.height > 0) await target.click({ position: { x: 8, y: 8 }, timeout: 5_000 });
+    }
+    if (!(await cardSelected())) throw new Error("旧カードを選択できませんでした (編集はしていません)");
+    const previousIndex = await target.evaluate((element) => {
+      if (element.parentElement.getAttribute("contenteditable") !== "true") throw new Error("カードがエディタ直下にありません");
+      return [...element.parentElement.children].indexOf(element) - 1;
+    });
     await page.keyboard.press("Delete");
     if (await editor.locator(`figure[embedded-content-key="${oldCard.key}"]`).count()) throw new Error("旧カードを削除できませんでした");
+    // Put the caret at the end of the paragraph that preceded the card (cards are direct children of the root).
+    await editor.evaluate((root, index) => {
+      const paragraph = root.children[index];
+      if (!paragraph || paragraph.tagName !== "P") throw new Error("前の段落が見つかりません");
+      const range = document.createRange();
+      range.selectNodeContents(paragraph);
+      range.collapse(false);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }, previousIndex);
     await page.keyboard.press("Enter");
     await page.keyboard.insertText(url);
     await page.keyboard.press("Enter");
     await page.waitForTimeout(4_000);
+    // The inserted card fills data-src asynchronously; comparing while it is still null crashed (2026-10-11).
+    await page.waitForFunction((count) => {
+      const figures = [...(document.querySelector("[contenteditable=true]")?.querySelectorAll("figure[embedded-service]") ?? [])];
+      return figures.length === count && figures.every((figure) => figure.getAttribute("data-src"));
+    }, cards.length, { timeout: 20_000 }).catch(() => { throw new Error("挿入したカードのURLが20秒以内に確定しませんでした"); });
     const edited = await editor.locator("figure[embedded-service]").evaluateAll((elements) => elements.map((element) => ({
       url: element.getAttribute("data-src"), key: element.getAttribute("embedded-content-key"),
     })));

@@ -46,6 +46,8 @@ npm run sns:trace:check                                                     # �
 - 隔週程度で `/competitor-scan` を挟み、競合の当たり題材も参考にする (煽り追随はしない)
 - 題材は数字の格差でなく**感情トリガー** (財布/地元愛/子育て不安/意外性) から逆算 (rules §0)
 
+- 題材の候補に、教材の未着手企画 (`npm run reference:expansion -- pending --channel x` / `--channel instagram`) を含める。採否の記録は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+
 ### Step 3: Instagram — カルーセル 7 (曜日ローテーション §2-3c) + リール 1 を生成・予約
 
 ```bash

@@ -26,7 +26,7 @@ note 記事 (`docs/31_note記事原稿/sunshine-solar-housing/`) と同じ続編
 - 文字数: 3,500〜4,500字、無料
 - ブログ (SEO・解説) と差別化: note は「ランキング読み比べ」のエンタメ性を強める
 - frontmatter は既存の一般ランキング note 形式 (`title` / `description`) に合わせる
-  （執筆時は `.claude/scripts/note/catalog/data/stats47-note.ts` の `sunshine-solar-housing` を参照し、必要なら R2 から原稿を復元）
+  （執筆時は記事台帳 `data/note/articles.json` の `sunshine-solar-housing` を参照し、原稿は `npm run note:article -- checkout sunshine-solar-housing` で取り出す）
 
 ## 共通の執筆規律 (全記事必須)
 

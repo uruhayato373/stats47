@@ -7,7 +7,7 @@
  *   node .claude/scripts/note/generate-note-covers.mjs [--slug <slug>] [--all]
  *
  * 出力: docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.{svg,png}
- * (存在しない場合は先に restore-from-r2.sh で復元する)
+ * (存在しない場合は先に note:article checkout で復元する)
  */
 
 import fs from 'fs';
@@ -319,5 +319,5 @@ const ok = results.filter(r => r.status === 'ok').length;
 const skip = results.filter(r => r.status === 'skip').length;
 console.log(`\n完了: OK=${ok}件, SKIP(未展開)=${skip}件`);
 if (skip > 0) {
-  console.log('  未展開のドラフトは restore-from-r2.sh で展開後に再実行してください');
+  console.log('  未展開のドラフトは note:article checkout で展開後に再実行してください');
 }

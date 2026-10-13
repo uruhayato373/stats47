@@ -16,7 +16,7 @@
  *   新構図のプレビュー: --layout spotlight|comparison|distribution --out <preview-dir>
  *
  * 出力 (既定 .local/r2/sns/ranking/<key>/x/ — publish-x が読む正典パス。§2-9 image catalog):
- *   stills/<key>.png       横長カード PNG (960x404、X 添付の既定 = ranking-card)
+ *   stills/<key>.png       全47県タイル PNG (1080x1350、X 添付の既定 = ranking-card)
  *   stills/<key>.svg       横長カード SVG
  *   stills/<key>-ig.svg     縦長カード SVG (1080x1350、Instagram 向け)
  *   stills/<key>-ig.png     縦長カード PNG
@@ -34,7 +34,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { generateBarChartSvg, type BarItem } from "../../../packages/svg-builder/src/charts/bar-chart.ts";
+import { PREF_CAPITAL_COORDS } from '../../../packages/migration-flow/src/lib/pref-capitals';
+import { renderAll47TileSvg } from "../../../apps/remotion/src/features/data-cards/all47-svg";
 import { STORY_LAYOUTS, renderRankingStoryCard } from "./lib/ranking-story-card.ts";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
@@ -55,15 +56,16 @@ const YEAR = getArg("--year");
 const OUT_DIR_ARG = getArg("--out");
 const REQUIRE_PNG = args.includes("--require-png");
 // 既存の予約素材は再生成せず、新しい構図は明示指定で試す。
-const layoutArg = getArg("--layout") || "columns";
+const requestedLayout = getArg("--layout") || "all47";
+const layoutArg = requestedLayout === 'columns' ? 'all47' : requestedLayout;
 const storyLayout = STORY_LAYOUTS.find(layout => layout === layoutArg);
-if (layoutArg !== "columns" && !storyLayout) {
-  console.error(`--layout: columns | ${STORY_LAYOUTS.join(" | ")}`);
+if (layoutArg !== "all47" && !storyLayout) {
+  console.error(`--layout: all47 | ${STORY_LAYOUTS.join(" | ")}`);
   process.exit(1);
 }
 
 if (!KEY) {
-  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--layout columns|spotlight|comparison|distribution] [--require-png]");
+  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--layout all47|spotlight|comparison|distribution] [--require-png]");
   process.exit(1);
 }
 const rankingKey = KEY;
@@ -94,6 +96,7 @@ interface RankingValuesPayload {
 interface RankingItemPayload {
   item?: {
     title?: string;
+    subtitle?: string;
     rankingName?: string;
     /** 読者向けの平易な呼び方 (builder が導出規則から焼き込む) */
     readerLabel?: string;
@@ -181,23 +184,11 @@ async function main() {
   const top = sorted.slice(0, N);
   const bottom = sorted.slice(-N);
 
-  const barItems: BarItem[] = [
-    ...top.map((v, i) => ({
-      label: `${i + 1}位 ${v.areaName}`,
-      name: v.areaName,
-      rank: i + 1,
-      value: v.value,
-    })),
-    { label: "…", value: 0, isSeparator: true },
-    ...bottom.map((v, i) => ({
-      label: `${sorted.length - N + i + 1}位 ${v.areaName}`,
-      name: v.areaName,
-      rank: sorted.length - N + i + 1,
-      value: v.value,
-    })),
-  ];
-
+  const capitalCities = /県庁所在市/.test(item?.subtitle || "");
+  const tileRows = capitalCities ? sorted.map(r => ({ ...r, areaName: r.areaCode === "13000" ? "東京区部" : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name })) : sorted;
   const baseOptions = {
+    capitalCities,
+    note: item?.subtitle,
     title,
     subtitle: `${year}年`,
     source,
@@ -211,8 +202,8 @@ async function main() {
         title, unit, source, layout: storyLayout,
         year: sorted[0]?.yearName || (item?.latestYear?.yearCode === year ? item.latestYear.yearName : undefined) || `${year}年`,
       })
-    : generateBarChartSvg(barItems, { ...baseOptions, layout: "columns" });
-  const svgPortrait = generateBarChartSvg(barItems, { ...baseOptions, layout: "portrait" });
+    : renderAll47TileSvg(tileRows, { ...baseOptions, year: sorted[0]?.yearName || `${year}年` });
+  const svgPortrait = renderAll47TileSvg(tileRows, { ...baseOptions, year: sorted[0]?.yearName || `${year}年` });
 
   const provenance = (file: string) =>
     `<!-- data-source: ${file} | generated: ${new Date().toISOString()} -->\n`;
@@ -233,7 +224,7 @@ async function main() {
     label: title,
     readerLabel,
     layout: layoutArg,
-    transform: storyLayout ? `全${sorted.length}県から${storyLayout}を描画 (IGは上位5+下位5)` : "all47 (quick-still が上位5+下位5を抽出)",
+    transform: storyLayout ? `全${sorted.length}県から${storyLayout}を描画 (IGは全47県)` : '全47県タイル地図。上位・下位5県の抽出なし',
     source: `r2:app/ranking/${KEY}/values.json`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
     restore: `npx tsx .claude/scripts/sns/quick-still.ts --key ${KEY} --year ${year} --layout ${layoutArg}`,
@@ -283,6 +274,10 @@ ${bottomLines}
   ] as const) {
     try {
       await svgToPng(svgFile, pngFile);
+      if (!storyLayout || svgFile === igSvgPath) {
+        const { default: sharp } = await import('sharp');
+        fs.writeFileSync(pngFile, await sharp(fs.readFileSync(pngFile)).resize(1080, 1350).png().toBuffer());
+      }
       pngResults.push({ file: path.relative(PROJECT_ROOT, pngFile), ok: true });
     } catch (e) {
       const reason = (e as Error).message;

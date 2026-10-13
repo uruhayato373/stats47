@@ -83,7 +83,10 @@
     "preflight:pr": "node .claude/scripts/lib/preflight-commit.mjs --pr",
     "test:content-routines": "node --test .claude/scripts/lib/__tests__/content-generation-routine.test.cjs .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs .claude/scripts/lib/__tests__/record-claude-usage.test.mjs",
     "test:ig-ledger": "node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs",
+    "note:article": "node .claude/scripts/note/note-article.mjs",
+    "note:article:test": "node --test .claude/scripts/note/__tests__/article-store.test.mjs .claude/scripts/note/__tests__/article-ledger.test.mjs",
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
+    "note:catalog:check": "tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check",
     "note:circulation:audit": "node .claude/scripts/note/audit-note-circulation.mjs",
     "note:cards:audit": "node .claude/scripts/note/audit-note-card-visibility.mjs",
     "note:cards:repair-batch": "node .claude/scripts/note/repair-note-cards-batch.mjs",
@@ -190,6 +193,8 @@
     "source-vault:process": "node .claude/scripts/source-vault/source-processing.mjs",
     "source-vault:inventory": "node .claude/scripts/source-vault/source-inventory.mjs",
     "source-vault:inventory:check": "node .claude/scripts/source-vault/source-inventory.mjs check-all",
+    "reference:expansion": "node .claude/scripts/source-vault/reference-expansion.mjs",
+    "reference:expansion:test": "node --test .claude/scripts/source-vault/__tests__/reference-expansion.test.mjs",
     "source-vault:ready": "node .claude/scripts/source-vault/source-processing.mjs readiness",
     "source-vault:check": "node .claude/scripts/source-vault/source-vault.mjs check-local && node .claude/scripts/source-vault/source-processing.mjs readiness --contract-only && node .claude/scripts/source-vault/source-inventory.mjs check-all",
     "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs",
@@ -218,6 +223,8 @@
     "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs"
   },
   "devDependencies": {
+    "@remotion/bundler": "4.0.517",
+    "@remotion/renderer": "4.0.517",
     "@types/shapefile": "^0.6.4",
     "@types/unzipper": "^0.10.11",
     "cheerio": "^1.2.0",
@@ -226,8 +233,7 @@
     "googleapis": "^171.4.0",
     "knip": "^6.39.0",
     "prettier": "^3.4.2",
-    "turbo": "^2.10.12",
-    "youtube-transcript": "^1.3.0"
+    "turbo": "^2.10.12"
   },
   "workspaces": [
     "apps/*",
@@ -261,12 +267,10 @@
   "packageManager": "npm@10.8.2",
   "dependencies": {
     "ajv": "^6.15.0",
-    "d3": "^7.9.0",
     "d3-scale-chromatic": "^3.1.0",
     "http-proxy-agent": "^8.0.0",
     "https-proxy-agent": "^8.0.0",
     "image-size": "file:packages/product-factory/src/shims/image-size-disabled",
-    "topojson-client": "^3.1.0",
-    "topojson-simplify": "^3.0.3"
+    "topojson-client": "^3.1.0"
   }
 }

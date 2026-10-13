@@ -29,7 +29,9 @@ describe('theme redesign taxonomy population', () => {
       for (const key of followUp.addedResolvedChartKeys) expect(charts.get(key)?.status, key).toBe('resolved');
       expected = followUp.previousResolvedCharts - followUp.removedResolvedChartKeys.length + followUp.addedResolvedChartKeys.length;
     }
-    expect(ratchet.theme.minResolvedCharts).toBe(expected);
+    // 下限は記録した後追いの分までしか下げない。週次監査 (survey-taxonomy-audit-weekly) が改善に合わせて引き上げるのは許す
+    // (2026-10-11 の監査が 51→53 に上げ、等号の検査が PR を止めた)
+    expect(ratchet.theme.minResolvedCharts).toBeGreaterThanOrEqual(expected);
   });
 
   it('lowers the metric-group baseline only by the recorded follow-up card merges', () => {
@@ -49,7 +51,8 @@ describe('theme redesign taxonomy population', () => {
       for (const key of followUp.added) expect(groups.get(key)?.status, key).toBe('resolved');
     }
     const last = withGroups[withGroups.length - 1]!;
-    expect(ratchet.theme.minResolvedMetricGroups).toBe(last.previous - last.removed.length + last.added.length);
+    // 同上: 記録した統合の分より下げない。週次監査の引き上げ (438→457) は許す
+    expect(ratchet.theme.minResolvedMetricGroups).toBeGreaterThanOrEqual(last.previous - last.removed.length + last.added.length);
   });
 
   it('protects source coverage on metric-group graphs including all three launch themes', () => {

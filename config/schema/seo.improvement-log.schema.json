@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "キーワード改善の実施記録",
+  "description": "data/seo/improvement-log.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string"
+          },
+          "targetPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "rankAtAction": {
+                  "type": "number"
+                },
+                "baselinePeriod": {
+                  "type": "object",
+                  "properties": {
+                    "periodStart": {
+                      "type": "string"
+                    },
+                    "periodEnd": {
+                      "type": "string"
+                    },
+                    "windowDays": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "baselineHash": {
+                  "type": "string"
+                },
+                "needs": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "proposalId": {
+                  "type": "string"
+                },
+                "deployment": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string"
+                    },
+                    "sha": {
+                      "type": "string"
+                    },
+                    "runUrl": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "date"
+                  ]
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "beforeSha256": {
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "methods": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "date"
+              ]
+            }
+          },
+          "nextReviewDate": {
+            "type": "string"
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "outcome": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "period": {
+                  "type": "object",
+                  "properties": {
+                    "periodStart": {
+                      "type": "string"
+                    },
+                    "periodEnd": {
+                      "type": "string"
+                    },
+                    "windowDays": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "snapshotHash": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "date"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "entries"
+  ]
+}

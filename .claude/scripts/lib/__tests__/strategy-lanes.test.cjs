@@ -14,6 +14,7 @@ const {
   laneBoard,
   parseKpiMarker,
   auditKpiLinkage,
+  parseImprovementRows,
   MAX_ACTIVE_IMPROVEMENTS,
 } = require('../strategy-lanes.cjs');
 
@@ -210,6 +211,14 @@ test('上限超過と [target:] 欠落は DG080 warning、上限ちょうどは�
   assert.deepStrictEqual(audit(at), []);
   assert.match(audit([...at, row('x')]).join(), /上限 \d+ 件を超えている/);
   assert.match(audit([row('y', false)]).join(), /\[target:\] の無い施策 1 件/);
+});
+
+test('「効果判定エンジン対象外: 理由」の行は [target:] 欠落に数えない (計測サイクルと同じ判定)', () => {
+  const md = (title) => `## Tier 1\n\n| ID | タイトル | Status | Due | Owner | Metric |\n|---|---|---|---|---|---|\n| X-01 | ${title} [kpi: search-clicks] | pending | 2026-10-31 | a | m |\n`;
+  const audit = (title) => auditKpiLinkage({ lanes: [], improvementRows: parseImprovementRows(md(title)), kpiNodes: KPI_NODES, files: {} }).issues.map((i) => i.message).join();
+  assert.match(audit('施策'), /\[target:\] の無い施策 1 件/);
+  assert.doesNotMatch(audit('施策。**効果判定エンジン対象外**: d28/d56 の独自チェックポイントで判定する'), /\[target:\] の無い施策/);
+  assert.match(audit('施策。効果判定エンジン対象外 (理由なし)'), /\[target:\] の無い施策 1 件/, '理由の無い宣言は対象外にしない');
 });
 
 test('KPI ツリーが未生成なら検査せず warning だけにする (fixture root で error を出さない)', () => {

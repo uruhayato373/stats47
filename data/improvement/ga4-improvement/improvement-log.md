@@ -62,3 +62,12 @@ hit していれば `effect/pending` に留まり、確定ラベルは付かな�
   実遷移に対する捕捉率が低い (theme_blog は 0 件、theme_ranking も 44 件中 3 件)。回遊の実測は
   `internal-transitions.csv` の referrer ベース集計を正とし、`nav_click` の捕捉率改善自体は
   別途の計装課題として扱う (本行の完了条件には含めない)。
+
+### [BLOG-SRCLINK-01] 是正前後の比較を取り下げ、新定義の baseline 記録へ切り替え (2026-10-11)
+
+- **デプロイ日**: 2026-07-24 (source-link 配置是正、commit 690b6a08c)
+- **想定効果**: 設定なし (guard: insufficient-target)。8.13% (W26–W29) → 7.43% (W31–W38) は上昇が観測されなかった記録として残す
+- **検証コマンド**: `node .claude/scripts/metrics/ga4-query.mjs --start 2026-09-28 --end 2026-10-04 --dims isoYearIsoWeek --metrics eventCount --filter 'eventName==page_view' --filter 'pagePath^=/ranking/' --japan` (分母)。同コマンドに `--filter 'pageReferrer*=stats47.jp/blog/'` を足したものが分子
+- **実測 (2026-10-11 取得、Japan、ISO 週)**: W40 (09-28〜10-04) 238/4,519 = 5.27%、W41 (10-05〜10-10 の 6 日分) 202/4,934 = 4.09%。W39 は 09-26 をまたぐため除外
+- **判定**: 判定しない。8.13% と 7.43% はどちらも 2026-09-26 の page_view 二重計測是正より前の定義で、`data/releases/2026-09-26-ga4-measurement-v2.json` の `doNotCompareAcross` に「pageReferrer 由来の回遊率」がある。是正前と同じ定義の baseline は取り直せない
+- **次**: 2026-10-19 に W40〜W42 の 3 週を同コマンドで取って新 baseline とし、本行を削除する。以後の blog→ranking 導線の変更は `[target:]` 付きの別行で測る

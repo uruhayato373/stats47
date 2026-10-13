@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KDP の出品内容と公開・審査状態",
+  "description": "config/kdp-listings.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "_note": {
+      "type": "string"
+    },
+    "listings": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "top": {
+                                    "type": "string"
+                                  },
+                                  "sub": {
+                                    "type": "string"
+                                  },
+                                  "place": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "used": {
+                              "type": "boolean"
+                            },
+                            "text": {
+                              "type": "string"
+                            },
+                            "images": {
+                              "type": "string"
+                            },
+                            "translations": {
+                              "type": "string"
+                            },
+                            "textTools": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "imageTools": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "used": {
+                  "type": "boolean"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "images": {
+                  "type": "string"
+                },
+                "translations": {
+                  "type": "string"
+                },
+                "textTools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "imageTools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "live": {
+                  "type": "object",
+                  "properties": {
+                    "at": {
+                      "type": "string"
+                    },
+                    "statusLabel": {
+                      "type": "string"
+                    },
+                    "asin": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "requestedAt": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "unpublishedAt": {
+                  "type": "string"
+                },
+                "unpublishedVia": {
+                  "type": "string"
+                },
+                "readBack": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "_note",
+    "listings"
+  ]
+}

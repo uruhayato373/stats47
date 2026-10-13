@@ -58,7 +58,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const { made, missing } = await ensureNoteImages(dir);
   if (made.length) console.log(`作り直した画像: ${made.length} 枚`);
   if (missing.length) {
-    console.error(`✗ 画像が足りない (${missing.length} 枚): ${missing.join(", ")}\n  SVG も render-spec.json も無い画像は作れない。restore-from-r2.sh で元の原稿を復元してから再実行する`);
+    console.error(`✗ 画像が足りない (${missing.length} 枚): ${missing.join(", ")}\n  SVG も render-spec.json も無い画像は作れない。note:article checkout で元の原稿を復元してから再実行する`);
     process.exit(1);
   }
   console.log("✓ 画像は揃っている");

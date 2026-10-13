@@ -1,0 +1,220 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "改善施策の効果判定 (閾値エンジン)",
+  "description": "data/effect-verdict/verdicts-{week}.json の形状契約。2026-10-11 に実データ 11 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number"
+    },
+    "week": {
+      "type": "string"
+    },
+    "decidedAt": {
+      "type": "string"
+    },
+    "thresholdsVersion": {
+      "type": "string"
+    },
+    "thresholdsPath": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "byLabel": {
+          "type": "object",
+          "properties": {
+            "effect/pending": {
+              "type": "number"
+            }
+          }
+        },
+        "byGuard": {
+          "type": "object",
+          "properties": {
+            "insufficient-target": {
+              "type": "number"
+            },
+            "insufficient-sample": {
+              "type": "number"
+            },
+            "confounded": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domainId": {
+            "type": "string"
+          },
+          "subjectId": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "thresholdsVersion": {
+            "type": "string"
+          },
+          "guards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "before": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "impressions": {
+                "type": "number"
+              }
+            }
+          },
+          "after": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "impressions": {
+                "type": "number"
+              }
+            }
+          },
+          "delta": {
+            "type": "number"
+          },
+          "relativeDelta": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "target": {},
+          "attainment": {},
+          "boundaries": {
+            "type": "object",
+            "properties": {
+              "attainmentFull": {
+                "type": "number"
+              },
+              "attainmentPartial": {
+                "type": "number"
+              },
+              "adverseRelativeDrop": {
+                "type": "number"
+              }
+            }
+          },
+          "window": {
+            "type": "object",
+            "properties": {
+              "beforeWeek": {
+                "type": "string"
+              },
+              "afterWeek": {
+                "type": "string"
+              },
+              "elapsedWeeks": {
+                "type": "number"
+              },
+              "minWeeks": {
+                "type": "number"
+              }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "observedAt": {
+                  "type": "string"
+                },
+                "freshness": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "confounders": {
+            "type": "object",
+            "properties": {
+              "coDeployed": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "laterContaminators": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "pastEffectKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "logPath": {
+            "type": "string"
+          },
+          "reproduceCommand": {
+            "type": "string"
+          },
+          "skipped": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "week",
+    "decidedAt",
+    "thresholdsVersion",
+    "thresholdsPath",
+    "note",
+    "summary",
+    "verdicts"
+  ]
+}

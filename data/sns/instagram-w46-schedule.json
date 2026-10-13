@@ -1,0 +1,99 @@
+[
+  {
+    "date": "2026-11-09",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "average-temperature",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1140
+  },
+  {
+    "date": "2026-11-10",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "correlation-carousel",
+    "content_key": "actual-income-worker-households-per-month--consumption-expenditure-total",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-scatter-1080x1350.png",
+      "slide-3-highlights-1080x1350.png",
+      "slide-4-caution-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1133
+  },
+  {
+    "date": "2026-11-11",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "minimum-wage-by-region",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1159
+  },
+  {
+    "date": "2026-11-12",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "07000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1116
+  },
+  {
+    "date": "2026-11-13",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "room-utilization-rate",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1169
+  },
+  {
+    "date": "2026-11-14",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "46000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ],
+    "post_id": 1127
+  },
+  {
+    "date": "2026-11-15",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking",
+    "content_key": "current-liabilities-balance-multi-person-households-per-household",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-table-1080x1350.png",
+      "slide-3-cta-1080x1350.png"
+    ],
+    "post_id": 1147
+  }
+]

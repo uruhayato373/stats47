@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "効果判定を判定不能のまま終了したブログ是正 wave (オーナー判断・理由付き)。閾値エンジンの対象から外す",
+  "description": "data/improvement/gsc-improvement/closed-waves.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "_comment": {
+      "type": "string"
+    },
+    "closures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "waveId": {
+            "type": "string"
+          },
+          "closedAt": {
+            "type": "string"
+          },
+          "decidedBy": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object",
+            "properties": {
+              "before": {
+                "type": "string"
+              },
+              "after": {
+                "type": "string"
+              },
+              "siteGrowth": {
+                "type": "string"
+              },
+              "guards": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reproduce": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "_comment",
+    "closures",
+    "reproduce"
+  ]
+}
