@@ -10298,7 +10298,7 @@
       "title": "りんごは盛岡、みかんは和歌山、いちごは宇都宮 ── 果物5品目の購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a33",
       "body": {
         "store": "r2-public",
@@ -10316,7 +10316,9 @@
         "/ranking/mandarin-consumption-quantity",
         "/ranking/watermelon-consumption-quantity",
         "/ranking/strawberry-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb16d150ee313",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-prc-a34",

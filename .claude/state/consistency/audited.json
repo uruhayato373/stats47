@@ -1,11 +1,11 @@
 {
-  "hash": "81943b5cfbc2caaf495448dda77e9290537f4533bf61f2b59eba8bb0a6381d36",
-  "audited_at": "2026-10-13T02:37:16",
+  "hash": "4759f54179f388549a36c8c047ddcb3f7918fea974425caa8ec3ab470a17f31c",
+  "audited_at": "2026-10-13T03:12:14",
   "files": [
-    ".claude/scripts/note/reference/__tests__/reference-note.test.ts",
-    ".claude/scripts/note/reference/build-reference-note-age.ts",
-    ".claude/scripts/note/reference/build-reference-note-quintile.ts",
-    ".claude/scripts/note/reference/build-reference-note-region.ts",
-    ".claude/scripts/note/reference/build-reference-note.ts"
+    ".claude/scripts/note/catalog/cover-designs.ts",
+    ".claude/scripts/note/catalog/reference-cover-copy.ts",
+    ".claude/scripts/note/catalog/reference-cover-figures.ts",
+    ".claude/scripts/note/editor-helpers.sh",
+    ".claude/scripts/note/publish-new-note.sh"
   ]
 }

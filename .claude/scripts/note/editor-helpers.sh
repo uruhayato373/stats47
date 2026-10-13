@@ -317,6 +317,9 @@ new_post_cover_title(){
   if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"; echo "  [FAIL] /new not loaded (login?)"; return 1; fi
   if [ -f "$COVER_FILE" ]; then
     local ADD=$(grep -oE '\[[0-9]+\]<button aria-label=画像を追加' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
+    # 2026-10-13: 「画像を追加」は <svg aria-label=画像を追加> になり、押せるのは親の <button>。旧形式が無ければ親を使う
+    [ -z "$ADD" ] && ADD=$(awk '/aria-label=画像を追加/{print prev; exit} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | head -1)
+    [ -n "$ADD" ] || { rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"; echo "  [FAIL] 見出し画像の追加ボタンが見つからない"; return 1; }
     BU click "$ADD" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
     local UP=$(grep -B1 '画像をアップロード' /tmp/ns.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
     BU click "$UP" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
@@ -324,7 +327,11 @@ new_post_cover_title(){
     BU upload "$FI" "$COVER_FILE" >/dev/null 2>&1; sleep 3; BU state 2>&1 > /tmp/ns.txt
     rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"
     local SV=$(awk '/^\t+保存$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | tail -1)
+    [ -n "$SV" ] || { echo "  [FAIL] 見出し画像の保存ボタンが見つからない"; return 1; }
     BU click "$SV" >/dev/null 2>&1; sleep 3
+    # カバーが付いたことを確かめる (付かないまま公開しない。2026-10-13 に画面の変更で黙って飛ばしていた)
+    local EYE=$(BU eval "(function(){return [...document.querySelectorAll('img')].some(x=>/uploads\\/images/.test(x.src))?'eyecatch-set':'eyecatch-missing';})()" 2>&1 | grep -oE 'eyecatch-(set|missing)' | head -1)
+    [ "$EYE" = "eyecatch-set" ] || { echo "  [FAIL] 見出し画像が設定されていない ($EYE)"; return 1; }
   fi
   BU state 2>&1 > /tmp/ns.txt
   local TITLE_ENCODED TITLE_LENGTH TV

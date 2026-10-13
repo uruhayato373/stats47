@@ -295,6 +295,14 @@ updated: 2026-10-06
 - **次**: ① `note-critic` で意味のレビュー (問いに答えているか・言い過ぎ・定義の取り違え)。REVISE は直す ② `npm run note:article -- save <key...>` で公開 R2 へ保存
   ③ 公開の本数と日程をオーナーに確認し、`/publish-note` で分けて公開 (同じセッションで大量に連続投稿しない)。カバーは `cover-assets.json` の手順で用意
   ④ 公開したら台帳に `noteUrl` を書き、`reference:expansion -- record --status done` で済みにする。
+- **公開の状況 (2026-10-13 12:30 JST)**: オーナー決定は「91 本を公開 R2 へ保存し、1 日 5 本ずつ公開」(mh-a09 は承諾確認まで保存・公開しない)。
+  91 本は公開 R2 へ保存し `--deep` で照合済み。1 日目は `b-ref-prc-a33` を公開 (https://note.com/stats47/n/nb16d150ee313、カバーは `update-note-covers` で付けて検証済み)。
+  残り 4 本 (`b-ref-kakei-a04-02`・`b-ref-kakei-a02-09`・`b-ref-prc-a38`・`b-ref-inc-a06`) はカバー採用・タグ・本文の前処理まで済み。
+  専用プロファイル `.local/playwright-note-profile` が note からログアウトしたため止めている (オーナーが `node .claude/scripts/note/login-note-profile.mjs` でログインしたら、
+  Chrome を `--remote-debugging-port=9333` で起動し `NOTE_BU_CDP=http://127.0.0.1:9333 bash .claude/scripts/note/publish-new-note.sh <key> stats47-note --publish "<マガジン名>"` で公開)。
+  1 回目の失敗で残った下書き `n706d8699fcd7` (同じ果物の記事) はオーナーが削除する。カバーは 1 本ずつ `prepare → generate-cover-refresh --local-review → 確認 → 登録 → review` で採用する。
+- **公開スクリプトの修正 (2026-10-13)**: note の画面の変更で「画像を追加」が `<svg>` になり、`new_post_cover_title` がカバーを黙って飛ばしていた (公開した 1 本目がカバー無し)。
+  親のボタンを押すよう直し、保存後にカバーが付いたことを確かめて付かなければ止める。画像の挿入は、アップロードより前で見出しの次の段落を取りこぼしたときだけ 1 回やり直す。
 - **公開前に確かめること (2026-10-13 の執筆で判明)**: `b-ref-mh-a09` (金融リテラシー調査の正答率) は、企画台帳に「商用目的の転載・複製には事前承諾が要り、承諾の確認は未了」とある。
   承諾を確かめるまで公開しない。`b-ref-dev-a05`・`a09`・`a15`・`a40` は問いが求める指標 (子育て世帯の貧困率・通学時間と進学率・最新年の貯蓄・自家用車で通う人の割合) が無く、
   答えの一部を「このデータでは判断できない」としている。指標を足すか、このまま公開するかを決める。

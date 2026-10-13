@@ -1050,6 +1050,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "prefecture-ranking-consumption-2020-a33",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-ref-prc-a33",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
       "analysis": "prefecture-ranking-consumption-2020-a34",
       "channel": "note",
       "status": "planned",
