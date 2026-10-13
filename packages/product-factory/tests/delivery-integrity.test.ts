@@ -29,18 +29,15 @@ function effectiveSource(key: string, year: string): Record<string, any> {
   const sup = (cfg.supplementalSources ?? []).find((s: { years: number[] }) => s.years.includes(Number(year)));
   return sup ? sup.source : cfg.source;
 }
-// パックの固定データ (src/data/pack-snapshots/、R2 から作る派生物・git 管理外) がある環境でだけ実行する。
-// CI の checkout には無い (2026-10-13 に PR #1125 の Unit Tests を null 参照で落とした)。CI での実行は PRODUCT-PACK-SNAPSHOT-CI-01
-const SNAPSHOTS_READY = PACK_IDS.every((id) => loadPackSnapshotDatasets(id) !== null);
-const packs = new Map(SNAPSHOTS_READY ? PACK_IDS.map((id) => [id, loadPackSnapshotDatasets(id)!.datasets]) : []);
-const p12 = packs.get("P-12") ?? [];
+const packs = new Map(PACK_IDS.map((id) => [id, loadPackSnapshotDatasets(id)!.datasets]));
+const p12 = packs.get("P-12")!;
 const byKey = (key: string): Dataset => {
   const d = p12.find((x) => x.rankingKey === key);
   if (!d) throw new Error(`P-12 に ${key} が無い`);
   return d;
 };
 
-describe.skipIf(!SNAPSHOTS_READY)("不具合1: 出典の種類に応じた注意事項と出典表示", () => {
+describe("不具合1: 出典の種類に応じた注意事項と出典表示", () => {
   it("e-Stat 以外の提供元の指標は、実際の出典を注意事項に書き、e-Stat の数値とは書かない", () => {
     const cases: Array<[string, string]> = [
       ["fishing-port-count-ksj", "水産庁"],
@@ -105,7 +102,7 @@ describe.skipIf(!SNAPSHOTS_READY)("不具合1: 出典の種類に応じた注意
   });
 });
 
-describe.skipIf(!SNAPSHOTS_READY)("不具合2: 使い方スライドの記載とグラフの参照範囲", () => {
+describe("不具合2: 使い方スライドの記載とグラフの参照範囲", () => {
   async function slideTexts(path: string): Promise<{ texts: string[]; chartRefs: string[] }> {
     const zip = await JSZip.loadAsync(readFileSync(path));
     const texts: string[] = [];
@@ -152,7 +149,7 @@ describe.skipIf(!SNAPSHOTS_READY)("不具合2: 使い方スライドの記載と
   }, 60000);
 });
 
-describe.skipIf(!SNAPSHOTS_READY)("不具合3: SOURCES の statsDataId は指標定義の取得元と一致する", () => {
+describe("不具合3: SOURCES の statsDataId は指標定義の取得元と一致する", () => {
   it("補完出典で取得した年は補完側の statsDataId・調査名を書く (総人口 2025 は国勢調査 0004065881)", () => {
     const d = packs.get("P-01")!.find((x) => x.rankingKey === "total-population") ?? byKey("total-population");
     expect(d.year).toBe("2025");
@@ -178,7 +175,7 @@ describe.skipIf(!SNAPSHOTS_READY)("不具合3: SOURCES の statsDataId は指標
   });
 });
 
-describe.skipIf(!SNAPSHOTS_READY)("不具合4: 47 県すべて同値の列は 1 つにまとめる", () => {
+describe("不具合4: 47 県すべて同値の列は 1 つにまとめる", () => {
   const sig = (d: Dataset): string => JSON.stringify(d.values.map((v) => [v.value, v.missing ?? null]));
 
   it("どのパックにも、値が完全に同じ列が 2 つ以上存在しない", () => {

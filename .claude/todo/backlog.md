@@ -310,16 +310,6 @@ updated: 2026-10-06
   (`apps/admin/lib/content-operations/reference.ts`)。
 - **完了条件**: `packages/data-configs/src/evidence-inventory/` にデータの配列・表が残らず (型・読み込み・判定関数だけ)、管理画面に企画単位の note の進み具合が出る。
 
-### [PRODUCT-PACK-SNAPSHOT-CI-01] 商品パックの実データ検査 (除外・納品物の 4 不具合) を CI でも実行する
-タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-13] [領域:商品]
-
-- **事実 (2026-10-13)**: `packages/product-factory/tests/{license-exclusion,delivery-integrity}.test.ts` は、R2 から作るパックの固定データ
-  (`src/data/pack-snapshots/P-NN.json`、9.1MB・git 管理外) を読む。CI の checkout には無く、PR #1125 の Unit Tests を null 参照で落とした。
-  同日、固定データが無い環境では実データの検査 16 件を飛ばす (`skipIf`) ようにした。いまはこの Mac でしか検査されない。
-- **次**: CI で固定データを作る (`pack-snapshot.ts` の生成を R2 公開 URL から実行する step を Unit Tests の前に置く) か、検査に要る指標だけの小さな固定データを
-  `tests/fixtures/` に置くかを決めて実装する。
-- **完了条件**: PR CI で 18 件がすべて実行され (飛ばされず) 合格する。
-
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
 
