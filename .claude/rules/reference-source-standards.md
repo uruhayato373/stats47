@@ -198,7 +198,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   問いを読んで同じなら`done`で結ぶ。
 - 入口は`npm run reference:expansion -- <status|pending|record|check>`。記録は`record`だけで書き、`check`が PR・pre-commit で
   企画の実在・展開先・ページ ID の種類・SNS の媒体・公開状態を検査する。
-- 担当: ブログ = blog-seo-strategist (`/plan-article-queue`)・note = note-manager・X / Threads = x-strategist (`/post-x-batch`)・
+- 担当: ブログ = blog-seo-strategist (`/plan-article-queue`)・note = note-manager (`/expand-reference-notes`)・X / Threads = x-strategist (`/post-x-batch`)・
   Instagram = instagram-strategist・YouTube = strategy-advisor (pilot 保留中)・テーマと全国 = theme-designer・県 = area-curator・
   ランキング = ranking-expander・調査 = survey-curator。各担当は企画・制作の前に自分の展開先の`pending`を読み、作ったら`done`、
   作らないと決めたら`declined`を記録する。週次は`/weekly-review`が`status --json`の未着手数を読む。

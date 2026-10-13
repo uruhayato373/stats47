@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-12T08:22:24.548Z",
+  "updatedAt": "2026-10-13T02:21:27.581Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13111,6 +13111,834 @@
         "observedAt": "2026-10-12T06:13:49.725Z",
         "revisionId": "cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5"
       },
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a02",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a03",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a05",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a06",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a07",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a08",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a09",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a11",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a13",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a15",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a17",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a19",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a21",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a26",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a31",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a32",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a36",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a40",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a42",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a45",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a49",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-dev-a51",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-gis-a33",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-inc-a05",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-inc-a06",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-inc-a55",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a01-01",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a01-04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a01-05",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-02",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-05",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-06",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-07",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-08",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a02-09",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a03-01",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a03-04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a04-01",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a04-02",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a04-03",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a04-04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a05-04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-kakei-a05-06",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-mh-a04",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-mh-a07",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-mh-a08",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-mh-a09",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-mh-a10",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a07",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a09",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a10",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a12",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a13",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a14",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a15",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a16",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a17",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a18",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a19",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a20",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a21",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a22",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a24",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a25",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a26",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a27",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a28",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a29",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a30",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a31",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a32",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a33",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a34",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a35",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a36",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a37",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a38",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a39",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a40",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a41",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a42",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a43",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a44",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a45",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a47",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a48",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a49",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a50",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a51",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": []
+    },
+    {
+      "articleKey": "b-ref-prc-a52",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
       "missingVersions": []
     },
     {

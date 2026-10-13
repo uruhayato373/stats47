@@ -1249,7 +1249,7 @@
       "resolution": "combined-analysis",
       "resolutionReason": "内閣府県民経済計算、総務省労働力調査はいずれも公式統計 県民所得・完全失業率は既存metricで充足済み。",
       "metricKeys": [
-        "prefectural-income-per-capita",
+        "per-capita-prefectural-income-h27",
         "unemployment-rate"
       ],
       "surveyIds": [],

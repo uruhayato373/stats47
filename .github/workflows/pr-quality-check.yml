@@ -510,6 +510,7 @@ jobs:
           npm run note:catalog:validate
           npm run note:catalog:check
           npm run note:article:test
+          npm run note:reference:test
         continue-on-error: false
 
       - name: 🧭 Business Plan SSOT Contract Gate

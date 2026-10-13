@@ -1,4 +1,1197 @@
 {
   "schemaVersion": 1,
-  "records": []
+  "records": [
+    {
+      "analysis": "average-income-ranking-unknown-a05",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-inc-a05",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a06",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-inc-a06",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a55",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-inc-a55",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "gis-business-guide-2022-a33",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-gis-a33",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a00-01",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-academic-food",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-01",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a01-01",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-02",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-advancement-employment",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-03",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-advancement-employment",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a01-04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-05",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a01-05",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-02",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-02",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-03",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-rich-spending-patterns",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-05",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-05",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-06",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-06",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-07",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-07",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-08",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-08",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-09",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a02-09",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-01",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a03-01",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-02",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-winter-bargain",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-03",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-necktie-decline",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a03-04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-01",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a04-01",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-02",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a04-02",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-03",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a04-03",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a04-04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-01",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-beer-peak-month",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-02",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-bread-giffen",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a05-04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-05",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-kakei-gyoza-counting",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-06",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-kakei-a05-06",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-01",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-hokkaido",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-02",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-aomori",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-03",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-iwate",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-04",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-miyagi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-05",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-akita",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-06",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-yamagata",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-07",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-fukushima",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-08",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-ibaraki",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-09",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-tochigi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-10",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-gunma",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-11",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-saitama",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-12",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-chiba",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-13",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-tokyo",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-14",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kanagawa",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-15",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-niigata",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-16",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-toyama",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-17",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-ishikawa",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-18",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-fukui",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-19",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-yamanashi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-20",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-nagano",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-21",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-gifu",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-22",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-shizuoka",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-23",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-aichi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-24",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-mie",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-25",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-shiga",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-26",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kyoto",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-27",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-osaka",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-28",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-hyogo",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-29",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-nara",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-30",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-wakayama",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-31",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-tottori",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-32",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-shimane",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-33",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-okayama",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-34",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-hiroshima",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-35",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-yamaguchi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-36",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-tokushima",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-37",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kagawa",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-38",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-ehime",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-39",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kochi",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-40",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-fukuoka",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-41",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-saga",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-42",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-nagasaki",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-43",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kumamoto",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-44",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-oita",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-45",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-miyazaki",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-46",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-kagoshima",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-47",
+      "channel": "note",
+      "status": "done",
+      "target": "note:a-kakei-okinawa",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-mh-a04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a07",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-mh-a07",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a08",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-mh-a08",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a09",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-mh-a09",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a10",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-mh-a10",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a01",
+      "channel": "note",
+      "status": "done",
+      "target": "note:d-kakei-spending-personality",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a02",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a02",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a03",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a03",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a04",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a04",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a05",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a05",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a06",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a06",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a07",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a07",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a08",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a08",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a09",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a09",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a11",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a11",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a13",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a13",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a15",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a15",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a17",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a17",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a19",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a19",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a21",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a21",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a26",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a26",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a31",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a31",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a32",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a32",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a36",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a36",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a40",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a40",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a42",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a42",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a45",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a45",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a49",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a49",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a51",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-dev-a51",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a07",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a07",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a09",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a09",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a10",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a10",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a12",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a12",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a13",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a13",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a14",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a14",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a15",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a15",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a16",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a16",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a17",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a17",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a18",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a18",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a19",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a19",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a20",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a20",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a21",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a21",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a22",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a22",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a24",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a24",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a25",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a25",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a26",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a26",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a27",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a27",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a28",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a28",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a29",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a29",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a30",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a30",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a31",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a31",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a32",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a32",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a33",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a33",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a34",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a34",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a35",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a35",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a36",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a36",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a37",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a37",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a38",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a38",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a39",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a39",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a40",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a40",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a41",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a41",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a42",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a42",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a43",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a43",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a44",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a44",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a45",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a45",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a47",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a48",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a49",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a50",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a51",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "note",
+      "status": "planned",
+      "target": "note:b-ref-prc-a52",
+      "decidedAt": "2026-10-13",
+      "decidedBy": "note-manager"
+    }
+  ]
 }

@@ -32,6 +32,8 @@ updated: 2026-10-06
   `gh workflow list --all` で該当 workflow が無効または消えている ⑦ 次の `note-circulation-audit-weekly` (土曜) が `note:circulation:test` を通り、`note-image-assets.json` の
   `--verify-r2` が合格する ⑧ ローカルの main を `git fetch && git switch main && git merge --ff-only origin/main` で合わせ、develop との差 (`git rev-list --count origin/develop..origin/main`) が
   マージコミット以外に無いことを確かめる。
+- **状態 (2026-10-13 11:20 JST)**: PR #1125 は CI 24 件合格でマージ済み (main `427b80974`)。⑥ main から 2 本が消えたことを `git ls-tree origin/main` で確認。⑧ ローカル main を早送りで合わせ、develop との差はマージコミットだけ。
+  ⑤ `deploy-workers` は R2 書き込みの排他 (`r2-write`) で `geo-source-publish` (22:26 UTC 開始、過去の成功例は 3.5〜4 時間) の終了待ち。終わり次第デプロイと smoke を確かめる。①〜④・⑦ は次の定期実行で確かめる。
 - **別の端末 (Windows PC) の注意**: このマージを pull すると docs/31 の追跡ファイル 861 件が作業ツリーから消える。pull の前にその端末の docs/31 に未コミットの編集が無いかを確かめ、
   あれば先に `npm run note:article -- save <key>` で R2 へ保存する (台帳 `data/note/articles.json` を pull してから)。
 - **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
@@ -282,21 +284,22 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画のうち note が展開先の 149 件を、記事にする・結ぶ・見送るに振り分ける
+### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画から作った note の下書き 92 本を、意味のレビュー・R2 保存・公開まで進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-13)**: 教材 9 冊の分析企画 376 件 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`) のうち、採択済みで展開先に note を含むものが 149 件。
-  展開記録 (`data/source-inventory/expansion.json`) は 0 件で、全件が未着手。家計調査マーケティング本の展開カード `KAKEI-MARKETING-CONTENT-01` は
-  2026-09-14 (6a4de050e1) に完了記録なしで backlog から消えており、企画が誰にも引き渡されていなかった。
-- **担当**: note-manager (記事台帳 `data/note/articles.json`)。読み手は広い検索意図・悩み起点・県の暮らしを読む型 (`sns-content-standards.md` §2-7)。
-  既存の記事が同じ問いを扱っていれば `note:<記事key>` で済みにし、新しく作るなら記事台帳に draft を足して planned で記録し、公開後に done へ更新する。
-  1 位が東京都になる単一ランキング記事は作らない。
-- **入口**: `npm run reference:expansion -- pending --channel <展開先>` が未着手の企画と、同じ指標を使う公開中のページ (結ぶ候補) を出す。
-  決めたら `npm run reference:expansion -- record --analysis <企画ID> --channel <展開先> --status done|planned|declined [--target <ページID>] [--reason 理由] --by <担当>`
-  で記録する (済みは公開中のページ ID だけ通る。見送りは理由が必須)。規約は `reference-source-standards.md`「分析企画の展開」。
-- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
-  指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
-- **完了条件**: `reference:expansion -- status --channel note` の未着手が 0。
+- **状態 (2026-10-13)**: note が展開先の採択企画 149 件のうち 57 件は公開済みの記事と問いが同じことを本文で確かめて結んだ
+  (家計調査の県別 47 件 = `a-kakei-<県>`、ほか `b-kakei-*`・`b-rich-spending-patterns`・`d-kakei-spending-personality`)。
+  残り 92 件は `/expand-reference-notes` の生成器 (都道府県・年収五分位・世帯主の年齢・地方別の 4 種) で下ごしらえし、
+  執筆して `check-reference-note.mjs` の数値照合に通し、記事台帳に下書き (`b-ref-*`)・展開記録に企画中 (planned) を書いた。
+  本文は作業場 `docs/31_note記事原稿/b-ref-*/` にあり、まだ R2 に保存していない。
+- **次**: ① `note-critic` で意味のレビュー (問いに答えているか・言い過ぎ・定義の取り違え)。REVISE は直す ② `npm run note:article -- save <key...>` で公開 R2 へ保存
+  ③ 公開の本数と日程をオーナーに確認し、`/publish-note` で分けて公開 (同じセッションで大量に連続投稿しない)。カバーは `cover-assets.json` の手順で用意
+  ④ 公開したら台帳に `noteUrl` を書き、`reference:expansion -- record --status done` で済みにする。
+- **公開前に確かめること (2026-10-13 の執筆で判明)**: `b-ref-mh-a09` (金融リテラシー調査の正答率) は、企画台帳に「商用目的の転載・複製には事前承諾が要り、承諾の確認は未了」とある。
+  承諾を確かめるまで公開しない。`b-ref-dev-a05`・`a09`・`a15`・`a40` は問いが求める指標 (子育て世帯の貧困率・通学時間と進学率・最新年の貯蓄・自家用車で通う人の割合) が無く、
+  答えの一部を「このデータでは判断できない」としている。指標を足すか、このまま公開するかを決める。
+- **停止条件**: 検査と意味のレビューに通らない本文を保存しない。公開はオーナーの確認なしに行わない。
+- **完了条件**: `reference:expansion -- status --channel note` の企画中と未着手が 0。
 
 ### [REFERENCE-EXPANSION-BLOG-01] 教材の分析企画のうちブログが展開先の 215 件を、記事にする・結ぶ・見送るに振り分ける
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel blog] [起票:2026-10-13] [領域:データ]
@@ -339,6 +342,27 @@ updated: 2026-10-06
 - **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
   指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
 - **完了条件**: `reference:expansion -- status` で area・theme・japan・ranking・survey の未着手が 0。
+
+### [METRIC-DENOMINATOR-LABEL-01] 人口当たりなどの指標で、表示名と単位から分母が落ちている (博物館数 = 人口100万人当たりなのに「博物館数」「館」)
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: キーに `per-million`・`per-100k`・`per-1000` などを持つ指標のうち約 90 件は、`data/metrics/<key>.ts` の `title`・`subtitle` に分母が無い。
+  例: `museum-count-per-million` は e-Stat の項目名が「博物館数（人口100万人当たり）」なのに、title「博物館数」・unit「館」。R2 の `item.json`、県データブック (`databook.json` の highlight.label)、
+  SNS のタイル画像 (`quick-still.ts` は item の title を描く) が実数のように読める。`certified-childcare-center-count-per-100k-0-5` (認定こども園数 687.1 園) も同じ。
+- **分母は推測しない**: per-1000 は人口・世帯・出生など分母が指標ごとに違う。正典は e-Stat の項目名 (`data/estat/meta/<統計表ID>.json` の cat01 の name)。
+  note の教材企画の生成器は `.claude/scripts/note/reference/lib/estat-denominator.ts` で項目名から分母を補っている (同じ方法で config を直せる)。
+- **次**: ① e-Stat の項目名に「当たり」があり title/subtitle に無い指標を一覧にする ② subtitle (または title) に分母を書き、単位は「館」のまま subtitle で分母を示すか unit を変えるかを決める
+  (ランキングの見出し・SEO に影響するので `metric-config-standards.md` に従う) ③ item.json・県データブックを作り直して反映する。
+- **完了条件**: 項目名に分母がある SSDS 由来の指標で、title か subtitle に分母が無いものが 0 件。
+
+### [ACADEMIC-TEST-YEARS-01] 全国学力テストの都道府県別平均正答率が 2025 年の 1 年分しか無い
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:データ]
+
+- **事実 (2026-10-13)**: `academic-achievement-test-average-rate` の R2 values は 2025 年の 47 行だけ。教材の企画 `kakei-marketing-2015-a01-01`
+  (「継続して上位に入る県はどこか」) の note 記事 `b-ref-kakei-a01-01` は、継続性を確かめられないと書いて 2025 年だけで答えている。
+- **次**: 国立教育政策研究所の公表 (https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html) から過去の年の都道府県別正答率を取り込む (`data-provenance-standards.md` の 9 点セット)。
+  取り込んだら記事の答えを複数年で書き直す。
+- **完了条件**: 3 年以上の 47 都道府県の値が R2 にあり、記事が複数年で答えている。
 
 ### [REFERENCE-LEDGER-DATA-MOVE-01] 参考文献の残りの authored 台帳 (資料ごとの方針・japan-zue の方針と試行) を data/ へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-datasets.mjs] [起票:2026-10-13] [領域:データ]
