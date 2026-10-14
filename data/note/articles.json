@@ -10088,7 +10088,7 @@
       "title": "テレビ・新聞などの時間は北海道155分、東京都106分 ── マスメディアに使う時間を47都道府県で比べる",
       "magazine": "s47-ict",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a20",
       "body": {
         "store": "r2-public",
@@ -10102,7 +10102,9 @@
       },
       "stats47Targets": [
         "/ranking/broadcast-media-time-all"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n3cc132d3422d",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-prc-a21",
@@ -10169,7 +10171,7 @@
       "title": "インターネットを使う人の割合は東京都70.8％、青森県44.4％ ── 2006年の47都道府県比較",
       "magazine": "s47-ict",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a24",
       "body": {
         "store": "r2-public",
@@ -10183,7 +10185,9 @@
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb1643889a8a4",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-prc-a25",

@@ -2044,6 +2044,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "b-ref-prc-a20": {
+      "vertical": "stats47-note",
+      "title": "テレビ・新聞などの時間は北海道155分、東京都106分 ── マスメディアに使う時間を47都道府県で比べる",
+      "url": "https://note.com/stats47/n/n3cc132d3422d",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/b-ref-prc-a20",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-ref-prc-a21": {
       "vertical": "stats47-note",
       "title": "女性の家事時間は奈良県が最長、女性有業者の仕事時間は青森県が最長 ── 1日の時間の使い方を47都道府県で比べる",
@@ -2062,6 +2073,17 @@
       "is_paid": false,
       "published_at": "2026-10-14",
       "r2_path": "note/stats47-note/b-ref-prc-a22",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-ref-prc-a24": {
+      "vertical": "stats47-note",
+      "title": "インターネットを使う人の割合は東京都70.8％、青森県44.4％ ── 2006年の47都道府県比較",
+      "url": "https://note.com/stats47/n/nb1643889a8a4",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/b-ref-prc-a24",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"

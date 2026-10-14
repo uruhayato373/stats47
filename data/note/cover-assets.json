@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-14T22:02:17.462Z",
+  "updatedAt": "2026-10-14T22:23:19.808Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -16064,7 +16064,7 @@
     },
     {
       "articleKey": "b-ref-prc-a20",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n3cc132d3422d",
       "revisions": [
         {
           "sha256": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
@@ -16211,7 +16211,7 @@
     },
     {
       "articleKey": "b-ref-prc-a24",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb1643889a8a4",
       "revisions": [
         {
           "sha256": "67d841805ceee40abc9f191357078b29790b0d8dece0597cff874c28882ecd6f",
