@@ -1,11 +1,7 @@
 {
-  "hash": "4759f54179f388549a36c8c047ddcb3f7918fea974425caa8ec3ab470a17f31c",
-  "audited_at": "2026-10-13T03:12:14",
+  "hash": "0b18996392822d5343f4573a91ef1dad7089d7a2ede0c0b67619947bf0b340c6",
+  "audited_at": "2026-10-13T13:51:44",
   "files": [
-    ".claude/scripts/note/catalog/cover-designs.ts",
-    ".claude/scripts/note/catalog/reference-cover-copy.ts",
-    ".claude/scripts/note/catalog/reference-cover-figures.ts",
-    ".claude/scripts/note/editor-helpers.sh",
-    ".claude/scripts/note/publish-new-note.sh"
+    ".claude/scripts/note/editor-helpers.sh"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-13T12:14:16.051Z",
+  "updatedAt": "2026-10-14T22:02:17.462Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13115,7 +13115,7 @@
     },
     {
       "articleKey": "b-ref-dev-a02",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0f9c73ec2188",
       "revisions": [
         {
           "sha256": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
@@ -13164,7 +13164,7 @@
     },
     {
       "articleKey": "b-ref-dev-a03",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/na31526b66ac4",
       "revisions": [
         {
           "sha256": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
@@ -13213,7 +13213,7 @@
     },
     {
       "articleKey": "b-ref-dev-a04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbd056e7589d0",
       "revisions": [
         {
           "sha256": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
@@ -13262,7 +13262,7 @@
     },
     {
       "articleKey": "b-ref-dev-a05",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n461e0a05a314",
       "revisions": [
         {
           "sha256": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
@@ -13311,7 +13311,7 @@
     },
     {
       "articleKey": "b-ref-dev-a06",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nc4fb51684d49",
       "revisions": [
         {
           "sha256": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
@@ -13360,7 +13360,7 @@
     },
     {
       "articleKey": "b-ref-dev-a07",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb43e69201497",
       "revisions": [
         {
           "sha256": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
@@ -13409,7 +13409,7 @@
     },
     {
       "articleKey": "b-ref-dev-a08",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n2a1a5b93cacb",
       "revisions": [
         {
           "sha256": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
@@ -13458,7 +13458,7 @@
     },
     {
       "articleKey": "b-ref-dev-a09",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n56515e90282e",
       "revisions": [
         {
           "sha256": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
@@ -13507,7 +13507,7 @@
     },
     {
       "articleKey": "b-ref-dev-a11",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbc4bbe4ef1d8",
       "revisions": [
         {
           "sha256": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
@@ -13556,7 +13556,7 @@
     },
     {
       "articleKey": "b-ref-dev-a13",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n5c3b0dfd46cc",
       "revisions": [
         {
           "sha256": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
@@ -13605,7 +13605,7 @@
     },
     {
       "articleKey": "b-ref-dev-a15",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n4c5a416b43be",
       "revisions": [
         {
           "sha256": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
@@ -13654,7 +13654,7 @@
     },
     {
       "articleKey": "b-ref-dev-a17",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb24b2deeb25d",
       "revisions": [
         {
           "sha256": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
@@ -13703,7 +13703,7 @@
     },
     {
       "articleKey": "b-ref-dev-a19",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n2d9fab7fc80d",
       "revisions": [
         {
           "sha256": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
@@ -13752,7 +13752,7 @@
     },
     {
       "articleKey": "b-ref-dev-a21",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/na34537eb2b48",
       "revisions": [
         {
           "sha256": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
@@ -13801,7 +13801,7 @@
     },
     {
       "articleKey": "b-ref-dev-a26",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ncc1cf723e8a4",
       "revisions": [
         {
           "sha256": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
@@ -13850,7 +13850,7 @@
     },
     {
       "articleKey": "b-ref-dev-a31",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n816c665cb671",
       "revisions": [
         {
           "sha256": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
@@ -13899,7 +13899,7 @@
     },
     {
       "articleKey": "b-ref-dev-a32",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n48f662d1b14e",
       "revisions": [
         {
           "sha256": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
@@ -13948,7 +13948,7 @@
     },
     {
       "articleKey": "b-ref-dev-a36",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nc406259524da",
       "revisions": [
         {
           "sha256": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
@@ -13997,7 +13997,7 @@
     },
     {
       "articleKey": "b-ref-dev-a40",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0afe52099b5e",
       "revisions": [
         {
           "sha256": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
@@ -14046,7 +14046,7 @@
     },
     {
       "articleKey": "b-ref-dev-a42",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nda788ad0528b",
       "revisions": [
         {
           "sha256": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
@@ -14095,7 +14095,7 @@
     },
     {
       "articleKey": "b-ref-dev-a45",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nca8939a4a9b3",
       "revisions": [
         {
           "sha256": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
@@ -14144,7 +14144,7 @@
     },
     {
       "articleKey": "b-ref-dev-a49",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n4ad7022a4411",
       "revisions": [
         {
           "sha256": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
@@ -14193,7 +14193,7 @@
     },
     {
       "articleKey": "b-ref-dev-a51",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n5443898bbe1c",
       "revisions": [
         {
           "sha256": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
@@ -14242,7 +14242,7 @@
     },
     {
       "articleKey": "b-ref-gis-a33",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n835484ded3ef",
       "revisions": [
         {
           "sha256": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
@@ -14291,7 +14291,7 @@
     },
     {
       "articleKey": "b-ref-inc-a05",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbaf2ff8914a3",
       "revisions": [
         {
           "sha256": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
@@ -14340,7 +14340,7 @@
     },
     {
       "articleKey": "b-ref-inc-a06",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nede8ff7a9eaa",
       "revisions": [
         {
           "sha256": "dec13891e60a4b6b56274400afe034451742e3e797aadb8c5743ff003261b314",
@@ -14389,7 +14389,7 @@
     },
     {
       "articleKey": "b-ref-inc-a55",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ne243cd01a29a",
       "revisions": [
         {
           "sha256": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
@@ -14438,7 +14438,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a01-01",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ncba36d395bd7",
       "revisions": [
         {
           "sha256": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
@@ -14487,7 +14487,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a01-04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n324be1cc99a6",
       "revisions": [
         {
           "sha256": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
@@ -14536,7 +14536,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a01-05",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ncfb6a1c35121",
       "revisions": [
         {
           "sha256": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
@@ -14585,7 +14585,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-02",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n6be231a3233f",
       "revisions": [
         {
           "sha256": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
@@ -14634,7 +14634,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb2e4f5f34f22",
       "revisions": [
         {
           "sha256": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
@@ -14683,7 +14683,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-05",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nd8b1ce95b997",
       "revisions": [
         {
           "sha256": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
@@ -14732,7 +14732,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-06",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0f84e2661d89",
       "revisions": [
         {
           "sha256": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
@@ -14781,7 +14781,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-07",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n5c964549ec30",
       "revisions": [
         {
           "sha256": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
@@ -14830,7 +14830,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-08",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nde5f16a081f9",
       "revisions": [
         {
           "sha256": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
@@ -14879,7 +14879,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a02-09",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ne8cba9b99137",
       "revisions": [
         {
           "sha256": "385abb7858bed74436f6fbf387f8077c79faba6ea8ecb3a484971179838c83ea",
@@ -14928,7 +14928,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a03-01",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n037f42ea22fc",
       "revisions": [
         {
           "sha256": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
@@ -14977,7 +14977,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a03-04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb729bb5e7612",
       "revisions": [
         {
           "sha256": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
@@ -15026,7 +15026,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a04-01",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nc421986688b2",
       "revisions": [
         {
           "sha256": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
@@ -15075,7 +15075,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a04-02",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n6aae3232670d",
       "revisions": [
         {
           "sha256": "6c38a5e94201527ecc5fa9118ded86a383b33e5f7a6167fa95119389e49d96c3",
@@ -15124,7 +15124,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a04-03",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n7687e091941c",
       "revisions": [
         {
           "sha256": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
@@ -15173,7 +15173,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a04-04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n9777ed7f52b5",
       "revisions": [
         {
           "sha256": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
@@ -15222,7 +15222,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a05-04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n7cde5e1423f4",
       "revisions": [
         {
           "sha256": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
@@ -15271,7 +15271,7 @@
     },
     {
       "articleKey": "b-ref-kakei-a05-06",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n25b0a46485dc",
       "revisions": [
         {
           "sha256": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
@@ -15320,7 +15320,7 @@
     },
     {
       "articleKey": "b-ref-mh-a04",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n9358aa3d39f1",
       "revisions": [
         {
           "sha256": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
@@ -15369,7 +15369,7 @@
     },
     {
       "articleKey": "b-ref-mh-a07",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n13ec75728be3",
       "revisions": [
         {
           "sha256": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
@@ -15418,7 +15418,7 @@
     },
     {
       "articleKey": "b-ref-mh-a08",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n105ed996a3a3",
       "revisions": [
         {
           "sha256": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
@@ -15476,7 +15476,7 @@
     },
     {
       "articleKey": "b-ref-mh-a10",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n6004a486c658",
       "revisions": [
         {
           "sha256": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
@@ -15525,7 +15525,7 @@
     },
     {
       "articleKey": "b-ref-prc-a07",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ncd2deb997656",
       "revisions": [
         {
           "sha256": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
@@ -15574,7 +15574,7 @@
     },
     {
       "articleKey": "b-ref-prc-a09",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0eda98daf2dd",
       "revisions": [
         {
           "sha256": "3b206e3d8df2689407294362d16b1ea7cbe02a1638aa687ec55a4d0e63576faf",
@@ -15623,7 +15623,7 @@
     },
     {
       "articleKey": "b-ref-prc-a10",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n76d822ca3e90",
       "revisions": [
         {
           "sha256": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
@@ -15672,7 +15672,7 @@
     },
     {
       "articleKey": "b-ref-prc-a12",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n4503382d72b7",
       "revisions": [
         {
           "sha256": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
@@ -15721,7 +15721,7 @@
     },
     {
       "articleKey": "b-ref-prc-a13",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n1015730f50b2",
       "revisions": [
         {
           "sha256": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
@@ -15770,7 +15770,7 @@
     },
     {
       "articleKey": "b-ref-prc-a14",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n44a61a72fdf2",
       "revisions": [
         {
           "sha256": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
@@ -15819,7 +15819,7 @@
     },
     {
       "articleKey": "b-ref-prc-a15",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0ad6145d5163",
       "revisions": [
         {
           "sha256": "bd6276d088c7945fbf458ec26f750028d21eddbf81f55477fa57bac3e3895a71",
@@ -15868,7 +15868,7 @@
     },
     {
       "articleKey": "b-ref-prc-a16",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbe45f74f61ee",
       "revisions": [
         {
           "sha256": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
@@ -15917,7 +15917,7 @@
     },
     {
       "articleKey": "b-ref-prc-a17",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n30dc733b8419",
       "revisions": [
         {
           "sha256": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
@@ -15966,7 +15966,7 @@
     },
     {
       "articleKey": "b-ref-prc-a18",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nd0c7a5055e26",
       "revisions": [
         {
           "sha256": "b4d9bc86e7e3389c2d66cded856d07987f767fcdc79dfdd4ec1afb634303b8b8",
@@ -16015,7 +16015,7 @@
     },
     {
       "articleKey": "b-ref-prc-a19",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n43512fd5645e",
       "revisions": [
         {
           "sha256": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
@@ -16113,7 +16113,7 @@
     },
     {
       "articleKey": "b-ref-prc-a21",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0442a497809e",
       "revisions": [
         {
           "sha256": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
@@ -16162,7 +16162,7 @@
     },
     {
       "articleKey": "b-ref-prc-a22",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n30a08f7ac737",
       "revisions": [
         {
           "sha256": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
@@ -16260,7 +16260,7 @@
     },
     {
       "articleKey": "b-ref-prc-a25",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n7c157e32eb9a",
       "revisions": [
         {
           "sha256": "7605508a997ecb4a683c299e58f2366f7b5214ebfdd651b24d245f12571da6c1",
@@ -16309,7 +16309,7 @@
     },
     {
       "articleKey": "b-ref-prc-a26",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n80869eb8b7e8",
       "revisions": [
         {
           "sha256": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
@@ -16358,7 +16358,7 @@
     },
     {
       "articleKey": "b-ref-prc-a27",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nd6efea2ea009",
       "revisions": [
         {
           "sha256": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
@@ -16407,7 +16407,7 @@
     },
     {
       "articleKey": "b-ref-prc-a28",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbb5ce1b6aa23",
       "revisions": [
         {
           "sha256": "560f6e3f1229cbc44ca56ddd70ea2f98ccff1cd521ff148161c800af7e9864d9",
@@ -16456,7 +16456,7 @@
     },
     {
       "articleKey": "b-ref-prc-a29",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n4f7ddc35ce44",
       "revisions": [
         {
           "sha256": "264733d54612f740816c7b985604dc5233bc675ac3c0efe6cad8bca38f74e751",
@@ -16505,7 +16505,7 @@
     },
     {
       "articleKey": "b-ref-prc-a30",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n3f73f9d8a5c7",
       "revisions": [
         {
           "sha256": "b7c738a3333fa1dcdf2d85baec5374170735562956d718d584d2088b8b0b3ece",
@@ -16554,7 +16554,7 @@
     },
     {
       "articleKey": "b-ref-prc-a31",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n165c2696ddaf",
       "revisions": [
         {
           "sha256": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
@@ -16603,7 +16603,7 @@
     },
     {
       "articleKey": "b-ref-prc-a32",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n711b217540df",
       "revisions": [
         {
           "sha256": "7b57f4c306726cd65889a03aa0077edc22c3cc284c3cdfe416f8c6ce19cf0ea3",
@@ -16706,7 +16706,7 @@
     },
     {
       "articleKey": "b-ref-prc-a34",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n019faad2cc71",
       "revisions": [
         {
           "sha256": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
@@ -16755,7 +16755,7 @@
     },
     {
       "articleKey": "b-ref-prc-a35",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nb25821eb9ef6",
       "revisions": [
         {
           "sha256": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
@@ -16804,7 +16804,7 @@
     },
     {
       "articleKey": "b-ref-prc-a36",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0edd260cf676",
       "revisions": [
         {
           "sha256": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
@@ -16853,7 +16853,7 @@
     },
     {
       "articleKey": "b-ref-prc-a37",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nf9c8f3c2d17e",
       "revisions": [
         {
           "sha256": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
@@ -16902,7 +16902,7 @@
     },
     {
       "articleKey": "b-ref-prc-a38",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n88b905cc0ae7",
       "revisions": [
         {
           "sha256": "99a58d24a251bd79e3c05a31a3732c7d5bca5108e6f867a3f5ac4eecf4690432",
@@ -16951,7 +16951,7 @@
     },
     {
       "articleKey": "b-ref-prc-a39",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n7813c753c4c8",
       "revisions": [
         {
           "sha256": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
@@ -17000,7 +17000,7 @@
     },
     {
       "articleKey": "b-ref-prc-a40",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/na899f4f02172",
       "revisions": [
         {
           "sha256": "da1b70aca6d64c05381e7083910e210da2792823741484e58f6ae7cd3a1052f7",
@@ -17049,7 +17049,7 @@
     },
     {
       "articleKey": "b-ref-prc-a41",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n9c53c03f6b32",
       "revisions": [
         {
           "sha256": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
@@ -17098,7 +17098,7 @@
     },
     {
       "articleKey": "b-ref-prc-a42",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n9fea483acaf5",
       "revisions": [
         {
           "sha256": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
@@ -17147,7 +17147,7 @@
     },
     {
       "articleKey": "b-ref-prc-a43",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n245947d339bc",
       "revisions": [
         {
           "sha256": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
@@ -17196,7 +17196,7 @@
     },
     {
       "articleKey": "b-ref-prc-a44",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n3f24f68f03fc",
       "revisions": [
         {
           "sha256": "d55bc594838901a6d9e9d50e9098125226c6e0a0041174758a564ff2f3405e1f",
@@ -17245,7 +17245,7 @@
     },
     {
       "articleKey": "b-ref-prc-a45",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nadef03ea09ad",
       "revisions": [
         {
           "sha256": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
@@ -17294,7 +17294,7 @@
     },
     {
       "articleKey": "b-ref-prc-a47",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n23d6898b0f15",
       "revisions": [
         {
           "sha256": "d90b2d53870cf15376694c0718290997525a48ca229993d320a40d46e6ae5dde",
@@ -17343,7 +17343,7 @@
     },
     {
       "articleKey": "b-ref-prc-a48",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ndc76fe819d05",
       "revisions": [
         {
           "sha256": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
@@ -17392,7 +17392,7 @@
     },
     {
       "articleKey": "b-ref-prc-a49",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbbd5bd83d5fd",
       "revisions": [
         {
           "sha256": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
@@ -17441,7 +17441,7 @@
     },
     {
       "articleKey": "b-ref-prc-a50",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nd94fc821b273",
       "revisions": [
         {
           "sha256": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
@@ -17490,7 +17490,7 @@
     },
     {
       "articleKey": "b-ref-prc-a51",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/na36328b979fc",
       "revisions": [
         {
           "sha256": "aef69bc7acafef28907707bc3f8fafc90dffddc55794ac0d75633d54e08115da",
@@ -17539,7 +17539,7 @@
     },
     {
       "articleKey": "b-ref-prc-a52",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nd0be61517d63",
       "revisions": [
         {
           "sha256": "7a69a8c1cc00504d378724acf6c68231d1acc5a2e3735d134bfb36cfce9ae2da",
