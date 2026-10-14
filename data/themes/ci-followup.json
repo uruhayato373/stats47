@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-12",
+  "observedAt": "2026-10-14",
   "status": "fail",
   "themeCount": 55,
   "runtime": {
@@ -3194,10 +3194,90 @@
         }
       },
       "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-aging-society",
+      "themeKey": "aging-society",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-fishery-marine",
+      "themeKey": "fishery-marine",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-local-economy",
+      "themeKey": "local-economy",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-healthcare",
+      "themeKey": "healthcare",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-labor-mobility",
+      "themeKey": "labor-mobility",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-labor-wages",
+      "themeKey": "labor-wages",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-living-housing",
+      "themeKey": "living-housing",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-population-dynamics",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d7",
+      "due": "2026-10-14",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
     }
   ],
   "alertBody": "# テーマ継続確認\n- quality-process:1\n- runtime-incomplete\n\n結果: `data/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "6175b70295f3a1d767fe1033d374444a44b344ab2f366befd7ac2eaf44d7e3c9",
+  "reviewInputSha256": "08034b4d82cdda9515809fb3f2cb9a193547840f96fe5aeaa0d0d979ca5af6c4",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38204523729"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38507968112"
 }
