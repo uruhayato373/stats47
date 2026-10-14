@@ -30159,9 +30159,9 @@
     },
     {
       "id": 1015,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.134Z",
-      "updated_at": "2026-10-12T01:18:59.412Z",
+      "updated_at": "2026-10-14T19:01:59.764Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30188,13 +30188,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/drinking-out-consumption-expenditure/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DedNO7jgW_Y",
+      "posted_at": "2026-10-14T01:30:08.000Z"
     },
     {
       "id": 1016,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.139Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-14T19:01:59.792Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30221,7 +30223,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/21000/x/stills/21000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/Ded7CzdiXZx",
+      "posted_at": "2026-10-14T08:10:26.000Z"
     },
     {
       "id": 1017,
