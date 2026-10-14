@@ -9198,15 +9198,23 @@
       "title": "金融の正誤問題の正答率は島根県58.83％、沖縄県51.03％ ── 47都道府県で見る金融知識の差",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a09",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "cd0dea54b8b4829e4edb0c775d25d50e66e6bd255364eb327b00341f200245cf",
+          "files": 5,
+          "bytes": 411298,
+          "savedAt": "2026-10-14T22:33:06.592Z"
+        },
+        "verifiedAt": "2026-10-14T22:33:06.592Z"
       },
       "stats47Targets": [
         "/ranking/financial-literacy-correct-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n194f4e88b9b9",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-mh-a10",

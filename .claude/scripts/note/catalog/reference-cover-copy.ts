@@ -48,6 +48,7 @@ export const REFERENCE_COVER_HEADLINES: Record<string, string> = {
   'b-ref-mh-a04': '所得の高い県は\n長生きか',
   'b-ref-mh-a07': '投資に回す県は\nどこか',
   'b-ref-mh-a08': '貯蓄の置き方\n預貯金か保険か',
+  'b-ref-mh-a09': '金融知識の正答率\n島根と沖縄',
   'b-ref-mh-a10': '長寿の県は\n塩を控えている？',
   'b-ref-prc-a07': '中学の運動部\n県で違う人気',
   'b-ref-prc-a09': '高校ラグビー部\n山梨と徳島',

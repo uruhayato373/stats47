@@ -1912,6 +1912,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "b-ref-mh-a09": {
+      "vertical": "stats47-note",
+      "title": "金融の正誤問題の正答率は島根県58.83％、沖縄県51.03％ ── 47都道府県で見る金融知識の差",
+      "url": "https://note.com/stats47/n/n194f4e88b9b9",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/b-ref-mh-a09",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-ref-mh-a10": {
       "vertical": "stats47-note",
       "title": "長寿の県が塩を控えているとは限らない ── 平均寿命と食塩・野菜の摂取量を47都道府県で比べる",

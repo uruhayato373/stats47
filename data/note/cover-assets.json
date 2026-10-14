@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-14T22:23:19.808Z",
+  "updatedAt": "2026-10-14T22:33:08.594Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -15467,10 +15467,50 @@
     },
     {
       "articleKey": "b-ref-mh-a09",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "noteUrl": "https://note.com/stats47/n/n194f4e88b9b9",
+      "revisions": [
+        {
+          "sha256": "fc4be288f216db28dd9abfa3e830ecc8b1fd84fe3109188e1747c2a9904f73b7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a09/revisions/fc4be288f216db28dd9abfa3e830ecc8b1fd84fe3109188e1747c2a9904f73b7.png"
+          },
+          "bytes": 51928,
+          "id": "fc4be288f216db28dd9abfa3e830ecc8b1fd84fe3109188e1747c2a9904f73b7",
+          "kind": "candidate",
+          "version": "ref-2026-10-13",
+          "createdAt": "2026-10-14T22:28:09.998Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "60ba79a914caef5ce834c90c431ed3ab9d1e1a70bad48c30a5c2b7d428b44417"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-14T22:28:11.452Z"
+          },
+          "provenance": {
+            "renderer": "figure-note-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "60ba79a914caef5ce834c90c431ed3ab9d1e1a70bad48c30a5c2b7d428b44417",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-ref-mh-a09/inputs/60ba79a914caef5ce834c90c431ed3ab9d1e1a70bad48c30a5c2b7d428b44417.json"
+              },
+              "bytes": 1323
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "fc4be288f216db28dd9abfa3e830ecc8b1fd84fe3109188e1747c2a9904f73b7",
+      "approvedRevisionId": "fc4be288f216db28dd9abfa3e830ecc8b1fd84fe3109188e1747c2a9904f73b7",
       "published": null,
       "missingVersions": []
     },

@@ -858,6 +858,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "money-health-ranking-unknown-a09",
+      "channel": "note",
+      "status": "done",
+      "target": "note:b-ref-mh-a09",
+      "decidedAt": "2026-10-14",
+      "decidedBy": "note-manager"
+    },
+    {
       "analysis": "money-health-ranking-unknown-a10",
       "channel": "note",
       "status": "planned",

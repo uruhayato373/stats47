@@ -51,6 +51,7 @@ export const REFERENCE_COVER_FIGURES: Record<string, { image: string; caption: s
   "b-ref-mh-a04": { image: "images/annual-income-per-household.png", caption: "記事の図: 年間収入（1世帯当たり）（2019年）" },
   "b-ref-mh-a07": { image: "images/current-securities-balance-ratio-multi-person-households.png", caption: "記事の図: 有価証券現在高割合（2019年）" },
   "b-ref-mh-a08": { image: "images/annual-income-per-household.png", caption: "記事の図: 年間収入（1世帯当たり）（2019年）" },
+  "b-ref-mh-a09": { image: "images/financial-literacy-correct-rate.png", caption: "記事の図: 金融知識の正誤問題の正答率（2022年）" },
   "b-ref-mh-a10": { image: "images/life-expectancy-0-male.png", caption: "記事の図: 平均余命（男性 0歳時点（平均寿命））（2020年）" },
   "b-ref-prc-a07": { image: "images/junior-high-club-per100-soccer.png", caption: "記事の図: 中学サッカー部の部員数（2025年）" },
   "b-ref-prc-a09": { image: "images/high-school-club-per100-rugby-male.png", caption: "記事の図: 高校男子100人あたりラグビー部員数（2025年）" },
