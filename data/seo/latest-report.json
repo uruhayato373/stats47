@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "period": {
-    "periodStart": "2026-10-04",
-    "periodEnd": "2026-10-10",
+    "periodStart": "2026-10-05",
+    "periodEnd": "2026-10-11",
     "windowDays": 7
   },
-  "inputHash": "3cfc0192a5623cf9fd2b2c9f2dd69110b4e56bc4cee94cd4b4c30276b4fb8a0b",
+  "inputHash": "d342f85246f85ce813015a5281ece57c51e376f919b9005de3c5893f5cdc0982",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
@@ -38,11 +38,11 @@
     {
       "keyword": "都道府県",
       "targetPath": "/",
-      "before": 59,
+      "before": 58,
       "after": 9.375,
-      "beforeImpressions": 2,
+      "beforeImpressions": 1,
       "impressions": 16,
-      "change": 49.625
+      "change": 48.625
     },
     {
       "keyword": "日本 に 原発は いくつ ある",
@@ -59,7 +59,7 @@
       "before": 50,
       "after": 10,
       "beforeImpressions": 1,
-      "impressions": 1,
+      "impressions": 2,
       "change": 40
     },
     {
@@ -81,15 +81,6 @@
       "change": -30
     },
     {
-      "keyword": "学力全国ランキング",
-      "targetPath": "/blog/academic-achievement-test-prefecture-ranking",
-      "before": 2,
-      "after": 30,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -28
-    },
-    {
       "keyword": "個人事業主 廃業率",
       "targetPath": "/themes/business-demography",
       "before": 46,
@@ -97,6 +88,15 @@
       "beforeImpressions": 1,
       "impressions": 2,
       "change": 27.5
+    },
+    {
+      "keyword": "労働災害 ランキング",
+      "targetPath": "/blog/workplace-accident-regional-map",
+      "before": 1,
+      "after": 28,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -27
     }
   ],
   "verdicts": [
