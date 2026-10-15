@@ -8178,7 +8178,35 @@
         "d28": "2026-11-05",
         "d56": "2026-12-03"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-15",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 17,
+            "missingKeyList": [
+              "total-overnight-guests",
+              "room-utilization-rate",
+              "total-overnight-guests-foreign",
+              "actual-overnight-guests",
+              "travel-participation-rate-domestic-tourism",
+              "travel-participation-rate-overseas",
+              "travel-participation-rate-overnight",
+              "travel-participation-rate-day-trip",
+              "air-passenger-transport",
+              "number-of-simple-lodging-facilities"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-tourism (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#tourism/metrics",
@@ -8224,7 +8252,35 @@
         "d28": "2026-11-05",
         "d56": "2026-12-03"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-15",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 14,
+            "missingKeyList": [
+              "consumer-price-difference-index-overall",
+              "consumer-price-difference-index-overall-excl-rent",
+              "consumer-price-difference-index-food",
+              "consumer-price-difference-index-housing",
+              "consumer-price-difference-index-utilities",
+              "consumer-price-difference-index-education",
+              "consumer-price-difference-index-culture-recreation",
+              "consumer-price-difference-index-transport-communication",
+              "consumer-price-difference-index-healthcare",
+              "consumer-price-difference-index-clothing-footwear"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-consumer-prices (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#consumer-prices/metrics",

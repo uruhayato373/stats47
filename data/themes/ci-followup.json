@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-14",
+  "observedAt": "2026-10-15",
   "status": "fail",
   "themeCount": 55,
   "runtime": {
@@ -3274,10 +3274,30 @@
       "reasons": [],
       "values": {},
       "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261008-tourism",
+      "themeKey": "tourism",
+      "checkpoint": "d7",
+      "due": "2026-10-15",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261008-consumer-prices",
+      "themeKey": "consumer-prices",
+      "checkpoint": "d7",
+      "due": "2026-10-15",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
     }
   ],
   "alertBody": "# テーマ継続確認\n- quality-process:1\n- runtime-incomplete\n\n結果: `data/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "08034b4d82cdda9515809fb3f2cb9a193547840f96fe5aeaa0d0d979ca5af6c4",
+  "reviewInputSha256": "0272bd67a5d9864340c8f99a1ef0184043210f39de54518e2d61ad5d11e8bf0c",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38507968112"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38676396964"
 }
