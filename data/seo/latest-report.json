@@ -1,30 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "period": {
-    "periodStart": "2026-10-05",
-    "periodEnd": "2026-10-11",
+    "periodStart": "2026-10-06",
+    "periodEnd": "2026-10-12",
     "windowDays": 7
   },
-  "inputHash": "d342f85246f85ce813015a5281ece57c51e376f919b9005de3c5893f5cdc0982",
+  "inputHash": "a6a2bef6102a578281ba4d87e8ecd8354b01e19d7b31eb3bd616e10cc9cc76d7",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
       "before": 73,
-      "after": 7,
+      "after": 3.3333333333333335,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 66
-    },
-    {
-      "keyword": "日照時間 ランキング",
-      "targetPath": "/blog/sunshine-pacific-vs-nihonkai",
-      "before": 70,
-      "after": 12,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 58
+      "impressions": 6,
+      "change": 69.66666666666667
     },
     {
       "keyword": "うどん消費量ランキング",
@@ -36,13 +27,13 @@
       "change": 57
     },
     {
-      "keyword": "都道府県",
-      "targetPath": "/",
-      "before": 58,
-      "after": 9.375,
+      "keyword": "食料自給率 日本 ランキング",
+      "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
+      "before": 48,
+      "after": 3,
       "beforeImpressions": 1,
-      "impressions": 16,
-      "change": 48.625
+      "impressions": 1,
+      "change": 45
     },
     {
       "keyword": "日本 に 原発は いくつ ある",
@@ -63,6 +54,15 @@
       "change": 40
     },
     {
+      "keyword": "日本 食料 自給 率 ランキング",
+      "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
+      "before": 43,
+      "after": 3,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 40
+    },
+    {
       "keyword": "水道統計",
       "targetPath": "/survey/waterworks-statistics",
       "before": 37,
@@ -70,6 +70,15 @@
       "beforeImpressions": 1,
       "impressions": 3,
       "change": 32
+    },
+    {
+      "keyword": "都道府県",
+      "targetPath": "/blog/fishery-catch-aquaculture-shift",
+      "before": 60,
+      "after": 30,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 30
     },
     {
       "keyword": "長野 物価",
@@ -81,22 +90,13 @@
       "change": -30
     },
     {
-      "keyword": "個人事業主 廃業率",
-      "targetPath": "/themes/business-demography",
-      "before": 46,
-      "after": 18.5,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 27.5
-    },
-    {
-      "keyword": "労働災害 ランキング",
-      "targetPath": "/blog/workplace-accident-regional-map",
-      "before": 1,
-      "after": 28,
-      "beforeImpressions": 2,
+      "keyword": "日照時間 日本一",
+      "targetPath": "/ranking/annual-sunshine-duration",
+      "before": 7.285714285714286,
+      "after": 37,
+      "beforeImpressions": 7,
       "impressions": 1,
-      "change": -27
+      "change": -29.714285714285715
     }
   ],
   "verdicts": [
