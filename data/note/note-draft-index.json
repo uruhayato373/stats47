@@ -70,6 +70,16 @@
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
       "status": "draft"
     },
+    "a-new-graduate-starting-salary-university-female": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-new-graduate-starting-salary-university-female",
+      "status": "draft"
+    },
+    "a-new-graduate-starting-salary-university-male": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-new-graduate-starting-salary-university-male",
+      "status": "draft"
+    },
     "a-number-of-hotel-rooms": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/a-number-of-hotel-rooms",

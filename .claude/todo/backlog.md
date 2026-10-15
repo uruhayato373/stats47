@@ -290,6 +290,7 @@ updated: 2026-10-06
 - **事象 (2026-10-15)**: 記事台帳の下書き `A-laborwage-*` 5 本は 2026-05-16 の雛形で、ランキング表の順位・県名・数値が「実データを入れる」という空欄 (各 10 か所) のまま、本文にデータで確かめていない説明がある。公開できない。
 - **済み**: 有効求人倍率は `/post-note-ranking` で `a-active-job-opening-ratio` として作り直し (2022 年・1 位福井)、公開した (https://note.com/stats47/n/n73c710f239ef)。旧雛形 `A-laborwage-job-opening-ratio-prefecture` は記事台帳とカバー台帳から外した (公開 R2 `note/stats47-note/A-laborwage-job-opening-ratio-prefecture/` の本文は残っている。削除は破壊的操作なのでオーナー判断)。
 - **残り 4 本**: 平均通勤時間・有給休暇取得率・産業別平均賃金は対応するランキングが無い。大卒初任給は `new-graduate-starting-salary-university-{male,female}` があるが 1 位が東京都・最新年 2019 で、生成器の `PREDICTABLE_LEADER` が止めた。
+- **2026-10-15 追記 (大卒初任給)**: オーナーの公開指示で `--allow-tokyo-leader` を付けて男女 2 本 (`a-new-graduate-starting-salary-university-{male,female}`・2019 年・1 位東京) を生成し、記事台帳・ハッシュタグ・公開 R2 まで済ませた。**カバー未作成のため未公開**。同日取り込んだ別セッションの変更でカバーは `note:cover-production` + Codex imagegen に一本化され (旧 `generate-cover-refresh.ts` は停止)、このセッションでは codex MCP が切断されていて生成できない。Codex でカバーを作って採用したら公開する。先に公開した `a-active-job-opening-ratio` のカバーは旧テンプレートで作ったので、新方針での作り直し対象になりうる。
 - **次**: ① 4 本を台帳から外す (見送り) か、指標を足してから作り直すかをオーナーが決める ② 外すなら記事台帳・カバー台帳から同時に外し、`generate-note-catalog.ts --apply` と `note:assets seed` を通す。
 - **完了条件**: `A-laborwage-*` の下書きが記事台帳に 0 件。
 

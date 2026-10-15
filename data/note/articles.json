@@ -11344,6 +11344,52 @@
       ],
       "noteUrl": "https://note.com/stats47/n/n73c710f239ef",
       "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-new-graduate-starting-salary-university-male",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2019年版・大卒・男性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-male",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a887c53df926421e5bd22ab8ab4cb1bd54285dab31ab6c61dcd7adafc074e38b",
+          "files": 9,
+          "bytes": 369046,
+          "savedAt": "2026-10-15T11:16:21.119Z"
+        },
+        "verifiedAt": "2026-10-15T11:16:21.119Z"
+      },
+      "stats47Targets": [
+        "/ranking/new-graduate-starting-salary-university-male"
+      ]
+    },
+    {
+      "key": "a-new-graduate-starting-salary-university-female",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2019年版・大卒・女性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-female",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "314b74f5164d1093aaa4909a55c6df87369af30995827cca65d084af1a796a1e",
+          "files": 9,
+          "bytes": 370773,
+          "savedAt": "2026-10-15T11:16:23.266Z"
+        },
+        "verifiedAt": "2026-10-15T11:16:23.266Z"
+      },
+      "stats47Targets": [
+        "/ranking/new-graduate-starting-salary-university-female"
+      ]
     }
   ]
 }

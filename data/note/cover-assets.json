@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T11:00:45.952Z",
+  "updatedAt": "2026-10-15T11:16:25.761Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -14085,6 +14085,36 @@
       ],
       "production": {
         "id": "NCI-00114",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": null
+      }
+    },
+    {
+      "articleKey": "a-new-graduate-starting-salary-university-female",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00497",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": null
+      }
+    },
+    {
+      "articleKey": "a-new-graduate-starting-salary-university-male",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00498",
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": null
