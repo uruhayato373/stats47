@@ -928,6 +928,50 @@
             "windowDays": 7
           },
           "snapshotHash": "93f57e2fe6b43c8873417672fde1e8306b96b8d289a971ddd9ddbdcf0d6b87d8"
+        },
+        {
+          "date": "2026-10-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-04",
+            "periodEnd": "2026-10-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "8a0a1db3b82f092c9a9b28fa465915d4c59051bbabfd6a23675625344a0e05d7"
+        },
+        {
+          "date": "2026-10-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-04",
+            "periodEnd": "2026-10-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "3cfc0192a5623cf9fd2b2c9f2dd69110b4e56bc4cee94cd4b4c30276b4fb8a0b"
+        },
+        {
+          "date": "2026-10-14",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-05",
+            "periodEnd": "2026-10-11",
+            "windowDays": 7
+          },
+          "snapshotHash": "d342f85246f85ce813015a5281ece57c51e376f919b9005de3c5893f5cdc0982"
+        },
+        {
+          "date": "2026-10-15",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-06",
+            "periodEnd": "2026-10-12",
+            "windowDays": 7
+          },
+          "snapshotHash": "a6a2bef6102a578281ba4d87e8ecd8354b01e19d7b31eb3bd616e10cc9cc76d7"
         }
       ]
     }

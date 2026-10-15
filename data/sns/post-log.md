@@ -3,10 +3,17 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**704 件** (最終更新: 2026-10-12)
+**711 件** (最終更新: 2026-10-14)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-14 | 📸 Instagram | correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio | 【データの相関】喫茶代消費支出額 × 最終学歴が大学・大学院卒の者の割合  喫茶店にお金を使う県ほど、大卒が多い？  縦… | [🔗](https://www.instagram.com/p/DeeqCv1lvuF/) |
+| 2026-10-14 | 📸 Instagram | ranking-quiz-reel/ramen-dining-consumption-expenditure | 【都道府県クイズ】ラーメンの外食にいちばんお金を使う県は？  A 新潟県 B 山形県 C 宮城県  答えは動画の最後に�… | [🔗](https://www.instagram.com/reel/Ded81JJipH-/) |
+| 2026-10-14 | 🧵 Threads | area/area-21000-profile | あなたの知る岐阜は、データでも同じ姿ですか？ イチイやすずらん大根から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/Ded7CzdiXZx) |
+| 2026-10-14 | 🧵 Threads | ranking/drinking-out-consumption-expenditure | 外で飲むお酒にいちばんお金を使う県は熊本。  飲酒代は1世帯あたり3万8,205円。2位東京3万4,911円、3位埼玉3… | [🔗](https://www.threads.com/@stats47jp/post/DedNO7jgW_Y) |
+| 2026-10-13 | 📸 Instagram | area-carousel/27000 | 【都道府県データ】大阪府、全国で何位？  全国トップクラス: 製造業事業所数 1位（18481事業所・2024年） 延べ… | [🔗](https://www.instagram.com/p/DebjveJFhhC/) |
+| 2026-10-13 | 🧵 Threads | area/area-20000-profile | 長野の「らしさ」をデータでたどる。 県花リンドウ、シナノリップと信州ひすいそば、統計ランキングを1ページに整理しました。… | [🔗](https://www.threads.com/@stats47jp/post/DebZt_UCsoU) |
+| 2026-10-13 | 🧵 Threads | ranking/nurse-annual-income | 564万円・546万円・541万円。  看護師の平均年収、上位3都県は東京・奈良・兵庫。 最も低い鹿児島は396万円で、… | [🔗](https://www.threads.com/@stats47jp/post/DeaquZ-Chrz) |
 | 2026-10-12 | 📸 Instagram | ranking-quiz/whitebait-consumption-quantity | 【都道府県クイズ】しらす干しをいちばん多く買う県は？  A 静岡県 B 和歌山県 C 京都府  ヒントは2枚目、答えは3… | [🔗](https://www.instagram.com/p/DeY_9shld4R/) |
 | 2026-10-12 | 🧵 Threads | area/area-19000-profile | 山梨を1位・47位だけで語らない。 県木はカエデ、県鳥はウグイス。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeYyoPij0s0) |
 | 2026-10-12 | 🧵 Threads | ranking/solar-panel-housing-rate | 太陽光パネルのある家が最も多い県は？  1位佐賀11.2％、2位長野10％、3位山梨9.7％。 最も低い東京は1.9％で… | [🔗](https://www.threads.com/@stats47jp/post/DeYE3fBD7F9) |

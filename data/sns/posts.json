@@ -30089,9 +30089,9 @@
     },
     {
       "id": 1013,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.121Z",
-      "updated_at": "2026-10-12T01:18:57.407Z",
+      "updated_at": "2026-10-13T20:27:40.470Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30118,13 +30118,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/nurse-annual-income/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeaquZ-Chrz",
+      "posted_at": "2026-10-13T01:50:07.000Z"
     },
     {
       "id": 1014,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.128Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-13T20:27:40.499Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30151,13 +30153,15 @@
           "height": 630,
           "source": ".local/r2/sns/area/20000/x/stills/20000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DebZt_UCsoU",
+      "posted_at": "2026-10-13T08:40:45.000Z"
     },
     {
       "id": 1015,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.134Z",
-      "updated_at": "2026-10-12T01:18:59.412Z",
+      "updated_at": "2026-10-14T19:01:59.764Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30184,13 +30188,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/drinking-out-consumption-expenditure/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DedNO7jgW_Y",
+      "posted_at": "2026-10-14T01:30:08.000Z"
     },
     {
       "id": 1016,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.139Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-14T19:01:59.792Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30217,7 +30223,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/21000/x/stills/21000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/Ded7CzdiXZx",
+      "posted_at": "2026-10-14T08:10:26.000Z"
     },
     {
       "id": 1017,
@@ -32918,7 +32926,7 @@
     },
     {
       "id": 1087,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32927,17 +32935,20 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.389Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-13T10:08:32.152Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
       "content_key": "27000",
       "caption": "【都道府県データ】大阪府、全国で何位？\n\n全国トップクラス:\n製造業事業所数 1位（18481事業所・2024年）\n延べ宿泊者数 2位（50030170人泊・2024年）\n男性所定内給与額 3位（363千円・2022年）\n粗出生率 8位（6.31人口千対・2023年）\n\n全国では下位:\n交通・通信費割合 47位（10.7％・2024年）\n食料自給率（カロリーベース） 46位（1％・2021年）\n平均余命（男性 0歳時点・平均寿命） 41位（80.81年・2020年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n出典: 社会・人口統計体系（2024年）、賃金構造基本統計調査（2022年）、人口動態統計（2023年）、社会・人口統計体系（2021年）、人口動態統計（2020年）\n\n#都道府県データ #統計 #地方創生 #ランキング #都道府県あるある #暮らし #地域比較 #日本 #データで見る日本 #大阪府",
-      "scheduled_at": "2026-10-13T10:00:00.000Z"
+      "scheduled_at": "2026-10-13T10:00:00.000Z",
+      "posted_at": "2026-10-13T10:08:32.144Z",
+      "post_url": "https://www.instagram.com/p/DebjveJFhhC/",
+      "external_id": "18117551341769158"
     },
     {
       "id": 1088,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32946,17 +32957,20 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.642Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-14T08:26:33.127Z",
       "platform": "instagram",
       "post_type": "reel",
       "domain": "ranking-quiz-reel",
       "content_key": "ramen-dining-consumption-expenditure",
       "caption": "【都道府県クイズ】ラーメンの外食にいちばんお金を使う県は？\n\nA 新潟県\nB 山形県\nC 宮城県\n\n答えは動画の最後に👀\n予想をコメントで教えてください💬\n\n保存して、ラーメン好きの友だちに📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間支出（2024年））\n\n#都道府県クイズ #都道府県ランキング #ラーメン #外食 #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-14T03:00:00.000Z"
+      "scheduled_at": "2026-10-14T03:00:00.000Z",
+      "posted_at": "2026-10-14T08:26:33.114Z",
+      "post_url": "https://www.instagram.com/reel/Ded81JJipH-/",
+      "external_id": "18139097041626193"
     },
     {
       "id": 1089,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -32965,13 +32979,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.050Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-14T15:01:19.683Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio",
       "caption": "【データの相関】喫茶代消費支出額 × 最終学歴が大学・大学院卒の者の割合\n\n喫茶店にお金を使う県ほど、大卒が多い？\n\n縦軸: 最終学歴が大学・大学院卒の者の割合（％・2020年）出典: 社会・人口統計体系\n横軸: 喫茶代消費支出額（円・2024年）出典: 家計調査\n\n相関係数 r=0.83（人口の影響を除くと r=0.70）\n\n相関は因果関係を示しません。人口の影響を除くと r=0.70\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #economy #educationsports",
-      "scheduled_at": "2026-10-14T10:00:00.000Z"
+      "scheduled_at": "2026-10-14T10:00:00.000Z",
+      "posted_at": "2026-10-14T15:01:19.672Z",
+      "post_url": "https://www.instagram.com/p/DeeqCv1lvuF/",
+      "external_id": "18087617363288464"
     },
     {
       "id": 1090,

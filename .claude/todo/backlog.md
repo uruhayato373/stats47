@@ -284,6 +284,30 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、改善台帳の上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。
+- **実測**: renovate.json はあるが未稼働。2026-09-07 は `gh pr list --search "author:app/renovate"` = 0 件。2026-10-11 の再実測は `gh pr list --state all --limit 200` で作者または head ブランチに renovate を含む PR が 0 件、`gh api repos/uruhayato373/stats47/branches --paginate` の 2 ブランチにも renovate を含むものは無い。
+- **次 (オーナー)**: GitHub App のインストール。DEPS-MAJOR-SECURITY-01 は Dependabot security alerts で解消済みなので緊急度は低い。
+- **完了条件**: インストール後の最初の月曜 (renovate.json の schedule は月曜 6 時前) の翌日に、上の検証コマンドで 1 件以上。無ければオーナーへ再依頼する。
+
+### [PERF-WORKER-P99-01] Workers の CPU / wall p99 を支配する route / R2 binding をオーナーが Dashboard で特定する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。この施策はコードを変えない調査で、before/after の効果値が無い。
+- **実測 (baseline)**: Workers traces / GraphQL で CPU p99 1.48〜2.02 秒・wall p99 3.80〜4.61 秒。
+- **次 (オーナー)**: Cloudflare Dashboard の Workers Observability で route 別の内訳を見て、支配 route / binding を特定する (サンプル不足ならその旨)。
+- **完了条件**: 特定結果を performance-improvement の詳細ログへ書く。修正が要る場合は上の baseline を置き `[target:]` 付きの別行で improvements.md に起票する [kpi: site-health]。
+
+### [R2-STORAGE-01] doboku-note-archive (8.98GB) の保持方針を決め、R2 容量の無料枠 (10GB) 超過に対処する
+タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。保持方針が決まるまで想定効果値を置けない。
+- **実測**: `data/cloudflare/history.csv` の r2_storage_gb は 09-07 23.007 → 09-26 33.368 → 10-02 33.338 → 10-09 33.635 GB (直近 2 週は +0.27GB)。再現: `awk -F, '$1>="2026-09-26"{print $1,$13}' data/cloudflare/history.csv`。
+- **次 (オーナー)**: doboku-note-archive の保持方針 (許容か削減か) を決める。
+- **完了条件**: 削減なら削除量を根拠に `[target: -N GB]` と `[kpi: operating-cost]` 付きの別行で improvements.md に起票する。許容なら理由と見直し期日を cloudflare-cost-improvement の詳細ログに書く。
+
 ### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画から作った note の下書き 92 本を、意味のレビュー・R2 保存・公開まで進める
 タグ: [コンテンツ品質] [種類:制作] [実行:別環境] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
 
@@ -307,6 +331,14 @@ updated: 2026-10-06
   専用プロファイル `.local/playwright-note-profile` が note からログアウトしたため止めている (オーナーが `node .claude/scripts/note/login-note-profile.mjs` でログインしたら、
   Chrome を `--remote-debugging-port=9333` で起動し `NOTE_BU_CDP=http://127.0.0.1:9333 bash .claude/scripts/note/publish-new-note.sh <key> stats47-note --publish "<マガジン名>"` で公開)。
   1 回目の失敗で残った下書き `n706d8699fcd7` (同じ果物の記事) はオーナーが削除する。カバーは 1 本ずつ `prepare → generate-cover-refresh --local-review → 確認 → 登録 → review` で採用する。
+- **一括公開 (2026-10-13〜15、オーナー指示「90 本すべて一気に公開」)**: 89 本を公開し、記事台帳の `status`・`noteUrl`・`publishedAt` と展開記録 (note・済み 146 / 企画中 3) を更新した。
+  公開 API で無料・カバー・タグ 99 個・画像を抜き取りで確かめた。カバー 86 本は `figure-note-cover-v1` で生成し、縮小表示の確認と SHA 一致を経て採用した (`046fd9d76`)。
+  途中の停止と対処: 見出し画像の反映待ち (3 秒 → 最大 20 秒)・マガジン一覧の読み込み待ちとタグ 99 個で一覧が state に出ない件 (DOM から直接「追加」→「追加済」を確認) を `editor-helpers.sh` で直した。
+  新規画面が開かない一時失敗は 1 回だけやり直す。private R2 の wrangler セッション切れと Mac の再起動で 2 回止まり、残った下書きは題名・本文の文字数・画像枚数を原稿と照合してから仕上げて公開した (重複なし)。
+  **2026-10-15 追記**: オーナー指示で `b-ref-prc-a20` (https://note.com/stats47/n/n3cc132d3422d)・`b-ref-prc-a24` (https://note.com/stats47/n/nb1643889a8a4) を**マガジンなしで公開**した (91 本中 91 本公開。展開記録は済み 148 / 企画中 1 = mh-a09)。マガジン「情報通信」は browser-use で作成を 2 回試し、POST `/api/v1/my/magazines` は 201 だったが一覧にも記事の追加にも現れず未作成のまま (カバー画像が必須の可能性。未検証)。作成後に 2 本をマガジンへ追加する。
+  **2026-10-15 追記 (mh-a09)**: オーナーが出典 (金融リテラシー調査) の商用利用の承諾を取得済みと確認したので、企画台帳に記録し、ハッシュタグ生成・公開 R2 保存・カバー採用を経て公開した (https://note.com/stats47/n/n194f4e88b9b9)。展開記録 (note) は済み 149 / 企画中 0 で、**このカードの完了条件 (企画中と未着手が 0) を満たした**。残るのはマガジン「情報通信」の作成と 2 本の追加・不要な下書きの削除。
+  **残り (当初)**: ① `b-ref-prc-a20`・`b-ref-prc-a24` はマガジン「都道府県ランキング｜情報通信」(`s47-ict`) が note に未作成のため保留 (オーナーが作成し URL を `data/note/magazines.json` に記録してから公開。`prc-a20` は下書き `n3cc132d3422d` が本文・画像入りで残っているので仕上げに使う)。
+  同じく未作成の「国際・外国人」(`s47-international`) も要判断 ② `b-ref-mh-a09` は承諾確認待ちのまま ③ 失敗回で残った空・途中の下書き (`n6c6e1708a2a1`・`n7f3aa1bb55b8`・`nb2b302a56c8c`・`n706d8699fcd7` ほか) を下書き一覧で照合して削除する (削除はオーナー)。
 - **公開スクリプトの修正 (2026-10-13)**: note の画面の変更で「画像を追加」が `<svg>` になり、`new_post_cover_title` がカバーを黙って飛ばしていた (公開した 1 本目がカバー無し)。
   親のボタンを押すよう直し、保存後にカバーが付いたことを確かめて付かなければ止める。画像の挿入は、アップロードより前で見出しの次の段落を取りこぼしたときだけ 1 回やり直す。
 - **公開前に確かめること (2026-10-13 の執筆で判明)**: `b-ref-mh-a09` (金融リテラシー調査の正答率) は、企画台帳に「商用目的の転載・複製には事前承諾が要り、承諾の確認は未了」とある。
@@ -751,16 +783,17 @@ updated: 2026-10-06
 
 - **オーナー指示**: 未更新の公開記事を新しい順に展開する（2026-10-14チャット）。2026-10-15に1バッチ10件、人物・キャラクターなし、県別家計は県の輪郭案へ切り替える指示。54件反映後の次バッチは複数カテゴリで構図を試す指示を受け、今回は家計以外の6カテゴリの代表を選定。同日公開分を新しい順に選ぶ場合は公開APIの`publish_at`を使う。モデルをSolに切り替えても共通台帳とCodex built-in imagegen経路を継続する。
 - **担当・正本**: image-prompt-curator / note-manager。制作・版・採用・公開は`data/note/cover-assets.json`、カテゴリ方針は`data/note/cover-policies.json`。対象は公開済みのみ。未反映候補がある場合はその確認と反映を先に行い、別の候補を重ねて作らない。
-- **現在地 (2026-10-15)**: 公開反映済み74件、未更新232件。ユーザーの「反映して」を受け、統計解説4件 `NCI-00376,NCI-00386,NCI-00431,NCI-00471`、配色5件 `NCI-00300,NCI-00318,NCI-00319,NCI-00348,NCI-00346`、データ整備1件 `NCI-00252` の確認済み候補SHAを採用して公開済み。生成証拠は `data/note/evidence/note-cover-candidates-7f6abff7d1c4d25c.json`、公開・最終検証は `data/note/evidence/note-cover-refresh-ledger-a7e921f6594a6f50.json`。10件すべて自動配信照合PASS、実配信画像320pxの個別目視PASS。本文・タイトル・価格・有料境界・タグ・公開日時等のfingerprintと下書き状態を保持し、対象外296記事の公開カバー・485台帳行も不変。再送・閾値変更なし。495記事1170版の資産検証PASS。管理画面は確認済み10・note反映済み10、比較画像20枚の読み込みを確認。所有する投稿ブラウザは終了済み。公開済みの統計解説・配色は全件更新完了（下書きは別）。
-- **終了・再開条件 (2026-10-15)**: 今回は74件反映済みの地点で制作・公開作業を区切り、残りは計画だけを保存する。公開済み記事の未反映の現行imagegen候補は0件。次の生成・公開はユーザーの再開指示で行い、自動実行は設定しない。再開時は記事台帳・カバー台帳・最新方針から未更新の公開記事を再計算し、完了済み74件を再送しない。下書き189件と今後の新規記事は、この公開済み232件の残件数へ混ぜない。
-- **残りの進行順（未実行の計画案）**: ① データ整備3件を次回バッチで完了させる ② 自治体実務50件 ③ 県別家計26件 ④ 問い型ランキング85件 ⑤ 比較型ランキング68件。カテゴリを完了させる順序を優先し、カテゴリ内は公開日の新しい順に進める。同日分は公開APIの`publish_at`で並べ、制作ID順で代用しない。小カテゴリを完了させ、利用目的が具体的な実務・家計記事を先に読みやすくするための順序であり、クリック・購入増の効果は未検証。
+- **現在地 (2026-10-15)**: Git同期後の公開記事397件のうち現行方式で反映済み74件、未更新323件（従来の232件＋別PCで新規公開された統計解説91件）。ユーザーの「反映して」を受け、統計解説4件 `NCI-00376,NCI-00386,NCI-00431,NCI-00471`、配色5件 `NCI-00300,NCI-00318,NCI-00319,NCI-00348,NCI-00346`、データ整備1件 `NCI-00252` の確認済み候補SHAを採用して公開済み。生成証拠は `data/note/evidence/note-cover-candidates-7f6abff7d1c4d25c.json`、公開・最終検証は `data/note/evidence/note-cover-refresh-ledger-a7e921f6594a6f50.json`。10件すべて自動配信照合PASS、実配信画像320pxの個別目視PASS。本文・タイトル・価格・有料境界・タグ・公開日時等のfingerprintと下書き状態を保持し、対象外296記事の公開カバー・485台帳行も不変。再送・閾値変更なし。495記事1170版の資産検証PASS。管理画面は確認済み10・note反映済み10、比較画像20枚の読み込みを確認。所有する投稿ブラウザは終了済み。従来306記事に含まれる統計解説・配色は更新済み。別PCで追加公開された統計解説91件は後続の対象へ追加し、公開記録・R2本文manifest・既存カバー履歴を保持して統合する。
+- **終了・再開条件 (2026-10-15)**: 今回は74件反映済みの地点で制作・公開作業を区切り、残りは計画だけを保存する。公開済み記事の未反映の現行imagegen候補は0件。次の生成・公開はユーザーの再開指示で行い、自動実行は設定しない。再開時は記事台帳・カバー台帳・最新方針から未更新の公開記事を再計算し、完了済み74件を再送しない。下書き98件と今後の新規記事は、この公開済み323件の残件数へ混ぜない。
+- **残りの進行順（未実行の計画案）**: ① データ整備3件を次回バッチで完了させる ② 自治体実務50件 ③ 県別家計26件 ④ 問い型ランキング85件 ⑤ 比較型ランキング68件 ⑥ 今回のGit同期で追加された統計解説91件。従来の232件の順序を保ち、新規公開91件は既存カバーを確認してから後続へ進める。カテゴリを完了させる順序を優先し、カテゴリ内は公開日の新しい順に進める。同日分は公開APIの`publish_at`で並べ、制作ID順で代用しない。小カテゴリを完了させ、利用目的が具体的な実務・家計記事を先に読みやすくするための順序であり、クリック・購入増の効果は未検証。
 - **次回の先頭バッチ**: データ整備 `NCI-00242`（洪水浸水想定区域×将来人口）、`NCI-00246`（人口減少×住宅地価格）、`NCI-00323`（家計調査の五分位・品目CSV）の3件と、未更新の自治体実務から新しい順に7件。実務7件のIDは再開時に公開日時と未更新状態を照合して確定する。制作前に本文の対象範囲・年・単位・商品の収録範囲を確認し、古い見出しの数値や原因説明をそのままカバーへ流用しない。
-- **バッチ数・費用の扱い**: 現在の232件を最大10件ずつ進め、カテゴリ境界の端数を次カテゴリと合わせる場合は23回×10件＋最終2件の計24回が目安。再生成分・新規公開の追加分は含めない。全232件を先に生成せず、1バッチの候補作成→比較→反映→公開検証を終えてから次へ進む。各回の再生成数と確認負担を見て件数を調整し、費用・利用枠の金額は未確認のまま見積もらない。
+- **バッチ数・費用の扱い**: 現在の323件を最大10件ずつ進め、カテゴリ境界の端数を次カテゴリと合わせる場合は32回×10件＋最終3件の計33回が目安。再生成分・新規公開の追加分は含めない。全232件を先に生成せず、1バッチの候補作成→比較→反映→公開検証を終えてから次へ進む。各回の再生成数と確認負担を見て件数を調整し、費用・利用枠の金額は未確認のまま見積もらない。
 - **再開時の確認**: 「次の10件」は候補作成と右ペインの比較までとし、今回の反映指示を次バッチへ持ち越さない。表示中の候補に対する明示的な反映指示で採用・公開へ進む。最新版のカテゴリ方針・人物なし・補足の可読性・県別家計の正確な輪郭参照を継続し、元画像・実プロンプト・目視記録・完成版をprivate R2に保存する。生成・保存・公開のいずれかが未検証なら、その件を残したまま次の候補を重ねて作らない。
 - **生成の契約**: 8カテゴリ最新版の`visualRules`、全カテゴリ人物なし、県別家計の対象範囲と検証済み参照PNG、カテゴリ別目視確認をprepare/import/採用/公開で照合する。手順はカタログREADME。`export-batch`は最大10件、登録済み候補を除いて再開する。関連71テスト・admin/制作スクリプト型検査・UI規約検査を通過。全体ビルド/全テストは未実行（ローカル変更の完了粒度）。
 - **実行順**: ① 本文からコピー・対象・年・題材を確定 ② imagegenで文字込み生成 ③ 原寸/320pxで指定全文・補足・人物なし・カテゴリ固有項目を確認 ④ 元画像・地図参照・完成版をprivate R2へ登録 ⑤ 管理画面で候補を確認・採用 ⑥ 採用版だけカバー専用更新で反映し、公開配信画像と本文等の保持を検証して次の10件へ進む。
 - **停止条件**: 誤字・文字切れ・指定外の図表・本文根拠不足・別アカウント・採用SHAの変化・POST応答不明では止まる。減色の復旧は配信SHAを目視確認し`NOTE-COVER-DELIVERY-VERIFY-01`と既存learnedの手順に従う。Claudeによる作画や旧rendererへの代作はしない。
 - **完了条件**: 公開済み全対象が現行方針の採用版で配信され、保全hashと公開画像の確認記録がある。途中の確認待ちや未反映を完了扱いしない。
+- **別PCの再開入口**: developをpullして本カードとカタログREADMEを読み、共有セッションの状況と最新版の資産検証を確認する。画像・実プロンプト・目視記録はprivate R2が正本で、Windowsの生成画像フォルダや一時ファイルをコピーする必要はない。R2認証とnoteのstats47ログインは各PCの既存設定を使う。今回のGit同期だけを理由に記事本文・カバーを再投稿しない。
 
 ### [PAGE-QUALITY-ERROR-BACKLOG-01] ページ品質の週次監査の error 3,149 件を種類ごとに振り分ける
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
@@ -1494,6 +1527,17 @@ updated: 2026-10-06
 - **現在地 (2026-10-11)**: 審査が承認された。**AdSense の所有者は stats47 専用の Google アカウント**で、上の方針 (uruhayato373 だけ) とは違う (内部ブラウザでは uruhayato373 が `authuser=0`、stats47 が `authuser=1`)。同日、AdSense の画面で自動広告がオフ (インテント重視のフォーマットも無効表示) を確認し、手動の広告ユニットを配置ごとに 11 個作った (右レールのアフィリエイト枠が意図なしページで AdSense に切り替わるときの専用ユニットを含む) (`stats47-<配置>`。ID と配置の対応は `apps/web/src/lib/google-adsense/constants.ts`)。コードは全 slotId を新 ID に替え、ランキング末尾とその他末尾の Multiplex を別ユニットに分け、`ADSENSE_DISPLAY_ENABLED` を true にした。配置はオーナーの指示 (「色々と試しながら計測記録改善」) で停止直前の手動枠をそのまま戻し、ユニット別の実測で外す・動かすを決める。10-08 の方針案 (1 枠 1 担当・アフィリエイトは意図が解決する本文中・AdSense はアフィリエイトの弱い右レールと意図の無いページ・モバイル手動枠は戻さない) は、実測後の改善候補として扱う。収益化戦略 §3.1・関連 rules・メモリを再開後の記述へ改訂した。**本番反映: 2026-10-11 15:43 JST に PR #1123 を main へマージ** (merge commit `cd80b60`、Deploy run 38118994278)。**アフィリエイト実験の比較窓の境界は 2026-10-11** (この日を含めずに前後を分ける)。デプロイ前の本番は `adsbygoogle` 0 件 (ranking・home・blog の 3 ページで実測)。AdSense の「サイト」画面で stats47.jp は「準備完了」、ads.txt は「承認済み」(2026-10-11 確認)。
 - **デプロイ後の本番確認 (2026-10-11)**: Deploy run 38118994278 は 15:59 に success。ヘッドレス Chromium でランキングページを開くと `adsbygoogle.js` が新 publisher ID で読み込まれ、デスクトップで 4 ユニット (table-side・rail-top・sidebar-affiliate-fallback・ranking-footer-multiplex)、モバイルで 3 ユニットが広告リクエストを出した。直後の状態は全ユニット `data-ad-status="unfilled"` (新ユニット直後・ヘッドレスのため、配信の有無は実ブラウザと AdSense のレポートで後日確かめる)。本文書き換えの smoke (apps/web で `PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts third-party-dom-injection`) は 3/3 緑。**記事内広告 (in-article) は全枠が `No slot size for availableWidth=0` で消えていた** (外枠が flex の items-center で ins が 0 幅)。`ins` に `width:100%` を足す修正を PR #1124 で出した。
 - **残り (実行順)**: ① ~~デプロイ~~ 済み (上記) ② ~~本番の広告タグと smoke の確認~~ 済み (上記)。PR #1124 は 2026-10-11 16:12 JST にマージ (merge commit `bca0286`、Deploy run 38120604593)。デプロイ後、ブログ (デスクトップ 3 枠)・テーマ (stats47-hub-incontent)・ランキングのモバイル中段 (stats47-ranking-incontent-mobile) の記事内広告が TagError 0 件で広告リクエストを出すことを確かめ、本文書き換えの smoke も 3/3 緑で再確認した。11 ユニットすべてが本番で広告リクエストを出すことを観測した (ranking・blog・themes・home・`/municipalities`・`/areas/13000`。直後は全て unfilled で、配信が始まったかは AdSense の広告ユニット別レポートで確かめる) ③ (オーナー) 今の GA4 の管理者アカウント (uruhayato373 は GA4 に権限が無い) で、プロパティ 463218070 に stats47 アカウントを管理者として追加する。GA4 は作り直さない (履歴・測定 ID・CI の権限・カスタムディメンションを失う) ④ (Claude) stats47 アカウントで AdSense の「Google アナリティクスとの統合」からプロパティ 463218070 をリンクする ⑤ (オーナー) 週次取得の API を戻す: stats47 アカウントで `.claude/scripts/adsense/oauth-setup.js` を実行して refresh token を発行し、GitHub の Secret と Variable `GOOGLE_ADSENSE_ACCOUNT_ID` (今は旧 `pub-7995274743017484`) を新アカウントへ替える ⑥ 4 週の実測 (ユニット別の収益・視認率、GA4 の PV で割った `ad-yield`、CWV) で効かない枠を外す・動かす。モバイルの手動枠 (W31 に外した記事内・フッター) を戻すかもここで決める。候補: home のレール枠 (stats47-hub-rail) は 2026-10-11 の実測で幅 262px しかなく 300×250 が入らない (ランキングのレールは 300px 以上)。ユニット別の表示単価が低ければ幅の確保か撤去を比べる。
+- **2026-10-13 改善サイクルの凍結解除**: 再開後も計測と改善の仕組みが 9/20 の「恒久停止」の前提のまま凍結されていたので、次を直した。
+  ① 週次収益 (NSM): `generate-weekly-metrics-issue.mjs` が AdSense を「恒久停止で ¥0」と固定で出していたのを、`.claude/scripts/metrics/lib/adsense-revenue.mjs` に置き換えた。停止中 (W35〜W41) は ¥0、再開後は `data/adsense/history.csv` の確定 7 日収益を出し、行が無い週は「判定不能」と書く。
+  ② KPI `ad-yield`: `measurement-cycle.mjs` で「AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000」として接続した。再開前の週を含む窓は `pending` (値なし)、AdSense の行が 1 週でも欠ければ `missing`。最初の値は W42〜W45 がそろう 2026-W45 (2026-11-13 金曜の週次計測)。事業計画 catalog の `ad-yield` を `measured` にして kpi-tree を再生成した。
+  ③ 週次 workflow: 9/26 に外した AdSense 施策の before/after (`npm run metrics:adsense-impact`) を `fetch-metrics-weekly.yml` に戻した (出力 `data/adsense/impact-LATEST.md`)。取得・ユニット突き合わせ・候補生成の段は止まっていなかった。
+  ④ 運用文書: `/adsense-improvement` と `/fetch-adsense-data` の凍結注記、週次計画の「AdSense の候補は採用しない」、週次レビューの NSM・AdSense 節、affiliate-manager の「AdSense 停止の維持確認」、improvement-triage の受け取り元、pre-mortem・growth-loops・monetization-strategy、`data-storage.md`・データ台帳 `config/datasets.mjs`・改善ログ冒頭・収益化戦略 §3.1/§3.2・docs/02/42 を再開後の記述に改めた。
+  ⑤ GitHub の Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を `pub-9055416085403520` に替えた (refresh token は旧アカウントのままなので、手順⑤のオーナー作業が済むまで取得は権限エラーのまま)。
+  **進捗 (2026-10-13 夕)**: 上の変更は develop→main の PR https://github.com/uruhayato373/stats47/pull/1133 で出した (CI の書き戻しコミットが先頭になり必須の Code Quality Check が起動しなかったので、この追記のコミットで起動し直した)。refresh token は Console の OAuth クライアント `1044264339032-22l15n9…` で Client Secret を追加し、`oauth-setup.js` を stats47 アカウントで認可して発行する。1 回目は Client ID を Secret 欄に入れて `invalid_client` になった (Secret は `GOCSPX-` で始まる)。
+  **手順⑤ 完了 (2026-10-13)**: stats47 専用アカウントで `oauth-setup.js` を認可し、`accounts.list` が `accounts/pub-9055416085403520` の 1 件を返すことを確かめてから、GitHub Secret `GOOGLE_ADSENSE_REFRESH_TOKEN`・`GOOGLE_ADSENSE_CLIENT_SECRET` を差し替えた (Client Secret は OAuth クライアント `stats47-adsense-cli-v2` に 2 本目を追加。旧 `****xah6` は同日オーナーの指示で無効化→削除し、残るのは 2026-10-13 発行の 1 本だけ。新しい値は token 発行の時点で Google に受理されている。手元の .env と doboku-note の Secret に同じ変数が無いことも確かめた)。PR #1133 は auto-merge (merge commit) を有効にした。**次の確認**: 2026-10-16 (金) の定期実行で `data/adsense/snapshots/2026-W41/manifest.json` の `status` が error でない (W41 は配信停止中なので 0 行が正しい)。10-18 以降に `gh workflow run fetch-metrics-weekly.yml --ref main -f week=2026-W42` で再開初週の行が `history.csv` に入ることを確かめる (定期は 10-23)。
+  **手順③④ 完了 (2026-10-13)**: オーナーが GA4 プロパティ 463218070 に stats47 アカウントを管理者として追加し、Claude が内部ブラウザ (stats47 アカウント・`authuser=1`) で GA4 管理 →「Google AdSense のリンク」から `pub-9055416085403520` (コンテンツ向け AdSense・収益データレポート オン) をリンクした。リンク一覧に新旧 2 件が並ぶ。旧 `pub-7995274743017484` (2026-03-12 リンク) のリンクは同日オーナーの指示で削除し、一覧は新 1 件だけになった (旧アカウントの AdSense データは GA4 のレポートに出なくなるが、過去分は `data/adsense/history.csv` に残る)。GA4 の AdSense 連携で `ad_impression` などが再び自動生成されるので、自前の `affiliate_impression` と混ぜない (`analytics-event-standards.md`)。
+  **運用の決め事**: 再開後 4 週 (W42〜W45 = 10-11〜11-07) はベースライン期間で配置を変えない (表示の不具合の修正だけ)。W46 以降、週次レビューで審査した人間承認済みの配置変更を最大 1 件/週。施策 ID は `ADSENSE-PLACEMENT-01`。同日、期限切れの 3 件 (`DEPS-RENOVATE-01`・`PERF-WORKER-P99-01`・`R2-STORAGE-01`) をオーナー指示で active から外して backlog 🟡 へ移し、空いた枠に登録した (Due 2026-11-14)。手順⑥の判定はこの施策行で行う。
+  **残り**: 手順⑤ (オーナー: stats47 アカウントで refresh token を発行し Secret を差し替える。済んだら `gh workflow run fetch-metrics-weekly.yml --ref main -f week=2026-W42` で再開初週を取り直し、`data/adsense/snapshots/2026-W42/manifest.json` の `status` が error でないことを確かめる)・手順③④ (GA4 との連携)・週次 workflow とスクリプトの変更は main の定義で動くので、develop→main のマージ後に効く。
 - **追記 (2026-10-07)**: オーナーは回収経路の一つを「アクセス集客で AdSense」と整理した (収益化戦略 §3.5)。同日、§3.1 の冒頭とメモリ `project_monetization_contract` に 9/28 の再開決定 (審査待ち) を書き足した。全面改訂は引き続き承認後に行う。見込みの注意: 再開後は手動枠だけなので、2026-W31 の実測 (手動枠は 1,000 表示あたり ¥8〜13、自動広告は ¥107〜114) から、停止前のページ RPM ¥37 を下回る可能性がある。**ページ RPM ¥37 は AdSense 自身が数えた PV (GA4 の 54〜78%) が分母**なので、GA4 の PV に換算すると停止前 W30〜W33 は 1,000 PV あたり ¥22 (AdSense 収益 ¥523 ÷ GA4 Japan PV 23,787)。今の閲覧 (月約 4.7 万 PV) では自動広告ありでも月約 ¥1,000、手動枠だけ (W31 の手動枠分 ¥6.7/1,000 PV) なら月約 ¥300 で、どちらも Cloudflare の請求 (月 ¥1,556〜1,846) に届かない。月 ¥1 万には月約 45 万 PV (手動枠だけなら約 150 万 PV) が要る (2026-10-07 訂正。前日までの「月 27 万 PV」は分母の違う ¥37 で計算していた)。承認後は AdSense 収益の週次取得を再開し、計測サイクルの KPI `ad-yield` (`.claude/scripts/metrics/lib/measurement-cycle.mjs`) に接続して、4 週の効率と月額を Cloudflare の請求と並べて判定する。自動広告を使うかどうかは効率を約 3 倍動かすので、書き換え事故の原因 (自動広告そのものか、広告インテントだけか) を AdSense の公式ヘルプで確かめてから決める。 承認後の改訂では、`.claude/rules/analytics-event-standards.md` と `.claude/rules/affiliate-ads-standards.md` に残る「2026-09-20 に恒久停止」の記述も合わせて直す。
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
 

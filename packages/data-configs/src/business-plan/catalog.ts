@@ -558,10 +558,10 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     role: 'input',
     kpiTier: 'driver',
     cadence: 'weekly',
-    source: 'AdSense 収益 + data/ga4/history-finalized7d.csv',
-    measurementStatus: 'not-instrumented',
+    source: 'data/adsense/history.csv + data/ga4/history-finalized7d.csv',
+    measurementStatus: 'measured',
     unit: '円/1,000 GA4 Japan PV',
-    note: 'AdSense 収益 ÷ GA4 Japan PV × 1,000。分母を AdSense 自身の PV にしない (W30〜W33 は GA4 の 54〜78% しか数えていない)。停止前 W30〜W33 は ¥22 (自動広告込み)、W31 の手動枠分だけなら ¥6.7。目標値は再開後 4 週の実測が出るまで置かない。',
+    note: 'AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000 (.claude/scripts/metrics/lib/adsense-revenue.mjs)。分母を AdSense 自身の PV にしない (W30〜W33 は GA4 の 54〜78% しか数えていない)。停止前 W30〜W33 は ¥22 (自動広告込み)、W31 の手動枠分だけなら ¥6.7。2026-10-11 に手動枠で再開し、再開前の週を含む窓は値にしない (最初の値は W42〜W45 がそろう 2026-W45)。目標値は再開後 4 週の実測が出るまで置かない。',
   },
   {
     id: 'site-circulation-rate',

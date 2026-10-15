@@ -388,7 +388,7 @@ eligible impressions
 - `targetRankingKeys` が設定済みなら hard allowlist とする。
 - rankingKey がない blog 等で `targetRankingKeys` を無視しない。
 - blog tag が未解決、または該当 vertical の在庫がない場合に `economy` へ fallback しない。
-- 不一致時は空配列を返し、無表示へ委ねる (AdSense fallback は 2026-09-20 の恒久停止で撤去済み)。
+- 不一致時は空配列を返す。描画側 (`AffiliateAdSlot`) は無関係な案件を出さず、AdSense に切り替える (2026-09-20 の停止で撤去し、2026-10-11 の再開で右レールは専用ユニット `stats47-sidebar-affiliate-fallback`、footer は `stats47-ranking-footer-multiplex` として戻した。`ADSENSE_DISPLAY_ENABLED` が false なら無表示)。
 - home の既存方針は別ルールで意図的に固定されているため、本変更で推測拡張しない。
 
 ## 8. ASP adapter と reconciliation

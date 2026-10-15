@@ -60,7 +60,8 @@ function ledgerNeedsRegistrationParams() {
 
 /**
  * mutation 前の identity 契約 (README「不変の安全契約 identity」)。
- * AdSense は 2026-09-20 に恒久停止したため identity に含めない (property / stream / GSC で本人確認する)。
+ * AdSense は identity に含めない (property / stream / GSC で本人確認する)。2026-10-11 に再開した AdSense は
+ * stats47 専用の Google アカウントが所有し、GA4/GSC の認証とは別の主体のため。
  */
 function identityBlockers(audit) {
   const b = [];

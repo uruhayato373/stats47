@@ -231,10 +231,28 @@ test('site pageviews sum four finalized weeks and compare with the non-overlappi
   // 欠測日のある週を含む窓は 28 日 PV と呼ばない
   const gap = kpi({ nodes, ga4Finalized: ga4Finalized.map((r) => (r.week === '2026-W37' ? { ...r, missing_days: '1' } : r)) });
   assert.equal(gap.nodes.find((n) => n.id === 'site-pageviews').status, 'missing');
-  // 広告収益効率は AdSense の承認まで接続しない (0 円と書かない)
+  // 窓 (W35〜W38) が AdSense 再開 (2026-10-11 = W42) より前なので広告収益効率は値にしない (0 円と書かない)
   const yieldNode = t.nodes.find((n) => n.id === 'ad-yield');
-  assert.equal(yieldNode.status, 'not-connected');
+  assert.equal(yieldNode.status, 'pending');
   assert.equal(yieldNode.value, null);
+});
+
+test('ad yield divides four post-restart AdSense weeks by GA4 Japan PV over the same 28 days', () => {
+  // 再開後 4 週 (W42〜W45) がそろった週に初めて値が出る。比較窓 (W38〜W41) は再開前なので previous は null
+  const weeks = ['2026-W42', '2026-W43', '2026-W44', '2026-W45'];
+  const ga4Finalized = weeks.map((week) => ({ week, pageviews_jp7d: '10000', missing_days: '0' }));
+  const adsenseHistory = weeks.map((week, i) => ({ week, earnings: String(50 + i * 10) }));
+  const nodes = [{ id: 'ad-yield', label: '広告', tier: 'driver' }];
+  const t = kpi({ nodes, week: '2026-W45', asOf: '2026-11-15', ga4Finalized, adsenseHistory });
+  const node = t.nodes.find((n) => n.id === 'ad-yield');
+  assert.equal(node.status, 'ok');
+  assert.equal(node.value, '6.5'); // (50+60+70+80) / 40,000 PV × 1,000
+  assert.equal(node.previous, null);
+  // 取得に失敗した週が 1 つでもあれば欠測 (部分和を 28 日の効率と呼ばない)
+  const gap = kpi({ nodes, week: '2026-W45', asOf: '2026-11-15', ga4Finalized, adsenseHistory: adsenseHistory.filter((r) => r.week !== '2026-W43') });
+  const gapNode = gap.nodes.find((n) => n.id === 'ad-yield');
+  assert.equal(gapNode.status, 'missing');
+  assert.match(gapNode.note, /2026-W43/);
 });
 
 test('unmeasurable nodes carry a reason instead of zero', () => {

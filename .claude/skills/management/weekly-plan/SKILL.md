@@ -174,7 +174,11 @@ primary_agent: strategy-advisor
     （確定収益/1,000 viewable imp・GA4 sessions・LCP/CLS）・14/28日判定日を計画に明記する。
   → 評価の主指標は確定収益/1,000 viewable impressionで、クリック数だけで勝敗を決めない。
   → 計測が不完全な間（`ga4-affiliate-history.csv` が10日以上古い間）は広告枠を増やさない。
-  → **AdSenseのcandidateは採用しない。2026-09-20に恒久停止（`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1）。**
+- AdSense 配置candidate（`data/adsense/candidates-latest.json`・運用正典 `/adsense-improvement`）
+  → 2026-10-11 に手動枠で再開した。**再開後 4 週 (2026-W42〜W45) はベースライン期間で配置変更を計画しない**
+    (表示の不具合の修正だけ)。W46 以降は、週次レビューで審査した人間承認済みを**最大1件/週**だけ採用し、1実験1レバー。
+  → 評価の主指標は KPI `ad-yield` (GA4 Japan PV あたりの AdSense 収益) とユニット別の収益・視認率。アフィリエイト施策と
+    同じ面を同じ週に変えない (交絡)。週次取得が 0 行の間 (`ADSENSE-RESTART-01` 手順⑤が未了) は候補を採用しない。
 
 - ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `data/blog/remediation-queue.json`）
   ```bash

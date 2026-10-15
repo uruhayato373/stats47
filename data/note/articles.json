@@ -8896,7 +8896,7 @@
       "title": "「年収の高い県」は物差しで変わる ── 賃金・県民所得・課税所得・世帯収入の5指標を47都道府県で比べる",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-inc-a05",
       "body": {
         "store": "r2-public",
@@ -8914,7 +8914,9 @@
         "/ranking/per-capita-prefectural-income-h27",
         "/ranking/per-taxpayer-taxable-income",
         "/ranking/annual-income-per-household"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbaf2ff8914a3",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-inc-a06",
@@ -8923,7 +8925,7 @@
       "title": "物価で割り戻すと埼玉(さいたま市)が1位、大阪(大阪市)は34位 ── 賃金の順位と「手元に残る額」の順位を比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-inc-a06",
       "body": {
         "store": "r2-public",
@@ -8943,7 +8945,9 @@
         "/ranking/private-rental-housing-rent-per-3-3m2",
         "/ranking/owner-occupied-housing-ratio",
         "/ranking/male-scheduled-earnings"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nede8ff7a9eaa",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-inc-a55",
@@ -8952,7 +8956,7 @@
       "title": "賃金と家賃は大都市、灯油は青森 ── 賃金・家賃・暖房費の組み合わせで47都道府県の暮らしを見る",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-inc-a55",
       "body": {
         "store": "r2-public",
@@ -8969,7 +8973,9 @@
         "/ranking/private-rental-housing-rent-per-3-3m2",
         "/ranking/kerosene-consumption-expenditure",
         "/ranking/real-disposable-income"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/ne243cd01a29a",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-gis-a33",
@@ -8978,7 +8984,7 @@
       "title": "標高5m以下の土地に住む人の割合は徳島が40.9%で1位、大阪が2位 ── 低い土地に暮らす人口を47都道府県で比べる",
       "magazine": "s47-climate",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-gis-a33",
       "body": {
         "store": "r2-public",
@@ -8992,7 +8998,9 @@
       },
       "stats47Targets": [
         "/ranking/low-elevation-population-ratio-5m"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n835484ded3ef",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-kakei-a01-04",
@@ -9001,7 +9009,7 @@
       "title": "塾代は少ないのに国公立大学への支出は多い長崎市・札幌市・盛岡市 ── 教育費の内訳を47市で比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a01-04",
       "body": {
         "store": "r2-public",
@@ -9021,7 +9029,9 @@
         "/ranking/high-school-tutoring-consumption-expenditure",
         "/ranking/tuition-consumption-expenditure",
         "/ranking/education-cost-all-households"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n324be1cc99a6",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-kakei-a04-03",
@@ -9030,7 +9040,7 @@
       "title": "エンゲル係数1位は兵庫県(神戸市)の33.4％ ── 47市の順位は生活水準の物差しになるか",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a04-03",
       "body": {
         "store": "r2-public",
@@ -9047,7 +9057,9 @@
         "/ranking/consumption-expenditure-total",
         "/ranking/food-expenditure-total",
         "/ranking/per-capita-prefectural-income-h27"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n7687e091941c",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a05-06",
@@ -9056,7 +9068,7 @@
       "title": "まぐろは静岡市、ぶりは富山市、かつおは高知市 ── 魚介18品目の支出1位から見る東西の好み",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a05-06",
       "body": {
         "store": "r2-public",
@@ -9087,7 +9099,9 @@
         "/ranking/oyster-consumption-expenditure",
         "/ranking/sea-bream-consumption-expenditure",
         "/ranking/horse-mackerel-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n25b0a46485dc",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-mh-a04",
@@ -9096,7 +9110,7 @@
       "title": "所得の高い県は男性の寿命も長め、女性では関係が薄い ── お金と健康の9指標を47都道府県で比べる",
       "magazine": "s47-health",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a04",
       "body": {
         "store": "r2-public",
@@ -9118,7 +9132,9 @@
         "/ranking/healthy-life-expectancy-female",
         "/ranking/suicide-rate-per-100k",
         "/ranking/k6-score10plus-rate-12plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n9358aa3d39f1",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-mh-a07",
@@ -9127,7 +9143,7 @@
       "title": "貯蓄に占める有価証券の割合は神奈川県21.7％、秋田県6.0％ ── 投資に回す県はどこか",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a07",
       "body": {
         "store": "r2-public",
@@ -9143,7 +9159,9 @@
         "/ranking/current-securities-balance-ratio-multi-person-households",
         "/ranking/securities-balance",
         "/ranking/current-savings-balance-multi-person-households"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n13ec75728be3",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-mh-a08",
@@ -9152,7 +9170,7 @@
       "title": "預貯金の割合は新潟県73.1％、生命保険は鹿児島県29.9％ ── 貯蓄の置き方と収入の関係を47都道府県で見る",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a08",
       "body": {
         "store": "r2-public",
@@ -9169,7 +9187,9 @@
         "/ranking/current-deposit-balance-ratio-multi-person-households",
         "/ranking/current-life-insurance-balance-ratio-multi-person-households",
         "/ranking/current-savings-balance-multi-person-households"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n105ed996a3a3",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-mh-a09",
@@ -9178,15 +9198,23 @@
       "title": "金融の正誤問題の正答率は島根県58.83％、沖縄県51.03％ ── 47都道府県で見る金融知識の差",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a09",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "cd0dea54b8b4829e4edb0c775d25d50e66e6bd255364eb327b00341f200245cf",
+          "files": 5,
+          "bytes": 411298,
+          "savedAt": "2026-10-14T22:33:06.592Z"
+        },
+        "verifiedAt": "2026-10-14T22:33:06.592Z"
       },
       "stats47Targets": [
         "/ranking/financial-literacy-correct-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n194f4e88b9b9",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-mh-a10",
@@ -9195,7 +9223,7 @@
       "title": "長寿の県が塩を控えているとは限らない ── 平均寿命と食塩・野菜の摂取量を47都道府県で比べる",
       "magazine": "s47-health",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-mh-a10",
       "body": {
         "store": "r2-public",
@@ -9214,7 +9242,9 @@
         "/ranking/salt-intake-female-age-adjusted",
         "/ranking/vegetable-intake-male-age-adjusted",
         "/ranking/vegetable-intake-female-age-adjusted"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n6004a486c658",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-dev-a03",
@@ -9223,7 +9253,7 @@
       "title": "かつお節を最も多く買うのは那覇市 ── かつお節・削り節の支出と購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a03",
       "body": {
         "store": "r2-public",
@@ -9238,7 +9268,9 @@
       "stats47Targets": [
         "/ranking/katsuobushi-consumption-expenditure",
         "/ranking/katsuobushi-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/na31526b66ac4",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a04",
@@ -9247,7 +9279,7 @@
       "title": "出生率は沖縄が1位、東京が最下位 ── 婚姻・離婚・子どもの割合を47都道府県で並べる",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a04",
       "body": {
         "store": "r2-public",
@@ -9264,7 +9296,9 @@
         "/ranking/divorces",
         "/ranking/young-population-ratio",
         "/ranking/total-fertility-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbd056e7589d0",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a05",
@@ -9273,7 +9307,7 @@
       "title": "世帯の年間収入は神奈川が1位、沖縄が最下位 ── 47都道府県の1世帯当たり年収を比べる",
       "magazine": "s47-fiscal",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a05",
       "body": {
         "store": "r2-public",
@@ -9287,7 +9321,9 @@
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n461e0a05a314",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a06",
@@ -9296,7 +9332,7 @@
       "title": "夫の育児参加率は茨城が1位、保育所の多さは青森が1位 ── 2つの子育て指標を47都道府県で比べる",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a06",
       "body": {
         "store": "r2-public",
@@ -9311,7 +9347,9 @@
       "stats47Targets": [
         "/ranking/husband-childcare-rate",
         "/ranking/nursery-count-per-100k-0-5"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nc4fb51684d49",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a07",
@@ -9320,7 +9358,7 @@
       "title": "学力テストは東京・石川・福井が上位、待機児童は東京・沖縄・滋賀が多い ── 47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a07",
       "body": {
         "store": "r2-public",
@@ -9335,7 +9373,9 @@
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate",
         "/ranking/nursery-waiting-children-count"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb43e69201497",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a08",
@@ -9344,7 +9384,7 @@
       "title": "不登校の割合は中学で宮城、小学校で沖縄が最多、福井はどちらも最少 ── 47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a08",
       "body": {
         "store": "r2-public",
@@ -9360,7 +9400,9 @@
         "/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
         "/ranking/elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
         "/ranking/cram-school-establishment-count"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n2a1a5b93cacb",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a09",
@@ -9369,7 +9411,7 @@
       "title": "1か月の教育費はさいたま市が1位、福井市が最少 ── 2007年の47市の教育費を比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a09",
       "body": {
         "store": "r2-public",
@@ -9383,7 +9425,9 @@
       },
       "stats47Targets": [
         "/ranking/education-cost-all-households"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n56515e90282e",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a11",
@@ -9392,7 +9436,7 @@
       "title": "進学した子への仕送りは長野市が最多、大阪市は最少 ── 47市の仕送り支出を比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a11",
       "body": {
         "store": "r2-public",
@@ -9406,7 +9450,9 @@
       },
       "stats47Targets": [
         "/ranking/domestic-student-remittance-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbc4bbe4ef1d8",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a13",
@@ -9415,7 +9461,7 @@
       "title": "美容室がいちばん多いのは東京、少ないのは鳥取 ── 美容所と理容・美容所の数を47都道府県で比べる",
       "magazine": "s47-health",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a13",
       "body": {
         "store": "r2-public",
@@ -9430,7 +9476,9 @@
       "stats47Targets": [
         "/ranking/beauty-salon-count",
         "/ranking/barber-beauty-salon-count"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n5c3b0dfd46cc",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a15",
@@ -9439,7 +9487,7 @@
       "title": "世帯の貯蓄は東京・神奈川・福井が上位、沖縄が最も少ない ── 47都道府県の貯蓄現在高を比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a15",
       "body": {
         "store": "r2-public",
@@ -9453,7 +9501,9 @@
       },
       "stats47Targets": [
         "/ranking/current-savings-balance-multi-person-households"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4c5a416b43be",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a17",
@@ -9462,7 +9512,7 @@
       "title": "持ち家比率は秋田が1位、沖縄が最も低い ── 47都道府県の持ち家比率を比べる",
       "magazine": "s47-housing",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a17",
       "body": {
         "store": "r2-public",
@@ -9476,7 +9526,9 @@
       },
       "stats47Targets": [
         "/ranking/owner-occupied-housing-ratio"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb24b2deeb25d",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a19",
@@ -9485,7 +9537,7 @@
       "title": "核家族の割合は奈良が1位、空き家率は徳島が1位 ── 家族のかたちと空き家を47都道府県で比べる",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a19",
       "body": {
         "store": "r2-public",
@@ -9501,7 +9553,9 @@
         "/ranking/nuclear-family-households-ratio",
         "/ranking/three-generation-household-members",
         "/ranking/vacant-housing-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n2d9fab7fc80d",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a21",
@@ -9510,7 +9564,7 @@
       "title": "若い世代の男女比は茨城が最も男性寄り、鹿児島が最も女性寄り ── 20〜39歳の性比を47都道府県で比べる",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a21",
       "body": {
         "store": "r2-public",
@@ -9524,7 +9578,9 @@
       },
       "stats47Targets": [
         "/ranking/sex-ratio-age-20-39"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/na34537eb2b48",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a26",
@@ -9533,7 +9589,7 @@
       "title": "熱中症で亡くなった人は東京が最多の424人 ── 47都道府県の熱中症による死亡数を比べる",
       "magazine": "s47-safety",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a26",
       "body": {
         "store": "r2-public",
@@ -9547,7 +9603,9 @@
       },
       "stats47Targets": [
         "/ranking/heatstroke-deaths"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/ncc1cf723e8a4",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a31",
@@ -9556,7 +9614,7 @@
       "title": "企業の数は東京が最多、鳥取が最少 ── 47都道府県の企業数を経済センサスで比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a31",
       "body": {
         "store": "r2-public",
@@ -9570,7 +9628,9 @@
       },
       "stats47Targets": [
         "/ranking/nonprimary-enterprises-count"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n816c665cb671",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a36",
@@ -9579,7 +9639,7 @@
       "title": "住める土地の割合は大阪が1位、森林の割合は高知が1位 ── 47都道府県の可住地と森林を比べる",
       "magazine": "s47-climate",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a36",
       "body": {
         "store": "r2-public",
@@ -9594,7 +9654,9 @@
       "stats47Targets": [
         "/ranking/habitable-area-ratio",
         "/ranking/forest-area-ratio"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nc406259524da",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a40",
@@ -9603,7 +9665,7 @@
       "title": "車で通勤・通学する人は愛知が最多、読書する人の割合は東京が1位 ── 47都道府県で比べる",
       "magazine": "s47-tourism",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a40",
       "body": {
         "store": "r2-public",
@@ -9618,7 +9680,9 @@
       "stats47Targets": [
         "/ranking/commute-by-car",
         "/ranking/hobby-participation-rate-reading"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0afe52099b5e",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a42",
@@ -9627,7 +9691,7 @@
       "title": "第1子を産むときの母の年齢は東京が最も高く32.5歳 ── 47都道府県で比べる",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a42",
       "body": {
         "store": "r2-public",
@@ -9641,7 +9705,9 @@
       },
       "stats47Targets": [
         "/ranking/mothers-age-at-first-birth"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nda788ad0528b",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a45",
@@ -9650,7 +9716,7 @@
       "title": "児童虐待の相談対応は東京が最多の27,755件 ── 47都道府県の児童相談所の対応件数を比べる",
       "magazine": "s47-health",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a45",
       "body": {
         "store": "r2-public",
@@ -9664,7 +9730,9 @@
       },
       "stats47Targets": [
         "/ranking/child-abuse-consultation-cases"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nca8939a4a9b3",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a49",
@@ -9673,7 +9741,7 @@
       "title": "脳梗塞で亡くなる人は人口当たりで秋田が最多、東京が最少 ── 47都道府県で比べる",
       "magazine": "s47-health",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a49",
       "body": {
         "store": "r2-public",
@@ -9687,7 +9755,9 @@
       },
       "stats47Targets": [
         "/ranking/deaths-cerebral-infarction-per-100k"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4ad7022a4411",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a51",
@@ -9696,7 +9766,7 @@
       "title": "自殺者数は東京が最多、人口当たりの交通事故死者は徳島が最も多い ── 47都道府県で比べる",
       "magazine": "s47-safety",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a51",
       "body": {
         "store": "r2-public",
@@ -9711,7 +9781,9 @@
       "stats47Targets": [
         "/ranking/suicide-count",
         "/ranking/traffic-accident-deaths-per-100k"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n5443898bbe1c",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-prc-a07",
@@ -9720,7 +9792,7 @@
       "title": "陸上部は福島、バドミントン部は富山、ソフトテニス部は山口 ── 中学の運動部10種目の部員数を47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a07",
       "body": {
         "store": "r2-public",
@@ -9743,7 +9815,9 @@
         "/ranking/junior-high-club-per100-table-tennis",
         "/ranking/junior-high-club-per100-basketball",
         "/ranking/junior-high-club-per100-soft-tennis"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/ncd2deb997656",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a09",
@@ -9752,7 +9826,7 @@
       "title": "高校ラグビー部員が多いのは山梨県と徳島県 ── 男子高校生100人あたりの部員数を47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a09",
       "body": {
         "store": "r2-public",
@@ -9766,7 +9840,9 @@
       },
       "stats47Targets": [
         "/ranking/high-school-club-per100-rugby-male"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0eda98daf2dd",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a10",
@@ -9775,7 +9851,7 @@
       "title": "サイクリングは東京都14.4％、スキーは北海道8.3％ ── アウトドアの楽しみ方を47都道府県で比べる",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a10",
       "body": {
         "store": "r2-public",
@@ -9791,7 +9867,9 @@
         "/ranking/sports-participation-rate-cycling",
         "/ranking/sports-participation-rate-hiking",
         "/ranking/sports-participation-rate-skiing"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n76d822ca3e90",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a12",
@@ -9800,7 +9878,7 @@
       "title": "ゴルフは愛知県、釣りは広島県が1位 ── ゴルフと釣りは盛んな県が逆になりやすい",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a12",
       "body": {
         "store": "r2-public",
@@ -9816,7 +9894,9 @@
         "/ranking/sports-participation-rate-golf",
         "/ranking/sports-participation-rate-fishing",
         "/ranking/sports-annual-participation-rate-10plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4503382d72b7",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a13",
@@ -9825,7 +9905,7 @@
       "title": "パチンコは佐賀県と鹿児島県、スポーツ観戦は広島県が1位 ── 6つの娯楽をした人の割合を47都道府県で比べる",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a13",
       "body": {
         "store": "r2-public",
@@ -9844,7 +9924,9 @@
         "/ranking/hobby-participation-rate-video-games",
         "/ranking/hobby-participation-rate-pachinko",
         "/ranking/hobby-participation-rate-karaoke"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n1015730f50b2",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a14",
@@ -9853,7 +9935,7 @@
       "title": "ガーデニングは群馬県、手芸は北海道、英語学習は東京都 ── 3つの趣味は盛んな県がばらばら",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a14",
       "body": {
         "store": "r2-public",
@@ -9869,7 +9951,9 @@
         "/ranking/hobby-participation-rate-gardening",
         "/ranking/hobby-participation-rate-knitting",
         "/ranking/study-participation-rate-english"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n44a61a72fdf2",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a15",
@@ -9878,7 +9962,7 @@
       "title": "華道とボランティアは島根県が1位 ── 書道・茶道・将棋・囲碁など6つの文化的活動を47都道府県で比べる",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a15",
       "body": {
         "store": "r2-public",
@@ -9898,7 +9982,9 @@
         "/ranking/volunteer-activity-annual-participation-rate-10plus",
         "/ranking/hobby-participation-rate-shogi",
         "/ranking/hobby-participation-rate-go"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0ad6145d5163",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a16",
@@ -9907,7 +9993,7 @@
       "title": "人口あたりの水泳プールは北海道が最多、埼玉県が最少 ── 数で見るか人口で割るかで並びが変わる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a16",
       "body": {
         "store": "r2-public",
@@ -9922,7 +10008,9 @@
       "stats47Targets": [
         "/ranking/public-swimming-pool-count-per-million",
         "/ranking/swimming-pool-public"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbe45f74f61ee",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a17",
@@ -9931,7 +10019,7 @@
       "title": "陸上競技場は北海道90施設、2位は鹿児島県 ── 陸上競技場と野球場の数を47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a17",
       "body": {
         "store": "r2-public",
@@ -9946,7 +10034,9 @@
       "stats47Targets": [
         "/ranking/athletics-stadium-count-public",
         "/ranking/baseball-field-public"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n30dc733b8419",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a18",
@@ -9955,7 +10045,7 @@
       "title": "人口あたりの体育館は鳥取県が東京都の12.84倍 ── 体育館の数を47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a18",
       "body": {
         "store": "r2-public",
@@ -9969,7 +10059,9 @@
       },
       "stats47Targets": [
         "/ranking/public-gymnasium-count-per-million"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nd0c7a5055e26",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a19",
@@ -9978,7 +10070,7 @@
       "title": "食事の時間が長いのは山梨県・秋田県・長野県 ── 1日の食事時間を男女別に47都道府県で比べる",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a19",
       "body": {
         "store": "r2-public",
@@ -9993,7 +10085,9 @@
       "stats47Targets": [
         "/ranking/meal-avg-time-female",
         "/ranking/meal-avg-time-male"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n43512fd5645e",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a20",
@@ -10002,7 +10096,7 @@
       "title": "テレビ・新聞などの時間は北海道155分、東京都106分 ── マスメディアに使う時間を47都道府県で比べる",
       "magazine": "s47-ict",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a20",
       "body": {
         "store": "r2-public",
@@ -10016,7 +10110,9 @@
       },
       "stats47Targets": [
         "/ranking/broadcast-media-time-all"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n3cc132d3422d",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-prc-a21",
@@ -10025,7 +10121,7 @@
       "title": "女性の家事時間は奈良県が最長、女性有業者の仕事時間は青森県が最長 ── 1日の時間の使い方を47都道府県で比べる",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a21",
       "body": {
         "store": "r2-public",
@@ -10045,7 +10141,9 @@
         "/ranking/sleep-avg-time-male",
         "/ranking/work-avg-time-employed-female",
         "/ranking/work-avg-time-employed-male"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0442a497809e",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a22",
@@ -10054,7 +10152,7 @@
       "title": "鉄道で通う人は東京都、車で通う人は愛知県が最多 ── 通勤・通学の交通手段を47都道府県で比べる",
       "magazine": "s47-tourism",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a22",
       "body": {
         "store": "r2-public",
@@ -10070,7 +10168,9 @@
         "/ranking/commute-by-train",
         "/ranking/commute-by-car",
         "/ranking/commuters-total"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n30a08f7ac737",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a24",
@@ -10079,7 +10179,7 @@
       "title": "インターネットを使う人の割合は東京都70.8％、青森県44.4％ ── 2006年の47都道府県比較",
       "magazine": "s47-ict",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a24",
       "body": {
         "store": "r2-public",
@@ -10093,7 +10193,9 @@
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb1643889a8a4",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "b-ref-prc-a25",
@@ -10102,7 +10204,7 @@
       "title": "塾や家庭教師で学ぶ小6は東京都57.9％、秋田県22.8％ ── 読書好きの割合と47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a25",
       "body": {
         "store": "r2-public",
@@ -10117,7 +10219,9 @@
       "stats47Targets": [
         "/ranking/national-assessment-elementary-tutoring-rate",
         "/ranking/national-assessment-elementary-reading-like-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n7c157e32eb9a",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a26",
@@ -10126,7 +10230,7 @@
       "title": "小学生の通学時間は岩手県が59分で最長、香川県は31分 ── 47都道府県で比べる",
       "magazine": "s47-sports-culture",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a26",
       "body": {
         "store": "r2-public",
@@ -10140,7 +10244,9 @@
       },
       "stats47Targets": [
         "/ranking/primary-school-commute-time-weekday"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n80869eb8b7e8",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a27",
@@ -10149,7 +10255,7 @@
       "title": "平日に1時間以上勉強する小6は岩手県64.7％で最多 ── 朝食と勉強の習慣を47都道府県で比べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a27",
       "body": {
         "store": "r2-public",
@@ -10164,7 +10270,9 @@
       "stats47Targets": [
         "/ranking/national-assessment-elementary-breakfast-rate",
         "/ranking/national-assessment-elementary-study-1h-plus-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nd6efea2ea009",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a28",
@@ -10173,7 +10281,7 @@
       "title": "エンゲル係数は兵庫県(神戸市)が33.4％で最も高い ── 家計の食費の割合を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a28",
       "body": {
         "store": "r2-public",
@@ -10187,7 +10295,9 @@
       },
       "stats47Targets": [
         "/ranking/engel-coefficient"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbb5ce1b6aa23",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a29",
@@ -10196,7 +10306,7 @@
       "title": "お米の購入量は福島県(福島市)が88kgで最多 ── 米の量と支出を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a29",
       "body": {
         "store": "r2-public",
@@ -10211,7 +10321,9 @@
       "stats47Targets": [
         "/ranking/rice-consumption-quantity",
         "/ranking/rice-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4f7ddc35ce44",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a30",
@@ -10220,7 +10332,7 @@
       "title": "生鮮野菜を最も多く買うのは山形県(山形市) ── 年間の購入量を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a30",
       "body": {
         "store": "r2-public",
@@ -10234,7 +10346,9 @@
       },
       "stats47Targets": [
         "/ranking/fresh-vegetables-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n3f73f9d8a5c7",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a31",
@@ -10243,7 +10357,7 @@
       "title": "キャベツは鹿児島市、もやしは山形市、はくさいは神戸市 ── 野菜10品目の購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a31",
       "body": {
         "store": "r2-public",
@@ -10266,7 +10380,9 @@
         "/ranking/cucumber-consumption-quantity",
         "/ranking/bean-sprouts-consumption-quantity",
         "/ranking/lettuce-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n165c2696ddaf",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a32",
@@ -10275,7 +10391,7 @@
       "title": "果物を最も多く買うのは山形県(山形市)、最も少ないのは大分県(大分市) ── 47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a32",
       "body": {
         "store": "r2-public",
@@ -10289,7 +10405,9 @@
       },
       "stats47Targets": [
         "/ranking/fresh-fruit-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n711b217540df",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a33",
@@ -10327,7 +10445,7 @@
       "title": "魚介類を最も多く買うのは青森県(青森市) ── 生鮮魚介の購入量を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a34",
       "body": {
         "store": "r2-public",
@@ -10341,7 +10459,9 @@
       },
       "stats47Targets": [
         "/ranking/fresh-seafood-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n019faad2cc71",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a35",
@@ -10350,7 +10470,7 @@
       "title": "さんまは秋田市、さばは鹿児島市、たいは佐賀市が最多 ── 3つの魚の購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a35",
       "body": {
         "store": "r2-public",
@@ -10366,7 +10486,9 @@
         "/ranking/saury-consumption-quantity",
         "/ranking/mackerel-consumption-quantity",
         "/ranking/sea-bream-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb25821eb9ef6",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a36",
@@ -10375,7 +10497,7 @@
       "title": "貝類の購入量は青森県(青森市)が最多、福岡県(福岡市)の7.00倍 ── 47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a36",
       "body": {
         "store": "r2-public",
@@ -10389,7 +10511,9 @@
       },
       "stats47Targets": [
         "/ranking/shellfish-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0edd260cf676",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a37",
@@ -10398,7 +10522,7 @@
       "title": "食塩は新潟市、みそは長野市、砂糖は津市が最多 ── 調味料4品目の購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a37",
       "body": {
         "store": "r2-public",
@@ -10415,7 +10539,9 @@
         "/ranking/miso-consumption-quantity",
         "/ranking/soy-sauce-consumption-quantity",
         "/ranking/sugar-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nf9c8f3c2d17e",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a38",
@@ -10424,7 +10550,7 @@
       "title": "緑茶は静岡市、紅茶は仙台市、コーヒーは鳥取市が最多 ── お茶とコーヒーの購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a38",
       "body": {
         "store": "r2-public",
@@ -10440,7 +10566,9 @@
         "/ranking/green-tea-consumption-quantity",
         "/ranking/black-tea-consumption-quantity",
         "/ranking/coffee-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n88b905cc0ae7",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-prc-a39",
@@ -10449,7 +10577,7 @@
       "title": "炭酸飲料は福島市、ミネラルウォーターは那覇市が最多 ── 飲み物への支出を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a39",
       "body": {
         "store": "r2-public",
@@ -10464,7 +10592,9 @@
       "stats47Targets": [
         "/ranking/carbonated-drink-consumption-expenditure",
         "/ranking/mineral-water-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n7813c753c4c8",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a40",
@@ -10473,7 +10603,7 @@
       "title": "牛乳を最も多く買うのは奈良県(奈良市) ── 年間の購入量を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a40",
       "body": {
         "store": "r2-public",
@@ -10487,7 +10617,9 @@
       },
       "stats47Targets": [
         "/ranking/milk-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/na899f4f02172",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a42",
@@ -10496,7 +10628,7 @@
       "title": "お菓子への支出は山形県(山形市)が最多 ── 菓子類の年間支出を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a42",
       "body": {
         "store": "r2-public",
@@ -10510,7 +10642,9 @@
       },
       "stats47Targets": [
         "/ranking/confectionery-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n9fea483acaf5",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a43",
@@ -10519,7 +10653,7 @@
       "title": "納豆への支出は福島県(福島市)が最多、和歌山県(和歌山市)が最少 ── 47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a43",
       "body": {
         "store": "r2-public",
@@ -10533,7 +10667,9 @@
       },
       "stats47Targets": [
         "/ranking/natto-consumption-expenditure"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n245947d339bc",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a44",
@@ -10542,7 +10678,7 @@
       "title": "即席麺(袋麺など)を最も多く買うのは熊本県(熊本市) ── 購入量を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a44",
       "body": {
         "store": "r2-public",
@@ -10556,7 +10692,9 @@
       },
       "stats47Targets": [
         "/ranking/instant-noodles-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n3f24f68f03fc",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a45",
@@ -10565,7 +10703,7 @@
       "title": "パンを最も多く買うのは大阪府(大阪市)、近畿の市が上位に並ぶ ── パンの購入量を47都道府県庁所在市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a45",
       "body": {
         "store": "r2-public",
@@ -10579,7 +10717,9 @@
       },
       "stats47Targets": [
         "/ranking/bread-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nadef03ea09ad",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-dev-a02",
@@ -10588,7 +10728,7 @@
       "title": "昆布をよく買うのは富山と東北、札幌は46位 ── こんぶの支出と購入量を47市で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a02",
       "body": {
         "store": "r2-public",
@@ -10603,7 +10743,9 @@
       "stats47Targets": [
         "/ranking/konbu-consumption-expenditure",
         "/ranking/konbu-consumption-quantity"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0f9c73ec2188",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-dev-a32",
@@ -10612,7 +10754,7 @@
       "title": "所得が高い県ほど失業率が低いとは限らない ── 県民所得と完全失業率を47都道府県で比べる",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-dev-a32",
       "body": {
         "store": "r2-public",
@@ -10626,7 +10768,9 @@
       },
       "stats47Targets": [
         "/ranking/unemployment-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n48f662d1b14e",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-prc-a41",
@@ -10635,7 +10779,7 @@
       "title": "成人1人あたりのお酒は東京都が最多、清酒は新潟県、焼酎は鹿児島県 ── 酒類別の販売量を46都道府県で比べる",
       "magazine": "s47-economy",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a41",
       "body": {
         "store": "r2-public",
@@ -10654,7 +10798,9 @@
         "/ranking/alcohol-sales-per-adult-shochu",
         "/ranking/alcohol-sales-per-adult-wine",
         "/ranking/alcohol-sales-per-adult-whisky"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n9c53c03f6b32",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a47",
@@ -10663,7 +10809,7 @@
       "title": "北海道は面積と食料自給率で全国1位 ── 北海道・東北の7道県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a47",
       "body": {
         "store": "r2-public",
@@ -10683,7 +10829,9 @@
         "/areas/05000",
         "/areas/06000",
         "/areas/07000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n23d6898b0f15",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a48",
@@ -10692,7 +10840,7 @@
       "title": "東京都は宿泊者数と世帯数で1位、合計特殊出生率は47位 ── 関東の7都県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a48",
       "body": {
         "store": "r2-public",
@@ -10712,7 +10860,9 @@
         "/areas/12000",
         "/areas/13000",
         "/areas/14000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/ndc76fe819d05",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a49",
@@ -10721,7 +10871,7 @@
       "title": "愛知県は製造品出荷額で1位、新潟県は水稲収穫量で1位 ── 中部の9県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a49",
       "body": {
         "store": "r2-public",
@@ -10743,7 +10893,9 @@
         "/areas/21000",
         "/areas/22000",
         "/areas/23000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nbbd5bd83d5fd",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a50",
@@ -10752,7 +10904,7 @@
       "title": "滋賀県は男性の平均寿命で1位、大阪府は製造業事業所数で1位 ── 近畿の7府県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a50",
       "body": {
         "store": "r2-public",
@@ -10772,7 +10924,9 @@
         "/areas/28000",
         "/areas/29000",
         "/areas/30000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nd94fc821b273",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a51",
@@ -10781,7 +10935,7 @@
       "title": "岡山県は女性の平均寿命で1位、徳島県は人口当たり医師数で1位 ── 中国・四国の9県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a51",
       "body": {
         "store": "r2-public",
@@ -10803,7 +10957,9 @@
         "/areas/37000",
         "/areas/38000",
         "/areas/39000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/na36328b979fc",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-prc-a52",
@@ -10812,7 +10968,7 @@
       "title": "沖縄県は粗出生率と年平均気温で1位、大分県は製造品出荷額(従業者1人当たり)で1位 ── 九州・沖縄の8県が全国で上位・下位に入る指標",
       "magazine": "s47-population",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-prc-a52",
       "body": {
         "store": "r2-public",
@@ -10833,7 +10989,9 @@
         "/areas/45000",
         "/areas/46000",
         "/areas/47000"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nd0be61517d63",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a01-05",
@@ -10842,7 +11000,7 @@
       "title": "予備校代の差は年収で101倍に ── 大学と塾への支出を年収5階級で10年前と比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a01-05",
       "body": {
         "store": "r2-public",
@@ -10854,7 +11012,9 @@
         },
         "verifiedAt": "2026-10-13T08:21:17.114Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/ncfb6a1c35121",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-02",
@@ -10863,7 +11023,7 @@
       "title": "年収が上がると食費の割合は下がり、仕送りや語学の割合は上がる ── 家計の配分を年収5階級で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-02",
       "body": {
         "store": "r2-public",
@@ -10875,7 +11035,9 @@
         },
         "verifiedAt": "2026-10-13T08:21:17.299Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n6be231a3233f",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-04",
@@ -10884,7 +11046,7 @@
       "title": "コンタクトレンズは12.99倍、医科診療代は1.12倍 ── 年収で差がつく医療費とつかない医療費",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-04",
       "body": {
         "store": "r2-public",
@@ -10896,7 +11058,9 @@
         },
         "verifiedAt": "2026-10-13T08:21:17.413Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/nb2e4f5f34f22",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-05",
@@ -10905,7 +11069,7 @@
       "title": "紅茶は2.42倍、緑茶は0.72倍 ── 年収の高い世帯が多く支出する食料品を5階級で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-05",
       "body": {
         "store": "r2-public",
@@ -10917,7 +11081,9 @@
         },
         "verifiedAt": "2026-10-13T08:22:02.673Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/nd8b1ce95b997",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-06",
@@ -10926,7 +11092,7 @@
       "title": "自動車購入は4.37倍、ガソリンは家計に占める割合が両端の階級でほぼ同じ ── 年収5階級で見る車の支出",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-06",
       "body": {
         "store": "r2-public",
@@ -10938,7 +11104,9 @@
         },
         "verifiedAt": "2026-10-13T08:22:11.185Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n0f84e2661d89",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-07",
@@ -10947,7 +11115,7 @@
       "title": "パソコンは5.24倍、テレビは1.39倍 ── 家電と映像関連10品目の支出を年収5階級で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-07",
       "body": {
         "store": "r2-public",
@@ -10959,7 +11127,9 @@
         },
         "verifiedAt": "2026-10-13T08:24:31.072Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n5c964549ec30",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-08",
@@ -10968,7 +11138,7 @@
       "title": "遊園地は22.63倍、ゴルフ用具は15.48倍 ── 年収の高い世帯が多く払う娯楽とその10年の変化",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-08",
       "body": {
         "store": "r2-public",
@@ -10980,7 +11150,9 @@
         },
         "verifiedAt": "2026-10-13T08:24:31.125Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/nde5f16a081f9",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a02-09",
@@ -10989,7 +11161,7 @@
       "title": "宿泊料は5.29倍、外国パック旅行は5.01倍 ── 旅行の支出を年収5階級で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a02-09",
       "body": {
         "store": "r2-public",
@@ -11001,7 +11173,9 @@
         },
         "verifiedAt": "2026-10-13T08:24:31.252Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/ne8cba9b99137",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-kakei-a03-01",
@@ -11010,7 +11184,7 @@
       "title": "男子用コートは14.48倍、下着は1.76倍 ── 年収の高い世帯が差をつけて買う衣料品",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a03-01",
       "body": {
         "store": "r2-public",
@@ -11022,7 +11196,9 @@
         },
         "verifiedAt": "2026-10-13T08:24:31.351Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n037f42ea22fc",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a03-04",
@@ -11031,7 +11207,7 @@
       "title": "腕時計は26.42倍 ── 腕時計・ハンドバッグ・傘の支出を年収5階級で比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a03-04",
       "body": {
         "store": "r2-public",
@@ -11043,7 +11219,9 @@
         },
         "verifiedAt": "2026-10-13T08:25:20.149Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/nb729bb5e7612",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a04-01",
@@ -11052,7 +11230,7 @@
       "title": "食費の割合は年収の低い世帯で34.38%、高い世帯で26.52% ── エンゲル係数と生活水準の関係を年収5階級で確かめる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a04-01",
       "body": {
         "store": "r2-public",
@@ -11064,7 +11242,9 @@
         },
         "verifiedAt": "2026-10-13T08:26:07.061Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/nc421986688b2",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a04-04",
@@ -11073,7 +11253,7 @@
       "title": "固定電話代は年収の低い世帯ほど家計に重い ── 通信費の割合は生活水準の物差しになるか",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a04-04",
       "body": {
         "store": "r2-public",
@@ -11085,7 +11265,9 @@
         },
         "verifiedAt": "2026-10-13T08:29:05.905Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n9777ed7f52b5",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a05-04",
@@ -11094,7 +11276,7 @@
       "title": "飲酒代は7.03倍、洋食は5.18倍 ── 外食のどの業態に年収の高い世帯がお金を使うか",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a05-04",
       "body": {
         "store": "r2-public",
@@ -11106,7 +11288,9 @@
         },
         "verifiedAt": "2026-10-13T08:29:06.013Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n7cde5e1423f4",
+      "publishedAt": "2026-10-14"
     },
     {
       "key": "b-ref-kakei-a01-01",
@@ -11115,7 +11299,7 @@
       "title": "学力テストの上位は東京・石川・福井 ── 2025年の都道府県別平均正答率を並べる",
       "magazine": "s47-education",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a01-01",
       "body": {
         "store": "r2-public",
@@ -11129,7 +11313,9 @@
       },
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/ncba36d395bd7",
+      "publishedAt": "2026-10-13"
     },
     {
       "key": "b-ref-kakei-a04-02",
@@ -11138,7 +11324,7 @@
       "title": "70歳以上の世帯はエンゲル係数33.5% ── それでも米は最も安い単価で買っていた",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-ref-kakei-a04-02",
       "body": {
         "store": "r2-public",
@@ -11150,7 +11336,9 @@
         },
         "verifiedAt": "2026-10-13T08:29:05.729Z"
       },
-      "stats47Targets": []
+      "stats47Targets": [],
+      "noteUrl": "https://note.com/stats47/n/n6aae3232670d",
+      "publishedAt": "2026-10-13"
     }
   ]
 }

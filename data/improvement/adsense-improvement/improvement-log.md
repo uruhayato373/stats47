@@ -1,9 +1,10 @@
-# AdSense 改善ログ (凍結記録)
+# AdSense 改善ログ
 
-> **2026-09-20: AdSense は恒久停止した。このログは凍結記録で、新しい施策を追記しない。**
-> 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は
-> `.claude/memory/project_monetization_contract.md`。広告レーンの改善は
-> `.claude/skills/analytics/affiliate-improvement/` で行う。
+> **2026-10-11: 新アカウント (`pub-9055416085403520`) の手動枠 11 ユニットで再開し、このログの凍結を解除した。**
+> 2026-09-20〜10-10 は「恒久停止」の凍結記録だった。再開後の施策は末尾に追記する。正典は
+> `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は `.claude/memory/project_monetization_contract.md`、
+> 運用は `/adsense-improvement`、再開の手順は backlog `ADSENSE-RESTART-01`。
+> **再開前の施策と snapshot は旧アカウント・自動広告ありの時期の記録**で、手動枠だけの今の前後比較の基準にしない。
 
 一覧・status の真実源は `.claude/todo/improvements.md`。ここは検証コマンド・仮説・期日の詳細ログ。
 記入テンプレ: `.claude/rules/evidence-based-judgment.md` §改善ログ記入テンプレ。
@@ -89,3 +90,17 @@
 - **検証コマンド**: デプロイ 2 週後に `cat .claude/skills/analytics/adsense-improvement/reference/snapshots/<week>/devices.csv` — High-end mobile 行の viewability を W27 (39.1%) と比較。全体は `overview.csv` の viewability を W27 (60.9%) と比較。imp/PV が下がりすぎ (< 0.7) ていないかも監視
 - **判定**: pending (モバイル系統一括で 2026-08-02。本施策は LAZYLOAD-01 の部分ロールバックのため交絡群に含める)
 - **未確定 / 仮説**: [仮説] viewability 回復で CPM が戻り earnings が改善する。2026-08-02 に viewability が W27 の 39% から回復していなければ、モバイルのアンカー広告 (ANCHOR-01) との共食いを units.csv で確認する
+
+---
+
+### [ADSENSE-PLACEMENT-01] 手動枠 11 ユニットの配置を再開後 4 週のベースラインの後に見直す
+
+- **デプロイ日**: 2026-10-11 (15:43 JST、新アカウント pub-9055416085403520、自動広告オフ。PR #1123 cd80b60、記事内広告の幅修正 PR #1124 bca0286)
+- **想定効果**: 置かない [根拠: 停止前の自動広告込み値しか無く、手動枠だけの 4 週実測が無い。オーナー方針で目標は 4 週の実測後に置く]。参考値: W30〜W33 は GA4 PV 換算 ¥22/1,000 PV (自動広告込み)、W31 の手動枠分のみ ¥6.7
+- **配置**: 停止直前の手動枠をそのまま戻した (オーナー指示「色々と試しながら計測記録改善」)。ユニットは `apps/web/src/lib/google-adsense/constants.ts`。W42〜W45 (10-11〜11-07) は配置を変えない
+- **検証コマンド**: `node .claude/scripts/metrics/measure-adsense-impact.mjs` / `npm run metrics:adsense-impact`。ユニット別は `data/adsense/history-units.csv`、KPI `ad-yield` は `.claude/scripts/metrics/lib/adsense-revenue.mjs` (AdSense 確定 7 日 × 4 週 ÷ GA4 Japan PV 28 日 × 1,000)
+- **実測**: 未取得 (W42 の週次計測は 2026-10-16 以降)
+- **判定**: effect/pending [期日 2026-11-14。W45 の週次計測 (11-13) の後に、効かない枠を外す・動かすを決める。動かなければ次の検証: ユニット別視認率と収益を見て枠単位で判断]
+- **未確定 / 仮説**: [仮説] home のレール枠 stats47-hub-rail は幅 262px で 300×250 が入らず表示されない。検証期日 2026-11-13、検証コマンド: `data/adsense/history-units.csv` の当該ユニットの imp。モバイル手動枠 (W31 に外した記事内・フッター) を戻すかは 4 週実測後に判断
+- **交絡**: AFF-IMPRESSION-ROUTING-01・AMAZON-ASSOCIATE-PILOT-01 と窓が重なる (境界 2026-10-11)
+- **計測経路**: 2026-10-13 に refresh token・Client Secret・Account ID を新アカウントへ差し替え、PR #1133 で週次 workflow に前後比較を戻した。GA4 と新 AdSense のリンクも 10-13 に作成

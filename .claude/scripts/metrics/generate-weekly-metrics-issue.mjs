@@ -22,6 +22,7 @@ import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
+import { adsenseRevenueLine } from './lib/adsense-revenue.mjs';
 import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
 
@@ -226,8 +227,8 @@ function revenueSection(week) {
   weekSun.setUTCDate(weekMon.getUTCDate() + 6);
   const sundayStr = weekSun.toISOString().slice(0, 10);
 
-  // --- AdSense: 2026-08-29 に恒久停止済み。再開しない前提で ¥0 を確定値として出す。
-  lines.push("- AdSense: **¥0**（2026-08-29 に恒久停止。再開前提の枠・スクリプトは撤去済み）");
+  // --- AdSense: 2026-10-11 に手動枠で再開。停止中の週は ¥0、再開後は history.csv の行だけを根拠にし、行が無ければ判定不能。
+  lines.push(adsenseRevenueLine({ history: readCsv(`${datasetDir("adsense.history")}/history.csv`)?.rows ?? null, week }));
 
   // --- アフィリエイト: 発生額は ASP 管理画面にしかないため、ここでは観測の鮮度だけを判定する。
   const aff = readCsv(datasetPath("ga4.affiliate-history"));
@@ -469,7 +470,7 @@ function main() {
   lines.push(`- [GA4 history.csv](../blob/develop/data/ga4/history.csv) / [LATEST.md](../blob/develop/data/ga4/LATEST.md)`);
   lines.push(`- [アフィリエイト観測 ga4-affiliate-history.csv](../blob/develop/data/affiliate/ga4-affiliate-history.csv)`);
   lines.push(`- [商品販売台帳 sales-ledger.json](../blob/develop/data/products/sales-ledger.json)`);
-  lines.push(`- AdSense は 2026-08-29 に恒久停止。過去分は [history.csv](../blob/develop/data/adsense/history.csv) に凍結`);
+  lines.push(`- [AdSense history.csv](../blob/develop/data/adsense/history.csv) / [LATEST.md](../blob/develop/data/adsense/LATEST.md)（2026-08-29〜10-10 は配信停止、2026-10-11 に手動枠で再開）`);
   lines.push("");
 
   process.stdout.write(lines.join("\n"));

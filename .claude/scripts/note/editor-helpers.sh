@@ -328,9 +328,14 @@ new_post_cover_title(){
     rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"
     local SV=$(awk '/^\t+保存$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | tail -1)
     [ -n "$SV" ] || { echo "  [FAIL] 見出し画像の保存ボタンが見つからない"; return 1; }
-    BU click "$SV" >/dev/null 2>&1; sleep 3
+    BU click "$SV" >/dev/null 2>&1
     # カバーが付いたことを確かめる (付かないまま公開しない。2026-10-13 に画面の変更で黙って飛ばしていた)
-    local EYE=$(BU eval "(function(){return [...document.querySelectorAll('img')].some(x=>/uploads\\/images/.test(x.src))?'eyecatch-set':'eyecatch-missing';})()" 2>&1 | grep -oE 'eyecatch-(set|missing)' | head -1)
+    # 保存から画面への反映まで 6 秒前後かかる (2026-10-13 実測)。3 秒で 1 回だけ見ると付いていても missing になるので、最大 20 秒待つ
+    local EYE="" EW=0
+    while [ "$EYE" != "eyecatch-set" ] && [ "$EW" -lt 10 ]; do
+      sleep 2; EW=$((EW+1))
+      EYE=$(BU eval "(function(){return [...document.querySelectorAll('img')].some(x=>/uploads\\/images/.test(x.src))?'eyecatch-set':'eyecatch-missing';})()" 2>&1 | grep -oE 'eyecatch-(set|missing)' | head -1)
+    done
     [ "$EYE" = "eyecatch-set" ] || { echo "  [FAIL] 見出し画像が設定されていない ($EYE)"; return 1; }
   fi
   BU state 2>&1 > /tmp/ns.txt
@@ -375,8 +380,21 @@ new_post_magazine(){
   BU state 2>&1 > /tmp/ns.txt
   local MA=$(grep -oE "\[[0-9]+\]<button id=item-magazine-add" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
   BU click "$MA" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
+  # 一覧は開いてから読み込みが続き、2 秒では最近使ったマガジンしか出ていないことがある (2026-10-13 に「教育・学び」で停止)。最大 15 秒待つ
+  local MW=0
+  while ! grep -qF "$MAG" /tmp/ns.txt && [ "$MW" -lt 5 ]; do sleep 3; MW=$((MW+1)); BU state 2>&1 > /tmp/ns.txt; done
+  # タグを 99 個入れると一覧が画面外に押し出され、state に出ないことがある (2026-10-13 に「人口・世帯」で停止)。
+  # DOM (shadow root を含む) からマガジン名を直接探して「追加」を押し、「追加済」になったことを確かめる
+  local MAG_ENC; MAG_ENC=$(node -e 'process.stdout.write(encodeURIComponent(process.argv[1]))' "$MAG")
+  local JSR=""
+  for _try in 1 2 3 4 5; do
+    JSR=$(BU eval "(function(){const name=decodeURIComponent('$MAG_ENC');const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const t=all.find(e=>e.childNodes.length===1&&e.firstChild.nodeType===3&&e.textContent.trim()===name);if(!t)return 'mag-missing';let p=t;for(let i=0;i<6&&p;i++){p=p.parentElement;const b=p&&p.querySelector('button');if(b){const l=b.textContent.trim();if(l==='追加済')return 'mag-added';if(l==='追加'){b.scrollIntoView({block:'center'});b.click();return 'mag-clicked';}return 'mag-button:'+l;}}return 'mag-nobutton';})()" 2>&1 | grep -oE 'mag-[a-z]+(:.*)?' | head -1)
+    [ "$JSR" = "mag-clicked" ] && { sleep 2; JSR=$(BU eval "(function(){const name=decodeURIComponent('$MAG_ENC');const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const t=all.find(e=>e.childNodes.length===1&&e.firstChild.nodeType===3&&e.textContent.trim()===name);let p=t;for(let i=0;i<6&&p;i++){p=p.parentElement;const b=p&&p.querySelector('button');if(b)return b.textContent.trim()==='追加済'?'mag-added':'mag-button:'+b.textContent.trim();}return 'mag-nobutton';})()" 2>&1 | grep -oE 'mag-[a-z]+(:.*)?' | head -1); }
+    [ "$JSR" = "mag-added" ] && { echo "  magazine: $MAG (dom)"; return 0; }
+    sleep 3
+  done
   local HL=$(grep -nF "$MAG" /tmp/ns.txt | head -1 | cut -d: -f1)
-  [ -z "$HL" ] && { echo "  [WARN] magazine not found: $MAG"; return 1; }
+  [ -z "$HL" ] && { echo "  [WARN] magazine not found: $MAG ($JSR)"; return 1; }
   local ADDIDX=$(awk -v h="$HL" 'NR>h && /追加$/{getline x; if(0){} match(prev,/\[[0-9]+\]/); } NR==h{found=1} found && /\[[0-9]+\]<button/{btn=$0} found && /^\t+追加$/{match(btn,/\[[0-9]+\]/); print substr(btn,RSTART+1,RLENGTH-2); exit} {prev=$0}' /tmp/ns.txt)
   [ -z "$ADDIDX" ] && { echo "  [WARN] magazine add button not found"; return 1; }
   BU click "$ADDIDX" >/dev/null 2>&1; sleep 1.5

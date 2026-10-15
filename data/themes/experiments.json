@@ -7586,7 +7586,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 25,
+            "missingKeyList": [
+              "ratio-65-plus",
+              "aging-index",
+              "total-fertility-rate",
+              "crude-birth-rate",
+              "crude-death-rate",
+              "average-age-of-first-marriage-wife",
+              "population-growth-rate",
+              "natural-increase-rate",
+              "social-increase-rate",
+              "dependent-population-index"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-aging-society (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「高齢者はどの世帯で暮らすか」のカードに高齢者の一人暮らしの割合を追加 (cf0335d56)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#aging-society/metrics",
@@ -7632,7 +7660,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 23,
+            "missingKeyList": [
+              "fish-catch",
+              "marine-fishery-catch",
+              "inland-fishery-catch",
+              "fishing-port-count-ksj",
+              "aquaculture-harvest",
+              "marine-aquaculture-harvest",
+              "inland-aquaculture-harvest",
+              "marine-fishery-aquaculture-output-value",
+              "marine-fishery-output-value",
+              "fishery-output-value"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-fishery-marine (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「主な魚種と産地」章を新設し魚種別漁獲量 5 指標を secondary に (cf0335d56)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#fishery-marine/metrics",
@@ -7678,7 +7734,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 15,
+            "missingKeyList": [
+              "total-production-in-the-prefecture",
+              "per-taxpayer-taxable-income",
+              "per-capita-prefectural-income-h27",
+              "employed-people-ratio-primary",
+              "employed-people-ratio-secondary",
+              "employed-people-ratio-tertiary",
+              "number-of-establishments-economic-census-basic-survey",
+              "agricultural-output",
+              "agricultural-employment-population",
+              "electricity-generation-capacity"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-local-economy (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#local-economy/metrics",
@@ -7724,7 +7808,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 59,
+            "missingKeyList": [
+              "physicians-in-medical-facilities-per-100k",
+              "nurses-in-medical-facilities-per-100k",
+              "general-hospital-count-per-100k",
+              "general-hospital-bed-count-per-100k",
+              "pharmacy-count-per-100k",
+              "national-medical-expense-per-person",
+              "general-hospital-avg-length-of-stay",
+              "general-hospital-bed-occupancy-rate",
+              "deaths-lifestyle-diseases-per-100k",
+              "deaths-diabetes-per-100k"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-healthcare (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 5 枚を削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#healthcare/metrics",
@@ -7770,7 +7882,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 19,
+            "missingKeyList": [
+              "turnover-rate",
+              "job-change-rate",
+              "active-job-opening-ratio",
+              "unemployment-rate",
+              "employment-rate",
+              "telework-rate",
+              "side-job-rate",
+              "monthly-average-actual-working-hours-male",
+              "employment-mobility-rate",
+              "day-time-population-ratio"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-labor-mobility (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「人手不足と求人」章を求人・求職と職業紹介へ統合し、「就業の状態と働き方」の重複カードを削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#labor-mobility/metrics",
@@ -7816,7 +7956,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 20,
+            "missingKeyList": [
+              "minimum-wage-by-region",
+              "starting-salary-university",
+              "starting-salary-highschool",
+              "scheduled-salary-male",
+              "nurse-salary",
+              "gender-wage-gap",
+              "male-part-time-hourly-wage",
+              "female-part-time-hourly-wage",
+              "active-job-opening-ratio",
+              "unemployment-rate"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-labor-wages (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#labor-wages/metrics",
@@ -7862,7 +8030,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 38,
+            "missingKeyList": [
+              "vacant-housing-ratio",
+              "owner-occupied-housing-ratio",
+              "floor-area-per-dwelling-owner",
+              "floor-area-per-dwelling-rented",
+              "households",
+              "nuclear-family-households-ratio",
+              "elderly-couple-only-household-ratio",
+              "single-person-household-old-population-ratio",
+              "population-density-per-km2-inhabitable-area",
+              "habitable-area-ratio"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-living-housing (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 2 枚を削除し、カード見出し「一般世帯数」から章名を外した (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#living-housing/metrics",
@@ -7908,7 +8104,35 @@
         "d28": "2026-11-04",
         "d56": "2026-12-02"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-14",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 34,
+            "missingKeyList": [
+              "total-population",
+              "total-fertility-rate",
+              "moving-in-excess-rate",
+              "ratio-65-plus",
+              "population-growth-rate",
+              "natural-increase-rate",
+              "crude-birth-rate",
+              "crude-death-rate",
+              "social-increase-rate",
+              "young-population-ratio"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-population-dynamics (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#population-dynamics/metrics",
@@ -7954,7 +8178,35 @@
         "d28": "2026-11-05",
         "d56": "2026-12-03"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-15",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 17,
+            "missingKeyList": [
+              "total-overnight-guests",
+              "room-utilization-rate",
+              "total-overnight-guests-foreign",
+              "actual-overnight-guests",
+              "travel-participation-rate-domestic-tourism",
+              "travel-participation-rate-overseas",
+              "travel-participation-rate-overnight",
+              "travel-participation-rate-day-trip",
+              "air-passenger-transport",
+              "number-of-simple-lodging-facilities"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-tourism (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#tourism/metrics",
@@ -8000,7 +8252,35 @@
         "d28": "2026-11-05",
         "d56": "2026-12-03"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-10-15",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "unknown",
+            "observedAt": "2026-10-05T04:27:30.324Z",
+            "keysChecked": 0,
+            "oldestLatestDataYear": null,
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 14,
+            "missingKeyList": [
+              "consumer-price-difference-index-overall",
+              "consumer-price-difference-index-overall-excl-rent",
+              "consumer-price-difference-index-food",
+              "consumer-price-difference-index-housing",
+              "consumer-price-difference-index-utilities",
+              "consumer-price-difference-index-education",
+              "consumer-price-difference-index-culture-recreation",
+              "consumer-price-difference-index-transport-communication",
+              "consumer-price-difference-index-healthcare",
+              "consumer-price-difference-index-clothing-footwear"
+            ],
+            "latestYearPrefCoverageMin": null
+          }
+        }
+      },
       "notes": "THEME-STRUCTURE-20260908-consumer-prices (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
       "evidenceRefs": [
         "data/themes/portfolio.json#consumer-prices/metrics",
