@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T12:19:15.227Z",
+  "updatedAt": "2026-10-15T12:57:39.689Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13736,21 +13736,6 @@
       }
     },
     {
-      "articleKey": "A-laborwage-commute-time-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00107",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
-      }
-    },
-    {
       "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
       "noteUrl": null,
       "revisions": [],
@@ -13865,6 +13850,72 @@
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
+      "revisions": [
+        {
+          "sha256": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/revisions/880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f.png"
+          },
+          "bytes": 2219160,
+          "id": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-b1b78bc1d377",
+          "createdAt": "2026-10-15T12:50:55.134Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T12:50:59.153Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/inputs/ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941.json"
+              },
+              "bytes": 9650
+            },
+            "production": {
+              "id": "NCI-00499",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "b1b78bc1d37702695f94ffc06595a94040b52121272e244f77c019e0562e1a95"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "approvedRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00499",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "通勤90分以上の\n世帯が多い県は？",
+          "subline": "1位は埼玉県\n2023年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に長い通勤を象徴する具体物を1点だけ大きく描く: 無地の通勤定期入れと、その横に置いた文字盤に数字のないシンプルな腕時計。定期入れの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。電車の車両・路線図・駅名標・地図・グラフ・時刻表・数字の入った時計は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min/draft.md 2026-10-15 公開R2の本文を確認。2023年の社会・人口統計体系 (statsDataId 0000010208・項目 H03102) の、家計を主に支える者が雇用者で通勤時間が1時間30分以上の主世帯の割合 (主世帯千世帯あたり) の都道府県ランキングで1位は埼玉県 (33.9)、47位は沖縄県 (2.6)。平均通勤時間ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {

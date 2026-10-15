@@ -289,26 +289,6 @@
       ]
     },
     {
-      "key": "A-laborwage-commute-time-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】平均通勤時間ランキング｜首都圏 vs 地方の差",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-commute-time-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "8cd5efdd138feafa024eb16c22aa1c73ee9381de964464470e16f797a84acaa9",
-          "files": 5,
-          "bytes": 97698,
-          "savedAt": "2026-10-12T22:05:55.551Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "A-laborwage-paid-leave-utilization-prefecture",
       "vertical": "stats47-note",
       "series": "A",
@@ -11373,6 +11353,31 @@
         "/ranking/new-graduate-starting-salary-university-female"
       ],
       "noteUrl": "https://note.com/stats47/n/necff830a091b",
+      "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2023年版・主世帯・1時間30分以上】雇用者世帯の通勤時間が最も長い県は？ 1位は埼玉県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "c80bbb5d1c92aa45b10f6fa7599a01a3b157f7cf1293e3e9266c1a731ebffa15",
+          "files": 9,
+          "bytes": 373589,
+          "savedAt": "2026-10-15T12:56:51.142Z"
+        },
+        "verifiedAt": "2026-10-15T12:56:51.142Z"
+      },
+      "stats47Targets": [
+        "/ranking/main-household-ratio-main-earner-employee-commute-90min"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
       "publishedAt": "2026-10-15"
     }
   ]
