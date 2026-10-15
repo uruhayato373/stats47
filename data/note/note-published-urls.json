@@ -1142,6 +1142,28 @@
       "r2_access": "none",
       "status": "note_only"
     },
+    "a-new-graduate-starting-salary-university-female": {
+      "vertical": "stats47-note",
+      "title": "【2019年版・大卒・女性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/necff830a091b",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/a-new-graduate-starting-salary-university-female",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "a-new-graduate-starting-salary-university-male": {
+      "vertical": "stats47-note",
+      "title": "【2019年版・大卒・男性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nf067364b58fb",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/a-new-graduate-starting-salary-university-male",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "a-number-of-establishments-manufacturing": {
       "vertical": "stats47-note",
       "title": "【2014年版・製造業】事業所数が最も多い県は？ 1位は東京都｜都道府県ランキング",

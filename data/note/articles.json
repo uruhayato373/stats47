@@ -329,26 +329,6 @@
       }
     },
     {
-      "key": "A-laborwage-starting-salary-by-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】大卒初任給ランキング｜新卒が一番もらえる県",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-starting-salary-by-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "7b26b0f7e5c37682566b4004cb9f63057962c6c0f66a854a1a931ce8b94869ab",
-          "files": 5,
-          "bytes": 99112,
-          "savedAt": "2026-10-12T22:05:55.509Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "A-laborwage-wages-by-industry-prefecture",
       "vertical": "stats47-note",
       "series": "A",
@@ -11352,7 +11332,7 @@
       "title": "【2019年版・大卒・男性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-male",
       "body": {
         "store": "r2-public",
@@ -11360,13 +11340,15 @@
           "sha256": "a887c53df926421e5bd22ab8ab4cb1bd54285dab31ab6c61dcd7adafc074e38b",
           "files": 9,
           "bytes": 369046,
-          "savedAt": "2026-10-15T11:16:21.119Z"
+          "savedAt": "2026-10-15T11:55:10.393Z"
         },
-        "verifiedAt": "2026-10-15T11:16:21.119Z"
+        "verifiedAt": "2026-10-15T11:55:10.393Z"
       },
       "stats47Targets": [
         "/ranking/new-graduate-starting-salary-university-male"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nf067364b58fb",
+      "publishedAt": "2026-10-15"
     },
     {
       "key": "a-new-graduate-starting-salary-university-female",
@@ -11375,7 +11357,7 @@
       "title": "【2019年版・大卒・女性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-female",
       "body": {
         "store": "r2-public",
@@ -11383,13 +11365,15 @@
           "sha256": "314b74f5164d1093aaa4909a55c6df87369af30995827cca65d084af1a796a1e",
           "files": 9,
           "bytes": 370773,
-          "savedAt": "2026-10-15T11:16:23.266Z"
+          "savedAt": "2026-10-15T11:55:12.472Z"
         },
-        "verifiedAt": "2026-10-15T11:16:23.266Z"
+        "verifiedAt": "2026-10-15T11:55:12.472Z"
       },
       "stats47Targets": [
         "/ranking/new-graduate-starting-salary-university-female"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/necff830a091b",
+      "publishedAt": "2026-10-15"
     }
   ]
 }

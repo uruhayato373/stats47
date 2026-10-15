@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T11:16:25.761Z",
+  "updatedAt": "2026-10-15T11:55:14.833Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13661,21 +13661,6 @@
       }
     },
     {
-      "articleKey": "A-laborwage-starting-salary-by-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00110",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
-      }
-    },
-    {
       "articleKey": "A-laborwage-wages-by-industry-prefecture",
       "noteUrl": null,
       "revisions": [],
@@ -14092,32 +14077,134 @@
     },
     {
       "articleKey": "a-new-graduate-starting-salary-university-female",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "noteUrl": "https://note.com/stats47/n/necff830a091b",
+      "revisions": [
+        {
+          "sha256": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-female/revisions/a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332.png"
+          },
+          "bytes": 2240209,
+          "id": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d53cdb2f3e19",
+          "createdAt": "2026-10-15T11:43:53.536Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T11:44:10.768Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-female/inputs/32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9.json"
+              },
+              "bytes": 9407
+            },
+            "production": {
+              "id": "NCI-00497",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d53cdb2f3e19c92faacd6aeca3fa33989cf1b54d21747299d43e594c9f445aed"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+      "approvedRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00497",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "大卒女性の初任給\n高い県は？",
+          "subline": "1位は東京都\n2019年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に新社会人を象徴する具体物を1点だけ大きく描く: 真新しい無地の濃紺の通勤用ビジネスバッグと、その上に置いた無地の社員証ケース (ストラップ付き)。社員証ケースの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。給与明細・札束・金額・グラフ・地図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-new-graduate-starting-salary-university-female/draft.md 2026-10-15 公開R2の本文を確認。2019年の新規学卒者初任給 (大学卒・女性) の都道府県ランキングで1位は東京都 (216.2千円)、47位は沖縄県 (175.5千円)。カバーは比較対象・対象年・1位だけを表示し、金額や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
       "articleKey": "a-new-graduate-starting-salary-university-male",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "noteUrl": "https://note.com/stats47/n/nf067364b58fb",
+      "revisions": [
+        {
+          "sha256": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-male/revisions/832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c.png"
+          },
+          "bytes": 2294758,
+          "id": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-f931c46a9356",
+          "createdAt": "2026-10-15T11:43:44.034Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T11:44:07.059Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-male/inputs/fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f.json"
+              },
+              "bytes": 9401
+            },
+            "production": {
+              "id": "NCI-00498",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "f931c46a9356a68c12ac6e0fe0f65b1765e54cb2388e7866ca57263bd218519c"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+      "approvedRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00498",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "大卒男性の初任給\n高い県は？",
+          "subline": "1位は東京都\n2019年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に新社会人を象徴する具体物を1点だけ大きく描く: 真新しい無地の濃紺の通勤用ビジネスバッグと、その上に置いた無地の社員証ケース (ストラップ付き)。社員証ケースの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。給与明細・札束・金額・グラフ・地図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-new-graduate-starting-salary-university-male/draft.md 2026-10-15 公開R2の本文を確認。2019年の新規学卒者初任給 (大学卒・男性) の都道府県ランキングで1位は東京都 (224.1千円)、47位は沖縄県 (174.7千円)。カバーは比較対象・対象年・1位だけを表示し、金額や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
