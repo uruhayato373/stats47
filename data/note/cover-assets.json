@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T11:55:14.833Z",
+  "updatedAt": "2026-10-15T12:19:15.227Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -5632,17 +5632,122 @@
               "bytes": 7308
             }
           }
+        },
+        {
+          "sha256": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50.png"
+          },
+          "bytes": 2201417,
+          "id": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-e417a71cdcdd",
+          "createdAt": "2026-10-15T12:17:09.187Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T12:17:13.134Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-active-job-opening-ratio/inputs/bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6.json"
+              },
+              "bytes": 9180
+            },
+            "production": {
+              "id": "NCI-00496",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "e417a71cdcdd118590736c285c2914f0dcbc05d538b3d6b39477c271ae4a64b7"
+            }
+          }
+        },
+        {
+          "sha256": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4.png"
+          },
+          "bytes": 55321,
+          "id": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-15T12:18:19.426Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/324706902/rectangle_large_type_2_e54c4f364775e0ca7e772b9375f97ca2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4"
+          }
+        },
+        {
+          "sha256": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b.png"
+          },
+          "bytes": 430698,
+          "id": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-15T12:19:08.271Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b"
+          }
         }
       ],
-      "candidateRevisionId": "f3e47d6406c09d76d0feef98eb4dc7dbb92c7d01e431e82b5d4a93dbe692c2dd",
-      "approvedRevisionId": "f3e47d6406c09d76d0feef98eb4dc7dbb92c7d01e431e82b5d4a93dbe692c2dd",
-      "published": null,
+      "candidateRevisionId": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+      "approvedRevisionId": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-15T12:19:15.196Z",
+        "revisionId": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00496",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "有効求人倍率\n高い県は？",
+          "subline": "1位は福井県\n2022年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に仕事探しを象徴する具体物を1点だけ大きく描く: 無地の求人票の束をはさんだクリップボードと、その横の無地の封筒。求人票は文字のない罫線と色面だけにする。左側に大きな2行の問い、下に十分大きな補足2行。地図・グラフ・表・数値・倍率の図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://note.com/stats47/n/n73c710f239ef 2026-10-15 公開本文を確認。2022年の有効求人倍率 (求職者1人当たりの求人数) の都道府県ランキングで1位は福井県 (1.94倍)、47位は神奈川県 (0.88倍)。カバーは比較対象・対象年・1位だけを表示し、倍率や差を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
