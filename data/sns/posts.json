@@ -30229,9 +30229,9 @@
     },
     {
       "id": 1017,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.145Z",
-      "updated_at": "2026-10-12T01:18:59.608Z",
+      "updated_at": "2026-10-15T18:45:42.553Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30258,13 +30258,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/passport-issuance-count-per-thousand/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/Defzz8Tj_we",
+      "posted_at": "2026-10-15T01:45:43.000Z"
     },
     {
       "id": 1018,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.150Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-15T18:45:42.584Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30291,7 +30293,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/22000/x/stills/22000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DegiIFoj1Ez",
+      "posted_at": "2026-10-15T08:30:25.000Z"
     },
     {
       "id": 1019,
