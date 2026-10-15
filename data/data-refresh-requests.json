@@ -1,7 +1,0 @@
-{
-  "metric": "annual-paid-leave-11-days-or-more-ratio,information-communication-industry-annual-income",
-  "since": "",
-  "dryRun": false,
-  "migrateLegacyRecipes": false,
-  "snapshotScope": "ranking"
-}
