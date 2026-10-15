@@ -284,6 +284,15 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-LABOR-METRICS-ADD-01] 有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-15] [領域:サイト]
+
+- **経緯 (2026-10-15)**: note の雛形 `A-laborwage-paid-leave-utilization-prefecture`・`A-laborwage-wages-by-industry-prefecture` は、元になる県別ランキングが無く作り直せなかった (`NOTE-A-LABORWAGE-TEMPLATES-01`)。オーナー指示で、指標を足してから作り直す。
+- **有給休暇**: 「取得率」の県別公式統計は e-Stat カタログに無いが、社会生活基本調査 2021 に「年次有給休暇の取得日数」を分類に持つ都道府県別の表がある (`0003456320`・`0003456321`・`0003456356`・`0003456357`・`0003456478` など。いずれも行動の種類との掛け合わせ。`node --import tsx .claude/scripts/estat/catalog.mjs search 有給休暇 --pref-only`)。総数の行から「年次有給休暇を N 日以上取得した雇用者の割合」を組めるかを `/inspect-estat-meta` で確かめる。組めなければ見送る。
+- **産業別賃金**: 賃金構造基本統計調査の都道府県 × 産業の所定内給与額から、産業ごとの指標を足す (`metric-config-standards.md` の形状ゲートと公開の多段依存に従う)。どの産業を足すかは検索需要で絞る。
+- **次 (実行順)**: ① 両方の表を `/inspect-estat-meta` で確かめ、指標の定義を決める ② metric config を足し、R2 へ投入してランキングを公開する (`ranking-publisher`) ③ `/post-note-ranking` で記事を作り、Codex imagegen のカバーで公開する ④ 旧雛形 2 本を記事台帳とカバー台帳から外す。
+- **完了条件**: 2 本の雛形が記事台帳から消え、置き換えの記事が公開済み (または指標が組めず見送りを記録)。
+
 ### [NOTE-A-LABORWAGE-TEMPLATES-01] 数値が空の note 雛形 (労働・賃金ランキング) 4 本を、作り直すか台帳から外すか決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-15] [領域:商品]
 
@@ -293,7 +302,8 @@ updated: 2026-10-06
 - **2026-10-15 追記 (大卒初任給)**: オーナーの公開指示で `--allow-tokyo-leader` を付けて男女 2 本 (`a-new-graduate-starting-salary-university-{male,female}`・2019 年・1 位東京) を生成し、記事台帳・ハッシュタグ・公開 R2 まで済ませた。同日、codex MCP を 0.153.0 固定で復旧し、`note:cover-production` + Codex imagegen でカバーを作って採用、**公開した** (男性 https://note.com/stats47/n/nf067364b58fb・女性 https://note.com/stats47/n/necff830a091b)。旧雛形 `A-laborwage-starting-salary-by-prefecture` は台帳から外した。以下はカバー作成前の経緯。同日取り込んだ別セッションの変更でカバーは `note:cover-production` + Codex imagegen に一本化され (旧 `generate-cover-refresh.ts` は停止)、このセッションでは codex MCP が切断されていて生成できない。Codex でカバーを作って採用したら公開する。先に公開した `a-active-job-opening-ratio` のカバーは旧テンプレートで作ったので、新方針での作り直し対象になりうる。
 - **次**: ① 4 本を台帳から外す (見送り) か、指標を足してから作り直すかをオーナーが決める ② 外すなら記事台帳・カバー台帳から同時に外し、`generate-note-catalog.ts --apply` と `note:assets seed` を通す。
 - **2026-10-15 有効求人倍率のカバー差し替え**: `note:cover-production` + Codex imagegen で作り直して採用し (`NCI-00496`)、`NOTE_COVER_BROWSER=playwright node .claude/scripts/note/update-note-covers.mjs --keys a-active-job-opening-ratio --commit` で note のカバーを差し替えた。note 上は新画像に替わったことを公開 API と目視で確認したが、差し替え後の照合 `verifyImage` が平均画素差 3.04 (基準 3) で止まり、台帳は公開版を採用版と別の revision (`published-original`) として記録した。`verify-cover-refresh` は `approved revision not published` で fail。**次**: imagegen の細かい画像は note の再圧縮で 3 を超えうるので、基準 (`update-note-covers.mjs` の `meanPixelError > 3`) を見直すか、同じ画像で再照合する手段を決める (カバー制作の担当セッションの判断)。台帳を手で公開済みにしない。
-- **残り 3 本** (平均通勤時間・有給休暇取得率・産業別平均賃金): 対応するランキングが無い。
+- **2026-10-15 通勤**: 平均通勤時間のランキングは無いので、題材を「通勤 1 時間 30 分以上の雇用者世帯の割合」(`main-household-ratio-main-earner-employee-commute-90min`・2023 年・1 位埼玉) に変えて作り直し、Codex imagegen のカバー (`NCI-00499`) を付けて公開した (https://note.com/stats47/n/n7a47171e06f3)。旧雛形 `A-laborwage-commute-time-prefecture` は台帳から外した。
+- **残り 2 本** (有給休暇取得率・産業別平均賃金): 指標を足してから作り直す。手順は `[NOTE-LABOR-METRICS-ADD-01]`。
 - **完了条件**: `A-laborwage-*` の下書きが記事台帳に 0 件。
 
 ### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
