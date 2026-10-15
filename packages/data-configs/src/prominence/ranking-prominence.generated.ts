@@ -52,18 +52,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "日照時間が最も長い県は？"
       },
       {
-        "rankingKey": "annual-clear-days",
-        "title": "年間快晴日数",
-        "readerLabel": "年間快晴日数",
-        "hook": "快晴日数1位は沖縄？"
-      },
-      {
-        "rankingKey": "quasi-national-park-area",
-        "title": "国定公園面積",
-        "readerLabel": "国定公園面積",
-        "hook": "国定公園面積が最も広い県は？"
-      },
-      {
         "rankingKey": "total-area-excluding-northern-territories-and-takeshima",
         "title": "総面積",
         "readerLabel": "総面積",
@@ -78,10 +66,22 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "道路実延長が最も長い県は？"
       },
       {
-        "rankingKey": "major-lake-area",
-        "title": "主要湖沼面積",
-        "readerLabel": "主要湖沼面積",
-        "hook": "主要湖沼面積が最も広い県は？"
+        "rankingKey": "annual-clear-days",
+        "title": "年間快晴日数",
+        "readerLabel": "年間快晴日数",
+        "hook": "快晴日数1位は沖縄？"
+      },
+      {
+        "rankingKey": "national-park-area",
+        "title": "国立公園面積",
+        "readerLabel": "国立公園面積",
+        "hook": "国立公園面積が最も広い県は？"
+      },
+      {
+        "rankingKey": "quasi-national-park-area",
+        "title": "国定公園面積",
+        "readerLabel": "国定公園面積",
+        "hook": "国定公園面積が最も広い県は？"
       }
     ]
   },
@@ -103,10 +103,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "粗出生率が最も高い県は？"
       },
       {
-        "rankingKey": "divorces",
-        "title": "離婚件数",
-        "readerLabel": "離婚件数",
-        "hook": "離婚件数が最も多い県は？"
+        "rankingKey": "deaths-hypertensive-diseases",
+        "title": "高血圧性疾患による死亡者数",
+        "readerLabel": "高血圧性疾患による死亡者数",
+        "subtitle": "総数",
+        "hook": "高血圧性疾患による死亡者数が最も多い県は？"
+      },
+      {
+        "rankingKey": "deaths-lifestyle-diseases",
+        "title": "生活習慣病による死亡者数",
+        "readerLabel": "生活習慣病による死亡者数",
+        "subtitle": "総数",
+        "hook": "生活習慣病による死亡者数が最も多い県は？"
       },
       {
         "rankingKey": "japanese-population",
@@ -115,24 +123,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "日本人人口が最も多い県は？"
       },
       {
-        "rankingKey": "densely-populated-area",
-        "title": "人口集中地区面積",
-        "readerLabel": "人口集中地区面積",
-        "hook": "人口集中地区面積が最も広い県は？"
-      },
-      {
-        "rankingKey": "deaths-hypertensive-diseases",
-        "title": "高血圧性疾患による死亡者数",
-        "readerLabel": "高血圧性疾患による死亡者数",
-        "subtitle": "総数",
-        "hook": "高血圧性疾患による死亡者数が最も多い県は？"
+        "rankingKey": "average-age-of-first-marriage-wife",
+        "title": "平均初婚年齢（妻）",
+        "readerLabel": "平均初婚年齢（妻）",
+        "subtitle": "妻の年齢",
+        "hook": "平均初婚年齢（妻）が最も高い県は？"
       }
     ]
   },
   {
     "categoryKey": "laborwage",
     "categoryName": "労働・賃金",
-    "count": 117,
+    "count": 119,
     "representatives": [
       {
         "rankingKey": "turnover-rate",
@@ -154,18 +156,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "睡眠の平均時間が最も長い県は？"
       },
       {
-        "rankingKey": "relaxation-avg-time-male",
-        "title": "休養・くつろぎの平均時間",
-        "readerLabel": "休養・くつろぎの平均時間",
-        "subtitle": "男性",
-        "hook": "休養・くつろぎの平均時間が最も長い県は？"
-      },
-      {
         "rankingKey": "meal-avg-time-male",
         "title": "食事の平均時間",
         "readerLabel": "食事の平均時間",
         "subtitle": "男性",
         "hook": "食事の平均時間が最も長い県は？"
+      },
+      {
+        "rankingKey": "employed-people-ratio-primary",
+        "title": "第1次産業就業者比率",
+        "readerLabel": "第1次産業就業者比率",
+        "hook": "第1次産業就業者比率が最も高い県は？"
       },
       {
         "rankingKey": "employed-people-ratio-tertiary",
@@ -205,16 +206,16 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "漁業就業者数が最も多い県は？"
       },
       {
+        "rankingKey": "agricultural-output",
+        "title": "農業産出額",
+        "readerLabel": "農業産出額",
+        "hook": "農業産出額が最も多い県は？"
+      },
+      {
         "rankingKey": "fishery-species-catch-bonito",
         "title": "カツオ漁獲量",
         "readerLabel": "カツオ漁獲量",
         "hook": "カツオ漁獲量が最も多い県は？"
-      },
-      {
-        "rankingKey": "fishery-species-catch-pollock",
-        "title": "スケトウダラ漁獲量",
-        "readerLabel": "スケトウダラ漁獲量",
-        "hook": "スケトウダラ漁獲量が最も多い県は？"
       }
     ]
   },
@@ -271,6 +272,13 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 77,
     "representatives": [
       {
+        "rankingKey": "public-bath-count-per-100k",
+        "title": "公衆浴場数",
+        "readerLabel": "公衆浴場数",
+        "subtitle": "人口10万人当たり",
+        "hook": "公衆浴場数が最も多い県は？"
+      },
+      {
         "rankingKey": "convenience-store-count-commercial",
         "title": "コンビニエンスストア店舗数",
         "readerLabel": "コンビニエンスストア店舗数",
@@ -291,24 +299,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "理容・美容所数が最も多い県は？"
       },
       {
+        "rankingKey": "manufacturing-establishments",
+        "title": "製造業事業所数",
+        "readerLabel": "製造業事業所数",
+        "hook": "製造業事業所数が最も多い県は？"
+      },
+      {
         "rankingKey": "pachinko-shop-density-per-10k",
         "title": "パチンコ店舗数",
         "readerLabel": "パチンコ店舗数",
         "subtitle": "人口1万人あたり",
         "hook": "パチンコ店舗数が最も多い県は？"
-      },
-      {
-        "rankingKey": "annual-sales-amount",
-        "title": "商業年間商品販売額",
-        "readerLabel": "商業年間商品販売額",
-        "subtitle": "総額",
-        "hook": "商業年間商品販売額が最も多い県は？"
-      },
-      {
-        "rankingKey": "cleaning-shop-count-per-100k",
-        "title": "クリーニング所数",
-        "readerLabel": "クリーニング所数",
-        "hook": "クリーニング所数が最も多い県は？"
       }
     ]
   },
@@ -317,6 +318,13 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "categoryName": "企業・家計・経済",
     "count": 885,
     "representatives": [
+      {
+        "rankingKey": "coffee-consumption-quantity",
+        "title": "コーヒー消費量",
+        "readerLabel": "コーヒー消費量",
+        "subtitle": "都道府県庁所在市の二人以上世帯の年間コーヒー消費量",
+        "hook": "コーヒー消費量が最も多い県は？"
+      },
       {
         "rankingKey": "natto-consumption-expenditure",
         "title": "納豆消費支出額",
@@ -351,13 +359,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "readerLabel": "アイスクリーム・シャーベットへの支出",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間アイスクリーム・シャーベット消費支出額",
         "hook": "アイスクリーム・シャーベットへの支出が最も多い県は？"
-      },
-      {
-        "rankingKey": "consumption-expenditure-multi-person-households-per-month",
-        "title": "消費支出",
-        "readerLabel": "二人以上世帯の1か月の消費支出",
-        "subtitle": "二人以上の世帯・1か月平均",
-        "hook": "最も消費支出が多い県は？"
       }
     ]
   },
@@ -372,18 +373,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "readerLabel": "普通建設事業費",
         "subtitle": "都道府県財政",
         "hook": "普通建設事業費が最も多い県は？"
-      },
-      {
-        "rankingKey": "owner-occupied-housing-ratio",
-        "title": "持ち家比率",
-        "readerLabel": "持ち家比率",
-        "hook": "持ち家比率が最も高い県は？"
-      },
-      {
-        "rankingKey": "floor-area-new-owner-dwelling",
-        "title": "着工新設持ち家住宅の床面積",
-        "readerLabel": "着工新設持ち家住宅の床面積",
-        "hook": "着工新設持ち家住宅の床面積が最も広い県は？"
       },
       {
         "rankingKey": "factory-location-area-annual",
@@ -403,6 +392,19 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "readerLabel": "公共工事の請負契約件数",
         "subtitle": "施工都道府県別・1件500万円以上",
         "hook": "公共工事の請負契約件数が最も多い県は？"
+      },
+      {
+        "rankingKey": "floor-area-per-dwelling-owner",
+        "title": "持ち家住宅の延べ面積",
+        "readerLabel": "持ち家住宅の延べ面積",
+        "subtitle": "1住宅当たり",
+        "hook": "持ち家住宅の延べ面積が最も広い県は？"
+      },
+      {
+        "rankingKey": "owner-occupied-housing-ratio",
+        "title": "持ち家比率",
+        "readerLabel": "持ち家比率",
+        "hook": "持ち家比率が最も高い県は？"
       }
     ]
   },
@@ -430,22 +432,23 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "光熱・水道費割合が最も高い県は？"
       },
       {
+        "rankingKey": "city-gas-supply-area-households",
+        "title": "都市ガス供給区域内世帯数",
+        "readerLabel": "都市ガス供給区域内世帯数",
+        "hook": "都市ガス供給区域内世帯数が最も多い県は？"
+      },
+      {
+        "rankingKey": "wind-power-turbine-count",
+        "title": "風力発電導入量（設置基数）",
+        "readerLabel": "風力発電導入量（設置基数）",
+        "subtitle": "風車台数",
+        "hook": "風力発電導入量（設置基数）が最も多い県は？"
+      },
+      {
         "rankingKey": "final-energy-consumption",
         "title": "最終エネルギー消費量",
         "readerLabel": "最終エネルギー消費量",
         "hook": "最終エネルギー消費量が最も多い県は？"
-      },
-      {
-        "rankingKey": "final-energy-consumption-per-capita",
-        "title": "1人当たり最終エネルギー消費量",
-        "readerLabel": "1人当たり最終エネルギー消費量",
-        "hook": "1人当たり最終エネルギー消費量が最も多い県は？"
-      },
-      {
-        "rankingKey": "regional-household-final-energy-consumption",
-        "title": "家庭部門の最終エネルギー消費量",
-        "readerLabel": "家庭部門の最終エネルギー消費量",
-        "hook": "家庭部門の最終エネルギー消費量が最も多い県は？"
       }
     ]
   },
@@ -479,18 +482,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "二輪の小型自動車台数が最も多い県は？"
       },
       {
+        "rankingKey": "total-overnight-guests-foreign",
+        "title": "外国人延べ宿泊者数",
+        "readerLabel": "外国人延べ宿泊者数",
+        "hook": "外国人延べ宿泊者数が最も多い県は？"
+      },
+      {
         "rankingKey": "domestic-travel-consumption-by-destination",
         "title": "日本人旅行者の県内消費額",
         "readerLabel": "日本人旅行者の県内消費額",
         "subtitle": "全目的・宿泊と日帰り",
         "hook": "日本人旅行者の県内消費額が最も多い県は？"
-      },
-      {
-        "rankingKey": "inbound-visitors-by-destination",
-        "title": "訪日外国人の都道府県別訪問者数",
-        "readerLabel": "訪日外国人の都道府県別訪問者数",
-        "subtitle": "2025年・全目的・一般客",
-        "hook": "訪日外国人の都道府県別訪問者数が最も多い県は？"
       }
     ]
   },
@@ -514,6 +516,13 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "専修学校生徒数が最も多い県は？"
       },
       {
+        "rankingKey": "average-weight-middle-school-second-grade-male",
+        "title": "平均体重",
+        "readerLabel": "平均体重",
+        "subtitle": "中学2年・男子",
+        "hook": "平均体重が最も多い県は？"
+      },
+      {
         "rankingKey": "miscellaneous-school-students",
         "title": "各種学校生徒数",
         "readerLabel": "各種学校生徒数",
@@ -521,24 +530,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "各種学校生徒数が最も多い県は？"
       },
       {
+        "rankingKey": "golf-course-public",
+        "title": "ゴルフ場数（公共）",
+        "readerLabel": "ゴルフ場数（公共）",
+        "hook": "ゴルフ場数（公共）が最も多い県は？"
+      },
+      {
         "rankingKey": "swimming-pool-public",
         "title": "水泳プール数（公共）",
         "readerLabel": "水泳プール数（公共）",
         "subtitle": "屋内・屋外合計",
         "hook": "水泳プール数（公共）が最も多い県は？"
-      },
-      {
-        "rankingKey": "elementary-school-children-count",
-        "title": "小学校児童数",
-        "readerLabel": "小学校児童数",
-        "subtitle": "総数",
-        "hook": "小学校児童数が最も多い県は？"
-      },
-      {
-        "rankingKey": "library-books",
-        "title": "図書館蔵書数",
-        "readerLabel": "図書館蔵書数",
-        "hook": "図書館蔵書数が最も多い県は？"
       }
     ]
   },
@@ -575,17 +577,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "警察職平均給与月額が最も多い県は？"
       },
       {
+        "rankingKey": "local-bonds-prefecture",
+        "title": "地方債",
+        "readerLabel": "地方債",
+        "subtitle": "都道府県財政",
+        "hook": "地方債が最も多い県は？"
+      },
+      {
         "rankingKey": "subsidy-expenses-prefecture",
         "title": "補助費等",
         "readerLabel": "補助費等",
         "subtitle": "都道府県財政",
         "hook": "補助費等が最も多い県は？"
-      },
-      {
-        "rankingKey": "business-tax",
-        "title": "事業税",
-        "readerLabel": "事業税",
-        "hook": "事業税が最も多い県は？"
       }
     ]
   },
@@ -594,6 +597,19 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "categoryName": "司法・安全・環境",
     "count": 146,
     "representatives": [
+      {
+        "rankingKey": "police-officer-count",
+        "title": "警察官数",
+        "readerLabel": "警察官数",
+        "subtitle": "総数",
+        "hook": "警察官数が最も多い県は？"
+      },
+      {
+        "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
+        "title": "消防ポンプ自動車等現有数",
+        "readerLabel": "消防ポンプ自動車等現有数",
+        "hook": "消防ポンプ自動車等現有数が最も多い県は？"
+      },
       {
         "rankingKey": "per-capita-police-expenditure-pref-municipal",
         "title": "警察費",
@@ -615,23 +631,11 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "窃盗犯認知件数が最も多い県は？"
       },
       {
-        "rankingKey": "fire-deaths-per-100k",
-        "title": "火災死亡者数",
-        "readerLabel": "火災死亡者数",
-        "hook": "火災死亡者数が最も多い県は？"
-      },
-      {
-        "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
-        "title": "消防ポンプ自動車等現有数",
-        "readerLabel": "消防ポンプ自動車等現有数",
-        "hook": "消防ポンプ自動車等現有数が最も多い県は？"
-      },
-      {
-        "rankingKey": "police-officer-count",
-        "title": "警察官数",
-        "readerLabel": "警察官数",
-        "subtitle": "総数",
-        "hook": "警察官数が最も多い県は？"
+        "rankingKey": "criminal-recognition-count",
+        "title": "刑法犯認知件数",
+        "readerLabel": "刑法犯認知件数",
+        "subtitle": "総数（旧統計）",
+        "hook": "刑法犯認知件数が最も多い県は？"
       }
     ]
   },
@@ -661,13 +665,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "精神病床数が最も多い県は？"
       },
       {
-        "rankingKey": "stillbirths-after-22-weeks",
-        "title": "死産数",
-        "readerLabel": "死産数",
-        "subtitle": "妊娠22週以後",
-        "hook": "死産数が最も多い県は？"
-      },
-      {
         "rankingKey": "death-count",
         "title": "死亡数",
         "readerLabel": "死亡数",
@@ -679,6 +676,12 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "readerLabel": "医薬品販売業数",
         "subtitle": "総数",
         "hook": "医薬品販売業数が最も多い県は？"
+      },
+      {
+        "rankingKey": "psychiatric-hospital-avg-length-of-stay",
+        "title": "精神科病院平均在院日数",
+        "readerLabel": "精神科病院平均在院日数",
+        "hook": "精神科病院平均在院日数が最も多い県は？"
       }
     ]
   },
@@ -839,11 +842,11 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "order": 5
   },
   {
-    "rankingKey": "natto-consumption-expenditure",
-    "title": "納豆消費支出額",
-    "readerLabel": "納豆への支出",
-    "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
-    "hook": "納豆への支出が最も多い県は？",
+    "rankingKey": "coffee-consumption-quantity",
+    "title": "コーヒー消費量",
+    "readerLabel": "コーヒー消費量",
+    "subtitle": "都道府県庁所在市の二人以上世帯の年間コーヒー消費量",
+    "hook": "コーヒー消費量が最も多い県は？",
     "categoryKey": "economy",
     "order": 6
   },
@@ -875,89 +878,89 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
 export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   [
   "annual-sunshine-duration",
-  "annual-clear-days",
-  "quasi-national-park-area",
   "total-area-excluding-northern-territories-and-takeshima",
   "road-length-per-km2",
-  "major-lake-area",
+  "annual-clear-days",
+  "national-park-area",
+  "quasi-national-park-area",
   "births",
   "crude-birth-rate",
-  "divorces",
-  "japanese-population",
-  "densely-populated-area",
   "deaths-hypertensive-diseases",
+  "deaths-lifestyle-diseases",
+  "japanese-population",
+  "average-age-of-first-marriage-wife",
   "turnover-rate",
   "new-hire-count",
   "sleep-avg-time-female",
-  "relaxation-avg-time-male",
   "meal-avg-time-male",
+  "employed-people-ratio-primary",
   "employed-people-ratio-tertiary",
   "fishery-species-catch-mackerel",
   "fishery-species-catch-pacific-saury",
   "fishery-species-catch-sardine",
   "fishery-workers",
+  "agricultural-output",
   "fishery-species-catch-bonito",
-  "fishery-species-catch-pollock",
   "manufacturing-shipment-amount",
   "manufacturing-industry-added-value",
   "manufacturing-employees",
   "food-manufacturing-establishments",
   "food-manufacturing-shipment-amount",
   "food-manufacturing-employees",
+  "public-bath-count-per-100k",
   "convenience-store-count-commercial",
   "retail-store-count",
   "barber-beauty-salon-count",
+  "manufacturing-establishments",
   "pachinko-shop-density-per-10k",
-  "annual-sales-amount",
-  "cleaning-shop-count-per-100k",
+  "coffee-consumption-quantity",
   "natto-consumption-expenditure",
   "other-bread-consumption-quantity",
   "rice-consumption-quantity",
   "tuna-consumption-quantity",
   "icecream-consumption-expenditure",
-  "consumption-expenditure-multi-person-households-per-month",
   "ordinary-construction-expenses-prefecture",
-  "owner-occupied-housing-ratio",
-  "floor-area-new-owner-dwelling",
   "factory-location-area-annual",
   "factory-industrial-park-rate",
   "public-construction-contract-count",
+  "floor-area-per-dwelling-owner",
+  "owner-occupied-housing-ratio",
   "final-disposal-site-remaining-capacity",
   "gasoline-sales-volume",
   "utilities-expenditure-ratio-multi-person-households",
+  "city-gas-supply-area-households",
+  "wind-power-turbine-count",
   "final-energy-consumption",
-  "final-energy-consumption-per-capita",
-  "regional-household-final-energy-consumption",
   "total-overnight-guests",
   "moped-count",
   "kei-car-count",
   "motorcycle-count",
+  "total-overnight-guests-foreign",
   "domestic-travel-consumption-by-destination",
-  "inbound-visitors-by-destination",
   "avg-height-high-school-2nd-male",
   "specialized-school-students",
+  "average-weight-middle-school-second-grade-male",
   "miscellaneous-school-students",
+  "golf-course-public",
   "swimming-pool-public",
-  "elementary-school-children-count",
-  "library-books",
   "local-allocation-tax-prefecture",
   "local-tax-prefecture",
   "national-treasury-disbursement-prefecture",
   "avg-salary-police-prefecture",
+  "local-bonds-prefecture",
   "subsidy-expenses-prefecture",
-  "business-tax",
+  "police-officer-count",
+  "fire-department-pump-car-count-per-100-thousand-people",
   "per-capita-police-expenditure-pref-municipal",
   "serious-crime-per-100k",
   "theft-offenses-recognized",
-  "fire-deaths-per-100k",
-  "fire-department-pump-car-count-per-100-thousand-people",
-  "police-officer-count",
+  "criminal-recognition-count",
   "early-neonatal-deaths",
   "physical-disability-certificates-issued",
   "psychiatric-bed-count",
-  "stillbirths-after-22-weeks",
   "death-count",
   "pharmaceutical-sales-count",
+  "psychiatric-hospital-avg-length-of-stay",
   "resident-foreigner-china",
   "road-expressway-length",
   "main-road-paving-rate",
@@ -982,13 +985,13 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
 export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   {
   "active-job-opening-ratio": 0.55,
-  "agricultural-output": 0.775,
+  "agricultural-output": 0.8313,
   "ambulance-hospital-arrival-time": 0.575,
-  "annual-income-per-household": 0.5188,
+  "annual-income-per-household": 0.4625,
   "annual-precipitation": 0.55,
   "annual-sunshine-duration": 1,
-  "average-age-of-first-marriage-husband": 0.46,
-  "average-age-of-first-marriage-wife": 0.755,
+  "average-age-of-first-marriage-husband": 0.685,
+  "average-age-of-first-marriage-wife": 0.8113,
   "average-height-high-school-second-grade-female": 0.6487,
   "average-relative-humidity": 0.55,
   "average-temperature": 0.55,
@@ -998,51 +1001,51 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "barber-beauty-salon-count-per-100k": 0.48,
   "beef-cattle-count": 0.6313,
   "beef-consumption-quantity": 0.8805,
-  "certified-childcare-center-count-per-100k-0-5": 0.5037,
-  "chicken-consumption-expenditure": 0.6555,
+  "certified-childcare-center-count-per-100k-0-5": 0.6162,
+  "chicken-consumption-expenditure": 0.7117,
   "chinese-noodles-consumption-expenditure": 0.8242,
   "cleaning-shop-count-per-100k": 0.7188,
-  "consumer-price-difference-index-housing": 0.62,
+  "consumer-price-difference-index-housing": 0.7462,
   "consumer-price-difference-index-overall": 0.5637,
   "consumption-expenditure-multi-person-households-per-month": 0.8875,
-  "criminal-arrest-rate": 0.55,
+  "criminal-arrest-rate": 0.6063,
   "crude-birth-rate": 0.8313,
   "crude-death-rate": 0.55,
   "cultivated-land-area-ratio": 0.55,
   "culture-recreation-expenditure-ratio-multi-person-households": 0.775,
   "current-savings-balance-multi-person-households": 0.2688,
-  "dairy-cattle-count": 0.6313,
-  "disaster-damage-amount-per-person": 0.48,
+  "dairy-cattle-count": 0.575,
+  "disaster-damage-amount-per-person": 0.6625,
   "education-expenditure-ratio-multi-person-households": 0.775,
   "elderly-couple-only-household-ratio": 0.4424,
   "employee-ratio-10-29-employee-establishments-private": 0.4387,
   "engel-coefficient": 0.8242,
-  "female-scheduled-earnings": 0.4525,
+  "female-scheduled-earnings": 0.5088,
   "final-energy-consumption-per-capita": 0.5351,
-  "financial-debt-balance": 0.4625,
-  "floor-area-per-dwelling-owner": 0.6725,
+  "financial-debt-balance": 0.5188,
+  "floor-area-per-dwelling-owner": 0.7287,
   "food-expenditure-ratio-multi-person-households": 0.6625,
   "food-self-sufficiency-rate-calorie": 0.7488,
   "foreign-resident-count-per-100k": 0.3892,
   "forest-area-ratio": 0.4237,
-  "fresh-udon-soba-consumption-expenditure": 0.5992,
+  "fresh-udon-soba-consumption-expenditure": 0.6555,
   "future-population-change-rate-2050": 0.5188,
   "gas-station-count-per-100km": 0.5954,
   "general-clinic-count-per-100k": 0.48,
   "general-hospital-bed-count-per-100k": 0.48,
   "general-hospital-count-per-100k": 0.48,
-  "green-tea-consumption-expenditure": 0.5992,
+  "green-tea-consumption-expenditure": 0.543,
   "healthy-life-expectancy-female": 0.4651,
-  "healthy-life-expectancy-male": 0.5913,
-  "households": 0.7404,
+  "healthy-life-expectancy-male": 0.6476,
+  "households": 0.6842,
   "households-on-public-assistance-per-1000": 0.48,
-  "kindergarten-count-per-100k-3-5": 0.55,
-  "layer-hen-count": 0.575,
+  "kindergarten-count-per-100k-3-5": 0.6625,
+  "layer-hen-count": 0.6313,
   "library-count-per-million": 0.6438,
   "life-expectancy-0-female": 0.635,
   "life-expectancy-0-male": 0.3962,
-  "male-scheduled-earnings": 0.3963,
-  "manufacturing-establishments": 0.7188,
+  "male-scheduled-earnings": 0.5088,
+  "manufacturing-establishments": 0.775,
   "manufacturing-industry-added-value": 0.8313,
   "manufacturing-shipment-amount": 0.9437,
   "manufacturing-shipment-amount-per-employee": 0.48,
@@ -1051,15 +1054,15 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "minimum-wage-by-region": 0.5308,
   "museum-count-per-million": 0.7324,
   "nature-park-area-ratio": 0.55,
-  "owner-occupied-housing-ratio": 0.7779,
-  "penal-code-offenses-recognized-per-1000": 0.5925,
-  "per-capita-prefectural-income-h27": 0.5975,
+  "owner-occupied-housing-ratio": 0.7217,
+  "penal-code-offenses-recognized-per-1000": 0.6487,
+  "per-capita-prefectural-income-h27": 0.6537,
   "physicians-in-medical-facilities-per-100k": 0.48,
-  "pig-count": 0.6313,
-  "police-officer-count-per-population": 0.48,
+  "pig-count": 0.6875,
+  "police-officer-count-per-population": 0.7613,
   "population-density-per-km2-total-area": 0.7188,
   "post-office-count-per-100km2": 0.48,
-  "residential-land-price-change-rate": 0.6063,
+  "residential-land-price-change-rate": 0.6625,
   "rice-harvest-volume": 0.4063,
   "room-utilization-rate": 0.5351,
   "sake-consumption-expenditure": 0.768,
@@ -1071,16 +1074,16 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "single-person-household-ratio": 0.6842,
   "suicide-rate-per-100k": 0.5308,
   "taxpayer-ratio-per-pref-resident": 0.55,
-  "total-area-excluding-northern-territories-and-takeshima": 0.775,
+  "total-area-excluding-northern-territories-and-takeshima": 0.8313,
   "total-fertility-rate": 0.775,
-  "total-overnight-guests": 0.7601,
-  "total-overnight-guests-foreign": 0.5351,
+  "total-overnight-guests": 0.8164,
+  "total-overnight-guests-foreign": 0.6476,
   "total-population": 0.55,
   "total-production-in-the-prefecture": 0.4213,
   "traffic-accident-count": 0.55,
-  "transport-communication-expenditure-ratio-multi-person-households": 0.6591,
+  "transport-communication-expenditure-ratio-multi-person-households": 0.7153,
   "unemployment-rate": 0.6449,
-  "vegetable-intake-female-age-adjusted": 0.4425,
+  "vegetable-intake-female-age-adjusted": 0.4988,
   "vegetable-intake-male-age-adjusted": 0.4425,
-  "water-supply-population-ratio-2012on": 0.5159
+  "water-supply-population-ratio-2012on": 0.4459
 };
