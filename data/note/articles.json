@@ -309,26 +309,6 @@
       }
     },
     {
-      "key": "A-laborwage-job-opening-ratio-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】有効求人倍率ランキング｜売り手市場の県は？",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-job-opening-ratio-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "9e2cc19aeafd9cb23eb48c741908985354dc095b8a8fcc964521e9254c7b5a8c",
-          "files": 5,
-          "bytes": 98482,
-          "savedAt": "2026-10-12T22:05:55.215Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "A-laborwage-paid-leave-utilization-prefecture",
       "vertical": "stats47-note",
       "series": "A",
@@ -11339,6 +11319,31 @@
       "stats47Targets": [],
       "noteUrl": "https://note.com/stats47/n/n6aae3232670d",
       "publishedAt": "2026-10-13"
+    },
+    {
+      "key": "a-active-job-opening-ratio",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2022年版】有効求人倍率が最も高い県は？ 1位は福井県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-active-job-opening-ratio",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "92cae179287a6155541eefb47304a0787a1eb1a268fc7f3a339117d38b2cc798",
+          "files": 10,
+          "bytes": 493471,
+          "savedAt": "2026-10-15T10:58:59.056Z"
+        },
+        "verifiedAt": "2026-10-15T10:58:59.056Z"
+      },
+      "stats47Targets": [
+        "/ranking/active-job-opening-ratio"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n73c710f239ef",
+      "publishedAt": "2026-10-15"
     }
   ]
 }

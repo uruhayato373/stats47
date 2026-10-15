@@ -1,11 +1,21 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T08:49:10.756Z",
+  "updatedAt": "2026-10-15T10:51:10.721Z",
   "blockers": {
     "fishery-output-value": {
       "code": "ZERO_DENOMINATOR",
       "message": "最下位値が0のため上位/下位倍率を計算できません: fishery-output-value/2016",
       "source": "r2:app/stats/fishery-output-value/values.json"
+    },
+    "new-graduate-starting-salary-university-male": {
+      "code": "PREDICTABLE_LEADER",
+      "message": "1位が東京都のため生成しません: new-graduate-starting-salary-university-male/2019。読者にとって意外な理由があれば --allow-tokyo-leader \"<理由>\" で再実行する",
+      "source": "r2:app/stats/new-graduate-starting-salary-university-male/values.json"
+    },
+    "new-graduate-starting-salary-university-female": {
+      "code": "PREDICTABLE_LEADER",
+      "message": "1位が東京都のため生成しません: new-graduate-starting-salary-university-female/2019。読者にとって意外な理由があれば --allow-tokyo-leader \"<理由>\" で再実行する",
+      "source": "r2:app/stats/new-graduate-starting-salary-university-female/values.json"
     }
   }
 }

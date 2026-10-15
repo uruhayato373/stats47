@@ -449,6 +449,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-active-job-opening-ratio": {
+      "vertical": "stats47-note",
+      "title": "【2022年版】有効求人倍率が最も高い県は？ 1位は福井県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n73c710f239ef",
+      "is_paid": false,
+      "published_at": "2026-10-15",
+      "r2_path": "note/stats47-note/a-active-job-opening-ratio",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "a-agricultural-employment-population": {
       "vertical": "stats47-note",
       "title": "【2014年版】農業就業人口が最も多い県は？ 1位は北海道｜都道府県ランキング",
