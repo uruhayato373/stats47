@@ -35,6 +35,7 @@ export function pendingSvgs(slugDir, { force = false } = {}) {
   const markdown = files.filter((file) => file.endsWith(".md")).map((file) => readFileSync(file, "utf8")).join("\n");
   return files
     .filter((file) => file.endsWith(".svg"))
+    .filter((file) => !/^(?:cover(?:-|\.)|header\.|eyecatch\.)/.test(basename(file)))
     .filter((svg) => markdown.includes(`${basename(svg).replace(/\.svg$/, "")}.png`))
     .filter((svg) => force || !existsSync(svg.replace(/\.svg$/, ".png")));
 }

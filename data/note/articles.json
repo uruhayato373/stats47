@@ -8901,12 +8901,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "07942c10468bb18a9f5bb1c669e858769472d7cd5511e282bbda0887dfd60bca",
-          "files": 9,
-          "bytes": 1893827,
-          "savedAt": "2026-10-13T03:26:10.832Z"
+          "sha256": "ca3faa06bd6afbe3089ffdef2117f3383a3b66bee636fb0f8526b8b4a2f386b9",
+          "files": 14,
+          "bytes": 832444,
+          "savedAt": "2026-10-13T08:19:33.589Z"
         },
-        "verifiedAt": "2026-10-13T03:26:10.832Z"
+        "verifiedAt": "2026-10-13T08:19:33.589Z"
       },
       "stats47Targets": [
         "/ranking/male-scheduled-earnings",
@@ -8928,12 +8928,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "dd35740039f42576335da955f0ba56862112bc80babb9bf3d0233d970924260e",
-          "files": 11,
-          "bytes": 2735304,
-          "savedAt": "2026-10-13T03:26:14.006Z"
+          "sha256": "018a652930b59db5b2e3d347db042cc853171c6e420526972bcd838ca86d2c91",
+          "files": 18,
+          "bytes": 1185427,
+          "savedAt": "2026-10-13T08:19:33.712Z"
         },
-        "verifiedAt": "2026-10-13T03:26:14.006Z"
+        "verifiedAt": "2026-10-13T08:19:33.712Z"
       },
       "stats47Targets": [
         "/ranking/real-disposable-income",
@@ -8957,12 +8957,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "4af45928a92f58d8e8b58f6edf2db46518295331d1e3232c7819c0f3304ef9d5",
-          "files": 8,
-          "bytes": 1603463,
-          "savedAt": "2026-10-13T03:26:17.245Z"
+          "sha256": "f1cb53bc0c086813ba55c35197df2bfd654b3477f2bcd6a60054facf83e1fb39",
+          "files": 12,
+          "bytes": 685036,
+          "savedAt": "2026-10-13T08:19:33.787Z"
         },
-        "verifiedAt": "2026-10-13T03:26:17.245Z"
+        "verifiedAt": "2026-10-13T08:19:33.787Z"
       },
       "stats47Targets": [
         "/ranking/male-scheduled-earnings",
@@ -8983,12 +8983,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "33eb9f9b37f9bb936f769aa340ecb75de242899dd8e679c3dfd04de8d177e17e",
-          "files": 5,
-          "bytes": 420341,
-          "savedAt": "2026-10-13T03:26:08.770Z"
+          "sha256": "017fdad25c95be44e6d97b6071712f63fd519db44879a7aa40ded9110f710c0d",
+          "files": 6,
+          "bytes": 174547,
+          "savedAt": "2026-10-13T08:17:35.039Z"
         },
-        "verifiedAt": "2026-10-13T03:26:08.770Z"
+        "verifiedAt": "2026-10-13T08:17:35.039Z"
       },
       "stats47Targets": [
         "/ranking/low-elevation-population-ratio-5m"
@@ -9006,12 +9006,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3f1a930bd6ab84e76fedfbc4558eadf88afbb6579e60629cf4b3095cd91eccfe",
-          "files": 11,
-          "bytes": 3016704,
-          "savedAt": "2026-10-13T03:26:22.051Z"
+          "sha256": "ea476837b7ca5e6ec55ba1f3f12bf2c4d1beff61416b70e585d7f96ee1522eb5",
+          "files": 18,
+          "bytes": 1212595,
+          "savedAt": "2026-10-13T08:21:17.108Z"
         },
-        "verifiedAt": "2026-10-13T03:26:22.051Z"
+        "verifiedAt": "2026-10-13T08:21:17.108Z"
       },
       "stats47Targets": [
         "/ranking/public-university-consumption-expenditure",
@@ -9035,12 +9035,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "77feab3309a44fe05bc227af278f50a33b8168c70018e57f740b9259fead050e",
-          "files": 8,
-          "bytes": 1599347,
-          "savedAt": "2026-10-13T03:27:01.556Z"
+          "sha256": "2da2ea0912e5e9a3a8e1e967024daa2b278b791aa971bda92847dbaa122b2f52",
+          "files": 12,
+          "bytes": 709864,
+          "savedAt": "2026-10-13T08:29:05.808Z"
         },
-        "verifiedAt": "2026-10-13T03:27:01.556Z"
+        "verifiedAt": "2026-10-13T08:29:05.808Z"
       },
       "stats47Targets": [
         "/ranking/engel-coefficient",
@@ -9061,12 +9061,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "26cc2e73f3b5c5c2fe4965d87f02b79dfd346103af16d1f2f238c85d3b274057",
-          "files": 22,
-          "bytes": 7311055,
-          "savedAt": "2026-10-13T03:27:10.425Z"
+          "sha256": "b7daca9bb9982bbf2463e597802fd76179abe7a4e3cd26f8fc20ad68bf275c3e",
+          "files": 40,
+          "bytes": 2904385,
+          "savedAt": "2026-10-13T08:29:54.583Z"
         },
-        "verifiedAt": "2026-10-13T03:27:10.425Z"
+        "verifiedAt": "2026-10-13T08:29:54.583Z"
       },
       "stats47Targets": [
         "/ranking/tuna-consumption-expenditure",
@@ -9101,12 +9101,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "21a49a7a9a624bc57cb74d140ab0a9aa61ce49637a88033d6398c406ae194bb4",
-          "files": 13,
-          "bytes": 3358427,
-          "savedAt": "2026-10-13T03:27:14.330Z"
+          "sha256": "8880d1659610fb15c12a2a8e20bd8ee61102cba209eaba670715f37baadc90c3",
+          "files": 22,
+          "bytes": 1467574,
+          "savedAt": "2026-10-13T08:34:14.933Z"
         },
-        "verifiedAt": "2026-10-13T03:27:14.330Z"
+        "verifiedAt": "2026-10-13T08:34:14.933Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household",
@@ -9132,12 +9132,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "26c67b5001733567a04e1e6cf5b7116c9c8f4ec486c7ed2ba4bbede864f94bca",
-          "files": 7,
-          "bytes": 1124159,
-          "savedAt": "2026-10-13T03:27:17.679Z"
+          "sha256": "cfb9ad820215f9eb631d113fb2b30b9e272b8b37c5ab6c3f733228f763a1aa55",
+          "files": 10,
+          "bytes": 477052,
+          "savedAt": "2026-10-13T08:34:14.993Z"
         },
-        "verifiedAt": "2026-10-13T03:27:17.679Z"
+        "verifiedAt": "2026-10-13T08:34:14.993Z"
       },
       "stats47Targets": [
         "/ranking/current-securities-balance-ratio-multi-person-households",
@@ -9157,12 +9157,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "7812874626009286a9c53e2a86333ed94637a7069548da752fa4aae7d4541a5b",
-          "files": 8,
-          "bytes": 1494764,
-          "savedAt": "2026-10-13T03:27:20.079Z"
+          "sha256": "f48b4058921e63ec56790461fa28591c7acb0dd8fd373c4e5e2e6101bb5900c9",
+          "files": 12,
+          "bytes": 644051,
+          "savedAt": "2026-10-13T08:34:15.050Z"
         },
-        "verifiedAt": "2026-10-13T03:27:20.079Z"
+        "verifiedAt": "2026-10-13T08:34:15.050Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household",
@@ -9200,12 +9200,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c518e2b4eccb65e81c2a74f851c608d734f7c2062ea81ac307579504b12b52b6",
-          "files": 10,
-          "bytes": 2290598,
-          "savedAt": "2026-10-13T03:27:22.140Z"
+          "sha256": "c1bb20687137eed954c3c1a54e6b4f479d0cefea4142b2f69061e32626d60f13",
+          "files": 16,
+          "bytes": 974531,
+          "savedAt": "2026-10-13T08:34:15.174Z"
         },
-        "verifiedAt": "2026-10-13T03:27:22.140Z"
+        "verifiedAt": "2026-10-13T08:34:15.174Z"
       },
       "stats47Targets": [
         "/ranking/life-expectancy-0-male",
@@ -9228,12 +9228,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ba7ee45b3f5ae54d80111d5c4724bca58e3a97234113aeca5e71780471a3734f",
-          "files": 6,
-          "bytes": 788322,
-          "savedAt": "2026-10-13T03:25:27.309Z"
+          "sha256": "f41e39d498a8320520ba1f62879e6f4b8465a4b22f10926c7a064899020f1ed0",
+          "files": 8,
+          "bytes": 321849,
+          "savedAt": "2026-10-13T08:09:21.037Z"
         },
-        "verifiedAt": "2026-10-13T03:25:27.309Z"
+        "verifiedAt": "2026-10-13T08:09:21.037Z"
       },
       "stats47Targets": [
         "/ranking/katsuobushi-consumption-expenditure",
@@ -9252,12 +9252,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "5fb6ea55b1a4802d97f4724f41c788d75c2394580e6a9f2e5ee1b940bd286b20",
-          "files": 8,
-          "bytes": 1479372,
-          "savedAt": "2026-10-13T03:25:29.343Z"
+          "sha256": "5c68a625f757734265b2e6660a094e8a303fe10af9a5a82d81b40f76d0478530",
+          "files": 12,
+          "bytes": 634140,
+          "savedAt": "2026-10-13T08:09:54.478Z"
         },
-        "verifiedAt": "2026-10-13T03:25:29.343Z"
+        "verifiedAt": "2026-10-13T08:09:54.478Z"
       },
       "stats47Targets": [
         "/ranking/marriages",
@@ -9278,12 +9278,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "1c951f31584b5c1d002eebfb7cdd5413cba0553aadb2e811624ca798dff054bf",
-          "files": 5,
-          "bytes": 378585,
-          "savedAt": "2026-10-13T03:25:31.400Z"
+          "sha256": "7541e26faa6223421c5bf1d7a33e059742c76e1e007232fe8153a7e47eba62ce",
+          "files": 6,
+          "bytes": 170482,
+          "savedAt": "2026-10-13T08:13:09.261Z"
         },
-        "verifiedAt": "2026-10-13T03:25:31.400Z"
+        "verifiedAt": "2026-10-13T08:13:09.261Z"
       },
       "stats47Targets": [
         "/ranking/annual-income-per-household"
@@ -9301,12 +9301,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c7d29ce73d56ee5ce79e630a470963aa2bd1b80fb001bbc6d33e15991e2fe0ce",
-          "files": 6,
-          "bytes": 766417,
-          "savedAt": "2026-10-13T03:25:33.178Z"
+          "sha256": "9df42000b1b4cc1535e2ad87d0fa984cfdf824f6e1e1044170cc9fffccd8539b",
+          "files": 8,
+          "bytes": 335148,
+          "savedAt": "2026-10-13T08:13:09.301Z"
         },
-        "verifiedAt": "2026-10-13T03:25:33.178Z"
+        "verifiedAt": "2026-10-13T08:13:09.301Z"
       },
       "stats47Targets": [
         "/ranking/husband-childcare-rate",
@@ -9325,12 +9325,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "bc9b55d23714f248514c1c6e1c83651f0406bdee9f5004577ea5d6c6a680ea22",
-          "files": 6,
-          "bytes": 748913,
-          "savedAt": "2026-10-13T03:25:34.995Z"
+          "sha256": "5c31c4b4a0275a20275e1794d33b9d9760e730d5f7afceee33f8a4349bb60b45",
+          "files": 8,
+          "bytes": 319551,
+          "savedAt": "2026-10-13T08:13:09.362Z"
         },
-        "verifiedAt": "2026-10-13T03:25:34.995Z"
+        "verifiedAt": "2026-10-13T08:13:09.362Z"
       },
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate",
@@ -9349,12 +9349,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "942ed90ceabdb49d1c71e531704f1a33c5e32a0eb938443a08b371cc55248d24",
-          "files": 7,
-          "bytes": 1225383,
-          "savedAt": "2026-10-13T03:25:36.802Z"
+          "sha256": "af95eae3dfe51f816a78da3b524feae45a008e5a4ffd7e951c6cda962c2751cc",
+          "files": 10,
+          "bytes": 508225,
+          "savedAt": "2026-10-13T08:13:09.444Z"
         },
-        "verifiedAt": "2026-10-13T03:25:36.802Z"
+        "verifiedAt": "2026-10-13T08:13:09.444Z"
       },
       "stats47Targets": [
         "/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
@@ -9374,12 +9374,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "0e179df8291e5a29f0f1d6ae6cb13192c0f6851b10242fe104ae2263febdf4f3",
-          "files": 5,
-          "bytes": 382489,
-          "savedAt": "2026-10-13T03:25:39.045Z"
+          "sha256": "9d448522143d9b31eb323a8d7731d05b1d9441a69316a06bb913bc04d0e67e5a",
+          "files": 6,
+          "bytes": 173211,
+          "savedAt": "2026-10-13T08:13:38.422Z"
         },
-        "verifiedAt": "2026-10-13T03:25:39.045Z"
+        "verifiedAt": "2026-10-13T08:13:38.422Z"
       },
       "stats47Targets": [
         "/ranking/education-cost-all-households"
@@ -9397,12 +9397,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "2be1493e1f1ef723f6d4bd11a22ffbc9cc007af8d756e42bd5bce5f0aae5a86c",
-          "files": 5,
-          "bytes": 448974,
-          "savedAt": "2026-10-13T03:25:40.622Z"
+          "sha256": "3d9d1f8ead3bf6ac96849003a4bbe413d10390ae96bf4fb16ab4094a6ecc6449",
+          "files": 6,
+          "bytes": 182994,
+          "savedAt": "2026-10-13T08:13:47.086Z"
         },
-        "verifiedAt": "2026-10-13T03:25:40.622Z"
+        "verifiedAt": "2026-10-13T08:13:47.086Z"
       },
       "stats47Targets": [
         "/ranking/domestic-student-remittance-consumption-expenditure"
@@ -9420,12 +9420,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "15b0534c9c756c7031d70497a44bcbf8deae34a7770032459d8408b39abd3afa",
-          "files": 6,
-          "bytes": 773070,
-          "savedAt": "2026-10-13T03:25:42.370Z"
+          "sha256": "24e8858086b12a15b0b7e12ac522ef99b5c615234bf0b0a314ce8935a3fb591c",
+          "files": 8,
+          "bytes": 344839,
+          "savedAt": "2026-10-13T08:13:47.093Z"
         },
-        "verifiedAt": "2026-10-13T03:25:42.370Z"
+        "verifiedAt": "2026-10-13T08:13:47.093Z"
       },
       "stats47Targets": [
         "/ranking/beauty-salon-count",
@@ -9444,12 +9444,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c5c3d136cc2e80e5c47f9b3029d584af7a03c3d3f1533a5ff7a5ce48029e6541",
-          "files": 5,
-          "bytes": 372955,
-          "savedAt": "2026-10-13T03:25:44.466Z"
+          "sha256": "e7d5ad36c4813b58d0927f1a6b30060888c6ad63a6164b966eb0dc9e1c5bf82f",
+          "files": 6,
+          "bytes": 174540,
+          "savedAt": "2026-10-13T08:13:55.367Z"
         },
-        "verifiedAt": "2026-10-13T03:25:44.466Z"
+        "verifiedAt": "2026-10-13T08:13:55.367Z"
       },
       "stats47Targets": [
         "/ranking/current-savings-balance-multi-person-households"
@@ -9467,12 +9467,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "83450d9949575e14c4037823a5ab7ba62d77925cca249d1a5021ae8a2b5b9260",
-          "files": 5,
-          "bytes": 360529,
-          "savedAt": "2026-10-13T03:25:46.283Z"
+          "sha256": "74067a039f7c1f680d55142d2f40e75863e9fe7a3ece9741d7e71d2dd9eab74b",
+          "files": 6,
+          "bytes": 159591,
+          "savedAt": "2026-10-13T08:14:10.869Z"
         },
-        "verifiedAt": "2026-10-13T03:25:46.283Z"
+        "verifiedAt": "2026-10-13T08:14:10.869Z"
       },
       "stats47Targets": [
         "/ranking/owner-occupied-housing-ratio"
@@ -9490,12 +9490,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "1150e1f959893c28526ff34a29eb94810fd18a0f1f624fc2eaacd494a6a1efef",
-          "files": 7,
-          "bytes": 1136608,
-          "savedAt": "2026-10-13T03:25:47.962Z"
+          "sha256": "7e92934a4665ec730b6450417b7399fc7e391a15cef977562ab050b08f8a6f92",
+          "files": 10,
+          "bytes": 492786,
+          "savedAt": "2026-10-13T08:14:15.542Z"
         },
-        "verifiedAt": "2026-10-13T03:25:47.962Z"
+        "verifiedAt": "2026-10-13T08:14:15.542Z"
       },
       "stats47Targets": [
         "/ranking/nuclear-family-households-ratio",
@@ -9515,12 +9515,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ec395f084880666233104504223f3804858bdc613d0e4783933cf2561ea30de4",
-          "files": 5,
-          "bytes": 374816,
-          "savedAt": "2026-10-13T03:25:50.113Z"
+          "sha256": "4d9b5887b2f1ba57f3db214c035a33b984b28fd5011264f37417614ce50f8ced",
+          "files": 6,
+          "bytes": 165431,
+          "savedAt": "2026-10-13T08:14:23.231Z"
         },
-        "verifiedAt": "2026-10-13T03:25:50.113Z"
+        "verifiedAt": "2026-10-13T08:14:23.231Z"
       },
       "stats47Targets": [
         "/ranking/sex-ratio-age-20-39"
@@ -9538,12 +9538,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c037cff10318a1daddac0439aee1c8d0d88a08a2bef75b370a6d51ccec160495",
-          "files": 5,
-          "bytes": 356280,
-          "savedAt": "2026-10-13T03:25:51.653Z"
+          "sha256": "a386a2cb9c65e8cf5bf046dd573d6f8830fe8a2d98f6a0ea68d18d27adaf43c0",
+          "files": 6,
+          "bytes": 159490,
+          "savedAt": "2026-10-13T08:14:26.701Z"
         },
-        "verifiedAt": "2026-10-13T03:25:51.653Z"
+        "verifiedAt": "2026-10-13T08:14:26.701Z"
       },
       "stats47Targets": [
         "/ranking/heatstroke-deaths"
@@ -9561,12 +9561,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c1b69fcbfd5f33a0784517459881c030a4a00d784ec3847cf812f7fe9e0fc489",
-          "files": 5,
-          "bytes": 425534,
-          "savedAt": "2026-10-13T03:25:53.398Z"
+          "sha256": "c61743ed984caeee93f8cd82fca486d402b2eed47af72c21771d8754fb581ca0",
+          "files": 6,
+          "bytes": 190137,
+          "savedAt": "2026-10-13T08:16:36.366Z"
         },
-        "verifiedAt": "2026-10-13T03:25:53.398Z"
+        "verifiedAt": "2026-10-13T08:16:36.366Z"
       },
       "stats47Targets": [
         "/ranking/nonprimary-enterprises-count"
@@ -9584,12 +9584,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c7b01d955ff76b9645f8db5150794e60c88167f6507b49bbc46ba84130299151",
-          "files": 6,
-          "bytes": 761421,
-          "savedAt": "2026-10-13T03:25:56.783Z"
+          "sha256": "29942912c545ca706e51d03bc54dfd244a2c19fc9be6be70f639608c4abe999c",
+          "files": 8,
+          "bytes": 313463,
+          "savedAt": "2026-10-13T08:16:36.472Z"
         },
-        "verifiedAt": "2026-10-13T03:25:56.783Z"
+        "verifiedAt": "2026-10-13T08:16:36.472Z"
       },
       "stats47Targets": [
         "/ranking/habitable-area-ratio",
@@ -9608,12 +9608,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "34a414a4c9a434cb354a59670441e8a435b79ef5b147c559a28870462e985f62",
-          "files": 6,
-          "bytes": 780015,
-          "savedAt": "2026-10-13T03:25:58.540Z"
+          "sha256": "28304512f639d2128325b07e6cf77cc2d37836d3f5193a01f804dc0887355a08",
+          "files": 8,
+          "bytes": 341950,
+          "savedAt": "2026-10-13T08:16:36.543Z"
         },
-        "verifiedAt": "2026-10-13T03:25:58.540Z"
+        "verifiedAt": "2026-10-13T08:16:36.543Z"
       },
       "stats47Targets": [
         "/ranking/commute-by-car",
@@ -9632,12 +9632,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e93472f40ff2b46f3436e1d93fce59e9b3cafff5e6180bc0c4b580091710a4a4",
-          "files": 5,
-          "bytes": 371263,
-          "savedAt": "2026-10-13T03:26:00.410Z"
+          "sha256": "b4968da36ca8b1a080efd0b78c82197154773d3121d583cdb6812aafdb240e9b",
+          "files": 6,
+          "bytes": 156804,
+          "savedAt": "2026-10-13T08:17:09.384Z"
         },
-        "verifiedAt": "2026-10-13T03:26:00.410Z"
+        "verifiedAt": "2026-10-13T08:17:09.384Z"
       },
       "stats47Targets": [
         "/ranking/mothers-age-at-first-birth"
@@ -9655,12 +9655,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "1e1d054583e191dabc2e2f00024a12f06efa025a94623cb88e09b08ad721020e",
-          "files": 5,
-          "bytes": 422187,
-          "savedAt": "2026-10-13T03:26:02.831Z"
+          "sha256": "255ec2c4173c1cfa3edd860e08bc1cb58675b41fca191927ee38bfad9396a64b",
+          "files": 6,
+          "bytes": 174491,
+          "savedAt": "2026-10-13T08:17:16.988Z"
         },
-        "verifiedAt": "2026-10-13T03:26:02.831Z"
+        "verifiedAt": "2026-10-13T08:17:16.988Z"
       },
       "stats47Targets": [
         "/ranking/child-abuse-consultation-cases"
@@ -9678,12 +9678,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ef3238f3faec57d35aebdc6aed7b5a38a8bf1bd6249a131b6ca8b5d7436fcd88",
-          "files": 5,
-          "bytes": 375081,
-          "savedAt": "2026-10-13T03:26:05.041Z"
+          "sha256": "2f9d2b3d7c44e8069a77c3795e9541a123f50fdc45a5b31b327e96156530af6c",
+          "files": 6,
+          "bytes": 162729,
+          "savedAt": "2026-10-13T08:17:17.265Z"
         },
-        "verifiedAt": "2026-10-13T03:26:05.041Z"
+        "verifiedAt": "2026-10-13T08:17:17.265Z"
       },
       "stats47Targets": [
         "/ranking/deaths-cerebral-infarction-per-100k"
@@ -9701,12 +9701,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e486415eeb16eaa86a22449b7c7702aa8daf6af032bb1eb370de85f372259ee0",
-          "files": 6,
-          "bytes": 701682,
-          "savedAt": "2026-10-13T03:26:06.636Z"
+          "sha256": "466ef43e8ae3a41a3aace7a5a20077cba59086213d86b6913624bac5a30007f8",
+          "files": 8,
+          "bytes": 310897,
+          "savedAt": "2026-10-13T08:17:18.974Z"
         },
-        "verifiedAt": "2026-10-13T03:26:06.636Z"
+        "verifiedAt": "2026-10-13T08:17:18.974Z"
       },
       "stats47Targets": [
         "/ranking/suicide-count",
@@ -9725,12 +9725,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "6b45d87da5883d6634d95c1b82492664937ab75845904d6761a338ee9b55dc3e",
-          "files": 14,
-          "bytes": 3794511,
-          "savedAt": "2026-10-13T03:27:25.819Z"
+          "sha256": "bd6bcd2761de54e4c344abc3516283c44cdf88bb6bee5a178f7a698c75f8758a",
+          "files": 24,
+          "bytes": 1639277,
+          "savedAt": "2026-10-13T08:34:54.518Z"
         },
-        "verifiedAt": "2026-10-13T03:27:25.819Z"
+        "verifiedAt": "2026-10-13T08:34:54.518Z"
       },
       "stats47Targets": [
         "/ranking/junior-high-club-per100-soccer",
@@ -9757,12 +9757,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "0326bda9c33d5fc5bc400005579becb320bd754e5274dfcf56676bad7afafcba",
-          "files": 5,
-          "bytes": 390279,
-          "savedAt": "2026-10-13T03:27:28.760Z"
+          "sha256": "a37152fcbce3bdc7694b32fd944643c814d9f0d9c840bf58c45b6bc6933e8b5a",
+          "files": 6,
+          "bytes": 162476,
+          "savedAt": "2026-10-13T08:34:58.371Z"
         },
-        "verifiedAt": "2026-10-13T03:27:28.760Z"
+        "verifiedAt": "2026-10-13T08:34:58.371Z"
       },
       "stats47Targets": [
         "/ranking/high-school-club-per100-rugby-male"
@@ -9780,12 +9780,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "cc42e6816e4ba336ec7dc44d114c902935b7ba16573a2e50fe1c21dcae3c3893",
-          "files": 7,
-          "bytes": 1052138,
-          "savedAt": "2026-10-13T03:27:30.703Z"
+          "sha256": "407e62f254a021eea362f86fd3b8d29ee82a27dd78a0e61ad592f45b10a85a5d",
+          "files": 10,
+          "bytes": 447830,
+          "savedAt": "2026-10-13T08:42:47.001Z"
         },
-        "verifiedAt": "2026-10-13T03:27:30.703Z"
+        "verifiedAt": "2026-10-13T08:42:47.001Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-cycling",
@@ -9805,12 +9805,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "d22593c99e6f4ab168af74d712ec5fac9f720fd4c6900836df187f881beed6e7",
-          "files": 7,
-          "bytes": 1072591,
-          "savedAt": "2026-10-13T03:27:32.362Z"
+          "sha256": "77f72ef5f1ca06a811d8c71815dcf6887c16c683231ed3ccd2f2e914de16ab68",
+          "files": 10,
+          "bytes": 454551,
+          "savedAt": "2026-10-13T08:42:47.035Z"
         },
-        "verifiedAt": "2026-10-13T03:27:32.362Z"
+        "verifiedAt": "2026-10-13T08:42:47.035Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-golf",
@@ -9830,12 +9830,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3ddb8e6fa4b604994a93ff9575c06930c71521ce8350ba4698b4afa8ee66d30c",
-          "files": 10,
-          "bytes": 2191709,
-          "savedAt": "2026-10-13T03:27:34.264Z"
+          "sha256": "c73a2af86ccc31e204263df467e5f3c4c0124d55d06709bbe95419de321f41a1",
+          "files": 16,
+          "bytes": 909909,
+          "savedAt": "2026-10-13T08:42:47.083Z"
         },
-        "verifiedAt": "2026-10-13T03:27:34.264Z"
+        "verifiedAt": "2026-10-13T08:42:47.083Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-sports-spectating",
@@ -9858,12 +9858,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3756b851cc5dc0d469d411af4dfb56c71553bebc6fd4c24fe901ceaa004e31d0",
-          "files": 7,
-          "bytes": 1094404,
-          "savedAt": "2026-10-13T03:27:36.633Z"
+          "sha256": "e68f0cac30fd6bc4931179b3786930366b8681ecc4e7d127c3138a0d2333b41f",
+          "files": 10,
+          "bytes": 470810,
+          "savedAt": "2026-10-13T08:42:47.139Z"
         },
-        "verifiedAt": "2026-10-13T03:27:36.633Z"
+        "verifiedAt": "2026-10-13T08:42:47.139Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-gardening",
@@ -9883,12 +9883,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "26e9d7e81dc9d36041f2afd620a7a32cab737646bff94c3e4b336c583d613b45",
-          "files": 11,
-          "bytes": 2465504,
-          "savedAt": "2026-10-13T03:27:38.511Z"
+          "sha256": "f089fc539484f07035a2dcc1ec32217bf5da0d76302a399c65d70f4b11135b20",
+          "files": 18,
+          "bytes": 1050708,
+          "savedAt": "2026-10-13T08:43:43.100Z"
         },
-        "verifiedAt": "2026-10-13T03:27:38.511Z"
+        "verifiedAt": "2026-10-13T08:43:43.100Z"
       },
       "stats47Targets": [
         "/ranking/hobby-participation-rate-calligraphy",
@@ -9912,12 +9912,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3b34329a371bc8b3eca537deb81d3a7f309a229ccfbda917c4cf93c3c46fbbc9",
-          "files": 6,
-          "bytes": 719177,
-          "savedAt": "2026-10-13T03:27:41.040Z"
+          "sha256": "1efa840deff44045e297a638ec2f6ce8cccc9f4b51b31ac89c0e4137d7ed9dce",
+          "files": 8,
+          "bytes": 315859,
+          "savedAt": "2026-10-13T08:43:43.153Z"
         },
-        "verifiedAt": "2026-10-13T03:27:41.040Z"
+        "verifiedAt": "2026-10-13T08:43:43.153Z"
       },
       "stats47Targets": [
         "/ranking/public-swimming-pool-count-per-million",
@@ -9936,12 +9936,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "38b24df36973d5c37252ee8f5ddecefb43465f38aeb622dc4524eb27ca89435d",
-          "files": 6,
-          "bytes": 721491,
-          "savedAt": "2026-10-13T03:27:43.131Z"
+          "sha256": "943f24f62e8c227d562291db59885dcdaf2cfbf653ee277125a7802ae8d6b9d5",
+          "files": 8,
+          "bytes": 305369,
+          "savedAt": "2026-10-13T08:43:43.247Z"
         },
-        "verifiedAt": "2026-10-13T03:27:43.131Z"
+        "verifiedAt": "2026-10-13T08:43:43.247Z"
       },
       "stats47Targets": [
         "/ranking/athletics-stadium-count-public",
@@ -9960,12 +9960,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ebce457621e65ccc56ee4fa8a89b3e2404697de068e34acca0161b7959ac24ac",
-          "files": 5,
-          "bytes": 372679,
-          "savedAt": "2026-10-13T03:27:44.862Z"
+          "sha256": "fbb0efe1e0d59baaef8d0eed37bce88b34d4df71f42032b563c0404ef1d2230b",
+          "files": 6,
+          "bytes": 163342,
+          "savedAt": "2026-10-13T08:43:43.291Z"
         },
-        "verifiedAt": "2026-10-13T03:27:44.862Z"
+        "verifiedAt": "2026-10-13T08:43:43.291Z"
       },
       "stats47Targets": [
         "/ranking/public-gymnasium-count-per-million"
@@ -9983,12 +9983,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9e9069d8486ee4f1b7e0e52003b7e9da44df4cea48a7730058c5386bb6510ee7",
-          "files": 6,
-          "bytes": 686482,
-          "savedAt": "2026-10-13T03:27:46.447Z"
+          "sha256": "ac68d1e9318df0a65859db6ca4512f478ac23f687d1e57c7ac13c7f73ddad050",
+          "files": 8,
+          "bytes": 306851,
+          "savedAt": "2026-10-13T08:46:11.137Z"
         },
-        "verifiedAt": "2026-10-13T03:27:46.447Z"
+        "verifiedAt": "2026-10-13T08:46:11.137Z"
       },
       "stats47Targets": [
         "/ranking/meal-avg-time-female",
@@ -10007,12 +10007,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e948c5efee17326599b7b87af43d7cc1779cc08df7ba2e0fe4d5bd8363cb9e38",
-          "files": 5,
-          "bytes": 370757,
-          "savedAt": "2026-10-13T03:27:48.522Z"
+          "sha256": "fd2b5679c15891e1df9d43246d8592f867e4fea5c3778d33879fc708e743148d",
+          "files": 6,
+          "bytes": 156813,
+          "savedAt": "2026-10-13T08:45:21.880Z"
         },
-        "verifiedAt": "2026-10-13T03:27:48.522Z"
+        "verifiedAt": "2026-10-13T08:45:21.880Z"
       },
       "stats47Targets": [
         "/ranking/broadcast-media-time-all"
@@ -10030,12 +10030,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "58c421c2dc391b19d48671ace7ce5723ebc01591056cb46a2a9c6a29c0fc3fb3",
-          "files": 11,
-          "bytes": 2467874,
-          "savedAt": "2026-10-13T03:27:50.374Z"
+          "sha256": "efa7c649bb3f29318387c6b166d18c5bebbc3c93f3638cbdbdff6794b2cc47a1",
+          "files": 18,
+          "bytes": 1073364,
+          "savedAt": "2026-10-13T08:46:11.217Z"
         },
-        "verifiedAt": "2026-10-13T03:27:50.374Z"
+        "verifiedAt": "2026-10-13T08:46:11.217Z"
       },
       "stats47Targets": [
         "/ranking/housework-avg-time-female",
@@ -10059,12 +10059,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "0bdb79e706e3c6948f2184b8d644bb61b93b0a73cd20378e96ab2815275a4e29",
-          "files": 7,
-          "bytes": 1183322,
-          "savedAt": "2026-10-13T03:27:53.099Z"
+          "sha256": "2805b734ab2e2149e6c5021019413755a940d491772c5bf1c2f554b398002588",
+          "files": 10,
+          "bytes": 552955,
+          "savedAt": "2026-10-13T08:46:11.233Z"
         },
-        "verifiedAt": "2026-10-13T03:27:53.099Z"
+        "verifiedAt": "2026-10-13T08:46:11.233Z"
       },
       "stats47Targets": [
         "/ranking/commute-by-train",
@@ -10084,12 +10084,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "923c132234d6d2aae79c231c3064ce11e6cb59c56078454fb1f8407181913562",
-          "files": 5,
-          "bytes": 379725,
-          "savedAt": "2026-10-13T03:27:55.521Z"
+          "sha256": "f4e01fad4c7264ca62fbb6150d42a9a6c7e9f1389078a91b59d1cffbeb290b21",
+          "files": 6,
+          "bytes": 160446,
+          "savedAt": "2026-10-13T08:47:17.952Z"
         },
-        "verifiedAt": "2026-10-13T03:27:55.521Z"
+        "verifiedAt": "2026-10-13T08:47:17.952Z"
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
@@ -10107,12 +10107,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "6b14e77c1553d650008d6a7106450de806c2284d4ef7c60471e1a4a27db0dd23",
-          "files": 6,
-          "bytes": 788508,
-          "savedAt": "2026-10-13T03:27:57.359Z"
+          "sha256": "8528a90c72ab359b1ebd15f5be7b3e28ad030a57939932024c4faa19ebb0f97e",
+          "files": 8,
+          "bytes": 334236,
+          "savedAt": "2026-10-13T08:47:18.015Z"
         },
-        "verifiedAt": "2026-10-13T03:27:57.359Z"
+        "verifiedAt": "2026-10-13T08:47:18.015Z"
       },
       "stats47Targets": [
         "/ranking/national-assessment-elementary-tutoring-rate",
@@ -10131,12 +10131,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9ffbb209e51fc75f2c8e13bfb98dd1ecff30b4710f936f4fa6a4a0ec98fa691c",
-          "files": 5,
-          "bytes": 367649,
-          "savedAt": "2026-10-13T03:27:59.271Z"
+          "sha256": "4b4ca74c0f60ca92e1de1c8862fc04620442bfe5e1ba184b94fafe00037a8ca5",
+          "files": 6,
+          "bytes": 161303,
+          "savedAt": "2026-10-13T08:47:18.041Z"
         },
-        "verifiedAt": "2026-10-13T03:27:59.271Z"
+        "verifiedAt": "2026-10-13T08:47:18.041Z"
       },
       "stats47Targets": [
         "/ranking/primary-school-commute-time-weekday"
@@ -10154,12 +10154,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "323813e3a12f4ee5109dfd861578ce133d56871b1037bed8fef43b9648656884",
-          "files": 6,
-          "bytes": 782738,
-          "savedAt": "2026-10-13T03:28:01.432Z"
+          "sha256": "f96d5f055e9a2e480f64d8ff014c0c4e11098b8da68a998f3ce51e80b99e3b60",
+          "files": 8,
+          "bytes": 332676,
+          "savedAt": "2026-10-13T08:47:18.148Z"
         },
-        "verifiedAt": "2026-10-13T03:28:01.432Z"
+        "verifiedAt": "2026-10-13T08:47:18.148Z"
       },
       "stats47Targets": [
         "/ranking/national-assessment-elementary-breakfast-rate",
@@ -10178,12 +10178,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "89fbb80a32f3f15fe0762a2d664e31010996471e022c6e28b688c7452369334c",
-          "files": 5,
-          "bytes": 412243,
-          "savedAt": "2026-10-13T03:28:03.243Z"
+          "sha256": "927f23f77c60d82ba066965ee8c4ef0e75934d10b1a0bc19bb6a3c25baeba467",
+          "files": 6,
+          "bytes": 164477,
+          "savedAt": "2026-10-13T08:48:02.346Z"
         },
-        "verifiedAt": "2026-10-13T03:28:03.243Z"
+        "verifiedAt": "2026-10-13T08:48:02.346Z"
       },
       "stats47Targets": [
         "/ranking/engel-coefficient"
@@ -10201,12 +10201,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "60b9e1334fd53b1a658fdd21cd603d8e0dc58b5d9d42948b89649480101ec3dd",
-          "files": 6,
-          "bytes": 840523,
-          "savedAt": "2026-10-13T03:28:05.452Z"
+          "sha256": "6af3c4d4318449a64a4689e9320c21003d458134aa88d273df2e7de9cfbe0906",
+          "files": 8,
+          "bytes": 340988,
+          "savedAt": "2026-10-13T08:48:02.388Z"
         },
-        "verifiedAt": "2026-10-13T03:28:05.452Z"
+        "verifiedAt": "2026-10-13T08:48:02.388Z"
       },
       "stats47Targets": [
         "/ranking/rice-consumption-quantity",
@@ -10225,12 +10225,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3113fe14ce14b358b594e4bce2047fbcf90abff7ab4d931b7989d1f91b488553",
-          "files": 5,
-          "bytes": 432091,
-          "savedAt": "2026-10-13T03:28:08.021Z"
+          "sha256": "8972207cbd18826c132ccc5bab4f8b7b9fb25d94b2311cba94dab48456ddcd74",
+          "files": 6,
+          "bytes": 182747,
+          "savedAt": "2026-10-13T08:48:02.451Z"
         },
-        "verifiedAt": "2026-10-13T03:28:08.021Z"
+        "verifiedAt": "2026-10-13T08:48:02.451Z"
       },
       "stats47Targets": [
         "/ranking/fresh-vegetables-consumption-quantity"
@@ -10248,12 +10248,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "862ccb05086051021a7349f5adbd2399f97e17c7d2f1a97047aa0dfbfb3aadfb",
-          "files": 14,
-          "bytes": 4162246,
-          "savedAt": "2026-10-13T03:28:10.202Z"
+          "sha256": "0cb86923092d25faf634180d227146f2e5e1f193eb310adbec02cb9f2e056f62",
+          "files": 24,
+          "bytes": 1670734,
+          "savedAt": "2026-10-13T08:57:56.587Z"
         },
-        "verifiedAt": "2026-10-13T03:28:10.202Z"
+        "verifiedAt": "2026-10-13T08:57:56.587Z"
       },
       "stats47Targets": [
         "/ranking/cabbage-consumption-quantity",
@@ -10280,12 +10280,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9305586b8a4d522c87773c2dec4f54cefe3703aecc8f671dbf64a6ad75fe6b8e",
-          "files": 5,
-          "bytes": 421777,
-          "savedAt": "2026-10-13T03:28:13.233Z"
+          "sha256": "2d5f8b2d5e7e08a0bee090e52d4241ef9dd2c2b452d8696ef3f7397182c7ad9e",
+          "files": 6,
+          "bytes": 177037,
+          "savedAt": "2026-10-13T08:53:25.525Z"
         },
-        "verifiedAt": "2026-10-13T03:28:13.233Z"
+        "verifiedAt": "2026-10-13T08:53:25.525Z"
       },
       "stats47Targets": [
         "/ranking/fresh-fruit-consumption-quantity"
@@ -10303,12 +10303,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "7c5470b5b311990ba997e9c1a70363fd1b1d001608e8bac6e0ea08582f6ffbe7",
-          "files": 9,
-          "bytes": 2073675,
-          "savedAt": "2026-10-13T03:28:15.591Z"
+          "sha256": "d5b3f207a4112de9b7d056331f7db032702604ac11ef6d7a3632253403873c43",
+          "files": 14,
+          "bytes": 839919,
+          "savedAt": "2026-10-13T08:53:25.590Z"
         },
-        "verifiedAt": "2026-10-13T03:28:15.591Z"
+        "verifiedAt": "2026-10-13T08:53:25.590Z"
       },
       "stats47Targets": [
         "/ranking/banana-consumption-quantity",
@@ -10332,12 +10332,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f930e8bcd5b3be77cfdcbf6b8280f84fc922c5d14f2343896eac75a2a138a230",
-          "files": 5,
-          "bytes": 423693,
-          "savedAt": "2026-10-13T03:28:18.167Z"
+          "sha256": "bbf6ce7a0dd59a9afb7b9c8bf6758014800adcafc7cef5ca34a866513cb813a0",
+          "files": 6,
+          "bytes": 178608,
+          "savedAt": "2026-10-13T08:53:25.622Z"
         },
-        "verifiedAt": "2026-10-13T03:28:18.167Z"
+        "verifiedAt": "2026-10-13T08:53:25.622Z"
       },
       "stats47Targets": [
         "/ranking/fresh-seafood-consumption-quantity"
@@ -10355,12 +10355,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "df55d2e6bd87407540a8e8a82e8cbb108622dfcd6d1af810cc1d5f9ddf24ce97",
-          "files": 7,
-          "bytes": 1191434,
-          "savedAt": "2026-10-13T03:28:20.289Z"
+          "sha256": "7a020a5cf1d107b910531d419d26a4ec59830f267c3a9fd2c2d9d17662ea3211",
+          "files": 10,
+          "bytes": 469739,
+          "savedAt": "2026-10-13T08:57:56.635Z"
         },
-        "verifiedAt": "2026-10-13T03:28:20.289Z"
+        "verifiedAt": "2026-10-13T08:57:56.635Z"
       },
       "stats47Targets": [
         "/ranking/saury-consumption-quantity",
@@ -10380,12 +10380,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "11b25e7db8738e724578d4193f5010c5f3ed07d2ad2c8f8d34b0178c5073d452",
-          "files": 5,
-          "bytes": 403097,
-          "savedAt": "2026-10-13T03:28:22.186Z"
+          "sha256": "5dc2e313abd286d57ccecc9116a4ccadae21a1fc3a0cad3e15513f34dd5501d5",
+          "files": 6,
+          "bytes": 167361,
+          "savedAt": "2026-10-13T08:58:43.728Z"
         },
-        "verifiedAt": "2026-10-13T03:28:22.186Z"
+        "verifiedAt": "2026-10-13T08:58:43.728Z"
       },
       "stats47Targets": [
         "/ranking/shellfish-consumption-quantity"
@@ -10403,12 +10403,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "88d356a10b4d36e1dd182f6d77ee10b5c5c660a7ecc3bb9db3444b3537bd93bc",
-          "files": 8,
-          "bytes": 1667094,
-          "savedAt": "2026-10-13T03:28:24.770Z"
+          "sha256": "7040ec1d43291b3203eadd2aafa6b98f9f064edc2966658af6b6b384041e8340",
+          "files": 12,
+          "bytes": 660924,
+          "savedAt": "2026-10-13T09:00:42.753Z"
         },
-        "verifiedAt": "2026-10-13T03:28:24.770Z"
+        "verifiedAt": "2026-10-13T09:00:42.753Z"
       },
       "stats47Targets": [
         "/ranking/table-salt-consumption-quantity",
@@ -10429,12 +10429,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "a35de7a137f758f7a131b2d8b29513034a3a2cdff8d489d7d1a94e23ef5a762e",
-          "files": 7,
-          "bytes": 1207138,
-          "savedAt": "2026-10-13T03:28:26.973Z"
+          "sha256": "35dcbe3fcda634efd3f96f85a6d42a96e038bf0664596e7b9ceb0d2464201798",
+          "files": 10,
+          "bytes": 472344,
+          "savedAt": "2026-10-13T09:00:42.768Z"
         },
-        "verifiedAt": "2026-10-13T03:28:26.973Z"
+        "verifiedAt": "2026-10-13T09:00:42.768Z"
       },
       "stats47Targets": [
         "/ranking/green-tea-consumption-quantity",
@@ -10454,12 +10454,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "b9f303e6438aadae910d9e8dc4a448daf22a3b2580b24e3c338ab1964fb130bf",
-          "files": 6,
-          "bytes": 860082,
-          "savedAt": "2026-10-13T03:28:29.213Z"
+          "sha256": "6b3844d6f396321773a2b73af3a4c38aeafd04941983085d6a07740579b636ee",
+          "files": 8,
+          "bytes": 343640,
+          "savedAt": "2026-10-13T08:58:43.793Z"
         },
-        "verifiedAt": "2026-10-13T03:28:29.213Z"
+        "verifiedAt": "2026-10-13T08:58:43.793Z"
       },
       "stats47Targets": [
         "/ranking/carbonated-drink-consumption-expenditure",
@@ -10478,12 +10478,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "869519a61af7c0529aa5011bd54ed2c58075885ca355d6ff11964bd01320fe0a",
-          "files": 5,
-          "bytes": 415482,
-          "savedAt": "2026-10-13T03:28:31.241Z"
+          "sha256": "731d86a034f472fe967d90799730b5ab7a1ca3d69ec959be3e00790d4abd9072",
+          "files": 6,
+          "bytes": 166817,
+          "savedAt": "2026-10-13T09:13:20.454Z"
         },
-        "verifiedAt": "2026-10-13T03:28:31.241Z"
+        "verifiedAt": "2026-10-13T09:13:20.454Z"
       },
       "stats47Targets": [
         "/ranking/milk-consumption-quantity"
@@ -10501,12 +10501,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f6ec4234f49fcaf9845e8b0d13fab55d36eb59f0fdd010499dd22f610641d1af",
-          "files": 5,
-          "bytes": 430981,
-          "savedAt": "2026-10-13T03:28:34.184Z"
+          "sha256": "cca1c2839e3363dd3ea0d43ae017946780d171f65b32dc6c162d1238e08237ca",
+          "files": 6,
+          "bytes": 183030,
+          "savedAt": "2026-10-13T09:13:20.468Z"
         },
-        "verifiedAt": "2026-10-13T03:28:34.184Z"
+        "verifiedAt": "2026-10-13T09:13:20.468Z"
       },
       "stats47Targets": [
         "/ranking/confectionery-consumption-expenditure"
@@ -10524,12 +10524,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3f7b76d9d65f2afa368d09c4fda5ab7b1e7b493e7976e4e871a7a8fc8ad102d1",
-          "files": 5,
-          "bytes": 421767,
-          "savedAt": "2026-10-13T03:28:36.130Z"
+          "sha256": "7254fd62c7ba0fc72e4051b97f2e37ada95d9bd69f198ff2c4f28cfed72461c6",
+          "files": 6,
+          "bytes": 173558,
+          "savedAt": "2026-10-13T09:13:20.487Z"
         },
-        "verifiedAt": "2026-10-13T03:28:36.130Z"
+        "verifiedAt": "2026-10-13T09:13:20.487Z"
       },
       "stats47Targets": [
         "/ranking/natto-consumption-expenditure"
@@ -10547,12 +10547,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9302bac28c507cb45c0b35e9a97ca8cbfba173366768f9cf11cf8e7d64271ecf",
-          "files": 5,
-          "bytes": 424282,
-          "savedAt": "2026-10-13T03:28:37.984Z"
+          "sha256": "a6633fd83def9ea11b399d5baa4502d68a92ca4eedb38af834942314051f9338",
+          "files": 6,
+          "bytes": 167289,
+          "savedAt": "2026-10-13T09:13:20.552Z"
         },
-        "verifiedAt": "2026-10-13T03:28:37.984Z"
+        "verifiedAt": "2026-10-13T09:13:20.552Z"
       },
       "stats47Targets": [
         "/ranking/instant-noodles-consumption-quantity"
@@ -10570,12 +10570,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "6427c8f244f4260b63993d0ec7eb3cc24635534c4fca7af54086bf28dda9e054",
-          "files": 5,
-          "bytes": 419650,
-          "savedAt": "2026-10-13T03:28:39.579Z"
+          "sha256": "814d05206d6c19384a6002606234bfd08921eb537854fa089991859964b7d049",
+          "files": 6,
+          "bytes": 176624,
+          "savedAt": "2026-10-13T09:14:26.351Z"
         },
-        "verifiedAt": "2026-10-13T03:28:39.579Z"
+        "verifiedAt": "2026-10-13T09:14:26.351Z"
       },
       "stats47Targets": [
         "/ranking/bread-consumption-quantity"
@@ -10593,12 +10593,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f21e9db0b934f0e315aa6852ad3bb41125659ec9ce4e181418a477ea64508bfd",
-          "files": 6,
-          "bytes": 780881,
-          "savedAt": "2026-10-13T03:25:25.461Z"
+          "sha256": "f98a5bf54ebbff811ec0026c92c2dd9862a3bf1e383026c24453cb32876bfa7f",
+          "files": 8,
+          "bytes": 311324,
+          "savedAt": "2026-10-13T08:08:38.668Z"
         },
-        "verifiedAt": "2026-10-13T03:25:25.461Z"
+        "verifiedAt": "2026-10-13T08:08:38.668Z"
       },
       "stats47Targets": [
         "/ranking/konbu-consumption-expenditure",
@@ -10617,12 +10617,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "8baae27067365e8c2e9c5ab02a5d45561217c79705af7072d6f03bf444579f45",
-          "files": 6,
-          "bytes": 716237,
-          "savedAt": "2026-10-13T03:25:55.013Z"
+          "sha256": "769b12a014b0062349089bf7e41b7d75950ad5c7b609176512eb7942ebf44956",
+          "files": 8,
+          "bytes": 314283,
+          "savedAt": "2026-10-13T08:16:36.413Z"
         },
-        "verifiedAt": "2026-10-13T03:25:55.013Z"
+        "verifiedAt": "2026-10-13T08:16:36.413Z"
       },
       "stats47Targets": [
         "/ranking/unemployment-rate"
@@ -10640,12 +10640,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "083fdbeaf1945db017cc7c6f61573859131fd62de2b7febf9e4defbcd7f85785",
+          "sha256": "d1a6ad6d4efe1406eec8849b28ba35db012806d95e64c112a3ffb5b156e18dad",
           "files": 4,
           "bytes": 65214,
-          "savedAt": "2026-10-13T03:28:32.887Z"
+          "savedAt": "2026-10-13T09:04:46.550Z"
         },
-        "verifiedAt": "2026-10-13T03:28:32.887Z"
+        "verifiedAt": "2026-10-13T09:04:46.550Z"
       },
       "stats47Targets": [
         "/ranking/alcohol-sales-per-adult-total",
@@ -10847,12 +10847,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "d27f5ed1d01816012e49e29313316906c9f217c25df76b2717254abd17f06fa3",
+          "sha256": "6947a7e3b265cf6e3170e6f3a3b05fe2fc482477f3a9e2a0de10f577ab11e1aa",
           "files": 10,
-          "bytes": 349351,
-          "savedAt": "2026-10-13T03:26:25.078Z"
+          "bytes": 153936,
+          "savedAt": "2026-10-13T08:21:17.114Z"
         },
-        "verifiedAt": "2026-10-13T03:26:25.078Z"
+        "verifiedAt": "2026-10-13T08:21:17.114Z"
       },
       "stats47Targets": []
     },
@@ -10868,12 +10868,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "5f5282ba4b6f452b226477e93e76eaac9b23cc3e980ce9bf3a906f017b06efd2",
+          "sha256": "27d36ebf0bb58477945ed423703545c530210bc0381aed08e4ab476a1dd73ec8",
           "files": 12,
-          "bytes": 500368,
-          "savedAt": "2026-10-13T03:26:28.661Z"
+          "bytes": 208076,
+          "savedAt": "2026-10-13T08:21:17.299Z"
         },
-        "verifiedAt": "2026-10-13T03:26:28.661Z"
+        "verifiedAt": "2026-10-13T08:21:17.299Z"
       },
       "stats47Targets": []
     },
@@ -10889,12 +10889,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f02ccc7c86ce0e959ef0f2edfcd9fbada69b5e9d9e5d312a3cb799845d288e57",
+          "sha256": "e09268f2a7057c6002bb4153745597061bac1f1ed94ece873f6242950fdb1135",
           "files": 18,
-          "bytes": 855657,
-          "savedAt": "2026-10-13T03:26:31.761Z"
+          "bytes": 341702,
+          "savedAt": "2026-10-13T08:21:17.413Z"
         },
-        "verifiedAt": "2026-10-13T03:26:31.761Z"
+        "verifiedAt": "2026-10-13T08:21:17.413Z"
       },
       "stats47Targets": []
     },
@@ -10910,12 +10910,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "87e42f0fef43b889620d925c84b00087b352c5633f465398885d40df05395688",
+          "sha256": "00de539d5b331a67a2f8158467f7b95958b868bba106c2f9a59b55bed045a787",
           "files": 18,
-          "bytes": 809313,
-          "savedAt": "2026-10-13T03:26:35.068Z"
+          "bytes": 329245,
+          "savedAt": "2026-10-13T08:22:02.673Z"
         },
-        "verifiedAt": "2026-10-13T03:26:35.068Z"
+        "verifiedAt": "2026-10-13T08:22:02.673Z"
       },
       "stats47Targets": []
     },
@@ -10931,12 +10931,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "fc5a0153dd03056b8c1c08e270aedf363044fb1ba3cf51f359e319b42e9b61ac",
+          "sha256": "434be50025f8b01eb7edc2302826d87139af1f25e8b0f607ce426151b0a0e939",
           "files": 10,
-          "bytes": 378141,
-          "savedAt": "2026-10-13T03:26:37.657Z"
+          "bytes": 151582,
+          "savedAt": "2026-10-13T08:22:11.185Z"
         },
-        "verifiedAt": "2026-10-13T03:26:37.657Z"
+        "verifiedAt": "2026-10-13T08:22:11.185Z"
       },
       "stats47Targets": []
     },
@@ -10952,12 +10952,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "04f9e82831ab70d3e9ecc4cf5c6f770e64c87c300a6e3b796e9d1338242c0dcd",
+          "sha256": "0668d8db0712ccd77a03eb8aa25f15056177705f93d2bc55e2245f89413d352d",
           "files": 24,
-          "bytes": 1210465,
-          "savedAt": "2026-10-13T03:26:40.318Z"
+          "bytes": 484428,
+          "savedAt": "2026-10-13T08:24:31.072Z"
         },
-        "verifiedAt": "2026-10-13T03:26:40.318Z"
+        "verifiedAt": "2026-10-13T08:24:31.072Z"
       },
       "stats47Targets": []
     },
@@ -10973,12 +10973,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "6983c7629ff609b551014a78aa27e5e716db0a4ec115ac6a1aa52db8133ba52f",
+          "sha256": "be7a38d3a3a62743fc23771e6d55c6793bb2512bab1e7e387ba00699be613f17",
           "files": 24,
-          "bytes": 1172030,
-          "savedAt": "2026-10-13T03:26:44.705Z"
+          "bytes": 480725,
+          "savedAt": "2026-10-13T08:24:31.125Z"
         },
-        "verifiedAt": "2026-10-13T03:26:44.705Z"
+        "verifiedAt": "2026-10-13T08:24:31.125Z"
       },
       "stats47Targets": []
     },
@@ -10994,12 +10994,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "977efebc81e1b8fa9fa386d5449cea0c4b7d0d2bf72f2f9b86179150c3e7a72e",
+          "sha256": "57dd50ad244576d088a735ca4b1b06b1dce85d49d1715aa5773261eacbc3b3e3",
           "files": 10,
-          "bytes": 374715,
-          "savedAt": "2026-10-13T03:26:48.514Z"
+          "bytes": 154517,
+          "savedAt": "2026-10-13T08:24:31.252Z"
         },
-        "verifiedAt": "2026-10-13T03:26:48.514Z"
+        "verifiedAt": "2026-10-13T08:24:31.252Z"
       },
       "stats47Targets": []
     },
@@ -11015,12 +11015,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f1dee15b728c20aa3004fa79c3004f0adabce31f7070990833d074a662ee08e3",
+          "sha256": "5ccff9ee7969f81b6c739f720e336fa4d9cdcad5a001a0bce8cdbbfa60ec5143",
           "files": 22,
-          "bytes": 1059671,
-          "savedAt": "2026-10-13T03:26:51.013Z"
+          "bytes": 427230,
+          "savedAt": "2026-10-13T08:24:31.351Z"
         },
-        "verifiedAt": "2026-10-13T03:26:51.013Z"
+        "verifiedAt": "2026-10-13T08:24:31.351Z"
       },
       "stats47Targets": []
     },
@@ -11036,12 +11036,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "865a6d798c6d71daba160ab9816c71abbae5a5f6bc1f522cc254b2da755b1344",
+          "sha256": "6b8989229175f39607da0f8e92b5ff326e900f5e267d5e4bf99620cb3115e5ce",
           "files": 10,
-          "bytes": 337491,
-          "savedAt": "2026-10-13T03:26:54.934Z"
+          "bytes": 147052,
+          "savedAt": "2026-10-13T08:25:20.149Z"
         },
-        "verifiedAt": "2026-10-13T03:26:54.934Z"
+        "verifiedAt": "2026-10-13T08:25:20.149Z"
       },
       "stats47Targets": []
     },
@@ -11057,12 +11057,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "3ee6b321d308b2b2224d4c48c8abf93769080411ee902314766bcac28b6d563f",
+          "sha256": "d1d3dd493de7ea5498ee5cf790ee7712d1679e3cef2e9842da56546d1b025ddb",
           "files": 8,
-          "bytes": 269967,
-          "savedAt": "2026-10-13T03:26:57.032Z"
+          "bytes": 111412,
+          "savedAt": "2026-10-13T08:26:07.061Z"
         },
-        "verifiedAt": "2026-10-13T03:26:57.032Z"
+        "verifiedAt": "2026-10-13T08:26:07.061Z"
       },
       "stats47Targets": []
     },
@@ -11078,12 +11078,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "76d810c12dd7951665d609ccd99b0d42ba0173fa5305d82693e3221867f857e4",
+          "sha256": "6f8ba4a9b284bcb1462870c169ec4ac42bb80cb4040dd7889c1f2ae9a642c58f",
           "files": 18,
-          "bytes": 880360,
-          "savedAt": "2026-10-13T03:27:03.474Z"
+          "bytes": 356800,
+          "savedAt": "2026-10-13T08:29:05.905Z"
         },
-        "verifiedAt": "2026-10-13T03:27:03.474Z"
+        "verifiedAt": "2026-10-13T08:29:05.905Z"
       },
       "stats47Targets": []
     },
@@ -11099,12 +11099,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "8f44b2bc0237c7b7dcca8471287dc836efa96afcfd4f0b4a4b99f15101253f55",
+          "sha256": "b03db163b29b93f9521a81ac8a6de51b4bf31f48b10dca5be6c9cf97e17c40ae",
           "files": 24,
-          "bytes": 1162323,
-          "savedAt": "2026-10-13T03:27:06.445Z"
+          "bytes": 476181,
+          "savedAt": "2026-10-13T08:29:06.013Z"
         },
-        "verifiedAt": "2026-10-13T03:27:06.445Z"
+        "verifiedAt": "2026-10-13T08:29:06.013Z"
       },
       "stats47Targets": []
     },
@@ -11120,12 +11120,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "169cdf1daf4cc7ddc20767ed04d5449e9355ffdc5d2092f95921e1782eece952",
-          "files": 5,
-          "bytes": 397051,
-          "savedAt": "2026-10-13T03:26:19.944Z"
+          "sha256": "2aaf57d079c330a00309a49f0a5c19857c985fffd8cd19308ebdb24851683528",
+          "files": 6,
+          "bytes": 172387,
+          "savedAt": "2026-10-13T08:17:59.700Z"
         },
-        "verifiedAt": "2026-10-13T03:26:19.944Z"
+        "verifiedAt": "2026-10-13T08:17:59.700Z"
       },
       "stats47Targets": [
         "/ranking/academic-achievement-test-average-rate"
@@ -11143,12 +11143,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "eb883709f4daeaa922a0195f3b429bd290382caacc20280e04b7109def98b495",
+          "sha256": "5e2b0c71f8dca6459c164f1f501920410a2dfc84b1258dbf7accafc0f540944a",
           "files": 10,
-          "bytes": 358805,
-          "savedAt": "2026-10-13T03:26:59.073Z"
+          "bytes": 146317,
+          "savedAt": "2026-10-13T08:29:05.729Z"
         },
-        "verifiedAt": "2026-10-13T03:26:59.073Z"
+        "verifiedAt": "2026-10-13T08:29:05.729Z"
       },
       "stats47Targets": []
     }

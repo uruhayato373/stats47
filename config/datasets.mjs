@@ -138,6 +138,8 @@ export const DATASETS = [
   d("note.paid-landing-schema", "data/note/paid-landing.schema.json", "config", "product", "data", "上の文言の JSON Schema"),
   d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの生成版・採用版・公開版の台帳", { schema: "data/note/cover-assets.schema.json" }),
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.cover-policies", "data/note/cover-policies.json", "config", "product", "data", "noteカバーのカテゴリ別方針ID・版・プロンプト", { schema: "data/note/cover-policies.schema.json" }),
+  d("note.cover-policies-schema", "data/note/cover-policies.schema.json", "config", "product", "data", "カバー方針のJSON Schema"),
   d("note.hashtags", "config/note-hashtags/{name}.json", "config", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", { schema: "config/schema/note.hashtags.schema.json" }),
   d("metrics.definitions", `${P.METRIC_DEFINITIONS_DIR}/{name}.ts`, "config", "data", "data", "指標ID・取得元・単位・表示方針の型付き正本"),
   d("metrics.defaults", `${P.METRIC_DEFINITIONS_DIR}/defaults/{name}.ts`, "config", "data", "data", "指標表示の共通既定値。指標ごとに上書き可能"),

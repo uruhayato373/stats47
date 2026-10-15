@@ -14,7 +14,7 @@ paths:
 `.local/` や特定PCのディレクトリを画像・レビュー・manifestの唯一の保存先にしない。
 「再生成できる」はレビューした版を保存しなくてよい理由にしない。
 
-- noteカバーの生成候補・採用版・noteに登録した実体は、版ごとに非公開R2へ保存する。公開サイトが直接読む画像だけpublic R2へ配信する。生成AIの元画像・候補をDriveへ置く既存契約は維持し、同じ画像の正本を複数持たない。
+- noteカバーの生成候補・採用版・noteに登録した実体は、版ごとに非公開R2へ保存する。公開サイトが直接読む画像だけpublic R2へ配信する。制作IDで管理する新経路は生成AIの元画像も同じprivate R2へ保管する。旧経路のDrive原本を自動移動せず、同じ画像の正本を複数持たない。
 - 画像台帳とJSON Schemaは **`data/note/`** に置き、gitで共有・レビューする。記事台帳 `data/note/articles.json` とは記事keyで結び、タイトル・分類を二重管理しない。監査の記録 (`data/note/evidence/`) を画像台帳の代用にしない。
 - 台帳は画像の版ID、storage/providerと相対key、SHA-256、bytes、寸法、生成日時、生成元・テンプレート版、レビュー状態、候補版・採用版の参照、note公開URL・公開画像URL・最終確認日時・対応版を持つ。公開画像だけ観測でき、版を照合できない場合は対応版をnullとする。
 - JSON Schemaで形・語彙・必須項目を検査し、専用validatorで記事key・版参照・承認状態・保存実体とSHAを検査する。ローカル絶対パス、署名付きURL、認証情報を台帳へ保存しない。
@@ -32,18 +32,18 @@ paths:
 
 - 既存の公開画像の保全・最新確認: `npm run note:assets -- archive [--keys key1,key2]`。
 - 旧public R2保管画像の移行: `archive-r2 --keys key1,key2`。候補・採用・公開ポインタを変更しない。
-- 制作入力は `prepare --keys key1,key2 --output /tmp/<task>` で一時領域へ取得し、
-  `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>` で生成する。
-  文字境界/重なりを検査し、画像のremote保管と照合後に一時領域を削除する。日付だけの版上書きはしない。
+- 公開本文・旧版の保全入力は `prepare --keys key1,key2 --output /tmp/<task>` で一時領域へ取得し、
+  カバー生成は下記の制作ID経路（Codex imagegen）へ進む。旧 `generate-cover-refresh.ts` は実行を拒否する。
+  元画像・完成版のremote保管と照合後に一時領域を削除する。日付だけの版上書きはしない。
   問い型など本文を制作入力に使わないカバーは `prepare --source ledger` で保存済み公開版を比較元にできる。
   公開URLと版IDの一致・remote SHAを確認し、公開サイトへの新規反映を意味する観測として扱わない。
-- 旧manifestは `import --manifest <path>` で取り込む。ローカル絶対パスは入力だけに使い、台帳には残さない。
-  旧レビューを自動継承せず未判定で登録する。回収できない旧版は `missingVersions` に残す。
+- `import --manifest <path>` は最新版の文字込み制作仕様を持つ候補だけを受け付ける。旧manifestの再投入は拒否する。
+  旧公開画像は `archive` / `archive-r2` で保全し、採用候補にはしない。回収できない旧版は `missingVersions` に残す。
 - 縮小表示確認後に `review --keys <key> --revision <sha> --status pass|needs-revision --reason <理由>`。
   採用は現在の候補の正確なSHAに対してだけ行う。新しい候補に古い承認を引き継がない。
 - `update-note-covers.mjs [--keys ...] [--commit]` は台帳の採用済みremote版だけを読み、
   画像専用更新と本文/価格/境界の保全・配信検証後に公開ポインタを更新する。
-  `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面はGET専用のまま。
+  `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面からの保存は以下の制作内容・目視確認だけ。
 - `/content/note/covers` と `/assets` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
   ローカル画像キャッシュを永続化しない。取得失敗・旧版未回収・未判定・未反映・観測の鮮度を表示する。
 - Wrangler OAuthの期限切れは、既存sessionを非対話で更新し、同時画像取得は1回の更新を共有する。
@@ -52,9 +52,38 @@ paths:
 - 汎用 `generate-ogp-images.ts --type note-covers` は書込開始前に停止する。既存のSVG/Remotion等は制作入力用の旧rendererであり、
   保存・採用・公開の正典ではない。本文チャートの再生成契約は以下に残す。
 
-### 問い型ランキングのカバー
+### カテゴリ方針と制作ID (2026-10-14 オーナー指示)
 
-分類SSOTの `ranking-question` 全記事は同じ `question-ranking-note-cover-v1` rendererを使う。
+新しいカバー制作は `data/note/cover-policies.json` + Schema がカテゴリ方針の正本。
+既存8分類に `NCP-001`〜`NCP-008` を割り当て、方針を変えるときは同じIDの版を追加する。
+記事単位の `NCI-00001` 形式の制作ID・コピー・題材・根拠は画像台帳の `production` に持つ。
+既存IDを並べ替えで振り直さない。新記事は `generate-note-catalog.ts --apply` が制作IDも同期する。単独同期は `note:cover-production seed`。
+分類不能・制作ID欠落・カテゴリと方針の不一致・最新版方針がimagegen以外なら検査を失敗させる。
+
+- 管理画面でカテゴリ方針を確認 → 記事の制作内容を保存 → 制作仕様をダウンロード → Codex imagegenで文字込み生成 → 候補登録 → 原寸/320pxで比較 → 採用/修正 → 次の記事。
+- `PATCH /api/note-covers/:key/production` は同一origin・localhost・JSON限定。専用writerを通し、古い画面からの保存を拒否する。noteの公開操作は含まない。
+- 方針の全文・版、記事key、コピー、題材、根拠、renderer版を制作仕様のSHAへ固定する。画像の登録・採用・公開で現在の仕様と照合する。入力変更後は旧候補を採用できない。
+- 元画像PNG・完成PNGはprivate R2の `note/covers/<key>/revisions/<sha>.png`、制作仕様・実際の生成指示・元画像参照・確認結果は `inputs/<sha>.json` に保存する。読み戻し確認後に台帳へ登録し、`verify` は元画像も照合する。
+- **全件一括差し替えはせず、管理画面で確認して順次移行する。** 未移行の既存画像を維持し、制作状況で進捗を追う。旧rendererは履歴参照だけに残し、未移行記事も新たに作る場合は同じ文字込み経路を使う。
+- 2026-10-14オーナー採択: 新規カバーは方針v2の `imagegen-complete` で日本語込みの一括生成を使う。保存した掲載文言と実画像を原寸・幅320pxで照合し、誤字・追加文言・文字切れ・重なりを目視確認する。`note-imagegen-cover-v1` の検証方法は `visual` と記録し、Satoriの機械的文字境界検査と混同しない。旧v1の背景＋組版画像・方針・公開版は保持する。正確なデータ図・地図・配色見本は生成AIで創作しない。手順の正典は [catalog/README.md](../scripts/note/catalog/README.md)「制作IDを使ったポップなカバー」。
+
+### 全記事の生成・採用・公開ゲート（2026-10-14）
+
+- **Claudeはカバーを作画しない。生成担当はCodex built-in imagegen。** Claudeは本文確認・入力準備・Codex MCPへの受け渡し・専用CLIでの保存を担う。SVG/HTML/Canvas/Python/Remotion/Satoriによる代作や他モデルへの暗黙切替は禁止。Codexが使えない場合は生成待ちにする。実行手順は `/image-prompt --use-case note-header` と `codex-mcp.md`。
+- 制作内容が未入力の旧記事も例外にしない。import・管理画面採用・CLI review・既存記事更新・新規公開の `materialize-cover.mjs` で、文字込みrenderer、現行方針、記事/制作ID、生成仕様SHA、正確な候補版を照合する。
+- private R2から元画像・入力・完成版を読み戻す。入力は実際のprompt、imagegenの使用記録、原寸/320pxの目視確認、読み取った全文を含む。画像SHA・寸法・保存文言との一致・採用状態を機械で検査し、日本語の正しさや可読性を機械が保証したとは扱わない。
+- `note:cover-production validate` は全記事と全カテゴリを検査する。pre-commit、PRの `note:assets:validate`、既存週次note監査へ接続する。新記事登録・旧生成経路の拒否・仕様変更後の承認無効化は回帰テストで守る。
+- 本文画像の再生成はカバーへ触れない。ランキングは本文3枚のみ、SVG→PNG復元もcover/header/eyecatchを除外する。
+
+2026-10-15採択: 最新方針の `visualRules` が分類別構図・人物禁止・補足の可読性・必須目視項目を固定する。
+県別家計は検証済みの県主域輪郭を参照し、対象都市・年・二人以上の世帯を入力と掲載文言の両方で要求する。
+輪郭は最大ポリゴンの地域識別用（遠隔離島省略）であり、県全域の観測図として扱わない。地図参照PNGもprivate R2へ保管・SHA照合する。
+最新版の確認項目が欠ける画像・別県の参照・古い仕様はprepare/import/採用/公開で停止する。画像内の県形・日本語・文字サイズの意味確認は原寸/320pxの目視で行う。
+最大10件の `export-batch` は同じ対象集合の未完了分だけを出し、生成失敗・修正依頼を再開できる。入力や仕様を変えたバッチへ黙って混ぜない。
+
+### 問い型ランキングの旧カバー（履歴の説明・新規生成禁止）
+
+既存の `question-ranking-note-cover-v1` の保存済み画像を説明する。現在の新規・差し替えには使用しない。
 淡い背景・大きな問い・答え・対象年・薄い日本地図を配置し、カバーに凡例・単位・数値範囲を載せない。
 地図はD3 `interpolateYlOrRd` と連続線形スケールで実際の値を塗り分け、本文チャートの順位配色とは区別する。
 長い主題は資格条件や助詞を失わず2行にし、同率1位は全て表示する。
@@ -63,9 +92,9 @@ paths:
 private R2の制作入力に固定する。最新年への自動切替・公開原稿一式の無断上書きは行わない。
 文字検査はSatoriの `textContent` を読む。空の検査結果をPASSにせず、境界・重なりを検査してから登録する。
 
-### 分類別のカバー (2026-10-11)
+### 分類別の旧カバー (2026-10-11・履歴の説明・新規生成禁止)
 
-問い型・家計以外の分類も `generate-cover-refresh.ts` の `categoryCover` が分類ごとに描く。文言と図の対応は git TS
+旧 `generate-cover-refresh.ts` の `categoryCover` は分類ごとに描いていた。現在は実行入口で停止する。文言と図の対応は git TS
 (`catalog/cover-designs.ts`・`catalog/ranking-story-cover-copy.ts`) が正本で、部品は `lib/cover-visuals.ts`。
 
 - ranking-story・intro: 記事の題名 (一部は無料本文) にある順位・値・格差だけを大きく出す。地図は値を持たない背景。
@@ -110,23 +139,12 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
    `data-provenance.json` は `source` が R2 の `app/stats/<key>/values.json` を指し、`restore` を持つ。
    観測値の本体は R2 が SSOT で、ここはその記事が使った値の**固定コピー** (R2 の値が後で更新されても、公開時の数値を辿れる)。
    `note:article save` が保存前に検査して警告を出す (旧記事の不備で保存を止めない)。
-4. **画像の作り方を変えたら、既存記事の画像も作り直す。** テンプレートだけ直して過去記事を放置しない。
+4. **画像の作り方を変えたら、既存記事も移行対象にする。** カバーは上の制作IDで進捗を管理し、目視確認して順次移行する。本文図版の是正は記事単位で行う。
 5. **「R2 に本文がある」は台帳の申告でなく実在で確かめる。** 台帳の `body.manifest` は保存して読み戻せたときだけ書かれる。
    週次の `--verify-r2` が公開 R2 の配信を、`note:article verify` が private を含む全ファイルを照合する。
    (2026-09-29 に、カタログの `r2Body` 既定が `true` で、登録しただけで「保存済み」になっていた a-* 14 本が R2 に無かった。)
-6. **生成 AI (imagegen / Codex) の画像は「作り直せない入力」なので保管する。** 同じ指示でも毎回別の絵になり、時間も枠も使うため。
-   二層で持つ (Kindle の表紙背景と同じ考え方。`.claude/rules/coconala-product-standards.md`「カバー画像は二層」)。
-   - **Drive (非公開・人が見る)**: 候補・元画像 `stats47/note画像/<slug>/candidates/`。
-   - **R2 (承認した最終版だけ)**: `media/note-backgrounds/<slug>/<sha12>/background.jpg` (1280x670 JPEG)。
-   - **記事の `render-spec.json` の `background`**: `sha256` / `r2Key` / 寸法 / `model` / `prompt` / `status: "approved"` だけ。画像本体は置かない。
-   - 文字・数値・地図は生成画像に含めず、テンプレートが実テキスト/実データで重ねる (家ルール。`ogp-image-standards.md` §5)。
-   手順は `node .claude/scripts/note/ingest-note-background.mjs` の先頭コメントに従う (候補を Drive へ `--stash` → 採用を正規化して
-   `--write-spec` → R2 反映 → `render-ranking-images.mjs`)。`render-ranking-images.mjs` は背景を取得して SHA を検証し、合わなければ
-   画像を作らず止まる (別の背景で焼かない)。生成 AI は再実行しない。現状、背景を使うのはカバーだけ。
-7. **画像の生成口は 1 つ、公開前に必ず揃える。** ランキング記事の 4 枚は `render-ranking-images.mjs` だけが作る
-   (`apps/remotion` の `pipeline:sns` は note 画像を作らない。`--note-only` は廃止して呼ぶと止まる。二つの経路で作ると内容が食い違う)。
-   公開・更新の入口 (`publish-new-note.sh` / `editor-helpers.sh`) は `ensure-note-images.mjs` で PNG を作り直し、足りなければ止まる
-   (カバー無しのまま黙って公開しない)。
+6. **旧背景の参照を保全する。** 旧 `render-spec.json` のbackground・Drive/R2原本・SHAは履歴として保持する。新しいカバーの正本は上記private R2と画像台帳で、旧背景＋文字合成へ戻さない。
+7. **本文画像とカバーの生成口を分ける。** ランキング本文3枚は `render-ranking-images.mjs` が作り、`ensure-note-images.mjs` が不足を検査する。カバーはCodex imagegenの採用済み版を `materialize-cover.mjs` で復元する。欠落時に本文レンダラーでカバーを代作しない。
 8. **決定的であることを保つ。** 同じ入力から `render-ranking-images.mjs` は同じバイト列を作る (2026-09-30 に同一 SHA を実測)。
    テンプレートに時刻・乱数・外部取得を入れない。入れるなら入力として spec に固定する。
 
@@ -144,9 +162,9 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 `note-image-assets`・週次 (`note-circulation-audit-weekly.yml` の artifact `note-image-assets.json`)。
 `/weekly-review` は `npm run note:images:audit -- --json` の `summary` を読む。
 
-## ランキング記事の画像 4 枚 (cover / choropleth / chart / boxplot)
+## ランキング記事の本文画像 3 枚 (choropleth / chart / boxplot)
 
-`node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` が `chart-data.json` だけから 4 枚を作り、`render-spec.json` を書く
+`node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` が `chart-data.json` だけから本文3枚を作り、`render-spec.json` を書く
 (`--all` 全記事 / `--stale` 古い記事だけ / `--check` 検査のみ)。R2 や `.local` のデータは読まない。
 
 - テンプレートは `apps/remotion/src/features/ranking-note/` (note 専用)。X・Instagram と共有する `ranking-x/` は変えない

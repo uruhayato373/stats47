@@ -11,15 +11,14 @@
  *   chart-data.json       指標ごとの 47 都道府県の値・順位・要約、指標間の順位相関、地方別平均
  *   data-provenance.json  R2 の入力キー・年・e-Stat 等の出典・企画の一次資料
  *   draft.md              数値・図・出典・注意の節は決定的に書く。題名・導入・問いへの答えは <!-- WRITE:… --> を執筆者が埋める
- *   images/<rankingKey>.png  全 47 都道府県のタイル地図 (quick-still.ts)
+ *   images/<rankingKey>.png  保存済み観測値から描く地域別タイル図
+ * 既存記事の図だけを直す: node --import tsx .claude/scripts/note/reference/render-reference-figures.ts --keys <key>
  * --register: 記事台帳に下書き (status draft・本文未保存) を足し、展開記録に企画中 (planned) を書く。
  *
  * 対象は都道府県の値で答えられる企画 (geoScopes に japan を含まず、metricKeys がある)。書籍の本文・数値・図は使わない。
  * 指標が R2 に無い・47 都道府県がそろう年が無いときは、その企画を止めて理由を出す (推測で埋めない)。
  */
-import { execFileSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import os from 'node:os';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { PREF_CAPITAL_COORDS } from '../../../../packages/migration-flow/src/lib/pref-capitals';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
@@ -30,7 +29,9 @@ import { readArticleLedger, updateArticleLedger } from '../lib/article-ledger.mj
 import { qualifyLabel } from './lib/estat-denominator';
 import SSDS_PROVENANCE from '../../../../packages/data-configs/src/ssds/ssds-provenance.generated.json';
 import { datasetPath } from '../../../../config/datasets.mjs';
-import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
+import { getMetricConfig } from '../../../../packages/data-configs/src/registry';
+import { renderReferencePrefectureSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
+import { writeReferenceFigure } from './lib/figure-files';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -189,8 +190,8 @@ const withUnit = (m: Metric, v: number) => `${fmt(v, m.decimals)}${m.unit}`;
  */
 export function isCapitalCityMetric(key: string, item: Item): boolean {
   if (item.sourceConfig?.recipe?.kind === 'kakei-chousa' || /県庁所在市/.test(item.subtitle ?? '')) return true;
-  const file = path.join(ROOT, METRIC_DEFINITIONS_DIR, `${key}.ts`);
-  if (existsSync(file) && /"(?:description|note|subtitle)":\s*"[^"]*県庁所在市/.test(readFileSync(file, 'utf8'))) return true;
+  const config = getMetricConfig(key);
+  if (/県庁所在市/.test([config?.description, config?.subtitle].filter(Boolean).join(' '))) return true;
   const code = item.sourceConfig?.recipe?.estatParams?.cdCat01?.replace(/^#/, '');
   return Boolean(code && (SSDS_PROVENANCE as Record<string, { originalSurveys?: { id: string }[] }>)[code]?.originalSurveys?.some((s) => s.id === 'household-survey'));
 }
@@ -212,7 +213,7 @@ function sameValue(m: Metric, rows: Ranked[]) {
   return names.length > 4 ? `${names.slice(0, 3).join('・')}など${names.length}${m.capitalCity ? '市' : '都道府県'}` : names.join('・');
 }
 
-function metricSection(m: Metric) {
+export function metricSection(m: Metric) {
   const [big, small] = magnitudeWords(m.label, m.unit);
   const groups: Ranked[][] = [];
   for (const r of m.rows) {
@@ -232,7 +233,7 @@ function metricSection(m: Metric) {
   const lines = [
     `## ${m.label} (${m.year}年)`,
     '',
-    ...(m.summary.count === 47 ? [`![${m.label}の47都道府県タイル地図](images/${m.key}.png)`, ''] : []),
+    ...(m.summary.count === 47 ? [`![${m.label}の${m.capitalCity ? '県庁所在市別' : '都道府県別'}タイル図](images/${m.key}.png)`, ''] : []),
     `${m.label}が最も${big}のは${sameValue(m, top[0])}の${withUnit(m, top[0][0].value)}${tie(top[0])}で、` +
       top.slice(1).map((g) => `${g[0].rank}位は${sameValue(m, g)}の${withUnit(m, g[0].value)}${tie(g)}`).join('、') + 'と続きます。' +
       `最も${small}のは${sameValue(m, bottom)}の${withUnit(m, bottom[0].value)}${tie(bottom)}です。` +
@@ -240,7 +241,7 @@ function metricSection(m: Metric) {
       `${m.capitalCity ? (m.summary.count === 47 ? '47市' : `値のある${m.summary.count}市`) : m.summary.count === 47 ? '47都道府県' : `値のある${m.summary.count}都道府県`}の単純平均は${withUnit(m, m.summary.mean)}です。`,
     '',
     `地方別の平均では${regionText(regionTop)}が最も${adverb(big)}、${regionText(regionBottom)}が最も${adverb(small)}なります。` +
-      `47都道府県の順位は[stats47の${m.label}ランキング](https://stats47.jp/ranking/${m.key})で確認できます。`,
+      `${m.summary.count}${m.capitalCity ? '市' : '都道府県'}の順位は[stats47の${m.label}ランキング](https://stats47.jp/ranking/${m.key})で確認できます。`,
   ];
   if (m.subtitle) lines.push('', `この指標は「${m.subtitle}」です。`);
   if (m.capitalCity) lines.push('', `値は県全体ではなく、各都道府県の県庁所在市 (東京都は区部) の世帯の値です。`);
@@ -355,15 +356,8 @@ export function mergeWritten(old: string, fresh: string): string {
     .replace(/<!-- WRITE:answer[^>]*-->/, () => answer);
 }
 
-function renderImage(m: Metric, imagesDir: string) {
-  const tmp = mkdtempSync(path.join(os.tmpdir(), 'ref-note-'));
-  try {
-    execFileSync(process.execPath, ['--import', 'tsx', path.join(ROOT, '.claude/scripts/sns/quick-still.ts'),
-      '--key', m.key, '--year', m.year, '--out', tmp, '--require-png'], { cwd: ROOT, stdio: 'pipe' });
-    copyFileSync(path.join(tmp, 'stills', `${m.key}.png`), path.join(imagesDir, `${m.key}.png`));
-  } finally {
-    rmSync(tmp, { recursive: true, force: true });
-  }
+async function renderImage(m: Metric, imagesDir: string) {
+  await writeReferenceFigure(path.join(imagesDir, `${m.key}.svg`), path.join(imagesDir, `${m.key}.png`), renderReferencePrefectureSvg(m));
 }
 
 export function isPrefectureAnalysis(a: Analysis) {
@@ -391,7 +385,7 @@ async function build(a: Analysis) {
   const imagesDir = path.join(dir, 'images');
   mkdirSync(imagesDir, { recursive: true });
   // 全 47 県タイル地図は 47 都道府県がそろう指標だけ (quick-still.ts が欠測を拒む)
-  for (const m of metrics) if (m.summary.count === 47 && !existsSync(path.join(imagesDir, `${m.key}.png`))) renderImage(m, imagesDir);
+  for (const m of metrics) if (m.summary.count === 47 && !existsSync(path.join(imagesDir, `${m.key}.png`))) await renderImage(m, imagesDir);
   const correlations = metrics.flatMap((m, i) => metrics.slice(i + 1).map((n) => ({ a: m.key, b: n.key, ...spearman(m.rows, n.rows) })));
   writeFileSync(path.join(dir, 'chart-data.json'), `${JSON.stringify({
     analysisId: a.id, question: a.question, generatedAt: new Date().toISOString(),
@@ -402,7 +396,7 @@ async function build(a: Analysis) {
     inputs: metrics.map((m) => ({ rankingKey: m.key, year: m.year, r2: [`app/ranking/${m.key}/item.json`, `app/stats/${m.key}/values.json`], source: m.source })),
     primarySources: a.primarySources ?? [],
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note.ts --analysis ${a.id}`,
-    images: metrics.filter((m) => m.summary.count === 47).map((m) => ({ file: `images/${m.key}.png`, generator: '.claude/scripts/sns/quick-still.ts', rankingKey: m.key, year: m.year })),
+    images: metrics.filter((m) => m.summary.count === 47).map((m) => ({ file: `images/${m.key}.png`, generator: '.claude/scripts/note/reference/lib/figure-renderer.ts', rendererVersion: REFERENCE_FIGURE_RENDERER_VERSION, rankingKey: m.key, year: m.year })),
   }, null, 2)}\n`);
   const draftPath = path.join(dir, 'draft.md');
   // 執筆済みの下書きは、書いた題名・説明文・導入・答えを残して生成部分だけ作り直す

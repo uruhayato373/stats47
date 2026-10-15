@@ -2,7 +2,7 @@
 
 stats47 のローカル統合メディアコンソール。X / Instagram / note / Kindle の原稿・公開状態、
 private Google Drive参考文献から既存コンテンツへの展開状況、
-SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。SNS下書き本文のみ画面から編集でき、それ以外は読み取り専用。
+SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。画面から保存できるのはSNS下書き本文とnoteカバーの制作内容・確認結果。それ以外は読み取り専用。
 2026-07-16 に旧 node:http + Vanilla JS 実装 (`.claude/scripts/gallery/`) から**完全移管** (旧実装は削除済み)。
 
 **公開サイト `apps/web` とは独立**。Cloudflare 等へデプロイしない。リモート公開・認証・DB なし。
@@ -27,8 +27,8 @@ PORT=5000 npm run admin    # ポート上書き
 | `/product/coconala` | ココナラの出品状況 (`coconala-listings.json` × product-factory カタログ) |
 | `/content` | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ |
 | `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示 |
-| `/content/note` | note catalog (git TS)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
-| `/content/note/covers` | 共通台帳から画像付き一覧・カバー比較を表示。右側で分類/確認状態/note反映を絞り込み、検索・列見出しの並べ替え・ページ送り・Sheetで拡大比較。画像はprivate R2からGET proxyでSHA確認し配信 |
+| `/content/note` | 記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
+| `/content/note/covers` | カテゴリ別方針・固定の制作ID・制作状況・公開画像/候補の比較。制作内容を保存してプロンプトと制作仕様を取得し、候補の採用/修正を記録して次の記事へ進む。画像はprivate R2からGET proxyでSHA確認し配信 |
 | `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー |
 | `/content/references` | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示 |
 | `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー |
@@ -47,7 +47,8 @@ app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカ
 components/     共有 (console-nav / async-state / media-preview) + ページ別
 components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
 components/admin-ui/  組み立て部品 (TableFrame / DataTable / PanelCard / StatCard / StatusBadge / LinkCard)。layout-primitives.tsx は Stack / Grid / Section
-components/content/note-covers-browser.tsx  shadcn Table + 既存のTanStack Table v8で検索/並べ替え。表示条件はURLに保持し、画像/公開台帳には書き込まない
+components/content/note-covers-browser.tsx  shadcn Table + TanStack Table v8で制作ID/分類/状況を検索・比較。表示条件はURLに保持
+components/content/note-cover-production.tsx  制作内容・目視確認のフォーム。方針と制作仕様の表示・ダウンロード
 lib/nav-registry.ts  左メニューの定義 (SSOT) と現在地判定。表示は公式 Sidebar (components/console-nav*.tsx)
 lib/client/     fetch wrapper (SWR 等は使わない)
 lib/contracts/  読み取りAPI DTO + Zod schema
@@ -94,8 +95,8 @@ ID検索 (`#1109`、`1109,1110,1111`)、本文・キー・template検索、媒�
 
 ## 安全ガード
 
-- APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存だけ (2026-10-11 オーナー指示)。同一origin・loopback・JSON限定、ID/本文/版を検査し、予約/公開/削除済み・古い版の更新を拒否する。変更後は承認待ちへ戻す
-- `posts-store.ts` の `saveDraftCaption` のみ既存storeのwriterを呼べる。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
+- APIは原則GET。保存の例外は `PATCH /api/posts/:id/caption` の下書き本文と `PATCH /api/note-covers/:key/production` の制作内容・確認結果 (2026-10-14 オーナー指示)。同一origin・loopback・JSON限定、ID/内容/版を検査し、古い画面からの更新を拒否する。SNSの予約/公開/削除済み投稿は編集できない
+- writerを呼べるのは `posts-store.ts` の `saveDraftCaption` と `note-cover-production.ts` の `saveCoverProduction`。後者は元画像/入力の実在確認と正確な候補版の照合を行い、コピー/方針変更で採用を解除する。noteへの反映は制作側の既存公開工程で行う。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
 - **ファイル配信**: decode → resolve → relative 検査 → **realpath 後再検査** (symlink 脱出拒否) → regular file のみ。Range 200/206/416
 - 個別制作物をTODOへ二重登録しない。`audit:content-operations` が `K-Sx-xx` / `NOTE-ARTICLE-*` /
   `SNS-POST-*` 等の個別カードを拒否し、システム課題・自動化・横断意思決定だけをbacklogに残す

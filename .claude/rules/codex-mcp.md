@@ -94,6 +94,16 @@ exact bytesのSSOTは `assets/blog/codex-backgrounds/*.jpg`。
 MCP prompt、自由入力prompt、生成済み画像をskill/ruleへ複製しない。Codex MCPが使えない場合に
 Geminiへ暗黙fallbackしない。R2 push / deployはCodexへ委譲しない。
 
+### note記事カバーの画像生成（2026-10-14）
+
+入口は `/image-prompt --use-case note-header`。全カテゴリ・新規・差し替えで同じ契約を使う。
+Claudeは `note:cover-production export` が出したrequest JSONのpathをCodex MCPへ渡す。
+
+1. `mcp__codex__codex` をrepo rootのcwd、read-only、approval-policy neverで呼ぶ。
+2. 指示は「requestを読み、imagePromptを使いbuilt-in imagegenで文字込み完成PNGを1枚生成する。repo編集・採用・公開はせず、画像path・実際のprompt・requestのplanSha256を返す」。手書きの画像描画コードを許可しない。
+3. 原寸/320pxの目視確認、`prepare-image`、private R2へのimport、管理画面の採用は呼び出し側で行う。
+4. MCP/画像生成が利用不能なら生成待ちで止める。ClaudeのSVG/HTML/Canvas/Python/Remotion/Satori描画や別画像モデルへのフォールバックは禁止。
+
 ## 3. パラメータ規律 (これが git 混入を防ぐ主装置)
 
 | パラメータ | 既定 | 規律 |

@@ -1,0 +1,349 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-10-15T07:11:24.452Z",
+  "selected": [
+    {
+      "id": "NCI-00120",
+      "key": "a-private-rental-housing-rent-per-3-3m2",
+      "category": "ranking-question",
+      "candidate": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1",
+      "published": "d228814e34291ee17849ddb2e326eb5b5c7f97f509122cd85f8303926e4cc8d0",
+      "sourceSha256": "7b0dc46a4ca1d3a3ab17c99a41be1a538749e6d32ddb258a6725fa411793f537",
+      "policy": "NCP-003@3",
+      "stage": "review",
+      "planSha256": "61f885180ff8cd6068c000fa0119a65b3f90087529b72c2e17978847d666b479",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/e7c258019ec3ece9340be36c168afbbf48c3d208a54899125c5163f1cf34ee39.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "comparisonScope": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00121",
+      "key": "a-railway-station-count",
+      "category": "ranking-question",
+      "candidate": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c",
+      "published": "b19bfa3fc2f2c198bddb81b8bcf78be19c57ea0fce42267c343b55fbcf843fcb",
+      "sourceSha256": "7725be987eed5248cb5814d8ac43dfd1f85458891c106f5ffb44e2cca865bbf1",
+      "policy": "NCP-003@3",
+      "stage": "review",
+      "planSha256": "e28ffb8329c77f2645b5b7afbe62ea24b399ac8c1e3e0c8b3a1e3a346e9bd8fa",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/inputs/fd98e03b10b9c23e0af45940c49897c08f95c1e732fc022ed20b43eed1e5914a.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "comparisonScope": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00113",
+      "key": "a-maximum-temperature",
+      "category": "ranking-story",
+      "candidate": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb",
+      "published": "4174741a26a2896b4ea45d7734fc7effac330bb16ae49f3f878c359fcf06b5bf",
+      "sourceSha256": "3f7700eeaf85959c42260d85c160b4ae722d1721bcfe01d69e7a18d56abb996f",
+      "policy": "NCP-004@3",
+      "stage": "review",
+      "planSha256": "fdd12ce883d054e094ac26070e5c81143b4ca9695eb713b1d332dd5cb07aba8d",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/inputs/4be0177fbbe6b93dfc9293613bcef1744e934e0c83a20e4d190d132fbe39b287.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "comparisonScope": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00391",
+      "key": "recovered-n1b943c7d414d",
+      "category": "ranking-story",
+      "candidate": "bb75d7570b24228208e6f229e692fa538668e3c6c8ba3f3903bf377d1828650d",
+      "published": "d1c0a4dc379260d7dab1491e220008d08f9c42fec710d1f828447bcc9beebc99",
+      "sourceSha256": "c7db66012ccfe22ec1ec985d7326d45cdf4d9b9e7f68b81ea1c4ab36fe58a105",
+      "policy": "NCP-004@3",
+      "stage": "review",
+      "planSha256": "bbacd349223628260cf17e979fdf92c3985af3ab35b91de8607f8126faaa16a0",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n1b943c7d414d/revisions/bb75d7570b24228208e6f229e692fa538668e3c6c8ba3f3903bf377d1828650d.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n1b943c7d414d/inputs/daa3904041b65015261344a51b2990aa59bc2d0dfb87febd065c7ed578954e66.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "comparisonScope": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00378",
+      "key": "recovered-n03844512d58a",
+      "category": "explainer",
+      "candidate": "c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07",
+      "published": "7930bed3368f2766216d2db0e7462bfbd903c11d804e88340b26d951ab4cffd7",
+      "sourceSha256": "0bd29c97e9842f5d0e628ea6358255ca39a3e566ff48ca56c839e0158cbc9af5",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "45b747c37a2d4211918df406f32d4784d007b93eb601e2440192e1b99b406f57",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/inputs/35ab9ff0b10c62534d27b05476875e839bff2e92ed4fb5a2a3efa00ba1c549ac.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00404",
+      "key": "recovered-n3908e5981967",
+      "category": "explainer",
+      "candidate": "52310da06465689dd4828ec4f1beecc6e270429c4fa70cf115368746b9956285",
+      "published": "0e536048148209f9afdba38d41a50a466275025cda3d15b04a3dd9c894c4f460",
+      "sourceSha256": "aaad352d874a645404b2ff1603914d5c17bd316978667ff0a06facafedc83098",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "a75824aa30476de6ad37a5eec345a131ad20d3e582059b41a775d0d63f6f456a",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3908e5981967/revisions/52310da06465689dd4828ec4f1beecc6e270429c4fa70cf115368746b9956285.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3908e5981967/inputs/74f2f5660f2de797af1bc8bbc3f5e40680ae32c4fd88323aa6d06dd9fe3d9211.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00034",
+      "key": "19-faq-auto-generation",
+      "category": "practitioner",
+      "candidate": "435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c",
+      "published": "8ef5bb279ea1051c2a8a1d6ed4d2354d181e76946bcb38bde631edf9233e4f5b",
+      "sourceSha256": "470d6b12feb48247b32490bb6b5f00fc1e11db341ff1db6bab3a2e6289a93f81",
+      "policy": "NCP-007@4",
+      "stage": "review",
+      "planSha256": "6fec8310e34840789ba4265872a321d7839352a96fa1de8b2874ccebdaec8f3a",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/inputs/85edaef5e0375712fd36ec898554ca39b0d71b0d2698e3f66bb0366452b8c3a6.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedResults": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00002",
+      "key": "00-estat-claude-code-intro",
+      "category": "practitioner",
+      "candidate": "c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e",
+      "published": "7f0dddcf32691b9df56872256ef4e86f99f57199ed0fee9e609e5fdae731b547",
+      "sourceSha256": "8d2333f43551c290dad08574d781a6e5f023ad7a5030583a09b54da0d77eebdf",
+      "policy": "NCP-007@4",
+      "stage": "review",
+      "planSha256": "4b9bc941015f75fc418ac778d103236efcd473371487dcf10489932c383f9aa6",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/inputs/27a025ca214d2ad4837c41f845063b4682962ac13620d1277d9d68e4acfbc1d0.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedResults": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00244",
+      "key": "d-geo-ipss-prefecture-map",
+      "category": "dataset-geo",
+      "candidate": "65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081",
+      "published": "58383cf69e823ae920069c0d09588945876a451608230f6150280bb8789319c4",
+      "sourceSha256": "4faf125e0cf283f99beeccff91a50d922cdf2da5fc145a3560903ad26e10a788",
+      "policy": "NCP-006@3",
+      "stage": "review",
+      "planSha256": "25efe132a3ea6a09113303b88084a28a4a94e129c54d4ee0f150848b15b0c10c",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/revisions/65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/inputs/8d8628ccd7dd3dc025bfe3a3291c1e797b9faef1be4eca5523956a7598f6f298.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "productScope": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00313",
+      "key": "paid-n66ffb10aa41b",
+      "category": "palette",
+      "candidate": "d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837",
+      "published": "88a29d2854dc4571fa2ee9dd5ad169021f18202508e42283bf9c7bd1ac18cf6f",
+      "sourceSha256": "f21f6e0351de84542196c7b272db0c4f2a12c6c0d1c4c714b0b48df67c83759b",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "a78825598c3e88a3ce55708551297151b87071c1d0a45465fe056414e3923b3d",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/inputs/03bb34a546759ea367b3ce7b31d627ccc859bf3224c9a6c4585af44732355e5f.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    }
+  ],
+  "categories": 6,
+  "modernPublished": 54,
+  "generationPending": 0,
+  "outsideRowsUnchanged": 485,
+  "publicationPerformed": false,
+  "managementUi": {
+    "checkedAt": "2026-10-15T07:18:01.304Z",
+    "selected": 10,
+    "reviewPending": 10,
+    "adopted": 0,
+    "notePublished": 0,
+    "comparisonImagesLoaded": 20,
+    "imageErrors": 0,
+    "categories": {
+      "ranking-question": 2,
+      "ranking-story": 2,
+      "explainer": 2,
+      "practitioner": 2,
+      "dataset-geo": 1,
+      "palette": 1
+    },
+    "readRetry": "A storage authentication error on two previews cleared after one page reload; all20comparisonimages decoded without re-upload or publication."
+  }
+}

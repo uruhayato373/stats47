@@ -173,6 +173,10 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 
 ## Phase 2: アイキャッチ画像（※必ず本文入力前に実行）
 
+実行は `editor-helpers.sh` の `new_post_cover_title` を使う。以下はUIの操作記録。
+先に `COVER_FILE=$(node .claude/scripts/note/materialize-cover.mjs <articleKey>)` が成功する必要がある。
+Codex imagegenの採用版・現行仕様・保存根拠が揃わなければ停止する。任意のローカルPNGを渡さない。
+
 **エディタ初期状態で「画像を追加」ボタンが確実に見える。** 本文入力後はスクロール位置がずれてボタン検出に失敗する。Phase 1 の state で `aria-label=画像を追加` のインデックスを同時に取得して使う。
 
 ```bash
@@ -188,7 +192,7 @@ sleep 2
 
 browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 FILE_IDX=$(grep -oE '\[[0-9]+\]<input id=note-editor-eyecatch-input' /tmp/note-state.txt | grep -oE '[0-9]+')
-browser-use --headed --profile "Profile 5" upload $FILE_IDX <articleDir>/images/cover-1280x670.png
+browser-use --headed --profile "Profile 5" upload $FILE_IDX "$COVER_FILE"
 sleep 3
 
 # トリミングダイアログの「保存」ボタン（「下書き保存」と区別）
@@ -198,7 +202,7 @@ browser-use --headed --profile "Profile 5" click $SAVE_IDX
 sleep 3
 ```
 
-画像ファイルが存在しない場合はこの Phase をスキップする。
+画像ファイルが取得できない場合は公開を停止する。カバーを省略したり旧画像を代作したりしない。
 
 ### Phase 2-edit: 既存アイキャッチの差し替え（`--update` 時）
 

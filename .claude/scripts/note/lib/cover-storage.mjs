@@ -10,6 +10,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
 import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
+import { assertGeneratedCoverReview } from './generated-cover.mjs';
 
 const BUCKET = R2_PRIVATE_BUCKET;
 const LIMIT = 16 * 1024 * 1024;
@@ -277,7 +278,37 @@ export async function readStoredCoverInput(revision, store = createCoverStore())
   const bytes = await store.get(input.storage.key);
   if (!bytes || bytes.length !== input.bytes || coverSha(bytes) !== input.sha256
       || input.sha256 !== revision.quality?.evidenceSha256) throw Error('private cover input missing or SHA mismatch');
-  JSON.parse(bytes.toString('utf8'));
+  const evidence = JSON.parse(bytes.toString('utf8'));
+  if (revision.provenance.production) {
+    const complete = revision.provenance.renderer === 'note-imagegen-cover-v1';
+    const background = complete ? evidence.original : evidence.background;
+    const sourceSha = complete ? evidence.sourceImageSha256 : evidence.backgroundSha256;
+    const articleKey = revision.storage.key.split('/')[2];
+    if (!background || background.sha256 !== sourceSha ||
+        background.storage?.provider !== 'r2-private' || background.storage.bucket !== BUCKET ||
+        background.storage.key !== coverAssetKey(articleKey, background.sha256)) throw Error('private cover background reference mismatch');
+    const original = await store.get(background.storage.key);
+    if (!original || original.length !== background.bytes || coverSha(original) !== background.sha256) throw Error('private cover background missing or SHA mismatch');
+    if (complete) {
+      const plan = evidence.production;
+      const { planSha256, ...body } = plan ?? {};
+      const reference = revision.provenance.production;
+      if (evidence.validationMethod !== 'visual' || evidence.renderer !== revision.provenance.renderer ||
+          planSha256 !== coverSha(JSON.stringify(body)) || planSha256 !== reference.planSha256 ||
+          plan.productionId !== reference.id || plan.policyId !== reference.policyId || plan.policyVersion !== reference.policyVersion ||
+          plan.articleKey !== articleKey || plan.account !== 'stats47') throw Error('private cover production evidence mismatch');
+      assertGeneratedCoverReview(plan, evidence.visualReview, original);
+      if (plan.mapReference) {
+        const image = evidence.referenceImage;
+        if (!image || image.sha256 !== evidence.referenceImageSha256 || image.sha256 !== evidence.visualReview.referenceSha256 ||
+            image.storage?.provider !== 'r2-private' || image.storage.bucket !== BUCKET ||
+            image.storage.key !== coverAssetKey(articleKey, image.sha256)) throw Error('private geographic reference mismatch');
+        const referenceBytes = await store.get(image.storage.key);
+        if (!referenceBytes || referenceBytes.length !== image.bytes || coverSha(referenceBytes) !== image.sha256)
+          throw Error('private geographic reference missing or SHA mismatch');
+      }
+    }
+  }
   return bytes;
 }
 

@@ -101,7 +101,14 @@ async function archiveBlob(archive, bytes) {
   const key = blobKey(sha256(bytes));
   const existing = await archive.get(key);
   if (existing && sha256(existing) !== sha256(bytes)) throw Error(`退避先の不変オブジェクトが一致しません: ${key}`);
-  if (!existing) await putVerified(archive, key, bytes);
+  if (!existing) {
+    try { await putVerified(archive, key, bytes); }
+    catch (error) {
+      // Articles can share an old image; another save may archive those same bytes first.
+      const concurrent = await archive.get(key);
+      if (!concurrent || sha256(concurrent) !== sha256(bytes)) throw error;
+    }
+  }
 }
 
 /**
@@ -118,9 +125,10 @@ export async function saveArticleFiles(article, files, stores, now = new Date())
   for (const file of files) {
     const nextSha = sha256(file.bytes);
     const existing = await stores.body.get(remoteKey(file.name));
+    // A previous attempt may have written this exact version before its ledger update.
+    if (existing && sha256(existing) === nextSha) continue;
     if (existing && recorded.has(file.name) && sha256(existing) !== recorded.get(file.name))
       throw Error(`${article.key}/${file.name}: R2 の実体が台帳の記録と違います (別の端末が保存した可能性)。git pull してから checkout し直してください`);
-    if (existing && sha256(existing) === nextSha) continue;
     if (existing) await archiveBlob(stores.archive, existing);
     await putVerified(stores.body, remoteKey(file.name), file.bytes);
     uploaded++;

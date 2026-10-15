@@ -588,6 +588,8 @@ async function main() {
     return generateMagazines(svgOnly);
   }
 
+  throw Error('旧noteカバー生成は終了しました。note:cover-production と Codex imagegen で文字込み画像を作成してください。');
+
   const hasBg = fs.existsSync(BG_PATH);
   let sharp = null;
   if (!svgOnly) {

@@ -12,6 +12,8 @@ note の全記事 (公開済み + 下書き) を、**記事 ID (key) の台帳 1
 | 本文と画像 (draft.md・SVG・PNG・chart-data.json など記事ディレクトリの全ファイル) | **無料 = 公開 R2・有料 = private R2** の `<r2Path>/` | R2 |
 | 保存の履歴 (ファイル名→SHA のマニフェスト・上書き前の旧ファイル) | private R2 `note-archive/manifests/<key>/<sha>.json`・`note-archive/blobs/<sha>` | R2 (不変) |
 | カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` | 下の「公開カバー」 |
+| カバーのカテゴリ方針・プロンプト (`NCP-*` と版) | `data/note/cover-policies.json` + Schema | git の JSON |
+| 記事の制作ID (`NCI-*`)・コピー・題材・根拠 | `data/note/cover-assets.json` の `production` | 画像台帳に統合 |
 | 有料記事の無料部分の文言 | `data/note/paid-landing/<key>.json` + `paid-landing.schema.json` | git の JSON |
 | 公開 URL の索引・下書き索引 | (派生) `data/note/note-published-urls.json`・`note-draft-index.json` | `generate-note-catalog.ts` が台帳から作る |
 
@@ -91,18 +93,70 @@ v3記事詳細APIで確認し、一覧サムネイルに代用された本文画
 収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
 
 
-## カバー制作・画像専用更新の実装
+## 制作IDを使ったポップなカバー
 
-`cover-designs.ts`が既存維持リスト・短い見出し・補足の編集判断を持つ。画像は派生物。
-`../generate-cover-refresh.ts`は共有`note-cover-render.ts`のeditorial rendererを使い、
-既存GISの県輪郭/日本地図を配置する。家計調査は2024年の47都市観測値から単純平均と増減率を再計算し、
-記事のchart-dataと一致する場合だけ描く。県名と調査対象都市名を併記する。
+新方式は8カテゴリの最新版方針・共通プロンプトから、記事ごとに日本語を含む完成画像をimagegenで作る。管理画面 `/content/note/covers` で
+カテゴリ方針・制作IDを確認し、コピー、補足、描く題材、本文の根拠を保存する。「制作仕様をダウンロード」で
+方針の版と入力を固定したJSONを受け取り、画像担当へ渡す。記事本文の確認を省いてタイトルから数値を推測しない。
 
-一時領域の`before/`、`inventory.json`、検算入力`sources/`、制作物`after/`、`production-manifest.json`は
-生成時の入力と検査結果であり、正本として保持しない。remote保管・読み戻しSHA検証後に削除する。
-共通画像台帳には記事ID・画像SHA・版・1280×670・文字境界/重なりの根拠・目視判定を保存する。
-Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格させず、`onNodeDetected`の実レイアウトで検査する。
-再生成すると目視判定はpendingへ戻る。PNGを手修正してもhashが変わり反映ゲートで止まる。
+構図と必須確認は `data/note/cover-policies.json` の `visualRules` が正本。全分類で人物・顔・手・キャラクター・擬人化を禁止し、補足も幅320pxで確認する。
+
+| カテゴリ | 主役 |
+|---|---|
+| 県別家計 | 検証済みの県の主域輪郭＋県名。対象都市・年・世帯区分を補足に必須掲載。生活の題材は小さく1点まで |
+| 問い型ランキング | 問いに対応する具体物1点 |
+| 比較型ランキング | 比較する具体物2点 |
+| 統計解説 | 記事の概念に対応する具体物1〜2点。因果を創作しない |
+| 自己紹介・自治体実務 | 本文に即した資料・作業道具 |
+| データセット・Geo | 提供する資料や作業の用途。架空の収録内容・分析地図は描かない |
+| 配色・可視化 | 画材・色紙。配色見本の数値や図は創作しない |
+
+県別家計は `brief.dataScope` に `place/year/households` を保存する。県は記事keyから決定し、`cover-geography.mjs` が既存の
+`apps/remotion/public/prefecture.topojson` から参照PNGを作る。**主域の最大ポリゴンだけを使い、遠隔離島は省略する地域識別用の絵**で、
+県全域の観測図・統計塗り分けではない。輪郭は原寸で参照と照合する。imagegenに県形を想像させない。
+
+```bash
+npm run note:cover-production -- seed                   # 新しい記事に固定IDを追加
+npm run note:cover-production -- validate               # 方針・カテゴリ・台帳参照を照合
+npm run note:cover-production -- list                   # IDと記事key・制作状況
+npm run note:cover-production -- export --id NCI-00001 --output /tmp/request.json
+# 最大10件。再実行は同じID集合・ディレクトリで、generation-pendingだけ生成する
+npm run note:cover-production -- export-batch --ids NCI-00133,NCI-00106 --output /tmp/note-cover-batch
+# 保存済み仕様のimagePromptで日本語込みの完成PNGを生成し、原寸・幅320pxを目視確認
+npm run note:cover-production -- prepare-image --request /tmp/request.json --image /tmp/generated.png --review /tmp/review.json --output /tmp/new-cover
+npm run note:assets -- import --manifest /tmp/new-cover/manifest.json
+```
+
+Windowsの一時パスは `$env:TEMP` 配下を使う。出力先は新しいディレクトリを指定する。
+`review.json` は `planSha256`・`sourceSha256`・`tool: "imagegen"`・実際に使った全文 `prompt`・`checkedAt`・
+`original: true`・`thumbnailWidth: 320`・`textBounds/textOverlap: "pass"`・目視で読んだ全文の配列 `transcription`・`reason` を持つ。
+最新版は `policySnapshot.visualRules.checks` の各IDについて `checks: { "noCharacters": "pass", ... }` を必須とする。
+地図付き仕様はexportされた `NCI-xxxxx-map-reference.png` をimagegenの参照画像として渡し、`referenceSha256` をreviewへ記録する。
+`prepare-image` に同じPNGを `--reference` で渡す。参照画像もprivate R2へ保管し、採用・公開の読み戻しで照合する。
+transcriptionはカテゴリ名、見出しの各行、補足の各行、署名の順。指定外の文字も点検し、修正画像は新しいSHAで再確認する。
+機械処理は画像SHA・コピーとの一致・検査記録を照合する。画像中の日本語そのものを自動検証したとは扱わない。
+生成原本を保持し、文字を切り取らず1280×670へcontainで正規化する。完成版の幅320px画像も出力する。
+原本・完成画像・生成プロンプト・方針・目視確認をprivate R2へ保管し、読戻し後に候補登録する。
+旧方針v1と生成済み画像は履歴として読み取れるが、新たなrender/import/採用/公開は拒否する。全カテゴリ・新規記事もCodex imagegenに統一する。
+`export-batch` は確認済みの候補登録を台帳から判定し、未生成・生成失敗・修正依頼分だけを `generation-pending` とする。
+生成ツールが失敗した記事は候補登録しない。同じバッチを再exportして再開し、別モデルや旧rendererで穴埋めしない。
+入力・素材・方針が変わったバッチは上書きせず停止する。新しい制作内容を保存し、新しい一時ディレクトリへexportする。
+
+管理画面を再読込すると候補を比較できる。「確認結果・修正指示」を入力して「この画像を採用」または「修正を依頼」を押す。
+「次の記事を確認」で同じ絞り込み内を順番に進める。公開済み/下書きの範囲、制作状況、制作IDでも絞り込める。
+`?view=gallery&ids=NCI-00215,NCI-00118` のようにID集合を渡すと、今回の対象だけを固定して修正前後を比較できる。
+コピーや方針が変わると以前の候補は採用できず、新しい候補が必要になる。公開済み画像は採用操作だけでは変わらない。
+noteへの差し替えは下の既存公開工程を使う。候補ごとの目視確認を省略して一括採用しない。
+
+方針は同じ `NCP-*` に新しいversionを追加する。既存版は削除せず、未着手記事はseed、編集中の記事は制作内容保存で最新版へ更新する。
+新記事は `generate-note-catalog.ts --apply` が制作IDも同期する。Claudeはカバーを描かず、`/image-prompt --use-case note-header` からCodexへ渡す。
+効果は未計測。全記事を一度に替えず、まずカテゴリごとに代表記事を確認して進める。
+
+## 画像専用更新の実装
+
+旧 `generate-cover-refresh.ts` / `generate-note-covers.mjs` / 公務員記事カバーCLIは実行時に停止する。
+旧画像の履歴・公開版は保全するが、制作内容が未入力の記事も旧manifestのimport・採用・再公開はできない。
+本文チャートの再生成はカバーを作らず、SVGからの再生成もカバーを除外する。
 
 `../update-note-covers.mjs`は採用済みremote版と現在の公開画像を検査する。`--commit`で実際に変更し、
 `--keys`/`--limit`で範囲を絞れる。stats47アカウント・記事台帳の記事URL・公開前の内容を照合した後、
@@ -122,20 +176,18 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 公開済み記事もドラフトも記事keyで結び、タイトルや分類は記事台帳から読む。
 管理画面の `/content/note/covers` と `/assets` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
 
-1. 新規catalog登録後は `npm run note:assets -- seed`。現在の公開画像は `archive --keys <key>` で保全する。
-2. `prepare --keys <key1,key2> --output /tmp/<task>` で一時入力を取得する。draftは `note:article checkout` で取り出した作業コピーを使う。
-3. `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <版>`。
-   文字境界/重なり/数値を検算し、private R2へ保存・読み戻しSHAを確認する。成功後は一時入力を削除する。
-4. 管理画面で320px相当の縮小表示を確認後、`npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>`。
-   要修正なら `--status needs-revision`。新しい候補に旧版の承認を引き継がない。
+1. 記事台帳登録後は `generate-note-catalog.ts --apply` で制作IDも同期する。現在の公開画像は `note:assets archive --keys <key>` で保全する。
+2. 上の「制作IDを使ったポップなカバー」に従い、本文根拠・コピー・題材を保存して最新版仕様をexportする。
+3. Codex imagegenで文字込み生成し、原寸/320pxの目視確認を記録して `prepare-image` → `note:assets import`。元画像・完成版・入力のremote読み戻し検査を通す。
+4. 管理画面で修正前後を比較し、正確な候補SHAに対して採用または修正を記録する。新しい候補に旧承認を引き継がない。
 5. 既存記事は `node .claude/scripts/note/update-note-covers.mjs --keys <key>` でdry-runする。
    明示された差し替え時だけ `--commit` を付け、画像専用POSTと本文/価格/有料境界の保全・配信確認後に公開ポインタを更新する。
    Windowsは`note-session.mjs`の専用Playwright profileで投稿先を照合し、未ログイン時は`login-note-profile.mjs`で人がログインする。
    再開は同じ`--keys`を指定する。採用版からjournalを識別し、完了行は送信せず、応答不明のPOSTは検査するまで再送しない。
 6. `node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>` と `npm run note:assets:validate` で整合を確認する。
 
-旧manifestは `note:assets import --manifest <path>`、旧public R2は `archive-r2 --keys <key>` で移行できる。
-旧manifestの絶対パスは入力にだけ使用し、旧レビューは自動採用せず未判定で登録する。未回収の版は `missingVersions` に残す。
+旧公開画像は `archive` / `archive-r2 --keys <key>` で履歴を保全する。旧manifestの再投入は拒否する。
+新規記事も `materialize-cover.mjs` が現行仕様と採用版・保存された生成根拠を照合する。未回収の版は `missingVersions` に残す。
 認証は既存S3環境変数または `wrangler login` のセッション。署名URLや認証情報を台帳に保存しない。
 
 ## 禁止事項

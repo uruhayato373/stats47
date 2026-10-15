@@ -35,11 +35,12 @@ docs/31_note記事原稿/a-<rankingKey>/
 ├── chart-data.json      ← チャート生成用データ（共通ルール）
 ├── tags.txt             ← note 投稿時にコピペするタグ（1行1タグ、最大99個）
 └── images/              ← Remotion で生成した画像
-    ├── cover-1280x670.png
     ├── choropleth-map-1080x1080.png
     ├── chart-x-1200x630.png
     └── boxplot-1200x630.png
 ```
+
+カバーは `/image-prompt --use-case note-header` でCodex imagegenへ渡す。本文画像の生成とは別工程で、Claudeはカバーを描かない。
 
 ## 手順
 
@@ -391,7 +392,7 @@ stats47
 
 ### Phase 3: 画像生成
 
-画像 4 枚は `chart-data.json` だけから作る。R2 や `.local` のデータは読まない。
+本文画像 3 枚は `chart-data.json` だけから作る。R2 や `.local` のデータは読まない。
 
 ```bash
 node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒。images/*.png と render-spec.json を書く
@@ -412,7 +413,7 @@ node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒
 - 全リンクに UTM パラメータが付与されていないこと（素 URL）
 - リンクパスが `/ranking/`（`/rankings/` ではない）であること
 - 偏差値が正しく算出されていること（Phase 1 の統計量と一致）
-- 画像が4枚生成されていること
+- 本文画像が3枚生成されていること
 - `data-provenance.json` が記事ディレクトリに生成されていること（rankingKey + year + charts + source。リライト系譜）
 
 ## 品質チェックリスト
@@ -432,7 +433,7 @@ node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒
 - [ ] 記事中盤「あなたの県は何位？」に本ランキングへの CTA（素 URL カード）が1つある
 - [ ] 「もっと詳しく知りたい方へ」に素 URL（UTM なし）で関連リンクが5本程度ある
 - [ ] リンクパスが `/ranking/`
-- [ ] 画像が4枚生成されている
+- [ ] 本文画像が3枚生成されている
 - [ ] 文体は「です・ます」調
 - [ ] 見出しに絵文字なし
 - [ ] Markdown テーブルなし

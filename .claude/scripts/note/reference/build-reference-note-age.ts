@@ -7,10 +7,10 @@
  *
  *   npx tsx .claude/scripts/note/reference/build-reference-note-age.ts --analysis <企画ID> [--register]
  */
-import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { generateBarChartSvg } from '../../../../packages/svg-builder/src/charts/index.ts';
+import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
+import { writeReferenceFigure } from './lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
 import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
 import { loadAnalyses } from '../../source-vault/lib/reference-expansion.mjs';
@@ -57,16 +57,10 @@ async function latestYear() {
     .map((v) => v['@time'].slice(0, 4)).sort().at(-1)!;
 }
 
-function chart(dir: string, file: string, title: string, unit: string, values: number[], year: string) {
-  const svg = generateBarChartSvg(AGES.map(([, n], i) => ({ label: n, value: values[i] })), {
-    title, subtitle: `${year}年 二人以上の世帯・全国 世帯主の年齢階級別`, source: '総務省統計局「家計調査」', unit,
-    palette: 'blue', layout: 'single', showAxis: true, ariaLabel: `${title} ${year}年`,
-  });
+async function chart(dir: string, file: string, title: string, unit: string, values: number[], year: string) {
+  const svg = renderReferenceBarSvg({rows:AGES.map(([,label],index)=>({label,value:values[index]})),title,year,unit,scope:'全国・二人以上の世帯・世帯主の年齢階級別',source:'総務省統計局「家計調査」'});
   const svgPath = path.join(dir, 'images', `${file}.svg`);
-  writeFileSync(svgPath, svg);
-  execFileSync(process.execPath, ['-e',
-    `require(${JSON.stringify(path.join(ROOT, '.claude/scripts/lib/svg-to-png.cjs'))}).svgToPng(process.argv[1], process.argv[2]).catch((e) => { console.error(e); process.exit(1); })`,
-    svgPath, svgPath.replace(/\.svg$/, '.png')], { stdio: 'pipe' });
+  await writeReferenceFigure(svgPath,svgPath.replace(/\.svg$/,'.png'),svg);
 }
 
 async function build(a: Analysis) {
@@ -95,8 +89,8 @@ async function build(a: Analysis) {
   const key = articleKeyOf(a);
   const dir = path.join(WORK_ROOT, key);
   mkdirSync(path.join(dir, 'images'), { recursive: true });
-  chart(dir, 'engel-coefficient-age', 'エンゲル係数（食料÷消費支出）', '%', engel, year);
-  for (const b of built) chart(dir, `${b.key}-price-age`, `${b.label}の購入単価`, b.priceUnit, b.price, year);
+  await chart(dir, 'engel-coefficient-age', 'エンゲル係数（食料÷消費支出）', '%', engel, year);
+  for (const b of built) await chart(dir, `${b.key}-price-age`, `${b.label}の購入単価`, b.priceUnit, b.price, year);
   writeFileSync(path.join(dir, 'chart-data.json'), `${JSON.stringify({
     analysisId: a.id, question: a.question, kind: 'age', year, ages: AGES.map(([, n]) => n),
     food, consumption, engel, items: built, generatedAt: new Date().toISOString(),
@@ -104,6 +98,7 @@ async function build(a: Analysis) {
   writeFileSync(path.join(dir, 'data-provenance.json'), `${JSON.stringify({
     analysisId: a.id, estat: { amount: AMOUNT_TABLE, quantity: QUANTITY_TABLE, cdCat02: TWO_PERSON, year, codes: [FOOD, CONSUMPTION, ...built.map((b) => b.code)] },
     primarySources: a.primarySources ?? [], restore: `npx tsx .claude/scripts/note/reference/build-reference-note-age.ts --analysis ${a.id}`,
+    images: ['engel-coefficient-age',...built.map(item=>`${item.key}-price-age`)].map(file=>({file:`images/${file}.png`,year,generator:'.claude/scripts/note/reference/lib/figure-renderer.ts',rendererVersion:REFERENCE_FIGURE_RENDERER_VERSION})),
   }, null, 2)}\n`);
   const list = (vals: number[], unit: string, d = 0) => AGES.map(([, n], i) => `${n}が${fmt(vals[i], d)}${unit}`).join('、');
   const body = [

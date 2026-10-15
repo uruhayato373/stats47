@@ -135,17 +135,16 @@ npm run admin  # http://127.0.0.1:4747/content/note
 
 ## OGP・画像生成の役割分担
 
-note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で生成する:
-
-- 43 種のテンプレートから選択可能（`.claude/skills/image-prompt/reference/catalog.md`）
-- `--use-case note-header` で note 最適サイズ（1280×670 ≒ 1.91:1）が自動適用
-- fit=high の 10 種（51/54/55/66/69/75/77/82/85/88）が stats47 ブランド安全圏
-- 保存先: 作業コピー `docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.png`（`note:article save` で R2 へ保存）
-- **生成AIで作ったカバー/背景は作り直せない入力**。docs/31 は gitignore された作業場なので、PNG を置くだけでは保存されない。二層で保管する: 候補は Drive、採用版は R2、git には SHA だけ (`.claude/rules/note-image-assets.md` 契約6・ランキング記事は `ingest-note-background.mjs`)。SVG 由来の PNG は作業コピーで `npm run note:images:regen` で作り直せる
+note記事の表紙は全カテゴリ・新規・差し替えとも `/image-prompt --use-case note-header` の専用経路を使う。
+Claudeは描画せず、記事のコピー・題材・根拠を準備し、Codex built-in imagegenへ文字込み生成を委譲する。
+使えない場合は生成待ちで止め、SVG/Remotion/Satori等による代作はしない。
+方針は `data/note/cover-policies.json`、制作ID・候補・採用は `data/note/cover-assets.json`。
+元画像・完成版・実際のprompt・原寸/320px目視確認はprivate R2へ保管する。
+新記事登録後の `generate-note-catalog.ts --apply` は制作IDも同期する。公開時は `materialize-cover.mjs` の現行仕様・採用版検査を通す。
 
 このエージェントが扱う画像の方式割当（補足）:
 
-- **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
+- **note 記事表紙** → `/image-prompt --use-case note-header`（Codex imagegen文字込み）
 - **note 内チャート** → `chart-author`（`/generate-note-charts` / `/generate-kakei-charts`、Remotion ベース）
 - **note 内の表（データ）** → **markdown 表を本文に書かない**。note は markdown 表をリテラルなパイプ（`| … |`）で表示してしまうため、`images/table-N.png` に画像化して `![](...)` で貼る（`prepare-article.cjs` の `pipeTable:true` は本文に markdown 表が残っている警告）。
 

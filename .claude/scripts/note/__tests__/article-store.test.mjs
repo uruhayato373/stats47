@@ -66,6 +66,50 @@ test('a remote change made elsewhere stops the save without overwriting it', asy
   assert.equal(s.body.objects.get('note/stats47-note/a-test/draft.md').toString(), 'saved on another machine');
 });
 
+test('an interrupted save resumes exact already-written bytes without accepting other remote changes', async () => {
+  const article = freeArticle();
+  const s = stores(article);
+  article.body.manifest = (await saveArticleFiles(article, [file('draft.md', 'v1'), file('images/a.svg', 'old')], s)).record;
+  const put = s.body.put.bind(s.body);
+  s.body.put = async (key, bytes) => {
+    if (key.endsWith('images/a.svg')) throw Error('connection interrupted');
+    return put(key, bytes);
+  };
+  const next = [file('draft.md', 'v2'), file('images/a.svg', 'new')];
+  await assert.rejects(saveArticleFiles(article, next, s), /connection interrupted/);
+  assert.equal(s.body.objects.get(`${article.r2Path}/draft.md`).toString(), 'v2');
+  assert.ok(s.archive.objects.has(blobKey(sha256(Buffer.from('v1')))));
+  s.body.put = put;
+  const result = await saveArticleFiles(article, next, s);
+  assert.equal(result.uploaded, 1);
+  article.body.manifest = result.record;
+  assert.deepEqual(await verifyArticleStorage(article, s, { deep: true }), []);
+  s.body.objects.set(`${article.r2Path}/draft.md`, Buffer.from('unknown remote edit'));
+  await assert.rejects(saveArticleFiles(article, next, s), /別の端末/);
+});
+
+test('a concurrent archive of identical old bytes is accepted, conflicting archive bytes are rejected', async () => {
+  for (const matching of [true, false]) {
+    const article = freeArticle();
+    const s = stores(article);
+    article.body.manifest = (await saveArticleFiles(article, [file('draft.md', 'v1')], s)).record;
+    const put = s.archive.put.bind(s.archive);
+    s.archive.put = async (key, bytes) => {
+      if (key.startsWith('note-archive/blobs/')) {
+        s.archive.objects.set(key, matching ? Buffer.from(bytes) : Buffer.from('different bytes'));
+        throw Error('conditional write conflict');
+      }
+      return put(key, bytes);
+    };
+    const result = saveArticleFiles(article, [file('draft.md', 'v2')], s);
+    if (matching) assert.equal((await result).uploaded, 1);
+    else {
+      await assert.rejects(result, /conditional write conflict/);
+      assert.equal(s.body.objects.get(`${article.r2Path}/draft.md`).toString(), 'v1');
+    }
+  }
+});
+
 test('verify reports a paid body left in the public bucket and files missing from the manifest', async () => {
   const article = { key: 'p-test', isPaid: true, r2Path: 'note/koumuin-claude-code/p-test', body: { store: 'r2-private', manifest: null } };
   const s = stores(article);

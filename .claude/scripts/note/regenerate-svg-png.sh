@@ -27,6 +27,7 @@ trap 'rm -rf "$QL"' EXIT
 count=0
 fail=0
 while IFS= read -r -d '' svg; do
+  case "$(basename "$svg")" in cover-*|cover.svg|header.svg|eyecatch.svg) continue ;; esac
   png="${svg%.svg}.png"
   # viewBox="0 0 W H" から W / H を取得
   vb=$(grep -oE 'viewBox="[0-9. ]+"' "$svg" | head -1 | grep -oE '[0-9.]+' | tr '\n' ' ')

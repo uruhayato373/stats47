@@ -16,6 +16,8 @@ import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { datasetPath } from "../../../config/datasets.mjs";
 
+throw Error('旧noteカバー生成は終了しました。note:cover-production と Codex imagegen で文字込み画像を作成してください。');
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
 

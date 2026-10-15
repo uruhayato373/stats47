@@ -19,7 +19,7 @@ test("draft の画像参照だけを拾い、コードフェンス内の例は�
   assert.deepEqual(referencedPngs(md), ["images/a.png", "images/b.png"]);
 });
 
-test("足りない画像: 参照された PNG と、render-spec を持つ記事の 4 枚", () => {
+test("本文の画像補充はカバーを再生成しない", () => {
   const dir = tmp();
   try {
     mkdirSync(join(dir, "images"));
@@ -28,7 +28,7 @@ test("足りない画像: 参照された PNG と、render-spec を持つ記事�
     assert.deepEqual(missingImages(dir), ["images/b.png"]);
     writeFileSync(join(dir, "render-spec.json"), "{}");
     const missing = missingImages(dir);
-    assert.ok(missing.includes("images/b.png") && missing.includes("images/cover-1280x670.png") && missing.length === 5);
+    assert.ok(missing.includes("images/b.png") && !missing.includes("images/cover-1280x670.png") && missing.length === 4);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -38,9 +38,9 @@ test("再生成の対象は『Markdown が PNG として参照し、PNG がま�
   const dir = tmp();
   try {
     mkdirSync(join(dir, "images"));
-    for (const name of ["used.svg", "unused.svg", "done.svg"]) writeFileSync(join(dir, "images", name), "<svg/>");
+    for (const name of ["used.svg", "unused.svg", "done.svg", "cover-1280x670.svg"]) writeFileSync(join(dir, "images", name), "<svg/>");
     writeFileSync(join(dir, "images/done.png"), "x");
-    writeFileSync(join(dir, "draft.md"), "![u](images/used.png)\n![d](images/done.png)\n");
+    writeFileSync(join(dir, "draft.md"), "![u](images/used.png)\n![d](images/done.png)\n![旧カバー](images/cover-1280x670.png)\n");
     assert.deepEqual(pendingSvgs(dir).map((f) => basename(f)), ["used.svg"]);
     assert.deepEqual(pendingSvgs(dir, { force: true }).map((f) => basename(f)).sort(), ["done.svg", "used.svg"]);
   } finally {

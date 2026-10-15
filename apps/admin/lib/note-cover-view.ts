@@ -1,4 +1,12 @@
 import type { NoteCoverReview, NoteCoverRow } from '@/lib/server/note-covers';
+import type { ProductionStage } from '../../../.claude/scripts/note/lib/cover-production.mjs';
+
+export const COVER_PRODUCTION_STAGES: { key: ProductionStage; label: string }[] = [
+  { key: 'unplanned', label: '未登録' }, { key: 'brief', label: '内容入力待ち' },
+  { key: 'ready', label: '画像制作待ち' }, { key: 'stale', label: '制作内容が変更済み' },
+  { key: 'review', label: '画像確認待ち' }, { key: 'changes', label: '画像修正待ち' },
+  { key: 'approved', label: 'note反映待ち' }, { key: 'published', label: 'note反映済み' },
+];
 
 export const COVER_REVIEWS: { key: NoteCoverReview; label: string }[] = [
   { key: 'needs-revision', label: '要修正' }, { key: 'pending', label: '未判定' },
@@ -10,14 +18,17 @@ export const COVER_PUBLICATIONS: { key: NoteCoverRow['publication']; label: stri
   { key: 'unpublished', label: 'noteに未反映' },
   { key: 'unapproved', label: '採用前・候補なし' },
 ];
-const SORT_COLUMNS = ['title', 'category', 'review', 'publication', 'coverObservedAt'];
+const SORT_COLUMNS = ['title', 'category', 'review', 'publication', 'coverObservedAt', 'production'];
 export function readCoverView(params: Pick<URLSearchParams, 'get'>, categories: readonly { key: string }[]) {
   const category = params.get('category') ?? '';
   const review = params.get('review') ?? '';
   const publication = params.get('publication') ?? '';
   const positive = (key: string) => Math.max(1, Number.parseInt(params.get(key) ?? '1', 10) || 1);
   return {
+    ids: [...new Set((params.get('ids') ?? '').split(',').filter(id => /^NCI-\d{5}$/.test(id)))],
     category: categories.some(c => c.key === category) ? category : '',
+    stage: COVER_PRODUCTION_STAGES.some(s => s.key === params.get('stage')) ? params.get('stage')! : '',
+    scope: params.get('scope') === 'all' ? 'all' : 'published',
     review: COVER_REVIEWS.some(r => r.key === review) ? review : '',
     publication: COVER_PUBLICATIONS.some(p => p.key === publication) ? publication : '',
     q: params.get('q') ?? '',

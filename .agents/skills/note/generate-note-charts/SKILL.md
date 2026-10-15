@@ -1,7 +1,7 @@
 ---
 name: generate-note-charts
 domain: product
-description: note 記事用 SVG チャートを生成し PNG に変換する。Use when user says "noteチャート生成", "note画像生成". 散布図・カバー画像・横棒グラフ等に対応. 記事本文完成後に実行.
+description: note 記事用 SVG チャートを生成し PNG に変換する。Use when user says "noteチャート生成", "note画像生成". 本文の散布図・横棒グラフ等に対応. カバーはCodex imagegenへ. 記事本文完成後に実行.
 disable-model-invocation: true
 primary_agent: chart-author
 co_agents: [note-manager]
@@ -28,7 +28,7 @@ note 記事用のチャートを SVG で生成し、PNG に変換して記事に
 docs/31_note記事原稿/<slug>/images/
 ├── chart-name.svg   ← レビュー用
 ├── chart-name.png   ← note.com アップロード用
-└── cover.png        ← カバー画像（1280×670）
+└── chart.png        ← 本文チャート
 ```
 
 > **作業場**: docs/31 は git に何も置かない作業場（本文と画像の正本は R2、所在は記事台帳 `data/note/articles.json`）。
@@ -66,7 +66,7 @@ const rows = payload.rows
 
 #### 方法 A: 同梱スクリプト（推奨）
 
-散布図・カバー画像は同梱スクリプトで JSON 設定ファイルから生成できる。
+散布図は同梱スクリプトで JSON 設定ファイルから生成できる。
 
 **散布図:**
 
@@ -76,15 +76,11 @@ node "${CLAUDE_SKILL_DIR}/scripts/scatter.js" config.json output.svg
 
 設定ファイルの書式は [scatter.js のヘッダコメント](scripts/scatter.js) を参照。
 
-**カバー画像:**
+**カバー画像は担当外:**
 
-カバー画像は記事ごとにレイアウトが異なるため、[cover-template.js](scripts/cover-template.js) をコピーして `// CUSTOMIZE:` 箇所を編集する。
-
-```bash
-cp "${CLAUDE_SKILL_DIR}/scripts/cover-template.js" docs/31_note記事原稿/<slug>/images/generate-cover.js
-# CUSTOMIZE 箇所を編集
-node docs/31_note記事原稿/<slug>/images/generate-cover.js
-```
+全記事共通の `/image-prompt --use-case note-header` でCodex built-in imagegenへ渡す。
+Claudeはカバーを描かず、SVGテンプレートのコピー・組版による代作をしない。
+旧 [cover-template.js](scripts/cover-template.js) は実行時に停止する。本文チャートだけを以下で作る。
 
 #### 方法 B: svg-builder パッケージ
 
@@ -115,7 +111,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/svg-to-png.js" docs/31_note記事原稿/<slug>
 ```
 
 - チャート SVG: `density: 288`（Retina 2x 相当）
-- カバー SVG（1280×670）: `density: 72`（等倍出力）
+- カバーはSVG変換の対象外（Codex imagegenの完成画像を専用経路で登録する）
 
 ### Phase 5: 記事への埋め込み
 
@@ -137,7 +133,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/svg-to-png.js" docs/31_note記事原稿/<slug>
 | 色・フォント・サイズ規約 | [reference/design-system.md](reference/design-system.md) |
 | チャート種別の選び方 | [reference/chart-patterns.md](reference/chart-patterns.md) |
 | 散布図スクリプト | [scripts/scatter.js](scripts/scatter.js) |
-| カバー画像テンプレート | [scripts/cover-template.js](scripts/cover-template.js) |
+| 旧カバーテンプレート（実行禁止・履歴のみ） | [scripts/cover-template.js](scripts/cover-template.js) |
 | SVG→PNG 変換 | [scripts/svg-to-png.js](scripts/svg-to-png.js) |
 | 完成例 SVG | [examples/](examples/) |
 | SVG 規約の詳細 | `.claude/skills/blog/generate-article-charts/SKILL.md` |

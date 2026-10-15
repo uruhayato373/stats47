@@ -1,0 +1,350 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-10-15T08:03:39.966Z",
+  "selected": [
+    {
+      "id": "NCI-00376",
+      "key": "recovered-n023501038bd5",
+      "category": "explainer",
+      "candidate": "5a0e1fd72322be3b6a2eb28e1a15344179a83cb64a7363371bb6881338887c01",
+      "published": "220a15937d65180d4257f8de7bd6d9b240140cb5bb5117746a2a3d733a3d4417",
+      "sourceSha256": "5fa8f1b711029a554105939564d06474c671189286c5db47f5d295a85a8c8e35",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "5e54eb6f7bc52b0f2d35d0e262f96985ad409e3c09befc944d0eefb7d98258a6",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n023501038bd5/revisions/5a0e1fd72322be3b6a2eb28e1a15344179a83cb64a7363371bb6881338887c01.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n023501038bd5/inputs/db706b53dae2be0beee81bbd8135cdd6a4727730f51d6936b74a2ffd00855ce6.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00386",
+      "key": "recovered-n144d350fc14e",
+      "category": "explainer",
+      "candidate": "5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3",
+      "published": "4c44ed04108cebb16f0c9a9bcb0b0134e0264bad2e36531e9b9e572bc81a27b2",
+      "sourceSha256": "f3b60ab9614546261441fdd39c23ffdf2e487e60ad4dd81781c3c64a470ca4f7",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "9c56075aac38fa72d73e2aed743ad9f9ca8c3183f7cd8ddab9537226591d4c28",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/inputs/d1a32de322fd989dcc47e166c981aeb53a7f2613b83c54ad54ffc78bce8d7ff1.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00431",
+      "key": "recovered-n68f5e09c8d62",
+      "category": "explainer",
+      "candidate": "23e2db3c0461280eb3744e975c5af1b9209eef1167dc2a9063c1dae348f1f87e",
+      "published": "8cbc4408b306006277042d48dee710b02948b5cde5f7808a09d43761e7153591",
+      "sourceSha256": "89767d0d255c17c8b698505a40382396fef2c914d59ba2d9b7957a876e1a64ef",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "6e8f78f4af73d2e74aa900534367af6bf8cec54f9be5966f374ba43564bb35f7",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n68f5e09c8d62/revisions/23e2db3c0461280eb3744e975c5af1b9209eef1167dc2a9063c1dae348f1f87e.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n68f5e09c8d62/inputs/53599f98e1121ecdfaa2f3cc9a3874c456f2a8f6d9b89b990111fa68be437c01.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00471",
+      "key": "recovered-nded2d34fc978",
+      "category": "explainer",
+      "candidate": "3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519",
+      "published": "52c72b3e7551aca7f3640b5940a929fd1e64e4b175614a6bf57003824a57268f",
+      "sourceSha256": "c47d8187a112e4f5c8283ab8f5430827cbf68d0800ad3d35ba6cb37dcf74233a",
+      "policy": "NCP-005@3",
+      "stage": "review",
+      "planSha256": "f27c18bf8cde1d889c63c08e60194c0e24ddd9cbe18da4dc54b098a18a713c67",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/inputs/050100a050a8e4fe39864db08d4b7fe29d8a9f61927e311f2824426f7f89b074.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noUnsupportedCausality": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00300",
+      "key": "paid-n02da130aae01",
+      "category": "palette",
+      "candidate": "c35e7a0e99a1c0f05f3b0a005525b51041fc4566048455c296384d0c61e2b842",
+      "published": "e8c1975ec6ac9e63aa063e7b8e1fcb49bd3391f27302f0c1f733bbb011c8c518",
+      "sourceSha256": "91d3001c04e6b217d8e68f5ce4d246c84ce747e744c45e13300e4fc683af234d",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "402c3df8f6c20b6a9abe1a57782740258ff1a387da70e6c3aced4e2a8dc16ef4",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n02da130aae01/revisions/c35e7a0e99a1c0f05f3b0a005525b51041fc4566048455c296384d0c61e2b842.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n02da130aae01/inputs/3bfff01c042d04740182335546abfe7015c0aedf2391dec5fcf3f2e81ee2acb7.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00318",
+      "key": "paid-n79fefdbd4d4c",
+      "category": "palette",
+      "candidate": "47120581c865fde259f3be5b7c2a2400a0da6b5d0a487d551229cabf61d4d0ca",
+      "published": "0f3ef22a5abf288f2a18602285a4c86d27374b757b4600ba88995fbde35b7d12",
+      "sourceSha256": "903fc95a3cbcab078163d08bf87383a1f4908b59a71cdfd6c061897137579850",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "b71727c59fc9a875f613260f8897239c3e7354d7bd86a6108194e0e65d8a98ef",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n79fefdbd4d4c/revisions/47120581c865fde259f3be5b7c2a2400a0da6b5d0a487d551229cabf61d4d0ca.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n79fefdbd4d4c/inputs/0177b927b3dbe4a75f4495baa23d9269787a18ed80c44e9ba9cd481ca643d9f4.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00319",
+      "key": "paid-n823d76c5cbac",
+      "category": "palette",
+      "candidate": "a89d06079aa1067fc7ed663698f037c000b35142d18a90150573301f46073fd0",
+      "published": "22fcd5cc81ddbc70936285160555afa9f87fcbacebb3131e6c315e3e65a3a77b",
+      "sourceSha256": "7249e804bb7d7858ba78f86456aaed91a689a9e7f001b6cb23e28a96f19235c6",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "7e3ba28608cb49da17e14831908231ad7834d92711f7bf22d7844ca092fd5309",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n823d76c5cbac/revisions/a89d06079aa1067fc7ed663698f037c000b35142d18a90150573301f46073fd0.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n823d76c5cbac/inputs/ab04ae6c667dae18da4cee270d226d76e5205ef4ebbdad4410ef2a68f30c7983.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00348",
+      "key": "paid-nfe2c65e669a8",
+      "category": "palette",
+      "candidate": "550d15f8b485ea7771ea6960f0e7132181666378ee1c54bb453e1ef8ab75802f",
+      "published": "fc1495c24bf53dc0f57d34fc132d0c58adb671ff97703636307a7e3cab753f98",
+      "sourceSha256": "1f08131411dfc83f4b0bb937309710815006d62a7dfb93c47de4f60dcc95244e",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "94b1ded5aaa5a2a71eb902340ce1c7cbbbb649676b3677f1acfe363853720f2c",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nfe2c65e669a8/revisions/550d15f8b485ea7771ea6960f0e7132181666378ee1c54bb453e1ef8ab75802f.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nfe2c65e669a8/inputs/a5fddfb3749bdb1efa298fd8f171d534ca9b2335af27f6fbc9633e37b6db062e.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00346",
+      "key": "paid-nf80da34b28c3",
+      "category": "palette",
+      "candidate": "b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7",
+      "published": "50e3d0a850aea5e8ef8f9c5428ec5ae46251fd9927c91581bba955c29ce5c156",
+      "sourceSha256": "705b96cbdc56036d7b89b96f7724a58b3da8c8b307a8bf2c465df3f8005e5e05",
+      "policy": "NCP-008@3",
+      "stage": "review",
+      "planSha256": "ea421ad9a27371483e8d25a852d6d7bd01767f5a7038588a5de6f6c730a5d5e6",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/inputs/674854656be4f41189c87f1335252b11f3c9065d17064bcf0870874ca77c82bc.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "noInventedSwatches": "pass"
+        }
+      }
+    },
+    {
+      "id": "NCI-00252",
+      "key": "d-geo-station-access-analysis",
+      "category": "dataset-geo",
+      "candidate": "3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8",
+      "published": "0d37635ec14f105dc06e9e5d3af8210ee8a7509fcfc1c16d467b8e29ee3413cb",
+      "sourceSha256": "4faaf1e06f1a4a303b4b1074f4b7ae3130a00a658cfda42c9987faaeffa5fc00",
+      "policy": "NCP-006@3",
+      "stage": "review",
+      "planSha256": "25e37f9332d7ab63382438b24c7b3fd5c58499b16876d95cef69b4c8794ed770",
+      "image": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/revisions/3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8.png"
+      },
+      "input": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/inputs/6c70ddd4afc5d7acab1c46baa95e53ccae7b688c76139c8461f5e69b8eb92d5c.json"
+      },
+      "visualReview": {
+        "original": true,
+        "thumbnailWidth": 320,
+        "status": "pass",
+        "checks": {
+          "noCharacters": "pass",
+          "subjectMatch": "pass",
+          "supplementReadable": "pass",
+          "productScope": "pass"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "explainer": 4,
+    "palette": 5,
+    "dataset-geo": 1
+  },
+  "modernPublished": 64,
+  "generationPending": 0,
+  "outsideRowsUnchanged": 485,
+  "publicCoverUrlsUnchanged": 10,
+  "publicationPerformed": false,
+  "managementUi": {
+    "checkedAt": "2026-10-15T08:05:30.133Z",
+    "selected": 10,
+    "reviewPending": 10,
+    "adopted": 0,
+    "notePublished": 0,
+    "comparisonImagesLoaded": 20,
+    "imageErrors": 0,
+    "categories": {
+      "explainer": 4,
+      "palette": 5,
+      "dataset-geo": 1
+    }
+  }
+}

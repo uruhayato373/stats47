@@ -339,7 +339,7 @@ results.filter(r => parseFloat(r.deviation) <= 45).forEach(r => console.log(r.ti
 | ランキング上位下位 | 横棒グラフ | `generateBarChartSvg(toSplitItems(data, 5, 5), options)` |
 | 地域パターン | コロプレス地図 | `generateChoroplethSvg(toChoroplethItems(data), options)` |
 | 時系列データ | 折れ線グラフ | `generateLineSvg(data, options)` |
-| カバー画像 | Remotion | `RankingNote-Cover` コンポジション |
+| カバー画像 | Codex imagegen（文字込み） | `/image-prompt --use-case note-header`。Claudeによる代作は禁止 |
 
 **シリーズ別の推奨チャート枚数:**
 

@@ -11,10 +11,10 @@
  * 最新年と 10 年前で取る。品目コードが無い指標 (e-Stat 以外の出典) は使わず chart-data.json の skipped に理由を残す。
  * 企画が年齢階級別・月別の表を要るとき (五分位の表では答えられないとき) は止める。
  */
-import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { generateBarChartSvg } from '../../../../packages/svg-builder/src/charts/index.ts';
+import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
+import { writeReferenceFigure } from './lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
 import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../source-vault/lib/reference-expansion.mjs';
@@ -156,19 +156,10 @@ function draftOf(a: Analysis, items: Item[], years: string[], household: Record<
 
 async function renderChart(item: Item, year: string, dir: string) {
   const v = item.values[year];
-  const svg = generateBarChartSvg(
-    [{ label: '平均', value: v.average }, ...QUINTILE_NAMES.map((n, i) => ({ label: n, value: v.q[i] }))],
-    {
-      title: `${item.label}（年収五分位別）`, subtitle: `${year}年 二人以上の世帯・全国 年間支出額`,
-      source: '総務省統計局「家計調査」', unit: '円', palette: 'blue', layout: 'single', showAxis: true,
-      ariaLabel: `${item.label}の年収五分位階級別の年間支出額 ${year}年`,
-    },
-  );
+  const svg = renderReferenceBarSvg({ rows: [{label:'平均',value:v.average},...QUINTILE_NAMES.map((label,index)=>({label,value:v.q[index]}))],
+    title:`${item.label}（年収五分位別）`,year,unit:item.unit,scope:'全国・二人以上の世帯・1世帯当たりの年間支出額',source:'総務省統計局「家計調査」' });
   const svgPath = path.join(dir, 'images', `${item.key}-quintile.svg`);
-  writeFileSync(svgPath, svg);
-  execFileSync(process.execPath, ['-e',
-    `require(${JSON.stringify(path.join(ROOT, '.claude/scripts/lib/svg-to-png.cjs'))}).svgToPng(process.argv[1], process.argv[2]).catch((e) => { console.error(e); process.exit(1); })`,
-    svgPath, svgPath.replace(/\.svg$/, '.png')], { stdio: 'pipe' });
+  await writeReferenceFigure(svgPath,svgPath.replace(/\.svg$/,'.png'),svg);
 }
 
 async function build(a: Analysis) {
@@ -216,7 +207,7 @@ async function build(a: Analysis) {
     inputs: built.map((i) => ({ rankingKey: i.key, estat: { statsDataId: STATS_DATA_ID, cdCat01: i.code, cdCat02: TWO_PERSON, years } })),
     skipped, primarySources: a.primarySources ?? [],
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note-quintile.ts --analysis ${a.id}`,
-    images: built.map((i) => ({ file: `images/${i.key}-quintile.png`, generator: 'packages/svg-builder generateBarChartSvg', year: latest })),
+    images: built.map((i) => ({ file: `images/${i.key}-quintile.png`, generator: '.claude/scripts/note/reference/lib/figure-renderer.ts', rendererVersion: REFERENCE_FIGURE_RENDERER_VERSION, year: latest })),
   }, null, 2)}\n`);
   {
     const draftPath = path.join(dir, 'draft.md'), fresh = draftOf(a, built, years, household as Record<string, Quintile>);

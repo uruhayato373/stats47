@@ -25,8 +25,8 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 置き場と手順の正典は `.claude/scripts/note/catalog/README.md`。
 
 ### 画像 (PNG) の扱い
-カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `note:assets prepare` →
-`generate-cover-refresh.ts` → `note:assets review` で確認済みのremote候補を用意してから公開する。
+カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `/image-prompt --use-case note-header` の
+Codex imagegen文字込み生成 → `prepare-image` → `note:assets import` → 管理画面で採用、を終えてから公開する。
 `editor-helpers.sh` は `materialize-cover.mjs <articleKey>` でSHA検証済みの採用版を一時領域へ復元し、アップロード後に削除する。
 公開後は記事台帳 `data/note/articles.json` へURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
 以下のPNG再生成は本文画像の準備であり、カバー採用の代用にしない。正典は `.claude/rules/note-image-assets.md`。
@@ -54,14 +54,14 @@ SVG から作れる PNG は作業コピーで作り直してよい (`note:articl
 ### 公開済み記事のカバーだけを変更する場合
 
 本文更新の`--update`とは別に、`.claude/scripts/note/update-note-covers.mjs`を使う。
-制作判断は`catalog/cover-designs.ts`、制作は`generate-cover-refresh.ts`と共有Satori rendererに置く。
+制作判断は`data/note/cover-policies.json`の最新版、画像はCodex imagegenで文字込み生成する。Claudeによる代作と旧rendererへのフォールバックは禁止。
 画像はprivate R2、候補・採用・公開の対応は `data/note/cover-assets.json` を読む。旧9/28版は未回収として記録し、
 過去のレビューを現在の候補へ引き継がない。旧manifestを回収した場合も `note:assets import` で未判定版として登録する。
 制作・保存の契約は[カタログREADME](../../../scripts/note/catalog/README.md#公開カバーの制作と差し替え)を参照する。
 
 ```bash
-npm run note:assets -- prepare --keys <key> --output /tmp/<task>
-node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>
+# /image-prompt --use-case note-header で生成・importまで完了させる
+npm run note:assets:validate
 # 共通台帳の画像を縮小表示で確認し、正確な候補SHAをレビュー・採用してから検査
 npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>
 node .claude/scripts/note/update-note-covers.mjs --keys <key>
@@ -120,7 +120,7 @@ PCごとにChromeのProfile番号が違うため、Windowsでは番号を投稿�
 
 ## 前処理（ブラウザ操作より先に実行）
 
-投稿前に **カバー SVG** と **ハッシュタグ** を生成する。どちらも欠けたまま投稿しない。
+投稿前に **採用済みの文字込みカバー** と **ハッシュタグ** を用意する。Claudeはカバーを描かず、`/image-prompt --use-case note-header` でCodexへ渡す。どちらも欠けたまま投稿しない。
 
 ```bash
 # 1. 作業コピーが docs/31 に無ければ R2 から取り出す
@@ -128,25 +128,18 @@ npm run note:article -- checkout <slug>
 
 # 1.5. SVG 由来の PNG が作業コピーに無ければ SVG から作り直す (契約 .claude/rules/note-image-assets.md)
 npm run note:images:regen -- --slug <slug>
-#     ランキング記事 (a-<rankingKey>) の画像 4 枚は chart-data.json から作る (約 15 秒)
+#     ランキング記事 (a-<rankingKey>) の本文画像 3 枚は chart-data.json から作る
 # node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
 
-# 2. カバーを生成 (images/cover-1280x670.{svg,png})
-#    ★ koumuin-claude-code / koumuin-estat-claude-code シリーズは専用ジェネレータを使う
-#      (共通のキャッチー背景 + カテゴリトーン + 中央ボックス。SVG+PNG を直接出力し sharp で合成):
-node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>
-#    それ以外 (stats47-note 等) は汎用版:
-# node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
+# 2. /image-prompt --use-case note-header の専用経路でカバーを作り、管理画面で採用する
+#    旧SVG/Remotionカバー生成は禁止。公開時はmaterialize-cover.mjsが現行仕様・採用版・根拠を照合する。
 
 # 3. ハッシュタグ 99 個を生成 (hashtags.txt)
 node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 ```
 
-- カバー: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.{svg,png}`
-  **koumuin シリーズは `generate-koumuin-covers.cjs` が PNG まで生成する**（背景 bitmap は
-  `assets/note/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
-  アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
-  `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
+- カバー: private R2の採用済み版を `materialize-cover.mjs` で一時復元してアップロードする。
+  制作ID・最新版の仕様・元画像・目視確認記録が無い旧画像は公開前に停止する。本文画像の再生成はカバーへ触れない。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
   draft.md のタイトルと本文から Claude が提案し、`lib/note-hashtags.mjs` の検査 (汎用タグ禁止・99 個・形式・年・県名) を通ったものだけを書く。headless `claude` CLI のログインが必要 (`~/.local/bin/claude auth status`)。
 
