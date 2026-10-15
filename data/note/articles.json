@@ -11379,6 +11379,29 @@
       ],
       "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
       "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-annual-paid-leave-11-days-or-more-ratio",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b48ce1cd24c585ebaa721320930703438be0371ef7c1d5ce98532e62f5bf324a",
+          "files": 9,
+          "bytes": 394802,
+          "savedAt": "2026-10-15T22:25:47.632Z"
+        },
+        "verifiedAt": "2026-10-15T22:25:47.632Z"
+      },
+      "stats47Targets": [
+        "/ranking/annual-paid-leave-11-days-or-more-ratio"
+      ]
     }
   ]
 }

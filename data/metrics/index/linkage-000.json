@@ -10660,7 +10660,7 @@
     },
     {
       "metricKey": "annual-paid-leave-11-days-or-more-ratio",
-      "pageId": null,
+      "pageId": "ranking:annual-paid-leave-11-days-or-more-ratio",
       "title": "年次有給休暇を11日以上取得した雇用者の割合",
       "sources": [
         {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T12:57:39.689Z",
+  "updatedAt": "2026-10-15T22:28:29.549Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -5922,6 +5922,72 @@
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-annual-paid-leave-11-days-or-more-ratio",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-annual-paid-leave-11-days-or-more-ratio/revisions/adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a.png"
+          },
+          "bytes": 2383739,
+          "id": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-41f8acf5ee2e",
+          "createdAt": "2026-10-15T22:27:43.412Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-16)",
+            "reviewedAt": "2026-10-15T22:27:46.451Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-annual-paid-leave-11-days-or-more-ratio/inputs/3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29.json"
+              },
+              "bytes": 9469
+            },
+            "production": {
+              "id": "NCI-00500",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "41f8acf5ee2e0323ed56b744e00296a12935cf3fe78c00ab95b4d1727494309a"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "approvedRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00500",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "有休を11日以上\n取る人が多い県は？",
+          "subline": "1位は愛知県\n2021年のデータ",
+          "subject": "若草色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に休暇を象徴する具体物を1点だけ大きく描く: 無地の小さな旅行かばんと、その上に載せた麦わら帽子。かばんにはタグ・ステッカー・文字を付けない。左側に大きな2行の問い、下に十分大きな補足2行。カレンダー・時計・地図・グラフ・数字の入った物は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio/draft.md 2026-10-16 公開R2の本文を確認。2021年の社会生活基本調査 (statsDataId 0003456356・推定人口) の、年次有給休暇があり過去1年間続けて働いた雇用者のうち11日以上取得した人の割合の都道府県ランキングで1位は愛知県 (44.4%)、47位は石川県 (31.2%)。取得率ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
