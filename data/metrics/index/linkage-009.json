@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "gross-fixed-capital-formation-real-h27",
+      "pageId": null,
+      "title": "総固定資本形成",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C142301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C142301"
+        },
+        "derived": false,
+        "configHash": "2af2b2164c5e8bf1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:gross-fixed-capital-formation-real-h27",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "gross-prefectural-income-growth-rate-nominal-h17",
       "pageId": "ranking:gross-prefectural-income-growth-rate-nominal-h17",
       "title": "県民総所得対前年増加率",
@@ -10253,236 +10285,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "hobby-participation-rate-instrument",
-      "pageId": "ranking:hobby-participation-rate-instrument",
-      "title": "楽器の演奏の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456573",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "99000",
-            "cdCat03": "09"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456573",
-          "cdCat01": "0",
-          "cdCat02": "99000",
-          "cdCat03": "09"
-        },
-        "derived": false,
-        "configHash": "f96de40e3118e14d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:hobby-participation-rate-instrument",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:cultural-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "cultural-participation"
-      ]
     }
   ]
 }

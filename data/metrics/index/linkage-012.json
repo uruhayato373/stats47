@@ -2,6 +2,73 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "labor-administration-expenses-prefecture",
+      "pageId": "ranking:labor-administration-expenses-prefecture",
+      "title": "労政費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103051"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103051"
+        },
+        "derived": false,
+        "configHash": "1d1f7f3c5208c95f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:labor-administration-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "labor-expenditure-ratio-pref-finance",
+      "pageId": "ranking:labor-expenditure-ratio-pref-finance",
+      "title": "労働費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0310901"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0310901"
+        },
+        "derived": false,
+        "configHash": "16cf088d0b92f472"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:labor-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "labor-expenses-prefecture",
       "pageId": "ranking:labor-expenses-prefecture",
       "title": "労働費",
@@ -14996,284 +15063,6 @@
       ],
       "themes": [
         "fishery-marine"
-      ]
-    },
-    {
-      "metricKey": "marine-fishery-output-value",
-      "pageId": "ranking:marine-fishery-output-value",
-      "title": "海面漁業産出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C312001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C312001"
-        },
-        "derived": false,
-        "configHash": "ad6585da6dd634e5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:marine-fishery-output-value",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:fishery-marine",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "fishery-marine"
-      ]
-    },
-    {
-      "metricKey": "maritime-import-export-cargo",
-      "pageId": "ranking:maritime-import-export-cargo",
-      "title": "海上出入貨物",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C370701"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C370701"
-        },
-        "derived": false,
-        "configHash": "890538e5a493a9ea"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "japan-theme:ports",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:maritime-import-export-cargo",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
       ]
     }
   ]

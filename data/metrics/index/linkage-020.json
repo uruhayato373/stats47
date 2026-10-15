@@ -2,6 +2,78 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "rented-housing-ratio",
+      "pageId": "ranking:rented-housing-ratio",
+      "title": "借家比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01302"
+        },
+        "derived": false,
+        "configHash": "6a8f7b333fbd8e04"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:rented-housing-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "repair-materials-consumption-expenditure",
+      "pageId": "ranking:repair-materials-consumption-expenditure",
+      "title": "修繕材料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "020210020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "020210020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9019cbf790ff0ff0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:repair-materials-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "researcher-annual-income",
       "pageId": "ranking:researcher-annual-income",
       "title": "研究者の平均年収",
@@ -11078,86 +11150,6 @@
       "themes": [
         "labor-wages"
       ]
-    },
-    {
-      "metricKey": "school-bag-consumption-expenditure",
-      "pageId": "ranking:school-bag-consumption-expenditure",
-      "title": "通学用かばん消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "100132020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "100132020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "d0aa471da03bebb6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:school-bag-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "school-bag-consumption-quantity",
-      "pageId": "ranking:school-bag-consumption-quantity",
-      "title": "通学用かばん消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "100132020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "100132020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "12609e41dfe986fa"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:school-bag-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

@@ -2,6 +2,76 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "municipal-intellectual-disability-consultations",
+      "pageId": "ranking:municipal-intellectual-disability-consultations",
+      "title": "市町村における知的障害者相談実人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J3208"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J3208"
+        },
+        "derived": false,
+        "configHash": "2aa0b277f0b93d10"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:municipal-intellectual-disability-consultations",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "municipal-intellectual-disability-consultations-per-100k",
+      "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
+      "title": "市町村における知的障害者相談実人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J05209"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J05209"
+        },
+        "derived": false,
+        "configHash": "815e5e9aa4266e0d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "municipal-mental-health-consultation-extended-persons",
       "pageId": "ranking:municipal-mental-health-consultation-extended-persons",
       "title": "市区町村の精神保健福祉相談延人員",
@@ -11332,86 +11402,6 @@
         },
         {
           "pageId": "ranking:number-of-establishments-agriculture-forestry",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "number-of-establishments-agriculture-forestry-fisheries",
-      "pageId": "ranking:number-of-establishments-agriculture-forestry-fisheries",
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C210702"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C210702"
-        },
-        "derived": false,
-        "configHash": "e0f680c7f900fd24"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:number-of-establishments-agriculture-forestry-fisheries",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:establishments",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:number-of-establishments-agriculture-forestry-fisheries",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "number-of-establishments-construction",
-      "pageId": "ranking:number-of-establishments-construction",
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C210708"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C210708"
-        },
-        "derived": false,
-        "configHash": "d14d1ffd2e7cc2de"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:number-of-establishments-construction",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:establishments",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:number-of-establishments-construction",
           "kind": "ranking"
         }
       ],

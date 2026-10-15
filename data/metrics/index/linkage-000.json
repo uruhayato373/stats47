@@ -10659,6 +10659,59 @@
       "themes": []
     },
     {
+      "metricKey": "annual-paid-leave-11-days-or-more-ratio",
+      "pageId": null,
+      "title": "年次有給休暇を11日以上取得した雇用者の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456356",
+          "filters": {
+            "cdTab": "202101A02",
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456356",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "0",
+          "cdTab": "202101A02"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat04",
+            "numeratorCodes": [
+              "13",
+              "14"
+            ],
+            "denominatorCodes": [
+              "11",
+              "12",
+              "13",
+              "14"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "a545eda7c99582b0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:annual-paid-leave-11-days-or-more-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "annual-precipitation",
       "pageId": "ranking:annual-precipitation",
       "title": "年間降水量",
@@ -15822,229 +15875,6 @@
         },
         {
           "pageId": "ranking:average-broadcast-media-consumption-time-employed-woman",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "average-height-high-school-second-grade-female",
-      "pageId": "ranking:average-height-high-school-second-grade-female",
-      "title": "平均身長",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I0210106"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I0210106"
-        },
-        "derived": false,
-        "configHash": "10a1c23912537f9a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "ranking:average-height-high-school-second-grade-female",
           "kind": "ranking"
         }
       ],

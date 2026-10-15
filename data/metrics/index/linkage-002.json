@@ -2,6 +2,78 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "bread-consumption-expenditure",
+      "pageId": "ranking:bread-consumption-expenditure",
+      "title": "パン消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010120000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010120000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "fd1f96e835c88783"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:bread-consumption-expenditure-vs-final-education-university",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:bread-consumption-expenditure-vs-high-school-advancement",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:bread-consumption-expenditure-vs-site-area-per-dwelling",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:bread-vs-rice-expenditure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:food-spending-pattern",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:rice-consumption-quantity-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:bread-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "bread-consumption-quantity",
       "pageId": "ranking:bread-consumption-quantity",
       "title": "パン消費量",
@@ -11073,45 +11145,6 @@
         },
         {
           "pageId": "ranking:city-gas-supply-area-household-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "city-gas-supply-area-households",
-      "pageId": "ranking:city-gas-supply-area-households",
-      "title": "都市ガス供給区域内世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H5203"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H5203"
-        },
-        "derived": false,
-        "configHash": "e213252dd8174ee6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:gasoline-car-society-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:city-gas-supply-area-households",
           "kind": "ranking"
         }
       ],

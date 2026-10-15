@@ -72,6 +72,7 @@ import { annualIncomePerHousehold } from "../../../data/metrics/annual-income-pe
 import { annualMinimumRelativeHumidity } from "../../../data/metrics/annual-minimum-relative-humidity";
 import { annualNewInpatientsGeneralHospitalPer100k } from "../../../data/metrics/annual-new-inpatients-general-hospital-per-100k";
 import { annualNewInpatientsPsychiatricHospitalPer100k } from "../../../data/metrics/annual-new-inpatients-psychiatric-hospital-per-100k";
+import { annualPaidLeave11DaysOrMoreRatio } from "../../../data/metrics/annual-paid-leave-11-days-or-more-ratio";
 import { annualPrecipitationDays } from "../../../data/metrics/annual-precipitation-days";
 import { annualPrecipitation } from "../../../data/metrics/annual-precipitation";
 import { annualSalesAmountPerEmployee } from "../../../data/metrics/annual-sales-amount-per-employee";
@@ -1096,6 +1097,7 @@ import { infantMortalityRatePer1000Births } from "../../../data/metrics/infant-m
 import { inflowPopulationRatio } from "../../../data/metrics/inflow-population-ratio";
 import { informationCommunicationCoefficient } from "../../../data/metrics/information-communication-coefficient";
 import { informationCommunicationExpenditure } from "../../../data/metrics/information-communication-expenditure";
+import { informationCommunicationIndustryAnnualIncome } from "../../../data/metrics/information-communication-industry-annual-income";
 import { informationPrivateEmployees } from "../../../data/metrics/information-private-employees";
 import { informationPrivateEstablishments } from "../../../data/metrics/information-private-establishments";
 import { inlandAquacultureHarvest } from "../../../data/metrics/inland-aquaculture-harvest";
@@ -2715,6 +2717,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "annual-minimum-relative-humidity": annualMinimumRelativeHumidity,
   "annual-new-inpatients-general-hospital-per-100k": annualNewInpatientsGeneralHospitalPer100k,
   "annual-new-inpatients-psychiatric-hospital-per-100k": annualNewInpatientsPsychiatricHospitalPer100k,
+  "annual-paid-leave-11-days-or-more-ratio": annualPaidLeave11DaysOrMoreRatio,
   "annual-precipitation-days": annualPrecipitationDays,
   "annual-precipitation": annualPrecipitation,
   "annual-sales-amount-per-employee": annualSalesAmountPerEmployee,
@@ -3739,6 +3742,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "inflow-population-ratio": inflowPopulationRatio,
   "information-communication-coefficient": informationCommunicationCoefficient,
   "information-communication-expenditure": informationCommunicationExpenditure,
+  "information-communication-industry-annual-income": informationCommunicationIndustryAnnualIncome,
   "information-private-employees": informationPrivateEmployees,
   "information-private-establishments": informationPrivateEstablishments,
   "inland-aquaculture-harvest": inlandAquacultureHarvest,

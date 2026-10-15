@@ -2,6 +2,86 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "number-of-establishments-agriculture-forestry-fisheries",
+      "pageId": "ranking:number-of-establishments-agriculture-forestry-fisheries",
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C210702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C210702"
+        },
+        "derived": false,
+        "configHash": "e0f680c7f900fd24"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:number-of-establishments-agriculture-forestry-fisheries",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:number-of-establishments-agriculture-forestry-fisheries",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "number-of-establishments-construction",
+      "pageId": "ranking:number-of-establishments-construction",
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C210708"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C210708"
+        },
+        "derived": false,
+        "configHash": "d14d1ffd2e7cc2de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:number-of-establishments-construction",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:number-of-establishments-construction",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "number-of-establishments-economic-census-basic-survey",
       "pageId": "ranking:number-of-establishments-economic-census-basic-survey",
       "title": "事業所数",
@@ -9826,90 +9906,6 @@
       "consumers": [
         {
           "pageId": "ranking:other-indoor-furnishing-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-japanese-sweets-consumption-expenditure",
-      "pageId": "ranking:other-japanese-sweets-consumption-expenditure",
-      "title": "他の和生菓子消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010800030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010800030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "2faad9189bae79e3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:other-japanese-sweets-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-kitchen-supplies-consumption-expenditure",
-      "pageId": "ranking:other-kitchen-supplies-consumption-expenditure",
-      "title": "他の台所用品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "040400040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "040400040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b5eb3a6adafd6429"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-kitchen-supplies-consumption-expenditure",
           "kind": "ranking"
         }
       ],

@@ -2,6 +2,284 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "marine-fishery-output-value",
+      "pageId": "ranking:marine-fishery-output-value",
+      "title": "海面漁業産出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C312001"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C312001"
+        },
+        "derived": false,
+        "configHash": "ad6585da6dd634e5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:fishery-marine",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:marine-fishery-output-value",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:fishery-marine",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "fishery-marine"
+      ]
+    },
+    {
+      "metricKey": "maritime-import-export-cargo",
+      "pageId": "ranking:maritime-import-export-cargo",
+      "title": "海上出入貨物",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C370701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C370701"
+        },
+        "derived": false,
+        "configHash": "890538e5a493a9ea"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "japan-theme:ports",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:maritime-import-export-cargo",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
       "metricKey": "marriages",
       "pageId": "ranking:marriages",
       "title": "婚姻件数",
@@ -10462,76 +10740,6 @@
         },
         {
           "pageId": "ranking:municipal-general-administration-staff",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "municipal-intellectual-disability-consultations",
-      "pageId": "ranking:municipal-intellectual-disability-consultations",
-      "title": "市町村における知的障害者相談実人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010110",
-          "filters": {
-            "cdCat01": "J3208"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010110",
-          "cdCat01": "J3208"
-        },
-        "derived": false,
-        "configHash": "2aa0b277f0b93d10"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:municipal-intellectual-disability-consultations",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "municipal-intellectual-disability-consultations-per-100k",
-      "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
-      "title": "市町村における知的障害者相談実人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J05209"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J05209"
-        },
-        "derived": false,
-        "configHash": "815e5e9aa4266e0d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
           "kind": "ranking"
         }
       ],

@@ -538,6 +538,14 @@
       "published": true
     },
     {
+      "id": "ranking:annual-paid-leave-11-days-or-more-ratio",
+      "kind": "ranking",
+      "key": "annual-paid-leave-11-days-or-more-ratio",
+      "title": "年次有給休暇を11日以上取得した雇用者の割合",
+      "href": "/ranking/annual-paid-leave-11-days-or-more-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:annual-precipitation",
       "kind": "ranking",
       "key": "annual-precipitation",
@@ -8728,6 +8736,14 @@
       "title": "情報通信関係費",
       "href": "/ranking/information-communication-expenditure",
       "published": true
+    },
+    {
+      "id": "ranking:information-communication-industry-annual-income",
+      "kind": "ranking",
+      "key": "information-communication-industry-annual-income",
+      "title": "情報通信業で働く人の平均年収",
+      "href": "/ranking/information-communication-industry-annual-income",
+      "published": false
     },
     {
       "id": "ranking:information-private-employees",

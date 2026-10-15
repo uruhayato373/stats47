@@ -2,6 +2,90 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "other-japanese-sweets-consumption-expenditure",
+      "pageId": "ranking:other-japanese-sweets-consumption-expenditure",
+      "title": "他の和生菓子消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010800030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010800030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2faad9189bae79e3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-japanese-sweets-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-kitchen-supplies-consumption-expenditure",
+      "pageId": "ranking:other-kitchen-supplies-consumption-expenditure",
+      "title": "他の台所用品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b5eb3a6adafd6429"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-kitchen-supplies-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-leafy-vegetables-consumption-expenditure",
       "pageId": "ranking:other-leafy-vegetables-consumption-expenditure",
       "title": "他の葉茎菜消費支出額",
@@ -6416,73 +6500,6 @@
         },
         {
           "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
-      "title": "災害復旧費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0332103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0332103"
-        },
-        "derived": false,
-        "configHash": "37cb1037e8d04490"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-education-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
-      "title": "教育費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0331403"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0331403"
-        },
-        "derived": false,
-        "configHash": "a617b3cff5122c04"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
           "kind": "ranking"
         }
       ],

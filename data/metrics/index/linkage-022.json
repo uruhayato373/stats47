@@ -2,6 +2,309 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "solar-panel-housing-rate",
+      "pageId": "ranking:solar-panel-housing-rate",
+      "title": "太陽光発電機のある住宅率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004021642",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "0",
+            "cdCat04": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004021642",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "0",
+          "cdCat04": "0"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat05",
+            "numeratorCodes": [
+              "21"
+            ],
+            "denominatorCodes": [
+              "21",
+              "22"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "a240c69c10f56def"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:solar-panel-housing-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sunshine-solar-housing-correlation",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:solar-panel-housing-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "solar-power-housing",
+      "pageId": "ranking:solar-power-housing",
+      "title": "太陽光を利用した発電機器のある住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H2281"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H2281"
+        },
+        "derived": false,
+        "configHash": "60b809463d108b01"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:energy-consumption-structure-shift",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:renewable-energy-regional-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:solar-power-housing",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:solar-power-housing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "sole-proprietor-operating-profit",
       "pageId": "ranking:sole-proprietor-operating-profit",
       "title": "個人企業の営業利益",
@@ -9392,142 +9695,6 @@
         },
         {
           "pageId": "ranking:sushi-takeout-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sweet-potato-consumption-expenditure",
-      "pageId": "ranking:sweet-potato-consumption-expenditure",
-      "title": "さつまいも消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010512010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010512010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "0ad077de1da24331"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:ibaraki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sweet-potato-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sweet-potato-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sweet-potato-consumption-quantity",
-      "pageId": "ranking:sweet-potato-consumption-quantity",
-      "title": "さつまいも消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "010512010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "010512010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "db90a84280c6575d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sweet-potato-consumption-quantity",
           "kind": "ranking"
         }
       ],

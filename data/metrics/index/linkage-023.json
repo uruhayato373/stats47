@@ -2,6 +2,142 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "sweet-potato-consumption-expenditure",
+      "pageId": "ranking:sweet-potato-consumption-expenditure",
+      "title": "さつまいも消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010512010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010512010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0ad077de1da24331"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sweet-potato-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sweet-potato-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sweet-potato-consumption-quantity",
+      "pageId": "ranking:sweet-potato-consumption-quantity",
+      "title": "さつまいも消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010512010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010512010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "db90a84280c6575d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sweet-potato-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "swimming-pool-public",
       "pageId": "ranking:swimming-pool-public",
       "title": "水泳プール数（公共）",
@@ -6525,81 +6661,6 @@
         },
         {
           "pageId": "ranking:total-area-prefecture-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "total-assessed-land-area",
-      "pageId": "ranking:total-assessed-land-area",
-      "title": "評価総地積",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010102",
-          "filters": {
-            "cdCat01": "B1201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010102",
-          "cdCat01": "B1201"
-        },
-        "derived": false,
-        "configHash": "eafc8c43103ec3d4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:total-assessed-land-area",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:land-area",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:total-assessed-land-area",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "total-assessed-land-area-ratio",
-      "pageId": "ranking:total-assessed-land-area-ratio",
-      "title": "評価総地積割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010202",
-          "filters": {
-            "cdCat01": "#B01401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010202",
-          "cdCat01": "#B01401"
-        },
-        "derived": false,
-        "configHash": "5c88b9470f3d9810"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:total-assessed-land-area-ratio",
           "kind": "ranking"
         }
       ],
