@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
@@ -21,6 +21,7 @@ import {
   TabsTrigger,
 } from '@stats47/components/atoms/ui/tabs';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 

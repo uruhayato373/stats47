@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 

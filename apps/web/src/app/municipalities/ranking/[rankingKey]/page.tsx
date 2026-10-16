@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
@@ -23,7 +22,7 @@ import {
 import { formatValueWithPrecision } from '@stats47/utils';
 import { ChevronDown } from 'lucide-react';
 
-
+import Link from '@/components/atoms/SiteLink';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';

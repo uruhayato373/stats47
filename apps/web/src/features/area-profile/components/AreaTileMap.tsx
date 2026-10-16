@@ -1,6 +1,7 @@
-import Link from "next/link";
-
 import { cn } from "@stats47/components";
+
+import Link from "@/components/atoms/SiteLink";
+
 
 import { regionStyle } from "../constants/region-styles.palette";
 

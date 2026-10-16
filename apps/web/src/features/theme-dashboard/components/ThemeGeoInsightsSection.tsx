@@ -1,10 +1,9 @@
-import Link from 'next/link';
-
 import {
   BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE,
   BUSINESS_PLAN_M1_GEO_ANALYSES,
 } from '@stats47/data-configs/business-plan';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 

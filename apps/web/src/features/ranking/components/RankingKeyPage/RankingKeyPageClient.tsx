@@ -2,14 +2,13 @@
 
 import { useMemo } from "react";
 
-import Link from "next/link";
-
 import {
     type RankingItem,
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
 
+import Link from "@/components/atoms/SiteLink";
 import { ArticleShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";

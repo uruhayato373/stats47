@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
+
 
 import { fetchPrefectures, lookupArea } from "@stats47/area";
 import {
@@ -23,6 +23,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
 
 import { RankingYearSelector } from "@/features/ranking";

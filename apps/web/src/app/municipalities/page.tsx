@@ -1,4 +1,3 @@
-import Link from 'next/link';
 
 import {
   buildMunicipalityEntityPolicy,
@@ -12,6 +11,7 @@ import {
 } from '@stats47/data-configs/geo-scope';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 import {

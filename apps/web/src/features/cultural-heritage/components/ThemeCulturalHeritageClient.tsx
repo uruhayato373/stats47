@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import Link from 'next/link';
 
 import { lookupArea } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
@@ -17,6 +16,7 @@ import {
 } from '@stats47/components/atoms/ui/table';
 import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 
+import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 

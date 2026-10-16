@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
-
 import { ExternalLink } from "lucide-react";
 
-
+import Link from "@/components/atoms/SiteLink";
 import { isLinkableSurveyId } from "@/components/molecules/SourceAttribution";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";

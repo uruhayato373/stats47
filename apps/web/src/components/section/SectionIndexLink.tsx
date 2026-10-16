@@ -1,6 +1,7 @@
-import Link from 'next/link';
-
 import { ArrowRight } from 'lucide-react';
+
+import Link from '@/components/atoms/SiteLink';
+
 
 interface SectionIndexLinkProps {
   href: string;

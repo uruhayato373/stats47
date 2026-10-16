@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import Link from 'next/link';
 
 import {
   Button,
@@ -22,6 +21,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { isLinkableSurveyId } from '@/components/molecules/SourceAttribution';
 
 import type { SourceAttribution as SourceAttributionData } from '@stats47/data-configs';

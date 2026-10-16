@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { GIS_DATASETS } from '@stats47/gis/mlit-ksj';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';

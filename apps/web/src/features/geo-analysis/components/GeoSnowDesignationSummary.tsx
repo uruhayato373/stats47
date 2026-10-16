@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 
 import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
@@ -16,6 +15,7 @@ import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 

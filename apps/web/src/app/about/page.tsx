@@ -15,13 +15,14 @@
 import { ReactNode } from "react";
 
 import Image from "next/image";
-import Link from "next/link";
+
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { Breadcrumbs, PageShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";

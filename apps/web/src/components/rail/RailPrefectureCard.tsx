@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -11,6 +10,7 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
+import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
 
 import { trackNavClick, type NavSurface } from '@/lib/analytics/events';

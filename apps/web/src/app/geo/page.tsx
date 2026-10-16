@@ -1,9 +1,9 @@
-import Link from 'next/link';
 
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { ArrowRight, MapPin } from 'lucide-react';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import {
   Breadcrumbs,

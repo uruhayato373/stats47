@@ -2,11 +2,12 @@
 
 import { useId, useState } from 'react';
 
-import Link from 'next/link';
 
 import { cn } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { Input } from '@stats47/components/atoms/ui/input';
+
+import Link from '@/components/atoms/SiteLink';
 
 import type { getGeoSourceNavigation } from '../lib/geo-source-navigation';
 

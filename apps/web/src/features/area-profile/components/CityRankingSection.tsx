@@ -3,7 +3,6 @@
 import { useMemo, useTransition } from "react";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import {
@@ -15,6 +14,7 @@ import { rankByValue } from "@stats47/ranking";
 import { computeDeviationScores } from "@stats47/utils";
 import { Loader2 } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 

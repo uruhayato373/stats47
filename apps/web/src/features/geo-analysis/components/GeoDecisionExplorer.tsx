@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 
-import Link from 'next/link';
 
 import { to2DigitPrefCode } from '@stats47/area';
 import {
@@ -13,6 +12,7 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
+import Link from '@/components/atoms/SiteLink';
 import { SurfaceCard } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';

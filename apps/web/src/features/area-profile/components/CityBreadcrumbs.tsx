@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +6,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+
+import Link from "@/components/atoms/SiteLink";
+
 
 interface CityBreadcrumbsProps {
   areaCode: string;

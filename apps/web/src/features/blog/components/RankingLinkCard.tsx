@@ -2,10 +2,11 @@
 
 import { type ReactNode, useEffect, useState } from "react";
 
-import Link from "next/link";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ArrowRight } from "lucide-react";
+
+import Link from "@/components/atoms/SiteLink";
 
 import { trackNavClick } from "@/lib/analytics/events";
 

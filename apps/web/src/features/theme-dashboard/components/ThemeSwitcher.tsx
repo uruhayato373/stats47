@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { cn } from '@stats47/components';
@@ -11,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
+
+import Link from '@/components/atoms/SiteLink';
 
 import { trackNavClick } from '@/lib/analytics/events';
 

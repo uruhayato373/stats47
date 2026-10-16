@@ -1,10 +1,10 @@
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { to5DigitPrefCode } from '@stats47/area';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
+import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 

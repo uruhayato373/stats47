@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
+import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
 
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";

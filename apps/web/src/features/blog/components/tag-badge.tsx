@@ -1,7 +1,8 @@
-import Link from "next/link";
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { resolveContentTag } from '@stats47/data-configs/content';
+
+import Link from "@/components/atoms/SiteLink";
 
 interface TagBadgeProps {
   tag: string;

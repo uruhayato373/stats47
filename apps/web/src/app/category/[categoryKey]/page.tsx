@@ -5,7 +5,6 @@
  * 注目ランキング（コンパクトカード）+ 全件テーブルのハイブリッドレイアウト。
  */
 
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
@@ -18,6 +17,7 @@ import {
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
 
+import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';

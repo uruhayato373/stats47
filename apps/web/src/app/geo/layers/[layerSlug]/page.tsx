@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
+import Link from '@/components/atoms/SiteLink';
 import {
   Breadcrumbs,
   LEFT_RAIL_NARROW_ONLY_CLASS,

@@ -1,6 +1,5 @@
 import { Suspense, type ReactNode } from 'react';
 
-import Link from 'next/link';
 
 import {
   Breadcrumb,
@@ -18,6 +17,7 @@ import {
   resolveThemeSurveyTaxonomy,
 } from '@stats47/ranking';
 
+import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';

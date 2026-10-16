@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 
-import Link from 'next/link';
 
 
 import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from '@stats47/area';
@@ -17,6 +16,7 @@ import {
 import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
+import Link from '@/components/atoms/SiteLink';
 import { ChartCard } from '@/components/charts/ChartCard';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartLegend } from '@/components/charts/ChartLegend';

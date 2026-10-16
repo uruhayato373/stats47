@@ -1,4 +1,3 @@
-import Link from 'next/link';
 
 import {
   geoAnalysisManifestKey,
@@ -7,6 +6,7 @@ import {
 } from '@stats47/gis';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 

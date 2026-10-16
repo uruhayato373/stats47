@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { Button } from "@stats47/components";
 import { LayoutDashboard, Home, MapPin, Search } from "lucide-react";
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell } from "@/components/layout";
 import { SurfaceLinkCard } from "@/components/surface";
 

@@ -1,10 +1,11 @@
 import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
-import Link from "next/link";
 
 
 import { CARD_SURFACE_CLASS, cn } from "@stats47/components";
 import { ChevronDown, ChevronRight } from "lucide-react";
+
+import Link from "@/components/atoms/SiteLink";
 
 /*
  * カード外枠の角丸・線色・地は CARD_SURFACE_CLASS (@stats47/components) の単一定義に従い、

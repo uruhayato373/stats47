@@ -217,7 +217,7 @@ updated: 2026-10-06
 
 ### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-16] [領域:管理]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-30] [領域:管理]
 
 - **背景 (2026-09-24 実測)**: 請求書 6 通 (`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W20〜W38.json`) で、
   5 月以降の従量課金は毎月 Workers CPU ms の 1 行だけ (9/15 請求は超過 267M ms で $5.36)。9/15〜の請求期間は予算アラート
@@ -232,6 +232,7 @@ updated: 2026-10-06
   ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
+  (2026-10-16 にこの 2 点は満たした。対策の本番反映と効果観測の引き渡しまでをこのカードで持つ)
 - **観測の追記 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 本番の撮影 308 回のうち 3 回で一時的な HTTP 503 (`/areas/29000/cities/29363` の 390・640px、`/category/landweather` の 390px)。
   同じ URL は直後の再取得で 3 回とも 200。
   GSC 是正キューでも `/blog/gasoline-consumption-quantity-vs-densely-inhabited-district` (9/7・9/20) と
@@ -240,6 +241,27 @@ updated: 2026-10-06
 - **関連する変更 (2026-09-25 夜・未リリース)**: `THEME-CHART-LOAD-LATENCY-01` で、テーマページの時系列取得を 1 回のサーバーアクションに
   束ね、同じ指標の「選択県」と「全国」を R2 の 1 回の読み込みから作るようにした (リクエスト 48 → 2、R2 読み込みは指標数分)。
   [仮説] テーマページ 1 表示あたりの Workers CPU 時間が減る。検証: リリース後の日次 snapshot の cpu_p50 / p99 を前週と比べる。
+- **10/15 の請求書 (2026-10-16 記録)**: IN-83898043 (9/15〜10/14) の Workers CPU は超過 1,068,120,555 ms・$21.38、
+  推定合計 1,098M ms で前期間 (297M) の 3.70 倍。合計 $29.02 (4,699 円)。記録 `data/cloudflare/weekly-snapshots/2026-W42.json`。
+  同期間の Workers requests は前期間比 +43.3% (2.08M → 2.98M、月次 JSON 同士の比較) なので、1 件あたりの CPU は約 2.6 倍。
+- **主因 (2026-10-16 実測・Workers Observability の Traces、10/16 09:00〜10:00 JST の 1 時間)**: 約 6,500 件・CPU 約 390 万 ms のうち、
+  `url.query` に `_rsc` を含むリクエストが 4,249 件・約 282 万 ms (**約 72%**)。App Router が画面に入ったリンクを先読みし、
+  RSC はキャッシュを通らない設計 (`lib/cache-policy.ts`) なので毎回サーバー描画になる。本番トップを開くだけで `_rsc` が 37 件出た。
+  内訳はほかに、OCN (ASN 4713) から Windows Chrome 155 を名乗る 1 端末が 1,263 件・約 33% (約 3 秒に 1 回が 1 時間連続、
+  Accept は 97% が `*/*`。`_rsc` の行と重なる)、Cloudflare が認めたクローラーが約 17% (うち AI 関係は約 4%)。
+  個別のランキング・ブログ・県ページは 1 回の描画で CPU 0.8〜2.5 秒。
+  限界: 1 時間のみ (期間切替が操作できなかった)。1 時間 × 720 の換算は請求書の約 2.5 倍で、gateway と CachedApp の二重計上の可能性があるので割合として読む。
+  集計の方法: Observability → Query Builder (データセット Traces) で `cpu_time_ms` の sum を `url.path` / `cloudflare.verified_bot_category` /
+  `user_agent.browser.name` / `cloudflare.asn` 別に出す。`$workers.event.request.path` は Traces に無く結果が空になる。
+- **対策 (2026-10-16)**: `SiteLink` (表示時は `prefetch={false}`、マウスを乗せた・触れたときに `router.prefetch()` を 1 回) を
+  `next/link` の全 91 import に適用し、ESLint で直接 import を禁止 (`f94a5035f`、PR #1137・未マージ)。localhost の本番ビルドで
+  トップの `_rsc` が 37 → 0、hover で 1 件、遷移正常。監視側は月次レポートの前月比 (30 日対 1 日の誤比較) と日次の CPU 合計取得を修正
+  (`9583e1df8`、main 反映済み。`sum.cpuTimeUs` が本番で取れるかは未確認)。
+- **次 (2026-10-16 更新)**: ① PR #1137 を main に反映する (オーナー承認待ち)。② 反映の翌日に日次取得の CI ログで
+  「Workers CPU total」が値か「取得不能」かを確かめる。③ 反映後 7 日の日次 CPU (取れれば合計、無ければ cpu_p50/p99 と requests) と、
+  Observability の `_rsc` の CPU 割合を反映前と比べる。④ 効果観測は改善台帳の別 ID (improvement-triage) へ引き渡し、このカードを閉じる。
+  残る対策は `CF-CPU-OCN-CLIENT-01` / `CF-CPU-RENDER-WEIGHT-01` / `CF-HTML-EDGE-TTL-01` / `CF-DEPLOY-CACHE-RESET-01`。
+  AI クローラーの制限は実測 4% のため起票しない。
 
 ### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ後に古い HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [進行中] [領域:サイト]
@@ -283,6 +305,57 @@ updated: 2026-10-06
 - **完了条件**: `npm audit --omit=dev --audit-level=high` が exit 0 で、本番の代表 URL が 200。または該当しないと確定し、例外の理由と再評価日をこのカードに書いて 🟡 へ下げた。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [CF-CPU-RENDER-WEIGHT-01] キャッシュに無いページの描画 1 回あたりの Workers CPU を減らす
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [領域:管理]
+
+- **背景 (2026-10-16 実測)**: Workers Observability (Traces・1 時間) で、個別のランキング・ブログ・県ページは 1 回の描画で
+  CPU 0.8〜2.5 秒 (例: `/ranking/main-household-ratio-main-earner-employee-commute-90min` 平均 2,526ms、`/areas/19000` 2,166ms)。
+  本番の初回取得は `/themes/healthcare` 5.5 秒・`/ranking/total-population` 3.1 秒。先読みを止めても (`CF-CPU-SURGE-01`)、
+  クローラーと初回の閲覧ではこの描画が残る。stats47 バケットの R2 転送量は 1 日 45〜196GB で Workers 1 件あたり約 1MB に当たり、
+  描画のたびに大きな JSON を読んで解析している疑いがある (ブラウザからの直接取得も含むので未確定)。
+- **次**: ① `CF-CPU-SURGE-01` の反映後 7 日で、Observability の `url.path` 別 CPU 合計の上位 20 を取り直す (方法は同カード)。
+  ② 上位ルートの描画で読む R2 オブジェクトとサイズを数え、CPU が JSON の解析か描画かを分ける。③ 必要な年・項目だけを切り出した
+  派生 snapshot (R2) を作るか、読み込みをやめるかを 1 ルートで試し、localhost の本番ビルドで描画時間を比べる。
+- **停止条件**: 計測なしに最適化を足さない。永続 DB に戻さない (派生は R2)。表示内容・SEO の構造化データを変えない。
+- **完了条件**: 上位ルートの 1 回あたり CPU の before/after を同じ方法で測り、改善した変更が本番に入っている。効果観測は改善台帳の別 ID へ引き渡す。
+
+### [CF-CPU-OCN-CLIENT-01] OCN 回線から Chrome を名乗って連続アクセスする 1 端末を特定し、必要ならレート制限する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [領域:管理]
+
+- **背景 (2026-10-16 実測)**: Observability (Traces・1 時間) で ASN 4713 (NTT OCN) の `Mozilla/5.0 (Windows NT 10.0; Win64; x64) ... Chrome/155.0.0.0`
+  が 1,263 件・CPU 約 128 万 ms (全体の約 33%)。約 3 秒に 1 回が 1 時間連続し、Accept は 97% が `*/*`。取りに来ているのは
+  トップ・`/ranking`・`/areas`・カテゴリなどナビのリンク先で、先読み (`_rsc`) と同じ形。オーナーに心当たりは無い。
+  送信元 IP は invocation logs 側のキーにあり、Traces のフィルターとは組み合わせられなかった。
+- **次**: ① `CF-CPU-SURGE-01` (先読み停止) の反映後に同じ ASN・UA で件数と CPU を取り直す。先読みが止まって消えたなら閉じる。
+  ② 残っていれば invocation logs で送信元 IP の数・時間帯・取得パスを確かめる。③ 単一の自動取得と分かれば、Cloudflare のレート制限
+  (一定時間あたりの件数上限) の条件と閾値の案を作る。
+- **停止条件**: 人の閲覧 (会社など共有の出口) の可能性を否定できないまま遮断しない。WAF・レート制限の設定変更はオーナーの承認後。
+- **完了条件**: 先読み停止後の実測で消えたことを確かめたか、レート制限を入れて同じ集計で件数が下がったことを確かめた。
+
+### [CF-HTML-EDGE-TTL-01] HTML の Workers Cache の期間を 1 日から延ばす可否を決める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [領域:管理]
+
+- **背景 (2026-10-16)**: `lib/cache-policy.ts` の `PAGE_EDGE_CACHE_CONTROL` は `max-age=86400, stale-while-revalidate=604800`。
+  本番ではトップ・テーマページも、最後のデプロイ (10/13) の 3 日後の初回取得で `CF-Cache-Status: MISS` だった (原因は期間切れか削除か未確認)。
+  データ更新時は該当ページを差分 purge しているので、クローラーが 1 日 1 回未満しか来ない長い裾のページ (ランキング・市区町村) は期間を延ばすと
+  キャッシュから返せる。Workers Cache は tiered (公式 https://developers.cloudflare.com/workers/cache/ 、2026-10-16 確認)。
+- **次**: ① purge されない経路 (データ更新・テーマ定義・page_components・広告) を洗い出し、延長すると古い内容が残るページを特定する。
+  ② `stale-while-revalidate` が Workers Cache で効いているか (MISS ではなく STALE を返すか) を本番で確かめる。③ 期間の案と効果の見込みを出す。
+- **停止条件**: purge 漏れの経路を残したまま延ばさない。本番反映はオーナー承認後。
+- **完了条件**: 延長するかを決め、延長するなら purge 漏れの経路を塞いだうえで本番に入り、HIT 率か CPU の before/after を測った。
+
+### [CF-DEPLOY-CACHE-RESET-01] 配信に関係しない変更で本番デプロイしないようにし、キャッシュの全消しを減らす
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [領域:管理]
+
+- **背景 (2026-10-16)**: `deploy-workers.yml` は main への push ごとに動き (paths 指定なし)、9/15 以降の 32 日で 79 回デプロイした
+  (8/15〜9/14 は 83 回)。Workers Cache は版がキャッシュキーに入るので、デプロイのたびに空から始まる
+  (公式 https://developers.cloudflare.com/workers/cache/configuration/ 、2026-10-16 確認)。`cross_version_cache` は
+  `DEPLOY-WORKER-CACHE-STALE-CSS-01` の事故 (古い HTML が消えた CSS を参照) を招くので使わない。
+- **次**: ① 直近 79 回のうち、web の配信物 (apps/web・packages・ビルドが読む data/ 配下) に差の無いデプロイの件数を数える。
+  ② 多ければ `paths` / `paths-ignore` の案を作る。ビルドが読む `data/` (例: `data/themes/catalogs`・`data/content`) を必ず含める。
+- **停止条件**: ビルドが読むファイルを除外して、配信物が古いまま残る状態を作らない。workflow の変更は main 反映まで発火しない点に注意する。
+- **完了条件**: 配信物に差の無いデプロイが走らないことを、対象外の変更だけの push で確かめた。または件数が少なく不要と判断した理由をここに書いた。
 
 ### [NOTE-LABOR-METRICS-ADD-01] 有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-15] [領域:サイト]

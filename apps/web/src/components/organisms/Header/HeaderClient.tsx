@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react';
 
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { cn } from '@stats47/components';
@@ -22,6 +21,7 @@ import {
   Sun,
 } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 
 import { trackNavClick, trackSearch } from '@/lib/analytics/events';

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/atoms/SiteLink";
 
 import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 

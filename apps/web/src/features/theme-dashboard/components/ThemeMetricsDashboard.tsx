@@ -2,13 +2,13 @@
 
 import { useMemo, type ReactNode } from 'react';
 
-import Link from 'next/link';
 
 import { lookupArea } from '@stats47/area';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
 import { ArrowRight } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import type { PageComponent } from '@/components/stat-charts';

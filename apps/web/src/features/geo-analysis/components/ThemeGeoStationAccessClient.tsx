@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 
 import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
@@ -13,6 +12,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 

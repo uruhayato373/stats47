@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
+
 
 import { lookupArea } from "@stats47/area";
 import { metricDisplayName, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";

@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { cn } from '@stats47/components';
 
+import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
 
 import { OPERATOR_PROFILE } from '@/config/operator-profile';
