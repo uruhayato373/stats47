@@ -1,8 +1,0 @@
-{
-  "metric": "manufacturing-industry-annual-income,medical-welfare-industry-annual-income",
-  "since": "",
-  "dryRun": false,
-  "migrateLegacyRecipes": false,
-  "snapshotScope": "ranking",
-  "requestedAt": "2026-10-16T08:00:00+09:00"
-}
