@@ -27,6 +27,7 @@
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --allow-stale-source # 過去入力の診断用 (通常運用では禁止)
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --next 20       # 次にやる actionable を JSONL
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url>
+ *   node .claude/scripts/gsc/build-coverage-queue.mjs --set-content-verdict @urls.txt --verdict observe-after-fix --note "内容確認の証拠"
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> [--wave-id 2026-06-16-coverage]
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection  # 直近14日の URL Inspection で登録済み→done
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled <file> # バックログカードの対象が処理済みか (gate)
@@ -51,7 +52,9 @@ import {
   getCoverageSourceFreshness,
 } from "./lib/coverage-source-freshness.mjs";
 import {
+  applyContentVerdict,
   applyInspectionObservations,
+  CONTENT_VERDICT_ACTION,
   findUnhandledBatchUrls,
   getObserveAfterFixEntries,
   keepsDesignJudgment,
@@ -129,16 +132,6 @@ const ACTION_PRIORITY = {
   recheck: 8,
   none: 99,
 };
-// content-check の人/agent 判定 (content_verdict) → action マッピング。
-// 一度付けたら build の HTTP 再分類で上書きされず保持される。
-const CONTENT_VERDICT_ACTION = {
-  // 後方互換: 旧 content_verdict "resubmit" は observe-after-fix にマップする (準拠是正 2026-07-23)
-  resubmit: "observe-after-fix",
-  "observe-after-fix": "observe-after-fix",
-  enrich: "enrich",
-  noindex: "noindex",
-  deactivate: "deactivate",
-};
 
 // ── キュー I/O ─────────────────────────────────────────────────
 const loadQueue = () => {
@@ -199,19 +192,35 @@ async function getProxyDispatcher() {
 const markIP = getArg("--mark-in-progress", null);
 const markDone = getArg("--mark-done", null);
 const markDesign = getArg("--mark-by-design", null);
-if (markIP || markDone || markDesign) {
+const contentSpec = getArg("--set-content-verdict", null);
+if (markIP || markDone || markDesign || contentSpec) {
+  if ([markIP, markDone, markDesign, contentSpec].filter(Boolean).length !== 1) {
+    console.error("[err] 状態更新モードは1つだけ指定してください");
+    process.exit(1);
+  }
   const q = loadQueue();
   if (!q) {
     console.error("[err] queue が無い。先に build を実行: node build-coverage-queue.mjs");
     process.exit(1);
   }
-  const spec = markIP || markDone || markDesign;
+  const spec = markIP || markDone || markDesign || contentSpec;
   // "@path" なら 1 行 1 URL のファイルとして読む (URL にカンマが入りうるので分割はしない)
   const urls = spec.startsWith("@")
     ? fs.readFileSync(spec.slice(1), "utf8").split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
     : [spec];
   const note = getArg("--note", null);
   const waveId = getArg("--wave-id", null);
+  if (contentSpec) {
+    try {
+      const changed = applyContentVerdict(q.queue, urls, getArg("--verdict", null), note);
+      refreshQueueDerivedState(q);
+      console.log(`[ok] ${changed} 件の内容判定を更新 (in-progress、登録確認待ち)`);
+    } catch (error) {
+      console.error(`[err] ${error.message}`);
+      process.exit(1);
+    }
+    process.exit(0);
+  }
   const missing = [];
   let changed = 0;
   for (const url of urls) {

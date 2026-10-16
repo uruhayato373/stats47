@@ -309,8 +309,9 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
   const seg = pathname.split('/').filter(Boolean);
   if (seg[0] !== 'areas') return null;
 
-  // Next.js 内部ルート（opengraph-image 等）は 410 対象外
-  if (seg[2] === 'opengraph-image') return null;
+  // 県 OGP は静的画像へ移行済みで、この route は存在しない。
+  // themeSlug と誤認すると streamed notFound が HTTP 200 になるためここで廃止を返す。
+  if (seg.length === 3 && seg[2] === 'opengraph-image') return gone();
 
   // /areas/{無効5桁コード}: cities セグメント以外は 410
   if (seg.length >= 2 && seg[1] !== 'cities') {

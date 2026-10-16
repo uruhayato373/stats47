@@ -182,6 +182,8 @@ export const DATASETS = [
   d("gsc.url-inspection-latest", "data/gsc/url-inspection/LATEST.md", "report", "site", "data", "URL Inspection の最新要約"),
   d("gsc.resubmit-history", "data/gsc/resubmit-history.json", "ledger", "site", "data", "カバレッジ是正の再送信の記録", { schema: "config/schema/gsc.resubmit-history.schema.json" }),
   d("gsc.operations-cycle", "data/gsc/operations-cycle-LATEST.{name}", "state", "site", "data", "GSC 週次運用サイクルの配線検査の結果"),
+  d("gsc.ui-audits", "data/gsc/ui-audits/{date}.json", "evidence", "site", "data", "GSC UI の理由別件数・例示URL・HTTP・メッセージの監査証跡", { retain: "gsc-ui-audits" }),
+  d("gsc.remediation-evidence", "data/gsc/ui-audits/{date}-remediation.json", "evidence", "site", "data", "GSC 是正の内容確認・公開URLテスト・本番検証の証跡", { retain: "gsc-remediation-evidence" }),
   d("ga4.history", "data/ga4/history.csv", "series", "site", "data", "GA4 の週次集約"),
   d("ga4.history-finalized", "data/ga4/history-finalized7d.csv", "series", "site", "data", "GA4 の確定 7 日集約"),
   d("ga4.latest", "data/ga4/LATEST.md", "report", "site", "data", "GA4 の前週比の要約"),

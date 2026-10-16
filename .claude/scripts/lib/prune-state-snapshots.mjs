@@ -29,6 +29,16 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}\.csv$/,
     keep: 7,
   },
+  "gsc-ui-audits": {
+    directory: datasetDir("gsc.ui-audits"),
+    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 8,
+  },
+  "gsc-remediation-evidence": {
+    directory: datasetDir("gsc.remediation-evidence"),
+    pattern: /^\d{4}-\d{2}-\d{2}-remediation\.json$/,
+    keep: 8,
+  },
   cloudflare: {
     directory: datasetDir("cloudflare.snapshots"),
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
