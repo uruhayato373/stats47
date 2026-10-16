@@ -1,8 +1,9 @@
 import { CATALOGS } from '../../lib/svg-classify.mjs';
 import { filenameTemplate } from './classification.mjs';
+import { VISUAL_TEMPLATES, canonicalTemplate } from './taxonomy.mjs';
 
 export const IMAGE_USES = { body:'本文図版', cover:'noteカバー', ogp:'OGP', card:'リンクカード', background:'背景素材', social:'SNS投稿', material:'共通素材' };
-export const SVG_TEMPLATE = Object.fromEntries(CATALOGS.map(c=>[c.key,c.key==='unknown'?'unclassified':'svg-'+c.key]));
+export const SVG_TEMPLATE = Object.fromEntries(CATALOGS.map(c=>[c.key,c.key==='unknown'?'unclassified':canonicalTemplate('svg-'+c.key)]));
 
 /** Classify the recorded output, not the caption's rhetorical template or its dimensions. */
 export function snsImageTemplate(post, asset) {
@@ -19,6 +20,7 @@ export function snsImageTemplate(post, asset) {
   return 'unclassified';
 }
 export const catalogTemplates = () => [
+  ...VISUAL_TEMPLATES,
   {id:'boxplot',label:'箱ひげ図・分布',policy:'四分位・中央値・外れ値の定義と固定入力を照合する。スマホで軸と凡例が読めるようにする。',renderer:null},
   {id:'waterfall',label:'ウォーターフォール',policy:'増減の符号・基準値・累積値を照合する。項目名と増減をスマホ幅で追えるようにする。',renderer:null},
   {id:'radar',label:'レーダーチャート',policy:'各軸の尺度・方向・正規化を照合する。比較対象と軸名を明瞭に示す。',renderer:null},
@@ -34,7 +36,6 @@ export const catalogTemplates = () => [
   {id:'diagram',label:'説明図・関係図',policy:'関係や手順の向き・ラベル・根拠を確認し、スマホ幅で追える量にする。',renderer:null},
   {id:'photo',label:'写真',policy:'被写体・権利・使用目的を確認し、媒体の比率に応じて構図を調整する。',renderer:null},
   {id:'logo-icon',label:'ロゴ・アイコン',policy:'正規の素材と使用条件を確認する。縮小時の判別性と背景とのコントラストを確認する。',renderer:null},
-  ...CATALOGS.filter(c=>c.key!=='unknown').map(c=>({id:SVG_TEMPLATE[c.key],label:c.label,policy:'既存SVGカタログの '+c.desc+' を使用する。固定入力・単位・年を維持し、原寸と320pxで文字と凡例を確認する。',renderer:'packages/svg-builder/src/'})),
   {id:'ogp',label:'OGP・タイトル画像',policy:'共有時にタイトルと主題が読める構図にする。生成manifestと背景の根拠を保持する。',renderer:'apps/web/scripts/data/image-generator-registry.ts'},
   {id:'link-card',label:'リンクカード',policy:'使用箇所の比率に合わせ、light/darkの両方でタイトルと主題を確認する。',renderer:'apps/web/scripts/lib/blog-thumbnail-render.ts'},
   {id:'pref-silhouette',label:'正確な県の輪郭',policy:'県コードと地理データを照合し、媒体別の比率を維持する。',renderer:'apps/web/scripts/lib/pref-silhouette-render.ts'},

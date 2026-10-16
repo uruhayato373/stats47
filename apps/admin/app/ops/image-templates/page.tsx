@@ -3,6 +3,7 @@ import { qualityOverview } from '@/lib/server/content-quality';
 import { templateSamplePool } from '@/lib/media-template-examples';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { taxonomyQuery } from '../../../../../.claude/scripts/media/lib/taxonomy.mjs';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: '型の見本 — stats47 admin' };
@@ -10,10 +11,21 @@ export const metadata = { title: '型の見本 — stats47 admin' };
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ template?: string }>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  if ((await searchParams).template === 'unclassified')
+  const raw = await searchParams;
+  const query = taxonomyQuery(raw);
+  if (query.template === 'unclassified' || query.queue === 'classification')
     redirect('/ops/image-library?queue=classification');
+  if (JSON.stringify(raw) !== JSON.stringify(query))
+    redirect(
+      '/ops/image-templates?' +
+        new URLSearchParams(
+          Object.entries(query).filter(
+            (entry): entry is [string, string] => typeof entry[1] === 'string'
+          )
+        )
+    );
   const { images, templates, classificationSummary } = qualityOverview();
   return (
     <div className="flex h-[calc(100dvh-6rem)] min-h-[520px] flex-col gap-3 md:h-[calc(100dvh-4rem)]">

@@ -211,6 +211,31 @@
       "additionalProperties": false,
       "required": ["role", "basis", "reason", "updatedAt"],
       "properties": {
+        "purpose": {
+          "enum": [
+            "ranking",
+            "comparison",
+            "trend",
+            "composition",
+            "relationship",
+            "distribution",
+            "explanation",
+            "navigation",
+            "reference",
+            "undecided"
+          ]
+        },
+        "selection": {
+          "enum": [
+            "top-bottom",
+            "all-prefectures",
+            "selected",
+            "series",
+            "complete",
+            "na",
+            "undecided"
+          ]
+        },
         "role": {
           "enum": [
             "chart",

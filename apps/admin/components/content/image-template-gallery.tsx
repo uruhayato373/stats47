@@ -1,4 +1,8 @@
 'use client';
+import {
+  IMAGE_PURPOSES,
+  IMAGE_SELECTIONS,
+} from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -15,6 +19,7 @@ import type {
 import {
   channelExamples,
   channelRatios,
+  sampleCountKey,
   exampleDimensions,
   MEDIA_CHANNELS,
   type TemplateExample,
@@ -183,6 +188,10 @@ function ExamplePreview({
             {example.state === 'existing'
               ? example.image.format?.toUpperCase()
               : '候補画像'}
+          </p>
+          <p className="text-console-muted">
+            {IMAGE_PURPOSES[example.image.classification.purpose]} ·{' '}
+            {IMAGE_SELECTIONS[example.image.classification.selection]}
           </p>
           <p className="line-clamp-2" title={example.image.title}>
             {example.image.title || example.image.owner}
@@ -410,7 +419,14 @@ function TemplateCard({
           ))}
         </div>
         <Button asChild variant="outline" size="sm">
-          <Link href={mediaUrl('images', { template: template.id, returnTo })}>
+          <Link
+            href={mediaUrl('images', {
+              template: template.id,
+              purpose: params.get('purpose') ?? '',
+              selection: params.get('selection') ?? '',
+              returnTo,
+            })}
+          >
             この型の全画像 · {count}件
           </Link>
         </Button>
@@ -504,6 +520,8 @@ export function TemplateGallery({
   const [drafts, setDrafts] = useState<Record<string, PolicyDraft>>({});
   const [listOpen, setListOpen] = useState(false);
   const query = params.get('q') ?? '';
+  const purpose = params.get('purpose') ?? '';
+  const selection = params.get('selection') ?? '';
   const coverage = params.get('coverage') ?? 'all';
   const onlyCandidates = params.get('candidates') === '1';
   const dirtyCount = templates.filter((t) => {
@@ -556,6 +574,11 @@ export function TemplateGallery({
   const groups = useMemo(() => {
     const byType = new Map<string, ImageView[]>();
     for (const image of images) {
+      if (
+        (purpose && image.classification.purpose !== purpose) ||
+        (selection && image.classification.selection !== selection)
+      )
+        continue;
       const group = byType.get(image.templateId) ?? [];
       group.push(image);
       byType.set(image.templateId, group);
@@ -570,7 +593,7 @@ export function TemplateGallery({
         return {
           template,
           images: group,
-          count: counts[template.id] ?? 0,
+          count: counts[sampleCountKey(template.id, purpose, selection)] ?? 0,
           available,
           mediaCount: available.filter((channel) => channel !== 'web').length,
           hasCandidate: available.some((channel) =>
@@ -579,9 +602,10 @@ export function TemplateGallery({
         };
       })
       .sort((a, b) => Number(b.hasCandidate) - Number(a.hasCandidate));
-  }, [templates, images, counts]);
+  }, [templates, images, counts, purpose, selection]);
   const shown = groups.filter(
     (g) =>
+      (!(purpose || selection) || g.count > 0) &&
       (!onlyCandidates || g.hasCandidate) &&
       (coverage === 'all' ||
         (coverage === 'complete'
@@ -633,6 +657,9 @@ export function TemplateGallery({
       aria-label="型の基本形を確認"
     >
       <MediaWorkspaceNav active="templates" template={selected?.template.id} />
+      <p className="shrink-0 text-sm text-console-muted">
+        型は見た目、目的は伝える内容です。同じ型をnote・X・Instagramの比率で見比べます。
+      </p>
       <div
         className="shrink-0 space-y-2 border-b border-console-border pb-3"
         aria-label="見本の切り替え"
@@ -720,6 +747,32 @@ export function TemplateGallery({
               {channel === 'compare' ? '3媒体を比較' : channels[channel]}
             </Button>
           ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <NativeSelect
+            aria-label="見本の目的"
+            value={purpose}
+            onChange={(e) => updateView({ purpose: e.target.value })}
+          >
+            <option value="">すべての目的</option>
+            {Object.entries(IMAGE_PURPOSES).map(([id, label]) => (
+              <option key={id} value={id}>
+                {label}
+              </option>
+            ))}
+          </NativeSelect>
+          <NativeSelect
+            aria-label="見本の構成"
+            value={selection}
+            onChange={(e) => updateView({ selection: e.target.value })}
+          >
+            <option value="">すべての構成</option>
+            {Object.entries(IMAGE_SELECTIONS).map(([id, label]) => (
+              <option key={id} value={id}>
+                {label}
+              </option>
+            ))}
+          </NativeSelect>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-console-muted">
           <span>

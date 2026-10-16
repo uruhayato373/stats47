@@ -1,4 +1,5 @@
 import type { ImageView } from '../../../.claude/scripts/media/lib/workspace.mjs';
+import { canonicalTemplate } from '../../../.claude/scripts/media/lib/taxonomy.mjs';
 
 export function originalUrl(image: ImageView) {
   if (image.kind === 'cover') return image.coverUrl ?? null;
@@ -26,15 +27,24 @@ export interface TemplateExample {
 /** Send only the visible sample pool; full ledgers stay on the library page. */
 export function templateSamplePool(images: ImageView[]) {
   const groups = new Map<string, ImageView[]>();
-  for (const image of images) {
-    const group = groups.get(image.templateId) ?? [];
-    group.push(image);
-    groups.set(image.templateId, group);
-  }
   const counts: Record<string, number> = {};
+  for (const image of images) {
+    counts[image.templateId] = (counts[image.templateId] ?? 0) + 1;
+    for (const purpose of new Set(['', image.classification?.purpose ?? ''])) {
+      for (const selection of new Set([
+        '',
+        image.classification?.selection ?? '',
+      ])) {
+        const key = sampleCountKey(image.templateId, purpose, selection);
+        counts[key] = (counts[key] ?? 0) + 1;
+        const group = groups.get(key) ?? [];
+        group.push(image);
+        groups.set(key, group);
+      }
+    }
+  }
   const samples = new Map<string, ImageView>();
-  for (const [id, group] of groups) {
-    counts[id] = group.length;
+  for (const group of groups.values()) {
     for (const channel of [...MEDIA_CHANNELS, 'web']) {
       for (const ratio of ['', ...channelRatios(group, channel)]) {
         for (const example of channelExamples(group, channel, ratio)) {
@@ -45,14 +55,9 @@ export function templateSamplePool(images: ImageView[]) {
   }
   return { images: [...samples.values()], counts };
 }
+export const sampleCountKey = (id: string, purpose = '', selection = '') =>
+  `${id}:${purpose}:${selection}`;
 const order = { approved: 0, candidate: 1, stale: 2, existing: 3 };
-
-// Legacy sample overrides: remove when NOTE-ARTICLE-QUALITY-PILOT-01 separates process timelines and chart types.
-// Until then, use explicit statistical examples for these broad groups.
-const referenceImages: Record<string, string[]> = {
-  'time-series': ['IMG-d28cb325765185d2707d5a1b'],
-  household: ['IMG-bfce0322b0e9e684edcd2018', 'IMG-0ac68685cae114fcd8a29bbd'],
-};
 
 /** Use actual ledger assets; a displayed example never implies template approval. */
 export function templateExamples(
@@ -63,6 +68,7 @@ export function templateExamples(
     .flatMap((image): TemplateExample[] => {
       if (
         image.templateId === 'unclassified' ||
+        canonicalTemplate(image.templateId) !== image.templateId ||
         (image.kind === 'cover' && image.templateId !== 'note-cover') ||
         ['pending', 'stale'].includes(image.classification?.status)
       )
@@ -71,15 +77,8 @@ export function templateExamples(
       const candidate =
         image.kind !== 'cover' &&
         image.candidate &&
+        image.candidateMatches &&
         image.candidate.review?.status !== 'needs-revision';
-      const references = referenceImages[image.templateId];
-      if (
-        !candidate &&
-        image.channel === 'note' &&
-        references &&
-        !references.includes(image.id)
-      )
-        return [];
       const src = candidate ? candidateUrl(image) : originalUrl(image);
       if (!src) return [];
       return [
@@ -99,6 +98,8 @@ export function templateExamples(
     .sort(
       (a, b) =>
         order[a.state] - order[b.state] ||
+        Number(b.image.classification?.status === 'confirmed') -
+          Number(a.image.classification?.status === 'confirmed') ||
         Number(!!b.image.original?.key || !!b.image.original?.path) -
           Number(!!a.image.original?.key || !!a.image.original?.path) ||
         Number(!!b.image.original?.sha256) -
@@ -127,6 +128,7 @@ export type MediaChannel = (typeof MEDIA_CHANNELS)[number];
 export function exampleDimensions(
   image: ImageView,
   candidate = !!image.candidate &&
+    image.candidateMatches &&
     image.candidate.review?.status !== 'needs-revision'
 ) {
   const box = image.viewBox

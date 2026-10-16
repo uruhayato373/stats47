@@ -19,7 +19,7 @@ test('topic and generic image names do not invent a chart type', () => {
     ['boxplot.png', 'boxplot'],
     ['infographic-1-model-radar.svg', 'radar'],
     ['infographic-2-cost-pie.png', 'pie'],
-    ['table-1.svg', 'svg-table'],
+    ['table-1.svg', 'table'],
   ])
     assert.equal(filenameTemplate(file), type);
   assert.equal(
@@ -58,7 +58,7 @@ test('manual decisions survive heuristics but become stale on new evidence', () 
     classification: {
       role: 'diagram',
       basis,
-      reason: '実画像で関係図と確認',
+      reason: '実画像で関係図と確認', purpose:'explanation', selection:'na',
       updatedAt: '2026-10-16',
     },
   };
@@ -71,7 +71,7 @@ test('manual decisions survive heuristics but become stale on new evidence', () 
 });
 test('current-image review does not imply that missing numeric inputs are preserved', () => {
   const image = {
-    classification: classify({ templateId: 'ranking', origin: 'contract' }),
+    classification: classify({ templateId: 'bar', origin: 'contract' }),
     original: { sha256: basis },
     inputFiles: [{ name: 'article.md', role: 'article', sha256: basis }],
     policy: '',

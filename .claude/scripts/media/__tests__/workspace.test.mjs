@@ -12,23 +12,23 @@ import { roleForTemplate } from '../lib/classification.mjs';
 import { saveImagePolicy, assessImage } from '../lib/workspace.mjs';
 
 test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
- assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'ranking');
+ assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'unclassified');
  assert.equal(snsImageTemplate({template:'number'},{width:1080,height:1350}),'unclassified');
- assert.equal(snsImageTemplate({template:'correlation-carousel'},{source:'slide-2-scatter-1080x1350.png'}),'correlation');
+ assert.equal(snsImageTemplate({template:'correlation-carousel'},{source:'slide-2-scatter-1080x1350.png'}),'scatter');
  for(const template of ['ranking','household-receipt','rank-routes','buzz-map']) {
   assert.equal(snsImageTemplate({template},{source:'slide-1-cover-1080x1350.png'}),'title-card');
   assert.equal(snsImageTemplate({template},{source:'slide-3-source-1080x1350.png'}),'source-card');
  }
  assert.equal(snsImageTemplate({template:'tile-change'},{source:'slide-2-detail.png'}),'time-series');
  assert.equal(snsImageTemplate({template:'household-receipt'},{source:'slide-2-detail.png'}),'household');
- assert.equal(snsImageTemplate({template:'ranking'},{source:'choropleth-map-1200x630.png'}),'map');
+ assert.equal(snsImageTemplate({template:'ranking'},{source:'choropleth-map-1200x630.png'}),'choropleth');
 });
 
 test('SNS inventory carries recorded dimensions and keeps manual template ownership',t=>{
- const root=fixture(t),image=imageLibrary(root).images.find(i=>i.channel==='instagram'&&i.templateId==='correlation');
+ const root=fixture(t),image=imageLibrary(root).images.find(i=>i.channel==='instagram'&&i.templateId==='scatter');
  assert.ok(image);assert.equal(image.width,1080);assert.equal(image.height,1350);
- saveImagePlan(root,image.id,image.revision,{templateId:'procedure',policy:'人が確認した割り当て',role:'diagram',reason:'手順の図と確認'});
- assert.equal(imageLibrary(root).images.find(i=>i.id===image.id).templateId,'procedure');
+ saveImagePlan(root,image.id,image.revision,{templateId:'diagram',policy:'人が確認した割り当て',role:'diagram',reason:'手順の図と確認',purpose:'explanation',selection:'na'});
+ assert.equal(imageLibrary(root).images.find(i=>i.id===image.id).templateId,'diagram');
 });
 
 function fixture(t){
@@ -45,8 +45,8 @@ function candidate(image){
  storage:{provider:'r2-private',bucket:'stats47-private',key:candidateKey(imageSha,'png'),sha256:imageSha,bytes:5},
  input:{provider:'r2-private',bucket:'stats47-private',key:inputKey(inputSha),sha256:inputSha,bytes:5},width:1200,height:630,createdAt:'2026-10-16T00:00:00Z',review:null};
 }
-function confirmed(root,image,type=image.templateId==='unclassified'?'ranking':image.templateId){
- saveImagePlan(root,image.id,image.revision,{templateId:type,policy:image.policy,role:roleForTemplate(type),reason:'試験用固定画像の型を照合'});
+function confirmed(root,image,type=image.templateId==='unclassified'?'bar':image.templateId){
+ saveImagePlan(root,image.id,image.revision,{templateId:type,policy:image.policy,role:roleForTemplate(type),reason:'試験用固定画像の型を照合',purpose:'ranking',selection:'top-bottom'});
  return imageLibrary(root).images.find(i=>i.id===image.id);
 }
 test('all note records are visible including unavailable bodies; metrics do not invalidate reviews',t=>{
@@ -130,7 +130,7 @@ test('web and SVG catalog share image review, inputs and cross-page usages',t=>{
 });
 
 test('existing SVG catalog defaults are versioned in the shared policy ledger',t=>{
- const root=fixture(t),template=readTemplates(root).templates.find(x=>x.id==='svg-scatter');
+ const root=fixture(t),template=readTemplates(root).templates.find(x=>x.id==='scatter');
  saveTemplate(root,template.id,sha(template),{policy:'文字の重なりを確認する',profiles:template.profiles});
  const next=readTemplates(root).templates.find(x=>x.id===template.id);
  assert.equal(next.version,template.version+1);
@@ -179,7 +179,7 @@ test('classification persists, records history and invalidates only when origina
  let image=confirmed(root,before,'diagram');
  assert.equal(image.classification.status,'confirmed');
  assert.throws(()=>saveImagePlan(root,image.id,before.revision,{templateId:'ranking',policy:'',role:'chart',reason:'確認'}),/再読込/);
- image=confirmed(root,image,'ranking');
+ image=confirmed(root,image,'bar');
  assert.equal(image.record.classificationHistory.length,1);
  assert.equal(image.record.classificationHistory[0].templateId,'diagram');
  const file=path.join(root,'data/sns/posts.json'),posts=JSON.parse(fs.readFileSync(file));
@@ -198,12 +198,12 @@ test('pending images can record plans, but unknown types and unconfirmed approva
  image=imageLibrary(root).images.find(i=>i.id===image.id);
  assert.ok(image.policy.includes('回収'));assert.equal(image.classification.status,'pending');
  assert.throws(()=>saveImagePlan(root,image.id,image.revision,{templateId:'made-up',role:'chart',policy:'',reason:'x'}),/不正/);
- assert.throws(()=>saveImagePlan(root,image.id,image.revision,{templateId:'map',role:'title',policy:'',reason:'x'}),/一致/);
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{templateId:'choropleth',role:'title',policy:'',reason:'x'}),/一致/);
  registerCandidate(root,image.id,image.revision,candidate(image));image=imageLibrary(root).images.find(i=>i.id===image.id);
  assert.throws(()=>reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'確認',original:true,mobile:true,data:true}),/分類/);
 });
 test('maintaining a good existing image needs no new candidate; policy changes reopen review',t=>{
- const root=fixture(t);let image=confirmed(root,imageLibrary(root).images.find(i=>i.original?.sha256&&i.kind!=='cover'),'ranking');
+ const root=fixture(t);let image=confirmed(root,imageLibrary(root).images.find(i=>i.original?.sha256&&i.kind!=='cover'),'bar');
  assessImage(root,image.id,image.revision,{status:'pass',reason:'原寸・320pxで内容を照合',original:true,mobile:true,data:true});
  image=imageLibrary(root).images.find(i=>i.id===image.id);
  assert.equal(image.assessmentMatches,true);assert.ok(image.tasks.includes('kept'));assert.ok(!image.tasks.includes('candidate'));
@@ -217,4 +217,20 @@ test('all covers route to the canonical ledger, and cover policies cannot be sav
  assert.ok(covers.every(i=>i.templateId==='note-cover'&&i.classification.role==='title'&&i.tasks.join()==='cover'&&i.coverManagement));
  for(const id of ['note-cover','unclassified'])assert.throws(()=>saveTemplate(root,id,'x',{policy:'x',profiles:{}}),/制作画面/);
  assert.equal(Object.values(library.classificationSummary.states).reduce((a,b)=>a+b),library.images.length);
+});
+
+test('purpose and selection are validated, preserved in history and invalidate earlier candidate approval', t=>{
+ const root=fixture(t);let image=confirmed(root,imageLibrary(root).images.find(i=>i.original?.sha256&&i.kind!=='cover'),'table');
+ const plan={templateId:'table',role:'table',reason:'行列で数値を比較する',purpose:'ranking',selection:'top-bottom',policy:image.policy};
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{...plan,purpose:'made-up'}),/目的と構成/);
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{...plan,templateId:'ranking'}),/不正/);
+ registerCandidate(root,image.id,image.revision,candidate(image));image=imageLibrary(root).images.find(i=>i.id===image.id);
+ reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'確認',original:true,mobile:true,data:true});
+ image=imageLibrary(root).images.find(i=>i.id===image.id);const oldCandidate=image.candidate;
+ saveImagePlan(root,image.id,image.revision,{...plan,selection:'all-prefectures'});
+ const changed=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.equal(changed.candidateMatches,false);assert.equal(changed.approved,false);
+ assert.deepEqual(changed.candidate,oldCandidate);
+ assert.equal(changed.record.classificationHistory.at(-1).selection,'top-bottom');
+ assert.equal(changed.classification.selection,'all-prefectures');
 });

@@ -4,13 +4,14 @@ import path from 'node:path';
 import { ROOT,FILES,readQuality,readTemplates,sourceItems,imageLibrary,safeName } from './lib/workspace.mjs';
 import { readWebInventory,publicUrlAllowed } from './lib/web-inventory.mjs';
 import { auditClassification, IMAGE_ROLES } from './lib/classification.mjs';
+import { canonicalTemplate, RETIRED_TEMPLATES, IMAGE_PURPOSES, IMAGE_SELECTIONS } from './lib/taxonomy.mjs';
 import schema from '../../../data/content-operations/quality.schema.json' with {type:'json'};
 const quality=readQuality(ROOT),templates=readTemplates(ROOT),items=sourceItems(ROOT),images=imageLibrary(ROOT).images;
 const owners=new Set(items.map(i=>i.id)),ids=new Set(images.map(i=>i.id)),types=new Set(templates.templates.map(t=>t.id));
 if(owners.size!==items.length||ids.size!==images.length)throw Error('Duplicate owner or image ID');
 const web=readWebInventory(ROOT);
 for(const row of web.images){
-  if(!owners.has(row.owner)||!types.has(row.templateId))throw Error('Unresolved web image');
+  if(!owners.has(row.owner)||!types.has(canonicalTemplate(row.templateId)))throw Error('Unresolved web image');
   for(const ref of [row.original,...row.inputFiles]){
     if(ref.key&&!safeName(ref.key))throw Error('Unsafe web key');
     if(ref.url&&ref.provider!=='external'&&!publicUrlAllowed(ref.url))throw Error('Unsafe web URL');
@@ -21,9 +22,12 @@ for(const template of templates.templates)if(template.renderer&&(!safeName(templ
 for(const id of Object.keys(quality.reviews))if(!owners.has(id))throw Error('Orphan review: '+id);
 for(const [id,record]of Object.entries(quality.images)){
   if(!ids.has(id))throw Error('Orphan image: '+id);
-  if(!types.has(record.templateId))throw Error('Unknown template: '+id);
-  for(const old of record.classificationHistory??[])if(!old.templateId||!types.has(old.templateId))throw Error('Unknown classification history: '+id);
+  if(!types.has(canonicalTemplate(record.templateId)))throw Error('Unknown template: '+id);
+  for(const old of record.classificationHistory??[])if(!old.templateId||(!types.has(old.templateId)&&!RETIRED_TEMPLATES.includes(old.templateId)))throw Error('Unknown classification history: '+id);
 }
+if(templates.templates.some(t=>RETIRED_TEMPLATES.includes(t.id)))throw Error('Retired visual type returned');
+for(const [field,values] of [['purpose',IMAGE_PURPOSES],['selection',IMAGE_SELECTIONS]])
+  if(JSON.stringify(Object.keys(values).sort())!==JSON.stringify([...schema.definitions.classification.properties[field].enum].sort()))throw Error('Classification schema drift: '+field);
 const roles=Object.keys(IMAGE_ROLES).filter(r=>r!=='unresolved').sort();
 if(JSON.stringify(roles)!==JSON.stringify([...schema.definitions.classification.properties.role.enum].sort()))throw Error('Classification schema/role drift');
 const classification=auditClassification(images,templates.templates);

@@ -205,16 +205,26 @@
         }
       ],
       "candidateId": "f01b9e30608b7ccacbb835410f7ac388e9a0c2b60f425129cb553e465ad0f87c",
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "[MOBILE-PILOT-01] 47県の横長グラフから説明用の上位5県・下位5県の縦積みへ。全47県の原値は固定入力に保存し、比較対象を明記。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
       "approvedId": null,
       "classification": {
         "role": "chart",
         "basis": "b2406d2311b9b49a669632fbf23695b55278681463614f7c6749bd1a048cbbc9",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。47県を値順に並べた縦棒と全国平均の破線で比較しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:53.549Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。47県を値順に並べた縦棒と全国平均の破線で比較しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.030Z",
+        "purpose": "ranking",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": []
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "b2406d2311b9b49a669632fbf23695b55278681463614f7c6749bd1a048cbbc9",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。47県を値順に並べた縦棒と全国平均の破線で比較しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:53.549Z"
+        }
+      ]
     },
     "IMG-310dc9fdfc3f9841f4227fc8": {
       "revisions": [
@@ -264,16 +274,26 @@
         }
       ],
       "candidateId": "0417f9be57369739453fe3b1577d157e86d13c31087a7e3e0b935a37c0c904c4",
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "[MOBILE-PILOT-01] 上位5県・下位5県の左右2列を縦1列へ。順位・県名・値と単位を大きくし、上位下位で同じ値の尺度を使用。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
       "approvedId": null,
       "classification": {
         "role": "chart",
         "basis": "eb585aa0d9520119f1cc147d5390b76e53a49b45ff1818b75c59a9c579961387",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:03.060Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": []
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "eb585aa0d9520119f1cc147d5390b76e53a49b45ff1818b75c59a9c579961387",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:03.060Z"
+        }
+      ]
     },
     "IMG-b853d348f90285971268e44e": {
       "revisions": [
@@ -323,16 +343,26 @@
         }
       ],
       "candidateId": "87d7d44a0f5a843a96f4621e38b66276895e6587ad2505cfd2768a2c7b526f89",
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "[MOBILE-PILOT-01] 地理形状を維持して地図領域を拡大。沖縄を別枠表示し、大きな最小・最大値付き連続凡例と最大・最小県を付記。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
       "approvedId": null,
       "classification": {
         "role": "chart",
         "basis": "e241c022b3702fe9ca9e1f714e9fcc2bea4e39a92eaf6a07b052c41b1b1f9c2d",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:54.193Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": []
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "e241c022b3702fe9ca9e1f714e9fcc2bea4e39a92eaf6a07b052c41b1b1f9c2d",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:54.193Z"
+        }
+      ]
     },
     "IMG-b9d9f58054da60195ceb4680": {
       "revisions": [
@@ -382,16 +412,26 @@
         }
       ],
       "candidateId": "2ef170c2714ab3c82d669451dd8d6743ce70e1c34382fc3951f0be95c52b5262",
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "[MOBILE-PILOT-01] 全47県の原値を保ち、大きな連続凡例と最大・最小県を追加。沖縄は別枠、全県共通の色尺度。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
       "approvedId": null,
       "classification": {
         "role": "chart",
         "basis": "6006083217a2d6fccb6dc1046e9978e22327a599d20e14ea1e707cf565d162f8",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:03.665Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": []
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "6006083217a2d6fccb6dc1046e9978e22327a599d20e14ea1e707cf565d162f8",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:03.665Z"
+        }
+      ]
     },
     "IMG-f48279d9bbf68b0a6ff34896": {
       "revisions": [
@@ -505,10 +545,20 @@
       "classification": {
         "role": "chart",
         "basis": "4174dac1e13fec825b1c3b15f75c61250eb2989c8a52c69d951fcdb67a872c3d",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:53.059Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "4174dac1e13fec825b1c3b15f75c61250eb2989c8a52c69d951fcdb67a872c3d",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:53.059Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-94a0f89d6b63cc51fcd8f506": {
@@ -519,38 +569,68 @@
       "classification": {
         "role": "chart",
         "basis": "8f43e5a478500a8ef4d444ea38ef371e6981b1a854fe8e1b02f7c7f304f5fefe",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:54.831Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "8f43e5a478500a8ef4d444ea38ef371e6981b1a854fe8e1b02f7c7f304f5fefe",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:54.831Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-4610a7a9467847c7ea2975fb": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "213c031e20c73bc27e31d72c89462e88c9a54f9cb4baec485043102464a90ee2",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:55.410Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "213c031e20c73bc27e31d72c89462e88c9a54f9cb4baec485043102464a90ee2",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:55.410Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-c0030b9ba4fb23947c0b1c1c": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "地図を主役にして県境と小さな地域を読める面積を確保し、沖縄などの離島は別枠を検討する。色の基準が値か順位かを凡例に明示し、上位・下位の補助一覧は縮小後に確認する。年・単位・色尺度を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "1b0a90479b6435cd7cd87f2b80ebeff8b0ea8a8e91b41d0a12b964c0a51164ee",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:56.022Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "1b0a90479b6435cd7cd87f2b80ebeff8b0ea8a8e91b41d0a12b964c0a51164ee",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:56.022Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-69f4626fc4ae51e2aaa2ee38": {
@@ -561,38 +641,68 @@
       "classification": {
         "role": "chart",
         "basis": "e86150591291bdab3f7ece24cc94f1d54dd229eca698d70ee52c28f205534e3f",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:56.536Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "e86150591291bdab3f7ece24cc94f1d54dd229eca698d70ee52c28f205534e3f",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:56.536Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-3af296c9a9e94e7cc32192ad": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "44d594a83c29214959be89623306913199e712317d6f49b148b2471b81088bc9",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:57.223Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "44d594a83c29214959be89623306913199e712317d6f49b148b2471b81088bc9",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:57.223Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-075643298de8103e79dc7796": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "地図を主役にして県境と小さな地域を読める面積を確保し、沖縄などの離島は別枠を検討する。色の基準が値か順位かを凡例に明示し、上位・下位の補助一覧は縮小後に確認する。年・単位・色尺度を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "c8983dd88026aefc174cb2637fa18ed89f9c1aca7beaf12966a4126067e15e54",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:57.859Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "c8983dd88026aefc174cb2637fa18ed89f9c1aca7beaf12966a4126067e15e54",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:57.859Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-9471a61abb13ae13bc914eb2": {
@@ -603,38 +713,68 @@
       "classification": {
         "role": "chart",
         "basis": "768280d434772650f3cd497ada01016e245fa3c7fea9131e6482bca43c3dc294",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:58.492Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "768280d434772650f3cd497ada01016e245fa3c7fea9131e6482bca43c3dc294",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:58.492Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-83ae83b4ae770ac76a199e51": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "c0867f89d3cc4763d34e9491b68c4404b660f9c4ef1b1d0afc21aa748c9e9775",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:59.267Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "c0867f89d3cc4763d34e9491b68c4404b660f9c4ef1b1d0afc21aa748c9e9775",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:59.267Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-6dc66a25a0eff9763fef27a2": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "地図を主役にして県境と小さな地域を読める面積を確保し、沖縄などの離島は別枠を検討する。色の基準が値か順位かを凡例に明示し、上位・下位の補助一覧は縮小後に確認する。年・単位・色尺度を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "4cbbf26d89e1f91a24816a86a7782c3de78834a59dd76e2382f80ba2c050e558",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:39:59.858Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "4cbbf26d89e1f91a24816a86a7782c3de78834a59dd76e2382f80ba2c050e558",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:39:59.858Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-7b8d9a90e9821b60f8b74bfd": {
@@ -645,38 +785,68 @@
       "classification": {
         "role": "chart",
         "basis": "6afb05e33eadcf740e8741b631ded12ba827f58f26ff465dde4c62fbae2a0c77",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:00.499Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "6afb05e33eadcf740e8741b631ded12ba827f58f26ff465dde4c62fbae2a0c77",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:00.499Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-8fbf814fb4542cc68f5efa47": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "793980f2f1801133dd516153dfbda2a71688d3e7c4a3ec63c047c8de1774f5cb",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:01.000Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "793980f2f1801133dd516153dfbda2a71688d3e7c4a3ec63c047c8de1774f5cb",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:01.000Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-3ff3e801b9611133b75a89f2": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "地図を主役にして県境と小さな地域を読める面積を確保し、沖縄などの離島は別枠を検討する。色の基準が値か順位かを凡例に明示し、上位・下位の補助一覧は縮小後に確認する。年・単位・色尺度を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "cd7a7757b8cb2b82c0c72f8d47ee514d482b5a0d14f9c1c0e4fe5c23b7936e73",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:01.672Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "cd7a7757b8cb2b82c0c72f8d47ee514d482b5a0d14f9c1c0e4fe5c23b7936e73",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:01.672Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-9b646fe6a0ee3390053456d2": {
@@ -687,10 +857,20 @@
       "classification": {
         "role": "chart",
         "basis": "dc2c89c7ff00ca98c811c5f79669580a348c9a1c640996b2409be9fb7cc56efa",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:02.372Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "dc2c89c7ff00ca98c811c5f79669580a348c9a1c640996b2409be9fb7cc56efa",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:02.372Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-962d259ba0f839acb53650c6": {
@@ -701,206 +881,356 @@
       "classification": {
         "role": "chart",
         "basis": "6d671cfdc575c9faf7ddb90a5d440acfffd7c94b22d742dcb9c2337ff0e7fc65",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:04.344Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "complete"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "boxplot",
+          "role": "chart",
+          "basis": "6d671cfdc575c9faf7ddb90a5d440acfffd7c94b22d742dcb9c2337ff0e7fc65",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。7地域別に箱・中央線・ひげ・県ごとの点を重ねて分布を比較しているため箱ひげ図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:04.344Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-de83837e39e4d1ce5a506ef4": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "62ec23160bc4466252ea3ad5d1e887a7869c97a0e6dc59ca3c4396e8bc4ca232",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:04.926Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "62ec23160bc4466252ea3ad5d1e887a7869c97a0e6dc59ca3c4396e8bc4ca232",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位5県・下位5県を順位・県名・値・横棒の2列で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:04.926Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-d07901dff668278016c68382": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "map",
+      "templateId": "choropleth",
       "policy": "地図を主役にして県境と小さな地域を読める面積を確保し、沖縄などの離島は別枠を検討する。色の基準が値か順位かを凡例に明示し、上位・下位の補助一覧は縮小後に確認する。年・単位・色尺度を固定入力で照合する。",
       "classification": {
         "role": "chart",
         "basis": "b3abea63436cc3d77eebc7052a51f620cbfb507e0847539f611b5329c4345a77",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:05.628Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "distribution",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "map",
+          "role": "chart",
+          "basis": "b3abea63436cc3d77eebc7052a51f620cbfb507e0847539f611b5329c4345a77",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県の地理的輪郭を色分けした日本地図に上位・下位の補助一覧を添えているため塗り分け地図。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:05.628Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-a77aa5500da720f517948ca4": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上下各10県の20行と細かな軸ラベルを320pxで確認し、必要なら上下別の画像へ分割する。多寡を善悪に見せない青色系を基本とし、省略範囲と棒の基準点を明示する。記事タイトル28.6%と図中全国平均27.8%の対象年・定義の対応を本文と固定入力で確認する。",
       "classification": {
         "role": "chart",
         "basis": "00c8542c8eace89c99732269aa89ce303628810f9ee08e6d9b57a5b2a583dafb",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:06.204Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "00c8542c8eace89c99732269aa89ce303628810f9ee08e6d9b57a5b2a583dafb",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:06.204Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-8ee321637d5392505c6fd9b4": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "bar",
       "policy": "上下各10県の20行と細かな軸ラベルを320pxで確認し、必要なら上下別の画像へ分割する。多寡を善悪に見せない青色系を基本とし、省略範囲と棒の基準点を明示する。記事タイトル28.6%と図中全国平均27.8%の対象年・定義の対応を本文と固定入力で確認する。",
       "classification": {
         "role": "chart",
         "basis": "4e42ac1610e085e39f234461394944b63ef43ace5616613313da08759f2db9ed",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:06.902Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "4e42ac1610e085e39f234461394944b63ef43ace5616613313da08759f2db9ed",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。上位10県・下位10県を順位と横棒で対比しているためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:06.902Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-d28cb325765185d2707d5a1b": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "time-series",
+      "templateId": "line",
       "policy": "年・割合の軸と注記を320pxで読める大きさにする。主要時点だけに注記を絞り、線の形と年ごとの値を固定入力に保つ。記事タイトル28.6%と図中2024年27.8%の対応を本文・対象年・定義で確認する。",
       "classification": {
         "role": "chart",
         "basis": "dbbf122dad4b9bf30174f578fb1be715d45aefc814d707e6f50774334583bfed",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:07.458Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "trend",
+        "selection": "series"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "time-series",
+          "role": "chart",
+          "basis": "dbbf122dad4b9bf30174f578fb1be715d45aefc814d707e6f50774334583bfed",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:07.458Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-d18a9030b8577fa48bd9ddcc": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "time-series",
+      "templateId": "line",
       "policy": "年・割合の軸と注記を320pxで読める大きさにする。主要時点だけに注記を絞り、線の形と年ごとの値を固定入力に保つ。記事タイトル28.6%と図中2024年27.8%の対応を本文・対象年・定義で確認する。",
       "classification": {
         "role": "chart",
         "basis": "b9f2a2cc511003087dc2e661c3f6b1df58e660f63d3806edd2205cbb73b96108",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:08.091Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "trend",
+        "selection": "series"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "time-series",
+          "role": "chart",
+          "basis": "b9f2a2cc511003087dc2e661c3f6b1df58e660f63d3806edd2205cbb73b96108",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。2000〜2024年を横軸に全国平均のエンゲル係数を折れ線で表しているため時系列。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:08.091Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-01d981ada0b889f97d0516b3": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-bar",
+      "templateId": "bar",
       "policy": "費目名・倍率・基準線の説明を拡大する。Q5/Q1、対象年、月額/年額の扱いを明記し、1倍前後の短い棒も読み取れるようにする。色の意味を簡潔に示し、分母と倍率を固定入力で再確認する。",
       "classification": {
         "role": "chart",
         "basis": "58ce83ed3eef0843ff7ff2ee1c2f5a34941be7b0755c02fa1857dd937b9fba6a",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:08.649Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-bar",
+          "role": "chart",
+          "basis": "58ce83ed3eef0843ff7ff2ee1c2f5a34941be7b0755c02fa1857dd937b9fba6a",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:08.649Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-680d548c246fcd95b8012814": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-bar",
+      "templateId": "bar",
       "policy": "費目名・倍率・基準線の説明を拡大する。Q5/Q1、対象年、月額/年額の扱いを明記し、1倍前後の短い棒も読み取れるようにする。色の意味を簡潔に示し、分母と倍率を固定入力で再確認する。",
       "classification": {
         "role": "chart",
         "basis": "b24134c0122b472af31eb35f77b0b1e3c32df9de47abeb7617dc4f3ac6863e99",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:09.271Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-bar",
+          "role": "chart",
+          "basis": "b24134c0122b472af31eb35f77b0b1e3c32df9de47abeb7617dc4f3ac6863e99",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。教育の5費目について所得階層Q5/Q1の支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:09.271Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-d73ba290bcbc7928adeabf43": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-bar",
+      "templateId": "bar",
       "policy": "費目名・倍率・基準線の説明を拡大する。Q5/Q1、対象年、月額/年額の扱いを明記し、1倍前後の短い棒も読み取れるようにする。色の意味を簡潔に示し、分母と倍率を固定入力で再確認する。",
       "classification": {
         "role": "chart",
         "basis": "cb10fcb5753f82cc618b30c06191ef7af2ddd4406c291959d4003440572e7a90",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:09.845Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-bar",
+          "role": "chart",
+          "basis": "cb10fcb5753f82cc618b30c06191ef7af2ddd4406c291959d4003440572e7a90",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:09.845Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-c0a62dbf63ee47a8613fa932": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-bar",
+      "templateId": "bar",
       "policy": "費目名・倍率・基準線の説明を拡大する。Q5/Q1、対象年、月額/年額の扱いを明記し、1倍前後の短い棒も読み取れるようにする。色の意味を簡潔に示し、分母と倍率を固定入力で再確認する。",
       "classification": {
         "role": "chart",
         "basis": "340c3335a51c24e0ada135e91a8fbbf642e91418efc2be3af58e8fbfbf1499c1",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:10.505Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-bar",
+          "role": "chart",
+          "basis": "340c3335a51c24e0ada135e91a8fbbf642e91418efc2be3af58e8fbfbf1499c1",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。9費目の所得階層Q5/Q1支出倍率を横棒で比較しているため費目別棒グラフ。県別ランキングではない。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:10.505Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-3770159c8f7dc6e7bed66f40": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-map",
+      "templateId": "tile-map",
       "policy": "左右2枚のタイルをスマホでは1枚ずつ見られる配置を検討し、県名と色階級の凡例を拡大する。左右の色尺度と比較範囲を明記し、県庁所在市の値か都道府県値かを入力・表記と照合する。",
       "classification": {
         "role": "chart",
         "basis": "4a937d843f62e60b62ef01e28247662f3883942bda3372ba46f9bee0ea181997",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:11.086Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-map",
+          "role": "chart",
+          "basis": "4a937d843f62e60b62ef01e28247662f3883942bda3372ba46f9bee0ea181997",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:11.086Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-d8b235625371acd36f2aa547": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-map",
+      "templateId": "tile-map",
       "policy": "左右2枚のタイルをスマホでは1枚ずつ見られる配置を検討し、県名と色階級の凡例を拡大する。左右の色尺度と比較範囲を明記し、県庁所在市の値か都道府県値かを入力・表記と照合する。",
       "classification": {
         "role": "chart",
         "basis": "cdea9f668d89d419b668355c0fb00cf5900557c840df1df994f447c395212cdc",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:11.746Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "all-prefectures"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-map",
+          "role": "chart",
+          "basis": "cdea9f668d89d419b668355c0fb00cf5900557c840df1df994f447c395212cdc",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。県名入りの矩形タイルを地理的配置に並べ、ビールとワインを左右の色階級で比較しているためタイルマップ。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:11.746Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-72112e48fd6bc78ba01582ce": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-table",
+      "templateId": "table",
       "policy": "品目・地域・年間支出の3列を中心に整理し、9行を320pxでも読める文字サイズにする。各行の帯が共通尺度の数量比較を表すのかを確認し、単なる装飾なら削除する。地域の集計単位と数値・年を照合する。",
       "classification": {
         "role": "table",
         "basis": "47014696cf80871863edef24867b8ed0e734635b4ecce727db24399fa60ccbc3",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:12.299Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-table",
+          "role": "table",
+          "basis": "47014696cf80871863edef24867b8ed0e734635b4ecce727db24399fa60ccbc3",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:12.299Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-f2e18a19967a97d2bf833706": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "svg-table",
+      "templateId": "table",
       "policy": "品目・地域・年間支出の3列を中心に整理し、9行を320pxでも読める文字サイズにする。各行の帯が共通尺度の数量比較を表すのかを確認し、単なる装飾なら削除する。地域の集計単位と数値・年を照合する。",
       "classification": {
         "role": "table",
         "basis": "cde0389a3afd6e251ebb71764bb78bc4b96a4f6bc1b38526f8cf107a6d10fade",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:12.948Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "svg-table",
+          "role": "table",
+          "basis": "cde0389a3afd6e251ebb71764bb78bc4b96a4f6bc1b38526f8cf107a6d10fade",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。品目・全国1位の地域・年間支出を列にそろえた9行の一覧が主で、補助的な帯と注記が付くため数表。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:12.948Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-da34190a6118a704f546d81b": {
@@ -911,10 +1241,20 @@
       "classification": {
         "role": "summary",
         "basis": "02adbb74e24ea770173481f4c282707565443710b2baede42d38e899ce4dc1d0",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:13.491Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "summary-card",
+          "role": "summary",
+          "basis": "02adbb74e24ea770173481f4c282707565443710b2baede42d38e899ce4dc1d0",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:13.491Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-78b8e5524b611f0b2ba0cf47": {
@@ -925,24 +1265,44 @@
       "classification": {
         "role": "summary",
         "basis": "fbfb6e02bbe1862ef47cb00f3b92c2698f132e73b0174a4b17916e41c7c16a25",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:14.162Z"
+        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。 型は見た目、目的・掲載範囲は別項目として整理。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "comparison",
+        "selection": "selected"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "summary-card",
+          "role": "summary",
+          "basis": "fbfb6e02bbe1862ef47cb00f3b92c2698f132e73b0174a4b17916e41c7c16a25",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。清酒・焼酎・ワインの3カードに代表地域・支出額・全国平均比・2位の情報を配置し、要点を抜き出しているため要点カード。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:14.162Z"
+        }
+      ],
       "approvedId": null
     },
     "IMG-3f97289800af0fc31a2d9973": {
       "revisions": [],
       "candidateId": null,
-      "templateId": "ranking",
+      "templateId": "table",
       "policy": "上位・下位の2列をスマホで読みやすい縦1列へ整理し、順位・県名・値・単位を拡大する。値の多寡を善悪に見せない青色系を基本とし、棒を使う場合は共通の尺度を保持する。対象年・対象人口・単位を固定入力で照合する。",
       "classification": {
-        "role": "chart",
+        "role": "table",
         "basis": "d5ab2bb3edd8e1f70015039502f77ffe87d7668b621cbd2b672f13a90a198478",
-        "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。支出の多い5県・少ない5県を順位・県名・金額の2列で示すためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
-        "updatedAt": "2026-10-16T07:40:14.689Z"
+        "reason": "実画像を再確認。順位・県名・金額を行と列で読む上位5県・下位5県の表で、量を表す棒はない。目的はランキング、見た目の型はテーブルへ是正。",
+        "updatedAt": "2026-10-16T08:00:20.033Z",
+        "purpose": "ranking",
+        "selection": "top-bottom"
       },
-      "classificationHistory": [],
+      "classificationHistory": [
+        {
+          "templateId": "ranking",
+          "role": "chart",
+          "basis": "d5ab2bb3edd8e1f70015039502f77ffe87d7668b621cbd2b672f13a90a198478",
+          "reason": "2026-10-16 原本SHA・サイズ照合後に実画像を目視。支出の多い5県・少ない5県を順位・県名・金額の2列で示すためランキング。 分類の確認であり、原典の数値照合・品質合格・公開採用は未判定。",
+          "updatedAt": "2026-10-16T07:40:14.689Z"
+        }
+      ],
       "approvedId": null
     }
   }

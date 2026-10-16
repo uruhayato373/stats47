@@ -55,6 +55,8 @@ const schema = z.discriminatedUnion('action', [
       policy: z.string().max(10000),
       role: z.string().min(1).max(40),
       reason: z.string().trim().min(1).max(5000),
+      purpose: z.string().min(1).max(40),
+      selection: z.string().min(1).max(40),
     })
     .strict(),
   z
@@ -87,6 +89,8 @@ export async function PATCH(
         policy: body.policy,
         role: body.role as import('../../../../../../.claude/scripts/media/lib/classification.mjs').ImageRole,
         reason: body.reason,
+        purpose: body.purpose,
+        selection: body.selection,
       });
     else if (body.action === 'policy')
       saveImagePolicy(projectRoot(), id, body.revision, body.policy);

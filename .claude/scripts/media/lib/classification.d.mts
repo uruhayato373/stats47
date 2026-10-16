@@ -21,8 +21,12 @@ export interface Classification {
   basis: string;
   reason: string;
   updatedAt?: string;
+  purpose: string;
+  selection: string;
 }
 export interface ClassificationDecision {
+  purpose?: string;
+  selection?: string;
   role: ImageRole;
   basis: string;
   reason: string;

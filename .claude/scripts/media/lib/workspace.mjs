@@ -12,6 +12,7 @@ import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { readWebInventory,WEB_INVENTORY } from './web-inventory.mjs';
 import { catalogTemplates, snsImageTemplate } from './catalog.mjs';
+import { RETIRED_TEMPLATES, IMAGE_PURPOSES, IMAGE_SELECTIONS } from './taxonomy.mjs';
 import { CLASSIFIER_VERSION, IMAGE_ROLES, roleForTemplate, resolveClassification, imageTasks, inventoryGaps, classificationSummary } from './classification.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
@@ -48,6 +49,7 @@ export function validateQuality(result) {
 }
 export function readTemplates(root = ROOT) {
   const result = read(root, FILES.templates);
+  result.templates = result.templates.filter(t => !RETIRED_TEMPLATES.includes(t.id));
   for(const template of catalogTemplates())if(!result.templates.some(t=>t.id===template.id))result.templates.push(template);
   if (!validateTemplates(result) ||
       new Set(result.templates.map(t => t.id)).size !== result.templates.length ||
@@ -133,7 +135,7 @@ export function imageLibrary(root = ROOT) {
       origin: ['ogp','card','background'].includes(extra.usage) || extra.templateId === 'pref-silhouette' ? 'contract' : 'catalog'});
     const templateId = classification.templateId;
     const template = templates.find(t => t.id === templateId) ?? templates.find(t => t.id === 'unclassified');
-    const basis = sha([item.basis, original, extra.inputFiles ?? [], extra.generation??null, template, record?.policy ?? '']);
+    const basis = sha([item.basis, original, extra.inputFiles ?? [], extra.generation??null, template, record?.policy ?? '', classification.purpose, classification.selection]);
     const candidate = record?.revisions.find(r => r.id === record.candidateId) ?? null;
     images.push({ ...extra, id, owner, file, title: item.title, channel: item.channel, category: item.category,
       original, templateId, classification, policy: record?.policy ?? '', basis,
@@ -209,8 +211,9 @@ export function saveImagePlan(root, id, expected, plan) {
     if (!Object.hasOwn(IMAGE_ROLES, plan.role) || plan.role === 'unresolved' || typeof plan.reason !== 'string' || !plan.reason.trim() || plan.reason.length > 5000)
       throw new WorkspaceError('画像の役割と分類の確認根拠を入力してください。');
     if (roleForTemplate(plan.templateId) !== plan.role) throw new WorkspaceError('画像の役割と型が一致しません。');
+    if (!Object.hasOwn(IMAGE_PURPOSES, plan.purpose) || !Object.hasOwn(IMAGE_SELECTIONS, plan.selection)) throw new WorkspaceError('画像の目的と構成を指定してください。');
     const previous = data.images[id];
-    const classification = {role:plan.role,basis:current.classification.basis,reason:plan.reason.trim(),updatedAt:new Date().toISOString()};
+    const classification = {role:plan.role,purpose:plan.purpose,selection:plan.selection,basis:current.classification.basis,reason:plan.reason.trim(),updatedAt:new Date().toISOString()};
     data.images[id] = { revisions: [], candidateId: null, ...previous,
       templateId:plan.templateId,policy:plan.policy,classification,
       classificationHistory:[...(previous?.classificationHistory??[]),...(previous?.classification?[{templateId:previous.templateId,...previous.classification}]:[])],
@@ -261,6 +264,7 @@ export function reviewCandidate(root, id, expected, candidateId, review) {
   });
 }
 export function saveTemplate(root, id, expected, next) {
+  if (RETIRED_TEMPLATES.includes(id)) throw new WorkspaceError('旧分類は編集できません。見た目の型を選択してください。');
   if (id === 'unclassified' || id === 'note-cover') throw new WorkspaceError('分類待ちには制作方針を設定できません。noteカバーはカバー制作画面を使用してください。');
   return atomicUpdate(root, FILES.templates, data => {
     let index = data.templates.findIndex(t => t.id === id);

@@ -66,6 +66,8 @@ describe('image classification route uses the shared ledger', () => {
       templateId: 'diagram',
       role: 'diagram',
       reason: '実画像の矢印と手順を確認',
+      purpose: 'explanation',
+      selection: 'na',
       policy: '文字を拡大',
     };
     expect((await patch(image.id, body, 'https://example.com')).status).toBe(

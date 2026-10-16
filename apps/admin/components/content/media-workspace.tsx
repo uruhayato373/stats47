@@ -1,4 +1,8 @@
 'use client';
+import {
+  IMAGE_PURPOSES,
+  IMAGE_SELECTIONS,
+} from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ActualImage } from './media-image';
@@ -382,6 +386,8 @@ function ImageEditor({
 }) {
   const [policy, setPolicy] = useState(image.policy),
     [templateId, setTemplateId] = useState(image.templateId),
+    [purpose, setPurpose] = useState(image.classification.purpose),
+    [selection, setSelection] = useState(image.classification.selection),
     [classificationReason, setClassificationReason] = useState(
       image.record?.classification?.reason ?? ''
     ),
@@ -462,6 +468,15 @@ function ImageEditor({
           </StatusBadge>
           <StatusBadge tone="neutral">
             役割: {IMAGE_ROLES[image.classification.role]}
+          </StatusBadge>
+          <StatusBadge tone="neutral">
+            型: {templates.find((t) => t.id === image.templateId)?.label}
+          </StatusBadge>
+          <StatusBadge tone="neutral">
+            目的: {IMAGE_PURPOSES[image.classification.purpose]}
+          </StatusBadge>
+          <StatusBadge tone="neutral">
+            構成: {IMAGE_SELECTIONS[image.classification.selection]}
           </StatusBadge>
           {image.tasks.map((task) => (
             <StatusBadge key={task} tone="neutral">
@@ -643,6 +658,7 @@ function ImageEditor({
             <span>図・画像の型（確認して割り当てる）</span>
             <NativeSelect
               value={templateId}
+              aria-label="図・画像の型（確認して割り当てる）"
               onChange={(e) => {
                 setTemplateId(e.target.value);
                 onDirty(true);
@@ -663,6 +679,43 @@ function ImageEditor({
           <p className="text-sm">
             選択した型の役割: {IMAGE_ROLES[roleForTemplate(templateId)]}
           </p>
+          <p className="text-sm text-console-muted">
+            棒の長さで比較する画像は棒グラフ、行と列で数値を読む画像はテーブルです。ランキングは目的として記録します。
+          </p>
+          <label className="block space-y-2 text-sm">
+            <span>伝える目的</span>
+            <NativeSelect
+              aria-label="伝える目的"
+              value={purpose}
+              onChange={(e) => {
+                setPurpose(e.target.value);
+                onDirty(true);
+              }}
+            >
+              {Object.entries(IMAGE_PURPOSES).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </NativeSelect>
+          </label>
+          <label className="block space-y-2 text-sm">
+            <span>掲載範囲・構成</span>
+            <NativeSelect
+              aria-label="掲載範囲・構成"
+              value={selection}
+              onChange={(e) => {
+                setSelection(e.target.value);
+                onDirty(true);
+              }}
+            >
+              {Object.entries(IMAGE_SELECTIONS).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </NativeSelect>
+          </label>
           <label className="block space-y-2 text-sm">
             <span>分類を確認した根拠</span>
             <Textarea
@@ -698,6 +751,8 @@ function ImageEditor({
                   policy,
                   role: roleForTemplate(templateId),
                   reason: classificationReason,
+                  purpose,
+                  selection,
                 })
               )
             }
@@ -932,6 +987,8 @@ export function MediaWorkspace({
   initialTemplate = '',
   initialQueue = '',
   initialRole = '',
+  initialPurpose = '',
+  initialSelection = '',
 }: {
   initial: WorkspaceData;
   mode: 'articles' | 'images';
@@ -945,6 +1002,8 @@ export function MediaWorkspace({
   initialTemplate?: string;
   initialQueue?: string;
   initialRole?: string;
+  initialPurpose?: string;
+  initialSelection?: string;
 }) {
   const [data, setData] = useState(initial),
     [q, setQ] = useState(initialQuery),
@@ -958,6 +1017,8 @@ export function MediaWorkspace({
       initialTemplate === 'unclassified' ? 'classification' : initialQueue
     ),
     [role, setRole] = useState(initialRole),
+    [purpose, setPurpose] = useState(initialPurpose),
+    [selection, setSelection] = useState(initialSelection),
     [usage, setUsage] = useState(initialUsage),
     [format, setFormat] = useState(initialFormat),
     [collection, setCollection] = useState(initialCollection),
@@ -983,6 +1044,8 @@ export function MediaWorkspace({
       template,
       queue,
       role,
+      purpose,
+      selection,
       q,
     })) {
       if (value) url.searchParams.set(key, value);
@@ -998,6 +1061,8 @@ export function MediaWorkspace({
     template,
     queue,
     role,
+    purpose,
+    selection,
     q,
   ]);
   useEffect(() => {
@@ -1071,6 +1136,8 @@ export function MediaWorkspace({
       (!template || i.templateId === template) &&
       (!queue || i.tasks.includes(queue)) &&
       (!role || i.classification.role === role) &&
+      (!purpose || i.classification.purpose === purpose) &&
+      (!selection || i.classification.selection === selection) &&
       (!usage || i.usage === usage) &&
       (!format || i.format === format) &&
       (!collection || i.collection === collection) &&
@@ -1249,6 +1316,36 @@ export function MediaWorkspace({
         </NativeSelect>
         {mode === 'images' && (
           <>
+            <NativeSelect
+              aria-label="画像の目的"
+              value={purpose}
+              onChange={(e) => {
+                setPurpose(e.target.value);
+                setPage(0);
+              }}
+            >
+              <option value="">すべての目的</option>
+              {Object.entries(IMAGE_PURPOSES).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </NativeSelect>
+            <NativeSelect
+              aria-label="画像の構成"
+              value={selection}
+              onChange={(e) => {
+                setSelection(e.target.value);
+                setPage(0);
+              }}
+            >
+              <option value="">すべての構成</option>
+              {Object.entries(IMAGE_SELECTIONS).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </NativeSelect>
             <NativeSelect
               aria-label="画像の役割"
               value={role}

@@ -217,6 +217,8 @@ export function saveImagePlan(
     policy: string;
     role: import('./classification.mjs').ImageRole;
     reason: string;
+    purpose: string;
+    selection: string;
   }
 ): void;
 export function saveImagePolicy(

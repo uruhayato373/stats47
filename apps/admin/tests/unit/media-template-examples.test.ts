@@ -11,7 +11,7 @@ import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.
 function image(id: string, patch: Partial<ImageView> = {}): ImageView {
   return {
     id,
-    templateId: 'ranking',
+    templateId: 'bar',
     original: { key: id + '.png', sha256: id },
     ...patch,
   } as ImageView;
@@ -29,11 +29,24 @@ function candidate(id: string, patch: Partial<ImageView> = {}): ImageView {
   });
 }
 describe('template reference images', () => {
-  it('keeps cover originals in their own type and never uses an unreviewed cover candidate',()=>{
-    const cover=image('cover',{kind:'cover',templateId:'note-cover',coverUrl:'/old-cover',coverCandidateUrl:'/new-cover'});
-    const samples=templateExamples([cover]);
-    expect(samples[0].src).toBe('/old-cover');expect(samples[0].state).toBe('existing');
-    expect(templateExamples([image('pending',{templateId:'unclassified'}),image('stale',{classification:{status:'stale'} as ImageView['classification']})])).toEqual([]);
+  it('keeps cover originals in their own type and never uses an unreviewed cover candidate', () => {
+    const cover = image('cover', {
+      kind: 'cover',
+      templateId: 'note-cover',
+      coverUrl: '/old-cover',
+      coverCandidateUrl: '/new-cover',
+    });
+    const samples = templateExamples([cover]);
+    expect(samples[0].src).toBe('/old-cover');
+    expect(samples[0].state).toBe('existing');
+    expect(
+      templateExamples([
+        image('pending', { templateId: 'unclassified' }),
+        image('stale', {
+          classification: { status: 'stale' } as ImageView['classification'],
+        }),
+      ])
+    ).toEqual([]);
   });
   it('keeps every medium/ratio sample and full counts while reducing the browser payload', () => {
     const images = [
@@ -42,10 +55,10 @@ describe('template reference images', () => {
       ),
       image('portrait', { channel: 'x', width: 1080, height: 1350 }),
       candidate('note', { channel: 'note' }),
-      image('web', { templateId: 'svg-scatter', channel: 'web' }),
+      image('web', { templateId: 'scatter', channel: 'web' }),
     ];
     const pool = templateSamplePool(images);
-    expect(pool.counts).toEqual({ ranking: 22, 'svg-scatter': 1 });
+    expect(pool.counts).toMatchObject({ bar: 22, scatter: 1 });
     expect(pool.images.length).toBeLessThan(images.length);
     for (const channel of ['note', 'x', 'web']) {
       for (const ratio of ['', ...channelRatios(images, channel)]) {
@@ -126,14 +139,14 @@ describe('template reference images', () => {
       exampleDimensions(image('invalid', { width: -1, height: 10 }))
     ).toBeNull();
   });
-  it('does not apply note legacy sample pins to SNS images of the same type', () => {
+  it('does not show retired topic categories as visual examples', () => {
     const images = [
       image('x', { templateId: 'household', channel: 'x' }),
       image('ig', { templateId: 'household', channel: 'instagram' }),
       image('unreviewed-note', { templateId: 'household', channel: 'note' }),
     ];
-    expect(channelExamples(images, 'x')).toHaveLength(1);
-    expect(channelExamples(images, 'instagram')).toHaveLength(1);
+    expect(channelExamples(images, 'x')).toHaveLength(0);
+    expect(channelExamples(images, 'instagram')).toHaveLength(0);
     expect(channelExamples(images, 'note')).toHaveLength(0);
   });
   it('puts current candidates before existing images and never calls a stale approval approved', () => {
@@ -147,7 +160,7 @@ describe('template reference images', () => {
     expect(templateExamples(images).map((e) => [e.image.id, e.state])).toEqual([
       ['approved', 'approved'],
       ['trial', 'candidate'],
-      ['stale', 'stale'],
+      ['original', 'existing'],
     ]);
     expect(JSON.stringify(images)).toBe(before);
   });
@@ -190,5 +203,56 @@ describe('template reference images', () => {
     expect(templateExamples(images)[0].src).toBe(
       '/api/media-library/c/file?revision=revision-c'
     );
+  });
+  it('preserves minority purpose/selection samples and does not mix table and bar counts', () => {
+    const images = [
+      ...Array.from({ length: 10 }, (_, n) =>
+        image('bar-' + n, {
+          channel: 'note',
+          classification: {
+            purpose: 'ranking',
+            selection: 'top-bottom',
+            status: 'confirmed',
+          } as ImageView['classification'],
+        })
+      ),
+      image('table', {
+        templateId: 'table',
+        channel: 'note',
+        classification: {
+          purpose: 'ranking',
+          selection: 'top-bottom',
+          status: 'confirmed',
+        } as ImageView['classification'],
+      }),
+      image('comparison', {
+        channel: 'note',
+        classification: {
+          purpose: 'comparison',
+          selection: 'selected',
+          status: 'confirmed',
+        } as ImageView['classification'],
+      }),
+    ];
+    const pool = templateSamplePool(images);
+    expect(pool.counts['bar:ranking:top-bottom']).toBe(10);
+    expect(pool.counts['table:ranking:top-bottom']).toBe(1);
+    expect(pool.images.map((i) => i.id)).toContain('comparison');
+  });
+  it('never displays an old candidate under a newly assigned visual type', () => {
+    const row = candidate('old-chart', {
+      templateId: 'table',
+      candidateMatches: false,
+      width: 1200,
+      height: 630,
+    });
+    row.candidate!.width = 1080;
+    row.candidate!.height = 1350;
+    const example = templateExamples([row])[0];
+    expect(example.state).toBe('existing');
+    expect(example.src).not.toContain('revision=');
+    expect(channelRatios([{ ...row, channel: 'note' }], 'note')).toEqual([
+      '1.90:1',
+    ]);
   });
 });

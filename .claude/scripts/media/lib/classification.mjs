@@ -1,4 +1,10 @@
 /** Shared, deterministic classification and work queues. No caption, size or topic guesses. */
+import {
+  canonicalTemplate,
+  purposeFromEvidence,
+  IMAGE_PURPOSES,
+  IMAGE_SELECTIONS,
+} from './taxonomy.mjs';
 export const CLASSIFIER_VERSION = 1;
 export const IMAGE_ROLES = {
   chart: '統計グラフ',
@@ -50,6 +56,7 @@ const fixedRoles = {
   diagram: 'diagram',
   'svg-findings': 'summary',
   'svg-table': 'table',
+  table: 'table',
   unclassified: 'unresolved',
 };
 export function roleForTemplate(id) {
@@ -83,13 +90,12 @@ export function filenameTemplate(file) {
   for (const id of ['boxplot', 'waterfall', 'radar', 'heatmap', 'sankey'])
     if (new RegExp('(?:^|[-_])' + id + '(?:[-_.]|$)').test(name)) return id;
   if (/(?:^|[-_])(?:pie|donut)(?:[-_.]|$)/.test(name)) return 'pie';
-  if (/^(?:ranking-)?table[-_.]/.test(name)) return 'svg-table';
-  if (/choropleth|tile[-_]?(?:map|grid)|prefecture-map/.test(name))
-    return 'map';
-  if (/scatter|correlation/.test(name)) return 'correlation';
-  if (/timeseries|time-series|trend|line-chart/.test(name))
-    return 'time-series';
-  if (/top[-_]?bottom|ranking|all47|rankings/.test(name)) return 'ranking';
+  if (/^(?:ranking-)?table[-_.]/.test(name)) return 'table';
+  if (/tile[-_]?(?:map|grid)/.test(name)) return 'tile-map';
+  if (/choropleth|prefecture-map/.test(name)) return 'choropleth';
+  if (/scatter/.test(name)) return 'scatter';
+  if (/line-chart/.test(name)) return 'line';
+  if (/(?:^|[-_])bars?(?:[-_.]|$)/.test(name)) return 'bar';
   if (/flowchart|lineage|procedure/.test(name)) return 'diagram';
   // Generic chart-N / image-N and the owner's subject do not establish a chart type.
   return 'unclassified';
@@ -112,32 +118,49 @@ export function resolveClassification({
       status: 'recorded',
       basis,
       reason: 'noteカバー台帳の @cover。制作・採用・公開は同じカバーIDで管理。',
+      purpose: 'explanation',
+      selection: 'na',
     };
   if (record?.classification)
     return {
-      templateId: record.templateId,
-      role: record.classification.role,
+      templateId: canonicalTemplate(record.templateId),
+      role: canonicalTemplate(record.templateId) === record.templateId
+        ? record.classification.role
+        : roleForTemplate(canonicalTemplate(record.templateId)),
       basis,
-      status: record.classification.basis === basis ? 'confirmed' : 'stale',
+      status:
+        canonicalTemplate(record.templateId) !== record.templateId ||
+        !record.classification.purpose ||
+        !record.classification.selection
+          ? 'stale'
+          : record.classification.basis === basis
+            ? 'confirmed'
+            : 'stale',
       reason: record.classification.reason,
       updatedAt: record.classification.updatedAt,
+      purpose:
+        record.classification.purpose ??
+        purposeFromEvidence(record.templateId, source ?? file),
+      selection: record.classification.selection ?? 'undecided',
     };
   const slide = slideTemplate(source ?? file);
   const id =
     slide ??
-    (templateId && templateId !== 'unclassified'
-      ? templateId
+    (templateId && canonicalTemplate(templateId) !== 'unclassified'
+      ? canonicalTemplate(templateId)
       : filenameTemplate(source ?? file));
   if (
     record?.templateId &&
-    record.templateId !== 'unclassified' &&
-    record.templateId !== id
+    canonicalTemplate(record.templateId) !== 'unclassified' &&
+    canonicalTemplate(record.templateId) !== id
   )
     return {
-      templateId: record.templateId,
-      role: roleForTemplate(record.templateId),
+      templateId: canonicalTemplate(record.templateId),
+      role: roleForTemplate(canonicalTemplate(record.templateId)),
       status: 'suggested',
       basis,
+      purpose: purposeFromEvidence(record.templateId, source ?? file),
+      selection: 'undecided',
       reason:
         '既存の改善台帳による指定。元画像に結び付いた分類の確認記録が必要です。',
     };
@@ -152,6 +175,11 @@ export function resolveClassification({
     role: roleForTemplate(id),
     status,
     basis,
+    purpose: purposeFromEvidence(
+      record?.templateId ?? templateId,
+      source ?? file
+    ),
+    selection: 'undecided',
     reason:
       status === 'pending'
         ? '型を特定する記録が不足しています。実画像・生成元を確認して指定してください。'
@@ -279,7 +307,9 @@ export function auditClassification(images, templates) {
       !Object.hasOwn(IMAGE_ROLES, c.role) ||
       !Object.hasOwn(CLASSIFICATION_STATES, c.status) ||
       !/^[a-f0-9]{64}$/.test(c.basis) ||
-      !c.reason?.trim()
+      !c.reason?.trim() ||
+      !Object.hasOwn(IMAGE_PURPOSES, c.purpose) ||
+      !Object.hasOwn(IMAGE_SELECTIONS, c.selection)
     )
       throw Error('Missing classification contract: ' + image.id);
     if (c.role !== roleForTemplate(image.templateId))
