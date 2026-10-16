@@ -25,7 +25,7 @@
 | 守り | ★ データ品質ゲート通過率 | 99.1% (2435/2456) | — | — | ok（監査 2026-10-10・不合格 recipe.unbaked 21） | — |
 | 守り | ★ サイト健全性 | PSI モバイル中央値 75・Workers error 0.1% | — | — | ok | — |
 | 守り | ★ 運用コスト | 閾値違反 24 件・R2 保存 34.152 GB | — | — | ok | — |
-| 守り | ★ 計測の鮮度 | 9/14 | — | — | degraded（欠測・古い・認証切れ: sns, a8(collection_failed), note(report_incomplete), kdp(auth_required), coconala(auth_required)） | `MEASUREMENT-AUTH-RESTORE-01` |
+| 守り | ★ 計測の鮮度 | 10/14 | — | — | degraded（欠測・古い・認証切れ: sns, a8(collection_failed), kdp(auth_required), coconala(auth_required)） | `MEASUREMENT-AUTH-RESTORE-01` |
 
 **施策の配線**: active 8 件（上限 10 件）・KPI 未接続 0 件・`[target:]` なし 5 件
 
