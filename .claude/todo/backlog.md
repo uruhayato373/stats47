@@ -392,12 +392,12 @@ updated: 2026-10-06
 - **停止条件**: 期間を表示だけで直して元Observationを残さない。欠測を0や確定済みとして埋めない。過去の効果判定を根拠なしに上書きしない。
 - **完了条件**: 同じ8,407表示・17クリックの期間が09-11〜10-08で一致し、7日/28日・取得遅延・異期間混在を区別する回帰テストが通る。再生成後の候補と元summaryの期間整合を確認する。
 
-### [GSC-ROBOTS-INDEXED-01] 公開ダウンロードの検索除外と廃止OGPの是正を本番反映する
+### [GSC-ROBOTS-INDEXED-01] 公開ダウンロード・廃止OGPのGoogle再取得と除外を確認する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
 
-- **GSC案24 / P2（実装済み・本番反映待ち）**: robotsブロック済み登録584件のうち576件は公開CSV/JSON、8件はOGP。公開ダウンロードに限定してcrawlを許可しX-Robots-Tag:noindexを読ませる。公開画像と廃止URLのHTTP応答も読めるようにする。
+- **GSC案24 / P2（本番HTTP確認済み・Google検証中）**: robotsブロック済み登録584件のうち576件は公開CSV/JSON、8件はOGP。公開ダウンロードに限定してcrawlを許可しX-Robots-Tag:noindexを読ませる。公開画像と廃止URLのHTTP応答も読めるようにする。
 - **owner / 入力**: gsc-analyst・site-ux-manager。対象・内容確認・ローカル検証は `data/gsc/ui-audits/2026-10-16-remediation.json`。変更はrobots.ts・download route・middleware、恒久方針はcoding-standards.md。
-- **次 / 順序**: 本番反映の明示承認後、まとまりで1回deploy→robots/APIのnoindex・CSV/JSONのダウンロード・現役テーマ画像200・旧県OGP410を本番で検査→必要なら変更URLだけCDN purge→GSCの修正検証と再クロール後の除外判定を観測する。
+- **次 / 順序**: PR #1139をmainへ反映し、本番31 URLは全件期待どおり。デプロイ・purge・post-deploy smokeの最終結果は `data/gsc/ui-audits/2026-10-16-remediation.json` のreleaseを参照。GSCのrobots.txt再取得リクエストは受理済み、584件の警告は10-16に「検証: 開始」。10-23にGoogleの再取得とnoindex/404/410による除外を確認する。Google側の検証完了前にカードを閉じない。
 - **停止条件**: API全体は開放しない。ダウンロード/画像機能を壊さない。Googleがnoindex/404/410を取得する前に解消としない。ローカル実装を本番反映済みとしない。
 - **完了条件**: 本番で意図したHTTP/robotsが配信され、対象URLのGoogle再取得でダウンロードの検索除外・廃止画像の除外が確認できる。正常画像は取得可能。noindex対象増加は意図した除外として評価する。
 
@@ -1638,7 +1638,7 @@ updated: 2026-10-06
 - **owner**: gsc-analyst（最新入力との照合・再クロール観測）
 - **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
 - **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
-- **次 (2026-10-16 更新)**: 現sitemap内soft404 15件は実本文・県固有数値または記事本文・index可・自己canonical・流入hrefを確認、代表3件はChrome実表示でJavaScript例外0。内容判定を専用CLIでobserve-after-fixへ移しin-progressを維持した（登録済みにはしていない）。Google公開URLテストと代表URLの登録リクエスト結果は `data/gsc/ui-audits/2026-10-16-remediation.json`。10-23に修正後のlastCrawlTime・登録状態を再確認し、未再クロールならサイトマップ再取得・クロール統計を調べる。現在200/ライブテスト合格だけで登録済みとしない。既存キューの他URL・母集団を今回の部分確認で再構築しない。
+- **次 (2026-10-16 更新)**: 現sitemap内soft404 15件は本文・固有数値・自己canonical・index可・流入hrefと本番HTTP200を確認し、内容判定をobserve-after-fixへ移してin-progressを維持。代表3件のGoogleライブテストは合格、15件中11件の登録リクエストをGSCが受理した。1日割当超過で未送信の4 URL（栃木local-finance、静岡/茨城/福井labor-wages）は証跡のrelease.indexingRequests.remainingUrlsが正本。自動化gsc-4が毎日09:00 JSTに未送信分だけ処理し、全件受付後に停止する。10-23に修正後のlastCrawlTime・登録状態を既存の日次Inspectionで再確認し、未再クロールならサイトマップ再取得・クロール統計を照合する。現在200・ライブテスト合格・送信受理だけで登録済みとしない。根拠: `data/gsc/ui-audits/2026-10-16-remediation.json`。
 - **優先対象の絞り込み案 (10-16)**: UI例示と現sitemapが重なるsoft404 15件・クロール済未登録146件・検出未登録971件の計1,132 URLを候補母集団にする（全件の現HTTPは未検査）。検出未登録977件の内訳はranking485・areas329・municipalities108・blog37など。需要・最終クロール・内部リンク・本文の独自性で優先付けし、まず既存15件と需要のある小標本を調べる。streaming HTMLのmain文字数0だけで空ページと判定せず、実レンダリングとGoogle公開URLテストを照合する。
 - **観測の判断条件**: 登録済み6,700とsitemap6,574は対象集合が異なるので割り算しない。固定した対象URL群で修正後クロール・登録・検索表示・クリックを追い、未登録総数の減少だけを成功にしない。UI監査（10-12）と既存coverage入力（10-04）の鮮度を分け、取り込み時は既存CSV/manifest gateを通す。既存lastmodは実際の本文/データ更新を表すかを確認し、確認できない日時を捏造して一律更新しない。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
