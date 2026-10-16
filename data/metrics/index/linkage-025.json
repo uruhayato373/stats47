@@ -2,6 +2,74 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "university-graduates-job-ratio",
+      "pageId": "ranking:university-graduates-job-ratio",
+      "title": "大学卒業者に占める就職者の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03403"
+        },
+        "derived": false,
+        "configHash": "37963fc3dff7c810"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:university-graduates-job-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "university-new-graduates-unemployment-rate",
+      "pageId": "ranking:university-new-graduates-unemployment-rate",
+      "title": "大学新規卒業者の無業者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03402"
+        },
+        "derived": false,
+        "configHash": "3463206a3d04e3ed"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:university-new-graduates-unemployment-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:university-new-graduates-unemployment-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "university-professor-annual-income",
       "pageId": "ranking:university-professor-annual-income",
       "title": "大学教授の平均年収",
@@ -9708,73 +9776,6 @@
         },
         {
           "pageId": "ranking:wind-power-capacity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "wind-power-plant-count-facility",
-      "pageId": null,
-      "title": "風力発電施設数（施設ベース）",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "ksjDataId": "P03",
-          "ksjVersion": "13"
-        },
-        "fetcherKey": "mlit_ksj",
-        "configHash": "4ea62d6c9c854fc7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:wind-power-plant-count-facility",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "wind-power-turbine-count",
-      "pageId": "ranking:wind-power-turbine-count",
-      "title": "風力発電導入量（設置基数）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H5103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H5103"
-        },
-        "derived": false,
-        "configHash": "c3ad0b7e6404c555"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:wind-power-capacity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:wind-power-turbine-count",
           "kind": "ranking"
         }
       ],

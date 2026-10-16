@@ -2,6 +2,287 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "scarf-consumption-expenditure",
+      "pageId": "ranking:scarf-consumption-expenditure",
+      "title": "マフラー・スカーフ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050600030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050600030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ef16814e35810495"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:scarf-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "scheduled-salary-male",
+      "pageId": "ranking:scheduled-salary-male",
+      "title": "所定内給与額（男）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010106",
+          "filters": {
+            "cdCat01": "F620217"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010106",
+          "cdCat01": "F620217"
+        },
+        "derived": false,
+        "configHash": "0aab5aa583fa4686"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:truck-driver-2024-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wage-vs-living-cost",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:labor-wages",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:scheduled-salary-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:labor-wages",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "labor-wages"
+      ]
+    },
+    {
       "metricKey": "school-bag-consumption-expenditure",
       "pageId": "ranking:school-bag-consumption-expenditure",
       "title": "通学用かばん消費支出額",
@@ -12476,307 +12757,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "social-welfare-expenses-prefecture",
-      "pageId": "ranking:social-welfare-expenses-prefecture",
-      "title": "社会福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103031"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103031"
-        },
-        "derived": false,
-        "configHash": "e548ead264ef31e5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:social-welfare-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "software-engineer-annual-income",
-      "pageId": "ranking:software-engineer-annual-income",
-      "title": "ソフトウェア作成者の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1104"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1104"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "f00643aba840e510"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:engineer-telework-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:engineer-vs-professions-income",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:prefecture-salary-gap-career",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:software-engineer-income-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:software-engineer-salary-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:system-consultant-income-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:working-hours-overtime-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:software-engineer-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
     }
   ]
 }

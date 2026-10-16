@@ -2,6 +2,427 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "marine-fishery-catch",
+      "pageId": "ranking:marine-fishery-catch",
+      "title": "海面漁業漁獲量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C312101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C312101"
+        },
+        "derived": false,
+        "configHash": "b231a49f2d4b35d0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "japan-theme:fishery-marine",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:marine-fishery-catch",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:fishery-marine",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "fishery-marine"
+      ]
+    },
+    {
       "metricKey": "marine-fishery-output-value",
       "pageId": "ranking:marine-fishery-output-value",
       "title": "海面漁業産出額",
@@ -4346,6 +4767,57 @@
       "themes": [
         "healthcare"
       ]
+    },
+    {
+      "metricKey": "medical-welfare-industry-annual-income",
+      "pageId": null,
+      "title": "医療・福祉で働く人の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003426933",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "01",
+            "cdCat03": "01",
+            "cdCat04": "94"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003426933",
+          "cdCat01": "01",
+          "cdCat02": "01",
+          "cdCat03": "01",
+          "cdCat04": "94"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "091428093477c92e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:medical-welfare-industry-annual-income",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
     },
     {
       "metricKey": "melon-consumption-expenditure",
@@ -10655,91 +11127,6 @@
         },
         {
           "pageId": "ranking:moving-out-rate-japanese",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "municipal-bonds-outstanding",
-      "pageId": "ranking:municipal-bonds-outstanding",
-      "title": "地方債",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D320121"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D320121"
-        },
-        "derived": false,
-        "configHash": "8af80786efcd5c6d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:municipal-bonds-outstanding",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:municipal-bonds-outstanding",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "municipal-general-administration-staff",
-      "pageId": "ranking:municipal-general-administration-staff",
-      "title": "一般行政部門職員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D1202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D1202"
-        },
-        "derived": false,
-        "configHash": "cdb564b40163ab37"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:municipal-general-administration-staff",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:municipal-general-administration-staff",
           "kind": "ranking"
         }
       ],

@@ -2,6 +2,73 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "wind-power-plant-count-facility",
+      "pageId": null,
+      "title": "風力発電施設数（施設ベース）",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "ksjDataId": "P03",
+          "ksjVersion": "13"
+        },
+        "fetcherKey": "mlit_ksj",
+        "configHash": "4ea62d6c9c854fc7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:wind-power-plant-count-facility",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "wind-power-turbine-count",
+      "pageId": "ranking:wind-power-turbine-count",
+      "title": "風力発電導入量（設置基数）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H5103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H5103"
+        },
+        "derived": false,
+        "configHash": "c3ad0b7e6404c555"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:wind-power-capacity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:wind-power-turbine-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "wine-consumption-expenditure",
       "pageId": "ranking:wine-consumption-expenditure",
       "title": "ワイン消費支出額",

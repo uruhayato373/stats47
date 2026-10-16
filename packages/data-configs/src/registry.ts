@@ -1293,6 +1293,7 @@ import { manufacturingEmployees } from "../../../data/metrics/manufacturing-empl
 import { manufacturingEstablishmentSiteArea } from "../../../data/metrics/manufacturing-establishment-site-area";
 import { manufacturingEstablishments } from "../../../data/metrics/manufacturing-establishments";
 import { manufacturingIndustryAddedValue } from "../../../data/metrics/manufacturing-industry-added-value";
+import { manufacturingIndustryAnnualIncome } from "../../../data/metrics/manufacturing-industry-annual-income";
 import { manufacturingNetValueAddedPrivate } from "../../../data/metrics/manufacturing-net-value-added-private";
 import { manufacturingSalesPrivate } from "../../../data/metrics/manufacturing-sales-private";
 import { manufacturingShipmentAmountPerEmployee } from "../../../data/metrics/manufacturing-shipment-amount-per-employee";
@@ -1335,6 +1336,7 @@ import { medicalPhysiciansEmergencyMedicine } from "../../../data/metrics/medica
 import { medicalPhysiciansObstetricsGynecology } from "../../../data/metrics/medical-physicians-obstetrics-gynecology";
 import { medicalPhysiciansPediatrics } from "../../../data/metrics/medical-physicians-pediatrics";
 import { medicalPhysiciansUnder40 } from "../../../data/metrics/medical-physicians-under-40";
+import { medicalWelfareIndustryAnnualIncome } from "../../../data/metrics/medical-welfare-industry-annual-income";
 import { melonConsumptionExpenditure } from "../../../data/metrics/melon-consumption-expenditure";
 import { melonConsumptionQuantity } from "../../../data/metrics/melon-consumption-quantity";
 import { membershipFeesConsumptionExpenditure } from "../../../data/metrics/membership-fees-consumption-expenditure";
@@ -3938,6 +3940,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "manufacturing-establishment-site-area": manufacturingEstablishmentSiteArea,
   "manufacturing-establishments": manufacturingEstablishments,
   "manufacturing-industry-added-value": manufacturingIndustryAddedValue,
+  "manufacturing-industry-annual-income": manufacturingIndustryAnnualIncome,
   "manufacturing-net-value-added-private": manufacturingNetValueAddedPrivate,
   "manufacturing-sales-private": manufacturingSalesPrivate,
   "manufacturing-shipment-amount-per-employee": manufacturingShipmentAmountPerEmployee,
@@ -3980,6 +3983,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "medical-physicians-obstetrics-gynecology": medicalPhysiciansObstetricsGynecology,
   "medical-physicians-pediatrics": medicalPhysiciansPediatrics,
   "medical-physicians-under-40": medicalPhysiciansUnder40,
+  "medical-welfare-industry-annual-income": medicalWelfareIndustryAnnualIncome,
   "melon-consumption-expenditure": melonConsumptionExpenditure,
   "melon-consumption-quantity": melonConsumptionQuantity,
   "membership-fees-consumption-expenditure": membershipFeesConsumptionExpenditure,

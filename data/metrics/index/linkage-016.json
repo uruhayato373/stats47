@@ -2,6 +2,86 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "other-household-goods-consumption-expenditure",
+      "pageId": "ranking:other-household-goods-consumption-expenditure",
+      "title": "他の家事雑貨消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b9487cb197ad7f86"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-household-goods-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-indoor-furnishing-consumption-expenditure",
+      "pageId": "ranking:other-indoor-furnishing-consumption-expenditure",
+      "title": "他の室内装備品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040200060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040200060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d99278a60cde05cd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-indoor-furnishing-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-japanese-sweets-consumption-expenditure",
       "pageId": "ranking:other-japanese-sweets-consumption-expenditure",
       "title": "他の和生菓子消費支出額",
@@ -6433,77 +6513,6 @@
       "themes": [
         "safety"
       ]
-    },
-    {
-      "metricKey": "pension-benefit-total",
-      "pageId": "ranking:pension-benefit-total",
-      "title": "厚生年金受給権者年金総額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010110",
-          "filters": {
-            "cdCat01": "J5104"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010110",
-          "cdCat01": "J5104"
-        },
-        "derived": false,
-        "configHash": "0a1d2fbae26e3ae1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:pension-benefit-total",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
-      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
-      "title": "児童福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0330503"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0330503"
-        },
-        "derived": false,
-        "configHash": "94f64329fddb1e9e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:childcare-friendly-prefecture-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }
