@@ -6,10 +6,14 @@ export function ActualImage({
   src,
   alt,
   small = false,
+  onDimensions,
+  dimensions,
 }: {
   src: string | null;
   alt: string;
   small?: boolean;
+  onDimensions?: (size: { width: number; height: number }) => void;
+  dimensions?: { width: number; height: number } | null;
 }) {
   const [failed, setFailed] = useState(false);
   if (!src)
@@ -36,12 +40,20 @@ export function ActualImage({
       src={src}
       alt={alt}
       loading="lazy"
+      width={dimensions?.width}
+      height={dimensions?.height}
       className={
         small
           ? 'mx-auto h-36 w-full object-contain'
           : 'mx-auto h-auto max-h-[600px] w-full object-contain'
       }
       onError={() => setFailed(true)}
+      onLoad={(event) =>
+        onDimensions?.({
+          width: event.currentTarget.naturalWidth,
+          height: event.currentTarget.naturalHeight,
+        })
+      }
     />
   );
 }

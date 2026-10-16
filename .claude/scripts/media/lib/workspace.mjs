@@ -11,7 +11,7 @@ import { readCoverLedger } from '../../note/lib/cover-assets.mjs';
 import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { readWebInventory,WEB_INVENTORY } from './web-inventory.mjs';
-import { catalogTemplates } from './catalog.mjs';
+import { catalogTemplates, snsImageTemplate } from './catalog.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 export const FILES = { quality: datasetPath('content.quality'), inventory: datasetPath('content.image-inventory'), templates: datasetPath('content.image-templates') };
@@ -169,6 +169,7 @@ export function imageLibrary(root = ROOT) {
         sha256: asset.sha256, bytes: asset.bytes, drivePath: asset.drive_path ?? null,
       } : null, { inputFiles: [], inventoryStatus: asset.state, legacyUrl: asset.state === 'archived' ? '/sns-asset/' + post.id + '/' + encodeURIComponent(asset.drive_path?.split('/').pop() ?? (file + '.' + (asset.mime?.split('/')[1] ?? 'png'))) : null,
         format:asset.mime?.split('/')[1]??'',
+        templateId:snsImageTemplate(post,asset),width:asset.width,height:asset.height,
         generation:post.template?{generator:post.template}:undefined,
         sourceLinks:asset.source?[{label:asset.source,relationship:'投稿台帳に記録された元素材。固定数値入力との対応は未確認。'}]:[],
         missingReason: asset.reason ?? null });

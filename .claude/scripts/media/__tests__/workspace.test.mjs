@@ -7,6 +7,27 @@ import { ROOT,FILES,workspaceItems,readQuality,saveReview,imageLibrary,saveImage
 import { archiveSnsImage,readMediaObject } from '../lib/storage.mjs';
 import { WEB_INVENTORY,WEB_PARTS,readWebInventory,writeWebInventory,publicRef,imageReferences,inlineSvgReferences,publicUrlAllowed } from '../lib/web-inventory.mjs';
 import { assertStaticSvg } from '../lib/svg-safety.mjs';
+import { snsImageTemplate } from '../lib/catalog.mjs';
+
+test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
+ assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'ranking');
+ assert.equal(snsImageTemplate({template:'number'},{width:1080,height:1350}),'unclassified');
+ assert.equal(snsImageTemplate({template:'correlation-carousel'},{source:'slide-2-scatter-1080x1350.png'}),'correlation');
+ for(const template of ['ranking','household-receipt','rank-routes','buzz-map']) {
+  assert.equal(snsImageTemplate({template},{source:'slide-1-cover-1080x1350.png'}),'unclassified');
+  assert.equal(snsImageTemplate({template},{source:'slide-3-source-1080x1350.png'}),'unclassified');
+ }
+ assert.equal(snsImageTemplate({template:'tile-change'},{source:'slide-2-detail.png'}),'time-series');
+ assert.equal(snsImageTemplate({template:'household-receipt'},{source:'slide-2-detail.png'}),'household');
+ assert.equal(snsImageTemplate({template:'ranking'},{source:'choropleth-map-1200x630.png'}),'map');
+});
+
+test('SNS inventory carries recorded dimensions and keeps manual template ownership',t=>{
+ const root=fixture(t),image=imageLibrary(root).images.find(i=>i.channel==='instagram'&&i.templateId==='correlation');
+ assert.ok(image);assert.equal(image.width,1080);assert.equal(image.height,1350);
+ saveImagePlan(root,image.id,image.revision,{templateId:'procedure',policy:'人が確認した割り当て'});
+ assert.equal(imageLibrary(root).images.find(i=>i.id===image.id).templateId,'procedure');
+});
 
 function fixture(t){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'stats47-media-test-'));

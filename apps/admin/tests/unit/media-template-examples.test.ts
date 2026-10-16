@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { templateExamples } from '@/lib/media-template-examples';
+import {
+  templateExamples,
+  channelExamples,
+  channelRatios,
+  exampleDimensions,
+} from '@/lib/media-template-examples';
 import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 
 function image(id: string, patch: Partial<ImageView> = {}): ImageView {
@@ -23,6 +28,85 @@ function candidate(id: string, patch: Partial<ImageView> = {}): ImageView {
   });
 }
 describe('template reference images', () => {
+  it('prefers directly stored originals over Drive-only examples and excludes rejected-only ratios', () => {
+    const drive = image('a-drive', {
+      channel: 'x',
+      original: { provider: 'drive', sha256: 'drive' },
+      legacyUrl: '/sns-asset/1/image.png',
+    });
+    const stored = image('z-stored', { channel: 'x' });
+    expect(channelExamples([drive, stored], 'x')[0].image.id).toBe('z-stored');
+    const rejected = candidate('rejected', { channel: 'x', original: null });
+    rejected.candidate!.review = {
+      status: 'needs-revision',
+      reason: '修正',
+      mobile: false,
+      original: false,
+      data: false,
+    };
+    rejected.candidate!.width = 1080;
+    rejected.candidate!.height = 1920;
+    expect(channelRatios([rejected], 'x')).toEqual([]);
+  });
+  it('selects each medium before applying the limit or deduplicating', () => {
+    const images = [
+      image('a', { channel: 'web' }),
+      image('b', { channel: 'web' }),
+      image('c', { channel: 'web' }),
+      image('note', { channel: 'note' }),
+      image('x', {
+        channel: 'x',
+        original: { key: 'x.png', sha256: 'shared' },
+      }),
+      image('ig', {
+        channel: 'instagram',
+        original: { key: 'ig.png', sha256: 'shared' },
+      }),
+    ];
+    expect(channelExamples(images, 'note').map((e) => e.image.id)).toEqual([
+      'note',
+    ]);
+    expect(channelExamples(images, 'x').map((e) => e.image.id)).toEqual(['x']);
+    expect(channelExamples(images, 'instagram').map((e) => e.image.id)).toEqual(
+      ['ig']
+    );
+    expect(channelExamples(images, 'missing')).toEqual([]);
+  });
+  it('filters actual candidate dimensions, not the original or misleading filename', () => {
+    const c = candidate('trial', { channel: 'note', width: 1200, height: 630 });
+    c.candidate!.width = 1280;
+    c.candidate!.height = 1920;
+    const square = image('square', {
+      channel: 'x',
+      file: 'choropleth-1200x630.png',
+      width: 1080,
+      height: 1080,
+    });
+    const unknown = image('unknown', { channel: 'x', file: '1200x630.png' });
+    expect(exampleDimensions(square)?.ratio).toBe('1:1');
+    expect(exampleDimensions(unknown)).toBeNull();
+    expect(channelRatios([c, square, unknown], 'note')).toEqual(['2:3']);
+    expect(channelExamples([c, square], 'note', '1.90:1')).toEqual([]);
+    expect(channelExamples([c, square], 'note', '2:3')[0].image.id).toBe(
+      'trial'
+    );
+    expect(
+      exampleDimensions(image('svg', { viewBox: '0 0 1080 1350' }))?.ratio
+    ).toBe('4:5');
+    expect(
+      exampleDimensions(image('invalid', { width: -1, height: 10 }))
+    ).toBeNull();
+  });
+  it('does not apply note legacy sample pins to SNS images of the same type', () => {
+    const images = [
+      image('x', { templateId: 'household', channel: 'x' }),
+      image('ig', { templateId: 'household', channel: 'instagram' }),
+      image('unreviewed-note', { templateId: 'household', channel: 'note' }),
+    ];
+    expect(channelExamples(images, 'x')).toHaveLength(1);
+    expect(channelExamples(images, 'instagram')).toHaveLength(1);
+    expect(channelExamples(images, 'note')).toHaveLength(0);
+  });
   it('puts current candidates before existing images and never calls a stale approval approved', () => {
     const images = [
       image('original'),

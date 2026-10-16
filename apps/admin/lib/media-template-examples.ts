@@ -32,7 +32,10 @@ const referenceImages: Record<string, string[]> = {
 };
 
 /** Use actual ledger assets; a displayed example never implies template approval. */
-export function templateExamples(images: ImageView[]): TemplateExample[] {
+export function templateExamples(
+  images: ImageView[],
+  limit = 3
+): TemplateExample[] {
   const examples = images
     .flatMap((image): TemplateExample[] => {
       if (image.templateId === 'unclassified' || image.kind === 'cover')
@@ -41,7 +44,13 @@ export function templateExamples(images: ImageView[]): TemplateExample[] {
       const candidate =
         image.candidate && image.candidate.review?.status !== 'needs-revision';
       const references = referenceImages[image.templateId];
-      if (!candidate && references && !references.includes(image.id)) return [];
+      if (
+        !candidate &&
+        image.channel === 'note' &&
+        references &&
+        !references.includes(image.id)
+      )
+        return [];
       const src = candidate ? candidateUrl(image) : originalUrl(image);
       if (!src) return [];
       return [
@@ -61,6 +70,8 @@ export function templateExamples(images: ImageView[]): TemplateExample[] {
     .sort(
       (a, b) =>
         order[a.state] - order[b.state] ||
+        Number(!!b.image.original?.key || !!b.image.original?.path) -
+          Number(!!a.image.original?.key || !!a.image.original?.path) ||
         Number(!!b.image.original?.sha256) -
           Number(!!a.image.original?.sha256) ||
         a.image.id.localeCompare(b.image.id)
@@ -75,7 +86,78 @@ export function templateExamples(images: ImageView[]): TemplateExample[] {
     if (fingerprints.has(fingerprint)) continue;
     fingerprints.add(fingerprint);
     selected.push(example);
-    if (selected.length === 3) break;
+    if (selected.length === limit) break;
   }
   return selected;
+}
+
+export const MEDIA_CHANNELS = ['note', 'x', 'instagram'] as const;
+export type MediaChannel = (typeof MEDIA_CHANNELS)[number];
+
+/** Actual dimensions only: filenames and channel presets are not measurement evidence. */
+export function exampleDimensions(
+  image: ImageView,
+  candidate = !!image.candidate &&
+    image.candidate.review?.status !== 'needs-revision'
+) {
+  const box = image.viewBox
+    ?.trim()
+    .split(/[\s,]+/)
+    .map(Number);
+  const width = candidate ? image.candidate?.width : (image.width ?? box?.[2]);
+  const height = candidate
+    ? image.candidate?.height
+    : (image.height ?? box?.[3]);
+  if (
+    !width ||
+    !height ||
+    !Number.isFinite(width) ||
+    !Number.isFinite(height) ||
+    width <= 0 ||
+    height <= 0
+  )
+    return null;
+  const known = [
+    [1, 1],
+    [4, 5],
+    [2, 3],
+    [9, 16],
+    [16, 9],
+  ];
+  const match = known.find(
+    ([w, h]) => Math.abs(width / height - w / h) < 0.002
+  );
+  const ratio = match ? match.join(':') : (width / height).toFixed(2) + ':1';
+  return { width, height, ratio };
+}
+
+export function channelExamples(
+  images: ImageView[],
+  channel: string,
+  ratio = ''
+) {
+  return templateExamples(
+    images.filter(
+      (image) =>
+        image.channel === channel &&
+        (!ratio || exampleDimensions(image)?.ratio === ratio)
+    )
+  );
+}
+
+export function channelRatios(images: ImageView[], channel: string) {
+  return [
+    ...new Set(
+      templateExamples(
+        images.filter((image) => image.channel === channel),
+        Infinity
+      )
+        .map(
+          (example) =>
+            exampleDimensions(example.image, example.state !== 'existing')
+              ?.ratio
+        )
+        .filter((ratio): ratio is string => !!ratio)
+    ),
+  ].sort();
 }
