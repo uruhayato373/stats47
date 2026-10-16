@@ -61,11 +61,17 @@ export function templateExamples(
 ): TemplateExample[] {
   const examples = images
     .flatMap((image): TemplateExample[] => {
-      if (image.templateId === 'unclassified' || image.kind === 'cover')
+      if (
+        image.templateId === 'unclassified' ||
+        (image.kind === 'cover' && image.templateId !== 'note-cover') ||
+        ['pending', 'stale'].includes(image.classification?.status)
+      )
         return [];
       // Covers have a separate approval ledger; don't infer their candidate state here.
       const candidate =
-        image.candidate && image.candidate.review?.status !== 'needs-revision';
+        image.kind !== 'cover' &&
+        image.candidate &&
+        image.candidate.review?.status !== 'needs-revision';
       const references = referenceImages[image.templateId];
       if (
         !candidate &&

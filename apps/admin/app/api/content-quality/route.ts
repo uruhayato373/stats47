@@ -19,6 +19,8 @@ const schema = z
       .object({
         priority: z.enum(['high', 'normal', 'low']),
         policy: z.string().max(10000),
+        imageInventory: z.enum(['unverified', 'no-assets']).optional(),
+        inventoryReason: z.string().max(5000).optional(),
         checks: z
           .object({
             data: check,

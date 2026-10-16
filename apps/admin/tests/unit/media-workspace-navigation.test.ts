@@ -8,6 +8,10 @@ import {
 } from '@/lib/media-workspace-navigation';
 
 describe('画像管理の専用ページと確認位置', () => {
+  it('分類待ちを型の見本の一種として戻り先にしない',()=>{
+    expect(templateReturnUrl('/ops/image-templates?template=unclassified&medium=compare')).toBeNull();
+    expect(mediaUrl('templates',{template:'unclassified'})).toBe('/ops/image-templates');
+  });
   it('古い見本・改善ページのURLでも絞り込みと選択を失わない', () => {
     expect(
       mediaViewRedirect({

@@ -18,6 +18,8 @@ export default async function Page({
     collection?: string;
     q?: string;
     template?: string;
+    queue?: string;
+    role?: string;
   }>;
 }) {
   const query = await searchParams;
@@ -46,6 +48,8 @@ export default async function Page({
         initialCollection={query.collection}
         initialQuery={query.q}
         initialTemplate={query.template}
+        initialQueue={query.queue}
+        initialRole={query.role}
       />
     </div>
   );

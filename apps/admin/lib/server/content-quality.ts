@@ -26,6 +26,7 @@ import {
   storeVerified,
   registerCandidate,
   reviewCandidate,
+  assessImage,
   workspaceItems,
   readTemplates,
   type VisualReview,
@@ -94,6 +95,9 @@ export function regenerationRequest(id: string) {
     mode: 'fixed-data-design',
     original: image.original,
     template,
+    classification: image.classification,
+    tasks: image.tasks,
+    coverManagement: image.coverManagement,
     policy: image.policy,
     inputs: image.inputFiles,
     generation: image.generation,
@@ -260,6 +264,26 @@ export async function saveVisualReview(
   await readVerified(current.candidate.input);
   reviewCandidate(projectRoot(), id, revision, candidate, review);
   return imageById(projectRoot(), id);
+}
+export async function saveOriginalReview(
+  id: string,
+  revision: string,
+  review: VisualReview
+) {
+  const root = projectRoot(),
+    current = imageById(root, id);
+  if (current.revision !== revision)
+    throw new WorkspaceError('画像が変わりました。再確認してください。', 409);
+  if (current.kind === 'cover')
+    throw new WorkspaceError('カバー制作画面で確認してください。');
+  if (review.status === 'pass') {
+    if (!current.original?.sha256)
+      throw new WorkspaceError('原本の保存記録が必要です。');
+    await readMediaObject(root, current.original);
+  }
+  // Re-check the revision inside the atomic writer after the storage read.
+  assessImage(root, id, revision, review);
+  return imageById(root, id);
 }
 export async function imageBytes(id: string, revision: string, input: boolean) {
   const image = imageById(projectRoot(), id);

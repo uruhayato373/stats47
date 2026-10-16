@@ -12,6 +12,7 @@ import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { readWebInventory,WEB_INVENTORY } from './web-inventory.mjs';
 import { catalogTemplates, snsImageTemplate } from './catalog.mjs';
+import { CLASSIFIER_VERSION, IMAGE_ROLES, roleForTemplate, resolveClassification, imageTasks, inventoryGaps, classificationSummary } from './classification.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 export const FILES = { quality: datasetPath('content.quality'), inventory: datasetPath('content.image-inventory'), templates: datasetPath('content.image-templates') };
@@ -85,7 +86,7 @@ export function sourceItems(root = ROOT) {
   const social = posts.filter(p => p.platform !== 'note' && p.status !== 'deleted').map(p => ({
     id: 'sns/' + p.id, channel: p.platform, key: String(p.id), title: (p.caption ?? p.content_key ?? String(p.id)).slice(0, 100),
     category: p.domain ?? '未分類', status: p.status, url: p.post_url ?? null, publishedAt: p.posted_at ?? p.scheduled_at ?? null,
-    bodyStore: 'git', bodySaved: !!p.caption,
+    bodyStore: 'git', bodySaved: !!p.caption, assetCount:p.assets?.length??0,
     basis: sha({ caption: p.caption, assets: p.assets, media: p.media_path, template: p.template }),
   }));
   return [...notes, ...social, ...readWebInventory(root).items];
@@ -106,18 +107,14 @@ export function saveReview(root, id, expected, review) {
     const item = sourceItems(root).find(i => i.id === id);
     if (!item) throw new WorkspaceError('記事・投稿が見つかりません。', 404);
     if (sha([item.basis, data.reviews[id] ?? null]) !== expected) throw new WorkspaceError('本文または確認記録が変わりました。再読込してください。', 409);
+    if (review.imageInventory === 'no-assets') {
+      const post=readSources(root).posts.find(p=>id==='sns/'+p.id);
+      if (!post || post.assets?.length || !review.inventoryReason?.trim()) throw new WorkspaceError('素材なしの確認は、素材一覧が空のSNS投稿に根拠付きで記録してください。');
+    }
     data.reviews[id] = { ...review, basis: item.basis, updatedAt: new Date().toISOString() };
   });
 }
 const raster = /\.(png|jpe?g|webp|gif|svg)$/i;
-function inferTemplate(file, owner) {
-  if (/kakei|household/i.test(owner)) return 'household';
-  if (/choropleth|map|tile/i.test(file)) return 'map';
-  if (/scatter|correlation/i.test(file)) return 'correlation';
-  if (/time|trend|change/i.test(file)) return 'time-series';
-  if (/chart|ranking|boxplot/i.test(file)) return 'ranking';
-  return 'unclassified';
-}
 let libraryCache;
 export function imageLibrary(root = ROOT) {
   const paths=[...Object.values(FILES),WEB_INVENTORY,datasetPath('sns.posts'),datasetPath('note.articles'),datasetPath('note.cover-assets')];
@@ -128,17 +125,22 @@ export function imageLibrary(root = ROOT) {
   const images = [];
   const add = (owner, file, original, extra = {}) => {
     const item = itemMap.get(owner);
-    if (!item) return;
+    if (!item) throw new WorkspaceError('画像の使用先が台帳にありません: ' + owner, 500);
     const id = imageId(owner, file), record = quality.images[id];
-    const templateId = record?.templateId ?? extra.templateId ?? inferTemplate(file, owner);
+    const classificationBasis = sha([CLASSIFIER_VERSION, original, extra.coverUrl ?? null, extra.classificationSource ?? file, extra.generation ?? null]);
+    const classification = resolveClassification({kind:extra.kind,templateId:extra.templateId,file,
+      source:extra.classificationSource,record,basis:classificationBasis,
+      origin: ['ogp','card','background'].includes(extra.usage) || extra.templateId === 'pref-silhouette' ? 'contract' : 'catalog'});
+    const templateId = classification.templateId;
     const template = templates.find(t => t.id === templateId) ?? templates.find(t => t.id === 'unclassified');
     const basis = sha([item.basis, original, extra.inputFiles ?? [], extra.generation??null, template, record?.policy ?? '']);
     const candidate = record?.revisions.find(r => r.id === record.candidateId) ?? null;
     images.push({ ...extra, id, owner, file, title: item.title, channel: item.channel, category: item.category,
-      original, templateId, policy: record?.policy ?? '', basis,
+      original, templateId, classification, policy: record?.policy ?? '', basis,
       revision: sha([basis, record ?? null]), record: record ?? null, candidate,
       candidateMatches: !!candidate && candidate.basis === basis,
-      approved: !!candidate && candidate.id === record?.approvedId && candidate.basis === basis,
+      approved: !!candidate && candidate.id === record?.approvedId && candidate.basis === basis && ['recorded','confirmed'].includes(classification.status),
+      assessment:record?.assessment?.review??null,assessmentMatches:record?.assessment?.basis===sha([basis,classificationBasis]) && ['recorded','confirmed'].includes(classification.status),
       usage:extra.usage??(extra.kind==='cover'?'cover':item.channel==='note'?'body':'social'),
       format:extra.format??path.extname(original?.key??file).slice(1)??'',
       pageUrl:item.url });
@@ -154,13 +156,16 @@ export function imageLibrary(root = ROOT) {
     if (cover) {
       const published = cover.revisions.find(r => r.id === cover.published?.revisionId);
       add(owner, '@cover', published ? { ...published.storage, sha256: published.sha256, bytes: published.bytes } : null,
-        { kind: 'cover', coverUrl: published ? '/note-cover/' + a.key + '?revision=' + published.id : cover.published?.url ?? null,
+        { kind: 'cover', width:published?.width, height:published?.height, coverUrl: published ? '/note-cover/' + a.key + '?revision=' + published.id : cover.published?.url ?? null,
           coverCandidateUrl: cover.candidateRevisionId ? '/note-cover/' + a.key + '?revision=' + cover.candidateRevisionId : null,
           coverManagement: '/content/note/covers?view=gallery&q=' + encodeURIComponent(cover.production?.id ?? a.key),
+          coverWorkflow: { id:cover.production?.id??a.key, policyId:cover.production?.policyId??null,
+            candidateId:cover.candidateRevisionId,approvedId:cover.approvedRevisionId,publishedId:cover.published?.revisionId??null },
           inputFiles: [], inventoryStatus: entry?.status ?? (a.body.manifest ? 'unindexed' : 'unavailable') });
     }
   }
   for (const post of sources.posts) {
+    if (post.platform === 'note' || post.status === 'deleted') continue;
     for (const asset of post.assets ?? []) {
       if (asset.role === 'video' || asset.mime?.startsWith('video/')) continue;
       const file = asset.role + '-' + asset.order;
@@ -169,7 +174,7 @@ export function imageLibrary(root = ROOT) {
         sha256: asset.sha256, bytes: asset.bytes, drivePath: asset.drive_path ?? null,
       } : null, { inputFiles: [], inventoryStatus: asset.state, legacyUrl: asset.state === 'archived' ? '/sns-asset/' + post.id + '/' + encodeURIComponent(asset.drive_path?.split('/').pop() ?? (file + '.' + (asset.mime?.split('/')[1] ?? 'png'))) : null,
         format:asset.mime?.split('/')[1]??'',
-        templateId:snsImageTemplate(post,asset),width:asset.width,height:asset.height,
+        templateId:snsImageTemplate(post,asset),classificationSource:asset.source??file,width:asset.width,height:asset.height,
         generation:post.template?{generator:post.template}:undefined,
         sourceLinks:asset.source?[{label:asset.source,relationship:'投稿台帳に記録された元素材。固定数値入力との対応は未確認。'}]:[],
         missingReason: asset.reason ?? null });
@@ -184,7 +189,9 @@ export function imageLibrary(root = ROOT) {
   }
   // Return IDs rather than repeated article metadata, so a common site image does not make the response quadratic.
   for(const image of images)image.relatedImageIds=uses.get(image.assetKey).map(u=>u.id);
-  const value={images,templates,inventoryUpdatedAt:inventory.updatedAt,webInventoryUpdatedAt:web.updatedAt,coverage:web.coverage};
+  for(const image of images)image.tasks=imageTasks(image);
+  const value={images,templates,inventoryUpdatedAt:inventory.updatedAt,webInventoryUpdatedAt:web.updatedAt,coverage:web.coverage,
+    classificationSummary:classificationSummary(images),inventoryGaps:inventoryGaps(sources,inventory,web,quality.reviews,items)};
   libraryCache={stamp,value};return value;
 }
 export function imageById(root, id) {
@@ -198,7 +205,35 @@ export function saveImagePlan(root, id, expected, plan) {
     if (current.kind === 'cover') throw new WorkspaceError('カバー制作画面で編集してください。');
     if (current.revision !== expected) throw new WorkspaceError('画像または方針が変わりました。再読込してください。', 409);
     if (!readTemplates(root).templates.some(t => t.id === plan.templateId)) throw new WorkspaceError('図の型が不正です。');
-    data.images[id] = { revisions: [], candidateId: null, ...data.images[id], ...plan, approvedId: null };
+    if (plan.templateId === 'unclassified' || plan.templateId === 'note-cover') throw new WorkspaceError('実画像に合う型を指定してください。カバーは専用台帳で管理します。');
+    if (!Object.hasOwn(IMAGE_ROLES, plan.role) || plan.role === 'unresolved' || typeof plan.reason !== 'string' || !plan.reason.trim() || plan.reason.length > 5000)
+      throw new WorkspaceError('画像の役割と分類の確認根拠を入力してください。');
+    if (roleForTemplate(plan.templateId) !== plan.role) throw new WorkspaceError('画像の役割と型が一致しません。');
+    const previous = data.images[id];
+    const classification = {role:plan.role,basis:current.classification.basis,reason:plan.reason.trim(),updatedAt:new Date().toISOString()};
+    data.images[id] = { revisions: [], candidateId: null, ...previous,
+      templateId:plan.templateId,policy:plan.policy,classification,
+      classificationHistory:[...(previous?.classificationHistory??[]),...(previous?.classification?[{templateId:previous.templateId,...previous.classification}]:[])],
+      approvedId: null };
+  });
+}
+export function saveImagePolicy(root, id, expected, policy) {
+  return atomicUpdate(root, FILES.quality, data => {
+    const current = imageById(root, id);
+    if (current.kind === 'cover') throw new WorkspaceError('カバー制作画面で編集してください。');
+    if (current.revision !== expected) throw new WorkspaceError('画像または方針が変わりました。再読込してください。',409);
+    data.images[id] = {templateId:current.templateId,revisions:[],candidateId:null,...data.images[id],policy,approvedId:null};
+  });
+}
+export function assessImage(root, id, expected, review) {
+  return atomicUpdate(root, FILES.quality, data => {
+    const current=imageById(root,id);
+    if (current.kind==='cover') throw new WorkspaceError('カバー制作画面で確認してください。');
+    if (current.revision!==expected) throw new WorkspaceError('画像が変わりました。再確認してください。',409);
+    if (review.status==='pass' && (!current.original?.sha256 || !['recorded','confirmed'].includes(current.classification.status) || !review.original || !review.mobile || !review.data))
+      throw new WorkspaceError('原本の保存記録・分類・原寸・スマホ・内容の照合を確認してください。');
+    data.images[id]={templateId:current.templateId,policy:'',revisions:[],candidateId:null,approvedId:null,...data.images[id],
+      assessment:{basis:sha([current.basis,current.classification.basis]),review:{...review,reviewedAt:new Date().toISOString()}}};
   });
 }
 export function registerCandidate(root, id, expected, candidate) {
@@ -216,6 +251,8 @@ export function reviewCandidate(root, id, expected, candidateId, review) {
     const current = imageById(root, id), record = data.images[id];
     if (current.revision !== expected || !record || record.candidateId !== candidateId || !current.candidateMatches)
       throw new WorkspaceError('候補または入力が変わりました。再確認してください。', 409);
+    if (review.status === 'pass' && ['pending','suggested','stale'].includes(current.classification.status))
+      throw new WorkspaceError('採用前に画像の役割と分類を確認して保存してください。');
     if (review.status === 'pass' && (!review.original || !review.mobile || !review.data))
       throw new WorkspaceError('原寸・スマホ表示・データの照合を確認してください。');
     const revision = record.revisions.find(r => r.id === candidateId);
@@ -224,6 +261,7 @@ export function reviewCandidate(root, id, expected, candidateId, review) {
   });
 }
 export function saveTemplate(root, id, expected, next) {
+  if (id === 'unclassified' || id === 'note-cover') throw new WorkspaceError('分類待ちには制作方針を設定できません。noteカバーはカバー制作画面を使用してください。');
   return atomicUpdate(root, FILES.templates, data => {
     let index = data.templates.findIndex(t => t.id === id);
     if(index<0){const base=catalogTemplates().find(t=>t.id===id);if(!base)throw new WorkspaceError('図の型が見つかりません。',404);data.templates.push(base);index=data.templates.length-1;}

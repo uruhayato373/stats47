@@ -25,6 +25,7 @@ export function mediaUrl(
 ) {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(values)) {
+    if (page === 'templates' && key === 'template' && value === 'unclassified') continue;
     if (value) params.set(key, value);
   }
   return MEDIA_PAGES[page] + (params.size ? '?' + params : '');
@@ -42,6 +43,7 @@ export function mediaViewRedirect(query: Record<string, string | undefined>) {
 export function templateReturnUrl(value: string | null) {
   if (!value?.startsWith(MEDIA_PAGES.templates + '?')) return null;
   const url = new URL(value, 'http://localhost');
+  if (url.searchParams.get('template') === 'unclassified') return null;
   return url.pathname === MEDIA_PAGES.templates
     ? url.pathname + url.search
     : null;

@@ -1,4 +1,5 @@
 import 'server-only';
+import { ZodError } from 'zod';
 import { WorkspaceError } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { errorResponse } from './http';
 export function assertWorkspaceMutation(req: Request, json = true) {
@@ -31,6 +32,7 @@ export async function workspaceJson(req: Request) {
   }
 }
 export function workspaceError(error: unknown) {
+  if (error instanceof ZodError) return errorResponse('入力項目の形式・必須項目を確認してください。',400);
   return error instanceof WorkspaceError
     ? errorResponse(error.message, error.status)
     : errorResponse(

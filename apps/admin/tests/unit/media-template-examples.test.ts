@@ -29,6 +29,12 @@ function candidate(id: string, patch: Partial<ImageView> = {}): ImageView {
   });
 }
 describe('template reference images', () => {
+  it('keeps cover originals in their own type and never uses an unreviewed cover candidate',()=>{
+    const cover=image('cover',{kind:'cover',templateId:'note-cover',coverUrl:'/old-cover',coverCandidateUrl:'/new-cover'});
+    const samples=templateExamples([cover]);
+    expect(samples[0].src).toBe('/old-cover');expect(samples[0].state).toBe('existing');
+    expect(templateExamples([image('pending',{templateId:'unclassified'}),image('stale',{classification:{status:'stale'} as ImageView['classification']})])).toEqual([]);
+  });
   it('keeps every medium/ratio sample and full counts while reducing the browser payload', () => {
     const images = [
       ...Array.from({ length: 20 }, (_, n) =>

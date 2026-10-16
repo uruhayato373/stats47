@@ -3,10 +3,17 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ActualImage } from './media-image';
 import { MediaWorkspaceNav } from './media-workspace-nav';
+import { ImageAssessment } from './image-assessment';
 import { originalUrl, candidateUrl } from '@/lib/media-template-examples';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { IMAGE_USES } from '../../../../.claude/scripts/media/lib/catalog.mjs';
+import {
+  IMAGE_ROLES,
+  CLASSIFICATION_STATES,
+  IMAGE_QUEUES,
+  roleForTemplate,
+} from '../../../../.claude/scripts/media/lib/classification.mjs';
 import {
   PanelCard,
   StatusBadge,
@@ -32,6 +39,13 @@ export interface WorkspaceData {
   images: ImageView[];
   templates: (Template & { revision: string })[];
   inventoryUpdatedAt: string | null;
+  classificationSummary?: {
+    version: number;
+    total: number;
+    states: Record<string, number>;
+    tasks: Record<string, number>;
+  };
+  inventoryGaps?: { owner: string; reason: string }[];
   webInventoryUpdatedAt?: string | null;
   coverage?: {
     collection: string;
@@ -94,6 +108,8 @@ function ArticleEditor({
     priority: item.review.priority,
     policy: item.review.policy,
     checks: { ...item.review.checks },
+    imageInventory: item.review.imageInventory ?? 'unverified',
+    inventoryReason: item.review.inventoryReason ?? '',
   });
   const [message, setMessage] = useState(''),
     [busy, setBusy] = useState(false),
@@ -222,6 +238,33 @@ function ArticleEditor({
           </label>
         ))}
       </div>
+      {item.id.startsWith('sns/') && item.assetCount === 0 && (
+        <div className="space-y-2 text-sm">
+          <label>
+            素材一覧の確認
+            <NativeSelect
+              value={review.imageInventory}
+              onChange={(e) =>
+                change({
+                  ...review,
+                  imageInventory: e.target.value as Review['imageInventory'],
+                })
+              }
+            >
+              <option value="unverified">未確認・回収待ち</option>
+              <option value="no-assets">画像・動画なしの投稿と確認</option>
+            </NativeSelect>
+          </label>
+          <Textarea
+            aria-label="素材なしと判断した根拠"
+            value={review.inventoryReason}
+            onChange={(e) =>
+              change({ ...review, inventoryReason: e.target.value })
+            }
+            placeholder="公開投稿などで確認した根拠"
+          />
+        </div>
+      )}
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={save} disabled={busy}>
           {busy ? '保存中…' : '改善方針・確認結果を保存'}
@@ -339,6 +382,9 @@ function ImageEditor({
 }) {
   const [policy, setPolicy] = useState(image.policy),
     [templateId, setTemplateId] = useState(image.templateId),
+    [classificationReason, setClassificationReason] = useState(
+      image.record?.classification?.reason ?? ''
+    ),
     [message, setMessage] = useState(''),
     [busy, setBusy] = useState(false);
   const [reason, setReason] = useState(''),
@@ -403,6 +449,54 @@ function ImageEditor({
           </StatusBadge>
         </div>
       </div>
+      <Section title="分類と次の作業">
+        <div className="flex flex-wrap gap-2">
+          <StatusBadge
+            tone={
+              ['confirmed', 'recorded'].includes(image.classification.status)
+                ? 'info'
+                : 'warn'
+            }
+          >
+            {CLASSIFICATION_STATES[image.classification.status]}
+          </StatusBadge>
+          <StatusBadge tone="neutral">
+            役割: {IMAGE_ROLES[image.classification.role]}
+          </StatusBadge>
+          {image.tasks.map((task) => (
+            <StatusBadge key={task} tone="neutral">
+              {IMAGE_QUEUES[task]}
+            </StatusBadge>
+          ))}
+        </div>
+        <p className="mt-2 text-sm text-console-muted">
+          {image.classification.reason}
+        </p>
+        {image.classification.updatedAt && (
+          <p className="text-xs text-console-muted">
+            分類の確認日: {image.classification.updatedAt}
+          </p>
+        )}
+        {!!image.record?.classificationHistory?.length && (
+          <details className="text-sm">
+            <summary>
+              過去の分類 {image.record.classificationHistory.length}件
+            </summary>
+            {image.record.classificationHistory.map((entry, index) => (
+              <p key={index}>
+                {entry.updatedAt} · {entry.templateId} · {entry.reason}
+              </p>
+            ))}
+          </details>
+        )}
+        {image.coverWorkflow && (
+          <p className="mt-2 text-sm">
+            制作ID: {image.coverWorkflow.id} · 方針:{' '}
+            {image.coverWorkflow.policyId ?? '要確認'}
+            。候補・採用・公開状態はカバー制作台帳で確認できます。
+          </p>
+        )}
+      </Section>
       <Section title="使用先・元データ・生成元">
         <div className="space-y-3 text-sm">
           {image.pageUrl && (
@@ -546,7 +640,7 @@ function ImageEditor({
       ) : (
         <>
           <label className="block space-y-2 text-sm">
-            <span>図の型</span>
+            <span>図・画像の型（確認して割り当てる）</span>
             <NativeSelect
               value={templateId}
               onChange={(e) => {
@@ -554,12 +648,32 @@ function ImageEditor({
                 onDirty(true);
               }}
             >
-              {templates.map((t) => (
-                <option value={t.id} key={t.id}>
-                  {t.label} · v{t.version}
-                </option>
-              ))}
+              <option value="unclassified" disabled>
+                型を選択してください
+              </option>
+              {templates
+                .filter((t) => !['unclassified', 'note-cover'].includes(t.id))
+                .map((t) => (
+                  <option value={t.id} key={t.id}>
+                    {t.label} · v{t.version}
+                  </option>
+                ))}
             </NativeSelect>
+          </label>
+          <p className="text-sm">
+            選択した型の役割: {IMAGE_ROLES[roleForTemplate(templateId)]}
+          </p>
+          <label className="block space-y-2 text-sm">
+            <span>分類を確認した根拠</span>
+            <Textarea
+              rows={2}
+              value={classificationReason}
+              placeholder="実画像で確認した内容、または一致を確認した生成記録を記入"
+              onChange={(e) => {
+                setClassificationReason(e.target.value);
+                onDirty(true);
+              }}
+            />
           </label>
           <p className="text-sm text-console-muted">{template?.policy}</p>
           <label className="block space-y-2 text-sm">
@@ -582,12 +696,43 @@ function ImageEditor({
                   revision: image.revision,
                   templateId,
                   policy,
+                  role: roleForTemplate(templateId),
+                  reason: classificationReason,
                 })
               )
             }
           >
-            画像の改善方針を保存
+            分類と改善方針を確認して保存
           </Button>
+          <Button
+            variant="outline"
+            disabled={busy}
+            onClick={() =>
+              perform(() =>
+                requestJson('/api/media-library/' + image.id, 'PATCH', {
+                  action: 'policy',
+                  revision: image.revision,
+                  policy,
+                })
+              )
+            }
+          >
+            改善方針だけ保存（分類は変更しない）
+          </Button>
+          <ImageAssessment
+            image={image}
+            busy={busy}
+            onDirty={() => onDirty(true)}
+            onSave={(review) =>
+              perform(() =>
+                requestJson('/api/media-library/' + image.id, 'PATCH', {
+                  action: 'assess',
+                  revision: image.revision,
+                  review,
+                })
+              )
+            }
+          />
           <Section title="元データ・生成条件">
             <p className="text-sm">
               {image.inputFiles.length
@@ -785,6 +930,8 @@ export function MediaWorkspace({
   initialCollection = '',
   initialQuery = '',
   initialTemplate = '',
+  initialQueue = '',
+  initialRole = '',
 }: {
   initial: WorkspaceData;
   mode: 'articles' | 'images';
@@ -796,13 +943,21 @@ export function MediaWorkspace({
   initialCollection?: string;
   initialQuery?: string;
   initialTemplate?: string;
+  initialQueue?: string;
+  initialRole?: string;
 }) {
   const [data, setData] = useState(initial),
     [q, setQ] = useState(initialQuery),
     [channel, setChannel] = useState(initialChannel),
     [storage, setStorage] = useState(''),
     [state, setState] = useState(''),
-    [template, setTemplate] = useState(initialTemplate),
+    [template, setTemplate] = useState(
+      initialTemplate === 'unclassified' ? '' : initialTemplate
+    ),
+    [queue, setQueue] = useState(
+      initialTemplate === 'unclassified' ? 'classification' : initialQueue
+    ),
+    [role, setRole] = useState(initialRole),
     [usage, setUsage] = useState(initialUsage),
     [format, setFormat] = useState(initialFormat),
     [collection, setCollection] = useState(initialCollection),
@@ -826,13 +981,25 @@ export function MediaWorkspace({
       collection,
       owner: ownerFilter,
       template,
+      queue,
+      role,
       q,
     })) {
       if (value) url.searchParams.set(key, value);
       else url.searchParams.delete(key);
     }
     window.history.replaceState(null, '', url);
-  }, [channel, usage, format, collection, ownerFilter, template, q]);
+  }, [
+    channel,
+    usage,
+    format,
+    collection,
+    ownerFilter,
+    template,
+    queue,
+    role,
+    q,
+  ]);
   useEffect(() => {
     const controller = new AbortController();
     setDetail(null);
@@ -902,6 +1069,8 @@ export function MediaWorkspace({
           .toLowerCase()
           .includes(q.toLowerCase())) &&
       (!template || i.templateId === template) &&
+      (!queue || i.tasks.includes(queue)) &&
+      (!role || i.classification.role === role) &&
       (!usage || i.usage === usage) &&
       (!format || i.format === format) &&
       (!collection || i.collection === collection) &&
@@ -954,6 +1123,66 @@ export function MediaWorkspace({
           ))}
         </ul>
       </details>
+      {mode === 'images' && (
+        <Section title="画像の改善キュー">
+          <p className="mb-2 text-sm text-console-muted">
+            全使用箇所から自動集計します。複数の作業がある画像は各キューに含まれます。分類済みは品質確認済みを意味しません。
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              size="sm"
+              variant={queue ? 'outline' : 'default'}
+              onClick={() => {
+                setQueue('');
+                setPage(0);
+              }}
+            >
+              全画像
+            </Button>
+            {Object.entries(IMAGE_QUEUES).map(([key, label]) => (
+              <Button
+                key={key}
+                size="sm"
+                variant={queue === key ? 'default' : 'outline'}
+                onClick={() => {
+                  setQueue(key);
+                  setPage(0);
+                }}
+              >
+                {label} · {data.classificationSummary?.tasks[key] ?? 0}
+              </Button>
+            ))}
+          </div>
+        </Section>
+      )}
+      {!!data.inventoryGaps?.length && (
+        <details className="space-y-2 text-sm">
+          <summary className="cursor-pointer font-medium">
+            棚卸し待ちの使用先 ·{' '}
+            {new Set(data.inventoryGaps.map((g) => g.owner)).size}件
+          </summary>
+          <p>
+            一覧未取得を「画像なし」と判定しません。本文・素材台帳を回収して索引を更新すると、同じ画像IDの改善キューへ入ります。
+          </p>
+          <ul className="max-h-64 space-y-2 overflow-y-auto">
+            {data.inventoryGaps.map((gap, index) => (
+              <li key={gap.owner + index}>
+                <Link
+                  className="text-console-accent underline"
+                  href={
+                    '/product/content-quality?owner=' +
+                    encodeURIComponent(gap.owner)
+                  }
+                >
+                  {data.items.find((i) => i.id === gap.owner)?.title ??
+                    gap.owner}
+                </Link>{' '}
+                · {gap.reason}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
       {data.migration && (
         <p className="text-sm text-console-muted">
           旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
@@ -1021,6 +1250,21 @@ export function MediaWorkspace({
         {mode === 'images' && (
           <>
             <NativeSelect
+              aria-label="画像の役割"
+              value={role}
+              onChange={(e) => {
+                setRole(e.target.value);
+                setPage(0);
+              }}
+            >
+              <option value="">すべての役割</option>
+              {Object.entries(IMAGE_ROLES).map(([key, label]) => (
+                <option key={key} value={key}>
+                  {label}
+                </option>
+              ))}
+            </NativeSelect>
+            <NativeSelect
               aria-label="画像の用途"
               value={usage}
               onChange={(e) => {
@@ -1087,11 +1331,13 @@ export function MediaWorkspace({
             }}
           >
             <option value="">すべての型</option>
-            {data.templates.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.label}
-              </option>
-            ))}
+            {data.templates
+              .filter((t) => t.id !== 'unclassified')
+              .map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.label}
+                </option>
+              ))}
           </NativeSelect>
         )}
         {mode === 'images' && (
@@ -1151,6 +1397,25 @@ export function MediaWorkspace({
                   <p className="break-all text-xs text-console-muted">
                     {(row as ImageView).file}
                   </p>
+                  <p className="text-xs text-console-muted">
+                    {IMAGE_USES[(row as ImageView).usage]} ·{' '}
+                    {IMAGE_ROLES[(row as ImageView).classification.role]}
+                  </p>
+                  <StatusBadge
+                    tone={
+                      ['recorded', 'confirmed'].includes(
+                        (row as ImageView).classification.status
+                      )
+                        ? 'info'
+                        : 'warn'
+                    }
+                  >
+                    {
+                      CLASSIFICATION_STATES[
+                        (row as ImageView).classification.status
+                      ]
+                    }
+                  </StatusBadge>
                   <StatusBadge
                     tone={(row as ImageView).original?.key ? 'good' : 'warn'}
                   >

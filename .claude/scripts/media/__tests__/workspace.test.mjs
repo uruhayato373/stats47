@@ -8,14 +8,16 @@ import { archiveSnsImage,readMediaObject } from '../lib/storage.mjs';
 import { WEB_INVENTORY,WEB_PARTS,readWebInventory,writeWebInventory,publicRef,imageReferences,inlineSvgReferences,publicUrlAllowed } from '../lib/web-inventory.mjs';
 import { assertStaticSvg } from '../lib/svg-safety.mjs';
 import { snsImageTemplate } from '../lib/catalog.mjs';
+import { roleForTemplate } from '../lib/classification.mjs';
+import { saveImagePolicy, assessImage } from '../lib/workspace.mjs';
 
 test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
  assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'ranking');
  assert.equal(snsImageTemplate({template:'number'},{width:1080,height:1350}),'unclassified');
  assert.equal(snsImageTemplate({template:'correlation-carousel'},{source:'slide-2-scatter-1080x1350.png'}),'correlation');
  for(const template of ['ranking','household-receipt','rank-routes','buzz-map']) {
-  assert.equal(snsImageTemplate({template},{source:'slide-1-cover-1080x1350.png'}),'unclassified');
-  assert.equal(snsImageTemplate({template},{source:'slide-3-source-1080x1350.png'}),'unclassified');
+  assert.equal(snsImageTemplate({template},{source:'slide-1-cover-1080x1350.png'}),'title-card');
+  assert.equal(snsImageTemplate({template},{source:'slide-3-source-1080x1350.png'}),'source-card');
  }
  assert.equal(snsImageTemplate({template:'tile-change'},{source:'slide-2-detail.png'}),'time-series');
  assert.equal(snsImageTemplate({template:'household-receipt'},{source:'slide-2-detail.png'}),'household');
@@ -25,7 +27,7 @@ test('SNS classification uses asset evidence and excludes non-chart carousel sli
 test('SNS inventory carries recorded dimensions and keeps manual template ownership',t=>{
  const root=fixture(t),image=imageLibrary(root).images.find(i=>i.channel==='instagram'&&i.templateId==='correlation');
  assert.ok(image);assert.equal(image.width,1080);assert.equal(image.height,1350);
- saveImagePlan(root,image.id,image.revision,{templateId:'procedure',policy:'人が確認した割り当て'});
+ saveImagePlan(root,image.id,image.revision,{templateId:'procedure',policy:'人が確認した割り当て',role:'diagram',reason:'手順の図と確認'});
  assert.equal(imageLibrary(root).images.find(i=>i.id===image.id).templateId,'procedure');
 });
 
@@ -42,6 +44,10 @@ function candidate(image){
  return {id:sha([imageSha,inputSha]),basis:image.basis,
  storage:{provider:'r2-private',bucket:'stats47-private',key:candidateKey(imageSha,'png'),sha256:imageSha,bytes:5},
  input:{provider:'r2-private',bucket:'stats47-private',key:inputKey(inputSha),sha256:inputSha,bytes:5},width:1200,height:630,createdAt:'2026-10-16T00:00:00Z',review:null};
+}
+function confirmed(root,image,type=image.templateId==='unclassified'?'ranking':image.templateId){
+ saveImagePlan(root,image.id,image.revision,{templateId:type,policy:image.policy,role:roleForTemplate(type),reason:'試験用固定画像の型を照合'});
+ return imageLibrary(root).images.find(i=>i.id===image.id);
 }
 test('all note records are visible including unavailable bodies; metrics do not invalidate reviews',t=>{
  const root=fixture(t),items=workspaceItems(root);
@@ -66,7 +72,7 @@ test('content changes make an earlier review stale',t=>{
  assert.equal(workspaceItems(root).find(x=>x.id===item.id).reviewState,'stale');
 });
 test('image policy/template changes invalidate exact candidate approval',t=>{
- const root=fixture(t),image=imageLibrary(root).images.find(x=>x.kind!=='cover');
+ const root=fixture(t),image=confirmed(root,imageLibrary(root).images.find(x=>x.kind!=='cover'));
  registerCandidate(root,image.id,image.revision,candidate(image));
  let next=imageLibrary(root).images.find(x=>x.id===image.id);
  assert.throws(()=>reviewCandidate(root,next.id,next.revision,next.candidate.id,{status:'pass',reason:'確認',original:true,mobile:false,data:true}),/スマホ/);
@@ -110,6 +116,7 @@ test('web and SVG catalog share image review, inputs and cross-page usages',t=>{
  fs.writeFileSync(file,JSON.stringify(index));
  let image=imageLibrary(root).images.find(i=>i.owner===items[0].id);
  assert.equal(image.relatedImageIds.length,2);assert.equal(image.inputFiles[0].sha256,input.sha256);
+ image=confirmed(root,image);
  registerCandidate(root,image.id,image.revision,candidate(image));
  image=imageLibrary(root).images.find(i=>i.id===image.id);
  reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'固定値・320pxを照合',original:true,mobile:true,data:true});
@@ -164,4 +171,50 @@ test('partitioned inventory restores all uses and rejects a partial update',t=>{
  assert.throws(()=>readWebInventory(root),/incomplete/);
  writeWebInventory(root,{items:[item],images:[image],coverage:[],updatedAt:'complete'});
  assert.deepEqual(readWebInventory(root).items,[item]);
+});
+
+test('classification persists, records history and invalidates only when original evidence changes',t=>{
+ const root=fixture(t),before=imageLibrary(root).images.find(i=>i.channel==='instagram'&&i.original?.sha256&&i.kind!=='cover');
+ const coverBytes=fs.readFileSync(path.join(root,'data/note/cover-assets.json'));
+ let image=confirmed(root,before,'diagram');
+ assert.equal(image.classification.status,'confirmed');
+ assert.throws(()=>saveImagePlan(root,image.id,before.revision,{templateId:'ranking',policy:'',role:'chart',reason:'確認'}),/再読込/);
+ image=confirmed(root,image,'ranking');
+ assert.equal(image.record.classificationHistory.length,1);
+ assert.equal(image.record.classificationHistory[0].templateId,'diagram');
+ const file=path.join(root,'data/sns/posts.json'),posts=JSON.parse(fs.readFileSync(file));
+ const post=posts.posts.find(p=>'sns/'+p.id===image.owner);
+ post.caption+=' edited';post.impressions=42;fs.writeFileSync(file,JSON.stringify(posts));
+ assert.equal(imageLibrary(root).images.find(i=>i.id===image.id).classification.status,'confirmed');
+ const asset=post.assets.find(a=>a.role+'-'+a.order===image.file);asset.sha256=sha('new actual image');
+ fs.writeFileSync(file,JSON.stringify(posts));
+ const changed=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.equal(changed.classification.status,'stale');assert.ok(changed.tasks.includes('classification'));
+ assert.deepEqual(fs.readFileSync(path.join(root,'data/note/cover-assets.json')),coverBytes);
+});
+test('pending images can record plans, but unknown types and unconfirmed approvals are rejected',t=>{
+ const root=fixture(t);let image=imageLibrary(root).images.find(i=>i.templateId==='unclassified'&&i.kind!=='cover');
+ saveImagePolicy(root,image.id,image.revision,'元画像を回収してから型を確認する');
+ image=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.ok(image.policy.includes('回収'));assert.equal(image.classification.status,'pending');
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{templateId:'made-up',role:'chart',policy:'',reason:'x'}),/不正/);
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{templateId:'map',role:'title',policy:'',reason:'x'}),/一致/);
+ registerCandidate(root,image.id,image.revision,candidate(image));image=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.throws(()=>reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'確認',original:true,mobile:true,data:true}),/分類/);
+});
+test('maintaining a good existing image needs no new candidate; policy changes reopen review',t=>{
+ const root=fixture(t);let image=confirmed(root,imageLibrary(root).images.find(i=>i.original?.sha256&&i.kind!=='cover'),'ranking');
+ assessImage(root,image.id,image.revision,{status:'pass',reason:'原寸・320pxで内容を照合',original:true,mobile:true,data:true});
+ image=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.equal(image.assessmentMatches,true);assert.ok(image.tasks.includes('kept'));assert.ok(!image.tasks.includes('candidate'));
+ saveImagePolicy(root,image.id,image.revision,'文字サイズを変更する');
+ image=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.equal(image.assessmentMatches,false);assert.ok(image.tasks.includes('candidate'));
+});
+test('all covers route to the canonical ledger, and cover policies cannot be saved twice',t=>{
+ const root=fixture(t),library=imageLibrary(root),covers=library.images.filter(i=>i.kind==='cover');
+ assert.ok(covers.length>0);
+ assert.ok(covers.every(i=>i.templateId==='note-cover'&&i.classification.role==='title'&&i.tasks.join()==='cover'&&i.coverManagement));
+ for(const id of ['note-cover','unclassified'])assert.throws(()=>saveTemplate(root,id,'x',{policy:'x',profiles:{}}),/制作画面/);
+ assert.equal(Object.values(library.classificationSummary.states).reduce((a,b)=>a+b),library.images.length);
 });

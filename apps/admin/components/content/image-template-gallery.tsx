@@ -101,6 +101,7 @@ const channels = {
 };
 
 const usages: Record<string, string> = {
+  cover: 'noteカバー',
   body: '本文図版',
   social: '投稿画像',
   ogp: 'OGP',
@@ -159,6 +160,9 @@ function ExamplePreview({
       >
         {labels[example.state]}
       </StatusBadge>
+      {example.image.classification?.status === 'suggested' && (
+        <StatusBadge tone="warn">分類案・実画像で確認</StatusBadge>
+      )}
       <figure className="space-y-2">
         <div className="mx-auto w-full max-w-[320px] rounded-md border border-console-border bg-white">
           <ActualImage
@@ -416,56 +420,67 @@ function TemplateCard({
           </summary>
           <p>{template.policy}</p>
         </details>
-        <details className="space-y-3">
-          <summary className="cursor-pointer text-sm font-medium">
-            共通方針・媒体別の調整を編集{changed ? '（未保存）' : ''}
-          </summary>
-          <Textarea
-            aria-label={template.label + 'の共通方針'}
-            rows={4}
-            value={policy}
-            disabled={busy}
-            onChange={(e) => edit({ policy: e.target.value })}
-          />
-          {(['note', 'x', 'instagram', 'web'] as const).map((channel) => (
-            <label key={channel} className="block space-y-1 text-sm">
-              <span>{channels[channel]}</span>
-              <Textarea
-                disabled={busy}
-                rows={2}
-                value={
-                  profiles[channel] ?? '使用ページの幅と表示テーマで確認する。'
-                }
-                onChange={(e) =>
-                  edit({ profiles: { ...profiles, [channel]: e.target.value } })
-                }
-              />
-            </label>
-          ))}
-          <p className="text-sm text-console-muted">
-            保存すると版が上がり、この型の候補は再確認が必要になります。
-          </p>
-          <Button
-            disabled={busy || !changed}
-            onClick={async () => {
-              setBusy(true);
-              try {
-                await onSave({ ...template, revision }, policy, profiles);
-                onDraft(null);
-                setMessage('方針を更新しました。');
-              } catch (e) {
-                setMessage((e as Error).message);
-              } finally {
-                setBusy(false);
-              }
-            }}
-          >
-            新しい版として保存
+        {template.id === 'note-cover' ? (
+          <Button asChild variant="outline">
+            <Link href="/content/note/covers">
+              カテゴリ別のカバー方針・制作台帳を開く
+            </Link>
           </Button>
-          <p role="status" className="text-sm">
-            {message}
-          </p>
-        </details>
+        ) : (
+          <details className="space-y-3">
+            <summary className="cursor-pointer text-sm font-medium">
+              共通方針・媒体別の調整を編集{changed ? '（未保存）' : ''}
+            </summary>
+            <Textarea
+              aria-label={template.label + 'の共通方針'}
+              rows={4}
+              value={policy}
+              disabled={busy}
+              onChange={(e) => edit({ policy: e.target.value })}
+            />
+            {(['note', 'x', 'instagram', 'web'] as const).map((channel) => (
+              <label key={channel} className="block space-y-1 text-sm">
+                <span>{channels[channel]}</span>
+                <Textarea
+                  disabled={busy}
+                  rows={2}
+                  value={
+                    profiles[channel] ??
+                    '使用ページの幅と表示テーマで確認する。'
+                  }
+                  onChange={(e) =>
+                    edit({
+                      profiles: { ...profiles, [channel]: e.target.value },
+                    })
+                  }
+                />
+              </label>
+            ))}
+            <p className="text-sm text-console-muted">
+              保存すると版が上がり、この型の候補は再確認が必要になります。
+            </p>
+            <Button
+              disabled={busy || !changed}
+              onClick={async () => {
+                setBusy(true);
+                try {
+                  await onSave({ ...template, revision }, policy, profiles);
+                  onDraft(null);
+                  setMessage('方針を更新しました。');
+                } catch (e) {
+                  setMessage((e as Error).message);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              新しい版として保存
+            </Button>
+            <p role="status" className="text-sm">
+              {message}
+            </p>
+          </details>
+        )}
       </div>
     </section>
   );
@@ -546,6 +561,7 @@ export function TemplateGallery({
       byType.set(image.templateId, group);
     }
     return templates
+      .filter((template) => template.id !== 'unclassified')
       .map((template) => {
         const group = byType.get(template.id) ?? [];
         const available = [...MEDIA_CHANNELS, 'web' as const].filter(

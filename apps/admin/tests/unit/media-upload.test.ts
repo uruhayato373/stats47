@@ -3,6 +3,8 @@ import sharp from 'sharp';
 const fixture = vi.hoisted(() => ({
   objects: new Map<string, Buffer>(),
   register: vi.fn(),
+  assess: vi.fn(),
+  readOriginal: vi.fn(),
   broken: false,
 }));
 vi.mock('../../../../.claude/scripts/media/lib/storage.mjs', () => ({
@@ -18,6 +20,7 @@ vi.mock('../../../../.claude/scripts/media/lib/storage.mjs', () => ({
     },
   }),
   readVerified: vi.fn(),
+  readMediaObject: fixture.readOriginal,
 }));
 vi.mock(
   '../../../../.claude/scripts/media/lib/workspace.mjs',
@@ -34,16 +37,20 @@ vi.mock(
         templateId: 'ranking',
         policy: '',
         inputFiles: [],
+        original: { provider: 'r2-private', sha256: 'a'.repeat(64) },
       }),
       registerCandidate: fixture.register,
+      assessImage: fixture.assess,
     };
   }
 );
-import { importImage } from '@/lib/server/content-quality';
+import { importImage, saveOriginalReview } from '@/lib/server/content-quality';
 describe('candidate upload preserves exact image and evidence before registration', () => {
   beforeEach(() => {
     fixture.objects.clear();
     fixture.register.mockClear();
+    fixture.assess.mockClear();
+    fixture.readOriginal.mockReset();
     fixture.broken = false;
   });
   const evidence = {
@@ -70,6 +77,35 @@ describe('candidate upload preserves exact image and evidence before registratio
       })
     ).rejects.toThrow('生成根拠');
     expect(fixture.objects.size).toBe(0);
+  });
+  it('cannot mark an inaccessible or changed original as reviewed', async () => {
+    const review = {
+      status: 'pass' as const,
+      reason: '原寸・320pxと数値を確認',
+      original: true,
+      mobile: true,
+      data: true,
+    };
+    fixture.readOriginal.mockRejectedValueOnce(new Error('原本の照合に失敗'));
+    await expect(saveOriginalReview('id', 'current', review)).rejects.toThrow(
+      '照合'
+    );
+    expect(fixture.assess).not.toHaveBeenCalled();
+    await saveOriginalReview('id', 'current', review);
+    expect(fixture.assess).toHaveBeenCalledOnce();
+    fixture.assess.mockClear();
+    fixture.readOriginal.mockClear();
+    await expect(saveOriginalReview('id', 'old', review)).rejects.toThrow(
+      '画像が変わりました'
+    );
+    expect(fixture.readOriginal).not.toHaveBeenCalled();
+    expect(fixture.assess).not.toHaveBeenCalled();
+    await saveOriginalReview('id', 'current', {
+      ...review,
+      status: 'needs-revision',
+    });
+    expect(fixture.readOriginal).not.toHaveBeenCalled();
+    expect(fixture.assess).toHaveBeenCalledOnce();
   });
   it('registers only after both immutable R2 objects have been read back', async () => {
     await importImage('id', 'current', await file(), evidence);

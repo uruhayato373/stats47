@@ -24,7 +24,7 @@ try{
     if(sha(fs.readFileSync(target))!==input.sha256)throw Error('Local readback mismatch');
     restored.push({file,sha256:input.sha256,bytes:bytes.length});
   }
-  const request={schemaVersion:1,imageId:image.id,owner:image.owner,basis:image.basis,policy:image.policy,
+  const request={schemaVersion:1,imageId:image.id,owner:image.owner,basis:image.basis,policy:image.policy,classification:image.classification,tasks:image.tasks,
     template:readTemplates(ROOT).templates.find(t=>t.id===image.templateId),generation:image.generation,sourceLinks:image.sourceLinks,restored,
     reproducibility:image.inputFiles.some(f=>f.role==='data'||(f.role==='input'&&/\.(json|csv)$/.test(f.name)))?'fixed-inputs-restored-render-unverified':'numeric-inputs-unverified',
     instruction:'Use these exact input values, year and units. Render through the referenced deterministic renderer. Upload candidate and evidence in /ops/image-library. A restore is not a successful re-render.'};
