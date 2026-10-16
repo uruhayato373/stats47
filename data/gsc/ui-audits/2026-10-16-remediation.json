@@ -1,0 +1,681 @@
+{
+  "schemaVersion": 1,
+  "observedDateJst": "2026-10-16",
+  "property": "sc-domain:stats47.jp",
+  "status": "local-implementation-not-deployed",
+  "initialAudit": "data/gsc/ui-audits/2026-10-16.json",
+  "soft404": {
+    "observedAt": "2026-10-16T12:51:23.358Z",
+    "method": "public HTTP HTML + 3 Playwright Chrome render checks + actual inbound hrefs",
+    "pages": [
+      {
+        "url": "https://stats47.jp/areas/17000/safety",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/17000/safety",
+        "canonical": "https://stats47.jp/areas/17000/safety",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "石川県の安全 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "石川県の安全"
+        ],
+        "h2": [
+          "石川県の主なデータ",
+          "石川県の主要指標",
+          "犯罪の認知と検挙",
+          "交通事故の発生と人的被害",
+          "火災と救急需要",
+          "交通安全と高齢者の死傷",
+          "洪水と浸水",
+          "自然災害の人的・住家被害と復旧支出",
+          "消防・救急の人員と車両",
+          "避難施設と個別避難計画の整備",
+          "犯罪と消費者被害",
+          "都道府県の分布",
+          "指標の比較",
+          "白書・統計から見る論点",
+          "石川県を空間分析で読む"
+        ],
+        "highlights": "石川県の主なデータ",
+        "highlightText": "石川県の主なデータこのテーマに関連する最新公表値です。刑法犯認知件数（人口千人当たり）4.31 件2023年度凶悪犯認知件数33 件2023年度刑法犯認知件数（総数（旧統計））4,775 件2023年度",
+        "bodyTextSha256": "a72b3b4e7c611bde6fed143a66c0aead76d75b99447e630ed18ec4ccf656fbb4",
+        "bodyTextCharacters": 8864,
+        "inboundPages": [
+          "https://stats47.jp/areas/17000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/blog/apple-expenditure-ranking",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/blog/apple-expenditure-ranking",
+        "canonical": "https://stats47.jp/blog/apple-expenditure-ranking",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "りんご消費支出額ランキング｜1位岩手9262円・47位大分3074円 3.0倍差 47都道府県2024 | 統計で見る都道府県",
+        "h1": [
+          "りんご消費支出は東北勢が独占｜産地なのに青森が首位を逃す謎 (2024)"
+        ],
+        "h2": [
+          "この記事のデータを確かめる",
+          "上位と下位",
+          "下位グループ",
+          "発見: 生産量トップの青森が首位を逃す理由",
+          "まとめ",
+          "データについて",
+          "データ出典"
+        ],
+        "highlights": "",
+        "highlightText": "",
+        "bodyTextSha256": "36627ac8db51446a2669123e19ed44bfd4cb468045055ec562a5c919bad6b9ea",
+        "bodyTextCharacters": 3862,
+        "inboundPages": [
+          "https://stats47.jp/ranking/apple-consumption-expenditure",
+          "https://stats47.jp/tag/%E3%82%8A%E3%82%93%E3%81%94",
+          "https://stats47.jp/blog/aomori-food-culture"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/24000/labor-mobility",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/24000/labor-mobility",
+        "canonical": "https://stats47.jp/areas/24000/labor-mobility",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "三重県の人材流動性・雇用環境 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "三重県の人材流動性・雇用環境"
+        ],
+        "h2": [
+          "三重県の主なデータ",
+          "三重県の主要指標",
+          "求人・求職と職業紹介",
+          "離職と転職",
+          "就業の状態と働き方",
+          "就業異動率を詳しく見る",
+          "非正規雇用と雇用の安定性",
+          "労働時間と長時間就業",
+          "テレワークと通勤",
+          "通勤通学と昼間人口",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方",
+          "白書・統計から見る論点",
+          "三重県を空間分析で読む"
+        ],
+        "highlights": "三重県の主なデータ",
+        "highlightText": "三重県の主なデータこのテーマに関連する最新公表値です。離職率4.1 %2022年度転職率3.8 %2022年度有効求人倍率1.51 倍2022年度",
+        "bodyTextSha256": "45dd3c0eb73cc1afa46e4fb5993e04e482ed126c26e16ba81be01668bd08c705",
+        "bodyTextCharacters": 5086,
+        "inboundPages": [
+          "https://stats47.jp/areas/24000/population-dynamics"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/33000/fishery-marine",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/33000/fishery-marine",
+        "canonical": "https://stats47.jp/areas/33000/fishery-marine",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "岡山県の漁業（水産業） | stats47 | 統計で見る都道府県",
+        "h1": [
+          "岡山県の漁業（水産業）"
+        ],
+        "h2": [
+          "岡山県の主なデータ",
+          "岡山県の主要指標",
+          "漁獲量と養殖収獲量",
+          "海と川・湖の内訳",
+          "主な魚種と産地",
+          "漁業・養殖業の産出額",
+          "漁業の担い手",
+          "都道府県の分布",
+          "指標の比較",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "岡山県の主なデータ",
+        "highlightText": "岡山県の主なデータこのテーマに関連する最新公表値です。漁獲量3,306 トン2023年度海面漁業漁獲量3,127 トン2023年度内水面漁業漁獲量179 トン2023年度",
+        "bodyTextSha256": "a13a0dde78515381a974ac150a5cea664cb8f155a6d97877a012588272239374",
+        "bodyTextCharacters": 3721,
+        "inboundPages": [
+          "https://stats47.jp/areas/33000/population-dynamics"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/39000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/39000/labor-wages",
+        "canonical": "https://stats47.jp/areas/39000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "高知県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "高知県の労働・賃金"
+        ],
+        "h2": [
+          "高知県の主なデータ",
+          "高知県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "高知県の主なデータ",
+        "highlightText": "高知県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金952 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））211.1 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））175 千円2023年",
+        "bodyTextSha256": "ac93641d51800a66d74be3333b60c18e1067ff8c2470f0bbb192b4294da00ac7",
+        "bodyTextCharacters": 3797,
+        "inboundPages": [
+          "https://stats47.jp/areas/39000",
+          "https://stats47.jp/areas/39000/population-dynamics"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/47000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/47000/labor-wages",
+        "canonical": "https://stats47.jp/areas/47000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "沖縄県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "沖縄県の労働・賃金"
+        ],
+        "h2": [
+          "沖縄県の主なデータ",
+          "沖縄県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "沖縄県の主なデータ",
+        "highlightText": "沖縄県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金952 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））234.6 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））164.9 千円2023年",
+        "bodyTextSha256": "1c37dcc3c2304101a347bac3a3135930c6f6b89d87ca454c650c770ce509da4b",
+        "bodyTextCharacters": 3813,
+        "inboundPages": [
+          "https://stats47.jp/areas/47000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/38000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/38000/labor-wages",
+        "canonical": "https://stats47.jp/areas/38000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "愛媛県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "愛媛県の労働・賃金"
+        ],
+        "h2": [
+          "愛媛県の主なデータ",
+          "愛媛県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "愛媛県の主なデータ",
+        "highlightText": "愛媛県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金956 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））213.7 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））181.9 千円2023年",
+        "bodyTextSha256": "5ef5a268c858ed2a009318be749e961bbab4e89e053e817672ac60f7c3790b03",
+        "bodyTextCharacters": 3811,
+        "inboundPages": [
+          "https://stats47.jp/areas/38000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/40000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/40000/labor-wages",
+        "canonical": "https://stats47.jp/areas/40000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "福岡県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "福岡県の労働・賃金"
+        ],
+        "h2": [
+          "福岡県の主なデータ",
+          "福岡県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "福岡県の主なデータ",
+        "highlightText": "福岡県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金992 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））227.6 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））185.5 千円2023年",
+        "bodyTextSha256": "28ca8c924ce9e98d7422382281f68901cc9caf967f20e0fd8228913a4d4b7236",
+        "bodyTextCharacters": 3799,
+        "inboundPages": [
+          "https://stats47.jp/areas/40000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/19000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/19000/labor-wages",
+        "canonical": "https://stats47.jp/areas/19000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "山梨県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "山梨県の労働・賃金"
+        ],
+        "h2": [
+          "山梨県の主なデータ",
+          "山梨県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "山梨県の主なデータ",
+        "highlightText": "山梨県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金988 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））225.4 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））190 千円2023年",
+        "bodyTextSha256": "d68666db7e52b9414471549dd27eb11140c6c97e94a3c967756eb6fbadadcd10",
+        "bodyTextCharacters": 3802,
+        "inboundPages": [
+          "https://stats47.jp/areas/19000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/41000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/41000/labor-wages",
+        "canonical": "https://stats47.jp/areas/41000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "佐賀県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "佐賀県の労働・賃金"
+        ],
+        "h2": [
+          "佐賀県の主なデータ",
+          "佐賀県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "佐賀県の主なデータ",
+        "highlightText": "佐賀県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金956 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））246 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））172.7 千円2023年",
+        "bodyTextSha256": "02fda79845ebb7520b9c2ea511e12e8146bbe8c34027172c0760b9adab46418a",
+        "bodyTextCharacters": 3798,
+        "inboundPages": [
+          "https://stats47.jp/areas/41000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/18000/aging-society",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/18000/aging-society",
+        "canonical": "https://stats47.jp/areas/18000/aging-society",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "福井県の少子高齢化 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "福井県の少子高齢化"
+        ],
+        "h2": [
+          "福井県の主なデータ",
+          "福井県の主要指標",
+          "出生と高齢化の現在地",
+          "年齢構造と支え手の比率",
+          "婚姻と家族形成",
+          "高齢者はどの世帯で暮らすか",
+          "高齢者の就業",
+          "医療・介護の受け皿と費用",
+          "過疎地域等の集落と高齢化",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方",
+          "白書・統計から見る論点",
+          "過疎地域と医療機関"
+        ],
+        "highlights": "福井県の主なデータ",
+        "highlightText": "福井県の主なデータこのテーマに関連する最新公表値です。65歳以上人口割合（65歳以上割合）32.055 %2025年老年化指数（15歳未満人口100人当たり）255.4 指数2022年合計特殊出生率1.46 人2023年",
+        "bodyTextSha256": "2c8ddd35e0af355615a907aa4df5daef3336bc9d099f589d84b305abef8b4a17",
+        "bodyTextCharacters": 5557,
+        "inboundPages": [
+          "https://stats47.jp/areas/18000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/09000/local-finance",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/09000/local-finance",
+        "canonical": "https://stats47.jp/areas/09000/local-finance",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "栃木県の地方財政 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "栃木県の地方財政"
+        ],
+        "h2": [
+          "栃木県の主なデータ",
+          "栃木県の主要指標",
+          "財政の規模と収支",
+          "財政運営の余裕と負担",
+          "どこから調達し何に使うか",
+          "児童福祉への支出と公的給付",
+          "公共施設の量と維持・建設への支出",
+          "目的別と性質別の歳出を分けて見る",
+          "行政部門の職員数と職種別給与",
+          "ふるさと納税の受入・募集費・税控除",
+          "都道府県の分布",
+          "指標の比較",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "栃木県の主なデータ",
+        "highlightText": "栃木県の主なデータこのテーマに関連する最新公表値です。自治体の財政力（都道府県財政）0.61 指数2022年度経常収支比率（都道府県財政）93.3 %2022年度実質公債費比率（都道府県財政）9.5 %2022年度",
+        "bodyTextSha256": "b0c79a493053070318e429b4c846dbc97d3e0e676417070b1b6d8e34e7070673",
+        "bodyTextCharacters": 6662,
+        "inboundPages": [
+          "https://stats47.jp/areas/09000/population-dynamics"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/22000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/22000/labor-wages",
+        "canonical": "https://stats47.jp/areas/22000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "静岡県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "静岡県の労働・賃金"
+        ],
+        "h2": [
+          "静岡県の主なデータ",
+          "静岡県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "静岡県の主なデータ",
+        "highlightText": "静岡県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金1,034 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））249.8 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））189.7 千円2023年",
+        "bodyTextSha256": "94e65e6ec5774da4a576c433bc3a3f72ade826b5d2b37487ec20cebe721a3619",
+        "bodyTextCharacters": 3811,
+        "inboundPages": [
+          "https://stats47.jp/areas/22000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/08000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/08000/labor-wages",
+        "canonical": "https://stats47.jp/areas/08000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "茨城県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "茨城県の労働・賃金"
+        ],
+        "h2": [
+          "茨城県の主なデータ",
+          "茨城県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "茨城県の主なデータ",
+        "highlightText": "茨城県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金1,005 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））236 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））185.4 千円2023年",
+        "bodyTextSha256": "c6ca1a7effc7a8b05c25d78cc39f4780d733b3c1c49db79cc0d3a832a38a0371",
+        "bodyTextCharacters": 3809,
+        "inboundPages": [
+          "https://stats47.jp/areas/08000"
+        ]
+      },
+      {
+        "url": "https://stats47.jp/areas/18000/labor-wages",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/areas/18000/labor-wages",
+        "canonical": "https://stats47.jp/areas/18000/labor-wages",
+        "robots": "index, follow",
+        "xrobots": null,
+        "title": "福井県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          "福井県の労働・賃金"
+        ],
+        "h2": [
+          "福井県の主なデータ",
+          "福井県の主要指標",
+          "最低賃金はいくらか",
+          "初任給はいくらか",
+          "属性別の賃金差",
+          "女性の就業と賃金",
+          "都道府県の分布",
+          "指標の比較",
+          "読み方・雇用環境への導線",
+          "白書・統計から見る論点"
+        ],
+        "highlights": "福井県の主なデータ",
+        "highlightText": "福井県の主なデータこのテーマに関連する最新公表値です。地域別最低賃金984 円2024年度大卒初任給（新規学卒者の所定内給与額（大学卒））227 千円2023年高卒初任給（新規学卒者の所定内給与額（高校卒））186 千円2023年",
+        "bodyTextSha256": "1bbef0556b1d082601a7f2a0763c59ba4b641fabda9ba84e3f99fd8aa0474b98",
+        "bodyTextCharacters": 3794,
+        "inboundPages": [
+          "https://stats47.jp/areas/18000"
+        ]
+      }
+    ],
+    "browser": [
+      {
+        "title": "高知県の労働・賃金 | stats47 | 統計で見る都道府県",
+        "h1": [
+          {
+            "text": "高知県の労働・賃金",
+            "visible": true
+          }
+        ],
+        "highlights": "高知県の主なデータ\n\nこのテーマに関連する最新公表値です。\n\n地域別最低賃金\n952 円\n2024年度\n大卒初任給（新規学卒者の所定内給与額（大学卒））\n211.1 千円\n2023年\n高卒初任給（新規学卒者の所定内給与額（高校卒））\n175 千円\n2023年",
+        "svgCount": 52,
+        "canvasCount": 0,
+        "url": "https://stats47.jp/areas/39000/labor-wages",
+        "status": 200,
+        "errors": [],
+        "bodyTextSha256": "426386cc98e3341dd33f375f191ee8d2dff3b1228fc294eab2ba39ffde591429",
+        "mainTextCharacters": 1,
+        "articleExcerpt": [
+          "供給・受け皿\n\n求人と失業から見る労働需給\n\n有効求人倍率と完全失業率は、地域の仕事の需給をそれぞれどう映しているか。\n\n有効求人倍率は公共職業安定所の求人・求職、完全失業率は国勢調査の労働力人口を基礎にします。調査対象と時点が異なるため、数値を直接差し引いて比較はできません。\n\n関連ランキング\n\n有効求人倍率\n完全失業率（総数）\n\n別の視点で見る\n\n人材流動性・雇用環境\n\n参考資料\n\n令和7年版 労働経済の分析（厚生労働省）",
+          "格差・公平性\n\n男女の所定内給与水準\n\n男性を100とした女性の所定内給与水準には、どのような地域差があるか。\n\n一般労働者の所定内給与額を男女で比べた未調整の比率です。短時間労働者を含まず、年齢、勤続年数、職種などの構成差を調整した格差ではありません。\n\n関連ランキング\n\n男女間賃金格差（女性/男性）\n\n別の視点で見る\n\n職業別年収\n\n参考資料\n\n賃金構造基本統計調査（厚生労働省）"
+        ]
+      },
+      {
+        "title": "石川県の安全 | stats47 | 統計で見る都道府県",
+        "h1": [
+          {
+            "text": "石川県の安全",
+            "visible": true
+          }
+        ],
+        "highlights": "石川県の主なデータ\n\nこのテーマに関連する最新公表値です。\n\n刑法犯認知件数（人口千人当たり）\n4.31 件\n2023年度\n凶悪犯認知件数\n33 件\n2023年度\n刑法犯認知件数（総数（旧統計））\n4,775 件\n2023年度",
+        "svgCount": 133,
+        "canvasCount": 0,
+        "url": "https://stats47.jp/areas/17000/safety",
+        "status": 200,
+        "errors": [],
+        "bodyTextSha256": "eb6eed5840e3c37d31a26aa5f0ad860a36884dab599ee5d1c495516ee90f8d30",
+        "mainTextCharacters": 1,
+        "articleExcerpt": [
+          "成果\n\n犯罪の認知状況と検挙状況\n\n人口千人当たりの刑法犯認知件数と検挙率には、地域ごとにどのような差があるか\n\n刑法犯認知件数は警察が犯罪の発生を認知した事件数で、未認知の事件は含みません。主指標と推移図では人口千人当たりの値を使い、罪種別の内訳は総件数で表示します。検挙率は検挙した事件件数を認知件数で割った割合であり、検挙人員の割合ではありません。\n\n関連ランキング\n\n刑法犯認知件数（人口千人当たり）\n刑法犯検挙率\n\n参考資料\n\n犯罪統計（警察庁）",
+          "成果\n\n交通事故の発生と人的被害\n\n交通事故の発生件数と負傷者数には、地域ごとにどのような差があるか\n\n現在の交通事故統計は、人の死亡または負傷を伴う事故を対象とし、物損事故は含みません。発生件数は事故の数、負傷者数は重傷者と軽傷者の人数なので、同じ単位として足し合わせません。\n\n関連ランキング\n\n交通事故発生件数（総数）\n交通事故負傷者数（総数）\n\n参考資料\n\n交通事故発生状況（警察庁）"
+        ]
+      },
+      {
+        "title": "りんご消費支出額ランキング｜1位岩手9262円・47位大分3074円 3.0倍差 47都道府県2024 | 統計で見る都道府県",
+        "h1": [
+          {
+            "text": "りんご消費支出は東北勢が独占｜産地なのに青森が首位を逃す謎 (2024)",
+            "visible": true
+          }
+        ],
+        "svgCount": 42,
+        "canvasCount": 0,
+        "url": "https://stats47.jp/blog/apple-expenditure-ranking",
+        "status": 200,
+        "errors": [],
+        "bodyTextSha256": "67a988a938547cc026d86e4c0bbc0d14c14ea482aad2ad21d5735238a1f60949",
+        "mainTextCharacters": 2,
+        "articleExcerpt": [
+          "「りんごの消費量が一番多いのはやっぱり青森でしょう」——多くの人がそう予想するはずです。青森県は収穫量で全国シェア約6割を占める日本最大のりんご産地であり、「りんご県」を名乗る自治体もあります。ところが総務省の家計調査（二人以上世帯・都道府県庁所在市）でりんごの年間消費支出額を見ると、トップの座には別の県が入っていました。\n\n2024年の家計調査によると、りんご消費支出額の1位は岩手県で9,262円。青森県は7,748円で2位にとどまります。最下位は大分県の3,074円で、1位との差は約3.0倍です。この記事では、なぜ「りんご県」青森が首位ではないのか、そして上位に東北勢と長野県が並ぶ理由を、産地との近さという観点から掘り下げます。\n\n補足\n\nりんご消費支出額は総務省「家計調査（品目別）」の都道府県庁所在市データです。実際に住む都道府県全体の消費傾向ではなく、県庁所在市（盛岡市・青森市など）の二人以上世帯が対象である点に注意してください。地方部を含む県全体の消費とは値がずれる可能性があります。\n\n上位と下位\n\n上位5県は岩手（9,262円）、青森（7,748円）、福島（7,327円）、秋田（7,028円）、山形（6,927円）と、東北6県のうち5県が名を連ねます。6位以降は兵庫（6,781円）、長崎（6,715円）と続き、日本有数のりんご産地である長野は8位（6,353円）に入ります。上位10位以内は東北5県＋兵庫・長崎・長野・群馬・奈良という構成になりました。\n\n東北勢が軒並み上位に来る背景には、りんごの一大産地が集中していることがあります。青森はもちろん、岩手・福島・秋田・山形もりんご生産量の全国上位県で、地元で採れたりんごが日常的に食卓に上りやすい環境にあります。産直市場や親戚・知人からの「お裾分け」文化が根強く残っている地域ほど、家計調査の支出額にも表れやすいと考えられます。\n\n上位3県\nりんご消費支出額ランキングをもっと見る\n下位グループ\n\n下位5県は石川（3,567円）、三重（3,689円）、愛知（3,697円）、大阪（3,759円）、そして最下位の大分（3,074円）です。近畿・中部・九州の都市部や、りんご以外の果物（みかん・梨など）が地元で盛んな地域が並んでいます。\n\n大分は日本梨や柑橘類の産地として知られ、地元産の果物としてはりんご以外の選択肢が豊富にあります。愛知や大阪のような大都市圏は、特定の果物の産地としての結びつきが薄く、消費が果物全体に分散しやすい傾向があります。石川や三重も同様に、りんごが県の代表的な特産品ではない地域です。\n\n同じ家計調査の品目別データでは、米の消費量ランキングでも地元の主食作物への依存度が地域ごとに大きく異なることが分かっています。りんごや米に限らず、家計の消費支出は産地との近さに強く影響される傾向があります。\n\n発見: 生産量トップの青森が首位を逃す理由\n\n最も興味深い発見は、生産量で圧倒的な青森県が消費支出額では首位を逃しているという点です。農林水産省の統計で青森はりんご収穫量の全国シェアが約6割に達する圧倒的な産地ですが、家計調査の消費支出額では岩手に次ぐ順位にとどまっています。\n\n[仮説] 岩手県は青森ほど収穫量で突出してはいないものの、盛岡市を中心に「りんごの木のオーナー制度」や産直施設が普及しており、県庁所在市に住む世帯が購入する頻度・量が相対的に多い可能性があります。また青森県産りんごは県外・海外への出荷比率が高く、地元消費に回る割合が必ずしも生産量に比例しない可能性も考えられます。この点は家計調査の品目別購入数量データや青森県の産直販売統計と突き合わせた検証が必要です。詳しい県別の数値はりんご消費支出額ランキングのページで確認できます。\n\nもう一つの発見は、上位10県のうち兵庫・長崎・奈良のように、りんごの主要産地とは言い難い県も含まれていることです。これらの県では、贈答用としてりんごを購入する文化や、健康志向による果物消費の高さが影響している可能性があります。[仮説] であり、地域別の世帯属性データ（高齢化率や果物全体の消費支出）と合わせた分析が今後の検証課題です。\n\n読み解きのポイント: りんごのような単一品目の消費支出は、生産量ランキングと合わせて見ると「地産地消がどれだけ機能しているか」が見えてきます。産地なのに消費が少ない、逆に産地でないのに消費が多い県を比較すると、流通や食文化の違いが浮かび上がります。\n\n注意\n\n家計調査は購入金額ベースの支出額であり、購入量（重量）とは異なります。りんごの価格は品種や時期によって変動するため、支出額が高い＝消費量が多いとは限らない点に留意してください。\n\nまとめ\n1位: 岩手県（9,262円）\n47位（最下位）: 大分県（3,074円）\n倍率: 約3.0倍\n地域パターン: 東北5県（岩手・青森・福島・秋田・山形）と長野が上位クラスタを形成\n特筆点: 生産量日本一の青森は消費支出額では首位を逃す。産地=消費量トップとは限らないという意外な結果\n\n家計消費に関するその他の統計は経済カテゴリでまとめて確認できます。\n\nデータについて\n\n総務省統計局「家計調査（品目別）」都道府県庁所在市の二人以上世帯データ（2024年）を基に集計しています。e-Stat経由で整備した統計データを使用しました。"
+        ]
+      }
+    ]
+  },
+  "robotsIndexed": {
+    "total": 584,
+    "publicDownloads": 576,
+    "ogp": 8,
+    "decision": "Allow crawl of public ranking download route with X-Robots-Tag: noindex; allow public OGP crawling and existing 404/410 removal signals; retired area OGP responds 410 instead of streamed 200 notFound.",
+    "implementationFiles": [
+      "apps/web/src/app/robots.ts",
+      "apps/web/src/app/api/ranking/[rankingKey]/download/route.ts",
+      "apps/web/src/middleware.ts"
+    ]
+  },
+  "validation": {
+    "webTestsPassed": 132,
+    "queueTestsPassed": 11,
+    "webTypeCheck": "passed",
+    "productionDeployment": "not-run",
+    "localHttp": [
+      {
+        "path": "/robots.txt",
+        "status": 200,
+        "xRobotsTag": null,
+        "contentType": "text/plain",
+        "contentDisposition": null,
+        "cloudflareCache": "public, max-age=86400, stale-while-revalidate=604800, stale-if-error=86400",
+        "bytes": 511,
+        "body": "User-Agent: *\nAllow: /\nAllow: /ranking/*?norm=*\nAllow: /api/ranking/*/download$\nAllow: /api/ranking/*/download?\nDisallow: /admin/*\nDisallow: /api/*\nDisallow: /profile/edit\n\nUser-Agent: Google-Extended\nAllow: /\nAllow: /ranking/*?norm=*\nAllow: /api/ranking/*/download$\nAllow: /api/ranking/*/download?\nDisallow: /admin/*\nDisallow: /api/*\nDisallow: /profile/edit\n\nUser-Agent: GPTBot\nDisallow: /\n\nUser-Agent: CCBot\nDisallow: /\n\nSitemap: http://localhost:3000/sitemap.xml\nSitemap: http://localhost:3000/sitemap/8.xml\n"
+      },
+      {
+        "path": "/api/ranking/total-population/download?format=json",
+        "status": 200,
+        "xRobotsTag": "noindex",
+        "contentType": "application/json; charset=utf-8",
+        "contentDisposition": "attachment; filename=\"total-population.json\"; filename*=UTF-8''total-population.json",
+        "cloudflareCache": "public, max-age=2592000, stale-while-revalidate=604800, stale-if-error=86400",
+        "bytes": 423913
+      },
+      {
+        "path": "/api/ranking/total-population/download?format=csv",
+        "status": 200,
+        "xRobotsTag": "noindex",
+        "contentType": "text/csv; charset=utf-8",
+        "contentDisposition": "attachment; filename=\"total-population.csv\"; filename*=UTF-8''total-population.csv",
+        "cloudflareCache": "public, max-age=2592000, stale-while-revalidate=604800, stale-if-error=86400",
+        "bytes": 20028
+      },
+      {
+        "path": "/api/ranking/total-population/download?format=invalid",
+        "status": 400,
+        "xRobotsTag": "noindex",
+        "contentType": "application/json",
+        "contentDisposition": null,
+        "cloudflareCache": null,
+        "bytes": 49
+      },
+      {
+        "path": "/areas/19000/opengraph-image",
+        "status": 410,
+        "xRobotsTag": "noindex",
+        "contentType": null,
+        "contentDisposition": null,
+        "cloudflareCache": null,
+        "bytes": 0
+      },
+      {
+        "path": "/ranking/psychiatric-hospital-count/opengraph-image",
+        "status": 404,
+        "xRobotsTag": null,
+        "contentType": "text/html; charset=utf-8",
+        "contentDisposition": null,
+        "cloudflareCache": "public, max-age=86400, stale-while-revalidate=604800, stale-if-error=86400",
+        "bytes": 119307
+      },
+      {
+        "path": "/themes/daily-time-use/opengraph-image",
+        "status": 200,
+        "xRobotsTag": null,
+        "contentType": "image/png",
+        "contentDisposition": null,
+        "cloudflareCache": "public, max-age=86400, stale-while-revalidate=604800, stale-if-error=86400",
+        "bytes": 113940
+      }
+    ],
+    "allWorkspaceTypeChecks": "passed: 25 workspaces + 8 script configs",
+    "docs": "passed: errors 0, pre-existing warnings 5",
+    "fullProductionBuild": "not-run; targeted route tests and local HTTP verification used",
+    "eslint": "passed",
+    "queueScope": {
+      "changed": 15,
+      "total": 3417,
+      "unrelatedEntriesUnchanged": true
+    }
+  },
+  "officialSources": [
+    "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl"
+  ],
+  "gscLiveTests": {
+    "recordedAt": "2026-10-16T13:04:52.006Z",
+    "method": "Authenticated Search Console UI via Playwright; public URL tests and one indexing request per representative URL",
+    "results": [
+      {
+        "url": "https://stats47.jp/areas/39000/labor-wages",
+        "observedAt": "2026-10-16T12:56:56.027Z",
+        "body": "\nGOOGLE インデックス\nライブテスト\nテスト日時: 2026/10/16、21:55\n\ncheck_circle\nURL は Google に登録できます\nURL がインデックスに登録され、正規 URL として選択された場合、関連するすべての拡張機能とともに Google 検索結果に表示されます。詳細\nテスト済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ncheck_circle\nページの可用性\nページをインデックスに登録可能です\n\n特定の条件が満たされている場合にのみ、URL はインデックスに登録されます\n検出\nライブテストでは確認できません\nクロール\n時間\n2026/10/16 21:55:48\nユーザー エージェント\nGoogle 検査ツール（スマートフォン）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/39000/labor-wages\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\ncheck_circle\nパンくずリスト\n1 件の有効なアイテムを検出しました\n",
+        "indexingRequest": "accepted",
+        "requestConfirmation": "）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/39000/labor-wages\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\ncheck_circle\nパンくずリスト\n1 件の有効なアイテムを検出しました\n\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+      },
+      {
+        "url": "https://stats47.jp/blog/apple-expenditure-ranking",
+        "observedAt": "2026-10-16T13:01:49.707Z",
+        "body": "\nGOOGLE インデックス\nライブテスト\nテスト日時: 2026/10/16、21:59\n\ncheck_circle\nURL は Google に登録できます\nURL がインデックスに登録され、正規 URL として選択された場合、関連するすべての拡張機能とともに Google 検索結果に表示されます。詳細\nテスト済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ncheck_circle\nページの可用性\nページをインデックスに登録可能です\n\n特定の条件が満たされている場合にのみ、URL はインデックスに登録されます\n検出\nライブテストでは確認できません\nクロール\n時間\n2026/10/16 21:59:26\nユーザー エージェント\nGoogle 検査ツール（スマートフォン）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/blog/apple-expenditure-ranking\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\nURL に拡張機能はありません",
+        "indexingRequest": "accepted"
+      },
+      {
+        "url": "https://stats47.jp/areas/17000/safety",
+        "observedAt": "2026-10-16T13:03:59.364Z",
+        "body": "\nGOOGLE インデックス\nライブテスト\nテスト日時: 2026/10/16、22:02\n\ncheck_circle\nURL は Google に登録できます\nURL がインデックスに登録され、正規 URL として選択された場合、関連するすべての拡張機能とともに Google 検索結果に表示されます。詳細\nテスト済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ncheck_circle\nページの可用性\nページをインデックスに登録可能です\n\n特定の条件が満たされている場合にのみ、URL はインデックスに登録されます\n検出\nライブテストでは確認できません\nクロール\n時間\n2026/10/16 22:03:04\nユーザー エージェント\nGoogle 検査ツール（スマートフォン）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/17000/safety\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\ncheck_circle\nパンくずリスト\n1 件の有効なアイテムを検出しました\n",
+        "indexingRequest": "accepted",
+        "requestConfirmation": "ck_circle\nページの可用性\nページをインデックスに登録可能です\n\n特定の条件が満たされている場合にのみ、URL はインデックスに登録されます\n検出\nライブテストでは確認できません\nクロール\n時間\n2026/10/16 22:03:04\nユーザー エージェント\nGoogle 検査ツール（スマートフォン）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/17000/safety\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\ncheck_circle\nパンくずリスト\n1 件の有効なアイテムを検出しました\n\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+      }
+    ],
+    "limitation": "Live test success and accepted requests do not confirm indexing; observe subsequent indexed inspection lastCrawlTime and verdict."
+  }
+}

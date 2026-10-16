@@ -1,5 +1,42 @@
 export const RESOLVED_BY_INSPECTION = "url-inspection";
 
+// 旧 resubmit は保存済み判定の読み込みだけに残す。通常ページの Indexing API は使わない。
+export const CONTENT_VERDICT_ACTION = {
+  resubmit: "observe-after-fix",
+  "observe-after-fix": "observe-after-fix",
+  enrich: "enrich",
+  noindex: "noindex",
+  deactivate: "deactivate",
+};
+
+/** 内容確認の結果を既存キューへ反映する。全件を検証してから更新し、登録完了とは扱わない。 */
+export function applyContentVerdict(queue, urls, verdict, note) {
+  if (verdict === "resubmit" || !Object.hasOwn(CONTENT_VERDICT_ACTION, verdict)) {
+    throw new Error(`未対応の content verdict: ${verdict}`);
+  }
+  if (!note?.trim()) throw new Error("内容確認の証拠を --note に指定してください");
+  const targets = [...new Set(urls)];
+  if (!targets.length) throw new Error("対象 URL が空です");
+  const entries = targets.map((url) => {
+    const entry = queue.find((candidate) => candidate.url === url);
+    if (!entry) throw new Error(`queue に無い URL: ${url}`);
+    if (!["pending", "in-progress"].includes(entry.status) ||
+        !["content-check", "enrich", "observe-after-fix"].includes(entry.action)) {
+      throw new Error(`内容確認対象ではない URL: ${url} (${entry.status}/${entry.action})`);
+    }
+    return entry;
+  });
+  for (const entry of entries) {
+    entry.content_verdict = verdict;
+    entry.action = CONTENT_VERDICT_ACTION[verdict];
+    entry.verdict = `cc:${verdict}`;
+    entry.content_signal = "content-reviewed";
+    entry.status = "in-progress";
+    entry.note = note;
+  }
+  return entries.length;
+}
+
 export function summarizeCoverageQueue(queue) {
   const byAction = {};
   const byStatus = {};

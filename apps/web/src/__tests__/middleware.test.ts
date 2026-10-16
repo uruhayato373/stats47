@@ -34,6 +34,18 @@ describe('isValidPrefCode', () => {
   });
 });
 
+describe('廃止された県OGP URL', () => {
+  test.each(['19000', '13000', '99000'])(
+    '%s は県テーマの200エラー画面へ流さず410/noindexを返す', (code) => {
+      const req = new NextRequest(`https://stats47.jp/areas/${code}/opengraph-image?old=1`);
+      Object.defineProperty(req, 'nextUrl', { value: new URL(req.url) });
+      const response = middleware(req);
+      expect(response.status).toBe(410);
+      expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
+    }
+  );
+});
+
 describe('middleware Workers Cache headers', () => {
   const originalNext = NextResponse.next;
 

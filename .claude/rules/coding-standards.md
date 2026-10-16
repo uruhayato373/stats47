@@ -165,10 +165,10 @@ test("テスト", () => {});
 
 ## 新規ページ作成時のインデックス制御チェックリスト
 
-Next.js App Router でページを追加する際は、以下を必ず確認する。過去に OGP 画像 URL の Disallow 漏れと noindex 未設定で GSC 1,453 件の「クロール済み - インデックス未登録」が発生した教訓に基づく。
+Next.js App Router でページを追加する際は、以下を必ず確認する。robots.txt は取得を制御するもので、検索除外は保証しない。公開配布ファイルを検索から除外する場合は、取得を許可して `X-Robots-Tag: noindex` を読ませる。
 
 1. **インデックス対象か?** — NO なら `generateMetadata` に `robots: "noindex, follow"` を追加
 2. **サイトマップに含めるか?** — YES なら `sitemap.ts` に追加。NO なら含めない
 3. **親/子ページと noindex 設定が一貫しているか?** — 子ページが noindex なら親も検討
-4. **opengraph-image.tsx を配置したか?** — `robots.ts` の `"/*/opengraph-image"` Disallow でカバーされていることを確認
+4. **opengraph-image.tsx を配置したか?** — 公開画像はクロール可能な画像レスポンス、廃止画像は正しい404/410を返すことを確認。画像URLを一律にDisallowしない
 5. **middleware でのリダイレクト/410 が必要か?** — 旧 URL パターンや削除予定ページ

@@ -39,12 +39,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         // ranking の派生指標 toggle URL (?norm=per_population / per_area) を明示的に許可
-        allow: ["/", "/ranking/*?norm=*"],
+        // 公開配布ファイルは X-Robots-Tag: noindex を読めるようにする。
+        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?"],
         disallow: [
           "/admin/*", // 管理画面
           "/api/*", // 内部 route handler（blog-data, ranking-data 等）。フロントから fetch するだけで Googlebot に露出させない
           "/profile/edit", // プロフィール編集
-          "/*/opengraph-image", // Next.js OGP 画像エンドポイント
+          // 公開 OGP は取得を許可。廃止画像は HTTP 404/410 を読ませる。
           // 市区町村ページ (/areas/*/cities/*) の Disallow は 2026-05-23 解除:
           // - Phase 1 で city profile (強み 5 件) が表示されるようになり、
           //   薄いプレースホルダーではなく価値ある content を持つようになった
@@ -54,12 +55,11 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Google-Extended", // Google Gemini
-        allow: ["/", "/ranking/*?norm=*"], // 明示的に全ページ + 派生指標 URL を許可
+        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?"],
         disallow: [
           "/admin/*", // 管理画面は除外
           "/api/*", // 内部 route handler
           "/profile/edit", // プロフィール編集は除外
-          "/*/opengraph-image", // Next.js OGP 画像エンドポイント
           // /areas/*/cities/* も Disallow 解除 (2026-05-23、city profile 表示開始)
         ],
       },

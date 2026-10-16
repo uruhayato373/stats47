@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import {
+  applyContentVerdict,
   applyInspectionObservations,
   findUnhandledBatchUrls,
   getObserveAfterFixEntries,
@@ -19,6 +20,32 @@ const entry = (overrides) => ({
   verdict: "live-misflagged",
   gsc_category: "crawled-not-indexed",
   ...overrides,
+});
+
+test("内容補強済みを観測へ移し、Googleの未登録判定と未完了状態を保持する", () => {
+  const inspection = { verdict: "NEUTRAL", last_crawl: "2026-06-06" };
+  const queue = [entry({ url: "https://stats47.jp/a", action: "enrich", content_verdict: "enrich", inspection })];
+  assert.equal(applyContentVerdict(queue, [queue[0].url], "observe-after-fix", "2026-10-16 本文・数値・href確認: data/gsc/ui-audits/evidence.json"), 1);
+  assert.equal(queue[0].status, "in-progress");
+  assert.equal(queue[0].action, "observe-after-fix");
+  assert.equal(queue[0].content_verdict, "observe-after-fix");
+  assert.deepEqual(queue[0].inspection, inspection);
+  assert.equal(getObserveAfterFixEntries(queue).length, 1);
+});
+
+test("証拠なし・不正判定・存在しないURL・完了URLは一括更新全体を拒否する", () => {
+  for (const scenario of [
+    { urls: ["https://stats47.jp/a"], verdict: "observe-after-fix", note: " " },
+    { urls: ["https://stats47.jp/a"], verdict: "resubmit", note: "evidence" },
+    { urls: ["https://stats47.jp/a"], verdict: "toString", note: "evidence" },
+    { urls: ["https://stats47.jp/a", "https://stats47.jp/missing"], verdict: "observe-after-fix", note: "evidence" },
+    { urls: ["https://stats47.jp/a", "https://stats47.jp/done"], verdict: "observe-after-fix", note: "evidence" },
+  ]) {
+    const queue = [entry({ url: "https://stats47.jp/a", action: "content-check" }), entry({ url: "https://stats47.jp/done", status: "done" })];
+    const before = structuredClone(queue);
+    assert.throws(() => applyContentVerdict(queue, scenario.urls, scenario.verdict, scenario.note));
+    assert.deepEqual(queue, before);
+  }
 });
 
 test("done化したactionを分類総数には残し、pending集計から除外する", () => {
