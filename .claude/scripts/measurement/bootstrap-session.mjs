@@ -10,6 +10,7 @@ import { chromium } from 'playwright';
 import { createInterface } from 'node:readline/promises';
 import { sourceFor, scopedState } from './sources.mjs';
 import { openKdpReports } from './kdp-reports.mjs';
+import { assertClosedNativeProfile } from './native-profile.mjs';
 
 const [sourceName, ...args] = process.argv.slice(2);
 if (!sourceName || args.includes('--help')) {
@@ -52,6 +53,7 @@ else {
   // Export from a disposable copy: opening with incompatible defaults must never
   // discard the user's original encrypted cookies.
   const nativeProfile = NATIVE_PROFILE_SOURCES.has(sourceName);
+  if (nativeProfile) assertClosedNativeProfile(profile);
   const temporaryProfile = nativeProfile ? mkdtempSync(join(tmpdir(), 'stats47-measurement-profile-')) : null;
   let context;
   try {

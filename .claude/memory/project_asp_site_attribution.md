@@ -36,3 +36,11 @@ metadata:
 **対策**: `measurement/afb-outcomes.mjs`はJSON配列だけを受理し、エラーobjectや欠落を空配列へ変換しない。要求はstats47のsite IDを必須にし、非ゼロ行も帰属・重複・日付・状態・報酬gateで検査する。APIキーは承認済みGitHub Secretのみ、発生日/確定日系列を合算しない。
 
 **証拠**: CI `35560007703` attempt 2の値を含まない応答型診断、`.claude/scripts/measurement/__tests__/afb-outcomes.test.mjs`。
+
+**問題**: native Chromeで本人ログイン済みでも、起動中のprofileを複製して移送するとCIが未認証になる。
+
+**原因**: 2026-10-17のココナラは、Chrome起動中のexportでは26cookies、専用Chromeを正常終了して保存後は33cookiesになった。後者の移送状態で本人ID・14サービスの合計・売上管理の実取得が成功した。profileのディスク複製は未保存のメモリ上セッションを含まない。
+
+**対策**: native Chromeを終了してからbootstrapする。`measurement/native-profile.mjs`がSingletonLockの存在（dangling symlinkも含む）を検出してexportを停止する。`configured:true`はSecretの設定完了だけで、対象画面とデータ取得の成功ではない。再ログイン依頼の前に、専用Chromeの保存とexportを照合する。
+
+**証拠**: `.claude/scripts/measurement/__tests__/native-profile.test.mjs`、`bootstrap-session.mjs`。個々のCookie値は記録しない。

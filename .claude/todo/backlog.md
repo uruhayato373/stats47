@@ -80,6 +80,8 @@ updated: 2026-10-17
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 - **2026-10-05 確認 (W41 Must 2・affiliate-manager)**: blocked (`a8-cross-check-shortfall` / `a8-results-month-missing`) の原因は、10 月分の案件別明細 (program-detail) を一度も取得していないこと。2026-10-04T08:34Z の収集はサイト別 (site-summary) だけで (`a8-ui-last-run.json` は 1/1 unit)、`a8-report-log.json` の `programPeriod` と `a8-results.json` に 202610 が無い (site=57 clicks・picked=0・delta=-57・許容 3)。収集は CI ではなくローカルの手動運用で、`affiliate-ga4-weekly.yml` は取得済み state の restore だけ (直近 5 run の failure はこの blocked による計測ゲート)。次: 10-11 以降に A8 ログイン済みのプロファイルで `node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports program-detail --month 2026-10` を取得し、`node .claude/scripts/ads/check-a8-outcome-gate.mjs` が ready (exceeded なし・shortfall なし) になれば閉じる。10-11 に 202610 が無ければ「収集未実施の継続」として残す。program-detail は doboku-note との共用口座分を含むので `programIdMap` の allowlist で絞る運用を変えない。
 
+- **現在の残件（2026-10-17）**: UI変更は修正し10月4CSVを取得したが、案件別の独立監査は専用click下限がサイト合計＋既存許容差を超えてFAIL。全CSV run `2026-10-16T23-37-11Z` は正規化せず隔離した。サイト別run `2026-10-16T23-39-00Z`だけ監査PASS後に正規化（222click、発生/確定件数・金額0）。次は両サイトの現在の配信広告定義とprogramIdMapを照合し、帰属の根拠を得る。未写像3行と共用3案件を推測配賦せず、既存の許容差を広げない。収益のサイト行は利用可、EPC判断は引き続き停止。
+
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
 
