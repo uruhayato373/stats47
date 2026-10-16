@@ -24,10 +24,64 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { NativeSelect } from '@/components/ui/native-select';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { CANVAS } from '../../../remotion/src/shared/themes/brand';
 import { ActualImage } from './media-image';
 
 type EditableTemplate = Template & { revision: string };
+type TemplateListEntry = {
+  template: EditableTemplate;
+  available: (keyof typeof channels)[];
+};
+
+function TemplateList({
+  entries,
+  selected,
+  drafts,
+  onSelect,
+}: {
+  entries: TemplateListEntry[];
+  selected?: string;
+  drafts: Record<string, PolicyDraft>;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <nav aria-label="型の一覧">
+      <ul className="space-y-2">
+        {entries.map(({ template, available }) => (
+          <li key={template.id}>
+            <Button
+              className="w-full justify-start"
+              variant={template.id === selected ? 'default' : 'ghost'}
+              size="sm"
+              aria-pressed={template.id === selected}
+              title={template.label}
+              onClick={() => onSelect(template.id)}
+            >
+              <span className="truncate">{template.label}</span>
+              {drafts[template.id] && <span aria-label="未保存">＊</span>}
+            </Button>
+            <p className="px-3 text-xs text-console-muted">
+              {available.length
+                ? available.map((channel) => channels[channel]).join(' / ')
+                : '見本未登録'}
+            </p>
+          </li>
+        ))}
+      </ul>
+      {!entries.length && (
+        <p className="text-sm text-console-muted">該当する型はありません。</p>
+      )}
+    </nav>
+  );
+}
 type Save = (
   template: EditableTemplate,
   policy: string,
@@ -338,7 +392,7 @@ function TemplateCard({
         <div
           className={
             medium === 'compare'
-              ? 'grid items-start gap-6 @min-[850px]:grid-cols-3'
+              ? 'grid items-start gap-6 @min-[600px]:grid-cols-3'
               : 'mx-auto w-full max-w-xl'
           }
         >
@@ -433,6 +487,7 @@ export function TemplateGallery({
   const content = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number | null>(null);
   const [drafts, setDrafts] = useState<Record<string, PolicyDraft>>({});
+  const [listOpen, setListOpen] = useState(false);
   const query = params.get('q') ?? '';
   const coverage = params.get('coverage') ?? 'all';
   const onlyCandidates = params.get('candidates') === '1';
@@ -567,6 +622,34 @@ export function TemplateGallery({
         aria-label="見本の切り替え"
       >
         <div className="flex items-end gap-2">
+          <div className="@min-[760px]:hidden">
+            <Sheet open={listOpen} onOpenChange={setListOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="sm">
+                  型の一覧 ({shown.length})
+                </Button>
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>型の一覧 ({shown.length})</SheetTitle>
+                  <SheetDescription>
+                    型を選ぶと、選択中の媒体で見本を表示します。
+                  </SheetDescription>
+                </SheetHeader>
+                <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
+                  <TemplateList
+                    entries={shown}
+                    selected={selected?.template.id}
+                    drafts={drafts}
+                    onSelect={(id) => {
+                      choose(id);
+                      setListOpen(false);
+                    }}
+                  />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
           <label className="min-w-0 max-w-xl flex-1 space-y-1 text-sm [&>[data-slot=native-select-wrapper]]:w-full">
             <span className="font-medium">型を選択</span>
             <NativeSelect
@@ -663,44 +746,60 @@ export function TemplateGallery({
           </details>
         </div>
       </div>
-      <div
-        ref={content}
-        className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain pr-1 pb-4"
-        role="region"
-        aria-label="選択した型の見本"
-        tabIndex={0}
-      >
-        {selected ? (
-          <TemplateCard
-            key={selected.template.id}
-            {...selected}
-            medium={medium}
-            onSave={onSave}
-            draft={drafts[selected.template.id]}
-            onDraft={(draft) =>
-              setDrafts((current) => {
-                const next = { ...current };
-                if (
-                  draft &&
-                  (draft.policy !== selected.template.policy ||
-                    JSON.stringify(draft.profiles) !==
-                      JSON.stringify(selected.template.profiles))
-                ) {
-                  next[selected.template.id] = draft;
-                } else delete next[selected.template.id];
-                return next;
-              })
-            }
-          />
-        ) : (
+      <div className="grid min-h-0 flex-1 gap-4 @min-[760px]:grid-cols-[216px_minmax(0,1fr)]">
+        <aside
+          className="hidden min-h-0 flex-col gap-3 border-r border-console-border pr-3 @min-[760px]:flex"
+          aria-label="型を一覧から選ぶ"
+        >
+          <h2 className="shrink-0 font-semibold">型の一覧 ({shown.length})</h2>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+            <TemplateList
+              entries={shown}
+              selected={selected?.template.id}
+              drafts={drafts}
+              onSelect={choose}
+            />
+          </div>
+        </aside>
+        <div
+          ref={content}
+          className="@container min-h-0 space-y-4 overflow-y-auto overscroll-contain pr-1 pb-4"
+          role="region"
+          aria-label="選択した型の見本"
+          tabIndex={0}
+        >
+          {selected ? (
+            <TemplateCard
+              key={selected.template.id}
+              {...selected}
+              medium={medium}
+              onSave={onSave}
+              draft={drafts[selected.template.id]}
+              onDraft={(draft) =>
+                setDrafts((current) => {
+                  const next = { ...current };
+                  if (
+                    draft &&
+                    (draft.policy !== selected.template.policy ||
+                      JSON.stringify(draft.profiles) !==
+                        JSON.stringify(selected.template.profiles))
+                  ) {
+                    next[selected.template.id] = draft;
+                  } else delete next[selected.template.id];
+                  return next;
+                })
+              }
+            />
+          ) : (
+            <p className="text-sm text-console-muted">
+              該当する型はありません。絞り込み条件を変更してください。
+            </p>
+          )}
+          <MediaSizes />
           <p className="text-sm text-console-muted">
-            該当する型はありません。絞り込み条件を変更してください。
+            実画像を各媒体・比率で最大3枚表示します。題材は画像ごとに異なり、見本の表示は採用・公開を意味しません。未登録の媒体はそのまま表示します。
           </p>
-        )}
-        <MediaSizes />
-        <p className="text-sm text-console-muted">
-          実画像を各媒体・比率で最大3枚表示します。題材は画像ごとに異なり、見本の表示は採用・公開を意味しません。未登録の媒体はそのまま表示します。
-        </p>
+        </div>
       </div>
     </section>
   );
