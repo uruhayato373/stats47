@@ -228,8 +228,8 @@ test("accepts the Claude Code to Codex MCP blog image contract", (t) => {
       mcpServers: {
         codex: {
           type: "stdio",
-          command: "codex",
-          args: ["mcp-server"],
+          command: "npx",
+          args: ["-y", "@openai/codex@0.153.0", "mcp-server"],
         },
       },
     }),
@@ -257,8 +257,9 @@ test("rejects a drifted Codex MCP command", (t) => {
       mcpServers: {
         codex: {
           type: "stdio",
+          // 固定しない codex は 0.154.0 以降 mcp-server を持たず MCP が落ちる (2026-10-15)
           command: "codex",
-          args: ["mcp"],
+          args: ["mcp-server"],
         },
       },
     }),
