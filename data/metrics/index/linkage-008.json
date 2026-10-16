@@ -2,6 +2,41 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "fulltime-physicians-general-hospital-per-100beds",
+      "pageId": "ranking:fulltime-physicians-general-hospital-per-100beds",
+      "title": "一般病院常勤医師数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I0930202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0930202"
+        },
+        "derived": false,
+        "configHash": "b43312910e17e56a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:fulltime-physicians-general-hospital-per-100beds",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "funeral-expense-consumption-expenditure",
       "pageId": "ranking:funeral-expense-consumption-expenditure",
       "title": "葬儀関係費消費支出額",
@@ -10499,38 +10534,6 @@
       "consumers": [
         {
           "pageId": "ranking:gross-fixed-capital-formation-nominal-h27",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "gross-fixed-capital-formation-real-h27",
-      "pageId": null,
-      "title": "総固定資本形成",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C142301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C142301"
-        },
-        "derived": false,
-        "configHash": "2af2b2164c5e8bf1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:gross-fixed-capital-formation-real-h27",
           "kind": "ranking"
         }
       ],

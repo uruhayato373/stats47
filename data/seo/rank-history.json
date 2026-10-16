@@ -155,6 +155,11 @@
       "date": "2026-10-15",
       "file": "data/seo/rank-history/2026-10-15.json",
       "sha256": "fe9bd5edacc6cbba3c8c1c7d4d27acc76587e655d8c7471353e61a728c9a8ec0"
+    },
+    {
+      "date": "2026-10-16",
+      "file": "data/seo/rank-history/2026-10-16.json",
+      "sha256": "0818eb67b1d0c908a043b7c5e5779f141b1f87fada094fa87f801c893bc2a384"
     }
   ]
 }

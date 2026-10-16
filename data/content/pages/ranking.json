@@ -538,6 +538,14 @@
       "published": true
     },
     {
+      "id": "ranking:annual-paid-leave-11-days-or-more-ratio",
+      "kind": "ranking",
+      "key": "annual-paid-leave-11-days-or-more-ratio",
+      "title": "年次有給休暇を11日以上取得した雇用者の割合",
+      "href": "/ranking/annual-paid-leave-11-days-or-more-ratio",
+      "published": true
+    },
+    {
       "id": "ranking:annual-precipitation",
       "kind": "ranking",
       "key": "annual-precipitation",
@@ -8730,6 +8738,14 @@
       "published": true
     },
     {
+      "id": "ranking:information-communication-industry-annual-income",
+      "kind": "ranking",
+      "key": "information-communication-industry-annual-income",
+      "title": "情報通信業で働く人の平均年収",
+      "href": "/ranking/information-communication-industry-annual-income",
+      "published": true
+    },
+    {
       "id": "ranking:information-private-employees",
       "kind": "ranking",
       "key": "information-private-employees",
@@ -10290,6 +10306,14 @@
       "published": true
     },
     {
+      "id": "ranking:manufacturing-industry-annual-income",
+      "kind": "ranking",
+      "key": "manufacturing-industry-annual-income",
+      "title": "製造業で働く人の平均年収",
+      "href": "/ranking/manufacturing-industry-annual-income",
+      "published": true
+    },
+    {
       "id": "ranking:manufacturing-net-value-added-private",
       "kind": "ranking",
       "key": "manufacturing-net-value-added-private",
@@ -10623,6 +10647,14 @@
       "key": "medical-physicians-under-40",
       "title": "40歳未満の医療施設従事医師数",
       "href": "/ranking/medical-physicians-under-40",
+      "published": true
+    },
+    {
+      "id": "ranking:medical-welfare-industry-annual-income",
+      "kind": "ranking",
+      "key": "medical-welfare-industry-annual-income",
+      "title": "医療・福祉で働く人の平均年収",
+      "href": "/ranking/medical-welfare-industry-annual-income",
       "published": true
     },
     {

@@ -12,8 +12,8 @@
     },
     "codex": {
       "type": "stdio",
-      "command": "codex",
-      "args": ["mcp-server"]
+      "command": "npx",
+      "args": ["-y", "@openai/codex@0.153.0", "mcp-server"]
     }
   }
 }

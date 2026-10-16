@@ -289,46 +289,6 @@
       ]
     },
     {
-      "key": "A-laborwage-commute-time-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】平均通勤時間ランキング｜首都圏 vs 地方の差",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-commute-time-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "8cd5efdd138feafa024eb16c22aa1c73ee9381de964464470e16f797a84acaa9",
-          "files": 5,
-          "bytes": 97698,
-          "savedAt": "2026-10-12T22:05:55.551Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "A-laborwage-job-opening-ratio-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】有効求人倍率ランキング｜売り手市場の県は？",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-job-opening-ratio-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "9e2cc19aeafd9cb23eb48c741908985354dc095b8a8fcc964521e9254c7b5a8c",
-          "files": 5,
-          "bytes": 98482,
-          "savedAt": "2026-10-12T22:05:55.215Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "A-laborwage-paid-leave-utilization-prefecture",
       "vertical": "stats47-note",
       "series": "A",
@@ -344,26 +304,6 @@
           "files": 5,
           "bytes": 100549,
           "savedAt": "2026-10-12T22:05:55.248Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "A-laborwage-starting-salary-by-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】大卒初任給ランキング｜新卒が一番もらえる県",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-starting-salary-by-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "7b26b0f7e5c37682566b4004cb9f63057962c6c0f66a854a1a931ce8b94869ab",
-          "files": 5,
-          "bytes": 99112,
-          "savedAt": "2026-10-12T22:05:55.509Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
       }
@@ -11339,6 +11279,152 @@
       "stats47Targets": [],
       "noteUrl": "https://note.com/stats47/n/n6aae3232670d",
       "publishedAt": "2026-10-13"
+    },
+    {
+      "key": "a-active-job-opening-ratio",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2022年版】有効求人倍率が最も高い県は？ 1位は福井県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-active-job-opening-ratio",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "92cae179287a6155541eefb47304a0787a1eb1a268fc7f3a339117d38b2cc798",
+          "files": 10,
+          "bytes": 493471,
+          "savedAt": "2026-10-15T10:58:59.056Z"
+        },
+        "verifiedAt": "2026-10-15T10:58:59.056Z"
+      },
+      "stats47Targets": [
+        "/ranking/active-job-opening-ratio"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n73c710f239ef",
+      "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-new-graduate-starting-salary-university-male",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2019年版・大卒・男性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-male",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a887c53df926421e5bd22ab8ab4cb1bd54285dab31ab6c61dcd7adafc074e38b",
+          "files": 9,
+          "bytes": 369046,
+          "savedAt": "2026-10-15T11:55:10.393Z"
+        },
+        "verifiedAt": "2026-10-15T11:55:10.393Z"
+      },
+      "stats47Targets": [
+        "/ranking/new-graduate-starting-salary-university-male"
+      ],
+      "noteUrl": "https://note.com/stats47/n/nf067364b58fb",
+      "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-new-graduate-starting-salary-university-female",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2019年版・大卒・女性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-new-graduate-starting-salary-university-female",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "314b74f5164d1093aaa4909a55c6df87369af30995827cca65d084af1a796a1e",
+          "files": 9,
+          "bytes": 370773,
+          "savedAt": "2026-10-15T11:55:12.472Z"
+        },
+        "verifiedAt": "2026-10-15T11:55:12.472Z"
+      },
+      "stats47Targets": [
+        "/ranking/new-graduate-starting-salary-university-female"
+      ],
+      "noteUrl": "https://note.com/stats47/n/necff830a091b",
+      "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2023年版・主世帯・1時間30分以上】雇用者世帯の通勤時間が最も長い県は？ 1位は埼玉県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "c80bbb5d1c92aa45b10f6fa7599a01a3b157f7cf1293e3e9266c1a731ebffa15",
+          "files": 9,
+          "bytes": 373589,
+          "savedAt": "2026-10-15T12:56:51.142Z"
+        },
+        "verifiedAt": "2026-10-15T12:56:51.142Z"
+      },
+      "stats47Targets": [
+        "/ranking/main-household-ratio-main-earner-employee-commute-90min"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
+      "publishedAt": "2026-10-15"
+    },
+    {
+      "key": "a-annual-paid-leave-11-days-or-more-ratio",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b48ce1cd24c585ebaa721320930703438be0371ef7c1d5ce98532e62f5bf324a",
+          "files": 9,
+          "bytes": 394802,
+          "savedAt": "2026-10-15T22:25:47.632Z"
+        },
+        "verifiedAt": "2026-10-15T22:25:47.632Z"
+      },
+      "stats47Targets": [
+        "/ranking/annual-paid-leave-11-days-or-more-ratio"
+      ]
+    },
+    {
+      "key": "a-manufacturing-industry-annual-income",
+      "vertical": "stats47-note",
+      "series": "A",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "magazine": "s47-labor",
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/a-manufacturing-industry-annual-income",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ff5c58da739bad6cd11130784d2c4afbaada77c9a868375d21b31be627772c49",
+          "files": 9,
+          "bytes": 396705,
+          "savedAt": "2026-10-16T00:20:51.741Z"
+        },
+        "verifiedAt": "2026-10-16T00:20:51.741Z"
+      },
+      "stats47Targets": [
+        "/ranking/manufacturing-industry-annual-income"
+      ]
     }
   ]
 }

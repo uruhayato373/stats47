@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W41",
+  "decidedAt": "2026-10-15T23:08:01.649Z",
+  "thresholdsVersion": "1.0.0",
+  "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
+  "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
+  "summary": {
+    "total": 1,
+    "byLabel": {
+      "effect/pending": 1
+    },
+    "byGuard": {
+      "insufficient-target": 1
+    }
+  },
+  "verdicts": [
+    {
+      "domainId": "adsense",
+      "subjectId": "ADSENSE-PLACEMENT-01",
+      "label": "effect/pending",
+      "reason": "before/after 週が解決できない (snapshot 不足)",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "計測窓が確定できない"
+        }
+      ],
+      "window": {
+        "beforeWeek": "2026-W34",
+        "afterWeek": null,
+        "elapsedWeeks": null,
+        "notDue": true
+      },
+      "skipped": true
+    }
+  ]
+}
