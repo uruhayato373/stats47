@@ -380,3 +380,42 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
   assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
 });
+
+test('note sales with private evidence survive an incomplete article inventory without making the source pass', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-note-revenue-'));
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const runId = 'note-sales-recovery';
+    const observation = { source: 'note', capability: SOURCES.note.capability,
+      observedAt: new Date().toISOString(), status: 'failed', code: 'report_incomplete',
+      runId, runAttempt: 1, collectionAttempted: true, inventoryAvailable: true,
+      evidence: { sha256: 'a'.repeat(64), bytes: 100 },
+      quality: { revenueStatus: 'pass', revenueEvidenceAvailable: true,
+        revenue: { date: '2026-10-17', month: '2026-10', monthToDateYen: 0, closedMonths: {} } } };
+    const collect = (value) => {
+      rmSync(join(temp, 'data'), { recursive: true, force: true });
+      writeFileSync(join(input, 'note-1.json'), JSON.stringify(value));
+      execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
+        cwd: temp, env: { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1' },
+      });
+      return {
+        state: JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))),
+        rows: JSON.parse(readFileSync(join(temp, 'data/authenticated/revenue-history.json'))).entries,
+      };
+    };
+    const result = collect(observation);
+    assert.equal(result.state.status, 'action_required');
+    assert.equal(result.state.sources.find(s => s.source === 'note').metricsAvailable, false);
+    assert.equal(result.rows.length, 1);
+    assert.equal(result.rows[0].monthToDateYen, 0, 'measured zero must be recorded');
+    for (const change of [
+      { evidence: null }, { collectionAttempted: false }, { code: 'auth_required' },
+      { quality: { ...observation.quality, revenueStatus: 'verification_required' } },
+      { quality: { ...observation.quality, revenueEvidenceAvailable: false } },
+      { runId: 'old-run' },
+    ]) assert.equal(collect({ ...observation, ...change }).rows.length, 0);
+    const code = readFileSync(resolve('.claude/scripts/measurement/collect.mjs'), 'utf8');
+    assert.match(code, /capture\(`\.local\/authenticated-measurement\/\$\{name\}-\$\{runId\}\/sales\.json`\)/,
+      'recorded note revenue must have a raw sales artifact in the private vault');
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
