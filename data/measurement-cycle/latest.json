@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W41",
   "asOf": "2026-10-11",
-  "generatedAt": "2026-10-15T23:08:04.407Z",
+  "generatedAt": "2026-10-16T23:47:39.752Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -222,9 +222,9 @@
         "source": "data/measurement-cycle/latest.json",
         "focus": true,
         "status": "degraded",
-        "value": "9/14",
+        "value": "10/14",
         "previous": null,
-        "note": "欠測・古い・認証切れ: sns, a8(collection_failed), note(report_incomplete), kdp(auth_required), coconala(auth_required)",
+        "note": "欠測・古い・認証切れ: sns, a8(collection_failed), kdp(auth_required), coconala(auth_required)",
         "improvements": [
           "MEASUREMENT-AUTH-RESTORE-01"
         ]
