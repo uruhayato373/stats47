@@ -266,6 +266,12 @@ export const DATASETS = [
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
+  d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),
+  d("content.quality-schema", "data/content-operations/quality.schema.json", "config", "product", "data", "記事と画像の改善台帳のJSON Schema"),
+  d("content.image-templates-schema", "data/content-operations/image-templates.schema.json", "config", "ops", "data", "図の型と媒体方針のJSON Schema"),
+  d("content.image-templates", "data/content-operations/image-templates.json", "config", "ops", "data", "媒体共通の図の型・改善方針と版履歴", { schema: "data/content-operations/image-templates.schema.json" }),
+  d("content.image-inventory", "data/content-operations/image-inventory.json", "state", "ops", "data", "R2のnote本文manifestから派生した画像・入力の索引"),
+  d("content.image-migration", "data/content-operations/image-migration.json", "state", "ops", "data", "旧SNS画像のR2移行とハッシュ照合の結果"),
   d("content.note-blockers", "data/content-operations/note-generation-blockers.json", "state", "product", "data", "note 記事生成の止まっている理由"),
   d("data-quality.state", "data/data-quality/{name}", "state", "data", "data", "データ品質の要約・再取り込みキュー・ページ横断の事前検査・SEO メタの基準"),
   d("data-quality.checks", "data/data-quality/checks/{name}", "state", "data", "data", "データ品質の検査キュー"),

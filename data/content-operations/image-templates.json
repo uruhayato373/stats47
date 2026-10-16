@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    {"id":"ranking","version":1,"label":"ランキング・比較","policy":"順位・単位・年を明記する。noteは説明に必要な比較を大きく表示し、X・Instagramの単年図は現行の全47県表示を維持する。","profiles":{"note":"本文幅320pxでも値と地域名を読める枚数へ分ける。","x":"全47県タイルと読みどころを配置する。","instagram":"表紙・データ・出典を分ける。"},"renderer":"apps/remotion/src/features/ranking-note/"},
+    {"id":"map","version":1,"label":"地図・タイル","policy":"正確な地理形状を使い、数値と色の対応・欠測・対象年・地域粒度を明記する。","profiles":{"note":"凡例と注目地域を本文幅で確認する。","x":"一覧性と注目点を両立する。","instagram":"地図と詳しい説明を別スライドにできる。"},"renderer":"apps/remotion/src/features/buzz-map/"},
+    {"id":"correlation","version":1,"label":"相関・散布図","policy":"両軸の指標・単位・対象年を示す。相関を因果と表現しない。注記は注目地域に絞る。","profiles":{"note":"軸と凡例を320pxで確認する。","x":"問いと注目点を一つに絞る。","instagram":"問い・散布図・解説を分ける。"},"renderer":".claude/scripts/sns/render-ig-carousel.ts"},
+    {"id":"time-series","version":1,"label":"時系列・順位変化","policy":"始点・終点、比較母集団、単位、計算式を固定する。増減率とポイント差を区別する。","profiles":{"note":"期間を本文と揃える。","x":"変化の読みどころを短く示す。","instagram":"全体像と注目地域を分ける。"},"renderer":".claude/scripts/sns/render-data-card.ts"},
+    {"id":"household","version":1,"label":"家計・内訳","policy":"県庁所在市と県全域、世帯区分、月額と年額を区別する。合計・構成比と原値を照合する。","profiles":{"note":"内訳と比較を読みやすい枚数へ分ける。","x":"家計のレシート型・県の図鑑型を利用できる。","instagram":"表紙・内訳・出典へ分ける。"},"renderer":".claude/scripts/sns/render-data-card.ts"},
+    {"id":"procedure","version":1,"label":"手順・概念説明","policy":"必要な操作範囲を拡大し、説明と図の順序を一致させる。データや実画面を創作しない。","profiles":{"note":"見出しの直後に対応する図を置く。","x":"一つの操作・結果を見せる。","instagram":"一枚一手順にする。"},"renderer":null},
+    {"id":"unclassified","version":1,"label":"未分類","policy":"用途と入力データを確認してから図の型を指定する。","profiles":{"note":"用途を確認する。","x":"用途を確認する。","instagram":"用途を確認する。"},"renderer":null}
+  ]
+}

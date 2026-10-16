@@ -39,6 +39,7 @@
       "manages": "行政資料・note・Kindle・ココナラ・売上・商品品質",
       "nav": [
         { "label": "販売状態", "href": "/product/status", "kind": "actions" },
+        { "label": "記事・投稿の改善", "href": "/product/content-quality", "kind": "actions" },
         { "label": "チャネル別", "channels": "product", "kind": "actions" },
         { "label": "売上", "href": "/revenue", "kind": "results" }
       ]
@@ -98,6 +99,8 @@
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
         { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
         { "label": "画像資産", "href": "/assets", "kind": "assets" },
+        { "label": "画像ライブラリ", "href": "/ops/image-library", "kind": "assets" },
+        { "label": "図の型・媒体別方針", "href": "/ops/image-templates", "kind": "policy" },
         { "label": "SVG カタログ", "href": "/svg", "kind": "assets" }
       ]
     }

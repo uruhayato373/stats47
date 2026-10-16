@@ -1,0 +1,20 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "type":"object","additionalProperties":false,"required":["schemaVersion","reviews","images"],
+  "properties":{
+    "schemaVersion":{"const":1},
+    "reviews":{"type":"object","patternProperties":{"^(note/[A-Za-z0-9_-]+|sns/[0-9]+)$":{"$ref":"#/definitions/review"}},"additionalProperties":false},
+    "images":{"type":"object","patternProperties":{"^IMG-[0-9a-f]{24}$":{"$ref":"#/definitions/image"}},"additionalProperties":false}
+  },
+  "definitions":{
+    "sha":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "nullableSha":{"anyOf":[{"$ref":"#/definitions/sha"},{"type":"null"}]},
+    "checks":{"type":"object","additionalProperties":false,"required":["data","images","placement","intro","sources","links"],"properties":{"data":{"$ref":"#/definitions/check"},"images":{"$ref":"#/definitions/check"},"placement":{"$ref":"#/definitions/check"},"intro":{"$ref":"#/definitions/check"},"sources":{"$ref":"#/definitions/check"},"links":{"$ref":"#/definitions/check"}}},
+    "check":{"enum":["unchecked","pass","issue","na"]},
+    "review":{"type":"object","additionalProperties":false,"required":["priority","policy","checks","basis","updatedAt"],"properties":{"priority":{"enum":["high","normal","low"]},"policy":{"type":"string","maxLength":10000},"checks":{"$ref":"#/definitions/checks"},"basis":{"$ref":"#/definitions/sha"},"updatedAt":{"type":"string","minLength":10}}},
+    "storage":{"type":"object","additionalProperties":false,"required":["provider","bucket","key","sha256","bytes"],"properties":{"provider":{"const":"r2-private"},"bucket":{"const":"stats47-private"},"key":{"type":"string","pattern":"^media-workspace/(images|inputs)/[0-9a-f]{64}\\.(png|jpg|webp|json)$"},"sha256":{"$ref":"#/definitions/sha"},"bytes":{"type":"integer","minimum":1}}},
+    "visual":{"type":"object","additionalProperties":false,"required":["status","reason","original","mobile","data","reviewedAt"],"properties":{"status":{"enum":["pass","needs-revision"]},"reason":{"type":"string","minLength":1,"maxLength":5000},"original":{"type":"boolean"},"mobile":{"type":"boolean"},"data":{"type":"boolean"},"reviewedAt":{"type":"string","minLength":10}}},
+    "candidate":{"type":"object","additionalProperties":false,"required":["id","basis","storage","input","width","height","createdAt","review"],"properties":{"id":{"$ref":"#/definitions/sha"},"basis":{"$ref":"#/definitions/sha"},"storage":{"$ref":"#/definitions/storage"},"input":{"$ref":"#/definitions/storage"},"width":{"type":"integer","minimum":1,"maximum":20000},"height":{"type":"integer","minimum":1,"maximum":20000},"createdAt":{"type":"string","minLength":10},"review":{"anyOf":[{"type":"null"},{"$ref":"#/definitions/visual"}]}}},
+    "image":{"type":"object","additionalProperties":false,"required":["templateId","policy","revisions","candidateId","approvedId"],"properties":{"templateId":{"type":"string","pattern":"^[a-z-]+$"},"policy":{"type":"string","maxLength":10000},"revisions":{"type":"array","items":{"$ref":"#/definitions/candidate"}},"candidateId":{"$ref":"#/definitions/nullableSha"},"approvedId":{"$ref":"#/definitions/nullableSha"}}}
+  }
+}

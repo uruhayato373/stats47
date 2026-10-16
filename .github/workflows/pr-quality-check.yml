@@ -998,6 +998,11 @@ jobs:
         run: npm run lint --workspace=apps/admin
         continue-on-error: false
 
+      - name: Verify article and image workspace
+        run: |
+          npm run media:check
+          npm run media:test
+
       - name: 🧾 Audit Content Operations SSOT
         run: npm run audit:content-operations
         continue-on-error: false

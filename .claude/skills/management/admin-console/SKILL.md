@@ -7,8 +7,8 @@ co_agents: [note-manager, kindle-publisher, kdp-operator]
 ---
 
 全コンテンツ運用とメディア資産を 1 つの localhost 画面で横断管理するコンソール。
-画面から保存できるのはSNS下書き本文とnoteカバーの制作内容・確認結果 (2026-10-14 オーナー指示)。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
-画像生成・登録・投稿は各 owner agent / skill が担う。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
+画面からSNS下書き本文、noteカバー制作、記事・画像の改善方針、候補画像、目視結果、図の型を保存できる (2026-10-16 オーナー指示)。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
+画像生成と公開反映は各 owner agent / skill が担い、候補画像は管理画面からR2へ登録できる。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
 2026-07-16 に旧 node:http 実装から完全移管)。
 
 ## 起動 / 停止
@@ -55,14 +55,14 @@ PORT=5000 npm run admin    # ポート変更
 | `GET /api/dashboard/summary` | プロジェクト現況の集約 JSON (state/md ライブ読み・TTL 60 秒、collector は `dashboard-data.mjs`) |
 | `GET /api/content` | 4運用チャネルの共通stage・note/Kindle詳細・参考文献12チャネル展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
 
-APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存と `PATCH /api/note-covers/:key/production` のカバー制作内容・目視確認。
+品質改善の書込APIとR2保存契約は `apps/admin/README.md`「記事・画像の改善管理」。それ以外のAPIは原則GET。従来の例外は `PATCH /api/posts/:id/caption` の下書き本文保存と `PATCH /api/note-covers/:key/production` のカバー制作内容・目視確認。
 許可範囲は `apps/admin/tests/unit/read-only-contract.test.ts` と下書き保存テストで固定する。
 
 ## できること
 
 | 操作 | 実装 |
 |---|---|
-| SNS 素材ギャラリー閲覧 (動画再生・画像) | 投稿IDに紐づくDrive保全素材を優先し、ローカル/R2へフォールバック |
+| SNS 素材ギャラリー閲覧 (動画再生・画像) | 投稿IDのR2画像正本を優先。旧Drive画像・動画も表示 |
 | caption / 予約日時 / 投稿状態の確認・下書き本文編集 | `/content/{x,instagram}` と `/sns` |
 | Geo role・分析ID・claim metricの確認 | `/content/x` と `/strategy` |
 | 画像資産の所在・欠落状態の確認 | `/assets` |
@@ -101,3 +101,5 @@ APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保
 `/sns?scope=candidates` で予約前の候補を画像付きで確認する。`origin=new-format` は新しい型の追加企画、`origin=material-import` は既存素材から整理した候補。準備状況と型で絞り込める。
 未登録ディレクトリを既存IDに照合・候補登録する入口は `node .claude/scripts/sns/reconcile-materials.mjs --input /tmp/materials.json --report /tmp/plan.json`（既定dry-run、適用は `--apply`）。入力・保全・削除済みの扱いは `apps/admin/README.md`「SNSのID台帳」。
 画像・本文・承認・素材の別名は `posts.json` の同じIDに紐付く。確認用プレビューと投稿用画像を区別し、候補整理だけで予約・公開しない。
+
+記事・画像の改善は `/product/content-quality`、実画像・候補比較は `/ops/image-library`、図の型は `/ops/image-templates`。保存・復元・検査の手順は `apps/admin/README.md`「記事・画像の改善管理」を使う。

@@ -2,7 +2,7 @@
 
 stats47 のローカル統合メディアコンソール。X / Instagram / note / Kindle の原稿・公開状態、
 private Google Drive参考文献から既存コンテンツへの展開状況、
-SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。画面から保存できるのはSNS下書き本文とnoteカバーの制作内容・確認結果。それ以外は読み取り専用。
+SNS 投稿状態、Geo契約、画像資産、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。画面からSNS下書き本文・noteカバー制作・記事と画像の改善方針・候補画像・目視結果・図の型を保存できる。公開状態は既存の投稿工程が管理する。
 2026-07-16 に旧 node:http + Vanilla JS 実装 (`.claude/scripts/gallery/`) から**完全移管** (旧実装は削除済み)。
 
 **公開サイト `apps/web` とは独立**。Cloudflare 等へデプロイしない。リモート公開・認証・DB なし。
@@ -89,14 +89,14 @@ ID検索 (`#1109`、`1109,1110,1111`)、本文・キー・template検索、媒�
 確認用プレビューは `assets.role=thumbnail` で保全し、投稿用 `media_path` には設定しない。公開前に投稿用画像・本文・出典を確認する。
 未登録素材の整理は `node .claude/scripts/sns/reconcile-materials.mjs --input /tmp/materials.json --report /tmp/plan.json`（dry-run）、適用は `--apply`。
 入力は `{platform, domain, content_key, batch:"YYYY-MM-DD"}` の配列で、`title/caption/origin/note` は任意。正確なファイル・既知の別名・素材キーで既存IDへ紐付け、曖昧なら停止。
-削除済み素材も元IDへの所属を維持し復活させない。新規行は承認待ち・日時なしで登録し、Driveに実体とSHAを保全する。既存本文・状態・予約日時は変更しない。
+削除済み素材も元IDへの所属を維持し復活させない。新規行は承認待ち・日時なしで登録し、画像はprivate R2、動画はDriveに実体とSHAを保全する。既存本文・状態・予約日時は変更しない。
 画像と本文を開くと下書きだけ編集できる。未保存で閉じる際は確認し、保存エラーでも入力を残す。予約済み・投稿済みは閲覧用。
-素材は投稿IDに紐づくGoogle Drive保全素材を優先し、ローカル/R2候補へフォールバックする。家計レシート・県図鑑・順位乗換も型で絞り込める。
+画像は投稿IDに紐づくprivate R2正本を優先する。移行前の画像と動画はGoogle Driveを読み、既存のローカル/R2配信候補も表示する。家計レシート・県図鑑・順位乗換も型で絞り込める。
 
 ## 安全ガード
 
 - APIは原則GET。保存の例外は `PATCH /api/posts/:id/caption` の下書き本文と `PATCH /api/note-covers/:key/production` の制作内容・確認結果 (2026-10-14 オーナー指示)。同一origin・loopback・JSON限定、ID/内容/版を検査し、古い画面からの更新を拒否する。SNSの予約/公開/削除済み投稿は編集できない
-- writerを呼べるのは `posts-store.ts` の `saveDraftCaption` と `note-cover-production.ts` の `saveCoverProduction`。後者は元画像/入力の実在確認と正確な候補版の照合を行い、コピー/方針変更で採用を解除する。noteへの反映は制作側の既存公開工程で行う。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
+- writerを呼べるのは `posts-store.ts` の `saveDraftCaption` と `note-cover-production.ts` の `saveCoverProduction`。後者は元画像/入力の実在確認と正確な候補版の照合を行い、コピー/方針変更で採用を解除する。noteへの反映は制作側の既存公開工程で行う。品質改善の限定writerは `content-quality.ts` と共有 `media/lib/workspace.mjs`。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
 - **ファイル配信**: decode → resolve → relative 検査 → **realpath 後再検査** (symlink 脱出拒否) → regular file のみ。Range 200/206/416
 - 個別制作物をTODOへ二重登録しない。`audit:content-operations` が `K-Sx-xx` / `NOTE-ARTICLE-*` /
   `SNS-POST-*` 等の個別カードを拒否し、システム課題・自動化・横断意思決定だけをbacklogに残す
@@ -119,3 +119,25 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 ## 共通事業方針の表示
 
 「戦略」→「共通方針」(`/strategy/policy`) で、Obsidian vault正本(`.claude/共通事業方針SSOT.md`)から配布されたHARM・判断の問い・原則を読み取り専用表示する。全画面共通の表示ではなく、この専用ページだけに置く。同じ配布版をエージェントも参照する。`npm run admin` の起動前に `policy:check` が内容の整合性（正本があれば最新版との一致も）を検査する。正本更新後はObsidian vaultで `npm run policy:sync`。個別適用は `.claude/shared-policy/application.json`、収益モデルとKPIは既存戦略が正本。
+
+## 記事・画像の改善管理
+
+- 商品 → 記事・投稿の改善 (`/product/content-quality`): 全note記事・SNS投稿を既存台帳から結合し、優先度、改善方針、データ/画像/配置/導入/出典/リンクの確認を保存する。右ペインで保存原稿と実画像を確認できる。公開ページのnoteカード表示は別途確認する。
+- 管理 → 画像ライブラリ (`/ops/image-library`): 使用箇所ID、R2所在、入力ファイル、旧新画像、320px比較、候補履歴、生成根拠を確認する。PNG/JPEG/WebP候補はprivate R2保存後に読み戻して照合する。原寸・320px・数値/年/単位の確認が揃った現在の候補だけ採用できる。カバーは既存の専用制作画面へ接続する。
+- 管理 → 図の型・媒体別方針 (`/ops/image-templates`): ランキング、地図、相関、時系列、家計、手順、未分類を共通管理する。編集時は版と旧方針を残し、旧条件の候補を失効させる。X/Instagramの現行全47県表示契約を維持する。
+
+運用記録は `data/content-operations/quality.json`、図の方針は `image-templates.json` と各JSON Schema。公開URL/本文/投稿状態の正本を複製しない。画像索引 `image-inventory.json` は検証済み記事manifestから派生する。未回収・未照合を「画像なし」「再生成可能」と扱わない。候補画像・入力根拠はprivate R2 `media-workspace/{images,inputs}/<sha>.*` に保存する。
+
+新規SNS画像は `sns-assets/<platform>/<id>/<role>-<order>/<sha>.*` のprivate R2正本へ保全する。従来の `sns/` は配信コピー。既存note本文/カバーのR2正本は維持し、旧Driveはハッシュ一致を確認した画像だけ移行する。元画像の削除はしない。
+
+```bash
+npm run media:inventory -- --all --apply
+npm run media:migrate -- --all --verify-existing --apply
+npm run media:prepare -- --id IMG-...
+npm run media:check
+npm run media:test
+```
+
+inventory/migrateは `--apply` なしで保存しない。移行結果は `image-migration.json`、元画像未取得・内容不一致・通信等の未照合を区別する。prepareは正本をSHA照合して新しいOS一時ディレクトリへ復元し、固定入力とrenderer参照を記したrequest.jsonを出力する。復元は再生成成功を意味しない。数値入力不足は回収してから制作する。
+
+書込APIは `PATCH /api/content-quality`、`PATCH /api/media-library/:id`、`POST /api/media-library/:id/candidate`、`PATCH /api/media-templates/:id`。同一localhost Origin、入力schema、楽観ロック、保存ロック、画像サイズ/形式、R2 readbackを検査する。採用で公開面は変更しない。CIのadmin-qualityが台帳検査と専用単体テストを実行する。

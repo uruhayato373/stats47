@@ -5,6 +5,7 @@ import { Readable } from "node:stream";
 import { getById } from "@/lib/server/posts-store";
 import { mimeFor } from "@/lib/server/safe-local-file";
 import { driveAbsolutePath, resolveDriveRoot } from "../../../../../../.claude/scripts/sns/lib/sns-drive-assets.mjs";
+import { readVerified } from "../../../../../../.claude/scripts/media/lib/storage.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,9 +23,17 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   if (!ID.test(id) || !FILE.test(name)) return Response.json({ error: "not found" }, { status: 404 });
   const post = getById(Number(id));
   const asset = (post?.assets ?? []).find(
-    (a) => a.state === "archived" && a.drive_path && path.posix.basename(a.drive_path) === name,
+    (a) => a.state === "archived" && (a.drive_path ? path.posix.basename(a.drive_path) : `${a.role}-${a.order}.${a.mime?.split('/')[1] ?? 'png'}`) === name,
   );
-  if (!asset?.drive_path) return Response.json({ error: "台帳に無い素材" }, { status: 404 });
+  if (!asset) return Response.json({ error: "台帳に無い素材" }, { status: 404 });
+  if (asset.r2) {
+    if (!asset.r2.key.startsWith(`sns-assets/${post!.platform}/${id}/${asset.role}-${asset.order}/`)) return Response.json({error:"素材の参照が不正です。"},{status:400});
+    try {
+      const bytes=await readVerified({...asset.r2,sha256:asset.sha256,bytes:asset.bytes});
+      return new Response(new Uint8Array(bytes),{headers:{"content-type":asset.mime??"application/octet-stream","cache-control":"no-store","x-content-type-options":"nosniff"}});
+    } catch { return Response.json({error:"R2画像を照合できません。"},{status:502}); }
+  }
+  if (!asset.drive_path) return Response.json({error:"移行元がありません。"},{status:404});
 
   let abs: string;
   try {

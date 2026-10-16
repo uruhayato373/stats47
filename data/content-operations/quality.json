@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "reviews": {
+    "note/recovered-n80e58a01f660": {
+      "priority": "high",
+      "policy": "2026-10-16公開面確認。上位・下位の横並び図はスマホでラベルと値が小さい。縦配置・分割を試し、同じ比較図の重複を減らす。末尾の「元データ」が衣服物価を指すため、指標・年・粒度が一致するリンクへ修正する。出典を末尾の短い説明とリンクへ整理する。候補は原寸と320px幅で比較してから採用する。",
+      "checks": {
+        "data": "unchecked",
+        "images": "issue",
+        "placement": "issue",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "issue"
+      },
+      "basis": "0708366a75e79e1764cabf57bb38d0a354c23064a60b13751b57000b5e0d688c",
+      "updatedAt": "2026-10-16T01:15:03.597Z"
+    },
+    "note/recovered-nf962c6702b93": {
+      "priority": "high",
+      "policy": "2026-10-16公開面確認。上位・下位図の文字をスマホ幅で読みやすくする。コロプレス地図の凡例と本文説明を照合する。出典を記事末尾に簡潔にまとめる案を試す。地図の数値・年・単位は固定入力で再確認する。",
+      "checks": {
+        "data": "unchecked",
+        "images": "issue",
+        "placement": "unchecked",
+        "intro": "unchecked",
+        "sources": "issue",
+        "links": "unchecked"
+      },
+      "basis": "e63db2ce107cf28f60193293ef53f6795b477e18ab274d7f499cd11e1bdf9279",
+      "updatedAt": "2026-10-16T01:13:23.169Z"
+    },
+    "note/recovered-n023501038bd5": {
+      "priority": "high",
+      "policy": "2026-10-16公開面確認。散布図の軸・地域名を拡大し、相関と因果を区別した説明を維持する。空欄の関連記事・マガジンカードを公開画面で修正する。「元データ」として案内する農地転用商品はテーマ不一致のため導線を見直す。",
+      "checks": {
+        "data": "unchecked",
+        "images": "issue",
+        "placement": "unchecked",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "issue"
+      },
+      "basis": "3357748b6091c54b8832280d7c4cd86055af5b4ef9e9b1b35365ca13e95dbc7b",
+      "updatedAt": "2026-10-16T01:13:23.323Z"
+    },
+    "note/a-kakei-aichi": {
+      "priority": "normal",
+      "policy": "県名と調査対象市（名古屋市）を区別する。2024年・二人以上世帯・都市の単純平均という条件を保持し、5図を320px幅で一つずつ確認する。費目の値と保存入力を照合してから画像・配置を変更する。",
+      "checks": {
+        "data": "unchecked",
+        "images": "unchecked",
+        "placement": "unchecked",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "3bf02587a51f1b824470012c499cce2e33667ed2beb392621bb8e27bdc84a1f6",
+      "updatedAt": "2026-10-16T01:13:23.501Z"
+    },
+    "note/recovered-n03e45e40d3a7": {
+      "priority": "normal",
+      "policy": "2026-10-16公開面確認。手順画像は必要な操作部分を拡大する案を検証する。現在の操作とスクリーンショットの一致は未確認。末尾の重複した案内を整理する。既存の更新下書きとの突合後に反映する。",
+      "checks": {
+        "data": "unchecked",
+        "images": "unchecked",
+        "placement": "unchecked",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "issue"
+      },
+      "basis": "95c0640878e14ff45b92314bce0f955e7b0578f87b70c8b2a30f8f4744665639",
+      "updatedAt": "2026-10-16T01:13:23.655Z"
+    },
+    "note/d-geo-ipss-prefecture-map": {
+      "priority": "normal",
+      "policy": "2026-10-16に無料公開部分だけを確認。導入の対象読者・得られることは維持する。CSV見本に加えて分析結果の地図プレビューを無料部分へ配置する案を検証する。有料部分の品質は未確認。",
+      "checks": {
+        "data": "unchecked",
+        "images": "unchecked",
+        "placement": "issue",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "ed84bfcc017b23fe63516bf3e512a9dac7d6a8e749109181dc39def3fc978b23",
+      "updatedAt": "2026-10-16T01:13:23.798Z"
+    }
+  },
+  "images": {
+    "IMG-ea19010e6c9b25a368d42ad3": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "ranking",
+      "policy": "上位5県と下位5県の横並びでは文字が小さい。縦配置または2枚への分割を試し、地域名・値・単位を320pxで読める大きさにする。固定数値入力は未回収のため、照合後に生成する。",
+      "approvedId": null
+    }
+  }
+}
