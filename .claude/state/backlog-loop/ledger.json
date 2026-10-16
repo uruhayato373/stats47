@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-12T03:46:08.935Z",
+  "updatedAt": "2026-10-16T21:58:30.748Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7509,6 +7509,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-12T03:46:08.935Z"
+    },
+    "GSC-OBSERVATION-PERIOD-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T21:58:30.748Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run search-growth:test",
+              "npm run type-check",
+              "npm run search-growth:normalize",
+              "npm run search-growth:analyze"
+            ],
+            "pass": true
+          },
+          "evidence": "元summaryの期間・取得時刻・確定性を継承。8407表示/17クリックは09-11〜10-08へ訂正、2078候補の承認1件保持。GA4旧窓は復元根拠と不確定を表示。98テスト・全型検査PASS。証拠:data/gsc/ui-audits/2026-10-17-remediation.json",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T21:58:30.748Z"
     }
   }
 }

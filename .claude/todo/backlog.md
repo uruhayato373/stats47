@@ -357,40 +357,31 @@ updated: 2026-10-06
 - **停止条件**: ビルドが読むファイルを除外して、配信物が古いまま残る状態を作らない。workflow の変更は main 反映まで発火しない点に注意する。
 - **完了条件**: 配信物に差の無いデプロイが走らないことを、対象外の変更だけの push で確かめた。または件数が少なく不要と判断した理由をここに書いた。
 
-### [GSC-GEO-SITEMAP-404-01] サイトマップ掲載の土砂災害人口分析が本番404を返す不整合を直す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [領域:サイト]
+### [GSC-GEO-SITEMAP-404-01] 土砂災害分析の修正を本番へ反映し、公開gateを確認する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
 
 - **GSC案01 / P1（最優先・順序1）**: 公開対象のGeoページの404を原因特定から是正する。
 - **GSC案02 / P2（次に着手）**: Geo各分析のデータ検証・公開可否・sitemap掲載を既存公開gateで照合する。案01の再発防止として同じ変更単位で扱う。
 - **owner / 順序**: geo-analysis-curator・Geoページ担当。2026-10-16 の GSC 監査内では優先1。証跡: `data/gsc/ui-audits/2026-10-16.json`。
 - **実測**: `https://stats47.jp/geo/population-landslide-exposure` は公開 `sitemap/0.xml` に掲載されているが404 + noindex。Googlebot UAの初回（CDN MISS）と時間を空けた再測定、通常UAの計3回で404。GSCの404一覧にも存在する。今回実測したサイトマップ掲載URLのうち、現在404のものはこの1件。原因は未特定。
-- **次**: ①当該routeのnotFound条件、公開対象、R2 snapshot・lineage検証結果、デプロイ状態を照合する ②公開対象なら根拠データと途中artifactの整合を保って200へ復旧し、撤回対象ならsitemapと内部リンクから除外する ③代表の通常UA・Googlebot UAとsitemapの整合を再検査する。
+- **次**: 修正コードを一括デプロイ後、①通常UA・Googlebot UAで200・canonical・noindex不在を確認する ②既存route smokeのGeo全7分析とsitemap掲載を照合する ③県別途中データが閲覧できることを確認する。修正とローカル検証の証拠は `data/gsc/ui-audits/2026-10-17-remediation.json`。
 - **調査の具体化 (10-16)**: `GeoCrossAnalysisArticle` はspec/bundle欠落とprimaryMetric欠落でnotFoundになる。`loadGeoAnalysisBundle` のsnapshot parse・manifest照合まで失敗地点を分け、データ不整合・取得失敗・配信版の不一致を調べる。再発防止は既存route smoke / page-qualityにGeo各分析の公開可否とsitemapの一致を追加する案とし、新しい常駐監視は増やさない。
 - **停止条件**: 原因を確定せず404を200へ置換しない。Geoの出典・途中artifact・保存則検証を外さない。R2 push・デプロイは別途オーナー指示で行う。
 - **完了条件**: 公開方針と本番HTTP・sitemapが一致し、公開継続なら当該ページと途中artifactが実データで閲覧できる。GSCの過去404件数が減ることだけを完了条件にしない。
 
-### [GSC-DATASET-NESTED-SCHEMA-01] 出典Datasetの説明文不足で無効になった構造化データを是正する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [領域:サイト]
+### [GSC-DATASET-NESTED-SCHEMA-01] Dataset修正の本番反映・再取得と、出典メタデータの是正を進める
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
 
 - **GSC案03 / P1（最優先・順序2）**: 入れ子Datasetの説明不足・欠落を修正する。
 - **GSC案04 / P2（次に着手）**: 出典SSOTからcreator・license・対象年・地域・単位を正しく引き継ぐ。案03と同じ生成処理で扱う。
 - **GSC案05 / P2（次に着手）**: 親・isBasedOn・@graphを辿る検査を追加し、案03の公開前gateに含める。
 - **owner / 順序**: ranking-ui-manager・市区町村ページ担当。2026-10-16 の GSC 監査内では `GSC-GEO-SITEMAP-404-01` とともに優先対応。証跡: `data/gsc/ui-audits/2026-10-16.json`。
 - **実測**: GSC Dataset（最終更新 10-15）は description 長さ不正 775、欠落 83、計 858 アイテム無効。license / creator 欠落は各 1,092。通知本文の「1 件」は問題種別数で、影響ページ数ではない。本番 `/ranking/donations-prefecture` は親 Dataset の説明 121 文字に対し `isBasedOn` の Dataset は 47 文字、`/ranking/side-job-rate` は 46 文字。市区町村ランキング 4 例では `isBasedOn.description` 自体が無い。親の説明は存在する。
-- **次**: ① `features/ranking/utils/generate-structured-data.ts` と `features/municipalities/lib/municipality-dataset-structured-data.ts` の出典オブジェクトを是正し、入れ子も含め Dataset の説明 50〜5,000 文字を検証する ②出典に対応する creator / license も根拠があるものだけ付ける ③代表ページの本番JSON-LDとGSC再クロール後の該当アイテムを照合する。公式: https://developers.google.com/search/docs/appearance/structured-data/dataset?hl=ja
+- **次**: ①一括デプロイ後、都道府県・市区町村の代表HTMLで親と出典Datasetの説明を再帰検査する ②GSCの該当問題で修正検証を開始し再取得後のアイテムを追う ③P2のcreator / licenseは対応する出典SSOTの作成者・利用条件を特定したものだけ引き継ぐ（調査名を組織名として流用しない）。ローカル修正・文字数検査の証拠は `data/gsc/ui-audits/2026-10-17-remediation.json`。公式: https://developers.google.com/search/docs/appearance/structured-data/dataset?hl=ja
 - **再発防止案 (10-16)**: 親・`isBasedOn`・`@graph`内を再帰的に検査し、短い出典名と説明欠落の両ケースを回帰入力にする。出典SSOTと作成者・利用規約・対象年・地域・単位の一致も照合する。858は無効アイテム数として追跡し、ページ数や通常検索の未登録数と混同しない。
 - **停止条件**: 親 Dataset の本文だけを水増しして解消としない。出典の作成者・利用条件を推測で埋めない。本番反映は別途オーナー指示で行う。
 - **完了条件**: 親と入れ子の Dataset を辿る回帰テスト、対象の型検査、本番代表HTMLの必須項目検査が通り、再クロール後に該当エラーが解消したことを確認する。デプロイ前・再クロール前はそれぞれ区別して記録する。
 
-### [GSC-OBSERVATION-PERIOD-01] search-growthの集計期間を元データから引き継ぎ、28日値の1日表示を直す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [領域:サイト]
-
-- **GSC案06 / P1（最優先・順序3）**: 集計期間の不整合を修正する。CTRの前後比較より先に完了する。
-- **owner / 順序**: gsc-analyst・search-growth担当。CTR施策の前後比較を始める前に修正する。
-- **実測**: `data/gsc/snapshots/2026-W41/summary.json` の rolling28d は 09-11〜10-08。`pages.csv` の道の駅記事は 8,407表示・17クリックだが、`data/search-growth/candidates.json` の同記事は baselinePeriod が 10-11〜10-11。`lib/sources.mjs` は summary の期間を使わず週末から計算し、`lib/scoring.mjs` の baselinePeriod は evidence の periodEnd だけから開始・終了を作るため、取得遅延と期間幅が失われる。
-- **次**: ① summaryの実期間・取得日時・確定状態をObservationへ継承する ② evidenceに開始日も保持し、異なる窓を一つの比較期間に偽装しない ③候補を再生成して既存の承認状態を保ち、GA4側にも同じ期間誤認が無いか検査する。
-- **停止条件**: 期間を表示だけで直して元Observationを残さない。欠測を0や確定済みとして埋めない。過去の効果判定を根拠なしに上書きしない。
-- **完了条件**: 同じ8,407表示・17クリックの期間が09-11〜10-08で一致し、7日/28日・取得遅延・異期間混在を区別する回帰テストが通る。再生成後の候補と元summaryの期間整合を確認する。
 
 ### [GSC-ROBOTS-INDEXED-01] 公開ダウンロード・廃止OGPのGoogle再取得と除外を確認する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
@@ -406,7 +397,7 @@ updated: 2026-10-06
 
 - **GSC案38 / P2（次に着手・比較前の前提）**: UI監査10-12と既存coverage入力10-04を区別し、HTTP・sitemapの新しい証拠を検査付きの取得経路へ接続する。
 - **owner / 入力**: gsc-analyst。`data/gsc/ui-audits/2026-10-16.json`、coverage-remediation、search-growthのstatus。UI例示の上限と722 URLだけのHTTP検査を保持する。
-- **次 / 順序**: ①sourceごとに観測日・取得日・母集団・標本数・欠測を照合する ②既存CSV/manifest gateで最新coverageを取り込むか、部分UI監査を補助証拠として保持するかを決める ③HTTP/sitemap collectorの既存出力との接続を検証し、既存キューの状態を保持して再構築する。期間の計算修正はGSC-OBSERVATION-PERIOD-01が所有する。
+- **次 / 順序**: ①sourceごとに観測日・取得日・母集団・標本数・欠測を照合する ②既存CSV/manifest gateで最新coverageを取り込むか、部分UI監査を補助証拠として保持するかを決める ③HTTP/sitemap collectorの既存出力との接続を検証し、既存キューの状態を保持して再構築する。集計期間はsearch-growthのObservationと元summaryを照合し、週フォルダ名から推定しない。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
 
@@ -1308,7 +1299,7 @@ updated: 2026-10-06
 - **GSC案27 / P2（次に着手）**: 選んだページの冒頭に答え・対象年・単位を示し、必要な順位表をHTMLで読めるようにする。既存図表との重複は増やさない。
 - **GSC案28 / P2（次に着手）**: 公衆電話のrankingを総数・一覧・推移、blogを理由・地域差へ分け、相互リンクする。検索語の重複だけで悪影響を断定しない。
 - **GSC案29 / P2（次に着手）**: 国勢調査ハブから40代未婚割合など答えのあるrankingへ案内し、リンク先・表示文言・到達を検証する。
-- **GSC案37 / P2（次に着手）**: GSC-OBSERVATION-PERIOD-01後に実期間・検索語・端末を固定して比較し、類似未変更ページ・順位・季節性・同時変更を併記する。少標本で因果や効果を確定しない。
+- **GSC案37 / P2（次に着手）**: 実期間・検索語・端末を固定して比較し、類似未変更ページ・順位・季節性・同時変更を併記する。少標本で因果や効果を確定しない。
 - **入力**: `GSC-CTR-DECOMPOSE-01` の 2026-10-07 の表 (健康寿命・道の駅・公衆電話 ranking/blog・国勢調査ハブ・出生率・食料自給率・高校2年男子の身長)。PV 計画 (`PV-PLAN-REVIEW-2026Q4-01`) のうち CTR を上げる打ち手。
 - **次 (実行順)**: ① 公衆電話 (`/ranking/public-phone-count` と `/blog/public-phone-count`)、出生率 (`/blog/fertility-rate-prefecture-gap` と `/ranking/total-fertility-rate`) の 2 組で、同じ検索語に両方が出ていないかを GSC (page × query) で確かめ、食い合いなら役割を分ける (canonical・内部リンク・title の切り口) ② 残り 5 ページを `/search-growth` の候補にし、title・description を 1 ページずつ変える (一括変更はしない) ③ 変えた日を記録し、4 週後に同じ 28 日窓で CTR を比べる。
 - **2026-10-07 の確認 (本番の title・canonical を curl で取得)**: 2 組とも canonical はそれぞれ自分自身で、title がほぼ同じ書き方 (同じ年・同じ 1 位と最下位の値) だった。公衆電話は ranking「公衆電話設置台数 都道府県ランキング【2024年】｜1位東京都（10,717.00個）」と blog「公衆電話設置台数1位東京10,717個・最下位徳島509個｜…」。出生率は ranking「…なぜ沖縄1.60が1位で東京0.99が最下位?」と blog「…沖縄1.60・東京0.99、早婚の県ほど高い…」。出生率の ranking から blog へのリンクは 0 本。**[仮説]** 同じ検索語に 2 ページが出て、互いの順位とクリックを下げている。検証: GSC で page × query を取り、同じクエリに両 URL が表示されているか (Mac か CI)。期日: 10-25。判定: 同じクエリの表示が両方にあれば、ranking を「一覧・推移・地図」、blog を「なぜ・相関」の切り口に分けて title を変える。
@@ -1334,7 +1325,7 @@ updated: 2026-10-06
   | `/ranking/food-self-sufficiency-rate-calorie` | — | 停止条件どおり `DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` の後 | 見送る |
 - **停止条件**: title の一括置換をしない。食料自給率はデータの年を直す (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01`) まで title を変えない。
 - **完了条件**: 7 ページそれぞれに「変えた / 見送った」と理由が記録され、変えたページの変更日が search-growth の台帳にある。
-- **10-16 の追加観測・実行候補**: `data/seo/latest-report.json` の pendingPublication 8件は、参照先proposalが全件 `implementation-needed`（09-18〜10-06選定）。実装済み・公開承認済みとは扱わない。既存7ページと重なる道の駅・高校2年男子身長・公衆電話を先に照合し、重複提案をまとめて各1件の実装担当・対象・完了gateへ落とす。CTR比較は `GSC-OBSERVATION-PERIOD-01` の後に実期間で行う。残りは需要と既存作業の重複を確認して採否を決め、一括実装・一括公開しない。
+- **10-16 の追加観測・実行候補**: `data/seo/latest-report.json` の pendingPublication 8件は、参照先proposalが全件 `implementation-needed`（09-18〜10-06選定）。実装済み・公開承認済みとは扱わない。既存7ページと重なる道の駅・高校2年男子身長・公衆電話を先に照合し、重複提案をまとめて各1件の実装担当・対象・完了gateへ落とす。CTR比較は元summaryを継承した実期間で行う。残りは需要と既存作業の重複を確認して採否を決め、一括実装・一括公開しない。
 
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
