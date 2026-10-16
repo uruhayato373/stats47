@@ -404,3 +404,62 @@ test('snapshotが無いmonthly監査は例外にせずfailを返す', (t) => {
     'fail'
   );
 });
+
+test('baseline新契約はtarget不要、effect実験のtarget欠落は引き続きFAIL', async () => {
+  const { ADSENSE_BASELINE } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const root = fixture();
+  const writeVerdicts = verdicts => write(root, 'data/effect-verdict/verdicts-2026-W34.json', {
+    week: '2026-W34', summary: { total: verdicts.length }, verdicts,
+  });
+  const baseline = { domainId: 'adsense', subjectId: ADSENSE_BASELINE.subjectId,
+    assessment: ADSENSE_BASELINE, label: 'effect/pending', guards: [{ code: 'insufficient-window' }] };
+  try {
+    writeVerdicts([baseline]);
+    let result = auditOperationsCycle({ root, now: NOW, stage: 'review-input', week: '2026-W34', policy: POLICY });
+    assert.equal(result.checks.find(c => c.code === 'effect-target-ratchet').level, 'pass');
+    assert.equal(result.checks.find(c => c.code === 'baseline-observation').level, 'warn');
+    writeVerdicts([baseline, { domainId: 'adsense', subjectId: 'REAL-EXPERIMENT', label: 'effect/pending',
+      guards: [{ code: 'insufficient-target' }, { code: 'insufficient-window' }] }]);
+    result = auditOperationsCycle({ root, now: NOW, stage: 'review-input', week: '2026-W34', policy: POLICY });
+    assert.equal(result.checks.find(c => c.code === 'effect-target-ratchet').level, 'fail');
+    // Reusing a baseline ID with an experiment assessment cannot bypass the target gate.
+    writeVerdicts([{ ...baseline, assessment: { kind: 'effect-experiment' }, guards: [{ code: 'insufficient-target' }] }]);
+    result = auditOperationsCycle({ root, now: NOW, stage: 'review-input', week: '2026-W34', policy: POLICY });
+    assert.equal(result.checks.find(c => c.code === 'effect-target-ratchet').level, 'fail');
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+
+test('既定監査は原本を変えず、hash・週・契約・日時が一致する新再評価を採用する', async () => {
+  const { ADSENSE_BASELINE } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const { reassessmentProvenance, selectReassessment, ASSESSMENT_CONTRACT_VERSION } = await import('../../lib/effect-verdict/reassessment.mjs');
+  const root = fixture();
+  const original = path.join(root, 'data/effect-verdict/verdicts-2026-W34.json');
+  write(root, 'data/effect-verdict/verdicts-2026-W34.json', {
+    week: '2026-W34', decidedAt: '2026-08-23T10:00:00Z', summary: { total: 1 },
+    verdicts: [{ domainId: 'adsense', subjectId: ADSENSE_BASELINE.subjectId, label: 'effect/pending', guards: [{ code: 'insufficient-target' }] }],
+  });
+  const bytes = fs.readFileSync(original, 'utf8');
+  const relative = 'data/effect-verdict/reassessments/2026-W34/new.json';
+  const reassessment = { week: '2026-W34', decidedAt: '2026-08-24T10:00:00Z',
+    assessmentContractVersion: ASSESSMENT_CONTRACT_VERSION, reassesses: reassessmentProvenance(original, '2026-W34'),
+    summary: { total: 1 }, verdicts: [{ domainId: 'adsense', subjectId: ADSENSE_BASELINE.subjectId,
+      assessment: ADSENSE_BASELINE, label: 'effect/pending', guards: [{ code: 'insufficient-window' }] }] };
+  try {
+    let result = auditOperationsCycle({ root, now: NOW, stage: 'review-input', week: '2026-W34', policy: POLICY });
+    assert.equal(result.checks.find(c => c.code === 'effect-target-ratchet').level, 'fail');
+    write(root, relative, reassessment);
+    result = auditOperationsCycle({ root, now: NOW, stage: 'review-input', week: '2026-W34', policy: POLICY });
+    assert.equal(result.checks.find(c => c.code === 'effect-target-ratchet').level, 'pass');
+    assert.match(result.checks.find(c => c.code === 'effect-verdict').detail, /reassessments/);
+    assert.equal(fs.readFileSync(original, 'utf8'), bytes);
+    for (const invalid of [
+      { week: '2026-W35' }, { assessmentContractVersion: 0 },
+      { verdicts: [], summary: { total: 0 } },
+      { decidedAt: '2026-08-25T00:00:00Z' },
+      { reassesses: { ...reassessment.reassesses, sourceSha256: 'wrong' } },
+    ]) {
+      write(root, relative, { ...reassessment, ...invalid });
+      assert.equal(selectReassessment(original, '2026-W34', NOW), original);
+    }
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});

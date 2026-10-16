@@ -9,11 +9,15 @@
  *   node .claude/scripts/gsc/audit-operations-cycle.mjs
  *   node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor --write --strict
  *   node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week 2026-W34
+ *   --verdict /tmp/reassessment.json は明示検証用。既定は原本hash・week・契約・日時が
+ *   一致するappend-only再評価を採用し、それが無ければ元の週次verdictを読む。
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, observeAdsenseBaseline } from '../metrics/lib/adsense-measurement-contract.mjs';
+import { selectReassessment } from '../lib/effect-verdict/reassessment.mjs';
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
 import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../management/lib/review-cadence.mjs';
 import { loadClosedWaveIds } from '../blog/measure-gsc-impact.mjs';
@@ -205,6 +209,7 @@ export function auditOperationsCycle({
   stage = 'monitor',
   week = null,
   policy: policyOverride = null,
+  verdictFile = null,
 } = {}) {
   if (!STAGES.has(stage)) throw new Error(`未知の stage: ${stage}`);
   const policy = loadPolicy(root, policyOverride);
@@ -276,11 +281,12 @@ export function auditOperationsCycle({
     );
   }
 
-  const verdictPath = measurementWeek
-    ? path.join(paths.verdicts, `verdicts-${measurementWeek}.json`)
-    : null;
+  const originalVerdictPath = measurementWeek
+    ? path.join(paths.verdicts, `verdicts-${measurementWeek}.json`) : null;
+  const verdictPath = verdictFile ?? (originalVerdictPath
+    ? selectReassessment(originalVerdictPath, measurementWeek, now) : null);
   const verdictDoc = verdictPath ? readJson(verdictPath) : null;
-  if (!verdictDoc) {
+  if (!verdictDoc || verdictDoc.week !== measurementWeek) {
     addCheck(
       checks,
       'effect-verdict',
@@ -295,7 +301,7 @@ export function auditOperationsCycle({
       checks,
       'effect-verdict',
       'pass',
-      `${measurementWeek} verdict ${verdictDoc.summary?.total ?? 0}件を記録済み`
+      `${measurementWeek} verdict ${verdictDoc.summary?.total ?? 0}件 / ${path.relative(root, verdictPath)} / decidedAt=${verdictDoc.decidedAt ?? "legacy-unrecorded"}`
     );
     // 判定不能のまま終了した wave (closed-waves.json・オーナー判断) は欠落に数えない。
     // 終了より前の週の verdict には残るので、ここで外さないと終了後も既知欠落の警告が続く。
@@ -304,7 +310,7 @@ export function auditOperationsCycle({
     );
     const missingTargets = (verdictDoc.verdicts ?? []).filter(
       (verdict) =>
-        verdict.guards?.some((guard) => guard.code === 'insufficient-target') &&
+        isMissingEffectTarget(verdict) &&
         !closedWaves.has(String(verdict.subjectId ?? '').replace(/^BLOG-WAVE-/, ''))
     );
     const legacy = new Set(policy.legacyMissingTargetSubjectIds ?? []);
@@ -329,6 +335,20 @@ export function auditOperationsCycle({
           ? '既知7件は推測で補わず、週次で終了または再計測を判断'
           : null
     );
+
+    const baselines = (verdictDoc.verdicts ?? []).filter(hasBaselineAssessment);
+    for (const baseline of baselines) {
+      const contract = assessmentForSubject(baseline);
+      // Re-read the observation source for append-only reassessments.
+      const csv = readText(path.join(root, datasetDir('adsense.history'), 'history.csv'), '') ?? '';
+      const [header, ...lines] = csv.trim().split('\n');
+      const keys = header.split(',');
+      const rows = lines.map(line => Object.fromEntries(line.split(',').map((value, i) => [keys[i], value])));
+      const observation = observeAdsenseBaseline(rows, now.toISOString());
+      addCheck(checks, 'baseline-observation', observation.overdue ? 'fail' : observation.status === 'ready' ? 'pass' : 'warn',
+        `${baseline.subjectId}: ${observation.observedWeeks.length}/${contract.weeks.length}週 / missing=${observation.missingWeeks.join(',') || 'none'} / review=${contract.reviewDate}`,
+        observation.overdue ? 'fetch-metrics-weekly のAdSense取得を復旧し4週のbaselineを揃える' : null);
+    }
 
     const improvements = readText(paths.improvements, '') ?? '';
     const unresolvedConfirmed = (verdictDoc.verdicts ?? []).filter(
@@ -560,7 +580,8 @@ function main() {
     throw new Error(`--now が日時ではない: ${nowRaw}`);
   const stage = getArg(args, '--stage', 'monitor');
   const week = getArg(args, '--week');
-  const result = auditOperationsCycle({ root, now, stage, week });
+  const verdictFile = getArg(args, '--verdict');
+  const result = auditOperationsCycle({ root, now, stage, week, verdictFile });
   const markdown = renderMarkdown(result);
 
   if (args.includes('--write')) {

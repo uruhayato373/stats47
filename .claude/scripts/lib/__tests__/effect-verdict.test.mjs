@@ -137,7 +137,7 @@ test("群B: window.minWeeks を上げると full が pending に変わる", () =
   assert.equal(mutated.label, LABELS.pending);
   assert.deepEqual(
     mutated.guards.map((g) => g.code),
-    ["insufficient-target"],
+    ["insufficient-window"],
   );
 });
 
@@ -190,7 +190,7 @@ test("insufficient-target: 想定効果値が無ければ確定しない", () =>
   assert.match(v.guards[0].detail, /想定効果値/);
 });
 
-test("insufficient-target: 判定窓 (minWeeks) 未達なら確定しない", () => {
+test("insufficient-window: 判定窓 (minWeeks) 未達なら確定しない", () => {
   const v = decideVerdict(subject(95, { window: { beforeWeek: "2026-W29", afterWeek: "2026-W30" } }));
   assert.equal(v.label, LABELS.pending);
   assert.match(v.guards[0].detail, /判定窓が不足 \(経過 1 週 < window\.minWeeks 2\)/);
@@ -220,12 +220,13 @@ test("ガードは達成率より優先される (full 相当でも pending)", (
   assert.equal(v.attainment, 0.95, "達成率自体は evidence として残す");
 });
 
-test("guard code は 4 種に固定されている", () => {
+test("guard code は target欠落と窓不足を区別する", () => {
   assert.deepEqual(GUARD_CODES, [
     "insufficient-sample",
     "stale-source",
     "confounded",
     "insufficient-target",
+    "insufficient-window",
   ]);
 });
 
@@ -372,7 +373,7 @@ test("formatVerdictSection: 判定 / 根拠データ / 閾値 SSOT / ガード /
   assert.ok(md.includes("effect/full"));
   assert.ok(md.includes("thresholds.mjs` v1.0.0"));
   assert.ok(md.includes("clicks 20→115"));
-  assert.ok(md.includes("なし (4 ガードすべて通過)"));
+  assert.ok(md.includes("なし (全ガード通過)"));
 });
 
 // ── verdict CLI (adapter 横断ランナー) ───────────────────────────────
@@ -461,4 +462,48 @@ test("formatVerdictSection: 原因・外部仕様を出力しない (engine の�
   for (const ng of ["のはず", "と思われる", "Google の仕様", "浸透待ち", "だろう", "と考えられる", "原因は"]) {
     assert.ok(!md.includes(ng), `NG ワード「${ng}」が出力に混入`);
   }
+});
+
+test("window不足でもeffect実験の真のtarget欠落を独立して記録する", () => {
+  const v = decideVerdict(subject(95, { target: null, window: { notDue: true } }));
+  assert.equal(v.label, LABELS.pending);
+  assert.ok(v.guards.some(g => g.code === 'insufficient-window'));
+  assert.ok(v.guards.some(g => g.code === 'insufficient-target'));
+});
+
+test("baselineは差分や事後targetを作らず4週の充足だけを記録する", async () => {
+  const { runAdapter } = await import('../effect-verdict/cli.mjs');
+  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const rows = ADSENSE_BASELINE.weeks.map(week => ({ week, earnings: 25, accountId: ADSENSE_BASELINE.accountId }));
+  const fake = {
+    domainId: 'adsense', logPath: '/tmp/test.md',
+    listSubjects: () => [{ id: ADSENSE_BASELINE.subjectId }],
+    observeBaseline: () => observeAdsenseBaseline(rows.slice(0, 1), '2026-10-17'),
+    baselineSources: () => [{ name: 'fixture' }], reproduceCommand: () => 'fixture',
+    measure: () => { throw new Error('baseline must not compare'); },
+  };
+  const [v] = runAdapter(fake);
+  assert.equal(v.assessment.kind, 'baseline-observation');
+  assert.equal(v.observation.status, 'pending');
+  assert.equal(v.guards[0].code, 'insufficient-window');
+  assert.equal(v.before, null);
+  assert.equal(v.after, null);
+  assert.equal(v.target, null);
+  assert.equal(v.label, LABELS.pending);
+  assert.equal(observeAdsenseBaseline(rows, '2026-11-13').status, 'ready');
+  assert.equal(observeAdsenseBaseline(rows.slice(0, 1), '2026-11-13').overdue, true);
+});
+
+test("AdSense adapterは新旧口座と明示的な不一致口座の比較を拒否する", async () => {
+  const { resolveAdsenseWindows } = await import('../../metrics/measure-adsense-impact.mjs');
+  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const rows = [
+    { week: '2026-W34', earnings: 100 },
+    { week: '2026-W42', earnings: 200, accountId: 'pub-wrong' },
+    { week: '2026-W43', earnings: 50, accountId: ADSENSE_BASELINE.accountId },
+  ];
+  assert.equal(resolveAdsenseWindows('2026-W41', rows).before, null);
+  assert.equal(resolveAdsenseWindows('2026-W41', rows).after, '2026-W43');
+  assert.equal(resolveAdsenseWindows('2026-W33', rows).after, '2026-W34');
+  assert.deepEqual(observeAdsenseBaseline(rows).observedWeeks, ['2026-W43']);
 });

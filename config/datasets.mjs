@@ -258,6 +258,7 @@ export const DATASETS = [
   d("gsc.coverage-totals", "data/gsc/coverage-totals-history.csv", "series", "site", "data", "カバレッジ件数の推移 (是正キュー側)"),
   d("search-growth.state", "data/search-growth/{name}.json", "state", "site", "data", "検索成長の候補・健全性・抑制台帳"),
   d("search-growth.manifests", "data/search-growth/manifests/{week}.json", "evidence", "site", "data", "検索成長の週次入力の固定", { retain: "search-growth-manifests" }),
+  d("effect.reassessments", "data/effect-verdict/reassessments/{week}/{name}.json", "ledger", "strategy", "data", "原本hashに結んだ効果判定契約の再評価 (append-only)", { schema: "config/schema/effect.verdicts.schema.json" }),
   d("effect.verdicts", "data/effect-verdict/verdicts-{week}.json", "ledger", "strategy", "data", "改善施策の効果判定 (閾値エンジン)", { schema: "config/schema/effect.verdicts.schema.json" }),
   d("page-quality.findings", "data/page-quality/{name}", "state", "site", "data", "UI 指摘のキュー"),
   d("page-quality.backlog-batches", "data/page-quality/backlog-batches/{**}", "state", "site", "data", "UI 指摘を backlog カードへ束ねた記録"),

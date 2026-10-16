@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "改善施策の効果判定 (閾値エンジン)",
-  "description": "data/effect-verdict/verdicts-{week}.json の形状契約。2026-10-11 に実データ 11 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "週次の効果判定と原本hashに結んだappend-only再評価。assessmentはbaseline観測と効果実験を分離する。過去のassessment無し記録は維持する。",
   "type": "object",
   "properties": {
     "schemaVersion": {
@@ -87,7 +87,10 @@
             }
           },
           "before": {
-            "type": "object",
+            "type": [
+              "object",
+              "null"
+            ],
             "properties": {
               "value": {
                 "type": "number"
@@ -98,7 +101,10 @@
             }
           },
           "after": {
-            "type": "object",
+            "type": [
+              "object",
+              "null"
+            ],
             "properties": {
               "value": {
                 "type": "number"
@@ -109,7 +115,10 @@
             }
           },
           "delta": {
-            "type": "number"
+            "type": [
+              "number",
+              "null"
+            ]
           },
           "relativeDelta": {
             "anyOf": [
@@ -144,10 +153,16 @@
                 "type": "string"
               },
               "afterWeek": {
-                "type": ["string", "null"]
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "elapsedWeeks": {
-                "type": ["number", "null"]
+                "type": [
+                  "number",
+                  "null"
+                ]
               },
               "notDue": {
                 "type": "boolean"
@@ -205,7 +220,144 @@
           },
           "skipped": {
             "type": "boolean"
+          },
+          "assessment": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "effect-experiment"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "subjectId",
+                  "domainId",
+                  "accountId",
+                  "deployWeek",
+                  "firstWeek",
+                  "weeks",
+                  "reviewDate"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "baseline-observation"
+                  },
+                  "subjectId": {
+                    "type": "string"
+                  },
+                  "domainId": {
+                    "type": "string"
+                  },
+                  "accountId": {
+                    "type": "string"
+                  },
+                  "deployWeek": {
+                    "type": "string"
+                  },
+                  "firstWeek": {
+                    "type": "string"
+                  },
+                  "weeks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "reviewDate": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  }
+                }
+              }
+            ]
           }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "assessment"
+              ],
+              "properties": {
+                "assessment": {
+                  "required": [
+                    "kind"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "const": "baseline-observation"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "before",
+                "after",
+                "delta",
+                "target",
+                "attainment"
+              ],
+              "properties": {
+                "label": {
+                  "const": "effect/pending"
+                },
+                "before": {
+                  "type": "null"
+                },
+                "after": {
+                  "type": "null"
+                },
+                "delta": {
+                  "type": "null"
+                },
+                "target": {
+                  "type": "null"
+                },
+                "attainment": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "assessmentContractVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reassesses": {
+      "type": "object",
+      "required": [
+        "week",
+        "sourceSha256",
+        "sourceDecidedAt"
+      ],
+      "properties": {
+        "week": {
+          "type": "string"
+        },
+        "sourceSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sourceDecidedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }

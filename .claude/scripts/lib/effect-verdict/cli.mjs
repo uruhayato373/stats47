@@ -17,6 +17,8 @@
  *   node .claude/scripts/lib/effect-verdict/cli.mjs --week 2026-W31
  *   node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run        # 書かずに summary のみ
  *   node .claude/scripts/lib/effect-verdict/cli.mjs --out /tmp/v.json
+ *   node .claude/scripts/lib/effect-verdict/cli.mjs --week 2026-W41 --reassess
+ *     # 原本を残し、hashで結んだ新評価をreassessments/<week>/へ保存する
  *
  * 終了コード: ガード hit は正常系 (exit 0)。閾値計算の例外は exit 1 で赤くする
  * (backlog の status 書き換えは行わない — improvement-triage の排他 write を侵さない)。
@@ -26,6 +28,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { assessmentForSubject } from "../../metrics/lib/adsense-measurement-contract.mjs";
+import { ASSESSMENT_CONTRACT_VERSION, reassessmentProvenance } from "./reassessment.mjs";
 import { decideVerdict } from "./engine.mjs";
 import { DEFAULT_THRESHOLDS } from "./thresholds.mjs";
 import { weekLt } from "./iso-week.mjs";
@@ -59,15 +63,33 @@ export function loadAdapters(opts = {}) {
 export function runAdapter(adapter, thresholds = DEFAULT_THRESHOLDS) {
   const out = [];
   for (const subject of adapter.listSubjects()) {
-    const window = adapter.resolveWindow(subject);
     const subjectId = subject.subjectId ?? subject.id;
+    const assessment = assessmentForSubject({ ...subject, subjectId, domainId: adapter.domainId });
+    if (assessment.kind === "baseline-observation") {
+      const observation = adapter.observeBaseline();
+      out.push({ domainId: adapter.domainId, subjectId, assessment, observation,
+        label: "effect/pending", reason: `baseline ${observation.status}: ${observation.observedWeeks.length}/${assessment.weeks.length}週 / review ${assessment.reviewDate}`,
+        guards: observation.status === "pending" ? [{ code: "insufficient-window", detail: `baseline未取得: ${observation.missingWeeks.join(", ")}` }] : [],
+        target: null, before: null, after: null, delta: null, attainment: null,
+        sources: adapter.baselineSources(), window: { weeks: assessment.weeks, reviewDate: assessment.reviewDate },
+        reproduceCommand: adapter.reproduceCommand(subject), skipped: false });
+      continue;
+    }
+    const window = adapter.resolveWindow(subject);
+    const target = adapter.targetOf(subject);
     if (!window.beforeWeek || !window.afterWeek || !weekLt(window.beforeWeek, window.afterWeek)) {
       out.push({
         domainId: adapter.domainId,
         subjectId,
         label: "effect/pending",
         reason: "before/after 週が解決できない (snapshot 不足)",
-        guards: [{ code: "insufficient-target", detail: "計測窓が確定できない" }],
+        assessment,
+        target,
+        guards: [
+          { code: "insufficient-window", detail: "計測窓が確定できない" },
+          ...(!Number.isFinite(target) || target === 0
+            ? [{ code: "insufficient-target", detail: "想定効果値が未登録" }] : []),
+        ],
         window,
         skipped: true,
       });
@@ -79,7 +101,7 @@ export function runAdapter(adapter, thresholds = DEFAULT_THRESHOLDS) {
       {
         before: { value: before.value, impressions: before.impressions },
         after: { value: after.value, impressions: after.impressions },
-        target: adapter.targetOf(subject),
+        target,
         window,
         sources: adapter.sourcesOf ? adapter.sourcesOf(subject, window) : [],
         confounders: adapter.confoundersOf ? adapter.confoundersOf(subject, window) : {},
@@ -89,6 +111,7 @@ export function runAdapter(adapter, thresholds = DEFAULT_THRESHOLDS) {
     out.push({
       domainId: adapter.domainId,
       subjectId,
+      assessment,
       label: verdict.label,
       reason: verdict.reason,
       thresholdsVersion: verdict.thresholdsVersion,
@@ -125,7 +148,13 @@ function main() {
   };
   const dryRun = args.includes("--dry-run");
   const week = getArg("--week", currentIsoWeek());
-  const outPath = getArg("--out", path.join(STATE_DIR, `verdicts-${week}.json`));
+  const decidedAt = new Date().toISOString();
+  const reassess = args.includes("--reassess");
+  const originalPath = path.join(STATE_DIR, `verdicts-${week}.json`);
+  const reassesses = reassess ? reassessmentProvenance(originalPath, week) : null;
+  const outPath = getArg("--out", reassess
+    ? path.join(STATE_DIR, "reassessments", week, `${decidedAt.replaceAll(":", "-")}.json`)
+    : originalPath);
 
   const adapters = loadAdapters();
   const verdicts = [];
@@ -139,7 +168,9 @@ function main() {
   const payload = {
     schemaVersion: 1,
     week,
-    decidedAt: new Date().toISOString(),
+    decidedAt,
+    assessmentContractVersion: ASSESSMENT_CONTRACT_VERSION,
+    ...(reassesses ? { reassesses } : {}),
     thresholdsVersion: DEFAULT_THRESHOLDS.version,
     thresholdsPath: ".claude/scripts/lib/effect-verdict/thresholds.mjs",
     note:
@@ -174,6 +205,7 @@ function main() {
     return;
   }
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  if (reassess && fs.existsSync(outPath)) throw new Error(`reassessment already exists: ${outPath}`);
   fs.writeFileSync(outPath, JSON.stringify(payload, null, 2) + "\n");
   process.stderr.write(`\n✓ wrote ${outPath}\n`);
 }
