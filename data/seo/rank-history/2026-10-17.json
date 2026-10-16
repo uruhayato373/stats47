@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-10-17",
+  "generatedAt": "2026-10-16T22:41:40.892Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-10-08",
+      "periodEnd": "2026-10-14",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1183,
+    "rows": [
+      {
+        "keyword": "病院数が最も少ない都道府県はどこ",
+        "targetPath": "/ranking/general-hospital-count",
+        "rank": 7.131156316916488,
+        "impressions": 1868,
+        "clicks": 29
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 8.450676982591876,
+        "impressions": 517,
+        "clicks": 12
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 3.1,
+        "impressions": 30,
+        "clicks": 2
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 11,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 7.285714285714286,
+        "impressions": 7,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count-per-1000",
+        "rank": 7.6,
+        "impressions": 5,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 4,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count-per-1000",
+        "rank": 5,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "山形県 コンビニ 店舗数",
+        "targetPath": "/blog/convenience-store-density-map",
+        "rank": 1,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 7.421052631578948,
+        "impressions": 19,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 8.067039106145252,
+        "impressions": 179,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 10.51923076923077,
+        "impressions": 52,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 14.857142857142858,
+        "impressions": 14,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-10-01",
+      "periodEnd": "2026-10-07",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1063,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 7.560457516339869,
+        "impressions": 612,
+        "clicks": 13
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 3,
+        "impressions": 92,
+        "clicks": 9
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 6.4,
+        "impressions": 20,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 6.571428571428571,
+        "impressions": 7,
+        "clicks": 0
+      },
+      {
+        "keyword": "山形県 コンビニ 店舗数",
+        "targetPath": "/blog/convenience-store-density-map",
+        "rank": 11.566666666666666,
+        "impressions": 30,
+        "clicks": 0
+      },
+      {
+        "keyword": "山形県 コンビニ 店舗数",
+        "targetPath": "/ranking/convenience-store-count-commercial",
+        "rank": 3,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 7.238095238095238,
+        "impressions": 21,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.285714285714286,
+        "impressions": 168,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 15.6,
+        "impressions": 15,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 12.333333333333334,
+        "impressions": 3,
+        "clicks": 0
+      }
+    ]
+  }
+}

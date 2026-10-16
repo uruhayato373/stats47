@@ -1,21 +1,30 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "period": {
-    "periodStart": "2026-10-07",
-    "periodEnd": "2026-10-13",
+    "periodStart": "2026-10-08",
+    "periodEnd": "2026-10-14",
     "windowDays": 7
   },
-  "inputHash": "4ddeb33bfea0403e948fdface0dc1aa3712d5a9111baa626dff163cc7f189d72",
+  "inputHash": "fb2bb27227bc419a6bc4f03d3d55fa4ef4b2a2c130977637b7be87d75e8f6d59",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
       "before": 73,
-      "after": 5.7272727272727275,
+      "after": 6.666666666666667,
       "beforeImpressions": 1,
-      "impressions": 11,
-      "change": 67.27272727272727
+      "impressions": 15,
+      "change": 66.33333333333333
+    },
+    {
+      "keyword": "看護師 年収 平均",
+      "targetPath": "/blog/nurse-income-prefecture-gap",
+      "before": 6,
+      "after": 72.2,
+      "beforeImpressions": 1,
+      "impressions": 5,
+      "change": -66.2
     },
     {
       "keyword": "うどん消費量ランキング",
@@ -27,24 +36,6 @@
       "change": 57
     },
     {
-      "keyword": "食料自給率 日本 ランキング",
-      "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
-      "before": 48,
-      "after": 3,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 45
-    },
-    {
-      "keyword": "自動車保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 60.25,
-      "after": 18.2,
-      "beforeImpressions": 4,
-      "impressions": 5,
-      "change": 42.05
-    },
-    {
       "keyword": "日本 食料 自給 率 ランキング",
       "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
       "before": 43,
@@ -52,6 +43,24 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 40
+    },
+    {
+      "keyword": "警察 給料 ランキング",
+      "targetPath": "/blog/avg-salary-police-prefecture-prefecture-gap",
+      "before": 52,
+      "after": 19,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 33
+    },
+    {
+      "keyword": "小学生 人数 全国 ランキング",
+      "targetPath": "/blog/elementary-school-children-count",
+      "before": 33,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 32
     },
     {
       "keyword": "都道府県",
@@ -63,22 +72,22 @@
       "change": 30
     },
     {
-      "keyword": "長野 物価",
-      "targetPath": "/areas/20000/consumer-prices",
-      "before": 1,
-      "after": 31,
-      "beforeImpressions": 3,
-      "impressions": 3,
-      "change": -30
-    },
-    {
       "keyword": "日照時間 日本一",
       "targetPath": "/ranking/annual-sunshine-duration",
-      "before": 7.285714285714286,
+      "before": 7.25,
       "after": 37,
-      "beforeImpressions": 7,
+      "beforeImpressions": 4,
       "impressions": 1,
-      "change": -29.714285714285715
+      "change": -29.75
+    },
+    {
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 50,
+      "after": 20.5,
+      "beforeImpressions": 5,
+      "impressions": 4,
+      "change": 29.5
     },
     {
       "keyword": "鳥取県 小売",
@@ -88,15 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 4,
       "change": 29.5
-    },
-    {
-      "keyword": "人口集中地区",
-      "targetPath": "/geo/datasets/A16",
-      "before": 1,
-      "after": 29,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -28
     }
   ],
   "verdicts": [
