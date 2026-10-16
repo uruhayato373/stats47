@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { invalidDatasetDescriptions } from '@/lib/structured-data/dataset';
+
 import {
     generateRankingBreadcrumbStructuredData,
     generateRankingFAQStructuredData,
@@ -43,6 +45,13 @@ const mockValues: Partial<RankingValue>[] = [
 ];
 
 describe("generateRankingPageStructuredData", () => {
+    it.each([{ name: '短い出典名', sourceName: 'e-Stat' }, { name: '長い出典名', sourceName: 'a'.repeat(6000) }])('入れ子を含め全Datasetの説明が文字数範囲を満たす: $name', ({ sourceName }) => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: { ...mockItem, sourceConfig: { ...mockItem.sourceConfig, source: { name: sourceName, url: 'https://example.test/' } } } as RankingItem,
+            rankingValues: [], selectedYear: undefined,
+        });
+        expect(invalidDatasetDescriptions(result)).toEqual([]);
+    });
     it("Dataset形式の構造化データを生成すること", () => {
         const result = generateRankingPageStructuredData({
             rankingItem: mockItem as RankingItem,

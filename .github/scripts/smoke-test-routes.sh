@@ -83,6 +83,13 @@ URLS+=( "${BASE_URL}/areas/13000/population-dynamics" )
 STRICT_URLS=(
   "${BASE_URL}/tag/%E5%AE%B6%E8%A8%88%E8%AA%BF%E6%9F%BB"  # /tag/家計調査 (記事 150+ 本の最大タグ)
   "${BASE_URL}/survey/census"                              # 国勢調査 (最も参照される調査ハブ)
+  "${BASE_URL}/geo/population-landslide-exposure"          # pinned Geo aggregate + manifest runtime contract
+  "${BASE_URL}/geo/population-snow-designation"
+  "${BASE_URL}/geo/population-land-price"
+  "${BASE_URL}/geo/population-flood-risk"
+  "${BASE_URL}/geo/population-station-access"
+  "${BASE_URL}/geo/population-public-facility-access"
+  "${BASE_URL}/geo/population-low-elevation"
 )
 
 # G6 (2026-07-11): 直近 push (≒ merge された PR) で追加された ranking キーを smoke 対象に追加。

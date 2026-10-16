@@ -91,12 +91,16 @@ test("CLI-MCP parity: 同一 input で service と MCP callTool が一致", () =
   assert.deepEqual(parsed, direct);
 });
 
-test("measure: 不明 candidate は error / 既知 candidate は 14/28/56 日", () => {
+test("measure: 期間が確定したcandidateだけ14/28/56日の予定を返す", () => {
   assert.ok(measure({ candidateId: "no::such" }).error);
   const first = candidates({ limit: 1 }).items[0];
   if (first) {
     const m = measure({ candidateId: first.id });
-    assert.ok(m.judgmentSchedule.day14 && m.judgmentSchedule.day28 && m.judgmentSchedule.day56);
+    if (first.baselinePeriod?.end) {
+      assert.ok(m.judgmentSchedule.day14 && m.judgmentSchedule.day28 && m.judgmentSchedule.day56);
+    } else {
+      assert.equal(m.judgmentSchedule, null, '不明なbaselineを今日で補完しない');
+    }
     assert.equal(m.externalActionFlag, false);
   }
 });

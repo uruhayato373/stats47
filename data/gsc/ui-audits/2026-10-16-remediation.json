@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "observedDateJst": "2026-10-16",
   "property": "sc-domain:stats47.jp",
-  "status": "local-implementation-not-deployed",
+  "status": "deployed-and-verified-google-processing-pending",
   "initialAudit": "data/gsc/ui-audits/2026-10-16.json",
   "soft404": {
     "observedAt": "2026-10-16T12:51:23.358Z",
@@ -570,7 +570,7 @@
     "webTestsPassed": 132,
     "queueTestsPassed": 11,
     "webTypeCheck": "passed",
-    "productionDeployment": "not-run",
+    "productionDeployment": "success; production HTTP, CDN/Workers purge, health check and Playwright smoke verified",
     "localHttp": [
       {
         "path": "/robots.txt",
@@ -639,13 +639,14 @@
     ],
     "allWorkspaceTypeChecks": "passed: 25 workspaces + 8 script configs",
     "docs": "passed: errors 0, pre-existing warnings 5",
-    "fullProductionBuild": "not-run; targeted route tests and local HTTP verification used",
+    "fullProductionBuild": "passed in PR CI and production deployment workflow",
     "eslint": "passed",
     "queueScope": {
       "changed": 15,
       "total": 3417,
       "unrelatedEntriesUnchanged": true
-    }
+    },
+    "retentionTestsPassed": 5
   },
   "officialSources": [
     "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
@@ -677,5 +678,794 @@
       }
     ],
     "limitation": "Live test success and accepted requests do not confirm indexing; observe subsequent indexed inspection lastCrawlTime and verdict."
+  },
+  "release": {
+    "pullRequest": "https://github.com/uruhayato373/stats47/pull/1139",
+    "mergedAt": "2026-10-16T13:22:11Z",
+    "mergeCommit": "60bb90b1a4a694f61a6e9d5198d92e9625178766",
+    "ci": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38905894411",
+      "conclusion": "success",
+      "representativeE2ePassed": 37
+    },
+    "deploy": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38907317845",
+      "conclusion": "success",
+      "updatedAt": "2026-10-16T13:38:43Z"
+    },
+    "purge": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38908903703",
+      "conclusion": "success",
+      "updatedAt": "2026-10-16T13:37:06Z"
+    },
+    "productionVerification": {
+      "checkedAt": "2026-10-16T13:34:00.900Z",
+      "method": "Googlebot UA public GET; no cache-bypass query added",
+      "total": 31,
+      "passed": 31,
+      "results": [
+        {
+          "url": "https://stats47.jp/robots.txt",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/plain",
+          "xRobotsTag": null,
+          "bytes": 505,
+          "cacheStatus": "HIT",
+          "age": "14",
+          "elapsedMs": 1531,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "downloadAllowed": true,
+            "internalApiBlocked": true,
+            "ogpCrawlable": true
+          },
+          "body": "User-Agent: *\nAllow: /\nAllow: /ranking/*?norm=*\nAllow: /api/ranking/*/download$\nAllow: /api/ranking/*/download?\nDisallow: /admin/*\nDisallow: /api/*\nDisallow: /profile/edit\n\nUser-Agent: Google-Extended\nAllow: /\nAllow: /ranking/*?norm=*\nAllow: /api/ranking/*/download$\nAllow: /api/ranking/*/download?\nDisallow: /admin/*\nDisallow: /api/*\nDisallow: /profile/edit\n\nUser-Agent: GPTBot\nDisallow: /\n\nUser-Agent: CCBot\nDisallow: /\n\nSitemap: https://stats47.jp/sitemap.xml\nSitemap: https://stats47.jp/sitemap/8.xml\n",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=json",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "application/json; charset=utf-8",
+          "xRobotsTag": "noindex",
+          "bytes": 423913,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 1820,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=csv&basis=original",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/csv; charset=utf-8",
+          "xRobotsTag": "noindex",
+          "bytes": 20028,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 682,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=csv",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/csv; charset=utf-8",
+          "xRobotsTag": "noindex",
+          "bytes": 20028,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4159,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=csv&encoding=sjis",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/csv; charset=Shift_JIS",
+          "xRobotsTag": "noindex",
+          "bytes": 19819,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2273,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=csv&basis=all-bases",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/csv; charset=utf-8",
+          "xRobotsTag": "noindex",
+          "bytes": 66173,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 3123,
+          "checks": {
+            "status": true,
+            "mime": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=invalid",
+          "status": 400,
+          "expectedStatus": 400,
+          "contentType": "application/json",
+          "xRobotsTag": "noindex",
+          "bytes": 49,
+          "cacheStatus": "BYPASS",
+          "age": null,
+          "elapsedMs": 847,
+          "checks": {
+            "status": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/dam-count/download?format=csv",
+          "status": 410,
+          "expectedStatus": 410,
+          "contentType": "application/json",
+          "xRobotsTag": "noindex",
+          "bytes": 48,
+          "cacheStatus": "BYPASS",
+          "age": null,
+          "elapsedMs": 1327,
+          "checks": {
+            "status": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/19000/opengraph-image",
+          "status": 410,
+          "expectedStatus": 410,
+          "contentType": null,
+          "xRobotsTag": "noindex",
+          "bytes": 0,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 1327,
+          "checks": {
+            "status": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/themes/daily-time-use/opengraph-image",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "image/png",
+          "xRobotsTag": null,
+          "bytes": 113940,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2635,
+          "checks": {
+            "status": true,
+            "mime": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/psychiatric-hospital-count/opengraph-image",
+          "status": 404,
+          "expectedStatus": 404,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 71355,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2094,
+          "checks": {
+            "status": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/tennis-court-public/opengraph-image",
+          "status": 404,
+          "expectedStatus": 404,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 71348,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2285,
+          "checks": {
+            "status": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/blog/migration-destination-ranking-factors/opengraph-image?a7b2107dfad4bd78",
+          "status": 410,
+          "expectedStatus": 410,
+          "contentType": null,
+          "xRobotsTag": "noindex",
+          "bytes": 0,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 297,
+          "checks": {
+            "status": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/other-grains-consumption-quantity/opengraph-image",
+          "status": 404,
+          "expectedStatus": 404,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 71355,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 1937,
+          "checks": {
+            "status": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/blog/wage-gap-factors-2026/opengraph-image?a7b2107dfad4bd78",
+          "status": 410,
+          "expectedStatus": 410,
+          "contentType": null,
+          "xRobotsTag": "noindex",
+          "bytes": 0,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 1466,
+          "checks": {
+            "status": true,
+            "noindex": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/general-affairs-expenses-prefecture/opengraph-image",
+          "status": 404,
+          "expectedStatus": 404,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 71348,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2728,
+          "checks": {
+            "status": true
+          },
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/17000/safety",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 1372540,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 3607,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "石川県の安全 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/17000/safety",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/24000/labor-mobility",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 612029,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 3702,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "三重県の人材流動性・雇用環境 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/24000/labor-mobility",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/33000/fishery-marine",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 713779,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2692,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "岡山県の漁業（水産業） | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/33000/fishery-marine",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/blog/apple-expenditure-ranking",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 205053,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 7229,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "りんご消費支出額ランキング｜1位岩手9262円・47位大分3074円 3.0倍差 47都道府県2024 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/blog/apple-expenditure-ranking",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/47000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562567,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2143,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "沖縄県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/47000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/39000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562549,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4139,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "高知県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/39000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/38000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 563027,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2340,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "愛媛県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/38000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/40000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562639,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 2802,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "福岡県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/40000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/19000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562554,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 5606,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "山梨県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/19000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/41000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562636,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4878,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "佐賀県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/41000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/18000/aging-society",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 736587,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4030,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "福井県の少子高齢化 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/18000/aging-society",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/22000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562567,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 3047,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "静岡県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/22000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/09000/local-finance",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 1064948,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 3884,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "栃木県の地方財政 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/09000/local-finance",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/08000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562563,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4371,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "茨城県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/08000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/18000/labor-wages",
+          "status": 200,
+          "expectedStatus": 200,
+          "contentType": "text/html; charset=utf-8",
+          "xRobotsTag": null,
+          "bytes": 562544,
+          "cacheStatus": "MISS",
+          "age": null,
+          "elapsedMs": 4530,
+          "checks": {
+            "status": true,
+            "canonical": true,
+            "indexable": true,
+            "notFoundBody": true
+          },
+          "title": "福井県の労働・賃金 | stats47 | 統計で見る都道府県",
+          "canonical": "https://stats47.jp/areas/18000/labor-wages",
+          "robots": "index, follow",
+          "passed": true
+        }
+      ]
+    },
+    "indexingRequests": {
+      "recordedAt": "2026-10-16T13:20:43.797Z",
+      "previousRequests": [
+        "https://stats47.jp/areas/39000/labor-wages",
+        "https://stats47.jp/blog/apple-expenditure-ranking",
+        "https://stats47.jp/areas/17000/safety"
+      ],
+      "additionalRequests": [
+        {
+          "url": "https://stats47.jp/areas/24000/labor-mobility",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:13:17.337Z"
+        },
+        {
+          "url": "https://stats47.jp/areas/33000/fishery-marine",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:14:05.565Z",
+          "confirmation": "y_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/33000/fishery-marine\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/33000/communication-access\nクロール\n前回のクロール\n2026/06/20 7:44:19\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/33000/fishery-marine\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\n公開 URL がインデックスに登録可能かどうかをテストする\nこの処理には 1～2 分かかる場合があります\nキャンセル"
+        },
+        {
+          "url": "https://stats47.jp/areas/47000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:16:02.352Z",
+          "confirmation": "ップ\nvisibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/47000/labor-wages\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\n検出されませんでした\nクロール\n前回のクロール\n2026/06/06 1:36:27\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/47000/labor-wages\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/38000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:16:36.436Z",
+          "confirmation": "_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/38000/labor-wages\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/38000/landslide-exposure\nクロール\n前回のクロール\n2026/06/06 1:23:14\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/38000/labor-wages\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/40000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:17:14.993Z",
+          "confirmation": "S\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/40000/labor-wages\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/40000/local-government-digital\nhttps://stats47.jp/areas/40000\nクロール\n前回のクロール\n2026/06/06 0:56:12\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/40000/labor-wages\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/19000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:17:48.261Z",
+          "confirmation": "S\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/19000/labor-wages\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/19000/local-government-digital\nhttps://stats47.jp/areas/19000\nクロール\n前回のクロール\n2026/06/06 0:52:02\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/19000/labor-wages\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/41000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:18:37.876Z",
+          "confirmation": "登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/41000\nクロール\n前回のクロール\n2026/06/06 0:23:31\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/41000/labor-wages\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/18000/aging-society",
+          "result": "accepted",
+          "observedAt": "2026-10-16T13:19:40.268Z",
+          "confirmation": "sibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/18000/aging-society\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\n検出されませんでした\nクロール\n前回のクロール\n2026/06/05 23:26:28\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/18000/aging-society\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\ncheck_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/09000/local-finance",
+          "result": "quota-reached",
+          "observedAt": "2026-10-16T13:20:23.156Z",
+          "confirmation": "keyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/09000/local-finance\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/09000/freight-logistics\nクロール\n前回のクロール\n2026/06/05 22:32:55\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/09000/local-finance\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\nerror_outline\n割り当て量を超えています\n1 日の割り当て量を超えたため、リクエストを処理できませんでした。明日、もう一度お試しください。\n表示しない"
+        }
+      ],
+      "remainingUrls": [
+        "https://stats47.jp/areas/09000/local-finance",
+        "https://stats47.jp/areas/22000/labor-wages",
+        "https://stats47.jp/areas/08000/labor-wages",
+        "https://stats47.jp/areas/18000/labor-wages"
+      ],
+      "stopReason": "GSC UI quota reached; no bypass or repeat submissions attempted."
+    },
+    "robotsRecrawl": {
+      "url": "https://stats47.jp/robots.txt",
+      "requestedAt": "2026-10-16T13:33:48.528Z",
+      "result": "accepted",
+      "confirmation": "026/09/24 13:41\t\ncheck_circle_outline\n取得済み\n\t435 バイト\t-\t\nmore_vert\n\nhttps://stats47.jp/robots.txt\t2026/09/21 21:55\t\ncheck_circle_outline\n取得済み\n\t435 バイト\t-\t\nmore_vert\n1 ページあたりの行数:\n5\n10\n25\n50\n100\n250\n500\n1～4/4\n\ncheck_circle\n再クロールのリクエストを送信しました\nファイル\nhttps://stats47.jp/robots.txt\nしばらくしてからもう一度結果をご確認ください\n閉じる"
+    },
+    "coverageValidation": {
+      "reportUrl": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=CAMYBCAD",
+      "observedAt": "2026-10-16T13:34:33.210Z",
+      "status": "started",
+      "startDate": "2026-10-16",
+      "affectedCount": 584,
+      "confirmation": "\nSearch Console の概要\nプライバシー利用規約\nページのインデックス登録\n\nrobots.txt によりブロックされましたが、インデックスに登録しました\n\nエクスポート\n\n共有\nすべての既知のページ\nすべての送信済みページ\n未送信ページのみ\nhttps://stats47.jp/sitemap.xml\n最終更新日: 2026/10/12\nwarning\nrobots.txt によりブロックされましたが、インデックスに登録しました\nこれは重大な問題ではありません。この問題があるページはインデックス登録されますが、検索結果の見え方は改善できます\n詳細\n\n検証: 開始\n開始日: 2026/10/16\n詳細を表示\n該当ページ\n584\n2026/07/18\n2026/07/29\n2026/08/09\n2026/08/20\n2026/08/31\n2026/09/11\n2026/09/22\n2026/10/03\n600\n400\n200\n0\n例\n\n\nURL\n\t\n前回のクロール\n\nhttps://stats47.jp/api/ranking/manufacturing-establishments/download?format=csv&basis=all-bases\n\t2026/10/13\n\nhttps://stats47.jp/api/ranking/utilities-expenditure-ratio-multi-person-households/download?format=csv\n\t2026/10/13\n\nhttps://stats47.jp/api/ranking/fit-fip-new-approved-installed-capacity/download?format=csv&basis=original\n\t2026/10/13\n\nhttps://stats47.jp/ranking/psychiatric-hospital-count/o"
+    },
+    "followup": {
+      "automationId": "gsc-4",
+      "name": "GSCの未送信4ページを処理",
+      "scheduleLocal": "09:00 Asia/Tokyo daily until remaining requests are accepted",
+      "stopAfterCompletion": true,
+      "remainingUrls": [
+        "https://stats47.jp/areas/09000/local-finance",
+        "https://stats47.jp/areas/22000/labor-wages",
+        "https://stats47.jp/areas/08000/labor-wages",
+        "https://stats47.jp/areas/18000/labor-wages"
+      ],
+      "firstAttemptLocalDate": "2026-10-17"
+    },
+    "postPurgeVerification": {
+      "checkedAt": "2026-10-16T13:38:32.809Z",
+      "phase": "after-successful-CDN-and-workers-cache-purge",
+      "total": 7,
+      "passed": 7,
+      "results": [
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=csv",
+          "status": 200,
+          "xRobotsTag": "noindex",
+          "contentType": "text/csv; charset=utf-8",
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/robots.txt",
+          "status": 200,
+          "xRobotsTag": null,
+          "contentType": "text/plain",
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/19000/opengraph-image",
+          "status": 410,
+          "xRobotsTag": "noindex",
+          "contentType": null,
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/api/ranking/total-population/download?format=json",
+          "status": 200,
+          "xRobotsTag": "noindex",
+          "contentType": "application/json; charset=utf-8",
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/themes/daily-time-use/opengraph-image",
+          "status": 200,
+          "xRobotsTag": null,
+          "contentType": "image/png",
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/areas/39000/labor-wages",
+          "status": 200,
+          "xRobotsTag": null,
+          "contentType": "text/html; charset=utf-8",
+          "canonical": "https://stats47.jp/areas/39000/labor-wages",
+          "robots": "index, follow",
+          "cacheStatus": "MISS",
+          "passed": true
+        },
+        {
+          "url": "https://stats47.jp/blog/apple-expenditure-ranking",
+          "status": 200,
+          "xRobotsTag": null,
+          "contentType": "text/html; charset=utf-8",
+          "canonical": "https://stats47.jp/blog/apple-expenditure-ranking",
+          "robots": "index, follow",
+          "cacheStatus": "MISS",
+          "passed": true
+        }
+      ]
+    },
+    "postDeploySmoke": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38909445709",
+      "conclusion": "success",
+      "updatedAt": "2026-10-16T13:46:40Z",
+      "steps": [
+        {
+          "name": "Run health check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Playwright smoke tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Warm cache (R2 ISR + Edge)",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "verifiedAt": "2026-10-16T13:47:49.127Z"
   }
 }

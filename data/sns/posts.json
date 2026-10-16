@@ -30299,9 +30299,9 @@
     },
     {
       "id": 1019,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.155Z",
-      "updated_at": "2026-10-12T01:18:59.806Z",
+      "updated_at": "2026-10-16T18:29:56.414Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30328,13 +30328,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/apple-consumption-quantity/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeiaVEcjB_T",
+      "posted_at": "2026-10-16T02:00:46.000Z"
     },
     {
       "id": 1020,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.161Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-16T18:29:56.444Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30361,7 +30363,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/23000/x/stills/23000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DejIoe6k83z",
+      "posted_at": "2026-10-16T08:45:22.000Z"
     },
     {
       "id": 1021,
@@ -33018,7 +33022,7 @@
     },
     {
       "id": 1091,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33027,13 +33031,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.435Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-16T14:45:29.781Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
       "content_key": "01000-vs-47000",
       "caption": "【県どうしの比較】北海道 vs 沖縄県\n\n水稲収穫量（水稲・子実用の収穫量）: 北海道が大きい（2019年・出典: 作物統計調査）\n住宅地地価変動率: 沖縄県が大きい（2024年・出典: 社会・人口統計体系）\n製造品出荷額等（総額）: 北海道が大きい（2023年・出典: 社会・人口統計体系）\n粗出生率: 沖縄県が大きい（2023年・出典: 人口動態統計）\n男性所定内給与額: 北海道が大きい（2022年・出典: 賃金構造基本統計調査）\n平均余命（女性 0歳時点・平均寿命）: 沖縄県が大きい（2020年・出典: 人口動態統計）\n\n数値が大きかったのは 北海道 3項目 / 沖縄県 3項目\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県比較 #北海道 #沖縄県 #都道府県ランキング #統計 #暮らし #地域比較 #雑学 #stats47",
-      "scheduled_at": "2026-10-16T10:00:00.000Z"
+      "scheduled_at": "2026-10-16T10:00:00.000Z",
+      "posted_at": "2026-10-16T14:45:29.773Z",
+      "post_url": "https://www.instagram.com/p/Dejx0ayEZ6Z/",
+      "external_id": "18491630785107786"
     },
     {
       "id": 1092,

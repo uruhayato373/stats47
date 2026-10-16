@@ -452,7 +452,7 @@ function mk(bucket, type, p) {
     baselinePeriod: period,
     observedAt,
     freshness,
-    limitations: p.limitations ?? [],
+    limitations: [...(p.limitations ?? []), ...(period ? [] : ['根拠の集計期間が不明または不一致。単一のbaseline期間として比較しない'])],
     expectedMetric: p.expectedMetric ?? null,
     suggestedVerification: p.suggestedVerification ?? null,
     externalActionFlag: false, // read-only 提案。deploy/送信は人間承認
@@ -470,7 +470,11 @@ function evi(bucket, refs) {
       metric: device ? `${metric}[${device}]` : metric,
       value: o.value,
       freshness: o.freshness,
+      periodStart: o.periodStart ?? null,
       periodEnd: o.periodEnd ?? null,
+      observedAt: o.observedAt,
+      isFinalized: o.isFinalized ?? null,
+      provenance: o.provenance,
     });
   }
   return out;
@@ -494,9 +498,10 @@ function latestObservedAt(observations) {
   return latest ?? new Date().toISOString();
 }
 function baselinePeriod(evidence) {
-  const ends = evidence.map((e) => e.periodEnd).filter(Boolean).sort();
-  if (!ends.length) return null;
-  return { start: ends[0], end: ends[ends.length - 1] };
+  if (!evidence.length || evidence.some((e) => !e.periodStart || !e.periodEnd)) return null;
+  const periods = new Set(evidence.map((e) => `${e.periodStart}/${e.periodEnd}`));
+  if (periods.size !== 1) return null;
+  return { start: evidence[0].periodStart, end: evidence[0].periodEnd };
 }
 
 function num(v) {
