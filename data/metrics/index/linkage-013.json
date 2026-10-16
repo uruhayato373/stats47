@@ -4770,7 +4770,7 @@
     },
     {
       "metricKey": "medical-welfare-industry-annual-income",
-      "pageId": null,
+      "pageId": "ranking:medical-welfare-industry-annual-income",
       "title": "医療・福祉で働く人の平均年収",
       "sources": [
         {

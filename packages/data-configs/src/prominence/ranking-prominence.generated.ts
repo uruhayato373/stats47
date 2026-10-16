@@ -134,7 +134,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "laborwage",
     "categoryName": "労働・賃金",
-    "count": 119,
+    "count": 121,
     "representatives": [
       {
         "rankingKey": "turnover-rate",

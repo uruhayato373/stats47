@@ -480,19 +480,21 @@ function checkCodexMcpContract(findings, scope) {
     return;
   }
 
+  // mcp-server サブコマンドは codex 0.154.0 で削除されたため、MCP だけ 0.153.0 を npx で固定する
+  // (2026-10-15。正典 .claude/rules/codex-mcp.md)。手元の codex を更新しても MCP は落ちない
   const codex = config?.mcpServers?.codex;
+  const CODEX_MCP_ARGS = ["-y", "@openai/codex@0.153.0", "mcp-server"];
   if (
     codex?.type !== "stdio" ||
-    codex?.command !== "codex" ||
+    codex?.command !== "npx" ||
     !Array.isArray(codex?.args) ||
-    codex.args.length !== 1 ||
-    codex.args[0] !== "mcp-server"
+    codex.args.join("\u0000") !== CODEX_MCP_ARGS.join("\u0000")
   ) {
     findings.push({
       level: "error",
       code: "E10",
       file: mcpRel,
-      msg: 'codex MCPは type=stdio / command=codex / args=["mcp-server"] に固定する',
+      msg: `codex MCPは type=stdio / command=npx / args=${JSON.stringify(CODEX_MCP_ARGS)} に固定する`,
     });
   }
 

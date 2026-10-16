@@ -10311,7 +10311,7 @@
       "key": "manufacturing-industry-annual-income",
       "title": "製造業で働く人の平均年収",
       "href": "/ranking/manufacturing-industry-annual-income",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:manufacturing-net-value-added-private",
@@ -10655,7 +10655,7 @@
       "key": "medical-welfare-industry-annual-income",
       "title": "医療・福祉で働く人の平均年収",
       "href": "/ranking/medical-welfare-industry-annual-income",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:melon-consumption-expenditure",

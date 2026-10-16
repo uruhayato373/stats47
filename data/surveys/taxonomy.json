@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T19:40:23.800Z",
+  "generatedAt": "2026-10-16T00:17:04.595Z",
   "masterSurveyCount": 151,
   "ranking": {
-    "metrics": 2599,
-    "activeMetrics": 2456,
-    "applicableMetrics": 2510,
-    "activeApplicableMetrics": 2368,
+    "metrics": 2603,
+    "activeMetrics": 2460,
+    "applicableMetrics": 2514,
+    "activeApplicableMetrics": 2372,
     "notApplicable": 89,
     "activeNotApplicable": 88,
-    "resolved": 2510,
+    "resolved": 2514,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2368,
+    "activeResolved": 2372,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -229,7 +229,7 @@
       "sewerage-statistics": 5,
       "sixth-industry-survey": 2,
       "social-education-survey": 38,
-      "social-life-basic-survey": 116,
+      "social-life-basic-survey": 117,
       "social-welfare-facility-survey": 34,
       "sole-proprietor-survey": 3,
       "special-forest-products-statistics": 2,
@@ -244,7 +244,7 @@
       "vehicle-registration-statistics": 1,
       "vital-statistics": 62,
       "voter-registration-statistics": 1,
-      "wage-structure-survey": 76,
+      "wage-structure-survey": 79,
       "waste-management-survey": 7,
       "wastewater-treatment-coverage-report": 2,
       "water-pollution-control-law-status": 1,
@@ -4192,7 +4192,7 @@
     },
     {
       "surveyId": "social-life-basic-survey",
-      "rankingCount": 116,
+      "rankingCount": 117,
       "themeKeys": [
         "communication-access",
         "community-participation",
@@ -4377,7 +4377,7 @@
     },
     {
       "surveyId": "wage-structure-survey",
-      "rankingCount": 76,
+      "rankingCount": 79,
       "themeKeys": [
         "construction-industry",
         "gender-participation",

@@ -12193,7 +12193,7 @@
     },
     {
       "metricKey": "manufacturing-industry-annual-income",
-      "pageId": null,
+      "pageId": "ranking:manufacturing-industry-annual-income",
       "title": "製造業で働く人の平均年収",
       "sources": [
         {
