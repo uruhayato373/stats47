@@ -306,6 +306,33 @@ updated: 2026-10-17
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-IMPROVEMENT-LOG-PATH-01] 改善サイクルの旧ログパスを直し、判定後の書き戻しを復旧する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-17] [期日:2026-10-23] [領域:管理]
+
+- **優先度 / owner**: P2、devops-runner。`DATA-LAYOUT-MOVE-01`の移設後確認に関連するが、本カードはimprovement-cycleの具体的なstaging失敗と再発防止を扱う。同カードは進行中のため変更しない。
+- **実測**: Issue #1138、run `38868518573`の2026-10-16T07:42:18Zログで、`git add`が旧ログパスに対する`fatal: pathspec did not match any files`を返しexit 128。対象はanalytics配下の各improvementスキルのreferenceログで、現行の置き場は`data/improvement/`。判定ゲート通過後の記録の書き戻しが失敗した。証拠: https://github.com/uruhayato373/stats47/actions/runs/38868518573 、https://github.com/uruhayato373/stats47/issues/1138 。
+- **次 / 順序**: workflowとconsumerのstaging対象を現行SSOTへ照合し、旧ログパスの取り残しを最小修正する。ログ差分を適用した後に、意図したファイルだけがcommit-backされることを既存テストと次の実行で確認する。
+- **停止条件**: 保護パス・ゲートを緩めない。存在しないパスのエラーを無視して成功にしない。未検証の判定結果を一括適用しない。
+- **完了条件**: 旧ログパスで失敗する再現テストが修正後に通り、適用後のcommit-backが成功し、記録・台帳・verdictの整合を確認できる。
+
+### [GA4-NSM-SNAPSHOT-RECONCILE-01] GA4週次summaryとNSM snapshotの同一期間の値を照合する
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-17] [期日:2026-10-23] [領域:管理]
+
+- **優先度 / owner**: P2、ga4-analyst・devops-runner。週次レビューは原因が確定するまでcanonical GA4 summaryを参照し、不一致を併記する。
+- **実測**: `data/ga4/snapshots/2026-W41/summary.json`のJapan finalized7d（10-04〜10-10）はsessions 6,242 / engagedSessions 4,245 / activeUsers 5,484。同じ期間・Japanを表す`data/nsm/weekly-snapshots/2026-W41.json`は6,270 / 4,266 / 5,513で一致しない。異なるreportの集計に由来するかは未確定。
+- **次 / 順序**: 両collectorのsource・期間・フィルタ・dimension・集計方法を照合し、同じKPIを表す箇所は同一定義の入力へ統一する。channel別内訳と期間内重複排除値を区別する。`GA4-FULL-MEASUREMENT-01`で見送ったNSM snapshotの改名は本件に含めない。
+- **停止条件**: 欠測を0で埋めない。原因未確定のまま過去snapshotをforce再生成しない。取得時点や定義の差があるデータを同一条件として比較しない。
+- **完了条件**: 同じ入力・期間・フィルタから、両出力の同一定義のKPIが一致する回帰検証が通る。元データと集計定義を追跡でき、不一致の再発が検出される。
+
+### [ADSENSE-BASELINE-VERDICT-01] AdSense再開後のbaseline観測と効果判定の契約を分ける
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-17] [期日:2026-10-23] [領域:管理]
+
+- **優先度 / owner**: P2、performance-auditor・devops-runner。`ADSENSE-PLACEMENT-01`の改善行の変更はimprovement-triageへ渡す。
+- **実測**: `data/effect-verdict/verdicts-2026-W41.json`はbeforeWeek W34 / afterWeek null / notDue trueで、snapshot不足による窓未確定を`insufficient-target`に分類する。そのためGSC operations cycleのeffect-target-ratchetはFAIL。10-11の新アカウント再開前のW34を再開後baselineとして比較できない。
+- **次 / 順序**: 再開後baseline収集と、開始前targetを必要とする配置実験を区別する。窓不足の分類とアカウント境界の検証をadapter・監査側で揃え、窓不足と真のtarget欠落をそれぞれ再現するテストを追加する。baselineの観測期限11-13は既存方針を維持する。
+- **停止条件**: 11-13のbaseline取得前に事後targetを作らない。allowlist追加・閾値緩和・過去verdictの改変でFAILを消さない。旧アカウントと新アカウントを比較しない。
+- **完了条件**: baseline観測は窓不足として追跡され、効果実験の真のtarget欠落は引き続きFAILする。アカウントをまたぐ比較を拒否する回帰テストが通り、次の週次判定とoperations cycleで分類が一致する。
+
 ### [CI-SMOKE-BOUNDING-BOX-01] 本番ランキングの画面幅テストで初回にboundingBoxが取れない原因を調べる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-17] [期日:2026-10-24] [領域:サイト]
 
@@ -397,6 +424,9 @@ updated: 2026-10-17
 - **次 / 順序**: ①sourceごとに観測日・取得日・母集団・標本数・欠測を照合する ②既存CSV/manifest gateで最新coverageを取り込むか、部分UI監査を補助証拠として保持するかを決める ③HTTP/sitemap collectorの既存出力との接続を検証し、既存キューの状態を保持して再構築する。集計期間はsearch-growthのObservationと元summaryを照合し、週フォルダ名から推定しない。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
+- **週次CIの追加実測 (2026-10-17確認)**: Issue #1135、run `38820105627`はGSC restore 67 files（observedAt 2026-10-15T08:34Z）成功後、2,800 URLのHTTP probeと5xx/timeout 8件の再試行を終えた。HTTP 200の1,224 URLのHTML index signal検査中、2026-10-15T23:08:01Zにstepの12分上限で停止した。jobはcontinue-on-errorによりsuccessでもqueue buildはfailureで、source staleがこのrunの失敗原因ではない。証拠: https://github.com/uruhayato373/stats47/actions/runs/38820105627 。
+- **追加の次 / 順序**: HTTP/HTMLの二段取得の所要時間・予算・再開方法・部分結果の保全を調べ、全体完了未達を明示する。成功後に新しいqueueとsourceの取得範囲を照合する。古い入力を新しい証拠として扱わず、既存の完了条件を維持する。
+
 
 ### [GSC-INTERNAL-DISCOVERY-01] 未登録候補の孤立ページとHTMLリンクの到達経路を是正する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
