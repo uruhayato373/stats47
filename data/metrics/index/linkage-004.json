@@ -2,6 +2,42 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "cpi-change-rate-housing",
+      "pageId": "ranking:cpi-change-rate-housing",
+      "title": "消費者物価指数変化率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L04105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L04105"
+        },
+        "derived": false,
+        "configHash": "4fbf4b36d93b977d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:inflation-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:cpi-change-rate-housing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "cpi-change-rate-miscellaneous",
       "pageId": "ranking:cpi-change-rate-miscellaneous",
       "title": "消費者物価指数変化率",
@@ -13345,49 +13381,6 @@
       "themes": [
         "occupation-salary"
       ]
-    },
-    {
-      "metricKey": "dentists-in-medical-facilities",
-      "pageId": "ranking:dentists-in-medical-facilities",
-      "title": "歯科医師数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I6200"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I6200"
-        },
-        "derived": false,
-        "configHash": "2b824fe934ead90e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:dentists-in-medical-facilities",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:medical-welfare",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:dentists-in-medical-facilities",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

@@ -30229,9 +30229,9 @@
     },
     {
       "id": 1017,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.145Z",
-      "updated_at": "2026-10-12T01:18:59.608Z",
+      "updated_at": "2026-10-15T18:45:42.553Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30258,13 +30258,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/passport-issuance-count-per-thousand/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/Defzz8Tj_we",
+      "posted_at": "2026-10-15T01:45:43.000Z"
     },
     {
       "id": 1018,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.150Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-15T18:45:42.584Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30291,7 +30293,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/22000/x/stills/22000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DegiIFoj1Ez",
+      "posted_at": "2026-10-15T08:30:25.000Z"
     },
     {
       "id": 1019,
@@ -32992,7 +32996,7 @@
     },
     {
       "id": 1090,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33001,13 +33005,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.275Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-15T14:53:39.133Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
       "content_key": "mochi-consumption-expenditure",
       "caption": "【都道府県クイズ】おもちにいちばんお金を使う県は？\n\nA 新潟県\nB 富山県\nC 茨城県\n\nヒントは2枚目、答えは3枚目👉\n予想をコメントで教えてください💬\n\n保存して、雑談の小ネタに📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間支出（2024年））\n\n#都道府県クイズ #都道府県ランキング #もち #おもち #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-15T10:00:00.000Z"
+      "scheduled_at": "2026-10-15T10:00:00.000Z",
+      "posted_at": "2026-10-15T14:53:39.121Z",
+      "post_url": "https://www.instagram.com/p/DehN9mcjg9p/",
+      "external_id": "18055045895804076"
     },
     {
       "id": 1091,

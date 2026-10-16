@@ -2,6 +2,45 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "city-gas-supply-area-households",
+      "pageId": "ranking:city-gas-supply-area-households",
+      "title": "都市ガス供給区域内世帯数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H5203"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H5203"
+        },
+        "derived": false,
+        "configHash": "e213252dd8174ee6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:gasoline-car-society-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:city-gas-supply-area-households",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "city-ward-assembly-members",
       "pageId": "ranking:city-ward-assembly-members",
       "title": "市区議会議員数",
@@ -13146,42 +13185,6 @@
       "consumers": [
         {
           "pageId": "ranking:cpi-change-rate-healthcare",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "cpi-change-rate-housing",
-      "pageId": "ranking:cpi-change-rate-housing",
-      "title": "消費者物価指数変化率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010212",
-          "filters": {
-            "cdCat01": "#L04105"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010212",
-          "cdCat01": "#L04105"
-        },
-        "derived": false,
-        "configHash": "4fbf4b36d93b977d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:inflation-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:cpi-change-rate-housing",
           "kind": "ranking"
         }
       ],

@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "period": {
-    "periodStart": "2026-10-06",
-    "periodEnd": "2026-10-12",
+    "periodStart": "2026-10-07",
+    "periodEnd": "2026-10-13",
     "windowDays": 7
   },
-  "inputHash": "a6a2bef6102a578281ba4d87e8ecd8354b01e19d7b31eb3bd616e10cc9cc76d7",
+  "inputHash": "50c6b643c89ef1c99c67fb492a2da6cbaa7a9e9efe334b58933366e0c9c5ae3c",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
       "before": 73,
-      "after": 3.3333333333333335,
+      "after": 5.7272727272727275,
       "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 69.66666666666667
+      "impressions": 11,
+      "change": 67.27272727272727
     },
     {
       "keyword": "うどん消費量ランキング",
@@ -36,22 +36,13 @@
       "change": 45
     },
     {
-      "keyword": "日本 に 原発は いくつ ある",
-      "targetPath": "/blog/nuclear-power-plant-count-prefecture-gap",
-      "before": 45,
-      "after": 3,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 42
-    },
-    {
-      "keyword": "うどん消費量ランキング",
-      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
-      "before": 50,
-      "after": 10,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 40
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 60.25,
+      "after": 18.2,
+      "beforeImpressions": 4,
+      "impressions": 5,
+      "change": 42.05
     },
     {
       "keyword": "日本 食料 自給 率 ランキング",
@@ -61,15 +52,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 40
-    },
-    {
-      "keyword": "水道統計",
-      "targetPath": "/survey/waterworks-statistics",
-      "before": 37,
-      "after": 5,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 32
     },
     {
       "keyword": "都道府県",
@@ -85,7 +67,7 @@
       "targetPath": "/areas/20000/consumer-prices",
       "before": 1,
       "after": 31,
-      "beforeImpressions": 4,
+      "beforeImpressions": 3,
       "impressions": 3,
       "change": -30
     },
@@ -97,6 +79,24 @@
       "beforeImpressions": 7,
       "impressions": 1,
       "change": -29.714285714285715
+    },
+    {
+      "keyword": "鳥取県 小売",
+      "targetPath": "/areas/31000/retail-commerce",
+      "before": 42,
+      "after": 12.5,
+      "beforeImpressions": 1,
+      "impressions": 4,
+      "change": 29.5
+    },
+    {
+      "keyword": "人口集中地区",
+      "targetPath": "/geo/datasets/A16",
+      "before": 1,
+      "after": 29,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -28
     }
   ],
   "verdicts": [

@@ -2,6 +2,341 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "public-assistance-education-beneficiaries-per-1000",
+      "pageId": "ranking:public-assistance-education-beneficiaries-per-1000",
+      "title": "生活保護教育扶助人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J0110803"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J0110803"
+        },
+        "derived": false,
+        "configHash": "3ae61c5b5ee85e58"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:public-assistance-education-beneficiaries-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "public-assistance-expenditure-ratio-pref-finance",
+      "pageId": "ranking:public-assistance-expenditure-ratio-pref-finance",
+      "title": "生活保護費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0310701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0310701"
+        },
+        "derived": false,
+        "configHash": "3f82ad53f4a46f80"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:public-assistance-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "public-assistance-expense-municipal",
+      "pageId": "ranking:public-assistance-expense-municipal",
+      "title": "扶助費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D320404"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D320404"
+        },
+        "derived": false,
+        "configHash": "9745fa840c9f5847"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:public-assistance-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:public-assistance-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "public-assistance-expenses-prefecture",
+      "pageId": "ranking:public-assistance-expenses-prefecture",
+      "title": "生活保護費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103034"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103034"
+        },
+        "derived": false,
+        "configHash": "863dc85b42020a3a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:public-assistance-expenses-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:public-assistance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "public-assistance"
+      ]
+    },
+    {
       "metricKey": "public-assistance-facility-capacity-per-1000",
       "pageId": "ranking:public-assistance-facility-capacity-per-1000",
       "title": "生活保護施設定員数",
@@ -11185,359 +11520,6 @@
       "consumers": [
         {
           "pageId": "ranking:religious-expense-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "renovation-rate",
-      "pageId": "ranking:renovation-rate",
-      "title": "リフォーム工事実施率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004025556",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "00"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004025556",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "00"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat04",
-            "numeratorCodes": [
-              "1"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "a3fcc94bbe99d116"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:renovation-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "rental-car-consumption-expenditure",
-      "pageId": "ranking:rental-car-consumption-expenditure",
-      "title": "レンタカー・カーシェアリング料金消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "070230080",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "070230080",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "108c894ae2cfaefd"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:rental-car-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "rented-housing-ratio",
-      "pageId": "ranking:rented-housing-ratio",
-      "title": "借家比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H01302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H01302"
-        },
-        "derived": false,
-        "configHash": "6a8f7b333fbd8e04"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:rented-housing-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "repair-materials-consumption-expenditure",
-      "pageId": "ranking:repair-materials-consumption-expenditure",
-      "title": "修繕材料消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "020210020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "020210020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "9019cbf790ff0ff0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:repair-materials-consumption-expenditure",
           "kind": "ranking"
         }
       ],

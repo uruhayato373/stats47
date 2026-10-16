@@ -2,6 +2,144 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pension-benefit-total",
+      "pageId": "ranking:pension-benefit-total",
+      "title": "厚生年金受給権者年金総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J5104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J5104"
+        },
+        "derived": false,
+        "configHash": "0a1d2fbae26e3ae1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pension-benefit-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0330503"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0330503"
+        },
+        "derived": false,
+        "configHash": "94f64329fddb1e9e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0332103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0332103"
+        },
+        "derived": false,
+        "configHash": "37cb1037e8d04490"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-education-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+      "title": "教育費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0331403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0331403"
+        },
+        "derived": false,
+        "configHash": "a617b3cff5122c04"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
       "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
       "title": "老人福祉費",
@@ -10307,208 +10445,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "port-cargo-export",
-      "pageId": "ranking:port-cargo-export",
-      "title": "輸出貨物量（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130738",
-          "filters": {
-            "cdCat01": "110",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130738",
-          "cdCat01": "110",
-          "cdCat02": "100"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat03",
-            "codes": [
-              "110",
-              "120",
-              "130"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "d4dbaab6fb240de1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-cargo-export",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
-      ]
-    },
-    {
-      "metricKey": "port-cargo-import",
-      "pageId": "ranking:port-cargo-import",
-      "title": "輸入貨物量（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130738",
-          "filters": {
-            "cdCat01": "120",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130738",
-          "cdCat01": "120",
-          "cdCat02": "100"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat03",
-            "codes": [
-              "110",
-              "120",
-              "130"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "3095f0c5fff81d16"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-cargo-import",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
-      ]
-    },
-    {
-      "metricKey": "port-cargo-total",
-      "pageId": "ranking:port-cargo-total",
-      "title": "海上出入貨物量（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130738",
-          "filters": {
-            "cdCat01": "100",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130738",
-          "cdCat01": "100",
-          "cdCat02": "100"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat03",
-            "codes": [
-              "110",
-              "120",
-              "130"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "bd3c81a337d9c7bc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-cargo-total",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
-      ]
-    },
-    {
-      "metricKey": "port-container-count",
-      "pageId": "ranking:port-container-count",
-      "title": "コンテナ取扱個数（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130688",
-          "filters": {
-            "cdCat01": "100",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130688",
-          "cdCat01": "100",
-          "cdCat02": "100"
-        },
-        "derived": false,
-        "configHash": "a3f5b107df4e3d50"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-container-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
-      ]
     }
   ]
 }

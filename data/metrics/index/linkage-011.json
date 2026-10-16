@@ -2,6 +2,81 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "inpatients-per-nurse-per-day",
+      "pageId": "ranking:inpatients-per-nurse-per-day",
+      "title": "一般病院在院患者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I10108"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I10108"
+        },
+        "derived": false,
+        "configHash": "145c74d98b9e4f06"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:inpatients-per-nurse-per-day",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "insecticide-consumption-expenditure",
+      "pageId": "ranking:insecticide-consumption-expenditure",
+      "title": "殺虫・防虫剤消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040503020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040503020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8828c00e3ba50ef5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:insecticide-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "instant-noodles-consumption-expenditure",
       "pageId": "ranking:instant-noodles-consumption-expenditure",
       "title": "即席麺消費支出額",
@@ -11784,73 +11859,6 @@
         },
         {
           "pageId": "ranking:konnyaku-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "labor-administration-expenses-prefecture",
-      "pageId": "ranking:labor-administration-expenses-prefecture",
-      "title": "労政費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103051"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103051"
-        },
-        "derived": false,
-        "configHash": "1d1f7f3c5208c95f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:labor-administration-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "labor-expenditure-ratio-pref-finance",
-      "pageId": "ranking:labor-expenditure-ratio-pref-finance",
-      "title": "労働費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0310901"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0310901"
-        },
-        "derived": false,
-        "configHash": "16cf088d0b92f472"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:labor-expenditure-ratio-pref-finance",
           "kind": "ranking"
         }
       ],

@@ -2,6 +2,208 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "port-cargo-export",
+      "pageId": "ranking:port-cargo-export",
+      "title": "輸出貨物量（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130738",
+          "filters": {
+            "cdCat01": "110",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130738",
+          "cdCat01": "110",
+          "cdCat02": "100"
+        },
+        "ops": {
+          "axisSum": {
+            "axis": "cat03",
+            "codes": [
+              "110",
+              "120",
+              "130"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "d4dbaab6fb240de1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-cargo-export",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
+      "metricKey": "port-cargo-import",
+      "pageId": "ranking:port-cargo-import",
+      "title": "輸入貨物量（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130738",
+          "filters": {
+            "cdCat01": "120",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130738",
+          "cdCat01": "120",
+          "cdCat02": "100"
+        },
+        "ops": {
+          "axisSum": {
+            "axis": "cat03",
+            "codes": [
+              "110",
+              "120",
+              "130"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "3095f0c5fff81d16"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-cargo-import",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
+      "metricKey": "port-cargo-total",
+      "pageId": "ranking:port-cargo-total",
+      "title": "海上出入貨物量（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130738",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130738",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "ops": {
+          "axisSum": {
+            "axis": "cat03",
+            "codes": [
+              "110",
+              "120",
+              "130"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "bd3c81a337d9c7bc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-cargo-total",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
+      "metricKey": "port-container-count",
+      "pageId": "ranking:port-container-count",
+      "title": "コンテナ取扱個数（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130688",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130688",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "a3f5b107df4e3d50"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-container-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
       "metricKey": "port-container-tonnage",
       "pageId": null,
       "title": "コンテナ取扱トン数",
@@ -8221,341 +8423,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "public-assistance-education-beneficiaries-per-1000",
-      "pageId": "ranking:public-assistance-education-beneficiaries-per-1000",
-      "title": "生活保護教育扶助人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J0110803"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J0110803"
-        },
-        "derived": false,
-        "configHash": "3ae61c5b5ee85e58"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:public-assistance-education-beneficiaries-per-1000",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "public-assistance-expenditure-ratio-pref-finance",
-      "pageId": "ranking:public-assistance-expenditure-ratio-pref-finance",
-      "title": "生活保護費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0310701"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0310701"
-        },
-        "derived": false,
-        "configHash": "3f82ad53f4a46f80"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:public-assistance-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "public-assistance-expense-municipal",
-      "pageId": "ranking:public-assistance-expense-municipal",
-      "title": "扶助費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D320404"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D320404"
-        },
-        "derived": false,
-        "configHash": "9745fa840c9f5847"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:public-assistance-expense-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:public-assistance-expense-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "public-assistance-expenses-prefecture",
-      "pageId": "ranking:public-assistance-expenses-prefecture",
-      "title": "生活保護費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103034"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103034"
-        },
-        "derived": false,
-        "configHash": "863dc85b42020a3a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:public-assistance-expenses-prefecture",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:public-assistance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "public-assistance"
-      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T08:49:10.756Z",
+  "updatedAt": "2026-10-15T11:14:28.771Z",
   "blockers": {
     "fishery-output-value": {
       "code": "ZERO_DENOMINATOR",
