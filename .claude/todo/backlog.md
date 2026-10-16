@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-10-06
+updated: 2026-10-17
 ---
 
 # バックログ (タスクマスタ)
@@ -306,6 +306,15 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-SMOKE-BOUNDING-BOX-01] 本番ランキングの画面幅テストで初回にboundingBoxが取れない原因を調べる
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-17] [期日:2026-10-24] [領域:サイト]
+
+- **優先度 / owner**: P2、devops-runner・site-ux-manager。GSCの公開障害対応を優先した後に扱う。
+- **実測**: post-deploy smoke run38977124768は全体成功だが、`responsive-layout.spec.ts:70`のranking右レール契約が375/768/1024pxで初回`main.boundingBox() === null`となり、各retry #1で成功した（45 passed / 3 flaky）。取得不能の原因と実際の表示障害の有無は未確定。証拠: `data/gsc/ui-audits/2026-10-17-remediation.json#productionRelease`。
+- **次 / 順序**: 同じランキング・viewportの初回遷移でDOMとmainの可視性・置換タイミングを記録し、表示側と検査側の原因を切り分ける。確定した原因に対する最小修正を既存テストへ反映する。
+- **停止条件**: boundingBoxのnullを無視したり、assertion・対象幅を削除したり、固定sleepやretry増量で隠さない。追加デプロイは別途指示で行う。
+- **完了条件**: 原因に対応する再現条件を残し、対象3viewportの既存テストがretryなしの反復実行で通る。修正による赤→緑と実行ログを記録する。
+
 ### [CF-CPU-RENDER-WEIGHT-01] キャッシュに無いページの描画 1 回あたりの Workers CPU を減らす
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [領域:管理]
 
@@ -357,29 +366,17 @@ updated: 2026-10-06
 - **停止条件**: ビルドが読むファイルを除外して、配信物が古いまま残る状態を作らない。workflow の変更は main 反映まで発火しない点に注意する。
 - **完了条件**: 配信物に差の無いデプロイが走らないことを、対象外の変更だけの push で確かめた。または件数が少なく不要と判断した理由をここに書いた。
 
-### [GSC-GEO-SITEMAP-404-01] 土砂災害分析の修正を本番へ反映し、公開gateを確認する
+
+### [GSC-DATASET-NESTED-SCHEMA-01] DatasetのGSC再検証結果を確認し、出典メタデータを是正する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
 
-- **GSC案01 / P1（最優先・順序1）**: 公開対象のGeoページの404を原因特定から是正する。
-- **GSC案02 / P2（次に着手）**: Geo各分析のデータ検証・公開可否・sitemap掲載を既存公開gateで照合する。案01の再発防止として同じ変更単位で扱う。
-- **owner / 順序**: geo-analysis-curator・Geoページ担当。2026-10-16 の GSC 監査内では優先1。証跡: `data/gsc/ui-audits/2026-10-16.json`。
-- **実測**: `https://stats47.jp/geo/population-landslide-exposure` は公開 `sitemap/0.xml` に掲載されているが404 + noindex。Googlebot UAの初回（CDN MISS）と時間を空けた再測定、通常UAの計3回で404。GSCの404一覧にも存在する。今回実測したサイトマップ掲載URLのうち、現在404のものはこの1件。原因は未特定。
-- **次**: 修正コードを一括デプロイ後、①通常UA・Googlebot UAで200・canonical・noindex不在を確認する ②既存route smokeのGeo全7分析とsitemap掲載を照合する ③県別途中データが閲覧できることを確認する。修正とローカル検証の証拠は `data/gsc/ui-audits/2026-10-17-remediation.json`。
-- **調査の具体化 (10-16)**: `GeoCrossAnalysisArticle` はspec/bundle欠落とprimaryMetric欠落でnotFoundになる。`loadGeoAnalysisBundle` のsnapshot parse・manifest照合まで失敗地点を分け、データ不整合・取得失敗・配信版の不一致を調べる。再発防止は既存route smoke / page-qualityにGeo各分析の公開可否とsitemapの一致を追加する案とし、新しい常駐監視は増やさない。
-- **停止条件**: 原因を確定せず404を200へ置換しない。Geoの出典・途中artifact・保存則検証を外さない。R2 push・デプロイは別途オーナー指示で行う。
-- **完了条件**: 公開方針と本番HTTP・sitemapが一致し、公開継続なら当該ページと途中artifactが実データで閲覧できる。GSCの過去404件数が減ることだけを完了条件にしない。
-
-### [GSC-DATASET-NESTED-SCHEMA-01] Dataset修正の本番反映・再取得と、出典メタデータの是正を進める
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
-
-- **GSC案03 / P1（最優先・順序2）**: 入れ子Datasetの説明不足・欠落を修正する。
+- **GSC案03 / P1（最優先・順序2）**: 入れ子Datasetの説明不足・欠落の修正をGoogle側で検証する。
 - **GSC案04 / P2（次に着手）**: 出典SSOTからcreator・license・対象年・地域・単位を正しく引き継ぐ。案03と同じ生成処理で扱う。
-- **GSC案05 / P2（次に着手）**: 親・isBasedOn・@graphを辿る検査を追加し、案03の公開前gateに含める。
-- **owner / 順序**: ranking-ui-manager・市区町村ページ担当。2026-10-16 の GSC 監査内では `GSC-GEO-SITEMAP-404-01` とともに優先対応。証跡: `data/gsc/ui-audits/2026-10-16.json`。
-- **実測**: GSC Dataset（最終更新 10-15）は description 長さ不正 775、欠落 83、計 858 アイテム無効。license / creator 欠落は各 1,092。通知本文の「1 件」は問題種別数で、影響ページ数ではない。本番 `/ranking/donations-prefecture` は親 Dataset の説明 121 文字に対し `isBasedOn` の Dataset は 47 文字、`/ranking/side-job-rate` は 46 文字。市区町村ランキング 4 例では `isBasedOn.description` 自体が無い。親の説明は存在する。
-- **次**: ①一括デプロイ後、都道府県・市区町村の代表HTMLで親と出典Datasetの説明を再帰検査する ②GSCの該当問題で修正検証を開始し再取得後のアイテムを追う ③P2のcreator / licenseは対応する出典SSOTの作成者・利用条件を特定したものだけ引き継ぐ（調査名を組織名として流用しない）。ローカル修正・文字数検査の証拠は `data/gsc/ui-audits/2026-10-17-remediation.json`。公式: https://developers.google.com/search/docs/appearance/structured-data/dataset?hl=ja
-- **再発防止案 (10-16)**: 親・`isBasedOn`・`@graph`内を再帰的に検査し、短い出典名と説明欠落の両ケースを回帰入力にする。出典SSOTと作成者・利用規約・対象年・地域・単位の一致も照合する。858は無効アイテム数として追跡し、ページ数や通常検索の未登録数と混同しない。
-- **停止条件**: 親 Dataset の本文だけを水増しして解消としない。出典の作成者・利用条件を推測で埋めない。本番反映は別途オーナー指示で行う。
+- **owner / 順序**: ranking-ui-manager・市区町村ページ担当。P1のGoogle再検証結果確認を優先し、P2の出典メタデータ確認へ進む。監査: `data/gsc/ui-audits/2026-10-16.json`、本番反映・GSC操作の証拠: `data/gsc/ui-audits/2026-10-17-remediation.json`。
+- **修正前の実測**: GSC Dataset（最終更新 10-15）は description 長さ不正 775、欠落 83、計 858 アイテム無効。license / creator 欠落は各 1,092。通知本文の「1 件」は問題種別数で、影響ページ数ではない。本番 `/ranking/donations-prefecture` は親 Dataset の説明 121 文字に対し `isBasedOn` の Dataset は 47 文字、`/ranking/side-job-rate` は 46 文字。市区町村ランキング 4 例では `isBasedOn.description` 自体が無い。親の説明は存在する。
+- **次 / 順序**: ①10-23にGSCのdescription長さ不正775件・欠落83件の検証結果と前回クロールを確認する（両方10-17に「検証: 開始」）。失敗した場合は該当URLと入れ子項目を特定して再現する ②P2のcreator / licenseは対応する出典SSOTの作成者・利用条件を特定したものだけ引き継ぐ（調査名を組織名として流用しない）。PR #1140で本番反映済み、対象6ページ×通常/Googlebotの必須description検査と再帰回帰テストは通過。証拠は `data/gsc/ui-audits/2026-10-17-remediation.json`。公式: https://developers.google.com/search/docs/appearance/structured-data/dataset?hl=ja
+- **残る照合**: 出典SSOTと作成者・利用規約・対象年・地域・単位の一致を確認する。858は無効アイテム数として追跡し、ページ数や通常検索の未登録数と混同しない。
+- **停止条件**: 親 Dataset の本文だけを水増しして解消としない。出典の作成者・利用条件を推測で埋めない。追加の本番反映は別途オーナー指示で行う。
 - **完了条件**: 親と入れ子の Dataset を辿る回帰テスト、対象の型検査、本番代表HTMLの必須項目検査が通り、再クロール後に該当エラーが解消したことを確認する。デプロイ前・再クロール前はそれぞれ区別して記録する。
 
 
@@ -416,7 +413,7 @@ updated: 2026-10-06
 
 - **GSC案17 / P2（次に着手）**: 本文・データの実更新とlastmodの対応をテンプレ別に検証し、根拠のある更新日時を反映する。
 - **GSC案18 / P2（次に着手）**: sitemap掲載URLとHTTP・noindex・canonicalの矛盾を既存検査で拾う。
-- **owner / 入力**: ranking-publisher・site-ux-manager。`apps/web/src/app/sitemap.ts`、sitemap shard、公開URL方針、既存check-sitemap-index / route smoke / page-quality。Geo固有の404と公開gateはGSC-GEO-SITEMAP-404-01に委ねる。
+- **owner / 入力**: ranking-publisher・site-ux-manager。`apps/web/src/app/sitemap.ts`、sitemap shard、公開URL方針、既存check-sitemap-index / route smoke / page-quality。Geo固有の公開gateは既存route smoke（全7分析）と定義SHA回帰テストを参照する。
 - **次 / 順序**: ①既存検査が覆う項目を確認する ②変更されたURLと各テンプレ代表で不整合・lastmod根拠を検査し、不足箇所だけ既存gateへ足す ③週次全URL検査へ必要な項目を接続する。
 - **停止条件**: 全URLのlastmodを毎日更新しない。更新日が不明なとき捏造しない。priority/changefreqの変更をGoogle向け改善策にしない。公開反映は別途指示で行う。
 - **完了条件**: 意図しない404/転送/noindex/別canonical掲載を検出でき、lastmodが実更新に一致するか未設定理由を説明できる。既存検査との二重運用を残さない。
@@ -436,7 +433,7 @@ updated: 2026-10-06
 
 - **GSC案21 / P2（次に着手）**: 404例示を内部リンク・取得できる被リンク・過去GSC流入と照合し、救済価値があるURLを選ぶ。
 - **owner / 順序**: gsc-analyst・site-ux-manager。10-16監査の12,658件は総数、例示は1,000件という範囲を保持する。現sitemap・内部リンクあり→過去流入/被リンクあり→意図的廃止の順に分類する。
-- **次**: 対応する移転先があれば個別301、現役ページなら原因修正、代替がなければ404/410維持を選ぶ。GeoはGSC-GEO-SITEMAP-404-01、既知の本文410リンクはBLOG-LINK-410-REMAP-01へ統合する。
+- **次**: 対応する移転先があれば個別301、現役ページなら原因修正、代替がなければ404/410維持を選ぶ。土砂災害Geoの404はPR #1140で是正済み（本番・Googleライブ検査の証拠: `data/gsc/ui-audits/2026-10-17-remediation.json`）。既知の本文410リンクはBLOG-LINK-410-REMAP-01へ統合する。
 - **停止条件**: 被リンク情報の欠測を0と扱わない。無関係なページへの転送や廃止ページの大量復活をしない。公開は別途指示で行う。
 - **完了条件**: 調べたURL群の優先度・処置・移転先根拠・既存カードへの対応が残り、採用した修正が検証可能な単位になっている。
 

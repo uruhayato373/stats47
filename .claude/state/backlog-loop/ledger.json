@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T21:58:30.748Z",
+  "updatedAt": "2026-10-16T22:48:59.697Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7545,6 +7545,68 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-16T21:58:30.748Z"
+    },
+    "GSC-GEO-SITEMAP-404-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T22:47:58.087Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "bash .github/scripts/smoke-test-routes.sh https://stats47.jp",
+              "bash .github/scripts/check-sitemap-index.sh https://stats47.jp",
+              "node --import tsx /tmp/gsc-release-production-probe.mts"
+            ],
+            "pass": true
+          },
+          "evidence": "PR1140/main dce97072c、Deploy38975435527・postdeploy38977124768成功。route23/23、sitemap11shard、独立21チェックと4artifact SHA/bytes一致。GSCライブ取得成功・登録可能、登録リクエスト受理。全47県artifactの全数監査とGoogle登録完了は未確認。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-10-16T22:48:59.697Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "bash .github/scripts/smoke-test-routes.sh https://stats47.jp",
+              "bash .github/scripts/check-sitemap-index.sh https://stats47.jp",
+              "node --import tsx /tmp/gsc-release-production-probe.mts",
+              "gh run view 38977124768 --json status",
+              "conclusion",
+              "headSha",
+              "url",
+              "jobs"
+            ],
+            "pass": true
+          },
+          "evidence": "完了証跡の追記: Deploy38975435527とpostdeploy38977124768は成功。公開21チェック・Geo7分析・4artifact照合PASS。追加ログ精査でPlaywright45 passed/3 flaky（各retry #1で成功）を確認し、原因未確定のmain boundingBox nullはCI-SMOKE-BOUNDING-BOX-01へ分離した。",
+          "failReason": null,
+          "followUps": [
+            "CI-SMOKE-BOUNDING-BOX-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T22:48:59.697Z"
     }
   }
 }
