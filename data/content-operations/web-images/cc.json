@@ -1,0 +1,2759 @@
+{
+  "items": [
+    {
+      "id": "web/blog/elderly-ratio-rise-2020-2025",
+      "channel": "web",
+      "key": "elderly-ratio-rise-2020-2025",
+      "title": "高齢化率の上昇、5年で鈍ったのはなぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/elderly-ratio-rise-2020-2025",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "b9c360c8bb4515241db974645cffbc0d6480afffe26919d1b057574b98abb030",
+      "catalogBasis": "8326d02a15d3cdf4ab34984172348a58d4b720d578eb3003f5480ccd65268ea7",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/article.md",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/article.md",
+        "sha256": "6b7ff1c46ff549d3d8e3b2a215a1457ff00312cdce83709b7c74c7c896adb6a4",
+        "bytes": 14413
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/household-solo-vs-dualincome",
+      "channel": "web",
+      "key": "household-solo-vs-dualincome",
+      "title": "都市は独居、地方は共働き",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/household-solo-vs-dualincome",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "9b7c42cd55664f54fcc15bfb1c1dde050385db242eef06631011fa4349165c74",
+      "catalogBasis": "a0630824c39d317c75646763df3f289e24ffda959f47d4892a124f726a52cf70",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/article.md",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+        "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+        "bytes": 10146
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/e570eb83ac933126aa7f743a",
+      "channel": "web",
+      "key": "apps/web/public/images/home/use-cases/healthcare.webp",
+      "title": "healthcare.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1dbf6b7750d393468178de27366f2e2d9daa970e3abdc789f8e2040c708ae6d0"
+    },
+    {
+      "id": "web/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "channel": "web",
+      "key": "elderly-general-worker-old-population-ratio-pre2019",
+      "title": "高齢一般労働者割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e2ca6970167992220a2100e3529c3dac443e03d63c831e211702929f996f8f3e",
+      "catalogBasis": "e2ca6970167992220a2100e3529c3dac443e03d63c831e211702929f996f8f3e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/golf-green-fee-consumption-expenditure",
+      "channel": "web",
+      "key": "golf-green-fee-consumption-expenditure",
+      "title": "ゴルフプレー料金消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/golf-green-fee-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3378322379ffa6757f26217d5aaa7159c919cb77ffff0df05a4bc3cf77e660db",
+      "catalogBasis": "3378322379ffa6757f26217d5aaa7159c919cb77ffff0df05a4bc3cf77e660db",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-high-club-per100-volleyball",
+      "channel": "web",
+      "key": "junior-high-club-per100-volleyball",
+      "title": "中学部活動 100人あたり部員数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-high-club-per100-volleyball",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "108ea3832732df2e457701476e7f691ed2b0a1542982bc2a7412f24524a221ad",
+      "catalogBasis": "108ea3832732df2e457701476e7f691ed2b0a1542982bc2a7412f24524a221ad",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/kiwi-consumption-expenditure",
+      "channel": "web",
+      "key": "kiwi-consumption-expenditure",
+      "title": "キウイフルーツ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/kiwi-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f7115ae268f981bdb403150aed725ce47eb12abcb961bb4d14ebbd7fe8aa592b",
+      "catalogBasis": "f7115ae268f981bdb403150aed725ce47eb12abcb961bb4d14ebbd7fe8aa592b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/mackerel-consumption-expenditure",
+      "channel": "web",
+      "key": "mackerel-consumption-expenditure",
+      "title": "さば消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/mackerel-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "51f82da1fe09848ee21e8a79080048fb638a5f54d862bb137ab3348efe1457de",
+      "catalogBasis": "51f82da1fe09848ee21e8a79080048fb638a5f54d862bb137ab3348efe1457de",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/new-rented-housing-ratio",
+      "channel": "web",
+      "key": "new-rented-housing-ratio",
+      "title": "着工新設貸家比率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/new-rented-housing-ratio",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1decda5d415c1a64cc54dd7529583f7a2b41459867362fca39e03cadd0bb641b",
+      "catalogBasis": "1decda5d415c1a64cc54dd7529583f7a2b41459867362fca39e03cadd0bb641b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-grains-consumption-expenditure",
+      "channel": "web",
+      "key": "other-grains-consumption-expenditure",
+      "title": "他の穀類のその他消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-grains-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1781dc14e6671a9db442292b566263a73dce69f5bde463b632cbea9db4806ad9",
+      "catalogBasis": "1781dc14e6671a9db442292b566263a73dce69f5bde463b632cbea9db4806ad9",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sea-bream-consumption-quantity",
+      "channel": "web",
+      "key": "sea-bream-consumption-quantity",
+      "title": "たい消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sea-bream-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f3a41e98d0a5d08c1ad01f3ecb4f927b670a76acbd6fdec121896180ac3b8fa6",
+      "catalogBasis": "f3a41e98d0a5d08c1ad01f3ecb4f927b670a76acbd6fdec121896180ac3b8fa6",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/stillbirth-rate",
+      "channel": "web",
+      "key": "stillbirth-rate",
+      "title": "死産率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/stillbirth-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "394812e414cadf3774cb27274529ac73a4de4c90f963ad5a0fb01fb481b69191",
+      "catalogBasis": "394812e414cadf3774cb27274529ac73a4de4c90f963ad5a0fb01fb481b69191",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/treatment-rate-schizophrenia-outpatient",
+      "channel": "web",
+      "key": "treatment-rate-schizophrenia-outpatient",
+      "title": "統合失調症の受療率（外来）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/treatment-rate-schizophrenia-outpatient",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8106e77e02f2960b98aa98733333420515f5f204ef71943ff047155e4b9517be",
+      "catalogBasis": "8106e77e02f2960b98aa98733333420515f5f204ef71943ff047155e4b9517be",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.svg",
+        "sha256": "61d2efd55410ff10a8bc3e5b604083b41085e00ab45cf1af0f57ad3757676466",
+        "bytes": 32572
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "sha256": "6b7ff1c46ff549d3d8e3b2a215a1457ff00312cdce83709b7c74c7c896adb6a4",
+          "bytes": 14413,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.json",
+          "sha256": "a0305136da1673a23d5ec9f015d2baddd99ce000024ea38f885a14e26e480114",
+          "bytes": 4542,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.source.json",
+          "sha256": "097f10e2c1be0fbfb97430cfc61bcc52cdbc4d6b3630f21475cdf66c02f48409",
+          "bytes": 823,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-map.svg",
+          "alt": "高齢化率の上昇幅の都道府県マップ(2020→2025年)",
+          "heading": "都道府県の上昇幅:東北が上位を占め、大都市圏は動かない",
+          "line": 45
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/ratio-65-plus/values.json",
+          "url": "https://storage.stats47.jp/app/stats/ratio-65-plus/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.svg",
+        "sha256": "d19a37a95a9bf39b4fd07cc50fadcbcf6cd3f875d613cbb1e91104d5ab06edeb",
+        "bytes": 7194
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "sha256": "6b7ff1c46ff549d3d8e3b2a215a1457ff00312cdce83709b7c74c7c896adb6a4",
+          "bytes": 14413,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-municipality-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.json",
+          "sha256": "36a541a4c1b8c264bbad7323b65da4d0f28a5a241a01d1e3d3c60900ea6f5bd7",
+          "bytes": 367765,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-municipality-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.source.json",
+          "sha256": "c94ff2c97be58e08b58a80b53c2fc8113a0cb616c54d57269cd843271aa1c3ce",
+          "bytes": 1019,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-municipality-ranking.svg",
+          "alt": "市区町村の高齢化率の上昇幅、上位5と下位5(2020→2025年)",
+          "heading": "市区町村では約15ポイントの開き:小さな町村ほど大きく振れる",
+          "line": 64
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/ratio-65-plus/cities.json",
+          "url": "https://storage.stats47.jp/app/stats/ratio-65-plus/cities.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.svg",
+        "sha256": "578281909adfe9fb75bdf63acfb059384ea0ee362c29a53d9fdf48b2d48a1131",
+        "bytes": 7033
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "sha256": "6b7ff1c46ff549d3d8e3b2a215a1457ff00312cdce83709b7c74c7c896adb6a4",
+          "bytes": 14413,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.json",
+          "sha256": "57a79c45786818cfe1b83e5aab9ab09d5952f79b210c74de153c25f612137ac6",
+          "bytes": 9297,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.source.json",
+          "sha256": "ee8cd821b23be4b1659d46e0fa21ec52870eb37c782b52b5c4200deb19fbd9a3",
+          "bytes": 1033,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-prefecture-rankings.svg",
+          "alt": "高齢化率の上昇幅、上位5県と下位5都府県(2020→2025年)",
+          "heading": "都道府県の上昇幅:東北が上位を占め、大都市圏は動かない",
+          "line": 37
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/ratio-65-plus/values.json",
+          "url": "https://storage.stats47.jp/app/stats/ratio-65-plus/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.svg",
+        "sha256": "8e9163ec0282c21cff2ab35732711845f3c48046ea277de0f151a377b10049af",
+        "bytes": 7561
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/article.md",
+          "sha256": "6b7ff1c46ff549d3d8e3b2a215a1457ff00312cdce83709b7c74c7c896adb6a4",
+          "bytes": 14413,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-timeseries.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.json",
+          "sha256": "510d5a75451a57af88df8208392cd64fc1664b4b0a109a9569fb9350cb34aa51",
+          "bytes": 2227,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "elderly-ratio-rise-2020-2025-timeseries.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.source.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.source.json",
+          "sha256": "7061ef9825c271efd92a653e057939187d331d6b8e25f2069fca4638ccb785c5",
+          "bytes": 449,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-line",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/data/elderly-ratio-rise-2020-2025-timeseries.svg",
+          "alt": "高齢化率の5年ごとの推移(秋田・青森・大阪・東京・沖縄)",
+          "heading": "5年おきの推移で見る、上昇ペースの変化",
+          "line": 27
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 420",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/ratio-65-plus/values.json",
+          "url": "https://storage.stats47.jp/app/stats/ratio-65-plus/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/background.jpg",
+        "sha256": "fc4131294a6b8d9117ff4ec4bf5bf2fe4705a62cec66787fed38e97545b9ea53",
+        "bytes": 148138
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "sha256": "51a478bdf592a285beaba909468b1b5bf9ae6472bbaaeed9f3b9b2e27b5fc671",
+          "bytes": 2212,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "440dfb18fc71b1d556b6ca6612b6afce9d85b75ef45dd6756423840118949746",
+        "fingerprint": "06c8cbe4e6fe77e90d7a04b043b36ff824d29b317bbb90fb53011ad1ef222c51",
+        "generatedAt": "2026-09-30T06:06:07.177Z"
+      }
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/ogp.png",
+        "sha256": "777783f26796d8b8bd0f91556ce86a259d2c73184f6fccd5fa293696d0a51091",
+        "bytes": 805464
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "sha256": "51a478bdf592a285beaba909468b1b5bf9ae6472bbaaeed9f3b9b2e27b5fc671",
+          "bytes": 2212,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "440dfb18fc71b1d556b6ca6612b6afce9d85b75ef45dd6756423840118949746",
+        "fingerprint": "06c8cbe4e6fe77e90d7a04b043b36ff824d29b317bbb90fb53011ad1ef222c51",
+        "generatedAt": "2026-09-30T06:06:07.177Z"
+      }
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/thumbnail-dark.webp",
+        "sha256": "59bfa043e76a77b2dfed977167572e871a533b8e41562195b2206fa0ba96e6e0",
+        "bytes": 22946
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "sha256": "51a478bdf592a285beaba909468b1b5bf9ae6472bbaaeed9f3b9b2e27b5fc671",
+          "bytes": 2212,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "440dfb18fc71b1d556b6ca6612b6afce9d85b75ef45dd6756423840118949746",
+        "fingerprint": "06c8cbe4e6fe77e90d7a04b043b36ff824d29b317bbb90fb53011ad1ef222c51",
+        "generatedAt": "2026-09-30T06:06:07.177Z"
+      }
+    },
+    {
+      "owner": "web/blog/elderly-ratio-rise-2020-2025",
+      "file": "app/blog/elderly-ratio-rise-2020-2025/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/elderly-ratio-rise-2020-2025/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/thumbnail-light.webp",
+        "sha256": "d7e64f8b0169f3c10df3aa570f1d54c56a4450edef84e837869fd0c30dc71051",
+        "bytes": 44942
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/elderly-ratio-rise-2020-2025/ogp/generation.json",
+          "sha256": "51a478bdf592a285beaba909468b1b5bf9ae6472bbaaeed9f3b9b2e27b5fc671",
+          "bytes": 2212,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "440dfb18fc71b1d556b6ca6612b6afce9d85b75ef45dd6756423840118949746",
+        "fingerprint": "06c8cbe4e6fe77e90d7a04b043b36ff824d29b317bbb90fb53011ad1ef222c51",
+        "generatedAt": "2026-09-30T06:06:07.177Z"
+      }
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.svg",
+        "sha256": "6e8b6827c87a74c2dd4d11f6578fa04582f802c785a5d5cafd76518b240335fb",
+        "bytes": 6774
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "average-persons-per-general-household-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.json",
+          "sha256": "4a0ae05b603d6a7cf5dafb796b01a8d30dc5a089c65439ab85025c75c6de301c",
+          "bytes": 6729,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "average-persons-per-general-household-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.source.json",
+          "sha256": "c714b1beca467fcdc649b7ac9d5dc3a57b7f59c554a3c0187a0b73fafbb8a9c7",
+          "bytes": 810,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/average-persons-per-general-household-prefecture-rankings.svg",
+          "alt": "平均世帯人員ランキング",
+          "heading": "平均世帯人員",
+          "line": 52
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-persons-per-general-household/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-persons-per-general-household/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/dual-income-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/dual-income-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/dual-income-map.svg",
+        "sha256": "ac6d0a70f6cbe500cc0fa3e1ac6b10ef7ba375bcf075f9445ccdb1d59692bdee",
+        "bytes": 31633
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dual-income-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/dual-income-map.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/dual-income-map.json",
+          "sha256": "2c512de9754cd6e96c5ef6c0f89c3ff6d7819a51cf6bd1728887c613003912c6",
+          "bytes": 5376,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dual-income-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/dual-income-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/dual-income-map.source.json",
+          "sha256": "5482aee79ca6cbeaa94397ae9f023d26b7e707131245099626e174b9c7e87115",
+          "bytes": 353,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/dual-income-map.svg",
+          "alt": "共働き世帯割合 都道府県マップ",
+          "heading": "共働き世帯割合マップ──日本海側に集中",
+          "line": 64
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dual-income-household-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dual-income-household-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/household-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/household-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/household-summary-findings.svg",
+        "sha256": "f8bbccd4232b4c9d45722cfd3af9d35a0d4b31f47d414fe822ccf81ff11c80ef",
+        "bytes": 3416
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "household-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/household-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/household-summary-findings.json",
+          "sha256": "4b6e32211f4e418ed589f8fd1dd999bb2658d001dd2623d5cfa6381209951ede",
+          "bytes": 987,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "household-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/household-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/household-summary-findings.source.json",
+          "sha256": "714a8474e76ab51138215023627ce7c32c12c9edee376c6bac2fab3c74dac126",
+          "bytes": 629,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/household-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 124
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 444",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.svg",
+        "sha256": "dc53b87286919bbe0aaf83ba5b69e24d5b0e1a49b057c20168ad63cbd34909bd",
+        "bytes": 6771
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "nuclear-family-households-ratio-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.json",
+          "sha256": "a25aeffa3f10bb0f76c8034eed53e6e0a888126ee0d646b627d70d317995bf6a",
+          "bytes": 6760,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "nuclear-family-households-ratio-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.source.json",
+          "sha256": "a400c710440694da639adb382d4cee62346ecc424c458a3f7a2e49c26a94c8dc",
+          "bytes": 780,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/nuclear-family-households-ratio-prefecture-rankings.svg",
+          "alt": "核家族世帯割合ランキング",
+          "heading": "核家族世帯割合",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nuclear-family-households-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nuclear-family-households-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/single-household-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/single-household-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-household-ranking.svg",
+        "sha256": "f0894e55a024ee1259b5109dc76d3ce2cb0b9a2f27d86125df463a59cfcc3acb",
+        "bytes": 6760
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "single-household-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/single-household-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-household-ranking.json",
+          "sha256": "1f3f1a6915bbc02852928ba869844abc8f053b8e8dc1116bfcfba4d546744f5a",
+          "bytes": 6736,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "single-household-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/single-household-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-household-ranking.source.json",
+          "sha256": "d6e88ac1012387ff218460a60a01316c8f3381b873fc2ab1062a63fe6c0535fa",
+          "bytes": 896,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-household-ranking.svg",
+          "alt": "単独世帯割合ランキング",
+          "heading": "単独世帯割合ランキング（2020年）",
+          "line": 23
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/single-person-household-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/single-person-household-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.svg",
+        "sha256": "8940e64e9f77b0997389013f3ade87d6deb276af97311be9d60570c3622a515f",
+        "bytes": 10603
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/article.md",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/article.md",
+          "sha256": "1d665bf9022020f42a19ae055e576c0cb476392f678f632623d13effcebcfcd1",
+          "bytes": 10146,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "single-vs-dual-income-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.json",
+          "sha256": "0ca4601cec08391638681e24d0809efd70d938a2e2e648263879a36c91e71171",
+          "bytes": 4750,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "single-vs-dual-income-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.source.json",
+          "sha256": "b34ab7c1d65ae0a917222c00ab8934ab3d5259d16e84aca5ae3b63a7bd1e8cdb",
+          "bytes": 1127,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/data/single-vs-dual-income-scatter.svg",
+          "alt": "単独世帯割合と共働き世帯割合の散布図",
+          "heading": "単独世帯割合と共働き割合の関係",
+          "line": 83
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/single-person-household-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/single-person-household-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/dual-income-household-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dual-income-household-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/background.jpg",
+        "sha256": "24e4f2910ea8930e883d5ddde21220bfbab245a4f35676fee88ec4bb05302721",
+        "bytes": 115634
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "sha256": "ec5e9185ef2a9f15101073383c13d9e631b68e8367ebd1de3ea0983d06630c3a",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "5236b0e8469dcb5857381f79c80c72e603f6a53eb3426ffb3245ca11419bc816",
+        "fingerprint": "f30872caea167b9d32a74b670867461629939ea57cfe781b019d94a16637f40c",
+        "generatedAt": "2026-08-22T05:17:27.010Z"
+      }
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/ogp.png",
+        "sha256": "a4c46750a36d213796bb4cf1b6b60b6685711bd7c6d35bea9b7351cc3242ac70",
+        "bytes": 645597
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "sha256": "ec5e9185ef2a9f15101073383c13d9e631b68e8367ebd1de3ea0983d06630c3a",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "5236b0e8469dcb5857381f79c80c72e603f6a53eb3426ffb3245ca11419bc816",
+        "fingerprint": "f30872caea167b9d32a74b670867461629939ea57cfe781b019d94a16637f40c",
+        "generatedAt": "2026-08-22T05:17:27.010Z"
+      }
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/thumbnail-dark.webp",
+        "sha256": "0c3ad04d361fccc58fc60fd820baaaf4b1ee1c204997f66d2dfa5fa0f1729c61",
+        "bytes": 20178
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "sha256": "ec5e9185ef2a9f15101073383c13d9e631b68e8367ebd1de3ea0983d06630c3a",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "5236b0e8469dcb5857381f79c80c72e603f6a53eb3426ffb3245ca11419bc816",
+        "fingerprint": "f30872caea167b9d32a74b670867461629939ea57cfe781b019d94a16637f40c",
+        "generatedAt": "2026-08-22T05:17:27.010Z"
+      }
+    },
+    {
+      "owner": "web/blog/household-solo-vs-dualincome",
+      "file": "app/blog/household-solo-vs-dualincome/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/household-solo-vs-dualincome/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/thumbnail-light.webp",
+        "sha256": "64962009dd26b7e46f9b96b017b37ccc0e053d1639af5c31a44d320ef2cf4cec",
+        "bytes": 38300
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/household-solo-vs-dualincome/ogp/generation.json",
+          "sha256": "ec5e9185ef2a9f15101073383c13d9e631b68e8367ebd1de3ea0983d06630c3a",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "5236b0e8469dcb5857381f79c80c72e603f6a53eb3426ffb3245ca11419bc816",
+        "fingerprint": "f30872caea167b9d32a74b670867461629939ea57cfe781b019d94a16637f40c",
+        "generatedAt": "2026-08-22T05:17:27.010Z"
+      }
+    },
+    {
+      "owner": "web/material/e570eb83ac933126aa7f743a",
+      "file": "apps/web/public/images/home/use-cases/healthcare.webp",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/home/use-cases/healthcare.webp",
+        "url": "https://stats47.jp/images/home/use-cases/healthcare.webp",
+        "sha256": "321d4c8d18df07add75d42def6252cf177a4486c4e8f5edd7b817bd7e25229e3",
+        "bytes": 40992
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/home/use-cases/healthcare.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "file": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/ogp/ogp.png",
+        "sha256": "15949a0ff4680658d43f41eae62d4b899921cdf198d673fbcd6ad2289762ac1e",
+        "bytes": 60378
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/ogp/generation.json",
+          "sha256": "6fa1d5c7db709c069d45de0d743e1c199282cb716eff02adde29127d38a27f74",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "758fa08bad242379a5ad84c3d88825e6887b92c260bdc78479ca0178cd3bbd37",
+        "fingerprint": "c835c8ecf3dbb6cec0191991abf80bcdfa07e2e46fda34b1dd0c929f929dc1f8",
+        "generatedAt": "2026-10-01T18:10:27.945Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "file": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-dark.webp",
+        "sha256": "098ba6effcac5d16aa88a7c6fc698d2fa54466dc56e27c6de2f1868f46d26259",
+        "bytes": 16486
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail.json",
+          "sha256": "90cf691712c4a92e6225492963fb961b5967df628d1fe342d3461540388bae06",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b072679a5aba11f206e55f3d08b187071acd0b0b52934d42a5227ba378661c80",
+        "fingerprint": "3ccdba2daef263923ddab89ee508e6f4632c013c32e69edefd68397c0b841426",
+        "generatedAt": "2026-10-01T18:35:44.402Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "file": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail-light.webp",
+        "sha256": "6fd92b30bb44aa7bb0453688c1b72094a3c3a1eec93051312d8afffa431ac432",
+        "bytes": 15080
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/thumbnail.json",
+          "sha256": "90cf691712c4a92e6225492963fb961b5967df628d1fe342d3461540388bae06",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-general-worker-old-population-ratio-pre2019/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b072679a5aba11f206e55f3d08b187071acd0b0b52934d42a5227ba378661c80",
+        "fingerprint": "3ccdba2daef263923ddab89ee508e6f4632c013c32e69edefd68397c0b841426",
+        "generatedAt": "2026-10-01T18:35:44.402Z"
+      }
+    },
+    {
+      "owner": "web/ranking/golf-green-fee-consumption-expenditure",
+      "file": "app/ranking/golf-green-fee-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/golf-green-fee-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/ogp/ogp.png",
+        "sha256": "34a07f15c175efdcf29ee9d1d08ffc6260cd3bf7df1077a87d65517e801c2f3d",
+        "bytes": 61649
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/golf-green-fee-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/ogp/generation.json",
+          "sha256": "8a4f50b7fb739e4eff0d708f158a4ea8a01bf8ca973d81fee0cadb359a9cd6da",
+          "bytes": 985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "09dcacf467b9b1c063b25d0efd34e204bde77908fd0d64cf55613415c8981394",
+        "fingerprint": "b57a9b974fa38355d5763a68a1f262640938872bed5591491bdacad7b1c491ec",
+        "generatedAt": "2026-10-01T18:11:14.158Z"
+      }
+    },
+    {
+      "owner": "web/ranking/golf-green-fee-consumption-expenditure",
+      "file": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "c79108a8c3c991eadeeefaa785c124f0163d32514dd8cc4c65327a8fed227dfb",
+        "bytes": 17544
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "1512d4f577d1c53c9fae9afc1c9325a52869591982a3e9a40ddbfa5494f484ca",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "febbcc45a00e43028e7fe141ce558c750f41e494ee8c6bb87db4cfc179023dfb",
+        "fingerprint": "cebc325d12e89c1262bda628e5fcb1a281652375a29936f84752358e6f407f98",
+        "generatedAt": "2026-10-01T18:35:56.598Z"
+      }
+    },
+    {
+      "owner": "web/ranking/golf-green-fee-consumption-expenditure",
+      "file": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "50b183109b5c187722f409cc8e851bbe9445f2743d4bcdf1a015ac3b3e6b65c3",
+        "bytes": 15832
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/golf-green-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "1512d4f577d1c53c9fae9afc1c9325a52869591982a3e9a40ddbfa5494f484ca",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/golf-green-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "febbcc45a00e43028e7fe141ce558c750f41e494ee8c6bb87db4cfc179023dfb",
+        "fingerprint": "cebc325d12e89c1262bda628e5fcb1a281652375a29936f84752358e6f407f98",
+        "generatedAt": "2026-10-01T18:35:56.598Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-volleyball",
+      "file": "app/ranking/junior-high-club-per100-volleyball/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-volleyball/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-volleyball/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-volleyball",
+      "file": "app/ranking/junior-high-club-per100-volleyball/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-volleyball/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-volleyball/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-volleyball",
+      "file": "app/ranking/junior-high-club-per100-volleyball/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-volleyball/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-volleyball/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/kiwi-consumption-expenditure",
+      "file": "app/ranking/kiwi-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kiwi-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/ogp/ogp.png",
+        "sha256": "8cda18e1f58413f95695c7dc0eefd80ed9045b10dbd6d8c002ba735d68d568b9",
+        "bytes": 61509
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kiwi-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/ogp/generation.json",
+          "sha256": "78c2e32134b8b9d8216ee8923befc734771283bc8f50e3448887ed99114359a0",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "e2343f7a1d4dc903a80fa4cd0789a68028075ddf45572b29784b5c106c52f5c9",
+        "fingerprint": "85adf7fd4abb2ec33956b00af038b3fdd1fe6fa6c3c005e94b324d0f8f8d2370",
+        "generatedAt": "2026-10-03T20:59:33.263Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kiwi-consumption-expenditure",
+      "file": "app/ranking/kiwi-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kiwi-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "818dd0a04ce93b128a7eff6ab06b76f6e3bd394d757607ecb7ca80773118119f",
+        "bytes": 16970
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kiwi-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/thumbnail.json",
+          "sha256": "879c3f1b07d6e15284381628aa859621c7f92d73d52d2cf5ff5c5498e2ff709e",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "c81fff7685654fcb3e572ef69d5f1ec09ab4e79503a3a3b0025c9cbabb388616",
+        "fingerprint": "39c7e4a0e48acfa8e2c3195aaab7fdbc59049e63340f37755cfd503aed18d173",
+        "generatedAt": "2026-10-03T21:25:20.455Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kiwi-consumption-expenditure",
+      "file": "app/ranking/kiwi-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kiwi-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "2b512833bd3cfa2a73fa9bb8765d3bdd18dee20b41431ac54c65f192fd8a7019",
+        "bytes": 15428
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kiwi-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/thumbnail.json",
+          "sha256": "879c3f1b07d6e15284381628aa859621c7f92d73d52d2cf5ff5c5498e2ff709e",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kiwi-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kiwi-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "c81fff7685654fcb3e572ef69d5f1ec09ab4e79503a3a3b0025c9cbabb388616",
+        "fingerprint": "39c7e4a0e48acfa8e2c3195aaab7fdbc59049e63340f37755cfd503aed18d173",
+        "generatedAt": "2026-10-03T21:25:20.455Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mackerel-consumption-expenditure",
+      "file": "app/ranking/mackerel-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mackerel-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/ogp/ogp.png",
+        "sha256": "67c312c88138ab57c1505c6b2ebbb3d98a9e16edfa3ae912e1c57ef72708db3c",
+        "bytes": 58750
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mackerel-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/ogp/generation.json",
+          "sha256": "7ebb4f74f145aca0350bf8445236b7d3c267c9db346f0d9cac840d671b25159a",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "d5a26261deaf85008dbb817ee03f27b30adcf758951599d4de12d64f8b1d0d8c",
+        "fingerprint": "e6e22431d3635a8b821be864a1f447c53b1455cc58703858385c584b5455d514",
+        "generatedAt": "2026-10-03T20:59:44.554Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mackerel-consumption-expenditure",
+      "file": "app/ranking/mackerel-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mackerel-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "277b7f7199347f933650202a07c351e7c510905781c43e08bc450d9bf18aeff2",
+        "bytes": 16186
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mackerel-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/thumbnail.json",
+          "sha256": "a4a8b7d4b924bf8d57c08240b989753e1356f698dd90759a3a2346c17a0d8c00",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8ed5aaae96c911f5374c4fd57fa2505ac690d58c85f5d20973d4e9f5358f44f6",
+        "fingerprint": "634784cfc881d1e1fad0a279ba272c347077f3b9f346b4559d2bc3361c1d560c",
+        "generatedAt": "2026-10-03T21:25:23.465Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mackerel-consumption-expenditure",
+      "file": "app/ranking/mackerel-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mackerel-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "5ca35b0d19f2ca0afaa5587f6508fac0a226bed67ea27475ed7570d7d34286d6",
+        "bytes": 14540
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mackerel-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/thumbnail.json",
+          "sha256": "a4a8b7d4b924bf8d57c08240b989753e1356f698dd90759a3a2346c17a0d8c00",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mackerel-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mackerel-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8ed5aaae96c911f5374c4fd57fa2505ac690d58c85f5d20973d4e9f5358f44f6",
+        "fingerprint": "634784cfc881d1e1fad0a279ba272c347077f3b9f346b4559d2bc3361c1d560c",
+        "generatedAt": "2026-10-03T21:25:23.465Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-rented-housing-ratio",
+      "file": "app/ranking/new-rented-housing-ratio/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-rented-housing-ratio/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/ogp/ogp.png",
+        "sha256": "8049303d7c621238df9436341455551f6dff4a3b875d433122cb1f8dd14a419b",
+        "bytes": 60608
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-rented-housing-ratio/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/ogp/generation.json",
+          "sha256": "bbecd8e4584c105b130518b0082ff1687bc264228b645c340420f2b5a9b556b5",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-rented-housing-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-rented-housing-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "6039ba2bb196b5bf02ea292e242774ff3bcf6aab6b8a0180e1b81f52b78d3db4",
+        "fingerprint": "ca623c21958facedbf7dce285c06985a3a3be88b321f9fdf3754370d5f4731cf",
+        "generatedAt": "2026-10-03T21:00:17.831Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-rented-housing-ratio",
+      "file": "app/ranking/new-rented-housing-ratio/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-rented-housing-ratio/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/thumbnail-dark.webp",
+        "sha256": "a04a014e6eea6dea19caff01e071d857155bb94553971acf81c2bdc510de03dd",
+        "bytes": 16988
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-rented-housing-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/thumbnail.json",
+          "sha256": "a84f96c8ec26f91f3e65e953839ae63a4b99714952e36bec5711f8e9a877931d",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-rented-housing-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-rented-housing-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5db7cb661797117a1bcf273a5b04375d2f7d3cb153be4c8c15efb0a1fe40475b",
+        "fingerprint": "01776cce8e97ccf722394918edd42e7e4337b39d1f187da591f512bf42fafc50",
+        "generatedAt": "2026-10-03T21:25:32.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-rented-housing-ratio",
+      "file": "app/ranking/new-rented-housing-ratio/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-rented-housing-ratio/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/thumbnail-light.webp",
+        "sha256": "19961040a384a688ba526ef5678928ef4f48a70e06aa78875cd6efa1f61ff54c",
+        "bytes": 15686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-rented-housing-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/thumbnail.json",
+          "sha256": "a84f96c8ec26f91f3e65e953839ae63a4b99714952e36bec5711f8e9a877931d",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-rented-housing-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-rented-housing-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-rented-housing-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5db7cb661797117a1bcf273a5b04375d2f7d3cb153be4c8c15efb0a1fe40475b",
+        "fingerprint": "01776cce8e97ccf722394918edd42e7e4337b39d1f187da591f512bf42fafc50",
+        "generatedAt": "2026-10-03T21:25:32.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-grains-consumption-expenditure",
+      "file": "app/ranking/other-grains-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-grains-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/ogp/ogp.png",
+        "sha256": "5cb6e25262d389606ec87d7ea234d192cf21d2ec3715ffa84568c43fee68ec91",
+        "bytes": 62142
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-grains-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/ogp/generation.json",
+          "sha256": "1472129dcedbfec06cf2cacb6607837562f43eba770144d6b0cd5646a65839fd",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "a32a40317067112050d7c39a3add127aaa99ad83122edbfb8e40613e81f373aa",
+        "fingerprint": "f0023e6aba70b3660c0aef7994f25e4ac1d8589cddf60a06006f3ef65a790251",
+        "generatedAt": "2026-10-03T21:00:35.345Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-grains-consumption-expenditure",
+      "file": "app/ranking/other-grains-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-grains-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "5ff0aa1ac751b453e7f18e5d6e763f2b74aa761c377989ccf043843cd78a49bc",
+        "bytes": 18540
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-grains-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/thumbnail.json",
+          "sha256": "e78ba970b086ab442eb5af2636a8e3ba6f712409f12435d0cd07c2cc3ea1fc89",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "95e6a3c5f4b642550a34e62e9070df20ffce8e10ca6685631f06d4bf357cf453",
+        "fingerprint": "fe9273f554bd32293d9a2ce2ac494592a95060540a26ddc69533b3244c7725a3",
+        "generatedAt": "2026-10-03T21:25:36.730Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-grains-consumption-expenditure",
+      "file": "app/ranking/other-grains-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-grains-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "69437969ec1177c843d89409d7a3091fa59d819c3dcc5039cfe0b382c40e46f6",
+        "bytes": 17042
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-grains-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/thumbnail.json",
+          "sha256": "e78ba970b086ab442eb5af2636a8e3ba6f712409f12435d0cd07c2cc3ea1fc89",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-grains-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-grains-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "95e6a3c5f4b642550a34e62e9070df20ffce8e10ca6685631f06d4bf357cf453",
+        "fingerprint": "fe9273f554bd32293d9a2ce2ac494592a95060540a26ddc69533b3244c7725a3",
+        "generatedAt": "2026-10-03T21:25:36.730Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sea-bream-consumption-quantity",
+      "file": "app/ranking/sea-bream-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sea-bream-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/ogp/ogp.png",
+        "sha256": "0f277970d9d73ab1c09c9ca9e348583403eecd3a041825c3fa5a7cbe00683dcb",
+        "bytes": 73656
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sea-bream-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/ogp/generation.json",
+          "sha256": "6d27bb71e3ce918d168936a312eb3f4286ef2b6ee02803e25dcd7b8f58e28328",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "47be7110b6d2249b251504bb1f0d757792f4cb884347ad092b8f6547e2bcf8fd",
+        "fingerprint": "cfd4f50321a90b3af2bce81bc8da5a7d4192070c5a7e022417ba6f6702487c14",
+        "generatedAt": "2026-08-15T18:42:45.451Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sea-bream-consumption-quantity",
+      "file": "app/ranking/sea-bream-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sea-bream-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "5f788a880a4e701cb2abb515ddb1507a0472141f72412b729731b4a199390718",
+        "bytes": 14108
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sea-bream-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/thumbnail.json",
+          "sha256": "e5b36ef0d2e18bd553d0e8178a4f6ceab364328a3563ffed4d958fe7f9296557",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "628aaddc248cfd9dbf74492ca2ab477a6ba519f67fa893deb391e981db436316",
+        "fingerprint": "10bb1c47804d7ada1dd6974d5e0286507c647f164e4de56547e471a49db40262",
+        "generatedAt": "2026-08-15T18:58:49.447Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sea-bream-consumption-quantity",
+      "file": "app/ranking/sea-bream-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sea-bream-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/thumbnail-light.webp",
+        "sha256": "568d413ecaa660655747c2c6c478c5e925325cc05785a69f8a22c7ff8fcf5efd",
+        "bytes": 12408
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sea-bream-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/thumbnail.json",
+          "sha256": "e5b36ef0d2e18bd553d0e8178a4f6ceab364328a3563ffed4d958fe7f9296557",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sea-bream-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sea-bream-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "628aaddc248cfd9dbf74492ca2ab477a6ba519f67fa893deb391e981db436316",
+        "fingerprint": "10bb1c47804d7ada1dd6974d5e0286507c647f164e4de56547e471a49db40262",
+        "generatedAt": "2026-08-15T18:58:49.447Z"
+      }
+    },
+    {
+      "owner": "web/ranking/stillbirth-rate",
+      "file": "app/ranking/stillbirth-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/stillbirth-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/ogp/ogp.png",
+        "sha256": "e594c82083df2e8ba63a0c4fe8a4ea8600c17b7f837f8cff3bc71d47ad335c7d",
+        "bytes": 72432
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/stillbirth-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/ogp/generation.json",
+          "sha256": "1ce1f8d892ad6d5f4ef17418321a39e879662b2c1fc3176f220aa57cf131cc40",
+          "bytes": 893,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/stillbirth-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/stillbirth-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "469cdc0bf42fc305a30539a28d2a7522874373d0a50f3bd278f6b1987de7f050",
+        "fingerprint": "f62f112b0e6862520520d9df56919393622f07fa11210a52ba86488c85bc56a3",
+        "generatedAt": "2026-08-16T22:21:04.360Z"
+      }
+    },
+    {
+      "owner": "web/ranking/stillbirth-rate",
+      "file": "app/ranking/stillbirth-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/stillbirth-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/thumbnail-dark.webp",
+        "sha256": "2fa83c5c98eb4d157667505a6bb10c7412cd39e19106d81eb4e461e290ebb689",
+        "bytes": 15692
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/stillbirth-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/thumbnail.json",
+          "sha256": "776cc35857f8eefbf62d8ec21c51a4c706abacd1b7df0a37ad35d1279ee3c700",
+          "bytes": 1709,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/stillbirth-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/stillbirth-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a92f06b7386039f9308456e025c0cee3adf10442efe680b2043a7dd120579f5a",
+        "fingerprint": "512987ce131b26022b066545232b2225fe20dd26639743a486d0835dc39e9476",
+        "generatedAt": "2026-08-16T22:36:25.149Z"
+      }
+    },
+    {
+      "owner": "web/ranking/stillbirth-rate",
+      "file": "app/ranking/stillbirth-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/stillbirth-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/thumbnail-light.webp",
+        "sha256": "84334ea303d157ed866dba6942240eb44e492a4c2b1d0f0029a6d09b62380c33",
+        "bytes": 14456
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/stillbirth-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/thumbnail.json",
+          "sha256": "776cc35857f8eefbf62d8ec21c51a4c706abacd1b7df0a37ad35d1279ee3c700",
+          "bytes": 1709,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/stillbirth-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/stillbirth-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/stillbirth-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a92f06b7386039f9308456e025c0cee3adf10442efe680b2043a7dd120579f5a",
+        "fingerprint": "512987ce131b26022b066545232b2225fe20dd26639743a486d0835dc39e9476",
+        "generatedAt": "2026-08-16T22:36:25.149Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-schizophrenia-outpatient",
+      "file": "app/ranking/treatment-rate-schizophrenia-outpatient/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-schizophrenia-outpatient/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/ogp/ogp.png",
+        "sha256": "23ef51982998605fbdebfedd35a30440727f864c481c6313b355183e09ea0ea2",
+        "bytes": 81316
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-schizophrenia-outpatient/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/ogp/generation.json",
+          "sha256": "27e75d3c59cab70532b2418d32967122d534aa41c6228140ab73216e7dbe8e07",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "9853660a4e7d9505acf1b640de99657b3fbafa7a89b90ecaf633d3994512ae70",
+        "fingerprint": "9646203a96f3f869dbfe1e71ee5a9275e9b4abd2628f564d664a77c9059232b1",
+        "generatedAt": "2026-08-16T22:21:21.048Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-schizophrenia-outpatient",
+      "file": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-dark.webp",
+        "sha256": "1b2c889916bd43395ff94a05530356387c3e696ffd6e273f54a78252c7ec329e",
+        "bytes": 18850
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail.json",
+          "sha256": "3ef31dfde5e04a84721269954b030bd2db3734e694106ef7512f8f85095e3e3b",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9e18ae8674bedb9634e441994bd980e1999b1c377d211863f08771bf7f7009ee",
+        "fingerprint": "6455bb44646118164f250aed8eb44b2f17ab8808f0f413051f2b932265f55212",
+        "generatedAt": "2026-08-16T22:36:32.290Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-schizophrenia-outpatient",
+      "file": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail-light.webp",
+        "sha256": "dcdc71179d10549bbe334025d6ed0c73b18dcebf8a4711ae8f7026bdf8b6a21b",
+        "bytes": 17546
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/thumbnail.json",
+          "sha256": "3ef31dfde5e04a84721269954b030bd2db3734e694106ef7512f8f85095e3e3b",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-schizophrenia-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9e18ae8674bedb9634e441994bd980e1999b1c377d211863f08771bf7f7009ee",
+        "fingerprint": "6455bb44646118164f250aed8eb44b2f17ab8808f0f413051f2b932265f55212",
+        "generatedAt": "2026-08-16T22:36:32.290Z"
+      }
+    }
+  ]
+}

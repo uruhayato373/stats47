@@ -1,0 +1,2191 @@
+{
+  "items": [
+    {
+      "id": "web/material/1cd2b47751346b707b31fb29",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/tissue-paper-consumption-expenditure-vs-average-weight.jpg",
+      "title": "tissue-paper-consumption-expenditure-vs-average-weight.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "56fb8b67ea6a518996ab5c4096b0fd41c9ba4056eacead3595225f333f9ef7e0"
+    },
+    {
+      "id": "web/material/21575c8a96348d62bc85efe4",
+      "channel": "web",
+      "key": "assets/area-specialty/12000/tokyo-bay-nori.webp",
+      "title": "tokyo-bay-nori.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8ea796eda3e615fc8588e3f89034d8c9fff9572ec2db8efb44440f3bc612893f"
+    },
+    {
+      "id": "web/material/3559dbf6875e242240af43d1",
+      "channel": "web",
+      "key": "apps/web/public/categories/svg/ict.svg",
+      "title": "ict.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "893d9b0cfe1de177b2074dfbe8bd0ed90e57151ed9ee2e3c0d3ccd92b816a2ce"
+    },
+    {
+      "id": "web/material/76475acdee1d1cdd95c86147",
+      "channel": "web",
+      "key": "assets/area-specialty/04000/sendai-hakusai.webp",
+      "title": "sendai-hakusai.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "938dae0440972b2e93e498f8c85ca89e114b514838318cf4ce2f87e6b6b90cd2"
+    },
+    {
+      "id": "web/material/af532eeecd47a0bced70a592",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/okinawa-municipal-finance.jpg",
+      "title": "okinawa-municipal-finance.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "bcf03ec1b87dfb18d6d1c6cf672c36d35854b398f9ff4f1413d5a34d90a82e89"
+    },
+    {
+      "id": "web/material/f8b5a9c10c51cf81a9b0eddd",
+      "channel": "web",
+      "key": "apps/web/public/flag/宮崎県.png",
+      "title": "宮崎県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e83da5e3bd1ef78dc03b51b96f2097463d2291fd980a70b46b77ed72736516e8"
+    },
+    {
+      "id": "web/product/data-p-14",
+      "channel": "web",
+      "key": "data-p-14",
+      "title": "県庁所在市の家計消費データ集をお渡しします",
+      "category": "product",
+      "status": "published",
+      "url": "https://stats47.jp/products/data-p-14",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9987560f45e0cf58c7c5e1db877fc4c9478d21b231401aaf4c7c33baa5aeba68",
+      "catalogBasis": "9987560f45e0cf58c7c5e1db877fc4c9478d21b231401aaf4c7c33baa5aeba68",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/broadband-contract-count-excluding-39-4g",
+      "channel": "web",
+      "key": "broadband-contract-count-excluding-39-4g",
+      "title": "ブロードバンドサービス契約数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/broadband-contract-count-excluding-39-4g",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fba639cfe5e2e1401401b86702ab293931226517194ba16be7d71015a2d1e9bc",
+      "catalogBasis": "fba639cfe5e2e1401401b86702ab293931226517194ba16be7d71015a2d1e9bc",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/drug-enforcement-arrest-count",
+      "channel": "web",
+      "key": "drug-enforcement-arrest-count",
+      "title": "覚醒剤取締検挙件数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/drug-enforcement-arrest-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "73335c5fb57b36e52c206f197ca1d0cbafc46fda5f546789396699f49ef50c7c",
+      "catalogBasis": "73335c5fb57b36e52c206f197ca1d0cbafc46fda5f546789396699f49ef50c7c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/housing-expenditure-ratio-multi-person-households",
+      "channel": "web",
+      "key": "housing-expenditure-ratio-multi-person-households",
+      "title": "住居費割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e83976c3c5a51f02921201355306d099eb420ffa21951ec94c087eab8ac85450",
+      "catalogBasis": "e83976c3c5a51f02921201355306d099eb420ffa21951ec94c087eab8ac85450",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/judo-therapist-count",
+      "channel": "web",
+      "key": "judo-therapist-count",
+      "title": "柔道整復師数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/judo-therapist-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8dd436d011e7b803e011f02480c06767b0b8cb259b142fdc473e7af8184377f2",
+      "catalogBasis": "8dd436d011e7b803e011f02480c06767b0b8cb259b142fdc473e7af8184377f2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/kerosene-consumption-expenditure",
+      "channel": "web",
+      "key": "kerosene-consumption-expenditure",
+      "title": "灯油消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/kerosene-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5598f1d766423e6d76ec25fedffd336ce2e36b533e4e3d5860d4539613940239",
+      "catalogBasis": "5598f1d766423e6d76ec25fedffd336ce2e36b533e4e3d5860d4539613940239",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/miso-consumption-quantity",
+      "channel": "web",
+      "key": "miso-consumption-quantity",
+      "title": "みそ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/miso-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "db154157e64a5124734bf5d8cc28336802487fe69e42b02fd197209c4548fa74",
+      "catalogBasis": "db154157e64a5124734bf5d8cc28336802487fe69e42b02fd197209c4548fa74",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/new-graduate-starting-salary-university-female",
+      "channel": "web",
+      "key": "new-graduate-starting-salary-university-female",
+      "title": "新規学卒者初任給",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/new-graduate-starting-salary-university-female",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0937a90fd33416ce33a0b2b07dadaf99f6d14e4de9ff336f97005e9ed786ad66",
+      "catalogBasis": "0937a90fd33416ce33a0b2b07dadaf99f6d14e4de9ff336f97005e9ed786ad66",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-womens-shirt-consumption-expenditure",
+      "channel": "web",
+      "key": "other-womens-shirt-consumption-expenditure",
+      "title": "他の婦人用シャツ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-womens-shirt-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "535b823d222d2cd7ed4c12c22ff25987ceb4adec9311699b0d31fce3075eef9d",
+      "catalogBasis": "535b823d222d2cd7ed4c12c22ff25987ceb4adec9311699b0d31fce3075eef9d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/road-bridge-diagnosed-count",
+      "channel": "web",
+      "key": "road-bridge-diagnosed-count",
+      "title": "道路橋の診断済総数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/road-bridge-diagnosed-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "68870ce683eedffac7c4d1ffa259f721f689fbf5dd60745b4a1cf88d556f98f8",
+      "catalogBasis": "68870ce683eedffac7c4d1ffa259f721f689fbf5dd60745b4a1cf88d556f98f8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/subcontractor-completed-construction",
+      "channel": "web",
+      "key": "subcontractor-completed-construction",
+      "title": "下請完成工事高",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/subcontractor-completed-construction",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fcd2a041673d3f59b0f200355f455956ec6739c240704feaddfc0ba02f26acc1",
+      "catalogBasis": "fcd2a041673d3f59b0f200355f455956ec6739c240704feaddfc0ba02f26acc1",
+      "indexComplete": true
+    },
+    {
+      "id": "web/silhouette/35",
+      "channel": "web",
+      "key": "35",
+      "title": "山口県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/35000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "256bd27af6659fedea1f4b74d1c83cf42ad1d34a1b69a7ba30e30c1204990689"
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/1cd2b47751346b707b31fb29",
+      "file": "assets/blog/article-backgrounds/tissue-paper-consumption-expenditure-vs-average-weight.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/tissue-paper-consumption-expenditure-vs-average-weight.jpg",
+        "sha256": "f9b05efb924852233786816928535b1a6f915ceca07a3bf70ebc03a8d9577fc7",
+        "bytes": 82139
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/tissue-paper-consumption-expenditure-vs-average-weight.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/21575c8a96348d62bc85efe4",
+      "file": "assets/area-specialty/12000/tokyo-bay-nori.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/12000/tokyo-bay-nori.webp",
+        "sha256": "93cee68c933905dab7c6d48a30a9618563ba314c19525a9814131f5e006ce375",
+        "bytes": 45718
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/12000/tokyo-bay-nori.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/3559dbf6875e242240af43d1",
+      "file": "apps/web/public/categories/svg/ict.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/categories/svg/ict.svg",
+        "url": "https://stats47.jp/categories/svg/ict.svg",
+        "sha256": "31440810aed28bd4e002862af0953d30d80bf22f2089003142b66351dc077bdd",
+        "bytes": 387
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/categories/svg/ict.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/76475acdee1d1cdd95c86147",
+      "file": "assets/area-specialty/04000/sendai-hakusai.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/04000/sendai-hakusai.webp",
+        "sha256": "31e77443c7ddbe23aca9a32a83e1caa46ce3baeb4e1c512ae7e54ccbf7ce3de8",
+        "bytes": 41342
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/04000/sendai-hakusai.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/af532eeecd47a0bced70a592",
+      "file": "assets/blog/article-backgrounds/okinawa-municipal-finance.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/okinawa-municipal-finance.jpg",
+        "sha256": "5babc8e91be64661c41f6f643468079a4290620ce85c7fa939935ee707dfa039",
+        "bytes": 75013
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/okinawa-municipal-finance.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/f8b5a9c10c51cf81a9b0eddd",
+      "file": "apps/web/public/flag/宮崎県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/宮崎県.png",
+        "url": "https://stats47.jp/flag/宮崎県.png",
+        "sha256": "660e7a8df7a3211707daa5af16354c89ccb97539752ce27c99bd4f25c0dd0f22",
+        "bytes": 2687
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/宮崎県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/product/data-p-14",
+      "file": "app/products/data-p-14/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/products/data-p-14/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png",
+        "sha256": "e6cb5a666173fb129472d04e9b9fef6af2eef3c26d1e4149758e6d02362e533d",
+        "bytes": 342251
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/products/data-p-14/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/products/data-p-14/ogp/generation.json",
+          "sha256": "b27fdf0985d752a2a695810323331d975cfa6f325d52a2b68039c59dfb852184",
+          "bytes": 804,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "product-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "product-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "735c7a32837d7fbb94dfedbdc95b775376fb98700779c8aa97585ff454ba6e05",
+        "inputHash": "d8be8f5368b79d5b9ad8c814c320a0063f8eeee2c3f98a275b40ff6a03e1937d",
+        "fingerprint": "82e874a0b6110e9396337a9b781ca19c60c05c9d060652dc861cd0c8a0d48e92",
+        "generatedAt": "2026-09-14T22:25:50.705Z"
+      }
+    },
+    {
+      "owner": "web/ranking/broadband-contract-count-excluding-39-4g",
+      "file": "app/ranking/broadband-contract-count-excluding-39-4g/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadband-contract-count-excluding-39-4g/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/ogp/ogp.png",
+        "sha256": "531d2b8ea940c9447b4bf0664320085c63dc205650c2134328e9986bd895e22c",
+        "bytes": 72679
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadband-contract-count-excluding-39-4g/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/ogp/generation.json",
+          "sha256": "f1b26ee762613902d624cfb2eb4a5655c98f82b114f7cb268680445c14363b1f",
+          "bytes": 993,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "e83ff23f0387588c93f936afa5ee6d3da1dca24a821c7225f518e5beb03979b4",
+        "fingerprint": "9418c896a830d75e1e22bdccd12f08e3db6a860083d2d477edc767ca911347d9",
+        "generatedAt": "2026-10-10T21:32:23.021Z"
+      }
+    },
+    {
+      "owner": "web/ranking/broadband-contract-count-excluding-39-4g",
+      "file": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-dark.webp",
+        "sha256": "3db0d6ef6d418b1aa91e8e4c5e46c55f4fe39723820d05d920b9e84f652441c5",
+        "bytes": 18504
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/thumbnail.json",
+          "sha256": "976a55fefe48e0a9985f44f52575baabbc45ab88881ee773d0b4b08fe68f12d8",
+          "bytes": 1913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "7a34461ebc72537284fed7e738ec049c8d6ab479655b02f153da98a0a7ca4069",
+        "fingerprint": "b87c56053b1bf911d16c22d290d9e1f502d5094217960c91a67e1c0d65fc5dda",
+        "generatedAt": "2026-10-10T21:50:03.116Z"
+      }
+    },
+    {
+      "owner": "web/ranking/broadband-contract-count-excluding-39-4g",
+      "file": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/thumbnail-light.webp",
+        "sha256": "2dc8c8cf43c77405e51d4d4d5932014d3dcea367276ec71f5f1f3af03f988758",
+        "bytes": 17356
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadband-contract-count-excluding-39-4g/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/thumbnail.json",
+          "sha256": "976a55fefe48e0a9985f44f52575baabbc45ab88881ee773d0b4b08fe68f12d8",
+          "bytes": 1913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadband-contract-count-excluding-39-4g/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "7a34461ebc72537284fed7e738ec049c8d6ab479655b02f153da98a0a7ca4069",
+        "fingerprint": "b87c56053b1bf911d16c22d290d9e1f502d5094217960c91a67e1c0d65fc5dda",
+        "generatedAt": "2026-10-10T21:50:03.116Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drug-enforcement-arrest-count",
+      "file": "app/ranking/drug-enforcement-arrest-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drug-enforcement-arrest-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/ogp/ogp.png",
+        "sha256": "c6022b80cb6c6bf81104ecf69aed23ccb32bad793cc49962857697af2de1922f",
+        "bytes": 61322
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drug-enforcement-arrest-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/ogp/generation.json",
+          "sha256": "5ed6225787b47d664ef961271dfa24f947ab3856b63e66ff221b9f0d722039c7",
+          "bytes": 949,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "78be4f5f0756e22917066c571473b97f745b670a87bc67fd5ca23ba61b010558",
+        "fingerprint": "3245762e24629d5d7b5da14c319f56ab4891270c2ab09c0f7aa1566fd9c961e2",
+        "generatedAt": "2026-10-01T18:10:24.502Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drug-enforcement-arrest-count",
+      "file": "app/ranking/drug-enforcement-arrest-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drug-enforcement-arrest-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/thumbnail-dark.webp",
+        "sha256": "1f5363698b742f56762c8f0acc9c327321381d064ea0863a81bebcc6d941f0cc",
+        "bytes": 17334
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drug-enforcement-arrest-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/thumbnail.json",
+          "sha256": "324f544b4ef997a7b5d3ad3651dcb427b5b83897a43c6ade5914b2d6bf7b43eb",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "17b531b55c8be7848866147b135a60125757252e139a0e1ca7dde12e9a40171f",
+        "fingerprint": "a7fc3080e543fa27b707202bbe85bb8b159863bca162bf4463a2f9b9e0ee13e4",
+        "generatedAt": "2026-10-01T18:35:43.615Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drug-enforcement-arrest-count",
+      "file": "app/ranking/drug-enforcement-arrest-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drug-enforcement-arrest-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/thumbnail-light.webp",
+        "sha256": "ed06fd6e4eb7c457cd326b6de77f772c83b138b3c29c83cfea7525660069700e",
+        "bytes": 15972
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drug-enforcement-arrest-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/thumbnail.json",
+          "sha256": "324f544b4ef997a7b5d3ad3651dcb427b5b83897a43c6ade5914b2d6bf7b43eb",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drug-enforcement-arrest-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drug-enforcement-arrest-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "17b531b55c8be7848866147b135a60125757252e139a0e1ca7dde12e9a40171f",
+        "fingerprint": "a7fc3080e543fa27b707202bbe85bb8b159863bca162bf4463a2f9b9e0ee13e4",
+        "generatedAt": "2026-10-01T18:35:43.615Z"
+      }
+    },
+    {
+      "owner": "web/ranking/housing-expenditure-ratio-multi-person-households",
+      "file": "app/ranking/housing-expenditure-ratio-multi-person-households/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/housing-expenditure-ratio-multi-person-households/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/housing-expenditure-ratio-multi-person-households/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/housing-expenditure-ratio-multi-person-households",
+      "file": "app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/housing-expenditure-ratio-multi-person-households",
+      "file": "app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/housing-expenditure-ratio-multi-person-households/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/judo-therapist-count",
+      "file": "app/ranking/judo-therapist-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/judo-therapist-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/judo-therapist-count",
+      "file": "app/ranking/judo-therapist-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/judo-therapist-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/thumbnail-dark.webp",
+        "sha256": "670f1861f8beae3231ec5829b28b92a0faed938c2e06a8e5b082c0d7b269af01",
+        "bytes": 16216
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/judo-therapist-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/thumbnail.json",
+          "sha256": "361a9fb58c8026c91c212514d8ad17ac9247e92c39407c9b121147c1d04bc87c",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/judo-therapist-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/judo-therapist-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f53158747644a9e1a97f3c56d3ba0bf619ddea1af7cbfa2c489b1ab83ea27edc",
+        "fingerprint": "4747b0409efa9f0dbe68f9ebaa6293ce4346eba65753aca3a80fe1a07d1438cf",
+        "generatedAt": "2026-10-03T21:25:18.044Z"
+      }
+    },
+    {
+      "owner": "web/ranking/judo-therapist-count",
+      "file": "app/ranking/judo-therapist-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/judo-therapist-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/thumbnail-light.webp",
+        "sha256": "6abbe672384cc83955225492c2c12ffeb44e1d8e3142884aefa0d93867bdddd3",
+        "bytes": 14698
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/judo-therapist-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/thumbnail.json",
+          "sha256": "361a9fb58c8026c91c212514d8ad17ac9247e92c39407c9b121147c1d04bc87c",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/judo-therapist-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/judo-therapist-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/judo-therapist-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f53158747644a9e1a97f3c56d3ba0bf619ddea1af7cbfa2c489b1ab83ea27edc",
+        "fingerprint": "4747b0409efa9f0dbe68f9ebaa6293ce4346eba65753aca3a80fe1a07d1438cf",
+        "generatedAt": "2026-10-03T21:25:18.044Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-expenditure",
+      "file": "app/ranking/kerosene-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/ogp/ogp.png",
+        "sha256": "1d5db4875ada760a294a56dfeb6443db7777a09ec9fccda7906c481f4d67605c",
+        "bytes": 60235
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kerosene-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/ogp/generation.json",
+          "sha256": "913df33c096be3093c021e61bb4d5809f9b25d3ce773a872ecb0f156952467a5",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kerosene-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kerosene-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "844df0004a0c1dcc07b3b356995b05cd30e151ad459ecb930e5025bddb036278",
+        "fingerprint": "b6b93b3da672809cb50a13a6cf655239692c44271f42adcd2e2e4238be1a9f99",
+        "generatedAt": "2026-10-03T20:59:31.075Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-expenditure",
+      "file": "app/ranking/kerosene-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-expenditure",
+      "file": "app/ranking/kerosene-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-expenditure/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/miso-consumption-quantity",
+      "file": "app/ranking/miso-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/miso-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/ogp/ogp.png",
+        "sha256": "9a2b7d5e60ba56ccac5c3d3beb8eec3198b683266d69e975b4afd0fcf3af6c23",
+        "bytes": 58264
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/miso-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/ogp/generation.json",
+          "sha256": "4ab02d2c454c7af8e3244f456db7aed011a83350a5e5d8ef7d815fdaa16ab728",
+          "bytes": 933,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/miso-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/miso-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1773cf988af1003d5a1a1c52d78cac08a9eff3f3b7bcb6c022ca5ca8a4177c72",
+        "fingerprint": "d43a29aaec841f953dd520ceeff3039d0e040a7546d4872d0c6f9bb54d500cb5",
+        "generatedAt": "2026-10-03T21:00:01.694Z"
+      }
+    },
+    {
+      "owner": "web/ranking/miso-consumption-quantity",
+      "file": "app/ranking/miso-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/miso-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "c482d3cdbb66240656d8f8224f50c5adbad0cdcaf568fa9125360c3d768393df",
+        "bytes": 15312
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/miso-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/thumbnail.json",
+          "sha256": "9c6e88c577f647aab16399a702dcd6ad6b1c1ae1307b6388987f859631f0decc",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/miso-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/miso-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f09278e85ed7bbbc9a2277a9a6a195b719b7c6a0909810499d2fe102a5ec8dad",
+        "fingerprint": "d0b4c4e1b90ad6f1aad89a87d883932fe1dd7a36a43d33a385b89430e76d4bf8",
+        "generatedAt": "2026-10-03T21:25:27.923Z"
+      }
+    },
+    {
+      "owner": "web/ranking/miso-consumption-quantity",
+      "file": "app/ranking/miso-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/miso-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/thumbnail-light.webp",
+        "sha256": "920fa8c0f4c8fef8b1c84569e138c5ac0f11b7d8063bc5490076bb70c38ec933",
+        "bytes": 13818
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/miso-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/thumbnail.json",
+          "sha256": "9c6e88c577f647aab16399a702dcd6ad6b1c1ae1307b6388987f859631f0decc",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/miso-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/miso-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f09278e85ed7bbbc9a2277a9a6a195b719b7c6a0909810499d2fe102a5ec8dad",
+        "fingerprint": "d0b4c4e1b90ad6f1aad89a87d883932fe1dd7a36a43d33a385b89430e76d4bf8",
+        "generatedAt": "2026-10-03T21:25:27.923Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-starting-salary-university-female",
+      "file": "app/ranking/new-graduate-starting-salary-university-female/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-starting-salary-university-female/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/ogp/ogp.png",
+        "sha256": "02ed25a17c734119666c5c73768aac73da055c7f8f32e0112508b001a900142f",
+        "bytes": 61223
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-starting-salary-university-female/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/ogp/generation.json",
+          "sha256": "3ef93af358d04c710a44562ec47bb0eef0e2eebaabe89f4316aecc2ee86b25df",
+          "bytes": 1017,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "c0c32c3357aeb92ea5c30d3b0be388a664d9f6f43f56fbb8f27aab5ca432ff8e",
+        "fingerprint": "750a7b4a1358fedfc4897a1a2b4ef70905fea73d6f3df10e39b348934d00c8b8",
+        "generatedAt": "2026-10-03T21:00:16.017Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-starting-salary-university-female",
+      "file": "app/ranking/new-graduate-starting-salary-university-female/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-starting-salary-university-female/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/thumbnail-dark.webp",
+        "sha256": "c94d96779374d9270776b0cbd4445631aa2a46cb9a93a73bc25ec7520bf017ef",
+        "bytes": 16716
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-starting-salary-university-female/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/thumbnail.json",
+          "sha256": "c27312256231423146123f0a70bfed54db6e52fa1e9e08fb40a03d2ec131b519",
+          "bytes": 1988,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "75b7b36953156af3c5e4c3995dbb0b94211614acb6dee08e8fe096a136c0954b",
+        "fingerprint": "95fb7a218f08a89358cfa03e31925c662d187c40ee1dab053e5a918c9891bbd3",
+        "generatedAt": "2026-10-03T21:25:31.606Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-starting-salary-university-female",
+      "file": "app/ranking/new-graduate-starting-salary-university-female/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-starting-salary-university-female/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/thumbnail-light.webp",
+        "sha256": "c34dc19131d972c566c3321e1a89cc8dd715dd9a1f7d9d58034bafba672ae990",
+        "bytes": 15198
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-starting-salary-university-female/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/thumbnail.json",
+          "sha256": "c27312256231423146123f0a70bfed54db6e52fa1e9e08fb40a03d2ec131b519",
+          "bytes": 1988,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-starting-salary-university-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "75b7b36953156af3c5e4c3995dbb0b94211614acb6dee08e8fe096a136c0954b",
+        "fingerprint": "95fb7a218f08a89358cfa03e31925c662d187c40ee1dab053e5a918c9891bbd3",
+        "generatedAt": "2026-10-03T21:25:31.606Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-womens-shirt-consumption-expenditure",
+      "file": "app/ranking/other-womens-shirt-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-womens-shirt-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/ogp/ogp.png",
+        "sha256": "cc24e160c48c9c3a9daa794219f1258372167269a05c19eb9b0db38cfee2feba",
+        "bytes": 80079
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-womens-shirt-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/ogp/generation.json",
+          "sha256": "39ec804accd7351882c968533920d2bc68f70a50b8e18ede2df12496eae0fb22",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "b251071798f723b463cf6b7af2a3d371c80fe69e65a323500b960140c26c346f",
+        "fingerprint": "e61b12384dbdd67afb96f526ac27a57f2c398e0e98ae3c3503457fbf6424a844",
+        "generatedAt": "2026-08-15T18:42:09.037Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-womens-shirt-consumption-expenditure",
+      "file": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "2e5707c06031e6929b433e04b3b97d57c372ebda71543533c59cc07630c71cd4",
+        "bytes": 18284
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/thumbnail.json",
+          "sha256": "75e7647fc2c14c30f9be225f4091795d4000c4bd437cd4ab456c9e11ecad84a2",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fb32e296aeff6c2205812c4e2981a2669786fde8d83570b532a42176c90503a3",
+        "fingerprint": "9bc01a815ac0da230d4c50b8bb1eae500c7c975395301fdafd81ac89e067d9ed",
+        "generatedAt": "2026-10-08T12:08:23.221Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-womens-shirt-consumption-expenditure",
+      "file": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "2ad348696cfbe82bee1da7aadef0ebbbb72abbe181bbfce3ee9a960ce33df53e",
+        "bytes": 16842
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-womens-shirt-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/thumbnail.json",
+          "sha256": "75e7647fc2c14c30f9be225f4091795d4000c4bd437cd4ab456c9e11ecad84a2",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-womens-shirt-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fb32e296aeff6c2205812c4e2981a2669786fde8d83570b532a42176c90503a3",
+        "fingerprint": "9bc01a815ac0da230d4c50b8bb1eae500c7c975395301fdafd81ac89e067d9ed",
+        "generatedAt": "2026-10-08T12:08:23.221Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-diagnosed-count",
+      "file": "app/ranking/road-bridge-diagnosed-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-diagnosed-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/ogp/ogp.png",
+        "sha256": "130ea664aba042c27b99e4c7b63c1ba31f8197d8fa598be61db11d7f077728ac",
+        "bytes": 67019
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-diagnosed-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/ogp/generation.json",
+          "sha256": "b689de553503d80aef8e74fe34057eb81646a7ee6975c06e0997da5eec79daa0",
+          "bytes": 941,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "01e3cdea2cc2587b569c57f99301d5cf9e9d24f946994b7f1895573fe3ff56b0",
+        "fingerprint": "ef81c54f7e602bb3b15e101a93ea138f4523247aa7a9a939fd1c73b3a8edd61e",
+        "generatedAt": "2026-09-11T14:06:09.728Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-diagnosed-count",
+      "file": "app/ranking/road-bridge-diagnosed-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-diagnosed-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/thumbnail-dark.webp",
+        "sha256": "530374064af3e10ab9ca70c78f34b36cf82d598ad23c4e25d559b49e74d0b2eb",
+        "bytes": 17746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-diagnosed-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/thumbnail.json",
+          "sha256": "88bb2bbc4b79e2f60e609c2ee6c1ea34dcd3686711dc69ebfcba3b82d4d1801a",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "23c302adda9c60d467b14999e712ac52026d9e70d37a1212cf4e4ba574a39b84",
+        "fingerprint": "4379b1dea14bcf3aba59a8dbe9ca812763121aafae06d51edf273d7f50bebc48",
+        "generatedAt": "2026-09-11T14:27:06.060Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-diagnosed-count",
+      "file": "app/ranking/road-bridge-diagnosed-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-diagnosed-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/thumbnail-light.webp",
+        "sha256": "fa0aa9c35ffe8071f1ee4289ee2ae8f5d2f037e16f48b8e9a31003addd8cd94b",
+        "bytes": 16278
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-diagnosed-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/thumbnail.json",
+          "sha256": "88bb2bbc4b79e2f60e609c2ee6c1ea34dcd3686711dc69ebfcba3b82d4d1801a",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-diagnosed-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-diagnosed-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "23c302adda9c60d467b14999e712ac52026d9e70d37a1212cf4e4ba574a39b84",
+        "fingerprint": "4379b1dea14bcf3aba59a8dbe9ca812763121aafae06d51edf273d7f50bebc48",
+        "generatedAt": "2026-09-11T14:27:06.060Z"
+      }
+    },
+    {
+      "owner": "web/ranking/subcontractor-completed-construction",
+      "file": "app/ranking/subcontractor-completed-construction/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/subcontractor-completed-construction/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/ogp/ogp.png",
+        "sha256": "662ed0f489669e6d4f599dd68940ebf37c82bdf99fb59031fd0a5a408f767587",
+        "bytes": 61316
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/subcontractor-completed-construction/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/ogp/generation.json",
+          "sha256": "202adede5d3d1184b4ed276f5628687497072f968775afbd9503d26e05d8a8bb",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/subcontractor-completed-construction/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/subcontractor-completed-construction/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "d9852ae18531916708198c3cb37b4d966d84136985d077e2f03e8ee65f34fe95",
+        "fingerprint": "3c29f3d5d5dc3eafad04f13e7ce3b13e1ce264012a03b26a82244736b316bd1b",
+        "generatedAt": "2026-09-11T14:06:46.997Z"
+      }
+    },
+    {
+      "owner": "web/ranking/subcontractor-completed-construction",
+      "file": "app/ranking/subcontractor-completed-construction/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/subcontractor-completed-construction/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/thumbnail-dark.webp",
+        "sha256": "b8124436aa3d258440396fd74f6ffa1334521baa089ace53cf6760624c3c8fee",
+        "bytes": 17108
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/subcontractor-completed-construction/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/thumbnail.json",
+          "sha256": "fc8d31836ba9c363d232c77f3b1693fb4b5da75d1f94b3758545073f2f2288f3",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/subcontractor-completed-construction/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/subcontractor-completed-construction/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "261905efae9fde7ddf851b7aa10aceb0e69d507604e9b25f159d9592d2397382",
+        "fingerprint": "d3e93667c2d82877aed4c6e1d352b253cbc1617f0f11429ff933d7401353e506",
+        "generatedAt": "2026-09-11T14:27:43.359Z"
+      }
+    },
+    {
+      "owner": "web/ranking/subcontractor-completed-construction",
+      "file": "app/ranking/subcontractor-completed-construction/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/subcontractor-completed-construction/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/thumbnail-light.webp",
+        "sha256": "e32919a8444b4663cf172dfe010824e67e579c532f79a95fe6fed298e15371c4",
+        "bytes": 15870
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/subcontractor-completed-construction/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/thumbnail.json",
+          "sha256": "fc8d31836ba9c363d232c77f3b1693fb4b5da75d1f94b3758545073f2f2288f3",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/subcontractor-completed-construction/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/subcontractor-completed-construction/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/subcontractor-completed-construction/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "261905efae9fde7ddf851b7aa10aceb0e69d507604e9b25f159d9592d2397382",
+        "fingerprint": "d3e93667c2d82877aed4c6e1d352b253cbc1617f0f11429ff933d7401353e506",
+        "generatedAt": "2026-09-11T14:27:43.359Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-11-blue.png",
+        "sha256": "c46fc8538f1ec96a4b2ff48dca2f3c9d8b98c3dc15e67922bf33a324501c555c",
+        "bytes": 226984
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-11-dark.png",
+        "sha256": "4e04577ecdb91df25e64a1179b662219076032dec7ffeac30785378d9a43daca",
+        "bytes": 196394
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-169-blue.png",
+        "sha256": "581de0149460397eb1e58fffb8e375262c2d6a7a345a69da56dc8ebb95626ec3",
+        "bytes": 348741
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-169-dark.png",
+        "sha256": "b2d12ffbb03c06b6c12ac8b00e8127da9eee1e39e56cc9727dbfdcf7ca585972",
+        "bytes": 296448
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-45-blue.png",
+        "sha256": "3570ee9b6d122a2164bca58dffaa36f891accfc8eb29b666fd186489ea1021b7",
+        "bytes": 251540
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-45-dark.png",
+        "sha256": "dc982af6ed214b003b6a04fcee58e5d500c8efffcebcc90bede1f808f26b25eb",
+        "bytes": 219715
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-916-blue.png",
+        "sha256": "0a246f784c4b66bbab41f062151c8fb0c2430425cb72d361738cee52a22305eb",
+        "bytes": 298367
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-916-dark.png",
+        "sha256": "42ea976e64fcd077a2dd0c9fa5abed39ef88164366162f5ca7d68fa36a28c20a",
+        "bytes": 265658
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-ogp-blue.png",
+        "sha256": "30e0a8636232d0878a67566863ac8d1675a655186025b67a93cae5ab352f3c47",
+        "bytes": 178610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/35",
+      "file": "sns/pref-silhouette/35/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/35/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/35/card-ogp-dark.png",
+        "sha256": "f2d4134d1b03fc6c2dca3ca974d4fc804192554ab76ab9df77289532a0241e6b",
+        "bytes": 151695
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/35/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/35/generation.json",
+          "sha256": "35d751e83b17bcef7b75932dceb59ec23995fd6a07b6cc1584ff674b0eae1ab9",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "9127f619b4c609043fea1b67e51f0d3a4752e49489d1c529b5830202024f4cce",
+        "fingerprint": "7d946fd2d486249a5f0872eb230fc85a6b65b643abb94418f8ed66a20d606924",
+        "generatedAt": "2026-10-10T22:10:29.168Z"
+      }
+    }
+  ]
+}

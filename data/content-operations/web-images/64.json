@@ -1,0 +1,1980 @@
+{
+  "items": [
+    {
+      "id": "web/blog/chicken-consumption-prefecture-gap",
+      "channel": "web",
+      "key": "chicken-consumption-prefecture-gap",
+      "title": "鶏肉は島根が茨城の1.9倍｜なぜ西で食べ東で減る?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/chicken-consumption-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "1f3c79a432b2b9f61ca33f2dec9316a2c29c853bb4654b2840f7b54e09f9219c",
+      "catalogBasis": "ab4b6acf7d7a57f7d0c8ef87ffc39ff6c1ae849c7c6d2e58585fecab37dc3eec",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/article.md",
+        "sha256": "61a96b9c4bab1e0a1040021694a5978b19e7cd3d6b287c9a2ff8ae8252965b0c",
+        "bytes": 8053
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/oyster-consumption-prefecture-gap",
+      "channel": "web",
+      "key": "oyster-consumption-prefecture-gap",
+      "title": "牡蠣を一番食べる県は広島、なぜ海なし滋賀が僅差で追う?｜47都道府県2024",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/oyster-consumption-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "3f771bacdd5348ac0a1a270bc101c1dae3ae2f7d8d13d46c77263ab9b61be581",
+      "catalogBasis": "b30cdc309560223264620bfa10cb0e754402d424e987a01b5e80eb843ec913ca",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/article.md",
+        "sha256": "38d2764d3014d4e54ec59babcc178f29a1e8b4edcb9737eae611583cc82a40c4",
+        "bytes": 9792
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/277b2346ca315f9f5f226394",
+      "channel": "web",
+      "key": "assets/area-specialty/01000/haskap.webp",
+      "title": "haskap.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "be78ebaa66b67b20e00951afb43dae3894dae6f2f3ad010ee403e1d73ea25793"
+    },
+    {
+      "id": "web/material/491eec1264c64e4eb5ab934b",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/education-expenses-gap.jpg",
+      "title": "education-expenses-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c5d268109aa6304a63a153512877f28a3eb7343f249d3416f0d0669da744cdfe"
+    },
+    {
+      "id": "web/material/502b171057026ba5a7123dcd",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/black-tea-expenditure-ranking.jpg",
+      "title": "black-tea-expenditure-ranking.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8c137b5014e638d1f68391cb02ea6aeec68adbd24f35304d1bdf568cfe186c84"
+    },
+    {
+      "id": "web/material/ecce970f366cea3342a5543e",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/future-population-disappearing-prefectures.jpg",
+      "title": "future-population-disappearing-prefectures.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "24105a053eb7531d17ae6f5411f68f3e994284277d8de620058743df00e34b22"
+    },
+    {
+      "id": "web/ranking/elementary-school-count",
+      "channel": "web",
+      "key": "elementary-school-count",
+      "title": "小学校数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/elementary-school-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a744c45c49f7396950d8323328c89d51e8b5e1864430299e9fb92659b86a0162",
+      "catalogBasis": "a744c45c49f7396950d8323328c89d51e8b5e1864430299e9fb92659b86a0162",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/fish-canned-consumption-expenditure",
+      "channel": "web",
+      "key": "fish-canned-consumption-expenditure",
+      "title": "魚介の缶詰消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/fish-canned-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "808b51753274ba7bb629e92f7fc69ba1c7963717b8a51172b60d94e6de8ff6a8",
+      "catalogBasis": "808b51753274ba7bb629e92f7fc69ba1c7963717b8a51172b60d94e6de8ff6a8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/salmon-consumption-quantity",
+      "channel": "web",
+      "key": "salmon-consumption-quantity",
+      "title": "さけ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/salmon-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2a39159689bcced207144acab76861e92b0232cab64d9a0ea010dd72564c6315",
+      "catalogBasis": "2a39159689bcced207144acab76861e92b0232cab64d9a0ea010dd72564c6315",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/special-support-school-expenses-prefecture",
+      "channel": "web",
+      "key": "special-support-school-expenses-prefecture",
+      "title": "特別支援学校費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/special-support-school-expenses-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4ad060e95c8b36135f1a75acc02bc00c5f69257232c0b8cd5585f53709f1a42d",
+      "catalogBasis": "4ad060e95c8b36135f1a75acc02bc00c5f69257232c0b8cd5585f53709f1a42d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/widowed-ratio-male-60plus",
+      "channel": "web",
+      "key": "widowed-ratio-male-60plus",
+      "title": "死別者割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/widowed-ratio-male-60plus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "50c254f6140ee51cb1e0152dd4229a39ae56ac9e72723382fd55b1beda1d8be9",
+      "catalogBasis": "50c254f6140ee51cb1e0152dd4229a39ae56ac9e72723382fd55b1beda1d8be9",
+      "indexComplete": true
+    },
+    {
+      "id": "web/silhouette/04",
+      "channel": "web",
+      "key": "04",
+      "title": "宮城県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/04000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0ed9d99b9850968dce49a35d76a3e96db79cd5be7fa88bb4ecb7d0cad4619d10"
+    },
+    {
+      "id": "web/theme/manufacturing",
+      "channel": "web",
+      "key": "manufacturing",
+      "title": "製造業",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/manufacturing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "559472678744f16e6c9164480be97b40283d513dc9be452c218e98e661cc5270",
+      "catalogBasis": "559472678744f16e6c9164480be97b40283d513dc9be452c218e98e661cc5270",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/chicken-consumption-prefecture-gap",
+      "file": "app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.svg",
+        "sha256": "7b3d6944be2fa1d77c1d027849280675e7166bfaa4b0cf3d008e8a4975bd6740",
+        "bytes": 6862
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/article.md",
+          "sha256": "61a96b9c4bab1e0a1040021694a5978b19e7cd3d6b287c9a2ff8ae8252965b0c",
+          "bytes": 8053,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chicken-consumption-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.json",
+          "sha256": "3774bca50802d4bcb1b23f01fae7676f7394cddbd891f2d11a5ac30fb54322e4",
+          "bytes": 6733,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chicken-consumption-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.source.json",
+          "sha256": "dc833e97e646dd2a616103c51318487341f6a14c96053c0b127eb2f2af8528e7",
+          "bytes": 631,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/data/chicken-consumption-ranking.svg",
+          "alt": "鶏肉消費量 上位5・下位5 (2024年・総務省家計調査)",
+          "heading": "鶏肉消費量が多い県・少ない県 (2024年)",
+          "line": 32
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/chicken-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/chicken-consumption-quantity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/chicken-consumption-prefecture-gap",
+      "file": "app/blog/chicken-consumption-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/background.jpg",
+        "sha256": "04c1561a6da390fa7973d4d124aa4881d29ec0c21b841eb64d436f24d9fa0d73",
+        "bytes": 44749
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "c45cda77cd18087fac873a571ff87db062bccf7ba10d5dfac4290c1f47fd4845",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c3c7894f293efbd88ffdf6f2f8aa179e26b561328c394cd553dec503a946cba2",
+        "fingerprint": "79de866944dba27fd4d13f7d25cecf02b8b791103b775ef6ebe2c4d267f32a24",
+        "generatedAt": "2026-08-22T05:17:20.910Z"
+      }
+    },
+    {
+      "owner": "web/blog/chicken-consumption-prefecture-gap",
+      "file": "app/blog/chicken-consumption-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/ogp.png",
+        "sha256": "09ea603f7a383f320f01a593aa2060e76c71ab71143a63bc5429e7c9fa864912",
+        "bytes": 367524
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "c45cda77cd18087fac873a571ff87db062bccf7ba10d5dfac4290c1f47fd4845",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c3c7894f293efbd88ffdf6f2f8aa179e26b561328c394cd553dec503a946cba2",
+        "fingerprint": "79de866944dba27fd4d13f7d25cecf02b8b791103b775ef6ebe2c4d267f32a24",
+        "generatedAt": "2026-08-22T05:17:20.910Z"
+      }
+    },
+    {
+      "owner": "web/blog/chicken-consumption-prefecture-gap",
+      "file": "app/blog/chicken-consumption-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "08b860780ccb296dec54a91edfe012da8b1d0876cf2f3d85ecf51c8a9cae44e9",
+        "bytes": 7208
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "c45cda77cd18087fac873a571ff87db062bccf7ba10d5dfac4290c1f47fd4845",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c3c7894f293efbd88ffdf6f2f8aa179e26b561328c394cd553dec503a946cba2",
+        "fingerprint": "79de866944dba27fd4d13f7d25cecf02b8b791103b775ef6ebe2c4d267f32a24",
+        "generatedAt": "2026-08-22T05:17:20.910Z"
+      }
+    },
+    {
+      "owner": "web/blog/chicken-consumption-prefecture-gap",
+      "file": "app/blog/chicken-consumption-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/chicken-consumption-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/thumbnail-light.webp",
+        "sha256": "02a3aee2e024e129a17a13ff50cbd76cac92e6ca85f23fc23a4264a57317ba37",
+        "bytes": 12910
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/chicken-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "c45cda77cd18087fac873a571ff87db062bccf7ba10d5dfac4290c1f47fd4845",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c3c7894f293efbd88ffdf6f2f8aa179e26b561328c394cd553dec503a946cba2",
+        "fingerprint": "79de866944dba27fd4d13f7d25cecf02b8b791103b775ef6ebe2c4d267f32a24",
+        "generatedAt": "2026-08-22T05:17:20.910Z"
+      }
+    },
+    {
+      "owner": "web/blog/oyster-consumption-prefecture-gap",
+      "file": "app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "0dbe9ad63a4452b4654c21d501b1fb015bf862ca44d1084059d34d5f2a6df7c1",
+        "bytes": 6851
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/article.md",
+          "sha256": "38d2764d3014d4e54ec59babcc178f29a1e8b4edcb9737eae611583cc82a40c4",
+          "bytes": 9792,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "oyster-consumption-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.json",
+          "sha256": "101bda76681995752922f958e6be1c6cb6ffb76ba9530749bc0c491aaf5ff223",
+          "bytes": 6645,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "oyster-consumption-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "8a8c57b579f55af56e701838218a77eaadce25daa641a3012ad7e6e32f831a97",
+          "bytes": 658,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/data/oyster-consumption-prefecture-gap-prefecture-rankings.svg",
+          "alt": "かき(貝)消費量 上位5県と下位5県(2024年・家計調査、単位g)",
+          "heading": "かき消費量の上位5県と下位5県（2024年）",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/oyster-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/oyster-consumption-quantity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/oyster-consumption-prefecture-gap",
+      "file": "app/blog/oyster-consumption-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/background.jpg",
+        "sha256": "bb72a055c1533a6097c44b4464094896747587bf3f57fd4342e0c83bb152663e",
+        "bytes": 87333
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "f4d53851f2a0440163dd01e19b10adbc60a59dbd1cc289a9691fffd3af19bcfa",
+          "bytes": 2302,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6edc86e198ce5d21518fe391e356d7fe1d8ebcbbc722b948df3394c422f5b5f9",
+        "fingerprint": "2db96dd50927dcf68ece3a5819eaad64760b655b4122bc5d02e608b61192d3f0",
+        "generatedAt": "2026-08-22T05:17:33.361Z"
+      }
+    },
+    {
+      "owner": "web/blog/oyster-consumption-prefecture-gap",
+      "file": "app/blog/oyster-consumption-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/ogp.png",
+        "sha256": "93fd62d9123ecfcb653ede2ba5828f6b2695f54fd0142c362e45ba6601ae8c60",
+        "bytes": 518642
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "f4d53851f2a0440163dd01e19b10adbc60a59dbd1cc289a9691fffd3af19bcfa",
+          "bytes": 2302,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6edc86e198ce5d21518fe391e356d7fe1d8ebcbbc722b948df3394c422f5b5f9",
+        "fingerprint": "2db96dd50927dcf68ece3a5819eaad64760b655b4122bc5d02e608b61192d3f0",
+        "generatedAt": "2026-08-22T05:17:33.361Z"
+      }
+    },
+    {
+      "owner": "web/blog/oyster-consumption-prefecture-gap",
+      "file": "app/blog/oyster-consumption-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "edbf1a93593e1eec1e4d9ba8acb45f2cf561e59613e91f6b7f74f43e0d08d6ac",
+        "bytes": 14614
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "f4d53851f2a0440163dd01e19b10adbc60a59dbd1cc289a9691fffd3af19bcfa",
+          "bytes": 2302,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6edc86e198ce5d21518fe391e356d7fe1d8ebcbbc722b948df3394c422f5b5f9",
+        "fingerprint": "2db96dd50927dcf68ece3a5819eaad64760b655b4122bc5d02e608b61192d3f0",
+        "generatedAt": "2026-08-22T05:17:33.361Z"
+      }
+    },
+    {
+      "owner": "web/blog/oyster-consumption-prefecture-gap",
+      "file": "app/blog/oyster-consumption-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/oyster-consumption-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/thumbnail-light.webp",
+        "sha256": "9ddb33be60784df55b3ab9840eaaaba6c0eab33a0f25228c8996f548098471a7",
+        "bytes": 27812
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/oyster-consumption-prefecture-gap/ogp/generation.json",
+          "sha256": "f4d53851f2a0440163dd01e19b10adbc60a59dbd1cc289a9691fffd3af19bcfa",
+          "bytes": 2302,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6edc86e198ce5d21518fe391e356d7fe1d8ebcbbc722b948df3394c422f5b5f9",
+        "fingerprint": "2db96dd50927dcf68ece3a5819eaad64760b655b4122bc5d02e608b61192d3f0",
+        "generatedAt": "2026-08-22T05:17:33.361Z"
+      }
+    },
+    {
+      "owner": "web/material/277b2346ca315f9f5f226394",
+      "file": "assets/area-specialty/01000/haskap.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/01000/haskap.webp",
+        "sha256": "a17a598d53b187782b73f5cf2da76a96fd0dadfa73fb614a2f234792e2bdc850",
+        "bytes": 40444
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/01000/haskap.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/491eec1264c64e4eb5ab934b",
+      "file": "assets/blog/article-backgrounds/education-expenses-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/education-expenses-gap.jpg",
+        "sha256": "71beb76a00f87f73c5e182d9dd78d086cfa03282dc5bdbe228db9b7b7997df67",
+        "bytes": 81657
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/education-expenses-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/502b171057026ba5a7123dcd",
+      "file": "assets/blog/article-backgrounds/black-tea-expenditure-ranking.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/black-tea-expenditure-ranking.jpg",
+        "sha256": "1f657536f0a4ed1deedce22996eefb91c8fdc849856fe8db40ff841e57c0967e",
+        "bytes": 89639
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/black-tea-expenditure-ranking.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/ecce970f366cea3342a5543e",
+      "file": "assets/blog/article-backgrounds/future-population-disappearing-prefectures.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/future-population-disappearing-prefectures.jpg",
+        "sha256": "708d3c08ef12c236a5e52689a2f916ab2bd754ae095cf2d653f0ae0823f4dedb",
+        "bytes": 91472
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/future-population-disappearing-prefectures.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/elementary-school-count",
+      "file": "app/ranking/elementary-school-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/ogp/ogp.png",
+        "sha256": "7ca41bc205a4f2053e28bc11c2fab4f9aba8487a6fec88510f34b28728e1cffc",
+        "bytes": 58910
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/ogp/generation.json",
+          "sha256": "1fcd5a9854e739bd6dd84a120df7b4dee22192b1cefaf8645361c8229960cfa2",
+          "bytes": 925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "3ebbc994e327306a6e8f0b6611cd6d1dc72e588cc6449195e2572a3c6618d5bf",
+        "fingerprint": "da84c9c9fd81c0303078c5cd72f7fd20bc5e1e825b3395a5304e02e767ff3a05",
+        "generatedAt": "2026-10-01T18:10:30.716Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-count",
+      "file": "app/ranking/elementary-school-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/thumbnail-dark.webp",
+        "sha256": "51043df88500e5b1184869ac8c91728324566e4c58dc50156ce45e0fc0d94056",
+        "bytes": 15068
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/thumbnail.json",
+          "sha256": "ade8f3ca71c15e38cfd7007bc2b0e4f83d471c2c1e7d6acfdca0a737a0f500d9",
+          "bytes": 1781,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "41555df0e8d8ba84e33038694c34d6a48e131b8d3c6caa5438e1c5ad8bae0f78",
+        "fingerprint": "1012f88e0838e334bf9a7d47dabc28daccc16dff98d1fd974852cab6f1db1313",
+        "generatedAt": "2026-10-01T18:35:45.155Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-count",
+      "file": "app/ranking/elementary-school-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/thumbnail-light.webp",
+        "sha256": "ba854dd231b890f334a20dde5cfbd9ca6b046e5c91135d7588b0b64537ffd7fc",
+        "bytes": 13750
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/thumbnail.json",
+          "sha256": "ade8f3ca71c15e38cfd7007bc2b0e4f83d471c2c1e7d6acfdca0a737a0f500d9",
+          "bytes": 1781,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "41555df0e8d8ba84e33038694c34d6a48e131b8d3c6caa5438e1c5ad8bae0f78",
+        "fingerprint": "1012f88e0838e334bf9a7d47dabc28daccc16dff98d1fd974852cab6f1db1313",
+        "generatedAt": "2026-10-01T18:35:45.155Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fish-canned-consumption-expenditure",
+      "file": "app/ranking/fish-canned-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fish-canned-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/ogp/ogp.png",
+        "sha256": "f34e6fca31960489e20013a90d7fe369db4fcfa81a971de12f10c064b4dd0f77",
+        "bytes": 61294
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fish-canned-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/ogp/generation.json",
+          "sha256": "9bd072f43310415fa44a390afb56de9c706f578f332f844a6af216f5e4187d90",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "82901fa7cad6f05bb44391aacfdc3568bc7d4fd80d9a0e3e73ecb2b56d85aa77",
+        "fingerprint": "24cd48da2de4d2d5078b7f79c5c844cca057536882aaa1ab79eff742a63ebda8",
+        "generatedAt": "2026-10-01T18:10:46.736Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fish-canned-consumption-expenditure",
+      "file": "app/ranking/fish-canned-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fish-canned-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "8bf3361323c3e8bdfc704dc72f05af61b09f41e4b6d209bd15d3de70cd7148af",
+        "bytes": 17318
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fish-canned-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/thumbnail.json",
+          "sha256": "1352d9216bedcd3d127776203ae07eafab6f5601bb9d2841a42c1887b1b3dce7",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3ac60dd92fd34afcf305ba3bdac2ad07905102b43fc427a86e4129b71e20dc6d",
+        "fingerprint": "7f6766ccb96e318754912ff3015e027cfbc88a41853fa39e2c856153de8ec273",
+        "generatedAt": "2026-10-01T18:35:49.492Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fish-canned-consumption-expenditure",
+      "file": "app/ranking/fish-canned-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fish-canned-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "f5223ccf6338a008d8eba8a58955be414205058f60f844d9c89c146c83c5d7fb",
+        "bytes": 15746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fish-canned-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/thumbnail.json",
+          "sha256": "1352d9216bedcd3d127776203ae07eafab6f5601bb9d2841a42c1887b1b3dce7",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fish-canned-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-canned-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3ac60dd92fd34afcf305ba3bdac2ad07905102b43fc427a86e4129b71e20dc6d",
+        "fingerprint": "7f6766ccb96e318754912ff3015e027cfbc88a41853fa39e2c856153de8ec273",
+        "generatedAt": "2026-10-01T18:35:49.492Z"
+      }
+    },
+    {
+      "owner": "web/ranking/salmon-consumption-quantity",
+      "file": "app/ranking/salmon-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/salmon-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/ogp/ogp.png",
+        "sha256": "cd4a961a1c6f1266fdf43d459633c0ec80372193dc7171de678d73f1c33d63eb",
+        "bytes": 73755
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/salmon-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/ogp/generation.json",
+          "sha256": "3f42d1538803ae3cf4abfd57a8a95b4ba1c753b467904ca29bced0d9bd06e097",
+          "bytes": 941,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/salmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/salmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c356042cfc88cd7a5bfc0116ac9b797f1ebb851ff6e4aad07c3dbac3fcb33c54",
+        "fingerprint": "62de2b1466c7e1716be1544f7579c308b24b21166e275a1d80d7542a5303344e",
+        "generatedAt": "2026-08-15T18:42:42.790Z"
+      }
+    },
+    {
+      "owner": "web/ranking/salmon-consumption-quantity",
+      "file": "app/ranking/salmon-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/salmon-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "3bca1ae434136f9a686a42285272103c0ab38dcea12bfc81d817dd2417e66e44",
+        "bytes": 15924
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/salmon-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/thumbnail.json",
+          "sha256": "c5b650ebb0d357cc46fc28ba08a5258e84418407fdae44e57189861d3ef9bfe1",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/salmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/salmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "31b02958091946fc8cc024469fe4a73a44a555d8e4d3b9511fd17dede7155ca7",
+        "fingerprint": "1fbec42887054c06916ccfdd7aa17b61ae9c543c6a411834cf668e36fe0a2b83",
+        "generatedAt": "2026-08-15T18:58:48.144Z"
+      }
+    },
+    {
+      "owner": "web/ranking/salmon-consumption-quantity",
+      "file": "app/ranking/salmon-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/salmon-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/thumbnail-light.webp",
+        "sha256": "f66bab1624600c75184bdecbf16eeb3653fe511e0379637e3612d638db92b049",
+        "bytes": 14484
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/salmon-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/thumbnail.json",
+          "sha256": "c5b650ebb0d357cc46fc28ba08a5258e84418407fdae44e57189861d3ef9bfe1",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/salmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/salmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/salmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "31b02958091946fc8cc024469fe4a73a44a555d8e4d3b9511fd17dede7155ca7",
+        "fingerprint": "1fbec42887054c06916ccfdd7aa17b61ae9c543c6a411834cf668e36fe0a2b83",
+        "generatedAt": "2026-08-15T18:58:48.144Z"
+      }
+    },
+    {
+      "owner": "web/ranking/special-support-school-expenses-prefecture",
+      "file": "app/ranking/special-support-school-expenses-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/special-support-school-expenses-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/ogp/ogp.png",
+        "sha256": "9a82846b90e3800bd87e3601ffa472d81601c04dafab0b1d0fb575fcd9a43ebd",
+        "bytes": 76139
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/special-support-school-expenses-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/ogp/generation.json",
+          "sha256": "e29424db2931d2cad26c79d5a32fc85bccbe1d0b539ef5b3efc6820b32611473",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "6436be38ac0c7bb5cf03607b66fdf17af533def2792fd2b6a5f95c53ff5c5324",
+        "fingerprint": "9d1255636a3ee225720907081385ee26886621170f7293185f1996eb91c6f063",
+        "generatedAt": "2026-08-16T22:20:59.065Z"
+      }
+    },
+    {
+      "owner": "web/ranking/special-support-school-expenses-prefecture",
+      "file": "app/ranking/special-support-school-expenses-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/special-support-school-expenses-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/thumbnail-dark.webp",
+        "sha256": "7ce0a09cbb9cd966728abdd39ed429a4b5ffc44e1bbcf9e59754294316d5ddf2",
+        "bytes": 17728
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/special-support-school-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/thumbnail.json",
+          "sha256": "92da4e61c2036e665831f2f94b9231c95eba090c981ebe369fbe2e96bbea4054",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "437995ee78e0179aa8f2bfcee7568d95f8d8926d498f59657f1afe5a08362131",
+        "fingerprint": "1c05d2403eb9886e847cd97e8ec75d393d4f31d8f2cfbe9485fec5a07c669f82",
+        "generatedAt": "2026-08-16T22:36:22.764Z"
+      }
+    },
+    {
+      "owner": "web/ranking/special-support-school-expenses-prefecture",
+      "file": "app/ranking/special-support-school-expenses-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/special-support-school-expenses-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/thumbnail-light.webp",
+        "sha256": "6efef8bcc7fa6583407b091f636fc8a01054a5724e5f2193836e076dcdab24e6",
+        "bytes": 16556
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/special-support-school-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/thumbnail.json",
+          "sha256": "92da4e61c2036e665831f2f94b9231c95eba090c981ebe369fbe2e96bbea4054",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/special-support-school-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/special-support-school-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "437995ee78e0179aa8f2bfcee7568d95f8d8926d498f59657f1afe5a08362131",
+        "fingerprint": "1c05d2403eb9886e847cd97e8ec75d393d4f31d8f2cfbe9485fec5a07c669f82",
+        "generatedAt": "2026-08-16T22:36:22.764Z"
+      }
+    },
+    {
+      "owner": "web/ranking/widowed-ratio-male-60plus",
+      "file": "app/ranking/widowed-ratio-male-60plus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/widowed-ratio-male-60plus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/ogp/ogp.png",
+        "sha256": "b9d6d20cf94f7305cfc58d770eeaab561832ff9789ea21f305bb3401517279fa",
+        "bytes": 73209
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/widowed-ratio-male-60plus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/ogp/generation.json",
+          "sha256": "4000f755d3cbbd8cf65ae44e6acd942388956d154187e8dcfa5e25364e047fd0",
+          "bytes": 933,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "68c21d8ad2283766d61cf19846c19ae04accf193bc5a145dcff06ad31adfce2d",
+        "fingerprint": "f4173298a7ac2f43976e4e6c67e4b03be26a07512715597e1f4475d15f1b4b83",
+        "generatedAt": "2026-08-16T22:21:31.902Z"
+      }
+    },
+    {
+      "owner": "web/ranking/widowed-ratio-male-60plus",
+      "file": "app/ranking/widowed-ratio-male-60plus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/widowed-ratio-male-60plus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/thumbnail-dark.webp",
+        "sha256": "5103fe90cb2a79227d4c4bbb4e842c6fac1b8c9963e7cc01e489a5412d3ba48c",
+        "bytes": 14696
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/widowed-ratio-male-60plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/thumbnail.json",
+          "sha256": "b43b59570953317d0b058a6e78fffbc29fac457538a9f397000731136d83ea0e",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f06fd12670a7a230353446ecb525d5adcb044c1badab6fcf593b923d6777c25d",
+        "fingerprint": "030f59ac0ff23e8697728cea21f59597e65f82e5cfcb95d85e9e3bfe7fc46ce3",
+        "generatedAt": "2026-08-16T22:36:36.981Z"
+      }
+    },
+    {
+      "owner": "web/ranking/widowed-ratio-male-60plus",
+      "file": "app/ranking/widowed-ratio-male-60plus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/widowed-ratio-male-60plus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/thumbnail-light.webp",
+        "sha256": "83d93af48c29fc668db98e4737ec10577730ef893f5ad4db49f076510e9f0f8d",
+        "bytes": 12792
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/widowed-ratio-male-60plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/thumbnail.json",
+          "sha256": "b43b59570953317d0b058a6e78fffbc29fac457538a9f397000731136d83ea0e",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/widowed-ratio-male-60plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/widowed-ratio-male-60plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f06fd12670a7a230353446ecb525d5adcb044c1badab6fcf593b923d6777c25d",
+        "fingerprint": "030f59ac0ff23e8697728cea21f59597e65f82e5cfcb95d85e9e3bfe7fc46ce3",
+        "generatedAt": "2026-08-16T22:36:36.981Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-11-blue.png",
+        "sha256": "ab9a780c8865a2326739f381c3f2c3ac4201d8dfad6bb7bb122061c3f73abbd1",
+        "bytes": 192619
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-11-dark.png",
+        "sha256": "fb8e906595961764396ea503da6277c3989e39800ca2a3fe2aa099a88b199f5e",
+        "bytes": 176855
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-169-blue.png",
+        "sha256": "6f07c69e17d5cc799093c29bf6662bb8056d5e03e7e856f397c1c2dc2db8c641",
+        "bytes": 245536
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-169-dark.png",
+        "sha256": "6c7411a0479b9b508ecbe3f4c398e91ca1c116494a3a2af4b789379c3188ce33",
+        "bytes": 226184
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-45-blue.png",
+        "sha256": "8d0aa17f92d7ece52774e24c451204109972f9cb447b59df6148eedc5b6ea1af",
+        "bytes": 217294
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-45-dark.png",
+        "sha256": "377fdb7929050210248bc9151f1b54123840d1c532dfb1c47243586038700932",
+        "bytes": 200094
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-916-blue.png",
+        "sha256": "ceae1879930ac3d7e0b5f76bb87c67ea973944b78e6a7aaa4ba6545becd75ad3",
+        "bytes": 254457
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-916-dark.png",
+        "sha256": "a605fafb3a380a09f1ab70b30595ccd1e52c9f9554eae6328f81407c99ada0de",
+        "bytes": 238570
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-ogp-blue.png",
+        "sha256": "736fae66e5cdb1bddeece7849894bbbd6dc5bfe99ad4188d12bc2ac28d0422cb",
+        "bytes": 129552
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/04",
+      "file": "sns/pref-silhouette/04/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/04/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/04/card-ogp-dark.png",
+        "sha256": "88df6ca4c7c0f06563c4ae67c4be3d396ae9861d567075d6d8a6f87dc577d53b",
+        "bytes": 119209
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/04/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/04/generation.json",
+          "sha256": "01af1987fe105a0ae8397eb3941123e21852434e09b0a2e4af3da2bf7919ea5d",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "217a4b37dd34febba979b84df146b6ad08285c6273c84cb6a79501d9ffdae5f7",
+        "fingerprint": "b8a42a824cb60e8023d966fbb857cfa384e1c1f8ed57cb3b6d248172a41adcf0",
+        "generatedAt": "2026-10-10T22:08:06.702Z"
+      }
+    },
+    {
+      "owner": "web/theme/manufacturing",
+      "file": "https://stats47.jp/themes/manufacturing/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/manufacturing/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

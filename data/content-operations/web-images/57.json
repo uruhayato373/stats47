@@ -1,0 +1,2941 @@
+{
+  "items": [
+    {
+      "id": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "channel": "web",
+      "key": "annual-sunshine-duration-prefecture-gap",
+      "title": "日照時間1位はなぜ高知?日本海側との差",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/annual-sunshine-duration-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "d21270fe9574e463d0fb2d8ec379280aa1f4dced927151eb44fbd7c22d5de5cb",
+      "catalogBasis": "d4311c2c06e1bb277bf7dc09b36a415a2bb3c77466e22be86234bdf6cf5b8643",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+        "sha256": "821b20d17333617f05c6a22bd97de3ed802ca10930f65959b48dbe330f4ca40e",
+        "bytes": 7905
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/dental-hygienist-income-prefecture-gap",
+      "channel": "web",
+      "key": "dental-hygienist-income-prefecture-gap",
+      "title": "歯科衛生士の年収は県で2.5倍違う｜なぜ岐阜が突出?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/dental-hygienist-income-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "798d74bdf86f51c0321c2502ba1f0c09e563177993525c6cc09b6dc555e34020",
+      "catalogBasis": "1d6b03fc86c3b2a638d3653a883bae124db87ab4c856567e7a585c58c78f55cf",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/article.md",
+        "sha256": "39f05c34ff8d7211a2fe40df2226237c08ffbef1d9051fb394e7cf6aa0e45d09",
+        "bytes": 10652
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "channel": "web",
+      "key": "toilet-paper-consumption-expenditure-prefecture-gap",
+      "title": "トイレットペーパー、青森と沖縄が突出",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "ae50150eee19264747ae346a80030fcd1d6be4d6a213d3cface3c9b9f82bc2d4",
+      "catalogBasis": "ba7ab9fcf78799c87298517f2cab3d34b164cfc2e889680d8ad7b153031e60e6",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+        "sha256": "5a09b42691ed871851d22eeac0fa6e4fba0be96fc30546f0e08f187e2fb03271",
+        "bytes": 8291
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/university-advancement-capacity",
+      "channel": "web",
+      "key": "university-advancement-capacity",
+      "title": "大学が「ある県」と「ない県」の差",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/university-advancement-capacity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "2dff2c0b7a309d8c2dd30547fc115318e4517c475904ebfd2f005caf524d7d9d",
+      "catalogBasis": "7f5e80ee3bdfd5f13b78fa38445067502ce6e2b3fb4467c0b53cb0a75a2b9b05",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/article.md",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/article.md",
+        "sha256": "b92ba0c546a837b2e4c6b1e0d9b9ce34e9371902059fe9b91c50b04141b8a3e3",
+        "bytes": 9513
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/061e2f55d71335c0c02182c7",
+      "channel": "web",
+      "key": "assets/area-specialty/29000/yamato-mana.webp",
+      "title": "yamato-mana.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "dd983799771525c2283a31d3b0b10ae6807426d8243f07bc0c2f713af58fc046"
+    },
+    {
+      "id": "web/material/4a8a19ac2c85ba38b7cb261c",
+      "channel": "web",
+      "key": "assets/area-specialty/14000/soshun-cabbage.webp",
+      "title": "soshun-cabbage.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f3808a1942f8d91fb21dac8e1b02209b1e4d1bc432d2e76b2e7c239c76b62e7b"
+    },
+    {
+      "id": "web/material/581867c4d55267fa720da058",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/osaka-migration-flow.jpg",
+      "title": "osaka-migration-flow.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ec62ac9e8da960d72aaf21438fd75fb497bafbf838efd0d37599edaa64799a31"
+    },
+    {
+      "id": "web/material/96b4ec711e57e701b4c40c6f",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/dual-income-reversal.jpg",
+      "title": "dual-income-reversal.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "30b5234b044fffaf193c09ab7633b13f224c12474829414d69fedf5074155cd3"
+    },
+    {
+      "id": "web/material/a0a27be57350046cac22a1dc",
+      "channel": "web",
+      "key": "apps/web/public/images/brand-pe-comprehensive-wide.png",
+      "title": "brand-pe-comprehensive-wide.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d35faa22696223aa62df615743788a2fea273a68785ac407a6f5b5266a5525e5"
+    },
+    {
+      "id": "web/material/a31f72ade61cb4e403461de7",
+      "channel": "web",
+      "key": "apps/web/public/flag/愛媛県.png",
+      "title": "愛媛県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "569e5583d011433fdd278296bb3973efbb72d2ab7d5e6d80a6c891ed5e95a4ef"
+    },
+    {
+      "id": "web/material/fe963aaa37c3b2d70ccb2ac5",
+      "channel": "web",
+      "key": "assets/page-heroes/category-population-hero.jpg",
+      "title": "category-population-hero.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d6242e6c3e6efee5c7d0b0cbc599a560a32189dc201730b3474df16c7b0ac10c"
+    },
+    {
+      "id": "web/ranking/beer-consumption-expenditure",
+      "channel": "web",
+      "key": "beer-consumption-expenditure",
+      "title": "ビール消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/beer-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4dd2fed1db9da21f14778f8fd0c7e6412689068badd6a1c06f88a09a867d55db",
+      "catalogBasis": "4dd2fed1db9da21f14778f8fd0c7e6412689068badd6a1c06f88a09a867d55db",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/dental-technician-rate",
+      "channel": "web",
+      "key": "dental-technician-rate",
+      "title": "歯科技工士率（人口10万対）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/dental-technician-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "dc0d51dc3a3266c618bbe0df33128e39bec125d74b16ab27dc50738740ef0cd2",
+      "catalogBasis": "dc0d51dc3a3266c618bbe0df33128e39bec125d74b16ab27dc50738740ef0cd2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/elementary-school-count-per-100k-6-11",
+      "channel": "web",
+      "key": "elementary-school-count-per-100k-6-11",
+      "title": "小学校数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/elementary-school-count-per-100k-6-11",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "381b4f8b8f1464a2c040e21a24e5ad98bc49c27b7875aa36116d1b0f8b3306d1",
+      "catalogBasis": "381b4f8b8f1464a2c040e21a24e5ad98bc49c27b7875aa36116d1b0f8b3306d1",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-processed-meat-consumption-expenditure",
+      "channel": "web",
+      "key": "other-processed-meat-consumption-expenditure",
+      "title": "他の加工肉消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-processed-meat-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "295097da60d789b96b1a27e70e2162bdeeb20a3d6394a8ebfcee7e2b7eb67ed7",
+      "catalogBasis": "295097da60d789b96b1a27e70e2162bdeeb20a3d6394a8ebfcee7e2b7eb67ed7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/outpatient-rate-per-1000",
+      "channel": "web",
+      "key": "outpatient-rate-per-1000",
+      "title": "通院者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/outpatient-rate-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "73bc402f0d73eeb999085dee786d97fc167a126dfd7740327747a603e7cc9b59",
+      "catalogBasis": "73bc402f0d73eeb999085dee786d97fc167a126dfd7740327747a603e7cc9b59",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/resident-foreigner-population",
+      "channel": "web",
+      "key": "resident-foreigner-population",
+      "title": "在留外国人数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/resident-foreigner-population",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cb7d4a0e10cb7573f9cfd855d8ff93c58e952bc7431a22debcdac5d716491f4d",
+      "catalogBasis": "cb7d4a0e10cb7573f9cfd855d8ff93c58e952bc7431a22debcdac5d716491f4d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sports-participation-rate-table-tennis",
+      "channel": "web",
+      "key": "sports-participation-rate-table-tennis",
+      "title": "卓球の行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sports-participation-rate-table-tennis",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "44cb0f4cf7aed85942dd9bfee95fcea45173f9f87c3d193b2c91c291df379fc5",
+      "catalogBasis": "44cb0f4cf7aed85942dd9bfee95fcea45173f9f87c3d193b2c91c291df379fc5",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.svg",
+        "sha256": "6037a62fd7993361d67cf818ec70c946c221f0c53601c65005939ab8c9395d9c",
+        "bytes": 32076
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+          "sha256": "821b20d17333617f05c6a22bd97de3ed802ca10930f65959b48dbe330f4ca40e",
+          "bytes": 7905,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "annual-sunshine-duration-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.json",
+          "sha256": "56c27aa8c58a1d6be55c92ba34da0b63e62c6f7fbd133d5992b8990f46375478",
+          "bytes": 4657,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "annual-sunshine-duration-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.source.json",
+          "sha256": "5fed5e1ebf05595f2a77b1bf2c9194ccc3b0225e39555e812420d243a901f01c",
+          "bytes": 601,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-map.svg",
+          "alt": "年間日照時間の地理分布",
+          "heading": "地理から見る日照時間の分布",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-sunshine-duration/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "ea5580ce3743bb5007e9970333a8463628b8c848f4b0aeae14323ae098590349",
+        "bytes": 6942
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/article.md",
+          "sha256": "821b20d17333617f05c6a22bd97de3ed802ca10930f65959b48dbe330f4ca40e",
+          "bytes": 7905,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "annual-sunshine-duration-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.json",
+          "sha256": "f5e02115508ae50e52ee8c71078022590e98897efcb7afc97a4d2fa33dfe4e31",
+          "bytes": 6763,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "annual-sunshine-duration-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "e5c9dbefadfececf34a627a86645e9a5c17c2f5137aeddb6cf39172343272d46",
+          "bytes": 664,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/data/annual-sunshine-duration-prefecture-gap-prefecture-rankings.svg",
+          "alt": "年間日照時間の上位と下位",
+          "heading": "日照時間が多い県と少ない県",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-sunshine-duration/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/background.jpg",
+        "sha256": "4fa8c2d89daef3ad8973f6ce9c278b93e4404202ff25f822192d130f3aeeae2b",
+        "bytes": 112824
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "sha256": "e48ee4073e0221f164114d5324bb38bbdaac746a97446845f8b87e17b9aca310",
+          "bytes": 2193,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "99b8d568c5cd8894184c0f1ca5b2ea2cba9eccad88c6814a0d066f2a2d97e4dd",
+        "fingerprint": "00d54fbb5fd4b1f9ab6c8d4700bf362a805c4abad275e7fe47939e82a1b5f163",
+        "generatedAt": "2026-09-07T15:44:29.984Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png",
+        "sha256": "66ebebf2be833169779d9c60b8a0139135758d394a942b44bce6c48298967a7e",
+        "bytes": 724002
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "sha256": "e48ee4073e0221f164114d5324bb38bbdaac746a97446845f8b87e17b9aca310",
+          "bytes": 2193,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "99b8d568c5cd8894184c0f1ca5b2ea2cba9eccad88c6814a0d066f2a2d97e4dd",
+        "fingerprint": "00d54fbb5fd4b1f9ab6c8d4700bf362a805c4abad275e7fe47939e82a1b5f163",
+        "generatedAt": "2026-09-07T15:44:29.984Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "4b24ed9a880ca5a95437cf080a7321828d6cf6eaa4c81bfdf0ea1f8d8f833b94",
+        "bytes": 14888
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "sha256": "e48ee4073e0221f164114d5324bb38bbdaac746a97446845f8b87e17b9aca310",
+          "bytes": 2193,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "99b8d568c5cd8894184c0f1ca5b2ea2cba9eccad88c6814a0d066f2a2d97e4dd",
+        "fingerprint": "00d54fbb5fd4b1f9ab6c8d4700bf362a805c4abad275e7fe47939e82a1b5f163",
+        "generatedAt": "2026-09-07T15:44:29.984Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-sunshine-duration-prefecture-gap",
+      "file": "app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-light.webp",
+        "sha256": "457a767beb6f7f73b29d6f1019be4900b18967ee7fc145673bf274b8e51972ed",
+        "bytes": 29810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/generation.json",
+          "sha256": "e48ee4073e0221f164114d5324bb38bbdaac746a97446845f8b87e17b9aca310",
+          "bytes": 2193,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "99b8d568c5cd8894184c0f1ca5b2ea2cba9eccad88c6814a0d066f2a2d97e4dd",
+        "fingerprint": "00d54fbb5fd4b1f9ab6c8d4700bf362a805c4abad275e7fe47939e82a1b5f163",
+        "generatedAt": "2026-09-07T15:44:29.984Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.svg",
+        "sha256": "25d8d4355573640259488c52446153a07446555854deff214c75bec6868ccd22",
+        "bytes": 6922
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/article.md",
+          "sha256": "39f05c34ff8d7211a2fe40df2226237c08ffbef1d9051fb394e7cf6aa0e45d09",
+          "bytes": 10652,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "income-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.json",
+          "sha256": "816c56f1d1e43d5700586e33646458e8bbc6678bf5b3b5b0c70a35162c755332",
+          "bytes": 6349,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "income-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.source.json",
+          "sha256": "3783e504ebf031afbcb3ab58b588b8ea115763dcf0cadb196d3ac61a2e1b396b",
+          "bytes": 660,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-prefecture-rankings.svg",
+          "alt": "歯科衛生士の平均年収 上位5・下位5（2023年・都道府県別）",
+          "heading": "上位5と下位5──岐阜県だけが頭ひとつ抜けている",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-hygienist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-hygienist-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.svg",
+        "sha256": "c3dbf6a3469e4f1b2b42fe8472c84e5f4572dd3e31f7347110ec17df06e7fa6e",
+        "bytes": 4137
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/article.md",
+          "sha256": "39f05c34ff8d7211a2fe40df2226237c08ffbef1d9051fb394e7cf6aa0e45d09",
+          "bytes": 10652,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "income-timeseries.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.json",
+          "sha256": "d34a21416acb5d1b1b57f7d8da3298e06c7f72356c5d5282cb90e266418fad8f",
+          "bytes": 1292,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "income-timeseries.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.source.json",
+          "sha256": "9416277c320ba95dc907e9dd56ecd6190f9ded5925856aa383b8be4355ed1479",
+          "bytes": 698,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-line",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/data/income-timeseries.svg",
+          "alt": "歯科衛生士の平均年収の推移（岐阜・長野・大分・福島）",
+          "heading": "このランキングの最大の落とし穴──数字は年ごとに大きく揺れる",
+          "line": 57
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-hygienist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-hygienist-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/background.jpg",
+        "sha256": "0519e445e7cb68f965105810838751580eaa9a76ba5f3182c6ba006648fc68bf",
+        "bytes": 64370
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "sha256": "cff045a28295b39eb7190b5d134000cb3c11c0c9839d3ee6f7a340cca543ceb1",
+          "bytes": 2260,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e602387d5e4608f940193ed45f9d9c50ae9393b868a06c525089dcf54d14c4b5",
+        "fingerprint": "6860d7a9d21e77a5fbb0f32b6ff37f9acc787db89d4ecc11889decd56b6a8c76",
+        "generatedAt": "2026-08-22T05:17:21.881Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/ogp.png",
+        "sha256": "ae6a38b52fa5d1b6ffa19ae3f179afc6dc863415819f47de85bbcb711f1d1386",
+        "bytes": 367900
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "sha256": "cff045a28295b39eb7190b5d134000cb3c11c0c9839d3ee6f7a340cca543ceb1",
+          "bytes": 2260,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e602387d5e4608f940193ed45f9d9c50ae9393b868a06c525089dcf54d14c4b5",
+        "fingerprint": "6860d7a9d21e77a5fbb0f32b6ff37f9acc787db89d4ecc11889decd56b6a8c76",
+        "generatedAt": "2026-08-22T05:17:21.881Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "7ae9cebd017d97038e75bc9bc03f4a0e5cb168bdabd0485632d0673d696b4fbc",
+        "bytes": 8056
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "sha256": "cff045a28295b39eb7190b5d134000cb3c11c0c9839d3ee6f7a340cca543ceb1",
+          "bytes": 2260,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e602387d5e4608f940193ed45f9d9c50ae9393b868a06c525089dcf54d14c4b5",
+        "fingerprint": "6860d7a9d21e77a5fbb0f32b6ff37f9acc787db89d4ecc11889decd56b6a8c76",
+        "generatedAt": "2026-08-22T05:17:21.881Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-hygienist-income-prefecture-gap",
+      "file": "app/blog/dental-hygienist-income-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-hygienist-income-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/thumbnail-light.webp",
+        "sha256": "7b4136dd9724848cc6aeba1181da02570fac908a7a00e6606cf3566c86f10b00",
+        "bytes": 15478
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-hygienist-income-prefecture-gap/ogp/generation.json",
+          "sha256": "cff045a28295b39eb7190b5d134000cb3c11c0c9839d3ee6f7a340cca543ceb1",
+          "bytes": 2260,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e602387d5e4608f940193ed45f9d9c50ae9393b868a06c525089dcf54d14c4b5",
+        "fingerprint": "6860d7a9d21e77a5fbb0f32b6ff37f9acc787db89d4ecc11889decd56b6a8c76",
+        "generatedAt": "2026-08-22T05:17:21.881Z"
+      }
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.svg",
+        "sha256": "58177ab677bf76f1506e12abb2a9604fffc05ec222e2f0b8f35afb1414054b82",
+        "bytes": 31541
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "5a09b42691ed871851d22eeac0fa6e4fba0be96fc30546f0e08f187e2fb03271",
+          "bytes": 8291,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "toilet-paper-consumption-expenditure-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.json",
+          "sha256": "091c60d69cad3af657b1b25f7d763a89da094a57034e4b1a6f2d9f62e30b6df3",
+          "bytes": 4617,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "toilet-paper-consumption-expenditure-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.source.json",
+          "sha256": "696583de94a10f5536017bb56195e274af58cd8acd4386896de0ac859dcb90f3",
+          "bytes": 670,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-map.svg",
+          "alt": "トイレットペーパー消費支出額の地理分布",
+          "heading": "地理分布から見える傾向",
+          "line": 32
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/toilet-paper-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/toilet-paper-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "933f5cee1922e4b06636c5fad11a7f69395512d050498a8b66a060ea3ce52519",
+        "bytes": 6943
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "5a09b42691ed871851d22eeac0fa6e4fba0be96fc30546f0e08f187e2fb03271",
+          "bytes": 8291,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "sha256": "480a41fc1c647745732ab1cd5559baeface1d3bf091e00362c258427c51ae939",
+          "bytes": 6723,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "55a1f8c5d86bc0ccc336f0627a98773ca7cf93433f5e01cab430c6421d6a7773",
+          "bytes": 745,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/data/toilet-paper-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+          "alt": "トイレットペーパー消費支出額の上位と下位",
+          "heading": "トイレットペーパー消費支出額の上位と下位",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/toilet-paper-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/toilet-paper-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "sha256": "3fbb76fe5c3f72cd6be49e69aafcd446b24948acf1b613d483d1269b354347b5",
+        "bytes": 84357
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "52a28c0441f986817d9a9970be037e8be778be1c046988ca70cdd7e6f94b32f2",
+          "bytes": 2265,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c40e6b10e917c5d40af5c9f81285e6af7ff890a114bac006985b8963a2347bb",
+        "fingerprint": "d49407303fab4796edf48e532e8fb19c3815766b5c916235192f4ecd843e3e74",
+        "generatedAt": "2026-09-07T16:06:39.225Z"
+      }
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "sha256": "28dd50646de626455eb03e3256573538ff4e2257731eb91da8534915d9c6d28d",
+        "bytes": 512169
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "52a28c0441f986817d9a9970be037e8be778be1c046988ca70cdd7e6f94b32f2",
+          "bytes": 2265,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c40e6b10e917c5d40af5c9f81285e6af7ff890a114bac006985b8963a2347bb",
+        "fingerprint": "d49407303fab4796edf48e532e8fb19c3815766b5c916235192f4ecd843e3e74",
+        "generatedAt": "2026-09-07T16:06:39.225Z"
+      }
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "77ac6d82489040d00f966220d2fb048d09f0f755d9ab593e93fdd8e3aef4b245",
+        "bytes": 12410
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "52a28c0441f986817d9a9970be037e8be778be1c046988ca70cdd7e6f94b32f2",
+          "bytes": 2265,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c40e6b10e917c5d40af5c9f81285e6af7ff890a114bac006985b8963a2347bb",
+        "fingerprint": "d49407303fab4796edf48e532e8fb19c3815766b5c916235192f4ecd843e3e74",
+        "generatedAt": "2026-09-07T16:06:39.225Z"
+      }
+    },
+    {
+      "owner": "web/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "sha256": "450bd4916407f0ce646f8e033fdc13a4512c18fdc644017880a2c5a77f82f21f",
+        "bytes": 26124
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "52a28c0441f986817d9a9970be037e8be778be1c046988ca70cdd7e6f94b32f2",
+          "bytes": 2265,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c40e6b10e917c5d40af5c9f81285e6af7ff890a114bac006985b8963a2347bb",
+        "fingerprint": "d49407303fab4796edf48e532e8fb19c3815766b5c916235192f4ecd843e3e74",
+        "generatedAt": "2026-09-07T16:06:39.225Z"
+      }
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/data/advancement-rate-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/data/advancement-rate-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-rate-ranking.svg",
+        "sha256": "4966301a39c9fd9bc240a2e60b24f6d7d5c4018a04fdd74ff35a920c9546c158",
+        "bytes": 6896
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/article.md",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/article.md",
+          "sha256": "b92ba0c546a837b2e4c6b1e0d9b9ce34e9371902059fe9b91c50b04141b8a3e3",
+          "bytes": 9513,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "advancement-rate-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/advancement-rate-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-rate-ranking.json",
+          "sha256": "b5ac8c85f579eb69c584727a45382b10e99884829aee0df43e699acc431fe1ad",
+          "bytes": 6709,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "advancement-rate-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/advancement-rate-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-rate-ranking.source.json",
+          "sha256": "1e5f8d7a8e827b40910b392fc6fc1e939fdc4d0c10799b716de2b79ae9944e13",
+          "bytes": 627,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-rate-ranking.svg",
+          "alt": "高校卒業者の進学率ランキング",
+          "heading": "高校卒業者の進学率ランキング──東京74%、沖縄47%",
+          "line": 28
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/university-capacity-index/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/university-capacity-index/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.svg",
+        "sha256": "54f6ce2384e060f8ed430bc8e81fdffbc2d61ab5cf2f348a3320b431ff6b1e8a",
+        "bytes": 10223
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/article.md",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/article.md",
+          "sha256": "b92ba0c546a837b2e4c6b1e0d9b9ce34e9371902059fe9b91c50b04141b8a3e3",
+          "bytes": 9513,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "advancement-vs-university-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.json",
+          "sha256": "de0a1f50b52d5a1f7a284cc936504b9a590a89860476bc44f5f7936473037b58",
+          "bytes": 4697,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "advancement-vs-university-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.source.json",
+          "sha256": "72cd8c98853bacae05e3a5675d5120f073a216bc689a31241b45920608dbe4b2",
+          "bytes": 1166,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/advancement-vs-university-scatter.svg",
+          "alt": "高校卒業者の進学率と大卒割合の相関",
+          "heading": "進学率と大卒割合の相関──教育インフラの格差は世代を超える",
+          "line": 71
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-advancement-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-advancement-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/final-education-university-graduate-school-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-university-graduate-school-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/data/capacity-index-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/data/capacity-index-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/capacity-index-map.svg",
+        "sha256": "048b37e4e1c66dbfc7ebd20013b3c2d7cf35ea8db996afc6d65c5b396b007ad8",
+        "bytes": 31863
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/article.md",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/article.md",
+          "sha256": "b92ba0c546a837b2e4c6b1e0d9b9ce34e9371902059fe9b91c50b04141b8a3e3",
+          "bytes": 9513,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "capacity-index-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/capacity-index-map.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/capacity-index-map.json",
+          "sha256": "10b5867eaa39ff022c3862d88edb618ef91b889ae39e8b712f931a083fcadc6f",
+          "bytes": 5354,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "capacity-index-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/capacity-index-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/capacity-index-map.source.json",
+          "sha256": "44169826d5aa0eeb0c5087b3c0e99cb73695398809b15bdeb05fdc88f473e4d4",
+          "bytes": 352,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/capacity-index-map.svg",
+          "alt": "大学収容力指数 都道府県マップ",
+          "heading": "大学収容力指数マップ──京都・東京の「磁力」",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/university-capacity-index/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/university-capacity-index/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/data/university-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/data/university-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/university-summary-findings.svg",
+        "sha256": "7e961703c423ecca89af35d04e2a48888e5eb66f9d6f096ae3a5b7b876af302a",
+        "bytes": 3633
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/article.md",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/article.md",
+          "sha256": "b92ba0c546a837b2e4c6b1e0d9b9ce34e9371902059fe9b91c50b04141b8a3e3",
+          "bytes": 9513,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "university-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/university-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/university-summary-findings.json",
+          "sha256": "c40c769452e81a36061eedf4aa61f33f719a4daedb2639a6e5c459d4a7ef7147",
+          "bytes": 1174,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "university-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/data/university-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/university-summary-findings.source.json",
+          "sha256": "522328766408fb3c1b24103f1eb961f5c5df10a2e5708e8f33b7b8c9f6f4e3c1",
+          "bytes": 630,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/data/university-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 108
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 466",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/background.jpg",
+        "sha256": "cbfa7348dcdb589ab93efb498a130608d322d03791249391c6be616789735d2a",
+        "bytes": 33156
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/generation.json",
+          "sha256": "cccc60592a1ab957a241d0ac74aac983e7bd305958aec672ae545e03ad4853ea",
+          "bytes": 2203,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "d00c92eda2a025070e9711debd170a4e4537222e875f1012b5c6d7ab39da581e",
+        "fingerprint": "5af13d0fc477af9f44a6a1446e80c1099d52dc7472ced5a4ddccbc7b0bf80611",
+        "generatedAt": "2026-08-22T05:17:40.607Z"
+      }
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/ogp.png",
+        "sha256": "16d707e50a850dbb05e1d8f1edf2fca0e1b950f456dd4110c0d968e3952e28d7",
+        "bytes": 280623
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/generation.json",
+          "sha256": "cccc60592a1ab957a241d0ac74aac983e7bd305958aec672ae545e03ad4853ea",
+          "bytes": 2203,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "d00c92eda2a025070e9711debd170a4e4537222e875f1012b5c6d7ab39da581e",
+        "fingerprint": "5af13d0fc477af9f44a6a1446e80c1099d52dc7472ced5a4ddccbc7b0bf80611",
+        "generatedAt": "2026-08-22T05:17:40.607Z"
+      }
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/thumbnail-dark.webp",
+        "sha256": "c5d1ad7f1a0cc9141b55b905cb394e050ff1c80a392fe3a3e1fa8f346543cffa",
+        "bytes": 6488
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/generation.json",
+          "sha256": "cccc60592a1ab957a241d0ac74aac983e7bd305958aec672ae545e03ad4853ea",
+          "bytes": 2203,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "d00c92eda2a025070e9711debd170a4e4537222e875f1012b5c6d7ab39da581e",
+        "fingerprint": "5af13d0fc477af9f44a6a1446e80c1099d52dc7472ced5a4ddccbc7b0bf80611",
+        "generatedAt": "2026-08-22T05:17:40.607Z"
+      }
+    },
+    {
+      "owner": "web/blog/university-advancement-capacity",
+      "file": "app/blog/university-advancement-capacity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/university-advancement-capacity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/thumbnail-light.webp",
+        "sha256": "862c3aa798699efc73464db80ad82309a0030a2d376d42aa9af0552cbac06b90",
+        "bytes": 11388
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/university-advancement-capacity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/university-advancement-capacity/ogp/generation.json",
+          "sha256": "cccc60592a1ab957a241d0ac74aac983e7bd305958aec672ae545e03ad4853ea",
+          "bytes": 2203,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "d00c92eda2a025070e9711debd170a4e4537222e875f1012b5c6d7ab39da581e",
+        "fingerprint": "5af13d0fc477af9f44a6a1446e80c1099d52dc7472ced5a4ddccbc7b0bf80611",
+        "generatedAt": "2026-08-22T05:17:40.607Z"
+      }
+    },
+    {
+      "owner": "web/material/061e2f55d71335c0c02182c7",
+      "file": "assets/area-specialty/29000/yamato-mana.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/29000/yamato-mana.webp",
+        "sha256": "968d5c42d3705f206ddb7d9597c54f516d64e46b46ad9086c7dcb30e02b3c2db",
+        "bytes": 45772
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/29000/yamato-mana.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/4a8a19ac2c85ba38b7cb261c",
+      "file": "assets/area-specialty/14000/soshun-cabbage.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/14000/soshun-cabbage.webp",
+        "sha256": "6049cdf2eafa126d31fa4a71dfe7d88f81b0911d7f64c1836a15287530f91a47",
+        "bytes": 48544
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/14000/soshun-cabbage.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/581867c4d55267fa720da058",
+      "file": "assets/blog/article-backgrounds/osaka-migration-flow.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/osaka-migration-flow.jpg",
+        "sha256": "7b831de0d45302d7e46c6177e3d073cddd699bc7ea7afb1e96f1ae8fd5c34c65",
+        "bytes": 85961
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/osaka-migration-flow.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/96b4ec711e57e701b4c40c6f",
+      "file": "assets/blog/article-backgrounds/dual-income-reversal.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/dual-income-reversal.jpg",
+        "sha256": "a2765d2e8cd515c6e9954261e2aa04b35711d5018437e3b6fa45a6c8ed89c725",
+        "bytes": 78169
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/dual-income-reversal.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/a0a27be57350046cac22a1dc",
+      "file": "apps/web/public/images/brand-pe-comprehensive-wide.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/brand-pe-comprehensive-wide.png",
+        "url": "https://stats47.jp/images/brand-pe-comprehensive-wide.png",
+        "sha256": "0be6ce8967aa5990e3f71586b4c0e1e26c6e388aead11f865a3a879aac1841e7",
+        "bytes": 2030632
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/brand-pe-comprehensive-wide.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/a31f72ade61cb4e403461de7",
+      "file": "apps/web/public/flag/愛媛県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/愛媛県.png",
+        "url": "https://stats47.jp/flag/愛媛県.png",
+        "sha256": "09ab00e183cb50ffb7a6d669b851c6c4107010614082f6e3460d56644f51f090",
+        "bytes": 3426
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/愛媛県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fe963aaa37c3b2d70ccb2ac5",
+      "file": "assets/page-heroes/category-population-hero.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/page-heroes/category-population-hero.jpg",
+        "sha256": "974cab467e4c2ce8186403e3967549721f3df6284a05114767c8fcd0f52d9080",
+        "bytes": 131277
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/page-heroes/category-population-hero.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/beer-consumption-expenditure",
+      "file": "app/ranking/beer-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/beer-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/ogp/ogp.png",
+        "sha256": "5a92dd974e88c4320c25bd020ee19c7cd89311d87681255ac1956afed9248ea8",
+        "bytes": 58746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/beer-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/ogp/generation.json",
+          "sha256": "04629587adfde9dd6e9ad0a5ecd1a5c44e3f29f232ee13054d953deb0b2d4dd6",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/beer-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/beer-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "5dde7e33e1a2e3477734646ebc07cff5bdd049df75f623d9513011617766e130",
+        "fingerprint": "14cceed6f7ecfa10524ca41644677fa42b79c11962e233f8ab3dfabce68c1343",
+        "generatedAt": "2026-10-10T21:32:18.327Z"
+      }
+    },
+    {
+      "owner": "web/ranking/beer-consumption-expenditure",
+      "file": "app/ranking/beer-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/beer-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "b3c1621750b11d334b8f7969135d74ab65e73ac4d574c973945eb918fb9ac522",
+        "bytes": 16184
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/beer-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/thumbnail.json",
+          "sha256": "356b1ea6638aedd9719cc31a5079d0d7c0ab78c4947c8127df53557082a2c897",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/beer-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/beer-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "30ca5eb2346f1d3bb6d72cabdd161389237f401342f33b6af29fd95a346a4707",
+        "fingerprint": "a708d6dd9b0052ea69e0117dc906829cb2088df6b2a754c3bd399141603253cd",
+        "generatedAt": "2026-10-10T21:50:01.850Z"
+      }
+    },
+    {
+      "owner": "web/ranking/beer-consumption-expenditure",
+      "file": "app/ranking/beer-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/beer-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "e5036d9df94d0a59fc8130f7ee8408007721ccca059dd5e154ea3af6963e9bf9",
+        "bytes": 14648
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/beer-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/thumbnail.json",
+          "sha256": "356b1ea6638aedd9719cc31a5079d0d7c0ab78c4947c8127df53557082a2c897",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/beer-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/beer-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/beer-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "30ca5eb2346f1d3bb6d72cabdd161389237f401342f33b6af29fd95a346a4707",
+        "fingerprint": "a708d6dd9b0052ea69e0117dc906829cb2088df6b2a754c3bd399141603253cd",
+        "generatedAt": "2026-10-10T21:50:01.850Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-technician-rate",
+      "file": "app/ranking/dental-technician-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-technician-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/ogp/ogp.png",
+        "sha256": "f0d81a0b64011f840cba02f1038a3c248da001d3a89f3781573b7cc852685085",
+        "bytes": 61135
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-technician-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/ogp/generation.json",
+          "sha256": "7f0f12be175f577b125d5fccd6ea1cf8cab503c27ca39eb93148eec9d39415d6",
+          "bytes": 921,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-technician-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-technician-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "b601b6ead2048953e730fcef3c0f6d8ec4bf3160979273eb581b0d4a746b5865",
+        "fingerprint": "fabf3efd1ac16796680f76b214fe941525bc2e408f59c4a5b2fbd6f86a08d33e",
+        "generatedAt": "2026-10-10T21:32:59.768Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-technician-rate",
+      "file": "app/ranking/dental-technician-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-technician-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/thumbnail-dark.webp",
+        "sha256": "956dc19416acf717e2b0d18d9d28c5313c36eaf1f200d3a90adda85a1cec5341",
+        "bytes": 17210
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-technician-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/thumbnail.json",
+          "sha256": "ce8c63b5a2fdbcee2674b658e4c9d71c05aa8a33d521133bde75bd445b80bb40",
+          "bytes": 1751,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-technician-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-technician-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "deb5dc6d6432a378433b858e821bfa58e36e1dbb00177010f249c50adaa04b75",
+        "fingerprint": "d9b93d9f5ba4c48bbbe783005e3f06aa3c284ad7f3bfbb7b9e16ce7ecef45c14",
+        "generatedAt": "2026-10-10T21:50:12.635Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-technician-rate",
+      "file": "app/ranking/dental-technician-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-technician-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/thumbnail-light.webp",
+        "sha256": "57d9ce3c3d92eb748e135050b04ce0a9d5ec0e458d30c609f10b32660ddf98b2",
+        "bytes": 15840
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-technician-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/thumbnail.json",
+          "sha256": "ce8c63b5a2fdbcee2674b658e4c9d71c05aa8a33d521133bde75bd445b80bb40",
+          "bytes": 1751,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-technician-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-technician-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-technician-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "deb5dc6d6432a378433b858e821bfa58e36e1dbb00177010f249c50adaa04b75",
+        "fingerprint": "d9b93d9f5ba4c48bbbe783005e3f06aa3c284ad7f3bfbb7b9e16ce7ecef45c14",
+        "generatedAt": "2026-10-10T21:50:12.635Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-count-per-100k-6-11",
+      "file": "app/ranking/elementary-school-count-per-100k-6-11/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count-per-100k-6-11/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/ogp/ogp.png",
+        "sha256": "c40ee812677ed0502b301b2d6c43a86b85d451989d6d7f39ed8ac06d5cf1ea72",
+        "bytes": 59430
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count-per-100k-6-11/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/ogp/generation.json",
+          "sha256": "090f01dfe8fa5268a62e16bf288717f111d20c6f8f9666a1141a0a612b316eb6",
+          "bytes": 981,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "6774a459d01574aeea138271caf2448a6698a814d0760576a422e8cc086881e3",
+        "fingerprint": "8c5639264f5917db6e38ddbdf41acf894ce245aeaae56fe954b73d3282397291",
+        "generatedAt": "2026-10-01T18:10:30.862Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-count-per-100k-6-11",
+      "file": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/thumbnail-dark.webp",
+        "sha256": "19d9beff51e6506901e4eb6616f8fc5c38ba62cf359504d56c1e6b62fd042d44",
+        "bytes": 15090
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/thumbnail.json",
+          "sha256": "30ed0b1e82741d580aed80343b89d4fb757a634b5bab3ee2f1e5f7e89834f01b",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ab561eb5b4f038ca3cb2427bd1916a2026be4ec8edef4706602b241b1dba0e93",
+        "fingerprint": "55d4b641ab83a058f621179e969373b1e8efc71199ae7ca0343015041d2a823e",
+        "generatedAt": "2026-10-01T18:35:45.250Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-count-per-100k-6-11",
+      "file": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/thumbnail-light.webp",
+        "sha256": "d4b535ebc7031c0c1bb9ae02c8c79e1e513801fde884c1c71060f459a721de0d",
+        "bytes": 13708
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-count-per-100k-6-11/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/thumbnail.json",
+          "sha256": "30ed0b1e82741d580aed80343b89d4fb757a634b5bab3ee2f1e5f7e89834f01b",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-count-per-100k-6-11/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ab561eb5b4f038ca3cb2427bd1916a2026be4ec8edef4706602b241b1dba0e93",
+        "fingerprint": "55d4b641ab83a058f621179e969373b1e8efc71199ae7ca0343015041d2a823e",
+        "generatedAt": "2026-10-01T18:35:45.250Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-processed-meat-consumption-expenditure",
+      "file": "app/ranking/other-processed-meat-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-processed-meat-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/ogp/ogp.png",
+        "sha256": "a532ba7e7e59f6eeb14214d5339be0677df16072779b0d55e706ed897fa3dc81",
+        "bytes": 60931
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-processed-meat-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/ogp/generation.json",
+          "sha256": "e450ff6f19ea818f43d3ef37e3577c3773b161530718c5526dd457a7560d7a5d",
+          "bytes": 1009,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "25964ede38262c21965247a4f14a7cc0d392f8f2d985042419d77a16f7482430",
+        "fingerprint": "c16d8a2733c8c13d692b1ce27f866300ebc2345a8da26fa6aecdcd71538146e5",
+        "generatedAt": "2026-10-03T21:00:41.207Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-processed-meat-consumption-expenditure",
+      "file": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "b03d541aa6c1ce42dae7df034ffe5b4e78b02d420124fd83da6a39f5f94db6b9",
+        "bytes": 17108
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/thumbnail.json",
+          "sha256": "cd7c25942a669ecd4a39afdc0f7164b9fcd20f12bfc455adbb7395a16bdc5028",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "39aeebc38adc51b415bd99f05b5ce2c2c64d0902de5b33326e279ba7e8da492c",
+        "fingerprint": "80a82896ae201b54613544c3d541e663c231ba43fcf5157c05e55c29d1588ecb",
+        "generatedAt": "2026-10-03T21:25:38.189Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-processed-meat-consumption-expenditure",
+      "file": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "adeabc0ea3cc4cd6e69e6805e25e88cdbfe4a0a23904d17cfd581875c778a2a3",
+        "bytes": 15702
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-processed-meat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/thumbnail.json",
+          "sha256": "cd7c25942a669ecd4a39afdc0f7164b9fcd20f12bfc455adbb7395a16bdc5028",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-processed-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "39aeebc38adc51b415bd99f05b5ce2c2c64d0902de5b33326e279ba7e8da492c",
+        "fingerprint": "80a82896ae201b54613544c3d541e663c231ba43fcf5157c05e55c29d1588ecb",
+        "generatedAt": "2026-10-03T21:25:38.189Z"
+      }
+    },
+    {
+      "owner": "web/ranking/outpatient-rate-per-1000",
+      "file": "app/ranking/outpatient-rate-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/outpatient-rate-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/ogp/ogp.png",
+        "sha256": "57a7f13ea0cd5a4ee27ee99c05dbc8910ff7708fd245ad880c4e4b6de3cc0594",
+        "bytes": 73191
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/outpatient-rate-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/ogp/generation.json",
+          "sha256": "5311a27f3edbbed21eff21d3035daca99debd94a71f2744789dc9bbdb6462897",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c267fa12bb5df84265631e39c2fbfeefb0974bd7acf336a176eb47a28df881be",
+        "fingerprint": "a8e2459200feccbb3909afe32ac485a592a213bc6073c9056110bc866685bfe0",
+        "generatedAt": "2026-08-15T18:42:09.671Z"
+      }
+    },
+    {
+      "owner": "web/ranking/outpatient-rate-per-1000",
+      "file": "app/ranking/outpatient-rate-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/outpatient-rate-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/thumbnail-dark.webp",
+        "sha256": "44a50213215185a6a60d82ed3fad14a67d28a39bbdbb57c01d6663ea49d5439e",
+        "bytes": 15762
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/outpatient-rate-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/thumbnail.json",
+          "sha256": "608a4db93ef5e55c8a2b30d92629decb3141c020929d2279b4e2bc290f9c2456",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "bec617bf3a46185ead780afda7b1bdcdeaa095f57821a72ed8ac1e70dd78a98d",
+        "fingerprint": "ffb8faba249f45846768c70b32ee8f57698c6f4615c4f653d2230cb3d64ec2f9",
+        "generatedAt": "2026-10-08T12:08:23.431Z"
+      }
+    },
+    {
+      "owner": "web/ranking/outpatient-rate-per-1000",
+      "file": "app/ranking/outpatient-rate-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/outpatient-rate-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/thumbnail-light.webp",
+        "sha256": "8405e1a6ed8ea4a5f566fe09cfb454dd032748a42f31de5573e97bc17039c48b",
+        "bytes": 14230
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/outpatient-rate-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/thumbnail.json",
+          "sha256": "608a4db93ef5e55c8a2b30d92629decb3141c020929d2279b4e2bc290f9c2456",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/outpatient-rate-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/outpatient-rate-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "bec617bf3a46185ead780afda7b1bdcdeaa095f57821a72ed8ac1e70dd78a98d",
+        "fingerprint": "ffb8faba249f45846768c70b32ee8f57698c6f4615c4f653d2230cb3d64ec2f9",
+        "generatedAt": "2026-10-08T12:08:23.431Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-population",
+      "file": "app/ranking/resident-foreigner-population/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-population/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/ogp/ogp.png",
+        "sha256": "0151703d2db6b6f28b881dac52840c46a5a1d01bdb218eb8b154a17a16c90fad",
+        "bytes": 74736
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-population/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/ogp/generation.json",
+          "sha256": "572e4f9ba5bdf7d19dd993d0ca76dcbe4bb6e48049cf25d91914a37377b9d627",
+          "bytes": 949,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-population/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "e210ddbc392e89e1c8a5f4c512a58657f735d9c843c88fc8a279cea208577047",
+        "fingerprint": "a3b6ef4a255cb9a473cfe0abc0d0aaf8ce38afe3105488392d31edab37095da4",
+        "generatedAt": "2026-08-15T18:42:37.783Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-population",
+      "file": "app/ranking/resident-foreigner-population/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-population/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/thumbnail-dark.webp",
+        "sha256": "8eab1397a4a01e6b366c28ad493c59064ec3d5f924ed9e02deafc46acd9fd168",
+        "bytes": 16178
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-population/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/thumbnail.json",
+          "sha256": "867173a8b3d568d8018937544dff61c8e750badba497bc1045288cca46322e02",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-population/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "043c0e33698c6c9e42d3e599715d21eb126ebdd1d6a1db138ca65c816372648c",
+        "fingerprint": "4d03282f7b6239748f71f4534eacf3168f1ea8295bb57784d3bf553414a71f3f",
+        "generatedAt": "2026-08-15T18:58:46.114Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-population",
+      "file": "app/ranking/resident-foreigner-population/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-population/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/thumbnail-light.webp",
+        "sha256": "3a346eb5b0ee32f8d0e3cfa1645ee136a3fb3911463f39ad7890fb817da58e0a",
+        "bytes": 14526
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-population/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/thumbnail.json",
+          "sha256": "867173a8b3d568d8018937544dff61c8e750badba497bc1045288cca46322e02",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-population/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-population/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "043c0e33698c6c9e42d3e599715d21eb126ebdd1d6a1db138ca65c816372648c",
+        "fingerprint": "4d03282f7b6239748f71f4534eacf3168f1ea8295bb57784d3bf553414a71f3f",
+        "generatedAt": "2026-08-15T18:58:46.114Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-table-tennis",
+      "file": "app/ranking/sports-participation-rate-table-tennis/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-table-tennis/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/ogp/ogp.png",
+        "sha256": "5107dfe86d1d90b77c7a4951ed8bbf084d11c3906e98c6e0f96015c61fec1f52",
+        "bytes": 75313
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-table-tennis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/ogp/generation.json",
+          "sha256": "6e3862880ac6c66f7151653dfe7d1a0c980775bf82e47c5d4f45ea6d5295943c",
+          "bytes": 985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "940dfe2e64acd6be291391102c7565e9b7f0b1038dafb996b3f871ea2e9f3c2c",
+        "fingerprint": "4d67d236a0806651ad863588d5bdbeb44e1330334ee5c5bd1fafce6aee7665f8",
+        "generatedAt": "2026-08-16T22:21:02.211Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-table-tennis",
+      "file": "app/ranking/sports-participation-rate-table-tennis/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-table-tennis/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/thumbnail-dark.webp",
+        "sha256": "f204a7950d3caed0cd086f0cbe26d3e44b5bd2dc6c67303113ef123df3e22b77",
+        "bytes": 15674
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-table-tennis/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/thumbnail.json",
+          "sha256": "3c15bdfd1c80bf4e9d517594928d9559f033155249ab2481d7e74a08e176c1ed",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a3774dac768414983e200506c0c784f908d4da76f4de80c09218c55570c6ff9e",
+        "fingerprint": "89d08407419bf486e85a2514a08baa76d6c4fe1e1af9a8555b97eeb15bf42049",
+        "generatedAt": "2026-08-16T22:36:24.184Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-table-tennis",
+      "file": "app/ranking/sports-participation-rate-table-tennis/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-table-tennis/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/thumbnail-light.webp",
+        "sha256": "5dbbfe1caf40fdf03f10a43ef162c9061cf413ef4cac58f28de1bfa0684bfd5b",
+        "bytes": 14134
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-table-tennis/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/thumbnail.json",
+          "sha256": "3c15bdfd1c80bf4e9d517594928d9559f033155249ab2481d7e74a08e176c1ed",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-table-tennis/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-table-tennis/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a3774dac768414983e200506c0c784f908d4da76f4de80c09218c55570c6ff9e",
+        "fingerprint": "89d08407419bf486e85a2514a08baa76d6c4fe1e1af9a8555b97eeb15bf42049",
+        "generatedAt": "2026-08-16T22:36:24.184Z"
+      }
+    }
+  ]
+}

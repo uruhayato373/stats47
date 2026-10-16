@@ -17,6 +17,7 @@ const schema = z
         note: z.string().max(2000),
         x: z.string().max(2000),
         instagram: z.string().max(2000),
+        web: z.string().min(1).max(2000).optional(),
       })
       .strict(),
   })

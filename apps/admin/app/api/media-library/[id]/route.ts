@@ -9,6 +9,16 @@ import {
 } from '../../../../../../.claude/scripts/media/lib/workspace.mjs';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+export async function GET(
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    return jsonResponse(imageById(projectRoot(), (await params).id));
+  } catch (e) {
+    return workspaceError(e);
+  }
+}
 const revision = z.string().regex(/^[a-f0-9]{64}$/);
 const schema = z.discriminatedUnion('action', [
   z

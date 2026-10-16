@@ -1,0 +1,1859 @@
+{
+  "items": [
+    {
+      "id": "web/area/15000",
+      "channel": "web",
+      "key": "15000",
+      "title": "新潟県",
+      "category": "area",
+      "status": "published",
+      "url": "https://stats47.jp/areas/15000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "394f9622f9ba6ff6cc0957366c43d699b8612b382c9898f90bfa93659425b18b",
+      "catalogBasis": "394f9622f9ba6ff6cc0957366c43d699b8612b382c9898f90bfa93659425b18b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/blog/foreign-resident-five-percent-municipalities",
+      "channel": "web",
+      "key": "foreign-resident-five-percent-municipalities",
+      "title": "外国人が多い街は大都市とは限らない",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/foreign-resident-five-percent-municipalities",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "2368f991a07312b989cf878e9199e26bf71afb45f0e3d8c2cea5b0d39657e676",
+      "catalogBasis": "de42b8ce1c251f786718714aba6b17324b1a96c522f3d1397d59615843ea05bf",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/article.md",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/article.md",
+        "sha256": "8224357b5f0f6bb884c490a8e0f70da5c02a2bfcf009e0979630f225f76aef4b",
+        "bytes": 8418
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/niigata-migration-flow",
+      "channel": "web",
+      "key": "niigata-migration-flow",
+      "title": "新潟県の人口流出はなぜ止まらないのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/niigata-migration-flow",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "ea37f2ed85fdb91f0ffc65e6935ef573d4613551a4f0c4b5990e0872c7c0fc1e",
+      "catalogBasis": "562d50a2340c11d6a6ee0482c0604f998c31343930b4ae31906d4177d9caced1",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/article.md",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/article.md",
+        "sha256": "85bf7649db904d337cd42fc2ed2029bd97b28d24acc7acd5be72c791a0397bdc",
+        "bytes": 8603
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/098650f47098f36ceeb2c7d2",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/lake-count-prefecture-gap.jpg",
+      "title": "lake-count-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "16fa61752af4c36fda0221d6efb0a3bdb272174a7bf7cd9faef895f8eb1608de"
+    },
+    {
+      "id": "web/material/19714ddefd21444387ab11b9",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/natto-consumption-expenditure.jpg",
+      "title": "natto-consumption-expenditure.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4e5034b1977dfb16eb0b2c756b0daa6abf0e16b1c1ee07a5e16d6d3e2ea935ab"
+    },
+    {
+      "id": "web/material/8c4422129802bca491d9b64f",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/consumption-expenditure-multi-person-households-per-month.jpg",
+      "title": "consumption-expenditure-multi-person-households-per-month.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e0702b9364894889731880d08d3378990aece0830ebbc427be97d0485cc8628b"
+    },
+    {
+      "id": "web/material/b3527ef33073eeddef4122d8",
+      "channel": "web",
+      "key": "assets/area-specialty/47000/handama.webp",
+      "title": "handama.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cd7b9e7b915b4574e3634c08c8b216729a096da534868e6c5f9a3855263ff04e"
+    },
+    {
+      "id": "web/material/cb40235c57c5daf45574b1c0",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/voluntary-car-insurance-rate-bodily-injury-prefecture-gap.jpg",
+      "title": "voluntary-car-insurance-rate-bodily-injury-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cf81d823f66b8d82ecdeff8a7064dd4992588976236f7bf005382834cea774b2"
+    },
+    {
+      "id": "web/material/f8f2ac7658879f5ce5fced4f",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/consumer-price-regional-gap.jpg",
+      "title": "consumer-price-regional-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1d606d2c4ec6b4bb036e810f396efe0571c8962a2eebbaddf7cee123822028b5"
+    },
+    {
+      "id": "web/ranking/disabled-employment-rate",
+      "channel": "web",
+      "key": "disabled-employment-rate",
+      "title": "障害者就職率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/disabled-employment-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4122b32cfce0938d1bd23dbea6f0df4d8e4620e9caad6fce43c5967beb4f9b3f",
+      "catalogBasis": "4122b32cfce0938d1bd23dbea6f0df4d8e4620e9caad6fce43c5967beb4f9b3f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/high-school-count",
+      "channel": "web",
+      "key": "high-school-count",
+      "title": "高等学校数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/high-school-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "98cd02e7cd9501eee42c0de88528539dab3ec98386d067e0c65c7e0f71345c3f",
+      "catalogBasis": "98cd02e7cd9501eee42c0de88528539dab3ec98386d067e0c65c7e0f71345c3f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/male-parttime-workers",
+      "channel": "web",
+      "key": "male-parttime-workers",
+      "title": "男性パートタイム労働者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/male-parttime-workers",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6e5e2c6063315238b77a11d57b0d0c2d7e5693d87957a5d64b0ee3d43d5ff31f",
+      "catalogBasis": "6e5e2c6063315238b77a11d57b0d0c2d7e5693d87957a5d64b0ee3d43d5ff31f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/mens-socks-consumption-quantity",
+      "channel": "web",
+      "key": "mens-socks-consumption-quantity",
+      "title": "男子用靴下消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/mens-socks-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "09d131d489b9b8e2a75892fa81cfb1550a3a0fecd369c839d980a76c07e3c244",
+      "catalogBasis": "09d131d489b9b8e2a75892fa81cfb1550a3a0fecd369c839d980a76c07e3c244",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-bags-consumption-expenditure",
+      "channel": "web",
+      "key": "other-bags-consumption-expenditure",
+      "title": "他のバッグ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-bags-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c9b8fb85c1413282755a81b0ea74e6512734a6f3fedeb22aa367563fbc90b9c0",
+      "catalogBasis": "c9b8fb85c1413282755a81b0ea74e6512734a6f3fedeb22aa367563fbc90b9c0",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/area/15000",
+      "file": "app/areas/15000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/areas/15000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png",
+        "sha256": "a33e89eab9ead2f44097b873ea7e68077f011ec720393253a55ab1e3534da478",
+        "bytes": 148134
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/areas/15000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/areas/15000/ogp/generation.json",
+          "sha256": "63067b2de46208b16b8b728c9bcd7f8d07f84d491d97988753396da9339cf023",
+          "bytes": 779,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "areas-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "area-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "ceb9493b116fe2bb6f90dc845586ef0607e61b8eeaf65c40361946ce932aa188",
+        "fingerprint": "83a120c09de1285c3e8ebb9e736c884880bf321060904f9c20d7c065e1859761",
+        "generatedAt": "2026-10-10T22:06:16.978Z"
+      }
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.svg",
+        "sha256": "8680b59d30eb2c6eb5214249a09ca788cb4ba4274701c7c29bca001bbffcc82a",
+        "bytes": 7050
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "sha256": "8224357b5f0f6bb884c490a8e0f70da5c02a2bfcf009e0979630f225f76aef4b",
+          "bytes": 8418,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.json",
+          "sha256": "61557c9f8d35527dae36e29e36007f2df602fbda0a0e010c64aa82fcbaa24b96",
+          "bytes": 6181,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.source.json",
+          "sha256": "d0cc3f9325337d63db6118f73a63510c1634dcc6f699509d735b2740a07a1b6f",
+          "bytes": 462,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-ranking.svg",
+          "alt": "外国人比率が5%を超える市区町村",
+          "heading": "上位は農村と工業の町",
+          "line": 23
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/foreign-population-per-100k/cities.json",
+          "url": "https://storage.stats47.jp/app/stats/foreign-population-per-100k/cities.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.svg",
+        "sha256": "4fd40d1378a0a55f55aea7640a1f46cd31e4c065146b7f773410c91e0aebe922",
+        "bytes": 2955
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "sha256": "8224357b5f0f6bb884c490a8e0f70da5c02a2bfcf009e0979630f225f76aef4b",
+          "bytes": 8418,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.json",
+          "sha256": "1e983a58941e047a3c158c5129ddcfa9d9271ec79beed79e2121a239ddfdd321",
+          "bytes": 660,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.source.json",
+          "sha256": "42f8fc93bd94dea52cec5df428905523b3c5e7272b13b28f7834f530d6187ce1",
+          "bytes": 389,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 400",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.svg",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.svg",
+        "sha256": "d71a576155f0c800d22fa04ca17f6cdffa44fc83362d66ef4b0ce82c8b2294c2",
+        "bytes": 32035
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/article.md",
+          "sha256": "8224357b5f0f6bb884c490a8e0f70da5c02a2bfcf009e0979630f225f76aef4b",
+          "bytes": 8418,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-tile-grid.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.json",
+          "sha256": "42d9dc1266201ebf4fac3a75db2d04393414d59b5b5aaaed3b1411301b27303d",
+          "bytes": 6752,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "foreign-resident-five-percent-municipalities-tile-grid.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.source.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.source.json",
+          "sha256": "d0cc3f9325337d63db6118f73a63510c1634dcc6f699509d735b2740a07a1b6f",
+          "bytes": 462,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/data/foreign-resident-five-percent-municipalities-tile-grid.svg",
+          "alt": "県別・外国人比率5%以上の市区町村の数",
+          "heading": "県別に見ると関東・東海に集中する",
+          "line": 35
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/stats/foreign-population-per-100k/cities.json",
+          "url": "https://storage.stats47.jp/app/stats/foreign-population-per-100k/cities.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/background.jpg",
+        "sha256": "2b12c07dc7c85149e4eb6b30b9688e1570e0375087316d6ca0d65ee39f64c43f",
+        "bytes": 30235
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "sha256": "e4527a0ee80cff2f4a456ae6bb97fb4168405373cd4799058b1dc36e78f502f1",
+          "bytes": 2253,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "242d48927622fe9978e44555043a86c5d97ee8134876180f6d6e7401826406f2",
+        "fingerprint": "a9e65bda3bafb43540de21ed060a3aca852d92b25a6932f24da666b019d06ac5",
+        "generatedAt": "2026-08-22T05:17:24.405Z"
+      }
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/ogp.png",
+        "sha256": "e393e5d2ee1f8523e546bc80ab75d08890af88514c3e8c977947b21579d402b4",
+        "bytes": 264898
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "sha256": "e4527a0ee80cff2f4a456ae6bb97fb4168405373cd4799058b1dc36e78f502f1",
+          "bytes": 2253,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "242d48927622fe9978e44555043a86c5d97ee8134876180f6d6e7401826406f2",
+        "fingerprint": "a9e65bda3bafb43540de21ed060a3aca852d92b25a6932f24da666b019d06ac5",
+        "generatedAt": "2026-08-22T05:17:24.405Z"
+      }
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/thumbnail-dark.webp",
+        "sha256": "ecfbf2e36d305cf68540f3a6391723885afb36991632c3ab0d12762253ab9779",
+        "bytes": 5642
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "sha256": "e4527a0ee80cff2f4a456ae6bb97fb4168405373cd4799058b1dc36e78f502f1",
+          "bytes": 2253,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "242d48927622fe9978e44555043a86c5d97ee8134876180f6d6e7401826406f2",
+        "fingerprint": "a9e65bda3bafb43540de21ed060a3aca852d92b25a6932f24da666b019d06ac5",
+        "generatedAt": "2026-08-22T05:17:24.405Z"
+      }
+    },
+    {
+      "owner": "web/blog/foreign-resident-five-percent-municipalities",
+      "file": "app/blog/foreign-resident-five-percent-municipalities/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/foreign-resident-five-percent-municipalities/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/thumbnail-light.webp",
+        "sha256": "2b551c174dda96d50e27e4a1ad8f58d4b89c048fabf3be7c04b617e353dcbc80",
+        "bytes": 10338
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/foreign-resident-five-percent-municipalities/ogp/generation.json",
+          "sha256": "e4527a0ee80cff2f4a456ae6bb97fb4168405373cd4799058b1dc36e78f502f1",
+          "bytes": 2253,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "242d48927622fe9978e44555043a86c5d97ee8134876180f6d6e7401826406f2",
+        "fingerprint": "a9e65bda3bafb43540de21ed060a3aca852d92b25a6932f24da666b019d06ac5",
+        "generatedAt": "2026-08-22T05:17:24.405Z"
+      }
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-map.svg"
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/article.md",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/article.md",
+          "sha256": "85bf7649db904d337cd42fc2ed2029bd97b28d24acc7acd5be72c791a0397bdc",
+          "bytes": 8603,
+          "role": "article",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "unverified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-map.svg",
+          "alt": "新潟県と各県の純移動の地理分布",
+          "heading": "地図でみる純移動の広がり",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "missingReason": "本文参照はありますが、画像を取得できません。"
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.svg",
+        "sha256": "c7b992d45583444d89b4cfa6c3b84d08bbc169394288b2b7daaaa1d2cb444846",
+        "bytes": 6883
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/article.md",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/article.md",
+          "sha256": "85bf7649db904d337cd42fc2ed2029bd97b28d24acc7acd5be72c791a0397bdc",
+          "bytes": 8603,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "niigata-migration-flow-migration-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.source.json",
+          "sha256": "f816903b3aff77045e1f84dcbb89f8b691cad41d0aed3b0040de2ae217d6f4ff",
+          "bytes": 848,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.svg",
+          "alt": "新潟県と各県の純移動",
+          "heading": "相手県別にみる純移動",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-ranking.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/stats/population-migration-inter-prefecture/migration-flow-2025.json",
+          "url": "https://storage.stats47.jp/app/stats/population-migration-inter-prefecture/migration-flow-2025.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-timeseries.svg"
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/article.md",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/article.md",
+          "sha256": "85bf7649db904d337cd42fc2ed2029bd97b28d24acc7acd5be72c791a0397bdc",
+          "bytes": 8603,
+          "role": "article",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "unverified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/data/niigata-migration-flow-migration-timeseries.svg",
+          "alt": "新潟県の転入・転出の推移",
+          "heading": "転入・転出の推移",
+          "line": 53
+        }
+      ],
+      "format": "svg",
+      "missingReason": "本文参照はありますが、画像を取得できません。"
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/background.jpg",
+        "sha256": "2ce65575390d3833c230247bc2005dc703182c854de836d383313cdeb0d447dc",
+        "bytes": 88210
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/generation.json",
+          "sha256": "3684c28081877437f891bcae5616f3d9e3a9e26bdd38ba5349a58e8f0181d693",
+          "bytes": 2091,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "afbd94172d420adf2d8706fcb36c6f0be5f3651f9094b90f3932bb2aa472b4aa",
+        "fingerprint": "44d5a3455eb20edaa950e390360c3925e1d2c7c82af40f720ce7dc5dd8bc4133",
+        "generatedAt": "2026-08-30T22:24:06.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/ogp.png",
+        "sha256": "90ea31e5c879ff3cc6f8af75e32031af47bb86753dd945ea529730efcfd53d21",
+        "bytes": 518496
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/generation.json",
+          "sha256": "3684c28081877437f891bcae5616f3d9e3a9e26bdd38ba5349a58e8f0181d693",
+          "bytes": 2091,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "afbd94172d420adf2d8706fcb36c6f0be5f3651f9094b90f3932bb2aa472b4aa",
+        "fingerprint": "44d5a3455eb20edaa950e390360c3925e1d2c7c82af40f720ce7dc5dd8bc4133",
+        "generatedAt": "2026-08-30T22:24:06.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/thumbnail-dark.webp",
+        "sha256": "10ccdefad8357c59a8e9986af4b13c82a2b40236b096fc756e14be8b20936a19",
+        "bytes": 12282
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/generation.json",
+          "sha256": "3684c28081877437f891bcae5616f3d9e3a9e26bdd38ba5349a58e8f0181d693",
+          "bytes": 2091,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "afbd94172d420adf2d8706fcb36c6f0be5f3651f9094b90f3932bb2aa472b4aa",
+        "fingerprint": "44d5a3455eb20edaa950e390360c3925e1d2c7c82af40f720ce7dc5dd8bc4133",
+        "generatedAt": "2026-08-30T22:24:06.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/niigata-migration-flow",
+      "file": "app/blog/niigata-migration-flow/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/niigata-migration-flow/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/thumbnail-light.webp",
+        "sha256": "86c8135784a8ceec25ccd4197fba955723aa26c958a91a41c6236a4462b20e29",
+        "bytes": 23960
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/niigata-migration-flow/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/niigata-migration-flow/ogp/generation.json",
+          "sha256": "3684c28081877437f891bcae5616f3d9e3a9e26bdd38ba5349a58e8f0181d693",
+          "bytes": 2091,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "afbd94172d420adf2d8706fcb36c6f0be5f3651f9094b90f3932bb2aa472b4aa",
+        "fingerprint": "44d5a3455eb20edaa950e390360c3925e1d2c7c82af40f720ce7dc5dd8bc4133",
+        "generatedAt": "2026-08-30T22:24:06.287Z"
+      }
+    },
+    {
+      "owner": "web/material/098650f47098f36ceeb2c7d2",
+      "file": "assets/blog/article-backgrounds/lake-count-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/lake-count-prefecture-gap.jpg",
+        "sha256": "69b2ca58734e28c03640b749bb606286672e4b73f96a17e957c9e49942cfe3a3",
+        "bytes": 71910
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/lake-count-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/19714ddefd21444387ab11b9",
+      "file": "assets/blog/article-backgrounds/natto-consumption-expenditure.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/natto-consumption-expenditure.jpg",
+        "sha256": "38b4fe5cc0c8ebe4e18bc85041d08ff7741acd209fb9b62eb6422c245192a13e",
+        "bytes": 81470
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/natto-consumption-expenditure.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8c4422129802bca491d9b64f",
+      "file": "assets/blog/article-backgrounds/consumption-expenditure-multi-person-households-per-month.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/consumption-expenditure-multi-person-households-per-month.jpg",
+        "sha256": "4c6a662bd68d92bf5f89dbf69261535d792c7bed7758946ba3f8034b60022609",
+        "bytes": 79618
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/consumption-expenditure-multi-person-households-per-month.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b3527ef33073eeddef4122d8",
+      "file": "assets/area-specialty/47000/handama.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/47000/handama.webp",
+        "sha256": "12bd171ef0120ed31fd1593fa0d3f8c54e9374c0f7e0a71dcd9e8e6a3e0406c0",
+        "bytes": 35936
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/47000/handama.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/cb40235c57c5daf45574b1c0",
+      "file": "assets/blog/article-backgrounds/voluntary-car-insurance-rate-bodily-injury-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/voluntary-car-insurance-rate-bodily-injury-prefecture-gap.jpg",
+        "sha256": "09848fdc07ecf3b82f265f248b0f044c54c9229cf555bc26f5268549460b4b83",
+        "bytes": 76931
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/voluntary-car-insurance-rate-bodily-injury-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/f8f2ac7658879f5ce5fced4f",
+      "file": "assets/blog/article-backgrounds/consumer-price-regional-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/consumer-price-regional-gap.jpg",
+        "sha256": "e40e9fc9c89972ad1c16c26b9210576c1790494c02f625e751c5e5f8c2dc4a6d",
+        "bytes": 87569
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/consumer-price-regional-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/disabled-employment-rate",
+      "file": "app/ranking/disabled-employment-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disabled-employment-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/ogp/ogp.png",
+        "sha256": "1ccbdfeb061a4da9c7e35089caeaed24688d0c75d434edcdf9e23d2d8848dada",
+        "bytes": 59153
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disabled-employment-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/ogp/generation.json",
+          "sha256": "bcb26fb6556ed07a56635e3707af4e526c7ab4cbb1d30848624bac575f81887b",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disabled-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disabled-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "bd4a39135ba2b13bf8c916d1c3f64aa89973d6220570cdb39474db488f624af7",
+        "fingerprint": "9f0879242e05eedb1c6de4469488ab4a8e562e193dc7cccc330f025740028ae4",
+        "generatedAt": "2026-10-10T21:33:02.197Z"
+      }
+    },
+    {
+      "owner": "web/ranking/disabled-employment-rate",
+      "file": "app/ranking/disabled-employment-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disabled-employment-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/thumbnail-dark.webp",
+        "sha256": "fcf10f86db14a995a8461b8767f33ec1ecf0c5a0daf2d26fc571b14d95ad3d0d",
+        "bytes": 15268
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disabled-employment-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/thumbnail.json",
+          "sha256": "43fbcc183555a8718f3f638edf31ef65d8c0da03eb6645a55ce52b4b25a2bdff",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disabled-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disabled-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "07f7a1330f1bd04c9e13367c13f7726518f714b6684263d687aed06176a88b5d",
+        "fingerprint": "92bae53e0189f619acf9715a976026f0bd68783b05a2d18041feb8c5f98519eb",
+        "generatedAt": "2026-10-10T21:50:13.271Z"
+      }
+    },
+    {
+      "owner": "web/ranking/disabled-employment-rate",
+      "file": "app/ranking/disabled-employment-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disabled-employment-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/thumbnail-light.webp",
+        "sha256": "b2e2265d3ab9b1116098c72dd96babc378317532869502c8755ab4f81fd432d8",
+        "bytes": 13646
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disabled-employment-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/thumbnail.json",
+          "sha256": "43fbcc183555a8718f3f638edf31ef65d8c0da03eb6645a55ce52b4b25a2bdff",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disabled-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disabled-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disabled-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "07f7a1330f1bd04c9e13367c13f7726518f714b6684263d687aed06176a88b5d",
+        "fingerprint": "92bae53e0189f619acf9715a976026f0bd68783b05a2d18041feb8c5f98519eb",
+        "generatedAt": "2026-10-10T21:50:13.271Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count",
+      "file": "app/ranking/high-school-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count/ogp/ogp.png",
+        "sha256": "f2f72a602e67a5da55691a13609bbc8a277a931a472943a178b65131cfa11f7b",
+        "bytes": 58810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/ogp/generation.json",
+          "sha256": "e76fa4d372ad0c662f389477ebb009957ea6b9eea18b1289994aaa421eaf437a",
+          "bytes": 901,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "a3e4a8494ec591292fab885ee2fa2afc28168cdba1735ac1b9ef077da230e7ef",
+        "fingerprint": "ad2ba47eeafe9a5a14f3dec72cf9a05816f203364f72e428a1239238057232d8",
+        "generatedAt": "2026-10-01T18:11:24.246Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count",
+      "file": "app/ranking/high-school-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count/thumbnail-dark.webp",
+        "sha256": "530202685a9ce281f92fbe635846951cfe209f49502f7a6dc3852a0fe82483bf",
+        "bytes": 15348
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/thumbnail.json",
+          "sha256": "c2d4903a0f0d73ee0e2b7f54263c735f31b17ee070c03b58b20b20e0895c0a7b",
+          "bytes": 1727,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dfb3c41f128eacae073bcb74f67a25010e1086d6de1059340c75e54fac275420",
+        "fingerprint": "5501a56516385dd132306287637a70abf9dce24d5e321f360f5b51dc6cae4078",
+        "generatedAt": "2026-10-01T18:35:59.181Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count",
+      "file": "app/ranking/high-school-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count/thumbnail-light.webp",
+        "sha256": "712d604eb02fa168c6a00e5c1095528e762ff154313257473b8f06cec22d707e",
+        "bytes": 13954
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/thumbnail.json",
+          "sha256": "c2d4903a0f0d73ee0e2b7f54263c735f31b17ee070c03b58b20b20e0895c0a7b",
+          "bytes": 1727,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dfb3c41f128eacae073bcb74f67a25010e1086d6de1059340c75e54fac275420",
+        "fingerprint": "5501a56516385dd132306287637a70abf9dce24d5e321f360f5b51dc6cae4078",
+        "generatedAt": "2026-10-01T18:35:59.181Z"
+      }
+    },
+    {
+      "owner": "web/ranking/male-parttime-workers",
+      "file": "app/ranking/male-parttime-workers/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/male-parttime-workers/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/ogp/ogp.png",
+        "sha256": "35649fe34693bbee36a888f240a96efa4989efd813a7d2fa549746dc9171f947",
+        "bytes": 65169
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/male-parttime-workers/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/ogp/generation.json",
+          "sha256": "667c116708d55af31c1aee4aea4e9287518de8033e21c8800a79e8f2d18accdd",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/male-parttime-workers/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/male-parttime-workers/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "bad903caf7fc2bd4b5a9d2c955713afa5d709c349acf169067abc9e1b8882219",
+        "fingerprint": "fa09deec6d118f8ace7c1ddc71dc52904f3688a055abca4e4ac3e3b2bb6a4d9e",
+        "generatedAt": "2026-10-03T20:59:46.368Z"
+      }
+    },
+    {
+      "owner": "web/ranking/male-parttime-workers",
+      "file": "app/ranking/male-parttime-workers/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/male-parttime-workers/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/thumbnail-dark.webp",
+        "sha256": "97cb06be2d58ea5b48f7d5fca1a32b4c5959c0bae401353d45176eb8c34fba8d",
+        "bytes": 17812
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/male-parttime-workers/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/thumbnail.json",
+          "sha256": "43b7289c4b2e19290d92e57f6164d04d9ef16b4391c2500039cfb65198a4dce2",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/male-parttime-workers/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/male-parttime-workers/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "631303e3edab7b39450fffd6206d052f1220d59ea428f07dedbfb78547603e5e",
+        "fingerprint": "abd7fcc82aa91c81544b3bbc154e5956e010f55dfb87c3190542b37e34dbf916",
+        "generatedAt": "2026-10-03T21:25:23.915Z"
+      }
+    },
+    {
+      "owner": "web/ranking/male-parttime-workers",
+      "file": "app/ranking/male-parttime-workers/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/male-parttime-workers/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/thumbnail-light.webp",
+        "sha256": "ce991437812ffb8df39cd14377be6309409813e2b85b54ed5d96d05c6e9d3195",
+        "bytes": 16268
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/male-parttime-workers/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/thumbnail.json",
+          "sha256": "43b7289c4b2e19290d92e57f6164d04d9ef16b4391c2500039cfb65198a4dce2",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/male-parttime-workers/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/male-parttime-workers/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/male-parttime-workers/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "631303e3edab7b39450fffd6206d052f1220d59ea428f07dedbfb78547603e5e",
+        "fingerprint": "abd7fcc82aa91c81544b3bbc154e5956e010f55dfb87c3190542b37e34dbf916",
+        "generatedAt": "2026-10-03T21:25:23.915Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mens-socks-consumption-quantity",
+      "file": "app/ranking/mens-socks-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mens-socks-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/ogp/ogp.png",
+        "sha256": "a2c9cccce6a4b03adc79fe8b7d12ec364bb322328c76ba63bbb70ce8dc839abe",
+        "bytes": 59539
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mens-socks-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/ogp/generation.json",
+          "sha256": "523c36190196dae487651155185e2ad75e680acc30e26a9dab5732c7ce13b2ef",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "4a87138a27a2894acf5d4be58d0dd837a8ae90e4667f51cc2cadfcc9fe64b613",
+        "fingerprint": "a3453d256243276e12916b3ec237a7fc3bebefb8eff508a06ae93d0bb183811e",
+        "generatedAt": "2026-10-03T20:59:56.929Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mens-socks-consumption-quantity",
+      "file": "app/ranking/mens-socks-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mens-socks-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "9289108135041ecf253341eeca914fca84419318bd22c06945094145933d1362",
+        "bytes": 16458
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mens-socks-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/thumbnail.json",
+          "sha256": "cc3f6e894101e436179b4d385ed423dca157370546c6a49f377cb9977ffd29be",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "65c05a9fe11a46ce8067a8277700b9cdf414519b79492c0ba41cfc43aaa41f11",
+        "fingerprint": "c457e1cd7b6dd6f275df9737cf46bb5a9d4b14c9add61bc123923d7ff03fe462",
+        "generatedAt": "2026-10-03T21:25:26.699Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mens-socks-consumption-quantity",
+      "file": "app/ranking/mens-socks-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mens-socks-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/thumbnail-light.webp",
+        "sha256": "9e7459949bf070b76695f3464f17f9b3680519f9dcc76c13290db857144a5290",
+        "bytes": 14838
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mens-socks-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/thumbnail.json",
+          "sha256": "cc3f6e894101e436179b4d385ed423dca157370546c6a49f377cb9977ffd29be",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mens-socks-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mens-socks-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "65c05a9fe11a46ce8067a8277700b9cdf414519b79492c0ba41cfc43aaa41f11",
+        "fingerprint": "c457e1cd7b6dd6f275df9737cf46bb5a9d4b14c9add61bc123923d7ff03fe462",
+        "generatedAt": "2026-10-03T21:25:26.699Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-bags-consumption-expenditure",
+      "file": "app/ranking/other-bags-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-bags-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/ogp/ogp.png",
+        "sha256": "9d9b48fe6ac5c1d01a423ed4cd8b337c6c43a35113a83b9b59dc459d35f149ef",
+        "bytes": 61722
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-bags-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/ogp/generation.json",
+          "sha256": "10a9bd5fb3982534411c7e19fbd5453fdf7fd5e65cac93a116f1547c043956be",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "04b9b12752fcf20c9a0fa33f9a9732d6c9cce0588b084fd2bea9390b6409cace",
+        "fingerprint": "9af3f5e7075f5b184aa6c57b275e71091e199cbca58ffb86269f7a53fccc8300",
+        "generatedAt": "2026-10-03T21:00:29.743Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-bags-consumption-expenditure",
+      "file": "app/ranking/other-bags-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-bags-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "ae835e3bf9059e39f958aa87c3a50a106b7a9c330da9f0a18caaf20e9c967092",
+        "bytes": 16940
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-bags-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/thumbnail.json",
+          "sha256": "25d6ff96f229b62ee1c6a6a24c8703dbfdf8964c39c7c2dc63b1ea4f091b1887",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9d62a1eba28e88797088a751b39e9452646762844aaaec9b9914f768d4a2f1ce",
+        "fingerprint": "a941273c1f01f6f30ceaa41c99adfd155089fc166476560af91aca64b7d4cf7a",
+        "generatedAt": "2026-10-03T21:25:35.199Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-bags-consumption-expenditure",
+      "file": "app/ranking/other-bags-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-bags-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "985d3592fd755ec2ddb964c2eedf870817e9d7dcd6401c2c666cb158a72f3813",
+        "bytes": 15300
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-bags-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/thumbnail.json",
+          "sha256": "25d6ff96f229b62ee1c6a6a24c8703dbfdf8964c39c7c2dc63b1ea4f091b1887",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-bags-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-bags-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9d62a1eba28e88797088a751b39e9452646762844aaaec9b9914f768d4a2f1ce",
+        "fingerprint": "a941273c1f01f6f30ceaa41c99adfd155089fc166476560af91aca64b7d4cf7a",
+        "generatedAt": "2026-10-03T21:25:35.199Z"
+      }
+    }
+  ]
+}

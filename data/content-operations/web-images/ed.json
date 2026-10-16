@@ -1,0 +1,1776 @@
+{
+  "items": [
+    {
+      "id": "web/blog/industrial-water-manufacturing-nexus",
+      "channel": "web",
+      "key": "industrial-water-manufacturing-nexus",
+      "title": "製造業と水資源の切れない関係",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/industrial-water-manufacturing-nexus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "821ff108f33cf3f936eae75396e129f1c2b311ee974be0a71819ec646cece51f",
+      "catalogBasis": "b92caf002efae065223b36e9562e156092a57f7b2c493ac864b123cb065e46e7",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+        "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+        "bytes": 13049
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/category/miningindustry",
+      "channel": "web",
+      "key": "miningindustry",
+      "title": "鉱工業",
+      "category": "category",
+      "status": "published",
+      "url": "https://stats47.jp/category/miningindustry",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "575a7cce7a93a7a63d82d9033a002dd0aeb4db38ad66e5eb9db651801dd2a540",
+      "catalogBasis": "575a7cce7a93a7a63d82d9033a002dd0aeb4db38ad66e5eb9db651801dd2a540",
+      "indexComplete": true
+    },
+    {
+      "id": "web/material/7e2c8e71529af4e67ffce867",
+      "channel": "web",
+      "key": "assets/note/magazine-covers/koumuin-estat-claude-code/magazine-cover-1280x670.svg",
+      "title": "magazine-cover-1280x670.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0703dabd783c0bd74024922169df33227d32fa18b21865dfe661ed8d36601d11"
+    },
+    {
+      "id": "web/material/928eb6860c1dd214d39d712d",
+      "channel": "web",
+      "key": "apps/web/public/brand/atlas-v1/source-regional-landscape-dark.jpg",
+      "title": "source-regional-landscape-dark.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3ea7035296000f49fd7cd8d160405fffc89bc4229409709d0cf19fd8350ca6a1"
+    },
+    {
+      "id": "web/ranking/cabbage-consumption-quantity",
+      "channel": "web",
+      "key": "cabbage-consumption-quantity",
+      "title": "キャベツ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cabbage-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e4989e9ac5440ca6b36492b58019e8d2f5112856d0dfe0d0206f755d544d4229",
+      "catalogBasis": "e4989e9ac5440ca6b36492b58019e8d2f5112856d0dfe0d0206f755d544d4229",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/final-education-junior-college-technical-college-ratio",
+      "channel": "web",
+      "key": "final-education-junior-college-technical-college-ratio",
+      "title": "最終学歴が短大・高専卒の者の割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/final-education-junior-college-technical-college-ratio",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3afe606d8fb18c5ef64d06213cfc7007ae880f820fbbee74b5de8c246ea15cd6",
+      "catalogBasis": "3afe606d8fb18c5ef64d06213cfc7007ae880f820fbbee74b5de8c246ea15cd6",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/high-school-count-per-100k-15-17",
+      "channel": "web",
+      "key": "high-school-count-per-100k-15-17",
+      "title": "高等学校数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/high-school-count-per-100k-15-17",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3b96bba748de875ef27b1da16a163f9fc0e84b7256245b1e2261df760ab247e3",
+      "catalogBasis": "3b96bba748de875ef27b1da16a163f9fc0e84b7256245b1e2261df760ab247e3",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/marine-aquaculture-harvest",
+      "channel": "web",
+      "key": "marine-aquaculture-harvest",
+      "title": "海面養殖業収獲量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/marine-aquaculture-harvest",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fdcde901ade97f81782af899e69305b218e2869766bd693d3c03172870f26f61",
+      "catalogBasis": "fdcde901ade97f81782af899e69305b218e2869766bd693d3c03172870f26f61",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/moving-in-excess-rate-japanese",
+      "channel": "web",
+      "key": "moving-in-excess-rate-japanese",
+      "title": "転入超過率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/moving-in-excess-rate-japanese",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f6b2885121cb2c09b8fced5ccb892013002c50adaf1b1519183c1c5a80c5282d",
+      "catalogBasis": "f6b2885121cb2c09b8fced5ccb892013002c50adaf1b1519183c1c5a80c5282d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/secondary-education-school-count-per-100k-12-17",
+      "channel": "web",
+      "key": "secondary-education-school-count-per-100k-12-17",
+      "title": "中等教育学校数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/secondary-education-school-count-per-100k-12-17",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e7c1385d1c455b02a7691b6cabc8f7f531430b4da33fafc7dbf08e937389a616",
+      "catalogBasis": "e7c1385d1c455b02a7691b6cabc8f7f531430b4da33fafc7dbf08e937389a616",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/summary-findings.svg",
+        "sha256": "b48f96a4293daef1f80bbcf1dc06589f7f240da448cd37b1195ab8a0631a874b",
+        "bytes": 3624
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/summary-findings.json",
+          "sha256": "e57e1e235cd7d09066c4a4acee0f78c345c6125a198a8dab673ce8aa19d385e4",
+          "bytes": 912,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/summary-findings.source.json",
+          "sha256": "e137fd85eb8ddbd0522389263d0e7c2e46b0b34c09ea067d0417747d8552ee6e",
+          "bytes": 358,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 111
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 570",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.svg",
+        "sha256": "8188f33d0433ad52f22931dc06ce47cab14c17c7a14f33f4404481b00bde36c6",
+        "bytes": 6977
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-efficiency-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.json",
+          "sha256": "26b722100fe7c70a6259b4c22e2f3854f17f005ce3c8206fd43532ea7c35d3fd",
+          "bytes": 6966,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-efficiency-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.source.json",
+          "sha256": "4831627f2aec52bb5cccb596510ba68526a38e0edea1867d98ea248568002de2",
+          "bytes": 647,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-efficiency-ranking.svg",
+          "alt": "水効率（製造品出荷額 / 工業用水量）上位5・下位5県",
+          "heading": "水効率ランキング──少ない水で高い出荷額を実現する県",
+          "line": 50
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/manufacturing-shipment-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/industrial-water-usage/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/industrial-water-usage/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.svg",
+        "sha256": "9c9f8f137e76340815b208e207b11f5fbb50f2259aee8a80e316bbb32481a1c7",
+        "bytes": 32459
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-usage-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.json",
+          "sha256": "0221b3275ed895b487e834d6f76d45a043fcd6b221329d9731cba2b3e4f10656",
+          "bytes": 5463,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-usage-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.source.json",
+          "sha256": "de230724b086d11b70ce97d38bc171be89d5ec25103b345f2cda0116471a41fc",
+          "bytes": 350,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-map.svg",
+          "alt": "工業用水量 都道府県マップ",
+          "heading": "工業用水量の地域分布──太平洋ベルトと瀬戸内に集中",
+          "line": 36
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/industrial-water-usage/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/industrial-water-usage/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.svg",
+        "sha256": "5a79aad20c4eabe82abd49331794b7cb14ae51dd52b950a0d6e6c0d9f9dd7b7d",
+        "bytes": 6928
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-usage-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.json",
+          "sha256": "269e98a8248773c6ee334cf089056dbe252f40718df04ab29ce6734839bf1e9f",
+          "bytes": 6810,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-usage-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.source.json",
+          "sha256": "c42e5e58f780cf2f03648868794144d7fe85f45fbf6e12a1fe08f728530f6f46",
+          "bytes": 607,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-usage-ranking.svg",
+          "alt": "工業用水量 都道府県別 上位5・下位5",
+          "heading": "工業用水量ランキング──千葉・山口・愛知がTOP3",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/industrial-water-usage/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/industrial-water-usage/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.svg",
+        "sha256": "ccdc8ae7a5b1e94c8770cf09686c5739e8953025a9f4150d863ff832b1fa09e7",
+        "bytes": 10391
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-vs-addedvalue-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.json",
+          "sha256": "98238c9b599fc41b5fa401231ca246cfb0f42d4e898325f4d362bca3e3217a48",
+          "bytes": 6618,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-vs-addedvalue-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.source.json",
+          "sha256": "4e1744b291b05c2e114815480925336968b4bd04b0fb15110ed157a1dbbaba28",
+          "bytes": 619,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-addedvalue-scatter.svg",
+          "alt": "工業用水量 vs 製造業付加価値額",
+          "heading": "工業用水量 vs 製造業付加価値額──真の生産性はどこに",
+          "line": 80
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/industrial-water-usage/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/industrial-water-usage/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/manufacturing-industry-added-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-industry-added-value/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.svg",
+        "sha256": "06a4ca951f4dbc070939c3a60c3fcbd51db4af3deeb4e58308d7094aa6c32f03",
+        "bytes": 10397
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/article.md",
+          "sha256": "ce3c947d9cf89e50d1c11e5895f5f0f8fccfcf60d4cf5faf537975108a975954",
+          "bytes": 13049,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-vs-shipment-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.json",
+          "sha256": "9bd9be803dae6c0d404ca1ab4a243c4c15ca82e692d00466ea5179948ca69eab",
+          "bytes": 6660,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-vs-shipment-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.source.json",
+          "sha256": "bc03d9f9ba5e49e8d5e6200e2ca93a61bd695830f87bb4778725a179fe32b18b",
+          "bytes": 603,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/data/water-vs-shipment-scatter.svg",
+          "alt": "工業用水量 vs 製造品出荷額等",
+          "heading": "工業用水量 vs 製造品出荷額──水と生産の関係",
+          "line": 65
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/industrial-water-usage/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/industrial-water-usage/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/manufacturing-shipment-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/background.jpg",
+        "sha256": "140b9def45eea420bb40101dfe5f5074f2617f3852b1a56a73d0118d2f99147a",
+        "bytes": 105187
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "sha256": "291a96bd18c7ba306a5383b18427a6f92b625ef4b79011fd9aaf63303068210c",
+          "bytes": 2235,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc949c0433d04ace0bce11a37e62f89388723001137d9f34c5ff0a5623af3bc0",
+        "fingerprint": "40b5711c38582bfb75fa3459dceae73147ef20861189d78bc2d21c67cf518f02",
+        "generatedAt": "2026-08-22T05:17:28.581Z"
+      }
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/ogp.png",
+        "sha256": "589c77f82ec9ee9e709c22c68ee9c77e7da23c79add983d60c2e97729951520f",
+        "bytes": 570020
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "sha256": "291a96bd18c7ba306a5383b18427a6f92b625ef4b79011fd9aaf63303068210c",
+          "bytes": 2235,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc949c0433d04ace0bce11a37e62f89388723001137d9f34c5ff0a5623af3bc0",
+        "fingerprint": "40b5711c38582bfb75fa3459dceae73147ef20861189d78bc2d21c67cf518f02",
+        "generatedAt": "2026-08-22T05:17:28.581Z"
+      }
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/thumbnail-dark.webp",
+        "sha256": "9eb686cfb6fbfeec512c1fb5d37420c4b94db2aa34e7a1ba82d759bcaaa0630b",
+        "bytes": 18250
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "sha256": "291a96bd18c7ba306a5383b18427a6f92b625ef4b79011fd9aaf63303068210c",
+          "bytes": 2235,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc949c0433d04ace0bce11a37e62f89388723001137d9f34c5ff0a5623af3bc0",
+        "fingerprint": "40b5711c38582bfb75fa3459dceae73147ef20861189d78bc2d21c67cf518f02",
+        "generatedAt": "2026-08-22T05:17:28.581Z"
+      }
+    },
+    {
+      "owner": "web/blog/industrial-water-manufacturing-nexus",
+      "file": "app/blog/industrial-water-manufacturing-nexus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/industrial-water-manufacturing-nexus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/thumbnail-light.webp",
+        "sha256": "5d384d240c69f1f009232fef2a7a7b69ada936957da4e54330210192c1937a3e",
+        "bytes": 33962
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/industrial-water-manufacturing-nexus/ogp/generation.json",
+          "sha256": "291a96bd18c7ba306a5383b18427a6f92b625ef4b79011fd9aaf63303068210c",
+          "bytes": 2235,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc949c0433d04ace0bce11a37e62f89388723001137d9f34c5ff0a5623af3bc0",
+        "fingerprint": "40b5711c38582bfb75fa3459dceae73147ef20861189d78bc2d21c67cf518f02",
+        "generatedAt": "2026-08-22T05:17:28.581Z"
+      }
+    },
+    {
+      "owner": "web/category/miningindustry",
+      "file": "https://stats47.jp/og-image.jpg",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/og-image.jpg"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "category-ogp",
+      "generation": {
+        "generator": "static",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    },
+    {
+      "owner": "web/material/7e2c8e71529af4e67ffce867",
+      "file": "assets/note/magazine-covers/koumuin-estat-claude-code/magazine-cover-1280x670.svg",
+      "original": {
+        "provider": "git",
+        "path": "assets/note/magazine-covers/koumuin-estat-claude-code/magazine-cover-1280x670.svg",
+        "sha256": "1d88a245b377d5c11e2579d63835e823bfb7a5d480a9fd642c716820533e182a",
+        "bytes": 2605
+      },
+      "inputFiles": [],
+      "templateId": "svg-bar",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "assets/note/magazine-covers/koumuin-estat-claude-code/magazine-cover-1280x670.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/928eb6860c1dd214d39d712d",
+      "file": "apps/web/public/brand/atlas-v1/source-regional-landscape-dark.jpg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/brand/atlas-v1/source-regional-landscape-dark.jpg",
+        "url": "https://stats47.jp/brand/atlas-v1/source-regional-landscape-dark.jpg",
+        "sha256": "72bdb2c7d6f5913f920f060cd0e2e3a4bb642e678027a7348925a2a04ad2f845",
+        "bytes": 171629
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/brand/atlas-v1/source-regional-landscape-dark.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/cabbage-consumption-quantity",
+      "file": "app/ranking/cabbage-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cabbage-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/ogp/ogp.png",
+        "sha256": "83115c3961b6012e15a7c36e2b0012d0512f2fdd09830a6bcd8f203903c90abf",
+        "bytes": 60183
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cabbage-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/ogp/generation.json",
+          "sha256": "72be113e3c7be05cfedf436a87975f116acdf81c53afe9374092ee8c5fa0e117",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "8a2c56de300d5cb3fe3cde34807e270c270ee7c506290db68d6d59fefcdab771",
+        "fingerprint": "c7b46306eae52b039a14a88a7ce3b3c2f5610d31e79a83dd300fdbb0023871ab",
+        "generatedAt": "2026-10-10T21:32:26.504Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cabbage-consumption-quantity",
+      "file": "app/ranking/cabbage-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cabbage-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "6ddd6b67172703a792ffd03cb9ec1ad71231170b1ffeed9dad86fcd6817b264f",
+        "bytes": 16364
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cabbage-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/thumbnail.json",
+          "sha256": "e96c2b1181c3e63da34ec5eb15edb19a86faaa2199bb1f38d5c34ab31059b5e1",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "791921adbbd04432a8d8630281de3940d4fd80d3ce0ecb48d667de3606ebf740",
+        "fingerprint": "446a69698abd50bf8ce450712439d3f3f39eca83393343c37f69476cc57711b2",
+        "generatedAt": "2026-10-10T21:50:04.033Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cabbage-consumption-quantity",
+      "file": "app/ranking/cabbage-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cabbage-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/thumbnail-light.webp",
+        "sha256": "faaa294b4e79471033673670c0123f541ce4d30ca23edcad46d9359a1710aaa7",
+        "bytes": 14822
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cabbage-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/thumbnail.json",
+          "sha256": "e96c2b1181c3e63da34ec5eb15edb19a86faaa2199bb1f38d5c34ab31059b5e1",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cabbage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cabbage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "791921adbbd04432a8d8630281de3940d4fd80d3ce0ecb48d667de3606ebf740",
+        "fingerprint": "446a69698abd50bf8ce450712439d3f3f39eca83393343c37f69476cc57711b2",
+        "generatedAt": "2026-10-10T21:50:04.033Z"
+      }
+    },
+    {
+      "owner": "web/ranking/final-education-junior-college-technical-college-ratio",
+      "file": "app/ranking/final-education-junior-college-technical-college-ratio/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/final-education-junior-college-technical-college-ratio/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/ogp/ogp.png",
+        "sha256": "b936238e46e65af15abdff6f2a2bd25a24a2f8b36fa91ff87b257650bc5a9df5",
+        "bytes": 64804
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/final-education-junior-college-technical-college-ratio/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/ogp/generation.json",
+          "sha256": "d53fa99f2733a45e1adc6fa05ea621ed7204099c998a22f84a903dfed5e42823",
+          "bytes": 1049,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "cf0694c6de92ebca735e6ccdd69979b3812b0a81a3db6d15964b4172d7822d9a",
+        "fingerprint": "14cd3ba2b3c8f8403d20b725ab5b696c0ca19867334d2b4c72a415eb7cc11ab7",
+        "generatedAt": "2026-10-01T18:10:42.610Z"
+      }
+    },
+    {
+      "owner": "web/ranking/final-education-junior-college-technical-college-ratio",
+      "file": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-dark.webp",
+        "sha256": "28be3d2ae4a3b9e6c3688cb40c44424266d6c181bff0c35e11be65e0752655b4",
+        "bytes": 19056
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/thumbnail.json",
+          "sha256": "c3ee38df1a0b4d61b5c46c5d444254640819fcba820fe8ddb7d08ffe526ef78c",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b6a4dbd1daac6c6d24b5b748f36b15784c49708ea60ea0aef54d9b785de0656f",
+        "fingerprint": "d20edfce8f1b66b370669acdd32eb949a160b36e0da5295ba28281d05d31cd4e",
+        "generatedAt": "2026-10-01T18:35:48.434Z"
+      }
+    },
+    {
+      "owner": "web/ranking/final-education-junior-college-technical-college-ratio",
+      "file": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/thumbnail-light.webp",
+        "sha256": "cb51d53ebd00bc9312093ba27ab29b955c57271a34405ce4474d860c6cc82683",
+        "bytes": 17348
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/final-education-junior-college-technical-college-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/thumbnail.json",
+          "sha256": "c3ee38df1a0b4d61b5c46c5d444254640819fcba820fe8ddb7d08ffe526ef78c",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/final-education-junior-college-technical-college-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b6a4dbd1daac6c6d24b5b748f36b15784c49708ea60ea0aef54d9b785de0656f",
+        "fingerprint": "d20edfce8f1b66b370669acdd32eb949a160b36e0da5295ba28281d05d31cd4e",
+        "generatedAt": "2026-10-01T18:35:48.434Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count-per-100k-15-17",
+      "file": "app/ranking/high-school-count-per-100k-15-17/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count-per-100k-15-17/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/ogp/ogp.png",
+        "sha256": "90b2272d51148348170035a37a3ddea5106415750e6d0d89a325a7fc7a6eac75",
+        "bytes": 59661
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count-per-100k-15-17/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/ogp/generation.json",
+          "sha256": "79a005dd398e75b8530c43f7814237f596aba42e2906930fcf422800afb4064a",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9745eb911f8359cb09db895be216f45a26c57fa112abf5d37d593af36e8e30a3",
+        "fingerprint": "33aace0bdbf2b87f87a5e78c35798181bb9294428451747fe6fbbbc45866680e",
+        "generatedAt": "2026-10-01T18:11:24.353Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count-per-100k-15-17",
+      "file": "app/ranking/high-school-count-per-100k-15-17/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count-per-100k-15-17/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/thumbnail-dark.webp",
+        "sha256": "9cd796010655c127f8d81aaf694afc2d767e79e9b3f097a95c77adb4ca4156b3",
+        "bytes": 15586
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count-per-100k-15-17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/thumbnail.json",
+          "sha256": "c6bc329931831b20dd44ff3ff1a613a9813413805a7285f2f465d11eade24da0",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0c4b18ccef417ee6047e6e3fa9d5958addbf75d7d01e4dde858379f1daff2d8a",
+        "fingerprint": "08e7756bd4d2c85182a7604c5a1cb4358422c2e9702c778972c65600383ccbab",
+        "generatedAt": "2026-10-01T18:35:59.234Z"
+      }
+    },
+    {
+      "owner": "web/ranking/high-school-count-per-100k-15-17",
+      "file": "app/ranking/high-school-count-per-100k-15-17/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/high-school-count-per-100k-15-17/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/thumbnail-light.webp",
+        "sha256": "579fe14dd39f7641db44d754ea988b19341cb40c84bdb6757de05da5ec204ff6",
+        "bytes": 14264
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/high-school-count-per-100k-15-17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/thumbnail.json",
+          "sha256": "c6bc329931831b20dd44ff3ff1a613a9813413805a7285f2f465d11eade24da0",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/high-school-count-per-100k-15-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-count-per-100k-15-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0c4b18ccef417ee6047e6e3fa9d5958addbf75d7d01e4dde858379f1daff2d8a",
+        "fingerprint": "08e7756bd4d2c85182a7604c5a1cb4358422c2e9702c778972c65600383ccbab",
+        "generatedAt": "2026-10-01T18:35:59.234Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-aquaculture-harvest",
+      "file": "app/ranking/marine-aquaculture-harvest/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-aquaculture-harvest/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/ogp/ogp.png",
+        "sha256": "b58fd4eac9ba1f98f2b42db7e398170bc0537d12ddefd6ba4adb0155a404e46a",
+        "bytes": 61731
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-aquaculture-harvest/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/ogp/generation.json",
+          "sha256": "e1968fe27b7b913b3dec48d55eca0a58bce4a40589c2f138ee552b6b6e253f19",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "3418603769ad45cfe4c094b69d45a49d73ae78813b8e18df2ec68ea3a7143a88",
+        "fingerprint": "3d36f2d0d657798635d13a79046c5fa6b7bea8bab4adfeb8135b685691f78a66",
+        "generatedAt": "2026-10-03T20:59:49.059Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-aquaculture-harvest",
+      "file": "app/ranking/marine-aquaculture-harvest/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-aquaculture-harvest/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/thumbnail-dark.webp",
+        "sha256": "6a2b18c5d3fc6faeffcd1d4ad6eddbe893062a89c0ad3dbf9a7d9cd991f2385b",
+        "bytes": 17836
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-aquaculture-harvest/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/thumbnail.json",
+          "sha256": "dcc1d54a4164903fca34ec728d7622c2ee43fbad7665ac00f81405c0a1a7d459",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e083cb2fd2e3fc3774f627d682ff0103556f2d290ff10a9171648d60832772d",
+        "fingerprint": "7bf8059d47c90b544f54a22799cc8b82e3a69f1993519a850625d63c02b2f254",
+        "generatedAt": "2026-10-03T21:25:24.658Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-aquaculture-harvest",
+      "file": "app/ranking/marine-aquaculture-harvest/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-aquaculture-harvest/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/thumbnail-light.webp",
+        "sha256": "c57b63252258dab163fe8d68b8580094e2153b6a693900d1774d7d68a118f19f",
+        "bytes": 16560
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-aquaculture-harvest/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/thumbnail.json",
+          "sha256": "dcc1d54a4164903fca34ec728d7622c2ee43fbad7665ac00f81405c0a1a7d459",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e083cb2fd2e3fc3774f627d682ff0103556f2d290ff10a9171648d60832772d",
+        "fingerprint": "7bf8059d47c90b544f54a22799cc8b82e3a69f1993519a850625d63c02b2f254",
+        "generatedAt": "2026-10-03T21:25:24.658Z"
+      }
+    },
+    {
+      "owner": "web/ranking/moving-in-excess-rate-japanese",
+      "file": "app/ranking/moving-in-excess-rate-japanese/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/moving-in-excess-rate-japanese/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/ogp/ogp.png",
+        "sha256": "ff179b48ad966ad6c6bfafc34d4b3d86017bec3461a08a8dcd584778d8efde07",
+        "bytes": 58032
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/moving-in-excess-rate-japanese/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/ogp/generation.json",
+          "sha256": "5b51e394f34896b70a917c0895741c54e4e68260138a0cccd29114b3f1e601de",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "7f8b2f4872170b9f1b573cd85e1fe3cc461d5b63036d7dfc86d9cee465031263",
+        "fingerprint": "96b32376ee2bb3bf9cd7489032b9876fce5e5111cdeb56e2d52cad4a90797c8f",
+        "generatedAt": "2026-10-03T21:00:04.798Z"
+      }
+    },
+    {
+      "owner": "web/ranking/moving-in-excess-rate-japanese",
+      "file": "app/ranking/moving-in-excess-rate-japanese/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/moving-in-excess-rate-japanese/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/thumbnail-dark.webp",
+        "sha256": "a0c9935a18da6e2907b2a994735dd9f2a0b1c4b32597d7111693cf223b80b4c5",
+        "bytes": 14546
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/moving-in-excess-rate-japanese/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/thumbnail.json",
+          "sha256": "4b1eb2b1dde6a196701ae1d7e6e5ce61cc9b74d7bc178a05853f6eb7dfa2bb13",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5a4aeedebcbaceb809c6942d2a846df9389c6dc5145c3eb368415c18bc8ca6a4",
+        "fingerprint": "253b00b6f064b29a08d6454a4373a80d6f5761429a6358d4fd74adcbaede7fff",
+        "generatedAt": "2026-10-03T21:25:28.693Z"
+      }
+    },
+    {
+      "owner": "web/ranking/moving-in-excess-rate-japanese",
+      "file": "app/ranking/moving-in-excess-rate-japanese/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/moving-in-excess-rate-japanese/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/thumbnail-light.webp",
+        "sha256": "46b0e938ca731da398e3ccf7780c6a97c7642c798c56e71c6a1cff946607c0a0",
+        "bytes": 12360
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/moving-in-excess-rate-japanese/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/thumbnail.json",
+          "sha256": "4b1eb2b1dde6a196701ae1d7e6e5ce61cc9b74d7bc178a05853f6eb7dfa2bb13",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/moving-in-excess-rate-japanese/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate-japanese/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5a4aeedebcbaceb809c6942d2a846df9389c6dc5145c3eb368415c18bc8ca6a4",
+        "fingerprint": "253b00b6f064b29a08d6454a4373a80d6f5761429a6358d4fd74adcbaede7fff",
+        "generatedAt": "2026-10-03T21:25:28.693Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-education-school-count-per-100k-12-17",
+      "file": "app/ranking/secondary-education-school-count-per-100k-12-17/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-education-school-count-per-100k-12-17/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/ogp/ogp.png",
+        "sha256": "913a500ea1a03df1491ab178a9394326bc554f99f39db6d7276277774f06dc68",
+        "bytes": 76016
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-education-school-count-per-100k-12-17/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/ogp/generation.json",
+          "sha256": "b8f356f327bf503fcc0c83447c572c6e819e6d71b5b4ef3f607d034182221eea",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c9004b249bbc85b37acd085af76c0d17f2c7cd0602f2e1b942842d00e28ba702",
+        "fingerprint": "0b5369612e2f50a291a1665762fb09cf53bc56268140386bdf101c2e884ee967",
+        "generatedAt": "2026-08-15T18:42:46.155Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-education-school-count-per-100k-12-17",
+      "file": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-dark.webp",
+        "sha256": "8077db0323ae9d2d96dfe8946789646d7cfc443b24b9b311077073d61c3df135",
+        "bytes": 16438
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail.json",
+          "sha256": "0b7ad0612665f2e2b87be98c540cf59385a4526674fad0ae1b83b718ee756d8e",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c32e143d8124ba977a0a92353a4bf5d2e73d60141626bd9032e3d42ae431b3f7",
+        "fingerprint": "07fa4c54d1c015a2974b7bfc0fc8f0e555f2e41f260e96af6481a23bcbe01cf9",
+        "generatedAt": "2026-08-15T18:58:49.676Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-education-school-count-per-100k-12-17",
+      "file": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail-light.webp",
+        "sha256": "9e5f4205b6f12408128c4b57dfb93b55c9c315df1b8f1656f9effa42b017040f",
+        "bytes": 15022
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/thumbnail.json",
+          "sha256": "0b7ad0612665f2e2b87be98c540cf59385a4526674fad0ae1b83b718ee756d8e",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-education-school-count-per-100k-12-17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c32e143d8124ba977a0a92353a4bf5d2e73d60141626bd9032e3d42ae431b3f7",
+        "fingerprint": "07fa4c54d1c015a2974b7bfc0fc8f0e555f2e41f260e96af6481a23bcbe01cf9",
+        "generatedAt": "2026-08-15T18:58:49.676Z"
+      }
+    }
+  ]
+}

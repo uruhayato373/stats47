@@ -1,0 +1,2620 @@
+{
+  "items": [
+    {
+      "id": "web/blog/local-government-debt-burden",
+      "channel": "web",
+      "key": "local-government-debt-burden",
+      "title": "地方債残高は歳出の何倍か",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/local-government-debt-burden",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "899953ab857ab6f52f2383be95f6d58228678fff83a452790a8f239c5e92cd75",
+      "catalogBasis": "a2cabb919761edf0c61e332e8ca46dd2681fcff997a24b4ffac6795f434f0e39",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/article.md",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/article.md",
+        "sha256": "2d84f23f8840ed4abc89f17d419594f0eab2d808fe78fed7e611ef87826f59fa",
+        "bytes": 7799
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/school-nonattendance-pattern",
+      "channel": "web",
+      "key": "school-nonattendance-pattern",
+      "title": "不登校が最少の福井、最多の宮城──小中一貫して「低不登校県」になる条件とは",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/school-nonattendance-pattern",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "c95efc746ef049f1f7a330f99342fa96ce31c64574f60bb54422e7e049516692",
+      "catalogBasis": "cd73644c4233f6ed24cd1ce5a7f17c53cdaeb9f773a2da982228477692e421ec",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/article.md",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+        "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+        "bytes": 12062
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/suicide-rate-aging-nexus",
+      "channel": "web",
+      "key": "suicide-rate-aging-nexus",
+      "title": "自殺率と高齢化の相関",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/suicide-rate-aging-nexus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "0d8d59f15771332186e795a742a730cf5884cc1ab374bfbde03b5da59ff849b0",
+      "catalogBasis": "117277d9d3186b0d3943d86355a39b991d9d794f9bc0a411311e76ae7c892e10",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/article.md",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+        "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+        "bytes": 8442
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/water-infrastructure-crisis",
+      "channel": "web",
+      "key": "water-infrastructure-crisis",
+      "title": "水道の持続力は県で大きく違う",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/water-infrastructure-crisis",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "9e6841187c919e31f8c6605fe25079b78a75fa740c578b812a741e31f21c2c36",
+      "catalogBasis": "54f87266ced6ce3f618f57abfac6f09e651c7401b8d6103ab67ee4d046e627e3",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/article.md",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+        "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+        "bytes": 9595
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/08b01057e3bcbeb751384e95",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/income-quintile-overview.jpg",
+      "title": "income-quintile-overview.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e452c9265a30e30bd7a133714a0b65e53b2baa0bd86accd15a23410cd4d3bdb1"
+    },
+    {
+      "id": "web/material/12782c633f23f058cadbc593",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/new-hire-count-prefecture-gap.jpg",
+      "title": "new-hire-count-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "940cde7a88cbb436c75a357808e4a5afcffed9815f268473ee1e833818ae3be8"
+    },
+    {
+      "id": "web/material/5d86354beadebb1dbb0525d6",
+      "channel": "web",
+      "key": "assets/blog/codex-backgrounds/empty-house.jpg",
+      "title": "empty-house.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f47652ce0e4f96fdb9485e8d7d3b68568be003a281c027fb04e8a900cd5a88cf"
+    },
+    {
+      "id": "web/material/6ab4705aa3bf589f55644c90",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/self-financing-ratio-prefecture-gap.jpg",
+      "title": "self-financing-ratio-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6bd728bb4abe5ea8f81e381e0d3a8b435705afa0b731d1694fe9eb57b3180284"
+    },
+    {
+      "id": "web/material/c31baa158e540e5f5b1b39a2",
+      "channel": "web",
+      "key": "assets/area-specialty/24000/matoya-oyster.webp",
+      "title": "matoya-oyster.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "caec522d7d971e4d1ba4032041bad62814a123c9192e9668da073ae7b132eefe"
+    },
+    {
+      "id": "web/material/ddae0b6b0541edf685861120",
+      "channel": "web",
+      "key": "packages/gis/data/geoshape/svg/37_香川県.svg",
+      "title": "37_香川県.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fb7c47ede4a6857ff5d4e2619ae5deaa6a7d48a33ebb3f3384cbde587cb5ea1f"
+    },
+    {
+      "id": "web/ranking/haircut-consumption-quantity",
+      "channel": "web",
+      "key": "haircut-consumption-quantity",
+      "title": "カット代消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/haircut-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "98d5f9a8869da2279f046b1d01e73f71063d65e8ce152b9403a7e2149a12b847",
+      "catalogBasis": "98d5f9a8869da2279f046b1d01e73f71063d65e8ce152b9403a7e2149a12b847",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/onigiri-consumption-expenditure",
+      "channel": "web",
+      "key": "onigiri-consumption-expenditure",
+      "title": "おにぎり・その他消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/onigiri-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "77f0c1c99ab92328724d7f7c792efeae41ecbe1efbbf738daf0b879063857d10",
+      "catalogBasis": "77f0c1c99ab92328724d7f7c792efeae41ecbe1efbbf738daf0b879063857d10",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.svg",
+        "sha256": "9e65f9b0c638665869578ad3685e267db4c594f365565c27cd916878ba09341c",
+        "bytes": 10584
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/article.md",
+          "sha256": "2d84f23f8840ed4abc89f17d419594f0eab2d808fe78fed7e611ef87826f59fa",
+          "bytes": 7799,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "debt-vs-future-burden-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.json",
+          "sha256": "41faa6b8409b04608af930f2a145247e3e711f24b767fc58937d60b8ce67186d",
+          "bytes": 4762,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "debt-vs-future-burden-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.source.json",
+          "sha256": "9a59af76e901cced0c7437fd7be3587ae5ce8a60e2dead0cda8135d1ff049abc",
+          "bytes": 659,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/debt-vs-future-burden-scatter.svg",
+          "alt": "地方債現在高の対歳出比と将来負担比率（2022年度）",
+          "heading": "将来負担比率とは算定範囲が異なります",
+          "line": 48
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/local-debt-current-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/local-debt-current-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/future-burden-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/future-burden-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/data/local-debt-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/data/local-debt-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-map.svg",
+        "sha256": "a0325d60250b5e5badf61b7ecc247d7870a140c2396400ce7feedab808472c69",
+        "bytes": 32017
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/article.md",
+          "sha256": "2d84f23f8840ed4abc89f17d419594f0eab2d808fe78fed7e611ef87826f59fa",
+          "bytes": 7799,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "local-debt-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/local-debt-map.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-map.json",
+          "sha256": "315f1a9bfb0c6e2e642e9f995ee16f27d17844d20518d03e4a73c3e48030cebf",
+          "bytes": 5438,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "local-debt-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/local-debt-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-map.source.json",
+          "sha256": "1885111c5a209e3879a867747f4011c83c2c7fc32d7035fbf675d42ac55b57f8",
+          "bytes": 347,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-map.svg",
+          "alt": "地方債現在高の対歳出比マップ（2022年度）",
+          "heading": "47都道府県の分布を地図で確認する",
+          "line": 38
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/local-debt-current-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/local-debt-current-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.svg",
+        "sha256": "1570cdda9d63ee1f9085f78d94cc30cd91891e279a8aad91bfc0adb36bdaa551",
+        "bytes": 6964
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/article.md",
+          "sha256": "2d84f23f8840ed4abc89f17d419594f0eab2d808fe78fed7e611ef87826f59fa",
+          "bytes": 7799,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "local-debt-ratio-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.json",
+          "sha256": "15422890947dfa8608a8258d12bb4cc50201b4e0d255c9f559c221f20ab74331",
+          "bytes": 6801,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "local-debt-ratio-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.source.json",
+          "sha256": "b2a9bb22537b8a3c969ee2e9ace24975420a0c7d268192fdcb4ceca703ea7256",
+          "bytes": 624,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/data/local-debt-ratio-ranking.svg",
+          "alt": "地方債現在高の対歳出比（2022年度）",
+          "heading": "地方債現在高の対歳出比ランキング（2022年度）",
+          "line": 24
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/local-debt-current-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/local-debt-current-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/background.jpg",
+        "sha256": "3b1f84ca803a1963f6f12e7ee2b836f05b2fb5486e2fc56986581e6ef60ba271",
+        "bytes": 104416
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/generation.json",
+          "sha256": "a04727933e472da36cb9c5534ae81f3d47713e58ced38a4d632d7753ea8bc8ba",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "7b73a53cb25a3eca3770bec067cbb2ebbaf1f342999019be9d815bd218189775",
+        "fingerprint": "70b44057adfa65070b392d6df953fcb39d3ddd1e3515e77529cebb5e7d218903",
+        "generatedAt": "2026-10-02T12:16:44.609Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/ogp.png",
+        "sha256": "1b14ddaf91a1c1bc8ae8140c4f22fbe8984a2272e139339e2a70286cf2b964b1",
+        "bytes": 622469
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/generation.json",
+          "sha256": "a04727933e472da36cb9c5534ae81f3d47713e58ced38a4d632d7753ea8bc8ba",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "7b73a53cb25a3eca3770bec067cbb2ebbaf1f342999019be9d815bd218189775",
+        "fingerprint": "70b44057adfa65070b392d6df953fcb39d3ddd1e3515e77529cebb5e7d218903",
+        "generatedAt": "2026-10-02T12:16:44.609Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/thumbnail-dark.webp",
+        "sha256": "5f629850bdd3b5cccaebd93c5fc09fd0ceeeb718471ace5f67d10fe0217b48e0",
+        "bytes": 14106
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/generation.json",
+          "sha256": "a04727933e472da36cb9c5534ae81f3d47713e58ced38a4d632d7753ea8bc8ba",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "7b73a53cb25a3eca3770bec067cbb2ebbaf1f342999019be9d815bd218189775",
+        "fingerprint": "70b44057adfa65070b392d6df953fcb39d3ddd1e3515e77529cebb5e7d218903",
+        "generatedAt": "2026-10-02T12:16:44.609Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-government-debt-burden",
+      "file": "app/blog/local-government-debt-burden/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-government-debt-burden/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/thumbnail-light.webp",
+        "sha256": "445bbeb5b8985a95282ddb08aa959f5dadf3d9640536c6a30de89f2c385788fc",
+        "bytes": 29882
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-government-debt-burden/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-government-debt-burden/ogp/generation.json",
+          "sha256": "a04727933e472da36cb9c5534ae81f3d47713e58ced38a4d632d7753ea8bc8ba",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "109b9a8241cc0298eff6cc0ee75987318c922f218e58e89328b801bf312f22e5",
+        "inputHash": "7b73a53cb25a3eca3770bec067cbb2ebbaf1f342999019be9d815bd218189775",
+        "fingerprint": "70b44057adfa65070b392d6df953fcb39d3ddd1e3515e77529cebb5e7d218903",
+        "generatedAt": "2026-10-02T12:16:44.609Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.svg",
+        "sha256": "dd8fa04aefbebcd150cc3cf04dd13313ebc573e8b41cea35e381bca7481859bd",
+        "bytes": 10506
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+          "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+          "bytes": 12062,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "elem-vs-junior-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.json",
+          "sha256": "8147099d688e782af4069b3fcf5cbae4cb28ab0c7e2fd0fb0202d513e44a6f54",
+          "bytes": 3952,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "elem-vs-junior-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.source.json",
+          "sha256": "64fcfacc6104b4bbd0cd23dd869b6ff109fc0c2703e6d694ad619c57808235da",
+          "bytes": 733,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/elem-vs-junior-scatter.svg",
+          "alt": "小学校×中学校 不登校比率 散布図",
+          "heading": "散布図──小学校と中学校の強い正相関",
+          "line": 67
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/data/nonattendance-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/data/nonattendance-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-map.svg",
+        "sha256": "31861e328c25dbe00c2b617806e024809f9bc57faf7d35d086b96b4d82e76581",
+        "bytes": 32563
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+          "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+          "bytes": 12062,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "nonattendance-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-map.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-map.json",
+          "sha256": "1f785fc81df0b6319917ea0241b888103459eee4d4e47bb02ced926480ac65e7",
+          "bytes": 5465,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "nonattendance-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-map.source.json",
+          "sha256": "18e16a1b7bd04bcb91b1aaf2ec0d94786ee54628e4423821d60d30d37a1659a9",
+          "bytes": 452,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-map.svg",
+          "alt": "中学校不登校比率 都道府県マップ",
+          "heading": "都道府県マップ──大都市が突出していない意外な構造",
+          "line": 38
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/data/nonattendance-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/data/nonattendance-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-ranking.svg",
+        "sha256": "d1b8374fdbefccd4651eac5b0d5d1f65ea527ec365271c0dc4f3dc386cb7a665",
+        "bytes": 7004
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+          "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+          "bytes": 12062,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "nonattendance-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-ranking.json",
+          "sha256": "83c399c56792c216902369d6e9be532f3094a58a87688c7619f842117f7b2269",
+          "bytes": 6852,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "nonattendance-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-ranking.source.json",
+          "sha256": "c371db09fffcd43406e3c2ad61e1ea104cc3392bf0e39f755cdf3e270124ecf8",
+          "bytes": 1064,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-ranking.svg",
+          "alt": "中学校不登校比率 上位5・下位5",
+          "heading": "中学校不登校比率ランキング──宮城・北海道が上位、福井・岡山が最少",
+          "line": 23
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.svg",
+        "sha256": "5f01f40529a614eb7028564673adc22a1f45e3d08ae436a28e8315d95b0cc8eb",
+        "bytes": 3071
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+          "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+          "bytes": 12062,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "nonattendance-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.json",
+          "sha256": "c27d027025310734e47e829a909a7317578fd286e460bba91e201f854577778d",
+          "bytes": 868,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "nonattendance-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.source.json",
+          "sha256": "6d56dd634e0579b6b8bbede3ddfc759ead8aa19d6773527673dd124265786ee0",
+          "bytes": 306,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/nonattendance-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ──小学校段階の対応が連鎖を左右する",
+          "line": 108
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 466",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.svg",
+        "sha256": "b143e8269d288f521e33debb172a8fcb193dfe773c0fe0b3cf1d336c10aeaeea",
+        "bytes": 6957
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/article.md",
+          "sha256": "92b914a342e2f35b8ec1c429aa1a0bc10210c58d4eb16df925e5b393f9143ca1",
+          "bytes": 12062,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.json",
+          "sha256": "0ee8d2ba9e2df2e57825774b0038f0fcff1c30736ced1cb05c977c75b86ccd46",
+          "bytes": 6790,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.source.json",
+          "sha256": "3d5baaac139b5a91fd444a73c40df73084a5639366b05d11ece071aab5f05b3c",
+          "bytes": 900,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/data/per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings.svg",
+          "alt": "公立小学校費（1人当たり）ランキング",
+          "heading": "公立小学校費と不登校の関係",
+          "line": 87
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-child-public-elementary-school-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-child-public-elementary-school-expenditure-pref-municipal/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/background.jpg",
+        "sha256": "64ba787a461d533f418878652ecd5d8478b9bf3c0af622127354ff24106125e8",
+        "bytes": 70494
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "sha256": "46ce8899acd659794436f5e944478f9d14e516f0e1bcbdaf51af0b31bd6ed4bf",
+          "bytes": 2318,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2ec0301026b29ac723774f286fc51e15a1ad7876c1bdeadcfcefc4437169c5a4",
+        "fingerprint": "e59f7aa8606bfd440b8bb0d0cf356e71ad41517f13b45edfd958372069de2a28",
+        "generatedAt": "2026-08-22T05:17:36.593Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/ogp.png",
+        "sha256": "3a2cc2fe29144fcd9524893b9e5d7b07f7ee6498857ab24d549129159c16c3d2",
+        "bytes": 409048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "sha256": "46ce8899acd659794436f5e944478f9d14e516f0e1bcbdaf51af0b31bd6ed4bf",
+          "bytes": 2318,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2ec0301026b29ac723774f286fc51e15a1ad7876c1bdeadcfcefc4437169c5a4",
+        "fingerprint": "e59f7aa8606bfd440b8bb0d0cf356e71ad41517f13b45edfd958372069de2a28",
+        "generatedAt": "2026-08-22T05:17:36.593Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/thumbnail-dark.webp",
+        "sha256": "4deddff6b506a4cb245af88f60df94a757bd085c6357bd853c5d31750226776d",
+        "bytes": 10584
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "sha256": "46ce8899acd659794436f5e944478f9d14e516f0e1bcbdaf51af0b31bd6ed4bf",
+          "bytes": 2318,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2ec0301026b29ac723774f286fc51e15a1ad7876c1bdeadcfcefc4437169c5a4",
+        "fingerprint": "e59f7aa8606bfd440b8bb0d0cf356e71ad41517f13b45edfd958372069de2a28",
+        "generatedAt": "2026-08-22T05:17:36.593Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-nonattendance-pattern",
+      "file": "app/blog/school-nonattendance-pattern/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-nonattendance-pattern/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/thumbnail-light.webp",
+        "sha256": "f018246a091b596f63cf98fad1e37acbdaee193003c9d8035d66cb982f6e9199",
+        "bytes": 21048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-nonattendance-pattern/ogp/generation.json",
+          "sha256": "46ce8899acd659794436f5e944478f9d14e516f0e1bcbdaf51af0b31bd6ed4bf",
+          "bytes": 2318,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2ec0301026b29ac723774f286fc51e15a1ad7876c1bdeadcfcefc4437169c5a4",
+        "fingerprint": "e59f7aa8606bfd440b8bb0d0cf356e71ad41517f13b45edfd958372069de2a28",
+        "generatedAt": "2026-08-22T05:17:36.593Z"
+      }
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/data/suicide-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/data/suicide-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-map.svg",
+        "sha256": "95b0bc85409391f5065c8067a1860eccbab22bb26ddab47369487c6fff0298bc",
+        "bytes": 31421
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+          "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+          "bytes": 8442,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "suicide-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-map.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-map.json",
+          "sha256": "0724cb68ed432320ce30ae14e2f9885fe594ab7075a7664fb55fc8bbafb22587",
+          "bytes": 5315,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "suicide-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-map.source.json",
+          "sha256": "3cae4bcca09f4027ac9ad7d9f90bbce38ec9333dd28f4df20697839c92419d73",
+          "bytes": 333,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-map.svg",
+          "alt": "自殺率 都道府県マップ",
+          "heading": "都道府県マップ──自殺率の「地域パターン」",
+          "line": 35
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/suicides-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/suicides-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/data/suicide-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/data/suicide-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-ranking.svg",
+        "sha256": "232f75a151f026ba23e6bf8e5acfccba47c9f5b3e669b7f7a0c05981be61ea2d",
+        "bytes": 6843
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+          "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+          "bytes": 8442,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "suicide-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-ranking.json",
+          "sha256": "87c4335a68d7fa1069a62e99bee9229b8c90627c395950cee1bab95413f86ec1",
+          "bytes": 6663,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "suicide-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-ranking.source.json",
+          "sha256": "902920a72a2c9897c2bc482571d9849965b82b4b0f539452e084a2e3478a48a1",
+          "bytes": 575,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-ranking.svg",
+          "alt": "自殺率 上位10・下位10",
+          "heading": "自殺率ランキング（人口10万人当たり）",
+          "line": 22
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/suicides-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/suicides-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.svg",
+        "sha256": "4e7288e9b735dbca5be0ca260a9af9dc7b3540e8b1bdaca07440e1615ee212d6",
+        "bytes": 4062
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+          "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+          "bytes": 8442,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "suicide-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.json",
+          "sha256": "536ce5a183e37f6cbec119a93e95530f1126db9002feb903059f812df652cbdd",
+          "bytes": 1190,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "suicide-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.source.json",
+          "sha256": "710dcad3d722c7c3fae7a656f33c417afefec767cc586581793a39cbf6c165bb",
+          "bytes": 627,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 102
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 570",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.svg",
+        "sha256": "096ff6d474c103f60cbb602eb345ed71c69ca1b142898d14c15b19aa9db38c57",
+        "bytes": 5014
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+          "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+          "bytes": 8442,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "suicide-timeseries.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.source.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.source.json",
+          "sha256": "5f8bdf707f0e09a5c0c31f18725d1486bf39fe4e95111aeb818d5a587685e934",
+          "bytes": 347,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-line",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.svg",
+          "alt": "自殺率推移（全国平均）",
+          "heading": "約50年の推移──自殺率はどう変わったか",
+          "line": 83
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 700 400",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/suicide-rate-aging-nexus/data/suicide-timeseries.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/ranking/suicides-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/suicides-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.svg",
+        "sha256": "25f089d8043cc37d9b9bdbea4d6bb76acb72fc83af79227e5e258583c577808c",
+        "bytes": 10560
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/article.md",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/article.md",
+          "sha256": "a7935de75010ba9effa8fc7c16e0fe7a2de594f5749986de777678b8d8b0ccb0",
+          "bytes": 8442,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "suicide-vs-aging-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.json",
+          "sha256": "c032a91a9137af9bb9882cf5ff5784a3a37c799829fca1df00cbc47186cfdda2",
+          "bytes": 4689,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "suicide-vs-aging-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.source.json",
+          "sha256": "01fb7dc414ec8e8ffa0d8932c098a7636c35b613970ba454421db0cdecd9f39d",
+          "bytes": 1062,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/data/suicide-vs-aging-scatter.svg",
+          "alt": "自殺率と高齢化率の散布図",
+          "heading": "高齢化率との相関──通説を検証する",
+          "line": 51
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/ratio-65-plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/ratio-65-plus/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/suicides-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/suicides-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/background.jpg",
+        "sha256": "158d09134202c0e07bbe7ab7ea05d6ddbcd1fa9ddbc2ebfcf81777ffca8ea55b",
+        "bytes": 61644
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "sha256": "6bc7b333ca9b424745cf3d7a7dd3b3560b4b86e40caacf67e0d5fd273b59abab",
+          "bytes": 2139,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "15427dfcf8442a81366f6c148dbe36430cad2b2e7539ef40256dc4a168ddf1a0",
+        "fingerprint": "516e6b0e5170bbc765219369d10c3a0bc746a8101fd3ee9111b1e3471019a28c",
+        "generatedAt": "2026-08-22T05:17:38.147Z"
+      }
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/ogp.png",
+        "sha256": "ef98fd1b00001dbe8146b2b79861a682243872ca5e92a3c3d82ef51071369e48",
+        "bytes": 375877
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "sha256": "6bc7b333ca9b424745cf3d7a7dd3b3560b4b86e40caacf67e0d5fd273b59abab",
+          "bytes": 2139,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "15427dfcf8442a81366f6c148dbe36430cad2b2e7539ef40256dc4a168ddf1a0",
+        "fingerprint": "516e6b0e5170bbc765219369d10c3a0bc746a8101fd3ee9111b1e3471019a28c",
+        "generatedAt": "2026-08-22T05:17:38.147Z"
+      }
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/thumbnail-dark.webp",
+        "sha256": "34c86c8cecc9e87e6fb6ec3266c746ed0bf8db1463e520182f5887099e8c566a",
+        "bytes": 6966
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "sha256": "6bc7b333ca9b424745cf3d7a7dd3b3560b4b86e40caacf67e0d5fd273b59abab",
+          "bytes": 2139,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "15427dfcf8442a81366f6c148dbe36430cad2b2e7539ef40256dc4a168ddf1a0",
+        "fingerprint": "516e6b0e5170bbc765219369d10c3a0bc746a8101fd3ee9111b1e3471019a28c",
+        "generatedAt": "2026-08-22T05:17:38.147Z"
+      }
+    },
+    {
+      "owner": "web/blog/suicide-rate-aging-nexus",
+      "file": "app/blog/suicide-rate-aging-nexus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/suicide-rate-aging-nexus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/thumbnail-light.webp",
+        "sha256": "46de608f4337351075522be0853310b29858797b0ad2ba19580a948f0ab19bbd",
+        "bytes": 11544
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/suicide-rate-aging-nexus/ogp/generation.json",
+          "sha256": "6bc7b333ca9b424745cf3d7a7dd3b3560b4b86e40caacf67e0d5fd273b59abab",
+          "bytes": 2139,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "15427dfcf8442a81366f6c148dbe36430cad2b2e7539ef40256dc4a168ddf1a0",
+        "fingerprint": "516e6b0e5170bbc765219369d10c3a0bc746a8101fd3ee9111b1e3471019a28c",
+        "generatedAt": "2026-08-22T05:17:38.147Z"
+      }
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.svg",
+        "sha256": "ffea31e9ccb81fd0e21dfab81d684a389026a0f933b9f937af8b2f7663500253",
+        "bytes": 6949
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+          "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+          "bytes": 9595,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "facility-capacity-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.json",
+          "sha256": "d368e46d39ccdd9e0ea374b034ad0171a578b4d36e088321f251b591737106bf",
+          "bytes": 6925,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "facility-capacity-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.source.json",
+          "sha256": "81d12f560103770c0454d1e5ae3558adb96d8bb7527290d85f89376f362971db",
+          "bytes": 612,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/facility-capacity-ranking.svg",
+          "alt": "上水道施設能力 上位5・下位5（2022年）",
+          "heading": "施設能力 — 簡単には縮められない「最大供給力」",
+          "line": 42
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-capacity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-capacity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.svg",
+        "sha256": "4996f577706b40f3cc5b0f6aff3bcde51cd5a2900398497b2967ec97b9274bb8",
+        "bytes": 6937
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+          "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+          "bytes": 9595,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "sewerage-population-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.json",
+          "sha256": "d74cfdd6ccfa5cd88ddbbeec15b91c5af4737d35ec084be3dbb1dc67564159f9",
+          "bytes": 6948,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "sewerage-population-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.source.json",
+          "sha256": "a11691a6fbee9fd74b4f1c7a2d6699ff55937a4c1ba9cb87739d682863f962af",
+          "bytes": 638,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/sewerage-population-ranking.svg",
+          "alt": "下水道排水区域人口 上位5・下位5（2021年）",
+          "heading": "下水道排水区域人口 — 整備の進度差が85倍",
+          "line": 55
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-drainage-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-drainage-population/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/data/water-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/data/water-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-summary-findings.svg",
+        "sha256": "a8d43d8bd43ab0aea7887162482be4d64e0da2a545e36ad7caecbdd606623a86",
+        "bytes": 3610
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+          "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+          "bytes": 9595,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-summary-findings.json",
+          "sha256": "cc572bdd254662ccebce555d2eeac12877702bb0752aa59893d33d7ee987cf7b",
+          "bytes": 952,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-summary-findings.source.json",
+          "sha256": "4079ced545138c3776fe46307965edb71e02b2f8e01ca1db41bfe1809f89f9fc",
+          "bytes": 350,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 570",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/data/water-supply-tilemap.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/data/water-supply-tilemap.svg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-tilemap.svg",
+        "sha256": "720f9c64861e73405296f480414713e925c1dc0e8a0152fa5f3eeb73225832c0",
+        "bytes": 31934
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+          "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+          "bytes": 9595,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-supply-tilemap.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-supply-tilemap.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-tilemap.json",
+          "sha256": "24aba093772add2a4a2d58064ab715d18bb5772478a6413cb0fa2f5dfc72fb6d",
+          "bytes": 5466,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-supply-tilemap.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-supply-tilemap.source.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-tilemap.source.json",
+          "sha256": "491766691a28069ada9d1b0ac04bf936568ee01ef10287aa47c67156e74a627e",
+          "bytes": 345,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-tilemap.svg",
+          "alt": "上水道給水人口 都道府県別タイルマップ",
+          "heading": "上水道給水人口マップ — 水道の全国カバー状況",
+          "line": 20
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-population/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.svg",
+        "sha256": "f5aa83e9e3967795b49640d5269c93557fbb121b66015037fb08ba724d5664f9",
+        "bytes": 6933
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/article.md",
+          "sha256": "21427ea46f06502003bc8752414cdb802042559515f92c4eb39192ec5c6212a5",
+          "bytes": 9595,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "water-supply-volume-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.json",
+          "sha256": "7dd97b75253c7477bd3e7c5447eeaf649a2ce43d3b354a6d9551e34474b9f916",
+          "bytes": 6900,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "water-supply-volume-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.source.json",
+          "sha256": "e8eeb0de40670bf7c1f9649596c49d2492c1c1dd9e051c8b13782c3819bd2933",
+          "bytes": 631,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/data/water-supply-volume-ranking.svg",
+          "alt": "上水道年間給水量 上位5・下位5（2022年）",
+          "heading": "上水道年間給水量 — 東京は全国の約1割",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-annual-volume/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/background.jpg",
+        "sha256": "8e3ee092805eec14f2ecb41c51a4d1dee672725ea4cfefd9489df3d6f29e727e",
+        "bytes": 39733
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "sha256": "08055d186a4f10777b294e08c2f5e7ea898ea97d5db3f7a58d8eebbbbc3fc3c9",
+          "bytes": 2168,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "f0f711372e6bd351dbd2066d0094c77411231ce8566c668d454f202a7a9ec88f",
+        "fingerprint": "f4fed725338d237242044d12d6edb4be21f8d00db19697eb9a85ef7e198df70c",
+        "generatedAt": "2026-08-22T05:17:41.328Z"
+      }
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/ogp.png",
+        "sha256": "a3baa8b945a3ae8ef505791627f71bb74551f393e9618994bd6bbe6dac33c9d9",
+        "bytes": 359610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "sha256": "08055d186a4f10777b294e08c2f5e7ea898ea97d5db3f7a58d8eebbbbc3fc3c9",
+          "bytes": 2168,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "f0f711372e6bd351dbd2066d0094c77411231ce8566c668d454f202a7a9ec88f",
+        "fingerprint": "f4fed725338d237242044d12d6edb4be21f8d00db19697eb9a85ef7e198df70c",
+        "generatedAt": "2026-08-22T05:17:41.328Z"
+      }
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/thumbnail-dark.webp",
+        "sha256": "4c089526d489bf8fd7cdd4758642ed855c339291ec45bb4526f15be9bb43aa1a",
+        "bytes": 3214
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "sha256": "08055d186a4f10777b294e08c2f5e7ea898ea97d5db3f7a58d8eebbbbc3fc3c9",
+          "bytes": 2168,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "f0f711372e6bd351dbd2066d0094c77411231ce8566c668d454f202a7a9ec88f",
+        "fingerprint": "f4fed725338d237242044d12d6edb4be21f8d00db19697eb9a85ef7e198df70c",
+        "generatedAt": "2026-08-22T05:17:41.328Z"
+      }
+    },
+    {
+      "owner": "web/blog/water-infrastructure-crisis",
+      "file": "app/blog/water-infrastructure-crisis/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/water-infrastructure-crisis/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/thumbnail-light.webp",
+        "sha256": "0727face86dc7226b12bb9c94b7cddbef820e022829bbfac8ebf13925a3382c8",
+        "bytes": 5886
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/water-infrastructure-crisis/ogp/generation.json",
+          "sha256": "08055d186a4f10777b294e08c2f5e7ea898ea97d5db3f7a58d8eebbbbc3fc3c9",
+          "bytes": 2168,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "f0f711372e6bd351dbd2066d0094c77411231ce8566c668d454f202a7a9ec88f",
+        "fingerprint": "f4fed725338d237242044d12d6edb4be21f8d00db19697eb9a85ef7e198df70c",
+        "generatedAt": "2026-08-22T05:17:41.328Z"
+      }
+    },
+    {
+      "owner": "web/material/08b01057e3bcbeb751384e95",
+      "file": "assets/blog/article-backgrounds/income-quintile-overview.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/income-quintile-overview.jpg",
+        "sha256": "f3da1f62409e47b6eacbc0eb85cddd9b773b2c04ac30d15b1baaed683c35f25e",
+        "bytes": 86289
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/income-quintile-overview.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/12782c633f23f058cadbc593",
+      "file": "assets/blog/article-backgrounds/new-hire-count-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/new-hire-count-prefecture-gap.jpg",
+        "sha256": "b2fe8de1a5ecea20fcb83779338ca5ca62c7f5c2c2ff1a7734411a0284a01308",
+        "bytes": 83985
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/new-hire-count-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/5d86354beadebb1dbb0525d6",
+      "file": "assets/blog/codex-backgrounds/empty-house.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/codex-backgrounds/empty-house.jpg",
+        "sha256": "29db96bc5fc7a3da25c022cb75acce79b99acb3a3dbe08187d5e7b2c85d1ad3a",
+        "bytes": 27776
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/codex-backgrounds/empty-house.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/6ab4705aa3bf589f55644c90",
+      "file": "assets/blog/article-backgrounds/self-financing-ratio-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/self-financing-ratio-prefecture-gap.jpg",
+        "sha256": "0bb6697f509825edf93d9f34bbd2df522b60b70185297c62f75b5ec6ab43ca7d",
+        "bytes": 73010
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/self-financing-ratio-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/c31baa158e540e5f5b1b39a2",
+      "file": "assets/area-specialty/24000/matoya-oyster.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/24000/matoya-oyster.webp",
+        "sha256": "83bc8ca68220a333533175d15d5a468cef6bfb0343f71b7268319376552a06f7",
+        "bytes": 50980
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/24000/matoya-oyster.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/ddae0b6b0541edf685861120",
+      "file": "packages/gis/data/geoshape/svg/37_香川県.svg",
+      "original": {
+        "provider": "git",
+        "path": "packages/gis/data/geoshape/svg/37_香川県.svg",
+        "sha256": "d535592e37dd2680b1719e5da9ac0588fb6057b6889520d447b0742bb558e0a3",
+        "bytes": 26809
+      },
+      "inputFiles": [],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "packages/gis/data/geoshape/svg/37_香川県.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/haircut-consumption-quantity",
+      "file": "app/ranking/haircut-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/haircut-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/ogp/ogp.png",
+        "sha256": "ffa1aa1e91dd935f389aa391eee5bd5c2f7b61b38d29f5b42cf38e8b2f7b2192",
+        "bytes": 57516
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/haircut-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/ogp/generation.json",
+          "sha256": "507bbec83b64ed97fb96d501fc0f3667df386e84949ac64003b33f76ac466ecb",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/haircut-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/haircut-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "ee2aae1c1c8a4187a8f1da67506bc7060286014b2eb2d35cb236d4e9d89927ba",
+        "fingerprint": "3180dce23784ab3d9f250ab34946482a32c91c83179c6a8c0d841607697d529d",
+        "generatedAt": "2026-10-01T18:11:19.637Z"
+      }
+    },
+    {
+      "owner": "web/ranking/haircut-consumption-quantity",
+      "file": "app/ranking/haircut-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/haircut-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "3dcf366d22c2437ee90170f15d3ec3a10f7e620ed9d9ab88abee11dd690d2737",
+        "bytes": 15454
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/haircut-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/thumbnail.json",
+          "sha256": "89ff120fccb910eaaa31d1ea9e05f6183598daf83c3163852ee1515f04ad16da",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/haircut-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/haircut-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "a02bb1f58db2b6aef4102d42a1348ea3586c96e7ecf5a26a0c0a26cc9d6df2d7",
+        "fingerprint": "b219432205d775d2ae903d0d5c8bf5a29172f7a7c9b97d62583dcc9de6402a56",
+        "generatedAt": "2026-10-01T18:35:58.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/haircut-consumption-quantity",
+      "file": "app/ranking/haircut-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/haircut-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/thumbnail-light.webp",
+        "sha256": "8e18f43a778474a7f70906bcaccc488d7984bbfd1280662701235ec96d2c16dd",
+        "bytes": 13908
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/haircut-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/thumbnail.json",
+          "sha256": "89ff120fccb910eaaa31d1ea9e05f6183598daf83c3163852ee1515f04ad16da",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/haircut-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/haircut-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/haircut-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "a02bb1f58db2b6aef4102d42a1348ea3586c96e7ecf5a26a0c0a26cc9d6df2d7",
+        "fingerprint": "b219432205d775d2ae903d0d5c8bf5a29172f7a7c9b97d62583dcc9de6402a56",
+        "generatedAt": "2026-10-01T18:35:58.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/onigiri-consumption-expenditure",
+      "file": "app/ranking/onigiri-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/onigiri-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/ogp/ogp.png",
+        "sha256": "7322b359f0f308897b217c423a07143babfab09fe888054d96bf056b2ace8d03",
+        "bytes": 62971
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/onigiri-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/ogp/generation.json",
+          "sha256": "f1e829f3550d25a357f6d22d54e66a709b360fd59a7c9e74a1938371879eef26",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "19e7bec19c34cd796d942f52866aa3097ee5f782ea367fb8736e044333e7179a",
+        "fingerprint": "7ab3945b82be169729eb45a593a2b4e1c42c3671f81bc9ee3a1a554d7e719a41",
+        "generatedAt": "2026-10-03T21:00:28.270Z"
+      }
+    },
+    {
+      "owner": "web/ranking/onigiri-consumption-expenditure",
+      "file": "app/ranking/onigiri-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/onigiri-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "b1b280f093274bd1450b7c1a176b3511e8fcd7ef80561303f2b9f99b3da6fde5",
+        "bytes": 17820
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/onigiri-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/thumbnail.json",
+          "sha256": "61d8aeac5f8f908c250a999d1361a9ba1832f60eeef898a6b29d7d1f0a6e0762",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f1f8ee20deb45bbcaea012b67fb6b78f6508172b189905f4a54dfd0472cde197",
+        "fingerprint": "c9a1cb01d25e79a85bafd936dabb0d2cfc7b3bc2d35792e3e90563b78e01703a",
+        "generatedAt": "2026-10-03T21:25:34.836Z"
+      }
+    },
+    {
+      "owner": "web/ranking/onigiri-consumption-expenditure",
+      "file": "app/ranking/onigiri-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/onigiri-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "01331d3f6942182e82e39ebad3df983a650d5e2042d5900f76d34a5a60dc0814",
+        "bytes": 16230
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/onigiri-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/thumbnail.json",
+          "sha256": "61d8aeac5f8f908c250a999d1361a9ba1832f60eeef898a6b29d7d1f0a6e0762",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/onigiri-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/onigiri-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f1f8ee20deb45bbcaea012b67fb6b78f6508172b189905f4a54dfd0472cde197",
+        "fingerprint": "c9a1cb01d25e79a85bafd936dabb0d2cfc7b3bc2d35792e3e90563b78e01703a",
+        "generatedAt": "2026-10-03T21:25:34.836Z"
+      }
+    }
+  ]
+}

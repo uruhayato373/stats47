@@ -1,0 +1,3489 @@
+{
+  "items": [
+    {
+      "id": "web/blog/electricity-bill-hike-impact",
+      "channel": "web",
+      "key": "electricity-bill-hike-impact",
+      "title": "電気代値上げで最も打撃を受ける県はどこか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/electricity-bill-hike-impact",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "85a9ee45a663de44092e8fb148d0824e6ea9875dd6b4f5cc338b6be88081bd3c",
+      "catalogBasis": "2c025cc70465fb76826c09aceb34ee9e37656afe9298238e145a492bf9ec49bb",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/article.md",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/article.md",
+        "sha256": "f1e542389218ce8fd36d27ef688eb6b144810cd9a53ddfd2a10f917988511720",
+        "bytes": 7326
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/prefectural-income-gdp-ranking",
+      "channel": "web",
+      "key": "prefectural-income-gdp-ranking",
+      "title": "県民所得の2番手は大阪でも神奈川でもなく愛知｜GDPと順位が逆転するのはなぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/prefectural-income-gdp-ranking",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "3c06215f6863863becb64577f11e25258bd98571f94eb72686340362c42cbdd1",
+      "catalogBasis": "34c03a5157325c4df602379137cf0311d6776c6d217dad061807e9c07a7f6a67",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/article.md",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/article.md",
+        "sha256": "8a9ea42cc0290550f8b10f71898f9b0c5bcb2fa565c515ea403329ddaf39e4df",
+        "bytes": 12535
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/a137b57e746ac55ca9374e85",
+      "channel": "web",
+      "key": "packages/gis/data/geoshape/svg/30_和歌山県.svg",
+      "title": "30_和歌山県.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "729db64a2bb0450d279419e91a1770ca97789c2cc20e88c4d6bfc6ab392eb4c2"
+    },
+    {
+      "id": "web/material/bc61135a660c2008c3d2f934",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/household-liabilities-prefecture-gap.jpg",
+      "title": "household-liabilities-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6ed7f68a14cb885de4a4a9de57c44108f34f0e3e33b82c25a702bbb476a90a93"
+    },
+    {
+      "id": "web/material/dbffaba4fe4b4a223450fbe9",
+      "channel": "web",
+      "key": "assets/area-specialty/39000/tosa-buntan.webp",
+      "title": "tosa-buntan.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2ba87f9f0923ae97fdc01b809f3c6902c7e052085e365f278c76b50d51150638"
+    },
+    {
+      "id": "web/material/e322a22ceba1235d06c29c67",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/airport-count-vs-wind-power-plant-count-facility.jpg",
+      "title": "airport-count-vs-wind-power-plant-count-facility.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "76280452205ce9240638def96b76ad90e200abae71e50a923f88293b221f595b"
+    },
+    {
+      "id": "web/ranking/accident-death-30day",
+      "channel": "web",
+      "key": "accident-death-30day",
+      "title": "30日以内交通事故死者数（都道府県別）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/accident-death-30day",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cc8277fd4aeb844eec16f86f95476754aea80639d3c3f93d1b25a977df8e9d30",
+      "catalogBasis": "cc8277fd4aeb844eec16f86f95476754aea80639d3c3f93d1b25a977df8e9d30",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "channel": "web",
+      "key": "avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "title": "精神科病院の1日平均外来患者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4786041a66413589454fce406290d3ef0d79a6218f58797dca58d8fc21f83d20",
+      "catalogBasis": "4786041a66413589454fce406290d3ef0d79a6218f58797dca58d8fc21f83d20",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/bmi-female-40to69-age-adjusted",
+      "channel": "web",
+      "key": "bmi-female-40to69-age-adjusted",
+      "title": "女性のBMI（40〜69歳・年齢調整値）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/bmi-female-40to69-age-adjusted",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ea36105297db024ca6b937e3a918a6d17a28d5255c6229fa84ea01f52832299f",
+      "catalogBasis": "ea36105297db024ca6b937e3a918a6d17a28d5255c6229fa84ea01f52832299f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/construction-employed-age55plus",
+      "channel": "web",
+      "key": "construction-employed-age55plus",
+      "title": "建設業の55歳以上就業者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/construction-employed-age55plus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fe2e5558a21c16ba61ddf932e2d969a09a91f1d908841ba297359822fe3fc372",
+      "catalogBasis": "fe2e5558a21c16ba61ddf932e2d969a09a91f1d908841ba297359822fe3fc372",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/elementary-school-children-count",
+      "channel": "web",
+      "key": "elementary-school-children-count",
+      "title": "小学校児童数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/elementary-school-children-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "316d8998b98af89e85381be5275281e36a1d67f5ac7ea492e5e0651182040c57",
+      "catalogBasis": "316d8998b98af89e85381be5275281e36a1d67f5ac7ea492e5e0651182040c57",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "channel": "web",
+      "key": "fire-department-pump-car-count-per-100-thousand-people",
+      "title": "消防ポンプ自動車等現有数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ec7298a63e2136929803fe06641e193d5098c916bac1bdc9d780b12aadb43d69",
+      "catalogBasis": "ec7298a63e2136929803fe06641e193d5098c916bac1bdc9d780b12aadb43d69",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/information-communication-coefficient",
+      "channel": "web",
+      "key": "information-communication-coefficient",
+      "title": "情報通信係数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/information-communication-coefficient",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7a2cc77d4a1b91156adfdbf98cafd7fb48fb00736b451ef39d0c0f8b0101fea9",
+      "catalogBasis": "7a2cc77d4a1b91156adfdbf98cafd7fb48fb00736b451ef39d0c0f8b0101fea9",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/nursing-home-capacity-per-1000-65plus",
+      "channel": "web",
+      "key": "nursing-home-capacity-per-1000-65plus",
+      "title": "老人ホーム定員数（65歳以上人口千人当たり）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/nursing-home-capacity-per-1000-65plus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "23feb9d2ad4ae1dd8475c89067b93d5abca59f64337e59d59c9fe0375d39b0d3",
+      "catalogBasis": "23feb9d2ad4ae1dd8475c89067b93d5abca59f64337e59d59c9fe0375d39b0d3",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-household-goods-consumption-expenditure",
+      "channel": "web",
+      "key": "other-household-goods-consumption-expenditure",
+      "title": "他の家事雑貨消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-household-goods-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "edf0f93213f56123cdeff14c1b7feaedf9dac466194a80ed1d884ef2696a861c",
+      "catalogBasis": "edf0f93213f56123cdeff14c1b7feaedf9dac466194a80ed1d884ef2696a861c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/per-capita-firefighting-expenditure-tokyo-municipal",
+      "channel": "web",
+      "key": "per-capita-firefighting-expenditure-tokyo-municipal",
+      "title": "消防費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/per-capita-firefighting-expenditure-tokyo-municipal",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ffda6120d2336a55184ad7aa758ef6a5c3a1bc9f3bda43e382b5562dda72a151",
+      "catalogBasis": "ffda6120d2336a55184ad7aa758ef6a5c3a1bc9f3bda43e382b5562dda72a151",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/pm25-general-station-compliance-rate",
+      "channel": "web",
+      "key": "pm25-general-station-compliance-rate",
+      "title": "PM2.5の環境基準達成率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/pm25-general-station-compliance-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "66231bdf567e6a9a397b5642f2b13e5ded1ec8c29038ba25745d94399c7f98a8",
+      "catalogBasis": "66231bdf567e6a9a397b5642f2b13e5ded1ec8c29038ba25745d94399c7f98a8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/pork-consumption-quantity",
+      "channel": "web",
+      "key": "pork-consumption-quantity",
+      "title": "豚肉消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/pork-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e52af0dfbc5a21a75e35f95498d3ea927eb8c34740c6b0a5e17c7c7cf169861b",
+      "catalogBasis": "e52af0dfbc5a21a75e35f95498d3ea927eb8c34740c6b0a5e17c7c7cf169861b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/public-construction-contract-amount",
+      "channel": "web",
+      "key": "public-construction-contract-amount",
+      "title": "公共工事の請負契約額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/public-construction-contract-amount",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c0e868a3621e3bb22480114e040ba15483b235e4cbce5f7a08a464b80d6e9a33",
+      "catalogBasis": "c0e868a3621e3bb22480114e040ba15483b235e4cbce5f7a08a464b80d6e9a33",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/security-guard-annual-income",
+      "channel": "web",
+      "key": "security-guard-annual-income",
+      "title": "警備員の平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/security-guard-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2dc2643a2b5c07df1be0a8174ffc826e8a31d122d54f3f74b5c540933ad9bbf0",
+      "catalogBasis": "2dc2643a2b5c07df1be0a8174ffc826e8a31d122d54f3f74b5c540933ad9bbf0",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/tissue-paper-consumption-expenditure",
+      "channel": "web",
+      "key": "tissue-paper-consumption-expenditure",
+      "title": "ティッシュペーパー消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/tissue-paper-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ef2ca7c4842fd8c1c8581db8ac2de1cf379e931bdfa7ac3f7f5929114a2cb2be",
+      "catalogBasis": "ef2ca7c4842fd8c1c8581db8ac2de1cf379e931bdfa7ac3f7f5929114a2cb2be",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.svg",
+        "sha256": "f4e286df141db45c0f040e2c05875c1b0babc3388532842360e13d191988b277",
+        "bytes": 6553
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/article.md",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/article.md",
+          "sha256": "f1e542389218ce8fd36d27ef688eb6b144810cd9a53ddfd2a10f917988511720",
+          "bytes": 7326,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.json",
+          "sha256": "4e0b38eee3266205149ed5bedd4eacd73217203d57a1a9fbb0475608f36bc9ff",
+          "bytes": 6222,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.source.json",
+          "sha256": "bfcbaa888c793a60446d738acca15765c1e84202718143327b75bdcc5e1d059f",
+          "bytes": 755,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/consumer-price-difference-index-utilities-prefecture-rankings.svg",
+          "alt": "光熱・水道の消費者物価地域差指数 上位10・下位10",
+          "heading": "光熱費の「物価」も北海道が突出",
+          "line": 54
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/consumer-price-difference-index-utilities/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/consumer-price-difference-index-utilities/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.svg",
+        "sha256": "fe3632e79290c934e305ec5532509aff46596d010fdb6bcde952615fe3cc47f7",
+        "bytes": 6526
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/article.md",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/article.md",
+          "sha256": "f1e542389218ce8fd36d27ef688eb6b144810cd9a53ddfd2a10f917988511720",
+          "bytes": 7326,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cpi-change-rate-utilities-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.json",
+          "sha256": "29cf9b8f30f9cb5c0b02e65e21a5f74e040ff585d84f6a375c98a77eff884bd7",
+          "bytes": 6195,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cpi-change-rate-utilities-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.source.json",
+          "sha256": "f916fd24cce4b0fa4d414ff62adb7c504f07c24a963150517790b9bbcc20819a",
+          "bytes": 691,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/cpi-change-rate-utilities-prefecture-rankings.svg",
+          "alt": "光熱・水道の消費者物価指数変化率 上位10・下位10",
+          "heading": "光熱費の値上がり幅にも地域差",
+          "line": 68
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-utilities/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-utilities/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.svg",
+        "sha256": "3790a2a6ed09e04ac7b4c86682f76ca5e6072205a4c1b43d4ad2b1d289cf5d65",
+        "bytes": 6538
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/article.md",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/article.md",
+          "sha256": "f1e542389218ce8fd36d27ef688eb6b144810cd9a53ddfd2a10f917988511720",
+          "bytes": 7326,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "utilities-expenditure-ratio-multi-person-households-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.json",
+          "sha256": "f81ce103475b03fd39052d6e5db3f365eb110e39c957181d04f32cc33fd35939",
+          "bytes": 6055,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "utilities-expenditure-ratio-multi-person-households-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.source.json",
+          "sha256": "5567d873cd5ab2ca210e42d6a75d8246dccd98e4f5044e012077f4f99e97d101",
+          "bytes": 795,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/data/utilities-expenditure-ratio-multi-person-households-prefecture-rankings.svg",
+          "alt": "光熱・水道費の家計負担割合 上位10・下位10",
+          "heading": "光熱費の家計負担、最大は青森の11.5%",
+          "line": 39
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/utilities-expenditure-ratio-multi-person-households/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/utilities-expenditure-ratio-multi-person-households/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/background.jpg",
+        "sha256": "24a3ffba0a3a4c4d1beac3fb93615d797c9da9fb1d5c7c3543458c59f2c2db60",
+        "bytes": 86871
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "sha256": "ab6e98b4e4eeaa9a1a98930051967b4c3b5128723554be2c8b3525c1e8672336",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "edd8641ecd6a0bed2eb2591bdf2b485f594ac099921f8f6270c233e1c0da7154",
+        "fingerprint": "8192cf793f15a5a4a5b483990f0af7a12f1e970c2fca0d27433e93019d594f06",
+        "generatedAt": "2026-08-22T05:17:23.060Z"
+      }
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/ogp.png",
+        "sha256": "ca1a796b7ef5519a519b6b07f6c38c0f84e8613dab06b48c5ee68bffef67ae59",
+        "bytes": 503547
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "sha256": "ab6e98b4e4eeaa9a1a98930051967b4c3b5128723554be2c8b3525c1e8672336",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "edd8641ecd6a0bed2eb2591bdf2b485f594ac099921f8f6270c233e1c0da7154",
+        "fingerprint": "8192cf793f15a5a4a5b483990f0af7a12f1e970c2fca0d27433e93019d594f06",
+        "generatedAt": "2026-08-22T05:17:23.060Z"
+      }
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/thumbnail-dark.webp",
+        "sha256": "c8533750f9382d254c21f0f791f90927fe3d32d2db5b0668023bb8ec1de4eb96",
+        "bytes": 13582
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "sha256": "ab6e98b4e4eeaa9a1a98930051967b4c3b5128723554be2c8b3525c1e8672336",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "edd8641ecd6a0bed2eb2591bdf2b485f594ac099921f8f6270c233e1c0da7154",
+        "fingerprint": "8192cf793f15a5a4a5b483990f0af7a12f1e970c2fca0d27433e93019d594f06",
+        "generatedAt": "2026-08-22T05:17:23.060Z"
+      }
+    },
+    {
+      "owner": "web/blog/electricity-bill-hike-impact",
+      "file": "app/blog/electricity-bill-hike-impact/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/electricity-bill-hike-impact/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/thumbnail-light.webp",
+        "sha256": "2d06006726c65b77e08555be7909aac769111e3c96828034fce67d181fb48a25",
+        "bytes": 25796
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/electricity-bill-hike-impact/ogp/generation.json",
+          "sha256": "ab6e98b4e4eeaa9a1a98930051967b4c3b5128723554be2c8b3525c1e8672336",
+          "bytes": 2174,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "edd8641ecd6a0bed2eb2591bdf2b485f594ac099921f8f6270c233e1c0da7154",
+        "fingerprint": "8192cf793f15a5a4a5b483990f0af7a12f1e970c2fca0d27433e93019d594f06",
+        "generatedAt": "2026-08-22T05:17:23.060Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.svg",
+        "sha256": "d0175c52b96a4a18aa9d804ec46a7d03089e6216c5880788e21e1ea8301380a4",
+        "bytes": 6922
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/article.md",
+          "sha256": "8a9ea42cc0290550f8b10f71898f9b0c5bcb2fa565c515ea403329ddaf39e4df",
+          "bytes": 12535,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "gdp-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.json",
+          "sha256": "0a8e114031f0ad0e0c3f5d28713a84b427f88ad3f9d4bf528c5d4f12e826f765",
+          "bytes": 6861,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "gdp-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.source.json",
+          "sha256": "917a31b41e030b2972d94f0651e2092c6cccfebbf61738359e0265d398db87ac",
+          "bytes": 640,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/gdp-ranking.svg",
+          "alt": "県内総生産ランキング 上位5・下位5",
+          "heading": "県内総生産（GDP）ランキング──人口の多い大都市圏が並ぶ",
+          "line": 43
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-production-in-the-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-production-in-the-prefecture/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/data/income-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/data/income-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/income-ranking.svg",
+        "sha256": "f47b1393fd8801d8b335dad40e07c9d7096518cbb2ef020573b4bd71fe585d98",
+        "bytes": 6888
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/article.md",
+          "sha256": "8a9ea42cc0290550f8b10f71898f9b0c5bcb2fa565c515ea403329ddaf39e4df",
+          "bytes": 12535,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "income-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/income-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/income-ranking.json",
+          "sha256": "6ce88b2e0532b047faed52a85be1383307b607c5b35339dbb24cb77c3ac87238",
+          "bytes": 6716,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "income-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/income-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/income-ranking.source.json",
+          "sha256": "adcf8a322b349f9ec207406e0d641be291845e9b6fe712ea6c3cbfb593ed1097",
+          "bytes": 634,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/income-ranking.svg",
+          "alt": "1人当たり県民所得ランキング 上位5・下位5",
+          "heading": "1人あたり県民所得ランキング──上位は「ものづくり県」",
+          "line": 27
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-kenmin-shotoku-h27/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-kenmin-shotoku-h27/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/data/summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/data/summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/summary-findings.svg",
+        "sha256": "b8bf0164b480169b73ba62ddbc2510c5568f57b12863dcff479802a38b95bb78",
+        "bytes": 3337
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/article.md",
+          "sha256": "8a9ea42cc0290550f8b10f71898f9b0c5bcb2fa565c515ea403329ddaf39e4df",
+          "bytes": 12535,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/summary-findings.json",
+          "sha256": "d1d448b234bf09ffba3116b3cceeed14a29897e9785fdcbe9c4c07a14d634b92",
+          "bytes": 715,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/data/summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/summary-findings.source.json",
+          "sha256": "0273dfa73573e33fdca9a8d796f7bbf7836003bc62e2e06563cbb59630358eaa",
+          "bytes": 344,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/data/summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 106
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 504",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/background.jpg",
+        "sha256": "865aeb7ea5d0b1aa59e7e5f350b1c0a995ec221583bf48acb2b39bc243df9f18",
+        "bytes": 45640
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "sha256": "c4a23d0728a9f8897e2874d5a53008b64c8343b69a01fdfdb1b2b8f3416cf7dc",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "41e1f030e1660ee846b8399be617c91711f5c2796b1cd23533da5859f8e59b46",
+        "fingerprint": "94b262caf8c0ef4368322c238ac3f31688f2fd16f5fb956774843c020fab2636",
+        "generatedAt": "2026-08-22T05:17:35.130Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/ogp.png",
+        "sha256": "4af1b43ebf87b4fc646e97d5027d34bb84e8204d047b192fa6b4da0da8fb286a",
+        "bytes": 377464
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "sha256": "c4a23d0728a9f8897e2874d5a53008b64c8343b69a01fdfdb1b2b8f3416cf7dc",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "41e1f030e1660ee846b8399be617c91711f5c2796b1cd23533da5859f8e59b46",
+        "fingerprint": "94b262caf8c0ef4368322c238ac3f31688f2fd16f5fb956774843c020fab2636",
+        "generatedAt": "2026-08-22T05:17:35.130Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/thumbnail-dark.webp",
+        "sha256": "7f60edead84c748405b9387486931f77c09ea4863e559e2185193863c8186811",
+        "bytes": 7494
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "sha256": "c4a23d0728a9f8897e2874d5a53008b64c8343b69a01fdfdb1b2b8f3416cf7dc",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "41e1f030e1660ee846b8399be617c91711f5c2796b1cd23533da5859f8e59b46",
+        "fingerprint": "94b262caf8c0ef4368322c238ac3f31688f2fd16f5fb956774843c020fab2636",
+        "generatedAt": "2026-08-22T05:17:35.130Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-income-gdp-ranking",
+      "file": "app/blog/prefectural-income-gdp-ranking/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-income-gdp-ranking/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/thumbnail-light.webp",
+        "sha256": "cee406f2d92fa695a734985c8329bd18033e71d900daec3fb6536a5e0cee005a",
+        "bytes": 13832
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-income-gdp-ranking/ogp/generation.json",
+          "sha256": "c4a23d0728a9f8897e2874d5a53008b64c8343b69a01fdfdb1b2b8f3416cf7dc",
+          "bytes": 2208,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "41e1f030e1660ee846b8399be617c91711f5c2796b1cd23533da5859f8e59b46",
+        "fingerprint": "94b262caf8c0ef4368322c238ac3f31688f2fd16f5fb956774843c020fab2636",
+        "generatedAt": "2026-08-22T05:17:35.130Z"
+      }
+    },
+    {
+      "owner": "web/material/a137b57e746ac55ca9374e85",
+      "file": "packages/gis/data/geoshape/svg/30_和歌山県.svg",
+      "original": {
+        "provider": "git",
+        "path": "packages/gis/data/geoshape/svg/30_和歌山県.svg",
+        "sha256": "eef90779d535363d63d0a0a6ea78bcb121e6d70fb94aff01d9aa5f2f396bc536",
+        "bytes": 30093
+      },
+      "inputFiles": [],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "packages/gis/data/geoshape/svg/30_和歌山県.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/bc61135a660c2008c3d2f934",
+      "file": "assets/blog/article-backgrounds/household-liabilities-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/household-liabilities-prefecture-gap.jpg",
+        "sha256": "04f75086272077d603caed1d02010ba6038903014823e57e4c89940583431353",
+        "bytes": 74975
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/household-liabilities-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/dbffaba4fe4b4a223450fbe9",
+      "file": "assets/area-specialty/39000/tosa-buntan.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/39000/tosa-buntan.webp",
+        "sha256": "4c5e4294f0c1fc64a74da06c98852df26ad916209abd13575bee812a8dbf6bb5",
+        "bytes": 15736
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/39000/tosa-buntan.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e322a22ceba1235d06c29c67",
+      "file": "assets/blog/article-backgrounds/airport-count-vs-wind-power-plant-count-facility.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/airport-count-vs-wind-power-plant-count-facility.jpg",
+        "sha256": "1633b2b886159ee72d57e80ec8f48df1ef56497e15129f2195e4a0b446392962",
+        "bytes": 71188
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/airport-count-vs-wind-power-plant-count-facility.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/accident-death-30day",
+      "file": "app/ranking/accident-death-30day/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accident-death-30day/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/ogp/ogp.png",
+        "sha256": "f879b61f11b5ebf5a2ccb70de8897e9892bd0057a223e3914a90420339650e4a",
+        "bytes": 67479
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accident-death-30day/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/ogp/generation.json",
+          "sha256": "6e655feaf3589a24d24e283271a4485d6400cef64249dd02257b9f536c7abc03",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accident-death-30day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accident-death-30day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "dd1efa5700dc028d5a658d6017808ea2ee8aa39390696c74922054c0884e7275",
+        "fingerprint": "26edc324182588ee44e66d1f30f8f2f9d80816605a3fc2e46115251415cba757",
+        "generatedAt": "2026-10-10T21:31:58.009Z"
+      }
+    },
+    {
+      "owner": "web/ranking/accident-death-30day",
+      "file": "app/ranking/accident-death-30day/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accident-death-30day/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/thumbnail-dark.webp",
+        "sha256": "f0eddc9ef41f8b5eaeb549991a17f4b60f615c7d6ffad6205865163a41d5a719",
+        "bytes": 20124
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accident-death-30day/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/thumbnail.json",
+          "sha256": "eca10797f1770ec0f53acc56ab9512922e557806845725d64b9bcf9b1168764f",
+          "bytes": 1733,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accident-death-30day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accident-death-30day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "52b340bd03d0393a43c615883f58731f3b5ff6fd59439d518269c91917855aa8",
+        "fingerprint": "1852ad915ca5c2a4d4008a72493fc219587cb08588b6af67e9fb4233df3bc938",
+        "generatedAt": "2026-10-10T21:49:56.488Z"
+      }
+    },
+    {
+      "owner": "web/ranking/accident-death-30day",
+      "file": "app/ranking/accident-death-30day/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accident-death-30day/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/thumbnail-light.webp",
+        "sha256": "fe8da95a717cd7b0d538cb0a21f5d8f3bfc7e3d9552a4b13e8926c3688f085d3",
+        "bytes": 18388
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accident-death-30day/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/thumbnail.json",
+          "sha256": "eca10797f1770ec0f53acc56ab9512922e557806845725d64b9bcf9b1168764f",
+          "bytes": 1733,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accident-death-30day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accident-death-30day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accident-death-30day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "52b340bd03d0393a43c615883f58731f3b5ff6fd59439d518269c91917855aa8",
+        "fingerprint": "1852ad915ca5c2a4d4008a72493fc219587cb08588b6af67e9fb4233df3bc938",
+        "generatedAt": "2026-10-10T21:49:56.488Z"
+      }
+    },
+    {
+      "owner": "web/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "file": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/ogp/ogp.png",
+        "sha256": "900eaf997e284f74a89073c17fdeeb71853d3c7564d982336fc32509fb516f1f",
+        "bytes": 64104
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/ogp/generation.json",
+          "sha256": "5cd7984fc310d2fc6cfaa8a6e2da61236e135e923589706674a9eb36872648a7",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "f118581eb90d03e55f244d646768128a1855270bf0e21f44bde65cd30ea8fc96",
+        "fingerprint": "dac51816d75ffdb32f9ae0fd9c1b14c2fa335fd1fe58cc162248bc170d38e76b",
+        "generatedAt": "2026-10-10T21:32:13.055Z"
+      }
+    },
+    {
+      "owner": "web/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "file": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-dark.webp",
+        "sha256": "7b3387e5eff8b9c59b75e3cf55a63c4df523213f4ebea9fa1039cb3754b5fbaf",
+        "bytes": 19262
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail.json",
+          "sha256": "a7036bc44cd07fe0c32df974fadfc0f3fbf2cc09a562f7fa18427a8d7c058ad0",
+          "bytes": 2012,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "c86cd1eb79a2f7bf71688a56a8cee8d581425f52fb5eeb95a1271128e6aa6ce8",
+        "fingerprint": "4539e4082a848da60c202edd687b3c21b3c63146517fbfbf36a3f3f03f448efb",
+        "generatedAt": "2026-10-10T21:50:00.518Z"
+      }
+    },
+    {
+      "owner": "web/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k",
+      "file": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail-light.webp",
+        "sha256": "f45510f4af24005ea641d6c6471e811bb82216f719995a89a5d5a6fb8302b04d",
+        "bytes": 17792
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/thumbnail.json",
+          "sha256": "a7036bc44cd07fe0c32df974fadfc0f3fbf2cc09a562f7fa18427a8d7c058ad0",
+          "bytes": 2012,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-daily-outpatients-psychiatric-hospital-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "c86cd1eb79a2f7bf71688a56a8cee8d581425f52fb5eeb95a1271128e6aa6ce8",
+        "fingerprint": "4539e4082a848da60c202edd687b3c21b3c63146517fbfbf36a3f3f03f448efb",
+        "generatedAt": "2026-10-10T21:50:00.518Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bmi-female-40to69-age-adjusted",
+      "file": "app/ranking/bmi-female-40to69-age-adjusted/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bmi-female-40to69-age-adjusted/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/ogp/ogp.png",
+        "sha256": "678fe3e4aa24250b996d7fca6cc8f2886bb94367846473ef457b8aa095c57dd3",
+        "bytes": 68466
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bmi-female-40to69-age-adjusted/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/ogp/generation.json",
+          "sha256": "e2c2a51e40acf2732a9b93fb04bf94b96288078b6786db796c16aec32057a8f1",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "98266a8b3be8db99c1d79e3dfd96c49af3c813246cbac5705ab4fbfb17dd8292",
+        "fingerprint": "b77dd22f48bf36f023b0f3e22fb3324f8b960792fc6eb16bef864501e6cdec11",
+        "generatedAt": "2026-10-10T21:32:20.976Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bmi-female-40to69-age-adjusted",
+      "file": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/thumbnail-dark.webp",
+        "sha256": "1161ab76c7679f6273b8143e53cabddbfb84cc230b07a9547b20e131d25917da",
+        "bytes": 20078
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/thumbnail.json",
+          "sha256": "b071a7c69f96a16effb59ae192c6ae3f171daac04be973565e002e1e8f2f36d7",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b93df16c6eded5a2cad5d4f88097d8d8e5b3bf53235f36d5c96a9d5d49872a4e",
+        "fingerprint": "2e77f9487a4bbfbc5758a2f4e022b045250d768552dd4d2381067170846e4712",
+        "generatedAt": "2026-10-10T21:50:02.624Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bmi-female-40to69-age-adjusted",
+      "file": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/thumbnail-light.webp",
+        "sha256": "6f2594f21a6797e2534d27e2ba8aa61ea5d5144765987cf0aa1f574110799f86",
+        "bytes": 18432
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bmi-female-40to69-age-adjusted/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/thumbnail.json",
+          "sha256": "b071a7c69f96a16effb59ae192c6ae3f171daac04be973565e002e1e8f2f36d7",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bmi-female-40to69-age-adjusted/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b93df16c6eded5a2cad5d4f88097d8d8e5b3bf53235f36d5c96a9d5d49872a4e",
+        "fingerprint": "2e77f9487a4bbfbc5758a2f4e022b045250d768552dd4d2381067170846e4712",
+        "generatedAt": "2026-10-10T21:50:02.624Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-employed-age55plus",
+      "file": "app/ranking/construction-employed-age55plus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-employed-age55plus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/ogp/ogp.png",
+        "sha256": "e51f34d540a7e790a469e5ced5f89e5b0d2d41b23e2ea57ecc94d11800bedd8c",
+        "bytes": 67850
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-employed-age55plus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/ogp/generation.json",
+          "sha256": "85891d01484f7357071a829c1dcd1fee1dd858a1d4b728802bd6b9b3ddaf0bc2",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-employed-age55plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-employed-age55plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "d21460807aafc887f6e0e082d6f1ec63a6c60d8657aba2c1cfa4840ac096ccbd",
+        "fingerprint": "585228ed7f05f528b5c9e996ca13170c98c020ef9d4d66fa7f82a2d4f3bdacaf",
+        "generatedAt": "2026-10-10T21:32:41.334Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-employed-age55plus",
+      "file": "app/ranking/construction-employed-age55plus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-employed-age55plus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/thumbnail-dark.webp",
+        "sha256": "a4b086efdbc3cfee2896119a125bff249bd0210506b3e18d803c3aab3fe6a57b",
+        "bytes": 18890
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-employed-age55plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/thumbnail.json",
+          "sha256": "18723357d4c76d71b41d71ff7e133c06e99d0d8e31d8154dada3f564b5b57462",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-employed-age55plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-employed-age55plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "ee036b9baed20de0d262e79aca4e3df974ef316f014146165a8dafcfcf4d9313",
+        "fingerprint": "e33ddcd20834ff92f7164a3fdc7a7a7390ad2aa31348e68302f504560f2bacc9",
+        "generatedAt": "2026-10-10T21:50:07.862Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-employed-age55plus",
+      "file": "app/ranking/construction-employed-age55plus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-employed-age55plus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/thumbnail-light.webp",
+        "sha256": "e7fe75f21d21186c8c69b56ae039e363e025a1bec2aa3bfb8e492c88e6b3c961",
+        "bytes": 17764
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-employed-age55plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/thumbnail.json",
+          "sha256": "18723357d4c76d71b41d71ff7e133c06e99d0d8e31d8154dada3f564b5b57462",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-employed-age55plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-employed-age55plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-employed-age55plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "ee036b9baed20de0d262e79aca4e3df974ef316f014146165a8dafcfcf4d9313",
+        "fingerprint": "e33ddcd20834ff92f7164a3fdc7a7a7390ad2aa31348e68302f504560f2bacc9",
+        "generatedAt": "2026-10-10T21:50:07.862Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-children-count",
+      "file": "app/ranking/elementary-school-children-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-children-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/ogp/ogp.png",
+        "sha256": "71cd01d9eda51d783d6c0173246cd4f80cfaaa591fdb7151c620823b839b1242",
+        "bytes": 61558
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-children-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/ogp/generation.json",
+          "sha256": "de3121ef68e6a85c47b524809c114f5eab3825feea19c9287f38491393510889",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-children-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-children-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "70045f9b37c94313f3f30cc36e7fd95535540bd1257ed6e2c7de38cf70792911",
+        "fingerprint": "0d6b22985c04a69acccd22cabfcf2d5e979729f2bfa80ecbb2f3182332049155",
+        "generatedAt": "2026-10-01T18:10:30.493Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-children-count",
+      "file": "app/ranking/elementary-school-children-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-children-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/thumbnail-dark.webp",
+        "sha256": "7b468b4deea0b0ab375f13bced326d64844ea1ab70bd106648099edafa4ba23e",
+        "bytes": 16456
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-children-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/thumbnail.json",
+          "sha256": "75941850f06a78186aa1d471059653151ef4f2afa1de365cc10f2ee789742ad8",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-children-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-children-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5fe38dfddb9cbff49ee37d0f46c1b10f935ffa881c98501ee8516b038a0e2224",
+        "fingerprint": "c8f139f6cc85cdfb3754bf955d763f1515e81c859ae5ee9738ba21530da68af8",
+        "generatedAt": "2026-10-01T18:35:45.105Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elementary-school-children-count",
+      "file": "app/ranking/elementary-school-children-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elementary-school-children-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/thumbnail-light.webp",
+        "sha256": "a5e17770a26b7b780c99000618be9e9d4ca5ec7f3537363e5166b6eb0cf10a6f",
+        "bytes": 14918
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elementary-school-children-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/thumbnail.json",
+          "sha256": "75941850f06a78186aa1d471059653151ef4f2afa1de365cc10f2ee789742ad8",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elementary-school-children-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elementary-school-children-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elementary-school-children-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5fe38dfddb9cbff49ee37d0f46c1b10f935ffa881c98501ee8516b038a0e2224",
+        "fingerprint": "c8f139f6cc85cdfb3754bf955d763f1515e81c859ae5ee9738ba21530da68af8",
+        "generatedAt": "2026-10-01T18:35:45.105Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "file": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/ogp/ogp.png",
+        "sha256": "63a144c9454c5f350b9906106a432311fe1dfff0787dc404953220db4283a819",
+        "bytes": 62932
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/ogp/generation.json",
+          "sha256": "b5984eebd8499c153cb6eefea8348fe9ceb1aca9624e195257be17ce06e5ec8f",
+          "bytes": 1049,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "b3c13bbb46f94779507d52b265f7bf55767bb39019cc003336dded08faaca63d",
+        "fingerprint": "1d5045bd36a97ebe3361a580efaae3bd02a7ffa3ead3096b7d1c67b0ec63496c",
+        "generatedAt": "2026-10-01T18:10:45.164Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "file": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-dark.webp",
+        "sha256": "729293d49b110228dd2181ca703dd803b101c4e99dd0c861d7002a0df7a4ced7",
+        "bytes": 17706
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail.json",
+          "sha256": "79fc5edcae20dc55515763cac1335990f8f9c73b4a458ffda57c9d7bd2883cb1",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "91e5a196948112ef86e282a7fd16a965703f5fc3a27859031b065eccb47f6df6",
+        "fingerprint": "2d16aa76cc511322cf752b342a00c6a8adbdc2048aa94cec2ae646ccd7eab80e",
+        "generatedAt": "2026-10-01T18:35:49.065Z"
+      }
+    },
+    {
+      "owner": "web/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "file": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail-light.webp",
+        "sha256": "d40d3dcb80768a94e293aafa79a7e2025e191ecb035884cbc9f3369382bd4f7c",
+        "bytes": 15980
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/thumbnail.json",
+          "sha256": "79fc5edcae20dc55515763cac1335990f8f9c73b4a458ffda57c9d7bd2883cb1",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fire-department-pump-car-count-per-100-thousand-people/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "91e5a196948112ef86e282a7fd16a965703f5fc3a27859031b065eccb47f6df6",
+        "fingerprint": "2d16aa76cc511322cf752b342a00c6a8adbdc2048aa94cec2ae646ccd7eab80e",
+        "generatedAt": "2026-10-01T18:35:49.065Z"
+      }
+    },
+    {
+      "owner": "web/ranking/information-communication-coefficient",
+      "file": "app/ranking/information-communication-coefficient/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/information-communication-coefficient/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/information-communication-coefficient",
+      "file": "app/ranking/information-communication-coefficient/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/information-communication-coefficient/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/thumbnail-dark.webp",
+        "sha256": "72515fcf0f9330d6b81a7fdb32b1c22471b573a8aaabe4dbd570ebdccd153d54",
+        "bytes": 15582
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/information-communication-coefficient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/thumbnail.json",
+          "sha256": "dee87cd897ada1b3253c3140394d649c2bf68ad8490269702585f43852c3b052",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/information-communication-coefficient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/information-communication-coefficient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e3ad8a46bbcdd9d4c75b52e12cb70c8de8519a0da3a3c5470c06655c0d37d0a",
+        "fingerprint": "39a87a91d9e24e9f137bc12bd581b6690a3586b7bbe12fcff23c5504768193f1",
+        "generatedAt": "2026-10-01T18:36:04.284Z"
+      }
+    },
+    {
+      "owner": "web/ranking/information-communication-coefficient",
+      "file": "app/ranking/information-communication-coefficient/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/information-communication-coefficient/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/thumbnail-light.webp",
+        "sha256": "10004a7eac9388cc3a513abf06e4202aeb3bfc749c3048ed050e35b0e1f10f4f",
+        "bytes": 13956
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/information-communication-coefficient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/thumbnail.json",
+          "sha256": "dee87cd897ada1b3253c3140394d649c2bf68ad8490269702585f43852c3b052",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/information-communication-coefficient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/information-communication-coefficient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/information-communication-coefficient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e3ad8a46bbcdd9d4c75b52e12cb70c8de8519a0da3a3c5470c06655c0d37d0a",
+        "fingerprint": "39a87a91d9e24e9f137bc12bd581b6690a3586b7bbe12fcff23c5504768193f1",
+        "generatedAt": "2026-10-01T18:36:04.284Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nursing-home-capacity-per-1000-65plus",
+      "file": "app/ranking/nursing-home-capacity-per-1000-65plus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nursing-home-capacity-per-1000-65plus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/ogp/ogp.png",
+        "sha256": "6daf5ace15fee561efe074c111dccdb352cb317af053ff2cca8ee89214db2ed0",
+        "bytes": 66757
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nursing-home-capacity-per-1000-65plus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/ogp/generation.json",
+          "sha256": "9117e17274afae4977f9d98243b07c31044f0bfecb98e740775b3e0a141f3ed7",
+          "bytes": 981,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "c573b51c956f4fee22d210061ded25ab4d3dce0152e31998791ac2605ff875ec",
+        "fingerprint": "da7b306ae3456929b8864eeeca17eb75d03199c1f452c52b92e730d2834339ae",
+        "generatedAt": "2026-10-03T21:00:26.646Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nursing-home-capacity-per-1000-65plus",
+      "file": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-dark.webp",
+        "sha256": "8190e4fc6529c19eca9bfb44d6148c12283818f7b047adc156319092900ac552",
+        "bytes": 19424
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail.json",
+          "sha256": "a8af7c96f050ae929dd11df80f1d8cfc0d7a3eab7795e16dea81e3c661822048",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "99629a3498c0490ccb7e89a5c7e98fb662f276b7b5433e9ca71be6d18402cf0e",
+        "fingerprint": "f3069da22389186da2ef55006a8cd33e4fb87d55faa6440b24eba576e6c4da6c",
+        "generatedAt": "2026-10-03T21:25:34.408Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nursing-home-capacity-per-1000-65plus",
+      "file": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail-light.webp",
+        "sha256": "1823a695d883321cb59a32fa1efdd413145b33211b83434e6a82861317ac752d",
+        "bytes": 18164
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/thumbnail.json",
+          "sha256": "a8af7c96f050ae929dd11df80f1d8cfc0d7a3eab7795e16dea81e3c661822048",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nursing-home-capacity-per-1000-65plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "99629a3498c0490ccb7e89a5c7e98fb662f276b7b5433e9ca71be6d18402cf0e",
+        "fingerprint": "f3069da22389186da2ef55006a8cd33e4fb87d55faa6440b24eba576e6c4da6c",
+        "generatedAt": "2026-10-03T21:25:34.408Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-household-goods-consumption-expenditure",
+      "file": "app/ranking/other-household-goods-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-household-goods-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/ogp/ogp.png",
+        "sha256": "4d8a0107e29b8e5a7f07af97d60df44d01da8b6fc97aa38f46525b671cca940b",
+        "bytes": 62696
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-household-goods-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/ogp/generation.json",
+          "sha256": "0eec2f054d63a9023e2767211f144659fb0ebfa84b791d286a010caaab6b0ef8",
+          "bytes": 1013,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "df0232759c8270aa819d97be6dfa9a90dff96112dd28f084a377687f24ed5f3a",
+        "fingerprint": "2cc16458c08116453228d23b58a8be313575f0b0511ffa9d1dcb1c1a7d7a1d58",
+        "generatedAt": "2026-10-03T21:00:36.727Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-household-goods-consumption-expenditure",
+      "file": "app/ranking/other-household-goods-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-household-goods-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "ece06114d1ea98b0a6c5a4550ab20ccf0904de2f5262724b4c0076f7208a1689",
+        "bytes": 17848
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-household-goods-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/thumbnail.json",
+          "sha256": "d824ab9d4e3e6f7746a86d893f375126ba11766cde941f0609589c8b17141399",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0d37e82bbfb24328fa861649cc3b93dc7b639563c8f1859b5633feb5922dc51e",
+        "fingerprint": "490718e4f8536b2df265992901b625ddb626a62f97e6c7004f5f3e228e1ce89f",
+        "generatedAt": "2026-10-03T21:25:36.979Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-household-goods-consumption-expenditure",
+      "file": "app/ranking/other-household-goods-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-household-goods-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "e73ac745a3583adfb05ed749569f706515737be5cd350c10c9efa867e3529058",
+        "bytes": 16402
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-household-goods-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/thumbnail.json",
+          "sha256": "d824ab9d4e3e6f7746a86d893f375126ba11766cde941f0609589c8b17141399",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-household-goods-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0d37e82bbfb24328fa861649cc3b93dc7b639563c8f1859b5633feb5922dc51e",
+        "fingerprint": "490718e4f8536b2df265992901b625ddb626a62f97e6c7004f5f3e228e1ce89f",
+        "generatedAt": "2026-10-03T21:25:36.979Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-firefighting-expenditure-tokyo-municipal",
+      "file": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/ogp/ogp.png",
+        "sha256": "9f4e5a40fb33f3e29d9b1ac124f05e02f2bb159ee5084ec2c7f0f9fe23be44ce",
+        "bytes": 72814
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/ogp/generation.json",
+          "sha256": "d5fd46f74962f52eb53cbaf01170be824e8652dcc33b908d4264c085e3869fdf",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "72892b7c3fb003feb6e163120e7dfe47c0c396c6ed6ce5eebbe8fc2990c24590",
+        "fingerprint": "9c9d5508b764fd5782808553cac0b92d324590a9865821b70498fbce267e1512",
+        "generatedAt": "2026-08-15T18:42:13.334Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-firefighting-expenditure-tokyo-municipal",
+      "file": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-dark.webp",
+        "sha256": "9432cd1459f40a68155391dbdd1a1af2c70036300bae6ce39165facef7e873c5",
+        "bytes": 14562
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail.json",
+          "sha256": "d865898c86be7daadf3b72c02fdf7af7605cbb208b9ca483fa1c691a82136a70",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6089ea3310651a4641f0a6ad48631f85883876898421711359782a2694261421",
+        "fingerprint": "8c4f7f15474f55b2f7c990cba6886085e392f87f5f3b871048f51321f39e2b05",
+        "generatedAt": "2026-10-08T23:17:27.856Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-firefighting-expenditure-tokyo-municipal",
+      "file": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail-light.webp",
+        "sha256": "ed0477631e426bbf9b0ea0845edea21ef519d67294c584168dfc5d0f1113f5dc",
+        "bytes": 13030
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/thumbnail.json",
+          "sha256": "d865898c86be7daadf3b72c02fdf7af7605cbb208b9ca483fa1c691a82136a70",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-firefighting-expenditure-tokyo-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6089ea3310651a4641f0a6ad48631f85883876898421711359782a2694261421",
+        "fingerprint": "8c4f7f15474f55b2f7c990cba6886085e392f87f5f3b871048f51321f39e2b05",
+        "generatedAt": "2026-10-08T23:17:27.856Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pm25-general-station-compliance-rate",
+      "file": "app/ranking/pm25-general-station-compliance-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pm25-general-station-compliance-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/ogp/ogp.png",
+        "sha256": "3ff1ba5749b191d07bea1c26291d6d6af88a093b2305b128e39695d1955da1a1",
+        "bytes": 63083
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pm25-general-station-compliance-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/ogp/generation.json",
+          "sha256": "a5b086333a915f9ffb10d022e867fac043c1c529b6819fe34eab2865626fcdae",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "2426bf1154185eaf863f386729c49d756cdf19860d7fa432a8548ab50a06e50d",
+        "fingerprint": "436de64b0df7a56176cd9ea7fc809d2e906b00b7af21a7727207e936692bc233",
+        "generatedAt": "2026-09-11T14:05:32.137Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pm25-general-station-compliance-rate",
+      "file": "app/ranking/pm25-general-station-compliance-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pm25-general-station-compliance-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/thumbnail-dark.webp",
+        "sha256": "b81782ce3dc0b8719f84181d8b41fe21ef073139a7094a79771af32e8475150b",
+        "bytes": 20188
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pm25-general-station-compliance-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/thumbnail.json",
+          "sha256": "b5f40c39b0dd5d1eedf86972fe708b1bdb894e5bc9400efdd2ea1eebcfe7d072",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "177fe41d8684a5ce66246b5faf309e86545e8b2b0f3fc8b8de221d546f7c73f9",
+        "fingerprint": "dc6af12bec66e8bf9bd7e72f86fa9c06d80d14b68f55e2911b5a2e36e3b2ee25",
+        "generatedAt": "2026-09-11T14:26:28.289Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pm25-general-station-compliance-rate",
+      "file": "app/ranking/pm25-general-station-compliance-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pm25-general-station-compliance-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/thumbnail-light.webp",
+        "sha256": "9d5d908ce7c75957425b0272c3c3c3c4098bb586164f6acf2803d5a1d081ecc6",
+        "bytes": 20040
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pm25-general-station-compliance-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/thumbnail.json",
+          "sha256": "b5f40c39b0dd5d1eedf86972fe708b1bdb894e5bc9400efdd2ea1eebcfe7d072",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pm25-general-station-compliance-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pm25-general-station-compliance-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "177fe41d8684a5ce66246b5faf309e86545e8b2b0f3fc8b8de221d546f7c73f9",
+        "fingerprint": "dc6af12bec66e8bf9bd7e72f86fa9c06d80d14b68f55e2911b5a2e36e3b2ee25",
+        "generatedAt": "2026-09-11T14:26:28.289Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pork-consumption-quantity",
+      "file": "app/ranking/pork-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pork-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/ogp/ogp.png",
+        "sha256": "f50daacbc060a1b791224d3f2c714bdf5af55ce4be250c66248d1b0ba4cc7580",
+        "bytes": 74170
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pork-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/ogp/generation.json",
+          "sha256": "2df4a60edeff65dca74b888cf4a6748552c81eb197066bbfcc710345076947a0",
+          "bytes": 933,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pork-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pork-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c26edd557cf2213692e255a0366a9f31c39dc0b934574bcc9ee98f12199ab5c5",
+        "fingerprint": "3a4f49f245025512cee245c70c1fcced0e62e04ca02f713d1d3f4bca6056bcdb",
+        "generatedAt": "2026-08-15T18:42:21.871Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pork-consumption-quantity",
+      "file": "app/ranking/pork-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pork-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "2cd5d7b3eca0ed5481b6a5ac842f66ac66545c5c8fde2cc5b0339af77ae191c3",
+        "bytes": 15792
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pork-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/thumbnail.json",
+          "sha256": "d90d874cf86c26ea0a3ae7d53c717005e3c8aae186b1520529511339724f9e00",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pork-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pork-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1eca537a9de3f6ca0416b01e6af45e8d79e572b3d7f5806ce6a9f408160bfa90",
+        "fingerprint": "9df8fb51c55769093be36e056295f432b7f199cb2fc10d2c0dc88f41ced6bebc",
+        "generatedAt": "2026-08-15T18:58:39.383Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pork-consumption-quantity",
+      "file": "app/ranking/pork-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pork-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/thumbnail-light.webp",
+        "sha256": "a16da9b58c475c8061b5d7306237f6a97ee8d33fc68563c2659f0effd813669e",
+        "bytes": 14412
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pork-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/thumbnail.json",
+          "sha256": "d90d874cf86c26ea0a3ae7d53c717005e3c8aae186b1520529511339724f9e00",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pork-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pork-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pork-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1eca537a9de3f6ca0416b01e6af45e8d79e572b3d7f5806ce6a9f408160bfa90",
+        "fingerprint": "9df8fb51c55769093be36e056295f432b7f199cb2fc10d2c0dc88f41ced6bebc",
+        "generatedAt": "2026-08-15T18:58:39.383Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-amount",
+      "file": "app/ranking/public-construction-contract-amount/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-amount/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/ogp/ogp.png",
+        "sha256": "66104966ac0333616c3954fce2618259b8babead262c0e3d5321c2e1ce5b4dee",
+        "bytes": 67659
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-amount/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/ogp/generation.json",
+          "sha256": "38fde582a443c010f3c7b0ee440cb1f124e1ba9ff9579b910c47c0e97a82350c",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-amount/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "af80ab61518a0bbae1c1d4aba5e62fb465c091753aa427669cb34fd50f3730b8",
+        "fingerprint": "a81cc329a7021d582bd666040476437e2b4f823c23066919052d774314f29560",
+        "generatedAt": "2026-09-11T14:05:33.069Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-amount",
+      "file": "app/ranking/public-construction-contract-amount/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-amount/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/thumbnail-dark.webp",
+        "sha256": "70994f3c7f7ffc2026a6146e1e9ee7822afe19526f8c3e6b010737c8702d3a4c",
+        "bytes": 18502
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-amount/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/thumbnail.json",
+          "sha256": "29bae66a1ec38731093a3677fbc768f8d80a45654b612dc0b771a05599b50c84",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-amount/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "f257cc59a87097305efb94c12a4b2adaebd3679089bcefde8138478afc0e0130",
+        "fingerprint": "0c9ce679ea008fb39219a3565366eaef2a8c957aafd4da8231108edab0222a47",
+        "generatedAt": "2026-09-11T14:26:28.558Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-amount",
+      "file": "app/ranking/public-construction-contract-amount/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-amount/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/thumbnail-light.webp",
+        "sha256": "3622468dfa3a62f05b1b2c413e78b339bcd38b2abcb0ec7b8193abe344fff68e",
+        "bytes": 17410
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-amount/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/thumbnail.json",
+          "sha256": "29bae66a1ec38731093a3677fbc768f8d80a45654b612dc0b771a05599b50c84",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-amount/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-amount/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "f257cc59a87097305efb94c12a4b2adaebd3679089bcefde8138478afc0e0130",
+        "fingerprint": "0c9ce679ea008fb39219a3565366eaef2a8c957aafd4da8231108edab0222a47",
+        "generatedAt": "2026-09-11T14:26:28.558Z"
+      }
+    },
+    {
+      "owner": "web/ranking/security-guard-annual-income",
+      "file": "app/ranking/security-guard-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/security-guard-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/ogp/ogp.png",
+        "sha256": "02d71d96187f8aafdcaf443f9618d4575d7b8d800ec672e7bbc67e7469dc3fe4",
+        "bytes": 75600
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/security-guard-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/ogp/generation.json",
+          "sha256": "88b59e21399384faaca4878716aab736a7cf197e57f33397342c5d0395ad9033",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/security-guard-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/security-guard-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "70aa8fb7ee09530bd8b54ca4d81102fdf04cae881439992c55f9fb7da4f63614",
+        "fingerprint": "34be0f372b6b2331b666ae620a987a6b9640571e62d15b4f16e0cffdf4d8441f",
+        "generatedAt": "2026-08-17T11:41:45.259Z"
+      }
+    },
+    {
+      "owner": "web/ranking/security-guard-annual-income",
+      "file": "app/ranking/security-guard-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/security-guard-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/thumbnail-dark.webp",
+        "sha256": "286fd750932ea1de680e9aaf4438a1c264dcdecd8384c7e907643503826e24ea",
+        "bytes": 16282
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/security-guard-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/thumbnail.json",
+          "sha256": "bf2a0879b79917cc39b9be108718f2bb672a7f14b8ea9dcc0317c9d3c9020b12",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/security-guard-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/security-guard-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3faf960ce556ae2af09d5e811ea9b229f9b997a1e841b5fefcda408ada6b3734",
+        "fingerprint": "37d23a647bda47302bf2eebabf1aa3321119885ae7669f40520b571c34b45609",
+        "generatedAt": "2026-08-17T11:47:15.968Z"
+      }
+    },
+    {
+      "owner": "web/ranking/security-guard-annual-income",
+      "file": "app/ranking/security-guard-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/security-guard-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/thumbnail-light.webp",
+        "sha256": "9ee38b591f9ba42db17522305f49713e478de55073a8234e6defe67f6ac0b07a",
+        "bytes": 14616
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/security-guard-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/thumbnail.json",
+          "sha256": "bf2a0879b79917cc39b9be108718f2bb672a7f14b8ea9dcc0317c9d3c9020b12",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/security-guard-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/security-guard-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/security-guard-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3faf960ce556ae2af09d5e811ea9b229f9b997a1e841b5fefcda408ada6b3734",
+        "fingerprint": "37d23a647bda47302bf2eebabf1aa3321119885ae7669f40520b571c34b45609",
+        "generatedAt": "2026-08-17T11:47:15.968Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tissue-paper-consumption-expenditure",
+      "file": "app/ranking/tissue-paper-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tissue-paper-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/ogp/ogp.png",
+        "sha256": "f42c79e17e65575cd75685a453652bf8c007ff1647adfb9b799ae34553dfd40a",
+        "bytes": 78471
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tissue-paper-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/ogp/generation.json",
+          "sha256": "f08485dabe0709a85285e111a36c16942625ace975714e16a7d9c8821fc9e4ca",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "28a80af19d12bdc67b29eec62d9e02246ac81c210bbc0478317055c07ed3fbef",
+        "fingerprint": "0b15c6eeb106b4d396234522a22354828a23948ea128e9fc313a90d797e5643f",
+        "generatedAt": "2026-08-16T22:21:12.376Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tissue-paper-consumption-expenditure",
+      "file": "app/ranking/tissue-paper-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tissue-paper-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "c833eabceeae6d2eff4d9c22cf4109269e0a9c6e7feabb6821939675049e41ee",
+        "bytes": 17696
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tissue-paper-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/thumbnail.json",
+          "sha256": "92e4a15f6537c6b62e734920490408adaf117f06e19f81501a55b2d86d122e98",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1ec397db619d7d6e56738e8ebaf9fda63ac692b7a6b8a7f928ee0243dc9fffaa",
+        "fingerprint": "af409386c605013187393e5efb191f1f7de51485533daad941a0b7c19d8abe5b",
+        "generatedAt": "2026-08-16T22:36:28.484Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tissue-paper-consumption-expenditure",
+      "file": "app/ranking/tissue-paper-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tissue-paper-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "f3992154485c0da3cfec8b6b65fdefe5eae6c4fca186609012c38f16c0183a09",
+        "bytes": 16166
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tissue-paper-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/thumbnail.json",
+          "sha256": "92e4a15f6537c6b62e734920490408adaf117f06e19f81501a55b2d86d122e98",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tissue-paper-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1ec397db619d7d6e56738e8ebaf9fda63ac692b7a6b8a7f928ee0243dc9fffaa",
+        "fingerprint": "af409386c605013187393e5efb191f1f7de51485533daad941a0b7c19d8abe5b",
+        "generatedAt": "2026-08-16T22:36:28.484Z"
+      }
+    }
+  ]
+}

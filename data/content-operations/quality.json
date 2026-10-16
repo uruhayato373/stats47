@@ -93,6 +93,13 @@
       "templateId": "ranking",
       "policy": "上位5県と下位5県の横並びでは文字が小さい。縦配置または2枚への分割を試し、地域名・値・単位を320pxで読める大きさにする。固定数値入力は未回収のため、照合後に生成する。",
       "approvedId": null
+    },
+    "IMG-0318894703d4249f94dd2ff8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "svg-bar-card",
+      "policy": "320pxでは上位5県・下位5県の横並びを縦積みにし、県名・値・単位を大きくする。保存済みJSONの数値と年を維持し、説明直後への配置も確認する。候補作成後、原寸・320px・元データの一致を目視確認して採用する。",
+      "approvedId": null
     }
   }
 }

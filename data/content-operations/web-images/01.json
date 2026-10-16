@@ -1,0 +1,2895 @@
+{
+  "items": [
+    {
+      "id": "web/blog/fish-catch-vs-consumption-prefecture",
+      "channel": "web",
+      "key": "fish-catch-vs-consumption-prefecture",
+      "title": "獲れる県と食べる県は違う？",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/fish-catch-vs-consumption-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "1d02683189e4b6dc280094127c170fd673b5ec1feadb9a582af54df35a787df9",
+      "catalogBasis": "8a558d9fcc73ac00da8563529bc5c6e96974b254ab7dd40bc858686e6ff47d69",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+        "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+        "bytes": 14888
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/income-quintile-education",
+      "channel": "web",
+      "key": "income-quintile-education",
+      "title": "教育費だけ格差が桁違いなのはなぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/income-quintile-education",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "5888704b6dbeb627d2eae853cc537c40cd539661f2330b9f265870d189815a64",
+      "catalogBasis": "59dcb743cc656c25e0350f974f5f091c4c339facf72a46e9faa9a1ee919dda1e",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/article.md",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/article.md",
+        "sha256": "a1a802700c9ebe3c8e838f93c62753516029fae6e1a47356ef1972a250eccbc3",
+        "bytes": 15530
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "channel": "web",
+      "key": "pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "title": "パチンコ店と教育費、なぜ同じ方向に動く?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "33dbb09329a5e947bdaf089752635ffe660cbd3b67d19f7d8dd20af3c196cf80",
+      "catalogBasis": "1365f716050c43e6cbd2e9a1fa3c80054c18d6615e74fdfa4d69d13d5327d9b5",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+        "sha256": "69d433a3462c9fbbb48a227f6ed2e7068d070e6135a6af317e548496f012032b",
+        "bytes": 9577
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/2569aba14b5c7119e3a2080c",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/health-life-expectancy-structure.jpg",
+      "title": "health-life-expectancy-structure.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3c91b69f159c05aba4e8bd17fe4844a5f01e719897a35e6e41e33d9e6a69a43c"
+    },
+    {
+      "id": "web/material/7d72f770f2db4277d7c43e8a",
+      "channel": "web",
+      "key": "packages/gis/data/geoshape/svg/16_富山県.svg",
+      "title": "16_富山県.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fa97b81ef2a475d1835c61eeefb42bfcdc57ae8a06f7324a57ce3141942d11e0"
+    },
+    {
+      "id": "web/material/a7f1a349688759028e719e3b",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/cc-estat-18-cache-r2.jpg",
+      "title": "cc-estat-18-cache-r2.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "836c3319393c7a4f5bb36f5ac1621287a54a02df3ad71665357586354d91dc0d"
+    },
+    {
+      "id": "web/material/c23c759c0bf3e413bfd5b15c",
+      "channel": "web",
+      "key": "assets/area-specialty/15000/komeko.webp",
+      "title": "komeko.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "759731032a3afb6831c56df20dd03a45d60770ed9dcfa2364b57d60894799cb6"
+    },
+    {
+      "id": "web/material/f76261a7dc64496ac14b27ad",
+      "channel": "web",
+      "key": "assets/area-specialty/04000/sanma.webp",
+      "title": "sanma.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8f7697ad453fc19a4698d148ccdb459841bfdc9e616f83f496e81873e7d82627"
+    },
+    {
+      "id": "web/ranking/assistance-expenses-prefecture",
+      "channel": "web",
+      "key": "assistance-expenses-prefecture",
+      "title": "扶助費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/assistance-expenses-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e084506513b4c4b7a26744dc2d0ebbec380e46127aad58fbc21f21d874e22de3",
+      "catalogBasis": "e084506513b4c4b7a26744dc2d0ebbec380e46127aad58fbc21f21d874e22de3",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/cable-tv-fee-consumption-expenditure",
+      "channel": "web",
+      "key": "cable-tv-fee-consumption-expenditure",
+      "title": "ケーブルテレビ放送受信料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cable-tv-fee-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "56f58deb69d28bfa29b49437086023fbc5c55b5515c785a94047f25da156712d",
+      "catalogBasis": "56f58deb69d28bfa29b49437086023fbc5c55b5515c785a94047f25da156712d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/construction-private-employees",
+      "channel": "web",
+      "key": "construction-private-employees",
+      "title": "建設業従業者数（民営）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/construction-private-employees",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ab15556bcc5f5a4b206fc5a814f1bd04cc2ed42dbe66727af6a0ce62405bdf98",
+      "catalogBasis": "ab15556bcc5f5a4b206fc5a814f1bd04cc2ed42dbe66727af6a0ce62405bdf98",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/drinking-out-consumption-expenditure",
+      "channel": "web",
+      "key": "drinking-out-consumption-expenditure",
+      "title": "飲酒代消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/drinking-out-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ca4e6dbba68afef32891bec1cbd2f7af291cbcad432ba0fa6e7e240d8bb42516",
+      "catalogBasis": "ca4e6dbba68afef32891bec1cbd2f7af291cbcad432ba0fa6e7e240d8bb42516",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/inland-aquaculture-harvest",
+      "channel": "web",
+      "key": "inland-aquaculture-harvest",
+      "title": "内水面養殖業収獲量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/inland-aquaculture-harvest",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fd7ce39ac94e76d9f2d76ff2265913155c6b4f6d455b1df155f220966edd815e",
+      "catalogBasis": "fd7ce39ac94e76d9f2d76ff2265913155c6b4f6d455b1df155f220966edd815e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/intellectual-disability-rehabilitation-center-cases",
+      "channel": "web",
+      "key": "intellectual-disability-rehabilitation-center-cases",
+      "title": "知的障害者更生相談所取扱実人員",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/intellectual-disability-rehabilitation-center-cases",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cda53d26e0e648bddfb43eedf27b34c416d5553e49f18f2cda62a9da101a40e3",
+      "catalogBasis": "cda53d26e0e648bddfb43eedf27b34c416d5553e49f18f2cda62a9da101a40e3",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/public-construction-contract-count",
+      "channel": "web",
+      "key": "public-construction-contract-count",
+      "title": "公共工事の請負契約件数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/public-construction-contract-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "df8798d3ea79dd96044c6e80765c4fb658c50a767b75c7cb5a905e54173d454b",
+      "catalogBasis": "df8798d3ea79dd96044c6e80765c4fb658c50a767b75c7cb5a905e54173d454b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/swimming-pool-public",
+      "channel": "web",
+      "key": "swimming-pool-public",
+      "title": "水泳プール数（公共）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/swimming-pool-public",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f3b9cd8cd084dc52b4ccab086b00c64e1674e157d6f67ba3044d555a5e3d5078",
+      "catalogBasis": "f3b9cd8cd084dc52b4ccab086b00c64e1674e157d6f67ba3044d555a5e3d5078",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.svg",
+        "sha256": "63f10cccd2d25443f4a1b571648171344e0823f0d1809e78ea52690a76831fce",
+        "bytes": 8612
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-catch-consumption-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.json",
+          "sha256": "3f379dd7c7b8d80f2aa33d52c924fd4f5c9cf724759df7b682d5a376fb50c3fd",
+          "bytes": 2634,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-catch-consumption-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.source.json",
+          "sha256": "b5a655c60383e58fb762eb36a07d608054c226486fdaf03e3290544f4f59b75e",
+          "bytes": 1070,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-consumption-scatter.svg",
+          "alt": "マグロ類漁獲量とまぐろ消費支出額の散布図",
+          "heading": "マグロの散布図｜右上がりは静岡県が引っ張っている",
+          "line": 54
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.svg",
+        "sha256": "59a85a71011fe7d51f6365793c9464f22ee124f3e5a555ab0c879cf1de94e44a",
+        "bytes": 6868
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-catch-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.json",
+          "sha256": "c0a9499fa38fd79632f87949539edb5f16504965ffcfce0b412977f8e478e59c",
+          "bytes": 4772,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-catch-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.source.json",
+          "sha256": "0d3ff1f119f7bd5cfe39ef9c6dd64c23f36635b93b03e2f223b6d652b692ab79",
+          "bytes": 661,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-catch-ranking.svg",
+          "alt": "マグロ類漁獲量 上位5・下位5",
+          "heading": "マグロ類漁獲量｜上位は太平洋側の県",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fishery-species-catch-tuna/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fishery-species-catch-tuna/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.svg",
+        "sha256": "6ec2ff77c296e6a8ac5368b45cd21f713608561d687e88ebe8e11a3e47caacef",
+        "bytes": 6846
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-consumption-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.json",
+          "sha256": "5857f14f39764df78b080ac4c26c5630c4daca73d1c55b8a90747b671782a61e",
+          "bytes": 6780,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-consumption-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.source.json",
+          "sha256": "2bffe8edd8c80e9c923c35d1c8f79afcff285267c1382b2f46da72de7a3e2ea0",
+          "bytes": 683,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/tuna-consumption-ranking.svg",
+          "alt": "まぐろ消費支出額 上位5・下位5",
+          "heading": "まぐろ消費支出額｜上位5県のうち3県は漁獲ランキングに登場しない",
+          "line": 42
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tuna-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tuna-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.svg",
+        "sha256": "68fa658592c180b7da51c85cf5aecc55ad03a03607d60a48e80675cb84094b77",
+        "bytes": 8837
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "yellowtail-catch-consumption-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.json",
+          "sha256": "c0a84e62c4cd386fb8e14f99ae4d160687b7a191671678da550eae6ad5d91a15",
+          "bytes": 3062,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "yellowtail-catch-consumption-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.source.json",
+          "sha256": "050f20d5f0801160ce8c204a6e53ab5d77807524d3f0e568b72883bc2d47ee2e",
+          "bytes": 716,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-consumption-scatter.svg",
+          "alt": "ブリ類漁獲量とぶり消費支出額の散布図",
+          "heading": "ブリの散布図｜北海道が右端の最下段、相関は-0.01",
+          "line": 89
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.svg",
+        "sha256": "5b4641da87c737c330dcabfb591c7a94ef0cadd41f6069abc2e79cf8f53d7b76",
+        "bytes": 6868
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "yellowtail-catch-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.json",
+          "sha256": "02509a6cbd011e6bf291efc0de591bc663b7b6abc50d4a3302c25947e99e33a2",
+          "bytes": 5584,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "yellowtail-catch-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.source.json",
+          "sha256": "dcc8181deb089883bd7bf5974346bbc4b045f62ddcc38ffe472cd25c6c5b34ef",
+          "bytes": 682,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-catch-ranking.svg",
+          "alt": "ブリ類漁獲量 上位5・下位5",
+          "heading": "ブリ類漁獲量｜北海道と長崎が1万トン超で並ぶ",
+          "line": 67
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fishery-species-catch-yellowtail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fishery-species-catch-yellowtail/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.svg",
+        "sha256": "9e9a8da8288a3c9eb3ec22dc14e4cf898ba8cfae3b74b39126d2fb6e928b6240",
+        "bytes": 6852
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/article.md",
+          "sha256": "a329fc5c8854e40c1347081abe2aa8d67058c219e3f907a658416a4a85b3f2c6",
+          "bytes": 14888,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "yellowtail-consumption-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.json",
+          "sha256": "d851f0c0ed6303058a984f9538f09d30ad5f53846c87dc717e795ead27649c49",
+          "bytes": 6774,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "yellowtail-consumption-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.source.json",
+          "sha256": "533f3c356a662fc651cf3139539dd4d23893c7b7d2754841fdc9f524834fee6a",
+          "bytes": 701,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/data/yellowtail-consumption-ranking.svg",
+          "alt": "ぶり消費支出額 上位5・下位5",
+          "heading": "ぶり消費支出額｜漁獲上位とは別の顔ぶれ",
+          "line": 77
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/yellowtail-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/yellowtail-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/background.jpg",
+        "sha256": "74cb7b18c2babada704990aca200ee5690d91b998cec7fb0ac365d8b05e70c7e",
+        "bytes": 110089
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "sha256": "a5ea821406ecdda5a420454c140e17d53dfaac3db05096541969c1a5bc8218a2",
+          "bytes": 2226,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "575d0cd2c8a9560b3f15ac4ba4374117e18c6c6f19ef1515317efa2242463de0",
+        "fingerprint": "de8fe7c54e7bb7e6513dcf6f6014e1295b5740c106b241999eb2deaa7a5008b7",
+        "generatedAt": "2026-10-08T21:34:04.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/ogp.png",
+        "sha256": "3740d38c530e7987b8289c9ff235b973f7e34777f0926e81f4ded05ca08215ad",
+        "bytes": 641888
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "sha256": "a5ea821406ecdda5a420454c140e17d53dfaac3db05096541969c1a5bc8218a2",
+          "bytes": 2226,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "575d0cd2c8a9560b3f15ac4ba4374117e18c6c6f19ef1515317efa2242463de0",
+        "fingerprint": "de8fe7c54e7bb7e6513dcf6f6014e1295b5740c106b241999eb2deaa7a5008b7",
+        "generatedAt": "2026-10-08T21:34:04.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/thumbnail-dark.webp",
+        "sha256": "3c4ce9053c14b949709d275fe00287ac661738ae856102bd8ee5b782337c2514",
+        "bytes": 16278
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "sha256": "a5ea821406ecdda5a420454c140e17d53dfaac3db05096541969c1a5bc8218a2",
+          "bytes": 2226,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "575d0cd2c8a9560b3f15ac4ba4374117e18c6c6f19ef1515317efa2242463de0",
+        "fingerprint": "de8fe7c54e7bb7e6513dcf6f6014e1295b5740c106b241999eb2deaa7a5008b7",
+        "generatedAt": "2026-10-08T21:34:04.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/fish-catch-vs-consumption-prefecture",
+      "file": "app/blog/fish-catch-vs-consumption-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fish-catch-vs-consumption-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/thumbnail-light.webp",
+        "sha256": "ccdcc99e0ef0d044754a76aa492908190c016d04d5c491c9edf6690f962a02b8",
+        "bytes": 32256
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/ogp/generation.json",
+          "sha256": "a5ea821406ecdda5a420454c140e17d53dfaac3db05096541969c1a5bc8218a2",
+          "bytes": 2226,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "575d0cd2c8a9560b3f15ac4ba4374117e18c6c6f19ef1515317efa2242463de0",
+        "fingerprint": "de8fe7c54e7bb7e6513dcf6f6014e1295b5740c106b241999eb2deaa7a5008b7",
+        "generatedAt": "2026-10-08T21:34:04.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/data/cram-school-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/data/cram-school-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/cram-school-quintile.svg",
+        "sha256": "b8f3096d8b1d59d12fe665c983d62b776a7f2f254d0a62652417ecd80a6c8aae",
+        "bytes": 3655
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/article.md",
+          "sha256": "a1a802700c9ebe3c8e838f93c62753516029fae6e1a47356ef1972a250eccbc3",
+          "bytes": 15530,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cram-school-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/cram-school-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/cram-school-quintile.json",
+          "sha256": "e2ad0dc63bd48a08b318a3af4c002869fa54443422a2c3fe1d7e9658cd21a7b6",
+          "bytes": 695,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cram-school-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/cram-school-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/cram-school-quintile.source.json",
+          "sha256": "f00762e88a88aeffae1294984e785e4c8d754bfd687ec56a8e0c5b114d405fc2",
+          "bytes": 517,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/cram-school-quintile.svg",
+          "alt": "高校補習教育(予備校等) 年収五分位別",
+          "heading": "高校補習教育(予備校等) — 格差はさらに開き101倍",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/data/private-univ-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/data/private-univ-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/private-univ-quintile.svg",
+        "sha256": "8f26cbff74592dc9511d45877741a2fcbe55c76541997aa67f09ebb8c1a1a875",
+        "bytes": 3256
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/article.md",
+          "sha256": "a1a802700c9ebe3c8e838f93c62753516029fae6e1a47356ef1972a250eccbc3",
+          "bytes": 15530,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "private-univ-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/private-univ-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/private-univ-quintile.json",
+          "sha256": "a8fb4dd365f3b9f1af7b65d65a6a44eb0e0acda54106936856fff6ee67826e72",
+          "bytes": 686,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "private-univ-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/private-univ-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/private-univ-quintile.source.json",
+          "sha256": "fd02e730f283603f58f97c134fa4aabf24465796b4f619f2f5387fe549e6465d",
+          "bytes": 506,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/private-univ-quintile.svg",
+          "alt": "私立大学授業料等 年収五分位別",
+          "heading": "私立大学授業料等 — 32倍の壁",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/data/remittance-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/data/remittance-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/remittance-quintile.svg",
+        "sha256": "5b419c52ba164474bbb5b9f52ec5a2c9e75f51744e49627af94f29469e9d02dd",
+        "bytes": 3253
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/article.md",
+          "sha256": "a1a802700c9ebe3c8e838f93c62753516029fae6e1a47356ef1972a250eccbc3",
+          "bytes": 15530,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "remittance-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/remittance-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/remittance-quintile.json",
+          "sha256": "454a728f6dba97fbf4a77b1507a93652f4bd0b9c76ce5f2a2dc72d84bf1cb4de",
+          "bytes": 686,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "remittance-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/remittance-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/remittance-quintile.source.json",
+          "sha256": "8cb520dfee3cf55a02e07d01650c48f9c47796d45edec5022930d2ec0a87f739",
+          "bytes": 504,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/remittance-quintile.svg",
+          "alt": "国内遊学仕送り金 年収五分位別",
+          "heading": "国内遊学仕送り金 — 67倍が示す「地元を離れる」ハードル",
+          "line": 50
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/data/tutoring-academic-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/data/tutoring-academic-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/tutoring-academic-scatter.svg",
+        "sha256": "142d045268164d19a5a63f087f2c0033324749729694bd652eb0c57508a69656",
+        "bytes": 11165
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/article.md",
+          "sha256": "a1a802700c9ebe3c8e838f93c62753516029fae6e1a47356ef1972a250eccbc3",
+          "bytes": 15530,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tutoring-academic-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/tutoring-academic-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/tutoring-academic-scatter.json",
+          "sha256": "77bee455629b5dea0ea27f6985fb4b983ccc164763f4c73d619d3aedc0da1d29",
+          "bytes": 3190,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tutoring-academic-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/data/tutoring-academic-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/tutoring-academic-scatter.source.json",
+          "sha256": "87d72b52d5f7f87bcc8bad04fbd7e82fcd5d88310ec93be99608d8b4b74f404c",
+          "bytes": 1165,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/data/tutoring-academic-scatter.svg",
+          "alt": "高校補習教育消費支出額と学力調査正答率の関係(都道府県別)",
+          "heading": "都道府県別に見る「投資の型」— 秋田と東京・奈良の対比",
+          "line": 74
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/background.jpg",
+        "sha256": "9168692e4f37282e56368041a1ae9e99507c6745001760c168ba39cc6c961b18",
+        "bytes": 101915
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/generation.json",
+          "sha256": "3476407f4d5f7a9ad0fb6e00174100bdb1ba6b87ac8c70a1ab1c2480c1409ea5",
+          "bytes": 2161,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "eff8ba55ebd408d690735e66bae3233631fe6b61ff301243db7e84b5251cbb48",
+        "fingerprint": "4c42fb90e032b626adf90d6ca40f163869a65e49cf8e135a033ed6fad6ee259c",
+        "generatedAt": "2026-09-05T23:55:12.898Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/ogp.png",
+        "sha256": "93ef717d4c4f59537fb3541ee1ba931178ae032c00828bdeb4ef13addf23ab6e",
+        "bytes": 649308
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/generation.json",
+          "sha256": "3476407f4d5f7a9ad0fb6e00174100bdb1ba6b87ac8c70a1ab1c2480c1409ea5",
+          "bytes": 2161,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "eff8ba55ebd408d690735e66bae3233631fe6b61ff301243db7e84b5251cbb48",
+        "fingerprint": "4c42fb90e032b626adf90d6ca40f163869a65e49cf8e135a033ed6fad6ee259c",
+        "generatedAt": "2026-09-05T23:55:12.898Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/thumbnail-dark.webp",
+        "sha256": "9e3f5c799c97d18a3cc1c354edea5f6e48c01193725192aadf9f97a3a089bd27",
+        "bytes": 14060
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/generation.json",
+          "sha256": "3476407f4d5f7a9ad0fb6e00174100bdb1ba6b87ac8c70a1ab1c2480c1409ea5",
+          "bytes": 2161,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "eff8ba55ebd408d690735e66bae3233631fe6b61ff301243db7e84b5251cbb48",
+        "fingerprint": "4c42fb90e032b626adf90d6ca40f163869a65e49cf8e135a033ed6fad6ee259c",
+        "generatedAt": "2026-09-05T23:55:12.898Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-education",
+      "file": "app/blog/income-quintile-education/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-education/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-education/thumbnail-light.webp",
+        "sha256": "83797d14c693e6675dc58f1b47b129e079d2819aaa46e24188fa8312c39f7e92",
+        "bytes": 27140
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-education/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-education/ogp/generation.json",
+          "sha256": "3476407f4d5f7a9ad0fb6e00174100bdb1ba6b87ac8c70a1ab1c2480c1409ea5",
+          "bytes": 2161,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "eff8ba55ebd408d690735e66bae3233631fe6b61ff301243db7e84b5251cbb48",
+        "fingerprint": "4c42fb90e032b626adf90d6ca40f163869a65e49cf8e135a033ed6fad6ee259c",
+        "generatedAt": "2026-09-05T23:55:12.898Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.svg",
+        "sha256": "691b831805c9c9963782b025425d1c096717ee7f4d7fe224c076d4e2451a5fa2",
+        "bytes": 6947
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "sha256": "69d433a3462c9fbbb48a227f6ed2e7068d070e6135a6af317e548496f012032b",
+          "bytes": 9577,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "high-school-education-cost-fulltime-per-student-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.json",
+          "sha256": "4aad8266c5c89539e4072e49878800db3517a669d783f7013b42202044757a4e",
+          "bytes": 6848,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "high-school-education-cost-fulltime-per-student-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.source.json",
+          "sha256": "d106ada86fb8ababc6dc374de8dc0f9dff2620e053abcde946678a426a1a1d2c",
+          "bytes": 761,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/high-school-education-cost-fulltime-per-student-prefecture-rankings.svg",
+          "alt": "高等学校教育費の上位と下位",
+          "heading": "高等学校教育費のランキングを見る",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-education-cost-fulltime-per-student/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-education-cost-fulltime-per-student/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.svg",
+        "sha256": "d7c184ce468069602e0248cc33d5702e755816967778ecafb6d6d4e604939f8e",
+        "bytes": 10830
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "sha256": "69d433a3462c9fbbb48a227f6ed2e7068d070e6135a6af317e548496f012032b",
+          "bytes": 9577,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.json",
+          "sha256": "bc8a36da5f0b16e21a320184c736e4c7659b89243e37637bd0d734d8aa1eaaf2",
+          "bytes": 3808,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.source.json",
+          "sha256": "2a4d23a0565d601b4bdd29f7c4237e6f09a28e5707258ca87876c7018176a23c",
+          "bytes": 712,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter.svg",
+          "alt": "パチンコ店舗数と高等学校教育費の関係",
+          "heading": "散布図で相関を確かめる",
+          "line": 41
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/pachinko-shop-density-per-10k.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/pachinko-shop-density-per-10k.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.svg",
+        "sha256": "64080d712f66f9c373a5fb4d45aa0a36a142abe56aee86d7c533b987638f98b4",
+        "bytes": 6852
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/article.md",
+          "sha256": "69d433a3462c9fbbb48a227f6ed2e7068d070e6135a6af317e548496f012032b",
+          "bytes": 9577,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.json",
+          "sha256": "f3ad0551cf908f2af32a99519ec4e0a184b787bd96db8de3b9e510e6d8289e29",
+          "bytes": 6379,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.source.json",
+          "sha256": "616de7070d2ffe3a499ae2157354c703ab05dd2d2d2761d7373fac3776838f3e",
+          "bytes": 719,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/data/pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings.svg",
+          "alt": "パチンコ店舗数の上位と下位",
+          "heading": "パチンコ店舗数のランキングを見る",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pachinko-shop-density-per-10k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pachinko-shop-density-per-10k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/background.jpg",
+        "sha256": "35566b92653d81ee184b4660735bf3696fab2bcd5179228270129050eed2f807",
+        "bytes": 85765
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "sha256": "aa7d59b186b87eb439027818f38dca4b09e87c3fc536a152affdf239d1d5f6fd",
+          "bytes": 2317,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "edb3e6b56f3bb8b97c9b655e407d357db8c00980821b5fe5e164a4449e9b3cff",
+        "fingerprint": "98724bb070c3568bc6eb169dbb5dfde56d216bc6d8980a555cad1350b37d2224",
+        "generatedAt": "2026-08-29T23:38:34.897Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/ogp.png",
+        "sha256": "75472d3da604eee4a6f98cb93314c8ff7ad5b6dda36a7c9da99efaba596bdb53",
+        "bytes": 478152
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "sha256": "aa7d59b186b87eb439027818f38dca4b09e87c3fc536a152affdf239d1d5f6fd",
+          "bytes": 2317,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "edb3e6b56f3bb8b97c9b655e407d357db8c00980821b5fe5e164a4449e9b3cff",
+        "fingerprint": "98724bb070c3568bc6eb169dbb5dfde56d216bc6d8980a555cad1350b37d2224",
+        "generatedAt": "2026-08-29T23:38:34.897Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-dark.webp",
+        "sha256": "cd415e70de68256b0981cb5a839bba85e411c5d3a17cad49da57f7177d5afdbd",
+        "bytes": 13808
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "sha256": "aa7d59b186b87eb439027818f38dca4b09e87c3fc536a152affdf239d1d5f6fd",
+          "bytes": 2317,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "edb3e6b56f3bb8b97c9b655e407d357db8c00980821b5fe5e164a4449e9b3cff",
+        "fingerprint": "98724bb070c3568bc6eb169dbb5dfde56d216bc6d8980a555cad1350b37d2224",
+        "generatedAt": "2026-08-29T23:38:34.897Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "file": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/thumbnail-light.webp",
+        "sha256": "a1ee8dd9139a816525378e7d6debd7957483b01adbd04e884059799c6a18a676",
+        "bytes": 27306
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-shop-density-per-10k-vs-high-school-education-cost/ogp/generation.json",
+          "sha256": "aa7d59b186b87eb439027818f38dca4b09e87c3fc536a152affdf239d1d5f6fd",
+          "bytes": 2317,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "edb3e6b56f3bb8b97c9b655e407d357db8c00980821b5fe5e164a4449e9b3cff",
+        "fingerprint": "98724bb070c3568bc6eb169dbb5dfde56d216bc6d8980a555cad1350b37d2224",
+        "generatedAt": "2026-08-29T23:38:34.897Z"
+      }
+    },
+    {
+      "owner": "web/material/2569aba14b5c7119e3a2080c",
+      "file": "assets/blog/article-backgrounds/health-life-expectancy-structure.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/health-life-expectancy-structure.jpg",
+        "sha256": "db8b54f7d0ab058f80984c4aad970ec553aac4feb27d808c38eeed8c963c6f17",
+        "bytes": 118404
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/health-life-expectancy-structure.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/7d72f770f2db4277d7c43e8a",
+      "file": "packages/gis/data/geoshape/svg/16_富山県.svg",
+      "original": {
+        "provider": "git",
+        "path": "packages/gis/data/geoshape/svg/16_富山県.svg",
+        "sha256": "c3d505ac321d1f2a16376d2cae6af30c996dbc7aef2105112fd3fc4660db5c5b",
+        "bytes": 20704
+      },
+      "inputFiles": [],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "packages/gis/data/geoshape/svg/16_富山県.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/a7f1a349688759028e719e3b",
+      "file": "assets/blog/article-backgrounds/cc-estat-18-cache-r2.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/cc-estat-18-cache-r2.jpg",
+        "sha256": "8984f3e86e47242ff8ab881added2bbc2047e279738435098b07258bad201934",
+        "bytes": 64130
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/cc-estat-18-cache-r2.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/c23c759c0bf3e413bfd5b15c",
+      "file": "assets/area-specialty/15000/komeko.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/15000/komeko.webp",
+        "sha256": "808f8e9a010eb4373eb95ce5b346493450737348a210062ddd0ee7ce0a8ff05d",
+        "bytes": 29510
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/15000/komeko.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/f76261a7dc64496ac14b27ad",
+      "file": "assets/area-specialty/04000/sanma.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/04000/sanma.webp",
+        "sha256": "722b53d10c95a4d1ce87e609c83c32f501e924ec99dc6da2729c761a50ff6bb2",
+        "bytes": 32942
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/04000/sanma.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/assistance-expenses-prefecture",
+      "file": "app/ranking/assistance-expenses-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/assistance-expenses-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/ogp/ogp.png",
+        "sha256": "154671f2f249ae4e1d1fac4cb909b5a77da03617403c2d8c30b4458eb373e93b",
+        "bytes": 60277
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/assistance-expenses-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/ogp/generation.json",
+          "sha256": "8ee371407593899102de65a965e63e859b082ebd055dedac1cdf2d0759898a3e",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "4df3e1e2dbeb74bfd88ae984b7d740248ce24e10e9c97c84a53181dea2b5078b",
+        "fingerprint": "3a77520d92fd1f6de8d626395696745cf3bdac2c5f33cb27f0c46548258f4666",
+        "generatedAt": "2026-10-10T21:32:08.015Z"
+      }
+    },
+    {
+      "owner": "web/ranking/assistance-expenses-prefecture",
+      "file": "app/ranking/assistance-expenses-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/assistance-expenses-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/thumbnail-dark.webp",
+        "sha256": "46217ecc00f3b23dea7639f7b3f792a49bb61ad29d9d27438aa5722ee432235d",
+        "bytes": 15714
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/assistance-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/thumbnail.json",
+          "sha256": "38106b162655aabac09c93a19816622ae1bb17935714ca335687412ffabe90ac",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b6170a1c9ef7902aba9afc8873fd36619fc30b38705dc51bdedf298ec77d4a66",
+        "fingerprint": "0f7f4eedb931fe39bad1ebe42936a65b7bb912d364f2d282eeb0f47f88812683",
+        "generatedAt": "2026-10-10T21:49:59.261Z"
+      }
+    },
+    {
+      "owner": "web/ranking/assistance-expenses-prefecture",
+      "file": "app/ranking/assistance-expenses-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/assistance-expenses-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/thumbnail-light.webp",
+        "sha256": "bd80214ef8b1354852edb416827ebb9a2246b76004e4a6824e7f0a2ea7a96c3e",
+        "bytes": 14488
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/assistance-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/thumbnail.json",
+          "sha256": "38106b162655aabac09c93a19816622ae1bb17935714ca335687412ffabe90ac",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/assistance-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/assistance-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b6170a1c9ef7902aba9afc8873fd36619fc30b38705dc51bdedf298ec77d4a66",
+        "fingerprint": "0f7f4eedb931fe39bad1ebe42936a65b7bb912d364f2d282eeb0f47f88812683",
+        "generatedAt": "2026-10-10T21:49:59.261Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cable-tv-fee-consumption-expenditure",
+      "file": "app/ranking/cable-tv-fee-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cable-tv-fee-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/ogp/ogp.png",
+        "sha256": "2460a58859b48e731b7e2ee865ef750c140de3eeb0ee3f0de5995abd75403bdd",
+        "bytes": 65996
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cable-tv-fee-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/ogp/generation.json",
+          "sha256": "ca0c5a0300b62d949af6d291840b3db76a8d9315016ad0351ea3d011cc3c387c",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "cefe853deb4f4743b7c0978c1364eade6d95cf58631b0ed0bfea62a77318fb1f",
+        "fingerprint": "daad50997af46d8d8455811babcc9ae8136710d94d0df013dce6f00e84c62312",
+        "generatedAt": "2026-10-10T21:32:26.579Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cable-tv-fee-consumption-expenditure",
+      "file": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "c6307cdc5d3ee6519338493bd23be0c24786c9c11c73c5ea34dbcd961dd11f3f",
+        "bytes": 18926
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "7a3beee0ee543272db4b9003ef1ed51fe74dd62bdeb760499c4f75ec42af4c2b",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b40471dcc6fbdcd54f8643949e5dda38a1c70d329b1715f76ff558d4490285b2",
+        "fingerprint": "fab668d24cd46c9959eb0b11e6194ba189d55ea3fcb663b3143919b0a99f8015",
+        "generatedAt": "2026-10-10T21:50:04.088Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cable-tv-fee-consumption-expenditure",
+      "file": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "4f12e318b92c02dc766879212850316cbfafa607e9c69642970e00ead4068b6d",
+        "bytes": 17564
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cable-tv-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "7a3beee0ee543272db4b9003ef1ed51fe74dd62bdeb760499c4f75ec42af4c2b",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cable-tv-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b40471dcc6fbdcd54f8643949e5dda38a1c70d329b1715f76ff558d4490285b2",
+        "fingerprint": "fab668d24cd46c9959eb0b11e6194ba189d55ea3fcb663b3143919b0a99f8015",
+        "generatedAt": "2026-10-10T21:50:04.088Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-private-employees",
+      "file": "app/ranking/construction-private-employees/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-private-employees/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/ogp/ogp.png",
+        "sha256": "3a728387127aa16adbd40cce1d3c899097a450c4c8357c2131aa3f039cde177c",
+        "bytes": 65604
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-private-employees/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/ogp/generation.json",
+          "sha256": "80d588357d8e5e8ca947c370175464320a4e4502e1e3d4f4628d5d11228b6188",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-private-employees/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-private-employees/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "b9f5c62e0aa1824c7812436d8fef1eadc515015b19a988a94328436aff9f659c",
+        "fingerprint": "7501ac7cd4330be7d5af231dad61e043c89d8ee644fb203a3062c9d114a9df6e",
+        "generatedAt": "2026-10-10T21:32:41.913Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-private-employees",
+      "file": "app/ranking/construction-private-employees/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-private-employees/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/thumbnail-dark.webp",
+        "sha256": "2ee5377696b2334a023917ab22764525e864b4391e109c56cb03fb170f6c746a",
+        "bytes": 18336
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-private-employees/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/thumbnail.json",
+          "sha256": "437f37307b56e293922edb82e10014ca7f8df898ca0733f56357db122ee448bd",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-private-employees/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-private-employees/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "8871b26bcf4b56ecbb5518e44c3ca2d0dbc3dd6f6d1b9b204876a79a09c6472c",
+        "fingerprint": "218f1bfcd9b35261e9c63b315d4682476438f385d4e2ec79d29026d43d3ab3a8",
+        "generatedAt": "2026-10-10T21:50:07.989Z"
+      }
+    },
+    {
+      "owner": "web/ranking/construction-private-employees",
+      "file": "app/ranking/construction-private-employees/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/construction-private-employees/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/thumbnail-light.webp",
+        "sha256": "c4abb7323c51b6bd6ddcdc211fff2e85cec93774f647110606e25a56e0825d5a",
+        "bytes": 17164
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/construction-private-employees/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/thumbnail.json",
+          "sha256": "437f37307b56e293922edb82e10014ca7f8df898ca0733f56357db122ee448bd",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/construction-private-employees/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/construction-private-employees/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/construction-private-employees/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "8871b26bcf4b56ecbb5518e44c3ca2d0dbc3dd6f6d1b9b204876a79a09c6472c",
+        "fingerprint": "218f1bfcd9b35261e9c63b315d4682476438f385d4e2ec79d29026d43d3ab3a8",
+        "generatedAt": "2026-10-10T21:50:07.989Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drinking-out-consumption-expenditure",
+      "file": "app/ranking/drinking-out-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drinking-out-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/ogp/ogp.png",
+        "sha256": "7e40929a9b33355af606e1c43fa79993832b0b3166ca2ac89a4237e24d5dcb06",
+        "bytes": 61525
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drinking-out-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/ogp/generation.json",
+          "sha256": "e149280366ed0267bee5f72cf1fb746792ace63ac6a6eb0fc8c2d3b83ced4770",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "0c85c1d55690dcc3373c7eb06441bfa47fde6ae2ecba91cd2038627cc9db7669",
+        "fingerprint": "aa7bebc5face55bb60d9173fba84ee30fbd8ab0b92288639a9b1846c870ce777",
+        "generatedAt": "2026-10-01T18:10:24.320Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drinking-out-consumption-expenditure",
+      "file": "app/ranking/drinking-out-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drinking-out-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "c0164b235125ffd1f2bfbec79d6de23632a6f9914a6487c6563ac18b35d1ec81",
+        "bytes": 16898
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drinking-out-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/thumbnail.json",
+          "sha256": "8aa8b56caf0e6155f8308ed59d05446340e0a37509598e97a22839bd52e5cbd0",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f11b1893f9084574d61c93a10885925fe6fb6070339cd98e1c20a468845eb2f0",
+        "fingerprint": "14dc48878588287cb4d2619b3c844b0c056fd8fc361a442450601639e343a896",
+        "generatedAt": "2026-10-01T18:35:43.377Z"
+      }
+    },
+    {
+      "owner": "web/ranking/drinking-out-consumption-expenditure",
+      "file": "app/ranking/drinking-out-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/drinking-out-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "8c3d282febd39dde3ee43c038f7d23729022be7ddf65c45d7a61fb531dee9fb2",
+        "bytes": 15382
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/drinking-out-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/thumbnail.json",
+          "sha256": "8aa8b56caf0e6155f8308ed59d05446340e0a37509598e97a22839bd52e5cbd0",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/drinking-out-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/drinking-out-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f11b1893f9084574d61c93a10885925fe6fb6070339cd98e1c20a468845eb2f0",
+        "fingerprint": "14dc48878588287cb4d2619b3c844b0c056fd8fc361a442450601639e343a896",
+        "generatedAt": "2026-10-01T18:35:43.377Z"
+      }
+    },
+    {
+      "owner": "web/ranking/inland-aquaculture-harvest",
+      "file": "app/ranking/inland-aquaculture-harvest/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inland-aquaculture-harvest/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/ogp/ogp.png",
+        "sha256": "8101c700f0743311750acc31744f87df0c2a2c3e306bf993566330e772af7f41",
+        "bytes": 61827
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/inland-aquaculture-harvest/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/ogp/generation.json",
+          "sha256": "97095efdee00e586c7c805c26850f5fcce75c1571da166119914001ea85b202e",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/inland-aquaculture-harvest/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/inland-aquaculture-harvest/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "83a478bd39a9891237bb160ca7887cdf7f7847abaf497e8d79506e5752eaae0b",
+        "fingerprint": "1ce32e20f741ca86497ac894ace2c821145861cbee1154675efb8b2e91e97618",
+        "generatedAt": "2026-10-01T18:11:44.552Z"
+      }
+    },
+    {
+      "owner": "web/ranking/inland-aquaculture-harvest",
+      "file": "app/ranking/inland-aquaculture-harvest/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inland-aquaculture-harvest/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/inland-aquaculture-harvest",
+      "file": "app/ranking/inland-aquaculture-harvest/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inland-aquaculture-harvest/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/inland-aquaculture-harvest/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/intellectual-disability-rehabilitation-center-cases",
+      "file": "app/ranking/intellectual-disability-rehabilitation-center-cases/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/intellectual-disability-rehabilitation-center-cases/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/ogp/ogp.png",
+        "sha256": "04713e77633386e47124250a6de27669b5584138c4d60f0bcebaac24ad2fa90e",
+        "bytes": 64272
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/intellectual-disability-rehabilitation-center-cases/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/ogp/generation.json",
+          "sha256": "ae581606685a16f6f679e4923a9433165b671194ec5e16e9693634e43fd91820",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/intellectual-disability-rehabilitation-center-cases/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/intellectual-disability-rehabilitation-center-cases/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "cf55541877cbbd4e9a48fcd206e163fb5e19cc2a041b87bc5d218101136a87d6",
+        "fingerprint": "7783a9bf594af63812fce0a5290cc32fcbe5186429a403c8735cb7e62f81e109",
+        "generatedAt": "2026-10-01T18:11:45.933Z"
+      }
+    },
+    {
+      "owner": "web/ranking/intellectual-disability-rehabilitation-center-cases",
+      "file": "app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/intellectual-disability-rehabilitation-center-cases",
+      "file": "app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/intellectual-disability-rehabilitation-center-cases/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-count",
+      "file": "app/ranking/public-construction-contract-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/ogp/ogp.png",
+        "sha256": "fd44a2a894a1ac2aa833ccd2b3f8d7aee63d6f231d4ec5255e744b5fcbdbf100",
+        "bytes": 65309
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/ogp/generation.json",
+          "sha256": "0ae2fa367cc18a43ad30aa885b66493088e0ed8fc63a11c0a7b6f42b9216638e",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "665cc18cbc0e5e017aff426459ee41dff07575d0bd817858a11ab08a39c27851",
+        "fingerprint": "8debe443b64530d6cc14ec69a9c988ee53ff865db88591bb1560303cc0af2d08",
+        "generatedAt": "2026-09-11T14:05:33.181Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-count",
+      "file": "app/ranking/public-construction-contract-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/thumbnail-dark.webp",
+        "sha256": "9b3c937680171e7f8def6c94bbd7c58bde015978d6871388bca843cb63fb5b37",
+        "bytes": 18808
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/thumbnail.json",
+          "sha256": "8a980b4bb2afb271a1ba8b2c2ceeac0a15125bd6600abd5d197f16648720d02f",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "2451c8626e1c9ada1cf1773de3b664eb882613ad1d91c88f002f9be4046c54e9",
+        "fingerprint": "5d8fd1dcc63e73753a591ece3cb684c5d2702938e1d8b654f401ffe184413fb9",
+        "generatedAt": "2026-09-11T14:26:28.568Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-construction-contract-count",
+      "file": "app/ranking/public-construction-contract-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-construction-contract-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/thumbnail-light.webp",
+        "sha256": "96350f98ab8eae064345bc0aaea076766a64aab69fcb30be9d626d52e3c72261",
+        "bytes": 17800
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-construction-contract-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/thumbnail.json",
+          "sha256": "8a980b4bb2afb271a1ba8b2c2ceeac0a15125bd6600abd5d197f16648720d02f",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-construction-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-construction-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-construction-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "2451c8626e1c9ada1cf1773de3b664eb882613ad1d91c88f002f9be4046c54e9",
+        "fingerprint": "5d8fd1dcc63e73753a591ece3cb684c5d2702938e1d8b654f401ffe184413fb9",
+        "generatedAt": "2026-09-11T14:26:28.568Z"
+      }
+    },
+    {
+      "owner": "web/ranking/swimming-pool-public",
+      "file": "app/ranking/swimming-pool-public/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/swimming-pool-public/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/ogp/ogp.png",
+        "sha256": "e93735e3d6005fc05f54c439cfa0e685ec465401e4fe786488e26eacfc32c2b6",
+        "bytes": 77593
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/swimming-pool-public/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/ogp/generation.json",
+          "sha256": "b7c1e986f3c8512f8fc684eceea445954f02f39c085abfe220331fd1299b745e",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/swimming-pool-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/swimming-pool-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "7baebec0542639024ee6cb7fd147e136212ec84a5b67a01c61c50ea5c9376bb7",
+        "fingerprint": "b46f72b68889d19b43f56511e70da29dc6ffbf116b705457c01ad642662ee9cc",
+        "generatedAt": "2026-08-16T22:21:07.583Z"
+      }
+    },
+    {
+      "owner": "web/ranking/swimming-pool-public",
+      "file": "app/ranking/swimming-pool-public/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/swimming-pool-public/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/thumbnail-dark.webp",
+        "sha256": "78091b5bf6bcc5c9264f1677f266695c0f1840bd8699dbfcef259fe1553438a6",
+        "bytes": 17206
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/swimming-pool-public/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/thumbnail.json",
+          "sha256": "56b36504dc3ee888663fb4f267fd4fa8aed50d1876d8c7a13abac70c6d445538",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/swimming-pool-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/swimming-pool-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c9eeb9c87b33886c577cbe4f0322f6784393032089e812c5554d55b98576940b",
+        "fingerprint": "2786b61042c42647591b6452404945da1129f40151377465d71f8652bbe91c4d",
+        "generatedAt": "2026-08-16T22:36:26.506Z"
+      }
+    },
+    {
+      "owner": "web/ranking/swimming-pool-public",
+      "file": "app/ranking/swimming-pool-public/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/swimming-pool-public/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/thumbnail-light.webp",
+        "sha256": "95d2cb43b637f13af42d22ee4b907e79c54963202c8bae88bc52428707d5f0f4",
+        "bytes": 15856
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/swimming-pool-public/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/thumbnail.json",
+          "sha256": "56b36504dc3ee888663fb4f267fd4fa8aed50d1876d8c7a13abac70c6d445538",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/swimming-pool-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/swimming-pool-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/swimming-pool-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c9eeb9c87b33886c577cbe4f0322f6784393032089e812c5554d55b98576940b",
+        "fingerprint": "2786b61042c42647591b6452404945da1129f40151377465d71f8652bbe91c4d",
+        "generatedAt": "2026-08-16T22:36:26.506Z"
+      }
+    }
+  ]
+}

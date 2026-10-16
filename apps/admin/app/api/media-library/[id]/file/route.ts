@@ -10,7 +10,8 @@ export async function GET(
   try {
     const { id } = await params,
       url = new URL(req.url),
-      input = url.searchParams.get('input') === '1';
+      input = url.searchParams.get('input') === '1',
+      download = url.searchParams.get('download') === '1';
     const value = await imageBytes(
       id,
       url.searchParams.get('revision') ?? 'original',
@@ -26,24 +27,26 @@ export async function GET(
     };
     // Never serve active SVG documents; rasterize the verified image.
     const bytes =
-      value.mime === '.svg'
+      value.mime === '.svg' && !download
         ? await sharp(value.bytes, { limitInputPixels: 40_000_000 })
             .png()
             .toBuffer()
         : value.bytes;
     return new Response(new Uint8Array(bytes), {
       headers: {
-        'content-type':
-          value.mime === '.svg'
+        'content-type': download
+          ? 'application/octet-stream'
+          : value.mime === '.svg'
             ? 'image/png'
             : (types[value.mime] ?? 'application/octet-stream'),
         'cache-control': 'no-store',
         'x-content-type-options': 'nosniff',
         'content-security-policy': "default-src 'none'; sandbox",
-        ...(input
+        ...(input || download
           ? {
-              'content-disposition':
-                'attachment; filename="generation-input.json"',
+              'content-disposition': input
+                ? 'attachment; filename="generation-input.json"'
+                : 'attachment; filename="image' + value.mime + '"',
             }
           : {}),
       },

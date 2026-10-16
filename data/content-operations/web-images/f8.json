@@ -1,0 +1,1174 @@
+{
+  "items": [
+    {
+      "id": "web/material/3b077ab9782ab7933f23c7d4",
+      "channel": "web",
+      "key": "apps/web/public/flag/香川県.png",
+      "title": "香川県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ca92dbeaa06b2b84b5d65ca96f7aaf3c4460c6827a233e2cf5383155c2969d64"
+    },
+    {
+      "id": "web/material/64bbe75afb724777af8b0acd",
+      "channel": "web",
+      "key": "apps/web/public/flag/秋田県.png",
+      "title": "秋田県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "756413649b28d8e9d354c9de70458904070a0f93a756d2e5e45f86395958cdfa"
+    },
+    {
+      "id": "web/material/8a15248c7de36df88cef9900",
+      "channel": "web",
+      "key": "assets/area-specialty/16000/koshi-no-akagani.webp",
+      "title": "koshi-no-akagani.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b3a50762738a73a52e47fd5054ea4e70bd2c2443ff0051e93b911f281397dd0d"
+    },
+    {
+      "id": "web/material/fdbe54eeec20b161d45e01db",
+      "channel": "web",
+      "key": "assets/area-specialty/15000/shiobiki-sake.webp",
+      "title": "shiobiki-sake.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2bf826a3c754b67bdaf68f22653504eb72f73bb62ad11d4002a0c8597fb8960f"
+    },
+    {
+      "id": "web/ranking/furusato-fundraising-cost-prefecture",
+      "channel": "web",
+      "key": "furusato-fundraising-cost-prefecture",
+      "title": "ふるさと納税募集経費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/furusato-fundraising-cost-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fb1176dd63487fb932cfe2859e9764084d474a13e85b496308eb201fe46100a9",
+      "catalogBasis": "fb1176dd63487fb932cfe2859e9764084d474a13e85b496308eb201fe46100a9",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/library-main-count",
+      "channel": "web",
+      "key": "library-main-count",
+      "title": "図書館本館数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/library-main-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ea6b6272b735b475500e766895d31abe9b34b344708c92ab5f519b093a13f1ce",
+      "catalogBasis": "ea6b6272b735b475500e766895d31abe9b34b344708c92ab5f519b093a13f1ce",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/number-of-commercial-employees-wholesale-retail",
+      "channel": "web",
+      "key": "number-of-commercial-employees-wholesale-retail",
+      "title": "商業従業者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/number-of-commercial-employees-wholesale-retail",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f643937f30c49ef6792066a6d2488f73d2db298ed75c60d00cd44bb27592f773",
+      "catalogBasis": "f643937f30c49ef6792066a6d2488f73d2db298ed75c60d00cd44bb27592f773",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/physical-disability-rehabilitation-center-cases-per-1000",
+      "channel": "web",
+      "key": "physical-disability-rehabilitation-center-cases-per-1000",
+      "title": "身体障害者更生相談所取扱実人員",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/physical-disability-rehabilitation-center-cases-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "98dcef7daffe75c5917b4e4f569c42c2bcc727854dc65fe566bb90c12173c67c",
+      "catalogBasis": "98dcef7daffe75c5917b4e4f569c42c2bcc727854dc65fe566bb90c12173c67c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/psychiatric-bed-count-per-100k",
+      "channel": "web",
+      "key": "psychiatric-bed-count-per-100k",
+      "title": "精神病床数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/psychiatric-bed-count-per-100k",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "118d9b872cbb90840998d6cfe21fca26087ee7a69bdb60c5c93e86ede29d8622",
+      "catalogBasis": "118d9b872cbb90840998d6cfe21fca26087ee7a69bdb60c5c93e86ede29d8622",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/total-area-including-northern-territories-and-takeshima",
+      "channel": "web",
+      "key": "total-area-including-northern-territories-and-takeshima",
+      "title": "総面積",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/total-area-including-northern-territories-and-takeshima",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a67bb2fe02dfa14b570f72353a721bd9cd6e60584a1f7e3dcaf9cf0b12e6b40e",
+      "catalogBasis": "a67bb2fe02dfa14b570f72353a721bd9cd6e60584a1f7e3dcaf9cf0b12e6b40e",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/3b077ab9782ab7933f23c7d4",
+      "file": "apps/web/public/flag/香川県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/香川県.png",
+        "url": "https://stats47.jp/flag/香川県.png",
+        "sha256": "a9b7aaccafb47efdf98d1780d6ffc448102049c68a109c95a5d078420639eaa7",
+        "bytes": 5391
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/香川県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/64bbe75afb724777af8b0acd",
+      "file": "apps/web/public/flag/秋田県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/秋田県.png",
+        "url": "https://stats47.jp/flag/秋田県.png",
+        "sha256": "5d90d667575b4c4e9a2b2f369e3261a4b6a94327e9dcfe3dd8c693cc334b8eca",
+        "bytes": 11042
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/秋田県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8a15248c7de36df88cef9900",
+      "file": "assets/area-specialty/16000/koshi-no-akagani.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/16000/koshi-no-akagani.webp",
+        "sha256": "b05652776cb01b05cd96fc7b8ed1cedd0c4b163cfecff8904db056481e2b7449",
+        "bytes": 43182
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/16000/koshi-no-akagani.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fdbe54eeec20b161d45e01db",
+      "file": "assets/area-specialty/15000/shiobiki-sake.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/15000/shiobiki-sake.webp",
+        "sha256": "2169da1a5a919e934c213b4c5c862f3fb417f53afd36e93c57bdfc4434fe7e69",
+        "bytes": 46680
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/15000/shiobiki-sake.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/furusato-fundraising-cost-prefecture",
+      "file": "app/ranking/furusato-fundraising-cost-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-fundraising-cost-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/ogp/ogp.png",
+        "sha256": "57dcc4babfc2b4e36d679f0112745d0af366622b0926354890accba4ff28391e",
+        "bytes": 67176
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-fundraising-cost-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/ogp/generation.json",
+          "sha256": "a03965ed86018fe3a19180de00d83d680b998cf85c78bf76c4fe95c9cfadc6df",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "f2df745a317685375964c3c6f9d21b754847c07a0841592b8fb91f5057931def",
+        "fingerprint": "84ed7d236f1a628af5cbe037e86acb63091a0e42179362798bf2117565086bd1",
+        "generatedAt": "2026-10-01T18:11:03.610Z"
+      }
+    },
+    {
+      "owner": "web/ranking/furusato-fundraising-cost-prefecture",
+      "file": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/thumbnail-dark.webp",
+        "sha256": "1fa503c24244a28b55c4896027adcaf684fd6874d4f4db13d31a55b1faeb32f9",
+        "bytes": 18782
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/thumbnail.json",
+          "sha256": "5ece2abcd0dbdfce094401e2836c0bb1dc97844db494cb569815314d93011f40",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7d4c782542db1e92a58528e70dd0f4e33363078d6501d3edf94c234dacbf8d27",
+        "fingerprint": "9a9bf0e0bf798474c3390aaba61f991f55b3715779a8876945ca3d938822fa27",
+        "generatedAt": "2026-10-01T18:35:53.986Z"
+      }
+    },
+    {
+      "owner": "web/ranking/furusato-fundraising-cost-prefecture",
+      "file": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/thumbnail-light.webp",
+        "sha256": "9607a3017b85c9f02a7382acfd9d4009ccb6c437ef9e410de4f2aba1afe752ce",
+        "bytes": 17602
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-fundraising-cost-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/thumbnail.json",
+          "sha256": "5ece2abcd0dbdfce094401e2836c0bb1dc97844db494cb569815314d93011f40",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-fundraising-cost-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7d4c782542db1e92a58528e70dd0f4e33363078d6501d3edf94c234dacbf8d27",
+        "fingerprint": "9a9bf0e0bf798474c3390aaba61f991f55b3715779a8876945ca3d938822fa27",
+        "generatedAt": "2026-10-01T18:35:53.986Z"
+      }
+    },
+    {
+      "owner": "web/ranking/library-main-count",
+      "file": "app/ranking/library-main-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/library-main-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/library-main-count/ogp/ogp.png",
+        "sha256": "e67c361783e5f1819945be060602c09d69a99317262338d3655c38725df64532",
+        "bytes": 57368
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/library-main-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/ogp/generation.json",
+          "sha256": "7f1a3acc600ff516e71492b67ba756fe90340db64d0239ad4d43371d01a3a4e6",
+          "bytes": 905,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/library-main-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/library-main-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "bf29edf6a783df30b180c5118318969029b2c017e4e8b010be026ae2ad05f31b",
+        "fingerprint": "394e6d289476adf29619ae15274a0bebcc14c8037cece32bd0761274a47f20a4",
+        "generatedAt": "2026-10-03T20:59:39.655Z"
+      }
+    },
+    {
+      "owner": "web/ranking/library-main-count",
+      "file": "app/ranking/library-main-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/library-main-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/library-main-count/thumbnail-dark.webp",
+        "sha256": "dc9bf00abcb54f28df5c219752f433c7b2ba3c198bc615ce38fdbcc127dfc742",
+        "bytes": 14722
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/library-main-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/thumbnail.json",
+          "sha256": "406df0aa42069e61c45c89c6ec994de54ac4b0f0ae0134409b6512fe456c651a",
+          "bytes": 1736,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/library-main-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/library-main-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6fe1598815a7f310790b476524dc0762a6e8e814897aa33daf8d99e473480fe9",
+        "fingerprint": "36c8bdf48b78db0f5d349af0b1caf2c4989b1c3795976d2ca73c4d445027d865",
+        "generatedAt": "2026-10-03T21:25:22.202Z"
+      }
+    },
+    {
+      "owner": "web/ranking/library-main-count",
+      "file": "app/ranking/library-main-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/library-main-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/library-main-count/thumbnail-light.webp",
+        "sha256": "20d190bcaeee1ce90cdd5e147206bec2b687930405bc90d225b81418547481c1",
+        "bytes": 13048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/library-main-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/thumbnail.json",
+          "sha256": "406df0aa42069e61c45c89c6ec994de54ac4b0f0ae0134409b6512fe456c651a",
+          "bytes": 1736,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/library-main-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/library-main-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-main-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6fe1598815a7f310790b476524dc0762a6e8e814897aa33daf8d99e473480fe9",
+        "fingerprint": "36c8bdf48b78db0f5d349af0b1caf2c4989b1c3795976d2ca73c4d445027d865",
+        "generatedAt": "2026-10-03T21:25:22.202Z"
+      }
+    },
+    {
+      "owner": "web/ranking/number-of-commercial-employees-wholesale-retail",
+      "file": "app/ranking/number-of-commercial-employees-wholesale-retail/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/number-of-commercial-employees-wholesale-retail/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/ogp/ogp.png",
+        "sha256": "233eaf8c0965cc24a75c632039b87f76cd161dde33f1f3d4223e6c37945fbe74",
+        "bytes": 61144
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/number-of-commercial-employees-wholesale-retail/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/ogp/generation.json",
+          "sha256": "c72188ee7362523a58a19139c71d26beb44bfac54b173885e2c7e4f007d507e5",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "0a8271a4006655248c9aa0d53bdd083cdf0aabff50b551b09ed364cec78a8737",
+        "fingerprint": "96c8ca220bb8f4cd1703537fa55d746763b5d62685fc58ac1691bdf22f6713aa",
+        "generatedAt": "2026-10-03T21:00:20.991Z"
+      }
+    },
+    {
+      "owner": "web/ranking/number-of-commercial-employees-wholesale-retail",
+      "file": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-dark.webp",
+        "sha256": "c8834b91c649ff1301532da1a097bf858a25ef676e9e64892876bf53a32f4835",
+        "bytes": 16948
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail.json",
+          "sha256": "ff290f12a05a365320082f4d95cc06c54ab6ad1ebe66e4772a4eab7756b48b8f",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b2cab87581375a4e01b2307b940344ed118975d05ff6413243483b9130809310",
+        "fingerprint": "538ec41882adca7078abd2af3653b2e701b82f9647537275d109a8e75ee94b17",
+        "generatedAt": "2026-10-03T21:25:32.936Z"
+      }
+    },
+    {
+      "owner": "web/ranking/number-of-commercial-employees-wholesale-retail",
+      "file": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail-light.webp",
+        "sha256": "85f0140b6827de8d4eeb8c205191201de2f4b70ce49ae66eb37b0447899e2691",
+        "bytes": 15534
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/thumbnail.json",
+          "sha256": "ff290f12a05a365320082f4d95cc06c54ab6ad1ebe66e4772a4eab7756b48b8f",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/number-of-commercial-employees-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b2cab87581375a4e01b2307b940344ed118975d05ff6413243483b9130809310",
+        "fingerprint": "538ec41882adca7078abd2af3653b2e701b82f9647537275d109a8e75ee94b17",
+        "generatedAt": "2026-10-03T21:25:32.936Z"
+      }
+    },
+    {
+      "owner": "web/ranking/physical-disability-rehabilitation-center-cases-per-1000",
+      "file": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/ogp/ogp.png",
+        "sha256": "dca95a95884ccad848c25b5ede46ad73ceab1f1e53ffb979608d917774dac919",
+        "bytes": 80952
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/ogp/generation.json",
+          "sha256": "2968fc0495d9baf28577687f4e443b5e452ce6f2154c1bee9f70ea59ae935f15",
+          "bytes": 1057,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "e366f3b7a001520d51e3d55e378bf141bddbc593ee12c5627e4fa2d53c11fc5c",
+        "fingerprint": "1c823b67e8ec1d77da15b9a79721a9b389a6c997e491e7d54962b0e1b919eab8",
+        "generatedAt": "2026-08-15T18:42:18.482Z"
+      }
+    },
+    {
+      "owner": "web/ranking/physical-disability-rehabilitation-center-cases-per-1000",
+      "file": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-dark.webp",
+        "sha256": "37f2abe21207000794c15cbcbb33c53dc49667a36522f58b09a0b730e3da430f",
+        "bytes": 18824
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail.json",
+          "sha256": "7b715ba2cf2238940a00281fdd5b468a490ee33ea5ce81371237b503d8c8495e",
+          "bytes": 2078,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "abf3e0427c3b45709d8de055595f82dda0d0db8b0efd2cafa9c1503c4a848de2",
+        "fingerprint": "9f489696d59eb933a9d44d04a40f9958921db8707f2b0c30de8871d7efffb016",
+        "generatedAt": "2026-08-15T18:58:37.906Z"
+      }
+    },
+    {
+      "owner": "web/ranking/physical-disability-rehabilitation-center-cases-per-1000",
+      "file": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail-light.webp",
+        "sha256": "79c6fba3a3dd8d59dd6adec6e31d3c9032ab3ff4c2ad8161638b4fe9e7186699",
+        "bytes": 17248
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/thumbnail.json",
+          "sha256": "7b715ba2cf2238940a00281fdd5b468a490ee33ea5ce81371237b503d8c8495e",
+          "bytes": 2078,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-disability-rehabilitation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "abf3e0427c3b45709d8de055595f82dda0d0db8b0efd2cafa9c1503c4a848de2",
+        "fingerprint": "9f489696d59eb933a9d44d04a40f9958921db8707f2b0c30de8871d7efffb016",
+        "generatedAt": "2026-08-15T18:58:37.906Z"
+      }
+    },
+    {
+      "owner": "web/ranking/psychiatric-bed-count-per-100k",
+      "file": "app/ranking/psychiatric-bed-count-per-100k/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/psychiatric-bed-count-per-100k/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/ogp/ogp.png",
+        "sha256": "9205ecc666183dc525ae495adfb4402824172669a26f8889c3b9a47f2608f69f",
+        "bytes": 74699
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/psychiatric-bed-count-per-100k/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/ogp/generation.json",
+          "sha256": "591edddc0cacedc866653c52db67e7aff3b1d0df4d5a24b3b770234a7d5afa2e",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "ced2de74c090cad98ce1e6a11648972f8de7500d7ba198d729a4cba0072b3a3d",
+        "fingerprint": "4bea92e3ae6e4696e33d606e218cbe59e60b55468262dd7a108832b45b8e192b",
+        "generatedAt": "2026-08-15T18:42:27.893Z"
+      }
+    },
+    {
+      "owner": "web/ranking/psychiatric-bed-count-per-100k",
+      "file": "app/ranking/psychiatric-bed-count-per-100k/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/psychiatric-bed-count-per-100k/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/thumbnail-dark.webp",
+        "sha256": "2e8e9bef81a5a26850a8970feb4a4a251141866477b6b2dc0082cd195ad0eddc",
+        "bytes": 15474
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/psychiatric-bed-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/thumbnail.json",
+          "sha256": "9730700f0fa3cfb922f95e7eec47e7a6fe4075b6638d300a4215037c6ddcca0a",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f88927001113a586a7245356722c40ef5e7862f79e02816d4450e1dd0c8b0fa2",
+        "fingerprint": "98a38cd4d778b4bfff76c69d15a22341fa1614f38dcbabb52f07fb73a3dec0cd",
+        "generatedAt": "2026-08-15T18:58:42.035Z"
+      }
+    },
+    {
+      "owner": "web/ranking/psychiatric-bed-count-per-100k",
+      "file": "app/ranking/psychiatric-bed-count-per-100k/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/psychiatric-bed-count-per-100k/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/thumbnail-light.webp",
+        "sha256": "795847528185d96ffec136d9a5b434182089c90d5f4a2da2ecb6d4d56810ee1e",
+        "bytes": 14148
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/psychiatric-bed-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/thumbnail.json",
+          "sha256": "9730700f0fa3cfb922f95e7eec47e7a6fe4075b6638d300a4215037c6ddcca0a",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f88927001113a586a7245356722c40ef5e7862f79e02816d4450e1dd0c8b0fa2",
+        "fingerprint": "98a38cd4d778b4bfff76c69d15a22341fa1614f38dcbabb52f07fb73a3dec0cd",
+        "generatedAt": "2026-08-15T18:58:42.035Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-area-including-northern-territories-and-takeshima",
+      "file": "app/ranking/total-area-including-northern-territories-and-takeshima/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-area-including-northern-territories-and-takeshima/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/ogp/ogp.png",
+        "sha256": "ef4daeab52952e693a4b68cba23015d324e92ea2682531f2b600eb9494ff597e",
+        "bytes": 73066
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-area-including-northern-territories-and-takeshima/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/ogp/generation.json",
+          "sha256": "415816b40f105174aeb9f750fba555f7c4f8551d54247f2ae2a8c33618058947",
+          "bytes": 1053,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "4ed469e9463d6a14ecbe9d3b375bd7278acdbe905c8b4a9b189b37551825470b",
+        "fingerprint": "e03d0eca66d8243e6dec4b6d6fb74ae28ffa7f2fe5282bebebe14c85ca1a35fb",
+        "generatedAt": "2026-08-16T22:21:13.535Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-area-including-northern-territories-and-takeshima",
+      "file": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-dark.webp",
+        "sha256": "d312afaf35d412110955befdae324b1450dd3c8e89db84a62c2aab60f46922b2",
+        "bytes": 16324
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail.json",
+          "sha256": "91c1c70842d3936ad22a4b1fd8c9a238dd7ca12527edd73d143e4bb0499f642d",
+          "bytes": 2069,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "b4656a431f75c97d4845fc8d37a2ec5cf59f4f1fb433f9b82af9f1595e43dba1",
+        "fingerprint": "fee46890c3aff3f0b164da31ce96b8c217dcf3d2e6e076639bc100ca39e8b3f6",
+        "generatedAt": "2026-08-16T22:36:28.992Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-area-including-northern-territories-and-takeshima",
+      "file": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail-light.webp",
+        "sha256": "72d1ffd5c02505b014ac7196e4716941d30c6880ee2b5b109d82e0b1a52cb22f",
+        "bytes": 15048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/thumbnail.json",
+          "sha256": "91c1c70842d3936ad22a4b1fd8c9a238dd7ca12527edd73d143e4bb0499f642d",
+          "bytes": 2069,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-area-including-northern-territories-and-takeshima/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "b4656a431f75c97d4845fc8d37a2ec5cf59f4f1fb433f9b82af9f1595e43dba1",
+        "fingerprint": "fee46890c3aff3f0b164da31ce96b8c217dcf3d2e6e076639bc100ca39e8b3f6",
+        "generatedAt": "2026-08-16T22:36:28.992Z"
+      }
+    }
+  ]
+}

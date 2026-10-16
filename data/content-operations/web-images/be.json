@@ -1,0 +1,1741 @@
+{
+  "items": [
+    {
+      "id": "web/blog/wheat-flour-consumption-prefecture",
+      "channel": "web",
+      "key": "wheat-flour-consumption-prefecture",
+      "title": "小麦粉を最も買う県は三重、なぜ「ほうとう県」山梨が最下位?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/wheat-flour-consumption-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "13093940d59a86a7c65fc1413d7f2822bec7806be3f2be915df4116b007cdd79",
+      "catalogBasis": "7031f5a79ddb2fa450b6d1c853a4bf0e99c2d919803985d420f7294b4bb1171e",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/article.md",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/article.md",
+        "sha256": "869d557dd316ad76af8b498068a86a02639be4ee75de852df36c3425a284d747",
+        "bytes": 10350
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/014b27ec7dca3bed0167de42",
+      "channel": "web",
+      "key": "assets/area-specialty/45000/kyo-imo.webp",
+      "title": "kyo-imo.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5d6c202a5a9e442854942f75717d568093ff1d28d130022583e260b3f6f0d3bc"
+    },
+    {
+      "id": "web/material/1c21687655c31bee4404ffd1",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/vacant-housing-rate-vs-standard-price-change-rate-commercial.jpg",
+      "title": "vacant-housing-rate-vs-standard-price-change-rate-commercial.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b66abe2df32353b89a21ff42e545ae39164ab241edbb79bb011fefbaa786ee71"
+    },
+    {
+      "id": "web/material/2cf7fa04578b03826cdf1c17",
+      "channel": "web",
+      "key": "apps/web/public/categories/svg/agriculture.svg",
+      "title": "agriculture.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "84906fda01b34fa6c9382169903d31afe08361d6e2c052c9a4344dc41c187a5c"
+    },
+    {
+      "id": "web/material/b81b3fa3a527e870adf2a475",
+      "channel": "web",
+      "key": "apps/remotion/public/images/site-intro/05-area-profile.png",
+      "title": "05-area-profile.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ddb988e6f5c581856a4058ab72bfb61a782d3511282d31db56d507ba87fda32d"
+    },
+    {
+      "id": "web/material/c94f971f243cc9466b0f2728",
+      "channel": "web",
+      "key": "assets/area-specialty/41000/unshu-mikan.webp",
+      "title": "unshu-mikan.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "985c7fb29323edf704a07a63fe23806775acd19ee1e01b4dde49c3d11fa3c6ec"
+    },
+    {
+      "id": "web/material/d9f6fa8ef5bb07d1dbe11fc4",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/chinese-noodles-expenditure-ranking.jpg",
+      "title": "chinese-noodles-expenditure-ranking.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9aa23780460371728f284925e65c364775adc312e970d69cb079ba12ee020c10"
+    },
+    {
+      "id": "web/ranking/bamboo-shoot-consumption-expenditure",
+      "channel": "web",
+      "key": "bamboo-shoot-consumption-expenditure",
+      "title": "たけのこ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/bamboo-shoot-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f5f388994a822045d1a3bf7e616efb4064c039df3ba12dbda8713aeed240a5ad",
+      "catalogBasis": "f5f388994a822045d1a3bf7e616efb4064c039df3ba12dbda8713aeed240a5ad",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/carrot-consumption-quantity",
+      "channel": "web",
+      "key": "carrot-consumption-quantity",
+      "title": "にんじん消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/carrot-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0025c3147414642d30aeb665623cfaf4bc9d79e3cc4ceb282ac2c9902b9f60d2",
+      "catalogBasis": "0025c3147414642d30aeb665623cfaf4bc9d79e3cc4ceb282ac2c9902b9f60d2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/coffee-shop-consumption-expenditure",
+      "channel": "web",
+      "key": "coffee-shop-consumption-expenditure",
+      "title": "喫茶代消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/coffee-shop-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "794b7c6c124d706fa27e80af094dc36d88ed746208094d51861626ee614ad37d",
+      "catalogBasis": "794b7c6c124d706fa27e80af094dc36d88ed746208094d51861626ee614ad37d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/industrial-and-semi-industrial-area-ratio",
+      "channel": "web",
+      "key": "industrial-and-semi-industrial-area-ratio",
+      "title": "工業・準工業地域面積比率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/industrial-and-semi-industrial-area-ratio",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9e2d59726c4bb4e9ad6a2e9f54708582c8fedbfe7260860434532349c1a64bc0",
+      "catalogBasis": "9e2d59726c4bb4e9ad6a2e9f54708582c8fedbfe7260860434532349c1a64bc0",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-high-club-per100-basketball",
+      "channel": "web",
+      "key": "junior-high-club-per100-basketball",
+      "title": "中学部活動 100人あたり部員数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-high-club-per100-basketball",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "733e4b8d9f83b3372ee50433d26d2e495dc6deadc83ddbcc98ed1ca610fbb053",
+      "catalogBasis": "733e4b8d9f83b3372ee50433d26d2e495dc6deadc83ddbcc98ed1ca610fbb053",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/kindergarten-education-cost-per-student",
+      "channel": "web",
+      "key": "kindergarten-education-cost-per-student",
+      "title": "幼稚園教育費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/kindergarten-education-cost-per-student",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "54fad5e03ab6c1ca5ba6a6e40017d092816a33adaccbdd8c7c2c5f989ba7fc1d",
+      "catalogBasis": "54fad5e03ab6c1ca5ba6a6e40017d092816a33adaccbdd8c7c2c5f989ba7fc1d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/port-count",
+      "channel": "web",
+      "key": "port-count",
+      "title": "港湾調査の対象港数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/port-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ff83aac8ac0b73f5be9952242ab6ce43c1ecb5e706fb77520d00c944353bf761",
+      "catalogBasis": "ff83aac8ac0b73f5be9952242ab6ce43c1ecb5e706fb77520d00c944353bf761",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sausage-consumption-quantity",
+      "channel": "web",
+      "key": "sausage-consumption-quantity",
+      "title": "ソーセージ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sausage-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e593d7df6f85d4b1dfe75abe08bc6c2b8438822a91421843d19805bdc5b36d95",
+      "catalogBasis": "e593d7df6f85d4b1dfe75abe08bc6c2b8438822a91421843d19805bdc5b36d95",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.svg",
+        "sha256": "437dab98a7459c58e6c10c9510a54b1ae704b865d72521d9c8606c1382f9787a",
+        "bytes": 6998
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/article.md",
+          "sha256": "869d557dd316ad76af8b498068a86a02639be4ee75de852df36c3425a284d747",
+          "bytes": 10350,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "wheat-flour-expenditure-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.json",
+          "sha256": "bd88f90e5816291fb9648b6f3ce748ed6bc0e9bc7469e0b47798486ad7cd8a38",
+          "bytes": 6846,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "wheat-flour-expenditure-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.source.json",
+          "sha256": "639f0842dc1443f845ed027da0d2a7740fbbc376d61b21c8c2f27a9b5726ec29",
+          "bytes": 667,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-expenditure-ranking.svg",
+          "alt": "都道府県別 小麦粉への年間支出額 上位5・下位5（2024年）",
+          "heading": "支出額で見ると順位が入れ替わる──岐阜の「こだわり買い」",
+          "line": 59
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/wheat-flour-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/wheat-flour-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.svg",
+        "sha256": "4a804e69c87df57f1cef96342d713e7cc5ba9441bf85b5be75eca8697321b4cb",
+        "bytes": 6962
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/article.md",
+          "sha256": "869d557dd316ad76af8b498068a86a02639be4ee75de852df36c3425a284d747",
+          "bytes": 10350,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "wheat-flour-quantity-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.json",
+          "sha256": "83beeab9df7cc677a1be3ca70fca26b10e966e95be79aebdd9f84ad4d620777d",
+          "bytes": 6875,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "wheat-flour-quantity-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.source.json",
+          "sha256": "b3f27e42f4c57e996ff148e2571e846e49bcba8632f931cbceddcfc3f4f610b2",
+          "bytes": 647,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/data/wheat-flour-quantity-ranking.svg",
+          "alt": "都道府県別 小麦粉消費量 上位5・下位5（2024年）",
+          "heading": "小麦粉を最も買う県・最も買わない県",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/wheat-flour-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/wheat-flour-consumption-quantity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/background.jpg",
+        "sha256": "814f2ec35335821a23a7cc275b255a7e0139a9c9617e8882559bd7e399d1b28c",
+        "bytes": 31723
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "sha256": "369438fc3c009478e32aa95d7d28c1c5da18eb56cb612a766942b2d83ef96226",
+          "bytes": 2221,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c74bcb383df4873b72c76f038035e9cde549188ba160c99b4dc93891106380a8",
+        "fingerprint": "46bc6e8b45a0f18355d08d5eb6f3a83252f82a259fc2d2a0897811389d24faa2",
+        "generatedAt": "2026-08-22T05:17:41.686Z"
+      }
+    },
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/ogp.png",
+        "sha256": "b9fd42e9db68df312dfbd06ed330741325188faf53246fab3ee2732e8cf497b2",
+        "bytes": 220861
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "sha256": "369438fc3c009478e32aa95d7d28c1c5da18eb56cb612a766942b2d83ef96226",
+          "bytes": 2221,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c74bcb383df4873b72c76f038035e9cde549188ba160c99b4dc93891106380a8",
+        "fingerprint": "46bc6e8b45a0f18355d08d5eb6f3a83252f82a259fc2d2a0897811389d24faa2",
+        "generatedAt": "2026-08-22T05:17:41.686Z"
+      }
+    },
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/thumbnail-dark.webp",
+        "sha256": "31f9638258931a6b19eed52885d2bf9de3f7aba7f0bc3c97a2ddddfd42e92f21",
+        "bytes": 4758
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "sha256": "369438fc3c009478e32aa95d7d28c1c5da18eb56cb612a766942b2d83ef96226",
+          "bytes": 2221,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c74bcb383df4873b72c76f038035e9cde549188ba160c99b4dc93891106380a8",
+        "fingerprint": "46bc6e8b45a0f18355d08d5eb6f3a83252f82a259fc2d2a0897811389d24faa2",
+        "generatedAt": "2026-08-22T05:17:41.686Z"
+      }
+    },
+    {
+      "owner": "web/blog/wheat-flour-consumption-prefecture",
+      "file": "app/blog/wheat-flour-consumption-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/wheat-flour-consumption-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/thumbnail-light.webp",
+        "sha256": "a1731fa28abadaad07cda791fb2ec1dffee0c2c9b5b8cc4607452d3141828e80",
+        "bytes": 8172
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/wheat-flour-consumption-prefecture/ogp/generation.json",
+          "sha256": "369438fc3c009478e32aa95d7d28c1c5da18eb56cb612a766942b2d83ef96226",
+          "bytes": 2221,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "c74bcb383df4873b72c76f038035e9cde549188ba160c99b4dc93891106380a8",
+        "fingerprint": "46bc6e8b45a0f18355d08d5eb6f3a83252f82a259fc2d2a0897811389d24faa2",
+        "generatedAt": "2026-08-22T05:17:41.686Z"
+      }
+    },
+    {
+      "owner": "web/material/014b27ec7dca3bed0167de42",
+      "file": "assets/area-specialty/45000/kyo-imo.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/45000/kyo-imo.webp",
+        "sha256": "17a3b5408123589845c97f8548494ccac52c56bda3d8a982bf5cd3e5a3eed24f",
+        "bytes": 28478
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/45000/kyo-imo.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/1c21687655c31bee4404ffd1",
+      "file": "assets/blog/article-backgrounds/vacant-housing-rate-vs-standard-price-change-rate-commercial.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/vacant-housing-rate-vs-standard-price-change-rate-commercial.jpg",
+        "sha256": "4eb247559b31bd6e89d9449fd6861240930e3ecf864bd6c7f173a61128db7283",
+        "bytes": 71134
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/vacant-housing-rate-vs-standard-price-change-rate-commercial.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/2cf7fa04578b03826cdf1c17",
+      "file": "apps/web/public/categories/svg/agriculture.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/categories/svg/agriculture.svg",
+        "url": "https://stats47.jp/categories/svg/agriculture.svg",
+        "sha256": "ea3f22b06f742d4f75a9c767ff4fcc2d698664a922379709e59daa1ac758239f",
+        "bytes": 7198
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/categories/svg/agriculture.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b81b3fa3a527e870adf2a475",
+      "file": "apps/remotion/public/images/site-intro/05-area-profile.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/remotion/public/images/site-intro/05-area-profile.png",
+        "sha256": "98cfe510a1818f6aa7cbca58131b36dcb7ad2fc6cce4c63af996b8b5714d7644",
+        "bytes": 358879
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/remotion/public/images/site-intro/05-area-profile.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/c94f971f243cc9466b0f2728",
+      "file": "assets/area-specialty/41000/unshu-mikan.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/41000/unshu-mikan.webp",
+        "sha256": "2fb9b74f77274fa002f555aa19d0fddb1f674a9eb88200df6f365de025e82d8f",
+        "bytes": 22462
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/41000/unshu-mikan.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d9f6fa8ef5bb07d1dbe11fc4",
+      "file": "assets/blog/article-backgrounds/chinese-noodles-expenditure-ranking.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/chinese-noodles-expenditure-ranking.jpg",
+        "sha256": "8079d0df1ea613aca8c153cde0d8e15b91a552980f1c4cfd3226833a4225cf9a",
+        "bytes": 95853
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/chinese-noodles-expenditure-ranking.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/bamboo-shoot-consumption-expenditure",
+      "file": "app/ranking/bamboo-shoot-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bamboo-shoot-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/ogp/ogp.png",
+        "sha256": "ff5985c36bd2c7e2ecfd1ee0bf90fbe4e903b99edb61fa8abb8f2e6b81e3f286",
+        "bytes": 59741
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bamboo-shoot-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/ogp/generation.json",
+          "sha256": "e52694af34c1c3b7075cf3f20ec0a02affb11d4724bea6b0cd4d83fede65cf10",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "49b89c10876c4bf11b7afa242f61c1ac87cf169ee29e4acf6789228201174ed0",
+        "fingerprint": "5762d9f12bbfa37a1d36accfa290af4f4e1330c1c3f6b3861587563a254694b9",
+        "generatedAt": "2026-10-10T21:32:14.380Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bamboo-shoot-consumption-expenditure",
+      "file": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "d1a6db448dfe61c969bc55f57da3e3c1102027793b93067fd3db41d0d992f6a5",
+        "bytes": 16368
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/thumbnail.json",
+          "sha256": "ee3d23870960e4c6d0ec9190dc1faa004cfc3d4db73a91ebd8760e64294d0309",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "1f27d48434b48758709f9c754bab93a173a81ee65e557f835b5fbd3e1492a7f4",
+        "fingerprint": "ecc7ddda2d44730ada0a23686d3f4af83b2ec9ba4b761631f9409b544df3fcac",
+        "generatedAt": "2026-10-10T21:50:00.882Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bamboo-shoot-consumption-expenditure",
+      "file": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "21c1ee74f2487c8bd3aaaa247bf5e56468397a796457833bd29f3c7c65eb4ec5",
+        "bytes": 14928
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bamboo-shoot-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/thumbnail.json",
+          "sha256": "ee3d23870960e4c6d0ec9190dc1faa004cfc3d4db73a91ebd8760e64294d0309",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bamboo-shoot-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "1f27d48434b48758709f9c754bab93a173a81ee65e557f835b5fbd3e1492a7f4",
+        "fingerprint": "ecc7ddda2d44730ada0a23686d3f4af83b2ec9ba4b761631f9409b544df3fcac",
+        "generatedAt": "2026-10-10T21:50:00.882Z"
+      }
+    },
+    {
+      "owner": "web/ranking/carrot-consumption-quantity",
+      "file": "app/ranking/carrot-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/carrot-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/ogp/ogp.png",
+        "sha256": "6425b07c901d021a5e9a217748581e45fba6d3fd7fdc5a32b03a2656745aab43",
+        "bytes": 59140
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/carrot-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/ogp/generation.json",
+          "sha256": "845d47371e148202458907604a0b3c04250864ee5fb8d75b3d49957e2124af1a",
+          "bytes": 941,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/carrot-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/carrot-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "9e147485af8d53aa97006934318f110d8879fcf80533e3829d76a429cf7543e2",
+        "fingerprint": "4a681b45860e81b67df2b96e274a0ed63f55d94c696fcec4a89de951430bd370",
+        "generatedAt": "2026-10-10T21:32:29.002Z"
+      }
+    },
+    {
+      "owner": "web/ranking/carrot-consumption-quantity",
+      "file": "app/ranking/carrot-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/carrot-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "6ce4bc04a26648d478d766a29a94d5a375531df17c512af91326ac1f047f11f1",
+        "bytes": 15702
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/carrot-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/thumbnail.json",
+          "sha256": "afb826622aa7903b597ed5bf7dc513f19ca377c342742dbfa1a4007f8b410521",
+          "bytes": 1796,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/carrot-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/carrot-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "8c22c32096359e3542674b5f2152e8d42142d3ba280562edea1b65b08d5f3ec1",
+        "fingerprint": "45cc97d5561538fd5967ff212095e1268ef5ae17c02cc0ecb0fe277fbc99b6b4",
+        "generatedAt": "2026-10-10T21:50:04.703Z"
+      }
+    },
+    {
+      "owner": "web/ranking/carrot-consumption-quantity",
+      "file": "app/ranking/carrot-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/carrot-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/thumbnail-light.webp",
+        "sha256": "9cdee77f18c4612900a4f1ceb372e5ebca51a6c445a1079951c9f332bfb82ee6",
+        "bytes": 14184
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/carrot-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/thumbnail.json",
+          "sha256": "afb826622aa7903b597ed5bf7dc513f19ca377c342742dbfa1a4007f8b410521",
+          "bytes": 1796,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/carrot-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/carrot-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/carrot-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "8c22c32096359e3542674b5f2152e8d42142d3ba280562edea1b65b08d5f3ec1",
+        "fingerprint": "45cc97d5561538fd5967ff212095e1268ef5ae17c02cc0ecb0fe277fbc99b6b4",
+        "generatedAt": "2026-10-10T21:50:04.703Z"
+      }
+    },
+    {
+      "owner": "web/ranking/coffee-shop-consumption-expenditure",
+      "file": "app/ranking/coffee-shop-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/coffee-shop-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/ogp/ogp.png",
+        "sha256": "b78d64fbbffe0e60dbf766af22687645ada662bdb9993ca40e7451f12224248d",
+        "bytes": 60547
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/coffee-shop-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/ogp/generation.json",
+          "sha256": "5572180f543f95898b94eed1121810d258a95f2a2dbecd36b5a8b709ca1ba815",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "0723656af3f8f1f9c8c9b435554b1a910b5090b03411c010e231b4353eaf70f4",
+        "fingerprint": "22d7260fd723b84b861740115bd46f746d4032b54b9e2cbb164a8a7534cbda20",
+        "generatedAt": "2026-10-10T21:32:37.910Z"
+      }
+    },
+    {
+      "owner": "web/ranking/coffee-shop-consumption-expenditure",
+      "file": "app/ranking/coffee-shop-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/coffee-shop-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "062e97934df224c8bf8d4f0a706df29f403241dac026dfdbb8aca6c1157ff1b6",
+        "bytes": 16592
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/coffee-shop-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/thumbnail.json",
+          "sha256": "f7d9369a0e97f7ef5df7b9042c7751c4def8d524affc433fef4f35ea6df2a75d",
+          "bytes": 1868,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "63c511b0fc21bf949b76140f76a2c9506524973e42d8869cca4b71447665d7ce",
+        "fingerprint": "9aab0fcafd954161e8cf67eec45eb7efad9dbe203b4a64017f0d61a812a9865b",
+        "generatedAt": "2026-10-10T21:50:07.075Z"
+      }
+    },
+    {
+      "owner": "web/ranking/coffee-shop-consumption-expenditure",
+      "file": "app/ranking/coffee-shop-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/coffee-shop-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "09bf63520cf0781f923a3612c8fdaffe7170a6fc6e1fc114c049779f922d3fda",
+        "bytes": 15094
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/coffee-shop-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/thumbnail.json",
+          "sha256": "f7d9369a0e97f7ef5df7b9042c7751c4def8d524affc433fef4f35ea6df2a75d",
+          "bytes": 1868,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/coffee-shop-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "63c511b0fc21bf949b76140f76a2c9506524973e42d8869cca4b71447665d7ce",
+        "fingerprint": "9aab0fcafd954161e8cf67eec45eb7efad9dbe203b4a64017f0d61a812a9865b",
+        "generatedAt": "2026-10-10T21:50:07.075Z"
+      }
+    },
+    {
+      "owner": "web/ranking/industrial-and-semi-industrial-area-ratio",
+      "file": "app/ranking/industrial-and-semi-industrial-area-ratio/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/industrial-and-semi-industrial-area-ratio/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/industrial-and-semi-industrial-area-ratio/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/industrial-and-semi-industrial-area-ratio",
+      "file": "app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/industrial-and-semi-industrial-area-ratio",
+      "file": "app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/industrial-and-semi-industrial-area-ratio/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-basketball",
+      "file": "app/ranking/junior-high-club-per100-basketball/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-basketball/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/ogp/ogp.png",
+        "sha256": "6e9d42b61c1ce5123547562f3f9b1dbe66dece930250376ac03e4e0897c449c4",
+        "bytes": 65661
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-club-per100-basketball/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/ogp/generation.json",
+          "sha256": "35ce727eee253fa9287c60521bfbf8838984e9d8aa613214e8288829a61ffbd6",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-club-per100-basketball/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-club-per100-basketball/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "bca7bdc671cf82502656c8e444da8c7593dc25d3ca5055e763b68764095bf848",
+        "fingerprint": "2d5a340f2caa4a2458d71c95f59ba015a430de688daa5ba0ebacead4bd52ab8c",
+        "generatedAt": "2026-10-03T20:59:25.819Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-basketball",
+      "file": "app/ranking/junior-high-club-per100-basketball/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-basketball/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-basketball",
+      "file": "app/ranking/junior-high-club-per100-basketball/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-basketball/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-basketball/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/kindergarten-education-cost-per-student",
+      "file": "app/ranking/kindergarten-education-cost-per-student/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-education-cost-per-student/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/ogp/ogp.png",
+        "sha256": "a78898dab130b528d693851926d9fadab01359a699a4475dcd35a5d36a399609",
+        "bytes": 61963
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-education-cost-per-student/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/ogp/generation.json",
+          "sha256": "7b1ad2409a62b30b73d34eaee6c76b660ef18b6ed422de38587669beb28128dc",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9ee6734b6097099ce669b0db433a68795219942c048f27b0c44cc34c165231ac",
+        "fingerprint": "39304619951c66d82032ede20995fd357c80fa7a46537effefbe0cfee79afb6a",
+        "generatedAt": "2026-10-03T20:59:32.196Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kindergarten-education-cost-per-student",
+      "file": "app/ranking/kindergarten-education-cost-per-student/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-education-cost-per-student/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/thumbnail-dark.webp",
+        "sha256": "86ca356927592d860a2f3d5bf25d75faabf56d838224055aa9282e9f7c26b438",
+        "bytes": 16814
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-education-cost-per-student/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/thumbnail.json",
+          "sha256": "3e772395663014091ef6a11590e8c566a13df6020464b1a03b8d0c9468bc467d",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0540cfb779ddaecc3e3e7e203df2547923a239c7e4703601de66df9ea1efc3e4",
+        "fingerprint": "26643204487ba8a439fdbc73e101780962ccbe67eed32a0ecdd8045bf3527978",
+        "generatedAt": "2026-10-03T21:25:20.123Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kindergarten-education-cost-per-student",
+      "file": "app/ranking/kindergarten-education-cost-per-student/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-education-cost-per-student/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/thumbnail-light.webp",
+        "sha256": "f0a3131dd7f82d68dad0535c1821ba6f6f9b7e80aef3a832d70c4ae2b4d122e4",
+        "bytes": 15604
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-education-cost-per-student/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/thumbnail.json",
+          "sha256": "3e772395663014091ef6a11590e8c566a13df6020464b1a03b8d0c9468bc467d",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-education-cost-per-student/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-education-cost-per-student/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0540cfb779ddaecc3e3e7e203df2547923a239c7e4703601de66df9ea1efc3e4",
+        "fingerprint": "26643204487ba8a439fdbc73e101780962ccbe67eed32a0ecdd8045bf3527978",
+        "generatedAt": "2026-10-03T21:25:20.123Z"
+      }
+    },
+    {
+      "owner": "web/ranking/port-count",
+      "file": "app/ranking/port-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/port-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/port-count/ogp/ogp.png",
+        "sha256": "7d4471dcddf2b82cdc329afe223b5209d9aaafcd1e5259221f9f87b8573f45b5",
+        "bytes": 62232
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/port-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/ogp/generation.json",
+          "sha256": "810a8d6a32289afe3b4341a725ee5ae7ee5241a9b7ac607d5bf889095ceb533e",
+          "bytes": 873,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/port-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/port-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "6679d349015bc6cb42eac67ea3da7ea356d9b1dfd88ae59ae50c429f5c126379",
+        "fingerprint": "5b94572c848688d09b35806be3b633b7217c105bc3e2b0eb1d45454e3f8373f0",
+        "generatedAt": "2026-09-05T23:08:59.878Z"
+      }
+    },
+    {
+      "owner": "web/ranking/port-count",
+      "file": "app/ranking/port-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/port-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/port-count/thumbnail-dark.webp",
+        "sha256": "adde8622d16ca584e509de5b66a28c673e38f76a5de839e280e27ba1e8c73dcf",
+        "bytes": 16980
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/port-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/thumbnail.json",
+          "sha256": "5e7312d279e3674bee46dded19fa40a3296b810b97bfbe0a3cd234b14e8624d7",
+          "bytes": 1664,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/port-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/port-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "20e89c096948e4b272ba44e1ac6448de0086703318a6126a5ffa00b7677ca4ec",
+        "fingerprint": "81a19baa91174aaa5fd88c7faaa5d2298b0ac9d72a6a5071e278ecf39dcc6daa",
+        "generatedAt": "2026-09-05T23:09:29.717Z"
+      }
+    },
+    {
+      "owner": "web/ranking/port-count",
+      "file": "app/ranking/port-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/port-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/port-count/thumbnail-light.webp",
+        "sha256": "89b4667ec85733235068070c8e613f648da767bdbb66925a4b72615a3b8245de",
+        "bytes": 15786
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/port-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/thumbnail.json",
+          "sha256": "5e7312d279e3674bee46dded19fa40a3296b810b97bfbe0a3cd234b14e8624d7",
+          "bytes": 1664,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/port-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/port-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/port-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "20e89c096948e4b272ba44e1ac6448de0086703318a6126a5ffa00b7677ca4ec",
+        "fingerprint": "81a19baa91174aaa5fd88c7faaa5d2298b0ac9d72a6a5071e278ecf39dcc6daa",
+        "generatedAt": "2026-09-05T23:09:29.717Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sausage-consumption-quantity",
+      "file": "app/ranking/sausage-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sausage-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/ogp/ogp.png",
+        "sha256": "737e07204cdbde40074839f33eba4e3f62d73100ebbac5a8575919e9cfef8160",
+        "bytes": 74580
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sausage-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/ogp/generation.json",
+          "sha256": "32ea2b6523a46b4824ed0a4d8a523aeee5a15911784668d5c67de4d3dc30f1ac",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sausage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sausage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "06e4d9075ff5ec1ace3fd4ae1aabd271ee46cc3ec618fa8aea3f442943279b6f",
+        "fingerprint": "f4f309158b1fadea4c0f0f6a678451affa5ff9ea8c566641d99bbc657579869a",
+        "generatedAt": "2026-08-15T18:42:44.146Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sausage-consumption-quantity",
+      "file": "app/ranking/sausage-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sausage-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "74c6cd3af7bb2de9968e08fad57eb2d4a709751c447a2f319fa927559a6faa40",
+        "bytes": 15386
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sausage-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/thumbnail.json",
+          "sha256": "8838eeebda671c14651ab6fd994f9c08f36b7428b5c19d6382d0853384233d32",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sausage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sausage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3a666062ce1f2d8d5ad13004ba96af81c4559b21e72a1dca3e7f7d952b184a40",
+        "fingerprint": "e8a78e3b66d2cf4475ab6aaf7546bde0c17dc9b531dfb9a18c431f4198f5433a",
+        "generatedAt": "2026-08-15T18:58:48.897Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sausage-consumption-quantity",
+      "file": "app/ranking/sausage-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sausage-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/thumbnail-light.webp",
+        "sha256": "ec7293bfc3ba229152d8f4bdcdaec07f4f35d04a67076fed96f1f09cb351fb5d",
+        "bytes": 13842
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sausage-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/thumbnail.json",
+          "sha256": "8838eeebda671c14651ab6fd994f9c08f36b7428b5c19d6382d0853384233d32",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sausage-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sausage-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sausage-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3a666062ce1f2d8d5ad13004ba96af81c4559b21e72a1dca3e7f7d952b184a40",
+        "fingerprint": "e8a78e3b66d2cf4475ab6aaf7546bde0c17dc9b531dfb9a18c431f4198f5433a",
+        "generatedAt": "2026-08-15T18:58:48.897Z"
+      }
+    }
+  ]
+}

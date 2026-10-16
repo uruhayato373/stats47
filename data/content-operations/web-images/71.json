@@ -1,0 +1,1529 @@
+{
+  "items": [
+    {
+      "id": "web/blog/doctor-income-prefecture-gap",
+      "channel": "web",
+      "key": "doctor-income-prefecture-gap",
+      "title": "医師の年収は沖縄1853万円｜なぜ石川は935万円で最下位? 2023",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/doctor-income-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "c39d04ef20ea94d696365b2411a22d9dcc1bb90a485660f8d22ddc9fa85af6ba",
+      "catalogBasis": "21b666129fa9f5b1beec1413ae433ce758ba3e2925e184af1a568007e4af3d2a",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/article.md",
+        "sha256": "b4d75967c00eed12c7fa287ed37ff71477173fb4fba8c36232b4206c213ba394",
+        "bytes": 9319
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/high-school-advancement-rate",
+      "channel": "web",
+      "key": "high-school-advancement-rate",
+      "title": "進学率トップは東京・京都｜なぜ都市部ほど高いのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/high-school-advancement-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "d9d7c7252c8dd9a28852ad20e21d3c3a1bff2e135459280c52b2cb9e626d5174",
+      "catalogBasis": "9ebabded60b0066c04989afd5ae86ba34cc1becfee4fdff8deeb6a6fbc9c1abd",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/article.md",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/article.md",
+        "sha256": "03bda6c5ac3ba962d2b243374f81f8d42b56ea57d194ffede94f73f286b241ed",
+        "bytes": 8429
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/6982534249705c2ed06264fb",
+      "channel": "web",
+      "key": "assets/area-specialty/02000/fuji-ringo.webp",
+      "title": "fuji-ringo.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "97d6e683ad9a6442ede62789d4dd3080eaabe4a475d158d7d4572e6ac60de8ba"
+    },
+    {
+      "id": "web/material/de373c56179543e63497ac31",
+      "channel": "web",
+      "key": "assets/area-specialty/06000/yamagata-akane-hourensou.webp",
+      "title": "yamagata-akane-hourensou.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "87b20478b4aaada7cbd3793b69d48e81b49841c3013e4a27aa272e1828d757c3"
+    },
+    {
+      "id": "web/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "channel": "web",
+      "key": "disaster-recovery-expenditure-ratio-pref-finance",
+      "title": "災害復旧費割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a5fc60e8e41800bfb524bb451ac39a8fd6a4de7fa93756b4a48dd33163a4027b",
+      "catalogBasis": "a5fc60e8e41800bfb524bb451ac39a8fd6a4de7fa93756b4a48dd33163a4027b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/marine-fishery-aquaculture-output-value",
+      "channel": "web",
+      "key": "marine-fishery-aquaculture-output-value",
+      "title": "海面漁業・養殖業産出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/marine-fishery-aquaculture-output-value",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b6243aad26d503d7e4cbc7373c92883dcca11371cb6b0cc8e00ec14d4305ebb8",
+      "catalogBasis": "b6243aad26d503d7e4cbc7373c92883dcca11371cb6b0cc8e00ec14d4305ebb8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/raw-milk-production",
+      "channel": "web",
+      "key": "raw-milk-production",
+      "title": "生乳生産量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/raw-milk-production",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b8160709d5cef27fddb61d91ac2a353650a6f96cdee74b179cfc73ce870b7754",
+      "catalogBasis": "b8160709d5cef27fddb61d91ac2a353650a6f96cdee74b179cfc73ce870b7754",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/video-recorder-consumption-expenditure",
+      "channel": "web",
+      "key": "video-recorder-consumption-expenditure",
+      "title": "ビデオレコーダー・プレイヤー消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/video-recorder-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "55182e228b0401771ec17484166e0ebff43bc1790f5436f0f3c1366d46aeec38",
+      "catalogBasis": "55182e228b0401771ec17484166e0ebff43bc1790f5436f0f3c1366d46aeec38",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/zoo-count",
+      "channel": "web",
+      "key": "zoo-count",
+      "title": "登録・相当動物園数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/zoo-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9ed451d87e1c01a3b9c87fc2244f0efc88a14e85e621d0895d0fcc7bdd2edae2",
+      "catalogBasis": "9ed451d87e1c01a3b9c87fc2244f0efc88a14e85e621d0895d0fcc7bdd2edae2",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/doctor-income-prefecture-gap",
+      "file": "app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.svg",
+        "sha256": "0922d9a5dd28d965ffd0eacc5602c8278d5dd12173bdf2d5716464138d6c58af",
+        "bytes": 6933
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/article.md",
+          "sha256": "b4d75967c00eed12c7fa287ed37ff71477173fb4fba8c36232b4206c213ba394",
+          "bytes": 9319,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "doctor-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.json",
+          "sha256": "1663bddfdd58e58582d03ed24d3c766b5bf14d220d5ee7ab47cb93343bfe4486",
+          "bytes": 6780,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "doctor-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.source.json",
+          "sha256": "83c17e408fc26794faaf1ac34ee75cf2f13a724743484be3613df47df564646b",
+          "bytes": 611,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/data/doctor-prefecture-rankings.svg",
+          "alt": "医師の平均年収 上位5県と下位5県（2023年・万円）",
+          "heading": "医師年収ランキング──上位5県と下位5県（2023年）",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/doctor-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/doctor-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/doctor-income-prefecture-gap",
+      "file": "app/blog/doctor-income-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/background.jpg",
+        "sha256": "96514ca030f8abc9ce3cd65d8f06bafb99e12899420d0b198a5b6906830e1147",
+        "bytes": 81276
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "sha256": "f659bd6b3b2780f2de5812bb6d193908f793f6122bc8d55a44682833e14810e2",
+          "bytes": 2218,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "9e8471116be28e1bea0a387246ba92aa9e4c804667572cdd02254f1a8880b6ce",
+        "fingerprint": "33fd7ed391238ce2d22bacdd72ae5dd11d77f8d798ebabd580b07622a0595f7d",
+        "generatedAt": "2026-08-22T05:17:22.321Z"
+      }
+    },
+    {
+      "owner": "web/blog/doctor-income-prefecture-gap",
+      "file": "app/blog/doctor-income-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/ogp.png",
+        "sha256": "1d239884a706c5a33e9226272eaa397f5eb0063cb96057d00d1f3cdd181421fe",
+        "bytes": 409659
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "sha256": "f659bd6b3b2780f2de5812bb6d193908f793f6122bc8d55a44682833e14810e2",
+          "bytes": 2218,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "9e8471116be28e1bea0a387246ba92aa9e4c804667572cdd02254f1a8880b6ce",
+        "fingerprint": "33fd7ed391238ce2d22bacdd72ae5dd11d77f8d798ebabd580b07622a0595f7d",
+        "generatedAt": "2026-08-22T05:17:22.321Z"
+      }
+    },
+    {
+      "owner": "web/blog/doctor-income-prefecture-gap",
+      "file": "app/blog/doctor-income-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "e8c036e65dc15f901c98407a97ba129101351cbe14844033c51bd8f8ee9ea1aa",
+        "bytes": 13446
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "sha256": "f659bd6b3b2780f2de5812bb6d193908f793f6122bc8d55a44682833e14810e2",
+          "bytes": 2218,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "9e8471116be28e1bea0a387246ba92aa9e4c804667572cdd02254f1a8880b6ce",
+        "fingerprint": "33fd7ed391238ce2d22bacdd72ae5dd11d77f8d798ebabd580b07622a0595f7d",
+        "generatedAt": "2026-08-22T05:17:22.321Z"
+      }
+    },
+    {
+      "owner": "web/blog/doctor-income-prefecture-gap",
+      "file": "app/blog/doctor-income-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/doctor-income-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/thumbnail-light.webp",
+        "sha256": "134ade77c4e803d69dcf4ba36092c353fac275e217c38f0276f59195e095910e",
+        "bytes": 25314
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/doctor-income-prefecture-gap/ogp/generation.json",
+          "sha256": "f659bd6b3b2780f2de5812bb6d193908f793f6122bc8d55a44682833e14810e2",
+          "bytes": 2218,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "9e8471116be28e1bea0a387246ba92aa9e4c804667572cdd02254f1a8880b6ce",
+        "fingerprint": "33fd7ed391238ce2d22bacdd72ae5dd11d77f8d798ebabd580b07622a0595f7d",
+        "generatedAt": "2026-08-22T05:17:22.321Z"
+      }
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.svg",
+        "sha256": "28b7a7330c215d3cc17365a58e2f6e991e32825d310736c7fb8cafb8d7a755d3",
+        "bytes": 31478
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/article.md",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/article.md",
+          "sha256": "03bda6c5ac3ba962d2b243374f81f8d42b56ea57d194ffede94f73f286b241ed",
+          "bytes": 8429,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "high-school-advancement-rate-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.json",
+          "sha256": "b43059a36d02229cfde945857a0b2ab2ddc5490513186b8ef0606eb2facf3ac1",
+          "bytes": 5347,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "high-school-advancement-rate-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.source.json",
+          "sha256": "15fdf41f08824a2914540e91f2bbe6b2af50491949e5c513337220a9c646911f",
+          "bytes": 355,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-map.svg",
+          "alt": "進学率 47都道府県マップ",
+          "heading": "発見：47都道府県で見る進学率と大学立地の重なり",
+          "line": 51
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-advancement-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-advancement-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.svg",
+        "sha256": "60f81597debab395de877d6b7cc574f8e730d0447f508a2bb9d86ad3079c977b",
+        "bytes": 6905
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/article.md",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/article.md",
+          "sha256": "03bda6c5ac3ba962d2b243374f81f8d42b56ea57d194ffede94f73f286b241ed",
+          "bytes": 8429,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "high-school-advancement-rate-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.json",
+          "sha256": "a0f8b0e7e5b73515fcb9666f16812d2bf1659f94b28e09f09e1182e5f54dcf2a",
+          "bytes": 6716,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "high-school-advancement-rate-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.source.json",
+          "sha256": "83cc77f78d35f98c75e736f8b9d7810ad9804c7c591def808a04e59ff4100c00",
+          "bytes": 654,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/data/high-school-advancement-rate-ranking.svg",
+          "alt": "進学率 上位5・下位5",
+          "heading": "上位と下位",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/high-school-advancement-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/high-school-advancement-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/background.jpg",
+        "sha256": "0ff11f2f24746f1d9cf7850bee0396f84ebd248d44c7b1b99c3fbb74754ebbe7",
+        "bytes": 81723
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/generation.json",
+          "sha256": "d726d2224d79ff60fcfdfb1c427e226964f7819fca35d5a6cba311119a55f69a",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc221592622da0cc9053ff9303e8b756f624180c71c6006e0b7376b765969dfa",
+        "fingerprint": "99f07093eff8349e2f3fa2961f2c479a09d8c2e88b9656d9e4347cb2dfcbc0d5",
+        "generatedAt": "2026-08-22T05:17:26.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/ogp.png",
+        "sha256": "39dea2bb4ccfe61a27c783adbf5a26def91d6c694347153bd40e0763c81cb420",
+        "bytes": 447156
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/generation.json",
+          "sha256": "d726d2224d79ff60fcfdfb1c427e226964f7819fca35d5a6cba311119a55f69a",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc221592622da0cc9053ff9303e8b756f624180c71c6006e0b7376b765969dfa",
+        "fingerprint": "99f07093eff8349e2f3fa2961f2c479a09d8c2e88b9656d9e4347cb2dfcbc0d5",
+        "generatedAt": "2026-08-22T05:17:26.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/thumbnail-dark.webp",
+        "sha256": "7f46e2e6ce95916d0da0e60d31131924ffdd17e0efdec41d63750381911fb9b0",
+        "bytes": 13040
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/generation.json",
+          "sha256": "d726d2224d79ff60fcfdfb1c427e226964f7819fca35d5a6cba311119a55f69a",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc221592622da0cc9053ff9303e8b756f624180c71c6006e0b7376b765969dfa",
+        "fingerprint": "99f07093eff8349e2f3fa2961f2c479a09d8c2e88b9656d9e4347cb2dfcbc0d5",
+        "generatedAt": "2026-08-22T05:17:26.287Z"
+      }
+    },
+    {
+      "owner": "web/blog/high-school-advancement-rate",
+      "file": "app/blog/high-school-advancement-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/high-school-advancement-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/thumbnail-light.webp",
+        "sha256": "406a2c8246730ea0cceebb9639c8cf80727eef3b1fe57bd063ed70e298994399",
+        "bytes": 25092
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/high-school-advancement-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/high-school-advancement-rate/ogp/generation.json",
+          "sha256": "d726d2224d79ff60fcfdfb1c427e226964f7819fca35d5a6cba311119a55f69a",
+          "bytes": 2206,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bc221592622da0cc9053ff9303e8b756f624180c71c6006e0b7376b765969dfa",
+        "fingerprint": "99f07093eff8349e2f3fa2961f2c479a09d8c2e88b9656d9e4347cb2dfcbc0d5",
+        "generatedAt": "2026-08-22T05:17:26.287Z"
+      }
+    },
+    {
+      "owner": "web/material/6982534249705c2ed06264fb",
+      "file": "assets/area-specialty/02000/fuji-ringo.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/02000/fuji-ringo.webp",
+        "sha256": "59c4b7e3c7b615ac792942e45e1f60b468b962754dc1299d82b3f6a91d28cbc3",
+        "bytes": 29840
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/02000/fuji-ringo.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/de373c56179543e63497ac31",
+      "file": "assets/area-specialty/06000/yamagata-akane-hourensou.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/06000/yamagata-akane-hourensou.webp",
+        "sha256": "14f8883e83c18529bc625d86f22076186659d6af2a09a20b9360a9434582e2c7",
+        "bytes": 36440
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/06000/yamagata-akane-hourensou.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "file": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/ogp/ogp.png",
+        "sha256": "12155e2e9aaf77fe8c658ea5811f8bf9457c639896e1a46e79bab68bc52bf7bd",
+        "bytes": 58933
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/ogp/generation.json",
+          "sha256": "561e4405a564956ca85052956bb171fb4c28facf26d4f5a330efac3fc51994ea",
+          "bytes": 1025,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "10fbec62c4491b9078b9bad19f69ee28fd2ca3152efa14d30c287b592d50c65d",
+        "fingerprint": "ec0668ed995e06e7023955da63ece82cf4296d1a4b0f81f2b371e29820778df4",
+        "generatedAt": "2026-10-10T21:33:02.661Z"
+      }
+    },
+    {
+      "owner": "web/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "file": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+        "sha256": "314f43e3b8069e1b8a37349228519856cf401e450dcf5883a714ce81d719b417",
+        "bytes": 15356
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail.json",
+          "sha256": "037e09355611b19df413d5c5fbc02ef48e666c908ea111c98b8b7e60c1d47bdb",
+          "bytes": 1985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "329458ed4e6cf6790842053687dce394ab7b25fe8ba06ebd9725f74cfa951e5a",
+        "fingerprint": "1b7dd3def5902c495d13157dd1b8387054cdcc285e28ece686d2ffd12f8c76b2",
+        "generatedAt": "2026-10-10T21:50:13.378Z"
+      }
+    },
+    {
+      "owner": "web/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "file": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail-light.webp",
+        "sha256": "88dbdf23fca25e165f068e27b6547bface9e4c2564344aa34d0898c9238f5adb",
+        "bytes": 13644
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/thumbnail.json",
+          "sha256": "037e09355611b19df413d5c5fbc02ef48e666c908ea111c98b8b7e60c1d47bdb",
+          "bytes": 1985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/disaster-recovery-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "329458ed4e6cf6790842053687dce394ab7b25fe8ba06ebd9725f74cfa951e5a",
+        "fingerprint": "1b7dd3def5902c495d13157dd1b8387054cdcc285e28ece686d2ffd12f8c76b2",
+        "generatedAt": "2026-10-10T21:50:13.378Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-aquaculture-output-value",
+      "file": "app/ranking/marine-fishery-aquaculture-output-value/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-aquaculture-output-value/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/ogp/ogp.png",
+        "sha256": "91a6c1da16c17757916b884885ca8d81af82748dc2fc857390d4842e4e393c9b",
+        "bytes": 64486
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-aquaculture-output-value/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/ogp/generation.json",
+          "sha256": "3a1c6ab05b41148c4668f3d1c20c0b04f57e1c5900c2e73d7d4898525cc0e31f",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1ba6efb75faefa058701fd1c0a7a540c90fae8ebc1e21129487e0cdb62a823f1",
+        "fingerprint": "d368e17ebdb7aecc376a3919640575d0e5a8e99bf96f235718f320a2c3c01d08",
+        "generatedAt": "2026-10-03T20:59:49.124Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-aquaculture-output-value",
+      "file": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/thumbnail-dark.webp",
+        "sha256": "90bc85852fab3976e1f32e9ad5ad2a359da9f6ae892721a26f25eff7abb0886c",
+        "bytes": 19482
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/thumbnail.json",
+          "sha256": "be99f93a84a6bd38b006a86bcc1200ba2f859562d59984c67af7605cacdae2a5",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b8d75163b82df0fb7f9f1c6f537670a1f17cbaf1bff077dac4cd823cf25d2382",
+        "fingerprint": "9cb462ebf0d0b3d831d0c51ab7c79d07bcb3321bf0de916a0242927e22fbe58e",
+        "generatedAt": "2026-10-03T21:25:24.760Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-aquaculture-output-value",
+      "file": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/thumbnail-light.webp",
+        "sha256": "74ffd0a85932bebedec0ac227980f0cc25ccd9f8c6a0daf87ff3d08d75d1ac92",
+        "bytes": 18366
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-aquaculture-output-value/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/thumbnail.json",
+          "sha256": "be99f93a84a6bd38b006a86bcc1200ba2f859562d59984c67af7605cacdae2a5",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-aquaculture-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b8d75163b82df0fb7f9f1c6f537670a1f17cbaf1bff077dac4cd823cf25d2382",
+        "fingerprint": "9cb462ebf0d0b3d831d0c51ab7c79d07bcb3321bf0de916a0242927e22fbe58e",
+        "generatedAt": "2026-10-03T21:25:24.760Z"
+      }
+    },
+    {
+      "owner": "web/ranking/raw-milk-production",
+      "file": "app/ranking/raw-milk-production/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/raw-milk-production/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/ogp/ogp.png",
+        "sha256": "5d44ca799772c4fc9dbfd5f83171ebefb462c34464e89326ecbae09572527488",
+        "bytes": 59589
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/raw-milk-production/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/ogp/generation.json",
+          "sha256": "8e93185a90ee0c5fb7b592453ffc449cd24705bc3f3000b57bcaa7109f7de3b4",
+          "bytes": 909,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/raw-milk-production/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/raw-milk-production/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "6aa5ab03282cbd05dedb2cf1fd59947042723e5cc7216b2115caec871fde022b",
+        "fingerprint": "513a1026e5eadaeab608fa3f80af4f6493239fa86ca68f4c5eaafb32b5ef1ba9",
+        "generatedAt": "2026-09-11T14:06:08.394Z"
+      }
+    },
+    {
+      "owner": "web/ranking/raw-milk-production",
+      "file": "app/ranking/raw-milk-production/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/raw-milk-production/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/thumbnail-dark.webp",
+        "sha256": "4799ca18e0e2ee3a58e4f1db4f70bdd85534aa057f524a7161f804b1084f0f33",
+        "bytes": 16712
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/raw-milk-production/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/thumbnail.json",
+          "sha256": "b71222511b929a7de3c64f776c7ab264c4a45419ab7777001a4a1342a07a3950",
+          "bytes": 1745,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/raw-milk-production/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/raw-milk-production/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "16db4f0d1f73aae71169c7448371ee016c7cd20e0b12876a591024a084e9ba86",
+        "fingerprint": "341b0645fe94b50f4c55871e7ca02ce59c61aaf4fb10e9deb19d11cb9b13606b",
+        "generatedAt": "2026-09-11T14:27:05.744Z"
+      }
+    },
+    {
+      "owner": "web/ranking/raw-milk-production",
+      "file": "app/ranking/raw-milk-production/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/raw-milk-production/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/thumbnail-light.webp",
+        "sha256": "b1affba8527f60b44bf3f7c69fcde5a7a17920e9a0fc623ee028821c94811583",
+        "bytes": 15320
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/raw-milk-production/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/thumbnail.json",
+          "sha256": "b71222511b929a7de3c64f776c7ab264c4a45419ab7777001a4a1342a07a3950",
+          "bytes": 1745,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/raw-milk-production/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/raw-milk-production/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/raw-milk-production/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "16db4f0d1f73aae71169c7448371ee016c7cd20e0b12876a591024a084e9ba86",
+        "fingerprint": "341b0645fe94b50f4c55871e7ca02ce59c61aaf4fb10e9deb19d11cb9b13606b",
+        "generatedAt": "2026-09-11T14:27:05.744Z"
+      }
+    },
+    {
+      "owner": "web/ranking/video-recorder-consumption-expenditure",
+      "file": "app/ranking/video-recorder-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/video-recorder-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/ogp/ogp.png",
+        "sha256": "93ae71605fc135975e391fddff928ad5655822f6329ecc20ab117dcce47ddb5f",
+        "bytes": 80634
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/video-recorder-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/ogp/generation.json",
+          "sha256": "9118484f9fbd24b7faeef590d8a863993a2adddac9de98a6bfe9b8f65e6915be",
+          "bytes": 985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "ca91c5b3ff024eb99927f144f91c7c3b08e602dced094ba03a2393d13f0ea57d",
+        "fingerprint": "f099ea2bbcd41985b9ac1bb8afad664fba08430ef81a932fa816b9f4b89c4c33",
+        "generatedAt": "2026-08-16T22:21:25.784Z"
+      }
+    },
+    {
+      "owner": "web/ranking/video-recorder-consumption-expenditure",
+      "file": "app/ranking/video-recorder-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/video-recorder-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "31d896f2d0c9abdcbffd52e84a924644836e28752db0699a2d5241fc1347e359",
+        "bytes": 17720
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/video-recorder-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/thumbnail.json",
+          "sha256": "37344ddd4769a24d50b6e12296bf663c84fbc13fc1048f40e3cea66d0a619ff2",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "4d49657657216ad05c0d5424e9af5a454f6ed11805b2016b9dcc91b4f644c0ce",
+        "fingerprint": "1bc81ce7182750a20ce01002e9c9dfd6883286023dc52cc79e61fb250ac847d3",
+        "generatedAt": "2026-08-16T22:36:34.330Z"
+      }
+    },
+    {
+      "owner": "web/ranking/video-recorder-consumption-expenditure",
+      "file": "app/ranking/video-recorder-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/video-recorder-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "ad3299bd8b0c988ccc1841f172265f06de0748aedcf597f5292992a13a647961",
+        "bytes": 16238
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/video-recorder-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/thumbnail.json",
+          "sha256": "37344ddd4769a24d50b6e12296bf663c84fbc13fc1048f40e3cea66d0a619ff2",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/video-recorder-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/video-recorder-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "4d49657657216ad05c0d5424e9af5a454f6ed11805b2016b9dcc91b4f644c0ce",
+        "fingerprint": "1bc81ce7182750a20ce01002e9c9dfd6883286023dc52cc79e61fb250ac847d3",
+        "generatedAt": "2026-08-16T22:36:34.330Z"
+      }
+    },
+    {
+      "owner": "web/ranking/zoo-count",
+      "file": "app/ranking/zoo-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/zoo-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png",
+        "sha256": "0d283a67e5e685a2d8b146db1b09c22d0ad85e7d621668b4355d73073efc5c20",
+        "bytes": 74605
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/zoo-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/ogp/generation.json",
+          "sha256": "7d50290991c61d2be258309deeb290371cb29514a41a7c4bcfae081ca483c4d1",
+          "bytes": 869,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/zoo-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/zoo-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "9981accc05761d2d5f3271031c43e9dc5fb715a8dd5511d8b1572def8be0d365",
+        "fingerprint": "2565ef72c25ae2ec1e7ece5b9c9b36beb808799f3b3b226f5a99df8078058b4b",
+        "generatedAt": "2026-08-16T22:21:36.346Z"
+      }
+    },
+    {
+      "owner": "web/ranking/zoo-count",
+      "file": "app/ranking/zoo-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/zoo-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/zoo-count/thumbnail-dark.webp",
+        "sha256": "c76d155f94b10d887ec57514c581513438a8869306132c97945ece5d215d8d17",
+        "bytes": 15628
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/zoo-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/thumbnail.json",
+          "sha256": "69e29bc91ad41afa4298d939c99aa8dbc71ec0a13349ec71f461f38cba740f32",
+          "bytes": 1655,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/zoo-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/zoo-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "675a3b972d4a29bbe13445890de7082fff71398d5c79b4b15818ff203e49b0b7",
+        "fingerprint": "9daea5bbf2317d8df30792d3900ef9ec765227862c4b574f18d3368fa06d1352",
+        "generatedAt": "2026-08-16T22:36:38.806Z"
+      }
+    },
+    {
+      "owner": "web/ranking/zoo-count",
+      "file": "app/ranking/zoo-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/zoo-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/zoo-count/thumbnail-light.webp",
+        "sha256": "c04bcfdbd294edb493c2b438146d06400c55101843aca667e94322123a9ab0a1",
+        "bytes": 13746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/zoo-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/thumbnail.json",
+          "sha256": "69e29bc91ad41afa4298d939c99aa8dbc71ec0a13349ec71f461f38cba740f32",
+          "bytes": 1655,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/zoo-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/zoo-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/zoo-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "675a3b972d4a29bbe13445890de7082fff71398d5c79b4b15818ff203e49b0b7",
+        "fingerprint": "9daea5bbf2317d8df30792d3900ef9ec765227862c4b574f18d3368fa06d1352",
+        "generatedAt": "2026-08-16T22:36:38.806Z"
+      }
+    }
+  ]
+}

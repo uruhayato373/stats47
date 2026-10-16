@@ -271,6 +271,8 @@ export const DATASETS = [
   d("content.image-templates-schema", "data/content-operations/image-templates.schema.json", "config", "ops", "data", "図の型と媒体方針のJSON Schema"),
   d("content.image-templates", "data/content-operations/image-templates.json", "config", "ops", "data", "媒体共通の図の型・改善方針と版履歴", { schema: "data/content-operations/image-templates.schema.json" }),
   d("content.image-inventory", "data/content-operations/image-inventory.json", "state", "ops", "data", "R2のnote本文manifestから派生した画像・入力の索引"),
+  d("content.web-image-inventory", "data/content-operations/web-image-inventory.json", "state", "ops", "data", "OGP・ブログSVG・静的素材の派生索引と元データ参照・棚卸し範囲"),
+  d("content.web-image-parts", "data/content-operations/web-images/{name}.json", "state", "ops", "data", "画像索引のowner別ハッシュ分割。索引のSHAで照合し、1ファイル1MB未満に保つ"),
   d("content.image-migration", "data/content-operations/image-migration.json", "state", "ops", "data", "旧SNS画像のR2移行とハッシュ照合の結果"),
   d("content.note-blockers", "data/content-operations/note-generation-blockers.json", "state", "product", "data", "note 記事生成の止まっている理由"),
   d("data-quality.state", "data/data-quality/{name}", "state", "data", "data", "データ品質の要約・再取り込みキュー・ページ横断の事前検査・SEO メタの基準"),

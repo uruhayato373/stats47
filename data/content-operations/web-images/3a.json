@@ -1,0 +1,2265 @@
+{
+  "items": [
+    {
+      "id": "web/blog/annual-precipitation-rainy-season-gap",
+      "channel": "web",
+      "key": "annual-precipitation-rainy-season-gap",
+      "title": "降水量トップは静岡だが雨の日数トップは富山｜梅雨で分かれる47都道府県の雨タイプ (2024)",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/annual-precipitation-rainy-season-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "0c7726ee5b847eb2178403648cbad29a251a74aa41086429419dc6fa6d119f16",
+      "catalogBasis": "122087d8129ba5ac32d69ba3d93e2bfac4ad5b6b0f9fc046cfdabb19359546bd",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/article.md",
+        "sha256": "8aeb70cfec801d079f92788c0e8eddd1c4dbc207b41c8d8a32a2c572ad0e7e84",
+        "bytes": 14901
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "channel": "web",
+      "key": "consumer-price-difference-index-utilities-prefecture-gap",
+      "title": "光熱・水道費はなぜ北海道が突出して高いのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "e3e66f55d67dac06695e66c44bdc1430e9506aaf7d41fa1c00e0abfcf736ae54",
+      "catalogBasis": "131dc70c6011dc4a0719b6661faa09e4cca34b2f77dd98686e72dc642f5836e4",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+        "sha256": "0791a2dea0a12d701fa6d7d5216087a44ea3863d18021c09fba24c08c9686220",
+        "bytes": 9327
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/351ac63fe88ebdad0ba5625a",
+      "channel": "web",
+      "key": "assets/area-specialty/04000/mabo-ya.webp",
+      "title": "mabo-ya.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e754a992814462c9b9ac9ea2f3671c07a94f869101f162bd1cc28ea0592cef0b"
+    },
+    {
+      "id": "web/material/b7ebb07d5e2d7a3742dfa0ad",
+      "channel": "web",
+      "key": "assets/area-specialty/30000/kue.webp",
+      "title": "kue.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e86ac28ba76eb9ca73d0a414bc60e57b4471b5b0791e08f7126af125e7cbec3c"
+    },
+    {
+      "id": "web/material/edaa22f50abadbf9c40186f3",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/disaster-damage-per-person-prefecture-gap.jpg",
+      "title": "disaster-damage-per-person-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3f635c96a60ae6d36d05fc79ed65eb9b5874b5dc31c89308f124b7220c854637"
+    },
+    {
+      "id": "web/material/fd19843b6e74eb953f5826c8",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/crab-expenditure-ranking.jpg",
+      "title": "crab-expenditure-ranking.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9cdf26dfff2c4a2c492cf9346420e4edc570460d08b92b51334a81fe893a7f9b"
+    },
+    {
+      "id": "web/ranking/actual-income-worker-households-per-month",
+      "channel": "web",
+      "key": "actual-income-worker-households-per-month",
+      "title": "実収入",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/actual-income-worker-households-per-month",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d844778b1078b162548a624e6b74d9bf417bda36bdf08dd806b8b7ee1b18118e",
+      "catalogBasis": "d844778b1078b162548a624e6b74d9bf417bda36bdf08dd806b8b7ee1b18118e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/gross-prefectural-income-growth-rate-real-h17",
+      "channel": "web",
+      "key": "gross-prefectural-income-growth-rate-real-h17",
+      "title": "県民総所得対前年増加率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/gross-prefectural-income-growth-rate-real-h17",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "04ec0ab6f2dc4a4849645ef5f0de463cb77719bd59a6152b12d2813c630bb9e2",
+      "catalogBasis": "04ec0ab6f2dc4a4849645ef5f0de463cb77719bd59a6152b12d2813c630bb9e2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/hobby-participation-rate-writing",
+      "channel": "web",
+      "key": "hobby-participation-rate-writing",
+      "title": "詩・和歌・俳句・小説などの創作の行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/hobby-participation-rate-writing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9f7183f62e039e15404dc10c612e9d8603fe5ba59c9e8f63108fcfdc03f8cdfd",
+      "catalogBasis": "9f7183f62e039e15404dc10c612e9d8603fe5ba59c9e8f63108fcfdc03f8cdfd",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/net-decrease-rate-land-house-loans-worker-households",
+      "channel": "web",
+      "key": "net-decrease-rate-land-house-loans-worker-households",
+      "title": "土地家屋借金純減率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/net-decrease-rate-land-house-loans-worker-households",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5b5021785062395be1fddd79f62e15422f3781e817b33f8d931b16cf3a04c982",
+      "catalogBasis": "5b5021785062395be1fddd79f62e15422f3781e817b33f8d931b16cf3a04c982",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-leafy-vegetables-consumption-quantity",
+      "channel": "web",
+      "key": "other-leafy-vegetables-consumption-quantity",
+      "title": "他の葉茎菜消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-leafy-vegetables-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "72e44a2d84ad45f4cec28e68af5cfd2fcaa7ffd63b299f9a462978aabb49c38d",
+      "catalogBasis": "72e44a2d84ad45f4cec28e68af5cfd2fcaa7ffd63b299f9a462978aabb49c38d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-root-vegetables-consumption-expenditure",
+      "channel": "web",
+      "key": "other-root-vegetables-consumption-expenditure",
+      "title": "他の根菜消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-root-vegetables-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5e4d03becad3a5dd58920faeb36266f684d909112a5d90efeb58dca62cb27da7",
+      "catalogBasis": "5e4d03becad3a5dd58920faeb36266f684d909112a5d90efeb58dca62cb27da7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/pickled-daikon-consumption-expenditure",
+      "channel": "web",
+      "key": "pickled-daikon-consumption-expenditure",
+      "title": "だいこん漬消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/pickled-daikon-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4420ac89440ee4a94dcdbf82f1ce647a67b3591cb426eb38413cba655affb79c",
+      "catalogBasis": "4420ac89440ee4a94dcdbf82f1ce647a67b3591cb426eb38413cba655affb79c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/prefectural-income-growth-rate-h23",
+      "channel": "web",
+      "key": "prefectural-income-growth-rate-h23",
+      "title": "県民所得対前年増加率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/prefectural-income-growth-rate-h23",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0c88aecc9fe38a4fcf3f9e7bd90f653e62a5e601a231bd338496734f70462352",
+      "catalogBasis": "0c88aecc9fe38a4fcf3f9e7bd90f653e62a5e601a231bd338496734f70462352",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.svg",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.svg",
+        "sha256": "4f62ef550b03dc00040cf783a33bc16fb87cd9e664c26824fb80f207618079d4",
+        "bytes": 6745
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "sha256": "8aeb70cfec801d079f92788c0e8eddd1c4dbc207b41c8d8a32a2c572ad0e7e84",
+          "bytes": 14901,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart-precipitation-days-top5-bottom5.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.json",
+          "sha256": "0fa79c82b9356092f0be2c4d7a813b2adf6a6f95a440c38863e5297a4a223d06",
+          "bytes": 6636,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart-precipitation-days-top5-bottom5.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.source.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.source.json",
+          "sha256": "5f5b5cd813b5ce393410ced644752f1fa4dab9f11981d48b8056d91e1d0a1a6d",
+          "bytes": 906,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-days-top5-bottom5.svg",
+          "alt": "年間降水日数 上位5・下位5 (2024年)",
+          "heading": "年間降水日数ランキング｜北陸・東北が「しとしと型」の実態",
+          "line": 51
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-precipitation-days/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation-days/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.svg",
+        "sha256": "46e90a333b0594813b99675fe4335ab3154a48b42a9e8cda80a00a39b0cc9837",
+        "bytes": 11080
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "sha256": "8aeb70cfec801d079f92788c0e8eddd1c4dbc207b41c8d8a32a2c572ad0e7e84",
+          "bytes": 14901,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart-precipitation-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.json",
+          "sha256": "9ffa3aa2ddd7a2e557184d32df313c0f55a9170d5e89340c9de124b02f337749",
+          "bytes": 4672,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart-precipitation-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.source.json",
+          "sha256": "801c7238289bc7fc2fc0f298f4431abc875702de4d27f618a036d419ca1376a4",
+          "bytes": 1119,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-scatter.svg",
+          "alt": "年間降水量 × 降水日数 47都道府県 (2024年)",
+          "heading": "散布図で見る「集中豪雨型」vs「しとしと型」の2分類",
+          "line": 69
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-precipitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/annual-precipitation-days/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation-days/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.svg",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.svg",
+        "sha256": "ba5682a4b69821026b05d0e8291331f0abcba8ac6135f8ba49680a0ea8501af5",
+        "bytes": 6797
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/article.md",
+          "sha256": "8aeb70cfec801d079f92788c0e8eddd1c4dbc207b41c8d8a32a2c572ad0e7e84",
+          "bytes": 14901,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart-precipitation-top5-bottom5.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.json",
+          "sha256": "2b5b28f832d801c9cf79616b77df6cbac0b1e42f4037bcf2333d956b1da73dd1",
+          "bytes": 6727,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart-precipitation-top5-bottom5.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.source.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.source.json",
+          "sha256": "5ae77aaa613449e8a76a69b180f161fd50f26b47f8336866d493463868b858af",
+          "bytes": 886,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/data/chart-precipitation-top5-bottom5.svg",
+          "alt": "年間降水量 上位5・下位5 (2024年)",
+          "heading": "年間降水量ランキング｜静岡・南九州・沖縄が上位を占める理由",
+          "line": 32
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-precipitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/background.jpg",
+        "sha256": "ce1c833b80faaf11c5d7fc811c81674be213c7ddcf142769274f5bc062c99ef6",
+        "bytes": 82663
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "sha256": "e4715758f4ae74dcdc7d8ddd394d62c94d34a30edbab67303022957b9fe5c1f7",
+          "bytes": 2351,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "379da9fc03011b457e3a9a0f6e48c8604e17a4d4f3159ed4381a3582f6b61d9f",
+        "fingerprint": "07a32d117c5eb2f5f8ee4feebe37106c84d34dee25cd36af78bd7988c7dd07e1",
+        "generatedAt": "2026-08-22T05:17:17.908Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/ogp.png",
+        "sha256": "5e8055ace0ecacab67e87ff83e93643786e25b7a43a02a3b3c396a2abc3c5b1e",
+        "bytes": 479418
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "sha256": "e4715758f4ae74dcdc7d8ddd394d62c94d34a30edbab67303022957b9fe5c1f7",
+          "bytes": 2351,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "379da9fc03011b457e3a9a0f6e48c8604e17a4d4f3159ed4381a3582f6b61d9f",
+        "fingerprint": "07a32d117c5eb2f5f8ee4feebe37106c84d34dee25cd36af78bd7988c7dd07e1",
+        "generatedAt": "2026-08-22T05:17:17.908Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/thumbnail-dark.webp",
+        "sha256": "441e163c8c10905256d0045b0360ffcc7371cfbcf7c5555fb14f1bd517fac87e",
+        "bytes": 12146
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "sha256": "e4715758f4ae74dcdc7d8ddd394d62c94d34a30edbab67303022957b9fe5c1f7",
+          "bytes": 2351,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "379da9fc03011b457e3a9a0f6e48c8604e17a4d4f3159ed4381a3582f6b61d9f",
+        "fingerprint": "07a32d117c5eb2f5f8ee4feebe37106c84d34dee25cd36af78bd7988c7dd07e1",
+        "generatedAt": "2026-08-22T05:17:17.908Z"
+      }
+    },
+    {
+      "owner": "web/blog/annual-precipitation-rainy-season-gap",
+      "file": "app/blog/annual-precipitation-rainy-season-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/annual-precipitation-rainy-season-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/thumbnail-light.webp",
+        "sha256": "f7e143f6e7fbb5573cb5feaf0eca19d6540aee4b1849d810d4716432bdddc445",
+        "bytes": 24204
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/annual-precipitation-rainy-season-gap/ogp/generation.json",
+          "sha256": "e4715758f4ae74dcdc7d8ddd394d62c94d34a30edbab67303022957b9fe5c1f7",
+          "bytes": 2351,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "379da9fc03011b457e3a9a0f6e48c8604e17a4d4f3159ed4381a3582f6b61d9f",
+        "fingerprint": "07a32d117c5eb2f5f8ee4feebe37106c84d34dee25cd36af78bd7988c7dd07e1",
+        "generatedAt": "2026-08-22T05:17:17.908Z"
+      }
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.svg",
+        "sha256": "44f2aca221e69083ac64008a8252c6c06434a84a9aeb90ea93e83ba81e819458",
+        "bytes": 32434
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+          "sha256": "0791a2dea0a12d701fa6d7d5216087a44ea3863d18021c09fba24c08c9686220",
+          "bytes": 9327,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.json",
+          "sha256": "c8bcc5a3a8085c097216ac4ccac057083dbef072f6da7c404a4e153b48ba88e3",
+          "bytes": 4641,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.source.json",
+          "sha256": "26195a1cca98b0a8f967988ad6582dbd75f575372efdc399c24cc46b517c7ee5",
+          "bytes": 691,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-map.svg",
+          "alt": "消費者物価地域差指数の地理分布",
+          "heading": "地理分布で見えてくる寒冷地と大都市圏の差",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/consumer-price-difference-index-utilities/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/consumer-price-difference-index-utilities/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "d5775aa861b817f78553ab8c823a529824787c282fc6acdb62ae4932bd994701",
+        "bytes": 7064
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/article.md",
+          "sha256": "0791a2dea0a12d701fa6d7d5216087a44ea3863d18021c09fba24c08c9686220",
+          "bytes": 9327,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.json",
+          "sha256": "070e4fc72a86b88c1e2762f8777a9110f262499848713673fb354aa710634c5d",
+          "bytes": 6748,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "580c59fe5de11b9b476fdc5c611e5659b44036a7248fd210bbfb1c07aba8d640",
+          "bytes": 771,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.svg",
+          "alt": "消費者物価地域差指数の上位と下位",
+          "heading": "上位と下位に見る格差の大きさ",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/consumer-price-difference-index-utilities/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/consumer-price-difference-index-utilities/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/background.jpg",
+        "sha256": "cb0590c61030e30c781a0747c340565db5c1b026bc26f0762ae55b2bde7d1701",
+        "bytes": 100589
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "sha256": "78be426750a5457752c410844b2a333dcd9df700b3d6e27167bd5ce5d54afb98",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "590acfcbe1f3940bd0d295e1c46ea568051341653ac7752c49041299dbaa863f",
+        "fingerprint": "cfa0e3fec845496432c823eadc9a9c5b5f6e3ff5cae866cfc96841ffddaa274c",
+        "generatedAt": "2026-09-07T15:47:40.799Z"
+      }
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/ogp.png",
+        "sha256": "ba3c79d2c7bac85399871997cc2980455402b4af0e4f65f65d6a54fbb771b963",
+        "bytes": 566543
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "sha256": "78be426750a5457752c410844b2a333dcd9df700b3d6e27167bd5ce5d54afb98",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "590acfcbe1f3940bd0d295e1c46ea568051341653ac7752c49041299dbaa863f",
+        "fingerprint": "cfa0e3fec845496432c823eadc9a9c5b5f6e3ff5cae866cfc96841ffddaa274c",
+        "generatedAt": "2026-09-07T15:47:40.799Z"
+      }
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "e29bf4a50761597fe27a721dacec070d3867afc1cbfeba998b16bddcb052f8c0",
+        "bytes": 14536
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "sha256": "78be426750a5457752c410844b2a333dcd9df700b3d6e27167bd5ce5d54afb98",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "590acfcbe1f3940bd0d295e1c46ea568051341653ac7752c49041299dbaa863f",
+        "fingerprint": "cfa0e3fec845496432c823eadc9a9c5b5f6e3ff5cae866cfc96841ffddaa274c",
+        "generatedAt": "2026-09-07T15:47:40.799Z"
+      }
+    },
+    {
+      "owner": "web/blog/consumer-price-difference-index-utilities-prefecture-gap",
+      "file": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/thumbnail-light.webp",
+        "sha256": "eb6165cf20a98ace6b1b63c0ce3b2ea3dd35512c73cc130de28f50b6b1163d86",
+        "bytes": 28332
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/generation.json",
+          "sha256": "78be426750a5457752c410844b2a333dcd9df700b3d6e27167bd5ce5d54afb98",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "590acfcbe1f3940bd0d295e1c46ea568051341653ac7752c49041299dbaa863f",
+        "fingerprint": "cfa0e3fec845496432c823eadc9a9c5b5f6e3ff5cae866cfc96841ffddaa274c",
+        "generatedAt": "2026-09-07T15:47:40.799Z"
+      }
+    },
+    {
+      "owner": "web/material/351ac63fe88ebdad0ba5625a",
+      "file": "assets/area-specialty/04000/mabo-ya.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/04000/mabo-ya.webp",
+        "sha256": "cd4fcad57c3ada9319b9cbba1c39604d3e27c31f2af6f8ad03625deb07ebdf52",
+        "bytes": 42178
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/04000/mabo-ya.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b7ebb07d5e2d7a3742dfa0ad",
+      "file": "assets/area-specialty/30000/kue.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/30000/kue.webp",
+        "sha256": "ab6d5bffbe107e155255603858c44b94b8ad221bd646558f34c71e788ba94769",
+        "bytes": 35960
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/30000/kue.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/edaa22f50abadbf9c40186f3",
+      "file": "assets/blog/article-backgrounds/disaster-damage-per-person-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/disaster-damage-per-person-prefecture-gap.jpg",
+        "sha256": "6cc7f502ab5caf767b8881cf2e2ddb6f9f09a8174ff03fcebf0d0ce4b8887fc2",
+        "bytes": 85338
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/disaster-damage-per-person-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fd19843b6e74eb953f5826c8",
+      "file": "assets/blog/article-backgrounds/crab-expenditure-ranking.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/crab-expenditure-ranking.jpg",
+        "sha256": "5796150151b8de67257a3712cea7f51d1fa2ba020799949a0c686bc25f973cb8",
+        "bytes": 113226
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/crab-expenditure-ranking.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/actual-income-worker-households-per-month",
+      "file": "app/ranking/actual-income-worker-households-per-month/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/actual-income-worker-households-per-month/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/ogp/ogp.png",
+        "sha256": "0aca4592e47a7c695d69cf32814c0a3b0781642bd8489f7d353d2fd7049673a8",
+        "bytes": 56815
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/actual-income-worker-households-per-month/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/ogp/generation.json",
+          "sha256": "343d86599d6bd1645cb9d268cf01c4ad4c9b1e542deb9acc8a52d992017298c6",
+          "bytes": 997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "8348a578da4bf7d28fb01e1db959a375bff65cc01ee0b9a3d6103036dc73fed5",
+        "fingerprint": "9478b94935ed03317d2d747aaf6cd9f95aab6a09204a01ce6f5ed83fb276c160",
+        "generatedAt": "2026-10-10T21:31:58.741Z"
+      }
+    },
+    {
+      "owner": "web/ranking/actual-income-worker-households-per-month",
+      "file": "app/ranking/actual-income-worker-households-per-month/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/actual-income-worker-households-per-month/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/thumbnail-dark.webp",
+        "sha256": "0edc2bfd8645d7325559f3b5a7cef40d1336267f536d872c64e0c0346c5afca8",
+        "bytes": 14222
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/actual-income-worker-households-per-month/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/thumbnail.json",
+          "sha256": "22462f502b78943f59086a73b00d008497ca1a0cc68da91751c435e7fb345d56",
+          "bytes": 1922,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "01771bf54f546e1fe454d4f4abb36d76853c47cce7b5b85f5f69d9c8ccbb8346",
+        "fingerprint": "f8eb2a74c0b24ca6d5a5ce5459644e93ee2588174564279ab9e40426de4f0b68",
+        "generatedAt": "2026-10-10T21:49:56.717Z"
+      }
+    },
+    {
+      "owner": "web/ranking/actual-income-worker-households-per-month",
+      "file": "app/ranking/actual-income-worker-households-per-month/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/actual-income-worker-households-per-month/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/thumbnail-light.webp",
+        "sha256": "3f4fb56d067b3df6fb21e7c69dcd08be24199c341f71556f6ff3a3bf80e99096",
+        "bytes": 12458
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/actual-income-worker-households-per-month/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/thumbnail.json",
+          "sha256": "22462f502b78943f59086a73b00d008497ca1a0cc68da91751c435e7fb345d56",
+          "bytes": 1922,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/actual-income-worker-households-per-month/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/actual-income-worker-households-per-month/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "01771bf54f546e1fe454d4f4abb36d76853c47cce7b5b85f5f69d9c8ccbb8346",
+        "fingerprint": "f8eb2a74c0b24ca6d5a5ce5459644e93ee2588174564279ab9e40426de4f0b68",
+        "generatedAt": "2026-10-10T21:49:56.717Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gross-prefectural-income-growth-rate-real-h17",
+      "file": "app/ranking/gross-prefectural-income-growth-rate-real-h17/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/ogp/ogp.png",
+        "sha256": "850ce9e7f975d631e4ff7a9c4ee4431eadf3c2f98bb8a4eaf7c5d76f152a7938",
+        "bytes": 61390
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/ogp/generation.json",
+          "sha256": "974da5819d9777f85dc8af374445c59b2047d4529c7d0f194441c61f76b05096",
+          "bytes": 1013,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "d7d22a46167c828e561364221cf5c99b8135b8fc50578ccd610400bc58e895c0",
+        "fingerprint": "ac2e71e55a8fc13df4242c0ca82ef648dfbbb47bc14a430d01d6f079a49ea493",
+        "generatedAt": "2026-10-01T18:11:17.766Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gross-prefectural-income-growth-rate-real-h17",
+      "file": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-dark.webp",
+        "sha256": "343b0972de623db8b24a3b32d2eda23fba71c2513dd2bb40419975ecc542a1b1",
+        "bytes": 16796
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail.json",
+          "sha256": "302e181fe6e94efe73f9b2fa3685a8e8fed081ed068a7c5d12fb7c922eefe44d",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "42bc1c9532e391b38a2b6cf04c3f42bd703492dbd1efc09a171edfa603f397a3",
+        "fingerprint": "7d332aa204fdaa55d6c0d5813909fc8b8d81f98b0e7199eb8babe6f402464c5e",
+        "generatedAt": "2026-10-01T18:35:57.592Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gross-prefectural-income-growth-rate-real-h17",
+      "file": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail-light.webp",
+        "sha256": "0d62a037ea47e0acab38a1ff555277068f64eeb001a09325e3fe41b12677f9d1",
+        "bytes": 14588
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/thumbnail.json",
+          "sha256": "302e181fe6e94efe73f9b2fa3685a8e8fed081ed068a7c5d12fb7c922eefe44d",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gross-prefectural-income-growth-rate-real-h17/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "42bc1c9532e391b38a2b6cf04c3f42bd703492dbd1efc09a171edfa603f397a3",
+        "fingerprint": "7d332aa204fdaa55d6c0d5813909fc8b8d81f98b0e7199eb8babe6f402464c5e",
+        "generatedAt": "2026-10-01T18:35:57.592Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-writing",
+      "file": "app/ranking/hobby-participation-rate-writing/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-writing/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/ogp/ogp.png",
+        "sha256": "ec0b6eda1286fd3653c98cfda4e0a42803089a4d8b300b2c54333f51bdf51a55",
+        "bytes": 65946
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-writing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/ogp/generation.json",
+          "sha256": "79b0496533c060edf6cb38e19f1af1ba0b0a8f8d099ffce9e4b2cfedb369df53",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "e7427d031edc1e1f2ab38a619c39ce45cebe17474340e0dcb9a0857f2e0c18e9",
+        "fingerprint": "6c2735046613ae0cbffaa1aea2ff0cb5274f91cf98a73c3af6259c8bd60f18f1",
+        "generatedAt": "2026-10-01T18:11:32.978Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-writing",
+      "file": "app/ranking/hobby-participation-rate-writing/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-writing/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/thumbnail-dark.webp",
+        "sha256": "0413e26537b586911343655d54f8bfb4666b1d6ab55cab0b2eb9e7218c5e94ea",
+        "bytes": 20088
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-writing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/thumbnail.json",
+          "sha256": "6507a89fbd1b38a28c9595b2ea77c5c08c365ef03849c98606b7991ed0a73171",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "40b644256c0a082c77c6a06dfbd0bd64db849abb71bdec13a2464b24d1830094",
+        "fingerprint": "e5aabb5eec8d48cf6379e4a8c2840f8ca8c6f4f99c800e64543db393d5574c1e",
+        "generatedAt": "2026-10-01T18:36:01.513Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-writing",
+      "file": "app/ranking/hobby-participation-rate-writing/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-writing/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/thumbnail-light.webp",
+        "sha256": "df04489d142b2e337eec9b4307b683046f72afd139a358090ab6409d8ef0a1ef",
+        "bytes": 18442
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-writing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/thumbnail.json",
+          "sha256": "6507a89fbd1b38a28c9595b2ea77c5c08c365ef03849c98606b7991ed0a73171",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-writing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-writing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "40b644256c0a082c77c6a06dfbd0bd64db849abb71bdec13a2464b24d1830094",
+        "fingerprint": "e5aabb5eec8d48cf6379e4a8c2840f8ca8c6f4f99c800e64543db393d5574c1e",
+        "generatedAt": "2026-10-01T18:36:01.513Z"
+      }
+    },
+    {
+      "owner": "web/ranking/net-decrease-rate-land-house-loans-worker-households",
+      "file": "app/ranking/net-decrease-rate-land-house-loans-worker-households/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/ogp/ogp.png",
+        "sha256": "e7ff85de601140c3b6cec83a24f03b01ea249a39a3ffa01c069128232f540084",
+        "bytes": 61139
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/ogp/generation.json",
+          "sha256": "35cf433e6d2a394f620830b8cdf7e3b72c3be25a5ae07ec781eba39f3294d021",
+          "bytes": 1041,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "4b108fd724e9f11086b2b648a52a0b10481f618b42460e2ac3b63dd4cf96bf8f",
+        "fingerprint": "1dce726ce1eb435072e90998d34100dfe0e0f693824931ac66474c0de2d5f8fa",
+        "generatedAt": "2026-10-03T21:00:13.665Z"
+      }
+    },
+    {
+      "owner": "web/ranking/net-decrease-rate-land-house-loans-worker-households",
+      "file": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-dark.webp",
+        "sha256": "c8c2128483d3568581614975209def7dd0225212b9c009f4968c3694dd52748f",
+        "bytes": 16038
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail.json",
+          "sha256": "a4f6cb1897d9d5c519925285921c40449725d982c58f102d7106103e832144bf",
+          "bytes": 2042,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "34781537fa67f1b85376ad3d2885c0d76375ea757c1a72fd2b10f7b601322998",
+        "fingerprint": "d19036e0ea759d931537205bdc4b9fec4618758dc1cc1030387d4dfab4a05b05",
+        "generatedAt": "2026-10-03T21:25:31.002Z"
+      }
+    },
+    {
+      "owner": "web/ranking/net-decrease-rate-land-house-loans-worker-households",
+      "file": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail-light.webp",
+        "sha256": "e0a1776020c0a005a9d2763e2a9e1f8422aa878deb43b79a35c5e33408ee8ac7",
+        "bytes": 14160
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/thumbnail.json",
+          "sha256": "a4f6cb1897d9d5c519925285921c40449725d982c58f102d7106103e832144bf",
+          "bytes": 2042,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/net-decrease-rate-land-house-loans-worker-households/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "34781537fa67f1b85376ad3d2885c0d76375ea757c1a72fd2b10f7b601322998",
+        "fingerprint": "d19036e0ea759d931537205bdc4b9fec4618758dc1cc1030387d4dfab4a05b05",
+        "generatedAt": "2026-10-03T21:25:31.002Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-leafy-vegetables-consumption-quantity",
+      "file": "app/ranking/other-leafy-vegetables-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-leafy-vegetables-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/ogp/ogp.png",
+        "sha256": "ebf6cd2b64ab35f2caebe9ce5cd350bda778318f58d4e804c5aebd4a84a1066c",
+        "bytes": 60257
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-leafy-vegetables-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/ogp/generation.json",
+          "sha256": "aaa4aa83ffdd49dda381e4403e9f9c7d39c1357cc30ffe9f2852f96f8efa02fd",
+          "bytes": 1005,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "2cf40cd0dc8f13a4821e7c3251da0598a841a5387e7bc70746cf7de948625551",
+        "fingerprint": "5b408e3484742d708bd426278ff8d96d03d76d21b9f3343bef763f9f0590748f",
+        "generatedAt": "2026-10-03T21:00:37.628Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-leafy-vegetables-consumption-quantity",
+      "file": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "8a1e8897bfbf1aa739607ca8f745c5ad4d9568b58ee994259412fabf4e859d72",
+        "bytes": 16570
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail.json",
+          "sha256": "dc0b3e0cb36a8978ae9fc7b6b844ae2aef07f612c94e847cf1ccde7a2477cdc5",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "98e7ece59742a9166194ec30fc27b878deca863f24e6153f94d073b38b7470da",
+        "fingerprint": "271ae0b10bae2dd4d3691f9a599a4db24d5972b9e90ca31aea34180c097e3cfe",
+        "generatedAt": "2026-10-03T21:25:37.228Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-leafy-vegetables-consumption-quantity",
+      "file": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail-light.webp",
+        "sha256": "e75dee16eb023b86d4195fc53df67410af486ad26e905325af2aafb72d66c715",
+        "bytes": 15126
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/thumbnail.json",
+          "sha256": "dc0b3e0cb36a8978ae9fc7b6b844ae2aef07f612c94e847cf1ccde7a2477cdc5",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-leafy-vegetables-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "98e7ece59742a9166194ec30fc27b878deca863f24e6153f94d073b38b7470da",
+        "fingerprint": "271ae0b10bae2dd4d3691f9a599a4db24d5972b9e90ca31aea34180c097e3cfe",
+        "generatedAt": "2026-10-03T21:25:37.228Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-root-vegetables-consumption-expenditure",
+      "file": "app/ranking/other-root-vegetables-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-root-vegetables-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/ogp/ogp.png",
+        "sha256": "10c3d6ffa318369376b77674d32c21829ec299d864c54609069a3be2cc954f12",
+        "bytes": 60395
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-root-vegetables-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/ogp/generation.json",
+          "sha256": "4daaa6bca4bf0f78b48ef2248b695fa9a2fabb8002f5c9e90249f69cad6a73b2",
+          "bytes": 1013,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "f4deb579c203b0bce94cb218965a95de19c5332973a109d241f3173daccc6c2e",
+        "fingerprint": "629a0931acd9c75fc6aec2f1c6d713bccdb0699b4f4f15aeec669f4362ce3bb3",
+        "generatedAt": "2026-10-03T21:00:41.823Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-root-vegetables-consumption-expenditure",
+      "file": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "4313ab5c5521e72cf9c1810b848650ec05cc7acbfe93af28c803f20835aba2c4",
+        "bytes": 17032
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/thumbnail.json",
+          "sha256": "b783717e74fedf9a50a99bdbd3988a4caf1d8efb544fbe0b23621df48da370bc",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9cc1786c46b2dd3d8e8e690dbb571939b34d24548206e1de0e3460ee126d5cda",
+        "fingerprint": "ee0d5bdb1d652658e2ad528c8b07a7b1bad3c57a072db7fbb4866f82138217d9",
+        "generatedAt": "2026-10-03T21:25:38.385Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-root-vegetables-consumption-expenditure",
+      "file": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "7aa5016c8678488d5e703de6080667ea70ef04302cdc4ecc8b86b6d439508bee",
+        "bytes": 15510
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-root-vegetables-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/thumbnail.json",
+          "sha256": "b783717e74fedf9a50a99bdbd3988a4caf1d8efb544fbe0b23621df48da370bc",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-root-vegetables-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9cc1786c46b2dd3d8e8e690dbb571939b34d24548206e1de0e3460ee126d5cda",
+        "fingerprint": "ee0d5bdb1d652658e2ad528c8b07a7b1bad3c57a072db7fbb4866f82138217d9",
+        "generatedAt": "2026-10-03T21:25:38.385Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pickled-daikon-consumption-expenditure",
+      "file": "app/ranking/pickled-daikon-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pickled-daikon-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/ogp/ogp.png",
+        "sha256": "91b7c0de7ebcf5fad7f57c13fdc7ff31674ce6c372731b363fa8aaad56536617",
+        "bytes": 77491
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pickled-daikon-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/ogp/generation.json",
+          "sha256": "b137e60b0ffca72cae881fdc5dd01b53cfe81aa094785e176e07c39092a494cd",
+          "bytes": 985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "94b828f7383737dea69f6326a8a5f1ceea7215ff47c8754712b7a55b52668c56",
+        "fingerprint": "a748ca3cac1b7d1a4cf13da493b184013dd424dbfefd16447a17385452fb4d46",
+        "generatedAt": "2026-08-15T18:42:19.750Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pickled-daikon-consumption-expenditure",
+      "file": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "7dcddf332a1018137d8703d1755f40fb6dfbc2526adda6f8dab2082ca6a6e72e",
+        "bytes": 16848
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/thumbnail.json",
+          "sha256": "db0a5d12ab51e0a77c46be43fe4483b9d5660ba630a127af9d94ff910ad54578",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1d9b3874b7f8646f1fe989e651c41e719234946d4ef5de0540c2db7261b089e7",
+        "fingerprint": "a059c2b99d142304379b4c94efd57fd97026be421aab104a210da8aae8649842",
+        "generatedAt": "2026-08-15T18:58:38.477Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pickled-daikon-consumption-expenditure",
+      "file": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "ab5252a3a67bf9c900f3323c4a10acc049e2d9a4031cca422dc6538d64af64cc",
+        "bytes": 15352
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pickled-daikon-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/thumbnail.json",
+          "sha256": "db0a5d12ab51e0a77c46be43fe4483b9d5660ba630a127af9d94ff910ad54578",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pickled-daikon-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "1d9b3874b7f8646f1fe989e651c41e719234946d4ef5de0540c2db7261b089e7",
+        "fingerprint": "a059c2b99d142304379b4c94efd57fd97026be421aab104a210da8aae8649842",
+        "generatedAt": "2026-08-15T18:58:38.477Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-income-growth-rate-h23",
+      "file": "app/ranking/prefectural-income-growth-rate-h23/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-income-growth-rate-h23/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/ogp/ogp.png",
+        "sha256": "45a3e4f5c3a548ee31e59b05c5fcf952200f40280efd8f45594b664877efccbb",
+        "bytes": 77099
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-income-growth-rate-h23/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/ogp/generation.json",
+          "sha256": "2730ae4fe9c201de4abf813d1adf751c3422b365996395a1ca574c2e1b735387",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c61768035c7bacb0fd2ba7a66f565c3e06aea1c1f037a2b4b79c763156508734",
+        "fingerprint": "43815afa6a9d620c487e0447855fb6680373dfc01c77c0ffb248981aa2c3bf35",
+        "generatedAt": "2026-08-15T18:42:24.421Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-income-growth-rate-h23",
+      "file": "app/ranking/prefectural-income-growth-rate-h23/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-income-growth-rate-h23/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/thumbnail-dark.webp",
+        "sha256": "20dd487bd1392806ba99091afcb844ff15efaab1db396ae4758c25f18c3603d7",
+        "bytes": 16232
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-income-growth-rate-h23/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/thumbnail.json",
+          "sha256": "7c7a53e2e259bdb0f1625aef5c9cd50f4cf27dc011da89c75833ca10173f0c4c",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "08016dc23bed5673668adaeedfc981100da896f158c9a67f73770abf26b40bc0",
+        "fingerprint": "5fa897830263873059acf28ba31290929f38deaa29826d6834ab3c6c0bb02950",
+        "generatedAt": "2026-08-15T18:58:40.504Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-income-growth-rate-h23",
+      "file": "app/ranking/prefectural-income-growth-rate-h23/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-income-growth-rate-h23/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/thumbnail-light.webp",
+        "sha256": "110dec783681e9c4aefdd78a313564c5a981517ffd3526983c78e0d65a49c9a8",
+        "bytes": 13980
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-income-growth-rate-h23/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/thumbnail.json",
+          "sha256": "7c7a53e2e259bdb0f1625aef5c9cd50f4cf27dc011da89c75833ca10173f0c4c",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-income-growth-rate-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "08016dc23bed5673668adaeedfc981100da896f158c9a67f73770abf26b40bc0",
+        "fingerprint": "5fa897830263873059acf28ba31290929f38deaa29826d6834ab3c6c0bb02950",
+        "generatedAt": "2026-08-15T18:58:40.504Z"
+      }
+    }
+  ]
+}

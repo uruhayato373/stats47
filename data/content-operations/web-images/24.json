@@ -1,0 +1,1299 @@
+{
+  "items": [
+    {
+      "id": "web/material/2bf2ce839db8e3d0c4e6d20c",
+      "channel": "web",
+      "key": "assets/area-specialty/21000/kobo-imo.webp",
+      "title": "kobo-imo.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "104de795d1836d411a6356a1656c93499407cf48ccd3dbd3ad9bfb8c2897e99f"
+    },
+    {
+      "id": "web/material/79d3e253c47a5ad3b48487fe",
+      "channel": "web",
+      "key": "assets/area-specialty/40000/ouma-takenoko.webp",
+      "title": "ouma-takenoko.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "19dac259dc6cc43a75313a0abb793ed3c995f140de8d2f2fff4fb4da26696f44"
+    },
+    {
+      "id": "web/material/815346f99f8f071a71ca65cd",
+      "channel": "web",
+      "key": "apps/web/public/images/category-administrativefinancial-hero.webp",
+      "title": "category-administrativefinancial-hero.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "836c9081da57c71a5a4e82e1449b93c61b00157dbe5f92c018d28711bacba936"
+    },
+    {
+      "id": "web/material/d0c9508f958c0ddc3d787e86",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/shimane-food-culture.jpg",
+      "title": "shimane-food-culture.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1dcff8575c3de814e04c651b6ef9d8837a9ee142a789da2b175c1820fc4729e7"
+    },
+    {
+      "id": "web/material/dc3e76fb288091e10e2c3dd8",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/minimum-wage-1000yen-prefecture.jpg",
+      "title": "minimum-wage-1000yen-prefecture.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b2bc77a01b4dfff640e1bd36a05051ebfe88770c0957bb9c8ed0ecd9ec70f6c0"
+    },
+    {
+      "id": "web/material/eee641a3f86443bc9acca9f0",
+      "channel": "web",
+      "key": "assets/area-specialty/44000/toyonohoshi.webp",
+      "title": "toyonohoshi.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1baf4344a2c8948c1a058025fcd5d67a5564d6f4edf1802ed8d0f4c4246e960d"
+    },
+    {
+      "id": "web/product/kindle-k-s1-02",
+      "channel": "web",
+      "key": "kindle-k-s1-02",
+      "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+      "category": "product",
+      "status": "published",
+      "url": "https://stats47.jp/products/kindle-k-s1-02",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c677c8a9448d559cdd695b77495bd1008870a34994d8755346a25b4ebb621fff",
+      "catalogBasis": "c677c8a9448d559cdd695b77495bd1008870a34994d8755346a25b4ebb621fff",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/average-life-expectancy-female-65",
+      "channel": "web",
+      "key": "average-life-expectancy-female-65",
+      "title": "平均余命",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/average-life-expectancy-female-65",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4b8ae091e4996d4a53629cb7d9e642ede4d4d728cf9000b47b45beb4ae46db23",
+      "catalogBasis": "4b8ae091e4996d4a53629cb7d9e642ede4d4d728cf9000b47b45beb4ae46db23",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/business-closure-establishments",
+      "channel": "web",
+      "key": "business-closure-establishments",
+      "title": "保険関係消滅事業所数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/business-closure-establishments",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "86d550eace9d0bf266320152f8df3a6175ff419ed8f051d76fca642bbea7ba9a",
+      "catalogBasis": "86d550eace9d0bf266320152f8df3a6175ff419ed8f051d76fca642bbea7ba9a",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/establishment-ratio-5-9-employees-private",
+      "channel": "web",
+      "key": "establishment-ratio-5-9-employees-private",
+      "title": "従業者5～9人の事業所割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/establishment-ratio-5-9-employees-private",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c2453eb34943c823614c909d8e564323451f1853cac841b770a09ba4940e92c1",
+      "catalogBasis": "c2453eb34943c823614c909d8e564323451f1853cac841b770a09ba4940e92c1",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/k6-score10plus-rate-12plus",
+      "channel": "web",
+      "key": "k6-score10plus-rate-12plus",
+      "title": "K6が10点以上の人の割合（12歳以上）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/k6-score10plus-rate-12plus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d20ab31b251058bad52187edbfba9c139828c04f985f8f75a976ade80c371dda",
+      "catalogBasis": "d20ab31b251058bad52187edbfba9c139828c04f985f8f75a976ade80c371dda",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/nurse-salary",
+      "channel": "web",
+      "key": "nurse-salary",
+      "title": "看護師の所定内給与（月額）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/nurse-salary",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6aaa15ab9fc1a8f6630642ede9a888c52c2761a3dce0275227a68462f9647b40",
+      "catalogBasis": "6aaa15ab9fc1a8f6630642ede9a888c52c2761a3dce0275227a68462f9647b40",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/occupational-accident-frequency-rate",
+      "channel": "web",
+      "key": "occupational-accident-frequency-rate",
+      "title": "労働災害度数率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/occupational-accident-frequency-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "052bb94a89d755188755e1f65309d4953c44e35d1a0dd09628d8d7d478370af1",
+      "catalogBasis": "052bb94a89d755188755e1f65309d4953c44e35d1a0dd09628d8d7d478370af1",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/2bf2ce839db8e3d0c4e6d20c",
+      "file": "assets/area-specialty/21000/kobo-imo.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/21000/kobo-imo.webp",
+        "sha256": "2608832dde8f71fbf3ed48b350b1129bbb00c91c55de96644b20c0cde37ffd4f",
+        "bytes": 34156
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/21000/kobo-imo.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/79d3e253c47a5ad3b48487fe",
+      "file": "assets/area-specialty/40000/ouma-takenoko.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/40000/ouma-takenoko.webp",
+        "sha256": "87f729dd1c730931043a2c83f59d2c756f88b53f8b164dcbb07dbee6d88a330c",
+        "bytes": 23530
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/40000/ouma-takenoko.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/815346f99f8f071a71ca65cd",
+      "file": "apps/web/public/images/category-administrativefinancial-hero.webp",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/category-administrativefinancial-hero.webp",
+        "url": "https://stats47.jp/images/category-administrativefinancial-hero.webp",
+        "sha256": "a02899f718585b2d2e437e270cfd3b313fbf70b94a21420422f350c0b123fbaf",
+        "bytes": 13120
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/category-administrativefinancial-hero.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d0c9508f958c0ddc3d787e86",
+      "file": "assets/blog/article-backgrounds/shimane-food-culture.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/shimane-food-culture.jpg",
+        "sha256": "d1e46b62f7bfaa0d56a89c37673fd8beb78a8437c29fa1411a47fa347e8b413f",
+        "bytes": 108754
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/shimane-food-culture.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/dc3e76fb288091e10e2c3dd8",
+      "file": "assets/blog/article-backgrounds/minimum-wage-1000yen-prefecture.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/minimum-wage-1000yen-prefecture.jpg",
+        "sha256": "4496b74fe8bb7652acf3869fc6688ffb2945ec81a0ad9291cd04d35e113789fa",
+        "bytes": 76593
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/minimum-wage-1000yen-prefecture.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/eee641a3f86443bc9acca9f0",
+      "file": "assets/area-specialty/44000/toyonohoshi.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/44000/toyonohoshi.webp",
+        "sha256": "e4c8dcb1cf41fd92c84b815226faaf83e982f88d6184f439f61bd567bcdb5db4",
+        "bytes": 23222
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/44000/toyonohoshi.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/product/kindle-k-s1-02",
+      "file": "app/products/kindle-k-s1-02/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/products/kindle-k-s1-02/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png",
+        "sha256": "e91304a60b48cfbcf178c231ba4fabf435a6c0f1f3056a2d34c23a1bd764f460",
+        "bytes": 894625
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/products/kindle-k-s1-02/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/generation.json",
+          "sha256": "f5d919305abf0163e9f563be70a2406ca50db62026e18eac8d21dc171c079f60",
+          "bytes": 820,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "product-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "product-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "735c7a32837d7fbb94dfedbdc95b775376fb98700779c8aa97585ff454ba6e05",
+        "inputHash": "45e0f452a5e6325b419cf24bc719aafe72bea7484150ee13a426af8bbaf06b47",
+        "fingerprint": "0ebc60d7e5e7da60b9b8cbefc62d62487edf61105dd97b738a72b90883de772b",
+        "generatedAt": "2026-09-14T22:25:50.815Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-65",
+      "file": "app/ranking/average-life-expectancy-female-65/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-65/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/ogp/ogp.png",
+        "sha256": "be5c3f55d3b8b4b0a6166b5ac1d61aa749b278e942f613abad1f86bcf2000237",
+        "bytes": 57598
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-65/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/ogp/generation.json",
+          "sha256": "c2fb38c2491e579b04d55b3d6b5b355f972564b61f3442af9223bf9abaa7b3b5",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "f0503b905a1b71d925b0e2b33a6ae7724734874f7668629c979a85fb27a73d73",
+        "fingerprint": "374b42676c846d20b9a0c5dbd30bb0be1238f1b604eb13c4a3f810c319075837",
+        "generatedAt": "2026-10-10T21:32:10.565Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-65",
+      "file": "app/ranking/average-life-expectancy-female-65/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-65/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/thumbnail-dark.webp",
+        "sha256": "953023986559638cac0da0a152f21be20de03fc4b1e5bb10b5c0e1ea10781217",
+        "bytes": 14256
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-65/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/thumbnail.json",
+          "sha256": "deee3eaf4beae2328ead284d8442b18de7160b61f443323f6db22afb737834dc",
+          "bytes": 1850,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "08f87d26ee0a7abc59580114c69a47edf9a5a99cb860f674de816390c53df3ca",
+        "fingerprint": "657cc27e91d0513b6951a5bb7f8cdb8821745fb717a075c4e886ffbc451a801b",
+        "generatedAt": "2026-10-10T21:49:59.905Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-65",
+      "file": "app/ranking/average-life-expectancy-female-65/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-65/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/thumbnail-light.webp",
+        "sha256": "81f6871d3b6284dad066d4d21fe407b4d3d8966df7fc9e4feaf096a5439609e1",
+        "bytes": 12540
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-65/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/thumbnail.json",
+          "sha256": "deee3eaf4beae2328ead284d8442b18de7160b61f443323f6db22afb737834dc",
+          "bytes": 1850,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-65/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-65/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "08f87d26ee0a7abc59580114c69a47edf9a5a99cb860f674de816390c53df3ca",
+        "fingerprint": "657cc27e91d0513b6951a5bb7f8cdb8821745fb717a075c4e886ffbc451a801b",
+        "generatedAt": "2026-10-10T21:49:59.905Z"
+      }
+    },
+    {
+      "owner": "web/ranking/business-closure-establishments",
+      "file": "app/ranking/business-closure-establishments/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/business-closure-establishments/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/ogp/ogp.png",
+        "sha256": "c28d8d36056f38a57bda15f908b51b34b4c16379da61ccbcf252ce3406e64716",
+        "bytes": 66057
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/business-closure-establishments/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/ogp/generation.json",
+          "sha256": "4076a2a3396b8cf55ea3e163cc00b39c7d384f84683ba9a5aaf74d66819321c4",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/business-closure-establishments/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/business-closure-establishments/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "6884bbed9db2873c13f33ee5faa1de635a60e3120ed7cc9b87f31979cba74aa1",
+        "fingerprint": "7a13142576a793b772c8325a5d8e651769d7ae5434d5cb3cac3ed9b6e68d0322",
+        "generatedAt": "2026-10-10T21:32:25.157Z"
+      }
+    },
+    {
+      "owner": "web/ranking/business-closure-establishments",
+      "file": "app/ranking/business-closure-establishments/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/business-closure-establishments/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/thumbnail-dark.webp",
+        "sha256": "a870245352e6caac5c1fc22688a729ad50984a83916e4b711a8157c7921ce668",
+        "bytes": 18260
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/business-closure-establishments/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/thumbnail.json",
+          "sha256": "238a52340bd98bdfa1a0b1ce2a8fe6110e20cca9482430e1f3e6a749b25d1c73",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/business-closure-establishments/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/business-closure-establishments/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0da3998a6b23e062aeb82df9571b9180c350b9e8aeeb66a52cfc4645510cee55",
+        "fingerprint": "812cdf2101a21af05d33540b24c485898872dfcca1d4f1189dac0c8847074fb1",
+        "generatedAt": "2026-10-10T21:50:03.676Z"
+      }
+    },
+    {
+      "owner": "web/ranking/business-closure-establishments",
+      "file": "app/ranking/business-closure-establishments/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/business-closure-establishments/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/thumbnail-light.webp",
+        "sha256": "96641498635ece7027b3e1fbfd2cceb985b1f88a7052000499e6ff019c64b743",
+        "bytes": 16980
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/business-closure-establishments/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/thumbnail.json",
+          "sha256": "238a52340bd98bdfa1a0b1ce2a8fe6110e20cca9482430e1f3e6a749b25d1c73",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/business-closure-establishments/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/business-closure-establishments/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/business-closure-establishments/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0da3998a6b23e062aeb82df9571b9180c350b9e8aeeb66a52cfc4645510cee55",
+        "fingerprint": "812cdf2101a21af05d33540b24c485898872dfcca1d4f1189dac0c8847074fb1",
+        "generatedAt": "2026-10-10T21:50:03.676Z"
+      }
+    },
+    {
+      "owner": "web/ranking/establishment-ratio-5-9-employees-private",
+      "file": "app/ranking/establishment-ratio-5-9-employees-private/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/establishment-ratio-5-9-employees-private/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/ogp/ogp.png",
+        "sha256": "96b20d17ecc122bea47859d7fed51637f746aba9cb5a0028c06cece146a2fe70",
+        "bytes": 64411
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/establishment-ratio-5-9-employees-private/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/ogp/generation.json",
+          "sha256": "392708f4e18fce886cec9c9194dfbd90a2a0d2bf7b4afacb96a768271806c02a",
+          "bytes": 997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "68d7e9861a8a3ccefd26d2c5949dd21dfb97085ba2c1e32dbbb945cf366c4bc2",
+        "fingerprint": "67c57309ccc6481533bb4595fe7f72d4107366f0a2e0a8c049436dca18efd232",
+        "generatedAt": "2026-10-01T18:10:39.493Z"
+      }
+    },
+    {
+      "owner": "web/ranking/establishment-ratio-5-9-employees-private",
+      "file": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/thumbnail-dark.webp",
+        "sha256": "96bd7aada276395f637f591d882285529218813029aff79e6ad6086a609f727b",
+        "bytes": 17936
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/thumbnail.json",
+          "sha256": "01d5dbdd7a0b2e4f0976c7df93f1f47614534106bb8acca12f2e3c0abb9e89a5",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b6111bc4ee0948a949b9eddb7415bb72536b0dc8fab57b942013f091ff05207b",
+        "fingerprint": "d569ceb6871da29f183e6d4d54b5c2d0c304e80ff5ebad13a5f23cdd41aac64b",
+        "generatedAt": "2026-10-01T18:35:47.485Z"
+      }
+    },
+    {
+      "owner": "web/ranking/establishment-ratio-5-9-employees-private",
+      "file": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/thumbnail-light.webp",
+        "sha256": "135859b81d76f8a2d10ca6c46b05201dfb06fad442998b9e1b386e2a5de0b453",
+        "bytes": 16596
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/establishment-ratio-5-9-employees-private/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/thumbnail.json",
+          "sha256": "01d5dbdd7a0b2e4f0976c7df93f1f47614534106bb8acca12f2e3c0abb9e89a5",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/establishment-ratio-5-9-employees-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b6111bc4ee0948a949b9eddb7415bb72536b0dc8fab57b942013f091ff05207b",
+        "fingerprint": "d569ceb6871da29f183e6d4d54b5c2d0c304e80ff5ebad13a5f23cdd41aac64b",
+        "generatedAt": "2026-10-01T18:35:47.485Z"
+      }
+    },
+    {
+      "owner": "web/ranking/k6-score10plus-rate-12plus",
+      "file": "app/ranking/k6-score10plus-rate-12plus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/k6-score10plus-rate-12plus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/ogp/ogp.png",
+        "sha256": "49d935732ebb4ce09e9b876d4cb296776017d415ecd8ffab48641beb9911cc20",
+        "bytes": 74684
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/k6-score10plus-rate-12plus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/ogp/generation.json",
+          "sha256": "8310a0517d04a1471831ced138617e86a82dc7162127870d64b38e1f7d26a5fd",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "55c707a61a87deed8e821d67e627dbade5563491c97886e55eb11adc4024fcf7",
+        "fingerprint": "2470ec3540dcbfe4be78b50d4fcbe664e4cc1ef279285819a54ccd70bb5ff501",
+        "generatedAt": "2026-10-03T20:59:30.574Z"
+      }
+    },
+    {
+      "owner": "web/ranking/k6-score10plus-rate-12plus",
+      "file": "app/ranking/k6-score10plus-rate-12plus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/k6-score10plus-rate-12plus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/thumbnail-dark.webp",
+        "sha256": "92488643a8d28f27fe5161434764cd58bc2e986e316236311be1efc863c96d3c",
+        "bytes": 20014
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/k6-score10plus-rate-12plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/thumbnail.json",
+          "sha256": "2dcf265a37db693bb6fef16e576dc713ff6526abf8996eff3a127b594db57eb9",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "19c67090f50d63e19a2baae50d155232c7b15d2a596449e7b936d32def5c1995",
+        "fingerprint": "071c3764d767b4701caf16e48e7ece689061ed2266f3e42bf27935ea47a6894a",
+        "generatedAt": "2026-10-03T21:25:19.665Z"
+      }
+    },
+    {
+      "owner": "web/ranking/k6-score10plus-rate-12plus",
+      "file": "app/ranking/k6-score10plus-rate-12plus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/k6-score10plus-rate-12plus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/thumbnail-light.webp",
+        "sha256": "d174ca0fb033ea9e81ded4c5b30c1d17d44841df06eab20a571bc2348e57ad23",
+        "bytes": 18318
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/k6-score10plus-rate-12plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/thumbnail.json",
+          "sha256": "2dcf265a37db693bb6fef16e576dc713ff6526abf8996eff3a127b594db57eb9",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/k6-score10plus-rate-12plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/k6-score10plus-rate-12plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "19c67090f50d63e19a2baae50d155232c7b15d2a596449e7b936d32def5c1995",
+        "fingerprint": "071c3764d767b4701caf16e48e7ece689061ed2266f3e42bf27935ea47a6894a",
+        "generatedAt": "2026-10-03T21:25:19.665Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurse-salary",
+      "file": "app/ranking/nurse-salary/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurse-salary/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/nurse-salary/ogp/ogp.png",
+        "sha256": "65c3e029b526615d7be3e4ca6c214d724932210ab63e58963f3bcee01780d874",
+        "bytes": 63864
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurse-salary/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/ogp/generation.json",
+          "sha256": "ac0430a12bb7899b59bafc16d79a51d2718a2e48ba3d7d239a15e9ccb5dc6d5a",
+          "bytes": 881,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurse-salary/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurse-salary/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "69d6fe022e990f88848ecfd88b52cbe292e9bde07585f4680d5f4776f4062f03",
+        "fingerprint": "2ef02cd2ea2f0ec285251db227e5c4d978440227ba95573e034589ddc0842234",
+        "generatedAt": "2026-10-03T21:00:24.938Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurse-salary",
+      "file": "app/ranking/nurse-salary/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurse-salary/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nurse-salary/thumbnail-dark.webp",
+        "sha256": "2b6c3c9bdb9da94337e2730902dd4dd97b1baa307c3048b0889a4e8d8bf746e4",
+        "bytes": 18310
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurse-salary/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/thumbnail.json",
+          "sha256": "1b31e6494dbf4794269585984a8a8ba24a2bd18cca571dde165182451f39e0e4",
+          "bytes": 1682,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurse-salary/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurse-salary/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5625f55e20ddda1933819f207dfcc4aba8ce8d13098440e1473136b54e769157",
+        "fingerprint": "1e410310b4151419be148e378865e4a36287bf9cb6aa35f3e71a959e131e1b3a",
+        "generatedAt": "2026-10-08T00:38:11.931Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurse-salary",
+      "file": "app/ranking/nurse-salary/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurse-salary/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nurse-salary/thumbnail-light.webp",
+        "sha256": "a50ae7be1e47dfabd97f1ab1e46984322d306c0acfbd16e7c43be66f009b4264",
+        "bytes": 16636
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurse-salary/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/thumbnail.json",
+          "sha256": "1b31e6494dbf4794269585984a8a8ba24a2bd18cca571dde165182451f39e0e4",
+          "bytes": 1682,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurse-salary/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurse-salary/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurse-salary/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "5625f55e20ddda1933819f207dfcc4aba8ce8d13098440e1473136b54e769157",
+        "fingerprint": "1e410310b4151419be148e378865e4a36287bf9cb6aa35f3e71a959e131e1b3a",
+        "generatedAt": "2026-10-08T00:38:11.931Z"
+      }
+    },
+    {
+      "owner": "web/ranking/occupational-accident-frequency-rate",
+      "file": "app/ranking/occupational-accident-frequency-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/occupational-accident-frequency-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/ogp/ogp.png",
+        "sha256": "06c87bf18246393a6cc8a7df339ec8797496125946c9ce224ba939c76fcb3dd3",
+        "bytes": 64642
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/occupational-accident-frequency-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/ogp/generation.json",
+          "sha256": "0c4165c2c295a76381cf6cd376384a96dc9fa0cd93b8ef073edb53255da440cd",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "ddabeb0e5ed051ee72d80359ba0907132c8ce9425cc71598cd7c49f6e4492d5d",
+        "fingerprint": "2c174a477772d2b43c57930d2b1f57ae9d4c61be33f8b7c49961213ef757a8fc",
+        "generatedAt": "2026-10-03T21:00:27.605Z"
+      }
+    },
+    {
+      "owner": "web/ranking/occupational-accident-frequency-rate",
+      "file": "app/ranking/occupational-accident-frequency-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/occupational-accident-frequency-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/thumbnail-dark.webp",
+        "sha256": "72a84548c698ab7b15bc9d1ce4357bf8de7b761b742624655aab7fdcdf025dc9",
+        "bytes": 17812
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/occupational-accident-frequency-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/thumbnail.json",
+          "sha256": "793f15017c62cab22e27ada240ae41e24fc7da94f4e4da756ab4cfa65f392cd8",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "c705586de021c4bd6ca885256f2624c6de4044ec90b76f90e32d918737fd8bc9",
+        "fingerprint": "a880c550a995eb22d05f0ea1c3f961af06ef987882da7beb8d92dcc2c404f67f",
+        "generatedAt": "2026-10-03T21:25:34.670Z"
+      }
+    },
+    {
+      "owner": "web/ranking/occupational-accident-frequency-rate",
+      "file": "app/ranking/occupational-accident-frequency-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/occupational-accident-frequency-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/thumbnail-light.webp",
+        "sha256": "0fd0bb6024878bffdec658d1098fae3f76270e19e7705e2ed0c577a2dda26be8",
+        "bytes": 16612
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/occupational-accident-frequency-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/thumbnail.json",
+          "sha256": "793f15017c62cab22e27ada240ae41e24fc7da94f4e4da756ab4cfa65f392cd8",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/occupational-accident-frequency-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/occupational-accident-frequency-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "c705586de021c4bd6ca885256f2624c6de4044ec90b76f90e32d918737fd8bc9",
+        "fingerprint": "a880c550a995eb22d05f0ea1c3f961af06ef987882da7beb8d92dcc2c404f67f",
+        "generatedAt": "2026-10-03T21:25:34.670Z"
+      }
+    }
+  ]
+}

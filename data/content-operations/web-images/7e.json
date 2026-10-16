@@ -1,0 +1,1693 @@
+{
+  "items": [
+    {
+      "id": "web/area/35000",
+      "channel": "web",
+      "key": "35000",
+      "title": "山口県",
+      "category": "area",
+      "status": "published",
+      "url": "https://stats47.jp/areas/35000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8b8b75141ae16be8484bc883d2d7bc744c19b0297b9d08ac7f946b0a6b5939c9",
+      "catalogBasis": "8b8b75141ae16be8484bc883d2d7bc744c19b0297b9d08ac7f946b0a6b5939c9",
+      "indexComplete": true
+    },
+    {
+      "id": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "channel": "web",
+      "key": "manufacturing-shipment-prefecture-ranking",
+      "title": "製造品出荷額は愛知58兆円が別格──なぜ太平洋ベルトに集中するのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/manufacturing-shipment-prefecture-ranking",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "5cdbf1b028c7bceb1aed26baefd96253dbbd3134f4a84bde5187f2499eae7534",
+      "catalogBasis": "bdd478a496341e689188d3040898203f9651da530da157d7eae0979accf71af6",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/article.md",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/article.md",
+        "sha256": "a32b69862f61ffb24cf44cc1c08d45db35dd51f5f19c825efe6034245ec12229",
+        "bytes": 10766
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/roadside-station-count-vs-forest-road-length",
+      "channel": "web",
+      "key": "roadside-station-count-vs-forest-road-length",
+      "title": "道の駅と林道の長さは関係があるのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/roadside-station-count-vs-forest-road-length",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "419c8c9895e8547fab1f6a11a1289ddaea60aef7e33476a53e6259b7519bdb72",
+      "catalogBasis": "592c3e6cbd944077e3f75f8fdbdedbcf318fd983694f0b33fdec6a3fe62d2339",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/article.md",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/article.md",
+        "sha256": "1d3a4f22aa069fcaaa0b2d949341742fcb0a115d92ae707f74e034739f2dc8c4",
+        "bytes": 8856
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/ranking/employee-ratio-5-9-employee-establishments-private",
+      "channel": "web",
+      "key": "employee-ratio-5-9-employee-establishments-private",
+      "title": "5〜9人事業所の従業者割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/employee-ratio-5-9-employee-establishments-private",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ed8e9dd8aa84bbf26dd892a3812bb66e0b853c8ff027fc2eba6aa35470fd6133",
+      "catalogBasis": "ed8e9dd8aa84bbf26dd892a3812bb66e0b853c8ff027fc2eba6aa35470fd6133",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-high-club-per100-kendo",
+      "channel": "web",
+      "key": "junior-high-club-per100-kendo",
+      "title": "中学部活動 100人あたり部員数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-high-club-per100-kendo",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d525665d64000011bf4cb6d7b970996e36d29d3ee7308c46ea950b0a5619b8ea",
+      "catalogBasis": "d525665d64000011bf4cb6d7b970996e36d29d3ee7308c46ea950b0a5619b8ea",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/public-water-pipe-aging-rate",
+      "channel": "web",
+      "key": "public-water-pipe-aging-rate",
+      "title": "水道管路の経年化率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/public-water-pipe-aging-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "65a76350c6b5b7aea4ef24aade4cd3c5ff806e82874d5b8f531774ff48335fa4",
+      "catalogBasis": "65a76350c6b5b7aea4ef24aade4cd3c5ff806e82874d5b8f531774ff48335fa4",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/road-bridge-condition-iii-count",
+      "channel": "web",
+      "key": "road-bridge-condition-iii-count",
+      "title": "道路橋の判定区分Ⅲの施設数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/road-bridge-condition-iii-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "884bf589d7d2ccc4279e556d8e5b7746a7d2e47ee0327fe30be638e14a0e6785",
+      "catalogBasis": "884bf589d7d2ccc4279e556d8e5b7746a7d2e47ee0327fe30be638e14a0e6785",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/study-participation-rate-academic",
+      "channel": "web",
+      "key": "study-participation-rate-academic",
+      "title": "人文・社会・自然科学の行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/study-participation-rate-academic",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "57326375447a5729d948764557e0b1022c3045f51abf00bfab9662b4c856ab31",
+      "catalogBasis": "57326375447a5729d948764557e0b1022c3045f51abf00bfab9662b4c856ab31",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/taxpayer-count-equal",
+      "channel": "web",
+      "key": "taxpayer-count-equal",
+      "title": "納税義務者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/taxpayer-count-equal",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3f21cec57b14da7d92290a6174b5a82737b35267f391870ad563eced3609a7b2",
+      "catalogBasis": "3f21cec57b14da7d92290a6174b5a82737b35267f391870ad563eced3609a7b2",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/area/35000",
+      "file": "app/areas/35000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/areas/35000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png",
+        "sha256": "30e0a8636232d0878a67566863ac8d1675a655186025b67a93cae5ab352f3c47",
+        "bytes": 178610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/areas/35000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/areas/35000/ogp/generation.json",
+          "sha256": "af4931caa519b75c25307e70cb1830dbad224181256fe9a9282ee9c62b32bc16",
+          "bytes": 779,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "areas-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "area-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "1e306683201937975817b0876a5dcbaa9340689c2411b7cccf12f1c878bf4f7b",
+        "fingerprint": "885423ac03f69006fa4beede8d89274492bac4d22dcdc896ba108878909ed4c0",
+        "generatedAt": "2026-10-10T22:06:26.451Z"
+      }
+    },
+    {
+      "owner": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "file": "app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.svg",
+        "sha256": "fe28eace3e7485ad0fed75bfcb86b2b9b57b1fa50b8b309e7585a7f19b62bf13",
+        "bytes": 6956
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/article.md",
+          "sha256": "a32b69862f61ffb24cf44cc1c08d45db35dd51f5f19c825efe6034245ec12229",
+          "bytes": 10766,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "shipment-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.json",
+          "sha256": "839e65df52ecb1a113d3ea1ee35fbf5304b2dd15a83f87bab073837fed2da7d3",
+          "bytes": 6857,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "shipment-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.source.json",
+          "sha256": "364c4cced548ef06ce65a76de38dc19235e7ae4c28308e3d7bf94e44657c3b6d",
+          "bytes": 644,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/data/shipment-ranking.svg",
+          "alt": "製造品出荷額 上位5県・下位5県（2023年）",
+          "heading": "総額ランキング──愛知58兆円という別格",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/manufacturing-shipment-amount/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "file": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/background.jpg",
+        "sha256": "3dfadd4f3f58d458d4b43f339a122cbf4526a964def9c21272755331bf4cbac0",
+        "bytes": 33636
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "sha256": "eecc6d0d6fb69bd52fa95c44e278bbfb037619164abe323d7032a23907e23cdc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "97d14ebae4aae79cc34031a5be3fbe13a89f9d421c4cb71ae38868f7af22e48d",
+        "fingerprint": "a3f74610f6274c3a3232ef31c18d8b54d05bb82afed18ac765d05ed9c14c7783",
+        "generatedAt": "2026-08-22T05:17:31.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "file": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/ogp.png",
+        "sha256": "dd66b5260faa76f9b9159f2c59c98604dbf1787fc52ac81e1ae5ea70d2196c41",
+        "bytes": 286820
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "sha256": "eecc6d0d6fb69bd52fa95c44e278bbfb037619164abe323d7032a23907e23cdc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "97d14ebae4aae79cc34031a5be3fbe13a89f9d421c4cb71ae38868f7af22e48d",
+        "fingerprint": "a3f74610f6274c3a3232ef31c18d8b54d05bb82afed18ac765d05ed9c14c7783",
+        "generatedAt": "2026-08-22T05:17:31.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "file": "app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-dark.webp",
+        "sha256": "87cb7154995f579d7e033131b4322bb17e870ac21a8e3cefda46bffe43cf50a3",
+        "bytes": 3920
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "sha256": "eecc6d0d6fb69bd52fa95c44e278bbfb037619164abe323d7032a23907e23cdc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "97d14ebae4aae79cc34031a5be3fbe13a89f9d421c4cb71ae38868f7af22e48d",
+        "fingerprint": "a3f74610f6274c3a3232ef31c18d8b54d05bb82afed18ac765d05ed9c14c7783",
+        "generatedAt": "2026-08-22T05:17:31.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/manufacturing-shipment-prefecture-ranking",
+      "file": "app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/thumbnail-light.webp",
+        "sha256": "154056894998102402468ccf44ddd15f22c7af314d6d6aedacc51e378859bb3c",
+        "bytes": 6292
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/manufacturing-shipment-prefecture-ranking/ogp/generation.json",
+          "sha256": "eecc6d0d6fb69bd52fa95c44e278bbfb037619164abe323d7032a23907e23cdc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "97d14ebae4aae79cc34031a5be3fbe13a89f9d421c4cb71ae38868f7af22e48d",
+        "fingerprint": "a3f74610f6274c3a3232ef31c18d8b54d05bb82afed18ac765d05ed9c14c7783",
+        "generatedAt": "2026-08-22T05:17:31.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.svg",
+        "sha256": "95f190f72df28fa56eb4fd1d7644ba4ada4e2cb4d06de7e0b8fba3fac0feb2f9",
+        "bytes": 6870
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "sha256": "1d3a4f22aa069fcaaa0b2d949341742fcb0a115d92ae707f74e034739f2dc8c4",
+          "bytes": 8856,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "forest-road-length-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.json",
+          "sha256": "4ba541c74528de3bc30d947152955a8f9606caaec11023f0cd61cc7f535f21bd",
+          "bytes": 6661,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "forest-road-length-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.source.json",
+          "sha256": "a467e558e7b507afb5fc96c40c54f509204ead0c03bc9ee8d97154094574f4a5",
+          "bytes": 624,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/forest-road-length-prefecture-rankings.svg",
+          "alt": "2022年度の林道延長の上位5県・下位5県",
+          "heading": "林道延長から見る出発点",
+          "line": 41
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forest-road-length/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forest-road-length/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.svg",
+        "sha256": "0f91d552eef6d8fa565d1cd56621c4740a33abc9f1babdc84b393b513c25aa96",
+        "bytes": 11023
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "sha256": "1d3a4f22aa069fcaaa0b2d949341742fcb0a115d92ae707f74e034739f2dc8c4",
+          "bytes": 8856,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "roadside-station-count--forest-road-length-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.json",
+          "sha256": "2af84e01ec83649140e13bb4cf13615076a8eb8711ccc1eb6d16c440e5b5e2ec",
+          "bytes": 3670,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "roadside-station-count--forest-road-length-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.source.json",
+          "sha256": "196e8fa5b18db632370d7cfc5dc8fa4c7939152634cee5c3b9d331196e21d881",
+          "bytes": 972,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count--forest-road-length-scatter.svg",
+          "alt": "道の駅登録数2026年と林道延長2022年度の47県散布図",
+          "heading": "二つの指標の関係を散布図で確認する",
+          "line": 51
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/roadside-station-count.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/roadside-station-count.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/stats/total-area-excluding-northern-territories-and-takeshima/values.json",
+          "url": "https://storage.stats47.jp/app/stats/total-area-excluding-northern-territories-and-takeshima/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.svg",
+        "sha256": "3e05503c17d04a8c3826110739f75442b0a1452c3880511dbd80700f5c11863f",
+        "bytes": 6936
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/article.md",
+          "sha256": "1d3a4f22aa069fcaaa0b2d949341742fcb0a115d92ae707f74e034739f2dc8c4",
+          "bytes": 8856,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "roadside-station-count-vs-forest-road-length-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.json",
+          "sha256": "3237477121b28d52c45c5d42aa0d641c90d622b8544daf44ec9802e81fc9c3c3",
+          "bytes": 6679,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "roadside-station-count-vs-forest-road-length-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.source.json",
+          "sha256": "fd6ddf723b1498a3eb4feff4d0f32ac558d02c5d15f25ea45ef590e678e7a454",
+          "bytes": 1025,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/data/roadside-station-count-vs-forest-road-length-prefecture-rankings.svg",
+          "alt": "2026年の道の駅登録数の上位5県・下位5県",
+          "heading": "道の駅数から見る出発点",
+          "line": 26
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/roadside-station-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/roadside-station-count/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/background.jpg",
+        "sha256": "9068cf0fac0b56e5e82951da69e63baa22917c0444df01bbd46fdb56cb1646bf",
+        "bytes": 96985
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "sha256": "d75f8ff0e2cd70cf5e5bf954bf73a11abda9ff024f896e34d3009ed7b2a75324",
+          "bytes": 2280,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "62a7b3371b6c5341bb40cf67068fb6e089ff318a53192c908c03617863651cd9",
+        "fingerprint": "3d47fea8213659dd1008902ae948554754b1546f6851a1f74d892c4d7696e587",
+        "generatedAt": "2026-09-06T00:00:47.358Z"
+      }
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/ogp.png",
+        "sha256": "cfa510813bda9c4e5c5cd6a33d9c443abb76fc218aad568addb76c92aaceec9c",
+        "bytes": 676691
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "sha256": "d75f8ff0e2cd70cf5e5bf954bf73a11abda9ff024f896e34d3009ed7b2a75324",
+          "bytes": 2280,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "62a7b3371b6c5341bb40cf67068fb6e089ff318a53192c908c03617863651cd9",
+        "fingerprint": "3d47fea8213659dd1008902ae948554754b1546f6851a1f74d892c4d7696e587",
+        "generatedAt": "2026-09-06T00:00:47.358Z"
+      }
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/thumbnail-dark.webp",
+        "sha256": "35d3c4e46a8b11a4cf873984a1892a9c7378b582ea5287f97d5a3ba2c9b5c62a",
+        "bytes": 15604
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "sha256": "d75f8ff0e2cd70cf5e5bf954bf73a11abda9ff024f896e34d3009ed7b2a75324",
+          "bytes": 2280,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "62a7b3371b6c5341bb40cf67068fb6e089ff318a53192c908c03617863651cd9",
+        "fingerprint": "3d47fea8213659dd1008902ae948554754b1546f6851a1f74d892c4d7696e587",
+        "generatedAt": "2026-09-06T00:00:47.358Z"
+      }
+    },
+    {
+      "owner": "web/blog/roadside-station-count-vs-forest-road-length",
+      "file": "app/blog/roadside-station-count-vs-forest-road-length/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/roadside-station-count-vs-forest-road-length/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/thumbnail-light.webp",
+        "sha256": "ed2f26054dfd69d5e2a95275ab211bf033ef4b8a11eda5801a6abb07a120b267",
+        "bytes": 32614
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/roadside-station-count-vs-forest-road-length/ogp/generation.json",
+          "sha256": "d75f8ff0e2cd70cf5e5bf954bf73a11abda9ff024f896e34d3009ed7b2a75324",
+          "bytes": 2280,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "62a7b3371b6c5341bb40cf67068fb6e089ff318a53192c908c03617863651cd9",
+        "fingerprint": "3d47fea8213659dd1008902ae948554754b1546f6851a1f74d892c4d7696e587",
+        "generatedAt": "2026-09-06T00:00:47.358Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employee-ratio-5-9-employee-establishments-private",
+      "file": "app/ranking/employee-ratio-5-9-employee-establishments-private/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/ogp/ogp.png",
+        "sha256": "4fb567684ece847f3a9b60187b4d173ff44b8ca4df2a83c716f903df1f9c5761",
+        "bytes": 61949
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/ogp/generation.json",
+          "sha256": "3887bb758005603b7126c76d1feeb1d7097d1bb64cf4b93fcebeb2ab125f8a02",
+          "bytes": 1033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "0fc805bc37070b5ac87a3da232a1c157b8f99a7d8c21c3bb6f455af8c4eb2e3e",
+        "fingerprint": "485437113ff676cac3e0c2eb2765d3af288e700e2305017ee209bcd5597de43e",
+        "generatedAt": "2026-10-01T18:10:35.382Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employee-ratio-5-9-employee-establishments-private",
+      "file": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-dark.webp",
+        "sha256": "f947e038b45c3829051209a129119b8c65368a14b3aa0af2e2e714370dd75215",
+        "bytes": 18064
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail.json",
+          "sha256": "5a5b3f688917d266c569f435a10e8a496b95100c020818d330ffc65fe2de628a",
+          "bytes": 2024,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d499b74b409c056682bdece5656d5b29da80eb77dd07e7b350d22d35d46d3332",
+        "fingerprint": "e7c910a9a54d1093c1863bdfb10195a4eb39fe102c998f27f5d44ecf1d88ef80",
+        "generatedAt": "2026-10-01T18:35:46.410Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employee-ratio-5-9-employee-establishments-private",
+      "file": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail-light.webp",
+        "sha256": "dd26641384d23152c251f452c823573bfdbe4d28316fe4b31d3c95c51ad9d03f",
+        "bytes": 16544
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/thumbnail.json",
+          "sha256": "5a5b3f688917d266c569f435a10e8a496b95100c020818d330ffc65fe2de628a",
+          "bytes": 2024,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employee-ratio-5-9-employee-establishments-private/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d499b74b409c056682bdece5656d5b29da80eb77dd07e7b350d22d35d46d3332",
+        "fingerprint": "e7c910a9a54d1093c1863bdfb10195a4eb39fe102c998f27f5d44ecf1d88ef80",
+        "generatedAt": "2026-10-01T18:35:46.410Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-kendo",
+      "file": "app/ranking/junior-high-club-per100-kendo/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-kendo/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/ogp/ogp.png",
+        "sha256": "1826f7e04e90ed2c9781f76039b29ba585f2a710d71a49eff21460b3c9266f42",
+        "bytes": 65458
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-club-per100-kendo/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/ogp/generation.json",
+          "sha256": "10f819c2c7df8c2a258f7b403f5b7bd3d992d3f1b3df9069c6e7a653da4eceb2",
+          "bytes": 949,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-club-per100-kendo/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-club-per100-kendo/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "f0adf79710b3be040ac8b5740cda6274a954a5f16b06b6d741961b3cb1d4f46d",
+        "fingerprint": "7420bfc93dbcb89108e6447b9599aff5ffb0ff6702e25cc16026d3b03a2f6032",
+        "generatedAt": "2026-10-03T20:59:26.083Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-kendo",
+      "file": "app/ranking/junior-high-club-per100-kendo/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-kendo/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-kendo",
+      "file": "app/ranking/junior-high-club-per100-kendo/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-kendo/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-kendo/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/public-water-pipe-aging-rate",
+      "file": "app/ranking/public-water-pipe-aging-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-water-pipe-aging-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/ogp/ogp.png",
+        "sha256": "f947de71e0dc7adf229171f764409e78f1c27672712b838cdcc02a2d513143ba",
+        "bytes": 68054
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-water-pipe-aging-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/ogp/generation.json",
+          "sha256": "fd5770bf493344c4348f23c315f8d0f55e77f86a18d5cefe4d9e9724545828b6",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "01f8044c5faf466660cba36cee9834270a45201afb53109e1268fb99b6f67b5b",
+        "fingerprint": "0afb6f6bf16a9cb6a12f8b607ba12dac5d1bcc1439f679724913cb38b799a38b",
+        "generatedAt": "2026-09-11T14:05:33.236Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-water-pipe-aging-rate",
+      "file": "app/ranking/public-water-pipe-aging-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-water-pipe-aging-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/thumbnail-dark.webp",
+        "sha256": "f0e80f6bc15a36ca0d8970c7459b35d05c444054ab7241d31796471bd109acb7",
+        "bytes": 18068
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-water-pipe-aging-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/thumbnail.json",
+          "sha256": "59de82d8f409acb4aa64156a448b2a616607d4ef72039167bb301c7e8b60baed",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "3429a421ac29c6baebfff6414bf58e2bb369d53371b331359a85dcfbd594bb89",
+        "fingerprint": "5ba90af5ae444432fc2d884f73fc482aa83b008fbb273fb3d50c403d541eea3f",
+        "generatedAt": "2026-09-11T14:26:28.585Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-water-pipe-aging-rate",
+      "file": "app/ranking/public-water-pipe-aging-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-water-pipe-aging-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/thumbnail-light.webp",
+        "sha256": "b55caf3f180331f41f9ed988effed99bbaf9d699d816d0fa7b79720c150bf9f4",
+        "bytes": 16290
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-water-pipe-aging-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/thumbnail.json",
+          "sha256": "59de82d8f409acb4aa64156a448b2a616607d4ef72039167bb301c7e8b60baed",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-water-pipe-aging-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-water-pipe-aging-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "3429a421ac29c6baebfff6414bf58e2bb369d53371b331359a85dcfbd594bb89",
+        "fingerprint": "5ba90af5ae444432fc2d884f73fc482aa83b008fbb273fb3d50c403d541eea3f",
+        "generatedAt": "2026-09-11T14:26:28.585Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-condition-iii-count",
+      "file": "app/ranking/road-bridge-condition-iii-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-condition-iii-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/ogp/ogp.png",
+        "sha256": "32d205933bd9e5e39f07925824e1a708a8e8815de6de45128e214ac14d855d8a",
+        "bytes": 66447
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-condition-iii-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/ogp/generation.json",
+          "sha256": "0b84f0696c5fef167027601b13e405979fe19be6ed7eb3df44ae5e0f28bb3da1",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "869209cd8c96d3697069882c896cac381e8dc09ed116d050f2e695c1fe4990ec",
+        "fingerprint": "9afdaff3f7fd87db11ae2a65aebb18d6fc810622d36780f57fb3ed911fd84868",
+        "generatedAt": "2026-09-11T14:06:09.519Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-condition-iii-count",
+      "file": "app/ranking/road-bridge-condition-iii-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-condition-iii-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/thumbnail-dark.webp",
+        "sha256": "6b4a77dfc6191c3620bd20e7817994f51db33342707c1d8a455147ee833a358a",
+        "bytes": 20286
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-condition-iii-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/thumbnail.json",
+          "sha256": "4903bd66ae277194538d4b37ec0aa703181dffd1ed21240380a0b6eb9646a361",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "e35cb464b745fe9068b53bce565427a3aecd90109b1ccddff2e36b4448cf2a2d",
+        "fingerprint": "30aec4f3a2f30456755f4c8dd2bd6c2445832631dddc238624e38eabf4e131fb",
+        "generatedAt": "2026-09-11T14:27:06.051Z"
+      }
+    },
+    {
+      "owner": "web/ranking/road-bridge-condition-iii-count",
+      "file": "app/ranking/road-bridge-condition-iii-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/road-bridge-condition-iii-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/thumbnail-light.webp",
+        "sha256": "772fde049368a541a7fe7aeebb95fc02ce307dcbfa84bdf4d988ab6269e13506",
+        "bytes": 18928
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/road-bridge-condition-iii-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/thumbnail.json",
+          "sha256": "4903bd66ae277194538d4b37ec0aa703181dffd1ed21240380a0b6eb9646a361",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/road-bridge-condition-iii-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-bridge-condition-iii-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "e35cb464b745fe9068b53bce565427a3aecd90109b1ccddff2e36b4448cf2a2d",
+        "fingerprint": "30aec4f3a2f30456755f4c8dd2bd6c2445832631dddc238624e38eabf4e131fb",
+        "generatedAt": "2026-09-11T14:27:06.051Z"
+      }
+    },
+    {
+      "owner": "web/ranking/study-participation-rate-academic",
+      "file": "app/ranking/study-participation-rate-academic/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/study-participation-rate-academic/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/ogp/ogp.png",
+        "sha256": "ef057d2c573580e569725e540ac6f0eb089eaebd70337221698c7aef46de5e44",
+        "bytes": 81202
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/study-participation-rate-academic/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/ogp/generation.json",
+          "sha256": "a19075e2eaee0a06fc66b903f680b5720cb0a0d556a253994b5aa0b17300f3fb",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/study-participation-rate-academic/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/study-participation-rate-academic/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "88c0c239a4de425e67a8bce6f5c01c785385db90c824bbe6e9e98d20926bf600",
+        "fingerprint": "7d2bdb5034fbb56d27076ed95bfafd6093bcf22bad987b5de9aecd8c39a249c8",
+        "generatedAt": "2026-08-16T22:21:05.183Z"
+      }
+    },
+    {
+      "owner": "web/ranking/study-participation-rate-academic",
+      "file": "app/ranking/study-participation-rate-academic/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/study-participation-rate-academic/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/thumbnail-dark.webp",
+        "sha256": "47212270b9a271dd09da099b7156f0855d412e215328acfbdcc48458bdbc6c36",
+        "bytes": 18044
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/study-participation-rate-academic/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/thumbnail.json",
+          "sha256": "7f3f7645e97a88867045f9e1eb6b425fd9792cfad8e9162a53cf763e0299be29",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/study-participation-rate-academic/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/study-participation-rate-academic/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "104bb8c283dbd6f8528733fa6ecd7f0c17d796e1c3aaa272d39bbfaeb6f28c28",
+        "fingerprint": "a7f8931555e0f601da216f0153f009614b7b4b169ff3c00e0c0796e7ce0caf0b",
+        "generatedAt": "2026-08-16T22:36:25.462Z"
+      }
+    },
+    {
+      "owner": "web/ranking/study-participation-rate-academic",
+      "file": "app/ranking/study-participation-rate-academic/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/study-participation-rate-academic/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/thumbnail-light.webp",
+        "sha256": "9e54b3e50a209a83de543a6c8c3667f8ebc83d32c7207dfbf5c415610fc139c0",
+        "bytes": 16578
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/study-participation-rate-academic/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/thumbnail.json",
+          "sha256": "7f3f7645e97a88867045f9e1eb6b425fd9792cfad8e9162a53cf763e0299be29",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/study-participation-rate-academic/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/study-participation-rate-academic/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "104bb8c283dbd6f8528733fa6ecd7f0c17d796e1c3aaa272d39bbfaeb6f28c28",
+        "fingerprint": "a7f8931555e0f601da216f0153f009614b7b4b169ff3c00e0c0796e7ce0caf0b",
+        "generatedAt": "2026-08-16T22:36:25.462Z"
+      }
+    },
+    {
+      "owner": "web/ranking/taxpayer-count-equal",
+      "file": "app/ranking/taxpayer-count-equal/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/taxpayer-count-equal/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/ogp/ogp.png",
+        "sha256": "08e7b8e2d1087482ad70905c57212980d5d1cb9786487a8cbe58f4c638e1c9ca",
+        "bytes": 76810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/taxpayer-count-equal/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/ogp/generation.json",
+          "sha256": "150d8fe66e7adc62aa5704c359bb41c1f825478b465f29eecea4623a630adb02",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/taxpayer-count-equal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/taxpayer-count-equal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "f73ca1cd64fe261c20fbaf091a98b4eb627951317726ec5ef3416a819a21e453",
+        "fingerprint": "5ef93eb64c4088d9e7cb06334ea4bc8657fd924b2f0595d5be67ba405396630e",
+        "generatedAt": "2026-08-16T22:21:09.646Z"
+      }
+    },
+    {
+      "owner": "web/ranking/taxpayer-count-equal",
+      "file": "app/ranking/taxpayer-count-equal/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/taxpayer-count-equal/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/thumbnail-dark.webp",
+        "sha256": "90b9736b8bc7b41b68d2b69dd68c3409c5a2113abfbebad65574d884177fac94",
+        "bytes": 17032
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/taxpayer-count-equal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/thumbnail.json",
+          "sha256": "2edf223112ccd227eabdfefdf65f532a96a8b2b440c8ccb2866cca4af4a0c29a",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/taxpayer-count-equal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/taxpayer-count-equal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "166b6dd1a328c83765a750f18843317c978cfdcd3c7cfcc66b39620cf2cfaaf3",
+        "fingerprint": "91f7825cac471283e50efa7783b9c0b7743bc7c1d1ed7e4d916ae0da490e6b76",
+        "generatedAt": "2026-08-16T22:36:27.293Z"
+      }
+    },
+    {
+      "owner": "web/ranking/taxpayer-count-equal",
+      "file": "app/ranking/taxpayer-count-equal/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/taxpayer-count-equal/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/thumbnail-light.webp",
+        "sha256": "d91d68e1c512e503a4193bac3c81512d3873d7014d19be749f627013437c636b",
+        "bytes": 15548
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/taxpayer-count-equal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/thumbnail.json",
+          "sha256": "2edf223112ccd227eabdfefdf65f532a96a8b2b440c8ccb2866cca4af4a0c29a",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/taxpayer-count-equal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/taxpayer-count-equal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/taxpayer-count-equal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "166b6dd1a328c83765a750f18843317c978cfdcd3c7cfcc66b39620cf2cfaaf3",
+        "fingerprint": "91f7825cac471283e50efa7783b9c0b7743bc7c1d1ed7e4d916ae0da490e6b76",
+        "generatedAt": "2026-08-16T22:36:27.293Z"
+      }
+    }
+  ]
+}

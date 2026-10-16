@@ -1,0 +1,2175 @@
+{
+  "items": [
+    {
+      "id": "web/blog/habitable-area-land-use",
+      "channel": "web",
+      "key": "habitable-area-land-use",
+      "title": "土地が少ない県ほど効率的に使っている逆説",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/habitable-area-land-use",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "5db5821f0ec61a415dfc4fd262efaf4b74091328920e9755ebe2f68a57dd8c49",
+      "catalogBasis": "9737927bd2e4ffc44b6240e5e7984046d23b894031fcd810946c5d7a90f53065",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/article.md",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/article.md",
+        "sha256": "db8581121233b7cc75b5535fe71be162dacbbaf3446039e1df0c0408487b1f52",
+        "bytes": 8905
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "channel": "web",
+      "key": "psychiatric-bed-count-vs-neighborhood-park-count",
+      "title": "精神病床が多い県は近隣公園も多い?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "3c2a313f8d13c3e49b41d35ec57eeadf990644e65ba7b8ba03291198706330d6",
+      "catalogBasis": "a118843898544c03e66db2aa8cc6f91e981018421f6307502d6ca4c4ac5c096b",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+        "sha256": "f22eb7770be462542d4afd084a2384970a427b003c35490b085451b6beb7a241",
+        "bytes": 8434
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/tokyo-food-culture",
+      "channel": "web",
+      "key": "tokyo-food-culture",
+      "title": "東京の食卓は野菜も麺も乳製品も首位独占、なぜ全部獲るのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/tokyo-food-culture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "a660aa628d3ade537922a972d28afb89fa12e2799a7f9cb077d8ec77196a7994",
+      "catalogBasis": "71f24ba27451e5c728ff7bafee82754b21bf413683ca283f82929d527a0b7f44",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/article.md",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/article.md",
+        "sha256": "fa1203e755b832995b73a394337811b55f9ed4329ea463c8130bbd9cf4805a59",
+        "bytes": 11584
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/83fd57a5235cbaaf2aad61de",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/sewage-treatment-coverage-rate-prefecture-gap.jpg",
+      "title": "sewage-treatment-coverage-rate-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "15cdc960ef753ddc6a6c0a63281bc4a942b5545ff090a61318934bb18ef94575"
+    },
+    {
+      "id": "web/ranking/kerosene-consumption-quantity",
+      "channel": "web",
+      "key": "kerosene-consumption-quantity",
+      "title": "灯油消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/kerosene-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9672eecd7e97957bb1f1ffd61f21efeffe6cf3faecc7eda433f35a6ef3f57981",
+      "catalogBasis": "9672eecd7e97957bb1f1ffd61f21efeffe6cf3faecc7eda433f35a6ef3f57981",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/nhk-fee-consumption-expenditure",
+      "channel": "web",
+      "key": "nhk-fee-consumption-expenditure",
+      "title": "NHK放送受信料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/nhk-fee-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "190a929029b4b9714201c64d6fa0d3954a8af2c9b62fce1c3a8c5f32f3d3a1ce",
+      "catalogBasis": "190a929029b4b9714201c64d6fa0d3954a8af2c9b62fce1c3a8c5f32f3d3a1ce",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-prepared-food-consumption-expenditure",
+      "channel": "web",
+      "key": "other-prepared-food-consumption-expenditure",
+      "title": "他の調理食品のその他消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-prepared-food-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c74b69cbce841d0dcf0d39a77671816e789b66211e0a5c2a98d733166a25487e",
+      "catalogBasis": "c74b69cbce841d0dcf0d39a77671816e789b66211e0a5c2a98d733166a25487e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sewerage-penetration-rate-pre2011",
+      "channel": "web",
+      "key": "sewerage-penetration-rate-pre2011",
+      "title": "下水道普及率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sewerage-penetration-rate-pre2011",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "15f824d0be4a2833b1ec5b5a65c9dff9ad6c0368ee84e17574ab05a13833fe6e",
+      "catalogBasis": "15f824d0be4a2833b1ec5b5a65c9dff9ad6c0368ee84e17574ab05a13833fe6e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/total-assessed-land-area-ratio",
+      "channel": "web",
+      "key": "total-assessed-land-area-ratio",
+      "title": "評価総地積割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/total-assessed-land-area-ratio",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0816c67913d6018486c43f4e325cffb52241f001f49fd14953814c65c3ed3a36",
+      "catalogBasis": "0816c67913d6018486c43f4e325cffb52241f001f49fd14953814c65c3ed3a36",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/treatment-rate-circulatory-outpatient",
+      "channel": "web",
+      "key": "treatment-rate-circulatory-outpatient",
+      "title": "循環器系の疾患の受療率（外来）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/treatment-rate-circulatory-outpatient",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a4eccefa598d834d009b029b2767991b7149d01c710a7c05f5f3d6712a0e7625",
+      "catalogBasis": "a4eccefa598d834d009b029b2767991b7149d01c710a7c05f5f3d6712a0e7625",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/data/habitable-area-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/data/habitable-area-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/habitable-area-ranking.svg",
+        "sha256": "2ee6897e2d46db3c0e6b18c15a53a96bd1362fdf01ad6b8a878544dfd6d552c2",
+        "bytes": 6851
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/article.md",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/article.md",
+          "sha256": "db8581121233b7cc75b5535fe71be162dacbbaf3446039e1df0c0408487b1f52",
+          "bytes": 8905,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "habitable-area-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/data/habitable-area-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/habitable-area-ranking.json",
+          "sha256": "569561a4cd1ca7fc2742065552ab04d8ea7a856ed0b45b7ec57f2cea2f61e385",
+          "bytes": 6684,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "habitable-area-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/data/habitable-area-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/habitable-area-ranking.source.json",
+          "sha256": "bef73bbb21a26d36b7b0aa8be5ded08c196cc1f34acd1f79f3a6c3ca264cec55",
+          "bytes": 599,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/habitable-area-ranking.svg",
+          "alt": "可住地面積割合 上位5・下位5（都道府県別）",
+          "heading": "可住地面積割合ランキング──大阪70% vs 高知16%の4.3倍差",
+          "line": 28
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/habitable-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/habitable-area-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/data/land-productivity.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/data/land-productivity.svg",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/land-productivity.svg",
+        "sha256": "547b24dab3d27a8c5d3f5ddcfd8a527bf16bbfe05a06b6090abd22a19712ab07",
+        "bytes": 2586
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/article.md",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/article.md",
+          "sha256": "db8581121233b7cc75b5535fe71be162dacbbaf3446039e1df0c0408487b1f52",
+          "bytes": 8905,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "land-productivity.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/data/land-productivity.source.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/land-productivity.source.json",
+          "sha256": "4bf1661f2b6394a4621f3a9f37f7a7a33aad11a8f1d798c4c7f36ef28fdc1f49",
+          "bytes": 391,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/data/land-productivity.svg",
+          "alt": "可住地1haあたり農業産出額 代表6県比較",
+          "heading": "逆説──住める土地が少ない県ほど土地を効率的に使う",
+          "line": 56
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 600 320",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/habitable-area-land-use/data/land-productivity.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/ranking/habitable-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/habitable-area-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/background.jpg",
+        "sha256": "f552de3ea44311a2154da54d38bc486d12fa5e40b9a25adf3f0fb33c424c557c",
+        "bytes": 40357
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/generation.json",
+          "sha256": "1ad8d1571d94b5211ca4e2251a8cc705cf462aa9749f93fe54a953dbe0ebaf79",
+          "bytes": 2202,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "285f02a5508c3bfd283a6d65b6e845a0cf5ac29063bcc1a9e512da168437dc52",
+        "fingerprint": "c480c60fbabca4af33cb869d73c9b70b1dd98602fd652027873d792fee647d82",
+        "generatedAt": "2026-08-22T05:17:26.171Z"
+      }
+    },
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/ogp.png",
+        "sha256": "d54cb29a75984be5251cbdf00a652af50c94457266fbad690748e972d3b66c3f",
+        "bytes": 275790
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/generation.json",
+          "sha256": "1ad8d1571d94b5211ca4e2251a8cc705cf462aa9749f93fe54a953dbe0ebaf79",
+          "bytes": 2202,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "285f02a5508c3bfd283a6d65b6e845a0cf5ac29063bcc1a9e512da168437dc52",
+        "fingerprint": "c480c60fbabca4af33cb869d73c9b70b1dd98602fd652027873d792fee647d82",
+        "generatedAt": "2026-08-22T05:17:26.171Z"
+      }
+    },
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/thumbnail-dark.webp",
+        "sha256": "612f2a32874401d5c7a393d5d52859e4b7063eaa6c437ee3f675e2a25ef20655",
+        "bytes": 6302
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/generation.json",
+          "sha256": "1ad8d1571d94b5211ca4e2251a8cc705cf462aa9749f93fe54a953dbe0ebaf79",
+          "bytes": 2202,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "285f02a5508c3bfd283a6d65b6e845a0cf5ac29063bcc1a9e512da168437dc52",
+        "fingerprint": "c480c60fbabca4af33cb869d73c9b70b1dd98602fd652027873d792fee647d82",
+        "generatedAt": "2026-08-22T05:17:26.171Z"
+      }
+    },
+    {
+      "owner": "web/blog/habitable-area-land-use",
+      "file": "app/blog/habitable-area-land-use/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/habitable-area-land-use/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/thumbnail-light.webp",
+        "sha256": "e392b9c7bda9b9963a23c88cbebc5281aa5384136015a30a6bd2df43586fb10f",
+        "bytes": 11222
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/habitable-area-land-use/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/habitable-area-land-use/ogp/generation.json",
+          "sha256": "1ad8d1571d94b5211ca4e2251a8cc705cf462aa9749f93fe54a953dbe0ebaf79",
+          "bytes": 2202,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "285f02a5508c3bfd283a6d65b6e845a0cf5ac29063bcc1a9e512da168437dc52",
+        "fingerprint": "c480c60fbabca4af33cb869d73c9b70b1dd98602fd652027873d792fee647d82",
+        "generatedAt": "2026-08-22T05:17:26.171Z"
+      }
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.svg",
+        "sha256": "fac72f33dd668a86b3056cf8baabd71fa571cbd5dce6b1fc4de752db5b97d4d9",
+        "bytes": 6876
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "sha256": "f22eb7770be462542d4afd084a2384970a427b003c35490b085451b6beb7a241",
+          "bytes": 8434,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "neighborhood-park-count-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.json",
+          "sha256": "3c0d0f328f9a6b85b22d315c9f6334c41b3f0cd8fc5a187672b0bf743efa1c61",
+          "bytes": 6596,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "neighborhood-park-count-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.source.json",
+          "sha256": "191211ffe1ee8e9b440c768c4050e495acfb898cb2dcbda52daaa46fa025a57c",
+          "bytes": 651,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/neighborhood-park-count-prefecture-rankings.svg",
+          "alt": "近隣公園数の上位と下位",
+          "heading": "近隣公園数の分布",
+          "line": 35
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/neighborhood-park-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/neighborhood-park-count/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.svg",
+        "sha256": "f7f59bfbb2390e0856b1b4ec003addacff212997af8f876363347e9d014bcabb",
+        "bytes": 10749
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "sha256": "f22eb7770be462542d4afd084a2384970a427b003c35490b085451b6beb7a241",
+          "bytes": 8434,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "psychiatric-bed-count--neighborhood-park-count-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.json",
+          "sha256": "3d94f18f357021aa5f75e34813b1416746fbfa783dc14432ea385d0ba2edad49",
+          "bytes": 3626,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "psychiatric-bed-count--neighborhood-park-count-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.source.json",
+          "sha256": "97120ce4c4244d28ce62ba065408a52645f1a8473cbfb36591b0d8afcd90b40b",
+          "bytes": 588,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count--neighborhood-park-count-scatter.svg",
+          "alt": "精神病床数と近隣公園数の関係",
+          "heading": "見かけの相関とその真因",
+          "line": 49
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/psychiatric-bed-count.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/psychiatric-bed-count.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.svg",
+        "sha256": "5ea64aa641c87c47bd9cdd745dea7369143f0863f0f94dff2a9815d2e30ed8ec",
+        "bytes": 6900
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/article.md",
+          "sha256": "f22eb7770be462542d4afd084a2384970a427b003c35490b085451b6beb7a241",
+          "bytes": 8434,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.json",
+          "sha256": "4082cb8304fa02039ae3518f6b6d1572c27323eef04df3811a3d802a84a1dca9",
+          "bytes": 6678,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.source.json",
+          "sha256": "5761773cc4d453c8f09b09fc556ff964c6d8d6fe1b9742cc3a23b6ed7644c4f7",
+          "bytes": 667,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/data/psychiatric-bed-count-vs-neighborhood-park-count-prefecture-rankings.svg",
+          "alt": "精神病床数の上位と下位",
+          "heading": "精神病床数の分布",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/psychiatric-bed-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/psychiatric-bed-count/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/background.jpg",
+        "sha256": "610d53ba073e06c28041aa9b9ad816a1426e780efa447269b1433c0bed1925ad",
+        "bytes": 104713
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "sha256": "b742a58cbb959ada54225589e9fe9464ef9fcbcff79054537f9d9b520ef66dd1",
+          "bytes": 2243,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e49199afd59d0baaa99e44280ee3652f5364b92cc7fbcef9cf1728a50645e313",
+        "fingerprint": "49cc95c1d0b6a3271c51c3fbf6e2379e835dd18b95b121e4429249b3b7c8d019",
+        "generatedAt": "2026-08-29T08:41:36.771Z"
+      }
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/ogp.png",
+        "sha256": "0dbbaa30b11766283e57314252ba968a8f20969a3ad2efc9725103d7b0e5ae6c",
+        "bytes": 629664
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "sha256": "b742a58cbb959ada54225589e9fe9464ef9fcbcff79054537f9d9b520ef66dd1",
+          "bytes": 2243,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e49199afd59d0baaa99e44280ee3652f5364b92cc7fbcef9cf1728a50645e313",
+        "fingerprint": "49cc95c1d0b6a3271c51c3fbf6e2379e835dd18b95b121e4429249b3b7c8d019",
+        "generatedAt": "2026-08-29T08:41:36.771Z"
+      }
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-dark.webp",
+        "sha256": "80dd9587b2c9bfce12140318bf9ccad8a0c3e45efb943f0ad78f9877127925f8",
+        "bytes": 15188
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "sha256": "b742a58cbb959ada54225589e9fe9464ef9fcbcff79054537f9d9b520ef66dd1",
+          "bytes": 2243,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e49199afd59d0baaa99e44280ee3652f5364b92cc7fbcef9cf1728a50645e313",
+        "fingerprint": "49cc95c1d0b6a3271c51c3fbf6e2379e835dd18b95b121e4429249b3b7c8d019",
+        "generatedAt": "2026-08-29T08:41:36.771Z"
+      }
+    },
+    {
+      "owner": "web/blog/psychiatric-bed-count-vs-neighborhood-park-count",
+      "file": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/thumbnail-light.webp",
+        "sha256": "8bb36aba8addbdf04f4b5fb06948ece62d4988a9833af040b7d0947639e5980b",
+        "bytes": 32442
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/psychiatric-bed-count-vs-neighborhood-park-count/ogp/generation.json",
+          "sha256": "b742a58cbb959ada54225589e9fe9464ef9fcbcff79054537f9d9b520ef66dd1",
+          "bytes": 2243,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e49199afd59d0baaa99e44280ee3652f5364b92cc7fbcef9cf1728a50645e313",
+        "fingerprint": "49cc95c1d0b6a3271c51c3fbf6e2379e835dd18b95b121e4429249b3b7c8d019",
+        "generatedAt": "2026-08-29T08:41:36.771Z"
+      }
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/data/cheese-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/data/cheese-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/cheese-ranking.svg",
+        "sha256": "5f480d6834b828ff91a204f79f4bbc1d091ffcbf794d6d58946f8e4e0f5bb16b",
+        "bytes": 6850
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/article.md",
+          "sha256": "fa1203e755b832995b73a394337811b55f9ed4329ea463c8130bbd9cf4805a59",
+          "bytes": 11584,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cheese-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/cheese-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/cheese-ranking.json",
+          "sha256": "55a297c15e40321fc2943e85af99d6a83a4169163c2028cf6e6afa8497b74c5c",
+          "bytes": 6681,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cheese-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/cheese-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/cheese-ranking.source.json",
+          "sha256": "5afd0c16aa8b43f98bf9f6a07e17c051446bc46199cfa9e4ecee8620c9efb330",
+          "bytes": 619,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/cheese-ranking.svg",
+          "alt": "チーズ消費支出額 上位5・下位5",
+          "heading": "チーズ消費支出額 — 全国1位9,320円、乳製品でも首位",
+          "line": 50
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cheese-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cheese-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/data/pasta-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/data/pasta-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/pasta-ranking.svg",
+        "sha256": "fe16b6a2e87b850fa37fb10e00a15a1a3a22430de0ccc60376521538720c0bb5",
+        "bytes": 6852
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/article.md",
+          "sha256": "fa1203e755b832995b73a394337811b55f9ed4329ea463c8130bbd9cf4805a59",
+          "bytes": 11584,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "pasta-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/pasta-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/pasta-ranking.json",
+          "sha256": "3681ad22f952371f9d673cae59729636dc39554414d6cc015bdb2089747676ba",
+          "bytes": 6680,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "pasta-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/pasta-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/pasta-ranking.source.json",
+          "sha256": "88f97e3f1632d6d5930a050546dfceaa516b8f28879906f19a751b636a9d0197",
+          "bytes": 615,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/pasta-ranking.svg",
+          "alt": "パスタ消費支出額 上位5・下位5",
+          "heading": "パスタ消費支出額 — 全国1位1,988円、麺類でも洋風が優位",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pasta-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pasta-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.svg",
+        "sha256": "c64ce54a36ab1223c86aad7cc5809e0621d3abff36881707a819d558183ffadf",
+        "bytes": 3730
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/article.md",
+          "sha256": "fa1203e755b832995b73a394337811b55f9ed4329ea463c8130bbd9cf4805a59",
+          "bytes": 11584,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tokyo-quantity-price-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.json",
+          "sha256": "e8df53b14a0059cefe34b1fe7159d3cd4f80c0cfbeaad454046473ffd4b4e7be",
+          "bytes": 1163,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tokyo-quantity-price-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.source.json",
+          "sha256": "6a462dee1c4062055d7c2c10277af1f6c2c9c46b86122f965f90da0156486f3b",
+          "bytes": 2006,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tokyo-quantity-price-findings.svg",
+          "alt": "東京の食卓を数量×価格で分解",
+          "heading": "数量×価格で分解する東京の食卓",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 488",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/data/tomato-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/data/tomato-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tomato-ranking.svg",
+        "sha256": "812a940d90fab12fe037eb4160a035fb74e8ddd9e16215b31279079b98b09173",
+        "bytes": 6850
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/article.md",
+          "sha256": "fa1203e755b832995b73a394337811b55f9ed4329ea463c8130bbd9cf4805a59",
+          "bytes": 11584,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tomato-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/tomato-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tomato-ranking.json",
+          "sha256": "db885b40dcde4a92832da591dded3df888f4cbd869607da27ade34e9ea4a3fa3",
+          "bytes": 6685,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tomato-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/data/tomato-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tomato-ranking.source.json",
+          "sha256": "2eaf07c9cbaa89b6c60b89e4591363b0dc266fbf7e2f4c356f6cb419d2827acc",
+          "bytes": 619,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/data/tomato-ranking.svg",
+          "alt": "トマト消費支出額 上位5・下位5",
+          "heading": "トマト消費支出額 — 全国1位10,705円、野菜の中でも突出",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/background.jpg",
+        "sha256": "fd89509608b28345c64083fed99890c488d765f317561164c2be39efed39e906",
+        "bytes": 94519
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/generation.json",
+          "sha256": "13cda0bdbab727fd6ecf025628bb94641be78c0114c3e736aae2e444b87835bb",
+          "bytes": 2157,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "31b2f8edaf9895a4632b3daec6bd9d9574cc20bbe7cda1a825f64378629a9991",
+        "fingerprint": "e842d36e2ea22e54d12f99d88e682351441021a26fa6da2c2bf952a66fd7e0e2",
+        "generatedAt": "2026-09-05T15:59:13.294Z"
+      }
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/ogp.png",
+        "sha256": "c8f0822eb1f2e71159ba4ee1f117965102dbc75339d842f1bbc1bdd273bcc814",
+        "bytes": 571792
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/generation.json",
+          "sha256": "13cda0bdbab727fd6ecf025628bb94641be78c0114c3e736aae2e444b87835bb",
+          "bytes": 2157,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "31b2f8edaf9895a4632b3daec6bd9d9574cc20bbe7cda1a825f64378629a9991",
+        "fingerprint": "e842d36e2ea22e54d12f99d88e682351441021a26fa6da2c2bf952a66fd7e0e2",
+        "generatedAt": "2026-09-05T15:59:13.294Z"
+      }
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/thumbnail-dark.webp",
+        "sha256": "7dc572668e8e07ceddf02d0aa3a6e21700453b1f9657ca466caa13ffdfe93c72",
+        "bytes": 13028
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/generation.json",
+          "sha256": "13cda0bdbab727fd6ecf025628bb94641be78c0114c3e736aae2e444b87835bb",
+          "bytes": 2157,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "31b2f8edaf9895a4632b3daec6bd9d9574cc20bbe7cda1a825f64378629a9991",
+        "fingerprint": "e842d36e2ea22e54d12f99d88e682351441021a26fa6da2c2bf952a66fd7e0e2",
+        "generatedAt": "2026-09-05T15:59:13.294Z"
+      }
+    },
+    {
+      "owner": "web/blog/tokyo-food-culture",
+      "file": "app/blog/tokyo-food-culture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tokyo-food-culture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/thumbnail-light.webp",
+        "sha256": "9c59a99f3fc198af59fb48d0b6b3cc6a332545bd4cff95d5096924e2a2681a0f",
+        "bytes": 25272
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tokyo-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tokyo-food-culture/ogp/generation.json",
+          "sha256": "13cda0bdbab727fd6ecf025628bb94641be78c0114c3e736aae2e444b87835bb",
+          "bytes": 2157,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "31b2f8edaf9895a4632b3daec6bd9d9574cc20bbe7cda1a825f64378629a9991",
+        "fingerprint": "e842d36e2ea22e54d12f99d88e682351441021a26fa6da2c2bf952a66fd7e0e2",
+        "generatedAt": "2026-09-05T15:59:13.294Z"
+      }
+    },
+    {
+      "owner": "web/material/83fd57a5235cbaaf2aad61de",
+      "file": "assets/blog/article-backgrounds/sewage-treatment-coverage-rate-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/sewage-treatment-coverage-rate-prefecture-gap.jpg",
+        "sha256": "f3badc58109f334373f19789a4c35cb608d7c33a52623dcce210c1fb755ebee3",
+        "bytes": 99458
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/sewage-treatment-coverage-rate-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-quantity",
+      "file": "app/ranking/kerosene-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-quantity/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-quantity",
+      "file": "app/ranking/kerosene-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-quantity/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/kerosene-consumption-quantity",
+      "file": "app/ranking/kerosene-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kerosene-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kerosene-consumption-quantity/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/nhk-fee-consumption-expenditure",
+      "file": "app/ranking/nhk-fee-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nhk-fee-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/ogp/ogp.png",
+        "sha256": "255a0fbfe8d57996264d794a238c9ddc678d9b8f886437b43584eb7a62374ff9",
+        "bytes": 63985
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nhk-fee-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/ogp/generation.json",
+          "sha256": "14f927566096bd67e284ee7f655ea877a35ec1cf421ed886d9efcc6d48407527",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "d84ddbdf290aeb097dc475f29328a222dc4e8595677b47713ad811e0d6d8bbf4",
+        "fingerprint": "44e1b9b9668fd7e0e01ad86b986cb7c1e7b45250060621cd7c9c4ab1e395b9fd",
+        "generatedAt": "2026-10-03T21:00:18.031Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nhk-fee-consumption-expenditure",
+      "file": "app/ranking/nhk-fee-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nhk-fee-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "ee8295094fd1185b3452854ec04dc311f2f8276988f302b905459876dafb3bfe",
+        "bytes": 18710
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nhk-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "cb034b14a0661e9048038010d54efe8f16d89a3f2d4c94f3b2e65d4f7c21a700",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "4460688204ff3eac8c9c8948cff9cc23182d83a7d4182d46997a1cc1d8cd4a98",
+        "fingerprint": "4178b22514367f998a28f2d792006a5843f9ac5db1e81dea70d3bdadf8e7534e",
+        "generatedAt": "2026-10-03T21:25:32.134Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nhk-fee-consumption-expenditure",
+      "file": "app/ranking/nhk-fee-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nhk-fee-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "9cedbd8bd218291bd3c031e06c3a31f4ab21383ff0e50a7cb4e8508b4e383cdc",
+        "bytes": 17272
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nhk-fee-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/thumbnail.json",
+          "sha256": "cb034b14a0661e9048038010d54efe8f16d89a3f2d4c94f3b2e65d4f7c21a700",
+          "bytes": 1853,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nhk-fee-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "4460688204ff3eac8c9c8948cff9cc23182d83a7d4182d46997a1cc1d8cd4a98",
+        "fingerprint": "4178b22514367f998a28f2d792006a5843f9ac5db1e81dea70d3bdadf8e7534e",
+        "generatedAt": "2026-10-03T21:25:32.134Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-prepared-food-consumption-expenditure",
+      "file": "app/ranking/other-prepared-food-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-prepared-food-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/ogp/ogp.png",
+        "sha256": "78d050a8cfc35a7a425b81d8899cbf366d2042bd6305a80597e80a3ef70a3318",
+        "bytes": 63944
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-prepared-food-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/ogp/generation.json",
+          "sha256": "c2a4d5ecf01da9c4b9d23e056e3dbffc128873b26cdfb4d18884c545d99183fd",
+          "bytes": 1005,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "c135f88c7dfc2a087eb655e4e65a39f6c57918bdb331a14f4bdcf820e9f96593",
+        "fingerprint": "b8ba3c3897cfd400f2ed77bf49c3ade9bb1c068725e8df2057b79b90c65eff7c",
+        "generatedAt": "2026-10-03T21:00:41.059Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-prepared-food-consumption-expenditure",
+      "file": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "6fa5c0013f405c55eadedc0ddcfe4c0b8d8f16b94234aaa79fdfedcb3776d8a1",
+        "bytes": 19260
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/thumbnail.json",
+          "sha256": "f71d5d457f5e91fd4564a1be032de6c4da2023f935ba72680a63b8beff7235b5",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "33ac4664631c875aaa1f49ef7d8c3998e53719de8e85c77bb8000b6baca722b6",
+        "fingerprint": "7db9c4d892eb5a259224caabd957cd145f30e9490537fdf3977f55db6aadcc6c",
+        "generatedAt": "2026-10-03T21:25:38.107Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-prepared-food-consumption-expenditure",
+      "file": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "4da13ae91bf18048c0de712aa763c0fe3e7d7335ee9a838fce4da6fccea8eb1e",
+        "bytes": 17724
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-prepared-food-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/thumbnail.json",
+          "sha256": "f71d5d457f5e91fd4564a1be032de6c4da2023f935ba72680a63b8beff7235b5",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-prepared-food-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "33ac4664631c875aaa1f49ef7d8c3998e53719de8e85c77bb8000b6baca722b6",
+        "fingerprint": "7db9c4d892eb5a259224caabd957cd145f30e9490537fdf3977f55db6aadcc6c",
+        "generatedAt": "2026-10-03T21:25:38.107Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sewerage-penetration-rate-pre2011",
+      "file": "app/ranking/sewerage-penetration-rate-pre2011/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sewerage-penetration-rate-pre2011/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/ogp/ogp.png",
+        "sha256": "e5ce41d28589998bca7c80fe64b7f6e351adc8262c1e8e4002c39504996973d0",
+        "bytes": 74437
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sewerage-penetration-rate-pre2011/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/ogp/generation.json",
+          "sha256": "5b1df15530e8bb4e96edf790a7aa6d7b87a5e629681d9de52216c435333392df",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "f63908955c59cc898c0789d30f39514d441a28469de6c1a36a72dff319e32cf4",
+        "fingerprint": "b32115b447799d10b3c93cb042ed63aa4cbc9654d5a5e9bd6fec0ae1af4ea046",
+        "generatedAt": "2026-08-16T22:20:52.541Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sewerage-penetration-rate-pre2011",
+      "file": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/thumbnail-dark.webp",
+        "sha256": "38547fa5968d4e96471b902692bf7372fe6d50d9f0769b4e0a15bcb4963856d1",
+        "bytes": 15458
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/thumbnail.json",
+          "sha256": "a26870074e15ce8a1993800b8f557f3b455091ec0c231ca7af673046d0d3a516",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9206d8d24c04aae37143ba35472b2744b8d5f0dc6789c4ec7c889679aeca9e78",
+        "fingerprint": "6c6e3cbcdc61468bdfbbebe2ab7b1d4e6286f42555913be4eb73d1c518b12974",
+        "generatedAt": "2026-08-16T22:36:19.937Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sewerage-penetration-rate-pre2011",
+      "file": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/thumbnail-light.webp",
+        "sha256": "56befc25a497fc0e6c438f18af78b32b82c04eaec432237729ed6e204c528470",
+        "bytes": 13906
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sewerage-penetration-rate-pre2011/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/thumbnail.json",
+          "sha256": "a26870074e15ce8a1993800b8f557f3b455091ec0c231ca7af673046d0d3a516",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-penetration-rate-pre2011/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9206d8d24c04aae37143ba35472b2744b8d5f0dc6789c4ec7c889679aeca9e78",
+        "fingerprint": "6c6e3cbcdc61468bdfbbebe2ab7b1d4e6286f42555913be4eb73d1c518b12974",
+        "generatedAt": "2026-08-16T22:36:19.937Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-assessed-land-area-ratio",
+      "file": "app/ranking/total-assessed-land-area-ratio/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-assessed-land-area-ratio/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/ogp/ogp.png",
+        "sha256": "5c4ff430746744fe6381b68b7a4bf573b3b9eadc9e2793d0cae930ff5fa9b6af",
+        "bytes": 75789
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-assessed-land-area-ratio/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/ogp/generation.json",
+          "sha256": "88ee61ed17777b8a2117909deb88ca5476ebbefd905b703493bd1a7594246dd2",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "8bf7c9dcf4f4d0f6748aa06968ffcf488809fd6d7bb52fd72bbf8f97f0b68f5b",
+        "fingerprint": "edc95fcb4f744527b29a57cf780364b326528c95e1033b41f05a30bbd8ee5bc4",
+        "generatedAt": "2026-08-16T22:21:13.580Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-assessed-land-area-ratio",
+      "file": "app/ranking/total-assessed-land-area-ratio/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-assessed-land-area-ratio/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/thumbnail-dark.webp",
+        "sha256": "419b812059cdd6f728524edb27d1434c60409bb05f87ec3ba77b73b34ed3b197",
+        "bytes": 15358
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-assessed-land-area-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/thumbnail.json",
+          "sha256": "2f82dc9be6d588912b7fde6ee8dd193a859f7deddcd3f5b6f688ccd2273fadf2",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9cedec551b8f0f48362ddc0cad71f1a5d72a2cfcff5d4f7d49e57a92f3657147",
+        "fingerprint": "45c0a69e3d15dca766593ef03c2a03abd355130d93660bcaad54734c96f4ced0",
+        "generatedAt": "2026-08-16T22:36:29.090Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-assessed-land-area-ratio",
+      "file": "app/ranking/total-assessed-land-area-ratio/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-assessed-land-area-ratio/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/thumbnail-light.webp",
+        "sha256": "5399af0a364acdc1e17ac70069cc52b7caabf6e9e7895396d60705bcf8dc1a95",
+        "bytes": 13652
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-assessed-land-area-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/thumbnail.json",
+          "sha256": "2f82dc9be6d588912b7fde6ee8dd193a859f7deddcd3f5b6f688ccd2273fadf2",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-assessed-land-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-assessed-land-area-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "9cedec551b8f0f48362ddc0cad71f1a5d72a2cfcff5d4f7d49e57a92f3657147",
+        "fingerprint": "45c0a69e3d15dca766593ef03c2a03abd355130d93660bcaad54734c96f4ced0",
+        "generatedAt": "2026-08-16T22:36:29.090Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-circulatory-outpatient",
+      "file": "app/ranking/treatment-rate-circulatory-outpatient/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-circulatory-outpatient/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/ogp/ogp.png",
+        "sha256": "83253af9f14cb3cfa3ea15d176616ad737c8ca22ee07b16ef3d6f37dcd476141",
+        "bytes": 82639
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-circulatory-outpatient/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/ogp/generation.json",
+          "sha256": "5e75ac9d17bffe9b60469cbcf2fa0f9773777becd7df6ed5b248f97938f3de53",
+          "bytes": 981,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "8687ff0b51c928e289ef50b9fffb50c3254fecc1f85374b071a6100dad78ea87",
+        "fingerprint": "6f8e42c2abae87914ed1631d656a6ff2adfd2633aa4b5bba09d674a33b1c54a0",
+        "generatedAt": "2026-08-16T22:21:19.439Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-circulatory-outpatient",
+      "file": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/thumbnail-dark.webp",
+        "sha256": "dd437de8299ccd010418bf5fce514a36aee498b69c7805cb50d647c0dfa15448",
+        "bytes": 20058
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/thumbnail.json",
+          "sha256": "e0dc435408fdc66e1f4eee67f492654f2388760f45fa6752b7255eb70e6e784b",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "ae3700f6fba1c8f322686a84085cb414bdf99e4a871498b11674b4890e1a9ccb",
+        "fingerprint": "66fa7e2a2cc2f2e874683c4c7216edca7e8c9f0ec4816249e47aa0cdfcba443a",
+        "generatedAt": "2026-08-16T22:36:31.529Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-circulatory-outpatient",
+      "file": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/thumbnail-light.webp",
+        "sha256": "d958ddd016ca41e381416119ebddc1b59ade027d07b548d73718f7603694ee1d",
+        "bytes": 18810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-circulatory-outpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/thumbnail.json",
+          "sha256": "e0dc435408fdc66e1f4eee67f492654f2388760f45fa6752b7255eb70e6e784b",
+          "bytes": 1907,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-circulatory-outpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "ae3700f6fba1c8f322686a84085cb414bdf99e4a871498b11674b4890e1a9ccb",
+        "fingerprint": "66fa7e2a2cc2f2e874683c4c7216edca7e8c9f0ec4816249e47aa0cdfcba443a",
+        "generatedAt": "2026-08-16T22:36:31.529Z"
+      }
+    }
+  ]
+}

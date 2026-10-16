@@ -1,0 +1,1491 @@
+{
+  "items": [
+    {
+      "id": "web/blog/income-quintile-clothing",
+      "channel": "web",
+      "key": "income-quintile-clothing",
+      "title": "外に着る服ほど年収差が出るのはなぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/income-quintile-clothing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "099eb57d9074d1b1a127bf5843299cd55ef276213951ff3a160557257aff7365",
+      "catalogBasis": "a3d826ac425c5b84c9d4df88d973dc651685e8ab9452c89335ada82272bcbcb0",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/article.md",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+        "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+        "bytes": 9811
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/2e2604ec9e1d55fca8bde62f",
+      "channel": "web",
+      "key": "apps/remotion/public/images/site-intro/04-ranking-map.png",
+      "title": "04-ranking-map.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c1dd98537c12ad0514faf82d08a94181aff660f8db1225c5cf94c98449f50d0d"
+    },
+    {
+      "id": "web/material/8ea46bff654914347ac0f1e4",
+      "channel": "web",
+      "key": "assets/area-specialty/18000/koshi-no-risotto.webp",
+      "title": "koshi-no-risotto.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "66e1650282c1327781c9c7f59dd189d65a403a56c8602993d52ef2a5158f3a58"
+    },
+    {
+      "id": "web/ranking/banana-consumption-expenditure",
+      "channel": "web",
+      "key": "banana-consumption-expenditure",
+      "title": "バナナ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/banana-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3c886e7441e511725947e26931dd81903ee52c8a651a33e9839dd9e06b751693",
+      "catalogBasis": "3c886e7441e511725947e26931dd81903ee52c8a651a33e9839dd9e06b751693",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/childrens-shoes-consumption-quantity",
+      "channel": "web",
+      "key": "childrens-shoes-consumption-quantity",
+      "title": "子供用靴・サンダル消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/childrens-shoes-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f7cbd4a619700100b4096311cc6293272f785959b2687a35059aec6e88b7a7c7",
+      "catalogBasis": "f7cbd4a619700100b4096311cc6293272f785959b2687a35059aec6e88b7a7c7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/home-ownership-rate-kakei",
+      "channel": "web",
+      "key": "home-ownership-rate-kakei",
+      "title": "持家率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/home-ownership-rate-kakei",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "457d364fe827e6ba2078006f959d237b70e377f20a79bfae5a8e6e779e851445",
+      "catalogBasis": "457d364fe827e6ba2078006f959d237b70e377f20a79bfae5a8e6e779e851445",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/marine-fishery-catch",
+      "channel": "web",
+      "key": "marine-fishery-catch",
+      "title": "海面漁業漁獲量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/marine-fishery-catch",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7a86b7421ada13be2a6dce0da574cffdb3d9e8bd3fc36ff7705f5378fd89fbf7",
+      "catalogBasis": "7a86b7421ada13be2a6dce0da574cffdb3d9e8bd3fc36ff7705f5378fd89fbf7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/old-population-index",
+      "channel": "web",
+      "key": "old-population-index",
+      "title": "老年人口指数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/old-population-index",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1f970f2aef20fbeb2bd06e14609534df0386eb433d446dc14510e6ee99b8fe2d",
+      "catalogBasis": "1f970f2aef20fbeb2bd06e14609534df0386eb433d446dc14510e6ee99b8fe2d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/theme/local-economy",
+      "channel": "web",
+      "key": "local-economy",
+      "title": "地域経済",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/local-economy",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "40d1a7e28db3ea6adf962b7d73cbe19d81f76868fb37a1c3c0f001e684fe4ac5",
+      "catalogBasis": "40d1a7e28db3ea6adf962b7d73cbe19d81f76868fb37a1c3c0f001e684fe4ac5",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/data/mens-suit-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/data/mens-suit-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-suit-quintile.svg",
+        "sha256": "5f0cf48fccd0df1710c785dc134d9d961e3744b6c04166c163287b25dad7183b",
+        "bytes": 3215
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+          "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+          "bytes": 9811,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "mens-suit-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/mens-suit-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-suit-quintile.json",
+          "sha256": "a563944e3255ed577df3fdfc896bed42d91fbe78fe2d262aae1f8706e2a65f29",
+          "bytes": 666,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "mens-suit-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/mens-suit-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-suit-quintile.source.json",
+          "sha256": "a44399179e64a8b9bf418d2b7b25310656e71f1d51993b1ac623baa2c1040e72",
+          "bytes": 487,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-suit-quintile.svg",
+          "alt": "背広服 年収五分位別",
+          "heading": "背広服 — 最もフォーマルな服は10.6倍差",
+          "line": 67
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/data/mens-underwear-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/data/mens-underwear-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-underwear-quintile.svg",
+        "sha256": "f1f1a02a385a76ac03c4c55f4e387dd753f24df128f4bb35a06784457473c264",
+        "bytes": 3813
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+          "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+          "bytes": 9811,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "mens-underwear-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/mens-underwear-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-underwear-quintile.json",
+          "sha256": "9e193078ab03bdc58753a1c9fd122440ae9c5f20de9cc33c5fc5af4d6e3e98be",
+          "bytes": 675,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "mens-underwear-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/mens-underwear-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-underwear-quintile.source.json",
+          "sha256": "0670b0a3ed8c01cd5aeb003d320130901fa0877f07164511700907d5b1fe50cf",
+          "bytes": 501,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/mens-underwear-quintile.svg",
+          "alt": "男子用下着類 年収五分位別",
+          "heading": "男子用下着 — 男性衣料でも同じ傾向は再現するか",
+          "line": 56
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/data/womens-coat-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/data/womens-coat-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-coat-quintile.svg",
+        "sha256": "463cc54fc29c5b23481a78a96355c01d28c3dac758d063cc07b14bbf6c98f01a",
+        "bytes": 3615
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+          "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+          "bytes": 9811,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "womens-coat-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-coat-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-coat-quintile.json",
+          "sha256": "35982439873c2f2d07c7ae26fb0dab3e0efbc2fa4ac2953458b833279b2935dd",
+          "bytes": 673,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "womens-coat-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-coat-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-coat-quintile.source.json",
+          "sha256": "c37a0f538dfea47841b8dd72402487dfebbd2cd1fe2ffc8c7db9a4249576a6d8",
+          "bytes": 498,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-coat-quintile.svg",
+          "alt": "婦人用コート 年収五分位別",
+          "heading": "婦人用コート — 外側の服は4.4倍差",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/data/womens-sweater-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/data/womens-sweater-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-sweater-quintile.svg",
+        "sha256": "479c9cede261a9a14582ed801b5d22275760e660b2b060970b968f40aa4a7dcc",
+        "bytes": 4392
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+          "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+          "bytes": 9811,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "womens-sweater-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-sweater-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-sweater-quintile.json",
+          "sha256": "10ae41729bedc6c9665099fa0759bc73955a6d08e42b3d247453420f1ad7a865",
+          "bytes": 678,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "womens-sweater-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-sweater-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-sweater-quintile.source.json",
+          "sha256": "54fc9085f0a2742274c84214373fc30bdad617fe170d6d8a3b8ad2be03fdda0a",
+          "bytes": 504,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-sweater-quintile.svg",
+          "alt": "婦人用セーター 年収五分位別",
+          "heading": "婦人用セーター — 中間の服は3.7倍差",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/data/womens-underwear-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/data/womens-underwear-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-underwear-quintile.svg",
+        "sha256": "76804041fe6270b060baf81fe307a093f4bec75e0a755a396c02972862b8f329",
+        "bytes": 3245
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/article.md",
+          "sha256": "926fe8df613294ee5ab5bfb7d50264962e7f431060845add075759b2d5f00a5c",
+          "bytes": 9811,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "womens-underwear-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-underwear-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-underwear-quintile.json",
+          "sha256": "f39822ed005864f16b99b19fbe7c48c5d15de457ffec96075da3169059646906",
+          "bytes": 676,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "womens-underwear-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/data/womens-underwear-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-underwear-quintile.source.json",
+          "sha256": "27bc9ae2c56989cabb1737c0a2de176e78d59ece4250542fb15128cbd5a7c9e9",
+          "bytes": 503,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/data/womens-underwear-quintile.svg",
+          "alt": "婦人用下着類 年収五分位別",
+          "heading": "婦人用下着 — 内側の服は2.4倍差",
+          "line": 48
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/background.jpg",
+        "sha256": "a4f344b774b45bbd170ab9e1ae5bb838bcc7219083a0928e27cb30a6e2967971",
+        "bytes": 90815
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/generation.json",
+          "sha256": "4a2f7c9d21564b66400bd3ff60447ac1f35ee63bf6adddb753521cd78e4c7c93",
+          "bytes": 2190,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "2548542d4aa9d47e0184275d9e1322dca67aa22de4570d6e5b012a6a93637719",
+        "fingerprint": "b1d0a7d112ff6bcac643eeb35e03a1e746d976029eb1af6c510a270fcedcd3c3",
+        "generatedAt": "2026-09-05T14:56:06.871Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/ogp.png",
+        "sha256": "35639cb849c7ae0e0eadb6347a2e5f748b60186c1c9bcc5781dcb87d5832b731",
+        "bytes": 610372
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/generation.json",
+          "sha256": "4a2f7c9d21564b66400bd3ff60447ac1f35ee63bf6adddb753521cd78e4c7c93",
+          "bytes": 2190,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "2548542d4aa9d47e0184275d9e1322dca67aa22de4570d6e5b012a6a93637719",
+        "fingerprint": "b1d0a7d112ff6bcac643eeb35e03a1e746d976029eb1af6c510a270fcedcd3c3",
+        "generatedAt": "2026-09-05T14:56:06.871Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/thumbnail-dark.webp",
+        "sha256": "26f60f80bce06e09656ac8fc2b93c1f474ff7c25d5fd4eb38faa47bee8cfeb1b",
+        "bytes": 13854
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/generation.json",
+          "sha256": "4a2f7c9d21564b66400bd3ff60447ac1f35ee63bf6adddb753521cd78e4c7c93",
+          "bytes": 2190,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "2548542d4aa9d47e0184275d9e1322dca67aa22de4570d6e5b012a6a93637719",
+        "fingerprint": "b1d0a7d112ff6bcac643eeb35e03a1e746d976029eb1af6c510a270fcedcd3c3",
+        "generatedAt": "2026-09-05T14:56:06.871Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-clothing",
+      "file": "app/blog/income-quintile-clothing/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-clothing/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/thumbnail-light.webp",
+        "sha256": "8639383d5703e1e7cd3a847a6852a4cf0c7add13faae63d340d237db397bb6c5",
+        "bytes": 26796
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-clothing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-clothing/ogp/generation.json",
+          "sha256": "4a2f7c9d21564b66400bd3ff60447ac1f35ee63bf6adddb753521cd78e4c7c93",
+          "bytes": 2190,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "2548542d4aa9d47e0184275d9e1322dca67aa22de4570d6e5b012a6a93637719",
+        "fingerprint": "b1d0a7d112ff6bcac643eeb35e03a1e746d976029eb1af6c510a270fcedcd3c3",
+        "generatedAt": "2026-09-05T14:56:06.871Z"
+      }
+    },
+    {
+      "owner": "web/material/2e2604ec9e1d55fca8bde62f",
+      "file": "apps/remotion/public/images/site-intro/04-ranking-map.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/remotion/public/images/site-intro/04-ranking-map.png",
+        "sha256": "715d1cc745c25d739426631468504df446f18a297d5cf1fdc08d90e433c69b4f",
+        "bytes": 391140
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/remotion/public/images/site-intro/04-ranking-map.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8ea46bff654914347ac0f1e4",
+      "file": "assets/area-specialty/18000/koshi-no-risotto.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/18000/koshi-no-risotto.webp",
+        "sha256": "7773569f3bef6f9c17a8a36fa2fef4083e0a346173c1f198dedb1c562e6af045",
+        "bytes": 48838
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/18000/koshi-no-risotto.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/banana-consumption-expenditure",
+      "file": "app/ranking/banana-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/banana-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/ogp/ogp.png",
+        "sha256": "1f70b1345f2d32be8f5f0c9a7b4cac8c02c46656dc5fc58d07386fb55d13c5ea",
+        "bytes": 58618
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/banana-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/ogp/generation.json",
+          "sha256": "85f231ef6e076c9c011fa69c48c64e2439d05188bba043fb703eaafb613ac5a1",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/banana-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/banana-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "7c6843a140b8d4b86e49fb36c6dff685fad17fcb00fe19822daedf298ea01268",
+        "fingerprint": "6c67cd94f266dd8ebc4bcc39d5c6ab5adedfd94753048ce0f8ed216db62fc25d",
+        "generatedAt": "2026-10-10T21:32:14.740Z"
+      }
+    },
+    {
+      "owner": "web/ranking/banana-consumption-expenditure",
+      "file": "app/ranking/banana-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/banana-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "fe9500b8e22f4c2b45ecbccacfb11d36fc294019afc58cf02c9f513f4865c70a",
+        "bytes": 15790
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/banana-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/thumbnail.json",
+          "sha256": "bfe441c18c8994c1c4fb8f3415f1db63ad511833fdcaea75388b6d1630f0984e",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/banana-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/banana-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b5675c52aa2ca46efe95caef9513499bcd857f93ab338c8353026990962ccb5d",
+        "fingerprint": "02a2a46abd03f8640174b60cc20e2d37fded1747fc1102ad63109beff2251fa5",
+        "generatedAt": "2026-10-10T21:50:00.985Z"
+      }
+    },
+    {
+      "owner": "web/ranking/banana-consumption-expenditure",
+      "file": "app/ranking/banana-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/banana-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "491178677cb01f73952759643e73c7fca1cc7fd021c928cd08f2de25742d2a31",
+        "bytes": 14070
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/banana-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/thumbnail.json",
+          "sha256": "bfe441c18c8994c1c4fb8f3415f1db63ad511833fdcaea75388b6d1630f0984e",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/banana-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/banana-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/banana-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "b5675c52aa2ca46efe95caef9513499bcd857f93ab338c8353026990962ccb5d",
+        "fingerprint": "02a2a46abd03f8640174b60cc20e2d37fded1747fc1102ad63109beff2251fa5",
+        "generatedAt": "2026-10-10T21:50:00.985Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-quantity",
+      "file": "app/ranking/childrens-shoes-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/ogp/ogp.png",
+        "sha256": "b1986202872dbe43bac291a65e963e98384086b0d5201174ab313613e8d7d94a",
+        "bytes": 61580
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/ogp/generation.json",
+          "sha256": "54e5dd43ac549d07a98172e87d13a3ece8cf61294922baeb54a8d0d302898ed0",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "49bc7316eedc3c5ad8b577bc233e94efc2e56ef68ace264077e3376a6adeb23d",
+        "fingerprint": "77e7440d3bfb7d0a2ff16c4d48d4aafacb3f8adf5aae04c1f2664f0c4c0576ad",
+        "generatedAt": "2026-10-10T21:32:33.163Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-quantity",
+      "file": "app/ranking/childrens-shoes-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "5f2ee39e12f2be678c0db660119936e0b1efa4a3177f4b46af1f328025d45783",
+        "bytes": 17184
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/thumbnail.json",
+          "sha256": "bd7749883868475fce85a3d5cd40adc8c5fe52d62f1675f1321bb9be0eb6b83b",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "de728454f77bdc094304b86bb14e431e70b0d07501e6a580ab59bd0951018073",
+        "fingerprint": "9b31b0eb7a32c956d2acef2cfd009fd11bae62a7dda25d9d84d85d16ec1b5f3a",
+        "generatedAt": "2026-10-10T21:50:05.816Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-quantity",
+      "file": "app/ranking/childrens-shoes-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/thumbnail-light.webp",
+        "sha256": "9ec06a588140a88107844879a044d95dde322ed0a902df098e0839e3d63d8699",
+        "bytes": 15436
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/thumbnail.json",
+          "sha256": "bd7749883868475fce85a3d5cd40adc8c5fe52d62f1675f1321bb9be0eb6b83b",
+          "bytes": 1877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "de728454f77bdc094304b86bb14e431e70b0d07501e6a580ab59bd0951018073",
+        "fingerprint": "9b31b0eb7a32c956d2acef2cfd009fd11bae62a7dda25d9d84d85d16ec1b5f3a",
+        "generatedAt": "2026-10-10T21:50:05.816Z"
+      }
+    },
+    {
+      "owner": "web/ranking/home-ownership-rate-kakei",
+      "file": "app/ranking/home-ownership-rate-kakei/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/home-ownership-rate-kakei/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/ogp/ogp.png",
+        "sha256": "c35772ef2f0eb5ab49403f1b5dddcc6666cefa4f35c3610cf65c3ee7045c056a",
+        "bytes": 56523
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/home-ownership-rate-kakei/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/ogp/generation.json",
+          "sha256": "88a70d4a2c3b3b6f922643da0fc03a9687a8b0727d0e194efc742468a0f179c0",
+          "bytes": 933,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "4f7a728460d25919e4dfd81a4cf24555b580d00f6a5dff7e63fe14c3a68d9f23",
+        "fingerprint": "fd6fdbb4dd1f623a7a67eb5fb92369d0ccb25d8c55138d1b0b720d88fc7e9163",
+        "generatedAt": "2026-10-01T18:11:33.826Z"
+      }
+    },
+    {
+      "owner": "web/ranking/home-ownership-rate-kakei",
+      "file": "app/ranking/home-ownership-rate-kakei/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/home-ownership-rate-kakei/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/thumbnail-dark.webp",
+        "sha256": "b9ad484a1c283b476c1bac8b9e17f148ef9df3f87a40f649d700f0576533f510",
+        "bytes": 13624
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/home-ownership-rate-kakei/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/thumbnail.json",
+          "sha256": "3f0cea7bc79f43a1a3f283d95af701f7e87dded55b649c1acbcae54069b9501a",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "cfccc9c06981d5e9755c9455334b4d3899f2ba029c98cbb02ff7cfd6523dc0c6",
+        "fingerprint": "65bf4cf128b0f936e294c6aa870fbabb31dc32f978d5ab7e083e03dadee323b5",
+        "generatedAt": "2026-10-01T18:36:01.710Z"
+      }
+    },
+    {
+      "owner": "web/ranking/home-ownership-rate-kakei",
+      "file": "app/ranking/home-ownership-rate-kakei/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/home-ownership-rate-kakei/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/thumbnail-light.webp",
+        "sha256": "cdab90afe89e5a5bf2609cf5ae748f5eb430dac0750e0acc446db7d0959c1083",
+        "bytes": 11744
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/home-ownership-rate-kakei/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/thumbnail.json",
+          "sha256": "3f0cea7bc79f43a1a3f283d95af701f7e87dded55b649c1acbcae54069b9501a",
+          "bytes": 1799,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/home-ownership-rate-kakei/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/home-ownership-rate-kakei/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "cfccc9c06981d5e9755c9455334b4d3899f2ba029c98cbb02ff7cfd6523dc0c6",
+        "fingerprint": "65bf4cf128b0f936e294c6aa870fbabb31dc32f978d5ab7e083e03dadee323b5",
+        "generatedAt": "2026-10-01T18:36:01.710Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-catch",
+      "file": "app/ranking/marine-fishery-catch/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-catch/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/ogp/ogp.png",
+        "sha256": "5d1ffae6a0fb73bfbb9f043fb096685bb13c6224fc43958f6ab5a146405ed1e2",
+        "bytes": 61767
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-catch/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/ogp/generation.json",
+          "sha256": "c62052bd9e6779deb7204f6fe09a4305231bf237b253733d38ef07c0737a5b41",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-catch/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-catch/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "8548f852a207ca5050f76c48c4fbb866dfbd6d6c9c1309daed9e30b397d2ed5f",
+        "fingerprint": "f2c9558ad9bad573d20668aa8e33af0f095f0292c907d48e7d4747966afd50e2",
+        "generatedAt": "2026-10-03T20:59:49.597Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-catch",
+      "file": "app/ranking/marine-fishery-catch/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-catch/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/thumbnail-dark.webp",
+        "sha256": "6878a91043bcab2875ce454acd70ec95fd41dda6241572989e9fac3b5a101ae8",
+        "bytes": 17762
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-catch/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/thumbnail.json",
+          "sha256": "b034158303a4b994b0dfb1de6dd3c4dede6cc0f8f21991b66fdae3d02c3f2a6e",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-catch/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-catch/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "45ae4f47ded3ddf9fe0bc41681e9fc54bc80966e245e09420e74c5675bc12cfc",
+        "fingerprint": "b7b2a6e7c47eea76483bfaaf63dff754499e360022f4a380a763667b9bf68f08",
+        "generatedAt": "2026-10-03T21:25:24.679Z"
+      }
+    },
+    {
+      "owner": "web/ranking/marine-fishery-catch",
+      "file": "app/ranking/marine-fishery-catch/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/marine-fishery-catch/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/thumbnail-light.webp",
+        "sha256": "744d7df164078a7bb4c61cd53765912af6738575321d69cd9e726cf63f70b0f6",
+        "bytes": 16500
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/marine-fishery-catch/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/thumbnail.json",
+          "sha256": "b034158303a4b994b0dfb1de6dd3c4dede6cc0f8f21991b66fdae3d02c3f2a6e",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-fishery-catch/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/marine-fishery-catch/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-fishery-catch/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "45ae4f47ded3ddf9fe0bc41681e9fc54bc80966e245e09420e74c5675bc12cfc",
+        "fingerprint": "b7b2a6e7c47eea76483bfaaf63dff754499e360022f4a380a763667b9bf68f08",
+        "generatedAt": "2026-10-03T21:25:24.679Z"
+      }
+    },
+    {
+      "owner": "web/ranking/old-population-index",
+      "file": "app/ranking/old-population-index/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/old-population-index/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/old-population-index/ogp/ogp.png",
+        "sha256": "a43c464f9a8f0fd02ad7d76812542dabf73339c8d1fcf6d004e1e1f1725fca0b",
+        "bytes": 59617
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/old-population-index/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/ogp/generation.json",
+          "sha256": "ce9c0714cd6d43f9181e7d3609afd4dfe0da202b6fecbe632fffd0570cd23d75",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/old-population-index/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/old-population-index/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9678c133ba4eb43076afba6b2651405ccd8195dd5b88e34a7c9dc4451af5454c",
+        "fingerprint": "e04e7bb0e11a997e1e99b34c4a9ee52eceb274a9f45d957688f421c85348004b",
+        "generatedAt": "2026-10-03T21:00:27.880Z"
+      }
+    },
+    {
+      "owner": "web/ranking/old-population-index",
+      "file": "app/ranking/old-population-index/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/old-population-index/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/old-population-index/thumbnail-dark.webp",
+        "sha256": "b386aa243d5e25f2af9b1d0081d2110cdd70a1d86d71e6ffde71233945ef826f",
+        "bytes": 15534
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/old-population-index/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/thumbnail.json",
+          "sha256": "a9bf3b8c2662de0f018216dca9ca02611b4c2a399612e640e5a6c58338982e76",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/old-population-index/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/old-population-index/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e7166dc1055491fd02a6a9c6a8f294ef1ebb093bb17a8de0f7dac8af55b9e908",
+        "fingerprint": "64bd7f7f3e1f33cc5dd688b57ff9f97258aa5c7aba9e6af98b1699a9cbeef06e",
+        "generatedAt": "2026-10-03T21:25:34.753Z"
+      }
+    },
+    {
+      "owner": "web/ranking/old-population-index",
+      "file": "app/ranking/old-population-index/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/old-population-index/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/old-population-index/thumbnail-light.webp",
+        "sha256": "4c9caa637a8554d0291c820c29fcfd007b7cf4ec1e8b39b1a24489f20311d849",
+        "bytes": 14052
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/old-population-index/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/thumbnail.json",
+          "sha256": "a9bf3b8c2662de0f018216dca9ca02611b4c2a399612e640e5a6c58338982e76",
+          "bytes": 1754,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/old-population-index/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/old-population-index/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/old-population-index/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e7166dc1055491fd02a6a9c6a8f294ef1ebb093bb17a8de0f7dac8af55b9e908",
+        "fingerprint": "64bd7f7f3e1f33cc5dd688b57ff9f97258aa5c7aba9e6af98b1699a9cbeef06e",
+        "generatedAt": "2026-10-03T21:25:34.753Z"
+      }
+    },
+    {
+      "owner": "web/theme/local-economy",
+      "file": "https://stats47.jp/themes/local-economy/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/local-economy/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

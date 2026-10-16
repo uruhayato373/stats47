@@ -1,0 +1,1305 @@
+{
+  "items": [
+    {
+      "id": "web/material/4376893dd430723485b5aa22",
+      "channel": "web",
+      "key": "assets/area-specialty/03000/morioka-yogurt.webp",
+      "title": "morioka-yogurt.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1945a189f29c8faa3e9e04f2559ffd933f6cb3be49f8aa977adc2977df615c0c"
+    },
+    {
+      "id": "web/material/86b2d354f0229d2d5fd0a6e7",
+      "channel": "web",
+      "key": "assets/note/brand-headers/generated/magazine-koumuin-gis-1920x1006.png",
+      "title": "magazine-koumuin-gis-1920x1006.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "68dd5a6fc9401fd7792d96e074ead39b4e0afecc5d214ec7df55c58d415b8657"
+    },
+    {
+      "id": "web/ranking/childrens-shoes-consumption-expenditure",
+      "channel": "web",
+      "key": "childrens-shoes-consumption-expenditure",
+      "title": "子供用靴・サンダル消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/childrens-shoes-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f3fd5948615e76f359945c8cd4e5fca480db92c0ea3f98a98345afea6afe4122",
+      "catalogBasis": "f3fd5948615e76f359945c8cd4e5fca480db92c0ea3f98a98345afea6afe4122",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/green-pepper-consumption-quantity",
+      "channel": "web",
+      "key": "green-pepper-consumption-quantity",
+      "title": "ピーマン消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/green-pepper-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4cbd31ed2b0f813afece6009ede3bdd9c15cf8ee2240892f8bc3dcbf74f8dbe2",
+      "catalogBasis": "4cbd31ed2b0f813afece6009ede3bdd9c15cf8ee2240892f8bc3dcbf74f8dbe2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/landslide-special-warning-zone-count",
+      "channel": "web",
+      "key": "landslide-special-warning-zone-count",
+      "title": "土砂災害特別警戒区域数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/landslide-special-warning-zone-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3e3cceaedce02ab43e766745be3c4e11aae961eb5d4f8590accaf0da32593576",
+      "catalogBasis": "3e3cceaedce02ab43e766745be3c4e11aae961eb5d4f8590accaf0da32593576",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/natural-disaster-partially-damaged-houses",
+      "channel": "web",
+      "key": "natural-disaster-partially-damaged-houses",
+      "title": "自然災害による一部破損住家棟数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/natural-disaster-partially-damaged-houses",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "eee45078a0ee21587a18a4323f3457c0d38de1523d8a58604d1ad60335c9cc36",
+      "catalogBasis": "eee45078a0ee21587a18a4323f3457c0d38de1523d8a58604d1ad60335c9cc36",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-citrus-consumption-expenditure",
+      "channel": "web",
+      "key": "other-citrus-consumption-expenditure",
+      "title": "他の柑きつ類消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-citrus-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "23e3de26ea066c66e6ebe8f2fa7c8672ca2e20d1fe1776d49a879bde002cf67c",
+      "catalogBasis": "23e3de26ea066c66e6ebe8f2fa7c8672ca2e20d1fe1776d49a879bde002cf67c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/persimmon-consumption-quantity",
+      "channel": "web",
+      "key": "persimmon-consumption-quantity",
+      "title": "柿消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/persimmon-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a952643956e84cd6daf30456350ecf8b66b5481ef192968b32b8d1c66547ef2d",
+      "catalogBasis": "a952643956e84cd6daf30456350ecf8b66b5481ef192968b32b8d1c66547ef2d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sheets-consumption-quantity",
+      "channel": "web",
+      "key": "sheets-consumption-quantity",
+      "title": "敷布消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sheets-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1b28ab449ee623d67d475755294487bd93aa420ebc55945def03869b99c044b5",
+      "catalogBasis": "1b28ab449ee623d67d475755294487bd93aa420ebc55945def03869b99c044b5",
+      "indexComplete": true
+    },
+    {
+      "id": "web/theme/agriculture-production",
+      "channel": "web",
+      "key": "agriculture-production",
+      "title": "農業の生産力",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/agriculture-production",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "564e7656ba10b9b29355d443da885b680b0c0896ac007d3b473d6923fd508a7a",
+      "catalogBasis": "564e7656ba10b9b29355d443da885b680b0c0896ac007d3b473d6923fd508a7a",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/4376893dd430723485b5aa22",
+      "file": "assets/area-specialty/03000/morioka-yogurt.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/03000/morioka-yogurt.webp",
+        "sha256": "ceecebffc57a0068349b2088f18a118b3be70bbf606c02046b4b779e85e37a3f",
+        "bytes": 14578
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/03000/morioka-yogurt.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/86b2d354f0229d2d5fd0a6e7",
+      "file": "assets/note/brand-headers/generated/magazine-koumuin-gis-1920x1006.png",
+      "original": {
+        "provider": "git",
+        "path": "assets/note/brand-headers/generated/magazine-koumuin-gis-1920x1006.png",
+        "sha256": "d4859f13e086a18a60fe82d53d53a2c15e1c32671cd787cb5bfcf2313ae12d60",
+        "bytes": 313697
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "assets/note/brand-headers/generated/magazine-koumuin-gis-1920x1006.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-expenditure",
+      "file": "app/ranking/childrens-shoes-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/ogp/ogp.png",
+        "sha256": "280cecb30bd4d9221c99ae5c38f9653a0b4e8a02a9c3b60678ca2ff896ab31d4",
+        "bytes": 61335
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/ogp/generation.json",
+          "sha256": "2697b05d6c0a0289b3da703145a40c25c5735015ca908bd56d846840b869c725",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "25a8aca1e83ec56b263d27dcd83179f2623ec65f075432792ee4bd28f362b81a",
+        "fingerprint": "f9441ecba77d9190e60cd3219de22e2e52877f42f8045561ced8d89f2aea6a5f",
+        "generatedAt": "2026-10-10T21:32:32.852Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-expenditure",
+      "file": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "7444ef0853702738fde844060074b45910d3b9c4c328ec474e0312f0a072fafa",
+        "bytes": 18140
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/thumbnail.json",
+          "sha256": "7eb17dfdbb34bea7c82ef554453b17b730d51e04d225ea7fc77525ae79e70cb2",
+          "bytes": 1904,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "c3423c63ed2cbd9a0f93ab8cd09152a9bfeb870800d0ac35d5b11e749d97562d",
+        "fingerprint": "94dca9e56041ad593dc15e47bd72fb6102f71c260fbcf0cc9300f1f5e44452d3",
+        "generatedAt": "2026-10-10T21:50:05.671Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childrens-shoes-consumption-expenditure",
+      "file": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "ebaffaab6c14ec6be50c7eb2dfcc65d6bc3df418b7aa9cd0ea5e8d97dd377e1f",
+        "bytes": 16682
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childrens-shoes-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/thumbnail.json",
+          "sha256": "7eb17dfdbb34bea7c82ef554453b17b730d51e04d225ea7fc77525ae79e70cb2",
+          "bytes": 1904,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childrens-shoes-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "c3423c63ed2cbd9a0f93ab8cd09152a9bfeb870800d0ac35d5b11e749d97562d",
+        "fingerprint": "94dca9e56041ad593dc15e47bd72fb6102f71c260fbcf0cc9300f1f5e44452d3",
+        "generatedAt": "2026-10-10T21:50:05.671Z"
+      }
+    },
+    {
+      "owner": "web/ranking/green-pepper-consumption-quantity",
+      "file": "app/ranking/green-pepper-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/green-pepper-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/ogp/ogp.png",
+        "sha256": "6693f4bfbb182c6e0f75d30839d9810d83ccc4a12591d5f3cdb9dff50dbe252f",
+        "bytes": 57795
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/green-pepper-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/ogp/generation.json",
+          "sha256": "22cb7d9f52e032633eaf6fd94ac7318c507a92e761144511dea3383363df6e7d",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "b7a870c0c0df9781080dc9a4e31d344eba1ad842d39f8adf88725a3a001ae860",
+        "fingerprint": "16695c8e50db147d9b4d0fc906351af350e6e8a148c41eb3089eb5c6f792e4e1",
+        "generatedAt": "2026-10-01T18:11:16.989Z"
+      }
+    },
+    {
+      "owner": "web/ranking/green-pepper-consumption-quantity",
+      "file": "app/ranking/green-pepper-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/green-pepper-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "2257f1cb0467fb7034162d0d8302c2abc9195f2ed56ce2fae6962ec78059bf64",
+        "bytes": 15166
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/green-pepper-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/thumbnail.json",
+          "sha256": "db2598b399861a2fb9ede001a147460457f283bcf32485e0a161ce0ff114b8ba",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "412ef24c813df043652576ef0da3964afd3ec0583daa2e96ea7a2719a2487c05",
+        "fingerprint": "855da75f2e9db956445b8078b4802e65140f2e56312f32828f77bacd9e7f18ca",
+        "generatedAt": "2026-10-01T18:35:57.375Z"
+      }
+    },
+    {
+      "owner": "web/ranking/green-pepper-consumption-quantity",
+      "file": "app/ranking/green-pepper-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/green-pepper-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/thumbnail-light.webp",
+        "sha256": "d95d10645b8dc54d13cf00a126b646e76b1ff19afda1c041b57ea46b8936ddd2",
+        "bytes": 13624
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/green-pepper-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/thumbnail.json",
+          "sha256": "db2598b399861a2fb9ede001a147460457f283bcf32485e0a161ce0ff114b8ba",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/green-pepper-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/green-pepper-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "412ef24c813df043652576ef0da3964afd3ec0583daa2e96ea7a2719a2487c05",
+        "fingerprint": "855da75f2e9db956445b8078b4802e65140f2e56312f32828f77bacd9e7f18ca",
+        "generatedAt": "2026-10-01T18:35:57.375Z"
+      }
+    },
+    {
+      "owner": "web/ranking/landslide-special-warning-zone-count",
+      "file": "app/ranking/landslide-special-warning-zone-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/landslide-special-warning-zone-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/ogp/ogp.png",
+        "sha256": "a90b2666b33f82a0953a61304084d763cff16fb98e7dfc1512b6e7309efacd8e",
+        "bytes": 67627
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/landslide-special-warning-zone-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/ogp/generation.json",
+          "sha256": "454f0a63517cf25a86267567be1cf583bbfe8af80310b513d12d652a4fdf1326",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "958df9545998880b6d109554b7aa48299026a7c49dd1fe6d26ea779e4d35acef",
+        "fingerprint": "92371c8f4b1b6916d6acb871b5a02ed567428002affc1c968be31f9ab5082b98",
+        "generatedAt": "2026-10-03T20:59:36.106Z"
+      }
+    },
+    {
+      "owner": "web/ranking/landslide-special-warning-zone-count",
+      "file": "app/ranking/landslide-special-warning-zone-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/landslide-special-warning-zone-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/thumbnail-dark.webp",
+        "sha256": "3f84ff0dcd41167c243bc8bc025d51379955246c5d0d1740b4deaf3b6e664d2d",
+        "bytes": 18152
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/landslide-special-warning-zone-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/thumbnail.json",
+          "sha256": "a19623150ae37c81462733cd9d362505c4a274c30f8285744ac8c69e7f75a9ca",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "975ce0ab00eda655c097d7f47e909b07662f3e06b8a1843a4f5676d8b343d638",
+        "fingerprint": "b10bd3c7884e2e3326b95956e19f1c66ddb054d1926003817f2cbcdbc440742e",
+        "generatedAt": "2026-10-03T21:25:21.220Z"
+      }
+    },
+    {
+      "owner": "web/ranking/landslide-special-warning-zone-count",
+      "file": "app/ranking/landslide-special-warning-zone-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/landslide-special-warning-zone-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/thumbnail-light.webp",
+        "sha256": "f2e48453ee00859e5354203fb51dde12730f97ee0343c946817ffbba12d2766c",
+        "bytes": 16758
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/landslide-special-warning-zone-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/thumbnail.json",
+          "sha256": "a19623150ae37c81462733cd9d362505c4a274c30f8285744ac8c69e7f75a9ca",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/landslide-special-warning-zone-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/landslide-special-warning-zone-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "975ce0ab00eda655c097d7f47e909b07662f3e06b8a1843a4f5676d8b343d638",
+        "fingerprint": "b10bd3c7884e2e3326b95956e19f1c66ddb054d1926003817f2cbcdbc440742e",
+        "generatedAt": "2026-10-03T21:25:21.220Z"
+      }
+    },
+    {
+      "owner": "web/ranking/natural-disaster-partially-damaged-houses",
+      "file": "app/ranking/natural-disaster-partially-damaged-houses/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/natural-disaster-partially-damaged-houses/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/ogp/ogp.png",
+        "sha256": "1b4b8d157ffeb0377ddceaf388f731cc09d10ee81389c63db819cb3e23a62b11",
+        "bytes": 67088
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/natural-disaster-partially-damaged-houses/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/ogp/generation.json",
+          "sha256": "4736158f3409c9ec0691eb3fe74e3c7d92d1f13847c18234b395a8626fa04b57",
+          "bytes": 997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1cc411009ee390df1ed6b986315d3f631d4a2329cc79ba1a8fc0bb5041566329",
+        "fingerprint": "11ef3be2450abc445f080209226262f5ba16fe36932cba23bc82feba44f46115",
+        "generatedAt": "2026-10-03T21:00:11.506Z"
+      }
+    },
+    {
+      "owner": "web/ranking/natural-disaster-partially-damaged-houses",
+      "file": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/thumbnail-dark.webp",
+        "sha256": "803aefda8a54ec976e9f88d14705f33b7df1c2623a1bf2b3958893a41413fd04",
+        "bytes": 20218
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/thumbnail.json",
+          "sha256": "21588e86c336c93c9ae19745432daee85ee9559474d2ba8dbc13c7d6c5ddc991",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "830fc21bdc71d1e0261dbacce053cdadf120cfb722ce1748c163c5ffc0a2c97d",
+        "fingerprint": "326074743846887419b28bd038c2ebbca84ce1730dec004eeb5e994ceaca4843",
+        "generatedAt": "2026-10-03T21:25:30.472Z"
+      }
+    },
+    {
+      "owner": "web/ranking/natural-disaster-partially-damaged-houses",
+      "file": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/thumbnail-light.webp",
+        "sha256": "377bb84168db62cc14bbb5950161ea2f4cdbc0c02746cd2af4d0774149ed53af",
+        "bytes": 18616
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/natural-disaster-partially-damaged-houses/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/thumbnail.json",
+          "sha256": "21588e86c336c93c9ae19745432daee85ee9559474d2ba8dbc13c7d6c5ddc991",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/natural-disaster-partially-damaged-houses/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "830fc21bdc71d1e0261dbacce053cdadf120cfb722ce1748c163c5ffc0a2c97d",
+        "fingerprint": "326074743846887419b28bd038c2ebbca84ce1730dec004eeb5e994ceaca4843",
+        "generatedAt": "2026-10-03T21:25:30.472Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-citrus-consumption-expenditure",
+      "file": "app/ranking/other-citrus-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-citrus-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/ogp/ogp.png",
+        "sha256": "577ee91134bf7a8fa97a18743df7e376a6fbabc50425bef073bf9e0b4dea9c6d",
+        "bytes": 61833
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-citrus-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/ogp/generation.json",
+          "sha256": "5c9cfd89e148872b13a4cd3a5684f549a3477c7b44c947da165be721fad2de39",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "6e879401ac95f2b5d7a95a5e219f2e90c66b0717acf15ca770cefeb40ad70f10",
+        "fingerprint": "b622ed7fad1b17ec5bec48a4b130a7a32076481c2c7dda6fc1b56143ca447779",
+        "generatedAt": "2026-10-03T21:00:31.517Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-citrus-consumption-expenditure",
+      "file": "app/ranking/other-citrus-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-citrus-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "64f01bf83c630305dcb760ea404ddeab02b7f0b60388887ea80eb28061f993ec",
+        "bytes": 17584
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-citrus-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/thumbnail.json",
+          "sha256": "030921e5f38fbeeb39fc02d6b6296b4809992e3283886109c0b8a603fd2fdb0e",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d07c5f22845eeb262dee22f2505a88daea44803fd73987fde3acc59cd852a89a",
+        "fingerprint": "e5521c50f51b608ede0c4849ccdb98fea52ab8293adbd740d6547c4bf0db098f",
+        "generatedAt": "2026-10-03T21:25:35.700Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-citrus-consumption-expenditure",
+      "file": "app/ranking/other-citrus-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-citrus-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "a53597f775247cb0ea5ba445cb081b7a081a7f28b7133d22911d634aa3c4e0cf",
+        "bytes": 16072
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-citrus-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/thumbnail.json",
+          "sha256": "030921e5f38fbeeb39fc02d6b6296b4809992e3283886109c0b8a603fd2fdb0e",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-citrus-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-citrus-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d07c5f22845eeb262dee22f2505a88daea44803fd73987fde3acc59cd852a89a",
+        "fingerprint": "e5521c50f51b608ede0c4849ccdb98fea52ab8293adbd740d6547c4bf0db098f",
+        "generatedAt": "2026-10-03T21:25:35.700Z"
+      }
+    },
+    {
+      "owner": "web/ranking/persimmon-consumption-quantity",
+      "file": "app/ranking/persimmon-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/persimmon-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/ogp/ogp.png",
+        "sha256": "8df781f4cc5f54af3d341bc186c9f4142ac8ec86616ed1e3dcdfed41c05da4cb",
+        "bytes": 72397
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/persimmon-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/ogp/generation.json",
+          "sha256": "defda9a4def477073f418bb0c01888c89ecb3ecccaad04195020921a8660f587",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "f7de5824582486a4fc4f6835c26988655810945de78a12919c91e57e2d52a87c",
+        "fingerprint": "1046b7221e7d482d419369e237f8bc0fc1dbc60f0b9bf0c48f56d4dbbe165859",
+        "generatedAt": "2026-08-15T18:42:16.056Z"
+      }
+    },
+    {
+      "owner": "web/ranking/persimmon-consumption-quantity",
+      "file": "app/ranking/persimmon-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/persimmon-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "e10250f4179a589eb36f14e35959dda7e24c6d6b8136450c86b0081922260cd4",
+        "bytes": 14740
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/persimmon-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/thumbnail.json",
+          "sha256": "130c18110ab41b2acb23741f48e3a17e20c0841a7969b2a96bf6360e67521305",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f89b5972be5aa25933bc5d1007be6c7ac3355e95fb312668af0ffbe024fe9322",
+        "fingerprint": "2bf9afd6faad98e7af9a56d630d1c05f07188780fc5d45b3956391848acad6c4",
+        "generatedAt": "2026-08-15T18:58:36.816Z"
+      }
+    },
+    {
+      "owner": "web/ranking/persimmon-consumption-quantity",
+      "file": "app/ranking/persimmon-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/persimmon-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/thumbnail-light.webp",
+        "sha256": "edab4b26d70e99b3923197ee8bfa22f22bb8ce5fd49b13bcade84592631b2b16",
+        "bytes": 13290
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/persimmon-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/thumbnail.json",
+          "sha256": "130c18110ab41b2acb23741f48e3a17e20c0841a7969b2a96bf6360e67521305",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/persimmon-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/persimmon-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "f89b5972be5aa25933bc5d1007be6c7ac3355e95fb312668af0ffbe024fe9322",
+        "fingerprint": "2bf9afd6faad98e7af9a56d630d1c05f07188780fc5d45b3956391848acad6c4",
+        "generatedAt": "2026-08-15T18:58:36.816Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sheets-consumption-quantity",
+      "file": "app/ranking/sheets-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sheets-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/ogp/ogp.png",
+        "sha256": "5d465b237e56759abc6efbcf2dd3cb823a6d268258afe660e7fad1e72f5e4577",
+        "bytes": 73609
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sheets-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/ogp/generation.json",
+          "sha256": "67d35ec756b08e00db9fbeeed60af27ff3e6c8c557940e53b290dc80a0ecc44c",
+          "bytes": 941,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sheets-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sheets-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "d840e796086dfc6c8f72c95e0401fc8ea4c309387dae93a48211e862b89ffd42",
+        "fingerprint": "e5125c5ad1d56b81c02f419d4214bad8491edf4026dbca2596938421ab125a3b",
+        "generatedAt": "2026-08-16T22:20:53.280Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sheets-consumption-quantity",
+      "file": "app/ranking/sheets-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sheets-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "28bdce9dde06222c6ba80b86be2268fa6e8ac05088fde1ccb4f121aafe3552e8",
+        "bytes": 14900
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sheets-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/thumbnail.json",
+          "sha256": "0a6ad3d2a01ffdf91d8aa93ea5ce67840ed13dde7132d31c74f0395d7bea039c",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sheets-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sheets-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "2c2103f979659fc54b634816fc4a1135968baf8af332a558473e12ddcbbd442f",
+        "fingerprint": "54229c6460a3fd64bbb79c6b32f32d3112d1afeb0bf59de97e85b849b069b37d",
+        "generatedAt": "2026-08-16T22:36:20.274Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sheets-consumption-quantity",
+      "file": "app/ranking/sheets-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sheets-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/thumbnail-light.webp",
+        "sha256": "12c4b88c5bc4adac07df9dc8c5a4468eebf861e6f8e188edbda393d700ce0e99",
+        "bytes": 13258
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sheets-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/thumbnail.json",
+          "sha256": "0a6ad3d2a01ffdf91d8aa93ea5ce67840ed13dde7132d31c74f0395d7bea039c",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sheets-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sheets-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sheets-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "2c2103f979659fc54b634816fc4a1135968baf8af332a558473e12ddcbbd442f",
+        "fingerprint": "54229c6460a3fd64bbb79c6b32f32d3112d1afeb0bf59de97e85b849b069b37d",
+        "generatedAt": "2026-08-16T22:36:20.274Z"
+      }
+    },
+    {
+      "owner": "web/theme/agriculture-production",
+      "file": "https://stats47.jp/themes/agriculture-production/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/agriculture-production/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

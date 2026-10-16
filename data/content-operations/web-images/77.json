@@ -1,0 +1,1480 @@
+{
+  "items": [
+    {
+      "id": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "channel": "web",
+      "key": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "title": "共働きが多い県ほど家は広い、その理由は?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "4497c06d6997ed3666c4372112ef60dd7593f6898c0661fedf0f0242af2c99b9",
+      "catalogBasis": "dc489f158a30f76e42a662970240e62bba2f468837a797ab28e87f84f29797e0",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+        "sha256": "016f4d2ff6ffc28fc4c0c8d986bec22d18613c21369baffcd8d3d9622fb76c70",
+        "bytes": 9955
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/21e433dc6d1c123806107781",
+      "channel": "web",
+      "key": "apps/web/public/categories/svg/construction.svg",
+      "title": "construction.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "25c7f877001cd4b998a80992088770d49af3c8164f75b8019fb1e0bbf6e0e2b4"
+    },
+    {
+      "id": "web/material/8c39e19a83d35baa65dc6e29",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/local-allocation-tax-prefecture-vs-agriculture-forestry.jpg",
+      "title": "local-allocation-tax-prefecture-vs-agriculture-forestry.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "98dd9bbce2afb43a7c66f79963c098519b564b33a50fa432aa75dc34cbae5dca"
+    },
+    {
+      "id": "web/material/c9769fd323b259e875a9aafd",
+      "channel": "web",
+      "key": "apps/web/public/icon-maskable-512.png",
+      "title": "icon-maskable-512.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e3b44602d90e36994c31f323e91748f7fe9be68cba887e367756ae80985a9619"
+    },
+    {
+      "id": "web/material/f4937cb7b87fe11c972cc86d",
+      "channel": "web",
+      "key": "assets/area-specialty/12000/chiba-satsumaimo.webp",
+      "title": "chiba-satsumaimo.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "393a478553a3c18a7c618a84960cf6266bbed43a66d2616d44d40bd29a990f29"
+    },
+    {
+      "id": "web/material/fd119bdc2eb67cbaf23e5406",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/chiba-food-culture.jpg",
+      "title": "chiba-food-culture.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "07c2ca9330c91f1daef991b1d977065cdcb7d710160171bdbed252b8c3737e9b"
+    },
+    {
+      "id": "web/ranking/bed-consumption-quantity",
+      "channel": "web",
+      "key": "bed-consumption-quantity",
+      "title": "ベッド消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/bed-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2cf6a82d277397796159776026bdacda26a4e43c82b20754e2ce6c39904e9f2b",
+      "catalogBasis": "2cf6a82d277397796159776026bdacda26a4e43c82b20754e2ce6c39904e9f2b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/cpi-change-rate-food",
+      "channel": "web",
+      "key": "cpi-change-rate-food",
+      "title": "消費者物価指数変化率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cpi-change-rate-food",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e36e435e411b9ba0a0147a02e15c5a7144a12f1029a1c771eabbbba302db4c8b",
+      "catalogBasis": "e36e435e411b9ba0a0147a02e15c5a7144a12f1029a1c771eabbbba302db4c8b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/dietitian-annual-income",
+      "channel": "web",
+      "key": "dietitian-annual-income",
+      "title": "栄養士の平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/dietitian-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f714ff07fd6f8a27cd4ceb344fc304633b03b3f0c84bfb75f315962986babf51",
+      "catalogBasis": "f714ff07fd6f8a27cd4ceb344fc304633b03b3f0c84bfb75f315962986babf51",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/large-retail-store-count-per-100k",
+      "channel": "web",
+      "key": "large-retail-store-count-per-100k",
+      "title": "大型小売店数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/large-retail-store-count-per-100k",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a1563bf808d24040d4d122e9aec2901b9b547633b186a683b193cb84a7592cfa",
+      "catalogBasis": "a1563bf808d24040d4d122e9aec2901b9b547633b186a683b193cb84a7592cfa",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/overtime-pay-admin-prefecture",
+      "channel": "web",
+      "key": "overtime-pay-admin-prefecture",
+      "title": "一般行政職 時間外勤務手当",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/overtime-pay-admin-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2688d07e724c58366d0ed334df918d90c37140f3bb683ca078d2ae6a750b733f",
+      "catalogBasis": "2688d07e724c58366d0ed334df918d90c37140f3bb683ca078d2ae6a750b733f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/theme/childcare-services",
+      "channel": "web",
+      "key": "childcare-services",
+      "title": "保育の需給",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/childcare-services",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b4b6708828f5b85ba03ac2e747bb7fc33218dadfe64b0142162cced51cf026bf",
+      "catalogBasis": "b4b6708828f5b85ba03ac2e747bb7fc33218dadfe64b0142162cced51cf026bf",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.svg",
+        "sha256": "441b24635672e6b369192ca4e8fdd2bf07b9bce719bf0caeafcd9d40986d8098",
+        "bytes": 10635
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "sha256": "016f4d2ff6ffc28fc4c0c8d986bec22d18613c21369baffcd8d3d9622fb76c70",
+          "bytes": 9955,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.json",
+          "sha256": "74d8a1cb9c77c293ed4a2b41483aeb77f714fdfae136229053a9fc99096da462",
+          "bytes": 3807,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.source.json",
+          "sha256": "fce74e04d70523766abbb303191a86e42c06eb71aed369d701663de68813f445",
+          "bytes": 661,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio--floor-area-per-dwelling-owner-scatter.svg",
+          "alt": "共働き世帯割合と持ち家住宅の延べ面積の関係",
+          "heading": "散布図で見る2つの指標の関係",
+          "line": 38
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/dual-income-household-ratio.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/dual-income-household-ratio.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.svg",
+        "sha256": "d6ef53a18325e5fa47242de286e68442da113d2f49874d246102d1b3fab2b229",
+        "bytes": 6917
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "sha256": "016f4d2ff6ffc28fc4c0c8d986bec22d18613c21369baffcd8d3d9622fb76c70",
+          "bytes": 9955,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "sha256": "156fc20e96f91f954296742582d9ebb3d452d05b745fafd3873ace07bd500dde",
+          "bytes": 6721,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "sha256": "dcc313d93eaafdcba63462c6ec468b015144f99f94846e28c8623b39c44a9465",
+          "bytes": 715,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings.svg",
+          "alt": "共働き世帯割合の上位と下位",
+          "heading": "共働き世帯が多い県、少ない県",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dual-income-household-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dual-income-household-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.svg",
+        "sha256": "6afa521e9e45ba397672baa896bb901710fd30d047423108433b70116f90de8c",
+        "bytes": 6917
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/article.md",
+          "sha256": "016f4d2ff6ffc28fc4c0c8d986bec22d18613c21369baffcd8d3d9622fb76c70",
+          "bytes": 9955,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.json",
+          "sha256": "f60ea54de6090ae745a8c7208fcc2dfc57d6de66bae5f66e26f174456878313d",
+          "bytes": 6746,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.source.json",
+          "sha256": "ea996bce5e198303a573ad8dcded0cfcb720bd3f79722e67434261047379ae45",
+          "bytes": 700,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/data/floor-area-per-dwelling-owner-prefecture-rankings.svg",
+          "alt": "持ち家住宅の延べ面積の上位と下位",
+          "heading": "持ち家はどのくらい広いのか",
+          "line": 27
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/floor-area-per-dwelling-owner/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/floor-area-per-dwelling-owner/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/background.jpg",
+        "sha256": "210a51ce309201d8ac4b8ba5fc3deb906d8eeb23e5c345ea4ae2f7cd70d7ffc4",
+        "bytes": 37193
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "sha256": "9aa0463fb9acec2c8d4695412760cb45eb17bcbec484114ca67376d7ea9cf6e6",
+          "bytes": 2275,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6c1f5d590b77f7d0af350f167387047abd779c2fc317d7029b4a740e8a3ad0a9",
+        "fingerprint": "8c7ec6307833c4f7d3469d7c3e5dd24e5abe0221e76f4dcb840661d170effdc3",
+        "generatedAt": "2026-08-22T05:17:22.454Z"
+      }
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/ogp.png",
+        "sha256": "bfdce2330397a44d253be9560e05e0e842d082fdee3315c9e5f6e1f158c9014a",
+        "bytes": 294681
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "sha256": "9aa0463fb9acec2c8d4695412760cb45eb17bcbec484114ca67376d7ea9cf6e6",
+          "bytes": 2275,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6c1f5d590b77f7d0af350f167387047abd779c2fc317d7029b4a740e8a3ad0a9",
+        "fingerprint": "8c7ec6307833c4f7d3469d7c3e5dd24e5abe0221e76f4dcb840661d170effdc3",
+        "generatedAt": "2026-08-22T05:17:22.454Z"
+      }
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-dark.webp",
+        "sha256": "e833c427d395d4ba14435e483978b12d1d860b264c0ace320759457aad30510f",
+        "bytes": 6952
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "sha256": "9aa0463fb9acec2c8d4695412760cb45eb17bcbec484114ca67376d7ea9cf6e6",
+          "bytes": 2275,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6c1f5d590b77f7d0af350f167387047abd779c2fc317d7029b4a740e8a3ad0a9",
+        "fingerprint": "8c7ec6307833c4f7d3469d7c3e5dd24e5abe0221e76f4dcb840661d170effdc3",
+        "generatedAt": "2026-08-22T05:17:22.454Z"
+      }
+    },
+    {
+      "owner": "web/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "file": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/thumbnail-light.webp",
+        "sha256": "190775cf65c277f8a52177349b1189c78827104647876c17d65c78689f193c97",
+        "bytes": 12506
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dual-income-household-ratio-vs-floor-area-per-dwelling-owner/ogp/generation.json",
+          "sha256": "9aa0463fb9acec2c8d4695412760cb45eb17bcbec484114ca67376d7ea9cf6e6",
+          "bytes": 2275,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6c1f5d590b77f7d0af350f167387047abd779c2fc317d7029b4a740e8a3ad0a9",
+        "fingerprint": "8c7ec6307833c4f7d3469d7c3e5dd24e5abe0221e76f4dcb840661d170effdc3",
+        "generatedAt": "2026-08-22T05:17:22.454Z"
+      }
+    },
+    {
+      "owner": "web/material/21e433dc6d1c123806107781",
+      "file": "apps/web/public/categories/svg/construction.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/categories/svg/construction.svg",
+        "url": "https://stats47.jp/categories/svg/construction.svg",
+        "sha256": "163d849489ce6015f48d738e49fc4607c58ddbb1a9d14760f621887f6596a389",
+        "bytes": 418
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/categories/svg/construction.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8c39e19a83d35baa65dc6e29",
+      "file": "assets/blog/article-backgrounds/local-allocation-tax-prefecture-vs-agriculture-forestry.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/local-allocation-tax-prefecture-vs-agriculture-forestry.jpg",
+        "sha256": "63e1ab466b0034cc43332ac5ed78108209786cd45340c93540df7ff5f31f47f6",
+        "bytes": 69709
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/local-allocation-tax-prefecture-vs-agriculture-forestry.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/c9769fd323b259e875a9aafd",
+      "file": "apps/web/public/icon-maskable-512.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/icon-maskable-512.png",
+        "url": "https://stats47.jp/icon-maskable-512.png",
+        "sha256": "e5885340ca0e92432b67e60534d4d2d72a7b312a2f5b95a2c7a81875211ac80e",
+        "bytes": 8937
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/icon-maskable-512.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/f4937cb7b87fe11c972cc86d",
+      "file": "assets/area-specialty/12000/chiba-satsumaimo.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/12000/chiba-satsumaimo.webp",
+        "sha256": "3d2e335b0ce6d5ecb3540c9da93c2d67b1d371f4344f4bc8c4f3ae9f3670acf9",
+        "bytes": 44994
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/12000/chiba-satsumaimo.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fd119bdc2eb67cbaf23e5406",
+      "file": "assets/blog/article-backgrounds/chiba-food-culture.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/chiba-food-culture.jpg",
+        "sha256": "46748f932ef0bd3b737be05d2b25017e3af76b32b3ace8b80787af781807f265",
+        "bytes": 119533
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/chiba-food-culture.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/bed-consumption-quantity",
+      "file": "app/ranking/bed-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bed-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/ogp/ogp.png",
+        "sha256": "22e01fa6a9c87d59d069163b2dceb0e2c2487da3398562507857758c48654ec8",
+        "bytes": 58442
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bed-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/ogp/generation.json",
+          "sha256": "39a62d4bcc124ab9dcf8aaed6b6135bcd418cedb9eb3ca291f308db5e694edcb",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bed-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bed-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "ff9d6d65bd47a6cc43dd7a64fdb86036ee200bede87c6ef87151ae035a6b507e",
+        "fingerprint": "bee0da6d049f8f75e76461911b3a67b523b14d5aae31744b8de10c5c80002d31",
+        "generatedAt": "2026-10-10T21:32:17.507Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bed-consumption-quantity",
+      "file": "app/ranking/bed-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bed-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "ad7111c13f9a3c2ff5f76d55a462021c674e49416ee734e778e7ff110e92fc13",
+        "bytes": 15396
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bed-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/thumbnail.json",
+          "sha256": "05b383411f0b076a02878b712c2a5badee947b29142ccf5f9333eafa15e29163",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bed-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bed-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "323bf4f6ce18dd2abe24f01cd504a1daa22fcbc4ad75fe9d83056b7f637e3460",
+        "fingerprint": "7c8dc5a5d1b8b5fbe31b687bd6d74e261004d563589a6b113ba5e75c52cfc54c",
+        "generatedAt": "2026-10-10T21:50:01.730Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bed-consumption-quantity",
+      "file": "app/ranking/bed-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bed-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/thumbnail-light.webp",
+        "sha256": "b99e3916895df1baa4776049c44ebace88c3b75b83965fea46e1b2134c0c56b3",
+        "bytes": 13944
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bed-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/thumbnail.json",
+          "sha256": "05b383411f0b076a02878b712c2a5badee947b29142ccf5f9333eafa15e29163",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bed-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bed-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bed-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "323bf4f6ce18dd2abe24f01cd504a1daa22fcbc4ad75fe9d83056b7f637e3460",
+        "fingerprint": "7c8dc5a5d1b8b5fbe31b687bd6d74e261004d563589a6b113ba5e75c52cfc54c",
+        "generatedAt": "2026-10-10T21:50:01.730Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-food",
+      "file": "app/ranking/cpi-change-rate-food/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-food/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/ogp/ogp.png",
+        "sha256": "a8caa7347b214a43ca16403d92aa886872d7db2daee1be427924891a2248c104",
+        "bytes": 62844
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-food/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/ogp/generation.json",
+          "sha256": "a2c7bcac8c9ca52734a5d42ac0e4e2eb675a8e887aae514e45087816a163d158",
+          "bytes": 913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-food/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-food/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "24d1c6b4fe626c405be3860124258be2e12ffbffedffed2980fc78207f475189",
+        "fingerprint": "0ac3ebc68e58cdfe18c9379b9c26f5e519b991fe8ca8634ad651d1f715421a84",
+        "generatedAt": "2026-10-10T21:32:46.902Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-food",
+      "file": "app/ranking/cpi-change-rate-food/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-food/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/thumbnail-dark.webp",
+        "sha256": "e35e0724f9cf2460b469c9fc87018e3cde8e9c1d484a62204bfd3e27b704d11f",
+        "bytes": 16480
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-food/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/thumbnail.json",
+          "sha256": "6b68d3af1a9c4e736bfdcb369c6ef65ffd89f4ea7f170277816c3d43b5bd04f8",
+          "bytes": 1733,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-food/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-food/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "9f86e977f7769e41f4bc0a121df2121d5f07876c4eb04f5a323180ed46209899",
+        "fingerprint": "d1583ce018ed4e2f54e09a0ebe57a501bf81eed924dbeddfaf4714516929b80f",
+        "generatedAt": "2026-10-10T21:50:09.288Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-food",
+      "file": "app/ranking/cpi-change-rate-food/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-food/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/thumbnail-light.webp",
+        "sha256": "fda6734e2b808df44783b8cdd02980e20cec51d03ef60a9fb8c515d4723c602a",
+        "bytes": 14008
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-food/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/thumbnail.json",
+          "sha256": "6b68d3af1a9c4e736bfdcb369c6ef65ffd89f4ea7f170277816c3d43b5bd04f8",
+          "bytes": 1733,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-food/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-food/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-food/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "9f86e977f7769e41f4bc0a121df2121d5f07876c4eb04f5a323180ed46209899",
+        "fingerprint": "d1583ce018ed4e2f54e09a0ebe57a501bf81eed924dbeddfaf4714516929b80f",
+        "generatedAt": "2026-10-10T21:50:09.288Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dietitian-annual-income",
+      "file": "app/ranking/dietitian-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dietitian-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/ogp/ogp.png",
+        "sha256": "fab6983a51e5d33fe55092c6a456ef8473b5afb67f36c348c153cc818ad19f11",
+        "bytes": 62038
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dietitian-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/ogp/generation.json",
+          "sha256": "c564279232559a3cdc2e42eee1a242a59602bbe02ef218e9fd5c5a4c6bc09f46",
+          "bytes": 925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dietitian-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dietitian-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "96a37e2fca4a5c5c70cbd66a704bb458990d7b31c839039391115f3f12875518",
+        "fingerprint": "7db0d2d703eaba9cad1f966d7f065d4609a62d19969e835a2fb0db2e1e36679b",
+        "generatedAt": "2026-10-10T21:33:02.016Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dietitian-annual-income",
+      "file": "app/ranking/dietitian-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dietitian-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/thumbnail-dark.webp",
+        "sha256": "6f54b45bb5cb89d31a405ad797467d5f5db70402f801117b747618c36f5c0ad4",
+        "bytes": 16394
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dietitian-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/thumbnail.json",
+          "sha256": "6c380eb7a93ce9b2de345b66deab67ae4617f61519ff28579dbc49d0fc8e2356",
+          "bytes": 1760,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dietitian-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dietitian-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "72c9bf8054db83bb6d93e3dd65d61a479feaa840f3d23c72a84ae7825ebe2d8c",
+        "fingerprint": "cf57e62fefb23f767b13eefe861dea58dad32d464b2f64ed41c49fcb31303363",
+        "generatedAt": "2026-10-10T21:50:13.144Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dietitian-annual-income",
+      "file": "app/ranking/dietitian-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dietitian-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/thumbnail-light.webp",
+        "sha256": "a8d9ba64f35cde5c4764c9d959d8a39bebf17e0761a2516063658420df96b9a1",
+        "bytes": 14736
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dietitian-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/thumbnail.json",
+          "sha256": "6c380eb7a93ce9b2de345b66deab67ae4617f61519ff28579dbc49d0fc8e2356",
+          "bytes": 1760,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dietitian-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dietitian-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dietitian-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "72c9bf8054db83bb6d93e3dd65d61a479feaa840f3d23c72a84ae7825ebe2d8c",
+        "fingerprint": "cf57e62fefb23f767b13eefe861dea58dad32d464b2f64ed41c49fcb31303363",
+        "generatedAt": "2026-10-10T21:50:13.144Z"
+      }
+    },
+    {
+      "owner": "web/ranking/large-retail-store-count-per-100k",
+      "file": "app/ranking/large-retail-store-count-per-100k/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/large-retail-store-count-per-100k/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/ogp/ogp.png",
+        "sha256": "c3138c8cc3bc0507563b112ddac7912a15e9a55756fce34eb0a7d55112a3ff76",
+        "bytes": 59324
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/large-retail-store-count-per-100k/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/ogp/generation.json",
+          "sha256": "a45b2714a76fe49607b06f320dc920ed9580bd21546d5b854fc181b8d31c4d4a",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "390cf8e585a87730f38b895272bd2e2e8723f3b3049ac0e41e7e7411ff5a7155",
+        "fingerprint": "c2d0ba41c1525e20d969ea66734a07c53c83129e02644510fdb037fe27907a95",
+        "generatedAt": "2026-10-03T20:59:36.663Z"
+      }
+    },
+    {
+      "owner": "web/ranking/large-retail-store-count-per-100k",
+      "file": "app/ranking/large-retail-store-count-per-100k/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/large-retail-store-count-per-100k/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/thumbnail-dark.webp",
+        "sha256": "3a8403b67222a8988695c28a2da0ff2ad4b67c3d95fdb3b94b6e98e39be67efb",
+        "bytes": 15686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/large-retail-store-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/thumbnail.json",
+          "sha256": "db21f320ac6a6918c60c471563f221ffcafead8ed478daeec458e35e6e3ab9a6",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d070d78e49a03ec75146eee38495bf782abe063bcd1cb13d9631c1f389020cb5",
+        "fingerprint": "ae35800fa243c16e395332c1a9a8ee30b9e95bb05073dc21eca6be7bfc19dd7d",
+        "generatedAt": "2026-10-03T21:25:21.416Z"
+      }
+    },
+    {
+      "owner": "web/ranking/large-retail-store-count-per-100k",
+      "file": "app/ranking/large-retail-store-count-per-100k/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/large-retail-store-count-per-100k/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/thumbnail-light.webp",
+        "sha256": "37ab464fb16923c5b9040556b3413207d058ffe320054f6a943e1f5ef4a82d5e",
+        "bytes": 14202
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/large-retail-store-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/thumbnail.json",
+          "sha256": "db21f320ac6a6918c60c471563f221ffcafead8ed478daeec458e35e6e3ab9a6",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/large-retail-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/large-retail-store-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d070d78e49a03ec75146eee38495bf782abe063bcd1cb13d9631c1f389020cb5",
+        "fingerprint": "ae35800fa243c16e395332c1a9a8ee30b9e95bb05073dc21eca6be7bfc19dd7d",
+        "generatedAt": "2026-10-03T21:25:21.416Z"
+      }
+    },
+    {
+      "owner": "web/ranking/overtime-pay-admin-prefecture",
+      "file": "app/ranking/overtime-pay-admin-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/overtime-pay-admin-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/ogp/ogp.png",
+        "sha256": "79f9933045d4411b0fbc22db1e86dba8dfa37cdbf355e9382f4bba9087fac371",
+        "bytes": 78618
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/overtime-pay-admin-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/ogp/generation.json",
+          "sha256": "89cefdc252890a60f29608fecf91c32f4d27c3b741196241141f4e0f353164a8",
+          "bytes": 949,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "cc74acb943fd011de7e8f002d77be39dd1270e2719489df9fb330be27e605e86",
+        "fingerprint": "760ddcedd44b9a2cbaa75c2928e6be6c7fd1e3d19abe1300b73a0f450f643b1c",
+        "generatedAt": "2026-08-15T18:42:10.316Z"
+      }
+    },
+    {
+      "owner": "web/ranking/overtime-pay-admin-prefecture",
+      "file": "app/ranking/overtime-pay-admin-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/overtime-pay-admin-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/thumbnail-dark.webp",
+        "sha256": "f506722b265a6abc73f6c54b60bc62b0984772a111678d0fb05c102c202276f0",
+        "bytes": 17822
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/overtime-pay-admin-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/thumbnail.json",
+          "sha256": "1acce6947289d7fc4fdf17127e8349f959e6da026e3d83627a66dbaaa5d2483c",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "30a3d690dd8a02448a12f22ebff8bbdd0c8761bc5d18424a85a8b913b4720c4f",
+        "fingerprint": "3fe0721417edf01ddf196bbb8b2e44bb6a3bc3bdceb2994c65c8c61748d8c93c",
+        "generatedAt": "2026-10-08T12:08:23.787Z"
+      }
+    },
+    {
+      "owner": "web/ranking/overtime-pay-admin-prefecture",
+      "file": "app/ranking/overtime-pay-admin-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/overtime-pay-admin-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/thumbnail-light.webp",
+        "sha256": "0fafe918a0ced6ce12255a8aff09d6ecd0b3fe1f31fe2aa120945910f2842665",
+        "bytes": 16080
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/overtime-pay-admin-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/thumbnail.json",
+          "sha256": "1acce6947289d7fc4fdf17127e8349f959e6da026e3d83627a66dbaaa5d2483c",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/overtime-pay-admin-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/overtime-pay-admin-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "30a3d690dd8a02448a12f22ebff8bbdd0c8761bc5d18424a85a8b913b4720c4f",
+        "fingerprint": "3fe0721417edf01ddf196bbb8b2e44bb6a3bc3bdceb2994c65c8c61748d8c93c",
+        "generatedAt": "2026-10-08T12:08:23.787Z"
+      }
+    },
+    {
+      "owner": "web/theme/childcare-services",
+      "file": "https://stats47.jp/themes/childcare-services/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/childcare-services/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

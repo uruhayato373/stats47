@@ -1,0 +1,2434 @@
+{
+  "items": [
+    {
+      "id": "web/blog/densely-populated-area-prefecture-gap",
+      "channel": "web",
+      "key": "densely-populated-area-prefecture-gap",
+      "title": "人口集中地区面積、北海道はなぜ5位なのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/densely-populated-area-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "4e00f1f011c8b16b5303485bd9c8ea8850fc1f6801238140dc168d1e76020249",
+      "catalogBasis": "19f8526a3740c2685065bf27608f3e5cdeec7f8630579c59ce6f3fd6fb9031fd",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/article.md",
+        "sha256": "81e7cb689cec6e76c112c500e8537f91b3b0583f51b24ba4a45af784ebc7ffb9",
+        "bytes": 10730
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/natto-consumption-east-west-divide",
+      "channel": "web",
+      "key": "natto-consumption-east-west-divide",
+      "title": "納豆を食べる県・食べない県の境界はどこか｜福島7830円vs和歌山2627円",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/natto-consumption-east-west-divide",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "04c22d9e5c48e117d06d3f1978126f06801ad1f5039fc64467168063939a07e5",
+      "catalogBasis": "43b28ad459b3b549578190c84ef004bd1afcf077a1aa28cc9a790b7caf0c8908",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/article.md",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/article.md",
+        "sha256": "c6fb2d3c1d33b5db659011464e9fff93844715186c093fa4d4b61ea30e168822",
+        "bytes": 6654
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "channel": "web",
+      "key": "soy-sauce-consumption-expenditure-prefecture-gap",
+      "title": "しょう油消費額1位はなぜ山形なのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "d4c6de8a55d62b4f7151a045908cbb4212651c89ea84be1ff45442bdd3d7675d",
+      "catalogBasis": "ab26a6349aecae42d6dae14f3da8b376b08b8c12065ac4a09ea6d5710ea05d99",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+        "sha256": "c40a7e17309802786f1c2162dc876c98b0dfd57303472e7800f143c34f4d4b18",
+        "bytes": 8856
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/71a794747f280ad9cadd7dc7",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/bonito-vs-oyster-fish-map.jpg",
+      "title": "bonito-vs-oyster-fish-map.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1529dbcfcd8afe8b5c0698e021a3cc3e7eb429cca3c2d275ff7472a75458c9ad"
+    },
+    {
+      "id": "web/material/9926e91936ac8ece985c469e",
+      "channel": "web",
+      "key": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-nonmanufacturing-ranking-mobile.svg",
+      "title": "sme-di-nonmanufacturing-ranking-mobile.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e46b16d7bcb44637d1610bf848eed397d7e9b991963dc285be2fcdafdbb7de23"
+    },
+    {
+      "id": "web/product/kindle-k-s1-11",
+      "channel": "web",
+      "key": "kindle-k-s1-11",
+      "title": "文化・スポーツ・余暇の地図",
+      "category": "product",
+      "status": "published",
+      "url": "https://stats47.jp/products/kindle-k-s1-11",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9b673faec25e9af804d0dee7d4ccacfdc2c004640c335637090195671ab13e15",
+      "catalogBasis": "9b673faec25e9af804d0dee7d4ccacfdc2c004640c335637090195671ab13e15",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/cultural-facility-admission-consumption-expenditure",
+      "channel": "web",
+      "key": "cultural-facility-admission-consumption-expenditure",
+      "title": "文化施設入場料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cultural-facility-admission-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a9fcabddb996fecc834072ec7b49e4acee8589a6b5d12a52b0f74332f4935353",
+      "catalogBasis": "a9fcabddb996fecc834072ec7b49e4acee8589a6b5d12a52b0f74332f4935353",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/dental-checkup-persons-per-1000",
+      "channel": "web",
+      "key": "dental-checkup-persons-per-1000",
+      "title": "歯科健診受診延人員",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/dental-checkup-persons-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "927ccd90451dc137ae25b8b1d918027a63959253670b853250e6561daa71f315",
+      "catalogBasis": "927ccd90451dc137ae25b8b1d918027a63959253670b853250e6561daa71f315",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/foreign-resident-count-usa",
+      "channel": "web",
+      "key": "foreign-resident-count-usa",
+      "title": "外国人人口",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/foreign-resident-count-usa",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d5690b7e8b91454b246a4762c43034aa97676fb7a1383c28dc42360d914fd6f7",
+      "catalogBasis": "d5690b7e8b91454b246a4762c43034aa97676fb7a1383c28dc42360d914fd6f7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/gasoline-consumption-expenditure",
+      "channel": "web",
+      "key": "gasoline-consumption-expenditure",
+      "title": "ガソリン消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/gasoline-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "372ebd8bb58b50111685454d143a98254d2da43c74606f4c79e329e89bedd7df",
+      "catalogBasis": "372ebd8bb58b50111685454d143a98254d2da43c74606f4c79e329e89bedd7df",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/goods-inventory-wholesale-retail",
+      "channel": "web",
+      "key": "goods-inventory-wholesale-retail",
+      "title": "商品手持額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/goods-inventory-wholesale-retail",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ae170e0275173fc9a5045c4b9e8d58b3836e29c79f4e4c5dc6d0fc548c1fac9e",
+      "catalogBasis": "ae170e0275173fc9a5045c4b9e8d58b3836e29c79f4e4c5dc6d0fc548c1fac9e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sashimi-platter-consumption-expenditure",
+      "channel": "web",
+      "key": "sashimi-platter-consumption-expenditure",
+      "title": "さしみ盛合わせ消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sashimi-platter-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "666764561d23ba5527f44945ef25f53f472f167961259bdd88a637f071b6c5b4",
+      "catalogBasis": "666764561d23ba5527f44945ef25f53f472f167961259bdd88a637f071b6c5b4",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/total-overnight-guests",
+      "channel": "web",
+      "key": "total-overnight-guests",
+      "title": "延べ宿泊者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/total-overnight-guests",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "03dbdfa485bae62575cd6a8a0b609f59a5f8eb1883f0a90a9ef50b868df6e248",
+      "catalogBasis": "03dbdfa485bae62575cd6a8a0b609f59a5f8eb1883f0a90a9ef50b868df6e248",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/tsunami-evacuation-building-count",
+      "channel": "web",
+      "key": "tsunami-evacuation-building-count",
+      "title": "津波避難ビル数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/tsunami-evacuation-building-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4f399e8b30f17651dc24a1c187c73270fe531212fbedf0052ad7107c9310358c",
+      "catalogBasis": "4f399e8b30f17651dc24a1c187c73270fe531212fbedf0052ad7107c9310358c",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.svg",
+        "sha256": "bb39994683030c3b747e932c99af735b311ec51259baeb3332b717336810f986",
+        "bytes": 31884
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/article.md",
+          "sha256": "81e7cb689cec6e76c112c500e8537f91b3b0583f51b24ba4a45af784ebc7ffb9",
+          "bytes": 10730,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "densely-populated-area-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.json",
+          "sha256": "1dde77d54b2db6110d5740ad20a8fbf8ec7b58698b43834235257f081d90902a",
+          "bytes": 4658,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "densely-populated-area-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.source.json",
+          "sha256": "1bd94de114ef7471f9dc3f1b38605abdde7de637b85dc0b7adbfe6bb57bf2d13",
+          "bytes": 600,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-map.svg",
+          "alt": "人口集中地区面積の地理分布",
+          "heading": "人口集中地区面積が小さい県の共通点",
+          "line": 42
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/densely-populated-area/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/densely-populated-area/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "7fcee8e44812be2835ad60ed603af6e2fda88c3ed2e432a108095340ed2318e9",
+        "bytes": 6945
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/article.md",
+          "sha256": "81e7cb689cec6e76c112c500e8537f91b3b0583f51b24ba4a45af784ebc7ffb9",
+          "bytes": 10730,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "densely-populated-area-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.json",
+          "sha256": "0f92d5feb89a5d64a9ed36b1006ba85e91bd2e0ddbab05e6651a7bb23939bf05",
+          "bytes": 6764,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "densely-populated-area-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "555e66bbd2bd806e3e0f253f63054eb8ba4c0779bd481b085d2e6bb5f64e5d1f",
+          "bytes": 661,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/data/densely-populated-area-prefecture-gap-prefecture-rankings.svg",
+          "alt": "人口集中地区面積の上位と下位",
+          "heading": "人口集中地区面積の上位と下位",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/densely-populated-area/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/densely-populated-area/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/background.jpg",
+        "sha256": "6b5a46529486165216f570ee0fc478970a949487055918da91a5feb351e6d167",
+        "bytes": 86192
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "sha256": "a08d107cd4e3115f5d8efb7af083358c8d7d35a5fa1a8b00dd739d581b13d467",
+          "bytes": 2185,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "39657ca4061fa8907129bf79fb331b26f91cd4a4ea30d43595852455598c8c74",
+        "fingerprint": "bdcb66b31e24f2ac398788ce18e6c5dc320fffc51e035c62805479ecb07a7f11",
+        "generatedAt": "2026-09-07T15:49:25.468Z"
+      }
+    },
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/ogp.png",
+        "sha256": "69df3e614ad8383dd6c2fc49dfa9ef193b27358655c8d2bd517d31bad68842d3",
+        "bytes": 467115
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "sha256": "a08d107cd4e3115f5d8efb7af083358c8d7d35a5fa1a8b00dd739d581b13d467",
+          "bytes": 2185,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "39657ca4061fa8907129bf79fb331b26f91cd4a4ea30d43595852455598c8c74",
+        "fingerprint": "bdcb66b31e24f2ac398788ce18e6c5dc320fffc51e035c62805479ecb07a7f11",
+        "generatedAt": "2026-09-07T15:49:25.468Z"
+      }
+    },
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "c72b96323d83e92a87696161ea953ef3e4b5278ed788c30dc0fa45d51cb077ac",
+        "bytes": 14284
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "sha256": "a08d107cd4e3115f5d8efb7af083358c8d7d35a5fa1a8b00dd739d581b13d467",
+          "bytes": 2185,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "39657ca4061fa8907129bf79fb331b26f91cd4a4ea30d43595852455598c8c74",
+        "fingerprint": "bdcb66b31e24f2ac398788ce18e6c5dc320fffc51e035c62805479ecb07a7f11",
+        "generatedAt": "2026-09-07T15:49:25.468Z"
+      }
+    },
+    {
+      "owner": "web/blog/densely-populated-area-prefecture-gap",
+      "file": "app/blog/densely-populated-area-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/densely-populated-area-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/thumbnail-light.webp",
+        "sha256": "13a111f78611314b02863786e557c7791bddcb82a03e43e4385045f4db5266e7",
+        "bytes": 27776
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/generation.json",
+          "sha256": "a08d107cd4e3115f5d8efb7af083358c8d7d35a5fa1a8b00dd739d581b13d467",
+          "bytes": 2185,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "39657ca4061fa8907129bf79fb331b26f91cd4a4ea30d43595852455598c8c74",
+        "fingerprint": "bdcb66b31e24f2ac398788ce18e6c5dc320fffc51e035c62805479ecb07a7f11",
+        "generatedAt": "2026-09-07T15:49:25.468Z"
+      }
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/data/inline-chart-1.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/data/inline-chart-1.svg",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/data/inline-chart-1.svg"
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/article.md",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/article.md",
+          "sha256": "c6fb2d3c1d33b5db659011464e9fff93844715186c093fa4d4b61ea30e168822",
+          "bytes": 6654,
+          "role": "article",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "unverified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/data/inline-chart-1.svg",
+          "alt": "チャート",
+          "heading": "上位・下位の顔ぶれ",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "missingReason": "本文参照はありますが、画像を取得できません。"
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/data/inline-chart-2.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/data/inline-chart-2.svg",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/data/inline-chart-2.svg"
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/article.md",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/article.md",
+          "sha256": "c6fb2d3c1d33b5db659011464e9fff93844715186c093fa4d4b61ea30e168822",
+          "bytes": 6654,
+          "role": "article",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "unverified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/data/inline-chart-2.svg",
+          "alt": "チャート",
+          "heading": "上位・下位の顔ぶれ",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "missingReason": "本文参照はありますが、画像を取得できません。"
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/background.jpg",
+        "sha256": "52483a342a0cf39734b7970835da5a362c347191c5054c1276a063c0aa7623d7",
+        "bytes": 55750
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "sha256": "ee9b83722cc0ad44451d22c224d29b8b65d123b6c5e8c37d63a2384b3f6f57b2",
+          "bytes": 2267,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "24ee2c57057323a7f9bbdd1283b2124b2a89007aa9aeb61c481eec6b26f041de",
+        "fingerprint": "64295521e6c9ed8d531865eca6574f2053fd03be5cec38f0ba0e4c1d461381fd",
+        "generatedAt": "2026-08-22T05:17:32.644Z"
+      }
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/ogp.png",
+        "sha256": "ee746ea7233bb76ec087e8880cb2c2746d545f94da7ac5154492036c7eea11e1",
+        "bytes": 477776
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "sha256": "ee9b83722cc0ad44451d22c224d29b8b65d123b6c5e8c37d63a2384b3f6f57b2",
+          "bytes": 2267,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "24ee2c57057323a7f9bbdd1283b2124b2a89007aa9aeb61c481eec6b26f041de",
+        "fingerprint": "64295521e6c9ed8d531865eca6574f2053fd03be5cec38f0ba0e4c1d461381fd",
+        "generatedAt": "2026-08-22T05:17:32.644Z"
+      }
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/thumbnail-dark.webp",
+        "sha256": "1a65585743b060c2fe0c26244c70fe9f97c3c4d0856642232263e25019678a1c",
+        "bytes": 11840
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "sha256": "ee9b83722cc0ad44451d22c224d29b8b65d123b6c5e8c37d63a2384b3f6f57b2",
+          "bytes": 2267,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "24ee2c57057323a7f9bbdd1283b2124b2a89007aa9aeb61c481eec6b26f041de",
+        "fingerprint": "64295521e6c9ed8d531865eca6574f2053fd03be5cec38f0ba0e4c1d461381fd",
+        "generatedAt": "2026-08-22T05:17:32.644Z"
+      }
+    },
+    {
+      "owner": "web/blog/natto-consumption-east-west-divide",
+      "file": "app/blog/natto-consumption-east-west-divide/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/natto-consumption-east-west-divide/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/thumbnail-light.webp",
+        "sha256": "aea148c86f82a0fecbd62f16281a6f82b718a6bd4537fdcad0eff0947728ced5",
+        "bytes": 21776
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/natto-consumption-east-west-divide/ogp/generation.json",
+          "sha256": "ee9b83722cc0ad44451d22c224d29b8b65d123b6c5e8c37d63a2384b3f6f57b2",
+          "bytes": 2267,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "24ee2c57057323a7f9bbdd1283b2124b2a89007aa9aeb61c481eec6b26f041de",
+        "fingerprint": "64295521e6c9ed8d531865eca6574f2053fd03be5cec38f0ba0e4c1d461381fd",
+        "generatedAt": "2026-08-22T05:17:32.644Z"
+      }
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.svg",
+        "sha256": "5a750b507d805e66b28d7dd4c157592c5d1b26578434b1a96b2309202eb04245",
+        "bytes": 31429
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "c40a7e17309802786f1c2162dc876c98b0dfd57303472e7800f143c34f4d4b18",
+          "bytes": 8856,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "soy-sauce-consumption-expenditure-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.json",
+          "sha256": "621e1d8883c6fd6a91ca4d445c704672a9dbf3f0273155ba074d511d5a738a41",
+          "bytes": 4584,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "soy-sauce-consumption-expenditure-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.source.json",
+          "sha256": "5e10b58545c54ebba0f4c37790983f9af255e101d493b82197f13cfd655e59ae",
+          "bytes": 643,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-map.svg",
+          "alt": "しょう油消費支出額の地理分布",
+          "heading": "地理的に見るしょう油消費の広がり",
+          "line": 45
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/soy-sauce-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/soy-sauce-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "6aeec52d8ac19c3a6490513abd72d0864e52c0c7b9688ec0ffa570439e2a4810",
+        "bytes": 6900
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "c40a7e17309802786f1c2162dc876c98b0dfd57303472e7800f143c34f4d4b18",
+          "bytes": 8856,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "sha256": "36f1e4e239eec91c16858f30744d41e0129ae6adb77227777865faae3dc61ce2",
+          "bytes": 6690,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "8e8327b37147e2781603ce58c3b80b3bcc71ae333eb6a15d5954d3fd976b015d",
+          "bytes": 715,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/data/soy-sauce-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+          "alt": "しょう油消費支出額の上位と下位",
+          "heading": "しょう油消費支出額、上位と下位の県",
+          "line": 19
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/soy-sauce-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/soy-sauce-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "sha256": "6a81f8aa1bf95ff1bc0bca83a1bd94f41778cf91200a0d7334c52a5d12f213ca",
+        "bytes": 83710
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "79c2bc91a3051c956a48c5483e49627f726bc1c196021da3c53070fd9c1079b2",
+          "bytes": 2242,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "9d0a95e3458bd465008314dd7356172eeb7ad6a38354ab025dc5d322109785db",
+        "fingerprint": "85d5ce1254b244cffb665563da33e747688e845678f51fd8b18569b5363d7aa7",
+        "generatedAt": "2026-09-07T16:03:23.537Z"
+      }
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "sha256": "8db3a5e70e5c6d0ff7eb863110ae2977bbc2019c277db6507566277befe9b849",
+        "bytes": 497462
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "79c2bc91a3051c956a48c5483e49627f726bc1c196021da3c53070fd9c1079b2",
+          "bytes": 2242,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "9d0a95e3458bd465008314dd7356172eeb7ad6a38354ab025dc5d322109785db",
+        "fingerprint": "85d5ce1254b244cffb665563da33e747688e845678f51fd8b18569b5363d7aa7",
+        "generatedAt": "2026-09-07T16:03:23.537Z"
+      }
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "96fa831ef66f6fa0b313480a3be368a56fceab798346bfa6c4026049762ffc82",
+        "bytes": 12734
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "79c2bc91a3051c956a48c5483e49627f726bc1c196021da3c53070fd9c1079b2",
+          "bytes": 2242,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "9d0a95e3458bd465008314dd7356172eeb7ad6a38354ab025dc5d322109785db",
+        "fingerprint": "85d5ce1254b244cffb665563da33e747688e845678f51fd8b18569b5363d7aa7",
+        "generatedAt": "2026-09-07T16:03:23.537Z"
+      }
+    },
+    {
+      "owner": "web/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "sha256": "b1bfa04bc43df8531c9ff8d8320c5736e6e5fcb5a5d8b18e5485b30ae950c660",
+        "bytes": 24950
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "79c2bc91a3051c956a48c5483e49627f726bc1c196021da3c53070fd9c1079b2",
+          "bytes": 2242,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "9d0a95e3458bd465008314dd7356172eeb7ad6a38354ab025dc5d322109785db",
+        "fingerprint": "85d5ce1254b244cffb665563da33e747688e845678f51fd8b18569b5363d7aa7",
+        "generatedAt": "2026-09-07T16:03:23.537Z"
+      }
+    },
+    {
+      "owner": "web/material/71a794747f280ad9cadd7dc7",
+      "file": "assets/blog/article-backgrounds/bonito-vs-oyster-fish-map.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/bonito-vs-oyster-fish-map.jpg",
+        "sha256": "3a4472d8bd2ab301d19fd890219e48123edeb0bad0b9026ab53575e5cc70cc20",
+        "bytes": 123828
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/bonito-vs-oyster-fish-map.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/9926e91936ac8ece985c469e",
+      "file": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-nonmanufacturing-ranking-mobile.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-nonmanufacturing-ranking-mobile.svg",
+        "sha256": "26a4b62ac9835aacc1f800df7e3ea9d5d3929e5f8537578bc0ea0b6b1a1cbd29",
+        "bytes": 4940
+      },
+      "inputFiles": [],
+      "templateId": "svg-bar",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-nonmanufacturing-ranking-mobile.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/product/kindle-k-s1-11",
+      "file": "app/products/kindle-k-s1-11/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/products/kindle-k-s1-11/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png",
+        "sha256": "65377a16b2884ae7f508c990ddccd6ed2ec776385dd0d71d5a50e382690edc19",
+        "bytes": 831253
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/products/kindle-k-s1-11/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/generation.json",
+          "sha256": "e047d73a6a68de6e9b62fd8422b9dc811714641b3cc3c5f5e3857d7811147f04",
+          "bytes": 820,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "product-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "product-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "735c7a32837d7fbb94dfedbdc95b775376fb98700779c8aa97585ff454ba6e05",
+        "inputHash": "d10ee73fc4a1f8636e94c16509cd9fbf29b15252064d10672704f3a71554982f",
+        "fingerprint": "e22de2aca70906f5e60a6181cfd4d867a0716675fb4dec74ebfac1a7e868ee79",
+        "generatedAt": "2026-09-14T22:25:51.127Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cultural-facility-admission-consumption-expenditure",
+      "file": "app/ranking/cultural-facility-admission-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cultural-facility-admission-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/ogp/ogp.png",
+        "sha256": "23af60967a3e940ae0eb53343e559f20e27f7ced4642f7b4c89639ea389c20fa",
+        "bytes": 63081
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cultural-facility-admission-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/ogp/generation.json",
+          "sha256": "7ba26c59dcaed2f99b6adabd8a19c7d4e4daebe2ff3fcae1cdcaf66fb192c232",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "c1d4f1ab167ab53e9efa7f2c51ab503eb6c6752aabc9181accfcb31466067bb3",
+        "fingerprint": "156abf07348800e06ea085a427dcc4e5cbd4b90a29fdf352b1a297bfba7d3919",
+        "generatedAt": "2026-10-10T21:32:50.732Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cultural-facility-admission-consumption-expenditure",
+      "file": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "91319cd91f060daf2b7cd846310830bf1d300c559a0b2440ac21b6af2ba4ad18",
+        "bytes": 18126
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail.json",
+          "sha256": "9fb5ec1027042093d162a2d0ccb69e4d08effdff497c1fb56c7fec2f27a6fc49",
+          "bytes": 2012,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "3822f197c4addeb1a57aa0b07759d216c6451972dfeecd5df1ea01d018eb641c",
+        "fingerprint": "48a05a063641306938e2bf53ddf1864f6f1e6e822f37b8af1000aba73e9e706e",
+        "generatedAt": "2026-10-10T21:50:10.318Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cultural-facility-admission-consumption-expenditure",
+      "file": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "bd1d33809a3c257cebe001d1b9097658535058f6b21d9602ee616b7e7c95fd45",
+        "bytes": 16616
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/thumbnail.json",
+          "sha256": "9fb5ec1027042093d162a2d0ccb69e4d08effdff497c1fb56c7fec2f27a6fc49",
+          "bytes": 2012,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cultural-facility-admission-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "3822f197c4addeb1a57aa0b07759d216c6451972dfeecd5df1ea01d018eb641c",
+        "fingerprint": "48a05a063641306938e2bf53ddf1864f6f1e6e822f37b8af1000aba73e9e706e",
+        "generatedAt": "2026-10-10T21:50:10.318Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-checkup-persons-per-1000",
+      "file": "app/ranking/dental-checkup-persons-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-checkup-persons-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/ogp/ogp.png",
+        "sha256": "886a5ca9b61f7b9709445569d9799dd87769c60becedccf81733d1de062decd0",
+        "bytes": 61044
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-checkup-persons-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/ogp/generation.json",
+          "sha256": "e01b8473a8913236555621546084d74f06fa9a6419486612b541f75dd4a16b79",
+          "bytes": 957,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "e0af0784870f23974edebae1e0eb43cf2dff04ab362b1cba7b9a86225fe4d03b",
+        "fingerprint": "ccbab894fc3d3feafc42dfa6093d420a500f11af2aeb6751ab3b63257014b66e",
+        "generatedAt": "2026-10-10T21:32:58.426Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-checkup-persons-per-1000",
+      "file": "app/ranking/dental-checkup-persons-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-checkup-persons-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/thumbnail-dark.webp",
+        "sha256": "970ac22a6f4cd8304ce9152f53684fd41c6ac39987a7cb0832c931b0768d5702",
+        "bytes": 16998
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-checkup-persons-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/thumbnail.json",
+          "sha256": "2219cc79fc52d2af04ebc862b1da27d46c92ff70d743fa349fedbbf6e2869c5f",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "998089450cc94b7c2169fa332bdac30312ad044ed812a3828492fd2708463dc0",
+        "fingerprint": "3ae2cc4a7ebbe3ea3088f2dd372f9aca34c9f8c0c7b2fd45f146037bd8e92bb0",
+        "generatedAt": "2026-10-10T21:50:12.229Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-checkup-persons-per-1000",
+      "file": "app/ranking/dental-checkup-persons-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-checkup-persons-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/thumbnail-light.webp",
+        "sha256": "6a72f74ba93461e62d8bb31cb110f4efdcd439564bb5a6c4a5f852dfb889fc40",
+        "bytes": 15334
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-checkup-persons-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/thumbnail.json",
+          "sha256": "2219cc79fc52d2af04ebc862b1da27d46c92ff70d743fa349fedbbf6e2869c5f",
+          "bytes": 1832,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "998089450cc94b7c2169fa332bdac30312ad044ed812a3828492fd2708463dc0",
+        "fingerprint": "3ae2cc4a7ebbe3ea3088f2dd372f9aca34c9f8c0c7b2fd45f146037bd8e92bb0",
+        "generatedAt": "2026-10-10T21:50:12.229Z"
+      }
+    },
+    {
+      "owner": "web/ranking/foreign-resident-count-usa",
+      "file": "app/ranking/foreign-resident-count-usa/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/foreign-resident-count-usa/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/ogp/ogp.png",
+        "sha256": "42883cd93b9ae2c63ae5c267aa4d2594be8d7c669689e7bca8f528ec7fbe97ba",
+        "bytes": 57358
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/foreign-resident-count-usa/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/ogp/generation.json",
+          "sha256": "0c681a18894b3e8805913e4ba1a8a11fd5f78c4b0bf3bdf0c85e0e056aca2aaf",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/foreign-resident-count-usa/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/foreign-resident-count-usa/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "88df9df62d4a397039b966150255384fa5831c5aea9aa80e116e36d3ba77da85",
+        "fingerprint": "41d7fa363ae3146342b9c6883b1191c616255249228936830aaa867c4d7a0474",
+        "generatedAt": "2026-10-01T18:10:58.011Z"
+      }
+    },
+    {
+      "owner": "web/ranking/foreign-resident-count-usa",
+      "file": "app/ranking/foreign-resident-count-usa/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/foreign-resident-count-usa/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/thumbnail-dark.webp",
+        "sha256": "0fec65ff35700d3ec62336c88816ed435041330608f9aa536663325bf2c98c46",
+        "bytes": 15008
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/foreign-resident-count-usa/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/thumbnail.json",
+          "sha256": "7a2835a21b925ddfd61c6e031ee5a80fb8a139b37887eabff1f1ffd32ec6e846",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/foreign-resident-count-usa/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/foreign-resident-count-usa/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8dbb8b95ecaa0922c4373b242dca7c2eff43f155fb0d35f35a9297fb6db0a378",
+        "fingerprint": "854b25af938f74a88cb1760235f824e56ade2f03732aff2126245b575fb9f612",
+        "generatedAt": "2026-10-01T18:35:52.494Z"
+      }
+    },
+    {
+      "owner": "web/ranking/foreign-resident-count-usa",
+      "file": "app/ranking/foreign-resident-count-usa/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/foreign-resident-count-usa/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/thumbnail-light.webp",
+        "sha256": "cfc6579924b57ba3684e27103b9ea0e95c42407e70eb7ebe65a5b3361394d581",
+        "bytes": 13362
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/foreign-resident-count-usa/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/thumbnail.json",
+          "sha256": "7a2835a21b925ddfd61c6e031ee5a80fb8a139b37887eabff1f1ffd32ec6e846",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/foreign-resident-count-usa/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/foreign-resident-count-usa/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/foreign-resident-count-usa/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8dbb8b95ecaa0922c4373b242dca7c2eff43f155fb0d35f35a9297fb6db0a378",
+        "fingerprint": "854b25af938f74a88cb1760235f824e56ade2f03732aff2126245b575fb9f612",
+        "generatedAt": "2026-10-01T18:35:52.494Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gasoline-consumption-expenditure",
+      "file": "app/ranking/gasoline-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gasoline-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/ogp/ogp.png",
+        "sha256": "792658255e3c46f223f69c7beb2ea281118c83d597c41f79b8536fcf19f17806",
+        "bytes": 61015
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gasoline-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/ogp/generation.json",
+          "sha256": "9852676ea0a77fca28755d2cd0c48d4a5978b614626e4f65ff5691a62986326d",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9eda042ea5b516f17d0caeac7f533b1b255af04eca816036a2f70ca6aae290da",
+        "fingerprint": "e53a3ff4b7f695f5351a92b7cdfaece3396119c1cebb460a37d71468702ec717",
+        "generatedAt": "2026-10-01T18:11:07.391Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gasoline-consumption-expenditure",
+      "file": "app/ranking/gasoline-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gasoline-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "9cdbd70daa13acb0ab2dcdc34220f801cc00abb8e99f9ed284ab608f9e762292",
+        "bytes": 16786
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gasoline-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/thumbnail.json",
+          "sha256": "729405abb73443c416ed39aaaf42570e71beab40e1c675cd41af230f9ff15915",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dbf800d6ce6e2956338c1e5e9ddbc15cfa30d8419a3debd1bad5635bca175103",
+        "fingerprint": "ec233cdbaf093763293f034653f4378ae6442edf051135261a07378dc18c2176",
+        "generatedAt": "2026-10-01T18:35:54.990Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gasoline-consumption-expenditure",
+      "file": "app/ranking/gasoline-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gasoline-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "23a09ecdee3995db1fe60574263097fbd8bf4e7e581bbf549229cef3e3aab8e5",
+        "bytes": 15168
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gasoline-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/thumbnail.json",
+          "sha256": "729405abb73443c416ed39aaaf42570e71beab40e1c675cd41af230f9ff15915",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gasoline-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gasoline-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dbf800d6ce6e2956338c1e5e9ddbc15cfa30d8419a3debd1bad5635bca175103",
+        "fingerprint": "ec233cdbaf093763293f034653f4378ae6442edf051135261a07378dc18c2176",
+        "generatedAt": "2026-10-01T18:35:54.990Z"
+      }
+    },
+    {
+      "owner": "web/ranking/goods-inventory-wholesale-retail",
+      "file": "app/ranking/goods-inventory-wholesale-retail/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/goods-inventory-wholesale-retail/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/ogp/ogp.png",
+        "sha256": "1f8fc3e07d02d30f4dcc21fd3cb157f123658f3f3c4c1e8724a1cc768cdd4475",
+        "bytes": 61104
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/goods-inventory-wholesale-retail/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/ogp/generation.json",
+          "sha256": "3d30ccc2d93c0cbaa788d8fc818ce4768c909f56e6fda70ca800eab0643c55ab",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "495ec4090ab427f83b14638733312790b2e9a01cde395e912d65a964c6fe36df",
+        "fingerprint": "5f74eadbd5c7c5bc8b78721b0e26fa3015b39f9fbdab1789df6253866d8efaca",
+        "generatedAt": "2026-10-01T18:11:14.267Z"
+      }
+    },
+    {
+      "owner": "web/ranking/goods-inventory-wholesale-retail",
+      "file": "app/ranking/goods-inventory-wholesale-retail/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/goods-inventory-wholesale-retail/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/thumbnail-dark.webp",
+        "sha256": "bd60813f4c39e4fecc7c519380cbfbad0e4f25a04519e53af5267a55b34477bb",
+        "bytes": 16616
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/goods-inventory-wholesale-retail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/thumbnail.json",
+          "sha256": "b5e144da64093f83073004f3fdbe4a68d18436233e7e27e904152005bbcb2036",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8a5cd085ade09a26b32e370b01f8b51d31d426025a9844aef1008b4e320bb920",
+        "fingerprint": "46271b0a42fce92f5d05ed9b983be39b8252f45cb91b7ef69518eb6f0738723b",
+        "generatedAt": "2026-10-01T18:35:56.679Z"
+      }
+    },
+    {
+      "owner": "web/ranking/goods-inventory-wholesale-retail",
+      "file": "app/ranking/goods-inventory-wholesale-retail/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/goods-inventory-wholesale-retail/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/thumbnail-light.webp",
+        "sha256": "32f920480ed8180f1c15f0b51347119ca328daaed055aab157c282878bd95389",
+        "bytes": 15194
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/goods-inventory-wholesale-retail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/thumbnail.json",
+          "sha256": "b5e144da64093f83073004f3fdbe4a68d18436233e7e27e904152005bbcb2036",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/goods-inventory-wholesale-retail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/goods-inventory-wholesale-retail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8a5cd085ade09a26b32e370b01f8b51d31d426025a9844aef1008b4e320bb920",
+        "fingerprint": "46271b0a42fce92f5d05ed9b983be39b8252f45cb91b7ef69518eb6f0738723b",
+        "generatedAt": "2026-10-01T18:35:56.679Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sashimi-platter-consumption-expenditure",
+      "file": "app/ranking/sashimi-platter-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sashimi-platter-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/ogp/ogp.png",
+        "sha256": "27372eb29dbf00749a30a41dbca484762a4680407dc8ef7d4727c74938b8eeff",
+        "bytes": 78788
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sashimi-platter-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/ogp/generation.json",
+          "sha256": "d83492eb3295b251ccb38ed67cc2b2b384066d7daa155252a1b2350e6b9f9861",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "9b31b1011e90d163a21172f2ad06774883c12e74e9ab1462c87b6e5056a1c2d7",
+        "fingerprint": "69274d64b586d77e7e2452689273511214df6036e2a26bfda00e395d4b792039",
+        "generatedAt": "2026-08-15T18:42:43.542Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sashimi-platter-consumption-expenditure",
+      "file": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "040a543eb80ebb6c01da6b17b899695280a37af2c662db6a7c0557d927a31d38",
+        "bytes": 17508
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/thumbnail.json",
+          "sha256": "f2c4291efde9a126b1e90dc9dcbe35e51b2e81d93b6b6f514dd701f435177ef2",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "bee143a0b856a65c2300c1df8d934bbc5c0b3ea44efa9c96e881667edee55481",
+        "fingerprint": "6b7924149a419d0de4db487b62c02004d9aa54189621b318ac0be849e6ac215c",
+        "generatedAt": "2026-08-15T18:58:48.662Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sashimi-platter-consumption-expenditure",
+      "file": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "f2c016e4cbd7f3710134d69c821387494594c01f15fa162bf6963518abb3fb2b",
+        "bytes": 15998
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sashimi-platter-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/thumbnail.json",
+          "sha256": "f2c4291efde9a126b1e90dc9dcbe35e51b2e81d93b6b6f514dd701f435177ef2",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sashimi-platter-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "bee143a0b856a65c2300c1df8d934bbc5c0b3ea44efa9c96e881667edee55481",
+        "fingerprint": "6b7924149a419d0de4db487b62c02004d9aa54189621b318ac0be849e6ac215c",
+        "generatedAt": "2026-08-15T18:58:48.662Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-overnight-guests",
+      "file": "app/ranking/total-overnight-guests/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-overnight-guests/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/ogp/ogp.png",
+        "sha256": "616da20f74e9087757e9d8d4033329e667dc0784786f3adbf30c598f3cd957e8",
+        "bytes": 75239
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-overnight-guests/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/ogp/generation.json",
+          "sha256": "0c0b565efa2693cce9ebb3a9c72fa6772c9c3644b5a1d81e3d9c2ea537dd74ae",
+          "bytes": 921,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-overnight-guests/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-overnight-guests/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "7e5042953fef6906fb57c14b369655cf96a45d0f842fa60d19c12d5a5f156b28",
+        "fingerprint": "df645c93b9a2dcc9d3c10c50995958fe7cbf717c9b9007046d35ef1e4bf99b94",
+        "generatedAt": "2026-08-16T22:21:14.794Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-overnight-guests",
+      "file": "app/ranking/total-overnight-guests/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-overnight-guests/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/thumbnail-dark.webp",
+        "sha256": "0a86cabe127edaa699a61707b8aeb4bab75db1f699b97ec08226815edfd0884b",
+        "bytes": 16990
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-overnight-guests/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/thumbnail.json",
+          "sha256": "1703f16035be24d29e9180f2b37f246ac1da3477e4896ab8d95f9affb1fe0e79",
+          "bytes": 1772,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-overnight-guests/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-overnight-guests/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c07510a8debf4a0b6742e042118075ae8177f5ab3b32fea59be006108af2db0a",
+        "fingerprint": "c89e620090fb37ce151d68ca839135d39e1752c76abce072cbfcbfbcff49b7d5",
+        "generatedAt": "2026-08-16T22:36:29.629Z"
+      }
+    },
+    {
+      "owner": "web/ranking/total-overnight-guests",
+      "file": "app/ranking/total-overnight-guests/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/total-overnight-guests/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/thumbnail-light.webp",
+        "sha256": "59606fb8131fef03353b2dc01e3447a4417fd56ddd42f89eccdc797bcd36f150",
+        "bytes": 15640
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/total-overnight-guests/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/thumbnail.json",
+          "sha256": "1703f16035be24d29e9180f2b37f246ac1da3477e4896ab8d95f9affb1fe0e79",
+          "bytes": 1772,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-overnight-guests/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/total-overnight-guests/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-overnight-guests/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "c07510a8debf4a0b6742e042118075ae8177f5ab3b32fea59be006108af2db0a",
+        "fingerprint": "c89e620090fb37ce151d68ca839135d39e1752c76abce072cbfcbfbcff49b7d5",
+        "generatedAt": "2026-08-16T22:36:29.629Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tsunami-evacuation-building-count",
+      "file": "app/ranking/tsunami-evacuation-building-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tsunami-evacuation-building-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/ogp/ogp.png",
+        "sha256": "7a3c2e5cc40bbd459012327389d2390fad85d1c52d4cad2815b3e9b70ae8701d",
+        "bytes": 63718
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tsunami-evacuation-building-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/ogp/generation.json",
+          "sha256": "b0786d8b5292a8db8ed735c65cd8fd0fc301bdae7250dc6929a186d2d0d1448c",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "c5461969a923c1f72f36966456b1bf3e75bb1dcaa8f3b3bd272f415ae6465267",
+        "fingerprint": "a3db00141ded9fff0a90ccdad7e9d5dfa671eede855c7a7d022d47d792a3f475",
+        "generatedAt": "2026-09-11T14:06:46.617Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tsunami-evacuation-building-count",
+      "file": "app/ranking/tsunami-evacuation-building-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tsunami-evacuation-building-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/thumbnail-dark.webp",
+        "sha256": "1e323bac0c868ec21af5ef5aa8dc67de87dc0a05d37000fad216205cf15a097e",
+        "bytes": 15954
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tsunami-evacuation-building-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/thumbnail.json",
+          "sha256": "6b965d72746216abd22162754091aa392b8dc352f33654488ad9384226c33cab",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "8e38b9c588a8e7889fb95f7fbc1f8e88fb553521e9b4910b93104c72f133e233",
+        "fingerprint": "2d5f0af139136a515eeb4fcac460f878ea796834ccea61f84d3f2c73707d5343",
+        "generatedAt": "2026-09-11T14:27:43.268Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tsunami-evacuation-building-count",
+      "file": "app/ranking/tsunami-evacuation-building-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tsunami-evacuation-building-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/thumbnail-light.webp",
+        "sha256": "be515b3b3d3031a6eaf3a52a700c9a0c8669e6a6bf243b34ca66ed3a8017278e",
+        "bytes": 14562
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tsunami-evacuation-building-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/thumbnail.json",
+          "sha256": "6b965d72746216abd22162754091aa392b8dc352f33654488ad9384226c33cab",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tsunami-evacuation-building-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tsunami-evacuation-building-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2e6d02f630d487397f87bb8c9f0b483865748ed5f934da6d8840c90e5b100a4a",
+        "inputHash": "8e38b9c588a8e7889fb95f7fbc1f8e88fb553521e9b4910b93104c72f133e233",
+        "fingerprint": "2d5f0af139136a515eeb4fcac460f878ea796834ccea61f84d3f2c73707d5343",
+        "generatedAt": "2026-09-11T14:27:43.268Z"
+      }
+    }
+  ]
+}

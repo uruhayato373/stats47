@@ -6,7 +6,15 @@ export const metadata = { title: '画像ライブラリ — stats47 admin' };
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ owner?: string; image?: string; channel?: string }>;
+  searchParams: Promise<{
+    owner?: string;
+    image?: string;
+    channel?: string;
+    view?: string;
+    usage?: string;
+    format?: string;
+    collection?: string;
+  }>;
 }) {
   const query = await searchParams;
   return (
@@ -17,15 +25,25 @@ export default async function Page({
         source="R2 / 画像・投稿台帳"
       >
         <p className="text-sm text-console-muted">
-          note・X・Instagramなどの実画像、使用先、改善候補と元データをまとめて確認します。
+          OGP・リンクカード・ブログSVG・note・SNS・共通素材の実画像、元データ、使用先、改善方針をここで管理します。
         </p>
       </PageHeading>
       <MediaWorkspace
+        key={JSON.stringify(query)}
         initial={qualityOverview()}
-        mode="images"
+        mode={
+          query.view === 'templates'
+            ? 'templates'
+            : query.view === 'articles'
+              ? 'articles'
+              : 'images'
+        }
         initialOwner={query.owner}
         initialImage={query.image}
         initialChannel={query.channel}
+        initialUsage={query.usage}
+        initialFormat={query.format}
+        initialCollection={query.collection}
       />
     </div>
   );

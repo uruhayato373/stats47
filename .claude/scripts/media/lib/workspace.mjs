@@ -10,6 +10,8 @@ import { readArticleLedger } from '../../note/lib/article-ledger.mjs';
 import { readCoverLedger } from '../../note/lib/cover-assets.mjs';
 import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 import { datasetPath } from '../../../../config/datasets.mjs';
+import { readWebInventory,WEB_INVENTORY } from './web-inventory.mjs';
+import { catalogTemplates } from './catalog.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 export const FILES = { quality: datasetPath('content.quality'), inventory: datasetPath('content.image-inventory'), templates: datasetPath('content.image-templates') };
@@ -45,6 +47,7 @@ export function validateQuality(result) {
 }
 export function readTemplates(root = ROOT) {
   const result = read(root, FILES.templates);
+  for(const template of catalogTemplates())if(!result.templates.some(t=>t.id===template.id))result.templates.push(template);
   if (!validateTemplates(result) ||
       new Set(result.templates.map(t => t.id)).size !== result.templates.length ||
       result.templates.some(t => !/^[a-z-]+$/.test(t.id) || !Number.isInteger(t.version) || t.version < 1 ||
@@ -85,7 +88,7 @@ export function sourceItems(root = ROOT) {
     bodyStore: 'git', bodySaved: !!p.caption,
     basis: sha({ caption: p.caption, assets: p.assets, media: p.media_path, template: p.template }),
   }));
-  return [...notes, ...social];
+  return [...notes, ...social, ...readWebInventory(root).items];
 }
 export function defaultReview() { return { priority: 'normal', policy: '', checks: Object.fromEntries(CHECKS.map(c => [c, 'unchecked'])) }; }
 export function workspaceItems(root = ROOT) {
@@ -115,7 +118,11 @@ function inferTemplate(file, owner) {
   if (/chart|ranking|boxplot/i.test(file)) return 'ranking';
   return 'unclassified';
 }
+let libraryCache;
 export function imageLibrary(root = ROOT) {
+  const paths=[...Object.values(FILES),WEB_INVENTORY,datasetPath('sns.posts'),datasetPath('note.articles'),datasetPath('note.cover-assets')];
+  const stamp=root+JSON.stringify(paths.map(f=>{const s=fs.statSync(path.join(root,f),{throwIfNoEntry:false});return [s?.mtimeMs,s?.size];}));
+  if(libraryCache?.stamp===stamp)return libraryCache.value;
   const sources = readSources(root), inventory = read(root, FILES.inventory), quality = readQuality(root);
   const templates = readTemplates(root).templates, items = sourceItems(root), itemMap = new Map(items.map(i => [i.id, i]));
   const images = [];
@@ -123,21 +130,23 @@ export function imageLibrary(root = ROOT) {
     const item = itemMap.get(owner);
     if (!item) return;
     const id = imageId(owner, file), record = quality.images[id];
-    const templateId = record?.templateId ?? inferTemplate(file, owner);
+    const templateId = record?.templateId ?? extra.templateId ?? inferTemplate(file, owner);
     const template = templates.find(t => t.id === templateId) ?? templates.find(t => t.id === 'unclassified');
-    const basis = sha([item.basis, original, extra.inputFiles ?? [], template, record?.policy ?? '']);
+    const basis = sha([item.basis, original, extra.inputFiles ?? [], extra.generation??null, template, record?.policy ?? '']);
     const candidate = record?.revisions.find(r => r.id === record.candidateId) ?? null;
-    images.push({ id, owner, file, title: item.title, channel: item.channel, category: item.category,
+    images.push({ ...extra, id, owner, file, title: item.title, channel: item.channel, category: item.category,
       original, templateId, policy: record?.policy ?? '', basis,
       revision: sha([basis, record ?? null]), record: record ?? null, candidate,
       candidateMatches: !!candidate && candidate.basis === basis,
       approved: !!candidate && candidate.id === record?.approvedId && candidate.basis === basis,
-      ...extra });
+      usage:extra.usage??(extra.kind==='cover'?'cover':item.channel==='note'?'body':'social'),
+      format:extra.format??path.extname(original?.key??file).slice(1)??'',
+      pageUrl:item.url });
   };
   for (const a of sources.articles) {
     const owner = 'note/' + a.key, entry = inventory.articles[a.key];
     if (entry?.status === 'indexed' && entry.manifestSha === a.body.manifest?.sha256) {
-      const inputFiles = entry.files.filter(f => /\.(json|csv|ts|tsx|mjs|svg)$/i.test(f.name) && !/cover|eyecatch|header/i.test(f.name));
+      const inputFiles = entry.files.filter(f => /\.(json|csv|ts|tsx|mjs|svg)$/i.test(f.name) && !/cover|eyecatch|header/i.test(f.name)).map(f=>({...f,bucket:entry.bucket,key:a.r2Path+'/'+f.name,state:'article-saved',role:'input'}));
       for (const f of entry.files.filter(f => raster.test(f.name) && !/cover|eyecatch|header/i.test(f.name)))
         add(owner, f.name, { provider: a.body.store, bucket: entry.bucket, key: a.r2Path + '/' + f.name, sha256: f.sha256, bytes: f.bytes }, { inputFiles, inventoryStatus: 'indexed' });
     }
@@ -159,10 +168,23 @@ export function imageLibrary(root = ROOT) {
         provider: asset.r2 ? 'r2-private' : 'drive', ...(asset.r2 ?? {}),
         sha256: asset.sha256, bytes: asset.bytes, drivePath: asset.drive_path ?? null,
       } : null, { inputFiles: [], inventoryStatus: asset.state, legacyUrl: asset.state === 'archived' ? '/sns-asset/' + post.id + '/' + encodeURIComponent(asset.drive_path?.split('/').pop() ?? (file + '.' + (asset.mime?.split('/')[1] ?? 'png'))) : null,
+        format:asset.mime?.split('/')[1]??'',
+        generation:post.template?{generator:post.template}:undefined,
+        sourceLinks:asset.source?[{label:asset.source,relationship:'投稿台帳に記録された元素材。固定数値入力との対応は未確認。'}]:[],
         missingReason: asset.reason ?? null });
     }
   }
-  return { images, templates, inventoryUpdatedAt: inventory.updatedAt };
+  const web=readWebInventory(root);
+  for(const row of web.images){const {owner,file,original,...extra}=row;add(owner,file,original,extra);}
+  const uses=new Map();
+  for(const image of images){
+    image.assetKey=image.original?.key?(image.original.bucket??'')+'/'+image.original.key:image.original?.url??(image.original?.path?'git/'+image.original.path:image.coverUrl??image.id);
+    const list=uses.get(image.assetKey)??[];list.push({id:image.id,owner:image.owner,title:image.title,url:image.pageUrl,usage:image.usage});uses.set(image.assetKey,list);
+  }
+  // Return IDs rather than repeated article metadata, so a common site image does not make the response quadratic.
+  for(const image of images)image.relatedImageIds=uses.get(image.assetKey).map(u=>u.id);
+  const value={images,templates,inventoryUpdatedAt:inventory.updatedAt,webInventoryUpdatedAt:web.updatedAt,coverage:web.coverage};
+  libraryCache={stamp,value};return value;
 }
 export function imageById(root, id) {
   const image = imageLibrary(root).images.find(i => i.id === id);
@@ -202,8 +224,8 @@ export function reviewCandidate(root, id, expected, candidateId, review) {
 }
 export function saveTemplate(root, id, expected, next) {
   return atomicUpdate(root, FILES.templates, data => {
-    const index = data.templates.findIndex(t => t.id === id);
-    if (index < 0) throw new WorkspaceError('図の型が見つかりません。', 404);
+    let index = data.templates.findIndex(t => t.id === id);
+    if(index<0){const base=catalogTemplates().find(t=>t.id===id);if(!base)throw new WorkspaceError('図の型が見つかりません。',404);data.templates.push(base);index=data.templates.length-1;}
     if (sha(data.templates[index]) !== expected) throw new WorkspaceError('方針が更新されました。再読込してください。', 409);
     const current = data.templates[index];
     data.history ??= [];

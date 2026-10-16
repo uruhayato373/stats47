@@ -1,0 +1,2340 @@
+{
+  "items": [
+    {
+      "id": "web/blog/income-quintile-medical-health",
+      "channel": "web",
+      "key": "income-quintile-medical-health",
+      "title": "医療費で払うのは機能より感情",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/income-quintile-medical-health",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "1d08f730183577573dbc1224e8a71e53f380593d459b7165a3b3bec302fbb03b",
+      "catalogBasis": "a8b50e0ff34639f348a9625f38253b7dfa573de1d161e96897cb0ac8502eb2cf",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/article.md",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+        "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+        "bytes": 14422
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/0ca61237bcedc43eb86e92b8",
+      "channel": "web",
+      "key": "assets/area-specialty/19000/momo.webp",
+      "title": "momo.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0f3aa7190c41769eb75720bb1f8b6765310622ba312e9f714aeedce15b53339b"
+    },
+    {
+      "id": "web/material/63dccb165267f4fee14a520d",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/general-hospital-bed-occupancy-rate.jpg",
+      "title": "general-hospital-bed-occupancy-rate.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ead15146812934fe5d534637498185a21b30bbf33fe00ce9e949cfcb8d779deb"
+    },
+    {
+      "id": "web/material/88c1d20da4d17db6086a5ced",
+      "channel": "web",
+      "key": "assets/area-specialty/25000/ibuki-daikon.webp",
+      "title": "ibuki-daikon.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "13fc88d42494c57cebfb192f44240a893df36e423b934fdb74a3edb06359f089"
+    },
+    {
+      "id": "web/ranking/average-weight-middle-school-second-grade-male",
+      "channel": "web",
+      "key": "average-weight-middle-school-second-grade-male",
+      "title": "平均体重",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/average-weight-middle-school-second-grade-male",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6f2868f272979d0649eaf11c2bfcec80847f21609014cf456df6e515d11862c8",
+      "catalogBasis": "6f2868f272979d0649eaf11c2bfcec80847f21609014cf456df6e515d11862c8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/cpi-change-rate-housing",
+      "channel": "web",
+      "key": "cpi-change-rate-housing",
+      "title": "消費者物価指数変化率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cpi-change-rate-housing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "03b2f12de86e3414fe737cede298c9bfea98a46864ba13f884ad77a94e924d83",
+      "catalogBasis": "03b2f12de86e3414fe737cede298c9bfea98a46864ba13f884ad77a94e924d83",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/midwife-annual-income",
+      "channel": "web",
+      "key": "midwife-annual-income",
+      "title": "助産師の平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/midwife-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ba01cd1e586fc6a480dfc45b74632b3b7b488b94dea428f6f9749bce7abfaeda",
+      "catalogBasis": "ba01cd1e586fc6a480dfc45b74632b3b7b488b94dea428f6f9749bce7abfaeda",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-indoor-furnishing-consumption-expenditure",
+      "channel": "web",
+      "key": "other-indoor-furnishing-consumption-expenditure",
+      "title": "他の室内装備品消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-indoor-furnishing-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7ed892aa32e5921998ba2e28910aee6bb0b41bdc9365b714ddfae103b0b3c2d0",
+      "catalogBasis": "7ed892aa32e5921998ba2e28910aee6bb0b41bdc9365b714ddfae103b0b3c2d0",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/simple-life-insurance-contract-count",
+      "channel": "web",
+      "key": "simple-life-insurance-contract-count",
+      "title": "簡易生命保険保有契約件数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/simple-life-insurance-contract-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7f6f212350c68f854d152dc749224e8f5ab6413358766c325ad63556a4bc3052",
+      "catalogBasis": "7f6f212350c68f854d152dc749224e8f5ab6413358766c325ad63556a4bc3052",
+      "indexComplete": true
+    },
+    {
+      "id": "web/silhouette/22",
+      "channel": "web",
+      "key": "22",
+      "title": "静岡県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/22000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "dbf1a2626d1ba660c95f391dc97ae343e755fc3986d8b6859156f5e2caf38449"
+    },
+    {
+      "id": "web/silhouette/45",
+      "channel": "web",
+      "key": "45",
+      "title": "宮崎県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/45000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f0903b39fe7a0d9c0eb84dfa21449a5dec58623858d6bf07b3cb67961810e93a"
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/data/cold-medicine-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/data/cold-medicine-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/cold-medicine-quintile.svg",
+        "sha256": "6cd22768fa155c02afea8dbc3940b27cb790f1da4a0dce75200fa7c5c5dd7306",
+        "bytes": 3603
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+          "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+          "bytes": 14422,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cold-medicine-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/cold-medicine-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/cold-medicine-quintile.json",
+          "sha256": "ae1b5339c8dc49e5a43d19c19401eba62b706510e3d35b0d0982059c0b0bf43a",
+          "bytes": 666,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cold-medicine-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/cold-medicine-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/cold-medicine-quintile.source.json",
+          "sha256": "d53133283c4df5eb3d939d6c3871879585d440934721fe75666f6f1397febb63",
+          "bytes": 497,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/cold-medicine-quintile.svg",
+          "alt": "感冒薬 年収五分位別",
+          "heading": "感冒薬 — 症状を治す支出は、所得が上がっても基準線並みのペースでしか増えない",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/data/contact-lens-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/data/contact-lens-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/contact-lens-quintile.svg",
+        "sha256": "3714ed40b51bdd1e4d9f46ba12ae01b0ca03967991f12dc4f74674cb1fc13bc2",
+        "bytes": 3248
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+          "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+          "bytes": 14422,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "contact-lens-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/contact-lens-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/contact-lens-quintile.json",
+          "sha256": "dc89d0117c8bf047de77fc0d0b92555e96e267d86ebf7a36eb37d2e750dc9d6a",
+          "bytes": 681,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "contact-lens-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/contact-lens-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/contact-lens-quintile.source.json",
+          "sha256": "be46950d8afe3dbd8f507d6f604db1aae95ad608e90b90f80224e82be779243d",
+          "bytes": 511,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/contact-lens-quintile.svg",
+          "alt": "コンタクトレンズ 年収五分位別",
+          "heading": "眼鏡とコンタクトレンズ — 同じ視力矯正なのに、なぜこれほど差がつくのか",
+          "line": 46
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/data/eyeglasses-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/data/eyeglasses-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/eyeglasses-quintile.svg",
+        "sha256": "0af3f1c226c34dd9cb95105e49bba10254348657e440cf4bd911fca3deb2e121",
+        "bytes": 3786
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+          "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+          "bytes": 14422,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "eyeglasses-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/eyeglasses-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/eyeglasses-quintile.json",
+          "sha256": "7dfb22729817421831387cec9ddc3d97cd4fbecdebb627abc3fc1e82f83fde99",
+          "bytes": 663,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "eyeglasses-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/eyeglasses-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/eyeglasses-quintile.source.json",
+          "sha256": "451b474be5ed85bcab4db20d2d8a7ab3f589d98b8272aab6790ef0ffd4442af7",
+          "bytes": 491,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/eyeglasses-quintile.svg",
+          "alt": "眼鏡 年収五分位別",
+          "heading": "眼鏡とコンタクトレンズ — 同じ視力矯正なのに、なぜこれほど差がつくのか",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/data/health-checkup-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/data/health-checkup-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/health-checkup-quintile.svg",
+        "sha256": "ee3d299d3fe1da7bed8d27e7cae8954f3e6d80724daf35c1625080e0a2d14174",
+        "bytes": 4404
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+          "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+          "bytes": 14422,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "health-checkup-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/health-checkup-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/health-checkup-quintile.json",
+          "sha256": "d4a245db7cef267d0cd78ade4817bd8c58d6e21eed035515363aa6ca26a09673",
+          "bytes": 684,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "health-checkup-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/health-checkup-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/health-checkup-quintile.source.json",
+          "sha256": "dbb0f00a4381d386ba4252aa80f5d9498d8da59678b322e1a566aa04710c5e54",
+          "bytes": 516,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/health-checkup-quintile.svg",
+          "alt": "人間ドック等受診料 年収五分位別",
+          "heading": "人間ドック等受診料 — 「治療」ではなく「安心」を買う",
+          "line": 66
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/data/massage-quintile.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/data/massage-quintile.svg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/massage-quintile.svg",
+        "sha256": "67db271f15b436c8786590c127b03a879deb9311181d710e3c31631fb540f0e4",
+        "bytes": 4413
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/article.md",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/article.md",
+          "sha256": "1b0718d10c3b671613863c4725d0e056a197507766a90139b2aa2f5a6d3e0570",
+          "bytes": 14422,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "massage-quintile.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/massage-quintile.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/massage-quintile.json",
+          "sha256": "e50c26b60c5359364eaaa3bad251de35f1b46c6bd0dd64954ebab930879e19f1",
+          "bytes": 692,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "massage-quintile.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/data/massage-quintile.source.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/massage-quintile.source.json",
+          "sha256": "e651e98e0ffaa94004c58b92925bb123e96b2f121eb4a45f18727b02b9294e3c",
+          "bytes": 517,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/data/massage-quintile.svg",
+          "alt": "マッサージ料金等 年収五分位別",
+          "heading": "マッサージ料金等(診療外) — 「スッキリ感」に一番大きい財布を開ける層",
+          "line": 56
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 230",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/background.jpg",
+        "sha256": "ab5bf4ef0b7c75c6a6d45d96027f43db0a94f2f633d99ad7bdf443185811d507",
+        "bytes": 85218
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/generation.json",
+          "sha256": "24ada4243f66ef6999ee65ef2ba9caa2c593954770a719fd025e1dc1b423f38f",
+          "bytes": 2179,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e2b9391b848dc0bc3085401768cf09bf5774b0227eeab1884d46c27865edc428",
+        "fingerprint": "f311a4e658b53e63743601b45ee98f424c6e7ececb961ff96380c9a590b82280",
+        "generatedAt": "2026-09-05T14:56:50.071Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/ogp.png",
+        "sha256": "165a2579758ebe8b91652555ed347db936ebe1effb684b8de95c535634c1cebe",
+        "bytes": 530686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/generation.json",
+          "sha256": "24ada4243f66ef6999ee65ef2ba9caa2c593954770a719fd025e1dc1b423f38f",
+          "bytes": 2179,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e2b9391b848dc0bc3085401768cf09bf5774b0227eeab1884d46c27865edc428",
+        "fingerprint": "f311a4e658b53e63743601b45ee98f424c6e7ececb961ff96380c9a590b82280",
+        "generatedAt": "2026-09-05T14:56:50.071Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/thumbnail-dark.webp",
+        "sha256": "585cfb3600f25a20326d49cc5ea4fe8668b4e357e1530601b4ca718d66aa234a",
+        "bytes": 11780
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/generation.json",
+          "sha256": "24ada4243f66ef6999ee65ef2ba9caa2c593954770a719fd025e1dc1b423f38f",
+          "bytes": 2179,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e2b9391b848dc0bc3085401768cf09bf5774b0227eeab1884d46c27865edc428",
+        "fingerprint": "f311a4e658b53e63743601b45ee98f424c6e7ececb961ff96380c9a590b82280",
+        "generatedAt": "2026-09-05T14:56:50.071Z"
+      }
+    },
+    {
+      "owner": "web/blog/income-quintile-medical-health",
+      "file": "app/blog/income-quintile-medical-health/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/income-quintile-medical-health/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/thumbnail-light.webp",
+        "sha256": "0f6f4b439d1356702ac6dace1aae5790efb0edace325ef536f58839da1dc6cc7",
+        "bytes": 23858
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/income-quintile-medical-health/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/income-quintile-medical-health/ogp/generation.json",
+          "sha256": "24ada4243f66ef6999ee65ef2ba9caa2c593954770a719fd025e1dc1b423f38f",
+          "bytes": 2179,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e2b9391b848dc0bc3085401768cf09bf5774b0227eeab1884d46c27865edc428",
+        "fingerprint": "f311a4e658b53e63743601b45ee98f424c6e7ececb961ff96380c9a590b82280",
+        "generatedAt": "2026-09-05T14:56:50.071Z"
+      }
+    },
+    {
+      "owner": "web/material/0ca61237bcedc43eb86e92b8",
+      "file": "assets/area-specialty/19000/momo.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/19000/momo.webp",
+        "sha256": "51f430b704a25d1e6d2f21500284a58de9630d938d74324c37d4367d56f54f12",
+        "bytes": 29468
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/19000/momo.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/63dccb165267f4fee14a520d",
+      "file": "assets/blog/article-backgrounds/general-hospital-bed-occupancy-rate.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/general-hospital-bed-occupancy-rate.jpg",
+        "sha256": "ea385dfdfcbc5b240dd8ffbda0b9dc3365dd5f77a2df4f3354f9dfbfef3df5c2",
+        "bytes": 79483
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/general-hospital-bed-occupancy-rate.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/88c1d20da4d17db6086a5ced",
+      "file": "assets/area-specialty/25000/ibuki-daikon.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/25000/ibuki-daikon.webp",
+        "sha256": "7c946368244261168b4ee9846f082145188d36f8bb8a0bbfbebcae0460c0cf47",
+        "bytes": 27276
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/25000/ibuki-daikon.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/average-weight-middle-school-second-grade-male",
+      "file": "app/ranking/average-weight-middle-school-second-grade-male/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-weight-middle-school-second-grade-male/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/ogp/ogp.png",
+        "sha256": "e127f4b8458338e0cc144098a19f1a1ab0d17901406347c08ce58aeaeb90c56e",
+        "bytes": 57820
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-weight-middle-school-second-grade-male/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/ogp/generation.json",
+          "sha256": "6db843ce9a3eabadc43e2336f80ac42abfcdf0ed386d180be4675c271f11bac9",
+          "bytes": 1017,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "56058d798fed3e7173fad1da6b5cd13bebda29360eca52da943c8383275f0817",
+        "fingerprint": "5382a5972c726c6e3c4c427b7673e53b0ef2b06025d45f9b5b3a83aaf1a9feb4",
+        "generatedAt": "2026-10-10T21:32:12.254Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-weight-middle-school-second-grade-male",
+      "file": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/thumbnail-dark.webp",
+        "sha256": "7a7c0aee7026e7abbd41e794f83425d56ebb54c5826aa138d64cf251f47052f9",
+        "bytes": 14818
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/thumbnail.json",
+          "sha256": "83f0f7a5a1e5d6993354fa101692929ce8730a1a97b8fa6dd4fdd8e24e763d1f",
+          "bytes": 1967,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "897f70909775b9bbed524f653a37e7aeb3ff3502d3694b9a650f1e9c140ea719",
+        "fingerprint": "1309b5348debd534eb07ce1c01f7e9b9effa527332661309b8e2f678e14d7f54",
+        "generatedAt": "2026-10-10T21:50:00.276Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-weight-middle-school-second-grade-male",
+      "file": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/thumbnail-light.webp",
+        "sha256": "90882c334e25c117068dc13c4743cb5b4abf661ef020f5219873d8399ecf00c1",
+        "bytes": 13342
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-weight-middle-school-second-grade-male/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/thumbnail.json",
+          "sha256": "83f0f7a5a1e5d6993354fa101692929ce8730a1a97b8fa6dd4fdd8e24e763d1f",
+          "bytes": 1967,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-weight-middle-school-second-grade-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "897f70909775b9bbed524f653a37e7aeb3ff3502d3694b9a650f1e9c140ea719",
+        "fingerprint": "1309b5348debd534eb07ce1c01f7e9b9effa527332661309b8e2f678e14d7f54",
+        "generatedAt": "2026-10-10T21:50:00.276Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-housing",
+      "file": "app/ranking/cpi-change-rate-housing/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-housing/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/ogp/ogp.png",
+        "sha256": "d61e946d1b967b3d4ffe9f727ef4274a0ed8b9ae08b41e19ffa29e57dc5df5bb",
+        "bytes": 60780
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-housing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/ogp/generation.json",
+          "sha256": "fe2e8877254f606bea3ccbdb6a9843603d77235f3aa1dfd90be7393bcfc69586",
+          "bytes": 925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-housing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-housing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "ca2f564717cdf07fa775b2ca8418c270af6d7e1fb5f74ae1b898cb6d3a930e9a",
+        "fingerprint": "a27d11a6d3acb9ac7694c579073caa5129e0ba0afaa2bc93664cff6a01bc3676",
+        "generatedAt": "2026-10-10T21:32:47.425Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-housing",
+      "file": "app/ranking/cpi-change-rate-housing/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-housing/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/thumbnail-dark.webp",
+        "sha256": "b18a6f6af78c2a068f6f1efe193aa7247c86045fb7031e893cb7858a87c028a8",
+        "bytes": 16564
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-housing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/thumbnail.json",
+          "sha256": "b4079b764c23602b9a037eacc48507a89f648922c5f0b3a6ea11a90f8d35a93c",
+          "bytes": 1760,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-housing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-housing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0e86b3ff2ae0adadbf9e71d9a58bf9f673d517f23ccaa13013cd8f667cc4f105",
+        "fingerprint": "eca023866d1cd3a926e7f4a3a7895434df3b2a18be2b9fde0c31b110d0ef1943",
+        "generatedAt": "2026-10-10T21:50:09.395Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cpi-change-rate-housing",
+      "file": "app/ranking/cpi-change-rate-housing/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cpi-change-rate-housing/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/thumbnail-light.webp",
+        "sha256": "fd7fac419e89938a19bb7cb886c5a93ad09a12a18dc9b3f98b00d5ee67ac1129",
+        "bytes": 14540
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cpi-change-rate-housing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/thumbnail.json",
+          "sha256": "b4079b764c23602b9a037eacc48507a89f648922c5f0b3a6ea11a90f8d35a93c",
+          "bytes": 1760,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cpi-change-rate-housing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cpi-change-rate-housing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cpi-change-rate-housing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0e86b3ff2ae0adadbf9e71d9a58bf9f673d517f23ccaa13013cd8f667cc4f105",
+        "fingerprint": "eca023866d1cd3a926e7f4a3a7895434df3b2a18be2b9fde0c31b110d0ef1943",
+        "generatedAt": "2026-10-10T21:50:09.395Z"
+      }
+    },
+    {
+      "owner": "web/ranking/midwife-annual-income",
+      "file": "app/ranking/midwife-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/midwife-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/ogp/ogp.png",
+        "sha256": "cbb4600020cc663e74f99090102e467c02e54e0787be476326038eb7ed7ff9fb",
+        "bytes": 62677
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/midwife-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/ogp/generation.json",
+          "sha256": "c84b64657f7f2a87935bd73a663a2e9ed2493376c0ec0c747e85a0c88c4d10b2",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/midwife-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/midwife-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "5d760b27227510dee1b40e6d7122eb2012b064ed34e00c0db0ff352fe925781a",
+        "fingerprint": "0b5b313e9f05de443ac4f39f80cd0f8b765d601b896247df8d43daa46808ced0",
+        "generatedAt": "2026-10-03T20:59:59.496Z"
+      }
+    },
+    {
+      "owner": "web/ranking/midwife-annual-income",
+      "file": "app/ranking/midwife-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/midwife-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/thumbnail-dark.webp",
+        "sha256": "db1353cc32e039e29edf11f97c98ef4d12c8609b57ddc0bdf01027c1a5539bd4",
+        "bytes": 16680
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/midwife-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/thumbnail.json",
+          "sha256": "83d30b54f3d5cf1816d8f34cd616065fde0a90b3fa38e42a9013d99bb6541198",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/midwife-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/midwife-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b4e17396cfcb0bc0bcfb9042caf15a478b5c99c2529c8ab2a213cebfac371a42",
+        "fingerprint": "e904f958f9512c1f62ef2741e09c0774ab292da589f1f3326fea176252d2c531",
+        "generatedAt": "2026-10-08T00:38:11.869Z"
+      }
+    },
+    {
+      "owner": "web/ranking/midwife-annual-income",
+      "file": "app/ranking/midwife-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/midwife-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/thumbnail-light.webp",
+        "sha256": "aa17116c7b7480d40a38f02ffc8574d84328d283f8bb5976ee924fa7426b2d74",
+        "bytes": 15320
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/midwife-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/thumbnail.json",
+          "sha256": "83d30b54f3d5cf1816d8f34cd616065fde0a90b3fa38e42a9013d99bb6541198",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/midwife-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/midwife-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/midwife-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b4e17396cfcb0bc0bcfb9042caf15a478b5c99c2529c8ab2a213cebfac371a42",
+        "fingerprint": "e904f958f9512c1f62ef2741e09c0774ab292da589f1f3326fea176252d2c531",
+        "generatedAt": "2026-10-08T00:38:11.869Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-indoor-furnishing-consumption-expenditure",
+      "file": "app/ranking/other-indoor-furnishing-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/ogp/ogp.png",
+        "sha256": "054daa76306a035ec334259816b62c015464bff563d072ec6905f056c8c693af",
+        "bytes": 61733
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/ogp/generation.json",
+          "sha256": "df79122abd36a26b473bbade742915c2162cc26159bfc87d85970ecd98d2f3d1",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "eb63a27bc8ec8762132ca3264c4c3c1c27d87731397f857150fc73e352b109b0",
+        "fingerprint": "dead38f3fe6a4ca04780685a03f9c91c3bc36392918f9b1145955c66a07ed394",
+        "generatedAt": "2026-10-03T21:00:37.099Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-indoor-furnishing-consumption-expenditure",
+      "file": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "2754e9e83b2acb0a4f3baff53991518abac530232fa831948f18fd3243c697ac",
+        "bytes": 17784
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail.json",
+          "sha256": "d50e041dba8586a4fadcbdeb18dc99454141cf3195a7c7e35ef110d31fbd66bc",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d7108d93458b1be8a059f7c6fdbbc7c94c04bd25ce0d304a0ffd724d4f686cd6",
+        "fingerprint": "1049ab4d027c7f560ce5304c7fb6f31c875a8be847692933d4ea8a7e7e211caa",
+        "generatedAt": "2026-10-03T21:25:37.063Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-indoor-furnishing-consumption-expenditure",
+      "file": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "7681c5d85afe989ce6b53a3a0f4fdb9a24b323b6f1daeeb9970bbb5fd7ac2af2",
+        "bytes": 16138
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/thumbnail.json",
+          "sha256": "d50e041dba8586a4fadcbdeb18dc99454141cf3195a7c7e35ef110d31fbd66bc",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-indoor-furnishing-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "d7108d93458b1be8a059f7c6fdbbc7c94c04bd25ce0d304a0ffd724d4f686cd6",
+        "fingerprint": "1049ab4d027c7f560ce5304c7fb6f31c875a8be847692933d4ea8a7e7e211caa",
+        "generatedAt": "2026-10-03T21:25:37.063Z"
+      }
+    },
+    {
+      "owner": "web/ranking/simple-life-insurance-contract-count",
+      "file": "app/ranking/simple-life-insurance-contract-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/simple-life-insurance-contract-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/ogp/ogp.png",
+        "sha256": "1646c068a1cef52d320937489b74ccfb51771ee017945e728a3be8838ea7090e",
+        "bytes": 79378
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/simple-life-insurance-contract-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/ogp/generation.json",
+          "sha256": "b87d3faec9a23df91b5cc1765a5c5dde098b1b793f5514253ba8ea1119a017c2",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "12e7c3207c16c78beff7c2e014f34284d3f70cf49d1f9bfb9f4607e7791941a9",
+        "fingerprint": "d078de757c0b48764c205a673e158c014372640c566ea6a7e7f5f220a55af586",
+        "generatedAt": "2026-08-16T22:20:54.473Z"
+      }
+    },
+    {
+      "owner": "web/ranking/simple-life-insurance-contract-count",
+      "file": "app/ranking/simple-life-insurance-contract-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/simple-life-insurance-contract-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/thumbnail-dark.webp",
+        "sha256": "9327892bf220f3fc92f6d32010e237e768bfe4b2897d1768faf1d1398e2c5b81",
+        "bytes": 19328
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/simple-life-insurance-contract-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/thumbnail.json",
+          "sha256": "87a0a6f91b0af85c0a1c1e4b1e797d1fa2d80752410f9ddc6a0d5d91ed13db37",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3ba934954500ebbc82f5a6070f85daad3696dd9edea692a69e38f0a59024bea9",
+        "fingerprint": "fa17858b8cb1e7193055f1af420cc11bcd95cb1171ffa0948df756138651b356",
+        "generatedAt": "2026-08-16T22:36:20.825Z"
+      }
+    },
+    {
+      "owner": "web/ranking/simple-life-insurance-contract-count",
+      "file": "app/ranking/simple-life-insurance-contract-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/simple-life-insurance-contract-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/thumbnail-light.webp",
+        "sha256": "89d4de6eef93d0393a58fa7a49ff5560d729bd9fc0a9c13d413485488288b1cf",
+        "bytes": 17936
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/simple-life-insurance-contract-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/thumbnail.json",
+          "sha256": "87a0a6f91b0af85c0a1c1e4b1e797d1fa2d80752410f9ddc6a0d5d91ed13db37",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/simple-life-insurance-contract-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/simple-life-insurance-contract-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3ba934954500ebbc82f5a6070f85daad3696dd9edea692a69e38f0a59024bea9",
+        "fingerprint": "fa17858b8cb1e7193055f1af420cc11bcd95cb1171ffa0948df756138651b356",
+        "generatedAt": "2026-08-16T22:36:20.825Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-11-blue.png",
+        "sha256": "425f0b2186e43878a5748aaefe2badeb9364ad5429b4099b33a61ed46f4c2a81",
+        "bytes": 184974
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-11-dark.png",
+        "sha256": "044c78fb9c1da09095b619fdb84d0ed43a7f024c950ffb15a552684f94339ba7",
+        "bytes": 172645
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-169-blue.png",
+        "sha256": "6defa0c860afb1924264e2241e8234b16c4e182e39beb241ffd130c0fb206fb5",
+        "bytes": 308508
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-169-dark.png",
+        "sha256": "fe0d1b964423738a11ad726a0b3c3ab40621706bc2a508cc7f05a998b19015f5",
+        "bytes": 282028
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-45-blue.png",
+        "sha256": "c2257aedc627835ea248d57302d2b78005a293c0868a2596643ae61409f69feb",
+        "bytes": 204484
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-45-dark.png",
+        "sha256": "d5677dc6a7c15d80e6976decb536325bc31274f0611e88b6cd18709630e676b6",
+        "bytes": 194455
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-916-blue.png",
+        "sha256": "393d3abe520bf7a0016e7b15410ec115eb7ca9ece35b6261777b20c178a3f925",
+        "bytes": 248412
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-916-dark.png",
+        "sha256": "464c9e55507269eb63653f54f7a15ab921e46a747e7584d5610463cfda7e7992",
+        "bytes": 239086
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-ogp-blue.png",
+        "sha256": "990069b6dd3ecd672bf613f80b47264da485fe5029888439ec03a46978af56cc",
+        "bytes": 163169
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/22",
+      "file": "sns/pref-silhouette/22/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/22/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/22/card-ogp-dark.png",
+        "sha256": "343514755f8ad432d7e5db3146ae086da39049d3d405f50a9e89b4e46db5e9bc",
+        "bytes": 148260
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/22/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/22/generation.json",
+          "sha256": "b334e0bcb38913d70eab066db17332085244a4c839f51d5a260c72fa6886d306",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "b5eb0da163546a50e61d9e37264effbbdcbd18a970ef8c315378452d4b0a32b5",
+        "fingerprint": "91909eda030cc504a4ce8d8f6e0ff8e798b47ae38334d2183f82dc7b8d91efb4",
+        "generatedAt": "2026-10-10T22:09:30.271Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-11-blue.png",
+        "sha256": "51786775a6bbbaba216cc8e3755b490983a8d3519b097bdf38384935538846fe",
+        "bytes": 205831
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-11-dark.png",
+        "sha256": "efdf6a6ece1e9f124c61e21469c495f89d284258c9ca5fbafaa4eaea4442c663",
+        "bytes": 181139
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-169-blue.png",
+        "sha256": "7be1801018762ecb43588c44d3c139ef6efe326ae18849ebdf66c560eb948118",
+        "bytes": 280234
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-169-dark.png",
+        "sha256": "1ceea861e65ce8176a28b8e2041606ed95855801bf7ed5e86ab85f67160fad27",
+        "bytes": 243596
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-45-blue.png",
+        "sha256": "7f82f8fc5504badfb39c81a3dc06359e6642f7ca9453a2e105f18164d8e3c0e6",
+        "bytes": 233322
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-45-dark.png",
+        "sha256": "15a6daa070051e5132d784b0fe8bb4c4b2e28457060e5b901622aae0ff88d690",
+        "bytes": 207393
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-916-blue.png",
+        "sha256": "a7109643b565b846d26ab3ada52ff61aa9f07e294ec9c43206eefe8b5e0c8234",
+        "bytes": 279258
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-916-dark.png",
+        "sha256": "1128102145f27b98dfb83b3a065ae1adc656fbebcb8fc8eab6c500c40fbbf0c9",
+        "bytes": 253999
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-ogp-blue.png",
+        "sha256": "c46194cd454248acd810419fe88dc29f20585922147b7e2ee3d4beb1450662b7",
+        "bytes": 143118
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/45",
+      "file": "sns/pref-silhouette/45/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/45/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/45/card-ogp-dark.png",
+        "sha256": "1d8ae90693a67f7b18afaee8e7349f292278c5a264a80786fa1a08d1b478534b",
+        "bytes": 123066
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/45/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/45/generation.json",
+          "sha256": "0cec887dbb08ff190882c93406680f80457b430093de487a42c4b9614360bc4f",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "fbf85c855d5d6e18cef0bc959b23cc9bae91966f3d0ef11cb8c8dc1e48fd5171",
+        "fingerprint": "9f71dc7f8bdf799826ff4ac23f77d35aaa2156ac98a69a1cb4adb65e2b142a24",
+        "generatedAt": "2026-10-10T22:11:18.959Z"
+      }
+    }
+  ]
+}

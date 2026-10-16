@@ -2,8 +2,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT,FILES,readQuality,readTemplates,sourceItems,imageLibrary,safeName } from './lib/workspace.mjs';
+import { readWebInventory,publicUrlAllowed } from './lib/web-inventory.mjs';
 const quality=readQuality(ROOT),templates=readTemplates(ROOT),items=sourceItems(ROOT),images=imageLibrary(ROOT).images;
 const owners=new Set(items.map(i=>i.id)),ids=new Set(images.map(i=>i.id)),types=new Set(templates.templates.map(t=>t.id));
+if(owners.size!==items.length||ids.size!==images.length)throw Error('Duplicate owner or image ID');
+const web=readWebInventory(ROOT);
+for(const row of web.images){
+  if(!owners.has(row.owner)||!types.has(row.templateId))throw Error('Unresolved web image');
+  for(const ref of [row.original,...row.inputFiles]){
+    if(ref.key&&!safeName(ref.key))throw Error('Unsafe web key');
+    if(ref.url&&ref.provider!=='external'&&!publicUrlAllowed(ref.url))throw Error('Unsafe web URL');
+    if(ref.sha256&&(!/^[a-f0-9]{64}$/.test(ref.sha256)||!Number.isSafeInteger(ref.bytes)||ref.bytes<1))throw Error('Invalid image or input hash');
+  }
+}
 for(const template of templates.templates)if(template.renderer&&(!safeName(template.renderer.replace(/\/$/,''))||!fs.existsSync(path.join(ROOT,template.renderer))))throw Error('Missing renderer: '+template.id);
 for(const id of Object.keys(quality.reviews))if(!owners.has(id))throw Error('Orphan review: '+id);
 for(const [id,record]of Object.entries(quality.images)){

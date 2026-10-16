@@ -227,6 +227,7 @@
     "media:check": "node .claude/scripts/media/check-workspace.mjs",
     "media:test": "node --test .claude/scripts/media/__tests__/*.test.mjs",
     "media:inventory": "node .claude/scripts/media/sync-image-inventory.mjs",
+    "media:inventory:web": "node .claude/scripts/media/sync-web-image-inventory.mjs",
     "media:migrate": "node .claude/scripts/media/migrate-sns-images.mjs",
     "media:prepare": "node .claude/scripts/media/prepare-image.mjs"
   },

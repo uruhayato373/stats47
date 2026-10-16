@@ -1,0 +1,2710 @@
+{
+  "items": [
+    {
+      "id": "web/blog/convenience-store-density-map",
+      "channel": "web",
+      "key": "convenience-store-density-map",
+      "title": "コンビニが最も多い県、少ない県",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/convenience-store-density-map",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "1e48fda70a27605ac7f06403b2c39b4f16cc2a59111df873ea9247d37ad96b59",
+      "catalogBasis": "642a920e71dd87762ff0a7a1549ab86cc658f268c7efdc6ea56fe624ff858211",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/article.md",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/article.md",
+        "sha256": "784087f07480b6214f4e0d853f4ea19806426c26fa31db8a67f7ef475539f431",
+        "bytes": 8169
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/pachinko-participation-prefecture-gap",
+      "channel": "web",
+      "key": "pachinko-participation-prefecture-gap",
+      "title": "パチンコ参加率トップは九州だった｜佐賀・鹿児島8.6%、沖縄3.6%、なぜ東京は下位? (2021)",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/pachinko-participation-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "94bebfd8f4045b1bf41029c7428b0d37262b4f0bc5043602ead3db8d266f7e90",
+      "catalogBasis": "4c0f187f7e754bdbbbb9e802adad8155eb73e245a7821e90e9b25ef9d29c814d",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/article.md",
+        "sha256": "a10b49ee9e8a4615f051e162d6c6cf28217b4e41933ab76d849590e71485b74f",
+        "bytes": 10703
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/pharma-medical-device-production-map",
+      "channel": "web",
+      "key": "pharma-medical-device-production-map",
+      "title": "医薬品・医療機器の生産地図",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/pharma-medical-device-production-map",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "9bc6d70168119973f39570510144d28a014660de37f5742308414361c08eef78",
+      "catalogBasis": "674b113d89aab99e5637e2cf38780e004e77ce96d5ab7222b904890b96f94515",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/article.md",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+        "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+        "bytes": 11387
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/1d3cb264da04547c446fafc1",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/estat-7-techniques-from-unusable-to-usable.jpg",
+      "title": "estat-7-techniques-from-unusable-to-usable.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "55d64191c233102abd1c932a7c819fe8dad64ef5917a28f67bd53be507553326"
+    },
+    {
+      "id": "web/material/367c5f3fb4b0e75aab2605a1",
+      "channel": "web",
+      "key": "apps/web/public/images/brand-concrete-diagnosis-wide.png",
+      "title": "brand-concrete-diagnosis-wide.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "db13ef54cf35d650d1a08bc1d18eeefb218ef25701cf566f166f23958a422788"
+    },
+    {
+      "id": "web/material/44e120c0dedc9534718af7c1",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/ai-claude-code-pref-analysis.jpg",
+      "title": "ai-claude-code-pref-analysis.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a9bacc312b14bd81d08a1ae87d466f3f8ab3ed51a1eb9608f0ca5add55e74c46"
+    },
+    {
+      "id": "web/material/4e488a36d34e1c6a2274d832",
+      "channel": "web",
+      "key": "assets/area-specialty/28000/tamba-guri.webp",
+      "title": "tamba-guri.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "39d3dce2ff7413a1745a324e37810ea8520db58ccf612982f7f5a401012a83c6"
+    },
+    {
+      "id": "web/material/77873022cce7f84ea0519f47",
+      "channel": "web",
+      "key": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings-ig.svg",
+      "title": "nursery-shortage-urban-prefecture-prefecture-rankings-ig.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5bacb71beefbb18f94d47d04aedfbc34b945be715f5ea4f688329b090a13aa67"
+    },
+    {
+      "id": "web/material/c43de6eefd9f72d45b034f58",
+      "channel": "web",
+      "key": "assets/area-specialty/15000/nanban-ebi.webp",
+      "title": "nanban-ebi.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "84e60b34ce4944afbcb76d238399067a016abe9ad52b100760c8f0af917cf318"
+    },
+    {
+      "id": "web/material/dbd051d529a68fae329d99a6",
+      "channel": "web",
+      "key": "apps/web/public/logo-landscape.svg",
+      "title": "logo-landscape.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9881ac4792e77841495e689dc56e35f84d890b296b6fa0cac4fb05d301b0e459"
+    },
+    {
+      "id": "web/material/e8b068592c22765744f66086",
+      "channel": "web",
+      "key": "assets/area-specialty/06000/ukogi.webp",
+      "title": "ukogi.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a0c6dacd1ad49fce3e572bd6e8580561b1c8e495e42b79aba9ff752f92d5fc6a"
+    },
+    {
+      "id": "web/material/fe5086242d9a79d82a58b061",
+      "channel": "web",
+      "key": "apps/web/public/brand/atlas-v1/source-regional-portrait.jpg",
+      "title": "source-regional-portrait.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a81bcfc7918edafe91cc6339e0d1e46ab983b7572867ccbf6bbc00155da765a9"
+    },
+    {
+      "id": "web/ranking/childcare-employment-rate",
+      "channel": "web",
+      "key": "childcare-employment-rate",
+      "title": "育児をしている人の就業率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/childcare-employment-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3dc15e77ceca4f3d0e3d6ce908d410298f67fae1e3bee02f03b743aaf3d51eb8",
+      "catalogBasis": "3dc15e77ceca4f3d0e3d6ce908d410298f67fae1e3bee02f03b743aaf3d51eb8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/dental-clinic-count-per-100km2",
+      "channel": "web",
+      "key": "dental-clinic-count-per-100km2",
+      "title": "歯科診療所数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/dental-clinic-count-per-100km2",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1b1d1664231bcb70a7a608e0326183dc859a7fa76cf04c8684189db6f6a6b6f4",
+      "catalogBasis": "1b1d1664231bcb70a7a608e0326183dc859a7fa76cf04c8684189db6f6a6b6f4",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/hobby-activity-by-couple",
+      "channel": "web",
+      "key": "hobby-activity-by-couple",
+      "title": "共働き世帯の夫の趣味・娯楽行動者推定人口",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/hobby-activity-by-couple",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f67774fe965897eb71eebaef435154f51e49ac0f2381669f015928e7f0f98d30",
+      "catalogBasis": "f67774fe965897eb71eebaef435154f51e49ac0f2381669f015928e7f0f98d30",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/media-production-net-value-added",
+      "channel": "web",
+      "key": "media-production-net-value-added",
+      "title": "映像・音声・文字情報制作業の企業純付加価値額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/media-production-net-value-added",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6d361ff50f99eb42ffb5a574b530197ab3c4de2108caef771cddda0b30c2e067",
+      "catalogBasis": "6d361ff50f99eb42ffb5a574b530197ab3c4de2108caef771cddda0b30c2e067",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/nonregular-continuation-wish-rate",
+      "channel": "web",
+      "key": "nonregular-continuation-wish-rate",
+      "title": "非正規雇用者の継続就業希望割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/nonregular-continuation-wish-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8423056302f69f5d2fa7e2a8de7ac0dd4d0f957a4c5a66548002bd25116aa846",
+      "catalogBasis": "8423056302f69f5d2fa7e2a8de7ac0dd4d0f957a4c5a66548002bd25116aa846",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-non-savings-insurance-consumption-expenditure",
+      "channel": "web",
+      "key": "other-non-savings-insurance-consumption-expenditure",
+      "title": "他の非貯蓄型保険料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-non-savings-insurance-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "876b7ed3b1bb4a7963e92068099d71287449eb529c4ca9d366d498cc6e3fe406",
+      "catalogBasis": "876b7ed3b1bb4a7963e92068099d71287449eb529c4ca9d366d498cc6e3fe406",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/data/convenience-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/data/convenience-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-map.svg",
+        "sha256": "8bc179fe55dec2cfa8a4357ac289bf30a6826a699e63169aa177b9d3f63aad5b",
+        "bytes": 31438
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/article.md",
+          "sha256": "784087f07480b6214f4e0d853f4ea19806426c26fa31db8a67f7ef475539f431",
+          "bytes": 8169,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "convenience-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-map.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-map.json",
+          "sha256": "38adc786924310fafed35df9e466f46e397aa5cbc1d770706111cb6cf1ec060d",
+          "bytes": 5347,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "convenience-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-map.source.json",
+          "sha256": "bbf757b41f7b8917765653b46fea090220ed1cb54791fdc6bddfc53b2c43b30e",
+          "bytes": 363,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-map.svg",
+          "alt": "コンビニ密度 都道府県マップ",
+          "heading": "都道府県マップ──コンビニの「地域パターン」",
+          "line": 42
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/convenience-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/convenience-store-count-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/data/convenience-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/data/convenience-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-ranking.svg",
+        "sha256": "ff79972251ba9a89c5e21af6efb32b02d7113f607ba74b9d9a79cb076a17dc70",
+        "bytes": 6884
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/article.md",
+          "sha256": "784087f07480b6214f4e0d853f4ea19806426c26fa31db8a67f7ef475539f431",
+          "bytes": 8169,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "convenience-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-ranking.json",
+          "sha256": "d7779c4567f2c2a97d745758ff572e4de4f663c095296ce611224ff1fb57e7dd",
+          "bytes": 6716,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "convenience-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-ranking.source.json",
+          "sha256": "3f7aaa15788822abaa1c8a0da3e1c724e6c7691e802d1367bb0e22b229150286",
+          "bytes": 650,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-ranking.svg",
+          "alt": "コンビニ密度 上位10・下位10",
+          "heading": "コンビニ密度ランキング（人口10万人当たり）",
+          "line": 22
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/convenience-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/convenience-store-count-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/data/convenience-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/data/convenience-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-summary-findings.svg",
+        "sha256": "82b78f15db757c373fbe2ee0e52116b1dcf837d685b2f7ea542e68378e7065cd",
+        "bytes": 4030
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/article.md",
+          "sha256": "784087f07480b6214f4e0d853f4ea19806426c26fa31db8a67f7ef475539f431",
+          "bytes": 8169,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "convenience-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-summary-findings.json",
+          "sha256": "6985c12b7a8f15b2d0c3d0122b6d2b48c5c5956ca8ccd8d39c0d89a55617ecfa",
+          "bytes": 1188,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "convenience-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-summary-findings.source.json",
+          "sha256": "cf1b576538d6f0d30e02014a7572632c735126aafc43631571226e35e4be5cf6",
+          "bytes": 631,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 75
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 548",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.svg",
+        "sha256": "aa3e0978e2c4d8811d8cb1a72b5f6615b10564afeadb7726b3393df4daea9fb8",
+        "bytes": 10579
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/article.md",
+          "sha256": "784087f07480b6214f4e0d853f4ea19806426c26fa31db8a67f7ef475539f431",
+          "bytes": 8169,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "convenience-vs-retail-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.json",
+          "sha256": "f0a04d9b25e12a28478a0b7052fcc003e6c078def478963b355e5c2a6581a418",
+          "bytes": 4739,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "convenience-vs-retail-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.source.json",
+          "sha256": "e8df329c63916b66803419a4b152f7d6f456ac4ea83af918566703c125114690",
+          "bytes": 1130,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/data/convenience-vs-retail-scatter.svg",
+          "alt": "コンビニ密度と小売店密度の散布図",
+          "heading": "コンビニ密度 × 小売店密度──散布図で見る構造の違い",
+          "line": 58
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/convenience-store-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/convenience-store-count-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/retail-store-count-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/retail-store-count-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/background.jpg",
+        "sha256": "06a867b993f8ee44a8bef646883ae8e97f8949797ce698a3f3605f365be4df5f",
+        "bytes": 32766
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/generation.json",
+          "sha256": "1bc022931ed5391d99d71ebd6e871e212e638651c2181bee4d042074e141cc43",
+          "bytes": 2160,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6ff6af05790969a83df1115fccfa304f2ae69ca8078cc498999441d11af72229",
+        "fingerprint": "454b44429063b0b5501904b0053982a57c8487684d793659fb9f63959c355133",
+        "generatedAt": "2026-08-22T05:17:21.635Z"
+      }
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/ogp.png",
+        "sha256": "3184a9b0c5c5724d7c816a7a515eacee5265fabe52ed6feaf3be83c9161aa39c",
+        "bytes": 290342
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/generation.json",
+          "sha256": "1bc022931ed5391d99d71ebd6e871e212e638651c2181bee4d042074e141cc43",
+          "bytes": 2160,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6ff6af05790969a83df1115fccfa304f2ae69ca8078cc498999441d11af72229",
+        "fingerprint": "454b44429063b0b5501904b0053982a57c8487684d793659fb9f63959c355133",
+        "generatedAt": "2026-08-22T05:17:21.635Z"
+      }
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/thumbnail-dark.webp",
+        "sha256": "50acb12a6adbb0ba045897cab38d7a7c4b496f4effbbcddae87391c6e03b08f1",
+        "bytes": 5310
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/generation.json",
+          "sha256": "1bc022931ed5391d99d71ebd6e871e212e638651c2181bee4d042074e141cc43",
+          "bytes": 2160,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6ff6af05790969a83df1115fccfa304f2ae69ca8078cc498999441d11af72229",
+        "fingerprint": "454b44429063b0b5501904b0053982a57c8487684d793659fb9f63959c355133",
+        "generatedAt": "2026-08-22T05:17:21.635Z"
+      }
+    },
+    {
+      "owner": "web/blog/convenience-store-density-map",
+      "file": "app/blog/convenience-store-density-map/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/convenience-store-density-map/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/thumbnail-light.webp",
+        "sha256": "dad67787f2c3d9e1c8632e8747f891dd3ae7771dd331c6e6b0ebb1d47a2f8a12",
+        "bytes": 8968
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/convenience-store-density-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/convenience-store-density-map/ogp/generation.json",
+          "sha256": "1bc022931ed5391d99d71ebd6e871e212e638651c2181bee4d042074e141cc43",
+          "bytes": 2160,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6ff6af05790969a83df1115fccfa304f2ae69ca8078cc498999441d11af72229",
+        "fingerprint": "454b44429063b0b5501904b0053982a57c8487684d793659fb9f63959c355133",
+        "generatedAt": "2026-08-22T05:17:21.635Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-participation-prefecture-gap",
+      "file": "app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.svg",
+        "sha256": "f4f461b30593e0f3f9c24237971ccb8e3d300aafa47249ba087c4c1ad53ca5b3",
+        "bytes": 6897
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/article.md",
+          "sha256": "a10b49ee9e8a4615f051e162d6c6cf28217b4e41933ab76d849590e71485b74f",
+          "bytes": 10703,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "hobby-participation-rate-pachinko-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.json",
+          "sha256": "9a1dcb5ec77d63d840fba0ebe4f62dabe625eb72ab8598acfdf48569c4de70b3",
+          "bytes": 6662,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "hobby-participation-rate-pachinko-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.source.json",
+          "sha256": "f3bd426eb7d2d527d3b3865c367e03bea312e7ad00e658a1652810f21720da20",
+          "bytes": 689,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/data/hobby-participation-rate-pachinko-prefecture-rankings.svg",
+          "alt": "パチンコの行動者率 上位10県と最下位3県（2021年・社会生活基本調査）",
+          "heading": "上位・下位を一望する",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-pachinko/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-pachinko/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pachinko-participation-prefecture-gap",
+      "file": "app/blog/pachinko-participation-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/background.jpg",
+        "sha256": "59dd4db5fe1c47f8392023fe54ee3efade79da263111e720fb23ad013eeb8085",
+        "bytes": 82310
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "sha256": "b5ccca17ef6e20b207cf3068497c6bd008b00727a4adeadbc2f6ae92263c0942",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b86436af7c775aab7c592632f80cc4a61c532439c1936b9b3e29920d4a3d5e81",
+        "fingerprint": "b9d2fe2178b46d300e8f8e77d0f5e8f914c8c5ed920034237aa7dd1331263bf9",
+        "generatedAt": "2026-08-22T05:17:33.457Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-participation-prefecture-gap",
+      "file": "app/blog/pachinko-participation-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/ogp.png",
+        "sha256": "d63a57a87457e08da902279bf725fb6744e773119073daa0194e8a732ff6d447",
+        "bytes": 463572
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "sha256": "b5ccca17ef6e20b207cf3068497c6bd008b00727a4adeadbc2f6ae92263c0942",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b86436af7c775aab7c592632f80cc4a61c532439c1936b9b3e29920d4a3d5e81",
+        "fingerprint": "b9d2fe2178b46d300e8f8e77d0f5e8f914c8c5ed920034237aa7dd1331263bf9",
+        "generatedAt": "2026-08-22T05:17:33.457Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-participation-prefecture-gap",
+      "file": "app/blog/pachinko-participation-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "344aa70007dcad1a610df1affda30be8e2617d59f678272fd191dba6afe138b5",
+        "bytes": 14688
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "sha256": "b5ccca17ef6e20b207cf3068497c6bd008b00727a4adeadbc2f6ae92263c0942",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b86436af7c775aab7c592632f80cc4a61c532439c1936b9b3e29920d4a3d5e81",
+        "fingerprint": "b9d2fe2178b46d300e8f8e77d0f5e8f914c8c5ed920034237aa7dd1331263bf9",
+        "generatedAt": "2026-08-22T05:17:33.457Z"
+      }
+    },
+    {
+      "owner": "web/blog/pachinko-participation-prefecture-gap",
+      "file": "app/blog/pachinko-participation-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pachinko-participation-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/thumbnail-light.webp",
+        "sha256": "ac3531fafe32b42bb037eb52c43501b04603748dd5dc96e2e9cd1de6a3e8203f",
+        "bytes": 26836
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pachinko-participation-prefecture-gap/ogp/generation.json",
+          "sha256": "b5ccca17ef6e20b207cf3068497c6bd008b00727a4adeadbc2f6ae92263c0942",
+          "bytes": 2305,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b86436af7c775aab7c592632f80cc4a61c532439c1936b9b3e29920d4a3d5e81",
+        "fingerprint": "b9d2fe2178b46d300e8f8e77d0f5e8f914c8c5ed920034237aa7dd1331263bf9",
+        "generatedAt": "2026-08-22T05:17:33.457Z"
+      }
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.svg",
+        "sha256": "031f6b3ba6279af06361caaf0853b921ff4839041682edf24666f071ae4f7683",
+        "bytes": 27760
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chemical-ratio-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.json",
+          "sha256": "0b33c70112f9db7aabd0188e886f522c85fcd174b3eed14394885dfb09edb392",
+          "bytes": 2316,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chemical-ratio-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.source.json",
+          "sha256": "3d0174e2cf76c42227485e2baf3faee52322bee46b5f90abf89a0a8b674efc2c",
+          "bytes": 499,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-map.svg",
+          "alt": "化学工業が製造品出荷額に占める割合",
+          "heading": "化学工業比率マップ -- 「化学県」は意外なところに",
+          "line": 35
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.svg",
+        "sha256": "ebc5c86c5009520f2e2c6c168a76def5572d6d1933a308ea8fb489f825355b8e",
+        "bytes": 6776
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chemical-ratio-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.json",
+          "sha256": "fb93dd5216544cd2ecc121923b20cd89b727fea9fb915708f58d7bebb153c020",
+          "bytes": 5116,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chemical-ratio-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.source.json",
+          "sha256": "0f9824b35d28f5af30be4f88508136b9c9b216531e1ddbc4dec894222533310b",
+          "bytes": 470,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-ratio-ranking.svg",
+          "alt": "化学工業比率 上位5・下位5",
+          "heading": "化学工業比率ランキング -- 上位と下位でくっきり分かれる産業構造",
+          "line": 47
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.svg",
+        "sha256": "4e248a9997022f57fb88f2b9015b76b698de97bc9afc3972d1fd629c1754a989",
+        "bytes": 6822
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chemical-shipment-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.json",
+          "sha256": "d927e8021e0529a1a6f902fd55864770de23069cd4a0eacc7886908862dca0ed",
+          "bytes": 7038,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chemical-shipment-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.source.json",
+          "sha256": "005265bcdd57171c155c2e42096c6765acd69df870f0982d83b0212e7b4ab9c2",
+          "bytes": 554,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-shipment-ranking.svg",
+          "alt": "化学工業出荷額 上位5・下位5",
+          "heading": "化学工業出荷額ランキング -- 太平洋ベルトが独占",
+          "line": 20
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.svg",
+        "sha256": "f88e3b71e3424a067c87cf9490c230b17f0be97ba4be826de534f50f263031bd",
+        "bytes": 10214
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chemical-vs-transport-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.json",
+          "sha256": "bdb98b420fe7b35f5eceee1a32f06ed09110c08a290a8dc12ee2372a152dd60c",
+          "bytes": 3413,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chemical-vs-transport-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.source.json",
+          "sha256": "c530eda1ef4ef5290ff85c484826f08fa70c9ad840c09c7bdc16957b60c1ce1a",
+          "bytes": 506,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/chemical-vs-transport-scatter.svg",
+          "alt": "化学工業 vs 輸送用機械 出荷額",
+          "heading": "化学工業 vs 輸送用機械 -- 産業構造の二大軸",
+          "line": 71
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.svg",
+        "sha256": "a0b41277fd8d798b6f07ecda35db591bbeb10def0364d7bbeaf3cc605172540c",
+        "bytes": 11297
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "manufacturing-shipment-timeseries.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.json",
+          "sha256": "4b908b37b01e047ba8dce0e87dfe8f1fa7ee0cc5ddc076cae3c9b4c96b331aa1",
+          "bytes": 1977,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "manufacturing-shipment-timeseries.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.source.json",
+          "sha256": "1be3550dd43393414f7edbbefd45558a138e4c29f4dd2f3827d78e4c1d5e0b8b",
+          "bytes": 532,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-line",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/manufacturing-shipment-timeseries.svg",
+          "alt": "全国の製造品出荷額の推移",
+          "heading": "製造品出荷額の推移 -- 2023年に過去最高を更新",
+          "line": 87
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 420",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/data/summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/data/summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/summary-findings.svg",
+        "sha256": "e2b1a058849294408283cc939c116b50e42c7e2c561a1dadfc35d9e24561f295",
+        "bytes": 3624
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/article.md",
+          "sha256": "d500b15e0cb31cc66fa2c4e0565dd728fcf95033ce2c0757853fd02a8857c77e",
+          "bytes": 11387,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/summary-findings.json",
+          "sha256": "24bdb88fe2c5babbce1e5fec83e6c95bc1a5f7be99fc8e6459b48f1418978d8b",
+          "bytes": 972,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/data/summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/summary-findings.source.json",
+          "sha256": "c36bef25efce268a8fc6c6330f13782765cc058ad1fa9653061a7337753e6a2f",
+          "bytes": 440,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/data/summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 99
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 570",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/background.jpg",
+        "sha256": "102cee420d27471486ac197fdd138d31930bde1e57720292bbd81768bf5f0809",
+        "bytes": 91154
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "sha256": "e6fddbd13f1cd40a8088a8281e8914f43da8d7d8c4a6372ff632742f1c9eb9dc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "655daa9b9ab4551364de424179ae8986a76e4d4be9d9541e52f792728cdc57ec",
+        "fingerprint": "02d2e47dccee48fe831a27148e3689024a82849002d5fe559a1a3bd737858a8f",
+        "generatedAt": "2026-08-22T05:17:33.922Z"
+      }
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/ogp.png",
+        "sha256": "401378e056873f95a60b6bcbc822f421eaa7a1e7e14ab05f5313bd457e014662",
+        "bytes": 577083
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "sha256": "e6fddbd13f1cd40a8088a8281e8914f43da8d7d8c4a6372ff632742f1c9eb9dc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "655daa9b9ab4551364de424179ae8986a76e4d4be9d9541e52f792728cdc57ec",
+        "fingerprint": "02d2e47dccee48fe831a27148e3689024a82849002d5fe559a1a3bd737858a8f",
+        "generatedAt": "2026-08-22T05:17:33.922Z"
+      }
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/thumbnail-dark.webp",
+        "sha256": "119cb72e551235aad8a90255cb09f04c3a5e3a6564064fa6ac29824692f6bc69",
+        "bytes": 12912
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "sha256": "e6fddbd13f1cd40a8088a8281e8914f43da8d7d8c4a6372ff632742f1c9eb9dc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "655daa9b9ab4551364de424179ae8986a76e4d4be9d9541e52f792728cdc57ec",
+        "fingerprint": "02d2e47dccee48fe831a27148e3689024a82849002d5fe559a1a3bd737858a8f",
+        "generatedAt": "2026-08-22T05:17:33.922Z"
+      }
+    },
+    {
+      "owner": "web/blog/pharma-medical-device-production-map",
+      "file": "app/blog/pharma-medical-device-production-map/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pharma-medical-device-production-map/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/thumbnail-light.webp",
+        "sha256": "f0bb64c88a26ba1be49a3d7ee612f4cea487b85fd577cd79ae0c7ef933b0df50",
+        "bytes": 25384
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pharma-medical-device-production-map/ogp/generation.json",
+          "sha256": "e6fddbd13f1cd40a8088a8281e8914f43da8d7d8c4a6372ff632742f1c9eb9dc",
+          "bytes": 2256,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "655daa9b9ab4551364de424179ae8986a76e4d4be9d9541e52f792728cdc57ec",
+        "fingerprint": "02d2e47dccee48fe831a27148e3689024a82849002d5fe559a1a3bd737858a8f",
+        "generatedAt": "2026-08-22T05:17:33.922Z"
+      }
+    },
+    {
+      "owner": "web/material/1d3cb264da04547c446fafc1",
+      "file": "assets/blog/article-backgrounds/estat-7-techniques-from-unusable-to-usable.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/estat-7-techniques-from-unusable-to-usable.jpg",
+        "sha256": "7164b2a9b2eda1cf982ede3486fdfa9c72d286280e1f1f1dc8645383a33b7241",
+        "bytes": 76176
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/estat-7-techniques-from-unusable-to-usable.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/367c5f3fb4b0e75aab2605a1",
+      "file": "apps/web/public/images/brand-concrete-diagnosis-wide.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/brand-concrete-diagnosis-wide.png",
+        "url": "https://stats47.jp/images/brand-concrete-diagnosis-wide.png",
+        "sha256": "2cc8bb02921f1a27fee2c85c0dce728d2d043d36312ff910832dd60a9cc87863",
+        "bytes": 2100477
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/brand-concrete-diagnosis-wide.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/44e120c0dedc9534718af7c1",
+      "file": "assets/blog/article-backgrounds/ai-claude-code-pref-analysis.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/ai-claude-code-pref-analysis.jpg",
+        "sha256": "4a745c32cb00a271834d9e685a7612ef93166bc21ccbfd79b6b51eaa4a9bdac0",
+        "bytes": 91563
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/ai-claude-code-pref-analysis.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/4e488a36d34e1c6a2274d832",
+      "file": "assets/area-specialty/28000/tamba-guri.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/28000/tamba-guri.webp",
+        "sha256": "848175a1bcbe979dd5b6ff31c96784921bbe3b4c9faddd71d20d3914f5cd31d0",
+        "bytes": 25080
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/28000/tamba-guri.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/77873022cce7f84ea0519f47",
+      "file": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings-ig.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings-ig.svg",
+        "sha256": "6c379d13cc34206cd7264ebe989d965e65d4b0c6a571ec2923533c4174b0dda4",
+        "bytes": 6708
+      },
+      "inputFiles": [
+        {
+          "name": "nursery-shortage-urban-prefecture-prefecture-rankings.json",
+          "provider": "git",
+          "path": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings.json",
+          "sha256": "3972f79c799500e7017f101198910e4e77ca53c30c2f538a04da21b499a33fb4",
+          "bytes": 6925,
+          "role": "data",
+          "state": "observed-current"
+        },
+        {
+          "name": "nursery-shortage-urban-prefecture-prefecture-rankings.source.json",
+          "provider": "git",
+          "path": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings.source.json",
+          "sha256": "2a24780d4e91109e82a1ada5721aa1598b1961056338fd13f694cf8a0616161f",
+          "bytes": 688,
+          "role": "provenance",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "svg-bar-ig",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/nursery-shortage-urban-prefecture/data/nursery-shortage-urban-prefecture-prefecture-rankings-ig.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/c43de6eefd9f72d45b034f58",
+      "file": "assets/area-specialty/15000/nanban-ebi.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/15000/nanban-ebi.webp",
+        "sha256": "78954040415ab28e05ed9822e169c07b2d9bdd4c37e648608a68ab11b70ff562",
+        "bytes": 48438
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/15000/nanban-ebi.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/dbd051d529a68fae329d99a6",
+      "file": "apps/web/public/logo-landscape.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/logo-landscape.svg",
+        "url": "https://stats47.jp/logo-landscape.svg",
+        "sha256": "c2114f11fc44a0ed5afe58bc8f9a34825f4361e37eec6239551b8a3943513998",
+        "bytes": 556
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/logo-landscape.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e8b068592c22765744f66086",
+      "file": "assets/area-specialty/06000/ukogi.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/06000/ukogi.webp",
+        "sha256": "0b65fc5ba8a3470ed7befec4d0e0829ad2f0507f2e73003fd061c11ace7c0c88",
+        "bytes": 31106
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/06000/ukogi.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fe5086242d9a79d82a58b061",
+      "file": "apps/web/public/brand/atlas-v1/source-regional-portrait.jpg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/brand/atlas-v1/source-regional-portrait.jpg",
+        "url": "https://stats47.jp/brand/atlas-v1/source-regional-portrait.jpg",
+        "sha256": "5b8d4f71854928b3064037238292f47bdcfe0c04b840adaddbd03a73c9e722bb",
+        "bytes": 265925
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/brand/atlas-v1/source-regional-portrait.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/childcare-employment-rate",
+      "file": "app/ranking/childcare-employment-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childcare-employment-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/ogp/ogp.png",
+        "sha256": "56f121b5a766143c24262c00d296eead694342604deb9a8e11f859e2a1ab66bf",
+        "bytes": 63407
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childcare-employment-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/ogp/generation.json",
+          "sha256": "60567a14a8809136a097a0d70eabadbf60d405e827ca92c20a4a9b1cc4a3e26b",
+          "bytes": 933,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childcare-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childcare-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "dad838eb0a736127d67ee1f809f00aad4ecf47a433e25a74b399c1c92a22f7a4",
+        "fingerprint": "d0ea4058c6765845fd6b13381537596cdd3bd66cb94498196b07a9b10a335734",
+        "generatedAt": "2026-10-10T21:32:32.334Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childcare-employment-rate",
+      "file": "app/ranking/childcare-employment-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childcare-employment-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/thumbnail-dark.webp",
+        "sha256": "b6faf9ce78d39448110cd485b1fec1d3b6131e9f76651544f362f235652e19e0",
+        "bytes": 16878
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childcare-employment-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/thumbnail.json",
+          "sha256": "4a83f890e152557097e465efaf0129bb9cd70cd6f6999df294084173708328f3",
+          "bytes": 1778,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childcare-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childcare-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0202419cb2c034d5e19ed4fe3a831814c5ea4ef74afd042ae7c793e80e6bc3ba",
+        "fingerprint": "d17d67611d21882d85e4e087274f8e2fd12cc2bf7bb43626bab683d676981cc9",
+        "generatedAt": "2026-10-10T21:50:05.613Z"
+      }
+    },
+    {
+      "owner": "web/ranking/childcare-employment-rate",
+      "file": "app/ranking/childcare-employment-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/childcare-employment-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/thumbnail-light.webp",
+        "sha256": "09bcbbbf5cdaa44a0b0813d9c74320082e5be99de26a1d51d15c5fc947061c83",
+        "bytes": 15252
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/childcare-employment-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/thumbnail.json",
+          "sha256": "4a83f890e152557097e465efaf0129bb9cd70cd6f6999df294084173708328f3",
+          "bytes": 1778,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/childcare-employment-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/childcare-employment-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/childcare-employment-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "0202419cb2c034d5e19ed4fe3a831814c5ea4ef74afd042ae7c793e80e6bc3ba",
+        "fingerprint": "d17d67611d21882d85e4e087274f8e2fd12cc2bf7bb43626bab683d676981cc9",
+        "generatedAt": "2026-10-10T21:50:05.613Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-clinic-count-per-100km2",
+      "file": "app/ranking/dental-clinic-count-per-100km2/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-clinic-count-per-100km2/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/ogp/ogp.png",
+        "sha256": "8470cd6d296c95b97baab100e59cd23a4387c32da42994d702eadb4d230e0330",
+        "bytes": 63039
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-clinic-count-per-100km2/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/ogp/generation.json",
+          "sha256": "1d610053ff36929f4859a2f6f873b74bbbc8956e70ea6477e8ca119bd575ab5c",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "8402cac2aa7340a85b051e18677c52e9e97a700e2ee9f5120bdb702833fb5825",
+        "fingerprint": "02417e00ce5dbe6ab4b2464031722178633ceca045bfd56931139e2bcab8cc07",
+        "generatedAt": "2026-10-10T21:32:59.017Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-clinic-count-per-100km2",
+      "file": "app/ranking/dental-clinic-count-per-100km2/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-clinic-count-per-100km2/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/thumbnail-dark.webp",
+        "sha256": "41418a71d79efa1793a20e35f8fc516ad2c14bdc6e1493c5d86f9a2ca20a7797",
+        "bytes": 15416
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-clinic-count-per-100km2/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/thumbnail.json",
+          "sha256": "fda9c78fabe34f2238cce7a9389a8af30b45aa7420df91138de9a35d84d6bc70",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "3c0cb03c1baa783900790e71596d07a20209bbe8dacfaf0668c9725308d09ad4",
+        "fingerprint": "2ad7e46b0d44fc0ebedaaf2785ee29c4d666d3932851c3d1d4ef7ace97da5f01",
+        "generatedAt": "2026-10-10T21:50:12.372Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dental-clinic-count-per-100km2",
+      "file": "app/ranking/dental-clinic-count-per-100km2/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dental-clinic-count-per-100km2/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/thumbnail-light.webp",
+        "sha256": "ab7db49ae92d1a467b5946f7a437c3f05ed2c346d0b9ff8fe8f64cd081c547df",
+        "bytes": 13686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dental-clinic-count-per-100km2/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/thumbnail.json",
+          "sha256": "fda9c78fabe34f2238cce7a9389a8af30b45aa7420df91138de9a35d84d6bc70",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dental-clinic-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-clinic-count-per-100km2/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "3c0cb03c1baa783900790e71596d07a20209bbe8dacfaf0668c9725308d09ad4",
+        "fingerprint": "2ad7e46b0d44fc0ebedaaf2785ee29c4d666d3932851c3d1d4ef7ace97da5f01",
+        "generatedAt": "2026-10-10T21:50:12.372Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-activity-by-couple",
+      "file": "app/ranking/hobby-activity-by-couple/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-activity-by-couple/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/ogp/ogp.png",
+        "sha256": "071fe08dc40e09f1abd8434e441f220af688b6e00523d218b0ef722a91bf7ee0",
+        "bytes": 69308
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-activity-by-couple/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/ogp/generation.json",
+          "sha256": "10e61fdd05c6e12bd5acabe12acd0de78a3b609705ac14eafeecd2dc01d4dc4d",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-activity-by-couple/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-activity-by-couple/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "6b5299958bfcc270509e6b17a95d60179e439da2b3737291772f1a55acaf8c4f",
+        "fingerprint": "028474456a500ecab332ba886cf4a53a3ad68f768c1c35601db482fe5d9007c6",
+        "generatedAt": "2026-10-01T18:11:26.438Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-activity-by-couple",
+      "file": "app/ranking/hobby-activity-by-couple/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-activity-by-couple/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/thumbnail-dark.webp",
+        "sha256": "fd89b77567778fe66278e5509b28d7b4e412257e6baab1551c91e5cc1c48fb61",
+        "bytes": 20738
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-activity-by-couple/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/thumbnail.json",
+          "sha256": "b7fe6daf17eeff8cc4d027678a964ac3a9632ae7811440de384343de71a3df9f",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-activity-by-couple/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-activity-by-couple/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9eda8e20899ecb408b5ad0ddbaae92f3fe866204078ddfc351f7ca833e20991c",
+        "fingerprint": "cfd8b10013daf9685adbd5e0de6b7a212c061b19a39428fe6e37fe69c193ac44",
+        "generatedAt": "2026-10-01T18:35:59.858Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-activity-by-couple",
+      "file": "app/ranking/hobby-activity-by-couple/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-activity-by-couple/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/thumbnail-light.webp",
+        "sha256": "273dcde54d8e217c3282776bd55d64ac3976ec39881749807666ce0243f3e30e",
+        "bytes": 19372
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-activity-by-couple/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/thumbnail.json",
+          "sha256": "b7fe6daf17eeff8cc4d027678a964ac3a9632ae7811440de384343de71a3df9f",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-activity-by-couple/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-activity-by-couple/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-activity-by-couple/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9eda8e20899ecb408b5ad0ddbaae92f3fe866204078ddfc351f7ca833e20991c",
+        "fingerprint": "cfd8b10013daf9685adbd5e0de6b7a212c061b19a39428fe6e37fe69c193ac44",
+        "generatedAt": "2026-10-01T18:35:59.858Z"
+      }
+    },
+    {
+      "owner": "web/ranking/media-production-net-value-added",
+      "file": "app/ranking/media-production-net-value-added/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/media-production-net-value-added/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/ogp/ogp.png",
+        "sha256": "c0dc36b1cfc7181b92d91996c4f0cf1fa80e1e1a3a5772e61691e96ca9b91dbf",
+        "bytes": 70247
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/media-production-net-value-added/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/ogp/generation.json",
+          "sha256": "b8c7a9d99b594cf124ece1d5cec5428cb9ceeed3363c1034dfcb4c80531123c9",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/media-production-net-value-added/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/media-production-net-value-added/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "065e062dbca21450457026c9f5c98ee699722737b7d6b63376e232e4f395a085",
+        "fingerprint": "92d6d4db1a74422a2717a126b7941d622d2c53a42e66a572a4e3b011d545fe36",
+        "generatedAt": "2026-10-03T20:59:53.134Z"
+      }
+    },
+    {
+      "owner": "web/ranking/media-production-net-value-added",
+      "file": "app/ranking/media-production-net-value-added/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/media-production-net-value-added/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/thumbnail-dark.webp",
+        "sha256": "6b9e0e3b8d3ce6f540328df4bdd4a34cb841409bb8c5b58bfed9b55dc3e4fd1c",
+        "bytes": 22850
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/media-production-net-value-added/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/thumbnail.json",
+          "sha256": "70a3222a86fc9436f838dc04e31b55297561a257838e645f6a81d6a82cce7085",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/media-production-net-value-added/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/media-production-net-value-added/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "569724426ae47dbdb8288eed5e58708f2386fe1898434546b36a334a61ab0b47",
+        "fingerprint": "02f5818c1790ce7fb70997c40d62f181d61b292162eb280bff508f6be1337296",
+        "generatedAt": "2026-10-03T21:25:25.736Z"
+      }
+    },
+    {
+      "owner": "web/ranking/media-production-net-value-added",
+      "file": "app/ranking/media-production-net-value-added/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/media-production-net-value-added/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/thumbnail-light.webp",
+        "sha256": "bb781d73c72f4078ad5a213ca5b385536deda68082c77d695ea23eaeaafc5c72",
+        "bytes": 21356
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/media-production-net-value-added/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/thumbnail.json",
+          "sha256": "70a3222a86fc9436f838dc04e31b55297561a257838e645f6a81d6a82cce7085",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/media-production-net-value-added/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/media-production-net-value-added/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/media-production-net-value-added/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "569724426ae47dbdb8288eed5e58708f2386fe1898434546b36a334a61ab0b47",
+        "fingerprint": "02f5818c1790ce7fb70997c40d62f181d61b292162eb280bff508f6be1337296",
+        "generatedAt": "2026-10-03T21:25:25.736Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nonregular-continuation-wish-rate",
+      "file": "app/ranking/nonregular-continuation-wish-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nonregular-continuation-wish-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/ogp/ogp.png",
+        "sha256": "4c812cdcd03f89fdd39522b23a6bc2c55a2fadebb890683d18a142d88badbd69",
+        "bytes": 73983
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nonregular-continuation-wish-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/ogp/generation.json",
+          "sha256": "020ffa59888dd2e29e52a3ed7ffb24fe2872a7eadbbde3cca6c3e6bf2757fde9",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "965d8ecab5633d76e8bfc19316340e586006af997534ad962eb87f2a69f9fc17",
+        "fingerprint": "4f29a090b78a8c372bf92ef69255a6ceb278bfdd1aa03ab1eb379fad3d483177",
+        "generatedAt": "2026-10-03T21:00:20.046Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nonregular-continuation-wish-rate",
+      "file": "app/ranking/nonregular-continuation-wish-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nonregular-continuation-wish-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/thumbnail-dark.webp",
+        "sha256": "38fe9a9da48fd02fec7a8451633f03ea433cb1b19e602efbe53d6c47882dc5bc",
+        "bytes": 19112
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nonregular-continuation-wish-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/thumbnail.json",
+          "sha256": "0ffc795902c9028711a895010e80bfdbfd7436cffd821d96b3f8a991ebcec09c",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "208decf75ba27ecea1bd77fb60fcf8d872843ac295462b34cb0d253b1b72008d",
+        "fingerprint": "dfcc09792be660dc8744f183fcd2ba7bb335c86536abbc07cb821d353b5dbbda",
+        "generatedAt": "2026-10-08T00:38:11.849Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nonregular-continuation-wish-rate",
+      "file": "app/ranking/nonregular-continuation-wish-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nonregular-continuation-wish-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/thumbnail-light.webp",
+        "sha256": "d7b0552e2d8b9da6e2d8678e71c93682bfea38534dadcfc258cdadbed9bd90a7",
+        "bytes": 17402
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nonregular-continuation-wish-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/thumbnail.json",
+          "sha256": "0ffc795902c9028711a895010e80bfdbfd7436cffd821d96b3f8a991ebcec09c",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nonregular-continuation-wish-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nonregular-continuation-wish-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "208decf75ba27ecea1bd77fb60fcf8d872843ac295462b34cb0d253b1b72008d",
+        "fingerprint": "dfcc09792be660dc8744f183fcd2ba7bb335c86536abbc07cb821d353b5dbbda",
+        "generatedAt": "2026-10-08T00:38:11.849Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-non-savings-insurance-consumption-expenditure",
+      "file": "app/ranking/other-non-savings-insurance-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/ogp/ogp.png",
+        "sha256": "64ec1117504a01e50b987a78b16ef3a655539f2ab2230ab2810bbc74faf4708d",
+        "bytes": 64196
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/ogp/generation.json",
+          "sha256": "8fd024d51be52aeacd1a95f18167abfaf324bde56fea60e16aebaa36ea2d6e12",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "7c9020c12632b0fb8749e82f299a933871d176892dba0dc7afa5e203994ce78b",
+        "fingerprint": "1d0302f0d0bf6d13f3a9312816f297f9b7d2f3aa3b3c43a25017b491827446d6",
+        "generatedAt": "2026-10-03T21:00:39.891Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-non-savings-insurance-consumption-expenditure",
+      "file": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "22026dd37631b9d7f2dd47a06d5f21143c258ba5463712599b2a915125d10b2c",
+        "bytes": 19614
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail.json",
+          "sha256": "7a2239c9194179bfd02122df12bb164a8bb4acd1d24c2d75817e015183a44f77",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f22da45f5302dbbe925bb808ad14f29c72786ea65c8da7eb416dd2c2ba2bb332",
+        "fingerprint": "328164fc1bdc9f823fb0c2281e7007157b43d33025f7277aed61e565cc0e5e37",
+        "generatedAt": "2026-10-03T21:25:37.801Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-non-savings-insurance-consumption-expenditure",
+      "file": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "e79ed725bc2771c506746573b203b4ee793df5cbe07178c5268b2e3b3df64339",
+        "bytes": 18138
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/thumbnail.json",
+          "sha256": "7a2239c9194179bfd02122df12bb164a8bb4acd1d24c2d75817e015183a44f77",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-non-savings-insurance-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f22da45f5302dbbe925bb808ad14f29c72786ea65c8da7eb416dd2c2ba2bb332",
+        "fingerprint": "328164fc1bdc9f823fb0c2281e7007157b43d33025f7277aed61e565cc0e5e37",
+        "generatedAt": "2026-10-03T21:25:37.801Z"
+      }
+    }
+  ]
+}

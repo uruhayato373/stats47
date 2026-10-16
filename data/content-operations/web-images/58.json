@@ -1,0 +1,1951 @@
+{
+  "items": [
+    {
+      "id": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "channel": "web",
+      "key": "dental-checkup-persons-per-1000-prefecture-gap",
+      "title": "歯科健診、鹿児島と徳島で受診率が違う理由",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "e7697034c0933ec58556b937c7eef51de38f83393a4257951c4f59959fa40cc6",
+      "catalogBasis": "41b614b41e02a780e6bc55987f88c3ec21ef1ef7a481a5003651f63afb519413",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+        "sha256": "2e39ba7b151e12161571ba696d96e222181e56ccf76aab1adbf2b01136eaa33c",
+        "bytes": 7937
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/04690ff8fdbda3020f3b6ff2",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/saitama-food-culture.jpg",
+      "title": "saitama-food-culture.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "15e96d226c4726f2f684ff8100ab431a32d511ccaf729df002a720c21aa26169"
+    },
+    {
+      "id": "web/material/d7d4e8542e73f25b26477f81",
+      "channel": "web",
+      "key": "assets/area-specialty/46000/okra.webp",
+      "title": "okra.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "df23c744f81be09cfe4ff7b5a42a2c935571b597931b6e4e9d8a907c030b7e7c"
+    },
+    {
+      "id": "web/ranking/bonito-consumption-expenditure",
+      "channel": "web",
+      "key": "bonito-consumption-expenditure",
+      "title": "かつお消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/bonito-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "85b9a47470939760d8bb7a73339a05886c6217302b211d4967c04c937e8e36bc",
+      "catalogBasis": "85b9a47470939760d8bb7a73339a05886c6217302b211d4967c04c937e8e36bc",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/general-clinic-count-per-100k",
+      "channel": "web",
+      "key": "general-clinic-count-per-100k",
+      "title": "一般診療所数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/general-clinic-count-per-100k",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4ae4ed41e8270b4e580ae98092815de47a9ade64a49446614de5c0edc7027998",
+      "catalogBasis": "4ae4ed41e8270b4e580ae98092815de47a9ade64a49446614de5c0edc7027998",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/kindergarten-students-per-teacher",
+      "channel": "web",
+      "key": "kindergarten-students-per-teacher",
+      "title": "幼稚園在園者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/kindergarten-students-per-teacher",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "14095afa63a5e994d9cdddf5ed4c72b1c41f9fb81f0e57e330487b4becccbf5c",
+      "catalogBasis": "14095afa63a5e994d9cdddf5ed4c72b1c41f9fb81f0e57e330487b4becccbf5c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/konbu-tsukudani-consumption-quantity",
+      "channel": "web",
+      "key": "konbu-tsukudani-consumption-quantity",
+      "title": "こんぶつくだ煮消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/konbu-tsukudani-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "83ede94a11eb29e2d1e0900fc2b99deec67eb80b0c04a6ccc7cc0dda0a96739b",
+      "catalogBasis": "83ede94a11eb29e2d1e0900fc2b99deec67eb80b0c04a6ccc7cc0dda0a96739b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/mental-health-expenses-prefecture",
+      "channel": "web",
+      "key": "mental-health-expenses-prefecture",
+      "title": "精神衛生費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/mental-health-expenses-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4396e7404bf9dfecbbbfc7b67950f9e95650d77170900e250d4259a1949e8fd1",
+      "catalogBasis": "4396e7404bf9dfecbbbfc7b67950f9e95650d77170900e250d4259a1949e8fd1",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/per-capita-police-expenditure-pref-municipal",
+      "channel": "web",
+      "key": "per-capita-police-expenditure-pref-municipal",
+      "title": "警察費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/per-capita-police-expenditure-pref-municipal",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a728c2f2c41e4590f09e9e6973fb63db7aee6bb496ff343796598bd545f50356",
+      "catalogBasis": "a728c2f2c41e4590f09e9e6973fb63db7aee6bb496ff343796598bd545f50356",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/pharmacy-count-by-prefecture",
+      "channel": "web",
+      "key": "pharmacy-count-by-prefecture",
+      "title": "薬局数（都道府県別・総数）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/pharmacy-count-by-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f59dd27acb82743fbcaccadba438a49f30ac2568f29d8a358c7327eafee50015",
+      "catalogBasis": "f59dd27acb82743fbcaccadba438a49f30ac2568f29d8a358c7327eafee50015",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/prefectural-general-administration-staff",
+      "channel": "web",
+      "key": "prefectural-general-administration-staff",
+      "title": "一般行政部門職員数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/prefectural-general-administration-staff",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b92e4b9e6e67416f671ff2b6dd3dff5a79bfd8b57299c3b428ef04c0384d7243",
+      "catalogBasis": "b92e4b9e6e67416f671ff2b6dd3dff5a79bfd8b57299c3b428ef04c0384d7243",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/womens-coat-consumption-expenditure",
+      "channel": "web",
+      "key": "womens-coat-consumption-expenditure",
+      "title": "婦人用コート消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/womens-coat-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b4e9b72ac62c2fd8f0149c74d9d6a583d2a445733f4dfe508c24c9b0b498ed2c",
+      "catalogBasis": "b4e9b72ac62c2fd8f0149c74d9d6a583d2a445733f4dfe508c24c9b0b498ed2c",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.svg",
+        "sha256": "3339f751b06ad5fe433465ea7ae5ad7f3d7cf92ece7dc131c58d3f2f60e2c3c3",
+        "bytes": 31337
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+          "sha256": "2e39ba7b151e12161571ba696d96e222181e56ccf76aab1adbf2b01136eaa33c",
+          "bytes": 7937,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dental-checkup-persons-per-1000-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.json",
+          "sha256": "f37b4e55753d68d311b4327c59edc377ddd52507c875112801ec0bc5096ef59e",
+          "bytes": 4595,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dental-checkup-persons-per-1000-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.source.json",
+          "sha256": "de0a4ac47556636f35873856fea03a799eab24f224997bcb6c658549a9c51a8c",
+          "bytes": 635,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-map.svg",
+          "alt": "歯科健診受診延人員の地理分布",
+          "heading": "地理で見る分布",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "d0e2fa19394c49fa09c0ea3a3b32563f8468fa3dbede495274c3e92918f99910",
+        "bytes": 6907
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/article.md",
+          "sha256": "2e39ba7b151e12161571ba696d96e222181e56ccf76aab1adbf2b01136eaa33c",
+          "bytes": 7937,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.json",
+          "sha256": "622895bc264cccaced24f415ba378750e4812ec2351525f455f4b02dd1545f03",
+          "bytes": 6701,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "63a637e23f20a77bbbea2b8c8b557e13662cd61d6eae1cfd668cada749bd5670",
+          "bytes": 705,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/data/dental-checkup-persons-per-1000-prefecture-gap-prefecture-rankings.svg",
+          "alt": "歯科健診受診延人員の上位と下位",
+          "heading": "上位と下位の顔ぶれ",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dental-checkup-persons-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dental-checkup-persons-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/background.jpg",
+        "sha256": "b554314c46075ff55a0359ac7e0f5337da72bcec529f5fdd0f5c140a70a9d3f7",
+        "bytes": 68293
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "sha256": "a374d5e52935689536ab2a6058f95420f36c99ac91522d36b046fc76468998b0",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c67a787a6393563bab39050ee1a25895718242e53dc22a37b71b7bc64a7a3a0",
+        "fingerprint": "c4d3ab87c284905fd15046fba7343b9c8f71128c05a2b79b998b7d63c9cf6cf8",
+        "generatedAt": "2026-08-30T04:27:03.252Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/ogp.png",
+        "sha256": "c43018c0c326e84adbc345f23c62899139c4d5ec211206d0713b2eae1fe6f1df",
+        "bytes": 429886
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "sha256": "a374d5e52935689536ab2a6058f95420f36c99ac91522d36b046fc76468998b0",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c67a787a6393563bab39050ee1a25895718242e53dc22a37b71b7bc64a7a3a0",
+        "fingerprint": "c4d3ab87c284905fd15046fba7343b9c8f71128c05a2b79b998b7d63c9cf6cf8",
+        "generatedAt": "2026-08-30T04:27:03.252Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "eae357dba75309398479791f2e4cc2db05ad559737a1b6edbe872feb2960dc95",
+        "bytes": 8746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "sha256": "a374d5e52935689536ab2a6058f95420f36c99ac91522d36b046fc76468998b0",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c67a787a6393563bab39050ee1a25895718242e53dc22a37b71b7bc64a7a3a0",
+        "fingerprint": "c4d3ab87c284905fd15046fba7343b9c8f71128c05a2b79b998b7d63c9cf6cf8",
+        "generatedAt": "2026-08-30T04:27:03.252Z"
+      }
+    },
+    {
+      "owner": "web/blog/dental-checkup-persons-per-1000-prefecture-gap",
+      "file": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/thumbnail-light.webp",
+        "sha256": "0621d1d60dd7a8baa0c2aeb8c393b63eda5a4fc63d1481eeaaf8c77556763b05",
+        "bytes": 16052
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dental-checkup-persons-per-1000-prefecture-gap/ogp/generation.json",
+          "sha256": "a374d5e52935689536ab2a6058f95420f36c99ac91522d36b046fc76468998b0",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "1c67a787a6393563bab39050ee1a25895718242e53dc22a37b71b7bc64a7a3a0",
+        "fingerprint": "c4d3ab87c284905fd15046fba7343b9c8f71128c05a2b79b998b7d63c9cf6cf8",
+        "generatedAt": "2026-08-30T04:27:03.252Z"
+      }
+    },
+    {
+      "owner": "web/material/04690ff8fdbda3020f3b6ff2",
+      "file": "assets/blog/article-backgrounds/saitama-food-culture.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/saitama-food-culture.jpg",
+        "sha256": "264564b246bb96ee3b5f9a833d296ca6d7ad3f4fb8cbd6ac96128623a6a74bfd",
+        "bytes": 106119
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/saitama-food-culture.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d7d4e8542e73f25b26477f81",
+      "file": "assets/area-specialty/46000/okra.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/46000/okra.webp",
+        "sha256": "2f16319c46b95bf0a82e193dfa518627b15f0a9fb73ac5e4938fe372a6919d40",
+        "bytes": 23378
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/46000/okra.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/bonito-consumption-expenditure",
+      "file": "app/ranking/bonito-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bonito-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/ogp/ogp.png",
+        "sha256": "fc64c0b6bdab6f0986b1686000d6049bec63872f1aefbb8bb9cffb01df310fdc",
+        "bytes": 60300
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bonito-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/ogp/generation.json",
+          "sha256": "a73b9b1b0ec507034bc23aeccb7b26a893fc3f6a2da9c1c0084d0848080c305f",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "b00f241f816e7b8915e3d3a7c5cd57609fb38ed6bf2cdfefae6ab36c9a826e18",
+        "fingerprint": "92cfd36ed08d1d29f1722c22b98336f05fc407e28f0f80b322910e3868ffa9e7",
+        "generatedAt": "2026-10-10T21:32:21.314Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bonito-consumption-expenditure",
+      "file": "app/ranking/bonito-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bonito-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "4f1b929eca7ec7329eb0dbd3bb9b94f7453b11b1479dea8a8168ed1b82ade447",
+        "bytes": 16300
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bonito-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/thumbnail.json",
+          "sha256": "5e0e546faf7e246970bad699e7d523aa17137a624407e3b5d50bd785a8a5fe86",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "a197dd8b1bb018176baae91eddb594dd44e20690bb48b9895ea5d19907ffdf29",
+        "fingerprint": "6fbf5f87bc025a7705ac661ed70eb79f1e12d53c42b1f7b250fd17deff4aafe3",
+        "generatedAt": "2026-10-10T21:50:02.692Z"
+      }
+    },
+    {
+      "owner": "web/ranking/bonito-consumption-expenditure",
+      "file": "app/ranking/bonito-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/bonito-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "ec7cb372ee15ec04ab0814928dafa47e78ddc01dd42990096cf5b2f4b7b31ff4",
+        "bytes": 14834
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/bonito-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/thumbnail.json",
+          "sha256": "5e0e546faf7e246970bad699e7d523aa17137a624407e3b5d50bd785a8a5fe86",
+          "bytes": 1823,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/bonito-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/bonito-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "a197dd8b1bb018176baae91eddb594dd44e20690bb48b9895ea5d19907ffdf29",
+        "fingerprint": "6fbf5f87bc025a7705ac661ed70eb79f1e12d53c42b1f7b250fd17deff4aafe3",
+        "generatedAt": "2026-10-10T21:50:02.692Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-clinic-count-per-100k",
+      "file": "app/ranking/general-clinic-count-per-100k/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-clinic-count-per-100k/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/ogp/ogp.png",
+        "sha256": "95ca2dc03537301d78338a1243024d2c29e148f1222630ecd4b5fef7d8e1fff1",
+        "bytes": 61460
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-clinic-count-per-100k/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/ogp/generation.json",
+          "sha256": "be2ec1966c18acb63b4c22aa0a488bb5a93f62a563d8eacbccd583011cec9dd5",
+          "bytes": 949,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "aa1a79c4c3ce46d60bd7a03a6457966dc6c574fe8184c0922d785c7d2a655c93",
+        "fingerprint": "8679a9b49869dd20597e487ec4306e0d8054928abac8933e21ff09ab1bffe653",
+        "generatedAt": "2026-10-01T18:11:08.865Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-clinic-count-per-100k",
+      "file": "app/ranking/general-clinic-count-per-100k/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-clinic-count-per-100k/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/thumbnail-dark.webp",
+        "sha256": "b8f238ba364d27ed9bbc4f2acb61ee3960de361cf7b41169a67bddd5124e22d4",
+        "bytes": 15118
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-clinic-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/thumbnail.json",
+          "sha256": "6cdd05a37f572718483cf8041b1db1c67a8a12af0e6a11f8f56a2646e4ec491c",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dddb46fd9f3cde77934b0f4e0e350db90d1f4456b81abb9002f02a8bee4ceeb0",
+        "fingerprint": "cc8a6ffeed312874c7179b1b764f069762c1f694849b7f5a3d9b48375579b130",
+        "generatedAt": "2026-10-01T18:35:55.274Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-clinic-count-per-100k",
+      "file": "app/ranking/general-clinic-count-per-100k/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-clinic-count-per-100k/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/thumbnail-light.webp",
+        "sha256": "74298d949ff47d9269c36428d63aaf17d6f56b2c0fc15671818ba5d49ca39d20",
+        "bytes": 13344
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-clinic-count-per-100k/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/thumbnail.json",
+          "sha256": "6cdd05a37f572718483cf8041b1db1c67a8a12af0e6a11f8f56a2646e4ec491c",
+          "bytes": 1835,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-clinic-count-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-clinic-count-per-100k/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "dddb46fd9f3cde77934b0f4e0e350db90d1f4456b81abb9002f02a8bee4ceeb0",
+        "fingerprint": "cc8a6ffeed312874c7179b1b764f069762c1f694849b7f5a3d9b48375579b130",
+        "generatedAt": "2026-10-01T18:35:55.274Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kindergarten-students-per-teacher",
+      "file": "app/ranking/kindergarten-students-per-teacher/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-students-per-teacher/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/ogp/ogp.png",
+        "sha256": "a5ebd55bfdbdd76d78d9f26e1f693e8fb793f1cf186d92c0d769130452991749",
+        "bytes": 59110
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-students-per-teacher/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/ogp/generation.json",
+          "sha256": "269efce6e5c9e3373ef7cba6cf5c95587c192eda42e80b03a6eddfa62b612fde",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "545d7a075a2049cc565502b7ef130066179da56c9ad9eaef7bbce1230c71da07",
+        "fingerprint": "db7d84753b32b621d20dfa6413a28f10464211e743d95603af416e509740ce8c",
+        "generatedAt": "2026-10-03T20:59:32.569Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kindergarten-students-per-teacher",
+      "file": "app/ranking/kindergarten-students-per-teacher/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-students-per-teacher/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/thumbnail-dark.webp",
+        "sha256": "f336414d0b60f7d9c89f7089e050ad7569693ad8db9f57c2e1848d9294631ab6",
+        "bytes": 15754
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-students-per-teacher/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/thumbnail.json",
+          "sha256": "996250867b2c87e4d7c305e57191702b95b9e1be966d2259aef43548248f3679",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3b472b839181d57177254d776a0ef1968dc824351906e98c9878ccedeb2a5939",
+        "fingerprint": "e52e71eb4cc5f31565b7e62467e7897b247a89a39d7dd7749792340caa303fa5",
+        "generatedAt": "2026-10-03T21:25:20.249Z"
+      }
+    },
+    {
+      "owner": "web/ranking/kindergarten-students-per-teacher",
+      "file": "app/ranking/kindergarten-students-per-teacher/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/kindergarten-students-per-teacher/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/thumbnail-light.webp",
+        "sha256": "b3e56c1d98f514f9fa91646306d6a5430b0cbbb93daaf50fd04bebd28899b11a",
+        "bytes": 14118
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/kindergarten-students-per-teacher/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/thumbnail.json",
+          "sha256": "996250867b2c87e4d7c305e57191702b95b9e1be966d2259aef43548248f3679",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/kindergarten-students-per-teacher/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/kindergarten-students-per-teacher/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3b472b839181d57177254d776a0ef1968dc824351906e98c9878ccedeb2a5939",
+        "fingerprint": "e52e71eb4cc5f31565b7e62467e7897b247a89a39d7dd7749792340caa303fa5",
+        "generatedAt": "2026-10-03T21:25:20.249Z"
+      }
+    },
+    {
+      "owner": "web/ranking/konbu-tsukudani-consumption-quantity",
+      "file": "app/ranking/konbu-tsukudani-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/konbu-tsukudani-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/ogp/ogp.png",
+        "sha256": "6f11061dbbbaa7567fcb101b1ba670367f509e010dc4291b498cfbbb9f4b6805",
+        "bytes": 60166
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/konbu-tsukudani-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/ogp/generation.json",
+          "sha256": "0484bf45545700ad1699e2a17d3a632d6c3572629dba95eb664dafc7f79c3ce8",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "a047a1bcba8ed87035441075080cb924ab9aba59cf1f1b4b1ff4a9f9dacade80",
+        "fingerprint": "4989a1a0f2c8a155290c45ecfe280572c241f18a9811570e347c02947445fd60",
+        "generatedAt": "2026-10-03T20:59:34.190Z"
+      }
+    },
+    {
+      "owner": "web/ranking/konbu-tsukudani-consumption-quantity",
+      "file": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "478c2078cf4b029c83ac9fa2a40e71e5aed98d637ac381b56455e4d48064b952",
+        "bytes": 16252
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/thumbnail.json",
+          "sha256": "d4a1f5ca81b72e095542f2b6e58c9ab964efbb218230ffb9739f3daa67999003",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fe1b42fbd7afe47fe46a386a95c6539aff89f29132e71585fa7346fc0fd78717",
+        "fingerprint": "38cedf8be1b44a7b25591cc2e5c5d22973d511d09261c62a2da7f00f02312ba2",
+        "generatedAt": "2026-10-03T21:25:20.721Z"
+      }
+    },
+    {
+      "owner": "web/ranking/konbu-tsukudani-consumption-quantity",
+      "file": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/thumbnail-light.webp",
+        "sha256": "183dac13328426fdb436c66713e26f9c06fd5874eef4b1a3bc2bc850e7f7c4a4",
+        "bytes": 14686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/konbu-tsukudani-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/thumbnail.json",
+          "sha256": "d4a1f5ca81b72e095542f2b6e58c9ab964efbb218230ffb9739f3daa67999003",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/konbu-tsukudani-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fe1b42fbd7afe47fe46a386a95c6539aff89f29132e71585fa7346fc0fd78717",
+        "fingerprint": "38cedf8be1b44a7b25591cc2e5c5d22973d511d09261c62a2da7f00f02312ba2",
+        "generatedAt": "2026-10-03T21:25:20.721Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mental-health-expenses-prefecture",
+      "file": "app/ranking/mental-health-expenses-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mental-health-expenses-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/ogp/ogp.png",
+        "sha256": "af6c76e07391e370ec47453aa73e850dc5b08ba6c98ba37729d3bd372af229df",
+        "bytes": 60802
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mental-health-expenses-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/ogp/generation.json",
+          "sha256": "4d9b3e0e67c3f69f45f274631843dadaa80c5449130d52273496c0df86523465",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "536953253bc8a1e560362bed8c5c8dddd2736b6219705290b51833cd4d2dd2f2",
+        "fingerprint": "3c3e4b15d728d29b115bead1f220af345e7776b8fbc39b74dd7246cf567b53c2",
+        "generatedAt": "2026-10-03T20:59:58.264Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mental-health-expenses-prefecture",
+      "file": "app/ranking/mental-health-expenses-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mental-health-expenses-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/thumbnail-dark.webp",
+        "sha256": "225de65b55d36d109fae4849c0d9f3422217e0496ffdeb9b577ae59db6a40129",
+        "bytes": 16364
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mental-health-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/thumbnail.json",
+          "sha256": "716254b9eac6c070012e64f46c44c0919974c6d2bda6848e8814fef464b2c80c",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e45febd8a01ebf73e5c07a2ca43b8a6259a397e65518517329d60228d86c7bb2",
+        "fingerprint": "5895fcc2e53d23a8975a2dad6bf717df95e1fd1622d5db9a536fde3f72dd202b",
+        "generatedAt": "2026-10-03T21:25:26.965Z"
+      }
+    },
+    {
+      "owner": "web/ranking/mental-health-expenses-prefecture",
+      "file": "app/ranking/mental-health-expenses-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/mental-health-expenses-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/thumbnail-light.webp",
+        "sha256": "446485cdf8fbefcc84973b9706e75489e1ea819be2ae4f7cdb14664eed048290",
+        "bytes": 14976
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/mental-health-expenses-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/thumbnail.json",
+          "sha256": "716254b9eac6c070012e64f46c44c0919974c6d2bda6848e8814fef464b2c80c",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/mental-health-expenses-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mental-health-expenses-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e45febd8a01ebf73e5c07a2ca43b8a6259a397e65518517329d60228d86c7bb2",
+        "fingerprint": "5895fcc2e53d23a8975a2dad6bf717df95e1fd1622d5db9a536fde3f72dd202b",
+        "generatedAt": "2026-10-03T21:25:26.965Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-police-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-police-expenditure-pref-municipal/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-police-expenditure-pref-municipal/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/ogp/ogp.png",
+        "sha256": "1e1d11abb0c195cb4c455c3aa8342e3ef5ef9c492d5d48e710bff7edf1db6699",
+        "bytes": 72890
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-police-expenditure-pref-municipal/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/ogp/generation.json",
+          "sha256": "b073ba8deeafb5562914f92a1559a89d3e8f04b1f0d12b99535034acee492324",
+          "bytes": 1009,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "9468d01b9f321b50439cfc3b88d89bbd60a0e38e27767a6c7472de4904990075",
+        "fingerprint": "9d6a89d04eac16ce2d6644a0fb9c2d114eea1e2474ef82ab6a6ae6ce0f6e9c3b",
+        "generatedAt": "2026-08-15T18:42:14.042Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-police-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-dark.webp",
+        "sha256": "960dc5e153911ca6f981787ffecce3fb716aaacb87a8fc582d8e76a5d6388434",
+        "bytes": 14450
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail.json",
+          "sha256": "7ef1bf0da56a50b2b75b1d2d617fe82524bc58ed924bbc2833fc50c42c0d7de1",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "175dfe327e3c0ade4d81ffac9d52d81c4e7abd26c1c9c92a992985464a28a38b",
+        "fingerprint": "d67e67a058d6a04159d14341bddaf9845c0ffb730cf442cc30f972d2de5197ec",
+        "generatedAt": "2026-10-08T23:17:28.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-police-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail-light.webp",
+        "sha256": "f66a8e325e3ace6408b66f9ea6b8d339b21ab0b21398b111fce755356247a18c",
+        "bytes": 12968
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/thumbnail.json",
+          "sha256": "7ef1bf0da56a50b2b75b1d2d617fe82524bc58ed924bbc2833fc50c42c0d7de1",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-police-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "175dfe327e3c0ade4d81ffac9d52d81c4e7abd26c1c9c92a992985464a28a38b",
+        "fingerprint": "d67e67a058d6a04159d14341bddaf9845c0ffb730cf442cc30f972d2de5197ec",
+        "generatedAt": "2026-10-08T23:17:28.089Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmacy-count-by-prefecture",
+      "file": "app/ranking/pharmacy-count-by-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmacy-count-by-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/ogp/ogp.png",
+        "sha256": "a462a9b7215a833e4ca03055039c563b806f9be792201d665f6c0ea7a0609a0f",
+        "bytes": 81634
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmacy-count-by-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/ogp/generation.json",
+          "sha256": "65c667073d94b871d7932e30259a4840a38a84b4929a661ba63646460f001984",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "cf721fecafc0c3a8d73f01b85de565e57cf35608b71876a283358b10062c7ae9",
+        "fingerprint": "fde7e75c8eaf736c44531adf8d243c50c0648934abf702793532f23e223a17bf",
+        "generatedAt": "2026-08-15T18:42:17.398Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmacy-count-by-prefecture",
+      "file": "app/ranking/pharmacy-count-by-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmacy-count-by-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/thumbnail-dark.webp",
+        "sha256": "ac9a8c2208d3ea6d4d685353ac602e5e560b6fb6b905f3ec248cf3a91861abd1",
+        "bytes": 18820
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmacy-count-by-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/thumbnail.json",
+          "sha256": "47a9fc7d1cf05d7e2fdc4e134686ddefa922bef8faec7a483096dec20e754b49",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "396a35dd92031c46c2b2791be0375b6637cd28ef72c344eb98eba1c3d8ee1bdc",
+        "fingerprint": "43ee4e6e5fd1679345a94ee95da38c3fc8c0a5026b144cafb1b96c3ea9b920a7",
+        "generatedAt": "2026-08-15T18:58:37.407Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmacy-count-by-prefecture",
+      "file": "app/ranking/pharmacy-count-by-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmacy-count-by-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/thumbnail-light.webp",
+        "sha256": "b0ca2ee92e6ab364519b9c3be12fa0535de8f3833b1fba3600efca8bb0018807",
+        "bytes": 17618
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmacy-count-by-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/thumbnail.json",
+          "sha256": "47a9fc7d1cf05d7e2fdc4e134686ddefa922bef8faec7a483096dec20e754b49",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmacy-count-by-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmacy-count-by-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "396a35dd92031c46c2b2791be0375b6637cd28ef72c344eb98eba1c3d8ee1bdc",
+        "fingerprint": "43ee4e6e5fd1679345a94ee95da38c3fc8c0a5026b144cafb1b96c3ea9b920a7",
+        "generatedAt": "2026-08-15T18:58:37.407Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-general-administration-staff",
+      "file": "app/ranking/prefectural-general-administration-staff/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-general-administration-staff/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/ogp/ogp.png",
+        "sha256": "1c61cb55c54d6a89bc8d455592903f1efb72dfffd5e00fb1ae7366b6f450fe0f",
+        "bytes": 77018
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-general-administration-staff/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/ogp/generation.json",
+          "sha256": "aa78503b21c86767073ded6711a139983163d1ade9fb02334fbdf2c3d0d948d4",
+          "bytes": 993,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "de63b209e59a85d038310b6620d9b6bdc77534a995baeb2c4c65208b922b5967",
+        "fingerprint": "9badd3f6ba8fcf90112f06206845abf016f0907cbe4c73f670a1228bf82884d0",
+        "generatedAt": "2026-08-15T18:42:24.297Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-general-administration-staff",
+      "file": "app/ranking/prefectural-general-administration-staff/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-general-administration-staff/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/thumbnail-dark.webp",
+        "sha256": "31d845718209b4c8eb1be963de60d25d8a08d6a7bacbeb2204ee8dbe09e36e9b",
+        "bytes": 17222
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-general-administration-staff/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/thumbnail.json",
+          "sha256": "c12e89d663321ad1eef877bb5784263d9b13ad1b8256bf6ea56ac66cf918309f",
+          "bytes": 1934,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "62af5268599280dc5ba1473dffbd5fb1048dc15b320ce5322115773b917a4912",
+        "fingerprint": "79f3161460503fa4d2e8b07f4814a6e3197c5ea13b51862bf6b336fd1bfc43e2",
+        "generatedAt": "2026-08-15T18:58:40.436Z"
+      }
+    },
+    {
+      "owner": "web/ranking/prefectural-general-administration-staff",
+      "file": "app/ranking/prefectural-general-administration-staff/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/prefectural-general-administration-staff/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/thumbnail-light.webp",
+        "sha256": "224b1d17278e644e9cc2fd97b1149b418fb9c91da13f49b87d20817c09377880",
+        "bytes": 15798
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/prefectural-general-administration-staff/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/thumbnail.json",
+          "sha256": "c12e89d663321ad1eef877bb5784263d9b13ad1b8256bf6ea56ac66cf918309f",
+          "bytes": 1934,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/prefectural-general-administration-staff/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/prefectural-general-administration-staff/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "62af5268599280dc5ba1473dffbd5fb1048dc15b320ce5322115773b917a4912",
+        "fingerprint": "79f3161460503fa4d2e8b07f4814a6e3197c5ea13b51862bf6b336fd1bfc43e2",
+        "generatedAt": "2026-08-15T18:58:40.436Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-coat-consumption-expenditure",
+      "file": "app/ranking/womens-coat-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-coat-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/ogp/ogp.png",
+        "sha256": "cb82a16f211201463ffb66a6b277129dab014c0559043ba829a84fa7a72d3742",
+        "bytes": 76445
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-coat-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/ogp/generation.json",
+          "sha256": "83b1e305d9961a7ed67f1b6b3addf00ae0fcd8a2f0d1a541af82e5381dbab331",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "6fb4f077a1b37d37f0d3b0752e77c46709f1d003c79222c56a4a86e48dc3a509",
+        "fingerprint": "fa6cee33c07587c8f290efb649cee0d665981b0c37bedacb10690e25ef67ae18",
+        "generatedAt": "2026-08-16T22:21:32.599Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-coat-consumption-expenditure",
+      "file": "app/ranking/womens-coat-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-coat-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "0051b6c15d55926b55148237648441b16b0243b8daec80538ae15db90818f922",
+        "bytes": 17056
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-coat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/thumbnail.json",
+          "sha256": "d6c070fc370cfac7cf0c53e820df8f7c672d422528d5c22b5b792741a42d5d8a",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "31bfad6424b3ab0487d74af0a324b2476ea06b4ab4f18c9ee75d0ebd790793d0",
+        "fingerprint": "18811d3c8278da32741aff09b20c9c67f2638dcbd8ce4d87192d5191bd017b47",
+        "generatedAt": "2026-08-16T22:36:37.277Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-coat-consumption-expenditure",
+      "file": "app/ranking/womens-coat-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-coat-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "f3e77a6fed8e8576b0e7f94c8dd8e4f97ae5c1f1c6502c1f982b82b591f59981",
+        "bytes": 15484
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-coat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/thumbnail.json",
+          "sha256": "d6c070fc370cfac7cf0c53e820df8f7c672d422528d5c22b5b792741a42d5d8a",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-coat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-coat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "31bfad6424b3ab0487d74af0a324b2476ea06b4ab4f18c9ee75d0ebd790793d0",
+        "fingerprint": "18811d3c8278da32741aff09b20c9c67f2638dcbd8ce4d87192d5191bd017b47",
+        "generatedAt": "2026-08-16T22:36:37.277Z"
+      }
+    }
+  ]
+}

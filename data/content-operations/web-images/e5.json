@@ -1,0 +1,1799 @@
+{
+  "items": [
+    {
+      "id": "web/blog/ai-claude-code-pref-analysis",
+      "channel": "web",
+      "key": "ai-claude-code-pref-analysis",
+      "title": "なぜ公務員の統計づくりは半日かかるのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/ai-claude-code-pref-analysis",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "ca7f60c711e70c46b9b27f4011288d05b512e6867920697a01a5c0419f6f732e",
+      "catalogBasis": "8dda819ede5c69f66922abcbeb2a5f67d847005cc44695f75c3a1f37d6b17dd4",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/article.md",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/article.md",
+        "sha256": "36a5954c4f5e4fab3bf14c65577c094b2fbab1a575353d2e075339a948190105",
+        "bytes": 30968
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/housing-cost-livability-trend",
+      "channel": "web",
+      "key": "housing-cost-livability-trend",
+      "title": "家賃が安い県ほど住宅面積が広い──東京90m2 vs 富山167m2、なぜ逆転するのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/housing-cost-livability-trend",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "570cce64a6190b748ff7fd673593cc3197528f8e073c1f762614ddd75c05bb65",
+      "catalogBasis": "f0c3146226cd753d1a11501fcb2e1cd1e4b22b96d039d0c807dacebe095f7dc9",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/article.md",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/article.md",
+        "sha256": "9e7f472ab9a0e59fd47e037f0febbad988492f3e4554533adb87634dfef5aaa9",
+        "bytes": 13723
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "channel": "web",
+      "key": "local-tax-prefecture-vs-railway-passengers",
+      "title": "地方税と駅乗降客、東京が両方で圧勝",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/local-tax-prefecture-vs-railway-passengers",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "f889dec990a70c9eeee6620cde4147e5ba03beff65138e434076f97419ba22a4",
+      "catalogBasis": "8e50c2aac3267da20f1d85efcaa91281d9d9d6fe0b4e220fa62b6e8084512f68",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+        "sha256": "341f8802600cf71721b07c7bafcbc4d4ea8be50f5fd9eb2a17c43b1826e44e22",
+        "bytes": 7365
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "channel": "web",
+      "key": "treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "title": "精神疾患の入院受療率、なぜ九州に集中するのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "dbd0a79179297bed01ba8729e0a3dc89660af424f77ea99575e49087bb80a8e4",
+      "catalogBasis": "5ec35bdbcb6f90a42bbe54621cb79b90452bf7e03f1da99d715251d0c95be8d7",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+        "sha256": "a27e7e2b34e56b5c390e56bf21a81e9822f729a72cf7c4a903cc62ca65a0d92f",
+        "bytes": 8676
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/22579ac89b5e1b23f228314d",
+      "channel": "web",
+      "key": "assets/ogp/ogp-bg-brand-dark.jpg",
+      "title": "ogp-bg-brand-dark.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b174c58748df9b28812fb85e8b789ef3ae0e57e875753704372e91224c041da6"
+    },
+    {
+      "id": "web/material/b4bd35679720537411e65a00",
+      "channel": "web",
+      "key": "assets/area-specialty/08000/edosaki-kabocha.webp",
+      "title": "edosaki-kabocha.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5055ef8587ca64e303a571a614318c60173d1c40a0b36e6c94d8d426e7b73d8c"
+    },
+    {
+      "id": "web/ranking/public-bond-expenses-purpose-prefecture",
+      "channel": "web",
+      "key": "public-bond-expenses-purpose-prefecture",
+      "title": "公債費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/public-bond-expenses-purpose-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "67c6976572d6e9e9b039a8ec8ead63448b0b3aea1fd07600f08a844859660251",
+      "catalogBasis": "67c6976572d6e9e9b039a8ec8ead63448b0b3aea1fd07600f08a844859660251",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/relaxation-avg-time-female",
+      "channel": "web",
+      "key": "relaxation-avg-time-female",
+      "title": "休養・くつろぎの平均時間",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/relaxation-avg-time-female",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "531c2e8ec038314de837c5e7c52711e18eb8cbab4da28736117704e7dc5b3caf",
+      "catalogBasis": "531c2e8ec038314de837c5e7c52711e18eb8cbab4da28736117704e7dc5b3caf",
+      "indexComplete": true
+    },
+    {
+      "id": "web/theme/aging-society",
+      "channel": "web",
+      "key": "aging-society",
+      "title": "少子高齢化",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/aging-society",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "32f83dd9b1f38db6d28e18eb189c8a05de8d3b983144b39c6caa70715a5ebfda",
+      "catalogBasis": "32f83dd9b1f38db6d28e18eb189c8a05de8d3b983144b39c6caa70715a5ebfda",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/ai-claude-code-pref-analysis",
+      "file": "app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.svg",
+        "sha256": "96efb34dae3e7751063be7dc5386a8b49d283fa978042f68d163e302fef0ba53",
+        "bytes": 6927
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/article.md",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/article.md",
+          "sha256": "36a5954c4f5e4fab3bf14c65577c094b2fbab1a575353d2e075339a948190105",
+          "bytes": 30968,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "prefectural-income-per-capita-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.json",
+          "sha256": "db1135387bf3b9d64ac6054b25afbabe1bd2cacac2908e6104818dceee094c61",
+          "bytes": 6720,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "prefectural-income-per-capita-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.source.json",
+          "sha256": "dbc60876d432f88a8eb13503e00863baa7cc001827cbf0ee947172a8fe895471",
+          "bytes": 697,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/data/prefectural-income-per-capita-ranking.svg",
+          "alt": "1人当たり県民所得 上位5県・下位5県（2021年度）",
+          "heading": "Step 4: 都道府県別ランキングを自動生成する",
+          "line": 166
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-prefectural-income-h27/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-prefectural-income-h27/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/ai-claude-code-pref-analysis",
+      "file": "app/blog/ai-claude-code-pref-analysis/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/background.jpg",
+        "sha256": "4a745c32cb00a271834d9e685a7612ef93166bc21ccbfd79b6b51eaa4a9bdac0",
+        "bytes": 91563
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "sha256": "9d96bd75cc43dad22d64789a9cc4443c04def82a5fb79a89368ff8dd7ee3a155",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "f3f4e1ac52aba5ca1f75f3383886b49e7c53bb88639121bf98fee28f22f539dd",
+        "fingerprint": "b5e5f1ed6e165cf5075f89bf9475d73fab9978f6001b76bd435763a8c9d63002",
+        "generatedAt": "2026-10-07T09:40:05.661Z"
+      }
+    },
+    {
+      "owner": "web/blog/ai-claude-code-pref-analysis",
+      "file": "app/blog/ai-claude-code-pref-analysis/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/ogp.png",
+        "sha256": "f370e80d3b6bbdb1fbd4128787b0b348307463413502bf265e174cc89792dbe7",
+        "bytes": 477108
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "sha256": "9d96bd75cc43dad22d64789a9cc4443c04def82a5fb79a89368ff8dd7ee3a155",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "f3f4e1ac52aba5ca1f75f3383886b49e7c53bb88639121bf98fee28f22f539dd",
+        "fingerprint": "b5e5f1ed6e165cf5075f89bf9475d73fab9978f6001b76bd435763a8c9d63002",
+        "generatedAt": "2026-10-07T09:40:05.661Z"
+      }
+    },
+    {
+      "owner": "web/blog/ai-claude-code-pref-analysis",
+      "file": "app/blog/ai-claude-code-pref-analysis/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/thumbnail-dark.webp",
+        "sha256": "7bba871d9aa8681dfb69620d6c279995293fe11d0729192a3ad14d6286d04c01",
+        "bytes": 15370
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "sha256": "9d96bd75cc43dad22d64789a9cc4443c04def82a5fb79a89368ff8dd7ee3a155",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "f3f4e1ac52aba5ca1f75f3383886b49e7c53bb88639121bf98fee28f22f539dd",
+        "fingerprint": "b5e5f1ed6e165cf5075f89bf9475d73fab9978f6001b76bd435763a8c9d63002",
+        "generatedAt": "2026-10-07T09:40:05.661Z"
+      }
+    },
+    {
+      "owner": "web/blog/ai-claude-code-pref-analysis",
+      "file": "app/blog/ai-claude-code-pref-analysis/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/ai-claude-code-pref-analysis/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/thumbnail-light.webp",
+        "sha256": "6abd7caea2d079247ed1c51e6cd9b83265e6228544c1718406e40cf1107e2c1f",
+        "bytes": 30352
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/ai-claude-code-pref-analysis/ogp/generation.json",
+          "sha256": "9d96bd75cc43dad22d64789a9cc4443c04def82a5fb79a89368ff8dd7ee3a155",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "f3f4e1ac52aba5ca1f75f3383886b49e7c53bb88639121bf98fee28f22f539dd",
+        "fingerprint": "b5e5f1ed6e165cf5075f89bf9475d73fab9978f6001b76bd435763a8c9d63002",
+        "generatedAt": "2026-10-07T09:40:05.661Z"
+      }
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.svg",
+        "sha256": "b4a8693a0b6681fde20294465921b5716a627f2a61d78691c96e34962d63c51e",
+        "bytes": 10442
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/article.md",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/article.md",
+          "sha256": "9e7f472ab9a0e59fd47e037f0febbad988492f3e4554533adb87634dfef5aaa9",
+          "bytes": 13723,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "rent-floorarea-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.json",
+          "sha256": "8ce4ba251ef6bee0048c990bb39e14f21d28e81a0b06d79ef0db6d1dc6e103a1",
+          "bytes": 3655,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "rent-floorarea-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.source.json",
+          "sha256": "efa0a0a32b323ec8d1ca050e8a23e43a60e791b994015171d768e769656dce8b",
+          "bytes": 545,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-floorarea-scatter.svg",
+          "alt": "家賃×持ち家延べ面積の散布図（47都道府県）",
+          "heading": "家賃 × 住宅面積の負の相関──「安い県ほど広い家」の構造",
+          "line": 82
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/floor-area-per-dwelling-owner/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/floor-area-per-dwelling-owner/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/data/rent-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/data/rent-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-ranking.svg",
+        "sha256": "402ec419f7e9f4ac6ba7ef07e9a67d0b1370948eb5beb4c760af94d7d10c6250",
+        "bytes": 6879
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/article.md",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/article.md",
+          "sha256": "9e7f472ab9a0e59fd47e037f0febbad988492f3e4554533adb87634dfef5aaa9",
+          "bytes": 13723,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "rent-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/data/rent-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-ranking.json",
+          "sha256": "67c7d162e29275c9e1f4e747ea4a3cdaa96ca0131a19fd1f596728f286fb8537",
+          "bytes": 6721,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "rent-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/data/rent-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-ranking.source.json",
+          "sha256": "2991ecec6a2af12ac7db38b90a8eb763298759e376b9d92cee4915fcddec603d",
+          "bytes": 652,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/data/rent-ranking.svg",
+          "alt": "民営賃貸住宅家賃 上位5・下位5（3.3m2当たり円、2024年）",
+          "heading": "家賃ランキング──東京9,736円 vs 和歌山3,442円",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/background.jpg",
+        "sha256": "2d03202019cc071ff1b2d9c5197c30acf8e036693da14f0806db11107e3d9802",
+        "bytes": 30975
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "sha256": "5e0f0eae2f657f7396a35f46d5e6aa76798f9ae830afcb1753f9a8b10554c096",
+          "bytes": 2277,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8569a08f1a1bdf33f38594bab9c042908c8acd44c340a359b16336fe99b90dcc",
+        "fingerprint": "2b5587999fe5193a62200f5fb0aa7cbb3602044dc0ccfceaa670267cbd418ded",
+        "generatedAt": "2026-08-22T05:17:27.498Z"
+      }
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/ogp.png",
+        "sha256": "3d6713dedd3490ddb99151557dc92785ce07a3499be42adfb1fe4372ebcd98a0",
+        "bytes": 246270
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "sha256": "5e0f0eae2f657f7396a35f46d5e6aa76798f9ae830afcb1753f9a8b10554c096",
+          "bytes": 2277,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8569a08f1a1bdf33f38594bab9c042908c8acd44c340a359b16336fe99b90dcc",
+        "fingerprint": "2b5587999fe5193a62200f5fb0aa7cbb3602044dc0ccfceaa670267cbd418ded",
+        "generatedAt": "2026-08-22T05:17:27.498Z"
+      }
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/thumbnail-dark.webp",
+        "sha256": "312181338dad84ba47b99809043bbcd55278e4d7065774958ed63ebf5a5a5307",
+        "bytes": 4846
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "sha256": "5e0f0eae2f657f7396a35f46d5e6aa76798f9ae830afcb1753f9a8b10554c096",
+          "bytes": 2277,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8569a08f1a1bdf33f38594bab9c042908c8acd44c340a359b16336fe99b90dcc",
+        "fingerprint": "2b5587999fe5193a62200f5fb0aa7cbb3602044dc0ccfceaa670267cbd418ded",
+        "generatedAt": "2026-08-22T05:17:27.498Z"
+      }
+    },
+    {
+      "owner": "web/blog/housing-cost-livability-trend",
+      "file": "app/blog/housing-cost-livability-trend/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/housing-cost-livability-trend/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/thumbnail-light.webp",
+        "sha256": "b74c8793f9b555584b5da4c34e36c86eeea17bc99f6d95f74f9fc3bca93a7de0",
+        "bytes": 8220
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/housing-cost-livability-trend/ogp/generation.json",
+          "sha256": "5e0f0eae2f657f7396a35f46d5e6aa76798f9ae830afcb1753f9a8b10554c096",
+          "bytes": 2277,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8569a08f1a1bdf33f38594bab9c042908c8acd44c340a359b16336fe99b90dcc",
+        "fingerprint": "2b5587999fe5193a62200f5fb0aa7cbb3602044dc0ccfceaa670267cbd418ded",
+        "generatedAt": "2026-08-22T05:17:27.498Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.svg",
+        "sha256": "706bfe822d3080c36c6ddb438ce31ff644521241b7db2defafda4ddedca758a4",
+        "bytes": 10839
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "sha256": "341f8802600cf71721b07c7bafcbc4d4ea8be50f5fd9eb2a17c43b1826e44e22",
+          "bytes": 7365,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "local-tax-prefecture--railway-passengers-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.json",
+          "sha256": "4790e9e80eb4d69b2853dfa0f02e53882329bbff4a392d8f94d26dda47596753",
+          "bytes": 4034,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "local-tax-prefecture--railway-passengers-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.source.json",
+          "sha256": "5a2ffe038d2757dd504672cd903ae19b27dca7b165f7874bda03d470e8bbe18f",
+          "bytes": 567,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture--railway-passengers-scatter.svg",
+          "alt": "地方税と鉄道駅 乗降客数の関係",
+          "heading": "2つの指標の関係を散布図で見る",
+          "line": 41
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/local-tax-prefecture.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/local-tax-prefecture.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.svg",
+        "sha256": "835c1eaddc1029bda189401fd03525703301e47b998e5e863814d86e3b87ee36",
+        "bytes": 6964
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "sha256": "341f8802600cf71721b07c7bafcbc4d4ea8be50f5fd9eb2a17c43b1826e44e22",
+          "bytes": 7365,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "local-tax-prefecture-vs-railway-passengers-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.json",
+          "sha256": "189e13c14171c15edffcde7bc362585fda9ae3ccd1e55794ca5a4e04e27cf299",
+          "bytes": 6896,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "local-tax-prefecture-vs-railway-passengers-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.source.json",
+          "sha256": "08014f27d270c9037abc6e60a58c1f10047db40f35b81a968959023ea55ddbe9",
+          "bytes": 649,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/local-tax-prefecture-vs-railway-passengers-prefecture-rankings.svg",
+          "alt": "地方税の上位と下位",
+          "heading": "地方税が多い県、少ない県",
+          "line": 15
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/local-tax-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/local-tax-prefecture/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.svg",
+        "sha256": "0a68bd60dd26bae6c2eef3479dce4648ecf5fcdcd09498e4e658a2ce38bacb82",
+        "bytes": 6947
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/article.md",
+          "sha256": "341f8802600cf71721b07c7bafcbc4d4ea8be50f5fd9eb2a17c43b1826e44e22",
+          "bytes": 7365,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "railway-passengers-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.json",
+          "sha256": "35f32be9d28596b11e53e8e3ba284be08ac9c4a36d2aa979fb837934bb1b3b01",
+          "bytes": 6790,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "railway-passengers-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.source.json",
+          "sha256": "5d241fb6d0d335994cad5ed27885d220d18f84ff64aaf445586dd6d142f3b8ec",
+          "bytes": 633,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/data/railway-passengers-prefecture-rankings.svg",
+          "alt": "鉄道駅 乗降客数の上位と下位",
+          "heading": "鉄道駅の乗降客数が多い県、少ない県",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/railway-passengers/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/railway-passengers/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/background.jpg",
+        "sha256": "24f2b9201776f7ec875ffd186bb59694c829f38be27aa818c9e635471676e6ef",
+        "bytes": 117063
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "sha256": "35b0b3655ce4e5df8d9c8e155475ab70b1049598fb77bfe15c3a7e484a11e7eb",
+          "bytes": 2209,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e438514473cb89482291c7d5cadf303222261eeb12a533d5a4b7581aabe7b8ef",
+        "fingerprint": "52f8ec24a0f3060d5a92c4e921db24fa09caf6fefc3c5474a7bfcb664b4c2960",
+        "generatedAt": "2026-08-30T07:25:20.627Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/ogp.png",
+        "sha256": "1982dc8a94007888d3e5eba885c5532252888d2b95563c260486983135dc2b85",
+        "bytes": 704014
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "sha256": "35b0b3655ce4e5df8d9c8e155475ab70b1049598fb77bfe15c3a7e484a11e7eb",
+          "bytes": 2209,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e438514473cb89482291c7d5cadf303222261eeb12a533d5a4b7581aabe7b8ef",
+        "fingerprint": "52f8ec24a0f3060d5a92c4e921db24fa09caf6fefc3c5474a7bfcb664b4c2960",
+        "generatedAt": "2026-08-30T07:25:20.627Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-dark.webp",
+        "sha256": "1c962f9cd43b7a0db33992eef65bd06dc681ca6a926c0b64a4db36cc4814cf91",
+        "bytes": 20714
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "sha256": "35b0b3655ce4e5df8d9c8e155475ab70b1049598fb77bfe15c3a7e484a11e7eb",
+          "bytes": 2209,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e438514473cb89482291c7d5cadf303222261eeb12a533d5a4b7581aabe7b8ef",
+        "fingerprint": "52f8ec24a0f3060d5a92c4e921db24fa09caf6fefc3c5474a7bfcb664b4c2960",
+        "generatedAt": "2026-08-30T07:25:20.627Z"
+      }
+    },
+    {
+      "owner": "web/blog/local-tax-prefecture-vs-railway-passengers",
+      "file": "app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/thumbnail-light.webp",
+        "sha256": "fbc063c451303a4a3ab2556170d34b77b26704f577655d9c6ccd44d70d933ccb",
+        "bytes": 40188
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/local-tax-prefecture-vs-railway-passengers/ogp/generation.json",
+          "sha256": "35b0b3655ce4e5df8d9c8e155475ab70b1049598fb77bfe15c3a7e484a11e7eb",
+          "bytes": 2209,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "e438514473cb89482291c7d5cadf303222261eeb12a533d5a4b7581aabe7b8ef",
+        "fingerprint": "52f8ec24a0f3060d5a92c4e921db24fa09caf6fefc3c5474a7bfcb664b4c2960",
+        "generatedAt": "2026-08-30T07:25:20.627Z"
+      }
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.svg",
+        "sha256": "457311f71737df6c783c48181c86b3bbdd609452e6feb3a3a61d9d76545a3d50",
+        "bytes": 32909
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+          "sha256": "a27e7e2b34e56b5c390e56bf21a81e9822f729a72cf7c4a903cc62ca65a0d92f",
+          "bytes": 8676,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "treatment-rate-mental-disorder-inpatient-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.json",
+          "sha256": "081f4b9f5f904ef60523484e6f00635ad650dfe84635f3e679b7f73ecb91b8d0",
+          "bytes": 4688,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "treatment-rate-mental-disorder-inpatient-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.source.json",
+          "sha256": "c99ed9bdeb3127a6cde4fdc795f4c34a9f49293255d80a5ac66f5aae7afe9dc7",
+          "bytes": 715,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-map.svg",
+          "alt": "精神及び行動の障害の受療率（入院）の地理分布",
+          "heading": "地理的にみる分布",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-mental-disorder-inpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-mental-disorder-inpatient/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "7eab727d9fcf0fe9d69d1cc71201f3d007514910bb7f1460dd316928208e3c67",
+        "bytes": 7219
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/article.md",
+          "sha256": "a27e7e2b34e56b5c390e56bf21a81e9822f729a72cf7c4a903cc62ca65a0d92f",
+          "bytes": 8676,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.json",
+          "sha256": "ab5199da903e28082fe8ca10d5fa9ddfa214aba11c5cdb3b12db140f70c53372",
+          "bytes": 6794,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "dcadd97759be162cbf7d26e4a115c86e6c503d120ee966023c13e1d0a003d701",
+          "bytes": 794,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/data/treatment-rate-mental-disorder-inpatient-prefecture-gap-prefecture-rankings.svg",
+          "alt": "精神及び行動の障害の受療率（入院）の上位と下位",
+          "heading": "上位5県と下位5県の差",
+          "line": 22
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-mental-disorder-inpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-mental-disorder-inpatient/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/background.jpg",
+        "sha256": "a788b4a72b797fe253b631d1c3a7bd0284e1d6c0a0bdc60ab4b6d96db739f2ee",
+        "bytes": 84048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "sha256": "77d76db57c9815296a4453572016c52f7f4b7d08e1cd69b2bd64d9de4ffc4261",
+          "bytes": 2301,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "4a36539356e8c75434f233c95f15d1e8c891e11fc6fcac343a913c9c3cf01db4",
+        "fingerprint": "686708534a331890b42882b0b9bdeb921e637c6be5936b49639b029c622facf0",
+        "generatedAt": "2026-09-07T16:07:21.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/ogp.png",
+        "sha256": "942e09352649156276b2e721a117b1145ccdb6c4c3e1ed6953fc7a13648e9191",
+        "bytes": 479855
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "sha256": "77d76db57c9815296a4453572016c52f7f4b7d08e1cd69b2bd64d9de4ffc4261",
+          "bytes": 2301,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "4a36539356e8c75434f233c95f15d1e8c891e11fc6fcac343a913c9c3cf01db4",
+        "fingerprint": "686708534a331890b42882b0b9bdeb921e637c6be5936b49639b029c622facf0",
+        "generatedAt": "2026-09-07T16:07:21.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "fe4a0334ddc36ab600230a96dda473274d4e18d28365fb6f895b0314fe0475a4",
+        "bytes": 13782
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "sha256": "77d76db57c9815296a4453572016c52f7f4b7d08e1cd69b2bd64d9de4ffc4261",
+          "bytes": 2301,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "4a36539356e8c75434f233c95f15d1e8c891e11fc6fcac343a913c9c3cf01db4",
+        "fingerprint": "686708534a331890b42882b0b9bdeb921e637c6be5936b49639b029c622facf0",
+        "generatedAt": "2026-09-07T16:07:21.707Z"
+      }
+    },
+    {
+      "owner": "web/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+      "file": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/thumbnail-light.webp",
+        "sha256": "0f12d493ab68121998f3fbecca2efe15cc04a1e24250adc9e600faa7508f8111",
+        "bytes": 25748
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/generation.json",
+          "sha256": "77d76db57c9815296a4453572016c52f7f4b7d08e1cd69b2bd64d9de4ffc4261",
+          "bytes": 2301,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "4a36539356e8c75434f233c95f15d1e8c891e11fc6fcac343a913c9c3cf01db4",
+        "fingerprint": "686708534a331890b42882b0b9bdeb921e637c6be5936b49639b029c622facf0",
+        "generatedAt": "2026-09-07T16:07:21.707Z"
+      }
+    },
+    {
+      "owner": "web/material/22579ac89b5e1b23f228314d",
+      "file": "assets/ogp/ogp-bg-brand-dark.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/ogp/ogp-bg-brand-dark.jpg",
+        "sha256": "e512f16fd79a61fd96c47e861c067b610c0a6c762f9c8fb4b35228800dbce127",
+        "bytes": 36827
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/ogp/ogp-bg-brand-dark.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b4bd35679720537411e65a00",
+      "file": "assets/area-specialty/08000/edosaki-kabocha.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/08000/edosaki-kabocha.webp",
+        "sha256": "7c0fc0496be7fa4aa1a22146e0210525a454db366e1669d6f271599c58e56318",
+        "bytes": 38158
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/08000/edosaki-kabocha.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/public-bond-expenses-purpose-prefecture",
+      "file": "app/ranking/public-bond-expenses-purpose-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-bond-expenses-purpose-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/ogp/ogp.png",
+        "sha256": "f6ded99fb2b5b7d1570e2dc5bf3830e291115874ff261f4a2ab8f702c844eb66",
+        "bytes": 72553
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-bond-expenses-purpose-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/ogp/generation.json",
+          "sha256": "c16edd2b4f61b0eea5458e48c4685178b67690f4f10d8d84b04230d86e729b2b",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "9afb1ecd694b17de3c8bdd88e88720487317a6e856031e60277db090ce15c695",
+        "fingerprint": "fed31e0901d0631816a314070563a797c730a97bb80cdfd79cb0ad2442514139",
+        "generatedAt": "2026-08-15T18:42:30.206Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-bond-expenses-purpose-prefecture",
+      "file": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-dark.webp",
+        "sha256": "6d6391f376ff37b89df0f21f49162a3a79d9ed3c76d9189cabccf26ce42c47de",
+        "bytes": 15842
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/thumbnail.json",
+          "sha256": "128008a5e077ea05c62cf32ec5176791e2909188d28a6672723117b5669b449c",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "25afcb180ca8b208232f3b83fb77e957e9d0c5c209ff3302cc81e5925f066070",
+        "fingerprint": "b3dec176c6fed26440210f6e589b9394e160ddc3e46f7c2b60ddab14f0763d99",
+        "generatedAt": "2026-08-15T18:58:42.880Z"
+      }
+    },
+    {
+      "owner": "web/ranking/public-bond-expenses-purpose-prefecture",
+      "file": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/thumbnail-light.webp",
+        "sha256": "00e71aedf35ea69a2d337d1becb700ba6e3cdeb2d7fdf90f5e35118ffe60db57",
+        "bytes": 14570
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/public-bond-expenses-purpose-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/thumbnail.json",
+          "sha256": "128008a5e077ea05c62cf32ec5176791e2909188d28a6672723117b5669b449c",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/public-bond-expenses-purpose-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "25afcb180ca8b208232f3b83fb77e957e9d0c5c209ff3302cc81e5925f066070",
+        "fingerprint": "b3dec176c6fed26440210f6e589b9394e160ddc3e46f7c2b60ddab14f0763d99",
+        "generatedAt": "2026-08-15T18:58:42.880Z"
+      }
+    },
+    {
+      "owner": "web/ranking/relaxation-avg-time-female",
+      "file": "app/ranking/relaxation-avg-time-female/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/relaxation-avg-time-female/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/ogp/ogp.png",
+        "sha256": "8b1a42b2c4ca4799de70af147e94ae158c889bf382512c0ea4ebe920c55c3a0c",
+        "bytes": 78024
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/relaxation-avg-time-female/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/ogp/generation.json",
+          "sha256": "8b917e28bd514faae0f02b55c636c00eda532aa69625413928a8b00628cf954b",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/relaxation-avg-time-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/relaxation-avg-time-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "bdad167b947537f5339ac20343291b1dd6c989d339e31a40ea434024df21cbe6",
+        "fingerprint": "e006ef371ce71668936ea430c068ed23c1cc32342dbce874e3d53e35ea7a825d",
+        "generatedAt": "2026-08-15T18:42:36.236Z"
+      }
+    },
+    {
+      "owner": "web/ranking/relaxation-avg-time-female",
+      "file": "app/ranking/relaxation-avg-time-female/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/relaxation-avg-time-female/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/thumbnail-dark.webp",
+        "sha256": "3af1b44d7820f33bd00d2bd9380af0d3d9259d9871dbf015847e04bc7c382ccd",
+        "bytes": 16738
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/relaxation-avg-time-female/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/thumbnail.json",
+          "sha256": "c5aa474eb3f39a072e89f0a598b303700373b3e143b820322fb55fc6f6a98069",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/relaxation-avg-time-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/relaxation-avg-time-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "235b39f87703ee01b3c73c79620a4d4a1e10e4c3bd6780cc54283bcd8e835a5e",
+        "fingerprint": "fdbe382b5ca349c4615bf3d5a2d45766fbb611057eac9985416a557c37b5db57",
+        "generatedAt": "2026-08-15T18:58:45.548Z"
+      }
+    },
+    {
+      "owner": "web/ranking/relaxation-avg-time-female",
+      "file": "app/ranking/relaxation-avg-time-female/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/relaxation-avg-time-female/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/thumbnail-light.webp",
+        "sha256": "354d070c1a488e98a1140a696018b93eee3c53061cba6ca19e8d41ddb442c877",
+        "bytes": 15004
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/relaxation-avg-time-female/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/thumbnail.json",
+          "sha256": "c5aa474eb3f39a072e89f0a598b303700373b3e143b820322fb55fc6f6a98069",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/relaxation-avg-time-female/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/relaxation-avg-time-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/relaxation-avg-time-female/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "235b39f87703ee01b3c73c79620a4d4a1e10e4c3bd6780cc54283bcd8e835a5e",
+        "fingerprint": "fdbe382b5ca349c4615bf3d5a2d45766fbb611057eac9985416a557c37b5db57",
+        "generatedAt": "2026-08-15T18:58:45.548Z"
+      }
+    },
+    {
+      "owner": "web/theme/aging-society",
+      "file": "https://stats47.jp/themes/aging-society/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/aging-society/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

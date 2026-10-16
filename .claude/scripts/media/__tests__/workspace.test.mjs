@@ -4,7 +4,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { ROOT,FILES,workspaceItems,readQuality,saveReview,imageLibrary,saveImagePlan,registerCandidate,reviewCandidate,readTemplates,saveTemplate,sha,storeVerified,candidateKey,inputKey,validateQuality } from '../lib/workspace.mjs';
-import { archiveSnsImage } from '../lib/storage.mjs';
+import { archiveSnsImage,readMediaObject } from '../lib/storage.mjs';
+import { WEB_INVENTORY,WEB_PARTS,readWebInventory,writeWebInventory,publicRef,imageReferences,inlineSvgReferences,publicUrlAllowed } from '../lib/web-inventory.mjs';
+import { assertStaticSvg } from '../lib/svg-safety.mjs';
 
 function fixture(t){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'stats47-media-test-'));
@@ -77,4 +79,68 @@ test('new SNS images use private R2 with exact post ownership and preserve legac
  assert.equal(asset.r2.key,'sns-assets/x/123/image-1/'+sha(bytes)+'.png');
  assert.equal(asset.r2.bucket,'stats47-private');assert.equal(asset.drive_path,'SNS素材/x/123/image-1.png');
  await assert.rejects(()=>archiveSnsImage({platform:'other-account',id:123,role:'image',order:1,bytes,mime:'image/png'},store),/identity/);
+});
+
+test('web and SVG catalog share image review, inputs and cross-page usages',t=>{
+ const root=fixture(t),file=path.join(root,WEB_INVENTORY),original=publicRef('app/blog/example/data/chart.svg',Buffer.from('svg'));
+ const items=['example','other'].map(key=>({id:'web/blog/'+key,channel:'web',key,title:key,category:'blog',basis:sha(key),url:'https://stats47.jp/blog/'+key}));
+ const input={name:'chart.json',...publicRef('app/blog/example/data/chart.json',Buffer.from('{}')),role:'data'};
+ const index={schemaVersion:1,items,images:items.map(item=>({owner:item.id,file:original.key,original,inputFiles:[input],templateId:'svg-bar',usage:'body',format:'svg'})),coverage:[]};
+ fs.writeFileSync(file,JSON.stringify(index));
+ let image=imageLibrary(root).images.find(i=>i.owner===items[0].id);
+ assert.equal(image.relatedImageIds.length,2);assert.equal(image.inputFiles[0].sha256,input.sha256);
+ registerCandidate(root,image.id,image.revision,candidate(image));
+ image=imageLibrary(root).images.find(i=>i.id===image.id);
+ reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'固定値・320pxを照合',original:true,mobile:true,data:true});
+ index.images[0].inputFiles=[{...input,sha256:sha('changed')}];
+ fs.writeFileSync(file,JSON.stringify(index));
+ const changed=imageLibrary(root).images.find(i=>i.id===image.id);
+ assert.equal(changed.id,image.id);assert.equal(changed.approved,false);assert.equal(changed.candidateMatches,false);
+ const item=workspaceItems(root).find(i=>i.id===items[0].id);
+ saveReview(root,item.id,item.revision,{...item.review,policy:'本文中の配置を改善'});
+ assert.equal(workspaceItems(root).find(i=>i.id===item.id).review.policy,'本文中の配置を改善');
+});
+
+test('existing SVG catalog defaults are versioned in the shared policy ledger',t=>{
+ const root=fixture(t),template=readTemplates(root).templates.find(x=>x.id==='svg-scatter');
+ saveTemplate(root,template.id,sha(template),{policy:'文字の重なりを確認する',profiles:template.profiles});
+ const next=readTemplates(root).templates.find(x=>x.id===template.id);
+ assert.equal(next.version,2);
+ assert.throws(()=>saveTemplate(root,template.id,sha(template),{policy:'stale',profiles:template.profiles}),/再読込/);
+});
+
+test('actual references include extensionless images and exact inline SVG ranges',()=>{
+ const md='# 関係\n![図](data/figure.svg)\n<img src="https://storage.stats47.jp/render?id=1">\n<svg viewBox="0 0 10 10"><text>日本</text></svg>';
+ const refs=imageReferences(md,'https://storage.stats47.jp/app/blog/test/');
+ assert.equal(refs.length,2);assert.equal(refs[0].heading,'関係');assert.equal(refs[0].line,2);
+ const inline=inlineSvgReferences(md)[0];assert.equal(sha(Buffer.from(md.slice(inline.start,inline.end))),inline.sha256);
+ assert.equal(publicUrlAllowed('https://storage.stats47.jp/file.svg'),true);
+ for(const url of ['http://127.0.0.1/file','https://storage.stats47.jp.evil.test/file','https://x:y@storage.stats47.jp/file'])assert.equal(publicUrlAllowed(url),false);
+});
+
+test('SVG candidates reject executable and externally loaded resources before rendering',()=>{
+ assert.doesNotThrow(()=>assertStaticSvg(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>')));
+ for(const child of ['<script>alert(1)</script>','<image href="https://example.com/a"/>','<rect onload="run()"/>','<style>@import "https://example.com/a";</style>','<foreignObject/>']){
+  assert.throws(()=>assertStaticSvg(Buffer.from('<svg>'+child+'</svg>')));
+ }
+});
+
+test('local originals verify hashes and never escape material roots',async t=>{
+ const root=fixture(t),bytes=Buffer.from('<svg/>'),rel='assets/fixture.svg';
+ fs.mkdirSync(path.join(root,'assets'),{recursive:true});fs.writeFileSync(path.join(root,rel),bytes);
+ assert.deepEqual(await readMediaObject(root,{provider:'git',path:rel,sha256:sha(bytes),bytes:bytes.length}),bytes);
+ await assert.rejects(()=>readMediaObject(root,{provider:'git',path:'data/note/articles.json'}),/パス/);
+ await assert.rejects(()=>readMediaObject(root,{provider:'git',path:rel,sha256:sha('changed'),bytes:bytes.length}),/変わりました/);
+});
+
+test('partitioned inventory restores all uses and rejects a partial update',t=>{
+ const root=fixture(t),item={id:'web/blog/test',title:'test'},image={owner:item.id,file:'test.svg'};
+ writeWebInventory(root,{items:[item],images:[image],coverage:[],updatedAt:'first'});
+ assert.deepEqual(readWebInventory(root).images,[image]);
+ const file=path.join(root,WEB_INVENTORY),index=JSON.parse(fs.readFileSync(file));
+ fs.writeFileSync(path.join(root,WEB_PARTS,index.parts[0].file),'{}');
+ index.updatedAt='changed';fs.writeFileSync(file,JSON.stringify(index));
+ assert.throws(()=>readWebInventory(root),/incomplete/);
+ writeWebInventory(root,{items:[item],images:[image],coverage:[],updatedAt:'complete'});
+ assert.deepEqual(readWebInventory(root).items,[item]);
 });

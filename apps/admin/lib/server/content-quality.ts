@@ -12,6 +12,7 @@ import {
 import {
   readVerified,
   mediaStore,
+  readMediaObject,
 } from '../../../../.claude/scripts/media/lib/storage.mjs';
 import {
   CHECKS,
@@ -31,6 +32,8 @@ import {
 } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { projectRoot } from './project-root';
 import { getById } from './posts-store';
+import { readWebInventory } from '../../../../.claude/scripts/media/lib/web-inventory.mjs';
+import { assertStaticSvg } from '../../../../.claude/scripts/media/lib/svg-safety.mjs';
 
 export function qualityOverview() {
   const library = imageLibrary(projectRoot());
@@ -44,6 +47,19 @@ export function qualityOverview() {
   return {
     items: workspaceItems(projectRoot()),
     ...library,
+    // Keep the list small. Exact inputs, occurrence metadata and revision history load on selection.
+    images: library.images.map(
+      ({
+        generation: _generation,
+        sourceLinks: _sourceLinks,
+        occurrences: _occurrences,
+        missingInputs: _missingInputs,
+        relatedImageIds: _relatedImageIds,
+        record: _record,
+        inputFiles: _inputFiles,
+        ...image
+      }) => ({ ...image, inputFiles: [], relatedImageIds: [], record: null })
+    ),
     migration: report
       ? {
           observedAt: report.observedAt,
@@ -80,6 +96,10 @@ export function regenerationRequest(id: string) {
     template,
     policy: image.policy,
     inputs: image.inputFiles,
+    generation: image.generation,
+    sourceLinks: image.sourceLinks,
+    usage: image.usage,
+    pageUrl: image.pageUrl,
     requiredReview: ['original', 'mobile-320px', 'data-year-unit'],
     instruction:
       '保存済みの年・単位・数値を保持して改善する。入力が不足する場合は回収する。統計図は決定的なrendererで作る。カバーは専用制作画面を使う。',
@@ -89,6 +109,25 @@ export function regenerationRequest(id: string) {
   };
 }
 export async function contentBody(owner: string) {
+  if (owner.startsWith('web/')) {
+    const item = readWebInventory(projectRoot()).items.find(
+      (i) => i.id === owner
+    );
+    if (!item?.bodyRef)
+      return {
+        body: '',
+        files: [],
+        verified: false,
+        reason: 'この使用先は公開ページから確認してください。',
+      };
+    return {
+      body: (await readMediaObject(projectRoot(), item.bodyRef)).toString(
+        'utf8'
+      ),
+      files: [],
+      verified: true,
+    };
+  }
   if (owner.startsWith('sns/'))
     return {
       body: getById(Number(owner.slice(4)))?.caption ?? '',
@@ -151,6 +190,12 @@ export async function importImage(
   const bytes = Buffer.from(await file.arrayBuffer());
   if (!bytes.length || bytes.length > 16 * 1024 * 1024)
     throw new WorkspaceError('画像は16MB以内にしてください。');
+  if (
+    file.name.toLowerCase().endsWith('.svg') ||
+    file.type === 'image/svg+xml' ||
+    bytes.subarray(0, 512).toString().includes('<svg')
+  )
+    assertStaticSvg(bytes);
   const metadata = await sharp(bytes, {
     limitInputPixels: 40_000_000,
   }).metadata();
@@ -158,6 +203,7 @@ export async function importImage(
     png: 'png',
     jpeg: 'jpg',
     webp: 'webp',
+    svg: 'svg',
   };
   const ext = extensions[metadata.format ?? ''];
   if (
@@ -166,7 +212,10 @@ export async function importImage(
     !metadata.height ||
     (metadata.pages && metadata.pages !== 1)
   )
-    throw new WorkspaceError('静止画のPNG・JPEG・WebPを指定してください。');
+    throw new WorkspaceError(
+      '静止画のPNG・JPEG・WebP・SVGを指定してください。'
+    );
+  if (ext === 'svg') assertStaticSvg(bytes);
   const store = mediaStore();
   const storage = await storeVerified(
     store,
@@ -215,11 +264,20 @@ export async function saveVisualReview(
 export async function imageBytes(id: string, revision: string, input: boolean) {
   const image = imageById(projectRoot(), id);
   if (revision === 'original') {
-    if (!image.original?.key)
+    if (!image.original)
       throw new WorkspaceError('R2への移行が未完了です。', 404);
     return {
-      bytes: await readVerified(image.original),
-      mime: path.extname(image.original.key).toLowerCase(),
+      bytes: await readMediaObject(projectRoot(), image.original),
+      mime:
+        image.original.provider === 'inline-svg'
+          ? '.svg'
+          : path
+              .extname(
+                image.original.key ??
+                  image.original.path ??
+                  new URL(image.original.url!).pathname
+              )
+              .toLowerCase() || '.png',
     };
   }
   const record = image.record?.revisions.find((r) => r.id === revision);

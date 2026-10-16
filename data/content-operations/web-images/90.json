@@ -1,0 +1,2075 @@
+{
+  "items": [
+    {
+      "id": "web/blog/library-museum-cultural-capital",
+      "channel": "web",
+      "key": "library-museum-cultural-capital",
+      "title": "人口あたり図書館数は県で7倍違う",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/library-museum-cultural-capital",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "95639480912470da8ad844000b6628059eee89da9838aa5a3dacd3ce17dbc27f",
+      "catalogBasis": "ecf58d0e6b9b3cb393fe9f2125b745bf2f4bcbd2a63ad2063646b3d1f2d9f9ce",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/article.md",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+        "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+        "bytes": 10360
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "channel": "web",
+      "key": "sewerage-coverage-rate-prefecture-gap",
+      "title": "下水道普及率、なぜ東京と徳島で差が開くのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/sewerage-coverage-rate-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "6bdc0e3c3d6f8392486d49f855dd77ae16ee4f0e069c720ff125d5a75d1ab5b1",
+      "catalogBasis": "8b7c8959785198574bbcd2a1750722f6e693548aa0a03cb15cc22e401b41d1bf",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+        "sha256": "7d3d497dd59512210e838b880074f66fad6c161f4c4c602fbc5938b298a3a78f",
+        "bytes": 8210
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/33b02bfad3dfe5fe3aa99310",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/annual-sunshine-duration-prefecture-gap.jpg",
+      "title": "annual-sunshine-duration-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f93b557a40ed67dfdcf1d024839b84df9219cfbc38f3e119ce56e5d069ce80ff"
+    },
+    {
+      "id": "web/material/b736476faac56a57f4d1a33c",
+      "channel": "web",
+      "key": "packages/gis/data/geoshape/svg/09_栃木県.svg",
+      "title": "09_栃木県.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "acaf73e25629c527e78d9574209965fd4824893cdddc2f6dc77f7718a68d3c3e"
+    },
+    {
+      "id": "web/material/f124ca92bfed49d334b4b4f5",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/income-quintile-car.jpg",
+      "title": "income-quintile-car.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "68dfb2d8d790c9c2cb5c8d04dbfb121dc9f33617071d4afba641ae44a3c714d4"
+    },
+    {
+      "id": "web/product/kindle-k-s1-05",
+      "channel": "web",
+      "key": "kindle-k-s1-05",
+      "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+      "category": "product",
+      "status": "published",
+      "url": "https://stats47.jp/products/kindle-k-s1-05",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "75ff3c2fd9f0b2394ed35435a10da009269643331e60219f47aefb2bffe499d7",
+      "catalogBasis": "75ff3c2fd9f0b2394ed35435a10da009269643331e60219f47aefb2bffe499d7",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/child-consultation-center-cases-per-1000",
+      "channel": "web",
+      "key": "child-consultation-center-cases-per-1000",
+      "title": "児童相談所受付件数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/child-consultation-center-cases-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f572a82ee8c140e4d5ba60a861746b0165d334f306b2dc0620999242daf1a4b8",
+      "catalogBasis": "f572a82ee8c140e4d5ba60a861746b0165d334f306b2dc0620999242daf1a4b8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/employment-location-quotient-manufacturing",
+      "channel": "web",
+      "key": "employment-location-quotient-manufacturing",
+      "title": "製造業の従業者特化係数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/employment-location-quotient-manufacturing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "fb8dd7c7f42ed061ada21a09a1dd80a274591dcbb7ea3d7da4265c33d612475c",
+      "catalogBasis": "fb8dd7c7f42ed061ada21a09a1dd80a274591dcbb7ea3d7da4265c33d612475c",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/hobby-participation-rate-western-dance",
+      "channel": "web",
+      "key": "hobby-participation-rate-western-dance",
+      "title": "洋舞・社交ダンスの行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/hobby-participation-rate-western-dance",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9e1b065c69d098aff06792b2b8f1629e2831f5537624de24dc39f40bdebcb6b2",
+      "catalogBasis": "9e1b065c69d098aff06792b2b8f1629e2831f5537624de24dc39f40bdebcb6b2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/national-health-insurance-enrollees-per-1000",
+      "channel": "web",
+      "key": "national-health-insurance-enrollees-per-1000",
+      "title": "国民健康保険被保険者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/national-health-insurance-enrollees-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1b860e0ac62875d049bdc984a560af128412e25c07e1207f038efef29312d55b",
+      "catalogBasis": "1b860e0ac62875d049bdc984a560af128412e25c07e1207f038efef29312d55b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/per-capita-education-expenditure-pref-municipal",
+      "channel": "web",
+      "key": "per-capita-education-expenditure-pref-municipal",
+      "title": "教育費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/per-capita-education-expenditure-pref-municipal",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ec489e3c1575d1dd71efe12e1657e244508a98fe720b7bdf3c468f9c791ded38",
+      "catalogBasis": "ec489e3c1575d1dd71efe12e1657e244508a98fe720b7bdf3c468f9c791ded38",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/travel-leisure-annual-participation-rate-15plus",
+      "channel": "web",
+      "key": "travel-leisure-annual-participation-rate-15plus",
+      "title": "旅行・行楽の年間行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/travel-leisure-annual-participation-rate-15plus",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a027766869c2f6de5b1e622fcd34c98bfaf8cf58ad039dd6d054c88bb7f1a00a",
+      "catalogBasis": "a027766869c2f6de5b1e622fcd34c98bfaf8cf58ad039dd6d054c88bb7f1a00a",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/data/library-lending-tilemap.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/data/library-lending-tilemap.svg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-lending-tilemap.svg",
+        "sha256": "87c5f4efaf021f240b246c91e4a866970459f10983f4a4ff24abfd5eb5138c62",
+        "bytes": 31358
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/article.md",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+          "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+          "bytes": 10360,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "library-lending-tilemap.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/library-lending-tilemap.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-lending-tilemap.json",
+          "sha256": "03a611c7ae5814b60a092eaa4b61fbb8d0890e6a874216bc0700011fff30e819",
+          "bytes": 7827,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "library-lending-tilemap.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/library-lending-tilemap.source.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-lending-tilemap.source.json",
+          "sha256": "0899b4e367fc8ceb2467956e94c2b605d6a3e55104501e58dff0ce2c70a9c6f4",
+          "bytes": 1610,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-lending-tilemap.svg",
+          "alt": "1人あたり図書館貸出冊数の全国分布",
+          "heading": "1人あたり貸出冊数で見る「使われている図書館」",
+          "line": 33
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/data/library-per-capita.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/data/library-per-capita.svg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-per-capita.svg",
+        "sha256": "99d72911fd727a3757bc4040988238676cad4d531515fad272dad5308b5032ed",
+        "bytes": 6977
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/article.md",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+          "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+          "bytes": 10360,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "library-per-capita.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/library-per-capita.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-per-capita.json",
+          "sha256": "26f3734fa894291a7274b80c2fa8979fa66df51fb9f6a2bc8cd214745e998088",
+          "bytes": 6753,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "library-per-capita.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/library-per-capita.source.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-per-capita.source.json",
+          "sha256": "96fd3223de0af1f0569831ebd9b2dac373f1c4f30572c5a10fb32ca3b2ae4ed7",
+          "bytes": 1215,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/library-per-capita.svg",
+          "alt": "人口10万人あたり図書館数 上位5・下位5",
+          "heading": "図書館数ランキング -- 山梨・島根・長野が上位、神奈川・愛知は下位",
+          "line": 20
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/library-count-per-million/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/library-count-per-million/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/data/museum-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/data/museum-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/museum-ranking.svg",
+        "sha256": "100328bef9f41dad529d70d8b2d7fa1978c77e731bc4938e9f648ebb2acf0645",
+        "bytes": 6798
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/article.md",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+          "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+          "bytes": 10360,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "museum-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/museum-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/museum-ranking.json",
+          "sha256": "5d7b65bd2501cd1d6d6adda070aa378bfe459cf077a3f987c9efbd264e59ebe4",
+          "bytes": 6559,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "museum-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/museum-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/museum-ranking.source.json",
+          "sha256": "7d27ab2b4c0014a995364e975955fe9a5e4d22e09248698e924a0506bb05ca73",
+          "bytes": 587,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/museum-ranking.svg",
+          "alt": "博物館数（類似施設含む）上位5・下位5",
+          "heading": "博物館数ランキング -- 東京・長野・北海道に集中",
+          "line": 53
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/total-museum-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/total-museum-count/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/data/summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/data/summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/summary-findings.svg",
+        "sha256": "33f1abd90433b0e7280f2e48e0a3e841d2a48d07ac5795df939174a308637fbf",
+        "bytes": 3172
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/article.md",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+          "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+          "bytes": 10360,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/summary-findings.json",
+          "sha256": "d303509bdec1f1da2661b71dbd3e91598b4262dc62c841d31dcb207e7306f531",
+          "bytes": 773,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/summary-findings.source.json",
+          "sha256": "f0851d272be0a70a260853108e1955b834d466c5f8701c9431a444881ede828b",
+          "bytes": 366,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 78
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 422",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/data/theater-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/data/theater-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/theater-ranking.svg",
+        "sha256": "d07ca82706b3dfef5731a2429b9bda3694596deff4c448b5b18445c9fe831313",
+        "bytes": 6859
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/article.md",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/article.md",
+          "sha256": "f92ca86bb7f9a7e8a42a52407ded3089c9ee32a5f1737e61395d68e3d63bc2ee",
+          "bytes": 10360,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "theater-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/theater-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/theater-ranking.json",
+          "sha256": "2685dae78ea33a23ac161262b8399c513dfacdf7ef3848ecdf3ae15bfe3d0b8b",
+          "bytes": 6594,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "theater-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/data/theater-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/theater-ranking.source.json",
+          "sha256": "37c461e2874f489029e165532fe31328e91f2b825a7177a1ba4dc114b4f4ee3b",
+          "bytes": 600,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/data/theater-ranking.svg",
+          "alt": "劇場・音楽堂等数 上位5・下位5",
+          "heading": "劇場・音楽堂の分布 -- 絶対数で見ると顔ぶれが変わる",
+          "line": 63
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/theater-music-hall/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/theater-music-hall/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/background.jpg",
+        "sha256": "a1933490d75fca596a7fee091a2d113fd44c445d0157638c207b501e3e6e22b9",
+        "bytes": 93177
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "sha256": "53cde2027087f72b081a09ea0ca78aab58dec47cb384c7f82f3c6b58cd22f0c3",
+          "bytes": 2232,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "31ab41aefbbcbc536a59abacb82a73cbd4091a7df72cf7e2e496580e27f999fc",
+        "fingerprint": "614f39f0e03ff830587f217a6a66d6dd5d76bb765b7d68c7ab735ec81fbdcaaa",
+        "generatedAt": "2026-08-22T05:17:30.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/ogp.png",
+        "sha256": "17d9de95502ff561c06c66728e47e5c39530c8f6364dc9b64069933f07902377",
+        "bytes": 552665
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "sha256": "53cde2027087f72b081a09ea0ca78aab58dec47cb384c7f82f3c6b58cd22f0c3",
+          "bytes": 2232,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "31ab41aefbbcbc536a59abacb82a73cbd4091a7df72cf7e2e496580e27f999fc",
+        "fingerprint": "614f39f0e03ff830587f217a6a66d6dd5d76bb765b7d68c7ab735ec81fbdcaaa",
+        "generatedAt": "2026-08-22T05:17:30.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/thumbnail-dark.webp",
+        "sha256": "6d8ea3b69750f648dc5a904665c8d8413a8c7e28a6e486ef442c976c59f28f91",
+        "bytes": 14156
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "sha256": "53cde2027087f72b081a09ea0ca78aab58dec47cb384c7f82f3c6b58cd22f0c3",
+          "bytes": 2232,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "31ab41aefbbcbc536a59abacb82a73cbd4091a7df72cf7e2e496580e27f999fc",
+        "fingerprint": "614f39f0e03ff830587f217a6a66d6dd5d76bb765b7d68c7ab735ec81fbdcaaa",
+        "generatedAt": "2026-08-22T05:17:30.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/library-museum-cultural-capital",
+      "file": "app/blog/library-museum-cultural-capital/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/library-museum-cultural-capital/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/thumbnail-light.webp",
+        "sha256": "cba015f1fce9d57fb11edeae27ab37571ec56b468ca2f9c9a98f58fdcfb07ba5",
+        "bytes": 28726
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/library-museum-cultural-capital/ogp/generation.json",
+          "sha256": "53cde2027087f72b081a09ea0ca78aab58dec47cb384c7f82f3c6b58cd22f0c3",
+          "bytes": 2232,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "31ab41aefbbcbc536a59abacb82a73cbd4091a7df72cf7e2e496580e27f999fc",
+        "fingerprint": "614f39f0e03ff830587f217a6a66d6dd5d76bb765b7d68c7ab735ec81fbdcaaa",
+        "generatedAt": "2026-08-22T05:17:30.041Z"
+      }
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.svg",
+        "sha256": "11c4901b0660167e1da0afe4f88841fcc80000654a266d7e139f353f4e881fee",
+        "bytes": 31440
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+          "sha256": "7d3d497dd59512210e838b880074f66fad6c161f4c4c602fbc5938b298a3a78f",
+          "bytes": 8210,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "sewerage-coverage-rate-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.json",
+          "sha256": "b95e85615d089cb15f5c20c071cc6458a5084a2dafab9538a218ef5d58fc20bf",
+          "bytes": 4582,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "sewerage-coverage-rate-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.source.json",
+          "sha256": "c5d5f4b371a899d2a300712f45025791782da439261a95a951114b34d0fc410b",
+          "bytes": 602,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-map.svg",
+          "alt": "下水道処理人口普及率の地理分布",
+          "heading": "地理的な分布で見えてくること",
+          "line": 32
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-coverage-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-coverage-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "8285fcfe4b8d3d7a5e2ee373625c604d5616d02c66786c8f3ff7285f350e0260",
+        "bytes": 6911
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/article.md",
+          "sha256": "7d3d497dd59512210e838b880074f66fad6c161f4c4c602fbc5938b298a3a78f",
+          "bytes": 8210,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "sewerage-coverage-rate-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.json",
+          "sha256": "9f43d717af728b7c35c7661350121f8c1f8d319b816f49f02be3a66acce28da3",
+          "bytes": 6688,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "sewerage-coverage-rate-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "5bfaa3be3743d6a495c79bdec06957ea360eca2884ffd9c0cac902b36b66cb78",
+          "bytes": 663,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/data/sewerage-coverage-rate-prefecture-gap-prefecture-rankings.svg",
+          "alt": "下水道処理人口普及率の上位と下位",
+          "heading": "普及率が高い県・低い県",
+          "line": 20
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sewerage-coverage-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sewerage-coverage-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/background.jpg",
+        "sha256": "fe05cb224eb435294dbcb10919c2d6fcaf68927ee2601a272bc1f8f4aecb1de7",
+        "bytes": 126177
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "047797f01ba533783b828f98b9bed95f69574665822728f5705a8587677d30cb",
+          "bytes": 2191,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "65be6b03f6e593db210bed314ec5ad3791bf9dc7d1e52dd242e43df753164bd1",
+        "fingerprint": "773d69c2ae09d2f9e619697aed105b9d1314626ef02583771a537fa7aa491f5f",
+        "generatedAt": "2026-09-07T16:02:41.310Z"
+      }
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/ogp.png",
+        "sha256": "17931a3b94af8b62407c326da78383264d5e952ecb1abe0faf05e98ba896699e",
+        "bytes": 730119
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "047797f01ba533783b828f98b9bed95f69574665822728f5705a8587677d30cb",
+          "bytes": 2191,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "65be6b03f6e593db210bed314ec5ad3791bf9dc7d1e52dd242e43df753164bd1",
+        "fingerprint": "773d69c2ae09d2f9e619697aed105b9d1314626ef02583771a537fa7aa491f5f",
+        "generatedAt": "2026-09-07T16:02:41.310Z"
+      }
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "2d87a49ce74e7cffc20d3e47b6964b301f74546d3c08b5f35e840cc296c2680c",
+        "bytes": 20958
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "047797f01ba533783b828f98b9bed95f69574665822728f5705a8587677d30cb",
+          "bytes": 2191,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "65be6b03f6e593db210bed314ec5ad3791bf9dc7d1e52dd242e43df753164bd1",
+        "fingerprint": "773d69c2ae09d2f9e619697aed105b9d1314626ef02583771a537fa7aa491f5f",
+        "generatedAt": "2026-09-07T16:02:41.310Z"
+      }
+    },
+    {
+      "owner": "web/blog/sewerage-coverage-rate-prefecture-gap",
+      "file": "app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/thumbnail-light.webp",
+        "sha256": "3c5d521c8250a6a0d80cfd795578596686c663168835e261a4f442828b1106c5",
+        "bytes": 40002
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "047797f01ba533783b828f98b9bed95f69574665822728f5705a8587677d30cb",
+          "bytes": 2191,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "65be6b03f6e593db210bed314ec5ad3791bf9dc7d1e52dd242e43df753164bd1",
+        "fingerprint": "773d69c2ae09d2f9e619697aed105b9d1314626ef02583771a537fa7aa491f5f",
+        "generatedAt": "2026-09-07T16:02:41.310Z"
+      }
+    },
+    {
+      "owner": "web/material/33b02bfad3dfe5fe3aa99310",
+      "file": "assets/blog/article-backgrounds/annual-sunshine-duration-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/annual-sunshine-duration-prefecture-gap.jpg",
+        "sha256": "4fa8c2d89daef3ad8973f6ce9c278b93e4404202ff25f822192d130f3aeeae2b",
+        "bytes": 112824
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/annual-sunshine-duration-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b736476faac56a57f4d1a33c",
+      "file": "packages/gis/data/geoshape/svg/09_栃木県.svg",
+      "original": {
+        "provider": "git",
+        "path": "packages/gis/data/geoshape/svg/09_栃木県.svg",
+        "sha256": "8fa23a553e77de64a140ed961e776afbb276c790c1e6b9e9bae580e023a3243c",
+        "bytes": 25587
+      },
+      "inputFiles": [],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "packages/gis/data/geoshape/svg/09_栃木県.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/f124ca92bfed49d334b4b4f5",
+      "file": "assets/blog/article-backgrounds/income-quintile-car.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/income-quintile-car.jpg",
+        "sha256": "83be88aae9fc9147d57d23e46c06835ffd6eb10e75aa7b9020b11c7794415903",
+        "bytes": 71336
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/income-quintile-car.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/product/kindle-k-s1-05",
+      "file": "app/products/kindle-k-s1-05/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/products/kindle-k-s1-05/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png",
+        "sha256": "9faa8b85aae54c89b837e00d8b8805e0393aa67e13055f28434c69a57b172d86",
+        "bytes": 576491
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/products/kindle-k-s1-05/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/generation.json",
+          "sha256": "0413e10cdc903ce5cd5cf1fafa5d8ee92fc20838a28fbb939d86b51204c83229",
+          "bytes": 820,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "product-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "product-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "735c7a32837d7fbb94dfedbdc95b775376fb98700779c8aa97585ff454ba6e05",
+        "inputHash": "57f505632bead6fc6a297468664b10f97db3603019fadbdfa1cea68f872b6544",
+        "fingerprint": "e3e34332d2b61ba6e38afa1c8dc8a7080666c75e4b94d53c316070add2f43025",
+        "generatedAt": "2026-09-14T22:25:50.934Z"
+      }
+    },
+    {
+      "owner": "web/ranking/child-consultation-center-cases-per-1000",
+      "file": "app/ranking/child-consultation-center-cases-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/child-consultation-center-cases-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/ogp/ogp.png",
+        "sha256": "c62db18270aef3ff28765d605bd706b95277cc546d03bcef64b249adacdae7b2",
+        "bytes": 60299
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/child-consultation-center-cases-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/ogp/generation.json",
+          "sha256": "e335096ea218253d07d04bde00017aa3db92a89ed52a0412a892cb65ecd2b5c6",
+          "bytes": 993,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "1c9b10eb6fd7721d07aae7b0242d95f00fab402bb62745c2cf5a466b1ee78aea",
+        "fingerprint": "ecdd6bc15739e5fe4aa92f543c4cc4f43fe4ceddc13a82e35b97fac30b6c012f",
+        "generatedAt": "2026-10-10T21:32:31.338Z"
+      }
+    },
+    {
+      "owner": "web/ranking/child-consultation-center-cases-per-1000",
+      "file": "app/ranking/child-consultation-center-cases-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/child-consultation-center-cases-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/thumbnail-dark.webp",
+        "sha256": "a60bc06000fcc0101155791f4b9bc7a6579a3fdd9a57d76a0abec60898aefdf0",
+        "bytes": 16420
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/child-consultation-center-cases-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/thumbnail.json",
+          "sha256": "e7acc23facb217a0f2ec01c38d58618c085576962e7697ba25834da7b51d33e4",
+          "bytes": 1913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "d4431b9db908b38a9d1bf7a59747df81ef180796e6e8a80ce02e7616512e0fe3",
+        "fingerprint": "825dcd0cdc40ccec14b45dc6143d8f7f313200e485fac82300b246930594a9f2",
+        "generatedAt": "2026-10-10T21:50:05.311Z"
+      }
+    },
+    {
+      "owner": "web/ranking/child-consultation-center-cases-per-1000",
+      "file": "app/ranking/child-consultation-center-cases-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/child-consultation-center-cases-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/thumbnail-light.webp",
+        "sha256": "a4accd30a10175e065b1b8a14c57799f9677a4d2df3bc877ee8c76ca7bcecb93",
+        "bytes": 14888
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/child-consultation-center-cases-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/thumbnail.json",
+          "sha256": "e7acc23facb217a0f2ec01c38d58618c085576962e7697ba25834da7b51d33e4",
+          "bytes": 1913,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/child-consultation-center-cases-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "d4431b9db908b38a9d1bf7a59747df81ef180796e6e8a80ce02e7616512e0fe3",
+        "fingerprint": "825dcd0cdc40ccec14b45dc6143d8f7f313200e485fac82300b246930594a9f2",
+        "generatedAt": "2026-10-10T21:50:05.311Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-location-quotient-manufacturing",
+      "file": "app/ranking/employment-location-quotient-manufacturing/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-location-quotient-manufacturing/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/ogp/ogp.png",
+        "sha256": "bb7793640e565fba5c1e985750875a4eabe946cf518a3417ec2471dee1c09e51",
+        "bytes": 68557
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-location-quotient-manufacturing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/ogp/generation.json",
+          "sha256": "17e1d829cc6445c2b97f717208b3fb0d8ad0c8ab4d33fb35e919600e97ab818c",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "10367518802264439316c677c882fdc252ba19ccb60066011b140249981bb78f",
+        "fingerprint": "14e23a0f0f3ecb871ab3690856a4989bed8a515fe669296381c38633942fa1fd",
+        "generatedAt": "2026-10-01T18:10:36.833Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-location-quotient-manufacturing",
+      "file": "app/ranking/employment-location-quotient-manufacturing/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-location-quotient-manufacturing/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/thumbnail-dark.webp",
+        "sha256": "d6fdc9561016c0b17b38b84037948fee882a73fa03b05af2cf46843c36263cc1",
+        "bytes": 17928
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-location-quotient-manufacturing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/thumbnail.json",
+          "sha256": "a0a108a1d27ef016526e06b5e3766b3601f45773499becbb386fd26a08b6f339",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9354c6f5c671675edc7701c19c0df982698fec866b010f9008e1c465edf49390",
+        "fingerprint": "d334bbf6ab9f28a1db9859e632103b480ebb1f321d6433ef700b65a327198ece",
+        "generatedAt": "2026-10-01T18:35:46.904Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-location-quotient-manufacturing",
+      "file": "app/ranking/employment-location-quotient-manufacturing/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-location-quotient-manufacturing/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/thumbnail-light.webp",
+        "sha256": "697ebffa3807d12d1f84fe39114f5f00a8df3b0d8a64315b5525f248d7e8c2b0",
+        "bytes": 16088
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-location-quotient-manufacturing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/thumbnail.json",
+          "sha256": "a0a108a1d27ef016526e06b5e3766b3601f45773499becbb386fd26a08b6f339",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-location-quotient-manufacturing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-location-quotient-manufacturing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "9354c6f5c671675edc7701c19c0df982698fec866b010f9008e1c465edf49390",
+        "fingerprint": "d334bbf6ab9f28a1db9859e632103b480ebb1f321d6433ef700b65a327198ece",
+        "generatedAt": "2026-10-01T18:35:46.904Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-western-dance",
+      "file": "app/ranking/hobby-participation-rate-western-dance/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-western-dance/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/ogp/ogp.png",
+        "sha256": "e787a860bed6d80b2572eef1c8df6de8a174a29567079180b5d3343652623715",
+        "bytes": 62305
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-western-dance/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/ogp/generation.json",
+          "sha256": "dd2cab595b74f68bc93a464cd6ff3ee658a259be70655b8faf256b7a5ccb1731",
+          "bytes": 985,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "28e9acf0b16d69a2734ef9d23b2cc26875f613b257e2ead0b0b0e6e8e3304888",
+        "fingerprint": "cf5d3c0e8c73cc5f6da444acebf9f3f12206842bd08cde6459569c3e846fa1ac",
+        "generatedAt": "2026-10-01T18:11:32.618Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-western-dance",
+      "file": "app/ranking/hobby-participation-rate-western-dance/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-western-dance/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/thumbnail-dark.webp",
+        "sha256": "b2c9ce13e31ead96c656e8cd34f22cba0c6a597f931ff37f6cf976c50cd26b3f",
+        "bytes": 17480
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-western-dance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/thumbnail.json",
+          "sha256": "14776d431bd8e699b8b875fbcfa6050aed93b05b2eaad297cd1a050ea32c6ad5",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "12eab87f5b3fda60aa5576630b0f8950185b1cc57178fa4bc6a49aef0358d3ca",
+        "fingerprint": "030e507b8fdf462d028dd9f55a3ee1e4171994c80c0622a5def1fca766526469",
+        "generatedAt": "2026-10-01T18:36:01.443Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-western-dance",
+      "file": "app/ranking/hobby-participation-rate-western-dance/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-western-dance/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/thumbnail-light.webp",
+        "sha256": "bafb62054df219e3e478f565b96cf52b1f29979037c66a47409e909e42517344",
+        "bytes": 15994
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-western-dance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/thumbnail.json",
+          "sha256": "14776d431bd8e699b8b875fbcfa6050aed93b05b2eaad297cd1a050ea32c6ad5",
+          "bytes": 1916,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-western-dance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-western-dance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "12eab87f5b3fda60aa5576630b0f8950185b1cc57178fa4bc6a49aef0358d3ca",
+        "fingerprint": "030e507b8fdf462d028dd9f55a3ee1e4171994c80c0622a5def1fca766526469",
+        "generatedAt": "2026-10-01T18:36:01.443Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-health-insurance-enrollees-per-1000",
+      "file": "app/ranking/national-health-insurance-enrollees-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-health-insurance-enrollees-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/ogp/ogp.png",
+        "sha256": "074bfff34d0b9891b2973ae09e12e00cd0b3f7a03922e26827cc36c8aa040e79",
+        "bytes": 62609
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-health-insurance-enrollees-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/ogp/generation.json",
+          "sha256": "1d112efce5910909f1549b2daaa539e7706d883e8b2c7203a0500623c6e5294f",
+          "bytes": 1009,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "ab579cd34e037617b044f8c574f0a2983d4d7c2898a2b393ce801dbd2a7aa935",
+        "fingerprint": "f2a434cfad8c5b31acfe230006144df9e9fe1c49a72f28e1a7b349df00925449",
+        "generatedAt": "2026-10-03T21:00:07.703Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-health-insurance-enrollees-per-1000",
+      "file": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-dark.webp",
+        "sha256": "626d8d51406f56630ce33f862f20c2b3bc3eb7c2c2fab9b4110c577d7c45c3f1",
+        "bytes": 17950
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/thumbnail.json",
+          "sha256": "a423e9841c19b3b95533738b7a2c20735f9dc4dfe69d2d8a8a983a990139e91c",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "061191330ef67a5c3ab92bc73da49995f20c695fb147975cb7d5dd549c6016ed",
+        "fingerprint": "01527df3a29caac7f550377b85c51fa1bdd29bc80d58e1f53396e2733e956982",
+        "generatedAt": "2026-10-03T21:25:29.431Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-health-insurance-enrollees-per-1000",
+      "file": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/thumbnail-light.webp",
+        "sha256": "ea0b18b070e4f100b8aeaad6354578ed7d1ea6d27e090a18000fbe173c7bf854",
+        "bytes": 16460
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-health-insurance-enrollees-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/thumbnail.json",
+          "sha256": "a423e9841c19b3b95533738b7a2c20735f9dc4dfe69d2d8a8a983a990139e91c",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-health-insurance-enrollees-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "061191330ef67a5c3ab92bc73da49995f20c695fb147975cb7d5dd549c6016ed",
+        "fingerprint": "01527df3a29caac7f550377b85c51fa1bdd29bc80d58e1f53396e2733e956982",
+        "generatedAt": "2026-10-03T21:25:29.431Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-education-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-education-expenditure-pref-municipal/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-education-expenditure-pref-municipal/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/ogp/ogp.png",
+        "sha256": "4d5059e83157542703b708697bed7e3a9b075f12aee3f5bcfa0eac7361daa443",
+        "bytes": 72691
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-education-expenditure-pref-municipal/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/ogp/generation.json",
+          "sha256": "e81160f934f55371220b779d6a2b2f85e71333cad38231965797f1a10bd20370",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "fe96790b634b575262f50f4cf2e98493883c1e5250d2fe1c39acda130c77fd84",
+        "fingerprint": "c2fdf2dedbefcd16f22f20e753e868e29fbe4133ae7da63a7e173a935ee501dc",
+        "generatedAt": "2026-08-15T18:42:13.098Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-education-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-dark.webp",
+        "sha256": "c03b26992211a26812bee5a96e149327048af8657b8c642f50f2259fcb09eb11",
+        "bytes": 14568
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail.json",
+          "sha256": "76a70044d48245c67bca5070bcebfb2b76d56b6096a56263ec95b58fabe4eace",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e800aac64a3ccdc6836da2863a424b0a645fa1807e9f7a1e1f2e5bf9fd22660",
+        "fingerprint": "1d4a1e1229bc1e933ff48e4e493cbdd11588dc3f37dca001fb3bd10b9a453622",
+        "generatedAt": "2026-10-08T23:17:27.831Z"
+      }
+    },
+    {
+      "owner": "web/ranking/per-capita-education-expenditure-pref-municipal",
+      "file": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail-light.webp",
+        "sha256": "7d4ee4b8106c94102dc7da8a306f196802529819b3fcb5b105d12d4b71f5b2cb",
+        "bytes": 13038
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/thumbnail.json",
+          "sha256": "76a70044d48245c67bca5070bcebfb2b76d56b6096a56263ec95b58fabe4eace",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/per-capita-education-expenditure-pref-municipal/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7e800aac64a3ccdc6836da2863a424b0a645fa1807e9f7a1e1f2e5bf9fd22660",
+        "fingerprint": "1d4a1e1229bc1e933ff48e4e493cbdd11588dc3f37dca001fb3bd10b9a453622",
+        "generatedAt": "2026-10-08T23:17:27.831Z"
+      }
+    },
+    {
+      "owner": "web/ranking/travel-leisure-annual-participation-rate-15plus",
+      "file": "app/ranking/travel-leisure-annual-participation-rate-15plus/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/ogp/ogp.png",
+        "sha256": "7a6ef38683d9b0e97531681d143a6c37103f5c4ddd4a9ddfbfd7e205e00f3d2a",
+        "bytes": 77708
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/ogp/generation.json",
+          "sha256": "188dc9d25cd664b4fcbfd049afd9b10f2b26fe895350269895bb5502684401b6",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "a0572905703b2e2c8ab68575e2c7b9ab3931e65f32a8bc92075bbcb2514995a4",
+        "fingerprint": "a784e41a6057c64aee62785f510966e2335e2ccd954679bb5a1de91540feab84",
+        "generatedAt": "2026-08-16T22:21:17.781Z"
+      }
+    },
+    {
+      "owner": "web/ranking/travel-leisure-annual-participation-rate-15plus",
+      "file": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-dark.webp",
+        "sha256": "6d2be04f649d87150b8bd1d74324a8ad97c38a75df4a95acaf0edfb80f113d1f",
+        "bytes": 17458
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail.json",
+          "sha256": "202648f23758e5897fa8daec231cb49765ee3e4ef657f344cc52be915a135b41",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "cb8d07d8dfd9da93cad1a569e89ae1b2b0e870e6437798dae5c8e299a70832bc",
+        "fingerprint": "1b7f26e9e7b556ff0dd96ebd6bb5572b3199d12c3c408e495417052dd01819ef",
+        "generatedAt": "2026-08-16T22:36:30.815Z"
+      }
+    },
+    {
+      "owner": "web/ranking/travel-leisure-annual-participation-rate-15plus",
+      "file": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail-light.webp",
+        "sha256": "800b7108050cfbe7de3493c912e41cd206f17224bca90e98cbb2cae8e7f3ad1e",
+        "bytes": 15650
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/thumbnail.json",
+          "sha256": "202648f23758e5897fa8daec231cb49765ee3e4ef657f344cc52be915a135b41",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-15plus/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "cb8d07d8dfd9da93cad1a569e89ae1b2b0e870e6437798dae5c8e299a70832bc",
+        "fingerprint": "1b7f26e9e7b556ff0dd96ebd6bb5572b3199d12c3c408e495417052dd01819ef",
+        "generatedAt": "2026-08-16T22:36:30.815Z"
+      }
+    }
+  ]
+}

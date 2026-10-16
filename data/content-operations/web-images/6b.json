@@ -1,0 +1,2371 @@
+{
+  "items": [
+    {
+      "id": "web/area/09000",
+      "channel": "web",
+      "key": "09000",
+      "title": "栃木県",
+      "category": "area",
+      "status": "published",
+      "url": "https://stats47.jp/areas/09000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "72a3fbc056cae58e206e49cc011594df63c1831b08bc1219e3bfd1f8eddf0641",
+      "catalogBasis": "72a3fbc056cae58e206e49cc011594df63c1831b08bc1219e3bfd1f8eddf0641",
+      "indexComplete": true
+    },
+    {
+      "id": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "channel": "web",
+      "key": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "title": "身長が高い県は魚介の漬物も多い?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "abd3868c66fe2d5daf4bde2fd287975cc8b758799b835ecfb9e05885aae4a890",
+      "catalogBasis": "ccc1715fbeecc99b6d8dd76fb8f426901043654bbdbd4dafad8ec1d3b377e7eb",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+        "sha256": "0965a33328648e0e1870ff98d1a350a385ae6217d92283e76a3089926c25b90e",
+        "bytes": 10842
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/mobile-contracts-over-population",
+      "channel": "web",
+      "key": "mobile-contracts-over-population",
+      "title": "携帯契約数が人口を超える県",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/mobile-contracts-over-population",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "58ad29cf79a3636223839d4a9d992a8c228aaf2f6155e0310341772ba199b3de",
+      "catalogBasis": "ef74a62b0ed25a6089e13c3445f7eed087b4c7cfc0e9f817c2da162945eb569e",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/article.md",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/article.md",
+        "sha256": "12eb25fa978c804a841e2e40fb38af55857fd2404e1b56c5122a10cb3ab279db",
+        "bytes": 6395
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/occupation-income-gap-pilot-vs-careworker",
+      "channel": "web",
+      "key": "occupation-income-gap-pilot-vs-careworker",
+      "title": "パイロット1964万・介護職309万",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/occupation-income-gap-pilot-vs-careworker",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "87f4c569f9915edeaa634b5d174234c4e98f657081c1dc59ba13a7a71357cfe6",
+      "catalogBasis": "a6101212c918499400801f1c37c67bd8a49689acd761387dc4766d51780ebfb3",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/occupation-income-gap-pilot-vs-careworker/article.md",
+        "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/article.md",
+        "sha256": "686e463b5cfa6aee6b78236c76c68a7d46db5f0522643675c90906edb1defc8c",
+        "bytes": 8500
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/pollution-complaints-regional-map",
+      "channel": "web",
+      "key": "pollution-complaints-regional-map",
+      "title": "汚染施設が全国最多の北海道で公害苦情が最少──施設数と苦情件数が一致しない構造",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/pollution-complaints-regional-map",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "b51e3dfb1cd91fff3ed097b1826704d6af90397b6d933197d7ebff79093358b0",
+      "catalogBasis": "32346e9cf1067beaee5fb49d6bf326454c73e7b9764f176160a16610bd5b1d2b",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/article.md",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/article.md",
+        "sha256": "1219de96b11fb12d65e2a885277cca4edf1c0483b969c4bde81e6fce556dcc40",
+        "bytes": 9847
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/2c28453f8d7bbc420992d8a0",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/white-bread-price-up-quantity-up.jpg",
+      "title": "white-bread-price-up-quantity-up.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f84f721a9fca7d08497a15d1bd838a57b4729c66b933b95d29327c3ecad4a9ab"
+    },
+    {
+      "id": "web/material/57025d45f6bae8b852a191d5",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/wage-vs-living-cost.jpg",
+      "title": "wage-vs-living-cost.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "89e5cd2cf920b26fc8c171c95fa8c982c03a95e6f643361ef001fd22e49a76a2"
+    },
+    {
+      "id": "web/material/7a20e4d7caffca0f005b8f8f",
+      "channel": "web",
+      "key": "apps/web/public/images/features/ranking.webp",
+      "title": "ranking.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6d063a71180cf576f804e3943cbab085250e2c533439610576cab81a99de7c3c"
+    },
+    {
+      "id": "web/material/811670e5759970178059e772",
+      "channel": "web",
+      "key": "assets/area-specialty/02000/hatsuyuki-take.webp",
+      "title": "hatsuyuki-take.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2ab1eb33e8c219483621dadfa48d08e1267a178b7e7a462804c287355ea78b5c"
+    },
+    {
+      "id": "web/material/8ec4b6c43446f0a22cca9a42",
+      "channel": "web",
+      "key": "apps/web/public/categories/svg/safetyenvironment.svg",
+      "title": "safetyenvironment.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ce6d9341da38a601f94fd69117372efcb18b686215bd60cbe0b2482a633315e3"
+    },
+    {
+      "id": "web/material/9b93c110ad68005c2cce98b3",
+      "channel": "web",
+      "key": "assets/area-specialty/06000/okahijiki.webp",
+      "title": "okahijiki.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b1952c656e51c40caf95c94965cec8e3ec453bcca8c02df01184c236b77e67bf"
+    },
+    {
+      "id": "web/material/bd62cae8031325edcb18d4d9",
+      "channel": "web",
+      "key": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.svg",
+      "title": "bonito-ranking.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2a97fbee79b9205b24901c5b299becc110d9bd5e1be9abd11d3d84c839e643af"
+    },
+    {
+      "id": "web/ranking/average-life-expectancy-female-20",
+      "channel": "web",
+      "key": "average-life-expectancy-female-20",
+      "title": "平均余命",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/average-life-expectancy-female-20",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "99bef7f9a5e7f6d4145cf931ed944493aeb6386babe91bcdd921417b924ab33d",
+      "catalogBasis": "99bef7f9a5e7f6d4145cf931ed944493aeb6386babe91bcdd921417b924ab33d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/baseball-field-public",
+      "channel": "web",
+      "key": "baseball-field-public",
+      "title": "野球場・ソフトボール場数（公共）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/baseball-field-public",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e8cc7819a893e5c1f58da39b11d89d8a4b6f610e52ff4bcfdbeb4b233a72b0ce",
+      "catalogBasis": "e8cc7819a893e5c1f58da39b11d89d8a4b6f610e52ff4bcfdbeb4b233a72b0ce",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/inpatients-per-nurse-per-day",
+      "channel": "web",
+      "key": "inpatients-per-nurse-per-day",
+      "title": "一般病院在院患者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/inpatients-per-nurse-per-day",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c06becca247a4a0d009a6caea161b1dd626027946942c4a915668afdb66652e4",
+      "catalogBasis": "c06becca247a4a0d009a6caea161b1dd626027946942c4a915668afdb66652e4",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-high-club-per100-table-tennis",
+      "channel": "web",
+      "key": "junior-high-club-per100-table-tennis",
+      "title": "中学部活動 100人あたり部員数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-high-club-per100-table-tennis",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "36c19838445950237edda6f67ba5f8cd781fcdf270efb16eb0fe73112672302f",
+      "catalogBasis": "36c19838445950237edda6f67ba5f8cd781fcdf270efb16eb0fe73112672302f",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/area/09000",
+      "file": "app/areas/09000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/areas/09000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png",
+        "sha256": "fef47078e5be9d75beb2ea34c1cd7299225d092602044b7f4e479811a162fd1e",
+        "bytes": 127467
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/areas/09000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/areas/09000/ogp/generation.json",
+          "sha256": "3c734bf195f76df65defc79d479e7c56bfa4422d93b55341aa1c343b8b55b0e7",
+          "bytes": 779,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "areas-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "area-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "f4b4c6871e60ca41d0d697d38fba64323de2b087d004f07f2367489f3e888da9",
+        "fingerprint": "4abdae3296a141f582e3285e60eb8cb6359b0e5233793bcc4d121986d2f4ff0d",
+        "generatedAt": "2026-10-10T22:06:13.380Z"
+      }
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.svg",
+        "sha256": "f37a85fd77df09563ae236b896f4048d5266c7d517c9608c35007f19da0a54b4",
+        "bytes": 10568
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "sha256": "0965a33328648e0e1870ff98d1a350a385ae6217d92283e76a3089926c25b90e",
+          "bytes": 10842,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.json",
+          "sha256": "2ea0ae40b2fa2bc9a5784598df1786bdfdb14c9dc7e7e2cb7d6f814b9e06e19a",
+          "bytes": 3742,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.source.json",
+          "sha256": "52c08fa5df057342ab25ac4e424fca58e248facf676a19a786b9c24ba34ca78d",
+          "bytes": 686,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter.svg",
+          "alt": "平均身長と魚介の漬物消費支出額の関係",
+          "heading": "2つの指標の関係を散布図で確認する",
+          "line": 39
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/avg-height-high-school-2nd-male.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/avg-height-high-school-2nd-male.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.svg",
+        "sha256": "ef22cf749a899d022056cb71eb1cbf82ddb251331f75973aca08f7a9753d90ad",
+        "bytes": 6889
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "sha256": "0965a33328648e0e1870ff98d1a350a385ae6217d92283e76a3089926c25b90e",
+          "bytes": 10842,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.json",
+          "sha256": "f75f714c913c6ea4d786130d0cd9af648037fa5f4ea60336df0b0aa417683a96",
+          "bytes": 6701,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.source.json",
+          "sha256": "e0ebcd1e2bf60a0e0ad49d23664ee1e85fae08a83bce74701dac8c08049649d4",
+          "bytes": 715,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings.svg",
+          "alt": "平均身長の上位と下位",
+          "heading": "平均身長は北陸・東北で高く、九州・沖縄で低い",
+          "line": 17
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/avg-height-high-school-2nd-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/avg-height-high-school-2nd-male/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.svg",
+        "sha256": "491693cb3ee5cb38d0d90eee753d596163dfdeb62a3e7119b0646129d56d052b",
+        "bytes": 6891
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/article.md",
+          "sha256": "0965a33328648e0e1870ff98d1a350a385ae6217d92283e76a3089926c25b90e",
+          "bytes": 10842,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "fish-pickled-consumption-expenditure-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.json",
+          "sha256": "0f1026b50739effb40cc480f88f9b31b271f746b59aedb8ece18a7f6cf905da6",
+          "bytes": 6697,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "fish-pickled-consumption-expenditure-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.source.json",
+          "sha256": "ec21c4724e4be1cc567ef9fdfb0ac45cf9b44cddde0ea37592d5a2b4596ed44d",
+          "bytes": 726,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/data/fish-pickled-consumption-expenditure-prefecture-rankings.svg",
+          "alt": "魚介の漬物消費支出額の上位と下位",
+          "heading": "魚介の漬物消費支出額も北陸・東北に集中する",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fish-pickled-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-pickled-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/background.jpg",
+        "sha256": "1db7d2a5025b5496727429cc7195dadcb46799f21a5a2ae82c0213c7f0d9843e",
+        "bytes": 44776
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "sha256": "70e38ea82389bbd953a68bda61bc1e0af7fc8ea837e46db1d19113837c163a98",
+          "bytes": 2272,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8ccf8609bdb7bdb251ded098ebd89c9491b37df69f35cd50659968d0df892477",
+        "fingerprint": "2cbb75f454fa982ff02c55a776610589c01bbaf4dd07dd4c8f6f3bf1d29d960d",
+        "generatedAt": "2026-08-22T05:17:18.179Z"
+      }
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/ogp.png",
+        "sha256": "83314f81b76c1bed51a3e6dd88391df863588238c9b6489685eb54cd3b5db032",
+        "bytes": 365104
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "sha256": "70e38ea82389bbd953a68bda61bc1e0af7fc8ea837e46db1d19113837c163a98",
+          "bytes": 2272,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8ccf8609bdb7bdb251ded098ebd89c9491b37df69f35cd50659968d0df892477",
+        "fingerprint": "2cbb75f454fa982ff02c55a776610589c01bbaf4dd07dd4c8f6f3bf1d29d960d",
+        "generatedAt": "2026-08-22T05:17:18.179Z"
+      }
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-dark.webp",
+        "sha256": "39ad4c73768fe2efccf8bf7b9da8e231609b81ad7becb0e502a3529ada826aa4",
+        "bytes": 7330
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "sha256": "70e38ea82389bbd953a68bda61bc1e0af7fc8ea837e46db1d19113837c163a98",
+          "bytes": 2272,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8ccf8609bdb7bdb251ded098ebd89c9491b37df69f35cd50659968d0df892477",
+        "fingerprint": "2cbb75f454fa982ff02c55a776610589c01bbaf4dd07dd4c8f6f3bf1d29d960d",
+        "generatedAt": "2026-08-22T05:17:18.179Z"
+      }
+    },
+    {
+      "owner": "web/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "file": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/thumbnail-light.webp",
+        "sha256": "2fd13a3877026145fc41abee4a661d1700898c5d2672a3fa95a1eacbe4e16649",
+        "bytes": 13462
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/avg-height-high-school-2nd-male-vs-fish-pickled-consumption/ogp/generation.json",
+          "sha256": "70e38ea82389bbd953a68bda61bc1e0af7fc8ea837e46db1d19113837c163a98",
+          "bytes": 2272,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "8ccf8609bdb7bdb251ded098ebd89c9491b37df69f35cd50659968d0df892477",
+        "fingerprint": "2cbb75f454fa982ff02c55a776610589c01bbaf4dd07dd4c8f6f3bf1d29d960d",
+        "generatedAt": "2026-08-22T05:17:18.179Z"
+      }
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/data/mobile-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/data/mobile-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-map.svg",
+        "sha256": "7c7d6ab0211318fa3b21c42bc92e85cdce232527e69d56ab267bca7b9ad3e3cd",
+        "bytes": 32036
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/article.md",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/article.md",
+          "sha256": "12eb25fa978c804a841e2e40fb38af55857fd2404e1b56c5122a10cb3ab279db",
+          "bytes": 6395,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "mobile-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-map.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-map.json",
+          "sha256": "2a6f3b38b6f6fe1f6e3a3f644fb9b9359b1eb8517cac478970b3eddfa9e6e9f6",
+          "bytes": 5437,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "mobile-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-map.source.json",
+          "sha256": "6b49f36091b8afe5a4352c547273f1e4dfe94babdccf22735b005301587ccbde",
+          "bytes": 374,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-map.svg",
+          "alt": "携帯電話契約数の地域分布",
+          "heading": "地域分布マップ──都市圏集中のパターン",
+          "line": 39
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mobile-phone-contract-count-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mobile-phone-contract-count-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/data/mobile-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/data/mobile-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-ranking.svg",
+        "sha256": "31b34e6c5d5c55154782927df4f11c8d0ad880a0640b7f8fb8fa418765909eea",
+        "bytes": 6903
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/article.md",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/article.md",
+          "sha256": "12eb25fa978c804a841e2e40fb38af55857fd2404e1b56c5122a10cb3ab279db",
+          "bytes": 6395,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "mobile-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-ranking.json",
+          "sha256": "a6757fe2623d3d35fc66a51f4439e221bc10aa6e97dee00ab2e2fbc78db5a66c",
+          "bytes": 6794,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "mobile-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-ranking.source.json",
+          "sha256": "65b761307bf4a4c1639ba709d172880addee80a336d2b77960a21e39a5c6f795",
+          "bytes": 651,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-ranking.svg",
+          "alt": "携帯電話契約数 都道府県ランキング",
+          "heading": "全国ランキング──東京が圧倒的1位",
+          "line": 25
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/mobile-phone-contract-count-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/mobile-phone-contract-count-per-1000/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/data/mobile-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/data/mobile-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-summary-findings.svg",
+        "sha256": "1893539a51a6d2784e0f4de66f5cad62d28f942acc028601955e9cd15a7762eb",
+        "bytes": 3905
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/article.md",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/article.md",
+          "sha256": "12eb25fa978c804a841e2e40fb38af55857fd2404e1b56c5122a10cb3ab279db",
+          "bytes": 6395,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "mobile-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-summary-findings.json",
+          "sha256": "d82eb71ebdf7f44417de43047c7d4354d4d03e550f77e5cece07cc1aa7b33922",
+          "bytes": 1123,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "mobile-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/data/mobile-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-summary-findings.source.json",
+          "sha256": "e0c1bd0a8833472f9d76c5941f6bab7585b7bdd5f3a1d37a27712d87157189d3",
+          "bytes": 626,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/data/mobile-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 77
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 504",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/background.jpg",
+        "sha256": "3c331c95267d97daf5f3d414859f9412b2bac20f77a5005aab145f22b22d7623",
+        "bytes": 66626
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "sha256": "27e76652b3013e0f191499b4ebd612dff89db3b98d4617cdeb5b827f67c81f91",
+          "bytes": 2227,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "04c530afbe2116a7c08534fa1bbc23fbc577d827487ee262f4ed9bd193a530f6",
+        "fingerprint": "cd13e81cce0f304d3dd972835fd0c4e7120a53eabc0369c142ead9f1a4becc7e",
+        "generatedAt": "2026-08-22T05:17:31.736Z"
+      }
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/ogp.png",
+        "sha256": "f81d0a5f6e34dec02b49174c6254026c1c8fa5e8692efd9d283e8439afa3c558",
+        "bytes": 384854
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "sha256": "27e76652b3013e0f191499b4ebd612dff89db3b98d4617cdeb5b827f67c81f91",
+          "bytes": 2227,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "04c530afbe2116a7c08534fa1bbc23fbc577d827487ee262f4ed9bd193a530f6",
+        "fingerprint": "cd13e81cce0f304d3dd972835fd0c4e7120a53eabc0369c142ead9f1a4becc7e",
+        "generatedAt": "2026-08-22T05:17:31.736Z"
+      }
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/thumbnail-dark.webp",
+        "sha256": "f339082f8f679c58a9144c49b21d6568be6fcc83e22fa38b262c3d48a73a5f99",
+        "bytes": 11098
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "sha256": "27e76652b3013e0f191499b4ebd612dff89db3b98d4617cdeb5b827f67c81f91",
+          "bytes": 2227,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "04c530afbe2116a7c08534fa1bbc23fbc577d827487ee262f4ed9bd193a530f6",
+        "fingerprint": "cd13e81cce0f304d3dd972835fd0c4e7120a53eabc0369c142ead9f1a4becc7e",
+        "generatedAt": "2026-08-22T05:17:31.736Z"
+      }
+    },
+    {
+      "owner": "web/blog/mobile-contracts-over-population",
+      "file": "app/blog/mobile-contracts-over-population/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/mobile-contracts-over-population/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/thumbnail-light.webp",
+        "sha256": "0e1078cc409d97bb6ef8070b5e2543c8063d6394b1748175c5cde940efa4e25c",
+        "bytes": 19558
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/mobile-contracts-over-population/ogp/generation.json",
+          "sha256": "27e76652b3013e0f191499b4ebd612dff89db3b98d4617cdeb5b827f67c81f91",
+          "bytes": 2227,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "04c530afbe2116a7c08534fa1bbc23fbc577d827487ee262f4ed9bd193a530f6",
+        "fingerprint": "cd13e81cce0f304d3dd972835fd0c4e7120a53eabc0369c142ead9f1a4becc7e",
+        "generatedAt": "2026-08-22T05:17:31.736Z"
+      }
+    },
+    {
+      "owner": "web/blog/occupation-income-gap-pilot-vs-careworker",
+      "file": "app/blog/occupation-income-gap-pilot-vs-careworker/data/occupation-salary-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/occupation-income-gap-pilot-vs-careworker/data/occupation-salary-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/data/occupation-salary-ranking.svg"
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/occupation-income-gap-pilot-vs-careworker/article.md",
+          "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/article.md",
+          "sha256": "686e463b5cfa6aee6b78236c76c68a7d46db5f0522643675c90906edb1defc8c",
+          "bytes": 8500,
+          "role": "article",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "unverified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/data/occupation-salary-ranking.svg",
+          "alt": "39職種の全国平均年収",
+          "heading": "39職種の全国平均年収──上位と下位",
+          "line": 26
+        }
+      ],
+      "format": "svg",
+      "missingReason": "本文参照はありますが、画像を取得できません。"
+    },
+    {
+      "owner": "web/blog/occupation-income-gap-pilot-vs-careworker",
+      "file": "app/blog/occupation-income-gap-pilot-vs-careworker/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/occupation-income-gap-pilot-vs-careworker/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "blog-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/blog/occupation-income-gap-pilot-vs-careworker",
+      "file": "app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "blog-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/blog/occupation-income-gap-pilot-vs-careworker",
+      "file": "app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/occupation-income-gap-pilot-vs-careworker/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "blog-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/data/complaints-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/data/complaints-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-map.svg",
+        "sha256": "0a3928c01769fd542ca6ce322cf768f9b2aa672b6dfd65b2aee78a303aba0ee8",
+        "bytes": 31504
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/article.md",
+          "sha256": "1219de96b11fb12d65e2a885277cca4edf1c0483b969c4bde81e6fce556dcc40",
+          "bytes": 9847,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "complaints-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/complaints-map.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-map.json",
+          "sha256": "5514758bcf016db3fbd5da996b2aaf6396d3efd0900234641bbc85f822827733",
+          "bytes": 5346,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "complaints-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/complaints-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-map.source.json",
+          "sha256": "96904023b096c47100d1c682b701b30bdf95baafe8fb7b39f8714c45c9b2bdc8",
+          "bytes": 375,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-map.svg",
+          "alt": "公害苦情受付件数 都道府県マップ",
+          "heading": "都道府県マップ──苦情の「地域パターン」",
+          "line": 38
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pollution-complaints-received-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pollution-complaints-received-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/data/complaints-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/data/complaints-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-ranking.svg",
+        "sha256": "5c754c204647771472aaf051d42d99a14baf7ca5e47b2ddbf6d511665df24c10",
+        "bytes": 6857
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/article.md",
+          "sha256": "1219de96b11fb12d65e2a885277cca4edf1c0483b969c4bde81e6fce556dcc40",
+          "bytes": 9847,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "complaints-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/complaints-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-ranking.json",
+          "sha256": "44805d2a78a910a1f400b6c0a0a7312df16c7c7ad3dc19fae0977eacd406f663",
+          "bytes": 6706,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "complaints-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/complaints-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-ranking.source.json",
+          "sha256": "cb49b83d2cacac59e3851a648df6dea990203cf972f1d84a57ce630c251ee1aa",
+          "bytes": 662,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/complaints-ranking.svg",
+          "alt": "公害苦情受付件数 上位5・下位5",
+          "heading": "公害苦情件数ランキング（人口10万人当たり）",
+          "line": 28
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pollution-complaints-received-per-100k/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pollution-complaints-received-per-100k/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/data/facility-comparison.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/data/facility-comparison.svg",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-comparison.svg",
+        "sha256": "3eae0ebaf0e4fc4734c49a7d2cdd77102e24292254dc2d373d7c96134e710cba",
+        "bytes": 8840
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/article.md",
+          "sha256": "1219de96b11fb12d65e2a885277cca4edf1c0483b969c4bde81e6fce556dcc40",
+          "bytes": 9847,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "facility-comparison.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/facility-comparison.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-comparison.json",
+          "sha256": "d2850622484ebccd2aef0c406d3a86f760afa9fe2d3af276a60332c6588389e8",
+          "bytes": 2244,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "facility-comparison.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/facility-comparison.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-comparison.source.json",
+          "sha256": "b00bcbe4b18e7d8df97c48501f8d3abe2697b20e7188c79ad4a0137d3afa57d1",
+          "bytes": 915,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-comparison.svg",
+          "alt": "汚染施設数 上位15都道府県",
+          "heading": "汚染施設の集積──ばい煙・粉じん・水質汚濁の比較",
+          "line": 57
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 650",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.svg",
+        "sha256": "56dc0f426d527a3e0ff0800832c470e35e2d9d0a23cf6e50f457662181695652",
+        "bytes": 10748
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/article.md",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/article.md",
+          "sha256": "1219de96b11fb12d65e2a885277cca4edf1c0483b969c4bde81e6fce556dcc40",
+          "bytes": 9847,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "facility-vs-complaints-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.json",
+          "sha256": "7a1a2b6b45117884a95ba8e13836461680774173a69f7ee2b8467f2dd2b59d0b",
+          "bytes": 3841,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "facility-vs-complaints-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.source.json",
+          "sha256": "06230e950f0f9d1bf15e4564fd212d9d80002fb4aa49430f43b0d9016783c2dd",
+          "bytes": 932,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/data/facility-vs-complaints-scatter.svg",
+          "alt": "大気汚染施設数と公害苦情件数の散布図",
+          "heading": "大気汚染施設数 × 苦情件数──散布図で見る「距離の法則」",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/background.jpg",
+        "sha256": "00c943ff1fd73e5f972fc296e1305c8aab3ce124c472ea6c748aa833e3da5ffd",
+        "bytes": 87734
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "sha256": "79662f5c254a6661efdeabea31eaaffc515804d3431cc8656e97a2576310e4e7",
+          "bytes": 2309,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "78d1d9e3092c930d1ce672eaedae4846ca63f50a580c16bfb8a2053c1bd04160",
+        "fingerprint": "22284fca3bf40ae5b74354fe4b30897b3c552bfb781913a7560dfc535f012f1c",
+        "generatedAt": "2026-08-22T05:17:34.306Z"
+      }
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/ogp.png",
+        "sha256": "abca3f2f1df11f437029b85277695f753966771a03f1a40aa0e026351e9e306d",
+        "bytes": 494701
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "sha256": "79662f5c254a6661efdeabea31eaaffc515804d3431cc8656e97a2576310e4e7",
+          "bytes": 2309,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "78d1d9e3092c930d1ce672eaedae4846ca63f50a580c16bfb8a2053c1bd04160",
+        "fingerprint": "22284fca3bf40ae5b74354fe4b30897b3c552bfb781913a7560dfc535f012f1c",
+        "generatedAt": "2026-08-22T05:17:34.306Z"
+      }
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/thumbnail-dark.webp",
+        "sha256": "b9342acc46209faccfe66cae47cb27b379d7ab2950577436321acffd55132203",
+        "bytes": 11646
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "sha256": "79662f5c254a6661efdeabea31eaaffc515804d3431cc8656e97a2576310e4e7",
+          "bytes": 2309,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "78d1d9e3092c930d1ce672eaedae4846ca63f50a580c16bfb8a2053c1bd04160",
+        "fingerprint": "22284fca3bf40ae5b74354fe4b30897b3c552bfb781913a7560dfc535f012f1c",
+        "generatedAt": "2026-08-22T05:17:34.306Z"
+      }
+    },
+    {
+      "owner": "web/blog/pollution-complaints-regional-map",
+      "file": "app/blog/pollution-complaints-regional-map/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/pollution-complaints-regional-map/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/thumbnail-light.webp",
+        "sha256": "925180834d26529bb302bfa8da396efbaefbcd1392ea292993ebb3061e029678",
+        "bytes": 20084
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/pollution-complaints-regional-map/ogp/generation.json",
+          "sha256": "79662f5c254a6661efdeabea31eaaffc515804d3431cc8656e97a2576310e4e7",
+          "bytes": 2309,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "78d1d9e3092c930d1ce672eaedae4846ca63f50a580c16bfb8a2053c1bd04160",
+        "fingerprint": "22284fca3bf40ae5b74354fe4b30897b3c552bfb781913a7560dfc535f012f1c",
+        "generatedAt": "2026-08-22T05:17:34.306Z"
+      }
+    },
+    {
+      "owner": "web/material/2c28453f8d7bbc420992d8a0",
+      "file": "assets/blog/article-backgrounds/white-bread-price-up-quantity-up.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/white-bread-price-up-quantity-up.jpg",
+        "sha256": "f51dbfc623998b3dd9eb92d3bc1c55abb5eb9b76783c32569bdf80cd205a8292",
+        "bytes": 80400
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/white-bread-price-up-quantity-up.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/57025d45f6bae8b852a191d5",
+      "file": "assets/blog/article-backgrounds/wage-vs-living-cost.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/wage-vs-living-cost.jpg",
+        "sha256": "dae21807d198b3c1c6a81db2f02b5a581ce90e1d330c8b83a4c1b8c4a7673146",
+        "bytes": 87352
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/wage-vs-living-cost.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/7a20e4d7caffca0f005b8f8f",
+      "file": "apps/web/public/images/features/ranking.webp",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/features/ranking.webp",
+        "url": "https://stats47.jp/images/features/ranking.webp",
+        "sha256": "605023a0f93426aa53041eb8b0a3493f3ad297ad6196cda80ebbde9ad1a2c733",
+        "bytes": 13222
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/features/ranking.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/811670e5759970178059e772",
+      "file": "assets/area-specialty/02000/hatsuyuki-take.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/02000/hatsuyuki-take.webp",
+        "sha256": "7f53921b0dd43fb3d66826ba2c97983b537aab6889a3c5dc11b7ca04609ee7fb",
+        "bytes": 21736
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/02000/hatsuyuki-take.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8ec4b6c43446f0a22cca9a42",
+      "file": "apps/web/public/categories/svg/safetyenvironment.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/categories/svg/safetyenvironment.svg",
+        "url": "https://stats47.jp/categories/svg/safetyenvironment.svg",
+        "sha256": "2214bbe04326d0935521f91f392336424a4250e21c5f49fbe1a6725abf363b42",
+        "bytes": 449
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/categories/svg/safetyenvironment.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/9b93c110ad68005c2cce98b3",
+      "file": "assets/area-specialty/06000/okahijiki.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/06000/okahijiki.webp",
+        "sha256": "65536566bfba8da7ffdc3e6af95534adf8f0d1d9d49c96b5bcd8fcbd6aca2e44",
+        "bytes": 53638
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/06000/okahijiki.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/bd62cae8031325edcb18d4d9",
+      "file": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.svg",
+        "sha256": "6e961d480d1554cc8afd4437d1883aea7363b800d03037b4740af62ebff1a35c",
+        "bytes": 6837
+      },
+      "inputFiles": [
+        {
+          "name": "bonito-ranking.json",
+          "provider": "git",
+          "path": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.json",
+          "sha256": "d95414c17f8d61ec96a2f9d507c0a8be7004de0915d96f434271484a20526105",
+          "bytes": 4981,
+          "role": "data",
+          "state": "observed-current"
+        },
+        {
+          "name": "bonito-ranking.source.json",
+          "provider": "git",
+          "path": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.source.json",
+          "sha256": "4cda2f726662a143a175201b954c3dfe2c6e2a61cdd4e93a6996e878abb62e63",
+          "bytes": 2083,
+          "role": "provenance",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/bonito-catch-prefecture/data/bonito-ranking.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-20",
+      "file": "app/ranking/average-life-expectancy-female-20/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-20/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/ogp/ogp.png",
+        "sha256": "fc468d2cf55d917ed0eb884d8cc5e19cb45f88031acd292c0b87613afa57f2a7",
+        "bytes": 58325
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-20/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/ogp/generation.json",
+          "sha256": "49361191c2e8f960b9e06c48b252e18f75a71cc25e902ba4ee8dff196370d3e0",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "90c2cab425fb25166ff5cc11041c739a7cd2571ac4d388062a0cd32c19537478",
+        "fingerprint": "0c6a3d2ccece421e2b74615304db2e606d756576652a0da4ebac0b5bb4744852",
+        "generatedAt": "2026-10-10T21:32:10.433Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-20",
+      "file": "app/ranking/average-life-expectancy-female-20/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-20/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/thumbnail-dark.webp",
+        "sha256": "9f57c1de680f779eacde2f949c9cece2a10147b1f793e10e091bc621ae2b82e3",
+        "bytes": 14246
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-20/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/thumbnail.json",
+          "sha256": "81c6b5e2fb00842fd5995e23b4c85934a4c1c922a62b4dae2a525586ea666de7",
+          "bytes": 1850,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "aaef75d4cf60444b046e7e2aa9361e8f44531f0fa6d025b8b9dbfd99d2cbca18",
+        "fingerprint": "b79b0f48518d55d3e9bf5ac1b6bca49f8801f5a9f8c2035a0d8b8c1a1b420022",
+        "generatedAt": "2026-10-10T21:49:59.880Z"
+      }
+    },
+    {
+      "owner": "web/ranking/average-life-expectancy-female-20",
+      "file": "app/ranking/average-life-expectancy-female-20/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/average-life-expectancy-female-20/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/thumbnail-light.webp",
+        "sha256": "2ba42ca940a5d58fabc2a8189290887f8e392dd411b07f44500a990b1251c903",
+        "bytes": 12584
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/average-life-expectancy-female-20/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/thumbnail.json",
+          "sha256": "81c6b5e2fb00842fd5995e23b4c85934a4c1c922a62b4dae2a525586ea666de7",
+          "bytes": 1850,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/average-life-expectancy-female-20/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-life-expectancy-female-20/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "aaef75d4cf60444b046e7e2aa9361e8f44531f0fa6d025b8b9dbfd99d2cbca18",
+        "fingerprint": "b79b0f48518d55d3e9bf5ac1b6bca49f8801f5a9f8c2035a0d8b8c1a1b420022",
+        "generatedAt": "2026-10-10T21:49:59.880Z"
+      }
+    },
+    {
+      "owner": "web/ranking/baseball-field-public",
+      "file": "app/ranking/baseball-field-public/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/baseball-field-public/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/ogp/ogp.png",
+        "sha256": "290ece642048e752a0192a8a821c812a5ff470d1e41ebf8cc3322c7ab827fec2",
+        "bytes": 65869
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/baseball-field-public/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/ogp/generation.json",
+          "sha256": "7b6406899354f2574f8877e144c8d81f6df8f085f99568573a1b5ec76c7a28d6",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/baseball-field-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/baseball-field-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "ab76b031198590e9f2a68e999014251e6857c911344ff22a14b0131ad2943caf",
+        "fingerprint": "80b88829f98a22d0bb2f88b2d678bb05b9495b2522c6e6ced970b7cb3d5e1440",
+        "generatedAt": "2026-10-10T21:32:16.344Z"
+      }
+    },
+    {
+      "owner": "web/ranking/baseball-field-public",
+      "file": "app/ranking/baseball-field-public/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/baseball-field-public/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/thumbnail-dark.webp",
+        "sha256": "fccf86412e75dbec4a6011be5f7b274dd927e25319cc0c87708f787593749499",
+        "bytes": 18312
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/baseball-field-public/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/thumbnail.json",
+          "sha256": "7944e722f3f6c50e5a7af8923ffd078099fa7dbddc1bfa2cfb992b4f16976a68",
+          "bytes": 1742,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/baseball-field-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/baseball-field-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "669d4dc011c91698e67a5cc7f7e8fd2cce58421fa45fa8240e09d0021d39e211",
+        "fingerprint": "5f4bc2090ac90af0f0326170f9e8993a4af96ba582071a6e3c18fe4a1d1f1977",
+        "generatedAt": "2026-10-10T21:50:01.441Z"
+      }
+    },
+    {
+      "owner": "web/ranking/baseball-field-public",
+      "file": "app/ranking/baseball-field-public/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/baseball-field-public/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/thumbnail-light.webp",
+        "sha256": "95ce0c80f2d89aacc528a6e0208034a89bf802e7067a2499420238aaff6c34af",
+        "bytes": 16908
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/baseball-field-public/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/thumbnail.json",
+          "sha256": "7944e722f3f6c50e5a7af8923ffd078099fa7dbddc1bfa2cfb992b4f16976a68",
+          "bytes": 1742,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/baseball-field-public/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/baseball-field-public/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/baseball-field-public/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "669d4dc011c91698e67a5cc7f7e8fd2cce58421fa45fa8240e09d0021d39e211",
+        "fingerprint": "5f4bc2090ac90af0f0326170f9e8993a4af96ba582071a6e3c18fe4a1d1f1977",
+        "generatedAt": "2026-10-10T21:50:01.441Z"
+      }
+    },
+    {
+      "owner": "web/ranking/inpatients-per-nurse-per-day",
+      "file": "app/ranking/inpatients-per-nurse-per-day/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inpatients-per-nurse-per-day/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/ogp/ogp.png",
+        "sha256": "d10e2d5451c03c0e38083641ff365f7798ad099380fc3298d9d92216dbbc19d5",
+        "bytes": 58539
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/inpatients-per-nurse-per-day/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/ogp/generation.json",
+          "sha256": "d95bdf4649680781066b60e92a0fadc4e7ddacf43dc59236c463b5ba9b74e1a9",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "902bfd6d5882ab28558aa294e3db6cac563a21b9d5c030abf9e59f9343f5aa6d",
+        "fingerprint": "dee55c65f20665f30cbe078cb089d4b52c642ca7436e930b74a3063342fd7b3c",
+        "generatedAt": "2026-10-01T18:11:45.259Z"
+      }
+    },
+    {
+      "owner": "web/ranking/inpatients-per-nurse-per-day",
+      "file": "app/ranking/inpatients-per-nurse-per-day/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inpatients-per-nurse-per-day/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/thumbnail-dark.webp",
+        "sha256": "fede2d06883c83eca5e0fcc2d098b99e65dd09ce9c4e6918d051b5d09ce98614",
+        "bytes": 16730
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/inpatients-per-nurse-per-day/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/thumbnail.json",
+          "sha256": "3463482af1ac4eed0f6c24fb3af81859022ac06f441e7ce50eaebd64e6b48dfb",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "db12d5fd2cdc88d10661ac36c8a633107cb1bba11b387c3fd9533a21455ccfff",
+        "fingerprint": "c9e82e79baeb3f5ec0356b949b9d114d974e984ecfb740a3d0c97a7ac364ea89",
+        "generatedAt": "2026-10-01T18:36:04.610Z"
+      }
+    },
+    {
+      "owner": "web/ranking/inpatients-per-nurse-per-day",
+      "file": "app/ranking/inpatients-per-nurse-per-day/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/inpatients-per-nurse-per-day/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/thumbnail-light.webp",
+        "sha256": "027f37c7a2bd812521f7e118d9841911f4b1ed44ab9dd04f3edf788828dff840",
+        "bytes": 15454
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/inpatients-per-nurse-per-day/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/thumbnail.json",
+          "sha256": "3463482af1ac4eed0f6c24fb3af81859022ac06f441e7ce50eaebd64e6b48dfb",
+          "bytes": 1826,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/inpatients-per-nurse-per-day/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/inpatients-per-nurse-per-day/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "db12d5fd2cdc88d10661ac36c8a633107cb1bba11b387c3fd9533a21455ccfff",
+        "fingerprint": "c9e82e79baeb3f5ec0356b949b9d114d974e984ecfb740a3d0c97a7ac364ea89",
+        "generatedAt": "2026-10-01T18:36:04.610Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-table-tennis",
+      "file": "app/ranking/junior-high-club-per100-table-tennis/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-table-tennis/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-table-tennis",
+      "file": "app/ranking/junior-high-club-per100-table-tennis/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-table-tennis/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/thumbnail-dark.webp",
+        "sha256": "8917730e353ebf6c267b28976040beda4b5547947c3cb9c941c3aea7b645f78b",
+        "bytes": 18074
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-club-per100-table-tennis/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/thumbnail.json",
+          "sha256": "01cc889b50967ff06f03e1c1215acdaf76e6915316e75b1c4001dae5e9bfd67b",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-club-per100-table-tennis/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-club-per100-table-tennis/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6b6b8aca0a8071b1b5a29efa8f5a3ce63ecd897eb6002ae1009d09d955d0fe1f",
+        "fingerprint": "46f4342b1f9ef1a0db982a0e498c9619964f25024fad8bfc35795c65469f80cb",
+        "generatedAt": "2026-10-03T21:25:18.635Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-club-per100-table-tennis",
+      "file": "app/ranking/junior-high-club-per100-table-tennis/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-club-per100-table-tennis/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/thumbnail-light.webp",
+        "sha256": "81d3abe684c043e7a73debfc322a835bb439003016e15993558c1406f161d573",
+        "bytes": 16408
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-club-per100-table-tennis/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/thumbnail.json",
+          "sha256": "01cc889b50967ff06f03e1c1215acdaf76e6915316e75b1c4001dae5e9bfd67b",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-club-per100-table-tennis/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-club-per100-table-tennis/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-club-per100-table-tennis/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "6b6b8aca0a8071b1b5a29efa8f5a3ce63ecd897eb6002ae1009d09d955d0fe1f",
+        "fingerprint": "46f4342b1f9ef1a0db982a0e498c9619964f25024fad8bfc35795c65469f80cb",
+        "generatedAt": "2026-10-03T21:25:18.635Z"
+      }
+    }
+  ]
+}

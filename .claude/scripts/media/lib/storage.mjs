@@ -1,7 +1,29 @@
-import { createR2Store } from '../../note/lib/cover-storage.mjs';
+import { createR2Store,fetchPublicMediaSource } from '../../note/lib/cover-storage.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { publicUrlAllowed,MATERIAL_ROOTS } from './web-inventory.mjs';
 import { R2_BUCKET, R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 import { sha, WorkspaceError, safeName, storeVerified } from './workspace.mjs';
 export const mediaStore = () => createR2Store({bucket:R2_PRIVATE_BUCKET,writeOnce:true});
+export async function readMediaObject(root,reference) {
+  let bytes;
+  if(reference?.provider==='inline-svg'){
+    if(reference.source?.provider==='inline-svg'||!Number.isSafeInteger(reference.start)||!Number.isSafeInteger(reference.end)||reference.start<0||reference.end<=reference.start)throw new WorkspaceError('埋込SVGの参照が不正です。');
+    const source=(await readMediaObject(root,reference.source)).toString('utf8');
+    if(reference.end>source.length)throw new WorkspaceError('埋込SVGの範囲が変わりました。');
+    bytes=Buffer.from(source.slice(reference.start,reference.end));
+  }else if(reference?.provider==='git'){
+    if(!safeName(reference.path)||!MATERIAL_ROOTS.some(p=>reference.path.startsWith(p+'/')))throw new WorkspaceError('素材パスが不正です。');
+    const base=fs.realpathSync(root),file=fs.realpathSync(path.join(base,reference.path)),rel=path.relative(base,file);
+    if(rel.startsWith('..')||path.isAbsolute(rel)||!fs.statSync(file).isFile())throw new WorkspaceError('素材パスが不正です。');
+    bytes=fs.readFileSync(file);
+  }else if(reference?.url){
+    if(!publicUrlAllowed(reference.url))throw new WorkspaceError('画像・入力の取得先が不正です。');
+    bytes=await fetchPublicMediaSource(reference.url);
+  }else return readVerified(reference);
+  if(reference.sha256&&(sha(bytes)!==reference.sha256||bytes.length!==reference.bytes))throw new WorkspaceError('画像・入力が索引から変わりました。棚卸しを更新してください。',409);
+  return bytes;
+}
 export async function readVerified(reference) {
   if (!reference?.bucket || ![R2_BUCKET,R2_PRIVATE_BUCKET].includes(reference.bucket) || !safeName(reference.key))
     throw new WorkspaceError('保存先が不正です。',400);

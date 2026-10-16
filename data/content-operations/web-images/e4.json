@@ -1,0 +1,2438 @@
+{
+  "items": [
+    {
+      "id": "web/blog/carpenter-income-prefecture-gap",
+      "channel": "web",
+      "key": "carpenter-income-prefecture-gap",
+      "title": "大工の最高年収は広島682万円｜大都市を超える地方の県、なぜ稼げる? (2023)",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/carpenter-income-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "cf4e5c28ef2ec44fd2e201519c997d3e9057573dcd1b8b5acd7d0e106b89e642",
+      "catalogBasis": "33a7e53c91415829aeedd128779605a783a73a07008d27375684f21cdfba4a41",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/article.md",
+        "sha256": "345be37aee35a517f47b2d237463c087284b4258a06ac7a03964df7eb416a53a",
+        "bytes": 10270
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/cc-estat-10-wage-box-plot",
+      "channel": "web",
+      "key": "cc-estat-10-wage-box-plot",
+      "title": "賃金の都道府県格差をボックスプロット｜外れ値ハイライトを Claude Code で",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/cc-estat-10-wage-box-plot",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "91ee2801f0aa949f54a87190da5d362fb8e0476d466105eda0a6ca7a44956611",
+      "catalogBasis": "19c4335b5befab83a6a595a54df939713c7866b51da8063152fa2e2bc24c4f32",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/article.md",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/article.md",
+        "sha256": "a1fdbc3ee789fadc314da916c6bfc87c8c6fc74f03ab82a5e9d99ec80a650afa",
+        "bytes": 27921
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/fishery-catch-aquaculture-shift",
+      "channel": "web",
+      "key": "fishery-catch-aquaculture-shift",
+      "title": "漁獲量85万トンの北海道 vs 愛媛｜なぜ「育てる漁業」が稼ぐのか",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/fishery-catch-aquaculture-shift",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "37798311a605ca7c3758ae2137aff3857966d7d3a64a4f40c3c459c3dcdb0f6d",
+      "catalogBasis": "c3abab8473944cf460f01709c911e5b67349194688ad59c2562619a74b391517",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/article.md",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/article.md",
+        "sha256": "5c635b69f5b5c1de1a8ea5abc98ac5b67a5ba5216a42f990fdbb3581ad432a71",
+        "bytes": 9410
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "channel": "web",
+      "key": "musical-instrument-expenditure-prefecture-gap",
+      "title": "楽器支出は埼玉14,840円 vs 和歌山23円で645倍｜なぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/musical-instrument-expenditure-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "d39163ae2589b55ecc127612fd205897258c2d93331964dc1a7e33e3e3d72e20",
+      "catalogBasis": "8858322c12930ef94fd98f78c40c81b1a096cc11a4cb4c10a03076bb44157abd",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/article.md",
+        "sha256": "7a87af4f0c60f1c98e9637d876f0b08d2f43a71bece0c6fc7a216c7d1a24996c",
+        "bytes": 10802
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/1eb9c73897aaffd4fb0efe04",
+      "channel": "web",
+      "key": "apps/web/public/flag/山梨県.png",
+      "title": "山梨県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c3660d26753ddf3ffcdf9bb3297fcfdf5b9ef2b3f40eddf312f98ffe172490cd"
+    },
+    {
+      "id": "web/material/4358c09dfd1a2f123d8799cb",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/golf-green-fee-consumption-ranking.jpg",
+      "title": "golf-green-fee-consumption-ranking.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a8ce029c3ff98fb0ede9a637bc7074658c709eb16905d7478170f5cb4ed4bc4d"
+    },
+    {
+      "id": "web/material/8a9372747384fc76629a80fa",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/sixth-industry-direct-sales.jpg",
+      "title": "sixth-industry-direct-sales.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8a372cf706e48a3d38da002cf52dddabf0fb61f066d5a227525e21c06fa91a23"
+    },
+    {
+      "id": "web/material/9a5f0384da00c05fd59cacb3",
+      "channel": "web",
+      "key": "assets/blog/codex-backgrounds/factory.jpg",
+      "title": "factory.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d9a00a1a3c0f09eabeab0f95034e9a0105c0c55bcf16e69f1a433f623771492f"
+    },
+    {
+      "id": "web/material/d0ac4b155d1cae7fecb3634c",
+      "channel": "web",
+      "key": "assets/area-specialty/32000/izumo-orochi-daikon.webp",
+      "title": "izumo-orochi-daikon.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "13a3bc81090e9b4c843540e2d5ee8df246488e66dd8c1259a4d6c0dc6385fdec"
+    },
+    {
+      "id": "web/material/d82e86f0a45d31f42e6914e7",
+      "channel": "web",
+      "key": "apps/web/public/images/civil-engineering-site-card-accent.png",
+      "title": "civil-engineering-site-card-accent.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7409091c5ca1f7c751e786308791d4963bd9d423195ff93dab08d09a60d8485d"
+    },
+    {
+      "id": "web/ranking/gini-coefficient-disposable-income",
+      "channel": "web",
+      "key": "gini-coefficient-disposable-income",
+      "title": "等価可処分所得ジニ係数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/gini-coefficient-disposable-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "65d3cac8dff2884a743f075d5827051f78de16861feb0e71e2293d4f509bb6c2",
+      "catalogBasis": "65d3cac8dff2884a743f075d5827051f78de16861feb0e71e2293d4f509bb6c2",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/jam-consumption-expenditure",
+      "channel": "web",
+      "key": "jam-consumption-expenditure",
+      "title": "ジャム消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/jam-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8cb2d2c6ad73db217dd13c419b7456f85657f852cd0f00d878ea66377fea2d9f",
+      "catalogBasis": "8cb2d2c6ad73db217dd13c419b7456f85657f852cd0f00d878ea66377fea2d9f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/job-change-rate",
+      "channel": "web",
+      "key": "job-change-rate",
+      "title": "転職率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/job-change-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "42ba0759070d22588c95a9fcf6b6c25b4fde97b9a9f742ec074f15fdf476c21f",
+      "catalogBasis": "42ba0759070d22588c95a9fcf6b6c25b4fde97b9a9f742ec074f15fdf476c21f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/room-aircon-ownership-multi-person-households-per-1000",
+      "channel": "web",
+      "key": "room-aircon-ownership-multi-person-households-per-1000",
+      "title": "ルームエアコン所有数量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/room-aircon-ownership-multi-person-households-per-1000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "98548ed78fc0d85deaa3727a733cd61da5d1a01c08e75c1e5760575b4c6c8f54",
+      "catalogBasis": "98548ed78fc0d85deaa3727a733cd61da5d1a01c08e75c1e5760575b4c6c8f54",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/vacuum-cleaner-consumption-quantity",
+      "channel": "web",
+      "key": "vacuum-cleaner-consumption-quantity",
+      "title": "電気掃除機消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/vacuum-cleaner-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "77a0c35cb00284ea1d3dd1e64fdf0f160726726749b9a380dfa92cd11cc9c08e",
+      "catalogBasis": "77a0c35cb00284ea1d3dd1e64fdf0f160726726749b9a380dfa92cd11cc9c08e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/womens-foundation-garment-consumption-expenditure",
+      "channel": "web",
+      "key": "womens-foundation-garment-consumption-expenditure",
+      "title": "婦人用ファンデーション消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/womens-foundation-garment-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1ebd6e909d59a1316e3d2c338509a15f614a22262483c73bf738a62b8286583a",
+      "catalogBasis": "1ebd6e909d59a1316e3d2c338509a15f614a22262483c73bf738a62b8286583a",
+      "indexComplete": true
+    },
+    {
+      "id": "web/theme/ports",
+      "channel": "web",
+      "key": "ports",
+      "title": "港湾",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/ports",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "886d6455f52b99b9a8447c8dd9aebc50058aee21a61051f77445dd4981847235",
+      "catalogBasis": "886d6455f52b99b9a8447c8dd9aebc50058aee21a61051f77445dd4981847235",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/carpenter-income-prefecture-gap",
+      "file": "app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "cb54a083a9d6e8f39b10f1028a206fce72d41f1ad69093bca395c5eece1650d9",
+        "bytes": 6926
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/article.md",
+          "sha256": "345be37aee35a517f47b2d237463c087284b4258a06ac7a03964df7eb416a53a",
+          "bytes": 10270,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "carpenter-income-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.json",
+          "sha256": "a88adf67249060e488052cbdb8ad92129a8be315c4d1a5261c185a9dff891205",
+          "bytes": 5770,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "carpenter-income-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "fdb0dab8738ec112c38c61235030581be976e623c3801acbb1d0f294594acd76",
+          "bytes": 648,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/data/carpenter-income-prefecture-gap-prefecture-rankings.svg",
+          "alt": "大工の平均年収 都道府県別 上位5・下位5 (2023年)",
+          "heading": "大工の年収トップ5と最下位5",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/carpenter-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/carpenter-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/carpenter-income-prefecture-gap",
+      "file": "app/blog/carpenter-income-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/background.jpg",
+        "sha256": "cae52a54218bad3e5fd89005bb1c945cdc56480b7aea685a5dd0d61cd21a02d9",
+        "bytes": 36433
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "sha256": "01f50ca48f5e37297907fac6dbb1b8a6321fea70a83130f3bb5bdfa89e548c3b",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bafefe8150ba20adb2530b2b6ef7e807600143268aae48ec6ec1b3d397698c38",
+        "fingerprint": "e5e938c0357fa84d1b9ac34afed120a1b61ecbd1ee1b5e335ed6632a218170bf",
+        "generatedAt": "2026-08-22T05:17:19.682Z"
+      }
+    },
+    {
+      "owner": "web/blog/carpenter-income-prefecture-gap",
+      "file": "app/blog/carpenter-income-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/ogp.png",
+        "sha256": "990b77c309550384682873c5986ec18bf887f0f3d9c5c751153c892985fe100c",
+        "bytes": 322498
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "sha256": "01f50ca48f5e37297907fac6dbb1b8a6321fea70a83130f3bb5bdfa89e548c3b",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bafefe8150ba20adb2530b2b6ef7e807600143268aae48ec6ec1b3d397698c38",
+        "fingerprint": "e5e938c0357fa84d1b9ac34afed120a1b61ecbd1ee1b5e335ed6632a218170bf",
+        "generatedAt": "2026-08-22T05:17:19.682Z"
+      }
+    },
+    {
+      "owner": "web/blog/carpenter-income-prefecture-gap",
+      "file": "app/blog/carpenter-income-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "baaaeebe834419793eddab333b0c645ce8d01b253450bc62633e6e35b3211775",
+        "bytes": 6468
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "sha256": "01f50ca48f5e37297907fac6dbb1b8a6321fea70a83130f3bb5bdfa89e548c3b",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bafefe8150ba20adb2530b2b6ef7e807600143268aae48ec6ec1b3d397698c38",
+        "fingerprint": "e5e938c0357fa84d1b9ac34afed120a1b61ecbd1ee1b5e335ed6632a218170bf",
+        "generatedAt": "2026-08-22T05:17:19.682Z"
+      }
+    },
+    {
+      "owner": "web/blog/carpenter-income-prefecture-gap",
+      "file": "app/blog/carpenter-income-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/carpenter-income-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/thumbnail-light.webp",
+        "sha256": "b9db00ecf26ee079071434be31469df92a71fc2722cb8cc2bc2fa7ea82bac5f1",
+        "bytes": 10610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/carpenter-income-prefecture-gap/ogp/generation.json",
+          "sha256": "01f50ca48f5e37297907fac6dbb1b8a6321fea70a83130f3bb5bdfa89e548c3b",
+          "bytes": 2240,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bafefe8150ba20adb2530b2b6ef7e807600143268aae48ec6ec1b3d397698c38",
+        "fingerprint": "e5e938c0357fa84d1b9ac34afed120a1b61ecbd1ee1b5e335ed6632a218170bf",
+        "generatedAt": "2026-08-22T05:17:19.682Z"
+      }
+    },
+    {
+      "owner": "web/blog/cc-estat-10-wage-box-plot",
+      "file": "app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.svg",
+        "sha256": "2f5025ea1eb05ea1fb50cca5ad413c34350e7dbaf6d5df71d6828a1b7fd0a113",
+        "bytes": 6950
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/article.md",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/article.md",
+          "sha256": "a1fdbc3ee789fadc314da916c6bfc87c8c6fc74f03ab82a5e9d99ec80a650afa",
+          "bytes": 27921,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "wage-prefecture-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.json",
+          "sha256": "a2740f102593887d836a0c16cf3bf58136ff33cd3fd154392b8e13d979ec3bc8",
+          "bytes": 6774,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "wage-prefecture-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.source.json",
+          "sha256": "402bb548a1f7f8576951f79aa1af97cd5efe2110b5a00ea05a48c4bac43faf96",
+          "bytes": 638,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/data/wage-prefecture-ranking.svg",
+          "alt": "きまって支給する現金給与月額 男性 上位5・下位5（2023年）",
+          "heading": "なぜ業種別の賃金格差は面白いのか",
+          "line": 43
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/regular-cash-salary-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/regular-cash-salary-male/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/cc-estat-10-wage-box-plot",
+      "file": "app/blog/cc-estat-10-wage-box-plot/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/background.jpg",
+        "sha256": "318d96d2f660fe14deb252ee0ae42094c1b85c1c9eb84fd709b4d0e65c4c559e",
+        "bytes": 69103
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "sha256": "4d93f2d38740383c6a195bf4b021a7278437f6a4b66c653f7b104c14f2d517e5",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6abc519415d19f3c1552b5122a716d599d87a7e6db59bd2a6ae1c08743465167",
+        "fingerprint": "e1439774e7bd472cc5a9ad012958e2be3872f6779fdd517036f39324e70ed601",
+        "generatedAt": "2026-08-22T05:17:20.078Z"
+      }
+    },
+    {
+      "owner": "web/blog/cc-estat-10-wage-box-plot",
+      "file": "app/blog/cc-estat-10-wage-box-plot/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/ogp.png",
+        "sha256": "2637ca33490bd35e9317c84ed21f55a02348c0af068c853ed2b7eb7148e0c845",
+        "bytes": 351417
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "sha256": "4d93f2d38740383c6a195bf4b021a7278437f6a4b66c653f7b104c14f2d517e5",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6abc519415d19f3c1552b5122a716d599d87a7e6db59bd2a6ae1c08743465167",
+        "fingerprint": "e1439774e7bd472cc5a9ad012958e2be3872f6779fdd517036f39324e70ed601",
+        "generatedAt": "2026-08-22T05:17:20.078Z"
+      }
+    },
+    {
+      "owner": "web/blog/cc-estat-10-wage-box-plot",
+      "file": "app/blog/cc-estat-10-wage-box-plot/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/thumbnail-dark.webp",
+        "sha256": "cacf9e548099306d9382f8c10e7c17d6cf695841fc725a64136a748dcfd1b06f",
+        "bytes": 8558
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "sha256": "4d93f2d38740383c6a195bf4b021a7278437f6a4b66c653f7b104c14f2d517e5",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6abc519415d19f3c1552b5122a716d599d87a7e6db59bd2a6ae1c08743465167",
+        "fingerprint": "e1439774e7bd472cc5a9ad012958e2be3872f6779fdd517036f39324e70ed601",
+        "generatedAt": "2026-08-22T05:17:20.078Z"
+      }
+    },
+    {
+      "owner": "web/blog/cc-estat-10-wage-box-plot",
+      "file": "app/blog/cc-estat-10-wage-box-plot/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cc-estat-10-wage-box-plot/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/thumbnail-light.webp",
+        "sha256": "b3e560b7f5b708f698f6b689688eb9bf6b04c7fe19b0d916d7bf469685a5a445",
+        "bytes": 13288
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cc-estat-10-wage-box-plot/ogp/generation.json",
+          "sha256": "4d93f2d38740383c6a195bf4b021a7278437f6a4b66c653f7b104c14f2d517e5",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "6abc519415d19f3c1552b5122a716d599d87a7e6db59bd2a6ae1c08743465167",
+        "fingerprint": "e1439774e7bd472cc5a9ad012958e2be3872f6779fdd517036f39324e70ed601",
+        "generatedAt": "2026-08-22T05:17:20.078Z"
+      }
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.svg",
+        "sha256": "dbce9ef8553249808ed3d6b695dda625a16c1ee896083f3de7c4ca83c51fa34c",
+        "bytes": 6841
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/article.md",
+          "sha256": "5c635b69f5b5c1de1a8ea5abc98ac5b67a5ba5216a42f990fdbb3581ad432a71",
+          "bytes": 9410,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "fish-catch-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.json",
+          "sha256": "78c4d0445754b54d0f0b6520fd074136fee02fff35c0ab9c8fe890132debebfe",
+          "bytes": 6410,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "fish-catch-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.source.json",
+          "sha256": "c01714e853c11d58f34bdeb340149e1a2f50558a1e5435860bd5fe23047ddc4d",
+          "bytes": 564,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fish-catch-ranking.svg",
+          "alt": "海面漁獲量 上位5・下位5（2023年）",
+          "heading": "海面漁獲量ランキング──北海道85万トンが全国3割を占める",
+          "line": 22
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fish-catch/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fish-catch/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.svg",
+        "sha256": "1f0631672c09301cadaed5ee5fc7219c9a194017d40ebec341f1fc94f1915ea7",
+        "bytes": 6878
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/article.md",
+          "sha256": "5c635b69f5b5c1de1a8ea5abc98ac5b67a5ba5216a42f990fdbb3581ad432a71",
+          "bytes": 9410,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "fishery-output-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.json",
+          "sha256": "d593088ab30d6fa6e1810118dbabbd049d19058d810b20ae8dc913730c79e3ce",
+          "bytes": 6695,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "fishery-output-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.source.json",
+          "sha256": "946125c3f9ce6ae842c5626e6ead7bb6157c6f61dbc29c23fbfc92e591810a6b",
+          "bytes": 607,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-output-ranking.svg",
+          "alt": "漁業産出額 上位5・下位5（2016年）",
+          "heading": "漁業産出額ランキング──金額にすると養殖県が浮上する",
+          "line": 45
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fishery-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fishery-output-value/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.svg",
+        "sha256": "9ba6d001226b84e914355593ad447893a083a52495c8d5f89c3d3ce9c1552bdf",
+        "bytes": 6818
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/article.md",
+          "sha256": "5c635b69f5b5c1de1a8ea5abc98ac5b67a5ba5216a42f990fdbb3581ad432a71",
+          "bytes": 9410,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "fishery-workers-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.json",
+          "sha256": "6c0483bb12cb9bc65b72ae3e4fc274014ca0bf35b81a8efbf1f2312a22795ba9",
+          "bytes": 6650,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "fishery-workers-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.source.json",
+          "sha256": "3aa20fe0d6b640c4c6d8f40619fdb594a09791aa0b9279ebc29ecedb277f5618",
+          "bytes": 590,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/fishery-workers-ranking.svg",
+          "alt": "漁業就業者数 上位5・下位5（2023年）",
+          "heading": "漁業就業者数ランキング──減る担い手と、養殖が選ばれる理由",
+          "line": 58
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/fishery-workers/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/fishery-workers/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.svg",
+        "sha256": "f5ff2cd6e31a078fdf471b977d47c5678286b4e022e7410274029969204de84c",
+        "bytes": 6871
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/article.md",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/article.md",
+          "sha256": "5c635b69f5b5c1de1a8ea5abc98ac5b67a5ba5216a42f990fdbb3581ad432a71",
+          "bytes": 9410,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "marine-aquaculture-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.json",
+          "sha256": "66457f34dbdc4ba7f3702e2bf3f3bef3af5b268f4ee929f0dcfdd6341560750f",
+          "bytes": 6285,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "marine-aquaculture-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.source.json",
+          "sha256": "bd0cafe842f6c3fe83f59f83552c253ae3d32463b93f5a63611d3e1479057952",
+          "bytes": 635,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/data/marine-aquaculture-ranking.svg",
+          "alt": "海面養殖収獲量 上位5・下位5（2023年）",
+          "heading": "海面養殖収獲量ランキング──広島・宮城・愛媛が上位に割り込む",
+          "line": 35
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/marine-aquaculture-harvest/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/marine-aquaculture-harvest/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/background.jpg",
+        "sha256": "199a1fb9b1bfd4980bd17fbfa4cf57fe62bd15c550a3397ed64e79825be4f98e",
+        "bytes": 30884
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "sha256": "7473fcee28d3160e737561184bd5cbebc3abf49eb815aa3f431febeb23535d24",
+          "bytes": 2261,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b2aeb8307919ff12d45a5cda78a5b4cbc38b9bf163ce46090b1b3e49b203a3cf",
+        "fingerprint": "9a2cf35646c143b869b2d08a9429b503344c4cddad16d97da6ae9648c51bf103",
+        "generatedAt": "2026-08-22T05:17:24.238Z"
+      }
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/ogp.png",
+        "sha256": "71f8d6d7a86a737314d12a7210e434aae09ee7396bca14b43711aadff6296a2b",
+        "bytes": 252523
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "sha256": "7473fcee28d3160e737561184bd5cbebc3abf49eb815aa3f431febeb23535d24",
+          "bytes": 2261,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b2aeb8307919ff12d45a5cda78a5b4cbc38b9bf163ce46090b1b3e49b203a3cf",
+        "fingerprint": "9a2cf35646c143b869b2d08a9429b503344c4cddad16d97da6ae9648c51bf103",
+        "generatedAt": "2026-08-22T05:17:24.238Z"
+      }
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/thumbnail-dark.webp",
+        "sha256": "6bff8d9a446c4f25c24d6854e07b17f1378e174ebb32585c2ec0a6bdb3900c28",
+        "bytes": 4362
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "sha256": "7473fcee28d3160e737561184bd5cbebc3abf49eb815aa3f431febeb23535d24",
+          "bytes": 2261,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b2aeb8307919ff12d45a5cda78a5b4cbc38b9bf163ce46090b1b3e49b203a3cf",
+        "fingerprint": "9a2cf35646c143b869b2d08a9429b503344c4cddad16d97da6ae9648c51bf103",
+        "generatedAt": "2026-08-22T05:17:24.238Z"
+      }
+    },
+    {
+      "owner": "web/blog/fishery-catch-aquaculture-shift",
+      "file": "app/blog/fishery-catch-aquaculture-shift/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/fishery-catch-aquaculture-shift/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/thumbnail-light.webp",
+        "sha256": "740a26c2720eb9ee338a9e6442b73ee0c4d83e9b86d8dee395c5b1f9253c0377",
+        "bytes": 6746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/fishery-catch-aquaculture-shift/ogp/generation.json",
+          "sha256": "7473fcee28d3160e737561184bd5cbebc3abf49eb815aa3f431febeb23535d24",
+          "bytes": 2261,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "b2aeb8307919ff12d45a5cda78a5b4cbc38b9bf163ce46090b1b3e49b203a3cf",
+        "fingerprint": "9a2cf35646c143b869b2d08a9429b503344c4cddad16d97da6ae9648c51bf103",
+        "generatedAt": "2026-08-22T05:17:24.238Z"
+      }
+    },
+    {
+      "owner": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "file": "app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.svg",
+        "sha256": "8d65aa0b3c7a06a457444ccc96eea943d54c9c01a537e93b5aa6dbd23c13331b",
+        "bytes": 6870
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/article.md",
+          "sha256": "7a87af4f0c60f1c98e9637d876f0b08d2f43a71bece0c6fc7a216c7d1a24996c",
+          "bytes": 10802,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "musical-instrument-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.json",
+          "sha256": "f922b56ec2e322de3c409b609298e98a9f7933350a00069457a1d8dd6c497586",
+          "bytes": 6679,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "musical-instrument-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.source.json",
+          "sha256": "58d55db3d9bb566bdf3b4330352c48cb02243ef00f4c6698aea037ac7c3f488e",
+          "bytes": 703,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/data/musical-instrument-prefecture-rankings.svg",
+          "alt": "楽器消費支出額 上位5・下位5（2024年・1世帯当たり年間・円）",
+          "heading": "上位5と下位5 — 埼玉が突出する一方、下位は事実上ゼロ",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/musical-instrument-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/musical-instrument-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "file": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/background.jpg",
+        "sha256": "e4c3461af150bffe46524f52728586bde769ac88b9b800eb2ecc4b90630fd8cb",
+        "bytes": 60597
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "de24b9f55a2fa940a348bb14c26077c43d6bf4b8050d6e87442918d386fad266",
+          "bytes": 2298,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "785c9e592004a6473cd9c9ec08b332103a45f3adc0fc24ed4246c2431ba75f13",
+        "fingerprint": "db2ace2f10ee0133799a21265513b02733a21df8e0fba598cbe1d6a35a8c2ea9",
+        "generatedAt": "2026-08-22T05:17:32.148Z"
+      }
+    },
+    {
+      "owner": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "file": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/ogp.png",
+        "sha256": "e37bc448d19d197d365350cfcb5a86b380c91b0075585f2aca5a1f35c2571ccd",
+        "bytes": 309286
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "de24b9f55a2fa940a348bb14c26077c43d6bf4b8050d6e87442918d386fad266",
+          "bytes": 2298,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "785c9e592004a6473cd9c9ec08b332103a45f3adc0fc24ed4246c2431ba75f13",
+        "fingerprint": "db2ace2f10ee0133799a21265513b02733a21df8e0fba598cbe1d6a35a8c2ea9",
+        "generatedAt": "2026-08-22T05:17:32.148Z"
+      }
+    },
+    {
+      "owner": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "file": "app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "4f94e27ecd792438ddfa11feb0506f6baea22c0e108559cb12e03097a5a8f100",
+        "bytes": 9980
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "de24b9f55a2fa940a348bb14c26077c43d6bf4b8050d6e87442918d386fad266",
+          "bytes": 2298,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "785c9e592004a6473cd9c9ec08b332103a45f3adc0fc24ed4246c2431ba75f13",
+        "fingerprint": "db2ace2f10ee0133799a21265513b02733a21df8e0fba598cbe1d6a35a8c2ea9",
+        "generatedAt": "2026-08-22T05:17:32.148Z"
+      }
+    },
+    {
+      "owner": "web/blog/musical-instrument-expenditure-prefecture-gap",
+      "file": "app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/thumbnail-light.webp",
+        "sha256": "6befb0cbdf1aa0bef744de6215342ad2efb2d3ceb4138747fb5a750347341c5e",
+        "bytes": 18596
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/musical-instrument-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "de24b9f55a2fa940a348bb14c26077c43d6bf4b8050d6e87442918d386fad266",
+          "bytes": 2298,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "785c9e592004a6473cd9c9ec08b332103a45f3adc0fc24ed4246c2431ba75f13",
+        "fingerprint": "db2ace2f10ee0133799a21265513b02733a21df8e0fba598cbe1d6a35a8c2ea9",
+        "generatedAt": "2026-08-22T05:17:32.148Z"
+      }
+    },
+    {
+      "owner": "web/material/1eb9c73897aaffd4fb0efe04",
+      "file": "apps/web/public/flag/山梨県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/山梨県.png",
+        "url": "https://stats47.jp/flag/山梨県.png",
+        "sha256": "c7d0df65a2ed2bc9b8340b9eb3fae295055c68fae0bdecd5c42ca8e87af93fbd",
+        "bytes": 3998
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/山梨県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/4358c09dfd1a2f123d8799cb",
+      "file": "assets/blog/article-backgrounds/golf-green-fee-consumption-ranking.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/golf-green-fee-consumption-ranking.jpg",
+        "sha256": "0fa5dabcc0634cf61a9d3a0586e87934802f5f534bb6814fd0cdd0105a86ddaf",
+        "bytes": 101465
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/golf-green-fee-consumption-ranking.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/8a9372747384fc76629a80fa",
+      "file": "assets/blog/article-backgrounds/sixth-industry-direct-sales.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/sixth-industry-direct-sales.jpg",
+        "sha256": "def49bf1e665bd9ee99f1d88dc798ea9d1bd2da2d17d1a49e1c99abd57d4d479",
+        "bytes": 72576
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/sixth-industry-direct-sales.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/9a5f0384da00c05fd59cacb3",
+      "file": "assets/blog/codex-backgrounds/factory.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/codex-backgrounds/factory.jpg",
+        "sha256": "b3734cfdbb539b0d7a0bdb0f1238fcb84a6343907f8b826ae2c02c3662fd2c2e",
+        "bytes": 21587
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/codex-backgrounds/factory.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d0ac4b155d1cae7fecb3634c",
+      "file": "assets/area-specialty/32000/izumo-orochi-daikon.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/32000/izumo-orochi-daikon.webp",
+        "sha256": "d4e844b10ee30f57d8fe45d36332abbbd7293422e9f2fe93c166db47fdf4cf10",
+        "bytes": 43308
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/32000/izumo-orochi-daikon.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d82e86f0a45d31f42e6914e7",
+      "file": "apps/web/public/images/civil-engineering-site-card-accent.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/civil-engineering-site-card-accent.png",
+        "url": "https://stats47.jp/images/civil-engineering-site-card-accent.png",
+        "sha256": "0a7c371205ee5f9e44e3fdf7c2895560ed7af6daee94988c8af9ba23b840f160",
+        "bytes": 2051862
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/civil-engineering-site-card-accent.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/gini-coefficient-disposable-income",
+      "file": "app/ranking/gini-coefficient-disposable-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gini-coefficient-disposable-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/ogp/ogp.png",
+        "sha256": "e7ab3a1967aaa15048d8ee053c5c1b312df08ae2a0eb51a23454b6592b79999e",
+        "bytes": 68491
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gini-coefficient-disposable-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/ogp/generation.json",
+          "sha256": "54d2d997836e8406b5c9f90cb1684b5358a1398d6edf5d2e954b29b9a0f1ca0c",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9886e98145ef0354b0fb035f105095a3ec83eb2835ec2f46e05cb2c810627ef2",
+        "fingerprint": "398097fabbf94a0af6315c898882721b6938acafdfefb03de95df1fe1db5140f",
+        "generatedAt": "2026-10-01T18:11:12.851Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gini-coefficient-disposable-income",
+      "file": "app/ranking/gini-coefficient-disposable-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gini-coefficient-disposable-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/thumbnail-dark.webp",
+        "sha256": "943f12f6976fbf72b043629ef5de33db186f6e6f8de9f4f423162cf77f197e81",
+        "bytes": 17580
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gini-coefficient-disposable-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/thumbnail.json",
+          "sha256": "868b19f7d404b68dd97ae5ddfdd50bacf849037d1d16fcc855bcb40bab5521e2",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ef9a6dc74bc6f6731b1842d16da936eca5bf621b4cfe3d88ed5a9fbb5d241060",
+        "fingerprint": "0eff7fde119bd2fe0f7a1d7fa7a2912f8fbc8269c9f10a2f4ab3d143c85a29b2",
+        "generatedAt": "2026-10-01T18:35:56.318Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gini-coefficient-disposable-income",
+      "file": "app/ranking/gini-coefficient-disposable-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gini-coefficient-disposable-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/thumbnail-light.webp",
+        "sha256": "0b1198650c35a2e1515cf5d02f711dbddd52c3deb6532f44b6548c210d807285",
+        "bytes": 16058
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gini-coefficient-disposable-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/thumbnail.json",
+          "sha256": "868b19f7d404b68dd97ae5ddfdd50bacf849037d1d16fcc855bcb40bab5521e2",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gini-coefficient-disposable-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gini-coefficient-disposable-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ef9a6dc74bc6f6731b1842d16da936eca5bf621b4cfe3d88ed5a9fbb5d241060",
+        "fingerprint": "0eff7fde119bd2fe0f7a1d7fa7a2912f8fbc8269c9f10a2f4ab3d143c85a29b2",
+        "generatedAt": "2026-10-01T18:35:56.318Z"
+      }
+    },
+    {
+      "owner": "web/ranking/jam-consumption-expenditure",
+      "file": "app/ranking/jam-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/jam-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/jam-consumption-expenditure/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/jam-consumption-expenditure",
+      "file": "app/ranking/jam-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/jam-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/jam-consumption-expenditure/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/jam-consumption-expenditure",
+      "file": "app/ranking/jam-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/jam-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/jam-consumption-expenditure/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/job-change-rate",
+      "file": "app/ranking/job-change-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/job-change-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/job-change-rate/ogp/ogp.png",
+        "sha256": "33cb83c474b030ed939bfdb06086acaea59a89c35529dbd0919d2185ae558b9a",
+        "bytes": 56801
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/job-change-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/ogp/generation.json",
+          "sha256": "2fa2ea527c98bcb28b88719b77463a0b0b236b2c2d2d28662f9b8645b7e7804b",
+          "bytes": 893,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/job-change-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/job-change-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "bb1e7d31c259c6cf6d88b3969df4966fd0fb51e42400cfdeadf9cdfbebb93f7e",
+        "fingerprint": "ca5657bdcdb14f5b0db0ad2bad8cd6df43a1ca554c7118cf4879bd0c14bbc727",
+        "generatedAt": "2026-10-03T20:59:23.993Z"
+      }
+    },
+    {
+      "owner": "web/ranking/job-change-rate",
+      "file": "app/ranking/job-change-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/job-change-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/job-change-rate/thumbnail-dark.webp",
+        "sha256": "a18db0b8c80a3884b5f51dc3cccfe98832a64e098f309a57032e101d14dee407",
+        "bytes": 14232
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/job-change-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/thumbnail.json",
+          "sha256": "b0ae2b2d989f403bd2cd428ced85253de7ca905742172da4625e7be63d4ae1e0",
+          "bytes": 1709,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/job-change-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/job-change-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0bd5b74a02ebfa0164886b9967e9be1520fb6f7f962f19f1207fbaa95faa2d14",
+        "fingerprint": "8dc243262fc0fa58c7d8c6b8894715faa4869a22f629fd7603fd160e7dc1fa67",
+        "generatedAt": "2026-10-03T21:25:17.967Z"
+      }
+    },
+    {
+      "owner": "web/ranking/job-change-rate",
+      "file": "app/ranking/job-change-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/job-change-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/job-change-rate/thumbnail-light.webp",
+        "sha256": "0d25be841048f25cc373e0188a45fe8c90f3bb0891725f099584d3f6d97fbe72",
+        "bytes": 12688
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/job-change-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/thumbnail.json",
+          "sha256": "b0ae2b2d989f403bd2cd428ced85253de7ca905742172da4625e7be63d4ae1e0",
+          "bytes": 1709,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/job-change-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/job-change-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/job-change-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "0bd5b74a02ebfa0164886b9967e9be1520fb6f7f962f19f1207fbaa95faa2d14",
+        "fingerprint": "8dc243262fc0fa58c7d8c6b8894715faa4869a22f629fd7603fd160e7dc1fa67",
+        "generatedAt": "2026-10-03T21:25:17.967Z"
+      }
+    },
+    {
+      "owner": "web/ranking/room-aircon-ownership-multi-person-households-per-1000",
+      "file": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/ogp/ogp.png",
+        "sha256": "bc00cdf98aca203899dd94584bd6becb579a09994ae4edd53a72ff3ded4d84f6",
+        "bytes": 76345
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/ogp/generation.json",
+          "sha256": "92674371df3d882e850d42959e120476ff0803a5635196c47a5eaef57ba96b17",
+          "bytes": 1049,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "122964302c4e0dad525acc1984ec9742768ec6efb265b2903f99fc7402aa8af0",
+        "fingerprint": "ec1c1f59d827499348d2a97b7a6e8a628645d1a0c77ce22e1bdf4a86b43a2435",
+        "generatedAt": "2026-08-15T18:42:41.530Z"
+      }
+    },
+    {
+      "owner": "web/ranking/room-aircon-ownership-multi-person-households-per-1000",
+      "file": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-dark.webp",
+        "sha256": "04bab4e4ec3a96e9e80145c022f5120ba77ed48a5d9a6c02a98320fd68444863",
+        "bytes": 15468
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail.json",
+          "sha256": "ac190db32e7b943b0b11a74cd9f93cd78be8ee171bef874bccd93e8909b504ad",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "2759fffa65f2c8d52830a9e51504dfc22189e21d5e6e1744f37b740b34944430",
+        "fingerprint": "ab19f01fa4dc67ce1f7608d4dae62c863f065e1844fd9c52aa1ef02ea1e7b60b",
+        "generatedAt": "2026-08-15T18:58:47.644Z"
+      }
+    },
+    {
+      "owner": "web/ranking/room-aircon-ownership-multi-person-households-per-1000",
+      "file": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail-light.webp",
+        "sha256": "9cda121e3d93d5670c16aa36f1401e22802ebc613141880127da087dacf249c7",
+        "bytes": 13568
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/thumbnail.json",
+          "sha256": "ac190db32e7b943b0b11a74cd9f93cd78be8ee171bef874bccd93e8909b504ad",
+          "bytes": 2060,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/room-aircon-ownership-multi-person-households-per-1000/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "2759fffa65f2c8d52830a9e51504dfc22189e21d5e6e1744f37b740b34944430",
+        "fingerprint": "ab19f01fa4dc67ce1f7608d4dae62c863f065e1844fd9c52aa1ef02ea1e7b60b",
+        "generatedAt": "2026-08-15T18:58:47.644Z"
+      }
+    },
+    {
+      "owner": "web/ranking/vacuum-cleaner-consumption-quantity",
+      "file": "app/ranking/vacuum-cleaner-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/vacuum-cleaner-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/ogp/ogp.png",
+        "sha256": "0a11452a82b68305c93cc3f9b799d2f307e5f9493f4a41fe1243fea3de20d9c5",
+        "bytes": 76828
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/vacuum-cleaner-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/ogp/generation.json",
+          "sha256": "a4bdd3165272acf8be594e8c0ed4b9402feb0b1a9584f0f95369c30f0c7f975a",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c0c63240cc5ac01da0654e3347e5efde3ab923813b9b0a4574141b04acd850a3",
+        "fingerprint": "2c02f51f7f7571198df08123dab768d2703298d723976267d66885832568efda",
+        "generatedAt": "2026-08-16T22:21:25.370Z"
+      }
+    },
+    {
+      "owner": "web/ranking/vacuum-cleaner-consumption-quantity",
+      "file": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "05710b3db6e10eb1bc590cd1e2b578a42c0a5d935e985e184a73f9a7ac288c1d",
+        "bytes": 16718
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/thumbnail.json",
+          "sha256": "5625721d165aff8b5dfa516517e70da08e953de17d40a6366a1db533b3613384",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "16df164cbb87bdaf841540f89ed69828e3d88c44d0c1e62af6ebcc51ec4149cd",
+        "fingerprint": "182a23095402b1bc82d55ad05a8f6a849934fdf249e7902e3cc253bb1f56153b",
+        "generatedAt": "2026-08-16T22:36:34.124Z"
+      }
+    },
+    {
+      "owner": "web/ranking/vacuum-cleaner-consumption-quantity",
+      "file": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/thumbnail-light.webp",
+        "sha256": "a557ffe4295866a6278263d1069700dd756ba6edfd0cbf11598b13d28e947ef8",
+        "bytes": 15450
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/vacuum-cleaner-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/thumbnail.json",
+          "sha256": "5625721d165aff8b5dfa516517e70da08e953de17d40a6366a1db533b3613384",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/vacuum-cleaner-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "16df164cbb87bdaf841540f89ed69828e3d88c44d0c1e62af6ebcc51ec4149cd",
+        "fingerprint": "182a23095402b1bc82d55ad05a8f6a849934fdf249e7902e3cc253bb1f56153b",
+        "generatedAt": "2026-08-16T22:36:34.124Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-foundation-garment-consumption-expenditure",
+      "file": "app/ranking/womens-foundation-garment-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-foundation-garment-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/ogp/ogp.png",
+        "sha256": "0dab89d7d9151e99367c28cb38615a9ad7331927d3ae23f2781d4f0202e5c47a",
+        "bytes": 80319
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-foundation-garment-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/ogp/generation.json",
+          "sha256": "5fe6f3e9bfa420f9a6171a773973da81547955d5e5ca17231eab3ecd2cd41b20",
+          "bytes": 1029,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "1762c6bf942fcdc1b4d4d43537638bd0fe3e1fdde60f7f8e460f5d8af9eff4c9",
+        "fingerprint": "9e5a98ab7832bcc678f7203fcfebb720483c7a902322723bc87219dcc2ed62f6",
+        "generatedAt": "2026-08-16T22:21:33.052Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-foundation-garment-consumption-expenditure",
+      "file": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "58b29d26bb21fa0deacdcb92aad347a5659d860353b9a4b93ccdfa018aadf8a4",
+        "bytes": 17810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail.json",
+          "sha256": "7b0458001d7b0e9ff08a5eb35bb04dbda5780e262f0ebf962f05ec6b4f6b51db",
+          "bytes": 2015,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "36ee54901df93ed068e7d8c3aaa3046bedc7757e482197ed47cb21bb2d378437",
+        "fingerprint": "ec873a6fdb5d4ef625b746ddd772bdb5e7648473c95e1dd14d0c0defeadb7cc0",
+        "generatedAt": "2026-08-16T22:36:37.481Z"
+      }
+    },
+    {
+      "owner": "web/ranking/womens-foundation-garment-consumption-expenditure",
+      "file": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "0b294614dfbc45f9a7e5cec7ce9eb69f79b4dbd7a459afff75db990db8edb9be",
+        "bytes": 15936
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/thumbnail.json",
+          "sha256": "7b0458001d7b0e9ff08a5eb35bb04dbda5780e262f0ebf962f05ec6b4f6b51db",
+          "bytes": 2015,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/womens-foundation-garment-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "36ee54901df93ed068e7d8c3aaa3046bedc7757e482197ed47cb21bb2d378437",
+        "fingerprint": "ec873a6fdb5d4ef625b746ddd772bdb5e7648473c95e1dd14d0c0defeadb7cc0",
+        "generatedAt": "2026-08-16T22:36:37.481Z"
+      }
+    },
+    {
+      "owner": "web/theme/ports",
+      "file": "https://stats47.jp/themes/ports/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/ports/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

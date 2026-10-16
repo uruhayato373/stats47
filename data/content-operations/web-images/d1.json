@@ -1,0 +1,2298 @@
+{
+  "items": [
+    {
+      "id": "web/area/17000",
+      "channel": "web",
+      "key": "17000",
+      "title": "石川県",
+      "category": "area",
+      "status": "published",
+      "url": "https://stats47.jp/areas/17000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3b786f6468f9c0ac3991082492a415b7365b70b936a6e2894c815599ac7a4a6d",
+      "catalogBasis": "3b786f6468f9c0ac3991082492a415b7365b70b936a6e2894c815599ac7a4a6d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "channel": "web",
+      "key": "road-length-per-km2-vs-average-road-traffic-volume",
+      "title": "道路密度と交通量、なぜ同じ都府県が並ぶ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "53d12dea1e648ef069ff85aa8a9e88be80dfa718515c4e2e66a3074cfce20d40",
+      "catalogBasis": "0d329d15453bf119ee852e2161dc8749d135097c2a72c508ed1ff1ca4422e024",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+        "sha256": "f9a60753142650a45f18b54928ffb6bbbf96f0e32ea1d44610aead394e0ea8b5",
+        "bytes": 8249
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/solar-panel-housing-prefecture-gap",
+      "channel": "web",
+      "key": "solar-panel-housing-prefecture-gap",
+      "title": "太陽光住宅率は佐賀10.8%・東京1.8%｜下位を決めるのは「屋根の有無」",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/solar-panel-housing-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "c69cd2024956a41a0a77f832451a00f5078f11730efaa98e9ad16372c9ba1ddc",
+      "catalogBasis": "ed816caa90ae7be22a98f6108428c19ed0e0c331e489b89534b9951ef97ecc03",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/article.md",
+        "sha256": "bb6d97e1eeb5292955e3e45dcc30e9df628c09c9f5bf3d2171b0d4ea2ee5e48c",
+        "bytes": 12936
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/3dd749d7605241f834e5baab",
+      "channel": "web",
+      "key": "assets/area-specialty/20000/nezumi-daikon.webp",
+      "title": "nezumi-daikon.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e63baacf4757f77176ebd0929f70cf9afd66da7c0e43ab6dac444c384dd64ca3"
+    },
+    {
+      "id": "web/ranking/forestry-output-value",
+      "channel": "web",
+      "key": "forestry-output-value",
+      "title": "林業産出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/forestry-output-value",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e8ae336e557e42dd0f1c4158757f795c73a5001c113dabeb147f7aa326324ab1",
+      "catalogBasis": "e8ae336e557e42dd0f1c4158757f795c73a5001c113dabeb147f7aa326324ab1",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-high-school-students-count",
+      "channel": "web",
+      "key": "junior-high-school-students-count",
+      "title": "中学校生徒数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-high-school-students-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a36d4ee12b401b32fb8401c2e7e74a54491ef8c16a78e01605b3689b1d2fe22b",
+      "catalogBasis": "a36d4ee12b401b32fb8401c2e7e74a54491ef8c16a78e01605b3689b1d2fe22b",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/orange-consumption-quantity",
+      "channel": "web",
+      "key": "orange-consumption-quantity",
+      "title": "オレンジ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/orange-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "88afde95254d55c4b525a2ccfb8e4889e37c5b477f568541806769e6bdb34540",
+      "catalogBasis": "88afde95254d55c4b525a2ccfb8e4889e37c5b477f568541806769e6bdb34540",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/water-supply-annual-volume",
+      "channel": "web",
+      "key": "water-supply-annual-volume",
+      "title": "上水道年間給水量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/water-supply-annual-volume",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f1fb402f8ec41895dba9bccdaae87b409b3bac980b46f27cdb323f0c0877bc44",
+      "catalogBasis": "f1fb402f8ec41895dba9bccdaae87b409b3bac980b46f27cdb323f0c0877bc44",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "channel": "web",
+      "key": "welfare-facilities-count-per-100k-on-assistance",
+      "title": "保護施設数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "df84267d4483bc64f2113ce2d9723009a8b18cb96e860d5c315ff000866d34c6",
+      "catalogBasis": "df84267d4483bc64f2113ce2d9723009a8b18cb96e860d5c315ff000866d34c6",
+      "indexComplete": true
+    },
+    {
+      "id": "web/silhouette/37",
+      "channel": "web",
+      "key": "37",
+      "title": "香川県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/37000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e384805e9a29929fb20dd2ad8a640f0b9ee2b3a16b2a9161af0e0cf50089acdd"
+    },
+    {
+      "id": "web/theme/land-property-market",
+      "channel": "web",
+      "key": "land-property-market",
+      "title": "不動産取引と地価",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/land-property-market",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c57dc432460b44a3adaabf73abbc76eb232ffc55f0673a70e91eb416ce328d7c",
+      "catalogBasis": "c57dc432460b44a3adaabf73abbc76eb232ffc55f0673a70e91eb416ce328d7c",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/area/17000",
+      "file": "app/areas/17000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/areas/17000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png",
+        "sha256": "04ee90f0b54278b83f1acaf65d6034eb3af14b6ea06e2ea8021e3fe8f792bf22",
+        "bytes": 117022
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/areas/17000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/areas/17000/ogp/generation.json",
+          "sha256": "4677a6f30adcdb9e6b34bc927708c0220dcc2bc4fde097127a06cb7cdd895048",
+          "bytes": 779,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "areas-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "area-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "6adb6024159a795d3559a6c6cfa2c5142a3b7d3a95896e7af9f63d3e6c0e222d",
+        "fingerprint": "42a423238d159598527575b75b70bed852c698cfcfc8857ecde70764371246d7",
+        "generatedAt": "2026-10-10T22:06:17.924Z"
+      }
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.svg",
+        "sha256": "ab2ed7681343e9b34886005c9dc78f112ca30c0224fc3fad3bb1b6bea4c39b4d",
+        "bytes": 6931
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "sha256": "f9a60753142650a45f18b54928ffb6bbbf96f0e32ea1d44610aead394e0ea8b5",
+          "bytes": 8249,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "average-road-traffic-volume-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.json",
+          "sha256": "f090e511de5efedc558853ef6b2cde2b06635199801dc35585236ceb7bd49744",
+          "bytes": 6696,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "average-road-traffic-volume-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.source.json",
+          "sha256": "0713e8a02c5acd8c9c66ac7cc9c5c01c7bfff79d889df10fdf761c5e73bb1c5a",
+          "bytes": 676,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/average-road-traffic-volume-prefecture-rankings.svg",
+          "alt": "道路平均交通量の上位と下位",
+          "heading": "道路平均交通量の上位と下位",
+          "line": 27
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-road-traffic-volume/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-road-traffic-volume/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.svg",
+        "sha256": "96aa4458ad608c33310fccbf823ad43774dc2c8d7271b637f3b348bffeaeaf51",
+        "bytes": 10511
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "sha256": "f9a60753142650a45f18b54928ffb6bbbf96f0e32ea1d44610aead394e0ea8b5",
+          "bytes": 8249,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "road-length-per-km2--average-road-traffic-volume-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.json",
+          "sha256": "1110ffc420ae3eb8cf93ec415955c1f4c303336237b0a0a9bcaec059bedaa415",
+          "bytes": 3712,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "road-length-per-km2--average-road-traffic-volume-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.source.json",
+          "sha256": "36375020e71d9a730af50a0dc1610d511b50a6cc20427e14646584763b430bbc",
+          "bytes": 600,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2--average-road-traffic-volume-scatter.svg",
+          "alt": "道路実延長と道路平均交通量の関係",
+          "heading": "2つの指標の相関を見る",
+          "line": 39
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/road-length-per-km2.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/road-length-per-km2.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.svg",
+        "sha256": "e119a5bedd1d34590d7db4ac7751b355c9ca067e73727ce482040de891729ad1",
+        "bytes": 6881
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/article.md",
+          "sha256": "f9a60753142650a45f18b54928ffb6bbbf96f0e32ea1d44610aead394e0ea8b5",
+          "bytes": 8249,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.json",
+          "sha256": "b0283dee00ecb4c62d193a0ac0a4d7886695c06e71d36ad1b2e0b588d75d5130",
+          "bytes": 6666,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.source.json",
+          "sha256": "ba3003c50a3a1753c75771b711fffe38ef2ce451b52b7303dcafcbfc9dd75ad1",
+          "bytes": 664,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/data/road-length-per-km2-vs-average-road-traffic-volume-prefecture-rankings.svg",
+          "alt": "道路実延長の上位と下位",
+          "heading": "道路実延長の上位と下位",
+          "line": 15
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/road-length-per-km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/road-length-per-km2/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/background.jpg",
+        "sha256": "88dab2aedd72070802c00d0f9189ae9765bb5982a299dee892155184872714b2",
+        "bytes": 143490
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "sha256": "6dfe82fc79410c6b2fe9f7a2ffe06ef0a84121efcf5268deb2679ab5450c460f",
+          "bytes": 2264,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "d53506071e94c2b7ae811e37d4c1a66b58f327e2a7320c5915fadfe639af6377",
+        "fingerprint": "7f9fda718f5296a064d7d260bf396d7fec70ffb79f621f48070092d8f512c9ea",
+        "generatedAt": "2026-08-30T07:36:26.944Z"
+      }
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/ogp.png",
+        "sha256": "9ae8ac49cf61c6aceb920716614f9b6c6994bebe701a5d47220cc72aba715a84",
+        "bytes": 772100
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "sha256": "6dfe82fc79410c6b2fe9f7a2ffe06ef0a84121efcf5268deb2679ab5450c460f",
+          "bytes": 2264,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "d53506071e94c2b7ae811e37d4c1a66b58f327e2a7320c5915fadfe639af6377",
+        "fingerprint": "7f9fda718f5296a064d7d260bf396d7fec70ffb79f621f48070092d8f512c9ea",
+        "generatedAt": "2026-08-30T07:36:26.944Z"
+      }
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-dark.webp",
+        "sha256": "fe10c0fc1cb4e4850121fe19e2efa871a7d061668b5ed6ed09f536b5f811031d",
+        "bytes": 26556
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "sha256": "6dfe82fc79410c6b2fe9f7a2ffe06ef0a84121efcf5268deb2679ab5450c460f",
+          "bytes": 2264,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "d53506071e94c2b7ae811e37d4c1a66b58f327e2a7320c5915fadfe639af6377",
+        "fingerprint": "7f9fda718f5296a064d7d260bf396d7fec70ffb79f621f48070092d8f512c9ea",
+        "generatedAt": "2026-08-30T07:36:26.944Z"
+      }
+    },
+    {
+      "owner": "web/blog/road-length-per-km2-vs-average-road-traffic-volume",
+      "file": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/thumbnail-light.webp",
+        "sha256": "cfbf2a0bd56093451a4c45f721a33bb2248560c70b0a7a95e6406871013a825d",
+        "bytes": 52324
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-average-road-traffic-volume/ogp/generation.json",
+          "sha256": "6dfe82fc79410c6b2fe9f7a2ffe06ef0a84121efcf5268deb2679ab5450c460f",
+          "bytes": 2264,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "d53506071e94c2b7ae811e37d4c1a66b58f327e2a7320c5915fadfe639af6377",
+        "fingerprint": "7f9fda718f5296a064d7d260bf396d7fec70ffb79f621f48070092d8f512c9ea",
+        "generatedAt": "2026-08-30T07:36:26.944Z"
+      }
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.svg",
+        "sha256": "f47cb3806e2f107de866a331c625fb5c5ec98b1d69c384bb77efb4c449726220",
+        "bytes": 10934
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "sha256": "bb6d97e1eeb5292955e3e45dcc30e9df628c09c9f5bf3d2171b0d4ea2ee5e48c",
+          "bytes": 12936,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "detached-vs-solar-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.json",
+          "sha256": "919d95278ddbb2c8f0d8f09b4646ac0279c2f8770fa3b24bd64271bc4f4461d5",
+          "bytes": 4662,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "detached-vs-solar-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.source.json",
+          "sha256": "40b5215c13e2c1a34bb3e0f63383769d2f5baedc92b8ff15f52e86c2a66a7ec1",
+          "bytes": 1099,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/detached-vs-solar-scatter.svg",
+          "alt": "一戸建住宅比率（横）と太陽光住宅率（縦）の関係（2023年）",
+          "heading": "戸建てが多ければ普及するのか：屋根はあるが載らない雪国",
+          "line": 61
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/detached-house-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/detached-house-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        },
+        {
+          "label": "app/ranking/solar-panel-housing-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/solar-panel-housing-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.svg",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.svg",
+        "sha256": "95bfbd0dd3cd2f7052023ccab6a9d1176cac3370d67ac7452a1bf3b79fd31aec",
+        "bytes": 2562
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "sha256": "bb6d97e1eeb5292955e3e45dcc30e9df628c09c9f5bf3d2171b0d4ea2ee5e48c",
+          "bytes": 12936,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "owner-occupied-housing-ratio.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.json",
+          "sha256": "4f9c37f60d79a234fade923037cce2ca85cb0a55fd8c1e98b6b7c2aad9b2c18a",
+          "bytes": 5205,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "owner-occupied-housing-ratio.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.source.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.source.json",
+          "sha256": "1d82d187ccd6d66b56f9981af15086e6db8cddd8704565c92baf1c982cd914a3",
+          "bytes": 654,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/owner-occupied-housing-ratio.svg",
+          "alt": "持ち家比率 上位3・下位5（2023年・住宅・土地統計調査）",
+          "heading": "持ち家比率も「載せられるか」を左右する",
+          "line": 74
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 294",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/owner-occupied-housing-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/owner-occupied-housing-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.svg",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.svg",
+        "sha256": "5dd75db2caea7db5c45b65a28959cdf9c3f0497a903f639a433f33a865c36984",
+        "bytes": 4182
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "sha256": "bb6d97e1eeb5292955e3e45dcc30e9df628c09c9f5bf3d2171b0d4ea2ee5e48c",
+          "bytes": 12936,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "solar-low-detached-contrast.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.source.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.source.json",
+          "sha256": "960bf17606503c0cebf19c0862b25cd88a64be641e098a1490acad5b9b389e1c",
+          "bytes": 404,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.svg",
+          "alt": "太陽光が普及しない県の一戸建住宅比率：都市型と豪雪地の対比（2023年）",
+          "heading": "なぜ下位は都市県なのか：一戸建が少ないと載せる屋根がない",
+          "line": 44
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 396",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/solar-panel-housing-prefecture-gap/data/solar-low-detached-contrast.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/ranking/solar-panel-housing-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/solar-panel-housing-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.svg",
+        "sha256": "91dd9fde9262996548b63c82d0ed14f28ae78a42e402d2e0dc09542540a1e811",
+        "bytes": 6532
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/article.md",
+          "sha256": "bb6d97e1eeb5292955e3e45dcc30e9df628c09c9f5bf3d2171b0d4ea2ee5e48c",
+          "bytes": 12936,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "solar-panel-housing-rate-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.json",
+          "sha256": "bbdc1a9b6b5c2069b67ea2d70180d5990d3c24f0b6ea9576c6833e6df49533ab",
+          "bytes": 6676,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "solar-panel-housing-rate-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.source.json",
+          "sha256": "cbdfe2ba2e46e17ae8f61d573d83349b31110a827916465ae26f39028584d978",
+          "bytes": 648,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/data/solar-panel-housing-rate-rankings.svg",
+          "alt": "太陽光発電機のある住宅率 上位5・下位5（2023年・住宅・土地統計調査）",
+          "heading": "太陽光住宅率ランキング 上位5と下位5",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/solar-panel-housing-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/solar-panel-housing-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/background.jpg",
+        "sha256": "c633daad6c30b2100f44ddb8cb19960f88ef445310eda33faa3afa7f2f2fcb70",
+        "bytes": 73274
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "sha256": "bd16a82c7a24d8cac05b1a171479dfbb7fb1fdeefeb94ccb67d209897921dd1a",
+          "bytes": 2262,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "69c1e824ee0b3f9ad48b9846a8425c46e1b46465bdcd2235fbf6ac70220a5f39",
+        "fingerprint": "7cbb0d57fc68397d79483af967490046f143e8727a773dd7129a3ee293d11e99",
+        "generatedAt": "2026-08-22T05:17:37.634Z"
+      }
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/ogp.png",
+        "sha256": "f47ae121a297256d7cce1615f38c1bfb8635397b6cb6a7f2890cfc5dd9821140",
+        "bytes": 445507
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "sha256": "bd16a82c7a24d8cac05b1a171479dfbb7fb1fdeefeb94ccb67d209897921dd1a",
+          "bytes": 2262,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "69c1e824ee0b3f9ad48b9846a8425c46e1b46465bdcd2235fbf6ac70220a5f39",
+        "fingerprint": "7cbb0d57fc68397d79483af967490046f143e8727a773dd7129a3ee293d11e99",
+        "generatedAt": "2026-08-22T05:17:37.634Z"
+      }
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "6a275835aa1e8f8acc95d44f2bb7b4e9c13bf571d93d0b9fd1a994e3accb2b52",
+        "bytes": 9614
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "sha256": "bd16a82c7a24d8cac05b1a171479dfbb7fb1fdeefeb94ccb67d209897921dd1a",
+          "bytes": 2262,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "69c1e824ee0b3f9ad48b9846a8425c46e1b46465bdcd2235fbf6ac70220a5f39",
+        "fingerprint": "7cbb0d57fc68397d79483af967490046f143e8727a773dd7129a3ee293d11e99",
+        "generatedAt": "2026-08-22T05:17:37.634Z"
+      }
+    },
+    {
+      "owner": "web/blog/solar-panel-housing-prefecture-gap",
+      "file": "app/blog/solar-panel-housing-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/solar-panel-housing-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/thumbnail-light.webp",
+        "sha256": "edee400ea67877fc35ed4ed107a7899248da8794f2de3b697e0c2ec90d1dd095",
+        "bytes": 18598
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/solar-panel-housing-prefecture-gap/ogp/generation.json",
+          "sha256": "bd16a82c7a24d8cac05b1a171479dfbb7fb1fdeefeb94ccb67d209897921dd1a",
+          "bytes": 2262,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "69c1e824ee0b3f9ad48b9846a8425c46e1b46465bdcd2235fbf6ac70220a5f39",
+        "fingerprint": "7cbb0d57fc68397d79483af967490046f143e8727a773dd7129a3ee293d11e99",
+        "generatedAt": "2026-08-22T05:17:37.634Z"
+      }
+    },
+    {
+      "owner": "web/material/3dd749d7605241f834e5baab",
+      "file": "assets/area-specialty/20000/nezumi-daikon.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/20000/nezumi-daikon.webp",
+        "sha256": "bed6ab329b41c33efc8b056def74d4763a0aca7822c08fc6d194a965cac15fe0",
+        "bytes": 29160
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/20000/nezumi-daikon.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/forestry-output-value",
+      "file": "app/ranking/forestry-output-value/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/forestry-output-value/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/ogp/ogp.png",
+        "sha256": "f9ea7af9b87636f2e6902885f56caa4a5cdc700bc0f9da7829d938d52d0bb584",
+        "bytes": 60639
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/forestry-output-value/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/ogp/generation.json",
+          "sha256": "c2e0ede019ee51922d909bbb9f9f9b8ecf6d8c965d6cfdf11a0dcf0b38e938a0",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forestry-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/forestry-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9cf11c7d4a1407b9c0bf051eacad00fd373519716420753e0ded6220b2481c36",
+        "fingerprint": "2157e8689e28b17c0ba1cb7ee3cf42f7ec140d08d8d2aac0d47f11d5afdbc40a",
+        "generatedAt": "2026-10-01T18:10:59.803Z"
+      }
+    },
+    {
+      "owner": "web/ranking/forestry-output-value",
+      "file": "app/ranking/forestry-output-value/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/forestry-output-value/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/thumbnail-dark.webp",
+        "sha256": "f9630c6db2e8940ba85ce5622d08c4012a067d955b2a8270434a9b1b9d9f10be",
+        "bytes": 15842
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/forestry-output-value/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/thumbnail.json",
+          "sha256": "0e06a102f7dbe1dd4eb5393eb9dd39ae61b831fecf2a94dd6b8228b0ac0b3e98",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forestry-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/forestry-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "edd4c466c83ed1654d8a0d645f3694728cfa6c7ea9fb5bb118c6a8188f127b32",
+        "fingerprint": "9856ed25d63ac32248db094decc549dfeead6788a237b31dd41a722e2388c4fa",
+        "generatedAt": "2026-10-01T18:35:52.947Z"
+      }
+    },
+    {
+      "owner": "web/ranking/forestry-output-value",
+      "file": "app/ranking/forestry-output-value/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/forestry-output-value/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/thumbnail-light.webp",
+        "sha256": "51ace15052fa6a431cb466087b4eebb1374b7cb8b32db89176672a1331a2b81d",
+        "bytes": 14198
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/forestry-output-value/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/thumbnail.json",
+          "sha256": "0e06a102f7dbe1dd4eb5393eb9dd39ae61b831fecf2a94dd6b8228b0ac0b3e98",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forestry-output-value/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/forestry-output-value/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forestry-output-value/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "edd4c466c83ed1654d8a0d645f3694728cfa6c7ea9fb5bb118c6a8188f127b32",
+        "fingerprint": "9856ed25d63ac32248db094decc549dfeead6788a237b31dd41a722e2388c4fa",
+        "generatedAt": "2026-10-01T18:35:52.947Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-school-students-count",
+      "file": "app/ranking/junior-high-school-students-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-school-students-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/ogp/ogp.png",
+        "sha256": "67d41feec07d645b0117a0686f61e2981ad9f5599df2a1a32c6f937d4974c12e",
+        "bytes": 60583
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-school-students-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/ogp/generation.json",
+          "sha256": "680b43acf380d871eda12b7413c4db27abf5e7973a6ceea04b8e83428b462e3b",
+          "bytes": 965,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-school-students-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-school-students-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1bc3021c1a501b71e067dc90e5ffdd3685cbb4216a62b2363d0d6243b0567579",
+        "fingerprint": "f70157ae98031e1aabfb4afccbd9dbd49599aa6ef45c658591fc2f6cba17b35b",
+        "generatedAt": "2026-10-03T20:59:28.844Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-school-students-count",
+      "file": "app/ranking/junior-high-school-students-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-school-students-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/thumbnail-dark.webp",
+        "sha256": "a73a48b718c9a4063620d29d96f503de7027a7c5d66512fd9f5e8740fdfa79ab",
+        "bytes": 16394
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-school-students-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/thumbnail.json",
+          "sha256": "9907cb14a17796196ac828561bbb2d5bb44c6a848d8b75cb3d9190def9f31548",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-school-students-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-school-students-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "901fe83bda52e4e6fb022fc83ad8d33254eb502dfab551ba822a536bd7ee863e",
+        "fingerprint": "a18bb65648a2f1ae1db3aab503304110f2384661243094be1d2f61bb0f7266cd",
+        "generatedAt": "2026-10-03T21:25:19.323Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-high-school-students-count",
+      "file": "app/ranking/junior-high-school-students-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-high-school-students-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/thumbnail-light.webp",
+        "sha256": "9f598356f2b18b4a4af4545c525a4901971829daba0183af073843baa12564a9",
+        "bytes": 14874
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/junior-high-school-students-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/thumbnail.json",
+          "sha256": "9907cb14a17796196ac828561bbb2d5bb44c6a848d8b75cb3d9190def9f31548",
+          "bytes": 1871,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/junior-high-school-students-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/junior-high-school-students-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/junior-high-school-students-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "901fe83bda52e4e6fb022fc83ad8d33254eb502dfab551ba822a536bd7ee863e",
+        "fingerprint": "a18bb65648a2f1ae1db3aab503304110f2384661243094be1d2f61bb0f7266cd",
+        "generatedAt": "2026-10-03T21:25:19.323Z"
+      }
+    },
+    {
+      "owner": "web/ranking/orange-consumption-quantity",
+      "file": "app/ranking/orange-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/orange-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/ogp/ogp.png",
+        "sha256": "c9752945105dd65ddc9ccb12cdfdf15c2d0adcc55fbe508c5387fa1bc2a85e62",
+        "bytes": 57703
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/orange-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/ogp/generation.json",
+          "sha256": "62f9ed100aa235da247801bc86494c1677a30965cdb8f78d5f98181c60eb9278",
+          "bytes": 941,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/orange-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/orange-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "2668c2b8c46280ab010d94cf14058666dde73cc02c7144118964f4d905836fee",
+        "fingerprint": "5000d2f0be9152ec07c986245deb24dfcb15a28b79cc122adfa73d082908adad",
+        "generatedAt": "2026-10-03T21:00:29.095Z"
+      }
+    },
+    {
+      "owner": "web/ranking/orange-consumption-quantity",
+      "file": "app/ranking/orange-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/orange-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "8d7483476515101acec330bd835e46f05a9a76074e1a71740841542cb3818c07",
+        "bytes": 15170
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/orange-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/thumbnail.json",
+          "sha256": "797f7749036e6031cbe3327a55d3b2fb18af0089a2237d08f0dba3820bb974a0",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/orange-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/orange-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "a747d81e44e34c509d425b4f58eadc49338bd34b32739691f2beffcaa1b8839c",
+        "fingerprint": "0320f3da78a1af0d4c7f6fe8727e4035b7cd391ab13e2823fd3e9712958731a9",
+        "generatedAt": "2026-10-03T21:25:34.928Z"
+      }
+    },
+    {
+      "owner": "web/ranking/orange-consumption-quantity",
+      "file": "app/ranking/orange-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/orange-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/thumbnail-light.webp",
+        "sha256": "75f789a60d634c1fdb3d48014f720aaea408c3ae6fe225f2d4dd40e7a4e04c58",
+        "bytes": 13346
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/orange-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/thumbnail.json",
+          "sha256": "797f7749036e6031cbe3327a55d3b2fb18af0089a2237d08f0dba3820bb974a0",
+          "bytes": 1817,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/orange-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/orange-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/orange-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "a747d81e44e34c509d425b4f58eadc49338bd34b32739691f2beffcaa1b8839c",
+        "fingerprint": "0320f3da78a1af0d4c7f6fe8727e4035b7cd391ab13e2823fd3e9712958731a9",
+        "generatedAt": "2026-10-03T21:25:34.928Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-supply-annual-volume",
+      "file": "app/ranking/water-supply-annual-volume/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-supply-annual-volume/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/ogp/ogp.png",
+        "sha256": "f8d08be4ae21ba5ce65bb29bf81d5fa26c3bf4e2dd7fce97fdec399bac61a64c",
+        "bytes": 74337
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-supply-annual-volume/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/ogp/generation.json",
+          "sha256": "0d1f08fa01fa05b0f5afb788cd991e52d5083b266d1831da3d81938056ef9235",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-annual-volume/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-supply-annual-volume/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "62eb95f877f94a99550bde1157025520d04c11f3967e1ba355311949626e5e79",
+        "fingerprint": "f85abaec3deb286914bd70503110a58055ab5cf1561969d82be9855dad63968c",
+        "generatedAt": "2026-08-16T22:21:28.721Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-supply-annual-volume",
+      "file": "app/ranking/water-supply-annual-volume/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-supply-annual-volume/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/thumbnail-dark.webp",
+        "sha256": "976d3a5819a8df0855eb47c893075a6a9d4c4b7fe56d1fcf949fc69b1edadecb",
+        "bytes": 17274
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-supply-annual-volume/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/thumbnail.json",
+          "sha256": "72d9e5ef15cc24e74212fa6129158528a34be35b0489172debf18a856b2903b3",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-annual-volume/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-supply-annual-volume/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3479652bc960817467fb186a815d29d9584f1e1b5da50e216365223ab396d30d",
+        "fingerprint": "0798bfac82abca25a5309374496211917f7c3279d031222db66012984828985c",
+        "generatedAt": "2026-08-16T22:36:35.630Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-supply-annual-volume",
+      "file": "app/ranking/water-supply-annual-volume/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-supply-annual-volume/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/thumbnail-light.webp",
+        "sha256": "d7e98dbbfe32cb59362d653b366d5599fe0a290b07a401d9e52d6f2adfe727be",
+        "bytes": 15888
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-supply-annual-volume/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/thumbnail.json",
+          "sha256": "72d9e5ef15cc24e74212fa6129158528a34be35b0489172debf18a856b2903b3",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-supply-annual-volume/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-supply-annual-volume/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-supply-annual-volume/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "3479652bc960817467fb186a815d29d9584f1e1b5da50e216365223ab396d30d",
+        "fingerprint": "0798bfac82abca25a5309374496211917f7c3279d031222db66012984828985c",
+        "generatedAt": "2026-08-16T22:36:35.630Z"
+      }
+    },
+    {
+      "owner": "web/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "file": "app/ranking/welfare-facilities-count-per-100k-on-assistance/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/ogp/ogp.png",
+        "sha256": "6d8eec6293b62f6a3670908927ef7a08e0d329c5c131b0dbbcfa39c8dc5f500c",
+        "bytes": 75056
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/ogp/generation.json",
+          "sha256": "7809b909831b5969ffa4e5e062f4301fffc5c35db020b1b0c6c8ee59b2acd0a3",
+          "bytes": 1021,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "608d5e4243dfc741f711f3ff4e4c9b6130d076d4bd601fd1d6cef9699899e4da",
+        "fingerprint": "a235bc3a60a19638a21b5c266d1fae8dff033993531fa4d6d459fe2de7a1063e",
+        "generatedAt": "2026-08-16T22:21:30.318Z"
+      }
+    },
+    {
+      "owner": "web/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "file": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-dark.webp",
+        "sha256": "696d5c0771fa143ddf0aaf3610baeaaec8f0608243330902f2b9ebbbc4e364e3",
+        "bytes": 15240
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail.json",
+          "sha256": "e5e847e6f031fa8e8c93b5b8c45f481f759fb900f5b4cd620d6637690ce4109c",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "b4dc209d5470c629d5be88c3312644397f796a140d479588514317abd01afd7d",
+        "fingerprint": "3595c30d3372b8f0502342387a967ab6da109c9ab807eddc0b2590fd818282ae",
+        "generatedAt": "2026-08-16T22:36:36.310Z"
+      }
+    },
+    {
+      "owner": "web/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "file": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail-light.webp",
+        "sha256": "dda49675e8078e041ed68f4c0be4569711ba9e356d4f04ba1db0b0a5d03ac98d",
+        "bytes": 13432
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/thumbnail.json",
+          "sha256": "e5e847e6f031fa8e8c93b5b8c45f481f759fb900f5b4cd620d6637690ce4109c",
+          "bytes": 1997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/welfare-facilities-count-per-100k-on-assistance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "b4dc209d5470c629d5be88c3312644397f796a140d479588514317abd01afd7d",
+        "fingerprint": "3595c30d3372b8f0502342387a967ab6da109c9ab807eddc0b2590fd818282ae",
+        "generatedAt": "2026-08-16T22:36:36.310Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-11-blue.png",
+        "sha256": "b32d9546449836e4c4ced3e082fdb2e3fd530df6a907dc2ed3613f364d93e23c",
+        "bytes": 236017
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-11-dark.png",
+        "sha256": "847facc2cf248946fb7fbbfe76a3787f1e9eca9101738f4c151fbaaa6c24fa43",
+        "bytes": 207969
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-169-blue.png",
+        "sha256": "3f2f4d0ecfa581a5d4593a289145140d173d4935338db74dcfd929ad57ba1c9f",
+        "bytes": 364144
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-169-dark.png",
+        "sha256": "d531b26c70a75c5200d56f91ae37802170c5c793f4df430f23205b23d9931221",
+        "bytes": 311610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-45-blue.png",
+        "sha256": "01653922ca7eabb2b90f7086f50a996a9eeddd96ad2605f2820d1529c7159e68",
+        "bytes": 251911
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-45-dark.png",
+        "sha256": "65064c4432f74ae64611a3cfd97a682283cfe76cba3511019167a0ad782c0452",
+        "bytes": 224111
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-916-blue.png",
+        "sha256": "8a8fc61f0c6a5cd0cf0697d74231736acc9c09a20e9acaaef2c0aace26adbde9",
+        "bytes": 288775
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-916-dark.png",
+        "sha256": "76d3f3be6404b5936dad098b8d527633fb367dd07d9f069ecdd88d9e82a4efb7",
+        "bytes": 263423
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-ogp-blue.png",
+        "sha256": "7f78e7dd46bed85978b6d63857bfa49d36312382843873ed8d62e15976f15641",
+        "bytes": 189732
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/37",
+      "file": "sns/pref-silhouette/37/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/37/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/37/card-ogp-dark.png",
+        "sha256": "55698c212d89f5428a076733eb5ab24d5e8e336f0de63f84f206e5e8d8fb53a9",
+        "bytes": 161908
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/37/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/37/generation.json",
+          "sha256": "a5430aa3dc5e71d0a46b685254c1d5c777836b51d69d6b3534d152839f0aa56c",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "e47277e15d95ecf703d7b74da4d65550e409dffbd0d80f657ac25978924d4986",
+        "fingerprint": "52dcf19081c153b92dbfecb274a9dc0c74b3921ab19ac98467db1e42b28b9378",
+        "generatedAt": "2026-10-10T22:10:54.227Z"
+      }
+    },
+    {
+      "owner": "web/theme/land-property-market",
+      "file": "https://stats47.jp/themes/land-property-market/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/land-property-market/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}

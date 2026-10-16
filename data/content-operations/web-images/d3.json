@@ -1,0 +1,696 @@
+{
+  "items": [
+    {
+      "id": "web/material/964cfb080dd1037141959fa7",
+      "channel": "web",
+      "key": "assets/area-specialty/01000/tsubutsubu-denpun.webp",
+      "title": "tsubutsubu-denpun.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a785762fee471220076387eadba3e9fe04df0c4935346d5ee67ebbd852bf46d7"
+    },
+    {
+      "id": "web/material/aff5220883981eda41d261f3",
+      "channel": "web",
+      "key": "assets/area-specialty/22000/crown-melon.webp",
+      "title": "crown-melon.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ac1e7889b38f9ae1f608258e34be060139ee8457763f8e5c8e5bb15accb2e0dc"
+    },
+    {
+      "id": "web/material/be8113e676cba45fd952b109",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/bread-consumption-expenditure-vs-final-education-university.jpg",
+      "title": "bread-consumption-expenditure-vs-final-education-university.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "544504823f7ba51fa37caa18eff4c719ec281f54db26f82d35dbb358671cdefb"
+    },
+    {
+      "id": "web/material/bf68eedebcd8602071156dce",
+      "channel": "web",
+      "key": "apps/web/public/logo-square.svg",
+      "title": "logo-square.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b8c3a073cc7c9318b5904ba2d6b04195993277800fb497e2e1b35035b821ade5"
+    },
+    {
+      "id": "web/material/bfdfa24b53d8dbabefd54d97",
+      "channel": "web",
+      "key": "apps/web/public/brand/atlas-v1/x-post-default-960x404-overlay.svg",
+      "title": "x-post-default-960x404-overlay.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7eacbce60465a19b5646e6679f79e380ac95fd0305f3b7ce24a14a9e8c3cf33a"
+    },
+    {
+      "id": "web/ranking/cook-annual-income",
+      "channel": "web",
+      "key": "cook-annual-income",
+      "title": "飲食物調理従事者の平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/cook-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "b1c7dca5923cde2febfbdf3d28edff67ffcb6aeaa18d101e80a1aba29b36f75d",
+      "catalogBasis": "b1c7dca5923cde2febfbdf3d28edff67ffcb6aeaa18d101e80a1aba29b36f75d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/nurses-general-hospital-per-100beds",
+      "channel": "web",
+      "key": "nurses-general-hospital-per-100beds",
+      "title": "一般病院看護師・准看護師数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/nurses-general-hospital-per-100beds",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "26ce22157ec8483081f86d1f7bcc576dc4a3efbeb5f8455adf108d310ec589ac",
+      "catalogBasis": "26ce22157ec8483081f86d1f7bcc576dc4a3efbeb5f8455adf108d310ec589ac",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/patent-inventor-count",
+      "channel": "web",
+      "key": "patent-inventor-count",
+      "title": "特許出願の延べ発明者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/patent-inventor-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "24c814ca5213096f66f62a4d4fc3006d086e4da05656abc60156a063d925ff61",
+      "catalogBasis": "24c814ca5213096f66f62a4d4fc3006d086e4da05656abc60156a063d925ff61",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/964cfb080dd1037141959fa7",
+      "file": "assets/area-specialty/01000/tsubutsubu-denpun.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/01000/tsubutsubu-denpun.webp",
+        "sha256": "ef8d7bef1de22b5800ff09cd117863d12e06629d8cf010369667e8e4e5b160c8",
+        "bytes": 23282
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/01000/tsubutsubu-denpun.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/aff5220883981eda41d261f3",
+      "file": "assets/area-specialty/22000/crown-melon.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/22000/crown-melon.webp",
+        "sha256": "d217c9f99aa6dc4e4ae208c06000531864ba25b684491bda30366d84fb72229e",
+        "bytes": 45416
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/22000/crown-melon.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/be8113e676cba45fd952b109",
+      "file": "assets/blog/article-backgrounds/bread-consumption-expenditure-vs-final-education-university.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/bread-consumption-expenditure-vs-final-education-university.jpg",
+        "sha256": "9977bea39c686d8b5a0b8279ae6ead8fee02b96d55e18c71bc8f192facb81640",
+        "bytes": 70828
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/bread-consumption-expenditure-vs-final-education-university.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/bf68eedebcd8602071156dce",
+      "file": "apps/web/public/logo-square.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/logo-square.svg",
+        "url": "https://stats47.jp/logo-square.svg",
+        "sha256": "1f0dea1a10a35cecd375214f23a70692e8254c41f277261a609aaee03862d6c5",
+        "bytes": 311
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/logo-square.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/bfdfa24b53d8dbabefd54d97",
+      "file": "apps/web/public/brand/atlas-v1/x-post-default-960x404-overlay.svg",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/brand/atlas-v1/x-post-default-960x404-overlay.svg",
+        "url": "https://stats47.jp/brand/atlas-v1/x-post-default-960x404-overlay.svg",
+        "sha256": "0728521c7b7ccc2a8871264317ea01183752f78b5589c853968f8ca5528d9049",
+        "bytes": 1086
+      },
+      "inputFiles": [],
+      "templateId": "unclassified",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/brand/atlas-v1/x-post-default-960x404-overlay.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/cook-annual-income",
+      "file": "app/ranking/cook-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cook-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/ogp/ogp.png",
+        "sha256": "87aa25a6f35d17f9326544aa952def96e9f4cba49aca8315dd8a80eb507846d8",
+        "bytes": 66271
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cook-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/ogp/generation.json",
+          "sha256": "345a8e0fa393728f4ab8ba14fc4481be4e894134f2ffacb527989c6f6125f707",
+          "bytes": 905,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cook-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cook-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "36656d32e29bd1b3d3ecf6b60dfac2b4c2361195b2e3e302b15a081a8dc4bed7",
+        "fingerprint": "f5213cdb3dd6445195b721342c6cd9fd7b3db376d2fd16cc3b3622d86036b636",
+        "generatedAt": "2026-10-10T21:32:44.964Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cook-annual-income",
+      "file": "app/ranking/cook-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cook-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/thumbnail-dark.webp",
+        "sha256": "b67ba351d2ec65951d05e2923494db5e060f61464842a27a34451033c67431ad",
+        "bytes": 18544
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cook-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/thumbnail.json",
+          "sha256": "0cba2eded4971448b7c4af72d8e1f7b19797bda440b31ffb2d72d11e5620cfd7",
+          "bytes": 1715,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cook-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cook-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "e575f1449510dc85888bff5a2110cd0f5f6f4d75f70449f2ac53e9f2c65f02d2",
+        "fingerprint": "c63990db4fb4ef789dcb5162a320ada4ab47238769ae0e1771668484fa0af638",
+        "generatedAt": "2026-10-10T21:50:08.820Z"
+      }
+    },
+    {
+      "owner": "web/ranking/cook-annual-income",
+      "file": "app/ranking/cook-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/cook-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/thumbnail-light.webp",
+        "sha256": "5c81ae5a45ec395188000366ae554e4d4f6c9823e6e88cd7abe05a692654277a",
+        "bytes": 16926
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/cook-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/thumbnail.json",
+          "sha256": "0cba2eded4971448b7c4af72d8e1f7b19797bda440b31ffb2d72d11e5620cfd7",
+          "bytes": 1715,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cook-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/cook-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cook-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "e575f1449510dc85888bff5a2110cd0f5f6f4d75f70449f2ac53e9f2c65f02d2",
+        "fingerprint": "c63990db4fb4ef789dcb5162a320ada4ab47238769ae0e1771668484fa0af638",
+        "generatedAt": "2026-10-10T21:50:08.820Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurses-general-hospital-per-100beds",
+      "file": "app/ranking/nurses-general-hospital-per-100beds/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurses-general-hospital-per-100beds/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/ogp/ogp.png",
+        "sha256": "6b37af59c1fa395b8d30fc53df82d384d14087da2eb5c92ef0d5d312a129c506",
+        "bytes": 62704
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurses-general-hospital-per-100beds/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/ogp/generation.json",
+          "sha256": "6f1d320bf34d10968369a55ad29ec8276ecef3099e6f5d70064c847fa6bce25d",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "acf1af6b1e3ed4a7a5ef2b25d59fef597128e7e2133025e6a46d38db404772b5",
+        "fingerprint": "8c64cbed2363314159c9aef5bc942baa6c3570b5dc6981b6711db0597a9c319e",
+        "generatedAt": "2026-10-03T21:00:25.789Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurses-general-hospital-per-100beds",
+      "file": "app/ranking/nurses-general-hospital-per-100beds/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurses-general-hospital-per-100beds/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/thumbnail-dark.webp",
+        "sha256": "f67e432ac10477c66df4611c61dcf327416d30bcaeb09ba4bf5ebbdb596426b5",
+        "bytes": 17606
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurses-general-hospital-per-100beds/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/thumbnail.json",
+          "sha256": "45502914e23a7d937aca7f9c66098b6e1c04ceb03f12d05f19cd51d80103cb3a",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "07bb0646a6f2d127bd04ad638a8b859dce1d6ff66515bfb6218b91818af09064",
+        "fingerprint": "3a2e0dcbbec92997e594d29f90fe1fd340a48889d779b3738921701f3eded9cc",
+        "generatedAt": "2026-10-03T21:25:34.171Z"
+      }
+    },
+    {
+      "owner": "web/ranking/nurses-general-hospital-per-100beds",
+      "file": "app/ranking/nurses-general-hospital-per-100beds/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/nurses-general-hospital-per-100beds/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/thumbnail-light.webp",
+        "sha256": "4ae4a9258e0137ed9f070a046bb12ccd33538d82c887b64d77a68deff6a0117f",
+        "bytes": 15814
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/nurses-general-hospital-per-100beds/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/thumbnail.json",
+          "sha256": "45502914e23a7d937aca7f9c66098b6e1c04ceb03f12d05f19cd51d80103cb3a",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nurses-general-hospital-per-100beds/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "07bb0646a6f2d127bd04ad638a8b859dce1d6ff66515bfb6218b91818af09064",
+        "fingerprint": "3a2e0dcbbec92997e594d29f90fe1fd340a48889d779b3738921701f3eded9cc",
+        "generatedAt": "2026-10-03T21:25:34.171Z"
+      }
+    },
+    {
+      "owner": "web/ranking/patent-inventor-count",
+      "file": "app/ranking/patent-inventor-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/patent-inventor-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/ogp/ogp.png",
+        "sha256": "679a3c2287db302856c5e578b660c2edd60eec6485e0f7c849cc2b1c5f5c841f",
+        "bytes": 64408
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/patent-inventor-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/ogp/generation.json",
+          "sha256": "e3a936ee556d3117c0ffbba49ccaac62b3940052a6e38efddd9ef71a4c61ea3a",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/patent-inventor-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/patent-inventor-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "5caa3da79b77ff27a60ff560023bf6ff7763ea73ca0818526700a3337a3a8ad1",
+        "inputHash": "74e87061ac97b52da67c8e79199dae5619ad09150a210cdadfaf60810e3714f4",
+        "fingerprint": "ab0891a0955a10ba35eeeeefbac5dec4ab97c03f9f4f2c89a1cab2130fafc1f9",
+        "generatedAt": "2026-09-11T14:05:32.013Z"
+      }
+    },
+    {
+      "owner": "web/ranking/patent-inventor-count",
+      "file": "app/ranking/patent-inventor-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/patent-inventor-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/thumbnail-dark.webp",
+        "sha256": "5a905c8943a3a13299b8b58399c85bcf32ff0acdaf75cf78f7073e1b9684aae7",
+        "bytes": 18166
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/patent-inventor-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/thumbnail.json",
+          "sha256": "105d199a9e08be55eac6cf635c2a35ac1e8ac9f53314ece4a3b65b2b3ca6544a",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/patent-inventor-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/patent-inventor-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "23d82502c091ef92a796fa95658a69dd1ba109a07b6bcc82da5e3ef37c51550d",
+        "fingerprint": "e141dfa718467a6c78e942bbf244bbeecaea065723a6d5128b632ac9a63d14a8",
+        "generatedAt": "2026-10-08T12:08:24.555Z"
+      }
+    },
+    {
+      "owner": "web/ranking/patent-inventor-count",
+      "file": "app/ranking/patent-inventor-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/patent-inventor-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/thumbnail-light.webp",
+        "sha256": "a1e4db0a5c9ba40e155d47c2629f4a7ca9b9d884f750917f1b35a0b35b39e112",
+        "bytes": 16630
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/patent-inventor-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/thumbnail.json",
+          "sha256": "105d199a9e08be55eac6cf635c2a35ac1e8ac9f53314ece4a3b65b2b3ca6544a",
+          "bytes": 1763,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/patent-inventor-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/patent-inventor-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/patent-inventor-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "23d82502c091ef92a796fa95658a69dd1ba109a07b6bcc82da5e3ef37c51550d",
+        "fingerprint": "e141dfa718467a6c78e942bbf244bbeecaea065723a6d5128b632ac9a63d14a8",
+        "generatedAt": "2026-10-08T12:08:24.555Z"
+      }
+    }
+  ]
+}

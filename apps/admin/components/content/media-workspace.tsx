@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { IMAGE_USES } from '../../../../.claude/scripts/media/lib/catalog.mjs';
 import {
   PanelCard,
   StatusBadge,
@@ -28,6 +29,14 @@ export interface WorkspaceData {
   images: ImageView[];
   templates: (Template & { revision: string })[];
   inventoryUpdatedAt: string | null;
+  webInventoryUpdatedAt?: string | null;
+  coverage?: {
+    collection: string;
+    images: number;
+    verified: number;
+    missing: number;
+    unverified: number;
+  }[];
   migration?: { observedAt: string; counts: Record<string, number> } | null;
 }
 const CHECK_LABELS: Record<CheckName, string> = {
@@ -46,6 +55,7 @@ const STATE_LABELS: Record<string, string> = {
   stale: '変更あり・再確認',
 };
 const CHANNELS: Record<string, string> = {
+  web: 'Web・ブログ',
   note: 'note',
   x: 'X',
   instagram: 'Instagram',
@@ -56,7 +66,14 @@ const CHANNELS: Record<string, string> = {
 const PAGE_SIZE = 36;
 function originalUrl(image: ImageView) {
   if (image.kind === 'cover') return image.coverUrl ?? null;
-  if (image.original?.key) return '/api/media-library/' + image.id + '/file';
+  if (
+    image.original?.key ||
+    image.original?.path ||
+    image.original?.provider === 'inline-svg' ||
+    (image.original?.url && image.original.provider !== 'external')
+  )
+    return '/api/media-library/' + image.id + '/file';
+  if (image.original?.url) return image.original.url;
   return image.legacyUrl ?? null;
 }
 function candidateUrl(image: ImageView) {
@@ -369,11 +386,15 @@ function ArticleEditor({
 }
 function ImageEditor({
   image,
+  related,
+  onSelect,
   templates,
   onSaved,
   onDirty,
 }: {
   image: ImageView;
+  related: ImageView[];
+  onSelect: (image: ImageView) => void;
   templates: Template[];
   onSaved: () => Promise<void>;
   onDirty: (value: boolean) => void;
@@ -416,7 +437,24 @@ function ImageEditor({
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           <StatusBadge tone={image.original?.key ? 'good' : 'warn'}>
-            {image.original?.key ? 'R2保存' : 'R2移行・回収待ち'}
+            {image.original?.key
+              ? 'R2参照'
+              : image.original?.provider === 'git'
+                ? 'Git素材'
+                : image.original?.provider === 'site'
+                  ? 'サイト配信'
+                  : 'R2移行・回収待ち'}
+          </StatusBadge>
+          <StatusBadge tone="neutral">
+            {IMAGE_USES[image.usage] ?? image.usage} ·{' '}
+            {image.format || '形式未照合'}
+          </StatusBadge>
+          <StatusBadge tone={image.original?.sha256 ? 'info' : 'warn'}>
+            {image.inventoryStatus === 'verified'
+              ? '取得・SHA記録済み'
+              : image.original?.sha256
+                ? '保存記録あり'
+                : '実体未照合'}
           </StatusBadge>
           <StatusBadge tone={image.approved ? 'good' : 'neutral'}>
             {image.approved
@@ -427,18 +465,110 @@ function ImageEditor({
           </StatusBadge>
         </div>
       </div>
+      <Section title="使用先・元データ・生成元">
+        <div className="space-y-3 text-sm">
+          {image.pageUrl && (
+            <a
+              className="text-console-accent underline"
+              href={image.pageUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              使用ページ・投稿を開く
+            </a>
+          )}
+          <p className="break-all text-xs text-console-muted">
+            原本:{' '}
+            {image.original?.key ??
+              image.original?.path ??
+              image.original?.url ??
+              '所在未確認'}
+          </p>
+          {image.missingReason && (
+            <p className="text-console-muted">{image.missingReason}</p>
+          )}
+          {image.occurrences?.map((use, index) => (
+            <p key={index}>
+              本文 {use.line}行目 · {use.heading || '導入'} ·{' '}
+              {use.alt || '説明なし'}
+            </p>
+          ))}
+          {!!related.length && (
+            <div>
+              <p>同じ原本の使用先（{related.length}件）</p>
+              <ul className="space-y-1">
+                {related.map((row) => (
+                  <li key={row.id}>
+                    <button
+                      className="text-left text-console-accent underline"
+                      onClick={() => onSelect(row)}
+                    >
+                      {row.title} · {IMAGE_USES[row.usage] ?? row.usage}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {image.generation && (
+            <div className="break-all text-xs text-console-muted">
+              <p>生成方式: {image.generation.generator}</p>
+              <p>生成コード: {image.generation.renderer ?? '未記録'}</p>
+              {image.generation.rendererHash && (
+                <p>コードの記録SHA: {image.generation.rendererHash}</p>
+              )}
+              {image.generation.inputHash && (
+                <p>入力の記録SHA: {image.generation.inputHash}</p>
+              )}
+            </div>
+          )}
+          {image.sourceLinks?.map((source, index) => (
+            <div key={index}>
+              <p>{source.relationship}</p>
+              {source.url ? (
+                <a
+                  className="break-all text-console-accent underline"
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {source.label}
+                </a>
+              ) : (
+                <p className="break-all">{source.label}</p>
+              )}
+            </div>
+          ))}
+          {!!image.missingInputs?.length && (
+            <p className="break-all text-console-muted">
+              未取得の入力: {image.missingInputs.join('、')}
+            </p>
+          )}
+        </div>
+      </Section>
       <div className="grid gap-4 xl:grid-cols-2">
         <Section title="現在の画像">
           <ActualImage key={old} src={old} alt="現在の画像" />
           {old && (
-            <a
-              href={old}
-              target="_blank"
-              rel="noreferrer"
-              className="text-xs text-console-accent underline"
-            >
-              原寸を開く
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={old}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-console-accent underline"
+              >
+                原寸を開く
+              </a>
+              {image.kind !== 'cover' &&
+                image.original?.provider !== 'external' && (
+                  <a
+                    className="text-xs text-console-accent underline"
+                    href={'/api/media-library/' + image.id + '/file?download=1'}
+                  >
+                    原本ファイルを保存
+                  </a>
+                )}
+            </div>
           )}
         </Section>
         <Section title="改善候補">
@@ -541,6 +671,11 @@ function ImageEditor({
                     {f.name}
                   </a>{' '}
                   · {f.sha256.slice(0, 12)}
+                  {' · '}
+                  {f.role ?? '入力候補'}
+                  {f.state === 'observed-current'
+                    ? '（今回取得。生成当時との一致は未照合）'
+                    : ''}
                 </li>
               ))}
             </ul>
@@ -552,12 +687,12 @@ function ImageEditor({
           </Section>
           <Section title="改善候補をR2へ保存">
             <p className="text-sm text-console-muted">
-              PNG・JPEG・WebPと、使用したrenderer・元データ・変更点を登録します。統計図は元データに基づいて生成してください。
+              PNG・JPEG・WebP・SVGと、使用したrenderer・元データ・変更点を登録します。SVGは安全なプレビューへ変換して表示します。
             </p>
             <Input
               aria-label="改善候補の画像"
               type="file"
-              accept="image/png,image/jpeg,image/webp"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
               onChange={(e) => setFile(e.target.files?.[0] ?? null)}
             />
             <Textarea
@@ -720,12 +855,12 @@ function TemplateEditor({
           value={policy}
           onChange={(e) => setPolicy(e.target.value)}
         />
-        {(['note', 'x', 'instagram'] as const).map((p) => (
+        {(['note', 'x', 'instagram', 'web'] as const).map((p) => (
           <label key={p} className="block space-y-1 text-sm">
             <span>{CHANNELS[p]}</span>
             <Textarea
               rows={2}
-              value={profiles[p]}
+              value={profiles[p] ?? '使用ページの幅と表示テーマで確認する。'}
               onChange={(e) =>
                 setProfiles({ ...profiles, [p]: e.target.value })
               }
@@ -769,12 +904,18 @@ export function MediaWorkspace({
   initialOwner = '',
   initialImage = '',
   initialChannel = '',
+  initialUsage = '',
+  initialFormat = '',
+  initialCollection = '',
 }: {
   initial: WorkspaceData;
   mode: 'articles' | 'images' | 'templates';
   initialOwner?: string;
   initialImage?: string;
   initialChannel?: string;
+  initialUsage?: string;
+  initialFormat?: string;
+  initialCollection?: string;
 }) {
   const [data, setData] = useState(initial),
     [q, setQ] = useState(''),
@@ -782,11 +923,52 @@ export function MediaWorkspace({
     [storage, setStorage] = useState(''),
     [state, setState] = useState(''),
     [template, setTemplate] = useState(''),
+    [usage, setUsage] = useState(initialUsage),
+    [format, setFormat] = useState(initialFormat),
+    [collection, setCollection] = useState(initialCollection),
+    [ownerFilter, setOwnerFilter] = useState(initialOwner),
     [page, setPage] = useState(0);
-  const [owner, setOwner] = useState(initialOwner),
+  const [owner, setOwner] = useState(
+      initialOwner ||
+        initial.images.find((i) => i.id === initialImage)?.owner ||
+        ''
+    ),
     [imageId, setImageId] = useState(initialImage),
     [dirty, setDirty] = useState(false),
     [error, setError] = useState('');
+  const [detail, setDetail] = useState<ImageView | null>(null);
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    for (const [key, value] of Object.entries({
+      channel,
+      usage,
+      format,
+      collection,
+      owner: ownerFilter,
+    })) {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    }
+    window.history.replaceState(null, '', url);
+  }, [channel, usage, format, collection, ownerFilter]);
+  useEffect(() => {
+    const controller = new AbortController();
+    setDetail(null);
+    if (imageId)
+      fetch('/api/media-library/' + encodeURIComponent(imageId), {
+        signal: controller.signal,
+      })
+        .then(async (res) => {
+          const value = await res.json();
+          if (!res.ok) throw Error(value.error);
+          return value;
+        })
+        .then(setDetail)
+        .catch((e) => {
+          if (e.name !== 'AbortError') setError(e.message);
+        });
+    return () => controller.abort();
+  }, [imageId, data]);
   useEffect(() => {
     const listener = (e: BeforeUnloadEvent) => {
       if (dirty) {
@@ -809,6 +991,10 @@ export function MediaWorkspace({
     setDirty(false);
     setOwner(nextOwner);
     setImageId(nextImage);
+    const url = new URL(window.location.href);
+    if (nextImage) url.searchParams.set('image', nextImage);
+    else url.searchParams.delete('image');
+    window.history.replaceState(null, '', url);
   };
   const filtered = useMemo(
     () =>
@@ -834,16 +1020,19 @@ export function MediaWorkspace({
           .toLowerCase()
           .includes(q.toLowerCase())) &&
       (!template || i.templateId === template) &&
+      (!usage || i.usage === usage) &&
+      (!format || i.format === format) &&
+      (!collection || i.collection === collection) &&
       (!storage ||
         (storage === 'r2'
           ? !!i.original?.key
           : storage === 'candidate'
             ? !!i.candidate
             : !i.original?.key)) &&
-      (!initialOwner || mode !== 'images' || i.owner === initialOwner)
+      (!ownerFilter || mode !== 'images' || i.owner === ownerFilter)
   );
   const selected = data.items.find((i) => i.id === owner),
-    image = data.images.find((i) => i.id === imageId);
+    image = detail?.id === imageId ? detail : undefined;
   const rows = mode === 'images' ? images : filtered,
     pages = Math.ceil(rows.length / PAGE_SIZE),
     slice = rows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
@@ -851,17 +1040,19 @@ export function MediaWorkspace({
     <div className="space-y-6">
       <nav className="flex flex-wrap gap-2">
         <Button asChild variant={mode === 'articles' ? 'default' : 'outline'}>
-          <Link href="/product/content-quality">記事・投稿の改善</Link>
+          <Link href="/ops/image-library?view=articles">記事・投稿の改善</Link>
         </Button>
         <Button asChild variant={mode === 'images' ? 'default' : 'outline'}>
           <Link href="/ops/image-library">画像ライブラリ</Link>
         </Button>
         <Button asChild variant={mode === 'templates' ? 'default' : 'outline'}>
-          <Link href="/ops/image-templates">図の型・媒体別方針</Link>
+          <Link href="/ops/image-library?view=templates">
+            図の型・媒体別方針
+          </Link>
         </Button>
       </nav>
       <div className="grid gap-3 sm:grid-cols-3">
-        <StatCard label="記事・投稿" value={data.items.length} />
+        <StatCard label="記事・投稿・使用先" value={data.items.length} />
         <StatCard label="画像の使用箇所" value={data.images.length} />
         <StatCard
           label="要改善・再確認"
@@ -871,6 +1062,23 @@ export function MediaWorkspace({
           }
         />
       </div>
+      <details className="text-sm text-console-muted">
+        <summary className="cursor-pointer">
+          棚卸し範囲・不足を確認する（Web索引:{' '}
+          {data.webInventoryUpdatedAt ?? '未取得'}）
+        </summary>
+        <p>
+          画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
+        </p>
+        <ul className="mt-2 space-y-1">
+          {data.coverage?.map((row) => (
+            <li key={row.collection}>
+              {row.collection}: {row.images}件 / SHA記録あり {row.verified}件 /
+              未照合 {row.unverified}件 / 取得不可 {row.missing}件
+            </li>
+          ))}
+        </ul>
+      </details>
       {data.migration && (
         <p className="text-sm text-console-muted">
           旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
@@ -893,6 +1101,20 @@ export function MediaWorkspace({
       ) : (
         <>
           <div className="flex flex-wrap gap-2">
+            {ownerFilter && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setOwnerFilter('');
+                  setPage(0);
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('owner');
+                  window.history.replaceState(null, '', url);
+                }}
+              >
+                この記事への絞り込みを解除
+              </Button>
+            )}
             <Input
               className="max-w-md"
               aria-label="記事・画像を検索"
@@ -933,6 +1155,69 @@ export function MediaWorkspace({
                 </option>
               ))}
             </NativeSelect>
+            {mode === 'images' && (
+              <>
+                <NativeSelect
+                  aria-label="画像の用途"
+                  value={usage}
+                  onChange={(e) => {
+                    setUsage(e.target.value);
+                    setPage(0);
+                  }}
+                >
+                  <option value="">すべての用途</option>
+                  {Object.entries(IMAGE_USES).map(([key, label]) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+                </NativeSelect>
+                <NativeSelect
+                  aria-label="画像形式"
+                  value={format}
+                  onChange={(e) => {
+                    setFormat(e.target.value);
+                    setPage(0);
+                  }}
+                >
+                  <option value="">すべての形式</option>
+                  {[
+                    ...new Set(
+                      data.images.map((i) => i.format).filter(Boolean)
+                    ),
+                  ]
+                    .sort()
+                    .map((f) => (
+                      <option key={f} value={f}>
+                        {f.toUpperCase()}
+                      </option>
+                    ))}
+                </NativeSelect>
+                <NativeSelect
+                  aria-label="既存カタログ"
+                  value={collection}
+                  onChange={(e) => {
+                    setCollection(e.target.value);
+                    setPage(0);
+                  }}
+                >
+                  <option value="">すべてのカタログ</option>
+                  {[
+                    ...new Set(
+                      data.images
+                        .map((i) => i.collection)
+                        .filter((v): v is string => !!v)
+                    ),
+                  ]
+                    .sort()
+                    .map((f) => (
+                      <option key={f} value={f}>
+                        {f}
+                      </option>
+                    ))}
+                </NativeSelect>
+              </>
+            )}
             {mode === 'images' && (
               <NativeSelect
                 aria-label="図の型"
@@ -977,8 +1262,9 @@ export function MediaWorkspace({
             画像一覧の取得: {data.inventoryUpdatedAt ?? '未実施'} ·
             R2保存の記録と再生成の成功は別々に確認します。
           </p>
-          <div className="grid min-w-0 grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(320px,2fr)_minmax(420px,3fr)]">
+          <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(260px,2fr)_minmax(340px,3fr)]">
             <Section
+              className="lg:max-h-[75vh] lg:overflow-y-auto"
               title={mode === 'images' ? '画像' : '記事・投稿'}
               count={rows.length}
             >
@@ -1012,8 +1298,15 @@ export function MediaWorkspace({
                         }
                       >
                         {(row as ImageView).original?.key
-                          ? 'R2'
-                          : '未移行・未保全'}
+                          ? 'R2参照'
+                          : (row as ImageView).original?.provider === 'git'
+                            ? 'Git素材'
+                            : (row as ImageView).original?.provider ===
+                                'inline-svg'
+                              ? '本文埋込'
+                              : (row as ImageView).original?.url
+                                ? 'URL参照'
+                                : '未移行・未保全'}
                       </StatusBadge>
                     </button>
                   ) : (
@@ -1069,7 +1362,7 @@ export function MediaWorkspace({
             <PanelCard
               key={imageId || owner}
               title={image ? '画像の確認・改善' : '記事の確認・改善'}
-              className="order-first min-w-0 xl:order-none xl:sticky xl:top-4 xl:max-h-[calc(100vh-2rem)] xl:overflow-y-auto"
+              className="order-first min-w-0 lg:order-none lg:max-h-[75vh] lg:overflow-y-auto"
             >
               {image ? (
                 <div className="space-y-4">
@@ -1083,11 +1376,19 @@ export function MediaWorkspace({
                   <ImageEditor
                     key={image.id + ':' + image.revision}
                     image={image}
+                    related={data.images.filter(
+                      (row) =>
+                        image.relatedImageIds.includes(row.id) &&
+                        row.id !== image.id
+                    )}
+                    onSelect={(row) => choose(row.owner, row.id)}
                     templates={data.templates}
                     onSaved={reload}
                     onDirty={setDirty}
                   />
                 </div>
+              ) : imageId ? (
+                <p role="status">画像の詳細を読み込んでいます。</p>
               ) : selected ? (
                 <ArticleEditor
                   key={selected.id + ':' + selected.revision}

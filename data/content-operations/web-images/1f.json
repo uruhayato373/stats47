@@ -1,0 +1,1344 @@
+{
+  "items": [
+    {
+      "id": "web/material/2edcc2a486566e04756d861d",
+      "channel": "web",
+      "key": "apps/web/public/images/categories/economy.webp",
+      "title": "economy.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "77a5a8951f4e6eff71d6f8cfc137ff63f4c36124b61b428774f37c682a14f57b"
+    },
+    {
+      "id": "web/material/38ce393760c41a167d342cfd",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/pork-consumption-quantity.jpg",
+      "title": "pork-consumption-quantity.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4dd59ef4758414440b23ff80c11771c9196438ee1d51d147a33425c1789f1911"
+    },
+    {
+      "id": "web/material/4ad0113469454d23555ba540",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/udon-soba-food-culture-prefecture-map.jpg",
+      "title": "udon-soba-food-culture-prefecture-map.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "590475352c216a682e943e978cdc33258b5540c0cf766a135a21380d090a4981"
+    },
+    {
+      "id": "web/material/d318e15b632f2823bd7d83c3",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/area-ratio-prefecture-gap.jpg",
+      "title": "area-ratio-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7a4c71f3dcf0eba2fe18b1721c6f5c3063edb500de6f4e653ae400344b5d7089"
+    },
+    {
+      "id": "web/ranking/broadcast-media-time-all",
+      "channel": "web",
+      "key": "broadcast-media-time-all",
+      "title": "テレビ・ラジオ・新聞・雑誌の総平均時間",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/broadcast-media-time-all",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d915005bb3b356a1ee2ddccd1ab59e5fd990758cc7850298526cd69ee7b38708",
+      "catalogBasis": "d915005bb3b356a1ee2ddccd1ab59e5fd990758cc7850298526cd69ee7b38708",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/dentist-annual-income",
+      "channel": "web",
+      "key": "dentist-annual-income",
+      "title": "歯科医師の平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/dentist-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "79b592166b20247d250f75676211ca13d97210a3ea9c46a7fb0ddfe4234d307a",
+      "catalogBasis": "79b592166b20247d250f75676211ca13d97210a3ea9c46a7fb0ddfe4234d307a",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/designer-annual-income",
+      "channel": "web",
+      "key": "designer-annual-income",
+      "title": "デザイナーの平均年収",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/designer-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c916ad34748f917ed8dbf1777aecb36ec336df16140b6952b032326ef4b149fa",
+      "catalogBasis": "c916ad34748f917ed8dbf1777aecb36ec336df16140b6952b032326ef4b149fa",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/gdp-growth-rate-pref-h23",
+      "channel": "web",
+      "key": "gdp-growth-rate-pref-h23",
+      "title": "県内総生産額対前年増加率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/gdp-growth-rate-pref-h23",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "83219f4f95748e30565cf700d72346a1f67a68e98bb56777e565ab70b28ebb70",
+      "catalogBasis": "83219f4f95748e30565cf700d72346a1f67a68e98bb56777e565ab70b28ebb70",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/horse-mackerel-consumption-quantity",
+      "channel": "web",
+      "key": "horse-mackerel-consumption-quantity",
+      "title": "あじ消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/horse-mackerel-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1fc10b5f1b535e5c1c997a1219d6240676babc4befecb9c13607aa6880fc175d",
+      "catalogBasis": "1fc10b5f1b535e5c1c997a1219d6240676babc4befecb9c13607aa6880fc175d",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/new-graduate-scheduled-salary-highschool-male",
+      "channel": "web",
+      "key": "new-graduate-scheduled-salary-highschool-male",
+      "title": "新規学卒者所定内給与額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/new-graduate-scheduled-salary-highschool-male",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "2717c9c621dd86b951902be5efd0f30eeb92fd02cf5785150a9fb53b51890b38",
+      "catalogBasis": "2717c9c621dd86b951902be5efd0f30eeb92fd02cf5785150a9fb53b51890b38",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/probiotic-drink-consumption-expenditure",
+      "channel": "web",
+      "key": "probiotic-drink-consumption-expenditure",
+      "title": "乳酸菌飲料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/probiotic-drink-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "56fd893186d69aa6aec7a67d46586eabb69d9d35bfb12fde89f0b5fd41d422df",
+      "catalogBasis": "56fd893186d69aa6aec7a67d46586eabb69d9d35bfb12fde89f0b5fd41d422df",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/material/2edcc2a486566e04756d861d",
+      "file": "apps/web/public/images/categories/economy.webp",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/categories/economy.webp",
+        "url": "https://stats47.jp/images/categories/economy.webp",
+        "sha256": "339ba6afdb535441936dcfa674512be7551f34d87065bd89ce2654c904139cbb",
+        "bytes": 11944
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/categories/economy.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/38ce393760c41a167d342cfd",
+      "file": "assets/blog/article-backgrounds/pork-consumption-quantity.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/pork-consumption-quantity.jpg",
+        "sha256": "8f78d6b7f22d1fcf4cd0b816b0f2a2799144c12585e3e52190c5cf43be70cefc",
+        "bytes": 128293
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/pork-consumption-quantity.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/4ad0113469454d23555ba540",
+      "file": "assets/blog/article-backgrounds/udon-soba-food-culture-prefecture-map.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/udon-soba-food-culture-prefecture-map.jpg",
+        "sha256": "1f08bc2029fcbf46531c179bae1826eada27d48bee968f3f7743f35d1e2d2b8a",
+        "bytes": 120397
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/udon-soba-food-culture-prefecture-map.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/d318e15b632f2823bd7d83c3",
+      "file": "assets/blog/article-backgrounds/area-ratio-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/area-ratio-prefecture-gap.jpg",
+        "sha256": "1ae4a36e88b108b6329c2faa928b1fb9fe5a41f49eb0b1f9392131e6360d3d8b",
+        "bytes": 76107
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/area-ratio-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/broadcast-media-time-all",
+      "file": "app/ranking/broadcast-media-time-all/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadcast-media-time-all/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/ogp/ogp.png",
+        "sha256": "439f66001e350dd2542be4e706ce2aa2847e0fb3ac56d3eaf1006da90fa10d0c",
+        "bytes": 66387
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadcast-media-time-all/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/ogp/generation.json",
+          "sha256": "9434499079083e514c5f7bf4a8c721ad11066c81af847762434290af1ff66255",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadcast-media-time-all/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadcast-media-time-all/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "7a154a02859eb08254f528110d94272e67d68f4d556c2c9c88b389de0f05527c",
+        "fingerprint": "baddc6b5f8da473e4ccca1090c11d89395e302191013aea966e40d8761810e2c",
+        "generatedAt": "2026-10-10T21:32:23.184Z"
+      }
+    },
+    {
+      "owner": "web/ranking/broadcast-media-time-all",
+      "file": "app/ranking/broadcast-media-time-all/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadcast-media-time-all/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/thumbnail-dark.webp",
+        "sha256": "3309829a6053a18a836995599fcf54bd500cef9b144c718d2b5b05e2ab5d13bd",
+        "bytes": 20124
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadcast-media-time-all/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/thumbnail.json",
+          "sha256": "4e33f7618b94c76ac50f01c99c9ec007938479bb14a891de3ad68158b4f55348",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadcast-media-time-all/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadcast-media-time-all/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "89d85cd0011c6e568f24654946dacaa1e3d56aefb2870d34c8b42736c110ed7c",
+        "fingerprint": "387801217e99deedfa1310227568ed4059351539c55573f1e10b85641081b712",
+        "generatedAt": "2026-10-10T21:50:03.171Z"
+      }
+    },
+    {
+      "owner": "web/ranking/broadcast-media-time-all",
+      "file": "app/ranking/broadcast-media-time-all/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/broadcast-media-time-all/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/thumbnail-light.webp",
+        "sha256": "d8ed4be82ca171808b3be9cc6efe695c3fcb559359f0329d0c199d8b3ae06aa6",
+        "bytes": 18926
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/broadcast-media-time-all/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/thumbnail.json",
+          "sha256": "4e33f7618b94c76ac50f01c99c9ec007938479bb14a891de3ad68158b4f55348",
+          "bytes": 1769,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/broadcast-media-time-all/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/broadcast-media-time-all/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/broadcast-media-time-all/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "89d85cd0011c6e568f24654946dacaa1e3d56aefb2870d34c8b42736c110ed7c",
+        "fingerprint": "387801217e99deedfa1310227568ed4059351539c55573f1e10b85641081b712",
+        "generatedAt": "2026-10-10T21:50:03.171Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dentist-annual-income",
+      "file": "app/ranking/dentist-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dentist-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/ogp/ogp.png",
+        "sha256": "ad6ad07aba8ba86024c01403975112503b4e3d5aab2f044bbb53ff6bc571ef50",
+        "bytes": 62958
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dentist-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/ogp/generation.json",
+          "sha256": "8c9cc48520d7239fd6890b88716bcefb664a7864c11afb8b1e9ad8ebd60bd275",
+          "bytes": 917,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dentist-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dentist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "4201400e39bb399eda93cad6902fbc2f696b444317a31d2fef512b141fd1ac09",
+        "fingerprint": "899da7f3c39358ef18ef987a133864c2d11522e9ea84f9b657950e479629c882",
+        "generatedAt": "2026-10-10T21:33:00.133Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dentist-annual-income",
+      "file": "app/ranking/dentist-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dentist-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/thumbnail-dark.webp",
+        "sha256": "ee7d8e968d2a270d15b8ac2a7edad5437fc3d3e4b2cedb02473b8dcd9c9398a2",
+        "bytes": 16230
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dentist-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/thumbnail.json",
+          "sha256": "d0168a772bd87ec55225f10d307d07bea6de398e1c42d4aa1ea0dbc568f52f84",
+          "bytes": 1742,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dentist-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dentist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "f511a6b2c08e312eeef5bab167df50745ab1fc1b2c1dba7a07c0d24eaf213c41",
+        "fingerprint": "9e7ea5fec1eb4775b98e2b3152437173ef4c321bb5a3a2348a3933d24abbbbd6",
+        "generatedAt": "2026-10-10T21:50:12.649Z"
+      }
+    },
+    {
+      "owner": "web/ranking/dentist-annual-income",
+      "file": "app/ranking/dentist-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/dentist-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/thumbnail-light.webp",
+        "sha256": "32a7b6013b2d68337e64b06f24320717bd8c72fe89909838f0bd5c57d489c0a0",
+        "bytes": 14352
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/dentist-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/thumbnail.json",
+          "sha256": "d0168a772bd87ec55225f10d307d07bea6de398e1c42d4aa1ea0dbc568f52f84",
+          "bytes": 1742,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dentist-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/dentist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dentist-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "f511a6b2c08e312eeef5bab167df50745ab1fc1b2c1dba7a07c0d24eaf213c41",
+        "fingerprint": "9e7ea5fec1eb4775b98e2b3152437173ef4c321bb5a3a2348a3933d24abbbbd6",
+        "generatedAt": "2026-10-10T21:50:12.649Z"
+      }
+    },
+    {
+      "owner": "web/ranking/designer-annual-income",
+      "file": "app/ranking/designer-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/designer-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/ogp/ogp.png",
+        "sha256": "25f3489228630538d9b155cb00ddaf98da77102f20abac3e850e4b83798bb9dc",
+        "bytes": 63110
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/designer-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/ogp/generation.json",
+          "sha256": "7d905107a4ab30e99f00c670855acbf3a3a65f4d17d26aa4973738e9c0688953",
+          "bytes": 921,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/designer-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/designer-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "aebd6d82ebf2d0085984756eb06cf1d67cf3e5cb55ca2d166dea0f7eff8b6e00",
+        "fingerprint": "44da5640794638a5d1f69b23429af5040436bc0375d358855ab8fdf904113456",
+        "generatedAt": "2026-10-10T21:33:01.718Z"
+      }
+    },
+    {
+      "owner": "web/ranking/designer-annual-income",
+      "file": "app/ranking/designer-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/designer-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/thumbnail-dark.webp",
+        "sha256": "a294036b883be367d1fc451d7b0df80671aeef5ecfcd2664213930fdbbf78de5",
+        "bytes": 16672
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/designer-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/thumbnail.json",
+          "sha256": "c9164e1c6e234f3742bd6a98edd3b8a2ce0e9ab36e6c4cfb80fd168f73e881ab",
+          "bytes": 1751,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/designer-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/designer-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "4d92cd75b10817825335b9ea65095c7464d6e8113abe9b8838937ea101499935",
+        "fingerprint": "588739bd32e6a91b1fdc5a54c183b118cdfeb9ed823bd5e58e4dcd6f3071f684",
+        "generatedAt": "2026-10-10T21:50:13.148Z"
+      }
+    },
+    {
+      "owner": "web/ranking/designer-annual-income",
+      "file": "app/ranking/designer-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/designer-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/thumbnail-light.webp",
+        "sha256": "71be1d5992e11f5f3a0cfc0d5e321af367c6854911526089ab74c88aa081eeee",
+        "bytes": 15216
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/designer-annual-income/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/thumbnail.json",
+          "sha256": "c9164e1c6e234f3742bd6a98edd3b8a2ce0e9ab36e6c4cfb80fd168f73e881ab",
+          "bytes": 1751,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/designer-annual-income/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/designer-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/designer-annual-income/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "4d92cd75b10817825335b9ea65095c7464d6e8113abe9b8838937ea101499935",
+        "fingerprint": "588739bd32e6a91b1fdc5a54c183b118cdfeb9ed823bd5e58e4dcd6f3071f684",
+        "generatedAt": "2026-10-10T21:50:13.148Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gdp-growth-rate-pref-h23",
+      "file": "app/ranking/gdp-growth-rate-pref-h23/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gdp-growth-rate-pref-h23/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/ogp/ogp.png",
+        "sha256": "0fd47129fe6733dee4ec42355ffdadbc8b37a584794a9277145604c455c8509f",
+        "bytes": 62452
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gdp-growth-rate-pref-h23/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/ogp/generation.json",
+          "sha256": "0ba62b5081aa810bae0e00b3b6a6ec02847864e3cb3416d7b3c4bb80d2f58434",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1e2f2f5043dae10b55ea6cc26eb01ab525ee5c4a14c47e911f2a35078b4a8d40",
+        "fingerprint": "7a5ef913d0609956490df0916a3f48eee823b8278002f8804707fc4c1b6ec2a1",
+        "generatedAt": "2026-10-01T18:11:08.191Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gdp-growth-rate-pref-h23",
+      "file": "app/ranking/gdp-growth-rate-pref-h23/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gdp-growth-rate-pref-h23/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/thumbnail-dark.webp",
+        "sha256": "db6b9bbba992d7eae2b7a613545bef09efba11fc5a416e9d5c7717f1f4a62e6e",
+        "bytes": 17246
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gdp-growth-rate-pref-h23/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/thumbnail.json",
+          "sha256": "42cda84b2a1bef7e23af7a1ca7f7168026e522cd08fe357af8276ddcff8444b8",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ca71bac123fd023e818ffbd16e2a4b7fd073466de33ad796ccdbfd8d03e237b0",
+        "fingerprint": "81df1c25b2fa155c1ba485b1d3be2e7c49f9ad658e1f443e5ff7ee274523562a",
+        "generatedAt": "2026-10-01T18:35:55.083Z"
+      }
+    },
+    {
+      "owner": "web/ranking/gdp-growth-rate-pref-h23",
+      "file": "app/ranking/gdp-growth-rate-pref-h23/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/gdp-growth-rate-pref-h23/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/thumbnail-light.webp",
+        "sha256": "0612f7d1b2bcb2c64e5584b0283beea31a5dd9d0c5cddc211143aeb82ee8921d",
+        "bytes": 14700
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/gdp-growth-rate-pref-h23/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/thumbnail.json",
+          "sha256": "42cda84b2a1bef7e23af7a1ca7f7168026e522cd08fe357af8276ddcff8444b8",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gdp-growth-rate-pref-h23/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ca71bac123fd023e818ffbd16e2a4b7fd073466de33ad796ccdbfd8d03e237b0",
+        "fingerprint": "81df1c25b2fa155c1ba485b1d3be2e7c49f9ad658e1f443e5ff7ee274523562a",
+        "generatedAt": "2026-10-01T18:35:55.083Z"
+      }
+    },
+    {
+      "owner": "web/ranking/horse-mackerel-consumption-quantity",
+      "file": "app/ranking/horse-mackerel-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/horse-mackerel-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/ogp/ogp.png",
+        "sha256": "4841acf571fc91e8eddc84beb67d1958f26bb39e0008fb382ca39d1dc8414219",
+        "bytes": 57391
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/horse-mackerel-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/ogp/generation.json",
+          "sha256": "4b2bed7954d03175a11038ec654d2217e58a47105c2ea58962ea3e5dc9cd6ac1",
+          "bytes": 973,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "1eb860f722659a624d8a3329af0b772132f100f9d23a7f7b57e795cf033af314",
+        "fingerprint": "666788644a4c1189adf531f8a925a9a638f3899ccea91592403aed786d6b4e82",
+        "generatedAt": "2026-10-01T18:11:34.497Z"
+      }
+    },
+    {
+      "owner": "web/ranking/horse-mackerel-consumption-quantity",
+      "file": "app/ranking/horse-mackerel-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/horse-mackerel-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/thumbnail-dark.webp",
+        "sha256": "618663aee7e001985e494487d1af0fbd39ecf2945ea0e2ff8dcc6e2728607f75",
+        "bytes": 14570
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/horse-mackerel-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/thumbnail.json",
+          "sha256": "13e05b53180bbcad4751547ddab0cfd9fa417033a1c364af0b10c7a7feb42d61",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7ceeeab4cfa3f591dbbac1e27df0ef479bb69fded09a526f0a8fffaf9505c1d3",
+        "fingerprint": "96dd179e8c61413e9bcb8efb4d7c9b6525130fffbaa801d7206365fbf4a0e43a",
+        "generatedAt": "2026-10-01T18:36:01.860Z"
+      }
+    },
+    {
+      "owner": "web/ranking/horse-mackerel-consumption-quantity",
+      "file": "app/ranking/horse-mackerel-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/horse-mackerel-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/thumbnail-light.webp",
+        "sha256": "f9fab2bd22b0dc15aeea541f5b552591d28976a3e7aaf9fa153adc47932dce18",
+        "bytes": 13048
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/horse-mackerel-consumption-quantity/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/thumbnail.json",
+          "sha256": "13e05b53180bbcad4751547ddab0cfd9fa417033a1c364af0b10c7a7feb42d61",
+          "bytes": 1889,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/horse-mackerel-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "7ceeeab4cfa3f591dbbac1e27df0ef479bb69fded09a526f0a8fffaf9505c1d3",
+        "fingerprint": "96dd179e8c61413e9bcb8efb4d7c9b6525130fffbaa801d7206365fbf4a0e43a",
+        "generatedAt": "2026-10-01T18:36:01.860Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-scheduled-salary-highschool-male",
+      "file": "app/ranking/new-graduate-scheduled-salary-highschool-male/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/ogp/ogp.png",
+        "sha256": "94e25913d642fce6034fcb936313857e0becda626a9823235fbdb083e4158a3c",
+        "bytes": 62491
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/ogp/generation.json",
+          "sha256": "dfe10b63befd67316478502ffbd0d08392de44384bcfca606cd915fa80fa8888",
+          "bytes": 1013,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "e7d7322c0ed29df97865d2a9592d999b34181ab51e2b830e57efd24a2041680f",
+        "fingerprint": "cc4fb42eb3b96b9e31099e9f7513bce110a62254652ac70bf5e61d0254aae03f",
+        "generatedAt": "2026-10-03T21:00:15.003Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-scheduled-salary-highschool-male",
+      "file": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-dark.webp",
+        "sha256": "09497e10a683a7fd2a83c196356bd4c41d8f743bdcab3bf3375f71e797537e5b",
+        "bytes": 17850
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail.json",
+          "sha256": "620f02918b57e185af4d6709dfede79880aef2a036e197e143fca6748563387d",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f4ae9eb10ae071fa181459064bc2ba618e48cfcb6fa89d32c44f9ce6faa20b30",
+        "fingerprint": "7e6e811e6c2c728940d084d4fd94170aca3fffa25c42a7f49b11db3a9637ee2f",
+        "generatedAt": "2026-10-03T21:25:31.328Z"
+      }
+    },
+    {
+      "owner": "web/ranking/new-graduate-scheduled-salary-highschool-male",
+      "file": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail-light.webp",
+        "sha256": "daee26a167ca3ef86f1b946b2eca7aa5ecfc5e8bf1ecfc291c7620aaabf24d60",
+        "bytes": 16340
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/thumbnail.json",
+          "sha256": "620f02918b57e185af4d6709dfede79880aef2a036e197e143fca6748563387d",
+          "bytes": 1979,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/new-graduate-scheduled-salary-highschool-male/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f4ae9eb10ae071fa181459064bc2ba618e48cfcb6fa89d32c44f9ce6faa20b30",
+        "fingerprint": "7e6e811e6c2c728940d084d4fd94170aca3fffa25c42a7f49b11db3a9637ee2f",
+        "generatedAt": "2026-10-03T21:25:31.328Z"
+      }
+    },
+    {
+      "owner": "web/ranking/probiotic-drink-consumption-expenditure",
+      "file": "app/ranking/probiotic-drink-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/probiotic-drink-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/ogp/ogp.png",
+        "sha256": "ddb9c6eb409076ba093ee15e3d175429f11b7cf4f77fa8d52066ad4fa156752f",
+        "bytes": 78610
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/probiotic-drink-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/ogp/generation.json",
+          "sha256": "c714f8e82e49efe2adea54ae5392b415391e6dfb43c2e685694a16398eec9250",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "27e819e83cd5d6560971c53d9beb5b6ebf34f769463759fe48d19e857bb7506f",
+        "fingerprint": "0defe36df2a1ffcbf69ecf3fb1e8fcd985d17ed6cb94018debd2659ecd080e85",
+        "generatedAt": "2026-08-15T18:42:27.300Z"
+      }
+    },
+    {
+      "owner": "web/ranking/probiotic-drink-consumption-expenditure",
+      "file": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "2718b2ba80c1300ea09f092fcc927f136e4d6d8f205a61ae005efcd638f056bf",
+        "bytes": 17908
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/thumbnail.json",
+          "sha256": "472a44510d7319347645a7b7431e35e7b0baf924528b6cdbfe8110c9fc1305f4",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "5ac036aedca44b023fd824dd5c3c78f48795b1a42be68b960d9d9029cbef526a",
+        "fingerprint": "e71df2d004c9aee181a5d38f6ed78be5fbc1981ed876fb64a5458db9eed523eb",
+        "generatedAt": "2026-08-15T18:58:41.714Z"
+      }
+    },
+    {
+      "owner": "web/ranking/probiotic-drink-consumption-expenditure",
+      "file": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "dde3bf0d184006cfbe5e764c33b6b93f140aac10addc6705cb88d1d7d0bc7b84",
+        "bytes": 16370
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/probiotic-drink-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/thumbnail.json",
+          "sha256": "472a44510d7319347645a7b7431e35e7b0baf924528b6cdbfe8110c9fc1305f4",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/probiotic-drink-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "5ac036aedca44b023fd824dd5c3c78f48795b1a42be68b960d9d9029cbef526a",
+        "fingerprint": "e71df2d004c9aee181a5d38f6ed78be5fbc1981ed876fb64a5458db9eed523eb",
+        "generatedAt": "2026-08-15T18:58:41.714Z"
+      }
+    }
+  ]
+}

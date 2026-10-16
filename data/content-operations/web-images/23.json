@@ -1,0 +1,1947 @@
+{
+  "items": [
+    {
+      "id": "web/blog/dog-registration-prefecture-gap",
+      "channel": "web",
+      "key": "dog-registration-prefecture-gap",
+      "title": "なぜ犬の登録頭数ランキングは大都市圏だらけ? 絶対数が「人口規模」を映す限界 (2020)",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/dog-registration-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "ce9d8ba56a18828bdfa08d4db0c996f68f11fdb9d9f1853cc0e0f1d17e0f03fd",
+      "catalogBasis": "ccb43c150ba54a570343cb7a8f84aee5cad460740d81e893538d1288b6f466f9",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/article.md",
+        "sha256": "b154fe0105d3a416868006e892b468a7d8704bcb4945636ace3aa7441706fb7f",
+        "bytes": 7724
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/gunma-food-culture",
+      "channel": "web",
+      "key": "gunma-food-culture",
+      "title": "群馬の食卓｜ねぎの本場なのに家計は低迷する謎",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/gunma-food-culture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "3724b51d1c70b3a7938948fb86cca6cb223812825f1e1be34ae0744fefe9314e",
+      "catalogBasis": "3cd99f3463619c713be6a0531356fb020366802a490874cfbbbdcff3c443fefc",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/article.md",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+        "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+        "bytes": 12838
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/category/laborwage",
+      "channel": "web",
+      "key": "laborwage",
+      "title": "労働・賃金",
+      "category": "category",
+      "status": "published",
+      "url": "https://stats47.jp/category/laborwage",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6050e3ff2796fd6c6a591effe0ac59bfc514f9983e4556d7388e0ca2109232af",
+      "catalogBasis": "6050e3ff2796fd6c6a591effe0ac59bfc514f9983e4556d7388e0ca2109232af",
+      "indexComplete": true
+    },
+    {
+      "id": "web/material/0b440d27d1efdeeb49d3b423",
+      "channel": "web",
+      "key": "assets/area-specialty/10000/moroheiya.webp",
+      "title": "moroheiya.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c18f1e2fcea253135c8085849103b4e945248360df6f9f07e2074917f9f5160c"
+    },
+    {
+      "id": "web/material/89ffde590c09c388c72e6ef2",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/tobacco-expenditure-ranking.jpg",
+      "title": "tobacco-expenditure-ranking.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "97df7ce53023ba1e52aa38d383fc71b6a3d2dbfaff028b295af0d8a5e44fb4d8"
+    },
+    {
+      "id": "web/material/e0fe1fb76580174aff15a96b",
+      "channel": "web",
+      "key": "assets/area-specialty/01000/shibetsu-suffolk-lamb.webp",
+      "title": "shibetsu-suffolk-lamb.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "aead529db35c93a2aea8a62cad89dbe96175d7c749c8a73f44525f198a005d13"
+    },
+    {
+      "id": "web/ranking/elderly-household-detail",
+      "channel": "web",
+      "key": "elderly-household-detail",
+      "title": "65歳以上世帯員のいる主世帯数（家族類型総数）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/elderly-household-detail",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3bdcd32b86588249bd9f1cf648675f5d18e2957d68057bb37726ccff7343daa4",
+      "catalogBasis": "3bdcd32b86588249bd9f1cf648675f5d18e2957d68057bb37726ccff7343daa4",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/japan-health-insurance-society-medical-expense-insured-per-person",
+      "channel": "web",
+      "key": "japan-health-insurance-society-medical-expense-insured-per-person",
+      "title": "全国保険協会管掌健康保険医療費",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/japan-health-insurance-society-medical-expense-insured-per-person",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "d6e0dc9d15cce35bbc14442a7b90117540fc0884b46d6e9419bc732628e8df61",
+      "catalogBasis": "d6e0dc9d15cce35bbc14442a7b90117540fc0884b46d6e9419bc732628e8df61",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/manufacturing-shipment-amount-per-employee",
+      "channel": "web",
+      "key": "manufacturing-shipment-amount-per-employee",
+      "title": "製造品出荷額等",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/manufacturing-shipment-amount-per-employee",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6be14995d5a72caa941d5de2da2c5f3440c8baed93f37a1a15a126a52a004584",
+      "catalogBasis": "6be14995d5a72caa941d5de2da2c5f3440c8baed93f37a1a15a126a52a004584",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sanitation-expenditure-ratio-pref-finance",
+      "channel": "web",
+      "key": "sanitation-expenditure-ratio-pref-finance",
+      "title": "衛生費割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sanitation-expenditure-ratio-pref-finance",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "97c5ced0b5a0fbc26c2c358e5b7548f270c972472f8be1d5cdab85564fd04bbf",
+      "catalogBasis": "97c5ced0b5a0fbc26c2c358e5b7548f270c972472f8be1d5cdab85564fd04bbf",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sports-participation-rate-skiing",
+      "channel": "web",
+      "key": "sports-participation-rate-skiing",
+      "title": "スキー・スノーボードの行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sports-participation-rate-skiing",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "646c0d6e35b6fe24f887c8d7c6b3aa109e105c2da856483dff551f138d1fbf40",
+      "catalogBasis": "646c0d6e35b6fe24f887c8d7c6b3aa109e105c2da856483dff551f138d1fbf40",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/treatment-rate-cerebrovascular-inpatient",
+      "channel": "web",
+      "key": "treatment-rate-cerebrovascular-inpatient",
+      "title": "脳血管疾患の受療率（入院）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/treatment-rate-cerebrovascular-inpatient",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ca9ee97656a19119bc4d63777de7ae15a8b572906777812e665b347f3d58382a",
+      "catalogBasis": "ca9ee97656a19119bc4d63777de7ae15a8b572906777812e665b347f3d58382a",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/dog-registration-prefecture-gap",
+      "file": "app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.svg",
+        "sha256": "4342841678f14a0cbe6ef54df6e727a61552ca447686e51c5ba8c732f3c3481c",
+        "bytes": 6902
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/article.md",
+          "sha256": "b154fe0105d3a416868006e892b468a7d8704bcb4945636ace3aa7441706fb7f",
+          "bytes": 7724,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "dog-registration-count-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.json",
+          "sha256": "2b3b651a5ce9b8a9bb907ef3b8c848b98a00d81a737eb858b8197b84a61e65bc",
+          "bytes": 6754,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "dog-registration-count-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.source.json",
+          "sha256": "e749410c9f1c24b71290d08fe2be218643e611d11ee33b08d433e5625e94e9e4",
+          "bytes": 630,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/data/dog-registration-count-prefecture-rankings.svg",
+          "alt": "犬の登録頭数 上位5・下位5（2020年・頭）",
+          "heading": "絶対数ランキング — 上位5と下位5",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/dog-registration-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/dog-registration-count/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/dog-registration-prefecture-gap",
+      "file": "app/blog/dog-registration-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/background.jpg",
+        "sha256": "7e3c879294bc0ebda10f9c6d970896e76c86a2cd40a15705d6eed6cf92f268a7",
+        "bytes": 95741
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "sha256": "8ac38d264523634c7c5bafc698cd3c7f1300029d40ae101b030a66cd37a8d3a2",
+          "bytes": 2316,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1de1d1d737459b68c215d486dedbb14954aaac6b5d9c5adfcdd788f2b56f366b",
+        "fingerprint": "21904b0025209487a5f7d3c998574dbc4d4df998464ea0f7b05225feb574cea2",
+        "generatedAt": "2026-08-22T05:17:22.444Z"
+      }
+    },
+    {
+      "owner": "web/blog/dog-registration-prefecture-gap",
+      "file": "app/blog/dog-registration-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/ogp.png",
+        "sha256": "31a0709f21fbf6ecd0a3cb8538b3e2873b8dd03fdf036d895d7cb8cabba7b208",
+        "bytes": 516313
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "sha256": "8ac38d264523634c7c5bafc698cd3c7f1300029d40ae101b030a66cd37a8d3a2",
+          "bytes": 2316,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1de1d1d737459b68c215d486dedbb14954aaac6b5d9c5adfcdd788f2b56f366b",
+        "fingerprint": "21904b0025209487a5f7d3c998574dbc4d4df998464ea0f7b05225feb574cea2",
+        "generatedAt": "2026-08-22T05:17:22.444Z"
+      }
+    },
+    {
+      "owner": "web/blog/dog-registration-prefecture-gap",
+      "file": "app/blog/dog-registration-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "6b37ca181a344061ccf374e777373705bfdd48c0d99d5a7f24fbf0fdd60ec1cf",
+        "bytes": 15634
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "sha256": "8ac38d264523634c7c5bafc698cd3c7f1300029d40ae101b030a66cd37a8d3a2",
+          "bytes": 2316,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1de1d1d737459b68c215d486dedbb14954aaac6b5d9c5adfcdd788f2b56f366b",
+        "fingerprint": "21904b0025209487a5f7d3c998574dbc4d4df998464ea0f7b05225feb574cea2",
+        "generatedAt": "2026-08-22T05:17:22.444Z"
+      }
+    },
+    {
+      "owner": "web/blog/dog-registration-prefecture-gap",
+      "file": "app/blog/dog-registration-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/dog-registration-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/thumbnail-light.webp",
+        "sha256": "3ab461c2ddfdbbfcdca67ac07424483a7b0354c235dfe869991eaba382288fb5",
+        "bytes": 30230
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/dog-registration-prefecture-gap/ogp/generation.json",
+          "sha256": "8ac38d264523634c7c5bafc698cd3c7f1300029d40ae101b030a66cd37a8d3a2",
+          "bytes": 2316,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1de1d1d737459b68c215d486dedbb14954aaac6b5d9c5adfcdd788f2b56f366b",
+        "fingerprint": "21904b0025209487a5f7d3c998574dbc4d4df998464ea0f7b05225feb574cea2",
+        "generatedAt": "2026-08-22T05:17:22.444Z"
+      }
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/data/cucumber-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/data/cucumber-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/cucumber-ranking.svg",
+        "sha256": "42d4bed1fa4835857eee69625cb0c32d5c1fd3b41ae8fcc40dc260d376877ea7",
+        "bytes": 6858
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+          "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+          "bytes": 12838,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cucumber-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/cucumber-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/cucumber-ranking.json",
+          "sha256": "3e2a4201abec72f3e47cf0ec56af37f7279e4985e611cddc95f8246f8a51f19d",
+          "bytes": 6689,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cucumber-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/cucumber-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/cucumber-ranking.source.json",
+          "sha256": "a8efff428547ef9da62c9a45de095e1a1c514dac2432dd2404b2d698defd7698",
+          "bytes": 630,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/cucumber-ranking.svg",
+          "alt": "きゅうり消費支出額 上位5・下位5",
+          "heading": "きゅうり — 全国5位、4,316円",
+          "line": 50
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cucumber-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cucumber-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/data/gunma-quantity-price-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/data/gunma-quantity-price-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/gunma-quantity-price-findings.svg",
+        "sha256": "616cee81caa56499d7bbf81ad8ebfc2805448cdda33365c2f5e232a88d1a4a50",
+        "bytes": 3680
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+          "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+          "bytes": 12838,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "gunma-quantity-price-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/gunma-quantity-price-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/gunma-quantity-price-findings.json",
+          "sha256": "9fa071b98121e0c6853a1a9432622089bda99ceacc920211494467b14a4f88ef",
+          "bytes": 1113,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "gunma-quantity-price-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/gunma-quantity-price-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/gunma-quantity-price-findings.source.json",
+          "sha256": "b489f835c9a633e227bd19889ebfdeda590fb63a2b1c70ec224c658b6f4ebc06",
+          "bytes": 1875,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/gunma-quantity-price-findings.svg",
+          "alt": "群馬の食卓を数量×価格で分解",
+          "heading": "数量×価格で分解する前橋市の食卓",
+          "line": 82
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 488",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/data/leek-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/data/leek-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/leek-ranking.svg",
+        "sha256": "9b12256c49ee150959904b68096163758f1b1a33545132156607b56143820913",
+        "bytes": 6836
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+          "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+          "bytes": 12838,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "leek-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/leek-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/leek-ranking.json",
+          "sha256": "912a823b57dc6c95f99645e7a3969331374a2631343ce2052b63ec0113610a79",
+          "bytes": 6673,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "leek-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/leek-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/leek-ranking.source.json",
+          "sha256": "4b6d1c8d8ab1c8538bf88e5f63a31b79efc2f93a15922494e5dfd828921e32b5",
+          "bytes": 608,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/leek-ranking.svg",
+          "alt": "ねぎ消費支出額 上位5・下位5",
+          "heading": "ねぎ — 全国44位、2,826円",
+          "line": 60
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/leek-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/leek-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/data/miso-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/data/miso-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/miso-ranking.svg",
+        "sha256": "8bce5dc5c2ded3e28f848f2d019b162c9b24e5d765e24760181d67c88d334b5c",
+        "bytes": 6838
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+          "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+          "bytes": 12838,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "miso-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/miso-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/miso-ranking.json",
+          "sha256": "97f63a4321af162bebc7585ba8e1379213c6d5a2be9f8ee68ea0a919f8b500b1",
+          "bytes": 6673,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "miso-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/miso-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/miso-ranking.source.json",
+          "sha256": "5c42ef6c8e903e324428384491075871568b87fe11ef3d6c222681872baec1ee",
+          "bytes": 608,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/miso-ranking.svg",
+          "alt": "みそ消費支出額 上位5・下位5",
+          "heading": "みそ — 全国4位、2,773円",
+          "line": 40
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/miso-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/miso-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/data/pear-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/data/pear-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/pear-ranking.svg",
+        "sha256": "803bc9ed1e49aff9d30cf941a4cc91a82a5dd80a929be4a53ed545a9ea2147c0",
+        "bytes": 6814
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/article.md",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/article.md",
+          "sha256": "61b81b347681d99d1ac808ed9f26de17031a756db23981376771b8b3ae118000",
+          "bytes": 12838,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "pear-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/pear-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/pear-ranking.json",
+          "sha256": "1136e4688b90c5cde62d247228320cd44229d41df6901584e8bf5fefcd8a894f",
+          "bytes": 6662,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "pear-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/data/pear-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/pear-ranking.source.json",
+          "sha256": "da47a602fee2296b69a6fbe5402d5c1bdf5a965a52038ff0771c662d1d4caed0",
+          "bytes": 605,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/data/pear-ranking.svg",
+          "alt": "梨消費支出額 上位5・下位5",
+          "heading": "梨 — 全国4位、3,997円",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pear-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pear-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/background.jpg",
+        "sha256": "8dae27b1965b488f6be5a82668d0dc1dd60d13ba4ddcbac8dd039cce38231c87",
+        "bytes": 93543
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/generation.json",
+          "sha256": "1b0d7c2040d7e525f9d25f08be4730c271016202d11147772332b2f4b1922f55",
+          "bytes": 2153,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "8ac58f4147399d93b99efb71afcc75feceb88c73752f6a71a438955744bd9297",
+        "fingerprint": "8c5c7fd95c30b73fab3c4b57d3c7afb2f449adfb7854702c61fe2f26c509eaf9",
+        "generatedAt": "2026-09-05T15:57:39.767Z"
+      }
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/ogp.png",
+        "sha256": "75300f282f6665a4f5f049da3bf516a8e0ebd4949dca045e6d145471e0b98548",
+        "bytes": 576927
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/generation.json",
+          "sha256": "1b0d7c2040d7e525f9d25f08be4730c271016202d11147772332b2f4b1922f55",
+          "bytes": 2153,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "8ac58f4147399d93b99efb71afcc75feceb88c73752f6a71a438955744bd9297",
+        "fingerprint": "8c5c7fd95c30b73fab3c4b57d3c7afb2f449adfb7854702c61fe2f26c509eaf9",
+        "generatedAt": "2026-09-05T15:57:39.767Z"
+      }
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/thumbnail-dark.webp",
+        "sha256": "dcef108e533767f480e28f1dfb5d9d603e2ab5c4aae0caaea0d0dcea1b9d55d7",
+        "bytes": 14542
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/generation.json",
+          "sha256": "1b0d7c2040d7e525f9d25f08be4730c271016202d11147772332b2f4b1922f55",
+          "bytes": 2153,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "8ac58f4147399d93b99efb71afcc75feceb88c73752f6a71a438955744bd9297",
+        "fingerprint": "8c5c7fd95c30b73fab3c4b57d3c7afb2f449adfb7854702c61fe2f26c509eaf9",
+        "generatedAt": "2026-09-05T15:57:39.767Z"
+      }
+    },
+    {
+      "owner": "web/blog/gunma-food-culture",
+      "file": "app/blog/gunma-food-culture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/gunma-food-culture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/thumbnail-light.webp",
+        "sha256": "d36e709c70e309bfe7ba688a7e0fe3db3d601e741e2364779459d3d0c3310fdd",
+        "bytes": 32378
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/gunma-food-culture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/gunma-food-culture/ogp/generation.json",
+          "sha256": "1b0d7c2040d7e525f9d25f08be4730c271016202d11147772332b2f4b1922f55",
+          "bytes": 2153,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "8ac58f4147399d93b99efb71afcc75feceb88c73752f6a71a438955744bd9297",
+        "fingerprint": "8c5c7fd95c30b73fab3c4b57d3c7afb2f449adfb7854702c61fe2f26c509eaf9",
+        "generatedAt": "2026-09-05T15:57:39.767Z"
+      }
+    },
+    {
+      "owner": "web/category/laborwage",
+      "file": "https://stats47.jp/og-image.jpg",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/og-image.jpg"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "category-ogp",
+      "generation": {
+        "generator": "static",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    },
+    {
+      "owner": "web/material/0b440d27d1efdeeb49d3b423",
+      "file": "assets/area-specialty/10000/moroheiya.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/10000/moroheiya.webp",
+        "sha256": "bdd3654584a8a3ecb2aa69c0b6bd7b577395558f6937392d1d301bb676f6b327",
+        "bytes": 52910
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/10000/moroheiya.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/89ffde590c09c388c72e6ef2",
+      "file": "assets/blog/article-backgrounds/tobacco-expenditure-ranking.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/tobacco-expenditure-ranking.jpg",
+        "sha256": "1db4159d3bd98bb31f3f0d06882124a5acd25ff9fcff33e0fd096a9b199f684d",
+        "bytes": 79276
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/tobacco-expenditure-ranking.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e0fe1fb76580174aff15a96b",
+      "file": "assets/area-specialty/01000/shibetsu-suffolk-lamb.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/01000/shibetsu-suffolk-lamb.webp",
+        "sha256": "6b480b5f515c7ac4036380bb23f2073e97e9db9799d05666ab473c3db2e58417",
+        "bytes": 34334
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/01000/shibetsu-suffolk-lamb.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/elderly-household-detail",
+      "file": "app/ranking/elderly-household-detail/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-household-detail/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/ogp/ogp.png",
+        "sha256": "0f346f6d54345b875bf60fd16a6adde237390762e3304d43147dea2ff57bcc86",
+        "bytes": 75147
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-household-detail/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/ogp/generation.json",
+          "sha256": "5435e7b64f1564f8882fba8838a7fd7c2bb6fde3f136eda2cdcd77c9e29bf97d",
+          "bytes": 929,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-household-detail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-household-detail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "95ecba3a8f0c018b994dc08b1e4448f64cf771214f77528215fa2159f648d6d2",
+        "fingerprint": "0ca1e9e7d3f94f7107b4d7316a1031bb73d5743267a869911d529ca09ce87666",
+        "generatedAt": "2026-10-01T18:10:28.047Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elderly-household-detail",
+      "file": "app/ranking/elderly-household-detail/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-household-detail/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/thumbnail-dark.webp",
+        "sha256": "ab9480d56fbb20d4fba0b6e1e98097a24a262b19384e7bfc3472a42d8ed25fb4",
+        "bytes": 22926
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-household-detail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/thumbnail.json",
+          "sha256": "cd4a1ea35d160e9f32c5fdcd991243c4d31817314aa78acb11afaae7f1572d54",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-household-detail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-household-detail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "aaea3fe47a83e4c0dcd2e59b7e6c5277301fa8003bd3f34190224100ef1e8c2f",
+        "fingerprint": "0549d73c8b3c5ca6139259ac56e851da2c7741053d3330397757001de5ce2f9f",
+        "generatedAt": "2026-10-01T18:35:44.480Z"
+      }
+    },
+    {
+      "owner": "web/ranking/elderly-household-detail",
+      "file": "app/ranking/elderly-household-detail/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/elderly-household-detail/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/thumbnail-light.webp",
+        "sha256": "8287bb9f3ac2081d318f50c595683a6019bcea848c2a0d9fb60fac7d39e90415",
+        "bytes": 21756
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/elderly-household-detail/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/thumbnail.json",
+          "sha256": "cd4a1ea35d160e9f32c5fdcd991243c4d31817314aa78acb11afaae7f1572d54",
+          "bytes": 1790,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/elderly-household-detail/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/elderly-household-detail/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/elderly-household-detail/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "aaea3fe47a83e4c0dcd2e59b7e6c5277301fa8003bd3f34190224100ef1e8c2f",
+        "fingerprint": "0549d73c8b3c5ca6139259ac56e851da2c7741053d3330397757001de5ce2f9f",
+        "generatedAt": "2026-10-01T18:35:44.480Z"
+      }
+    },
+    {
+      "owner": "web/ranking/japan-health-insurance-society-medical-expense-insured-per-person",
+      "file": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/japan-health-insurance-society-medical-expense-insured-per-person",
+      "file": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-dark.webp",
+        "sha256": "cf7cdea9746b8cdf8740c5fbd6a0326224f84b3c421dd5675abff55b07cdaca0",
+        "bytes": 20916
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail.json",
+          "sha256": "b6a75806da1150975bd8e30dffe15420f9d6f35f8e76252822c8b47d95dc26a3",
+          "bytes": 2159,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "2c633655fe43f6fa1e2c3aeaab6631d56aeeb4e6dfa20b914149a4681d641a22",
+        "fingerprint": "6298de75b4f19f54286a74c72a0fa0cfd185b9be3cec0a8ebe0b21863ed71e89",
+        "generatedAt": "2026-10-03T21:25:17.547Z"
+      }
+    },
+    {
+      "owner": "web/ranking/japan-health-insurance-society-medical-expense-insured-per-person",
+      "file": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail-light.webp",
+        "sha256": "56a7e4f60a77d67ca79dafc0c4bbf0018a88e3e802410c8d4b7a8a6c9d5e1021",
+        "bytes": 19962
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/thumbnail.json",
+          "sha256": "b6a75806da1150975bd8e30dffe15420f9d6f35f8e76252822c8b47d95dc26a3",
+          "bytes": 2159,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/japan-health-insurance-society-medical-expense-insured-per-person/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "2c633655fe43f6fa1e2c3aeaab6631d56aeeb4e6dfa20b914149a4681d641a22",
+        "fingerprint": "6298de75b4f19f54286a74c72a0fa0cfd185b9be3cec0a8ebe0b21863ed71e89",
+        "generatedAt": "2026-10-03T21:25:17.547Z"
+      }
+    },
+    {
+      "owner": "web/ranking/manufacturing-shipment-amount-per-employee",
+      "file": "app/ranking/manufacturing-shipment-amount-per-employee/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/manufacturing-shipment-amount-per-employee/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/ogp/ogp.png",
+        "sha256": "128c9899237819fe05fe6344c0aca75b83b477dae3a201050e546647ab5564e7",
+        "bytes": 59744
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/manufacturing-shipment-amount-per-employee/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/ogp/generation.json",
+          "sha256": "feee9ef3dad3b428141789eb4126626a468f101459a4253042e5482c825c10cf",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "2db75440a8195983cb94d04c4f0ed3687a5e92d6256c6a9fc2bf7f6e0f3b123b",
+        "fingerprint": "c2cfc53ce850273e3256e3a502d89f0430a25c2c641ea08b0af02dfb4385e03e",
+        "generatedAt": "2026-10-03T20:59:48.515Z"
+      }
+    },
+    {
+      "owner": "web/ranking/manufacturing-shipment-amount-per-employee",
+      "file": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-dark.webp",
+        "sha256": "8bb29daa19151cd09eb0642afef6fc8c666b02524c2e663cc67606b112574356",
+        "bytes": 16390
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/thumbnail.json",
+          "sha256": "b7f8caca564c92ab3ae801104f05ced793dfc757e70b1e5930ad964a8c0687f0",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8d8cf6be05b395f890a75cc5a9e4c0820f0814eae9dc0b369314c139bb83f5ce",
+        "fingerprint": "66846bf0c55ad3114cc35fe7e75237ff25767d5e9cef24fa5384c5003f3e2cca",
+        "generatedAt": "2026-10-03T21:25:24.454Z"
+      }
+    },
+    {
+      "owner": "web/ranking/manufacturing-shipment-amount-per-employee",
+      "file": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/thumbnail-light.webp",
+        "sha256": "dc6bc2ed1d2caae4b4e62dbc067001cc3e6346ec82763c2e3991918ffac067b2",
+        "bytes": 14898
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/manufacturing-shipment-amount-per-employee/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/thumbnail.json",
+          "sha256": "b7f8caca564c92ab3ae801104f05ced793dfc757e70b1e5930ad964a8c0687f0",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/manufacturing-shipment-amount-per-employee/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "8d8cf6be05b395f890a75cc5a9e4c0820f0814eae9dc0b369314c139bb83f5ce",
+        "fingerprint": "66846bf0c55ad3114cc35fe7e75237ff25767d5e9cef24fa5384c5003f3e2cca",
+        "generatedAt": "2026-10-03T21:25:24.454Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sanitation-expenditure-ratio-pref-finance",
+      "file": "app/ranking/sanitation-expenditure-ratio-pref-finance/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/ogp/ogp.png",
+        "sha256": "10a47b507d12a610856a5e3cc697cc3650f3df328d842010a4c97a4c6b7b4ec6",
+        "bytes": 73015
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/ogp/generation.json",
+          "sha256": "a046c194a33709bebf258225f1c2040ca347daa97222d020b2bceabf22c54ad9",
+          "bytes": 997,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "020910f79e20e38f59c74fc349462b1e6f7f54b9e265c026d42103d7a8bc5261",
+        "fingerprint": "7c965ab98b76ed5225ed910d522265bc0ab57a90acae75f11881f02d89917814",
+        "generatedAt": "2026-08-15T18:42:43.003Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sanitation-expenditure-ratio-pref-finance",
+      "file": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-dark.webp",
+        "sha256": "4cc0e648af878bdaae09df3436864341b0272d288148ff85476a916f084f49f0",
+        "bytes": 14694
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail.json",
+          "sha256": "50baea32adff781cae2ce125ee3ce967d54611b52bc1594988e92014c4a88987",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "497749473b9badb7294b12fe22b76ba8bb8f2a723bd10c1de67b07f79f1c6a77",
+        "fingerprint": "fa1e43a1f25aeafa2841e4efa232734fc091f67a7cae0a820ab13d7d81685156",
+        "generatedAt": "2026-08-15T18:58:48.432Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sanitation-expenditure-ratio-pref-finance",
+      "file": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail-light.webp",
+        "sha256": "bd466a740efc533cd05dcb4ef96e5334bec472978aa998f4f3e0cf313c848dc1",
+        "bytes": 13030
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/thumbnail.json",
+          "sha256": "50baea32adff781cae2ce125ee3ce967d54611b52bc1594988e92014c4a88987",
+          "bytes": 1943,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sanitation-expenditure-ratio-pref-finance/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "497749473b9badb7294b12fe22b76ba8bb8f2a723bd10c1de67b07f79f1c6a77",
+        "fingerprint": "fa1e43a1f25aeafa2841e4efa232734fc091f67a7cae0a820ab13d7d81685156",
+        "generatedAt": "2026-08-15T18:58:48.432Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-skiing",
+      "file": "app/ranking/sports-participation-rate-skiing/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-skiing/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/ogp/ogp.png",
+        "sha256": "2ea68832f57f03deb1e7babc282da0ecae6dac95d26ce20de4bcfb21545dcb2c",
+        "bytes": 78809
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-skiing/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/ogp/generation.json",
+          "sha256": "25fe7c16a80cece1aa481fbdea865abf0b7bf8db4d782809292238c71fb7d10f",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "0378fe527c93d5f454a206fdc2a14114c09ec009d8823d3633e0b827bc669a0d",
+        "fingerprint": "504f4fc5873bb45860389a74f49613dbb72f9ee21d17f8ff0ea380ea31f0b2a5",
+        "generatedAt": "2026-08-16T22:21:01.801Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-skiing",
+      "file": "app/ranking/sports-participation-rate-skiing/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-skiing/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/thumbnail-dark.webp",
+        "sha256": "a64eabd6640411d0c6673254dcd8030297fd5ae35749032e43639735ef745808",
+        "bytes": 17882
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-skiing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/thumbnail.json",
+          "sha256": "5fddbcb0254189f5ec08196aeb9d70a2e45802226c918f92e7162806ab466b09",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "100a09f005862e39661d048d8df2eea0829637fd50758486d97a212522bdebf7",
+        "fingerprint": "a382575c2bbe705a9b2ef84969d864c1e83b45c27eaf7df901292a178a6551b8",
+        "generatedAt": "2026-08-16T22:36:23.952Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sports-participation-rate-skiing",
+      "file": "app/ranking/sports-participation-rate-skiing/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sports-participation-rate-skiing/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/thumbnail-light.webp",
+        "sha256": "750a116c1b929e418681e55c1668b82b411b7244ee86cd9c2029e9ffb49936e2",
+        "bytes": 16558
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sports-participation-rate-skiing/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/thumbnail.json",
+          "sha256": "5fddbcb0254189f5ec08196aeb9d70a2e45802226c918f92e7162806ab466b09",
+          "bytes": 1862,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sports-participation-rate-skiing/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "100a09f005862e39661d048d8df2eea0829637fd50758486d97a212522bdebf7",
+        "fingerprint": "a382575c2bbe705a9b2ef84969d864c1e83b45c27eaf7df901292a178a6551b8",
+        "generatedAt": "2026-08-16T22:36:23.952Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-cerebrovascular-inpatient",
+      "file": "app/ranking/treatment-rate-cerebrovascular-inpatient/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/ogp/ogp.png",
+        "sha256": "2121c4bbeb14baac57c3df04a3f2a421b65a226ee149ab65382d016a8700a296",
+        "bytes": 80894
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/ogp/generation.json",
+          "sha256": "96ac0b40a9347f9df6699e9295d31907b7637432f2a7796e03bbe6c329ddedaf",
+          "bytes": 993,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "b342f2667413f45242877555b4e39330bea080365ae31c6b024e8a3ffddb00c3",
+        "fingerprint": "6dc2fafded12e988a3dbda1739410ec32a59632d7c62f26eccdeb62ba9f90ca4",
+        "generatedAt": "2026-08-16T22:21:19.219Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-cerebrovascular-inpatient",
+      "file": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-dark.webp",
+        "sha256": "2292029339848e420d741373af0b7b450822adbc095d69d43b7bb0f5cb773cf6",
+        "bytes": 18698
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail.json",
+          "sha256": "bf18a44a9dba5256f2c4c26b24f5f982348887c862fb551d3fcce0fba4f568a6",
+          "bytes": 1934,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "32385522fb6e9e86b427663478c12964710d83eaf3bcbec755268446e8e14be1",
+        "fingerprint": "fd1bc765b2da67f5d13e41199918ed72eedffa9cd7fd84957f970f96c1c68bd3",
+        "generatedAt": "2026-08-16T22:36:31.425Z"
+      }
+    },
+    {
+      "owner": "web/ranking/treatment-rate-cerebrovascular-inpatient",
+      "file": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail-light.webp",
+        "sha256": "91f7aa3dfb34d4911c531280cfbe27c2b2e7d23f6bcdf6c33e99758f69119c00",
+        "bytes": 17298
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/thumbnail.json",
+          "sha256": "bf18a44a9dba5256f2c4c26b24f5f982348887c862fb551d3fcce0fba4f568a6",
+          "bytes": 1934,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/treatment-rate-cerebrovascular-inpatient/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "32385522fb6e9e86b427663478c12964710d83eaf3bcbec755268446e8e14be1",
+        "fingerprint": "fd1bc765b2da67f5d13e41199918ed72eedffa9cd7fd84957f970f96c1c68bd3",
+        "generatedAt": "2026-08-16T22:36:31.425Z"
+      }
+    }
+  ]
+}

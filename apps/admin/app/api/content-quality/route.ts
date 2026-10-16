@@ -9,7 +9,11 @@ export const dynamic = 'force-dynamic';
 const check = z.enum(['unchecked', 'pass', 'issue', 'na']);
 const schema = z
   .object({
-    id: z.string().regex(/^(note\/[A-Za-z0-9_-]+|sns\/[0-9]+)$/),
+    id: z
+      .string()
+      .regex(
+        /^(note\/[A-Za-z0-9_-]+|sns\/[0-9]+|web\/[a-z-]+\/[A-Za-z0-9_-]+)$/
+      ),
     revision: z.string().regex(/^[a-f0-9]{64}$/),
     review: z
       .object({

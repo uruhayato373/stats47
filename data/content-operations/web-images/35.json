@@ -1,0 +1,2596 @@
+{
+  "items": [
+    {
+      "id": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "channel": "web",
+      "key": "physical-therapist-annual-income-prefecture-gap",
+      "title": "理学療法士などの年収、2023年は秋田が東京を上回る",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/physical-therapist-annual-income-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "b6d626db8d70c5d590f79e4cddc8ba873250f1dc92c68ec7cbb28febc03dd5e0",
+      "catalogBasis": "e91a1a15023fd50775fdf079249532cbcfd74bd32ce06fc057eb5b5cbac731a3",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+        "sha256": "11c5f986b7cb10f9d73baa18cc663e22c6f80a6aa628072c2a3138375607de40",
+        "bytes": 10628
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/prefectural-height-male-female-gap",
+      "channel": "web",
+      "key": "prefectural-height-male-female-gap",
+      "title": "なぜ東北の子は背が高い?──小5身長は青森141.4cm vs 愛媛138.5cm、半世紀続く東西差",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/prefectural-height-male-female-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "2e42cafa90501de69c346a3106f22f5585f319a2a15137ac52473b008e8f220f",
+      "catalogBasis": "4997f5a4f70c8210933468bf27ed91796aad211e56046db7a4b9a8c08fff1d24",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/article.md",
+        "sha256": "981ac0f31e28b29f4475c8bc40cbd18d82a4378e1203fd94dcdb697e64b35f2c",
+        "bytes": 11076
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/tuna-medical-expense",
+      "channel": "web",
+      "key": "tuna-medical-expense",
+      "title": "まぐろを食べる県は医療費が安い?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/tuna-medical-expense",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "7788656344ef3fb05c4a841f31f43fe8cce3b101bb0235db883f3562bcfe0bf5",
+      "catalogBasis": "9e552bf6482404b184a6c26b7cbf7352c6eebc37f27519ba387d6199e4d84ea5",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/article.md",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/article.md",
+        "sha256": "504da32041a993e4ec3ed80a6111d236169f94523f50f1d7c02b99a9b061e00b",
+        "bytes": 9957
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/23ea966c395c032a9cbd7aa4",
+      "channel": "web",
+      "key": "apps/web/public/flag/山口県.png",
+      "title": "山口県.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "54098ebf911475dd285e147cd4762edf0c7d75a62356c019a677965d7569999a"
+    },
+    {
+      "id": "web/material/554a4bff9a2d0890651c502e",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/roadside-station-count-prefecture-gap.jpg",
+      "title": "roadside-station-count-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "386a2fdd7cc550287c05ffa214a795e650f36f02df873b850850631b2fec61d7"
+    },
+    {
+      "id": "web/material/5578db0526bbfcd6ae544510",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/non-regular-employment-rate-prefecture-gap.jpg",
+      "title": "non-regular-employment-rate-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7682475cb6e46609f46dbfc29f0613981eade4ddbdaff00c540ddebaacac32d7"
+    },
+    {
+      "id": "web/material/68aa6bf7bbbcb047a4539aea",
+      "channel": "web",
+      "key": "assets/blog/codex-backgrounds/tuna.jpg",
+      "title": "tuna.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ea7b452a9367ab6fb06bf767f1fe11d5e5a6c10bbe4492b893468ab89353b6bc"
+    },
+    {
+      "id": "web/material/be0645d2cbba4d7bd13c8e70",
+      "channel": "web",
+      "key": "assets/note/brand-headers/generated/magazine-s47-housing-1920x1006.png",
+      "title": "magazine-s47-housing-1920x1006.png",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7d39521d8bc2c0f98075f1589f5acdc09c23e502d0248b899c2dc338644c89f8"
+    },
+    {
+      "id": "web/material/ec6c7475a127e4253ac83a4e",
+      "channel": "web",
+      "key": "assets/area-specialty/19000/hozumi-yuzu.webp",
+      "title": "hozumi-yuzu.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9b3e143f25f8881c6a0d0468b0ee6afac1d6a9f48f96c5aa80a39f3311ddee7d"
+    },
+    {
+      "id": "web/material/fa6ade21fd6c0c0ae51d7847",
+      "channel": "web",
+      "key": "assets/area-specialty/41000/yobuko-ika.webp",
+      "title": "yobuko-ika.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "16790a4acbfa771d2bf6f8d493ea32f3fc59873c3f14141ac965f3884a206230"
+    },
+    {
+      "id": "web/ranking/accommodation-consumption-expenditure",
+      "channel": "web",
+      "key": "accommodation-consumption-expenditure",
+      "title": "宿泊料消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/accommodation-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "a50f0c7bb95dc0604e8a99b001321027fab43e919097224710f281d168b5bdce",
+      "catalogBasis": "a50f0c7bb95dc0604e8a99b001321027fab43e919097224710f281d168b5bdce",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/furusato-tax-deduction-municipal-prefecture",
+      "channel": "web",
+      "key": "furusato-tax-deduction-municipal-prefecture",
+      "title": "ふるさと納税の市町村民税控除額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/furusato-tax-deduction-municipal-prefecture",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e2b3dc4dbe169b1de8f8aab23694e1bd46d00dcaba115ad535027e6593ca81cb",
+      "catalogBasis": "e2b3dc4dbe169b1de8f8aab23694e1bd46d00dcaba115ad535027e6593ca81cb",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/general-project-investment-environmental-sanitation",
+      "channel": "web",
+      "key": "general-project-investment-environmental-sanitation",
+      "title": "一般事業投資額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/general-project-investment-environmental-sanitation",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9ec121707d44aede3972c1dde5fc2d5496a93a20b415b94d623dced3f49832f8",
+      "catalogBasis": "9ec121707d44aede3972c1dde5fc2d5496a93a20b415b94d623dced3f49832f8",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/junior-college-capacity-index",
+      "channel": "web",
+      "key": "junior-college-capacity-index",
+      "title": "短期大学収容力指数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/junior-college-capacity-index",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6c30f9a457d2044024cfa2fb362b072731a111f45818cf7a9ecc8c9d725e0fac",
+      "catalogBasis": "6c30f9a457d2044024cfa2fb362b072731a111f45818cf7a9ecc8c9d725e0fac",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/katsuobushi-consumption-quantity",
+      "channel": "web",
+      "key": "katsuobushi-consumption-quantity",
+      "title": "かつお節・削り節消費量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/katsuobushi-consumption-quantity",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0aec63d44e79f723098fac5cedb92132bb24371221d26aed3d05502b676668ef",
+      "catalogBasis": "0aec63d44e79f723098fac5cedb92132bb24371221d26aed3d05502b676668ef",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/national-pension-partial-exemption-rate",
+      "channel": "web",
+      "key": "national-pension-partial-exemption-rate",
+      "title": "国民年金保険料申請一部免除割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/national-pension-partial-exemption-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "8c480d75068ee895d2423b698933f334e60e33ed55423ab307ae0983a3d3f9d6",
+      "catalogBasis": "8c480d75068ee895d2423b698933f334e60e33ed55423ab307ae0983a3d3f9d6",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sex-young-population-ratio",
+      "channel": "web",
+      "key": "sex-young-population-ratio",
+      "title": "人口性比",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sex-young-population-ratio",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "ba63df8134f430d8b856e32cec5da8865b4b43b92671d39afc3d8387a6109299",
+      "catalogBasis": "ba63df8134f430d8b856e32cec5da8865b4b43b92671d39afc3d8387a6109299",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/water-pollution-control-law-facility-count",
+      "channel": "web",
+      "key": "water-pollution-control-law-facility-count",
+      "title": "水質汚濁防止法上の特定事業場数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/water-pollution-control-law-facility-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5f974dd4e9cbcd7b3345a3f98a29f1ae9c24b2a4af819726aa88942a837b2331",
+      "catalogBasis": "5f974dd4e9cbcd7b3345a3f98a29f1ae9c24b2a4af819726aa88942a837b2331",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.svg",
+        "sha256": "8e7c94e9f229a90925821f3cdf6cd133751ec4f9e9f08741908042b5265b20d3",
+        "bytes": 31955
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+          "sha256": "11c5f986b7cb10f9d73baa18cc663e22c6f80a6aa628072c2a3138375607de40",
+          "bytes": 10628,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "physical-therapist-annual-income-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.json",
+          "sha256": "d30e36680a6e4da936f157e01890959f65e7a8a627877829c479e3c4a633300c",
+          "bytes": 4705,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "physical-therapist-annual-income-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.source.json",
+          "sha256": "763454352c66c146217c29783e4f26e626b5cc010d69c788c355e6e4b03aab60",
+          "bytes": 680,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-map.svg",
+          "alt": "理学療法士等の平均年収の都道府県別タイルマップ（2023年）",
+          "heading": "地図で見ると、地方でくくっても順位はそろわない",
+          "line": 46
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/physical-therapist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-therapist-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "91370dcfe22debbf8ccfc024fce0b66fdd645042f3b105be3664a83765691f22",
+        "bytes": 6975
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/article.md",
+          "sha256": "11c5f986b7cb10f9d73baa18cc663e22c6f80a6aa628072c2a3138375607de40",
+          "bytes": 10628,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "physical-therapist-annual-income-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.json",
+          "sha256": "6765ae13ca81459670cf62dab207e8a1ad2cd305ffa48e8600a0a27e4195d3f0",
+          "bytes": 6811,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "physical-therapist-annual-income-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "7bcf02c735751b15f583a08c795589810fdfc0f3996aea32b32a9161f1b19486",
+          "bytes": 751,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/data/physical-therapist-annual-income-prefecture-gap-prefecture-rankings.svg",
+          "alt": "理学療法士等の平均年収の上位5県と下位5県（2023年）",
+          "heading": "2023年の上位は滋賀県・茨城県・秋田県、東京都は18位",
+          "line": 24
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/physical-therapist-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/physical-therapist-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/background.jpg",
+        "sha256": "2d3011b450e87edce89059adad58b25093d5e07d877bd8277240957fce14fdc0",
+        "bytes": 93536
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "sha256": "74e7b99f5956163c328207acde2a9536ee4cf00c9f7aed284fca34f8ac74e818",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "10cc935b821200b0c6b34e394806163265be1331f7c61535cd554620e8046844",
+        "fingerprint": "c05db640834620098b58566572d01db94c0a317848559dbc9c4878d1471f1dc0",
+        "generatedAt": "2026-10-07T10:40:25.471Z"
+      }
+    },
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/ogp.png",
+        "sha256": "ecc959486050775837978cbbaa81ec6ffa1b06ba0480047546745453c6f6a4c2",
+        "bytes": 528080
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "sha256": "74e7b99f5956163c328207acde2a9536ee4cf00c9f7aed284fca34f8ac74e818",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "10cc935b821200b0c6b34e394806163265be1331f7c61535cd554620e8046844",
+        "fingerprint": "c05db640834620098b58566572d01db94c0a317848559dbc9c4878d1471f1dc0",
+        "generatedAt": "2026-10-07T10:40:25.471Z"
+      }
+    },
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "65a46ce59beb01c018e64e8392f33797f6b9fd912caec03d38efe56ecd5ac1b0",
+        "bytes": 14954
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "sha256": "74e7b99f5956163c328207acde2a9536ee4cf00c9f7aed284fca34f8ac74e818",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "10cc935b821200b0c6b34e394806163265be1331f7c61535cd554620e8046844",
+        "fingerprint": "c05db640834620098b58566572d01db94c0a317848559dbc9c4878d1471f1dc0",
+        "generatedAt": "2026-10-07T10:40:25.471Z"
+      }
+    },
+    {
+      "owner": "web/blog/physical-therapist-annual-income-prefecture-gap",
+      "file": "app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/thumbnail-light.webp",
+        "sha256": "f55d7986cbbf96eb3ca4a360403a62194975b079e0fd6bb5105c2cd49bc47e20",
+        "bytes": 28328
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/generation.json",
+          "sha256": "74e7b99f5956163c328207acde2a9536ee4cf00c9f7aed284fca34f8ac74e818",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "10cc935b821200b0c6b34e394806163265be1331f7c61535cd554620e8046844",
+        "fingerprint": "c05db640834620098b58566572d01db94c0a317848559dbc9c4878d1471f1dc0",
+        "generatedAt": "2026-10-07T10:40:25.471Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/data/height-female-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/data/height-female-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-female-ranking.svg",
+        "sha256": "56e372eded8e1dcf26fcfc78d81a15226aa4483a03c814fee534887485826288",
+        "bytes": 6846
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/article.md",
+          "sha256": "981ac0f31e28b29f4475c8bc40cbd18d82a4378e1203fd94dcdb697e64b35f2c",
+          "bytes": 11076,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "height-female-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/data/height-female-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-female-ranking.json",
+          "sha256": "6e94902c3addb330e3298ab8c33c08d80056f353987fe485c4868496ab4dbe7a",
+          "bytes": 6740,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "height-female-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/data/height-female-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-female-ranking.source.json",
+          "sha256": "76745594c48856b0189280b4dddef3ea6d0250bbc6033278d4f94bb95914f9ab",
+          "bytes": 683,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-female-ranking.svg",
+          "alt": "2023年 小5女子 平均身長 上位5・下位5",
+          "heading": "女子 小5平均身長 上位5・下位5",
+          "line": 44
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-height-primary-school-fifth-grade-female/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-height-primary-school-fifth-grade-female/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/data/height-male-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/data/height-male-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-male-ranking.svg",
+        "sha256": "e5227c4840f9641b1072ddb5182b5a6bc4f9a0a8adc85726133d96be0224cd7b",
+        "bytes": 6839
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/article.md",
+          "sha256": "981ac0f31e28b29f4475c8bc40cbd18d82a4378e1203fd94dcdb697e64b35f2c",
+          "bytes": 11076,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "height-male-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/data/height-male-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-male-ranking.json",
+          "sha256": "8bb3bddb3c1482ed5e95b64a3c791d71c943e6d1332210f40db740bed1d747e4",
+          "bytes": 6736,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "height-male-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/data/height-male-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-male-ranking.source.json",
+          "sha256": "f00261832c78677d320bcdad93164fbc93454c6e3539bb9fdef487ee8530fa77",
+          "bytes": 675,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/data/height-male-ranking.svg",
+          "alt": "2023年 小5男子 平均身長 上位5・下位5",
+          "heading": "男子 小5平均身長 上位5・下位5",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/average-height-primary-school-fifth-grade-male/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/average-height-primary-school-fifth-grade-male/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/background.jpg",
+        "sha256": "db178d9b26dc698f9954c0b309dd61fb38c6426e81b2c4079967378aebabb066",
+        "bytes": 27348
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "sha256": "342c13ae397cd360fd60f47150285a7f5d2709c3b3c5745fd7af545f9562297b",
+          "bytes": 2266,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e44e283c9cd052c46e45eebdaf16cc5fd9d689fe9e97233e3d79bd3c3202ad38",
+        "fingerprint": "1d5a93868437d8d201b0b5523e262534055fc9ee4ebd84bb38a86ba2687e2b30",
+        "generatedAt": "2026-08-22T05:17:35.021Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/ogp.png",
+        "sha256": "cb4dddee3bd52f68841ba92af37b825530e581f18097b95644d155775753fa44",
+        "bytes": 235497
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "sha256": "342c13ae397cd360fd60f47150285a7f5d2709c3b3c5745fd7af545f9562297b",
+          "bytes": 2266,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e44e283c9cd052c46e45eebdaf16cc5fd9d689fe9e97233e3d79bd3c3202ad38",
+        "fingerprint": "1d5a93868437d8d201b0b5523e262534055fc9ee4ebd84bb38a86ba2687e2b30",
+        "generatedAt": "2026-08-22T05:17:35.021Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/thumbnail-dark.webp",
+        "sha256": "14cd16cbf7b1c04c356d526f199eff70e3ac7735a6fffddb542845eec424b57f",
+        "bytes": 4484
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "sha256": "342c13ae397cd360fd60f47150285a7f5d2709c3b3c5745fd7af545f9562297b",
+          "bytes": 2266,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e44e283c9cd052c46e45eebdaf16cc5fd9d689fe9e97233e3d79bd3c3202ad38",
+        "fingerprint": "1d5a93868437d8d201b0b5523e262534055fc9ee4ebd84bb38a86ba2687e2b30",
+        "generatedAt": "2026-08-22T05:17:35.021Z"
+      }
+    },
+    {
+      "owner": "web/blog/prefectural-height-male-female-gap",
+      "file": "app/blog/prefectural-height-male-female-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/prefectural-height-male-female-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/thumbnail-light.webp",
+        "sha256": "b931fdebaf02ffb7c6476597f224fce3d95323a05fe1c2ccb62747db28ae03d9",
+        "bytes": 6746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/prefectural-height-male-female-gap/ogp/generation.json",
+          "sha256": "342c13ae397cd360fd60f47150285a7f5d2709c3b3c5745fd7af545f9562297b",
+          "bytes": 2266,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e44e283c9cd052c46e45eebdaf16cc5fd9d689fe9e97233e3d79bd3c3202ad38",
+        "fingerprint": "1d5a93868437d8d201b0b5523e262534055fc9ee4ebd84bb38a86ba2687e2b30",
+        "generatedAt": "2026-08-22T05:17:35.021Z"
+      }
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.svg",
+        "sha256": "ea05d740a7a617fffb67d135e1afb79edf4ea10491682fbb28d33a42181e40dc",
+        "bytes": 6933
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/article.md",
+          "sha256": "504da32041a993e4ec3ed80a6111d236169f94523f50f1d7c02b99a9b061e00b",
+          "bytes": 9957,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "national-medical-expense-per-person-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.json",
+          "sha256": "ee6228eb08137a21c603d52b2ff96ec96d3782a810f1c0dd4e27ba1d035ea294",
+          "bytes": 6671,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "national-medical-expense-per-person-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.source.json",
+          "sha256": "eaf40fd9a9828f0ee980c4257027aa9baa215efe4a022dcaed306043093a2087",
+          "bytes": 687,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/national-medical-expense-per-person-prefecture-rankings.svg",
+          "alt": "1人当たりの国民医療費 上位5・下位5",
+          "heading": "1人当たりの国民医療費──今度は西高東低です",
+          "line": 51
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-medical-expense-per-person/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-medical-expense-per-person/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/data/tuna-medical-expense-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-map.svg",
+        "sha256": "595f0a9957ca409ca4f6ed3baabf3761a851915ea0c16eec5218f3fc3b2de19b",
+        "bytes": 30962
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/article.md",
+          "sha256": "504da32041a993e4ec3ed80a6111d236169f94523f50f1d7c02b99a9b061e00b",
+          "bytes": 9957,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-medical-expense-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-map.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-map.json",
+          "sha256": "0660d85dc3cd93cb53c5153a44c71197a0ab208b1bbfd4e2e9e3eb0accc8f752",
+          "bytes": 4539,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-medical-expense-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-map.source.json",
+          "sha256": "acec7b05ec3bf35c7579a1a8ee619feb74698acaa826bfd69e4a9a9daaf09045",
+          "bytes": 580,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-map.svg",
+          "alt": "まぐろ消費量 都道府県マップ",
+          "heading": "地図で見ると「東高西低」がひと目で分かります",
+          "line": 41
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tuna-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tuna-consumption-quantity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.svg",
+        "sha256": "57c8acf4037c1cc25259bbec561c5751ad9c225f2b4517f689fd0214c1501588",
+        "bytes": 6824
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/article.md",
+          "sha256": "504da32041a993e4ec3ed80a6111d236169f94523f50f1d7c02b99a9b061e00b",
+          "bytes": 9957,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-medical-expense-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.json",
+          "sha256": "40c8dd93e42089a7c9bd66cbd7ab4624c2ba2c16fec1688b76fe5108509b60e0",
+          "bytes": 6645,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-medical-expense-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.source.json",
+          "sha256": "a01fdcfb6acd85cb1ba62a1a9fc31ccbdc29723e42d07570ccbc8ffdfdab7708",
+          "bytes": 624,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-expense-prefecture-rankings.svg",
+          "alt": "まぐろ消費量 上位5・下位5",
+          "heading": "まぐろ消費量ランキング──上位は関東とその周辺です",
+          "line": 26
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tuna-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tuna-consumption-quantity/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/data/tuna-medical-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/data/tuna-medical-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-scatter.svg",
+        "sha256": "1f7d42447d3d12d2770637456537f1db63716b1032551f4b6093d9cff94c1795",
+        "bytes": 10282
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/article.md",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/article.md",
+          "sha256": "504da32041a993e4ec3ed80a6111d236169f94523f50f1d7c02b99a9b061e00b",
+          "bytes": 9957,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "tuna-medical-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-scatter.json",
+          "sha256": "193aac54161b12cbcb74a0e523d5be7d989ad64d1690914797479b662396ca22",
+          "bytes": 3667,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "tuna-medical-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/data/tuna-medical-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-scatter.source.json",
+          "sha256": "a9cf5a055111c44e36ad78acadf980e089ff43cda71c3f11bad5faf0a9c17eb4",
+          "bytes": 581,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/data/tuna-medical-scatter.svg",
+          "alt": "まぐろ消費量と1人当たり国民医療費の散布図",
+          "heading": "散布図が示す負の相関──r=−0.66",
+          "line": 63
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/correlation/by-ranking-key/tuna-consumption-quantity.json",
+          "url": "https://storage.stats47.jp/app/correlation/by-ranking-key/tuna-consumption-quantity.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/background.jpg",
+        "sha256": "76ab84249eebfe9409bb2171571e4980ae2d59f3d5161c4863439652dc42a32e",
+        "bytes": 76371
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/generation.json",
+          "sha256": "85b54afc65d35e76d317d341c5b6955814dbfd7670458423113d049be94865db",
+          "bytes": 2187,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "88534da0a575ed88dbd8e96806dec0b3e98cb8135201c44481bdd7b45fdfeb98",
+        "fingerprint": "f2ba336ce82fa52364b4c8e9dd3a3ce3f8c54f705534853b5437595db105d015",
+        "generatedAt": "2026-08-28T10:26:35.152Z"
+      }
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/ogp.png",
+        "sha256": "69fa9ccd95766d4ff36f7b100187bc2e35a713e2e13a88dd8893031cd4575ab7",
+        "bytes": 481918
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/generation.json",
+          "sha256": "85b54afc65d35e76d317d341c5b6955814dbfd7670458423113d049be94865db",
+          "bytes": 2187,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "88534da0a575ed88dbd8e96806dec0b3e98cb8135201c44481bdd7b45fdfeb98",
+        "fingerprint": "f2ba336ce82fa52364b4c8e9dd3a3ce3f8c54f705534853b5437595db105d015",
+        "generatedAt": "2026-08-28T10:26:35.152Z"
+      }
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/thumbnail-dark.webp",
+        "sha256": "07e50c831e79af82efcca6406b70f6a6a6f29ef4965851e305098cd3b8981973",
+        "bytes": 12832
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/generation.json",
+          "sha256": "85b54afc65d35e76d317d341c5b6955814dbfd7670458423113d049be94865db",
+          "bytes": 2187,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "88534da0a575ed88dbd8e96806dec0b3e98cb8135201c44481bdd7b45fdfeb98",
+        "fingerprint": "f2ba336ce82fa52364b4c8e9dd3a3ce3f8c54f705534853b5437595db105d015",
+        "generatedAt": "2026-08-28T10:26:35.152Z"
+      }
+    },
+    {
+      "owner": "web/blog/tuna-medical-expense",
+      "file": "app/blog/tuna-medical-expense/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/tuna-medical-expense/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/thumbnail-light.webp",
+        "sha256": "ebc92d7da178c9a163dddbb345fd232392582eca8afe2ede7c0dbb5936b129f1",
+        "bytes": 24824
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/tuna-medical-expense/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/tuna-medical-expense/ogp/generation.json",
+          "sha256": "85b54afc65d35e76d317d341c5b6955814dbfd7670458423113d049be94865db",
+          "bytes": 2187,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "88534da0a575ed88dbd8e96806dec0b3e98cb8135201c44481bdd7b45fdfeb98",
+        "fingerprint": "f2ba336ce82fa52364b4c8e9dd3a3ce3f8c54f705534853b5437595db105d015",
+        "generatedAt": "2026-08-28T10:26:35.152Z"
+      }
+    },
+    {
+      "owner": "web/material/23ea966c395c032a9cbd7aa4",
+      "file": "apps/web/public/flag/山口県.png",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/flag/山口県.png",
+        "url": "https://stats47.jp/flag/山口県.png",
+        "sha256": "c17c6bc7f40150790f9aab2a97d86df08909ef4a914250a84614790b65f7e378",
+        "bytes": 4403
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/flag/山口県.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/554a4bff9a2d0890651c502e",
+      "file": "assets/blog/article-backgrounds/roadside-station-count-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/roadside-station-count-prefecture-gap.jpg",
+        "sha256": "3787d60c7f246bfa199327ca9e108c4571cfa7dacad6eab3b9e59f0f4fdb9c4d",
+        "bytes": 79793
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/roadside-station-count-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/5578db0526bbfcd6ae544510",
+      "file": "assets/blog/article-backgrounds/non-regular-employment-rate-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/non-regular-employment-rate-prefecture-gap.jpg",
+        "sha256": "ea361827a4848f50b31911050baee9f468148ee96621b8513a06b9809bc4a54d",
+        "bytes": 98456
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/non-regular-employment-rate-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/68aa6bf7bbbcb047a4539aea",
+      "file": "assets/blog/codex-backgrounds/tuna.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/codex-backgrounds/tuna.jpg",
+        "sha256": "0af2f98546a142e18ee897d1bef075cd50630e8c7a3beed7572fedc6fcfb95aa",
+        "bytes": 33726
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/codex-backgrounds/tuna.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/be0645d2cbba4d7bd13c8e70",
+      "file": "assets/note/brand-headers/generated/magazine-s47-housing-1920x1006.png",
+      "original": {
+        "provider": "git",
+        "path": "assets/note/brand-headers/generated/magazine-s47-housing-1920x1006.png",
+        "sha256": "679f32e0150ff5673e089212c06c16ba04dd54cfea6137c88f5bcf61e98ea0ff",
+        "bytes": 315211
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "png",
+      "sourceLinks": [
+        {
+          "label": "assets/note/brand-headers/generated/magazine-s47-housing-1920x1006.png",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/ec6c7475a127e4253ac83a4e",
+      "file": "assets/area-specialty/19000/hozumi-yuzu.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/19000/hozumi-yuzu.webp",
+        "sha256": "36d0a2c8a6793e61dd2520101bc347d76c66d50229e2721ddeb9b40e0bc40716",
+        "bytes": 33336
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/19000/hozumi-yuzu.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fa6ade21fd6c0c0ae51d7847",
+      "file": "assets/area-specialty/41000/yobuko-ika.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/41000/yobuko-ika.webp",
+        "sha256": "a3112cfa5ace866b241bb29e755aeccaa71a92162aad283664b090f2c9f19410",
+        "bytes": 25940
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/41000/yobuko-ika.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/accommodation-consumption-expenditure",
+      "file": "app/ranking/accommodation-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accommodation-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/ogp/ogp.png",
+        "sha256": "29d6f55fa9d34f72335859af26e182cd60a42d66ac0d4e8f7ba53f17b7ed5f9e",
+        "bytes": 60529
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accommodation-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/ogp/generation.json",
+          "sha256": "7891514f5be580bfb26b0688b8dd1541ab9b7cf46e93da977bd133c279b91ed9",
+          "bytes": 981,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "9a5043513d5bef5073336959f5c781fd9a7fc82ed9508b1eda17f8e135f31572",
+        "fingerprint": "ba94681952dc971a72ce1c1911b6c544a8e9c34326b37880799e2dedc488ba92",
+        "generatedAt": "2026-10-10T21:31:58.161Z"
+      }
+    },
+    {
+      "owner": "web/ranking/accommodation-consumption-expenditure",
+      "file": "app/ranking/accommodation-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accommodation-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "6bded9d0795877a546b392222d2c1fa275be0c67acff9e0f85e147d634ac6c8e",
+        "bytes": 16490
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accommodation-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/thumbnail.json",
+          "sha256": "237401082478e593b753db2153e9aee62608dfe6a4b5ac1ddfed48e88a06b78d",
+          "bytes": 1886,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "93d6a4261c8de17349ca76f99c7de453aa44722ec21d2efc4fa503b0b0df515d",
+        "fingerprint": "532e925aff95a564c132697577ac46058642a58c5d786972bca2fb80133993c6",
+        "generatedAt": "2026-10-10T21:49:56.604Z"
+      }
+    },
+    {
+      "owner": "web/ranking/accommodation-consumption-expenditure",
+      "file": "app/ranking/accommodation-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/accommodation-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "fd381a7954cfd28edea1a351dac8fce758ded23d49fd95d9186057a0a746c246",
+        "bytes": 14976
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/accommodation-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/thumbnail.json",
+          "sha256": "237401082478e593b753db2153e9aee62608dfe6a4b5ac1ddfed48e88a06b78d",
+          "bytes": 1886,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/accommodation-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "93d6a4261c8de17349ca76f99c7de453aa44722ec21d2efc4fa503b0b0df515d",
+        "fingerprint": "532e925aff95a564c132697577ac46058642a58c5d786972bca2fb80133993c6",
+        "generatedAt": "2026-10-10T21:49:56.604Z"
+      }
+    },
+    {
+      "owner": "web/ranking/furusato-tax-deduction-municipal-prefecture",
+      "file": "app/ranking/furusato-tax-deduction-municipal-prefecture/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/ogp/ogp.png",
+        "sha256": "ef80609a38f7190a79f70f83c693ba344ea4271b6cc85a4c34768adc142f6c0a",
+        "bytes": 76592
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/ogp/generation.json",
+          "sha256": "55029a9a5f2546149fd33dbeb9b64bd93be63c820e8b2361c34c0417a150a54d",
+          "bytes": 1005,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "536f39e6847550192c7a909d9092c20131ef37ab4c14f644aa7915c0d3afb795",
+        "fingerprint": "307efc4c0411f354276ed1108f2daf17c76222ac8e9fb54f5e7ab64292f7cb34",
+        "generatedAt": "2026-10-01T18:11:04.218Z"
+      }
+    },
+    {
+      "owner": "web/ranking/furusato-tax-deduction-municipal-prefecture",
+      "file": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-dark.webp",
+        "sha256": "5e22d754d8fcc70f62306e010c3290f3c8ee6e5273e41873dab21a427ca5df59",
+        "bytes": 19912
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail.json",
+          "sha256": "5d5b11c1f2a7cd1281d3a70f61fd7f46bf66f429b8840e54c72782b86b5c03cd",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "1103457e2c307b902e4af0f819988972cce52493ede29d8c8e94aedf8cc78167",
+        "fingerprint": "dfbfca21079a9c6622adf6ff6e31fc3a29a1aa2aaaadffe7cac732f5359559d6",
+        "generatedAt": "2026-10-01T18:35:54.090Z"
+      }
+    },
+    {
+      "owner": "web/ranking/furusato-tax-deduction-municipal-prefecture",
+      "file": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail-light.webp",
+        "sha256": "7bc8eaaf35878c897b842bd0cf4025025958b367f595ea9d0b34473590217d02",
+        "bytes": 19592
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/thumbnail.json",
+          "sha256": "5d5b11c1f2a7cd1281d3a70f61fd7f46bf66f429b8840e54c72782b86b5c03cd",
+          "bytes": 1961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/furusato-tax-deduction-municipal-prefecture/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "1103457e2c307b902e4af0f819988972cce52493ede29d8c8e94aedf8cc78167",
+        "fingerprint": "dfbfca21079a9c6622adf6ff6e31fc3a29a1aa2aaaadffe7cac732f5359559d6",
+        "generatedAt": "2026-10-01T18:35:54.090Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-project-investment-environmental-sanitation",
+      "file": "app/ranking/general-project-investment-environmental-sanitation/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-project-investment-environmental-sanitation/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/ogp/ogp.png",
+        "sha256": "32823b4871f4b9afa6514d48f1f8bbe6fdf35e9a2773b530159d0489bc2bf22e",
+        "bytes": 63062
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-project-investment-environmental-sanitation/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/ogp/generation.json",
+          "sha256": "04d035a4a8310eb8e4d7c7649aa82e2523bee9cf74e65b0b1bded5d8f84a3d1f",
+          "bytes": 1037,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "816b72304a2ce91e206e2bcde8b2e0444085e61a5c4a9f539d0a75092ed9c16a",
+        "fingerprint": "ee3c7fce320d5e7ef4a3c20b1e1de5f4e87bdcd9400de0bb418758075a6f779a",
+        "generatedAt": "2026-10-01T18:11:11.471Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-project-investment-environmental-sanitation",
+      "file": "app/ranking/general-project-investment-environmental-sanitation/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-project-investment-environmental-sanitation/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/thumbnail-dark.webp",
+        "sha256": "079570f95127ec3ef3909f7145edec8f9c97ad8a3a1a39cbbd3d67c4f3c304dd",
+        "bytes": 17260
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-project-investment-environmental-sanitation/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/thumbnail.json",
+          "sha256": "ddceb67c7791e8a878ed6f14f6e69e291d8b75909416c42084e15510e483ae58",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e4f878849151630be1e1685ae2613e24f5510fa2f3acade20ae845838c81fa00",
+        "fingerprint": "ef09abcf57d5a1553cd62feb9f34561cf0f532426662de5cfdf20ab9da971807",
+        "generatedAt": "2026-10-01T18:35:56.021Z"
+      }
+    },
+    {
+      "owner": "web/ranking/general-project-investment-environmental-sanitation",
+      "file": "app/ranking/general-project-investment-environmental-sanitation/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/general-project-investment-environmental-sanitation/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/thumbnail-light.webp",
+        "sha256": "5bdc95748550411df1e5576fecd06de41cba3608363158d0dc6ccf1e7a7bf3b3",
+        "bytes": 15908
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/general-project-investment-environmental-sanitation/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/thumbnail.json",
+          "sha256": "ddceb67c7791e8a878ed6f14f6e69e291d8b75909416c42084e15510e483ae58",
+          "bytes": 2033,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/general-project-investment-environmental-sanitation/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "e4f878849151630be1e1685ae2613e24f5510fa2f3acade20ae845838c81fa00",
+        "fingerprint": "ef09abcf57d5a1553cd62feb9f34561cf0f532426662de5cfdf20ab9da971807",
+        "generatedAt": "2026-10-01T18:35:56.021Z"
+      }
+    },
+    {
+      "owner": "web/ranking/junior-college-capacity-index",
+      "file": "app/ranking/junior-college-capacity-index/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-college-capacity-index/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/junior-college-capacity-index/ogp/ogp.png"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-ogp",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-college-capacity-index",
+      "file": "app/ranking/junior-college-capacity-index/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-college-capacity-index/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-college-capacity-index/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/junior-college-capacity-index",
+      "file": "app/ranking/junior-college-capacity-index/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/junior-college-capacity-index/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/junior-college-capacity-index/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/katsuobushi-consumption-quantity",
+      "file": "app/ranking/katsuobushi-consumption-quantity/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/katsuobushi-consumption-quantity/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/ogp/ogp.png",
+        "sha256": "b65e7ff87a0c5a924f7787bf7b25ecb38414bf379fb9a41f77a39a9c04dfd260",
+        "bytes": 60937
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/katsuobushi-consumption-quantity/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/ogp/generation.json",
+          "sha256": "a25c4756ba8830d35ccc93f70e0c86f276c28f6ca43a866765e5b9cc4f743736",
+          "bytes": 961,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/katsuobushi-consumption-quantity/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/katsuobushi-consumption-quantity/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "9df6cd490618f541d67b59b8759794cfbc8db4276073f7388b697140b52023b3",
+        "fingerprint": "0722298205ef015e1d735688200c832ec58687cd34505c9a2d473a9735a47684",
+        "generatedAt": "2026-10-03T20:59:30.762Z"
+      }
+    },
+    {
+      "owner": "web/ranking/katsuobushi-consumption-quantity",
+      "file": "app/ranking/katsuobushi-consumption-quantity/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/katsuobushi-consumption-quantity/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/thumbnail-dark.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/katsuobushi-consumption-quantity",
+      "file": "app/ranking/katsuobushi-consumption-quantity/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/katsuobushi-consumption-quantity/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/katsuobushi-consumption-quantity/thumbnail-light.webp"
+      },
+      "inputFiles": [],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "reference-only",
+      "collection": "ranking-card",
+      "missingReason": "生成manifestを照合できません。"
+    },
+    {
+      "owner": "web/ranking/national-pension-partial-exemption-rate",
+      "file": "app/ranking/national-pension-partial-exemption-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-pension-partial-exemption-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/ogp/ogp.png",
+        "sha256": "9b1babe4e20a029840e07bf73b18728c80f06c3161b22b75cebd5d5783080efa",
+        "bytes": 61378
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-pension-partial-exemption-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/ogp/generation.json",
+          "sha256": "9d62ecb5772c08db5b4487f7e0d9c1ebe2a9bfbc1ae45c95f9603de27c66111b",
+          "bytes": 989,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "56f07aca62dcb350eb8cca1d52c6bc14ff351882d1fd462c5faeede7eb4867d7",
+        "fingerprint": "28c3e8e1507334d657638540c3350a3ad31e42d2b100f386bb9afc93aa80777c",
+        "generatedAt": "2026-10-03T21:00:09.271Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-pension-partial-exemption-rate",
+      "file": "app/ranking/national-pension-partial-exemption-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-pension-partial-exemption-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/thumbnail-dark.webp",
+        "sha256": "27f41e9368c5e78af2404ef9caf610e3dd84d6fc33789589b09a20c7b4167470",
+        "bytes": 19322
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-pension-partial-exemption-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/thumbnail.json",
+          "sha256": "04480465fd7568db83d252897c232bef64aec2fb88b58c9de5734c2720b1b2e2",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f22b157735cdb337b14e7003e2d5601293fca91c955a7101933e0eefff0c5133",
+        "fingerprint": "defdfe412feb0c35dccccc76a23d0d1699e3b39cb97e2ea9359942f9ec9acf2b",
+        "generatedAt": "2026-10-03T21:25:29.943Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-pension-partial-exemption-rate",
+      "file": "app/ranking/national-pension-partial-exemption-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-pension-partial-exemption-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/thumbnail-light.webp",
+        "sha256": "7e46c46915129c5c94be589e2c5e098f02da350d5382c133ab103761e086c27e",
+        "bytes": 17588
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-pension-partial-exemption-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/thumbnail.json",
+          "sha256": "04480465fd7568db83d252897c232bef64aec2fb88b58c9de5734c2720b1b2e2",
+          "bytes": 1925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-pension-partial-exemption-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-pension-partial-exemption-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "f22b157735cdb337b14e7003e2d5601293fca91c955a7101933e0eefff0c5133",
+        "fingerprint": "defdfe412feb0c35dccccc76a23d0d1699e3b39cb97e2ea9359942f9ec9acf2b",
+        "generatedAt": "2026-10-03T21:25:29.943Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-young-population-ratio",
+      "file": "app/ranking/sex-young-population-ratio/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-young-population-ratio/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/ogp/ogp.png",
+        "sha256": "e7c1e29c4d37d563c0b12f63516d20ff510f2ea13f906d389027dbc8730b7906",
+        "bytes": 71841
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-young-population-ratio/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/ogp/generation.json",
+          "sha256": "fc340c88f802eba5eecf14f5d0fa40794400208bf97a7e649512224451e87254",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-young-population-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-young-population-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "62de96c4629645c81c2f05444e3ffe0c7dac53a43e5f66b8cb6b7b1ac0d85f35",
+        "fingerprint": "765f8c98abe9ef6670cb41b60d32cfb301964104e8bcc9f9d88f4b5f1a87e098",
+        "generatedAt": "2026-08-16T22:20:52.935Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-young-population-ratio",
+      "file": "app/ranking/sex-young-population-ratio/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-young-population-ratio/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/thumbnail-dark.webp",
+        "sha256": "af8d835477579667709f039f124d6e976ccd51bee9273f929d806782836a8c82",
+        "bytes": 13518
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-young-population-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/thumbnail.json",
+          "sha256": "b9c7ec2f501836c11d77e2c620441566fc8363f88bd786aebebc2373c34e69d7",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-young-population-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-young-population-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "21afcbc0ab8eaf70e305fbc75fbf75ccf8283bcefce96132971fff392798c12c",
+        "fingerprint": "949285424f69997664fdead74639598ec34542f0e57e462ec7a1293f9b50c812",
+        "generatedAt": "2026-08-16T22:36:20.104Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-young-population-ratio",
+      "file": "app/ranking/sex-young-population-ratio/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-young-population-ratio/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/thumbnail-light.webp",
+        "sha256": "33604886d9edf851d3b051878262ddd24f39fa95c5a7008941cf2d9a5f33a6a3",
+        "bytes": 10840
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-young-population-ratio/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/thumbnail.json",
+          "sha256": "b9c7ec2f501836c11d77e2c620441566fc8363f88bd786aebebc2373c34e69d7",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-young-population-ratio/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-young-population-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-young-population-ratio/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "21afcbc0ab8eaf70e305fbc75fbf75ccf8283bcefce96132971fff392798c12c",
+        "fingerprint": "949285424f69997664fdead74639598ec34542f0e57e462ec7a1293f9b50c812",
+        "generatedAt": "2026-08-16T22:36:20.104Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-pollution-control-law-facility-count",
+      "file": "app/ranking/water-pollution-control-law-facility-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-pollution-control-law-facility-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/ogp/ogp.png",
+        "sha256": "a67719caa9b6c1d84ad69d2b74e8f9a0470f7e30fc274a5badb3e91c4674ff9f",
+        "bytes": 82607
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-pollution-control-law-facility-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/ogp/generation.json",
+          "sha256": "c4270848ec2d784f33e73d34795e5a2702d32f418a4c596eaac62337d4834e7c",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "c6fbfb2d382ee8544e38169e13422eee98b6926baba1225e8ac2ddc66e499a72",
+        "fingerprint": "25484e01c4af33943bd7f182fb087d2b30df0f3149c73568e219173358b5fa81",
+        "generatedAt": "2026-08-16T22:21:28.768Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-pollution-control-law-facility-count",
+      "file": "app/ranking/water-pollution-control-law-facility-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-pollution-control-law-facility-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/thumbnail-dark.webp",
+        "sha256": "511865cb912db29439349461a5659c0da063636455c81b36522b461781da8fda",
+        "bytes": 19660
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-pollution-control-law-facility-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/thumbnail.json",
+          "sha256": "0cad17ce172dc3370edede0dec8a9680d1994dab317a7b76b025c7e598e0c558",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "14a7256eff3ed82ce19e9c1e466dee765e590a3996c9b2b908a0bc9be344eb0d",
+        "fingerprint": "17fbc0c4a1240988cdf7db8cd8806b5de8cc4be641fb769f255ddef433ed625e",
+        "generatedAt": "2026-08-16T22:36:35.630Z"
+      }
+    },
+    {
+      "owner": "web/ranking/water-pollution-control-law-facility-count",
+      "file": "app/ranking/water-pollution-control-law-facility-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/water-pollution-control-law-facility-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/thumbnail-light.webp",
+        "sha256": "a157a79f414d06878fd666d3fa7b2d79f72a02204001944c8d9c5a85db64237e",
+        "bytes": 18270
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/water-pollution-control-law-facility-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/thumbnail.json",
+          "sha256": "0cad17ce172dc3370edede0dec8a9680d1994dab317a7b76b025c7e598e0c558",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/water-pollution-control-law-facility-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/water-pollution-control-law-facility-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "14a7256eff3ed82ce19e9c1e466dee765e590a3996c9b2b908a0bc9be344eb0d",
+        "fingerprint": "17fbc0c4a1240988cdf7db8cd8806b5de8cc4be641fb769f255ddef433ed625e",
+        "generatedAt": "2026-08-16T22:36:35.630Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1914 @@
+{
+  "items": [
+    {
+      "id": "web/blog/abortion-rate-prefecture-gap",
+      "channel": "web",
+      "key": "abortion-rate-prefecture-gap",
+      "title": "中絶率は九州で高く関東内陸で低い──なぜ宮崎が最多で茨城が最少か",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/abortion-rate-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "45bcf1dfdd8a46ad67aa636d843e9cc67f169dfd4a1f3e1ac1938f360c2cedec",
+      "catalogBasis": "5a4480f6ac8624aa6b9fc4493e6d690d49768ab4ed357eda3b4195fc8f5e4a9d",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/article.md",
+        "sha256": "33f8c879ec521b4764a5a2a0f265d89c02f32e5abfb71e94237dca54d046419b",
+        "bytes": 7649
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/forest-coverage-woodland-economy",
+      "channel": "web",
+      "key": "forest-coverage-woodland-economy",
+      "title": "森林大国なのに林業は稼げない",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/forest-coverage-woodland-economy",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "736b26634116244941f455dafb2b3482e520a777b049dc5d8c42fb3f21d11265",
+      "catalogBasis": "66fa3df4f734d74f436474cae383cb9632116c3958204f51cca752b05f8ddbd2",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/article.md",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+        "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+        "bytes": 14372
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/6c3962c6f80cc3731346e411",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/annual-precipitation-rainy-season-gap.jpg",
+      "title": "annual-precipitation-rainy-season-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9b35d3a7da3635ca18a158a3e1f6a609e06633efa1b22583fe4bf64cfbf32f46"
+    },
+    {
+      "id": "web/material/b0ac8e2c3b900bc8e68e279f",
+      "channel": "web",
+      "key": "assets/area-specialty/24000/takana-kumano.webp",
+      "title": "takana-kumano.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7cf171e9a22312ecbfd97c78652143cf581d2de1179133c9671b46ef51bd73b8"
+    },
+    {
+      "id": "web/material/e6ae65d435136c845a8e39c4",
+      "channel": "web",
+      "key": "packages/gis/data/geoshape/svg/35_山口県.svg",
+      "title": "35_山口県.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "bc94c69bb3aead69b76a38c143eb62b986c9889fbc99c7ddcf2cfe63de18a6fc"
+    },
+    {
+      "id": "web/ranking/death-count",
+      "channel": "web",
+      "key": "death-count",
+      "title": "死亡数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/death-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "729ddcd427afbedf992eeeec6859afc221b2eb76c7d152da0042d6aa27e02680",
+      "catalogBasis": "729ddcd427afbedf992eeeec6859afc221b2eb76c7d152da0042d6aa27e02680",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/employment-insurance-basic-benefit-average",
+      "channel": "web",
+      "key": "employment-insurance-basic-benefit-average",
+      "title": "雇用保険基本手当平均支給額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/employment-insurance-basic-benefit-average",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "27f206493c76e6c27a973216ff0b3457b96cd71c1210c661f71c384e9289e582",
+      "catalogBasis": "27f206493c76e6c27a973216ff0b3457b96cd71c1210c661f71c384e9289e582",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/national-assessment-elementary-tutoring-rate",
+      "channel": "web",
+      "key": "national-assessment-elementary-tutoring-rate",
+      "title": "学習塾・家庭教師で教わっている小学生の割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/national-assessment-elementary-tutoring-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "6b53ec3be4ad657912c2d995d0993a264cddf74845af17e9ea3078863a69b018",
+      "catalogBasis": "6b53ec3be4ad657912c2d995d0993a264cddf74845af17e9ea3078863a69b018",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/pharmaceutical-sales-count",
+      "channel": "web",
+      "key": "pharmaceutical-sales-count",
+      "title": "医薬品販売業数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/pharmaceutical-sales-count",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e3a704a2fb3b34ba74184c9d35d643e7740c795fd1ba4976f41e0ae26c2e5881",
+      "catalogBasis": "e3a704a2fb3b34ba74184c9d35d643e7740c795fd1ba4976f41e0ae26c2e5881",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/secondary-industry-employees-per-establishment-census",
+      "channel": "web",
+      "key": "secondary-industry-employees-per-establishment-census",
+      "title": "第2次産業従業者数",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/secondary-industry-employees-per-establishment-census",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "5f46a5ec8383483d80459d08eba9c5ea25c4062288d57f4ba5b91697f4ec8d90",
+      "catalogBasis": "5f46a5ec8383483d80459d08eba9c5ea25c4062288d57f4ba5b91697f4ec8d90",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "b4f8ea36ecb5fae8d6293985457e581fcf4ada79da7273414024cc74fc89fb52",
+        "bytes": 6890
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/article.md",
+          "sha256": "33f8c879ec521b4764a5a2a0f265d89c02f32e5abfb71e94237dca54d046419b",
+          "bytes": 7649,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "abortion-rate-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.json",
+          "sha256": "a67ea57a81908434045bbbaeefd2ce2da654bc7a28d50c580830641364e22ae2",
+          "bytes": 6640,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "abortion-rate-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "e1c2b61342a8deade9fc501b457f1b1c71ef0bcba53a85c90c3b70d6c529a21e",
+          "bytes": 615,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/abortion-rate-prefecture-gap-prefecture-rankings.svg",
+          "alt": "2020年 人工妊娠中絶実施率 47都道府県ランキング",
+          "heading": "全国ランキングと都道府県分布",
+          "line": 65
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/abortion-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/abortion-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.svg",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.svg",
+        "sha256": "11cd401b9bd4dfd348486021adbb477f4c7abc83b0f3e212c2bce11b32d237fb",
+        "bytes": 2750
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/article.md",
+          "sha256": "33f8c879ec521b4764a5a2a0f265d89c02f32e5abfb71e94237dca54d046419b",
+          "bytes": 7649,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "inline-chart-1.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.source.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.source.json",
+          "sha256": "c008b5e61b736fa66222249d77bb5b76ddef6c32ad2da06e7a36dcff1284ddc8",
+          "bytes": 346,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "unclassified",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.svg",
+          "alt": "2020年 人工妊娠中絶実施率 上位10 (出典: 厚労省「衛生行政報告例」)",
+          "heading": "人工妊娠中絶実施率 TOP10 (2020年)",
+          "line": 29
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 340",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/abortion-rate-prefecture-gap/data/inline-chart-1.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/ranking/abortion-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/abortion-rate/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/background.jpg",
+        "sha256": "02fec85695130cb65866ba25e454518784d0e94abc10dce0ebfde45939a0a0c4",
+        "bytes": 106947
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "64ab8716badf84c761b63122503db525c685a8ed2a2d55fbf1f7fa99bf3c77e2",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bac5652c1e88a754ced9c3cee8ffc5a81f1585f552ecf9e7000437d5364578a5",
+        "fingerprint": "d09ea583df0209581f80653271ba7c47e4cc4602d532eaa31e3272efbc853d2d",
+        "generatedAt": "2026-08-22T05:17:17.570Z"
+      }
+    },
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/ogp.png",
+        "sha256": "fae0c7c54acb3c44c0c8582d6945e0ec2583a0a65a720eba0c233fdb2e16dac0",
+        "bytes": 623944
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "64ab8716badf84c761b63122503db525c685a8ed2a2d55fbf1f7fa99bf3c77e2",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bac5652c1e88a754ced9c3cee8ffc5a81f1585f552ecf9e7000437d5364578a5",
+        "fingerprint": "d09ea583df0209581f80653271ba7c47e4cc4602d532eaa31e3272efbc853d2d",
+        "generatedAt": "2026-08-22T05:17:17.570Z"
+      }
+    },
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "ef108d6485c69794f22b6ed6c79f54ba74fa5eba8b3735fe34f80a08171810ab",
+        "bytes": 16032
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "64ab8716badf84c761b63122503db525c685a8ed2a2d55fbf1f7fa99bf3c77e2",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bac5652c1e88a754ced9c3cee8ffc5a81f1585f552ecf9e7000437d5364578a5",
+        "fingerprint": "d09ea583df0209581f80653271ba7c47e4cc4602d532eaa31e3272efbc853d2d",
+        "generatedAt": "2026-08-22T05:17:17.570Z"
+      }
+    },
+    {
+      "owner": "web/blog/abortion-rate-prefecture-gap",
+      "file": "app/blog/abortion-rate-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/abortion-rate-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/thumbnail-light.webp",
+        "sha256": "efd71e42c6495bc719ff24348bbd87c1ef9f3c36bbc7c97a880d36ab54fc346e",
+        "bytes": 33518
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/abortion-rate-prefecture-gap/ogp/generation.json",
+          "sha256": "64ab8716badf84c761b63122503db525c685a8ed2a2d55fbf1f7fa99bf3c77e2",
+          "bytes": 2222,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "bac5652c1e88a754ced9c3cee8ffc5a81f1585f552ecf9e7000437d5364578a5",
+        "fingerprint": "d09ea583df0209581f80653271ba7c47e4cc4602d532eaa31e3272efbc853d2d",
+        "generatedAt": "2026-08-22T05:17:17.570Z"
+      }
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.svg",
+        "sha256": "08d831116a161f321bd5ad805b78fed03f548f7a8ac92b8b01e3f20d5219bf20",
+        "bytes": 6845
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart1-forest-ratio-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.json",
+          "sha256": "a7032447e80aadc2540707b9407e611f81ed2377dde97aabe107213cec03264f",
+          "bytes": 6695,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart1-forest-ratio-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.source.json",
+          "sha256": "79b09e1e21a5dbd68378fdd8f2694012f92f5c8c4a9dea1312793ebc2e509e48",
+          "bytes": 867,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart1-forest-ratio-ranking.svg",
+          "alt": "森林面積割合 上位5・下位5",
+          "heading": "森林面積割合ランキング──1位は高知県の83.3%",
+          "line": 22
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forest-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forest-area-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.svg",
+        "sha256": "aa18e2cdac05684dc012383980e19046dc274cda379edcfce39c5d3cca71fce2",
+        "bytes": 31496
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart2-forest-ratio-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.json",
+          "sha256": "d542947a0e8e0cf5e2e2ae261de9dde57b37073155875669d3a419b1c05e553b",
+          "bytes": 5321,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart2-forest-ratio-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.source.json",
+          "sha256": "117db105b91bbe32aa311b49e7067b460ba1d3c7930bc9b8155365b2395d3c1d",
+          "bytes": 333,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart2-forest-ratio-map.svg",
+          "alt": "森林面積割合",
+          "heading": "タイルマップで見る森林面積割合",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forest-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forest-area-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.svg",
+        "sha256": "2fd85d3232c224a0eaf34e979ec46d0ae24a64b0a479dd4e2e0362d28004bb0b",
+        "bytes": 10697
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart3-forest-vs-gdp-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.json",
+          "sha256": "3da54655f4f89d2b2fb432e25753f5f9fb11ddea7bbbbd54450425d2f79f8a5c",
+          "bytes": 5987,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart3-forest-vs-gdp-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.source.json",
+          "sha256": "1287991717180d602c519b8c96edb937859d63826ac7213309c9605919955f00",
+          "bytes": 913,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart3-forest-vs-gdp-scatter.svg",
+          "alt": "林野面積 vs 県内総生産額（林業）",
+          "heading": "林業GDP の現実──散布図で見る断絶",
+          "line": 45
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.svg",
+        "sha256": "415f9e8971d16023d67a5e98dcaa96c52604e9a8ea0cc0c9121ceeb1f5e73768",
+        "bytes": 6852
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart4-forest-road-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.json",
+          "sha256": "abc4a6ee81bff571028d81dc25b8810bfc3a3d9cf02a986590d216b95e4d2f21",
+          "bytes": 6692,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart4-forest-road-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.source.json",
+          "sha256": "fd6195b14215a29bb187ad43d8fb63e887a1e1000daa7d0208ffa4f315442e20",
+          "bytes": 866,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart4-forest-road-ranking.svg",
+          "alt": "林道延長 上位5・下位5",
+          "heading": "林道インフラの格差──北海道が圧倒的1位",
+          "line": 79
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/forest-road-length/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/forest-road-length/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.svg",
+        "sha256": "cb66e65fd28e3533fdb2ba1a90e2cd5122fee298971f1207e7acd9715428ec28",
+        "bytes": 6868
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart5-artificial-forest-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.json",
+          "sha256": "1b9d0504b9be71004563c9314c932a3b16e56f5957a32475ff18dca2b3803352",
+          "bytes": 6661,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart5-artificial-forest-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.source.json",
+          "sha256": "c9ae19b4517ab417dddbf6de7741e250ffe4cabad518fcffafa55e7a1c649624",
+          "bytes": 890,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart5-artificial-forest-ranking.svg",
+          "alt": "人工造林面積 上位5・下位5",
+          "heading": "人工造林面積──再造林の現状",
+          "line": 94
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/artificial-forest-area/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/artificial-forest-area/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.svg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.svg",
+        "sha256": "d7e622628a2565fc71bdc82938ca2bb73485b5d41fb78752ce117c89ce43c269",
+        "bytes": 3290
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/article.md",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/article.md",
+          "sha256": "17a1ad7f2d5cad0a7e56d1abae6746852e9af2ba6c7b89eab30c79f5ba19d806",
+          "bytes": 14372,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "chart6-summary-findings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.json",
+          "sha256": "ee87cc592b8fe0703403873ad5699a67d22a6dfa4c941abdf69ec91230be3335",
+          "bytes": 661,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "chart6-summary-findings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.source.json",
+          "sha256": "711cc15917873ca4d38ac470cd451fe551989047ca20d8577accb5a266b3a126",
+          "bytes": 355,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-findings",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/data/chart6-summary-findings.svg",
+          "alt": "この記事でわかったこと",
+          "heading": "まとめ",
+          "line": 111
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 504",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/background.jpg",
+        "sha256": "fdb0399175fc01121587b4eb4ef9c65a8b0741b0bb9cd2696ad11e70b958732d",
+        "bytes": 95535
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "sha256": "65583eeeff0f8b735479bf262689fab7bca119fe9311f001a7d18796693ffe4d",
+          "bytes": 2246,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "dd40d2069f9bb0aedd2025a61e04b0b67778f9fb2f01654609453afc588c46fc",
+        "fingerprint": "3ca16e8c72030ac46ad5b48c16ef0fe2a9d1dc74d2ae08bbeeb6313533214b24",
+        "generatedAt": "2026-08-22T05:17:24.518Z"
+      }
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/ogp.png",
+        "sha256": "0f2226a6aac52bdedc236cb97920027c93eaa39aa0e48feded2c651241b10b7a",
+        "bytes": 562211
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "sha256": "65583eeeff0f8b735479bf262689fab7bca119fe9311f001a7d18796693ffe4d",
+          "bytes": 2246,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "dd40d2069f9bb0aedd2025a61e04b0b67778f9fb2f01654609453afc588c46fc",
+        "fingerprint": "3ca16e8c72030ac46ad5b48c16ef0fe2a9d1dc74d2ae08bbeeb6313533214b24",
+        "generatedAt": "2026-08-22T05:17:24.518Z"
+      }
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/thumbnail-dark.webp",
+        "sha256": "4488ce5e28d9e0fe86e0151ce4402ade5d90c4824c404d21ac6ebb4b46663cdc",
+        "bytes": 14394
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "sha256": "65583eeeff0f8b735479bf262689fab7bca119fe9311f001a7d18796693ffe4d",
+          "bytes": 2246,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "dd40d2069f9bb0aedd2025a61e04b0b67778f9fb2f01654609453afc588c46fc",
+        "fingerprint": "3ca16e8c72030ac46ad5b48c16ef0fe2a9d1dc74d2ae08bbeeb6313533214b24",
+        "generatedAt": "2026-08-22T05:17:24.518Z"
+      }
+    },
+    {
+      "owner": "web/blog/forest-coverage-woodland-economy",
+      "file": "app/blog/forest-coverage-woodland-economy/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/forest-coverage-woodland-economy/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/thumbnail-light.webp",
+        "sha256": "0988650bb264a07d13e96819e5bb28e2049c7db1df1285f872e52f97eca33f0c",
+        "bytes": 29706
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/forest-coverage-woodland-economy/ogp/generation.json",
+          "sha256": "65583eeeff0f8b735479bf262689fab7bca119fe9311f001a7d18796693ffe4d",
+          "bytes": 2246,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "dd40d2069f9bb0aedd2025a61e04b0b67778f9fb2f01654609453afc588c46fc",
+        "fingerprint": "3ca16e8c72030ac46ad5b48c16ef0fe2a9d1dc74d2ae08bbeeb6313533214b24",
+        "generatedAt": "2026-08-22T05:17:24.518Z"
+      }
+    },
+    {
+      "owner": "web/material/6c3962c6f80cc3731346e411",
+      "file": "assets/blog/article-backgrounds/annual-precipitation-rainy-season-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/annual-precipitation-rainy-season-gap.jpg",
+        "sha256": "ce1c833b80faaf11c5d7fc811c81674be213c7ddcf142769274f5bc062c99ef6",
+        "bytes": 82663
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/annual-precipitation-rainy-season-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/b0ac8e2c3b900bc8e68e279f",
+      "file": "assets/area-specialty/24000/takana-kumano.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/24000/takana-kumano.webp",
+        "sha256": "fbea9acfdf07bfc36d6bc6aa55d512c909f8ed622e9535b5cdea4362f37270ff",
+        "bytes": 47600
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/24000/takana-kumano.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e6ae65d435136c845a8e39c4",
+      "file": "packages/gis/data/geoshape/svg/35_山口県.svg",
+      "original": {
+        "provider": "git",
+        "path": "packages/gis/data/geoshape/svg/35_山口県.svg",
+        "sha256": "1f6fc36f2d6fe9fd6ca3f2b5a580377e26aece73a800201b61a1f28d356674e3",
+        "bytes": 55514
+      },
+      "inputFiles": [],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "packages/gis/data/geoshape/svg/35_山口県.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/death-count",
+      "file": "app/ranking/death-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/death-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/death-count/ogp/ogp.png",
+        "sha256": "ed341813d6f809837e2137f6224de52c272d6b8bbc71c7832fc223b1fd2dc5a8",
+        "bytes": 58129
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/death-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/ogp/generation.json",
+          "sha256": "fbeec9c42062462c814b91dcbc56c31a72ae284ef9b6888a54dbe6093fc01a07",
+          "bytes": 877,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/death-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/death-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "dbc725b5b2f384d72a36c79b8df206dacb542b5e7094ea8ce1802467fbdbaaca",
+        "fingerprint": "8c35667104563ddaa6d492f0476aec86a16feff2b9ab049cc59b4fa115c3cb53",
+        "generatedAt": "2026-10-10T21:32:54.621Z"
+      }
+    },
+    {
+      "owner": "web/ranking/death-count",
+      "file": "app/ranking/death-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/death-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/death-count/thumbnail-dark.webp",
+        "sha256": "ae0c19b34352b3d2f82bd45409e45bded2ad1615b0ab4e90c794af67944a87be",
+        "bytes": 15682
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/death-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/thumbnail.json",
+          "sha256": "5480c7d6a04e34a5c1f9bb1c795a4a069cf3e9edeb9dab7d8c9578fed9211356",
+          "bytes": 1652,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/death-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/death-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "54666a343f3a1a02a87d0f9daefd691c4752c94869161e12ff7d1308033d86f6",
+        "fingerprint": "4530f5e701ee516ca0d329cf7fdb1c2a44f56864c377d67ea8665e060b31c1b1",
+        "generatedAt": "2026-10-10T21:50:11.269Z"
+      }
+    },
+    {
+      "owner": "web/ranking/death-count",
+      "file": "app/ranking/death-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/death-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/death-count/thumbnail-light.webp",
+        "sha256": "bf3af92a80ffa5622de298ca254eeb04600eae8a9a2aa761e2b3ad60e835edcb",
+        "bytes": 13994
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/death-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/thumbnail.json",
+          "sha256": "5480c7d6a04e34a5c1f9bb1c795a4a069cf3e9edeb9dab7d8c9578fed9211356",
+          "bytes": 1652,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/death-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/death-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/death-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "54666a343f3a1a02a87d0f9daefd691c4752c94869161e12ff7d1308033d86f6",
+        "fingerprint": "4530f5e701ee516ca0d329cf7fdb1c2a44f56864c377d67ea8665e060b31c1b1",
+        "generatedAt": "2026-10-10T21:50:11.269Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-insurance-basic-benefit-average",
+      "file": "app/ranking/employment-insurance-basic-benefit-average/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-insurance-basic-benefit-average/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/ogp/ogp.png",
+        "sha256": "4fd587b333487cb1c1eb24a2792b968b91c1db4b84b8b7a0497f0b2dd64f4b97",
+        "bytes": 63869
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-insurance-basic-benefit-average/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/ogp/generation.json",
+          "sha256": "d77cce4164ba64e5c8ae1138a6f63d42ebe66b71e742f5e41eb55ea8ed06e129",
+          "bytes": 1001,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "d6daef3c43266b5fe659de8632944520098c7e57b3ada2cd4abdb9c1e8112568",
+        "fingerprint": "9eea1747783b36954cda418cca4af7d0e6cf7cb1c5d38a1923c9731d83d79c29",
+        "generatedAt": "2026-10-01T18:10:36.056Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-insurance-basic-benefit-average",
+      "file": "app/ranking/employment-insurance-basic-benefit-average/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-insurance-basic-benefit-average/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/thumbnail-dark.webp",
+        "sha256": "5646cdd062095064905ab50d1f6a7a7f908e4ce17922d8ebdcf95d571eb4dc14",
+        "bytes": 18662
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-insurance-basic-benefit-average/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/thumbnail.json",
+          "sha256": "dbed98331c8274666b45bc67a0489a9d9ee6d21c283d4999f6f7ed6b850a5cfd",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b9271df8a2b108078081dc50a86c70ee06a16d42b2621a880a11ffadf5d4d13b",
+        "fingerprint": "0b4b506ed0efcf94ce652dee68f5d3de54ab3ad391d392478c22c8239d963fb8",
+        "generatedAt": "2026-10-01T18:35:46.653Z"
+      }
+    },
+    {
+      "owner": "web/ranking/employment-insurance-basic-benefit-average",
+      "file": "app/ranking/employment-insurance-basic-benefit-average/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/employment-insurance-basic-benefit-average/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/thumbnail-light.webp",
+        "sha256": "14bb17c9c5c3e1ab1edb2bdd838612ca6fcb8cf881a09e21b5b1b05b68f35e36",
+        "bytes": 17168
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/employment-insurance-basic-benefit-average/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/thumbnail.json",
+          "sha256": "dbed98331c8274666b45bc67a0489a9d9ee6d21c283d4999f6f7ed6b850a5cfd",
+          "bytes": 1952,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/employment-insurance-basic-benefit-average/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b9271df8a2b108078081dc50a86c70ee06a16d42b2621a880a11ffadf5d4d13b",
+        "fingerprint": "0b4b506ed0efcf94ce652dee68f5d3de54ab3ad391d392478c22c8239d963fb8",
+        "generatedAt": "2026-10-01T18:35:46.653Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-tutoring-rate",
+      "file": "app/ranking/national-assessment-elementary-tutoring-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-tutoring-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/ogp/ogp.png",
+        "sha256": "ca6bf3924b56bc4c6324e66d74bf92b2ac366a7aef53cbf04501f3c81289921f",
+        "bytes": 69868
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-tutoring-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/ogp/generation.json",
+          "sha256": "0b3c14be698d7c85e62ded445054e34cef865eeba13ec26e0c6beb678aaec154",
+          "bytes": 1009,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "217f7f02d0339bc8bb51ad55719d0183772e234536b965fe164121ca92f5700e",
+        "inputHash": "1db9e7b7fe0a5c2d13070bf5a9598611efa67a05c5bdf8424f91dfd343972522",
+        "fingerprint": "4d8b3145a77ed92af253905a712d0103f84ba5991a45601121c6a82a18908d11",
+        "generatedAt": "2026-10-08T06:39:42.707Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-tutoring-rate",
+      "file": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-dark.webp",
+        "sha256": "ff592f08f38aec98bcf24dfe3b30fd190a493137af211e855f21365f92baf481",
+        "bytes": 20372
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/thumbnail.json",
+          "sha256": "466aa94d0040645e3f779c3d6d6e1e0dc9e9beb0b0396c76c128a9de145d2875",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "162655981932a3b233a524f5bdde16aa9752aeabb3b9f1726af37b0ef05f071a",
+        "fingerprint": "84234e4dfbdde2873511c1e4d1d3183bc55b19a7b40ecf1fe788bc92f013e000",
+        "generatedAt": "2026-10-08T06:52:04.738Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-tutoring-rate",
+      "file": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/thumbnail-light.webp",
+        "sha256": "4f24613e4d61a8de3a98a885ac3ce2e45674bad0544c6508e71f1501c0602c7e",
+        "bytes": 18746
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-tutoring-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/thumbnail.json",
+          "sha256": "466aa94d0040645e3f779c3d6d6e1e0dc9e9beb0b0396c76c128a9de145d2875",
+          "bytes": 1970,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "162655981932a3b233a524f5bdde16aa9752aeabb3b9f1726af37b0ef05f071a",
+        "fingerprint": "84234e4dfbdde2873511c1e4d1d3183bc55b19a7b40ecf1fe788bc92f013e000",
+        "generatedAt": "2026-10-08T06:52:04.738Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmaceutical-sales-count",
+      "file": "app/ranking/pharmaceutical-sales-count/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmaceutical-sales-count/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/ogp/ogp.png",
+        "sha256": "67f72e90afe15f969ac3d66b0974d3be7fc2f07c8ad72ba716492a9e0db485fd",
+        "bytes": 75810
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmaceutical-sales-count/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/ogp/generation.json",
+          "sha256": "b79dd826c6c5e660cde4ed8548c0ce4091b856872a28b2363606be0c1749c048",
+          "bytes": 937,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "d56c20bb4317c572eea1633c53633b9b3a673514b5db2557b659ecd1be78a92e",
+        "fingerprint": "dd24bc3906740363ce26574a2865194fcf07ef3893be75d96c2362cd2abeaa20",
+        "generatedAt": "2026-08-15T18:42:16.824Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmaceutical-sales-count",
+      "file": "app/ranking/pharmaceutical-sales-count/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmaceutical-sales-count/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/thumbnail-dark.webp",
+        "sha256": "0a068cffdb8b644d04aa9eaf84f97578f2583ff4225b3b8581d91570535e9cf4",
+        "bytes": 16466
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmaceutical-sales-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/thumbnail.json",
+          "sha256": "5fde2a7ebb851ac6fe7c05eafd7ce0a14562f7747d00aedd8af88b3893a3c54f",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "4833012f7dc4742bb70ba9a52fcd6aeb688dab5de388bb8a113af0e3a03e633e",
+        "fingerprint": "d7a66985dc5013131af7faef05f26541db142cce9e2c8b3e2c50666f625bb638",
+        "generatedAt": "2026-08-15T18:58:37.166Z"
+      }
+    },
+    {
+      "owner": "web/ranking/pharmaceutical-sales-count",
+      "file": "app/ranking/pharmaceutical-sales-count/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/pharmaceutical-sales-count/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/thumbnail-light.webp",
+        "sha256": "3c19a3d2f2476f56b9b77c847d6553ecea26b46600e575ebacf37a3f2ea10c65",
+        "bytes": 14984
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/pharmaceutical-sales-count/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/thumbnail.json",
+          "sha256": "5fde2a7ebb851ac6fe7c05eafd7ce0a14562f7747d00aedd8af88b3893a3c54f",
+          "bytes": 1808,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/pharmaceutical-sales-count/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/pharmaceutical-sales-count/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "4833012f7dc4742bb70ba9a52fcd6aeb688dab5de388bb8a113af0e3a03e633e",
+        "fingerprint": "d7a66985dc5013131af7faef05f26541db142cce9e2c8b3e2c50666f625bb638",
+        "generatedAt": "2026-08-15T18:58:37.166Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-industry-employees-per-establishment-census",
+      "file": "app/ranking/secondary-industry-employees-per-establishment-census/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-industry-employees-per-establishment-census/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/ogp/ogp.png",
+        "sha256": "fca2e171dde106243b797878a3b8c13bd2f35f997e588529e0a18dad01902d92",
+        "bytes": 77250
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-industry-employees-per-establishment-census/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/ogp/generation.json",
+          "sha256": "27bb6f1d513ede42c2d338eb806b5aea22d2aea980a3e47e715874132c0a7628",
+          "bytes": 1045,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "623715b9e964fa284e9f0a16af760a9a85e69fc1ade888cff6cafafe7301586e",
+        "fingerprint": "f01012b31df177ebc8f037be169a248efcebafc7d34e286dba69014bffba4fd3",
+        "generatedAt": "2026-08-15T18:42:46.374Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-industry-employees-per-establishment-census",
+      "file": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-dark.webp",
+        "sha256": "56d3dd1ee4e181414d934542605e07ac4071d0c482a6e5aa98c571735dec819a",
+        "bytes": 17294
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/thumbnail.json",
+          "sha256": "f7f1613b83fbba3f99506080d35688b417e35f4defa3d8c64e0d78fdf929e899",
+          "bytes": 2051,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "369c7414e11572400eccfcbd7a58f2d62d56a9ac48e448169c23c7120712827c",
+        "fingerprint": "da2339f0629291e994a088733818d466c2ef0bd8a7a86a20978edf00df4ec6d9",
+        "generatedAt": "2026-08-15T18:58:49.830Z"
+      }
+    },
+    {
+      "owner": "web/ranking/secondary-industry-employees-per-establishment-census",
+      "file": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/thumbnail-light.webp",
+        "sha256": "aef2a1009524cf3c1a7f0e1ca4c5c5c78a67bcd7ff139f5dbae6ce1b407110de",
+        "bytes": 15754
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/secondary-industry-employees-per-establishment-census/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/thumbnail.json",
+          "sha256": "f7f1613b83fbba3f99506080d35688b417e35f4defa3d8c64e0d78fdf929e899",
+          "bytes": 2051,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/secondary-industry-employees-per-establishment-census/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "369c7414e11572400eccfcbd7a58f2d62d56a9ac48e448169c23c7120712827c",
+        "fingerprint": "da2339f0629291e994a088733818d466c2ef0bd8a7a86a20978edf00df4ec6d9",
+        "generatedAt": "2026-08-15T18:58:49.830Z"
+      }
+    }
+  ]
+}

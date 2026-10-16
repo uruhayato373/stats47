@@ -1,0 +1,4055 @@
+{
+  "items": [
+    {
+      "id": "web/area/22000",
+      "channel": "web",
+      "key": "22000",
+      "title": "静岡県",
+      "category": "area",
+      "status": "published",
+      "url": "https://stats47.jp/areas/22000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7f927deb2de4b71262c84c1d956709efdd08df40c91d43d3ceaeeb271eca27d6",
+      "catalogBasis": "7f927deb2de4b71262c84c1d956709efdd08df40c91d43d3ceaeeb271eca27d6",
+      "indexComplete": true
+    },
+    {
+      "id": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "channel": "web",
+      "key": "cake-consumption-expenditure-prefecture-gap",
+      "title": "ケーキ支出額、埼玉と福井で4千円差",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/cake-consumption-expenditure-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "7e5faf1e8f728b61a2463f7e9baa44712ab7daafd68b5685b01690bfcc904b6d",
+      "catalogBasis": "ef15ae51216d6e8b3fa5520338be8b095b9ca4eefbd238e3ac512ecdb59d34e3",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+        "sha256": "6d362e93f14c0dc6156d54e621f37143b06cef31361fa953fde1322218abba74",
+        "bytes": 7684
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/day-time-population-prefecture-gap",
+      "channel": "web",
+      "key": "day-time-population-prefecture-gap",
+      "title": "昼間人口1位だけでは吸引力は分からない",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/day-time-population-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "7f2a61cc1e9e25363d24eeb72d5f5ef89370ad7014d1b8f6b1ba3db0344aeb72",
+      "catalogBasis": "2a7d5bb4be23c4ea755470e74c3c024ea1defb41f430913357916c5b13fdf1d8",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/article.md",
+        "sha256": "a7679776d99c0ad06d585c634b30a1ef3ec72ea789c3d82cb42a913a33eabe10",
+        "bytes": 7737
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "channel": "web",
+      "key": "frozen-gyoza-spending-prefecture-gap",
+      "title": "ぎょうざ消費支出トップは宮崎3,517円｜浜松の静岡が中位に沈む意外、高知とは3.18倍(2024)",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/frozen-gyoza-spending-prefecture-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "58d20ccba156ae4742a8aa8cfaf5b1240a0fee8df84b9c7dc0077a26a4d8d520",
+      "catalogBasis": "be8db2963345299a07a80d4ac81703dd5e26903a627b9fc78606e30490658bea",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+        "sha256": "f806eeeb4ebe057022ef2c8586b9e8e0bdeb256f6b8c4e9f9424296aee7177be",
+        "bytes": 14590
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/park-green-space-gap",
+      "channel": "web",
+      "key": "park-green-space-gap",
+      "title": "自然豊かな滋賀に国立公園はゼロ──3指標で変わる47都道府県の「緑」の本当の姿",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/park-green-space-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "894b5fdbbfcb644d2ed7b244e7b924f178d36841c4542e71e6cb9baeb255ab8e",
+      "catalogBasis": "6ffe735390bbded3006c25c675cb2d16b193506785e0b9f53f28f3c23fdc24e0",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+        "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+        "bytes": 11063
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/precipitation-snow-regional-gap",
+      "channel": "web",
+      "key": "precipitation-snow-regional-gap",
+      "title": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプに分類すると見えてくること",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/precipitation-snow-regional-gap",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "6b0660a9d706b48b84d3f866f71231bb927f104e101d5886a6a43a36dfadbe49",
+      "catalogBasis": "6f99bf9dcad6e3d858ac1905172ba4cf62627c6db1f03bd7b0475a0116c8faab",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/article.md",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/article.md",
+        "sha256": "66abb72f29bae0f177fab114ccbfd43f1fb335d35192874d43f8a863b1eb92e8",
+        "bytes": 12660
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/school-lunch-expenditure-ranking",
+      "channel": "web",
+      "key": "school-lunch-expenditure-ranking",
+      "title": "給食費64倍、東京はなぜ激安",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/school-lunch-expenditure-ranking",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "40c26ab7723b1a5337ba061c7b1bd92fc4aa37ecf6c36398239ead204253a7dc",
+      "catalogBasis": "020e683c435d4197a574aa2b773cc750c9c00844683366cc92c4bec5e6909e16",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/article.md",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/article.md",
+        "sha256": "65981ee06da7bcdd8d3463ddac32310c61de773c7fe874162f0d8f6364f1acd9",
+        "bytes": 8332
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/blog/school-teacher-annual-income",
+      "channel": "web",
+      "key": "school-teacher-annual-income",
+      "title": "教員年収の首位が毎年変わるのはなぜ?",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/school-teacher-annual-income",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "0737b618ee98c7635072139c6c191a8f591e97c33c89f0e80272b9a26326c010",
+      "catalogBasis": "bb5db7e666dee023b63c5f6d63dd6760cfa9a168b10101af52f902f0cf3eaa96",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/article.md",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/article.md",
+        "sha256": "5da2b1f7d04d83d191e88120bef84824abb6afe2fc4c380d3382b557b1c1abfd",
+        "bytes": 25425
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/0f680969b5f703bc8d796534",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/treatment-rate-mood-disorder-outpatient-prefecture-gap.jpg",
+      "title": "treatment-rate-mood-disorder-outpatient-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "1bcb35969123a6ac7a7e31ef7e4158ac18b7432d505d28845ba8174dbceee40c"
+    },
+    {
+      "id": "web/material/1bc81212faad99bea4e76e73",
+      "channel": "web",
+      "key": "assets/area-specialty/16000/himi-kanburi.webp",
+      "title": "himi-kanburi.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "0e2a3962e9c9698bedf1cd0d9d970b4a5777e3fa505d845c421558b9fc4ba815"
+    },
+    {
+      "id": "web/material/2828dbb960fcbeb598f3ec62",
+      "channel": "web",
+      "key": "apps/web/public/images/features/area-profile.webp",
+      "title": "area-profile.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "15c34a2c8ed49b29bc0ee6b0a354b4f7072af60f4306fcd975a025cb59d2cbc6"
+    },
+    {
+      "id": "web/material/987f0d16885335a1e86c1249",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/pickled-plum-consumption-expenditure-prefecture-gap.jpg",
+      "title": "pickled-plum-consumption-expenditure-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "66d08324f1fc4c535dd9292720e98dcca9b38e6827ee7d62b8f1c585c2cdeb85"
+    },
+    {
+      "id": "web/material/a1a53783be6fe63be3ef862e",
+      "channel": "web",
+      "key": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.svg",
+      "title": "pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "386ecd694f0aa6893e8a905d71d41db4ce87160b4575e9c857bdaf6bdf83dbec"
+    },
+    {
+      "id": "web/material/e9ec94fda4f05055b2480f22",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/sports-participation-rate-swimming-prefecture-gap.jpg",
+      "title": "sports-participation-rate-swimming-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "717beb6c11aa21d938bb77ad2c40d81e754aa89c90e9ef3f816f701ad5e6b206"
+    },
+    {
+      "id": "web/material/fdfd987d5011b2efe337f292",
+      "channel": "web",
+      "key": "assets/blog/codex-backgrounds/care-home.jpg",
+      "title": "care-home.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "34a6558a5ccbbe654c57e39cd9690d465c63fc9fba296fe59142ee0a3301d10a"
+    },
+    {
+      "id": "web/ranking/alcohol-sales-per-adult-sake",
+      "channel": "web",
+      "key": "alcohol-sales-per-adult-sake",
+      "title": "成人1人あたり酒類販売(消費)数量",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/alcohol-sales-per-adult-sake",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e44bd0328f32db5f7882dae41380c364a727de846fb962170e5830817738a94f",
+      "catalogBasis": "e44bd0328f32db5f7882dae41380c364a727de846fb962170e5830817738a94f",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/hair-styling-consumption-expenditure",
+      "channel": "web",
+      "key": "hair-styling-consumption-expenditure",
+      "title": "整髪・養毛剤消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/hair-styling-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "427ed550f135f49f77c1849d4621f70ea8f03ad8ed0bc125d98b0425732d1abe",
+      "catalogBasis": "427ed550f135f49f77c1849d4621f70ea8f03ad8ed0bc125d98b0425732d1abe",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/hobby-participation-rate-video-games",
+      "channel": "web",
+      "key": "hobby-participation-rate-video-games",
+      "title": "ゲームの行動者率",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/hobby-participation-rate-video-games",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "c88ba0cb716f4ec9c639d7259758a1c0567ed9ee06094d7ad859d2b88aed8160",
+      "catalogBasis": "c88ba0cb716f4ec9c639d7259758a1c0567ed9ee06094d7ad859d2b88aed8160",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/national-assessment-elementary-study-1h-plus-rate",
+      "channel": "web",
+      "key": "national-assessment-elementary-study-1h-plus-rate",
+      "title": "平日に1時間以上勉強する小学生の割合",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/national-assessment-elementary-study-1h-plus-rate",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "4eab175ba0ad689c4bc66dc02cbd207965f6cb88a274f65bcbd171a09fe838fd",
+      "catalogBasis": "4eab175ba0ad689c4bc66dc02cbd207965f6cb88a274f65bcbd171a09fe838fd",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/school-lunch-consumption-expenditure",
+      "channel": "web",
+      "key": "school-lunch-consumption-expenditure",
+      "title": "学校給食消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/school-lunch-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cd7b3dfe76ffe7f4cecc2e4edda2a6d08c9a915829171b44eabe312dda6c0421",
+      "catalogBasis": "cd7b3dfe76ffe7f4cecc2e4edda2a6d08c9a915829171b44eabe312dda6c0421",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/tomato-consumption-expenditure",
+      "channel": "web",
+      "key": "tomato-consumption-expenditure",
+      "title": "トマト消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/tomato-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "771380098facefa773326708a1df2ff037e2f95525aaf807688131b1f8086233",
+      "catalogBasis": "771380098facefa773326708a1df2ff037e2f95525aaf807688131b1f8086233",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/area/22000",
+      "file": "app/areas/22000/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/areas/22000/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png",
+        "sha256": "990069b6dd3ecd672bf613f80b47264da485fe5029888439ec03a46978af56cc",
+        "bytes": 163169
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/areas/22000/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/areas/22000/ogp/generation.json",
+          "sha256": "aedcd154019f7e44a5ab1be9c47f4f9a92ccc8d9e547e40b0ed30bd1a9066536",
+          "bytes": 779,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "areas-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "area-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "31cf284d4b006b26781f4eb6abe7e285e9aa7f0ddb0376866c687aabc3fecf4b",
+        "fingerprint": "9ba0576d879a426e5eb3c0ee0747a9f2cab122a64f58f0475a117b46bc44efe4",
+        "generatedAt": "2026-10-10T22:06:20.966Z"
+      }
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.svg",
+        "sha256": "e37ffe9c77d72a9ec73be593be9b04d9db5d6e039399c8fe29a3e42b81c06d3e",
+        "bytes": 31500
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "6d362e93f14c0dc6156d54e621f37143b06cef31361fa953fde1322218abba74",
+          "bytes": 7684,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cake-consumption-expenditure-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.json",
+          "sha256": "ca11d59c792662631437dd2cb77734a296ff04a6b7b50375d32d349904062d42",
+          "bytes": 4573,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cake-consumption-expenditure-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.source.json",
+          "sha256": "73add4f3656e5cb56cc8705269ebfe05a954feb143e91c9be8cb39691d3f98f8",
+          "bytes": 620,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-map.svg",
+          "alt": "ケーキ消費支出額の地理分布",
+          "heading": "地理分布のタイルマップで確認する",
+          "line": 27
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cake-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cake-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "9c962d33eff1e38df6d306fe4425005cf3c8726f7bbb36feda5529451d22bccf",
+        "bytes": 6893
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/article.md",
+          "sha256": "6d362e93f14c0dc6156d54e621f37143b06cef31361fa953fde1322218abba74",
+          "bytes": 7684,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "cake-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.json",
+          "sha256": "b42bbec438901ee08c1e14781c6cba9a0db0a9c967762c23843853364c689e8b",
+          "bytes": 6679,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "cake-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "e6ebf80b8d2d05a744f17cc7123fbe85fae6a0f30bee569a157dcb5d4323fe6b",
+          "bytes": 687,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/data/cake-consumption-expenditure-prefecture-gap-prefecture-rankings.svg",
+          "alt": "ケーキ消費支出額の上位と下位",
+          "heading": "支出額の上位と下位を見る",
+          "line": 15
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/cake-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/cake-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/background.jpg",
+        "sha256": "e4b561b2c7e4a3419df88421108788bade9f0074a31628b970c951428f35cbd6",
+        "bytes": 75686
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "dc21e7238f659cfdc701a74be6d4b0ef095623b50aaf7b44faf4074738150f39",
+          "bytes": 2211,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "fda38eb24d0dfc6403aced722c49ef47f91980ed193fc8d3d8361617993546d8",
+        "fingerprint": "8dd9be3b33d5b6d7d2a6644cf81cc77fa5db4a57f8f0a305918c1a5b163f9098",
+        "generatedAt": "2026-09-07T15:45:35.440Z"
+      }
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "sha256": "5b99955d93614076733d75a10ae4223ff3e6fc3bdea0291749fbd88fab92fccf",
+        "bytes": 436354
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "dc21e7238f659cfdc701a74be6d4b0ef095623b50aaf7b44faf4074738150f39",
+          "bytes": 2211,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "fda38eb24d0dfc6403aced722c49ef47f91980ed193fc8d3d8361617993546d8",
+        "fingerprint": "8dd9be3b33d5b6d7d2a6644cf81cc77fa5db4a57f8f0a305918c1a5b163f9098",
+        "generatedAt": "2026-09-07T15:45:35.440Z"
+      }
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "bcb9516ee84840dc08b8c29bd352b96e76535245824c0758404dbb509737bfb7",
+        "bytes": 9770
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "dc21e7238f659cfdc701a74be6d4b0ef095623b50aaf7b44faf4074738150f39",
+          "bytes": 2211,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "fda38eb24d0dfc6403aced722c49ef47f91980ed193fc8d3d8361617993546d8",
+        "fingerprint": "8dd9be3b33d5b6d7d2a6644cf81cc77fa5db4a57f8f0a305918c1a5b163f9098",
+        "generatedAt": "2026-09-07T15:45:35.440Z"
+      }
+    },
+    {
+      "owner": "web/blog/cake-consumption-expenditure-prefecture-gap",
+      "file": "app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/thumbnail-light.webp",
+        "sha256": "add36a1000dce9b303ed1c3132086e8c2b1e16111f7ca809b494c396ea9a6c6b",
+        "bytes": 19568
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/generation.json",
+          "sha256": "dc21e7238f659cfdc701a74be6d4b0ef095623b50aaf7b44faf4074738150f39",
+          "bytes": 2211,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "fda38eb24d0dfc6403aced722c49ef47f91980ed193fc8d3d8361617993546d8",
+        "fingerprint": "8dd9be3b33d5b6d7d2a6644cf81cc77fa5db4a57f8f0a305918c1a5b163f9098",
+        "generatedAt": "2026-09-07T15:45:35.440Z"
+      }
+    },
+    {
+      "owner": "web/blog/day-time-population-prefecture-gap",
+      "file": "app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "f603aadd2af7d1705f9a20051d7c74f7b263292616bddab5251c3f37468c1657",
+        "bytes": 6899
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/article.md",
+          "sha256": "a7679776d99c0ad06d585c634b30a1ef3ec72ea789c3d82cb42a913a33eabe10",
+          "bytes": 7737,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "day-time-population-prefecture-gap-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.json",
+          "sha256": "6027a2b40453b60eb2c5ffd862f607582c312c58bfe1dc2c9e075045e05b6054",
+          "bytes": 6793,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "day-time-population-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "44eac97630bb01166166d122cfd57b56d953e2ce79cd622cbb61810311c7bea6",
+          "bytes": 630,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/data/day-time-population-prefecture-gap-prefecture-rankings.svg",
+          "alt": "昼間人口の上位と下位",
+          "heading": "上位には大都市圏を構成する都府県が並びます",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/day-time-population/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/day-time-population/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/day-time-population-prefecture-gap",
+      "file": "app/blog/day-time-population-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/background.jpg",
+        "sha256": "d33e5177eab6187dff42abcba3c597aaf909190a510f5dc978fe73832f478fcc",
+        "bytes": 88974
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "sha256": "c3999a8d09fcb15bb17944f0f96607c1750fd7fc2447c66fb5c7be283a787c06",
+          "bytes": 2250,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "13858a5993bee8c929e7f689170e03d91134d6c74552012ddda02228b9358448",
+        "fingerprint": "6639877a7d6194a151a12aac95565213bf862be85d82c8b75e4e0ea84feae756",
+        "generatedAt": "2026-08-29T10:58:01.951Z"
+      }
+    },
+    {
+      "owner": "web/blog/day-time-population-prefecture-gap",
+      "file": "app/blog/day-time-population-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/ogp.png",
+        "sha256": "a49dca983717f66d876a36ee5e865f3741a8ab8fb48ab7556022d0b491d83b25",
+        "bytes": 513333
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "sha256": "c3999a8d09fcb15bb17944f0f96607c1750fd7fc2447c66fb5c7be283a787c06",
+          "bytes": 2250,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "13858a5993bee8c929e7f689170e03d91134d6c74552012ddda02228b9358448",
+        "fingerprint": "6639877a7d6194a151a12aac95565213bf862be85d82c8b75e4e0ea84feae756",
+        "generatedAt": "2026-08-29T10:58:01.951Z"
+      }
+    },
+    {
+      "owner": "web/blog/day-time-population-prefecture-gap",
+      "file": "app/blog/day-time-population-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "2a7717bc1ae2285c25d247d3aa7e1c405a0c3dcd8d4ded5c45043f96163005a4",
+        "bytes": 14932
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "sha256": "c3999a8d09fcb15bb17944f0f96607c1750fd7fc2447c66fb5c7be283a787c06",
+          "bytes": 2250,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "13858a5993bee8c929e7f689170e03d91134d6c74552012ddda02228b9358448",
+        "fingerprint": "6639877a7d6194a151a12aac95565213bf862be85d82c8b75e4e0ea84feae756",
+        "generatedAt": "2026-08-29T10:58:01.951Z"
+      }
+    },
+    {
+      "owner": "web/blog/day-time-population-prefecture-gap",
+      "file": "app/blog/day-time-population-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/day-time-population-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/thumbnail-light.webp",
+        "sha256": "06905c574fdead01d34b7e386d162b014e89af1013b65c692e58833969cc9d16",
+        "bytes": 28390
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/day-time-population-prefecture-gap/ogp/generation.json",
+          "sha256": "c3999a8d09fcb15bb17944f0f96607c1750fd7fc2447c66fb5c7be283a787c06",
+          "bytes": 2250,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "b37244df8c7527d24c49e44228d880f51a03a097c66b0a3ab48fa82cf039462e",
+        "inputHash": "13858a5993bee8c929e7f689170e03d91134d6c74552012ddda02228b9358448",
+        "fingerprint": "6639877a7d6194a151a12aac95565213bf862be85d82c8b75e4e0ea84feae756",
+        "generatedAt": "2026-08-29T10:58:01.951Z"
+      }
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.svg",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.svg",
+        "sha256": "6e946e0363da3c604dc8f5ffa5c6cb377c8a61eff9a23ca69b8a1ddb472d139d",
+        "bytes": 31418
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+          "sha256": "f806eeeb4ebe057022ef2c8586b9e8e0bdeb256f6b8c4e9f9424296aee7177be",
+          "bytes": 14590,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "frozen-gyoza-spending-prefecture-gap-map.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.json",
+          "sha256": "d308976fafec36f05ae534eafc52a0e2fa253eb3b0cbbd66dc0eeabc6bf98acc",
+          "bytes": 4587,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "frozen-gyoza-spending-prefecture-gap-map.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.source.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.source.json",
+          "sha256": "8d1c7250503b5ba122a44422a1bb0862adb4b379aa39e847ee9d9d5bfe882aa1",
+          "bytes": 640,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-map",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/frozen-gyoza-spending-prefecture-gap-map.svg",
+          "alt": "ぎょうざ消費支出額 全国分布(2024年・県庁所在市)",
+          "heading": "最下位グループの地理的偏り",
+          "line": 48
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gyoza-frozen-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gyoza-frozen-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.svg",
+        "sha256": "3bdd33548127b255ec6927551977a19158c09ea56dd7d2536ef67b8322cf775f",
+        "bytes": 6889
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/article.md",
+          "sha256": "f806eeeb4ebe057022ef2c8586b9e8e0bdeb256f6b8c4e9f9424296aee7177be",
+          "bytes": 14590,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "gyoza-frozen-consumption-expenditure-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.json",
+          "sha256": "730943478c3f7c92294f438cea42ad08eaad7461daa220b16b535daa577f1c7d",
+          "bytes": 6693,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "gyoza-frozen-consumption-expenditure-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.source.json",
+          "sha256": "de64fc87bdbd23c1e2e710de393ce48f516c6af537a1c524e8aeb77efb004429",
+          "bytes": 700,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/data/gyoza-frozen-consumption-expenditure-prefecture-rankings.svg",
+          "alt": "ぎょうざ消費支出額 上位5県・下位5県(2024年・県庁所在市)",
+          "heading": "ぎょうざ消費支出額 上位5県・下位5県",
+          "line": 34
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/gyoza-frozen-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/gyoza-frozen-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/background.jpg",
+        "sha256": "8821be7f813aa3196705fc25c2c29881f94bef56eba79986f1ad6dda7735f0e1",
+        "bytes": 104200
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "sha256": "58f76131813cbb6ee308346cdf84485e31e09cd66c90e01d70f80dc1e5f13c99",
+          "bytes": 2330,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a5c63b9f9ee88aba9dc7be17bb6ef5f972d33ea5168ff6721e5b2d173edbc4c8",
+        "fingerprint": "40799c03aafa356aa1bedfd16e1f553cd9f7a0f91606e6ab916021977cd4caf9",
+        "generatedAt": "2026-10-08T00:05:03.068Z"
+      }
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/ogp.png",
+        "sha256": "e60deb9ef0482a33536016cfebd04c593d11ab2a1f673d4bfcb4c842c6f2189b",
+        "bytes": 665527
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "sha256": "58f76131813cbb6ee308346cdf84485e31e09cd66c90e01d70f80dc1e5f13c99",
+          "bytes": 2330,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a5c63b9f9ee88aba9dc7be17bb6ef5f972d33ea5168ff6721e5b2d173edbc4c8",
+        "fingerprint": "40799c03aafa356aa1bedfd16e1f553cd9f7a0f91606e6ab916021977cd4caf9",
+        "generatedAt": "2026-10-08T00:05:03.068Z"
+      }
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-dark.webp",
+        "sha256": "b36ddbfc1fb6818c5af8e2a6b9ca70adbd4daaa2bb6fb00c1a35585927139101",
+        "bytes": 13900
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "sha256": "58f76131813cbb6ee308346cdf84485e31e09cd66c90e01d70f80dc1e5f13c99",
+          "bytes": 2330,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a5c63b9f9ee88aba9dc7be17bb6ef5f972d33ea5168ff6721e5b2d173edbc4c8",
+        "fingerprint": "40799c03aafa356aa1bedfd16e1f553cd9f7a0f91606e6ab916021977cd4caf9",
+        "generatedAt": "2026-10-08T00:05:03.068Z"
+      }
+    },
+    {
+      "owner": "web/blog/frozen-gyoza-spending-prefecture-gap",
+      "file": "app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/thumbnail-light.webp",
+        "sha256": "9644f9c1a4168ae2dfacbf95a53e7ffcc9e407b26221567915cf79f1adbb3c78",
+        "bytes": 28498
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/frozen-gyoza-spending-prefecture-gap/ogp/generation.json",
+          "sha256": "58f76131813cbb6ee308346cdf84485e31e09cd66c90e01d70f80dc1e5f13c99",
+          "bytes": 2330,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a5c63b9f9ee88aba9dc7be17bb6ef5f972d33ea5168ff6721e5b2d173edbc4c8",
+        "fingerprint": "40799c03aafa356aa1bedfd16e1f553cd9f7a0f91606e6ab916021977cd4caf9",
+        "generatedAt": "2026-10-08T00:05:03.068Z"
+      }
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/data/block-park-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/data/block-park-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/block-park-ranking.svg",
+        "sha256": "89f7db5c06c41a0e7511ea69531441b3252c17440550258960bccd5ae571af03",
+        "bytes": 6836
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+          "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+          "bytes": 11063,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "block-park-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/block-park-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/block-park-ranking.json",
+          "sha256": "a09d3ddd040fa5bd8ac98bf2e3374ff290fedbfe4c23e0c7cef86f7c6ab80542",
+          "bytes": 6742,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "block-park-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/block-park-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/block-park-ranking.source.json",
+          "sha256": "c92c794858cc420519f89546d1c709cb720e384bf78977eca9088974a60431c6",
+          "bytes": 607,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/block-park-ranking.svg",
+          "alt": "街区公園数（100km²当たり）上位5・下位5",
+          "heading": "街区公園（100km²当たり、1位東京487所）",
+          "line": 82
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/block-park-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/block-park-count-per-100km2/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/data/national-park-area-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/data/national-park-area-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/national-park-area-ranking.svg",
+        "sha256": "b188ea63d283f30c1424f82da69f336fbe835c893bb7882e6f8ca6120a91dded",
+        "bytes": 6845
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+          "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+          "bytes": 11063,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "national-park-area-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/national-park-area-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/national-park-area-ranking.json",
+          "sha256": "227cfadd03b8ef1fa56f221600d93f4aa569d4b7320b8bd561ba508d7fb1bed4",
+          "bytes": 6707,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "national-park-area-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/national-park-area-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/national-park-area-ranking.source.json",
+          "sha256": "df083593c71da1b39bc3b15fa2a247e06808543e1f795cd14919265d3319ae80",
+          "bytes": 594,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/national-park-area-ranking.svg",
+          "alt": "国立公園面積 上位5・下位5（ha）",
+          "heading": "国立公園面積──北海道が圧倒的1位、6府県はゼロ",
+          "line": 61
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-park-area/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-park-area/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.svg",
+        "sha256": "8fc34f4fde3e7de378ee84a30457c3de1a90f4f14451300402194bd55573d0b8",
+        "bytes": 6858
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+          "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+          "bytes": 11063,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "nature-park-area-ratio-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.json",
+          "sha256": "37b3dc90483192a936ef1855f5e47a16da755e0023709f41dfedb7e6ca557fcb",
+          "bytes": 6682,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "nature-park-area-ratio-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.source.json",
+          "sha256": "e1088016dc81d46217d94df1bb3a854c419e05e3ffbcf36a73b0299355b83c3d",
+          "bytes": 613,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/nature-park-area-ratio-ranking.svg",
+          "alt": "自然公園面積割合 上位5・下位5（％）",
+          "heading": "自然公園面積割合ランキング──1位は滋賀、東京が2位",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/nature-park-area-ratio/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/nature-park-area-ratio/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/data/neighborhood-park-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/data/neighborhood-park-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/neighborhood-park-ranking.svg",
+        "sha256": "81a6fa7a0a23c68e6294f6939b62f27f0be27f7c2e1fca98a73b61af4a852620",
+        "bytes": 6834
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+          "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+          "bytes": 11063,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "neighborhood-park-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/neighborhood-park-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/neighborhood-park-ranking.json",
+          "sha256": "c568ccc4ef1dc39246c010f3de509d645656f78fe790be693129c0fc29ba10b2",
+          "bytes": 6698,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "neighborhood-park-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/neighborhood-park-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/neighborhood-park-ranking.source.json",
+          "sha256": "df69202a4caafdf9840ed86701510cf6d2f9a9085e762ac4714fc5ebc7db36b8",
+          "bytes": 635,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/neighborhood-park-ranking.svg",
+          "alt": "近隣公園数（100km²当たり）上位5・下位5",
+          "heading": "近隣公園（100km²当たり、1位大阪25.8所）",
+          "line": 90
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/neighborhood-park-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/neighborhood-park-count-per-100km2/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/data/urban-park-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/data/urban-park-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/urban-park-ranking.svg",
+        "sha256": "bcd47aff3bcdffd745ed26063bfc9fa830009df2154bd85169b9c0cdd845433e",
+        "bytes": 6836
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/article.md",
+          "sha256": "df252bde9ec2773c657d8cd92633625c0b87f3752f1c5832bdc04853d6eb3a55",
+          "bytes": 11063,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "urban-park-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/urban-park-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/urban-park-ranking.json",
+          "sha256": "1d43fe6981c01458ea83f02e7d76a2326aae4fea11882a31faa78db8d2272d3f",
+          "bytes": 6745,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "urban-park-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/data/urban-park-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/urban-park-ranking.source.json",
+          "sha256": "02f34b9ba6178b28489e2c82bf219c63d02a0fb06d7f4c5e76c3e8c763e8af8f",
+          "bytes": 607,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/data/urban-park-ranking.svg",
+          "alt": "都市公園数（100km²当たり）上位5・下位5",
+          "heading": "都市公園密度ランキング──東京617所、秋田18所の格差",
+          "line": 45
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/urban-park-count-per-100km2/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/urban-park-count-per-100km2/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/background.jpg",
+        "sha256": "4ad0d93798c16cb6f293108401453fb73bb2d18d348bac023ce82fd26836f957",
+        "bytes": 42036
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/generation.json",
+          "sha256": "eae842acf30f1f1d75853382b134e3b57a2b1e59a3f588614eb7229c13be75b2",
+          "bytes": 2225,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2615106e246574a5d4df7910c08606c772c7ee7677dc9f0f9a77935ed3593529",
+        "fingerprint": "e4e107468f44c791fe0c589b9ea96498c4f7e6b404f446d2655694dac6552ae2",
+        "generatedAt": "2026-08-22T05:17:33.744Z"
+      }
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/ogp.png",
+        "sha256": "cc393b6232728425aa181be0a2a8344999676e11040a0a937f47563070617cd3",
+        "bytes": 341111
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/generation.json",
+          "sha256": "eae842acf30f1f1d75853382b134e3b57a2b1e59a3f588614eb7229c13be75b2",
+          "bytes": 2225,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2615106e246574a5d4df7910c08606c772c7ee7677dc9f0f9a77935ed3593529",
+        "fingerprint": "e4e107468f44c791fe0c589b9ea96498c4f7e6b404f446d2655694dac6552ae2",
+        "generatedAt": "2026-08-22T05:17:33.744Z"
+      }
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/thumbnail-dark.webp",
+        "sha256": "52c6ca2623812a6ef0dc0c4af190d252863ac3670a220cdb5299f0f4bf2b28de",
+        "bytes": 7266
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/generation.json",
+          "sha256": "eae842acf30f1f1d75853382b134e3b57a2b1e59a3f588614eb7229c13be75b2",
+          "bytes": 2225,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2615106e246574a5d4df7910c08606c772c7ee7677dc9f0f9a77935ed3593529",
+        "fingerprint": "e4e107468f44c791fe0c589b9ea96498c4f7e6b404f446d2655694dac6552ae2",
+        "generatedAt": "2026-08-22T05:17:33.744Z"
+      }
+    },
+    {
+      "owner": "web/blog/park-green-space-gap",
+      "file": "app/blog/park-green-space-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/park-green-space-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/thumbnail-light.webp",
+        "sha256": "fc5ea4660c671965f0cf9c466b30404a08f606edf5f00809278ff13d0d5092be",
+        "bytes": 12662
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/park-green-space-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/park-green-space-gap/ogp/generation.json",
+          "sha256": "eae842acf30f1f1d75853382b134e3b57a2b1e59a3f588614eb7229c13be75b2",
+          "bytes": 2225,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "2615106e246574a5d4df7910c08606c772c7ee7677dc9f0f9a77935ed3593529",
+        "fingerprint": "e4e107468f44c791fe0c589b9ea96498c4f7e6b404f446d2655694dac6552ae2",
+        "generatedAt": "2026-08-22T05:17:33.744Z"
+      }
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.svg",
+        "sha256": "4f62ef550b03dc00040cf783a33bc16fb87cd9e664c26824fb80f207618079d4",
+        "bytes": 6745
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/article.md",
+          "sha256": "66abb72f29bae0f177fab114ccbfd43f1fb335d35192874d43f8a863b1eb92e8",
+          "bytes": 12660,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "precipitation-days-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.json",
+          "sha256": "0fa79c82b9356092f0be2c4d7a813b2adf6a6f95a440c38863e5297a4a223d06",
+          "bytes": 6636,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "precipitation-days-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.source.json",
+          "sha256": "a63e1a73fd6d914c7ef07d638d0f9a8508a2c014ab808d14fc25bade0b02bcab",
+          "bytes": 889,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-days-ranking.svg",
+          "alt": "年間降水日数 上位5・下位5（47都道府県・2024年）",
+          "heading": "「降る日数」で並べ替えると順位が入れ替わる",
+          "line": 43
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-precipitation-days/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation-days/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.svg",
+        "sha256": "ba5682a4b69821026b05d0e8291331f0abcba8ac6135f8ba49680a0ea8501af5",
+        "bytes": 6797
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/article.md",
+          "sha256": "66abb72f29bae0f177fab114ccbfd43f1fb335d35192874d43f8a863b1eb92e8",
+          "bytes": 12660,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "precipitation-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.json",
+          "sha256": "2b5b28f832d801c9cf79616b77df6cbac0b1e42f4037bcf2333d956b1da73dd1",
+          "bytes": 6727,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "precipitation-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.source.json",
+          "sha256": "0bca967c73e553a54202b5866c767c3210a7865e186829dbbf8f31f2929cc163",
+          "bytes": 869,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/precipitation-ranking.svg",
+          "alt": "年間降水量 上位5・下位5（47都道府県・2024年）",
+          "heading": "年間降水量が多いのはどこか──太平洋側が突出する",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/annual-precipitation/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/annual-precipitation/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.svg",
+        "sha256": "124957f5cb387c12f0d548654bed60cb6ed6d8cb52a4f879218ab8251a4f4ff9",
+        "bytes": 3466
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/article.md",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/article.md",
+          "sha256": "66abb72f29bae0f177fab114ccbfd43f1fb335d35192874d43f8a863b1eb92e8",
+          "bytes": 12660,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "snowfall-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.source.json",
+          "sha256": "4a6214676a263ebf2e5ae0e1203eff466ca0ca0117dd508e51558bbb79600cbc",
+          "bytes": 356,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.svg",
+          "alt": "年間降雪量 上位5・下位5（都道府県庁所在地）",
+          "heading": "降雪量──日本海側と太平洋側の差が降り方を決める",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 760 490",
+      "hasTheme": false,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "missingInputs": [
+        "app/blog/precipitation-snow-regional-gap/data/snowfall-ranking.json"
+      ],
+      "sourceLinks": [
+        {
+          "label": "app/ranking/maximum-snow-depth/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/maximum-snow-depth/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/background.jpg",
+        "sha256": "cac1aa047262829e6c9af30512a26836699973566333fead60de6cd6f4e1f615",
+        "bytes": 30070
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "sha256": "07bfb6a8d99e3336b127844a49c1abd49f531fdf9a39bc31812bb3f83bf92522",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e72b81414865897c5f8963ebf514156d3af343b98901e9f5b525dc6f957e4ccf",
+        "fingerprint": "20a41ac72357a81534e44269570bfb9c40dec2d17ba24a317be0bae702c01274",
+        "generatedAt": "2026-08-22T05:17:34.860Z"
+      }
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/ogp.png",
+        "sha256": "ad24f3d48e95cd6c04d36afa5f30079093f7fc6008aea825f3c707f7bb5eddf6",
+        "bytes": 270440
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "sha256": "07bfb6a8d99e3336b127844a49c1abd49f531fdf9a39bc31812bb3f83bf92522",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e72b81414865897c5f8963ebf514156d3af343b98901e9f5b525dc6f957e4ccf",
+        "fingerprint": "20a41ac72357a81534e44269570bfb9c40dec2d17ba24a317be0bae702c01274",
+        "generatedAt": "2026-08-22T05:17:34.860Z"
+      }
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/thumbnail-dark.webp",
+        "sha256": "ce43f5399ab9f6b3f72521d3dbb19ce37ce5f3eacb56d0861684de2965bd7481",
+        "bytes": 3324
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "sha256": "07bfb6a8d99e3336b127844a49c1abd49f531fdf9a39bc31812bb3f83bf92522",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e72b81414865897c5f8963ebf514156d3af343b98901e9f5b525dc6f957e4ccf",
+        "fingerprint": "20a41ac72357a81534e44269570bfb9c40dec2d17ba24a317be0bae702c01274",
+        "generatedAt": "2026-08-22T05:17:34.860Z"
+      }
+    },
+    {
+      "owner": "web/blog/precipitation-snow-regional-gap",
+      "file": "app/blog/precipitation-snow-regional-gap/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/precipitation-snow-regional-gap/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/thumbnail-light.webp",
+        "sha256": "cb6c98012c8699941d6765602f8ad404aa2a4a63067d11e11b40adf460967dd3",
+        "bytes": 6230
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/precipitation-snow-regional-gap/ogp/generation.json",
+          "sha256": "07bfb6a8d99e3336b127844a49c1abd49f531fdf9a39bc31812bb3f83bf92522",
+          "bytes": 2257,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "e72b81414865897c5f8963ebf514156d3af343b98901e9f5b525dc6f957e4ccf",
+        "fingerprint": "20a41ac72357a81534e44269570bfb9c40dec2d17ba24a317be0bae702c01274",
+        "generatedAt": "2026-08-22T05:17:34.860Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.svg",
+        "sha256": "b7952d4da17b05853774c1272a324a882d9bb25f61f2ac72cf92752177106245",
+        "bytes": 7721
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/article.md",
+          "sha256": "65981ee06da7bcdd8d3463ddac32310c61de773c7fe874162f0d8f6364f1acd9",
+          "bytes": 8332,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "national-average-timeseries.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.json",
+          "sha256": "64bf6b5d10962d9148e56eff934c04bb0254da12f878e8a79533f20c9ff3b6b7",
+          "bytes": 1415,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "national-average-timeseries.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.source.json",
+          "sha256": "12998726e76af11a053ba4dff2737cf51244ea84b9d033552c73f53ed6246d00",
+          "bytes": 749,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-line",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/national-average-timeseries.svg",
+          "alt": "学校給食消費支出額 全国平均の推移",
+          "heading": "全国平均も右肩下がり、2023年以降は急落",
+          "line": 55
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 680 420",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.svg",
+        "sha256": "f1c7f2eac47792d0eb7287b68629b037b90b3b41700457e792e51160e3c22658",
+        "bytes": 6917
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/article.md",
+          "sha256": "65981ee06da7bcdd8d3463ddac32310c61de773c7fe874162f0d8f6364f1acd9",
+          "bytes": 8332,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "school-lunch-expenditure-ranking-prefecture-rankings.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.json",
+          "sha256": "ea17747801737abdd2e014e3d1d9ebdd34147e8ad64a27a00203414b8fe53551",
+          "bytes": 6740,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "school-lunch-expenditure-ranking-prefecture-rankings.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.source.json",
+          "sha256": "606c3c96b1da4f390ab832af2b780a3632ac8715f010fd88d69e135499282e73",
+          "bytes": 692,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/data/school-lunch-expenditure-ranking-prefecture-rankings.svg",
+          "alt": "学校給食消費支出額 上位5・下位5",
+          "heading": "上位と下位、64倍の格差",
+          "line": 30
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/background.jpg",
+        "sha256": "a431eb70fd399e9698c8e5edc65c3f35ce9ed3a47ce3cbadcfeb64b041301df3",
+        "bytes": 83915
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "sha256": "1c34f0b9db5270299034fcdbadbf34ce857c05cbcb92d6a02f769bd0a5534913",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1169bd07cc91527ed3a8bece0e5c7a7f5fbe969937343224920b18f8a830031c",
+        "fingerprint": "a8bbee12e56174ba662f75c02ffc795b07df994411928dd3d9149bbe362bcc48",
+        "generatedAt": "2026-08-22T05:17:36.567Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/ogp.png",
+        "sha256": "d3ea56ef90e2c339724aa7e6a66c09bf71d0a0d6ed05cca53f36c388df89cc94",
+        "bytes": 427657
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "sha256": "1c34f0b9db5270299034fcdbadbf34ce857c05cbcb92d6a02f769bd0a5534913",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1169bd07cc91527ed3a8bece0e5c7a7f5fbe969937343224920b18f8a830031c",
+        "fingerprint": "a8bbee12e56174ba662f75c02ffc795b07df994411928dd3d9149bbe362bcc48",
+        "generatedAt": "2026-08-22T05:17:36.567Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/thumbnail-dark.webp",
+        "sha256": "5b98d0553d6a475ddda1a48a900451522779bd972842e1429f263f4a3c334bfe",
+        "bytes": 12030
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "sha256": "1c34f0b9db5270299034fcdbadbf34ce857c05cbcb92d6a02f769bd0a5534913",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1169bd07cc91527ed3a8bece0e5c7a7f5fbe969937343224920b18f8a830031c",
+        "fingerprint": "a8bbee12e56174ba662f75c02ffc795b07df994411928dd3d9149bbe362bcc48",
+        "generatedAt": "2026-08-22T05:17:36.567Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-lunch-expenditure-ranking",
+      "file": "app/blog/school-lunch-expenditure-ranking/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-lunch-expenditure-ranking/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/thumbnail-light.webp",
+        "sha256": "4cc0f5ab168704f535e2fd74b3d7c61755420adcb8dacae3c24dfb1d936bbc2a",
+        "bytes": 20580
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-lunch-expenditure-ranking/ogp/generation.json",
+          "sha256": "1c34f0b9db5270299034fcdbadbf34ce857c05cbcb92d6a02f769bd0a5534913",
+          "bytes": 2182,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "1169bd07cc91527ed3a8bece0e5c7a7f5fbe969937343224920b18f8a830031c",
+        "fingerprint": "a8bbee12e56174ba662f75c02ffc795b07df994411928dd3d9149bbe362bcc48",
+        "generatedAt": "2026-08-22T05:17:36.567Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.svg",
+        "sha256": "798d61469d24da450c17b509ccbc3140f0264fed8882d6c2c33ad92c9babaacd",
+        "bytes": 9918
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/article.md",
+          "sha256": "5da2b1f7d04d83d191e88120bef84824abb6afe2fc4c380d3382b557b1c1abfd",
+          "bytes": 25425,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "school-teacher-annual-income-2022-2023-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.json",
+          "sha256": "07e896b7442373f2ebc12f8c023157592fe7db4ab6abda6e4af0a1d6383d9acc",
+          "bytes": 3438,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "school-teacher-annual-income-2022-2023-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.source.json",
+          "sha256": "1ecf9eebbb6f7e2b477dd336874af2723e54e00f674114b9441b94ab8cc79be1",
+          "bytes": 1356,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/school-teacher-annual-income-2022-2023-scatter.svg",
+          "alt": "小中学校教員の平均年収 2022年と2023年の関係",
+          "heading": "同じ県でも1年で順位が大きく動く",
+          "line": 56
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-teacher-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-teacher-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.svg",
+        "sha256": "9992e02351e8db1b4a876e57d985cc96b1671b56a276536c4ebb51bef261104c",
+        "bytes": 9713
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/article.md",
+          "sha256": "5da2b1f7d04d83d191e88120bef84824abb6afe2fc4c380d3382b557b1c1abfd",
+          "bytes": 25425,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "teacher-age-income-change-scatter.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.json",
+          "sha256": "3998032a8fb5ca14f09cbfc2ad74caa2484663d6c2df5e469894c7b86ad33395",
+          "bytes": 3397,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "teacher-age-income-change-scatter.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.source.json",
+          "sha256": "ea290d438c1cb1a526cbd90f247e6ccce9445e9789bcb395bd2093283ca1b0b5",
+          "bytes": 2573,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-age-income-change-scatter.svg",
+          "alt": "小中学校教員の平均年齢と平均年収の変化 2022年から2023年",
+          "heading": "平均年齢が1年で10歳以上動く県もある",
+          "line": 95
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 720 720",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.svg",
+        "sha256": "4e0900c044c5cea92d3122bf6c0ce04fe89248ec0d550f36459d98115fbd31d0",
+        "bytes": 7065
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/article.md",
+          "sha256": "5da2b1f7d04d83d191e88120bef84824abb6afe2fc4c380d3382b557b1c1abfd",
+          "bytes": 25425,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "teacher-coverage-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.json",
+          "sha256": "078ccfd24ab16d84c16aa33c2e3eaabb3718a92546f3702bbe3ae99020312580",
+          "bytes": 14135,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "teacher-coverage-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.source.json",
+          "sha256": "293f32f450c0865838deab09a10833ca48e3fc6f5a6808b7965dff4938f6e039",
+          "bytes": 2472,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-coverage-ranking.svg",
+          "alt": "統計に映る小中学校教員の割合 上位5・下位5",
+          "heading": "統計に映る小中学校教員は全体の約5%",
+          "line": 72
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": []
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/data/teacher-income-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/data/teacher-income-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-income-ranking.svg",
+        "sha256": "0f88889873d8f63cf51358ec47f6bb6f8be6a80964bf4cc7d2d3660f50f6e65d",
+        "bytes": 6924
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/article.md",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/article.md",
+          "sha256": "5da2b1f7d04d83d191e88120bef84824abb6afe2fc4c380d3382b557b1c1abfd",
+          "bytes": 25425,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "teacher-income-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-income-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-income-ranking.json",
+          "sha256": "1bf37fdf2a8953c121bc3bbed346ea8591edae128c8b0ceacd7488599cc13b5b",
+          "bytes": 6355,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "teacher-income-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/data/teacher-income-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-income-ranking.source.json",
+          "sha256": "ddf258e87b24acd78518bb10316d5db2f44c4e126d867d09a5afc975ce36de17",
+          "bytes": 643,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/data/teacher-income-ranking.svg",
+          "alt": "上位5・下位5 教員平均年収",
+          "heading": "2023年の上位5県と下位5県",
+          "line": 31
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-teacher-annual-income/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-teacher-annual-income/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/background.jpg",
+        "sha256": "134f341170266eebcf9d65374ba668619b907915edc80c4dbdea0d86906d2ff0",
+        "bytes": 80400
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/generation.json",
+          "sha256": "192fd985d25ae2ceb44f4d751f3aafadad1dbfac27ae877a292008795ae4ef37",
+          "bytes": 2186,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a87be7eaf5edda7aab0026d6378fc6e5557b31b33ce7fa3514dc7898ead4d516",
+        "fingerprint": "eedf2b9aa51886cc004333d55be699a9171103a8c97d7f581ba90d19326b1767",
+        "generatedAt": "2026-10-08T19:41:58.108Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/ogp.png",
+        "sha256": "9b579c24ec3b0f5edb4af111eae8a399c62aaf7d25bff1b65ea70f2e1ec206f4",
+        "bytes": 455226
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/generation.json",
+          "sha256": "192fd985d25ae2ceb44f4d751f3aafadad1dbfac27ae877a292008795ae4ef37",
+          "bytes": 2186,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a87be7eaf5edda7aab0026d6378fc6e5557b31b33ce7fa3514dc7898ead4d516",
+        "fingerprint": "eedf2b9aa51886cc004333d55be699a9171103a8c97d7f581ba90d19326b1767",
+        "generatedAt": "2026-10-08T19:41:58.108Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/thumbnail-dark.webp",
+        "sha256": "13d8010305ec287cbfcfdfecec5b6aee0cd4ffde66a1f942c01ac5ff1a271775",
+        "bytes": 11608
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/generation.json",
+          "sha256": "192fd985d25ae2ceb44f4d751f3aafadad1dbfac27ae877a292008795ae4ef37",
+          "bytes": 2186,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a87be7eaf5edda7aab0026d6378fc6e5557b31b33ce7fa3514dc7898ead4d516",
+        "fingerprint": "eedf2b9aa51886cc004333d55be699a9171103a8c97d7f581ba90d19326b1767",
+        "generatedAt": "2026-10-08T19:41:58.108Z"
+      }
+    },
+    {
+      "owner": "web/blog/school-teacher-annual-income",
+      "file": "app/blog/school-teacher-annual-income/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/school-teacher-annual-income/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/thumbnail-light.webp",
+        "sha256": "bdf53c33d4daca0c98aa0314fa3c742d4bb253761ba2fe504e2a9c5986df8cd5",
+        "bytes": 21580
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/school-teacher-annual-income/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/school-teacher-annual-income/ogp/generation.json",
+          "sha256": "192fd985d25ae2ceb44f4d751f3aafadad1dbfac27ae877a292008795ae4ef37",
+          "bytes": 2186,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "2cdd35fe1f7b7ddb1e5e783b16dee5be1c92913a6f70be0b9808bb792be4e071",
+        "inputHash": "a87be7eaf5edda7aab0026d6378fc6e5557b31b33ce7fa3514dc7898ead4d516",
+        "fingerprint": "eedf2b9aa51886cc004333d55be699a9171103a8c97d7f581ba90d19326b1767",
+        "generatedAt": "2026-10-08T19:41:58.108Z"
+      }
+    },
+    {
+      "owner": "web/material/0f680969b5f703bc8d796534",
+      "file": "assets/blog/article-backgrounds/treatment-rate-mood-disorder-outpatient-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/treatment-rate-mood-disorder-outpatient-prefecture-gap.jpg",
+        "sha256": "8d27abdc9ae1c9f178e73d9dcfdb31b92920c205ed980ab1d26b2c9c7745326c",
+        "bytes": 79839
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/treatment-rate-mood-disorder-outpatient-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/1bc81212faad99bea4e76e73",
+      "file": "assets/area-specialty/16000/himi-kanburi.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/16000/himi-kanburi.webp",
+        "sha256": "87040198d545c35ec684fb1d0e807973cddadc8e9e00d212cc5985b0abc154b4",
+        "bytes": 37084
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/16000/himi-kanburi.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/2828dbb960fcbeb598f3ec62",
+      "file": "apps/web/public/images/features/area-profile.webp",
+      "original": {
+        "provider": "git",
+        "path": "apps/web/public/images/features/area-profile.webp",
+        "url": "https://stats47.jp/images/features/area-profile.webp",
+        "sha256": "3a0eb0e7d9447455e92bdad767a8b423db6779f82e475a0fc593fcf091e6662d",
+        "bytes": 18118
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "apps/web/public/images/features/area-profile.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/987f0d16885335a1e86c1249",
+      "file": "assets/blog/article-backgrounds/pickled-plum-consumption-expenditure-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/pickled-plum-consumption-expenditure-prefecture-gap.jpg",
+        "sha256": "5b1ad1b794fd5ce15dcdbbe3a6607d6ecb7b4104ada9ecdd2954dc100ce57565",
+        "bytes": 92035
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/pickled-plum-consumption-expenditure-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/a1a53783be6fe63be3ef862e",
+      "file": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.svg",
+        "sha256": "bd5480d3d1be657218065682ebd38ffaea90c2444d91a67592c06356b78dae43",
+        "bytes": 10686
+      },
+      "inputFiles": [
+        {
+          "name": "pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.json",
+          "provider": "git",
+          "path": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.json",
+          "sha256": "75bd965a25202e8481cdf18376964b51bb9691979e022d23ab7a5af29a5ca38c",
+          "bytes": 3708,
+          "role": "data",
+          "state": "observed-current"
+        },
+        {
+          "name": "pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.source.json",
+          "provider": "git",
+          "path": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.source.json",
+          "sha256": "baf7cb6bbaf280dd6cfa44d52a572cbe001b808911ab5acb13cbad0077425be0",
+          "bytes": 666,
+          "role": "provenance",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "svg-scatter",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/pachinko-shop-density-per-10k-vs-high-school-students-per/data/pachinko-shop-density-per-10k--high-school-students-per-teacher-scatter.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e9ec94fda4f05055b2480f22",
+      "file": "assets/blog/article-backgrounds/sports-participation-rate-swimming-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/sports-participation-rate-swimming-prefecture-gap.jpg",
+        "sha256": "e0a5425de5435c6a7c375309e47b2be174b15a94c41f47459294afd9f14c90cb",
+        "bytes": 113521
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/sports-participation-rate-swimming-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/fdfd987d5011b2efe337f292",
+      "file": "assets/blog/codex-backgrounds/care-home.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/codex-backgrounds/care-home.jpg",
+        "sha256": "e2a0ccc5ed0f7335ae8b221bc65016d9ded33a53d25b0e391790f8742ea61f47",
+        "bytes": 43447
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/codex-backgrounds/care-home.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/ranking/alcohol-sales-per-adult-sake",
+      "file": "app/ranking/alcohol-sales-per-adult-sake/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/alcohol-sales-per-adult-sake/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/ogp/ogp.png",
+        "sha256": "9f9435944ce45e9affa95f0ddca47e853ebed2a1ecdb43d53486fdcda466cabb",
+        "bytes": 66271
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/alcohol-sales-per-adult-sake/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/ogp/generation.json",
+          "sha256": "bce5fb5b2acb60886b9f7661c2aea2169c8f62848d7476731f83851fe07b6dc5",
+          "bytes": 945,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "7a5fbe95e69df45b657cd5b69317aa6b5e4c15b1e0e7ddbe3e4b6ff7cb584172",
+        "inputHash": "5c75a79c5ff18274f16344d1194d415903a178dd2b29b08e4e6c95e0572eacab",
+        "fingerprint": "01a909cd2104401dbdfdd5350a8fc909ca0b77b315044b1cad5a2282bd7997eb",
+        "generatedAt": "2026-10-10T21:32:02.206Z"
+      }
+    },
+    {
+      "owner": "web/ranking/alcohol-sales-per-adult-sake",
+      "file": "app/ranking/alcohol-sales-per-adult-sake/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/alcohol-sales-per-adult-sake/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/thumbnail-dark.webp",
+        "sha256": "1fccd96cb3f9fe8dc693e570f60513844e398168a23200174a37c801f9490339",
+        "bytes": 19318
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/alcohol-sales-per-adult-sake/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/thumbnail.json",
+          "sha256": "40d3b7e682fc0afd73ec5686203c1d65620e45edc4a8d8eb1eb1c180f164476b",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "30ff90fb4e070df9551867513e0b5e27a83b59f8be8840e896ba85ecafcaeb8d",
+        "fingerprint": "2aa675c25695ec36e9ebb7314614c1c41edb1727067492919550b9e062831573",
+        "generatedAt": "2026-10-10T21:49:57.723Z"
+      }
+    },
+    {
+      "owner": "web/ranking/alcohol-sales-per-adult-sake",
+      "file": "app/ranking/alcohol-sales-per-adult-sake/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/alcohol-sales-per-adult-sake/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/thumbnail-light.webp",
+        "sha256": "2236abb5067889b851736fe4f9f110923f5283e63317f7f5fbda9add227ad4e6",
+        "bytes": 17546
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/alcohol-sales-per-adult-sake/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/thumbnail.json",
+          "sha256": "40d3b7e682fc0afd73ec5686203c1d65620e45edc4a8d8eb1eb1c180f164476b",
+          "bytes": 1805,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/alcohol-sales-per-adult-sake/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "e543940b957d8381234ea2c093a80e2030511657f8cb083dac861b671efc93d7",
+        "inputHash": "30ff90fb4e070df9551867513e0b5e27a83b59f8be8840e896ba85ecafcaeb8d",
+        "fingerprint": "2aa675c25695ec36e9ebb7314614c1c41edb1727067492919550b9e062831573",
+        "generatedAt": "2026-10-10T21:49:57.723Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hair-styling-consumption-expenditure",
+      "file": "app/ranking/hair-styling-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hair-styling-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/ogp/ogp.png",
+        "sha256": "33887ef7013e376dfda23cd7d4abbe959480a18cb78c0fc1aa9bea1bfc040f13",
+        "bytes": 62151
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hair-styling-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/ogp/generation.json",
+          "sha256": "4b91989844da088060da22fbe949eca5abc27c768bd8797efed0701badd103dc",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "b4edb6beca3db1e2b40514ed2acd948c98a27610e7c4455151f0c5c6c7df7b66",
+        "fingerprint": "44e368885ec5484c4aa4e4421fbf9ce1be618592a05f3023cd465c03f564bfba",
+        "generatedAt": "2026-10-01T18:11:19.236Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hair-styling-consumption-expenditure",
+      "file": "app/ranking/hair-styling-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hair-styling-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "6880f6bab635cce843597b5822e88c60c8ca0d36c7385c053b4800a9f370835f",
+        "bytes": 18054
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hair-styling-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/thumbnail.json",
+          "sha256": "78057dcfd37c09a4f6a232a5cd49878818812bb35caec24ffe8fe1a37c7141bc",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "768a0a805b8eb8449cb36c9978295bd4b3a56d787c81c22278bc62a86b00a1e3",
+        "fingerprint": "92b4e21744bfd0a03cb9ecf5496e700445478d554728ce8e4ca5755fb93987a4",
+        "generatedAt": "2026-10-01T18:35:57.914Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hair-styling-consumption-expenditure",
+      "file": "app/ranking/hair-styling-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hair-styling-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "a6bb84fb8e37d6d834c1f45a788be3954af3be8e6e2158da42bac1feda7ce893",
+        "bytes": 16336
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hair-styling-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/thumbnail.json",
+          "sha256": "78057dcfd37c09a4f6a232a5cd49878818812bb35caec24ffe8fe1a37c7141bc",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hair-styling-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hair-styling-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "768a0a805b8eb8449cb36c9978295bd4b3a56d787c81c22278bc62a86b00a1e3",
+        "fingerprint": "92b4e21744bfd0a03cb9ecf5496e700445478d554728ce8e4ca5755fb93987a4",
+        "generatedAt": "2026-10-01T18:35:57.914Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-video-games",
+      "file": "app/ranking/hobby-participation-rate-video-games/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-video-games/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/ogp/ogp.png",
+        "sha256": "3502b3036ac19f12756b1bb155eb85d416952d2bb5a35633cba305ff6b3c4934",
+        "bytes": 60431
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-video-games/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/ogp/generation.json",
+          "sha256": "4afd038a5c78e388b8eaa553b106288be09505bb08be3a61226b06f290d1d45b",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "e1a1b6217b936a828f862aec088bd8c04f958090a2889f6e4a0261282c91fee9",
+        "fingerprint": "26d9cd373af9d3a5d87b8fc01653d3c123dc5b0f54d64f40b2ae0ed8751f94b3",
+        "generatedAt": "2026-10-01T18:11:32.533Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-video-games",
+      "file": "app/ranking/hobby-participation-rate-video-games/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-video-games/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/thumbnail-dark.webp",
+        "sha256": "acf1dd936a0e137544fd48fd14574295bf42fa033cb0d7d7d632398beb04894e",
+        "bytes": 15708
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-video-games/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/thumbnail.json",
+          "sha256": "12e07e35d1dadd229311e1cf08c7409b838265412346c9b2a1e8c8b122d68df4",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3334046c3136d1f55c466d2e9476a5a99120706bf729e760e6bba0092d1a29e4",
+        "fingerprint": "7ffbaaaa6c19670418a0cc8abb57c59533434b79de0f18614038317098415b95",
+        "generatedAt": "2026-10-01T18:36:01.434Z"
+      }
+    },
+    {
+      "owner": "web/ranking/hobby-participation-rate-video-games",
+      "file": "app/ranking/hobby-participation-rate-video-games/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/hobby-participation-rate-video-games/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/thumbnail-light.webp",
+        "sha256": "97eef859cad0e9c22550289d29d445443555bf812896bac42cdb01e144a30a85",
+        "bytes": 14018
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/hobby-participation-rate-video-games/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/thumbnail.json",
+          "sha256": "12e07e35d1dadd229311e1cf08c7409b838265412346c9b2a1e8c8b122d68df4",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/hobby-participation-rate-video-games/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "3334046c3136d1f55c466d2e9476a5a99120706bf729e760e6bba0092d1a29e4",
+        "fingerprint": "7ffbaaaa6c19670418a0cc8abb57c59533434b79de0f18614038317098415b95",
+        "generatedAt": "2026-10-01T18:36:01.434Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-study-1h-plus-rate",
+      "file": "app/ranking/national-assessment-elementary-study-1h-plus-rate/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/ogp/ogp.png",
+        "sha256": "041ace53ad65e508556a7ed3563414c1bc00d2d7bf19c2cfa6cba0584c690946",
+        "bytes": 66644
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/ogp/generation.json",
+          "sha256": "e569fdce1f81baa22fc1be1c4043cb3d1c8481580c62690bbd7695d745d9d2f3",
+          "bytes": 1029,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "217f7f02d0339bc8bb51ad55719d0183772e234536b965fe164121ca92f5700e",
+        "inputHash": "27b08ff73fab40726305a7746bd2ea74c73c9c89e4d66552c6d4b774946d59c6",
+        "fingerprint": "ec3b4a6fdf1c3a0753ca337893eaaf65ecefe522bb112600711241ae4e8f5851",
+        "generatedAt": "2026-10-08T06:39:42.628Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-study-1h-plus-rate",
+      "file": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-dark.webp",
+        "sha256": "40c65361ea4b786fcc4e762933755c52f1458c1451d2b9044bd194724c7c2d02",
+        "bytes": 18854
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail.json",
+          "sha256": "9b141ed20a2ef7c2790982da15b9be62b00a8ecdb8b6701e80f1e690785367fe",
+          "bytes": 2015,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b0fc7c5a923da99692ab30f9148d3f6a73cf35466dfe5c39fd2f4a4ad4843da8",
+        "fingerprint": "27021c58cd67d2c9d763c79aabe37090b83d4fe8c825d1b9f4304a9bc7e348c3",
+        "generatedAt": "2026-10-08T06:52:04.704Z"
+      }
+    },
+    {
+      "owner": "web/ranking/national-assessment-elementary-study-1h-plus-rate",
+      "file": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail-light.webp",
+        "sha256": "da01cafed6277c1af88ac4ad214edc3ba9334bb797bb2e544a04fcf11970effe",
+        "bytes": 17266
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/thumbnail.json",
+          "sha256": "9b141ed20a2ef7c2790982da15b9be62b00a8ecdb8b6701e80f1e690785367fe",
+          "bytes": 2015,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/national-assessment-elementary-study-1h-plus-rate/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "b0fc7c5a923da99692ab30f9148d3f6a73cf35466dfe5c39fd2f4a4ad4843da8",
+        "fingerprint": "27021c58cd67d2c9d763c79aabe37090b83d4fe8c825d1b9f4304a9bc7e348c3",
+        "generatedAt": "2026-10-08T06:52:04.704Z"
+      }
+    },
+    {
+      "owner": "web/ranking/school-lunch-consumption-expenditure",
+      "file": "app/ranking/school-lunch-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/school-lunch-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/ogp/ogp.png",
+        "sha256": "feff79b6035bfc1a4f5aec44d60e1d6f4d72d92c8232e03a0fe33b4d902dbdfc",
+        "bytes": 77427
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/school-lunch-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/ogp/generation.json",
+          "sha256": "f23ab7fd430000cada14a470c4722922f07bfaee5f250d3b24366fcf04b713a4",
+          "bytes": 977,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "175b306b5de8d68b0676d6c4db625150cc41665bf47c5a3720f792c1c2c29b6f",
+        "fingerprint": "6bca51412376da43f21ede95aeda959cfa6d084d0a78df5bfe21a546ac382021",
+        "generatedAt": "2026-08-15T18:42:45.047Z"
+      }
+    },
+    {
+      "owner": "web/ranking/school-lunch-consumption-expenditure",
+      "file": "app/ranking/school-lunch-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/school-lunch-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "cd4bf99f38864e63dc27f8b7dab2af133441a5b2eda03e8554858ff316d6c1b3",
+        "bytes": 17248
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/school-lunch-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/thumbnail.json",
+          "sha256": "35e65f5040adb18fbf16124f9ae3b60e87f94a57fb0b0708eaaedce57d7b21eb",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "156d15ad66c8e10ca68f8fb855dcb41203ff56129b1b21e2072dbb70090017e8",
+        "fingerprint": "b49387af6c225dcce3b07540a216f2dd5d7e4ffd03d03ac64f403efede348120",
+        "generatedAt": "2026-08-15T18:58:49.309Z"
+      }
+    },
+    {
+      "owner": "web/ranking/school-lunch-consumption-expenditure",
+      "file": "app/ranking/school-lunch-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/school-lunch-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "1be5325fc97e77b23932770c15d9f021049ea9ebc1cc9edd3100609b86994f55",
+        "bytes": 15858
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/school-lunch-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/thumbnail.json",
+          "sha256": "35e65f5040adb18fbf16124f9ae3b60e87f94a57fb0b0708eaaedce57d7b21eb",
+          "bytes": 1898,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/school-lunch-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/school-lunch-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "156d15ad66c8e10ca68f8fb855dcb41203ff56129b1b21e2072dbb70090017e8",
+        "fingerprint": "b49387af6c225dcce3b07540a216f2dd5d7e4ffd03d03ac64f403efede348120",
+        "generatedAt": "2026-08-15T18:58:49.309Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tomato-consumption-expenditure",
+      "file": "app/ranking/tomato-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tomato-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/ogp/ogp.png",
+        "sha256": "dfc8b62171d55a3d1e07df7d951d5661be80e7c0cb338e0884e05987445c6ed2",
+        "bytes": 74670
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tomato-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/ogp/generation.json",
+          "sha256": "3ee0eff4784950c6da98cd0898eed3898c2fe2e5c41baa553fbec0ac496cc8c0",
+          "bytes": 953,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "82b0dc34c802e1dbc291a7d6222ad979479abcb7d8e340acca789029e140edf0",
+        "fingerprint": "2b2560dced13c8a8c10a0126db36c6850b5f6d82d5378ebd50f4065ef259889c",
+        "generatedAt": "2026-08-16T22:21:12.774Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tomato-consumption-expenditure",
+      "file": "app/ranking/tomato-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tomato-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "7ce2f9a872def853f33895cacf3ec22a9c692edec18a06676436f3a895a7900a",
+        "bytes": 16114
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tomato-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/thumbnail.json",
+          "sha256": "d37fa60586260524a2f708296268d2e0bb7b4b04526f65b25d685593c4599d39",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "08b1bd4fc4d9ee6e11c4d36e7537fcc58e3a6ab361107d20593e74d58ec2b2c3",
+        "fingerprint": "3310a88886fd98762f1b94e29a48c8236dabf8522f936d0d7bca7c16a43a947d",
+        "generatedAt": "2026-08-16T22:36:28.761Z"
+      }
+    },
+    {
+      "owner": "web/ranking/tomato-consumption-expenditure",
+      "file": "app/ranking/tomato-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/tomato-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "1661b1dfdd774e375e1c2c6a659f519ba65e22187313e259fbe3ad6062d77273",
+        "bytes": 14472
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/tomato-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/thumbnail.json",
+          "sha256": "d37fa60586260524a2f708296268d2e0bb7b4b04526f65b25d685593c4599d39",
+          "bytes": 1844,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/tomato-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/tomato-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "08b1bd4fc4d9ee6e11c4d36e7537fcc58e3a6ab361107d20593e74d58ec2b2c3",
+        "fingerprint": "3310a88886fd98762f1b94e29a48c8236dabf8522f936d0d7bca7c16a43a947d",
+        "generatedAt": "2026-08-16T22:36:28.761Z"
+      }
+    }
+  ]
+}

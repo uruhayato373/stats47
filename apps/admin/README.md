@@ -20,25 +20,25 @@ PORT=5000 npm run admin    # ポート上書き
 
 ## 画面
 
-| パス | 内容 |
-|---|---|
-| `/` | 導線 + 件数サマリ |
-| `/product/status` | 商品チャネル (note・ココナラ・Kindle) の件数・公開段階。チャネルの定義は `lib/channel-registry.ts` |
-| `/product/coconala` | ココナラの出品状況 (`coconala-listings.json` × product-factory カタログ) |
-| `/content` | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ |
-| `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示 |
-| `/content/note` | 記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
-| `/content/note/covers` | カテゴリ別方針・固定の制作ID・制作状況・公開画像/候補の比較。制作内容を保存してプロンプトと制作仕様を取得し、候補の採用/修正を記録して次の記事へ進む。画像はprivate R2からGET proxyでSHA確認し配信 |
-| `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー |
-| `/content/references` | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示 |
-| `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー |
-| `/assets` | 画像/動画資産 11 タブの読み取り専用ギャラリー |
-| `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
-| `/research` | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続の読み取り専用ミラー |
-| `/strategy` | stats47 2.0事業計画とM1 Geoのsource layer・空間演算・metric・X role 3/9/2/1・契約違反の読み取り専用ミラー |
-| `/dashboard` | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ) |
-| `/buzz-map` | curated catalog・score・evidence・landing・素材previewの読み取り専用ギャラリー。実行は `/buzz-map` skill |
-| `/ops/agents` | agent・skill・CI 無人実行・backlog-loop のモデル/effort 割り当て一覧。正本の frontmatter・workflow・routing policy を表示のたびに読む |
+| パス                              | 内容                                                                                                                                                                                               |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                               | 導線 + 件数サマリ                                                                                                                                                                                  |
+| `/product/status`                 | 商品チャネル (note・ココナラ・Kindle) の件数・公開段階。チャネルの定義は `lib/channel-registry.ts`                                                                                                 |
+| `/product/coconala`               | ココナラの出品状況 (`coconala-listings.json` × product-factory カタログ)                                                                                                                           |
+| `/content`                        | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ                                                                                                                 |
+| `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示                                                                                                                        |
+| `/content/note`                   | 記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー                                                                                                        |
+| `/content/note/covers`            | カテゴリ別方針・固定の制作ID・制作状況・公開画像/候補の比較。制作内容を保存してプロンプトと制作仕様を取得し、候補の採用/修正を記録して次の記事へ進む。画像はprivate R2からGET proxyでSHA確認し配信 |
+| `/content/kindle`                 | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー                                                                |
+| `/content/references`             | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示         |
+| `/sns`                            | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー                                                                                   |
+| `/assets`                         | 画像/動画資産 11 タブの読み取り専用ギャラリー                                                                                                                                                      |
+| `/svg`                            | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ)                                                                                                                                              |
+| `/research`                       | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続の読み取り専用ミラー                                                                                                  |
+| `/strategy`                       | stats47 2.0事業計画とM1 Geoのsource layer・空間演算・metric・X role 3/9/2/1・契約違反の読み取り専用ミラー                                                                                          |
+| `/dashboard`                      | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ)                                                                                                                        |
+| `/buzz-map`                       | curated catalog・score・evidence・landing・素材previewの読み取り専用ギャラリー。実行は `/buzz-map` skill                                                                                           |
+| `/ops/agents`                     | agent・skill・CI 無人実行・backlog-loop のモデル/effort 割り当て一覧。正本の frontmatter・workflow・routing policy を表示のたびに読む                                                              |
 
 ## 構成
 
@@ -65,20 +65,20 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 
 ## SSOT (このアプリはミラー・複製 store を作らない)
 
-| データ | SSOT | 扱い |
-|---|---|---|
-| SNS 投稿台帳 | `data/sns/posts.json` | ID台帳・画像一覧から確認。下書き本文の保存だけadminから既存store経由で実行。予約・投稿はowner agent/skill |
-| note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
-| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `config/kdp-listings.json` / `data/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
-| 参考文献展開 | `data/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `contents/blog/`・`docs/31_note記事原稿/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
-| IG 予約 | `data/sns/instagram-w*-schedule.json` | adminはposts.jsonとの差分表示だけ。予約agentが更新 |
-| ローカル素材 | `.local/r2/sns` / `.local/ogp-pilot` | `/media` `/pilot` で配信 (読み取り) |
-| X 成功時刻 | `.local/sns-gallery-state.json` | 投稿agentが更新し、adminは残枠表示のために読む |
-| 配信素材 | R2 (`storage.stats47.jp`) | 公開 URL で読む。list しない |
-| dashboard | state JSON / metrics CSV / docs md | 読み取り専用ミラー (`lib/server/dashboard.ts`) |
-| 調査カタログ | `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json` | 読み取り専用ミラー (`lib/server/dashboard-catalog.ts`) |
-| 事業計画 | `packages/data-configs/src/business-plan/` + `data/business-plan/latest.json` | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`) |
-| 資産列挙 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs` | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import |
+| データ                   | SSOT                                                                                                                     | 扱い                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| SNS 投稿台帳             | `data/sns/posts.json`                                                                                                    | ID台帳・画像一覧から確認。下書き本文の保存だけadminから既存store経由で実行。予約・投稿はowner agent/skill                        |
+| note編集メタ / 本文      | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/`                                                  | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない                                                |
+| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `config/kdp-listings.json` / `data/products/kindle-archives.json`              | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示                                               |
+| 参考文献展開             | `data/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `contents/blog/`・`docs/31_note記事原稿/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
+| IG 予約                  | `data/sns/instagram-w*-schedule.json`                                                                                    | adminはposts.jsonとの差分表示だけ。予約agentが更新                                                                               |
+| ローカル素材             | `.local/r2/sns` / `.local/ogp-pilot`                                                                                     | `/media` `/pilot` で配信 (読み取り)                                                                                              |
+| X 成功時刻               | `.local/sns-gallery-state.json`                                                                                          | 投稿agentが更新し、adminは残枠表示のために読む                                                                                   |
+| 配信素材                 | R2 (`storage.stats47.jp`)                                                                                                | 公開 URL で読む。list しない                                                                                                     |
+| dashboard                | state JSON / metrics CSV / docs md                                                                                       | 読み取り専用ミラー (`lib/server/dashboard.ts`)                                                                                   |
+| 調査カタログ             | `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json`                                    | 読み取り専用ミラー (`lib/server/dashboard-catalog.ts`)                                                                           |
+| 事業計画                 | `packages/data-configs/src/business-plan/` + `data/business-plan/latest.json`                                            | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`)                                              |
+| 資産列挙                 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs`                                                        | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import                                       |
 
 ## SNSのID台帳
 
@@ -116,6 +116,7 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 生成先は通常dev=`.local/next-admin-dev`、E2E=`.local/next-e2e`、build/start=`.next` に分離する。
 起動中のdevとbuildで同じwebpack chunkを上書きしないための契約で、`run-next.mjs` と
 `playwright.config.ts` が `NEXT_DIST_DIR` を設定する。
+
 ## 共通事業方針の表示
 
 「戦略」→「共通方針」(`/strategy/policy`) で、Obsidian vault正本(`.claude/共通事業方針SSOT.md`)から配布されたHARM・判断の問い・原則を読み取り専用表示する。全画面共通の表示ではなく、この専用ページだけに置く。同じ配布版をエージェントも参照する。`npm run admin` の起動前に `policy:check` が内容の整合性（正本があれば最新版との一致も）を検査する。正本更新後はObsidian vaultで `npm run policy:sync`。個別適用は `.claude/shared-policy/application.json`、収益モデルとKPIは既存戦略が正本。
@@ -124,7 +125,9 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 
 - 商品 → 記事・投稿の改善 (`/product/content-quality`): 全note記事・SNS投稿を既存台帳から結合し、優先度、改善方針、データ/画像/配置/導入/出典/リンクの確認を保存する。右ペインで保存原稿と実画像を確認できる。公開ページのnoteカード表示は別途確認する。
 - 管理 → 画像ライブラリ (`/ops/image-library`): 使用箇所ID、R2所在、入力ファイル、旧新画像、320px比較、候補履歴、生成根拠を確認する。PNG/JPEG/WebP候補はprivate R2保存後に読み戻して照合する。原寸・320px・数値/年/単位の確認が揃った現在の候補だけ採用できる。カバーは既存の専用制作画面へ接続する。
-- 管理 → 図の型・媒体別方針 (`/ops/image-templates`): ランキング、地図、相関、時系列、家計、手順、未分類を共通管理する。編集時は版と旧方針を残し、旧条件の候補を失効させる。X/Instagramの現行全47県表示契約を維持する。
+- 管理 → 画像・元データ・改善 (`/ops/image-library`): OGP・リンクカード・ブログ本文SVG・note・SNS・県の輪郭・共通素材を同じ使用箇所IDで管理する。用途、形式、既存カタログ、媒体で絞り込み、右ペインで保存済み入力・生成元・記事内の位置・同じ元画像の使用先を辿る。`?view=templates` は既存SVG分類を含む図の型・媒体別方針、`?view=articles` は記事の改善。旧 `/assets`・`/svg`・`/ops/image-templates` はここへ転送する。共有collectorとSVG分類は既存SSOTを再利用する。
+
+図の方針更新時は版と旧方針を残し、旧条件の候補を失効させる。SVG候補は外部参照・スクリプト等を検査し、実ファイルはR2に保存、画面ではPNGプレビューにする。X/Instagramの現行全47県表示契約を維持する。
 
 運用記録は `data/content-operations/quality.json`、図の方針は `image-templates.json` と各JSON Schema。公開URL/本文/投稿状態の正本を複製しない。画像索引 `image-inventory.json` は検証済み記事manifestから派生する。未回収・未照合を「画像なし」「再生成可能」と扱わない。候補画像・入力根拠はprivate R2 `media-workspace/{images,inputs}/<sha>.*` に保存する。
 
@@ -132,6 +135,7 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 
 ```bash
 npm run media:inventory -- --all --apply
+npm run media:inventory:web -- --all --apply
 npm run media:migrate -- --all --verify-existing --apply
 npm run media:prepare -- --id IMG-...
 npm run media:check
@@ -139,5 +143,7 @@ npm run media:test
 ```
 
 inventory/migrateは `--apply` なしで保存しない。移行結果は `image-migration.json`、元画像未取得・内容不一致・通信等の未照合を区別する。prepareは正本をSHA照合して新しいOS一時ディレクトリへ復元し、固定入力とrenderer参照を記したrequest.jsonを出力する。復元は再生成成功を意味しない。数値入力不足は回収してから制作する。
+
+Web索引は `web-image-inventory.json` と `web-images/*.json` の小分けファイルで保持し、読込時に各ファイルのSHAを照合する。Web索引は公開ページ台帳とR2の生成manifest・本文参照から派生する。変更のない記事はキャッシュを使い、リモートの全面再照合には `--refresh` を付ける。OGPのmanifestに残るSHAと、実画像を取得したSHAを区別する。本文SVGは対応JSON・source JSONを照合し、埋込SVGは固定本文の範囲から復元する。上流URLだけでは当時の入力を保全したことにしない。素材のGit所在、外部URL、生成記録なし、使用箇所未照合も一覧に残す。棚卸し範囲は画面に表示し、未照合を「全画像の品質確認済み」と扱わない。
 
 書込APIは `PATCH /api/content-quality`、`PATCH /api/media-library/:id`、`POST /api/media-library/:id/candidate`、`PATCH /api/media-templates/:id`。同一localhost Origin、入力schema、楽観ロック、保存ロック、画像サイズ/形式、R2 readbackを検査する。採用で公開面は変更しない。CIのadmin-qualityが台帳検査と専用単体テストを実行する。

@@ -1,0 +1,1505 @@
+{
+  "items": [
+    {
+      "id": "web/blog/future-population-disappearing-prefectures",
+      "channel": "web",
+      "key": "future-population-disappearing-prefectures",
+      "title": "30年で人口が4割消える県はどこ？",
+      "category": "blog",
+      "status": "published",
+      "url": "https://stats47.jp/blog/future-population-disappearing-prefectures",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": true,
+      "basis": "822e675f862ca879e081c7924bd426ffafa5f847837c88cbe12c7853ea88c628",
+      "catalogBasis": "8b0d28937a8ddc318d0aa3327b74c700e387e834b82cdfa73eb9ff3e79f45388",
+      "bodyRef": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/article.md",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/article.md",
+        "sha256": "1b394bdbc758f7ca8c161350974c79a82acdb8ce543899de61c6d7f971f6102c",
+        "bytes": 12047
+      },
+      "indexComplete": true,
+      "inlineIndexed": true
+    },
+    {
+      "id": "web/material/08367d7ff45ee369a42ed224",
+      "channel": "web",
+      "key": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking-ig.svg",
+      "title": "sme-di-manufacturing-change-ranking-ig.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e4c09a0f81655f379e3716555a9310a0a45ac64432e1ddade0deb96e2122f45d"
+    },
+    {
+      "id": "web/material/2d1ff7d46294bb01969f5521",
+      "channel": "web",
+      "key": "assets/area-specialty/40000/buzen-honigani.webp",
+      "title": "buzen-honigani.webp",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "82e4b5c685e4e169aaeb0f66423a182d8a3f0baacac9e1f25c025fce96d56370"
+    },
+    {
+      "id": "web/material/33dfbf626846f43a463de66e",
+      "channel": "web",
+      "key": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.svg",
+      "title": "evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.svg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "33e08f2c1b913d20841ad9ded5ce6332386bbac623faee729a94e83653324239"
+    },
+    {
+      "id": "web/material/ad7203cf35f482206475c1b1",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/dentist-income-prefecture-gap.jpg",
+      "title": "dentist-income-prefecture-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "814c93c6bbec65cc3ce9f58424bc5d47f45cf07afa144f75d73a7980d395cdfb"
+    },
+    {
+      "id": "web/material/e2dc218d8f686e9cdf1addba",
+      "channel": "web",
+      "key": "assets/blog/article-backgrounds/public-phone-count-gap.jpg",
+      "title": "public-phone-count-gap.jpg",
+      "category": "material",
+      "status": "draft",
+      "url": null,
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "f1e03e137e88cbfb633e98d0e815749da25fe2bf1071a8ac99d923af71787430"
+    },
+    {
+      "id": "web/product/kindle-k-s1-07",
+      "channel": "web",
+      "key": "kindle-k-s1-07",
+      "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+      "category": "product",
+      "status": "published",
+      "url": "https://stats47.jp/products/kindle-k-s1-07",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "7ca5cd0e595edc3e182cb7a3651b3ae16849fd286f2b2ee9224136d0e5f3ce94",
+      "catalogBasis": "7ca5cd0e595edc3e182cb7a3651b3ae16849fd286f2b2ee9224136d0e5f3ce94",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/other-meat-consumption-expenditure",
+      "channel": "web",
+      "key": "other-meat-consumption-expenditure",
+      "title": "他の生鮮肉消費支出額",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/other-meat-consumption-expenditure",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "cbed731c3fab8fd56cd0486dc8f4bb43c2cf77307d22d6c3fdd01c12ddedadcb",
+      "catalogBasis": "cbed731c3fab8fd56cd0486dc8f4bb43c2cf77307d22d6c3fdd01c12ddedadcb",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/resident-foreigner-asia",
+      "channel": "web",
+      "key": "resident-foreigner-asia",
+      "title": "在留外国人数（アジア）",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/resident-foreigner-asia",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "e804aefd0dbf325453389666a7244d3dfb96875a6db1262795bd9dec1cd00661",
+      "catalogBasis": "e804aefd0dbf325453389666a7244d3dfb96875a6db1262795bd9dec1cd00661",
+      "indexComplete": true
+    },
+    {
+      "id": "web/ranking/sex-ratio-age-20-39",
+      "channel": "web",
+      "key": "sex-ratio-age-20-39",
+      "title": "人口性比",
+      "category": "ranking",
+      "status": "published",
+      "url": "https://stats47.jp/ranking/sex-ratio-age-20-39",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "03fbf13240d39a79b12d74f0c11af7124682608a1b992f36cddf3d27c815952e",
+      "catalogBasis": "03fbf13240d39a79b12d74f0c11af7124682608a1b992f36cddf3d27c815952e",
+      "indexComplete": true
+    },
+    {
+      "id": "web/silhouette/43",
+      "channel": "web",
+      "key": "43",
+      "title": "熊本県",
+      "category": "material",
+      "status": "published",
+      "url": "https://stats47.jp/areas/43000",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "3c08c1571ea1a05c83aebf8e56a9d3c18851ebda4930ef6387fec6b1411426a0"
+    },
+    {
+      "id": "web/theme/sports-participation",
+      "channel": "web",
+      "key": "sports-participation",
+      "title": "スポーツ施設と利用",
+      "category": "theme",
+      "status": "published",
+      "url": "https://stats47.jp/themes/sports-participation",
+      "publishedAt": null,
+      "bodyStore": "r2-public",
+      "bodySaved": false,
+      "basis": "9a6eafb2bb968f90ccf2909f80081518604ac9e86139b903d39d90f4687595ca",
+      "catalogBasis": "9a6eafb2bb968f90ccf2909f80081518604ac9e86139b903d39d90f4687595ca",
+      "indexComplete": true
+    }
+  ],
+  "images": [
+    {
+      "owner": "web/blog/future-population-disappearing-prefectures",
+      "file": "app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.svg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.svg",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.svg",
+        "sha256": "8af4c87ed6577497484a6ff39601b168036a18d6a34ea74ccdb8614c6830165e",
+        "bytes": 6819
+      },
+      "inputFiles": [
+        {
+          "name": "article.md",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/article.md",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/article.md",
+          "sha256": "1b394bdbc758f7ca8c161350974c79a82acdb8ce543899de61c6d7f971f6102c",
+          "bytes": 12047,
+          "role": "article",
+          "state": "observed-current"
+        },
+        {
+          "name": "change-rate-2050-ranking.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.json",
+          "sha256": "1176cda0b8f077198e51d9e7142af656e5a0c43c201a1743c69636dd770088c0",
+          "bytes": 6785,
+          "role": "data",
+          "state": "preserved-input"
+        },
+        {
+          "name": "change-rate-2050-ranking.source.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.source.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.source.json",
+          "sha256": "e6909d0a8ccd2b4ea55a7b396853d5aa97c342efb812ea5847329cbd55576cf2",
+          "bytes": 662,
+          "role": "provenance",
+          "state": "preserved-input"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "body",
+      "inventoryStatus": "verified",
+      "collection": "blog-body",
+      "occurrences": [
+        {
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/data/change-rate-2050-ranking.svg",
+          "alt": "2050年 将来人口増減率 上位5県と下位5県（IPSS 令和5年推計）",
+          "heading": "増えるのは東京だけ──2050年増減率ランキング",
+          "line": 32
+        }
+      ],
+      "format": "svg",
+      "viewBox": "0 0 960 404",
+      "hasTheme": true,
+      "hasViewBox": true,
+      "generation": {
+        "generator": "svg-builder",
+        "renderer": ".claude/scripts/blog/generate-article-charts.ts"
+      },
+      "sourceLinks": [
+        {
+          "label": "app/ranking/future-population-change-rate-2050/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/future-population-change-rate-2050/values.json",
+          "relationship": "出典manifestの参照先"
+        }
+      ]
+    },
+    {
+      "owner": "web/blog/future-population-disappearing-prefectures",
+      "file": "app/blog/future-population-disappearing-prefectures/ogp/background.jpg",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/ogp/background.jpg",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/background.jpg",
+        "sha256": "708d3c08ef12c236a5e52689a2f916ab2bd754ae095cf2d653f0ae0823f4dedb",
+        "bytes": 91472
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "sha256": "29631a6fdb8885a4703da3849dafda5ab819408d6e0f7760e160fa49df545985",
+          "bytes": 2303,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "background",
+      "usage": "background",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "jpeg",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "3be36c7ff9e504c926901fe3403acf9fa48a363395a111695d25ad581daa8b5c",
+        "fingerprint": "a11b993a5930a4066636f2290e14e04dd227641476adfba88f292844cc12db37",
+        "generatedAt": "2026-08-22T05:17:25.182Z"
+      }
+    },
+    {
+      "owner": "web/blog/future-population-disappearing-prefectures",
+      "file": "app/blog/future-population-disappearing-prefectures/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/ogp.png",
+        "sha256": "a3d59c6139fc5a21cb70ddfde75cc340c41b264f674019caed887dcf6525be71",
+        "bytes": 584753
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "sha256": "29631a6fdb8885a4703da3849dafda5ab819408d6e0f7760e160fa49df545985",
+          "bytes": 2303,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "3be36c7ff9e504c926901fe3403acf9fa48a363395a111695d25ad581daa8b5c",
+        "fingerprint": "a11b993a5930a4066636f2290e14e04dd227641476adfba88f292844cc12db37",
+        "generatedAt": "2026-08-22T05:17:25.182Z"
+      }
+    },
+    {
+      "owner": "web/blog/future-population-disappearing-prefectures",
+      "file": "app/blog/future-population-disappearing-prefectures/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/thumbnail-dark.webp",
+        "sha256": "04fd41efee655134571ed6824d4dc36d7e3c04d189d66dd558b7e93afb0cd3dc",
+        "bytes": 14482
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "sha256": "29631a6fdb8885a4703da3849dafda5ab819408d6e0f7760e160fa49df545985",
+          "bytes": 2303,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "3be36c7ff9e504c926901fe3403acf9fa48a363395a111695d25ad581daa8b5c",
+        "fingerprint": "a11b993a5930a4066636f2290e14e04dd227641476adfba88f292844cc12db37",
+        "generatedAt": "2026-08-22T05:17:25.182Z"
+      }
+    },
+    {
+      "owner": "web/blog/future-population-disappearing-prefectures",
+      "file": "app/blog/future-population-disappearing-prefectures/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/blog/future-population-disappearing-prefectures/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/thumbnail-light.webp",
+        "sha256": "51f35e672a5a2ad401355ecfa76911431f46d7c33a334e1225297b5b11013a83",
+        "bytes": 27848
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/blog/future-population-disappearing-prefectures/ogp/generation.json",
+          "sha256": "29631a6fdb8885a4703da3849dafda5ab819408d6e0f7760e160fa49df545985",
+          "bytes": 2303,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "blog-card",
+      "sourceLinks": [],
+      "format": "webp",
+      "width": 640,
+      "height": 336,
+      "generation": {
+        "generator": "blog-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+        "inputHash": "3be36c7ff9e504c926901fe3403acf9fa48a363395a111695d25ad581daa8b5c",
+        "fingerprint": "a11b993a5930a4066636f2290e14e04dd227641476adfba88f292844cc12db37",
+        "generatedAt": "2026-08-22T05:17:25.182Z"
+      }
+    },
+    {
+      "owner": "web/material/08367d7ff45ee369a42ed224",
+      "file": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking-ig.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking-ig.svg",
+        "sha256": "daf78d4f4552dd7a67d0cd0c29a6a85093039465d333fa1081db4fcb7d966e4e",
+        "bytes": 5016
+      },
+      "inputFiles": [
+        {
+          "name": "sme-di-manufacturing-change-ranking.json",
+          "provider": "git",
+          "path": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking.json",
+          "sha256": "0f8931df746c0b964f9adf303e05e83218fa3d3b9c8044584d96f0ba5d6ebcfb",
+          "bytes": 1908,
+          "role": "data",
+          "state": "observed-current"
+        },
+        {
+          "name": "sme-di-manufacturing-change-ranking.source.json",
+          "provider": "git",
+          "path": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking.source.json",
+          "sha256": "a150b67148ae093954eb1eb8d80eea43a7445fb33ef219af9424b0ff1a50cf21",
+          "bytes": 1506,
+          "role": "provenance",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "svg-bar-ig",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/sme-business-sentiment-regional-gap/data/sme-di-manufacturing-change-ranking-ig.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/2d1ff7d46294bb01969f5521",
+      "file": "assets/area-specialty/40000/buzen-honigani.webp",
+      "original": {
+        "provider": "git",
+        "path": "assets/area-specialty/40000/buzen-honigani.webp",
+        "sha256": "1fc22cdf125f5570c30fdb690fda92de430c10f4ff532449be112b21dced5098",
+        "bytes": 40454
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "webp",
+      "sourceLinks": [
+        {
+          "label": "assets/area-specialty/40000/buzen-honigani.webp",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/33dfbf626846f43a463de66e",
+      "file": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.svg",
+      "original": {
+        "provider": "git",
+        "path": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.svg",
+        "sha256": "b9bb069f4d88ec59dfc00cf07441ecb74ba1216fc40067ccc844257b0ac4e8e5",
+        "bytes": 6994
+      },
+      "inputFiles": [
+        {
+          "name": "evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.json",
+          "provider": "git",
+          "path": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.json",
+          "sha256": "1763f92ac83dee07a61ac8700ddf6feff3839b515c27e1d696c0bf88c6c244ad",
+          "bytes": 6912,
+          "role": "data",
+          "state": "observed-current"
+        },
+        {
+          "name": "evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.source.json",
+          "provider": "git",
+          "path": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.source.json",
+          "sha256": "4abb1abd07f72bb5afcc27f1e8d91e96fae3c5579d92638b49dd2b7d28c4a7c9",
+          "bytes": 784,
+          "role": "provenance",
+          "state": "observed-current"
+        }
+      ],
+      "templateId": "svg-bar-card",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "svg",
+      "sourceLinks": [
+        {
+          "label": "contents/blog/evacuation-plan-coverage-urban-prefecture-gap/data/evacuation-plan-coverage-urban-prefecture-gap-prefecture-rankings.svg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/ad7203cf35f482206475c1b1",
+      "file": "assets/blog/article-backgrounds/dentist-income-prefecture-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/dentist-income-prefecture-gap.jpg",
+        "sha256": "c51d70920cd25853f72e97c60bf4e348dbcde73d4a11e629c24d6aca6d9db5dc",
+        "bytes": 73071
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/dentist-income-prefecture-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/material/e2dc218d8f686e9cdf1addba",
+      "file": "assets/blog/article-backgrounds/public-phone-count-gap.jpg",
+      "original": {
+        "provider": "git",
+        "path": "assets/blog/article-backgrounds/public-phone-count-gap.jpg",
+        "sha256": "18a7f5cc47343ded7e0eb6fe362ad0fe26e04f69e7a8a285f0b62582f585db2b",
+        "bytes": 63023
+      },
+      "inputFiles": [],
+      "templateId": "background",
+      "usage": "material",
+      "inventoryStatus": "verified",
+      "collection": "static-material",
+      "format": "jpg",
+      "sourceLinks": [
+        {
+          "label": "assets/blog/article-backgrounds/public-phone-count-gap.jpg",
+          "relationship": "登録素材。使用箇所の全件照合は未実施。"
+        }
+      ]
+    },
+    {
+      "owner": "web/product/kindle-k-s1-07",
+      "file": "app/products/kindle-k-s1-07/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/products/kindle-k-s1-07/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png",
+        "sha256": "fc55b946101aac846f2bb15cd2c7429eed2458f3eb230943eac6cbff19689e01",
+        "bytes": 426295
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/products/kindle-k-s1-07/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/generation.json",
+          "sha256": "df22eae203cea4732ea6fcb8891b12b34bf16a9fda7e90cb048f8b09afbb7ce5",
+          "bytes": 820,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "product-ogp",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "product-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "735c7a32837d7fbb94dfedbdc95b775376fb98700779c8aa97585ff454ba6e05",
+        "inputHash": "1702233918f020860c1c20a0ece8c23cd92cba0096f9195d33eb889528af9397",
+        "fingerprint": "7a167c4c5a21c28af78dfe4e9729ab3d62df1c5cab5ba135659b7de3945b76e7",
+        "generatedAt": "2026-09-14T22:25:50.960Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-meat-consumption-expenditure",
+      "file": "app/ranking/other-meat-consumption-expenditure/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-meat-consumption-expenditure/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/ogp/ogp.png",
+        "sha256": "6dae6bdec07fea7c46a91628393e5e77381eb173b96e1f9aff185e8ebf949349",
+        "bytes": 62185
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-meat-consumption-expenditure/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/ogp/generation.json",
+          "sha256": "4831bf0932d67ca08511ab1dca6e54936a2270fec2ecd28cb413650d1f12c52d",
+          "bytes": 969,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "9d75aa1e0bbf2bd3943f8be3c491e5b6b2a15dd8e3d80dd237ceea4708891498",
+        "inputHash": "d995130031730028370a9a5d9783314e4d4060e774eaf9ebb8165a3fb36c80e3",
+        "fingerprint": "0f7b02c93a38af38817bc4a413b40f34127b6373bc21408e80ab3940a1c8dca7",
+        "generatedAt": "2026-10-03T21:00:38.286Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-meat-consumption-expenditure",
+      "file": "app/ranking/other-meat-consumption-expenditure/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-meat-consumption-expenditure/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/thumbnail-dark.webp",
+        "sha256": "cecf9cfec97ee12b9259626933b73c461907d5d05929a9c2caaed1113f8c7f50",
+        "bytes": 17548
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-meat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/thumbnail.json",
+          "sha256": "d15b51f0f4c0f5a96823d9be831599ce3b92e711205048d0a106b3d3c664f9c7",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ebe4ed77f421235b44aa268ab4f6983af6d979a03b70f6f3a250e3df7f71e883",
+        "fingerprint": "38de3bd260bf3c16fc66e8732d8b0d1350c292cdf672eb2dce696291caa16f2a",
+        "generatedAt": "2026-10-03T21:25:37.464Z"
+      }
+    },
+    {
+      "owner": "web/ranking/other-meat-consumption-expenditure",
+      "file": "app/ranking/other-meat-consumption-expenditure/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/other-meat-consumption-expenditure/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/thumbnail-light.webp",
+        "sha256": "6569fec44ac0d9e13c7a81acbd86222fae782783e025a1b87fcec27ecf92d4b0",
+        "bytes": 16192
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/other-meat-consumption-expenditure/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/thumbnail.json",
+          "sha256": "d15b51f0f4c0f5a96823d9be831599ce3b92e711205048d0a106b3d3c664f9c7",
+          "bytes": 1880,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/other-meat-consumption-expenditure/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/other-meat-consumption-expenditure/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "ebe4ed77f421235b44aa268ab4f6983af6d979a03b70f6f3a250e3df7f71e883",
+        "fingerprint": "38de3bd260bf3c16fc66e8732d8b0d1350c292cdf672eb2dce696291caa16f2a",
+        "generatedAt": "2026-10-03T21:25:37.464Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-asia",
+      "file": "app/ranking/resident-foreigner-asia/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-asia/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/ogp/ogp.png",
+        "sha256": "2eba1f8547f242e63158d3b42cbb5c88a479f7f739970444ba7320dd955f1edc",
+        "bytes": 77605
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-asia/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/ogp/generation.json",
+          "sha256": "4163874cfbc0ad9d563e8fcda60607b9a92042a8474ff4f6dee0d5c768287668",
+          "bytes": 925,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-asia/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-asia/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "07fbc5e7336dc84b2f9016420bbacaf25633f87ba388c2474d22f431907447ff",
+        "inputHash": "de363c0eec3f4bf364ec571c962df2187b58317d40f5a290ae7032115dba9339",
+        "fingerprint": "da9bdde0e2ccdab349bd411d13dc8799538ed317808a17c2e3a46beace39689b",
+        "generatedAt": "2026-08-15T18:42:37.317Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-asia",
+      "file": "app/ranking/resident-foreigner-asia/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-asia/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/thumbnail-dark.webp",
+        "sha256": "d22572ac95eb358161e881cfb2471b3dc6c55acb4daa4247dfcb6dd1f87ed782",
+        "bytes": 17514
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-asia/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/thumbnail.json",
+          "sha256": "3b992a81d124bcee9d869d527b078fb1da3b9f08b6c2a2e1e3927bb392c174f4",
+          "bytes": 1781,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-asia/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-asia/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a2cdd65ee881ec6682555684a7d06ca60b8bea7a8233a6ecad45686b1e48e26d",
+        "fingerprint": "4a812a643c05b7354fc030ddce3c96e1e4b24503ccd4e88d23fe5576d0c1ec02",
+        "generatedAt": "2026-08-15T18:58:45.893Z"
+      }
+    },
+    {
+      "owner": "web/ranking/resident-foreigner-asia",
+      "file": "app/ranking/resident-foreigner-asia/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/resident-foreigner-asia/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/thumbnail-light.webp",
+        "sha256": "005d39bcbc96aca23219b9a6b0c367861c7adf550f53f739ecf331b648508464",
+        "bytes": 15892
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/resident-foreigner-asia/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/thumbnail.json",
+          "sha256": "3b992a81d124bcee9d869d527b078fb1da3b9f08b6c2a2e1e3927bb392c174f4",
+          "bytes": 1781,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/resident-foreigner-asia/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/resident-foreigner-asia/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/resident-foreigner-asia/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "97987db71ebfe06ff66474e34f2d32142e40a96e58d0f4af41d06e4b1144a326",
+        "inputHash": "a2cdd65ee881ec6682555684a7d06ca60b8bea7a8233a6ecad45686b1e48e26d",
+        "fingerprint": "4a812a643c05b7354fc030ddce3c96e1e4b24503ccd4e88d23fe5576d0c1ec02",
+        "generatedAt": "2026-08-15T18:58:45.893Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-ratio-age-20-39",
+      "file": "app/ranking/sex-ratio-age-20-39/ogp/ogp.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-ratio-age-20-39/ogp/ogp.png",
+        "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/ogp/ogp.png",
+        "sha256": "96202e834654814e04cb4286bf7e07b55577ac5c5414a332cbc3aafd8b0f8f81",
+        "bytes": 61943
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-ratio-age-20-39/ogp/generation.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/ogp/generation.json",
+          "sha256": "1817b6a693977f949ab51f56aa72b20867cf0c2bbc17cbbdb66942a9c7de3000",
+          "bytes": 909,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-ogp",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "ranking-ogp",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "217f7f02d0339bc8bb51ad55719d0183772e234536b965fe164121ca92f5700e",
+        "inputHash": "881ebb564ec8638409ddf38464931a45fa11844e12d7402468b76096ddfc3b1d",
+        "fingerprint": "a7ba75df88d84e1832b8467e350040bed0b7996344301e4d808f6e443527842b",
+        "generatedAt": "2026-10-08T06:39:43.236Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-ratio-age-20-39",
+      "file": "app/ranking/sex-ratio-age-20-39/thumbnail-dark.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-ratio-age-20-39/thumbnail-dark.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/thumbnail-dark.webp",
+        "sha256": "b6ddec741c9b5e6e3aec73cf91082c5f8c34d1062efbdca8bd0e20727dd9991b",
+        "bytes": 13546
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-ratio-age-20-39/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/thumbnail.json",
+          "sha256": "e7958fa6943af9c6b996f3079bd2019ad9f70eb8d108357311875f6e062b2cc5",
+          "bytes": 1745,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fa49c4b4461a1227033845dd4656f957daaa460859a921afab0b81dce0996f86",
+        "fingerprint": "0ccda88f895c97a01688e087ca2532f078262f0761df54efa77200411541b8e4",
+        "generatedAt": "2026-10-08T06:52:04.862Z"
+      }
+    },
+    {
+      "owner": "web/ranking/sex-ratio-age-20-39",
+      "file": "app/ranking/sex-ratio-age-20-39/thumbnail-light.webp",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "app/ranking/sex-ratio-age-20-39/thumbnail-light.webp",
+        "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/thumbnail-light.webp",
+        "sha256": "9fb573b3a6c801721610cc39e3bd4d476d9660d54f5b06dced9ae8c1846ca321",
+        "bytes": 10842
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "app/ranking/sex-ratio-age-20-39/thumbnail.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/thumbnail.json",
+          "sha256": "e7958fa6943af9c6b996f3079bd2019ad9f70eb8d108357311875f6e062b2cc5",
+          "bytes": 1745,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "link-card",
+      "usage": "card",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "ranking-card",
+      "sourceLinks": [
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/item.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/item.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        },
+        {
+          "label": "app/ranking/sex-ratio-age-20-39/values.json",
+          "url": "https://storage.stats47.jp/app/ranking/sex-ratio-age-20-39/values.json",
+          "relationship": "生成記録の参照先（当時の固定値は未照合）"
+        }
+      ],
+      "format": "webp",
+      "width": 640,
+      "height": 360,
+      "generation": {
+        "generator": "ranking-card",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "444f3d7cc23743b8275d6c468eaa22dce3c8bc1b9e969fb6e112b84e635de45c",
+        "inputHash": "fa49c4b4461a1227033845dd4656f957daaa460859a921afab0b81dce0996f86",
+        "fingerprint": "0ccda88f895c97a01688e087ca2532f078262f0761df54efa77200411541b8e4",
+        "generatedAt": "2026-10-08T06:52:04.862Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-11-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-11-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-11-blue.png",
+        "sha256": "097b3f28423c1c1026dc4e58bbb34d6e0c479e241d859ef1e35f62030ad0f607",
+        "bytes": 246605
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-11-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-11-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-11-dark.png",
+        "sha256": "31d43125299e3f2a9327ab9324da1de7d4f050af203ba73526321be6327fa375",
+        "bytes": 222143
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-169-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-169-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-169-blue.png",
+        "sha256": "10201a7ba774fde305d467704588d2b11ed953a6157c11f5e35d007d27d0722a",
+        "bytes": 350807
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-169-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-169-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-169-dark.png",
+        "sha256": "c751607bd3d9827d9a7e0a523cd01038bcef56ab9abc466ffed829b4045e5d8b",
+        "bytes": 305503
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1920,
+      "height": 1080,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-45-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-45-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-45-blue.png",
+        "sha256": "630f62ed57c81cc62b64008bd99e6c74ace97d0a6c689f6a77c735ae960b1a49",
+        "bytes": 277139
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-45-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-45-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-45-dark.png",
+        "sha256": "edb58e45f9d8a403c57c4bbe1dad0613ef4d7621f80a8dc10882ecbcdf2db862",
+        "bytes": 252090
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1350,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-916-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-916-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-916-blue.png",
+        "sha256": "64a120181f0851a551db8b7ed44261fc19697c62a58f47d02aee12d0453365fd",
+        "bytes": 337190
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-916-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-916-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-916-dark.png",
+        "sha256": "64ec34d4b32fe30ba3126ef3306504e5df5ce8900272e9debdc749507b6cff4a",
+        "bytes": 306812
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-ogp-blue.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-ogp-blue.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-ogp-blue.png",
+        "sha256": "f36f0a0106bd050b511de84e9f37093b2231c5e1ec27a0417664ea18c332863d",
+        "bytes": 182094
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/silhouette/43",
+      "file": "sns/pref-silhouette/43/card-ogp-dark.png",
+      "original": {
+        "provider": "r2-public",
+        "bucket": "stats47",
+        "key": "sns/pref-silhouette/43/card-ogp-dark.png",
+        "url": "https://storage.stats47.jp/sns/pref-silhouette/43/card-ogp-dark.png",
+        "sha256": "687bf3a3d4af9f53a15c43411f5d29d85e5be28f8cb76577932ec4d8aa1778b5",
+        "bytes": 158008
+      },
+      "inputFiles": [
+        {
+          "name": "generation-manifest.json",
+          "provider": "r2-public",
+          "bucket": "stats47",
+          "key": "sns/pref-silhouette/43/generation.json",
+          "url": "https://storage.stats47.jp/sns/pref-silhouette/43/generation.json",
+          "sha256": "5e6616ac5af724f3d7e6c110bc5d1ae0a0c513ab3462b3c228a60479f9859b6b",
+          "bytes": 3433,
+          "role": "generation",
+          "state": "preserved-manifest"
+        }
+      ],
+      "templateId": "pref-silhouette",
+      "usage": "material",
+      "inventoryStatus": "manifest-indexed",
+      "collection": "pref-silhouette",
+      "sourceLinks": [],
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "generation": {
+        "generator": "prefecture-silhouette",
+        "renderer": "apps/web/scripts/data/image-generator-registry.ts",
+        "rendererHash": "f3de68871b54a8299895e3f74a734a498ce9299e4387650d07ba0045af5f30bf",
+        "inputHash": "eccda14f6fdd780acda554d39ab26e14f911f2f0745daf5cb3a5a8987f944fb5",
+        "fingerprint": "af2653505cc12216c36cce2b692e90aabe03cc2868293bfc9f656c34d2df9ee0",
+        "generatedAt": "2026-10-10T22:11:17.708Z"
+      }
+    },
+    {
+      "owner": "web/theme/sports-participation",
+      "file": "https://stats47.jp/themes/sports-participation/opengraph-image",
+      "original": {
+        "provider": "site",
+        "url": "https://stats47.jp/themes/sports-participation/opengraph-image"
+      },
+      "inputFiles": [],
+      "templateId": "ogp",
+      "usage": "ogp",
+      "inventoryStatus": "reference-only",
+      "collection": "theme-ogp",
+      "generation": {
+        "generator": "satori-route",
+        "renderer": "apps/web/src/features/ogp/"
+      }
+    }
+  ]
+}
