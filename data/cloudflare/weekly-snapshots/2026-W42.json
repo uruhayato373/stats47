@@ -1,0 +1,47 @@
+{
+  "snapshot_id": "2026-W42",
+  "period_label": "Sep 15 – Oct 14, 2026 (月次請求)",
+  "period_start": "2026-09-15",
+  "period_end": "2026-10-14",
+  "source": "Cloudflare invoice IN-83898043 (PDF, recorded 2026-10-16)",
+  "recorded_at": "2026-10-16",
+  "metrics": {
+    "workers_cpu_ms": {
+      "value": 1098120555,
+      "unit": "CPU ms",
+      "billable_overage": 1068120555,
+      "billable_amount_usd": 21.38,
+      "note": "billable_overage は請求書の Qty。value は込み分 30M を足した推定合計。金額は開始した 100 万 ms 単位で $0.02 (1,069 単位)。前期間 (2026-W38) の 297M の 3.70 倍。"
+    },
+    "subscription_workers_paid": {
+      "value": 1,
+      "unit": "month",
+      "billable_amount_usd": 5
+    },
+    "other_line_items": {
+      "billable_amount_usd": 0,
+      "note": "D1・KV・Durable Objects・Observability Logs・Queues・Workflows・Pipelines など他の行はすべて $0.00 (R2 は行自体が無い)"
+    }
+  },
+  "cost_summary": {
+    "subtotal_usd": 26.38,
+    "tax_usd": 2.64,
+    "tax_rate": 0.1,
+    "tax_region": "JAPAN",
+    "total_usd": 29.02,
+    "exchange_rate_jpy": 161.94,
+    "total_jpy": 4699
+  },
+  "alerts": [
+    {
+      "metric": "workers_cpu_ms",
+      "severity": "error",
+      "reason": "無料枠 30M に対し推定合計 1,098M（超過 1,068M）"
+    },
+    {
+      "metric": "total_cost_usd_monthly",
+      "severity": "error",
+      "reason": "エラー閾値 $15 を超過（$29.02）"
+    }
+  ]
+}
