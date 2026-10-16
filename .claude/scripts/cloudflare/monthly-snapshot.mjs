@@ -20,7 +20,7 @@
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -70,6 +70,18 @@ function cycleRange(cycleStart) {
   return { start, end };
 }
 
+// 比較・予算判定に使ってよい日次の網羅率。日次 snapshot は取得翌日に作られるので、
+// 実行時点で請求期間の最終日が欠けるのは正常 (30 日中 29 日)。
+export const MIN_COVERAGE_RATIO = 0.9;
+
+export function daysInRange({ start, end }) {
+  return Math.round((Date.parse(`${end}T00:00:00Z`) - Date.parse(`${start}T00:00:00Z`)) / 86_400_000) + 1;
+}
+
+export function isCoverageComplete(daysCovered, daysExpected) {
+  return daysExpected > 0 && daysCovered / daysExpected >= MIN_COVERAGE_RATIO;
+}
+
 function listDailySnapshots(start, end) {
   if (!existsSync(SNAPSHOTS_DIR)) return [];
   return readdirSync(SNAPSHOTS_DIR)
@@ -79,17 +91,58 @@ function listDailySnapshots(start, end) {
     .sort();
 }
 
+function readDailySnapshots(dates) {
+  return dates
+    .map((date) => path.join(SNAPSHOTS_DIR, `${date}.json`))
+    .filter((p) => existsSync(p))
+    .map((p) => JSON.parse(readFileSync(p, "utf-8")));
+}
+
+function readMonthlySnapshot(cycle) {
+  const p = path.join(MONTHLY_DIR, `${cycle}.json`);
+  return existsSync(p) ? JSON.parse(readFileSync(p, "utf-8")) : null;
+}
+
+/**
+ * 前月の比較元を決める。日次 snapshot は保持 30 件 (prune-state-snapshots.mjs) なので、
+ * 15 日の実行時点で前月の日次はほぼ消えている。日次が揃わなければ前月の月次 JSON を使い、
+ * どちらも揃わなければ比較しない (欠けた日数の合計と 1 か月分を比べない)。
+ */
+export function resolvePreviousAggregate({ prevCycle, prevSnapshots, prevDaysExpected, prevMonthly }) {
+  if (isCoverageComplete(prevSnapshots.length, prevDaysExpected)) {
+    return { aggregate: aggregateSnapshots(prevSnapshots), source: "daily", daysCovered: prevSnapshots.length };
+  }
+  const monthlyDays = prevMonthly?.days_covered ?? 0;
+  if (prevMonthly?.aggregate && isCoverageComplete(monthlyDays, prevDaysExpected)) {
+    return { aggregate: prevMonthly.aggregate, source: "monthly", daysCovered: monthlyDays };
+  }
+  return {
+    aggregate: null,
+    source: "none",
+    daysCovered: Math.max(prevSnapshots.length, monthlyDays),
+    reason: `前月 (${prevCycle}) の日次 snapshot が ${prevSnapshots.length}/${prevDaysExpected} 日分で、`
+      + (prevMonthly ? `月次 JSON も ${monthlyDays} 日分しか無い` : "月次 JSON も無い"),
+  };
+}
+
 function aggregate(dates) {
+  return aggregateSnapshots(readDailySnapshots(dates));
+}
+
+export function aggregateSnapshots(snapshots) {
   const agg = {
     d1: { readQueries: 0, writeQueries: 0, rowsRead: 0, rowsWritten: 0 },
-    workers: { totalRequests: 0, totalErrors: 0, totalSubrequests: 0 },
+    // totalCpuTimeUs は全日分の CPU 合計が揃ったときだけ数値。1 日でも欠ければ null (部分和を合計と見せない)
+    workers: { totalRequests: 0, totalErrors: 0, totalSubrequests: 0, totalCpuTimeUs: null, cpuDaysCovered: 0 },
     r2_operations: { classA: 0, classB: 0, otherOps: 0, totalEgressBytes: 0 },
     r2_storage: { latestBytes: 0, latestObjects: 0 },
   };
-  for (const date of dates) {
-    const p = path.join(SNAPSHOTS_DIR, `${date}.json`);
-    if (!existsSync(p)) continue;
-    const s = JSON.parse(readFileSync(p, "utf-8"));
+  let cpuSum = 0;
+  for (const s of snapshots) {
+    if (typeof s.workers?.totalCpuTimeUs === "number") {
+      cpuSum += s.workers.totalCpuTimeUs;
+      agg.workers.cpuDaysCovered += 1;
+    }
     if (s.d1) {
       agg.d1.readQueries += s.d1.readQueries || 0;
       agg.d1.writeQueries += s.d1.writeQueries || 0;
@@ -111,6 +164,9 @@ function aggregate(dates) {
       agg.r2_storage.latestBytes = s.r2_storage.totalBytes || agg.r2_storage.latestBytes;
       agg.r2_storage.latestObjects = s.r2_storage.totalObjects || agg.r2_storage.latestObjects;
     }
+  }
+  if (snapshots.length > 0 && agg.workers.cpuDaysCovered === snapshots.length) {
+    agg.workers.totalCpuTimeUs = cpuSum;
   }
   return agg;
 }
@@ -134,9 +190,15 @@ function fmtBytes(n) {
 function compareToBudgets(agg) {
   if (!existsSync(BUDGETS_PATH)) return [];
   const { budgets } = JSON.parse(readFileSync(BUDGETS_PATH, "utf-8"));
+  return evaluateBudgets(budgets, agg);
+}
+
+export function evaluateBudgets(budgets, agg) {
+  const cpuUs = agg.workers.totalCpuTimeUs;
   const valueOf = {
     d1_rows_read: agg.d1.rowsRead,
     d1_rows_written: agg.d1.rowsWritten,
+    workers_cpu_ms: typeof cpuUs === "number" ? cpuUs / 1000 : null,
     workers_requests: agg.workers.totalRequests,
     r2_class_a_operations: agg.r2_operations.classA,
     r2_class_b_operations: agg.r2_operations.classB,
@@ -152,11 +214,13 @@ function compareToBudgets(agg) {
   });
 }
 
-function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
+export function buildIssueBody(cycle, range, agg, comparisons, previous, coverage) {
+  const prevAgg = previous?.aggregate ?? null;
+  const cpuMs = (a) => (typeof a?.workers?.totalCpuTimeUs === "number" ? a.workers.totalCpuTimeUs / 1000 : null);
   const lines = [];
   lines.push(`# [Cloudflare Cost Snapshot] ${cycle}`);
   lines.push("");
-  lines.push(`請求サイクル: ${range.start} 〜 ${range.end}`);
+  lines.push(`請求サイクル: ${range.start} 〜 ${range.end} (日次 snapshot ${coverage.daysCovered}/${coverage.daysExpected} 日分)`);
   lines.push("");
 
   lines.push(`## サマリ`);
@@ -166,6 +230,7 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
   const metrics = [
     ["D1 rows read", agg.d1.rowsRead, prevAgg?.d1?.rowsRead],
     ["D1 rows written", agg.d1.rowsWritten, prevAgg?.d1?.rowsWritten],
+    ["Workers CPU ms", cpuMs(agg), cpuMs(prevAgg)],
     ["Workers requests", agg.workers.totalRequests, prevAgg?.workers?.totalRequests],
     ["R2 Class A ops", agg.r2_operations.classA, prevAgg?.r2_operations?.classA],
     ["R2 Class B ops", agg.r2_operations.classB, prevAgg?.r2_operations?.classB],
@@ -176,12 +241,24 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
     const isBytes = /egress|storage/.test(name);
     const f = isBytes ? fmtBytes : fmtNum;
     let delta = "—";
-    if (prev !== undefined && prev !== null && prev !== 0) {
+    if (typeof curr === "number" && typeof prev === "number" && prev !== 0) {
       const pct = ((curr - prev) / prev) * 100;
       const sign = pct >= 0 ? "+" : "";
       delta = `${sign}${pct.toFixed(1)}%`;
     }
-    lines.push(`| ${name} | ${f(curr)} | ${prev !== undefined && prev !== null ? f(prev) : "—"} | ${delta} |`);
+    lines.push(`| ${name} | ${f(curr)} | ${typeof prev === "number" ? f(prev) : "—"} | ${delta} |`);
+  }
+  lines.push("");
+  if (!coverage.complete) {
+    lines.push(`> 当月の日次 snapshot が ${coverage.daysCovered}/${coverage.daysExpected} 日分しか無いため、合計は 1 か月分ではない。`);
+  }
+  if (previous?.source === "monthly") {
+    lines.push(`> 前月の値は前月の月次 JSON (${previous.daysCovered} 日分) から。前月の日次 snapshot は保持期間を過ぎている。`);
+  } else if (previous?.source === "none") {
+    lines.push(`> 前月比を出さない: ${previous.reason}。`);
+  }
+  if (cpuMs(agg) === null) {
+    lines.push(`> Workers CPU ms: 日次 snapshot の CPU 合計が ${agg.workers.cpuDaysCovered}/${coverage.daysCovered} 日分しか無いため集計しない。請求書の CPU 行が唯一の出典 (\`/cloudflare-cost-improvement invoice\`)。`);
   }
   lines.push("");
 
@@ -207,7 +284,11 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
   if (warnings.length > 0) {
     lines.push(`- 🟡 **警告**: ${warnings.map((c) => c.metric_key).join(", ")} — 月次トレンドを監視`);
   }
-  if (errors.length === 0 && warnings.length === 0) {
+  const unknowns = comparisons.filter((c) => c.status === "unknown");
+  if (unknowns.length > 0) {
+    lines.push(`- ⚪ **未判定**: ${unknowns.map((c) => c.metric_key).join(", ")} — 日次 snapshot で取れないため、請求書で \`/cloudflare-cost-improvement invoice\` を実行して判定`);
+  }
+  if (errors.length === 0 && warnings.length === 0 && unknowns.length === 0) {
     lines.push(`- 🟢 全 budget 内。次回請求書到着時に \`/cloudflare-cost-improvement invoice\` で精算検証`);
   }
   lines.push("");
@@ -218,7 +299,7 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
   return lines.join("\n");
 }
 
-function buildReportMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody) {
+function buildReportMarkdown(cycle, range, comparisons, snapshotBody) {
   const lines = [];
   lines.push("---");
   lines.push(`type: cloudflare-cost-snapshot`);
@@ -246,22 +327,33 @@ function main() {
   }
 
   const agg = aggregate(dates);
-  const comparisons = compareToBudgets(agg);
+  const daysExpected = daysInRange(range);
+  const coverage = { daysCovered: dates.length, daysExpected, complete: isCoverageComplete(dates.length, daysExpected) };
+  // 当月の日次が欠けている月は予算判定もしない (部分和を ok と誤判定しない)
+  const comparisons = coverage.complete
+    ? compareToBudgets(agg)
+    : compareToBudgets(agg).map((c) => ({ ...c, actual: null, status: "unknown" }));
 
-  // 前月分も集計
   const prevCycle = addMonths(cycle, -1);
   const prevRange = cycleRange(prevCycle);
-  const prevDates = listDailySnapshots(prevRange.start, prevRange.end);
-  const prevAgg = prevDates.length > 0 ? aggregate(prevDates) : null;
+  const previous = resolvePreviousAggregate({
+    prevCycle,
+    prevSnapshots: readDailySnapshots(listDailySnapshots(prevRange.start, prevRange.end)),
+    prevDaysExpected: daysInRange(prevRange),
+    prevMonthly: readMonthlySnapshot(prevCycle),
+  });
 
   const snapshot = {
     cycle,
     range,
     generated_at: new Date().toISOString(),
     days_covered: dates.length,
+    days_expected: daysExpected,
     aggregate: agg,
     previous_cycle: prevCycle,
-    previous_aggregate: prevAgg,
+    previous_source: previous.source,
+    previous_days_covered: previous.daysCovered,
+    previous_aggregate: previous.aggregate,
     budget_comparisons: comparisons,
   };
 
@@ -275,8 +367,8 @@ function main() {
     console.log(JSON.stringify(snapshot, null, 2));
   }
 
-  const snapshotBody = buildIssueBody(cycle, range, agg, comparisons, prevAgg);
-  const reportMarkdown = buildReportMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody);
+  const snapshotBody = buildIssueBody(cycle, range, agg, comparisons, previous, coverage);
+  const reportMarkdown = buildReportMarkdown(cycle, range, comparisons, snapshotBody);
 
   if (NO_WRITE || DRY_RUN) {
     console.log("\n--- report markdown preview ---");
@@ -294,4 +386,6 @@ function main() {
   console.log(`✓ Wrote ${reportOut}`);
 }
 
-main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}

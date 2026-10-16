@@ -4,8 +4,9 @@
     "start": "2026-09-15",
     "end": "2026-10-14"
   },
-  "generated_at": "2026-10-15T03:50:46.899Z",
+  "generated_at": "2026-10-16T00:29:49.493Z",
   "days_covered": 29,
+  "days_expected": 30,
   "aggregate": {
     "d1": {
       "readQueries": 0,
@@ -16,7 +17,9 @@
     "workers": {
       "totalRequests": 2980977,
       "totalErrors": 6701,
-      "totalSubrequests": 18904
+      "totalSubrequests": 18904,
+      "totalCpuTimeUs": null,
+      "cpuDaysCovered": 0
     },
     "r2_operations": {
       "classA": 665948,
@@ -30,6 +33,8 @@
     }
   },
   "previous_cycle": "2026-08",
+  "previous_source": "monthly",
+  "previous_days_covered": 29,
   "previous_aggregate": {
     "d1": {
       "readQueries": 0,
@@ -38,19 +43,19 @@
       "rowsWritten": 0
     },
     "workers": {
-      "totalRequests": 94328,
-      "totalErrors": 1075,
-      "totalSubrequests": 1265
+      "totalRequests": 2079648,
+      "totalErrors": 904,
+      "totalSubrequests": 34532
     },
     "r2_operations": {
-      "classA": 7553,
-      "classB": 228700,
-      "otherOps": 70,
-      "totalEgressBytes": 54180693515
+      "classA": 452025,
+      "classB": 8075900,
+      "otherOps": 33889,
+      "totalEgressBytes": 2130040881330
     },
     "r2_storage": {
-      "latestBytes": 32303490838,
-      "latestObjects": 101734
+      "latestBytes": 32260409713,
+      "latestObjects": 101521
     }
   },
   "budget_comparisons": [

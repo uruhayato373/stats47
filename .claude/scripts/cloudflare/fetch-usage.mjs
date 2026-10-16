@@ -132,6 +132,30 @@ async function fetchWorkers(accountTag, since, until) {
   return { totalRequests, totalErrors, totalSubrequests, byScript };
 }
 
+/**
+ * Workers の CPU 時間の日次合計 (µs)。請求書の「Workers CPU ms」行と突き合わせるために取る。
+ * `sum.cpuTimeUs` は Cloudflare 公式文書では未確認 (2026-10-16。公式の例は quantiles のみ)。
+ * 項目が無い・権限が無いときに日次 snapshot 全体を落とさないよう、別クエリにして失敗は null で返す。
+ */
+async function fetchWorkersCpuTotal(accountTag, since, until) {
+  try {
+    const data = await gql(
+      `query WCpu($a: string!, $s: Time!, $u: Time!) {
+        viewer { accounts(filter: {accountTag: $a}) {
+          workersInvocationsAdaptive(filter: {datetime_geq: $s, datetime_leq: $u}, limit: 1000) {
+            sum { cpuTimeUs }
+          }
+        } }
+      }`,
+      { a: accountTag, s: since, u: until },
+    );
+    const groups = data.viewer.accounts[0]?.workersInvocationsAdaptive || [];
+    return { totalCpuTimeUs: groups.reduce((acc, g) => acc + (g.sum?.cpuTimeUs || 0), 0), cpuTimeError: null };
+  } catch (err) {
+    return { totalCpuTimeUs: null, cpuTimeError: err.message.slice(0, 300) };
+  }
+}
+
 async function fetchR2Operations(accountTag, since, until) {
   const data = await gql(
     `query R2Ops($a: string!, $s: Time!, $u: Time!) {
@@ -207,9 +231,10 @@ async function main() {
 
   console.log(`Cloudflare usage snapshot: ${date} (UTC) [${since} - ${until}]`);
 
-  const [d1, workers, r2Ops, r2Storage] = await Promise.all([
+  const [d1, workers, workersCpu, r2Ops, r2Storage] = await Promise.all([
     fetchD1(accountTag, since, until),
     fetchWorkers(accountTag, since, until),
+    fetchWorkersCpuTotal(accountTag, since, until),
     fetchR2Operations(accountTag, since, until),
     fetchR2Storage(accountTag),
   ]);
@@ -219,7 +244,7 @@ async function main() {
     fetched_at: new Date().toISOString(),
     account_tag: accountTag,
     d1,
-    workers,
+    workers: { ...workers, ...workersCpu },
     r2_operations: r2Ops,
     r2_storage: r2Storage,
   };
@@ -230,6 +255,9 @@ async function main() {
   console.log(`✅ ${out}`);
   console.log(`   D1: ${d1.readQueries}q / ${d1.rowsRead} rows read | databases=${d1.databases.length}`);
   console.log(`   Workers: ${workers.totalRequests} reqs / ${workers.totalErrors} errors`);
+  console.log(workersCpu.totalCpuTimeUs === null
+    ? `   Workers CPU total: 取得不能 (${workersCpu.cpuTimeError})`
+    : `   Workers CPU total: ${(workersCpu.totalCpuTimeUs / 1000).toFixed(0)} ms`);
   console.log(`   R2 ops: classA=${r2Ops.classA}, classB=${r2Ops.classB}, egress=${(r2Ops.totalEgressBytes/1e6).toFixed(1)}MB`);
   console.log(`   R2 storage: ${(r2Storage.totalBytes/1e9).toFixed(2)}GB / ${r2Storage.totalObjects.toLocaleString()} objects`);
 }
