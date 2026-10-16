@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * ランキング note 記事の画像 4 枚 (cover / choropleth / chart / boxplot) を chart-data.json から作り直す。
+ * ランキング note 記事の本文画像 3 枚 (choropleth / chart / boxplot) を chart-data.json から作り直す。カバーは作らない。
  * 入力は記事ディレクトリの chart-data.json だけ。R2 や .local のデータは読まない。契約: .claude/rules/note-image-assets.md
  *
  *   node .claude/scripts/note/render-ranking-images.mjs <rankingKey | a-slug>     # 1 記事
@@ -89,12 +89,11 @@ async function render(slug) {
   const chartData = JSON.parse(chartText);
   const specPath = join(dir, "render-spec.json");
   const background = existsSync(specPath) ? JSON.parse(readFileSync(specPath, "utf8")).background : undefined;
-  const backgroundImage = background ? await loadBackground(background) : undefined;
   if (typeof chartData.unit !== "string") throw new Error(`${slug}: chart-data.json に unit が無い`);
   const work = mkdtempSync(join(tmpdir(), `note-render-${slug}-`));
   try {
     const propsPath = join(work, "props.json");
-    writeFileSync(propsPath, JSON.stringify(buildRenderProps(chartData, backgroundImage)));
+    writeFileSync(propsPath, JSON.stringify(buildRenderProps(chartData)));
     const chrome = CHROME_CANDIDATES.find((candidate) => existsSync(candidate));
     const outputs = [];
     for (const image of NOTE_RANKING_IMAGES) {
@@ -106,7 +105,7 @@ async function render(slug) {
       if (w !== image.width || h !== image.height) throw new Error(`${slug} ${image.file}: 寸法 ${w}x${h} (期待 ${image.width}x${image.height})`);
       outputs.push([out, image.file]);
     }
-    // 4 枚すべて成功してから書く。途中で失敗しても、公開時の画像を半端に壊さない
+    // 本文の 3 枚すべて成功してから書く。カバーは変更しない。
     mkdirSync(join(dir, "images"), { recursive: true });
     for (const [out, file] of outputs) copyFileSync(out, join(dir, file));
     writeFileSync(join(dir, "render-spec.json"), `${JSON.stringify(buildRenderSpec(slug, chartText, background), null, 2)}\n`);

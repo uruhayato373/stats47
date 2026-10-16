@@ -24,13 +24,13 @@ const CHILD_PROCESS_EXCEPTIONS: Record<string, RegExp> = {
 };
 
 describe("admin read-only contract", () => {
-  it("API routeは下書き本文PATCH以外はGETだけを公開する", () => {
+  it("API routeは下書き本文とカバー制作確認のPATCH以外はGETだけを公開する", () => {
     const violations = filesUnder(path.join(adminRoot, "app/api"))
       .filter((file) => file.endsWith("route.ts"))
       .flatMap((file) => {
         const source = fs.readFileSync(file, "utf8");
         const rel = path.relative(adminRoot, file).replaceAll("\\", "/");
-        if (rel === "app/api/posts/[id]/caption/route.ts") {
+        if (["app/api/posts/[id]/caption/route.ts", "app/api/note-covers/[key]/production/route.ts"].includes(rel)) {
           expect(source).toMatch(/export async function PATCH/);
           expect(source).not.toMatch(/export\s+(?:async\s+)?function\s+(POST|PUT|DELETE)/);
           return [];
@@ -42,6 +42,13 @@ describe("admin read-only contract", () => {
           : [];
       });
     expect(violations).toEqual([]);
+  });
+
+  it("カバー制作の書込は専用adapterだけで行い、公開処理を呼ばない", () => {
+    const source = fs.readFileSync(path.join(adminRoot, 'lib/server/note-cover-production.ts'), 'utf8');
+    expect(source.match(/await updateCoverLedger\(/g)).toHaveLength(1);
+    expect(source).toContain('coverProductionToken(row, article, policies) !== edit.revision');
+    expect(source).not.toMatch(/update-note-covers|uploadInBrowser|child_process/);
   });
 
   it("clientに書き込みhelperと実行endpointを持たない", () => {

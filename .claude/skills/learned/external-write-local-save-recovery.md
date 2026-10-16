@@ -8,3 +8,11 @@
 **関連**: `.claude/scripts/note/update-note-covers.mjs` / `.claude/scripts/note/lib/cover-assets.mjs` / `data/note/evidence/note-cover-refresh-ledger-91214c55dafc1456.json`
 
 owner: knowledge-curator。外部操作の復旧判断を共有するための記録。操作契約の変更時に見直す。
+
+## 配信画像の検査だけが停止した場合（2026-10-14）
+
+**トリガー**: noteカバーPOSTは201でURLを返し、公開eyecatchも一致するが、`public image differs`でjournalが`uploaded`のまま止まる。
+**対処**: 同じ画像を再送しない。採用元SHAと公開配信の実バイトを対比し、原寸で文字全文・構図・切り抜き・色反転を確認する。減色だけと確認できた場合に限り、元SHA・配信SHA・公開URLに限定した目視確認をjournalへ残す。自動検査の失敗値も残し、本文等の全fingerprintとhas_draft、現在の採用SHAを再照合して記録のみ確定する。同じ選択範囲で未反映行を再開する。未確認の画像への一括承認や一律の閾値引き上げは禁止。
+**根拠**: 文字込みimagegen画像の1280×670 RGB PNGがnote配信ではpalette PNGとなった。海外旅行・歳出・奈良・果物・教育の画像は平均差3.86〜4.33で閾値3を超えたが、画像対比と公開内容のhashは一致した。特定の減色実装やパラメータまでは未確定。
+**確信度**: 0.9（5件の配信を個別確認）。自動判定の改修は`NOTE-COVER-DELIVERY-VERIFY-01`へ分離。
+**証拠**: `data/note/evidence/note-cover-refresh-ledger-a4bc4308a8b6dcce.json`の`imageVerification.visualReview`と`recoveredFrom`。

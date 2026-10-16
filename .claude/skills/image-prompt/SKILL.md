@@ -23,6 +23,31 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 - その他の動的タイトル差し込み OGP → Satori（種別カタログ・棚卸しは `.claude/rules/ogp-image-standards.md`）
 - OGP / カバー / リンクカード画像の目視確認・棚卸し → `/audit-ogp-images`（`.claude/scripts/ogp/build-image-gallery.mjs`）
 
+## note記事カバーの専用経路（全カテゴリ・新規記事・差し替え共通）
+
+`--use-case note-header` はこの節を使い、以下の43種テンプレート選定へ進まない。
+方針は `data/note/cover-policies.json` の8カテゴリの最新版、記事の制作IDと入力は `data/note/cover-assets.json`。
+本文を読んでコピー・題材・根拠を管理画面へ保存し、`note:cover-production export` で確定した `imagePrompt` を取得する。
+新記事は記事台帳へ登録後、`generate-note-catalog.ts --apply` で制作IDも同期する。分類できない記事は停止し、既存分類の判断を整える。
+
+- **生成担当はCodex built-in imagegenだけ。** 文字・補足・署名を含む完成PNGを生成する。
+- **Claudeはカバーを描かない。** Claudeの役割は本文確認・制作内容の準備・Codexへの受け渡し・生成結果の確認・専用CLIによる登録。
+  SVG / HTML / Canvas / Python / Remotion / Satoriによる代作や、別の画像モデルへの暗黙フォールバックは禁止。
+- Claude Codeは `.claude/rules/codex-mcp.md` のnote画像生成手順でCodexへ渡す。MCPが使えなければ生成待ちのまま理由を報告し、代替カバーを作らない。
+- 原寸・幅320pxで、指定全文、余計な文字、誤字、文字切れ、重なり、補足の可読性を確認する。
+  確認できないものをPASSにせず、Codex imagegenで修正して新しいSHAで確認し直す。
+- 最新カテゴリの `visualRules` に従い、人物なし・題材・補足の可読性とカテゴリ固有項目を個別に確認する。
+  県別家計は県名と対象都市・年・世帯区分を保存し、exportされた検証済みの県主域輪郭PNGを参照画像としてimagegenへ渡す。
+  地図は地域識別用で離島省略、観測範囲は対象都市。県形を想像で描かせず、原寸で参照と照合する。
+- 複数件は `note:cover-production export-batch` の `generation-pending` だけを生成する。生成失敗時は同じID集合で再exportして再開する。
+  reviewの `checks` と地図の `referenceSha256`、`prepare-image --reference` はカタログREADMEの契約に従う。
+- `prepare-image` → `note:assets import` → 管理画面の修正前後比較 → 採用 → 公開の順。
+  元画像・完成画像・実際のプロンプト・目視確認はprivate R2、記事ID・版・状態は共通画像台帳へ保存する。
+- 正確な統計図・地図・配色見本は本文の検証済みデータ描画を使う。カバーに架空のデータ図を描かせない。
+
+CLI引数とreview JSONの正典は [カタログREADME](../../scripts/note/catalog/README.md#制作idを使ったポップなカバー)。
+画像中の日本語を機械で保証する仕組みではない。機械は仕様・コピーの確認記録・画像SHA・寸法・版・採用状態の整合を検査する。
+
 ## 引数
 
 ```
@@ -42,7 +67,7 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 
 | 値 | 用途 | デフォルト aspect | 推奨 fit |
 |---|---|---|---|
-| `note-header` | note.com 記事表紙 | `2:1` | high or medium |
+| `note-header` | note.com 記事表紙（上の専用経路） | `1280:670` | カテゴリ方針v2以降 |
 | `x-banner` | X プロフィール背景 | `3:1` | high |
 | `blog-hero` | ブログ記事 hero 画像 | `2:1` | high or medium |
 | `sns-supporting` | SNS 投稿の補助画像 | `1:1` or `4:5` | 全 |
@@ -111,7 +136,7 @@ use-case に応じて以下の推奨パスを出力する:
 
 | use-case | 保存先 |
 |---|---|
-| note-header | `docs/31_note記事原稿/<slug>/header.png` |
+| note-header | 専用経路のprivate R2と画像台帳（上記参照） |
 | x-banner | `.local/r2/sns/brand/x-banner.png` |
 | blog-hero | `contents/blog/<slug>/hero.png` |
 | sns-supporting | `.local/r2/sns/ranking/<ranking_key>/supporting.png` |
@@ -119,7 +144,7 @@ use-case に応じて以下の推奨パスを出力する:
 
 ## 運用ルール
 
-- **採択済みブランド方針**: [`デザインシステム`](../../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」と `.claude/rules/ogp-image-standards.md` のブランド表現ゲートを優先する。既存 catalog の `fit: high` だけでは採用を決めず、地域・記事の主題との一致を確認する。文字・数値・発行元名・出典は画像生成プロンプトへ焼き込まず、媒体のテンプレートで後から合成する。
+- **採択済みブランド方針**: [`デザインシステム`](../../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」と `.claude/rules/ogp-image-standards.md` のブランド表現ゲートを優先する。既存 catalog の `fit: high` だけでは採用を決めず、地域・記事の主題との一致を確認する。note-header以外では文字・数値・発行元名・出典を後から合成する。note-headerは上の文字込み専用経路を使う。
 - **エージェント連携**: `blog-editor`, `note-manager`, `x-strategist` から呼ばれることを想定。各エージェントは catalog から自分の用途に合う ID を選んで呼び出す
 - **イテレーション前提**: ユーザーは複数 ID を試して感触を掴む。`--list` で一覧、`--id` で試作、という流れを推奨
 - **ブログOGP背景には使わない**: 本skillの外部AI向け自由promptを記事別背景へ流用しない。

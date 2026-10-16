@@ -284,23 +284,88 @@ updated: 2026-10-06
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-LABOR-METRICS-ADD-01] 有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-15] [領域:サイト]
+
+- **経緯 (2026-10-15)**: note の雛形 `A-laborwage-paid-leave-utilization-prefecture`・`A-laborwage-wages-by-industry-prefecture` は、元になる県別ランキングが無く作り直せなかった (`NOTE-A-LABORWAGE-TEMPLATES-01`)。オーナー指示で、指標を足してから作り直す。
+- **有給休暇**: 「取得率」の県別公式統計は e-Stat カタログに無いが、社会生活基本調査 2021 に「年次有給休暇の取得日数」を分類に持つ都道府県別の表がある (`0003456320`・`0003456321`・`0003456356`・`0003456357`・`0003456478` など。いずれも行動の種類との掛け合わせ。`node --import tsx .claude/scripts/estat/catalog.mjs search 有給休暇 --pref-only`)。総数の行から「年次有給休暇を N 日以上取得した雇用者の割合」を組めるかを `/inspect-estat-meta` で確かめる。組めなければ見送る。
+- **産業別賃金**: 賃金構造基本統計調査の都道府県 × 産業の所定内給与額から、産業ごとの指標を足す (`metric-config-standards.md` の形状ゲートと公開の多段依存に従う)。どの産業を足すかは検索需要で絞る。
+- **次 (実行順)**: ① 両方の表を `/inspect-estat-meta` で確かめ、指標の定義を決める ② metric config を足し、R2 へ投入してランキングを公開する (`ranking-publisher`) ③ `/post-note-ranking` で記事を作り、Codex imagegen のカバーで公開する ④ 旧雛形 2 本を記事台帳とカバー台帳から外す。
+- **2026-10-16 進捗 (① ② の config まで)**: 有給休暇は `0003456356` の tab `202101A02` (推定人口) が cat04 に取得日数の区分 (11:0日・12:1～10日・13:11～20日・14:21日以上・15:その他) を持つので、`annual-paid-leave-11-days-or-more-ratio` (= 13+14 / 11～14 の計。取得率ではない) を足した。産業別賃金は新しい表を探さず、既存の `0003426933` の cat04 (産業分類 51 区分) を使い、`information-communication-industry-annual-income` (37 情報通信業・職種別年収と同じ算式) を足した。GSC の検索需要は産業別・有給休暇とも小さく (W40 までの累計で「it企業 年収」表示 2 回など)、産業は 1 つに絞った。config は `78400fc35`。dryRun の取り込み依頼を `e988ea847` で push した。
+- **2026-10-16 進捗 (② の本番デプロイ前まで)**: R2 の観測値・`item.json`・`values.json`・OGP は 2 キーとも 200 (data-refresh run 38815750662・ranking-ogp-new-keys run 38816637273)。KNOWN とサイトマップに足した (`a42ff5ee8`)。**残り: develop→main のマージ (本番デプロイ。オーナー承認待ち)** → Googlebot UA で `/ranking/<key>` が 200 を実測。
+- **有給休暇の note**: `a-annual-paid-leave-11-days-or-more-ratio` を下書きで記事台帳・R2 に保存し、カバー `NCI-00500` を採用済み (1 位愛知 44.4%・47 位石川 31.2%)。ランキングが本番に出たら公開し、旧雛形 `A-laborwage-paid-leave-utilization-prefecture` を外す。
+- **2026-10-16 オーナー指示「できることはすべてやって」**: 産業別は (b) を採り、製造業 (`manufacturing-industry-annual-income`・隣り合う年の順位相関 0.94〜0.95) と医療・福祉 (`medical-welfare-industry-annual-income`・0.69〜0.75) を足した。記事は製造業 (`a-manufacturing-industry-annual-income`・2023 年 1 位神奈川・カバー `NCI-00501`) で下書き済み。情報通信業・医療福祉はランキングのみ。4 指標は PR #1136 で本番反映する (CI の書き戻し commit が develop の先頭に重なり必須チェックが 2 回外れたため、実 commit を積んで CI を起こし直した)。
+- **情報通信業の note は保留 → 製造業に置き換え (上の行)**: R2 の 2020〜2023 年で隣り合う年の順位相関が 0.55〜0.68 (介護職員の年収は 0.74〜0.77)。2023 年 1 位の石川県は 2022 年に 22 位で、「1 位は石川県」を見出しにすると標本の振れを結論として出すことになる。選択肢: (a) 注記付きでそのまま記事化 (b) 標本の大きい産業 (製造業・医療福祉など) に替える (c) 産業別は見送り、旧雛形を外すだけにする。
+- **完了条件**: 2 本の雛形が記事台帳から消え、置き換えの記事が公開済み (または指標が組めず見送りを記録)。
+
+### [NOTE-A-LABORWAGE-TEMPLATES-01] 数値が空の note 雛形 (労働・賃金ランキング) 4 本を、作り直すか台帳から外すか決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-15] [領域:商品]
+
+- **事象 (2026-10-15)**: 記事台帳の下書き `A-laborwage-*` 5 本は 2026-05-16 の雛形で、ランキング表の順位・県名・数値が「実データを入れる」という空欄 (各 10 か所) のまま、本文にデータで確かめていない説明がある。公開できない。
+- **済み**: 有効求人倍率は `/post-note-ranking` で `a-active-job-opening-ratio` として作り直し (2022 年・1 位福井)、公開した (https://note.com/stats47/n/n73c710f239ef)。旧雛形 `A-laborwage-job-opening-ratio-prefecture` は記事台帳とカバー台帳から外した (公開 R2 `note/stats47-note/A-laborwage-job-opening-ratio-prefecture/` の本文は残っている。削除は破壊的操作なのでオーナー判断)。
+- **残り 4 本**: 平均通勤時間・有給休暇取得率・産業別平均賃金は対応するランキングが無い。大卒初任給は `new-graduate-starting-salary-university-{male,female}` があるが 1 位が東京都・最新年 2019 で、生成器の `PREDICTABLE_LEADER` が止めた。
+- **2026-10-15 追記 (大卒初任給)**: オーナーの公開指示で `--allow-tokyo-leader` を付けて男女 2 本 (`a-new-graduate-starting-salary-university-{male,female}`・2019 年・1 位東京) を生成し、記事台帳・ハッシュタグ・公開 R2 まで済ませた。同日、codex MCP を 0.153.0 固定で復旧し、`note:cover-production` + Codex imagegen でカバーを作って採用、**公開した** (男性 https://note.com/stats47/n/nf067364b58fb・女性 https://note.com/stats47/n/necff830a091b)。旧雛形 `A-laborwage-starting-salary-by-prefecture` は台帳から外した。以下はカバー作成前の経緯。同日取り込んだ別セッションの変更でカバーは `note:cover-production` + Codex imagegen に一本化され (旧 `generate-cover-refresh.ts` は停止)、このセッションでは codex MCP が切断されていて生成できない。Codex でカバーを作って採用したら公開する。先に公開した `a-active-job-opening-ratio` のカバーは旧テンプレートで作ったので、新方針での作り直し対象になりうる。
+- **次**: ① 4 本を台帳から外す (見送り) か、指標を足してから作り直すかをオーナーが決める ② 外すなら記事台帳・カバー台帳から同時に外し、`generate-note-catalog.ts --apply` と `note:assets seed` を通す。
+- **2026-10-15 有効求人倍率のカバー差し替え**: `note:cover-production` + Codex imagegen で作り直して採用し (`NCI-00496`)、`NOTE_COVER_BROWSER=playwright node .claude/scripts/note/update-note-covers.mjs --keys a-active-job-opening-ratio --commit` で note のカバーを差し替えた。note 上は新画像に替わったことを公開 API と目視で確認したが、差し替え後の照合 `verifyImage` が平均画素差 3.04 (基準 3) で止まり、台帳は公開版を採用版と別の revision (`published-original`) として記録した。`verify-cover-refresh` は `approved revision not published` で fail。**次**: imagegen の細かい画像は note の再圧縮で 3 を超えうるので、基準 (`update-note-covers.mjs` の `meanPixelError > 3`) を見直すか、同じ画像で再照合する手段を決める (カバー制作の担当セッションの判断)。台帳を手で公開済みにしない。
+- **2026-10-15 通勤**: 平均通勤時間のランキングは無いので、題材を「通勤 1 時間 30 分以上の雇用者世帯の割合」(`main-household-ratio-main-earner-employee-commute-90min`・2023 年・1 位埼玉) に変えて作り直し、Codex imagegen のカバー (`NCI-00499`) を付けて公開した (https://note.com/stats47/n/n7a47171e06f3)。旧雛形 `A-laborwage-commute-time-prefecture` は台帳から外した。
+- **残り 2 本** (有給休暇取得率・産業別平均賃金): 指標を足してから作り直す。手順は `[NOTE-LABOR-METRICS-ADD-01]`。
+- **完了条件**: `A-laborwage-*` の下書きが記事台帳に 0 件。
+
+### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、改善台帳の上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。
+- **実測**: renovate.json はあるが未稼働。2026-09-07 は `gh pr list --search "author:app/renovate"` = 0 件。2026-10-11 の再実測は `gh pr list --state all --limit 200` で作者または head ブランチに renovate を含む PR が 0 件、`gh api repos/uruhayato373/stats47/branches --paginate` の 2 ブランチにも renovate を含むものは無い。
+- **次 (オーナー)**: GitHub App のインストール。DEPS-MAJOR-SECURITY-01 は Dependabot security alerts で解消済みなので緊急度は低い。
+- **完了条件**: インストール後の最初の月曜 (renovate.json の schedule は月曜 6 時前) の翌日に、上の検証コマンドで 1 件以上。無ければオーナーへ再依頼する。
+
+### [PERF-WORKER-P99-01] Workers の CPU / wall p99 を支配する route / R2 binding をオーナーが Dashboard で特定する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。この施策はコードを変えない調査で、before/after の効果値が無い。
+- **実測 (baseline)**: Workers traces / GraphQL で CPU p99 1.48〜2.02 秒・wall p99 3.80〜4.61 秒。
+- **次 (オーナー)**: Cloudflare Dashboard の Workers Observability で route 別の内訳を見て、支配 route / binding を特定する (サンプル不足ならその旨)。
+- **完了条件**: 特定結果を performance-improvement の詳細ログへ書く。修正が要る場合は上の baseline を置き `[target:]` 付きの別行で improvements.md に起票する [kpi: site-health]。
+
+### [R2-STORAGE-01] doboku-note-archive (8.98GB) の保持方針を決め、R2 容量の無料枠 (10GB) 超過に対処する
+タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [起票:2026-10-13]
+
+- **背景**: improvements.md の期限 (2026-10-12) を超過し、上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。保持方針が決まるまで想定効果値を置けない。
+- **実測**: `data/cloudflare/history.csv` の r2_storage_gb は 09-07 23.007 → 09-26 33.368 → 10-02 33.338 → 10-09 33.635 GB (直近 2 週は +0.27GB)。再現: `awk -F, '$1>="2026-09-26"{print $1,$13}' data/cloudflare/history.csv`。
+- **次 (オーナー)**: doboku-note-archive の保持方針 (許容か削減か) を決める。
+- **完了条件**: 削減なら削除量を根拠に `[target: -N GB]` と `[kpi: operating-cost]` 付きの別行で improvements.md に起票する。許容なら理由と見直し期日を cloudflare-cost-improvement の詳細ログに書く。
+
 ### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画から作った note の下書き 92 本を、意味のレビュー・R2 保存・公開まで進める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
+タグ: [コンテンツ品質] [種類:制作] [実行:別環境] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
 
 - **状態 (2026-10-13)**: note が展開先の採択企画 149 件のうち 57 件は公開済みの記事と問いが同じことを本文で確かめて結んだ
   (家計調査の県別 47 件 = `a-kakei-<県>`、ほか `b-kakei-*`・`b-rich-spending-patterns`・`d-kakei-spending-personality`)。
   残り 92 件は `/expand-reference-notes` の生成器 (都道府県・年収五分位・世帯主の年齢・地方別の 4 種) で下ごしらえし、
   執筆して `check-reference-note.mjs` の数値照合に通し、記事台帳に下書き (`b-ref-*`)・展開記録に企画中 (planned) を書いた。
-  本文は作業場 `docs/31_note記事原稿/b-ref-*/` にあり、まだ R2 に保存していない。
-- **次**: ① `note-critic` で意味のレビュー (問いに答えているか・言い過ぎ・定義の取り違え)。REVISE は直す ② `npm run note:article -- save <key...>` で公開 R2 へ保存
+  mh-a09 を除く 91 本の本文・画像の正本は R2 に保存済み。`docs/31_note記事原稿/b-ref-*/` は取り出した作業コピー。
+- **次**: ① Mac へ最新台帳・修正コードを受け渡し、`npm run note:article -- checkout <key...>` で R2 の修正版を取り出す (下記ハンドオフ参照) ② `note-critic` で意味のレビュー (問いに答えているか・言い過ぎ・定義の取り違え)。REVISE は直し、変更した記事だけ `npm run note:article -- save <key...>` で R2 へ保存
   ③ 公開の本数と日程をオーナーに確認し、`/publish-note` で分けて公開 (同じセッションで大量に連続投稿しない)。カバーは `cover-assets.json` の手順で用意
   ④ 公開したら台帳に `noteUrl` を書き、`reference:expansion -- record --status done` で済みにする。
+- **Mac へのハンドオフ (2026-10-13、オーナー指定)**: 公開・既存公開記事への修正版反映は Mac で行う。Windows では公開操作を行わない。
+  - **記事内の図**: `b-ref-*` から `b-ref-mh-a09` を除く全 91 本を検査。285 枚の PNG を実際に開いて目視し、文字サイズ・単位/分母・月額/世帯条件・県/県庁所在市の表記を是正。図なしは酒類 a41 と地方別 a47〜a52 の 7 本。修正版 85 本を公開 R2 `note/stats47-note/<key>/` に保存し、変更不要の地方別 6 本も含め全 91 本・934 ファイルを認証付きで読み戻し、検査した作業コピーとの SHA 一致を確認済み。観測値は変更せず、市の対象フラグ 3 件と酒類の順位リンク 47県→46県を修正。
+  - **検査証跡の取り出し先**: private R2 `stats47-private` の `note-archive/manifests/note-reference-figure-audit-20261013/7e1cbe67c20801d8f815f890a4adf7e227235d20baa3579d1d504432ea5621f9.json`。この manifest の `files` から検査表・要約・全記事の SHA 照合結果・目視記録・修正前入力を取得できる。Windows の確認用は `.local/note-reference-figure-audit/results-fixed.md` と `audit-r2-storage.json`。
+  - **表紙背景**: draft 90 本を生成し private R2 `stats47-private` の `note/backgrounds/` に保存・読み戻し照合済み。manifest は `note/backgrounds/manifests/c7626c180ea17d8e83d5fb84ba501a6ef1adc00dff943d4b38387751874b7b80.json`。記事ごとの PNG・プロンプト・SHA・`reviewNote` を参照する。19 本に構図等の指摘があり、背景だけで完成表紙にはなっていない。Mac で指摘を確認し、見出しを重ねた完成カバーを縮小表示で確認してから `cover-assets.json` の採用・レビュー手順へ進める。既存公開の果物 a33 はこの draft 背景 90 本の対象外。
+  - **Mac の再開順**: ① Windows の未コミット変更、特に `data/note/articles.json` の最新 `body.manifest`、`.claude/scripts/note/reference/` の図生成器と `.claude/scripts/note/lib/article-store.mjs` の保存再開修正を受け取る。この作業では add/commit/push/checkout/reset は未実施。旧台帳のままでは新しい R2 実体と SHA が一致しないため、旧画像を再生成・再保存しない ② Mac の R2 認証で上記 `note:article checkout` を実行し、意味レビューと完成カバーの確認を済ませる ③ 既存公開の果物 a33 にも今回の修正版図を反映し、未公開分は既定の 1 日 5 本の順序と日程を確認して公開する ④ note の画面で図の位置・表示・表紙を確認し、記事台帳と展開記録を更新する。
+  - **公開前の残件**: 今回の完了判定は記事内の図と R2 保存の検査。記事全体の意味レビュー、完成カバーの採用、note エディタ上の画像配置確認は別途必要。mh-a09 の承諾未確認、下記 4 記事の不足指標の扱い、note ログインと既存の重複下書きについては本カードの既存停止条件を引き継ぐ。
 - **公開の状況 (2026-10-13 12:30 JST)**: オーナー決定は「91 本を公開 R2 へ保存し、1 日 5 本ずつ公開」(mh-a09 は承諾確認まで保存・公開しない)。
   91 本は公開 R2 へ保存し `--deep` で照合済み。1 日目は `b-ref-prc-a33` を公開 (https://note.com/stats47/n/nb16d150ee313、カバーは `update-note-covers` で付けて検証済み)。
   残り 4 本 (`b-ref-kakei-a04-02`・`b-ref-kakei-a02-09`・`b-ref-prc-a38`・`b-ref-inc-a06`) はカバー採用・タグ・本文の前処理まで済み。
   専用プロファイル `.local/playwright-note-profile` が note からログアウトしたため止めている (オーナーが `node .claude/scripts/note/login-note-profile.mjs` でログインしたら、
   Chrome を `--remote-debugging-port=9333` で起動し `NOTE_BU_CDP=http://127.0.0.1:9333 bash .claude/scripts/note/publish-new-note.sh <key> stats47-note --publish "<マガジン名>"` で公開)。
   1 回目の失敗で残った下書き `n706d8699fcd7` (同じ果物の記事) はオーナーが削除する。カバーは 1 本ずつ `prepare → generate-cover-refresh --local-review → 確認 → 登録 → review` で採用する。
+- **一括公開 (2026-10-13〜15、オーナー指示「90 本すべて一気に公開」)**: 89 本を公開し、記事台帳の `status`・`noteUrl`・`publishedAt` と展開記録 (note・済み 146 / 企画中 3) を更新した。
+  公開 API で無料・カバー・タグ 99 個・画像を抜き取りで確かめた。カバー 86 本は `figure-note-cover-v1` で生成し、縮小表示の確認と SHA 一致を経て採用した (`046fd9d76`)。
+  途中の停止と対処: 見出し画像の反映待ち (3 秒 → 最大 20 秒)・マガジン一覧の読み込み待ちとタグ 99 個で一覧が state に出ない件 (DOM から直接「追加」→「追加済」を確認) を `editor-helpers.sh` で直した。
+  新規画面が開かない一時失敗は 1 回だけやり直す。private R2 の wrangler セッション切れと Mac の再起動で 2 回止まり、残った下書きは題名・本文の文字数・画像枚数を原稿と照合してから仕上げて公開した (重複なし)。
+  **2026-10-15 追記**: オーナー指示で `b-ref-prc-a20` (https://note.com/stats47/n/n3cc132d3422d)・`b-ref-prc-a24` (https://note.com/stats47/n/nb1643889a8a4) を**マガジンなしで公開**した (91 本中 91 本公開。展開記録は済み 148 / 企画中 1 = mh-a09)。マガジン「情報通信」は browser-use で作成を 2 回試し、POST `/api/v1/my/magazines` は 201 だったが一覧にも記事の追加にも現れず未作成のまま (カバー画像が必須の可能性。未検証)。作成後に 2 本をマガジンへ追加する。
+  **2026-10-15 追記 (mh-a09)**: オーナーが出典 (金融リテラシー調査) の商用利用の承諾を取得済みと確認したので、企画台帳に記録し、ハッシュタグ生成・公開 R2 保存・カバー採用を経て公開した (https://note.com/stats47/n/n194f4e88b9b9)。展開記録 (note) は済み 149 / 企画中 0 で、**このカードの完了条件 (企画中と未着手が 0) を満たした**。残るのはマガジン「情報通信」の作成と 2 本の追加・不要な下書きの削除。
+  **残り (当初)**: ① `b-ref-prc-a20`・`b-ref-prc-a24` はマガジン「都道府県ランキング｜情報通信」(`s47-ict`) が note に未作成のため保留 (オーナーが作成し URL を `data/note/magazines.json` に記録してから公開。`prc-a20` は下書き `n3cc132d3422d` が本文・画像入りで残っているので仕上げに使う)。
+  同じく未作成の「国際・外国人」(`s47-international`) も要判断 ② `b-ref-mh-a09` は承諾確認待ちのまま ③ 失敗回で残った空・途中の下書き (`n6c6e1708a2a1`・`n7f3aa1bb55b8`・`nb2b302a56c8c`・`n706d8699fcd7` ほか) を下書き一覧で照合して削除する (削除はオーナー)。
 - **公開スクリプトの修正 (2026-10-13)**: note の画面の変更で「画像を追加」が `<svg>` になり、`new_post_cover_title` がカバーを黙って飛ばしていた (公開した 1 本目がカバー無し)。
   親のボタンを押すよう直し、保存後にカバーが付いたことを確かめて付かなければ止める。画像の挿入は、アップロードより前で見出しの次の段落を取りこぼしたときだけ 1 回やり直す。
 - **公開前に確かめること (2026-10-13 の執筆で判明)**: `b-ref-mh-a09` (金融リテラシー調査の正答率) は、企画台帳に「商用目的の転載・複製には事前承諾が要り、承諾の確認は未了」とある。
@@ -731,6 +796,31 @@ updated: 2026-10-06
 - **事象**: OGP 画像の週次監査 #814 (2026-10-03) で、自動修復後も note-cover が 103 件 missing (例: 12-fiscal-peer-comparison ほか公務員シリーズ)。note カバーの正本は 2026-10-02 に `data/note/cover-assets.json` へ移っており (`note-image-assets.md`)、監査が旧経路の画像を探している可能性がある。
 - **次**: [仮説] 監査の参照先が旧経路のまま。検証: `ogp-image-audit` が note-cover をどこで探すかを読み、`cover-assets.json` の版と突き合わせる。監査側の誤りなら監査を直し、実際の欠落なら `note:assets` の手順で補う。
 - **完了条件**: 次の週次 OGP 監査で note-cover の missing が 0 件。
+
+### [NOTE-COVER-DELIVERY-VERIFY-01] 文字込み生成カバーの配信検証をnote側の減色に対応させる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-14] [領域:商品]
+
+- **証拠**: `data/note/evidence/note-cover-refresh-ledger-a4bc4308a8b6dcce.json`。文字込みimagegen画像は公開PNGがpalette化され、画素平均差が海外旅行3.875・歳出4.325となり旧閾値3で停止した。原寸の対比で文字・構図・切り抜きの一致を確認し、配信SHAに限定した目視記録と本文等のhash再照合で復旧した。画像の再送・閾値の緩和はしていない。
+- **担当・順序**: image-prompt-curator / note-manager。① この6件の元画像・公開配信画像で減色の再現条件を確認 ② 文字欠落・別画像・色反転・切り抜きの負例を揃える ③ 自動判定と配信SHA単位の目視確認を共通手順にする。
+- **停止条件**: 差の原因を説明できない画像や負例が通る判定は採用しない。応答済みPOSTを再送しない。一律の閾値引き上げだけで解決しない。
+- **完了条件**: 正常な減色は判別でき、負例は止まり、目視確認は採用元SHA・配信SHA・公開URLに束縛される。関連テストと既存の本文保全・アカウント照合テストが通る。
+
+### [NOTE-COVER-IMAGEGEN-ROLLOUT-01] 公開済みnoteカバーを新しい順に10件ずつ文字込み生成へ更新する
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-14] [領域:商品]
+
+- **オーナー指示**: 未更新の公開記事を新しい順に展開する（2026-10-14チャット）。2026-10-15に1バッチ10件、人物・キャラクターなし、県別家計は県の輪郭案へ切り替える指示。54件反映後の次バッチは複数カテゴリで構図を試す指示を受け、今回は家計以外の6カテゴリの代表を選定。同日公開分を新しい順に選ぶ場合は公開APIの`publish_at`を使う。モデルをSolに切り替えても共通台帳とCodex built-in imagegen経路を継続する。
+- **担当・正本**: image-prompt-curator / note-manager。制作・版・採用・公開は`data/note/cover-assets.json`、カテゴリ方針は`data/note/cover-policies.json`。対象は公開済みのみ。未反映候補がある場合はその確認と反映を先に行い、別の候補を重ねて作らない。
+- **現在地 (2026-10-15)**: Git同期後の公開記事397件のうち現行方式で反映済み74件、未更新323件（従来の232件＋別PCで新規公開された統計解説91件）。ユーザーの「反映して」を受け、統計解説4件 `NCI-00376,NCI-00386,NCI-00431,NCI-00471`、配色5件 `NCI-00300,NCI-00318,NCI-00319,NCI-00348,NCI-00346`、データ整備1件 `NCI-00252` の確認済み候補SHAを採用して公開済み。生成証拠は `data/note/evidence/note-cover-candidates-7f6abff7d1c4d25c.json`、公開・最終検証は `data/note/evidence/note-cover-refresh-ledger-a7e921f6594a6f50.json`。10件すべて自動配信照合PASS、実配信画像320pxの個別目視PASS。本文・タイトル・価格・有料境界・タグ・公開日時等のfingerprintと下書き状態を保持し、対象外296記事の公開カバー・485台帳行も不変。再送・閾値変更なし。495記事1170版の資産検証PASS。管理画面は確認済み10・note反映済み10、比較画像20枚の読み込みを確認。所有する投稿ブラウザは終了済み。従来306記事に含まれる統計解説・配色は更新済み。別PCで追加公開された統計解説91件は後続の対象へ追加し、公開記録・R2本文manifest・既存カバー履歴を保持して統合する。
+- **終了・再開条件 (2026-10-15)**: 今回は74件反映済みの地点で制作・公開作業を区切り、残りは計画だけを保存する。公開済み記事の未反映の現行imagegen候補は0件。次の生成・公開はユーザーの再開指示で行い、自動実行は設定しない。再開時は記事台帳・カバー台帳・最新方針から未更新の公開記事を再計算し、完了済み74件を再送しない。下書き98件と今後の新規記事は、この公開済み323件の残件数へ混ぜない。
+- **残りの進行順（未実行の計画案）**: ① データ整備3件を次回バッチで完了させる ② 自治体実務50件 ③ 県別家計26件 ④ 問い型ランキング85件 ⑤ 比較型ランキング68件 ⑥ 今回のGit同期で追加された統計解説91件。従来の232件の順序を保ち、新規公開91件は既存カバーを確認してから後続へ進める。カテゴリを完了させる順序を優先し、カテゴリ内は公開日の新しい順に進める。同日分は公開APIの`publish_at`で並べ、制作ID順で代用しない。小カテゴリを完了させ、利用目的が具体的な実務・家計記事を先に読みやすくするための順序であり、クリック・購入増の効果は未検証。
+- **次回の先頭バッチ**: データ整備 `NCI-00242`（洪水浸水想定区域×将来人口）、`NCI-00246`（人口減少×住宅地価格）、`NCI-00323`（家計調査の五分位・品目CSV）の3件と、未更新の自治体実務から新しい順に7件。実務7件のIDは再開時に公開日時と未更新状態を照合して確定する。制作前に本文の対象範囲・年・単位・商品の収録範囲を確認し、古い見出しの数値や原因説明をそのままカバーへ流用しない。
+- **バッチ数・費用の扱い**: 現在の323件を最大10件ずつ進め、カテゴリ境界の端数を次カテゴリと合わせる場合は32回×10件＋最終3件の計33回が目安。再生成分・新規公開の追加分は含めない。全232件を先に生成せず、1バッチの候補作成→比較→反映→公開検証を終えてから次へ進む。各回の再生成数と確認負担を見て件数を調整し、費用・利用枠の金額は未確認のまま見積もらない。
+- **再開時の確認**: 「次の10件」は候補作成と右ペインの比較までとし、今回の反映指示を次バッチへ持ち越さない。表示中の候補に対する明示的な反映指示で採用・公開へ進む。最新版のカテゴリ方針・人物なし・補足の可読性・県別家計の正確な輪郭参照を継続し、元画像・実プロンプト・目視記録・完成版をprivate R2に保存する。生成・保存・公開のいずれかが未検証なら、その件を残したまま次の候補を重ねて作らない。
+- **生成の契約**: 8カテゴリ最新版の`visualRules`、全カテゴリ人物なし、県別家計の対象範囲と検証済み参照PNG、カテゴリ別目視確認をprepare/import/採用/公開で照合する。手順はカタログREADME。`export-batch`は最大10件、登録済み候補を除いて再開する。関連71テスト・admin/制作スクリプト型検査・UI規約検査を通過。全体ビルド/全テストは未実行（ローカル変更の完了粒度）。
+- **実行順**: ① 本文からコピー・対象・年・題材を確定 ② imagegenで文字込み生成 ③ 原寸/320pxで指定全文・補足・人物なし・カテゴリ固有項目を確認 ④ 元画像・地図参照・完成版をprivate R2へ登録 ⑤ 管理画面で候補を確認・採用 ⑥ 採用版だけカバー専用更新で反映し、公開配信画像と本文等の保持を検証して次の10件へ進む。
+- **停止条件**: 誤字・文字切れ・指定外の図表・本文根拠不足・別アカウント・採用SHAの変化・POST応答不明では止まる。減色の復旧は配信SHAを目視確認し`NOTE-COVER-DELIVERY-VERIFY-01`と既存learnedの手順に従う。Claudeによる作画や旧rendererへの代作はしない。
+- **完了条件**: 公開済み全対象が現行方針の採用版で配信され、保全hashと公開画像の確認記録がある。途中の確認待ちや未反映を完了扱いしない。
+- **別PCの再開入口**: developをpullして本カードとカタログREADMEを読み、共有セッションの状況と最新版の資産検証を確認する。画像・実プロンプト・目視記録はprivate R2が正本で、Windowsの生成画像フォルダや一時ファイルをコピーする必要はない。R2認証とnoteのstats47ログインは各PCの既存設定を使う。今回のGit同期だけを理由に記事本文・カバーを再投稿しない。
 
 ### [PAGE-QUALITY-ERROR-BACKLOG-01] ページ品質の週次監査の error 3,149 件を種類ごとに振り分ける
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
@@ -1471,7 +1561,9 @@ updated: 2026-10-06
   ④ 運用文書: `/adsense-improvement` と `/fetch-adsense-data` の凍結注記、週次計画の「AdSense の候補は採用しない」、週次レビューの NSM・AdSense 節、affiliate-manager の「AdSense 停止の維持確認」、improvement-triage の受け取り元、pre-mortem・growth-loops・monetization-strategy、`data-storage.md`・データ台帳 `config/datasets.mjs`・改善ログ冒頭・収益化戦略 §3.1/§3.2・docs/02/42 を再開後の記述に改めた。
   ⑤ GitHub の Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を `pub-9055416085403520` に替えた (refresh token は旧アカウントのままなので、手順⑤のオーナー作業が済むまで取得は権限エラーのまま)。
   **進捗 (2026-10-13 夕)**: 上の変更は develop→main の PR https://github.com/uruhayato373/stats47/pull/1133 で出した (CI の書き戻しコミットが先頭になり必須の Code Quality Check が起動しなかったので、この追記のコミットで起動し直した)。refresh token は Console の OAuth クライアント `1044264339032-22l15n9…` で Client Secret を追加し、`oauth-setup.js` を stats47 アカウントで認可して発行する。1 回目は Client ID を Secret 欄に入れて `invalid_client` になった (Secret は `GOCSPX-` で始まる)。
-  **運用の決め事**: 再開後 4 週 (W42〜W45 = 10-11〜11-07) はベースライン期間で配置を変えない (表示の不具合の修正だけ)。W46 以降、週次レビューで審査した人間承認済みの配置変更を最大 1 件/週。施策 ID は `ADSENSE-PLACEMENT-01` だが、改善台帳 `improvements.md` の active が上限 10 件で埋まっていたので (2026-10-13 improvement-triage 確認)、行は W45 の判定時に載せ、それまではこのカードの手順⑥で追う。
+  **手順⑤ 完了 (2026-10-13)**: stats47 専用アカウントで `oauth-setup.js` を認可し、`accounts.list` が `accounts/pub-9055416085403520` の 1 件を返すことを確かめてから、GitHub Secret `GOOGLE_ADSENSE_REFRESH_TOKEN`・`GOOGLE_ADSENSE_CLIENT_SECRET` を差し替えた (Client Secret は OAuth クライアント `stats47-adsense-cli-v2` に 2 本目を追加。旧 `****xah6` は同日オーナーの指示で無効化→削除し、残るのは 2026-10-13 発行の 1 本だけ。新しい値は token 発行の時点で Google に受理されている。手元の .env と doboku-note の Secret に同じ変数が無いことも確かめた)。PR #1133 は auto-merge (merge commit) を有効にした。**次の確認**: 2026-10-16 (金) の定期実行で `data/adsense/snapshots/2026-W41/manifest.json` の `status` が error でない (W41 は配信停止中なので 0 行が正しい)。10-18 以降に `gh workflow run fetch-metrics-weekly.yml --ref main -f week=2026-W42` で再開初週の行が `history.csv` に入ることを確かめる (定期は 10-23)。
+  **手順③④ 完了 (2026-10-13)**: オーナーが GA4 プロパティ 463218070 に stats47 アカウントを管理者として追加し、Claude が内部ブラウザ (stats47 アカウント・`authuser=1`) で GA4 管理 →「Google AdSense のリンク」から `pub-9055416085403520` (コンテンツ向け AdSense・収益データレポート オン) をリンクした。リンク一覧に新旧 2 件が並ぶ。旧 `pub-7995274743017484` (2026-03-12 リンク) のリンクは同日オーナーの指示で削除し、一覧は新 1 件だけになった (旧アカウントの AdSense データは GA4 のレポートに出なくなるが、過去分は `data/adsense/history.csv` に残る)。GA4 の AdSense 連携で `ad_impression` などが再び自動生成されるので、自前の `affiliate_impression` と混ぜない (`analytics-event-standards.md`)。
+  **運用の決め事**: 再開後 4 週 (W42〜W45 = 10-11〜11-07) はベースライン期間で配置を変えない (表示の不具合の修正だけ)。W46 以降、週次レビューで審査した人間承認済みの配置変更を最大 1 件/週。施策 ID は `ADSENSE-PLACEMENT-01`。同日、期限切れの 3 件 (`DEPS-RENOVATE-01`・`PERF-WORKER-P99-01`・`R2-STORAGE-01`) をオーナー指示で active から外して backlog 🟡 へ移し、空いた枠に登録した (Due 2026-11-14)。手順⑥の判定はこの施策行で行う。
   **残り**: 手順⑤ (オーナー: stats47 アカウントで refresh token を発行し Secret を差し替える。済んだら `gh workflow run fetch-metrics-weekly.yml --ref main -f week=2026-W42` で再開初週を取り直し、`data/adsense/snapshots/2026-W42/manifest.json` の `status` が error でないことを確かめる)・手順③④ (GA4 との連携)・週次 workflow とスクリプトの変更は main の定義で動くので、develop→main のマージ後に効く。
 - **追記 (2026-10-07)**: オーナーは回収経路の一つを「アクセス集客で AdSense」と整理した (収益化戦略 §3.5)。同日、§3.1 の冒頭とメモリ `project_monetization_contract` に 9/28 の再開決定 (審査待ち) を書き足した。全面改訂は引き続き承認後に行う。見込みの注意: 再開後は手動枠だけなので、2026-W31 の実測 (手動枠は 1,000 表示あたり ¥8〜13、自動広告は ¥107〜114) から、停止前のページ RPM ¥37 を下回る可能性がある。**ページ RPM ¥37 は AdSense 自身が数えた PV (GA4 の 54〜78%) が分母**なので、GA4 の PV に換算すると停止前 W30〜W33 は 1,000 PV あたり ¥22 (AdSense 収益 ¥523 ÷ GA4 Japan PV 23,787)。今の閲覧 (月約 4.7 万 PV) では自動広告ありでも月約 ¥1,000、手動枠だけ (W31 の手動枠分 ¥6.7/1,000 PV) なら月約 ¥300 で、どちらも Cloudflare の請求 (月 ¥1,556〜1,846) に届かない。月 ¥1 万には月約 45 万 PV (手動枠だけなら約 150 万 PV) が要る (2026-10-07 訂正。前日までの「月 27 万 PV」は分母の違う ¥37 で計算していた)。承認後は AdSense 収益の週次取得を再開し、計測サイクルの KPI `ad-yield` (`.claude/scripts/metrics/lib/measurement-cycle.mjs`) に接続して、4 週の効率と月額を Cloudflare の請求と並べて判定する。自動広告を使うかどうかは効率を約 3 倍動かすので、書き換え事故の原因 (自動広告そのものか、広告インテントだけか) を AdSense の公式ヘルプで確かめてから決める。 承認後の改訂では、`.claude/rules/analytics-event-standards.md` と `.claude/rules/affiliate-ads-standards.md` に残る「2026-09-20 に恒久停止」の記述も合わせて直す。
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
@@ -2697,6 +2789,10 @@ updated: 2026-10-06
     「同じ調査のランキング」がレール先頭の関連ランキングと重なる (③ の 3 つ目)。ただし出典の部品 `DataSourceList.tsx` のコメントは
     「調査ハブへの回遊は右レールの `SurveyTaxonomyCard` が担う」としており、意図して置かれている。同じカードはカテゴリ・テーマ・ブログでも使う。
   - 「家計調査（品目別）」の同じ調査のランキングに「情報通信係数」が並ぶ。家計調査の指標として不自然で、紐付けの誤りの可能性がある (未確認)。
+- **本番実測 (2026-10-08・関連記事見出しの上端)**: 1440×1000px は日照 1,253px・学力 1,778px。右レールはカテゴリ一覧 20 件の後に画像なしの関連記事が続く。390×844px は日照 4,108px・学力 5,424px。
+- **ブログ実測 (390×844px)**: 学力記事の本文内ランキングカードは上端 2,019px、関連記事見出しは 9,251px。
+- **GA4 (Japan・2026-09-06〜10-03・W40 snapshot)**: 参照元ベースで blog→ranking 869PV・ranking→blog 476PV・blog→blog 218PV。`blog_ranking_card` 222 件、`nav_click` 4,643 件中 `unlabeled` 1,828 件。位置別 CTR と効果不足の因果は未確定。
+- **次の画面検討 (未採択・2026-10-08)**: ランキング・ブログ・テーマ・エリア・Geo のページ ID・タグ等のマスタ・ID 間の関係を `data/` で一元把握できる設計を先に具体化する。既存の関連付け SSOT と照合し、二重 SSOT を作らないことを検討する。その設計を踏まえ、関連記事を PC は右レール先頭・スマホは地図/順位表直後へ置く案を画面で比較し、採否を決める。
 - **次 (実行順)**:
   1. 補足文と注記を 1 か所にまとめる (推奨: ページ見出しの説明として全幅で出す)。スマホでも離れないようにする。「最終更新」はデータの年
      (`yearName` 等) に置き換えるか削除する (データの年はスタットと地図の年表示に既にあるなら削除)。

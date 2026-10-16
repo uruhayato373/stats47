@@ -33,7 +33,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 視覚方針の正典は [`デザインシステム`](../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」。本規約は画像種別・配信・生成方式を担当する。既存の個別 renderer や画像プロンプトを更新するときは、以下を満たす。
 
 1. 一枚につき主題は一つに絞り、地域・記事・指標に即した視覚要素を選ぶ。地理が主題でない画像に日本地図を機械的に足さない。
-2. 背景生成 AI には文字、数値、ロゴ、精密な行政界、実在の統計図を描かせない。タイトル、発行元名、出典、実データの地図・チャートは既存の決定的 renderer または DOM で合成する。
+2. 背景生成 AI には文字、数値、ロゴ、精密な行政界、実在の統計図を描かせない。タイトル、発行元名、出典、実データの地図・チャートは既存の決定的 renderer または DOM で合成する。noteカバーは2026-10-14オーナー採択の例外として、日本語込みの一括生成と原寸・縮小での目視照合を使う（[note画像契約](note-image-assets.md)の制作ID・方針v2）。実データの地図・チャートはこの例外に含めない。
 3. 藍・インク色・白を発行元の共通色とし、データの系列色、正負、注意表示は各データ表現の意味を優先する。媒体間では記号、発行元名、文字階層、余白の扱いを揃え、比率と安全域は各画像種別の契約に従う。
 4. 公開前に実寸と縮小表示で文字の欠け、コントラスト、ロゴの識別、円形トリミング、データと画像の一致を確認する。正式な記号・favicon・プロフィール画像は同じ版から派生させる。
 
@@ -70,7 +70,7 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
 | カード: ranking (light/dark)   | 640×360 WebP                                                                 | 共通地理地図 renderer → R2                                                                                                                                                                                                                                                                                                                                                                                                                                        | `app/ranking/<key>/thumbnail-{light,dark}.webp`                    | `generate-ogp-images.ts --type ranking-cards`   | ranking-publisher                                                |
 | カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
-| note カバー | 1280×670 (≒1.91:1) | cover-designs.ts + generate-cover-refresh.ts / shared editorial renderer | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
+| note カバー | 1280×670 (≒1.91:1) | cover-policies.json + Codex imagegen（文字込み） | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 
 ### OGP コンポーネントの実体
 
@@ -139,7 +139,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 1. **ranking リンクカード供給**: 旧 `ranking/prefecture/<key>/<year>/...png` は廃止。
    `app/ranking/<key>/thumbnail-{light,dark}.webp` + 共通manifestへ移行済み。初回manifest移行だけは
    legacyを安全にcurrent扱いできないため、件数制限付きbatchで再生成する。
-2. **note カバー 2 系統併存**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
+2. **note カバーの旧課題（2026-10-14解消、以下は履歴）**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **OGP 専用なし route**: `/tag/<key>` `/survey/<key>` `/areas/<code>/cities/<city>` は親 `/` の `DefaultOgp` を流用 (現状その `DefaultOgp` 自体が 500)。→ 課題 0 の解消後、流入が増えたら専用 opengraph-image を検討 (判定は improvement-triage 経由)。
 4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
 
@@ -154,7 +154,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 | 外部 AI / 背景素材用の画像プロンプト生成                      | `image-prompt-curator` (skill `/image-prompt`)     |
 | ranking リンクカード供給 (R2 生成)                            | `ranking-publisher` + `snapshot-exporter`          |
 | blog OGP / サムネ                                             | `blog-editor`                                      |
-| note カバー | 1280×670 (≒1.91:1) | cover-designs.ts + generate-cover-refresh.ts / shared editorial renderer | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
+| note カバー | 1280×670 (≒1.91:1) | cover-policies.json + Codex imagegen（文字込み） | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 | R2 push                                                       | CI / `r2-publisher`                                |
 | 改善施策の status 管理                                        | `improvement-triage` (バックログ書き込みは排他)    |
 
@@ -223,8 +223,8 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
     satori 描画。satori 非互換なら共有 render lib のタイトルカードにフォールバック。
     ※ 両コンポーネントは satori-strict 対応済 (mixed text+式 → template literal 化、`dotted`→`dashed`、
     複数子 span に `display:flex`)。この修正が無いと全件フォールバックする。
-  - **blog OGP / ranking カード / note カバー**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
-    の `buildElement({title, subtitle, category, domainPath})` (共通デザイン・drift 防止)。note は `size` 引数で 1280×670。
+  - **blog OGP / ranking カード**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
+    の `buildElement({title, subtitle, category, domainPath})` (共通デザイン・drift 防止)。noteカバーは専用のCodex imagegen経路。
   - **blog は用途別に2レンダラーへ分離 (2026-08-22)**:
     - OGP = 1200×630 PNG。SNS上で画像単体でも意味が通るよう、カテゴリ・タイトル・ブランドを合成する。
       タイトルは文字数に応じて72 / 60 / 50 / 44pxを決定的に選び、長文ではsubtitleを省く。左側には
@@ -238,7 +238,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
 - **生成スクリプト (クラウド/ローカルから直接実行)**:
   - blog OGP = `generate-blog-thumbnails-cloud.ts` (公開記事) /
     `generate-blog-thumbnails.ts` (公開前staged記事)
-  - ranking OGP / areas OGP / ranking カード / note カバー = `generate-ogp-images.ts --type <ranking|areas|ranking-cards|note-covers>`
+  - ranking OGP / areas OGP / ranking カード = `generate-ogp-images.ts --type <ranking|areas|ranking-cards>`。noteカバーは `note:cover-production` とCodex imagegen。
   - いずれも`.local/image-staging/<type>`へ生成し、`push-generated-image-set.ts --plan <exact-plan>`で反映する。
   - CI fallback = `generate-ogp-images.yml` (手動 dispatch。ただしクラウド連携トークンは actions:write 無しのため、
     R2 creds のあるセッション/ローカルからの直接実行が主経路)。
@@ -258,14 +258,15 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   note上の設定有無は`npm run note:covers:audit`でv3記事詳細の`data.eyecatch`を全件検査する。
   一覧サムネイルは本文画像を代用する場合があり、R2保存画像やHTTP 200も設定済みの根拠にならない。
   取得失敗・フィールド欠損は`unknown`、全量取得できない場合は`incomplete`として合格させない。
-  既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
+  旧SVG・Remotion・Satoriによるnote記事カバーの新規作成は禁止。旧CLIは停止し、履歴だけ保持する。
   R2 archiveの生成だけではnote.comのカバーは差し替わらない。
-  公開カバーの改修は`catalog/cover-designs.ts`の編集判断 + `generate-cover-refresh.ts` +
-  共有`note-cover-render.ts`のeditorial rendererを使う。県輪郭/数字は既存GIS/観測値から決定的に生成し、
-  全件の文字境界・重なり・縮小表示を検査する。ユーザーが依頼した公開変更は画像専用
-  `update-note-covers.mjs`で行い、記事内容の保全hash・画像SHA・変更時刻・配信結果を記録する。
+  全8カテゴリ・既存記事の差し替え・今後の新規記事は、`data/note/cover-policies.json`の最新版と制作IDを使う。
+  生成はCodex built-in imagegenによる文字込みPNG。Claudeは描画せず、MCP経由で依頼する。
+  原寸/320pxで文字を目視照合し、元画像・実際のprompt・確認結果をprivate R2に保存する。
+  import・採用・新規公開・差し替えの各入口で現行仕様と版を照合する。旧記事でも例外にしない。
+  ユーザーが依頼した公開変更は`update-note-covers.mjs`で行い、記事内容の保全hash・画像SHA・変更時刻・配信結果を記録する。
   手順と入力契約は[カタログREADME](../scripts/note/catalog/README.md#公開カバーの制作と差し替え)。
-  全verticalで保存・採用・公開は同じ台帳を使う。旧SVG/Remotion/bespoke rendererは制作入力として残すが、
+  全verticalで保存・採用・公開は同じ台帳を使う。旧SVG/Remotion/bespoke rendererは履歴として残すが、
   ローカルPNGを採用版として直接公開しない。`generate-ogp-images.ts --type note-covers` は書込前に停止し、
   週次汎用OGP自動修復の対象から除外する。新規記事の公開も採用済みremote版を一時復元して使う。
   旧public R2の画像は移行元であり、note公開版とは別に未採用の保管版として管理する。

@@ -1,5 +1,5 @@
 /**
- * ランキング note 記事の画像 4 枚の「作り方」の正典。
+ * ランキング note 記事の本文画像 3 枚の「作り方」の正典。カバーは cover-production / Codex imagegen。
  * 画像は chart-data.json (記事で使ったデータ) とここの定義だけから作り直せる。契約: .claude/rules/note-image-assets.md
  *
  * テンプレート (apps/remotion/src/features/ranking-note/) の見た目を変えたら、必ず TEMPLATE_VERSION を上げる。
@@ -13,7 +13,6 @@ export const NOTE_RENDER_SCHEMA_VERSION = 1;
 
 /** file は記事ディレクトリからの相対パス。名前は draft.md・publish-note が参照するので変えない */
 export const NOTE_RANKING_IMAGES = [
-  { file: "images/cover-1280x670.png", composition: "RankingNote-Cover", width: 1280, height: 670 },
   { file: "images/choropleth-map-1080x1080.png", composition: "RankingNote-ChoroplethMap", width: 1080, height: 1080 },
   { file: "images/chart-x-1200x630.png", composition: "RankingNote-Chart", width: 1200, height: 630 },
   { file: "images/boxplot-1200x630.png", composition: "RankingNote-Boxplot", width: 1200, height: 630 },
@@ -88,7 +87,8 @@ export function validateRenderSpec(slug, spec, chartDataText) {
     errors.push(`templateVersion=${spec.renderer?.templateVersion} が現行 ${NOTE_RENDER_TEMPLATE_VERSION} と不一致 (テンプレートを変えたのに画像を作り直していない)`);
   }
   errors.push(...validateBackground(slug, spec.background));
-  const files = (spec.images ?? []).map((image) => image.file).sort().join(",");
-  if (files !== NOTE_RANKING_IMAGES.map((image) => image.file).sort().join(",")) errors.push("images が現行の 4 枚構成と不一致");
+  // Historical four-image specs remain readable; generators never emit that cover again.
+  const files = (spec.images ?? []).filter(image => image.file !== 'images/cover-1280x670.png').map((image) => image.file).sort().join(",");
+  if (files !== NOTE_RANKING_IMAGES.map((image) => image.file).sort().join(",")) errors.push("images が現行の本文 3 枚構成と不一致");
   return errors;
 }

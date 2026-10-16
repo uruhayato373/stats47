@@ -12,6 +12,7 @@ vi.mock('../../../../.claude/scripts/note/lib/cover-storage.mjs', () => ({ readS
 import { noteCoverManagement } from '@/lib/server/note-covers';
 import { GET } from '@/app/note-cover/[key]/route';
 import { readStoredCover } from '../../../../.claude/scripts/note/lib/cover-storage.mjs';
+import { readCoverPolicies } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
 
 function revision(kind: CoverRevision['kind']): CoverRevision {
   const sha = coverSha(fixture.bytes);
@@ -27,6 +28,7 @@ function writeLedger(change?: (ledger: CoverLedger) => void) {
   change?.(ledger);
   fs.mkdirSync(path.join(fixture.root, 'data/note'), { recursive: true });
   fs.writeFileSync(path.join(fixture.root, 'data/note/cover-assets.json'), JSON.stringify(ledger));
+  fs.writeFileSync(path.join(fixture.root, 'data/note/cover-policies.json'), JSON.stringify(readCoverPolicies()));
 }
 const requestImage = (sha: string, key = 'pinned-intro') => GET(new Request(`http://127.0.0.1:4747/note-cover/${key}?revision=${sha}`), { params: Promise.resolve({ key }) });
 

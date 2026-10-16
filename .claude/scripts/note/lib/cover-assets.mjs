@@ -28,13 +28,20 @@ export async function renameCoverFile(source, destination) {
 }
 export const coverUrlPath = (url) => url ? new URL(url).origin + new URL(url).pathname : null;
 export function assertCoverGenerationType(type) {
-  if (type === 'note-covers') throw Error(`noteカバーは ${datasetPath("note.cover-assets")} が正本です。note:assets と generate-cover-refresh.ts を使用してください。汎用OGP生成からの上書きは終了しました。`);
+  if (type === 'note-covers') throw Error(`noteカバーは ${datasetPath("note.cover-assets")} が正本です。note:cover-production と Codex imagegen を使用してください。汎用OGP生成からの上書きは終了しました。`);
 }
 
 export function validateCoverLedger(ledger, catalog) {
   if (!validateShape(ledger)) throw Error(`cover ledger schema: ${ajv.errorsText(validateShape.errors)}`);
   const seen = new Set();
+  const productionIds = new Set();
   for (const row of ledger.articles) {
+    if (row.production) {
+      if (productionIds.has(row.production.id)) throw Error(`duplicate cover production: ${row.production.id}`);
+      productionIds.add(row.production.id);
+      if (row.production.brief && ['headline', 'subject', 'evidence'].some(key => !row.production.brief[key].trim()))
+        throw Error(`empty production brief: ${row.articleKey}`);
+    }
     if (seen.has(row.articleKey)) throw Error(`duplicate cover article: ${row.articleKey}`);
     seen.add(row.articleKey);
     if (catalog) {
@@ -46,6 +53,8 @@ export function validateCoverLedger(ledger, catalog) {
       if (ids.has(rev.id) || rev.id !== rev.sha256 || rev.storage.key !== coverAssetKey(row.articleKey, rev.sha256))
         throw Error(`cover revision identity: ${row.articleKey}`);
       ids.add(rev.id);
+      if (rev.provenance.production && (!row.production || rev.provenance.production.id !== row.production.id || !rev.provenance.input))
+        throw Error(`cover production identity: ${row.articleKey}`);
       if (rev.kind === 'candidate' && (!rev.quality || rev.width !== 1280 || rev.height !== 670))
         throw Error(`candidate quality evidence required: ${row.articleKey}`);
       if (rev.provenance.input && (rev.provenance.input.storage.key !== coverInputKey(row.articleKey, rev.provenance.input.sha256)
@@ -133,6 +142,8 @@ export function addCoverRevision(row, revision, { candidate = false } = {}) {
   const existing = row.revisions.find((r) => r.id === revision.id);
   if (existing && (existing.storage.key !== revision.storage.key || existing.bytes !== revision.bytes))
     throw Error(`immutable cover revision mismatch: ${row.articleKey}`);
+  if (existing?.kind === 'candidate' && JSON.stringify(existing.provenance.production) !== JSON.stringify(revision.provenance.production))
+    throw Error(`same image cannot replace production provenance: ${row.articleKey}`);
   if (!existing) row.revisions.push(revision);
   // Identical public/archive bytes can become a reviewed candidate without duplicating the object.
   if (candidate && existing && existing.kind !== 'candidate') Object.assign(existing, {

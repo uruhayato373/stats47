@@ -1,14 +1,13 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-13T03:10:57.983Z",
-  "status": "pass",
+  "generatedAt": "2026-10-15T12:19:15.259Z",
+  "status": "fail",
   "articles": [
     {
-      "key": "b-ref-prc-a33",
-      "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/323859556/rectangle_large_type_2_9daedd18b50cae9197e5e689760ed192.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-13T03:10:57.925Z"
+      "key": "a-active-job-opening-ratio",
+      "status": "fail",
+      "reason": "approved revision not published"
     }
   ]
 }

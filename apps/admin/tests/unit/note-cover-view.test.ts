@@ -21,4 +21,8 @@ describe('カバー一覧の共有URL', () => {
   it('全角IDと前後の空白でも検索できる', () => {
     expect(coverSearchText(' Ａ－ＫＡＫＥＩ－ＡＩＣＨＩ ')).toBe('a-kakei-aichi');
   });
+  it('指定した制作IDの集合を比較URLで保持する', () => {
+    const url = coverViewUrl('ids=NCI-00215,NCI-00118,NCI-00215,invalid&view=gallery', { review: 'pending' });
+    expect(readCoverView(new URL(url, 'http://localhost').searchParams, categories).ids).toEqual(['NCI-00215', 'NCI-00118']);
+  });
 });

@@ -14,6 +14,8 @@
 const fs = require('fs');
 const path = require('path');
 
+throw Error('旧noteカバー生成は終了しました。/image-prompt --use-case note-header から Codex imagegen へ渡してください。');
+
 const W = 1280, H = 670;
 
 // ====================================================================

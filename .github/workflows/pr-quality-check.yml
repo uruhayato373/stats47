@@ -615,6 +615,13 @@ jobs:
         run: npm run psi:test
         continue-on-error: false
 
+      - name: ☁️ Cloudflare Cost Report Contract Guard
+        # 日次 usage の閾値判定と、月次レポートの前月比・CPU 合計の扱いを検証する。
+        # 前月の日次が保持期間で欠けたとき部分和と比べない (2026-09 に +3060% と誤表示)。Cloudflare API には触れない。
+        # 正典: .claude/scripts/cloudflare/monthly-snapshot.mjs
+        run: npm run cloudflare:test
+        continue-on-error: false
+
       - name: 🧠 Model Usage Contract Guard
         # モデル使用量の集計 (同じ応答の重複除去・単価換算)、改善提案の閾値、canary の採点と判定を検証する。
         # headless claude も transcript も使わない (実計測は npm run model-usage:collect / :canary)。

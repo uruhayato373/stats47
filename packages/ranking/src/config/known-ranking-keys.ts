@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-10-08
- * 件数: 2456
+ * 最終生成日: 2026-10-16
+ * 件数: 2460
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -80,6 +80,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "annual-minimum-relative-humidity",
   "annual-new-inpatients-general-hospital-per-100k",
   "annual-new-inpatients-psychiatric-hospital-per-100k",
+  "annual-paid-leave-11-days-or-more-ratio",
   "annual-precipitation",
   "annual-precipitation-days",
   "annual-sales-amount",
@@ -1036,6 +1037,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "inflow-population-ratio",
   "information-communication-coefficient",
   "information-communication-expenditure",
+  "information-communication-industry-annual-income",
   "information-private-employees",
   "information-private-establishments",
   "inland-aquaculture-harvest",
@@ -1223,6 +1225,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "manufacturing-establishment-site-area",
   "manufacturing-establishments",
   "manufacturing-industry-added-value",
+  "manufacturing-industry-annual-income",
   "manufacturing-shipment-amount",
   "manufacturing-shipment-amount-per-employee",
   "manufacturing-shipment-amount-per-establishment",
@@ -1261,6 +1264,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "medical-physicians-obstetrics-gynecology",
   "medical-physicians-pediatrics",
   "medical-physicians-under-40",
+  "medical-welfare-industry-annual-income",
   "melon-consumption-expenditure",
   "melon-consumption-quantity",
   "membership-fees-consumption-expenditure",

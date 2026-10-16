@@ -227,6 +227,24 @@
       "rankingKeys": []
     },
     {
+      "id": "note:12-fiscal-peer-comparison",
+      "kind": "note",
+      "key": "12-fiscal-peer-comparison",
+      "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+      "href": "https://note.com/stats47/n/n527e817995e9",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:13-fiscal-peer-no-code",
+      "kind": "note",
+      "key": "13-fiscal-peer-no-code",
+      "title": "財政指標の同規模比較を Claude・ChatGPT で作る — プログラミングなし、プロンプトを貼るだけ",
+      "href": "https://note.com/stats47/n/n20299fc77b17",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:13-ollama-offline-local-llm",
       "kind": "note",
       "key": "13-ollama-offline-local-llm",
@@ -324,6 +342,17 @@
       "href": "https://note.com/stats47/n/nac5e44284865",
       "published": true,
       "rankingKeys": []
+    },
+    {
+      "id": "note:a-active-job-opening-ratio",
+      "kind": "note",
+      "key": "a-active-job-opening-ratio",
+      "title": "【2022年版】有効求人倍率が最も高い県は？ 1位は福井県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/n73c710f239ef",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ]
     },
     {
       "id": "note:a-agricultural-employment-population",
@@ -1080,6 +1109,17 @@
       ]
     },
     {
+      "id": "note:a-main-household-ratio-main-earner-employee-commute-90min",
+      "kind": "note",
+      "key": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "title": "【2023年版・主世帯・1時間30分以上】雇用者世帯の通勤時間が最も長い県は？ 1位は埼玉県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/n7a47171e06f3",
+      "published": true,
+      "rankingKeys": [
+        "main-household-ratio-main-earner-employee-commute-90min"
+      ]
+    },
+    {
       "id": "note:a-maximum-temperature",
       "kind": "note",
       "key": "a-maximum-temperature",
@@ -1100,6 +1140,28 @@
       ]
     },
     {
+      "id": "note:a-new-graduate-starting-salary-university-female",
+      "kind": "note",
+      "key": "a-new-graduate-starting-salary-university-female",
+      "title": "【2019年版・大卒・女性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/necff830a091b",
+      "published": true,
+      "rankingKeys": [
+        "new-graduate-starting-salary-university-female"
+      ]
+    },
+    {
+      "id": "note:a-new-graduate-starting-salary-university-male",
+      "kind": "note",
+      "key": "a-new-graduate-starting-salary-university-male",
+      "title": "【2019年版・大卒・男性】新規学卒者初任給が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/nf067364b58fb",
+      "published": true,
+      "rankingKeys": [
+        "new-graduate-starting-salary-university-male"
+      ]
+    },
+    {
       "id": "note:a-number-of-establishments-manufacturing",
       "kind": "note",
       "key": "a-number-of-establishments-manufacturing",
@@ -1108,6 +1170,17 @@
       "published": true,
       "rankingKeys": [
         "number-of-establishments-manufacturing"
+      ]
+    },
+    {
+      "id": "note:a-overseas-travel-annual-participation-rate-15plus",
+      "kind": "note",
+      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "title": "【2001年版・15歳以上】海外旅行をした人が多い県は？ 1位は東京都｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/n70ff6efcb571",
+      "published": true,
+      "rankingKeys": [
+        "overseas-travel-annual-participation-rate-15plus"
       ]
     },
     {
@@ -1186,6 +1259,44 @@
       "rankingKeys": [
         "vacant-housing-rate"
       ]
+    },
+    {
+      "id": "note:a-volunteer-activity-annual-participation-rate-10plus",
+      "kind": "note",
+      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/nc7e84c5ccfa4",
+      "published": true,
+      "rankingKeys": [
+        "volunteer-activity-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "note:b-expenditure-structure",
+      "kind": "note",
+      "key": "b-expenditure-structure",
+      "title": "あなたの県は教育重視？産業重視？都道府県の「歳出構造」で見えるお金の使い方",
+      "href": "https://note.com/stats47/n/ne19e85f088bf",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-hotel-rooms-nara",
+      "kind": "note",
+      "key": "b-hotel-rooms-nara",
+      "title": "奈良にホテルが少ない本当の理由 ── 客室数ワースト常連県の観光戦略",
+      "href": "https://note.com/stats47/n/nd4f523eab511",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-hottest-prefecture",
+      "kind": "note",
+      "key": "b-hottest-prefecture",
+      "title": "日本一暑い県はどこか ── 最高気温・平均気温・日照時間で見る暑さの正体",
+      "href": "https://note.com/stats47/n/n995a5b3d3e87",
+      "published": true,
+      "rankingKeys": []
     },
     {
       "id": "note:b-kakei-academic-food",
@@ -1284,6 +1395,1188 @@
       ]
     },
     {
+      "id": "note:b-local-tax-vs-allocation-tax",
+      "kind": "note",
+      "key": "b-local-tax-vs-allocation-tax",
+      "title": "自力で稼ぐ県、国に頼る県｜「地方税」と「地方交付税」で見える47都道府県の自立度",
+      "href": "https://note.com/stats47/n/ne8f39a64c5f0",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-pharmacy-density",
+      "kind": "note",
+      "key": "b-pharmacy-density",
+      "title": "なぜ佐賀県は人口あたりの薬局数が日本一なのか｜「薬局密度」で見える地方医療の実態",
+      "href": "https://note.com/stats47/n/n4056bcc5457e",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-dev-a02",
+      "kind": "note",
+      "key": "b-ref-dev-a02",
+      "title": "昆布をよく買うのは富山と東北、札幌は46位 ── こんぶの支出と購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/n0f9c73ec2188",
+      "published": true,
+      "rankingKeys": [
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a03",
+      "kind": "note",
+      "key": "b-ref-dev-a03",
+      "title": "かつお節を最も多く買うのは那覇市 ── かつお節・削り節の支出と購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/na31526b66ac4",
+      "published": true,
+      "rankingKeys": [
+        "katsuobushi-consumption-expenditure",
+        "katsuobushi-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a04",
+      "kind": "note",
+      "key": "b-ref-dev-a04",
+      "title": "出生率は沖縄が1位、東京が最下位 ── 婚姻・離婚・子どもの割合を47都道府県で並べる",
+      "href": "https://note.com/stats47/n/nbd056e7589d0",
+      "published": true,
+      "rankingKeys": [
+        "marriages",
+        "divorces",
+        "young-population-ratio",
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a05",
+      "kind": "note",
+      "key": "b-ref-dev-a05",
+      "title": "世帯の年間収入は神奈川が1位、沖縄が最下位 ── 47都道府県の1世帯当たり年収を比べる",
+      "href": "https://note.com/stats47/n/n461e0a05a314",
+      "published": true,
+      "rankingKeys": [
+        "annual-income-per-household"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a06",
+      "kind": "note",
+      "key": "b-ref-dev-a06",
+      "title": "夫の育児参加率は茨城が1位、保育所の多さは青森が1位 ── 2つの子育て指標を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nc4fb51684d49",
+      "published": true,
+      "rankingKeys": [
+        "husband-childcare-rate",
+        "nursery-count-per-100k-0-5"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a07",
+      "kind": "note",
+      "key": "b-ref-dev-a07",
+      "title": "学力テストは東京・石川・福井が上位、待機児童は東京・沖縄・滋賀が多い ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nb43e69201497",
+      "published": true,
+      "rankingKeys": [
+        "academic-achievement-test-average-rate",
+        "nursery-waiting-children-count"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a08",
+      "kind": "note",
+      "key": "b-ref-dev-a08",
+      "title": "不登校の割合は中学で宮城、小学校で沖縄が最多、福井はどちらも最少 ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n2a1a5b93cacb",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "cram-school-establishment-count"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a09",
+      "kind": "note",
+      "key": "b-ref-dev-a09",
+      "title": "1か月の教育費はさいたま市が1位、福井市が最少 ── 2007年の47市の教育費を比べる",
+      "href": "https://note.com/stats47/n/n56515e90282e",
+      "published": true,
+      "rankingKeys": [
+        "education-cost-all-households"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a11",
+      "kind": "note",
+      "key": "b-ref-dev-a11",
+      "title": "進学した子への仕送りは長野市が最多、大阪市は最少 ── 47市の仕送り支出を比べる",
+      "href": "https://note.com/stats47/n/nbc4bbe4ef1d8",
+      "published": true,
+      "rankingKeys": [
+        "domestic-student-remittance-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a13",
+      "kind": "note",
+      "key": "b-ref-dev-a13",
+      "title": "美容室がいちばん多いのは東京、少ないのは鳥取 ── 美容所と理容・美容所の数を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n5c3b0dfd46cc",
+      "published": true,
+      "rankingKeys": [
+        "beauty-salon-count",
+        "barber-beauty-salon-count"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a15",
+      "kind": "note",
+      "key": "b-ref-dev-a15",
+      "title": "世帯の貯蓄は東京・神奈川・福井が上位、沖縄が最も少ない ── 47都道府県の貯蓄現在高を比べる",
+      "href": "https://note.com/stats47/n/n4c5a416b43be",
+      "published": true,
+      "rankingKeys": [
+        "current-savings-balance-multi-person-households"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a17",
+      "kind": "note",
+      "key": "b-ref-dev-a17",
+      "title": "持ち家比率は秋田が1位、沖縄が最も低い ── 47都道府県の持ち家比率を比べる",
+      "href": "https://note.com/stats47/n/nb24b2deeb25d",
+      "published": true,
+      "rankingKeys": [
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a19",
+      "kind": "note",
+      "key": "b-ref-dev-a19",
+      "title": "核家族の割合は奈良が1位、空き家率は徳島が1位 ── 家族のかたちと空き家を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n2d9fab7fc80d",
+      "published": true,
+      "rankingKeys": [
+        "nuclear-family-households-ratio",
+        "three-generation-household-members",
+        "vacant-housing-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a21",
+      "kind": "note",
+      "key": "b-ref-dev-a21",
+      "title": "若い世代の男女比は茨城が最も男性寄り、鹿児島が最も女性寄り ── 20〜39歳の性比を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/na34537eb2b48",
+      "published": true,
+      "rankingKeys": [
+        "sex-ratio-age-20-39"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a26",
+      "kind": "note",
+      "key": "b-ref-dev-a26",
+      "title": "熱中症で亡くなった人は東京が最多の424人 ── 47都道府県の熱中症による死亡数を比べる",
+      "href": "https://note.com/stats47/n/ncc1cf723e8a4",
+      "published": true,
+      "rankingKeys": [
+        "heatstroke-deaths"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a31",
+      "kind": "note",
+      "key": "b-ref-dev-a31",
+      "title": "企業の数は東京が最多、鳥取が最少 ── 47都道府県の企業数を経済センサスで比べる",
+      "href": "https://note.com/stats47/n/n816c665cb671",
+      "published": true,
+      "rankingKeys": [
+        "nonprimary-enterprises-count"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a32",
+      "kind": "note",
+      "key": "b-ref-dev-a32",
+      "title": "所得が高い県ほど失業率が低いとは限らない ── 県民所得と完全失業率を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n48f662d1b14e",
+      "published": true,
+      "rankingKeys": [
+        "unemployment-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a36",
+      "kind": "note",
+      "key": "b-ref-dev-a36",
+      "title": "住める土地の割合は大阪が1位、森林の割合は高知が1位 ── 47都道府県の可住地と森林を比べる",
+      "href": "https://note.com/stats47/n/nc406259524da",
+      "published": true,
+      "rankingKeys": [
+        "habitable-area-ratio",
+        "forest-area-ratio"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a40",
+      "kind": "note",
+      "key": "b-ref-dev-a40",
+      "title": "車で通勤・通学する人は愛知が最多、読書する人の割合は東京が1位 ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n0afe52099b5e",
+      "published": true,
+      "rankingKeys": [
+        "commute-by-car",
+        "hobby-participation-rate-reading"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a42",
+      "kind": "note",
+      "key": "b-ref-dev-a42",
+      "title": "第1子を産むときの母の年齢は東京が最も高く32.5歳 ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nda788ad0528b",
+      "published": true,
+      "rankingKeys": [
+        "mothers-age-at-first-birth"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a45",
+      "kind": "note",
+      "key": "b-ref-dev-a45",
+      "title": "児童虐待の相談対応は東京が最多の27,755件 ── 47都道府県の児童相談所の対応件数を比べる",
+      "href": "https://note.com/stats47/n/nca8939a4a9b3",
+      "published": true,
+      "rankingKeys": [
+        "child-abuse-consultation-cases"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a49",
+      "kind": "note",
+      "key": "b-ref-dev-a49",
+      "title": "脳梗塞で亡くなる人は人口当たりで秋田が最多、東京が最少 ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n4ad7022a4411",
+      "published": true,
+      "rankingKeys": [
+        "deaths-cerebral-infarction-per-100k"
+      ]
+    },
+    {
+      "id": "note:b-ref-dev-a51",
+      "kind": "note",
+      "key": "b-ref-dev-a51",
+      "title": "自殺者数は東京が最多、人口当たりの交通事故死者は徳島が最も多い ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n5443898bbe1c",
+      "published": true,
+      "rankingKeys": [
+        "suicide-count",
+        "traffic-accident-deaths-per-100k"
+      ]
+    },
+    {
+      "id": "note:b-ref-gis-a33",
+      "kind": "note",
+      "key": "b-ref-gis-a33",
+      "title": "標高5m以下の土地に住む人の割合は徳島が40.9%で1位、大阪が2位 ── 低い土地に暮らす人口を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n835484ded3ef",
+      "published": true,
+      "rankingKeys": [
+        "low-elevation-population-ratio-5m"
+      ]
+    },
+    {
+      "id": "note:b-ref-inc-a05",
+      "kind": "note",
+      "key": "b-ref-inc-a05",
+      "title": "「年収の高い県」は物差しで変わる ── 賃金・県民所得・課税所得・世帯収入の5指標を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nbaf2ff8914a3",
+      "published": true,
+      "rankingKeys": [
+        "male-scheduled-earnings",
+        "female-scheduled-earnings",
+        "per-capita-prefectural-income-h27",
+        "per-taxpayer-taxable-income",
+        "annual-income-per-household"
+      ]
+    },
+    {
+      "id": "note:b-ref-inc-a06",
+      "kind": "note",
+      "key": "b-ref-inc-a06",
+      "title": "物価で割り戻すと埼玉(さいたま市)が1位、大阪(大阪市)は34位 ── 賃金の順位と「手元に残る額」の順位を比べる",
+      "href": "https://note.com/stats47/n/nede8ff7a9eaa",
+      "published": true,
+      "rankingKeys": [
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-housing",
+        "private-rental-housing-rent-per-3-3m2",
+        "owner-occupied-housing-ratio",
+        "male-scheduled-earnings"
+      ]
+    },
+    {
+      "id": "note:b-ref-inc-a55",
+      "kind": "note",
+      "key": "b-ref-inc-a55",
+      "title": "賃金と家賃は大都市、灯油は青森 ── 賃金・家賃・暖房費の組み合わせで47都道府県の暮らしを見る",
+      "href": "https://note.com/stats47/n/ne243cd01a29a",
+      "published": true,
+      "rankingKeys": [
+        "male-scheduled-earnings",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "real-disposable-income"
+      ]
+    },
+    {
+      "id": "note:b-ref-kakei-a01-01",
+      "kind": "note",
+      "key": "b-ref-kakei-a01-01",
+      "title": "学力テストの上位は東京・石川・福井 ── 2025年の都道府県別平均正答率を並べる",
+      "href": "https://note.com/stats47/n/ncba36d395bd7",
+      "published": true,
+      "rankingKeys": [
+        "academic-achievement-test-average-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-kakei-a01-04",
+      "kind": "note",
+      "key": "b-ref-kakei-a01-04",
+      "title": "塾代は少ないのに国公立大学への支出は多い長崎市・札幌市・盛岡市 ── 教育費の内訳を47市で比べる",
+      "href": "https://note.com/stats47/n/n324be1cc99a6",
+      "published": true,
+      "rankingKeys": [
+        "public-university-consumption-expenditure",
+        "private-university-consumption-expenditure",
+        "elementary-tutoring-consumption-expenditure",
+        "junior-high-tutoring-consumption-expenditure",
+        "high-school-tutoring-consumption-expenditure",
+        "tuition-consumption-expenditure",
+        "education-cost-all-households"
+      ]
+    },
+    {
+      "id": "note:b-ref-kakei-a01-05",
+      "kind": "note",
+      "key": "b-ref-kakei-a01-05",
+      "title": "予備校代の差は年収で101倍に ── 大学と塾への支出を年収5階級で10年前と比べる",
+      "href": "https://note.com/stats47/n/ncfb6a1c35121",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-02",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-02",
+      "title": "年収が上がると食費の割合は下がり、仕送りや語学の割合は上がる ── 家計の配分を年収5階級で比べる",
+      "href": "https://note.com/stats47/n/n6be231a3233f",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-04",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-04",
+      "title": "コンタクトレンズは12.99倍、医科診療代は1.12倍 ── 年収で差がつく医療費とつかない医療費",
+      "href": "https://note.com/stats47/n/nb2e4f5f34f22",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-05",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-05",
+      "title": "紅茶は2.42倍、緑茶は0.72倍 ── 年収の高い世帯が多く支出する食料品を5階級で比べる",
+      "href": "https://note.com/stats47/n/nd8b1ce95b997",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-06",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-06",
+      "title": "自動車購入は4.37倍、ガソリンは家計に占める割合が両端の階級でほぼ同じ ── 年収5階級で見る車の支出",
+      "href": "https://note.com/stats47/n/n0f84e2661d89",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-07",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-07",
+      "title": "パソコンは5.24倍、テレビは1.39倍 ── 家電と映像関連10品目の支出を年収5階級で比べる",
+      "href": "https://note.com/stats47/n/n5c964549ec30",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-08",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-08",
+      "title": "遊園地は22.63倍、ゴルフ用具は15.48倍 ── 年収の高い世帯が多く払う娯楽とその10年の変化",
+      "href": "https://note.com/stats47/n/nde5f16a081f9",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a02-09",
+      "kind": "note",
+      "key": "b-ref-kakei-a02-09",
+      "title": "宿泊料は5.29倍、外国パック旅行は5.01倍 ── 旅行の支出を年収5階級で比べる",
+      "href": "https://note.com/stats47/n/ne8cba9b99137",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a03-01",
+      "kind": "note",
+      "key": "b-ref-kakei-a03-01",
+      "title": "男子用コートは14.48倍、下着は1.76倍 ── 年収の高い世帯が差をつけて買う衣料品",
+      "href": "https://note.com/stats47/n/n037f42ea22fc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a03-04",
+      "kind": "note",
+      "key": "b-ref-kakei-a03-04",
+      "title": "腕時計は26.42倍 ── 腕時計・ハンドバッグ・傘の支出を年収5階級で比べる",
+      "href": "https://note.com/stats47/n/nb729bb5e7612",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a04-01",
+      "kind": "note",
+      "key": "b-ref-kakei-a04-01",
+      "title": "食費の割合は年収の低い世帯で34.38%、高い世帯で26.52% ── エンゲル係数と生活水準の関係を年収5階級で確かめる",
+      "href": "https://note.com/stats47/n/nc421986688b2",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a04-02",
+      "kind": "note",
+      "key": "b-ref-kakei-a04-02",
+      "title": "70歳以上の世帯はエンゲル係数33.5% ── それでも米は最も安い単価で買っていた",
+      "href": "https://note.com/stats47/n/n6aae3232670d",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a04-03",
+      "kind": "note",
+      "key": "b-ref-kakei-a04-03",
+      "title": "エンゲル係数1位は兵庫県(神戸市)の33.4％ ── 47市の順位は生活水準の物差しになるか",
+      "href": "https://note.com/stats47/n/n7687e091941c",
+      "published": true,
+      "rankingKeys": [
+        "engel-coefficient",
+        "consumption-expenditure-total",
+        "food-expenditure-total",
+        "per-capita-prefectural-income-h27"
+      ]
+    },
+    {
+      "id": "note:b-ref-kakei-a04-04",
+      "kind": "note",
+      "key": "b-ref-kakei-a04-04",
+      "title": "固定電話代は年収の低い世帯ほど家計に重い ── 通信費の割合は生活水準の物差しになるか",
+      "href": "https://note.com/stats47/n/n9777ed7f52b5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a05-04",
+      "kind": "note",
+      "key": "b-ref-kakei-a05-04",
+      "title": "飲酒代は7.03倍、洋食は5.18倍 ── 外食のどの業態に年収の高い世帯がお金を使うか",
+      "href": "https://note.com/stats47/n/n7cde5e1423f4",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-kakei-a05-06",
+      "kind": "note",
+      "key": "b-ref-kakei-a05-06",
+      "title": "まぐろは静岡市、ぶりは富山市、かつおは高知市 ── 魚介18品目の支出1位から見る東西の好み",
+      "href": "https://note.com/stats47/n/n25b0a46485dc",
+      "published": true,
+      "rankingKeys": [
+        "tuna-consumption-expenditure",
+        "salmon-consumption-expenditure",
+        "saury-consumption-expenditure",
+        "scallop-consumption-expenditure",
+        "clam-consumption-expenditure",
+        "bonito-consumption-expenditure",
+        "squid-consumption-expenditure",
+        "yellowtail-consumption-expenditure",
+        "octopus-consumption-expenditure",
+        "shrimp-consumption-expenditure",
+        "mackerel-consumption-expenditure",
+        "flounder-consumption-expenditure",
+        "crab-consumption-expenditure",
+        "sardine-consumption-expenditure",
+        "freshwater-clam-consumption-expenditure",
+        "oyster-consumption-expenditure",
+        "sea-bream-consumption-expenditure",
+        "horse-mackerel-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-mh-a04",
+      "kind": "note",
+      "key": "b-ref-mh-a04",
+      "title": "所得の高い県は男性の寿命も長め、女性では関係が薄い ── お金と健康の9指標を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n9358aa3d39f1",
+      "published": true,
+      "rankingKeys": [
+        "annual-income-per-household",
+        "current-savings-balance-multi-person-households",
+        "current-securities-balance-ratio-multi-person-households",
+        "life-expectancy-0-male",
+        "life-expectancy-0-female",
+        "healthy-life-expectancy-male",
+        "healthy-life-expectancy-female",
+        "suicide-rate-per-100k",
+        "k6-score10plus-rate-12plus"
+      ]
+    },
+    {
+      "id": "note:b-ref-mh-a07",
+      "kind": "note",
+      "key": "b-ref-mh-a07",
+      "title": "貯蓄に占める有価証券の割合は神奈川県21.7％、秋田県6.0％ ── 投資に回す県はどこか",
+      "href": "https://note.com/stats47/n/n13ec75728be3",
+      "published": true,
+      "rankingKeys": [
+        "current-securities-balance-ratio-multi-person-households",
+        "securities-balance",
+        "current-savings-balance-multi-person-households"
+      ]
+    },
+    {
+      "id": "note:b-ref-mh-a08",
+      "kind": "note",
+      "key": "b-ref-mh-a08",
+      "title": "預貯金の割合は新潟県73.1％、生命保険は鹿児島県29.9％ ── 貯蓄の置き方と収入の関係を47都道府県で見る",
+      "href": "https://note.com/stats47/n/n105ed996a3a3",
+      "published": true,
+      "rankingKeys": [
+        "annual-income-per-household",
+        "current-deposit-balance-ratio-multi-person-households",
+        "current-life-insurance-balance-ratio-multi-person-households",
+        "current-savings-balance-multi-person-households"
+      ]
+    },
+    {
+      "id": "note:b-ref-mh-a09",
+      "kind": "note",
+      "key": "b-ref-mh-a09",
+      "title": "金融の正誤問題の正答率は島根県58.83％、沖縄県51.03％ ── 47都道府県で見る金融知識の差",
+      "href": "https://note.com/stats47/n/n194f4e88b9b9",
+      "published": true,
+      "rankingKeys": [
+        "financial-literacy-correct-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-mh-a10",
+      "kind": "note",
+      "key": "b-ref-mh-a10",
+      "title": "長寿の県が塩を控えているとは限らない ── 平均寿命と食塩・野菜の摂取量を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n6004a486c658",
+      "published": true,
+      "rankingKeys": [
+        "life-expectancy-0-male",
+        "life-expectancy-0-female",
+        "salt-intake-male-age-adjusted",
+        "salt-intake-female-age-adjusted",
+        "vegetable-intake-male-age-adjusted",
+        "vegetable-intake-female-age-adjusted"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a07",
+      "kind": "note",
+      "key": "b-ref-prc-a07",
+      "title": "陸上部は福島、バドミントン部は富山、ソフトテニス部は山口 ── 中学の運動部10種目の部員数を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/ncd2deb997656",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-club-per100-soccer",
+        "junior-high-club-per100-swimming",
+        "junior-high-club-per100-kendo",
+        "junior-high-club-per100-badminton",
+        "junior-high-club-per100-baseball-soft",
+        "junior-high-club-per100-volleyball",
+        "junior-high-club-per100-track-and-field",
+        "junior-high-club-per100-table-tennis",
+        "junior-high-club-per100-basketball",
+        "junior-high-club-per100-soft-tennis"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a09",
+      "kind": "note",
+      "key": "b-ref-prc-a09",
+      "title": "高校ラグビー部員が多いのは山梨県と徳島県 ── 男子高校生100人あたりの部員数を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n0eda98daf2dd",
+      "published": true,
+      "rankingKeys": [
+        "high-school-club-per100-rugby-male"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a10",
+      "kind": "note",
+      "key": "b-ref-prc-a10",
+      "title": "サイクリングは東京都14.4％、スキーは北海道8.3％ ── アウトドアの楽しみ方を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n76d822ca3e90",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-cycling",
+        "sports-participation-rate-hiking",
+        "sports-participation-rate-skiing"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a12",
+      "kind": "note",
+      "key": "b-ref-prc-a12",
+      "title": "ゴルフは愛知県、釣りは広島県が1位 ── ゴルフと釣りは盛んな県が逆になりやすい",
+      "href": "https://note.com/stats47/n/n4503382d72b7",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-golf",
+        "sports-participation-rate-fishing",
+        "sports-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a13",
+      "kind": "note",
+      "key": "b-ref-prc-a13",
+      "title": "パチンコは佐賀県と鹿児島県、スポーツ観戦は広島県が1位 ── 6つの娯楽をした人の割合を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n1015730f50b2",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-sports-spectating",
+        "hobby-participation-rate-instrument",
+        "hobby-participation-rate-photography",
+        "hobby-participation-rate-video-games",
+        "hobby-participation-rate-pachinko",
+        "hobby-participation-rate-karaoke"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a14",
+      "kind": "note",
+      "key": "b-ref-prc-a14",
+      "title": "ガーデニングは群馬県、手芸は北海道、英語学習は東京都 ── 3つの趣味は盛んな県がばらばら",
+      "href": "https://note.com/stats47/n/n44a61a72fdf2",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-gardening",
+        "hobby-participation-rate-knitting",
+        "study-participation-rate-english"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a15",
+      "kind": "note",
+      "key": "b-ref-prc-a15",
+      "title": "華道とボランティアは島根県が1位 ── 書道・茶道・将棋・囲碁など6つの文化的活動を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n0ad6145d5163",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-calligraphy",
+        "hobby-participation-rate-tea-ceremony",
+        "hobby-participation-rate-flower-arrangement",
+        "volunteer-activity-annual-participation-rate-15plus",
+        "volunteer-activity-annual-participation-rate-10plus",
+        "hobby-participation-rate-shogi",
+        "hobby-participation-rate-go"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a16",
+      "kind": "note",
+      "key": "b-ref-prc-a16",
+      "title": "人口あたりの水泳プールは北海道が最多、埼玉県が最少 ── 数で見るか人口で割るかで並びが変わる",
+      "href": "https://note.com/stats47/n/nbe45f74f61ee",
+      "published": true,
+      "rankingKeys": [
+        "public-swimming-pool-count-per-million",
+        "swimming-pool-public"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a17",
+      "kind": "note",
+      "key": "b-ref-prc-a17",
+      "title": "陸上競技場は北海道90施設、2位は鹿児島県 ── 陸上競技場と野球場の数を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n30dc733b8419",
+      "published": true,
+      "rankingKeys": [
+        "athletics-stadium-count-public",
+        "baseball-field-public"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a18",
+      "kind": "note",
+      "key": "b-ref-prc-a18",
+      "title": "人口あたりの体育館は鳥取県が東京都の12.84倍 ── 体育館の数を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nd0c7a5055e26",
+      "published": true,
+      "rankingKeys": [
+        "public-gymnasium-count-per-million"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a19",
+      "kind": "note",
+      "key": "b-ref-prc-a19",
+      "title": "食事の時間が長いのは山梨県・秋田県・長野県 ── 1日の食事時間を男女別に47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n43512fd5645e",
+      "published": true,
+      "rankingKeys": [
+        "meal-avg-time-female",
+        "meal-avg-time-male"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a20",
+      "kind": "note",
+      "key": "b-ref-prc-a20",
+      "title": "テレビ・新聞などの時間は北海道155分、東京都106分 ── マスメディアに使う時間を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n3cc132d3422d",
+      "published": true,
+      "rankingKeys": [
+        "broadcast-media-time-all"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a21",
+      "kind": "note",
+      "key": "b-ref-prc-a21",
+      "title": "女性の家事時間は奈良県が最長、女性有業者の仕事時間は青森県が最長 ── 1日の時間の使い方を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n0442a497809e",
+      "published": true,
+      "rankingKeys": [
+        "housework-avg-time-female",
+        "relaxation-avg-time-female",
+        "relaxation-avg-time-male",
+        "sleep-avg-time-female",
+        "sleep-avg-time-male",
+        "work-avg-time-employed-female",
+        "work-avg-time-employed-male"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a22",
+      "kind": "note",
+      "key": "b-ref-prc-a22",
+      "title": "鉄道で通う人は東京都、車で通う人は愛知県が最多 ── 通勤・通学の交通手段を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n30a08f7ac737",
+      "published": true,
+      "rankingKeys": [
+        "commute-by-train",
+        "commute-by-car",
+        "commuters-total"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a24",
+      "kind": "note",
+      "key": "b-ref-prc-a24",
+      "title": "インターネットを使う人の割合は東京都70.8％、青森県44.4％ ── 2006年の47都道府県比較",
+      "href": "https://note.com/stats47/n/nb1643889a8a4",
+      "published": true,
+      "rankingKeys": [
+        "internet-usage-rate-10plus"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a25",
+      "kind": "note",
+      "key": "b-ref-prc-a25",
+      "title": "塾や家庭教師で学ぶ小6は東京都57.9％、秋田県22.8％ ── 読書好きの割合と47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n7c157e32eb9a",
+      "published": true,
+      "rankingKeys": [
+        "national-assessment-elementary-tutoring-rate",
+        "national-assessment-elementary-reading-like-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a26",
+      "kind": "note",
+      "key": "b-ref-prc-a26",
+      "title": "小学生の通学時間は岩手県が59分で最長、香川県は31分 ── 47都道府県で比べる",
+      "href": "https://note.com/stats47/n/n80869eb8b7e8",
+      "published": true,
+      "rankingKeys": [
+        "primary-school-commute-time-weekday"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a27",
+      "kind": "note",
+      "key": "b-ref-prc-a27",
+      "title": "平日に1時間以上勉強する小6は岩手県64.7％で最多 ── 朝食と勉強の習慣を47都道府県で比べる",
+      "href": "https://note.com/stats47/n/nd6efea2ea009",
+      "published": true,
+      "rankingKeys": [
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-study-1h-plus-rate"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a28",
+      "kind": "note",
+      "key": "b-ref-prc-a28",
+      "title": "エンゲル係数は兵庫県(神戸市)が33.4％で最も高い ── 家計の食費の割合を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/nbb5ce1b6aa23",
+      "published": true,
+      "rankingKeys": [
+        "engel-coefficient"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a29",
+      "kind": "note",
+      "key": "b-ref-prc-a29",
+      "title": "お米の購入量は福島県(福島市)が88kgで最多 ── 米の量と支出を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n4f7ddc35ce44",
+      "published": true,
+      "rankingKeys": [
+        "rice-consumption-quantity",
+        "rice-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a30",
+      "kind": "note",
+      "key": "b-ref-prc-a30",
+      "title": "生鮮野菜を最も多く買うのは山形県(山形市) ── 年間の購入量を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n3f73f9d8a5c7",
+      "published": true,
+      "rankingKeys": [
+        "fresh-vegetables-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a31",
+      "kind": "note",
+      "key": "b-ref-prc-a31",
+      "title": "キャベツは鹿児島市、もやしは山形市、はくさいは神戸市 ── 野菜10品目の購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/n165c2696ddaf",
+      "published": true,
+      "rankingKeys": [
+        "cabbage-consumption-quantity",
+        "onion-consumption-quantity",
+        "daikon-consumption-quantity",
+        "tomato-consumption-quantity",
+        "potato-consumption-quantity",
+        "carrot-consumption-quantity",
+        "chinese-cabbage-consumption-quantity",
+        "cucumber-consumption-quantity",
+        "bean-sprouts-consumption-quantity",
+        "lettuce-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a32",
+      "kind": "note",
+      "key": "b-ref-prc-a32",
+      "title": "果物を最も多く買うのは山形県(山形市)、最も少ないのは大分県(大分市) ── 47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n711b217540df",
+      "published": true,
+      "rankingKeys": [
+        "fresh-fruit-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a33",
+      "kind": "note",
+      "key": "b-ref-prc-a33",
+      "title": "りんごは盛岡、みかんは和歌山、いちごは宇都宮 ── 果物5品目の購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/nb16d150ee313",
+      "published": true,
+      "rankingKeys": [
+        "banana-consumption-quantity",
+        "apple-consumption-quantity",
+        "mandarin-consumption-quantity",
+        "watermelon-consumption-quantity",
+        "strawberry-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a34",
+      "kind": "note",
+      "key": "b-ref-prc-a34",
+      "title": "魚介類を最も多く買うのは青森県(青森市) ── 生鮮魚介の購入量を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n019faad2cc71",
+      "published": true,
+      "rankingKeys": [
+        "fresh-seafood-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a35",
+      "kind": "note",
+      "key": "b-ref-prc-a35",
+      "title": "さんまは秋田市、さばは鹿児島市、たいは佐賀市が最多 ── 3つの魚の購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/nb25821eb9ef6",
+      "published": true,
+      "rankingKeys": [
+        "saury-consumption-quantity",
+        "mackerel-consumption-quantity",
+        "sea-bream-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a36",
+      "kind": "note",
+      "key": "b-ref-prc-a36",
+      "title": "貝類の購入量は青森県(青森市)が最多、福岡県(福岡市)の7.00倍 ── 47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n0edd260cf676",
+      "published": true,
+      "rankingKeys": [
+        "shellfish-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a37",
+      "kind": "note",
+      "key": "b-ref-prc-a37",
+      "title": "食塩は新潟市、みそは長野市、砂糖は津市が最多 ── 調味料4品目の購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/nf9c8f3c2d17e",
+      "published": true,
+      "rankingKeys": [
+        "table-salt-consumption-quantity",
+        "miso-consumption-quantity",
+        "soy-sauce-consumption-quantity",
+        "sugar-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a38",
+      "kind": "note",
+      "key": "b-ref-prc-a38",
+      "title": "緑茶は静岡市、紅茶は仙台市、コーヒーは鳥取市が最多 ── お茶とコーヒーの購入量を47市で比べる",
+      "href": "https://note.com/stats47/n/n88b905cc0ae7",
+      "published": true,
+      "rankingKeys": [
+        "green-tea-consumption-quantity",
+        "black-tea-consumption-quantity",
+        "coffee-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a39",
+      "kind": "note",
+      "key": "b-ref-prc-a39",
+      "title": "炭酸飲料は福島市、ミネラルウォーターは那覇市が最多 ── 飲み物への支出を47市で比べる",
+      "href": "https://note.com/stats47/n/n7813c753c4c8",
+      "published": true,
+      "rankingKeys": [
+        "carbonated-drink-consumption-expenditure",
+        "mineral-water-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a40",
+      "kind": "note",
+      "key": "b-ref-prc-a40",
+      "title": "牛乳を最も多く買うのは奈良県(奈良市) ── 年間の購入量を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/na899f4f02172",
+      "published": true,
+      "rankingKeys": [
+        "milk-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a41",
+      "kind": "note",
+      "key": "b-ref-prc-a41",
+      "title": "成人1人あたりのお酒は東京都が最多、清酒は新潟県、焼酎は鹿児島県 ── 酒類別の販売量を46都道府県で比べる",
+      "href": "https://note.com/stats47/n/n9c53c03f6b32",
+      "published": true,
+      "rankingKeys": [
+        "alcohol-sales-per-adult-total",
+        "alcohol-sales-per-adult-beer",
+        "alcohol-sales-per-adult-sake",
+        "alcohol-sales-per-adult-shochu",
+        "alcohol-sales-per-adult-wine",
+        "alcohol-sales-per-adult-whisky"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a42",
+      "kind": "note",
+      "key": "b-ref-prc-a42",
+      "title": "お菓子への支出は山形県(山形市)が最多 ── 菓子類の年間支出を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n9fea483acaf5",
+      "published": true,
+      "rankingKeys": [
+        "confectionery-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a43",
+      "kind": "note",
+      "key": "b-ref-prc-a43",
+      "title": "納豆への支出は福島県(福島市)が最多、和歌山県(和歌山市)が最少 ── 47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n245947d339bc",
+      "published": true,
+      "rankingKeys": [
+        "natto-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a44",
+      "kind": "note",
+      "key": "b-ref-prc-a44",
+      "title": "即席麺(袋麺など)を最も多く買うのは熊本県(熊本市) ── 購入量を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/n3f24f68f03fc",
+      "published": true,
+      "rankingKeys": [
+        "instant-noodles-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a45",
+      "kind": "note",
+      "key": "b-ref-prc-a45",
+      "title": "パンを最も多く買うのは大阪府(大阪市)、近畿の市が上位に並ぶ ── パンの購入量を47都道府県庁所在市で比べる",
+      "href": "https://note.com/stats47/n/nadef03ea09ad",
+      "published": true,
+      "rankingKeys": [
+        "bread-consumption-quantity"
+      ]
+    },
+    {
+      "id": "note:b-ref-prc-a47",
+      "kind": "note",
+      "key": "b-ref-prc-a47",
+      "title": "北海道は面積と食料自給率で全国1位 ── 北海道・東北の7道県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/n23d6898b0f15",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-prc-a48",
+      "kind": "note",
+      "key": "b-ref-prc-a48",
+      "title": "東京都は宿泊者数と世帯数で1位、合計特殊出生率は47位 ── 関東の7都県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/ndc76fe819d05",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-prc-a49",
+      "kind": "note",
+      "key": "b-ref-prc-a49",
+      "title": "愛知県は製造品出荷額で1位、新潟県は水稲収穫量で1位 ── 中部の9県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/nbbd5bd83d5fd",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-prc-a50",
+      "kind": "note",
+      "key": "b-ref-prc-a50",
+      "title": "滋賀県は男性の平均寿命で1位、大阪府は製造業事業所数で1位 ── 近畿の7府県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/nd94fc821b273",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-prc-a51",
+      "kind": "note",
+      "key": "b-ref-prc-a51",
+      "title": "岡山県は女性の平均寿命で1位、徳島県は人口当たり医師数で1位 ── 中国・四国の9県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/na36328b979fc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-ref-prc-a52",
+      "kind": "note",
+      "key": "b-ref-prc-a52",
+      "title": "沖縄県は粗出生率と年平均気温で1位、大分県は製造品出荷額(従業者1人当たり)で1位 ── 九州・沖縄の8県が全国で上位・下位に入る指標",
+      "href": "https://note.com/stats47/n/nd0be61517d63",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:b-rich-spending-patterns",
+      "kind": "note",
+      "key": "b-rich-spending-patterns",
+      "title": "お金持ちが使うもの、使わないもの ── 所得トップ20%と底辺20%の家計を比較した",
+      "href": "https://note.com/stats47/n/nd9bfdd519d2f",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:c-engel-food-gap",
+      "kind": "note",
+      "key": "c-engel-food-gap",
+      "title": "食費28.6%時代──エンゲル係数で見る都道府県の「食の格差」",
+      "href": "https://note.com/stats47/n/n28d03969fa6d",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:c-kita-kanto-fiscal",
+      "kind": "note",
+      "key": "c-kita-kanto-fiscal",
+      "title": "北関東3県はなぜ「財政優等生」なのか｜茨城8位・栃木11位・群馬12位の秘密",
+      "href": "https://note.com/stats47/n/n56eb35145c32",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:c-tokyo-vs-osaka-fiscal",
+      "kind": "note",
+      "key": "c-tokyo-vs-osaka-fiscal",
+      "title": "東京vs大阪｜数字で比べる二大都市の「財政構造」は驚くほど違った",
+      "href": "https://note.com/stats47/n/n0eb7e589b1ba",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:d-education-income-gap",
+      "kind": "note",
+      "key": "d-education-income-gap",
+      "title": "塾代56倍の衝撃 ── 年収別に見る教育格差のリアル",
+      "href": "https://note.com/stats47/n/n7c8391d4c639",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:d-engel-coefficient-income",
+      "kind": "note",
+      "key": "d-engel-coefficient-income",
+      "title": "エンゲル係数で見える日本の階層構造 ── 補習教育56倍、外食5倍、しかし光熱費は1.16倍",
+      "href": "https://note.com/stats47/n/n392f0f3cb374",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:d-geo-flood-population-mesh",
       "kind": "note",
       "key": "d-geo-flood-population-mesh",
@@ -1331,11 +2624,29 @@
       ]
     },
     {
+      "id": "note:d-kakei-spending-personality",
+      "kind": "note",
+      "key": "d-kakei-spending-personality",
+      "title": "690品目でわかる「47都道府県の消費グセ」── 家計調査ランキングが暴く食の県民性",
+      "href": "https://note.com/stats47/n/n94cd84139a45",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:koumuin-gis-01-depopulation-medical",
       "kind": "note",
       "key": "koumuin-gis-01-depopulation-medical",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
       "href": "https://note.com/stats47/n/n686dcc017bbe",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:koumuin-shigoto-kouritsuka-ai",
+      "kind": "note",
+      "key": "koumuin-shigoto-kouritsuka-ai",
+      "title": "公務員の事務作業、AI で「半日仕事」が「数分」になる時代の話",
+      "href": "https://note.com/stats47/n/na451784fbbca",
       "published": true,
       "rankingKeys": []
     },
@@ -1795,6 +3106,15 @@
       "key": "pinned-intro",
       "title": "【自己紹介】元県庁職員がつくった都道府県統計サイト「stats47」",
       "href": "https://note.com/stats47/n/na69997771fe5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-free-trial-pack",
+      "kind": "note",
+      "key": "prefecture-free-trial-pack",
+      "title": "都道府県データの無料お試しサンプル 総人口2024",
+      "href": "https://note.com/stats47/n/n584098246188",
       "published": true,
       "rankingKeys": []
     },
@@ -2978,6 +4298,15 @@
       "rankingKeys": []
     },
     {
+      "id": "note:sunshine-solar-housing",
+      "kind": "note",
+      "key": "sunshine-solar-housing",
+      "title": "日が照る県ほど太陽光発電が盛んなのか ── 日照時間ランキングの続編",
+      "href": "https://note.com/stats47/n/n2fffce0e2320",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:1",
       "kind": "sns",
       "key": "1",
@@ -3065,6 +4394,126 @@
       "key": "1006",
       "title": "富山を数字と地域文化の両方から見る。",
       "href": "https://www.threads.com/@stats47jp/post/DeRDEEPjntQ",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1007",
+      "kind": "sns",
+      "key": "1007",
+      "title": "「病床数は都市部が多いはず」と思われがちですが、データは真逆の傾向です。",
+      "href": "https://www.threads.com/@stats47jp/post/DeS71Opj-W3",
+      "published": true,
+      "rankingKeys": [
+        "general-hospital-bed-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:1008",
+      "kind": "sns",
+      "key": "1008",
+      "title": "旅先では見えにくい石川の輪郭。",
+      "href": "https://www.threads.com/@stats47jp/post/DeTqLPLEzlO",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1009",
+      "kind": "sns",
+      "key": "1009",
+      "title": "柿を最も多く買う県は岐阜。",
+      "href": "https://www.threads.com/@stats47jp/post/DeViQ40DwnF",
+      "published": true,
+      "rankingKeys": [
+        "persimmon-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:1010",
+      "kind": "sns",
+      "key": "1010",
+      "title": "福井のデータブックを公開中。",
+      "href": "https://www.threads.com/@stats47jp/post/DeWQqq_gK68",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1011",
+      "kind": "sns",
+      "key": "1011",
+      "title": "太陽光パネルのある家が最も多い県は？",
+      "href": "https://www.threads.com/@stats47jp/post/DeYE3fBD7F9",
+      "published": true,
+      "rankingKeys": [
+        "solar-panel-housing-rate"
+      ]
+    },
+    {
+      "id": "sns:1012",
+      "kind": "sns",
+      "key": "1012",
+      "title": "山梨を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/DeYyoPij0s0",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1013",
+      "kind": "sns",
+      "key": "1013",
+      "title": "564万円・546万円・541万円。",
+      "href": "https://www.threads.com/@stats47jp/post/DeaquZ-Chrz",
+      "published": true,
+      "rankingKeys": [
+        "nurse-annual-income"
+      ]
+    },
+    {
+      "id": "sns:1014",
+      "kind": "sns",
+      "key": "1014",
+      "title": "長野の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/DebZt_UCsoU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1015",
+      "kind": "sns",
+      "key": "1015",
+      "title": "外で飲むお酒にいちばんお金を使う県は熊本。",
+      "href": "https://www.threads.com/@stats47jp/post/DedNO7jgW_Y",
+      "published": true,
+      "rankingKeys": [
+        "drinking-out-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:1016",
+      "kind": "sns",
+      "key": "1016",
+      "title": "あなたの知る岐阜は、データでも同じ姿ですか？",
+      "href": "https://www.threads.com/@stats47jp/post/Ded7CzdiXZx",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1017",
+      "kind": "sns",
+      "key": "1017",
+      "title": "パスポートを取る人が多い県は？",
+      "href": "https://www.threads.com/@stats47jp/post/Defzz8Tj_we",
+      "published": true,
+      "rankingKeys": [
+        "passport-issuance-count-per-thousand"
+      ]
+    },
+    {
+      "id": "sns:1018",
+      "kind": "sns",
+      "key": "1018",
+      "title": "静岡を数字と地域文化の両方から見る。",
+      "href": "https://www.threads.com/@stats47jp/post/DegiIFoj1Ez",
       "published": true,
       "rankingKeys": []
     },
@@ -3359,6 +4808,60 @@
       "rankingKeys": []
     },
     {
+      "id": "sns:1084",
+      "kind": "sns",
+      "key": "1084",
+      "title": "【都道府県データ】岩手県、全国で何位？",
+      "href": "https://www.instagram.com/p/DeUch2EkeJe/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1085",
+      "kind": "sns",
+      "key": "1085",
+      "title": "【都道府県ランキング】牛肉への支出",
+      "href": "https://www.instagram.com/p/DeXENZAiRWG/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1086",
+      "kind": "sns",
+      "key": "1086",
+      "title": "【都道府県クイズ】しらす干しをいちばん多く買う県は？",
+      "href": "https://www.instagram.com/p/DeY_9shld4R/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1087",
+      "kind": "sns",
+      "key": "1087",
+      "title": "【都道府県データ】大阪府、全国で何位？",
+      "href": "https://www.instagram.com/p/DebjveJFhhC/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1088",
+      "kind": "sns",
+      "key": "1088",
+      "title": "【都道府県クイズ】ラーメンの外食にいちばんお金を使う県は？",
+      "href": "https://www.instagram.com/reel/Ded81JJipH-/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1089",
+      "kind": "sns",
+      "key": "1089",
+      "title": "【データの相関】喫茶代消費支出額 × 最終学歴が大学・大学院卒の者の割合",
+      "href": "https://www.instagram.com/p/DeeqCv1lvuF/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:109",
       "kind": "sns",
       "key": "109",
@@ -3368,6 +4871,15 @@
       "rankingKeys": [
         "disposable-income-worker-households"
       ]
+    },
+    {
+      "id": "sns:1090",
+      "kind": "sns",
+      "key": "1090",
+      "title": "【都道府県クイズ】おもちにいちばんお金を使う県は？",
+      "href": "https://www.instagram.com/p/DehN9mcjg9p/",
+      "published": true,
+      "rankingKeys": []
     },
     {
       "id": "sns:11",
@@ -8425,6 +9937,11 @@
   ],
   "links": [
     {
+      "from": "note:a-active-job-opening-ratio",
+      "to": "ranking:active-job-opening-ratio",
+      "relation": "uses"
+    },
+    {
       "from": "note:a-agricultural-employment-population",
       "to": "ranking:agricultural-employment-population",
       "relation": "uses"
@@ -9195,13 +10712,33 @@
       "relation": "uses"
     },
     {
+      "from": "note:a-main-household-ratio-main-earner-employee-commute-90min",
+      "to": "ranking:main-household-ratio-main-earner-employee-commute-90min",
+      "relation": "uses"
+    },
+    {
       "from": "note:a-minimum-wage-by-region",
       "to": "ranking:minimum-wage-by-region",
       "relation": "uses"
     },
     {
+      "from": "note:a-new-graduate-starting-salary-university-female",
+      "to": "ranking:new-graduate-starting-salary-university-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:a-new-graduate-starting-salary-university-male",
+      "to": "ranking:new-graduate-starting-salary-university-male",
+      "relation": "uses"
+    },
+    {
       "from": "note:a-number-of-establishments-manufacturing",
       "to": "ranking:number-of-establishments-manufacturing",
+      "relation": "uses"
+    },
+    {
+      "from": "note:a-overseas-travel-annual-participation-rate-15plus",
+      "to": "ranking:overseas-travel-annual-participation-rate-15plus",
       "relation": "uses"
     },
     {
@@ -9237,6 +10774,11 @@
     {
       "from": "note:a-vacant-housing-rate",
       "to": "ranking:vacant-housing-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:a-volunteer-activity-annual-participation-rate-10plus",
+      "to": "ranking:volunteer-activity-annual-participation-rate-10plus",
       "relation": "uses"
     },
     {
@@ -9362,6 +10904,1291 @@
     {
       "from": "note:b-kakei-winter-bargain",
       "to": "ranking:womens-coat-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a02",
+      "to": "ranking:konbu-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a02",
+      "to": "ranking:konbu-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a03",
+      "to": "ranking:katsuobushi-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a03",
+      "to": "ranking:katsuobushi-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a04",
+      "to": "ranking:divorces",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a04",
+      "to": "ranking:marriages",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a04",
+      "to": "ranking:total-fertility-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a04",
+      "to": "ranking:young-population-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a05",
+      "to": "ranking:annual-income-per-household",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a06",
+      "to": "ranking:husband-childcare-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a06",
+      "to": "ranking:nursery-count-per-100k-0-5",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a07",
+      "to": "ranking:academic-achievement-test-average-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a07",
+      "to": "ranking:nursery-waiting-children-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a08",
+      "to": "ranking:cram-school-establishment-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a08",
+      "to": "ranking:elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a08",
+      "to": "ranking:junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a09",
+      "to": "ranking:education-cost-all-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a11",
+      "to": "ranking:domestic-student-remittance-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a13",
+      "to": "ranking:barber-beauty-salon-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a13",
+      "to": "ranking:beauty-salon-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a15",
+      "to": "ranking:current-savings-balance-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a17",
+      "to": "ranking:owner-occupied-housing-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a19",
+      "to": "ranking:nuclear-family-households-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a19",
+      "to": "ranking:three-generation-household-members",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a19",
+      "to": "ranking:vacant-housing-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a21",
+      "to": "ranking:sex-ratio-age-20-39",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a26",
+      "to": "ranking:heatstroke-deaths",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a31",
+      "to": "ranking:nonprimary-enterprises-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a32",
+      "to": "ranking:unemployment-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a36",
+      "to": "ranking:forest-area-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a36",
+      "to": "ranking:habitable-area-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a40",
+      "to": "ranking:commute-by-car",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a40",
+      "to": "ranking:hobby-participation-rate-reading",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a42",
+      "to": "ranking:mothers-age-at-first-birth",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a45",
+      "to": "ranking:child-abuse-consultation-cases",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a49",
+      "to": "ranking:deaths-cerebral-infarction-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a51",
+      "to": "ranking:suicide-count",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-dev-a51",
+      "to": "ranking:traffic-accident-deaths-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-gis-a33",
+      "to": "ranking:low-elevation-population-ratio-5m",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a05",
+      "to": "ranking:annual-income-per-household",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a05",
+      "to": "ranking:female-scheduled-earnings",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a05",
+      "to": "ranking:male-scheduled-earnings",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a05",
+      "to": "ranking:per-capita-prefectural-income-h27",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a05",
+      "to": "ranking:per-taxpayer-taxable-income",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:consumer-price-difference-index-housing",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:consumer-price-difference-index-overall",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:disposable-income-after-rent",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:male-scheduled-earnings",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:owner-occupied-housing-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:private-rental-housing-rent-per-3-3m2",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a06",
+      "to": "ranking:real-disposable-income",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a55",
+      "to": "ranking:kerosene-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a55",
+      "to": "ranking:male-scheduled-earnings",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a55",
+      "to": "ranking:private-rental-housing-rent-per-3-3m2",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-inc-a55",
+      "to": "ranking:real-disposable-income",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-01",
+      "to": "ranking:academic-achievement-test-average-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:education-cost-all-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:elementary-tutoring-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:high-school-tutoring-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:junior-high-tutoring-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:private-university-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:public-university-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a01-04",
+      "to": "ranking:tuition-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a04-03",
+      "to": "ranking:consumption-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a04-03",
+      "to": "ranking:engel-coefficient",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a04-03",
+      "to": "ranking:food-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a04-03",
+      "to": "ranking:per-capita-prefectural-income-h27",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:bonito-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:clam-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:crab-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:flounder-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:freshwater-clam-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:horse-mackerel-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:mackerel-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:octopus-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:oyster-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:salmon-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:sardine-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:saury-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:scallop-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:sea-bream-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:shrimp-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:squid-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:tuna-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-kakei-a05-06",
+      "to": "ranking:yellowtail-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:annual-income-per-household",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:current-savings-balance-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:current-securities-balance-ratio-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:healthy-life-expectancy-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:healthy-life-expectancy-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:k6-score10plus-rate-12plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:life-expectancy-0-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:life-expectancy-0-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a04",
+      "to": "ranking:suicide-rate-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a07",
+      "to": "ranking:current-savings-balance-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a07",
+      "to": "ranking:current-securities-balance-ratio-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a07",
+      "to": "ranking:securities-balance",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a08",
+      "to": "ranking:annual-income-per-household",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a08",
+      "to": "ranking:current-deposit-balance-ratio-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a08",
+      "to": "ranking:current-life-insurance-balance-ratio-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a08",
+      "to": "ranking:current-savings-balance-multi-person-households",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a09",
+      "to": "ranking:financial-literacy-correct-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:life-expectancy-0-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:life-expectancy-0-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:salt-intake-female-age-adjusted",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:salt-intake-male-age-adjusted",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:vegetable-intake-female-age-adjusted",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-mh-a10",
+      "to": "ranking:vegetable-intake-male-age-adjusted",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-badminton",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-baseball-soft",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-basketball",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-kendo",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-soccer",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-soft-tennis",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-swimming",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-table-tennis",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-track-and-field",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a07",
+      "to": "ranking:junior-high-club-per100-volleyball",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a09",
+      "to": "ranking:high-school-club-per100-rugby-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a10",
+      "to": "ranking:sports-participation-rate-cycling",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a10",
+      "to": "ranking:sports-participation-rate-hiking",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a10",
+      "to": "ranking:sports-participation-rate-skiing",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a12",
+      "to": "ranking:sports-annual-participation-rate-10plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a12",
+      "to": "ranking:sports-participation-rate-fishing",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a12",
+      "to": "ranking:sports-participation-rate-golf",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-instrument",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-karaoke",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-pachinko",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-photography",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-sports-spectating",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a13",
+      "to": "ranking:hobby-participation-rate-video-games",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a14",
+      "to": "ranking:hobby-participation-rate-gardening",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a14",
+      "to": "ranking:hobby-participation-rate-knitting",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a14",
+      "to": "ranking:study-participation-rate-english",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:hobby-participation-rate-calligraphy",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:hobby-participation-rate-flower-arrangement",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:hobby-participation-rate-go",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:hobby-participation-rate-shogi",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:hobby-participation-rate-tea-ceremony",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:volunteer-activity-annual-participation-rate-10plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a15",
+      "to": "ranking:volunteer-activity-annual-participation-rate-15plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a16",
+      "to": "ranking:public-swimming-pool-count-per-million",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a16",
+      "to": "ranking:swimming-pool-public",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a17",
+      "to": "ranking:athletics-stadium-count-public",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a17",
+      "to": "ranking:baseball-field-public",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a18",
+      "to": "ranking:public-gymnasium-count-per-million",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a19",
+      "to": "ranking:meal-avg-time-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a19",
+      "to": "ranking:meal-avg-time-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a20",
+      "to": "ranking:broadcast-media-time-all",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:housework-avg-time-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:relaxation-avg-time-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:relaxation-avg-time-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:sleep-avg-time-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:sleep-avg-time-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:work-avg-time-employed-female",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a21",
+      "to": "ranking:work-avg-time-employed-male",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a22",
+      "to": "ranking:commute-by-car",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a22",
+      "to": "ranking:commute-by-train",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a22",
+      "to": "ranking:commuters-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a24",
+      "to": "ranking:internet-usage-rate-10plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a25",
+      "to": "ranking:national-assessment-elementary-reading-like-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a25",
+      "to": "ranking:national-assessment-elementary-tutoring-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a26",
+      "to": "ranking:primary-school-commute-time-weekday",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a27",
+      "to": "ranking:national-assessment-elementary-breakfast-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a27",
+      "to": "ranking:national-assessment-elementary-study-1h-plus-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a28",
+      "to": "ranking:engel-coefficient",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a29",
+      "to": "ranking:rice-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a29",
+      "to": "ranking:rice-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a30",
+      "to": "ranking:fresh-vegetables-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:bean-sprouts-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:cabbage-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:carrot-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:chinese-cabbage-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:cucumber-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:daikon-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:lettuce-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:onion-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:potato-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a31",
+      "to": "ranking:tomato-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a32",
+      "to": "ranking:fresh-fruit-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a33",
+      "to": "ranking:apple-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a33",
+      "to": "ranking:banana-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a33",
+      "to": "ranking:mandarin-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a33",
+      "to": "ranking:strawberry-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a33",
+      "to": "ranking:watermelon-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a34",
+      "to": "ranking:fresh-seafood-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a35",
+      "to": "ranking:mackerel-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a35",
+      "to": "ranking:saury-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a35",
+      "to": "ranking:sea-bream-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a36",
+      "to": "ranking:shellfish-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a37",
+      "to": "ranking:miso-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a37",
+      "to": "ranking:soy-sauce-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a37",
+      "to": "ranking:sugar-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a37",
+      "to": "ranking:table-salt-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a38",
+      "to": "ranking:black-tea-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a38",
+      "to": "ranking:coffee-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a38",
+      "to": "ranking:green-tea-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a39",
+      "to": "ranking:carbonated-drink-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a39",
+      "to": "ranking:mineral-water-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a40",
+      "to": "ranking:milk-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-beer",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-sake",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-shochu",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-whisky",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a41",
+      "to": "ranking:alcohol-sales-per-adult-wine",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a42",
+      "to": "ranking:confectionery-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a43",
+      "to": "ranking:natto-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a44",
+      "to": "ranking:instant-noodles-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a45",
+      "to": "ranking:bread-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:01000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:02000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:03000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:04000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:05000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:06000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a47",
+      "to": "area:07000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:08000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:09000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:10000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:11000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:12000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:13000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a48",
+      "to": "area:14000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:15000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:16000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:17000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:18000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:19000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:20000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:21000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:22000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a49",
+      "to": "area:23000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:24000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:25000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:26000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:27000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:28000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:29000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a50",
+      "to": "area:30000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:31000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:32000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:33000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:34000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:35000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:36000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:37000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:38000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a51",
+      "to": "area:39000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:40000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:41000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:42000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:43000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:44000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:45000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:46000",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-ref-prc-a52",
+      "to": "area:47000",
       "relation": "uses"
     },
     {
@@ -9797,6 +12624,36 @@
     {
       "from": "sns:1005",
       "to": "ranking:annual-sunshine-duration",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1007",
+      "to": "ranking:general-hospital-bed-count-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1009",
+      "to": "ranking:persimmon-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1011",
+      "to": "ranking:solar-panel-housing-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1013",
+      "to": "ranking:nurse-annual-income",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1015",
+      "to": "ranking:drinking-out-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1017",
+      "to": "ranking:passport-issuance-count-per-thousand",
       "relation": "uses"
     },
     {

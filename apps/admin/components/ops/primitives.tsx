@@ -13,17 +13,19 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 export function PageHeading({
   title,
   source,
+  accessLabel = "読み取り専用",
   children,
 }: {
   title: string;
   source: string;
+  accessLabel?: string;
   children?: ReactNode;
 }) {
   return (
     <header className="space-y-1">
       <h1 className="text-2xl font-bold text-console-fg">{title}</h1>
       <p className="text-sm text-console-muted">
-        真実源: <code className="break-all rounded bg-muted px-1">{source}</code> — 読み取り専用
+        真実源: <code className="break-all rounded bg-muted px-1">{source}</code> — {accessLabel}
       </p>
       {children}
     </header>

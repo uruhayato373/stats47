@@ -2,6 +2,610 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "social-welfare-expenses-prefecture",
+      "pageId": "ranking:social-welfare-expenses-prefecture",
+      "title": "社会福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103031"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103031"
+        },
+        "derived": false,
+        "configHash": "e548ead264ef31e5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:social-welfare-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "software-engineer-annual-income",
+      "pageId": "ranking:software-engineer-annual-income",
+      "title": "ソフトウェア作成者の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1104"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "f00643aba840e510"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:engineer-telework-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:engineer-vs-professions-income",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:prefecture-salary-gap-career",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:software-engineer-income-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:software-engineer-salary-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:system-consultant-income-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:working-hours-overtime-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:software-engineer-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "solar-panel-housing-rate",
+      "pageId": "ranking:solar-panel-housing-rate",
+      "title": "太陽光発電機のある住宅率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004021642",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "0",
+            "cdCat04": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004021642",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "0",
+          "cdCat04": "0"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat05",
+            "numeratorCodes": [
+              "21"
+            ],
+            "denominatorCodes": [
+              "21",
+              "22"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "a240c69c10f56def"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:solar-panel-housing-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sunshine-solar-housing-correlation",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:solar-panel-housing-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "solar-power-housing",
+      "pageId": "ranking:solar-power-housing",
+      "title": "太陽光を利用した発電機器のある住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H2281"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H2281"
+        },
+        "derived": false,
+        "configHash": "60b809463d108b01"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:energy-consumption-structure-shift",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:renewable-energy-regional-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:solar-power-housing",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:solar-power-housing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "sole-proprietor-operating-profit",
       "pageId": "ranking:sole-proprietor-operating-profit",
       "title": "個人企業の営業利益",
@@ -9102,432 +9706,6 @@
       "consumers": [
         {
           "pageId": "ranking:supplement-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sushi-dining-consumption-expenditure",
-      "pageId": "ranking:sushi-dining-consumption-expenditure",
-      "title": "すし(外食)消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "011211040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "011211040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "2956a410d0ed0df3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:food-consumption-prefecture-battle",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sushi-dining-consumption-expenditure",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sushi-dining-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "sushi-takeout-consumption-expenditure",
-      "pageId": "ranking:sushi-takeout-consumption-expenditure",
-      "title": "すし(弁当)消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010910020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010910020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "26350f0716e17c90"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sushi-takeout-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sweet-potato-consumption-expenditure",
-      "pageId": "ranking:sweet-potato-consumption-expenditure",
-      "title": "さつまいも消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010512010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010512010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "0ad077de1da24331"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:ibaraki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sweet-potato-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sweet-potato-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sweet-potato-consumption-quantity",
-      "pageId": "ranking:sweet-potato-consumption-quantity",
-      "title": "さつまいも消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "010512010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "010512010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "db90a84280c6575d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sweet-potato-consumption-quantity",
           "kind": "ranking"
         }
       ],

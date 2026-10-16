@@ -7,8 +7,8 @@ co_agents: [note-manager, kindle-publisher, kdp-operator]
 ---
 
 全コンテンツ運用とメディア資産を 1 つの localhost 画面で横断管理するコンソール。
-2026-10-11 オーナー指示によりSNS下書き本文の編集・保存だけを許可する。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
-下書き本文以外の書き込み・投稿・生成は各 owner agent / skill が担う。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
+画面から保存できるのはSNS下書き本文とnoteカバーの制作内容・確認結果 (2026-10-14 オーナー指示)。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」。
+画像生成・登録・投稿は各 owner agent / skill が担う。実装は独立 Next.js アプリ **`apps/admin`** (App Router・127.0.0.1 bind 固定。
 2026-07-16 に旧 node:http 実装から完全移管)。
 
 ## 起動 / 停止
@@ -31,7 +31,8 @@ PORT=5000 npm run admin    # ポート変更
 | `/product/coconala` | ココナラ | `coconala-listings.json` と product-factory カタログを突合した出品状況 (出品中・台帳のみ・未出品) |
 | `/content` | コンテンツ運用 | X / Instagram / note / Kindle の件数・制作段階・次アクション・SSOT監査を横断表示 |
 | `/content/{x,instagram}` | SNSチャネル別 | `/sns` の共通コンポーネントをチャネル別に初期絞り込み。Geo role・素材・caption・状態を閲覧 |
-| `/content/note` | note運用 | git TS catalog + R2本文所在 + 公開URL/準備状態。読み取り専用 |
+| `/content/note` | note運用 | 記事台帳 + R2本文所在 + 公開URL/準備状態。読み取り専用 |
+| `/content/note/covers` | カバー制作 | カテゴリ方針・制作ID・進捗・公開画像/候補を確認。コピー/題材/根拠を保存、制作仕様を取得し、画像の採用/修正を記録して順次進める |
 | `/content/kindle` | Kindle運用 | book catalog + manuscripts + `.local`成果物 + R2暗号化archive + KDP審査/販売状態・価格・ロイヤリティ・KU。読み取り専用 |
 | `/content/references` | 参考文献展開 | 制作単位×12チャネルとcontext-only補強プールを、既存SSOTから全件派生。読み取り専用 |
 | `/sns` | SNS 投稿ギャラリー | ID検索・画像一覧/台帳・caption・投稿状態・残枠を表示し、下書き本文を編集。YouTube は過去実績とpilot台帳を表示 |
@@ -54,7 +55,7 @@ PORT=5000 npm run admin    # ポート変更
 | `GET /api/dashboard/summary` | プロジェクト現況の集約 JSON (state/md ライブ読み・TTL 60 秒、collector は `dashboard-data.mjs`) |
 | `GET /api/content` | 4運用チャネルの共通stage・note/Kindle詳細・参考文献12チャネル展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
 
-APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存だけ。
+APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保存と `PATCH /api/note-covers/:key/production` のカバー制作内容・目視確認。
 許可範囲は `apps/admin/tests/unit/read-only-contract.test.ts` と下書き保存テストで固定する。
 
 ## できること
@@ -70,7 +71,7 @@ APIは原則GET。例外は `PATCH /api/posts/:id/caption` の下書き本文保
 ## 規約 (正典: `.claude/rules/sns-content-standards.md` §5.5 / `.claude/rules/ogp-image-standards.md`)
 
 - 投稿台帳 SSOT は `data/sns/posts.json`。adminの下書き本文保存と、owner agent/skillの書込は `sns-posts-store.cjs` 経由で行う
-- note は git TS catalog + R2本文、Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の新規台帳を作らない
+- note は `data/note/articles.json` + R2本文。カバーの方針・制作ID・画像は既存note台帳群に統合する。手順は `.claude/scripts/note/catalog/README.md`。Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の複製台帳を作らない
 - 参考文献展開は `data/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。制作可能単位は12チャネル、context-onlyは補強専用として全件集約し、別台帳・Drive ID・原本/OCR/cropを保持しない
 - `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityはbuild + lint + audit + 参考文献E2Eをblocking実行
 - 頻度リミット (§1) は画面の残枠バッジ + 各ガードで enforce

@@ -183,6 +183,7 @@ if [ -n "$STAGED_ANY" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate \
+    || ! (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/cover-production.ts validate >/dev/null) \
     || ! (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check >/dev/null); then
     echo -e "${RED}❌ note の台帳・資産の契約違反 (docs/31 の追跡・カバー台帳・記事台帳から生成した索引のずれ)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))

@@ -21,11 +21,11 @@ export function NoteCoverComparison({ row }: { row: NoteCoverRow }) {
     </div>
     <div className="grid gap-4 sm:grid-cols-2">
       <figure>
-        <figcaption className="mb-2 text-xs text-console-muted">公開カバー{row.coverObservedAt ? `（${new Date(row.coverObservedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}確認）` : ''}</figcaption>
+        <figcaption className="mb-2 text-xs text-console-muted">修正前・公開中{row.coverObservedAt ? `（${new Date(row.coverObservedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}確認）` : ''}</figcaption>
         {row.currentImageUrl ? <NoteCoverImage key={row.currentImageUrl} src={row.currentImageUrl} alt={`${row.title} 公開カバー`} /> : <p className="text-sm text-console-muted">公開画像なし</p>}
       </figure>
       <figure>
-        <figcaption className="mb-2 text-xs text-console-muted">差し替え候補{row.candidateVersion ? `（${row.candidateVersion}）` : ''}</figcaption>
+        <figcaption className="mb-2 text-xs text-console-muted">修正後の候補</figcaption>
         {row.candidateImageUrl ? <NoteCoverImage key={row.candidateImageUrl} src={row.candidateImageUrl} alt={`${row.title} 差し替え候補`} /> : <p className="text-sm text-console-muted">{row.review === 'unavailable' ? '旧候補の画像は未回収です' : '候補なし'}</p>}
       </figure>
     </div>

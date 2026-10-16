@@ -8,8 +8,9 @@ import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
 import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from './lib/cover-assets.mjs';
-import { readStoredCover, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
+import { readStoredCover, readStoredCoverInput, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
 import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
+import { assertCurrentCoverCandidate } from './lib/cover-production.mjs';
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 import {
   sha256,
@@ -54,6 +55,7 @@ const selected = new Set(opts.keys?.split(',') ?? []);
 const scope = ledger.articles.flatMap((row) => {
   const revision = adoptedCoverRevision(row);
   if (!revision || (selected.size && !selected.has(row.articleKey))) return [];
+  assertCurrentCoverCandidate(row, revision.id);
   return [{ key: row.articleKey, sha256: revision.sha256 }];
 });
 if (selected.size && selected.size !== scope.length)
@@ -61,6 +63,8 @@ if (selected.size && selected.size !== scope.length)
 const manifest = { account: 'stats47', version: '', articles: ledger.articles.flatMap((row) => {
   const revision = approvedCoverRevision(row);
   if (!revision) return [];
+  if (selected.size && !selected.has(row.articleKey)) return [];
+  assertCurrentCoverCandidate(row, revision.id);
   return [{ key: row.articleKey, noteUrl: row.noteUrl, noteId: row.noteUrl.split('/').at(-1),
     action: row.published?.status === 'missing' ? 'create' : 'improve',
     sha256: revision.sha256, revision, beforeCover: { url: row.published?.url ?? null },
@@ -92,6 +96,7 @@ for (const a of articles.slice(0, opts.limit)) {
   if (catalogByKey.get(a.key)?.noteUrl !== a.noteUrl)
     throw Error('catalog mismatch ' + a.key);
   const bytes = await readStoredCover(a.revision, store);
+  await readStoredCoverInput(a.revision, store);
   assertProduction(a, bytes, await sharp(bytes).metadata());
   assets.set(a.key, bytes);
   const original = await publicDetail(a);
@@ -303,6 +308,7 @@ try {
     // Recheck approval immediately before mutation, including resumed journals.
     const approvedRow = readCoverLedger().articles.find((r) => r.articleKey === a.key);
     if (approvedRow?.approvedRevisionId !== a.sha256) throw Error('cover approval changed');
+    assertCurrentCoverCandidate(approvedRow, a.sha256);
     const original = originals.get(a.key);
     const before = await publicDetail(a);
     const fingerprint = assertPreserved(original, before);
@@ -379,6 +385,7 @@ try {
     await updateCoverLedger((current) => {
       const row = current.articles.find((r) => r.articleKey === a.key);
       if (row?.approvedRevisionId !== a.sha256) throw Error('cover approval changed after upload; inspect journal');
+      assertCurrentCoverCandidate(row, a.sha256);
       recordCoverObservation(current, { key: a.key, noteUrl: a.noteUrl, status: 'configured',
         url: after.eyecatch, observedAt: active.verifiedAt });
       row.published.revisionId = a.sha256;

@@ -13,6 +13,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { execFileSync } from 'node:child_process';
 import { NOTE_ARTICLES } from "./index";
 import { datasetPath } from "../../../../config/datasets.mjs";
 
@@ -20,6 +21,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
 const APPLY = process.argv.includes("--apply");
 const CHECK = process.argv.includes("--check");
+
+// New draft/published articles receive stable cover IDs and the current category policy.
+if (APPLY && !CHECK) execFileSync(process.execPath, ['--import', 'tsx', '.claude/scripts/note/cover-production.ts', 'seed'], { cwd: ROOT, stdio: 'inherit' });
 
 const access = { "r2-public": "public", "r2-private": "private", "note-only": "none" } as const;
 

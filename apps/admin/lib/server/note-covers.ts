@@ -1,13 +1,16 @@
 import 'server-only';
 import { readCoverLedger, validateCoverLedger, coverDisplayState, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 import { NOTE_COVER_CATEGORIES, noteCoverCategory, type NoteCoverCategory } from '../../../../.claude/scripts/note/catalog/cover-categories';
-import { NOTE_ARTICLES, publishedArticles } from '../../../../.claude/scripts/note/catalog';
+import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
 import { projectRoot } from './project-root';
+import { coverProductionView, readCoverPolicies, validateCoverPolicies, type CoverProductionView } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
 
 export { NOTE_COVER_CATEGORIES };
 export type { NoteCoverCategory };
 export type NoteCoverReview = 'pass' | 'needs-revision' | 'pending' | 'missing' | 'unavailable';
 export interface NoteCoverRow {
+  production: CoverProductionView;
+  articleStatus: string;
   key: string; title: string; noteUrl: string; category: NoteCoverCategory;
   review: NoteCoverReview; reviewReason: string | null;
   currentImageUrl: string | null; coverObservedAt: string | null; candidateImageUrl: string | null;
@@ -20,13 +23,16 @@ export function privateCoverUrl(key: string, revision: CoverRevision) {
 }
 export function noteCoverManagement() {
   const ledger = validateCoverLedger(readCoverLedger(projectRoot()), NOTE_ARTICLES);
+  const policies = validateCoverPolicies(readCoverPolicies(projectRoot()), NOTE_COVER_CATEGORIES);
   const byKey = new Map(ledger.articles.map((row) => [row.articleKey, row]));
-  const rows: NoteCoverRow[] = publishedArticles().map((article) => {
+  const rows: NoteCoverRow[] = NOTE_ARTICLES.map((article) => {
     const record = byKey.get(article.key);
     if (!record) throw new Error('note cover catalog coverage mismatch');
     const state = coverDisplayState(record);
     const archived = record.revisions.find((r) => r.id === record.published?.revisionId);
     return {
+      production: coverProductionView(record, { ...article, category: noteCoverCategory(article) }, policies),
+      articleStatus: article.status ?? 'published',
       key: article.key, title: article.title, noteUrl: article.noteUrl ?? '', category: noteCoverCategory(article),
       review: state.review === 'not-required' ? 'pending' : state.review,
       reviewReason: state.candidate?.review.reason ?? null,
@@ -42,5 +48,5 @@ export function noteCoverManagement() {
   const counts = Object.fromEntries(NOTE_COVER_CATEGORIES.map(({ key }) => [key, rows.filter((row) => row.category === key).length])) as Record<NoteCoverCategory, number>;
   const reviews: NoteCoverReview[] = ['pass', 'needs-revision', 'pending', 'missing', 'unavailable'];
   const reviewCounts = Object.fromEntries(reviews.map((review) => [review, rows.filter((row) => row.review === review).length])) as Record<NoteCoverReview, number>;
-  return { rows, counts, reviewCounts, updatedAt: ledger.updatedAt };
+  return { rows, counts, reviewCounts, updatedAt: ledger.updatedAt, policies };
 }

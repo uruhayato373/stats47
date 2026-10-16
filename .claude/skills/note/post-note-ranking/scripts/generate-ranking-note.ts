@@ -748,7 +748,6 @@ https://stats47.jp
     rankingKey,
     year,
     charts: [
-      'images/cover-1280x670.png',
       'images/choropleth-map-1080x1080.png',
       'images/chart-x-1200x630.png',
       'images/boxplot-1200x630.png',
@@ -882,7 +881,6 @@ async function check(rankingKey: string, requireImages: boolean) {
     errors.push('provenance source不一致');
 
   const expected = new Map([
-    ['images/cover-1280x670.png', [1280, 670]],
     ['images/choropleth-map-1080x1080.png', [1080, 1080]],
     ['images/chart-x-1200x630.png', [1200, 630]],
     ['images/boxplot-1200x630.png', [1200, 630]],
@@ -903,7 +901,7 @@ async function check(rankingKey: string, requireImages: boolean) {
     }
   }
   if (
-    provenance.charts.length !== 4 ||
+    (provenance.charts.length !== 3 && !(provenance.charts.length === 4 && provenance.charts.includes('images/cover-1280x670.png'))) ||
     [...expected.keys()].some((name) => !provenance.charts.includes(name))
   )
     errors.push('provenance charts不一致');

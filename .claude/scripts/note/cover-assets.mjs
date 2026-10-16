@@ -180,16 +180,26 @@ if (command === 'seed') {
   const store = createCoverStore();
   for (const item of manifest.articles.filter((a) => a.action !== 'keep' && (!keys.size || keys.has(a.key)))) {
     if (!catalog.some((a) => a.key === item.key && (a.noteUrl ?? null) === (item.noteUrl ?? null))) throw Error('manifest catalog mismatch');
-    await registerCoverCandidate(item, fs.readFileSync(item.file), manifest.version, store);
+    const originalFile = item.originalFile ?? item.backgroundFile;
+    await registerCoverCandidate(item, fs.readFileSync(item.file), manifest.version, store, originalFile ? fs.readFileSync(originalFile) : undefined,
+      item.referenceFile ? fs.readFileSync(item.referenceFile) : undefined);
   }
   console.log('Remote import verified; candidates await review in the ledger');
 } else if (command === 'review') {
   if (keys.size !== 1 || !options.revision || !options.status || !options.reason) throw Error('review requires one --keys, --revision, --status and --reason');
   const articleKey = [...keys][0];
-  const revision = readCoverLedger().articles.find((a) => a.articleKey === articleKey)?.revisions.find((r) => r.id === options.revision);
+  const { assertCurrentCoverCandidate } = await import('./lib/cover-production.mjs');
+  const row = readCoverLedger().articles.find((a) => a.articleKey === articleKey);
+  const revision = row?.revisions.find((r) => r.id === options.revision);
   if (!revision) throw Error('unknown revision');
+  assertCurrentCoverCandidate(row, options.revision);
   await readStoredCover(revision);
-  await updateCoverLedger((ledger) => reviewCoverRevision(ledger.articles.find((a) => a.articleKey === articleKey), options.revision, options.status, options.reason));
+  await readStoredCoverInput(revision);
+  await updateCoverLedger((ledger) => {
+    const current = ledger.articles.find((a) => a.articleKey === articleKey);
+    assertCurrentCoverCandidate(current, options.revision);
+    reviewCoverRevision(current, options.revision, options.status, options.reason);
+  });
   console.log('Review saved for the exact remote revision');
 } else if (command === 'verify') {
   const store = createCoverStore();

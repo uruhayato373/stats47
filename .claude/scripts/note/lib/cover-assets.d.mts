@@ -1,3 +1,7 @@
+export interface CoverDataScope { place: string; year: string; households: '二人以上の世帯' }
+export interface CoverBrief { headline: string; subline: string; subject: string; evidence: string; dataScope?: CoverDataScope }
+export interface CoverProduction { id: string; policyId: string; policyVersion: number; brief: CoverBrief | null }
+export interface CoverProductionReference { id: string; policyId: string; policyVersion: number; planSha256: string }
 export interface CoverRevision {
   id: string; kind: 'candidate' | 'published-original' | 'r2-archive'; version: string; createdAt: string;
   storage: { provider: 'r2-private'; bucket: 'stats47-private'; key: string };
@@ -5,9 +9,11 @@ export interface CoverRevision {
   quality?: { textBounds: 'pass'; textOverlap: 'pass'; evidenceSha256: string };
   review: { status: 'pending' | 'pass' | 'needs-revision' | 'not-required'; reason: string | null; reviewedAt: string | null };
   provenance: { renderer: string | null; sourceUrl: string | null; sourceSha256: string | null;
+    production?: CoverProductionReference;
     input?: { sha256: string; bytes: number; storage: CoverRevision['storage'] } };
 }
 export interface CoverArticle {
+  production?: CoverProduction;
   articleKey: string; noteUrl: string | null; revisions: CoverRevision[];
   candidateRevisionId: string | null; approvedRevisionId: string | null; missingVersions: string[];
   published: { status: 'configured' | 'missing' | 'unknown'; url: string | null; observedAt: string; revisionId: string | null } | null;

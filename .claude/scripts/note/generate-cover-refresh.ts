@@ -33,7 +33,9 @@ import { NOTE_ARTICLES } from './catalog';
 import { noteCoverCategory } from './catalog/cover-categories';
 import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { assertCoverGenerationType } from './lib/cover-assets.mjs';
 async function main() {
+  assertCoverGenerationType('note-covers');
   const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
   const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
   const ROOT = path.resolve(

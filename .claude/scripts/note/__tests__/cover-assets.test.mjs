@@ -130,6 +130,22 @@ test('failed remote verification never reports a registered asset', async () => 
   await assert.rejects(fetchCoverSource('https://example.com/private'), /host not allowed/);
 });
 
+test('production inputs retain the generated original and reject missing or tampered backgrounds', async () => {
+  const objects = new Map();
+  const store = { get: async key => objects.get(key), put: async (key, bytes) => objects.set(key, bytes) };
+  const key = 'pinned-intro';
+  const original = await storeCoverBytes(key, Buffer.from('generated-original'), store);
+  const evidence = { background: original, backgroundSha256: original.sha256 };
+  const input = await storeCoverInput(key, Buffer.from(JSON.stringify(evidence)), store);
+  const image = await storeCoverBytes(key, Buffer.from('composed-image'), store);
+  const revision = { ...image, quality: { evidenceSha256: input.sha256 }, provenance: { input, production: {} } };
+  assert.deepEqual(JSON.parse((await readStoredCoverInput(revision, store)).toString()), evidence);
+  objects.set(original.storage.key, Buffer.from('tampered'));
+  await assert.rejects(readStoredCoverInput(revision, store), /background missing or SHA/);
+  objects.delete(original.storage.key);
+  await assert.rejects(readStoredCoverInput(revision, store), /background missing or SHA/);
+});
+
 test('expired remote sessions renew once for concurrent image reads and reload rotated tokens', async () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-auth-test-'));
   const config = path.join(directory, 'config.toml'); let renewals = 0;

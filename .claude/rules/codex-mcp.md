@@ -28,8 +28,11 @@ codex login                # ChatGPT アカウント。認証情報はエージ�
 codex login status         # → "Logged in using ChatGPT" なら準備完了
 ```
 
-- 入口は `.mcp.json` の `codex` エントリ (`type: stdio` / `command: codex` / `args: ["mcp-server"]`)。
+- 入口は `.mcp.json` の `codex` エントリ (`type: stdio` / `command: npx` / `args: ["-y", "@openai/codex@0.153.0", "mcp-server"]`)。
   **`codex mcp` は別物** (Codex が外部 MCP を使う側の管理コマンド)。サーバー起動は `codex mcp-server`。
+  **`mcp-server` は codex 0.154.0 で削除された** (2026-10-15 に 0.150〜0.162 を `npx … --help` で確認。0.153.0 が最後)。
+  手元の `codex` を最新に更新すると MCP が「Connection closed」で落ちるので、MCP だけ 0.153.0 を npx で固定する。
+  Claude Code の「ローカル」設定 (`~/.claude.json` の `projects["<repo>"].mcpServers.codex`) が優先されるので、同じ値にそろえる。
 - `.mcp.json` は git tracked なので設定は全マシンに共有されるが、**CLI 本体と認証はマシンごと**。
   未インストールのマシンでは MCP 接続が失敗するだけで、他のツールには影響しない。
 - 認証は `~/.codex/auth.json`。**このファイルを読まない・コピーしない・ログに出さない。**
@@ -93,6 +96,16 @@ Claude Codeが生成要求JSONを組み立て直さず、
 exact bytesのSSOTは `assets/blog/codex-backgrounds/*.jpg`。
 MCP prompt、自由入力prompt、生成済み画像をskill/ruleへ複製しない。Codex MCPが使えない場合に
 Geminiへ暗黙fallbackしない。R2 push / deployはCodexへ委譲しない。
+
+### note記事カバーの画像生成（2026-10-14）
+
+入口は `/image-prompt --use-case note-header`。全カテゴリ・新規・差し替えで同じ契約を使う。
+Claudeは `note:cover-production export` が出したrequest JSONのpathをCodex MCPへ渡す。
+
+1. `mcp__codex__codex` をrepo rootのcwd、read-only、approval-policy neverで呼ぶ。
+2. 指示は「requestを読み、imagePromptを使いbuilt-in imagegenで文字込み完成PNGを1枚生成する。repo編集・採用・公開はせず、画像path・実際のprompt・requestのplanSha256を返す」。手書きの画像描画コードを許可しない。
+3. 原寸/320pxの目視確認、`prepare-image`、private R2へのimport、管理画面の採用は呼び出し側で行う。
+4. MCP/画像生成が利用不能なら生成待ちで止める。ClaudeのSVG/HTML/Canvas/Python/Remotion/Satori描画や別画像モデルへのフォールバックは禁止。
 
 ## 3. パラメータ規律 (これが git 混入を防ぐ主装置)
 

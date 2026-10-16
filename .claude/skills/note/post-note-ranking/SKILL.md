@@ -25,7 +25,6 @@ docs/31_note記事原稿/a-<rankingKey>/
 ├── data-provenance.json
 ├── tags.txt
 └── images/
-    ├── cover-1280x670.png
     ├── choropleth-map-1080x1080.png
     ├── chart-x-1200x630.png
     └── boxplot-1200x630.png
@@ -90,7 +89,7 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 ## Phase 4: 画像を生成する
 
-`chart-data.json`から4枚を生成する。新しいrendererや一時SSOTを作らない。
+`chart-data.json`から本文画像3枚を生成する。新しいrendererや一時SSOTを作らない。
 画像生成を依頼されていない場合は省略できるが、chatで未生成と明示する。
 
 ```bash
@@ -100,13 +99,9 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 `images/*.png`はgitに載らず、`render-spec.json`（`chart-data.json`のSHA・テンプレート版）が作り直しの根拠になる。
 
-生成AI（imagegen/Codex）の背景をカバーに使う場合は、作り直せない入力なので保管する（契約6・`.claude/rules/note-image-assets.md`）。
-
-```bash
-node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --input <画像> --stash          # 候補をDrive(非公開)へ
-node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --input drive:a-<rankingKey>/<file> --model "<モデル>" --prompt "<指示文>" --write-spec
-# R2へ反映(書込権限のある環境)してから: node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
-```
+カバーは全記事共通の `/image-prompt --use-case note-header` を使い、Codex imagegenで文字込み生成する。
+Claudeによる代作・SVG組版・旧背景経路は禁止。元画像と確認結果をprivate R2へ保存し、管理画面で比較・採用する。
+カバーの制作ID・最新版仕様・画像SHA・目視確認が揃わなければ、新規投稿時の `materialize-cover.mjs` が停止する。
 
 ## Gate
 
@@ -114,7 +109,7 @@ node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --inp
 - draft表題の問いが`copy.hook`、1位県が`data[0].area_name`と一致する。
 - 画像の`displayTitle`が`copy.readerLabel`と一致し、正式名を平易名として再利用しない。
 - `data-provenance.json`のrankingKey/year/source/chart一覧が実ファイルと一致する。
-- 生成対象ならPNG 4枚がdecodeでき、期待寸法である。
+- 生成対象なら本文PNG 3枚がdecodeでき、期待寸法である。
 - stats47 linkが`/rankings/`でなく`/ranking/`を使う。
 - R2 sync、commit、push、note公開をローカル生成の完了に含めない。
 
