@@ -82,7 +82,7 @@
 
 | agent | 領域 | role | 派生元 |
 |---|---|---|---|
-| `gsc-analyst` 🆕 | site | GSC 専任 (fetch + inspect + improvement + indexing) | seo-auditor 分割 |
+| `gsc-analyst` 🆕 | site | GSC検索実績・全除外理由/通知/拡張の画面監査・是正・Google再検証。週次/月次レビューへの引き渡しは `/gsc-improvement` | seo-auditor 分割 |
 | `ga4-analyst` 🆕 | site | GA4 専任 | seo-auditor 分割 |
 | `performance-auditor` 🆕 | site | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `affiliate-manager` 🆕 | affiliate | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測値の取得は ga4-analyst (分析は本 agent・2026-09-30 に adsense-analyst を統合)、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
@@ -122,11 +122,11 @@
 
 | 同時起動シナリオ | 各 agent の file boundary |
 |---|---|
-| `trend-scout` + `gsc-analyst` + `ga4-analyst` | `state/blog/` vs `state/metrics/gsc/` vs `state/metrics/ga4/` |
+| `trend-scout` + `gsc-analyst` + `ga4-analyst` | `state/blog/` vs `data/gsc/` vs `state/metrics/ga4/` |
 | `article-writer × 最大3` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `contents/blog/<slug>/` を読むのみ |
 | `data-ingester` → `snapshot-exporter` → `r2-publisher` | git TS / API → `.local/r2/app/` → R2 push の一方向。同ranking_keyは逐次 |
 | `x-strategist` + `instagram-strategist` | API / state / metrics サブディレクトリが完全分離 |
-| `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `.claude/todo/improvements.md` 排他 append |
+| `gsc-analyst` + `improvement-triage` | gsc-analyst → `data/gsc/` の監査/検証証拠、triage → `.claude/todo/improvements.md` 排他更新 |
 | `code-reviewer` + 必要な専門reviewer 1体 | 同じdiffの重複reviewはせず、UIまたはtest設計がscopeにある時だけ追加 |
 | `ranking-ui-manager` + `ranking-publisher` | `features/ranking/**` (UI) vs `config/*-ranking-keys.ts` + 公開 scripts (publish) で非重複 |
 | `ranking-content-author` + `ranking-content-critic` | author=`app/ranking/<key>/ai-content.json` write (key単位) vs critic=read-only。非衝突 |

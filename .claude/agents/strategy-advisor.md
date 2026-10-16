@@ -14,6 +14,7 @@ model: opus
 ## 担当範囲
 
 - 週次計画・レビューサイクルの実行
+- 週次・月次レビューでGSC画面監査・本番是正・Google検証と残カード/確認日を集約する。正典は `/gsc-improvement`「画面監査・技術是正とレビューへの引き渡し」、詳細調査のownerはgsc-analyst
 - 戦略立案（NSM, 成長ループ, 収益化）
 - stats47 2.0事業計画の型付きSSOT、開始ゲート、KPI、管理画面stateの運用。KPI ツリー (NSM→駆動KPI→ガードレール、収益化戦略 §1.1) の定義変更は catalog の `kpiTier` で行い、週次・月次の判定は `measurement-cycle/LATEST.md` の「KPI ツリー」節を読む
 - YouTube 通常動画 pilot (EXP-006) の企画順・計測日・継続/停止判定。制作物そのものは各 owner へ渡す
@@ -28,6 +29,7 @@ model: opus
 | `/weekly-review` | 5観点の決定的データ収集→週次レビュー |
 | `/monthly-review` | 前月の週次レビュー・計測サイクル・効果判定を集約→月次レビュー |
 | `/monthly-plan` | 月次レビューを読み今月の重点1-2テーマ→月次計画 |
+| `/gsc-improvement` | 監査/本番是正/Google検証の証拠をレビューへ取り込む。技術調査はgsc-analyst、effect更新はimprovement-triage |
 | `/critical-review` | 設計書・計画書の批判的レビュー |
 | `/pre-mortem` | Pre-Mortem 分析 |
 | `/growth-loops` | 成長ループの設計 |

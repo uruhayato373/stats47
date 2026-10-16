@@ -1,5 +1,5 @@
 {
-  "_comment": "週次・月次レビューと計画の配線の正本 (2026-10-01、doboku-note の review-wiring を stats47 の計測→記録→改善サイクルへ移植)。読み口は .claude/scripts/management/lib/review-cadence.mjs だけ。検査 = check-review-cadence.mjs (Stop hook・review-cadence-guard.yml・docs:check DG084)、表示 = 管理画面 /strategy/reviews/{weekly,monthly}、週次メトリクス Issue の「サイクルの健全性」節。contractFrom より前の期間は必須見出しと申し送りの振り分けを検査しない (遡って書き直さない)。inputs はレビューのスキルが実際に使うコマンド・state で、run は SKILL.md に同じ文字列があること、read はパスが実在することを検査する。",
+  "_comment": "週次・月次レビューと計画の配線の正本 (2026-10-01、doboku-note の review-wiring を stats47 の計測→記録→改善サイクルへ移植)。読み口は .claude/scripts/management/lib/review-cadence.mjs だけ。検査 = check-review-cadence.mjs (Stop hook・review-cadence-guard.yml・docs:check DG084)、表示 = 管理画面 /strategy/reviews/{weekly,monthly}、週次メトリクス Issue の「サイクルの健全性」節。contractFrom より前の期間は必須見出しと申し送りの振り分けを検査しない (遡って書き直さない)。inputs はレビューのスキルが実際に使うコマンド・state で、run は SKILL.md に同じ文字列があること、read はパスが実在することを検査する。 requireInSkill=true の read は SKILL.md / reference/runbook.md から参照が消えても配線違反にする。",
   "handoffRouting": {
     "marker": "→ 振り分け:",
     "routes": [
@@ -42,6 +42,21 @@
         {
           "label": "GSC 入力契約",
           "run": "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input"
+        },
+        {
+          "label": "GSC画面監査・技術是正の証拠",
+          "read": "data/gsc/ui-audits",
+          "requireInSkill": true
+        },
+        {
+          "label": "GSC是正・Google検証の詳細ログ",
+          "read": "data/improvement/gsc-improvement/improvement-log.md",
+          "requireInSkill": true
+        },
+        {
+          "label": "技術是正の残カード・確認日",
+          "read": ".claude/todo/backlog.md",
+          "requireInSkill": true
         },
         {
           "label": "検索成長の候補",
@@ -171,6 +186,21 @@
         {
           "label": "GSC 月次の接続ゲート",
           "run": "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly"
+        },
+        {
+          "label": "GSC画面監査・技術是正の証拠",
+          "read": "data/gsc/ui-audits",
+          "requireInSkill": true
+        },
+        {
+          "label": "GSC是正・Google検証の詳細ログ",
+          "read": "data/improvement/gsc-improvement/improvement-log.md",
+          "requireInSkill": true
+        },
+        {
+          "label": "技術是正の残カード・確認日",
+          "read": ".claude/todo/backlog.md",
+          "requireInSkill": true
         },
         {
           "label": "改善施策",

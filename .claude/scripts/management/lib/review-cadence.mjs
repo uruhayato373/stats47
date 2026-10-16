@@ -244,7 +244,7 @@ export function checkReview(review, conf, { marker, ids, checkIds }) {
 
 // ---------- 配線 (inputs) ----------
 
-/** inputs の run は SKILL.md に同じ文字列があること・実体があること、read はパスが実在すること */
+/** run は手順と実体、read は実在を検査する。requireInSkill の read は手順からの参照も必須。 */
 export function checkWiring(root, wiring) {
   const pkg = JSON.parse(readText(root, "package.json") ?? "{}").scripts ?? {};
   const rows = [];
@@ -261,7 +261,10 @@ export function checkWiring(root, wiring) {
         if (npm && !pkg[npm]) problem = `package.json に ${npm} が無い`;
         else if (file && !existsSync(join(root, file))) problem = `${file} が無い`;
         else if (!skillText.includes(input.run)) problem = "スキルの手順に無い";
-      } else if (input.read && !existsSync(join(root, input.read))) problem = "パスが無い";
+      } else if (input.read) {
+        if (!existsSync(join(root, input.read))) problem = "パスが無い";
+        else if (input.requireInSkill && !skillText.includes(input.read)) problem = "スキルの参照手順に無い";
+      }
       rows.push({ cadence, label: input.label, target: input.run ?? input.read, problem });
     }
   }

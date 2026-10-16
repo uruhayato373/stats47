@@ -143,6 +143,7 @@
 週次の PDCA サイクル。詳細は各 SKILL.md を参照。
 
 - `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
+- 週次・月次ともGSC画面監査・本番是正・Google再検証と残カード/確認日を入力に含める。運用正典は `/gsc-improvement`「画面監査・技術是正とレビューへの引き渡し」、必須入力は `.claude/config/review-wiring.json`。
 - `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
 **保存先**: 計画は `.claude/todo/weekly.md`（毎週上書き）、レビューは `data/reviews/weekly/YYYY-Www.md`（agent用履歴）

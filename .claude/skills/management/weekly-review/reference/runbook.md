@@ -165,6 +165,12 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      真実源は `data/gsc/coverage-remediation/coverage-remediation-queue.json`。今週実行する場合だけ
      `.claude/todo/weekly.md` から参照し、完了済みの旧改善IDをTODOへ戻さない。
 
+   **GSC画面監査・技術是正**:
+   `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md` を読む。
+   全除外理由・メッセージ・Dataset等の拡張を扱う共通手順は `/gsc-improvement` の
+   「画面監査・技術是正とレビューへの引き渡し」。検索実績API/coverageキューの更新を画面確認の代わりにしない。
+   作業実績は実行日時のJST週、GSC件数は観測日に帰属させ、修正・本番確認・Google検証を分けて記録する。
+
 4.5. 週次収益 (NSM) と AdSense
    `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <当週 YYYY-Www>` を実行し、
    「週次収益 (NSM)」節をレビューへ載せる。NSM は AdSense 確定額 + アフィリエイト発生額 + 商品の実売額で、
@@ -481,6 +487,14 @@ snapshot CSV: `data/gsc/snapshots/YYYY-Www/`
 
 `snapshots/YYYY-Www/index-coverage.csv` が存在する場合は以下を 1 行で:
 - 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / 登録済みの前週差
+
+「計測→記録→改善サイクル」に次のGSC技術是正表を含める。更新が無ければ変更なし/未取得を区別し、
+確認期日が来たGoogle検証の再確認と残カードへの振り分けを省かない。
+
+| 対象/問題 | 観測日・報告値/例示範囲 | 本番確認 | Google検証 | 残カードID・次回確認日 | 証拠 |
+|---|---|---|---|---|---|
+
+修正をdeployしたこと、Googleがリクエストを受理/検証開始したこと、再クロール後の合格/登録は別の結果として書く。
 
 **GSC運用サイクル**: `data/gsc/operations-cycle-LATEST.md` と対象週の
 `data/effect-verdict/verdicts-YYYY-Www.json`を参照し、FAIL/WARNと次アクションを記載する。

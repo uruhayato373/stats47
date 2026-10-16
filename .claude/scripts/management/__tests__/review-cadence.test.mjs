@@ -228,6 +228,27 @@ test("配線: inputs の run がスキルの手順に無い・read のパスが�
   assert.ok(codes(r, "error").includes("wiring-broken"));
 });
 
+for (const cadence of ["weekly", "monthly"]) {
+  test(`配線: ${cadence} の必須監査入力は、保存先が存在してもスキルから参照が消えれば検出する`, () => {
+    const root = fixture();
+    const wiringPath = ".claude/config/review-wiring.json";
+    const wiring = JSON.parse(readFileSync(join(root, wiringPath), "utf8"));
+    const inputPath = "data/gsc/ui-audits";
+    mkdirSync(join(root, inputPath), { recursive: true });
+    wiring.cadences[cadence].inputs.push({ label: "GSC画面監査", read: inputPath, requireInSkill: true });
+    write(root, wiringPath, JSON.stringify(wiring));
+
+    const missing = reviewCadence(root, at("2026-10-06"));
+    assert.equal(missing.wiring.find(w => w.cadence === cadence && w.target === inputPath).problem, "スキルの参照手順に無い");
+    assert.ok(codes(missing, "error").includes("wiring-broken"));
+
+    write(root, wiring.cadences[cadence].skill, `node tools/check.mjs\n${inputPath} を読む`);
+    const connected = reviewCadence(root, at("2026-10-06"));
+    assert.equal(connected.wiring.find(w => w.cadence === cadence && w.target === inputPath).problem, null);
+    assert.ok(!codes(connected, "error").includes("wiring-broken"));
+  });
+}
+
 test("全部揃っていれば findings は 0 件", () => {
   const root = fixture({ weeks: { "2026-W40": okWeek(), "2026-W41": okWeek() }, months: { "2026-09": okMonth }, weeklyPlan: "2026-W42" });
   assert.deepEqual(reviewCadence(root, at("2026-10-13")).findings, []);
