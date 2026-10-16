@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+import { mediaViewRedirect } from '@/lib/media-workspace-navigation';
 import { MediaWorkspace } from '@/components/content/media-workspace';
 import { PageHeading } from '@/components/ops/primitives';
 import { qualityOverview } from '@/lib/server/content-quality';
@@ -19,6 +21,8 @@ export default async function Page({
   }>;
 }) {
   const query = await searchParams;
+  const destination = mediaViewRedirect(query);
+  if (destination) redirect(destination);
   return (
     <div className="space-y-6">
       <PageHeading
@@ -33,13 +37,7 @@ export default async function Page({
       <MediaWorkspace
         key={JSON.stringify(query)}
         initial={qualityOverview()}
-        mode={
-          query.view === 'templates'
-            ? 'templates'
-            : query.view === 'articles'
-              ? 'articles'
-              : 'images'
-        }
+        mode="images"
         initialOwner={query.owner}
         initialImage={query.image}
         initialChannel={query.channel}

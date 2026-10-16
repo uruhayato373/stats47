@@ -4,6 +4,7 @@ import {
   channelExamples,
   channelRatios,
   exampleDimensions,
+  templateSamplePool,
 } from '@/lib/media-template-examples';
 import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 
@@ -28,6 +29,28 @@ function candidate(id: string, patch: Partial<ImageView> = {}): ImageView {
   });
 }
 describe('template reference images', () => {
+  it('keeps every medium/ratio sample and full counts while reducing the browser payload', () => {
+    const images = [
+      ...Array.from({ length: 20 }, (_, n) =>
+        image('square-' + n, { channel: 'x', width: 1080, height: 1080 })
+      ),
+      image('portrait', { channel: 'x', width: 1080, height: 1350 }),
+      candidate('note', { channel: 'note' }),
+      image('web', { templateId: 'svg-scatter', channel: 'web' }),
+    ];
+    const pool = templateSamplePool(images);
+    expect(pool.counts).toEqual({ ranking: 22, 'svg-scatter': 1 });
+    expect(pool.images.length).toBeLessThan(images.length);
+    for (const channel of ['note', 'x', 'web']) {
+      for (const ratio of ['', ...channelRatios(images, channel)]) {
+        expect(
+          channelExamples(pool.images, channel, ratio).map((e) => e.image.id)
+        ).toEqual(
+          channelExamples(images, channel, ratio).map((e) => e.image.id)
+        );
+      }
+    }
+  });
   it('prefers directly stored originals over Drive-only examples and excludes rejected-only ratios', () => {
     const drive = image('a-drive', {
       channel: 'x',

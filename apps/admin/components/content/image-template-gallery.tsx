@@ -1,5 +1,12 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import {
+  mediaUrl,
+  templateMedium,
+  type TemplateMedium,
+} from '@/lib/media-workspace-navigation';
+import { MediaWorkspaceNav } from './media-workspace-nav';
 import Link from 'next/link';
 import type {
   ImageView,
@@ -12,7 +19,7 @@ import {
   MEDIA_CHANNELS,
   type TemplateExample,
 } from '@/lib/media-template-examples';
-import { PanelCard, StatusBadge } from '@/components/admin-ui';
+import { StatusBadge } from '@/components/admin-ui';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -50,10 +57,23 @@ const usages: Record<string, string> = {
 const sizeText = (size: { width: number; height: number }) =>
   `${size.width} × ${size.height}px`;
 
+function updateView(patch: Record<string, string>) {
+  const url = new URL(window.location.href);
+  for (const [key, value] of Object.entries(patch)) {
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
+  window.history.replaceState(null, '', url);
+}
+
+type PolicyDraft = Pick<EditableTemplate, 'policy' | 'profiles' | 'revision'>;
+
 function ExamplePreview({
   example,
   label,
+  returnTo,
 }: {
+  returnTo: string;
   example: TemplateExample;
   label: string;
 }) {
@@ -118,7 +138,13 @@ function ExamplePreview({
           </a>
         </Button>
         <Button asChild variant="outline" size="sm">
-          <Link href={'/ops/image-library?image=' + example.image.id}>
+          <Link
+            href={mediaUrl('images', {
+              image: example.image.id,
+              template: example.image.templateId,
+              returnTo,
+            })}
+          >
             比較・元データ・改善
           </Link>
         </Button>
@@ -141,34 +167,48 @@ function MediumExamples({
   images: ImageView[];
   channel: keyof typeof channels;
 }) {
-  const [ratio, setRatio] = useState('');
-  const [selected, setSelected] = useState(0);
-  const examples = channelExamples(images, channel, ratio);
+  const params = useSearchParams();
   const ratios = channelRatios(images, channel);
-  const index = Math.min(selected, Math.max(0, examples.length - 1));
+  const requestedRatio = params.get('ratio-' + channel) ?? '';
+  const ratio = ratios.includes(requestedRatio) ? requestedRatio : '';
+  const examples = channelExamples(images, channel, ratio);
+  const index = Math.max(
+    0,
+    examples.findIndex((e) => e.image.id === params.get('sample-' + channel))
+  );
+  const returnTo = mediaUrl('templates', Object.fromEntries(params));
   const example = examples[index];
   const label = `${template.label}・${channels[channel]}`;
   return (
     <section aria-label={label} className="min-w-0 space-y-3">
-      <h3 className="font-semibold">{channels[channel]}</h3>
-      <NativeSelect
-        aria-label={label + 'の比率'}
-        value={ratio}
-        onChange={(e) => {
-          setRatio(e.target.value);
-          setSelected(0);
-        }}
-      >
-        <option value="">すべての比率</option>
-        {ratios.map((value) => (
-          <option key={value} value={value}>
-            {value}
-          </option>
-        ))}
-      </NativeSelect>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="font-semibold">{channels[channel]}</h3>
+        <NativeSelect
+          aria-label={label + 'の比率'}
+          value={ratio}
+          onChange={(e) => {
+            updateView({
+              ['ratio-' + channel]: e.target.value,
+              ['sample-' + channel]: '',
+            });
+          }}
+        >
+          <option value="">すべての比率</option>
+          {ratios.map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </NativeSelect>
+      </div>
       {example ? (
         <>
-          <ExamplePreview key={example.src} example={example} label={label} />
+          <ExamplePreview
+            key={example.src}
+            example={example}
+            label={label}
+            returnTo={returnTo}
+          />
           {examples.length > 1 && (
             <div className="flex items-center gap-2">
               <Button
@@ -176,7 +216,11 @@ function MediumExamples({
                 size="sm"
                 disabled={index === 0}
                 aria-label={label + 'の前の見本'}
-                onClick={() => setSelected(index - 1)}
+                onClick={() =>
+                  updateView({
+                    ['sample-' + channel]: examples[index - 1].image.id,
+                  })
+                }
               >
                 前
               </Button>
@@ -188,7 +232,11 @@ function MediumExamples({
                 size="sm"
                 disabled={index >= examples.length - 1}
                 aria-label={label + 'の次の見本'}
-                onClick={() => setSelected(index + 1)}
+                onClick={() =>
+                  updateView({
+                    ['sample-' + channel]: examples[index + 1].image.id,
+                  })
+                }
               >
                 次
               </Button>
@@ -255,27 +303,46 @@ function TemplateCard({
   images,
   count,
   onSave,
+  medium,
+  draft,
+  onDraft,
 }: {
   template: EditableTemplate;
   images: ImageView[];
   count: number;
   onSave: Save;
+  medium: TemplateMedium;
+  draft?: PolicyDraft;
+  onDraft: (draft: PolicyDraft | null) => void;
 }) {
-  const [policy, setPolicy] = useState(template.policy);
-  const [profiles, setProfiles] = useState(template.profiles);
+  const params = useSearchParams();
+  const returnTo = mediaUrl('templates', Object.fromEntries(params));
+  const { policy, profiles, revision } = draft ?? template;
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const changed =
     policy !== template.policy ||
     JSON.stringify(profiles) !== JSON.stringify(template.profiles);
+  function edit(patch: Partial<PolicyDraft>) {
+    onDraft({ policy, profiles, revision, ...patch });
+  }
   return (
-    <PanelCard
-      title={template.label}
-      description={'方針 v' + template.version + ' · 使用箇所 ' + count + '件'}
-    >
+    <section aria-label={template.label + 'の見本と方針'} className="space-y-4">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h2 className="font-semibold">{template.label}</h2>
+        <p className="text-sm text-console-muted">
+          方針 v{template.version} · 使用箇所 {count}件
+        </p>
+      </div>
       <div className="space-y-4">
-        <div className="grid items-start gap-6 md:grid-cols-3">
-          {MEDIA_CHANNELS.map((channel) => (
+        <div
+          className={
+            medium === 'compare'
+              ? 'grid items-start gap-6 @min-[850px]:grid-cols-3'
+              : 'mx-auto w-full max-w-xl'
+          }
+        >
+          {(medium === 'compare' ? MEDIA_CHANNELS : [medium]).map((channel) => (
             <MediumExamples
               key={channel}
               template={template}
@@ -284,53 +351,39 @@ function TemplateCard({
             />
           ))}
         </div>
-        {channelExamples(images, 'web').length > 0 && (
-          <details
-            className="space-y-3 border-t border-console-border pt-4"
-            open={
-              !MEDIA_CHANNELS.some(
-                (channel) => channelExamples(images, channel).length
-              )
-            }
-          >
-            <summary className="cursor-pointer text-sm font-medium">
-              Web・ブログの参考見本（媒体別の完成形とは別）
-            </summary>
-            <div className="max-w-sm">
-              <MediumExamples
-                template={template}
-                images={images}
-                channel="web"
-              />
-            </div>
-          </details>
-        )}
         <Button asChild variant="outline" size="sm">
-          <Link href={'/ops/image-library?template=' + template.id}>
+          <Link href={mediaUrl('images', { template: template.id, returnTo })}>
             この型の全画像 · {count}件
           </Link>
         </Button>
-        <p className="text-sm">{template.policy}</p>
+        <details className="space-y-2 text-sm">
+          <summary className="cursor-pointer font-medium">
+            この型の共通方針
+          </summary>
+          <p>{template.policy}</p>
+        </details>
         <details className="space-y-3">
           <summary className="cursor-pointer text-sm font-medium">
-            共通方針・媒体別の調整を編集
+            共通方針・媒体別の調整を編集{changed ? '（未保存）' : ''}
           </summary>
           <Textarea
             aria-label={template.label + 'の共通方針'}
             rows={4}
             value={policy}
-            onChange={(e) => setPolicy(e.target.value)}
+            disabled={busy}
+            onChange={(e) => edit({ policy: e.target.value })}
           />
           {(['note', 'x', 'instagram', 'web'] as const).map((channel) => (
             <label key={channel} className="block space-y-1 text-sm">
               <span>{channels[channel]}</span>
               <Textarea
+                disabled={busy}
                 rows={2}
                 value={
                   profiles[channel] ?? '使用ページの幅と表示テーマで確認する。'
                 }
                 onChange={(e) =>
-                  setProfiles({ ...profiles, [channel]: e.target.value })
+                  edit({ profiles: { ...profiles, [channel]: e.target.value } })
                 }
               />
             </label>
@@ -343,7 +396,8 @@ function TemplateCard({
             onClick={async () => {
               setBusy(true);
               try {
-                await onSave(template, policy, profiles);
+                await onSave({ ...template, revision }, policy, profiles);
+                onDraft(null);
                 setMessage('方針を更新しました。');
               } catch (e) {
                 setMessage((e as Error).message);
@@ -359,22 +413,76 @@ function TemplateCard({
           </p>
         </details>
       </div>
-    </PanelCard>
+    </section>
   );
 }
 
 export function TemplateGallery({
   templates,
   images,
+  counts,
   onSave,
 }: {
   templates: EditableTemplate[];
   images: ImageView[];
+  counts: Record<string, number>;
   onSave: Save;
 }) {
-  const [query, setQuery] = useState('');
-  const [onlyCandidates, setOnlyCandidates] = useState(false);
-  const [coverage, setCoverage] = useState('all');
+  const params = useSearchParams();
+  const root = useRef<HTMLElement>(null);
+  const content = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState<number | null>(null);
+  const [drafts, setDrafts] = useState<Record<string, PolicyDraft>>({});
+  const query = params.get('q') ?? '';
+  const coverage = params.get('coverage') ?? 'all';
+  const onlyCandidates = params.get('candidates') === '1';
+  const dirtyCount = templates.filter((t) => {
+    const draft = drafts[t.id];
+    return (
+      draft &&
+      (draft.policy !== t.policy ||
+        JSON.stringify(draft.profiles) !== JSON.stringify(t.profiles))
+    );
+  }).length;
+  useEffect(() => {
+    if (!root.current) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setWidth(entry.contentRect.width)
+    );
+    observer.observe(root.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!dirtyCount) return;
+    const warn = (event: BeforeUnloadEvent) => event.preventDefault();
+    const warnNavigation = (event: MouseEvent) => {
+      const link = (event.target as Element).closest('a');
+      if (
+        !link ||
+        link.target === '_blank' ||
+        link.getAttribute('aria-current') ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      if (
+        !window.confirm(
+          '未保存の方針があります。ページを移動すると変更が失われます。移動しますか？'
+        )
+      ) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+    window.addEventListener('beforeunload', warn);
+    document.addEventListener('click', warnNavigation, true);
+    return () => {
+      window.removeEventListener('beforeunload', warn);
+      document.removeEventListener('click', warnNavigation, true);
+    };
+  }, [dirtyCount]);
   const groups = useMemo(() => {
     const byType = new Map<string, ImageView[]>();
     for (const image of images) {
@@ -385,22 +493,22 @@ export function TemplateGallery({
     return templates
       .map((template) => {
         const group = byType.get(template.id) ?? [];
-        const examples = [...MEDIA_CHANNELS, 'web'].flatMap((channel) =>
-          channelExamples(group, channel)
+        const available = [...MEDIA_CHANNELS, 'web' as const].filter(
+          (channel) => channelExamples(group, channel).length > 0
         );
         return {
           template,
-          examples,
           images: group,
-          count: group.length,
-          mediaCount: MEDIA_CHANNELS.filter(
-            (channel) => channelExamples(group, channel).length > 0
-          ).length,
-          hasCandidate: examples.some((e) => e.state !== 'existing'),
+          count: counts[template.id] ?? 0,
+          available,
+          mediaCount: available.filter((channel) => channel !== 'web').length,
+          hasCandidate: available.some((channel) =>
+            channelExamples(group, channel).some((e) => e.state !== 'existing')
+          ),
         };
       })
       .sort((a, b) => Number(b.hasCandidate) - Number(a.hasCandidate));
-  }, [templates, images]);
+  }, [templates, images, counts]);
   const shown = groups.filter(
     (g) =>
       (!onlyCandidates || g.hasCandidate) &&
@@ -412,63 +520,188 @@ export function TemplateGallery({
         .toLowerCase()
         .includes(query.toLowerCase())
   );
+  const index = Math.max(
+    0,
+    shown.findIndex((g) => g.template.id === params.get('template'))
+  );
+  const selected = shown[index];
+  const medium =
+    templateMedium(params.get('medium')) ??
+    (width !== null && width >= 850 && selected?.mediaCount
+      ? 'compare'
+      : (selected?.available[0] ?? 'note'));
+  useEffect(() => {
+    if (!selected || width === null) return;
+    if (
+      params.get('template') !== selected.template.id ||
+      !templateMedium(params.get('medium'))
+    ) {
+      updateView({ template: selected.template.id, medium });
+    }
+  }, [selected, medium, params, width]);
+  useEffect(() => {
+    if (content.current) content.current.scrollTop = 0;
+  }, [selected?.template.id, medium]);
+  function choose(id: string) {
+    updateView({
+      template: id,
+      'ratio-note': '',
+      'ratio-x': '',
+      'ratio-instagram': '',
+      'ratio-web': '',
+      'sample-note': '',
+      'sample-x': '',
+      'sample-instagram': '',
+      'sample-web': '',
+    });
+  }
   return (
-    <section className="space-y-4" aria-label="型の基本形を確認">
-      <div className="space-y-2">
-        <h2 className="text-lg font-semibold">
-          note・X・Instagramの基本形を見比べる
-        </h2>
-        <p className="text-sm text-console-muted">
-          各型を媒体別に並べ、各欄に実画像を最大3枚表示します。試作候補を優先し、既存画像を参考として比較できます。題材は画像ごとに異なります。見本の表示は採用や公開を意味しません。
-        </p>
-        <p className="text-sm">
-          {templates.length}型 · 見本あり{' '}
-          {groups.filter((g) => g.examples.length).length}型 ·
-          3媒体の見本登録あり{' '}
-          {groups.filter((g) => g.mediaCount === MEDIA_CHANNELS.length).length}
-          型 · 試作・採用候補あり {groups.filter((g) => g.hasCandidate).length}
-          型
-        </p>
-      </div>
-      <MediaSizes />
-      <div className="flex flex-wrap items-center gap-3">
-        <NativeSelect
-          aria-label="媒体別見本の充足状況"
-          value={coverage}
-          onChange={(e) => setCoverage(e.target.value)}
+    <section
+      ref={root}
+      className="@container flex min-h-0 flex-1 flex-col gap-3"
+      aria-label="型の基本形を確認"
+    >
+      <MediaWorkspaceNav active="templates" template={selected?.template.id} />
+      <div
+        className="shrink-0 space-y-2 border-b border-console-border pb-3"
+        aria-label="見本の切り替え"
+      >
+        <div className="flex items-end gap-2">
+          <label className="min-w-0 max-w-xl flex-1 space-y-1 text-sm [&>[data-slot=native-select-wrapper]]:w-full">
+            <span className="font-medium">型を選択</span>
+            <NativeSelect
+              aria-label="型を選択"
+              value={selected?.template.id ?? ''}
+              onChange={(e) => choose(e.target.value)}
+              disabled={!shown.length}
+            >
+              {!shown.length && (
+                <option value="">該当する型はありません</option>
+              )}
+              {shown.map((g) => (
+                <option key={g.template.id} value={g.template.id}>
+                  {g.template.label}
+                  {drafts[g.template.id] ? ' · 編集中' : ''}
+                </option>
+              ))}
+            </NativeSelect>
+          </label>
+          <Button
+            variant="outline"
+            size="sm"
+            aria-label="前の型"
+            disabled={!selected || index === 0}
+            onClick={() => choose(shown[index - 1].template.id)}
+          >
+            前
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            aria-label="次の型"
+            disabled={!selected || index >= shown.length - 1}
+            onClick={() => choose(shown[index + 1].template.id)}
+          >
+            次
+          </Button>
+        </div>
+        <div
+          role="group"
+          aria-label="見本の媒体"
+          className="flex flex-wrap gap-2"
         >
-          <option value="all">すべての型</option>
-          <option value="complete">3媒体の見本登録あり</option>
-          <option value="missing">媒体別見本が不足</option>
-        </NativeSelect>
-        <Input
-          className="max-w-sm"
-          aria-label="型を検索"
-          placeholder="型名で検索（地図・散布図・OGPなど）"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <label className="flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={onlyCandidates}
-            onChange={(e) => setOnlyCandidates(e.target.checked)}
-          />
-          試作・採用候補のある型だけ
-        </label>
+          {([...MEDIA_CHANNELS, 'web', 'compare'] as const).map((channel) => (
+            <Button
+              key={channel}
+              size="sm"
+              variant={medium === channel ? 'default' : 'outline'}
+              aria-pressed={medium === channel}
+              onClick={() => updateView({ medium: channel })}
+            >
+              {channel === 'compare' ? '3媒体を比較' : channels[channel]}
+            </Button>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-console-muted">
+          <span>
+            {shown.length ? index + 1 : 0} / {shown.length}型 · 見本のある媒体{' '}
+            {selected?.available.length ?? 0}/4
+          </span>
+          {dirtyCount > 0 && (
+            <StatusBadge tone="warn">未保存の方針 {dirtyCount}件</StatusBadge>
+          )}
+          <details>
+            <summary className="cursor-pointer">型を絞り込む</summary>
+            <div className="flex flex-wrap items-center gap-2 py-2">
+              <Input
+                className="max-w-xs"
+                aria-label="型を検索"
+                placeholder="地図・散布図・OGPなど"
+                value={query}
+                onChange={(e) => updateView({ q: e.target.value })}
+              />
+              <NativeSelect
+                aria-label="媒体別見本の充足状況"
+                value={coverage}
+                onChange={(e) => updateView({ coverage: e.target.value })}
+              >
+                <option value="all">すべての型</option>
+                <option value="complete">3媒体の見本登録あり</option>
+                <option value="missing">媒体別見本が不足</option>
+              </NativeSelect>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={onlyCandidates}
+                  onChange={(e) =>
+                    updateView({ candidates: e.target.checked ? '1' : '' })
+                  }
+                />
+                試作・採用候補あり
+              </label>
+            </div>
+          </details>
+        </div>
       </div>
-      <div className="space-y-6">
-        {shown.map((g) => (
+      <div
+        ref={content}
+        className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain pr-1 pb-4"
+        role="region"
+        aria-label="選択した型の見本"
+        tabIndex={0}
+      >
+        {selected ? (
           <TemplateCard
-            key={g.template.id + ':' + g.template.version}
-            {...g}
+            key={selected.template.id}
+            {...selected}
+            medium={medium}
             onSave={onSave}
+            draft={drafts[selected.template.id]}
+            onDraft={(draft) =>
+              setDrafts((current) => {
+                const next = { ...current };
+                if (
+                  draft &&
+                  (draft.policy !== selected.template.policy ||
+                    JSON.stringify(draft.profiles) !==
+                      JSON.stringify(selected.template.profiles))
+                ) {
+                  next[selected.template.id] = draft;
+                } else delete next[selected.template.id];
+                return next;
+              })
+            }
           />
-        ))}
+        ) : (
+          <p className="text-sm text-console-muted">
+            該当する型はありません。絞り込み条件を変更してください。
+          </p>
+        )}
+        <MediaSizes />
+        <p className="text-sm text-console-muted">
+          実画像を各媒体・比率で最大3枚表示します。題材は画像ごとに異なり、見本の表示は採用・公開を意味しません。未登録の媒体はそのまま表示します。
+        </p>
       </div>
-      {!shown.length && (
-        <p className="text-sm text-console-muted">該当する型はありません。</p>
-      )}
     </section>
   );
 }

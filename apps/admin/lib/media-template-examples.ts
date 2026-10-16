@@ -22,6 +22,29 @@ export interface TemplateExample {
   src: string;
   state: 'approved' | 'candidate' | 'stale' | 'existing';
 }
+
+/** Send only the visible sample pool; full ledgers stay on the library page. */
+export function templateSamplePool(images: ImageView[]) {
+  const groups = new Map<string, ImageView[]>();
+  for (const image of images) {
+    const group = groups.get(image.templateId) ?? [];
+    group.push(image);
+    groups.set(image.templateId, group);
+  }
+  const counts: Record<string, number> = {};
+  const samples = new Map<string, ImageView>();
+  for (const [id, group] of groups) {
+    counts[id] = group.length;
+    for (const channel of [...MEDIA_CHANNELS, 'web']) {
+      for (const ratio of ['', ...channelRatios(group, channel)]) {
+        for (const example of channelExamples(group, channel, ratio)) {
+          samples.set(example.image.id, example.image);
+        }
+      }
+    }
+  }
+  return { images: [...samples.values()], counts };
+}
 const order = { approved: 0, candidate: 1, stale: 2, existing: 3 };
 
 // Legacy sample overrides: remove when NOTE-ARTICLE-QUALITY-PILOT-01 separates process timelines and chart types.

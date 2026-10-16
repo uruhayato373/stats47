@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ActualImage } from './media-image';
-import { TemplateGallery } from './image-template-gallery';
+import { MediaWorkspaceNav } from './media-workspace-nav';
 import { originalUrl, candidateUrl } from '@/lib/media-template-examples';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -787,7 +787,7 @@ export function MediaWorkspace({
   initialTemplate = '',
 }: {
   initial: WorkspaceData;
-  mode: 'articles' | 'images' | 'templates';
+  mode: 'articles' | 'images';
   initialOwner?: string;
   initialImage?: string;
   initialChannel?: string;
@@ -920,383 +920,347 @@ export function MediaWorkspace({
     slice = rows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
   return (
     <div className="space-y-6">
-      <nav className="flex flex-wrap gap-2">
-        <Button asChild variant={mode === 'articles' ? 'default' : 'outline'}>
-          <Link href="/ops/image-library?view=articles">記事・投稿の改善</Link>
-        </Button>
-        <Button asChild variant={mode === 'images' ? 'default' : 'outline'}>
-          <Link href="/ops/image-library">画像ライブラリ</Link>
-        </Button>
-        <Button asChild variant={mode === 'templates' ? 'default' : 'outline'}>
-          <Link href="/ops/image-library?view=templates">
-            図の型・媒体別方針
-          </Link>
-        </Button>
-      </nav>
-      {mode !== 'templates' && (
-        <>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <StatCard label="記事・投稿・使用先" value={data.items.length} />
-            <StatCard label="画像の使用箇所" value={data.images.length} />
-            <StatCard
-              label="要改善・再確認"
-              value={
-                data.items.filter((i) =>
-                  ['issue', 'stale'].includes(i.reviewState)
-                ).length
-              }
-            />
-          </div>
-          <details className="text-sm text-console-muted">
-            <summary className="cursor-pointer">
-              棚卸し範囲・不足を確認する（Web索引:{' '}
-              {data.webInventoryUpdatedAt ?? '未取得'}）
-            </summary>
-            <p>
-              画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
-            </p>
-            <ul className="mt-2 space-y-1">
-              {data.coverage?.map((row) => (
-                <li key={row.collection}>
-                  {row.collection}: {row.images}件 / SHA記録あり {row.verified}
-                  件 / 未照合 {row.unverified}件 / 取得不可 {row.missing}件
-                </li>
-              ))}
-            </ul>
-          </details>
-          {data.migration && (
-            <p className="text-sm text-console-muted">
-              旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
-              {data.migration.counts.migrated ?? 0}件 · 元画像未取得{' '}
-              {data.migration.counts['source-unavailable'] ?? 0}件 · 内容不一致{' '}
-              {data.migration.counts['source-mismatch'] ?? 0}件 · 照合未完了{' '}
-              {data.migration.counts.unverified ?? 0}件
-            </p>
-          )}
-        </>
-      )}
-      {mode === 'templates' ? (
-        <TemplateGallery
-          templates={data.templates}
-          images={data.images}
-          onSave={async (t, policy, profiles) => {
-            await requestJson('/api/media-templates/' + t.id, 'PATCH', {
-              revision: t.revision,
-              policy,
-              profiles,
-            });
-            await reload();
-          }}
+      <MediaWorkspaceNav
+        active={mode}
+        template={template || image?.templateId}
+        owner={owner}
+        dirty={dirty}
+      />
+      <div className="grid gap-3 sm:grid-cols-3">
+        <StatCard label="記事・投稿・使用先" value={data.items.length} />
+        <StatCard label="画像の使用箇所" value={data.images.length} />
+        <StatCard
+          label="要改善・再確認"
+          value={
+            data.items.filter((i) => ['issue', 'stale'].includes(i.reviewState))
+              .length
+          }
         />
-      ) : (
-        <>
-          <div className="flex flex-wrap gap-2">
-            {ownerFilter && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setOwnerFilter('');
-                  setPage(0);
-                  const url = new URL(window.location.href);
-                  url.searchParams.delete('owner');
-                  window.history.replaceState(null, '', url);
-                }}
-              >
-                この記事への絞り込みを解除
-              </Button>
-            )}
-            <Input
-              className="max-w-md"
-              aria-label="記事・画像を検索"
-              value={q}
-              onChange={(e) => {
-                setQ(e.target.value);
-                setPage(0);
-              }}
-              placeholder="タイトル・ID・分類・改善方針で検索"
-            />
+      </div>
+      <details className="text-sm text-console-muted">
+        <summary className="cursor-pointer">
+          棚卸し範囲・不足を確認する（Web索引:{' '}
+          {data.webInventoryUpdatedAt ?? '未取得'}）
+        </summary>
+        <p>
+          画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
+        </p>
+        <ul className="mt-2 space-y-1">
+          {data.coverage?.map((row) => (
+            <li key={row.collection}>
+              {row.collection}: {row.images}件 / SHA記録あり {row.verified}件 /
+              未照合 {row.unverified}件 / 取得不可 {row.missing}件
+            </li>
+          ))}
+        </ul>
+      </details>
+      {data.migration && (
+        <p className="text-sm text-console-muted">
+          旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
+          {data.migration.counts.migrated ?? 0}件 · 元画像未取得{' '}
+          {data.migration.counts['source-unavailable'] ?? 0}件 · 内容不一致{' '}
+          {data.migration.counts['source-mismatch'] ?? 0}件 · 照合未完了{' '}
+          {data.migration.counts.unverified ?? 0}件
+        </p>
+      )}
+      <div className="flex flex-wrap gap-2">
+        {ownerFilter && (
+          <Button
+            variant="outline"
+            onClick={() => {
+              setOwnerFilter('');
+              setPage(0);
+              const url = new URL(window.location.href);
+              url.searchParams.delete('owner');
+              window.history.replaceState(null, '', url);
+            }}
+          >
+            この記事への絞り込みを解除
+          </Button>
+        )}
+        <Input
+          className="max-w-md"
+          aria-label="記事・画像を検索"
+          value={q}
+          onChange={(e) => {
+            setQ(e.target.value);
+            setPage(0);
+          }}
+          placeholder="タイトル・ID・分類・改善方針で検索"
+        />
+        <NativeSelect
+          aria-label="媒体"
+          value={channel}
+          onChange={(e) => {
+            setChannel(e.target.value);
+            setPage(0);
+          }}
+        >
+          <option value="">全媒体</option>
+          {Object.entries(CHANNELS).map(([key, label]) => (
+            <option value={key} key={key}>
+              {label}
+            </option>
+          ))}
+        </NativeSelect>
+        <NativeSelect
+          aria-label="確認状況"
+          value={state}
+          onChange={(e) => {
+            setState(e.target.value);
+            setPage(0);
+          }}
+        >
+          <option value="">全確認状況</option>
+          {Object.entries(STATE_LABELS).map(([key, label]) => (
+            <option value={key} key={key}>
+              {label}
+            </option>
+          ))}
+        </NativeSelect>
+        {mode === 'images' && (
+          <>
             <NativeSelect
-              aria-label="媒体"
-              value={channel}
+              aria-label="画像の用途"
+              value={usage}
               onChange={(e) => {
-                setChannel(e.target.value);
+                setUsage(e.target.value);
                 setPage(0);
               }}
             >
-              <option value="">全媒体</option>
-              {Object.entries(CHANNELS).map(([key, label]) => (
-                <option value={key} key={key}>
+              <option value="">すべての用途</option>
+              {Object.entries(IMAGE_USES).map(([key, label]) => (
+                <option key={key} value={key}>
                   {label}
                 </option>
               ))}
             </NativeSelect>
             <NativeSelect
-              aria-label="確認状況"
-              value={state}
+              aria-label="画像形式"
+              value={format}
               onChange={(e) => {
-                setState(e.target.value);
+                setFormat(e.target.value);
                 setPage(0);
               }}
             >
-              <option value="">全確認状況</option>
-              {Object.entries(STATE_LABELS).map(([key, label]) => (
-                <option value={key} key={key}>
-                  {label}
-                </option>
-              ))}
-            </NativeSelect>
-            {mode === 'images' && (
-              <>
-                <NativeSelect
-                  aria-label="画像の用途"
-                  value={usage}
-                  onChange={(e) => {
-                    setUsage(e.target.value);
-                    setPage(0);
-                  }}
-                >
-                  <option value="">すべての用途</option>
-                  {Object.entries(IMAGE_USES).map(([key, label]) => (
-                    <option key={key} value={key}>
-                      {label}
-                    </option>
-                  ))}
-                </NativeSelect>
-                <NativeSelect
-                  aria-label="画像形式"
-                  value={format}
-                  onChange={(e) => {
-                    setFormat(e.target.value);
-                    setPage(0);
-                  }}
-                >
-                  <option value="">すべての形式</option>
-                  {[
-                    ...new Set(
-                      data.images.map((i) => i.format).filter(Boolean)
-                    ),
-                  ]
-                    .sort()
-                    .map((f) => (
-                      <option key={f} value={f}>
-                        {f.toUpperCase()}
-                      </option>
-                    ))}
-                </NativeSelect>
-                <NativeSelect
-                  aria-label="既存カタログ"
-                  value={collection}
-                  onChange={(e) => {
-                    setCollection(e.target.value);
-                    setPage(0);
-                  }}
-                >
-                  <option value="">すべてのカタログ</option>
-                  {[
-                    ...new Set(
-                      data.images
-                        .map((i) => i.collection)
-                        .filter((v): v is string => !!v)
-                    ),
-                  ]
-                    .sort()
-                    .map((f) => (
-                      <option key={f} value={f}>
-                        {f}
-                      </option>
-                    ))}
-                </NativeSelect>
-              </>
-            )}
-            {mode === 'images' && (
-              <NativeSelect
-                aria-label="図の型"
-                value={template}
-                onChange={(e) => {
-                  setTemplate(e.target.value);
-                  setPage(0);
-                }}
-              >
-                <option value="">すべての型</option>
-                {data.templates.map((t) => (
-                  <option key={t.id} value={t.id}>
-                    {t.label}
+              <option value="">すべての形式</option>
+              {[...new Set(data.images.map((i) => i.format).filter(Boolean))]
+                .sort()
+                .map((f) => (
+                  <option key={f} value={f}>
+                    {f.toUpperCase()}
                   </option>
                 ))}
-              </NativeSelect>
+            </NativeSelect>
+            <NativeSelect
+              aria-label="既存カタログ"
+              value={collection}
+              onChange={(e) => {
+                setCollection(e.target.value);
+                setPage(0);
+              }}
+            >
+              <option value="">すべてのカタログ</option>
+              {[
+                ...new Set(
+                  data.images
+                    .map((i) => i.collection)
+                    .filter((v): v is string => !!v)
+                ),
+              ]
+                .sort()
+                .map((f) => (
+                  <option key={f} value={f}>
+                    {f}
+                  </option>
+                ))}
+            </NativeSelect>
+          </>
+        )}
+        {mode === 'images' && (
+          <NativeSelect
+            aria-label="図の型"
+            value={template}
+            onChange={(e) => {
+              setTemplate(e.target.value);
+              setPage(0);
+            }}
+          >
+            <option value="">すべての型</option>
+            {data.templates.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.label}
+              </option>
+            ))}
+          </NativeSelect>
+        )}
+        {mode === 'images' && (
+          <NativeSelect
+            aria-label="画像の保存状況"
+            value={storage}
+            onChange={(e) => {
+              setStorage(e.target.value);
+              setPage(0);
+            }}
+          >
+            <option value="">全保存状況</option>
+            <option value="r2">R2保存</option>
+            <option value="pending">移行・回収待ち</option>
+            <option value="candidate">改善候補あり</option>
+          </NativeSelect>
+        )}
+        <Button
+          variant="outline"
+          onClick={() => reload().catch((e) => setError(e.message))}
+        >
+          再読込
+        </Button>
+      </div>
+      {error && <p role="alert">{error}</p>}
+      <p className="text-xs text-console-muted">
+        画像一覧の取得: {data.inventoryUpdatedAt ?? '未実施'} ·
+        R2保存の記録と再生成の成功は別々に確認します。
+      </p>
+      <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(260px,2fr)_minmax(340px,3fr)]">
+        <Section
+          className="lg:max-h-[75vh] lg:overflow-y-auto"
+          title={mode === 'images' ? '画像' : '記事・投稿'}
+          count={rows.length}
+        >
+          <div
+            className={
+              mode === 'images' ? 'grid gap-3 sm:grid-cols-2' : 'space-y-2'
+            }
+          >
+            {slice.map((row) =>
+              mode === 'images' ? (
+                <button
+                  key={row.id}
+                  className="space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
+                  onClick={() => choose((row as ImageView).owner, row.id)}
+                >
+                  <ActualImage
+                    key={originalUrl(row as ImageView)}
+                    src={originalUrl(row as ImageView)}
+                    alt={(row as ImageView).file}
+                    small
+                  />
+                  <p className="line-clamp-2 text-sm">
+                    {(row as ImageView).title}
+                  </p>
+                  <p className="break-all text-xs text-console-muted">
+                    {(row as ImageView).file}
+                  </p>
+                  <StatusBadge
+                    tone={(row as ImageView).original?.key ? 'good' : 'warn'}
+                  >
+                    {(row as ImageView).original?.key
+                      ? 'R2参照'
+                      : (row as ImageView).original?.provider === 'git'
+                        ? 'Git素材'
+                        : (row as ImageView).original?.provider === 'inline-svg'
+                          ? '本文埋込'
+                          : (row as ImageView).original?.url
+                            ? 'URL参照'
+                            : '未移行・未保全'}
+                  </StatusBadge>
+                </button>
+              ) : (
+                <button
+                  key={row.id}
+                  className="block w-full space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
+                  onClick={() => choose(row.id)}
+                >
+                  <p className="text-sm font-medium">{row.title}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <StatusBadge tone="neutral">
+                      {CHANNELS[row.channel] ?? row.channel}
+                    </StatusBadge>
+                    <StatusBadge
+                      tone={
+                        (row as ItemView).reviewState === 'checked'
+                          ? 'good'
+                          : 'warn'
+                      }
+                    >
+                      {STATE_LABELS[(row as ItemView).reviewState]}
+                    </StatusBadge>
+                  </div>
+                  <p className="break-all text-xs text-console-muted">
+                    {row.id}
+                  </p>
+                </button>
+              )
             )}
-            {mode === 'images' && (
-              <NativeSelect
-                aria-label="画像の保存状況"
-                value={storage}
-                onChange={(e) => {
-                  setStorage(e.target.value);
-                  setPage(0);
-                }}
-              >
-                <option value="">全保存状況</option>
-                <option value="r2">R2保存</option>
-                <option value="pending">移行・回収待ち</option>
-                <option value="candidate">改善候補あり</option>
-              </NativeSelect>
-            )}
+          </div>
+          <div className="mt-4 flex items-center gap-3">
             <Button
               variant="outline"
-              onClick={() => reload().catch((e) => setError(e.message))}
+              size="sm"
+              disabled={!page}
+              onClick={() => setPage(page - 1)}
             >
-              再読込
+              前
+            </Button>
+            <span className="text-sm">
+              {pages ? page + 1 : 0} / {pages}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page + 1 >= pages}
+              onClick={() => setPage(page + 1)}
+            >
+              次
             </Button>
           </div>
-          {error && <p role="alert">{error}</p>}
-          <p className="text-xs text-console-muted">
-            画像一覧の取得: {data.inventoryUpdatedAt ?? '未実施'} ·
-            R2保存の記録と再生成の成功は別々に確認します。
-          </p>
-          <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(260px,2fr)_minmax(340px,3fr)]">
-            <Section
-              className="lg:max-h-[75vh] lg:overflow-y-auto"
-              title={mode === 'images' ? '画像' : '記事・投稿'}
-              count={rows.length}
-            >
-              <div
-                className={
-                  mode === 'images' ? 'grid gap-3 sm:grid-cols-2' : 'space-y-2'
-                }
+        </Section>
+        <PanelCard
+          key={imageId || owner}
+          title={image ? '画像の確認・改善' : '記事の確認・改善'}
+          className="order-first min-w-0 lg:order-none lg:max-h-[75vh] lg:overflow-y-auto"
+        >
+          {image ? (
+            <div className="space-y-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => choose(image.owner)}
               >
-                {slice.map((row) =>
-                  mode === 'images' ? (
-                    <button
-                      key={row.id}
-                      className="space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
-                      onClick={() => choose((row as ImageView).owner, row.id)}
-                    >
-                      <ActualImage
-                        key={originalUrl(row as ImageView)}
-                        src={originalUrl(row as ImageView)}
-                        alt={(row as ImageView).file}
-                        small
-                      />
-                      <p className="line-clamp-2 text-sm">
-                        {(row as ImageView).title}
-                      </p>
-                      <p className="break-all text-xs text-console-muted">
-                        {(row as ImageView).file}
-                      </p>
-                      <StatusBadge
-                        tone={
-                          (row as ImageView).original?.key ? 'good' : 'warn'
-                        }
-                      >
-                        {(row as ImageView).original?.key
-                          ? 'R2参照'
-                          : (row as ImageView).original?.provider === 'git'
-                            ? 'Git素材'
-                            : (row as ImageView).original?.provider ===
-                                'inline-svg'
-                              ? '本文埋込'
-                              : (row as ImageView).original?.url
-                                ? 'URL参照'
-                                : '未移行・未保全'}
-                      </StatusBadge>
-                    </button>
-                  ) : (
-                    <button
-                      key={row.id}
-                      className="block w-full space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
-                      onClick={() => choose(row.id)}
-                    >
-                      <p className="text-sm font-medium">{row.title}</p>
-                      <div className="flex flex-wrap gap-2">
-                        <StatusBadge tone="neutral">
-                          {CHANNELS[row.channel] ?? row.channel}
-                        </StatusBadge>
-                        <StatusBadge
-                          tone={
-                            (row as ItemView).reviewState === 'checked'
-                              ? 'good'
-                              : 'warn'
-                          }
-                        >
-                          {STATE_LABELS[(row as ItemView).reviewState]}
-                        </StatusBadge>
-                      </div>
-                      <p className="break-all text-xs text-console-muted">
-                        {row.id}
-                      </p>
-                    </button>
-                  )
+                記事・投稿の方針へ戻る
+              </Button>
+              <ImageEditor
+                key={image.id + ':' + image.revision}
+                image={image}
+                related={data.images.filter(
+                  (row) =>
+                    image.relatedImageIds.includes(row.id) &&
+                    row.id !== image.id
                 )}
-              </div>
-              <div className="mt-4 flex items-center gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={!page}
-                  onClick={() => setPage(page - 1)}
-                >
-                  前
-                </Button>
-                <span className="text-sm">
-                  {pages ? page + 1 : 0} / {pages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={page + 1 >= pages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  次
-                </Button>
-              </div>
-            </Section>
-            <PanelCard
-              key={imageId || owner}
-              title={image ? '画像の確認・改善' : '記事の確認・改善'}
-              className="order-first min-w-0 lg:order-none lg:max-h-[75vh] lg:overflow-y-auto"
-            >
-              {image ? (
-                <div className="space-y-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => choose(image.owner)}
-                  >
-                    記事・投稿の方針へ戻る
-                  </Button>
-                  <ImageEditor
-                    key={image.id + ':' + image.revision}
-                    image={image}
-                    related={data.images.filter(
-                      (row) =>
-                        image.relatedImageIds.includes(row.id) &&
-                        row.id !== image.id
-                    )}
-                    onSelect={(row) => choose(row.owner, row.id)}
-                    templates={data.templates}
-                    onSaved={reload}
-                    onDirty={setDirty}
-                  />
-                </div>
-              ) : imageId ? (
-                <p role="status">画像の詳細を読み込んでいます。</p>
-              ) : selected ? (
-                <ArticleEditor
-                  key={selected.id + ':' + selected.revision}
-                  item={selected}
-                  images={data.images.filter((i) => i.owner === selected.id)}
-                  onSaved={setData}
-                  onImage={(id) => choose(selected.id, id)}
-                  onDirty={setDirty}
-                />
-              ) : (
-                <p className="text-sm text-console-muted">
-                  左の項目を選ぶと、実際の画像と改善方針をここで確認・編集できます。
-                </p>
-              )}
-            </PanelCard>
-          </div>
-        </>
-      )}
+                onSelect={(row) => choose(row.owner, row.id)}
+                templates={data.templates}
+                onSaved={reload}
+                onDirty={setDirty}
+              />
+            </div>
+          ) : imageId ? (
+            <p role="status">画像の詳細を読み込んでいます。</p>
+          ) : selected ? (
+            <ArticleEditor
+              key={selected.id + ':' + selected.revision}
+              item={selected}
+              images={data.images.filter((i) => i.owner === selected.id)}
+              onSaved={setData}
+              onImage={(id) => choose(selected.id, id)}
+              onDirty={setDirty}
+            />
+          ) : (
+            <p className="text-sm text-console-muted">
+              左の項目を選ぶと、実際の画像と改善方針をここで確認・編集できます。
+            </p>
+          )}
+        </PanelCard>
+      </div>
     </div>
   );
 }

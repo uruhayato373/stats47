@@ -6,7 +6,13 @@ export const metadata = { title: '記事・投稿の改善 — stats47 admin' };
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ owner?: string; image?: string; channel?: string }>;
+  searchParams: Promise<{
+    owner?: string;
+    image?: string;
+    channel?: string;
+    q?: string;
+    template?: string;
+  }>;
 }) {
   const query = await searchParams;
   return (
@@ -21,11 +27,14 @@ export default async function Page({
         </p>
       </PageHeading>
       <MediaWorkspace
+        key={JSON.stringify(query)}
         initial={qualityOverview()}
         mode="articles"
         initialOwner={query.owner}
         initialImage={query.image}
         initialChannel={query.channel}
+        initialQuery={query.q}
+        initialTemplate={query.template}
       />
     </div>
   );

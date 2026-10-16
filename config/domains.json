@@ -98,7 +98,8 @@
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
         { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
-        { "label": "画像・元データ・改善", "href": "/ops/image-library", "kind": "assets" }
+        { "label": "型の見本", "href": "/ops/image-templates", "kind": "assets" },
+        { "label": "画像ライブラリ", "href": "/ops/image-library", "kind": "assets" }
       ]
     }
   ],
