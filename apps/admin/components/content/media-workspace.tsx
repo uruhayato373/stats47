@@ -546,7 +546,7 @@ function ImageEditor({
           )}
         </div>
       </Section>
-      <div className="grid gap-4 xl:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Section title="現在の画像">
           <ActualImage key={old} src={old} alt="現在の画像" />
           {old && (
@@ -907,6 +907,7 @@ export function MediaWorkspace({
   initialUsage = '',
   initialFormat = '',
   initialCollection = '',
+  initialQuery = '',
 }: {
   initial: WorkspaceData;
   mode: 'articles' | 'images' | 'templates';
@@ -916,9 +917,10 @@ export function MediaWorkspace({
   initialUsage?: string;
   initialFormat?: string;
   initialCollection?: string;
+  initialQuery?: string;
 }) {
   const [data, setData] = useState(initial),
-    [q, setQ] = useState(''),
+    [q, setQ] = useState(initialQuery),
     [channel, setChannel] = useState(initialChannel),
     [storage, setStorage] = useState(''),
     [state, setState] = useState(''),
@@ -945,12 +947,13 @@ export function MediaWorkspace({
       format,
       collection,
       owner: ownerFilter,
+      q,
     })) {
       if (value) url.searchParams.set(key, value);
       else url.searchParams.delete(key);
     }
     window.history.replaceState(null, '', url);
-  }, [channel, usage, format, collection, ownerFilter]);
+  }, [channel, usage, format, collection, ownerFilter, q]);
   useEffect(() => {
     const controller = new AbortController();
     setDetail(null);
@@ -1004,7 +1007,7 @@ export function MediaWorkspace({
           (!state || i.reviewState === state) &&
           (mode === 'images' ||
             !q ||
-            (i.title + ' ' + i.id + ' ' + i.category)
+            (i.title + ' ' + i.id + ' ' + i.category + ' ' + i.review.policy)
               .toLowerCase()
               .includes(q.toLowerCase()))
       ),
@@ -1015,7 +1018,7 @@ export function MediaWorkspace({
     (i) =>
       filteredIds.has(i.owner) &&
       (!q ||
-        [i.id, i.file, i.title, i.owner, i.category]
+        [i.id, i.file, i.title, i.owner, i.category, i.policy]
           .join(' ')
           .toLowerCase()
           .includes(q.toLowerCase())) &&
@@ -1123,7 +1126,7 @@ export function MediaWorkspace({
                 setQ(e.target.value);
                 setPage(0);
               }}
-              placeholder="タイトル・記事ID・分類で検索"
+              placeholder="タイトル・ID・分類・改善方針で検索"
             />
             <NativeSelect
               aria-label="媒体"

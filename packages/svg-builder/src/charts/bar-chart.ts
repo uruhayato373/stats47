@@ -392,8 +392,8 @@ function renderMobileSection(
       `  <rect x="${x}" y="${y}" width="${MOBILE_CONTENT_W}" height="${MOBILE_ROW_H}" rx="8" fill="${cardBg}"${highlightAttrs}/>` ,
       `  <circle cx="${badgeCx}" cy="${badgeCy}" r="18" fill="${theme.header}"/>`,
       `  <text x="${badgeCx}" y="${badgeCy + 7}" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">${rank}</text>`,
-      `  <text x="${x + 64}" y="${y + 34}" font-size="24" font-weight="bold" fill="#1f2937">${name}</text>`,
-      `  <text x="${x + MOBILE_CONTENT_W - 18}" y="${y + 34}" text-anchor="end" font-size="22" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
+      `  <text x="${x + 64}" y="${y + 34}" font-size="28" font-weight="bold" fill="#1f2937">${name}</text>`,
+      `  <text x="${x + MOBILE_CONTENT_W - 18}" y="${y + 34}" text-anchor="end" font-size="28" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
       ...(showBars
         ? [`  <rect x="${x + 64}" y="${y + 43}" width="${barW}" height="10" rx="4" fill="${theme.bar}" opacity="0.85"/>`]
         : []),

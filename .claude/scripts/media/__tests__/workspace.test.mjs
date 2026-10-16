@@ -105,7 +105,7 @@ test('existing SVG catalog defaults are versioned in the shared policy ledger',t
  const root=fixture(t),template=readTemplates(root).templates.find(x=>x.id==='svg-scatter');
  saveTemplate(root,template.id,sha(template),{policy:'文字の重なりを確認する',profiles:template.profiles});
  const next=readTemplates(root).templates.find(x=>x.id===template.id);
- assert.equal(next.version,2);
+ assert.equal(next.version,template.version+1);
  assert.throws(()=>saveTemplate(root,template.id,sha(template),{policy:'stale',profiles:template.profiles}),/再読込/);
 });
 

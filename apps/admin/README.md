@@ -147,3 +147,9 @@ inventory/migrateは `--apply` なしで保存しない。移行結果は `image
 Web索引は `web-image-inventory.json` と `web-images/*.json` の小分けファイルで保持し、読込時に各ファイルのSHAを照合する。Web索引は公開ページ台帳とR2の生成manifest・本文参照から派生する。変更のない記事はキャッシュを使い、リモートの全面再照合には `--refresh` を付ける。OGPのmanifestに残るSHAと、実画像を取得したSHAを区別する。本文SVGは対応JSON・source JSONを照合し、埋込SVGは固定本文の範囲から復元する。上流URLだけでは当時の入力を保全したことにしない。素材のGit所在、外部URL、生成記録なし、使用箇所未照合も一覧に残す。棚卸し範囲は画面に表示し、未照合を「全画像の品質確認済み」と扱わない。
 
 書込APIは `PATCH /api/content-quality`、`PATCH /api/media-library/:id`、`POST /api/media-library/:id/candidate`、`PATCH /api/media-templates/:id`。同一localhost Origin、入力schema、楽観ロック、保存ロック、画像サイズ/形式、R2 readbackを検査する。採用で公開面は変更しない。CIのadmin-qualityが台帳検査と専用単体テストを実行する。
+
+本文画像の型を試すときは、各型の代表例を原寸と320pxで比較してから全件に広げる。画像検索は改善方針も対象にし、`?q=MOBILE-PILOT-01` で試作対象を再表示できる。個別方針と記事の配置・本文の不一致は同じ品質台帳に記録し、見た目だけの改善で記事全体を確認済みにしない。
+
+`node node_modules/tsx/dist/cli.mjs .claude/scripts/media/render-article-pilot.ts --spec <OS一時領域/spec.json>` は `media:prepare` の復元物からランキング・地理形状地図・散布図の640×960候補を生成する。specは `{id,directory,kind,dataFile,title,subtitle,unit?,xLabel?,yLabel?,focusNames?,changes}` の配列（最大9件）。`kind` は `ranking` / `map` / `scatter`。既定はローカル試作のみ。`--register --admin http://127.0.0.1:4757` を付けると、PNG・SVG・固定数値入力・地理データ・生成条件・コードSHAをprivate R2へ保存し、管理API経由で候補登録する。数値は復元物のSHA、47県の集合、年・単位を検査し、PNGは200KiB以下を必須にする。元出典の正しさと過去の復元一致率は別途評価する。自動採用・公開はしない。
+
+候補の入力根拠の `supplied.sourceData`（JSON文字列）を解析し、`frozenBundle` のR2キーを辿ると、`inputs[].text` に固定ファイル、`sample` に描画条件、`geometry` に当時の地理データ、`renderer` にコード本文とSHAがある。最新値で補完せず、その版のコードと入力を復元して再試作する。媒体別方針の版が変わったら旧候補は再確認する。

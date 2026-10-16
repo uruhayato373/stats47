@@ -14,6 +14,7 @@ export default async function Page({
     usage?: string;
     format?: string;
     collection?: string;
+    q?: string;
   }>;
 }) {
   const query = await searchParams;
@@ -44,6 +45,7 @@ export default async function Page({
         initialUsage={query.usage}
         initialFormat={query.format}
         initialCollection={query.collection}
+        initialQuery={query.q}
       />
     </div>
   );

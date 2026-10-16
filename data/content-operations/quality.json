@@ -84,6 +84,62 @@
       },
       "basis": "ed84bfcc017b23fe63516bf3e512a9dac7d6a8e749109181dc39def3fc978b23",
       "updatedAt": "2026-10-16T01:13:23.798Z"
+    },
+    "note/a-maximum-temperature": {
+      "priority": "high",
+      "policy": "[MOBILE-PILOT-01] 地図は分布の見出し直後を維持し、その直後の解説に接続する。縦積みランキングは「上位5・下位5の比較」に見出しを変えるか上下2図に分割する。保存本文には青系の地図を「九州全体が赤く染まる」と説明する不一致、「北海道が唯一30℃未満」と青森29.7℃の矛盾、同値の順位表記ゆれがある。指標定義・年/年度・観測地点を原典と確認し、本文を修正してから公開する。候補は保存JSONとの一致のみ確認し、原典再監査未実施。",
+      "checks": {
+        "data": "issue",
+        "images": "issue",
+        "placement": "issue",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "dcb749ce4427ce9fbb505bc33ad293b824e9a7555ce3cfc75d24b8ca9676af1c",
+      "updatedAt": "2026-10-16T04:01:26.628Z"
+    },
+    "note/a-volunteer-activity-annual-participation-rate-10plus": {
+      "priority": "high",
+      "policy": "[MOBILE-PILOT-01] 地図は「全国の分布」直後を維持。上位下位の縦積み画像は比較の見出し下に置き、上下の解説へつなげる。本文に滋賀県「4位」と「10位台前半」の矛盾があるため固定JSONの4位へ整合させる。15歳以上版との差、原因を断定する文章は出典照合後に修正する。今回の入力は2021年・10歳以上を固定。",
+      "checks": {
+        "data": "issue",
+        "images": "issue",
+        "placement": "issue",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "e3ff685c4d4d910117938f03a4a05c480c7a10f115248aee6c7b4e072e9f8ea8",
+      "updatedAt": "2026-10-16T04:01:26.807Z"
+    },
+    "web/blog/annual-precipitation-rainy-season-gap": {
+      "priority": "high",
+      "policy": "[MOBILE-PILOT-01] 散布図は「降水量×降水日数」の節で2指標を説明した直後に維持し、静岡3753.5mm/113日・富山2652mm/182日の注記を本文に対応させる。試作は全47点と年/単位を維持。元sourceは復元時の軸レンジ照合で、原典の全点一致を示す記録ではないため、データ確証は別途確認する。今回の縦長版は本文スマホ用の候補。現行Web正方形・SNSの型を一括置換しない。",
+      "checks": {
+        "data": "unchecked",
+        "images": "issue",
+        "placement": "pass",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "0c7726ee5b847eb2178403648cbad29a251a74aa41086429419dc6fa6d119f16",
+      "updatedAt": "2026-10-16T04:01:26.986Z"
+    },
+    "web/blog/aging-solo-living-crisis": {
+      "priority": "high",
+      "policy": "[MOBILE-PILOT-01] 散布図の説明節で、高知・島根の番号注記と本文を対応させる。X=2020年の65歳以上世帯員の単独世帯割合、Y=2023年の介護老人福祉施設数（65歳以上人口10万人当たり）を明記。元sourceの復元一致率はX=1/Y=0.957のため、原典との完全一致確認済みとは扱わない。固定JSONの47点を維持してスマホ候補を比較する。",
+      "checks": {
+        "data": "unchecked",
+        "images": "issue",
+        "placement": "pass",
+        "intro": "unchecked",
+        "sources": "unchecked",
+        "links": "unchecked"
+      },
+      "basis": "ba393e13463cdde67769155dc3080c1fb239a11edf80d14ee68a5d5ad8850a90",
+      "updatedAt": "2026-10-16T04:01:27.147Z"
     }
   },
   "images": {
@@ -99,6 +155,318 @@
       "candidateId": null,
       "templateId": "svg-bar-card",
       "policy": "320pxでは上位5県・下位5県の横並びを縦積みにし、県名・値・単位を大きくする。保存済みJSONの数値と年を維持し、説明直後への配置も確認する。候補作成後、原寸・320px・元データの一致を目視確認して採用する。",
+      "approvedId": null
+    },
+    "IMG-37a9dcaff111583e70fc2cf7": {
+      "revisions": [
+        {
+          "id": "2059801287dcfd4be744d38120758035b791eaf50b8345bab67c8c286739dc2e",
+          "basis": "8e78574ba313e5f9ad2624463358800e1fc7822274d81e90681575067c939c5a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/e7bcd8aa87a67c865f0dc7664bd10447d755de6e445239797506420691252e63.png",
+            "sha256": "e7bcd8aa87a67c865f0dc7664bd10447d755de6e445239797506420691252e63",
+            "bytes": 111115
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/d93fa3a1c77b5dbb137adc8c87df1db5232a814c430aede31052caca09b92ed4.json",
+            "sha256": "d93fa3a1c77b5dbb137adc8c87df1db5232a814c430aede31052caca09b92ed4",
+            "bytes": 4128
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:00:44.512Z",
+          "review": null
+        },
+        {
+          "id": "f01b9e30608b7ccacbb835410f7ac388e9a0c2b60f425129cb553e465ad0f87c",
+          "basis": "8e78574ba313e5f9ad2624463358800e1fc7822274d81e90681575067c939c5a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/e7bcd8aa87a67c865f0dc7664bd10447d755de6e445239797506420691252e63.png",
+            "sha256": "e7bcd8aa87a67c865f0dc7664bd10447d755de6e445239797506420691252e63",
+            "bytes": 111115
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/47c9ba59b7d8607f65089f665d8c558e2c9844585ff892dc090a91a05af8f0e5.json",
+            "sha256": "47c9ba59b7d8607f65089f665d8c558e2c9844585ff892dc090a91a05af8f0e5",
+            "bytes": 4128
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:07:21.625Z",
+          "review": null
+        }
+      ],
+      "candidateId": "f01b9e30608b7ccacbb835410f7ac388e9a0c2b60f425129cb553e465ad0f87c",
+      "templateId": "ranking",
+      "policy": "[MOBILE-PILOT-01] 47県の横長グラフから説明用の上位5県・下位5県の縦積みへ。全47県の原値は固定入力に保存し、比較対象を明記。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
+      "approvedId": null
+    },
+    "IMG-310dc9fdfc3f9841f4227fc8": {
+      "revisions": [
+        {
+          "id": "f7e5a5d35e8f548c0c19f087245ea4df71241c4b9fb398a5b4386294d7a2f193",
+          "basis": "abdb855c6148910fda2853e6f597268f374035a13f6be3bad89e548fd0158cb3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/09a87c8df95f73b524f7313c5f17b969cbcc5c9ccac001d9d495b9e12db9fcfd.png",
+            "sha256": "09a87c8df95f73b524f7313c5f17b969cbcc5c9ccac001d9d495b9e12db9fcfd",
+            "bytes": 114229
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/6e95328d84e2681c78d0372e63f68082544e2064239c859d462182444a91b519.json",
+            "sha256": "6e95328d84e2681c78d0372e63f68082544e2064239c859d462182444a91b519",
+            "bytes": 4033
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:00:56.781Z",
+          "review": null
+        },
+        {
+          "id": "0417f9be57369739453fe3b1577d157e86d13c31087a7e3e0b935a37c0c904c4",
+          "basis": "abdb855c6148910fda2853e6f597268f374035a13f6be3bad89e548fd0158cb3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/09a87c8df95f73b524f7313c5f17b969cbcc5c9ccac001d9d495b9e12db9fcfd.png",
+            "sha256": "09a87c8df95f73b524f7313c5f17b969cbcc5c9ccac001d9d495b9e12db9fcfd",
+            "bytes": 114229
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/1b89dbb1789234150329baff209b44b33193602adfcb2378317a207c6c9d16c6.json",
+            "sha256": "1b89dbb1789234150329baff209b44b33193602adfcb2378317a207c6c9d16c6",
+            "bytes": 4033
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:07:35.336Z",
+          "review": null
+        }
+      ],
+      "candidateId": "0417f9be57369739453fe3b1577d157e86d13c31087a7e3e0b935a37c0c904c4",
+      "templateId": "ranking",
+      "policy": "[MOBILE-PILOT-01] 上位5県・下位5県の左右2列を縦1列へ。順位・県名・値と単位を大きくし、上位下位で同じ値の尺度を使用。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
+      "approvedId": null
+    },
+    "IMG-b853d348f90285971268e44e": {
+      "revisions": [
+        {
+          "id": "8ae4aafaef6323bd1d65399f31459c95beceffbc3601955a47caebf9088d0c7a",
+          "basis": "6595aa0f6b3d009561f8a40625b58e89be913a482bc64efc6f57a65bb0ced1b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/9cfd94c9b8951987870058aae0d25adc101cb0a0f4f8a9de940fd849daea32ce.png",
+            "sha256": "9cfd94c9b8951987870058aae0d25adc101cb0a0f4f8a9de940fd849daea32ce",
+            "bytes": 165187
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/544f9ecd6eb951fdb82efe82d2e4a4db01cd0f4ae24c7de0f7b8ca984ecffc48.json",
+            "sha256": "544f9ecd6eb951fdb82efe82d2e4a4db01cd0f4ae24c7de0f7b8ca984ecffc48",
+            "bytes": 4136
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:01:23.258Z",
+          "review": null
+        },
+        {
+          "id": "87d7d44a0f5a843a96f4621e38b66276895e6587ad2505cfd2768a2c7b526f89",
+          "basis": "6595aa0f6b3d009561f8a40625b58e89be913a482bc64efc6f57a65bb0ced1b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/9cfd94c9b8951987870058aae0d25adc101cb0a0f4f8a9de940fd849daea32ce.png",
+            "sha256": "9cfd94c9b8951987870058aae0d25adc101cb0a0f4f8a9de940fd849daea32ce",
+            "bytes": 165187
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/1a8902aedd7df6361b25d93e43123d7ead7449718d9aad88a720c6631997f031.json",
+            "sha256": "1a8902aedd7df6361b25d93e43123d7ead7449718d9aad88a720c6631997f031",
+            "bytes": 4136
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:07:54.023Z",
+          "review": null
+        }
+      ],
+      "candidateId": "87d7d44a0f5a843a96f4621e38b66276895e6587ad2505cfd2768a2c7b526f89",
+      "templateId": "map",
+      "policy": "[MOBILE-PILOT-01] 地理形状を維持して地図領域を拡大。沖縄を別枠表示し、大きな最小・最大値付き連続凡例と最大・最小県を付記。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
+      "approvedId": null
+    },
+    "IMG-b9d9f58054da60195ceb4680": {
+      "revisions": [
+        {
+          "id": "35fa4452412d7e7c366144ec01d2cc900643ae463832cf8f10214653bf1b0431",
+          "basis": "84f6517742de55548d313f52625867d2af37dbc529f7849ddd2f6fbe185b2b8f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/57ea1c5418722dd58a5a74b5f08ed72793cb44d69fb7215e88538ecea230fb19.png",
+            "sha256": "57ea1c5418722dd58a5a74b5f08ed72793cb44d69fb7215e88538ecea230fb19",
+            "bytes": 167096
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/cb83222e8c2516bb5c39d1ba93b2091550baa93e8304f4ef6b6061b69fe38da7.json",
+            "sha256": "cb83222e8c2516bb5c39d1ba93b2091550baa93e8304f4ef6b6061b69fe38da7",
+            "bytes": 4001
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:01:48.942Z",
+          "review": null
+        },
+        {
+          "id": "2ef170c2714ab3c82d669451dd8d6743ce70e1c34382fc3951f0be95c52b5262",
+          "basis": "84f6517742de55548d313f52625867d2af37dbc529f7849ddd2f6fbe185b2b8f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/57ea1c5418722dd58a5a74b5f08ed72793cb44d69fb7215e88538ecea230fb19.png",
+            "sha256": "57ea1c5418722dd58a5a74b5f08ed72793cb44d69fb7215e88538ecea230fb19",
+            "bytes": 167096
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/8d40aa9e469ea838ea2df33a7b8c91a143bf60944bb24c8c4863af17d0dede07.json",
+            "sha256": "8d40aa9e469ea838ea2df33a7b8c91a143bf60944bb24c8c4863af17d0dede07",
+            "bytes": 4001
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:08:10.283Z",
+          "review": null
+        }
+      ],
+      "candidateId": "2ef170c2714ab3c82d669451dd8d6743ce70e1c34382fc3951f0be95c52b5262",
+      "templateId": "map",
+      "policy": "[MOBILE-PILOT-01] 全47県の原値を保ち、大きな連続凡例と最大・最小県を追加。沖縄は別枠、全県共通の色尺度。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
+      "approvedId": null
+    },
+    "IMG-f48279d9bbf68b0a6ff34896": {
+      "revisions": [
+        {
+          "id": "314137ef3bcad8804b48552e372cfc0d14bb5a749d32587d8f286536dbcce2ab",
+          "basis": "485591530691bc6cfef96b7ced377e4b628f57f556e73d3a97bcb69455fd3402",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/eb4a3022f69ebd2205c4cea12fd830ee6d375295dc3b5dbe052a286fe202e701.png",
+            "sha256": "eb4a3022f69ebd2205c4cea12fd830ee6d375295dc3b5dbe052a286fe202e701",
+            "bytes": 141475
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/fc7e6f5ac060202d16130b7605269d7d399191222fb17953cd825dcb730702fc.json",
+            "sha256": "fc7e6f5ac060202d16130b7605269d7d399191222fb17953cd825dcb730702fc",
+            "bytes": 5143
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:02:03.099Z",
+          "review": null
+        },
+        {
+          "id": "9209938f29f0fd1da252cc79242bc75a71d7047b598824dd249318ac94d7a9dc",
+          "basis": "485591530691bc6cfef96b7ced377e4b628f57f556e73d3a97bcb69455fd3402",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/eb4a3022f69ebd2205c4cea12fd830ee6d375295dc3b5dbe052a286fe202e701.png",
+            "sha256": "eb4a3022f69ebd2205c4cea12fd830ee6d375295dc3b5dbe052a286fe202e701",
+            "bytes": 141475
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/805468e5a89316ac83152eafa1e0f84e400e713c6f614fe1454c22e5d8137c04.json",
+            "sha256": "805468e5a89316ac83152eafa1e0f84e400e713c6f614fe1454c22e5d8137c04",
+            "bytes": 5143
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:08:21.645Z",
+          "review": null
+        }
+      ],
+      "candidateId": "9209938f29f0fd1da252cc79242bc75a71d7047b598824dd249318ac94d7a9dc",
+      "templateId": "svg-scatter",
+      "policy": "[MOBILE-PILOT-01] 横・縦軸の指標、単位、年を大きく表示。全47点と回帰を維持し、本文に登場する静岡・富山を番号で注記。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
+      "approvedId": null
+    },
+    "IMG-8fcf36bed94aabed4d58979e": {
+      "revisions": [
+        {
+          "id": "9aa53d48f4b69b9b64056055ed510ac8bb826bd2295898a0bdf42767d7538e81",
+          "basis": "2dc508db8a4697770503fcfeaf1ae02577b3051361dc9e28f083aa5b1af825e6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/4047b17bfb5d5658c9fae3da221c51db79fe15a07ee10095876c7d28a8efe3f7.png",
+            "sha256": "4047b17bfb5d5658c9fae3da221c51db79fe15a07ee10095876c7d28a8efe3f7",
+            "bytes": 159563
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/b18e26bb5cf79e5c5691f2fd0c61bd12906f109f50e25ac2f1b9b24598eda501.json",
+            "sha256": "b18e26bb5cf79e5c5691f2fd0c61bd12906f109f50e25ac2f1b9b24598eda501",
+            "bytes": 5178
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:02:18.906Z",
+          "review": null
+        },
+        {
+          "id": "62891ec142c0c3947e380c24ee8e92a3e13b58fe16cc21a730ef04efed891ffb",
+          "basis": "2dc508db8a4697770503fcfeaf1ae02577b3051361dc9e28f083aa5b1af825e6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/4047b17bfb5d5658c9fae3da221c51db79fe15a07ee10095876c7d28a8efe3f7.png",
+            "sha256": "4047b17bfb5d5658c9fae3da221c51db79fe15a07ee10095876c7d28a8efe3f7",
+            "bytes": 159563
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/221ae7b77229df2b1096d8dc378eac571e03da62f846cae508a702838c6560b2.json",
+            "sha256": "221ae7b77229df2b1096d8dc378eac571e03da62f846cae508a702838c6560b2",
+            "bytes": 5178
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-16T04:08:31.790Z",
+          "review": null
+        }
+      ],
+      "candidateId": "62891ec142c0c3947e380c24ee8e92a3e13b58fe16cc21a730ef04efed891ffb",
+      "templateId": "svg-scatter",
+      "policy": "[MOBILE-PILOT-01] 異なる年と分母を軸に明記し、文字を大きくする。全47点・値を維持し、高知・島根を注記。元出典の復元一致率の制約は入力に保持。 原寸と320pxの試作比較対象。保存済み数値JSON・原画像のSHAを照合。原典の再取得による値の正否は別工程。公開前に記事内の配置と対象年・分母を確認する。",
       "approvedId": null
     }
   }
