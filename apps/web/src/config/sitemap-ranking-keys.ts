@@ -8,10 +8,10 @@
  * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= active・prefecture対応・R2実在。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
- * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36, 2026-W37, 2026-W38, 2026-W39, 2026-W40
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288 / 2026-W37: 1293 / 2026-W38: 1308 / 2026-W39: 1391 / 2026-W40: 1463
- * 和集合: 2458 キー (INDEXABLE +0 / KNOWN +672 / INDEXABLE 総数 335 / KNOWN 総数 2458)
- * 生成日: 2026-10-15
+ * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36, 2026-W37, 2026-W38, 2026-W39, 2026-W40, 2026-W41
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288 / 2026-W37: 1293 / 2026-W38: 1308 / 2026-W39: 1391 / 2026-W40: 1463 / 2026-W41: 1547
+ * 和集合: 2460 キー (INDEXABLE +0 / KNOWN +618 / INDEXABLE 総数 335 / KNOWN 総数 2460)
+ * 生成日: 2026-10-16
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -1223,6 +1223,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "manufacturing-establishment-site-area",
   "manufacturing-establishments",
   "manufacturing-industry-added-value",
+  "manufacturing-industry-annual-income",
   "manufacturing-shipment-amount",
   "manufacturing-shipment-amount-per-employee",
   "manufacturing-shipment-amount-per-establishment",
@@ -1261,6 +1262,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "medical-physicians-obstetrics-gynecology",
   "medical-physicians-pediatrics",
   "medical-physicians-under-40",
+  "medical-welfare-industry-annual-income",
   "melon-consumption-expenditure",
   "melon-consumption-quantity",
   "membership-fees-consumption-expenditure",
