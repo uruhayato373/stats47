@@ -319,7 +319,7 @@ export function generateRankingPageStructuredData({
     "@context": "https://schema.org",
     "@type": "Dataset",
     name: selectedYear ? `${itemName} ${yearLabel}` : itemName,
-    description,
+    description: description.slice(0, 5000),
     url,
     keywords: [
       "統計",
@@ -349,7 +349,7 @@ export function generateRankingPageStructuredData({
         "@type": "Dataset",
         name: primarySource.name,
         url: primarySource.url,
-        description: `${primarySource.name}の統計表。stats47 はこの表の値を都道府県ランキングに整理しています。`,
+        description: `${primarySource.name}を出典として、${itemName}の都道府県別の値を取得しています。stats47では、この出典の数値を地域ごとに比較できるランキングとして整理し、出典へのリンクとともに掲載しています。`.slice(0, 5000),
       },
       // E-E-A-T: 一次データの出典を明示
       citation: {

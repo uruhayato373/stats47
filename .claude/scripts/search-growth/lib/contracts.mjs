@@ -61,6 +61,7 @@ export const CANDIDATE_STATUSES = Object.freeze([
 /**
  * @typedef {Object} ObservationProvenance
  * @property {string} [file]        raw snapshot への参照 (相対パス)
+ * @property {string} [metadataFile] 集計期間・取得日時の根拠
  * @property {string} [api]         呼んだ API 名
  * @property {string} [queryHash]   検索 query の非可逆ハッシュ (生 query を保存しない)
  * @property {string[]} limitations 制約・注意 (timezone/attribution/origin-fallback など)
@@ -74,6 +75,7 @@ export const CANDIDATE_STATUSES = Object.freeze([
  * @property {number|string|boolean|null} value  null は「観測できたが値なし」ではなく未取得は freshness=missing で表す
  * @property {string|null} periodStart           ISO date or null
  * @property {string|null} periodEnd             ISO date or null
+ * @property {boolean|null} isFinalized          sourceが明示した確定性。nullは未確認
  * @property {string} observedAt                 ISO datetime (取得時刻)
  * @property {typeof FRESHNESS[number]} freshness
  * @property {ObservationProvenance} provenance
@@ -117,6 +119,8 @@ export function validateObservation(obs) {
       errors.push(`${k} must be ISO date string or null`);
     }
   }
+  if (obs.isFinalized != null && typeof obs.isFinalized !== 'boolean') errors.push('isFinalized must be boolean or null');
+  if (obs.periodStart && obs.periodEnd && obs.periodStart > obs.periodEnd) errors.push('periodStart must not exceed periodEnd');
   if (obs.provenance == null || typeof obs.provenance !== "object") {
     errors.push("provenance must be an object");
   } else if (!Array.isArray(obs.provenance.limitations)) {
@@ -138,10 +142,12 @@ export function createObservation(input) {
     value: input.value === undefined ? null : input.value,
     periodStart: input.periodStart ?? null,
     periodEnd: input.periodEnd ?? null,
+    isFinalized: input.isFinalized ?? null,
     observedAt: input.observedAt ?? new Date().toISOString(),
     freshness: input.freshness ?? (input.value === undefined || input.value === null ? "missing" : "fresh"),
     provenance: {
       file: input.provenance?.file,
+      metadataFile: input.provenance?.metadataFile,
       api: input.provenance?.api,
       queryHash: input.provenance?.queryHash,
       limitations: input.provenance?.limitations ?? [],

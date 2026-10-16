@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { invalidDatasetDescriptions } from '@/lib/structured-data/dataset';
+
 import { buildMunicipalityDatasetStructuredData } from '../municipality-dataset-structured-data';
 
 const item = {
@@ -22,6 +24,12 @@ const snapshot = {
 };
 
 describe('buildMunicipalityDatasetStructuredData', () => {
+  it.each([{ name: '短い出典名', sourceName: 'e-Stat' }, { name: '長い出典名', sourceName: 'a'.repeat(6000) }])('出典Datasetも文字数を満たす: $name', ({ sourceName }) => {
+    const result = buildMunicipalityDatasetStructuredData({
+      item: { ...item, source: { ...item.source, name: sourceName } }, snapshot,
+    });
+    expect(invalidDatasetDescriptions(result)).toEqual([]);
+  });
   it('Google Datasetの必須descriptionを50文字以上で生成する', () => {
     const result = buildMunicipalityDatasetStructuredData({ item, snapshot });
 
@@ -29,6 +37,7 @@ describe('buildMunicipalityDatasetStructuredData', () => {
     expect(result.name).toContain('2024年度');
     expect(result.description.length).toBeGreaterThanOrEqual(50);
     expect(result.description).toContain(item.description);
+    expect(invalidDatasetDescriptions(result)).toEqual([]);
   });
 
   it('元descriptionが空でもGoogle Datasetの文字数範囲を満たす', () => {
@@ -39,6 +48,7 @@ describe('buildMunicipalityDatasetStructuredData', () => {
 
     expect(result.description.length).toBeGreaterThanOrEqual(50);
     expect(result.description.length).toBeLessThanOrEqual(5000);
+    expect(invalidDatasetDescriptions(result)).toEqual([]);
   });
 
   it('canonical URLと実在するR2 JSON配布URLを分けて示す', () => {

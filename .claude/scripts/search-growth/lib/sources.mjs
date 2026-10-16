@@ -16,6 +16,7 @@ import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mj
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { addDays } from '../../metrics/lib/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -93,6 +94,39 @@ const numOrNull = (v) => {
 };
 const rel = (p) => (p ? path.relative(PROJECT_ROOT, p) : null);
 
+/** pages.csv is a rolling report, not the calendar week in its directory name. */
+function pageSnapshotMetadata(dir, source) {
+  const metadataFile = path.join(dir, 'summary.json');
+  if (!fs.existsSync(metadataFile)) return null;
+  const summary = JSON.parse(fs.readFileSync(metadataFile, 'utf8'));
+  if (typeof summary.generatedAt !== 'string' || !Number.isFinite(Date.parse(summary.generatedAt))) return null;
+  let period = summary.rolling28d;
+  const limitations = [];
+  if (source === 'ga4' && !period) {
+    // Legacy GA4 summaries: remove when all retained summaries contain rolling28d.
+    // They contain only finalized7d; the fetcher uses the same
+    // delayed end for raw pages.csv's rolling28d. Preserve uncertainty explicitly.
+    const end = summary.jpFinalized7d?.periodEnd;
+    if (end) period = { periodStart: addDays(end, -27), periodEnd: end };
+    limitations.push('旧GA4 pages.csv: summaryの確定7日終端とfetcherの28日契約から期間を復元。raw・国フィルタなし。個別reportの完全性・確定性は未確認');
+  }
+  const validPeriod = /^\d{4}-\d{2}-\d{2}$/.test(period?.periodStart) &&
+    /^\d{4}-\d{2}-\d{2}$/.test(period?.periodEnd) &&
+    Number.isFinite(Date.parse(period.periodStart)) && Number.isFinite(Date.parse(period.periodEnd)) &&
+    period.periodStart <= period.periodEnd;
+  if (!validPeriod) limitations.push('pages.csvの集計期間が未取得。週フォルダ名から推定しない');
+  const isFinalized = validPeriod && typeof period.isFinalized === 'boolean' ? period.isFinalized : null;
+  return {
+    observedAt: summary.generatedAt,
+    periodStart: validPeriod ? period.periodStart : null,
+    periodEnd: validPeriod ? period.periodEnd : null,
+    isFinalized,
+    status: validPeriod && isFinalized === true && period.coverage?.status === 'complete' ? 'success' : 'partial',
+    metadataFile: rel(metadataFile),
+    limitations: [...(period?.limitations ?? []), ...limitations],
+  };
+}
+
 // ── source definitions ───────────────────────────────────────────────
 // 各 def: name / staleAfterDays / api(live) / secretName(live) /
 //   normalize(root, now) → { observedAt, snapshotFile, observations[] } | { observedAt:null }
@@ -109,9 +143,9 @@ const GSC = {
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
     if (!fs.existsSync(file)) return { observedAt: null };
-    const observedAt = (isoWeekEndDate(week) ?? now.slice(0, 10)) + "T00:00:00Z";
-    const start = weekStart(observedAt);
-    const status = "success";
+    const metadata = pageSnapshotMetadata(path.join(dir, week), 'gsc');
+    if (!metadata) return { observedAt: null };
+    const { observedAt, status, periodStart, periodEnd, isFinalized } = metadata;
     const freshness = freshnessForSource({ status, observedAt, now, staleAfterDays: this.staleAfterDays });
     const { rows } = parseCsv(fs.readFileSync(file, "utf8"));
     const obs = [];
@@ -123,8 +157,8 @@ const GSC = {
         if (value === null) continue;
         obs.push(createObservation({
           source: "gsc", metric, dimensions: { page }, value,
-          periodStart: start, periodEnd: observedAt.slice(0, 10), observedAt, freshness,
-          provenance: { file: rel(file), api: this.api, limitations: ["GSC は全行を保証しない (rowLimit/pagination)", "finalized data は約2日遅延"] },
+          periodStart, periodEnd, isFinalized, observedAt, freshness,
+          provenance: { file: rel(file), metadataFile: metadata.metadataFile, api: this.api, limitations: ["GSC は全行を保証しない (rowLimit/pagination)", ...metadata.limitations] },
         }));
       }
     }
@@ -144,8 +178,10 @@ const GA4 = {
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
     if (!fs.existsSync(file)) return { observedAt: null };
-    const observedAt = (isoWeekEndDate(week) ?? now.slice(0, 10)) + "T00:00:00Z";
-    const freshness = freshnessForSource({ status: "success", observedAt, now, staleAfterDays: this.staleAfterDays });
+    const metadata = pageSnapshotMetadata(path.join(dir, week), 'ga4');
+    if (!metadata) return { observedAt: null };
+    const { observedAt, status, periodStart, periodEnd, isFinalized } = metadata;
+    const freshness = freshnessForSource({ status, observedAt, now, staleAfterDays: this.staleAfterDays });
     const { rows } = parseCsv(fs.readFileSync(file, "utf8"));
     const obs = [];
     for (const r of rows) {
@@ -160,8 +196,8 @@ const GA4 = {
         if (value === null) continue;
         obs.push(createObservation({
           source: "ga4", metric, dimensions: { page }, value,
-          periodStart: weekStart(observedAt), periodEnd: observedAt.slice(0, 10), observedAt, freshness,
-          provenance: { file: rel(file), api: this.api, limitations: ["GA4 sessions と GSC clicks は同値でない (timezone/consent/ad blocker/attribution 差)"] },
+          periodStart, periodEnd, isFinalized, observedAt, freshness,
+          provenance: { file: rel(file), metadataFile: metadata.metadataFile, api: this.api, limitations: ["GA4 sessions と GSC clicks は同値でない (timezone/consent/ad blocker/attribution 差)", ...metadata.limitations] },
         }));
       }
     }
@@ -450,12 +486,6 @@ export function coverageSourceObservedAt(queue, fallback = null) {
     queue?.generated_at ??
     fallback
   );
-}
-
-function weekStart(endIso) {
-  const d = new Date(endIso);
-  d.setUTCDate(d.getUTCDate() - 27); // GSC/GA4 は last 28d
-  return d.toISOString().slice(0, 10);
 }
 
 /** live fetch 用: 既存 fetcher を subprocess で呼ぶコマンドを組み立てる (実行は collect.mjs)。 */

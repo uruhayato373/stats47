@@ -137,7 +137,9 @@ switch (cmd) {
       console.log(`evidence:`);
       for (const e of m.evidence) console.log(`  ${e.source}:${e.metric}=${e.value} (${e.freshness})`);
       console.log(`baseline: ${JSON.stringify(m.baselinePeriod)}`);
-      console.log(`判定スケジュール: 14日=${m.judgmentSchedule.day14} / 28日=${m.judgmentSchedule.day28} / 56日=${m.judgmentSchedule.day56}`);
+      console.log(m.judgmentSchedule
+        ? `判定スケジュール: 14日=${m.judgmentSchedule.day14} / 28日=${m.judgmentSchedule.day28} / 56日=${m.judgmentSchedule.day56}`
+        : '判定スケジュール: 未確定（根拠の集計期間を確認してください）');
       if (m.limitations?.length) console.log(`limitations: ${m.limitations.join(" / ")}`);
     });
     break;

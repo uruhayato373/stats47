@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "site": "stats47.jp",
+  "localDate": "2026-10-17",
+  "recordedAt": "2026-10-16T22:02:36.941Z",
+  "implementationCommit": "09b6ed756",
+  "scope": [
+    "GSC-GEO-SITEMAP-404-01",
+    "GSC-DATASET-NESTED-SCHEMA-01",
+    "GSC-OBSERVATION-PERIOD-01"
+  ],
+  "priorityActions": {
+    "GSC案01": "local verified; production pending",
+    "GSC案02": "Geo definition SHA regression + seven existing route smoke targets; production/sitemap cross-check pending",
+    "GSC案03": "nested descriptions implemented; production/Google recrawl pending",
+    "GSC案04": "still pending; no unverified creator/license added",
+    "GSC案05": "recursive unit + existing E2E gate added; E2E execution in CI pending",
+    "GSC案06": "completed; normalized data and candidates regenerated"
+  },
+  "geo": {
+    "rootCause": "Published pinned definition and runtime definition differed only in method[1] display copy. Strict snapshot parser rejected unchanged R2 evidence. Restoring published definition matches pinned definition hash; validation was not relaxed.",
+    "definitionSha256": "803f1d0c202dd4824dbc68c43c01ee0c8a2bdb529fb69e01427095d2493859a4",
+    "artifacts": {
+      "checkedAt": "2026-10-16T21:51:35.234Z",
+      "snapshotValid": true,
+      "manifestValid": true,
+      "conservationPrefecture": "13000",
+      "artifacts": [
+        {
+          "key": "app/geo/population-landslide-exposure/item.json",
+          "status": 200,
+          "bytes": 31592,
+          "sha256": "541edf3f9d685a25a9a9bbca64cf90e54dcc10d12b3eae5f33026d56fae9b766",
+          "matches": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/pref/13.json",
+          "status": 200,
+          "bytes": 903878,
+          "sha256": "4a99e219cd68f7822a4a35f71cb6adc5c47f1085eebd00fa029fff88f629bdb7",
+          "matches": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/facilities/13.json",
+          "status": 200,
+          "bytes": 275533,
+          "sha256": "f0756ec7dcfa52d5b6e1f9614f8e30e313af9e8777c35f0ceab9eb8ca2482f4c",
+          "matches": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/source/13.json",
+          "status": 200,
+          "bytes": 4125,
+          "sha256": "9c9187d5b0db804ebbc3a1d80ddd87a8baa096e6e0aedd7f994657261c7d79c8",
+          "matches": true
+        }
+      ],
+      "scope": "aggregate + Tokyo population/operation, facility, hazard source artifacts; not all 47 prefectures"
+    },
+    "publicBefore": {
+      "checkedAt": "2026-10-16T21:53:17.019Z",
+      "results": [
+        {
+          "url": "https://stats47.jp/geo/population-landslide-exposure",
+          "status": 404,
+          "noindex": true,
+          "canonical": null
+        },
+        {
+          "url": "https://stats47.jp/geo/population-snow-designation",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-snow-designation"
+        },
+        {
+          "url": "https://stats47.jp/geo/population-land-price",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-land-price"
+        },
+        {
+          "url": "https://stats47.jp/geo/population-flood-risk",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-flood-risk"
+        },
+        {
+          "url": "https://stats47.jp/geo/population-station-access",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-station-access"
+        },
+        {
+          "url": "https://stats47.jp/geo/population-public-facility-access",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-public-facility-access"
+        },
+        {
+          "url": "https://stats47.jp/geo/population-low-elevation",
+          "status": 200,
+          "noindex": false,
+          "canonical": "https://stats47.jp/geo/population-low-elevation"
+        }
+      ]
+    },
+    "local": {
+      "status": "verified",
+      "title": "土砂災害指定区域と人口・公共施設 | stats47地域分析 | 統計で見る都道府県",
+      "h1": [
+        "土砂災害の指定区域と人口・公共施設"
+      ],
+      "bytes": 2193610,
+      "noindex": false,
+      "canonical": "http://localhost:3000/geo/population-landslide-exposure",
+      "notFoundBody": false,
+      "datasetNodes": [],
+      "datasetErrors": []
+    }
+  },
+  "dataset": {
+    "requirementsSource": "https://developers.google.com/search/docs/appearance/structured-data/dataset?hl=ja",
+    "descriptionCharacters": {
+      "minimum": 50,
+      "maximum": 5000
+    },
+    "rankingLocal": {
+      "status": "verified",
+      "title": "寄附金ランキング都道府県【2022年】｜1位山形県（2,378,211） | 統計で見る都道府県47都道府県の単純平均の推移 (千円)2022年: 527,201千円",
+      "h1": [
+        "寄附金"
+      ],
+      "bytes": 2512021,
+      "noindex": false,
+      "canonical": "http://localhost:3000/ranking/donations-prefecture",
+      "notFoundBody": false,
+      "datasetNodes": [
+        {
+          "name": "寄附金 2022年度",
+          "descriptionCharacters": 121
+        },
+        {
+          "name": "社会・人口統計体系",
+          "descriptionCharacters": 95
+        }
+      ],
+      "datasetErrors": []
+    },
+    "municipalityLocal": {
+      "status": "verified",
+      "title": "着工新設住宅床面積 市区町村ランキング【2024年度】 | 統計で見る都道府県",
+      "h1": [
+        "着工新設住宅床面積"
+      ],
+      "bytes": 484387,
+      "noindex": false,
+      "canonical": "http://localhost:3000/municipalities/ranking/new-housing-floor-area",
+      "notFoundBody": false,
+      "datasetNodes": [
+        {
+          "name": "着工新設住宅床面積 市区町村ランキング（2024年度）",
+          "descriptionCharacters": 116
+        },
+        {
+          "name": "社会・人口統計体系",
+          "descriptionCharacters": 104
+        }
+      ],
+      "datasetErrors": []
+    },
+    "municipalityRealInputBuilder": {
+      "name": "着工新設住宅床面積 市区町村ランキング（2024年度）",
+      "parentLength": 116,
+      "nestedLength": 104,
+      "source": {
+        "@type": "Dataset",
+        "name": "社会・人口統計体系",
+        "url": "https://www.stat.go.jp/data/ssds/index.htm",
+        "description": "社会・人口統計体系を出典として、着工新設住宅床面積の市区町村別の値を取得しています。stats47では、2024年度の数値を自治体ごとに比較できるランキングとして整理し、出典へのリンクとともに掲載しています。"
+      },
+      "errors": []
+    },
+    "historicalGscInvalidItems": 858,
+    "googleValidationStarted": false,
+    "productionVerified": false
+  },
+  "periods": {
+    "source": "data/gsc/snapshots/2026-W41/summary.json#rolling28d",
+    "beforeCandidate": {
+      "start": "2026-10-11",
+      "end": "2026-10-11"
+    },
+    "afterCandidate": {
+      "start": "2026-09-11",
+      "end": "2026-10-08"
+    },
+    "normalized": {
+      "clicks": {
+        "value": 17,
+        "periodStart": "2026-09-11",
+        "periodEnd": "2026-10-08",
+        "observedAt": "2026-10-15T22:55:06.877Z",
+        "isFinalized": true
+      },
+      "impressions": {
+        "value": 8407,
+        "periodStart": "2026-09-11",
+        "periodEnd": "2026-10-08",
+        "observedAt": "2026-10-15T22:55:06.877Z",
+        "isFinalized": true
+      },
+      "ctr": {
+        "value": 0.002,
+        "periodStart": "2026-09-11",
+        "periodEnd": "2026-10-08",
+        "observedAt": "2026-10-15T22:55:06.877Z",
+        "isFinalized": true
+      },
+      "position": {
+        "value": 8.65,
+        "periodStart": "2026-09-11",
+        "periodEnd": "2026-10-08",
+        "observedAt": "2026-10-15T22:55:06.877Z",
+        "isFinalized": true
+      }
+    },
+    "candidateCountBefore": 2078,
+    "candidateCountAfter": 2078,
+    "nonPendingStates": 1,
+    "allLifecycleFieldsPreserved": true,
+    "ga4": {
+      "period": "2026-09-13/2026-10-10",
+      "raw": true,
+      "isFinalized": null,
+      "freshness": "partial",
+      "limitations": "Restored from explicit summary finalized7d endpoint and documented rolling28d fetch contract; individual raw report completeness/finality not asserted."
+    },
+    "historicalEffectVerdictsChanged": false,
+    "cliUnknownBaselineSchedule": "null, displayed as 未確定"
+  },
+  "verification": {
+    "gisTests": 27,
+    "datasetTests": 29,
+    "geoLoaderTests": 22,
+    "searchGrowthTests": 98,
+    "totalDistinctTests": 176,
+    "postRegenerationMcpTests": 12,
+    "typeCheck": {
+      "workspaces": 25,
+      "scriptsProjects": 8,
+      "status": "pass"
+    },
+    "eslint": "pass",
+    "shellSyntax": "pass",
+    "gitDiffCheck": "pass",
+    "docs": {
+      "errors": 0,
+      "warnings": 6,
+      "existingWarnings": true
+    },
+    "productionBuild": "not run locally; release CI is authoritative",
+    "fullE2E": "not run locally; existing E2E includes recursive Dataset assertion"
+  },
+  "limitations": [
+    "No production deployment or R2 write in this run; GSC counts and validation state remain unchanged.",
+    "Artifact checks cover aggregate and Tokyo intermediate artifacts, not the full 47-prefecture artifact set.",
+    "Local ranking first-render logged timeouts for auxiliary categories/affiliate snapshots and missing page-cards; main ranking and Dataset rendered."
+  ],
+  "remaining": [
+    "Batch deploy Geo + Dataset and verify production HTTP/canonical/noindex and recursive JSON-LD.",
+    "Start GSC Dataset validation after production check and observe Google recrawl.",
+    "Resolve source-specific creator/license metadata before adding nested recommendations."
+  ]
+}
