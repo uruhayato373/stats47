@@ -127,6 +127,8 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 - 管理 → 画像ライブラリ (`/ops/image-library`): 使用箇所ID、R2所在、入力ファイル、旧新画像、320px比較、候補履歴、生成根拠を確認する。PNG/JPEG/WebP候補はprivate R2保存後に読み戻して照合する。原寸・320px・数値/年/単位の確認が揃った現在の候補だけ採用できる。カバーは既存の専用制作画面へ接続する。
 - 管理 → 画像・元データ・改善 (`/ops/image-library`): OGP・リンクカード・ブログ本文SVG・note・SNS・県の輪郭・共通素材を同じ使用箇所IDで管理する。用途、形式、既存カタログ、媒体で絞り込み、右ペインで保存済み入力・生成元・記事内の位置・同じ元画像の使用先を辿る。`?view=templates` は既存SVG分類を含む図の型・媒体別方針、`?view=articles` は記事の改善。旧 `/assets`・`/svg`・`/ops/image-templates` はここへ転送する。共有collectorとSVG分類は既存SSOTを再利用する。
 
+`?view=templates` は型ごとの実画像を最大3枚、最大320px幅で表示する。試作候補・採用済み画像・既存参考例を区別し、旧条件の候補には再確認を表示する。画像の選出は `lib/media-template-examples.ts` が所有し、重複画像・未分類・カバーを基本形から除く。旧分類が混在する時系列・家計は同ファイルの代表IDを用いる。原寸、比較・元データ、`?template=<id>` の全使用箇所へ進み、方針を版付きで保存できる。見本の掲載だけで型の確定や公開を行わない。
+
 図の方針更新時は版と旧方針を残し、旧条件の候補を失効させる。SVG候補は外部参照・スクリプト等を検査し、実ファイルはR2に保存、画面ではPNGプレビューにする。X/Instagramの現行全47県表示契約を維持する。
 
 運用記録は `data/content-operations/quality.json`、図の方針は `image-templates.json` と各JSON Schema。公開URL/本文/投稿状態の正本を複製しない。画像索引 `image-inventory.json` は検証済み記事manifestから派生する。未回収・未照合を「画像なし」「再生成可能」と扱わない。候補画像・入力根拠はprivate R2 `media-workspace/{images,inputs}/<sha>.*` に保存する。

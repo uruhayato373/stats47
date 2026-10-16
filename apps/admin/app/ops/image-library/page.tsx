@@ -15,6 +15,7 @@ export default async function Page({
     format?: string;
     collection?: string;
     q?: string;
+    template?: string;
   }>;
 }) {
   const query = await searchParams;
@@ -46,6 +47,7 @@ export default async function Page({
         initialFormat={query.format}
         initialCollection={query.collection}
         initialQuery={query.q}
+        initialTemplate={query.template}
       />
     </div>
   );

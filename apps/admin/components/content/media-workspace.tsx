@@ -1,6 +1,9 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { ActualImage } from './media-image';
+import { TemplateGallery } from './image-template-gallery';
+import { originalUrl, candidateUrl } from '@/lib/media-template-examples';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { IMAGE_USES } from '../../../../.claude/scripts/media/lib/catalog.mjs';
@@ -64,71 +67,6 @@ const CHANNELS: Record<string, string> = {
   tiktok: 'TikTok',
 };
 const PAGE_SIZE = 36;
-function originalUrl(image: ImageView) {
-  if (image.kind === 'cover') return image.coverUrl ?? null;
-  if (
-    image.original?.key ||
-    image.original?.path ||
-    image.original?.provider === 'inline-svg' ||
-    (image.original?.url && image.original.provider !== 'external')
-  )
-    return '/api/media-library/' + image.id + '/file';
-  if (image.original?.url) return image.original.url;
-  return image.legacyUrl ?? null;
-}
-function candidateUrl(image: ImageView) {
-  return image.kind === 'cover'
-    ? (image.coverCandidateUrl ?? null)
-    : image.candidate
-      ? '/api/media-library/' +
-        image.id +
-        '/file?revision=' +
-        image.candidate.id
-      : null;
-}
-function ActualImage({
-  src,
-  alt,
-  small = false,
-}: {
-  src: string | null;
-  alt: string;
-  small?: boolean;
-}) {
-  const [failed, setFailed] = useState(false);
-  if (!src)
-    return (
-      <p className="p-6 text-sm text-console-muted">
-        画像の保存記録がありません
-      </p>
-    );
-  if (failed)
-    return (
-      <div className="space-y-2 p-4 text-sm text-console-muted">
-        <p>
-          画像を取得できません。保存先への接続・移行状況を確認してください。
-        </p>
-        <Button variant="outline" size="sm" onClick={() => setFailed(false)}>
-          再取得
-        </Button>
-      </div>
-    );
-  // Exact ledger-owned proxy or a previously recorded public image URL.
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      className={
-        small
-          ? 'mx-auto h-36 w-full object-contain'
-          : 'mx-auto h-auto max-h-[600px] w-full object-contain'
-      }
-      onError={() => setFailed(true)}
-    />
-  );
-}
 async function requestJson(url: string, method: string, body: unknown) {
   const res = await fetch(url, {
     method,
@@ -836,68 +774,6 @@ function ImageEditor({
     </div>
   );
 }
-function TemplateEditor({
-  template,
-  onSaved,
-}: {
-  template: Template & { revision: string };
-  onSaved: () => Promise<void>;
-}) {
-  const [policy, setPolicy] = useState(template.policy),
-    [profiles, setProfiles] = useState(template.profiles),
-    [message, setMessage] = useState(''),
-    [busy, setBusy] = useState(false);
-  return (
-    <PanelCard title={template.label} description={'方針 v' + template.version}>
-      <div className="space-y-3">
-        <Textarea
-          aria-label={template.label + 'の共通方針'}
-          value={policy}
-          onChange={(e) => setPolicy(e.target.value)}
-        />
-        {(['note', 'x', 'instagram', 'web'] as const).map((p) => (
-          <label key={p} className="block space-y-1 text-sm">
-            <span>{CHANNELS[p]}</span>
-            <Textarea
-              rows={2}
-              value={profiles[p] ?? '使用ページの幅と表示テーマで確認する。'}
-              onChange={(e) =>
-                setProfiles({ ...profiles, [p]: e.target.value })
-              }
-            />
-          </label>
-        ))}
-        <p className="text-xs text-console-muted">
-          方針を更新すると、この型を使った候補は再確認が必要になります。
-        </p>
-        <Button
-          disabled={busy}
-          onClick={async () => {
-            setBusy(true);
-            try {
-              await requestJson(
-                '/api/media-templates/' + template.id,
-                'PATCH',
-                { revision: template.revision, policy, profiles }
-              );
-              await onSaved();
-              setMessage('方針を更新しました。');
-            } catch (e) {
-              setMessage((e as Error).message);
-            } finally {
-              setBusy(false);
-            }
-          }}
-        >
-          新しい版として保存
-        </Button>
-        <p role="status" className="text-sm">
-          {message}
-        </p>
-      </div>
-    </PanelCard>
-  );
-}
 export function MediaWorkspace({
   initial,
   mode,
@@ -908,6 +784,7 @@ export function MediaWorkspace({
   initialFormat = '',
   initialCollection = '',
   initialQuery = '',
+  initialTemplate = '',
 }: {
   initial: WorkspaceData;
   mode: 'articles' | 'images' | 'templates';
@@ -918,13 +795,14 @@ export function MediaWorkspace({
   initialFormat?: string;
   initialCollection?: string;
   initialQuery?: string;
+  initialTemplate?: string;
 }) {
   const [data, setData] = useState(initial),
     [q, setQ] = useState(initialQuery),
     [channel, setChannel] = useState(initialChannel),
     [storage, setStorage] = useState(''),
     [state, setState] = useState(''),
-    [template, setTemplate] = useState(''),
+    [template, setTemplate] = useState(initialTemplate),
     [usage, setUsage] = useState(initialUsage),
     [format, setFormat] = useState(initialFormat),
     [collection, setCollection] = useState(initialCollection),
@@ -947,13 +825,14 @@ export function MediaWorkspace({
       format,
       collection,
       owner: ownerFilter,
+      template,
       q,
     })) {
       if (value) url.searchParams.set(key, value);
       else url.searchParams.delete(key);
     }
     window.history.replaceState(null, '', url);
-  }, [channel, usage, format, collection, ownerFilter, q]);
+  }, [channel, usage, format, collection, ownerFilter, template, q]);
   useEffect(() => {
     const controller = new AbortController();
     setDetail(null);
@@ -1054,53 +933,61 @@ export function MediaWorkspace({
           </Link>
         </Button>
       </nav>
-      <div className="grid gap-3 sm:grid-cols-3">
-        <StatCard label="記事・投稿・使用先" value={data.items.length} />
-        <StatCard label="画像の使用箇所" value={data.images.length} />
-        <StatCard
-          label="要改善・再確認"
-          value={
-            data.items.filter((i) => ['issue', 'stale'].includes(i.reviewState))
-              .length
-          }
-        />
-      </div>
-      <details className="text-sm text-console-muted">
-        <summary className="cursor-pointer">
-          棚卸し範囲・不足を確認する（Web索引:{' '}
-          {data.webInventoryUpdatedAt ?? '未取得'}）
-        </summary>
-        <p>
-          画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
-        </p>
-        <ul className="mt-2 space-y-1">
-          {data.coverage?.map((row) => (
-            <li key={row.collection}>
-              {row.collection}: {row.images}件 / SHA記録あり {row.verified}件 /
-              未照合 {row.unverified}件 / 取得不可 {row.missing}件
-            </li>
-          ))}
-        </ul>
-      </details>
-      {data.migration && (
-        <p className="text-sm text-console-muted">
-          旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
-          {data.migration.counts.migrated ?? 0}件 · 元画像未取得{' '}
-          {data.migration.counts['source-unavailable'] ?? 0}件 · 内容不一致{' '}
-          {data.migration.counts['source-mismatch'] ?? 0}件 · 照合未完了{' '}
-          {data.migration.counts.unverified ?? 0}件
-        </p>
+      {mode !== 'templates' && (
+        <>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <StatCard label="記事・投稿・使用先" value={data.items.length} />
+            <StatCard label="画像の使用箇所" value={data.images.length} />
+            <StatCard
+              label="要改善・再確認"
+              value={
+                data.items.filter((i) =>
+                  ['issue', 'stale'].includes(i.reviewState)
+                ).length
+              }
+            />
+          </div>
+          <details className="text-sm text-console-muted">
+            <summary className="cursor-pointer">
+              棚卸し範囲・不足を確認する（Web索引:{' '}
+              {data.webInventoryUpdatedAt ?? '未取得'}）
+            </summary>
+            <p>
+              画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
+            </p>
+            <ul className="mt-2 space-y-1">
+              {data.coverage?.map((row) => (
+                <li key={row.collection}>
+                  {row.collection}: {row.images}件 / SHA記録あり {row.verified}
+                  件 / 未照合 {row.unverified}件 / 取得不可 {row.missing}件
+                </li>
+              ))}
+            </ul>
+          </details>
+          {data.migration && (
+            <p className="text-sm text-console-muted">
+              旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
+              {data.migration.counts.migrated ?? 0}件 · 元画像未取得{' '}
+              {data.migration.counts['source-unavailable'] ?? 0}件 · 内容不一致{' '}
+              {data.migration.counts['source-mismatch'] ?? 0}件 · 照合未完了{' '}
+              {data.migration.counts.unverified ?? 0}件
+            </p>
+          )}
+        </>
       )}
       {mode === 'templates' ? (
-        <div className="grid gap-4 lg:grid-cols-2">
-          {data.templates.map((t) => (
-            <TemplateEditor
-              key={t.id + ':' + t.version}
-              template={t}
-              onSaved={reload}
-            />
-          ))}
-        </div>
+        <TemplateGallery
+          templates={data.templates}
+          images={data.images}
+          onSave={async (t, policy, profiles) => {
+            await requestJson('/api/media-templates/' + t.id, 'PATCH', {
+              revision: t.revision,
+              policy,
+              profiles,
+            });
+            await reload();
+          }}
+        />
       ) : (
         <>
           <div className="flex flex-wrap gap-2">
