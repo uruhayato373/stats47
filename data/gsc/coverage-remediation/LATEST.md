@@ -29,12 +29,11 @@
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 1274 | 1034 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| content-check | 4 | 0 | soft404→現在200=薄さ/描画 未判定 |
-| enrich | 12 | 0 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
+| observe-after-fix | 1289 | 1034 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| enrich | 1 | 0 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
 | none | 2127 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1034 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1049 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

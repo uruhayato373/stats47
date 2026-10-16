@@ -35,6 +35,8 @@ const ALLOWED_BASES = new Set([
   "all-bases",
 ] as const);
 const ALLOWED_ENCODINGS = new Set(["utf8", "sjis"] as const);
+// robots.txt はこの公開配布ルートだけ取得を許可する。検索結果は説明のあるランキングページへ。
+const DOWNLOAD_ERROR_HEADERS = { ...NO_STORE_CACHE_HEADERS, "X-Robots-Tag": "noindex" };
 
 type Format = "csv" | "json";
 type Encoding = "utf8" | "sjis";
@@ -80,19 +82,19 @@ export async function GET(
   if (!isFormat(formatParam)) {
     return NextResponse.json(
       { error: "Invalid format. Expected csv or json." },
-      { status: 400, headers: NO_STORE_CACHE_HEADERS },
+      { status: 400, headers: DOWNLOAD_ERROR_HEADERS },
     );
   }
   if (!(ALLOWED_BASES as Set<string>).has(basisParam)) {
     return NextResponse.json(
       { error: "Invalid basis." },
-      { status: 400, headers: NO_STORE_CACHE_HEADERS },
+      { status: 400, headers: DOWNLOAD_ERROR_HEADERS },
     );
   }
   if (!isEncoding(encodingParam)) {
     return NextResponse.json(
       { error: "Invalid encoding." },
-      { status: 400, headers: NO_STORE_CACHE_HEADERS },
+      { status: 400, headers: DOWNLOAD_ERROR_HEADERS },
     );
   }
 
@@ -104,7 +106,7 @@ export async function GET(
   if (series.length === 0) {
     return NextResponse.json(
       { error: "No data for this ranking/basis." },
-      { status: 404, headers: NO_STORE_CACHE_HEADERS },
+      { status: 404, headers: DOWNLOAD_ERROR_HEADERS },
     );
   }
 
@@ -148,6 +150,7 @@ export async function GET(
     headers: {
       "Content-Type": contentType,
       "Content-Disposition": buildContentDisposition(filename),
+      "X-Robots-Tag": "noindex",
       // オンザフライ生成だが結果は決定的なので edge に長めにキャッシュさせる
       ...DOWNLOAD_DATA_CACHE_HEADERS,
     },
