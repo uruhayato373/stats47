@@ -2,6 +2,243 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "fish-catch",
+      "pageId": "ranking:fish-catch",
+      "title": "漁獲量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3121"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3121"
+        },
+        "derived": false,
+        "configHash": "9ec0eeb2651a7c5d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:fishery-marine",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fishery-catch-aquaculture-shift",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:fishery-marine",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:fish-catch",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:fishery-marine",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "fishery-marine"
+      ]
+    },
+    {
       "metricKey": "fish-paste-consumption-expenditure",
       "pageId": "ranking:fish-paste-consumption-expenditure",
       "title": "かまぼこ消費支出額",
@@ -16783,41 +17020,6 @@
       "consumers": [
         {
           "pageId": "ranking:fulfillment-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "fulltime-physicians-general-hospital-per-100beds",
-      "pageId": "ranking:fulltime-physicians-general-hospital-per-100beds",
-      "title": "一般病院常勤医師数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I0930202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I0930202"
-        },
-        "derived": false,
-        "configHash": "b43312910e17e56a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:fulltime-physicians-general-hospital-per-100beds",
           "kind": "ranking"
         }
       ],

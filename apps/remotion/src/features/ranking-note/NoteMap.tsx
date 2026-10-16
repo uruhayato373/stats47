@@ -9,6 +9,15 @@ import { SITE } from "@stats47/types";
 const MAP_BOX = { width: 1000, height: 560 };
 
 /**
+ * 題名の帯 (幅 1000px) に 1 行で収まる大きさ。2 行目は地図の枠 (top 160) に隠れるため折り返さない。
+ * 半角は全角の 0.6 字分として数える (2026-10-16 に「年次有給休暇を11日以上取得した雇用者の割合」の「割合」が隠れた)。
+ */
+function mapTitleFontSize(title: string): number {
+  const width = [...title].reduce((sum, ch) => sum + (ch.charCodeAt(0) < 0x100 ? 0.6 : 1), 0);
+  return Math.min(50, Math.floor(980 / width));
+}
+
+/**
  * 記事内コロプレス地図 (1080x1080)。
  * 旧デザインには凡例がなく、色が何の値に対応するか読み取れなかった。凡例 (最小・平均・最大) と上位/下位3県を併記する。
  */
@@ -38,7 +47,7 @@ export const NoteMap: React.FC<NoteImageProps> = (props) => {
         <div style={{ fontSize: 26, fontWeight: FONT.weight.bold, color: "#64748B", letterSpacing: 2 }}>
           {meta.yearName ? `${meta.yearName} 都道府県ランキング` : "都道府県ランキング"}
         </div>
-        <div style={{ fontSize: 50, fontWeight: FONT.weight.black, lineHeight: 1.2, marginTop: 4 }}>{title}</div>
+        <div style={{ fontSize: mapTitleFontSize(title), fontWeight: FONT.weight.black, lineHeight: 1.2, marginTop: 4, whiteSpace: "nowrap" }}>{title}</div>
       </div>
 
       <div style={{ position: "absolute", left: 40, top: 160, width: MAP_BOX.width, height: MAP_BOX.height, backgroundColor: "#EEF2F7", borderRadius: 20 }}>

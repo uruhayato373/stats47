@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**711 件** (最終更新: 2026-10-14)
+**714 件** (最終更新: 2026-10-15)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-15 | 📸 Instagram | ranking-quiz/mochi-consumption-expenditure | 【都道府県クイズ】おもちにいちばんお金を使う県は？  A 新潟県 B 富山県 C 茨城県  ヒントは2枚目、答えは3枚目… | [🔗](https://www.instagram.com/p/DehN9mcjg9p/) |
+| 2026-10-15 | 🧵 Threads | area/area-22000-profile | 静岡を数字と地域文化の両方から見る。 県鳥サンコウチョウ、特産クラウンメロン、全国順位をまとめた県別ページです。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DegiIFoj1Ez) |
+| 2026-10-15 | 🧵 Threads | ranking/passport-issuance-count-per-thousand | パスポートを取る人が多い県は？  人口千人あたりの発行件数は1位東京50.9件、2位神奈川39.3件、3位大阪37.3件… | [🔗](https://www.threads.com/@stats47jp/post/Defzz8Tj_we) |
 | 2026-10-14 | 📸 Instagram | correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio | 【データの相関】喫茶代消費支出額 × 最終学歴が大学・大学院卒の者の割合  喫茶店にお金を使う県ほど、大卒が多い？  縦… | [🔗](https://www.instagram.com/p/DeeqCv1lvuF/) |
 | 2026-10-14 | 📸 Instagram | ranking-quiz-reel/ramen-dining-consumption-expenditure | 【都道府県クイズ】ラーメンの外食にいちばんお金を使う県は？  A 新潟県 B 山形県 C 宮城県  答えは動画の最後に�… | [🔗](https://www.instagram.com/reel/Ded81JJipH-/) |
 | 2026-10-14 | 🧵 Threads | area/area-21000-profile | あなたの知る岐阜は、データでも同じ姿ですか？ イチイやすずらん大根から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/Ded7CzdiXZx) |

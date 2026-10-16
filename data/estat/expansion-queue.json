@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-04T15:40:19.761Z",
+ "generatedAt": "2026-10-15T23:08:18.355Z",
  "doctrine": "計測ゲート付き需要ファースト。公開→GSC実測→流入が付いたカテゴリのみ深掘り (thin-content回避)。",
  "summary": {
-  "totalCandidates": 3922,
+  "totalCandidates": 3920,
   "byStatus": {
-   "candidate": 3922
+   "candidate": 3920
   },
-  "addablePending": 2475,
+  "addablePending": 2474,
   "categoryTraffic": {}
  },
  "queue": [
@@ -28511,21 +28511,6 @@
    "priority": 2
   },
   {
-   "id": "0000010107|G7103",
-   "statsDataId": "0000010107",
-   "cdCat01": "G7103",
-   "title": "実宿泊者数",
-   "subtitleHint": null,
-   "category": "educationsports",
-   "unit": "人",
-   "key": null,
-   "status": "candidate",
-   "score": 2,
-   "fine": false,
-   "gsc": null,
-   "priority": 2
-  },
-  {
    "id": "0000010108|H110202",
    "statsDataId": "0000010108",
    "cdCat01": "H110202",
@@ -45631,21 +45616,6 @@
    "cdCat01": "G690102",
    "title": "テレビ・ラジオ・新聞・雑誌行動者率（15歳以上）（女）",
    "subtitleHint": "女",
-   "category": "educationsports",
-   "unit": "％",
-   "key": null,
-   "status": "candidate",
-   "score": 3,
-   "fine": true,
-   "gsc": null,
-   "priority": 0
-  },
-  {
-   "id": "0000010107|G7000",
-   "statsDataId": "0000010107",
-   "cdCat01": "G7000",
-   "title": "インターネットの利用行動者率（10歳以上）",
-   "subtitleHint": "10歳以上",
    "category": "educationsports",
    "unit": "％",
    "key": null,

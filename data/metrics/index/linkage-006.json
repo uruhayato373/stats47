@@ -2,6 +2,236 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "elementary-school-students-per-teacher",
+      "pageId": "ranking:elementary-school-students-per-teacher",
+      "title": "小学校児童数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E0510301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0510301"
+        },
+        "derived": false,
+        "configHash": "9c39c41d4bfa686e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:students-per-teacher-class-size-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:elementary-school-students-per-teacher",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
       "metricKey": "elementary-school-teachers",
       "pageId": "ranking:elementary-school-teachers",
       "title": "小学校教員数",
@@ -11512,243 +11742,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "fish-catch",
-      "pageId": "ranking:fish-catch",
-      "title": "漁獲量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C3121"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C3121"
-        },
-        "derived": false,
-        "configHash": "9ec0eeb2651a7c5d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:fishery-catch-aquaculture-shift",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:fish-catch",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:fishery-marine",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "fishery-marine"
-      ]
     }
   ]
 }

@@ -28,8 +28,11 @@ codex login                # ChatGPT アカウント。認証情報はエージ�
 codex login status         # → "Logged in using ChatGPT" なら準備完了
 ```
 
-- 入口は `.mcp.json` の `codex` エントリ (`type: stdio` / `command: codex` / `args: ["mcp-server"]`)。
+- 入口は `.mcp.json` の `codex` エントリ (`type: stdio` / `command: npx` / `args: ["-y", "@openai/codex@0.153.0", "mcp-server"]`)。
   **`codex mcp` は別物** (Codex が外部 MCP を使う側の管理コマンド)。サーバー起動は `codex mcp-server`。
+  **`mcp-server` は codex 0.154.0 で削除された** (2026-10-15 に 0.150〜0.162 を `npx … --help` で確認。0.153.0 が最後)。
+  手元の `codex` を最新に更新すると MCP が「Connection closed」で落ちるので、MCP だけ 0.153.0 を npx で固定する。
+  Claude Code の「ローカル」設定 (`~/.claude.json` の `projects["<repo>"].mcpServers.codex`) が優先されるので、同じ値にそろえる。
 - `.mcp.json` は git tracked なので設定は全マシンに共有されるが、**CLI 本体と認証はマシンごと**。
   未インストールのマシンでは MCP 接続が失敗するだけで、他のツールには影響しない。
 - 認証は `~/.codex/auth.json`。**このファイルを読まない・コピーしない・ログに出さない。**

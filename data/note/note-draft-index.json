@@ -50,14 +50,9 @@
       "r2_path": "note/koumuin-claude-code/30-post-retirement-career",
       "status": "draft"
     },
-    "A-laborwage-commute-time-prefecture": {
+    "a-annual-paid-leave-11-days-or-more-ratio": {
       "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/A-laborwage-commute-time-prefecture",
-      "status": "draft"
-    },
-    "A-laborwage-job-opening-ratio-prefecture": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/A-laborwage-job-opening-ratio-prefecture",
+      "r2_path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
       "status": "draft"
     },
     "A-laborwage-paid-leave-utilization-prefecture": {
@@ -65,14 +60,14 @@
       "r2_path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",
       "status": "draft"
     },
-    "A-laborwage-starting-salary-by-prefecture": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/A-laborwage-starting-salary-by-prefecture",
-      "status": "draft"
-    },
     "A-laborwage-wages-by-industry-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
+      "status": "draft"
+    },
+    "a-manufacturing-industry-annual-income": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
       "status": "draft"
     },
     "a-number-of-hotel-rooms": {

@@ -144,10 +144,13 @@
                 "type": "string"
               },
               "afterWeek": {
-                "type": "string"
+                "type": ["string", "null"]
               },
               "elapsedWeeks": {
-                "type": "number"
+                "type": ["number", "null"]
+              },
+              "notDue": {
+                "type": "boolean"
               },
               "minWeeks": {
                 "type": "number"

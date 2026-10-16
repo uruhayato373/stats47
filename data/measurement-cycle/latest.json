@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W40",
-  "asOf": "2026-10-04",
-  "generatedAt": "2026-10-04T15:40:04.122Z",
+  "week": "2026-W41",
+  "asOf": "2026-10-11",
+  "generatedAt": "2026-10-15T23:08:04.407Z",
   "sources": {
     "ga4": {
       "status": "ok",
-      "periodStart": "2026-09-06",
-      "periodEnd": "2026-10-03",
+      "periodStart": "2026-09-13",
+      "periodEnd": "2026-10-10",
       "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
     },
     "customDimensions": {
@@ -21,15 +21,15 @@
     },
     "improvements": {
       "status": "ok",
-      "detail": "active 25 件"
+      "detail": "active 8 件"
     },
     "effectVerdicts": {
       "status": "ok",
-      "detail": "verdicts-2026-W40.json"
+      "detail": "verdicts-2026-W41.json"
     }
   },
   "kpiTree": {
-    "compareWeek": "2026-W36",
+    "compareWeek": "2026-W37",
     "nodes": [
       {
         "id": "weekly-revenue",
@@ -38,7 +38,7 @@
         "cadence": "weekly",
         "measurementStatus": "partially-measured",
         "unit": "円/月換算",
-        "source": ".claude/state/metrics/",
+        "source": "data/",
         "focus": false,
         "status": "see-nsm",
         "value": null,
@@ -58,7 +58,7 @@
         "status": "unmeasurable",
         "value": null,
         "previous": null,
-        "note": "ココナラ ¥0（累積 ¥0 (2026-10-01)） / KDP 判定不能（日別の観測 1/7 日） / note 判定不能（週初め前の基準点が無い (最初の観測 2026-09-30)）",
+        "note": "ココナラ 判定不能（最終観測 2026-10-01 が週より前） / KDP 判定不能（日別の観測 0/7 日） / note 判定不能（最終観測 2026-09-30 が週より前）",
         "improvements": [
           "NOTE-KAKEI-REDESIGN-EFFECT-01",
           "NOTE-CIRCULATION-PILOT-01"
@@ -71,7 +71,7 @@
         "cadence": "weekly",
         "measurementStatus": "measured",
         "unit": "クリック/28日",
-        "source": ".claude/state/metrics/gsc/history.csv",
+        "source": "data/gsc/history.csv",
         "target": {
           "value": 20000,
           "dueWeek": "2026-W52",
@@ -79,18 +79,46 @@
         },
         "focus": true,
         "status": "ok",
-        "value": "10018",
-        "previous": "6053",
+        "value": "12263",
+        "previous": "7503",
         "improvements": [
-          "RANKING-REINDEX-01",
-          "BLOG-SEO-TYPES-01",
-          "BLOG-SEO-QUEUE-01",
-          "SURVEY-LINKAGE-02",
-          "BLOG-LINKROT-01",
-          "STP-MESSAGE-ROLLOUT-01",
-          "THEME-EXPANSION-EFFECT-01",
-          "RANK-THIN-01",
-          "STP-AI-WATCH-01"
+          "THEME-EXPANSION-EFFECT-01"
+        ]
+      },
+      {
+        "id": "site-pageviews",
+        "label": "ページビュー (GA4 Japan 確定7日×4週)",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "PV/28日",
+        "source": "data/ga4/history-finalized7d.csv",
+        "target": {
+          "value": 79000,
+          "dueWeek": "2026-W52",
+          "basis": "search-clicks の目標 20,000 (2026-W52) × PV/検索クリック 3.98 (W37〜W40 の GA4 Japan PV 43,907 ÷ GSC rolling28d 11,023) ≈ 79,600 を切り下げ (2026-10-07 設定)"
+        },
+        "focus": false,
+        "status": "ok",
+        "value": "44662",
+        "previous": "36760",
+        "improvements": []
+      },
+      {
+        "id": "ad-yield",
+        "label": "広告収益効率 (AdSense)",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "円/1,000 GA4 Japan PV",
+        "source": "data/adsense/history.csv + data/ga4/history-finalized7d.csv",
+        "focus": false,
+        "status": "pending",
+        "value": null,
+        "previous": null,
+        "note": "再開 (2026-10-11) 前の週 2026-W38・2026-W39・2026-W40・2026-W41 を含む。再開後 4 週は 2026-W42 から数える。停止前 W30〜W33 は ¥22 (自動広告込み)",
+        "improvements": [
+          "ADSENSE-PLACEMENT-01"
         ]
       },
       {
@@ -103,12 +131,10 @@
         "source": "GA4 internal-transitions.csv (referrer 集計)",
         "focus": false,
         "status": "ok",
-        "value": "8.2%",
+        "value": "8.6%",
         "previous": null,
         "improvements": [
-          "FUNNEL-CTA-01",
-          "BLOG-SRCLINK-01",
-          "BLOG-LINKROT-01"
+          "BLOG-SRCLINK-01"
         ]
       },
       {
@@ -120,16 +146,13 @@
         "unit": "円/1,000 viewable imp",
         "source": "GA4 ga4-affiliate-history.csv + ASP 確定成果",
         "focus": false,
-        "status": "stale",
-        "value": "GA4 7日 imp 3391・click 2",
+        "status": "partial",
+        "value": "GA4 7日 imp 4465・click 4",
         "previous": null,
-        "note": "最終観測 2026-09-26。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
+        "note": "最終観測 2026-10-10。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
         "improvements": [
           "AFF-RESOLUTION-EFFECT-01",
-          "AFF-RANKING-RAKUTEN-NATIVE-01",
-          "AFF-IMPRESSION-ROUTING-01",
-          "AFF-BLOG-TEXTLINK-01",
-          "AFF-A8-REGISTER-01"
+          "AFF-IMPRESSION-ROUTING-01"
         ]
       },
       {
@@ -142,7 +165,7 @@
         "source": "GA4 landing-context.csv",
         "focus": false,
         "status": "ok",
-        "value": "3560",
+        "value": "3828",
         "previous": null,
         "improvements": []
       },
@@ -153,16 +176,13 @@
         "cadence": "weekly",
         "measurementStatus": "partially-measured",
         "unit": "%",
-        "source": ".claude/state/ranking/integrity-audit.json",
+        "source": "data/ranking/integrity-audit.json",
         "focus": true,
         "status": "ok",
-        "value": "100.0% (2423/2423)",
+        "value": "99.1% (2435/2456)",
         "previous": null,
-        "note": "監査 2026-10-03",
-        "improvements": [
-          "DATA-ESTAT-FETCH-01",
-          "DATA-MANUAL-RESTORE-01"
-        ]
+        "note": "監査 2026-10-10・不合格 recipe.unbaked 21",
+        "improvements": []
       },
       {
         "id": "site-health",
@@ -171,16 +191,12 @@
         "cadence": "weekly",
         "measurementStatus": "measured",
         "unit": "PSIモバイル中央値 / Workersエラー率",
-        "source": ".claude/state/metrics/{psi,cloudflare}/history.csv",
+        "source": "data/{psi,cloudflare}/history.csv",
         "focus": true,
-        "status": "partial",
-        "value": "PSI モバイル中央値 70・Workers error 0.1%",
+        "status": "ok",
+        "value": "PSI モバイル中央値 75・Workers error 0.1%",
         "previous": null,
-        "improvements": [
-          "PERF-WORKER-P99-01",
-          "ASSET-POLICY-BURNDOWN-01",
-          "DEPS-RENOVATE-01"
-        ]
+        "improvements": []
       },
       {
         "id": "operating-cost",
@@ -189,15 +205,12 @@
         "cadence": "weekly",
         "measurementStatus": "partially-measured",
         "unit": "閾値違反数 / R2保存GB",
-        "source": ".claude/state/metrics/cloudflare/ + claude-usage/history.csv",
+        "source": "data/cloudflare/ + claude-usage/history.csv",
         "focus": true,
-        "status": "stale",
-        "value": "閾値違反 15 件・R2 保存 33.356 GB",
+        "status": "ok",
+        "value": "閾値違反 24 件・R2 保存 34.152 GB",
         "previous": null,
-        "improvements": [
-          "R2-STORAGE-01",
-          "TOKEN-AICONTENT-01"
-        ]
+        "improvements": []
       },
       {
         "id": "measurement-freshness",
@@ -206,157 +219,100 @@
         "cadence": "weekly",
         "measurementStatus": "measured",
         "unit": "鮮度okの計測源 / 全計測源",
-        "source": ".claude/state/metrics/measurement-cycle/latest.json",
+        "source": "data/measurement-cycle/latest.json",
         "focus": true,
         "status": "degraded",
-        "value": "7/14",
+        "value": "9/14",
         "previous": null,
-        "note": "欠測・古い・認証切れ: affiliate, psi, cloudflare, sns, gsc(runner_failed), kdp(auth_required), coconala(auth_required)",
-        "improvements": []
+        "note": "欠測・古い・認証切れ: sns, a8(collection_failed), note(report_incomplete), kdp(auth_required), coconala(auth_required)",
+        "improvements": [
+          "MEASUREMENT-AUTH-RESTORE-01"
+        ]
       }
     ],
     "improvements": {
-      "active": 25,
+      "active": 8,
       "maxActive": 10,
       "unlinked": [],
       "noTarget": [
-        "PERF-WORKER-P99-01",
-        "R2-STORAGE-01",
-        "DATA-ESTAT-FETCH-01",
-        "DATA-MANUAL-RESTORE-01",
         "AFF-IMPRESSION-ROUTING-01",
-        "RANKING-REINDEX-01",
-        "BLOG-SEO-TYPES-01",
-        "BLOG-SEO-QUEUE-01",
-        "SURVEY-LINKAGE-02",
-        "FUNNEL-CTA-01",
-        "AFF-BLOG-TEXTLINK-01",
-        "AFF-A8-REGISTER-01",
+        "ADSENSE-PLACEMENT-01",
         "BLOG-SRCLINK-01",
-        "BLOG-LINKROT-01",
-        "STP-MESSAGE-ROLLOUT-01",
         "THEME-EXPANSION-EFFECT-01",
-        "NOTE-CIRCULATION-PILOT-01",
-        "ASSET-POLICY-BURNDOWN-01",
-        "RANK-THIN-01",
-        "STP-AI-WATCH-01",
-        "DEPS-RENOVATE-01"
+        "NOTE-CIRCULATION-PILOT-01"
       ]
     },
     "focusWithoutImprovements": [
-      "measurement-freshness"
+      "data-quality-pass-rate",
+      "site-health",
+      "operating-cost"
     ]
   },
   "engine": {
-    "verdictsWeek": "2026-W40",
+    "verdictsWeek": "2026-W41",
     "byDomain": {
-      "gsc-blog-wave": {
-        "subjects": 7,
+      "adsense": {
+        "subjects": 1,
         "byLabel": {
-          "effect/pending": 7
+          "effect/pending": 1
         }
       }
     },
     "gsc": {
-      "active": 6,
+      "active": 0,
       "judgeable": 0,
-      "missing": [
-        {
-          "id": "RANKING-REINDEX-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "BLOG-SEO-TYPES-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "BLOG-SEO-QUEUE-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "BLOG-LINKROT-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "THEME-EXPANSION-EFFECT-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "STP-AI-WATCH-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        }
+      "missing": [],
+      "outOfScope": [
+        "THEME-EXPANSION-EFFECT-01"
       ]
     }
   },
   "operations": {
     "psi": {
-      "status": "stale",
-      "latestDate": "2026-09-30",
-      "daysInWindow": 2,
-      "mobileMedianScore": 70,
-      "urlsWithErrors": 25,
+      "status": "ok",
+      "latestDate": "2026-10-11",
+      "daysInWindow": 7,
+      "mobileMedianScore": 75,
+      "urlsWithErrors": 28,
       "urlsMeasured": 38,
       "measurementFailures": 0,
       "worstMobile": [
         {
-          "url": "https://stats47.jp/ranking/agricultural-output",
-          "score": 43,
-          "lcpMs": 10520
-        },
-        {
-          "url": "https://stats47.jp/ranking/annual-sunshine-duration",
-          "score": 48,
-          "lcpMs": 9253
+          "url": "https://stats47.jp/themes/population-dynamics",
+          "score": 40,
+          "lcpMs": 8551
         },
         {
           "url": "https://stats47.jp/ranking/total-population",
-          "score": 49,
-          "lcpMs": 9794
+          "score": 54,
+          "lcpMs": 4801
+        },
+        {
+          "url": "https://stats47.jp/",
+          "score": 57,
+          "lcpMs": 5950
         }
       ]
     },
     "cloudflare": {
-      "status": "stale",
-      "latestDate": "2026-09-29",
-      "daysInWindow": 2,
-      "workersRequests": 185374,
-      "workersErrorRate": 0.0013,
-      "r2ClassAOps": 17437,
-      "r2ClassBOps": 674438,
-      "r2EgressMb": 166966,
-      "r2StorageGb": 33.356,
+      "status": "ok",
+      "latestDate": "2026-10-11",
+      "daysInWindow": 7,
+      "workersRequests": 712041,
+      "workersErrorRate": 0.0012,
+      "r2ClassAOps": 345490,
+      "r2ClassBOps": 6107438,
+      "r2EgressMb": 953854,
+      "r2StorageGb": 34.152,
       "violationsBySeverity": {
-        "warning": 10,
-        "info": 5
+        "warning": 17,
+        "info": 7
       },
       "violationTitles": [
         "R2 account storage > 18GB",
         "stats47 bucket storage > 12.5GB",
-        "R2 egress > 5GB/日"
+        "R2 egress > 5GB/日",
+        "R2 Class B ops > 1M/日"
       ]
     },
     "sns": {
@@ -366,179 +322,174 @@
       "topPosts": []
     },
     "improvements": {
-      "psi": [
-        "PERF-WORKER-P99-01",
-        "ASSET-POLICY-BURNDOWN-01"
-      ],
-      "cloudflare": [
-        "R2-STORAGE-01"
-      ],
+      "psi": [],
+      "cloudflare": [],
       "sns": []
     }
   },
   "journey": {
     "blogToRanking": {
-      "pageViews": 869,
-      "fromPageViews": 10651,
-      "rate": 0.0816
+      "pageViews": 893,
+      "fromPageViews": 10428,
+      "rate": 0.0856
     },
     "themesToRanking": {
-      "pageViews": 76,
-      "fromPageViews": 758,
-      "rate": 0.1003
+      "pageViews": 104,
+      "fromPageViews": 816,
+      "rate": 0.1275
     },
     "themesToBlog": {
-      "pageViews": 3,
-      "fromPageViews": 758,
-      "rate": 0.004
+      "pageViews": 6,
+      "fromPageViews": 816,
+      "rate": 0.0074
     },
     "topCrossSection": [
       {
         "from": "blog",
         "to": "ranking",
-        "pageViews": 869
+        "pageViews": 893
       },
       {
         "from": "ranking",
         "to": "category",
-        "pageViews": 639
+        "pageViews": 735
       },
       {
         "from": "category",
         "to": "ranking",
-        "pageViews": 598
+        "pageViews": 672
       },
       {
         "from": "ranking",
         "to": "blog",
-        "pageViews": 476
+        "pageViews": 520
       },
       {
         "from": "areas",
         "to": "ranking",
-        "pageViews": 356
+        "pageViews": 468
       },
       {
         "from": "ranking",
         "to": "areas",
-        "pageViews": 346
+        "pageViews": 459
       },
       {
         "from": "search",
         "to": "ranking",
-        "pageViews": 327
+        "pageViews": 330
       },
       {
         "from": "ranking",
         "to": "search",
-        "pageViews": 280
+        "pageViews": 255
       }
     ]
   },
   "navCoverage": {
-    "internalTransitions": 13727,
-    "navClicks": 4643,
-    "labeledClicks": 2815,
-    "coverage": 0.2051,
-    "unlabeledShare": 0.3937,
+    "internalTransitions": 15759,
+    "navClicks": 7937,
+    "labeledClicks": 3659,
+    "coverage": 0.2322,
+    "unlabeledShare": 0.539,
     "topUnlabeled": [
       {
         "label": "ranking",
-        "clicks": 626
-      },
-      {
-        "label": "municipalities",
-        "clicks": 281
+        "clicks": 1495
       },
       {
         "label": "geo",
-        "clicks": 260
+        "clicks": 599
+      },
+      {
+        "label": "municipalities",
+        "clicks": 573
       },
       {
         "label": "areas",
-        "clicks": 154
-      },
-      {
-        "label": "themes",
-        "clicks": 114
+        "clicks": 509
       },
       {
         "label": "api",
-        "clicks": 97
+        "clicks": 285
+      },
+      {
+        "label": "themes",
+        "clicks": 209
       },
       {
         "label": "home",
-        "clicks": 94
+        "clicks": 186
       },
       {
         "label": "category",
-        "clicks": 76
+        "clicks": 169
       }
     ]
   },
   "workContext": {
     "baseline": {
-      "sessions": 13861,
-      "desktopShare": 0.453,
-      "workdayHoursShare": 0.448
+      "sessions": 15050,
+      "desktopShare": 0.46,
+      "workdayHoursShare": 0.451
     },
-    "qualifyingSessions": 3560,
+    "qualifyingSessions": 3828,
     "top": [
       {
         "landingPage": "/",
-        "sessions": 358,
-        "desktopShare": 0.733,
-        "workdayHoursShare": 0.539,
-        "avgEngagementSec": 94.6
+        "sessions": 387,
+        "desktopShare": 0.729,
+        "workdayHoursShare": 0.553,
+        "avgEngagementSec": 101.4
       },
       {
         "landingPage": "/blog/automotive-industry-transformation-map",
-        "sessions": 274,
-        "desktopShare": 0.68,
-        "workdayHoursShare": 0.591,
-        "avgEngagementSec": 63.5
-      },
-      {
-        "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
-        "sessions": 151,
-        "desktopShare": 0.748,
-        "workdayHoursShare": 0.85,
-        "avgEngagementSec": 100.8
-      },
-      {
-        "landingPage": "/blog/health-life-expectancy-structure",
-        "sessions": 266,
-        "desktopShare": 0.68,
-        "workdayHoursShare": 0.476,
-        "avgEngagementSec": 67.8
+        "sessions": 308,
+        "desktopShare": 0.715,
+        "workdayHoursShare": 0.627,
+        "avgEngagementSec": 69.2
       },
       {
         "landingPage": "/blog/livable-prefecture-composite-ranking",
-        "sessions": 295,
-        "desktopShare": 0.488,
-        "workdayHoursShare": 0.476,
-        "avgEngagementSec": 47.8
+        "sessions": 331,
+        "desktopShare": 0.48,
+        "workdayHoursShare": 0.49,
+        "avgEngagementSec": 51.3
+      },
+      {
+        "landingPage": "/blog/health-life-expectancy-structure",
+        "sessions": 197,
+        "desktopShare": 0.751,
+        "workdayHoursShare": 0.51,
+        "avgEngagementSec": 64.5
+      },
+      {
+        "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
+        "sessions": 132,
+        "desktopShare": 0.697,
+        "workdayHoursShare": 0.781,
+        "avgEngagementSec": 94
       },
       {
         "landingPage": "/ranking",
-        "sessions": 92,
-        "desktopShare": 0.946,
-        "workdayHoursShare": 0.636,
-        "avgEngagementSec": 193.7
+        "sessions": 103,
+        "desktopShare": 0.942,
+        "workdayHoursShare": 0.67,
+        "avgEngagementSec": 156.4
       },
       {
         "landingPage": "/ranking/rice-consumption-quantity",
-        "sessions": 133,
-        "desktopShare": 0.684,
-        "workdayHoursShare": 0.568,
-        "avgEngagementSec": 84
+        "sessions": 128,
+        "desktopShare": 0.75,
+        "workdayHoursShare": 0.655,
+        "avgEngagementSec": 89.2
       },
       {
-        "landingPage": "/blog/sports-urban-paradox",
-        "sessions": 92,
-        "desktopShare": 0.674,
-        "workdayHoursShare": 0.629,
-        "avgEngagementSec": 89.5
+        "landingPage": "/blog/alcohol-prefecture-map",
+        "sessions": 190,
+        "desktopShare": 0.5,
+        "workdayHoursShare": 0.502,
+        "avgEngagementSec": 66.3
       }
     ]
   },
@@ -547,50 +498,7 @@
     "groups": []
   },
   "improvements": {
-    "active": 25,
-    "overdue": [
-      {
-        "id": "STP-MESSAGE-ROLLOUT-01",
-        "status": "pending",
-        "due": "2026-09-21",
-        "metric": "brand",
-        "owner": "claude"
-      },
-      {
-        "id": "SURVEY-LINKAGE-02",
-        "status": "pending",
-        "due": "2026-09-21",
-        "metric": "content",
-        "owner": "claude"
-      },
-      {
-        "id": "AFF-IMPRESSION-ROUTING-01",
-        "status": "in-progress",
-        "due": "2026-09-27",
-        "metric": "affiliate",
-        "owner": "claude"
-      },
-      {
-        "id": "BLOG-SEO-QUEUE-01",
-        "status": "effect/pending",
-        "due": "2026-09-28",
-        "metric": "gsc",
-        "owner": "claude"
-      },
-      {
-        "id": "BLOG-SEO-TYPES-01",
-        "status": "effect/pending",
-        "due": "2026-09-28",
-        "metric": "gsc",
-        "owner": "claude"
-      },
-      {
-        "id": "TOKEN-AICONTENT-01",
-        "status": "pending",
-        "due": "2026-10-01",
-        "metric": "cost",
-        "owner": "ranking-content-author"
-      }
-    ]
+    "active": 8,
+    "overdue": []
   }
 }

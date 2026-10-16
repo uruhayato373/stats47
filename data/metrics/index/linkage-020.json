@@ -2,6 +2,359 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "renovation-rate",
+      "pageId": "ranking:renovation-rate",
+      "title": "リフォーム工事実施率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004025556",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "00"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004025556",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "00"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat04",
+            "numeratorCodes": [
+              "1"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "a3fcc94bbe99d116"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:renovation-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:living-housing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "living-housing"
+      ]
+    },
+    {
+      "metricKey": "rental-car-consumption-expenditure",
+      "pageId": "ranking:rental-car-consumption-expenditure",
+      "title": "レンタカー・カーシェアリング料金消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070230080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070230080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "108c894ae2cfaefd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:rental-car-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "rented-housing-ratio",
+      "pageId": "ranking:rented-housing-ratio",
+      "title": "借家比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01302"
+        },
+        "derived": false,
+        "configHash": "6a8f7b333fbd8e04"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:rented-housing-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "repair-materials-consumption-expenditure",
+      "pageId": "ranking:repair-materials-consumption-expenditure",
+      "title": "修繕材料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "020210020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "020210020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9019cbf790ff0ff0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:repair-materials-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "researcher-annual-income",
       "pageId": "ranking:researcher-annual-income",
       "title": "研究者の平均年収",
@@ -10793,367 +11146,6 @@
         },
         {
           "pageId": "ranking:scallop-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "scarf-consumption-expenditure",
-      "pageId": "ranking:scarf-consumption-expenditure",
-      "title": "マフラー・スカーフ消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "050600030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "050600030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "ef16814e35810495"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:scarf-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "scheduled-salary-male",
-      "pageId": "ranking:scheduled-salary-male",
-      "title": "所定内給与額（男）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010106",
-          "filters": {
-            "cdCat01": "F620217"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010106",
-          "cdCat01": "F620217"
-        },
-        "derived": false,
-        "configHash": "0aab5aa583fa4686"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:truck-driver-2024-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wage-vs-living-cost",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:scheduled-salary-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:labor-wages",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "labor-wages"
-      ]
-    },
-    {
-      "metricKey": "school-bag-consumption-expenditure",
-      "pageId": "ranking:school-bag-consumption-expenditure",
-      "title": "通学用かばん消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "100132020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "100132020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "d0aa471da03bebb6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:school-bag-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "school-bag-consumption-quantity",
-      "pageId": "ranking:school-bag-consumption-quantity",
-      "title": "通学用かばん消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "100132020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "100132020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "12609e41dfe986fa"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:school-bag-consumption-quantity",
           "kind": "ranking"
         }
       ],

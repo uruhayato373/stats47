@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T08:14:49.717Z",
+  "updatedAt": "2026-10-16T00:22:59.996Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -111,7 +111,7 @@
       "production": {
         "id": "NCI-00001",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -410,7 +410,7 @@
       "production": {
         "id": "NCI-00003",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -522,7 +522,7 @@
       "production": {
         "id": "NCI-00004",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -634,7 +634,7 @@
       "production": {
         "id": "NCI-00005",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -746,7 +746,7 @@
       "production": {
         "id": "NCI-00006",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -858,7 +858,7 @@
       "production": {
         "id": "NCI-00007",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -970,7 +970,7 @@
       "production": {
         "id": "NCI-00008",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1082,7 +1082,7 @@
       "production": {
         "id": "NCI-00009",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1194,7 +1194,7 @@
       "production": {
         "id": "NCI-00010",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1306,7 +1306,7 @@
       "production": {
         "id": "NCI-00011",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1482,7 +1482,7 @@
       "production": {
         "id": "NCI-00012",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1633,7 +1633,7 @@
       "production": {
         "id": "NCI-00013",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1784,7 +1784,7 @@
       "production": {
         "id": "NCI-00014",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -1935,7 +1935,7 @@
       "production": {
         "id": "NCI-00015",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2086,7 +2086,7 @@
       "production": {
         "id": "NCI-00016",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2237,7 +2237,7 @@
       "production": {
         "id": "NCI-00017",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2388,7 +2388,7 @@
       "production": {
         "id": "NCI-00018",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2539,7 +2539,7 @@
       "production": {
         "id": "NCI-00019",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2690,7 +2690,7 @@
       "production": {
         "id": "NCI-00020",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2841,7 +2841,7 @@
       "production": {
         "id": "NCI-00021",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -2992,7 +2992,7 @@
       "production": {
         "id": "NCI-00022",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -3143,7 +3143,7 @@
       "production": {
         "id": "NCI-00023",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -3294,7 +3294,7 @@
       "production": {
         "id": "NCI-00024",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -3445,7 +3445,7 @@
       "production": {
         "id": "NCI-00025",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -3866,7 +3866,7 @@
       "production": {
         "id": "NCI-00028",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4017,7 +4017,7 @@
       "production": {
         "id": "NCI-00029",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4168,7 +4168,7 @@
       "production": {
         "id": "NCI-00030",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4319,7 +4319,7 @@
       "production": {
         "id": "NCI-00031",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4470,7 +4470,7 @@
       "production": {
         "id": "NCI-00032",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4621,7 +4621,7 @@
       "production": {
         "id": "NCI-00033",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -4998,7 +4998,7 @@
       "production": {
         "id": "NCI-00035",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5149,7 +5149,7 @@
       "production": {
         "id": "NCI-00036",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5164,7 +5164,7 @@
       "production": {
         "id": "NCI-00037",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5179,7 +5179,7 @@
       "production": {
         "id": "NCI-00038",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5194,7 +5194,7 @@
       "production": {
         "id": "NCI-00039",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5209,7 +5209,7 @@
       "production": {
         "id": "NCI-00040",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5224,7 +5224,7 @@
       "production": {
         "id": "NCI-00041",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5239,7 +5239,7 @@
       "production": {
         "id": "NCI-00042",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5254,7 +5254,7 @@
       "production": {
         "id": "NCI-00043",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5269,7 +5269,7 @@
       "production": {
         "id": "NCI-00044",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5284,7 +5284,7 @@
       "production": {
         "id": "NCI-00045",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5435,7 +5435,7 @@
       "production": {
         "id": "NCI-00046",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -5586,8 +5586,168 @@
       "production": {
         "id": "NCI-00047",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-active-job-opening-ratio",
+      "noteUrl": "https://note.com/stats47/n/n73c710f239ef",
+      "revisions": [
+        {
+          "sha256": "f3e47d6406c09d76d0feef98eb4dc7dbb92c7d01e431e82b5d4a93dbe692c2dd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/f3e47d6406c09d76d0feef98eb4dc7dbb92c7d01e431e82b5d4a93dbe692c2dd.png"
+          },
+          "bytes": 47347,
+          "id": "f3e47d6406c09d76d0feef98eb4dc7dbb92c7d01e431e82b5d4a93dbe692c2dd",
+          "kind": "candidate",
+          "version": "2026-10-02-ranking-question-v1",
+          "createdAt": "2026-10-15T10:53:24.584Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c09da26f68cd689809494279b3eeefd03426ce942d89f7a61f6530301b6090aa"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "縮小表示で見出し・1位県・地図・年版が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T10:53:26.163Z"
+          },
+          "provenance": {
+            "renderer": "question-ranking-note-cover-v1",
+            "sourceUrl": "https://storage.stats47.jp/app/ranking/active-job-opening-ratio/values.json",
+            "sourceSha256": "c55837d741456c32fe12faafd891cfcfefd4ac6f1243664d0ce40c86f6d7b5e1",
+            "input": {
+              "sha256": "c09da26f68cd689809494279b3eeefd03426ce942d89f7a61f6530301b6090aa",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-active-job-opening-ratio/inputs/c09da26f68cd689809494279b3eeefd03426ce942d89f7a61f6530301b6090aa.json"
+              },
+              "bytes": 7308
+            }
+          }
+        },
+        {
+          "sha256": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50.png"
+          },
+          "bytes": 2201417,
+          "id": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-e417a71cdcdd",
+          "createdAt": "2026-10-15T12:17:09.187Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T12:17:13.134Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-active-job-opening-ratio/inputs/bd9fa8d503ddaaf58d783f0a1081e14381469a9766a5ca526915a343256023a6.json"
+              },
+              "bytes": 9180
+            },
+            "production": {
+              "id": "NCI-00496",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "e417a71cdcdd118590736c285c2914f0dcbc05d538b3d6b39477c271ae4a64b7"
+            }
+          }
+        },
+        {
+          "sha256": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4.png"
+          },
+          "bytes": 55321,
+          "id": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-15T12:18:19.426Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/324706902/rectangle_large_type_2_e54c4f364775e0ca7e772b9375f97ca2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "93d27e74e96ffd2419ac8813dcb5a4d349385d31f5b73d22b67e580efe951db4"
+          }
+        },
+        {
+          "sha256": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-active-job-opening-ratio/revisions/ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b.png"
+          },
+          "bytes": 430698,
+          "id": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-15T12:19:08.271Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b"
+          }
+        }
+      ],
+      "candidateRevisionId": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+      "approvedRevisionId": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-15T12:19:15.196Z",
+        "revisionId": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00496",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "有効求人倍率\n高い県は？",
+          "subline": "1位は福井県\n2022年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に仕事探しを象徴する具体物を1点だけ大きく描く: 無地の求人票の束をはさんだクリップボードと、その横の無地の封筒。求人票は文字のない罫線と色面だけにする。左側に大きな2行の問い、下に十分大きな補足2行。地図・グラフ・表・数値・倍率の図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://note.com/stats47/n/n73c710f239ef 2026-10-15 公開本文を確認。2022年の有効求人倍率 (求職者1人当たりの求人数) の都道府県ランキングで1位は福井県 (1.94倍)、47位は神奈川県 (0.88倍)。カバーは比較対象・対象年・1位だけを表示し、倍率や差を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
@@ -5673,7 +5833,7 @@
       "production": {
         "id": "NCI-00048",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -5760,8 +5920,74 @@
       "production": {
         "id": "NCI-00049",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-annual-paid-leave-11-days-or-more-ratio",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-annual-paid-leave-11-days-or-more-ratio/revisions/adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a.png"
+          },
+          "bytes": 2383739,
+          "id": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-41f8acf5ee2e",
+          "createdAt": "2026-10-15T22:27:43.412Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-16)",
+            "reviewedAt": "2026-10-15T22:27:46.451Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-annual-paid-leave-11-days-or-more-ratio/inputs/3e6472d75f10a5d320f59aaa7af1af97a4439f8feb0674f3a0aa91c825ce8b29.json"
+              },
+              "bytes": 9469
+            },
+            "production": {
+              "id": "NCI-00500",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "41f8acf5ee2e0323ed56b744e00296a12935cf3fe78c00ab95b4d1727494309a"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "approvedRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00500",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "有休を11日以上\n取る人が多い県は？",
+          "subline": "1位は愛知県\n2021年のデータ",
+          "subject": "若草色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に休暇を象徴する具体物を1点だけ大きく描く: 無地の小さな旅行かばんと、その上に載せた麦わら帽子。かばんにはタグ・ステッカー・文字を付けない。左側に大きな2行の問い、下に十分大きな補足2行。カレンダー・時計・地図・グラフ・数字の入った物は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio/draft.md 2026-10-16 公開R2の本文を確認。2021年の社会生活基本調査 (statsDataId 0003456356・推定人口) の、年次有給休暇があり過去1年間続けて働いた雇用者のうち11日以上取得した人の割合の都道府県ランキングで1位は愛知県 (44.4%)、47位は石川県 (31.2%)。取得率ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
@@ -5847,7 +6073,7 @@
       "production": {
         "id": "NCI-00050",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -5934,7 +6160,7 @@
       "production": {
         "id": "NCI-00051",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6021,7 +6247,7 @@
       "production": {
         "id": "NCI-00052",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6270,7 +6496,7 @@
       "production": {
         "id": "NCI-00054",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6357,7 +6583,7 @@
       "production": {
         "id": "NCI-00055",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6444,7 +6670,7 @@
       "production": {
         "id": "NCI-00056",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6531,7 +6757,7 @@
       "production": {
         "id": "NCI-00057",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6618,7 +6844,7 @@
       "production": {
         "id": "NCI-00058",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6705,7 +6931,7 @@
       "production": {
         "id": "NCI-00059",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6808,7 +7034,7 @@
       "production": {
         "id": "NCI-00060",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -6911,7 +7137,7 @@
       "production": {
         "id": "NCI-00061",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7014,7 +7240,7 @@
       "production": {
         "id": "NCI-00062",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7117,7 +7343,7 @@
       "production": {
         "id": "NCI-00063",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7220,7 +7446,7 @@
       "production": {
         "id": "NCI-00064",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7323,7 +7549,7 @@
       "production": {
         "id": "NCI-00065",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7426,7 +7652,7 @@
       "production": {
         "id": "NCI-00066",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7529,7 +7755,7 @@
       "production": {
         "id": "NCI-00067",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7632,7 +7858,7 @@
       "production": {
         "id": "NCI-00068",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7735,7 +7961,7 @@
       "production": {
         "id": "NCI-00069",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7838,7 +8064,7 @@
       "production": {
         "id": "NCI-00070",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -7941,7 +8167,7 @@
       "production": {
         "id": "NCI-00071",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8044,7 +8270,7 @@
       "production": {
         "id": "NCI-00072",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8147,7 +8373,7 @@
       "production": {
         "id": "NCI-00073",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8250,7 +8476,7 @@
       "production": {
         "id": "NCI-00074",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8353,7 +8579,7 @@
       "production": {
         "id": "NCI-00075",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8456,7 +8682,7 @@
       "production": {
         "id": "NCI-00076",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -8559,7 +8785,7 @@
       "production": {
         "id": "NCI-00077",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9196,7 +9422,7 @@
       "production": {
         "id": "NCI-00081",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9299,7 +9525,7 @@
       "production": {
         "id": "NCI-00082",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9402,7 +9628,7 @@
       "production": {
         "id": "NCI-00083",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9505,7 +9731,7 @@
       "production": {
         "id": "NCI-00084",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9608,7 +9834,7 @@
       "production": {
         "id": "NCI-00085",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9711,7 +9937,7 @@
       "production": {
         "id": "NCI-00086",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9814,7 +10040,7 @@
       "production": {
         "id": "NCI-00087",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -9917,7 +10143,7 @@
       "production": {
         "id": "NCI-00088",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -13576,36 +13802,6 @@
       }
     },
     {
-      "articleKey": "A-laborwage-commute-time-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00107",
-        "policyId": "NCP-004",
-        "policyVersion": 2,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "A-laborwage-job-opening-ratio-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00108",
-        "policyId": "NCP-004",
-        "policyVersion": 2,
-        "brief": null
-      }
-    },
-    {
       "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
       "noteUrl": null,
       "revisions": [],
@@ -13616,22 +13812,7 @@
       "production": {
         "id": "NCI-00109",
         "policyId": "NCP-004",
-        "policyVersion": 2,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "A-laborwage-starting-salary-by-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00110",
-        "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -13646,7 +13827,7 @@
       "production": {
         "id": "NCI-00111",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -13733,8 +13914,140 @@
       "production": {
         "id": "NCI-00112",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
+      "revisions": [
+        {
+          "sha256": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/revisions/880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f.png"
+          },
+          "bytes": 2219160,
+          "id": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-b1b78bc1d377",
+          "createdAt": "2026-10-15T12:50:55.134Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T12:50:59.153Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/inputs/ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941.json"
+              },
+              "bytes": 9650
+            },
+            "production": {
+              "id": "NCI-00499",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "b1b78bc1d37702695f94ffc06595a94040b52121272e244f77c019e0562e1a95"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "approvedRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00499",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "通勤90分以上の\n世帯が多い県は？",
+          "subline": "1位は埼玉県\n2023年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に長い通勤を象徴する具体物を1点だけ大きく描く: 無地の通勤定期入れと、その横に置いた文字盤に数字のないシンプルな腕時計。定期入れの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。電車の車両・路線図・駅名標・地図・グラフ・時刻表・数字の入った時計は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min/draft.md 2026-10-15 公開R2の本文を確認。2023年の社会・人口統計体系 (statsDataId 0000010208・項目 H03102) の、家計を主に支える者が雇用者で通勤時間が1時間30分以上の主世帯の割合 (主世帯千世帯あたり) の都道府県ランキングで1位は埼玉県 (33.9)、47位は沖縄県 (2.6)。平均通勤時間ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
+      }
+    },
+    {
+      "articleKey": "a-manufacturing-industry-annual-income",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-manufacturing-industry-annual-income/revisions/700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce.png"
+          },
+          "bytes": 2214824,
+          "id": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-7f25b0ae8648",
+          "createdAt": "2026-10-16T00:22:48.144Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-16)",
+            "reviewedAt": "2026-10-16T00:22:51.983Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-manufacturing-industry-annual-income/inputs/b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f.json"
+              },
+              "bytes": 9494
+            },
+            "production": {
+              "id": "NCI-00501",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "7f25b0ae8648b8415ef92081afc14faca395b9752eec1a38b5f7cc3e2b883852"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "approvedRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00501",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "製造業の年収が\n高い県は？",
+          "subline": "1位は神奈川県\n2023年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側にものづくりを象徴する具体物を1点だけ大きく描く: 無地の大きな歯車を2つ組み合わせ、その手前に置いた銀色のスパナ。歯車とスパナには刻印・文字・数字を付けない。左側に大きな2行の問い、下に十分大きな補足2行。工場の建物・煙突・紙幣・硬貨・お札の束・地図・グラフ・数字の入った物は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-manufacturing-industry-annual-income/draft.md 2026-10-16 公開R2の本文を確認。2023年の賃金構造基本統計調査 (statsDataId 0003426933・産業分類 E 製造業・一般労働者・男女計・企業規模10人以上) の、6月のきまって支給する現金給与額×12+前年の賞与で推計した年収の都道府県ランキングで1位は神奈川県 (629.09万円)、47位は沖縄県 (330.04万円)。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
@@ -14046,8 +14359,140 @@
       "production": {
         "id": "NCI-00114",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "a-new-graduate-starting-salary-university-female",
+      "noteUrl": "https://note.com/stats47/n/necff830a091b",
+      "revisions": [
+        {
+          "sha256": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-female/revisions/a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332.png"
+          },
+          "bytes": 2240209,
+          "id": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d53cdb2f3e19",
+          "createdAt": "2026-10-15T11:43:53.536Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T11:44:10.768Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-female/inputs/32cfd716812ef7d5d99126bd2d35a4a016c084cdccf19ef312048bc8c3d767d9.json"
+              },
+              "bytes": 9407
+            },
+            "production": {
+              "id": "NCI-00497",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d53cdb2f3e19c92faacd6aeca3fa33989cf1b54d21747299d43e594c9f445aed"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+      "approvedRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00497",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "大卒女性の初任給\n高い県は？",
+          "subline": "1位は東京都\n2019年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に新社会人を象徴する具体物を1点だけ大きく描く: 真新しい無地の濃紺の通勤用ビジネスバッグと、その上に置いた無地の社員証ケース (ストラップ付き)。社員証ケースの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。給与明細・札束・金額・グラフ・地図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-new-graduate-starting-salary-university-female/draft.md 2026-10-15 公開R2の本文を確認。2019年の新規学卒者初任給 (大学卒・女性) の都道府県ランキングで1位は東京都 (216.2千円)、47位は沖縄県 (175.5千円)。カバーは比較対象・対象年・1位だけを表示し、金額や倍率を追加しない。人物・キャラクターなし。"
+        }
+      }
+    },
+    {
+      "articleKey": "a-new-graduate-starting-salary-university-male",
+      "noteUrl": "https://note.com/stats47/n/nf067364b58fb",
+      "revisions": [
+        {
+          "sha256": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-male/revisions/832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c.png"
+          },
+          "bytes": 2294758,
+          "id": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-f931c46a9356",
+          "createdAt": "2026-10-15T11:43:44.034Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+            "reviewedAt": "2026-10-15T11:44:07.059Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-male/inputs/fd65c16a054535c0c2636fa5ece47a34b399e5932ebdf424bd3fa3a64fd48f9f.json"
+              },
+              "bytes": 9401
+            },
+            "production": {
+              "id": "NCI-00498",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "f931c46a9356a68c12ac6e0fe0f65b1765e54cb2388e7866ca57263bd218519c"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+      "approvedRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00498",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "大卒男性の初任給\n高い県は？",
+          "subline": "1位は東京都\n2019年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に新社会人を象徴する具体物を1点だけ大きく描く: 真新しい無地の濃紺の通勤用ビジネスバッグと、その上に置いた無地の社員証ケース (ストラップ付き)。社員証ケースの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。給与明細・札束・金額・グラフ・地図・表彰台・メダルは描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-new-graduate-starting-salary-university-male/draft.md 2026-10-15 公開R2の本文を確認。2019年の新規学卒者初任給 (大学卒・男性) の都道府県ランキングで1位は東京都 (224.1千円)、47位は沖縄県 (174.7千円)。カバーは比較対象・対象年・1位だけを表示し、金額や倍率を追加しない。人物・キャラクターなし。"
+        }
       }
     },
     {
@@ -14133,7 +14578,7 @@
       "production": {
         "id": "NCI-00115",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14148,7 +14593,7 @@
       "production": {
         "id": "NCI-00116",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14163,7 +14608,7 @@
       "production": {
         "id": "NCI-00117",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14313,7 +14758,7 @@
       "production": {
         "id": "NCI-00119",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14724,7 +15169,7 @@
       "production": {
         "id": "NCI-00122",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14811,7 +15256,7 @@
       "production": {
         "id": "NCI-00123",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -14898,7 +15343,7 @@
       "production": {
         "id": "NCI-00124",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -15372,7 +15817,7 @@
       "production": {
         "id": "NCI-00128",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18000,7 +18445,7 @@
       "production": {
         "id": "NCI-00142",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18055,7 +18500,7 @@
       "production": {
         "id": "NCI-00143",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18110,7 +18555,7 @@
       "production": {
         "id": "NCI-00144",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18165,7 +18610,7 @@
       "production": {
         "id": "NCI-00145",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18220,7 +18665,7 @@
       "production": {
         "id": "NCI-00146",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18275,7 +18720,7 @@
       "production": {
         "id": "NCI-00147",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18330,7 +18775,7 @@
       "production": {
         "id": "NCI-00148",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18385,7 +18830,7 @@
       "production": {
         "id": "NCI-00149",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18440,7 +18885,7 @@
       "production": {
         "id": "NCI-00150",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18495,7 +18940,7 @@
       "production": {
         "id": "NCI-00151",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18550,7 +18995,7 @@
       "production": {
         "id": "NCI-00152",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18605,7 +19050,7 @@
       "production": {
         "id": "NCI-00153",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18660,7 +19105,7 @@
       "production": {
         "id": "NCI-00154",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18715,7 +19160,7 @@
       "production": {
         "id": "NCI-00155",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18770,7 +19215,7 @@
       "production": {
         "id": "NCI-00156",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18825,7 +19270,7 @@
       "production": {
         "id": "NCI-00157",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18880,7 +19325,7 @@
       "production": {
         "id": "NCI-00158",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18935,7 +19380,7 @@
       "production": {
         "id": "NCI-00159",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -18990,7 +19435,7 @@
       "production": {
         "id": "NCI-00160",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19045,7 +19490,7 @@
       "production": {
         "id": "NCI-00161",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19100,7 +19545,7 @@
       "production": {
         "id": "NCI-00162",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19155,7 +19600,7 @@
       "production": {
         "id": "NCI-00163",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19210,7 +19655,7 @@
       "production": {
         "id": "NCI-00164",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19265,7 +19710,7 @@
       "production": {
         "id": "NCI-00165",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19320,7 +19765,7 @@
       "production": {
         "id": "NCI-00166",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19375,7 +19820,7 @@
       "production": {
         "id": "NCI-00167",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19430,7 +19875,7 @@
       "production": {
         "id": "NCI-00168",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19485,7 +19930,7 @@
       "production": {
         "id": "NCI-00169",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19540,7 +19985,7 @@
       "production": {
         "id": "NCI-00170",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19595,7 +20040,7 @@
       "production": {
         "id": "NCI-00171",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19650,7 +20095,7 @@
       "production": {
         "id": "NCI-00172",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19705,7 +20150,7 @@
       "production": {
         "id": "NCI-00173",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19760,7 +20205,7 @@
       "production": {
         "id": "NCI-00174",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19815,7 +20260,7 @@
       "production": {
         "id": "NCI-00175",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19870,7 +20315,7 @@
       "production": {
         "id": "NCI-00176",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19925,7 +20370,7 @@
       "production": {
         "id": "NCI-00177",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -19980,7 +20425,7 @@
       "production": {
         "id": "NCI-00178",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20035,7 +20480,7 @@
       "production": {
         "id": "NCI-00179",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20090,7 +20535,7 @@
       "production": {
         "id": "NCI-00180",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20145,7 +20590,7 @@
       "production": {
         "id": "NCI-00181",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20200,7 +20645,7 @@
       "production": {
         "id": "NCI-00182",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20255,7 +20700,7 @@
       "production": {
         "id": "NCI-00183",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20310,7 +20755,7 @@
       "production": {
         "id": "NCI-00184",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20365,7 +20810,7 @@
       "production": {
         "id": "NCI-00185",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20420,7 +20865,7 @@
       "production": {
         "id": "NCI-00186",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20475,7 +20920,7 @@
       "production": {
         "id": "NCI-00187",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20530,7 +20975,7 @@
       "production": {
         "id": "NCI-00188",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20585,7 +21030,7 @@
       "production": {
         "id": "NCI-00189",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20640,7 +21085,7 @@
       "production": {
         "id": "NCI-00190",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20695,7 +21140,7 @@
       "production": {
         "id": "NCI-00191",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20750,7 +21195,7 @@
       "production": {
         "id": "NCI-00192",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20805,7 +21250,7 @@
       "production": {
         "id": "NCI-00193",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20860,7 +21305,7 @@
       "production": {
         "id": "NCI-00194",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20915,7 +21360,7 @@
       "production": {
         "id": "NCI-00195",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -20970,7 +21415,7 @@
       "production": {
         "id": "NCI-00196",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21025,7 +21470,7 @@
       "production": {
         "id": "NCI-00197",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21080,7 +21525,7 @@
       "production": {
         "id": "NCI-00198",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21135,7 +21580,7 @@
       "production": {
         "id": "NCI-00199",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21190,7 +21635,7 @@
       "production": {
         "id": "NCI-00200",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21245,7 +21690,7 @@
       "production": {
         "id": "NCI-00201",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21300,7 +21745,7 @@
       "production": {
         "id": "NCI-00202",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21355,7 +21800,7 @@
       "production": {
         "id": "NCI-00203",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21410,7 +21855,7 @@
       "production": {
         "id": "NCI-00204",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21465,7 +21910,7 @@
       "production": {
         "id": "NCI-00205",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21520,7 +21965,7 @@
       "production": {
         "id": "NCI-00206",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21575,7 +22020,7 @@
       "production": {
         "id": "NCI-00207",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21630,7 +22075,7 @@
       "production": {
         "id": "NCI-00208",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21685,7 +22130,7 @@
       "production": {
         "id": "NCI-00209",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21740,7 +22185,7 @@
       "production": {
         "id": "NCI-00210",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21795,7 +22240,7 @@
       "production": {
         "id": "NCI-00211",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21850,7 +22295,7 @@
       "production": {
         "id": "NCI-00212",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21905,7 +22350,7 @@
       "production": {
         "id": "NCI-00213",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -21960,7 +22405,7 @@
       "production": {
         "id": "NCI-00214",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22240,7 +22685,7 @@
       "production": {
         "id": "NCI-00216",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22295,7 +22740,7 @@
       "production": {
         "id": "NCI-00217",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22350,7 +22795,7 @@
       "production": {
         "id": "NCI-00218",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22405,7 +22850,7 @@
       "production": {
         "id": "NCI-00219",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22460,7 +22905,7 @@
       "production": {
         "id": "NCI-00220",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22515,7 +22960,7 @@
       "production": {
         "id": "NCI-00221",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22570,7 +23015,7 @@
       "production": {
         "id": "NCI-00222",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22625,7 +23070,7 @@
       "production": {
         "id": "NCI-00223",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22680,7 +23125,7 @@
       "production": {
         "id": "NCI-00224",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22735,7 +23180,7 @@
       "production": {
         "id": "NCI-00225",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22790,7 +23235,7 @@
       "production": {
         "id": "NCI-00226",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22845,7 +23290,7 @@
       "production": {
         "id": "NCI-00227",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22900,7 +23345,7 @@
       "production": {
         "id": "NCI-00228",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -22955,7 +23400,7 @@
       "production": {
         "id": "NCI-00229",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -23010,7 +23455,7 @@
       "production": {
         "id": "NCI-00230",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -23065,7 +23510,7 @@
       "production": {
         "id": "NCI-00231",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -23120,7 +23565,7 @@
       "production": {
         "id": "NCI-00232",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -23175,7 +23620,7 @@
       "production": {
         "id": "NCI-00233",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24000,7 +24445,7 @@
       "production": {
         "id": "NCI-00240",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24015,7 +24460,7 @@
       "production": {
         "id": "NCI-00241",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24102,7 +24547,7 @@
       "production": {
         "id": "NCI-00242",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24117,7 +24562,7 @@
       "production": {
         "id": "NCI-00243",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24294,7 +24739,7 @@
       "production": {
         "id": "NCI-00245",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24381,7 +24826,7 @@
       "production": {
         "id": "NCI-00246",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24396,7 +24841,7 @@
       "production": {
         "id": "NCI-00247",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24411,7 +24856,7 @@
       "production": {
         "id": "NCI-00248",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24426,7 +24871,7 @@
       "production": {
         "id": "NCI-00249",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24441,7 +24886,7 @@
       "production": {
         "id": "NCI-00250",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24456,7 +24901,7 @@
       "production": {
         "id": "NCI-00251",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24633,7 +25078,7 @@
       "production": {
         "id": "NCI-00253",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24648,7 +25093,7 @@
       "production": {
         "id": "NCI-00254",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24960,7 +25405,7 @@
       "production": {
         "id": "NCI-00257",
         "policyId": "NCP-005",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24975,7 +25420,7 @@
       "production": {
         "id": "NCI-00258",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -24990,7 +25435,7 @@
       "production": {
         "id": "NCI-00259",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25005,7 +25450,7 @@
       "production": {
         "id": "NCI-00260",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25020,7 +25465,7 @@
       "production": {
         "id": "NCI-00261",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25035,7 +25480,7 @@
       "production": {
         "id": "NCI-00262",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25050,7 +25495,7 @@
       "production": {
         "id": "NCI-00263",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25065,7 +25510,7 @@
       "production": {
         "id": "NCI-00264",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25080,7 +25525,7 @@
       "production": {
         "id": "NCI-00265",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25095,7 +25540,7 @@
       "production": {
         "id": "NCI-00266",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25110,7 +25555,7 @@
       "production": {
         "id": "NCI-00267",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25125,7 +25570,7 @@
       "production": {
         "id": "NCI-00268",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25140,7 +25585,7 @@
       "production": {
         "id": "NCI-00269",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25155,7 +25600,7 @@
       "production": {
         "id": "NCI-00270",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25170,7 +25615,7 @@
       "production": {
         "id": "NCI-00271",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25185,7 +25630,7 @@
       "production": {
         "id": "NCI-00272",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25200,7 +25645,7 @@
       "production": {
         "id": "NCI-00273",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25215,7 +25660,7 @@
       "production": {
         "id": "NCI-00274",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25230,7 +25675,7 @@
       "production": {
         "id": "NCI-00275",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25245,7 +25690,7 @@
       "production": {
         "id": "NCI-00276",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25260,7 +25705,7 @@
       "production": {
         "id": "NCI-00277",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25275,7 +25720,7 @@
       "production": {
         "id": "NCI-00278",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25290,7 +25735,7 @@
       "production": {
         "id": "NCI-00279",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25305,7 +25750,7 @@
       "production": {
         "id": "NCI-00280",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25320,7 +25765,7 @@
       "production": {
         "id": "NCI-00281",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25335,7 +25780,7 @@
       "production": {
         "id": "NCI-00282",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25350,7 +25795,7 @@
       "production": {
         "id": "NCI-00283",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25365,7 +25810,7 @@
       "production": {
         "id": "NCI-00284",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25380,7 +25825,7 @@
       "production": {
         "id": "NCI-00285",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25395,7 +25840,7 @@
       "production": {
         "id": "NCI-00286",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25410,7 +25855,7 @@
       "production": {
         "id": "NCI-00287",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25425,7 +25870,7 @@
       "production": {
         "id": "NCI-00288",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25440,7 +25885,7 @@
       "production": {
         "id": "NCI-00289",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25591,7 +26036,7 @@
       "production": {
         "id": "NCI-00290",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -25741,7 +26186,7 @@
       "production": {
         "id": "NCI-00292",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25756,7 +26201,7 @@
       "production": {
         "id": "NCI-00293",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25771,7 +26216,7 @@
       "production": {
         "id": "NCI-00294",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25786,7 +26231,7 @@
       "production": {
         "id": "NCI-00295",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25801,7 +26246,7 @@
       "production": {
         "id": "NCI-00296",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25816,7 +26261,7 @@
       "production": {
         "id": "NCI-00297",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25831,7 +26276,7 @@
       "production": {
         "id": "NCI-00298",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -25982,7 +26427,7 @@
       "production": {
         "id": "NCI-00299",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -26334,7 +26779,7 @@
       "production": {
         "id": "NCI-00301",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -26485,7 +26930,7 @@
       "production": {
         "id": "NCI-00302",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -26636,7 +27081,7 @@
       "production": {
         "id": "NCI-00303",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -26787,7 +27232,7 @@
       "production": {
         "id": "NCI-00304",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -26938,7 +27383,7 @@
       "production": {
         "id": "NCI-00305",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27089,7 +27534,7 @@
       "production": {
         "id": "NCI-00306",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -27240,7 +27685,7 @@
       "production": {
         "id": "NCI-00307",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27391,7 +27836,7 @@
       "production": {
         "id": "NCI-00308",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27542,7 +27987,7 @@
       "production": {
         "id": "NCI-00309",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27693,7 +28138,7 @@
       "production": {
         "id": "NCI-00310",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27844,7 +28289,7 @@
       "production": {
         "id": "NCI-00311",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -27995,7 +28440,7 @@
       "production": {
         "id": "NCI-00312",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -28347,7 +28792,7 @@
       "production": {
         "id": "NCI-00314",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -28498,7 +28943,7 @@
       "production": {
         "id": "NCI-00315",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -28649,7 +29094,7 @@
       "production": {
         "id": "NCI-00316",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -28864,7 +29309,7 @@
       "production": {
         "id": "NCI-00317",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -29417,7 +29862,7 @@
       "production": {
         "id": "NCI-00320",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -29568,7 +30013,7 @@
       "production": {
         "id": "NCI-00321",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -29719,7 +30164,7 @@
       "production": {
         "id": "NCI-00322",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -29806,7 +30251,7 @@
       "production": {
         "id": "NCI-00323",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -29957,7 +30402,7 @@
       "production": {
         "id": "NCI-00324",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -30172,7 +30617,7 @@
       "production": {
         "id": "NCI-00325",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -30362,7 +30807,7 @@
       "production": {
         "id": "NCI-00326",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -30552,7 +30997,7 @@
       "production": {
         "id": "NCI-00327",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -30742,7 +31187,7 @@
       "production": {
         "id": "NCI-00328",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -30932,7 +31377,7 @@
       "production": {
         "id": "NCI-00329",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -31122,7 +31567,7 @@
       "production": {
         "id": "NCI-00330",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -31312,7 +31757,7 @@
       "production": {
         "id": "NCI-00331",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -31502,7 +31947,7 @@
       "production": {
         "id": "NCI-00332",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -31692,7 +32137,7 @@
       "production": {
         "id": "NCI-00333",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -31882,7 +32327,7 @@
       "production": {
         "id": "NCI-00334",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -32072,7 +32517,7 @@
       "production": {
         "id": "NCI-00335",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -32262,7 +32707,7 @@
       "production": {
         "id": "NCI-00336",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -32452,7 +32897,7 @@
       "production": {
         "id": "NCI-00337",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -32642,7 +33087,7 @@
       "production": {
         "id": "NCI-00338",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -32832,7 +33277,7 @@
       "production": {
         "id": "NCI-00339",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -33022,7 +33467,7 @@
       "production": {
         "id": "NCI-00340",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -33237,7 +33682,7 @@
       "production": {
         "id": "NCI-00341",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -33452,7 +33897,7 @@
       "production": {
         "id": "NCI-00342",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -33642,7 +34087,7 @@
       "production": {
         "id": "NCI-00343",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -33832,7 +34277,7 @@
       "production": {
         "id": "NCI-00344",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -34022,7 +34467,7 @@
       "production": {
         "id": "NCI-00345",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -34452,7 +34897,7 @@
       "production": {
         "id": "NCI-00347",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -34947,7 +35392,7 @@
       "production": {
         "id": "NCI-00350",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -34962,7 +35407,7 @@
       "production": {
         "id": "NCI-00351",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -34977,7 +35422,7 @@
       "production": {
         "id": "NCI-00352",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -34992,7 +35437,7 @@
       "production": {
         "id": "NCI-00353",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35007,7 +35452,7 @@
       "production": {
         "id": "NCI-00354",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35022,7 +35467,7 @@
       "production": {
         "id": "NCI-00355",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35037,7 +35482,7 @@
       "production": {
         "id": "NCI-00356",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35052,7 +35497,7 @@
       "production": {
         "id": "NCI-00357",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35067,7 +35512,7 @@
       "production": {
         "id": "NCI-00358",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35082,7 +35527,7 @@
       "production": {
         "id": "NCI-00359",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35097,7 +35542,7 @@
       "production": {
         "id": "NCI-00360",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35112,7 +35557,7 @@
       "production": {
         "id": "NCI-00361",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35206,7 +35651,7 @@
       "production": {
         "id": "NCI-00362",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35300,7 +35745,7 @@
       "production": {
         "id": "NCI-00363",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35394,7 +35839,7 @@
       "production": {
         "id": "NCI-00364",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35623,7 +36068,7 @@
       "production": {
         "id": "NCI-00366",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35678,7 +36123,7 @@
       "production": {
         "id": "NCI-00367",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35733,7 +36178,7 @@
       "production": {
         "id": "NCI-00368",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35827,7 +36272,7 @@
       "production": {
         "id": "NCI-00369",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35882,7 +36327,7 @@
       "production": {
         "id": "NCI-00370",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -35937,7 +36382,7 @@
       "production": {
         "id": "NCI-00371",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -36031,7 +36476,7 @@
       "production": {
         "id": "NCI-00372",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -36125,7 +36570,7 @@
       "production": {
         "id": "NCI-00373",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -36219,7 +36664,7 @@
       "production": {
         "id": "NCI-00374",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -36313,7 +36758,7 @@
       "production": {
         "id": "NCI-00375",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -36665,7 +37110,7 @@
       "production": {
         "id": "NCI-00377",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37120,7 +37565,7 @@
       "production": {
         "id": "NCI-00379",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -37207,7 +37652,7 @@
       "production": {
         "id": "NCI-00380",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37397,7 +37842,7 @@
       "production": {
         "id": "NCI-00381",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37484,7 +37929,7 @@
       "production": {
         "id": "NCI-00382",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37571,7 +38016,7 @@
       "production": {
         "id": "NCI-00383",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37658,7 +38103,7 @@
       "production": {
         "id": "NCI-00384",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -37848,7 +38293,7 @@
       "production": {
         "id": "NCI-00385",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -38200,7 +38645,7 @@
       "production": {
         "id": "NCI-00387",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -38390,7 +38835,7 @@
       "production": {
         "id": "NCI-00388",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -38477,7 +38922,7 @@
       "production": {
         "id": "NCI-00389",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -38667,7 +39112,7 @@
       "production": {
         "id": "NCI-00390",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39122,7 +39567,7 @@
       "production": {
         "id": "NCI-00392",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39312,7 +39757,7 @@
       "production": {
         "id": "NCI-00393",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39502,7 +39947,7 @@
       "production": {
         "id": "NCI-00394",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39692,7 +40137,7 @@
       "production": {
         "id": "NCI-00395",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39779,7 +40224,7 @@
       "production": {
         "id": "NCI-00396",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39866,7 +40311,7 @@
       "production": {
         "id": "NCI-00397",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -39953,7 +40398,7 @@
       "production": {
         "id": "NCI-00398",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40040,7 +40485,7 @@
       "production": {
         "id": "NCI-00399",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40127,7 +40572,7 @@
       "production": {
         "id": "NCI-00400",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40342,7 +40787,7 @@
       "production": {
         "id": "NCI-00401",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40429,7 +40874,7 @@
       "production": {
         "id": "NCI-00402",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40516,7 +40961,7 @@
       "production": {
         "id": "NCI-00403",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -40971,7 +41416,7 @@
       "production": {
         "id": "NCI-00405",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41161,7 +41606,7 @@
       "production": {
         "id": "NCI-00406",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41248,7 +41693,7 @@
       "production": {
         "id": "NCI-00407",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41335,7 +41780,7 @@
       "production": {
         "id": "NCI-00408",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41422,7 +41867,7 @@
       "production": {
         "id": "NCI-00409",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41534,7 +41979,7 @@
       "production": {
         "id": "NCI-00410",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41724,7 +42169,7 @@
       "production": {
         "id": "NCI-00411",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -41914,7 +42359,7 @@
       "production": {
         "id": "NCI-00412",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42001,7 +42446,7 @@
       "production": {
         "id": "NCI-00413",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42191,7 +42636,7 @@
       "production": {
         "id": "NCI-00414",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42278,7 +42723,7 @@
       "production": {
         "id": "NCI-00415",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42468,7 +42913,7 @@
       "production": {
         "id": "NCI-00416",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42555,7 +43000,7 @@
       "production": {
         "id": "NCI-00417",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42642,7 +43087,7 @@
       "production": {
         "id": "NCI-00418",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42729,7 +43174,7 @@
       "production": {
         "id": "NCI-00419",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -42919,7 +43364,7 @@
       "production": {
         "id": "NCI-00420",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43006,7 +43451,7 @@
       "production": {
         "id": "NCI-00421",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43196,7 +43641,7 @@
       "production": {
         "id": "NCI-00422",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43283,7 +43728,7 @@
       "production": {
         "id": "NCI-00423",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43370,7 +43815,7 @@
       "production": {
         "id": "NCI-00424",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43457,7 +43902,7 @@
       "production": {
         "id": "NCI-00425",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43544,7 +43989,7 @@
       "production": {
         "id": "NCI-00426",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43631,7 +44076,7 @@
       "production": {
         "id": "NCI-00427",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43821,7 +44266,7 @@
       "production": {
         "id": "NCI-00428",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43908,7 +44353,7 @@
       "production": {
         "id": "NCI-00429",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -43995,7 +44440,7 @@
       "production": {
         "id": "NCI-00430",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -44450,7 +44895,7 @@
       "production": {
         "id": "NCI-00432",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -44537,7 +44982,7 @@
       "production": {
         "id": "NCI-00433",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -44727,7 +45172,7 @@
       "production": {
         "id": "NCI-00434",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -44814,7 +45259,7 @@
       "production": {
         "id": "NCI-00435",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -44901,7 +45346,7 @@
       "production": {
         "id": "NCI-00436",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -44988,7 +45433,7 @@
       "production": {
         "id": "NCI-00437",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45178,7 +45623,7 @@
       "production": {
         "id": "NCI-00438",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45265,7 +45710,7 @@
       "production": {
         "id": "NCI-00439",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45455,7 +45900,7 @@
       "production": {
         "id": "NCI-00440",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45542,7 +45987,7 @@
       "production": {
         "id": "NCI-00441",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45629,7 +46074,7 @@
       "production": {
         "id": "NCI-00442",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -45819,7 +46264,7 @@
       "production": {
         "id": "NCI-00443",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46009,7 +46454,7 @@
       "production": {
         "id": "NCI-00444",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46096,7 +46541,7 @@
       "production": {
         "id": "NCI-00445",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46183,7 +46628,7 @@
       "production": {
         "id": "NCI-00446",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46373,7 +46818,7 @@
       "production": {
         "id": "NCI-00447",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46563,7 +47008,7 @@
       "production": {
         "id": "NCI-00448",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46650,7 +47095,7 @@
       "production": {
         "id": "NCI-00449",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46737,7 +47182,7 @@
       "production": {
         "id": "NCI-00450",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46824,7 +47269,7 @@
       "production": {
         "id": "NCI-00451",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46911,7 +47356,7 @@
       "production": {
         "id": "NCI-00452",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -46998,7 +47443,7 @@
       "production": {
         "id": "NCI-00453",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47085,7 +47530,7 @@
       "production": {
         "id": "NCI-00454",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47172,7 +47617,7 @@
       "production": {
         "id": "NCI-00455",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47259,7 +47704,7 @@
       "production": {
         "id": "NCI-00456",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47449,7 +47894,7 @@
       "production": {
         "id": "NCI-00457",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47536,7 +47981,7 @@
       "production": {
         "id": "NCI-00458",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47623,7 +48068,7 @@
       "production": {
         "id": "NCI-00459",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47710,7 +48155,7 @@
       "production": {
         "id": "NCI-00460",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47797,7 +48242,7 @@
       "production": {
         "id": "NCI-00461",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -47987,7 +48432,7 @@
       "production": {
         "id": "NCI-00462",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -48074,7 +48519,7 @@
       "production": {
         "id": "NCI-00463",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48161,7 +48606,7 @@
       "production": {
         "id": "NCI-00464",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48351,7 +48796,7 @@
       "production": {
         "id": "NCI-00465",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48438,7 +48883,7 @@
       "production": {
         "id": "NCI-00466",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48628,7 +49073,7 @@
       "production": {
         "id": "NCI-00467",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48715,7 +49160,7 @@
       "production": {
         "id": "NCI-00468",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -48905,7 +49350,7 @@
       "production": {
         "id": "NCI-00469",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -49095,7 +49540,7 @@
       "production": {
         "id": "NCI-00470",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": null
       }
     },
@@ -49550,7 +49995,7 @@
       "production": {
         "id": "NCI-00472",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -49740,7 +50185,7 @@
       "production": {
         "id": "NCI-00473",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -49827,7 +50272,7 @@
       "production": {
         "id": "NCI-00474",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -49914,7 +50359,7 @@
       "production": {
         "id": "NCI-00475",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50001,7 +50446,7 @@
       "production": {
         "id": "NCI-00476",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50088,7 +50533,7 @@
       "production": {
         "id": "NCI-00477",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50278,7 +50723,7 @@
       "production": {
         "id": "NCI-00478",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50365,7 +50810,7 @@
       "production": {
         "id": "NCI-00479",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50452,7 +50897,7 @@
       "production": {
         "id": "NCI-00480",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50642,7 +51087,7 @@
       "production": {
         "id": "NCI-00481",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50729,7 +51174,7 @@
       "production": {
         "id": "NCI-00482",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50816,7 +51261,7 @@
       "production": {
         "id": "NCI-00483",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50903,7 +51348,7 @@
       "production": {
         "id": "NCI-00484",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -50990,7 +51435,7 @@
       "production": {
         "id": "NCI-00485",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51077,7 +51522,7 @@
       "production": {
         "id": "NCI-00486",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51267,7 +51712,7 @@
       "production": {
         "id": "NCI-00487",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51354,7 +51799,7 @@
       "production": {
         "id": "NCI-00488",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51441,7 +51886,7 @@
       "production": {
         "id": "NCI-00489",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51631,7 +52076,7 @@
       "production": {
         "id": "NCI-00490",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51646,7 +52091,7 @@
       "production": {
         "id": "NCI-00491",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51661,7 +52106,7 @@
       "production": {
         "id": "NCI-00492",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51676,7 +52121,7 @@
       "production": {
         "id": "NCI-00493",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
@@ -51691,7 +52136,7 @@
       "production": {
         "id": "NCI-00494",
         "policyId": "NCP-006",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": null
       }
     },
