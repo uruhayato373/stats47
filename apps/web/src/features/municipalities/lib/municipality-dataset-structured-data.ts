@@ -77,6 +77,7 @@ export function buildMunicipalityDatasetStructuredData({
       '@type': 'Dataset',
       name: item.source.name,
       url: item.source.url,
+      description: `${item.source.name}を出典として、${title}の市区町村別の値を取得しています。stats47では、${snapshot.yearName}の数値を自治体ごとに比較できるランキングとして整理し、出典へのリンクとともに掲載しています。`.slice(0, 5000),
     },
     license: {
       '@type': 'CreativeWork',

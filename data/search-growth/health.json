@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-10-16T01:01:24.454Z",
+  "generatedAt": "2026-10-16T21:46:35.801Z",
   "week": "2026-W42",
   "sources": {
     "gsc": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-10-11T00:00:00Z",
+      "observedAt": "2026-10-15T22:55:06.877Z",
       "count": 23088
     },
     "ga4": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-10-11T00:00:00Z",
+      "status": "partial",
+      "freshness": "partial",
+      "observedAt": "2026-10-15T22:55:19.588Z",
       "count": 14800
     },
     "psi": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-10-15T20:37:21.091Z",
+      "observedAt": "2026-10-16T20:06:59.505Z",
       "count": 228
     },
     "coverage": {
@@ -35,7 +35,7 @@
     "cloudflare": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-10-15T20:29:38.187Z",
+      "observedAt": "2026-10-16T20:02:47.299Z",
       "count": 2
     },
     "sitemap": {

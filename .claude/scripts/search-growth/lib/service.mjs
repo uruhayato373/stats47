@@ -139,12 +139,12 @@ export function seoRouteContract() {
   return { httpStatusBuckets: byStatus, indexabilityConflicts: conflicts.items.length, sampleConflicts: conflicts.items.slice(0, 10) };
 }
 
-export function measure({ candidateId, now = new Date().toISOString() } = {}) {
+export function measure({ candidateId } = {}) {
   if (!candidateId) return { error: "candidateId required" };
   const { candidates: list } = loadCandidates();
   const c = list.find((x) => x.id === candidateId);
   if (!c) return { error: `candidate not found: ${candidateId}` };
-  const base = c.baselinePeriod?.end ?? now.slice(0, 10);
+  const base = c.baselinePeriod?.end;
   const plus = (days) => {
     const d = new Date(base + "T00:00:00Z");
     d.setUTCDate(d.getUTCDate() + days);
@@ -155,7 +155,7 @@ export function measure({ candidateId, now = new Date().toISOString() } = {}) {
     scoreBreakdown: c.scoreBreakdown, evidence: c.evidence, baselinePeriod: c.baselinePeriod,
     expectedMetric: c.expectedMetric, suggestedVerification: c.suggestedVerification,
     limitations: c.limitations, externalActionFlag: c.externalActionFlag,
-    judgmentSchedule: { day14: plus(14), day28: plus(28), day56: plus(56) },
+    judgmentSchedule: base ? { day14: plus(14), day28: plus(28), day56: plus(56) } : null,
   };
 }
 

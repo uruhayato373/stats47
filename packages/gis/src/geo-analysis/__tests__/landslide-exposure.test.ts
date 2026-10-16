@@ -1,4 +1,9 @@
 import { describe, it, expect } from 'vitest';
+import { createHash } from 'node:crypto';
+import {
+  LANDSLIDE_EXPOSURE_DEFINITION,
+  LANDSLIDE_EXPOSURE_DEFINITION_SHA256,
+} from '../landslide-exposure-definition';
 import { LANDSLIDE_EXPOSURE_SOURCE as S } from '../../../../data-configs/src/theme-catalog/landslide-exposure-source';
 import {
   landslideCounts,
@@ -98,6 +103,11 @@ describe('landslide exclusive counts', () => {
   });
 });
 describe('source and unavailable contract', () => {
+  it('keeps the runtime definition identical to the pinned published contract', () => {
+    // Display-only copy edits must not silently invalidate an existing R2 bundle.
+    expect(createHash('sha256').update(JSON.stringify(LANDSLIDE_EXPOSURE_DEFINITION)).digest('hex'))
+      .toBe(LANDSLIDE_EXPOSURE_DEFINITION_SHA256);
+  });
   it('keeps all 47 statuses but no Kyoto A33 input', () => {
     const inputs = expectedLandslideInputs();
     expect(inputs).toHaveLength(140);

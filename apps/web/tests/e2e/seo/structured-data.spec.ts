@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { invalidDatasetDescriptions } from '../../../src/lib/structured-data/dataset';
 import { getJsonLdByType, getJsonLdScripts } from "../helpers/structured-data";
 
 /**
@@ -56,6 +57,7 @@ test.describe("構造化データ（JSON-LD）", () => {
     const types = scripts.map((s) => s["@type"] as string);
     expect(types).toContain("BreadcrumbList");
     expect(types).toContain("Dataset");
+    expect(invalidDatasetDescriptions(scripts)).toEqual([]);
   });
 });
 
