@@ -1,7 +1,6 @@
-import Link from 'next/link';
-
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 

@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import { RailCard } from '@/components/surface';
 

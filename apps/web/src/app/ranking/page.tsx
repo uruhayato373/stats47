@@ -15,12 +15,12 @@
  * R2 の `app/home/featured.json` に焼き込まれた地図・1位情報を表示する。
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
-import Link from 'next/link';
 
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { metricDisplayName } from "@stats47/ranking";
 import { ChevronRight } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';

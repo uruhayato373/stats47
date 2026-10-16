@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
 import { RankBadge } from '@/components/atoms/RankBadge';
+import Link from '@/components/atoms/SiteLink';
 
 import type { HighlightTone } from '@stats47/area-profile';
 

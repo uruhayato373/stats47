@@ -1,7 +1,6 @@
-import Link from 'next/link';
-
 import { ListTree } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS } from '@/components/layout';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';

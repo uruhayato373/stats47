@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
+import Link from '@/components/atoms/SiteLink';
 import { SurfaceCard } from '@/components/surface';
 
 import { fetchGeoLayerAction } from '../actions';

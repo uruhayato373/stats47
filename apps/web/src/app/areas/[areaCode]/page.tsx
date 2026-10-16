@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { lookupArea } from '@stats47/area';
@@ -17,6 +16,7 @@ import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
 import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
 import { RailCategoryList, RailLinksCard, RightRailWidgets } from '@/components/rail';
 import { RailCard } from '@/components/surface';

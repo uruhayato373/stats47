@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
-
 import { FileText } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { RailCard, RailLinkList, RailNavRow, SectionCard } from "@/components/surface";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";

@@ -1,6 +1,7 @@
-import Link from "next/link";
-
 import { Badge } from "@stats47/components/atoms/ui/badge";
+
+import Link from "@/components/atoms/SiteLink";
+
 
 interface TagCount {
   tag: string;

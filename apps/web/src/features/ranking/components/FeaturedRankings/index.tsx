@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 import { buildRankingDisplayInfo, deriveFeaturedTop } from "@stats47/ranking";
@@ -6,6 +5,7 @@ import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
 
+import Link from "@/components/atoms/SiteLink";
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
 import { logger } from "@/lib/logger";

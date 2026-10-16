@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import { ArrowLeftRight } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { PageHeader } from "@/components/layout";
 
 interface Props {

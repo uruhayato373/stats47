@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
@@ -17,6 +16,7 @@ import {
 } from '@stats47/gis';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';

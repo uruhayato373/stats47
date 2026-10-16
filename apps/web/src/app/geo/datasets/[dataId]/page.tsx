@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { findGeoSourcePage } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';

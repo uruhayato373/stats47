@@ -4,7 +4,6 @@
 
 import { useMemo } from "react";
 
-import Link from "next/link";
 
 import { DataTable, cn } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -17,6 +16,7 @@ import {
 } from "@stats47/ranking";
 import { ColumnDef } from "@tanstack/react-table";
 
+import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 

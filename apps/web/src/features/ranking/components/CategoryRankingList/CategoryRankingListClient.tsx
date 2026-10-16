@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 
 import { DataTable } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
+import Link from "@/components/atoms/SiteLink";
 
 import type { ColumnDef } from "@tanstack/react-table";
 

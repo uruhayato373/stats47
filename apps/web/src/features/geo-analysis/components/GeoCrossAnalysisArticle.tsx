@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { to2DigitPrefCode } from '@stats47/area';
@@ -15,6 +14,7 @@ import {
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
+import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';

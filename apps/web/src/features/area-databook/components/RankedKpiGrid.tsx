@@ -1,10 +1,10 @@
-import Link from "next/link";
 
 
 import { cn } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
+import Link from "@/components/atoms/SiteLink";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";

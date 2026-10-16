@@ -1,8 +1,8 @@
-import Link from "next/link";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
 
+import Link from "@/components/atoms/SiteLink";
 import { SurfaceCard } from "@/components/surface";
 
 import type { CategoryTopicListItem } from "./types";

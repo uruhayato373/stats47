@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
@@ -16,6 +15,7 @@ import {
   type GeoAnalysisSnapshot,
 } from '@stats47/gis';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 const number = (n: number | null | undefined) =>

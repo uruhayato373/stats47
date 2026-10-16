@@ -2,11 +2,11 @@
 
 import { type ReactNode } from "react";
 
-import Link from "next/link";
 
 import { cn } from "@stats47/components";
 import { Table, TableBody, TableCell, TableRow } from "@stats47/components/atoms/ui/table";
 
+import Link from "@/components/atoms/SiteLink";
 import { SurfaceCard } from "@/components/surface";
 
 export interface KeyMetricsTableRow {

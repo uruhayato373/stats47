@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import {
@@ -10,6 +9,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@stats47/components/atoms/ui/select";
+
+import Link from "@/components/atoms/SiteLink";
 
 export interface RankingBasisMember {
     rankingKey: string;

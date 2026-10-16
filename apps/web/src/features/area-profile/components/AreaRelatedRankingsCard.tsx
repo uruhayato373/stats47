@@ -1,7 +1,6 @@
-import Link from 'next/link';
-
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionCard } from '@/components/surface';
 
 import { AreaHighlightList, type AreaHighlightListItem } from './AreaHighlightList';

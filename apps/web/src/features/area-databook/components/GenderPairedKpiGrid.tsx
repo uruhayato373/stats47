@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
+import Link from "@/components/atoms/SiteLink";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { GENDER_TONE_TEXT } from "./gender-tone.palette";

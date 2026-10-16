@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import { cn } from "@stats47/components";
 
+import Link from "@/components/atoms/SiteLink";
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
 import { FooterSocialLinks } from "./FooterSocialLinks";

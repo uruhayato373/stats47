@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { fetchPrefectures } from '@stats47/area';
 import { CATEGORIES } from '@stats47/data-configs';
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
 

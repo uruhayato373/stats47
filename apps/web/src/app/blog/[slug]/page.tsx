@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
@@ -15,6 +14,7 @@ import {
 import { CATEGORIES } from "@stats47/data-configs";
 import { contentTagIds, resolveContentTag } from '@stats47/data-configs/content';
 
+import Link from "@/components/atoms/SiteLink";
 import { ArticleShell, CURRENT_ITEM_CLASS } from "@/components/layout";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 import { ShareButtons } from "@/components/molecules/ShareButtons";

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BookOpen, Check, Database, ExternalLink } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { Breadcrumbs, PageHeader, PageShell } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
 import { SurfaceSection } from "@/components/surface";

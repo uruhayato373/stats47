@@ -1,9 +1,9 @@
-import Link from 'next/link';
 
 import { fetchPrefectures } from '@stats47/area';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { Metadata } from 'next';
 
+import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader } from '@/components/layout';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';

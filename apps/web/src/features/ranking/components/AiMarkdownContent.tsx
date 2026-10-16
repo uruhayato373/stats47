@@ -1,9 +1,10 @@
-import Link from "next/link";
 
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
+
+import Link from "@/components/atoms/SiteLink";
 
 import { addLineBreaksAfterPeriod } from "../utils";
 

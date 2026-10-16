@@ -18,6 +18,16 @@ const FEATURE_INTERNAL_IMPORT_PATTERNS = [
   },
 ];
 
+// サイト内リンクは SiteLink 経由 (表示時の先読みをやめ、触れたときだけ先読みする)。
+// feature 向けの上書き設定も同じ定数を使う (上書きは規則を丸ごと置き換えるため)。
+const RESTRICTED_IMPORT_PATHS = [
+  {
+    name: "next/link",
+    message:
+      "@/components/atoms/SiteLink を使ってください (表示時の先読みが _rsc の毎回描画で Workers CPU を使うため)。",
+  },
+];
+
 const eslintConfig = [// TypeScript Configuration
 // React Configuration
 {
@@ -74,6 +84,7 @@ reactHooksPlugin.configs.flat.recommended, {
     "no-restricted-imports": [
       "error",
       {
+        paths: RESTRICTED_IMPORT_PATHS,
         patterns: [
           // feature 内部実装への直接アクセス禁止（Public API 経由のみ）
           ...FEATURE_INTERNAL_IMPORT_PATTERNS,
@@ -204,6 +215,7 @@ reactHooksPlugin.configs.flat.recommended, {
     "no-restricted-imports": [
       "error",
       {
+        paths: RESTRICTED_IMPORT_PATHS,
         patterns: [
           // 後勝ちの override でも feature 境界契約を失わない。
           ...FEATURE_INTERNAL_IMPORT_PATTERNS,

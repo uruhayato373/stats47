@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { to2DigitPrefCode } from '@stats47/area';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
+import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { selectCityHighlights } from "@stats47/area-profile";
 
+import Link from "@/components/atoms/SiteLink";
 import { PageHeader, PageShell } from "@/components/layout";
 import { SurfaceSection } from "@/components/surface";
 

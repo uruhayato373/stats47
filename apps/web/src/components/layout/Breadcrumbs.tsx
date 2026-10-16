@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 
-import Link from "next/link";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,6 +8,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+
+import Link from "@/components/atoms/SiteLink";
+
 
 import { SITE_ORIGIN } from "@/config/site";
 

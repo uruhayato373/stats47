@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 
 import { cn } from '@stats47/components';
 import {
@@ -9,6 +8,8 @@ import {
   TabsList,
   TabsTrigger,
 } from '@stats47/components/atoms/ui/tabs';
+
+import Link from '@/components/atoms/SiteLink';
 
 import { trackNavClick } from '@/lib/analytics/events';
 

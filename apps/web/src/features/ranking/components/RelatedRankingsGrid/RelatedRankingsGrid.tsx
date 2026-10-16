@@ -1,10 +1,10 @@
-import Link from "next/link";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricShortName } from "@stats47/ranking";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
+import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";

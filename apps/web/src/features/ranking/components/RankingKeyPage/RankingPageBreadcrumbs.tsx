@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,6 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import Link from "@/components/atoms/SiteLink";
 import { CURRENT_ITEM_CLASS } from "@/components/layout/Breadcrumbs";
 
 interface RankingPageBreadcrumbsProps {

@@ -2,7 +2,6 @@
 
 import { type ReactNode, useMemo } from "react";
 
-import Link from "next/link";
 
 import {
     Table,
@@ -17,7 +16,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
-
+import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
 import { AffiliateTextAdList, BannerAd } from "@/features/ads";

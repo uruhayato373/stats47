@@ -1,8 +1,8 @@
-import Link from 'next/link';
 
 import { Button, Input } from '@stats47/components';
 import { Search } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
 
 interface RailSearchCardProps {

@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 
 import { cn } from '@stats47/components';
 import { ChevronRight } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 import { RailCard, RailNavRow } from '@/components/surface';
 

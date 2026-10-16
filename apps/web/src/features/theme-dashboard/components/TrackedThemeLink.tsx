@@ -2,7 +2,7 @@
 
 import { type ComponentPropsWithoutRef } from "react";
 
-import Link from "next/link";
+import Link from "@/components/atoms/SiteLink";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
 
