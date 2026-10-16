@@ -142,6 +142,7 @@ jobs:
       # ★step 単位で時間を区切る。probe は並列 12・1 件 12s timeout・上限 5,000 件なので、
       #   全件がタイムアウトする最悪ケースで約 41 分かかり job の timeout-minutes: 30 を食い潰す
       #   (= GSC/GA4/AdSense の週次計測ごと道連れになる)。実測 2,456 件は正常時 2 分程度。
+      #   status と HTML は同じ GET (並列12) で読み切る。200 ページの二重取得はしない。
       #   超過したら step が失敗し、下の Raise coverage queue alert が Issue を起票する。
       - name: 🗺 Rebuild GSC coverage queue (本番 HTTP 実測)
         id: coverage_queue
