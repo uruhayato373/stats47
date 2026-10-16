@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-15T22:28:29.549Z",
+  "updatedAt": "2026-10-16T00:22:59.996Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -13981,6 +13981,72 @@
           "subline": "1位は埼玉県\n2023年のデータ",
           "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に長い通勤を象徴する具体物を1点だけ大きく描く: 無地の通勤定期入れと、その横に置いた文字盤に数字のないシンプルな腕時計。定期入れの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。電車の車両・路線図・駅名標・地図・グラフ・時刻表・数字の入った時計は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
           "evidence": "https://storage.stats47.jp/note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min/draft.md 2026-10-15 公開R2の本文を確認。2023年の社会・人口統計体系 (statsDataId 0000010208・項目 H03102) の、家計を主に支える者が雇用者で通勤時間が1時間30分以上の主世帯の割合 (主世帯千世帯あたり) の都道府県ランキングで1位は埼玉県 (33.9)、47位は沖縄県 (2.6)。平均通勤時間ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+        }
+      }
+    },
+    {
+      "articleKey": "a-manufacturing-industry-annual-income",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-manufacturing-industry-annual-income/revisions/700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce.png"
+          },
+          "bytes": 2214824,
+          "id": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-7f25b0ae8648",
+          "createdAt": "2026-10-16T00:22:48.144Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-16)",
+            "reviewedAt": "2026-10-16T00:22:51.983Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-manufacturing-industry-annual-income/inputs/b9d5de49b1d9b5254cdf518747b8ac05a71beb732a058311ed3f241f1177609f.json"
+              },
+              "bytes": 9494
+            },
+            "production": {
+              "id": "NCI-00501",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "7f25b0ae8648b8415ef92081afc14faca395b9752eec1a38b5f7cc3e2b883852"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "approvedRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00501",
+        "policyId": "NCP-003",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "製造業の年収が\n高い県は？",
+          "subline": "1位は神奈川県\n2023年のデータ",
+          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側にものづくりを象徴する具体物を1点だけ大きく描く: 無地の大きな歯車を2つ組み合わせ、その手前に置いた銀色のスパナ。歯車とスパナには刻印・文字・数字を付けない。左側に大きな2行の問い、下に十分大きな補足2行。工場の建物・煙突・紙幣・硬貨・お札の束・地図・グラフ・数字の入った物は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-manufacturing-industry-annual-income/draft.md 2026-10-16 公開R2の本文を確認。2023年の賃金構造基本統計調査 (statsDataId 0003426933・産業分類 E 製造業・一般労働者・男女計・企業規模10人以上) の、6月のきまって支給する現金給与額×12+前年の賞与で推計した年収の都道府県ランキングで1位は神奈川県 (629.09万円)、47位は沖縄県 (330.04万円)。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
         }
       }
     },

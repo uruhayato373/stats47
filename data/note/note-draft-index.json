@@ -65,6 +65,11 @@
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
       "status": "draft"
     },
+    "a-manufacturing-industry-annual-income": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
+      "status": "draft"
+    },
     "a-number-of-hotel-rooms": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/a-number-of-hotel-rooms",
