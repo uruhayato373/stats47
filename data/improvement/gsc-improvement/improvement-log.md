@@ -861,3 +861,10 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **証拠 / 再確認**: `data/gsc/ui-audits/2026-10-17-remediation.json#productionRelease`。公開gateは `bash .github/scripts/smoke-test-routes.sh https://stats47.jp` と `bash .github/scripts/check-sitemap-index.sh https://stats47.jp`。
 - **残件**: 10-23のGSC検証結果と出典別creator/license（各1,092件の推奨警告）は `GSC-DATASET-NESTED-SCHEMA-01` で追跡。標準deployのメタデータ生成・publishを除き、Geoデータ再計算や手動R2変更は実施していない。
 - **テストの留保**: post-deployはhealth11/11、Playwright45 passed + 3 flaky（初回main boundingBox null、retry #1で全件成功）、warm-cache28/28。原因は未確定のため `CI-SMOKE-BOUNDING-BOX-01` へ起票。CI成功を初回全件成功とは扱わない。
+
+
+### [GSC-COVERAGE-DEPLOY-01] 残り4ページの通常登録リクエスト受理（2026-10-17）
+
+- 本番200・自己canonical・index可と、県ごとの本文・数値をPlaywrightで確認。最新日次Inspection（10-16）は4件ともNEUTRAL、直前のGSC画面も未登録soft404で、登録済みURLへの再送はしていない。
+- 栃木local-finance、静岡/茨城/福井labor-wagesは各1回の通常リクエストで「URLを優先クロールキューに追加」を確認。前日11件と合わせ15/15受付、未送信0件。gsc-4のみPAUSEDへ変更。専用Chrome・一時profile・google-admin lockは終了時に清掃。
+- 受理は登録完了ではない。10-23に修正後lastCrawlTime・登録を確認し、カードは進行中のまま。effect判定なし。証拠: `data/gsc/ui-audits/2026-10-16-remediation.json#release`。
