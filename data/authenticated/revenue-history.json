@@ -46,7 +46,7 @@
       "date": "2026-10-17",
       "cumulativeYen": 0,
       "monthToDateYen": 0,
-      "observedAt": "2026-10-17T00:07:04.273Z"
+      "observedAt": "2026-10-17T00:41:33.762Z"
     },
     {
       "channel": "note",
@@ -58,7 +58,7 @@
         "2026-06": 300,
         "2026-05": 300
       },
-      "observedAt": "2026-10-17T00:07:54.115Z"
+      "observedAt": "2026-10-17T00:41:36.093Z"
     }
   ]
 }
