@@ -215,7 +215,7 @@ jobs:
         run: |
           set -euo pipefail
           git add -- .claude/todo/improvements.md .claude/todo/backlog.md \
-            .claude/skills/analytics/*-improvement/reference/improvement-log.md \
+            ':(glob)data/improvement/*-improvement/improvement-log.md' \
             data/measurement-cycle/triage-latest.json
           if ! git diff --cached --quiet; then
             git commit -q -m "chore(improvements): weekly measurement cycle ${WEEK} [skip ci]"
@@ -227,7 +227,7 @@ jobs:
             exit 0
           fi
           for i in 1 2 3; do
-            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+            if git pull --rebase --autostash --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed"
               exit 0
             fi

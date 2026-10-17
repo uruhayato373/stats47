@@ -7,7 +7,9 @@ export function consumerPath(name, path) {
   if (name === 'moshimo' && path === datasetPath("moshimo.results")) return path;
   if (name === 'rakuten' && path === datasetPath("rakuten.results")) return path;
   if (name === 'a8' && /^data\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;
-  if (name === 'gsc' && /^data\/gsc\/coverage-drilldown\/\d{4}-W\d{2}\/[a-z0-9_-]+\.(csv|json)$/.test(path)) return path;
+  // Observation targets belong to the current queue builder, not a report snapshot.
+  if (name === 'gsc' && /^data\/gsc\/coverage-drilldown\/\d{4}-W\d{2}\/[a-z0-9_-]+\.(csv|json)$/.test(path)
+    && !/\/coverage-live-(observe|resubmit)-urls\.csv$/.test(path)) return path;
   if (name === 'note') {
     const match = /^\.local\/authenticated-measurement\/note-\d+\/note\/(latest\.json|cover-metrics-latest\.(json|csv))$/.exec(path);
     if (match) return `${datasetDir("note.dashboard")}/${match[1]}`;

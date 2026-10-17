@@ -104,7 +104,7 @@ async function main() {
     const t = metrics.ga4.total;
     const deltaSign = t.engagedSessionDelta > 0 ? "+" : "";
     console.log(
-      `\n  engagedSessions (NSM): ${t.thisEngagedSessions} (前週 ${t.prevEngagedSessions}, delta ${deltaSign}${t.engagedSessionDelta})`,
+      `\n  engagedSessions (Japan): ${t.thisEngagedSessions} (前週 ${t.prevEngagedSessions}, delta ${deltaSign}${t.engagedSessionDelta})`,
     );
   }
   if (metrics.gsc?.total) {

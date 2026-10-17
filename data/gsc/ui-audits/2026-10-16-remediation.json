@@ -1344,13 +1344,34 @@
           "confirmation": "keyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/areas/09000/local-finance\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: ソフト 404\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/areas/09000/freight-logistics\nクロール\n前回のクロール\n2026/06/05 22:32:55\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/areas/09000/local-finance\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\nerror_outline\n割り当て量を超えています\n1 日の割り当て量を超えたため、リクエストを処理できませんでした。明日、もう一度お試しください。\n表示しない"
         }
       ],
-      "remainingUrls": [
-        "https://stats47.jp/areas/09000/local-finance",
-        "https://stats47.jp/areas/22000/labor-wages",
-        "https://stats47.jp/areas/08000/labor-wages",
-        "https://stats47.jp/areas/18000/labor-wages"
-      ],
-      "stopReason": "GSC UI quota reached; no bypass or repeat submissions attempted."
+      "remainingUrls": [],
+      "stopReason": "All 15 requested URLs accepted; Google indexing remains unconfirmed.",
+      "followupAttempts": [
+        {
+          "url": "https://stats47.jp/areas/09000/local-finance",
+          "result": "accepted",
+          "observedAt": "2026-10-17T00:31:59.589Z",
+          "confirmation": "check_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/22000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-17T00:33:23.348Z",
+          "confirmation": "check_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/08000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-17T00:34:50.611Z",
+          "confirmation": "check_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        },
+        {
+          "url": "https://stats47.jp/areas/18000/labor-wages",
+          "result": "accepted",
+          "observedAt": "2026-10-17T00:35:44.141Z",
+          "confirmation": "check_circle\nインデックス登録をリクエスト済み\nURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細\n表示しない"
+        }
+      ]
     },
     "robotsRecrawl": {
       "url": "https://stats47.jp/robots.txt",
@@ -1371,13 +1392,64 @@
       "name": "GSCの未送信4ページを処理",
       "scheduleLocal": "09:00 Asia/Tokyo daily until remaining requests are accepted",
       "stopAfterCompletion": true,
-      "remainingUrls": [
-        "https://stats47.jp/areas/09000/local-finance",
-        "https://stats47.jp/areas/22000/labor-wages",
-        "https://stats47.jp/areas/08000/labor-wages",
-        "https://stats47.jp/areas/18000/labor-wages"
-      ],
-      "firstAttemptLocalDate": "2026-10-17"
+      "remainingUrls": [],
+      "firstAttemptLocalDate": "2026-10-17",
+      "status": "PAUSED",
+      "completedAt": "2026-10-17T00:35:44.141Z",
+      "result": "all-four-accepted",
+      "googleIndexingStatus": "not-yet-confirmed",
+      "nextVerificationDate": "2026-10-23",
+      "publicPreflight": {
+        "method": "Playwright page navigation and rendered main content",
+        "results": [
+          {
+            "url": "https://stats47.jp/areas/09000/local-finance",
+            "status": 200,
+            "canonical": "https://stats47.jp/areas/09000/local-finance",
+            "robots": "index, follow",
+            "renderedPrefectureDataPresent": true
+          },
+          {
+            "url": "https://stats47.jp/areas/22000/labor-wages",
+            "status": 200,
+            "canonical": "https://stats47.jp/areas/22000/labor-wages",
+            "robots": "index, follow",
+            "renderedPrefectureDataPresent": true
+          },
+          {
+            "url": "https://stats47.jp/areas/08000/labor-wages",
+            "status": 200,
+            "canonical": "https://stats47.jp/areas/08000/labor-wages",
+            "robots": "index, follow",
+            "renderedPrefectureDataPresent": true
+          },
+          {
+            "url": "https://stats47.jp/areas/18000/labor-wages",
+            "status": 200,
+            "canonical": "https://stats47.jp/areas/18000/labor-wages",
+            "robots": "index, follow",
+            "renderedPrefectureDataPresent": true
+          }
+        ],
+        "recordedAt": "2026-10-17T00:36:20.268441+00:00",
+        "phase": "before each corresponding indexing request"
+      },
+      "inspectionBeforeRequest": {
+        "latestDailyCsv": "data/gsc/url-inspection/2026-10-16.csv",
+        "dailyStatuses": {
+          "https://stats47.jp/areas/09000/local-finance": "NEUTRAL / soft404",
+          "https://stats47.jp/areas/22000/labor-wages": "NEUTRAL / soft404",
+          "https://stats47.jp/areas/08000/labor-wages": "NEUTRAL / soft404",
+          "https://stats47.jp/areas/18000/labor-wages": "NEUTRAL / soft404"
+        },
+        "liveUiStatuses": {
+          "https://stats47.jp/areas/09000/local-finance": "URL が Google に登録されていません / ソフト 404",
+          "https://stats47.jp/areas/22000/labor-wages": "URL が Google に登録されていません / ソフト 404",
+          "https://stats47.jp/areas/08000/labor-wages": "URL が Google に登録されていません / ソフト 404",
+          "https://stats47.jp/areas/18000/labor-wages": "URL が Google に登録されていません / ソフト 404"
+        },
+        "requestsPerUrl": 1
+      }
     },
     "postPurgeVerification": {
       "checkedAt": "2026-10-16T13:38:32.809Z",

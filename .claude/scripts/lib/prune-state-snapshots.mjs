@@ -19,6 +19,11 @@ import { datasetDir } from "../../../config/datasets.mjs";
 const PROJECT_ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 
 export const RETENTION_POLICIES = Object.freeze({
+  "ga4-reconciliations": {
+    directory: datasetDir("ga4.reconciliations"),
+    pattern: /^\d{4}-\d{2}-\d{2}-\d{4}-W\d{2}\.json$/,
+    keep: 26,
+  },
   psi: {
     directory: datasetDir("psi.batch"),
     pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,

@@ -80,6 +80,8 @@ updated: 2026-10-17
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 - **2026-10-05 確認 (W41 Must 2・affiliate-manager)**: blocked (`a8-cross-check-shortfall` / `a8-results-month-missing`) の原因は、10 月分の案件別明細 (program-detail) を一度も取得していないこと。2026-10-04T08:34Z の収集はサイト別 (site-summary) だけで (`a8-ui-last-run.json` は 1/1 unit)、`a8-report-log.json` の `programPeriod` と `a8-results.json` に 202610 が無い (site=57 clicks・picked=0・delta=-57・許容 3)。収集は CI ではなくローカルの手動運用で、`affiliate-ga4-weekly.yml` は取得済み state の restore だけ (直近 5 run の failure はこの blocked による計測ゲート)。次: 10-11 以降に A8 ログイン済みのプロファイルで `node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports program-detail --month 2026-10` を取得し、`node .claude/scripts/ads/check-a8-outcome-gate.mjs` が ready (exceeded なし・shortfall なし) になれば閉じる。10-11 に 202610 が無ければ「収集未実施の継続」として残す。program-detail は doboku-note との共用口座分を含むので `programIdMap` の allowlist で絞る運用を変えない。
 
+- **現在の残件（2026-10-17）**: UI変更は修正し10月4CSVを取得したが、案件別の独立監査は専用click下限がサイト合計＋既存許容差を超えてFAIL。全CSV run `2026-10-16T23-37-11Z` は正規化せず隔離した。サイト別run `2026-10-16T23-39-00Z`だけ監査PASS後に正規化（222click、発生/確定件数・金額0）。次は両サイトの現在の配信広告定義とprogramIdMapを照合し、帰属の根拠を得る。未写像3行と共用3案件を推測配賦せず、既存の許容差を広げない。収益のサイト行は利用可、EPC判断は引き続き停止。
+
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
 
@@ -160,6 +162,16 @@ updated: 2026-10-17
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・git記録の整合・認証付き計測Issueの復旧closeが成立し、本人の再認証を挟まない別日付のmain scheduleで連続2回以上確認する（恒久的な無人保証とはしない）。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。サイト全体の放置運用判定は、このカードだけでなく横断監視Issue #763の別系統異常の解消も必要。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 - **観測 (2026-10-08)**: run 37695475962 (develop への push で起動) で、もしもが `auth_required` (`blockedSince` 2026-10-07T16:31:27Z、新規)、KDP も `auth_required` (`blockedSince` 2026-09-30T08:35:08Z のまま)。どちらも `collectionAttempted:false` で、本人の再認証待ち。同じ run でココナラも `auth_required` (`blockedSince` 2026-10-01T12:39:06Z。自動ログイン対象外なので専用プロファイルからの `bootstrap-session.mjs coconala --from-profile --publish` 待ち)。
+
+- **復旧後の取得実測（2026-10-17）**: run38984474666は8サービス全てpass、recordとgit書戻しも成功。note/ココナラの10-17売上観測、KDP日次10-16と確定月次の重複防止（added0/skipped1/conflicts0）を確認。本人再認証を挟まない別日main schedule連続2回はまだ未達であり、このカードを継続する。
+
+- **後続の再発（2026-10-17T00:41Z）**: run38987311743はKDPだけ`auth_required / relogin=login_failed`、他7サービスはpass。KDPは同一世代を停止しており、古い成功で上書きしない。本人のReports再確認返信後、Reports実UIの表示を確認してCI用stateを更新した。クラウドの再取得を確認するまで復旧扱いにしない。継続2回の完了条件は未達。
+
+- **再発箇所への修正（2026-10-17）**: attempt2はCI再ログインに成功した後、全書籍確認の終了後にReportsへ戻る遷移で`auth_required`。取得前の長い棚卸しを避け、別Reportsタブで先に日次・月次を取得してから棚卸しするよう修正、32テストpass。全件確認・口座照合・確定月次とprivate保存を成功条件に維持。修正版の実CI確認が必要。
+
+- **時間予算の修正**: attempt3は認証成功後のtimeout。計測限定で、正しい本棚の可視draft行を再利用して22冊の重複再読み込みを減らす。未発見の探索・全件照合・出版時のfresh navigationは維持。48テストpass、実CIで確認する。
+
+- **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
@@ -441,6 +453,13 @@ updated: 2026-10-17
 - **次 / 順序**: ①sourceごとに観測日・取得日・母集団・標本数・欠測を照合する ②既存CSV/manifest gateで最新coverageを取り込むか、部分UI監査を補助証拠として保持するかを決める ③HTTP/sitemap collectorの既存出力との接続を検証し、既存キューの状態を保持して再構築する。集計期間はsearch-growthのObservationと元summaryを照合し、週フォルダ名から推定しない。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
+- **週次CIの追加実測 (2026-10-17確認)**: Issue #1135、run `38820105627`はGSC restore 67 files（observedAt 2026-10-15T08:34Z）成功後、2,800 URLのHTTP probeと5xx/timeout 8件の再試行を終えた。HTTP 200の1,224 URLのHTML index signal検査中、2026-10-15T23:08:01Zにstepの12分上限で停止した。jobはcontinue-on-errorによりsuccessでもqueue buildはfailureで、source staleがこのrunの失敗原因ではない。証拠: https://github.com/uruhayato373/stats47/actions/runs/38820105627 。
+- **追加の次 / 順序**: HTTP/HTMLの二段取得の所要時間・予算・再開方法・部分結果の保全を調べ、全体完了未達を明示する。成功後に新しいqueueとsourceの取得範囲を照合する。古い入力を新しい証拠として扱わず、既存の完了条件を維持する。
+
+- **全量実測の是正（2026-10-17）**: private R2の観測10-16・67ファイルを復元しW42入力へ更新。status/HTMLを単一GETにした上で、未完了のbody.cancel待ちが終了コード0で保存を止める問題をredテストで再現し、非同期cancel・強制deadline・CLI top-level awaitで修正した。本番2,751 URLのGETは9,172ms、sitemap 6,574 URLとの照合と2799件のqueue保存まで完了。source_observed_at=10-16、generated_at=10-17を分離し、pending1137は母集団の違う旧1034件と単純比較しない。残りは修正版を使う週次CIとGSC再認証後の新しいexportの照合。カードは継続する。
+
+
+- **新取得との照合（2026-10-17）**: 認証付きCI run38984474666はGSCを含む8サービスがpass。10-17取得のprivate GSC61ファイルを復元した。過去snapshotのqueue派生observe/resubmit CSVを復元対象から除く保護を追加し、W40/W42対象CSVのSHA不変を実復元で確認。取得日・GSC報告日・queue生成日は区別し、修正版のmain週次CIは引き続き確認する。
 
 ### [GSC-INTERNAL-DISCOVERY-01] 未登録候補の孤立ページとHTMLリンクの到達経路を是正する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
@@ -1676,6 +1695,8 @@ updated: 2026-10-17
 - **観測の判断条件**: 登録済み6,700とsitemap6,574は対象集合が異なるので割り算しない。固定した対象URL群で修正後クロール・登録・検索表示・クリックを追い、未登録総数の減少だけを成功にしない。UI監査（10-12）と既存coverage入力（10-04）の鮮度を分け、取り込み時は既存CSV/manifest gateを通す。既存lastmodは実際の本文/データ更新を表すかを確認し、確認できない日時を捏造して一律更新しない。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
+
+- **登録リクエスト残件の受付完了（2026-10-17）**: 栃木local-finance、静岡/茨城/福井labor-wagesの4ページは本番200・自己canonical・index可・県固有の表示数値を確認し、GSCで各1回の通常リクエストが全て受理された。前日分と合わせ15/15受付済み。未送信0件となったため自動化gsc-4だけをPAUSEDにした。Google保存状態は依然soft404で、登録完了・件数改善は未確認。10-23の修正後クロールと登録確認を維持し、このカードは進行中とする。
 
 ### [NOTE-FISCAL-PEER-PUBLISH-01] 財政指標の同規模比較 note 2 本 (#12 コード版 / #13 コードなし版) を Mac から公開する
 

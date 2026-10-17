@@ -16,3 +16,11 @@ metadata:
 **How to apply:** PV の WoW 監視は GA4 history ではなく `data/gsc/history.csv` の clicks/impressions（週次バケットで整合）と AdSense console PV を使う。GA4 を使う場合は API を直接照会し country=Japan + カレンダー週で集計する。恒久対処は GA4 history 生成スクリプトの修正（要 Issue 起票）。
 
 関連: Git履歴上のGA4 bot混入監査・収益化レビュー、[[project_ga4_setup]]
+
+**問題**: 2026-10-17、同じJapan・確定7日でもNSM補助snapshotとcanonical GA4 summaryの利用者/セッションが一致しなかった。
+
+**原因**: `metrics-reader.mjs`がチャネル別の非加算指標を合算していた。dimensionなしの同期間API実測はcanonicalに一致し、チャネル和は上振れした。
+
+**対策**: チャネル内訳は保持し、期間合計はcountry=Japan・dimensionなしで別照会する。欠けた集計をチャネル和や0で代替しない。既存snapshotは保持し、照合証拠を別保存する。
+
+**証拠**: `data/ga4/reconciliations/2026-10-17-2026-W41.json`、`.claude/scripts/metrics/__tests__/metrics-reader-ga4.test.mjs`。

@@ -21652,7 +21652,7 @@
       "id": "measurement-gap::/areas/01000",
       "url": "/areas/01000",
       "type": "measurement-gap",
-      "status": "pending",
+      "status": "dismissed",
       "score": 0.036,
       "scoreBreakdown": {
         "impact": 0.3,
@@ -21696,7 +21696,9 @@
       ],
       "expectedMetric": "不足データ: crux:lcp_p75",
       "suggestedVerification": "該当 collector を live 実行 or GA4 custom dimension を登録して再取得",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "dismissedAt": "2026-10-16T23:17:40.579Z",
+      "dismissReason": "2026-W41レビュー時点の判断(2026-10-17): CrUX LCP未取得だけを根拠に北海道ページ固有の改善施策は採用しない。欠測を性能不良と扱えず、測定経路の接続後に候補を再評価する。"
     },
     {
       "id": "measurement-gap::/areas/01000/consumer-prices",

@@ -1,39 +1,38 @@
-# GSC カバレッジ是正 — 2026-W40 (2026-10-16)
+# GSC カバレッジ是正 — 2026-W42 (2026-10-17)
 
 > SSOT: `data/gsc/coverage-remediation/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
-> 入力観測日: 2026-10-04 / 入力週齢: 1 週
+> 入力観測日: 2026-10-17 / 入力週齢: 0 週
 
 ## GSC カテゴリ別総件数 (UI export)
 
 | カテゴリ | 件数 | 扱い |
 |---|---:|---|
-| 見つからない(404) | 12639 | 大半=意図的削除/旧URL。放置 |
-| 登録済み | 6469 | 概要グラフの最新値。増やす対象 |
-| robots ブロック | 4956 | 意図的(OGP/CSV)。放置 |
-| noindex 除外 | 2228 | 意図的。放置 |
-| 検出-未登録 | 1054 | クロール待ち |
-| クロール済-未登録 | 968 | Google判断。live は observe-after-fix |
-| リダイレクト | 770 | 意図的301。放置 |
+| 見つからない(404) | 12658 | 大半=意図的削除/旧URL。放置 |
+| 登録済み | 6700 | 概要グラフの最新値。増やす対象 |
+| robots ブロック | 4996 | 意図的(OGP/CSV)。放置 |
+| noindex 除外 | 2299 | 意図的。放置 |
+| リダイレクト | 1004 | 意図的301。放置 |
+| 検出-未登録 | 977 | クロール待ち |
+| 代替canonical | 833 | 正常 |
+| robots-blocked-indexed | 584 |  |
 | ソフト404 | 429 | live は content-check |
-| 代替canonical | 310 | 正常 |
-| robots-blocked-indexed | 222 |  |
-| duplicate-no-user-canonical | 34 |  |
+| クロール済-未登録 | 373 | Google判断。live は observe-after-fix |
+| duplicate-no-user-canonical | 27 |  |
 | サーバーエラー5xx | 20 | 実測で fix/解消判定 |
-| redirect-error | 18 |  |
-| duplicate-google-chose-other | 5 |  |
+| redirect-error | 17 |  |
+| duplicate-google-chose-other | 8 |  |
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **3417** / 要対応 pending: **1034**
-- URL Inspection で登録を確認して done にした URL: **241** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
+- 追跡 URL: **2799** / 要対応 pending: **1137**
+- URL Inspection で登録を確認して done にした URL: **4** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 1289 | 1034 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| enrich | 1 | 0 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
-| none | 2127 | 0 | 意図的/解消済=放置 |
+| observe-after-fix | 1156 | 1137 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| none | 1643 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1049 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1152 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

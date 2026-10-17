@@ -74,11 +74,16 @@ const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: 
   status: sources.every(s => s.status === 'pass') && (salesLedger?.status ?? 'pass') === 'pass' ? 'pass' : 'action_required' };
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
-// 商品の週次実売の入力 (metrics/lib/product-revenue.mjs)。成功した取得元の quality.revenue だけを日付単位で足す。
+// 商品の週次実売の入力。noteの記事棚卸しと売上APIは独立した取得範囲。
+// 棚卸しの不足は残したまま、検証・private保管済み売上だけを記録する。
 const historyPath = `${datasetDir("revenue.authenticated")}/revenue-history.json`;
 const history = existsSync(historyPath) ? JSON.parse(readFileSync(historyPath, 'utf8')) : { schemaVersion: 1, entries: [] };
 for (const s of sources) {
-  const revenue = s.status === 'pass' ? s.quality?.revenue : null;
+  const noteRevenueVerified = s.source === 'note' && s.quality?.revenueStatus === 'pass'
+    && s.quality.revenueEvidenceAvailable === true && s.collectionAttempted === true
+    && /^[a-f0-9]{64}$/.test(s.evidence?.sha256 ?? '') && s.evidence.bytes > 0
+    && (s.status === 'pass' || (s.status === 'failed' && s.code === 'report_incomplete'));
+  const revenue = (s.source === 'note' ? noteRevenueVerified : s.status === 'pass') ? s.quality?.revenue : null;
   if (!revenue || !/^\d{4}-\d{2}-\d{2}$/.test(revenue.date ?? '')) continue;
   history.entries = history.entries.filter(e => !(e.channel === s.source && e.date === revenue.date));
   history.entries.push({ channel: s.source, ...revenue, observedAt: s.observedAt });

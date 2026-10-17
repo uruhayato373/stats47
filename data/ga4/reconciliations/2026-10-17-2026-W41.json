@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-10-16T23:31:55.664Z",
+  "week": "2026-W41",
+  "definition": "Japan-only dimensionless report, same finalized7d and previous7d periods",
+  "total": {
+    "thisUsers": 5484,
+    "prevUsers": 4872,
+    "thisSessions": 6242,
+    "prevSessions": 5651,
+    "thisEngagedSessions": 4245,
+    "prevEngagedSessions": 4021,
+    "userDelta": 612,
+    "userDeltaPct": 12.561576354679804,
+    "engagedSessionDelta": 224,
+    "engagedSessionDeltaPct": 5.570753543894553
+  },
+  "canonical": {
+    "current": {
+      "activeUsers": 5484,
+      "sessions": 6242,
+      "engagedSessions": 4245,
+      "pageviews": 12179,
+      "engagementRate": 0.6800704902274912
+    },
+    "previous": {
+      "activeUsers": 4872,
+      "sessions": 5651,
+      "engagedSessions": 4021,
+      "pageviews": 10783,
+      "engagementRate": 0.7115554769067421
+    }
+  },
+  "channelsSum": {
+    "users": 5513,
+    "sessions": 6270,
+    "engaged": 4266
+  },
+  "oldSnapshotPreserved": true
+}

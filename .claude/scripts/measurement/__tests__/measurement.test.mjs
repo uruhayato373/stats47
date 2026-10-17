@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readBookshelfState } from '../../kdp/lib/kdp-flow.mjs';
 import { randomBytes } from 'node:crypto';
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -127,14 +128,17 @@ test('KDP Reports readiness rejects login and requires the actual report UI', as
   url = 'https://kdpreports.amazon.co.jp.evil.example/dashboard'; redirect = false;
   await assert.rejects(openKdpReports(page), /account_mismatch: reports_origin/);
 });
-test('KDP checks Reports before scanning and verifies refresh only after final collection', () => {
+test('KDP collects short-lived Reports before the long bookshelf scan and retains its own tab', () => {
   const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
   const identity = code.indexOf('if (!identity.found');
-  const preflight = code.indexOf('await openKdpReports(page)');
+  const preflight = code.indexOf('await openKdpReports(reportsPage)');
   const report = code.indexOf('sales = await collectKdpReport');
   const verified = code.indexOf('markMeasurementAuthenticated(source)');
   const scan = code.indexOf('for (const [id, entry]');
-  assert.ok(identity > 0 && identity < preflight && preflight < scan && scan < report && report < verified);
+  const monthly = code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport(reportsPage');
+  assert.ok(identity > 0 && identity < preflight && preflight < report && report < monthly && monthly < scan && scan < verified, '13-minute bookshelf scans must not consume the Reports session before revenue collection');
+  assert.match(code, /const reportsPage = await context.newPage\(\)/);
+  assert.doesNotMatch(code, /readBookshelfState\(reportsPage|reportsPage.close\(/);
   const bootstrap = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
   const readiness = bootstrap.indexOf('await openKdpReports(page)');
   assert.ok(readiness > 0 && readiness < bootstrap.indexOf('state = await context.storageState'));
@@ -206,6 +210,12 @@ test('public failure codes cannot contain raw authentication diagnostics', () =>
 });
 
 test('restore permits canonical reports only and rejects failed, stale or future attempts', () => {
+  const gscDir = 'data/gsc/coverage-drilldown/2026-W42/';
+  assert.equal(consumerPath('gsc', `${gscDir}not-found-404-drilldown.csv`), `${gscDir}not-found-404-drilldown.csv`);
+  assert.equal(consumerPath('gsc', `${gscDir}category-totals.json`), `${gscDir}category-totals.json`);
+  for (const file of ['coverage-live-observe-urls.csv', 'coverage-live-resubmit-urls.csv']) {
+    assert.equal(consumerPath('gsc', `${gscDir}${file}`), null, 'restoring inputs must not overwrite newer queue-derived observation targets');
+  }
   assert.equal(consumerPath('note', '.local/authenticated-measurement/note-123/note/latest.json'), 'data/note/dashboard/latest.json');
   for (const path of ['../../.env.local', '.local/authenticated-measurement/note-123/state.json', '.local/authenticated-measurement/note-123/note/../../note/latest.json']) assert.equal(consumerPath('note', path), null);
   assert.equal(consumerPath('moshimo', 'data/affiliate/a8-results.json'), null);
@@ -379,4 +389,62 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
   assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
   assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
+});
+
+test('note sales with private evidence survive an incomplete article inventory without making the source pass', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-note-revenue-'));
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const runId = 'note-sales-recovery';
+    const observation = { source: 'note', capability: SOURCES.note.capability,
+      observedAt: new Date().toISOString(), status: 'failed', code: 'report_incomplete',
+      runId, runAttempt: 1, collectionAttempted: true, inventoryAvailable: true,
+      evidence: { sha256: 'a'.repeat(64), bytes: 100 },
+      quality: { revenueStatus: 'pass', revenueEvidenceAvailable: true,
+        revenue: { date: '2026-10-17', month: '2026-10', monthToDateYen: 0, closedMonths: {} } } };
+    const collect = (value) => {
+      rmSync(join(temp, 'data'), { recursive: true, force: true });
+      writeFileSync(join(input, 'note-1.json'), JSON.stringify(value));
+      execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
+        cwd: temp, env: { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1' },
+      });
+      return {
+        state: JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))),
+        rows: JSON.parse(readFileSync(join(temp, 'data/authenticated/revenue-history.json'))).entries,
+      };
+    };
+    const result = collect(observation);
+    assert.equal(result.state.status, 'action_required');
+    assert.equal(result.state.sources.find(s => s.source === 'note').metricsAvailable, false);
+    assert.equal(result.rows.length, 1);
+    assert.equal(result.rows[0].monthToDateYen, 0, 'measured zero must be recorded');
+    for (const change of [
+      { evidence: null }, { collectionAttempted: false }, { code: 'auth_required' },
+      { quality: { ...observation.quality, revenueStatus: 'verification_required' } },
+      { quality: { ...observation.quality, revenueEvidenceAvailable: false } },
+      { runId: 'old-run' },
+    ]) assert.equal(collect({ ...observation, ...change }).rows.length, 0);
+    const code = readFileSync(resolve('.claude/scripts/measurement/collect.mjs'), 'utf8');
+    assert.match(code, /capture\(`\.local\/authenticated-measurement\/\$\{name\}-\$\{runId\}\/sales\.json`\)/,
+      'recorded note revenue must have a raw sales artifact in the private vault');
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// Keep full per-book assertions, but do not reload an already visible exact draft row.
+test('measurement bookshelf reuse requires the correct origin, path and exact draft; publishing still navigates', async () => {
+  const expected = { found: true, status: '販売中', asin: 'B0HF17SQ9N' };
+  const page = (url, count, visible = count > 0) => ({
+    url: () => url,
+    locator: selector => { assert.equal(selector, 'a[href*="/title-setup/kindle/draft-1/"]'); return { count: async () => count, first: () => ({ isVisible: async () => visible }) }; },
+    goto: async () => { throw new Error('fresh-navigation-required'); },
+    evaluate: async (_fn, args) => { assert.equal(args.id, 'draft-1'); return expected; },
+  });
+  const bookshelf = 'https://kdp.amazon.co.jp/ja_JP/bookshelf#2';
+  assert.equal(await readBookshelfState(page(bookshelf, 1), 'draft-1', { reuseVisibleRow: true }), expected);
+  for (const [url, count, reuseVisibleRow, visible] of [
+    [bookshelf, 0, true], [bookshelf, 1, true, false], [bookshelf, 1, false],
+    ['https://kdpreports.amazon.co.jp/dashboard', 1, true],
+    ['https://kdp.amazon.co.jp.evil.example/ja_JP/bookshelf', 1, true],
+    ['https://kdp.amazon.co.jp/ja_JP/bookshelf-other', 1, true],
+  ]) await assert.rejects(readBookshelfState(page(url, count, visible), 'draft-1', { reuseVisibleRow }), /fresh-navigation-required/);
 });

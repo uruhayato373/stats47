@@ -33,6 +33,32 @@
       "cumulativeYen": 0,
       "monthToDateYen": 0,
       "observedAt": "2026-10-01T08:36:06.313Z"
+    },
+    {
+      "channel": "kdp",
+      "date": "2026-10-16",
+      "royaltyYen": 0,
+      "paidOrders": 0,
+      "observedAt": "2026-10-17T01:42:49.888Z"
+    },
+    {
+      "channel": "coconala",
+      "date": "2026-10-17",
+      "cumulativeYen": 0,
+      "monthToDateYen": 0,
+      "observedAt": "2026-10-17T00:41:33.762Z"
+    },
+    {
+      "channel": "note",
+      "date": "2026-10-17",
+      "month": "2026-10",
+      "monthToDateYen": 0,
+      "closedMonths": {
+        "2026-07": 300,
+        "2026-06": 300,
+        "2026-05": 300
+      },
+      "observedAt": "2026-10-17T00:41:36.093Z"
     }
   ]
 }
