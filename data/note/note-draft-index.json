@@ -275,9 +275,19 @@
       "r2_path": "note/product-sales/gov-training-materials",
       "status": "draft"
     },
+    "h-howto-excel-filled-map": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/h-howto-excel-filled-map",
+      "status": "draft"
+    },
     "h-howto-mymaps-kml": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/h-howto-mymaps-kml",
+      "status": "draft"
+    },
+    "h-howto-mymaps-share": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/h-howto-mymaps-share",
       "status": "draft"
     },
     "industry-government-promotion": {

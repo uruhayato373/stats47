@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-17T23:14:36.237Z",
+  "updatedAt": "2026-10-17T23:22:31.311Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -25881,6 +25881,21 @@
       }
     },
     {
+      "articleKey": "h-howto-excel-filled-map",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00504",
+        "policyId": "NCP-007",
+        "policyVersion": 4,
+        "brief": null
+      }
+    },
+    {
       "articleKey": "h-howto-mymaps-kml",
       "noteUrl": null,
       "revisions": [],
@@ -25890,6 +25905,21 @@
       "missingVersions": [],
       "production": {
         "id": "NCI-00503",
+        "policyId": "NCP-007",
+        "policyVersion": 4,
+        "brief": null
+      }
+    },
+    {
+      "articleKey": "h-howto-mymaps-share",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00505",
         "policyId": "NCP-007",
         "policyVersion": 4,
         "brief": null
