@@ -127,14 +127,17 @@ test('KDP Reports readiness rejects login and requires the actual report UI', as
   url = 'https://kdpreports.amazon.co.jp.evil.example/dashboard'; redirect = false;
   await assert.rejects(openKdpReports(page), /account_mismatch: reports_origin/);
 });
-test('KDP checks Reports before scanning and verifies refresh only after final collection', () => {
+test('KDP collects short-lived Reports before the long bookshelf scan and retains its own tab', () => {
   const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
   const identity = code.indexOf('if (!identity.found');
-  const preflight = code.indexOf('await openKdpReports(page)');
+  const preflight = code.indexOf('await openKdpReports(reportsPage)');
   const report = code.indexOf('sales = await collectKdpReport');
   const verified = code.indexOf('markMeasurementAuthenticated(source)');
   const scan = code.indexOf('for (const [id, entry]');
-  assert.ok(identity > 0 && identity < preflight && preflight < scan && scan < report && report < verified);
+  const monthly = code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport(reportsPage');
+  assert.ok(identity > 0 && identity < preflight && preflight < report && report < monthly && monthly < scan && scan < verified, '13-minute bookshelf scans must not consume the Reports session before revenue collection');
+  assert.match(code, /const reportsPage = await context.newPage\(\)/);
+  assert.doesNotMatch(code, /readBookshelfState\(reportsPage|reportsPage.close\(/);
   const bootstrap = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
   const readiness = bootstrap.indexOf('await openKdpReports(page)');
   assert.ok(readiness > 0 && readiness < bootstrap.indexOf('state = await context.storageState'));

@@ -26,17 +26,18 @@ try {
     if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
     if (!identity.found || identity.asin !== expected.asin) throw new Error('account_mismatch');
     const { listings } = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8'));
-    // Bookshelf and Reports have distinct authentication. Never persist a
-    // bookshelf-only refresh, or spend a full catalog scan before detecting it.
-    await openKdpReports(page);
+    // Collect the short-lived Reports session before the slow catalog scan.
+    // Keep its SPA open while scanning the bookshelf so its refresh lifecycle continues.
+    const reportsPage = await context.newPage();
+    await openKdpReports(reportsPage);
+    sales = await collectKdpReport(reportsPage, listings, output.replace(/\.json$/, '.xlsx'));
+    monthlyRoyalties = await collectKdpMonthlyReport(reportsPage, listings, output.replace(/\.json$/, '.monthly.xlsx'));
     for (const [id, entry] of Object.entries(listings)) {
       if (!entry.draftId) continue;
       const value = await readBookshelfState(page, entry.draftId, entry);
       records.push({ id, found: value.found, status: value.status ?? null, asin: value.asin ?? null });
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
-    sales = await collectKdpReport(page, listings, output.replace(/\.json$/, '.xlsx'));
-    monthlyRoyalties = await collectKdpMonthlyReport(page, listings, output.replace(/\.json$/, '.monthly.xlsx'));
     markMeasurementAuthenticated(source);
   } else if (source === 'coconala') {
     const account = await assertCoconala(page);
