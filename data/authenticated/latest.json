@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T00:43:36.763Z",
+  "generatedAt": "2026-10-17T01:14:53.492Z",
   "runId": "38987311743",
   "sources": [
     {
@@ -138,23 +138,23 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-17T00:41:34.281Z",
+      "observedAt": "2026-10-17T01:00:37.535Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
       "runId": "38987311743",
-      "runAttempt": 1,
+      "runAttempt": 2,
       "metricsAvailable": false,
       "inventoryAvailable": false,
-      "collectionAttempted": false,
-      "relogin": "login_failed",
+      "collectionAttempted": true,
+      "relogin": "session_valid",
       "recovery": {
         "state": "awaiting_reauthentication",
-        "blockedSince": "2026-10-17T00:41:34.281Z"
+        "blockedSince": "2026-10-17T01:00:37.535Z"
       },
       "evidence": {
-        "sha256": "230f7d9c7299d801d9229fdd5925c856794c400a0826ddf33eb1b7de8ae33777",
-        "bytes": 156
+        "sha256": "c08c6d468c22b63cefd0fb9c023fc1e1b8dc593a4251941cc5b2a3c3dca945b0",
+        "bytes": 1790
       },
       "quality": null,
       "knownIncomplete": null,
