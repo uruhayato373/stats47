@@ -1,7 +1,7 @@
 # GSC カバレッジ是正 — 2026-W42 (2026-10-17)
 
 > SSOT: `data/gsc/coverage-remediation/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
-> 入力観測日: 2026-10-16 / 入力週齢: 0 週
+> 入力観測日: 2026-10-17 / 入力週齢: 0 週
 
 ## GSC カテゴリ別総件数 (UI export)
 

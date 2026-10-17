@@ -405,6 +405,8 @@ updated: 2026-10-17
 - **全量実測の是正（2026-10-17）**: private R2の観測10-16・67ファイルを復元しW42入力へ更新。status/HTMLを単一GETにした上で、未完了のbody.cancel待ちが終了コード0で保存を止める問題をredテストで再現し、非同期cancel・強制deadline・CLI top-level awaitで修正した。本番2,751 URLのGETは9,172ms、sitemap 6,574 URLとの照合と2799件のqueue保存まで完了。source_observed_at=10-16、generated_at=10-17を分離し、pending1137は母集団の違う旧1034件と単純比較しない。残りは修正版を使う週次CIとGSC再認証後の新しいexportの照合。カードは継続する。
 
 
+- **新取得との照合（2026-10-17）**: 認証付きCI run38984474666はGSCを含む8サービスがpass。10-17取得のprivate GSC61ファイルを復元した。過去snapshotのqueue派生observe/resubmit CSVを復元対象から除く保護を追加し、W40/W42対象CSVのSHA不変を実復元で確認。取得日・GSC報告日・queue生成日は区別し、修正版のmain週次CIは引き続き確認する。
+
 ### [GSC-INTERNAL-DISCOVERY-01] 未登録候補の孤立ページとHTMLリンクの到達経路を是正する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
 

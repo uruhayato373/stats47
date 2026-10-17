@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-17",
   "week": "2026-W42",
-  "source_observed_at": "2026-10-16",
+  "source_observed_at": "2026-10-17",
   "source_age_weeks": 0,
   "source": "GSC UI ページ export (ingest-gsc-export.py) + 本番 HTTP 実測",
   "gsc_category_totals": {

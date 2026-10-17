@@ -206,6 +206,12 @@ test('public failure codes cannot contain raw authentication diagnostics', () =>
 });
 
 test('restore permits canonical reports only and rejects failed, stale or future attempts', () => {
+  const gscDir = 'data/gsc/coverage-drilldown/2026-W42/';
+  assert.equal(consumerPath('gsc', `${gscDir}not-found-404-drilldown.csv`), `${gscDir}not-found-404-drilldown.csv`);
+  assert.equal(consumerPath('gsc', `${gscDir}category-totals.json`), `${gscDir}category-totals.json`);
+  for (const file of ['coverage-live-observe-urls.csv', 'coverage-live-resubmit-urls.csv']) {
+    assert.equal(consumerPath('gsc', `${gscDir}${file}`), null, 'restoring inputs must not overwrite newer queue-derived observation targets');
+  }
   assert.equal(consumerPath('note', '.local/authenticated-measurement/note-123/note/latest.json'), 'data/note/dashboard/latest.json');
   for (const path of ['../../.env.local', '.local/authenticated-measurement/note-123/state.json', '.local/authenticated-measurement/note-123/note/../../note/latest.json']) assert.equal(consumerPath('note', path), null);
   assert.equal(consumerPath('moshimo', 'data/affiliate/a8-results.json'), null);
