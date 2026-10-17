@@ -318,6 +318,19 @@ updated: 2026-10-17
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-HOWTO-OWNER-CHECK-01] 別PCでマイマップとExcelの表示を確かめ、H-01・#9・#11 の画像を撮る
+タグ: [SNS・マーケ] [種類:制作] [実行:別環境] [起票:2026-10-18] [期日:2026-10-25] [領域:商品]
+
+- **なぜ別PCか**: 2026-10-18 に Mac で試したが、Microsoft Excel が入っておらず、Claude in Chrome も未接続でマイマップを操作できなかった (コンピュータ操作では Chrome はクリックできない)。3 本とも note-critic が「実機で確かめるまで公開しない」とした (`NOTE-HOWTO-SERIES-01`)。
+- **前提**: 別PCで `git pull` (この Mac の未 push のコミットが develop に入っていること) → `npm run note:article -- checkout <key>` で作業コピーを取り出す。対象は `h-howto-mymaps-kml` (H-01)・`h-howto-mymaps-share` (#9)・`h-howto-excel-filled-map` (#11)。
+- **確かめること・撮る画面**:
+  1. H-01: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`、47 県・2.5MB) をマイマップに「インポート」。①「インポート」の位置 ②読み込み後の地図 ③県をクリックした吹き出し。県ごとに 5 段階の色が付くか、吹き出しに値・順位・時点・URL が出るか
+  2. #9: ①「共有」の画面 (「リンクの共有を許可する」「地図を公開する」) ②メニューの「自分のサイトに埋め込む」。確定ボタンが「完了」と「変更を保存」のどちらか。**「地図を公開する」は押さない** (誰でも検索できる状態になる)
+  3. #11: Microsoft 365 の Excel で総人口の CSV (ランキングページの「ダウンロード」) から地図を作る。①「データ型」→「地理」の変換後のセル ②完成した地図。47 都道府県が全部塗られるか、「?」や候補選択が出るか、「国」列 (日本) が無くても塗られるかを比べる
+- **反映**: 画像を各作業コピーの `images/` に置き、本文の手順を結果に合わせて直して `npm run note:article -- save <key>`。結果が原稿と違う場合 (色が付かない・認識されない県がある) は公開せず、KML 側の修正 (`apps/web/src/lib/download/build-map-download.ts`) も検討する。Claude に渡す場合は画像と結果をチャットに貼る。
+- **完了条件**: 3 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。
+
+
 ### [KML-DOCUMENT-NAME-01] 地図用 KML の文書名を指標キーではなく日本語の指標名にする
 タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-10-18] [領域:サイト]
 
@@ -366,6 +379,7 @@ updated: 2026-10-17
 - **企画**: `docs/30_note記事企画/backlog/H-howto-maps-data.md` (8 本)。1 本目「Googleマイマップで都道府県を色分けした地図を作る方法」、2 本目「CSVをExcelで開くと文字化けする原因と直し方」。
 - **次**: ① 1 本目は地図用 KML が本番に出てから書く (手順の画面を実物で撮るため) ② 2 本目は今のダウンロード (Shift_JIS 版) で書ける ③ note-critic を通してからオーナー承認で公開。
 - **進捗 (2026-10-17)**: 2 本目 (H-02 CSV 文字化け) は公開済み (https://note.com/stats47/n/nc884a0a01b71)。1 本目 (H-01 マイマップ) は原稿 `docs/31_note記事原稿/h-howto-mymaps-kml/` (作業コピー・未登録) を note-critic が REVISE。minor 4 件は反映済み。
+- **実機確認は `NOTE-HOWTO-OWNER-CHECK-01` (別PC) に分けた。**
 - **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` (Excel の塗りつぶされたマップ) は blocker 1 件が残る: オーナーが Microsoft 365 の Excel で stats47 の CSV から地図を作り、47 都道府県が地理データ型で認識されて塗られるか (「国」列あり・なしで比較) を確かめ、データ型変換後のセルと完成した地図の 2 枚を撮る。認識されなければ公開しない。両方とも公開後に案内先を H-01 へ替える。
 - **H-01 の公開条件 (オーナー作業)**: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`) を Google マイマップへ 1 回インポートし、①県別の色分けが出るか ②県をクリックした吹き出しに値・順位・時点・URL が出るかを確かめ、「インポート」の位置と読み込み後の地図の 2 枚を撮る。色が出なければ KML の Style 指定を直してから公開する。
 - **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
