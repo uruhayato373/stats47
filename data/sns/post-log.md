@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**717 件** (最終更新: 2026-10-16)
+**720 件** (最終更新: 2026-10-17)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-17 | 📸 Instagram | area-carousel/17000 | 【都道府県データ】石川県、全国で何位？  全国トップクラス: 認定こども園数 2位（543園・2024年） 年間降水量 … | [🔗](https://www.instagram.com/p/DemPAAgG6MN/) |
+| 2026-10-17 | 🧵 Threads | area/area-24000-profile | 三重のデータブックを公開中。 シロチドリと松阪牛、桑名のはまぐりを入口に、人口・産業・消費の数字を県別に深掘り。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DelqkyPie0v) |
+| 2026-10-17 | 🧵 Threads | ranking/dental-clinic-count-per-100k | 歯医者が多い県はどこ？  人口10万人あたりの歯科診療所は1位東京75.3施設、2位大阪61.7、3位福岡59.6。 最… | [🔗](https://www.threads.com/@stats47jp/post/Dek81yZgqsP) |
 | 2026-10-16 | 📸 Instagram | compare-carousel/01000-vs-47000 | 【県どうしの比較】北海道 vs 沖縄県  水稲収穫量（水稲・子実用の収穫量）: 北海道が大きい（2019年・出典: 作物… | [🔗](https://www.instagram.com/p/Dejx0ayEZ6Z/) |
 | 2026-10-16 | 🧵 Threads | area/area-23000-profile | 旅先では見えにくい愛知の輪郭。 県木ハナノキと特産金俵まくわうり、暮らしの統計を同じページで確認できます。 続きは👇 … | [🔗](https://www.threads.com/@stats47jp/post/DejIoe6k83z) |
 | 2026-10-16 | 🧵 Threads | ranking/apple-consumption-quantity | りんごを最も多く買う県は、青森ではなく岩手。  岩手20,507g、青森19,772g。3位は山形14,640g。 最下… | [🔗](https://www.threads.com/@stats47jp/post/DeiaVEcjB_T) |

@@ -30369,9 +30369,9 @@
     },
     {
       "id": 1021,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.166Z",
-      "updated_at": "2026-10-12T01:18:59.967Z",
+      "updated_at": "2026-10-17T17:36:57.564Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30398,13 +30398,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/dental-clinic-count-per-100k/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/Dek81yZgqsP",
+      "posted_at": "2026-10-17T01:40:49.000Z"
     },
     {
       "id": 1022,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.171Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-17T17:36:57.590Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30431,7 +30433,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/24000/x/stills/24000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DelqkyPie0v",
+      "posted_at": "2026-10-17T08:20:27.000Z"
     },
     {
       "id": 1023,
@@ -33044,7 +33048,7 @@
     },
     {
       "id": 1092,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33053,13 +33057,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.634Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-17T13:38:56.905Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
       "content_key": "17000",
       "caption": "【都道府県データ】石川県、全国で何位？\n\n全国トップクラス:\n認定こども園数 2位（543園・2024年）\n年間降水量 5位（2780ｍｍ・2024年）\n平均余命（男性 0歳時点・平均寿命） 6位（82年・2020年）\n\n全国では下位:\n農業産出額 43位（61700百万円・2024年）\n交通事故発生件数（総数） 40位（1792件・2024年）\n日照時間 39位（1801.8時間・2024年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n出典: 社会・人口統計体系（2024年）、人口動態統計（2020年）、生産農業所得統計（2024年）\n\n#都道府県データ #統計 #地方創生 #ランキング #都道府県あるある #暮らし #地域比較 #日本 #データで見る日本 #石川県",
-      "scheduled_at": "2026-10-17T10:00:00.000Z"
+      "scheduled_at": "2026-10-17T10:00:00.000Z",
+      "posted_at": "2026-10-17T13:38:56.892Z",
+      "post_url": "https://www.instagram.com/p/DemPAAgG6MN/",
+      "external_id": "17946309219348083"
     },
     {
       "id": 1093,

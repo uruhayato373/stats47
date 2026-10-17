@@ -1,0 +1,19 @@
+{
+  "baseUrl": "https://stats47.jp",
+  "viewport": { "width": 1280, "height": 900 },
+  "settleMs": 5000,
+  "shots": [
+    {
+      "name": "01-ranking-map",
+      "url": "/ranking/total-population",
+      "steps": [{ "click": "button:has-text('拒否')", "optional": true }, { "wait": 2500 }]
+    },
+    {
+      "name": "02-kml-download-link",
+      "url": "/ranking/total-population",
+      "steps": [{ "click": "button:has-text('拒否')", "optional": true }, { "scrollTo": "h2:has-text('このデータを使う')" }, { "wait": 800 }],
+      "highlight": ["a:has-text('KML')"],
+      "clip": "div.rounded-card:has(h2:has-text('このデータを使う'))"
+    }
+  ]
+}

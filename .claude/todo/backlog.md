@@ -318,6 +318,76 @@ updated: 2026-10-17
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-HOWTO-OWNER-CHECK-01] 別PCでマイマップとExcelの表示を確かめ、H-01・#9・#11 の画像を撮る
+タグ: [SNS・マーケ] [種類:制作] [実行:別環境] [起票:2026-10-18] [期日:2026-10-25] [領域:商品]
+
+- **なぜ別PCか**: 2026-10-18 に Mac で試したが、Microsoft Excel が入っておらず、Claude in Chrome も未接続でマイマップを操作できなかった (コンピュータ操作では Chrome はクリックできない)。3 本とも note-critic が「実機で確かめるまで公開しない」とした (`NOTE-HOWTO-SERIES-01`)。
+- **前提**: 別PCで `git pull` (この Mac の未 push のコミットが develop に入っていること) → `npm run note:article -- checkout <key>` で作業コピーを取り出す。対象は `h-howto-mymaps-kml` (H-01)・`h-howto-mymaps-share` (#9)・`h-howto-excel-filled-map` (#11)。
+- **確かめること・撮る画面**:
+  1. H-01: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`、47 県・2.5MB) をマイマップに「インポート」。①「インポート」の位置 ②読み込み後の地図 ③県をクリックした吹き出し。県ごとに 5 段階の色が付くか、吹き出しに値・順位・時点・URL が出るか
+  2. #9: ①「共有」の画面 (「リンクの共有を許可する」「地図を公開する」) ②メニューの「自分のサイトに埋め込む」。確定ボタンが「完了」と「変更を保存」のどちらか。**「地図を公開する」は押さない** (誰でも検索できる状態になる)
+  3. #11: Microsoft 365 の Excel で総人口の CSV (ランキングページの「ダウンロード」) から地図を作る。①「データ型」→「地理」の変換後のセル ②完成した地図。47 都道府県が全部塗られるか、「?」や候補選択が出るか、「国」列 (日本) が無くても塗られるかを比べる
+- **反映**: 画像を各作業コピーの `images/` に置き、本文の手順を結果に合わせて直して `npm run note:article -- save <key>`。結果が原稿と違う場合 (色が付かない・認識されない県がある) は公開せず、KML 側の修正 (`apps/web/src/lib/download/build-map-download.ts`) も検討する。Claude に渡す場合は画像と結果をチャットに貼る。
+- **完了条件**: 3 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。
+
+
+### [KML-DOCUMENT-NAME-01] 地図用 KML の文書名を指標キーではなく日本語の指標名にする
+タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-10-18] [領域:サイト]
+
+- **経緯**: 2026-10-18 の note-critic レビューで指摘。本番の KML の `<Document><name>` が「total-population（2025年）」のように指標キーのままで、Google マイマップに読み込むとレイヤ名が英語になる。`apps/web/src/lib/download/build-map-download.ts` の `buildMapKml` が `meta.rankingKey` を名前に使っているため。
+- **次**: ダウンロード route でランキングの表示名を取得して `meta` に渡し、文書名と GeoJSON の properties に使う (route の読み込みが重くならない取得方法を選ぶ)。
+- **完了条件**: 総人口の KML の文書名が「総人口（2025年）」になり、route テストで固定した。
+
+### [CRITIC-VERDICT-RULE-01] critic の REVISE 判定の基準を、共通プロトコルと note-critic の定義で揃える
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-18] [領域:管理]
+
+- **経緯**: 2026-10-18 の note-critic レビューで指摘。`.claude/rules/critic-review-protocol.md` は「BLOCK が 1 件でもあれば REVISE」、`.claude/agents/note-critic.md` は「blocker か major があれば REVISE」と書いており、同じ指摘で判定が変わりうる。今回は note-critic.md に従って major で REVISE になった。
+- **次**: どちらを正にするか決めて片方を直す (major を公開前に直させたいなら protocol 側を直す)。blog-critic・ranking-content-critic の定義も同じ基準か確かめる。
+- **完了条件**: 3 つの critic と共通プロトコルの REVISE 条件が同じ文言になった。
+
+### [UI-FIX-RANKING-OLD-2YEARS-20261018] UI 是正: ranking--old-2years の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-OLD-2YEARS-20261018.txt] [起票:2026-10-18] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-OLD-2YEARS-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--old-2years-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--old-2years-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|ranking--old-2years` (Claude の確認)
+    - [desktop-1440/medium] デスクトップ 1 枚目の下部、右カラム内の順位表 (順位・都道府県・値・偏差値) の右端: 表が枠幅に収まらず、最右列「偏差値」の値が「7」「6」のように 1 文字だけ見えて途中で切れている。機械検査の laptop-1024 の横スクロールと同じ原因とみられるが、1440 でも崩れている。 → 表の列幅を詰めるか、表を横スクロール可能なコンテナに入れて切れていることが分かる見た目にする。
+    - [mobile-390/medium] スマホ 1 枚目、タイトル「国民年金保険料全額免除割合」直下から折れ線グラフのカードまで (デスクトップ 1 枚目の見出し周辺も同様): データが 2005〜2006 年度と 20 年前なのに、見出しやタイトル付近に年の表示が無い。年は折れ線グラフ内の小さな「2006年度」と軸ラベルにしか出ていないので、最新のランキングだと誤読しやすい。 → タイトル直下に「2006年度のデータ」のような時点表示を出し、古い場合は注記も添える。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-RANKING-OLD-2YEARS-20261018.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-RANKING-INDEX-20261018] UI 是正: ranking--index の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt] [起票:2026-10-18] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|ranking--index` (Claude の確認)
+    - [desktop-1440/low] デスクトップ 1 枚目、「カテゴリ別のランキング」の各カテゴリ内の項目リスト: 「国立公園面積」と「国定公園面積」、「総面積（北方地域及び竹島を除く）」など似た名前の項目が連続し、単位や年の情報が無く違いが分からない。 → 各項目に単位や対象年を添えるか、似た項目は説明を足して区別できるようにする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018] UI 是正: geo-analysis--analysis の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt] [起票:2026-10-18] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|geo-analysis--analysis` (Claude の確認)
+    - [mobile-390/low] スマホ 1 枚目の下部、「人口の分布と変化」「住宅地点と人口の重なり」の切替の下: 1 枚目の画面では切替タブの下に地図が無く、凡例の説明文とボタンだけが並ぶ。地図は 2 枚目まで下がらないと現れず、最初の画面で何を見るページなのか分かりにくい。 → 地図をタブの直下に置き、凡例の長い説明は地図の後ろに回す。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
 ### [DEV-R2-SNAPSHOT-TIMEOUT-01] ローカルの dev:web で R2 snapshot の読み込みが 10 秒で打ち切られ、ページ表示に数分かかる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-17] [領域:サイト]
 
@@ -329,7 +399,8 @@ updated: 2026-10-17
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
 - **中身 (2026-10-17 実装・localhost 確認済み・未デプロイ)**: ① 職場から読まれるブログ 10 記事に、読者の仕事に合うデータ集の案内 (`apps/web/src/features/products/storefront.ts` の `BLOG_DATA_PRODUCTS`) ② CSV ダウンロード後に「業務の資料」と答えた人へ、その分野のデータ集の案内 (`findDataProductForRanking`)、「学習・研究」には出典の書き方 ③ ランキングの地図用ダウンロード (`/api/ranking/<key>/download?format=kml|geojson`、最新年を都道府県に塗り分け。総人口で 47 県・2.5MB・XML 妥当を確認)。
-- **次**: ① オーナー承認のうえ、他の変更とまとめて 1 回デプロイする (`.claude/rules/branch-workflow.md`) ② 本番で KML を Google マイマップに読み込めることを確かめる ③ 反映日を境界に、4 週の `nav_click` (`surface=blog_product` / `ranking_product`) と `file_download` の `file_extension` (kml / geojson) を読む。効果判定は improvements へ別 ID で引き渡す。
+- **2026-10-17 本番反映済み** (PR #1143・deploy 04:48Z 成功): 本番で KML 47 県・XML 妥当・Content-Type、GeoJSON 47 件、Shift_JIS の先頭 `93 73` (「?」解消)、ランキングページの地図用リンク、家計ブログの商品案内を確認した。
+- **次**: ① ~~デプロイ~~ (済) ② 本番の KML を Google マイマップに読み込めることを確かめる (Google ログインが要るのでオーナー) ③ 反映日を境界に、4 週の `nav_click` (`surface=blog_product` / `ranking_product`) と `file_download` の `file_extension` (kml / geojson) を読む。効果判定は improvements へ別 ID で引き渡す。
 - **停止条件**: Workers の CPU が閾値を超える場合 (KML 生成は 1 回数十ミリ秒の想定で未計測。`CF-CPU-SURGE-01` と照合) は地図形式を外す。
 - **完了条件**: 本番で 3 つの導線が表示・動作し、4 週の計測の開始日が improvements に記録された。
 
@@ -337,7 +408,11 @@ updated: 2026-10-17
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
 - **経緯**: KML 記事 (`n03e45e40d3a7`) は通算閲覧 3,226・note 2 位で、読者は検索から来る (28 日の閲覧 377 に対し note 内の表示 10)。末尾から案内する有料の GIS 分析記事は 28 日の閲覧 1〜5 で、読者の目的 (地図にデータを載せる) と合っていない。
-- **次**: `PRODUCT-FUNNEL-DEPLOY-01` で地図用 KML が本番に出たあと、記事末尾に「47 都道府県の任意の指標を KML でダウンロード」(note の UTM 付き) を置く。本文で配っている `総人口_2023.kml` の出典表記 (境界の国土数値情報) も確かめる。
+- **次**: 反映日 (2026-10-18) から 4 週の note → stats47 の送客を測る。本文で配っている `総人口_2023.kml` の出典表記 (境界の国土数値情報) は未確認。
+- **2026-10-18 反映済み**: 編集画面の更新リクエスト (PUT `free_body`) だけを差し替える方式で本文を更新した (添付・画像は再アップロードなし)。公開 API で、新しい節・H-02 のカード・有料カード 3 枚と GIS 入門のカードの削除・添付 1・画像 6・タグ 99 を確認。R2 の原稿 (draft.md) も同じ 2 か所を合わせて保存した。
+- **再発の注意**: `update-published-navigation.mjs` を `--all-free` やこの記事の `--slug` で回すと、同じ無料マガジン (koumuin-gis) の有料記事カードを `chooseDatasetArticles` が付け直す。この記事を除外する仕組みは無いので、回す前に対象から外す。
+- **差し替え案 (2026-10-17 作成)**: ① 本文の「まとめ」の前に節「47都道府県の統計を地図用KMLでダウンロードする」を足す (stats47 の各ランキングで最新年を塗り分けた KML を取れること、マイマップの KML 上限 5MB に収まる約 2.5MB であること、総人口のページへのリンク)。② 「次のステップ」の 1 行目「他の統計データでもKMLファイルを作成してみる」を「stats47 で別の指標の KML をダウンロードして並べてみる」に替える。③ 回遊フッタの「もう一歩深掘りする」と有料の「この記事の元データを手元で使う」3 枚 (駅代表点・洪水浸水・人口減少×地価、28 日の閲覧 1〜5) を外し、次に読む記事を H-01 (公開後) か H-02 (https://note.com/stats47/n/nc884a0a01b71) にする。マガジンと stats47 のカードは残す。
+- **反映の注意**: フッタは本文の中にあるので update モードで本文ごと差し替える。`update-published-navigation.mjs` の再実行で有料カードが戻らないよう、記事台帳の `nextBestArticle` もあわせて設定する (有料カードの付与元は未特定。反映前に確かめる)。
 - **停止条件・禁止**: note の編集はオーナー承認と人手ログインの後。有料記事への導線は外すだけで、記事自体は消さない。
 - **完了条件**: 末尾の案内が替わり、4 週の note → stats47 の送客 (`utm_source=note`) を記録した。
 
@@ -346,6 +421,10 @@ updated: 2026-10-17
 
 - **企画**: `docs/30_note記事企画/backlog/H-howto-maps-data.md` (8 本)。1 本目「Googleマイマップで都道府県を色分けした地図を作る方法」、2 本目「CSVをExcelで開くと文字化けする原因と直し方」。
 - **次**: ① 1 本目は地図用 KML が本番に出てから書く (手順の画面を実物で撮るため) ② 2 本目は今のダウンロード (Shift_JIS 版) で書ける ③ note-critic を通してからオーナー承認で公開。
+- **進捗 (2026-10-17)**: 2 本目 (H-02 CSV 文字化け) は公開済み (https://note.com/stats47/n/nc884a0a01b71)。1 本目 (H-01 マイマップ) は原稿 `docs/31_note記事原稿/h-howto-mymaps-kml/` (作業コピー・未登録) を note-critic が REVISE。minor 4 件は反映済み。
+- **実機確認は `NOTE-HOWTO-OWNER-CHECK-01` (別PC) に分けた。**
+- **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` (Excel の塗りつぶされたマップ) は blocker 1 件が残る: オーナーが Microsoft 365 の Excel で stats47 の CSV から地図を作り、47 都道府県が地理データ型で認識されて塗られるか (「国」列あり・なしで比較) を確かめ、データ型変換後のセルと完成した地図の 2 枚を撮る。認識されなければ公開しない。両方とも公開後に案内先を H-01 へ替える。
+- **H-01 の公開条件 (オーナー作業)**: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`) を Google マイマップへ 1 回インポートし、①県別の色分けが出るか ②県をクリックした吹き出しに値・順位・時点・URL が出るかを確かめ、「インポート」の位置と読み込み後の地図の 2 枚を撮る。色が出なければ KML の Style 指定を直してから公開する。
 - **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
 
 ### [DOWNLOAD-CSV-CITATION-01] ランキング CSV に e-Stat 準拠の出典と「加工して作成」の表記が入っているかを確かめる

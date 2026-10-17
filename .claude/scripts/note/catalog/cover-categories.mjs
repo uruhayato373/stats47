@@ -41,7 +41,8 @@ export function noteCoverCategory(article) {
   if (article.key.startsWith('b-') || EXPLAINER_KEYS.has(article.key)) return 'explainer';
   if (article.key.startsWith('d-') || article.key === 'paid-n92b846280d1a' || article.vertical === 'product-sales') return 'dataset-geo';
   if (PALETTE_KEYS.has(article.key)) return 'palette';
-  if (article.vertical.startsWith('koumuin') || PRACTITIONER_KEYS.has(article.key)) return 'practitioner';
+  // 操作手順の連載 (H シリーズ・2026-10-17): KML 記事と同じく、本文に即した資料・作業道具を描く
+  if (article.vertical.startsWith('koumuin') || PRACTITIONER_KEYS.has(article.key) || article.key.startsWith('h-howto-')) return 'practitioner';
   if (/[？?]\s*1位は/.test(article.title)) return 'ranking-question';
   if (/ランキング|格差|1位|トップ|最下位|ワースト|全国|救急車を最も呼ぶ|教育費、和歌山は/.test(article.title))
     return 'ranking-story';

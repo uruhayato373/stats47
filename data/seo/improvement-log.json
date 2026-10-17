@@ -1038,6 +1038,28 @@
             "windowDays": 7
           },
           "snapshotHash": "c11b991e6db3e8d7f0db7c3c4e93a4a6c652dc1e19a52f3dcc9e22bff61be470"
+        },
+        {
+          "date": "2026-10-17",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-08",
+            "periodEnd": "2026-10-14",
+            "windowDays": 7
+          },
+          "snapshotHash": "57bce5c8aa1812e779000565cc3d1e31bdf2fe985944e3653d96497be22237b8"
+        },
+        {
+          "date": "2026-10-17",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-08",
+            "periodEnd": "2026-10-14",
+            "windowDays": 7
+          },
+          "snapshotHash": "fd77df75cc1c3d9c583d207b5da7948d8a31ee35b6ff12326cdd7ff348c4e803"
         }
       ]
     }
