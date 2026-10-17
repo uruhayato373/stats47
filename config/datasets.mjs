@@ -186,7 +186,7 @@ export const DATASETS = [
   d("gsc.remediation-evidence", "data/gsc/ui-audits/{date}-remediation.json", "evidence", "site", "data", "GSC 是正の内容確認・公開URLテスト・本番検証の証跡", { retain: "gsc-remediation-evidence" }),
   d("ga4.history", "data/ga4/history.csv", "series", "site", "data", "GA4 の週次集約"),
   d("ga4.history-finalized", "data/ga4/history-finalized7d.csv", "series", "site", "data", "GA4 の確定 7 日集約"),
-  d("ga4.reconciliations", "data/ga4/reconciliations/{date}-{week}.json", "ledger", "site", "data", "GA4 の週次集計定義の照合証拠", { schema: "config/schema/ga4.reconciliations.schema.json" }),
+  d("ga4.reconciliations", "data/ga4/reconciliations/{date}-{week}.json", "ledger", "site", "data", "GA4 の週次集計定義の照合証拠", { schema: "config/schema/ga4.reconciliations.schema.json", retain: "ga4-reconciliations" }),
   d("ga4.latest", "data/ga4/LATEST.md", "report", "site", "data", "GA4 の前週比の要約"),
   d("psi.batch", "data/psi/psi-batch-{ts}.json", "series", "site", "data", "PSI 日次計測の生 JSON", { retain: "psi" }),
   d("psi.history", "data/psi/history.csv", "series", "site", "data", "PSI の長期履歴"),

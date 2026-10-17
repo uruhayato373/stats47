@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T23:20:29.914Z",
+  "generatedAt": "2026-10-17T00:00:16.403Z",
   "stage": "review",
-  "status": "fail",
+  "status": "warn",
   "measurementWeek": "2026-W41",
   "expectedCompletedWeek": "2026-W41",
   "expectedPlanWeek": "2026-W43",
   "currentMonth": "2026-10",
   "summary": {
-    "pass": 9,
-    "warn": 0,
-    "fail": 1
+    "pass": 10,
+    "warn": 1,
+    "fail": 0
   },
   "checks": [
     {
@@ -28,14 +28,20 @@
     {
       "code": "effect-verdict",
       "level": "pass",
-      "detail": "2026-W41 verdict 1件を記録済み",
+      "detail": "2026-W41 verdict 1件 / data/effect-verdict/reassessments/2026-W41/2026-10-16T23-33-48.231Z.json / decidedAt=2026-10-16T23:33:48.231Z",
       "action": null
     },
     {
       "code": "effect-target-ratchet",
-      "level": "fail",
-      "detail": "新規の想定効果値欠落: ADSENSE-PLACEMENT-01",
-      "action": "デプロイ前の improvement-log に [target: ±N unit] を登録"
+      "level": "pass",
+      "detail": "想定効果値欠落0",
+      "action": null
+    },
+    {
+      "code": "baseline-observation",
+      "level": "warn",
+      "detail": "ADSENSE-PLACEMENT-01: 0/4週 / missing=2026-W42,2026-W43,2026-W44,2026-W45 / review=2026-11-13",
+      "action": null
     },
     {
       "code": "effect-backlog-reconciliation",

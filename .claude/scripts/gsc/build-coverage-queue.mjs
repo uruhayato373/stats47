@@ -908,7 +908,9 @@ function writeLatest(out, observeCount) {
   fs.writeFileSync(LATEST_PATH, L.join("\n") + "\n");
 }
 
-build().catch((e) => {
+try {
+  await build();
+} catch (e) {
   console.error(e);
-  process.exit(1);
-});
+  process.exitCode = 1;
+}

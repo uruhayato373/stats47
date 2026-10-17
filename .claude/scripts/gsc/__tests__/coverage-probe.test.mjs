@@ -86,3 +86,26 @@ test('bounded workers probe every URL once, retain individual failures and repor
   assert.deepEqual(progress.at(-1), [25, 25]);
   assert.ok(elapsedMs >= 0);
 });
+
+test('an unresolved body cancellation cannot leave a probe pending after its deadline', async () => {
+  let aborted = false;
+  const result = await probeCoverageUrl('https://example.test/gone', {
+    userAgent, timeoutMs: 20,
+    fetchImpl: async (_url, { signal }) => {
+      signal.addEventListener('abort', () => { aborted = true; });
+      return { status: 410, headers: new Headers({ 'content-type': 'text/html' }),
+        body: { cancel: () => new Promise(() => {}) } };
+    },
+  });
+  assert.deepEqual(result, { status: 410, signals: null });
+  assert.equal(aborted, true);
+});
+
+test('an uncooperative body reader still settles as recheck within the deadline', async () => {
+  const result = await probeCoverageUrl('https://example.test/page', {
+    userAgent, timeoutMs: 20,
+    fetchImpl: async () => ({ status: 200, headers: new Headers({ 'content-type': 'text/html' }),
+      text: () => new Promise(() => {}) }),
+  });
+  assert.deepEqual(result, { status: 0, signals: null });
+});
