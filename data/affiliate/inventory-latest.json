@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-30T11:20:39.119Z",
-  "date": "2026-09-30",
+  "generatedAt": "2026-10-16T23:07:02.837Z",
+  "date": "2026-10-16",
   "totals": {
     "entries": 300,
-    "active": 291,
-    "uniqueAdvertisers": 177,
-    "uniqueTitles": 177,
-    "uniquePrograms": 146,
+    "active": 288,
+    "uniqueAdvertisers": 176,
+    "uniqueTitles": 176,
+    "uniquePrograms": 145,
     "programRefMissing": 0
   },
   "byCategory": {
     "energy": 2,
     "tourism": 5,
     "economy": 8,
-    "construction": 3,
-    "(null)": 266,
+    "construction": 2,
+    "(null)": 264,
     "laborwage": 3,
     "socialsecurity": 2,
     "population": 2
@@ -25,20 +25,20 @@
     "economy": 36,
     "housing": 28,
     "education": 42,
-    "labor": 57,
+    "labor": 54,
     "health": 10,
     "mobility": 13,
     "population": 20,
     "furusato": 4
   },
   "byLocation": {
-    "blog-bottom": 149,
+    "blog-bottom": 146,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
     "sidebar-bottom": 139
   },
   "byAdType": {
-    "banner": 154,
+    "banner": 151,
     "text": 137
   },
   "coverage": {
@@ -58,6 +58,7 @@
     ],
     "thinCategories": [
       "population",
+      "construction",
       "energy",
       "socialsecurity"
     ],
@@ -83,7 +84,7 @@
       "economy": 21,
       "housing": 13,
       "education": 21,
-      "labor": 30,
+      "labor": 27,
       "health": 6,
       "mobility": 6,
       "population": 11,
