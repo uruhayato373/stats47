@@ -20,8 +20,6 @@ vi.mock("@stats47/visualization/server", () => ({
   ],
 }));
 
-vi.mock("@/features/ranking/server", async () => import("@/features/ranking/lib/build-map-download"));
-
 const { GET } = await import("../route");
 
 // テスト用の NextRequest (vitest.shims.ts) は nextUrl を持たないので、既存の route テストと同じく足す

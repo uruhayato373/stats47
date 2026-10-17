@@ -7,9 +7,8 @@ import {
 } from "@stats47/ranking/server";
 import { readPrefectureFeatures } from "@stats47/visualization/server";
 
-import { buildMapGeoJson, buildMapKml } from "@/features/ranking/server";
-
 import { DOWNLOAD_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+import { buildMapGeoJson, buildMapKml } from "@/lib/download/build-map-download";
 import { getRankingRetirementResponse } from "@/lib/ranking-retirement-response";
 
 /**
