@@ -62,6 +62,41 @@ export function findDataProductForBlog(
   return match ? findStorefrontProduct(match.productSlug) : null;
 }
 
+/**
+ * ランキングの 17 分類 (categoryKey) → その分野の販売中データ集。
+ * 家計調査の品目別 (…-consumption-quantity / …-consumption-expenditure) は分類によらず P-14。
+ * 対応が無い分類 (international など) は案内しない。
+ */
+const CATEGORY_DATA_PRODUCTS: Readonly<Record<string, string>> = {
+  population: "data-p-01",
+  laborwage: "data-p-02",
+  tourism: "data-p-03",
+  administrativefinancial: "data-p-04",
+  socialsecurity: "data-p-05",
+  educationsports: "data-p-06",
+  landweather: "data-p-07",
+  commercial: "data-p-08",
+  agriculture: "data-p-09",
+  miningindustry: "data-p-09",
+  economy: "data-p-09",
+  construction: "data-p-09",
+  energy: "data-p-09",
+  ict: "data-p-09",
+  safetyenvironment: "data-p-10",
+  infrastructure: "data-p-10",
+};
+const HOUSEHOLD_CONSUMPTION_KEY = /-consumption-(quantity|expenditure)$/;
+
+/** CSV を業務に使う人へ案内する、そのランキングの分野のデータ集。 */
+export function findDataProductForRanking(
+  rankingKey: string,
+  categoryKey: string | null | undefined
+): StorefrontProduct | null {
+  if (HOUSEHOLD_CONSUMPTION_KEY.test(rankingKey)) return findStorefrontProduct("data-p-14");
+  const slug = categoryKey ? CATEGORY_DATA_PRODUCTS[categoryKey] : undefined;
+  return slug ? findStorefrontProduct(slug) : null;
+}
+
 /** findDataProductForBlog が返すデータ集を、その記事の読者にどう使うかの導入文。 */
 export function findDataProductUseCase(blogSlug: string): string | null {
   return BLOG_DATA_PRODUCTS[blogSlug]?.useCase ?? null;

@@ -5,6 +5,9 @@ import {
   buildSingleSeriesCsv,
   getRankingDownloadSeries,
 } from "@stats47/ranking/server";
+import { readPrefectureFeatures } from "@stats47/visualization/server";
+
+import { buildMapGeoJson, buildMapKml } from "@/features/ranking/server";
 
 import { DOWNLOAD_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
 import { getRankingRetirementResponse } from "@/lib/ranking-retirement-response";
@@ -21,13 +24,14 @@ import { getRankingRetirementResponse } from "@/lib/ranking-retirement-response"
  *
  * パラメータは全て whitelist 検証で path injection を防ぐ。
  *
- * @param format    csv | json
+ * @param format    csv | json | kml | geojson
+ *                  (kml / geojson は最新年の値を都道府県の境界に結合した地図用。basis は単一のみ)
  * @param basis     original | per_population | per_area | all-bases
  *                  (省略時は original)
  * @param encoding  utf8 | sjis (CSV のみ。JSON は常に utf8)
  */
 
-const ALLOWED_FORMATS = new Set(["csv", "json"] as const);
+const ALLOWED_FORMATS = new Set(["csv", "json", "kml", "geojson"] as const);
 const ALLOWED_BASES = new Set([
   "original",
   "per_population",
@@ -38,7 +42,8 @@ const ALLOWED_ENCODINGS = new Set(["utf8", "sjis"] as const);
 // robots.txt はこの公開配布ルートだけ取得を許可する。検索結果は説明のあるランキングページへ。
 const DOWNLOAD_ERROR_HEADERS = { ...NO_STORE_CACHE_HEADERS, "X-Robots-Tag": "noindex" };
 
-type Format = "csv" | "json";
+type Format = "csv" | "json" | "kml" | "geojson";
+const MAP_FORMATS = new Set<Format>(["kml", "geojson"]);
 type Encoding = "utf8" | "sjis";
 
 function isFormat(v: string | null): v is Format {
@@ -81,7 +86,7 @@ export async function GET(
 
   if (!isFormat(formatParam)) {
     return NextResponse.json(
-      { error: "Invalid format. Expected csv or json." },
+      { error: "Invalid format. Expected csv, json, kml or geojson." },
       { status: 400, headers: DOWNLOAD_ERROR_HEADERS },
     );
   }
@@ -98,8 +103,15 @@ export async function GET(
     );
   }
 
-  // JSON は utf8 のみ
-  let safeEncoding: Encoding = formatParam === "json" ? "utf8" : encodingParam;
+  if (MAP_FORMATS.has(formatParam) && basisParam === "all-bases") {
+    return NextResponse.json(
+      { error: "Map formats need a single basis." },
+      { status: 400, headers: DOWNLOAD_ERROR_HEADERS },
+    );
+  }
+
+  // CSV 以外は utf8 のみ
+  let safeEncoding: Encoding = formatParam === "csv" ? encodingParam : "utf8";
 
   // R2 観測値からオンザフライで系列を取得 (47都道府県 × 全年)。
   const series = await getRankingDownloadSeries(rankingKey, "prefecture", basisParam);
@@ -112,7 +124,14 @@ export async function GET(
 
   // 本文生成
   let bodyText: string;
-  if (formatParam === "json") {
+  if (MAP_FORMATS.has(formatParam)) {
+    const mapInput = {
+      features: readPrefectureFeatures(),
+      values: series[0].values,
+      meta: { rankingKey, pageUrl: `${req.nextUrl.origin}/ranking/${encodeURIComponent(rankingKey)}` },
+    };
+    bodyText = formatParam === "kml" ? buildMapKml(mapInput) : JSON.stringify(buildMapGeoJson(mapInput));
+  } else if (formatParam === "json") {
     bodyText =
       basisParam === "all-bases"
         ? JSON.stringify(Object.fromEntries(series.map((s) => [s.basisKey, s.values])))
@@ -141,7 +160,11 @@ export async function GET(
     ? safeEncoding === "sjis"
       ? "text/csv; charset=Shift_JIS"
       : "text/csv; charset=utf-8"
-    : "application/json; charset=utf-8";
+    : formatParam === "kml"
+      ? "application/vnd.google-earth.kml+xml; charset=utf-8"
+      : formatParam === "geojson"
+        ? "application/geo+json; charset=utf-8"
+        : "application/json; charset=utf-8";
 
   const filename = buildFilename(rankingKey, basisParam, formatParam, safeEncoding);
 

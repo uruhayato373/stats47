@@ -7,6 +7,7 @@ import {
   findKindleProductForBlog,
   findStorefrontProduct,
   findDataProductForBlog,
+  findDataProductForRanking,
   findDataProductUseCase,
   findFiscalCompanionProduct,
 } from "../storefront";
@@ -23,6 +24,13 @@ describe("product storefront", () => {
     });
     expect(findDataProductForBlog("other")).toBeNull();
     expect(findDataProductUseCase("other")).toBeNull();
+  });
+  it("CSV を業務に使う人へ、ランキングの分野に合うデータ集を返す", () => {
+    expect(findDataProductForRanking("financial-strength-index", "administrativefinancial")?.id).toBe("P-04");
+    expect(findDataProductForRanking("rice-consumption-quantity", "agriculture")?.id).toBe("P-14");
+    expect(findDataProductForRanking("miso-consumption-expenditure", null)?.id).toBe("P-14");
+    expect(findDataProductForRanking("foreign-residents", "international")).toBeNull();
+    expect(findDataProductForRanking("total-population", undefined)).toBeNull();
   });
   it("職場から読まれる記事に、読者の仕事に合う販売中のデータ集と用途文を対応させる", () => {
     const cases = [

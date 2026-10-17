@@ -8,6 +8,7 @@ export {
   STOREFRONT_PRODUCTS,
   findKindleProductForBlog,
   findDataProductForBlog,
+  findDataProductForRanking,
   findFiscalCompanionProduct,
   findStorefrontProduct,
 } from "./storefront";
