@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T00:43:36.763Z",
+  "generatedAt": "2026-10-17T01:47:17.744Z",
   "runId": "38987311743",
   "sources": [
     {
@@ -138,25 +138,52 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-17T00:41:34.281Z",
+      "observedAt": "2026-10-17T01:42:49.888Z",
       "activated": true,
-      "status": "failed",
-      "code": "auth_required",
+      "status": "pass",
+      "code": null,
       "runId": "38987311743",
-      "runAttempt": 1,
-      "metricsAvailable": false,
+      "runAttempt": 4,
+      "metricsAvailable": true,
       "inventoryAvailable": false,
-      "collectionAttempted": false,
-      "relogin": "login_failed",
-      "recovery": {
-        "state": "awaiting_reauthentication",
-        "blockedSince": "2026-10-17T00:41:34.281Z"
-      },
+      "collectionAttempted": true,
+      "relogin": "session_valid",
+      "recovery": null,
       "evidence": {
-        "sha256": "230f7d9c7299d801d9229fdd5925c856794c400a0826ddf33eb1b7de8ae33777",
-        "bytes": 156
+        "sha256": "5572579e76d04da11e92339566d15011240b977960f5fbe4133ab9e53dba6442",
+        "bytes": 31066
       },
-      "quality": null,
+      "quality": {
+        "monthlyPeriod": "2026-09",
+        "monthlyRows": 1,
+        "monthlyComplete": true,
+        "revenue": {
+          "date": "2026-10-16",
+          "royaltyYen": 0,
+          "paidOrders": 0
+        },
+        "salesLedger": {
+          "month": "2026-09",
+          "vaultKey": "kdp/monthly/month-8",
+          "observations": [
+            {
+              "id": "29ce0b55b1152a96f4ad",
+              "channel": "kdp",
+              "productId": "K-S2-03",
+              "periodStart": "2026-09-01",
+              "periodEnd": "2026-09-30",
+              "orders": 1,
+              "units": 1,
+              "netRevenueYen": 159,
+              "refunds": 0,
+              "evidencePath": "vault:kdp/monthly/month-8",
+              "evidenceSha256": "fd7a5879f54fea7baa4ecf0ff8fef481d1605acb6016645e8cdb4b3206be7ded",
+              "recordedAt": "2026-10-17T01:42:49.888Z"
+            }
+          ],
+          "excluded": []
+        }
+      },
       "knownIncomplete": null,
       "remaining": "payout_and_net_profit_not_collected"
     },
@@ -211,6 +238,13 @@
       "remaining": null
     }
   ],
-  "salesLedger": null,
-  "status": "action_required"
+  "salesLedger": {
+    "status": "pass",
+    "month": "2026-09",
+    "added": 0,
+    "skipped": 1,
+    "conflicts": [],
+    "excluded": []
+  },
+  "status": "pass"
 }

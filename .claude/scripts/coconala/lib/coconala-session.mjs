@@ -155,12 +155,20 @@ export function writeBackCatalog(id, url, today) {
 /**
  * 永続プロファイルで Chrome を起動。channel:chrome + proxy + ignoreHTTPSErrors。
  * headless は既定 false (ログイン状態の目視・初回ログインのため)。
+ *
+ * ログインは普通の Chrome で行う (自動操作のブラウザは reCAPTCHA に拒否される。2026-10-02)。
+ * 普通の Chrome は Cookie を macOS のキーチェーンで暗号化するので、Playwright 既定の
+ * --password-store=basic / --use-mock-keychain のまま開くと Cookie を読めず、元の Cookie DB を
+ * 空にする (GSC で実測)。計測の bootstrap-session.mjs と同じく、この 2 つの既定引数だけを外す。
  */
+export const NATIVE_KEYCHAIN_IGNORED_ARGS = ['--password-store=basic', '--use-mock-keychain'];
+
 export async function launchContext({ headless = false } = {}) {
   mkdirSync(PROFILE, { recursive: true });
   return chromium.launchPersistentContext(PROFILE, {
     headless,
     channel: 'chrome',
+    ignoreDefaultArgs: NATIVE_KEYCHAIN_IGNORED_ARGS,
     proxy: PROXY ? { server: PROXY } : undefined,
     ignoreHTTPSErrors: true,
     viewport: { width: 1366, height: 1000 },

@@ -3,11 +3,13 @@
 import { useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
+import { formatValueWithPrecision } from "@stats47/utils";
 import { Download } from "lucide-react";
 
 import { SurfaceCard } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
+import { findDataProductForRanking, TrackedProductLink } from "@/features/products";
 
 import {
   setDeclaredPurpose,
@@ -29,6 +31,11 @@ const PURPOSE_OPTIONS: ReadonlyArray<{ value: CsvDownloadPurpose; label: string 
 
 type SurveyState = "hidden" | "asking" | "answered";
 
+const MAP_FORMATS = [
+  { format: "kml", label: "KML" },
+  { format: "geojson", label: "GeoJSON" },
+] as const;
+
 interface DataUsageCardProps {
   rankingKey: string;
   areaType: AreaType;
@@ -41,6 +48,8 @@ interface DataUsageCardProps {
   yearCount?: number;
   normalizationType?: string;
   hasAllBases?: boolean;
+  /** 17 分類。「業務の資料」と答えた人に、その分野のデータ集を案内するために使う */
+  categoryKey?: string | null;
 }
 
 export function DataUsageCard({
@@ -48,7 +57,9 @@ export function DataUsageCard({
   yearCount,
   normalizationType,
   hasAllBases,
+  categoryKey,
 }: DataUsageCardProps) {
+  const workProduct = findDataProductForRanking(rankingKey, categoryKey);
   const [survey, setSurvey] = useState<SurveyState>("hidden");
   const [answer, setAnswer] = useState<CsvDownloadPurpose | null>(null);
   const yearText = yearCount && yearCount > 0 ? `${yearCount}年分の時系列を含む` : "";
@@ -56,6 +67,8 @@ export function DataUsageCard({
   // 全基準があればまとめてDL、なければ現在の基準でDL
   const basis = hasAllBases ? "all-bases" : (normalizationType ?? "original");
   const href = `/api/ranking/${encodeURIComponent(rankingKey)}/download?format=csv&basis=${basis}`;
+  // 地図は 1 系列の塗り分けなので、全基準まとめ (all-bases) ではなく表示中の基準を使う
+  const mapBasis = normalizationType ?? "original";
 
   const handleAnswer = (purpose: CsvDownloadPurpose) => {
     trackCsvDownloadPurpose({ rankingKey, purpose });
@@ -91,6 +104,25 @@ export function DataUsageCard({
           </a>
         </Button>
       </div>
+      <p className="mt-2 text-xs text-muted-foreground">
+        地図用（最新年・都道府県の塗り分け）:{" "}
+        {MAP_FORMATS.map((m, i) => (
+          <span key={m.format}>
+            {i > 0 && " / "}
+            <a
+              href={`/api/ranking/${encodeURIComponent(rankingKey)}/download?format=${m.format}&basis=${mapBasis}`}
+              onClick={() => {
+                trackCsvDownload({ rankingKey, yearCode: "latest", fileExtension: m.format });
+                if (survey === "hidden") setSurvey("asking");
+              }}
+              className="text-primary underline underline-offset-2"
+            >
+              {m.label}
+            </a>
+          </span>
+        ))}
+        。Google マイマップ・Google Earth・QGIS で開けます。
+      </p>
 
       {survey === "asking" && (
         <div className="mt-3 border-t border-primary/20 pt-3">
@@ -118,6 +150,26 @@ export function DataUsageCard({
       {survey === "answered" && answer && (
         <div className="mt-3 border-t border-primary/20 pt-3 text-sm text-muted-foreground">
           ご回答ありがとうございます。
+          {answer === "work" && workProduct && (
+            <span className="mt-2 block">
+              同じ分野の指標をまとめて資料に使う場合は、
+              {workProduct.title.replace(/をお渡しします$/, "")}
+              （{formatValueWithPrecision(workProduct.priceYen, 0)}円・Excel / CSV / PowerPoint）があります。{" "}
+              <TrackedProductLink
+                href={`/products/${workProduct.slug}`}
+                label={`${workProduct.id}:${workProduct.title}`}
+                surface="ranking_product"
+                className="text-primary underline underline-offset-2"
+              >
+                内容と条件を確認する
+              </TrackedProductLink>
+            </span>
+          )}
+          {answer === "study" && (
+            <>
+              {" "}レポートや論文で使うときは、このページの出典欄にある調査名と、加工した場合は「stats47 にて加工」を出典に書いてください。
+            </>
+          )}
           {answer === "work" && (
             <>
               {" "}業務で統計を集める作業について、お話を聞かせていただける方は{" "}

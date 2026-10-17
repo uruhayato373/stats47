@@ -42,5 +42,32 @@
     ],
     "source": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv"
   },
+  "questionnaire": {
+    "version": 1,
+    "designedAt": "2026-10-17",
+    "$comment": "1 人 30〜40 分の聞き取り票。各問の records は fieldGuide の記録先。3 人は同じ種類の業務の担当者から選ぶ (stage1PassCondition が『複数の担当者で同じ作業が残る』ことを求めるため)。",
+    "principles": [
+      "過去の具体的な資料 1 件だけを聞く。『こういう商品があったら買うか』『いくらなら払うか』の仮定の質問はしない (答えは購入意思の代わりにならず、感想・意欲を記録しない方針に反する)。支払意思は段階 3 以降で実際の価格と納品範囲を示して確かめる",
+      "元同僚・知人が相手のときは好意的な答えに寄りやすい。『役に立ちそう』などの感想は記録せず、起きた事実だけを書く",
+      "記憶による所要時間と、記録から確かめた時間を分けて書く (timeSpent.recalledMinutes / measuredMinutes)"
+    ],
+    "questions": [
+      { "id": "Q0", "minutes": 2, "question": "(前置き) 目的は資料作成の作業を知ることで、売り込みではないと伝える。氏名・所属は記録しないと伝える", "records": [] },
+      { "id": "Q1", "minutes": 5, "question": "直近 1 年で、統計を集めて作った資料を 1 つ思い出してください。何の資料で、締切はいつで、誰に出しましたか", "records": ["targetTask", "role"] },
+      { "id": "Q2", "minutes": 2, "question": "その資料は、何が揃えば提出できる状態でしたか", "records": ["completionCondition"] },
+      { "id": "Q3", "minutes": 5, "question": "使った統計を挙げてください (名称・調査主体・年次・県か市町村か)。他の団体との比較は入っていましたか", "records": ["statisticsUsed"] },
+      { "id": "Q4", "minutes": 10, "question": "最初から順に手順を再現してください。どこから取り、どう整形し、何と照合しましたか。一番時間がかかったのは、探す・集める・揃える・確認する・更新するのどれですか。何時間くらいでしたか。作業の記録は残っていますか", "records": ["currentSteps", "timeSpent"] },
+      { "id": "Q5", "minutes": 5, "question": "上司・議会・監査から指摘されて直した箇所はありますか (単位・年次・定義のずれなど)", "records": ["reworkDescription"] },
+      { "id": "Q6", "minutes": 3, "question": "同じ資料を次に作るのはいつですか。前回の資料を流用しましたか", "records": ["repeatFrequency"] },
+      { "id": "Q7", "minutes": 5, "question": "RESAS・e-Stat・統計書・庁内のシステムや委託は使いましたか。それを使ってもなお手で残った作業は何ですか", "records": ["existingTools", "remainingWorkWithExistingTools"] },
+      { "id": "Q8", "minutes": 5, "question": "この種の作業のために、外部から何かを買ったことはありますか (書籍・研修・委託・ソフト)。誰の予算で、どんな手続きでしたか。仕事のために自腹で買ったものはありますか", "records": ["payer"] },
+      { "id": "Q9", "minutes": 3, "question": "業務で生成 AI は使える環境ですか。統計の作業に使ったことはありますか。使ったなら、どこで詰まりましたか", "records": ["evidence"] },
+      { "id": "Q10", "minutes": 2, "question": "公開されている版の資料を見せてもらえますか。同じ作業をしている人を紹介してもらえますか", "records": ["evidence"] }
+    ],
+    "branchRules": [
+      "Q8 で組織の購入経路 (物品購入・委託・予算) が 3 人とも見えなければ、データ商品は見送り、個人が買えるノウハウ商品だけを検証する",
+      "Q9 で庁内の生成 AI 利用ができない人が多ければ、KNOWHOW-PRODUCT-PILOT-01 の自治体向け候補を『AI を使わない e-Stat 実務ガイド』に切り替える"
+    ]
+  },
   "interviews": []
 }

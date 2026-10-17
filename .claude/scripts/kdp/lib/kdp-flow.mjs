@@ -321,13 +321,17 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
 }
 
 /** 本棚からその本の行を読む (status 文言 + ASIN)。 */
-export async function readBookshelfState(page, draftId, { asin = "", title = "" } = {}) {
-  await page.goto(`${BASE}/bookshelf`, { waitUntil: "domcontentloaded", timeout: 60000 });
-  try {
-    await page.waitForLoadState("networkidle", { timeout: 20000 });
-  } catch {}
-  await sleep(8000);
+export async function readBookshelfState(page, draftId, { asin = "", title = "", reuseVisibleRow = false } = {}) {
   const direct = page.locator(`a[href*="/title-setup/kindle/${draftId}/"]`);
+  // Measurement may reuse an exact draft row already present on the verified bookshelf.
+  // Publishing callers retain the default fresh navigation and settling wait.
+  const onBookshelf = /^https:\/\/kdp\.amazon\.co\.jp\/ja_JP\/bookshelf(?:[?#]|$)/.test(page.url());
+  const reuse = reuseVisibleRow && onBookshelf && (await direct.first().isVisible().catch(() => false));
+  if (!reuse) {
+    await page.goto(`${BASE}/bookshelf`, { waitUntil: "domcontentloaded", timeout: 60000 });
+    try { await page.waitForLoadState("networkidle", { timeout: 20000 }); } catch {}
+    await sleep(8000);
+  }
   // ★1 ページ目に無ければページを順にめくって探す (2026-09-27)。本棚は約 10 冊ずつのページ送り (#2, #3, ...) で、
   //   本棚の検索は結果に title-setup のリンクを出さない (実測 0 件)。検索だけに頼っていたため、第 2 版を出し直して
   //   ASIN 未記録の S1 7 冊が 2 ページ目以降にあると「本棚に見つからず」になり、計測の出版状態が不完全になっていた。

@@ -1,21 +1,10 @@
 {
-  "hash": "d0cd2df6720039033a77f074252a6c5683fe8ecd3e9eaf774fe29cb4823f1c86",
-  "audited_at": "2026-10-16T22:56:40",
+  "hash": "636cfb888e4105f77c6fcbc4b71e5d8c99641bcf465accb0b171a0c88cc12bbb",
+  "audited_at": "2026-10-17T04:05:00",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".agents/skills/analytics/gsc-improvement/SKILL.md",
-    ".agents/skills/management/monthly-review/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/agents/README.md",
-    ".claude/agents/gsc-analyst.md",
-    ".claude/agents/strategy-advisor.md",
-    ".claude/scripts/management/__tests__/review-cadence.test.mjs",
-    ".claude/scripts/management/lib/review-cadence.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/analytics/gsc-improvement/SKILL.md",
-    ".claude/skills/management/README.md",
-    ".claude/skills/management/monthly-review/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md",
-    ".claude/skills/management/weekly-review/reference/runbook.md"
+    ".agents/skills/note/write-note-section/SKILL.md",
+    ".claude/scripts/note/capture-howto-shots.mjs",
+    ".claude/scripts/note/howto-shots/h02-csv-mojibake.json",
+    ".claude/skills/note/write-note-section/SKILL.md"
   ]
 }

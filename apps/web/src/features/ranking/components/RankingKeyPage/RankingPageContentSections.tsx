@@ -83,6 +83,7 @@ export function RankingPageContentSections({
                 yearCount={activeRankingItem.availableYears?.length}
                 normalizationType={normalizationType}
                 hasAllBases={(rankingItem.calculation?.normalizationOptions?.length ?? 0) > 0}
+                categoryKey={rankingItem.categoryKey}
             />
 
             {sections.insights}

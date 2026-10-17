@@ -86,10 +86,13 @@ export function trackGeoCompareAdd(
 export function trackCsvDownload(params: {
   rankingKey: string;
   yearCode: string;
+  /** 既定 csv。地図用は kml / geojson (2026-10-17 追加) */
+  fileExtension?: 'csv' | 'kml' | 'geojson';
 }): void {
+  const ext = params.fileExtension ?? 'csv';
   sendEvent('file_download', {
-    file_name: `${params.rankingKey}-${params.yearCode}.csv`,
-    file_extension: 'csv',
+    file_name: `${params.rankingKey}-${params.yearCode}.${ext}`,
+    file_extension: ext,
     ranking_key: params.rankingKey,
     year_code: params.yearCode,
   });

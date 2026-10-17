@@ -7,6 +7,8 @@ import {
   findKindleProductForBlog,
   findStorefrontProduct,
   findDataProductForBlog,
+  findDataProductForRanking,
+  findDataProductUseCase,
   findFiscalCompanionProduct,
 } from "../storefront";
 
@@ -21,6 +23,29 @@ describe("product storefront", () => {
       externalUrl: "https://coconala.com/services/4324057",
     });
     expect(findDataProductForBlog("other")).toBeNull();
+    expect(findDataProductUseCase("other")).toBeNull();
+  });
+  it("CSV を業務に使う人へ、ランキングの分野に合うデータ集を返す", () => {
+    expect(findDataProductForRanking("financial-strength-index", "administrativefinancial")?.id).toBe("P-04");
+    expect(findDataProductForRanking("rice-consumption-quantity", "agriculture")?.id).toBe("P-14");
+    expect(findDataProductForRanking("miso-consumption-expenditure", null)?.id).toBe("P-14");
+    expect(findDataProductForRanking("foreign-residents", "international")).toBeNull();
+    expect(findDataProductForRanking("total-population", undefined)).toBeNull();
+  });
+  it("職場から読まれる記事に、読者の仕事に合う販売中のデータ集と用途文を対応させる", () => {
+    const cases = [
+      ["local-tax-revenue-gap", "P-04"],
+      ["aging-solo-living-crisis", "P-05"],
+      ["farmland-crisis-abandoned-land", "P-09"],
+      ["water-sewage-crisis", "P-10"],
+      ["household-solo-vs-dualincome", "P-14"],
+    ] as const;
+    for (const [slug, productId] of cases) {
+      const product = findDataProductForBlog(slug);
+      expect(product?.id).toBe(productId);
+      expect(product?.channel).toBe("coconala");
+      expect(findDataProductUseCase(slug)).toMatch(/方へ。$/);
+    }
     expect(findFiscalCompanionProduct("kindle-k-s1-06")?.id).toBe("P-04");
     expect(findFiscalCompanionProduct("data-p-04")?.id).toBe("K-S1-06");
     expect(findFiscalCompanionProduct("data-p-10")).toBeNull();

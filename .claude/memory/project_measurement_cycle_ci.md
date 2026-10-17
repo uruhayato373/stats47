@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: cfc716c2-3e72-4829-9d06-bc9944616b5a
-  modified: 2026-09-24T11:08:38.797Z
+  modified: 2026-10-17T01:48:55.060511Z
 ---
 
 GA4 実測で止まっていた判定待ちを処理した手順 (計測→improvements.md へ記録→計測基盤の改善) を 2026-09-24 に CI 化した
@@ -59,3 +59,8 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 主 ID = 項目で最初の ID (本文で他施策に触れただけの項目を誤検知しないため)。付け替え自体は /monthly-plan + todo-curator の毎月手順。
 
 関連: [[feedback-ga4-journey-referrer-over-navclick]] [[project_monetization_contract]]
+
+
+**KDP Reportsの取得順序（2026-10-17）**: 問題: CIの`session_valid`後も売上取得が`auth_required`に戻った。原因として確認した遷移: Reports実UIへ到達→約13分の全書籍棚卸し→`collectKdpReport`のReports再遷移でAmazonパスワード画面（run38987311743 attempt2）。セッション失効の内部理由は未確認。対策: 既知ASINで口座を照合した直後、別Reportsタブで日次・確定月次を先に取得し、Reportsページを閉じずに本棚を全件確認する。成功条件（全件確認・月次・private保存）は緩和しない。認証拒否世代は繰り返さず本人再確認を挟む。`authenticated-measurement.yml`のschedule定義はmainだが、collectorは明示的にdevelopをcheckoutするため、この取得コードの修正にWeb再デプロイは不要。32回帰テスト、実CIの成否はW41レビューとactivationカードで追う。
+
+KDPの同日追加検証: Reports先行だけのattempt3は22冊の再読込で15分timeout。計測に限って正しい本棚URLの可視draft行を再利用する`reuseVisibleRow`を追加し、出版操作の既定fresh navigationは維持した。関連48テストとdevelop CI成功、attempt4は4分12秒・全22冊・日次/月次complete・private SHA一致・全8source pass・台帳重複なし。基盤の継続性は別日main scheduleを観測するまで確定しない。
