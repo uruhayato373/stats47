@@ -2253,12 +2253,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ce93838611186f1e03e5c112cfbccef48ab3a8ba6c19f1064e89f5270cc2198a",
+          "sha256": "dbf5f8221ff605301da88e249766d98a77b8ab5daa056bbe323139bc72bd6d3e",
           "files": 9,
-          "bytes": 1079440,
-          "savedAt": "2026-10-12T22:06:25.493Z"
+          "bytes": 1080328,
+          "savedAt": "2026-10-17T23:14:32.749Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-17T23:14:32.749Z"
       }
     },
     {
