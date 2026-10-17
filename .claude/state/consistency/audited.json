@@ -1,7 +1,10 @@
 {
-  "hash": "b4c3343d483627083c8a0aac8ec1784d75d62eb4b81afcd69f8b3fe274fd7315",
-  "audited_at": "2026-10-17T02:28:58",
+  "hash": "636cfb888e4105f77c6fcbc4b71e5d8c99641bcf465accb0b171a0c88cc12bbb",
+  "audited_at": "2026-10-17T04:05:00",
   "files": [
-    ".claude/scripts/coconala/lib/coconala-session.mjs"
+    ".agents/skills/note/write-note-section/SKILL.md",
+    ".claude/scripts/note/capture-howto-shots.mjs",
+    ".claude/scripts/note/howto-shots/h02-csv-mojibake.json",
+    ".claude/skills/note/write-note-section/SKILL.md"
   ]
 }

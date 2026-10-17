@@ -229,3 +229,10 @@ npm run note:article -- save <slug>
 - UTM ルール: `/generate-utm-url` スキル
 - **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
   → フック・導入の型は plan.md に記載済みの型を使う。plan.md に型の記載がない場合は `/design-note-structure` に戻る。
+
+## 操作手順の記事のスクリーンショット (H シリーズ・2026-10-17)
+
+操作手順の記事 (企画: `docs/30_note記事企画/backlog/H-howto-maps-data.md`) に stats47 などの公開ページの画面を載せるときは、
+撮影手順を JSON に書いて `node .claude/scripts/note/capture-howto-shots.mjs --spec .claude/scripts/note/howto-shots/<記事>.json` で撮る。
+注目箇所に赤枠を付け、撮影元 URL・日時・SHA を `manifest.json` に残す。撮影手順の JSON は git、画像は記事の作業コピーへ移して
+`npm run note:article -- save <key>` で R2 に保存する (画像を git に置かない)。ログインが要る画面 (Google マイマップ・Excel など) は撮らず、文字で手順を書く。

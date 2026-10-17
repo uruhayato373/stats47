@@ -149,7 +149,8 @@ export async function GET(
   if (formatParam === "csv" && safeEncoding === "sjis") {
     try {
       const iconv = (await import("iconv-lite")).default;
-      responseBody = new Uint8Array(iconv.encode(bodyText, "Shift_JIS"));
+      // BOM は UTF-8 の Excel 対策で、Shift_JIS には表せず先頭が「?」になるので外す
+      responseBody = new Uint8Array(iconv.encode(bodyText.replace(/^\uFEFF/, ""), "Shift_JIS"));
     } catch {
       responseBody = bodyText; // fallback: UTF-8 文字列
       safeEncoding = "utf8"; // Content-Type / filename を UTF-8 に合わせる
