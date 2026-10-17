@@ -171,6 +171,8 @@ updated: 2026-10-17
 
 - **時間予算の修正**: attempt3は認証成功後のtimeout。計測限定で、正しい本棚の可視draft行を再利用して22冊の重複再読み込みを減らす。未発見の探索・全件照合・出版時のfresh navigationは維持。48テストpass、実CIで確認する。
 
+- **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
+
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
