@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readBookshelfState } from '../../kdp/lib/kdp-flow.mjs';
 import { randomBytes } from 'node:crypto';
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -427,4 +428,23 @@ test('note sales with private evidence survive an incomplete article inventory w
     assert.match(code, /capture\(`\.local\/authenticated-measurement\/\$\{name\}-\$\{runId\}\/sales\.json`\)/,
       'recorded note revenue must have a raw sales artifact in the private vault');
   } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// Keep full per-book assertions, but do not reload an already visible exact draft row.
+test('measurement bookshelf reuse requires the correct origin, path and exact draft; publishing still navigates', async () => {
+  const expected = { found: true, status: '販売中', asin: 'B0HF17SQ9N' };
+  const page = (url, count) => ({
+    url: () => url,
+    locator: selector => { assert.equal(selector, 'a[href*="/title-setup/kindle/draft-1/"]'); return { count: async () => count, first: () => ({ isVisible: async () => count > 0 }) }; },
+    goto: async () => { throw new Error('fresh-navigation-required'); },
+    evaluate: async (_fn, args) => { assert.equal(args.id, 'draft-1'); return expected; },
+  });
+  const bookshelf = 'https://kdp.amazon.co.jp/ja_JP/bookshelf#2';
+  assert.equal(await readBookshelfState(page(bookshelf, 1), 'draft-1', { reuseVisibleRow: true }), expected);
+  for (const [url, count, reuseVisibleRow] of [
+    [bookshelf, 0, true], [bookshelf, 1, false],
+    ['https://kdpreports.amazon.co.jp/dashboard', 1, true],
+    ['https://kdp.amazon.co.jp.evil.example/ja_JP/bookshelf', 1, true],
+    ['https://kdp.amazon.co.jp/ja_JP/bookshelf-other', 1, true],
+  ]) await assert.rejects(readBookshelfState(page(url, count), 'draft-1', { reuseVisibleRow }), /fresh-navigation-required/);
 });

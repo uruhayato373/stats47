@@ -27,14 +27,14 @@ try {
     if (!identity.found || identity.asin !== expected.asin) throw new Error('account_mismatch');
     const { listings } = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8'));
     // Collect the short-lived Reports session before the slow catalog scan.
-    // Keep its SPA open while scanning the bookshelf so its refresh lifecycle continues.
+    // Keep Reports open instead of navigating its page back to the bookshelf.
     const reportsPage = await context.newPage();
     await openKdpReports(reportsPage);
     sales = await collectKdpReport(reportsPage, listings, output.replace(/\.json$/, '.xlsx'));
     monthlyRoyalties = await collectKdpMonthlyReport(reportsPage, listings, output.replace(/\.json$/, '.monthly.xlsx'));
     for (const [id, entry] of Object.entries(listings)) {
       if (!entry.draftId) continue;
-      const value = await readBookshelfState(page, entry.draftId, entry);
+      const value = await readBookshelfState(page, entry.draftId, { ...entry, reuseVisibleRow: true });
       records.push({ id, found: value.found, status: value.status ?? null, asin: value.asin ?? null });
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
