@@ -448,7 +448,7 @@ Instagram は予約表のエントリを `register-ig-schedule.cjs` で登録し
 | 状態 | `status` (draft / scheduled / posted / deleted。store が語彙外を拒否) |
 | 承認 | `approval` = `{state: pending/approved/rejected/unrecorded, by, at, via, note}` |
 | 外部 ID | `store.externalIdOf(row)` が `post_url` から導出。導出できない Instagram の media_id だけ `external_id` に保存 |
-| 素材 | `assets[]` = `{role, order, state: archived/missing, drive_path, sha256, bytes, mime, source, reason}`。実体は Google Drive `マイドライブ/stats47/SNS素材/<platform>/<id>/<role>-<order>.<ext>` |
+| 素材 | `assets[]` = `{role, order, state: archived/missing, drive_path, sha256, bytes, mime, source, reason}`。画像実体はprivate R2 `sns-assets/<platform>/<id>/<role>-<order>/<sha>.*`。旧画像と動画はGoogle Drive `stats47/SNS素材/` |
 | 観測値 | 最新値は行の `impressions` 等。時系列は `metric-snapshots` を `sns_post_id = id` で引く (Instagram は週次 CI の `link-ig-media.cjs` が media_id で結ぶ) |
 | 確認画面 | 管理画面 `http://127.0.0.1:4747/sns/<id>` (読み取り専用) |
 
@@ -458,7 +458,7 @@ Instagram は予約表のエントリを `register-ig-schedule.cjs` で登録し
   IG cron は投稿時刻の来たエントリが承認待ち・未登録なら exit 3 で止まる。直接指定の `publish-x` / `post-instagram` は
   `--approve` を承認の明示として台帳に記録する。`scheduled → posted` (実際に出たことの記録) は止めない。
   2026-10-10 より前に作られた行は承認の記録が無いので `unrecorded` (approved に読み替えない)。
-- **素材は Drive が正本**。Git には相対パス・sha256・bytes だけを書き、Drive の fileId・URL・端末のマウント先は書かない。
+- **画像はprivate R2が正本、動画はDriveが正本** (2026-10-16 オーナー指示)。新規画像は `assets[].r2` にbucket/key、sha256/bytes/mimeを記録する。旧Drive画像は一致を照合してから移行し、未移行を隠さない。DriveのfileId・URL・端末マウント先は台帳に書かない。実装・移行・確認は `apps/admin/README.md`「記事・画像の改善管理」。
   `archive-sns-assets.mjs` が取得元 (`media_path` → IG 予約表の slides と R2 命名規約 → `.local/r2`) から複製し、読み戻して
   sha256 を照合する。`publish-x` / `publish-threads` (`--sync-ledger` を含む) / `post-instagram` は予約・投稿後に自動で呼ぶ。
   CI 投稿の Instagram は `/sns-weekly-plan` で Mac から `--since` 実行する。取得元が消えた素材は `state: "missing"` と理由を残す。

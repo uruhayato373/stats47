@@ -44,6 +44,8 @@ export interface PostDTO {
     order: number;
     state: string;
     drive_path?: string;
+    r2?: { bucket: string; key: string };
+    mime?: string;
     width?: number;
     height?: number;
   }>;

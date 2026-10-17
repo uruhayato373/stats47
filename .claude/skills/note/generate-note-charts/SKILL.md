@@ -95,6 +95,8 @@ import { generateLineSvg } from "@stats47/svg-builder";
 
 詳細は `packages/svg-builder/` を参照。
 
+本文のスマホ向け改善を比較するときは `.claude/scripts/media/render-article-pilot.ts` を使える。代表画像を `media:prepare` で復元し、生成条件と固定入力を保持して管理画面へ候補登録する。仕様は `apps/admin/README.md`「記事・画像の改善管理」。地理形状の地図・散布図は `packages/svg-builder/src/charts/article-mobile.ts` の明示選択型で、Web/SNSの標準を自動で置換しない。
+
 #### 方法 C: カスタムスクリプト
 
 フレームワーク図・比較表など特殊なチャートは、[design-system.md](reference/design-system.md) の規約に従ってカスタムスクリプトを作成。完成例は [examples/](examples/) を参照。

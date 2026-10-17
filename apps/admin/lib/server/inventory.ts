@@ -33,7 +33,7 @@ export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
       (a, b) => a.order - b.order
     )) {
       const url = assetUrl(p.id, asset);
-      if (url) out.push({ url, source: 'drive' });
+        if (url) out.push({ url, source: asset.r2 ? 'r2' : 'drive' });
     }
   }
   const base = localSnsDir();
