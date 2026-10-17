@@ -11449,6 +11449,28 @@
       ],
       "noteUrl": "https://note.com/stats47/n/nc884a0a01b71",
       "publishedAt": "2026-10-17"
+    },
+    {
+      "key": "h-howto-mymaps-kml",
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "magazine": null,
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/h-howto-mymaps-kml",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "e7bde42641443d0988af2f73e9d909af1f1b7bdc73a82ea547daa383769b3a83",
+          "files": 5,
+          "bytes": 257952,
+          "savedAt": "2026-10-17T07:35:22.314Z"
+        },
+        "verifiedAt": "2026-10-17T07:35:22.314Z"
+      },
+      "stats47Targets": [
+        "/ranking/total-population"
+      ]
     }
   ]
 }
