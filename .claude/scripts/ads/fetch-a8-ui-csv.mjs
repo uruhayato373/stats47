@@ -55,6 +55,7 @@ import {
   downloadTo,
   findUniqueByLabels,
   makeRunId,
+  maskSecrets,
   repoRoot,
 } from "./lib/a8-report-browser.mjs";
 import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
@@ -168,7 +169,7 @@ async function probeIsolation(page, cfg) {
  * 単月取得（`--month`）が入れば site-summary を月ごとに取れて、a8-results.json の
  * 月次 records ＝ EPC の分母が埋まる（現在は累計期間しか取れず records が空）。
  */
-async function probePeriodForm(page, cfg, reportKey = "site-summary") {
+export async function probePeriodForm(page, cfg, reportKey = "site-summary") {
   await openReport(page, cfg, reportKey);
   const fields = await page.evaluate(() => {
     const describe = (el) => {
@@ -184,7 +185,7 @@ async function probePeriodForm(page, cfg, reportKey = "site-summary") {
         type: el.getAttribute("type"),
         name: el.getAttribute("name"),
         id: el.getAttribute("id"),
-        value: (el.value ?? "").slice(0, 40),
+        value: /^(start|end)$/.test(el.getAttribute("name") ?? "") ? (el.value ?? "").slice(0, 40) : "[redacted]",
         placeholder: el.getAttribute("placeholder"),
         visible: r.width > 0 && r.height > 0,
         top: Math.round(r.top),
@@ -192,7 +193,9 @@ async function probePeriodForm(page, cfg, reportKey = "site-summary") {
         ctx: ctx.slice(0, 120),
       };
     };
-    return [...document.querySelectorAll("input, select")].map(describe);
+    return [...document.querySelectorAll("input, select")]
+      .filter((el) => !["hidden", "password"].includes(el.getAttribute("type")))
+      .map(describe);
   });
   const buttons = await page.evaluate(() =>
     [...document.querySelectorAll("button, input[type=submit], a[role=button]")]
@@ -207,14 +210,14 @@ async function probePeriodForm(page, cfg, reportKey = "site-summary") {
       })
       .filter((b) => b.text),
   );
-  return { reportKey, url: page.url(), fields, buttons };
+  return { reportKey, url: page.url().split("?")[0], fields: fields.map((field) => ({ ...field, ctx: maskSecrets(field.ctx) })), buttons };
 }
 
 /**
  * config で実機確認済みの一意な期間フォームだけを操作する。
  * name だけでは program-detail の月/日フォームが衝突するため placeholder も必須とする。
  */
-async function applyRequestedPeriod(page, cfg, reportKey, requestedMonth, today) {
+export async function applyRequestedPeriod(page, cfg, reportKey, requestedMonth, today) {
   const form = cfg.a8.periodForm?.[reportKey];
   if (!form) throw new Error(`periodForm 未設定: ${reportKey}`);
   if (!form.kind || !form.start?.name || !form.start?.placeholder || !form.end?.name || !form.end?.placeholder) {
@@ -222,6 +225,11 @@ async function applyRequestedPeriod(page, cfg, reportKey, requestedMonth, today)
   }
 
   const contract = buildA8PeriodContract({ requestedMonth, kind: form.kind, today });
+  if (form.modeButtonLabel) {
+    const mode = page.getByRole(form.modeButtonRole ?? "button", { name: form.modeButtonLabel, exact: true });
+    if (await mode.count() !== 1) throw new Error(`periodForm モードが一意でない: ${reportKey}`);
+    await mode.click();
+  }
   const start = page.locator(
     `input[name=${JSON.stringify(form.start.name)}][placeholder=${JSON.stringify(form.start.placeholder)}]:visible`,
   );

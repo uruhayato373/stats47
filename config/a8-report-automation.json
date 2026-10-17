@@ -10,14 +10,14 @@
     "mediaId": "a25050375786",
     "_accountNote": "doboku-note と同一口座（mediaId 不変）。2026-07-27 実機確認: A8 の管理画面に **サイト切替は存在しない**。メディアID=口座で、ヘッダーの「サイト名」は口座の代表サイトが常に表示されるだけ。したがって assert すべきは『正しい口座か』（mediaId）であり、対象サイトの分離はレポート単位で行う。",
     "_isolationNote": "レポートごとに siteScope が異なる（doboku-note 側 2026-07-27 実機確認・stats47 も同一口座のため同じ制約）:\n  site-rows    = サイト列があり targetSite の行だけ採れば **完全に分離できる**（/report/site のみ）。対象サイト実績の真実源。\n  account-wide = 口座横断でサイト分離不能（program/detail・period/*）。programIdMap の allowlist で対象サイト分を抽出し、site-rows と突合して混入を検算する（allowlist 合計が対象サイト行を超えたら混入の疑い）。\n代替案の検討結果（doboku-note 側で確認済み）: /report/program/detail は category フィルタのみでサイト列なし。/report/material の「素材ID」は 001/003/999 の3桁で a8mat の第4トークンとは別物のため素材による分離も不可。",
-    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視される）。2026-08-28 stats47 実機確認: month は可視 input[name=start/end][placeholder=開始月/終了月]、day は可視 input[name=start/end][placeholder=開始日/終了日]、適用は exact な button『適用』。program-detail には月/日の同名 input が共存するため placeholder と :visible の両方を必須にする。要求期間は CSV ファイル名の実期間と完全一致した場合だけ採用する。",
+    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視される）。2026-08-28 stats47 実機確認: month は可視 input[name=start/end][placeholder=開始月/終了月]、day は可視 input[name=start/end][placeholder=開始日/終了日]、2026-10-17の適用は exact な button『絞り込む』。program-detail には月/日の同名 input が共存するため placeholder と :visible の両方を必須にする。要求期間は CSV ファイル名の実期間と完全一致した場合だけ採用する。",
     "reports": {
       "site-summary": {
         "label": "サイト別",
         "readyText": "サイト別レポート",
         "path": "/report/site",
         "siteScope": "site-rows",
-        "_note": "**対象サイト実績の真実源**。CSV は合計行を含まず、統計で見る都道府県 と doboku-note の2行のみ（doboku-note 側の実機確認より）"
+        "_note": "**対象サイト実績の真実源**。2026-10-17実測のCSVは5サイト行。統計で見る都道府県の対象1行だけを採用し、他サイト4行を除外する（サイト構成は将来変わりうるため総行数を固定しない）。"
       },
       "program-detail": {
         "label": "プログラム別（詳細）",
@@ -46,25 +46,27 @@
         "kind": "month",
         "start": { "name": "start", "placeholder": "開始月" },
         "end": { "name": "end", "placeholder": "終了月" },
-        "applyButtonLabel": "適用"
+        "applyButtonLabel": "絞り込む"
       },
       "program-detail": {
         "kind": "month",
+        "modeButtonLabel": "月指定",
+        "modeButtonRole": "tab",
         "start": { "name": "start", "placeholder": "開始月" },
         "end": { "name": "end", "placeholder": "終了月" },
-        "applyButtonLabel": "適用"
+        "applyButtonLabel": "絞り込む"
       },
       "period-monthly": {
         "kind": "month",
         "start": { "name": "start", "placeholder": "開始月" },
         "end": { "name": "end", "placeholder": "終了月" },
-        "applyButtonLabel": "適用"
+        "applyButtonLabel": "絞り込む"
       },
       "period-daily": {
         "kind": "day",
         "start": { "name": "start", "placeholder": "開始日" },
         "end": { "name": "end", "placeholder": "終了日" },
-        "applyButtonLabel": "適用"
+        "applyButtonLabel": "絞り込む"
       }
     },
     "exportButtonLabels": [

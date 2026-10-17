@@ -52,6 +52,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
 | 性能・流入 | GSC / GA4の確定7日summary、SNSの最新snapshot |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
+| GSC画面監査・技術是正 | `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md`。全除外理由・メッセージ・拡張の監査、本番反映、Google再検証を `.claude/skills/analytics/gsc-improvement/SKILL.md`「画面監査・技術是正とレビューへの引き渡し」に従って読む。新通知・監査から7日超・確認期日到達なら該当画面を再確認し、取得不可はBlockersへ |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 週次収益 (NSM) | `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節。欠測は 0 円ではなく「判定不能」。AdSense は 2026-10-11 に手動枠で再開し、再開後に取得できなかった週は判定不能 (停止中の 2026-W35〜W41 だけ ¥0) |
 | AdSense の配置 | `data/adsense/LATEST.md`・`history-units.csv`・`impact-LATEST.md` と KPI `ad-yield`。運用は `/adsense-improvement`。再開後 4 週 (W42〜W45) はベースライン期間で配置を変えない。取得が 0 行 (`manifest.json` の `status: error`) なら Blockers へ (`ADSENSE-RESTART-01` 手順⑤) |
@@ -121,6 +122,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - KPIツリー（重点KPIの今週値・非重複比較・判定、ガードレールの悪化、判定不能のKPIと理由、施策の配線状況）
 - 🔴 の着手順（上位 3 枚の今週の進み具合と、止まっている理由）
 - 計測→記録→改善サイクル（回遊率・業務文脈の着地・無人記録で閉じた/更新した施策・オーナー作業）
+- 同節のGSC技術是正（作業対象週の修正/本番反映と、観測日時付きのGoogle検証状態・残カードID・次回確認日・証拠。検証開始を合格や登録済みと扱わない）
 - search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び
 - 来週への申し送り
@@ -172,6 +174,7 @@ node .claude/scripts/management/check-alert-triage.mjs
 - KPIはfinalized7d、候補はrolling28dという用途が明記されている。
 - 重点レーンのKPIすべてに判定か判定不能の理由があり、rolling28dを隣接週と比べていない。
 - 実測の無い数値・効果・完了を記録していない。
+- GSC画面監査・是正証拠を参照し、作業実績の週とGSCの観測期間を分け、Google検証中/未取得を残カードIDで申し送っている。
 - search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
 - 事業計画stateが当週に生成され、未計測・手動・部分計測を区別している。

@@ -230,13 +230,13 @@ async function afterKdpLogin(page, cred) {
   }
 }
 
-async function refresh(source, { root, publish, headed, waitHuman }) {
-  const { chromium } = await import('playwright');
+export async function refresh(source, { root, publish, headed, waitHuman, chromiumImpl = null }) {
+  const chromium = chromiumImpl ?? (await import('playwright')).chromium;
   const conf = LOGIN[source];
   const privateDir = join(root, '.local/authenticated-measurement');
   mkdirSync(privateDir, { recursive: true, mode: 0o700 });
   const failMark = join(privateDir, `${source}.autologin-failed`);
-  if (existsSync(failMark)) return { source, status: 'blocked', reason: `前回の自動ログインが失敗したため停止中。確認後に ${failMark} を削除する` };
+  if (existsSync(failMark) && !waitHuman) return { source, status: 'blocked', reason: `前回の自動ログインが失敗したため停止中。確認後に ${failMark} を削除する` };
 
   const context = await chromium.launchPersistentContext(join(root, '.local', `playwright-${source}-profile`), {
     ...(conf.bundledChromium
@@ -255,7 +255,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
     await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
     await page.waitForTimeout(3000);
     const before = await pageSignals(page);
-    if (!(conf.loggedIn(page.url()) && !before.hasPassword)) {
+    if (!(conf.loggedIn(page.url()) && !before.hasPassword && !before.hasChallenge)) {
       const cred = waitHuman ? null : readCredential(source);
       if (!cred && waitHuman) {
         // 人がこのブラウザでログインするのを待つ (自動入力しない)。
@@ -265,7 +265,8 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
         let ok = false;
         while (Date.now() < deadline && !ok) {
           await page.waitForTimeout(3000);
-          ok = conf.loggedIn(page.url()) && !(await pageSignals(page)).hasPassword;
+          const signals = await pageSignals(page);
+          ok = conf.loggedIn(page.url()) && !signals.hasPassword && !signals.hasChallenge;
         }
         if (!ok) return { source, status: 'human_timeout', reason: '10 分以内にログインを検知できなかった' };
       }
@@ -315,6 +316,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
     execFileSync(process.execPath, [join(root, '.claude/scripts/measurement/bootstrap-session.mjs'), source, '--root', root, '--publish'],
       { stdio: ['ignore', 'pipe', 'inherit'] });
   }
+  if (waitHuman) rmSync(failMark, { force: true });
   return { source, status: 'ok', loggedInBy, published: publish };
 }
 

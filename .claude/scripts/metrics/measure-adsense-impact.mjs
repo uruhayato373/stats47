@@ -49,6 +49,7 @@ import {
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekIndex, weekDiff } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+import { ADSENSE_BASELINE, assessmentForSubject, isCurrentAccountRow, observeAdsenseBaseline } from "./lib/adsense-measurement-contract.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -162,14 +163,19 @@ function parseBacklog() {
 }
 
 // ── before/after 解決 ──
-function resolveWindows(deployWeek) {
-  const { acctWeeks } = loadHistories();
+export function resolveAdsenseWindows(deployWeek, rows) {
+  // A new-account deployment must never select an old-account before point.
+  const acctWeeks = rows.filter(row => deployWeek >= ADSENSE_BASELINE.deployWeek
+    ? isCurrentAccountRow(row) : row.week < "2026-W35").map(row => row.week).sort();
   const dIdx = weekIdx(deployWeek);
   const before = acctWeeks.filter((w) => weekIdx(w) < dIdx).pop() || null;
   const afters = acctWeeks.filter((w) => weekIdx(w) > dIdx);
   const after = afters.length ? afters[afters.length - 1] : null;
   const elapsed = after ? weekIdx(after) - dIdx : 0;
   return { before, after, elapsed };
+}
+function resolveWindows(deployWeek) {
+  return resolveAdsenseWindows(deployWeek, loadHistories().acct?.rows ?? []);
 }
 
 // ── 整形ヘルパー ──
@@ -226,6 +232,13 @@ export function createAdsenseAdapter(opts = {}) {
     logPath: LOG_PATH,
     headerPrefix: "",
     available: Boolean(acct),
+
+    observeBaseline() { return observeAdsenseBaseline(acct?.rows ?? [], opts.now); },
+    baselineSources() {
+      return [{ name: `adsense:${datasetDir("adsense.history")}/history.csv`,
+        accountId: ADSENSE_BASELINE.accountId, firstWeek: ADSENSE_BASELINE.firstWeek,
+        identityBasis: "restart-cohort; explicit accountId checked when available" }];
+    },
 
     listSubjects() {
       return subjects.map((s) => ({ ...s, subjectId: s.id }));
@@ -322,6 +335,13 @@ function main() {
     const confTag = coDeployed.length ? `  ⚠ 交絡: ${coDeployed.join(", ")} と同時投入（単独帰属不可）` : "";
     p(`## ${it.id} — deployed ${it.deployDate} (${it.deployWeek})  [status: ${it.status}]${confTag}`);
 
+    const assessment = assessmentForSubject({ domainId: "adsense", subjectId: it.id });
+    if (assessment.kind === "baseline-observation") {
+      const observed = adapter.observeBaseline();
+      p(`  → baseline ${observed.status}: ${observed.observedWeeks.length}/4週、未取得 ${observed.missingWeeks.join(", ") || "なし"}。観測期限 ${assessment.reviewDate}。効果比較・target設定は行わない。`);
+      p("");
+      continue;
+    }
     const { before, after, elapsed } = resolveWindows(it.deployWeek);
     if (!before) {
       p("  → before 週が履歴に無い（deploy 週以前のデータ不足）。計測不能。");

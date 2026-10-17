@@ -19,6 +19,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const backlogLib = require('./backlog-lib.cjs');
+const { assessmentForSubject } = require('../metrics/lib/adsense-measurement-contract.mjs');
 const { DOMAINS } = require('../../../config/paths.mjs');
 const { datasetDir } = require("../../../config/datasets.mjs");
 // 「効果判定エンジン対象外: <理由>」の記法は計測サイクルと同じ判定を使う (別に正規表現を書くと片方だけ変わる)
@@ -327,7 +328,8 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
     issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `active 施策 ${improvementRows.length} 件が上限 ${MAX_ACTIVE_IMPROVEMENTS} 件を超えている。新しい施策を足さず、月次計画で判定・backlog 降格して削る` });
   }
   // 理由付きで機械判定から外した行は欠落に数えない (計測サイクルの「理由付きで対象外」と同じ扱い。2026-10-11)
-  const noTarget = improvementRows.filter((r) => !r.hasTarget && !r.outOfScope).map((r) => r.id);
+  const noTarget = improvementRows.filter((r) => !r.hasTarget && !r.outOfScope &&
+    assessmentForSubject({ domainId: r.metric, subjectId: r.id }).kind !== 'baseline-observation').map((r) => r.id);
   if (noTarget.length) {
     issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `[target:] の無い施策 ${noTarget.length} 件 (効果を機械判定できない): ${noTarget.join(', ')}` });
   }

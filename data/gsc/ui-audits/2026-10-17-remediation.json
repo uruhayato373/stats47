@@ -10,11 +10,11 @@
     "GSC-OBSERVATION-PERIOD-01"
   ],
   "priorityActions": {
-    "GSC案01": "local verified; production pending",
-    "GSC案02": "Geo definition SHA regression + seven existing route smoke targets; production/sitemap cross-check pending",
-    "GSC案03": "nested descriptions implemented; production/Google recrawl pending",
-    "GSC案04": "still pending; no unverified creator/license added",
-    "GSC案05": "recursive unit + existing E2E gate added; E2E execution in CI pending",
+    "GSC案01": "production 200 + canonical/noindex checks PASS; GSC live fetch successful and indexability PASS; indexing request accepted; Google index processing pending",
+    "GSC案02": "all seven Geo routes match public sitemap; strict published snapshot/manifest parsers and four representative artifact SHA/bytes checks PASS",
+    "GSC案03": "production parent/nested description checks PASS on six affected examples, normal + Googlebot; both GSC validations STARTED on 2026-10-17",
+    "GSC案04": "still pending; source-specific creator/license not inferred or added",
+    "GSC案05": "recursive regression assertions PASS in unit tests and existing representative E2E release CI",
     "GSC案06": "completed; normalized data and candidates regenerated"
   },
   "geo": {
@@ -181,8 +181,8 @@
       "errors": []
     },
     "historicalGscInvalidItems": 858,
-    "googleValidationStarted": false,
-    "productionVerified": false
+    "googleValidationStarted": true,
+    "productionVerified": true
   },
   "periods": {
     "source": "data/gsc/snapshots/2026-W41/summary.json#rolling28d",
@@ -258,17 +258,1685 @@
       "warnings": 6,
       "existingWarnings": true
     },
-    "productionBuild": "not run locally; release CI is authoritative",
-    "fullE2E": "not run locally; existing E2E includes recursive Dataset assertion"
+    "productionBuild": {
+      "status": "pass",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38974174532",
+      "authority": "release CI"
+    },
+    "fullE2E": {
+      "status": "pass",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38974174532",
+      "scope": "existing Representative E2E job including recursive Dataset assertions; not every E2E project"
+    },
+    "releaseRecords": {
+      "backlogGate": "pass",
+      "docs": {
+        "errors": 0,
+        "warnings": 6,
+        "existingWarnings": true
+      },
+      "gitDiffCheck": "pass",
+      "baseCommit": "4987edb3cc"
+    }
   },
   "limitations": [
-    "No production deployment or R2 write in this run; GSC counts and validation state remain unchanged.",
-    "Artifact checks cover aggregate and Tokyo intermediate artifacts, not the full 47-prefecture artifact set.",
-    "Local ranking first-render logged timeouts for auxiliary categories/affiliate snapshots and missing page-cards; main ranking and Dataset rendered."
+    "The implementation phase used local verification without production writes; production release and subsequent checks are now recorded in productionRelease.",
+    "Artifact checks cover aggregate and Tokyo (implementation phase) / Hyogo (production phase) intermediate artifacts, not every artifact for all 47 prefectures.",
+    "GSC counts are historical (report updated 2026-10-15); validations STARTED, not completed. Actual indexing and error-count reduction are not confirmed.",
+    "Nested creator/license recommendations (1,092 each at audit) require verified source metadata and remain pending.",
+    "Post-deploy Playwright succeeded with 45 clean passes and 3 first-retry passes; the main boundingBox flakiness is tracked separately in CI-SMOKE-BOUNDING-BOX-01."
   ],
   "remaining": [
-    "Batch deploy Geo + Dataset and verify production HTTP/canonical/noindex and recursive JSON-LD.",
-    "Start GSC Dataset validation after production check and observe Google recrawl.",
+    "Check both Dataset validation results and recrawled items on 2026-10-23; do not close the Dataset card solely because validation started.",
     "Resolve source-specific creator/license metadata before adding nested recommendations."
-  ]
+  ],
+  "lastUpdatedAt": "2026-10-16T22:48:41.603Z",
+  "productionRelease": {
+    "authorizedBy": "User explicitly requested one batch production release of Geo and Dataset, post-deploy verification and GSC validation.",
+    "pullRequest": "https://github.com/uruhayato373/stats47/pull/1140",
+    "mergeCommit": "dce97072cc5d8ad4b071719ef9650524087170bc",
+    "mergedAt": "2026-10-16T22:23:13Z",
+    "releaseCi": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38974174532",
+      "headSha": "172175d3e51a3eb7c447dcd4003609234083de89",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Static Gates",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "⚙️ GitHub Actions Syntax Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🛡️ GitHub Actions Policy Audit",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧯 Quality Gate Ratchet Contracts",
+              "conclusion": "success"
+            },
+            {
+              "name": "Metric and Content Identity Contracts",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔁 Sync-Snapshots Task Drift",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔗 File URL Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📁 import.meta.dirname Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📝 ESLint Check",
+              "conclusion": "success"
+            },
+            {
+              "name": "🎨 Design System Check",
+              "conclusion": "success"
+            },
+            {
+              "name": "🃏 Card Census Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📢 Ad Placement Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🚧 R2 Route SSG Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📚 Private Reference Source Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🚧 Web e-Stat Import Boundary Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📱 Static Asset Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🖼️ Image and SVG Policy Regression Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧩 Admin UI Guard (shadcn parity / UI debt)",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧾 SNS Post Trace Contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗒️ note Image Asset Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧹 Repository Hygiene Regression Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧩 Checker Wiring Regression Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔎 Keyword cooldown and history guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Workspace Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔐 Environment Registry Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧭 Route and SEO Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "♿ Static Accessibility Regression Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧭 Maintenance Debt Regression Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🛑 Commit Message Skip-Token Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔢 Value Formatting Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔗 github-script await Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "⏱️ Static Checker Runtime Budget",
+              "conclusion": "success"
+            },
+            {
+              "name": "🚫 D1 Import Gate (Phase 7)",
+              "conclusion": "success"
+            },
+            {
+              "name": "🏷 Known Tag Keys Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Catalog Gates",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "🗂️ Theme Portfolio State Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📊 Affiliate Compliance / Operations Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📋 Survey Portfolio State Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧬 Survey Taxonomy Cross-Surface Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📅 Metric Years Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧱 Metric Config Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧺 Kakei Item Classification Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📏 Unit Semantics Mirror Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🎨 Colorscheme Policy Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📰 SEO Meta Factual Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔗 Survey Master Coverage Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📚 Theme Catalog Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "Content identity and navigation gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧩 Theme Dependency Mirror Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗂️ Topic Catalog Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗾 Area Databook Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Plan affected quality jobs",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Classify changed paths",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Contract Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "🚨 Alert lifecycle contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "Metric source catalog linkage contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔄 GSC operations cycle contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔁 Workflow Commit-back Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔁 Scoped Workflow Contract Gate (差分連動)",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧭 Affiliate Offer Taxonomy Contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "A8 programIdMap drift check",
+              "conclusion": "success"
+            },
+            {
+              "name": "🤖 Content Generation Routine Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📸 Instagram Ledger Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗒️ note Catalog Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧭 Business Plan SSOT Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗂️ Backlog Loop Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📈 Audit Script Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🖼️ Image Generation Pipeline Contract Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗾 Japan Zue Evidence Inventory Gate",
+              "conclusion": "success"
+            },
+            {
+              "name": "📚 Docs Governance and Link Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📝 Blog Quality Gate Self-Test",
+              "conclusion": "success"
+            },
+            {
+              "name": "🤖 Agent / Skill Prompt Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧮 AI Content Gate Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📈 AdSense Metrics Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📐 PSI Collector Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "☁️ Cloudflare Cost Report Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧠 Model Usage Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "📚 KDP / Review Cadence Contract Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔐 Google Admin Allowlist Guard",
+              "conclusion": "success"
+            },
+            {
+              "name": "Authenticated measurement isolation and freshness",
+              "conclusion": "success"
+            },
+            {
+              "name": "🚦 Preflight Aggregator Contract",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Type Check",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "📐 Type Check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Build Check",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Generate metric metadata for this PR",
+              "conclusion": "success"
+            },
+            {
+              "name": "Start generated metadata overlay for build",
+              "conclusion": "success"
+            },
+            {
+              "name": "🏗️ Build Check",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Share verified Next.js build",
+              "conclusion": "success"
+            },
+            {
+              "name": "Share verified metric metadata",
+              "conclusion": "success"
+            },
+            {
+              "name": "Stop build metadata overlay",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Unit Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "🧪 Run Web Unit Tests",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧪 Run Package Unit Tests",
+              "conclusion": "success"
+            },
+            {
+              "name": "🎯 Critical Pure Module Coverage",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧪 Run Admin Unit Tests",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Blog Thumbnail Gate",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "name": "Admin Build & E2E",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "name": "Visualization Render Golden",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "name": "Remotion Bundle",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "name": "Representative E2E",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "📦 Install dependencies",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "🌐 Install Playwright Chromium",
+              "conclusion": "success"
+            },
+            {
+              "name": "📥 Reuse verified Next.js build",
+              "conclusion": "success"
+            },
+            {
+              "name": "Reuse verified metric metadata",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔁 Start R2 overlay (PR の page-components + 本番 R2)",
+              "conclusion": "success"
+            },
+            {
+              "name": "▶️ Start verified web build",
+              "conclusion": "success"
+            },
+            {
+              "name": "🎭 Run representative Playwright E2E suite",
+              "conclusion": "success"
+            },
+            {
+              "name": "🛑 Stop web app",
+              "conclusion": "success"
+            },
+            {
+              "name": "📊 Upload Playwright report",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 📦 Restore node_modules cache",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🟢 Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post 🧰 Checkout repository",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Code Quality Check",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧮 Verify all required checks passed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "✅ All Checks Passed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "deploy": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38975435527",
+      "headSha": "dce97072cc5d8ad4b071719ef9650524087170bc",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Deploy",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install dependencies",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate and verify metric release snapshots",
+              "conclusion": "success"
+            },
+            {
+              "name": "Publish verified metric snapshots before app build",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔐 Verify Cloudflare authentication",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify OpenNext build",
+              "conclusion": "success"
+            },
+            {
+              "name": "🛡️ Pre-deploy gate — prerender notFound scan",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔐 Set Secrets for Production",
+              "conclusion": "success"
+            },
+            {
+              "name": "Deploy to Production",
+              "conclusion": "success"
+            },
+            {
+              "name": "🧹 Reset Workers Cache after deploy",
+              "conclusion": "success"
+            },
+            {
+              "name": "Warm cache (Production)",
+              "conclusion": "success"
+            },
+            {
+              "name": "🔎 Smoke test (Production routes)",
+              "conclusion": "success"
+            },
+            {
+              "name": "🗺️ Sitemap index の整合性",
+              "conclusion": "success"
+            },
+            {
+              "name": "📝 Append improvement-log stub",
+              "conclusion": "success"
+            },
+            {
+              "name": "💾 Commit improvement-log changes to develop",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "postDeploySmoke": {
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/38977124768",
+      "headSha": "dce97072cc5d8ad4b071719ef9650524087170bc",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "smoke-test",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install dependencies",
+              "conclusion": "success"
+            },
+            {
+              "name": "Wait for deployment propagation",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run health check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install Playwright browsers",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run Playwright smoke tests",
+              "conclusion": "success"
+            },
+            {
+              "name": "🚨 Upsert post-deploy alert issue",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "✅ Close recovered post-deploy alert",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload smoke test report",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Warm cache (R2 ISR + Edge)",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Setup Node.js",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "publicVerification": {
+      "checkedAt": "2026-10-16T22:34:01.505Z",
+      "sitemap": {
+        "url": "https://stats47.jp/sitemap/0.xml",
+        "status": 200,
+        "geo": [
+          {
+            "url": "https://stats47.jp/geo/population-landslide-exposure",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-snow-designation",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-land-price",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-flood-risk",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-station-access",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-public-facility-access",
+            "listed": true
+          },
+          {
+            "url": "https://stats47.jp/geo/population-low-elevation",
+            "listed": true
+          }
+        ]
+      },
+      "pages": [
+        {
+          "url": "https://stats47.jp/geo/population-landslide-exposure",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-landslide-exposure",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "土砂災害の指定区域と人口・公共施設"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-landslide-exposure/28",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/item.json",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/manifest.json",
+            "/geo/data/population-landslide-exposure/28",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-landslide-exposure",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-landslide-exposure",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "土砂災害の指定区域と人口・公共施設"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-landslide-exposure/28",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/item.json",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/manifest.json",
+            "/geo/data/population-landslide-exposure/28",
+            "https://storage.stats47.jp/app/geo/population-landslide-exposure/pref/28.json"
+          ],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-snow-designation",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-snow-designation",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "2016年度の豪雪指定区域と2020年人口"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-snow-designation/28",
+            "https://storage.stats47.jp/app/geo/population-snow-designation/item.json",
+            "https://storage.stats47.jp/app/geo/population-snow-designation/manifest.json",
+            "/geo/data/population-snow-designation/28",
+            "https://storage.stats47.jp/app/geo/population-snow-designation/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-land-price",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-land-price",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "地価が上がる住宅地でも、周囲の人口は減るのか"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-land-price/28",
+            "https://storage.stats47.jp/app/geo/population-land-price/item.json",
+            "https://storage.stats47.jp/app/geo/population-land-price/manifest.json",
+            "/geo/data/population-land-price/28",
+            "https://storage.stats47.jp/app/geo/population-land-price/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-flood-risk",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-flood-risk",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "2050年、洪水浸水想定区域に暮らす人口はどれくらいか"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-flood-risk/28",
+            "https://storage.stats47.jp/app/geo/population-flood-risk/item.json",
+            "https://storage.stats47.jp/app/geo/population-flood-risk/manifest.json",
+            "/geo/data/population-flood-risk/28",
+            "https://storage.stats47.jp/app/geo/population-flood-risk/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-station-access",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-station-access",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "2050年、駅の近くに住む人口はどれくらい残るのか"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-station-access/28",
+            "https://storage.stats47.jp/app/geo/population-station-access/item.json",
+            "https://storage.stats47.jp/app/geo/population-station-access/manifest.json",
+            "/geo/data/population-station-access/28",
+            "https://storage.stats47.jp/app/geo/population-station-access/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-public-facility-access",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-public-facility-access",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "行政施設・公的集会施設までの距離と地域人口"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-public-facility-access/28",
+            "https://storage.stats47.jp/app/geo/population-public-facility-access/item.json",
+            "https://storage.stats47.jp/app/geo/population-public-facility-access/manifest.json",
+            "/geo/data/population-public-facility-access/28",
+            "https://storage.stats47.jp/app/geo/population-public-facility-access/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/population-low-elevation",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-low-elevation",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "標高の低い土地に、どれだけの人が住んでいるか"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [
+            "/geo/method",
+            "/geo/data/population-low-elevation/28",
+            "https://storage.stats47.jp/app/geo/population-low-elevation/item.json",
+            "https://storage.stats47.jp/app/geo/population-low-elevation/manifest.json",
+            "/geo/data/population-low-elevation/28",
+            "https://storage.stats47.jp/app/geo/population-low-elevation/pref/28.json"
+          ],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/geo/data/population-landslide-exposure/28",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/geo/population-landslide-exposure",
+          "noindex": true,
+          "robots": "noindex, follow",
+          "h1": [
+            "兵庫県｜土砂災害指定区域と人口・公共施設"
+          ],
+          "notFound": false,
+          "datasets": [],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/donations-prefecture",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/ranking/donations-prefecture",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "寄附金"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "寄附金 2022年度",
+              "descriptionCharacters": 121
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 95
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/donations-prefecture",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/ranking/donations-prefecture",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "寄附金"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "寄附金 2022年度",
+              "descriptionCharacters": 121
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 95
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/side-job-rate",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/ranking/side-job-rate",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "副業率"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "副業率 2022年",
+              "descriptionCharacters": 114
+            },
+            {
+              "name": "就業構造基本調査",
+              "descriptionCharacters": 94
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/ranking/side-job-rate",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/ranking/side-job-rate",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "副業率"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "副業率 2022年",
+              "descriptionCharacters": 114
+            },
+            {
+              "name": "就業構造基本調査",
+              "descriptionCharacters": 94
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "知的障害者援護施設在所者数"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "知的障害者援護施設在所者数 市区町村ランキング（2011年度）",
+              "descriptionCharacters": 126
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 108
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "知的障害者援護施設在所者数"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "知的障害者援護施設在所者数 市区町村ランキング（2011年度）",
+              "descriptionCharacters": 126
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 108
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/foreign-resident-count",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/foreign-resident-count",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "外国人人口"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "外国人人口 市区町村ランキング（2020年）",
+              "descriptionCharacters": 125
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 99
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/foreign-resident-count",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/foreign-resident-count",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "外国人人口"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "外国人人口 市区町村ランキング（2020年）",
+              "descriptionCharacters": 125
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 99
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/earthquake-retrofit-housing",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/earthquake-retrofit-housing",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "耐震工事をした住宅数（持ち家）"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "耐震工事をした住宅数（持ち家） 市区町村ランキング（2008年）",
+              "descriptionCharacters": 129
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 109
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/earthquake-retrofit-housing",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/earthquake-retrofit-housing",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "耐震工事をした住宅数（持ち家）"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "耐震工事をした住宅数（持ち家） 市区町村ランキング（2008年）",
+              "descriptionCharacters": 129
+            },
+            {
+              "name": "社会・人口統計体系",
+              "descriptionCharacters": 109
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/current-balance-ratio-city?page=4",
+          "agent": "normal",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/current-balance-ratio-city",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "経常収支比率（市町村財政）"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "経常収支比率（市町村財政） 市区町村ランキング（2021年度）",
+              "descriptionCharacters": 126
+            },
+            {
+              "name": "社会・人口統計体系（市区町村データ・廃置分合処理済）",
+              "descriptionCharacters": 125
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "MISS",
+          "pass": true
+        },
+        {
+          "url": "https://stats47.jp/municipalities/ranking/current-balance-ratio-city?page=4",
+          "agent": "googlebot",
+          "status": 200,
+          "canonical": "https://stats47.jp/municipalities/ranking/current-balance-ratio-city",
+          "noindex": false,
+          "robots": "index, follow;index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+          "h1": [
+            "経常収支比率（市町村財政）"
+          ],
+          "notFound": false,
+          "datasets": [
+            {
+              "name": "経常収支比率（市町村財政） 市区町村ランキング（2021年度）",
+              "descriptionCharacters": 126
+            },
+            {
+              "name": "社会・人口統計体系（市区町村データ・廃置分合処理済）",
+              "descriptionCharacters": 125
+            }
+          ],
+          "datasetErrors": [],
+          "lineageLinks": [],
+          "cfCacheStatus": "HIT",
+          "pass": true
+        }
+      ],
+      "artifacts": [
+        {
+          "key": "app/geo/population-landslide-exposure/item.json",
+          "bytes": 31592,
+          "sha256": "541edf3f9d685a25a9a9bbca64cf90e54dcc10d12b3eae5f33026d56fae9b766",
+          "pass": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/pref/28.json",
+          "bytes": 1362761,
+          "sha256": "679cef15b0ffd919b9e4a3aa41bcae1c8c1fa24331f031ef3fbb8a7ad49e771f",
+          "pass": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/facilities/28.json",
+          "bytes": 190344,
+          "sha256": "4c66e97f76767824e2f6f77c8a86a82f531a8c83eca621b07cbdd0149934500f",
+          "pass": true
+        },
+        {
+          "key": "app/geo/population-landslide-exposure/source/28.json",
+          "bytes": 5268,
+          "sha256": "423e2eeab7726d1fd20115e2430745d6db175dad095a37868f350097347c7ea6",
+          "pass": true
+        }
+      ],
+      "completedAt": "2026-10-16T22:34:37.203Z",
+      "pass": true,
+      "errors": []
+    },
+    "gsc": {
+      "property": "sc-domain:stats47.jp",
+      "startedAt": "2026-10-16T22:12:00.818Z",
+      "actions": [
+        {
+          "type": "geo-live-test",
+          "url": "https://stats47.jp/geo/population-landslide-exposure",
+          "startedAt": "2026-10-16T22:34:25.149Z"
+        },
+        {
+          "type": "geo-indexing-request",
+          "requestedAt": "2026-10-16T22:35:11.687Z",
+          "url": "https://stats47.jp/geo/population-landslide-exposure"
+        },
+        {
+          "type": "dataset-length-validation",
+          "requestedAt": "2026-10-16T22:37:02.862Z",
+          "url": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8IDhoLZGVzY3JpcHRpb24QAxgV&hl=ja"
+        },
+        {
+          "type": "dataset-missing-validation",
+          "requestedAt": "2026-10-16T22:37:36.665Z",
+          "url": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8ICRoLZGVzY3JpcHRpb24QAxgV&hl=ja"
+        }
+      ],
+      "datasetBefore": {
+        "checkedAt": "2026-10-16T22:12:17.301Z",
+        "overviewUrl": "https://search.google.com/search-console/r/datasets?resource_id=sc-domain%3Astats47.jp&hl=ja",
+        "descriptionInvalid": 775,
+        "descriptionMissing": 83,
+        "missingExamples": [
+          "https://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents",
+          "https://stats47.jp/municipalities/ranking/foreign-resident-count",
+          "https://stats47.jp/municipalities/ranking/earthquake-retrofit-housing",
+          "https://stats47.jp/municipalities/ranking/current-balance-ratio-city?page=4"
+        ],
+        "reports": {
+          "length": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8IDhoLZGVzY3JpcHRpb24QAxgV&hl=ja",
+          "missing": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8ICRoLZGVzY3JpcHRpb24QAxgV&hl=ja"
+        }
+      },
+      "propertyAssert": {
+        "url": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8ICRoLZGVzY3JpcHRpb24QAxgV&hl=ja",
+        "searchLabel": "stats47.jp 内のすべての URL を検査",
+        "confirmedAt": "2026-10-16T22:12:52.826Z"
+      },
+      "geoSavedBefore": {
+        "checkedAt": "2026-10-16T22:22:34.413Z",
+        "url": "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Astats47.jp&id=sevs6971KSCl31rMwSwUJA&hl=ja",
+        "text": "help_outline\nヘルプ\nmanage_accounts\nユーザー設定\n\t\nnotifications\nメッセージ\n1\n\nhome\nサマリー\nlightbulb_2\n分析情報\ntrending_up\n検索パフォーマンス\nkeyboard_arrow_down\nsearch\nURL 検査\nインデックス作成\nkeyboard_arrow_up\nfile_copy\nページ\nvideo_library\n動画\naccount_tree\nサイトマップ\nvisibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/geo/population-landslide-exposure\nURL 検査\n公開 URL をテスト\ninfo\nURL が Google に登録されていません\nこのページはインデックスに登録されていません。インデックスに登録されていないページは Google で配信することができません。インデックスに登録されなかった理由について詳細をご確認ください。詳細\nクロール済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ninfo\nページのインデックス登録\nページはインデックスに登録されていません: 見つかりませんでした（404）\n\n検出\nサイトマップ\nhttps://stats47.jp/sitemap.xml\n参照元ページ\nhttps://stats47.jp/geo/population-landslide-exposure?pref=28&stage=overlap\nhttps://stats47.jp/themes/landslide-exposure?pref=28000\nクロール\n前回のクロール\n2026/10/16 5:50:17\nユーザー エージェント\nスマートフォン用 Googlebot\nクロールを許可？\nはい\nページの取得\ninfo\n失敗しました: 見つかりませんでした（404）\nインデックス登録を許可？\n該当なし\nインデックス作成\nユーザーが指定した正規 URL\n該当なし\nGoogle が選択した正規 URL\n\n該当なし\n詳細\nレポートを開く\n拡張機能とエクスペリエンス\n拡張機能の対象になるのは、インデックスに登録されている URL のみです\nURL 検査"
+      },
+      "geoLiveTest": {
+        "checkedAt": "2026-10-16T22:35:11.597Z",
+        "url": "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Astats47.jp&id=C2kv6S2-58TpxSszKDoMBw&alt_id=sevs6971KSCl31rMwSwUJA&hl=ja",
+        "status": "PASS",
+        "indexability": "URL は Google に登録できます",
+        "text": "help_outline\nヘルプ\nmanage_accounts\nユーザー設定\n\t\nnotifications\nメッセージ\n1\n\nhome\nサマリー\nlightbulb_2\n分析情報\ntrending_up\n検索パフォーマンス\nkeyboard_arrow_down\nsearch\nURL 検査\nインデックス作成\nkeyboard_arrow_up\nfile_copy\nページ\nvideo_library\n動画\naccount_tree\nサイトマップ\nvisibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nhttps://stats47.jp/geo/population-landslide-exposure\nURL 検査\nGOOGLE インデックス\nライブテスト\nテスト日時: 2026/10/17、7:34\n\ncheck_circle\nURL は Google に登録できます\nURL がインデックスに登録され、正規 URL として選択された場合、関連するすべての拡張機能とともに Google 検索結果に表示されます。詳細\nテスト済みのページを表示\nページを変更しましたか？\nインデックス登録をリクエスト\ncheck_circle\nページの可用性\nページをインデックスに登録可能です\n\n特定の条件が満たされている場合にのみ、URL はインデックスに登録されます\n検出\nライブテストでは確認できません\nクロール\n時間\n2026/10/17 7:34:30\nユーザー エージェント\nGoogle 検査ツール（スマートフォン）\nクロールを許可？\nはい\nページの取得\n成功\nインデックス登録を許可？\nはい\nインデックス作成\nユーザーが指定した正規 URL\nhttps://stats47.jp/geo/population-landslide-exposure\nGoogle が選択した正規 URL\n\nインデックス登録後にのみ決定されます\n詳細\n拡張機能とエクスペリエンス\ncheck_circle\nパンくずリスト\n1 件の有効なアイテムを検出しました\n\nURL 検査"
+      },
+      "geoIndexingRequest": {
+        "checkedAt": "2026-10-16T22:36:55.052Z",
+        "status": "ACCEPTED",
+        "url": "https://stats47.jp/geo/population-landslide-exposure",
+        "message": "check_circleインデックス登録をリクエスト済みURL を優先クロール キューに追加しました。 ページを複数回送信してもキューの順番や優先順位は変わりません。詳細表示しない"
+      },
+      "datasetLengthValidation": {
+        "status": "STARTED",
+        "checkedAt": "2026-10-16T22:37:35.035Z",
+        "url": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8IDhoLZGVzY3JpcHRpb24QAxgV&hl=ja",
+        "affectedItems": 775,
+        "text": "help_outline\nヘルプ\nmanage_accounts\nユーザー設定\n\t\nnotifications\nメッセージ\n1\n\nhome\nサマリー\nlightbulb_2\n分析情報\ntrending_up\n検索パフォーマンス\nkeyboard_arrow_down\nsearch\nURL 検査\nインデックス作成\nkeyboard_arrow_up\nfile_copy\nページ\nvideo_library\n動画\naccount_tree\nサイトマップ\nvisibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nデータセット\n\n項目「description」の文字列長が無効です\n\nエクスポート\n\n共有\n最終更新日: 2026/10/15\nerror\n項目「description」の文字列長が無効です\nこの問題があるアイテムは無効です。無効なアイテムは Google 検索のリッチリザルトの対象外です\n詳細\n\n検証: 開始\n開始日: 2026/10/17\n詳細を表示\n該当アイテム\n775\n2026/07/18\n2026/07/30\n2026/08/11\n2026/08/23\n2026/09/04\n2026/09/16\n2026/09/28\n2026/10/10\n900\n600\n300\n0\n例\n\n\nURL\n\t項目名\n\t\n前回のクロール\n\nhttps://stats47.jp/ranking/donations-prefecture\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/ranking/private-rented-housing-ratio\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/ranking/side-job-rate\n\t就業構造基本調査\t2026/10/16\n\nhttps://stats47.jp/ranking/sex-production-age-population-ratio\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/ranking/unmarried-ratio-male-40-44\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/ranking/community-building-volunteer-participation-rate-10plus\n\t社会生活基本調査\t2026/10/16\n\nhttps://stats47.jp/ranking/other-cosmetics-consumption-expenditure\n\t家計調査\t2026/10/16\n\nhttps://stats47.jp/ranking/flounder-consumption-expenditure\n\t家計調査\t2026/10/16\n\nhttps://stats47.jp/ranking/middle-school-teachers-ratio-female\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/ranking/social-expense-consumption-expenditure\n\t家計調査\t2026/10/16\n1 ページあたりの行数:\n5\n10\n25\n50\n100\n250\n500\n1～10/775\n"
+      },
+      "datasetMissingValidation": {
+        "status": "STARTED",
+        "checkedAt": "2026-10-16T22:38:04.610Z",
+        "url": "https://search.google.com/search-console/r/datasets/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=Cg8ICRoLZGVzY3JpcHRpb24QAxgV&hl=ja",
+        "affectedItems": 83,
+        "text": "help_outline\nヘルプ\nmanage_accounts\nユーザー設定\n\t\nnotifications\nメッセージ\n2\n\nhome\nサマリー\nlightbulb_2\n分析情報\ntrending_up\n検索パフォーマンス\nkeyboard_arrow_down\nsearch\nURL 検査\nインデックス作成\nkeyboard_arrow_up\nfile_copy\nページ\nvideo_library\n動画\naccount_tree\nサイトマップ\nvisibility_off\n非表示\nエクスペリエンス\nkeyboard_arrow_up\nspeed\nウェブに関する主な指標\nlock\nHTTPS\nショッピング\nkeyboard_arrow_up\nlayers\n商品スニペット\nlayers\n販売者のリスティング\n拡張\nkeyboard_arrow_up\nlayers\nパンくずリスト\nlayers\nデータセット\nセキュリティと手動による対策\nkeyboard_arrow_down\nlink_2\nリンク\ntrophy\n実績\nsettings\n設定\nfeedback\nフィードバックを送信\ninfo\nSearch Console の概要\nプライバシー利用規約\nデータセット\n\n項目「description」がありません\n\nエクスポート\n\n共有\n最終更新日: 2026/10/15\nerror\n項目「description」がありません\nこの問題があるアイテムは無効です。無効なアイテムは Google 検索のリッチリザルトの対象外です\n詳細\n\n検証: 開始\n開始日: 2026/10/17\n詳細を表示\n該当アイテム\n83\n2026/07/18\n2026/07/30\n2026/08/11\n2026/08/23\n2026/09/03\n2026/09/15\n2026/09/27\n2026/10/09\n90\n60\n30\n0\n例\n\n\nURL\n\t項目名\n\t\n前回のクロール\n\nhttps://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-residents\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/municipalities/ranking/foreign-resident-count\n\t社会・人口統計体系\t2026/10/16\n\nhttps://stats47.jp/municipalities/ranking/earthquake-retrofit-housing\n\t社会・人口統計体系\t2026/10/15\n\nhttps://stats47.jp/municipalities/ranking/current-balance-ratio-city?page=4\n\t社会・人口統計体系（市区町村データ・廃置分合処理済）\t2026/10/15\n\nhttps://stats47.jp/municipalities/ranking/department-supermarket-count\n\t社会・人口統計体系\t2026/10/15\n\nhttps://stats47.jp/municipalities/ranking/welfare-expense-municipal\n\t社会・人口統計体系\t2026/10/15\n\nhttps://stats47.jp/municipalities/ranking/outflow-commuter-student-population\n\t社会・人口統計体系\t2026/10/15\n\nhttps://stats47.jp/municipalities/ranking/japanese-population\n\t社会・人口統計体系\t2026/10/14\n\nhttps://stats47.jp/municipalities/ranking/physicians-in-medical-facilities\n\t社会・人口統計体系\t2026/10/14\n\nhttps://stats47.jp/municipalities/ranking/intellectual-disability-support-facility-capacity\n\t社会・人口統計体系\t2026/10/14\n1 ページあたりの行数:\n5\n10\n25\n50\n100\n250\n500\n1～10/83\n"
+      },
+      "completedAt": "2026-10-16T22:38:04.611Z"
+    },
+    "sourceDataBoundary": "No manual Geo R2 writes or Geo recalculation. The standard release workflow generated, verified and published metric metadata snapshots before building and publishing the Worker.",
+    "effectVerdict": "not assessed; technical recovery and Google validation start do not establish indexing or traffic improvement",
+    "testSummary": {
+      "releaseCi": {
+        "webUnitPassed": 2570,
+        "combinedPackagePassed": 2947,
+        "combinedPackageExpectedFail": 7,
+        "representativeE2ePassed": 37,
+        "countsAreNotAdditive": true
+      },
+      "deploy": {
+        "representativeRoutesPassed": 23,
+        "sitemapShards": 11
+      },
+      "postDeploy": {
+        "healthPassed": 11,
+        "playwrightPassedWithoutRetry": 45,
+        "playwrightFlakyPassedOnFirstRetry": 3,
+        "failedAfterRetry": 0,
+        "warmCacheSuccess": 28,
+        "warmCacheFailed": 0
+      }
+    },
+    "postDeployFlaky": {
+      "test": "apps/web/tests/smoke/responsive-layout.spec.ts:70",
+      "case": "ranking detail right-rail contract",
+      "viewports": [
+        375,
+        768,
+        1024
+      ],
+      "firstAttemptError": "main boundingBox was null after toBeVisible",
+      "retryResult": "each retry #1 passed",
+      "rootCause": "not established",
+      "followUp": "CI-SMOKE-BOUNDING-BOX-01"
+    }
+  }
 }

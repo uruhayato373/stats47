@@ -165,9 +165,11 @@ try {
     // 売上は閲覧数と別の API。再確認切れで読めなくても閲覧数の収集は失敗にしない (値は作らない)。
     try {
       await command('.claude/scripts/measurement/note-sales.mjs', [join(work, 'sales.json')], 120000);
+      capture(`.local/authenticated-measurement/${name}-${runId}/sales.json`);
       const sales = JSON.parse(readFileSync(join(work, 'sales.json'), 'utf8'));
       result.quality.revenue = sales.status === 'pass' ? sales.revenue : null;
       result.quality.revenueStatus = sales.status === 'pass' ? 'pass' : sales.code;
+      result.quality.revenueEvidenceAvailable = sales.status === 'pass';
     } catch { result.quality.revenueStatus = 'collection_failed'; }
     const gap = acceptedNoteGap(snapshot, cover);
     if (gap) result.knownIncomplete = gap;

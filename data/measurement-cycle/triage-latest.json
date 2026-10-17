@@ -1,47 +1,22 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W39",
-  "base": "2da5f3ad2d9ba40d426d9b7d6e0ec546dbca3188",
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/36359637476",
-  "generatedAt": "2026-09-27T23:50:00.317Z",
+  "week": "2026-W41",
+  "base": "0487df657964a084cf4102a23bc130f564b60871",
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/38983066199",
+  "generatedAt": "2026-10-16T23:48:03.239Z",
   "gate": "pass",
   "proposal": {
-    "updated": [
-      "ASSET-POLICY-BURNDOWN-01",
-      "DATA-ESTAT-FETCH-01",
-      "DATA-MANUAL-RESTORE-01",
-      "DEPS-RENOVATE-01",
-      "PERF-WORKER-P99-01",
-      "R2-STORAGE-01",
-      "RANK-THIN-01"
-    ],
-    "deleted": [
-      "AFF-SCOUT-PIPE-01"
-    ],
-    "logs": [
-      "affiliate-improvement"
-    ],
+    "updated": [],
+    "deleted": [],
+    "logs": [],
     "cards": []
   },
   "problems": [],
-  "changedFiles": [
-    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md",
-    ".claude/todo/improvements.md"
-  ],
+  "changedFiles": [],
   "improvements": {
-    "deleted": [
-      "AFF-SCOUT-PIPE-01"
-    ],
+    "deleted": [],
     "added": [],
-    "updated": [
-      "PERF-WORKER-P99-01",
-      "R2-STORAGE-01",
-      "DATA-ESTAT-FETCH-01",
-      "DATA-MANUAL-RESTORE-01",
-      "ASSET-POLICY-BURNDOWN-01",
-      "RANK-THIN-01",
-      "DEPS-RENOVATE-01"
-    ]
+    "updated": []
   },
   "backlogAdded": []
 }

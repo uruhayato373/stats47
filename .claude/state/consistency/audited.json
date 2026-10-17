@@ -1,7 +1,21 @@
 {
-  "hash": "0b18996392822d5343f4573a91ef1dad7089d7a2ede0c0b67619947bf0b340c6",
-  "audited_at": "2026-10-13T13:51:44",
+  "hash": "d0cd2df6720039033a77f074252a6c5683fe8ecd3e9eaf774fe29cb4823f1c86",
+  "audited_at": "2026-10-16T22:56:40",
   "files": [
-    ".claude/scripts/note/editor-helpers.sh"
+    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
+    ".agents/skills/analytics/gsc-improvement/SKILL.md",
+    ".agents/skills/management/monthly-review/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/agents/README.md",
+    ".claude/agents/gsc-analyst.md",
+    ".claude/agents/strategy-advisor.md",
+    ".claude/scripts/management/__tests__/review-cadence.test.mjs",
+    ".claude/scripts/management/lib/review-cadence.mjs",
+    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
+    ".claude/skills/analytics/gsc-improvement/SKILL.md",
+    ".claude/skills/management/README.md",
+    ".claude/skills/management/monthly-review/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md",
+    ".claude/skills/management/weekly-review/reference/runbook.md"
   ]
 }

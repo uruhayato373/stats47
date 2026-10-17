@@ -62,6 +62,10 @@ actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を
 
 意図的カテゴリ (redirect / robots / noindex / alt-canonical / duplicate) は実測せず `resolved-by-design` で放置。
 
+これは自動キューの処理範囲であり、当該カテゴリが正常という意味ではない。
+公開URLの誤ブロックや「robotsでブロックされたが登録済み」、メッセージ、Dataset等の拡張は
+`/gsc-improvement`「画面監査・技術是正とレビューへの引き渡し」で別途実測し、同じbacklogと監査証拠へ接続する。
+
 ## 命名規約 (observe-after-fix)
 
 > **Indexing API 送信は 2026-07-23 に退役**（公式に JobPosting/BroadcastEvent VideoObject 専用。
@@ -198,6 +202,7 @@ step には `timeout-minutes: 12` を置き、probe が長引いても週次計�
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
+- 全理由・通知・拡張の画面監査と本番是正/Google検証の結果も `/gsc-improvement` の共通手順で週次・月次レビューへ渡す。
 - 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎日稼働。
   2026-09-23 まではCI既定の `--limit 500` が検索実績上位 500 件だけで埋まり、是正キューを 1 件も検査していなかった (7日間 0/1,133)。
   枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役・2026-10-01 削除 (Indexing API 送信しない)。

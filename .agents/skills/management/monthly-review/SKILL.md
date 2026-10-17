@@ -50,6 +50,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 | 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
 | 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
 | GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |
+| GSC画面監査・技術是正 | `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md`。対象月の監査・修正・本番確認・Google再検証を読み、月末以降の観測は後続確認として分ける。全理由・メッセージ・拡張の月次画面点検は `.claude/skills/analytics/gsc-improvement/SKILL.md`「画面監査・技術是正とレビューへの引き渡し」に従う |
 
 ## Phase 2: 判定
 
@@ -71,6 +72,8 @@ node .claude/scripts/management/check-review-cadence.mjs
    月次の自動処理 (Cloudflare・CTR・カタログ) と定点観測 (競合・X) が対象月に走ったかもここに書く。走っていなければ課題・ブロッカーへ。
 8. **計測→記録→改善サイクル**: 対象月の各週で、計測 state の生成・無人 triage のゲート・週次レビューの有無が揃ったかを表にし、
    止まった段と週を書く (週次メトリクス Issue の「サイクルの健全性」節と同じ段の名前を使う)。
+   同節でGSCの問題ごとに、技術復旧・Google検証の遷移・未確認・再発と残P1/P2を集約する。同一問題を週ごとに重複加算せず、
+   意図した除外が残ることを未達としない。期限超過はカードID・owner・次の確認日を「来月への申し送り」へ渡す。
 
 ## Phase 3: 記録
 
@@ -104,6 +107,9 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 ## 計測→記録→改善サイクル
 | 週 | 計測 state | 無人 triage | 週次レビュー | 止まった段 |
+
+### GSC画面監査・技術是正
+| 問題・観測日 | 月内の修正/本番確認 | Google検証の遷移 | 残カードID・owner・次回確認日 | 証拠 |
 
 ## 点検と Issue
 | Issue / 自動処理 | 状態 | 振り分け |
@@ -143,6 +149,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 - 申し送りのすべての項目に実在する行き先がある。
 - KPI の数値は計測 state の値で、判定不能を 0 にしていない。
 - 効果判定を新しく下していない (エンジンと improvement-triage の判定を写しただけ)。
+- GSC監査・本番是正・Google再検証を対象月の実行/観測日時で集約し、検証中・未取得・再発・期限超過を実在する残カードへ接続している。
 - 収益の締めで判定不能の源を 0 円にしていない。期日の来た実験すべてに判定か延長理由がある。
 - 開いている `auto-generated` Issue と月次の自動処理がすべて「点検と Issue」で振り分けられている。
 - `check-review-cadence.mjs` が error 0。

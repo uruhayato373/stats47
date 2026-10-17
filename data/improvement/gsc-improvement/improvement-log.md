@@ -851,3 +851,20 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - 根拠データ: `.claude/state/surveys/portfolio.json` の `linkage` (auditedAt 2026-09-27) は metrics 2563 / resolved 2476 / unresolved 0 / coveragePct 100 / uncoveredStatsDataIds 0 / orphanSurveys 0 / badOverrides 0。2026-09-06監査では unresolved 214 (当初241から27件回収済) だった。2026-09-06から2026-09-27の3週間で残り214件が0件になった。
 - 未確認の点: これは保存済みの監査結果を読んだ判定で、09-07〜09-27の個別の回収コミットは確認していない。metrics 2563 と resolved 2476 の差 87件が、unresolved に数えられていない理由も未確認。検索クリックへの効果は別軸の話で、effect/* ラベルは付けない。
 - 再現コマンド: `node -e "console.log(JSON.parse(require('fs').readFileSync('.claude/state/surveys/portfolio.json','utf8')).linkage)"` (保存値の表示)。再監査は skill `/audit-survey-linkage`。
+
+
+### [GSC-GEO-DATASET-20261017] Geoの404・入れ子Dataset説明の本番是正
+
+- **本番反映**: 2026-10-17 JST、PR [#1140](https://github.com/uruhayato373/stats47/pull/1140)、main `dce97072cc5d8ad4b071719ef9650524087170bc`。release CI [38974174532](https://github.com/uruhayato373/stats47/actions/runs/38974174532)、deploy [38975435527](https://github.com/uruhayato373/stats47/actions/runs/38975435527)、post-deploy smoke [38977124768](https://github.com/uruhayato373/stats47/actions/runs/38977124768) は成功。
+- **技術的な結果**: 本番21チェック通過。Geo全7分析とsitemapが一致し、土砂災害ページは通常/Googlebotとも404→200、canonical正常・noindexなし。県別閲覧と代表4artifactのSHA・bytesがmanifestと一致。Datasetは実際のGSC例6ページ×通常/Googlebotで親・入れ子の説明文を検査し通過。全47県artifactの全数監査ではない。
+- **Googleで確認した結果**: Geo公開URLテストは取得成功・登録可能、登録リクエスト受理済み。Dataset description長さ不正775件・欠落83件は両方10-17に「検証: 開始」。Googleの保存済み404・件数の更新、インデックス登録、検証完了は未確認。effect/*は付けない。
+- **証拠 / 再確認**: `data/gsc/ui-audits/2026-10-17-remediation.json#productionRelease`。公開gateは `bash .github/scripts/smoke-test-routes.sh https://stats47.jp` と `bash .github/scripts/check-sitemap-index.sh https://stats47.jp`。
+- **残件**: 10-23のGSC検証結果と出典別creator/license（各1,092件の推奨警告）は `GSC-DATASET-NESTED-SCHEMA-01` で追跡。標準deployのメタデータ生成・publishを除き、Geoデータ再計算や手動R2変更は実施していない。
+- **テストの留保**: post-deployはhealth11/11、Playwright45 passed + 3 flaky（初回main boundingBox null、retry #1で全件成功）、warm-cache28/28。原因は未確定のため `CI-SMOKE-BOUNDING-BOX-01` へ起票。CI成功を初回全件成功とは扱わない。
+
+
+### [GSC-COVERAGE-DEPLOY-01] 残り4ページの通常登録リクエスト受理（2026-10-17）
+
+- 本番200・自己canonical・index可と、県ごとの本文・数値をPlaywrightで確認。最新日次Inspection（10-16）は4件ともNEUTRAL、直前のGSC画面も未登録soft404で、登録済みURLへの再送はしていない。
+- 栃木local-finance、静岡/茨城/福井labor-wagesは各1回の通常リクエストで「URLを優先クロールキューに追加」を確認。前日11件と合わせ15/15受付、未送信0件。gsc-4のみPAUSEDへ変更。専用Chrome・一時profile・google-admin lockは終了時に清掃。
+- 受理は登録完了ではない。10-23に修正後lastCrawlTime・登録を確認し、カードは進行中のまま。effect判定なし。証拠: `data/gsc/ui-audits/2026-10-16-remediation.json#release`。

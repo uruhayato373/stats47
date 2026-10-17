@@ -25,12 +25,13 @@ export const LABELS = Object.freeze({
   pending: "effect/pending",
 });
 
-/** ガードコード (4 種固定)。増やすときは rules と verdict JSON の読み手を同時に直す。 */
+/** ガードコード (窓不足とtarget欠落を分離)。増やすときは rules と verdict JSON の読み手を同時に直す。 */
 export const GUARD_CODES = Object.freeze([
   "insufficient-sample",
   "stale-source",
   "confounded",
   "insufficient-target",
+  "insufficient-window",
 ]);
 
 /**
@@ -82,10 +83,11 @@ export function decideVerdict(input, thresholds = DEFAULT_THRESHOLDS) {
       : null;
   if (win.notDue === true || (elapsed != null && elapsed < t.window.minWeeks)) {
     guards.push({
-      code: "insufficient-target",
+      code: "insufficient-window",
       detail: `判定窓が不足 (経過 ${elapsed ?? "?"} 週 < window.minWeeks ${t.window.minWeeks})`,
     });
-  } else if (target == null || target === 0) {
+  }
+  if (target == null || target === 0) {
     guards.push({
       code: "insufficient-target",
       detail: "想定効果値 (target delta) が機械可読な形で登録されていない",
@@ -261,7 +263,7 @@ export function formatVerdictSection(v, { subjectId, metricLabel = "指標", rep
   const b = v.boundaries;
   const guardText =
     v.guards.length === 0
-      ? "なし (4 ガードすべて通過)"
+      ? "なし (全ガード通過)"
       : v.guards.map((g) => `${g.code} (${g.detail})`).join(" / ");
   const targetText =
     e.target == null

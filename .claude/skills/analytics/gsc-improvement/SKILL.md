@@ -1,7 +1,7 @@
 ---
 name: gsc-improvement
 domain: site
-description: Google Search Console の検索パフォーマンスとインデックス問題を .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
+description: Google Search Console の検索実績・画面の全除外理由・通知・Dataset等の拡張を調査し、是正とGoogle再検証を週次・月次レビューへ渡す。Use when user says "GSC改善", "GSC画面確認", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
 primary_agent: gsc-analyst
 ---
 
@@ -18,8 +18,10 @@ active 一覧と append-only の詳細ログに責務分離して追跡するス
 | 目標しきい値設定 | git: `.claude/config/budgets/gsc-improvement/budgets.json` | プロジェクト設定 |
 | 詳細ログ (agent 用) | git: `data/improvement/gsc-improvement/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
 | 要約 (人間向け) | git: `.claude/todo/improvements.md` | active 施策の ID・要約・status・期日を俯瞰 |
-| 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が金曜 JST 05:00 に前週分を自動更新 |
-| 運用サイクル監査 | `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` | 計測→review→候補判断→plan→月次集約の接続状態 |
+| 週次スナップショット | `data/gsc/{history.csv,LATEST.md}` | GitHub Actions が金曜 JST 05:00 に前週分を自動更新 |
+| 運用サイクル監査 | `data/gsc/operations-cycle-LATEST.{json,md}` | 計測→review→候補判断→plan→月次集約の接続状態 |
+| 画面監査・技術是正の証拠 | `data/gsc/ui-audits/` | 日付付きJSON。GSC表示値・メッセージ・公開HTTP・Google検証の観測日時を区別する |
+| 技術是正の未完了タスク | `.claude/todo/backlog.md` | 優先度・owner・次の確認日・停止条件・完了条件。効果観測の施策と二重起票しない |
 
 ## 引数
 
@@ -42,6 +44,44 @@ GSC メトリクス取得の優先順:
 2. **`data/gsc/snapshots/` 配下の既存 CSV** — 既に取得済みの週次データ
 3. **GSC 画面からの手動エクスポート** — API で取れない index-coverage 詳細等
 
+### 画面監査・技術是正とレビューへの引き渡し
+
+検索実績API・既存coverageキューだけでは、今回の画面監査を実施したことにはならない。
+画面確認の運用は本節、URL群の機械分類は `/gsc-coverage-remediation` を正典とする。
+
+1. **propertyと日時**: `sc-domain:stats47.jp` を画面で照合する。認証profile・lock・終了時の清掃は
+   `docs/01_技術設計/07_Playwright認証プロファイル.md` に従う。ログイン・2FA・CAPTCHAは人間へ戻し、古い成功を最新扱いしない。
+2. **調査範囲**: 「ページ」の表示中の全除外理由、サイトマップ、メッセージ、新規/継続中の拡張エラーを確認する。
+   各理由の総件数・例示件数・レポート最終更新日・前回クロールを記録する。メッセージは通知日・本文・対象・必要な処置を読む。
+   Dataset等のアイテム数をページ数へ置き換えない。未読・未取得の理由/通知は0件とせず未確認とする。
+3. **本番との突合と優先順位**: sitemap/内部リンクにある現役URLの404・5xx・意図しないrobots/noindex/canonicalを優先する。
+   通常/Googlebot UAのHTTP・本文・canonical・robotsと、必要なら実際のGoogleライブテストを突合する。
+   意図的な廃止・転送・重複は正常な除外として分ける。カテゴリ名だけで正常/異常を決めず、未登録総数0を目標にしない。
+   構造化データは親だけでなく入れ子を辿り、出典の作成者・利用条件を推測で補完しない。
+4. **是正**: 原因を特定し、既存owner（URL/画面・Geo・Dataset・計測期間等）へ渡す。
+   採用した未完了策だけを既存backlogへ統合し、P1/P2/P3・実行順・次の確認日・停止/完了条件を付ける。
+   ローカル検証、承認済みの本番反映、公開HTTP/データ/回帰gateの結果を分けて記録する。
+5. **Googleでの再検証**: 本番の修正確認後、依頼範囲でGSCの該当問題の「修正を検証」やネイティブの登録リクエストを行う。
+   受理・初期検証中・検証開始・合格/失敗・実際の登録/除外を別々に記録し、件数更新や登録完了を推測しない。
+   通常ページにIndexing APIを使わず、割当超過時に迂回・反復送信しない。技術復旧を検索流入の効果と混同しない。
+6. **記録**: `data/gsc/ui-audits/` の監査/是正JSONと、`data/improvement/gsc-improvement/improvement-log.md` に根拠を残す。
+   観測日、対象、報告値と例示範囲、修正/PR/deploy、公開確認、Google検証状態、未確認点、残カードIDと次回確認日を含める。
+   既存監査は保持し、後続観測は日時付きで区別する。保存先と保持数は `config/datasets.mjs` の登録を使う。
+
+**週次**: `/weekly-review` は上記証拠・詳細ログ・残backlogを必ず読み、「計測→記録→改善サイクル」に技術是正を載せる。
+新しい通知、前回監査から7日超、または次回確認日到達時は、未確認/検証中の該当画面を本節で再確認する。
+取得できなければ前回値のまま未確認としてBlockersへ渡す。レビュー本文には少なくとも
+`対象/問題 | 観測日・報告値/例示範囲 | 本番確認 | Google検証 | 残カードID・次回確認日 | 証拠`
+を残す。新規対応が無い週も「観測済みで変更なし」と「未取得」を区別する。
+
+**月次**: `/monthly-review` は対象月の週次レビューに加え、同じ証拠・詳細ログ・残backlogを読み、
+その月に扱った問題ごとの技術復旧、Google再検証の遷移、残P1/P2・期限超過・再発を集約する。
+月次の画面点検は表示中の全理由・メッセージ・拡張を一巡し、対象月末より後の観測は月末値へ混ぜず「後続確認」とする。
+同じ問題を毎週の値から重複加算せず、意図した除外が残ることだけで未達としない。
+
+作業実績は実行日時のJST週/月、GSC件数はレポートの観測日、検索KPIは確定7日/非重複比較窓に帰属させる。
+後日の本番反映・検証開始を過去週の完了として遡及記載しない。期日到達の未完了は実在するカードIDで申し送る。
+
 ### Step 2: mode 別の処理
 
 #### mode = status（デフォルト）
@@ -53,6 +93,7 @@ GSC メトリクス取得の優先順:
 3. data/improvement/gsc-improvement/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. data/gsc/LATEST.md を Read し週次推移を取得
 5. `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor` を実行し、未接続工程を取得
+6. data/gsc/ui-audits/ と詳細ログ・backlogを Read し、本番反映/Google検証中/次回確認日を上記契約で要約
 
 出力:
 - 最新 snapshot の主要指標 + 目標超過メトリクス

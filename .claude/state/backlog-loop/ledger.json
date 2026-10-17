@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T21:58:30.748Z",
+  "updatedAt": "2026-10-16T23:52:13.394Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7545,6 +7545,170 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-16T21:58:30.748Z"
+    },
+    "GSC-GEO-SITEMAP-404-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T22:47:58.087Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "bash .github/scripts/smoke-test-routes.sh https://stats47.jp",
+              "bash .github/scripts/check-sitemap-index.sh https://stats47.jp",
+              "node --import tsx /tmp/gsc-release-production-probe.mts"
+            ],
+            "pass": true
+          },
+          "evidence": "PR1140/main dce97072c、Deploy38975435527・postdeploy38977124768成功。route23/23、sitemap11shard、独立21チェックと4artifact SHA/bytes一致。GSCライブ取得成功・登録可能、登録リクエスト受理。全47県artifactの全数監査とGoogle登録完了は未確認。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-10-16T22:48:59.697Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "bash .github/scripts/smoke-test-routes.sh https://stats47.jp",
+              "bash .github/scripts/check-sitemap-index.sh https://stats47.jp",
+              "node --import tsx /tmp/gsc-release-production-probe.mts",
+              "gh run view 38977124768 --json status",
+              "conclusion",
+              "headSha",
+              "url",
+              "jobs"
+            ],
+            "pass": true
+          },
+          "evidence": "完了証跡の追記: Deploy38975435527とpostdeploy38977124768は成功。公開21チェック・Geo7分析・4artifact照合PASS。追加ログ精査でPlaywright45 passed/3 flaky（各retry #1で成功）を確認し、原因未確定のmain boundingBox nullはCI-SMOKE-BOUNDING-BOX-01へ分離した。",
+          "failReason": null,
+          "followUps": [
+            "CI-SMOKE-BOUNDING-BOX-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T22:48:59.697Z"
+    },
+    "GA4-NSM-SNAPSHOT-RECONCILE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T23:47:02.083Z",
+          "runId": null,
+          "model": "gpt-6",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/metrics/__tests__/metrics-reader-ga4.test.mjs",
+              "npm run type-check"
+            ],
+            "pass": true
+          },
+          "evidence": "Japan同一期間のdimensionなしAPI実測が正典5484users/6242sessions/4245engagedと一致。チャネル合算を除去し欠測は例外、実測0を許可する3回帰テストPASS。data/ga4/reconciliations/2026-10-17-2026-W41.json。過去snapshot保持。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T23:47:02.083Z"
+    },
+    "ADSENSE-BASELINE-VERDICT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T23:47:02.150Z",
+          "runId": null,
+          "model": "gpt-6",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
+              "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review --week 2026-W41 --strict"
+            ],
+            "pass": true
+          },
+          "evidence": "新account W42-W45の型付きbaseline契約、真のtarget欠落FAILとaccount横断拒否の回帰PASS。原本hash付きappend-only再評価をstrict監査が採用し10PASS1WARN。原本保持、baselineは0/4週で11/13観測待ち。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T23:47:02.150Z"
+    },
+    "CI-IMPROVEMENT-LOG-PATH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-16T23:52:13.394Z",
+          "runId": null,
+          "model": "gpt-6",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs",
+              "gh run view 38983066199 --log"
+            ],
+            "pass": true
+          },
+          "evidence": "旧ログpath stagingをdata/improvementへ修正。実git remote fixtureで更新/削除のwrite-backと対象外の保持PASS。実CI38983066199がgate pass、W41 triage-latestをcommit083d610b5としてdevelopへpush。変更提案0件は0件として記録。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-16T23:52:13.394Z"
     }
   }
 }

@@ -32,14 +32,18 @@ effect ラベルは、下記 3 条件を**すべて**満たす場合に限り機
    `target` / `attainment` / `sources[{name,observedAt,freshness}]` / `guards` /
    `thresholdsVersion` を記録し、improvement-log の `### 判定` に判定・根拠データ・閾値 SSOT・
    ガード・再現コマンドの 5 項目を出す
-3. **判定不能を宣言する** — 4 ガード（`insufficient-sample` / `stale-source` / `confounded` /
-   `insufficient-target`）が 1 つでも hit したら `effect/pending` に留める。これは人間ゲートの
+3. **判定不能を宣言する** — 5 ガード（`insufficient-sample` / `stale-source` / `confounded` /
+   `insufficient-target` / `insufficient-window`）が 1 つでも hit したら `effect/pending` に留める。これは人間ゲートの
    復活ではなく「閾値ルールが判定不能と宣言している状態」で、`guards[]` がその記録である
 
 **エンジンは観測差分と閾値の比較のみを出力し、原因や外部仕様を出力してはならない。** 「なぜ未達か」
 「Google がどう扱うか」は engine の出力に含めない（人間 / improvement-triage が状況 2・3 の要件を
 満たして書く）。想定効果値は `[target: ±N 単位]` の明示記法だけを機械可読とし、散文からの推測はしない
-（取れなければ `insufficient-target` で pending に留まる = 状況 4 の担保）。
+（取れなければ `insufficient-target` で pending に留まる = 状況 4 の担保）。窓不足は
+`insufficient-window` とし、targetも欠けている効果実験には両方を記録する。
+`adsense-measurement-contract.mjs` の `baseline-observation` は効果実験と区別し、再開後の
+同一account cohortの週の充足・観測期限だけを検査する。target・効果差分は作らず、4週が揃っても
+配置実験の効果確定とはしない。過去verdictは改変せず、新CLI出力を明示して再監査する。
 
 **統計的有意性は導入しない** — 週次 snapshot は各 1 点で分散が取れず、比率検定を入れると
 「有意性を装った推測」を作るだけになる。判定は達成率（第一基準）と noise floor（第二基準）の 2 段のみ。
@@ -180,7 +184,7 @@ GSC（URL Inspection API）/ GA4 / PSI・CrUX / Googlebot UA での HTTP 確認 
 このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
 ```
 
-**このチェックリストは手動判定時に必須**。閾値エンジン経由の自動判定では engine の 4 ガードが
+**このチェックリストは手動判定時に必須**。閾値エンジン経由の自動判定では engine の 5 ガードが
 同等の役割を果たし、`guards` フィールドがその記録である（対応関係は下表）。
 
 | 実証チェックリストの項目 | 自動判定での担保 |

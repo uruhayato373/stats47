@@ -309,3 +309,13 @@ test('領域表の名前が domains.json の領域と食い違えば DG073、一
   assert.match(msgs, /domains\.json の領域が領域表に無い: 存在しない領域/);
   assert.match(msgs, /領域表の領域が domains\.json に無い/);
 });
+
+
+test('DG080は登録済みtyped baselineだけをtarget欠落と区別する', () => {
+  const md = (id, metric, title) => `## Tier 1\n\n| ID | タイトル | Status | Due | Owner | Metric |\n|---|---|---|---|---|---|\n| ${id} | ${title} [kpi: ad-yield] | pending | 2026-11-13 | a | ${metric} |\n`;
+  const nodes = [...KPI_NODES, { id: 'ad-yield' }];
+  const audit = (id, metric, title) => auditKpiLinkage({ lanes: [], improvementRows: parseImprovementRows(md(id, metric, title)), kpiNodes: nodes, files: {} }).issues.filter(i => i.code === 'DG080');
+  assert.deepStrictEqual(audit('ADSENSE-PLACEMENT-01', 'adsense', '再開baseline観測'), []);
+  assert.equal(audit('ADSENSE-NEW-EXPERIMENT', 'adsense', 'baseline観測だからtarget不要').length, 1);
+  assert.equal(audit('ADSENSE-PLACEMENT-01', 'gsc', 'baseline').length, 1);
+});

@@ -40,6 +40,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseCsv } from "csv-parse/sync";
 import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
+import { probeCoverageUrls } from "./lib/coverage-probe.mjs";
 import { extractLocs } from "../search-growth/lib/live-sitemap.mjs";
 
 import {
@@ -444,43 +445,15 @@ function readDrilldowns() {
 
 // ── 本番 HTTP 実測 (Googlebot UA, redirect manual, 並列) ─────────
 // proxy dispatcher はファイル冒頭 (--probe モードより前) で定義している。
-async function probe(url) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 12000);
-  try {
-    const dispatcher = await getProxyDispatcher();
-    const res = await fetch(url, {
-      method: "GET",
-      headers: { "User-Agent": GOOGLEBOT_UA },
-      redirect: "manual",
-      signal: ctrl.signal,
-      ...(dispatcher ? { dispatcher } : {}),
-    });
-    return res.status;
-  } catch {
-    return 0;
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-async function probeAll(urls, limit) {
-  const results = new Map();
-  let idx = 0;
-  const CONC = 12;
-  let done = 0;
-  async function worker() {
-    while (idx < urls.length) {
-      const u = urls[idx++];
-      results.set(u, await probe(u));
-      done++;
-      if (done % 100 === 0) process.stderr.write(`  probed ${done}/${urls.length}\r`);
-    }
-  }
-  const target = limit ? urls.slice(0, limit) : urls;
-  // limit は URL 配列に既に適用済みとして扱う (呼び出し側で slice)
-  await Promise.all(Array.from({ length: CONC }, worker));
-  process.stderr.write("\n");
+async function probeAll(urls) {
+  const dispatcher = await getProxyDispatcher();
+  const { results, elapsedMs } = await probeCoverageUrls(urls, {
+    dispatcher, userAgent: GOOGLEBOT_UA,
+    onProgress(done, total) {
+      if (done % 100 === 0) process.stderr.write(`  probed ${done}/${total}\r`);
+    },
+  });
+  console.error(`\n[probe] status + HTML: ${urls.length} GET / ${elapsedMs}ms`);
   return results;
 }
 
@@ -488,13 +461,13 @@ async function probeAll(urls, limit) {
 // どちらも手動の再確認で 200 だった。失敗した URL だけ間隔を空けて測り直し、最後の結果で分類する。
 const REPROBE_DELAYS_MS = [3000, 10000];
 const isProbeFailure = (status) => status === 0 || status >= 500;
-async function reprobeFailures(httpByUrl) {
+async function reprobeFailures(results) {
   for (const delay of REPROBE_DELAYS_MS) {
-    const failed = [...httpByUrl].filter(([, status]) => isProbeFailure(status)).map(([url]) => url);
+    const failed = [...results].filter(([, result]) => isProbeFailure(result.status)).map(([url]) => url);
     if (!failed.length) return;
     console.error(`[probe] 5xx/timeout ${failed.length} URL を ${delay / 1000}s 後に再測定`);
     await new Promise((resolve) => setTimeout(resolve, delay));
-    for (const [url, status] of await probeAll(failed, null)) httpByUrl.set(url, status);
+    for (const [url, result] of await probeAll(failed)) results.set(url, result);
   }
 }
 
@@ -531,47 +504,6 @@ async function fetchSitemapKeys() {
   const keys = new Set();
   for (const xml of pages) for (const loc of extractLocs(xml)) keys.add(sitemapKey(loc));
   return keys.size ? keys : null;
-}
-
-async function probeHtmlSignals(url) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 12000);
-  try {
-    const dispatcher = await getProxyDispatcher();
-    const res = await fetch(url, {
-      method: "GET",
-      headers: { "User-Agent": GOOGLEBOT_UA },
-      redirect: "manual",
-      signal: ctrl.signal,
-      ...(dispatcher ? { dispatcher } : {}),
-    });
-    if (res.status !== 200) return null;
-    const contentType = res.headers.get("content-type") ?? "";
-    if (!contentType.includes("text/html")) return null;
-    const html = await res.text();
-    return {
-      ...readHtmlIndexSignals(html, res.headers.get("x-robots-tag") ?? ""),
-      canonical: readCanonicalUrl(html),
-    };
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-async function probeHtmlSignalsAll(urls) {
-  const results = new Map();
-  let idx = 0;
-  const CONC = 6;
-  async function worker() {
-    while (idx < urls.length) {
-      const url = urls[idx++];
-      results.set(url, await probeHtmlSignals(url));
-    }
-  }
-  await Promise.all(Array.from({ length: CONC }, worker));
-  return results;
 }
 
 // ── ranking キーの GONE 誤登録検出 (2026-07-03 の 56件 410 誤配信の再発防止) ──
@@ -686,20 +618,10 @@ async function build() {
     console.error(`[probe] --no-probe: ${uniqActionable.length} URL はキャッシュ値を使用`);
   } else {
     console.error(`[probe] ${uniqActionable.length} actionable URL を Googlebot UA で実測中...`);
-    httpByUrl = await probeAll(uniqActionable, null);
-    await reprobeFailures(httpByUrl);
-    const htmlSignalUrls = drilldowns
-      .filter(
-        (r) =>
-          ACTIONABLE.has(r.category) &&
-          httpByUrl.get(r.url) === 200 &&
-          !isIntentionallyNonIndexableResource(r.url),
-      )
-      .map((r) => r.url);
-    console.error(
-      `[probe] HTTP 200 ${htmlSignalUrls.length} URL の HTML index signal を確認中...`,
-    );
-    htmlSignalsByUrl = await probeHtmlSignalsAll([...new Set(htmlSignalUrls)]);
+    const results = await probeAll(uniqActionable);
+    await reprobeFailures(results);
+    httpByUrl = new Map([...results].map(([url, result]) => [url, result.status]));
+    htmlSignalsByUrl = new Map([...results].map(([url, result]) => [url, result.signals]));
   }
   // --no-probe では本番を叩かず、前回の in_sitemap を使う
   const sitemapKeys = noProbe ? null : await fetchSitemapKeys();
@@ -986,7 +908,9 @@ function writeLatest(out, observeCount) {
   fs.writeFileSync(LATEST_PATH, L.join("\n") + "\n");
 }
 
-build().catch((e) => {
+try {
+  await build();
+} catch (e) {
   console.error(e);
-  process.exit(1);
-});
+  process.exitCode = 1;
+}

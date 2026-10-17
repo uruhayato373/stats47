@@ -1,7 +1,43 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyLoginOutcome, LOGIN, passTotpIfOffered } from '../refresh-session.mjs';
+import { classifyLoginOutcome, LOGIN, passTotpIfOffered, refresh } from '../refresh-session.mjs';
+import { mkdtempSync, mkdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { parseKeychainAccount, totpCode } from '../credential-store.mjs';
+
+test('failed automatic login stays paused; explicit human recovery saves only a verified session', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'stats47-human-recovery-'));
+  const dir = join(root, '.local/authenticated-measurement');
+  mkdirSync(dir, { recursive: true });
+  const marker = join(dir, 'note.autologin-failed');
+  writeFileSync(marker, 'previous automated failure');
+  let opens = 0, checks = 0, validState = true;
+  const page = {
+    goto: async () => {}, url: () => LOGIN.note.checkUrl, waitForTimeout: async () => {},
+    evaluate: async () => ({ hasPassword: checks++ === 0, hasChallenge: checks < 2 }),
+  };
+  const chromiumImpl = { launchPersistentContext: async () => {
+    opens++;
+    return { pages: () => [page], addCookies: async () => {}, storageState: async () => ({ cookies: validState ? [{ name: 'fixture', value: 'test', domain: '.note.com', path: '/' }] : [], origins: [] }), close: async () => {} };
+  } };
+  const opts = { root, publish: false, headed: true, chromiumImpl };
+  try {
+    assert.equal((await refresh('note', { ...opts, waitHuman: false })).status, 'blocked');
+    assert.equal(opens, 0);
+    assert.ok(existsSync(marker));
+    const recovered = await refresh('note', { ...opts, waitHuman: true });
+    assert.equal(recovered.status, 'ok');
+    assert.equal(recovered.loggedInBy, 'human');
+    assert.equal(checks, 2);
+    assert.ok(!existsSync(marker));
+    assert.ok(existsSync(join(root, '.local/playwright-note-state.json')));
+    writeFileSync(marker, 'another failure');
+    validState = false;
+    await assert.rejects(refresh('note', { ...opts, waitHuman: true }), /session_missing/);
+    assert.ok(existsSync(marker));
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
 
 test('ログイン後に管理画面へ着地しパスワード欄が無ければ ok', () => {
   assert.equal(classifyLoginOutcome('a8', { url: 'https://media-console.a8.net/home', hasPassword: false, hasChallenge: false }), 'ok');

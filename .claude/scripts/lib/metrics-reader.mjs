@@ -7,7 +7,7 @@
  * (期間導出は ../metrics/lib/periods.mjs が機械 SSOT)。
  * GA4 KPI は country=Japan clean slice。GSC は日別欠損を検出し insufficient-data で WoW を止める。
  *
- * stats47 の NSM は「週間エンゲージドセッション数」(GA4 engagedSessions)。
+ * stats47 の NSM は週次収益。engagedSessions は流入品質の補助KPI。
  * 定義は `docs/00_プロジェクト管理/02_収益化戦略.md` を参照。
  *
  * 必要な資源:
@@ -98,14 +98,20 @@ async function runGa4Report(auth, body) {
   return data;
 }
 
-async function fetchGa4Weekly(ranges) {
-  const auth = createAuth([
+export async function fetchGa4Weekly(ranges, { runReport = null } = {}) {
+  const auth = runReport ? null : createAuth([
     "https://www.googleapis.com/auth/analytics.readonly",
   ]);
+  const report = runReport ?? ((body) => runGa4Report(auth, body));
+  const aggregateRequest = (range) => ({
+    dateRanges: [{ startDate: range.start, endDate: range.end }],
+    metrics: ["activeUsers", "sessions", "engagedSessions"].map((name) => ({ name })),
+    dimensionFilter: GA4_JAPAN_FILTER,
+  });
 
   // KPI は Japan-only clean slice。raw (無フィルタ) は pollution 監視専用に別取得する。
-  const [thisRes, prevRes, rawThisRes] = await Promise.all([
-    runGa4Report(auth, {
+  const [thisRes, prevRes, rawThisRes, thisTotals, prevTotals] = await Promise.all([
+    report({
       dateRanges: [{ startDate: ranges.this.start, endDate: ranges.this.end }],
       dimensions: [{ name: "sessionDefaultChannelGroup" }],
       metrics: [
@@ -117,7 +123,7 @@ async function fetchGa4Weekly(ranges) {
       dimensionFilter: GA4_JAPAN_FILTER,
       limit: 20,
     }),
-    runGa4Report(auth, {
+    report({
       dateRanges: [{ startDate: ranges.prev.start, endDate: ranges.prev.end }],
       dimensions: [{ name: "sessionDefaultChannelGroup" }],
       metrics: [
@@ -129,10 +135,12 @@ async function fetchGa4Weekly(ranges) {
       dimensionFilter: GA4_JAPAN_FILTER,
       limit: 20,
     }),
-    runGa4Report(auth, {
+    report({
       dateRanges: [{ startDate: ranges.this.start, endDate: ranges.this.end }],
       metrics: [{ name: "sessions" }, { name: "engagedSessions" }],
     }),
+    report(aggregateRequest(ranges.this)),
+    report(aggregateRequest(ranges.prev)),
   ]);
 
   const toChannelMap = (res) => {
@@ -185,24 +193,19 @@ async function fetchGa4Weekly(ranges) {
   });
   channels.sort((a, b) => b.thisUsers - a.thisUsers);
 
-  const total = channels.reduce(
-    (acc, c) => ({
-      thisUsers: acc.thisUsers + c.thisUsers,
-      prevUsers: acc.prevUsers + c.prevUsers,
-      thisSessions: acc.thisSessions + c.thisSessions,
-      prevSessions: acc.prevSessions + c.prevSessions,
-      thisEngagedSessions: acc.thisEngagedSessions + c.thisEngagedSessions,
-      prevEngagedSessions: acc.prevEngagedSessions + c.prevEngagedSessions,
-    }),
-    {
-      thisUsers: 0,
-      prevUsers: 0,
-      thisSessions: 0,
-      prevSessions: 0,
-      thisEngagedSessions: 0,
-      prevEngagedSessions: 0,
-    },
-  );
+  // Channel rows are breakdowns, not period-wide deduplicated totals.
+  // Use the same dimensionless Japan report as the canonical GA4 summary.
+  const values = (response) => {
+    const metrics = response.rows?.[0]?.metricValues;
+    const parsed = metrics?.map((metric) => metric.value === "" ? NaN : Number(metric.value));
+    if (!parsed || parsed.length !== 3 || parsed.some((value) => !Number.isFinite(value))) {
+      throw new Error("insufficient-data: Japan-only aggregate totals missing or invalid");
+    }
+    return parsed;
+  };
+  const [thisUsers, thisSessions, thisEngagedSessions] = values(thisTotals);
+  const [prevUsers, prevSessions, prevEngagedSessions] = values(prevTotals);
+  const total = { thisUsers, prevUsers, thisSessions, prevSessions, thisEngagedSessions, prevEngagedSessions };
   total.userDelta = total.thisUsers - total.prevUsers;
   total.userDeltaPct =
     total.prevUsers > 0 ? (total.userDelta / total.prevUsers) * 100 : null;
@@ -480,7 +483,7 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
     notes: [
       `週次期間契約: KPI/WoW は finalized7d (GSC ${ranges.gsc.this.start}〜${ranges.gsc.this.end} / GA4 ${ranges.ga4.this.start}〜${ranges.ga4.this.end}) と直前の重複しない previous7d のみ`,
       "GA4 は country=Japan clean slice (raw は pollution 監視専用)",
-      "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計・Japan-only)",
+      "NSM = 週次収益。GA4 engagedSessions は Japan-only 期間集計の補助KPI (チャネル行の合算ではない)",
       "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md",
     ],
   };
@@ -520,7 +523,7 @@ export function formatNsmSection(metrics) {
     lines.push("|---|---:|---:|---:|");
     const t = metrics.ga4.total;
     lines.push(
-      `| **engagedSessions (★NSM)** | **${t.thisEngagedSessions}** | ${t.prevEngagedSessions} | ${fmtDelta(t.engagedSessionDelta, t.engagedSessionDeltaPct)} |`,
+      `| **engagedSessions (Japan-only)** | **${t.thisEngagedSessions}** | ${t.prevEngagedSessions} | ${fmtDelta(t.engagedSessionDelta, t.engagedSessionDeltaPct)} |`,
     );
     lines.push(
       `| activeUsers | ${t.thisUsers} | ${t.prevUsers} | ${fmtDelta(t.userDelta, t.userDeltaPct)} |`,
