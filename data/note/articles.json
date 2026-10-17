@@ -11432,21 +11432,23 @@
       "title": "CSVをExcelで開くと文字化けする原因と直し方 ── UTF-8とShift_JISの違いを1回で理解する",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-csv-mojibake",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "6cb3c16d45c7bb86155ae43ac05f0b5eb0be8264120ac822257bd4623b87ec7f",
+          "sha256": "fe247ebb3cb911bba35525fb11804faf688630e89b3f6be360519508c9a1d14b",
           "files": 6,
-          "bytes": 252953,
-          "savedAt": "2026-10-17T04:57:52.429Z"
+          "bytes": 252900,
+          "savedAt": "2026-10-17T06:07:19.308Z"
         },
-        "verifiedAt": "2026-10-17T04:57:52.429Z"
+        "verifiedAt": "2026-10-17T06:07:19.308Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nc884a0a01b71",
+      "publishedAt": "2026-10-17"
     }
   ]
 }

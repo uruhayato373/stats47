@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-17T04:58:12.140Z",
+  "updatedAt": "2026-10-17T06:07:28.297Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -25786,7 +25786,7 @@
     },
     {
       "articleKey": "h-howto-csv-mojibake",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nc884a0a01b71",
       "revisions": [
         {
           "sha256": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
@@ -25808,9 +25808,9 @@
             "evidenceSha256": "29ebdd012fb9aa925bb82ec899c5f4dc3ab1f83cf91b635784dee34839af50a8"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "2026-10-17 オーナーがチャットで NCI-00502 の採用を指示 (管理画面での保存がこの台帳に届いていなかったため CLI で記録)。原寸・幅320pxで掲載文言5行の一致・人物/ロゴなし・補足の判読を確認済み。",
+            "reviewedAt": "2026-10-17T05:59:16.314Z"
           },
           "provenance": {
             "renderer": "note-imagegen-cover-v1",
@@ -25832,11 +25832,41 @@
               "planSha256": "b3f99087f842bca880243871cf51623f33f97b07b8cfa9bc4e18162eabde0f77"
             }
           }
+        },
+        {
+          "sha256": "699ef33ec4e5f44f1f34c27ab8c29b47321f0bdb6279b110c56101de9c582c32",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-csv-mojibake/revisions/699ef33ec4e5f44f1f34c27ab8c29b47321f0bdb6279b110c56101de9c582c32.png"
+          },
+          "bytes": 381965,
+          "id": "699ef33ec4e5f44f1f34c27ab8c29b47321f0bdb6279b110c56101de9c582c32",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-17T06:07:25.177Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/325325217/rectangle_large_type_2_857a7d099869fcda4eb23a775bc25e95.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "699ef33ec4e5f44f1f34c27ab8c29b47321f0bdb6279b110c56101de9c582c32"
+          }
         }
       ],
       "candidateRevisionId": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
-      "approvedRevisionId": null,
-      "published": null,
+      "approvedRevisionId": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/325325217/rectangle_large_type_2_857a7d099869fcda4eb23a775bc25e95.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-17T06:07:25.177Z",
+        "revisionId": "699ef33ec4e5f44f1f34c27ab8c29b47321f0bdb6279b110c56101de9c582c32"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00502",

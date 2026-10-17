@@ -2577,6 +2577,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "h-howto-csv-mojibake": {
+      "vertical": "stats47-note",
+      "title": "CSVをExcelで開くと文字化けする原因と直し方 ── UTF-8とShift_JISの違いを1回で理解する",
+      "url": "https://note.com/stats47/n/nc884a0a01b71",
+      "is_paid": false,
+      "published_at": "2026-10-17",
+      "r2_path": "note/stats47-note/h-howto-csv-mojibake",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
