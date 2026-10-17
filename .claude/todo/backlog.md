@@ -329,7 +329,8 @@ updated: 2026-10-17
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
 - **中身 (2026-10-17 実装・localhost 確認済み・未デプロイ)**: ① 職場から読まれるブログ 10 記事に、読者の仕事に合うデータ集の案内 (`apps/web/src/features/products/storefront.ts` の `BLOG_DATA_PRODUCTS`) ② CSV ダウンロード後に「業務の資料」と答えた人へ、その分野のデータ集の案内 (`findDataProductForRanking`)、「学習・研究」には出典の書き方 ③ ランキングの地図用ダウンロード (`/api/ranking/<key>/download?format=kml|geojson`、最新年を都道府県に塗り分け。総人口で 47 県・2.5MB・XML 妥当を確認)。
-- **次**: ① オーナー承認のうえ、他の変更とまとめて 1 回デプロイする (`.claude/rules/branch-workflow.md`) ② 本番で KML を Google マイマップに読み込めることを確かめる ③ 反映日を境界に、4 週の `nav_click` (`surface=blog_product` / `ranking_product`) と `file_download` の `file_extension` (kml / geojson) を読む。効果判定は improvements へ別 ID で引き渡す。
+- **2026-10-17 本番反映済み** (PR #1143・deploy 04:48Z 成功): 本番で KML 47 県・XML 妥当・Content-Type、GeoJSON 47 件、Shift_JIS の先頭 `93 73` (「?」解消)、ランキングページの地図用リンク、家計ブログの商品案内を確認した。
+- **次**: ① ~~デプロイ~~ (済) ② 本番の KML を Google マイマップに読み込めることを確かめる (Google ログインが要るのでオーナー) ③ 反映日を境界に、4 週の `nav_click` (`surface=blog_product` / `ranking_product`) と `file_download` の `file_extension` (kml / geojson) を読む。効果判定は improvements へ別 ID で引き渡す。
 - **停止条件**: Workers の CPU が閾値を超える場合 (KML 生成は 1 回数十ミリ秒の想定で未計測。`CF-CPU-SURGE-01` と照合) は地図形式を外す。
 - **完了条件**: 本番で 3 つの導線が表示・動作し、4 週の計測の開始日が improvements に記録された。
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-16T00:22:59.996Z",
+  "updatedAt": "2026-10-17T04:58:12.140Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -25782,6 +25782,72 @@
         "policyId": "NCP-006",
         "policyVersion": 3,
         "brief": null
+      }
+    },
+    {
+      "articleKey": "h-howto-csv-mojibake",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-csv-mojibake/revisions/3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3.png"
+          },
+          "bytes": 2183002,
+          "id": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-b3f99087f842",
+          "createdAt": "2026-10-17T04:57:10.390Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "29ebdd012fb9aa925bb82ec899c5f4dc3ab1f83cf91b635784dee34839af50a8"
+          },
+          "review": {
+            "status": "pending",
+            "reason": null,
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "29ebdd012fb9aa925bb82ec899c5f4dc3ab1f83cf91b635784dee34839af50a8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/h-howto-csv-mojibake/inputs/29ebdd012fb9aa925bb82ec899c5f4dc3ab1f83cf91b635784dee34839af50a8.json"
+              },
+              "bytes": 10464
+            },
+            "production": {
+              "id": "NCI-00502",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "b3f99087f842bca880243871cf51623f33f97b07b8cfa9bc4e18162eabde0f77"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3b53118852b16278676e2ba3bdbbf2b350e02f5f89b0f2e793c26caf186ad8a3",
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00502",
+        "policyId": "NCP-007",
+        "policyVersion": 4,
+        "brief": {
+          "headline": "CSVの文字化け\n直し方",
+          "subline": "UTF-8とシフトJISの違い",
+          "subject": "実務カテゴリの机上の資料構図。青と黄色、白い紙のカットアウト。主見出しは上左に大きく2行。右下に無人のノートPCと、罫線だけの無文字の表を印刷した紙1枚の2点だけを重ね、太い輪郭で整理された作業の印象に。画面と紙は無文字で、実在UI・Excelやスプレッドシートのロゴ・記号化けの文字列・グラフ・地図・指・人影は描かない。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+          "evidence": "2026-10-17 作成の下書き本文 (公開R2 note/stats47-note/h-howto-csv-mojibake、未公開) を確認。CSVをExcelで開いたときの文字化けの原因 (UTF-8とShift_JISの食い違い)、Excelの「テキストまたはCSVから」・Googleスプレッドシート・BOM付きUTF-8での保存という3つの直し方、配る側の対策を扱う。カバーは題名の主題だけを示し、文字化けした文字列や特定製品の画面は描かない。"
+        }
       }
     },
     {
