@@ -1,9 +1,10 @@
-import { BookOpen } from "lucide-react";
+import { BookOpen, FileSpreadsheet } from "lucide-react";
 
 import { SurfaceSection } from "@/components/surface";
 
 import {
   findDataProductForBlog,
+  findDataProductUseCase,
   findKindleProductForBlog,
 } from "../storefront";
 
@@ -12,7 +13,45 @@ import { TrackedProductLink } from "./TrackedProductLink";
 export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
   const product = findKindleProductForBlog(blogSlug);
   const dataProduct = findDataProductForBlog(blogSlug);
-  if (!product) return null;
+  const useCase = findDataProductUseCase(blogSlug);
+  if (!product && !dataProduct) return null;
+
+  const dataBlock = dataProduct && (
+    <>
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        {useCase}
+        {dataProduct.title.replace(/をお渡しします$/, "")}
+        （{dataProduct.priceYen.toLocaleString("ja-JP")}円）があります。固定年度のデータで、自動更新はありません。必要な年度・地域粒度・納品形式を購入前に確認してください。
+      </p>
+      <TrackedProductLink
+        href={`/products/${dataProduct.slug}`}
+        label={`${dataProduct.id}:${dataProduct.title}`}
+        surface="blog_product"
+        className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        データ集の内容と条件を確認する →
+      </TrackedProductLink>
+    </>
+  );
+
+  if (!product) {
+    return (
+      <SurfaceSection className="mt-8 border-primary/30 p-5">
+        <div className="flex items-start gap-3">
+          <FileSpreadsheet
+            className="mt-0.5 h-5 w-5 shrink-0 text-primary"
+            aria-hidden="true"
+          />
+          <div className="min-w-0">
+            <p className="text-xs font-semibold text-primary">
+              資料づくりに使う
+            </p>
+            <div className="mt-2">{dataBlock}</div>
+          </div>
+        </div>
+      </SurfaceSection>
+    );
+  }
 
   const href = `/products/${product.slug}`;
   return (
@@ -40,21 +79,8 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
           >
             内容と価格を確認する →
           </TrackedProductLink>
-          {dataProduct && (
-            <div className="mt-5 border-t border-border pt-4">
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                県別の値をExcelで編集したい方には、既存の自治体財政データ集があります。
-                固定年度のデータで、自動更新はありません。必要な年度・地域粒度・納品形式を購入前に確認してください。
-              </p>
-              <TrackedProductLink
-                href={`/products/${dataProduct.slug}`}
-                label={`${dataProduct.id}:${dataProduct.title}`}
-                surface="blog_product"
-                className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-primary underline"
-              >
-                自治体財政データ集の内容と条件を確認する →
-              </TrackedProductLink>
-            </div>
+          {dataBlock && (
+            <div className="mt-5 border-t border-border pt-4">{dataBlock}</div>
           )}
         </div>
       </div>
