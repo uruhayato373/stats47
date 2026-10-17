@@ -5,6 +5,7 @@ export function retryCoverRead<T extends { status: number }>(read: () => Promise
 export function wranglerConfigFile(options?: { platform?: NodeJS.Platform; env?: Record<string, string | undefined>; home?: string; isDirectory?: (dir: string) => boolean }): string;
 export function wranglerTokenProvider(config: string, renew?: () => Promise<void>): () => Promise<string>;
 export function fetchCoverSource(url: string): Promise<Buffer>;
+export function fetchPublicMediaSource(url: string): Promise<Buffer>;
 export function fetchNoteDetail(noteId: string): Promise<{ key: string; noteUrl: string; user: { urlname: string }; eyecatch: string | null; body: string; name: string; price: number }>;
 export function readStoredCover(revision: CoverRevision, store?: CoverStore): Promise<Buffer>;
 export function storeCoverBytes(articleKey: string, bytes: Buffer, store?: CoverStore): Promise<Pick<CoverRevision, 'sha256' | 'storage' | 'bytes'>>;

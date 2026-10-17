@@ -38,15 +38,15 @@ export function PostPreview({
   const [dirty, setDirty] = useState(false);
   const [assetIndex, setAssetIndex] = useState(0);
   const archived = [...(item.assets ?? [])]
-    .filter((a) => a.state === 'archived' && a.drive_path)
+    .filter((a) => a.state === 'archived' && (a.drive_path || a.r2))
     .sort((a, b) => a.order - b.order);
   const selected = archived[assetIndex];
   const candidates =
-    assetIndex > 0 && selected?.drive_path && item.id
+    assetIndex > 0 && selected && item.id
       ? [
           {
-            url: `/sns-asset/${item.id}/${encodeURIComponent(selected.drive_path.split('/').pop()!)}`,
-            source: 'drive',
+            url: `/sns-asset/${item.id}/${encodeURIComponent(selected.drive_path?.split('/').pop() ?? (selected.role + '-' + selected.order + '.' + (selected.mime?.split('/')[1] ?? 'png')))}`,
+            source: selected.r2 ? 'r2' : 'drive',
           },
         ]
       : candidatesFor(item);

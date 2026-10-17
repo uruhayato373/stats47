@@ -28,7 +28,7 @@ const plan = prepared.map(m => ({ ...m, existing: findMaterialPost(before, m, m.
 const rows = [];
 const fresh = [];
 if (values.apply) {
-  const driveRoot = await resolveDriveRoot();
+  const driveRoot = null; // New images are preserved in R2; videos resolve Drive lazily.
   // Concurrent work must not be overwritten by a stale plan.
   if (!fs.readFileSync(store.STORE_PATH).equals(beforeBytes)) throw new Error('台帳が更新されました。再度dry-runしてください');
   fs.writeFileSync(path.join('/tmp', `sns-posts-before-${Date.now()}.json`), beforeBytes, { flag: 'wx' });

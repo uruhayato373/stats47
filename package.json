@@ -224,7 +224,15 @@
     "content:check": "tsx apps/web/scripts/sync-content-catalog.ts --check && tsx apps/web/scripts/validate-content-catalog.ts",
     "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
     "metrics:check": "npm run metrics:check --workspace packages/data-configs",
-    "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs"
+    "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs",
+    "media:check": "node .claude/scripts/media/check-workspace.mjs",
+    "media:test": "node --test .claude/scripts/media/__tests__/*.test.mjs",
+    "media:inventory": "node .claude/scripts/media/sync-image-inventory.mjs",
+    "media:inventory:web": "node .claude/scripts/media/sync-web-image-inventory.mjs",
+    "media:migrate": "node .claude/scripts/media/migrate-sns-images.mjs",
+    "media:prepare": "node .claude/scripts/media/prepare-image.mjs",
+    "media:state:pull": "node .claude/scripts/media/sync-r2-state.mjs pull",
+    "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

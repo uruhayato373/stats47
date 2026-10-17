@@ -7,6 +7,12 @@ import { fileURLToPath } from 'node:url';
 
 import { classifyPrQualityPaths } from '../plan-pr-quality.mjs';
 
+test('article/image ledgers and shared writers run the admin gates', () => {
+  for (const file of ['.claude/scripts/media/lib/workspace.mjs','data/content-operations/quality.json','data/content-operations/image-templates.json']) {
+    assert.equal(classifyPrQualityPaths([file]).admin, true);
+  }
+});
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 
 test('docsだけのPRは重いjobを起動しない', () => {

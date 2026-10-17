@@ -45,8 +45,9 @@ describe('mobile editorial ranking cards', () => {
     });
 
     expect(svg).toContain('width="640" height="960" viewBox="0 0 640 960"');
-    expect(svg).toContain('font-size="24" font-weight="bold" fill="#1f2937">東京都</text>');
-    expect(svg).toContain('font-size="22" font-weight="700"');
+    // Main labels retain 14 CSS px at the narrow 320 px article width.
+    expect(svg).toContain('font-size="28" font-weight="bold" fill="#1f2937">東京都</text>');
+    expect(svg).toContain('font-size="28" font-weight="700"');
     expect(svg).toContain('font-size="20" class="svg-tick">出典: 総務省</text>');
   });
 });

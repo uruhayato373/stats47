@@ -129,7 +129,7 @@ const rows = store.loadAll().filter((row) => {
   return true;
 });
 
-const driveRoot = DRY ? null : await resolveDriveRoot();
+const driveRoot = null; // Images use R2; archiveFile resolves Drive only for a video.
 const patches = [];
 const tally = { archived: 0, missing: 0, textOnly: 0 };
 for (const row of rows) {

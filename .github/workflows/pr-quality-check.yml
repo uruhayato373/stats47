@@ -651,6 +651,12 @@ jobs:
           npm run note:metrics:test
           node --test .claude/scripts/lib/__tests__/workflow-health-core.test.mjs
 
+      # 台帳だけが更新されたPRでも、新規画像と棚卸し待ちの取りこぼしを検査する。
+      - name: Verify article and image workspace
+        run: |
+          npm run media:check
+          npm run media:test
+
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。

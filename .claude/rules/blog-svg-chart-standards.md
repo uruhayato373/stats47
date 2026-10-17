@@ -397,6 +397,11 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 
 ### 6-4. 散布図品質・データ完全性 gate（2026-08-02 追加）
 
+本文スマホ版を比較する明示選択の試作入口は `packages/svg-builder/src/charts/article-mobile.ts`。
+`generateMobileScatterSvg` / `generateMobileMapSvg` は640×960の白背景PNG候補用で、正方形のWeb正典やタイル地図を置換しない。
+全47県・有限値・一意な県コード・地図の凡例範囲を検査し、注目県は最大2県、軸・凡例は24px以上を基本とする。
+候補の固定入力と生成条件は管理画面の入力根拠へ保全する。公開前に使用先の画像選択・配置と媒体別gateを確認する。
+
 散布図は次の不変量を公開前 blocker として検査する。`quality-gate.mjs`、`audit-chart-quality.mjs`、
 `generate-article-charts.ts --validate` に配線済み。
 
