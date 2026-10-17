@@ -14,6 +14,20 @@
       "evidencePath": ".local/product-sales-evidence/kdp/kdp-monthly-2026-08.json",
       "evidenceSha256": "819ad765457036c000a496b60f1daf1a6419ee2cdb637dfde36ff703cf99a275",
       "recordedAt": "2026-10-07T21:57:23.008Z"
+    },
+    {
+      "id": "29ce0b55b1152a96f4ad",
+      "channel": "kdp",
+      "productId": "K-S2-03",
+      "periodStart": "2026-09-01",
+      "periodEnd": "2026-09-30",
+      "orders": 1,
+      "units": 1,
+      "netRevenueYen": 159,
+      "refunds": 0,
+      "evidencePath": "vault:kdp/monthly/month-8",
+      "evidenceSha256": "fd7a5879f54fea7baa4ecf0ff8fef481d1605acb6016645e8cdb4b3206be7ded",
+      "recordedAt": "2026-10-16T23:47:16.408Z"
     }
   ]
 }
