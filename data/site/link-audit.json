@@ -1,38 +1,217 @@
 {
-  "generatedAt": "2026-10-03T21:57:42.325Z",
+  "generatedAt": "2026-10-17T21:17:29.534Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
   "pagesCrawled": 141,
-  "pagesKnown": 7325,
-  "uniqueTargets": 4223,
+  "pagesKnown": 7421,
+  "uniqueTargets": 4468,
   "statusCount": {
-    "200": 4159,
-    "301": 62,
-    "410": 2
+    "200": 4339,
+    "301": 110,
+    "503": 19
   },
-  "brokenCount": 2,
+  "brokenCount": 19,
   "brokenByRoute": {
-    "/ranking/[k]": 2
+    "/areas/[c]/cities/[c]": 19
   },
   "broken": [
     {
-      "target": "/ranking/auto-insurance-penetration-bodily-injury-actual",
-      "status": 410,
-      "kind": "gone",
+      "target": "/areas/01000/cities/01233",
+      "status": 503,
+      "kind": "http-503",
       "title": "",
-      "refCount": 1,
+      "refCount": 2,
       "from": [
-        "/ranking/housing-land-liabilities-ratio-multi-person-households"
+        "/areas/01000",
+        "/areas/01000/cities/01100"
       ]
     },
     {
-      "target": "/ranking/fresh-vegetables-consumption-expenditure",
-      "status": 410,
-      "kind": "gone",
+      "target": "/areas/01000/cities/01234",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01346",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01407",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01408",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01409",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01471",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01472",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01000/cities/01513",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/01000",
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/10000/cities/10344",
+      "status": 503,
+      "kind": "http-503",
       "title": "",
       "refCount": 1,
       "from": [
-        "/ranking/tofu-consumption-expenditure"
+        "/areas/10000"
+      ]
+    },
+    {
+      "target": "/areas/10000/cities/10367",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/10000"
+      ]
+    },
+    {
+      "target": "/areas/10000/cities/10382",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/10000"
+      ]
+    },
+    {
+      "target": "/areas/10000/cities/10525",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/10000"
+      ]
+    },
+    {
+      "target": "/areas/19000/cities/19430",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/19000"
+      ]
+    },
+    {
+      "target": "/areas/20000/cities/20385",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20000/cities/20403",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20000/cities/20407",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20000/cities/20448",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/43000/cities/43424",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/43000"
       ]
     }
   ],

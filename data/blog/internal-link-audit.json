@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-03T21:57:02.068Z",
+  "generatedAt": "2026-10-17T21:11:32.753Z",
   "site": "https://stats47.jp",
-  "articles": 609,
-  "totalLinks": 3440,
+  "articles": 608,
+  "totalLinks": 3516,
   "absoluteLinks": 126,
-  "uniqueLinks": 961,
+  "uniqueLinks": 982,
   "byType": {
     "areas": {
       "total": 47,
       "broken": 0
     },
     "blog": {
-      "total": 187,
+      "total": 194,
       "broken": 0
     },
     "category": {
@@ -23,8 +23,8 @@
       "broken": 0
     },
     "ranking": {
-      "total": 690,
-      "broken": 5
+      "total": 704,
+      "broken": 3
     },
     "survey": {
       "total": 1,
@@ -64,26 +64,6 @@
       "reason": "HTTP 410",
       "referencedBy": [
         "population-density-urbanization"
-      ]
-    },
-    {
-      "href": "/ranking/prefectural-income-per-capita",
-      "status": 410,
-      "title": "",
-      "ok": false,
-      "reason": "HTTP 410",
-      "referencedBy": [
-        "ai-claude-code-pref-analysis"
-      ]
-    },
-    {
-      "href": "/ranking/tourism-resource-count",
-      "status": 410,
-      "title": "",
-      "ok": false,
-      "reason": "HTTP 410",
-      "referencedBy": [
-        "cc-estat-09-radar-prefecture"
       ]
     }
   ]
