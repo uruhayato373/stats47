@@ -27,6 +27,8 @@ describe('image classification route uses the shared ledger', () => {
       'data/note/cover-assets.json',
       'data/sns/posts.json',
     ]) {
+      // 在庫索引の正本は private R2 (live/ は gitignore)。CI のように未取得なら写さず、空の在庫として読ませる
+      if (!fs.existsSync(path.join(ROOT, rel))) continue;
       fs.mkdirSync(path.dirname(path.join(fixture.root, rel)), {
         recursive: true,
       });
