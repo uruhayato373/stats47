@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 2368,
+    "minActiveResolved": 2372,
     "minActiveCoveragePct": 100
   },
   "rankingBaselineAdjustment": {
