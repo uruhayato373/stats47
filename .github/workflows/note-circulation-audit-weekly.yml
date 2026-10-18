@@ -218,7 +218,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- data/note/cover-assets.json
           git commit -m 'chore(note): refresh cover observations [skip ci]'
-          git pull --rebase origin develop
+          # 監査の証跡など他のファイルが作業ツリーに残るので退避して取り込む (無いと pull が拒否して書き戻せない)
+          git pull --rebase --autostash origin develop
           git push origin HEAD:develop
 
       - name: ❌ Fail on unresolved note circulation drift
