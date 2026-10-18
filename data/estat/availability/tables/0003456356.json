@@ -1,0 +1,32 @@
+{
+  "statsDataId": "0003456356",
+  "statName": "社会生活基本調査",
+  "title": "男女,雇用形態,勤務形態,年次有給休暇の取得日数,学習・自己啓発・訓練の種類別行動者数(雇用されている人)－全国，都道府県",
+  "updatedDate": "2026-09-03",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "0",
+        "cdTab": "202101A02",
+        "axisRatio": {
+          "axis": "cat04",
+          "numeratorCodes": [
+            "13",
+            "14"
+          ],
+          "denominatorCodes": [
+            "11",
+            "12",
+            "13",
+            "14"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-18T03:51:08.102Z",
+      "years": { "2021": 47 },
+      "rawRows": 300
+    }
+  ]
+}

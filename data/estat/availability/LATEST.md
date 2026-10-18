@@ -1,7 +1,7 @@
 # e-Stat の実在年と metric config の years の差分 (LATEST)
 
-- 生成: 2026-10-07T02:48:09.275Z
-- 対象: 県の値を e-Stat (estat / kakei-chousa) から取り込む有効な metric 2221 件 (表 143・取り出し条件 2219)。市区町村の値は対象外
+- 生成: 2026-10-18T03:54:33.996Z
+- 対象: 県の値を e-Stat (estat / kakei-chousa) から取り込む有効な metric 2237 件 (表 145・取り出し条件 2235)。市区町村の値は対象外
 - 台帳: `data/estat/availability/tables/<statsDataId>.json`。取り込みと同じ取得と県の判定で、`years` で絞らずに年ごとの値のある県を数えたもの
 - 全県: その条件で最も多く値が出た年の県の数 (港湾・漁業のように 47 県がそろわない統計があるため 47 に固定しない)。一部の県だけの年は分類に入れない (diff.json の `partial`)
 - 作り直し: `npx tsx packages/data-configs/scripts/build-estat-availability.ts` (`--offline` で報告だけ)。差分は `npx tsx packages/data-configs/scripts/sync-estat-years.ts` が years に反映する
@@ -13,13 +13,13 @@
 |---|---|---|
 | 取り込み忘れ | 0 | 設定の最初と最後の年のあいだに、全県の値があるのに設定にない年がある |
 | 新しい年が出ている | 0 | 設定の最後の年より後に、全県の値がある年がある |
-| e-Stat に無い年がある | 0 | 設定にあるのに e-Stat に 1 県も値が無い年がある (補完元の年は除く) |
+| e-Stat に無い年がある | 13 | 設定にあるのに e-Stat に 1 県も値が無い年がある (補完元の年は除く) |
 | 範囲より前にも年がある | 0 | 設定の最初の年より前に、全県の値がある年がある (基準の切り替えで外した年もここに出る) |
-| 差分なし | 2167 | 設定の年が全県の値のある年と一致する |
+| 差分なし | 2170 | 設定の年が全県の値のある年と一致する |
 | years: "all" | 53 | 許可リストが無く、取り込みは e-Stat の全年を使う |
 | 台帳なし・取得失敗・打ち切り・重複行 | 1 | 差分を比べていない (下の表。取得失敗は次の実行で取り直し、打ち切りと重複行は metric config の軸を直す) |
-| 未判断の除外 | 422 | 移行時に当時の years から引き継いだ除外。根拠を書くか、外して年を戻す (下の表) |
-| 理由付きの除外 | 0 | 判断して書いた除外 |
+| 未判断の除外 | 421 | 移行時に当時の years から引き継いだ除外。根拠を書くか、外して年を戻す (下の表) |
+| 理由付きの除外 | 1 | 判断して書いた除外 |
 
 1 つの指標が複数の分類に入ることがある。
 
@@ -31,15 +31,31 @@
 
 なし
 
-## e-Stat に無い年がある
+## e-Stat に無い年がある (13 件)
 
-なし
+設定にあるのに e-Stat に 1 県も値が無い年がある (補完元の年は除く)。テーマで使う指標を先に、該当する年の多い順。
+
+| 指標 | 表 | 設定の年 | 該当する年 | 全県の値がある年 (県の数) | テーマ |
+|---|---|---|---|---|---|
+| `fishery-species-catch-bonito` | 0003238633 | 1956–2023 | 2019–2022 | 1978, 1981 (37) | fishery-marine |
+| `fishery-species-catch-japanese-squid` | 0003238633 | 1956–2023 | 2019–2022 | 1967–1968, 1970–1972, 1974, 1982, 2005, 2012, 2015 (36) | fishery-marine |
+| `fishery-species-catch-kelp` | 0003238633 | 1956–2023 | 2019–2022 | 1958, 1964, 2008 (6) | fishery-marine |
+| `fishery-species-catch-mackerel` | 0003238633 | 1956–2023 | 2019–2022 | 1974, 1976–1980, 1982–1984, 1995, 2000 (39) | fishery-marine |
+| `fishery-species-catch-pacific-saury` | 0003238633 | 1956–2023 | 2019–2022 | 1965–1967, 1969–1970 (34) | fishery-marine |
+| `fishery-species-catch-pollock` | 0003238633 | 1956–2023 | 2019–2022 | 1964, 1974–1975 (21) | fishery-marine |
+| `fishery-species-catch-sardine` | 0003238633 | 1956–2023 | 2019–2022 | 1974–1982 (39) | fishery-marine |
+| `fishery-species-catch-scallop` | 0003238633 | 1956–2023 | 2019–2022 | 1981, 1989 (6) | fishery-marine |
+| `fishery-species-catch-sea-bream` | 0003238633 | 1956–2023 | 2019–2022 | 1974–1982, 1990, 1996–2011, 2014–2015 (39) | fishery-marine |
+| `fishery-species-catch-snow-crab` | 0003238633 | 1956–2023 | 2019–2022 | 2002 (18) | fishery-marine |
+| `fishery-species-catch-tuna` | 0003238633 | 1956–2023 | 2019–2022 | 1974–1982 (39) | fishery-marine |
+| `fishery-species-catch-yellowtail` | 0003238633 | 1956–2023 | 2019–2022 | 1974, 1978, 1980–1993, 1995–2011, 2014–2015 (39) | fishery-marine |
+| `internet-usage-rate-10plus` | 0000010107 | 2001–2006 | 2002–2005 | 2001, 2006 (47) | communication-access |
 
 ## 範囲より前にも年がある
 
 なし
 
-## 未判断の除外 (422 件)
+## 未判断の除外 (421 件)
 
 全県の値があるのに、2026-10 の移行時の years に無かったので除外として残した年。基準の切り替え・5 年おきの揃えなどの根拠があれば `yearExclusions` の reason を具体的に書き換え、無ければ除外を消して `sync-estat-years.ts` で年を戻す。テーマで使う指標を先に、除外の年の多い順。上位 40 件 (全件は diff.json)。
 
@@ -74,6 +90,7 @@
 | `general-hospital-bed-occupancy-rate` | 0000010209 | 1985–2023 | 1975–1984 | healthcare |
 | `road-length-per-km2` | 0000010208 | 1985–2023 | 1975–1984 | roads |
 | `traffic-accident-injuries-per-100k` | 0000010211 | 1985–2024 | 1975–1984 | safety |
+| `elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000` | 0000010205 | 2000–2023 | 1991–1999 | education-culture |
 | `forest-road-length` | 0000010103 | 1989–2022 | 1980–1988 | forestry-timber |
 | `intellectual-disability-support-facility-count-per-1m` | 0000010210 | 1984–2011 | 1975–1983 | disability-support |
 | `investment-expenditure-ratio-pref-finance` | 0000010204 | 1984–2022 | 1975–1983 | local-finance |
@@ -84,7 +101,6 @@
 | `fire-department-emergency-car-count-per-100k` | 0000010209 | 1983–2024 | 1975–1982 | safety |
 | `nursing-home-capacity-per-1000-65plus` | 0000010210 | 2008–2023 | 2000–2007 | aging-society, long-term-care |
 | `passenger-ship-transport` | 0000010103 | 1983–2023 | 1975–1982 | ports |
-| `per-capita-prefectural-income-h27` | 0000010203 | 2020–2021 | 2012–2019 | local-economy, real-income |
 
 ## 市区町村 (cities.json)
 
