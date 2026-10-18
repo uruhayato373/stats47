@@ -30879,9 +30879,9 @@
     },
     {
       "id": 1023,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.176Z",
-      "updated_at": "2026-10-12T01:19:00.181Z",
+      "updated_at": "2026-10-18T17:38:26.757Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -30908,13 +30908,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/residential-land-price-change-rate/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DenixxZDjmi",
+      "posted_at": "2026-10-18T01:50:47.000Z"
     },
     {
       "id": 1024,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.182Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-18T17:38:26.782Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -30941,7 +30943,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/25000/x/stills/25000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeoRmz5Eaao",
+      "posted_at": "2026-10-18T08:39:59.000Z"
     },
     {
       "id": 1025,
