@@ -2,11 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { datasetPath,datasetDir } from '../../../../config/datasets.mjs';
+import { COCONALA_ASSETS_DIR } from '../../../../config/paths.mjs';
 import { R2_BUCKET, R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../lib/site-config.cjs';
 
 export const WEB_INVENTORY = datasetPath('content.web-image-inventory');
 export const WEB_PARTS=datasetDir('content.web-image-parts');
-export const MATERIAL_ROOTS=['assets','apps/web/public','apps/remotion/public','config/coconala/assets','contents/blog','packages/gis/data'];
+export const MATERIAL_ROOTS=['assets','apps/web/public','apps/remotion/public',COCONALA_ASSETS_DIR,'contents/blog','packages/gis/data'];
 export const digest = bytes=>createHash('sha256').update(bytes).digest('hex');
 let indexCache;
 export function readWebInventory(root) {

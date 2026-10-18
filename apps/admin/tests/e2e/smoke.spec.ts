@@ -60,6 +60,18 @@ async function sidebarOf(page: import("@playwright/test").Page) {
 }
 
 test.describe("smoke: 管理画面の疎通", () => {
+  // 画像ライブラリの画像の実体は private R2 にあり、CI には R2 の認証情報が無い (2026-10-18 オーナー判断: 画像は R2)。
+  // 疎通テストでは画像ファイルの API だけを 1px PNG で代替し、画面の描画と console error の有無を見る。
+  test.beforeEach(async ({ page }) => {
+    await page.route(/\/api\/media-library\/[^/]+\/file(\?|$)/, (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "image/png",
+        body: Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", "base64"),
+      }),
+    );
+  });
+
   for (const { path } of PAGES) {
     test(`${path} は 200 で表示され console error が無い`, async ({ page }) => {
       const errors = collectPageErrors(page);
@@ -111,11 +123,12 @@ test.describe("smoke: 管理画面の疎通", () => {
     await (await sidebarOf(page)).getByRole("link", { name: "投稿状況", exact: true }).click();
     await expect(page).toHaveURL(/\/sns$/);
 
-    await (await sidebarOf(page)).getByRole("link", { name: "画像資産", exact: true }).click();
-    await expect(page).toHaveURL(/\/assets$/);
+    // 2026-10-18: 「画像資産」「SVG カタログ」は画像ライブラリと型の見本に置き換わった (/assets・/svg は互換の転送)
+    await (await sidebarOf(page)).getByRole("link", { name: "型の見本", exact: true }).click();
+    await expect(page).toHaveURL(/\/ops\/image-templates$/);
 
-    await (await sidebarOf(page)).getByRole("link", { name: "SVG カタログ", exact: true }).click();
-    await expect(page).toHaveURL(/\/svg$/);
+    await (await sidebarOf(page)).getByRole("link", { name: "画像ライブラリ", exact: true }).click();
+    await expect(page).toHaveURL(/\/ops\/image-library$/);
 
     await (await sidebarOf(page)).getByRole("link", { name: "調査カタログ", exact: true }).click();
     await expect(page).toHaveURL(/\/research$/);
