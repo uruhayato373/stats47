@@ -66,6 +66,13 @@
       "cumulativeYen": 0,
       "monthToDateYen": 0,
       "observedAt": "2026-10-18T08:34:37.830Z"
+    },
+    {
+      "channel": "coconala",
+      "date": "2026-10-19",
+      "cumulativeYen": 0,
+      "monthToDateYen": 0,
+      "observedAt": "2026-10-18T22:12:24.643Z"
     }
   ]
 }
