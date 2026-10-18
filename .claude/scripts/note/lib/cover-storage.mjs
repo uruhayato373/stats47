@@ -9,7 +9,7 @@ import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
-import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
+import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../lib/site-config.cjs';
 import { assertGeneratedCoverReview } from './generated-cover.mjs';
 
 const BUCKET = R2_PRIVATE_BUCKET;
@@ -132,6 +132,15 @@ function requestOnce(url, { method = 'GET', body, headers = {} } = {}) {
     req.on('error', reject);
     req.end(body);
   });
+}
+
+/** Fetch only allowed public sources. No credentials are sent to note or its image CDN. */
+export async function fetchPublicMediaSource(url) {
+  const u=new URL(url);
+  if(u.username||u.password||![new URL(R2_PUBLIC_BASE_URL).origin,new URL(SITE_ORIGIN).origin].includes(u.origin))throw Error('public media source not allowed');
+  const result=await request(u,{headers:{'user-agent':'stats47-media-inventory/1.0'}});
+  if(result.status!==200)throw Object.assign(Error(`public media HTTP ${result.status}`),{status:result.status});
+  return result.body;
 }
 
 /** Fetch only allowed public sources. No credentials are sent to note or its image CDN. */

@@ -11,6 +11,8 @@
  *   opts    schema: 形状契約 (JSON Schema) のパス。kind が config / ledger で path が .json の行は必須 (check-datasets が検証する)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い
+ *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
+ *                    git の追跡ファイルに当たらなくてよい (2026-10-18 オーナー判断: 画像まわりの派生データは R2)
  *
  * 検査は `npm run check-datasets` (.claude/scripts/lib/check-datasets.mjs)。GOVERNED に当たる追跡ファイルは
  * ちょうど 1 行に当たらなければならず、行は 1 件以上のファイルに当たらなければならない。
@@ -270,6 +272,14 @@ export const DATASETS = [
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
+  d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),
+  d("content.quality-schema", "data/content-operations/quality.schema.json", "config", "product", "data", "記事と画像の改善台帳のJSON Schema"),
+  d("content.image-templates-schema", "data/content-operations/image-templates.schema.json", "config", "ops", "data", "図の型と媒体方針のJSON Schema"),
+  d("content.image-templates", "data/content-operations/image-templates.json", "config", "ops", "data", "媒体共通の図の型・改善方針と版履歴", { schema: "data/content-operations/image-templates.schema.json" }),
+  d("content.image-inventory", "data/content-operations/live/image-inventory.json", "state", "ops", "data", "R2のnote本文manifestから派生した画像・入力の索引", { r2State: "state/content-operations/" }),
+  d("content.web-image-inventory", "data/content-operations/live/web-image-inventory.json", "state", "ops", "data", "OGP・ブログSVG・静的素材の派生索引と元データ参照・棚卸し範囲", { r2State: "state/content-operations/" }),
+  d("content.web-image-parts", "data/content-operations/live/web-images/{name}.json", "state", "ops", "data", "画像索引のowner別ハッシュ分割。索引のSHAで照合し、1ファイル1MB未満に保つ", { r2State: "state/content-operations/" }),
+  d("content.image-migration", "data/content-operations/live/image-migration.json", "state", "ops", "data", "旧SNS画像のR2移行とハッシュ照合の結果", { r2State: "state/content-operations/" }),
   d("content.note-blockers", "data/content-operations/note-generation-blockers.json", "state", "product", "data", "note 記事生成の止まっている理由"),
   d("data-quality.state", "data/data-quality/{name}", "state", "data", "data", "データ品質の要約・再取り込みキュー・ページ横断の事前検査・SEO メタの基準"),
   d("data-quality.checks", "data/data-quality/checks/{name}", "state", "data", "data", "データ品質の検査キュー"),

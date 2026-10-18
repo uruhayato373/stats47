@@ -69,6 +69,7 @@ export interface PostAsset {
   order: number;
   state: "archived" | "missing";
   drive_path?: string;
+  r2?: { bucket: string; key: string };
   sha256?: string;
   bytes?: number;
   mime?: string;

@@ -101,6 +101,9 @@ export function checkPostTrace({ ledger, readScript, metricRows, externalIdOf, c
         if (asset.drive_path && !asset.drive_path.startsWith(prefix)) {
           errors.push(`${tag}: 素材の置き場 ${asset.drive_path} が ${prefix} の外です`);
         }
+        if (asset.r2 && (!asset.r2.key.startsWith(`sns-assets/${row.platform}/${row.id}/${asset.role}-${asset.order}/`) || !asset.r2.key.includes('/' + asset.sha256 + '.'))) {
+          errors.push(`${tag}: R2素材の投稿ID・役割・SHAが一致しません`);
+        }
         if (asset.state === "missing") summary.assets.missingAssets++;
       }
       if (row.assets.some((a) => a.state === "archived")) summary.assets.archivedRows++;

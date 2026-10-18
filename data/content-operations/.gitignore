@@ -1,0 +1,3 @@
+# 画像まわりの派生データ (在庫索引・Web 画像索引・SNS 画像の移行記録) の正本は private R2 の state/content-operations/。
+# 手元へは npm run media:state:pull で取得し、作り直したら npm run media:state:push で戻す (2026-10-18 オーナー判断: 画像は R2)。
+live/
