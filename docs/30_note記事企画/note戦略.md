@@ -82,7 +82,7 @@ GA4の着地ページだけでは送信元の記事やカードを特定でき�
 
 カバーの残りを一巡する前に、閲覧の多い記事と異なる図の型で本文品質を試すことを推奨する。
 狙いは、開いた読者が拡大せず結論と根拠を読み、必要な次のページへ進めること。
-対象・順番・公開境界は `NOTE-ARTICLE-QUALITY-PILOT-01`、調査値は
+対象・順番・公開境界は `NOTE-BODY-QUALITY-PILOT-01`、調査値は
 [`本文品質の調査記録`](../../data/note/evidence/note-article-quality-audit-20261016.json)を参照する。
 カバーの未着手分は `NOTE-COVER-IMAGEGEN-ROLLOUT-01` の計画を保持する。
 
