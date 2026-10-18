@@ -60,10 +60,11 @@ async function sidebarOf(page: import("@playwright/test").Page) {
 }
 
 test.describe("smoke: 管理画面の疎通", () => {
-  // 画像ライブラリの画像の実体は private R2 にあり、CI には R2 の認証情報が無い (2026-10-18 オーナー判断: 画像は R2)。
-  // 疎通テストでは画像ファイルの API だけを 1px PNG で代替し、画面の描画と console error の有無を見る。
+  // 画像の実体は private R2 にあり、CI には R2 の認証情報が無い (2026-10-18 オーナー判断: 画像は R2)。
+  // 疎通テストでは private R2 から画像を読む 3 経路 (画像ライブラリ・note カバー・SNS 素材) だけを 1px PNG で代替し、
+  // 画面の描画と console error の有無を見る。経路は R2 を外した起動で /assets の 5xx を記録して特定した。
   test.beforeEach(async ({ page }) => {
-    await page.route(/\/api\/media-library\/[^/]+\/file(\?|$)/, (route) =>
+    await page.route(/\/(api\/media-library\/[^/]+\/file|note-cover\/[^/?]+|sns-asset\/[^/]+\/[^/?]+)(\?|$)/, (route) =>
       route.fulfill({
         status: 200,
         contentType: "image/png",
