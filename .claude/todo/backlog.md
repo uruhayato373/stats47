@@ -36,6 +36,7 @@ updated: 2026-10-17
   ⑤ `deploy-workers` は R2 書き込みの排他 (`r2-write`) で `geo-source-publish` (22:26 UTC 開始、過去の成功例は 3.5〜4 時間) の終了待ち。終わり次第デプロイと smoke を確かめる。①〜④・⑦ は次の定期実行で確かめる。
 - **別の端末 (Windows PC) の注意**: このマージを pull すると docs/31 の追跡ファイル 861 件が作業ツリーから消える。pull の前にその端末の docs/31 に未コミットの編集が無いかを確かめ、
   あれば先に `npm run note:article -- save <key>` で R2 へ保存する (台帳 `data/note/articles.json` を pull してから)。
+- **状態 (2026-10-18)**: ② `blog-remediation-daily` の散布図ゲートは 167/167 一致 (run 39094552802・MLIT の Excel の URL 変更を直した後)。③ `affiliate-ga4-weekly` は A8 の月次成果の不足 (`a8-cross-check-shortfall`・`a8-results-month-missing`) で計測ゲートが止まったまま (`A8-CROSSCHECK-EXCEED-01`)。⑦ note 回遊監査は 30 分の制限で cancel が続いていたので 60 分に延ばし、カバー観測の書き戻しも直した。
 - **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
@@ -319,6 +320,13 @@ updated: 2026-10-17
 - **完了条件**: `npm audit --omit=dev --audit-level=high` が exit 0 で、本番の代表 URL が 200。または該当しないと確定し、例外の理由と再評価日をこのカードに書いて 🟡 へ下げた。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS]
+
+- **事象**: note 回遊の週次監査 #1149 (2026-10-18・run 39094551255)。error 5 件はリンク切れ (`broken_site_link`): `b-hotel-rooms-nara`・`d-engel-coefficient-income`・`d-kakei-spending-personality`・`koumuin-shigoto-kouritsuka-ai` ほか。warning 225 件は http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空行 (173 記事、`NOTE-CARD-REPAIR-01` が担当)。
+- **次**: リンク切れの行き先を stats47 の現行 URL で引き直し、置換案をオーナーに見せる。公開済み記事の本文変更は note への外部変更なので、承認後に PUT パッチで直す。この Mac からは 2026-10-18 時点で note が HTTP 403 のため、解けてから行う。
+- **完了条件**: note 回遊の週次監査で error 0 件になり #1149 が閉じる。
 
 ### [IG-CAPTION-DUP-1021-01] 10-21 予約の Instagram 相関投稿のキャプションで同じ相関係数を 2 回書いている
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-18] [期日:2026-10-20] [領域:SNS]
