@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "39102099890-1",
+  "status": "implementation-needed",
+  "keyword": "病院数が最も少ない都道府県はどこ",
+  "targetPath": "/ranking/general-hospital-count",
+  "needs": "検索者は「病院の数が一番少ない都道府県はどこか」を一言で知りたく、実数での最少と、人口あたりでの最少が別の県になりうることも併せて確かめたい。",
+  "gap": "対象ページの題名と説明文は「1位東京都（588施設）」で始まり、最少の答えである「島根県（37施設）」は説明文の後半にしかない。公開本文は題名と説明文だけがCIの取得物に出ており、最少の問いに題名で答えていない。比較した3ページは、実数の最少か人口あたりの最少かを冒頭か表で区別している。",
+  "done": "selected.editableFileがnullで自動適用できない。原因はkeyword-cycle.mjsの19〜25行が存在しないpackages/data-configs/src/metrics/を探しているため。実際の定義はdata/metrics/general-hospital-count.ts。そこのseoTitleを「病院数が最も少ない都道府県は島根県（37施設）｜一般病院数ランキング【2023年】」へ、seoDescriptionを最少の島根県37施設と最多の東京都588施設を並べ人口10万人あたりへの切替にも触れる文へ置換する。数値は現行と同じで、npm run validate:configを通す。",
+  "method": "title",
+  "competitors": [
+    {
+      "url": "https://todo-ran.com/t/kiji/14387",
+      "findings": "2018年の一般病院数で、本文の順位は人口10万人あたり（最少は神奈川県3.19）、表の総数の最少は鳥取県39軒と区別して答える。全47都道府県の並べ替えできる表、定義の説明、CSV提供がある。"
+    },
+    {
+      "url": "https://seisakuai.com/ranking/hospital-shortage.html",
+      "findings": "2023年の人口10万人あたり一般病院数と病床数の偏差値で神奈川県を最少とし、冒頭に結論欄を置く。実数の最少ではないと明記し、精神科病院と特定機能病院を除く対象範囲も示す。全県の比較カードとFAQがある。"
+    },
+    {
+      "url": "https://region-case.com/rank-r3-facility-hospital/",
+      "findings": "令和3年の病院数で、実数の最少は鳥取県43施設、人口10万人あたりの最少は神奈川県3.6と二つの答えを示す。47都道府県の表と地図があるが、病院の定義は書いていない。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/ranking/general-hospital-count",
+      "status": 200,
+      "fetchedAt": "2026-10-18T05:54:58.903Z",
+      "inputHash": "d309aeb55b2550c82dcede9bfa2e125d07a0ef549b0d1ecf78d93c3359e6bbe1",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "5d09fd44e8b7477cd260270a8e9b007ad9fc414a67e197d59d1678c76fc9f471",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "03831febb8c8ac34921d7adace965e848ec92bd8ebb70698a96e060a177ef887"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "病院数が最も少ない都道府県はどこ"
+      },
+      {
+        "name": "WebSearch",
+        "target": "病院数 都道府県別 少ない 鳥取県 島根県 ランキング 医療施設調査"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/ranking/general-hospital-count"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://todo-ran.com/t/kiji/14387"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://seisakuai.com/ranking/hospital-shortage.html"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://region-case.com/rank-r3-facility-hospital/"
+      }
+    ]
+  },
+  "selectedAt": "2026-10-18",
+  "inputHash": "d309aeb55b2550c82dcede9bfa2e125d07a0ef549b0d1ecf78d93c3359e6bbe1",
+  "methods": [],
+  "files": []
+}
