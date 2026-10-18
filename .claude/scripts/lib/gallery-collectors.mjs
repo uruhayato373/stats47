@@ -372,6 +372,8 @@ export async function buildTab(tab, opts) {
           key: c.slug,
           label: `${c.slug} [${coverDisplayState(c.record).review}]`,
           pageUrl: c.noteUrl,
+          // note に未公開の下書きは公開画像を持たないので欠落集計に入れない (表示はする)
+          draft: !c.noteUrl,
           images: [
             { variant: '公開画像', url: privateNoteCovers && c.record.published?.revisionId
               ? `/note-cover/${encodeURIComponent(c.slug)}?revision=${c.record.published.revisionId}` : c.record.published?.url ?? null },
