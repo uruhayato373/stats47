@@ -142,11 +142,11 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
       <Section
         title="素材"
         count={assets ? assets.length : "未保全"}
-        note="実体は Google Drive の stats47/SNS素材/<媒体>/<id>/。台帳には相対パス・sha256・bytes だけを記録する"
+        note="画像の正本はprivate R2。移行前の画像と動画はGoogle Driveを参照します。台帳のハッシュで照合します"
       >
         {assets === null ? (
           <p className="m-0 text-sm text-console-warn">
-            まだ Drive へ保全していません: node .claude/scripts/sns/archive-sns-assets.mjs --id {post.id}
+            まだ保全していません: node .claude/scripts/sns/archive-sns-assets.mjs --id {post.id}
           </p>
         ) : assets.length === 0 ? (
           <p className="m-0 text-sm text-console-muted">画像・動画を持たない投稿です (引用 RT など)</p>

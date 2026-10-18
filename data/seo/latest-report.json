@@ -1,39 +1,75 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "period": {
-    "periodStart": "2026-10-08",
-    "periodEnd": "2026-10-14",
+    "periodStart": "2026-10-09",
+    "periodEnd": "2026-10-15",
     "windowDays": 7
   },
-  "inputHash": "fd77df75cc1c3d9c583d207b5da7948d8a31ee35b6ff12326cdd7ff348c4e803",
+  "inputHash": "89dac653a0790dc480b90fb7a3ac414c8b7d272ff9bd14958bd32f459273a152",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
       "before": 73,
-      "after": 6.666666666666667,
+      "after": 7.55,
       "beforeImpressions": 1,
-      "impressions": 15,
-      "change": 66.33333333333333
+      "impressions": 20,
+      "change": 65.45
+    },
+    {
+      "keyword": "かつお 漁獲量",
+      "targetPath": "/ranking/fishery-species-catch-bonito",
+      "before": 65,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 64
     },
     {
       "keyword": "看護師 年収 平均",
       "targetPath": "/blog/nurse-income-prefecture-gap",
       "before": 6,
-      "after": 72.2,
+      "after": 69.33333333333333,
       "beforeImpressions": 1,
-      "impressions": 5,
-      "change": -66.2
+      "impressions": 6,
+      "change": -63.33333333333333
     },
     {
-      "keyword": "うどん消費量ランキング",
-      "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
-      "before": 61,
-      "after": 4,
+      "keyword": "小学校 人数 ランキング",
+      "targetPath": "/blog/elementary-school-children-count",
+      "before": 5.5,
+      "after": 53,
+      "beforeImpressions": 6,
+      "impressions": 1,
+      "change": -47.5
+    },
+    {
+      "keyword": "原発のある都道府県",
+      "targetPath": "/blog/nuclear-power-plant-count-prefecture-gap",
+      "before": 1,
+      "after": 45,
+      "beforeImpressions": 4,
+      "impressions": 1,
+      "change": -44
+    },
+    {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 51,
+      "after": 8.5,
+      "beforeImpressions": 1,
+      "impressions": 12,
+      "change": 42.5
+    },
+    {
+      "keyword": "可処分所得 都道府県",
+      "targetPath": "/blog/real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+      "before": 51,
+      "after": 11,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 57
+      "change": 40
     },
     {
       "keyword": "日本 食料 自給 率 ランキング",
@@ -45,58 +81,22 @@
       "change": 40
     },
     {
-      "keyword": "警察 給料 ランキング",
-      "targetPath": "/blog/avg-salary-police-prefecture-prefecture-gap",
-      "before": 52,
-      "after": 19,
+      "keyword": "小学校 児童",
+      "targetPath": "/ranking/elementary-school-children-count",
+      "before": 46,
+      "after": 10,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 33
+      "change": 36
     },
     {
-      "keyword": "小学生 人数 全国 ランキング",
-      "targetPath": "/blog/elementary-school-children-count",
-      "before": 33,
-      "after": 1,
+      "keyword": "介護人材不足 2040年",
+      "targetPath": "/blog/nursing-care-shortage-2040",
+      "before": 43,
+      "after": 7.333333333333333,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 32
-    },
-    {
-      "keyword": "都道府県",
-      "targetPath": "/blog/fishery-catch-aquaculture-shift",
-      "before": 60,
-      "after": 30,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 30
-    },
-    {
-      "keyword": "日照時間 日本一",
-      "targetPath": "/ranking/annual-sunshine-duration",
-      "before": 7.25,
-      "after": 37,
-      "beforeImpressions": 4,
-      "impressions": 1,
-      "change": -29.75
-    },
-    {
-      "keyword": "自動車保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 50,
-      "after": 20.5,
-      "beforeImpressions": 5,
-      "impressions": 4,
-      "change": 29.5
-    },
-    {
-      "keyword": "鳥取県 小売",
-      "targetPath": "/areas/31000/retail-commerce",
-      "before": 42,
-      "after": 12.5,
-      "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 29.5
+      "impressions": 3,
+      "change": 35.666666666666664
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "病院数が最も少ない都道府県はどこ",
     "targetPath": "/ranking/general-hospital-count",
-    "rank": 7.131156316916488,
-    "impressions": 1868,
+    "rank": 7.132691278758695,
+    "impressions": 1869,
     "clicks": 29,
     "group": 5,
     "previousMethod": null,

@@ -55,6 +55,7 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
           原稿本文を複製せず、記事台帳の編集メタとR2本文の所在、note.com公開状態をまとめて確認します。
         </p>
         <Link href="/content/note/covers" className="text-xs text-console-accent hover:underline">カバー画像を分類別に確認する →</Link>
+        <Link href="/product/content-quality?channel=note" className="text-sm text-console-accent hover:underline">本文・画像の改善方針を管理する →</Link>
       </PageHeading>
 
       <div className="space-y-2">
@@ -89,7 +90,7 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
           {articles.map((article) => (
             <Row key={`${article.vertical}-${article.key}`}>
               <Cell>
-                <div className="font-medium">{article.title}</div>
+                <Link className="font-medium text-console-accent hover:underline" href={'/product/content-quality?owner='+encodeURIComponent('note/'+article.key)}>{article.title}</Link>
                 <div className="font-mono text-[10px] text-console-muted">{article.key}</div>
               </Cell>
               <Cell nowrap><StageBadge stage={article.stage} /></Cell>

@@ -88,8 +88,9 @@ function readScript(post: Post): PostScript {
 }
 
 export function assetUrl(id: number, asset: PostAsset): string | null {
-  if (asset.state !== "archived" || !asset.drive_path) return null;
-  return `/sns-asset/${id}/${encodeURIComponent(path.posix.basename(asset.drive_path))}`;
+  if (asset.state !== "archived" || (!asset.drive_path && !asset.r2)) return null;
+  const name = asset.drive_path ? path.posix.basename(asset.drive_path) : `${asset.role}-${asset.order}.${asset.mime?.split('/')[1] ?? 'png'}`;
+  return `/sns-asset/${id}/${encodeURIComponent(name)}`;
 }
 
 export function buildPostTrace(id: number): PostTrace | null {

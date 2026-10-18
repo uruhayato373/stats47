@@ -1,0 +1,9 @@
+export const WEB_INVENTORY:string;
+export const WEB_PARTS:string;
+export function writeWebInventory(root:string,result:unknown):void;
+export const MATERIAL_ROOTS:string[];
+export function readWebInventory(root:string):{schemaVersion:number;updatedAt:string|null;items:(import('./workspace.mjs').Item&{bodyRef?:import('./workspace.mjs').Original})[];images:Record<string,unknown>[];coverage:Record<string,unknown>[]};
+export function publicUrlAllowed(url:string):boolean;
+export function imageReferences(markdown:string,base:string):{url:string;alt:string;heading:string;line:number}[];
+export function sourceReferences(value:unknown):string[];
+export function inlineSvgReferences(markdown:string):{start:number;end:number;sha256:string;bytes:number;line:number}[];

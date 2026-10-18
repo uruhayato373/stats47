@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-10-16",
+  "account": "stats47",
+  "scope": "representative-public-article-review-and-strategy",
+  "method": {
+    "browser": "note.com published pages; read-only DOM and screenshots",
+    "viewport": { "width": 390, "height": 844 },
+    "measuredBodyImageWidth": 343,
+    "editedPublishedArticles": false,
+    "paidContentScope": "visible free part only",
+    "generalization": "sample findings; not a complete audit of current published articles"
+  },
+  "imageReproducibility": {
+    "observedOn": "2026-10-16",
+    "method": "Read local article/post ledgers and generation/storage implementation; no full remote file verification or regeneration performed.",
+    "noteLedger": {
+      "file": "data/note/articles.json",
+      "allArticles": 495,
+      "publishedArticles": 397,
+      "distinctPublishedUrls": 397,
+      "allArticlesWithManifest": 411,
+      "publishedArticlesWithManifest": 324,
+      "publishedNoteOnly": 73,
+      "draftR2ArticlesWithoutManifest": 11,
+      "limitation": "A body manifest records stored files; it does not prove every article has valid fixed numeric inputs or can regenerate its figures. note-only is a ledger classification, not a new remote absence test."
+    },
+    "snsLedger": {
+      "file": "data/sns/posts.json",
+      "allRows": 1002,
+      "postedX": { "rows": 210, "withArchivedAsset": 130, "withMissingAsset": 72, "withoutAssetRecords": 8, "withoutAssetRecordsAreQuoteRetweets": true },
+      "postedInstagram": { "rows": 212, "withArchivedAsset": 120, "withMissingAsset": 85, "withoutAssetRecords": 7 },
+      "limitation": "Counts are per post row; a row may contain both archived and missing assets. Missing records do not establish irreversible loss, and archived records do not establish preserved generation inputs. Drive contents were not reverified."
+    },
+    "implementation": [
+      {
+        "source": ".claude/scripts/note/lib/article-store.mjs",
+        "finding": "R2 article file manifests, read-back hashes, and private historical blobs support restoring saved files."
+      },
+      {
+        "source": ".claude/scripts/note/lib/note-render-spec.mjs",
+        "finding": "Ranking body figures use fixed chart-data.json, input SHA and a template version. This is not a universal contract for all article categories."
+      },
+      {
+        "source": ".claude/scripts/note/audit-note-image-assets.mjs",
+        "finding": "Default audit checks tracked docs/31 files; verify-r2 checks public body presence and referenced backgrounds. This does not fully validate every remote chart input."
+      },
+      {
+        "source": ".claude/scripts/sns/render-data-card.ts",
+        "finding": "New data-card generation saves source bytes, props.json, and a manifest with input/output hashes. Its local output must still be preserved by the applicable storage workflow."
+      },
+      {
+        "source": ".claude/scripts/sns/quick-still.ts",
+        "finding": "This entry point reads current R2 ranking values/item and writes source.json with source key, year and restore command. That source manifest itself does not contain the fixed numeric input values."
+      },
+      {
+        "source": ".claude/scripts/sns/lib/sns-drive-assets.mjs",
+        "finding": "SNS completed media are archived to Drive with a hash; the standard asset archiver handles media files, not a universal package of renderer and numeric inputs."
+      }
+    ],
+    "proposedFollowUp": "Extend NOTE-ARTICLE-QUALITY-PILOT-01 with input/output/template/usage inventory and an admin comparison workflow; keep NOTE-BODY-RECOVERY-01 as owner of 73 note-only article recoveries. Separate fixed-data visual updates from latest-data updates. Preserve current SNS all-47 policies and existing storage boundaries.",
+    "implementationStatus": "proposal recorded; no renderer, admin UI, remote asset, or public post changed"
+  },
+  "metrics": {
+    "lastLocalComplete": {
+      "file": "data/note/dashboard/2026-09-07_2026-10-04_2026-10-05T00-15-50-936Z.json",
+      "status": "pass",
+      "account": "stats47",
+      "period": { "start": "2026-09-07", "end": "2026-10-04" },
+      "coverageCompleteForThenCatalog": true,
+      "catalogPublishedAtCollection": 286,
+      "currentCatalogFullyCovered": false,
+      "totals": { "pageViews": 7048, "impressions": 11047, "likes": 30, "salesJpy": 0 },
+      "topArticles": [
+        { "key": "recovered-n80e58a01f660", "pageViews": 1603 },
+        { "key": "recovered-nf962c6702b93", "pageViews": 872 },
+        { "key": "recovered-n03e45e40d3a7", "pageViews": 377 },
+        { "key": "paid-n2ed31d721531", "pageViews": 358 }
+      ],
+      "topTwoPageViews": 2475,
+      "topTwoSharePercentRounded": 35.1,
+      "use": "historical prioritization only; not a current baseline or a cover CTR"
+    },
+    "latestLocalAttempt": {
+      "file": "data/note/dashboard/latest.json",
+      "fetchedAt": "2026-10-12T00:15:18.089Z",
+      "period": { "start": "2026-09-14", "end": "2026-10-11" },
+      "status": "incomplete",
+      "coverageComplete": false,
+      "observedArticles": 0,
+      "issue": "browser_open_failed",
+      "use": "missing; not zero traffic and not silently replaced by prior success"
+    },
+    "historicalNoteReferral": {
+      "file": "data/note/evidence/note-referrals-2026-09-06.json",
+      "period": { "start": "2026-08-09", "end": "2026-09-05" },
+      "filter": "Japan; sessionSource=note.com",
+      "sessions": 502,
+      "pageViews": 2437,
+      "engagedSessions": 370,
+      "limitation": "older and different period; aggregate referral evidence, not article-level card clicks"
+    },
+    "causalEffect": "not_evaluated"
+  },
+  "observations": [
+    {
+      "key": "recovered-n80e58a01f660",
+      "url": "https://note.com/stats47/n/n80e58a01f660",
+      "checks": ["mobile-ranking", "placement", "intro", "footer-relevance"],
+      "findings": [
+        "Two-column upper/lower chart has very small labels and values at 343px body width.",
+        "Upper-five and lower-five sections each show the same kind of combined upper/lower comparison, increasing repeated content.",
+        "Footer describes an apparel-price article as this article's source data despite the subject being prefectural income."
+      ],
+      "rankingImage": "https://assets.st-note.com/img/1773172505-EWsbBvYwP3uItrlfCcDO7xSH.png?width=1200"
+    },
+    {
+      "key": "recovered-nf962c6702b93",
+      "url": "https://note.com/stats47/n/nf962c6702b93",
+      "checks": ["mobile-ranking", "choropleth", "source-placement"],
+      "findings": [
+        "Top/bottom comparison labels are very small in the published mobile layout.",
+        "A red/yellow choropleth is placed after the distribution heading; top/bottom numeric annotations are small and numeric class boundaries are not readable in the normal-size view.",
+        "The explanatory text describes colors and standardized deviation scores; any palette or scale change must update that text too.",
+        "A source explanation and large e-Stat card precede the main body; detailed source material could be consolidated at the end while year, measurement location and units remain near the claim."
+      ],
+      "mapImage": "https://assets.st-note.com/img/1765267109-kbZOTBlaAJFR4EMjmPzyN3HL.png?width=1200"
+    },
+    {
+      "key": "recovered-n023501038bd5",
+      "url": "https://note.com/stats47/n/n023501038bd5",
+      "checks": ["mobile-ranking", "scatterplot", "cards", "footer-relevance", "linked-data-year"],
+      "findings": [
+        "Ranking table and scatterplot axes, ticks and regional legend are small at normal mobile width.",
+        "The next-article area was scrolled into view: the note article card displayed blank space; DOM showed an empty iframe and the magazine card had zero height.",
+        "Footer introduces an agricultural-land-conversion article as this sunshine article's source data.",
+        "Article discusses 2023 values while linked ranking cards display 2024 values; the link introduction must distinguish updated data."
+      ],
+      "scatterImage": "https://assets.st-note.com/img/1773368180-OBdKMCAHFNwnvgtcPaUx8DRS.png?width=1200",
+      "blankObservedCardTargets": [
+        "https://note.com/stats47/n/nf962c6702b93",
+        "https://note.com/stats47/m/me574f67ac47f"
+      ],
+      "blankCardRootCause": "not_determined"
+    },
+    {
+      "key": "a-kakei-aichi",
+      "url": "https://note.com/stats47/n/nda72a0bed2c4",
+      "checks": ["intro", "figure-sequence", "source", "measurement-unit"],
+      "findings": [
+        "Five body images and three main analysis sections move from ten expenditure groups to individual items and corroborating statistics.",
+        "Intro and closing notes identify Nagoya City, 2024, two-or-more-person households and the simple mean of 47 cities.",
+        "Intro is dense; shortening must preserve those distinctions. Detailed mobile review of all five figures remains pending."
+      ]
+    },
+    {
+      "key": "recovered-n03e45e40d3a7",
+      "url": "https://note.com/stats47/n/n03e45e40d3a7",
+      "checks": ["intro", "procedure-structure", "footer-relevance"],
+      "findings": [
+        "Six images accompany Google My Maps and Google Earth instructions; detailed screenshot readability and current product behavior still require review.",
+        "Footer repeats next-step and source-data offers for multiple different analyses rather than a single clear continuation."
+      ]
+    },
+    {
+      "key": "d-geo-ipss-prefecture-map",
+      "url": "https://note.com/stats47/n/n137cfc540d23",
+      "checks": ["intro", "result-preview", "source"],
+      "findings": [
+        "Visible free part explicitly identifies audience, outcomes and data limitations.",
+        "The only body image in the visible free part is a six-row CSV sample, despite the geographic data-reuse subject. A readable result-map example is a candidate, not a requirement to add decoration.",
+        "A compact source section at the end already names original institutions, years and author's processing."
+      ],
+      "paidPartReviewed": false
+    },
+    {
+      "key": "d-geo-station-access-analysis",
+      "url": "https://note.com/stats47/n/n041e38af8fb5",
+      "checks": ["intro", "definitions", "source"],
+      "findings": [
+        "Visible free part defines straight-line 800m and distinguishes it from walking distance.",
+        "Reader/outcome headings and an end source section are already present; these elements should not be added again mechanically."
+      ],
+      "paidPartReviewed": false,
+      "pilotCandidate": false
+    }
+  ],
+  "noteLinkFormats": {
+    "verifiedOn": "2026-10-16",
+    "officialSources": [
+      { "url": "https://www.help-note.com/hc/ja/articles/360019596133", "supports": "URL embeds and general webpage cards; Enter/Return conversion" },
+      { "url": "https://www.help-note.com/hc/ja/articles/360008882854", "supports": "linked text" },
+      { "url": "https://www.help-note.com/hc/ja/articles/360009035593", "supports": "linked images" }
+    ],
+    "observedTemplates": ["external-article card", "note article embed", "text link"],
+    "arbitraryCardSizeToggle": "not_verified",
+    "cardClickUplift": "hypothesis_not_measured"
+  },
+  "dobokuReference": {
+    "project": "doboku-note",
+    "localSources": ["config/note-intro-standard.json", "data/note/sales.json", "data/business/records/site-to-sales-2026-09-r2.json"],
+    "publicSources": [
+      "https://note.com/dobokunote/m/m8290970a7f05",
+      "https://note.com/dobokunote/n/n047355a30ea8?magazine_key=m8290970a7f05"
+    ],
+    "observedStructure": "specific candidate and exam stage; audience/outcome statements; deliverables and adaptation guidance; problem-based magazine",
+    "salesEvidence": { "month": "2026-09", "transactions": 35, "magazineTransactions": 10, "sourceUpdatedAt": "2026-10-15" },
+    "limitation": "Sales are observed, but no causal attribution to covers, introductions or card format. Historical site-click and buyer identities are not joined."
+  },
+  "pendingChecks": [
+    "Refresh complete stats47 metrics for the current catalog and fixed pre-change period.",
+    "Review all household and procedure figures at 320px and 390px; verify data and current software steps.",
+    "Review magazine actual membership, reading order and public card rendering for pilot articles.",
+    "Prepare before/after candidates and implement only the necessary generator/gate changes before any approved publication."
+  ],
+  "backlog": "NOTE-ARTICLE-QUALITY-PILOT-01"
+}

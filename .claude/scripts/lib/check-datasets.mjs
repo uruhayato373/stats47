@@ -5,7 +5,7 @@
  * 落とすもの (error):
  *   - 台帳の行の不備 (id 重複・語彙外の kind / target / domain・寿命の名前が RETENTION_POLICIES に無い、または置き場が食い違う)
  *   - GOVERNED に当たる追跡ファイルが、台帳のどの行にも当たらない (未宣言) / 2 行以上に当たる (重なり)
- *   - どのファイルにも当たらない行 (planned を除く)
+ *   - どのファイルにも当たらない行 (planned・r2State を除く)。r2State の行が追跡ファイルに当たる・live/ の外にある
  *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json と、Markdown (手順書・作業カード・文書・memory・
  *     README) と Codex 用の agent 定義に残っている。当時のパスを残す履歴 (data/・.claude/state/・スキルの
  *     reference/ の監査とレビュー・原稿の outbox) は対象外。コードのコメント行と、文書で「旧置き場」「旧パス」と書いた
@@ -152,7 +152,9 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
     for (const c of matched) c.hits += 1;
   }
   for (const c of compiled) {
-    if (c.hits === 0 && !c.ds.planned) errors.push(`どのファイルにも当たらない: ${c.ds.id} (${c.ds.path})`);
+    if (c.hits === 0 && !c.ds.planned && !c.ds.r2State) errors.push(`どのファイルにも当たらない: ${c.ds.id} (${c.ds.path})`);
+    // r2State の行は正本が R2 で、手元は git 管理外の live/ に置く。追跡ファイルに当たっていたら置き場の取り違え
+    if (c.ds.r2State && (c.hits > 0 || !c.ds.path.includes("/live/"))) errors.push(`r2State の行は git 管理外の live/ に置く: ${c.ds.id} (${c.ds.path})`);
   }
 
   const moves = compiled

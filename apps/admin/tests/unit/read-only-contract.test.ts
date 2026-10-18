@@ -30,9 +30,14 @@ describe("admin read-only contract", () => {
       .flatMap((file) => {
         const source = fs.readFileSync(file, "utf8");
         const rel = path.relative(adminRoot, file).replaceAll("\\", "/");
-        if (["app/api/posts/[id]/caption/route.ts", "app/api/note-covers/[key]/production/route.ts"].includes(rel)) {
+        if (["app/api/posts/[id]/caption/route.ts", "app/api/note-covers/[key]/production/route.ts","app/api/content-quality/route.ts","app/api/media-library/[id]/route.ts","app/api/media-templates/[id]/route.ts"].includes(rel)) {
           expect(source).toMatch(/export async function PATCH/);
           expect(source).not.toMatch(/export\s+(?:async\s+)?function\s+(POST|PUT|DELETE)/);
+          return [];
+        }
+        if(rel==="app/api/media-library/[id]/candidate/route.ts"){
+          expect(source).toMatch(/export async function POST/);
+          expect(source).not.toMatch(/export\s+(?:async\s+)?function\s+(PATCH|PUT|DELETE)/);
           return [];
         }
         return /export\s+(?:async\s+)?function\s+(POST|PATCH|PUT|DELETE)|export\s+const\s+(POST|PATCH|PUT|DELETE)/.test(

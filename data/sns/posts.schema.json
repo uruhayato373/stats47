@@ -85,6 +85,7 @@
         "role": { "enum": ["image", "slide", "video", "thumbnail"] },
         "order": { "type": "integer", "minimum": 1 },
         "state": { "enum": ["archived", "missing"] },
+        "r2": {"type":"object","additionalProperties":false,"required":["bucket","key"],"properties":{"bucket":{"const":"stats47-private"},"key":{"type":"string","pattern":"^sns-assets/(x|instagram|threads|youtube|tiktok)/[0-9]+/(image|slide|thumbnail)-[0-9]+/[0-9a-f]{64}\\.(png|jpg|webp|gif)$"}}},
         "drive_path": {
           "description": "Google Drive の stats47 フォルダ起点の相対パス。fileId・URL・端末のマウント先は書かない",
           "type": "string",
@@ -103,7 +104,7 @@
         "reason": { "type": "string", "minLength": 1 }
       },
       "if": { "properties": { "state": { "const": "archived" } } },
-      "then": { "required": ["drive_path", "sha256", "bytes", "mime"] },
+      "then": { "required": ["sha256", "bytes", "mime"], "anyOf":[{"required":["r2"]},{"required":["drive_path"]}] },
       "else": { "required": ["reason"] }
     }
   }
