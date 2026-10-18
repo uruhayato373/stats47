@@ -1385,7 +1385,8 @@ export function MediaWorkspace({
               }}
             >
               <option value="">すべての形式</option>
-              {[...new Set(data.images.map((i) => i.format).filter(Boolean))]
+              {/* URL で指定した形式は、該当画像が 0 件 (在庫索引の未取得など) でも選択肢に残して条件を保つ */}
+              {[...new Set([...data.images.map((i) => i.format), format].filter(Boolean))]
                 .sort()
                 .map((f) => (
                   <option key={f} value={f}>
