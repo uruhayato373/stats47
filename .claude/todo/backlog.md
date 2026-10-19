@@ -129,6 +129,9 @@ updated: 2026-10-19
 
 - **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
 - **2026-10-19 ココナラ撤退**: ココナラを取得対象から外した (取得元 8 → 7、計測の鮮度の母数も 1 減る)。ココナラの日次の判定はこのカードの対象外。過去の観測は `data/authenticated/revenue-history.json` に残る。
+- **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
+- **次 (オーナー・10-20 17:30 の定期実行より前)**: ① Mac の `.env.local` に `AFB_API_KEY` を入れる (CI では Secrets から渡していた)。② `node .claude/scripts/google-admin/cli.mjs login` で Google 管理用プロファイルにログインし直す (CI は保管庫側のセッションを更新し続けていたので Mac のプロファイルは切れていた)。③ KDP は `.local/authenticated-measurement/kdp.autologin-failed` を消して `refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。これをしないと、Mac の要約が push された日は CI の予備も「収集済み」で省略し、その日の afb・GSC が欠ける。
+- **次 (2 日 pass の後・10-22 目安)**: Mac の取得が 2 日続けて全取得元 pass したら、`authenticated-measurement.yml`・`bootstrap-session.mjs --publish` と CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`)・GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」も書き換える。Secrets の削除はオーナー承認後。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
