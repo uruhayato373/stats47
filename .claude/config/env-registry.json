@@ -2,15 +2,70 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
-    { "name": "APPDATA", "visibility": "server", "contexts": ["process"] },
-    { "name": "CHROME_PATH", "visibility": "server", "contexts": ["process"] },
-    { "name": "NOTE_BU_CDP", "visibility": "server", "contexts": ["process"] },
-    { "name": "NOTE_COVER_BROWSER", "visibility": "server", "contexts": ["process"] },
-    { "name": "NOTE_COVER_PNG", "visibility": "server", "contexts": ["process"] },
-    { "name": "XDG_CONFIG_HOME", "visibility": "server", "contexts": ["process"] },
-    { "name": "NODE_EXTRA_CA_CERTS", "visibility": "server", "contexts": ["process"] },
-    { "name": "AFB_API_KEY", "visibility": "secret", "contexts": ["secret", "process"] },
-    { "name": "DISPLAY", "visibility": "server", "contexts": ["process"] },
+    {
+      "name": "APPDATA",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHROME_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_BU_CDP",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_COVER_BROWSER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_COVER_PNG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "XDG_CONFIG_HOME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NODE_EXTRA_CA_CERTS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "AFB_API_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "secret",
+        "process"
+      ]
+    },
+    {
+      "name": "DISPLAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
     {
       "name": "MEASUREMENT_BROWSER_SOURCE",
       "visibility": "server",
@@ -44,6 +99,13 @@
       "visibility": "secret",
       "contexts": [
         "secret",
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_VAULT_WRITER",
+      "visibility": "server",
+      "contexts": [
         "process"
       ]
     },

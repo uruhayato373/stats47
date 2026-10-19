@@ -20,6 +20,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const name = process.argv[2];
 const source = sourceFor(name);
 const local = process.argv.includes('--local');
+// --local --vault: Mac の定期実行 (collect-local.mjs)。セッションは Mac の専用プロファイルから取り出し、
+// 証跡・販売台帳の候補・直近の試行は CI と同じく private R2 の保管庫へ書く (restore.mjs の読み手を変えない)。
+// CI 専用の処理 (保管庫のセッション・CI 再ログイン・認証停止の記録) は行わない。
+const vaultWrites = !local || process.argv.includes('--vault');
 const now = new Date().toISOString();
 const runId = process.env.GITHUB_RUN_ID || String(Date.now());
 const runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT || 1);
@@ -204,7 +208,7 @@ try {
           paidOrders: daily.records.filter(r => r.kind === 'processed-orders').reduce((sum, r) => sum + (r.paid ?? 0), 0) }
         : null;
       result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue };
-      if (!local) {
+      if (vaultWrites) {
         const vaultKey = kdpMonthlyVaultKey(monthly.period.month);
         await writeVault(vaultKey, {
           schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
@@ -218,9 +222,11 @@ try {
   }
   const evidence = { schemaVersion: 1, source: name, observedAt: now, files, logs };
   writeFileSync(join(work, 'evidence.json'), JSON.stringify(evidence), { mode: 0o600 });
-  if (!local) {
+  if (vaultWrites) {
     result.evidence = await writeVault(historyKey, evidence);
     await writeVault(`${name}/latest-success`, evidence);
+  }
+  if (!local) {
     if (existsSync(join(work, 'refreshed.json'))) {
       await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(readFileSync(join(work, 'refreshed.json')))) });
     }
@@ -232,9 +238,9 @@ try {
   if (name === 'note' && existsSync(join(work, 'note'))) capture(`.local/authenticated-measurement/${name}-${runId}/note`);
   // Raw diagnostics stay in a private encrypted object. Only fixed codes reach public Actions logs.
   writeFileSync(join(work, 'failure.log'), `${error.message}\n${logs}`, { mode: 0o600 });
-  if (!local) {
+  if (vaultWrites) {
     try {
-      if (result.code === 'auth_required' && result.collectionAttempted && bundle) {
+      if (!local && result.code === 'auth_required' && result.collectionAttempted && bundle) {
         const recovery = rejectedAuthentication(name, bundle, now);
         await writeVault(`${name}/auth-recovery`, recovery);
         result.recovery = { state: 'awaiting_reauthentication', blockedSince: recovery.blockedSince };
@@ -252,6 +258,8 @@ if (!local) {
     try { await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(readFileSync(join(work, 'refreshed.json')))) }); }
     catch { result.status = 'failed'; result.code = 'storage_error'; }
   }
+}
+if (vaultWrites) {
   try { await writeVault(`${name}/latest-attempt`, result); }
   catch { result.status = 'failed'; result.code = 'storage_error'; }
 }

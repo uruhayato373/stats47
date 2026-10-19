@@ -367,7 +367,33 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   assert.equal(workflow.jobs.gate.permissions, undefined);
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
   assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
-  assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
+  // 2026-10-19: CI を起動せず Mac で直接取得する。CI の定期実行は gate で同日の収集済みを省略する予備として残る
+  assert.match(wrapper, /measurement-collect-local\.sh/);
+  assert.doesNotMatch(wrapper, /gh workflow run authenticated-measurement/);
+});
+
+test('Mac direct collection writes evidence to the vault but never touches CI-only session state', () => {
+  const collect = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
+  assert.match(collect, /const vaultWrites = !local \|\| process\.argv\.includes\('--vault'\);/);
+  // 保管庫のセッション・認証停止の記録は CI だけが書く (Mac のセッションの正本は専用プロファイル)
+  for (const needle of ['writeVault(`${name}/session`', 'writeVault(`${name}/auth-recovery`']) {
+    let index = collect.indexOf(needle);
+    assert.ok(index >= 0, needle);
+    for (; index >= 0; index = collect.indexOf(needle, index + 1)) {
+      // ciLogin は !local && CI の資格情報があるときだけ真
+      assert.match(collect.slice(Math.max(0, index - 1600), index), /!local|ciLogin/, `${needle} は CI だけが書く`);
+    }
+  }
+  const runner = readFileSync('.claude/scripts/measurement/collect-local.mjs', 'utf8');
+  assert.match(runner, /'--local', '--vault'/);
+  assert.match(runner, /MEASUREMENT_VAULT_WRITER: 'mac'/);
+  const vault = readFileSync('.claude/scripts/measurement/vault.mjs', 'utf8');
+  assert.match(vault, /!process\.env\.GITHUB_ACTIONS && process\.env\.MEASUREMENT_VAULT_WRITER !== 'mac'\) throw new Error\('vault_write_ci_only'\)/);
+  assert.doesNotMatch(runner, /--publish/, 'Mac の取得は Secrets へ送らない');
+  const shell = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
+  const commit = shell.split('\n').find((line) => /git .*commit/.test(line));
+  assert.ok(commit, '記録コミットがある');
+  assert.doesNotMatch(commit, /skip ci|ci skip|no ci/i, 'CI を止める印を付けると develop→main の PR の検査が止まる');
 });
 
 test('note sales with private evidence survive an incomplete article inventory without making the source pass', () => {

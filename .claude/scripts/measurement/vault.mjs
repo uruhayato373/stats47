@@ -44,7 +44,9 @@ export async function readVault(key) {
   }
 }
 export async function writeVault(key, value) {
-  if (!process.env.GITHUB_ACTIONS) throw new Error('vault_write_ci_only');
+  // 書けるのは CI と、Mac の定期実行 (collect-local.mjs が MEASUREMENT_VAULT_WRITER=mac を名乗る。2026-10-19)。
+  // 手元の試し実行がうっかり保管庫を上書きしないよう、それ以外は止める。
+  if (!process.env.GITHUB_ACTIONS && process.env.MEASUREMENT_VAULT_WRITER !== 'mac') throw new Error('vault_write_ci_only');
   const Key = objectKey(key);
   const body = Buffer.from(JSON.stringify(value));
   const encrypted = encrypt(body, encryptionKey(), Key);
