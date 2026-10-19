@@ -9,6 +9,7 @@ import { jstDateOf } from '../metrics/lib/periods.mjs';
 import { hash, validateSnapshot, validateLog, reviewDue, selectKeyword, rankingMovements, recordDeployment } from './lib/keyword-cycle.mjs';
 import { SITE_ORIGIN } from '../lib/site-config.cjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { METRIC_DEFINITIONS_DIR } from "../../../config/paths.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 export function readJson(repo, file) { return JSON.parse(fs.readFileSync(path.join(repo, file), 'utf8')); }
@@ -20,7 +21,7 @@ export function editableFile(repo, targetPath) {
   if (/^\/survey\/[a-z0-9-]+$/.test(targetPath)) return 'apps/web/src/features/survey/survey-editorial.ts';
   const match = /^\/(ranking|themes)\/([a-z0-9-]+)$/.exec(targetPath);
   if (!match) return null;
-  const file = `packages/data-configs/src/${match[1] === 'ranking' ? 'metrics' : 'theme-catalog'}/${match[2]}.ts`;
+  const file = match[1] === 'ranking' ? `${METRIC_DEFINITIONS_DIR}/${match[2]}.ts` : `${datasetDir('themes.catalogs')}/${match[2]}.json`;
   return fs.existsSync(path.join(repo, file)) ? file : null;
 }
 export function pageFragment(source, targetPath) {
