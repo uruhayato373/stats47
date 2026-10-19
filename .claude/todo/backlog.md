@@ -902,15 +902,6 @@ updated: 2026-10-19
 - **次**: 目的文を実データに合わせて直すか指標を足す (packs.ts)、見本画像の題名を折り返す (生成器)、listing.md とライセンスの記載を揃える。ココナラの出品文 (`config/coconala-listings.json`) にも同じ記載があれば同時に直す (outward はオーナー承認)。
 - **完了条件**: 14 パックの目的文・listing・LICENSE・見本画像が実物と一致し、note 販売記事の「収録外」の断り書きが不要になる。
 
-### [CI-DEVELOP-INHERITED-GATES-20261012] Codex ミラーとテーマ件数の検査不整合を直す
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-12] [領域:管理]
-
-- **追加確認 (2026-10-12、6件予約後)**: `63837dcbb7` の [Develop Quality Gate](https://github.com/uruhayato373/stats47/actions/runs/38200967468) は Fast Gates成功、Catalog Gates失敗、packages/web tests実行中。run未完了のためログ取得できず、今回のCatalog失敗原因が既存2系統と同じかは未確認。完了後のログを確認する。6件の予約・2件取消・公開素材・台帳・管理画面の照合は成功済みで、配信スケジュールはdevelopに保存済み。
-- **証拠**: SNS44件予約の保存コミット `358dd18884` の [Develop Quality Gate](https://github.com/uruhayato373/stats47/actions/runs/38187837335) で2系統が失敗。① `.claude/skills/sns/sns-weekly-report/reference/reports/2026-W40.md` の Codex ミラーリンクが未登録 (E12)。② `packages/ranking/src/survey/__tests__/theme-redesign-ratchet.test.ts` の baseline が chart=期待51/実53、metric-group=期待438/実457。両系統の対象は親コミットから差分なし。PR Quality Check `38187839993` の Contract / Type Check も①で停止 (25 workspace の型検査自体は合格)。SNS台帳・予約・素材の検査は合格し、既存のInstagram自動投稿はdevelopの予約表を読むため、このCI失敗による投稿待ちはない。
-- **実行順**: ① `node .claude/scripts/lib/sync-codex-mirror.cjs` で正本からミラーを再生成し、必要な差分だけ保存 ② テーマ変更の履歴と `survey-taxonomy-ratchet.json` の追加・統合記録を突合 ③ 記録とテスト契約を整合させ、関連単体テスト・`npm run type-check`・`npm run preflight:pr` を実行する。
-- **停止条件**: テーマ件数の変化を裏付ける変更が特定できなければ期待値だけを緩めない。他セッションの未コミット差分をまとめて取り込まない。
-- **完了条件**: ミラー検査とテーマの該当4テストが成功し、Develop Quality GateおよびContract / Type Checkが成功する。
-
 ### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:管理]
 
@@ -1043,20 +1034,6 @@ updated: 2026-10-19
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
-### [UI-FIX-OTHER-20261011] UI 是正: other の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-20261011.txt] [起票:2026-10-11] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-OTHER-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
-- **対象**:
-  - `machine|other|title_changed` — title_changed: 39 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/municipalities/ranking/agricultural-output / https://stats47.jp/municipalities/ranking/commute-by-bicycle / https://stats47.jp/municipalities/ranking/commute-by-bus
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-OTHER-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
 ### [UI-FIX-MUNICIPALITY-20261011] UI 是正: municipality の週次 UI 検査の指摘 2 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt] [起票:2026-10-11] [領域:サイト]
@@ -1157,13 +1134,6 @@ updated: 2026-10-19
 - **事象**: dependabot は `apps/web` などの package.json だけを上げ、ルートの `overrides` (next 15.5.24・sharp 0.35.4) は古いまま残った。next が 2 つの版で入り、PR #1119 の本番ビルドの /404 事前描画が `<Html> should not be imported outside of pages/_document` で落ちた (2026-10-10。overrides を揃えて解消)。CI の Build Check が本番前に止めたが、ビルド 5 分と CI 往復 1 回を使った。
 - **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
 - **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
-
-### [AI-CONTENT-GEMINI-PREFLIGHT-01] ai-content-gemini-daily が 12 日連続で Gemini の構造化出力の事前確認に失敗している
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
-
-- **事象**: 横断監視 #763 で `ai-content-gemini-daily.yml` が 12 回連続失敗 (2026-09-28〜10-09、例: run 37873064516)。ログの終わりは「Gemini structured-output preflight に失敗しました」。#763 には他に cron 異常が計 7 件ある。
-- **次**: 失敗 run のログで preflight が何を送って何が返ったか (認証・モデル名・スキーマ) を確かめ、原因を直す。止めると決めたなら `gh workflow disable` で止め、main からも消す。#763 の残り 6 件も同じ表で原因と行き先を付ける。
-- **完了条件**: 次の定時実行が成功するか、意図して止めたことが workflow と #763 で確認できる。
 
 ### [RANKING-RATIO-RANK-MISMATCH-01] 比率指標 4 件で配信中の順位が再計算と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
@@ -1351,19 +1321,6 @@ updated: 2026-10-19
 - **追記 (2026-10-08、blog-critic が報告・e-Stat 生応答で確認)**: 2021 年の岩手は表章項目「労働者数」が 0 (十人単位) で平均年齢 86.5 歳・勤続 52.5 年なのに、年収 491.4 万円で 39 位として順位が付いている。推計 10 人未満の県年は、少なくとも順位から外すか注記する。
 - **停止条件**: 推計人数が小さいことだけを理由に、他の職種の指標を一括で非公開にしない (職種ごとに比を見てから決める)。
 - **完了条件**: 対象指標の扱いが決まり、ページの表示 (併記・note・非公開) が本番に反映されている。
-
-### [DEPLOY-SMOKE-NEW-KEY-OGP-01] ランキングの公開キーを足すデプロイは、OGP 画像が後から作られるためデプロイ後スモークテストで必ず落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:bash .github/scripts/smoke-test-routes.sh https://stats47.jp] [起票:2026-10-08] [領域:データ]
-
-- **事象 (2026-10-08)**: 公開キー (`KNOWN_RANKING_KEYS`) を増やしたデプロイが、同じ日に 2 回ともデプロイ後スモークテスト
-  (`deploy-workers.yml` の「Smoke test (Production routes)」) で落ちた。PR #1100 (run 37705476022、13 キー) と
-  PR #1104 (run 37737480909、31 キー)。スモークは差分で増えたキーの `og:image` を検査するが、OGP 画像は main のマージ後に
-  `sync-snapshots.yml` (ranking-items) の `sync-ranking-keys` job が作るので、デプロイの時点では必ず 404 になる。
-  Worker のデプロイ自体は成功しており、どちらも手動で sync-snapshots を代理起動して OGP を作った後、スモークを再実行して 26/26 で通った。
-- **次**: OGP 画像を作る時点をデプロイ前へ動かす (develop の data-refresh か PR の段階で、増えるキーの OGP を R2 に作る) か、
-  `deploy-workers.yml` がスモークの前に増えたキーの OGP を作る。検査を緩めて og:image を見ないようにはしない。
-- **2026-10-08 実装 (develop)**: `ranking-ogp-new-keys.yml` を足した。develop への push で `known-ranking-keys.ts` に足されたキー (抽出はスモークと同じ規則・最大 50 件) の OGP とリンクカードを、`sync-ranking-keys` job と同じ exact publish plan で R2 に作る (`r2-write`)。抽出は今日の 2 件 (77073be42 で 13 件、PR #1104 の main マージで 31 件) を再現した。workflow policy audit 0 件。push 起動の workflow は push した commit の定義で動くので、develop に入った時点から効く。**残り**: 次に既知キーを足す develop push でこの run が成功し、その後のデプロイのスモークが手動の代理起動なしに通るのを見てカードを消す。
-- **完了条件**: 公開キーを足した次のデプロイで、手動の代理起動なしにデプロイ後スモークテストが通る。
 
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1762,29 +1719,12 @@ updated: 2026-10-19
 - **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
 - **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
 
-### [BLOG-OUTBOX-CONTENTS-01] ブログの公開待ち原稿を contents/blog へ移したあと、新しい置き場からの公開と掃除を run で確かめる
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
-
-- **経緯**: 2026-10-07 にオーナーが「docs/ ではなく、R2 か contents/ で管理し、ローカルは一時的に持つだけでよいのでは」と指摘し、(a) 「図の年の書き直し 22 本を公開してから移す」を選んだ。公開待ちの outbox は公開後に CI が消すもので、人が読み返す文書の置き場 (docs/) と性質が合わない。
-- **現在地 (2026-10-08)**: 22 本の公開後に、contents/blog の原稿 32 本を README と一緒に `git mv` で `contents/blog/` へ移した (未公開の 13 本も同じ diff で移したので失われていない)。台帳 `config/datasets.mjs` に `blog.outbox` と RETIRED を足し、workflow 4 本・スクリプト・skill・rule・memory の参照を書き換え、`npm run check-datasets` の旧置き場の参照は 0 件になった。PR CI の変更分類 (`plan-pr-quality.mjs`) は原稿だけの PR で重い job を起動しないよう `contents/` を docs/ と同じ扱いにした。
-- **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
-- **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
-- **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
-- **① 済 (2026-10-08)**: cc-estat-14 の書き直し (a1535b433) の push で `blog-auto-publish` (run 37776610241) が `contents/blog` から公開し、outbox 掃除を 938ca1fa1 で書き戻した。本番の記事は新しい表 ID (0003409159) を出している。残りは ② の日次 run だけ。
-
 ### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
 - **事象**: 2026-10-07 の書き直しで、数値の誤りやタイトルの約束が果たせないことを理由に、公開中の記事のタイトルを変えた。とくに `health-life-expectancy-structure` は週約 3,900 表示 (書き直し前の GSC) の記事で、タイトルと主題が変わった。ほかにタイトルを変えたのは `healthy-life-expectancy-male-female-gap`・`cc-estat-02-search-skill`・`cc-estat-04-aging-heatmap`・`ai-claude-code-pref-analysis` などである (公開時の diff で確定する)。
 - **次**: 公開日を記録し、公開前 28 日の表示回数・クリック・掲載順位を baseline として GSC から取る。improvement-triage に渡して `improvements.md` に effect/pending として載せ、期日を公開の 4 週間後にする。
 - **完了条件**: 対象の記事と baseline が improvements.md に載っている (効果判定そのものは improvements.md 側で行う)。
-
-### [BRANCH-CLEANUP-20261007] マージ済みの作業ブランチ 3 本を GitHub から消す
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:管理]
-
-- **事象**: `claude/years-downstream-follow`・`claude/metric-related-content`・`claude/years-follow-blog-theme` は develop にマージ済みだが、クラウドセッションの git proxy がリモートのブランチ削除を 403 で拒むので消せなかった (2026-10-07)。
-- **次**: GitHub の Branches 画面で 3 本を削除する。
-- **完了条件**: `git ls-remote --heads origin 'claude/years-*' 'claude/metric-related-content'` が何も返さない。
 
 ### [METRIC-DAIRY-CONFIG-01] 乳用牛の 2 指標で、調査時点と対象の表示が欠けている・食い違っている点を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
@@ -1854,21 +1794,6 @@ updated: 2026-10-19
 - **追記 (2026-10-07)**: school-teacher-annual-income-prefecture-gap の critic も 3 件目として同じ報告をした (本文で名指しする愛媛県・長崎県の点が図で特定できない)。
 - **次**: data JSON に名指しする県 (例: `labelAreas: ["26000", "24000"]`) を書けるようにし、その点だけに県名を添える。点の重なりで読めなくならない配置を `lintScatterQuality` の検査と合わせて決める (散布図は 720×720・単色の規格がある)。
 - **完了条件**: 指定した県だけに名前が出ることと、指定が無い図の出力が変わらないことを svg-builder のテストで固定している。
-
-### [BLOG-AUDIT-PROVENANCE-HELP-01] audit-chart-provenance.mjs が --help でも全件監査を実行して是正キューを書き換える
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/audit-chart-provenance.mjs --help] [起票:2026-10-07] [領域:サイト]
-
-- **事象**: 2026-10-07、it-industry-concentration の writer が使い方を確かめようと `--help` を付けて実行したところ、全件の監査が走って `data/blog/chart-provenance-queue.json` が書き換わった (writer が git checkout で戻した)。このキューは blog-remediation-daily の provenance ラチェットの基準なので、誤って書き換えると日次のラチェットの判定がずれる。
-- **次**: `--help` / `-h` で使い方を出して終了する。知らない引数は書き込まずにエラーにする。
-- **完了条件**: `--help` で何も書き換えずに exit 0 になる。
-
-### [METRIC-WAGE-SURVEY-01] 賃金構造基本統計調査の職種別年収 39 指標に surveyId と調査の注記を足す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
-
-- **事象**: `data/metrics/*-annual-income.ts` の 39 指標はどれも `surveyId` を持たず (2026-10-07 に数えた)、指標の定義シートで「調査」が空欄になる。physical-therapist-annual-income-prefecture-gap の writer が報告した。職種別の県の値は標本が少なく年ごとに順位が大きく動くので、その注意も読者向けの定義に出したい。
-- **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。 定義シートに対象 (一般労働者か・男女計か) も出るよう、description に書く (physical-therapist-annual-income の critic が報告)。
-- **追記 (2026-10-07)**: `school-teacher-annual-income` も同じで、critic が定義シートの対象欄「対象の記述なし」と「surveyId 未設定」を確認した。
-- **完了条件**: 39 指標の定義シートで調査名が出る。
 
 ### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト]
@@ -4068,14 +3993,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   選定時の需要 (`evidence.gscImp`、無ければ `areaImp`) が分かる 80 本を中央値 129 で 2 つに分けると、上半分 40 本のうち表示ありは 17 本、下半分 40 本は 14 本で、
   需要の大小と公開後の表示 (W40 の 1 週) の順位相関は 0.03 だった。ただし表示 0 の 49 本の多くは索引に入っていない (BLOG-SEO-TYPES-01 の URL Inspection の内訳) ので、
   「選定が外れた」のか「索引に入らず結果が出ていない」のかはまだ分けられない。索引に入った記事だけで同じ比較をやり直すまで、選定の当否は判定しない。
-
-### [TOKEN-AICONTENT-01] Claude 自動生成の API 課金 (5 件 run $79〜$90) を課金無効 project の Gemini 日次へ移行する
-
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:管理]
-
-- 2026-10 月次計画で improvements から降格。再開条件: Issue #763 が解消し日次 CI が PASS>0 を記録し始めた時。7 run の PASS 率・request/token・cost_usd を照合して費用 0 を判定する (`[kpi: operating-cost]`)。
-- [target: API 課金 -100% ($0)]。2026-09-24 実測: Gemini 日次 CI 21 run は PASS 0・preflight_status が billing → bad-request、cost_usd $0 は生成 0 件のため。横断監視 Issue #763 (Gemini HTTP402) で追跡中、重複起票しない。
-- **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: 同csvの最新行は2026-10-01で、2026-09-22〜10-01の10 runはすべてtargets 3・passed 0・skipped 3・preflight_status `bad-request`・cost_usd 0であり、2026-09-24の所見から変化していない (PASS>0のrunは0件のため、7 run分の判定条件はまだ満たされない)。次: Issue #763でGemini preflightのbad-request原因が解消し日次CIがPASS>0を記録し始めた時点で、7 run分のPASS率・request/token・cost_usdを照合して費用0かを判定する。2026-10-15時点でもPASS>0のrunが0件なら、効果判定を続けず、Gemini日次を止めるか生成経路を変えるかの意思決定カード (🟣) を `.claude/todo/backlog.md` へ起票し、このカードは削除する。
 
 ### [FUNNEL-CTA-01] ranking 末尾 CTA の click と遷移後行動を判定する
 
