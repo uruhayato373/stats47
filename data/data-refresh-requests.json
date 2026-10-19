@@ -1,0 +1,7 @@
+{
+  "metric": "designated-difficult-disease",
+  "since": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": false,
+  "snapshotScope": "ranking"
+}
