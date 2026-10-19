@@ -10,10 +10,9 @@
 # 同じ日の定期実行は authenticated-measurement.yml の gate が省略する。
 source "$(dirname "$0")/_common.sh"
 REFRESH_RC=0
-log_run measurement-session-refresh node .claude/scripts/measurement/refresh-session.mjs a8 moshimo kdp note --publish || REFRESH_RC=$?
+log_run measurement-session-refresh node .claude/scripts/measurement/refresh-session.mjs a8 kdp note --publish || REFRESH_RC=$?
 # X は予約投稿 (publish-x) 用。Mac だけで使うので CI へは渡さない (--publish を付けない)
 log_run x-session-refresh node .claude/scripts/measurement/refresh-session.mjs x || REFRESH_RC=$?
-# Mac で直接取得する経路 (measurement-collect-local.sh) は準備済み。afb の API キー (キーチェーン) と
-# GSC のログインが Mac に揃うまでは CI を起動する。切り替えは MEASUREMENT-MAC-DIRECT-01。
+# Mac で直接取得する経路 (measurement-collect-local.sh) は準備済み。GSC のログインが Mac に揃うまでは CI を起動する。切り替えは MEASUREMENT-MAC-DIRECT-01。
 log_run measurement-collect-dispatch gh workflow run authenticated-measurement.yml --ref develop
 exit "$REFRESH_RC"

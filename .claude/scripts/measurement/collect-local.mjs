@@ -8,7 +8,7 @@
  * data/authenticated/{latest,revenue-history}.json と販売台帳を更新する。git への記録は呼び元
  * (scripts/scheduled/measurement-collect-local.sh) が定期実行専用の clone で行う。
  *
- * プロファイル・.env.local (R2 の S3 資格情報・AFB_API_KEY)・保管庫の鍵は、対話の作業フォルダ (--main-root) のものを使う。
+ * プロファイル・.env.local (R2 の S3 資格情報)・保管庫の鍵は、対話の作業フォルダ (--main-root) のものを使う。
  * この clone の .local には置かない。
  *
  * Usage: node .claude/scripts/measurement/collect-local.mjs --main-root <作業フォルダ> [取得元...]
@@ -19,7 +19,6 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { config } from 'dotenv';
 import { SOURCES } from './sources.mjs';
-import { readSecret, SERVICE_PREFIX } from './credential-store.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const args = process.argv.slice(2);
@@ -33,12 +32,6 @@ const names = selected.length ? selected : Object.keys(SOURCES);
 config({ path: join(MAIN_ROOT, '.env.local'), quiet: true });
 const keyFile = join(MAIN_ROOT, '.local/authenticated-measurement/vault-key');
 if (!process.env.MEASUREMENT_VAULT_KEY && existsSync(keyFile)) process.env.MEASUREMENT_VAULT_KEY = readFileSync(keyFile, 'utf8').trim();
-// afb の公式 API キーは OS の資格情報ストアのサービス stats47-measurement-afb-api に置く (読むのは credential-store.mjs だけ)。
-// 無ければ afb は api_key_missing として失敗に記録される。値はログに出さない。
-if (!process.env.AFB_API_KEY) {
-  const secret = readSecret(`${SERVICE_PREFIX}afb-api`);
-  if (secret?.password) process.env.AFB_API_KEY = secret.password;
-}
 for (const key of ['MEASUREMENT_VAULT_KEY', 'R2_S3_ENDPOINT', 'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY']) {
   if (!process.env[key]) throw new Error(`env_missing: ${key}`);
 }

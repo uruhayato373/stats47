@@ -18,55 +18,35 @@ const A8 = { records: [
   { month: "2026-09", conversions: 2, approved: 1, revenueYen: 150 },
   { month: "2026-09", conversions: 1, approved: 0, revenueYen: 0 },
 ] };
-const MOSHIMO = { period: { from: "2026-08-17", to: "2026-09-20" }, coverage: { complete: true }, records: [
-  { conversions: 1, grossRevenueYen: 300, approved: 0, revenueYen: 0 },
-] };
-
-test("成功した ASP は最新月・期間の発生と確定を件数と金額で出す", () => {
-  const [a8, moshimo, afb] = aspRevenueLines({
-    authLatest: { sources: [pass("a8"), pass("moshimo"), pass("afb", { quality: { occurrenceRows: 0, recognitionRows: 0 } })] },
-    a8Results: A8, moshimoResults: MOSHIMO, asOf: AS_OF,
-  });
+test("成功した ASP は最新月の発生と確定を件数と金額で出す", () => {
+  const [a8] = aspRevenueLines({ authLatest: { sources: [pass("a8")] }, a8Results: A8, asOf: AS_OF });
   assert.match(a8, /2026-09 月累計.*発生 \*\*3 件\*\*.*確定 \*\*1 件・¥150\*\*/);
-  assert.match(moshimo, /発生 \*\*1 件・¥300\*\*.*確定 \*\*0 件・¥0\*\*/);
-  assert.match(afb, /発生 \*\*0 件・¥0\*\*/);
 });
 
 test("認証切れは 0 円ではなく判定不能と理由を出す (記録ファイルが残っていても使わない)", () => {
-  const [a8, moshimo] = aspRevenueLines({
-    authLatest: { sources: [authRequired("a8"), authRequired("moshimo"), pass("afb", { quality: { occurrenceRows: 0, recognitionRows: 0 } })] },
-    a8Results: A8, moshimoResults: MOSHIMO, asOf: AS_OF,
-  });
-  for (const line of [a8, moshimo]) {
-    assert.match(line, /判定不能/);
-    assert.match(line, /認証切れ（2026-09-21 から）/);
-    assert.doesNotMatch(line, /¥/);
-  }
+  const [a8] = aspRevenueLines({ authLatest: { sources: [authRequired("a8")] }, a8Results: A8, asOf: AS_OF });
+  assert.match(a8, /判定不能/);
+  assert.match(a8, /認証切れ（2026-09-21 から）/);
+  assert.doesNotMatch(a8, /¥/);
 });
 
-test("古い観測・記録なし・範囲不完全はどれも判定不能", () => {
+test("古い観測・記録なしはどれも判定不能", () => {
   const old = new Date(AS_OF.getTime() + (ASP_OBSERVATION_MAX_AGE_DAYS + 5) * 86_400_000);
-  const lines = aspRevenueLines({
-    authLatest: { sources: [pass("a8"), pass("moshimo"), pass("afb", { quality: {} })] },
-    a8Results: { records: [] }, moshimoResults: { ...MOSHIMO, coverage: { complete: false } }, asOf: AS_OF,
-  });
-  assert.ok(lines.every((line) => line.includes("判定不能")));
-  const stale = aspRevenueLines({ authLatest: { sources: [pass("a8")] }, a8Results: A8, moshimoResults: MOSHIMO, asOf: old });
-  assert.match(stale[0], /判定不能.*日前/);
-  assert.match(stale[1], /判定不能.*記録が無い/);
+  const [empty] = aspRevenueLines({ authLatest: { sources: [pass("a8")] }, a8Results: { records: [] }, asOf: AS_OF });
+  assert.match(empty, /判定不能.*記録が無い/);
+  const [stale] = aspRevenueLines({ authLatest: { sources: [pass("a8")] }, a8Results: A8, asOf: old });
+  assert.match(stale, /判定不能.*日前/);
 });
 
-test("afb に件数があるときは金額を判定不能とし、0 円にしない", () => {
-  const [, , afb] = aspRevenueLines({
-    authLatest: { sources: [pass("afb", { quality: { occurrenceRows: 2, recognitionRows: 1 } })] },
-    a8Results: null, moshimoResults: null, asOf: AS_OF,
-  });
-  assert.match(afb, /発生 \*\*2 件\*\*.*確定 \*\*1 件\*\*.*金額は \*\*判定不能\*\*/);
-  assert.doesNotMatch(afb, /¥0/);
+test("集約後は A8 と楽天の 2 行だけを出し、もしも・afb の行を出さない (ASP-CONSOLIDATE-A8-RAKUTEN-01)", () => {
+  // 計測から外した取得元が latest.json に残っていても、判定不能の行として週次収益に混ぜない
+  const lines = aspRevenueLines({ authLatest: { sources: [pass("a8"), pass("moshimo"), pass("afb")] }, a8Results: A8, asOf: AS_OF });
+  assert.equal(lines.length, 2);
+  assert.ok(lines.every((line) => !/もしも|afb/.test(line)));
 });
 
 test("latest.json が無ければ認証付き収集の ASP 全体を判定不能にする (手入力の楽天は別の行)", () => {
-  const lines = aspRevenueLines({ authLatest: null, a8Results: A8, moshimoResults: MOSHIMO, asOf: AS_OF });
+  const lines = aspRevenueLines({ authLatest: null, a8Results: A8, asOf: AS_OF });
   assert.equal(lines[0], "- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）");
   assert.match(lines[1], /^- 楽天: \*\*判定不能\*\*/);
   assert.equal(lines.length, 2);
@@ -113,6 +93,6 @@ test("楽天: 未記録・古い記録は判定不能、新しい記録は最新
     { month: "2026-09", orders: 1, estimatedYen: 120, confirmedYen: null, observedAt: "2026-09-26T00:00:00Z" },
   ] };
   assert.match(rakutenLine(fresh, AS_OF), /2026-09 月累計.*発生 \*\*1 件・¥120\*\* \/ 確定 \*\*未確定\*\*/);
-  const lines = aspRevenueLines({ authLatest: null, a8Results: null, moshimoResults: null, rakutenResults: fresh, asOf: AS_OF });
+  const lines = aspRevenueLines({ authLatest: null, a8Results: null, rakutenResults: fresh, asOf: AS_OF });
   assert.equal(lines.length, 2, "認証付き収集が無くても楽天の行は出す");
 });

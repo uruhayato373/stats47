@@ -7,12 +7,10 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
-import { collectAfbOutcomes } from './afb-outcomes.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
-import { AFFILIATE_ASP } from '../../../config/paths.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const run = promisify(execFile);
@@ -129,11 +127,7 @@ try {
     }
   }
   result.collectionAttempted = true;
-  if (name === 'moshimo') {
-    await command('.claude/scripts/ads/moshimo-report.mjs');
-    await command('.claude/scripts/ads/moshimo-report.mjs', ['--check']);
-    capture(datasetPath("moshimo.results"));
-  } else if (name === 'a8') {
+  if (name === 'a8') {
     const yesterday = new Date(Date.now() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
     await command('.claude/scripts/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
     const marker = JSON.parse(readFileSync(join(ROOT, datasetPath("a8.ui-last-run"))));
@@ -148,14 +142,6 @@ try {
   } else if (name === 'rakuten') {
     await command('.claude/scripts/ads/rakuten-report.mjs');
     capture(datasetPath("rakuten.results"));
-  } else if (name === 'afb') {
-    const config = JSON.parse(readFileSync(join(ROOT, AFFILIATE_ASP), 'utf8'));
-    const outcomes = await collectAfbOutcomes({ config, apiKey: process.env.AFB_API_KEY, now: new Date(now) });
-    for (const [file, value] of Object.entries({ 'outcomes.json': outcomes.report, 'raw.json': outcomes.raw })) {
-      writeFileSync(join(work, file), JSON.stringify(value), { mode: 0o600 });
-      capture(`.local/authenticated-measurement/${name}-${runId}/${file}`);
-    }
-    result.quality = { siteVerified: true, occurrenceRows: outcomes.report.coverage.occurrence, recognitionRows: outcomes.report.coverage.recognition };
   } else if (name === 'note') {
     await command('.claude/scripts/note/audit-note-covers.mjs', [], 360000, [1]);
     await command('.claude/scripts/note/fetch-note-metrics.mjs', ['--output-dir', join(work, 'note')], 360000, [2]);

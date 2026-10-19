@@ -261,7 +261,6 @@ function revenueSection(week) {
     ...aspRevenueLines({
       authLatest: readJsonOrNull(`${datasetDir("revenue.authenticated")}/latest.json`),
       a8Results: readJsonOrNull(datasetPath("a8.results")),
-      moshimoResults: readJsonOrNull(datasetPath("moshimo.results")),
       rakutenResults: readJsonOrNull(datasetPath("rakuten.results")),
       asOf: weekSun,
     }).map((line) => `  ${line}`),
