@@ -1,0 +1,7 @@
+{
+  "metric": "average-height-primary-school-fifth-grade-male,national-treasury-disbursement-prefecture",
+  "since": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": false,
+  "snapshotScope": "ranking"
+}
