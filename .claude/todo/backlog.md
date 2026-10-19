@@ -1527,6 +1527,7 @@ updated: 2026-10-17
 - **停止条件**: 送客が測れないうちに投稿を増やさない。インプレッションやいいねを送客の代わりにしない。
 - **完了条件**: 媒体別の送客が 2 か月分記録され、SNS 領域の構えの判断が収益化戦略 §5 の領域表に反映されている。
 
+- **2026-10-19 ① 実装**: 週次の GA4 取得 (`fetch-ga4-snapshot.mjs`) のレポート一覧 `MEASUREMENT_REPORTS` (`.claude/scripts/metrics/lib/journey-ga4-reports.mjs`) に `referral-sources` を足した。日本の Organic Social と Referral に絞り、流入元 (`sessionSource`)・メディア・チャネル別にセッション・エンゲージドセッション・PV を取る。保存先は `data/ga4/snapshots/<週>/referral-sources.csv` (rolling28d)。テスト `journey-ga4-reports.test.mjs` に 1 件追加。最初の実データは 10-23 (金) の週次 CI。② 以降 (月次レビューで媒体ごとに並べる) はデータが 2 か月分そろってから。
 ### [PV-PLAN-REVIEW-2026Q4-01] 2026-12-31 に PV の実績を里程標と比べ、AdSense 月¥1万への重点を見直す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-12-31] [領域:サイト]
 

@@ -177,6 +177,21 @@ export const MEASUREMENT_REPORTS = Object.freeze({
     dims: ['customEvent:ranking_key', 'customEvent:download_purpose'],
     metrics: ['eventCount'],
   },
+  // SNS-REFERRAL-MEASURE-01 (2026-10-19): SNS と外部サイト (note.com など) の媒体別の送客。
+  // Organic Social は 28 日で 98 セッションしかなく、どの媒体が送っているかが snapshot に無かった。
+  'referral-sources': {
+    columns: ['sessionSource', 'sessionMedium', 'sessionDefaultChannelGroup', 'sessions', 'engagedSessions', 'screenPageViews'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['sessionSource', 'sessionMedium', 'sessionDefaultChannelGroup'].map((name) => ({ name })),
+      metrics: ['sessions', 'engagedSessions', 'screenPageViews'].map((name) => ({ name })),
+      dimensionFilter: japanAnd({
+        filter: { fieldName: 'sessionDefaultChannelGroup', inListFilter: { values: ['Organic Social', 'Referral'] } },
+      }),
+    }),
+    dims: ['sessionSource', 'sessionMedium', 'sessionDefaultChannelGroup'],
+    metrics: ['sessions', 'engagedSessions', 'screenPageViews'],
+  },
 });
 
 /** GA4 の dimension 名 (customEvent:xxx) を CSV の列名 (xxx) に揃える。 */
