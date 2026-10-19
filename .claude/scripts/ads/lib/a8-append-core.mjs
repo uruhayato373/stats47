@@ -121,7 +121,7 @@ export function uniqueId(baseId, existingIds) {
 const FIELD_ORDER = [
   "id", "title", "htmlContent", "programRef", "areaCode", "vertical", "categoryKey",
   "locationCode", "isActive", "priority", "startDate", "endDate",
-  "targetCategories", "adType", "imageUrl", "trackingPixelUrl",
+  "targetCategories", "targetRankingKeys", "adType", "imageUrl", "trackingPixelUrl",
   "width", "height", "createdAt", "updatedAt",
 ];
 
@@ -134,6 +134,9 @@ export function renderEntry(draft, nowStr) {
   for (const k of FIELD_ORDER) {
     if (k === "createdAt" || k === "updatedAt") {
       obj[k] = draft[k] ?? nowStr ?? null;
+    } else if (k === "targetRankingKeys") {
+      // 対象ランキングは任意項目。空なら出さない (既存の広告と同じ形を保つ)
+      if (Array.isArray(draft[k]) && draft[k].length > 0) obj[k] = [...draft[k]];
     } else {
       obj[k] = k in draft ? draft[k] : null;
     }
@@ -158,4 +161,19 @@ export function insertEntry(src, entryLiteral) {
   // head の末尾改行を保ちつつ entry を差し込む。head が改行で終わっていなければ足す。
   const sep = head.endsWith("\n") ? "" : "\n";
   return `${head}${sep}${entryLiteral}\n${tail}`;
+}
+
+/**
+ * decision レーン (資料請求・見積もり・相談・購入・契約) の広告は対象ランキングの限定が必須
+ * (affiliate-ads-standards.md §2)。空・実在しない key を問題の一覧で返す (空配列なら OK)。
+ * 2026-10-19 に、追記スクリプトが targetRankingKeys を書き出さず 13 件を手で直した (AFF-APPEND-TARGET-KEYS-01)。
+ * @param {{ lane?: string }} profile
+ * @param {string[] | null | undefined} keys
+ * @param {(key: string) => boolean} metricExists
+ */
+export function validateDecisionTargets(profile, keys, metricExists) {
+  const list = Array.isArray(keys) ? keys : [];
+  if (profile?.lane !== "decision") return [];
+  if (list.length === 0) return ["decision レーンなのに targetRankingKeys が空"];
+  return list.filter((key) => !metricExists(key)).map((key) => `targetRankingKeys の ${key} が data/metrics に無い`);
 }

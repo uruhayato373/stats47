@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T06:05:03.757Z",
+  "updatedAt": "2026-10-19T08:19:40.291Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7880,6 +7880,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-19T06:05:03.757Z"
+    },
+    "AFF-APPEND-TARGET-KEYS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T08:19:40.291Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/a8-append-core.test.mjs",
+              "npm run type-check:scripts"
+            ],
+            "pass": true
+          },
+          "evidence": "renderEntry の FIELD_ORDER に targetRankingKeys を足し (値があるときだけ出力)、append-affiliate-ads.ts が台帳 entry の targetRankingKeys を下書きへ渡すようにした。decision レーンで対象ランキングが空・data/metrics に無い key なら validateDecisionTargets で追記を止める。a8-curated.json の verticalKeywords に通信 (WiMAX・ホームルーター・SoftBank Air・ビッグロ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T08:19:40.291Z"
     }
   }
 }

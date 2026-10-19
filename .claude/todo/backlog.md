@@ -300,13 +300,6 @@ updated: 2026-10-17
 - **次 (実行順)**: ① 登録分を確かめて develop へ push し `publish-affiliate-ads.yml` で R2 へ公開、対象ページだけに出ることを本番で確かめる ② 週次の `check-approval` で申請 21 件の承認を拾い、承認されたものから同じ手順で登録する (掲載 URL の事前提出などを求める案件は、三井住友カードと同じく先に提出する)。
 - **停止条件**: `targetRankingKeys` なしで decision レーンの案件を登録しない。広告主が求める事前手続きを済ませずに配信しない。
 - **完了条件**: 承認済みの対象案件が本番の対象ページに出て、ほかのページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
-### [AFF-APPEND-TARGET-KEYS-01] 広告の追記スクリプトが targetRankingKeys を書き出さず、decision レーンの案件を毎回手で直している
-タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-19] [領域:アフィリエイト]
-
-- **事象 (2026-10-19、AFF-A8-EXPANSION-2026-10 の登録で affiliate-manager が報告)**: `.claude/scripts/ads/append-affiliate-ads.ts` の `renderEntry` の FIELD_ORDER に `targetRankingKeys` が無く、書き出した広告に対象ランキングが入らない。規約上 decision レーン (資料請求・見積もり・相談・購入) は対象ランキングの限定が必須なので、13 件とも追記のあとに手で足して 4 ゲートを再実行した。あわせて、通信 4 件とシアーミュージックは `a8-curated.json` の verticalKeywords で軸が解決できず、台帳に手で設定した。
-- **次**: FIELD_ORDER に `targetRankingKeys` を足し、decision レーンで対象が空なら追記を止めるテストを足す。verticalKeywords に通信 (光回線・WiMAX・ホームルーター) と習い事の語を足す。
-- **完了条件**: 追記スクリプトだけで decision レーンの広告が対象ランキング付きで書き出され、対象が空なら失敗するテストがある。
-
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS]
 
