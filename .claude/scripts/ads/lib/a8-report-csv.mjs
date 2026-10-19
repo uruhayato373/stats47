@@ -248,6 +248,9 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
   const cols = mapColumns(headers, a8.columnAliases);
   const out = [];
   const rejects = [];
+  // サイト別レポートの他サイト登録の行。stats47 の実績ではないので rows には入れないが、
+  // 突合で「専用案件に混ざりうる他サイト登録のクリック」の上限に使う (crossCheckAgainstSite の otherSiteRows)。
+  const otherSiteRows = [];
 
   const need =
     reportKey === "site-summary"
@@ -284,7 +287,18 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
         rejects.push({ line, reason: "サイト列が空（帰属を確定できない）", raw: r });
         return;
       }
-      if (!String(siteRaw).includes(a8.targetSite)) return; // 他サイト行は静かに除外（異常ではない）
+      if (!String(siteRaw).includes(a8.targetSite)) {
+        // 他サイト行は rows から除外する (異常ではない)。数値だけ別に返す
+        otherSiteRows.push({
+          site: String(siteRaw).trim(),
+          clicks: parseNumber(get(r, "clicks")),
+          conversions: parseNumber(get(r, "conversions")),
+          grossRevenueYen: parseNumber(get(r, "grossRevenueYen")),
+          revenueYen: parseNumber(get(r, "revenueYen")),
+          ...(fetchedAt ? { fetchedAt } : {}),
+        });
+        return;
+      }
     }
 
     const month = parseMonth(get(r, "month")) ?? parseMonth(get(r, "date"));
@@ -331,7 +345,7 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
     });
   });
 
-  return { rows: out, rejects, headers, cols, siteScope, fatal: null };
+  return { rows: out, otherSiteRows, rejects, headers, cols, siteScope, fatal: null };
 }
 
 /**
@@ -340,9 +354,15 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
  * 専用分だけでサイト値を超えた場合、または共用込みでもサイト値に届かない場合だけ不整合とする。
  * 判定は呼び出し側（auditor）が行うため、ここでは差分を返すだけ。
  *
- * クリック数だけ許容差を持つ（2026-09-28 オーナー判断）。9 月の実測で専用 157 > サイト別 155 の 2 クリック差が出たが、
- * A8 にサイト×プログラム明細が無く原因を特定できないため（backlog `A8-CROSSCHECK-EXCEED-01`）。
- * 件数・金額は 1 でも超えたら超過のまま（成果の混入は許容しない）。
+ * クリック数だけ上限に幅を持たせる。件数・金額は 1 でも超えたら超過のまま（成果の混入は許容しない）。
+ *
+ * - 他サイト登録の行がある run（2026-10-19 オーナー判断）: 専用 ≦ サイト行 + 「他サイト登録のクリックのうち、
+ *   共用・未写像 (doboku-note のみの案件を含む) で説明できない分」。口座には stats47・doboku-note のほかに
+ *   doboku-note(note)・X・kazu-note のサイト登録があり、そこで使われた stats47 と同じ案件のリンクのクリックは
+ *   案件別レポートで「stats47 専用」に混ざる。A8 にサイト×案件の明細は無いので、サイト別レポートの実測で
+ *   混ざりうる上限を決める (10 月の実測: 専用 276・サイト 261・他サイト 92 − 共用 66 − 未写像 11 = 15)。
+ * - 他サイト登録の行が無い run（正規化の変更前に保存した記録など）: 従来の許容差 max(3, ceil(サイト×2%))
+ *   （2026-09-28 オーナー判断。backlog `A8-CROSSCHECK-EXCEED-01`）。
  */
 export const CLICK_EXCEED_TOLERANCE = { minClicks: 3, ratio: 0.02 };
 
@@ -351,12 +371,31 @@ export function clickExceedTolerance(siteClicks) {
   return Math.max(CLICK_EXCEED_TOLERANCE.minClicks, Math.ceil(siteClicks * CLICK_EXCEED_TOLERANCE.ratio));
 }
 
-export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramIds = [] } = {}) {
+/**
+ * 他サイト登録のクリックのうち、共用案件と未写像の案件で説明できない分 (= 専用案件に混ざりうる上限)。
+ * 共用案件のクリックは全部が他サイト分とは限らないので、この値は混入の「上限」であって実数ではない。
+ */
+export function unexplainedOtherSiteClicks({ otherSiteRows, sharedRows, unmappedRows }) {
+  const clicks = (rows) => rows.reduce((total, row) => total + (typeof row.clicks === "number" ? row.clicks : 0), 0);
+  return Math.max(0, clicks(otherSiteRows) - clicks(sharedRows) - clicks(unmappedRows));
+}
+
+/**
+ * @param {object} siteRow サイト別レポートの対象サイト行
+ * @param {object[]} allowlistedRows 案件別レポートのうち対応表に載る行 (program あり)
+ * @param {{ sharedProgramIds?: string[], otherSiteRows?: object[] | null, unmappedRows?: object[] }} options
+ *   otherSiteRows: 同じ期間のサイト別レポートの他サイト登録の行。null は「この run では取れていない」
+ *   unmappedRows: 案件別レポートのうち対応表に載らない行 (doboku-note のみの案件を含む)
+ */
+export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramIds = [], otherSiteRows = null, unmappedRows = [] } = {}) {
   if (!siteRow) return { comparable: false, reason: "サイト別レポートが無い" };
   const sharedIds = new Set(sharedProgramIds);
   const exclusiveRows = allowlistedRows.filter((row) => !sharedIds.has(row.programId));
   const sharedRows = allowlistedRows.filter((row) => sharedIds.has(row.programId));
   const sum = (rows, field) => rows.reduce((total, row) => total + (typeof row[field] === "number" ? row[field] : 0), 0);
+  const otherSiteAllowance = Array.isArray(otherSiteRows)
+    ? unexplainedOtherSiteClicks({ otherSiteRows, sharedRows, unmappedRows })
+    : null;
   const fields = ["clicks", "conversions", "grossRevenueYen", "approved", "revenueYen"];
   const deltas = {};
   let exceeded = false;
@@ -369,8 +408,16 @@ export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramI
     const upperBound = exclusive + shared;
     const picked = upperBound;
     deltas[f] = { site, picked, exclusive, shared, lowerBound, upperBound, delta: site == null ? null : picked - site };
-    const tolerance = f === "clicks" && site != null ? clickExceedTolerance(site) : 0;
-    if (tolerance > 0) deltas[f].tolerance = tolerance;
+    let tolerance = 0;
+    if (f === "clicks" && site != null) {
+      tolerance = otherSiteAllowance ?? clickExceedTolerance(site);
+      deltas[f].toleranceBasis = otherSiteAllowance == null ? "fixed-ratio" : "other-site-clicks";
+      if (otherSiteAllowance != null) {
+        deltas[f].otherSiteClicks = sum(otherSiteRows, "clicks");
+        deltas[f].unmappedClicks = sum(unmappedRows, "clicks");
+      }
+      deltas[f].tolerance = tolerance;
+    }
     if (site != null && lowerBound - site > tolerance) exceeded = true;
     if (site != null && upperBound < site) hasShortfall = true;
   }

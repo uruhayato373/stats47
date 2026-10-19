@@ -9,6 +9,8 @@ import { Input } from '@stats47/components/atoms/ui/input';
 
 import Link from '@/components/atoms/SiteLink';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type { getGeoSourceNavigation } from '../lib/geo-source-navigation';
 
 /** Receive the public list from the server without bundling the GIS registry. */
@@ -84,6 +86,7 @@ export function GeoSourceNavigationList({
                     className="border-b border-border last:border-b-0"
                   >
                     <Link
+                      {...navSurfaceProps('geo_source_list')}
                       href={item.href}
                       prefetch={false}
                       aria-current={

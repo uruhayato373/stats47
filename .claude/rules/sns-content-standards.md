@@ -10,6 +10,7 @@ paths:
 
 stats47 の SNS 運用 (X / Instagram / YouTube pilot / note) における**実行規約の単一ソース (SSOT)**。
 SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間はこれに従う。
+統計画像内の文言は4媒体共通の[最小テキスト規約](chart-image-copy.md)に従う。
 投稿画像の発行元表現は [`デザインシステム`](../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」を共有し、画像種別の寸法・生成・配信は `.claude/rules/ogp-image-standards.md` を参照する。投稿本文・データ・画像形式の個別契約は本規約を正典とする。
 
 > **方式**: `chart-component-standards.md` / `blog-quality-standards.md` と同じ「rules に規約カタログ 1 ファイル、

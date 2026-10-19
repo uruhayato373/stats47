@@ -3,6 +3,8 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import Link from "@/components/atoms/SiteLink";
 import { getSurfaceCardClassName } from "@/components/surface";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import { GENDER_TONE_TEXT } from "./gender-tone.palette";
 
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
@@ -47,6 +49,7 @@ function GenderCell({
   const genderLabel = tone === "male" ? "男性" : "女性";
   return (
     <Link
+      {...navSurfaceProps("area_databook")}
       href={href}
       className="flex flex-1 flex-col items-center gap-0.5 py-1.5 transition-colors hover:bg-accent/30"
     >

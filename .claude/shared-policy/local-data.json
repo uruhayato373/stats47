@@ -1,0 +1,29 @@
+{
+  "$comment": "stats47 の手元データの申告（正本の方針: obsidian memos/ローカルデータ方針SSOT.md §3。配布物 LOCAL-DATA.md）。このリポが所有し手で直す（配布対象外）。検査は npm run check-local-data。データの正本は .claude/rules/data-storage.md・r2-storage-design.md",
+  "regenerable": [
+    "**/node_modules/",
+    "**/.next/",
+    "**/.turbo/",
+    "**/next-env.d.ts",
+    "**/*.tsbuildinfo",
+    "**/test-results/",
+    "**/playwright-report/",
+    "**/playwright-smoke-report/",
+    ".local/*-cache.json",
+    "docs/31_note記事原稿/"
+  ],
+  "offloaded": [],
+  "device": [
+    ".claude/settings.local.json",
+    ".claude/worktrees/",
+    ".claude/state/session-locks/",
+    ".claude/state/cadence/",
+    ".local/playwright-*",
+    ".local/locks/"
+  ],
+  "secret": [],
+  "staging": [
+    { "path": ".local/", "maxAgeDays": 60, "note": "作業の出力。採用した画像・成果物は R2 か Google Drive へ移す（Kindle 表紙・note の参照図など）" },
+    { "path": "apps/admin/.local/", "maxAgeDays": 60 }
+  ]
+}

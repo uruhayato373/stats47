@@ -10,6 +10,7 @@ import {
   renderEntry,
   insertEntry,
   buildAdDraft,
+  validateDecisionTargets,
 } from "../lib/a8-append-core.mjs";
 
 const SRC = `import type { AffiliateAd } from "../src/features/ads/types";
@@ -207,4 +208,23 @@ test("同一プログラムの banner と text は a8mat が別なので両方�
   assert.notEqual(ab, at, "a8mat が違えば dedup で skip されない");
   const existing = new Set([ab]);
   assert.equal(existing.has(at), false, "text は既登録扱いにならない");
+});
+
+// AFF-APPEND-TARGET-KEYS-01 (2026-10-19): 追記スクリプトが targetRankingKeys を書き出さず、decision レーンの 13 件を手で直した
+test("renderEntry: targetRankingKeys があれば書き出し、無ければ出さない", () => {
+  const withKeys = renderEntry({ ...draft, targetRankingKeys: ["real-disposable-income", "engel-coefficient"] }, "2026-10-19 00:00:00");
+  const parsed = JSON.parse(withKeys.trim().replace(/,$/, ""));
+  assert.deepEqual(parsed.targetRankingKeys, ["real-disposable-income", "engel-coefficient"]);
+  assert.ok(withKeys.indexOf("targetCategories") < withKeys.indexOf("targetRankingKeys"));
+  assert.doesNotMatch(renderEntry(draft, "2026-10-19 00:00:00"), /targetRankingKeys/);
+  assert.doesNotMatch(renderEntry({ ...draft, targetRankingKeys: [] }, "2026-10-19 00:00:00"), /targetRankingKeys/);
+});
+
+test("validateDecisionTargets: decision レーンは対象ランキングが空・実在しない key なら問題を返す", () => {
+  const exists = (key) => key === "real-disposable-income";
+  assert.deepEqual(validateDecisionTargets({ lane: "decision" }, ["real-disposable-income"], exists), []);
+  assert.equal(validateDecisionTargets({ lane: "decision" }, [], exists).length, 1);
+  assert.equal(validateDecisionTargets({ lane: "decision" }, undefined, exists).length, 1);
+  assert.match(validateDecisionTargets({ lane: "decision" }, ["no-such-key"], exists)[0], /no-such-key/);
+  assert.deepEqual(validateDecisionTargets({ lane: "discovery" }, [], exists), []);
 });

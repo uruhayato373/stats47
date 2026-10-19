@@ -183,6 +183,7 @@ test("共用案件を含む口座横断値は専用分を下限・共用込み�
     upperBound: 326,
     delta: 32,
     tolerance: 6,
+    toleranceBasis: "fixed-ratio",
   });
 
   // クリックは max(3, ceil(294×2%)=6) までの超過を許す。原因を特定できない小差でゲートを止めない (A8-CROSSCHECK-EXCEED-01)

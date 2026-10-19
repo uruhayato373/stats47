@@ -72,6 +72,9 @@ test('制作IDで探し、内容の保存と制作仕様の受け渡しができ
   await page.getByRole('button', { name: /のカバーを比較/ }).click();
   const dialog = page.getByRole('dialog', { name: 'カバーを比較' });
   await dialog.getByLabel('大きく見せるコピー').fill('家計から見る愛知');
+  // 家計の記事は対象都市と対象年が無いと保存できない (scopeReady)
+  await dialog.getByLabel('家計データの対象都市').fill('名古屋市');
+  await dialog.getByLabel('対象年', { exact: true }).fill('2024');
   await dialog.getByLabel('描く題材・構図').fill('喫茶店のカップを右側に大きく');
   await dialog.getByLabel('コピーの根拠・本文の該当箇所').fill('本文の家計データと比較条件');
   await dialog.getByRole('button', { name: '制作内容を保存', exact: true }).click();

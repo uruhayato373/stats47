@@ -58,7 +58,7 @@ const KEY_FILE_ARG = (() => {
 })();
 const ESTAT_APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
 const LODGING_2024_XLSX =
-  'https://www.mlit.go.jp/kankocho/content/001905499.xlsx';
+  'https://www.mlit.go.jp/kankocho/content/002026764.xlsx';
 const CHINA_SCATTER =
   'inbound-by-nationality-regional-preference/resident-vs-guest-china-scatter';
 const SEMICONDUCTOR_SCATTER =

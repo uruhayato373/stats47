@@ -180,6 +180,19 @@ jobs:
             gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/snapshot-drift-issue.md
           fi
 
+      # 一致に戻ったら開いている Issue を閉じる。閉じる処理が無く、10-10 に再反映で解消した後も #865 が開いたまま残った
+      - name: ✅ Close snapshot drift issue when resolved
+        if: steps.snapshots.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --label "auto-generated" --state open \
+            --search "公開R2 snapshotのドリフト in:title" --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "page-components と affiliate-ads の公開R2 snapshot が git TS と一致したため閉じます。実行: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            done
+
       - name: 🚨 Create issue on error-level drift
         if: steps.check.outputs.exit_code == '1'
         env:

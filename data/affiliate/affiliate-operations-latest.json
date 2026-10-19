@@ -1,8 +1,8 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-20T10:17:40.668Z",
-  "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/live/ga4-affiliate/2026-09-19.json",
+  "generatedAt": "2026-10-18T16:26:35.257Z",
+  "inventorySnapshot": "data/affiliate/inventory-latest.json",
+  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-10-17.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -12,10 +12,13 @@
     "reasons": []
   },
   "portfolioGate": {
-    "status": "ready",
-    "reasons": []
+    "status": "blocked",
+    "reasons": [
+      "a8-cross-check-shortfall",
+      "a8-results-month-missing"
+    ]
   },
-  "portfolioSnapshot": ".claude/state/ads/affiliate-portfolio-latest.json",
+  "portfolioSnapshot": "data/affiliate/affiliate-portfolio-latest.json",
   "publishGate": {
     "status": "ready",
     "reasons": []
@@ -36,17 +39,16 @@
         "kind": "creative",
         "targetLocation": "sidebar-bottom",
         "startedAt": "2026-09-20",
-        "daysElapsed": 0,
+        "daysElapsed": 28,
         "minSamplePerVariant": 1000,
         "minDurationDays": 28,
         "maxDurationDays": 56,
         "sampleReached": false,
-        "minDurationReached": false,
+        "minDurationReached": true,
         "primaryMetric": "confirmed-revenue-per-1000-viewable-impressions",
         "decisionRule": "各variantが1000 viewable impressions・10 clicks・28日を満たし、成果窓30日が成熟してから確定収益/1000 viewable impressionsを提示し、人間が判断する。56日で母数未達ならinconclusive。",
         "decisionGuards": [
-          "insufficient-sample",
-          "insufficient-duration"
+          "insufficient-sample"
         ],
         "variants": [
           {
@@ -79,8 +81,8 @@
   },
   "recommendedActions": [],
   "ga4Totals": {
-    "impressions": 4862,
-    "clicks": 8,
-    "ctr": 0.0016454134101192926
+    "impressions": 3541,
+    "clicks": 4,
+    "ctr": 0.0011296243998870376
   }
 }

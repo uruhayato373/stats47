@@ -101,6 +101,11 @@ function nowStr(): string {
   return jst.toISOString().slice(0, 19).replace("T", " ");
 }
 
+/** data/metrics/<key>.ts が実在するか (対象ランキングの key の検査に使う) */
+function metricExists(key: string): boolean {
+  return fs.existsSync(path.join(PROJECT_ROOT, "data", "metrics", `${key}.ts`));
+}
+
 function main(): void {
   const cat = loadCatalog();
   const curated = core.loadCurated(); // priority 算出係数 (priorityBands)
@@ -132,7 +137,7 @@ function main(): void {
   // 未分類profileの自動生成は action/friction の推測確定になるため fail-closed にする。
   const offerByRef = new Map(AFFILIATE_OFFER_PROFILES.map((profile) => [profile.programRef, profile]));
   const profileErrors: string[] = [];
-  for (const { entry } of targets) {
+  for (const { entry, draft } of targets) {
     const programRef = `a8:${entry.programId}`;
     const profile = offerByRef.get(programRef);
     if (!profile) {
@@ -144,6 +149,11 @@ function main(): void {
     }
     if (!profile.allowedVerticals.includes(entry.vertical)) {
       profileErrors.push(`${programRef}: vertical=${entry.vertical} は profile allowlist 外`);
+    }
+    // decision レーンは対象ランキングの限定が必須。台帳 entry の targetRankingKeys を下書きへ渡す (AFF-APPEND-TARGET-KEYS-01)
+    const keys = entry.targetRankingKeys ?? draft.targetRankingKeys;
+    for (const problem of appendCore.validateDecisionTargets(profile, keys, metricExists)) {
+      profileErrors.push(`${programRef}: ${problem}`);
     }
   }
   if (profileErrors.length > 0) {
@@ -187,7 +197,8 @@ function main(): void {
     // priority は catalog entry の確定EPC (EPC×確定率) からバンド式で決定的に算出 (buildAdDraft の
     // 既定値 50 を上書き)。targetRankingKeys があれば +bonus。高EPC案件を上位に出すための要。
     const priority = core.computePriority(entry, curated);
-    const draft = { ...baseDraft, id, priority, createdAt: stamp, updatedAt: stamp };
+    const targetRankingKeys = entry.targetRankingKeys ?? baseDraft.targetRankingKeys;
+    const draft = { ...baseDraft, id, priority, targetRankingKeys, createdAt: stamp, updatedAt: stamp };
     const literal = appendCore.renderEntry(draft, stamp);
     src = appendCore.insertEntry(src, literal);
     if (a8mat) existingA8mats.add(a8mat); // 同一バッチ内の重複も弾く

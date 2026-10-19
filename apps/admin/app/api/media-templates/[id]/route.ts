@@ -2,6 +2,7 @@ import { z } from 'zod';
 import {
   saveTemplate,
   readTemplates,
+  sha,
 } from '../../../../../../.claude/scripts/media/lib/workspace.mjs';
 import { workspaceJson, workspaceError } from '@/lib/server/workspace-request';
 import { projectRoot } from '@/lib/server/project-root';
@@ -30,7 +31,14 @@ export async function PATCH(
     const { id } = await params,
       body = schema.parse(await workspaceJson(req));
     saveTemplate(projectRoot(), id, body.revision, body);
-    return jsonResponse(readTemplates(projectRoot()));
+    const result = readTemplates(projectRoot());
+    return jsonResponse({
+      ...result,
+      templates: result.templates.map((template) => ({
+        ...template,
+        revision: sha(template),
+      })),
+    });
   } catch (e) {
     return workspaceError(e);
   }

@@ -4,7 +4,11 @@
  * - 行の形・rank 規則は page-data-batch / fetch-chutairen-club-membership.mjs と揃える
  *   (value 降順・同値同順位・年ごとに rank を振る)。
  * - 本番 R2 への反映 (diff-push-r2) は呼び元が別途行う。ここはローカル書き出しのみ。
+ * - `meta.recipe` は正典 buildRecipe (print-metric-recipe.ts 経由) で必ず焼く。焼かないと週次監査の
+ *   レシピ整合 (検査 k) が config 変更後の古い値を検知できず、データ品質ゲートの残数に積まれる
+ *   (2026-10-08 に書いた 21 件がこの状態だった)。config が無い metric は書かずに止める。
  */
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -45,11 +49,34 @@ export function roundTo(value, decimals) {
   return Math.round(value * f) / f;
 }
 
+/** 正典 buildRecipe(config) の結果を返す。config が無ければ例外 (書き出しを止める)。 */
+export function resolveMetricRecipe(metricKey) {
+  const helper = path.join(PROJECT_ROOT, ".claude/scripts/data/lib/print-metric-recipe.ts");
+  const raw = execFileSync(process.execPath, ["--import", "tsx", helper, metricKey], {
+    cwd: PROJECT_ROOT,
+    encoding: "utf8",
+  });
+  return JSON.parse(raw);
+}
+
 /**
  * @param {{metricKey:string, unit:string, yearName?:(y:string)=>string,
- *          rows:{areaName:string, yearCode:string, value:number}[], expectedAreas?:number}} p
+ *          rows:{areaName:string, yearCode:string, value:number}[], expectedAreas?:number,
+ *          recipe?:{configHash:string}, outDir?:string}} p
+ *   recipe / outDir はテスト用。省略時は正典から recipe を作り、`.local/r2/app/stats` へ書く。
  */
-export function writeStatsValues({ metricKey, unit, rows, yearName = (y) => y, expectedAreas = 47 }) {
+export function writeStatsValues({
+  metricKey,
+  unit,
+  rows,
+  yearName = (y) => y,
+  expectedAreas = 47,
+  recipe = resolveMetricRecipe(metricKey),
+  outDir = path.join(PROJECT_ROOT, ".local/r2/app/stats"),
+}) {
+  if (typeof recipe?.configHash !== "string" || !recipe.configHash) {
+    throw new Error(`${metricKey}: recipe に configHash がありません`);
+  }
   const byYear = new Map();
   for (const r of rows) {
     if (!CODE_BY_NAME[r.areaName]) throw new Error(`${metricKey}: 未知の都道府県 ${r.areaName}`);
@@ -91,9 +118,10 @@ export function writeStatsValues({ metricKey, unit, rows, yearName = (y) => y, e
       yearRange: [years[0], years[years.length - 1]],
       areaCount,
       generatedAt: new Date().toISOString(),
+      recipe,
     },
   };
-  const outPath = path.join(PROJECT_ROOT, ".local/r2/app/stats", metricKey, "values.json");
+  const outPath = path.join(outDir, metricKey, "values.json");
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, `${JSON.stringify(payload, null, 2)}\n`);
   const latest = out.filter((r) => r.yearCode === years[years.length - 1]).sort((a, b) => a.rank - b.rank);

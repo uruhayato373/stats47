@@ -111,6 +111,8 @@ function emptyReportLog(site) {
     lastRun: null,
     period: null,
     siteSummary: [],
+    // サイト別レポートの他サイト登録の行 (stats47 の実績ではない)。突合で専用案件に混ざりうるクリックの上限に使う
+    otherSiteSummary: [],
     monthly: [],
     daily: [],
     programPeriod: [],
@@ -178,6 +180,10 @@ function main() {
     }
 
     log[bucket.field] = upsertBy(log[bucket.field], res.rows, bucket.key);
+    if (unit.reportKey === "site-summary") {
+      for (const row of res.otherSiteRows ?? []) row.period = periodRaw;
+      log.otherSiteSummary = upsertBy(log.otherSiteSummary ?? [], res.otherSiteRows ?? [], KEY.siteSummary);
+    }
     perReport.push({ reportKey: unit.reportKey, rows: res.rows.length, rejects: res.rejects.length, fatal: null });
     console.log(`  ${unit.reportKey}: ${res.rows.length} 行 upsert（reject ${res.rejects.length}）`);
   }
@@ -208,8 +214,12 @@ function main() {
       .filter(inCurrentPeriod)
       .find((r) => String(r.site || "").includes(cfg.a8.targetSite));
     const allowlisted = allProgramRows.filter((r) => r.program);
+    // 他サイト登録の行が無い期間 (正規化の変更前に保存した記録) は null を渡し、従来の許容差に戻す
+    const otherSiteRows = (log.otherSiteSummary ?? []).filter(inCurrentPeriod);
     log.crossCheck = crossCheckAgainstSite(siteRow, allowlisted, {
       sharedProgramIds: cfg.a8._sharedWithDobokuNote?.ids ?? [],
+      otherSiteRows: otherSiteRows.length > 0 ? otherSiteRows : null,
+      unmappedRows: allProgramRows.filter((r) => !r.program),
     });
     if (log.crossCheck) log.crossCheck.period = currentPeriod;
   }

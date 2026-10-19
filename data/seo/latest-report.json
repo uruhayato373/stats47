@@ -1,57 +1,48 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "period": {
-    "periodStart": "2026-10-09",
-    "periodEnd": "2026-10-15",
+    "periodStart": "2026-10-10",
+    "periodEnd": "2026-10-16",
     "windowDays": 7
   },
-  "inputHash": "89dac653a0790dc480b90fb7a3ac414c8b7d272ff9bd14958bd32f459273a152",
+  "inputHash": "1dfe66aa54b501694f3ffe8a70e0a6b97e913ad630260a1f8682e353a38ac136",
   "movements": [
     {
-      "keyword": "うどん消費量ランキング",
-      "targetPath": "/ranking/dried-udon-soba-consumption-quantity",
-      "before": 73,
-      "after": 7.55,
+      "keyword": "一人暮らし 割合",
+      "targetPath": "/blog/household-structure-transformation",
+      "before": 3,
+      "after": 63,
       "beforeImpressions": 1,
-      "impressions": 20,
-      "change": 65.45
+      "impressions": 2,
+      "change": -60
     },
     {
-      "keyword": "かつお 漁獲量",
-      "targetPath": "/ranking/fishery-species-catch-bonito",
-      "before": 65,
-      "after": 1,
+      "keyword": "広島建設 シェア",
+      "targetPath": "/areas/34000/construction-industry",
+      "before": 23,
+      "after": 78,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 64
-    },
-    {
-      "keyword": "看護師 年収 平均",
-      "targetPath": "/blog/nurse-income-prefecture-gap",
-      "before": 6,
-      "after": 69.33333333333333,
-      "beforeImpressions": 1,
-      "impressions": 6,
-      "change": -63.33333333333333
-    },
-    {
-      "keyword": "小学校 人数 ランキング",
-      "targetPath": "/blog/elementary-school-children-count",
-      "before": 5.5,
-      "after": 53,
-      "beforeImpressions": 6,
-      "impressions": 1,
-      "change": -47.5
+      "change": -55
     },
     {
       "keyword": "原発のある都道府県",
       "targetPath": "/blog/nuclear-power-plant-count-prefecture-gap",
       "before": 1,
       "after": 45,
-      "beforeImpressions": 4,
+      "beforeImpressions": 3,
       "impressions": 1,
       "change": -44
+    },
+    {
+      "keyword": "出生率 都道府県",
+      "targetPath": "/ranking/total-fertility-rate",
+      "before": 48,
+      "after": 5,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": 43
     },
     {
       "keyword": "高校 教師 年収",
@@ -61,6 +52,24 @@
       "beforeImpressions": 1,
       "impressions": 12,
       "change": 42.5
+    },
+    {
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 50,
+      "after": 7.75,
+      "beforeImpressions": 6,
+      "impressions": 4,
+      "change": 42.25
+    },
+    {
+      "keyword": "要介護認定 一 番 多いのは",
+      "targetPath": "/ranking/long-term-care-certified-persons",
+      "before": 64,
+      "after": 23,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 41
     },
     {
       "keyword": "可処分所得 都道府県",
@@ -88,15 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 36
-    },
-    {
-      "keyword": "介護人材不足 2040年",
-      "targetPath": "/blog/nursing-care-shortage-2040",
-      "before": 43,
-      "after": 7.333333333333333,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 35.666666666666664
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "病院数が最も少ない都道府県はどこ",
-    "targetPath": "/ranking/general-hospital-count",
-    "rank": 7.132691278758695,
-    "impressions": 1869,
-    "clicks": 29,
+    "keyword": "介護サービス施設・事業所調査",
+    "targetPath": "/survey/care-service-facility-survey",
+    "rank": 9.155303030303031,
+    "impressions": 264,
+    "clicks": 0,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
   },
   "observing": [
     {

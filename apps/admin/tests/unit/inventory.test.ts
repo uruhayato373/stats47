@@ -27,6 +27,15 @@ describe("inventory", () => {
   }
 
   describe("mediaCandidates", () => {
+    it("投稿用の画像を保全した後も参考原図を先頭の見本にしない", async () => {
+      const { mediaCandidates } = await load({ posts: [] });
+      const cands = mediaCandidates({ id: 1188, platform: 'x', domain: 'note', content_key: 'a-kakei-aichi', assets: [
+        { role: 'thumbnail', order: 1, state: 'archived', drive_path: 'SNS素材/x/1188/thumbnail-1.png' },
+        { role: 'image', order: 1, state: 'archived', drive_path: 'SNS素材/x/1188/image-1.png' },
+      ] });
+      expect(cands[0].url).toBe('/sns-asset/1188/image-1.png');
+      expect(cands[1].url).toBe('/sns-asset/1188/thumbnail-1.png');
+    });
     it("投稿IDのDrive素材を優先し、従来のローカル候補をfallbackに残す", async () => {
       const { mediaCandidates } = await load({ posts: [], localSnsFiles: ["household-receipt/28000/x/stills/28000.png"] });
       const cands = mediaCandidates({ id: 1109, platform: "x", domain: "household-receipt", content_key: "28000", assets: [{ role: "image", order: 1, state: "archived", drive_path: "SNS素材/x/1109/image-1.png" }] });

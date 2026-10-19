@@ -22,6 +22,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const REPORT_URL = "https://www.zennichiyuren.or.jp/material/report/8.html";
 const POP_URL = `${R2_PUBLIC_BASE_URL}/app/stats/japanese-population/values.json`;
@@ -208,6 +209,7 @@ async function main() {
       yearRange: ["2025", "2025"],
       areaCount: 47,
       generatedAt: new Date().toISOString(),
+      recipe: resolveMetricRecipe(METRIC_KEY),
     },
   };
 

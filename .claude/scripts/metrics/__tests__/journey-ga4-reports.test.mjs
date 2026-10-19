@@ -84,3 +84,14 @@ test('measurementRow maps customEvent:* dimensions to plain CSV column names', a
   const row = measurementRow({ 'customEvent:ui_action': 'tab_switch', 'customEvent:ui_target': 'table', contentGroup: 'ranking', eventCount: '4' }, MEASUREMENT_REPORTS.interactions);
   assert.deepEqual(row, { ui_action: 'tab_switch', ui_target: 'table', contentGroup: 'ranking', eventCount: '4' });
 });
+
+test("referral-sources: 日本の Organic Social と Referral だけを媒体別に取る (SNS-REFERRAL-MEASURE-01)", async () => {
+  const { MEASUREMENT_REPORTS } = await import("../lib/journey-ga4-reports.mjs");
+  const report = MEASUREMENT_REPORTS["referral-sources"];
+  const req = report.request(period);
+  const [japan, channel] = req.dimensionFilter.andGroup.expressions;
+  assert.equal(japan.filter.stringFilter.value, "Japan");
+  assert.equal(channel.filter.fieldName, "sessionDefaultChannelGroup");
+  assert.deepEqual(channel.filter.inListFilter.values, ["Organic Social", "Referral"]);
+  assert.deepEqual(req.dimensions.map((d) => d.name), ["sessionSource", "sessionMedium", "sessionDefaultChannelGroup"]);
+});

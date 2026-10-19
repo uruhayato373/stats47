@@ -9,6 +9,8 @@ import { SectionCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import { RANK_GOLD_TEXT } from "../../utils/rank-medal.palette";
 import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
 
@@ -56,6 +58,7 @@ export async function RelatedRankingsGrid({
       headerAction={
         categoryKey ? (
           <Link
+            {...navSurfaceProps("ranking_related")}
             href={`/category/${categoryKey}`}
             className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
           >
@@ -65,7 +68,10 @@ export async function RelatedRankingsGrid({
         ) : undefined
       }
     >
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+      <div
+        className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
+        {...navSurfaceProps("ranking_related")}
+      >
         {items.map((item) => {
           const readerLabel = metricShortName(item);
           const detail = getSidebarDetail(item);

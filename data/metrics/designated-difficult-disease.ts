@@ -8,17 +8,17 @@ export const designatedDifficultDisease: MetricConfig = {
   "category": "socialsecurity",
   "source": {
     "kind": "estat",
-    "statsDataId": "0004026904",
+    "statsDataId": "0004048079",
     "cdCat01": "100",
     "displayName": "指定難病受給者証所持者数（都道府県別・疾患総数）",
-    "url": "https://www.e-stat.go.jp/dbview?sid=0004026904",
+    "url": "https://www.e-stat.go.jp/dbview?sid=0004048079",
   },
   "entities": [
     "prefecture",
   ],
   "years": {
-    "from": 2020,
-    "to": 2020,
+    "from": 2021,
+    "to": 2021,
   },
   "yearFormat": "fiscal",
   "visualization": {

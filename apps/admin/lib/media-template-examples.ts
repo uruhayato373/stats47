@@ -1,5 +1,9 @@
 import type { ImageView } from '../../../.claude/scripts/media/lib/workspace.mjs';
-import { canonicalTemplate } from '../../../.claude/scripts/media/lib/taxonomy.mjs';
+import {
+  canonicalTemplate,
+  IMAGE_PURPOSES,
+  selectionAllowed,
+} from '../../../.claude/scripts/media/lib/taxonomy.mjs';
 
 export function originalUrl(image: ImageView) {
   if (image.kind === 'cover') return image.coverUrl ?? null;
@@ -22,13 +26,27 @@ export interface TemplateExample {
   image: ImageView;
   src: string;
   state: 'approved' | 'candidate' | 'stale' | 'existing';
+  sharedFrom?: string;
+}
+export function comparisonTopic(
+  image: ImageView
+): NonNullable<ImageView['comparison']> {
+  return (
+    image.comparison ?? {
+      key: image.original?.sha256 ? 'asset-' + image.original.sha256 : image.id,
+      title: image.title + ' · ' + image.file,
+      url: image.pageUrl ?? null,
+      role: 'reference' as const,
+    }
+  );
 }
 
-/** Send only the visible sample pool; full ledgers stay on the library page. */
+/** Keep every note/SNS reference selectable; limit the much larger Web catalogue per leaf/ratio. */
 export function templateSamplePool(images: ImageView[]) {
   const groups = new Map<string, ImageView[]>();
   const counts: Record<string, number> = {};
   for (const image of images) {
+    if (!templateExamples([image]).length) continue;
     counts[image.templateId] = (counts[image.templateId] ?? 0) + 1;
     for (const purpose of new Set(['', image.classification?.purpose ?? ''])) {
       for (const selection of new Set([
@@ -44,10 +62,24 @@ export function templateSamplePool(images: ImageView[]) {
     }
   }
   const samples = new Map<string, ImageView>();
+  // Keep every bar topic and explicitly linked topic, even beyond the Web sample cap.
+  for (const image of images)
+    if (
+      (image.templateId === 'bar' ||
+        image.comparison?.role === 'layout' ||
+        image.comparison?.reason) &&
+      templateExamples([image]).length
+    )
+      samples.set(image.id, image);
   for (const group of groups.values()) {
     for (const channel of [...MEDIA_CHANNELS, 'web']) {
       for (const ratio of ['', ...channelRatios(group, channel)]) {
-        for (const example of channelExamples(group, channel, ratio)) {
+        for (const example of channelExamples(
+          group,
+          channel,
+          ratio,
+          channel === 'web' ? 3 : Infinity
+        )) {
           samples.set(example.image.id, example.image);
         }
       }
@@ -67,10 +99,13 @@ export function templateExamples(
   const examples = images
     .flatMap((image): TemplateExample[] => {
       if (
+        image.previewOnly ||
         image.templateId === 'unclassified' ||
         canonicalTemplate(image.templateId) !== image.templateId ||
         (image.kind === 'cover' && image.templateId !== 'note-cover') ||
-        ['pending', 'stale'].includes(image.classification?.status)
+        !['recorded', 'confirmed'].includes(image.classification?.status) ||
+        image.classification?.purpose === 'undecided' ||
+        image.classification?.selection === 'undecided'
       )
         return [];
       // Covers have a separate approval ledger; don't infer their candidate state here.
@@ -122,6 +157,7 @@ export function templateExamples(
 }
 
 export const MEDIA_CHANNELS = ['note', 'x', 'instagram'] as const;
+export const TEMPLATE_CHANNELS = ['note', 'web', 'x', 'instagram'] as const;
 export type MediaChannel = (typeof MEDIA_CHANNELS)[number];
 
 /** Actual dimensions only: filenames and channel presets are not measurement evidence. */
@@ -165,15 +201,144 @@ export function exampleDimensions(
 export function channelExamples(
   images: ImageView[],
   channel: string,
-  ratio = ''
+  ratio = '',
+  limit = Infinity
 ) {
   return templateExamples(
     images.filter(
       (image) =>
         image.channel === channel &&
         (!ratio || exampleDimensions(image)?.ratio === ratio)
-    )
+    ),
+    limit
   );
+}
+
+export interface TemplateBranch {
+  key: string;
+  templateId: string;
+  purpose: string;
+  images: ImageView[];
+}
+
+/** Navigation stops at purpose + visual encoding. Range remains image metadata. */
+export function templateBranches(images: ImageView[]): TemplateBranch[] {
+  const branches = new Map<string, TemplateBranch>();
+  for (const image of images) {
+    const { purpose, selection } = image.classification ?? {};
+    if (!purpose || !selection || !selectionAllowed(purpose, selection))
+      continue;
+    if (!templateExamples([image]).length || purpose === 'undecided') continue;
+    const key = sampleCountKey(image.templateId, purpose);
+    const branch = branches.get(key) ?? {
+      key,
+      templateId: image.templateId,
+      purpose,
+      images: [],
+    };
+    branch.images.push(image);
+    branches.set(key, branch);
+  }
+  return [...branches.values()]
+    .filter((branch) =>
+      [...MEDIA_CHANNELS, 'web'].some(
+        (channel) => channelExamples(branch.images, channel).length
+      )
+    )
+    .sort(
+      (a, b) =>
+        Object.keys(IMAGE_PURPOSES).indexOf(a.purpose) -
+          Object.keys(IMAGE_PURPOSES).indexOf(b.purpose) ||
+        a.templateId.localeCompare(b.templateId)
+    );
+}
+
+/** Resolve old broad bookmarks to a single leaf, keeping an explicitly selected sample when possible. */
+export function resolveTemplateBranch(
+  branches: TemplateBranch[],
+  query: Record<string, string | undefined>
+) {
+  const requestedPurpose =
+    query.purpose || (query.selection === 'top-bottom' ? 'ranking' : '');
+  const matching = branches.filter(
+    (branch) =>
+      (!query.template || branch.templateId === query.template) &&
+      (!requestedPurpose || branch.purpose === requestedPurpose)
+  );
+  const selectedSamples = [...MEDIA_CHANNELS, 'web']
+    .map((channel) => query['sample-' + channel])
+    .filter(Boolean);
+  return (
+    matching.find((branch) =>
+      branch.images.some((image) => selectedSamples.includes(image.id))
+    ) ?? matching[0]
+  );
+}
+
+export function comparisonGroups(images: ImageView[]) {
+  return [
+    ...new Map(
+      images
+        .filter(
+          (image) =>
+            comparisonTopic(image).role !== 'note-original' &&
+            templateExamples([image]).length
+        )
+        .sort(
+          (a, b) =>
+            Number(!!comparisonTopic(a).reason) -
+            Number(!!comparisonTopic(b).reason)
+        )
+        .map((image) => [
+          comparisonTopic(image).key,
+          {
+            key: comparisonTopic(image).key,
+            title: comparisonTopic(image).title,
+          },
+        ])
+    ).values(),
+  ].sort((a, b) => a.key.localeCompare(b.key));
+}
+
+/** Same-article fixed layouts. The note source image is available in image details only. */
+export function comparisonExamples(
+  images: ImageView[],
+  channel: string,
+  topic: string | null,
+  ratio = ''
+): TemplateExample[] {
+  if (!topic) return channelExamples(images, channel, ratio);
+  const group = images.filter((image) => {
+    const meta = comparisonTopic(image);
+    if (meta.key !== topic || meta.role === 'note-original') return false;
+    if (
+      meta.requiredSelection &&
+      image.classification.selection !== meta.requiredSelection
+    )
+      return false;
+    const currentCandidate =
+      image.candidate &&
+      image.candidateMatches &&
+      image.candidate.review?.status !== 'needs-revision';
+    if (meta.candidateOnly && !currentCandidate) return false;
+    return !(meta.role === 'layout' && image.candidate && !currentCandidate);
+  });
+  const examples = channelExamples(group, channel, ratio);
+  if (examples.length) return examples;
+  return templateExamples(
+    group.filter(
+      (image) =>
+        comparisonTopic(image).sharedChannels?.includes(
+          channel as (typeof TEMPLATE_CHANNELS)[number]
+        ) &&
+        (!ratio || exampleDimensions(image)?.ratio === ratio)
+    ),
+    Infinity
+  ).map((example) => ({
+    ...example,
+    state: example.state === 'existing' ? 'existing' : 'candidate',
+    sharedFrom: example.image.channel,
+  }));
 }
 
 export function channelRatios(images: ImageView[], channel: string) {

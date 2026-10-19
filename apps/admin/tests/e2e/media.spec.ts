@@ -82,7 +82,7 @@ test.describe("/sns ページ内 video の seek", () => {
     await expect(page.locator("text=/\\d+ 件/").first()).toHaveText(/^[1-9]\d* 件$/, { timeout: 30_000 });
 
     // ローカル mp4 を持つことが分かっている post (bcr-births-1995-2023, id=580) を検索で絞り込む
-    await page.getByPlaceholder("content_key / caption 検索").fill("bcr-births-1995-2023");
+    await page.getByPlaceholder(/^ID \/ 本文 \/ キーを検索/).fill("bcr-births-1995-2023");
     await page.waitForTimeout(200);
 
     const video = page.locator("video").first();

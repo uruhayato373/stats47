@@ -119,6 +119,7 @@ export function candidatesFor(
   );
 }
 export function mediaAspect(item: GalleryItem): string {
+  if (item.domain === 'note' && item.content_key?.startsWith('a-kakei-')) return 'aspect-4/5';
   if (
     [
       'household-receipt',
@@ -135,6 +136,10 @@ export function mediaAspect(item: GalleryItem): string {
   if (String(item.media_path ?? '').includes('/_replacements/') || item.template === 'all47-tile') return 'aspect-4/5';
   if (item.platform === 'instagram') return 'aspect-4/5';
   return 'aspect-video';
+}
+/** Reference thumbnails remain available after the posting images, never as the cover. */
+export function orderedPostAssets<T extends { role: string; order: number }>(assets: T[]): T[] {
+  return [...assets].sort((a, b) => Number(a.role === 'thumbnail') - Number(b.role === 'thumbnail') || a.order - b.order);
 }
 export function canEditDraft(item: GalleryItem): item is PostDTO {
   return (

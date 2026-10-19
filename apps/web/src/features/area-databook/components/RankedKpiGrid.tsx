@@ -7,6 +7,8 @@ import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
 import Link from "@/components/atoms/SiteLink";
 import { getSurfaceCardClassName } from "@/components/surface";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
 import type { DatabookMetricRef } from "@stats47/data-configs";
 
@@ -89,6 +91,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
             >
               <dt className="text-xs font-medium leading-snug text-muted-foreground group-hover:text-foreground">
                 <Link
+                  {...navSurfaceProps("area_databook")}
                   href={`/ranking/${m.rankingKey}`}
                   className="hover:text-primary hover:underline"
                 >

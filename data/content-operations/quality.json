@@ -1304,6 +1304,2859 @@
         }
       ],
       "approvedId": null
+    },
+    "IMG-177c826c96b61f6b05a54352": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "selected",
+        "basis": "fb5035a3c878574d2b0b0efd8357b154c15ac4258dc1ccd44a97d3d46ff39767",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で横棒の長さが支出額・割合を表すことを確認。上位5地域の棒グラフで、クイズの問い・地図・全件表とは区別した。",
+        "updatedAt": "2026-10-19T00:47:11.253Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-0c14873010e41a46fd627e96": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "selected",
+        "basis": "1ecfa5b113c12d227de2bf1cdb8adfeedd6168017eedfc44d4fe3ef7b1cb636c",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で横棒の長さが支出額・割合を表すことを確認。上位5地域の棒グラフで、クイズの問い・地図・全件表とは区別した。",
+        "updatedAt": "2026-10-19T00:47:11.664Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-f1b0129181c7aca3aaa39403": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "selected",
+        "basis": "de6aecccd65a68029a88c3a6844f0fc53c256b21ccf1ae75e52ffe40df16fc1e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で横棒の長さが支出額・割合を表すことを確認。上位5地域の棒グラフで、クイズの問い・地図・全件表とは区別した。",
+        "updatedAt": "2026-10-19T00:47:12.063Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9a1cdc5cbb6c4577301feb69": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "selected",
+        "basis": "ea0f057d2ca2de8180e75b5eda53b57af72170588be61184a2f7772382de9d32",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で横棒の長さが支出額・割合を表すことを確認。上位5地域の棒グラフで、クイズの問い・地図・全件表とは区別した。",
+        "updatedAt": "2026-10-19T00:47:12.460Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a30dd92338fe94f73497e775": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "selected",
+        "basis": "be7caf3c7980d6649637f0597c22b833b72f08f649ae3d961ea2189ef58bbb65",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で横棒の長さが支出額・割合を表すことを確認。上位5地域の棒グラフで、クイズの問い・地図・全件表とは区別した。",
+        "updatedAt": "2026-10-19T00:47:12.865Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-c8a3c737dbe3ecf86e1a6288": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "0ea20b55aadca4dd84de99f77b50d89446b332b4669fcc37223e0fe7d87f64ba",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:13.321Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-50c6b93ce198df9e800a321b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "61bae49a8adbaf79e5018eee1f8f8ffadca208fe66411e7746c3e4c02e52a482",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:13.730Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-14afdf3eab05af0b5349bf47": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "724f5b68448cd60359439a6448d37ad1a73911fd345686b527af4183cc41b4ef",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:14.170Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a7f952e9707909f440431e46": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "6ad45c5f26d26b30ef2fc53ad0cad4687ab0092729e75b90ce8aaf5ce25c4c76",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:14.669Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-22dfa5162e5d059678dfaa7d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "1482868ead093895bc9eb0196fed15eb32299656e78911a27aede4631b3262b8",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:15.058Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-14b0b715d86723644022733d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "05e077f6bf8f93b17e598c5b9f0d52faa1ce10d9f362dfbe7bec6ffbb2a4d88c",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:15.534Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-b163c7476ead2e32812f6ba6": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "02cd6069363068f37ca5e760a9716f0966183edfa4f11de8bbbf2faf1689de65",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:16.126Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-4820f5027f8d57139dbec6e3": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "d52d14e1754dcb38a75575599b6ba7fb32577f73499c766a350408de505082ee",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:16.628Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-e0482f617973b22dffd5c041": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "d82ec946fe40b2e46b489be6308c9dec133661adb1ab6bd5334cb6a965fd91dd",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:17.171Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-84f530e7f753a01dc900c008": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "a7e722b41397cc36542e5d0ac4373e7a7514b4be699a7f20c9d39c09b661e31b",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:17.750Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-dad30bc1ab558d1272046957": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "15f8533e496bdad0e669ca77e27bcc94e6bc0d28411a026913bbb9b5a9e2278e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:18.276Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-ff1b174a45a9fc7591dde314": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "30d61bdeb1bcbcd75fb10909d774ba48ed619a65b6934e8e3a5691e0f217e18f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:18.786Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8e36202ad1d04ad07274380c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "0cc15f9b67416b22bd5a322dbc3461e852f10a65718f7139d2545cd728100f36",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:19.295Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-ae96374fffcf1780d96ed177": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "8496fe61beccbf996e08efae44ef1e43f7814f1fa43f9fe62ffe9c9db6d0ac78",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:19.889Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-438e30b7cb462b2720e4a930": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "9fd9a1b61de563e9ddd97a866b595dbfdac90f53ceffe92c19847f00d4dc7c09",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:20.322Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5ba5c20143970986016f14da": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "aa03d0958bbe0114af1ac54fcb466a458f603a12cc3b20259358b98a61871c59",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:20.775Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1f269be3b8b42f72995e734b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "004db2efd676ceae5d13541562ae9a174ea62a8597efbc7787ce2fba55dd219e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:21.594Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-be69545731abce4591e95d52": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "6c4bed2f340761b21122e263f3f704f5ee2ce3f1a9101d5a3fa19bd70b8c53fd",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:22.304Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1f41ea7db6f1b9888122556e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "b07784fd8159aba72424d2bd0436a4ceb9d4d8bcf6b3b3eec6f9143902da8480",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:22.780Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-88f0b0cc6c7cd4ba4c072555": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "c891e055ce8d5a6b15099499def603b1f163cae19a41401d7fca64c29a58a83f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:23.220Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-ce1e3115dba1e4e295e0625b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "55bde03a9199a00f442dfd50fa6083696d51ebe0678eb069b4cadb75609e83a3",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:23.824Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-219c3642690102e154f5d890": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "2130face1cd90f07d0d2b22d9a6abf5d007d70998167d353905be80326047a2f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:24.310Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1e2a9e41d9b63e22b7d7514c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "37846e9f5429c8002f385b5f08f8fb34624ed7062d15c4e286bc77ea4c0b3aee",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で全47地域の順位・地域名・値を行列で読む数表を確認。値を符号化する棒はなく、テーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:24.953Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-c9dcca78991487bb8046b5dc": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "comparison",
+        "selection": "selected",
+        "basis": "9d71a2f9a6f6654a2b1751ba56df93dacc990c986feb837ee3e4d3c7e86c3ad8",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で2県と複数指標の値を列で対照する表を確認。棒の長さによる比較ではない。",
+        "updatedAt": "2026-10-19T00:47:25.464Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-dbbda530d72d7bf6586d2ad7": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "comparison",
+        "selection": "selected",
+        "basis": "d88b8d71db2b553a9a3e81742ff4dc36ed2108b1cb0d16b71fd1bc5e0676b5e2",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で2県と複数指標の値を列で対照する表を確認。棒の長さによる比較ではない。",
+        "updatedAt": "2026-10-19T00:47:26.097Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9410bc693f430f2e7f748555": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "5efbdf37994967e76fd7b6fc29d2136facdbf0faca7bc8c74e8bdd2f008bf4c4",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で上位・下位の順位・地域名・値だけを読む表を確認。棒が無いためテーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:26.641Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-c6e557d02202eb24c073d5d9": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "",
+      "classification": {
+        "role": "table",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "a987c6495337bcbd4397c5fba7b083314d64fb7a7f8c5e5fac5c1197b84d0f0f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で上位・下位の順位・地域名・値だけを読む表を確認。棒が無いためテーブルに分類。",
+        "updatedAt": "2026-10-19T00:47:27.577Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-00f8e848935569c9b086c2c1": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "5ff0fbadb82a453cb6ee946a548eb52728a6f641786c0ee6321aea41fbb90130",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で等サイズの47地域タイル上に注目順位を示すヒント図を確認。地理的輪郭による色分けや棒グラフと区別した。",
+        "updatedAt": "2026-10-19T00:47:28.287Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-89131e52c9f3fd412f31d471": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "2c2341d03def454bdc8139d9cec36a7e2523a0fca6bffe5c0f74e9f3c326e6f6",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で等サイズの47地域タイル上に注目順位を示すヒント図を確認。地理的輪郭による色分けや棒グラフと区別した。",
+        "updatedAt": "2026-10-19T00:47:29.090Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-3838998634d1578c9e761f61": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "f23531107c8aff9239583223468895556b34db46a2bbb2a2ebdb60f2ac6e58e9",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で等サイズの47地域タイル上に注目順位を示すヒント図を確認。地理的輪郭による色分けや棒グラフと区別した。",
+        "updatedAt": "2026-10-19T00:47:29.752Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-36d4d59fd4caee3805096ccf": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "c616674fa931333e3c6449d8b3a2c4bb9a5a93a8d0600da719c2d4e1b6d5c1b4",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で等サイズの47地域タイル上に注目順位を示すヒント図を確認。地理的輪郭による色分けや棒グラフと区別した。",
+        "updatedAt": "2026-10-19T00:47:30.580Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-f572012919700de9303c1444": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "all-prefectures",
+        "basis": "b24936b0c185f558b47f37770d4c6bb2bde79592df37c04fd30b8908cdfa5e17",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で等サイズの47地域タイル上に注目順位を示すヒント図を確認。地理的輪郭による色分けや棒グラフと区別した。",
+        "updatedAt": "2026-10-19T00:47:31.184Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-165950508e29a5c24d5893f8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "5eb38a6a1be25c4b45e45222a269b56dcb0ccf9b820c3459bd5e7938a84cd926",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で47県の等サイズタイルに2時点の変化率を表示する図を確認。値をタイルの色で表しており棒グラフではない。",
+        "updatedAt": "2026-10-19T00:47:32.996Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-6a1646aab7afcb5730ee0842": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "ebc5d244e71a652550fa4a92f0c8351e850f726a0d82c210493818c3ae9d1826",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で47県の等サイズタイルに2時点の変化率を表示する図を確認。値をタイルの色で表しており棒グラフではない。",
+        "updatedAt": "2026-10-19T00:47:34.247Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1db29a522cd478e0f1bf3fd0": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "tile-map",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "dfc02f0fccbc72c86a34aca8a95b6313039d608c5262ca15844c12a8f9a35d60",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で47県の等サイズタイルに2時点の変化率を表示する図を確認。値をタイルの色で表しており棒グラフではない。",
+        "updatedAt": "2026-10-19T00:47:35.480Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-97ba5eef9ef7753e0aed74f2": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "8e5bb90980b9d82bc543da42d578e5189d2cb9b0f80170efdde87e184af08d5c",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でクイズの問いと選択肢を提示するカードを確認。数量を棒で表現するグラフは無く、タイトル・導入カードへ分類。",
+        "updatedAt": "2026-10-19T00:47:36.690Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-34fcf30acb469876dc50da82": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "4209417badc0fedec7daefccddf4b04ff6e38a11ae1c016aeba52e6ea68c39c7",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でクイズの問いと選択肢を提示するカードを確認。数量を棒で表現するグラフは無く、タイトル・導入カードへ分類。",
+        "updatedAt": "2026-10-19T00:47:37.911Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-760bf95ff70d80279ea9311a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "2d9bb4a8ac7a2d7d0b61496311cde08e2a0285842fcbf745129dcce4ed2d58eb",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でクイズの問いと選択肢を提示するカードを確認。数量を棒で表現するグラフは無く、タイトル・導入カードへ分類。",
+        "updatedAt": "2026-10-19T00:47:39.249Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-f08f703a5bf95499aa922384": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "e24a172056fa5e4022adda78187e9ab247cd11fe298958631d5f6902fe0eb5a7",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でクイズの問いと選択肢を提示するカードを確認。数量を棒で表現するグラフは無く、タイトル・導入カードへ分類。",
+        "updatedAt": "2026-10-19T00:47:40.816Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-44023a2bde4eebb5d0e4555e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "457ea8c4998f11aba49293d94afd5d624770c6f1bc0e7f8ef2aec5f23afd7527",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でクイズの問いと選択肢を提示するカードを確認。数量を棒で表現するグラフは無く、タイトル・導入カードへ分類。",
+        "updatedAt": "2026-10-19T00:47:42.073Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-4a7e6ed0f3ad98233f8075e0": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "0583636719a78e7c6dee8398562402d2232ecdc1c327b63ac6da34aa04e308ae",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:43.375Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-682b4730492c41104a4ca4cf": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "64d8f7ca4790793c509aa7cad110cdfa7ce1b209b90cf43dd64b2cdc743e5e80",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:44.572Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-312a4bcf984d00e35378aa11": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "2151f7bd26e22c62611dfc13ac15ce5537f58e737c43bd26d7e4243d145fc48f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:46.008Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-d1daec0927454f0e7e016fe5": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "37cebca0f4663d53532dd273f3b4a026edfa381716734e06495db9d7b2be86e2",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:47.466Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-f424ae4b2566728b081c573b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "93420245471b39c05f71a3bac11d60fe3fe4395ac329e95b29b554ffaffa5449",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:48.747Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5b39ac967c4f43da5dc871de": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "51a79362f98245b77f742511faeec8ff92d560a8e3ee599fab04919ae0acba6f",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:50.059Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-19bb952be89da8a0ac1ec578": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "788445f6c9be3ea836f65134f0a05344306ad81bc536e659eddcd945fc8d7866",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:51.336Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8595807be87482a48898ecf3": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "2f3680196c1e246a587e7f90eddbda93bf436bf245d49f96cc5e06939d3391e0",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:52.719Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-c1efc4b27b5ad4f18cf61723": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "6f29a9de1e57a0d767833a356281906b8653da1361a00853f10491459219c900",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:53.964Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8f31674adf3ad4ec9b5ab582": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "14941998e95883491ae41f7152ff05cb2677079d382bfe959904d5e5058a8543",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:55.229Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-2f33733ff4009946a0cba335": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "18c23cce8d1ef407235901e7713e3df377bcdf68f5fd30080ad1ef0b623c302c",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:56.476Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-58709f641545b99bb3c8049a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "8cf842cc3fa922546bf7301b3c852395369ed57789f572e9e11c956f5eb1e113",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:57.729Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-3df99eea6b38179fb4c226b2": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "7b1f99090598150daf84ec8997b6db35f9f646b96169a87527da898e983874c6",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:47:59.049Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-37da51a192edc2221bfa541b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "2217fa624f8de4eb08b7f76631d841df763b11fb96652ad6c34815a24d4d9915",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:48:00.319Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5054396db9c8d72e806b9a3e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "2988209ed5be4f73c6486437b1defc9c5aefe60aa6fea0624896ec03685f802d",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:48:01.569Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-3300c34ae60f5eb70989a936": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "87ae7e15dac1b8fe6abaff5db427659b0722a015668cc4b0c655cae0eff056ac",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:48:02.809Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a51fcce7ebb9d4f2536a2868": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "6ebe14e6bf84e4e2556ff5c044a8e2b5a66ea04a6ba3706e2f2a169955b51fd4",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像でこの投稿の出典と調査名・対象年を列挙するカードを確認。統計値のグラフではない。",
+        "updatedAt": "2026-10-19T00:48:04.112Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-050c61152779071060eb7b14": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "06477d77f0fb4c2fbb29547ca5ac1881183dcb3bc04421261969a717b4fbfc8d",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:05.392Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-6ffbf0ef21b8d8361e60c43d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "57876117994abf5a017e11becfbfc4d4209e4d8842f9d9546ab828bcde12e9ca",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:06.696Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-aa885a219bf71eda843b6dfc": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "48f91ff0ccc5d94b8df927d9327ff9b3d35ebca0450a24627638051e4072bc53",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:07.929Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-3e8b77cf7d16757d80b1f9db": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "562cde23de6e264723632461130e0448728a706088ee9f6725a77655e6e5fb7e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:09.211Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-6aeaec3a759f179942e34ca3": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "78a8dda5c8a0f7989c47e8763da4ec77a121f1641654a62350b79f0befd66323",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:11.374Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-7e4c6968a75ef58b60d91db7": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "41a84f3ac98832fbaa77c6d4eff32cc8d8d94544721694007a2af33335910bf8",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:12.258Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8d79f52802456fdac4a741c8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "30cba3d95a953653390928318bc21107df1bbdfb8049a410f6d83ca52946ba67",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:13.493Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9edd518699b253544c7ddf50": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "bc456046384fccbd5a201bb9b16bea943bb331cc33a826b6b56d0c50d41e7751",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:14.424Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a0c3943955ec19bba08ccd91": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "2b4066930e6994c859861d873e8efc91c42f22dbfdc16a7a2c9839d898e33880",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:15.881Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-e4eddeeec0c32d579a33c3aa": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "9e1633d328b3ac9a2d66b6335e8951fe84c377a5b9e0f24e8dafb1054304b1f6",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:17.214Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-25b690c82c939c05850dd7c3": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "69c6f554b9929054195d49ee36d62d5f3354652b4ad3ac05f1b2838eb285bb79",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:18.460Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-3a8d961130ba9bd2fafc19f8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "ffd55b575a9a6ef513bbf39fbce50f2cb3b90dd654647252f51cd7f4c3adcc28",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:19.702Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-47cccb0ace40c6cd9b4bf827": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "9bf97dfc98088de3a24137b9e01f16901ee84af5a7dafb0dda5a4ed100eb0e00",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:20.847Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-b81d9d425564e8367b97f8f8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "0995e98caf19a0bbdae8fa267721724dd7ef71a4a689a4a62ae65418d9c5026e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:22.021Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-28dfea04eed0ac5efb0f26e6": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "800f5c989b6cb48347ad78f2025dc5d095f45d3510b57de125f80ccc093dbe66",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:23.332Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8bbbc48bd9378c1dd3b2915a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "3c550b04184b7e7a615d0bf800143637997816383aef20bfb088e88ed9a880ce",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:24.758Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5ce105df7577838a9a17e66c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "d8b9676516a98a2959290354ee109a6c6d30022a4eedba6dd179a288ec2d606e",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:26.322Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-edd75b4dbe9437e1c267a91d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "15c2cf7e59cefb683d465e69b323df37f0d8bc22c5cd66352a530c368cbebef3",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:27.793Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-229ddfdb3664df4094d6494d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "79220f2586b5c80a1fe5e18036d4ea4faf2f7ab87a4a18997a53d16770796d06",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:28.312Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5234cda99a1bc35142acf19b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "6c0ba524df7d10b1439c04871ec742d6aa839a1618fda77180e10880f36d93ae",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:29.055Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-040f634739b17a9e50c14bfa": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "cf968d886182fa0aad9fa8a87b3f83ef321b0358d86391d52f828b5612479d5d",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:29.763Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-bc3b3d1e8a8c9ab3e9471f50": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "cae55f8a5adcb5c3d7bebad740321d517d1e549a07ac3807346b3496c8bc33f1",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:30.748Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1ba1fb9a58e1caa78b345663": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "ce842aa47cc780ccb7473d2865138a3f8ac1af543df0f3c557f3b9b163f0b232",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:31.642Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-704d32d7db97d5b85b26a95b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "b81cc82b7c2ee4bbd50aadbe7c12de377121b32def5a2b40fc958e34f8c2df27",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:32.304Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-25b8d95da78af94f0f70b1f2": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "711420b229acf21366f91a068c5b2a354bd1588bf0066eafab786a8e9fe25c65",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:33.127Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-75d89f4f17dd9342d8969f01": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "f1d1f473c66b183378ce7679834ffd2396053d6ae38e135958ac157e78a655ae",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:33.701Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-23039f2bd9b43b0200dbbb1d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "31f1c87b67a11f6a1a91b58bced451d1161760c8d039c4b5d7333b4bd4f93078",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:34.297Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-b29dd757f18dbd61eb492cef": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "dde675bc5abcca0747302a67207ee69cbe305601e1baa69b9380906fc0f44ce7",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:34.788Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-364cff0b879840b852e8092a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "8bb4d878d41c753732d0653b2718c37330ae7da5f5d105c5c25c9a7670acb67a",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:35.476Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a05c5b557ecfc3979ea2bb4e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "bba973b21f8a667fa32cb5a8365942867d5f9f2cd57d35a88a0bb5db9b506e38",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:36.328Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-40b0238f0f44c57317212f77": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "83edff8897df0c3b8310c0d5ccf65eeec693a6f7d90c06a6dc685e99948fa623",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:37.042Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-7ed3f78f08bd8e97518395d9": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "af8d3304a42eb3b8385f28cc153d45228a8009c97acce6ba2bcd1b64bd0f8abb",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:37.601Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-54127005a8dc977649d67334": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "a0b1888aa7bf1acc062772c362731fa28251f7f374be99204b5bae4ce71dc6f6",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:38.212Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-b4a180bda5425f15b8cc2230": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "f477c8d7d5f7beed51acb8f01f3f4483d9c61285a144ef8f2f1d9591608ad9cf",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:38.714Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-62d01eb843f049b4c9b3a123": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "20a1e7c0980c1e56861a1d5a5bd37ecf8ceb3ee6efad410ffea301448af926fb",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:39.342Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8eeadc9aa9668590c5413d24": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "summary-card",
+      "policy": "",
+      "classification": {
+        "role": "summary",
+        "purpose": "explanation",
+        "selection": "selected",
+        "basis": "b9815a7f8d0c71249a3fb6b1bb0a58f926f573bafa586bdbac362990df591613",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で複数指標の順位・数値、または比較の勝敗をカードとして要約する図を確認。異なる単位の値を棒の長さで並べていない。",
+        "updatedAt": "2026-10-19T00:48:39.810Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a56266404a9386123127aa40": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "choropleth",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "8c5d146b5050636c80add8e9a89abf624fb744aeb79267f37401dcb7c09d90b7",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で都道府県の実際の地理的輪郭に人口変化率を色分けする図を確認。棒グラフや等面積タイルとは区別した。",
+        "updatedAt": "2026-10-19T00:48:40.441Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1ae3bc16c1d6cc9523153f89": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "choropleth",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "78fa9ec4bed5c4fab918e9eada246e756c8b22655fd1783e980eae33c5bde961",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で都道府県の実際の地理的輪郭に人口変化率を色分けする図を確認。棒グラフや等面積タイルとは区別した。",
+        "updatedAt": "2026-10-19T00:48:41.045Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-dc1756ad3312568ceecb8c1c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "choropleth",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "b9fd9e970169f2530701019a28d48e4f17076e3d3856f56beb17f6b6ce839937",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で都道府県の実際の地理的輪郭に人口変化率を色分けする図を確認。棒グラフや等面積タイルとは区別した。",
+        "updatedAt": "2026-10-19T00:48:41.649Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-68f121d6cca0ce28d904b832": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "choropleth",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "f349e51dc259b599cc71df88162f03aca57d82d698262aec890dc405f5f98f21",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で都道府県の実際の地理的輪郭に人口変化率を色分けする図を確認。棒グラフや等面積タイルとは区別した。",
+        "updatedAt": "2026-10-19T00:48:42.202Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1a02c303ac5b78adef87bc76": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "choropleth",
+      "policy": "",
+      "classification": {
+        "role": "chart",
+        "purpose": "trend",
+        "selection": "all-prefectures",
+        "basis": "134283be01e9dccc68c3386487723e581eb3988351bccaba48b476933920bb4b",
+        "reason": "2026-10-19 原本SHA照合・実画像確認。実画像で都道府県の実際の地理的輪郭に人口変化率を色分けする図を確認。棒グラフや等面積タイルとは区別した。",
+        "updatedAt": "2026-10-19T00:48:42.851Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-175995663d15c87d5e73263f": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "既存の家計レシート。全国家計構造調査の県全域・二人以上世帯と対象月を維持し、県庁所在市の家計調査と混同しない。",
+      "classification": {
+        "role": "table",
+        "purpose": "composition",
+        "selection": "complete",
+        "basis": "de5084ed3c54edec450550f02cddd617f207ffdae247621e5ee7615b87ed35e6",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。10費目と月平均総額をレシート状の行列で読む。数量の棒は無いためテーブル。全国家計構造調査の県全域・2024年10〜11月平均でありnote家計調査とは別。",
+        "updatedAt": "2026-10-19T00:51:58.250Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-a73d91d70c33e902ee8c96f0": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "46d763cbdb312e3945675cd0f46c1428b39836fc6d0fb57668914a2d30bac457",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:51:58.888Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-96424b7b0da3584a2d455322": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "c9a4a82cba9830d4e18b77866fdaec4d1fdebac5036fe62dd98ecf37f17181ce",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:51:59.409Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-11546352dd0ee374697c2454": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "ce72596b79da4dd6ed0158db8b7d894026225eed89588b2d3c2719be8b6331eb",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:00.024Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9ecab92066cd82a386b72f66": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "8cc956747faa743a37aefb6cbf86b5883566be824a3c60125c969873b58e2409",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:00.559Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-12b0081e57803e770c07f2b8": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "f2bba21a71a4ed45b200126b2121044a33ab9939a695ef1f7dc50f167f16499c",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:01.115Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-19096371120cafcaa21f0194": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "a7d139853edfb7cf2eba426fcc69a7315404adaa1f9f5db1422f068c9c898227",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:01.624Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-df6983cb75ebcebbcb937203": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "71561e549e159f3f6ae5b6ae9715357d6c2eee509726c8fcd9f3a57967cca391",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:02.173Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-ff67a45a3d1a16b7919ae49a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "5dcc896a09c89743aa67f27daf443c845614b967bbcb8d67d77f70eb9d4f43e0",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:02.650Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-7b4d320945e19873ba2b9959": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "9352165e54f3865d85f75cc387bb585b47bc9e9b5f31de0fcee7bea94d5dfefb",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:03.144Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-92833193a0ed151326cef27c": {
+      "templateId": "bar",
+      "revisions": [],
+      "candidateId": null,
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。 実画像では下位側に負の最低気温がある。棒の基準・向きと符号の対応を数値入力で照合するまで再利用・採用しない。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "216960a0d2f61fef7943f70aaf049f325e3da7a1ca7c14d32c09864d4c78a144",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:03.651Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-6f1ef888feff3adc38338f9b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "dd56d745b6f16bff20ecc6eab1b36dbc8dbf7324c92c20f649550008ab8c7530",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:04.073Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-80e397f78d3e2cde8375138a": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "既存画像の分類用。新規SNSへ旧上位・下位型を再生成しない。現行の全47県表示を維持する。数値・出典・可読性は分類とは別に確認する。",
+      "classification": {
+        "role": "chart",
+        "purpose": "ranking",
+        "selection": "top-bottom",
+        "basis": "095335d30c16b3ce035d1654d25d60a258636559d65d9999d67f312e06454d2d",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。上位・下位5地域を横棒の長さで表した旧ランキング図。表ではなく棒グラフに分類。",
+        "updatedAt": "2026-10-19T00:52:04.688Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-d1311cce6fa69e3d1c662ac4": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "既存の家計レシート。全国家計構造調査の県全域・二人以上世帯と対象月を維持し、県庁所在市の家計調査と混同しない。",
+      "classification": {
+        "role": "table",
+        "purpose": "composition",
+        "selection": "complete",
+        "basis": "0811f21a7d481fed161bcd150fc4ec6e6986d08360247010ddae282c7ce1cd05",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。10費目と月平均総額をレシート状の行列で読む。数量の棒は無いためテーブル。全国家計構造調査の県全域・2024年10〜11月平均でありnote家計調査とは別。",
+        "updatedAt": "2026-10-19T00:52:05.367Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9281e7a4064a4f65a0947e3c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "既存の家計レシート。全国家計構造調査の県全域・二人以上世帯と対象月を維持し、県庁所在市の家計調査と混同しない。",
+      "classification": {
+        "role": "table",
+        "purpose": "composition",
+        "selection": "complete",
+        "basis": "7c742e7ce4c46528f16eba7dbd5b26d6dd21c82e1d02476211255b3489b2f90f",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。10費目と月平均総額をレシート状の行列で読む。数量の棒は無いためテーブル。全国家計構造調査の県全域・2024年10〜11月平均でありnote家計調査とは別。",
+        "updatedAt": "2026-10-19T00:52:05.927Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-960afdcf7ac5b2777a04038e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "既存の家計レシート。全国家計構造調査の県全域・二人以上世帯と対象月を維持し、県庁所在市の家計調査と混同しない。",
+      "classification": {
+        "role": "table",
+        "purpose": "composition",
+        "selection": "complete",
+        "basis": "491ab4133f5af26611dffef8a97ab954b07f30e18f85c9d11a728101a8e39b9f",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。10費目と月平均総額をレシート状の行列で読む。数量の棒は無いためテーブル。全国家計構造調査の県全域・2024年10〜11月平均でありnote家計調査とは別。",
+        "updatedAt": "2026-10-19T00:52:06.614Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-0e29e7094c74dceb35c1eb17": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "table",
+      "policy": "既存の家計レシート。全国家計構造調査の県全域・二人以上世帯と対象月を維持し、県庁所在市の家計調査と混同しない。",
+      "classification": {
+        "role": "table",
+        "purpose": "composition",
+        "selection": "complete",
+        "basis": "209a342578f9c5fba15cb4a382a84cec22b0796fb715722b8d6142962aeaed04",
+        "reason": "2026-10-19 Drive原本のSHA・bytes照合と実画像確認。10費目と月平均総額をレシート状の行列で読む。数量の棒は無いためテーブル。全国家計構造調査の県全域・2024年10〜11月平均でありnote家計調査とは別。",
+        "updatedAt": "2026-10-19T00:52:07.318Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-330c0cf43cf0e6886b258bbf": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "bcbe64cb1e578d816c84596931ac2abba747b9d5edaf47345eec52b0f5ef12c6",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:52:44.515Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-e920355ff9670bd9a80cc7f5": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "b879eea19b159a2a1cccc7a5337425977257abbc58d2bc17a93c03e981dd0135",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:52:47.613Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-0c1f113a8ca0ab87aa69506b": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "2f4e1498adb0b5c666a2f3688676683ff5030da75ec82404622936f2753129bd",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:52:53.781Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-d0f06e0494236501a5c4142c": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "1827d1132cf99927cea1a132e20cf166dcb3ca6d8122a86ea2df65b33dd3336c",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:52:57.038Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-235a3a82fe585b4263cb945f": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "4a61f0375ef9c21168a67be13b8f2360542e72b797710ace287090490f031685",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:53:02.448Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-00b7ce916e66f1de71fd8bd9": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ2024年・県庁所在市・二人以上世帯・47市単純平均の固定入力を使う。Xは1枚、Instagramは導入/比較/出典へ調整する。既存note原図は確認用で、媒体別の投稿用レイアウト・320px可読性は未確認。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "40aec4e05b7986ffb017d4ab503c79734152120248f21b495b8002dc0421a1ac",
+        "reason": "2026-10-19 note記事のmanifest SHA・chart-data・原PNGを照合し実画像を確認。十大費目の倍率を1.00基準から左右に延びる横棒で示す。SNS投稿用ではなくnote原図の確認用。",
+        "updatedAt": "2026-10-19T00:54:05.127Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-e65352866110f033d695a8f9": {
+      "revisions": [
+        {
+          "id": "44ccf2db86ec89fc959edeafbf9fd12e1c3464916c58cc6fd1f5ea9a290c64f4",
+          "basis": "05ddc04c13c2f50b72425c299beb67b81e305562d9cbc3bfcaba30f973997696",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698.png",
+            "sha256": "c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698",
+            "bytes": 156815
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/61452cc2ff5d6a3d885c6ee48d5233276e0fec2eeca317d88958a5a445eeffff.json",
+            "sha256": "61452cc2ff5d6a3d885c6ee48d5233276e0fec2eeca317d88958a5a445eeffff",
+            "bytes": 20106
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:19.820Z",
+          "review": null
+        }
+      ],
+      "candidateId": "44ccf2db86ec89fc959edeafbf9fd12e1c3464916c58cc6fd1f5ea9a290c64f4",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "0338e658560a573177c45e1e1afc7407d48cc0742c7e2262c1e8bdb4bd044bd1",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:16.845Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "0338e658560a573177c45e1e1afc7407d48cc0742c7e2262c1e8bdb4bd044bd1",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:32.105Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-ef79f46307a3e99af38b8b26": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "be81b574f5d93a478dedf9f2138e7b4e6e2cffd7b01d783c36e9b9b55bc6fbcc",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。市名と2費目の発見を大きく示す導入カード。棒グラフそのものとは区別。",
+        "updatedAt": "2026-10-19T01:17:32.696Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-894f11170e0cfa7b9eccfdac": {
+      "revisions": [
+        {
+          "id": "6fa5108e66b73388985cf62687f25bb7902eba5c9967fea0ae88b0a8b00430d5",
+          "basis": "5e1652836eca31356d43d1872e77f7691f9ac83a120a6bdc1b7fb66257821aef",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+            "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+            "bytes": 194991
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/2f5e4d1adb84550e2b929759195e73b8b1d526ee739e432f940fc2030ef5a385.json",
+            "sha256": "2f5e4d1adb84550e2b929759195e73b8b1d526ee739e432f940fc2030ef5a385",
+            "bytes": 20280
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:46:36.215Z",
+          "review": null
+        },
+        {
+          "id": "0ab811c0f85157143c159887730fcaf87a10a8fb64a7c487ada930450b2ddd6d",
+          "basis": "539ab0e3d73eb1d0206ce49954f94b0cb711aa02634dac1662c4063ce4c9b379",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698.png",
+            "sha256": "c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698",
+            "bytes": 156815
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/e361b2b42469331663d93896d426f81bf63b5c08d00039d4a38fee5561d6db70.json",
+            "sha256": "e361b2b42469331663d93896d426f81bf63b5c08d00039d4a38fee5561d6db70",
+            "bytes": 20114
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:24.564Z",
+          "review": null
+        }
+      ],
+      "candidateId": "0ab811c0f85157143c159887730fcaf87a10a8fb64a7c487ada930450b2ddd6d",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "6b14fb97c0ca6ce54e1431d273b950a5c9ee3580df538f1d2cf56d47adf5afee",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:21.357Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "selected",
+          "basis": "6b14fb97c0ca6ce54e1431d273b950a5c9ee3580df538f1d2cf56d47adf5afee",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:33.300Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "6b14fb97c0ca6ce54e1431d273b950a5c9ee3580df538f1d2cf56d47adf5afee",
+          "reason": "2026-10-19 オーナー指示でInstagramも十大費目1枚の共通型へ。候補の全10費目とnote/X画像SHAの一致を確認。旧図は5費目の分割版として保存・比較する。",
+          "updatedAt": "2026-10-19T02:46:32.345Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-f2305eaa4967dbfc09525017": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "selected",
+        "basis": "8925ac8f931d56fe589d6993b8464e8ec11465306a8a3047e21b0df01bd44e76",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+        "updatedAt": "2026-10-19T01:17:33.926Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-d614005f042904679ae1edc4": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "5266eb64d9f28d3b75d0683f3d411d6ee3e7faf6640ceccd1333b75840504975",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。調査・対象年・世帯区分・比較基準を示す出典カード。",
+        "updatedAt": "2026-10-19T01:17:34.386Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-9f8600f07258452d8dab916d": {
+      "revisions": [
+        {
+          "id": "12a04dd169fd9e0a4a57af675e2ab9ad7ead08e088e0b925307964bc0996b6cf",
+          "basis": "2387ffe8a2d0f61bfee785e6301762be328593a369655c6ce2ea890b2a24727f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c.png",
+            "sha256": "82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c",
+            "bytes": 163294
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/d76e308dbdd7acd2f8fd6189803671ab22af7dae1e5891c75f051a570aa040c4.json",
+            "sha256": "d76e308dbdd7acd2f8fd6189803671ab22af7dae1e5891c75f051a570aa040c4",
+            "bytes": 20078
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:35.959Z",
+          "review": null
+        }
+      ],
+      "candidateId": "12a04dd169fd9e0a4a57af675e2ab9ad7ead08e088e0b925307964bc0996b6cf",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "8944772f524f653408fea6de8685536f882a90554f72e5ba90de4591cb8c2dbb",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:33.383Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "8944772f524f653408fea6de8685536f882a90554f72e5ba90de4591cb8c2dbb",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:34.994Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-31dcca2cf488c8afae7b26ff": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "c78ba70d62b04008ff6dc6f4c56cd2ac2eb4d4083f4c3356655d96325572231c",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。市名と2費目の発見を大きく示す導入カード。棒グラフそのものとは区別。",
+        "updatedAt": "2026-10-19T01:17:35.545Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-00e9272b692473299bb4f71b": {
+      "revisions": [
+        {
+          "id": "b2f80a1f98928a757f783df8636dbec5179bba5be865814df5724e63504619ce",
+          "basis": "d810bc58a9c4ca59201a147dd92030933073009aacab54eae04329f8129194d8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+            "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+            "bytes": 201114
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/08e76e27437ea70a822e42419924c628085561b5f1fbd82acdb6051546dd2bc9.json",
+            "sha256": "08e76e27437ea70a822e42419924c628085561b5f1fbd82acdb6051546dd2bc9",
+            "bytes": 20252
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:46:41.624Z",
+          "review": null
+        },
+        {
+          "id": "b40ea589fc272f9ac16283ef4328e0cdbfd96edeff61687ac380460e048545b4",
+          "basis": "f45f542f27af3c39ccf4b9ec90fb657b5534c7c40b07e5794489d5740a365a02",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c.png",
+            "sha256": "82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c",
+            "bytes": 163294
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/6df6f8d8bd8b723d781a988567cc47aea2016342a688b6af32266e9d9782587c.json",
+            "sha256": "6df6f8d8bd8b723d781a988567cc47aea2016342a688b6af32266e9d9782587c",
+            "bytes": 20086
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:40.313Z",
+          "review": null
+        }
+      ],
+      "candidateId": "b40ea589fc272f9ac16283ef4328e0cdbfd96edeff61687ac380460e048545b4",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "050f95827b8918fc30b6a14927dae1bb1c7cc1741f8d6aaeb1d167e588a116ee",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:37.362Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "selected",
+          "basis": "050f95827b8918fc30b6a14927dae1bb1c7cc1741f8d6aaeb1d167e588a116ee",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:36.128Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "050f95827b8918fc30b6a14927dae1bb1c7cc1741f8d6aaeb1d167e588a116ee",
+          "reason": "2026-10-19 オーナー指示でInstagramも十大費目1枚の共通型へ。候補の全10費目とnote/X画像SHAの一致を確認。旧図は5費目の分割版として保存・比較する。",
+          "updatedAt": "2026-10-19T02:46:37.714Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-73dde55fb01ca45943761326": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "selected",
+        "basis": "b54d029694c40fd113bebeb52391109bbc6daa291dc38841ca2599bf2b771f11",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+        "updatedAt": "2026-10-19T01:17:36.728Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-42531c064bbc833fec854b7e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "db24842c198917b56bf4df13fd12372fe149843dd7c32fba6833a5637d170f94",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。調査・対象年・世帯区分・比較基準を示す出典カード。",
+        "updatedAt": "2026-10-19T01:17:37.272Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-8d67ebadbae22e9bbc6e1415": {
+      "revisions": [
+        {
+          "id": "c4e98674c58ef25aa7f6b9738ef72713f48de50315fac7ac390575f548e8ce5b",
+          "basis": "21786beb3ba0e30af1070e1269a05f25d8735a479f2085d77f796e5c9650a792",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c.png",
+            "sha256": "24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c",
+            "bytes": 160407
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/3afcad2e1af6bf050e4ca9655d55347ab1c32594049d3bb62fcc1759883a0440.json",
+            "sha256": "3afcad2e1af6bf050e4ca9655d55347ab1c32594049d3bb62fcc1759883a0440",
+            "bytes": 20073
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:51.981Z",
+          "review": null
+        }
+      ],
+      "candidateId": "c4e98674c58ef25aa7f6b9738ef72713f48de50315fac7ac390575f548e8ce5b",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "33ed9e20fc71d205a3de0ca5c57711deb814d61010aebc9a70f0f057c430e830",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:48.852Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "33ed9e20fc71d205a3de0ca5c57711deb814d61010aebc9a70f0f057c430e830",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:37.812Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-bb70c1447628bd9526b4282d": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "title-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "title",
+        "purpose": "explanation",
+        "selection": "na",
+        "basis": "361fe1a5e1eab579afa2da1d0152cc43e8bd236311da6f3a25a069e28a3cd415",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。市名と2費目の発見を大きく示す導入カード。棒グラフそのものとは区別。",
+        "updatedAt": "2026-10-19T01:17:38.312Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-5bf5f2c00907fd7f726778d4": {
+      "revisions": [
+        {
+          "id": "41120beb25553fb722177a4976df7145002da80a639f66ebd93c87bbd3a448c0",
+          "basis": "2203405fa3705bbfb9243018a58e64f125073434f08921b5a5a9fa7bde55ea3a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+            "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+            "bytes": 198470
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/761d3cb1527ab51da17cbcd7d06cbe733682d27e10378b475e034940efeb1891.json",
+            "sha256": "761d3cb1527ab51da17cbcd7d06cbe733682d27e10378b475e034940efeb1891",
+            "bytes": 20247
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:46:46.579Z",
+          "review": null
+        },
+        {
+          "id": "41dac49d8e9b562e5bfcc4d8575a96687d848f849e7408c98f0d91d1933c77e4",
+          "basis": "a5790d44500ca223ba32bcbc72a1ef746630522df7a237dcbd641ccc541942f9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c.png",
+            "sha256": "24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c",
+            "bytes": 160407
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/55fd2cda46edadf3c0af171f11f8cb7d2e438c8cc9122ec333650469190e2b44.json",
+            "sha256": "55fd2cda46edadf3c0af171f11f8cb7d2e438c8cc9122ec333650469190e2b44",
+            "bytes": 20081
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:57.077Z",
+          "review": null
+        }
+      ],
+      "candidateId": "41dac49d8e9b562e5bfcc4d8575a96687d848f849e7408c98f0d91d1933c77e4",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "c9a55b0592d548d51aa6bc246e0e65601a4f016b03b62f9f1d8f260b3a2a9f8d",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:54.457Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "selected",
+          "basis": "c9a55b0592d548d51aa6bc246e0e65601a4f016b03b62f9f1d8f260b3a2a9f8d",
+          "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+          "updatedAt": "2026-10-19T01:17:38.877Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "c9a55b0592d548d51aa6bc246e0e65601a4f016b03b62f9f1d8f260b3a2a9f8d",
+          "reason": "2026-10-19 オーナー指示でInstagramも十大費目1枚の共通型へ。候補の全10費目とnote/X画像SHAの一致を確認。旧図は5費目の分割版として保存・比較する。",
+          "updatedAt": "2026-10-19T02:46:43.014Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-bc61782928a3699dd02ef94e": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "bar",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "selected",
+        "basis": "d1e8fbf6b6299f538db20f7b549944a0a5ac4f5632f9953d4991c73770086140",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。倍率を1.00の基準線から左右へ延びる棒で表示。Xは十大費目、IGは前後2枚で全10費目を重複なく保持。",
+        "updatedAt": "2026-10-19T01:17:39.416Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-1a8db0d2ea89414455292eaa": {
+      "revisions": [],
+      "candidateId": null,
+      "templateId": "source-card",
+      "policy": "noteと同じ固定入力・市域・2024年・二人以上世帯・47市単純平均を保持。rendererとフォント版は制作入力JSONに保存。媒体別レイアウトを確認済み、投稿の承認は別途。",
+      "classification": {
+        "role": "source",
+        "purpose": "reference",
+        "selection": "na",
+        "basis": "d098a1ffe260d2b015317b1a576b6d3c4a2d669b6965f4faf702b51fd425d455",
+        "reason": "2026-10-19 固定note入力・年・市域・47市単純平均と生成画像SHAを照合。原寸/320px確認。調査・対象年・世帯区分・比較基準を示す出典カード。",
+        "updatedAt": "2026-10-19T01:17:40.238Z"
+      },
+      "classificationHistory": [],
+      "approvedId": null
+    },
+    "IMG-bfce0322b0e9e684edcd2018": {
+      "revisions": [
+        {
+          "id": "21e245954b32c8ec62a9944d547a225f32c2662e488c8bd94db4f44de3620ff5",
+          "basis": "45c6740c1a58f605b6cd298bd95840fd7c6759cb9e3545f3b51f2f09040de054",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/1c59ca1c4510edd961e7751842073abc7b0c9729b87a54ebb0f2a9cc8cf5aaab.png",
+            "sha256": "1c59ca1c4510edd961e7751842073abc7b0c9729b87a54ebb0f2a9cc8cf5aaab",
+            "bytes": 258389
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/079380278506cef22b721b375eb3a152278d66c9aa21c2822677671aab0bf6a5.json",
+            "sha256": "079380278506cef22b721b375eb3a152278d66c9aa21c2822677671aab0bf6a5",
+            "bytes": 21900
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-19T02:29:22.958Z",
+          "review": null
+        },
+        {
+          "id": "6d72ef2296945ed7cb47cb2a4a69b25964450697b16ec0e1450ce80dd64070aa",
+          "basis": "b716c8fb6fedbdec4d2d8ed618f0b511fc962426925b35e0dc13ac45c08572c0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+            "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+            "bytes": 194991
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/3b48f6bfc5d5fe9f061cf17e24b8c35a8e94a669b9219343d2971d51f8c0e6f8.json",
+            "sha256": "3b48f6bfc5d5fe9f061cf17e24b8c35a8e94a669b9219343d2971d51f8c0e6f8",
+            "bytes": 18904
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:40:19.702Z",
+          "review": null
+        },
+        {
+          "id": "9b4c8bcc558b4a181d6aa78c0019f65e41f2349dd5c821b6c3e4c7e26967029d",
+          "basis": "9a6eecc948004dd5f702b164573cc6411bca05404323ad0d298a4b09abc3910b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698.png",
+            "sha256": "c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698",
+            "bytes": 156815
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/b17a7f104bef9303a7e953d7fcf14a50e559033c0e42197a45a50ed34e2cdf7e.json",
+            "sha256": "b17a7f104bef9303a7e953d7fcf14a50e559033c0e42197a45a50ed34e2cdf7e",
+            "bytes": 20037
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:14.966Z",
+          "review": null
+        }
+      ],
+      "candidateId": "9b4c8bcc558b4a181d6aa78c0019f65e41f2349dd5c821b6c3e4c7e26967029d",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "a7d35b1d5025a1d231d68c8b815f3f1baeca0ffac383726cf3c2ff1de98186b7",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:10.940Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "a7d35b1d5025a1d231d68c8b815f3f1baeca0ffac383726cf3c2ff1de98186b7",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。note用の2:3固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:29:21.838Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "a7d35b1d5025a1d231d68c8b815f3f1baeca0ffac383726cf3c2ff1de98186b7",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。3媒体共通4:5の固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:40:18.538Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-15e76de879c959851b12bdb7": {
+      "revisions": [
+        {
+          "id": "e8e6ac1ce7d6556d7a96fa706cd49c0f423a6b1fa548187c17ff1fb089b9c9ca",
+          "basis": "9300e9574860e4ced287af480919a3a7d510f63633224c20f62451f4b400b9a9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/68c40a9ddb2d56218caca4dfdb43f7e7fee2edb3581f92ea046724a4ef02728c.png",
+            "sha256": "68c40a9ddb2d56218caca4dfdb43f7e7fee2edb3581f92ea046724a4ef02728c",
+            "bytes": 270397
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/5fbc5c255a178f013b0f0854d8bd8de9129c43bc4d48da16fa6b3e002343e1f6.json",
+            "sha256": "5fbc5c255a178f013b0f0854d8bd8de9129c43bc4d48da16fa6b3e002343e1f6",
+            "bytes": 21872
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-19T02:29:32.498Z",
+          "review": null
+        },
+        {
+          "id": "2c4bed3d5e1be52b6f09c55454d8b7575413898b694f0720aabff186d53ae832",
+          "basis": "31a858cfc641ee75a9abcb57b358d9c0e7361a26067fcc210fc42ce63a6b0500",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+            "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+            "bytes": 201114
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/03889a5fe5e45cf7c2f7b0c574b0cfa8cd6f996bd04770ead8983d51c410bc69.json",
+            "sha256": "03889a5fe5e45cf7c2f7b0c574b0cfa8cd6f996bd04770ead8983d51c410bc69",
+            "bytes": 18876
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:40:27.374Z",
+          "review": null
+        },
+        {
+          "id": "090b4922871b4efa89bf8a7616ae7ad3cce95e42dcb32e76a3f6a388b5506c05",
+          "basis": "89159c169a2adf0b90b3215c4f06ce57814c3425d0dbe450c7b868f091be768f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c.png",
+            "sha256": "82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c",
+            "bytes": 163294
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/629587b11ce0c161474883e419e20e8d6581cb823e98253bd6ba8b14b999f02d.json",
+            "sha256": "629587b11ce0c161474883e419e20e8d6581cb823e98253bd6ba8b14b999f02d",
+            "bytes": 20010
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:31.495Z",
+          "review": null
+        }
+      ],
+      "candidateId": "090b4922871b4efa89bf8a7616ae7ad3cce95e42dcb32e76a3f6a388b5506c05",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "e2f5a3889ecd5ca2777b7cb58fcb03c0a477f71199d94cf143c9bc51b47e7a93",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:28.787Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "e2f5a3889ecd5ca2777b7cb58fcb03c0a477f71199d94cf143c9bc51b47e7a93",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。note用の2:3固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:29:30.673Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "e2f5a3889ecd5ca2777b7cb58fcb03c0a477f71199d94cf143c9bc51b47e7a93",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。3媒体共通4:5の固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:40:26.852Z"
+        }
+      ],
+      "approvedId": null
+    },
+    "IMG-544740583c47dd0ac773b51a": {
+      "revisions": [
+        {
+          "id": "d0dfc3baf19bc9f8627fb85f0fbb4f6cafd0e7571a87ccee582a5e305dec4a2e",
+          "basis": "a534e5d4b49e3c7e24366fa185f1c35cbbe00124e65190583bf265a3de5bff9b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/da3568e31967a0105e1fef21da4f88db1d06221bee618bee984e33795c950e35.png",
+            "sha256": "da3568e31967a0105e1fef21da4f88db1d06221bee618bee984e33795c950e35",
+            "bytes": 266395
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/959854e840df66307e527c45bc0d67c073da4dd085bdd45ffe9c210369d3f133.json",
+            "sha256": "959854e840df66307e527c45bc0d67c073da4dd085bdd45ffe9c210369d3f133",
+            "bytes": 21867
+          },
+          "width": 1280,
+          "height": 1920,
+          "createdAt": "2026-10-19T02:29:41.209Z",
+          "review": null
+        },
+        {
+          "id": "ec0049faf7c859d1cb365571f03555059f1f5ee2800288345fe294175a2345cc",
+          "basis": "e5c6bef1bb1c8e0eaac9f87e52b352bc1a17e1f76cec01655998711d67d47938",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+            "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+            "bytes": 198470
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/57fb98fd23627b62982951a2405852eedb96d841abd4d5094d2ac9555083cacf.json",
+            "sha256": "57fb98fd23627b62982951a2405852eedb96d841abd4d5094d2ac9555083cacf",
+            "bytes": 18871
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T02:40:34.216Z",
+          "review": null
+        },
+        {
+          "id": "b86a7ba09a07df40001bbdf9807d034bfe02d96f9cb27ae78ef67b528a895a05",
+          "basis": "51d8f01759907761bc0a88c09cf067cc3c4c82a326d135a04435ecab61deab0d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/images/24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c.png",
+            "sha256": "24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c",
+            "bytes": 160407
+          },
+          "input": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "media-workspace/inputs/084fa715741c15ae01c77bbb3c150da2e96549e9a84cf6e67903526f3e22b9ec.json",
+            "sha256": "084fa715741c15ae01c77bbb3c150da2e96549e9a84cf6e67903526f3e22b9ec",
+            "bytes": 20007
+          },
+          "width": 1080,
+          "height": 1350,
+          "createdAt": "2026-10-19T03:03:46.791Z",
+          "review": null
+        }
+      ],
+      "candidateId": "b86a7ba09a07df40001bbdf9807d034bfe02d96f9cb27ae78ef67b528a895a05",
+      "templateId": "bar",
+      "policy": "3媒体共通4:5（1080×1350）・家計支出の10分類を1枚に統一。保存済みの数値・年・都市・世帯区分を維持。画像には対象・年・47県庁所在市単純平均1.00・出典を簡潔に表示し、重複注釈と一般的な注意は本文へ。旧画像を保持し、採用・公開は別途。",
+      "classification": {
+        "role": "chart",
+        "purpose": "comparison",
+        "selection": "complete",
+        "basis": "8ba743be73c0898f818f35a6f7e41585095a53db25093011cecec11f7080319d",
+        "reason": "2026-10-19 オーナー指示で「家計支出の10分類」に統一。画像の重複説明を削減し、比較基準と出典は保持。固定入力SHA・全10分類・画像寸法と3媒体共通SHAを照合。旧分割図・旧画像は保持。",
+        "updatedAt": "2026-10-19T03:03:44.065Z"
+      },
+      "classificationHistory": [
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "8ba743be73c0898f818f35a6f7e41585095a53db25093011cecec11f7080319d",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。note用の2:3固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:29:39.697Z"
+        },
+        {
+          "templateId": "bar",
+          "role": "chart",
+          "purpose": "comparison",
+          "selection": "complete",
+          "basis": "8ba743be73c0898f818f35a6f7e41585095a53db25093011cecec11f7080319d",
+          "reason": "2026-10-19 保存原図と固定入力のSHAを照合。十大費目の47市平均に対する倍率を棒で比較する図。3媒体共通4:5の固定サイズ候補を同じ画像IDへ登録。",
+          "updatedAt": "2026-10-19T02:40:33.484Z"
+        }
+      ],
+      "approvedId": null
     }
   }
 }

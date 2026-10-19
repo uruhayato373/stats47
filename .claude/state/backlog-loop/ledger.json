@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:52:13.394Z",
+  "updatedAt": "2026-10-19T08:19:40.291Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7709,6 +7709,211 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-16T23:52:13.394Z"
+    },
+    "STATE-OVERLAY-MAIN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T02:37:38.107Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git diff 543ebe715^ 543ebe715 -- data/psi/history.csv data/cloudflare/history.csv",
+              "git diff --name-only 543ebe715^ 543ebe715",
+              "git diff a92554ff7^ a92554ff7 -- data/cloudflare/history.csv"
+            ],
+            "pass": true
+          },
+          "evidence": "W41 週次 fetch-metrics-weekly run 38820105627 のコミット 543ebe715 で psi/cloudflare history の削除行 0・page-quality/monthly-jobs/authenticated の変更 0。日次 6361f0c60/fd14ef70c は削除 0、a92554ff7 は 2026-09-15 の cloudflare 1 行のみ (保持 30 日超)。2026-10-19 対話セッションで確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T02:37:38.107Z"
+    },
+    "RELEASE-1125-MERGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T02:37:38.349Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow seo-keyword-cycle-daily.yml -L 4",
+              "gh run list --workflow ai-content-gemini-daily.yml -L 4"
+            ],
+            "pass": true
+          },
+          "evidence": "PR #1125 は 10-13 に main 427b80974 へマージ済み。① seo-keyword-cycle-daily の main schedule が 10-17・10-18 success ② 散布図ゲート 167/167 (run 39094552802) ④ ai-content-gemini-daily は 10-12 を最後に定期発火なし。③ affiliate-ga4-weekly の計測ゲートは A8 の gate 未解除が原因のため A8-CROSSCHECK-EXCEED-01 へ引き継ぎ。2026-10-19 対話セ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T02:37:38.349Z"
+    },
+    "DEPS-NEXT16-UPGRADE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T04:47:18.484Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm audit --omit=dev --audit-level=high",
+              "curl -A Googlebot https://stats47.jp/ /ranking/annual-sunshine-duration /areas/13000 /geo"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-19: npm audit --omit=dev --audit-level=high が exit 0 (脆弱性 0)。GHSA-4jqv-mc3x-m676 / GHSA-mcj8-r9mp-w47p の公式 advisory は修正版を 15.5.27 と 16.3.8 としており、stats47 は next 15.5.27 (root/apps/web とも)。advisory 側のデータ更新で 15 系にも修正版が示され、上げる作業は不要になった。本番の代表 4 URL は Googlebot UA で 200。10-18 の",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T04:47:18.484Z"
+    },
+    "A8-CROSSCHECK-EXCEED-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T05:15:16.436Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/ads/check-a8-outcome-gate.mjs",
+              "node --test .claude/scripts/ads/__tests__/a8-cross-check-other-sites.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "原因: A8 口座には stats47・doboku-note のほかに doboku-note(note)・X・kazu-note のサイト登録があり、そこで使われた stats47 と同じ案件のリンクのクリックが案件別レポートで stats47 専用に混ざっていた (10 月: 専用 276・サイト 261・他サイト登録 92 − 共用 66 − 未写像 11 = 15 = 超過)。オーナー判断 (b) で突合の上限を『サイト行 + 他サイト登録のクリックのうち共用・未写像で説明できない分』に変更。オーナー再ログイン後の run 2026-10-19",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T05:15:16.436Z"
+    },
+    "BUSINESS-PLAN-FRESHNESS-MTIME-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T06:05:03.757Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run business-plan:check",
+              "npx vitest run src/business-plan/__tests__/data-freshness.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "鮮度の判定 (10-07 実装) を src/business-plan/data-freshness.ts に切り出し、一時 git リポジトリでテスト 4 件を追加 (clone 直後の mtime でもコミット時刻・改名だけのコミットは数えない・未コミットは mtime・git 外と無いパス)。コミット時刻を使う行を外すと 2 件失敗することを確認。business-plan:check PASS、build-state の sourceFreshness は各取得元のデータのコミット時刻。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T06:05:03.757Z"
+    },
+    "AFF-APPEND-TARGET-KEYS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T08:19:40.291Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/a8-append-core.test.mjs",
+              "npm run type-check:scripts"
+            ],
+            "pass": true
+          },
+          "evidence": "renderEntry の FIELD_ORDER に targetRankingKeys を足し (値があるときだけ出力)、append-affiliate-ads.ts が台帳 entry の targetRankingKeys を下書きへ渡すようにした。decision レーンで対象ランキングが空・data/metrics に無い key なら validateDecisionTargets で追記を止める。a8-curated.json の verticalKeywords に通信 (WiMAX・ホームルーター・SoftBank Air・ビッグロ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T08:19:40.291Z"
     }
   }
 }

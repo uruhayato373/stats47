@@ -985,6 +985,63 @@
             }
           ]
         },
+        "barDomain": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "extent"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "zero"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "fixed"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode",
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
         "divergingMidpoint": {
           "enum": [
             "zero",
@@ -1302,6 +1359,63 @@
                     ]
                   },
                   "comparisonDomain": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "extent"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "zero"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "fixed"
+                          },
+                          "min": {
+                            "type": "number"
+                          },
+                          "max": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "min",
+                          "max"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "barDomain": {
                     "anyOf": [
                       {
                         "type": "object",

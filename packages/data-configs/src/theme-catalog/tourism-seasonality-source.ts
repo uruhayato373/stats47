@@ -7,7 +7,7 @@ export const TOURISM_SEASONALITY_SOURCE = {
   r2Key: 'app/themes/tourism/seasonality.json',
   source: {
     title: '観光庁 宿泊旅行統計調査 2024年1～12月（年の確定値）集計結果',
-    url: 'https://www.mlit.go.jp/kankocho/content/001905499.xlsx',
+    url: 'https://www.mlit.go.jp/kankocho/content/002026764.xlsx',
     sha256: '2e1adf538381144c4c7428a8ec8dd76c8460d2067a85a043d234ea69eece10fe',
   },
   publicationIndexUrl: 'https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html',

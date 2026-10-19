@@ -198,7 +198,9 @@ async function auditLive(catalog, magazinesByKey) {
           detail: `商品カードが本文に見つからない (productTarget=${magazine.productTarget})`,
         };
       }
-      const actualTitle = unescapeHtml(actual.title);
+      // note のカードはリンク先の og:title を取り込むので、末尾にサイト名「 | stats47」が付く版がある。
+      // 商品の題名そのものの食い違いだけを不一致にする (2026-10-17 の監査で 109 件中 38 件がこの差だけだった)
+      const actualTitle = unescapeHtml(actual.title).trim().replace(/\s*\|\s*stats47$/, '');
       const expectedTitle = expected.title;
       const ok = actualTitle === expectedTitle;
       return {

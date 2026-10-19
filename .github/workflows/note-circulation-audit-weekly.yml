@@ -20,7 +20,9 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # 本文カードのブラウザ確認が 1 記事約 10 秒 × 169 記事で 28 分かかり、30 分では
+    # カバー観測の書き戻しまで届かず cancel が続いた (2026-10-03〜10-17 の 3 回)
+    timeout-minutes: 60
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -216,7 +218,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- data/note/cover-assets.json
           git commit -m 'chore(note): refresh cover observations [skip ci]'
-          git pull --rebase origin develop
+          # 監査の証跡など他のファイルが作業ツリーに残るので退避して取り込む (無いと pull が拒否して書き戻せない)
+          git pull --rebase --autostash origin develop
           git push origin HEAD:develop
 
       - name: ❌ Fail on unresolved note circulation drift

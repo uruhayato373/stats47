@@ -1,35 +1,37 @@
 # cron ヘルスチェック
 
-取得: 2026-10-17T03:05:49.990Z
+取得: 2026-10-19T03:22:36.518Z
 
 ```
 scheduled workflow 48 件を検査
 
-⚠️ cron 異常 7 件:
-- ogp-image-audit-weekly.yml: 11 回連続失敗 (最終成功から 83 日)
+⚠️ cron 異常 8 件:
+- ogp-image-audit-weekly.yml: 12 回連続失敗 (直近 12 回に成功なし)
+    2026-10-17T20:24:00Z failure https://github.com/uruhayato373/stats47/actions/runs/39066542687
     2026-10-10T21:26:37Z failure https://github.com/uruhayato373/stats47/actions/runs/38087640774
     2026-10-03T20:53:23Z failure https://github.com/uruhayato373/stats47/actions/runs/37153147851
-    2026-09-26T20:54:49Z failure https://github.com/uruhayato373/stats47/actions/runs/36271137465
 - workflow-health-daily.yml: 11 回連続失敗 (直近 12 回に成功なし)
+    2026-10-18T03:07:33Z failure https://github.com/uruhayato373/stats47/actions/runs/39092512668
+    2026-10-17T03:05:03Z failure https://github.com/uruhayato373/stats47/actions/runs/38997412361
     2026-10-16T03:13:57Z failure https://github.com/uruhayato373/stats47/actions/runs/38844474937
-    2026-10-15T03:18:09Z failure https://github.com/uruhayato373/stats47/actions/runs/38675550589
-    2026-10-14T03:37:45Z failure https://github.com/uruhayato373/stats47/actions/runs/38507231488
-- affiliate-ga4-weekly.yml: 7 回連続失敗 (最終成功から 26 日)
+- affiliate-ga4-weekly.yml: 8 回連続失敗 (最終成功から 28 日)
+    2026-10-18T16:24:31Z failure https://github.com/uruhayato373/stats47/actions/runs/39144856887
     2026-10-12T21:38:00Z failure https://github.com/uruhayato373/stats47/actions/runs/38311841219
     2026-10-11T17:55:58Z failure https://github.com/uruhayato373/stats47/actions/runs/38161693879
-    2026-10-05T21:00:13Z failure https://github.com/uruhayato373/stats47/actions/runs/37373196415
-- note-circulation-audit-weekly.yml: 5 回連続失敗 (直近 5 回に成功なし)
+- note-circulation-audit-weekly.yml: 6 回連続失敗 (直近 6 回に成功なし)
+    2026-10-17T22:19:59Z cancelled https://github.com/uruhayato373/stats47/actions/runs/39074628533
     2026-10-10T23:34:19Z cancelled https://github.com/uruhayato373/stats47/actions/runs/38095490764
     2026-10-03T23:05:19Z cancelled https://github.com/uruhayato373/stats47/actions/runs/37160611864
-    2026-09-26T22:52:06Z failure https://github.com/uruhayato373/stats47/actions/runs/36277651742
-- blog-remediation-daily.yml: 3 回連続失敗 (最終成功から 3 日)
-    2026-10-17T00:54:47Z failure https://github.com/uruhayato373/stats47/actions/runs/38988533309
-    2026-10-16T00:54:13Z failure https://github.com/uruhayato373/stats47/actions/runs/38832128979
-    2026-10-15T01:07:39Z failure https://github.com/uruhayato373/stats47/actions/runs/38663929030
-- improvement-cycle-weekly.yml: 2 回連続失敗 (最終成功から 19 日)
-    2026-10-16T07:38:38Z failure https://github.com/uruhayato373/stats47/actions/runs/38868518573
-    2026-10-04T23:53:27Z failure https://github.com/uruhayato373/stats47/actions/runs/37245377864
-- note-product-card-audit-weekly.yml: 2 回連続失敗 (最終成功から 20 日)
+- note-product-card-audit-weekly.yml: 3 回連続失敗 (最終成功から 22 日)
+    2026-10-17T22:23:58Z failure https://github.com/uruhayato373/stats47/actions/runs/39074907477
     2026-10-10T23:36:34Z failure https://github.com/uruhayato373/stats47/actions/runs/38095621947
     2026-10-03T23:07:05Z failure https://github.com/uruhayato373/stats47/actions/runs/37160712762
+- estat-year-coverage-audit-weekly.yml: 2 回連続失敗 (最終成功から 15 日)
+    2026-10-17T22:04:23Z failure https://github.com/uruhayato373/stats47/actions/runs/39073556216
+    2026-10-10T23:21:22Z failure https://github.com/uruhayato373/stats47/actions/runs/38094735700
+- improvement-cycle-weekly.yml: 2 回連続失敗 (最終成功から 21 日)
+    2026-10-16T07:38:38Z failure https://github.com/uruhayato373/stats47/actions/runs/38868518573
+    2026-10-04T23:53:27Z failure https://github.com/uruhayato373/stats47/actions/runs/37245377864
+- quality-suite-weekly.yml: 1 回連続失敗 (最終成功から 8 日)
+    2026-10-18T00:10:09Z failure https://github.com/uruhayato373/stats47/actions/runs/39081760381
 ```

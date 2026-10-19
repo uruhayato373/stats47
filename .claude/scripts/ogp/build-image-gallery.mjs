@@ -299,7 +299,7 @@ function summarize(tabData, checkMap) {
     let ok = 0;
     const missing = [];
     for (const e of d.entries) {
-      if (e.external) continue; // 外部 ephemeral は欠落集計の対象外
+      if (e.external || e.draft) continue; // 外部 ephemeral と未公開の下書きは欠落集計の対象外
       if (e.images.length === 0) {
         missing.push(e.key);
         continue;

@@ -54,7 +54,27 @@
           }
         },
         "approval": { "$ref": "#/definitions/approval" },
-        "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } }
+        "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } },
+        "production": {
+          "type": "object", "additionalProperties": false,
+          "required": ["version", "renderer", "rendererHash", "input"],
+          "properties": {
+            "version": { "type": "string", "minLength": 1 },
+            "renderer": { "type": "string", "pattern": "^apps/remotion/src/[A-Za-z0-9_./-]+$" },
+            "rendererHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "input": {
+              "type": "object", "additionalProperties": false,
+              "required": ["provider", "bucket", "key", "sha256", "bytes"],
+              "properties": {
+                "provider": { "const": "r2-private" },
+                "bucket": { "const": "stats47-private" },
+                "key": { "type": "string", "pattern": "^media-workspace/inputs/[a-f0-9]{64}\\.json$" },
+                "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                "bytes": { "type": "integer", "minimum": 1 }
+              }
+            }
+          }
+        }
       }
     },
     "approval": {

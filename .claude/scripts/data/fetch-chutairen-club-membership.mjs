@@ -31,6 +31,7 @@ import os from "node:os";
 import { execFileSync } from "node:child_process";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
+import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const PDF_BASE =
   "https://nippon-chutairen.or.jp/cms/wp-content/themes/nippon-chutairen/file/kameikou/";
@@ -194,6 +195,7 @@ async function main() {
         yearRange: ["2025", "2025"],
         areaCount: 47,
         generatedAt: new Date().toISOString(),
+        recipe: resolveMetricRecipe(key),
       },
     };
 

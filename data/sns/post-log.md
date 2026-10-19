@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**720 件** (最終更新: 2026-10-17)
+**723 件** (最終更新: 2026-10-18)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-18 | 📸 Instagram | tile-change/total-population-1975-2025 | 50年で、人口はどう変わった？ 1975→2025年。増加 21県 ／ 減少 26県。全47県を地図に。 全47都道府県… | [🔗](https://www.instagram.com/p/Deo10sGG1qy/) |
+| 2026-10-18 | 🧵 Threads | area/area-25000-profile | 滋賀を1位・47位だけで語らない。 県木はモミジ、県鳥はカイツブリ。人口・産業・暮らしの県データブックへ。 続きは👇 … | [🔗](https://www.threads.com/@stats47jp/post/DeoRmz5Eaao) |
+| 2026-10-18 | 🧵 Threads | ranking/residential-land-price-change-rate | 住宅地の地価、上昇率の1位は東京ではなく沖縄。  沖縄＋5.8％、東京＋4.6％、福岡＋3.8％。 最も低い愛媛は−1.… | [🔗](https://www.threads.com/@stats47jp/post/DenixxZDjmi) |
 | 2026-10-17 | 📸 Instagram | area-carousel/17000 | 【都道府県データ】石川県、全国で何位？  全国トップクラス: 認定こども園数 2位（543園・2024年） 年間降水量 … | [🔗](https://www.instagram.com/p/DemPAAgG6MN/) |
 | 2026-10-17 | 🧵 Threads | area/area-24000-profile | 三重のデータブックを公開中。 シロチドリと松阪牛、桑名のはまぐりを入口に、人口・産業・消費の数字を県別に深掘り。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DelqkyPie0v) |
 | 2026-10-17 | 🧵 Threads | ranking/dental-clinic-count-per-100k | 歯医者が多い県はどこ？  人口10万人あたりの歯科診療所は1位東京75.3施設、2位大阪61.7、3位福岡59.6。 最… | [🔗](https://www.threads.com/@stats47jp/post/Dek81yZgqsP) |
