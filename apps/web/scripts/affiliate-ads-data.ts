@@ -6544,7 +6544,9 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "targetCategories": null,
     "targetRankingKeys": [
       "internet-fee-consumption-expenditure",
-      "smartphone-ownership-multi-person-households-per-1000"
+      "smartphone-ownership-multi-person-households-per-1000",
+      "broadband-service-contract-count",
+      "internet-usage-rate-10plus"
     ],
     "adType": "banner",
     "imageUrl": "https://www22.a8.net/svt/bgt?aid=260728160470&wid=001&eno=01&mid=s00000017718022006000&mc=1",
@@ -6651,7 +6653,9 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "targetRankingKeys": [
       "junior-high-tutoring-consumption-expenditure",
       "high-school-tutoring-consumption-expenditure",
-      "cram-school-establishment-count"
+      "cram-school-establishment-count",
+      "junior-high-school-students-count",
+      "national-assessment-elementary-tutoring-rate"
     ],
     "adType": "banner",
     "imageUrl": "https://www27.a8.net/svt/bgt?aid=260925694660&wid=001&eno=01&mid=s00000022009002011000&mc=1",
@@ -6680,7 +6684,11 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
       "elementary-tutoring-consumption-expenditure",
       "junior-high-tutoring-consumption-expenditure",
       "high-school-tutoring-consumption-expenditure",
-      "cram-school-establishment-count"
+      "cram-school-establishment-count",
+      "national-assessment-elementary-tutoring-rate",
+      "national-assessment-elementary-study-1h-plus-rate",
+      "national-assessment-elementary-reading-like-rate",
+      "junior-high-school-students-count"
     ],
     "adType": "banner",
     "imageUrl": "https://www26.a8.net/svt/bgt?aid=260925694611&wid=001&eno=01&mid=s00000001817002180000&mc=1",
