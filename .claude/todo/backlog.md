@@ -274,6 +274,14 @@ updated: 2026-10-19
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト]
+
+- **経緯**: `.claude/scripts/search-growth/keyword-cycle.mjs` の `editableFile()` は `packages/data-configs/src/{metrics,theme-catalog}/<key>.ts` を探すが、この置き場はもう無い (2026-10-19 に `ls` で確認)。実際の定義は ranking が `data/metrics/<key>.ts`、テーマが `data/themes/catalogs/<key>.json` である。このため `/ranking/*`・`/themes/*` 向けの改善案はすべて `editableFile: null` となり、提案だけの PR になる (例: #1150 `/ranking/general-hospital-count` は 10-19 にブランチ整理で閉じた)。
+- **次**: `editableFile()` を現在の置き場へ直す。テーマは JSON なので、置換処理が JSON を扱えるかも確かめる。
+- **禁止**: 自動適用の対象を広げる目的で、検査や `validate:config` を緩めない。
+- **完了条件**: `/ranking/general-hospital-count` と既存テーマ 1 件で `editableFile()` が実在ファイルを返すテストが通り、次回の `seo-keyword-cycle-daily` で ranking 向けの案が `editableFile` 付きで出る。
+
 ### [PV-100K-LEVERS-01] 月10万PV (28日 93,000) へ向けて、新規ページより「見えているのに取れていないクリック」と「1訪問のページ数」を動かす
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-19] [期日:2027-01-31] [領域:サイト]
 
