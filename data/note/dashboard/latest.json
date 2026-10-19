@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "metricDefinition": "note-dashboard-2026-09-08",
   "account": "stats47",
-  "fetchedAt": "2026-10-12T00:15:18.089Z",
+  "fetchedAt": "2026-10-19T00:15:18.212Z",
   "period": {
-    "start": "2026-09-14",
-    "end": "2026-10-11"
+    "start": "2026-09-21",
+    "end": "2026-10-18"
   },
   "status": "incomplete",
   "coverage": {
