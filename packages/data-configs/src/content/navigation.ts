@@ -22,7 +22,7 @@ export function selectContentRecommendations(
   const outgoing = new Map(links.filter(edge => edge.from === context.sourceId).map(edge => [edge.to, edge.relation]));
   const exclusions: Record<string, readonly string[]> = CONTENT_NAVIGATION.excludedArticleTagIdsByKind;
   const excludedTags = new Set(exclusions[source?.kind ?? ''] ?? []);
-  const scored: Array<ContentRecommendation & { score: number }> = [];
+  const scored: Array<ContentRecommendation & { score: number; focus: number }> = [];
   const seen = new Set<string>();
   for (const page of pages) {
     if (!page.published || page.id === context.sourceId || !context.kinds.includes(page.kind) || seen.has(page.id)) continue;
@@ -37,8 +37,11 @@ export function selectContentRecommendations(
     if (!relation && page.kind === 'blog' && page.tagIds?.some(id => sourceTags.has(id))) relation = 'tag';
     if (!relation) continue;
     const policy = CONTENT_NAVIGATION.relations[relation];
-    scored.push({ ...page, relation, reason: policy.label, score: policy.priority + Math.min(matched, 10) });
+    // 同点の切り方: その記事が元ページの指標にどれだけ絞っているか (一致数 ÷ 記事が使う指標数)。
+    // 県の食文化記事のように多くの指標を使う記事が、品目そのものの記事を ID 順で押し出すのを防ぐ (RELATED-ARTICLES-TIEBREAK-01)。
+    const focus = page.kind === 'blog' && page.rankingKeys?.length ? matched / page.rankingKeys.length : 0;
+    scored.push({ ...page, relation, reason: policy.label, score: policy.priority + Math.min(matched, 10), focus });
   }
-  return scored.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id)).slice(0, context.limit ?? CONTENT_NAVIGATION.limit)
-    .map(({ score: _score, ...page }) => page);
+  return scored.sort((a, b) => b.score - a.score || b.focus - a.focus || a.id.localeCompare(b.id)).slice(0, context.limit ?? CONTENT_NAVIGATION.limit)
+    .map(({ score: _score, focus: _focus, ...page }) => page);
 }

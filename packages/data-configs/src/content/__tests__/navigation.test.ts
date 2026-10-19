@@ -39,6 +39,20 @@ describe('content identity and navigation', () => {
     const links = [{from:'geo:analysis',to:'blog:explainer',relation:'explains' as const},{from:'geo:analysis',to:'blog:draft',relation:'explains' as const}];
     expect(selectContentRecommendations(pages,links,{sourceId:'geo:analysis',kinds:['blog']}).map(item=>item.id)).toEqual(['blog:explainer']);
   });
+  it('同点ではその指標に絞った記事を先に出し、多くの指標を使う記事にID順で押し出させない', () => {
+    // 2026-10-20 実測: 納豆のランキングに福島・茨城の食文化記事 (指標を多数使う) が並び、納豆そのものの記事が出なかった
+    const source = page('ranking:natto', 'ranking');
+    const broadA = page('blog:aichi-food-culture', 'blog', ['natto', 'tuna', 'rice', 'miso']);
+    const broadB = page('blog:aomori-food-culture', 'blog', ['natto', 'apple', 'rice']);
+    const pair = page('blog:natto-vs-weight', 'blog', ['natto', 'weight']);
+    const focused = page('blog:natto-east-west', 'blog', ['natto']);
+    const selected = selectContentRecommendations([source, broadA, broadB, pair, focused], [], { sourceId: source.id, kinds: ['blog'], limit: 2 });
+    expect(selected.map(row => row.id)).toEqual(['blog:natto-east-west', 'blog:natto-vs-weight']);
+    // 関係の強さ (一致数) は同点の切り方より優先する
+    const both = page('blog:natto-and-tuna', 'blog', ['natto', 'tuna', 'rice', 'miso', 'apple']);
+    const multi = selectContentRecommendations([page('blog:src', 'blog', ['natto', 'tuna']), both, focused], [], { sourceId: 'blog:src', kinds: ['blog'] });
+    expect(multi[0]?.id).toBe('blog:natto-and-tuna');
+  });
   it('同順位は不変IDで並び、件数上限と候補が空の状態を守る', () => {
     const pages = [page('ranking:sunshine','ranking'),page('blog:z','blog',['sunshine']),page('blog:a','blog',['sunshine'])];
     expect(selectContentRecommendations(pages,[],{sourceId:'ranking:sunshine',kinds:['blog'],limit:1})[0]?.id).toBe('blog:a');
