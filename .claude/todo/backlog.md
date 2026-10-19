@@ -126,6 +126,14 @@ updated: 2026-10-19
 
 - **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
 
+### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
+
+- **事象 (2026-10-19 確認)**: origin/develop の `data/note/dashboard/latest.json` は `fetchedAt` 2026-10-12T00:15Z・`status: incomplete`・記事 0 件で、理由は `browser_open_failed: "[Errno 1] Operation not permitted: '/Users/minamidaisuke/Library/Application Support/Google/Chrome/Profile 5'"`。最後に全件取れたのは 09-07〜10-04 の分 (10-05 取得)。10-19 の分は develop に無い。計測サイクル (`data/measurement-cycle/LATEST.md`) の「有料購入」でも、note は「判定不能 (最終観測 2026-09-30)」になっている。
+- **影響**: note の閲覧と売上が 10-05 以降測れていない。`NOTE-PRODUCT-LADDER-01`・`KNOWHOW-PRODUCT-PILOT-01`・`KNOWHOW-QA-BOARD-01`・`NOTE-FREE-DEFAULT-01` の判定と、`NOTE-FISCAL-PEER-PUBLISH-01` の 11-09 の売上比較がすべて判定不能になる。
+- **[仮説]** 定期実行 (Mac の launchd → `scripts/scheduled/fetch-note-metrics.sh` → `.claude/scripts/note/fetch-note-metrics.sh`、毎週月曜 09:00 JST) のプロセスに、macOS のプライバシー保護が Chrome のプロファイルの読み取りを許していない。10-05 は成功しているので、10-05〜10-12 の間に OS の更新か権限の設定が変わった可能性がある。**検証**: Mac のターミナルから `bash .claude/scripts/note/fetch-note-metrics.sh` を手で実行して成功するかを見る。手では成功し launchd では失敗するなら、launchd から実行されるプログラム (bash など) に「フルディスクアクセス」を与えるかを確かめる。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。**検証期日**: 2026-10-26 (次の月曜の実行の後)。
+- **完了条件**: 定期実行で `latest.json` が `status: pass`・`coverage.complete: true` になり、10-05〜10-18 の欠けた期間を 28 日の窓で取り直せている。
+
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -265,14 +273,6 @@ updated: 2026-10-19
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
-
-### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-19 確認)**: origin/develop の `data/note/dashboard/latest.json` は `fetchedAt` 2026-10-12T00:15Z・`status: incomplete`・記事 0 件で、理由は `browser_open_failed: "[Errno 1] Operation not permitted: '/Users/minamidaisuke/Library/Application Support/Google/Chrome/Profile 5'"`。最後に全件取れたのは 09-07〜10-04 の分 (10-05 取得)。10-19 の分は develop に無い。計測サイクル (`data/measurement-cycle/LATEST.md`) の「有料購入」でも、note は「判定不能 (最終観測 2026-09-30)」になっている。
-- **影響**: note の閲覧と売上が 10-05 以降測れていない。`NOTE-PRODUCT-LADDER-01`・`KNOWHOW-PRODUCT-PILOT-01`・`KNOWHOW-QA-BOARD-01`・`NOTE-FREE-DEFAULT-01` の判定と、`NOTE-FISCAL-PEER-PUBLISH-01` の 11-09 の売上比較がすべて判定不能になる。
-- **[仮説]** 定期実行 (Mac の launchd → `scripts/scheduled/fetch-note-metrics.sh` → `.claude/scripts/note/fetch-note-metrics.sh`、毎週月曜 09:00 JST) のプロセスに、macOS のプライバシー保護が Chrome のプロファイルの読み取りを許していない。10-05 は成功しているので、10-05〜10-12 の間に OS の更新か権限の設定が変わった可能性がある。**検証**: Mac のターミナルから `bash .claude/scripts/note/fetch-note-metrics.sh` を手で実行して成功するかを見る。手では成功し launchd では失敗するなら、launchd から実行されるプログラム (bash など) に「フルディスクアクセス」を与えるかを確かめる。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。**検証期日**: 2026-10-26 (次の月曜の実行の後)。
-- **完了条件**: 定期実行で `latest.json` が `status: pass`・`coverage.complete: true` になり、10-05〜10-18 の欠けた期間を 28 日の窓で取り直せている。
 
 ### [PV-100K-LEVERS-01] 月10万PV (28日 93,000) へ向けて、新規ページより「見えているのに取れていないクリック」と「1訪問のページ数」を動かす
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-19] [期日:2027-01-31] [領域:サイト]
