@@ -79,7 +79,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Collect and verify private evidence
         env:
-          MEASUREMENT_SESSION: ${{ secrets[matrix.secret] }}
+          # Secret は名前で直接引く。secrets[matrix.secret] の動的参照は全 Secret をランナーへ渡す (CodeQL Excessive Secrets Exposure)
+          MEASUREMENT_SESSION: ${{ matrix.source == 'a8' && secrets.MEASUREMENT_SESSION_A8 || matrix.source == 'note' && secrets.MEASUREMENT_SESSION_NOTE || matrix.source == 'gsc' && secrets.MEASUREMENT_SESSION_GSC || matrix.source == 'kdp' && secrets.MEASUREMENT_SESSION_KDP || matrix.source == 'rakuten' && secrets.MEASUREMENT_SESSION_RAKUTEN || '' }}
           MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
           R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
