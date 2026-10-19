@@ -30997,9 +30997,9 @@
     },
     {
       "id": 1025,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.187Z",
-      "updated_at": "2026-10-12T01:19:00.656Z",
+      "updated_at": "2026-10-19T20:17:34.526Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31026,13 +31026,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/travel-participation-rate-domestic/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeqFOw9gLQg",
+      "posted_at": "2026-10-19T01:30:20.000Z"
     },
     {
       "id": 1026,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.192Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T20:17:34.546Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31059,7 +31061,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/26000/x/stills/26000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeqzBbbk2KN",
+      "posted_at": "2026-10-19T08:10:28.000Z"
     },
     {
       "id": 1027,
