@@ -266,6 +266,18 @@ updated: 2026-10-17
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [AFF-SMBC-NL-01] 三井住友カード（NL）を A8 で提携し、家計・所得のランキングに限って配信する
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:アフィリエイト]
+
+- **経緯 (2026-10-19 オーナー指示)**: A8 のクレジットカード・口座開設の検索 (73 件、申請なしで単価・EPC・確定率を収集) で、個人向けの確定 EPC が最も高かった (報酬 ¥4,800・EPC ¥578・確定率 30%・確定 EPC ¥174。A8 全体の平均で stats47 の実績ではない)。10 月の月次計画ではアフィリエイトの案件追加を 11 月へ送っていたが、オーナーの指示でこの 1 件だけ進める。
+- **済 (2026-10-19)**: 台帳へ候補登録 → A8 で提携申請 (申請サイト = 統計で見る都道府県、`a8-browser.ts apply --id s00000023355003`)。状態は applied (審査待ち)。成果条件は「WEB 申込後 30 日以内のカード発行」(行動負担 F4・decision レーン)。証拠 `.local/a8-offer-inspect/s00000023355003-*.txt`。
+- **広告主の条件 (案件詳細の備考)**: 承認の前に、バナーを載せるページの URL をすべて A8 のフォーム (記事なし・バナーのみ: https://pub.a8.net/a8v2/asApplicationInputAction.do?viewId=MTUwNDI) から提出する。登録したページ以外への掲載・SNS・リスティング・独自特典は禁止。広告と分かる表示が必要。ほかの ASP で提携済みなら提携不可。
+- **掲載ページの候補 (28 日の GSC 表示)**: `dual-income-household-ratio` 868 / `real-disposable-income` 593 / `engel-coefficient` 279 / `gini-coefficient-disposable-income` 115 / `annual-income-per-household` 24 / `consumption-expenditure-total` 10。職業別年収は転職の意図なので外した。
+- **次 (実行順)**: ① オーナーが掲載ページを決め、URL を上のフォームから提出する ② `check-approval` で承認を確かめる ③ `harvest --id` で広告コードを取り、案件プロファイル (`affiliate-offer-profiles-data.ts`、lane=decision・F4・allowedPageTypes=ranking) と広告 (`affiliate-ads-data.ts`、`targetRankingKeys` を提出したページだけに限定) を登録 ④ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページだけにバナーが出て、ほかのページに出ないことを確かめる。
+- **停止条件**: 提出していないページに出る設定 (`targetRankingKeys` なし) で登録しない。承認前にバナーを置かない。
+- **完了条件**: 提出したページの本番 HTML に広告が出て、それ以外のページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
+
+
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS]
 
