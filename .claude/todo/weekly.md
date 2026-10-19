@@ -129,7 +129,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 
 ### Must（絶対達成、3件）
 
-- [ ] **[分割] データ品質ゲートを 100% に戻す再生成の dryRun と、W41 の残り 1 指標の公式確認を済ませる** [M] — `DATA-QUALITY-LOOP-01`（🔴 4 番目・データ領域・KPI `data-quality-pass-rate`）。
+- [x] **[分割] データ品質ゲートを 100% に戻す再生成の dryRun と、W41 の残り 1 指標の公式確認を済ませる** [M] — `DATA-QUALITY-LOOP-01`（🔴 4 番目・データ領域・KPI `data-quality-pass-rate`）。
   W41 (未達)・W42 (未着手) の 2 週続けて進んでいないので、5 指標の枠を今週は次の 2 点に縮める。
   ① `treatment-rate-hypertension-outpatient` (患者調査) の公式の最新公表を一次資料で確かめ、基準 1〜4 の処置をカードに記録する。
   ② 監査のレシピ未焼き込み 21 件 (`data/ranking/integrity-audit.json` の `recipe.unbaked`) と、W41 に years を広げた 2 指標
@@ -142,6 +142,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   W41 の 2 指標は dryRun 合格済みで、R2 反映の承認待ち。
   **更新 (2026-10-19)**: オーナーが (a) を選び、2 指標の R2 反映を承認した。2 指標は data-refresh run 39192011125 (success) で反映済み。
   書き手 (`stats-values-writer.mjs` ほか 3 本) が recipe を焼くように直した。21 件の再投入は、R2 の資格情報がある端末で行う (カードに手順と完了条件を記録)。
+  **結果 (2026-10-19 夜・Mac)**: オーナーの指示で 21 件を R2 へ反映した。20 件は 10 本の fetch で作り直し、公開中の行と値・年・県・順位が全行一致することを確かめてから key ごとに diff-push-r2。`low-elevation-population-ratio-5m` は書き手の Python (`low-elevation-population-overlay.py`) が recipe を焼かないため、公開中の値のまま正典の recipe だけを足して反映した。ローカルで `audit-ranking-data-integrity.ts` を回し、`recipe.unbaked` は 0 件 (全 2,460 指標)。次の週次監査でゲート 100% を確かめる。
 - [x] **🔴 先頭 2 枚の残りの確認を run ログで終えて閉じる** [S] — `RELEASE-1125-MERGE-01` / `STATE-OVERLAY-MAIN-01`（🔴 1・2 番目・管理領域・不具合）。
   PR #1125 の確認項目は、① `seo-keyword-cycle-daily` の main の schedule が 10-17・10-18 に success、④ `ai-content-gemini-daily` は 10-12 を最後に定期発火していない (10-19 に `gh run list` で確認)。
   ③ (affiliate-ga4-weekly の計測ゲート) は A8 の未解除が原因なので `A8-CROSSCHECK-EXCEED-01` へ引き渡す。
@@ -158,6 +159,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   単体テストと localhost の確認が済み、コミット済みで、本番デプロイの承認依頼をオーナーへ出していれば完了。デプロイは承認後に 1 回だけ行う。使用: site-ux-manager
   **途中経過 (2026-10-19)**: GA4 の資格情報が手元に無いので、開発サーバーの HTML と部品のコードから出どころを特定し、7 部品に導線名を付けた (カードに記録)。
   テスト・型・ESLint は通過し、localhost の HTML で属性が出ることを確認した。実クリックの確認はブラウザ枠の描画が止まりできていない。本番デプロイの承認待ち。
+  **本番反映 (2026-10-19)**: PR #1158 で main に入り、deploy-workers は 09:35Z に success。本番の `/ranking/total-population` の HTML に `ranking_table` 10・`ranking_theme` 4・`ranking_related` 2・`ranking_blog` 9 の導線名が出ていることを curl で確認した。残りは実クリック 1 回につき送信 1 件の確認と、10-23 の計測での被覆率の読み取り。
 
 ### Should（できればやる、4件）
 
