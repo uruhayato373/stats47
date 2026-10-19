@@ -13,7 +13,7 @@ if (!key) {
 }
 const config = getMetricConfig(key);
 if (!config) {
-  console.error(`${key}: metric config がありません (data/metrics/<key>.ts と registry を確認)`);
+  console.error(`${key}: metric config がありません (metric の定義ファイルと registry を確認)`);
   process.exit(1);
 }
 process.stdout.write(JSON.stringify(buildRecipe(config)));
