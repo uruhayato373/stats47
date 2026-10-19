@@ -1579,6 +1579,14 @@ updated: 2026-10-19
 - **完了条件**: `/ranking/total-fertility-rate` の関連記事に `fertility-rate-prefecture-gap` が入り、差分一覧で意図しない入れ替わりが無いことを確かめた。
 
 
+### [REMOVE-WORKTREE-TEST-MAC-PATH-01] worktree 削除のテストが Mac で落ちる (/var と /private/var の表記ずれ)
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/remove-worktree.test.mjs] [起票:2026-10-20] [領域:管理]
+
+- **事象 (2026-10-20 Mac 実測)**: `remove-worktree.test.mjs` の「登録済み worktree を丸ごと削除する (正常系)」が `... は登録済み worktree ではない (known: /private/var/folders/...)` で落ちる。変更を退避した状態でも再現するので既存の不具合。
+- **原因 (仮説)**: macOS の一時ディレクトリは `/var` が `/private/var` への symlink で、テストが渡すパス (`/var/...`) と `git worktree list` が返すパス (`/private/var/...`) を文字列のまま比べている。検証: 比較の前に両方を `fs.realpathSync` で正規化して再実行する。
+- **完了条件**: Mac と Linux (CI) でこのテストが pass する。正規化は比較だけに使い、削除対象のパスの決め方は変えない。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 

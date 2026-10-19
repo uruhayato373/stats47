@@ -1,0 +1,46 @@
+name: 🛟 PR head skip-ci guard
+
+# develop→main の PR の先頭が CI の記録コミット ([skip ci] 付き) になると、GitHub は pull_request を発火させず、
+# 必須チェック「Code Quality Check」が付かないまま PR が BLOCKED で止まる
+# (https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs。2026-10-20 に PR #1161 で 2 回)。
+# pull_request_target は [skip ci] で止まらないのでそれで更新を受け取り、先頭が skip 指定のときだけ
+# pr-quality-check.yml を develop で起動する。GITHUB_TOKEN でも workflow_dispatch は新しい run を作れる
+# (https://docs.github.com/en/actions/concepts/security/github_token)。
+# PR のコードは checkout しない (pull_request_target で外部のコードを実行しないため)。
+# pull_request_target は base (main) の定義で動くので、main にマージされてから効く。
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  redispatch:
+    name: Re-run quality check for a skip-ci head
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🔁 Dispatch the quality check when the head commit skips CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          MESSAGE=$(gh api "repos/$REPO/commits/$HEAD_SHA" --jq .commit.message)
+          if ! printf '%s' "$MESSAGE" | grep -qiE '\[(skip ci|ci skip|no ci|skip actions|actions skip)\]'; then
+            echo "先頭 ${HEAD_SHA} は skip 指定ではない。pull_request の品質チェックが走るので何もしない"
+            exit 0
+          fi
+          echo "先頭 ${HEAD_SHA} が skip 指定。pr-quality-check.yml を develop で起動する (PR #${PR_NUMBER})"
+          gh workflow run pr-quality-check.yml --repo "$REPO" --ref develop -f pr_number="$PR_NUMBER" -f base_sha="$BASE_SHA"
