@@ -175,6 +175,11 @@
       "date": "2026-10-19",
       "file": "data/seo/rank-history/2026-10-19.json",
       "sha256": "98db04adca13d9e4179f7fa9127873a830105ccb0121897d4ac3f9f1dc3a9a7e"
+    },
+    {
+      "date": "2026-10-20",
+      "file": "data/seo/rank-history/2026-10-20.json",
+      "sha256": "3abca0706b211673521f7d23d233aa2d224e281373eafbce87a23150dd1b97a0"
     }
   ]
 }
