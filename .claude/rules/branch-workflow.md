@@ -40,6 +40,7 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 | `workflow-dispatch-proxy.yml` の request 消費 | proxy で sync-snapshots 等を代理起動した直後 (PR #733) |
 | `blog-auto-publish.yml` の contents/blog outbox 掃除 | 記事を公開した直後 (PR #734) |
 | 週次のキーワード観測の記録 (`chore(seo): record seven-day keyword observations`) | PR を開いた後に自動で積まれ、開いている PR の先頭を奪う (PR #1147・2026-10-18。auto-merge が BLOCKED のまま止まった) |
+| 認証付き計測の記録 (`chore(metrics): authenticated measurement status`) | 計測スクリプトや `authenticated-measurement.yml` を変えて develop へ push すると push で計測が走り、記録を書き戻して開いている PR の先頭を奪う (PR #1161・2026-10-20。checks は全件 pass なのに必須の Code Quality Check が走らず BLOCKED) |
 
 **対処**: PR 作成後に `get_check_runs` が 0 件なら、まず develop の HEAD が `[skip ci]` かを疑う
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
