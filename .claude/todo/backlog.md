@@ -135,7 +135,7 @@ updated: 2026-10-19
 - **2026-10-19 の切り分け**: launchd だけの問題ではない。Claude デスクトップアプリから手で実行しても同じ `browser_open_failed` で失敗した。同じ shell から `ls` すると、Chrome のプロファイルは Profile 5 だけでなく Default・Profile 1 もすべて `Operation not permitted` で中身を読めず、`~/Library/Application Support/Google/Chrome` の一覧も拒否される。フォルダの `stat` (`ls -ld`) は通り、所有者は自分・権限は `drwx------` なので、Unix の権限による拒否ではない。`system_profiler SPInstallHistoryDataType` を見ると、macOS 27.0.1 が **2026-10-10 10:06** に入っている。最後に成功した 10-05 と最初に失敗した 10-12 の間である。
 - **原因 1 (2026-10-19 解消・Claude アプリのみ)**: macOS 27 への更新後、実行元のアプリにフルディスクアクセスが無いと Chrome のプロファイルを読めなかった。オーナーが Claude デスクトップアプリに許可して再起動すると、同じ shell から Profile 5 を読めるようになり、取得のエラーは `browser_open_failed` から `login_required` に変わった。**launchd (`/bin/bash`) とターミナルへの許可は未確認**で、10-26 の定期実行で `browser_open_failed` が出れば、`/bin/bash` にも同じ許可が要る。
 - **原因 2 (2026-10-19 解消)**: Profile 5 (Chrome の表示名「stats47」) の note のログインが 2026-10-16 20:10 UTC に切れていた。オーナーが Profile 5 で再ログインした (新しい `_note_session_v5` の期限は 2027-01-19)。手動の取得は 09-21〜10-18 の 28 日窓で `status: pass` になり、公開 402 件を 21 ページで全件取得し、合計値もダッシュボードと一致した (`fetchedAt` 2026-10-19T10:42Z)。10-05〜10-18 の欠けはこの窓で埋まった。再ログインの直後に実行すると、Cookie ファイルへの書き込み前に読んで `login_required` になることがある (1 回観測)。
-- **残り**: 定期実行 (launchd → `/bin/bash`) にフルディスクアクセスが要るかの確認。**検証期日**: 2026-10-26 (月曜 09:00 JST の定期実行の後)。`data/note/dashboard/latest.json` が `status: pass` ならカードを削除する。`browser_open_failed` なら、オーナーが `/bin/bash` にフルディスクアクセスを許可する。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。
+- **残り**: 定期実行 (launchd → `/bin/bash`) にフルディスクアクセスが要るかの確認。**検証期日**: 2026-10-26 (月曜 09:00 JST の定期実行の後)。`data/note/dashboard/latest.json` が `status: pass` で、`cover-metrics-latest.json` も `pass` ならカードを削除する (2026-10-19 に定期実行のラッパー `scripts/scheduled/fetch-note-metrics.sh` が取得の前に表紙監査を毎回走らせるよう直し、同じラッパーの手動実行で結合が初めて `pass`・402 件になった)。`browser_open_failed` なら、オーナーが `/bin/bash` にフルディスクアクセスを許可する。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。
 - **完了条件**: 定期実行で `latest.json` が `status: pass`・`coverage.complete: true` になり、10-05〜10-18 の欠けた期間を 28 日の窓で取り直せている。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
@@ -279,14 +279,6 @@ updated: 2026-10-19
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
-
-### [NOTE-COVER-METRICS-JOIN-STALE-01] note の表紙×閲覧数の結合が、表紙監査の鮮度切れで毎週 incomplete のまま
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-19] [領域:管理]
-
-- **事象 (2026-10-19 確認)**: `data/note/dashboard/cover-metrics-latest.json` は 10-05・10-12・10-19 の 3 回とも `incomplete` だった。閲覧数の取得が成功した 10-05 と 10-19 の理由は `source_stale_or_invalid` である。`.claude/scripts/note/lib/dashboard-metrics.mjs` の結合は、閲覧数の取得と表紙の監査の両方が 1 日以内でないと結合しない。一方、表紙監査 `data/note/evidence/note-cover-audit-latest.json` の `completedAt` は 2026-09-11 のままで、週次の取得 (`fetch-note-metrics.mjs`) は表紙監査を作り直さない。
-- **次**: 表紙監査 (`audit-note-covers.mjs`) を週次の取得の前に走らせるか、表紙が変わらない期間は古い監査でも結合してよいとするかを決める。後者にする場合は、表紙を変えた日 (`update-note-covers.mjs` の記録) より新しい監査であることを条件にする。
-- **禁止**: 鮮度の条件を外すだけで結合を通さない (古い表紙と新しい閲覧数を組み合わせた誤った比較になる)。
-- **完了条件**: 週次の定期実行で `cover-metrics-latest.json` が `incomplete` 以外になり、結合に使った表紙監査の日時が表紙の最終変更より新しいことを確かめている。
 
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト]

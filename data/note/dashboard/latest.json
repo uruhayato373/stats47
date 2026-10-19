@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "metricDefinition": "note-dashboard-2026-09-08",
-  "fetchedAt": "2026-10-19T10:42:13.053Z",
+  "fetchedAt": "2026-10-19T11:33:52.388Z",
   "account": "stats47",
   "source": "https://note.com/dashboard",
   "status": "pass",
@@ -12,8 +12,8 @@
     "inclusive": true,
     "label": "カスタム",
     "display": "2026/9/21〜2026/10/18",
-    "aggregatedAt": "2026-10-19T17:56:00+09:00",
-    "summaryAggregatedAt": "2026-10-19T19:20:00+09:00"
+    "aggregatedAt": "2026-10-19T19:58:00+09:00",
+    "summaryAggregatedAt": "2026-10-19T19:58:00+09:00"
   },
   "coverage": {
     "complete": true,
@@ -10103,8 +10103,8 @@
     "timeZone": "Asia/Tokyo",
     "periodText": "2026/9/21〜2026/10/18",
     "periodLabel": "カスタム",
-    "articleAggregatedAt": "2026/10/19 17:56 集計",
-    "summaryAggregatedAt": "2026/10/19 19:20 集計",
+    "articleAggregatedAt": "2026/10/19 19:58 集計",
+    "summaryAggregatedAt": "2026/10/19 19:58 集計",
     "selectedTab": "記事",
     "tableCount": 1,
     "headers": [
