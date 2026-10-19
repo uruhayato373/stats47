@@ -2,12 +2,14 @@
 import {
   IMAGE_PURPOSES,
   IMAGE_SELECTIONS,
+  selectionAllowed,
 } from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ActualImage } from './media-image';
 import { MediaWorkspaceNav } from './media-workspace-nav';
 import { ImageAssessment } from './image-assessment';
+import { ImageComparison } from './image-comparison';
 import { originalUrl, candidateUrl } from '@/lib/media-template-examples';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -371,6 +373,7 @@ function ArticleEditor({
 }
 function ImageEditor({
   image,
+  comparisonImages,
   related,
   onSelect,
   templates,
@@ -378,6 +381,7 @@ function ImageEditor({
   onDirty,
 }: {
   image: ImageView;
+  comparisonImages: ImageView[];
   related: ImageView[];
   onSelect: (image: ImageView) => void;
   templates: Template[];
@@ -689,6 +693,8 @@ function ImageEditor({
               value={purpose}
               onChange={(e) => {
                 setPurpose(e.target.value);
+                if (!selectionAllowed(e.target.value, selection))
+                  setSelection('undecided');
                 onDirty(true);
               }}
             >
@@ -709,11 +715,13 @@ function ImageEditor({
                 onDirty(true);
               }}
             >
-              {Object.entries(IMAGE_SELECTIONS).map(([id, label]) => (
-                <option key={id} value={id}>
-                  {label}
-                </option>
-              ))}
+              {Object.entries(IMAGE_SELECTIONS)
+                .filter(([id]) => selectionAllowed(purpose, id))
+                .map(([id, label]) => (
+                  <option key={id} value={id}>
+                    {label}
+                  </option>
+                ))}
             </NativeSelect>
           </label>
           <label className="block space-y-2 text-sm">
@@ -774,6 +782,23 @@ function ImageEditor({
           >
             改善方針だけ保存（分類は変更しない）
           </Button>
+          {!image.previewOnly && (
+            <ImageComparison
+              image={image}
+              images={comparisonImages}
+              busy={busy}
+              onDirty={() => onDirty(true)}
+              onSave={(comparison) =>
+                perform(() =>
+                  requestJson('/api/media-library/' + image.id, 'PATCH', {
+                    action: 'comparison',
+                    revision: image.revision,
+                    comparison,
+                  })
+                )
+              }
+            />
+          )}
           <ImageAssessment
             image={image}
             busy={busy}
@@ -1321,6 +1346,11 @@ export function MediaWorkspace({
               value={purpose}
               onChange={(e) => {
                 setPurpose(e.target.value);
+                if (
+                  e.target.value &&
+                  !selectionAllowed(e.target.value, selection)
+                )
+                  setSelection('');
                 setPage(0);
               }}
             >
@@ -1336,15 +1366,18 @@ export function MediaWorkspace({
               value={selection}
               onChange={(e) => {
                 setSelection(e.target.value);
+                if (e.target.value === 'top-bottom') setPurpose('ranking');
                 setPage(0);
               }}
             >
               <option value="">すべての構成</option>
-              {Object.entries(IMAGE_SELECTIONS).map(([id, label]) => (
-                <option key={id} value={id}>
-                  {label}
-                </option>
-              ))}
+              {Object.entries(IMAGE_SELECTIONS)
+                .filter(([id]) => !purpose || selectionAllowed(purpose, id))
+                .map(([id, label]) => (
+                  <option key={id} value={id}>
+                    {label}
+                  </option>
+                ))}
             </NativeSelect>
             <NativeSelect
               aria-label="画像の役割"
@@ -1595,6 +1628,7 @@ export function MediaWorkspace({
               <ImageEditor
                 key={image.id + ':' + image.revision}
                 image={image}
+                comparisonImages={data.images}
                 related={data.images.filter(
                   (row) =>
                     image.relatedImageIds.includes(row.id) &&

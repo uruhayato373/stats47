@@ -590,6 +590,8 @@ npm run admin
 
 ### Codex / Claude の作業共有
 
+既存の依存をjunction等で参照してworktreeを復元するときは、ルートだけでなく対象workspace内の`node_modules`も確認する。同じソースでもworkspace固有の依存が欠けるとルートの別バージョンへ解決される。元checkoutと復元先で`createRequire(対象ソースの絶対パス).resolve(依存名)`を比較し、既存のインストール構成を揃えてから型エラーを判断する（2026-10-19: components内のtailwind-merge参照差を実測し、参照復元後にWeb補助スクリプト型検査が通過）。
+
 - Windows PowerShellでは以下の `npm` を `npm.cmd` とする。`npm.ps1` 経由でオプションが欠落する場合は `node .claude/hooks/session-guard.js` を直接使う。
 - 編集開始時に `npm run agent:session -- --status` で担当・タスク・最終メモを確認する。
 - `npm run agent:session -- --register --agent codex --session <task-id> --task <backlog-id>` で登録する。

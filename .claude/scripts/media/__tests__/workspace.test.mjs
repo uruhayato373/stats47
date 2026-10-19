@@ -10,6 +10,7 @@ import { assertStaticSvg } from '../lib/svg-safety.mjs';
 import { snsImageTemplate } from '../lib/catalog.mjs';
 import { roleForTemplate } from '../lib/classification.mjs';
 import { saveImagePolicy, assessImage } from '../lib/workspace.mjs';
+import { saveImageComparison } from '../lib/workspace.mjs';
 
 test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
  assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'unclassified');
@@ -22,6 +23,17 @@ test('SNS classification uses asset evidence and excludes non-chart carousel sli
  assert.equal(snsImageTemplate({template:'tile-change'},{source:'slide-2-detail.png'}),'time-series');
  assert.equal(snsImageTemplate({template:'household-receipt'},{source:'slide-2-detail.png'}),'household');
  assert.equal(snsImageTemplate({template:'ranking'},{source:'choropleth-map-1200x630.png'}),'choropleth');
+});
+
+test('SNS labels preserve complete emoji and use an authored candidate title without changing its caption',t=>{
+ const root=fixture(t),file=path.join(root,'data/sns/posts.json'),ledger=JSON.parse(fs.readFileSync(file));
+ const post=ledger.posts.find(p=>p.platform==='x'&&p.status!=='deleted');
+ post.caption='あ'.repeat(99)+'🗾続き';delete post.planning;
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ assert.equal(workspaceItems(root).find(i=>i.id==='sns/'+post.id).title,'あ'.repeat(99)+'🗾');
+ post.planning={title:'確認用の家計比較'};fs.writeFileSync(file,JSON.stringify(ledger));
+ assert.equal(workspaceItems(root).find(i=>i.id==='sns/'+post.id).title,'確認用の家計比較');
+ assert.equal(JSON.parse(fs.readFileSync(file)).posts.find(p=>p.id===post.id).caption,post.caption);
 });
 
 test('SNS inventory carries recorded dimensions and keeps manual template ownership',t=>{
@@ -42,6 +54,50 @@ function fixture(t){
  fs.writeFileSync(path.join(root,FILES.quality),JSON.stringify({schemaVersion:1,reviews:{},images:{}}));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;
 }
+test('SNS image read model retains the post preview-only boundary',t=>{
+ const root=fixture(t),file=path.join(root,'data/sns/posts.json'),ledger=JSON.parse(fs.readFileSync(file));
+ // The note-image index is fetched from R2 in production and absent in a fresh CI checkout.
+ const article=JSON.parse(fs.readFileSync(path.join(root,'data/note/articles.json'))).articles.find(a=>a.key==='a-kakei-aichi');
+ const inventoryPath=path.join(root,FILES.inventory),inventory=JSON.parse(fs.readFileSync(inventoryPath));
+ inventory.articles[article.key]={status:'indexed',manifestSha:article.body.manifest.sha256,bucket:'stats47',files:[{name:'images/category-ratio.png',sha256:'c'.repeat(64),bytes:32}]};
+ fs.writeFileSync(inventoryPath,JSON.stringify(inventory));
+ const post=ledger.posts.find(p=>p.platform==='x'&&p.status!=='deleted'&&p.assets?.some(a=>a.mime?.startsWith('image/')));
+ post.planning={origin:'new-format',batch:'2026-10-19',title:'note原図の確認',preview_only:true,note:'媒体別の投稿用画像は未作成'};
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ const images=imageLibrary(root).images.filter(i=>i.owner==='sns/'+post.id);
+ assert.ok(images.length);assert.ok(images.every(i=>i.previewOnly===true));
+ assert.ok(imageLibrary(root).images.some(i=>i.channel==='note'&&!i.previewOnly));
+ const asset=post.assets.find(a=>a.mime?.startsWith('image/'));
+ post.assets.push({...asset,role:'thumbnail',order:1});post.planning.preview_only=false;
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ const ready=imageLibrary(root).images.filter(i=>i.owner==='sns/'+post.id);
+ assert.equal(ready.find(i=>i.file==='thumbnail-1').previewOnly,true);
+ assert.equal(ready.find(i=>i.file===asset.role+'-'+asset.order).previewOnly,false);
+ post.production={version:'note-household-v1',renderer:'apps/remotion/src/features/note-household/HouseholdNote.tsx',rendererHash:'a'.repeat(64),input:{provider:'r2-private',bucket:'stats47-private',key:'media-workspace/inputs/'+ 'b'.repeat(64)+'.json',sha256:'b'.repeat(64),bytes:3000}};
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ const produced=imageLibrary(root).images.filter(i=>i.owner==='sns/'+post.id);
+ assert.equal(produced.find(i=>i.file==='thumbnail-1').inputFiles.length,0);
+ assert.equal(produced.find(i=>i.file===asset.role+'-'+asset.order).inputFiles[0].sha256,'b'.repeat(64));
+ assert.equal(produced.find(i=>i.file===asset.role+'-'+asset.order).generation.rendererHash,'a'.repeat(64));
+ post.domain='note';post.content_key='a-kakei-aichi';
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ const linked=imageLibrary(root).images.filter(i=>i.owner==='sns/'+post.id);
+ assert.equal(linked.find(i=>i.file==='thumbnail-1').comparison.role,'note-original');
+ assert.equal(linked.find(i=>i.file===asset.role+'-'+asset.order).comparison.key,post.content_key);
+ assert.equal(linked.find(i=>i.file==='thumbnail-1').channel,'x');
+ assert.equal(linked.find(i=>i.file==='thumbnail-1').previewOnly,true);
+ const note=imageLibrary(root).images.find(i=>i.owner==='note/'+post.content_key&&i.file==='images/category-ratio.png');
+ assert.equal(note.channel,'note');
+ assert.equal(note.comparison.role,'layout');
+ assert.equal(note.comparison.key,post.content_key);
+ assert.equal(note.original.key.endsWith('/images/category-ratio.png'),true);
+ post.production.version='note-household-v2';
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ assert.equal(imageLibrary(root).images.find(i=>i.owner==='sns/'+post.id&&i.file===asset.role+'-'+asset.order).comparison.key,post.content_key);
+ post.production.version='note-household-v3';
+ fs.writeFileSync(file,JSON.stringify(ledger));
+ assert.equal(imageLibrary(root).images.find(i=>i.owner==='sns/'+post.id&&i.file===asset.role+'-'+asset.order).comparison.key,post.content_key);
+});
 function candidate(image){
  const imageSha=sha('image'),inputSha=sha('input');
  return {id:sha([imageSha,inputSha]),basis:image.basis,
@@ -52,6 +108,21 @@ function confirmed(root,image,type=image.templateId==='unclassified'?'bar':image
  saveImagePlan(root,image.id,image.revision,{templateId:type,policy:image.policy,role:roleForTemplate(type),reason:'試験用固定画像の型を照合',purpose:'ranking',selection:'top-bottom'});
  return imageLibrary(root).images.find(i=>i.id===image.id);
 }
+test('comparison plans preserve current candidates and their independent approval',t=>{
+ const root=fixture(t);
+ const base=confirmed(root,imageLibrary(root).images.find(i=>i.kind!=='cover'&&!i.previewOnly));
+ const next=candidate(base);registerCandidate(root,base.id,base.revision,next);
+ let image=imageLibrary(root).images.find(i=>i.id===base.id);
+ reviewCandidate(root,image.id,image.revision,next.id,{status:'pass',reason:'fixture',original:true,mobile:true,data:true});
+ image=imageLibrary(root).images.find(i=>i.id===base.id);
+ assert.equal(image.approved,true);
+ saveImageComparison(root,image.id,image.revision,{key:'generic-bars-2024',title:'棒グラフの共通題材',sharedChannels:['web'],reason:'同じ固定入力'});
+ const saved=imageLibrary(root).images.find(i=>i.id===base.id);
+ assert.equal(saved.basis,image.basis);assert.equal(saved.candidateMatches,true);assert.equal(saved.approved,true);
+ assert.deepEqual(saved.candidate,image.candidate);assert.deepEqual(saved.original,image.original);assert.deepEqual(saved.classification,image.classification);
+ assert.equal(saved.comparison.key,'generic-bars-2024');assert.deepEqual(saved.comparison.sharedChannels,['web']);
+ assert.throws(()=>saveImageComparison(root,image.id,image.revision,null),/再読込/);
+});
 test('all note records are visible including unavailable bodies; metrics do not invalidate reviews',t=>{
  const root=fixture(t),items=workspaceItems(root);
  // 記事数は決め打ちせず台帳から数える (台帳は記事の追加・削除で変わる)
@@ -228,6 +299,7 @@ test('purpose and selection are validated, preserved in history and invalidate e
  const root=fixture(t);let image=confirmed(root,imageLibrary(root).images.find(i=>i.original?.sha256&&i.kind!=='cover'),'table');
  const plan={templateId:'table',role:'table',reason:'行列で数値を比較する',purpose:'ranking',selection:'top-bottom',policy:image.policy};
  assert.throws(()=>saveImagePlan(root,image.id,image.revision,{...plan,purpose:'made-up'}),/目的と構成/);
+ assert.throws(()=>saveImagePlan(root,image.id,image.revision,{...plan,purpose:'comparison'}),/上位・下位はランキング/);
  assert.throws(()=>saveImagePlan(root,image.id,image.revision,{...plan,templateId:'ranking'}),/不正/);
  registerCandidate(root,image.id,image.revision,candidate(image));image=imageLibrary(root).images.find(i=>i.id===image.id);
  reviewCandidate(root,image.id,image.revision,image.candidate.id,{status:'pass',reason:'確認',original:true,mobile:true,data:true});

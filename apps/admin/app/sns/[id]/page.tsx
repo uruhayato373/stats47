@@ -140,7 +140,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
       </PanelCard>
 
       <Section
-        title="素材"
+        title={post.domain === 'note' ? '原図と媒体別レイアウト' : '素材'}
         count={assets ? assets.length : "未保全"}
         note="画像の正本はprivate R2。移行前の画像と動画はGoogle Driveを参照します。台帳のハッシュで照合します"
       >
@@ -155,7 +155,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
             {assets.map((a) => (
               <PanelCard
                 key={`${a.role}-${a.order}`}
-                title={`${ROLE_LABEL[a.role] ?? a.role} ${a.order}`}
+                title={post.domain === 'note' ? a.role === 'thumbnail' ? '参考原図（note）' : post.platform === 'x' ? 'X向けレイアウト' : `Instagram ${a.order}枚目` : `${ROLE_LABEL[a.role] ?? a.role} ${a.order}`}
                 description={a.state === "archived" ? a.drive_path : `取得元なし: ${a.reason}`}
               >
                 {a.url ? (

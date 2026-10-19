@@ -70,6 +70,18 @@ npx tsx .claude/scripts/sns/render-data-card.ts --kind tile-change --key total-p
 - IGは既存の`post-instagram`へ`--domain <kind>`とcontentKeyを渡す。公開・予約・R2反映は既存の投稿手順で行う。
 - PNGを実寸・縮小で確認し、`manifest.json`の出典・期間・丸め差・抽出条件も確認する。
 
+## note家計記事の固定入力から展開する
+
+県庁所在市の家計調査を使うnote記事は、既存候補の制作メモにある固定入力JSONを復元して、次の専用CLIへ渡す。全国家計構造調査の県別レシートとは別の入力契約。
+
+```bash
+npx tsx .claude/scripts/sns/render-note-household.ts --input <固定snapshot.json> --out <新しい出力directory>
+```
+
+`--note-only` を加えると同じ固定入力からnote本文用1枚をXと同じ描画部品・4:5（1080×1350）で生成する。元記事の `images/category-ratio.png` と同じ画像IDへprivate R2の候補として登録し、既存原図・採用・公開状態を保持する。管理画面の型比較には固定サイズの候補を使い、旧原図は画像詳細で比較する。`--input`は複数指定できる。`apps/remotion/src/features/note-household/`の共通rendererが、X・Instagramとも「家計支出の10分類」を1枚にまとめた同じ1080×1350画像を生成する。画像の重複説明は削り、年・対象世帯・基準・出典を残す。下部は基準・出典の2行とし、詳しい説明・注意は本文に置く。費目・順序・倍率・年・市域・二人以上世帯・47市単純平均の基準を維持し、各スライドでpropsを解決する。原寸・320pxを確認し、同一都市の媒体別出力SHAが一致することを検査する。
+
+`production.json`には固定入力・rendererのソースとSHA・フォントSHA・出力SHAを保存する。制作JSONはprivate R2へ保全し、既存投稿の`production.input`から参照する。投稿画像は同じIDの`assets`へ追加し、note原図は`thumbnail`として保持する。原図を完成見本に混ぜず、`planning.preview_only`は投稿用画像一式の保存・照合後に解除する。承認・予約・公開は別工程。
+
 ## ドメイン別コンポジション
 
 ### ranking ドメイン

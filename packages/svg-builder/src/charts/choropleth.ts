@@ -80,6 +80,17 @@ export interface ChoroplethItem {
 }
 
 export interface ChoroplethOptions {
+  /** Pre-resolved site map scale. Fills and legend must use this same result. */
+  resolvedScale?: {
+    domain: [number, number] | null;
+    midpoint?: number;
+    boundaries: number[];
+    colors: string[];
+    method: string;
+    colorAtValue: (value: number) => string;
+  };
+  /** Boundary precision can differ from observation precision. */
+  formatBoundary?: (value: number) => string;
   /** チャートタイトル */
   title: string;
   /** サブタイトル（年次・指標の説明など） */
@@ -558,6 +569,8 @@ export function generateChoroplethSvg(
     legendLabels: rawLegendLabels,
     showRankList = true,
     highlightCode,
+    resolvedScale,
+    formatBoundary,
   } = options;
   const legendLabels = normalizeLegendLabels(rawLegendLabels);
   const safeUnit = typeof unit === "string" ? unit : "";
@@ -578,9 +591,11 @@ export function generateChoroplethSvg(
   // 桁数は 47 県全体で 1 度だけ決める。値ごとに決めると 60.4 と 44 が混ざって読み比べにくい
   // (2026-07-31。既定 formatValue は呼び元が渡さなければこれを使う)
   const fmtValue = formatValue ?? ((v: number) => formatValueLabel(v, resolveValuePrecision(values)));
-  const lo = colorMin ?? Math.min(...values);
-  const hi = colorMax ?? Math.max(...values);
+  if (resolvedScale && !resolvedScale.domain) throw new Error('Resolved map scale has no data');
+  const lo = resolvedScale?.domain?.[0] ?? colorMin ?? Math.min(...values);
+  const hi = resolvedScale?.domain?.[1] ?? colorMax ?? Math.max(...values);
   const toT = (v: number) => (hi === lo ? 0.5 : (v - lo) / (hi - lo));
+  const fillForValue = (value: number) => resolvedScale ? resolvedScale.colorAtValue(value) : colorOf(toT(value));
 
   // ── タイル ──
   // 字の大きさは 1 マスタイルで 1 度だけ決め、全タイルで共有する (県ごとに変えない)
@@ -594,8 +609,7 @@ export function generateChoroplethSvg(
     const w = cs * PITCH - GAP;
     const h = rs * PITCH - GAP;
 
-    const t = toT(item.value);
-    const fill = colorOf(t);
+    const fill = fillForValue(item.value);
     // タイル内の表示名はコードから決定的に作る (呼び元データの「北海」を持ち込まない)
     const tileName = shortNameOf(item);
     const nfs = nameFontSize(tileName, w, baseFont);
@@ -696,7 +710,7 @@ export function generateChoroplethSvg(
     for (const it of top3) {
       const rank = top3.findIndex((other) => other.value === it.value) + 1;
       y += 30;
-      const sw = colorOf(toT(it.value));
+      const sw = fillForValue(it.value);
       const valStr = fmtValue(it.value);
       // 値は右揃え (桁が揃う)、単位はその右に小さく置く
       const valX = nameEnd + valW;
@@ -748,7 +762,7 @@ export function generateChoroplethSvg(
     while (tickFont > 7 && !fitsWithoutMid(tickFont)) tickFont -= 0.5;
   }
 
-  const legend = [
+  const legacyLegend = [
     `  <defs>`,
     `    <linearGradient id="choropleth-lg" x1="0" x2="1">`,
     gradientStops,
@@ -767,6 +781,29 @@ export function generateChoroplethSvg(
     `  <text x="${barRight}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="end">${hiStr}${esc(unit)}</text>`,
   ].filter(Boolean);
 
+  // The caller resolves thresholds/centers once; this layer only arranges that legend.
+  const resolvedLegend: string[] = [];
+  if (resolvedScale) {
+    const fmt = formatBoundary ?? fmtValue;
+    const continuous = resolvedScale.method === 'continuous';
+    const count = continuous ? 100 : resolvedScale.colors.length;
+    for (let i = 0; i < count; i++) {
+      const fill = continuous ? resolvedScale.colorAtValue(lo + (hi - lo) * i / (count - 1)) : resolvedScale.colors[i];
+      resolvedLegend.push(`<rect x="${legendX + LEGEND_BAR_W * i / count}" y="${LEGEND_Y}" width="${LEGEND_BAR_W / count + 0.1}" height="${LEGEND_BAR_H}" fill="${esc(fill)}"/>`);
+    }
+    const label = (x: number, y: number, value: number, anchor = 'middle') =>
+      `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${FONT_FAMILY}" font-size="9" fill="${CHROME_COLOR}">${esc(fmt(value))}</text>`;
+    resolvedLegend.push(label(legendX, LEGEND_Y + 24, lo, 'start'), label(barRight, LEGEND_Y + 24, hi, 'end'));
+    if (!continuous) {
+      const breaks = resolvedScale.boundaries.slice(1, -1).map(fmt).join(' / ');
+      if (breaks) resolvedLegend.push(`<text x="${legendX}" y="${LEGEND_Y + 38}" font-family="${FONT_FAMILY}" font-size="8" fill="${CHROME_COLOR}">境界：${esc(breaks)}</text>`);
+    }
+    resolvedLegend.push(`<text x="${barRight}" y="${LEGEND_Y - 6}" text-anchor="end" font-family="${FONT_FAMILY}" font-size="10" fill="${CHROME_COLOR}">${esc(unit)}</text>`);
+    if (resolvedScale.midpoint !== undefined) {
+      resolvedLegend.push(`<text x="${legendX}" y="${LEGEND_Y - 6}" font-family="${FONT_FAMILY}" font-size="10" fill="${CHROME_COLOR}">基準：${esc(fmt(resolvedScale.midpoint))}</text>`);
+    }
+  }
+
   // 背景 rect は敷かない（透過 = ページの地色に追従）。冒頭の「配色とテーマ」参照。
   return `<svg width="${W}" height="${TOTAL_H}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${TOTAL_H}" role="img" aria-label="${esc(ariaLabel)}">
   <title>${esc(title)}</title>${subtitle ? `\n  <desc>${esc(subtitle)}</desc>` : ""}
@@ -774,6 +811,6 @@ ${head.join("\n")}
 ${rankLists.join("\n")}
 ${tiles.filter(Boolean).join("\n")}
 ${highlightOverlay}
-${legend.join("\n")}
+${(resolvedScale ? resolvedLegend : legacyLegend).join("\n")}
 </svg>`;
 }

@@ -25,6 +25,7 @@ export const maximumTemperature: MetricConfig = {
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
+    "barDomain": { "mode": "extent" },
     "colorScheme": "interpolateOranges",
     "colorSchemeType": "sequential",
   },

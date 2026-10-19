@@ -5,6 +5,12 @@ import {
   channelRatios,
   exampleDimensions,
   templateSamplePool,
+  templateBranches,
+  resolveTemplateBranch,
+  comparisonGroups,
+  comparisonExamples,
+  comparisonTopic,
+  TEMPLATE_CHANNELS,
 } from '@/lib/media-template-examples';
 import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 
@@ -13,6 +19,12 @@ function image(id: string, patch: Partial<ImageView> = {}): ImageView {
     id,
     templateId: 'bar',
     original: { key: id + '.png', sha256: id },
+    classification: {
+      status: 'confirmed',
+      purpose: 'comparison',
+      selection: 'complete',
+      role: 'chart',
+    },
     ...patch,
   } as ImageView;
 }
@@ -29,6 +41,62 @@ function candidate(id: string, patch: Partial<ImageView> = {}): ImageView {
   });
 }
 describe('template reference images', () => {
+  it('groups unrelated bar topics separately and shares references only when explicitly configured', () => {
+    const a = image('a', {
+      channel: 'note',
+      title: '同じ見出し',
+      file: 'one.png',
+    });
+    const b = image('b', {
+      channel: 'x',
+      title: '同じ見出し',
+      file: 'two.png',
+    });
+    const topics = comparisonGroups([a, b]);
+    expect(topics).toHaveLength(2);
+    expect(comparisonExamples([a, b], 'x', comparisonTopic(a).key)).toEqual([]);
+    const shared = {
+      ...a,
+      comparison: { ...comparisonTopic(a), sharedChannels: ['web' as const] },
+    };
+    expect(
+      comparisonExamples([shared, b], 'web', comparisonTopic(a).key)[0]
+    ).toMatchObject({
+      image: { id: 'a', channel: 'note' },
+      sharedFrom: 'note',
+      state: 'existing',
+    });
+    expect(
+      comparisonExamples([shared, b], 'instagram', comparisonTopic(a).key)
+    ).toEqual([]);
+    const copy = { ...b, original: a.original };
+    expect(comparisonGroups([a, copy])).toHaveLength(1);
+    expect(
+      comparisonExamples([a, copy], 'x', comparisonTopic(a).key)[0].image.id
+    ).toBe('b');
+  });
+  it('keeps every classified Web bar topic beyond the representative cap', () => {
+    const bars = Array.from({ length: 12 }, (_, i) =>
+      image('web-' + i, { channel: 'web', title: '棒' + i, file: i + '.svg' })
+    );
+    const pool = templateSamplePool(bars);
+    expect(pool.images).toHaveLength(12);
+    expect(comparisonGroups(pool.images)).toHaveLength(12);
+  });
+  it('keeps note-image previews out of actual X/Instagram layout references', () => {
+    const previews = ['x', 'instagram'].map((channel) =>
+      image('preview-' + channel, { channel, previewOnly: true })
+    );
+    const actual = image('actual-x', { channel: 'x' });
+    expect(templateExamples(previews)).toEqual([]);
+    expect(
+      channelExamples([...previews, actual], 'x').map((e) => e.image.id)
+    ).toEqual(['actual-x']);
+    expect(channelExamples(previews, 'instagram')).toEqual([]);
+    const pool = templateSamplePool([...previews, actual]);
+    expect(pool.images.map((i) => i.id)).toEqual(['actual-x']);
+    expect(pool.counts.bar).toBe(1);
+  });
   it('keeps cover originals in their own type and never uses an unreviewed cover candidate', () => {
     const cover = image('cover', {
       kind: 'cover',
@@ -48,7 +116,7 @@ describe('template reference images', () => {
       ])
     ).toEqual([]);
   });
-  it('keeps every medium/ratio sample and full counts while reducing the browser payload', () => {
+  it('keeps all note/SNS references selectable and limits only the larger Web catalogue', () => {
     const images = [
       ...Array.from({ length: 20 }, (_, n) =>
         image('square-' + n, { channel: 'x', width: 1080, height: 1080 })
@@ -56,19 +124,283 @@ describe('template reference images', () => {
       image('portrait', { channel: 'x', width: 1080, height: 1350 }),
       candidate('note', { channel: 'note' }),
       image('web', { templateId: 'scatter', channel: 'web' }),
+      ...Array.from({ length: 20 }, (_, n) =>
+        image('web-bar-' + n, { channel: 'web', width: 1080, height: 1080 })
+      ),
+      ...Array.from({ length: 10 }, (_, n) =>
+        image('web-scatter-' + n, { templateId: 'scatter', channel: 'web' })
+      ),
     ];
     const pool = templateSamplePool(images);
-    expect(pool.counts).toMatchObject({ bar: 22, scatter: 1 });
+    expect(pool.counts).toMatchObject({ bar: 42, scatter: 11 });
     expect(pool.images.length).toBeLessThan(images.length);
     for (const channel of ['note', 'x', 'web']) {
       for (const ratio of ['', ...channelRatios(images, channel)]) {
         expect(
-          channelExamples(pool.images, channel, ratio).map((e) => e.image.id)
+          channelExamples(
+            pool.images,
+            channel,
+            ratio,
+            channel === 'web' ? 3 : Infinity
+          ).map((e) => e.image.id)
         ).toEqual(
-          channelExamples(images, channel, ratio).map((e) => e.image.id)
+          channelExamples(
+            images,
+            channel,
+            ratio,
+            channel === 'web' ? 3 : Infinity
+          ).map((e) => e.image.id)
         );
       }
     }
+  });
+  it('groups by purpose and shape, keeps ranges as metadata and ignores old selection filters', () => {
+    const row = (
+      id: string,
+      purpose: string,
+      selection: string,
+      channel = 'note'
+    ) =>
+      image(id, {
+        channel,
+        classification: {
+          purpose,
+          selection,
+          status: 'confirmed',
+        } as ImageView['classification'],
+      });
+    const branches = templateBranches([
+      row('rank-note', 'ranking', 'top-bottom'),
+      row('rank-x', 'ranking', 'top-bottom', 'x'),
+      row('rank-ig', 'ranking', 'selected', 'instagram'),
+      row('household-note', 'comparison', 'selected'),
+      row('household-ig', 'comparison', 'selected', 'instagram'),
+      row('wrong', 'comparison', 'top-bottom'),
+    ]);
+    expect(branches).toHaveLength(2);
+    const ranking = resolveTemplateBranch(branches, { template: 'bar' })!;
+    expect(ranking.purpose).toBe('ranking');
+    expect(ranking.images.map((i) => i.id)).toEqual([
+      'rank-note',
+      'rank-x',
+      'rank-ig',
+    ]);
+    expect(channelExamples(ranking.images, 'instagram')).toHaveLength(1);
+    const comparison = resolveTemplateBranch(branches, {
+      template: 'bar',
+      'sample-note': 'household-note',
+    })!;
+    expect(comparison.purpose).toBe('comparison');
+    expect(comparison.images.map((i) => i.id)).toEqual([
+      'household-note',
+      'household-ig',
+    ]);
+    expect(
+      resolveTemplateBranch(branches, {
+        template: 'bar',
+        selection: 'top-bottom',
+      })?.purpose
+    ).toBe('ranking');
+    expect(
+      resolveTemplateBranch(branches, {
+        template: 'bar',
+        purpose: 'ranking',
+        selection: 'complete',
+      })?.key
+    ).toBe(ranking.key);
+  });
+  it('keeps classification review separate from the type catalogue', () => {
+    const rows = [
+      image('ready', { channel: 'x' }),
+      image('suggestion', {
+        channel: 'web',
+        classification: {
+          status: 'suggested',
+          purpose: 'comparison',
+          selection: 'undecided',
+        } as ImageView['classification'],
+      }),
+      image('unknown-purpose', {
+        channel: 'web',
+        classification: {
+          status: 'recorded',
+          purpose: 'undecided',
+          selection: 'complete',
+        } as ImageView['classification'],
+      }),
+      image('unknown-range', {
+        channel: 'web',
+        classification: {
+          status: 'recorded',
+          purpose: 'comparison',
+          selection: 'undecided',
+        } as ImageView['classification'],
+      }),
+    ];
+    expect(templateSamplePool(rows).images.map((i) => i.id)).toEqual(['ready']);
+    expect(templateBranches(rows).map((b) => b.key)).toEqual([
+      'bar:comparison:',
+    ]);
+  });
+  it('compares fixed-size trial layouts and keeps the old note original out of the template preview', () => {
+    const meta = {
+      key: 'electric-demand-example',
+      title: '同じ都市の家計',
+      url: 'https://note.com/example',
+      requiredSelection: 'complete',
+    };
+    const rows = [
+      image('note-original-x', {
+        channel: 'x',
+        previewOnly: true,
+        comparison: { ...meta, role: 'note-original' },
+        original: { key: 'note.png', sha256: 'original' },
+      }),
+      image('note-original-ig', {
+        channel: 'instagram',
+        previewOnly: true,
+        comparison: { ...meta, role: 'note-original' },
+        original: { key: 'note-copy.png', sha256: 'original' },
+      }),
+      image('x-layout', {
+        channel: 'x',
+        comparison: { ...meta, role: 'layout' },
+      }),
+      candidate('ig-page-1', {
+        channel: 'instagram',
+        comparison: { ...meta, role: 'layout' },
+        classification: {
+          status: 'confirmed',
+          purpose: 'comparison',
+          selection: 'complete',
+        } as ImageView['classification'],
+      }),
+      image('ig-page-2', {
+        channel: 'instagram',
+        comparison: { ...meta, role: 'layout' },
+        classification: {
+          status: 'confirmed',
+          purpose: 'comparison',
+          selection: 'selected',
+        } as ImageView['classification'],
+      }),
+      image('unrelated', { channel: 'note' }),
+      candidate('note-layout', {
+        channel: 'note',
+        comparison: {
+          ...meta,
+          role: 'layout',
+          candidateOnly: true,
+          sharedChannels: ['web'],
+        },
+      }),
+    ];
+    const pool = templateSamplePool(rows);
+    expect(comparisonGroups(pool.images)).toEqual(
+      expect.arrayContaining([{ key: meta.key, title: meta.title }])
+    );
+    const note = comparisonExamples(pool.images, 'note', meta.key);
+    expect(note).toHaveLength(1);
+    expect(note[0].image.id).toBe('note-layout');
+    expect(note[0].state).toBe('candidate');
+    const site = comparisonExamples(pool.images, 'web', meta.key);
+    expect(TEMPLATE_CHANNELS).toEqual(['note', 'web', 'x', 'instagram']);
+    expect(site).toHaveLength(1);
+    expect(site[0]).toMatchObject({
+      image: { id: 'note-layout', channel: 'note' },
+      src: note[0].src,
+      state: 'candidate',
+      sharedFrom: 'note',
+    });
+    expect(comparisonExamples(pool.images, 'web', 'another-topic')).toEqual([]);
+    expect(
+      comparisonExamples(
+        rows.map((i) =>
+          i.id === 'note-layout' ? { ...i, candidateMatches: false } : i
+        ),
+        'web',
+        meta.key
+      )
+    ).toEqual([]);
+    expect(
+      comparisonExamples(
+        [
+          ...rows,
+          image('site-original', {
+            channel: 'web',
+            comparison: { ...meta, role: 'layout' },
+          }),
+        ],
+        'web',
+        meta.key
+      ).map((example) => example.image.id)
+    ).toEqual(['site-original']);
+    expect(
+      comparisonExamples(
+        rows.map((i) =>
+          i.id === 'note-layout' ? { ...i, approved: true } : i
+        ),
+        'web',
+        meta.key
+      )[0].state
+    ).toBe('candidate');
+    expect(
+      comparisonExamples(
+        pool.images.filter((i) => i.id !== 'note-layout'),
+        'note',
+        meta.key
+      )
+    ).toEqual([]);
+    expect(
+      comparisonExamples(
+        rows.map((i) =>
+          i.id === 'note-layout' ? { ...i, candidateMatches: false } : i
+        ),
+        'note',
+        meta.key
+      )
+    ).toEqual([]);
+    expect(rows.find((i) => i.id === 'note-original-x')?.previewOnly).toBe(
+      true
+    );
+    expect(
+      comparisonExamples(pool.images, 'x', meta.key).map((e) => e.image.id)
+    ).toEqual(['x-layout']);
+    expect(
+      comparisonExamples(
+        [
+          image('ig-single', {
+            channel: 'instagram',
+            comparison: { ...meta, role: 'layout' },
+          }),
+        ],
+        'instagram',
+        meta.key
+      )
+    ).toHaveLength(1);
+    expect(comparisonExamples(pool.images, 'instagram', meta.key)).toHaveLength(
+      1
+    );
+    expect(
+      comparisonExamples(
+        pool.images.filter((i) => i.id !== 'ig-page-1'),
+        'instagram',
+        meta.key
+      )
+    ).toEqual([]);
+    expect(
+      comparisonExamples(
+        rows.map((i) =>
+          i.id === 'ig-page-1' ? { ...i, candidateMatches: false } : i
+        ),
+        'instagram',
+        meta.key
+      )
+    ).toEqual([]);
+    expect(channelExamples(pool.images, 'x').map((e) => e.image.id)).toEqual([
+      'x-layout',
+    ]);
+    expect(templateBranches(pool.images)).toHaveLength(1);
   });
   it('prefers directly stored originals over Drive-only examples and excludes rejected-only ratios', () => {
     const drive = image('a-drive', {

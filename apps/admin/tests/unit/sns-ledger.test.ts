@@ -5,9 +5,14 @@ import {
   matchesPostQuery,
   sortPosts,
   mediaAspect,
+  orderedPostAssets,
 } from '@/lib/sns-ledger';
 
 describe('SNS ID台帳の表示', () => {
+  it('家計の投稿用画像を先に表示し、原図を最後から比較できる', () => {
+    expect(mediaAspect({ platform: 'x', domain: 'note', content_key: 'a-kakei-aichi' })).toBe('aspect-4/5');
+    expect(orderedPostAssets([{ role: 'thumbnail', order: 1 }, { role: 'slide', order: 2 }, { role: 'slide', order: 1 }]).map(a => a.role + a.order)).toEqual(['slide1', 'slide2', 'thumbnail1']);
+  });
   it('IDは完全一致、複数IDはカンマ区切り、本文は大小文字を無視して探す', () => {
     const p = { id: 1109, caption: '北海道 Population', content_key: '01000' };
     expect(matchesPostQuery(p, '#1109')).toBe(true);

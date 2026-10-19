@@ -1,22 +1,22 @@
 'use client';
 import { useState } from 'react';
-import type { WorkspaceData } from './media-workspace';
+import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { TemplateGallery } from './image-template-gallery';
-import { templateSamplePool } from '@/lib/media-template-examples';
+import type { StatisticalSampleView } from '@/lib/image-template-basics';
 
 export function ImageTemplateWorkspace({
   initial,
 }: {
-  initial: Pick<WorkspaceData, 'images' | 'templates'> & {
-    counts: Record<string, number>;
+  initial: {
+    templates: (Template & { revision: string })[];
+    samples: StatisticalSampleView[];
   };
 }) {
   const [data, setData] = useState(initial);
   return (
     <TemplateGallery
       templates={data.templates}
-      images={data.images}
-      counts={data.counts}
+      samples={data.samples}
       onSave={async (template, policy, profiles) => {
         const response = await fetch('/api/media-templates/' + template.id, {
           method: 'PATCH',
@@ -30,16 +30,7 @@ export function ImageTemplateWorkspace({
         const result = await response.json();
         if (!response.ok)
           throw Error(result.error ?? '方針を保存できませんでした。');
-        const overview = await fetch('/api/content-quality');
-        if (!overview.ok)
-          throw Error(
-            '方針は保存されましたが、再読込に失敗しました。ページを再読込してください。'
-          );
-        const next: WorkspaceData = await overview.json();
-        setData({
-          templates: next.templates,
-          ...templateSamplePool(next.images),
-        });
+        setData((current) => ({ ...current, templates: result.templates }));
       }}
     />
   );
