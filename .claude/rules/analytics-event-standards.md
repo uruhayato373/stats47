@@ -331,6 +331,10 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。**デプロイ日を境に `unlabeled` の件数が減り、上の値が増える**
 > (クリックの総数は変わらない)。デプロイ前後の `unlabeled` を単純比較しない。
 >
+> **nav_surface の値追加 (2026-10-19・作り方の 1 行、RANKING-MAKING-OF-LINK-01、未デプロイ)**: 食の雑学ランキング上位 5 件 (`RANKING_MAKING_OF_KEYS`) の出典の欄の下に、
+> 無料の連載 `/blog/cc-estat-01-setup` への 1 行 (`RankingMakingOfLink`) を置き、`ranking_making_of` で数える (`nav_label` = `cc-estat-01-setup`)。
+> 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

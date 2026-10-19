@@ -14,6 +14,7 @@ import { RelatedArticlesCard } from '../RankingSidebar/RelatedArticlesCard';
 
 import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
+import { RankingMakingOfLink } from "./RankingMakingOfLink";
 import { RankingPageFaqSection, RankingPageInsightsSection } from "./RankingPageAiSections";
 import {
   RankingPageCorrelationSection,
@@ -107,11 +108,13 @@ export function RankingPageClientShell({
           />
         ),
         dataSources: (
-          <DataSourceList
-            key="data-sources"
-            sources={[...resolveRankingItemDataSources(model.rankingItem), MAP_DATA_SOURCE]}
-            surface="ranking_source"
-          />
+          <div key="data-sources" className="space-y-3">
+            <DataSourceList
+              sources={[...resolveRankingItemDataSources(model.rankingItem), MAP_DATA_SOURCE]}
+              surface="ranking_source"
+            />
+            <RankingMakingOfLink rankingKey={rankingKey} />
+          </div>
         ),
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
           <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />

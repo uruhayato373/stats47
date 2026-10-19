@@ -427,7 +427,9 @@ export type NavSurface =
   | 'ranking_related'
   | 'area_databook'
   | 'category_ranking_list'
-  | 'geo_source_list';
+  | 'geo_source_list'
+  // 雑学ランキング末尾の「作り方」の 1 行 → 無料の連載 (2026-10-19 値追加・RANKING-MAKING-OF-LINK-01。登録済み dimension の値追加)
+  | 'ranking_making_of';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。
