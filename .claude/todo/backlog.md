@@ -292,12 +292,34 @@ updated: 2026-10-19
 - **経緯 (2026-10-19 オーナー承認)**: ログインは Mac が毎日保ち、そのセッションを CI へ運んで CI のブラウザで取得する遠回りの構成だった。KDP は CI でほぼ毎回 `auth_required` になり、CI の記録コミットが develop→main の PR の検査を止めた。Mac で直接取得する仕組みは実装済み (`.claude/scripts/measurement/collect-local.mjs`・`scripts/scheduled/measurement-collect-local.sh`・`collect.mjs --local --vault`・`vault.mjs` の `MEASUREMENT_VAULT_WRITER=mac`。定期実行専用の clone は `~/stats47-measurement` に作成済み)。同日の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
 - **次 (オーナー)**:
   1. GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、`https://analytics.google.com` の表示を確かめて、その Chrome を ⌘Q で終了する (Google は 2 段階認証のため自動ログインしない)。
-  2. afb: 管理画面で API キー (認証トークン。9 月に GitHub Secret `AFB_API_KEY` に登録したもの) を確かめ、`security add-generic-password -s stats47-measurement-afb-api -a afb -w` でキーチェーンに入れる。
+  2. ~~afb~~ **不要 (2026-10-19 集約の判断。`ASP-CONSOLIDATE-A8-RAKUTEN-01` ③ で afb を計測の取得元から外す。外すまでは afb が `api_key_missing` で失敗に記録されるので、「2 日続けて全取得元 pass」は ③ の後に数える)**。旧手順: 管理画面で API キー (認証トークン。9 月に GitHub Secret `AFB_API_KEY` に登録したもの) を確かめ、`security add-generic-password -s stats47-measurement-afb-api -a afb -w` でキーチェーンに入れる。
   3. KDP: `.local/authenticated-measurement/kdp.autologin-failed` を消し、`node .claude/scripts/measurement/refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。
 - **次 (Claude・上の 1〜2 の後)**: clone を origin/develop に揃えてから、clone で `node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 afb gsc` を実行し、afb と GSC が pass することを確かめる。そのうえで `scripts/scheduled/measurement-session-refresh.sh` の最後の行を `measurement-collect-local.sh` を呼ぶ形に戻し、`measurement.test.mjs` の wrapper の検査も合わせる。
 - **次 (2 日続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
 - **注意**: 切り替えた日に afb や GSC が失敗すると、CI の予備は「その日は取得済み」で省略するので、その日の分が欠ける。1〜2 が済む前に切り替えない。
 - **完了条件**: Mac の定期実行で 2 日続けて全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
+
+
+### [ASP-CONSOLIDATE-A8-RAKUTEN-01] アフィリエイトを A8 と楽天 (直接) に集約し、もしも・afb・バリューコマースの配信と計測を止める
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:アフィリエイト]
+
+- **経緯 (2026-10-19 オーナー判断「集約しよう」)**: 全 ASP の確定収益が ¥0 で、もしも・afb・バリューコマースは配信量が誤差なのに認証付きの計測・照合・帰属確認の手間だけがかかっている。実測: A8 はクリック 8 月 257・9 月 157・10 月 276、成約 0 (`data/affiliate/a8-results.json`)。楽天 (直接) は 9 月 30・10 月 7 クリック、¥0 (`rakuten-results.json`)。もしもは提携 44 件・35 日 (09-14〜10-18) でクリック 1、¥0 (`moshimo-results.json`)。afb・バリューコマースは成果の記録なし。
+- **外す広告 9 件 (`apps/web/scripts/affiliate-ads-data.ts`、すべて `isActive: true`)**:
+  | ASP | id | 案件 | 位置 |
+  |---|---|---|---|
+  | バリューコマース | `af_ikyu_travel_001` | 一休.com 宿泊予約 | blog-bottom |
+  | バリューコマース | `af_expedia_travel_001` | Expedia | blog-bottom |
+  | afb | `af_afb_14567_001` | KOTORA (ハイクラス転職) | blog-bottom |
+  | afb | `af_afb_15743_001` | 能セン (受験対策) | blog-bottom |
+  | afb | `af_afb_16683_001` | おやここ (プロパンガス見直し) | blog-bottom |
+  | もしも | `af_moshimo_tabechoku_1863_001` | 食べチョク | blog-bottom |
+  | もしも | `af_moshimo_rakuten_travel_55_001` | 楽天トラベル 国内宿泊 | blog-bottom |
+  | もしも | `af_moshimo_samurai_job_2228_pilot` | Samurai Job | sidebar-bottom |
+  | もしも | `af_moshimo_techgo_6722_pilot` | テックゴー | sidebar-bottom |
+  楽天トラベルは楽天 (直接) の `af_rakuten_travel_001` が残るので、旅行の枠は空かない。
+- **次 (実行順)**: ① 上の 9 件の一覧をオーナーが確認する ② 9 件を `isActive: false` にし (削除はせず、履歴の照合に残す)、develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる (デプロイ不要) ③ 計測から moshimo・afb を外す: `.claude/scripts/measurement/sources.mjs` の取得元・`collect-local.mjs` の afb キー読み込み・`measurement-session-refresh.sh` の moshimo・`authenticated-measurement.yml` と `affiliate-ga4-weekly.yml` の該当段・テストを同じ差分で直し、計測の鮮度 (`measurement-freshness`) の分母と月次ゴール「12/14」を新しい取得元数で書き直す ④ 提携の解除・アカウントの扱いは急がない (配信と計測を止めれば足りる)。
+- **停止条件**: A8・楽天 (直接) の広告に触らない。②の前に計測を止めない (配信中の広告の成果が記録されなくなる)。
+- **完了条件**: 本番の `app/affiliate-ads/all.json` に moshimo・afi-b・valuecommerce の URL が 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新されている。
 
 
 ### [NOTE-PACKS-REPLACE-COCONALA-01] ココナラ撤退の後始末: データパックの有料 note 版 13 本を公開し、サイトの商品ページの行き先を note へ付け替える
