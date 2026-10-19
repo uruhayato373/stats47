@@ -3,6 +3,7 @@
 import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
 
 interface CorrelatedItem {
@@ -40,7 +41,7 @@ export function CorrelationSectionClient({
             <p className="mb-2 text-xs text-muted-foreground">
                 人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
             </p>
-            <nav className="flex flex-col">
+            <nav className="flex flex-col" {...navSurfaceProps("ranking_correlation")}>
                 {correlatedItems.map((item) => {
                     const article = articleByPairKey[item.rankingKey];
                     return (

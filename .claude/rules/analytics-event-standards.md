@@ -322,6 +322,15 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > **nav_surface の値追加 (2026-09-27・県の「特徴」)**: 県ページと市区町村ページの「特徴」一覧 (`AreaHighlightList`) の
 > リンクに `area_highlights` を追加 (`AREA-HIGHLIGHTS-SSOT-01`)。登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
 >
+> **nav_surface の値追加 (2026-10-19・導線名なしの上位部品、NAV-CLICK-COVERAGE-01、未デプロイ)**: W41 の計測で `nav_click` の 53.9% が
+> `unlabeled` だったので、部品側の送信も導線名も持たない上位の部品に導線名を付けた。ランキングの順位表の県名 (`RankingDataTable`) =
+> `ranking_table`、「相関が高い指標」(`CorrelationSectionClient`) = `ranking_correlation`、「同カテゴリの関連ランキング」(`RelatedRankingsGrid`) =
+> `ranking_related`、県データブックの指標 (`RankedKpiGrid` / `GenderPairedKpiGrid`) = `area_databook`、カテゴリ・調査の全件一覧
+> (`CategoryRankingTable` / `CategoryTopicGroups`) = `category_ranking_list`、Geo の出典データ一覧 (`GeoSourceNavigationList`) = `geo_source_list`。
+> 送信は共通のクリック監視だけが行い (部品側の `trackNavClick` は足していない)、属性は `navSurfaceProps()` (`NavSurface` で型を縛る) で付ける。
+> 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。**デプロイ日を境に `unlabeled` の件数が減り、上の値が増える**
+> (クリックの総数は変わらない)。デプロイ前後の `unlabeled` を単純比較しない。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

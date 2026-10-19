@@ -418,7 +418,24 @@ export type NavSurface =
   | 'tag'
   | 'blog_body'
   // 県・市区町村の「特徴」一覧 (AreaHighlightList。2026-09-27 値追加・AREA-HIGHLIGHTS-SSOT-01。登録済み dimension の値追加)
-  | 'area_highlights';
+  | 'area_highlights'
+  // 導線名の無かった上位の部品 (2026-10-19 値追加・NAV-CLICK-COVERAGE-01。登録済み dimension の値追加):
+  // ランキングの順位表の県名 / 相関が高い指標 / 同カテゴリの関連ランキング / 県データブックの指標 /
+  // カテゴリのランキング一覧 / Geo の出典データ一覧
+  | 'ranking_table'
+  | 'ranking_correlation'
+  | 'ranking_related'
+  | 'area_databook'
+  | 'category_ranking_list'
+  | 'geo_source_list';
+
+/**
+ * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。
+ * 値を `NavSurface` で縛るので、`data-nav-surface="..."` の直書きと違って打ち間違いが型エラーになる。
+ */
+export function navSurfaceProps(surface: NavSurface): { 'data-nav-surface': NavSurface } {
+  return { 'data-nav-surface': surface };
+}
 
 /** 直近に部品側で送った nav_click。共通のクリック監視が同じクリックを二重に送らないための記録 */
 let lastManualNavClick: { href: string; at: number } | null = null;

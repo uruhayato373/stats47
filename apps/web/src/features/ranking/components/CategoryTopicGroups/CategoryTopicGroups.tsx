@@ -5,6 +5,8 @@ import { metricDisplayName, metricShortName } from "@stats47/ranking";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceCard } from "@/components/surface";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import type { CategoryTopicListItem } from "./types";
 
 /**
@@ -64,6 +66,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
             <span className="min-w-0 flex-1 truncate text-[13px]">{readerLabel}</span>
           ) : (
             <Link
+              {...navSurfaceProps("category_ranking_list")}
               href={`/ranking/${primary.rankingKey}`}
               className="min-w-0 flex-1 truncate text-[13px] hover:text-primary hover:underline"
             >
@@ -91,6 +94,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
           <div className="flex flex-wrap gap-1">
             {row.variants.map((variant) => (
               <Link
+                {...navSurfaceProps("category_ranking_list")}
                 key={variant.rankingKey}
                 href={`/ranking/${variant.rankingKey}`}
                 className="border border-border px-1.5 text-[11px] leading-[18px] text-muted-foreground hover:border-primary hover:text-primary"

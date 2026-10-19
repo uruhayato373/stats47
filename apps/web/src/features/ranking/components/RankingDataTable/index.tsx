@@ -20,6 +20,8 @@ import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import {
   formatRankingValue,
   resolveRankingPrecision,
@@ -125,6 +127,7 @@ export function RankingDataTable({
           if (PREFECTURE_CODE_PATTERN.test(areaCode)) {
             return (
               <Link
+                {...navSurfaceProps("ranking_table")}
                 href={`/areas/${areaCode}`}
                 className="font-medium hover:underline hover:text-primary"
                 prefetch={false}

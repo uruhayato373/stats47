@@ -6,6 +6,8 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from "@/components/atoms/SiteLink";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import type { ColumnDef } from "@tanstack/react-table";
 
 export interface CategoryRankingListItem {
@@ -27,6 +29,7 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
     header: "タイトル",
     cell: ({ row }) => (
       <Link
+        {...navSurfaceProps("category_ranking_list")}
         href={`/ranking/${row.original.rankingKey}`}
         className="hover:text-primary transition-colors font-medium"
       >
