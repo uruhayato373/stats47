@@ -1564,8 +1564,20 @@ updated: 2026-10-19
 - **完了条件**: 7 ページそれぞれに「変えた / 見送った」と理由が記録され、変えたページの変更日が search-growth の台帳にある。
 - **10-16 の追加観測・実行候補**: `data/seo/latest-report.json` の pendingPublication 8件は、参照先proposalが全件 `implementation-needed`（09-18〜10-06選定）。実装済み・公開承認済みとは扱わない。既存7ページと重なる道の駅・高校2年男子身長・公衆電話を先に照合し、重複提案をまとめて各1件の実装担当・対象・完了gateへ落とす。CTR比較は元summaryを継承した実期間で行う。残りは需要と既存作業の重複を確認して採否を決め、一括実装・一括公開しない。
 
+- **2026-10-20 ① のランキング 2 件を git で変更 (未反映)**: オーナーの「できることから進めて」で、上の表の title 案を適用した。公開中の R2 values で数値を確認 (公衆電話 2024 年 47 県合計 96,126・1 位東京 10,717・最下位徳島 509・1975〜2024 年。出生率 2023 年 1 位沖縄 1.60・最下位東京 0.99・1980〜2023 年)、本番の両ページに推移と地図があることも確認。`data/metrics/public-phone-count.ts` を「公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図」、`total-fertility-rate.ts` を「合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図」に変え、description も同じ切り口にした (data-configs のテスト 1,181 件 pass)。**本番反映は次の develop→main マージと `sync-snapshots` の後**。反映した日に本番 title を curl で確かめ、`search-growth:approve` で `ctr-opportunity::/ranking/public-phone-count` と `ctr-opportunity::/ranking/total-fertility-rate` に反映日を記録する (週 2 件の上限・人が承認)。**未着手**: 公衆電話ブログの title 変更は、公開済み記事を送り箱へ戻して `publish-blog.yml` を起動する本番公開なのでオーナー確認待ち。title 案の「ピーク93.5万台」は本文の数値と照合してから使う。出生率の ranking→blog リンクは、推薦が同点を記事 ID のアルファベット順で切るため明示の関係でも上がらない (`RELATED-ARTICLES-TIEBREAK-01` へ分離)。
 - **2026-10-19 オーナー判断 (優先度の引き上げ)**: アフィリエイトの新規展開を保留し (`MONETIZE-BROAD-ROLLOUT-01`)、このカードを 10-21 からの出張中に進めるリモート作業の先頭にする。実行順: ① 公衆電話・出生率の title 案 (上の表) のオーナー確認 → 3 ページを変える ② 道の駅・高校 2 年男子身長・健康寿命の 3 ページを 1 ページずつ変える ③ 197 本を表示の多い順に `/search-growth` へ渡す (週 2 件の承認上限を守り、一括変更はしない)。title の変更は git の定義 (metric の seoTitle・記事 frontmatter) を直すだけなので、デプロイが要るものはまとめて 1 回にする。
 - **2026-10-19 確認 (W43 Could 2)**: ① (食い合いの確認) は 10-08 に済んでいた。「10,717.00個」の修正は main に入り (`origin/main` の config は `decimalPlaces: 0`)、本番 `/ranking/public-phone-count` の HTML は「10,717.00」0 件・「10,717個」27 か所で定着した。**残りは役割分けの title 案 (上の表) のオーナー確認**。承認後に公衆電話の ranking (metric の seoTitle・seoDescription)・blog (記事 frontmatter と ranking へのリンク)、出生率の ranking (seoTitle と blog へのリンク) を変え、変えた日を記録して 4 週後に同じ 28 日窓で CTR を比べる。
+### [RELATED-ARTICLES-TIEBREAK-01] ランキングの関連記事が同点のとき記事 ID のアルファベット順で選ばれ、その指標を主題にした記事が押し出される
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **事象 (2026-10-20 実測)**: `/ranking/total-fertility-rate` の関連記事 3 本は `abortion-rate-prefecture-gap`・`cc-estat-07-birthrate-line`・`childcare-friendly-prefecture-ranking` で、出生率そのものを扱う `fertility-rate-prefecture-gap` (「出生率 ランキング」で順位 1〜1.5) と `total-fertility-rate` が出ない。この指標を `rankingKeys` に持つ公開記事は 13 本。
+- **原因**: `packages/data-configs/src/content/navigation.ts` の推薦は、ランキングから見た記事をすべて `explains` (priority 100) + 一致 key 数 (この場合はどれも 1) で採点し、同点を `a.id.localeCompare(b.id)` で切る。ランキング側に tagIds が無いのでタグでも差がつかない。`data/content/navigation.json` の `links` に明示の関係を足しても同じ 101 点になり、順位は上がらない。
+- **影響範囲 (未計測)**: `rankingKeys` が同じ公開記事を 4 本以上持つランキングすべて。件数は `data/content/pages/blog.json` の rankingKeys を数えて出す。
+- **次**: ① 影響するランキングの数と、そのページの GSC 表示を出す ② 同点の切り方を決める (候補: 編集者が `navigation.json` の `links` で明示した関係に加点する、記事の `rankingKeys` の先頭 = 主題の指標なら加点する)。モデルの推測で記事の主題を決めない ③ `navigation.test.ts` に「主題の記事が上位に来る」テストを足す。
+- **停止条件**: 全ランキングの推薦が変わるので、変更前後の上位 3 本の差分を全件出してから本番に出す。デプロイは他の変更とまとめて 1 回。
+- **完了条件**: `/ranking/total-fertility-rate` の関連記事に `fertility-rate-prefecture-gap` が入り、差分一覧で意図しない入れ替わりが無いことを確かめた。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
