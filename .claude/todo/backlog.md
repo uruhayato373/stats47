@@ -273,7 +273,8 @@ updated: 2026-10-17
 - **済 (2026-10-19)**: 台帳へ候補登録 → A8 で提携申請 (申請サイト = 統計で見る都道府県、`a8-browser.ts apply --id s00000023355003`)。状態は applied (審査待ち)。成果条件は「WEB 申込後 30 日以内のカード発行」(行動負担 F4・decision レーン)。証拠 `.local/a8-offer-inspect/s00000023355003-*.txt`。
 - **広告主の条件 (案件詳細の備考)**: 承認の前に、バナーを載せるページの URL をすべて A8 のフォーム (記事なし・バナーのみ: https://pub.a8.net/a8v2/asApplicationInputAction.do?viewId=MTUwNDI) から提出する。登録したページ以外への掲載・SNS・リスティング・独自特典は禁止。広告と分かる表示が必要。ほかの ASP で提携済みなら提携不可。
 - **掲載ページの候補 (28 日の GSC 表示)**: `dual-income-household-ratio` 868 / `real-disposable-income` 593 / `engel-coefficient` 279 / `gini-coefficient-disposable-income` 115 / `annual-income-per-household` 24 / `consumption-expenditure-total` 10。職業別年収は転職の意図なので外した。
-- **次 (実行順)**: ① オーナーが掲載ページを決め、URL を上のフォームから提出する ② `check-approval` で承認を確かめる ③ `harvest --id` で広告コードを取り、案件プロファイル (`affiliate-offer-profiles-data.ts`、lane=decision・F4・allowedPageTypes=ranking) と広告 (`affiliate-ads-data.ts`、`targetRankingKeys` を提出したページだけに限定) を登録 ④ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページだけにバナーが出て、ほかのページに出ないことを確かめる。
+- **済 (2026-10-19 URL 提出)**: オーナー承認のうえ asp-scout が「【三井住友カード】広告掲載ページ（バナー広告のみ）報告フォーム」(対象プログラム 22-0511) に、サイト名「統計で見る都道府県」・上の候補 6 ページの URL・掲載方法の補足 (各ページ 1 枠・記事なし・PR 表記・SNS とリスティングは使わない) を入力して送信した。完了画面「応募完了しました」(`.local/playwright-a8-debug/smbc-form-complete.png`)。
+- **次 (実行順)**: ① (済) ② `check-approval` で承認を確かめる ③ `harvest --id` で広告コードを取り、案件プロファイル (`affiliate-offer-profiles-data.ts`、lane=decision・F4・allowedPageTypes=ranking) と広告 (`affiliate-ads-data.ts`、`targetRankingKeys` を提出したページだけに限定) を登録 ④ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページだけにバナーが出て、ほかのページに出ないことを確かめる。
 - **停止条件**: 提出していないページに出る設定 (`targetRankingKeys` なし) で登録しない。承認前にバナーを置かない。
 - **完了条件**: 提出したページの本番 HTML に広告が出て、それ以外のページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
 
