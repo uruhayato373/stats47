@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T02:37:38.349Z",
+  "updatedAt": "2026-10-19T04:47:18.484Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7778,6 +7778,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-19T02:37:38.349Z"
+    },
+    "DEPS-NEXT16-UPGRADE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T04:47:18.484Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm audit --omit=dev --audit-level=high",
+              "curl -A Googlebot https://stats47.jp/ /ranking/annual-sunshine-duration /areas/13000 /geo"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-19: npm audit --omit=dev --audit-level=high が exit 0 (脆弱性 0)。GHSA-4jqv-mc3x-m676 / GHSA-mcj8-r9mp-w47p の公式 advisory は修正版を 15.5.27 と 16.3.8 としており、stats47 は next 15.5.27 (root/apps/web とも)。advisory 側のデータ更新で 15 系にも修正版が示され、上げる作業は不要になった。本番の代表 4 URL は Googlebot UA で 200。10-18 の",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T04:47:18.484Z"
     }
   }
 }

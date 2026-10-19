@@ -264,6 +264,7 @@ updated: 2026-10-17
   残る対策は `CF-CPU-OCN-CLIENT-01` / `CF-CPU-RENDER-WEIGHT-01` / `CF-HTML-EDGE-TTL-01` / `CF-DEPLOY-CACHE-RESET-01`。
   AI クローラーの制限は実測 4% のため起票しない。
 
+- **2026-10-19 ② 確認**: 対策の本番反映 (10-17 01:15Z) 後の日次取得で `totalCpuTimeUs` は値が取れている (`cpuTimeError: null`、cloudflare-usage-daily run 39063203871 / 39159162517)。UTC 日別: 10-15 は 7,306 万 ms・requests 130,494・1 件あたり 560 ms・cpu_p50 31.6 ms / 10-16 は 4,344 万 ms・79,591・546 ms・15.8 ms / 10-17 は 4,293 万 ms・81,896・524 ms・1.2 ms (`data/cloudflare/snapshots/<日>.json`)。合計の低下はデプロイ前の 10-16 の requests 39% 減から始まっており、1 件あたりの平均 CPU はほぼ変わっていない。**③ (10-24) は合計ではなく、1 件あたりの CPU・cpu_p50・Observability の `_rsc` の割合を反映前と並べる** ([仮説] p50 の低下は軽い `_rsc` 要求が減った影響で、平均を押し上げている重い描画は残っている。10-24 に Traces で `_rsc` の件数と CPU の割合を取り、割合が 72% から下がっていなければ先読み以外の経路を疑う)。
 ### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ後に古い HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [進行中] [領域:サイト]
 
@@ -296,15 +297,6 @@ updated: 2026-10-17
 - **次**: CSS のハッシュが変わる次のデプロイで、reset step のログが新しいハッシュを確認してから全パージしたこと、route smoke の
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
-### [DEPS-NEXT16-UPGRADE-01] Next.js の high 脆弱性 (SSG/ISR のキャッシュ汚染) を解消する。修正は 16 系にしか無い
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=high] [起票:2026-10-10] [領域:管理]
-
-- **事象**: 2026-10-10 のリリース (PR #1119) 後も、本番依存の `npm audit --omit=dev` に high が 1 件残る。next `<=16.3.0-preview.10` の GHSA-4jqv-mc3x-m676 / GHSA-mcj8-r9mp-w47p (self-hosted の SSG・ISR ページのキャッシュ汚染。利用者をまたいだ内容の差し替えと継続的なサービス停止)。npm audit の提案は next 16.4.0 で、15 系 (現在 15.5.27) には修正版が無い。Security Scan は main への push と全 PR で赤のまま。
-- **[仮説] 該当性**: stats47 は OpenNext (`@opennextjs/cloudflare` ^1.20.2) で Workers に自前配信し、ISR キャッシュを R2 (`incremental-cache/`) に置くので、advisory の「self-hosted の SSG/ISR」に当たる可能性が高い。検証: 2 件の advisory の影響条件 (リクエストのどの値でキャッシュキーが汚れるか) を公式ページで読み、OpenNext のキャッシュ経路で再現条件が成り立つかを確かめる。成り立たないと確定できたら期限付きの例外として扱い、🟡 へ下げる。
-- **手順**: ①OpenNext の対応表で Next 16 に対応した版を確認する (未対応なら上流待ちとして日付を書く) ②作業ブランチで next 16.4 系・`eslint-config-next`・OpenNext を上げ、ルートの overrides も同じ版にする (overrides だけ古いと next が 2 つの版で入り、本番ビルドの /404 が落ちる。2026-10-10 の PR #1119 で実際に起きた) ③Next 16 の破壊的変更 (`next lint` の扱い・キャッシュ・params の非同期化など) を移行ガイドで確認して直す ④`npm run build --workspace=web`・`npm run type-check`・代表 URL の表示確認・`npm audit --omit=dev --audit-level=high` を通す ⑤デプロイ後に Googlebot UA で代表 URL が 200 を返すことを実測する。
-- **停止条件**: OpenNext が Next 16 に対応していない状態で上げない (本番が配信できなくなる)。見た目・ルーティングの差分が出た状態でデプロイしない。デプロイはオーナー確認後に 1 回だけ行う。
-- **完了条件**: `npm audit --omit=dev --audit-level=high` が exit 0 で、本番の代表 URL が 200。または該当しないと確定し、例外の理由と再評価日をこのカードに書いて 🟡 へ下げた。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す

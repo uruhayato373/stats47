@@ -165,15 +165,18 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   次の ② ③ ④ を行う。② 10-18 以降の日次取得の CI ログで「Workers CPU total」が値か取得不能かを確かめる。
   ③ 10-24（土）に、反映後 7 日 (10-17〜10-23) の日次 CPU (無ければ cpu_p50/p99 と requests) と Observability の `_rsc` の CPU 割合を、反映前と並べる。
   ④ 効果観測を `[kpi: operating-cost]` と根拠つきの `[target:]` を付けた別 ID で improvement-triage へ引き渡し、カードを閉じる。月次計画の W44 Must を前倒しする。
+  **途中経過 (2026-10-19)**: ②済み。CPU 合計は 3 日とも取得できている。合計の低下はデプロイ前の requests 減から始まっていたので、③は 1 件あたりの CPU と `_rsc` の割合で比べる (カードに記録)。
 - [ ] **A8 の案件別クリックの帰属根拠を得て、成果ゲートを再検証する** [S] — `A8-CROSSCHECK-EXCEED-01`（🔴 3 番目・管理領域・不具合）。
   stats47 と doboku-note の現在の配信広告定義と `programIdMap` を照合し、未写像 3 行と共用 3 案件の帰属根拠をカードに書く。
   推測で配賦しない。既存の許容差を広げない。`node .claude/scripts/ads/check-a8-outcome-gate.mjs` を再実行し、exceeded と shortfall が出なければカードを閉じる。
 - [ ] **KDP の月次売上が販売台帳へ自動で入ることを W42 の計測で確かめて閉じる** [S] — `KDP-LEDGER-AUTO-01`（管理領域・週次収益の商品実売の内訳）。
   10-23 の W42 計測のあと、`npm run products:sales --workspace=@stats47/product-factory -- validate` が PASS し、KPI ツリーの `paid-purchases` の KDP 分が判定不能でなくなっていればカードを閉じる。
   判定不能のままなら、どの段 (取得・record・KPI の読み込み) で止まったかをカードに書く。
-- [ ] **Next.js の high 脆弱性が OpenNext の配信に当たるかを確かめる** [S] — `DEPS-NEXT16-UPGRADE-01` ①（🔴 10 番目・不具合）。
+- [x] **Next.js の high 脆弱性が OpenNext の配信に当たるかを確かめる** [S] — `DEPS-NEXT16-UPGRADE-01` ①（🔴 10 番目・不具合）。
   W42 から持ち越し。advisory 2 件の影響条件と OpenNext の Next 16 対応状況を公式で確かめ、日付つきでカードに書く。
   当たらないと確定できれば例外の理由と再評価日を書いて 🟡 へ下げる。上げる作業 (② 以降) は今週はしない。
+  **結果 (2026-10-19)**: 公式 advisory 2 件の修正版は 15.5.27 と 16.3.8 で、stats47 は 15.5.27。`npm audit --omit=dev --audit-level=high` は exit 0、本番の代表 4 URL は 200。
+  advisory 側のデータ更新で 15 系にも修正版が示され、上げる作業は不要になった。台帳に記録してカードを削除した。
 
 ### Could（余力があれば、3件）
 
