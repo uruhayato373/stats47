@@ -2,21 +2,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { weeklyProductRevenue } from "../lib/product-revenue.mjs";
 import { productRevenueLine } from "../nsm-revenue-lines.mjs";
-import { parseCoconalaRevenue } from "../../measurement/report-parsers.mjs";
 
 /**
- * 商品の週次実売 (2026-09-30)。守りたいのは「累積の差分で週を出す」「欠測を ¥0 にしない」
- * 「累積が ¥0 なら基準点が無くても ¥0 と言い切る」の 3 点。
+ * 商品の週次実売 (2026-09-30)。守りたいのは「欠測を ¥0 にしない」「KDP の見積りを合計に入れない」
+ * 「note の月またぎを締め額で継ぐ」の 3 点。ココナラは 2026-10-19 の撤退で集計から外した。
  */
 const WEEK = { weekStart: "2026-09-21", weekEnd: "2026-09-27" };
 const kdpDays = (royaltyYen, paidOrders = 0, n = 7) =>
   Array.from({ length: n }, (_, i) => ({ channel: "kdp", date: `2026-09-${21 + i}`, royaltyYen, paidOrders }));
 const history = (...entries) => ({ schemaVersion: 1, entries: entries.flat() });
 
-test("ココナラは累積の差分、KDP は 7 日分の見積りを表示するが合計には入れない", () => {
+test("KDP は 7 日分の見積りを表示するが合計には入れず、ココナラは集計しない", () => {
   const week = weeklyProductRevenue({
     revenueHistory: history(
-      { channel: "coconala", date: "2026-09-20", cumulativeYen: 1000 },
       { channel: "coconala", date: "2026-09-27", cumulativeYen: 3500 },
       kdpDays(100, 1),
       { channel: "note", date: "2026-09-20", month: "2026-09", monthToDateYen: 500, closedMonths: {} },
@@ -25,30 +23,28 @@ test("ココナラは累積の差分、KDP は 7 日分の見積りを表示す�
     ...WEEK,
   });
   assert.equal(week.status, "ok");
-  assert.equal(week.channels.coconala.yen, 2500);
+  assert.equal(week.channels.coconala, undefined);
   assert.equal(week.channels.kdp.yen, 700);
   assert.equal(week.channels.note.yen, 300);
   // KDP の見積り ¥700 は確定ロイヤリティではないので合計に入れない。注文数は件数に入れる
-  assert.equal(week.yen, 2500 + 300);
+  assert.equal(week.yen, 300);
   assert.equal(week.channels.kdp.estimate, true);
 });
 
-test("KDP の日別が欠けた週・基準点の無い正の累積は判定不能にし、¥0 にしない", () => {
+test("KDP の日別が欠けた週・観測の無い note は判定不能にし、¥0 にしない", () => {
   const week = weeklyProductRevenue({
-    revenueHistory: history({ channel: "coconala", date: "2026-09-25", cumulativeYen: 3000 }, kdpDays(0, 0, 6)),
+    revenueHistory: history(kdpDays(0, 0, 6)),
     ...WEEK,
   });
   assert.equal(week.status, "unmeasurable");
   assert.equal(week.yen, null);
   assert.match(week.channels.kdp.note, /6\/7/);
-  assert.match(week.channels.coconala.note, /基準点/);
   assert.match(week.channels.note.note, /観測が無い/);
 });
 
-test("累積 ¥0 の観測は基準点が無くても今週 ¥0 と確定する", () => {
+test("全チャネルの観測がそろった ¥0 の週は ¥0 と確定する", () => {
   const week = weeklyProductRevenue({
     revenueHistory: history(
-      { channel: "coconala", date: "2026-09-26", cumulativeYen: 0 },
       { channel: "note", date: "2026-09-20", month: "2026-09", monthToDateYen: 0, closedMonths: {} },
       { channel: "note", date: "2026-09-26", month: "2026-09", monthToDateYen: 0, closedMonths: {} },
       kdpDays(0),
@@ -74,15 +70,10 @@ test("note は月をまたぐ週を前月の締め額で継ぎ、締め額が無
 test("台帳に今週の記録が無いとき、NSM の商品行は日次履歴の内訳を出す", () => {
   const line = productRevenueLine({
     ledger: { observations: [] }, liveProductCount: 3, ...WEEK,
-    revenueHistory: history({ channel: "coconala", date: "2026-09-26", cumulativeYen: 0 }, kdpDays(0, 0, 3)),
+    revenueHistory: history(kdpDays(0, 0, 3)),
   });
-  assert.match(line, /判定不能.*ココナラ ¥0.*KDP 判定不能（日別の観測 3\/7 日）/);
-});
-
-test("ココナラ売上管理はサービス欄の今月・累積だけを読み、画面が変わったら止める", () => {
-  const text = "売上金残高合計\n9,999 円\n売上実績\nサービス\n今月の売上\n1,200 円\n累積売上\n34,560 円\nブログ\n累積売上\n777 円\n売上履歴";
-  assert.deepEqual(parseCoconalaRevenue(text), { schemaVersion: 1, scope: "service-net-revenue", monthToDateYen: 1200, cumulativeYen: 34560 });
-  assert.throws(() => parseCoconalaRevenue("売上実績\nサービス\n売上履歴"), /report_schema_changed/);
+  assert.match(line, /判定不能.*KDP 判定不能（日別の観測 3\/7 日）/);
+  assert.doesNotMatch(line, /ココナラ/);
 });
 
 test("note の売上 API は今月と締め済み月だけを読み、再確認切れは値を作らず止める", async () => {

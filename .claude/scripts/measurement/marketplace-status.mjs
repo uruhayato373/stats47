@@ -1,11 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { measurementContext, markMeasurementAuthenticated } from './browser-session.mjs';
-import { parseCoconalaAnalytics, parseCoconalaRevenue, validateCoconalaCoverage } from './report-parsers.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
-import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
 import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
-import { COCONALA_LISTINGS, KDP_LISTINGS } from '../../../config/paths.mjs';
+import { KDP_LISTINGS } from '../../../config/paths.mjs';
 
 const source = process.argv[2];
 const output = process.argv[3];
@@ -39,32 +37,6 @@ try {
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
     markMeasurementAuthenticated(source);
-  } else if (source === 'coconala') {
-    const account = await assertCoconala(page);
-    if (/login|auth/.test(page.url())) throw new Error('auth_required');
-    if (!account.ok) throw new Error('account_mismatch');
-    markMeasurementAuthenticated(source);
-    await page.goto('https://coconala.com/mypage/analytics', { waitUntil: 'domcontentloaded', timeout: 45000 });
-    if (/login|auth/.test(page.url())) throw new Error('auth_required');
-    await page.getByText('全出品サービス累計', { exact: true }).waitFor({ timeout: 30000 });
-    analytics = parseCoconalaAnalytics(await page.locator('body').innerText());
-    const { listings } = JSON.parse(readFileSync(COCONALA_LISTINGS, 'utf8'));
-    for (const [id, entry] of Object.entries(listings)) {
-      if (entry.status !== 'listed') continue;
-      const serviceId = /^https:\/\/coconala\.com\/services\/(\d+)$/.exec(entry.serviceUrl)?.[1];
-      if (!serviceId) throw new Error('account_mismatch');
-      const sourceUrl = `https://coconala.com/mypage/analytics/${serviceId}`;
-      await page.goto(sourceUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
-      if (/login|auth/.test(page.url())) throw new Error('auth_required');
-      if (new URL(page.url()).pathname !== `/mypage/analytics/${serviceId}`) throw new Error('account_mismatch');
-      await page.getByText('サービスのパフォーマンス', { exact: true }).waitFor({ timeout: 30000 });
-      records.push({ id, serviceId, sourceUrl, ...parseCoconalaAnalytics(await page.locator('body').innerText(), { service: true }) });
-    }
-    coverage = validateCoconalaCoverage(analytics, records);
-    await page.goto('https://coconala.com/mypage/revenue', { waitUntil: 'domcontentloaded', timeout: 45000 });
-    if (/login|auth/.test(page.url())) throw new Error('auth_required');
-    await page.getByText('売上実績', { exact: true }).waitFor({ timeout: 30000 });
-    revenue = { ...parseCoconalaRevenue(await page.locator('body').innerText()), observedDate: new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }) };
   } else throw new Error('unknown_source');
   writeFileSync(output, JSON.stringify({ generatedAt: new Date().toISOString(), source, accountVerified: true, records,
     analytics, coverage, monthlyRoyalties, revenue, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));

@@ -8,7 +8,6 @@ export const SOURCES = {
   kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-daily-and-monthly-royalties' },
   // 楽天アフィリエイト (2026-10-01): 管理画面の JSON API を読む。SSO は login.account.rakuten.com のため rakuten.com も含める
   rakuten: { domains: ['rakuten.co.jp', 'rakuten.com'], profile: 'playwright-rakuten-profile', state: 'playwright-rakuten-state.json', secret: 'MEASUREMENT_SESSION_RAKUTEN', capability: 'monthly-outcomes' },
-  coconala: { domains: ['coconala.com'], profile: 'playwright-coconala-profile', secret: 'MEASUREMENT_SESSION_COCONALA', capability: 'marketplace-metrics' },
 };
 
 export function sourceFor(name) {

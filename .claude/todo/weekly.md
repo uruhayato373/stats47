@@ -210,7 +210,8 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 
 - **`DATA-QUALITY-LOOP-01`**: Must 1 が出す R2 反映の承認依頼 (W41 の 2 指標とレシピ未焼き込み分をまとめて 1 回) を承認してほしい。
 - **`NAV-CLICK-COVERAGE-01`**: Must 3 の後に出す本番デプロイ (P1・P2 をまとめて 1 回) を承認してほしい。
-- **`AUTH-CREDENTIAL-REGISTER-01`**: Windows のココナラ資格情報の登録 (`cmdkey /generic:stats47-measurement-coconala ...`、コマンドは `/ops/auth` に出る)。
+- ~~**`AUTH-CREDENTIAL-REGISTER-01`**: Windows のココナラ資格情報の登録~~ — 2026-10-19 のココナラ撤退で不要 (取得対象から外した)。
+- **`NOTE-PACKS-REPLACE-COCONALA-01`** (2026-10-19 追加): Windows PC で 13 パックの Office 実機確認と、有料 note 版の記事ごとの確認 (価格・境界・添付)。
 - **`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`**: 今週の作業は無い。別日の main schedule で 2 回続けて全取得元が pass になるかを観測する。KDP が `auth_required` に戻ったら本人の Reports 再認証が要る。
 - **`PERF-WORKER-P99-01`**: 10-16 に Observability の Traces で route 別の CPU を見て、`_rsc` が約 72% と出た (`CF-CPU-SURGE-01`)。これを特定結果としてカードを閉じてよいか決めてほしい。
 - **`R2-STORAGE-01`**: doboku-note-archive の保持方針 (許容か削減か) を決めてほしい。R2 保存は 34.152 GB で無料枠 10 GB の超過が続いている。

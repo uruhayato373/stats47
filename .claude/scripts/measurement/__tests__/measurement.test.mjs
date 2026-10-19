@@ -11,7 +11,6 @@ import { SOURCES, scopedState, sourceFor, failureCode, selectSessionBundle } fro
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
-import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
 import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 import ExcelJS from 'exceljs';
 import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
@@ -58,11 +57,10 @@ test('native Google session export preserves the OS keychain and original profil
   assert.match(code, /cpSync\(profile, temporaryProfile/);
   assert.match(code, /launchPersistentContext\(temporaryProfile \?\? profile/);
   assert.match(code, /ignoreDefaultArgs: \['--password-store=basic', '--use-mock-keychain'\]/);
-  // 普通の Chrome で入る対象: Google と、自動操作を拒否するココナラ (2026-10-02)。どちらも Playwright での --login を拒む
-  assert.match(code, /const NATIVE_PROFILE_SOURCES = new Set\(\['gsc', 'coconala'\]\);/);
+  // 普通の Chrome で入る対象: Google。Playwright での --login を拒む (ココナラは 2026-10-19 に撤退し取得対象から外した)
+  assert.match(code, /const NATIVE_PROFILE_SOURCES = new Set\(\['gsc'\]\);/);
   assert.match(code, /const nativeProfile = NATIVE_PROFILE_SOURCES\.has\(sourceName\);/);
   assert.match(code, /google_login_requires_native_chrome/);
-  assert.match(code, /coconala_login_requires_native_chrome/);
   assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
   assert.match(code, /reports_requires_kdp_login/);
 });
@@ -241,25 +239,6 @@ test('independent health detects stalled schedules even when the last run passed
   state.sources[0].observedAt='2026-09-10T00:00:00Z';
   assert.equal(measurementHealth(state,now).status,'action_required');
   assert.equal(measurementHealth(null,now).status,'action_required');
-});
-
-test('coconala distinguishes observed zero sales from paywalled display counts', () => {
-  const text = '全出品サービス累計\n対象期間：2026/08/22 - 2026/09/20\n過去30日間\n表示数\n0000 回\n閲覧数\n142 回\n販売数\n0 件\n販売額\n0 円\nお気に入り数\n0 回\nセラーサクセスに加入して、表示数を確認しましょう。\n閲覧数・販売数推移\n閲覧数\n999 回';
-  const value = parseCoconalaAnalytics(text);
-  assert.deepEqual(value.period,{start:'2026-08-22',end:'2026-09-20'});
-  assert.equal(value.views,142);
-  assert.equal(value.orders,0);
-  assert.equal(value.grossSalesJpy,0);
-  assert.equal(value.impressions,null);
-  assert.throws(()=>parseCoconalaAnalytics(text.replace('販売額','新しい列')),/report_schema_changed/);
-  assert.throws(()=>parseCoconalaAnalytics('ログイン'),/report_schema_changed/);
-  const serviceText = text.replace('全出品サービス累計','サービスのパフォーマンス').replace('販売額\n0 円\n','');
-  const service = {...parseCoconalaAnalytics(serviceText,{service:true}),serviceId:'123'};
-  assert.equal(service.grossSalesJpy,null);
-  assert.deepEqual(validateCoconalaCoverage(value,[service]),{complete:true,serviceCount:1,totalsMatched:true});
-  assert.throws(()=>validateCoconalaCoverage(value,[{...service,views:141}]),/collection_incomplete/);
-  assert.throws(()=>validateCoconalaCoverage(value,[service,service]),/collection_incomplete/);
-  assert.throws(()=>validateCoconalaCoverage(value,[{...service,period:{start:'2026-09-20',end:'2026-09-20'}}]),/collection_incomplete/);
 });
 
 test('missing jobs remain failed and activated consumers never silently fall back after failure', () => {

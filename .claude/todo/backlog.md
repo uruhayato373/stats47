@@ -83,6 +83,7 @@ updated: 2026-10-19
   1. **Windows のココナラ**: `cmdkey /generic:stats47-measurement-coconala /user:stats47jp@gmail.com /pass` (コマンドは Windows の `/ops/auth` にも出る)
   2. **パスワード経路の実証 (セッションが切れたとき)**: 2026-10-01 に A8・もしも・楽天の有効セッションを Mac から CI へ渡した (Secrets 更新済み)。楽天は送信を Enter に、送信後の着地がログイン済みでなければ checkUrl を開き直して判定するよう直した (ログインできているのに login_failed と判定された)。ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザは見えない reCAPTCHA に「認証できませんでした」で拒否され、普通の Chrome では同じ ID/PW で入れた。セッション切れは普通の Chrome で専用プロファイルにログインし `bootstrap-session.mjs coconala --from-profile --publish`)。A8・もしも・楽天のパスワードでの自動ログインは未実証で、セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は `.local/authenticated-measurement/kdp.autologin-failed` で停止中で、本棚は有効だが Reports 認証で止まる。CI の入り直しが本棚しか見ず `session_valid` を返し、2026-09-30 の拒否世代の停止が解けなかった。**2026-10-06**: CI の入り直しを本棚が有効でも Reports まで開き、求められたら Secrets で 1 回だけ入り直す形にし、結果コードを `latest.json` の `relogin` に残す (`refresh-session.mjs` の `ciRelogin`・`summarize.mjs`)。次回の CI で kdp の `relogin` が `relogged` なら収集再開、`human_required` / `login_failed` なら Reports の CI 入り直しは不可と判定して人の再認証か Mac 側収集を検討する
 - **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **2026-10-19 ココナラ撤退**: ココナラは認証付き計測の対象から外し (`sources.mjs`・CI の取得対象・`.claude/config/auth-credentials.json`)、Windows のココナラ資格情報の登録 (上の 1.) は不要になった。GitHub Secrets の `MEASUREMENT_SESSION_COCONALA` と Mac のキーチェーンの `stats47-measurement-coconala` は残っているので、消すかはオーナーが決める。
 
 ### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの日次継続運用を実証する
 
@@ -126,6 +127,7 @@ updated: 2026-10-19
 - **時間予算の修正**: attempt3は認証成功後のtimeout。計測限定で、正しい本棚の可視draft行を再利用して22冊の重複再読み込みを減らす。未発見の探索・全件照合・出版時のfresh navigationは維持。48テストpass、実CIで確認する。
 
 - **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
+- **2026-10-19 ココナラ撤退**: ココナラを取得対象から外した (取得元 8 → 7、計測の鮮度の母数も 1 減る)。ココナラの日次の判定はこのカードの対象外。過去の観測は `data/authenticated/revenue-history.json` に残る。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -279,6 +281,20 @@ updated: 2026-10-19
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [NOTE-PACKS-REPLACE-COCONALA-01] ココナラ撤退の後始末: データパックの有料 note 版 13 本を公開し、サイトの商品ページの行き先を note へ付け替える
+タグ: [収益化] [種類:制作] [実行:windows] [起票:2026-10-19] [領域:商品]
+
+- **経緯 (2026-10-19 オーナー判断)**: ココナラから撤退し、データ販売は note に集約する。同日、ココナラの 14 件を受付休止にした (ココナラに非公開の操作は無い。公開ページで「受付休止中」・「購入画面に進む」0 件を確認)。計測と週次収益の集計からもココナラを外した。ただし note でデータパックを買える状態にはまだない (有料の note 版 13 本は下書き。公開済みは無料の体験版 1 本だけ)。
+- **なぜサイト側をまだ変えないか**: 出品台帳 (`config/coconala-listings.json`) を `withdrawn` にすると、`generate-product-storefront.ts` が商品ハブからココナラ商品を外し、`/products/data-p-XX` が無くなる。公開済みの note 記事のカードの多くがこのページへリンクしている (`data/note/card-visibility-latest.json` 等) ので、note 版の公開前に変えるとリンクが切れる。それまでは商品ページはココナラ (受付休止中) を指したままにする。
+- **次 (実行順)**:
+  1. **Windows PC** (販売中の納品版 `.local/coconala-products/P-XX/v2-20260906-r1/` があり、出品記録とハッシュが一致する PC。Mac で作り直すとハッシュ一致は 18 → 5 件に落ちる) で、13 パックを Windows / Mac の Office 365 で開き、表示・県図形の編集・チャートの編集・再計算を確認して記録する (旧 `COCONALA-PROFILE-OWNER-01` から移した作業)。
+  2. `npm run products:note:validate` と、`note/cli.ts revision --revision <新版> --all` で販売準備の版を作り、記事ごとに価格・無料と有料の境界・添付をオーナーが確認する (規約 `.claude/rules/coconala-product-standards.md` の公開ゲート。一括公開しない)。
+  3. 有料の note 版を公開する。添付の upload は 1 日 10 回までなので、2 日に分ける。
+  4. 公開した note の URL を、商品ハブの行き先にする。`generate-product-storefront.ts` にデータパックの note 版の経路を足し、`/products/data-p-XX` と、ブログ・ランキングのデータ集の案内 (`storefront.ts`) が note を指すようにする。そのうえで出品台帳を `withdrawn` にし、`storefront.test.ts` を直してデプロイする。
+- **禁止**: note 版の公開前に出品台帳を `withdrawn` にしない (サイトの商品ページが消え、note 記事のリンクが切れる)。下書きのまま販売準備完了と扱わない。
+- **完了条件**: 有料の note 版 13 本が公開され、本番の `/products/data-p-01`〜`data-p-14` が note の記事へ案内し、`config/coconala-listings.json` の 14 件が `withdrawn`。
+
 
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト]
@@ -893,6 +909,7 @@ updated: 2026-10-19
 - **SOURCES.csv の残り (2026-10-12 再レビュー)**: 職種別平均年収 (`0003445758`) の行の調査名欄に指標名が入り、URL が社会・人口統計体系の案内ページを指す (P-09 ほか)。調査名欄に指標名が入る行は P-01「腎不全による死亡者数」・P-05「患者調査 第37表…」など多数。P-07「家賃差引の参考額（月額）」は 2 表を組み合わせた値なのに加工式が「R2 から抽出」だけ (§3 の加工式要件を満たさない)。P-04・P-11 の LICENSE は地方公務員給与実態調査の URL を 1 件しか載せない。
 - **次**: 目的文を実データに合わせて直すか指標を足す (packs.ts)、見本画像の題名を折り返す (生成器)、listing.md とライセンスの記載を揃える。ココナラの出品文 (`config/coconala-listings.json`) にも同じ記載があれば同時に直す (outward はオーナー承認)。
 - **完了条件**: 14 パックの目的文・listing・LICENSE・見本画像が実物と一致し、note 販売記事の「収録外」の断り書きが不要になる。
+- **2026-10-19 ココナラ撤退**: ココナラの出品文は直さなくてよい (14 件とも受付休止)。目的文・見本画像の食い違いは、note 版を公開する前に直す (`NOTE-PACKS-REPLACE-COCONALA-01`)。
 
 ### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:管理]
@@ -2369,7 +2386,7 @@ updated: 2026-10-19
 - **再開点（2026-09-06）**: 現行候補は`CURRENT_SALES_REVISIONS`で固定。最終EPUB検査は`kindle-v3-20260906-r4-verification.json`で実本文全章SHAを保持。S2-01だけは当該版の独立review.jsonがあり、他巻へ流用しない。最初の公開前に、固定bytes送信・旧draft再投入・公開直前再照合を認証済み下書きで実測する（コード/モック検査のみでは実UI動作を合格にしない）。新規公開は実機・権利/申告・保全・オーナー承認がそろってから。
 - **次（実行順）**: ①Kindle改訂版を全章で独立意味レビューする。書き下ろしだけでなくブログ/ランキング由来の本文・図を含め、未根拠因果・対象年/地域/分母の違いを是正し、内部比率を再計測する。②確定版のEPUB検査・Previewer・全章SHAに結び付いたreview.json・入稿bundle照合後、明示版指定のarchiveで旧版を保持して暗号化保全する。③note14パックの準備原稿に固有の使い方・図例を追加し、独立レビュー・価格/添付/利用条件確認へ進める。無料P13を含めた固定入力はfree-sample-delivery.jsonと納品manifestで照合する。未制作Geo11企画は原典・再現テスト・読者成果を満たすものから制作する。④商品別の残ゲートが解消してから、承認された対象だけを専用公開フローへ渡す。入稿提案JSONを公開済み記録と扱わない。
 - **Kindle再接地の具体対象**: S1-01のブログ9章は全章の再編集が必要。`per-capita-income-gap`の本文と図の採用年・数値不一致、`heating-cost-vs-disposable-income`の名目支出/実質所得・世帯範囲の不一致、`communication-cost-burden`の交通通信費/通信費混同、`expenditure-structure-comparison`の性質別/目的別混在と因果主張、`black-tea-income-gap`の購入量/飲用量・相関/説明割合混同を残さない。S1-02も食品の支出・購入数量と調査対象都市を元記事の本文・図まで照合する。`editorial-corrections.ts`の部分校訂だけで当該章全体を合格にしない。他冊にも同種の旧断定があるため全章レビューを省略しない。
-- **関連の別owner工程**: Office・本人確認は `COCONALA-PROFILE-OWNER-01`、歴史2指標は 2026-09-24 に原典 (社会生活統計指標2023 表7) と 47 県すべて一致を確認済み (`coconala-packs-2026-09-06.json` の `officialDefinitions.historicalSourceReconciliation`。`historicalNotReverified` の解除と納品 SOURCES の注記更新は商品担当の判断で未実施)。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
+- **関連の別owner工程**: Office の実機確認は `NOTE-PACKS-REPLACE-COCONALA-01` (ココナラの本人確認は 2026-10-19 の撤退で不要)、歴史2指標は 2026-09-24 に原典 (社会生活統計指標2023 表7) と 47 県すべて一致を確認済み (`coconala-packs-2026-09-06.json` の `officialDefinitions.historicalSourceReconciliation`。`historicalNotReverified` の解除と納品 SOURCES の注記更新は商品担当の判断で未実施)。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
 - **再利用本文の追加是正対象**: S1-03高齢単身の分母・通勤流入と移住、04介護必要数と不足数・化学工業と医薬品・相談窓口の時間、05大学収容力と入学定員・保育利用率と希望充足率、06財政指標の控除/平均期間・目的別と性質別、07宿泊施設範囲/人泊と人数・国籍から嗜好の断定、08供給契約と世帯普及率、09産業出荷/利益/用水効率、10火災地震合算/強度率の労働時間分母、11行動者率/稼働率、12有業者/雇用者を元ブログ・図まで直す。fresh訂正だけでは完了しない。
 - **販売中v1の機械監査 (2026-09-19・全32冊EPUB展開)**: 販売中22冊はarchive `v1` (2026-08-30) と一致し、ランキング章はサイトAI解説の転載のまま。S2/S3/S4のランキング章481件のうち177件 (37%・71指標) が他冊にも載る同一指標で、60字以上の同一段落が2冊以上に532件ある (S3-01↔S4-01で21段落)。S2-01「人口・世帯」に高血圧性疾患/肝疾患/し尿処理/水洗化が入り、S3-01「北海道」の章は祭具・墓石/マフラー/うなぎ等 (地域の極端順位で機械選定)。S1のブログ章に「この記事/本記事」が11〜38件/冊残る。合計特殊出生率に単位「（人）」、同一章で「2023年」と「2023年度」が混在 (S2/S3で9〜19章/冊)。S3-01は「北海道の内訳を見ると、北海道が全国47位」型の定型文が24章。現行コードで再生成した v3 は解説を外して全県表になるが、31章すべてに同じ免責文が付き主題外キー・重複指標 (昼夜間人口比率×2) は残る。監査スクリプトは `verify-epub.mts` に (a)冊間の指標/段落重複 (b)ブログ残語 (c)年/年度混在 (d)率系の単位 の決定的ゲートとして移す。
 - **S1-01 の是正 (2026-09-19 実施)**: v3-20260919-r1 を blog-critic (opus) が全 15 章で独立レビュー → REVISE (BLOCK 8 / MAJOR 19 / MINOR 13。大半が本文と図の年次不一致・名目/実質・世帯範囲・相関→因果)。40 件 + 追加 6 件 (2014 年の別指標図の除外・要約図の見出し誤りの除外・重複節の置換・年度→年) を `editorial-corrections.ts` (ブログ由来章・書籍版のみ) と `manuscripts/K-S1-01/` (書き下ろし) に反映し、`v3-20260919-r3` を生成 (15 章・図 35・書き下ろし 32.7%・verify-epub 3 層 error 0 / warn 0)。findings の記録は `.local/kindle-books/K-S1-01/v3-20260919-r3/review-r1-findings.md`、delta 再審査は同 dir の `review.md`。**同じ誤りは公開ブログ 9 本 (real-disposable-income-reversal / heating-cost-vs-disposable-income / per-capita-income-gap / savings-balance-gap / engel-coefficient-prefecture-ranking / household-spending-prefecture-gap / communication-cost-burden / expenditure-structure-comparison / black-tea-income-gap) に残っている** → blog remediation (`/blog-revise-fix`) で review-r1-findings.md の before/after を must-fix として直す (図の再生成: savings-ranking を 2019 年 financial-assets-balance に、income-summary-findings の heading「約200万円」→「約20万円」)。残り: R2 暗号化保全 (鍵のある環境でオーナー) → `kdp-publish --update` (書名変更 + 本文差替) → オーナー承認で `--commit`。
@@ -2397,17 +2414,6 @@ updated: 2026-10-19
 - **次 (差し替え手順・kindle-publisher が実行)**: ①1冊だけ生成して目視承認 ②`ingest-cover-background.mts --book K-S1-NN --input <png> --pop-band`でR2 staging ③完成PNG/JPEGとmanifestを同revisionへ置き、exact keyをR2 push ④`cover-design.ts`へkey/SHA/byte/寸法を登録 ⑤`products:kindle:generate -- --id K-S1-NN --version <次の版>` ⑥章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を確認 ⑦入稿提案を最新版へ更新。
 - **禁止**: 画像に文字・数字を焼き込まない (書名・著者は satori が実テキストで重ねる)。生成 AI の描く日本列島を使わない (2026-08-12 の指摘)。差し替え版は必ず新しい version で作り、既存版を上書きしない。KDP への表紙アップロードは `kdp-publish --update` の工程で行い、ここでは触らない。
 - **完了条件**: 12 冊ぶんの帯絵がオーナー選定の絵に置き換わり、各冊の最終版が本文差分 0・`verify-publishable --content-only` blocker 0 で、入稿提案が最新版を指している。差し替えない冊は現行の帯絵のままでよい (その旨をこのカードから消して閉じる)。
-
-### [COCONALA-PROFILE-OWNER-01] 本人手続き・実経験年数と13パックのOffice実機確認
-
-タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-09-06] [期日:2026-09-13] [領域:商品]
-
-- **status**: pending（期日は次回確認期限）
-- **owner**: オーナー
-- **次**: ココナラ本人確認を本人が実施し、NDAは内容を確認して本人が同意する。HTML・TypeScript・Next.js・Node.jsの実際の経験年数を確認できた場合のみ技術欄へ登録する。既存13パックの修正版はWindows/Mac Office 365で表示・県図形編集・チャート編集・Excel順位再計算を実機確認する。未確認の資格・職歴年月・稼働時間は増やさない。
-- **完了条件**: 本人確認・NDAの公開ステータスと、本人が申告した年数の一致を確認する。修正版13パックのOffice実機検証結果（OS・バージョン・表示・編集・再計算）を記録する。実施しない項目は本人の判断を記録し、未確認表示を維持する。
-- **停止条件**: 2FA・本人確認書類・規約同意はエージェントが代行しない。経験年数・資格は推測しない。Windows/MacのOffice環境が不足する場合は未検証表示を維持する。インボイス登録を売上改善のために自動実施しない。
-- **整備済み範囲の証跡**: `data/products/coconala-profile-2026-09-06.json`。プロフィール文面・画像・見本の公開更新を再実行しない。
 
 ### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 
@@ -3426,25 +3432,6 @@ updated: 2026-10-19
 - **再開材料**: 端末内 .local/resource-health/ の計測・掃除・GIS復元台帳、既存 source-inventory/japan-zue/2025-26/source-bundle-manifest.json。Driveの日本国勢図会/2025・2026年版にmanifestと6分割ファイルの存在・非共有・容量を確認し、ローカル1746ファイルのhash一致と全profileのcoverage 100%は検証済み。Drive connectorのバイナリ返却先はsediment URIで、このWindows端末への復元経路は未確立。
 - **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
-
-### [COCONALA-MEASUREMENT-CONTRACT-01] 14商品の公開後計測を整え改善台帳へ引き渡す
-
-タグ: [インフラ・計測] [種類:改善] [実行:別環境] [起票:2026-09-06] [期日:2026-09-13] [領域:商品]
-
-- **status**: pending（期日は計測契約整備の次回確認期限）
-- **owner**: coconala-operator（取得可否確認）／improvement-triage（効果観測の排他writer）
-- **次**: 既存13定型商品＋Geo1商品の公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。本人照合・商品別閲覧/販売件数/お気に入りと全体販売額の収集入口は`measurement/marketplace-status.mjs`、日次証拠はprivate R2。問い合わせ数・商品別販売額は未取得であり、画面に無い指標を推測しない。
-- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・実験開始は行わない。読み取りの定期収集は2026-09-21の自動化依頼の範囲。
-- **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
-
-### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
-タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-06] [領域:商品]
-
-- **owner**: オーナー（販売条件・承認）/ coconala-product-manager（再生成）/ coconala-operator（承認後の出品）
-- **対象**: `packages/product-factory/src/channels/geo/service-offer.ts`。生成・見本・検証状態は `data/products/geo-service-readiness-2026-09-06.json` を参照する。
-- **次**: 外部公開と匿名閲覧の検証結果は上記stateのpublicationを参照。出品の再実行は不要。商品生成コード・本人照合修正・出品台帳・`data/products/coconala-packs-2026-09-06.json`を含むcommitのdevelop反映をGitで照合し、ledger gateでカードを閉じる。Office実機確認・本人手続きはCOCONALA-PROFILE-OWNER-01へ分離済み。
-- **停止条件**: 価格・公開未承認、公開manifestと不一致、空間結合・保存則FAILでは出品しない。需要未確認の公開はオーナーの明示指示を記録し、購入実績があるとは扱わない。note自動取得403を非公開・閲覧ゼロと誤判定しない。任意商圏・住所検索・鑑定・安全保証へ範囲を拡大しない。
-- **完了条件**: 承認記録、納品ZIPのSHA、サービスURL・販売条件・実際の納品物の一致を確認するか、オーナーが出品見送りを決定する。カード削除はbacklog-loopのledger gate経由。
 
 ### [AFF-A8-NOTE-PILOT-01] A8 の note 用広告リンクを意図一致の無料 note 1 本で試し、stats47 分として計測できるか確かめる
 
@@ -4725,21 +4712,6 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **経緯**: 業務で使う人向けに Excel (xlsx) を足す案。作る前に、`PRODUCT-FUNNEL-DEPLOY-01` の「業務の資料」向けデータ集案内のクリックで需要を見る。
 - **判断材料**: 4 週の `csv_download_purpose=work` の件数と、`ranking_product` のクリック。ダウンロードは 28 日 414 回、用途の回答で仕事は 19 件 (2026-W41)。
 - **完了条件**: 足すか見送るかをオーナーが決めた。
-
-### [COCONALA-PERSONA-COPY-01] ココナラ 3 件 (P-04・P-14・P-12) の文面をペルソナの仕事に合わせて書き直すか、凍結を解くか決める
-タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-17] [領域:商品]
-
-- **経緯**: 2026-10-17 のペルソナ整理 (AI シミュレーション + Web 検索。実際の聞き取りではない) で、ココナラ 3 件のキャッチコピーと用途の段落を、自治体の答弁・企業の商品企画・計画策定の受託者の言葉へ書き直す案を作った。同日、オーナー判断で**ココナラの展開を凍結**し、出品台帳 `config/coconala-listings.json` は公開中の文面のまま戻した。ココナラには何も反映していない。
-- **反映の障害 (再開時に要対処)**: `coconala-edit.mjs --commit` は販売中の納品版 `.local/coconala-products/P-XX/v2-20260906-r1/` のハッシュを照合する。この版は生成した PC にしか無く、Mac で v1 から作り直すとハッシュが一致しない (zip の生成時刻)。再開するなら、v2 がある PC で実行するか、照合を外す例外をオーナーが決める。
-- **再開条件**: サイトの商品導線 (ブログ 10 記事の `BlogProductCta`、2026-10-17 実装) を本番に出してから 4 週の `blog_product` クリックで、データ集への関心が見えたとき。
-- **書き換え案** (本文は既存の「【用途・収録内容】\n企画・概況説明・比較資料づくりの基礎データに。\n」を下の段落 + 「\n\n【収録内容】\n」に置き換える。本文の上限は 1000 字で、案は 847〜944 字):
-  - P-04 キャッチコピー: 「議会答弁・類似団体比較に使える県別財政110指標」
-    用途: 【こんな作業に】 / ・議会答弁や予算説明で「全国で何位か」「似た規模の県と比べてどうか」を示す表・グラフづくり / ・財政状況の公表資料や財政計画の現状分析で、複数の財政指標を1つのExcelにそろえる作業 / ・自治体の計画策定を受託するコンサルタントの基礎調査 / 指標ごとに公表資料を探し、県コード・単位をそろえる手間を省けます。収録は都道府県単位で、市区町村の類似団体比較カードの代わりにはなりません。
-  - P-14 キャッチコピー: 「商品企画・エリア提案に使う県庁所在市の消費685指標」
-    用途: 【こんな作業に】 / ・食品・日用品の商品企画やエリア別の販売施策で、品目ごとの地域差を示す資料づくり / ・営業提案書で「この地域は〇〇の支出が多い」を出典つきで示す作業 / 家計調査の品目別の結果を品目ごとに集め、47地域を1つの表にそろえる手間を省けます。値は県庁所在市（東京都は区部）の二人以上世帯で、県全体の消費ではありません。資料では「県庁所在市の値」と注記してください。
-  - P-12 キャッチコピー: 「計画策定の基礎調査に使える47都道府県2076指標」
-    用途: 【こんな作業に】 / ・総合計画や分野別計画の基礎調査で、人口・産業・財政・医療などを全国や近隣の県と比べる比較表づくり / ・計画策定を受託するコンサルタント・シンクタンクの現状分析 / 分野ごとに調査を探し、県コード・単位をそろえる作業を1つのExcelから始められます。収録は都道府県単位です。市区町村の比較が必要な案件には向きません。
-- **完了条件**: 書き直して反映する (read-back で一致を確認) か、案を捨てるかをオーナーが決めた。
 
 ### [KDP-ROYALTY-RATE-CHECK-01] KDP の印税率が 35% になっている原因を確かめ、70% の条件を満たせるかを判断する
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-17] [領域:商品]

@@ -14,7 +14,6 @@ export function consumerPath(name, path) {
     const match = /^\.local\/authenticated-measurement\/note-\d+\/note\/(latest\.json|cover-metrics-latest\.(json|csv))$/.exec(path);
     if (match) return `${datasetDir("note.dashboard")}/${match[1]}`;
   }
-  if (name === 'coconala' && /^\.local\/authenticated-measurement\/coconala-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/coconala.json';
   if (name === 'kdp' && /^\.local\/authenticated-measurement\/kdp-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/kdp.json';
   return null;
 }
