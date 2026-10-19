@@ -7,6 +7,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
+import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const PDF_URL = "https://www.mext.go.jp/content/20260525-mxt_kyokoku-000049811_03.pdf";
 const EXPECTED_SHA256 = "c94028f6385bfa735095d796c70adf85804a7e342b64d1d57e1aa84e06f4bedc";
@@ -101,7 +102,7 @@ async function main() {
         metricKey: "students-requiring-japanese-instruction",
         entityKind: "prefecture",
         rows: rankedRows,
-        meta: { rowCount: 47, yearRange: ["2025", "2025"], areaCount: 47, generatedAt: new Date().toISOString() },
+        meta: { rowCount: 47, yearRange: ["2025", "2025"], areaCount: 47, generatedAt: new Date().toISOString(), recipe: resolveMetricRecipe("students-requiring-japanese-instruction") },
       }, null, 2)}\n`);
       console.log(`local snapshot written: ${outputPath}`);
     }
