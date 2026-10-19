@@ -169,6 +169,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 - [ ] **A8 の案件別クリックの帰属根拠を得て、成果ゲートを再検証する** [S] — `A8-CROSSCHECK-EXCEED-01`（🔴 3 番目・管理領域・不具合）。
   stats47 と doboku-note の現在の配信広告定義と `programIdMap` を照合し、未写像 3 行と共用 3 案件の帰属根拠をカードに書く。
   推測で配賦しない。既存の許容差を広げない。`node .claude/scripts/ads/check-a8-outcome-gate.mjs` を再実行し、exceeded と shortfall が出なければカードを閉じる。
+  **途中経過 (2026-10-19)**: 両サイトの定義と分類表は一致し、10 月の超過 12 件は分類の誤りでは説明できないと分かった。原因の特定には隔離した 10 月の案件別 CSV か、A8 への再ログイン後の取得が要る (カードに仮説と確かめ方を記録)。ゲートは shortfall・month-missing のまま。
 - [ ] **KDP の月次売上が販売台帳へ自動で入ることを W42 の計測で確かめて閉じる** [S] — `KDP-LEDGER-AUTO-01`（管理領域・週次収益の商品実売の内訳）。
   10-23 の W42 計測のあと、`npm run products:sales --workspace=@stats47/product-factory -- validate` が PASS し、KPI ツリーの `paid-purchases` の KDP 分が判定不能でなくなっていればカードを閉じる。
   判定不能のままなら、どの段 (取得・record・KPI の読み込み) で止まったかをカードに書く。
