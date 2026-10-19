@@ -318,6 +318,7 @@ updated: 2026-10-19
   | もしも | `af_moshimo_techgo_6722_pilot` | テックゴー | sidebar-bottom |
   楽天トラベルは楽天 (直接) の `af_rakuten_travel_001` が残るので、旅行の枠は空かない。
 - **次 (実行順)**: ① 上の 9 件の一覧をオーナーが確認する ② 9 件を `isActive: false` にし (削除はせず、履歴の照合に残す)、develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる (デプロイ不要) ③ 計測から moshimo・afb を外す: `.claude/scripts/measurement/sources.mjs` の取得元・`collect-local.mjs` の afb キー読み込み・`measurement-session-refresh.sh` の moshimo・`authenticated-measurement.yml` と `affiliate-ga4-weekly.yml` の該当段・テストを同じ差分で直し、計測の鮮度 (`measurement-freshness`) の分母と月次ゴール「12/14」を新しい取得元数で書き直す ④ 提携の解除・アカウントの扱いは急がない (配信と計測を止めれば足りる)。
+- **①② 済 (2026-10-19)**: オーナーが一覧を確認し「外して」。9 件を `isActive: false` にして develop へ push (`6f69fa2d2`)、`publish-affiliate-ads.yml` run 39258480944 が success (「git TS 313 件 = cloud 配信と完全一致」)。公開中の `https://storage.stats47.jp/app/affiliate-ads/all.json` で対象 9 件はすべて `isActive: false`。旧掲載先の本番 `/ranking/apple-consumption-expenditure`・`system-consultant-annual-income`・`travel-participation-rate-overnight` の HTML に moshimo・afi-b・valuecommerce は 0 件 (A8・楽天は表示)。変更前の HTML は取得していないので、「消えた」の根拠は R2 の状態と変更後の HTML だけ。**残りは ③ (計測から moshimo・afb を外す)**。
 - **停止条件**: A8・楽天 (直接) の広告に触らない。②の前に計測を止めない (配信中の広告の成果が記録されなくなる)。
 - **完了条件**: 本番の `app/affiliate-ads/all.json` に moshimo・afi-b・valuecommerce の URL が 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新されている。
 
