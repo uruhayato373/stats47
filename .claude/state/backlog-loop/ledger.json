@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T04:47:18.484Z",
+  "updatedAt": "2026-10-19T05:15:16.436Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7812,6 +7812,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-19T04:47:18.484Z"
+    },
+    "A8-CROSSCHECK-EXCEED-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T05:15:16.436Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/ads/check-a8-outcome-gate.mjs",
+              "node --test .claude/scripts/ads/__tests__/a8-cross-check-other-sites.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "原因: A8 口座には stats47・doboku-note のほかに doboku-note(note)・X・kazu-note のサイト登録があり、そこで使われた stats47 と同じ案件のリンクのクリックが案件別レポートで stats47 専用に混ざっていた (10 月: 専用 276・サイト 261・他サイト登録 92 − 共用 66 − 未写像 11 = 15 = 超過)。オーナー判断 (b) で突合の上限を『サイト行 + 他サイト登録のクリックのうち共用・未写像で説明できない分』に変更。オーナー再ログイン後の run 2026-10-19",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T05:15:16.436Z"
     }
   }
 }

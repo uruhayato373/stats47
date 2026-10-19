@@ -89,6 +89,36 @@
         }
       }
     },
+    "otherSiteSummary": {
+      "description": "サイト別レポートの他サイト登録の行 (stats47 の実績ではない)。突合で専用案件に混ざりうるクリックの上限に使う",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "site": {
+            "type": "string"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "conversions": {
+            "type": "number"
+          },
+          "grossRevenueYen": {
+            "type": "number"
+          },
+          "revenueYen": {
+            "type": "number"
+          },
+          "fetchedAt": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "monthly": {
       "type": "array",
       "items": {
