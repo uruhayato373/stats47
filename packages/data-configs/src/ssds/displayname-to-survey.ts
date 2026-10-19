@@ -175,6 +175,7 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   '0004026844': { id: 'health-admin-report', name: '衛生行政報告例' },
   '0004026870': { id: 'health-admin-report', name: '衛生行政報告例' },
   '0004026904': { id: 'health-admin-report', name: '衛生行政報告例' },
+  '0004048079': { id: 'health-admin-report', name: '衛生行政報告例' },
   '0004026906': { id: 'health-admin-report', name: '衛生行政報告例' },
   '0004026929': { id: 'health-admin-report', name: '衛生行政報告例' },
   '0004026960': { id: 'health-admin-report', name: '衛生行政報告例' },
