@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { jstDateOf, resolvePeriods, addDays } from '../../metrics/lib/periods.mjs';
 import { reviewDue, selectKeyword, recordDeployment, validateSnapshot } from '../lib/keyword-cycle.mjs';
-import { appendHistory, runCycle, pageFragment } from '../keyword-cycle.mjs';
+import { appendHistory, runCycle, pageFragment, editableFile } from '../keyword-cycle.mjs';
 import { applyTextPatches, validateReview } from '../keyword-review.mjs';
 import { fetchSnapshot } from '../fetch-keyword-ranks.mjs';
 import { capturePage, validatePageEvidence } from '../keyword-page.mjs';
@@ -154,4 +154,10 @@ test('CI commits measurements before read-only research and creates only tested 
   assert.match(publish.if,/success\(\).*proposal.outcome == 'success'/);
   assert.match(publish.run,/--draft --base develop/); assert.doesNotMatch(publish.run,/gh pr merge|push origin main/);
   assert.ok(steps.indexOf(publish)>steps.findIndex(s=>s.name==='Verify proposed implementation'));
+});
+test('editable files resolve to the current metric and theme definition paths', () => {
+  const repo = path.resolve(import.meta.dirname, '../../../..');
+  assert.equal(editableFile(repo, '/ranking/general-hospital-count'), 'data/metrics/general-hospital-count.ts');
+  assert.equal(editableFile(repo, '/themes/aging-society'), 'data/themes/catalogs/aging-society.json');
+  assert.equal(editableFile(repo, '/ranking/no-such-metric-key'), null);
 });

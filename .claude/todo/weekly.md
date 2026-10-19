@@ -129,7 +129,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 
 ### Must（絶対達成、3件）
 
-- [ ] **[分割] データ品質ゲートを 100% に戻す再生成の dryRun と、W41 の残り 1 指標の公式確認を済ませる** [M] — `DATA-QUALITY-LOOP-01`（🔴 4 番目・データ領域・KPI `data-quality-pass-rate`）。
+- [x] **[分割] データ品質ゲートを 100% に戻す再生成の dryRun と、W41 の残り 1 指標の公式確認を済ませる** [M] — `DATA-QUALITY-LOOP-01`（🔴 4 番目・データ領域・KPI `data-quality-pass-rate`）。
   W41 (未達)・W42 (未着手) の 2 週続けて進んでいないので、5 指標の枠を今週は次の 2 点に縮める。
   ① `treatment-rate-hypertension-outpatient` (患者調査) の公式の最新公表を一次資料で確かめ、基準 1〜4 の処置をカードに記録する。
   ② 監査のレシピ未焼き込み 21 件 (`data/ranking/integrity-audit.json` の `recipe.unbaked`) と、W41 に years を広げた 2 指標
@@ -142,6 +142,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   W41 の 2 指標は dryRun 合格済みで、R2 反映の承認待ち。
   **更新 (2026-10-19)**: オーナーが (a) を選び、2 指標の R2 反映を承認した。2 指標は data-refresh run 39192011125 (success) で反映済み。
   書き手 (`stats-values-writer.mjs` ほか 3 本) が recipe を焼くように直した。21 件の再投入は、R2 の資格情報がある端末で行う (カードに手順と完了条件を記録)。
+  **結果 (2026-10-19 夜・Mac)**: オーナーの指示で 21 件を R2 へ反映した。20 件は 10 本の fetch で作り直し、公開中の行と値・年・県・順位が全行一致することを確かめてから key ごとに diff-push-r2。`low-elevation-population-ratio-5m` は書き手の Python (`low-elevation-population-overlay.py`) が recipe を焼かないため、公開中の値のまま正典の recipe だけを足して反映した。ローカルで `audit-ranking-data-integrity.ts` を回し、`recipe.unbaked` は 0 件 (全 2,460 指標)。次の週次監査でゲート 100% を確かめる。
 - [x] **🔴 先頭 2 枚の残りの確認を run ログで終えて閉じる** [S] — `RELEASE-1125-MERGE-01` / `STATE-OVERLAY-MAIN-01`（🔴 1・2 番目・管理領域・不具合）。
   PR #1125 の確認項目は、① `seo-keyword-cycle-daily` の main の schedule が 10-17・10-18 に success、④ `ai-content-gemini-daily` は 10-12 を最後に定期発火していない (10-19 に `gh run list` で確認)。
   ③ (affiliate-ga4-weekly の計測ゲート) は A8 の未解除が原因なので `A8-CROSSCHECK-EXCEED-01` へ引き渡す。
@@ -151,13 +152,15 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   **結果 (2026-10-19)**: 週次 `fetch-metrics-weekly` run 38820105627 のコミット `543ebe715` (W41) は psi・cloudflare の削除行 0、禁止パスの変更 0。
   日次の `6361f0c60`・`fd14ef70c` は削除 0、`a92554ff7` は 2026-09-15 の cloudflare 1 行だけ (保持 30 日超)。①④は上記の run で確認済み。
   ③は `A8-CROSSCHECK-EXCEED-01` へ引き継ぎを書き、2 枚とも削除した。
-- [ ] **サイト内クリックの全件計測を仕上げ、導線名なしの上位に名前を付ける** [M] — `NAV-CLICK-COVERAGE-01`（🔴 7 番目・管理領域・月次計画の W43 Must・期日 10-23）。
+- [x] **サイト内クリックの全件計測を仕上げ、導線名なしの上位に名前を付ける** [M] — `NAV-CLICK-COVERAGE-01`（🔴 7 番目・管理領域・月次計画の W43 Must・期日 10-23）。
   W41 の計測で被覆率 23.2%、`nav_click` の 53.9% が導線名なし。行き先の上位 4 つ (ranking 1,495 / geo 599 / municipalities 573 / areas 509 クリック) を出している部品を特定し、
   `data-nav-surface`・`data-nav-label` の属性を足す (見た目・マークアップ構造・クラスは変えない)。
   あわせて完了条件 ① の残り (localhost で未確認だったカテゴリ・県・テーマ・調査の 4 種で、実クリック 1 回につき送信 1 件) を確かめる。
   単体テストと localhost の確認が済み、コミット済みで、本番デプロイの承認依頼をオーナーへ出していれば完了。デプロイは承認後に 1 回だけ行う。使用: site-ux-manager
   **途中経過 (2026-10-19)**: GA4 の資格情報が手元に無いので、開発サーバーの HTML と部品のコードから出どころを特定し、7 部品に導線名を付けた (カードに記録)。
   テスト・型・ESLint は通過し、localhost の HTML で属性が出ることを確認した。実クリックの確認はブラウザ枠の描画が止まりできていない。本番デプロイの承認待ち。
+  **本番反映 (2026-10-19)**: PR #1158 で main に入り、deploy-workers は 09:35Z に success。本番の `/ranking/total-population` の HTML に `ranking_table` 10・`ranking_theme` 4・`ranking_related` 2・`ranking_blog` 9 の導線名が出ていることを curl で確認した。残りは実クリック 1 回につき送信 1 件の確認と、10-23 の計測での被覆率の読み取り。
+  **実クリックの確認 (2026-10-19 夜・本番)**: アプリ内ブラウザで本番を操作した。ランキング表の「東京都」を 1 回クリックすると `nav_click` が 1 件 (`nav_surface=ranking_table`)、県ページの「世帯数」では GA4 への送信本文に `nav_click` が 1 件 (`area_highlights`) だけ入り、どちらも遷移は止まらなかった。完了条件を満たしたので完了とする。被覆率は 10-23 の計測で読む (カードの次の段)。
 
 ### Should（できればやる、4件）
 
@@ -207,7 +210,8 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 
 - **`DATA-QUALITY-LOOP-01`**: Must 1 が出す R2 反映の承認依頼 (W41 の 2 指標とレシピ未焼き込み分をまとめて 1 回) を承認してほしい。
 - **`NAV-CLICK-COVERAGE-01`**: Must 3 の後に出す本番デプロイ (P1・P2 をまとめて 1 回) を承認してほしい。
-- **`AUTH-CREDENTIAL-REGISTER-01`**: Windows のココナラ資格情報の登録 (`cmdkey /generic:stats47-measurement-coconala ...`、コマンドは `/ops/auth` に出る)。
+- ~~**`AUTH-CREDENTIAL-REGISTER-01`**: Windows のココナラ資格情報の登録~~ — 2026-10-19 のココナラ撤退で不要 (取得対象から外した)。
+- **`NOTE-PACKS-REPLACE-COCONALA-01`** (2026-10-19 追加): Windows PC で 13 パックの Office 実機確認と、有料 note 版の記事ごとの確認 (価格・境界・添付)。
 - **`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`**: 今週の作業は無い。別日の main schedule で 2 回続けて全取得元が pass になるかを観測する。KDP が `auth_required` に戻ったら本人の Reports 再認証が要る。
 - **`PERF-WORKER-P99-01`**: 10-16 に Observability の Traces で route 別の CPU を見て、`_rsc` が約 72% と出た (`CF-CPU-SURGE-01`)。これを特定結果としてカードを閉じてよいか決めてほしい。
 - **`R2-STORAGE-01`**: doboku-note-archive の保持方針 (許容か削減か) を決めてほしい。R2 保存は 34.152 GB で無料枠 10 GB の超過が続いている。

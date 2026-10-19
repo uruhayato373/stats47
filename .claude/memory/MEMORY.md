@@ -24,6 +24,7 @@
 - [project_business_plan_adaptation_contract.md](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
 - [project_kindle_publishing_factory.md](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・30%書き下ろし必須。KDPアップロードは人間工程。正典coconala-product-standards.md §8
 - [project_coconala_publish_automation.md](project_coconala_publish_automation.md) — ココナラ出品自動化。期待アカウントはconfigのみ参照。本人プロフィールのプレビューリンクでIDを照合（おすすめ出品者の先頭リンクは禁止）。価格・修正回数・提供形式は保存後にread-backし、警告時は公開しない。
+- [project_coconala_withdrawal.md](project_coconala_withdrawal.md) — 2026-10-19 ココナラ撤退。14件受付休止・計測除外。出品台帳のwithdrawnはnote版公開後(先に変えるとnoteのリンク切れ)
 - [project_coconala_product_factory.md](project_coconala_product_factory.md) — 商品設計・公開記録・固定納品版・販売準備を分離。件数はTSとproducts:reportを参照。改訂版上書き・監査による公開state変更を禁止
 - [project_note_product_rollout.md](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)

@@ -190,9 +190,6 @@ try {
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);
     // 週次の実売 (revenue-history.json) の入力。summarize.mjs が quality.revenue を日次の履歴へ足す。
     const status = JSON.parse(readFileSync(join(work, 'status.json'), 'utf8'));
-    if (name === 'coconala' && status.revenue) {
-      result.quality = { revenue: { date: status.revenue.observedDate, cumulativeYen: status.revenue.cumulativeYen, monthToDateYen: status.revenue.monthToDateYen } };
-    }
     if (name === 'kdp') {
       capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
       const monthlyPath = `.local/authenticated-measurement/${name}-${runId}/status.monthly.xlsx`;

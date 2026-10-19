@@ -4,40 +4,24 @@
  *
  * 入力 `revenueHistory` は認証付き収集が毎日足す `data/authenticated/revenue-history.json`
  * (summarize.mjs が書く)。チャネルごとに意味が違うので、足し方もチャネルごとに固定する。
- * - coconala … 売上管理の「累積売上」(手数料控除後・取引完了時点で計上)。単調増加なので
- *              週の実売 = 週末時点の累積 − 週初め前の累積
  * - kdp      … Reports の日別「電子書籍ロイヤリティ見積り」と有料注文数。7 日そろった週だけ合計する。
  *              見積りは確定ロイヤリティではないので金額は週次の合計に入れない (オーナー契約・
  *              AUTHENTICATED-MEASUREMENT-ACTIVATION-01 の停止条件)。有料注文数だけを件数に入れる
  * - note     … 売上 API の「今月の売上」(手数料控除前) と締め済みの月別売上 (closedMonths)。
  *              同じ月なら今月の売上の増分、月をまたいだら「前月の締め額 − 基準点の今月売上 + 週末の今月売上」
  *
+ * ココナラは 2026-10-19 に撤退した (出品は受付休止・取得を停止) ので数えない。過去の観測は revenue-history.json に残る。
+ *
  * 欠測は 0 にしない。判定できない理由を note に書き、status を unmeasurable にする。
  */
 
-export const REVENUE_CHANNELS = ["coconala", "kdp", "note"];
+export const REVENUE_CHANNELS = ["kdp", "note"];
 
 const yen = (value) => `¥${Number(value ?? 0).toLocaleString("ja-JP")}`;
 
 function entriesOf(history, channel) {
   const entries = Array.isArray(history?.entries) ? history.entries : [];
   return entries.filter((e) => e?.channel === channel && typeof e.date === "string").sort((a, b) => a.date.localeCompare(b.date));
-}
-
-/** 累積値の差分。週初め前の基準点が無くても、週末時点の累積が 0 なら今週も 0 と確定できる。 */
-function cumulativeWeek(entries, { weekStart, weekEnd, yenKey, countKey }) {
-  const end = entries.filter((e) => e.date <= weekEnd).at(-1);
-  if (!end) return { status: "unmeasurable", note: "今週末までの観測が無い" };
-  if (end.date < weekStart) return { status: "unmeasurable", note: `最終観測 ${end.date} が週より前` };
-  const base = entries.filter((e) => e.date < weekStart).at(-1);
-  if (!base) {
-    if (end[yenKey] === 0) return { status: "ok", yen: 0, count: countKey ? 0 : null, basis: `累積 ¥0 (${end.date})` };
-    return { status: "unmeasurable", note: `週初め前の基準点が無い (最初の観測 ${entries[0].date})` };
-  }
-  const delta = end[yenKey] - base[yenKey];
-  if (!Number.isFinite(delta) || delta < 0) return { status: "unmeasurable", note: "累積が減っている (返金か画面の変更)" };
-  const count = countKey && Number.isFinite(end[countKey]) && Number.isFinite(base[countKey]) ? end[countKey] - base[countKey] : null;
-  return { status: "ok", yen: delta, count, basis: `累積 ${base.date}→${end.date}` };
 }
 
 function kdpWeek(entries, { weekStart, weekEnd }) {
@@ -79,7 +63,6 @@ function noteWeek(entries, { weekStart, weekEnd }) {
 export function weeklyProductRevenue({ revenueHistory, weekStart, weekEnd }) {
   const window = { weekStart, weekEnd };
   const channels = {
-    coconala: cumulativeWeek(entriesOf(revenueHistory, "coconala"), { ...window, yenKey: "cumulativeYen", countKey: null }),
     kdp: kdpWeek(entriesOf(revenueHistory, "kdp"), window),
     note: noteWeek(entriesOf(revenueHistory, "note"), window),
   };
@@ -93,7 +76,7 @@ export function weeklyProductRevenue({ revenueHistory, weekStart, weekEnd }) {
   };
 }
 
-const LABEL = { coconala: "ココナラ", kdp: "KDP", note: "note" };
+const LABEL = { kdp: "KDP", note: "note" };
 
 /** チャネル別の 1 行説明 (週次 Issue 用)。
  * @param {string} name
