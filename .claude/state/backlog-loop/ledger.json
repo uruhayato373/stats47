@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T05:15:16.436Z",
+  "updatedAt": "2026-10-19T06:05:03.757Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7846,6 +7846,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-19T05:15:16.436Z"
+    },
+    "BUSINESS-PLAN-FRESHNESS-MTIME-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T06:05:03.757Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run business-plan:check",
+              "npx vitest run src/business-plan/__tests__/data-freshness.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "鮮度の判定 (10-07 実装) を src/business-plan/data-freshness.ts に切り出し、一時 git リポジトリでテスト 4 件を追加 (clone 直後の mtime でもコミット時刻・改名だけのコミットは数えない・未コミットは mtime・git 外と無いパス)。コミット時刻を使う行を外すと 2 件失敗することを確認。business-plan:check PASS、build-state の sourceFreshness は各取得元のデータのコミット時刻。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T06:05:03.757Z"
     }
   }
 }

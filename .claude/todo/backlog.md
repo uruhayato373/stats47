@@ -1513,15 +1513,6 @@ updated: 2026-10-17
 - **停止条件**: 全記事を一括で変えない。ノウハウの有料記事・マガジン (Claude Code の実務) は有料のまま。note への反映はオーナーのログインを経てから。
 - **完了条件**: 47 本の有料・無料が決定どおりになり、カタログと note.com が一致し、無料化の前後 4 週の閲覧と送客が記録されている。
 
-### [BUSINESS-PLAN-FRESHNESS-MTIME-01] 事業計画 state の取得元の鮮度が、ファイルの更新時刻を見ていて clone 直後は全部「今日」になる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run business-plan:check] [起票:2026-10-07] [領域:管理]
-
-- **事象**: 2026-10-07 にクラウドの新しい clone で `npm run business-plan:build-state` を実行すると、`data/business-plan/latest.json` の `sourceFreshness` が 6 取得元すべて 2026-10-07 になった。X の最新の計測は 2026-06-07 で、実際より 4 か月新しく見える (この回の `latest.json` はコミットせずに戻した)。
-- **原因**: `packages/data-configs/scripts/build-business-plan-state.ts` がファイルの `stat.mtime` を鮮度にしている。git は更新時刻を保存しないので、clone・checkout した時刻になる。
-- **次**: 鮮度をデータの中の時刻 (各取得元の `fetchedAt`・`generatedAt`・週の列) か、`git log -1 --format=%cI -- <path>` から取る。
-- **完了条件**: 新しい clone で build-state を実行しても、`sourceFreshness` が直前の値と同じ (データ時刻) になる。テストで固定する。
-- **2026-10-07 実装**: 最後にデータを変えたコミットの時刻 (`git log -1 -M --diff-filter=AM`。改名だけのコミットは数えない) を使い、未コミットの変更があるときと git が無いときだけ mtime に戻すようにした。クラウドの clone で再生成して、X が checkout 時刻ではなくデータのコミット時刻 (`data/sns` の 10-07 の投稿記録) になることを確かめた。テストはまだ無い (スクリプトが直接実行の形のため)。テストを足したら backlog-loop の gate で削除する。
-
 ### [KDP-LEDGER-AUTO-01] 認証付き計測で取った KDP の月次レポートを、CI が販売台帳へ自動で記録する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run products:sales --workspace=@stats47/product-factory -- validate] [起票:2026-10-07] [領域:管理]
 
