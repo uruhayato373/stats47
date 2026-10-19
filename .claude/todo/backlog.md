@@ -21,34 +21,7 @@ updated: 2026-10-17
 
 ## 🔴 高 — 今月中に着手したい
 
-### [RELEASE-1125-MERGE-01] 定期 workflow の修正を含む PR #1125 を CI 通過後にマージし、反映後の run を確かめる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-10-14] [領域:管理]
-
-- **状態 (2026-10-11)**: develop→main の PR https://github.com/uruhayato373/stats47/pull/1125 を作成済み。オーナーは本番反映を承認済み (同日チャット)。Static Gates の actionlint 指摘 (SC2209) は `d706c79de` で直し、手元の actionlint 1.7.7 + shellcheck で全 workflow 0 件。残りの CI は実行中だった。マージはまだしていない。
-- **次**: CI が全件 success ならマージする。定期実行は main の定義で動くので、マージ後に次を確かめる。① `seo-keyword-cycle-daily` の検証 step が通る ② `blog-remediation-daily` の散布図ゲートが 167/167 一致 ③ `affiliate-ga4-weekly` が `affiliate-portfolio-latest.json` を develop へ書き戻し、Health Check の portfolio stale が消える ④ `ai-content-gemini-daily` が定期発火しない。
-- **状態 (2026-10-13)**: develop に note 記事管理の作り直し (`84d6ac273`)・SNS データカード (`b44839190`)・dependabot 5 本を足して PR を更新し、
-  GitHub の auto-merge (merge commit) を有効にした。CI 10 件が実行中。`preflight:pr` 50/50 と pre-commit は通過済み。別セッションの SNS 作業はコミット済みで、上の注意は解消した。
-- **マージ後に追加で確かめること (2026-10-13 分)**: ⑤ `deploy-workers` の本番反映と post-deploy smoke が success ⑥ main から `sync-note-r2.yml`・`push-note-provenance.yml` が消え、
-  `gh workflow list --all` で該当 workflow が無効または消えている ⑦ 次の `note-circulation-audit-weekly` (土曜) が `note:circulation:test` を通り、`note-image-assets.json` の
-  `--verify-r2` が合格する ⑧ ローカルの main を `git fetch && git switch main && git merge --ff-only origin/main` で合わせ、develop との差 (`git rev-list --count origin/develop..origin/main`) が
-  マージコミット以外に無いことを確かめる。
-- **状態 (2026-10-13 11:20 JST)**: PR #1125 は CI 24 件合格でマージ済み (main `427b80974`)。⑥ main から 2 本が消えたことを `git ls-tree origin/main` で確認。⑧ ローカル main を早送りで合わせ、develop との差はマージコミットだけ。
-  ⑤ `deploy-workers` は R2 書き込みの排他 (`r2-write`) で `geo-source-publish` (22:26 UTC 開始、過去の成功例は 3.5〜4 時間) の終了待ち。終わり次第デプロイと smoke を確かめる。①〜④・⑦ は次の定期実行で確かめる。
-- **別の端末 (Windows PC) の注意**: このマージを pull すると docs/31 の追跡ファイル 861 件が作業ツリーから消える。pull の前にその端末の docs/31 に未コミットの編集が無いかを確かめ、
-  あれば先に `npm run note:article -- save <key>` で R2 へ保存する (台帳 `data/note/articles.json` を pull してから)。
-- **状態 (2026-10-18)**: ② `blog-remediation-daily` の散布図ゲートは 167/167 一致 (run 39094552802・MLIT の Excel の URL 変更を直した後)。③ `affiliate-ga4-weekly` は A8 の月次成果の不足 (`a8-cross-check-shortfall`・`a8-results-month-missing`) で計測ゲートが止まったまま (`A8-CROSSCHECK-EXCEED-01`)。⑦ note 回遊監査は 30 分の制限で cancel が続いていたので 60 分に延ばし、カバー観測の書き戻しも直した。
-- **完了条件**: PR がマージされ、①〜④を run のログで確認した。失敗率の 7 日判定は `SIMPLIFY-FAILING-AUTOMATION-01` が持つ。
-
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
-
-### [STATE-OVERLAY-MAIN-01] 計測 workflow の「develop を直接 checkout する」修正を main へ反映し、次の run で state が巻き戻らないことを確かめる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-05] [期日:2026-10-11] [領域:管理]
-
-- **経緯**: 週次の `fetch-metrics-weekly` は main を checkout して計測し、`.claude/state/metrics/` 全体を develop へ上書きコピーしていた。2026-10-04 の W40 コミット e45f5a0ee は、main に未マージだった 15 ファイル (page-quality 週次監査・KSJ / e-Stat 月次記録・psi / cloudflare / URL Inspection の履歴など) を main の古い版へ戻した。`psi-audit-daily` と `cloudflare-usage-daily` も同じ形で、main が遅れている間は前日以前の行を毎日失っていた (psi は 4 月以降の 55 日分)。`deploy-workers` の improvement-log の書き戻しも同じ形だった。2026-10-05 に develop で 4 本を直し、消えた行を git 履歴から戻した。今後の再発は `workflow-commit-back.test.cjs` の `findForeignTreeRestore` が止める。
-- **マージ済み (2026-10-06 11:34 JST)**: PR #1070 (main `881505c2e`) で main へ入り、本番デプロイと post-deploy smoke は成功した。
-  main の `psi-audit-daily` は `ref: develop` の新しい定義になっている。残りは下の完了条件の確認だけ (psi 日次 10-07 02:00 JST・cloudflare 日次 02:30 JST・W41 週次 10-11 20:00 JST)。
-- **2026-10-08 確認 (日次分)**: psi 日次 `d0d1bfa96` (10-06) と `bf8c1a9f3` (10-07) は `data/psi/history.csv` の削除行 0。cloudflare 日次 `f6e57c1c7` (10-06) と `40f5b3284` (10-07) の削除行は 2026-08-27〜09-05 の 10 行だけで、どれも保持 30 日を過ぎた行。残りは W41 週次 (10-11 20:00 JST) のコミットの確認だけ。
-- **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- data/psi/history.csv data/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
 
 ### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
 タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-10-05] [領域:管理]
@@ -83,6 +56,7 @@ updated: 2026-10-17
 
 - **現在の残件（2026-10-17）**: UI変更は修正し10月4CSVを取得したが、案件別の独立監査は専用click下限がサイト合計＋既存許容差を超えてFAIL。全CSV run `2026-10-16T23-37-11Z` は正規化せず隔離した。サイト別run `2026-10-16T23-39-00Z`だけ監査PASS後に正規化（222click、発生/確定件数・金額0）。次は両サイトの現在の配信広告定義とprogramIdMapを照合し、帰属の根拠を得る。未写像3行と共用3案件を推測配賦せず、既存の許容差を広げない。収益のサイト行は利用可、EPC判断は引き続き停止。
 
+- **引き継ぎ (2026-10-19)**: `RELEASE-1125-MERGE-01` の確認項目 ③ (`affiliate-ga4-weekly` の計測ゲートが通り、Health Check の portfolio stale が消える) はこのカードの gate 解除に依存するので、ここで持つ。
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
 
@@ -122,6 +96,13 @@ updated: 2026-10-17
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
   4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 - **2026-10-05 ③ 第2週 (需要順 3〜5 位に当たる 5 指標・W41 Must 1)**: 公式の範囲は SSDS 掲載年次一覧 (`kiso_ken.xlsx` / `shihyou_ken.xlsx`、2026-06-30 更新分) で確認した。`average-height-primary-school-fifth-grade-male` は years を 2023 のみから 1975〜2023 (1977・1978 は取得不可で除く) に、`national-treasury-disbursement-prefecture` は 2008〜2021 の穴を埋めて 1975〜2022 に広げた。`validate:config` と `validate:years` は exit 0。data-refresh の dryRun は CI で合格した ([run 37315946937](https://github.com/uruhayato373/stats47/actions/runs/37315946937): ok=2・fail=0・empty=0・shape=0)。R2 反映はオーナー承認後に `data/data-refresh-requests.json` を dryRun: false で push する。`fishery-workers` (漁業センサス 5 年周期・2023 が最新) と `treatment-rate-hypertension-outpatient` (患者調査 3 年周期・2023 が最新。公式サイトでの最新公表の照会は未実施) は誤検出で処置なし。`food-self-sufficiency-rate-calorie` は農水省が令和 6 年度 (概算) まで公表済みだが SSDS は 2021 年度止まりなので、取得元の切り替えを `DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` へ切り出した。
+
+- **2026-10-19 ③ W43 Must 1 ① (W41 の残り 1 指標)**: `treatment-rate-hypertension-outpatient` は厚生労働省の患者調査ページ (`https://www.mhlw.go.jp/toukei/list/10-20.html`、2026-10-19 取得) に「令和５年患者調査の結果は令和６年12月20日に公表しました」とあり、令和８年調査は実施中で未公表。配信の最新年 2023 は公式の最新公表と一致するので、キューの「1 周期遅れ」は推定周期 1 年による誤検出で処置なし (患者調査は 3 年周期)。過去年 (令和２年以前) は別の統計表なので、years の拡張はこのキューの処置とは分けて扱う。
+- **2026-10-19 ③ W43 Must 1 ② (データ品質ゲート 99.1% の 21 件)**: 監査の `recipe.unbaked` 21 件 (`data/ranking/integrity-audit.json`、10-17) は**すべて手動投入** (`kind:"external"`・`fetcherKey:"manual"`) で、data-refresh の再取得 (page-data-batch は external を skip) では焼き直せない。計画の「dryRun で再生成」は前提が誤っていた。
+  - 値を変えずに recipe だけを足す既存の移行 (`packages/stats-r2/src/scripts/lib/legacy-recipe-migration.ts` の `migrateLegacyRecipe`) は、公開 R2 の 21 件すべてで `migrated` になる (10-19 に読み取りだけで確認。行の形の不正なし)。対象リスト `LEGACY_RECIPE_ROW_HASHES` は 2026-08-27 に見直した 31 件で、この 21 件は入っていない。
+  - **未解決**: 21 件の `meta.generatedAt` はすべて 2026-10-08 (recipe 導入 07-30 の後) なのに recipe が無い。10-08 に手動投入の値を recipe なしで書いた経路があり、それを直さないとリストに足しても再発する。config の最終更新はすべて `212d2611d` (10-09、定義の置き場の一括移動) で、git の日付ではクエリが変わったか判定できない。
+  - **次 (オーナー判断)**: (a) 10-08 の書き手を特定して recipe を焼くように直し、手動投入の 21 件を再投入する、または (b) 21 件の config と値の対応を確かめたうえで `LEGACY_RECIPE_ROW_HASHES` に 21 件の行ハッシュを足し、`migrateLegacyRecipes` で一回だけ移す。どちらも R2 への書き込みはオーナー承認が要る。監査は残数が増えたときだけ失敗するので、待っても新たな失敗は出ない。
+  - W41 に years を広げた 2 指標 (`average-height-primary-school-fifth-grade-male`・`national-treasury-disbursement-prefecture`) は dryRun 合格済み (run 37315946937) で、R2 は未反映 (10-19 の公開 values は小 5 男子身長が 2023 の 1 年だけ)。反映は `data/data-refresh-requests.json` を dryRun:false・snapshotScope:"ranking" で push すれば走る。オーナー承認待ち。
 
 ### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]

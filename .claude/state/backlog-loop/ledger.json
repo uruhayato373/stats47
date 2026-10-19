@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:52:13.394Z",
+  "updatedAt": "2026-10-19T02:37:38.349Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7709,6 +7709,75 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-16T23:52:13.394Z"
+    },
+    "STATE-OVERLAY-MAIN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T02:37:38.107Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git diff 543ebe715^ 543ebe715 -- data/psi/history.csv data/cloudflare/history.csv",
+              "git diff --name-only 543ebe715^ 543ebe715",
+              "git diff a92554ff7^ a92554ff7 -- data/cloudflare/history.csv"
+            ],
+            "pass": true
+          },
+          "evidence": "W41 週次 fetch-metrics-weekly run 38820105627 のコミット 543ebe715 で psi/cloudflare history の削除行 0・page-quality/monthly-jobs/authenticated の変更 0。日次 6361f0c60/fd14ef70c は削除 0、a92554ff7 は 2026-09-15 の cloudflare 1 行のみ (保持 30 日超)。2026-10-19 対話セッションで確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T02:37:38.107Z"
+    },
+    "RELEASE-1125-MERGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-19T02:37:38.349Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow seo-keyword-cycle-daily.yml -L 4",
+              "gh run list --workflow ai-content-gemini-daily.yml -L 4"
+            ],
+            "pass": true
+          },
+          "evidence": "PR #1125 は 10-13 に main 427b80974 へマージ済み。① seo-keyword-cycle-daily の main schedule が 10-17・10-18 success ② 散布図ゲート 167/167 (run 39094552802) ④ ai-content-gemini-daily は 10-12 を最後に定期発火なし。③ affiliate-ga4-weekly の計測ゲートは A8 の gate 未解除が原因のため A8-CROSSCHECK-EXCEED-01 へ引き継ぎ。2026-10-19 対話セ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-19T02:37:38.349Z"
     }
   }
 }

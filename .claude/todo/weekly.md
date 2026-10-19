@@ -137,12 +137,18 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
   R2 反映の承認依頼を 1 回にまとめる。e-Stat 以外の出典などで再生成できないものは、件数と理由をカードに書く。
   dryRun の依頼 push は 10-21（水）までに行う。①の記録と②の dryRun run (失敗は理由つき) がカードにあり、承認依頼をオーナーへ出していれば完了。
   R2 への反映そのものはオーナーの承認後で、完了条件に含めない。使用: `/inspect-estat-meta`、data-ingester
-- [ ] **🔴 先頭 2 枚の残りの確認を run ログで終えて閉じる** [S] — `RELEASE-1125-MERGE-01` / `STATE-OVERLAY-MAIN-01`（🔴 1・2 番目・管理領域・不具合）。
+  **途中経過 (2026-10-19)**: ①は済み (令和5年患者調査が公式の最新公表で、処置なし)。②は前提が誤っていた。21 件はすべて手動投入で dryRun では焼き直せない。
+  値を変えずに recipe を足す移行は 21 件とも通るが、10-08 に recipe なしで書いた経路が未特定なので、(a) 書き手を直して再投入するか (b) 移行リストに足すかをオーナーが決める (カードに記録)。
+  W41 の 2 指標は dryRun 合格済みで、R2 反映の承認待ち。
+- [x] **🔴 先頭 2 枚の残りの確認を run ログで終えて閉じる** [S] — `RELEASE-1125-MERGE-01` / `STATE-OVERLAY-MAIN-01`（🔴 1・2 番目・管理領域・不具合）。
   PR #1125 の確認項目は、① `seo-keyword-cycle-daily` の main の schedule が 10-17・10-18 に success、④ `ai-content-gemini-daily` は 10-12 を最後に定期発火していない (10-19 に `gh run list` で確認)。
   ③ (affiliate-ga4-weekly の計測ゲート) は A8 の未解除が原因なので `A8-CROSSCHECK-EXCEED-01` へ引き渡す。
   state 上書き対策は、マージ後の週次 (`fetch-metrics-weekly`) のコミットで `data/psi/history.csv`・`data/cloudflare/history.csv` に削除行が無い
   (cloudflare は保持 30 日超の行だけ許す) ことと、`.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていないことを確かめる。
   2 枚の完了条件の証拠 (run ID・コミット) をカードに書き、カードを削除していれば完了。月曜に最初に行う。
+  **結果 (2026-10-19)**: 週次 `fetch-metrics-weekly` run 38820105627 のコミット `543ebe715` (W41) は psi・cloudflare の削除行 0、禁止パスの変更 0。
+  日次の `6361f0c60`・`fd14ef70c` は削除 0、`a92554ff7` は 2026-09-15 の cloudflare 1 行だけ (保持 30 日超)。①④は上記の run で確認済み。
+  ③は `A8-CROSSCHECK-EXCEED-01` へ引き継ぎを書き、2 枚とも削除した。
 - [ ] **サイト内クリックの全件計測を仕上げ、導線名なしの上位に名前を付ける** [M] — `NAV-CLICK-COVERAGE-01`（🔴 7 番目・管理領域・月次計画の W43 Must・期日 10-23）。
   W41 の計測で被覆率 23.2%、`nav_click` の 53.9% が導線名なし。行き先の上位 4 つ (ranking 1,495 / geo 599 / municipalities 573 / areas 509 クリック) を出している部品を特定し、
   `data-nav-surface`・`data-nav-label` の属性を足す (見た目・マークアップ構造・クラスは変えない)。
