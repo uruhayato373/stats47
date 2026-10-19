@@ -1,8 +1,7 @@
 /** Authenticated, read-only collectors. Commands are fixed here, never supplied by workflow input. */
 export const SOURCES = {
-  moshimo: { domains: ['moshimo.com'], profile: 'playwright-moshimo-profile', state: 'playwright-moshimo-state.json', secret: 'MEASUREMENT_SESSION_MOSHIMO', capability: 'outcomes' },
+  // もしも・afb は 2026-10-19 に A8・楽天へ集約して取得元から外した (ASP-CONSOLIDATE-A8-RAKUTEN-01)
   a8: { domains: ['a8.net'], profile: 'playwright-a8-profile', state: 'playwright-a8-state.json', secret: 'MEASUREMENT_SESSION_A8', capability: 'site-outcomes' },
-  afb: { domains: ['afi-b.com', 'affiliate-b.com'], profile: 'playwright-afb-profile', state: 'playwright-afb-state.json', secret: 'MEASUREMENT_SESSION_AFB', apiSecret: 'AFB_API_KEY', transport: 'api', capability: 'site-conversion-outcomes' },
   note: { domains: ['note.com'], profile: 'playwright-note-profile', secret: 'MEASUREMENT_SESSION_NOTE', capability: 'dashboard-metrics' },
   gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'verified-coverage-export' },
   kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-daily-and-monthly-royalties' },

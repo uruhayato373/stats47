@@ -283,19 +283,19 @@ test('rerun artifacts select the latest attempt and never resurrect an older suc
   const script = resolve('.claude/scripts/measurement/summarize.mjs');
   try {
     const input = join(temp, 'input'); mkdirSync(input);
-    const observation = { source: 'afb', capability: SOURCES.afb.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: 'current-run', runAttempt: 4 };
-    writeFileSync(join(input, 'afb.json'), JSON.stringify({ ...observation, status: 'failed' }));
-    writeFileSync(join(input, 'afb-4.json'), JSON.stringify(observation));
+    const observation = { source: 'a8', capability: SOURCES.a8.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: 'current-run', runAttempt: 4 };
+    writeFileSync(join(input, 'a8.json'), JSON.stringify({ ...observation, status: 'failed' }));
+    writeFileSync(join(input, 'a8-4.json'), JSON.stringify(observation));
     const read = () => {
       execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run', GITHUB_RUN_ATTEMPT: '5' } });
-      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources.find(s => s.source === 'afb');
+      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources.find(s => s.source === 'a8');
     };
     assert.equal(read().status, 'pass');
     assert.equal(read().runAttempt, 4);
-    writeFileSync(join(input, 'afb-5.json'), JSON.stringify({ ...observation, runAttempt: 5, status: 'failed', code: 'api_auth_required' }));
+    writeFileSync(join(input, 'a8-5.json'), JSON.stringify({ ...observation, runAttempt: 5, status: 'failed', code: 'api_auth_required' }));
     assert.equal(read().code, 'api_auth_required');
     for (const bad of ['not JSON', JSON.stringify(observation), JSON.stringify({ ...observation, runAttempt: 5, runId: 'old-run' })]) {
-      writeFileSync(join(input, 'afb-5.json'), bad);
+      writeFileSync(join(input, 'a8-5.json'), bad);
       assert.equal(read().code, 'invalid_observation');
       assert.equal(read().metricsAvailable, false);
     }
@@ -366,8 +366,33 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   assert.match(check.run, /9 \* 3600000/);
   assert.equal(workflow.jobs.gate.permissions, undefined);
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
-  assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
+  assert.match(wrapper, /refresh-session\.mjs a8 kdp note --publish \|\| REFRESH_RC=/);
+  // Mac で直接取得する経路は MEASUREMENT-MAC-DIRECT-01 で切り替えるまで CI を起動する
   assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
+});
+
+test('Mac direct collection writes evidence to the vault but never touches CI-only session state', () => {
+  const collect = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
+  assert.match(collect, /const vaultWrites = !local \|\| process\.argv\.includes\('--vault'\);/);
+  // 保管庫のセッション・認証停止の記録は CI だけが書く (Mac のセッションの正本は専用プロファイル)
+  for (const needle of ['writeVault(`${name}/session`', 'writeVault(`${name}/auth-recovery`']) {
+    let index = collect.indexOf(needle);
+    assert.ok(index >= 0, needle);
+    for (; index >= 0; index = collect.indexOf(needle, index + 1)) {
+      // ciLogin は !local && CI の資格情報があるときだけ真
+      assert.match(collect.slice(Math.max(0, index - 1600), index), /!local|ciLogin/, `${needle} は CI だけが書く`);
+    }
+  }
+  const runner = readFileSync('.claude/scripts/measurement/collect-local.mjs', 'utf8');
+  assert.match(runner, /'--local', '--vault'/);
+  assert.match(runner, /MEASUREMENT_VAULT_WRITER: 'mac'/);
+  const vault = readFileSync('.claude/scripts/measurement/vault.mjs', 'utf8');
+  assert.match(vault, /!process\.env\.GITHUB_ACTIONS && process\.env\.MEASUREMENT_VAULT_WRITER !== 'mac'\) throw new Error\('vault_write_ci_only'\)/);
+  assert.doesNotMatch(runner, /--publish/, 'Mac の取得は Secrets へ送らない');
+  const shell = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
+  const commit = shell.split('\n').find((line) => /git .*commit/.test(line));
+  assert.ok(commit, '記録コミットがある');
+  assert.doesNotMatch(commit, /skip ci|ci skip|no ci/i, 'CI を止める印を付けると develop→main の PR の検査が止まる');
 });
 
 test('note sales with private evidence survive an incomplete article inventory without making the source pass', () => {

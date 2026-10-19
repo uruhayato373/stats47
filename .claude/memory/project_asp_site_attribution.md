@@ -36,6 +36,7 @@ metadata:
 **対策**: `measurement/afb-outcomes.mjs`はJSON配列だけを受理し、エラーobjectや欠落を空配列へ変換しない。要求はstats47のsite IDを必須にし、非ゼロ行も帰属・重複・日付・状態・報酬gateで検査する。APIキーは承認済みGitHub Secretのみ、発生日/確定日系列を合算しない。
 
 **証拠**: CI `35560007703` attempt 2の値を含まない応答型診断、`.claude/scripts/measurement/__tests__/afb-outcomes.test.mjs`。
+**2026-10-19**: A8・楽天へ集約し、afb の成果取得 (`afb-outcomes.mjs` とテスト) を削除した。afb を計測に戻すときは `git log --diff-filter=D -- .claude/scripts/measurement/afb-outcomes.mjs` から復元し、上の gate を保つ。
 
 **問題**: native Chromeで本人ログイン済みでも、起動中のprofileを複製して移送するとCIが未認証になる。
 

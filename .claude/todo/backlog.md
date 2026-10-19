@@ -129,6 +129,8 @@ updated: 2026-10-19
 
 - **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
 - **2026-10-19 ココナラ撤退**: ココナラを取得対象から外した (取得元 8 → 7、計測の鮮度の母数も 1 減る)。ココナラの日次の判定はこのカードの対象外。過去の観測は `data/authenticated/revenue-history.json` に残る。
+- **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
+- **2026-10-19 夜**: オーナーの準備 (afb の API キー・GSC のログイン) を後日に回したので、定期実行は CI の起動に戻した。切り替えの手順と残りは `MEASUREMENT-MAC-DIRECT-01`。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -249,6 +251,7 @@ updated: 2026-10-19
 
 - **2026-10-19 ② 確認**: 対策の本番反映 (10-17 01:15Z) 後の日次取得で `totalCpuTimeUs` は値が取れている (`cpuTimeError: null`、cloudflare-usage-daily run 39063203871 / 39159162517)。UTC 日別: 10-15 は 7,306 万 ms・requests 130,494・1 件あたり 560 ms・cpu_p50 31.6 ms / 10-16 は 4,344 万 ms・79,591・546 ms・15.8 ms / 10-17 は 4,293 万 ms・81,896・524 ms・1.2 ms (`data/cloudflare/snapshots/<日>.json`)。合計の低下はデプロイ前の 10-16 の requests 39% 減から始まっており、1 件あたりの平均 CPU はほぼ変わっていない。**③ (10-24) は合計ではなく、1 件あたりの CPU・cpu_p50・Observability の `_rsc` の割合を反映前と並べる** ([仮説] p50 の低下は軽い `_rsc` 要求が減った影響で、平均を押し上げている重い描画は残っている。10-24 に Traces で `_rsc` の件数と CPU の割合を取り、割合が 72% から下がっていなければ先読み以外の経路を疑う)。
 - **2026-10-19 予算アラート**: 10-15〜11-15 の請求期間で、従量課金が予算に 4 日目 (10-19 10:11Z) で達した (現在の合計 $3.20。前期間は 5 日目)。日次の CPU 合計 10-15〜10-17 は計 1.59 億 ms で、前回の請求書から逆算した単価 (超過 1,068M ms で $21.38 = 100 万 ms あたり $0.02、無料枠 30M ms) で計算すると約 $2.58 になる。10-18 の 1 日分 (未取得) を足すと $3.20 に合う。新しい急増ではなく、1 日 4,300 万 ms のままなら、この期間も前回並み (従量約 $26 + 基本 $5) になる。
+- **2026-10-19 アカウント全体の内訳 (doboku-note 側で記録)**: doboku-note の cloudflare-metrics がアカウント全体の使用量と見込み額を記録し始めた (doboku-note リポジトリの `data/cloudflare/zone/2026-10-19.json` の `accountUsage`、2026-09-19〜10-18 の 30 日)。合計 $30.51 のうち Workers CPU $22.44 (約 73%)・Workers 基本 $5・R2 Class B $2.70・R2 保存 $0.37・R2 Class A $0 (無料枠内)。CPU 以外の従量は R2 で、その大半は doboku-note の画像配信と同期処理。doboku-note 側は 10-19 に差分アップロード・OGP 派生の HEAD 削減・Cache-Control 付与・公開バケットの不要 3,111 件の削除を本番反映済み。**このカードの CPU 行は doboku-note の対応では動かない** (請求の主因は引き続き stats47 の Workers CPU)。
 ### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ後に古い HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [進行中] [領域:サイト]
 
@@ -282,6 +285,46 @@ updated: 2026-10-19
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を Mac の直接取得へ切り替え、2 日 pass したら CI と Secrets を撤去する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-19] [領域:管理]
+
+- **経緯 (2026-10-19 オーナー承認)**: ログインは Mac が毎日保ち、そのセッションを CI へ運んで CI のブラウザで取得する遠回りの構成だった。KDP は CI でほぼ毎回 `auth_required` になり、CI の記録コミットが develop→main の PR の検査を止めた。Mac で直接取得する仕組みは実装済み (`.claude/scripts/measurement/collect-local.mjs`・`scripts/scheduled/measurement-collect-local.sh`・`collect.mjs --local --vault`・`vault.mjs` の `MEASUREMENT_VAULT_WRITER=mac`。定期実行専用の clone は `~/stats47-measurement` に作成済み)。同日の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
+- **次 (オーナー)**:
+  1. GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、`https://analytics.google.com` の表示を確かめて、その Chrome を ⌘Q で終了する (Google は 2 段階認証のため自動ログインしない)。
+  2. ~~afb~~ **不要 (2026-10-19 集約の判断。`ASP-CONSOLIDATE-A8-RAKUTEN-01` ③ で afb を計測の取得元から外す。外すまでは afb が `api_key_missing` で失敗に記録されるので、「2 日続けて全取得元 pass」は ③ の後に数える)**。旧手順: 管理画面で API キー (認証トークン。9 月に GitHub Secret `AFB_API_KEY` に登録したもの) を確かめ、`security add-generic-password -s stats47-measurement-afb-api -a afb -w` でキーチェーンに入れる。
+  3. KDP: `.local/authenticated-measurement/kdp.autologin-failed` を消し、`node .claude/scripts/measurement/refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。
+- **次 (Claude・上の 1〜2 の後)**: clone を origin/develop に揃えてから、clone で `node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 afb gsc` を実行し、afb と GSC が pass することを確かめる。そのうえで `scripts/scheduled/measurement-session-refresh.sh` の最後の行を `measurement-collect-local.sh` を呼ぶ形に戻し、`measurement.test.mjs` の wrapper の検査も合わせる。
+- **次 (2 日続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
+- **注意**: 切り替えた日に afb や GSC が失敗すると、CI の予備は「その日は取得済み」で省略するので、その日の分が欠ける。1〜2 が済む前に切り替えない。
+- **完了条件**: Mac の定期実行で 2 日続けて全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
+
+
+### [ASP-CONSOLIDATE-A8-RAKUTEN-01] アフィリエイトを A8 と楽天 (直接) に集約し、もしも・afb・バリューコマースの配信と計測を止める
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:アフィリエイト]
+
+- **経緯 (2026-10-19 オーナー判断「集約しよう」)**: 全 ASP の確定収益が ¥0 で、もしも・afb・バリューコマースは配信量が誤差なのに認証付きの計測・照合・帰属確認の手間だけがかかっている。実測: A8 はクリック 8 月 257・9 月 157・10 月 276、成約 0 (`data/affiliate/a8-results.json`)。楽天 (直接) は 9 月 30・10 月 7 クリック、¥0 (`rakuten-results.json`)。もしもは提携 44 件・35 日 (09-14〜10-18) でクリック 1、¥0 (`moshimo-results.json`)。afb・バリューコマースは成果の記録なし。
+- **外す広告 9 件 (`apps/web/scripts/affiliate-ads-data.ts`、すべて `isActive: true`)**:
+  | ASP | id | 案件 | 位置 |
+  |---|---|---|---|
+  | バリューコマース | `af_ikyu_travel_001` | 一休.com 宿泊予約 | blog-bottom |
+  | バリューコマース | `af_expedia_travel_001` | Expedia | blog-bottom |
+  | afb | `af_afb_14567_001` | KOTORA (ハイクラス転職) | blog-bottom |
+  | afb | `af_afb_15743_001` | 能セン (受験対策) | blog-bottom |
+  | afb | `af_afb_16683_001` | おやここ (プロパンガス見直し) | blog-bottom |
+  | もしも | `af_moshimo_tabechoku_1863_001` | 食べチョク | blog-bottom |
+  | もしも | `af_moshimo_rakuten_travel_55_001` | 楽天トラベル 国内宿泊 | blog-bottom |
+  | もしも | `af_moshimo_samurai_job_2228_pilot` | Samurai Job | sidebar-bottom |
+  | もしも | `af_moshimo_techgo_6722_pilot` | テックゴー | sidebar-bottom |
+  楽天トラベルは楽天 (直接) の `af_rakuten_travel_001` が残るので、旅行の枠は空かない。
+- **次 (実行順)**: ① 上の 9 件の一覧をオーナーが確認する ② 9 件を `isActive: false` にし (削除はせず、履歴の照合に残す)、develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる (デプロイ不要) ③ 計測から moshimo・afb を外す: `.claude/scripts/measurement/sources.mjs` の取得元・`collect-local.mjs` の afb キー読み込み・`measurement-session-refresh.sh` の moshimo・`authenticated-measurement.yml` と `affiliate-ga4-weekly.yml` の該当段・テストを同じ差分で直し、計測の鮮度 (`measurement-freshness`) の分母と月次ゴール「12/14」を新しい取得元数で書き直す ④ 提携の解除・アカウントの扱いは急がない (配信と計測を止めれば足りる)。
+- **①② 済 (2026-10-19)**: オーナーが一覧を確認し「外して」。9 件を `isActive: false` にして develop へ push (`6f69fa2d2`)、`publish-affiliate-ads.yml` run 39258480944 が success (「git TS 313 件 = cloud 配信と完全一致」)。公開中の `https://storage.stats47.jp/app/affiliate-ads/all.json` で対象 9 件はすべて `isActive: false`。旧掲載先の本番 `/ranking/apple-consumption-expenditure`・`system-consultant-annual-income`・`travel-participation-rate-overnight` の HTML に moshimo・afi-b・valuecommerce は 0 件 (A8・楽天は表示)。変更前の HTML は取得していないので、「消えた」の根拠は R2 の状態と変更後の HTML だけ。**残りは ③ (計測から moshimo・afb を外す)**。
+- **③ 済 (2026-10-20)**: 計測の取得元 (`sources.mjs`) から moshimo・afb を外し、`collect.mjs` の両分岐と afb の成果取得 (`afb-outcomes.mjs`・テスト)、`collect-local.mjs` の afb キー読み込みを削除。`authenticated-measurement.yml` の matrix から 2 行、`measurement-session-refresh.sh` と `affiliate-ga4-weekly.yml` の moshimo を外し、`auth-credentials.json` の moshimo を `ciCredential: false` にした。週次収益 (NSM) の内訳 (`nsm-revenue-lines.mjs`) は A8 と楽天の 2 行だけにした。計測の鮮度の分母は `latest.json` の取得元数から決まるので、次の計測から 14 → 12 になる (月次ゴール「12/14」は同じ欠測 2 件までなら「10/12」に当たる。`monthly.md` は `/monthly-plan` の担当なので書き換えていない)。テスト: 計測 70 件・metrics 204 件・workflow 方針 51 件が pass。
+- **main へのマージまでの影響**: 定期実行は main の workflow 定義で develop のスクリプトを動かす。マージまでは main の matrix に残る moshimo・afb の収集ジョブが `unknown_source` で失敗する (集計の `summarize.mjs` は develop の取得元定義を使うので `latest.json` と鮮度の数字は 12 取得元で出る)。次の develop→main のマージ (オーナー承認) で解消する。
+- **残り (急がない)**: GitHub Secrets `AFB_API_KEY`・`MEASUREMENT_SESSION_MOSHIMO`・`MEASUREMENT_SESSION_AFB`・`STATS47_AUTH_MOSHIMO_*` の削除と `env-registry.json` の 3 行の削除は、`MEASUREMENT-MAC-DIRECT-01` で CI の取得経路を撤去するときにまとめて行う。ASP の提携操作ツール (`.claude/scripts/ads/moshimo-*`・`afb-*`)、管理画面の表示、提携の解除はそのまま残す (配信と計測を止めれば足りる)。この 3 点が済んだらカードを削除する。
+- **停止条件**: A8・楽天 (直接) の広告に触らない。②の前に計測を止めない (配信中の広告の成果が記録されなくなる)。
+- **完了条件**: 本番の `app/affiliate-ads/all.json` で moshimo・afi-b・valuecommerce の広告が配信中 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新され、使わなくなった Secrets が削除されている。
+
 
 ### [NOTE-PACKS-REPLACE-COCONALA-01] ココナラ撤退の後始末: データパックの有料 note 版 13 本を公開し、サイトの商品ページの行き先を note へ付け替える
 タグ: [収益化] [種類:制作] [実行:windows] [起票:2026-10-19] [領域:商品]
@@ -352,6 +395,7 @@ updated: 2026-10-19
 - **絞る規則 (先に固定)**: ① 全件を `data/affiliate/ga4-affiliate-history.csv` の位置別・vertical 別の形で 4 週記録する。② 4 週後、表示 2,000 以上で **CTR 0.2% 未満かつ成約 0** の組 (案件 × 位置) は止める。0.2% 以上は `AFF-OFFER-ROTATION-01` の 2 週ローテで案件を入れ替えて続ける。③ AdSense は `ad-yield` ¥15/1,000 PV を境に、A2 (自動広告) を入れるか A1 (手動のみ) で行くかを決める。④ 商品導線 (C) は収益ではなく「導線クリック → 商品ページ到達率」で先に判定し、1% 未満の面は外す。⑤ 表示 2,000 に届かない組は判定せず `insufficient-sample` として次の 4 週へ持ち越す (`evidence-based-judgment.md` の 5 ガード)。
 - **共通事業方針 (HARM)**: 読者の課題は「1 位の県の味を試したい・贈りたい」(B1・B2、M+R)、「住む県・子育ての県を決めたい」(B3、M+R)、「家計を比べて見直したい」(B4、M)、「同じデータを自分でも作りたい」(C、A)。雑学の閲覧そのものは対象外で、広告 (A) は読者が払わない換金。支払う理由の証拠は未確認 (成約 0)。需要の証拠は食の検索クリック 27%・楽天カード CTR 0.4%・file_download 週 300 超。次の検証は上の 4 週表。年収などテーマ名から購入意図を推定しない (application.json)。
 - **月次計画との衝突**: 10 月の `monthly.md` は「アフィリエイトの枠・案件の追加はしない」「AdSense の配置設計は 11 月以降」。本カードはそれを上書きするオーナー判断 (2026-10-19) として起票する。開始時期は **11 月の `/monthly-plan` で重点候補として判断する**か、**10 月中に始める (monthly.md の「今月やらないこと」を改訂)** かをオーナーが決める。A2 (自動広告) は出典書き換えの再発確認を通らない限り始めない。
+- **2026-10-19 オーナー判断 (新規展開は保留)**: アフィリエイトの案件・枠の追加 (B1〜B5・C3) は、PV が伸びるまで保留する。理由は、汎用案件が 8〜10 月を通じてクリック率 0.02〜0.22%・成約 0、楽天が 9 月確定 ¥0、A8 も確定収益を確認できていないうえ、今の PV (28 日 44,662) では判定ライン (表示 2,000・成約あり) に届く組がほとんど作れず、登録・承認確認・計測の作業コストに見合わないこと。申請済みの A8 21 件と三井住友カード NL は承認を待つだけにして、登録・配置は増やさない。A1・A2 は `ADSENSE-PLACEMENT-01` の基準値 (11-13 まで) の後に判断する。代わりに PV を増やす `PV-100K-LEVERS-01` #1 (`SEO-CTR-CANDIDATES-01`) を先に進める。再開の判断は 11 月の `/monthly-plan` で、W41 比で 28 日 PV がどれだけ伸びたかを見て行う。
 - **停止条件**: 出典の文言が広告リンクへ書き換えられる事象が 1 件でも再現したら A2 を即停止。広告・導線を一括で全ページに出さない (面を限定して配置別に測る)。PR 表記・景表法の表示は `affiliate-ads-standards.md` を崩さない。表示 2,000 未満の組を「出ない」と判定しない。
 - **完了条件**: 12 本それぞれに「開始日・面・位置・4 週の表示 / クリック / 成約 (または到達率)・続行 / 停止」が記録され、絞った後の構成が `02_収益化戦略.md` §3 と `improvements.md` (効果観測が続くもの) へ引き渡されている。2026-12-31 の `PV-PLAN-REVIEW-2026Q4-01` と同じ回で見直す。
 
@@ -1520,7 +1564,21 @@ updated: 2026-10-19
 - **完了条件**: 7 ページそれぞれに「変えた / 見送った」と理由が記録され、変えたページの変更日が search-growth の台帳にある。
 - **10-16 の追加観測・実行候補**: `data/seo/latest-report.json` の pendingPublication 8件は、参照先proposalが全件 `implementation-needed`（09-18〜10-06選定）。実装済み・公開承認済みとは扱わない。既存7ページと重なる道の駅・高校2年男子身長・公衆電話を先に照合し、重複提案をまとめて各1件の実装担当・対象・完了gateへ落とす。CTR比較は元summaryを継承した実期間で行う。残りは需要と既存作業の重複を確認して採否を決め、一括実装・一括公開しない。
 
+- **2026-10-20 ① のランキング 2 件を git で変更 (未反映)**: オーナーの「できることから進めて」で、上の表の title 案を適用した。公開中の R2 values で数値を確認 (公衆電話 2024 年 47 県合計 96,126・1 位東京 10,717・最下位徳島 509・1975〜2024 年。出生率 2023 年 1 位沖縄 1.60・最下位東京 0.99・1980〜2023 年)、本番の両ページに推移と地図があることも確認。`data/metrics/public-phone-count.ts` を「公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図」、`total-fertility-rate.ts` を「合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図」に変え、description も同じ切り口にした (data-configs のテスト 1,181 件 pass)。**本番反映は次の develop→main マージと `sync-snapshots` の後**。反映した日に本番 title を curl で確かめ、`search-growth:approve` で `ctr-opportunity::/ranking/public-phone-count` と `ctr-opportunity::/ranking/total-fertility-rate` に反映日を記録する (週 2 件の上限・人が承認)。**未着手**: 公衆電話ブログの title 変更は、公開済み記事を送り箱へ戻して `publish-blog.yml` を起動する本番公開なのでオーナー確認待ち。title 案の「ピーク93.5万台」は本文の数値と照合してから使う。出生率の ranking→blog リンクは、推薦が同点を記事 ID のアルファベット順で切るため明示の関係でも上がらない (`RELATED-ARTICLES-TIEBREAK-01` へ分離)。
+- **2026-10-20 ブログ 4 本の seoTitle を R2 で変更 (オーナー承認「すべて」)**: 本文の数値と公開データで照合してから、`seoTitle` の 1 行だけを書き換えた (本文は不変を差分で確認)。`push-article-md-r2.ts --src .local/blog-title-ctr/out` で R2 の article.md を上書きし、`sync-snapshots only=blog` (run 39307859673 success) で `app/blog/all.json` に反映した。公衆電話「公衆電話はなぜ減った? ピーク93.5万台→9.6万台、都市に残り地方で消える理由｜47都道府県2024」(R2 観測値で 1984 年 935,000・2024 年 96,126)、道の駅「道の駅が多い県ランキング｜1位北海道128か所・最下位東京1か所 47都道府県【2026年】」、身長「高校2年生男子の平均身長 都道府県ランキング｜1位新潟・福井171cm、最下位沖縄167.6cm【2023年度】」、健康寿命「健康寿命 都道府県ランキング【最新・2022年】男性1位静岡73.75年・最下位岩手70.93年」(厚生労働省が 2022 年値を 2024-12-24 に公表、時事通信で確認)。ブログは SSG なので**本番の title は PR #1161 のマージ後のデプロイで変わる**。反映日に本番の `<title>` を確かめ、ランキング 2 件と合わせて変更日を記録し、28 日後に同じ窓で CTR を比べる。search-growth の承認は週 2 件までなので、ランキング 2 件を先に記録し、ブログ 4 本は次週以降に記録する。
+- **2026-10-19 オーナー判断 (優先度の引き上げ)**: アフィリエイトの新規展開を保留し (`MONETIZE-BROAD-ROLLOUT-01`)、このカードを 10-21 からの出張中に進めるリモート作業の先頭にする。実行順: ① 公衆電話・出生率の title 案 (上の表) のオーナー確認 → 3 ページを変える ② 道の駅・高校 2 年男子身長・健康寿命の 3 ページを 1 ページずつ変える ③ 197 本を表示の多い順に `/search-growth` へ渡す (週 2 件の承認上限を守り、一括変更はしない)。title の変更は git の定義 (metric の seoTitle・記事 frontmatter) を直すだけなので、デプロイが要るものはまとめて 1 回にする。
 - **2026-10-19 確認 (W43 Could 2)**: ① (食い合いの確認) は 10-08 に済んでいた。「10,717.00個」の修正は main に入り (`origin/main` の config は `decimalPlaces: 0`)、本番 `/ranking/public-phone-count` の HTML は「10,717.00」0 件・「10,717個」27 か所で定着した。**残りは役割分けの title 案 (上の表) のオーナー確認**。承認後に公衆電話の ranking (metric の seoTitle・seoDescription)・blog (記事 frontmatter と ranking へのリンク)、出生率の ranking (seoTitle と blog へのリンク) を変え、変えた日を記録して 4 週後に同じ 28 日窓で CTR を比べる。
+### [RELATED-ARTICLES-TIEBREAK-01] ランキングの関連記事が同点のとき記事 ID のアルファベット順で選ばれ、その指標を主題にした記事が押し出される
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **事象 (2026-10-20 実測)**: `/ranking/total-fertility-rate` の関連記事 3 本は `abortion-rate-prefecture-gap`・`cc-estat-07-birthrate-line`・`childcare-friendly-prefecture-ranking` で、出生率そのものを扱う `fertility-rate-prefecture-gap` (「出生率 ランキング」で順位 1〜1.5) と `total-fertility-rate` が出ない。この指標を `rankingKeys` に持つ公開記事は 13 本。
+- **原因**: `packages/data-configs/src/content/navigation.ts` の推薦は、ランキングから見た記事をすべて `explains` (priority 100) + 一致 key 数 (この場合はどれも 1) で採点し、同点を `a.id.localeCompare(b.id)` で切る。ランキング側に tagIds が無いのでタグでも差がつかない。`data/content/navigation.json` の `links` に明示の関係を足しても同じ 101 点になり、順位は上がらない。
+- **影響範囲 (未計測)**: `rankingKeys` が同じ公開記事を 4 本以上持つランキングすべて。件数は `data/content/pages/blog.json` の rankingKeys を数えて出す。
+- **次**: ① 影響するランキングの数と、そのページの GSC 表示を出す ② 同点の切り方を決める (候補: 編集者が `navigation.json` の `links` で明示した関係に加点する、記事の `rankingKeys` の先頭 = 主題の指標なら加点する)。モデルの推測で記事の主題を決めない ③ `navigation.test.ts` に「主題の記事が上位に来る」テストを足す。
+- **停止条件**: 全ランキングの推薦が変わるので、変更前後の上位 3 本の差分を全件出してから本番に出す。デプロイは他の変更とまとめて 1 回。
+- **完了条件**: `/ranking/total-fertility-rate` の関連記事に `fertility-rate-prefecture-gap` が入り、差分一覧で意図しない入れ替わりが無いことを確かめた。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 

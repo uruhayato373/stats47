@@ -9,8 +9,7 @@
  *                   ASP ごとの成否・認証切れ・観測日時の正典
  * - `a8Results`   … A8 の月別記録 (`data/affiliate/a8-results.json`)。
  *                   件数は発生 (`conversions`)・確定 (`approved`)、金額は確定額 (`revenueYen`) だけを持つ
- * - `moshimoResults` … もしもの期間記録 (`moshimo-results.json`)。発生額 `grossRevenueYen`・確定額 `revenueYen`
- * - afb の金額は非公開の証拠保管にしか無く、`authLatest` は件数だけを持つ。件数 0 の成功なら ¥0 と確定できる
+ * - もしも・afb は 2026-10-19 に A8・楽天へ集約して計測から外した (ASP-CONSOLIDATE-A8-RAKUTEN-01)。行を出さない
  * - `rakutenResults` … 楽天アフィリエイトの月別記録 (`rakuten-results.json`)。管理画面の値を週次レビューで手入力する
  *
  * 欠測・認証切れ・古い観測は 0 円にしない。「判定不能」と理由を書く (`project_monetization_contract`)。
@@ -57,40 +56,15 @@ function a8Line(source, a8Results, asOf) {
   return `- A8 (${month} 月累計・観測 ${source.observedAt.slice(0, 10)}): 発生 **${sum("conversions")} 件** / 確定 **${sum("approved")} 件・${yen(sum("revenueYen"))}**（A8 の記録は発生額を持たない）`;
 }
 
-function moshimoLine(source, moshimoResults, asOf) {
-  const reason = unusableReason(source, asOf);
-  if (reason) return `- もしも: **判定不能**（${reason}）`;
-  const records = Array.isArray(moshimoResults?.records) ? moshimoResults.records : null;
-  if (!records) return "- もしも: **判定不能**（moshimo-results.json に記録が無い）";
-  if (moshimoResults.coverage?.complete !== true) return "- もしも: **判定不能**（取得範囲が完全でない coverage.complete=false）";
-  const sum = (key) => records.reduce((total, r) => total + (Number(r[key]) || 0), 0);
-  const period = moshimoResults.period ? `${moshimoResults.period.from}〜${moshimoResults.period.to}` : "期間不明";
-  return `- もしも (${period}): 発生 **${sum("conversions")} 件・${yen(sum("grossRevenueYen"))}** / 確定 **${sum("approved")} 件・${yen(sum("revenueYen"))}**`;
-}
-
-function afbLine(source, asOf) {
-  const reason = unusableReason(source, asOf);
-  if (reason) return `- afb: **判定不能**（${reason}）`;
-  const occurrence = source.quality?.occurrenceRows;
-  const recognition = source.quality?.recognitionRows;
-  if (!Number.isInteger(occurrence) || !Number.isInteger(recognition)) return "- afb: **判定不能**（件数が記録されていない）";
-  if (occurrence === 0 && recognition === 0) {
-    return `- afb (観測 ${source.observedAt.slice(0, 10)}): 発生 **0 件・¥0** / 確定 **0 件・¥0**`;
-  }
-  return `- afb (観測 ${source.observedAt.slice(0, 10)}): 発生 **${occurrence} 件** / 確定 **${recognition} 件**。金額は **判定不能**（非公開の証拠保管にだけあり、週次では未集計）`;
-}
-
 /**
- * @param {{ authLatest: object|null, a8Results: object|null, moshimoResults: object|null, asOf: Date }} input
- * @returns {string[]} ASP ごとの行 (A8 / もしも / afb の順)
+ * @param {{ authLatest: object|null, a8Results: object|null, rakutenResults?: object|null, asOf: Date }} input
+ * @returns {string[]} ASP ごとの行 (A8 / 楽天の順)
  */
-export function aspRevenueLines({ authLatest, a8Results, moshimoResults, rakutenResults = null, asOf }) {
+export function aspRevenueLines({ authLatest, a8Results, rakutenResults = null, asOf }) {
   const rakuten = rakutenLine(rakutenResults, asOf);
   if (!authLatest) return ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）", rakuten];
   return [
     a8Line(findSource(authLatest, "a8"), a8Results, asOf),
-    moshimoLine(findSource(authLatest, "moshimo"), moshimoResults, asOf),
-    afbLine(findSource(authLatest, "afb"), asOf),
     rakuten,
   ];
 }

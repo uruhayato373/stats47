@@ -2090,6 +2090,6 @@
     }
   ],
   "schemaVersion": 2,
-  "updatedAt": "2026-10-19T05:14:57.848Z",
+  "updatedAt": "2026-10-19T18:29:02.305Z",
   "source": "fetch-a8-ui-csv.mjs → normalize-a8-csv.mjs（自動取込。手入力は不要）"
 }

@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**723 件** (最終更新: 2026-10-18)
+**726 件** (最終更新: 2026-10-19)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-19 | 📸 Instagram | ranking-quiz/katsuobushi-consumption-quantity | 【都道府県クイズ】かつお節をいちばん多く買う県は？  A 鹿児島県 B 高知県 C 沖縄県  ヒントは2枚目、答えは3枚… | [🔗](https://www.instagram.com/p/DervKb2lO3K/) |
+| 2026-10-19 | 🧵 Threads | area/area-26000-profile | 京都の「らしさ」をデータでたどる。 県花しだれ桜（嵯峨ぎく・なでしこは府の草花）、丹後とり貝と玉露、統計ランキングを1ペ… | [🔗](https://www.threads.com/@stats47jp/post/DeqzBbbk2KN) |
+| 2026-10-19 | 🧵 Threads | ranking/travel-participation-rate-domestic | この1年で国内旅行をした人が多い県は？  1位東京41.7％、2位愛知39.9％、3位神奈川38.1％。 最も低い徳島は… | [🔗](https://www.threads.com/@stats47jp/post/DeqFOw9gLQg) |
 | 2026-10-18 | 📸 Instagram | tile-change/total-population-1975-2025 | 50年で、人口はどう変わった？ 1975→2025年。増加 21県 ／ 減少 26県。全47県を地図に。 全47都道府県… | [🔗](https://www.instagram.com/p/Deo10sGG1qy/) |
 | 2026-10-18 | 🧵 Threads | area/area-25000-profile | 滋賀を1位・47位だけで語らない。 県木はモミジ、県鳥はカイツブリ。人口・産業・暮らしの県データブックへ。 続きは👇 … | [🔗](https://www.threads.com/@stats47jp/post/DeoRmz5Eaao) |
 | 2026-10-18 | 🧵 Threads | ranking/residential-land-price-change-rate | 住宅地の地価、上昇率の1位は東京ではなく沖縄。  沖縄＋5.8％、東京＋4.6％、福岡＋3.8％。 最も低い愛媛は−1.… | [🔗](https://www.threads.com/@stats47jp/post/DenixxZDjmi) |
