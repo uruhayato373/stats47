@@ -10,6 +10,7 @@ import {
   imageById,
   saveImagePlan,
   saveImagePolicy,
+  saveImageComparison,
 } from '../../../../../../.claude/scripts/media/lib/workspace.mjs';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -25,6 +26,21 @@ export async function GET(
 }
 const revision = z.string().regex(/^[a-f0-9]{64}$/);
 const schema = z.discriminatedUnion('action', [
+  z
+    .object({
+      action: z.literal('comparison'),
+      revision,
+      comparison: z
+        .object({
+          key: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9_-]{0,159}$/),
+          title: z.string().trim().min(1).max(300),
+          reason: z.string().trim().min(1).max(5000),
+          sharedChannels: z.array(z.enum(['note', 'web', 'x', 'instagram'])),
+        })
+        .strict()
+        .nullable(),
+    })
+    .strict(),
   z
     .object({
       action: z.literal('assess'),
@@ -94,6 +110,8 @@ export async function PATCH(
       });
     else if (body.action === 'policy')
       saveImagePolicy(projectRoot(), id, body.revision, body.policy);
+    else if (body.action === 'comparison')
+      saveImageComparison(projectRoot(), id, body.revision, body.comparison);
     else if (body.action === 'assess')
       await saveOriginalReview(id, body.revision, body.review);
     else

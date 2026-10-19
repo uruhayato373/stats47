@@ -2633,6 +2633,17 @@
       "rankingKeys": []
     },
     {
+      "id": "note:h-howto-csv-mojibake",
+      "kind": "note",
+      "key": "h-howto-csv-mojibake",
+      "title": "CSVをExcelで開くと文字化けする原因と直し方 ── UTF-8とShift_JISの違いを1回で理解する",
+      "href": "https://note.com/stats47/n/nc884a0a01b71",
+      "published": true,
+      "rankingKeys": [
+        "total-population"
+      ]
+    },
+    {
       "id": "note:koumuin-gis-01-depopulation-medical",
       "kind": "note",
       "key": "koumuin-gis-01-depopulation-medical",
@@ -4518,6 +4529,17 @@
       "rankingKeys": []
     },
     {
+      "id": "sns:1019",
+      "kind": "sns",
+      "key": "1019",
+      "title": "りんごを最も多く買う県は、青森ではなく岩手。",
+      "href": "https://www.threads.com/@stats47jp/post/DeiaVEcjB_T",
+      "published": true,
+      "rankingKeys": [
+        "apple-consumption-quantity"
+      ]
+    },
+    {
       "id": "sns:102",
       "kind": "sns",
       "key": "102",
@@ -4527,6 +4549,55 @@
       "rankingKeys": [
         "current-balance-ratio"
       ]
+    },
+    {
+      "id": "sns:1020",
+      "kind": "sns",
+      "key": "1020",
+      "title": "旅先では見えにくい愛知の輪郭。",
+      "href": "https://www.threads.com/@stats47jp/post/DejIoe6k83z",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1021",
+      "kind": "sns",
+      "key": "1021",
+      "title": "歯医者が多い県はどこ？",
+      "href": "https://www.threads.com/@stats47jp/post/Dek81yZgqsP",
+      "published": true,
+      "rankingKeys": [
+        "dental-clinic-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:1022",
+      "kind": "sns",
+      "key": "1022",
+      "title": "三重のデータブックを公開中。",
+      "href": "https://www.threads.com/@stats47jp/post/DelqkyPie0v",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1023",
+      "kind": "sns",
+      "key": "1023",
+      "title": "住宅地の地価、上昇率の1位は東京ではなく沖縄。",
+      "href": "https://www.threads.com/@stats47jp/post/DenixxZDjmi",
+      "published": true,
+      "rankingKeys": [
+        "residential-land-price-change-rate"
+      ]
+    },
+    {
+      "id": "sns:1024",
+      "kind": "sns",
+      "key": "1024",
+      "title": "滋賀を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/DeoRmz5Eaao",
+      "published": true,
+      "rankingKeys": []
     },
     {
       "id": "sns:104",
@@ -4882,6 +4953,24 @@
       "rankingKeys": []
     },
     {
+      "id": "sns:1091",
+      "kind": "sns",
+      "key": "1091",
+      "title": "【県どうしの比較】北海道 vs 沖縄県",
+      "href": "https://www.instagram.com/p/Dejx0ayEZ6Z/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1092",
+      "kind": "sns",
+      "key": "1092",
+      "title": "【都道府県データ】石川県、全国で何位？",
+      "href": "https://www.instagram.com/p/DemPAAgG6MN/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:11",
       "kind": "sns",
       "key": "11",
@@ -4935,6 +5024,15 @@
       "rankingKeys": [
         "fire-damage-casualties-per-population"
       ]
+    },
+    {
+      "id": "sns:1185",
+      "kind": "sns",
+      "key": "1185",
+      "title": "50年で、人口はどう変わった？",
+      "href": "https://www.instagram.com/p/Deo10sGG1qy/",
+      "published": true,
+      "rankingKeys": []
     },
     {
       "id": "sns:122",
@@ -12242,6 +12340,11 @@
       "relation": "uses"
     },
     {
+      "from": "note:h-howto-csv-mojibake",
+      "to": "ranking:total-population",
+      "relation": "uses"
+    },
+    {
       "from": "note:recovered-n026bb22ad4eb",
       "to": "ranking:sports-participation-rate-volleyball",
       "relation": "uses"
@@ -12657,8 +12760,23 @@
       "relation": "uses"
     },
     {
+      "from": "sns:1019",
+      "to": "ranking:apple-consumption-quantity",
+      "relation": "uses"
+    },
+    {
       "from": "sns:102",
       "to": "ranking:current-balance-ratio",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1021",
+      "to": "ranking:dental-clinic-count-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1023",
+      "to": "ranking:residential-land-price-change-rate",
       "relation": "uses"
     },
     {

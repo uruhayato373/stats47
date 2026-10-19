@@ -7,6 +7,10 @@ export type NumericDomainPolicy =
   | { mode: 'zero'; padding?: number }
   | { mode: 'fixed'; min: number; max: number };
 
+/** Truncated bar axes must expose their bounds and the omitted zero baseline. */
+export type BarDomainPolicy = NumericDomainPolicy;
+export const DEFAULT_BAR_DOMAIN = { mode: 'extent' } as const satisfies BarDomainPolicy;
+
 export type ColorClassification =
   | { method: 'continuous' }
   | { method: 'equal-interval' | 'quantile'; classes: number }
@@ -20,6 +24,8 @@ export interface MetricPresentation {
   classification: ColorClassification;
   trendDomain: NumericDomainPolicy;
   comparisonDomain: NumericDomainPolicy;
+  /** Separate from the position-encoded comparison plot. Omission uses DEFAULT_BAR_DOMAIN. */
+  barDomain?: BarDomainPolicy;
   divergingMidpoint?: 'zero' | 'mean' | 'median' | 'custom';
   divergingMidpointValue?: number;
   isReversed?: boolean;
@@ -43,6 +49,7 @@ export function assertMetricPresentation(
           'classification',
           'trendDomain',
           'comparisonDomain',
+          'barDomain',
           'divergingMidpoint',
           'divergingMidpointValue',
           'isReversed',
@@ -86,6 +93,10 @@ export function assertMetricPresentation(
     !domain(value.domain)
   )
     throw new Error('Invalid metric numeric domain');
+  if (value.barDomain !== undefined) {
+    if (!domain(value.barDomain))
+      throw new Error('Invalid metric bar domain');
+  }
   const classification = value.classification;
   if (!record(classification)) throw new Error('Metric classification missing');
   const method = classification.method;
@@ -178,6 +189,7 @@ export function presentationForNormalizedValues(
     domain: dynamic(presentation.domain),
     comparisonDomain: dynamic(presentation.comparisonDomain),
     trendDomain: dynamic(presentation.trendDomain),
+    ...(presentation.barDomain ? { barDomain: presentation.barDomain.mode === 'fixed' ? DEFAULT_BAR_DOMAIN : presentation.barDomain } : {}),
     classification:
       presentation.classification.method === 'threshold'
         ? { method: 'equal-interval', classes: 5 }
@@ -188,6 +200,18 @@ export function presentationForNormalizedValues(
         : presentation.divergingMidpoint,
     divergingMidpointValue: undefined,
   };
+}
+
+/** Shared bar-axis policy; reject clipping instead of changing authored fixed limits. */
+export function resolveBarDomain(
+  values: readonly (number | null | undefined)[],
+  policy: BarDomainPolicy = DEFAULT_BAR_DOMAIN
+): [number, number] | null {
+  const domain = resolveNumericDomain(values, policy);
+  if (!domain) return null;
+  const stats = summarizeNumericValues(values)!;
+  if (stats.min < domain[0] || stats.max > domain[1]) throw new Error('Bar domain excludes observations');
+  return domain;
 }
 
 /** Finite, present observations only; national aggregates belong to a separate series. */

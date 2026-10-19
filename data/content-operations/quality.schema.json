@@ -27,6 +27,17 @@
     }
   },
   "definitions": {
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "title", "sharedChannels", "reason"],
+      "properties": {
+        "key": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,159}$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 5000 },
+        "sharedChannels": { "type": "array", "uniqueItems": true, "items": { "enum": ["note", "web", "x", "instagram"] } }
+      }
+    },
     "sha": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
@@ -278,6 +289,7 @@
             "review": { "$ref": "#/definitions/visual" }
           }
         },
+        "comparison": { "$ref": "#/definitions/comparison" },
         "classification": { "$ref": "#/definitions/classification" },
         "classificationHistory": {
           "type": "array",

@@ -1,5 +1,9 @@
 # Memory Index
 
+- [chart-image-copy.md](../rules/chart-image-copy.md) — 画像内の冗長説明を別の型で再追加しない。note・サイト・X・Instagram共通の最小テキスト規約とPNG生成前の検査を使う（同じユーザー指摘の再発防止）
+
+- [feedback_sns_title_unicode_hydration.md](feedback_sns_title_unicode_hydration.md) — SNS見本名の文字数制限で絵文字を分断するとSSRとブラウザが不一致になる。明示題名を優先し、本文はコードポイント単位で短縮する
+
 - [feedback_remotion_resolved_slide_props.md](feedback_remotion_resolved_slide_props.md) — Remotionカルーセルは各slideでselectCompositionを解決し、3枚のSHAが異なることを検査する
 
 - [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note画像契約。カバーはdata/note JSON+Schema・private R2のSHA版。ランキング画像はchart-data+render-specから再生成

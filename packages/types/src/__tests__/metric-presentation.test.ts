@@ -3,6 +3,7 @@ import {
   assertMetricPresentation,
   presentationForNormalizedValues,
   resolveNumericDomain,
+  resolveBarDomain,
   summarizeNumericValues,
   type MetricPresentation,
 } from '../metric-presentation';
@@ -70,14 +71,30 @@ describe('Numeric observation and presentation contracts', () => {
       ...presentation,
       domain: { mode: 'fixed', min: 0, max: 1000 },
       trendDomain: { mode: 'fixed', min: 0, max: 1000 },
+      barDomain: { mode: 'fixed', min: 0, max: 1000 },
       classification: { method: 'threshold', thresholds: [100, 500] },
     });
     expect(resolved.domain).toEqual({ mode: 'extent' });
     expect(resolved.trendDomain).toEqual({ mode: 'extent' });
+    expect(resolved.barDomain).toEqual({ mode: 'extent' });
     expect(resolved.classification).toEqual({
       method: 'equal-interval',
       classes: 5,
     });
     expect(() => assertMetricPresentation(resolved)).not.toThrow();
+  });
+  it('validates bar limits independently of map and dot-plot limits', () => {
+    expect(() => assertMetricPresentation({ ...presentation, barDomain: { mode: 'fixed', min: -10, max: 50 } })).not.toThrow();
+    expect(() => assertMetricPresentation({ ...presentation, barDomain: { mode: 'extent' } })).not.toThrow();
+    expect(() => assertMetricPresentation({ ...presentation, barDomain: { mode: 'fixed', min: 20, max: 40 } })).not.toThrow();
+    for (const barDomain of [
+      { mode: 'fixed', min: 0, max: 0 },
+      { mode: 'fixed', min: 0, max: Infinity }, { mode: 'zero', padding: -1 },
+    ]) expect(() => assertMetricPresentation({ ...presentation, barDomain })).toThrow();
+    expect(resolveBarDomain([28.4, 36.2])).toEqual([28.4, 36.2]);
+    expect(resolveBarDomain([28.4, 36.2], { mode: 'fixed', min: 0, max: 37 })).toEqual([0, 37]);
+    expect(resolveBarDomain([-5, 36.2], { mode: 'fixed', min: -10, max: 37 })).toEqual([-10, 37]);
+    expect(() => resolveBarDomain([36.2], { mode: 'fixed', min: 0, max: 35 })).toThrow('excludes observations');
+    expect(resolveBarDomain([36.2], { mode: 'fixed', min: 20, max: 40 })).toEqual([20, 40]);
   });
 });

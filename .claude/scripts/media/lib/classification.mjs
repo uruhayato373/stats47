@@ -4,6 +4,7 @@ import {
   purposeFromEvidence,
   IMAGE_PURPOSES,
   IMAGE_SELECTIONS,
+  selectionAllowed,
 } from './taxonomy.mjs';
 export const CLASSIFIER_VERSION = 1;
 export const IMAGE_ROLES = {
@@ -309,7 +310,8 @@ export function auditClassification(images, templates) {
       !/^[a-f0-9]{64}$/.test(c.basis) ||
       !c.reason?.trim() ||
       !Object.hasOwn(IMAGE_PURPOSES, c.purpose) ||
-      !Object.hasOwn(IMAGE_SELECTIONS, c.selection)
+      !Object.hasOwn(IMAGE_SELECTIONS, c.selection) ||
+      !selectionAllowed(c.purpose, c.selection)
     )
       throw Error('Missing classification contract: ' + image.id);
     if (c.role !== roleForTemplate(image.templateId))

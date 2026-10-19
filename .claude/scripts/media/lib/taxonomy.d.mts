@@ -1,5 +1,6 @@
 export const IMAGE_PURPOSES: Record<string, string>;
 export const IMAGE_SELECTIONS: Record<string, string>;
+export function selectionAllowed(purpose: string, selection: string): boolean;
 export const TEMPLATE_ALIASES: Record<string, string>;
 export const RETIRED_TEMPLATES: string[];
 export const VISUAL_TEMPLATES: Pick<

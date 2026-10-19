@@ -89,6 +89,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (curiosity gap・図あたり字数・critic 必須) | contents/blog・scripts/blog・skills/blog |
 | `blog-data-schema.md` | ブログ data/*.json の統一 schema・3 点セット系譜・wave 命名 | 同上 |
 | `blog-svg-chart-standards.md` | ブログ SVG チャート (svg-builder カタログ・サイズ gate) | packages/svg-builder・contents/blog data |
+| `chart-image-copy.md` | 4媒体の統計画像内テキスト最小化・冗長説明の再混入防止 | admin型見本・Remotion・svg-builder・画像生成 |
 | `sns-content-standards.md` | SNS 投稿 (X/IG/YouTube pilot/note) の企画・生成・投稿・計測。管理コンソールは `npm run admin` (skill `/admin-console`) | scripts/sns・skills/sns・apps/remotion・admin |
 | `buzz-map-standards.md` | 日本地図×統計のバズカード (型A〜E・spec・カタログ) | remotion buzz-map・skills/sns/buzz-map |
 | `analytics-event-standards.md` | GA4 計装イベント追加・変更 (custom dimension 登録台帳) | apps/web/src/lib/analytics |

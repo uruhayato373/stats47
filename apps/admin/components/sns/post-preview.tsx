@@ -23,6 +23,7 @@ import {
   statusLabel,
   statusTone,
   type GalleryItem,
+  orderedPostAssets,
 } from '@/lib/sns-ledger';
 import { DraftCaptionEditor } from './draft-caption-editor';
 
@@ -37,9 +38,8 @@ export function PostPreview({
 }) {
   const [dirty, setDirty] = useState(false);
   const [assetIndex, setAssetIndex] = useState(0);
-  const archived = [...(item.assets ?? [])]
-    .filter((a) => a.state === 'archived' && (a.drive_path || a.r2))
-    .sort((a, b) => a.order - b.order);
+  const archived = orderedPostAssets(item.assets ?? [])
+    .filter((a) => a.state === 'archived' && (a.drive_path || a.r2));
   const selected = archived[assetIndex];
   const candidates =
     assetIndex > 0 && selected && item.id
@@ -89,7 +89,7 @@ export function PostPreview({
                     size="sm"
                     onClick={() => setAssetIndex(i)}
                   >
-                    素材 {i + 1}
+                    {item.domain === 'note' ? a.role === 'thumbnail' ? '参考原図（note）' : `投稿用 ${a.order}` : `素材 ${i + 1}`}
                   </Button>
                 ))}
               </div>
@@ -110,7 +110,7 @@ export function PostPreview({
                 <StatusBadge tone="info">
                   {CANDIDATE_STAGES[candidateStage(item)]}
                 </StatusBadge>
-                <p>{item.planning.note}</p>
+                <p className="break-all">{item.planning.note}</p>
                 <p className="text-console-muted">
                   {item.planning.origin === 'new-format'
                     ? '新しい型の追加企画'

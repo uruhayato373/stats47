@@ -8,12 +8,14 @@ export function ActualImage({
   small = false,
   onDimensions,
   dimensions,
+  eager = false,
 }: {
   src: string | null;
   alt: string;
   small?: boolean;
   onDimensions?: (size: { width: number; height: number }) => void;
   dimensions?: { width: number; height: number } | null;
+  eager?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
   if (!src)
@@ -39,7 +41,7 @@ export function ActualImage({
     <img
       src={src}
       alt={alt}
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
       width={dimensions?.width}
       height={dimensions?.height}
       className={
