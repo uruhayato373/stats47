@@ -175,5 +175,5 @@ export function validateDecisionTargets(profile, keys, metricExists) {
   const list = Array.isArray(keys) ? keys : [];
   if (profile?.lane !== "decision") return [];
   if (list.length === 0) return ["decision レーンなのに targetRankingKeys が空"];
-  return list.filter((key) => !metricExists(key)).map((key) => `targetRankingKeys の ${key} が data/metrics に無い`);
+  return list.filter((key) => !metricExists(key)).map((key) => `targetRankingKeys の ${key} が metric 定義に無い`);
 }

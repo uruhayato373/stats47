@@ -6,10 +6,14 @@
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
+import { A8_REPORT_AUTOMATION } from "../../../../config/paths.mjs";
 import { crossCheckAgainstSite, normalizeA8Csv, unexplainedOtherSiteClicks } from "../lib/a8-report-csv.mjs";
 
+const ROOT = fileURLToPath(new URL("../../../../", import.meta.url));
 const SHARED = ["s00000024757004"];
 const site = (clicks, extra = {}) => ({ site: "統計で見る都道府県", clicks, conversions: 0, grossRevenueYen: 0, approved: 0, revenueYen: 0, ...extra });
 const program = (programId, clicks, extra = {}) => ({ programId, program: `af_${programId}`, clicks, conversions: 0, grossRevenueYen: 0, approved: 0, revenueYen: 0, ...extra });
@@ -68,7 +72,7 @@ test("他サイト登録のクリックがあっても、専用案件の成果�
 });
 
 test("正規化はサイト別レポートの他サイト登録の行を rows に入れず otherSiteRows で返す", () => {
-  const cfg = JSON.parse(readFileSync(new URL("../../../../config/a8-report-automation.json", import.meta.url), "utf8"));
+  const cfg = JSON.parse(readFileSync(join(ROOT, A8_REPORT_AUTOMATION), "utf8"));
   const csv = [
     '"サイト","imp数","click数","CTR","発生件数","発生金額","CVR","確定件数","確定金額","確定率","キャンセル件数","キャンセル金額","未確定件数","未確定金額"',
     '"doboku-note",363326,56,0.02,1,13534,1.79,0,0,"-",0,0,1,13534',
