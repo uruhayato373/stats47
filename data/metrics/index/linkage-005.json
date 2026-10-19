@@ -1056,7 +1056,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0004026904",
+          "statsDataId": "0004048079",
           "filters": {
             "cdCat01": "100"
           }
@@ -1065,11 +1065,11 @@
       "recipe": {
         "kind": "estat",
         "estatParams": {
-          "statsDataId": "0004026904",
+          "statsDataId": "0004048079",
           "cdCat01": "100"
         },
         "derived": false,
-        "configHash": "bd010fd16ed36746"
+        "configHash": "580ba4927d65ada9"
       },
       "dependencies": [],
       "normalizationDependencies": [],
