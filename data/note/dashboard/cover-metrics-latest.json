@@ -1,9 +1,23 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T00:15:29.346Z",
+  "generatedAt": "2026-10-19T10:42:13.061Z",
   "status": "incomplete",
   "issues": [
-    "metrics_unavailable"
+    "source_stale_or_invalid"
   ],
-  "articles": []
+  "articles": [],
+  "period": {
+    "start": "2026-09-21",
+    "end": "2026-10-18",
+    "timeZone": "Asia/Tokyo",
+    "inclusive": true,
+    "label": "カスタム",
+    "display": "2026/9/21〜2026/10/18",
+    "aggregatedAt": "2026-10-19T17:56:00+09:00",
+    "summaryAggregatedAt": "2026-10-19T19:20:00+09:00"
+  },
+  "metricsFetchedAt": "2026-10-19T10:42:13.053Z",
+  "coverObservedAt": "2026-09-11T23:14:03.193Z",
+  "ctr": null,
+  "ctrUnavailableReason": "表示に対応するカバークリック数を取得していない"
 }
