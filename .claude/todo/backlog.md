@@ -278,6 +278,14 @@ updated: 2026-10-19
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-COVER-METRICS-JOIN-STALE-01] note の表紙×閲覧数の結合が、表紙監査の鮮度切れで毎週 incomplete のまま
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-19] [領域:管理]
+
+- **事象 (2026-10-19 確認)**: `data/note/dashboard/cover-metrics-latest.json` は 10-05・10-12・10-19 の 3 回とも `incomplete` だった。閲覧数の取得が成功した 10-05 と 10-19 の理由は `source_stale_or_invalid` である。`.claude/scripts/note/lib/dashboard-metrics.mjs` の結合は、閲覧数の取得と表紙の監査の両方が 1 日以内でないと結合しない。一方、表紙監査 `data/note/evidence/note-cover-audit-latest.json` の `completedAt` は 2026-09-11 のままで、週次の取得 (`fetch-note-metrics.mjs`) は表紙監査を作り直さない。
+- **次**: 表紙監査 (`audit-note-covers.mjs`) を週次の取得の前に走らせるか、表紙が変わらない期間は古い監査でも結合してよいとするかを決める。後者にする場合は、表紙を変えた日 (`update-note-covers.mjs` の記録) より新しい監査であることを条件にする。
+- **禁止**: 鮮度の条件を外すだけで結合を通さない (古い表紙と新しい閲覧数を組み合わせた誤った比較になる)。
+- **完了条件**: 週次の定期実行で `cover-metrics-latest.json` が `incomplete` 以外になり、結合に使った表紙監査の日時が表紙の最終変更より新しいことを確かめている。
+
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト]
 
