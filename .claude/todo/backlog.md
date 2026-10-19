@@ -130,8 +130,7 @@ updated: 2026-10-19
 - **修正後の実CI成功**: run38987311743 attempt4は全8サービスpass、KDP取得4分12秒。private SHA/bytes一致、22冊の状態・日次・確定月次completeを確認した。record成功・git commit be018dada8、確定9月売上の台帳はadded0/skipped1/conflicts0。本人再確認後の同日成功であり、別日main schedule連続2回の完了条件は維持する。修正後develop品質CI38991805850もsuccess。
 - **2026-10-19 ココナラ撤退**: ココナラを取得対象から外した (取得元 8 → 7、計測の鮮度の母数も 1 減る)。ココナラの日次の判定はこのカードの対象外。過去の観測は `data/authenticated/revenue-history.json` に残る。
 - **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
-- **次 (オーナー・10-20 17:30 の定期実行より前)**: ① Mac の `.env.local` に `AFB_API_KEY` を入れる (CI では Secrets から渡していた)。② `node .claude/scripts/google-admin/cli.mjs login` で Google 管理用プロファイルにログインし直す (CI は保管庫側のセッションを更新し続けていたので Mac のプロファイルは切れていた)。③ KDP は `.local/authenticated-measurement/kdp.autologin-failed` を消して `refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。これをしないと、Mac の要約が push された日は CI の予備も「収集済み」で省略し、その日の afb・GSC が欠ける。
-- **次 (2 日 pass の後・10-22 目安)**: Mac の取得が 2 日続けて全取得元 pass したら、`authenticated-measurement.yml`・`bootstrap-session.mjs --publish` と CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`)・GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」も書き換える。Secrets の削除はオーナー承認後。
+- **2026-10-19 夜**: オーナーの準備 (afb の API キー・GSC のログイン) を後日に回したので、定期実行は CI の起動に戻した。切り替えの手順と残りは `MEASUREMENT-MAC-DIRECT-01`。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -285,6 +284,20 @@ updated: 2026-10-19
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を Mac の直接取得へ切り替え、2 日 pass したら CI と Secrets を撤去する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-19] [領域:管理]
+
+- **経緯 (2026-10-19 オーナー承認)**: ログインは Mac が毎日保ち、そのセッションを CI へ運んで CI のブラウザで取得する遠回りの構成だった。KDP は CI でほぼ毎回 `auth_required` になり、CI の記録コミットが develop→main の PR の検査を止めた。Mac で直接取得する仕組みは実装済み (`.claude/scripts/measurement/collect-local.mjs`・`scripts/scheduled/measurement-collect-local.sh`・`collect.mjs --local --vault`・`vault.mjs` の `MEASUREMENT_VAULT_WRITER=mac`。定期実行専用の clone は `~/stats47-measurement` に作成済み)。同日の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
+- **次 (オーナー)**:
+  1. GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、`https://analytics.google.com` の表示を確かめて、その Chrome を ⌘Q で終了する (Google は 2 段階認証のため自動ログインしない)。
+  2. afb: 管理画面で API キー (認証トークン。9 月に GitHub Secret `AFB_API_KEY` に登録したもの) を確かめ、`security add-generic-password -s stats47-measurement-afb-api -a afb -w` でキーチェーンに入れる。
+  3. KDP: `.local/authenticated-measurement/kdp.autologin-failed` を消し、`node .claude/scripts/measurement/refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。
+- **次 (Claude・上の 1〜2 の後)**: clone を origin/develop に揃えてから、clone で `node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 afb gsc` を実行し、afb と GSC が pass することを確かめる。そのうえで `scripts/scheduled/measurement-session-refresh.sh` の最後の行を `measurement-collect-local.sh` を呼ぶ形に戻し、`measurement.test.mjs` の wrapper の検査も合わせる。
+- **次 (2 日続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
+- **注意**: 切り替えた日に afb や GSC が失敗すると、CI の予備は「その日は取得済み」で省略するので、その日の分が欠ける。1〜2 が済む前に切り替えない。
+- **完了条件**: Mac の定期実行で 2 日続けて全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
+
 
 ### [NOTE-PACKS-REPLACE-COCONALA-01] ココナラ撤退の後始末: データパックの有料 note 版 13 本を公開し、サイトの商品ページの行き先を note へ付け替える
 タグ: [収益化] [種類:制作] [実行:windows] [起票:2026-10-19] [領域:商品]

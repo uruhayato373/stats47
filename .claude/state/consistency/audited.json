@@ -1,9 +1,8 @@
 {
-  "hash": "ce86dde92fc3bfc19aa7e61c7990bfc1e335de3129b256eaa85f67995f59972b",
-  "audited_at": "2026-10-19T12:21:57",
+  "hash": "80bd946bab3d92289e7de268dcc9bdbc61087f66edbde108eed2d860ca7fbb5f",
+  "audited_at": "2026-10-19T12:33:08",
   "files": [
     ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/collect-local.mjs",
-    ".claude/scripts/measurement/collect.mjs"
+    ".claude/scripts/measurement/collect-local.mjs"
   ]
 }

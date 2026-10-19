@@ -367,9 +367,8 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   assert.equal(workflow.jobs.gate.permissions, undefined);
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
   assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
-  // 2026-10-19: CI を起動せず Mac で直接取得する。CI の定期実行は gate で同日の収集済みを省略する予備として残る
-  assert.match(wrapper, /measurement-collect-local\.sh/);
-  assert.doesNotMatch(wrapper, /gh workflow run authenticated-measurement/);
+  // Mac で直接取得する経路は MEASUREMENT-MAC-DIRECT-01 で切り替えるまで CI を起動する
+  assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
 });
 
 test('Mac direct collection writes evidence to the vault but never touches CI-only session state', () => {
