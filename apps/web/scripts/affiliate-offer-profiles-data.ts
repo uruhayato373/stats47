@@ -2656,6 +2656,253 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
       "ranking",
       "blog"
     ]
+  },
+  {
+    "programRef": "a8:s00000020819004",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "サービス新規（初めて申込する方・21歳以上）がWEBで無料相談を申し込み、90日以内に面談を実施。学生・無職・保険販売従事者、面談時間不足は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000020819004",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020819003",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "サービス新規（初めて申込する方・21歳以上）がWEBで無料相談を申し込み、90日以内に初回面談を実施。学生・無職・保険販売従事者、面談時間不足は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000020819003",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020819001",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規がWEBで無料相談を申し込み、60日以内に面談を実施（資料請求のみは20日以内の本人確認で500円）。20歳以下、面談内容・時間が不十分な場合は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000020819001",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009416001",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB申込後、60日以内にアドバイザーとの保険面談を完了。20歳未満・無職・学生・世帯年収100万以下、面談が数分で終わる場合、損害保険のみ・共済・かんぽの相談は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009416001",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000001817002",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "資料請求のWEB申込後、30日以内に電話またはメールで本人確認が取れた時点（複数資料・複数回の請求は1回のみ。入会成果は別条件）。海外在住用フォーム、次年度予約資料請求は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "optional",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000001817002",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000022009002",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で、中学1年生〜高卒生の保護者がWEB申込後、60日以内に電話での本人確認と資料発送を完了。無料体験・キャンペーン申込、電話不通、資料未受領は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000022009002",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633002",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "資料の受取り完了。同一ユーザー・同一IP・同一世帯の2回目以降、資料不達、当広告主の利用経験者は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "optional",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633002",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000013334001",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB申込後、30日以内に無料体験レッスンへ来校し成約。体験レッスン後のキャンセル、重複・虚偽申込、当広告主の利用経験者は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000013334001",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000013511007",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規がWEB申込後、30日以内に塗装会社紹介による見積もり取得を完了。築8年未満、施工予定が1年以上先、現地調査を1社以上断った場合は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000013511007",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000023754002",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規がWEB資料請求後、30日以内の電話での本人確認時点。23歳未満、住宅購入に興味がないと判断された場合、ポイントサイト誘導は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000023754002",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000014546010",
+    "vertical": "energy",
+    "allowedVerticals": [
+      "energy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB申込後、60日以内に利用開始し、利用開始後20日以内に決済方法が確定（新規他社転用5500円・新規開通8000円）。キャンセル・工事未完了、提供外地域、1世帯2回以上の申込は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000014546010",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000011875008",
+    "vertical": "energy",
+    "allowedVerticals": [
+      "energy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規がWEB申込後、30日以内に端末の納品を完了（対象はVision WiMAX）。重複・虚偽・キャンセル、お問い合わせ・法人経由の申込は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000011875008",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "a8:s00000017718022",
+    "vertical": "energy",
+    "allowedVerticals": [
+      "energy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規がWEB申込後、60日以内に利用を開始。1世帯2回以上の申込、初期契約解除の利用、お問い合わせフォーム経由の申込は否認",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000017718022",
+    "verifiedAt": "2026-10-19",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
   }
 ];
 
