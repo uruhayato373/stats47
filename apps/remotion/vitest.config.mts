@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: [
+      'src/features/note-household/**/*.test.ts',
       'src/features/geo-x/__tests__/**/*.test.ts',
       'src/features/ig-series/__tests__/**/*.test.ts',
       'src/features/ranking-quiz-instagram/__tests__/**/*.test.ts',

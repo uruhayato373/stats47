@@ -10,6 +10,8 @@ import { defineConfig } from "vitest/config";
  * - 実 SSOT に触れないよう、テスト側は必ず fixture root を STATS47_PROJECT_ROOT で差し込む。
  */
 export default defineConfig({
+  // Next preserves JSX; Vite 8's Oxc must transform imported TSX for component tests.
+  oxc: { jsx: { runtime: 'automatic' } },
   test: {
     environment: "node",
     globals: true,
@@ -22,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
+      "@stats47/types": path.resolve(__dirname, "../../packages/types/src/index.ts"),
       "@stats47/data-configs/business-plan": path.resolve(
         __dirname,
         "../../packages/data-configs/src/business-plan/index.ts"

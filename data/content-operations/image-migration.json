@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-16T01:15:49.417Z",
+  "observedAt": "2026-10-19T00:51:56.947Z",
   "applied": true,
   "driveMounted": false,
   "results": [
@@ -108,84 +108,108 @@
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "ea8f694619e5d450b13c9a443f2116ce8441cec650f1619c192bedbd2ff84684",
+      "key": "sns-assets/x/581/image-1/ea8f694619e5d450b13c9a443f2116ce8441cec650f1619c192bedbd2ff84684.png"
     },
     {
       "postId": 582,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "1e4ffe538e0dd06afffe8f402e3d75bdd002da2f7bbac2a90a9844b22bf515a1",
+      "key": "sns-assets/x/582/image-1/1e4ffe538e0dd06afffe8f402e3d75bdd002da2f7bbac2a90a9844b22bf515a1.png"
     },
     {
       "postId": 583,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "72211e3ceb3c6cf98e333096409e54c015abc260123a6b0e7b97e0fc9a82a5e3",
+      "key": "sns-assets/x/583/image-1/72211e3ceb3c6cf98e333096409e54c015abc260123a6b0e7b97e0fc9a82a5e3.png"
     },
     {
       "postId": 584,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "f18518edff119607ee600cc7cdda9e6d9d87f37df384df79be55a3ecd3929a70",
+      "key": "sns-assets/x/584/image-1/f18518edff119607ee600cc7cdda9e6d9d87f37df384df79be55a3ecd3929a70.png"
     },
     {
       "postId": 585,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "cbfca5b7cb6b93a325a4b61b3a772c5657d7113664135e425f6f6f893273ffd4",
+      "key": "sns-assets/x/585/image-1/cbfca5b7cb6b93a325a4b61b3a772c5657d7113664135e425f6f6f893273ffd4.png"
     },
     {
       "postId": 586,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "89687ecf93a9ba76167a2e16eebdf0a166f152f215db79baf88d9b4b403ec7b4",
+      "key": "sns-assets/x/586/image-1/89687ecf93a9ba76167a2e16eebdf0a166f152f215db79baf88d9b4b403ec7b4.png"
     },
     {
       "postId": 587,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "d5c720df87ccaa170008b5385aecf7aa877ee7c55cdf7d2556f8db9dae17c844",
+      "key": "sns-assets/x/587/image-1/d5c720df87ccaa170008b5385aecf7aa877ee7c55cdf7d2556f8db9dae17c844.png"
     },
     {
       "postId": 588,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "da323abb7e0886de200ae46a77e675ed914f02bf9d4dc62ff91e5841c4512587",
+      "key": "sns-assets/x/588/image-1/da323abb7e0886de200ae46a77e675ed914f02bf9d4dc62ff91e5841c4512587.png"
     },
     {
       "postId": 589,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "b9904df53d9e4081494415a3b2320696638369c51d17a003d74705a1a27e9fb1",
+      "key": "sns-assets/x/589/image-1/b9904df53d9e4081494415a3b2320696638369c51d17a003d74705a1a27e9fb1.png"
     },
     {
       "postId": 590,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "4cb31b93fd0264d113eb4782597d6a3c32fda70ffcb03d20c6daa145b96ed408",
+      "key": "sns-assets/x/590/image-1/4cb31b93fd0264d113eb4782597d6a3c32fda70ffcb03d20c6daa145b96ed408.png"
     },
     {
       "postId": 591,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "3e86e90ac96a3f8eaa8d3569b8883e87aa3eaad413a056eb8db74cd1be4da30a",
+      "key": "sns-assets/x/591/image-1/3e86e90ac96a3f8eaa8d3569b8883e87aa3eaad413a056eb8db74cd1be4da30a.png"
     },
     {
       "postId": 593,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "31c471959a4bc9f9d1711b2576db7cb8f5453237e536e042205e1824d528157b",
+      "key": "sns-assets/x/593/image-1/31c471959a4bc9f9d1711b2576db7cb8f5453237e536e042205e1824d528157b.png"
     },
     {
       "postId": 594,
@@ -3447,7 +3471,9 @@
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7",
+      "key": "sns-assets/x/1109/image-1/97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7.png"
     },
     {
       "postId": 1110,
@@ -4230,7 +4256,9 @@
       "platform": "instagram",
       "role": "slide",
       "order": 2,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7",
+      "key": "sns-assets/instagram/1135/slide-2/97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7.png"
     },
     {
       "postId": 1135,
@@ -4872,21 +4900,27 @@
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "87ca5437769c7cc5efe7a0919614cf7f473e9bb06b9c37b10fe79564dc52699c",
+      "key": "sns-assets/x/1173/image-1/87ca5437769c7cc5efe7a0919614cf7f473e9bb06b9c37b10fe79564dc52699c.png"
     },
     {
       "postId": 1174,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "de5975e7150bd5984f097a6fff23cdefb33e8829bd4b9cea031ad7126b7d87f5",
+      "key": "sns-assets/x/1174/image-1/de5975e7150bd5984f097a6fff23cdefb33e8829bd4b9cea031ad7126b7d87f5.png"
     },
     {
       "postId": 1175,
       "platform": "x",
       "role": "image",
       "order": 1,
-      "status": "source-unavailable"
+      "status": "migrated",
+      "sha256": "48487e2e4b40daa5b2be365e381b955fd0e9e2bef502a199a5230fc48aad4e14",
+      "key": "sns-assets/x/1175/image-1/48487e2e4b40daa5b2be365e381b955fd0e9e2bef502a199a5230fc48aad4e14.png"
     },
     {
       "postId": 1176,

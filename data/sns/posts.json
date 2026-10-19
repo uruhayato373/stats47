@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 1002,
-    "nextId": 1188
+    "count": 1008,
+    "nextId": 1194
   },
   "posts": [
     {
@@ -15041,7 +15041,7 @@
       "id": 581,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.405Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15075,7 +15075,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/total-overnight-guests/x/stills/total-overnight-guests.png"
+          "source": ".local/r2/sns/ranking/total-overnight-guests/x/stills/total-overnight-guests.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/581/image-1/ea8f694619e5d450b13c9a443f2116ce8441cec650f1619c192bedbd2ff84684.png"
+          }
         }
       ]
     },
@@ -15083,7 +15087,7 @@
       "id": 582,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.433Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15117,7 +15121,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/other-dried-vegetables-seaweed-consumption-expenditure/x/stills/other-dried-vegetables-seaweed-consumption-expenditure.png"
+          "source": ".local/r2/sns/ranking/other-dried-vegetables-seaweed-consumption-expenditure/x/stills/other-dried-vegetables-seaweed-consumption-expenditure.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/582/image-1/1e4ffe538e0dd06afffe8f402e3d75bdd002da2f7bbac2a90a9844b22bf515a1.png"
+          }
         }
       ]
     },
@@ -15125,7 +15133,7 @@
       "id": 583,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.436Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15159,7 +15167,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/electricity-demand/x/stills/electricity-demand.png"
+          "source": ".local/r2/sns/ranking/electricity-demand/x/stills/electricity-demand.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/583/image-1/72211e3ceb3c6cf98e333096409e54c015abc260123a6b0e7b97e0fc9a82a5e3.png"
+          }
         }
       ]
     },
@@ -15167,7 +15179,7 @@
       "id": 584,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.439Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15201,7 +15213,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/ritual-goods-tombstone-consumption-expenditure/x/stills/ritual-goods-tombstone-consumption-expenditure.png"
+          "source": ".local/r2/sns/ranking/ritual-goods-tombstone-consumption-expenditure/x/stills/ritual-goods-tombstone-consumption-expenditure.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/584/image-1/f18518edff119607ee600cc7cdda9e6d9d87f37df384df79be55a3ecd3929a70.png"
+          }
         }
       ]
     },
@@ -15209,7 +15225,7 @@
       "id": 585,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.442Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15243,7 +15259,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/flood-affected-rivers/x/stills/flood-affected-rivers.png"
+          "source": ".local/r2/sns/ranking/flood-affected-rivers/x/stills/flood-affected-rivers.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/585/image-1/cbfca5b7cb6b93a325a4b61b3a772c5657d7113664135e425f6f6f893273ffd4.png"
+          }
         }
       ]
     },
@@ -15251,7 +15271,7 @@
       "id": 586,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.446Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15285,7 +15305,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/travel-participation-rate-overseas/x/stills/travel-participation-rate-overseas.png"
+          "source": ".local/r2/sns/ranking/travel-participation-rate-overseas/x/stills/travel-participation-rate-overseas.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/586/image-1/89687ecf93a9ba76167a2e16eebdf0a166f152f215db79baf88d9b4b403ec7b4.png"
+          }
         }
       ]
     },
@@ -15293,7 +15317,7 @@
       "id": 587,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.450Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15327,7 +15351,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/total-overnight-guests-foreign/x/stills/total-overnight-guests-foreign.png"
+          "source": ".local/r2/sns/ranking/total-overnight-guests-foreign/x/stills/total-overnight-guests-foreign.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/587/image-1/d5c720df87ccaa170008b5385aecf7aa877ee7c55cdf7d2556f8db9dae17c844.png"
+          }
         }
       ]
     },
@@ -15335,7 +15363,7 @@
       "id": 588,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.453Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15369,7 +15397,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/maritime-import-export-cargo/x/stills/maritime-import-export-cargo.png"
+          "source": ".local/r2/sns/ranking/maritime-import-export-cargo/x/stills/maritime-import-export-cargo.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/588/image-1/da323abb7e0886de200ae46a77e675ed914f02bf9d4dc62ff91e5841c4512587.png"
+          }
         }
       ]
     },
@@ -15377,7 +15409,7 @@
       "id": 589,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.456Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15411,7 +15443,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/port-cargo-total/x/stills/port-cargo-total.png"
+          "source": ".local/r2/sns/ranking/port-cargo-total/x/stills/port-cargo-total.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/589/image-1/b9904df53d9e4081494415a3b2320696638369c51d17a003d74705a1a27e9fb1.png"
+          }
         }
       ]
     },
@@ -15419,7 +15455,7 @@
       "id": 590,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.459Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15453,7 +15489,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/lowest-temperature/x/stills/lowest-temperature.png"
+          "source": ".local/r2/sns/ranking/lowest-temperature/x/stills/lowest-temperature.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/590/image-1/4cb31b93fd0264d113eb4782597d6a3c32fda70ffcb03d20c6daa145b96ed408.png"
+          }
         }
       ]
     },
@@ -15461,7 +15501,7 @@
       "id": 591,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.462Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15495,7 +15535,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/vegetable-seaweed-tsukudani-consumption-expenditure/x/stills/vegetable-seaweed-tsukudani-consumption-expenditure.png"
+          "source": ".local/r2/sns/ranking/vegetable-seaweed-tsukudani-consumption-expenditure/x/stills/vegetable-seaweed-tsukudani-consumption-expenditure.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/591/image-1/3e86e90ac96a3f8eaa8d3569b8883e87aa3eaad413a056eb8db74cd1be4da30a.png"
+          }
         }
       ]
     },
@@ -15529,7 +15573,7 @@
       "id": 593,
       "status": "posted",
       "created_at": "2026-07-11T09:42:27.469Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -15563,7 +15607,11 @@
           "mime": "image/png",
           "width": 3840,
           "height": 1616,
-          "source": ".local/r2/sns/ranking/overseas-travel-annual-participation-rate-15plus/x/stills/overseas-travel-annual-participation-rate-15plus.png"
+          "source": ".local/r2/sns/ranking/overseas-travel-annual-participation-rate-15plus/x/stills/overseas-travel-annual-participation-rate-15plus.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/593/image-1/31c471959a4bc9f9d1711b2576db7cb8f5453237e536e042205e1824d528157b.png"
+          }
         }
       ]
     },
@@ -34080,7 +34128,7 @@
         "note": "オーナーの明示指示「この3つの型を1つずつ使って、次回のSNS投稿を画像と本文まで3本作って 感触を掴みたいので予約投稿まで」に基づく3本。既存予約後の空き枠11月1〜3日。"
       },
       "created_at": "2026-10-11T10:51:01.794Z",
-      "updated_at": "2026-10-11T11:49:07.703Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "post_type": "original",
       "domain": "household-receipt",
@@ -34106,7 +34154,11 @@
           "mime": "image/png",
           "width": 1080,
           "height": 1350,
-          "source": ".local/r2/sns/household-receipt/28000-2024/x/stills/28000-2024.png"
+          "source": ".local/r2/sns/household-receipt/28000-2024/x/stills/28000-2024.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1109/image-1/97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7.png"
+          }
         }
       ]
     },
@@ -36321,7 +36373,7 @@
         "state": "pending"
       },
       "created_at": "2026-10-11T14:31:40.789Z",
-      "updated_at": "2026-10-11T14:31:40.789Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "instagram",
       "domain": "household-receipt",
       "content_key": "28000-2024",
@@ -36364,7 +36416,11 @@
           "mime": "image/png",
           "width": 1080,
           "height": 1350,
-          "source": ".local/r2/sns/household-receipt/28000-2024/instagram/stills/slide-2-detail-1080x1350.png"
+          "source": ".local/r2/sns/household-receipt/28000-2024/instagram/stills/slide-2-detail-1080x1350.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1135/slide-2/97c40382f2daefe854ae1a536fb619dd6a0e8ef4d8c81a859f4fdf7e3c1da3e7.png"
+          }
         },
         {
           "role": "slide",
@@ -38789,7 +38845,7 @@
         "state": "pending"
       },
       "created_at": "2026-10-11T14:31:42.190Z",
-      "updated_at": "2026-10-11T14:31:42.190Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "domain": "household-receipt",
       "content_key": "13000-2024",
@@ -38820,7 +38876,11 @@
           "mime": "image/png",
           "width": 1080,
           "height": 1350,
-          "source": ".local/r2/sns/household-receipt/13000-2024/x/stills/13000-2024.png"
+          "source": ".local/r2/sns/household-receipt/13000-2024/x/stills/13000-2024.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1173/image-1/87ca5437769c7cc5efe7a0919614cf7f473e9bb06b9c37b10fe79564dc52699c.png"
+          }
         }
       ]
     },
@@ -38831,7 +38891,7 @@
         "state": "pending"
       },
       "created_at": "2026-10-11T14:31:42.207Z",
-      "updated_at": "2026-10-11T14:31:42.207Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "domain": "household-receipt",
       "content_key": "27000-2024",
@@ -38862,7 +38922,11 @@
           "mime": "image/png",
           "width": 1080,
           "height": 1350,
-          "source": ".local/r2/sns/household-receipt/27000-2024/x/stills/27000-2024.png"
+          "source": ".local/r2/sns/household-receipt/27000-2024/x/stills/27000-2024.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1174/image-1/de5975e7150bd5984f097a6fff23cdefb33e8829bd4b9cea031ad7126b7d87f5.png"
+          }
         }
       ]
     },
@@ -38873,7 +38937,7 @@
         "state": "pending"
       },
       "created_at": "2026-10-11T14:31:42.225Z",
-      "updated_at": "2026-10-11T14:31:42.225Z",
+      "updated_at": "2026-10-19T00:51:56.743Z",
       "platform": "x",
       "domain": "household-receipt",
       "content_key": "01000-2024",
@@ -38904,7 +38968,11 @@
           "mime": "image/png",
           "width": 1080,
           "height": 1350,
-          "source": ".local/r2/sns/household-receipt/01000-2024/x/stills/01000-2024.png"
+          "source": ".local/r2/sns/household-receipt/01000-2024/x/stills/01000-2024.png",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1175/image-1/48487e2e4b40daa5b2be365e381b955fd0e9e2bef502a199a5230fc48aad4e14.png"
+          }
         }
       ]
     },
@@ -39558,6 +39626,585 @@
           }
         }
       ]
+    },
+    {
+      "id": 1188,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:52:43.595Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "x",
+      "domain": "note",
+      "content_key": "a-kakei-aichi",
+      "post_type": "original",
+      "template": "question",
+      "caption": "名古屋市の家計、47県庁所在市の単純平均を1とすると住居0.64倍、被服及び履物1.26倍。\n2024年・二人以上世帯。県全域や全国平均の値ではありません。\nhttps://note.com/stats47/n/nda72a0bed2c4",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/x/stills/household-bars-1080x1350.png",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1188/image-1/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png"
+          },
+          "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+          "bytes": 194991,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/x/stills/household-bars-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1188/thumbnail-1/da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801.png"
+          },
+          "sha256": "da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801",
+          "bytes": 107234,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-aichi/x/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "x/note/a-kakei-aichi"
+      ],
+      "has_link": 1,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/nda72a0bed2c4\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "名古屋市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-aichi https://note.com/stats47/n/nda72a0bed2c4。固定入力: media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15.json",
+          "sha256": "acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15",
+          "bytes": 19562
+        }
+      }
+    },
+    {
+      "id": 1189,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:52:47.032Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "instagram",
+      "domain": "note",
+      "content_key": "a-kakei-aichi",
+      "post_type": "carousel",
+      "template": "question",
+      "caption": "名古屋市の家計を、同じ基準で比べると。\n\n住居：0.64倍\n被服及び履物：1.26倍\n\n総務省統計局「家計調査」、2024年・二人以上の世帯。47都道府県庁所在市の単純平均を1.00とした倍率です。県全域の値や、家計調査の全国値ではありません。\n\n高い・低いだけで暮らしの良し悪しや原因を断定せず、家計支出の10分類全体で読みます。詳しい図と解説はnoteの「名古屋市の家計」記事で。\n\n#家計調査 #名古屋市 #家計 #統計",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-1-cover-1080x1350.png",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1189/slide-1/24b21c7842b0324b0a53ccdce5953f489e3a8c4755d6cd7f6301d45da69b0604.png"
+          },
+          "sha256": "24b21c7842b0324b0a53ccdce5953f489e3a8c4755d6cd7f6301d45da69b0604",
+          "bytes": 152778,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1189/slide-2/64ccdedf6dae7dae0f5ce65e0a5a90a46ec9e121b728c75c80ddd1e90da480d4.png"
+          },
+          "sha256": "64ccdedf6dae7dae0f5ce65e0a5a90a46ec9e121b728c75c80ddd1e90da480d4",
+          "bytes": 158972,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-2-categories-1-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1189/slide-3/4e2c313c27ca8232148b1e0794c0a2b486edc5321f69501e93fad622cf804a75.png"
+          },
+          "sha256": "4e2c313c27ca8232148b1e0794c0a2b486edc5321f69501e93fad622cf804a75",
+          "bytes": 160544,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-3-categories-2-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1189/slide-4/00c196cbec4b8b1dd5b1d27377215350964e716943f6f1e3148e35740fd0d79a.png"
+          },
+          "sha256": "00c196cbec4b8b1dd5b1d27377215350964e716943f6f1e3148e35740fd0d79a",
+          "bytes": 176779,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-4-source-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1189/thumbnail-1/da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801.png"
+          },
+          "sha256": "da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801",
+          "bytes": 107234,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-aichi/instagram/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "instagram/note/a-kakei-aichi"
+      ],
+      "has_link": 0,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/nda72a0bed2c4\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "名古屋市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-aichi https://note.com/stats47/n/nda72a0bed2c4。固定入力: media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15.json",
+          "sha256": "acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15",
+          "bytes": 19562
+        }
+      }
+    },
+    {
+      "id": 1190,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:52:53.157Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "x",
+      "domain": "note",
+      "content_key": "a-kakei-aomori",
+      "post_type": "original",
+      "template": "question",
+      "caption": "青森市の家計、47県庁所在市の単純平均を1とすると光熱・水道1.28倍、教育0.35倍。\n2024年・二人以上世帯。県全域や全国平均の値ではありません。\nhttps://note.com/stats47/n/n85831c0c47aa",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/x/stills/household-bars-1080x1350.png",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1190/image-1/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png"
+          },
+          "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+          "bytes": 201114,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/x/stills/household-bars-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1190/thumbnail-1/e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004.png"
+          },
+          "sha256": "e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004",
+          "bytes": 110018,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-aomori/x/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "x/note/a-kakei-aomori"
+      ],
+      "has_link": 1,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/n85831c0c47aa\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "青森市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-aomori https://note.com/stats47/n/n85831c0c47aa。固定入力: media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c.json",
+          "sha256": "681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c",
+          "bytes": 19534
+        }
+      }
+    },
+    {
+      "id": 1191,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:52:56.249Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "instagram",
+      "domain": "note",
+      "content_key": "a-kakei-aomori",
+      "post_type": "carousel",
+      "template": "question",
+      "caption": "青森市の家計を、同じ基準で比べると。\n\n光熱・水道：1.28倍\n教育：0.35倍\n\n総務省統計局「家計調査」、2024年・二人以上の世帯。47都道府県庁所在市の単純平均を1.00とした倍率です。県全域の値や、家計調査の全国値ではありません。\n\n高い・低いだけで暮らしの良し悪しや原因を断定せず、家計支出の10分類全体で読みます。詳しい図と解説はnoteの「青森市の家計」記事で。\n\n#家計調査 #青森市 #家計 #統計",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-1-cover-1080x1350.png",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1191/slide-1/19030e843ea42daeea84f9ff84a61399a972f1e5920610911a638d8e57ffd826.png"
+          },
+          "sha256": "19030e843ea42daeea84f9ff84a61399a972f1e5920610911a638d8e57ffd826",
+          "bytes": 150725,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1191/slide-2/537962aae08a5228c031a6e366a7c2100740c6139fdedb61a62d7c0fa4ed79df.png"
+          },
+          "sha256": "537962aae08a5228c031a6e366a7c2100740c6139fdedb61a62d7c0fa4ed79df",
+          "bytes": 161183,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-2-categories-1-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1191/slide-3/8a1b8d5a63e4908fc37103ecada7099a847edd40d16f9cb1067c30ebebdb3466.png"
+          },
+          "sha256": "8a1b8d5a63e4908fc37103ecada7099a847edd40d16f9cb1067c30ebebdb3466",
+          "bytes": 165919,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-3-categories-2-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1191/slide-4/f44fec07c96bdb50a9aa7d4b0068a8c888855fbf5a3d96839b7e016c2159f95c.png"
+          },
+          "sha256": "f44fec07c96bdb50a9aa7d4b0068a8c888855fbf5a3d96839b7e016c2159f95c",
+          "bytes": 176322,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-4-source-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1191/thumbnail-1/e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004.png"
+          },
+          "sha256": "e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004",
+          "bytes": 110018,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-aomori/instagram/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "instagram/note/a-kakei-aomori"
+      ],
+      "has_link": 0,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/n85831c0c47aa\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "青森市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-aomori https://note.com/stats47/n/n85831c0c47aa。固定入力: media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c.json",
+          "sha256": "681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c",
+          "bytes": 19534
+        }
+      }
+    },
+    {
+      "id": 1192,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:53:01.781Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "x",
+      "domain": "note",
+      "content_key": "a-kakei-hokkaido",
+      "post_type": "original",
+      "template": "question",
+      "caption": "札幌市の家計、47県庁所在市の単純平均を1とすると住居1.27倍、光熱・水道1.13倍。\n2024年・二人以上世帯。県全域や全国平均の値ではありません。\nhttps://note.com/stats47/n/n39016e5f0002",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/x/stills/household-bars-1080x1350.png",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1192/image-1/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png"
+          },
+          "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+          "bytes": 198470,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/x/stills/household-bars-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/1192/thumbnail-1/f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8.png"
+          },
+          "sha256": "f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8",
+          "bytes": 109879,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-hokkaido/x/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "x/note/a-kakei-hokkaido"
+      ],
+      "has_link": 1,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/n39016e5f0002\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "札幌市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-hokkaido https://note.com/stats47/n/n39016e5f0002。固定入力: media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21.json",
+          "sha256": "35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21",
+          "bytes": 19529
+        }
+      }
+    },
+    {
+      "id": 1193,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-10-19T00:54:04.121Z",
+      "updated_at": "2026-10-19T03:03:02.224Z",
+      "platform": "instagram",
+      "domain": "note",
+      "content_key": "a-kakei-hokkaido",
+      "post_type": "carousel",
+      "template": "question",
+      "caption": "札幌市の家計を、同じ基準で比べると。\n\n住居：1.27倍\n光熱・水道：1.13倍\n\n総務省統計局「家計調査」、2024年・二人以上の世帯。47都道府県庁所在市の単純平均を1.00とした倍率です。県全域の値や、家計調査の全国値ではありません。\n\n高い・低いだけで暮らしの良し悪しや原因を断定せず、家計支出の10分類全体で読みます。詳しい図と解説はnoteの「札幌市の家計」記事で。\n\n#家計調査 #札幌市 #家計 #統計",
+      "scheduled_at": null,
+      "media_path": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-1-cover-1080x1350.png",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1193/slide-1/f24d3cc38000979fa39894e9b6c10f83e1775cb86060ea557ecec7f3747da40a.png"
+          },
+          "sha256": "f24d3cc38000979fa39894e9b6c10f83e1775cb86060ea557ecec7f3747da40a",
+          "bytes": 143373,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1193/slide-2/300450423704a2123f6187dba037ecf9cf893e5712c25cd6f6a736141e4a6592.png"
+          },
+          "sha256": "300450423704a2123f6187dba037ecf9cf893e5712c25cd6f6a736141e4a6592",
+          "bytes": 158650,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-2-categories-1-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1193/slide-3/9fdc40dabc19e06785a16413afcec8a39873887e1c4c6afe370079a40c6aba50.png"
+          },
+          "sha256": "9fdc40dabc19e06785a16413afcec8a39873887e1c4c6afe370079a40c6aba50",
+          "bytes": 166130,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-3-categories-2-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1193/slide-4/d9aa49af25a9f287f6df2540ff676dea201b0378b14c57827510d84d2550cf7b.png"
+          },
+          "sha256": "d9aa49af25a9f287f6df2540ff676dea201b0378b14c57827510d84d2550cf7b",
+          "bytes": 176366,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-4-source-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "thumbnail",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1193/thumbnail-1/f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8.png"
+          },
+          "sha256": "f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8",
+          "bytes": 109879,
+          "mime": "image/png",
+          "source": ".local/r2/sns/note/a-kakei-hokkaido/instagram/candidate-preview.png",
+          "width": 1200,
+          "height": 814
+        }
+      ],
+      "material_keys": [
+        "instagram/note/a-kakei-hokkaido"
+      ],
+      "has_link": 0,
+      "metric_keys": "[]",
+      "provenance_urls": "[\"https://note.com/stats47/n/n39016e5f0002\",\"https://www.stat.go.jp/data/kakei/\"]",
+      "planning": {
+        "origin": "new-format",
+        "batch": "2026-10-19",
+        "title": "札幌市｜家計支出の10分類",
+        "preview_only": false,
+        "note": "原記事: a-kakei-hokkaido https://note.com/stats47/n/n39016e5f0002。固定入力: media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json。制作仕様・同じ数値・renderer/フォント版・出力SHA: media-workspace/inputs/35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21.json。Xは家計支出の10分類1枚、Instagramは導入・比較前半/後半・出典の4枚。全15枚の原寸/320pxを確認。元のnote原図は参考素材として保持。投稿用候補で、承認・予約・公開は未実施。"
+      },
+      "production": {
+        "version": "note-household-v1",
+        "renderer": "apps/remotion/src/features/note-household/HouseholdNote.tsx",
+        "rendererHash": "ebe7de6a466b44e09cf7b31ee03094414e0fce30e42499cb1d838320cda7f865",
+        "input": {
+          "provider": "r2-private",
+          "bucket": "stats47-private",
+          "key": "media-workspace/inputs/35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21.json",
+          "sha256": "35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21",
+          "bytes": 19529
+        }
+      }
     }
   ]
 }

@@ -35,6 +35,7 @@ paths:
 
 `data/metrics/<key>.ts` の `visualization` は必須。正準色名・色方式・区分方式・時系列と比較の軸方針を持つ。
 正本型は `MetricPresentation`。地図と凡例は共有resolver、RankingItemは必須の型付きsnapshot契約で接続する。
+棒の表示範囲は同じ `visualization.barDomain` で管理する。2026-10-19オーナー指示で既定は `extent`（全観測値の実測最小〜最大）。`zero` は0を含む範囲、`fixed` は指定した最小・最大を丸めず使う。画像の軸目盛り・目盛線は既定で表示せず、0を含まない範囲は短い「範囲：最小–最大」で示す。最小値の棒が長さ0でも値と端点を残す。観測値を切り落とす範囲は生成エラーにする。点図用 `comparisonDomain` と混用しない。正規化で単位が変わる場合は元単位の棒の固定域も解除する。
 色は明示指定を優先し、Bluesも例外にしない。共通既定値は `data/metrics/defaults/presentation.ts`。
 観測値の平均・最小・最大を手入力の固定設定へ複製しない。固定域は明示的に指定した場合だけ使う。
 正規化optionは元単位の固定域を引き継がず、必要なら `visualization` を基準別に上書きする。

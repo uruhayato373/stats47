@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T22:19:30.899Z",
+  "generatedAt": "2026-10-19T04:52:54.107Z",
   "window": {
     "weeks": 4,
     "subWeeks": [
@@ -39,6 +39,11 @@
           "2026-W41",
           "2026-W42"
         ]
+      },
+      {
+        "platform": "windows",
+        "generatedAt": "2026-10-19T04:52:52.281Z",
+        "weeks": []
       }
     ],
     "pricing": {
@@ -202,18 +207,18 @@
   "ci": [
     {
       "workflow": "backlog-loop",
-      "runs": 13,
-      "items": 26,
-      "costUsd": 20.9947,
+      "runs": 6,
+      "items": 12,
+      "costUsd": 8.997,
       "errors": 0,
       "models": {
-        "unknown": 13
+        "unknown": 6
       },
       "efforts": {
-        "unknown": 13
+        "unknown": 6
       },
-      "costPerRun": 1.615,
-      "costPerItem": 0.8075
+      "costPerRun": 1.4995,
+      "costPerItem": 0.7497
     },
     {
       "workflow": "improvement-cycle",
@@ -234,33 +239,33 @@
     },
     {
       "workflow": "theme-chart-review",
-      "runs": 1,
-      "items": 1,
-      "costUsd": 1.1075,
+      "runs": 4,
+      "items": 4,
+      "costUsd": 4.0141,
       "errors": 0,
       "models": {
-        "claude-sonnet-5-5": 1
+        "claude-sonnet-5-5": 4
       },
       "efforts": {
-        "high": 1
+        "high": 4
       },
-      "costPerRun": 1.1075,
-      "costPerItem": 1.1075
+      "costPerRun": 1.0035,
+      "costPerItem": 1.0035
     },
     {
       "workflow": "seo-keyword-cycle",
-      "runs": 3,
-      "items": 3,
-      "costUsd": 0.9915,
+      "runs": 4,
+      "items": 4,
+      "costUsd": 1.5399,
       "errors": 0,
       "models": {
-        "claude-sonnet-5-5": 3
+        "claude-sonnet-5-5": 4
       },
       "efforts": {
-        "high": 3
+        "high": 4
       },
-      "costPerRun": 0.3305,
-      "costPerItem": 0.3305
+      "costPerRun": 0.385,
+      "costPerItem": 0.385
     },
     {
       "workflow": "page-quality-review",

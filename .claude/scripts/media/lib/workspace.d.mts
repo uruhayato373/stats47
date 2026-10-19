@@ -36,6 +36,7 @@ export interface Candidate {
   review: VisualReview | null;
 }
 export interface ImageRecord {
+  comparison?: ComparisonPlan;
   templateId: string;
   policy: string;
   revisions: Candidate[];
@@ -122,6 +123,8 @@ export interface ImageView {
   candidateMatches: boolean;
   approved: boolean;
   kind?: 'cover';
+  previewOnly?: boolean;
+  comparison?: ComparisonPlan & { url: string | null; role: 'note-original' | 'layout' | 'reference'; requiredSelection?: string; candidateOnly?: boolean };
   coverUrl?: string | null;
   coverCandidateUrl?: string | null;
   coverManagement?: string;
@@ -227,6 +230,13 @@ export function saveImagePolicy(
   expected: string,
   policy: string
 ): void;
+export interface ComparisonPlan {
+  key: string;
+  title: string;
+  sharedChannels?: ('note' | 'web' | 'x' | 'instagram')[];
+  reason?: string;
+}
+export function saveImageComparison(root: string, id: string, expected: string, plan: ComparisonPlan | null): void;
 export function assessImage(
   root: string,
   id: string,

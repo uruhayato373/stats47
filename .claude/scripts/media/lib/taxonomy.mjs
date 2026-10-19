@@ -20,6 +20,11 @@ export const IMAGE_SELECTIONS = {
   na: '対象外',
   undecided: '構成を確認する',
 };
+/** Top/bottom is a ranked selection, never a peer purpose or an arbitrary comparison. */
+export function selectionAllowed(purpose, selection) {
+  return Object.hasOwn(IMAGE_PURPOSES, purpose) && Object.hasOwn(IMAGE_SELECTIONS, selection) &&
+    (selection !== 'top-bottom' || purpose === 'ranking');
+}
 export const TEMPLATE_ALIASES = {
   'svg-bar-card': 'bar',
   'svg-bar-ig': 'bar',

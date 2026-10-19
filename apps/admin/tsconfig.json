@@ -33,6 +33,7 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@stats47/types": ["../../packages/types/src"],
       "@/*": [
         "./*"
       ],

@@ -8,6 +8,7 @@ import { loadAll, postRevision, type Post } from './posts-store';
 import { assetUrl } from './post-trace';
 import { igScheduleEntries } from './instagram';
 import { jstDateStr } from './time';
+import { orderedPostAssets } from '@/lib/sns-ledger';
 
 /**
  * インベントリ (posts ∪ ローカル素材 ∪ IG schedule) と表示候補メディア URL 解決。
@@ -29,9 +30,7 @@ export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
   const out: MediaCandidate[] = [];
   // 投稿IDに紐づく保全済み素材を優先。ローカルミラーの掃除後も投稿時の画像を見られる。
   if (p.id) {
-    for (const asset of [...(p.assets ?? [])].sort(
-      (a, b) => a.order - b.order
-    )) {
+    for (const asset of orderedPostAssets(p.assets ?? [])) {
       const url = assetUrl(p.id, asset);
         if (url) out.push({ url, source: asset.r2 ? 'r2' : 'drive' });
     }
