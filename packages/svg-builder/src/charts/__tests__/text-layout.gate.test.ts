@@ -229,3 +229,23 @@ describe("文字配置ゲートの検出感度", () => {
     expect(issues.overlaps.length).toBeGreaterThan(0);
   });
 });
+
+describe("4媒体の外枠に埋め込む共通SVG", () => {
+  it("狭い折れ線でも全観測点と始終値を保ち、見出しを重複表示しない", () => {
+    const svg = generateLineSvg(rows(YEARS, ["名古屋市"], xi => 26.3 + xi / 10), {
+      title: "エンゲル係数", xKey: "yearCode", seriesKey: "areaCode",
+      frame: { width: 340, height: 290 }, showHeading: false, showEndpointValues: true,
+    });
+    expectClean(svg);
+    expect(svg.match(/<circle /g)).toHaveLength(25);
+    expect(svg).not.toContain('class="svg-title">エンゲル係数</text>');
+    expect(svg).toContain('>26.3</text>');
+    expect(svg).toContain('>28.7</text>');
+  });
+  it("狭い積み上げ棒でも長い凡例の全区分を保つ", () => {
+    const data = rows(["2008年度", "2013年度", "2018年度"], LONG_SERIES, (_, si) => 100 + si * 20);
+    const svg = generateStackedBarSvg(data, { title: "酒類構成", xKey: "yearCode", seriesKey: "areaCode", horizontal: true, normalized: true, width: 340, showHeading: false });
+    expectClean(svg);
+    for (const label of LONG_SERIES) expect(svg).toContain(`>${label}</text>`);
+  });
+});

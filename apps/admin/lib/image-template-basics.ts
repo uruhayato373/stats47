@@ -22,7 +22,7 @@ export interface StatisticalSample {
   label?: string;
   topic?: string;
   imageId?: string;
-  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line';
+  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked';
   referenceImages?: { imageId: string; label: string }[];
 }
 /** A small curated sample per form, not a menu of every article using the form. */
@@ -114,6 +114,8 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     purpose: 'composition',
     statistic: '酒類の品目別販売内訳',
     imageId: 'IMG-50aa9b2aa27814e64e4e2227',
+    renderer: 'composition-stacked',
+    referenceImages: [{ imageId: 'IMG-50aa9b2aa27814e64e4e2227', label: 'サイト：酒類の販売数量構成比（公開済み）' }],
   },
   {
     id: 'maximum-temperature-distribution',

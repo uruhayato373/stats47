@@ -44,6 +44,9 @@ import {
 } from "../shared/stats-schema";
 
 export interface StackedBarOptions {
+  /** 外枠内の描画幅。高さは項目数・凡例の段数から決める。 */
+  width?: number;
+  showHeading?: boolean;
   domainPolicy?: NumericDomainPolicy;
   /** チャートタイトル */
   title: string;
@@ -64,6 +67,8 @@ export interface StackedBarOptions {
 }
 
 export function generateStackedBarSvg(data: StatsSchema[], options: StackedBarOptions): string {
+  if (options.width !== undefined && (!Number.isFinite(options.width) || options.width < 300))
+    throw new Error("Stacked chart width must be at least 300.");
   const { horizontal = false, normalized = false } = options;
   const finiteValues = data.flatMap(row => typeof row.value === "number" && Number.isFinite(row.value) ? [row.value] : []);
   if (!finiteValues.length) throw new Error("No finite observations for stacked chart");
@@ -86,13 +91,13 @@ function generateVertical(
   const series = uniqueDimension(data, seriesKey);
   const valueMap = buildValueMap(data, xKey, seriesKey);
 
-  const W = 680; // §5 積み上げ棒標準幅
+  const W = options.width ?? 680;
   const legend = layoutLegendRows(series.map((s, i) => ({ label: s.name, color: STACKED_COLORS[i % STACKED_COLORS.length] })), { left: 55, availW: W - 55 - 24, fontSize: 9, swatchW: 12, gap: 16 });
   const ticks = planCategoryTicks(xItems.map(x => x.name), (W - 55 - 24) / xItems.length, 9, { angle: 45 });
   const labelDrop = ticks.rotate ? rotatedLabelDrop(Math.max(...xItems.map(x => textWidth(x.name, 9))), 9, 45) : 9;
   const bottom = 14 + labelDrop + 16 + legend.rows * 22;
   const H = 322 + bottom;
-  const plot = makePlotArea(W, H, { top: 58, right: 24, bottom, left: 55 });
+  const plot = makePlotArea(W, H, { top: options.showHeading === false ? 14 : 58, right: 24, bottom, left: 55 });
 
   // 値の計算（正規化 or 生値）
   function getValues(xCode: string): number[] {
@@ -211,7 +216,7 @@ function generateVertical(
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
 ${svgThemeStyle()}
   <rect width="${W}" height="${H}" class="svg-bg"/>
-${titleLines}
+${options.showHeading === false ? "" : titleLines}
 ${unitLabel}
   <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" class="svg-plot svg-plot-border" stroke-width="1"/>
 ${yGridLines.join("\n")}
@@ -249,8 +254,8 @@ function generateHorizontal(
   const BAR_H = 32;
   const BAR_GAP = 10;
   const LABEL_W = 80;
-  const MARGIN_TOP = 58;
-  const W = 680; // §5 積み上げ棒標準幅
+  const MARGIN_TOP = options.showHeading === false ? 14 : 58;
+  const W = options.width ?? 680;
   const plotLeft = LABEL_W + 4;
   const plotRight = W - 20;
   const plotWidth = plotRight - plotLeft;
@@ -335,7 +340,7 @@ function generateHorizontal(
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
 ${svgThemeStyle()}
   <rect width="${W}" height="${H}" class="svg-bg"/>
-${titleLines}
+${options.showHeading === false ? "" : titleLines}
 ${unitNote}
 ${rowLabels.join("\n")}
 ${xAxis.join("\n")}

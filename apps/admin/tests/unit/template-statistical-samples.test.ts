@@ -17,6 +17,9 @@ function household(channel: string, patch: Partial<ImageView> = {}): ImageView {
   } as ImageView;
 }
 describe('fixed real-statistic sample resolution', () => {
+  it('does not attach an unrelated ranking metric to the published composition input', () => {
+    expect(resolveStatisticalSamples([]).find(s => s.id === 'liquor-breakdown')!.binding).toBeUndefined();
+  });
   it('keeps native household layouts and explicitly shares the note layout with the site', () => {
     const samples = resolveStatisticalSamples(['note', 'x', 'instagram'].map((c) => household(c)));
     const media = samples.find((s) => s.id === 'household-nagoya')!.media;
@@ -53,7 +56,7 @@ describe('fixed real-statistic sample resolution', () => {
     expect(resolveStatisticalSamples([unrelated]).find((s) => s.id === 'tokyo-osaka')!.media).toEqual({});
     expect(result.find((s) => s.id === 'household-radar')!.media).toEqual({});
   });
-  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend'])('uses generated %s for all four media without article inventory', (id) => {
+  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend', 'liquor-breakdown'])('uses generated %s for all four media without article inventory', (id) => {
     const media = resolveStatisticalSamples([]).find((s) => s.id === id)!.media;
     expect(Object.keys(media)).toEqual(['note', 'web', 'x', 'instagram']);
     expect(media.note).toMatchObject({ src: '/api/template-samples/' + id, kind: 'trial', width: 1080, height: 1350 });

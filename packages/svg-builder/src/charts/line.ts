@@ -33,6 +33,12 @@ import {
 } from "../shared/stats-schema";
 
 export interface LineChartOptions {
+  /** 媒体の外枠内で使う描画領域。省略時は従来の680×420。 */
+  frame?: { width: number; height: number };
+  /** 外枠に見出しがある場合は重複させない。 */
+  showHeading?: boolean;
+  /** 単系列の始点・終点の値を横軸の下に表示する。 */
+  showEndpointValues?: boolean;
   domainPolicy?: NumericDomainPolicy;
   yDomain?: NumericDomain;
   /** チャートタイトル */
@@ -82,8 +88,10 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const [yScaleLo, yScaleHi] = yMin === undefined ? domain : resolveChartDomain(allValues, {mode: 'fixed', min: yMin, max: domain[1]})!;
   const yTicks = niceTicks(yScaleLo, yScaleHi, 5);
 
-  const W = 680;
-  const H = 420;
+  const W = options.frame?.width ?? 680;
+  const H = options.frame?.height ?? 420;
+  if (!Number.isFinite(W) || !Number.isFinite(H) || W < 300 || H < 240)
+    throw new Error("Line chart frame must be at least 300×240.");
   const axisLabel = unit
     ? yLabel?.split(`（${unit}）`).join("").split(`(${unit})`).join("").trim()
     : yLabel;
@@ -99,8 +107,9 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const labelDrop = ticks.rotate
     ? rotatedLabelDrop(Math.max(...xItems.map(x => textWidth(x.name, 8.5))), 8.5, 35) : 8.5;
   const legend = layoutLegendRows(legendAtBottom ? legendEntries : [], { left, availW: plotWidth, fontSize: 9, swatchW: 12, gap: 16 });
-  const bottom = Math.max(60, 14 + labelDrop + (legendAtBottom ? 12 + legend.rows * 22 : 0) + (xLabel ? 20 : 8));
-  const plot = makePlotArea(W, H, { top: 58, right, bottom, left });
+  const endpointValues = options.showEndpointValues && series.length === 1;
+  const bottom = Math.max(60, 14 + labelDrop + (endpointValues ? 22 : 0) + (legendAtBottom ? 12 + legend.rows * 22 : 0) + (xLabel ? 20 : 8));
+  const plot = makePlotArea(W, H, { top: options.showHeading === false ? 14 : 58, right, bottom, left });
 
   const toSvgX = (i: number): number =>
     xItems.length > 1
@@ -172,6 +181,12 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const unitLabel = unit
     ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" class="svg-tick">(${unit})</text>`
     : "";
+  const endpointLabels = endpointValues
+    ? [...new Set([0, xItems.length - 1])].map(i => {
+      const value = valueMap.get(xItems[i].code)?.get(series[0].code);
+      if (value === undefined || !Number.isFinite(value)) return "";
+      return `<text x="${px(toSvgX(i))}" y="${px(plot.bottom + 14 + labelDrop + 16)}" text-anchor="${i === 0 ? "start" : "end"}" font-size="9" class="svg-axis">${formatTick(value)}</text>`;
+    }).join("\n") : "";
   const xAxisLabel = xLabel
     ? `  <text x="${((plot.left + plot.right) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis">${xLabel}</text>`
     : "";
@@ -193,7 +208,7 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
 ${svgThemeStyle()}
   <rect width="${W}" height="${H}" class="svg-bg"/>
-${titleLines}
+${options.showHeading === false ? "" : titleLines}
 ${unitLabel}
   <!-- プロットエリア -->
   <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" class="svg-plot svg-plot-border" stroke-width="1"/>
@@ -202,6 +217,7 @@ ${yGridLines.join("\n")}
 ${zeroLine}
   <!-- X 軸ラベル -->
 ${xTickLabels.join("\n")}
+${endpointLabels}
   <!-- 系列 -->
 ${seriesElements.join("\n")}
   <!-- 凡例 -->
