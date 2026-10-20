@@ -1603,8 +1603,8 @@ updated: 2026-10-19
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:管理]
 
 - **事象 (2026-10-20、improvement-triage の報告)**: `SEO-TITLE-CTR-EFFECT-01` の対象 `/blog/avg-height-high-school-2nd-male` に、`/blog/avg-height-high-school-2nd-male-vs-*` の実績 (W41 で 8 click / 601 imp、対象全体の約 1%) が混ざる。
-- **次**: effect-verdict の `[gsc-page:]` の照合を完全一致にするか、完全一致の記法を足す。既存の行で前方一致を前提にしているものが無いかを先に数える。
-- **完了条件**: 完全一致で照合できるようになり、`node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs` に前方一致で混ざらないことのテストがある。
+- **次**: `[gsc-page:]` を読む `.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs` (と `measurement-cycle.mjs`) の照合を完全一致にするか、完全一致の記法を足す。既存の行で前方一致を前提にしているものが無いかを先に数える。
+- **完了条件**: 完全一致で照合できるようになり、`.claude/scripts/metrics/__tests__/gsc-improvements-adapter.test.mjs` に前方一致で混ざらないことのテストがある。
 
 
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
