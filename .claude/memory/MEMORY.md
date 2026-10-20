@@ -1,5 +1,7 @@
 # Memory Index
 
+- [feedback_next_eslint_unpatched_braces.md](feedback_next_eslint_unpatched_braces.md) — Next ESLint経由の未修正bracesは限定overrideで除去。実際のページ検出・lint・auditとクリーンinstallで検証する
+
 - [chart-image-copy.md](../rules/chart-image-copy.md) — 画像内の冗長説明を別の型で再追加しない。note・サイト・X・Instagram共通の最小テキスト規約とPNG生成前の検査を使う（同じユーザー指摘の再発防止）
 
 - [feedback_sns_title_unicode_hydration.md](feedback_sns_title_unicode_hydration.md) — SNS見本名の文字数制限で絵文字を分断するとSSRとブラウザが不一致になる。明示題名を優先し、本文はコードポイント単位で短縮する
