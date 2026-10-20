@@ -14,7 +14,8 @@
  *   - コード (ts・tsx・mjs・cjs・js) が台帳の data/ のパスを直書きしている (datasetPath(id) / datasetDir(id) で引く)。
  *     テスト・コメント行・import 行・DATA_LITERAL_EXEMPT に理由を書いたファイルは除く
  *   - kind が config / ledger で path が .json の行に schema (JSON Schema のパス) が無い / schema のファイルが無い /
- *     当たるファイルが schema に合わない (SCHEMA_REQUIRED_KINDS。台帳の正本が形の契約を持たないと、書き手の差分で黙って壊れる)
+ *     当たるファイルが schema に合わない (SCHEMA_REQUIRED_KINDS。台帳の正本が形の契約を持たないと、書き手の差分で黙って壊れる)。
+ *     それ以外の種類でも schema を宣言した行は同じく検証する (判断に使う state・series の記録。2026-10-20)
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
@@ -75,9 +76,10 @@ export function checkSchemas({ datasets, files, readJson, exists }) {
   const ajv = new Ajv({ allErrors: true });
   for (const ds of datasets) {
     if (ds.schema !== undefined && !SCHEMA_FILE.test(ds.schema)) errors.push(`${ds.id}: schema は *.schema.json を指す (${ds.schema})`);
-    if (!needsSchema(ds)) continue;
+    // config / ledger は schema が必須。それ以外の種類も、schema を宣言した行は当たるファイルを検証する
+    // (2026-10-20 RECORD-SCHEMA-CONTRACT-01。セッションが判断に使う state・series の記録)
     if (!ds.schema) {
-      errors.push(`${ds.id}: config / ledger の JSON に schema (JSON Schema のパス) が無い (${ds.path})`);
+      if (needsSchema(ds)) errors.push(`${ds.id}: config / ledger の JSON に schema (JSON Schema のパス) が無い (${ds.path})`);
       continue;
     }
     if (!exists(ds.schema)) {

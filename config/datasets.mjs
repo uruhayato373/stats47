@@ -8,7 +8,8 @@
  *   kind    KINDS のどれか
  *   domain  config/domains.json の領域 id
  *   target  本来の置き場 (TARGETS)。path の現在地と食い違う行が、data/ への移行 (手順 2) の対象
- *   opts    schema: 形状契約 (JSON Schema) のパス。kind が config / ledger で path が .json の行は必須 (check-datasets が検証する)
+ *   opts    schema: 形状契約 (JSON Schema) のパス。kind が config / ledger で path が .json の行は必須。それ以外の kind も
+ *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い
  *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
@@ -201,12 +202,16 @@ export const DATASETS = [
   d("adsense.candidates", "data/adsense/candidates-latest.json", "state", "affiliate", "data", "AdSense の改善候補 (adsense-diagnostics・最大 3 件)"),
   d("adsense.past-effects", "data/adsense/past-effects.json", "ledger", "affiliate", "data", "AdSense 施策の効果判定", { schema: "config/schema/adsense.past-effects.schema.json" }),
   d("a8.report-log", "data/affiliate/a8-report-log.json", "ledger", "affiliate", "data", "A8 の月次レポート (成果・報酬)", { schema: "config/schema/a8.report-log.schema.json" }),
-  d("a8.results", "data/affiliate/a8-results.json", "state", "affiliate", "data", "A8 の確定成果"),
+  d("a8.results", "data/affiliate/a8-results.json", "state", "affiliate", "data", "A8 の確定成果", { schema: "config/schema/a8.results.schema.json" }),
   d("a8.ui-last-run", "data/affiliate/a8-ui-last-run.json", "state", "affiliate", "data", "A8 の画面取得を最後に回した記録"),
   d("moshimo.results", "data/affiliate/moshimo-results.json", "state", "affiliate", "data", "もしもアフィリエイトの成果"),
-  d("rakuten.results", "data/affiliate/rakuten-results.json", "state", "affiliate", "data", "楽天アフィリエイトの成果"),
-  d("revenue.authenticated", "data/authenticated/{name}.json", "series", "strategy", "data", "認証付き CI が取る売上・計測の最新と推移"),
-  d("business.measurement-cycle", "data/measurement-cycle/{name}", "series", "strategy", "data", "週次の計測→記録→改善サイクルのまとめと無人 triage の記録"),
+  d("rakuten.results", "data/affiliate/rakuten-results.json", "state", "affiliate", "data", "楽天アフィリエイトの成果", { schema: "config/schema/rakuten.results.schema.json" }),
+  d("revenue.authenticated", "data/authenticated/latest.json", "state", "strategy", "data", "認証付き計測 (木曜の Mac) の取得元ごとの最新の成否", { schema: "config/schema/revenue.authenticated.schema.json" }),
+  d("revenue.authenticated-history", "data/authenticated/revenue-history.json", "series", "strategy", "data", "認証付き計測が取る売上の推移", { schema: "config/schema/revenue.authenticated-history.schema.json" }),
+  d("business.measurement-cycle", "data/measurement-cycle/latest.json", "state", "strategy", "data", "週次の計測→記録→改善サイクルのまとめ", { schema: "config/schema/business.measurement-cycle.schema.json" }),
+  d("business.measurement-cycle-triage", "data/measurement-cycle/triage-latest.json", "state", "strategy", "data", "週次サイクルの無人 triage の記録"),
+  d("business.measurement-cycle-summary", "data/measurement-cycle/LATEST.md", "report", "strategy", "data", "週次サイクルのまとめの要約"),
+  d("business.measurement-cycle-history", "data/measurement-cycle/history.csv", "series", "strategy", "data", "週次サイクルの推移"),
   d("ai-content.history", "data/ai-content/history.csv", "series", "data", "data", "ランキング AI 解説の生成の推移"),
   d("ai-content.latest", "data/ai-content/LATEST.md", "report", "data", "data", "ランキング AI 解説の最新要約"),
   d("note.metrics", "data/note/metrics/note-{date}.json", "series", "product", "data", "note のダッシュボード指標", { retain: "note" }),
@@ -352,7 +357,7 @@ export const DATASETS = [
   d("cloudflare.cost-snapshots", "data/cloudflare/{name}-snapshots/{name}", "series", "ops", "data", "Cloudflare の月次・週次コストの snapshot"),
   d("psi.metric-snapshots", "data/psi/metric-snapshots/{date}/{name}", "series", "site", "data", "性能指標の snapshot"),
   d("sns.metric-snapshots", "data/sns/metric-snapshots/{date}/{name}", "series", "sns", "data", "SNS 投稿の指標の時系列"),
-  d("business.nsm-weekly", "data/nsm/weekly-snapshots/{name}.json", "series", "strategy", "data", "週次収益 (NSM) の snapshot"),
+  d("business.nsm-weekly", "data/nsm/weekly-snapshots/{name}.json", "series", "strategy", "data", "週次収益 (NSM) の snapshot", { schema: "config/schema/business.nsm-weekly.schema.json" }),
   d("business.weekly-reviews", "data/reviews/weekly/{week}.md", "report", "strategy", "data", "週次レビュー"),
   d("business.monthly-reviews", "data/reviews/monthly/{month}.md", "report", "strategy", "data", "月次レビュー"),
 ];
