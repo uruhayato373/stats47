@@ -12,6 +12,8 @@ noteの現行ダッシュボードを読み、期間・記事数・合計・カ�
 
 ## 前提
 
+- 取得は月曜の Mac の定期実行 (`scripts/scheduled/fetch-note-metrics.sh`) が行う。セッションでは `data/note/dashboard/latest.json` を読み、
+  このスキルはオーナーが会話で頼んだときだけ動かす (読むための実行は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
 - Chrome **Profile 5**にstats47のログインがあること。未ログインならユーザーのログインが必要。
 - `~/.browser-use-env/bin/browser-use`を使用する。別の場所なら`BROWSER_USE_BIN`で指定する。
 - アカウント設定画面の`note ID === stats47`と全記事URLの帰属を照合する。不一致なら取得を止める。

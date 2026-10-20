@@ -5,6 +5,7 @@ vi.mock('../../../../.claude/scripts/media/lib/storage.mjs', () => ({ readVerifi
 import { GET } from '@/app/api/template-samples/[id]/route';
 import { RANKING_SAMPLE_ASSETS } from '@/lib/template-ranking-assets';
 import { TREND_SAMPLE_ASSETS } from '@/lib/template-trend-assets';
+import { COMPOSITION_SAMPLE_ASSETS } from '@/lib/template-composition-assets';
 describe('ranking basic-form PNG endpoint', () => {
   let savedPng: Buffer;
   beforeAll(async () => {
@@ -34,7 +35,14 @@ describe('ranking basic-form PNG endpoint', () => {
     expect(storage.read).toHaveBeenCalledExactlyOnceWith(TREND_SAMPLE_ASSETS['engel-trend'].png);
     expect(Buffer.from(await response.arrayBuffer())).toEqual(savedPng);
   });
-  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend'])('%s fails when the saved PNG cannot be verified, without regeneration or a reference-image fallback', async (id) => {
+  it('serves the saved composition PNG without reading the article input', async () => {
+    storage.read.mockResolvedValue(savedPng);
+    const response = await GET(new Request('http://localhost/api/template-samples/liquor-breakdown'), { params: Promise.resolve({ id: 'liquor-breakdown' }) });
+    expect(response.status).toBe(200);
+    expect(storage.read).toHaveBeenCalledExactlyOnceWith(COMPOSITION_SAMPLE_ASSETS['liquor-breakdown'].png);
+    expect(Buffer.from(await response.arrayBuffer())).toEqual(savedPng);
+  });
+  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend', 'liquor-breakdown'])('%s fails when the saved PNG cannot be verified, without regeneration or a reference-image fallback', async (id) => {
     storage.read.mockRejectedValue(Error('saved PNG missing or SHA mismatch'));
     const response = await GET(new Request('http://localhost/api/template-samples/' + id), { params: Promise.resolve({ id }) });
     expect(response.status).toBe(502);

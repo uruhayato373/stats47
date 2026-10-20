@@ -38,6 +38,9 @@ node .claude/scripts/ads/check-a8-report-due.mjs
 
 ### 2. collect — CSV を取る (ローカル・要 A8 ログイン)
 
+collect はオーナーが会話で頼んだときだけ動かす。成果の判断は `data/affiliate/a8-results.json` (木曜に Mac が取得) から行う
+(読むための実行は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
+
 ```bash
 # まず DOM 検出だけ (ダウンロードしない)
 node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run

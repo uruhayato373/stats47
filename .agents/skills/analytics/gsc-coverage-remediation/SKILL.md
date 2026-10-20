@@ -90,6 +90,7 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ### Phase 1 — 取り込み (ingest)
 ```bash
 # (任意) UI export を Playwright で自動化する。カバレッジは公式 API が無く UI export しか経路がない。
+# 同じ export は週次の取得 (木曜の Mac) が行う。セッションで動かすのはオーナーが会話で頼んだときだけ (hook が止める)。
 # 初回だけ headed Chrome で人間が Google にログインする (認証情報はスクリプトが扱わない)。
 node .claude/scripts/gsc/export-coverage-playwright.mjs --probe   # 初回: DOM 構造を確認
 node .claude/scripts/gsc/export-coverage-playwright.mjs           # ~/Downloads へ zip を保存

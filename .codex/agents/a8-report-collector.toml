@@ -23,6 +23,8 @@ A8.net の**成果レポート CSV 収集**を単一所有する agent。提携�
 
 ## 担当範囲
 
+管理画面を読む手順は、週次の定期実行かオーナーが会話で頼んだときだけ動かす。セッションの判断は記録から行う (末尾「記録から判断する」。読むための実行は hook が止める)。
+
 - **collect** — `fetch-a8-ui-csv.mjs`。管理画面から CSV をダウンロードし、raw + `manifest.json`
   (sha256 / 行数 / 取得時刻 / 期間) を `.local/a8-ui/<runId>/` に保存する。
 - **dry-run / probe** — `--dry-run` で DOM 検出のみ。`--probe-isolation` / `--probe-period` で

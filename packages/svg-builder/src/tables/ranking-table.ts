@@ -16,6 +16,8 @@ export interface RankingTableRow {
 }
 
 export interface RankingTableOptions {
+  /** 媒体の統一色。省略時は上位3位を強調する既定色。 */
+  rankColor?: string;
   /** テーブルタイトル */
   title?: string;
   /** 値列のヘッダー */
@@ -72,8 +74,8 @@ export function generateRankingTableSvg(
       : i % 2 === 0
         ? "#ffffff"
         : "#f9fafb";
-    const rankColor =
-      row.rank === 1 ? "#b91c1c" : row.rank <= 3 ? "#c2410c" : "#6b7280";
+    const rankColor = options.rankColor ??
+      (row.rank === 1 ? "#b91c1c" : row.rank <= 3 ? "#c2410c" : "#6b7280");
 
     return [
       `  <rect x="0" y="${y}" width="${width}" height="${ROW_H}" fill="${bg}"/>`,

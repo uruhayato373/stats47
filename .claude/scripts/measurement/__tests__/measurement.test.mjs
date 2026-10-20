@@ -223,7 +223,9 @@ test('restore permits canonical reports only and rejects failed, stale or future
   validateAttempt(gsc, now, 'gsc');
   assert.throws(() => validateAttempt({ ...gsc, capability: 'coverage-export' }, now, 'gsc'), /capability_mismatch/);
   assert.throws(() => validateAttempt(gsc, now, 'kdp'), /capability_mismatch/);
-  for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-18T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
+  // 日曜・月曜のアフィリエイト週次は木曜の記録を復元できる。9 日前の記録は拒む
+  validateAttempt({status:'pass',observedAt:'2026-09-14T00:00:00Z'},now);
+  for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-12T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
 });
 
 test('independent health detects stalled schedules even when the last run passed', () => {
@@ -235,7 +237,9 @@ test('independent health detects stalled schedules even when the last run passed
   assert.equal(measurementHealth(state,now).sources.find(s=>s.source==='kdp').metricsAvailable,false);
   assert.equal(measurementHealth(state,now).status,'action_required');
   kdp.capability = SOURCES.kdp.capability;
-  assert.equal(measurementHealth(state,now+3*86400000).status,'action_required');
+  // 週次の取得 (木曜) の記録は次の取得まで有効で、8 日を過ぎたら古い (MEASUREMENT_MAX_AGE_MS)
+  assert.equal(measurementHealth(state,now+6*86400000).status,'pass');
+  assert.equal(measurementHealth(state,now+8*86400000).status,'action_required');
   state.sources[0].observedAt='2026-09-10T00:00:00Z';
   assert.equal(measurementHealth(state,now).status,'action_required');
   assert.equal(measurementHealth(null,now).status,'action_required');
@@ -355,20 +359,75 @@ test('independent health and alert run even if an earlier artifact download fail
   assert.match(alert.run, /if \[ -f \/tmp\/authenticated-health.txt \]/);
 });
 
-// 定期実行は Mac が起動した収集の補助 (2026-09-27)。意図: 同じ日の成功を、遅れて動く定期実行の auth_required で上書きしない。
-// 省略するのは schedule だけ。手動・catch-up・push は必ず収集し、Mac が止まっていた日は定期実行が収集する。
-test('scheduled collection is skipped only when today (JST) was already collected', () => {
+// 本取得は木曜 17:30 の Mac、定期実行はその予備 (2026-10-20 MEASUREMENT-MAC-DIRECT-01)。
+// 意図: Mac が pass した取得元を予備が取り直して、遅い予備の失敗で上書きしない。Mac が取れなかった取得元と、
+// Mac が動かなかった週は予備が取る。手動・catch-up・push は常に全取得元を取る。
+test('scheduled backup collects only the sources the Mac run did not pass', () => {
   const workflow = yaml.load(readFileSync('.github/workflows/authenticated-measurement.yml', 'utf8'));
   assert.equal(workflow.jobs.collect.needs, 'gate');
   assert.equal(workflow.jobs.collect.if, "needs.gate.outputs.skip != 'true'");
-  const check = workflow.jobs.gate.steps.find((s) => s.id === 'check');
-  assert.match(check.run, /\[ "\$EVENT" = 'schedule' \]/);
-  assert.match(check.run, /9 \* 3600000/);
   assert.equal(workflow.jobs.gate.permissions, undefined);
+  assert.match(workflow.jobs.collect.env.WANTED, /contains\(fromJSON\(needs\.gate\.outputs\.sources\), matrix\.source\)/);
+  for (const step of workflow.jobs.collect.steps) {
+    assert.match(step.if ?? '', /env\.WANTED == 'true'/, `取りに行かない取得元のジョブは何もしない: ${step.name ?? step.uses ?? step.run}`);
+  }
+  assert.match(workflow.jobs.record.steps.find((s) => s.id === 'record').env.MEASUREMENT_SOURCES, /needs\.gate\.outputs\.sources/);
+
+  // gate の判定を実際に動かす
+  const check = workflow.jobs.gate.steps.find((s) => s.id === 'check');
+  const script = /node --input-type=module -e '([\s\S]*?)'\)/.exec(check.run)[1];
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-gate-'));
+  try {
+    mkdirSync(join(temp, '.claude/scripts/measurement'), { recursive: true });
+    mkdirSync(join(temp, 'data/authenticated'), { recursive: true });
+    writeFileSync(join(temp, '.claude/scripts/measurement/sources.mjs'), readFileSync('.claude/scripts/measurement/sources.mjs'));
+    const wanted = (event, generatedAt, passed) => {
+      writeFileSync(join(temp, 'data/authenticated/latest.json'), JSON.stringify({ generatedAt,
+        sources: Object.keys(SOURCES).map((source) => ({ source, status: passed.includes(source) ? 'pass' : 'failed' })) }));
+      return JSON.parse(execFileSync(process.execPath, ['--input-type=module', '-e', script], { cwd: temp, env: { ...process.env, EVENT: event }, encoding: 'utf8' }));
+    };
+    const now = new Date().toISOString();
+    const all = Object.keys(SOURCES);
+    assert.deepEqual(wanted('schedule', now, ['a8', 'rakuten']), all.filter((s) => !['a8', 'rakuten'].includes(s)));
+    assert.deepEqual(wanted('schedule', now, all), []);
+    // Mac が動かなかった週は記録が古いので全取得元を取る
+    assert.deepEqual(wanted('schedule', new Date(Date.now() - 13 * 3600000).toISOString(), all), all);
+    for (const event of ['workflow_dispatch', 'push']) assert.deepEqual(wanted(event, now, all), all);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
-  assert.match(wrapper, /refresh-session\.mjs a8 kdp note --publish \|\| REFRESH_RC=/);
-  // Mac で直接取得する経路は MEASUREMENT-MAC-DIRECT-01 で切り替えるまで CI を起動する
-  assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
+  assert.match(wrapper, /refresh-session\.mjs a8 kdp note rakuten --publish \|\| REFRESH_RC=/);
+  assert.match(wrapper, /measurement-collect-local\.sh" \|\| REFRESH_RC=/);
+  assert.doesNotMatch(wrapper, /gh workflow run authenticated-measurement/, 'Mac で取得するので CI を起動しない');
+});
+
+// 予備が取りに行かなかった取得元は前回 (Mac) の行を残す。取りに行って失敗した取得元は前回の成功に戻さない。
+test('a backup run keeps the rows of sources it did not collect and still records its own failures', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-measurement-backup-'));
+  const script = resolve('.claude/scripts/measurement/summarize.mjs');
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const pass = (source, runId) => ({ source, capability: SOURCES[source].capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId });
+    writeFileSync(join(input, 'a8.json'), JSON.stringify(pass('a8', 'mac-run')));
+    writeFileSync(join(input, 'note.json'), JSON.stringify(pass('note', 'mac-run')));
+    const run = (env) => {
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, MEASUREMENT_SOURCES: '', ...env } });
+      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json')));
+    };
+    const mac = run({ GITHUB_RUN_ID: 'mac-run' });
+    assert.equal(mac.sources.find((s) => s.source === 'a8').status, 'pass');
+
+    rmSync(input, { recursive: true }); mkdirSync(input);
+    writeFileSync(join(input, 'note.json'), JSON.stringify({ ...pass('note', 'ci-run'), status: 'failed', code: 'auth_required' }));
+    const backup = run({ GITHUB_RUN_ID: 'ci-run', MEASUREMENT_SOURCES: 'note' });
+    assert.deepEqual(backup.sources.find((s) => s.source === 'a8'), mac.sources.find((s) => s.source === 'a8'));
+    assert.equal(backup.sources.find((s) => s.source === 'note').code, 'auth_required');
+    assert.equal(backup.sources.find((s) => s.source === 'note').metricsAvailable, false);
+
+    // 取得元の指定が無い実行では、結果の無い取得元は従来どおり失敗のまま
+    const full = run({ GITHUB_RUN_ID: 'ci-run' });
+    assert.equal(full.sources.find((s) => s.source === 'a8').code, 'runner_failed');
+  } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
 test('Mac direct collection writes evidence to the vault but never touches CI-only session state', () => {

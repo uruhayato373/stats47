@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "archivedAt": "2026-10-20",
+  "originalPath": ".claude/state/search-growth/latest.json",
+  "generatedAt": "2026-09-07T04:29:48.547Z",
+  "week": "2026-W37",
+  "observations": 32511,
+  "original": {
+    "sha256": "b3fe75d30e2bfd6c537641ba12071a6605cd617d9f0cedd92061047dfc1499d9",
+    "bytes": 20282643
+  },
+  "storage": {
+    "provider": "r2-private",
+    "bucket": "stats47-private",
+    "key": "operations/windows-sync/2026-10-20/search-growth/b3fe75d30e2bfd6c537641ba12071a6605cd617d9f0cedd92061047dfc1499d9.json.gz",
+    "sha256": "7d8175d1057393185bbb137efbab10799190e73e7f55be6d72200fbf88fec79e",
+    "bytes": 379552,
+    "encoding": "gzip"
+  }
+}

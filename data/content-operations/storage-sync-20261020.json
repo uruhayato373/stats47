@@ -1,0 +1,600 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-20T07:22:05.331Z",
+  "scope": "Windows household image prototypes and saved statistical samples",
+  "sourceCommit": "ec5b25392537ca235495d8d0f21c8536bb872641",
+  "summary": {
+    "localFiles": 70,
+    "uniqueObjects": 42,
+    "uploaded": 21,
+    "retained": 21,
+    "statisticalSampleObjects": 22
+  },
+  "archiveManifest": "data/search-growth/archives/windows-20261020.json",
+  "statisticalSampleObjects": [
+    "stats47-private/media-workspace/images/95504f86adedea1ceb731622f6532f6a7d129485e7a949513f95e72b3d9ce4c1.png",
+    "stats47-private/media-workspace/inputs/f390ec0eb811a6c72c95d255328648a0a2abf9ef0b4e0881719284ea1f600e5b.json",
+    "stats47-private/media-workspace/inputs/1c5dfecf954d41eab0ef35904cf948717b60398e819d66539cf4eb70c5b94d82.json",
+    "stats47/app/stats/maximum-temperature/values.json",
+    "stats47-private/media-workspace/images/44e77479a68bb55c5b28aa8e2581919d17e58724212a921431665083e92356e9.svg",
+    "stats47-private/media-workspace/images/49c1329eb8ef7c2738518902ba7be63a13d51b5ca9ff88f57acfaf5d2c923f3f.png",
+    "stats47-private/media-workspace/inputs/49300d49bc5dac2bbfa6569abf65322037afd293a581527d1e06bc3937b44c74.json",
+    "stats47-private/media-workspace/images/67bff24235cb7a0bfc989236db96e3d8d0e2c43090d950f5975785ede0a8a758.svg",
+    "stats47-private/media-workspace/images/848b937c44e24d8672b12a8638ca469e8f861df5ce6349d2e5410f3fde3a1195.png",
+    "stats47-private/media-workspace/inputs/66f214181a8520b765e1e78f022377a61e3b3d710e486e12172e2f61d03ec033.json",
+    "stats47-private/media-workspace/images/fb840332d04364ad53a874cb8d310cea4ae7fc1b7c9736f592c4ecb51d4e0204.svg",
+    "stats47-private/media-workspace/images/c628ba8ac92bcaed8aa16f17ed46dcdf33f118ef9658603f4139328dc2490385.png",
+    "stats47-private/media-workspace/inputs/ea77b709f771e70f3ebef7a67d6a889235904ce4ff5b5df6241382113bd224fe.json",
+    "stats47-private/media-workspace/inputs/4f76386523e4fb53d3eb42f46278216b405ee145a58570137b1606accdc36261.json",
+    "stats47/app/stats/engel-coefficient/values.json",
+    "stats47-private/media-workspace/images/974b69d285511a6e9f4db21223dbcab108e02efc57ecc7e8fb393ed0c04c8d30.svg",
+    "stats47-private/media-workspace/images/bac710b10915232ac9f1fa10cabe381f7174cc178f9226bdeaae3fe958c82e66.png",
+    "stats47-private/media-workspace/inputs/e49cf96db6e13ae0ab98942bbb984ddebb44b73e4268b0bf42149c62a53dd353.json",
+    "stats47-private/media-workspace/inputs/9b87f154b1a79c3cc9edc2c7373e890a935d7107224f5c47824d84e610c02aac.json",
+    "stats47/app/blog/alcohol-prefecture-map/data/liquor-type-breakdown.json",
+    "stats47-private/media-workspace/inputs/88618a62cb6681ee6232a5bff7686be8f309485d48fb12f1da122530d0d694f9.json",
+    "stats47-private/media-workspace/images/6fe6541dc86e3c9acaf6b44bb799f7b4c72898f322298479a37c9dc068150330.svg"
+  ],
+  "assets": [
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-aichi/instagram/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801.png",
+      "bytes": 107234,
+      "sha256": "da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-aichi/x/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801.png",
+      "bytes": 107234,
+      "sha256": "da5087dd610b7a6d7d960f7ef2c620bdd1133377736400588a2b2fe124026801",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-aomori/instagram/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004.png",
+      "bytes": 110018,
+      "sha256": "e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-aomori/x/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004.png",
+      "bytes": 110018,
+      "sha256": "e3ee6f62c36047c06cd27e63e12545b41f6722d8a8341395241fceb051ca9004",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-hokkaido/instagram/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8.png",
+      "bytes": 109879,
+      "sha256": "f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note/a-kakei-hokkaido/x/candidate-preview.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8.png",
+      "bytes": 109879,
+      "sha256": "f930ae953957c3dc1af745f2216bd9145450765fbcc78d22b8bad6f6d0d065e8",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aichi/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/027bc75b3b2c7b917ba2d2c187638584078a192834aaf975fd7ab475e56cd11b.json",
+      "bytes": 18909,
+      "sha256": "027bc75b3b2c7b917ba2d2c187638584078a192834aaf975fd7ab475e56cd11b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aichi/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698.png",
+      "bytes": 156815,
+      "sha256": "c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aichi/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698.png",
+      "bytes": 156815,
+      "sha256": "c5b2704d8006ac4f43b7d4c8c3c41d9eef57bbc85521ab8cea3ab668aa9a9698",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aomori/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c.png",
+      "bytes": 163294,
+      "sha256": "82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aomori/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/53b5954a76625c406ce9edd54aa313d596f04a8f007078f71f7133803e6bbd47.json",
+      "bytes": 18881,
+      "sha256": "53b5954a76625c406ce9edd54aa313d596f04a8f007078f71f7133803e6bbd47",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aomori/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json",
+      "bytes": 3843,
+      "sha256": "b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-aomori/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c.png",
+      "bytes": 163294,
+      "sha256": "82cbf7113de59a0f570fedfaa33c5af6366748099f090a1c95c07ba8af872c1c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-hokkaido/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c.png",
+      "bytes": 160407,
+      "sha256": "24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-hokkaido/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/dc8cdf3e9c2079512d9d2b2e0eadf1afff871023df97ce57c2163a94df7d8327.json",
+      "bytes": 18876,
+      "sha256": "dc8cdf3e9c2079512d9d2b2e0eadf1afff871023df97ce57c2163a94df7d8327",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-hokkaido/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json",
+      "bytes": 3836,
+      "sha256": "09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aichi/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+      "bytes": 194991,
+      "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aichi/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/4b52664513b9502dd441d012626bcaa8f3b22ac30c70c0c454eb7156a2b45bae.json",
+      "bytes": 19143,
+      "sha256": "4b52664513b9502dd441d012626bcaa8f3b22ac30c70c0c454eb7156a2b45bae",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aichi/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+      "bytes": 194991,
+      "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-short-v3-r2/a-kakei-hokkaido/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c.png",
+      "bytes": 160407,
+      "sha256": "24c55323dd49d4eb27fc2a1d45b7d9c301287b6fdfbc0d52d4e2060de493978c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aomori/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+      "bytes": 201114,
+      "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aomori/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/32dc7e0c9a6a8319196660e6f35b80937a14b8eaa04c71354d766ecc2b25eeee.json",
+      "bytes": 19115,
+      "sha256": "32dc7e0c9a6a8319196660e6f35b80937a14b8eaa04c71354d766ecc2b25eeee",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aomori/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json",
+      "bytes": 3843,
+      "sha256": "b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-aomori/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+      "bytes": 201114,
+      "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-hokkaido/instagram/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+      "bytes": 198470,
+      "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-hokkaido/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/25918888c634401c1aafb67659789baea3daf37c32ac36ca355e9210c51b629b.json",
+      "bytes": 19110,
+      "sha256": "25918888c634401c1aafb67659789baea3daf37c32ac36ca355e9210c51b629b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-hokkaido/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json",
+      "bytes": 3836,
+      "sha256": "09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-common-single-v2/a-kakei-hokkaido/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+      "bytes": 198470,
+      "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aichi/note/stills/household-bars-1280x1920.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/1c59ca1c4510edd961e7751842073abc7b0c9729b87a54ebb0f2a9cc8cf5aaab.png",
+      "bytes": 258389,
+      "sha256": "1c59ca1c4510edd961e7751842073abc7b0c9729b87a54ebb0f2a9cc8cf5aaab",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aichi/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/079380278506cef22b721b375eb3a152278d66c9aa21c2822677671aab0bf6a5.json",
+      "bytes": 21900,
+      "sha256": "079380278506cef22b721b375eb3a152278d66c9aa21c2822677671aab0bf6a5",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aomori/note/stills/household-bars-1280x1920.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/68c40a9ddb2d56218caca4dfdb43f7e7fee2edb3581f92ea046724a4ef02728c.png",
+      "bytes": 270397,
+      "sha256": "68c40a9ddb2d56218caca4dfdb43f7e7fee2edb3581f92ea046724a4ef02728c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aomori/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/5fbc5c255a178f013b0f0854d8bd8de9129c43bc4d48da16fa6b3e002343e1f6.json",
+      "bytes": 21872,
+      "sha256": "5fbc5c255a178f013b0f0854d8bd8de9129c43bc4d48da16fa6b3e002343e1f6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-aomori/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json",
+      "bytes": 3843,
+      "sha256": "b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-hokkaido/note/stills/household-bars-1280x1920.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/da3568e31967a0105e1fef21da4f88db1d06221bee618bee984e33795c950e35.png",
+      "bytes": 266395,
+      "sha256": "da3568e31967a0105e1fef21da4f88db1d06221bee618bee984e33795c950e35",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-hokkaido/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/959854e840df66307e527c45bc0d67c073da4dd085bdd45ffe9c210369d3f133.json",
+      "bytes": 21867,
+      "sha256": "959854e840df66307e527c45bc0d67c073da4dd085bdd45ffe9c210369d3f133",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v1/a-kakei-hokkaido/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json",
+      "bytes": 3836,
+      "sha256": "09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aichi/note/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+      "bytes": 194991,
+      "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aichi/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/3b48f6bfc5d5fe9f061cf17e24b8c35a8e94a669b9219343d2971d51f8c0e6f8.json",
+      "bytes": 18904,
+      "sha256": "3b48f6bfc5d5fe9f061cf17e24b8c35a8e94a669b9219343d2971d51f8c0e6f8",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aomori/note/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+      "bytes": 201114,
+      "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aomori/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json",
+      "bytes": 3843,
+      "sha256": "b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-hokkaido/note/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+      "bytes": 198470,
+      "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-aomori/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/03889a5fe5e45cf7c2f7b0c574b0cfa8cd6f996bd04770ead8983d51c410bc69.json",
+      "bytes": 18876,
+      "sha256": "03889a5fe5e45cf7c2f7b0c574b0cfa8cd6f996bd04770ead8983d51c410bc69",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-hokkaido/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/57fb98fd23627b62982951a2405852eedb96d841abd4d5094d2ac9555083cacf.json",
+      "bytes": 18871,
+      "sha256": "57fb98fd23627b62982951a2405852eedb96d841abd4d5094d2ac9555083cacf",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-note-v2/a-kakei-hokkaido/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json",
+      "bytes": 3836,
+      "sha256": "09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-1-cover-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/24b21c7842b0324b0a53ccdce5953f489e3a8c4755d6cd7f6301d45da69b0604.png",
+      "bytes": 152778,
+      "sha256": "24b21c7842b0324b0a53ccdce5953f489e3a8c4755d6cd7f6301d45da69b0604",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-2-categories-1-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/64ccdedf6dae7dae0f5ce65e0a5a90a46ec9e121b728c75c80ddd1e90da480d4.png",
+      "bytes": 158972,
+      "sha256": "64ccdedf6dae7dae0f5ce65e0a5a90a46ec9e121b728c75c80ddd1e90da480d4",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-3-categories-2-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/4e2c313c27ca8232148b1e0794c0a2b486edc5321f69501e93fad622cf804a75.png",
+      "bytes": 160544,
+      "sha256": "4e2c313c27ca8232148b1e0794c0a2b486edc5321f69501e93fad622cf804a75",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/instagram/stills/slide-4-source-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/00c196cbec4b8b1dd5b1d27377215350964e716943f6f1e3148e35740fd0d79a.png",
+      "bytes": 176779,
+      "sha256": "00c196cbec4b8b1dd5b1d27377215350964e716943f6f1e3148e35740fd0d79a",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15.json",
+      "bytes": 19562,
+      "sha256": "acdd9abfc1444320e92261ef39a7ffbdde030365584a1f4f43d30332ce8d5c15",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6.json",
+      "bytes": 3869,
+      "sha256": "bf20c76aeedcb9d1be5ac334fdca20d7db42117b5a03575ddc913dea4c2655c6",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-1-cover-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/19030e843ea42daeea84f9ff84a61399a972f1e5920610911a638d8e57ffd826.png",
+      "bytes": 150725,
+      "sha256": "19030e843ea42daeea84f9ff84a61399a972f1e5920610911a638d8e57ffd826",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-2-categories-1-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/537962aae08a5228c031a6e366a7c2100740c6139fdedb61a62d7c0fa4ed79df.png",
+      "bytes": 161183,
+      "sha256": "537962aae08a5228c031a6e366a7c2100740c6139fdedb61a62d7c0fa4ed79df",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-3-categories-2-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/8a1b8d5a63e4908fc37103ecada7099a847edd40d16f9cb1067c30ebebdb3466.png",
+      "bytes": 165919,
+      "sha256": "8a1b8d5a63e4908fc37103ecada7099a847edd40d16f9cb1067c30ebebdb3466",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aichi/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b.png",
+      "bytes": 194991,
+      "sha256": "7dfbdfdc77a323a0304a0845a8efd270545a198539ac3f116a4560b23c94803b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c.json",
+      "bytes": 19534,
+      "sha256": "681e13bb3c2b1302d40837c2686b3e3284a380f22240541161dad319ef466d9c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/instagram/stills/slide-4-source-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/f44fec07c96bdb50a9aa7d4b0068a8c888855fbf5a3d96839b7e016c2159f95c.png",
+      "bytes": 176322,
+      "sha256": "f44fec07c96bdb50a9aa7d4b0068a8c888855fbf5a3d96839b7e016c2159f95c",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386.json",
+      "bytes": 3843,
+      "sha256": "b416fa9c0dcf45eca730f3610933c6f3f38f9ca9d823fca249df520c220cc386",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-aomori/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e.png",
+      "bytes": 201114,
+      "sha256": "54f0e7fec5acce12404f79c8150e7c8b612dbd991bc5b9611177c84ae376f72e",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-1-cover-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/f24d3cc38000979fa39894e9b6c10f83e1775cb86060ea557ecec7f3747da40a.png",
+      "bytes": 143373,
+      "sha256": "f24d3cc38000979fa39894e9b6c10f83e1775cb86060ea557ecec7f3747da40a",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-2-categories-1-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/300450423704a2123f6187dba037ecf9cf893e5712c25cd6f6a736141e4a6592.png",
+      "bytes": 158650,
+      "sha256": "300450423704a2123f6187dba037ecf9cf893e5712c25cd6f6a736141e4a6592",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-3-categories-2-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/9fdc40dabc19e06785a16413afcec8a39873887e1c4c6afe370079a40c6aba50.png",
+      "bytes": 166130,
+      "sha256": "9fdc40dabc19e06785a16413afcec8a39873887e1c4c6afe370079a40c6aba50",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/instagram/stills/slide-4-source-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/d9aa49af25a9f287f6df2540ff676dea201b0378b14c57827510d84d2550cf7b.png",
+      "bytes": 176366,
+      "sha256": "d9aa49af25a9f287f6df2540ff676dea201b0378b14c57827510d84d2550cf7b",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/source-input.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd.json",
+      "bytes": 3836,
+      "sha256": "09c30963fc265d4eefebc17cc855af31a8f5a0101d53f16990bc084bc05146dd",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/production.json",
+      "bucket": "stats47-private",
+      "key": "media-workspace/inputs/35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21.json",
+      "bytes": 19529,
+      "sha256": "35ce003854d54b891df783cf9bede28c9aa3e3156c704aea84bd063ad4bb1a21",
+      "provider": "r2-private"
+    },
+    {
+      "localPath": ".local/r2/sns/note-household/20261019-v1/a-kakei-hokkaido/x/stills/household-bars-1080x1350.png",
+      "bucket": "stats47-private",
+      "key": "media-workspace/images/e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989.png",
+      "bytes": 198470,
+      "sha256": "e730cabf6aa2af052d0da33dae54bfc4de19e2a5d79a60cfeef4476bc4517989",
+      "provider": "r2-private"
+    }
+  ]
+}

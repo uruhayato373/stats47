@@ -47,6 +47,7 @@ Mac / Windows 双方で動く。
 node .claude/scripts/ads/affiliate-status.mjs
 ```
 
+- 提携の状態の判断は `affiliate-catalog.json` から行い、status はオーナーが会話で頼んだときだけ動かす (読むための実行は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
 - 各 ASP の提携中 / 申請中一覧を読み、`affiliate-catalog.json` の `status` と比較してドリフトを出す。
 - **取得できなかった ASP は「判定不能」として区別される。** これを「提携なし」と読み替えない。
   **A8 は抽出パターンが無く常に ID 0 件**になる (A8 の提携状態は `/scout-asp check-approval` で見る)。

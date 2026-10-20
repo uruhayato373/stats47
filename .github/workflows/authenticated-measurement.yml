@@ -9,7 +9,7 @@ on:
         required: false
         type: string
   schedule:
-    - cron: '20 9 * * 4' # 木曜 JST 18:20 (2026-10-20 に週次化)。金曜 05:00 の週次計測サイクルより前に記録する
+    - cron: '20 11 * * 4' # 木曜 JST 20:20。Mac の取得 (17:30) の予備で、Mac が取れなかった取得元だけを取る (2026-10-20)
   push:
     branches: [develop]
     paths: ['.github/workflows/authenticated-measurement.yml']
@@ -22,42 +22,57 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # 定期実行は Mac が起動した収集の補助。Mac の refresh-session (毎週木曜 17:30 JST。2026-10-20 に週次化) がログインし直した直後に
-  # 収集を起動するので、その日すでに収集済みなら定期実行は何もしない。もしものセッションは数時間で切れ、
-  # 定期実行は予定より 4〜5 時間遅れて動くため、遅い定期実行が同日の成功を auth_required で上書きしていた
-  # (2026-09-26 は 17:31 に渡したセッションで 22:47 に失敗、2026-09-27 は 42 分後の手動収集で成功)。
-  # Mac が止まっていた日は latest.json が前日のままなので、これまでどおり定期実行が収集する。
+  # 本取得は Mac (毎週木曜 17:30 JST の measurement-session-refresh.sh → measurement-collect-local.sh。
+  # 2026-10-20 に週次化し、Mac の直接取得へ切り替えた。MEASUREMENT-MAC-DIRECT-01)。定期実行はその予備で、
+  # Mac の記録が 12 時間以内なら、Mac が pass した取得元は取り直さない (cron は数時間遅れて動くので日付では判定しない)。
+  # 遅い予備が同じ枠の成功を auth_required で上書きしないためでもある (2026-09-26 は 17:31 に渡したセッションで 22:47 に失敗)。
+  # Mac が動かなかった週は記録が古いので、予備が全取得元を取る。手動・catch-up・push は常に全取得元を取る。
   gate:
     if: github.repository == 'uruhayato373/stats47' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     runs-on: ubuntu-latest
     timeout-minutes: 3
     outputs:
       skip: ${{ steps.check.outputs.skip }}
+      sources: ${{ steps.check.outputs.sources }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           persist-credentials: false
-          sparse-checkout: data/authenticated
+          sparse-checkout: |
+            data/authenticated
+            .claude/scripts/measurement
       - id: check
         env:
           EVENT: ${{ github.event_name }}
         run: |
-          SKIP=false
-          if [ "$EVENT" = 'schedule' ] && [ -f data/authenticated/latest.json ]; then
-            SKIP=$(node -e '
-              const s = require("./data/authenticated/latest.json");
-              const jst = (t) => new Date(Date.parse(t) + 9 * 3600000).toISOString().slice(0, 10);
-              process.stdout.write(String(Boolean(s.generatedAt) && jst(s.generatedAt) === jst(new Date().toISOString())));
-            ')
+          SOURCES=$(node --input-type=module -e '
+            import { existsSync, readFileSync } from "node:fs";
+            import { SOURCES } from "./.claude/scripts/measurement/sources.mjs";
+            const all = Object.keys(SOURCES);
+            let wanted = all;
+            if (process.env.EVENT === "schedule" && existsSync("data/authenticated/latest.json")) {
+              const state = JSON.parse(readFileSync("data/authenticated/latest.json", "utf8"));
+              const age = Date.now() - Date.parse(state.generatedAt);
+              if (age >= 0 && age <= 12 * 3600000) wanted = all.filter((name) => state.sources?.find((s) => s.source === name)?.status !== "pass");
+            }
+            process.stdout.write(JSON.stringify(wanted));
+          ')
+          echo "sources=$SOURCES" >> "$GITHUB_OUTPUT"
+          if [ "$SOURCES" = '[]' ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Mac の取得で全取得元が pass したため予備を省略する" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "取得する取得元: $SOURCES" >> "$GITHUB_STEP_SUMMARY"
           fi
-          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
-          if [ "$SKIP" = 'true' ]; then echo "今日 (JST) は収集済みのため定期実行を省略する" >> "$GITHUB_STEP_SUMMARY"; fi
   collect:
     needs: gate
     if: needs.gate.outputs.skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      WANTED: ${{ contains(fromJSON(needs.gate.outputs.sources), matrix.source) }}
     strategy:
       fail-fast: false
       max-parallel: 8 # separate services and ephemeral runners; no shared browser profile
@@ -70,14 +85,19 @@ jobs:
           - {source: rakuten, secret: MEASUREMENT_SESSION_RAKUTEN, auth: RAKUTEN}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: env.WANTED == 'true'
         with:
           ref: develop
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        if: env.WANTED == 'true'
         with: {node-version: '20', cache: npm}
       - run: npm ci
+        if: env.WANTED == 'true'
       - run: npx playwright install --with-deps chromium
+        if: env.WANTED == 'true'
       - name: Collect and verify private evidence
+        if: env.WANTED == 'true'
         env:
           # Secret は名前で直接引く。secrets[matrix.secret] の動的参照は全 Secret をランナーへ渡す (CodeQL Excessive Secrets Exposure)
           MEASUREMENT_SESSION: ${{ matrix.source == 'a8' && secrets.MEASUREMENT_SESSION_A8 || matrix.source == 'note' && secrets.MEASUREMENT_SESSION_NOTE || matrix.source == 'gsc' && secrets.MEASUREMENT_SESSION_GSC || matrix.source == 'kdp' && secrets.MEASUREMENT_SESSION_KDP || matrix.source == 'rakuten' && secrets.MEASUREMENT_SESSION_RAKUTEN || '' }}
@@ -95,7 +115,7 @@ jobs:
         run: |
           xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
       - name: Upload credential-free status only
-        if: always()
+        if: always() && env.WANTED == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0
         with:
           name: authenticated-status-${{ matrix.source }}-${{ github.run_attempt }}
@@ -105,7 +125,7 @@ jobs:
           if-no-files-found: warn
 
   record:
-    needs: collect
+    needs: [gate, collect]
     if: always() && needs.collect.result != 'skipped'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -124,6 +144,9 @@ jobs:
       - name: Record all sources, including missing jobs
         id: record
         if: always() # record missing artifacts without suppressing the failed download step
+        env:
+          # 取りに行かなかった取得元 (Mac が pass 済み) は前回の行を残す (summarize.mjs)
+          MEASUREMENT_SOURCES: ${{ join(fromJSON(needs.gate.outputs.sources), ',') }}
         run: |
           node .claude/scripts/measurement/summarize.mjs
           cat /tmp/authenticated-measurement-summary.md >> "$GITHUB_STEP_SUMMARY"

@@ -66,7 +66,7 @@ test('wrong identity, totals, pagination, stale input and inconsistent missing r
 test('latest failed or stale attempt cannot fall back to an old successful inventory', () => {
   for (const value of [null, { ...attempt, source: 'gsc' }, { ...attempt, code: 'auth_required' },
     { ...attempt, code: 'storage_error' }, { ...attempt, inventoryAvailable: false },
-    { ...attempt, observedAt: '2026-09-17T00:00:00Z' }, { ...attempt, capability: 'old' }]) {
+    { ...attempt, observedAt: '2026-09-12T00:00:00Z' }, { ...attempt, capability: 'old' }]) { // 記録の有効期間は 8 日 (MEASUREMENT_MAX_AGE_MS)
     assert.throws(() => validateInventoryAttempt(value, now));
   }
   const evidence = { source: 'note', observedAt: time, files: {} };

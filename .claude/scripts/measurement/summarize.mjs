@@ -9,7 +9,13 @@ const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;
 const previous = existsSync(output) ? JSON.parse(readFileSync(output, 'utf8')) : { sources: [] };
 const filenames = existsSync(input) ? readdirSync(input) : [];
+// この実行で取りに行った取得元 (カンマ区切り。未指定なら全部)。CI の予備は、木曜に Mac が pass した取得元を
+// 取り直さないので、取りに行かなかった取得元は前回の行をそのまま残す (MEASUREMENT-MAC-DIRECT-01)。
+// 取りに行って失敗した取得元は、従来どおり前回の成功に戻さない。
+const requested = process.env.MEASUREMENT_SOURCES ? new Set(process.env.MEASUREMENT_SOURCES.split(',').filter(Boolean)) : null;
 const sources = Object.entries(SOURCES).map(([source, config]) => {
+  const kept = requested && !requested.has(source) ? previous.sources?.find(s => s.source === source) : null;
+  if (kept) return kept;
   // Highest attempt wins even when failed/malformed; never fall back to an older success.
   // Legacy source.json: remove after 2026-10-21 (30-day artifact retention).
   const candidates = filenames.flatMap(file => {
@@ -44,7 +50,7 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     evidence: value.evidence ?? null,
     quality: value.quality ?? null,
     knownIncomplete: value.status === 'pass' ? value.knownIncomplete ?? null : null,
-    remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null,
+    remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : null,
   };
 });
 // KDP 月次レポートの書籍別集計を販売台帳へ足す。同じ書籍・月の行が既にあれば足さず (再実行・手入力済み)、

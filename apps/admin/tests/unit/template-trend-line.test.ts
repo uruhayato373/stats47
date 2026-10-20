@@ -17,7 +17,7 @@ describe('real annual-series portrait line sample', () => {
     const svg = renderTrendLine(input);
     for (const text of ['width="1080"', 'height="1350"', '名古屋市', '二人以上の世帯', '2007–2024年', '単位：％', '出典：家計調査', '26.3', '30.9', 'data-points="18"']) expect(svg).toContain(text);
     expect(svg).not.toContain('全国平均');
-    expect(svg.match(/data-year=/g)).toHaveLength(18);
+    expect(svg.match(/<circle /g)).toHaveLength(18);
     expect(svg.match(/出典：/g)).toHaveLength(1);
     expect(() => assertMinimalChartCopy(svg)).not.toThrow();
   });

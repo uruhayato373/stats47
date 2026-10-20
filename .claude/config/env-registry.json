@@ -110,6 +110,13 @@
       ]
     },
     {
+      "name": "MEASUREMENT_SOURCES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "STATS47_AUTH_PASSWORD",
       "visibility": "secret",
       "contexts": [
@@ -1382,6 +1389,13 @@
     },
     {
       "name": "XXX",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EVENT",
       "visibility": "server",
       "contexts": [
         "process"

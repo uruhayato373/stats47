@@ -243,6 +243,7 @@
     "cheerio": "^1.2.0",
     "csv-parse": "^7.0.2",
     "eslint-plugin-react-hooks": "7.0.1",
+    "fast-glob": "file:.claude/scripts/lib/next-eslint-glob",
     "googleapis": "^171.4.0",
     "knip": "^6.39.0",
     "prettier": "^3.4.2",
@@ -253,6 +254,9 @@
     "packages/*"
   ],
   "overrides": {
+    "@next/eslint-plugin-next": {
+      "fast-glob": "$fast-glob"
+    },
     "@aws-sdk/xml-builder": "3.972.40",
     "@babel/core": "7.29.7",
     "body-parser": "2.3.0",

@@ -1148,6 +1148,28 @@
             "windowDays": 7
           },
           "snapshotHash": "74d6e02da1ab01efac1306a62a9e6c40456273193ad7b6a40fc1325ff5674aa7"
+        },
+        {
+          "date": "2026-10-20",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-11",
+            "periodEnd": "2026-10-17",
+            "windowDays": 7
+          },
+          "snapshotHash": "67219a63ef128c2755337ba2f161224c0a6cb8ef715278ba04e70d1948d54d48"
+        },
+        {
+          "date": "2026-10-20",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-11",
+            "periodEnd": "2026-10-17",
+            "windowDays": 7
+          },
+          "snapshotHash": "1a58772fb140ead24ba360f91f1dc13e2da4b1536fc4290d2bf195b0f50b70a7"
         }
       ]
     }

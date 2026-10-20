@@ -2,7 +2,7 @@ import { engelCoefficient } from '../../../data/metrics/engel-coefficient';
 import { foodExpenditureTotal } from '../../../data/metrics/food-expenditure-total';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
 import { assertMetricPresentation, resolveNumericDomain, type MetricPresentation } from '../../../packages/types/src/metric-presentation';
-import { linearScale, niceTicks } from '../../../packages/svg-builder/src/shared/axis';
+import { generateLineSvg } from '../../../packages/svg-builder/src/charts/line';
 import { BRAND } from '../../web/src/features/ogp/brand';
 
 export const TREND_SAMPLE_METRIC = engelCoefficient;
@@ -37,10 +37,18 @@ export function renderTrendLine(raw: unknown, presentation: MetricPresentation =
   const domain = resolveNumericDomain(values, presentation.trendDomain);
   if (!domain || values.some((value) => value < domain[0] || value > domain[1]))
     throw Error('推移の表示範囲に値が収まりません。');
-  const format = new Intl.NumberFormat('ja-JP', { minimumFractionDigits: TREND_SAMPLE_METRIC.display?.decimalPlaces ?? 1, maximumFractionDigits: TREND_SAMPLE_METRIC.display?.decimalPlaces ?? 1 });
-  const x = linearScale(TREND_SAMPLE_SERIES.from, TREND_SAMPLE_SERIES.to, 144, 952);
-  const y = linearScale(domain[0], domain[1], 1040, 430);
-  const ticks = niceTicks(domain[0], domain[1], 3);
+  const chart = generateLineSvg(rows.map(row => ({
+    metricKey: TREND_SAMPLE_METRIC.key,
+    areaCode: TREND_SAMPLE_SERIES.areaCode, areaName: TREND_SAMPLE_SERIES.name,
+    yearCode: String(row.year), yearName: String(row.year),
+    value: row.value * factor, unit: TREND_SAMPLE_METRIC.display?.displayUnit ?? TREND_SAMPLE_METRIC.unit,
+  })), {
+    title: `${TREND_SAMPLE_SERIES.name}の${TREND_SAMPLE_METRIC.title}`,
+    xKey: 'yearCode', seriesKey: 'areaCode',
+    yDomain: [domain[0] * factor, domain[1] * factor],
+    frame: { width: 340, height: 290 }, showHeading: false,
+    showEndpointValues: true,
+  });
   const escape = (text: string) => text.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]!);
   const source = 'displayName' in foodExpenditureTotal.source ? foodExpenditureTotal.source.displayName : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" data-domain-min="${domain[0]}" data-domain-max="${domain[1]}" role="img" aria-label="名古屋市のエンゲル係数・2007〜2024年">
@@ -50,11 +58,7 @@ export function renderTrendLine(raw: unknown, presentation: MetricPresentation =
       <text x="64" y="184" font-size="72" font-weight="700">${escape(TREND_SAMPLE_METRIC.title)}の推移</text>
       <text x="64" y="246" font-size="32" fill="${BRAND.muted}">2007–2024年 · 単位：${escape(TREND_SAMPLE_METRIC.display?.displayUnit ?? TREND_SAMPLE_METRIC.unit)}</text>
       <text x="64" y="305" font-size="36">${TREND_SAMPLE_SERIES.name} · 二人以上の世帯</text>
-      ${ticks.map((tick) => `<line x1="144" x2="952" y1="${y(tick)}" y2="${y(tick)}" stroke="${BRAND.line}"/><text x="116" y="${y(tick) + 12}" text-anchor="end" font-size="32" fill="${BRAND.muted}">${format.format(tick * factor)}</text>`).join('')}
-      <polyline data-series="${TREND_SAMPLE_SERIES.areaCode}" data-points="${rows.length}" points="${rows.map((row) => `${x(row.year)},${y(row.value)}`).join(' ')}" fill="none" stroke="${BRAND.primary}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
-      ${rows.map((row, i) => `<circle data-year="${row.year}" data-value="${row.value}" cx="${x(row.year)}" cy="${y(row.value)}" r="${i === 0 || i === rows.length - 1 ? 9 : 4}" fill="${BRAND.primary}"/>`).join('')}
-      ${[rows[0], rows[rows.length - 1]].map((row) => `<text x="${x(row.year)}" y="1154" text-anchor="middle" font-size="38" font-weight="700" fill="${BRAND.primary}">${format.format(row.value * factor)}</text>`).join('')}
-      ${[2007, 2012, 2018, 2024].map((year) => `<text x="${x(year)}" y="1102" text-anchor="middle" font-size="34" fill="${BRAND.muted}">${year}</text>`).join('')}
+      <svg x="64" y="350" width="952" height="812" viewBox="0 0 340 290" data-points="${rows.length}">${chart}</svg>
       <line x1="64" x2="1016" y1="1190" y2="1190" stroke="${BRAND.line}"/>
       <text x="64" y="1235" font-size="28" fill="${BRAND.muted}">出典：${escape(source ?? '')}</text>
     </g></svg>`;

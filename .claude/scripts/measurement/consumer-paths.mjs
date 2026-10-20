@@ -1,5 +1,5 @@
 /** Exact canonical restore allowlist. Sessions, diagnostics and arbitrary paths never leave the vault. */
-import { sourceFor } from './sources.mjs';
+import { sourceFor, MEASUREMENT_MAX_AGE_MS } from './sources.mjs';
 import { createHash } from 'node:crypto';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 export function consumerPath(name, path) {
@@ -22,7 +22,7 @@ export function validateAttempt(attempt, now = Date.now(), source = null) {
   if (!attempt || attempt.status !== 'pass') throw new Error('latest_collection_not_successful');
   if (source && (attempt.source !== source || attempt.capability !== sourceFor(source).capability)) throw new Error('capability_mismatch');
   const age = now - Date.parse(attempt.observedAt);
-  if (!Number.isFinite(age) || age < -300000 || age > 2 * 86400000) throw new Error('measurement_stale');
+  if (!Number.isFinite(age) || age < -300000 || age > MEASUREMENT_MAX_AGE_MS) throw new Error('measurement_stale');
 }
 
 export function validateEvidence(attempt, evidence, source) {

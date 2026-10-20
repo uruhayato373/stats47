@@ -40,6 +40,15 @@
             "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre-bash-safety.js"
           }
         ]
+      },
+      {
+        "matcher": "mcp__claude-in-chrome__.*|mcp__Claude_Browser__.*|mcp__chrome-devtools__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre-browser-admin-read.mjs"
+          }
+        ]
       }
     ],
     "SessionStart": [

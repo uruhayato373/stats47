@@ -25,7 +25,12 @@ if [ "$(cat .local/measurement-lock-hash 2>/dev/null)" != "$LOCK_HASH" ]; then
   mkdir -p .local && echo "$LOCK_HASH" > .local/measurement-lock-hash
 fi
 
-node .claude/scripts/measurement/collect-local.mjs --main-root "$PROJECT_DIR"
+# 取得が途中で落ちても、記録と通知の段まで進む (_common.sh の set -e で止めると Issue が作られない)
+COLLECT_RC=0
+node .claude/scripts/measurement/collect-local.mjs --main-root "$PROJECT_DIR" || COLLECT_RC=$?
+if [ "$COLLECT_RC" != 0 ]; then
+  printf 'Mac の取得 (collect-local.mjs) が rc=%s で止まった。記録は更新していない可能性がある。\n' "$COLLECT_RC" > /tmp/authenticated-measurement-summary.md
+fi
 
 git add data/authenticated/latest.json data/authenticated/revenue-history.json data/products/sales-ledger.json
 if ! git diff --cached --quiet; then
@@ -40,7 +45,7 @@ fi
 
 # 取得元に失敗があれば Issue で知らせ、全件そろえば閉じる (CI の record job と同じ規則)。
 EXISTING=$(gh issue list --state open --label "$LABEL" --limit 1 --json number --jq '.[0].number // empty')
-if jq -e '.status == "pass"' data/authenticated/latest.json >/dev/null; then
+if [ "$COLLECT_RC" = 0 ] && jq -e '.status == "pass"' data/authenticated/latest.json >/dev/null; then
   if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "Mac の取得で全取得元がそろいました ($(date -Iseconds))"; fi
 else
   printf '\n実行: Mac の定期実行 %s (ログ: ~/Library/Logs/stats47/measurement-collect-local.log)\n' "$(date -Iseconds)" >> /tmp/authenticated-measurement-summary.md
