@@ -33,7 +33,7 @@ function extractLocs(xml) {
 /**
  * sitemap.xml (index 対応) を辿って掲載 URL の pathKey 集合を返す。
  * child sitemap と総 URL に上限を設け、本番を過剰に叩かない (超過時 partial)。
- * @returns {{ ok:boolean, observedAt:string, pathKeys:string[], truncated:boolean, childCount:number, error?:string }}
+ * @returns {Promise<{ ok:boolean, observedAt:string, pathKeys:string[], truncated:boolean, childCount:number, error?:string }>}
  */
 export async function fetchSitemapPathKeys({ origin = SITE_ORIGIN, timeoutMs = 12000, maxChildren = 25, maxUrls = 40000 } = {}) {
   const observedAt = new Date().toISOString();

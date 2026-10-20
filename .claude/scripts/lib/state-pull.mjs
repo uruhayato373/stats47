@@ -44,7 +44,8 @@ export function localDirFor(domain, root = ROOT) {
 }
 
 async function fetchJson(url, dispatcher) {
-  const res = await fetch(url, { dispatcher, headers: { "cache-control": "no-cache" } });
+  // dispatcher (undici のプロキシ) は Node の fetch だけが受け付け、DOM の RequestInit の型に無い
+  const res = await fetch(url, /** @type {any} */ ({ dispatcher, headers: { "cache-control": "no-cache" } }));
   if (!res.ok) throw new Error(`${res.status} ${url}`);
   return res;
 }

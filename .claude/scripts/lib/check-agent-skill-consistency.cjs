@@ -296,6 +296,7 @@ function checkBannedPromptPatterns(findings, scope) {
     ...walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]),
   ];
   if (scope) files = files.filter((f) => scope.has(rel(f)));
+  /** @type {Array<[string, RegExp]>} */
   const patterns = [
     ["自己検証", /自己検証/],
     ["ダブルチェック", /ダブルチェック/],
@@ -843,6 +844,7 @@ function readMarker() {
 }
 
 // ── モード分岐 ──────────────────────────────────────────────────
+/** @param {{ orphan?: boolean, scope?: Set<string> }} opts scope は今回の変更ファイル (無ければ全検査) */
 function runChecks({ orphan, scope }) {
   const findings = [];
   // scope (Set<relpath>) 指定時は agent/SKILL 系をその集合に絞る (gate=今回の変更だけ点検)。

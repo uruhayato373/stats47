@@ -7,11 +7,12 @@ export const MAX_ATTEMPTS = 5;
 /**
  * 今回の L1 クロールと既存索引を突き合わせ、getMetaInfo すべき statsDataId を決める。
  *
- * @param {object[]} existingTables 既存 index/tables/<statCode>.json を統合した現在の行
- * @param {Map<string, object>} freshRows 今回の L1 (getStatsList 全 collectArea) を正規化した行。key=statsDataId
- * @param {object} manifest 直前の manifest ({ failed, quarantined })
- * @param {number[]} metaScope meta を取る collectArea (例 [2,3])
- * @param {number} maxMeta 今回 fetch する上限件数
+ * @param {object} p
+ * @param {object[]} p.existingTables 既存 index/tables/<statCode>.json を統合した現在の行
+ * @param {Map<string, object>} p.freshRows 今回の L1 (getStatsList 全 collectArea) を正規化した行。key=statsDataId
+ * @param {object} p.manifest 直前の manifest ({ failed, quarantined })
+ * @param {number[]} p.metaScope meta を取る collectArea (例 [2,3])
+ * @param {number} [p.maxMeta] 今回 fetch する上限件数
  */
 export function buildPlan({ existingTables, freshRows, manifest, metaScope, maxMeta = Infinity }) {
   const existingById = new Map(existingTables.map((t) => [t.statsDataId, t]));

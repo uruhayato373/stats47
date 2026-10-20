@@ -356,7 +356,8 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
   const ranges = computeWeekRanges({ week, asOf });
   const generatedAt = new Date().toISOString();
 
-  const [ga4, gsc, psi] = await Promise.all([
+  // 取得元ごとに成功時の形が違い、失敗は { error } に置き換えるので、受け取りは any で読む
+  const [ga4, gsc, psi] = /** @type {any[]} */ (await Promise.all([
     fetchGa4Weekly(ranges.ga4).catch((e) => ({
       error: `GA4 取得失敗: ${e.message}`,
     })),
@@ -364,7 +365,7 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
       error: `GSC 取得失敗: ${e.message}`,
     })),
     fetchPsiSummary().catch((e) => ({ error: `PSI 取得失敗: ${e.message}` })),
-  ]);
+  ]));
 
   // 週次期間契約ブロック: 期間 metadata 付きの確定7日 KPI。weekly-plan/runbook はここを読む。
   const meta = (source, period, limitations) => ({

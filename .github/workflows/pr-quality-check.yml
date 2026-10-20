@@ -678,7 +678,7 @@ jobs:
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
-        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
+        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/scripts-checkjs-scope.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
         continue-on-error: false
 
   catalog-gates:

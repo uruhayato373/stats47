@@ -1,0 +1,24 @@
+{
+  // スクリプトの共通部品 (JavaScript) を型検査する (SCRIPT-LIB-CHECKJS-01)。
+  // 範囲は広げるだけで縮めない (lib/__tests__/scripts-checkjs-scope.test.cjs が include を固定する)。
+  // 範囲内のファイルが import する JS も同じ program に入るので、範囲外でも一緒に検査される。
+  // ファイルごとの // @ts-check は付けない: 付けると、そのファイルを import する TypeScript 側の検査
+  // (./tsconfig.json・packages/*。strict) でも strict で検査され、この入口の設定と食い違うため。
+  // strict は最初は外し、存在しない export の import・存在しないプロパティの参照・引数の型の取り違えを拾う。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": false,
+    "lib": ["es2023", "dom", "dom.iterable"]
+  },
+  "include": [
+    "lib/**/*.mjs",
+    "lib/**/*.cjs",
+    "lib/**/*.js",
+    "measurement/**/*.mjs",
+    "measurement/**/*.cjs",
+    "metrics/lib/**/*.mjs",
+    "metrics/lib/**/*.cjs"
+  ],
+  "exclude": ["node_modules", "**/__tests__/**"]
+}

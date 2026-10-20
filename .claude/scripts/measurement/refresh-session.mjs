@@ -280,7 +280,7 @@ export async function refresh(source, { root, publish, headed, waitHuman, chromi
         url: page.url().split('?')[0],
         shot: await page.screenshot({ fullPage: true }).catch(() => null),
         errors: await page.evaluate(() => [...document.querySelectorAll('[role=alert], .error, .error-message, [class*="error"], [class*="Error"], .flash, .alert')]
-          .map((element) => element.innerText?.trim()).filter(Boolean).slice(0, 5)).catch(() => []),
+          .map((element) => /** @type {HTMLElement} */ (element).innerText?.trim()).filter(Boolean).slice(0, 5)).catch(() => []),
       };
       await settleOnCheckUrl(page, conf);
       const signals = await pageSignals(page);

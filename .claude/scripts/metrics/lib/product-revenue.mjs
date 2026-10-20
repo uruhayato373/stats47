@@ -24,6 +24,7 @@ function entriesOf(history, channel) {
   return entries.filter((e) => e?.channel === channel && typeof e.date === "string").sort((a, b) => a.date.localeCompare(b.date));
 }
 
+/** @returns {ChannelWeek} */
 function kdpWeek(entries, { weekStart, weekEnd }) {
   const days = entries.filter((e) => e.date >= weekStart && e.date <= weekEnd);
   const unique = new Map(days.map((e) => [e.date, e]));
@@ -38,6 +39,7 @@ function kdpWeek(entries, { weekStart, weekEnd }) {
   };
 }
 
+/** @returns {ChannelWeek} */
 function noteWeek(entries, { weekStart, weekEnd }) {
   const end = entries.filter((e) => e.date <= weekEnd).at(-1);
   if (!end) return { status: "unmeasurable", note: "今週末までの観測が無い" };

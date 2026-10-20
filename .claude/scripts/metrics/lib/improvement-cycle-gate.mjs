@@ -72,6 +72,12 @@ export function parseCardIds(md) {
 
 /**
  * @param {object} input
+ * @param {string[]} input.changedFiles 無人 run が変えたファイル (リポジトリ相対)
+ * @param {string} input.beforeImprovements run 前の improvements.md の本文
+ * @param {string} input.afterImprovements run 後の improvements.md の本文
+ * @param {string} input.beforeBacklog run 前の backlog.md の本文
+ * @param {string} input.afterBacklog run 後の backlog.md の本文
+ * @param {string} [input.diffText] run の差分 (秘密の混入を検査する)
  * @param {{ tool: string, target: string }[]} [input.denials] summarize-claude-execution の denialRows
  * @param {string[]|null} [input.kpiIds] KPI ツリーの id (kpi-tree.json)。null なら KPI の検査をしない
  * @param {number} [input.maxActive] active 施策の上限 (strategy-lanes.MAX_ACTIVE_IMPROVEMENTS)

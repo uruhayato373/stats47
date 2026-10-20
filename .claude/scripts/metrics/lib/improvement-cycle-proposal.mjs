@@ -56,7 +56,7 @@ function validateCard(card, existingIds, problems, index) {
 
 /**
  * @param {{ improvements: string, backlog: string, logs: Record<string, string> }} files 現在の本文 (logs は skill 名 → improvement-log.md)
- * @param {unknown} proposal 提案 JSON を parse したもの
+ * @param {any} proposal 提案 JSON を parse したもの (形は下で検査する)
  * @param {{ week: string }} ctx
  * @returns {{ problems: string[], improvements: string, backlog: string, logs: Record<string, string>, summary: { updated: string[], deleted: string[], logs: string[], cards: string[] } }}
  *   problems が 1 件でもあれば本文は変更前のまま返す (部分適用しない)
@@ -117,6 +117,7 @@ export function applyProposal(files, proposal, { week }) {
       summary.deleted.push(item.id);
     }
   }
+  /** @type {Record<string, string>} */
   const logs = {};
   for (const entry of logEntries) {
     const current = logs[entry.skill] ?? files.logs[entry.skill];

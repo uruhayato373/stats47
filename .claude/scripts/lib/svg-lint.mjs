@@ -989,9 +989,11 @@ export function extractTextBoxes(svgContent) {
   }
   const L = CHART_TEXT_LAYOUT;
   const boxes = [];
+  /** @type {Array<{ tag: string, m: number[], fs: number, anchor: string, baseline: string, skip: boolean }>} */
   const stack = [
     { tag: '#root', m: IDENTITY, fs: L.defaultFontSize, anchor: 'start', baseline: 'auto', skip: false },
   ];
+  /** @type {{ id: number, m: number[], anchor: string, baseline: string, nextX: number, nextY: number, cur: { x: number, y: number, segs: Array<{ t: string, fs: number }> } | null } | null} */
   let text = null; // 現在の <text> の収集状態
   let elId = 0;
   const tokenRe =
@@ -1191,12 +1193,12 @@ export function findChartTextIssues(svgContent) {
     const vx1 = viewBox.x + viewBox.w;
     const vy1 = viewBox.y + viewBox.h;
     for (const b of measured) {
-      const [side, amount] = [
+      const [side, amount] = /** @type {Array<[string, number]>} */ ([
         ['left', viewBox.x - b.bb.x0],
         ['right', b.bb.x1 - vx1],
         ['top', viewBox.y - b.bb.y0],
         ['bottom', b.bb.y1 - vy1],
-      ].sort((p, q) => q[1] - p[1])[0];
+      ]).sort((p, q) => q[1] - p[1])[0];
       if (amount > L.overflowTolerancePx) {
         overflows.push(`"${shortLabel(b.label)}" ${side} +${Math.round(amount)}px`);
       }

@@ -46,6 +46,7 @@ export function assertNoLinks(root, target) {
   }
 }
 
+/** @param {string} root @param {{ deadline?: number, onResult?: (dir: string, result: { bytes: number, files: number, newest: number, links: number }) => void }} [options] */
 export function scanTree(
   root,
   { deadline = Date.now() + CONFIG.scanTimeoutSeconds * 1000, onResult } = {}
@@ -535,7 +536,8 @@ export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = 
   return { removedBytes, removedFiles };
 }
 
-/** footprintBudgets の各パスの容量を測り、上限を超えたものを warning にする (肥大化の機械検知) */
+/** footprintBudgets の各パスの容量を測り、上限を超えたものを warning にする (肥大化の機械検知)
+ * @param {any[]} [budgets] @param {{ home?: string, measureFn?: (p: string) => number }} [options] */
 export function checkFootprint(budgets = CONFIG.footprintBudgets ?? [], { home = os.homedir(), measureFn } = {}) {
   const measure = measureFn ?? ((p) => scanTree(p).bytes);
   return budgets.map((b) => {

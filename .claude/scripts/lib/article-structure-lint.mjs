@@ -206,6 +206,7 @@ function findSections(body) {
   const re = /^## .*$/gm;
   let m;
   while ((m = re.exec(body)) !== null) starts.push({ index: m.index, heading: m[0] });
+  /** @type {Array<{ start: number, end: number, heading: string, text?: string }>} */
   const secs = [];
   if (starts.length === 0 || starts[0].index > 0) {
     secs.push({ start: 0, end: starts.length ? starts[0].index : body.length, heading: "" });

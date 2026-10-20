@@ -411,6 +411,7 @@ const CRUX = { name: "crux", staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.crux, 
 const HTTP_LIVE = {
   name: "http", staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.http, liveOnly: true, liveNoSecret: true,
   api: "production HTTP probe (Googlebot/normal UA)",
+  /** @param {{ root?: string, now?: string, urls?: string[], sampleSize?: number }} [options] */
   async liveCollect({ root = PROJECT_ROOT, now = new Date().toISOString(), urls, sampleSize = 20 } = {}) {
     const { probeUrls } = await import("./live-http.mjs");
     const list = urls ?? defaultProbeUrls(root, sampleSize);
