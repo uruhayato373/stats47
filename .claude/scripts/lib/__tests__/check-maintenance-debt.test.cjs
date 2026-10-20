@@ -178,6 +178,18 @@ test("Google API の認証の自前実装を GOOGLE_AUTH_LOCAL として検出�
   const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "GOOGLE_AUTH_LOCAL");
   assert.deepEqual(found.map((item) => item.line), [1, 2, 3], "共通モジュールの呼び出しとコメントは止めない");
 });
+test("スキル・エージェントの手順書 (.claude) のコード例の自前認証も検出し、他の文書は見ない", (t) => {
+  const root = fixture("export const ok = 1;\n");
+  const snippet = "```javascript\nconst auth = new google.auth.GoogleAuth({ keyFile, scopes });\n```\n";
+  for (const file of [".claude/skills/analytics/x/SKILL.md", ".claude/agents/x.md", ".claude/rules/x.md"]) {
+    fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), snippet);
+  }
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const files = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "GOOGLE_AUTH_LOCAL").map((item) => item.file).sort();
+  assert.deepEqual(files, [".claude/agents/x.md", ".claude/skills/analytics/x/SKILL.md"]);
+});
 test("正本の google-client.cjs・トークン発行ツール・テストの認証は検出しない", (t) => {
   const root = fixture("export const ok = 1;\n");
   for (const file of [".claude/scripts/lib/google-client.cjs", ".claude/scripts/adsense/oauth-setup.js", ".claude/scripts/lib/__tests__/google-client.test.cjs"]) {

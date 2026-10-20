@@ -33,7 +33,7 @@ $ARGUMENTS — [期間] [レポート種類] [フィルタ] [snapshot YYYY-Www]
 
 ## 前提
 
-- サービスアカウント鍵: `stats47-*.json`（リポジトリルートに `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json` のいずれかが存在、gitignore 済み）
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
 - サービスアカウント: `stats47-windows@stats47.iam.gserviceaccount.com`
 - GA4 プロパティ ID: `463218070`
 - npm パッケージ: `googleapis`（インストール済み）
@@ -47,20 +47,11 @@ $ARGUMENTS — [期間] [レポート種類] [フィルタ] [snapshot YYYY-Www]
 
 ### Step 1: データ取得
 
-`node -e` でインライン実行する。認証・プロパティ ID は以下の共通コード:
+単発の照会は、まず `node .claude/scripts/metrics/ga4-query.mjs --start <startDate> --end <endDate> --dims <dims> --metrics <metrics>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで `node -e` を実行する。認証とクライアントは共通モジュール `.claude/scripts/lib/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない):
 
 ```javascript
-const { google } = require('googleapis');
-const fs = require('fs');
-// 存在する鍵ファイルを自動検出
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const keyFile = KEY_CANDIDATES.find(f => fs.existsSync(f));
-if (!keyFile) throw new Error('サービスアカウント鍵が見つかりません: ' + KEY_CANDIDATES.join(' / '));
-const auth = new google.auth.GoogleAuth({
-  keyFile,
-  scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
-});
-const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
+const { createGa4DataClient } = require('./.claude/scripts/lib/google-client.cjs');
+const analyticsdata = createGa4DataClient();
 const PROPERTY = 'properties/463218070';
 ```
 
@@ -234,18 +225,11 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 プロジェクトルートで以下を `node -e` で実行する:
 
 ```javascript
-const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
+const { createGa4DataClient } = require('./.claude/scripts/lib/google-client.cjs');
 
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const keyFile = KEY_CANDIDATES.find(f => fs.existsSync(f));
-if (!keyFile) throw new Error('サービスアカウント鍵が見つかりません');
-const auth = new google.auth.GoogleAuth({
-  keyFile,
-  scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
-});
-const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
+const analyticsdata = createGa4DataClient();
 const PROPERTY = 'properties/463218070';
 
 // 期間 (last28d): GA4 は 1 日遅延

@@ -14,6 +14,7 @@ const {
   loadServiceAccountCredentials,
   createGa4DataClient,
   createSearchConsoleClient,
+  createSearchConsoleWriteClient,
   createAnalyticsAdminEditClient,
   adsenseCredentialsFromEnv,
   createAdsenseClient,
@@ -62,6 +63,14 @@ test("GA4 Admin の作成 (POST) は 503 でも再送しない", async (t) => {
   const client = createAnalyticsAdminEditClient({ auth: "test-key", rootUrl });
   await assert.rejects(client.properties.customDimensions.create({ parent: "properties/1", requestBody: {} }));
   assert.deepEqual(hits, ["POST /v1beta/properties/1/customDimensions"]);
+});
+
+test("sitemap の送信 (PUT) は 503 でも再送しない", async (t) => {
+  const { hits, rootUrl } = await serve(t, [503]);
+  const client = createSearchConsoleWriteClient({ auth: "test-key", rootUrl });
+  await assert.rejects(client.sitemaps.submit({ siteUrl: "sc-domain:example.com", feedpath: "https://example.com/sitemap.xml" }));
+  assert.equal(hits.length, 1);
+  assert.match(hits[0], /^PUT /);
 });
 
 test("GA4 Admin の書き込み用クライアントでも一覧 (GET) は再試行する", async (t) => {

@@ -142,6 +142,9 @@ const ISO_WEEK_ALLOWED = new Map([
 // (鍵の探し方・スコープ・読み取りの POST だけを再試行する設定を 1 か所で決める)。15 ファイルが鍵の探し方 4 通り・自前の再試行なしで
 // ばらばらに組んでいたのを寄せた後の再発止め。GoogleAuth / OAuth2 / JWT を正本の外で作ったら止める。
 const GOOGLE_AUTH_LOCAL_RE = /\bgoogle\.auth\.(?:GoogleAuth|OAuth2|JWT|fromJSON)\b|\bnew\s+(?:GoogleAuth|OAuth2Client|JWT)\s*\(/;
+// スキル・エージェントの手順書のコード例も止める (SKILL-GOOGLE-SNIPPET-UNIFY-01)。写して実行するたびに自前の認証が生まれるため。
+// 正本の .claude だけを見る。Codex 用の写し (.agents/skills・.codex/agents) は sync-codex-mirror.cjs --check が同一を保証する。
+const GOOGLE_AUTH_DOC_RE = /^\.claude\/(?:skills|agents)\/.*\.md$/;
 const GOOGLE_AUTH_ALLOWED = new Map([
   [".claude/scripts/lib/google-client.cjs", "Google API の認証とクライアント生成の正本"],
   [".claude/scripts/adsense/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
@@ -235,7 +238,7 @@ function inspect(file) {
       results.push(finding("ISO_WEEK_LOCAL", file, number,
         "ISO 週・週の月曜の自前計算。.claude/scripts/metrics/lib/periods.mjs の isoWeekOf / isoWeekRange / jstDateOf を使う", line));
 
-    if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !GOOGLE_AUTH_ALLOWED.has(relative) &&
+    if (!isTest && (/\.[cm]?[jt]sx?$/.test(relative) || GOOGLE_AUTH_DOC_RE.test(relative)) && !GOOGLE_AUTH_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && GOOGLE_AUTH_LOCAL_RE.test(line))
       results.push(finding("GOOGLE_AUTH_LOCAL", file, number,
         "Google API の認証の自前実装。.claude/scripts/lib/google-client.cjs の create*Client を使う", line));

@@ -12,7 +12,7 @@
  * 再試行: googleapis は既定で 408・429・5xx を最大 3 回再試行するが、対象メソッドは GET・HEAD・PUT・OPTIONS・DELETE で
  * POST を含まない (googleapis-common 8.0.3 apirequest.js / gaxios 7.1.3 retry.js で確認)。GA4 の runReport、
  * Search Console の検索実績・URL 検査は読み取りだが POST なので、読み取り用クライアントは POST も再試行する。
- * 書き込み用クライアント (GA4 Admin の作成) は GET・HEAD・OPTIONS だけを再試行し、変更系の要求は 1 回だけ送る。
+ * 書き込み用クライアント (GA4 Admin の作成・sitemap の送信) は GET・HEAD・OPTIONS だけを再試行し、変更系の要求は 1 回だけ送る。
  */
 const fs = require("node:fs");
 const path = require("node:path");
@@ -24,6 +24,7 @@ const SCOPES = Object.freeze({
   GA4_READ: "https://www.googleapis.com/auth/analytics.readonly",
   GA4_EDIT: "https://www.googleapis.com/auth/analytics.edit",
   GSC_READ: "https://www.googleapis.com/auth/webmasters.readonly",
+  GSC_WRITE: "https://www.googleapis.com/auth/webmasters",
   ADSENSE_READ: "https://www.googleapis.com/auth/adsense.readonly",
 });
 
@@ -77,6 +78,11 @@ function createGa4DataClient(options = {}) {
 /** Search Console API (検索実績・URL 検査)。読み取り用。 */
 function createSearchConsoleClient(options = {}) {
   return google.searchconsole({ version: "v1", ...serviceOptions(SCOPES.GSC_READ, READ_RETRY_CONFIG, options) });
+}
+
+/** Search Console API の書き込み用 (sitemap の送信)。送信 (PUT) は再試行しない。 */
+function createSearchConsoleWriteClient(options = {}) {
+  return google.searchconsole({ version: "v1", ...serviceOptions(SCOPES.GSC_WRITE, WRITE_RETRY_CONFIG, options) });
 }
 
 /** Search Console の旧 API (sites.list)。読み取り用。 */
@@ -137,6 +143,7 @@ module.exports = {
   createServiceAccountAuth,
   createGa4DataClient,
   createSearchConsoleClient,
+  createSearchConsoleWriteClient,
   createWebmastersClient,
   createAnalyticsAdminReadClients,
   createAnalyticsAdminEditClient,

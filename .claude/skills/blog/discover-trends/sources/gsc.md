@@ -28,19 +28,9 @@ stats47.jp に対する検索クエリの過去 7 日 / 28 日比較を取り、
 ### Search Console API 呼び出し
 
 ```javascript
-const { google } = require('googleapis');
-const fs = require('fs');
-const path = require('path');
-
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(f)).find(f => fs.existsSync(f));
-if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません');
-
-const auth = new google.auth.GoogleAuth({
-  keyFile: KEY_FILE,
-  scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
-});
-const searchconsole = google.searchconsole({ version: 'v1', auth });
+// 認証とクライアントは共通モジュールが作る (プロジェクトルートで実行)
+const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
+const searchconsole = createSearchConsoleClient();
 const SITE_URL = 'https://stats47.jp/';
 
 async function fetchQueries(startDate, endDate) {
