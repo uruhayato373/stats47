@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-19T00:40:48.532Z",
+  "generatedAt": "2026-10-20T01:25:40.873Z",
   "gscWeek": "2026-W41",
-  "auditGeneratedAt": "2026-10-19T00:40:48.497Z",
+  "auditGeneratedAt": "2026-10-20T01:25:40.840Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > data-refresh > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
@@ -10,8 +10,8 @@
     "inProgress": 1,
     "done": 14,
     "mustFixPending": 48,
-    "dataRefreshPending": 24,
-    "opportunityPending": 273,
+    "dataRefreshPending": 25,
+    "opportunityPending": 272,
     "valueMismatchArticles": 0
   },
   "queue": [
@@ -1561,19 +1561,19 @@
       "quality": {
         "blockers": 0,
         "warnings": 0,
-        "prose": 4531,
-        "chartCount": 1,
-        "prosePerChart": 4531,
+        "prose": 5492,
+        "chartCount": 3,
+        "prosePerChart": 1831,
         "conformance": 0.67,
         "flags": [
-          "data-refresh: 図の年が古い (fishery-species-catch-bonito 2015 → 2023)"
+          "data-refresh: 図の年が古い (bonito-consumption-quantity 2023 → 2024)"
         ]
       },
       "staleData": [
         {
-          "rankingKey": "fishery-species-catch-bonito",
-          "articleYear": "2015",
-          "latestYear": "2023"
+          "rankingKey": "bonito-consumption-quantity",
+          "articleYear": "2023",
+          "latestYear": "2024"
         }
       ],
       "wave_id": null,
@@ -2036,10 +2036,48 @@
       "reviewTier": "sonnet"
     },
     {
-      "slug": "electricity-bill-hike-impact",
+      "slug": "designated-difficult-disease-prefecture-gap",
       "lane": "data-refresh",
       "status": "pending",
       "priority": 61,
+      "combinedScore": 0.056,
+      "gsc": {
+        "impressions": 144,
+        "clicks": 2,
+        "ctr": 0.0139,
+        "position": 8.09,
+        "expectedLift": 9
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 1,
+        "prose": 2749,
+        "chartCount": 2,
+        "prosePerChart": 1375,
+        "conformance": 0.87,
+        "flags": [
+          "warning: [legacy-auto-normalized] [adjacent-callouts] callout が通常本文・見出し・図表を挟まず連続している (1 箇所・2 組・最大 3 個連続: L46 NOTE→WARNING→TIP) — 最も重要な注意だけ callout に残し、分析・読み方・補足は通常本文へ戻すか、対応する節へ分散する",
+          "data-refresh: 図の年が古い (designated-difficult-disease 2020 → 2021)"
+        ]
+      },
+      "staleData": [
+        {
+          "rankingKey": "designated-difficult-disease",
+          "articleYear": "2020",
+          "latestYear": "2021"
+        }
+      ],
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null,
+      "reviewTier": "sonnet"
+    },
+    {
+      "slug": "electricity-bill-hike-impact",
+      "lane": "data-refresh",
+      "status": "pending",
+      "priority": 62,
       "combinedScore": 0.055,
       "gsc": {
         "impressions": 83,
@@ -2077,7 +2115,7 @@
       "slug": "nurse-income-prefecture-gap",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 62,
+      "priority": 63,
       "combinedScore": 0.052,
       "gsc": {
         "impressions": 245,
@@ -2115,7 +2153,7 @@
       "slug": "fish-catch-vs-consumption-prefecture",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 63,
+      "priority": 64,
       "combinedScore": 0.019,
       "gsc": {
         "impressions": 285,
@@ -2158,7 +2196,7 @@
       "slug": "consumer-price-difference-index-utilities-prefecture-gap",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 64,
+      "priority": 65,
       "combinedScore": 0.008,
       "gsc": {
         "impressions": 68,
@@ -2195,7 +2233,7 @@
       "slug": "school-teacher-annual-income",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 65,
+      "priority": 66,
       "combinedScore": 0.006,
       "gsc": {
         "impressions": 149,
@@ -2238,7 +2276,7 @@
       "slug": "real-disposable-income-reversal",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 66,
+      "priority": 67,
       "combinedScore": 0.001,
       "gsc": {
         "impressions": 9,
@@ -2275,7 +2313,7 @@
       "slug": "consumer-price-regional-gap",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 67,
+      "priority": 68,
       "combinedScore": 0.001,
       "gsc": {
         "impressions": 5,
@@ -2372,7 +2410,7 @@
       "slug": "fertility-fiscal-nexus",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 68,
+      "priority": 69,
       "combinedScore": 0.001,
       "gsc": {
         "impressions": 5,
@@ -2409,7 +2447,7 @@
       "slug": "safe-driving-5-features",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 69,
+      "priority": 70,
       "combinedScore": 0,
       "gsc": {
         "impressions": 37,
@@ -2452,7 +2490,7 @@
       "slug": "engel-coefficient-vs-prefectural-income",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 70,
+      "priority": 71,
       "combinedScore": 0,
       "gsc": {
         "impressions": 107,
@@ -2495,7 +2533,7 @@
       "slug": "agriculture-output-employment-productivity-gap",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 71,
+      "priority": 72,
       "combinedScore": 0,
       "gsc": {
         "impressions": 0,
@@ -2532,7 +2570,7 @@
       "slug": "fiscal-health-50years-trend",
       "lane": "data-refresh",
       "status": "pending",
-      "priority": 72,
+      "priority": 73,
       "combinedScore": 0,
       "gsc": {
         "impressions": 15,
@@ -2569,7 +2607,7 @@
       "slug": "roadside-station-count-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 73,
+      "priority": 74,
       "combinedScore": 0.65,
       "gsc": {
         "impressions": 8407,
@@ -2599,7 +2637,7 @@
       "slug": "automotive-industry-transformation-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 74,
+      "priority": 75,
       "combinedScore": 0.444,
       "gsc": {
         "impressions": 6428,
@@ -2629,7 +2667,7 @@
       "slug": "avg-height-high-school-2nd-male",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 75,
+      "priority": 76,
       "combinedScore": 0.436,
       "gsc": {
         "impressions": 5764,
@@ -2689,7 +2727,7 @@
       "slug": "public-phone-count",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 76,
+      "priority": 77,
       "combinedScore": 0.416,
       "gsc": {
         "impressions": 4682,
@@ -2719,7 +2757,7 @@
       "slug": "precipitation-snow-regional-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 77,
+      "priority": 78,
       "combinedScore": 0.371,
       "gsc": {
         "impressions": 5367,
@@ -2749,7 +2787,7 @@
       "slug": "livable-prefecture-composite-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 78,
+      "priority": 79,
       "combinedScore": 0.335,
       "gsc": {
         "impressions": 8214,
@@ -2780,7 +2818,7 @@
       "slug": "rice-harvest-volume-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 79,
+      "priority": 80,
       "combinedScore": 0.33,
       "gsc": {
         "impressions": 6091,
@@ -2840,7 +2878,7 @@
       "slug": "health-life-expectancy-structure",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 80,
+      "priority": 81,
       "combinedScore": 0.3,
       "gsc": {
         "impressions": 3374,
@@ -2868,7 +2906,7 @@
       "slug": "fishery-catch-aquaculture-shift",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 81,
+      "priority": 82,
       "combinedScore": 0.272,
       "gsc": {
         "impressions": 3061,
@@ -2899,7 +2937,7 @@
       "slug": "convenience-store-density-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 82,
+      "priority": 83,
       "combinedScore": 0.232,
       "gsc": {
         "impressions": 3898,
@@ -2932,7 +2970,7 @@
       "slug": "temperature-extremes-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 83,
+      "priority": 84,
       "combinedScore": 0.226,
       "gsc": {
         "impressions": 1451,
@@ -2963,7 +3001,7 @@
       "slug": "ict-media-consumption-gender-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 84,
+      "priority": 85,
       "combinedScore": 0.209,
       "gsc": {
         "impressions": 117,
@@ -2996,7 +3034,7 @@
       "slug": "energy-consumption-structure-shift",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 85,
+      "priority": 86,
       "combinedScore": 0.204,
       "gsc": {
         "impressions": 47,
@@ -3029,7 +3067,7 @@
       "slug": "farmland-crisis-abandoned-land",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 86,
+      "priority": 87,
       "combinedScore": 0.19,
       "gsc": {
         "impressions": 1191,
@@ -3061,7 +3099,7 @@
       "slug": "wind-power-capacity-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 87,
+      "priority": 88,
       "combinedScore": 0.188,
       "gsc": {
         "impressions": 712,
@@ -3093,7 +3131,7 @@
       "slug": "habitable-area-land-use",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 88,
+      "priority": 89,
       "combinedScore": 0.183,
       "gsc": {
         "impressions": 2171,
@@ -3123,7 +3161,7 @@
       "slug": "future-population-tokyo-paradox",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 89,
+      "priority": 90,
       "combinedScore": 0.181,
       "gsc": {
         "impressions": 1528,
@@ -3155,7 +3193,7 @@
       "slug": "middle-school-height-east-west-puzzle",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 90,
+      "priority": 91,
       "combinedScore": 0.166,
       "gsc": {
         "impressions": 1481,
@@ -3185,7 +3223,7 @@
       "slug": "barber-beauty-salon-regional-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 91,
+      "priority": 92,
       "combinedScore": 0.165,
       "gsc": {
         "impressions": 497,
@@ -3217,7 +3255,7 @@
       "slug": "hospital-bed-utilization-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 92,
+      "priority": 93,
       "combinedScore": 0.162,
       "gsc": {
         "impressions": 238,
@@ -3249,7 +3287,7 @@
       "slug": "small-business-dominance-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 93,
+      "priority": 94,
       "combinedScore": 0.16,
       "gsc": {
         "impressions": 135,
@@ -3281,7 +3319,7 @@
       "slug": "household-solo-vs-dualincome",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 94,
+      "priority": 95,
       "combinedScore": 0.156,
       "gsc": {
         "impressions": 88,
@@ -3313,7 +3351,7 @@
       "slug": "prefectural-income-gdp-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 95,
+      "priority": 96,
       "combinedScore": 0.153,
       "gsc": {
         "impressions": 2192,
@@ -3344,7 +3382,7 @@
       "slug": "development-history-place-name-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 96,
+      "priority": 97,
       "combinedScore": 0.152,
       "gsc": {
         "impressions": 606,
@@ -3406,7 +3444,7 @@
       "slug": "foreign-resident-five-percent-municipalities",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 97,
+      "priority": 98,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 3,
@@ -3438,7 +3476,7 @@
       "slug": "sports-facility-regional-divide",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 98,
+      "priority": 99,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 8,
@@ -3470,7 +3508,7 @@
       "slug": "income-1000man-which-prefecture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 99,
+      "priority": 100,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 5,
@@ -3502,7 +3540,7 @@
       "slug": "long-commute-telework-potential",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 100,
+      "priority": 101,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 5,
@@ -3534,7 +3572,7 @@
       "slug": "municipalities-without-general-hospitals",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 101,
+      "priority": 102,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 8,
@@ -3566,7 +3604,7 @@
       "slug": "savings-balance-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 102,
+      "priority": 103,
       "combinedScore": 0.151,
       "gsc": {
         "impressions": 2,
@@ -3598,7 +3636,7 @@
       "slug": "sake-consumption-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 103,
+      "priority": 104,
       "combinedScore": 0.15,
       "gsc": {
         "impressions": 754,
@@ -3629,7 +3667,7 @@
       "slug": "high-school-teacher-salary-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 104,
+      "priority": 105,
       "combinedScore": 0.145,
       "gsc": {
         "impressions": 2061,
@@ -3660,7 +3698,7 @@
       "slug": "students-per-teacher-class-size-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 105,
+      "priority": 106,
       "combinedScore": 0.135,
       "gsc": {
         "impressions": 514,
@@ -3691,7 +3729,7 @@
       "slug": "distinctive-place-name-kanji-by-prefecture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 106,
+      "priority": 107,
       "combinedScore": 0.133,
       "gsc": {
         "impressions": 1214,
@@ -3721,7 +3759,7 @@
       "slug": "sweet-potato-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 107,
+      "priority": 108,
       "combinedScore": 0.132,
       "gsc": {
         "impressions": 427,
@@ -3752,7 +3790,7 @@
       "slug": "rice-consumption-quantity-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 108,
+      "priority": 109,
       "combinedScore": 0.122,
       "gsc": {
         "impressions": 2149,
@@ -3783,7 +3821,7 @@
       "slug": "fukushima-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 109,
+      "priority": 110,
       "combinedScore": 0.115,
       "gsc": {
         "impressions": 218,
@@ -3814,7 +3852,7 @@
       "slug": "urban-parks-green-infrastructure",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 110,
+      "priority": 111,
       "combinedScore": 0.114,
       "gsc": {
         "impressions": 635,
@@ -3845,7 +3883,7 @@
       "slug": "firefighting-capacity-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 111,
+      "priority": 112,
       "combinedScore": 0.113,
       "gsc": {
         "impressions": 260,
@@ -3876,7 +3914,7 @@
       "slug": "elementary-school-children-count",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 112,
+      "priority": 113,
       "combinedScore": 0.109,
       "gsc": {
         "impressions": 825,
@@ -3906,7 +3944,7 @@
       "slug": "potato-consumption-quantity",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 113,
+      "priority": 114,
       "combinedScore": 0.109,
       "gsc": {
         "impressions": 784,
@@ -3936,7 +3974,7 @@
       "slug": "unemployment-structure",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 114,
+      "priority": 115,
       "combinedScore": 0.109,
       "gsc": {
         "impressions": 1193,
@@ -3966,7 +4004,7 @@
       "slug": "peach-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 115,
+      "priority": 116,
       "combinedScore": 0.109,
       "gsc": {
         "impressions": 189,
@@ -3997,7 +4035,7 @@
       "slug": "piano-ownership-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 116,
+      "priority": 117,
       "combinedScore": 0.109,
       "gsc": {
         "impressions": 117,
@@ -4058,7 +4096,7 @@
       "slug": "food-trio-prefecture-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 117,
+      "priority": 118,
       "combinedScore": 0.106,
       "gsc": {
         "impressions": 70,
@@ -4089,7 +4127,7 @@
       "slug": "mayonnaise-consumption-expenditure",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 118,
+      "priority": 119,
       "combinedScore": 0.104,
       "gsc": {
         "impressions": 154,
@@ -4120,7 +4158,7 @@
       "slug": "housing-cost-livability-trend",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 119,
+      "priority": 120,
       "combinedScore": 0.104,
       "gsc": {
         "impressions": 267,
@@ -4151,7 +4189,7 @@
       "slug": "natto-child-weight-correlation",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 120,
+      "priority": 121,
       "combinedScore": 0.104,
       "gsc": {
         "impressions": 43,
@@ -4182,7 +4220,7 @@
       "slug": "marriage-unmarried-crisis",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 121,
+      "priority": 122,
       "combinedScore": 0.104,
       "gsc": {
         "impressions": 1191,
@@ -4213,7 +4251,7 @@
       "slug": "manufacturing-shipment-prefecture-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 122,
+      "priority": 123,
       "combinedScore": 0.104,
       "gsc": {
         "impressions": 51,
@@ -4244,7 +4282,7 @@
       "slug": "pharma-medical-device-production-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 123,
+      "priority": 124,
       "combinedScore": 0.103,
       "gsc": {
         "impressions": 73,
@@ -4275,7 +4313,7 @@
       "slug": "brazilian-resident-population-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 124,
+      "priority": 125,
       "combinedScore": 0.103,
       "gsc": {
         "impressions": 21,
@@ -4306,7 +4344,7 @@
       "slug": "avg-salary-admin-prefecture-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 125,
+      "priority": 126,
       "combinedScore": 0.103,
       "gsc": {
         "impressions": 94,
@@ -4337,7 +4375,7 @@
       "slug": "konbu-consumption-quantity",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 126,
+      "priority": 127,
       "combinedScore": 0.102,
       "gsc": {
         "impressions": 532,
@@ -4367,7 +4405,7 @@
       "slug": "inbound-overnight-regional-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 127,
+      "priority": 128,
       "combinedScore": 0.102,
       "gsc": {
         "impressions": 16,
@@ -4398,7 +4436,7 @@
       "slug": "okinawa-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 128,
+      "priority": 129,
       "combinedScore": 0.102,
       "gsc": {
         "impressions": 16,
@@ -4429,7 +4467,7 @@
       "slug": "hokkaido-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 129,
+      "priority": 130,
       "combinedScore": 0.102,
       "gsc": {
         "impressions": 141,
@@ -4460,7 +4498,7 @@
       "slug": "income-quintile-regressive",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 130,
+      "priority": 131,
       "combinedScore": 0.102,
       "gsc": {
         "impressions": 27,
@@ -4491,7 +4529,7 @@
       "slug": "industrial-water-manufacturing-nexus",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 131,
+      "priority": 132,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 13,
@@ -4522,7 +4560,7 @@
       "slug": "international-cooperation-volunteer-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 132,
+      "priority": 133,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 23,
@@ -4553,7 +4591,7 @@
       "slug": "post-office-last-window",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 133,
+      "priority": 134,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 20,
@@ -4584,7 +4622,7 @@
       "slug": "natto-production-vs-consumption",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 134,
+      "priority": 135,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 17,
@@ -4615,7 +4653,7 @@
       "slug": "sea-bream-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 135,
+      "priority": 136,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 13,
@@ -4646,7 +4684,7 @@
       "slug": "aging-rate-akita-vs-okinawa",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 136,
+      "priority": 137,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 17,
@@ -4677,7 +4715,7 @@
       "slug": "communication-cost-burden",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 137,
+      "priority": 138,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 13,
@@ -4738,7 +4776,7 @@
       "slug": "tokushima-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 138,
+      "priority": 139,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 11,
@@ -4769,7 +4807,7 @@
       "slug": "unemployment-tertiary-industry-link",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 139,
+      "priority": 140,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 13,
@@ -4800,7 +4838,7 @@
       "slug": "wage-vs-living-cost",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 140,
+      "priority": 141,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 150,
@@ -4831,7 +4869,7 @@
       "slug": "wakayama-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 141,
+      "priority": 142,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 5,
@@ -4862,7 +4900,7 @@
       "slug": "scallop-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 142,
+      "priority": 143,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 12,
@@ -4893,7 +4931,7 @@
       "slug": "system-consultant-income-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 143,
+      "priority": 144,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 31,
@@ -4924,7 +4962,7 @@
       "slug": "software-engineer-salary-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 144,
+      "priority": 145,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 168,
@@ -4955,7 +4993,7 @@
       "slug": "konnyaku-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 145,
+      "priority": 146,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 715,
@@ -4986,7 +5024,7 @@
       "slug": "akita-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 146,
+      "priority": 147,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 3,
@@ -5017,7 +5055,7 @@
       "slug": "earthquake-insurance-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 147,
+      "priority": 148,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 7,
@@ -5048,7 +5086,7 @@
       "slug": "female-lecture-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 148,
+      "priority": 149,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 5,
@@ -5079,7 +5117,7 @@
       "slug": "golf-participation-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 149,
+      "priority": 150,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 3,
@@ -5140,7 +5178,7 @@
       "slug": "prefecture-salary-remote-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 150,
+      "priority": 151,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 5,
@@ -5171,7 +5209,7 @@
       "slug": "towns-villages-larger-than-cities",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 151,
+      "priority": 152,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 9,
@@ -5202,7 +5240,7 @@
       "slug": "toyama-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 152,
+      "priority": 153,
       "combinedScore": 0.101,
       "gsc": {
         "impressions": 6,
@@ -5233,7 +5271,7 @@
       "slug": "municipality-count-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 153,
+      "priority": 154,
       "combinedScore": 0.097,
       "gsc": {
         "impressions": 1655,
@@ -5261,7 +5299,7 @@
       "slug": "food-consumption-prefecture-battle",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 154,
+      "priority": 155,
       "combinedScore": 0.095,
       "gsc": {
         "impressions": 1255,
@@ -5318,7 +5356,7 @@
       "slug": "population-density-urbanization",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 155,
+      "priority": 156,
       "combinedScore": 0.09,
       "gsc": {
         "impressions": 1001,
@@ -5348,7 +5386,7 @@
       "slug": "annual-precipitation-rainy-season-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 156,
+      "priority": 157,
       "combinedScore": 0.083,
       "gsc": {
         "impressions": 557,
@@ -5378,7 +5416,7 @@
       "slug": "garbage-total-output",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 157,
+      "priority": 158,
       "combinedScore": 0.082,
       "gsc": {
         "impressions": 736,
@@ -5408,7 +5446,7 @@
       "slug": "police-officer-density-vs-crime-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 158,
+      "priority": 159,
       "combinedScore": 0.08,
       "gsc": {
         "impressions": 1085,
@@ -5496,7 +5534,7 @@
       "slug": "wheat-flour-consumption-food-culture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 159,
+      "priority": 160,
       "combinedScore": 0.077,
       "gsc": {
         "impressions": 287,
@@ -5555,7 +5593,7 @@
       "slug": "extreme-heat-days-prefecture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 160,
+      "priority": 161,
       "combinedScore": 0.074,
       "gsc": {
         "impressions": 418,
@@ -5585,7 +5623,7 @@
       "slug": "kochi-migration-flow",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 161,
+      "priority": 162,
       "combinedScore": 0.073,
       "gsc": {
         "impressions": 278,
@@ -5615,7 +5653,7 @@
       "slug": "school-lunch-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 162,
+      "priority": 163,
       "combinedScore": 0.072,
       "gsc": {
         "impressions": 378,
@@ -5645,7 +5683,7 @@
       "slug": "day-time-population-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 163,
+      "priority": 164,
       "combinedScore": 0.069,
       "gsc": {
         "impressions": 480,
@@ -5675,7 +5713,7 @@
       "slug": "natural-increase-rate-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 164,
+      "priority": 165,
       "combinedScore": 0.068,
       "gsc": {
         "impressions": 305,
@@ -5705,7 +5743,7 @@
       "slug": "gasoline-consumption-quantity-vs-densely-inhabited-district",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 165,
+      "priority": 166,
       "combinedScore": 0.068,
       "gsc": {
         "impressions": 128,
@@ -5735,7 +5773,7 @@
       "slug": "saitama-food-culture",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 166,
+      "priority": 167,
       "combinedScore": 0.067,
       "gsc": {
         "impressions": 161,
@@ -5765,7 +5803,7 @@
       "slug": "gasoline-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 167,
+      "priority": 168,
       "combinedScore": 0.066,
       "gsc": {
         "impressions": 200,
@@ -5795,7 +5833,7 @@
       "slug": "chocolate-expenditure-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 168,
+      "priority": 169,
       "combinedScore": 0.065,
       "gsc": {
         "impressions": 825,
@@ -5825,7 +5863,7 @@
       "slug": "nuclear-power-plant-count-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 169,
+      "priority": 170,
       "combinedScore": 0.064,
       "gsc": {
         "impressions": 528,
@@ -5853,7 +5891,7 @@
       "slug": "beef-consumption-quantity",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 170,
+      "priority": 171,
       "combinedScore": 0.064,
       "gsc": {
         "impressions": 668,
@@ -5883,7 +5921,7 @@
       "slug": "wheat-flour-expenditure-vs-quantity",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 171,
+      "priority": 172,
       "combinedScore": 0.063,
       "gsc": {
         "impressions": 190,
@@ -5913,7 +5951,7 @@
       "slug": "instant-noodles-consumption-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 172,
+      "priority": 173,
       "combinedScore": 0.063,
       "gsc": {
         "impressions": 319,
@@ -5943,7 +5981,7 @@
       "slug": "peach-consumption-quantity-vs-disaster-relief-expenses",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 173,
+      "priority": 174,
       "combinedScore": 0.063,
       "gsc": {
         "impressions": 81,
@@ -6002,7 +6040,7 @@
       "slug": "aging-solo-living-crisis",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 174,
+      "priority": 175,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 1703,
@@ -6032,7 +6070,7 @@
       "slug": "mineral-water-spending-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 175,
+      "priority": 176,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 146,
@@ -6062,7 +6100,7 @@
       "slug": "national-pension-payment-rate-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 176,
+      "priority": 177,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 114,
@@ -6092,7 +6130,7 @@
       "slug": "ehime-migration-flow",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 177,
+      "priority": 178,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 237,
@@ -6122,7 +6160,7 @@
       "slug": "gasoline-car-society-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 178,
+      "priority": 179,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 149,
@@ -6152,7 +6190,7 @@
       "slug": "railway-theme-overview",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 179,
+      "priority": 180,
       "combinedScore": 0.062,
       "gsc": {
         "impressions": 385,
@@ -6182,7 +6220,7 @@
       "slug": "pork-consumption-quantity",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 180,
+      "priority": 181,
       "combinedScore": 0.059,
       "gsc": {
         "impressions": 438,
@@ -6212,7 +6250,7 @@
       "slug": "miso-consumption-quantity-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 181,
+      "priority": 182,
       "combinedScore": 0.059,
       "gsc": {
         "impressions": 314,
@@ -6242,7 +6280,7 @@
       "slug": "carbonated-drink-spending-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 182,
+      "priority": 183,
       "combinedScore": 0.059,
       "gsc": {
         "impressions": 142,
@@ -6272,7 +6310,7 @@
       "slug": "divorces-per-total-population",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 183,
+      "priority": 184,
       "combinedScore": 0.057,
       "gsc": {
         "impressions": 215,
@@ -6302,7 +6340,7 @@
       "slug": "retail-sales-amount-by-prefecture-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 184,
+      "priority": 185,
       "combinedScore": 0.057,
       "gsc": {
         "impressions": 198,
@@ -6332,7 +6370,7 @@
       "slug": "overnight-guests-inbound-recovery",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 185,
+      "priority": 186,
       "combinedScore": 0.056,
       "gsc": {
         "impressions": 88,
@@ -6362,7 +6400,7 @@
       "slug": "total-fertility-rate",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 186,
+      "priority": 187,
       "combinedScore": 0.056,
       "gsc": {
         "impressions": 84,
@@ -6392,7 +6430,7 @@
       "slug": "campsite-public-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 187,
+      "priority": 188,
       "combinedScore": 0.056,
       "gsc": {
         "impressions": 95,
@@ -6410,36 +6448,6 @@
         "conformance": 0.87,
         "flags": [
           "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 1 件 (campsite-public(キャンプ場数（公共）)) — 本文で触れていないランキングへ誘導していないか確認する"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null,
-      "reviewTier": "sonnet"
-    },
-    {
-      "slug": "designated-difficult-disease-prefecture-gap",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 188,
-      "combinedScore": 0.056,
-      "gsc": {
-        "impressions": 144,
-        "clicks": 2,
-        "ctr": 0.0139,
-        "position": 8.09,
-        "expectedLift": 9
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 1,
-        "prose": 2749,
-        "chartCount": 2,
-        "prosePerChart": 1375,
-        "conformance": 0.87,
-        "flags": [
-          "warning: [legacy-auto-normalized] [adjacent-callouts] callout が通常本文・見出し・図表を挟まず連続している (1 箇所・2 組・最大 3 個連続: L46 NOTE→WARNING→TIP) — 最も重要な注意だけ callout に残し、分析・読み方・補足は通常本文へ戻すか、対応する節へ分散する"
         ]
       },
       "wave_id": null,

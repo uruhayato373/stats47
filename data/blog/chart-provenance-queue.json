@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-19T00:41:57.145Z",
-  "checked": 1616,
+  "generatedAt": "2026-10-20T01:26:50.853Z",
+  "checked": 1618,
   "byVerdict": {
-    "restorable": 1554,
+    "restorable": 1556,
     "out-of-scope": 62
   },
   "defectCount": 0,

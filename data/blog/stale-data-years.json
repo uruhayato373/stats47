@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T00:40:26.406Z",
+  "generatedAt": "2026-10-20T01:25:17.521Z",
   "published": 608,
   "withRankingRefs": 570,
   "stale": [
@@ -11,17 +11,6 @@
           "rankingKey": "agricultural-output",
           "articleYear": "2014",
           "latestYear": "2024"
-        }
-      ]
-    },
-    {
-      "slug": "bonito-catch-prefecture",
-      "title": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",
-      "stale": [
-        {
-          "rankingKey": "fishery-species-catch-bonito",
-          "articleYear": "2015",
-          "latestYear": "2023"
         }
       ]
     },
@@ -177,6 +166,17 @@
       ]
     },
     {
+      "slug": "bonito-catch-prefecture",
+      "title": "カツオ日本一が静岡と宮城で割れる理由",
+      "stale": [
+        {
+          "rankingKey": "bonito-consumption-quantity",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
       "slug": "consumer-price-difference-index-utilities-prefecture-gap",
       "title": "光熱・水道費はなぜ北海道が突出して高いのか",
       "stale": [
@@ -245,6 +245,17 @@
           "rankingKey": "consumer-price-difference-index-utilities",
           "articleYear": "2024",
           "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "designated-difficult-disease-prefecture-gap",
+      "title": "指定難病の受給者数はなぜ都市に多いのか",
+      "stale": [
+        {
+          "rankingKey": "designated-difficult-disease",
+          "articleYear": "2020",
+          "latestYear": "2021"
         }
       ]
     },
