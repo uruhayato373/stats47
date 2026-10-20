@@ -473,6 +473,12 @@ jobs:
         run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs .claude/scripts/metrics/__tests__/metrics-reader-ga4.test.mjs
         continue-on-error: false
 
+      - name: 🔑 Google API client contract
+        # 認証とクライアント生成は google-client.cjs だけが持ち、読み取りの POST は再試行・書き込みは 1 回だけ送る契約を固定する
+        # (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。共通クライアントへ置き換えた計測スクリプトの単体テストも同じ step で回す。
+        run: node --test .claude/scripts/lib/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs .claude/scripts/ads/__tests__/fetch-affiliate-ga4.test.cjs
+        continue-on-error: false
+
       - name: 🔁 Workflow Commit-back Contract Gate
         # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
         # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、

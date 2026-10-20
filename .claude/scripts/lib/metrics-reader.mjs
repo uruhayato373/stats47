@@ -11,26 +11,19 @@
  * 定義は `docs/00_プロジェクト管理/02_収益化戦略.md` を参照。
  *
  * 必要な資源:
- *   - stats47-*.json サービスアカウント鍵（リポジトリルート、gitignored）
+ *   - サービスアカウント鍵（env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。google-client.cjs が読む）
  *   - PSI_API_KEY env（任意、指定すれば PSI を取得）
  *
  * CLI 使用:
  *   node .claude/scripts/lib/metrics-reader.mjs [--json]
  */
 
-import { google } from "googleapis";
-import { readFileSync, existsSync } from "node:fs";
-import path from "node:path";
 import { resolvePeriods, DATA_DELAY_DAYS } from "../metrics/lib/periods.mjs";
 import { assessDailyCoverage } from "../metrics/lib/periods.mjs";
 import { pathToFileURL } from "node:url";
 import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "./site-config.cjs";
+import { createGa4DataClient, createSearchConsoleClient } from "./google-client.cjs";
 
-const REPO_ROOT = process.cwd();
-const KEY_CANDIDATES = [
-  "stats47-f6b5dae19196.json",
-  "stats47-31b18ee67144.json",
-];
 const GSC_SITE_URL = GSC_PROPERTY;
 const PSI_TARGET_URL = `${SITE_ORIGIN}/`;
 
@@ -71,26 +64,9 @@ export function computeWeekRanges({ week = null, asOf = null, now = Date.now() }
   };
 }
 
-// ── Auth ─────────────────────────────────────────────────────────
-
-function resolveKeyFile() {
-  for (const name of KEY_CANDIDATES) {
-    const full = path.join(REPO_ROOT, name);
-    if (existsSync(full)) return full;
-  }
-  throw new Error(
-    `サービスアカウント鍵が見つかりません: ${KEY_CANDIDATES.join(" / ")} をリポジトリルートに配置してください`,
-  );
-}
-
-function createAuth(scopes) {
-  return new google.auth.GoogleAuth({ keyFile: resolveKeyFile(), scopes });
-}
-
 // ── GA4 ───────────────────────────────────────────────────────────
 
-async function runGa4Report(auth, body) {
-  const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
+async function runGa4Report(analyticsdata, body) {
   const { data } = await analyticsdata.properties.runReport({
     property: `properties/${GA4_PROPERTY_ID}`,
     requestBody: body,
@@ -99,10 +75,8 @@ async function runGa4Report(auth, body) {
 }
 
 export async function fetchGa4Weekly(ranges, { runReport = null } = {}) {
-  const auth = runReport ? null : createAuth([
-    "https://www.googleapis.com/auth/analytics.readonly",
-  ]);
-  const report = runReport ?? ((body) => runGa4Report(auth, body));
+  const analyticsdata = runReport ? null : createGa4DataClient();
+  const report = runReport ?? ((body) => runGa4Report(analyticsdata, body));
   const aggregateRequest = (range) => ({
     dateRanges: [{ startDate: range.start, endDate: range.end }],
     metrics: ["activeUsers", "sessions", "engagedSessions"].map((name) => ({ name })),
@@ -240,8 +214,7 @@ export async function fetchGa4Weekly(ranges, { runReport = null } = {}) {
 
 // ── GSC ───────────────────────────────────────────────────────────
 
-async function fetchGscQuery(auth, startDate, endDate, opts = {}) {
-  const searchconsole = google.searchconsole({ version: "v1", auth });
+async function fetchGscQuery(searchconsole, startDate, endDate, opts = {}) {
   const { data } = await searchconsole.searchanalytics.query({
     siteUrl: GSC_SITE_URL,
     requestBody: {
@@ -255,19 +228,17 @@ async function fetchGscQuery(auth, startDate, endDate, opts = {}) {
 }
 
 async function fetchGscWeekly(ranges) {
-  const auth = createAuth([
-    "https://www.googleapis.com/auth/webmasters.readonly",
-  ]);
+  const searchconsole = createSearchConsoleClient();
 
   const [thisTotal, prevTotal, topQueries, dailyRows] = await Promise.all([
-    fetchGscQuery(auth, ranges.this.start, ranges.this.end),
-    fetchGscQuery(auth, ranges.prev.start, ranges.prev.end),
-    fetchGscQuery(auth, ranges.this.start, ranges.this.end, {
+    fetchGscQuery(searchconsole, ranges.this.start, ranges.this.end),
+    fetchGscQuery(searchconsole, ranges.prev.start, ranges.prev.end),
+    fetchGscQuery(searchconsole, ranges.this.start, ranges.this.end, {
       dimensions: ["query"],
       rowLimit: 10,
     }),
     // 日別行 (previous7d〜finalized7d の 14 日) — 欠損日の検出用。0 補完しない
-    fetchGscQuery(auth, ranges.prev.start, ranges.this.end, {
+    fetchGscQuery(searchconsole, ranges.prev.start, ranges.this.end, {
       dimensions: ["date"],
       rowLimit: 31,
     }),

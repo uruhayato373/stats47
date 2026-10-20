@@ -164,6 +164,29 @@ test("正本の periods.mjs・コメント・テストの週の計算は検出�
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
 });
+// SCRIPT-GOOGLE-CLIENT-UNIFY-01: Google API の認証は google-client.cjs だけが持つ。自前で組むと鍵の探し方と再試行がずれる。
+test("Google API の認証の自前実装を GOOGLE_AUTH_LOCAL として検出する", (t) => {
+  const root = fixture([
+    "const auth = new google.auth.GoogleAuth({ keyFile, scopes });",
+    "const oauth = new google.auth.OAuth2(id, secret);",
+    "const jwt = new JWT({ email, key });",
+    "const client = createGa4DataClient();",
+    "// 旧実装は new google.auth.GoogleAuth で組んでいた",
+  ].join("\n") + "\n");
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "GOOGLE_AUTH_LOCAL");
+  assert.deepEqual(found.map((item) => item.line), [1, 2, 3], "共通モジュールの呼び出しとコメントは止めない");
+});
+test("正本の google-client.cjs・トークン発行ツール・テストの認証は検出しない", (t) => {
+  const root = fixture("export const ok = 1;\n");
+  for (const file of [".claude/scripts/lib/google-client.cjs", ".claude/scripts/adsense/oauth-setup.js", ".claude/scripts/lib/__tests__/google-client.test.cjs"]) {
+    fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), "const auth = new google.auth.GoogleAuth({ credentials, scopes });\n");
+  }
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
 test("チェッカーが変わったらローカルの stat キャッシュを使わない (新ルールが未変更ファイルにも当たる)", (t) => {
   const root = fixture(`const R2 = "${SITE_R2}";\n`);
   const cache = path.join(root, ".local/maintenance-debt-cache.json");

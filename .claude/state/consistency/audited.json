@@ -1,8 +1,26 @@
 {
-  "hash": "80bd946bab3d92289e7de268dcc9bdbc61087f66edbde108eed2d860ca7fbb5f",
-  "audited_at": "2026-10-19T12:33:08",
+  "hash": "3143e020780d34f9728aaed530b84d82c48c11d63496095dace15a613f66201d",
+  "audited_at": "2026-10-20T22:34:59",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/collect-local.mjs"
+    ".claude/scripts/ads/fetch-affiliate-ga4.cjs",
+    ".claude/scripts/google-admin/audit-adsense.mjs",
+    ".claude/scripts/google-admin/audit-ga4-api.mjs",
+    ".claude/scripts/google-admin/audit-gsc.mjs",
+    ".claude/scripts/gsc/inspect-cities-sample.cjs",
+    ".claude/scripts/gsc/url-inspection-daily.cjs",
+    ".claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs",
+    ".claude/scripts/lib/__tests__/google-client.test.cjs",
+    ".claude/scripts/lib/check-maintenance-debt.cjs",
+    ".claude/scripts/lib/google-client.cjs",
+    ".claude/scripts/lib/metrics-reader.mjs",
+    ".claude/scripts/metrics/fetch-adsense-snapshot.mjs",
+    ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
+    ".claude/scripts/metrics/fetch-gsc-snapshot.mjs",
+    ".claude/scripts/metrics/ga4-query.mjs",
+    ".claude/scripts/metrics/gsc-query.mjs",
+    ".claude/scripts/metrics/lib/auth.mjs",
+    ".claude/scripts/note/fetch-note-referrals.mjs",
+    ".claude/scripts/search-growth/fetch-keyword-ranks.mjs",
+    ".claude/scripts/sns/buzz-map-attribution.mjs"
   ]
 }

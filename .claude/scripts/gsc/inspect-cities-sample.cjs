@@ -19,38 +19,14 @@
 
 const fs = require("fs");
 const path = require("path");
-const { google } = require("googleapis");
 const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
+const { createSearchConsoleClient } = require("../lib/google-client.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const SITE_URL = GSC_PROPERTY;
-const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 
 const SAMPLE_SIZE = 50;
 const REQUEST_INTERVAL_MS = 400;
-
-// ---------- auth ----------
-function loadAuth() {
-  const envKeyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
-  if (envKeyJson) {
-    const credentials = JSON.parse(envKeyJson);
-    return new google.auth.GoogleAuth({
-      credentials,
-      scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
-    });
-  }
-  const keyFile = KEY_CANDIDATES.map((f) => path.join(PROJECT_ROOT, f)).find((p) =>
-    fs.existsSync(p)
-  );
-  if (!keyFile) {
-    console.error("[error] service account key not found");
-    process.exit(1);
-  }
-  return new google.auth.GoogleAuth({
-    keyFile,
-    scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
-  });
-}
 
 // ---------- sample selection ----------
 function loadSampleCities() {
@@ -101,8 +77,7 @@ function sleep(ms) {
 // ---------- main ----------
 async function main() {
   const sample = loadSampleCities();
-  const auth = loadAuth();
-  const searchconsole = google.searchconsole({ version: "v1", auth });
+  const searchconsole = createSearchConsoleClient();
 
   const today = new Date().toISOString().slice(0, 10);
   const outputPath = `/tmp/cities-inspection-sample-${today}.csv`;

@@ -322,10 +322,20 @@ updated: 2026-10-19
 ### [SCRIPT-GOOGLE-CLIENT-UNIFY-01] Google API の認証とクライアントの自前実装 15 ファイルを 1 か所にまとめる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 数え直すと自前で認証を組むファイルは 16 本 (トークン発行用の対話式ツール `adsense/oauth-setup.js` を含む) で、鍵の探し方は 4 通り (1 本は実行ディレクトリ基準、3 本は env を読まず CI が鍵を直下へ書き出す運用に依存)、自前の再試行は 0 本だった。googleapis の既定の再試行は 408・429・5xx を 3 回までだが対象は GET 等だけで POST を含まず (googleapis-common 8.0.3 / gaxios 7.1.3 のコードで確認)、GA4 の runReport・GSC の検索実績・URL 検査は一時的な失敗 1 回で欠損していた。正本を `.claude/scripts/lib/google-client.cjs` にし (鍵は env をメモリで渡し、無ければリポジトリ直下の `stats47-*.json` をファイル位置基準で読む。一時ファイルに書かない)、読み取り用クライアントは POST も再試行、GA4 Admin の書き込み用は GET 系だけを再試行する (作成は 1 回だけ送る)。15 本を置き換え、`metrics/lib/auth.mjs` の鍵の一時ファイル書き出しと、CI 2 本 (`fetch-metrics-weekly.yml`・`affiliate-ga4-weekly.yml`) の鍵ファイル書き出しを外した。`check-maintenance-debt.cjs` の `GOOGLE_AUTH_LOCAL` が正本の外の GoogleAuth・OAuth2・JWT を止める (例外は `oauth-setup.js` だけ)。検証: 置き換え前後で 12 本を同じ固定期間で read-only 実行し、時刻の項目を除いて出力が一致した (URL 検査 1 件だけ Google 側の状態が実行の間に変わり、旧方式と新方式で続けて照会して同じ応答を確認)。AdSense の 2 本はローカルに OAuth の資格情報が無く実行できず、テストだけで確認した。意図のテスト `lib/__tests__/google-client.test.cjs` (ローカルの HTTP サーバーへの実要求。再試行の設定を壊すと落ちることを確認) を PR CI の Contract Tests に配線。手順書の雛形は `SKILL-GOOGLE-SNIPPET-UNIFY-01` へ分けた。
+
 - **背景 (2026-10-20 実測)**: `new GoogleAuth`・`google.auth.*`・`JWT(` を自前で書くスクリプトが 15 ファイル (metrics・gsc・google-admin・ads・note・sns・search-growth・lib) あり、GA4 の `runReport` を呼ぶファイルは 12。認証方式・スコープ・再試行がファイルごとに違い、資格情報の扱いを変えるたびに 15 か所を直すことになる。
 - **次**: `RECORD-SCHEMA-CONTRACT-01`・`SCRIPT-ISO-WEEK-UNIFY-01` の後に、`.claude/scripts/metrics/lib/gsc-query.mjs`・`ga4-query.mjs` を土台にして、認証とクライアントの生成を `.claude/scripts/lib` の 1 モジュールへ寄せる。呼び出し側は 1 ファイルずつ置き換える。
 - **停止条件**: 取得する値と記録の形を変えない。置き換えるたびに、既存のテストと 1 回の read-only 実行で同じ結果になることを確かめる。
 - **完了条件**: Google API の認証を書くのが共通モジュールだけになり、新しい自前の実装を検査が止める。
+
+### [SKILL-GOOGLE-SNIPPET-UNIFY-01] スキル手順書の Google API 認証の雛形を共通モジュールの呼び出しへ置き換える
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **背景 (2026-10-21 実測)**: `SCRIPT-GOOGLE-CLIENT-UNIFY-01` でスクリプトの認証を `.claude/scripts/lib/google-client.cjs` に寄せたが、スキル手順書に鍵ファイル名を複製して `google.auth.GoogleAuth` / `OAuth2` を組む `node -e` の雛形が残っている (`.claude/skills/analytics/{fetch-gsc-data,fetch-ga4-data}/SKILL.md` に各 2、`{inspect-url,submit-sitemap,fetch-adsense-data}/SKILL.md` に各 1、`blog/discover-trends/sources/gsc.md` に 1、Codex 用の写し `.agents/skills/` に同じものが 7)。写して実行するたびに、再試行の無い自前の認証が生まれる。雛形は使い捨てでリポジトリに残らないので `check-maintenance-debt.cjs` の `GOOGLE_AUTH_LOCAL` (コードだけを見る) には掛からない。
+- **次**: ① 読み取りの雛形を `createSearchConsoleClient()` / `createGa4DataClient()` / `createAdsenseClient()` の呼び出しに置き換え、ページ×検索語などの照会は `metrics/gsc-query.mjs`・`ga4-query.mjs` を案内する ② `submit-sitemap` は書き込みスコープ (`webmasters`) で sitemap を送信するので、共通モジュールに書き込み用の Search Console クライアント (変更は再試行しない) を足すか、雛形を残して理由を書くかを決める ③ `.agents/` の写しを同期の手順で更新する ④ 手順書に自前の認証が戻らないよう、検査の対象を Markdown のコード例へ広げるかを決める。
+- **停止条件**: sitemap の送信など外部へ書き込む雛形は、置き換え後に実行して確かめない (送信はオーナーの承認が要る)。
+- **完了条件**: スキル手順書の Google API の雛形が共通モジュールを使い、例外には理由が書かれている。
 
 ### [SCRIPT-LIB-CHECKJS-01] スクリプトの共通部品に型検査 (@ts-check と、範囲を絞った tsc --checkJs) をかける
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]

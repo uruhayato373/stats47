@@ -6,21 +6,15 @@
  * ブラウザは GA4 Admin UI (リンク作成側) だけに使う。
  * owner/user・change of address・bulk export 等の変更 API は呼ばない (README「denylist」)。
  */
-import { google } from "googleapis";
-import { resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
 import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { createWebmastersClient } from "../lib/google-client.cjs";
 
 export { GSC_PROPERTY };
 
 /** sites.list (read-only) で property の存在と permissionLevel を返す。 */
 export async function auditGscProperty() {
   try {
-    const keyFile = resolveServiceAccountKeyFile();
-    const auth = new google.auth.GoogleAuth({
-      keyFile,
-      scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
-    });
-    const webmasters = google.webmasters({ version: "v3", auth });
+    const webmasters = createWebmastersClient();
     const res = await webmasters.sites.list({});
     const sites = res.data.siteEntry ?? [];
     const target = sites.find((s) => s.siteUrl === GSC_PROPERTY);

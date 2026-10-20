@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 /** Finalized GSC query × canonical page; never scrape search result HTML. */
-import { google } from 'googleapis';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
-import { resolveServiceAccountKeyFile } from '../metrics/lib/auth.mjs';
 import { resolvePeriods, assessDailyCoverage } from '../metrics/lib/periods.mjs';
 import { sitePath, validateSnapshot } from './lib/keyword-cycle.mjs';
 import { GSC_PROPERTY } from '../lib/site-config.cjs';
+import { createSearchConsoleClient } from '../lib/google-client.cjs';
 
 export async function fetchRows(client, period, dimensions) {
   const rows = [];
@@ -43,11 +42,7 @@ async function main() {
   const args = process.argv.slice(2), option = (name, fallback) => args.includes(name) ? args[args.indexOf(name) + 1] : fallback;
   if (option('--days', '7') !== '7') throw new Error('Keyword effects require exactly 7 days');
   const repo = path.resolve(option('--repo', path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')));
-  const keyFile = resolveServiceAccountKeyFile();
-  const auth = new google.auth.GoogleAuth({ keyFile, scopes: ['https://www.googleapis.com/auth/webmasters.readonly'] });
-  let snapshot;
-  try { snapshot = await fetchSnapshot(google.searchconsole({ version: 'v1', auth })); }
-  finally { if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON) fs.rmSync(keyFile, { force: true }); }
+  const snapshot = await fetchSnapshot(createSearchConsoleClient());
   const output = path.join(repo, '.local/seo-rank-watch/gsc.json');
   fs.mkdirSync(path.dirname(output), { recursive: true }); fs.writeFileSync(output, JSON.stringify(snapshot, null, 2) + '\n');
   console.log(`GSC finalized7d ${snapshot.current.period.periodStart}..${snapshot.current.period.periodEnd}: ${snapshot.current.rows.length} query/page rows`);

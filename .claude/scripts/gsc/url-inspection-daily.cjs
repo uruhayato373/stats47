@@ -26,23 +26,20 @@
  *   node .claude/scripts/gsc/url-inspection-daily.cjs --dry-run     # URL リストだけ表示
  *   node .claude/scripts/gsc/url-inspection-daily.cjs --limit 5     # 5 URL だけ inspect
  *
- * 認証: サービスアカウント鍵（リポジトリルートの stats47-*.json）
+ * 認証: ../lib/google-client.cjs (サービスアカウント鍵。env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json)
  * scope: https://www.googleapis.com/auth/webmasters.readonly
+ * 一時的な 408 / 429 / 5xx は共通クライアントが最大 3 回再試行してから ERROR 行にする。
  */
 
 const path = require("node:path");
 const fs = require("node:fs");
-const { google } = require("googleapis");
 const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
 const { PREF_AREA_CODES } = require("../lib/prefectures.cjs");
+const { createSearchConsoleClient } = require("../lib/google-client.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const SITE_URL = GSC_PROPERTY;
-const KEY_CANDIDATES = [
-  "stats47-f6b5dae19196.json",
-  "stats47-31b18ee67144.json",
-];
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes("--dry-run");
@@ -105,24 +102,6 @@ const CATEGORY_LABELS = {
 
 function log(msg) {
   process.stderr.write(`[url-inspection] ${msg}\n`);
-}
-
-function findKeyFile() {
-  const jsonEnv = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
-  if (jsonEnv) {
-    const dir = path.join(require("node:os").tmpdir(), "stats47-sa");
-    fs.mkdirSync(dir, { recursive: true });
-    const p = path.join(dir, "service-account.json");
-    fs.writeFileSync(p, jsonEnv, { mode: 0o600 });
-    return p;
-  }
-  for (const name of KEY_CANDIDATES) {
-    const p = path.join(PROJECT_ROOT, name);
-    if (fs.existsSync(p)) return p;
-  }
-  throw new Error(
-    `Service account key not found. Set GOOGLE_SERVICE_ACCOUNT_KEY_JSON env or place ${KEY_CANDIDATES.join(" / ")} at ${PROJECT_ROOT}`,
-  );
 }
 
 function readCsv(filePath) {
@@ -488,12 +467,7 @@ async function main() {
     return;
   }
 
-  const keyFile = findKeyFile();
-  const auth = new google.auth.GoogleAuth({
-    keyFile,
-    scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
-  });
-  const searchconsole = google.searchconsole({ version: "v1", auth });
+  const searchconsole = createSearchConsoleClient();
 
   const rows = [];
   let i = 0;

@@ -7,7 +7,7 @@
  * 出力先: data/gsc/snapshots/<YYYY-Www>/
  *   - queries/pages/devices/countries/daily.csv … ローリング28日 (機会発見用)
  *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary
- * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json
+ * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - 期間は lib/periods.mjs (SSOT) が week から決定的に導出する (実行日に依存しない)。
@@ -16,22 +16,20 @@
  *   (source 単位の failure isolation を保ちつつ partial を隠さない)。API 失敗は exit 1。
  */
 
-import { google } from "googleapis";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import {
   PROJECT_ROOT,
-  resolveServiceAccountKeyFile,
   parseWeekArg,
   toCsv,
 } from "./lib/auth.mjs";
 import { resolvePeriods } from "./lib/periods.mjs";
 import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
 import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { createSearchConsoleClient } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const SITE_URL = GSC_PROPERTY;
-const SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
 async function fetchAll(searchconsole, dimensions, startDate, endDate) {
   const rows = [];
@@ -68,7 +66,7 @@ function normalize(rows, dimName) {
 
 async function main() {
   const week = parseWeekArg();
-  const keyFile = resolveServiceAccountKeyFile();
+  const searchconsole = createSearchConsoleClient();
 
   // 期間は week から決定的に導出 (SSOT: periods.mjs)。未来週はここで throw する。
   const periods = resolvePeriods({ source: "gsc", week });
@@ -76,9 +74,6 @@ async function main() {
 
   const outDir = join(PROJECT_ROOT, datasetDir("gsc.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
-
-  const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });
-  const searchconsole = google.searchconsole({ version: "v1", auth });
 
   const jobs = [
     { dim: "query", file: "queries.csv" },
