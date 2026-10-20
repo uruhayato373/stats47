@@ -93,6 +93,24 @@ async function main() {
       }
     }
 
+    // ログインの要る管理画面を読むスクリプト・browser-use を止め、代わりに読む記録を返す (2026-10-20)。
+    // 判定と例外 (オーナーの依頼) は admin-read-guard.mjs。正典: .claude/rules/recorded-measurement-first.md
+    const { pathToFileURL } = require("node:url");
+    const guard = await import(pathToFileURL(require("node:path").join(__dirname, "../scripts/measurement/admin-read-guard.mjs")).href);
+    const adminRead = guard.checkBashCommand(command);
+    if (adminRead) {
+      console.log(
+        JSON.stringify({
+          hookSpecificOutput: {
+            hookEventName: "PreToolUse",
+            permissionDecision: "deny",
+            permissionDecisionReason: adminRead,
+          },
+        }),
+      );
+      return;
+    }
+
     const advisories = ADVISORY_PATTERNS.filter(({ pattern }) => pattern.test(command));
     if (advisories.length > 0) {
       console.log(

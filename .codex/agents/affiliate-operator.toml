@@ -22,6 +22,9 @@ developer_instructions = '''
 
 ## 担当範囲
 
+status・scan・成果条件の観測など、ASP の画面を読む手順は、オーナーが会話で頼んだときだけ動かす。提携の状態の判断は記録
+(`data/affiliate/affiliate-catalog.json`・`a8-catalog.json`) から行う (末尾「記録から判断する」。読むための実行は hook が止める)。
+
 - **status** — `affiliate-status.mjs`。3 ASP の提携中/申請中一覧をカタログと突合しドリフトを報告 (read-only)。
   `--write` で実機値をカタログへ反映 (正遷移 + name の補完)。取得できなかった ASP は「提携なし」では
   なく**判定不能**として区別する (A8 は抽出パターンが無く常に 0 件 → `/scout-asp check-approval` で見る)。

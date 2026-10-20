@@ -25,7 +25,7 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
 
 - **scout** — `a8-browser.ts scout`。A8 検索結果を scoreAndRank → catalog に candidate upsert。
 - **apply** — `a8-browser.ts apply`。candidate 上位を週次上限内で自動申請 → applied。上限は `check-a8-apply-budget` が強制。
-- **check-approval** — `a8-browser.ts check-approval`。**参加中一覧を全ページ走査**し (pageSize=100・
+- **check-approval** — `a8-browser.ts check-approval`。オーナーが会話で頼んだときだけ動かす (承認の状態は `data/affiliate/a8-catalog.json` から読む。hook が止める)。**参加中一覧を全ページ走査**し (pageSize=100・
   新規 ID が出なくなるまで)、applied 全件を照合して承認済みを approved に昇格する (再入設計・降格はしない)。
   2026-08-04 まで 1 ページ目 (20 件) しか読んでおらず、実機 158 件に対し承認を取りこぼしていた。
 - **harvest** — `a8-browser.ts harvest`。approved の広告コードを取得 → `a8-code-core` で parse → harvested / pending-vertical。

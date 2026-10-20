@@ -1,14 +1,14 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { SOURCES } from './sources.mjs';
+import { SOURCES, MEASUREMENT_MAX_AGE_MS } from './sources.mjs';
 
 export function measurementHealth(state, now = Date.now()) {
   const age = now - Date.parse(state?.generatedAt);
-  const fresh = Number.isFinite(age) && age >= -300000 && age <= 2 * 86400000;
+  const fresh = Number.isFinite(age) && age >= -300000 && age <= MEASUREMENT_MAX_AGE_MS;
   const sources = Object.entries(SOURCES).map(([source, config]) => {
     const item = state?.sources?.find(s => s.source === source);
     const sourceAge = now - Date.parse(item?.observedAt);
-    const current = fresh && Number.isFinite(sourceAge) && sourceAge >= -300000 && sourceAge <= 2 * 86400000;
+    const current = fresh && Number.isFinite(sourceAge) && sourceAge >= -300000 && sourceAge <= MEASUREMENT_MAX_AGE_MS;
     const compatible = item?.capability === config.capability;
     return { source, capability: config.capability, status: !current ? 'stale' : !compatible ? 'failed' : item.status,
       code: !current ? 'measurement_stale' : !compatible ? 'capability_mismatch' : item.code ?? null,
@@ -17,7 +17,7 @@ export function measurementHealth(state, now = Date.now()) {
         && (item.status === 'pass' || (item.status === 'failed' && item.code === 'report_incomplete')),
       awaitingReauthentication: current && compatible && item.status === 'failed' && item.code === 'auth_required'
         && item.recovery?.state === 'awaiting_reauthentication',
-      remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null };
+      remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : null };
   });
   return { fresh, status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required', sources };
 }

@@ -48,6 +48,8 @@ GSC メトリクス取得の優先順:
 
 検索実績API・既存coverageキューだけでは、今回の画面監査を実施したことにはならない。
 画面確認の運用は本節、URL群の機械分類は `/gsc-coverage-remediation` を正典とする。
+除外理由の内訳は週次の取得 (木曜の Mac。`data/gsc/coverage-drilldown/`) で読む。セッションで画面を開くのはオーナーが会話で頼んだときだけ
+(読むための操作は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
 
 1. **propertyと日時**: `sc-domain:stats47.jp` を画面で照合する。認証profile・lock・終了時の清掃は
    `docs/01_技術設計/07_Playwright認証プロファイル.md` に従う。ログイン・2FA・CAPTCHAは人間へ戻し、古い成功を最新扱いしない。

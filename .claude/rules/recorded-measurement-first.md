@@ -2,8 +2,9 @@
 paths:
   - ".claude/skills/{ads,analytics,management,product,sns,note}/**"
   - ".claude/agents/{a8-report-collector,affiliate-manager,affiliate-operator,asp-scout,ga4-analyst,gsc-analyst,sns-metrics-sync,strategy-advisor,improvement-triage,note-manager,kdp-operator,coconala-operator,instagram-strategist,x-strategist}.md"
-  - ".claude/scripts/measurement/**"
-  - "data/{authenticated,affiliate,nsm,measurement-cycle,products}/**"
+  - ".claude/scripts/{measurement,ads,note,gsc,kdp}/**"
+  - ".claude/hooks/pre-browser-admin-read.mjs"
+  - "data/{authenticated,affiliate,nsm,measurement-cycle,products,gsc,ga4,sns,note,adsense}/**"
 ---
 # 計測は週次で記録し、セッションでは記録から判断する
 
@@ -22,11 +23,12 @@ paths:
 
 | 取得 | 周期 | 入口 |
 |---|---|---|
-| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週木曜 JST 18:20 | `authenticated-measurement.yml` (Mac の `measurement-session-refresh.sh` が木曜 17:30 にログインを保って起動) |
+| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週木曜 JST 17:30 | Mac の `measurement-session-refresh.sh` がログインを保ち、`measurement-collect-local.sh` が取得して develop へ記録する。CI の `authenticated-measurement.yml` (20:20) は予備で、Mac が取れなかった取得元だけを取る (2026-10-20 に Mac の取得へ切り替え。`MEASUREMENT-MAC-DIRECT-01`) |
 | 週次の計測→記録→改善サイクル | 毎週金曜 JST 05:00 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要) |
 
-認証付き計測は木曜に取り、金曜朝の週次サイクルがそれを読む。セッションが切れて取得に失敗した週は、
-次の木曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
+認証付き計測は木曜に取り、金曜朝の週次サイクルがそれを読む。記録は次の取得まで 8 日間「今の値」として使う
+(鮮度の判定と保管庫からの復元が共有する `.claude/scripts/measurement/sources.mjs` の `MEASUREMENT_MAX_AGE_MS`)。
+セッションが切れて取得に失敗した週は、次の木曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
 
 ## 判断に使う記録
 
@@ -36,6 +38,7 @@ paths:
 | note・KDP の売上 | `data/authenticated/revenue-history.json`・`data/products/sales-ledger.json` |
 | A8 の成果 / 楽天の成果 | `data/affiliate/a8-results.json` / `data/affiliate/rakuten-results.json` |
 | 提携の状態 (A8 / ASP 横断) | `data/affiliate/a8-catalog.json` / `data/affiliate/affiliate-catalog.json` |
+| note の記事別の閲覧 | `data/note/dashboard/latest.json` (月曜の Mac の定期実行) |
 | アフィリエイトの表示・クリック (GA4) | `data/affiliate/ga4-affiliate-history.csv` |
 | 週次収益 (NSM)・計測の鮮度 | `data/nsm/weekly-snapshots/`・`data/measurement-cycle/latest.json` |
 | 検索の実績 (GSC) / 除外理由 | `data/gsc/snapshots/<週>/`・`data/gsc/LATEST.md` / `data/gsc/coverage-drilldown/` |
@@ -56,6 +59,11 @@ paths:
    - 外部への変更そのもの (投稿・提携申請・出品・公開) と、その直後の反映確認
    - 定期実行で失敗した取得元の復旧 (ログインの入り直し) をオーナーが頼んだ
 4. 定期実行の失敗に気づいたら、復旧が必要なことを 1 行でオーナーに伝える。自分で入り直さない。
+5. **hook が止める (2026-10-20)。** ブラウザ MCP で読むための管理画面を開く操作は `.claude/hooks/pre-browser-admin-read.mjs` が、
+   読み取りスクリプトの実行と browser-use での管理画面は `.claude/hooks/pre-bash-safety.js` が止め、代わりに読む記録を返す。
+   判定と対象の画面・スクリプトの一覧は `.claude/scripts/measurement/admin-read-guard.mjs`。例外 3 のうち「オーナーが頼んだ」ときは、
+   `node .claude/scripts/measurement/admin-read-guard.mjs --allow "<オーナーの依頼の引用>"` で 60 分だけ通す (引用は `.local/` のログに残る)。
+   投稿・申請・出品の画面は対象にしていない。X の分析画面は週次の記録が無いので対象外 (`SNS-X-METRICS-WEEKLY-01`)。
 
 ## 既知の制約
 

@@ -9,6 +9,13 @@ export const SOURCES = {
   rakuten: { domains: ['rakuten.co.jp', 'rakuten.com'], profile: 'playwright-rakuten-profile', state: 'playwright-rakuten-state.json', secret: 'MEASUREMENT_SESSION_RAKUTEN', capability: 'monthly-outcomes' },
 };
 
+/**
+ * 記録を「今の値」として使ってよい期間。取得は週 1 回 (木曜。2026-10-20 に週次化) なので、次の取得までの 7 日に
+ * 1 日の猶予を足す。鮮度の判定 (health.mjs) と保管庫からの復元 (consumer-paths.mjs) が共有する。
+ * 2 日のままだと、日曜・月曜のアフィリエイト週次が木曜の記録を毎週 measurement_stale で拒んでいた。
+ */
+export const MEASUREMENT_MAX_AGE_MS = 8 * 86400000;
+
 export function sourceFor(name) {
   const source = Object.hasOwn(SOURCES, name) ? SOURCES[name] : null;
   if (!source) throw new Error('unknown_source');
