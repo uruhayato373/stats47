@@ -23,6 +23,7 @@ import {
 import { FONT_FAMILY, SERIES_COLORS as LINE_COLORS } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
+import { layoutLegendRows, planCategoryTicks, rotatedLabelDrop, textWidth, truncateToWidth } from "../shared/text-metrics";
 import { svgThemeStyle } from "../shared/theme";
 import {
   StatsSchema,
@@ -50,7 +51,7 @@ export interface LineChartOptions {
   yLabel?: string;
   /** 単位（プロットエリア左上に表示） */
   unit?: string;
-  /** Y 軸最小値（デフォルト: 0） */
+  /** Y 軸最小値（省略時は共有の範囲設定を使用） */
   yMin?: number;
   /** 凡例の位置（デフォルト: "bottom"） */
   legendPosition?: "right" | "bottom";
@@ -74,19 +75,32 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const series = uniqueDimension(data, seriesKey);
   const valueMap = buildValueMap(data, xKey, seriesKey);
 
-  const W = 680; // §5 折れ線標準幅
-  const legendAtBottom = legendPosition === "bottom" && series.length > 1;
-  const legendW = !legendAtBottom && series.length > 1 ? 132 : 0;
-  const legendBottomH = legendAtBottom ? 22 : 0;
-  const H = 420; // §5 折れ線標準高さ（凡例は bottom マージンで吸収）
-  const plot = makePlotArea(W, H, { top: 58, right: 14 + legendW, bottom: 60 + legendBottomH, left: 55 });
-
   // Y 軸範囲
   const allValues = data.map((d) => d.value).filter((v): v is number => v !== null);
   const domain = resolveChartDomain(allValues, options.domainPolicy ?? {mode: 'extent'}, options.yDomain);
   if (!domain) throw new Error('No finite observations for line chart');
   const [yScaleLo, yScaleHi] = yMin === undefined ? domain : resolveChartDomain(allValues, {mode: 'fixed', min: yMin, max: domain[1]})!;
   const yTicks = niceTicks(yScaleLo, yScaleHi, 5);
+
+  const W = 680;
+  const H = 420;
+  const axisLabel = unit
+    ? yLabel?.split(`（${unit}）`).join("").split(`(${unit})`).join("").trim()
+    : yLabel;
+  const visibleYLabel = axisLabel === title ? undefined : axisLabel;
+  const legendEntries = series.map((s, i) => ({ label: s.name, color: LINE_COLORS[i % LINE_COLORS.length] }));
+  const legendAtBottom = legendPosition === "bottom" && series.length > 1;
+  const legendW = legendPosition === "right" && series.length > 1
+    ? Math.min(240, 30 + Math.max(...series.map(s => textWidth(s.name, 9)))) : 0;
+  const left = Math.max(55, (visibleYLabel ? 28 : 12) + Math.max(...yTicks.map(v => textWidth(formatTick(v), 8.5))) + 5);
+  const right = Math.max(14, textWidth(xItems[xItems.length - 1]?.name ?? "", 8.5) / 2 + 4) + legendW;
+  const plotWidth = W - left - right;
+  const ticks = planCategoryTicks(xItems.map(x => x.name), plotWidth / Math.max(1, xItems.length - 1), 8.5, { angle: 35, maxLabels: 12 });
+  const labelDrop = ticks.rotate
+    ? rotatedLabelDrop(Math.max(...xItems.map(x => textWidth(x.name, 8.5))), 8.5, 35) : 8.5;
+  const legend = layoutLegendRows(legendAtBottom ? legendEntries : [], { left, availW: plotWidth, fontSize: 9, swatchW: 12, gap: 16 });
+  const bottom = Math.max(60, 14 + labelDrop + (legendAtBottom ? 12 + legend.rows * 22 : 0) + (xLabel ? 20 : 8));
+  const plot = makePlotArea(W, H, { top: 58, right, bottom, left });
 
   const toSvgX = (i: number): number =>
     xItems.length > 1
@@ -103,21 +117,18 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     ].join("\n");
   });
 
-  // X 軸ラベル（7個超は斜め表示。12 個超は間引いて重なりを防ぐ — 月次・長期年次の系列用）
-  const rotateTick = xItems.length > 7;
-  const tickStep = Math.max(1, Math.ceil(xItems.length / 12));
-  const xTickLabels = xItems.flatMap((item, i) => {
-    if (tickStep > 1 && i % tickStep !== 0 && i !== xItems.length - 1) return [];
+  // 文字幅に応じて回転・間引きする。観測点そのものは間引かない。
+  const xTickLabels = ticks.indices.map(i => {
     const x = toSvgX(i).toFixed(1);
     const y = (plot.bottom + 14).toFixed(1);
-    return rotateTick
-      ? `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,${x},${y})">${item.name}</text>`
-      : `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="middle">${item.name}</text>`;
+    return ticks.rotate
+      ? `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,${x},${y})">${xItems[i].name}</text>`
+      : `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="middle">${xItems[i].name}</text>`;
   });
 
   // ゼロライン（Y 軸が負を含む場合）
   const zeroLine =
-    yScaleLo < 0
+    yScaleLo < 0 && yScaleHi >= 0
       ? `  <line x1="${px(plot.left)}" y1="${px(toSvgY(0))}" x2="${px(plot.right)}" y2="${px(toSvgY(0))}" stroke="#9ca3af" stroke-width="1.5"/>`
       : "";
 
@@ -146,39 +157,17 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     });
   });
 
-  // 凡例
-  const legendItems = (() => {
-    if (legendAtBottom) {
-      // 下部凡例: 系列を横並びで中央配置
-      const itemWidth = 90;
-      const totalW = series.length * itemWidth;
-      const startX = (W - totalW) / 2;
-      // 斜めの X 軸ラベルは下へ約 30px はみ出すので、その下に置く
-      const ly = plot.bottom + (rotateTick ? 50 : 18);
-      return series
-        .map((s, si) => {
-          const color = LINE_COLORS[si % LINE_COLORS.length];
-          const lx = startX + si * itemWidth;
-          return [
-            `  <rect x="${lx.toFixed(1)}" y="${(ly - 3).toFixed(1)}" width="12" height="3" fill="${color}" rx="1.5"/>`,
-            `  <text x="${(lx + 16).toFixed(1)}" y="${ly.toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
-          ].join("\n");
-        })
-        .join("\n");
-    } else {
-      // 右サイド凡例
-      return series
-        .map((s, si) => {
-          const color = LINE_COLORS[si % LINE_COLORS.length];
-          const lx = (plot.right + 12).toFixed(1);
-          return [
-            `  <rect x="${lx}" y="${(plot.top + si * 22).toFixed(1)}" width="12" height="3" fill="${color}" rx="1.5"/>`,
-            `  <text x="${(plot.right + 27).toFixed(1)}" y="${(plot.top + si * 22 + 4).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
-          ].join("\n");
-        })
-        .join("\n");
-    }
-  })();
+  const legendItems = legendAtBottom
+    ? legend.items.map(item => {
+      const y = plot.bottom + 14 + labelDrop + 16 + item.row * 22;
+      return `  <rect x="${px(item.x)}" y="${px(y - 3)}" width="12" height="3" fill="${item.color}" rx="1.5"/>
+  <text x="${px(item.x + 16)}" y="${px(y)}" font-size="9" class="svg-axis">${item.label}</text>`;
+    }).join("\n")
+    : legendW > 0 ? legendEntries.map((item, i) => {
+      const y = plot.top + i * 22 + 4;
+      return `  <rect x="${px(plot.right + 12)}" y="${px(y - 4)}" width="12" height="3" fill="${item.color}" rx="1.5"/>
+  <text x="${px(plot.right + 28)}" y="${px(y)}" font-size="9" class="svg-axis">${truncateToWidth(item.label, legendW - 28, 9)}</text>`;
+    }).join("\n") : "";
 
   const unitLabel = unit
     ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" class="svg-tick">(${unit})</text>`
@@ -186,8 +175,8 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const xAxisLabel = xLabel
     ? `  <text x="${((plot.left + plot.right) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis">${xLabel}</text>`
     : "";
-  const yAxisLabel = yLabel
-    ? `  <text x="13" y="${((plot.top + plot.bottom) / 2).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,${((plot.top + plot.bottom) / 2).toFixed(1)})">${yLabel}</text>`
+  const yAxisLabel = visibleYLabel
+    ? `  <text x="13" y="${((plot.top + plot.bottom) / 2).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,${((plot.top + plot.bottom) / 2).toFixed(1)})">${truncateToWidth(visibleYLabel, plot.height, 10)}</text>`
     : "";
 
   const titleLines = [

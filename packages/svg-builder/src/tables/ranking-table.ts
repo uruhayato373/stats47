@@ -5,6 +5,7 @@
  */
 
 import { FONT_FAMILY } from "../shared/color";
+import { textWidth } from "../shared/text-metrics";
 
 export interface RankingTableRow {
   rank: number;
@@ -49,7 +50,8 @@ export function generateRankingTableSvg(
   const totalH = tableTop + rows.length * ROW_H + PADDING;
 
   const rankColW = 48;
-  const valueColW = 100;
+  const values = rows.map(row => formatValue(row.value));
+  const valueColW = Math.max(100, textWidth(valueHeader, 11) + 16, ...values.map(value => textWidth(value, 12) + 16));
   const nameColW = width - rankColW - valueColW;
 
   // ヘッダー
@@ -77,7 +79,7 @@ export function generateRankingTableSvg(
       `  <rect x="0" y="${y}" width="${width}" height="${ROW_H}" fill="${bg}"/>`,
       `  <text x="${rankColW / 2}" y="${textY}" text-anchor="middle" font-size="12" font-weight="${row.rank <= 3 ? "bold" : "normal"}" fill="${rankColor}">${row.rank}</text>`,
       `  <text x="${rankColW + 8}" y="${textY}" font-size="12" fill="#111827">${row.name}</text>`,
-      `  <text x="${width - 8}" y="${textY}" text-anchor="end" font-size="12" fill="#374151">${formatValue(row.value)}</text>`,
+      `  <text x="${width - 8}" y="${textY}" text-anchor="end" font-size="12" fill="#374151">${values[i]}</text>`,
     ].join("\n");
   });
 

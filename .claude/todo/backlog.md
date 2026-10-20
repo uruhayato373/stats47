@@ -3107,11 +3107,11 @@ updated: 2026-10-19
 - **途中成果**: リモートのブランチ `wip/ui-chart-text-loop-01` (commit `f8344bf3c`、35 ファイル。2026-09-25 時点の develop の上に
   stash を衝突なしで適用したもの。develop へは未取り込み)。**検証済み**: ①の検出を本番の代表URL 12 件 × 412/1440px で実行し、
   `/areas/13000` の縦軸切れを検出・他 11 ページは 0 件 / 検出とカード手順のテスト (壊すと落ちることも確認)。
-  **未完・未検証**: `findChartTextIssues` (途中)・`line.ts` の修正 (未着手)・D3 14 部品への `fitSvgViewBox` 適用
+  **未完・未検証**: D3 14 部品への `fitSvgViewBox` 適用
   (テスト・型チェック未実施)・`check-svg-text.ts` と `plan-svg-text-fix.ts` のテスト。
-- **次 (実行順)**: ①`wip/ui-chart-text-loop-01` を develop へ追従させて (`git merge develop`) 型チェック ②`findChartTextIssues` を完成させ、欠陥ごとの合成 SVG で感度テスト
+- **次 (実行順)**: ①`wip/ui-chart-text-loop-01` を develop へ追従させて (`git merge develop`) 型チェック ②生成器の通常テスト (`packages/svg-builder/src/charts/__tests__/text-layout.gate.test.ts`) を維持したまま旧WIPとの差分を整理
   ③公開済み記事 SVG の該当件数を実測し、公開前 gate (`quality-gate.mjs`) を error にするか件数固定の baseline にするか決める
-  ④`line.ts` を直してビール SVG を作り直す ⑤D3 の共通処理を型チェック・テストし、localhost の `/areas/13000` で
+  ④修正済みの `line.ts` でビール SVG を作り直し、公開中の画像との差分を確認する ⑤D3 の共通処理を型チェック・テストし、localhost の `/areas/13000` で
   `chart_text_issues` が 0 になることを確かめる ⑥残りのテスト ⑦週次監査を 1 回手動で流し、カードに手順が載ることを確かめる。
 - **関係するカード**: `AREA-DATABOOK-CHART-FIX-01` ② (狭い画面の文字サイズ・軸単位) は同じ D3 部品を触るので、こちらの WIP ブランチを先に
   取り込ませる。`NAV-CLICK-COVERAGE-01` P3 と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も週次監査の同じファイル群に指標を足すので並行実装しない。

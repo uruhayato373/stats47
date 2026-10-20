@@ -2,8 +2,7 @@
  * 全 svg-builder チャート関数の**実出力**が、文字配置 lint (`findChartTextIssues`) を
  * 通ることを固定する (配線テスト)。
  *
- * lint 側の感度 (はみ出し・重なりを壊した合成検体で落ちるか) は
- * `.claude/scripts/lib/__tests__/svg-lint.text-layout.test.mjs` が担保する。こちらは
+ * lint 側の感度も末尾の合成 SVG で固定する。生成器のテストは
  * 「生成器が長いラベルでも文字をキャンバス外へ出さず、互いに重ねない」ことを見る。
  *
  * 2026-09-25: 折れ線の下部凡例が斜めの X 軸ラベルに重なり、Y 軸タイトル (題名 + 単位) が
@@ -45,11 +44,6 @@ const LONG_TITLE = "ビール支出額の月別パターン (二人以上の世�
 
 type Issues = { overflows: string[]; overlaps: string[] };
 const issuesOf = (svg: string): Issues => findChartTextIssues(svg) as Issues;
-/**
- * 既知の欠陥 (UI-CHART-TEXT-LOOP-01 の未修正分・2026-09-26 に develop へ取り込んだ時点で 9 ケース)。
- * 生成器が直るとこのケースは失敗に変わるので、そのときに itKnown を it へ戻す。件数は縮小専用。
- */
-const itKnown = it.fails;
 
 const expectClean = (svg: string) => expect(issuesOf(svg)).toEqual({ overflows: [], overlaps: [] });
 
@@ -72,7 +66,7 @@ const rows = (
   );
 
 describe("generateLineSvg: 長いラベルでも文字がはみ出さず重ならない", () => {
-  itKnown("★ビール月別 (12 か月 × 3 系列 + 単位 + 題名入り yLabel) の回帰", () => {
+  it("★ビール月別 (12 か月 × 3 系列 + 単位 + 題名入り yLabel) の回帰", () => {
     const data = rows(MONTHS, ["2000年", "2012年", "2024年"], (xi, si) => 1281 + xi * 180 - si * 400);
     const svg = generateLineSvg(data, {
       title: LONG_TITLE,
@@ -84,17 +78,20 @@ describe("generateLineSvg: 長いラベルでも文字がはみ出さず重な�
       legendPosition: "bottom",
     });
     expectClean(svg);
+    expect(svg.match(/<circle /g)).toHaveLength(36);
+    for (const month of MONTHS) expect(svg).toContain(`>${month}</text>`);
     // 単位は 1 か所だけ (左上の "(円)")。Y 軸タイトルに繰り返さない
     expect(svg.match(/[（(]円[）)]/g)?.length).toBe(1);
     // 12 か月の短いラベルは横書きで収まるので回転しない
     expect(svg).not.toMatch(/rotate\(-35/);
   });
 
-  itKnown("25 年 × 6 系列 (長い凡例) + 1,400,000 級の値", () => {
+  it("25 年 × 6 系列 (長い凡例) + 1,400,000 級の値", () => {
     const data = rows(YEARS, LONG_SERIES, (xi, si) => 1_400_000 - si * 150_000 + xi * 3_000);
-    expectClean(
-      generateLineSvg(data, { title: "酒類別の年間支出額の推移", unit: "円", xKey: "yearCode", seriesKey: "areaCode", yLabel: "支出額", xLabel: "年" }),
-    );
+    const svg = generateLineSvg(data, { title: "酒類別の年間支出額の推移", unit: "円", xKey: "yearCode", seriesKey: "areaCode", yLabel: "支出額", xLabel: "年" });
+    expectClean(svg);
+    for (const name of LONG_SERIES) expect(svg).toContain(`>${name}</text>`);
+    expect(svg.match(/<circle /g)).toHaveLength(150);
   });
 
   it("47 都道府県を X 軸に並べる (回転が必要なケース)", () => {
@@ -104,14 +101,14 @@ describe("generateLineSvg: 長いラベルでも文字がはみ出さず重な�
     );
   });
 
-  itKnown("右側凡例 + 6 系列の長い名前", () => {
+  it("右側凡例 + 6 系列の長い名前", () => {
     const data = rows(MONTHS, LONG_SERIES, (xi, si) => 100 + xi * 10 + si * 7);
-    expectClean(
-      generateLineSvg(data, { title: "酒類別の月別支出", unit: "円", xKey: "yearCode", seriesKey: "areaCode", legendPosition: "right" }),
-    );
+    const svg = generateLineSvg(data, { title: "酒類別の月別支出", unit: "円", xKey: "yearCode", seriesKey: "areaCode", legendPosition: "right" });
+    expectClean(svg);
+    for (const name of LONG_SERIES) expect(svg).toContain(`>${name}</text>`);
   });
 
-  itKnown("単系列・負値・長い yLabel", () => {
+  it("単系列・負値・長い yLabel", () => {
     const data = rows(YEARS, ["値"], (xi) => -50_000 + xi * 4_000, "%");
     expectClean(
       generateLineSvg(data, {
@@ -164,15 +161,22 @@ describe("generateStackedBarSvg: 長い凡例・多数の区分", () => {
     const data = rows(MONTHS, LONG_SERIES, (xi, si) => 1_000 + xi * 50 + si * 120);
     expectClean(generateStackedBarSvg(data, { title: "酒類別の月別支出額の構成", unit: "円", xKey: "yearCode", seriesKey: "areaCode" }));
   });
-  itKnown("垂直 (47 都道府県)", () => {
+  it("垂直 (47 都道府県)", () => {
     const data = rows(PREFS, ["男性", "女性"], (xi, si) => 1_000_000 + xi * 1_000 + si * 3_000, "人");
-    expectClean(generateStackedBarSvg(data, { title: "都道府県別の男女別人口", unit: "人", xKey: "yearCode", seriesKey: "areaCode" }));
+    const svg = generateStackedBarSvg(data, { title: "都道府県別の男女別人口", unit: "人", xKey: "yearCode", seriesKey: "areaCode" });
+    expectClean(svg);
+    const segments = [...svg.matchAll(/<rect [^>]*width="([\d.]+)"[^>]*fill-opacity="0.85"\/>/g)];
+    expect(segments).toHaveLength(94);
+    for (const segment of segments) expect(Number(segment[1])).toBeGreaterThan(0);
+    expect(svg).toContain('>北海道</text>');
+    expect(svg).toContain('>沖縄県</text>');
   });
-  itKnown("水平 100% (47 都道府県 × 6 系列の長い凡例)", () => {
+  it("水平 100% (47 都道府県 × 6 系列の長い凡例)", () => {
     const data = rows(PREFS, LONG_SERIES, (xi, si) => 10 + ((xi + si) % 7), "%");
-    expectClean(
-      generateStackedBarSvg(data, { title: "都道府県別の酒類支出構成", unit: "%", xKey: "yearCode", seriesKey: "areaCode", horizontal: true, normalized: true }),
-    );
+    const svg = generateStackedBarSvg(data, { title: "都道府県別の酒類支出構成", unit: "%", xKey: "yearCode", seriesKey: "areaCode", horizontal: true, normalized: true });
+    expectClean(svg);
+    for (const name of [...PREFS, ...LONG_SERIES]) expect(svg).toContain(`>${name}</text>`);
+    expect(svg.match(/<rect [^>]*height="32"/g)).toHaveLength(282);
   });
 });
 
@@ -202,14 +206,26 @@ describe("generateChoroplethSvg / findings / ranking table", () => {
     );
   });
 
-  itKnown("ランキング表 (長い県名・大きな値)", () => {
+  it("ランキング表 (長い県名・大きな値)", () => {
     const rowsT = PREFS.slice(0, 10).map((name, i) => ({ rank: i + 1, name, value: 6_186_895_771 - i * 100_000_000 }));
-    expectClean(
-      generateRankingTableSvg(rowsT, {
+    const svg = generateRankingTableSvg(rowsT, {
         title: "都道府県別の地方税収入額ランキング",
         valueHeader: "地方税収入額（千円）",
         formatValue: (v) => Number(v).toLocaleString("ja-JP"),
-      }),
-    );
+      });
+    expectClean(svg);
+    expect(svg).toContain('>地方税収入額（千円）</text>');
+    for (const row of rowsT) expect(svg).toContain(`>${row.value.toLocaleString("ja-JP")}</text>`);
+  });
+});
+
+describe("文字配置ゲートの検出感度", () => {
+  it("キャンバス外の文字を検出する", () => {
+    const issues = issuesOf('<svg viewBox="0 0 100 50"><text x="95" y="20" font-size="12">都道府県</text></svg>');
+    expect(issues.overflows.length).toBeGreaterThan(0);
+  });
+  it("同じ位置の文字の重なりを検出する", () => {
+    const issues = issuesOf('<svg viewBox="0 0 200 50"><text x="10" y="20" font-size="12">都道府県</text><text x="15" y="20" font-size="12">人口</text></svg>');
+    expect(issues.overlaps.length).toBeGreaterThan(0);
   });
 });
