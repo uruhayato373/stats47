@@ -1,40 +1,40 @@
 {
-  "generatedAt": "2026-10-19T03:22:39.188Z",
+  "generatedAt": "2026-10-20T03:31:10.313Z",
   "results": [
     {
       "key": "app/rakuten/items/うどん.json",
       "maxAgeDays": 3,
       "why": "sync-rakuten-catalog.yml (日次)。古いと商品名・価格が古いまま配信される",
-      "generatedAt": "2026-10-18T21:13:57.967Z",
+      "generatedAt": "2026-10-19T22:44:30.582Z",
       "error": null,
-      "ageDays": 0.2560326388888889,
+      "ageDays": 0.19907094907407408,
       "status": "fresh"
     },
     {
       "key": "app/rakuten/furusato/01000.json",
       "maxAgeDays": 3,
       "why": "sync-rakuten-catalog.yml (日次)。ふるさと納税カードの返礼品が古くなる",
-      "generatedAt": "2026-10-18T21:13:57.967Z",
+      "generatedAt": "2026-10-19T22:44:30.582Z",
       "error": null,
-      "ageDays": 0.2560326388888889,
+      "ageDays": 0.19907094907407408,
       "status": "fresh"
     },
     {
       "key": "app/blog/all.json",
       "maxAgeDays": 14,
       "why": "blog-auto-publish.yml (公開のたび)。止まると新規記事が一覧に出ない",
-      "generatedAt": "2026-10-09T08:21:34.777Z",
+      "generatedAt": "2026-10-20T01:41:12.001Z",
       "error": null,
-      "ageDays": 9.792412152777779,
+      "ageDays": 0.07636934027777778,
       "status": "fresh"
     },
     {
       "key": "state/ads/ga4-affiliate/latest.json",
       "maxAgeDays": 10,
       "why": "affiliate-ga4-weekly.yml (週次+翌日再取得)。古いと収益施策のeffectを判定できない",
-      "generatedAt": "2026-10-18T16:26:15.728Z",
+      "generatedAt": "2026-10-19T19:12:09.525Z",
       "error": null,
-      "ageDays": 0.45582707175925924,
+      "ageDays": 0.34653688657407405,
       "status": "fresh"
     },
     {
@@ -43,7 +43,7 @@
       "why": "page-quality-audit-weekly.yml (週次)。止まると翌週のスクショ比較元と UI 確認が古いまま",
       "generatedAt": "2026-10-17T20:07:33.963Z",
       "error": null,
-      "ageDays": 1.3021437962962963,
+      "ageDays": 2.3080595949074074,
       "status": "fresh"
     }
   ]
