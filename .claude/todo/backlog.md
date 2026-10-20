@@ -629,6 +629,7 @@ updated: 2026-10-19
   `DEPLOY-WORKER-CACHE-STALE-CSS-01` の事故 (古い HTML が消えた CSS を参照) を招くので使わない。
 - **次**: ① 直近 79 回のうち、web の配信物 (apps/web・packages・ビルドが読む data/ 配下) に差の無いデプロイの件数を数える。
   ② 多ければ `paths` / `paths-ignore` の案を作る。ビルドが読む `data/` (例: `data/themes/catalogs`・`data/content`) を必ず含める。
+- **① の結果 (2026-10-20)**: `deploy-workers.yml` の main への実行 91 回 (2026-09-15〜10-20) を、直前のデプロイとの `git diff --name-only` で分類した。変更が配信物に関係しないもの (`.claude/`・`docs/`・`contents/`・`scripts/scheduled/`・deploy 以外の `.github/`・計測や監査の記録の `data/<取得元>/`) だけのデプロイは **90 回中 6 回 (約 7%)**。`config/` とビルドが読みうる `data/` は安全側で「関係あり」に数えた。**判断: `paths` の絞り込みは入れない。** 減るのは月に数回で、除外を誤ると配信物が古いまま残る (停止条件)。キャッシュ全消しを減らす主因はデプロイの回数そのもの (36 日で 90 回、1 日 2.5 回) なので、CLAUDE.md の「デプロイは溜めて 1 回」の規律で抑える。再現: `gh run list --workflow deploy-workers.yml --branch main --limit 200 --json headSha,createdAt` を日付順に並べ、隣り合う SHA の差分を上の規則で分類する。完了条件の「不要と判断した理由」を満たしたので、このカードは閉じてよい。
 - **停止条件**: ビルドが読むファイルを除外して、配信物が古いまま残る状態を作らない。workflow の変更は main 反映まで発火しない点に注意する。
 - **完了条件**: 配信物に差の無いデプロイが走らないことを、対象外の変更だけの push で確かめた。または件数が少なく不要と判断した理由をここに書いた。
 
