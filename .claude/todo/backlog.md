@@ -1599,6 +1599,14 @@ updated: 2026-10-19
 - **完了条件**: 図・data json・source.json・本文の 1 位〜3 位が一致し、`quality-gate.mjs` が pass。title 変更 (`SEO-CTR-CANDIDATES-01` の候補) とは別に直す。
 
 
+### [EFFECT-GSC-PAGE-PREFIX-MATCH-01] 効果判定の `[gsc-page:]` が前方一致で、別のページの実績が混ざる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **事象 (2026-10-20、improvement-triage の報告)**: `SEO-TITLE-CTR-EFFECT-01` の対象 `/blog/avg-height-high-school-2nd-male` に、`/blog/avg-height-high-school-2nd-male-vs-*` の実績 (W41 で 8 click / 601 imp、対象全体の約 1%) が混ざる。
+- **次**: effect-verdict の `[gsc-page:]` の照合を完全一致にするか、完全一致の記法を足す。既存の行で前方一致を前提にしているものが無いかを先に数える。
+- **完了条件**: 完全一致で照合できるようになり、`node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs` に前方一致で混ざらないことのテストがある。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 

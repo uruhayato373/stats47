@@ -71,3 +71,24 @@ hit していれば `effect/pending` に留まり、確定ラベルは付かな�
 - **実測 (2026-10-11 取得、Japan、ISO 週)**: W40 (09-28〜10-04) 238/4,519 = 5.27%、W41 (10-05〜10-10 の 6 日分) 202/4,934 = 4.09%。W39 は 09-26 をまたぐため除外
 - **判定**: 判定しない。8.13% と 7.43% はどちらも 2026-09-26 の page_view 二重計測是正より前の定義で、`data/releases/2026-09-26-ga4-measurement-v2.json` の `doNotCompareAcross` に「pageReferrer 由来の回遊率」がある。是正前と同じ定義の baseline は取り直せない
 - **次**: 2026-10-19 に W40〜W42 の 3 週を同コマンドで取って新 baseline とし、本行を削除する。以後の blog→ranking 導線の変更は `[target:]` 付きの別行で測る
+
+
+### [RELATED-ARTICLES-EFFECT-01] 関連記事の並び替え後の ranking→blog 遷移を観測 (2026-10-20)
+
+- **デプロイ日**: 2026-10-20 (PR #1162、2026-10-20T04:57Z = JST 13:57)。実装は commit 2fbe2b2f2 (`packages/data-configs/src/content/navigation.ts`)。同点を「一致数 ÷ 記事が使う指標数」で切り、それでも同じなら記事 ID 順にする。経緯と残件は backlog `RELATED-ARTICLES-TIEBREAK-01`。
+- **変更の範囲**: 全公開ページ 26,172 件の上位 3 本が変更前後で変わるのは 1,416 件 (ranking→blog 284・blog→blog 294・area-theme→blog 752 ほか)。ランキングで効くのは、指標を共有する公開記事が 4 本以上ある 194 ページ (GSC 2026-W41 の表示 36,671)。
+- **本番確認**: 2026-10-20 に `curl -s -A 'Mozilla/5.0 (compatible; Googlebot/2.1)' https://stats47.jp/ranking/total-fertility-rate | grep -oE 'href="/blog/[^"]+"' | sort -u` を実行し、`/blog/abortion-rate-prefecture-gap`・`/blog/cc-estat-07-birthrate-line`・`/blog/total-fertility-rate` を確認。`total-fertility-rate` が新たに入り、目標の `fertility-rate-prefecture-gap` は未達。
+- **baseline (GA4 Data API property 463218070・country=Japan・ISO 週・2026-09-26 の二重計測是正後の定義、2026-10-20 取得)**:
+
+  | 週 | ranking を参照元にした blog page_view | ranking page_view | 比率 |
+  |---|---|---|---|
+  | 2026-W40 (09-28〜10-04) | 142 | 4,519 | 3.14% |
+  | 2026-W41 (10-05〜10-11) | 153 | 5,270 | 2.90% |
+  | 2026-W42 (10-12〜10-18) | 195 | 5,191 | 3.76% |
+  | 3 週合計 | 490 | 14,980 | 3.27% |
+
+  副指標 (このカード「このランキングを読み解く」だけの `nav_click`、`customEvent:nav_surface==ranking_blog`、Japan): 導線名が付いた 10-08 以後だけ存在し、W41 (10-08〜10-11 の 4 日) 21、W42 56、10-19 は 8。KPI は `site-circulation-rate`。
+- **再現コマンド (baseline)**: 分子 `node .claude/scripts/metrics/ga4-query.mjs --start 2026-09-28 --end 2026-10-18 --dims isoYearIsoWeek --metrics eventCount --filter 'eventName==page_view' --filter 'pagePath^=/blog/' --filter 'pageReferrer*=stats47.jp/ranking/' --japan`、分母は同コマンドの pagePath を `^=/ranking/` にして pageReferrer の条件を外す。副指標は `--dims date --filter 'eventName==nav_click' --filter 'customEvent:nav_surface==ranking_blog' --japan`。
+- **想定効果**: 置かない [根拠が無い]。並び替えの前例が無く、カードのクリック率の倍率を支える過去事例も計算式も無い。週次 snapshot adapter が ranking→blog の page_view を扱わないため、行は「効果判定エンジン対象外」とし、下の手順で判定する。
+- **観測期限と判定手順**: 2026-11-17。W44〜W46 (10-26〜11-15) を同コマンドで取り、デプロイ前 W40〜W42 の比率の範囲 2.90〜3.76% と比べる。3 週すべてが 3.76% を超えれば増加として記録、3 週すべてが範囲内なら effect/none 候補、混在なら pending のまま次の 3 週 (期日 2026-12-08) を足す。W43 (10-19〜10-25) はデプロイ日をまたぐので使わない。副指標は 1 週 56 件で標本が薄く count のみ。
+- **交絡**: W40→W42 の 142→195 は並び替えより前の上昇で、原因は未確認 (範囲が広い理由)。`SEO-TITLE-CTR-EFFECT-01` の title 変更が分母 (ranking の page_view) の構成を変え得る。`NAV-CLICK-COVERAGE-01` の共通クリック監視が窓内にデプロイされると `nav_click` の数え方が変わり得る ([仮説] `ranking_blog` は導線名付きで影響は小さい。検証: デプロイ日に `ranking_blog` の日次件数を前日と比べる。検証期日: そのデプロイ日)。
