@@ -25,7 +25,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 ## ループ全体図
 
 ```
-[1] 認証付き日次CIが GSC UI export → private R2（初回/期限切れログインは人間）
+[1] 認証付き週次CI (木曜) が GSC UI export → private R2（初回/期限切れログインは人間）
        ↓
 [2] ingest-gsc-export.py        cp932 zip を正規化 → coverage-drilldown/<週>/<category>-drilldown.csv + category-totals.json
        ↓
@@ -197,7 +197,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
 step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
 
-**認証付き日次CI**: `authenticated-measurement.yml`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する。
+**認証付き週次CI (木曜)**: `authenticated-measurement.yml`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する。
 週次側はsource allowlistで入力だけを復元する。初回成功後は最新試行失敗・48時間超で停止し、古いgit入力へfallbackしない。
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 

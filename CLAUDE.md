@@ -104,6 +104,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
 | `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |
+| `recorded-measurement-first.md` | ログインが要る計測は週次 (木曜) に記録し、セッションではブラウザで取りに行かず記録から判断する | skills/{ads,analytics,management,product,sns,note}・計測/ASP系 agent・scripts/measurement |
 | `geo-analysis-standards.md` | Geo/GIS 掛け合わせコンテンツ (lineage / 保存則 / canonical / X・note 境界) | app/geo・features/geo-analysis・skills/gis |
 | `estat-api.md` | e-Stat API 利用 (年の 4 桁正規化・cdArea 禁止) | packages/estat-api・metrics・skills/estat |
 | `unit-semantics-standards.md` | 単位の解釈・換算・検証。正典 `packages/data-configs/src/unit/`、自前のスケール表を書かない | data-configs unit/metrics・skills/db/audit-units |

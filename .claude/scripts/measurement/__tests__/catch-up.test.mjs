@@ -4,21 +4,21 @@ import { readFileSync } from 'node:fs';
 import yaml from 'js-yaml';
 import { catchUpDecision, runCatchUp } from '../catch-up.mjs';
 
-const now = Date.parse('2026-09-22T00:00:00Z');
+const now = Date.parse('2026-10-23T00:00:00Z');
 const active = { state: 'active' };
-const run = { event: 'workflow_dispatch', head_branch: 'main', created_at: '2026-09-21T16:00:00Z', status: 'completed', conclusion: 'failure' };
-test('a missing daily run gets at most one catch-up, even if that run fails', () => {
-  assert.deepEqual(catchUpDecision(active, [], now), { dispatch: true, reason: 'scheduled_run_missing', expectedAt: '2026-09-21T09:20:00.000Z' });
+const run = { event: 'workflow_dispatch', head_branch: 'main', created_at: '2026-10-22T16:00:00Z', status: 'completed', conclusion: 'failure' };
+test('a missing weekly run gets at most one catch-up, even if that run fails', () => {
+  assert.deepEqual(catchUpDecision(active, [], now), { dispatch: true, reason: 'scheduled_run_missing', expectedAt: '2026-10-22T09:20:00.000Z' });
   assert.equal(catchUpDecision(active, [run], now).reason, 'run_already_present');
   assert.equal(catchUpDecision(active, [{ ...run, event: 'push', head_branch: 'develop' }], now).dispatch, false);
-  assert.equal(catchUpDecision(active, [{ ...run, status: 'queued', created_at: '2026-09-20T00:00:00Z' }], now).dispatch, false);
+  assert.equal(catchUpDecision(active, [{ ...run, status: 'queued', created_at: '2026-10-21T00:00:00Z' }], now).dispatch, false);
   assert.equal(catchUpDecision(active, [{ ...run, head_branch: 'feature/untrusted' }], now).dispatch, true);
-  assert.equal(catchUpDecision(active, [], Date.parse('2026-09-21T15:19:59Z')).dispatch, false);
+  assert.equal(catchUpDecision(active, [], Date.parse('2026-10-22T15:19:59Z')).dispatch, false);
   assert.equal(catchUpDecision({ state: 'disabled_manually' }, [], now).dispatch, false);
 });
 test('catch-up does not change schedule health; a real schedule run does', () => {
   assert.equal(catchUpDecision(active, [{ ...run, event: 'schedule' }], now).reason, 'schedule_not_overdue');
-  assert.equal(catchUpDecision(active, [run], now + 86400000).dispatch, true);
+  assert.equal(catchUpDecision(active, [run], now + 7 * 86400000).dispatch, true);
   assert.throws(() => catchUpDecision(active, null, now), /invalid_run_history/);
 });
 test('durable slot reservation prevents duplicate dispatch before run history becomes visible', () => {
