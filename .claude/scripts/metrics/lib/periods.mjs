@@ -89,7 +89,7 @@ export function isoWeekRange(week) {
   const sunday = new Date(monday);
   sunday.setUTCDate(monday.getUTCDate() + 6);
   const mondayStr = fmt(monday);
-  // 存在しない週 (例 2026-W53) を弾く: 月曜の ISO 週が一致しなければ不正
+  // 存在しない週 (例 2025-W53。2026 年は 53 週ある) を弾く: 月曜の ISO 週が一致しなければ不正
   if (isoWeekOf(mondayStr) !== `${year}-W${String(wk).padStart(2, "0")}`) {
     throw new Error(`ISO week does not exist: ${week}`);
   }

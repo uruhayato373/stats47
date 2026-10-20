@@ -16,6 +16,7 @@
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
+import { isoWeekRange } from "./lib/periods.mjs";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -110,18 +111,7 @@ function pctDelta(cur, prv) {
 }
 
 function monOfWeek(week) {
-  // ISO week: YYYY-Www → Monday date
-  const [yearStr, wStr] = week.split("-W");
-  const year = Number(yearStr);
-  const w = Number(wStr);
-  // Jan 4 is always in week 1
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  const jan4Day = jan4.getUTCDay() || 7;
-  const week1Mon = new Date(jan4);
-  week1Mon.setUTCDate(jan4.getUTCDate() - jan4Day + 1);
-  const target = new Date(week1Mon);
-  target.setUTCDate(week1Mon.getUTCDate() + (w - 1) * 7);
-  return target;
+  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 // ★引数は配列で渡す (execFileSync)。テンプレート文字列 + execSync だと引数がシェルとして

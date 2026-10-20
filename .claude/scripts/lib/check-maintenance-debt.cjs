@@ -129,6 +129,15 @@ const SITE_IDENTITY_ALLOWED = new Map([
   ["apps/web/scripts/generate-geo-source-thumbnails.ts", "画像生成器の rendererSources に含まれ、編集すると描画ハッシュが変わって既存画像が全て再生成対象になる"],
 ]);
 
+// ISO 週・週の月曜の自前計算 (2026-10-21 SCRIPT-ISO-WEEK-UNIFY-01)。正本は .claude/scripts/metrics/lib/periods.mjs
+// (JST の暦日で数える isoWeekOf / isoWeekRange / jstDateOf)。22 ファイル 27 か所の自前実装が UTC・実行マシンの時刻・JST で
+// まちまちに数え、月曜 0〜9 時 (JST) に前の週を返していたのを寄せた後の再発止め。1 月 4 日を基準にする計算・日曜を 7 とする計算・
+// 月曜を 0 とする計算のどれかを、正本の外のコードに書いたら止める。週以外の用途で要るときは理由を書いて ISO_WEEK_ALLOWED に足す。
+const ISO_WEEK_LOCAL_RE = /Date\.UTC\([^,()]+,\s*0,\s*4\)|get(?:UTC)?Day\(\)\s*\|\|\s*7|\(\s*[\w.]+\.get(?:UTC)?Day\(\)\s*\+\s*6\s*\)\s*%\s*7/;
+const ISO_WEEK_ALLOWED = new Map([
+  [".claude/scripts/metrics/lib/periods.mjs", "ISO 週・JST の暦日の正本"],
+]);
+
 function inspect(file) {
   const results = [];
   const relative = rel(file);
@@ -211,6 +220,11 @@ function inspect(file) {
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
         /\bwrangler\s+d1\b|\bgetDrizzle\s*\(|@stats47\/database\/server/.test(line))
       results.push(finding("D1_RUNTIME_RETURN", file, number, "廃止済みの永続D1 runtime操作候補", line));
+
+    if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !ISO_WEEK_ALLOWED.has(relative) &&
+        !/^\s*(?:\/\/|\/\*|\*)/.test(line) && ISO_WEEK_LOCAL_RE.test(line))
+      results.push(finding("ISO_WEEK_LOCAL", file, number,
+        "ISO 週・週の月曜の自前計算。.claude/scripts/metrics/lib/periods.mjs の isoWeekOf / isoWeekRange / jstDateOf を使う", line));
 
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))

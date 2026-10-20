@@ -11,6 +11,7 @@ import { writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
+import { isoWeekOf, isoWeekRange, jstDateOf } from "./periods.mjs";
 
 export const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..");
 
@@ -43,16 +44,11 @@ export function resolveServiceAccountKeyFile() {
 }
 
 /**
- * ISO 週番号 (YYYY-Www) を算出する。
+ * ISO 週番号 (YYYY-Www) を JST の暦日で算出する。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
  * @param {Date} date
  */
 export function toIsoWeek(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+  return isoWeekOf(jstDateOf(date));
 }
 
 /**
@@ -91,24 +87,6 @@ export function toCsv(rows, headers) {
  * @returns {{ startDate: string, endDate: string }} YYYY-MM-DD 形式
  */
 export function isoWeekToDateRange(week) {
-  const [year, weekNum] = week.split("-W").map(Number);
-  // Jan 4 は常に week 1 に含まれる (ISO 8601)
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  // week 1 の月曜日
-  const week1Mon = new Date(jan4);
-  week1Mon.setUTCDate(jan4.getUTCDate() - (jan4.getUTCDay() || 7) + 1);
-  // 対象週の月曜日
-  const monday = new Date(week1Mon);
-  monday.setUTCDate(week1Mon.getUTCDate() + (weekNum - 1) * 7);
-  // 対象週の日曜日
-  const sunday = new Date(monday);
-  sunday.setUTCDate(monday.getUTCDate() + 6);
-  return { startDate: fmtDate(monday), endDate: fmtDate(sunday) };
-}
-
-/**
- * YYYY-MM-DD へフォーマット
- */
-export function fmtDate(d) {
-  return d.toISOString().slice(0, 10);
+  const { monday, sunday } = isoWeekRange(week);
+  return { startDate: monday, endDate: sunday };
 }

@@ -65,12 +65,9 @@ function dayCount(dateStr) {
 
 /** dateStr を含む週の月曜 (JST) を "YYYY-MM-DD" で返す。 */
 function isoWeekStart(dateStr) {
-  // 日付だけの計算を UTC で行う。JST 00:00 を Date 化して getUTCDay() すると
-  // UTC では前日になり、月曜始まりが1日ずれる。
-  const d = new Date(`${dateStr}T00:00:00Z`);
-  const dow = (d.getUTCDay() + 6) % 7; // 月=0 ... 日=6
-  d.setUTCDate(d.getUTCDate() - dow);
-  return d.toISOString().slice(0, 10);
+  // dateStr は JST の日付。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const { isoWeekOf, isoWeekRange } = require("../metrics/lib/periods.mjs");
+  return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 
 function weekCount(weekStartMondayStr) {

@@ -1,3 +1,4 @@
+import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
 import "server-only";
 
 import { describeChannel, weeklyProductRevenue } from "../../../../.claude/scripts/metrics/lib/product-revenue.mjs";
@@ -91,14 +92,8 @@ export interface WeeklyProductRevenue {
 
 /** 直近の月曜〜日曜 (JST) を返す。今週はまだ終わっていないので、終わった直近の週を使う。 */
 function lastCompletedWeek(now = new Date()): { weekStart: string; weekEnd: string } {
-  const jst = new Date(now.getTime() + 9 * 3600_000);
-  const day = (jst.getUTCDay() + 6) % 7; // 月曜 = 0
-  const end = new Date(jst);
-  end.setUTCDate(jst.getUTCDate() - day - 1);
-  const start = new Date(end);
-  start.setUTCDate(end.getUTCDate() - 6);
-  const iso = (d: Date) => d.toISOString().slice(0, 10);
-  return { weekStart: iso(start), weekEnd: iso(end) };
+  const thisMonday = isoWeekRange(isoWeekOf(jstDateOf(now))).monday; // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return { weekStart: addDays(thisMonday, -7), weekEnd: addDays(thisMonday, -1) };
 }
 
 export function readWeeklyProductRevenue(): Wrapped<WeeklyProductRevenue> {

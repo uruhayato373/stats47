@@ -11,6 +11,7 @@
  * この module は純粋 (I/O なし)。書き込みは cli.mjs が state.mjs 経由で行う。
  * MCP には mutation を公開しない（read-only維持）。
  */
+import { isoWeekOf, jstDateOf } from '../../metrics/lib/periods.mjs';
 
 /** candidate type → トリアージの3区分。 */
 export const CANDIDATE_CATEGORY = Object.freeze({
@@ -39,13 +40,7 @@ const CATEGORY_ORDER = ["technical", "content", "measurement"];
 
 /** ISO 週 (承認週の記録用)。 */
 export function isoWeekOfDate(iso) {
-  const d = new Date(Date.parse(iso));
-  const u = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-  const dow = u.getUTCDay() || 7;
-  u.setUTCDate(u.getUTCDate() + 4 - dow);
-  const yearStart = new Date(Date.UTC(u.getUTCFullYear(), 0, 1));
-  const wk = Math.ceil(((u - yearStart) / 86400000 + 1) / 7);
-  return `${u.getUTCFullYear()}-W${String(wk).padStart(2, "0")}`;
+  return isoWeekOf(jstDateOf(iso)); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 /** 全 active 施策 (approved + in-progress) の数。 */

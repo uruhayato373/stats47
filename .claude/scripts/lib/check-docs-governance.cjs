@@ -148,13 +148,8 @@ function isIsoDate(value) {
 }
 
 function isoWeek(dateText) {
-  const date = new Date(`${dateText}T00:00:00Z`);
-  const day = date.getUTCDay() || 7;
-  date.setUTCDate(date.getUTCDate() + 4 - day);
-  const year = date.getUTCFullYear();
-  const yearStart = new Date(Date.UTC(year, 0, 1));
-  const week = Math.ceil(((date - yearStart) / 86_400_000 + 1) / 7);
-  return `${year}-W${String(week).padStart(2, "0")}`;
+  // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return require("../metrics/lib/periods.mjs").isoWeekOf(dateText);
 }
 
 /**

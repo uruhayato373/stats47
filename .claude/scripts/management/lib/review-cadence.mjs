@@ -16,6 +16,7 @@
  *   - 契約: contractFrom 以降のレビューだけ、必須見出しと申し送りの振り分け (→ 振り分け: <行き先>) を検査する。
  *     行き先のカード ID の実在は最新のレビューだけで見る (古いレビューの行き先は完了して消えるのが正常)
  */
+import { isoWeekOf, isoWeekRange } from "../../metrics/lib/periods.mjs";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
@@ -47,12 +48,7 @@ export function jstDay(now = new Date()) {
 }
 
 export function isoWeekLabel(day) {
-  const d = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate()));
-  const dow = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dow);
-  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
-  const week = Math.ceil(((d - yearStart) / 86_400_000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+  return isoWeekOf(ymd(day)); // day は JST の暦日 (UTC 0 時の Date)。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 const monthLabel = (d) => `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
@@ -490,10 +486,8 @@ const COMPETITOR_REPORTS = ".claude/skills/sns/competitor-scan/reference/reports
 
 /** ISO 週 YYYY-Www の月曜〜日曜 */
 export function weekRange(week) {
-  const [y, w] = week.split("-W").map(Number);
-  const jan4 = new Date(Date.UTC(y, 0, 4));
-  const monday = addDays(jan4, -((jan4.getUTCDay() || 7) - 1) + (w - 1) * 7);
-  return { start: ymd(monday), end: ymd(addDays(monday, 6)) };
+  const { monday, sunday } = isoWeekRange(week);
+  return { start: monday, end: sunday };
 }
 
 /** 月 YYYY-MM の初日〜末日 */

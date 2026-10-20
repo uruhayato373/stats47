@@ -1,3 +1,4 @@
+import { isoWeekOf } from "../metrics/lib/periods.mjs";
 import type { PageTemplate, PageTemplateKey, SharedPathRule } from "./types";
 
 /**
@@ -262,11 +263,8 @@ export const REVIEW_ROTATION_WEEKS = 4;
 
 /** ISO 週番号 (1〜53)。 */
 export function isoWeek(date: string): number {
-  const d = new Date(`${date.slice(0, 10)}T00:00:00Z`);
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - day);
-  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
-  return Math.ceil(((d.getTime() - yearStart) / 86_400_000 + 1) / 7);
+  // 正本は .claude/scripts/metrics/lib/periods.mjs (SCRIPT-ISO-WEEK-UNIFY-01)
+  return Number(isoWeekOf(date.slice(0, 10)).slice(6));
 }
 
 /** その週に agent が確認するページの key。代表URLは毎週、variants は key 順に並べて週番号で割り振る。 */

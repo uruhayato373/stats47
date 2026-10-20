@@ -310,6 +310,8 @@ updated: 2026-10-19
 ### [SCRIPT-ISO-WEEK-UNIFY-01] ISO 週の計算 16 か所を 1 関数にまとめ、新しい自前の実装を検査で止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 22 ファイル 27 か所の自前実装を調べ、数え方 (週の始まり・年またぎ) はすべて正しく、違いは入力の時刻を日付に直すタイムゾーンだけと実測した (UTC・実行マシンの時刻で数える 7 か所が、月曜 0〜9 時 JST に前の週を返していた。定期実行はこの時間帯に無い)。正本を `.claude/scripts/metrics/lib/periods.mjs` (JST の暦日で数える `isoWeekOf`・`isoWeekRange`・`jstDateOf`) にし、23 ファイルを呼び出しに置き換えた (関数名と返す形は不変。存在しない週は止める)。TS から読むための `periods.d.mts` を足した。`check-maintenance-debt.cjs` の `ISO_WEEK_LOCAL` が、1 月 4 日基準・日曜=7・月曜=0 の計算を正本の外に書くと止める。意図のテストは `metrics/__tests__/periods.test.mjs` (旧実装に戻すと落ちることを確認)。
+
 - **背景**: `SSOT-CONSOLIDATION-REST-01` ③ の調べで、スクリプトの ISO 週の計算が 16 ファイルにあり、月曜始まり・日曜締め・UTC・JST が混在している。計測を週次 (木曜に取得 → 金曜に集計 → 土曜にレビュー) に一本化したので、週の区切りがファイルごとに違うと、段ごとに別の週を見る誤りになりうる (実害はまだ確認していない)。
 - **次**: ① 16 か所の定義 (週の始まり・タイムゾーン・年またぎ) を表にする ② 意図が同じものを `.claude/scripts/lib` の 1 関数へ寄せ、意図が違うものは引数で選べるようにする ③ `check-maintenance-debt.cjs` に自前の ISO 週計算を止める規則を足す (baseline は縮小専用)。
 - **停止条件**: 記録のファイル名 (`YYYY-Www`) や表示が変わるものは、変えてよいとオーナーが決めるまで寄せない。
@@ -4846,6 +4848,13 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-local-data] [起票:2026-10-19] [領域:管理]
 
 追跡すべきものを除外していないか、除外すべきもの（生成物・秘密・大きいバイナリ）を追跡していないかを点検する。git の外の側は `npm run check-local-data`（LOCAL-DATA.md）で申告済みなので、ここでは追跡されている側を見る。（出典: obsidian の TODO マスタ ^t-0024・2026-09-28 のメモを3リポへ展開・2026-10-19）
+
+### [EFFECT-VERDICT-CLI-TEST-SOURCES-01] effect-verdict の CLI テストが実データの判定 1 件で sources 欠落により落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs] [起票:2026-10-21] [領域:管理]
+
+- **事象 (2026-10-21 確認)**: `effect-verdict.test.mjs` の「CLI: verdict JSON を書き、summary と thresholdsVersion を含む」が、`cli.mjs --week 2026-W31` を実データで動かした出力の判定のうち 1 件に `sources` が無いため落ちる。SCRIPT-ISO-WEEK-UNIFY-01 の変更を外した状態でも同じく落ちるので、その変更が原因ではない。
+- **次**: どの施策の判定が `sources` を持たないかを出力から特定し、engine がその経路でも `sources` (空配列でも) を書くようにする。テストが実データに依存して落ちる形でよいかも併せて決める。
+- **完了条件**: 上のテストが通り、判定の JSON はどの経路でも `sources` を持つ。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
 
