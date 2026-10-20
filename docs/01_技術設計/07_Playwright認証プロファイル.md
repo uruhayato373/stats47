@@ -49,6 +49,11 @@ product code、対応format、scope、必要roleまで確認する。
 
 ### CI 実行について
 
+> **2026-10-20 撤去 (オーナー判断)**: 認証付き計測の CI 実行 (`authenticated-measurement.yml`) と、その補完起動 (`catch-up.mjs`) を撤去した。
+> ログインは週 1 回この Mac だけが持ち、木曜 17:30 の `measurement-session-refresh.sh` → `measurement-collect-local.sh` が取得する。
+> 以下の Secrets・CI 再ログイン・artifact・補完起動の記述は旧仕様で、残っている CI 専用のコードとあわせて `MEASUREMENT-MAC-DIRECT-01` で削除する。
+> 保管庫 (vault)・restore・取得範囲・鮮度の記述は Mac の取得にもそのまま当てはまる (鮮度は `MEASUREMENT_MAX_AGE_MS` = 8 日)。
+
 **Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。ただし認証済みセッションを登録しても、別環境への移送可否・Reports等の追加認証・取得内容の完全性はサービス別に検証が必要。ログイン成功だけでCI収集可能とは判定しない。
 
 - **セルフホストランナーは本 repo では使えない。** stats47 は PUBLIC で、GitHub 公式が「セルフホストランナーは private repository のみ推奨。public repository の fork が危険なコードをランナー上で実行しうる」と警告している。

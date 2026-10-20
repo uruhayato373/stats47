@@ -88,7 +88,7 @@ session一覧が0でもOSプロセスが残る事例を確認した。OSのPID�
 [アカウント設定](https://note.com/settings/account)を開き、note IDを確認する。再認証はユーザー工程。
 他アカウントにログインしたまま再実行しない。
 
-週次 (木曜) の無人収集は`authenticated-measurement.yml`から同じCLIを呼ぶ。CIでは専用note profileの
+週次 (木曜) の無人収集は Mac の`measurement-collect-local.sh`から同じCLIを呼ぶ (2026-10-20 に CI から移した)。専用note profileの
 storageStateを一時Playwright contextへ読み込み、account/期間/全件ゲートをそのまま適用する。
 生データ・不完全な試行・更新セッションは暗号化private R2、git/artifactには固定コードの成否だけを保存する。
 認証更新は`npm run measurement:bootstrap -- note --login --publish`。詳細は

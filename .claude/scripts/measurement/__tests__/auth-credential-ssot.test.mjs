@@ -3,10 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { LOGIN } from '../refresh-session.mjs';
-import { ciCredentialServices, credentialServices, parseCmdkeyList, readCiCredential, readCredential, storedAccounts } from '../credential-store.mjs';
+import { credentialServices, parseCmdkeyList, readCiCredential, readCredential, storedAccounts } from '../credential-store.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
-const WORKFLOW = readFileSync(`${ROOT}.github/workflows/authenticated-measurement.yml`, 'utf8');
 const services = credentialServices();
 
 // 意図: 正本に「自動ログインする」と書いた service と、実際にセレクタを持つ service を一致させる。
@@ -21,17 +20,6 @@ test('項目名は stats47-measurement-<service> で、パスワードを持た�
     assert.equal(v.storeItem, `stats47-measurement-${id}`, id);
     assert.deepEqual(Object.keys(v).filter((k) => /user|password|secret|email/i.test(k)), [], id);
   }
-});
-
-// 意図: CI がパスワードを持つ service は正本の ciCredential=true だけ。workflow の matrix.auth と 1:1 で、
-// 自動ログインできない service に Secrets を渡さない。
-test('workflow が Secrets を渡す source は ciCredential=true の service と一致する', () => {
-  const wired = [...WORKFLOW.matchAll(/\{source: (\w+), secret: \w+, auth: (\w+)\}/g)].map(([, s, a]) => {
-    assert.equal(a, s.toUpperCase(), s);
-    return s;
-  }).sort();
-  assert.deepEqual(wired, ciCredentialServices().sort());
-  for (const s of wired) assert.ok(services[s].autoLogin, `${s} は autoLogin=false なのに CI 資格情報を持つ`);
 });
 
 test('CI の資格情報は GitHub Actions で、許可 service が指定されたときだけ読む', () => {

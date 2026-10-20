@@ -222,7 +222,7 @@ jobs:
         run: |
           # ASP ごとに独立して取り出す。1 つの認証切れで他の ASP と週次集計全体を止めない
           # (2026-09-21 は A8、2026-09-26 以降はもしもの認証切れで operations が丸ごと落ちる形だった)。
-          # 認証切れの通知は authenticated-measurement.yml の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
+          # 認証切れの通知は Mac の measurement-collect-local.sh の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
           # portfolio / 週次 NSM は観測日から鮮度を判定する。
           for SOURCE in a8 rakuten; do
             node .claude/scripts/measurement/restore.mjs "$SOURCE" --if-activated \

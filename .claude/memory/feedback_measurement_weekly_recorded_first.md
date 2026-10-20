@@ -4,7 +4,7 @@ description: ログインが要る計測は週次(木曜)に記録し、セッ�
 metadata:
   type: feedback
 ---
-ログインが要る取得元 (A8・楽天・note・KDP・GSC の画面) は週 1 回 (木曜 JST 18:20 の `authenticated-measurement.yml`、Mac は木曜 17:30 にログインを保つ) だけが取得して記録する。セッション中のエージェントは `data/authenticated/`・`data/affiliate/`・`data/nsm/` などの記録から判断し、Playwright / browser-use / Claude in Chrome で管理画面を開いて取りに行かない。記録が古ければ「判定不能 (最終観測日)」と書いて進める。
+ログインが要る取得元 (A8・楽天・note・KDP・GSC の画面) は週 1 回 (木曜 17:30 に Mac がその場でログインして取得する。ログインは Mac だけが持ち、CI へは渡さない。2026-10-20 に CI の取得を撤去) だけが取得して記録する。セッション中のエージェントは `data/authenticated/`・`data/affiliate/`・`data/nsm/` などの記録から判断し、Playwright / browser-use / Claude in Chrome で管理画面を開いて取りに行かない。記録が古ければ「判定不能 (最終観測日)」と書いて進める。
 
 **Why:** 毎日の取得はログインの維持と入り直しで毎回オーナーの手が止まった。セッション中のエージェントがすぐブラウザで情報を取りに行き、記録があるのに取り直していた (「記録してある情報から判断したらよいのに」)。
 

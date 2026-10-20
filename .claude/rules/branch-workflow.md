@@ -40,7 +40,7 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 | `workflow-dispatch-proxy.yml` の request 消費 | proxy で sync-snapshots 等を代理起動した直後 (PR #733) |
 | `blog-auto-publish.yml` の contents/blog outbox 掃除 | 記事を公開した直後 (PR #734) |
 | 週次のキーワード観測の記録 (`chore(seo): record seven-day keyword observations`) | PR を開いた後に自動で積まれ、開いている PR の先頭を奪う (PR #1147・2026-10-18。auto-merge が BLOCKED のまま止まった) |
-| 認証付き計測の記録 (`chore(metrics): authenticated measurement status`) | 計測スクリプトや `authenticated-measurement.yml` を変えて develop へ push すると push で計測が走り、記録を書き戻して開いている PR の先頭を奪う (PR #1161・2026-10-20。checks は全件 pass なのに必須の Code Quality Check が走らず BLOCKED) |
+| 認証付き計測の記録 (`chore(metrics): authenticated measurement status`) | 計測スクリプトや `authenticated-measurement.yml` を変えて develop へ push すると push で計測が走り、記録を書き戻して開いている PR の先頭を奪う (PR #1161・2026-10-20。checks は全件 pass なのに必須の Code Quality Check が走らず BLOCKED。この workflow は同日に撤去した) |
 
 **自動の手当て (2026-10-20〜)**: `pr-skip-ci-head-guard.yml` が `pull_request_target` (これは `[skip ci]` で止まらない) で PR の更新を受け、先頭コミットが `[skip ci]` 系なら `pr-quality-check.yml` を `workflow_dispatch` で develop に起動する (PR 番号と base SHA を inputs で渡す。GITHUB_TOKEN でも workflow_dispatch は run を作れる)。必須チェック「Code Quality Check」が先頭の SHA に付くので、手で push し直す必要は無い。`pull_request_target` は main の定義で動くので、**この見張り役は main にマージされてから効く**。契約テストは `pr-skip-ci-head-guard.test.cjs`。仕様の出典: [Skipping workflow runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)・[GITHUB_TOKEN](https://docs.github.com/en/actions/concepts/security/github_token) (2026-10-20 確認)。
 

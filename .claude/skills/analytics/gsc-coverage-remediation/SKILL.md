@@ -198,8 +198,8 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
 step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
 
-**認証付き週次CI (木曜)**: `authenticated-measurement.yml`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する。
-週次側はsource allowlistで入力だけを復元する。初回成功後は最新試行失敗・48時間超で停止し、古いgit入力へfallbackしない。
+**認証付きの週次取得 (木曜・Mac)**: `measurement-collect-local.sh`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する (2026-10-20 に CI から移した)。
+週次側はsource allowlistで入力だけを復元する。初回成功後は最新試行失敗・8日超で停止し、古いgit入力へfallbackしない。
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。

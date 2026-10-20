@@ -33,13 +33,6 @@ export const DEFAULT_MIN_STREAK = 2;
 //   2026-09-19 のページ品質監査 (スクショ検査) は時間切れで cancelled になり、2026-09-20 の週次フル検査は
 //   Issue 化ステップごと落ちたが、どちらも連続 1 回で止まっていて誰にも知らされなかった。
 export const SCHEDULE_CONTRACTS = Object.freeze({
-  // 2026-10-20 オーナー判断で週次にした。本取得は木曜 17:30 の Mac で、これはその予備 (木曜 JST 20:20)。
-  "authenticated-measurement.yml": Object.freeze({
-    firstExpectedAt: "2026-10-22T11:20:00Z",
-    intervalHours: 168,
-    graceHours: 6,
-    minStreak: 1,
-  }),
   "page-quality-audit-weekly.yml": Object.freeze({
     firstExpectedAt: "2026-09-26T18:00:00Z",
     intervalHours: 168,

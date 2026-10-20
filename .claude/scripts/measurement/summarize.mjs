@@ -9,8 +9,8 @@ const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;
 const previous = existsSync(output) ? JSON.parse(readFileSync(output, 'utf8')) : { sources: [] };
 const filenames = existsSync(input) ? readdirSync(input) : [];
-// この実行で取りに行った取得元 (カンマ区切り。未指定なら全部)。CI の予備は、木曜に Mac が pass した取得元を
-// 取り直さないので、取りに行かなかった取得元は前回の行をそのまま残す (MEASUREMENT-MAC-DIRECT-01)。
+// この実行で取りに行った取得元 (カンマ区切り。未指定なら全部)。Mac で一部の取得元だけを取り直したとき
+// (collect-local.mjs gsc など)、取りに行かなかった取得元は前回の行をそのまま残す。
 // 取りに行って失敗した取得元は、従来どおり前回の成功に戻さない。
 const requested = process.env.MEASUREMENT_SOURCES ? new Set(process.env.MEASUREMENT_SOURCES.split(',').filter(Boolean)) : null;
 const sources = Object.entries(SOURCES).map(([source, config]) => {
