@@ -90,6 +90,8 @@ updated: 2026-10-19
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21] [領域:管理]
 
+- **2026-10-20 統合 (行削除は backlog-loop)**: 計測を週次の Mac の取得へ一本化したので、このカードの目的 (認証付き CI の日次運用の実証) は無くなった。残る事実と手順は `MEASUREMENT-MAC-DIRECT-01` に移した。以下は経緯。
+
 - **2026-10-18 状態 (#1144)**: 10-17 08:32 の手動 run `39017739552` で KDP が認証切れ (`bootstrap-session.mjs kdp --login --reports --publish` で本人の再認証が要る)、note が `report_incomplete`。他の 6 取得元は pass。10-17 12:58 の run は success。
 
 - **2026-09-30 進捗 (商品の実売を配線)**: 9/28・9/29 の Mac 自動更新が A8・KDP で `no_credential` になっていた原因は、キーチェーンのアカウント名の先頭の全角スペース (A8・KDP) と KDP のパスワード空。オーナーの再登録待ち。
@@ -131,6 +133,18 @@ updated: 2026-10-19
 - **2026-10-19 ココナラ撤退**: ココナラを取得対象から外した (取得元 8 → 7、計測の鮮度の母数も 1 減る)。ココナラの日次の判定はこのカードの対象外。過去の観測は `data/authenticated/revenue-history.json` に残る。
 - **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
 - **2026-10-19 夜**: オーナーの準備 (afb の API キー・GSC のログイン) を後日に回したので、定期実行は CI の起動に戻した。切り替えの手順と残りは `MEASUREMENT-MAC-DIRECT-01`。
+
+### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を木曜の Mac の取得へ切り替え、2 週続けて全取得元 pass したら CI と Secrets を撤去する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-10-19] [期日:2026-11-05] [領域:管理]
+
+- **方針 (2026-10-20 オーナー判断)**: ログインが要る計測 (A8・楽天・note・KDP・GSC の画面) は、毎週木曜の夕方に Mac が取得して記録する。セッションのエージェントは記録から判断し、ブラウザで取りに行かない (`.claude/rules/recorded-measurement-first.md`。読むための操作は hook が止める)。切り替えは 10-22 (木) から。CI の取得は予備として残す。
+- **構成 (2026-10-20 実装)**: 木曜 17:30 の launchd `com.stats47.measurement-session-refresh` → `scripts/scheduled/measurement-session-refresh.sh` がログインを保つ (a8・kdp・note・rakuten。`--publish` で CI の予備にも渡す) → `measurement-collect-local.sh` が専用 clone `~/stats47-measurement` で `collect-local.mjs` を動かし、要約を develop へ push する。CI の `authenticated-measurement.yml` は木曜 20:20 JST に、Mac の記録が 12 時間以内なら Mac が pass しなかった取得元だけを取り直す (`summarize.mjs` は取りに行かなかった取得元の行を残す)。記録は 8 日間「今の値」として使う (`sources.mjs` の `MEASUREMENT_MAX_AGE_MS`。2 日のままだと日曜・月曜のアフィリエイト週次が木曜の記録を拒んでいた)。
+- **次 (Claude)**: 10-22 (木) の夜に、`~/Library/Logs/stats47/measurement-collect-local.log`・develop の「(Mac)」の記録コミット・`data/authenticated/latest.json` の各取得元・20:20 の CI が省略か予備か、を確かめる。CI 側の変更 (cron・予備の判定) は main の定義で動くので、10-22 17:00 JST までに develop→main をマージしてあることが前提 (オーナー確認のうえ)。
+- **次 (オーナー・帰国後)**: ① GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、⌘Q で終了する (Google は 2 段階認証のため自動ログインしない) ② KDP: TOTP の秘密鍵 `stats47-measurement-kdp-totp` をキーチェーンに登録し (任意)、`.local/authenticated-measurement/kdp.autologin-failed` を消して `node .claude/scripts/measurement/refresh-session.mjs kdp --headed` で入り直す ③ note: Mac の `note.autologin-failed` (10-17 から) を消して `refresh-session.mjs note --headed` で入り直す。
+- **次 (2 週続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
+- **引き継いだ事実 (旧 `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`)**: KDP の Reports は CI の入り直しで `login_failed` になる世代があり、そのときは本人の再認証が要る。note は短い集計期間で 1 記事が一覧に出ない欠けを、条件付きで既知の欠けとして pass にしている (`note-inventory.mjs` の `acceptedNoteGap`。値は null のまま)。KDP の速報売上・KENP は確定ロイヤリティや週次の純収益に入れない。
+- **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログ・artifact に出さない。
+- **完了条件**: Mac の定期実行で 2 週続けて (木曜 2 回) 全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -284,22 +298,63 @@ updated: 2026-10-19
 - **次**: CSS のハッシュが変わる次のデプロイで、reset step のログが新しいハッシュを確認してから全パージしたこと、route smoke の
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
+
+### [RECORD-SCHEMA-CONTRACT-01] 判断に使う記録に形の契約 (JSON Schema) と、書き込む前の検査を入れる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-20] [領域:管理]
+
+- **背景 (2026-10-20)**: セッションは管理画面を開かず、記録から判断する方針にした (`.claude/rules/recorded-measurement-first.md`)。これで記録が計測スクリプトとエージェントの境界になった。ところが `config/datasets.mjs` が schema を義務にしているのは kind が config・ledger の行だけで、判断に使う `data/authenticated/{latest,revenue-history}.json`・`data/measurement-cycle/latest.json`・`data/affiliate/{a8,rakuten}-results.json`・`data/nsm/weekly-snapshots/*.json` (kind は state・series) には形の契約が無い。書き手の変更で形が崩れても、読む側は気づかずに誤る。後続の `SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で書き手を作り直すときに、壊していないかを判定する基準にもなる。
+- **次**: ① 上の 6 データセットの schema を `config/schema/<台帳の id>.schema.json` に置く (既存の 27 本と同じく実データから推論し、必須はルートの項目と識別子に絞る) ② `.claude/scripts/lib/check-datasets.mjs` を「schema を宣言した行は kind を問わず検証する」に広げる ③ 書き手 (`measurement/summarize.mjs`・`metrics/build-measurement-cycle.mjs`・NSM の snapshot の書き出し・A8 と楽天の成果の書き出し) が、書く前に同じ ajv で検証し、合わなければ書かずに失敗する。
+- **停止条件**: 記録の形そのものは変えない (schema は今の形を固定するだけ)。
+- **完了条件**: 6 データセットの行に schema があり、`npm run check-datasets` がそれを検証し、書き手が検証してから書いている。
+
+### [SCRIPT-ISO-WEEK-UNIFY-01] ISO 週の計算 16 か所を 1 関数にまとめ、新しい自前の実装を検査で止める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **背景**: `SSOT-CONSOLIDATION-REST-01` ③ の調べで、スクリプトの ISO 週の計算が 16 ファイルにあり、月曜始まり・日曜締め・UTC・JST が混在している。計測を週次 (木曜に取得 → 金曜に集計 → 土曜にレビュー) に一本化したので、週の区切りがファイルごとに違うと、段ごとに別の週を見る誤りになりうる (実害はまだ確認していない)。
+- **次**: ① 16 か所の定義 (週の始まり・タイムゾーン・年またぎ) を表にする ② 意図が同じものを `.claude/scripts/lib` の 1 関数へ寄せ、意図が違うものは引数で選べるようにする ③ `check-maintenance-debt.cjs` に自前の ISO 週計算を止める規則を足す (baseline は縮小専用)。
+- **停止条件**: 記録のファイル名 (`YYYY-Www`) や表示が変わるものは、変えてよいとオーナーが決めるまで寄せない。
+- **完了条件**: 週の計算が共通の 1 関数と、理由を書いた例外だけになり、新しい自前の実装を検査が止める。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を Mac の直接取得へ切り替え、2 日 pass したら CI と Secrets を撤去する
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-19] [領域:管理]
+### [SCRIPT-GOOGLE-CLIENT-UNIFY-01] Google API の認証とクライアントの自前実装 15 ファイルを 1 か所にまとめる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
-- **経緯 (2026-10-19 オーナー承認)**: ログインは Mac が毎日保ち、そのセッションを CI へ運んで CI のブラウザで取得する遠回りの構成だった。KDP は CI でほぼ毎回 `auth_required` になり、CI の記録コミットが develop→main の PR の検査を止めた。Mac で直接取得する仕組みは実装済み (`.claude/scripts/measurement/collect-local.mjs`・`scripts/scheduled/measurement-collect-local.sh`・`collect.mjs --local --vault`・`vault.mjs` の `MEASUREMENT_VAULT_WRITER=mac`。定期実行専用の clone は `~/stats47-measurement` に作成済み)。同日の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
-- **次 (オーナー)**:
-  1. GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、`https://analytics.google.com` の表示を確かめて、その Chrome を ⌘Q で終了する (Google は 2 段階認証のため自動ログインしない)。
-  2. ~~afb~~ **不要 (2026-10-19 集約の判断。`ASP-CONSOLIDATE-A8-RAKUTEN-01` ③ で afb を計測の取得元から外す。外すまでは afb が `api_key_missing` で失敗に記録されるので、「2 日続けて全取得元 pass」は ③ の後に数える)**。旧手順: 管理画面で API キー (認証トークン。9 月に GitHub Secret `AFB_API_KEY` に登録したもの) を確かめ、`security add-generic-password -s stats47-measurement-afb-api -a afb -w` でキーチェーンに入れる。
-  3. KDP: `.local/authenticated-measurement/kdp.autologin-failed` を消し、`node .claude/scripts/measurement/refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。
-- **次 (Claude・上の 1〜2 の後)**: clone を origin/develop に揃えてから、clone で `node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 afb gsc` を実行し、afb と GSC が pass することを確かめる。そのうえで `scripts/scheduled/measurement-session-refresh.sh` の最後の行を `measurement-collect-local.sh` を呼ぶ形に戻し、`measurement.test.mjs` の wrapper の検査も合わせる。
-- **次 (2 日続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
-- **2026-10-20 オーナー判断 (週次化)**: 認証付き計測は毎日ではなく**毎週木曜** (CI 18:20 JST、Mac のログイン維持 17:30) に取る。セッション中のエージェントは記録から判断し、ブラウザで取りに行かない (`.claude/rules/recorded-measurement-first.md`)。これに合わせて、この先の手順を次のように読み替える: ① GSC の Chrome ログインは出発前の必須作業から外す (API の検索実績は取れ、止まるのは除外理由の内訳だけ。帰ってから週次の作業で入る) ② KDP は再ログインの代わりに TOTP の秘密鍵 `stats47-measurement-kdp-totp` をキーチェーンに登録する (未登録・2026-10-20 確認。ID/PW は登録済み) と `kdp.autologin-failed` の削除で、自動で入り直せるようにする ③ 「2 日続けて全取得元 pass」は「2 週続けて (木曜の 2 回)」と読む ④ KDP の書籍別の日次注文は「昨日」タブなので週 1 日分しか残らない。「過去 7 日間」タブへの切り替えはログインした画面で確かめてから行う (売上は月次ロイヤリティの累計で取るので欠けない)。
-- **注意**: 切り替えた日に afb や GSC が失敗すると、CI の予備は「その日は取得済み」で省略するので、その日の分が欠ける。1〜2 が済む前に切り替えない。
-- **完了条件**: Mac の定期実行で 2 日続けて全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
+- **背景 (2026-10-20 実測)**: `new GoogleAuth`・`google.auth.*`・`JWT(` を自前で書くスクリプトが 15 ファイル (metrics・gsc・google-admin・ads・note・sns・search-growth・lib) あり、GA4 の `runReport` を呼ぶファイルは 12。認証方式・スコープ・再試行がファイルごとに違い、資格情報の扱いを変えるたびに 15 か所を直すことになる。
+- **次**: `RECORD-SCHEMA-CONTRACT-01`・`SCRIPT-ISO-WEEK-UNIFY-01` の後に、`.claude/scripts/metrics/lib/gsc-query.mjs`・`ga4-query.mjs` を土台にして、認証とクライアントの生成を `.claude/scripts/lib` の 1 モジュールへ寄せる。呼び出し側は 1 ファイルずつ置き換える。
+- **停止条件**: 取得する値と記録の形を変えない。置き換えるたびに、既存のテストと 1 回の read-only 実行で同じ結果になることを確かめる。
+- **完了条件**: Google API の認証を書くのが共通モジュールだけになり、新しい自前の実装を検査が止める。
 
+### [SCRIPT-LIB-CHECKJS-01] スクリプトの共通部品に型検査 (@ts-check と、範囲を絞った tsc --checkJs) をかける
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **背景 (2026-10-20 実測)**: サイト本体 (apps・packages) の tsconfig 25 個はすべて strict だが、`.claude/scripts` は 753 ファイル中 641 が型の無い JS (mjs 539・cjs 101) で、`@ts-check` は 0。計測・記録・改善を回す部品が型の外にある。
+- **次**: 全部を TS に書き換えることはしない。共通部品 (`.claude/scripts/lib`・`measurement`・`metrics/lib` と、`SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で寄せた関数) に `// @ts-check` と JSDoc を付け、この範囲だけを対象にする tsconfig (allowJs・checkJs・noEmit) を作って `npm run type-check` に足す。重複を減らしてから型を付けるので、上の 2 枚の後に行う。
+- **停止条件**: 型を通すために挙動を変えない。対象範囲は広げるだけで縮めない。
+- **完了条件**: 対象範囲が型検査を通り、CI で検査されている。
+
+### [AGENT-THIN-CROSSCUT-01] 全体に効く規約をエージェントの本文から paths 付き rules へ移し、本文を役割・入出力・担当に絞る
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **背景 (2026-10-20)**: 「記録から判断する」方針を 1 つ足すのに、エージェント 10 体とスキル 4 本を書き換えた。全体に効く規約がエージェントの本文に書き写されているので、規約を 1 つ変えるたびに多くのファイルを直すことになり、写し漏れは矛盾になる (同日の調査で、6 体の本文の手順が、後から足した記録の節と食い違っていた)。
+- **次**: ① 複数のエージェントに同じ文言で載っている節を一覧にする (`.claude/scripts/lib/check-agent-skill-consistency.cjs` の走査を流用) ② それを paths 付き rules か hook へ移し、本文には参照の 1 行だけを残す ③ 同じ節を本文へ写し直すことを整合検査で止める。スクリプトの入口が固まった後に書き直すほうが 1 回で済むので、`SCRIPT-LIB-CHECKJS-01` の後に行う。
+- **停止条件**: 担当範囲 (owner) と排他の書き手の記述は動かさない。系統は残す (2026-10-11 オーナー判断)。
+- **完了条件**: 横断の節がエージェントの本文から無くなり、写し直しを検査が止める。
+
+### [MODEL-USAGE-COVERAGE-01] エージェントの利用記録を Windows と CI の無人実行まで広げ、4 週分たまったら統合候補を決める
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **背景 (2026-10-20 実測)**: エージェントの定義は 61 体ある。Mac の利用記録 (`.claude/state/metrics/model-usage/local-mac.json`、W29〜W42 に Agent ツールで起動した分) で起動されたのは 6 種 (article-writer 11 回・blog-critic 8 回・note-critic 4 回など) で、57 体は記録上 0 回だった。ただし Windows の記録 (`local-windows.json`) は空で、CI の無人実行も数えていないので、「使われていない」とは判断できない。
+- **次**: ① Windows で `.claude/scripts/model-usage/collect-local-usage.mjs` の記録が空になる原因を直す ② CI の無人 Claude (improvement-cycle など) の起動も同じ形で記録する ③ 4 週分たまったら、起動 0 回の体を統合候補として一覧にし、オーナーが決める。
+- **停止条件**: 記録が 4 週分そろうまで、エージェントの定義を消さない。系統は残し、系統の中の重複だけを減らす (2026-10-11 オーナー判断)。
+- **完了条件**: 3 環境の 4 週分の記録があり、統合候補の一覧とオーナーの判断が出ている。
+
+### [SNS-X-METRICS-WEEKLY-01] X の指標を週次で記録する定期実行を作り、管理画面を読みに行く操作を止める hook の対象に X を加える
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]
+
+- **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。同日に、セッションが管理画面を読みに行く操作を hook で止めたが、X は代わりに読む記録が無いので対象から外した。
+- **次**: X の指標を週 1 回 (認証付き計測と同じ木曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
+- **完了条件**: X の指標が週次で記録され、セッションがブラウザで取りに行く必要が無くなっている。
 
 ### [ASP-CONSOLIDATE-A8-RAKUTEN-01] アフィリエイトを A8 と楽天 (直接) に集約し、もしも・afb・バリューコマースの配信と計測を止める
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:アフィリエイト]
@@ -4494,7 +4549,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **候補 (上ほど優先)**:
   1. Windows で別の Playwright profile を読む可能性がある絶対パス直書き: `.claude/skills/sns/publish-x/check-x-scheduled.ts`・`.claude/skills/sns/update-x-profile/update-x-profile.cjs` (publish-x と profile を共有するため見送った)。
   2. 県名の短縮処理 9 か所 (data-configs `seo-meta-facts.ts`・`area-axis.ts`、product-factory、svg-builder、remotion)。北海道を「北海」にする箇所としない箇所が混在するので、`@stats47/area` に意図を引数で選べる関数を作ってから寄せる。
-  3. スクリプトの小さな重複ヘルパー: ISO 週計算 16 ファイル (月曜始まり・日曜締め・UTC/JST が混在)、JST 変換 27、getArg 52、fetchText 20、dotenv 読み込み 27、ブラウザ起動引数 16。挙動の差を一覧にしてから共通化するか決める。
+  3. スクリプトの小さな重複ヘルパー: ISO 週計算 16 ファイル (月曜始まり・日曜締め・UTC/JST が混在。2026-10-20 に `SCRIPT-ISO-WEEK-UNIFY-01` へ分け、Google API の認証 15 ファイルも `SCRIPT-GOOGLE-CLIENT-UNIFY-01` に起票した)、JST 変換 27、getArg 52、fetchText 20、dotenv 読み込み 27、ブラウザ起動引数 16。挙動の差を一覧にしてから共通化するか決める。
   4. データ表の重複: `apps/ges/scripts/data/ports.json` と `packages/area/src/data/ports.json` (キー形式・精度差)、県庁所在地の座標 3 か所 (精度差)、`databook-xlsx.ts` のカテゴリ名 (CATEGORIES と名称がずれており、寄せると Excel のシート名が変わる)、migration-flow の theme、8・10 区分の地方区分。
   5. remotion の一部・svg-builder・product-factory・ges・migration-flow は `@stats47/area` などを依存に持たず県リスト等を再定義している。依存を足すか (package-lock の更新を伴う) を決める。
 - **trigger**: 上のどれかを触る改修が入るとき、または同じ値の不一致で不具合が出たとき。
@@ -4793,6 +4848,14 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 追跡すべきものを除外していないか、除外すべきもの（生成物・秘密・大きいバイナリ）を追跡していないかを点検する。git の外の側は `npm run check-local-data`（LOCAL-DATA.md）で申告済みなので、ここでは追跡されている側を見る。（出典: obsidian の TODO マスタ ^t-0024・2026-09-28 のメモを3リポへ展開・2026-10-19）
 
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [WEB-ANY-RATCHET-01] apps・packages の `any` を増やさない検査を入れる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **背景 (2026-10-20 実測)**: tsconfig 25 個はすべて strict だが、`any` を含むファイルがテストを除いて 61 ある。
+- **trigger**: `any` を含むファイルを触る改修が入るとき、または `any` が原因の型の取りこぼしで不具合が出たとき。
+- **次**: 今の件数を baseline にして、増えたら `check-maintenance-debt.cjs` が止める (baseline は縮小専用)。触ったファイルの `any` はその改修で型に置き換える。
+- **完了条件**: 増加を検査が止めている。
 
 ### [SNS-KAKEI-EXPANSION-01] 家計調査のnote・サイト内容をX・Instagramへ展開する（再開指示待ち）
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:SNS]
