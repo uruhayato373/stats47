@@ -75,3 +75,9 @@ Google Search Console の専任 agent。検索実績、URL Inspection、画面�
 例外: **Template C** (report) を使う場面
 - URL Inspection 結果分析 (個別 URL の coverageState / pageFetchState から原因推定)
 - 画面監査・是正の引き渡し (`/gsc-improvement` の観測/本番確認/Google検証/残カード/期日の契約に従う)
+
+## 記録から判断する (2026-10-20)
+
+管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
+セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
+例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。

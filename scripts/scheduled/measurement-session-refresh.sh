@@ -1,6 +1,6 @@
 #!/bin/bash
 # measurement-session-refresh.sh — A8 / もしも / KDP / note の計測ログインと X の予約投稿用ログインを保ち、その直後に CI の収集を起動する
-# (launchd 毎日 17:30 + ログイン時)。
+# (launchd 毎週木曜 17:30。2026-10-20 に毎日 + ログイン時から週次へ変えた。セッション中のエージェントはここで記録したデータから判断する)。
 # 切れていればキーチェーンの ID/PW で 1 回だけ再ログインし、CI の Secret を更新する。
 # 2FA/CAPTCHA/失敗は突破せず停止して Mac に通知する。詳細: .claude/scripts/measurement/refresh-session.mjs
 #

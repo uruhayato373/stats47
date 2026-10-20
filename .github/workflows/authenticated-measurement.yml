@@ -9,7 +9,7 @@ on:
         required: false
         type: string
   schedule:
-    - cron: '20 9 * * *' # JST 18:20; before weekly metric consumers
+    - cron: '20 9 * * 4' # 木曜 JST 18:20 (2026-10-20 に週次化)。金曜 05:00 の週次計測サイクルより前に記録する
   push:
     branches: [develop]
     paths: ['.github/workflows/authenticated-measurement.yml']
@@ -22,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # 定期実行は Mac が起動した収集の補助。Mac の refresh-session (毎日 17:30 JST) がログインし直した直後に
+  # 定期実行は Mac が起動した収集の補助。Mac の refresh-session (毎週木曜 17:30 JST。2026-10-20 に週次化) がログインし直した直後に
   # 収集を起動するので、その日すでに収集済みなら定期実行は何もしない。もしものセッションは数時間で切れ、
   # 定期実行は予定より 4〜5 時間遅れて動くため、遅い定期実行が同日の成功を auth_required で上書きしていた
   # (2026-09-26 は 17:31 に渡したセッションで 22:47 に失敗、2026-09-27 は 42 分後の手動収集で成功)。
