@@ -4,6 +4,7 @@ const storage = vi.hoisted(() => ({ read: vi.fn() }));
 vi.mock('../../../../.claude/scripts/media/lib/storage.mjs', () => ({ readVerified: storage.read }));
 import { GET } from '@/app/api/template-samples/[id]/route';
 import { RANKING_SAMPLE_ASSETS } from '@/lib/template-ranking-assets';
+import { TREND_SAMPLE_ASSETS } from '@/lib/template-trend-assets';
 describe('ranking basic-form PNG endpoint', () => {
   let savedPng: Buffer;
   beforeAll(async () => {
@@ -26,7 +27,14 @@ describe('ranking basic-form PNG endpoint', () => {
     expect(response.status).toBe(404);
     expect(storage.read).not.toHaveBeenCalled();
   });
-  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map'])('%s fails when the saved PNG cannot be verified, without regeneration or a reference-image fallback', async (id) => {
+  it('serves the exact stored trend PNG using the same endpoint as ranking samples', async () => {
+    storage.read.mockResolvedValue(savedPng);
+    const response = await GET(new Request('http://localhost/api/template-samples/engel-trend'), { params: Promise.resolve({ id: 'engel-trend' }) });
+    expect(response.status).toBe(200);
+    expect(storage.read).toHaveBeenCalledExactlyOnceWith(TREND_SAMPLE_ASSETS['engel-trend'].png);
+    expect(Buffer.from(await response.arrayBuffer())).toEqual(savedPng);
+  });
+  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend'])('%s fails when the saved PNG cannot be verified, without regeneration or a reference-image fallback', async (id) => {
     storage.read.mockRejectedValue(Error('saved PNG missing or SHA mismatch'));
     const response = await GET(new Request('http://localhost/api/template-samples/' + id), { params: Promise.resolve({ id }) });
     expect(response.status).toBe(502);

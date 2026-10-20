@@ -53,13 +53,19 @@ describe('fixed real-statistic sample resolution', () => {
     expect(resolveStatisticalSamples([unrelated]).find((s) => s.id === 'tokyo-osaka')!.media).toEqual({});
     expect(result.find((s) => s.id === 'household-radar')!.media).toEqual({});
   });
-  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map'])('uses generated %s for all four media without article inventory', (id) => {
+  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend'])('uses generated %s for all four media without article inventory', (id) => {
     const media = resolveStatisticalSamples([]).find((s) => s.id === id)!.media;
     expect(Object.keys(media)).toEqual(['note', 'web', 'x', 'instagram']);
     expect(media.note).toMatchObject({ src: '/api/template-samples/' + id, kind: 'trial', width: 1080, height: 1350 });
     expect(media.web).toEqual(media.note);
     expect(media.x).toEqual(media.note);
     expect(media.instagram).toEqual(media.note);
+  });
+  it('binds the trend sample to Engel data and its own trend domain', () => {
+    const sample = resolveStatisticalSamples([]).find((s) => s.id === 'engel-trend')!;
+    expect(sample.binding?.metricKey).toBe('engel-coefficient');
+    expect(sample.binding?.dataKey).toBe('app/stats/engel-coefficient/values.json');
+    expect(sample.binding?.visualization.trendDomain).toEqual({ mode: 'extent', padding: 0.08 });
   });
   it('keeps the recorded published originals as visible layout references without guessing other images', () => {
     const note = household('note', { id: 'IMG-13e4c802056bd58faa30fc45', pageUrl: 'https://note.com/example' });
