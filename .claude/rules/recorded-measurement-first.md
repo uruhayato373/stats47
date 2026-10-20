@@ -63,7 +63,7 @@ paths:
    読み取りスクリプトの実行と browser-use での管理画面は `.claude/hooks/pre-bash-safety.js` が止め、代わりに読む記録を返す。
    判定と対象の画面・スクリプトの一覧は `.claude/scripts/measurement/admin-read-guard.mjs`。例外 3 のうち「オーナーが頼んだ」ときは、
    `node .claude/scripts/measurement/admin-read-guard.mjs --allow "<オーナーの依頼の引用>"` で 60 分だけ通す (引用は `.local/` のログに残る)。
-   投稿・申請・出品の画面は対象にしていない。X の分析画面は週次の記録が無いので対象外 (`SNS-X-METRICS-WEEKLY-01`)。
+   投稿・申請・出品の画面は対象にしていない。X の分析画面は週次の記録が無いので対象外 (`X-METRICS-WEEKLY-RECORD-01`)。
 
 ## 既知の制約
 

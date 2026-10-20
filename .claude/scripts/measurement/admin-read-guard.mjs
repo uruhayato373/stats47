@@ -29,7 +29,7 @@ const where = (specs) => specs.map((spec) => {
 const GSC_API = 'ページ×検索語はログイン不要の node .claude/scripts/metrics/gsc-query.mjs';
 const GA4_API = '細かい粒度はログイン不要の node .claude/scripts/metrics/ga4-query.mjs';
 
-/** 読むための管理画面と、代わりに読む記録。X は週次の記録が無いので対象外 (SNS-X-METRICS-WEEKLY-01) */
+/** 読むための管理画面と、代わりに読む記録。X は週次の記録が無いので対象外 (X-METRICS-WEEKLY-RECORD-01) */
 export const ADMIN_READ_PAGES = [
   { name: 'A8', pattern: /^https?:\/\/(pub|www)\.a8\.net\//i, records: where(['a8.results', 'a8.catalog']) },
   { name: '楽天アフィリエイトのレポート', pattern: /^https?:\/\/affiliate\.rakuten\.co\.jp\/report/i, records: where(['rakuten.results']) },
