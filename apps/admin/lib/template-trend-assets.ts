@@ -14,9 +14,9 @@ export const TREND_SAMPLE_ASSETS = {
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/44e7500e731b34ffe20d24a30eabe91094eaffb48e4738a7aa342196ab3b8461.json",
-      "sha256": "44e7500e731b34ffe20d24a30eabe91094eaffb48e4738a7aa342196ab3b8461",
-      "bytes": 11223
+      "key": "media-workspace/inputs/071a38e02373af8b829262f35de260f6bbc2f0354dece830657e4fcc7a0e978a.json",
+      "sha256": "071a38e02373af8b829262f35de260f6bbc2f0354dece830657e4fcc7a0e978a",
+      "bytes": 100295
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

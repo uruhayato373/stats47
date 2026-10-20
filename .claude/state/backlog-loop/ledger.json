@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T08:19:40.291Z",
+  "updatedAt": "2026-10-20T04:13:37.545Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7914,6 +7914,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-19T08:19:40.291Z"
+    },
+    "METRIC-PRESENTATION-UNIFY-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "指標定義・サイト・D3・画像の共通型と軸・配色計算を統合する",
+      "attempts": [
+        {
+          "at": "2026-10-20T04:13:37.545Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check",
+              "npm run metrics:check",
+              "npm run test:image-pipeline",
+              "npm run docs:check",
+              "npm run samples:publish --workspace apps/admin -- --apply",
+              "npm run samples:publish:trend --workspace apps/admin -- --apply"
+            ],
+            "pass": true
+          },
+          "evidence": "f48e4de023: shared types/domain/color resolvers integrated with data/metrics and Web/D3/SVG/Admin/Remotion. 25 workspaces + 8 script groups type-check PASS; 2643 metric contracts PASS; renderer/parser tests PASS (SVG retains 7 preexisting expected failures). Commit hooks PASS. Fo",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-20T04:13:37.545Z"
     }
   }
 }
