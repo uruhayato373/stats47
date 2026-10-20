@@ -157,3 +157,4 @@
 - [feedback_portfolio_keep_decision_2026_10.md](feedback_portfolio_keep_decision_2026_10.md) — 2026-10-11 オーナー判断: SNS・テーマ/Geo/調査・商品は継続。簡素化は系統撤退でなく系統内の未使用・誤報・失敗の是正で行う。消す前に importer を全 workspace で数える
 - [feedback_note_editor_autosave_drafts.md](feedback_note_editor_autosave_drafts.md) — noteエディタは操作を自動保存して下書きを作る。選択確認前にDeleteしない・編集途中で長く待たない。大量操作で公開APIが403
 - [feedback_coconala_edit_needs_v2_delivery.md](feedback_coconala_edit_needs_v2_delivery.md) — ココナラ P-* の --commit 編集は納品版 v2 が .local にある PC でしか通らない。Mac 再生成はハッシュ不一致
+- [feedback_windows_npm_install_rolldown_binding.md](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
