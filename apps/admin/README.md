@@ -136,6 +136,8 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 
 基本形ページのURLは `purpose` / `template` / `q` のみ。旧 `topic` / `medium` / `sample-<媒体>` / `ratio-<媒体>` / `selection` / 媒体充足条件は除去し、記事を選ばず同じ型へ戻す。使用先へのリンクは型・目的と `returnTo` を渡す。分類待ち・用途確認待ちは画像ライブラリへ案内する。
 
+ランキング3型の見本PNGはprivate R2 `media-workspace/images/<sha>.png` に固定保存する。`lib/template-ranking-assets.ts` は保存済みPNGと根拠manifestの参照（bucket/key/SHA/bytes）を持ち、GETは照合済みPNGだけを返す。閲覧時には生成・保存しない。元データの私有コピー、描画SVG、PNG、生成コードのcommitとソース、実行環境は同じR2のSHA付きオブジェクトとして保全する。入力や型を改訂するときは `npm run samples:publish --workspace apps/admin` で3型を確認し、`-- --apply` で明示保存する。全ファイルの保存後照合が成功してからGit参照を一括更新する。4媒体は同じ保存PNGを共有し、採用・公開状態は変更しない。
+
 「ランキング → 棒グラフ」は `lib/template-ranking-bars.ts` の共通基本形を4媒体で表示する。代表統計は2024年の最高気温（日最高気温の月平均の最高値）。`lib/template-ranking-data.ts` に固定した正典R2入力のSHA・バイト数を照合し、全47県から上位5県・下位5県を順位のまま抜粋する。全47県共通の実測最小〜最大・同じ青の横棒を縦積みにした1080×1350の1枚。軸目盛りと目盛線は置かず、順位・県名・薄い背景の棒・右端の数値を分離する。公開済みnoteの最高気温図とInstagramの副業者割合図を下部に固定表示し、既存の読みやすい配置を参照できるようにする。`GET /api/template-samples/maximum-temperature-bars` はこの定義をPNGへ描画するだけで、記事・画像・投稿台帳を書き換えない。入力照合失敗を旧図への置換で隠さず、エラーにする。原本の修正・採用・公開は別工程。
 
 「ランキング → テーブル」は `lib/template-ranking-table.ts` が同じ実統計の上位10県を順位・都道府県・数値の3列で描画する。棒や軸は置かず、県名は左、数値は右に揃える。全47県の入力検査とSHA照合は棒グラフと共用し、`GET /api/template-samples/maximum-temperature-table` から4媒体共通の1080×1350 PNGを表示する。既存の食品支出の参考図も追加見本として保持する。
