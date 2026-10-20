@@ -77,9 +77,10 @@ export function generateTypeSchemas(
       const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
       if (!declaration)
         throw new Error('Property declaration missing: ' + symbol.name);
-      properties[symbol.name] = convert(
-        checker.getTypeOfSymbolAtLocation(symbol, declaration)
-      );
+      const propertyType = checker.getTypeOfSymbolAtLocation(symbol, declaration);
+      // Optional never forbids a key in a discriminated union; JSON cannot contain undefined.
+      if (propertyType.flags & (ts.TypeFlags.Undefined | ts.TypeFlags.Never)) continue;
+      properties[symbol.name] = convert(propertyType);
       if (!(symbol.flags & ts.SymbolFlags.Optional)) required.push(symbol.name);
     }
     const indexType = checker.getIndexTypeOfType(type, ts.IndexKind.String);

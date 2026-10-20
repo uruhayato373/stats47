@@ -1,3 +1,9 @@
+import {
+  resolveChartDomain,
+  resolveSymmetricDomain,
+  resolveColorEncoding,
+  niceTicks,
+} from '@stats47/types';
 import React, { useMemo } from "react";
 import {
   AbsoluteFill,
@@ -296,16 +302,14 @@ const MigrationLineChart: React.FC<{
 
   // --- Line chart Y-axis ---
   const lineValues = ts.flatMap((d) => [d.moversIn, d.moversOut]);
-  const lineMin = Math.min(...lineValues);
-  const lineMax = Math.max(...lineValues);
-  const lineMargin = (lineMax - lineMin) * 0.12;
-  const lineYTicks = niceAxisTicks(lineMin - lineMargin, lineMax + lineMargin, 5);
-  const lineYMin = lineYTicks[0];
-  const lineYMax = lineYTicks[lineYTicks.length - 1];
+  const lineDomain = resolveChartDomain(lineValues, {mode:'extent',padding:0.12});
+  if (!lineDomain) throw new Error('No finite migration observations');
+  const [lineYMin, lineYMax] = lineDomain;
+  const lineYTicks = niceTicks(lineYMin, lineYMax, 5);
 
   // --- Bar chart Y-axis ---
   const netValues = ts.map((d) => d.netMigration);
-  const netAbsMax = Math.max(...netValues.map(Math.abs)) || 1;
+  const netAbsMax = resolveSymmetricDomain(netValues)?.[1] ?? 1;
   const barYMax = netAbsMax * 1.2;
   const barZeroY = BAR_CHART_H / 2;
 
@@ -733,26 +737,19 @@ const IntroSlide: React.FC<{
   }, [entries]);
 
   const values = entries.map((e) => e.value);
-  const vMin = Math.min(...values);
-  const vMax = Math.max(...values);
-
+  const mapScale = resolveColorEncoding(
+    { colorSchemeType: 'diverging', divergingMidpoint: 'zero' }, values,
+    (position) => {
+      if (position >= 0.5) {
+        const t = (position - 0.5) * 2;
+        return 'rgb(' + Math.round(110 - 76 * t) + ',197,' + Math.round(140 - 46 * t) + ')';
+      }
+      const t = 1 - position * 2;
+      return 'rgb(' + Math.round(220 + 19 * t) + ',' + Math.round(140 - 72 * t) + ',' + Math.round(140 - 72 * t) + ')';
+    }, colors.muted + '33',
+  );
   function tileColor(id: number): string {
-    const v = valueMap.get(id);
-    if (v === undefined) return colors.muted + "33";
-    if (v >= 0) {
-      // Green: light green (low) → deep green (high)
-      const t = Math.min(v / Math.max(vMax, 1), 1);
-      const r = Math.round(34 + (110 - 34) * (1 - t));
-      const g = Math.round(197 + (190 - 190) * (1 - t));
-      const b = Math.round(94 + (140 - 94) * (1 - t));
-      return `rgb(${r},${g},${b})`;
-    }
-    // Red: light red (low) → deep red (high)
-    const t = Math.min(Math.abs(v) / Math.max(Math.abs(vMin), 1), 1);
-    const r = Math.round(239 + (220 - 239) * (1 - t));
-    const g = Math.round(68 + (140 - 68) * (1 - t));
-    const b = Math.round(68 + (140 - 68) * (1 - t));
-    return `rgb(${r},${g},${b})`;
+    return mapScale.colorAtValue(valueMap.get(id) ?? NaN);
   }
 
   // Tile grid rendering

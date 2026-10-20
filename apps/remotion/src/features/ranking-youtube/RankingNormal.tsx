@@ -1,3 +1,4 @@
+import { resolveColorEncoding, type MetricPresentation } from '@stats47/types';
 import React, { useMemo } from "react";
 import {
   AbsoluteFill,
@@ -12,7 +13,6 @@ import {
 } from "remotion";
 import type { TileGridCell } from "@stats47/visualization";
 import { formatValueWithPrecision } from "@stats47/utils";
-import { scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
 import { NormalIntro } from "./NormalIntro";
@@ -112,14 +112,9 @@ function getInterpolator(name: string): (t: number) => string {
   return chromatic.interpolateBlues;
 }
 
-function buildColorScale(entries: RankingEntry[], scheme = "interpolateBlues") {
+function buildColorScale(entries: RankingEntry[], scheme = "interpolateBlues", presentation?: MetricPresentation) {
   const values = entries.map((e) => e.value);
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  const interpolator = getInterpolator(scheme);
-  const wrapped = (t: number) => interpolator(0.25 + t * 0.75);
-  const colorScale = scaleSequential(wrapped).domain([minVal, maxVal]);
-  return (value: number) => colorScale(value);
+  return resolveColorEncoding(presentation ?? {colorSchemeType:'sequential'}, values, getInterpolator(presentation?.colorScheme ?? scheme), '#e0e0e0').colorAtValue;
 }
 
 function getContrastTextColor(bgColor: string): string {
@@ -537,8 +532,8 @@ const RankingMainBody: React.FC<RankingMainBodyProps> = ({
 
   const entryMap = useMemo(() => buildEntryMap(entries), [entries]);
   const getColor = useMemo(
-    () => buildColorScale(entries, colorScheme),
-    [entries, colorScheme]
+    () => buildColorScale(entries, colorScheme, meta.presentation),
+    [entries, colorScheme, meta.presentation]
   );
 
   // 現在どの都道府県を表示中か

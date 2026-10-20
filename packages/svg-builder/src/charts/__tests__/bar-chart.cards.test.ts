@@ -42,6 +42,7 @@ describe('mobile editorial ranking cards', () => {
       source: '総務省',
       unit: '％',
       layout: 'mobile',
+      showBars: false,
     });
 
     expect(svg).toContain('width="640" height="960" viewBox="0 0 640 960"');

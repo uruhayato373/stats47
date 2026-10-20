@@ -1,4 +1,6 @@
+import type { ChartSeriesData } from '@stats47/types';
 import type { BaseD3ChartProps, MarginProps } from "../../types/base";
+import type { TimeSeriesDataNode } from '@stats47/types';
 
 /**
  * 時系列データノード（折れ線グラフ用）
@@ -6,22 +8,10 @@ import type { BaseD3ChartProps, MarginProps } from "../../types/base";
  * X軸は categoryKey で指定したキー、Y軸は valueKey または series[].dataKey で指定。
  * ダッシュボードからは { yearCode, year, value } や { yearCode, year, "男性", "女性" } が渡される。
  */
-export interface TimeSeriesDataNode {
-  /** X軸のカテゴリ値（年度コード等） */
-  category?: string;
-  /** X軸の表示ラベル（年度名等） */
-  label?: string;
-  /** 主値（単一系列） */
-  value?: number;
-  /** 複数系列用の追加値 */
-  [key: string]: string | number | undefined;
-}
+export type { TimeSeriesDataNode } from '@stats47/types';
 
 /** 系列の設定 */
-export interface LineSeriesConfig {
-  dataKey: string;
-  name: string;
-  color: string;
+export interface LineSeriesConfig extends ChartSeriesData {
   /**
    * 線を破線にする SVG の stroke-dasharray（例 `"6,4"`）。省略時は実線。
    *

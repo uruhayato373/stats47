@@ -1,7 +1,19 @@
 "use client";
 
+import { resolveChartDomain, numericSeriesValues } from '@stats47/types';
+
 import { cn } from "@stats47/components";
-import { schemeTableau10, select, scalePoint, scaleLinear, line, axisBottom, axisLeft, axisRight, pointer } from "d3";
+import {
+  schemeTableau10,
+  select,
+  scalePoint,
+  scaleLinear,
+  line,
+  axisBottom,
+  axisLeft,
+  axisRight,
+  pointer,
+} from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -133,27 +145,11 @@ export function LineChart({
     const rightSeries = seriesToDraw.filter((s) => s.yAxis === "right");
     const leftSeries = seriesToDraw.filter((s) => s.yAxis !== "right");
 
-    const domainOf = (keys: string[]): [number, number] => {
-      const values = data.flatMap((d) =>
-        keys.map((k) => d[k]).filter((v): v is number => typeof v === "number"),
-      );
-      const min = values.length ? Math.min(...values) : 0;
-      const max = values.length ? Math.max(...values) : 0;
-      return [Math.min(0, min), max];
-    };
-
-    const y = scaleLinear()
-      .domain(yDomainProp ?? domainOf(leftSeries.map((s) => s.dataKey)))
-      .range([height - marginBottom, marginTop]);
-    if (!yDomainProp) y.nice();
-
-    // yDomainProp は左軸専用 (右軸は常に自動スケール)
-    const yRight = hasRightAxis
-      ? scaleLinear()
-          .domain(rightYDomain ?? domainOf(rightSeries.map((s) => s.dataKey)))
-          .range([height - marginBottom, marginTop])
-      : null;
-    if (yRight && !rightYDomain) yRight.nice();
+    const leftDomain = resolveChartDomain(numericSeriesValues(data, leftSeries.map(s => s.dataKey)), {mode: 'extent'}, yDomainProp);
+    const rightDomain = resolveChartDomain(numericSeriesValues(data, rightSeries.map(s => s.dataKey)), {mode: 'extent'}, rightYDomain);
+    if (!leftDomain && !rightDomain) return;
+    const y = scaleLinear().domain(leftDomain ?? rightDomain!).range([height - marginBottom, marginTop]);
+    const yRight = hasRightAxis && rightDomain ? scaleLinear().domain(rightDomain).range([height - marginBottom, marginTop]) : null;
 
     // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
@@ -177,12 +173,11 @@ export function LineChart({
     const lineFn = line<TimeSeriesDataNode>().x((d) => x(String(d[categoryKey])) ?? 0);
 
     seriesToDraw.forEach((s) => {
-      const filtered = data.filter((d) => d[s.dataKey] != null);
       const scale = scaleFor(s);
-      const pathLine = lineFn.y((d) => scale(Number(d[s.dataKey])));
+      const pathLine = lineFn.defined(d => typeof d[s.dataKey] === 'number' && Number.isFinite(d[s.dataKey])).y((d) => scale(Number(d[s.dataKey])));
       svg
         .append("path")
-        .datum(filtered)
+        .datum(data)
         .attr("fill", "none")
         .attr("stroke", s.color)
         .attr("stroke-width", 1.5)
@@ -285,7 +280,7 @@ export function LineChart({
     seriesToDraw.forEach((s) => {
       // 比較系列は点を描かない (主系列の点と混ざって読みづらくなるため)
       if (s.hidePoints) return;
-      const filtered = data.filter((d) => d[s.dataKey] != null);
+      const filtered = data.filter((d) => typeof d[s.dataKey] === "number" && Number.isFinite(d[s.dataKey]));
       const scale = scaleFor(s);
       svg
         .append("g")

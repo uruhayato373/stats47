@@ -1,3 +1,8 @@
+import {
+  resolveChartDomain,
+  type NumericDomainPolicy,
+  type NumericDomain,
+} from '@stats47/types';
 /**
  * 散布図 SVG 生成
  *
@@ -5,12 +10,7 @@
  * 回帰直線付き散布図を静的 SVG 文字列として出力する。
  */
 
-import {
-  niceTicks,
-  paddedRange,
-  linearScale,
-  formatTick,
-} from '../shared/axis';
+import { niceTicks, linearScale, formatTick } from '../shared/axis';
 import { FONT_FAMILY, SCATTER_COLORS } from '../shared/color';
 import { makePlotArea, px } from '../shared/layout';
 import { linearRegression } from '../shared/regression';
@@ -24,6 +24,10 @@ export interface ScatterPoint {
 }
 
 export interface ScatterOptions {
+  xDomainPolicy?: NumericDomainPolicy;
+  yDomainPolicy?: NumericDomainPolicy;
+  xDomain?: NumericDomain;
+  yDomain?: NumericDomain;
   /** X 軸ラベル（年度を含める。例: "事故件数（件/10万人）2023年度"） */
   xLabel: string;
   /** Y 軸ラベル（年度を含める。例: "致死率（人/100件）2023年度"） */
@@ -81,11 +85,10 @@ export function generateScatterSvg(
   const plot = makePlotArea(W, H, { top: 56, right: 40, bottom: 64, left: 80 });
 
   // 軸範囲
-  const xRange = paddedRange(points.map((p) => p.x));
-  const yRange = paddedRange(
-    points.map((p) => p.y),
-    0.08
-  );
+  const xDomain = resolveChartDomain(points.map(p=>p.x), options.xDomainPolicy ?? {mode:'extent',padding:0.05}, options.xDomain);
+  const yDomain = resolveChartDomain(points.map(p=>p.y), options.yDomainPolicy ?? {mode:'extent',padding:0.08}, options.yDomain);
+  if (!xDomain || !yDomain) throw new Error('No finite scatter observations');
+  const xRange = {lo:xDomain[0],hi:xDomain[1]}, yRange={lo:yDomain[0],hi:yDomain[1]};
 
   const toSvgX = linearScale(xRange.lo, xRange.hi, plot.left, plot.right);
   // SVG は Y 軸が反転（データ値大 → SVG Y 小）

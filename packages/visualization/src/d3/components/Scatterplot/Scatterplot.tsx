@@ -1,9 +1,23 @@
 "use client";
 
-import { select, range, extent, scaleLog, scaleTime, scaleLinear, axisBottom, axisLeft } from "d3";
+import { resolveChartDomain } from '@stats47/types';
+import {
+  select,
+  range,
+  extent,
+  scaleLog,
+  scaleTime,
+  scaleLinear,
+  axisBottom,
+  axisLeft,
+} from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+} from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ScatterplotProps } from "./types";
@@ -76,25 +90,10 @@ export function Scatterplot({
         const Y = data.map((d) => d.y);
         const I = range(data.length);
 
-        // Compute default domains.
-        let currentXDomain = xDomain;
-        let currentYDomain = yDomain;
-
-        if (currentXDomain === undefined) {
-            if (xType === "time") {
-                currentXDomain = extent(X) as [Date, Date];
-            } else {
-                currentXDomain = extent(X as number[]) as [number, number];
-            }
-        }
-
-        if (currentYDomain === undefined) {
-            if (yType === "time") {
-                currentYDomain = extent(Y) as [Date, Date];
-            } else {
-                currentYDomain = extent(Y as number[]) as [number, number];
-            }
-        }
+        const currentXDomain = xType === 'time' ? xDomain ?? extent(X) as [Date, Date] : resolveChartDomain(X as number[], {mode: 'extent'}, xDomain as [number, number] | undefined);
+        const currentYDomain = yType === 'time' ? yDomain ?? extent(Y) as [Date, Date] : resolveChartDomain(Y as number[], {mode: 'extent'}, yDomain as [number, number] | undefined);
+        if (!currentXDomain || !currentYDomain) return;
+        if ((xType === 'log' && Number(currentXDomain[0]) <= 0) || (yType === 'log' && Number(currentYDomain[0]) <= 0)) throw new Error('Log axes require positive observations and limits');
 
         // Construct scales and axes.
         const xScale = (xType === "log" ? scaleLog() : xType === "time" ? scaleTime() : scaleLinear()) as any;

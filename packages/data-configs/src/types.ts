@@ -284,22 +284,10 @@ export interface YearExclusion {
 export type VisualizationConfig = MetricPresentation;
 
 /** 表示 */
-export interface DisplayConfig {
-  conversionFactor?: number;
-  decimalPlaces?: number;
-  displayUnit?: string;
-}
+export type DisplayConfig = import('@stats47/types').ValueDisplayConfig;
 
 /** 計算オプション (per_population, per_area などの派生 metric 生成定義) */
-export interface NormalizationOption {
-  type: 'per_population' | 'per_area';
-  label: string;
-  unit: string;
-  scaleFactor: number;
-  decimalPlaces: number;
-  /** Overrides use the normalized observation units. Raw fixed limits are never inherited. */
-  visualization?: VisualizationConfig;
-}
+export type NormalizationOption = import('@stats47/types').AuthoredNormalizationOption;
 
 /**
  * 分子・分母・結果それぞれの期間基準。

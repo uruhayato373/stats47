@@ -59,7 +59,7 @@ product code、対応format、scope、必要roleまで確認する。
 
 この合意は運用目標の承認であって、認証の復旧や継続取得の実証ではない。欠測を0に置換せず、初回成功だけで継続運用完了にしない。有料環境の新設・外部への問い合わせ送信・アカウント設定変更は別途承認を要し、2FA/CAPTCHAの自動突破や拒否済み認証での再接続反復は行わない。残る受入条件は`.claude/todo/backlog.md`の`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`で管理する。
 
-`authenticated-measurement.yml`が毎日JST18:20にGitHub hosted Ubuntu + Playwright Chromium + Xvfbで実行する。
+`authenticated-measurement.yml`が毎週木曜JST18:20に (2026-10-20 に日次から週次へ。`.claude/rules/recorded-measurement-first.md`) GitHub hosted Ubuntu + Playwright Chromium + Xvfbで実行する。
 `main`/`develop`だけを許可し、PR/forkではSecrets付きcollectorを起動しない。投稿・申請・出版・振込・設定変更は対象外。
 初回のdevelop workflow変更pushでも起動するが、schedule有効化にはmainへの反映が必要。
 

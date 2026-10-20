@@ -19,9 +19,9 @@ describe('theme axis policy wiring', () => {
     expect(mocks.metadata).toHaveBeenCalledTimes(1);
   });
 
-  it('does not impose one metric’s fixed limits on another metric on the same axis', async () => {
+  it('preserves identical fixed policies for multiple metrics', async () => {
     mocks.metadata.mockResolvedValue({ success: true, data: { visualization: { trendDomain: { mode: 'fixed', min: 0, max: 100 } } } });
-    expect(await resolveMetricAxisPolicy([{ metricKey: 'total-population' }, { metricKey: 'aging-population' }])).toEqual({ mode: 'extent', padding: 0.08 });
+    expect(await resolveMetricAxisPolicy([{ metricKey: 'total-population' }, { metricKey: 'aging-population' }])).toEqual({mode:'fixed', min:0, max:100});
   });
 
   it('supports an explicit chart domain without reading observations again', async () => {
@@ -34,12 +34,10 @@ describe('theme axis policy wiring', () => {
     expect(await resolveMetricAxisPolicy([{ metricKey: 'employment-rate' }], { mode: 'sync' })).toEqual({ mode: 'fixed', min: 3.5999999999999996, max: 96.4 });
   });
 
-  it('sync overrides authored fixed limits using all observations', async () => {
+  it('sync never discards authored fixed limits', async () => {
     mocks.metadata.mockResolvedValue({ success: true, data: { visualization: { trendDomain: { mode: 'fixed', min: 0, max: 10 } } } });
     mocks.values.mockResolvedValue({ rows: [{ value: 0 }, { value: 20 }] });
-    const policy = await resolveMetricAxisPolicy([{ metricKey: 'employment-rate' }], { mode: 'sync' });
-    expect(policy.mode).toBe('fixed');
-    expect(policy).toMatchObject({ min: -1.6, max: 21.6 });
+    await expect(resolveMetricAxisPolicy([{ metricKey: 'employment-rate' }], {mode:'sync'})).rejects.toThrow('excludes observations');
   });
 
   it('rejects missing inputs rather than synchronizing a partial set', async () => {

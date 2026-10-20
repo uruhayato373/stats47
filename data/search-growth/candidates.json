@@ -8737,7 +8737,7 @@
       "id": "ctr-opportunity::/ranking/public-phone-count",
       "url": "/ranking/public-phone-count",
       "type": "ctr-opportunity",
-      "status": "pending",
+      "status": "approved",
       "score": 0.0784,
       "scoreBreakdown": {
         "impact": 0.6997,
@@ -8824,7 +8824,9 @@
       ],
       "expectedMetric": "CTR 0.27% → 期待 3.2% 帯",
       "suggestedVerification": "seoTitle/description の curiosity gap 改修後、4/8 週で GSC CTR を再計測 (1 件ずつ query 確認・一括 rewrite 禁止)",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "approvedAt": "2026-10-19T23:12:44.148Z",
+      "approvedWeek": "2026-W43"
     },
     {
       "id": "ctr-opportunity::/blog/public-phone-count",
@@ -135292,7 +135294,7 @@
       "id": "striking-distance::/ranking/total-fertility-rate",
       "url": "/ranking/total-fertility-rate",
       "type": "striking-distance",
-      "status": "pending",
+      "status": "approved",
       "score": 0.0105,
       "scoreBreakdown": {
         "impact": 0.1748,
@@ -135357,7 +135359,9 @@
       ],
       "expectedMetric": "position 12.6 → Top10 圏へ",
       "suggestedVerification": "content 補強 + 内部リンク後、4 週で position を GSC 再計測",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "approvedAt": "2026-10-19T23:12:44.347Z",
+      "approvedWeek": "2026-W43"
     },
     {
       "id": "striking-distance::/areas/17000/cities/17203/population",

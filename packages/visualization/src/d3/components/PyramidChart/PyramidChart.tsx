@@ -1,5 +1,6 @@
 "use client";
 
+import { resolveSymmetricDomain } from '@stats47/types';
 /**
  * d3.jsベースのピラミッドチャートコンポーネント
  * 
@@ -12,8 +13,21 @@ import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils"
 
 import type { D3PyramidChartProps } from "../../types/d3";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
-import { select, rollup, sum, stack, stackOffsetDiverging, max, scaleLinear, scaleBand, scaleOrdinal } from "d3";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import {
+  select,
+  rollup,
+  sum,
+  stack,
+  stackOffsetDiverging,
+  scaleLinear,
+  scaleBand,
+  scaleOrdinal,
+} from "d3";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+} from "../../../shared/layout";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 
@@ -176,9 +190,10 @@ export function PyramidChart({
         allValues.push(point[0], point[1]);
       });
     });
-    const maxAbs = max(allValues, (v) => Math.abs(v)) ?? 0;
+    const domain = resolveSymmetricDomain(allValues);
+    if (!domain) return;
     const x = scaleLinear()
-      .domain([-maxAbs, maxAbs])
+      .domain(domain)
       .rangeRound([marginLeft, width - marginRight]);
 
     // y軸のdomainは上から下の順序なので、年齢の高い方が上になるようにそのまま使用

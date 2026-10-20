@@ -26,7 +26,7 @@ export function NumericTrendChart({
   const clipId = useId().replaceAll(':', '');
   const data = points
     .filter(
-      (point) => Number.isFinite(point.value) && Number.isFinite(point.year)
+      (point) => Number.isFinite(point.year)
     )
     .sort((a, b) => a.year - b.year);
   const domain = resolveNumericDomain(
@@ -60,9 +60,10 @@ export function NumericTrendChart({
     .domain(domain)
     .range([height - bottom, top]);
   const path = line<ChartPoint>()
+    .defined((point) => typeof point.value === "number" && Number.isFinite(point.value))
     .x((point) => x(point.year))
     .y((point) => y(point.value))(data);
-  const selected = data.find((point) => point.year === selectedYear);
+  const selected = data.find((point) => point.year === selectedYear && typeof point.value === "number" && Number.isFinite(point.value));
   const outside = data.filter(
     (point) => point.value < domain[0] || point.value > domain[1]
   );

@@ -1,6 +1,6 @@
 /**
  * 折れ線の X 軸ラベル間引き: 月次・長期年次 (13 点以上) でラベルが重ならないよう
- * 12 個以下になる等間隔 (ceil(n/12) おき) に間引き、最後の点は必ず残す。7〜12 点は従来どおり全点にラベルを付ける。
+ * 12 個以下を目安に文字幅に応じて間引き、最後の点は必ず残す。短いラベルは横書きにする。
  */
 
 import { describe, expect, it } from 'vitest';
@@ -58,17 +58,22 @@ describe('generateLineSvg の負の値と凡例の位置', () => {
     [...svg.matchAll(/text-anchor="end" font-size="8.5" class="svg-tick">(-?[\d.]+)</g)].map((m) => Number(m[1]));
   const circleYs = (svg: string) => [...svg.matchAll(/<circle cx="[\d.]+" cy="([\d.]+)"/g)].map((m) => Number(m[1]));
 
-  it('最小値が負なら最下段の目盛りは最小値以下になり、点がプロット枠の外に出ない', () => {
+  it('負値も共有範囲内に収まり、目盛りで範囲を拡張しない', () => {
     // 2020 年 4-6 月期の中小企業 DI (▲66.7) のような急落を含む系列
     const svg = generateLineSvg(twoSeries([-18, -12, -66.7, -20, -10]), { title: 't', xKey: 'yearCode', seriesKey: 'areaCode' });
-    expect(Math.min(...tickValues(svg))).toBeLessThanOrEqual(-67.7);
-    const plotBottom = 420 - (60 + 22);
+    expect(Math.min(...tickValues(svg))).toBeGreaterThanOrEqual(-67.7);
+    const plot = svg.match(/<rect x="[\d.]+" y="([\d.]+)" width="[\d.]+" height="([\d.]+)" class="svg-plot /)!;
+    const plotBottom = Number(plot[1]) + Number(plot[2]);
+    for (const y of circleYs(svg)) expect(y).toBeGreaterThanOrEqual(Number(plot[1]) - 0.1);
+    expect(svg).not.toContain('stroke="#9ca3af"'); // 全点が負なら範囲外のゼロ線を描かない
     for (const y of circleYs(svg)) expect(y).toBeLessThanOrEqual(plotBottom + 0.1);
   });
 
-  it('X 軸ラベルが斜めになる 8 点以上では、凡例をラベルより下に置く', () => {
+  it('短い年ラベルは横書きにし、凡例をラベルより下に置く', () => {
     const svg = generateLineSvg(twoSeries([1, 2, 3, 4, 5, 6, 7, 8]), { title: 't', xKey: 'yearCode', seriesKey: 'areaCode' });
     const legendY = Number(svg.match(/<text x="[\d.]+" y="([\d.]+)" font-size="9" class="svg-axis">系列1</)?.[1]);
-    expect(legendY).toBeGreaterThanOrEqual(420 - (60 + 22) + 50);
+    const tickY = Number(svg.match(/<text x="[\d.]+" y="([\d.]+)" font-size="8.5" class="svg-tick" text-anchor="middle">2000</)?.[1]);
+    expect(svg).not.toContain('rotate(-35');
+    expect(legendY - tickY).toBeGreaterThan(9);
   });
 });

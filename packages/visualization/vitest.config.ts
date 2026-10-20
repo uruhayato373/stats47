@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { configDefaults, defineConfig } from 'vitest/config';
@@ -53,6 +54,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@stats47/types': fileURLToPath(new URL('../types/src/index.ts', import.meta.url)),
       '@': path.resolve(__dirname, './src'),
     },
   },

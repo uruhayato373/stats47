@@ -20,6 +20,7 @@ import {
 } from '@/lib/media-template-examples';
 import { RANKING_BAR_FRAME } from '@/lib/template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_SOURCE } from '@/lib/template-ranking-data';
+import { TREND_SAMPLE_METRIC, TREND_SAMPLE_SOURCE, TREND_SAMPLE_FRAME } from '@/lib/template-trend-line';
 
 export function resolveStatisticalSamples(
   images: ImageView[]
@@ -30,7 +31,7 @@ export function resolveStatisticalSamples(
       const trial: SampleImage = {
         src: '/api/template-samples/' + sample.id,
         imageId: sample.imageId ?? sample.id,
-        ...RANKING_BAR_FRAME,
+        ...(sample.renderer === 'trend-line' ? TREND_SAMPLE_FRAME : RANKING_BAR_FRAME),
         kind: 'trial',
       };
       for (const channel of TEMPLATE_CHANNELS) media[channel] = trial;
@@ -80,12 +81,14 @@ export function resolveStatisticalSamples(
       const src = image && originalUrl(image);
       return image && src ? [{ src, label: reference.label, pageUrl: image.pageUrl }] : [];
     });
+    const metric = sample.renderer === 'trend-line' ? TREND_SAMPLE_METRIC : RANKING_SAMPLE_METRIC;
+    const source = sample.renderer === 'trend-line' ? TREND_SAMPLE_SOURCE : RANKING_SAMPLE_SOURCE;
     const binding = sample.renderer ? {
-      metricKey: RANKING_SAMPLE_METRIC.key,
-      definitionPath: `${datasetDir('metrics.definitions')}/${RANKING_SAMPLE_METRIC.key}.ts`,
-      dataKey: RANKING_SAMPLE_SOURCE.key,
-      dataSha256: RANKING_SAMPLE_SOURCE.sha256,
-      visualization: RANKING_SAMPLE_METRIC.visualization,
+      metricKey: metric.key,
+      definitionPath: `${datasetDir('metrics.definitions')}/${metric.key}.ts`,
+      dataKey: source.key,
+      dataSha256: source.sha256,
+      visualization: metric.visualization,
     } : undefined;
     return { ...sample, media, basisImages, binding };
   });

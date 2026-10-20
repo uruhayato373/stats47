@@ -63,7 +63,8 @@ describe("D3 LineChart — 2 軸", () => {
     // 小数の目盛りは倍のスケールにしか現れないので、これが右軸が居る証拠になる
     expect(texts).toContain("1.4千");
     expect(texts).toContain("1.8");
-    expect(texts).toContain("0.2");
+    expect(texts).not.toContain("0.2");
+    expect(texts).toContain("1.2");
   });
 
   it("右軸があるとき両方の単位ラベルを軸頭に出す", () => {

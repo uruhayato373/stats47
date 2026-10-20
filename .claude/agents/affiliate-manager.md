@@ -93,3 +93,9 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 - 実装規約: `.claude/rules/affiliate-ads-standards.md` / 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6
 - ASP継続運用: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
   `.claude/todo/backlog.md` の `ASP-CONTINUITY-01`
+
+## 記録から判断する (2026-10-20)
+
+管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
+セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
+例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。

@@ -28,13 +28,6 @@ export const LineChart = async ({
   let yDomain: [number, number] | undefined = sharedYDomain;
 
   try {
-    if (!yDomain) {
-      yDomain = await computeYAxisDomain({
-        yAxisConfig,
-        estatParams: paramsList,
-        domainType: "minMax",
-      });
-    }
 
     const responses = await Promise.all(
       paramsList.map((p) => fetchEstatData(areaCode, p))
@@ -45,6 +38,7 @@ export const LineChart = async ({
       fetchErrorMessage = firstError.error;
     } else {
       const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
+      if (!yDomain) yDomain = await computeYAxisDomain({yAxisConfig, estatParams: paramsList, rows: rawDataList.flat(), domainType: 'minMax'});
       const hasAnyData = rawDataList.some((d) => d.length > 0);
       if (!hasAnyData) {
         fetchErrorMessage = "データがありません";

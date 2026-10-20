@@ -109,7 +109,13 @@ function SampleRow({ sample }: { sample: StatisticalSampleView }) {
                 : '全47県の実測最小値 ～ 最大値'}
             {' · 指標台帳の棒グラフ設定'}
           </p>}
-          <p>指標定義・単位・出典はサイトと共通。同じ値は同順位。</p>
+          {sample.templateId === 'line' && <p>
+            表示範囲：{sample.binding.visualization.trendDomain.mode === 'fixed'
+              ? `${sample.binding.visualization.trendDomain.min} ～ ${sample.binding.visualization.trendDomain.max}（固定）`
+              : sample.binding.visualization.trendDomain.mode === 'zero' ? '0を含む範囲' : '掲載期間の実測範囲'}
+            {' · 指標台帳の推移設定'}
+          </p>}
+          <p>指標定義・単位・出典はサイトと共通。{sample.purpose === 'ranking' && '同じ値は同順位。'}</p>
         </div>
       )}
     </section>

@@ -63,3 +63,9 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 
 例外: **Template C** (report) を使う場面
 - GA4 異常検知 (急減ページの原因推定)
+
+## 記録から判断する (2026-10-20)
+
+管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
+セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
+例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。

@@ -1,8 +1,15 @@
+import { resolveChartDomain } from '@stats47/types';
 import React from "react";
 import { AbsoluteFill } from "remotion";
 
 import { BRAND, FONT } from "@/shared/themes/brand";
-import { formatNoteValue, rankColor, resolveNoteData, shortPrefName, type NoteImageProps } from "./note-common";
+import {
+  formatNoteValue,
+  rankColor,
+  resolveNoteData,
+  shortPrefName,
+  type NoteImageProps,
+} from "./note-common";
 import { SITE } from "@stats47/types";
 
 const W = 1200;
@@ -20,8 +27,11 @@ export const NoteBarChart: React.FC<NoteImageProps> = (props) => {
   const plotH = H - PLOT.top - PLOT.bottom;
   const slot = plotW / entries.length;
   const barW = slot * 0.72;
-  const domainMin = Math.min(0, min);
-  const y = (v: number) => PLOT.top + plotH - ((v - domainMin) / (max - domainMin || 1)) * plotH;
+  const domain = resolveChartDomain(entries.map(entry => entry.value), meta.presentation?.barDomain ?? {mode: "extent"});
+  if (!domain) return null;
+  const [domainMin, domainMax] = domain;
+  const baseline = Math.max(domainMin, Math.min(0, domainMax));
+  const y = (v: number) => PLOT.top + plotH - ((v - domainMin) / (domainMax - domainMin)) * plotH;
   // 値ラベルは 1 位と最下位だけ。隣り合う棒 (幅 24px) に 3 桁の数値を並べると重なって読めない
   const highlight = new Set([0, entries.length - 1]);
 
@@ -41,7 +51,7 @@ export const NoteBarChart: React.FC<NoteImageProps> = (props) => {
           const top = y(e.value);
           return (
             <g key={e.areaCode}>
-              <rect x={x} y={top} width={barW} height={Math.max(1, y(domainMin) - top)} fill={rankColor(e.rank, props.colorScheme)} rx={2} />
+              <rect x={x} y={Math.min(top, y(baseline))} width={barW} height={Math.abs(y(baseline) - top)} fill={rankColor(e.rank, props.colorScheme)} rx={2} />
               {highlight.has(i) && (
                 <text x={x + barW / 2} y={top - 8} textAnchor="middle" fontSize={17} fontWeight={800} fill="#0F172A">
                   {formatNoteValue(e.value, precision)}

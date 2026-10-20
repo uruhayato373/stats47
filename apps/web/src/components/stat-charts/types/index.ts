@@ -73,11 +73,7 @@ export interface DashboardCommonProps {
  * - "sync": 全都道府県データから算出し、比較時にスケールを揃える
  * - "fixed": domain で指定した固定範囲を使用
  */
-export interface YAxisConfig {
-  mode: "auto" | "sync" | "fixed";
-  /** fixed モード時のドメイン [min, max] */
-  domain?: [number, number];
-}
+export type YAxisConfig = import('@stats47/types').YAxisConfig;
 
 // ============================================================================
 // 固有 Config 用の共有型

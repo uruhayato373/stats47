@@ -1111,6 +1111,12 @@
           "items": {
             "type": "object",
             "properties": {
+              "scaleFactor": {
+                "type": "number"
+              },
+              "decimalPlaces": {
+                "type": "number"
+              },
               "type": {
                 "enum": [
                   "per_population",
@@ -1122,12 +1128,6 @@
               },
               "unit": {
                 "type": "string"
-              },
-              "scaleFactor": {
-                "type": "number"
-              },
-              "decimalPlaces": {
-                "type": "number"
               },
               "visualization": {
                 "type": "object",
@@ -1508,11 +1508,11 @@
               }
             },
             "required": [
+              "scaleFactor",
+              "decimalPlaces",
               "type",
               "label",
-              "unit",
-              "scaleFactor",
-              "decimalPlaces"
+              "unit"
             ],
             "additionalProperties": false
           }

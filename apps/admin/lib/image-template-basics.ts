@@ -22,7 +22,7 @@ export interface StatisticalSample {
   label?: string;
   topic?: string;
   imageId?: string;
-  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map';
+  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line';
   referenceImages?: { imageId: string; label: string }[];
 }
 /** A small curated sample per form, not a menu of every article using the form. */
@@ -96,8 +96,10 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'engel-trend',
     templateId: 'line',
     purpose: 'trend',
-    statistic: 'エンゲル係数の推移',
-    imageId: 'IMG-d28cb325765185d2707d5a1b',
+    statistic: 'エンゲル係数の推移（2007〜2024年）',
+    label: '名古屋市',
+    renderer: 'trend-line',
+    referenceImages: [{ imageId: 'IMG-d28cb325765185d2707d5a1b', label: 'note：全国の推移（公開済み）' }],
   },
   {
     id: 'temperature-kerosene',

@@ -38,13 +38,6 @@ export const DivergingBarChartDashboard = async ({
   let yDomain: [number, number] | undefined = sharedYDomain;
 
   try {
-    if (!yDomain) {
-      yDomain = await computeYAxisDomain({
-        yAxisConfig,
-        estatParams,
-        domainType: "symmetric",
-      });
-    }
 
     const responses = await Promise.all(
       estatParams.map((p) => fetchEstatData(areaCode, p)),
@@ -56,6 +49,7 @@ export const DivergingBarChartDashboard = async ({
     }
 
     const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
+      if (!yDomain) yDomain = await computeYAxisDomain({yAxisConfig, estatParams: estatParams, rows: rawDataList.flat(), domainType: 'symmetric'});
     const seriesLabels = labels ?? rawDataList.map(() => "");
     const chartData = toStackedBarChartData(rawDataList, seriesLabels);
 

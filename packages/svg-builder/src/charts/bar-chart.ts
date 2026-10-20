@@ -1,3 +1,8 @@
+import {
+  resolveChartDomain,
+  type NumericDomain,
+  type NumericDomainPolicy,
+} from '@stats47/types';
 /**
  * 横棒グラフ SVG 生成
  *
@@ -24,7 +29,12 @@
  * "single" レイアウトのみ対応。
  */
 
-import { niceScale, formatTick, formatValueLabel, resolveValuePrecision } from "../shared/axis";
+import {
+  niceTicks,
+  formatTick,
+  formatValueLabel,
+  resolveValuePrecision,
+} from "../shared/axis";
 import { FONT_FAMILY, PALETTES, PaletteName, colorByIndex } from "../shared/color";
 import { svgThemeStyle } from "../shared/theme";
 
@@ -45,6 +55,10 @@ export interface BarItem {
 }
 
 export interface BarChartOptions {
+  /** Full comparison cohort, when displaying only selected rows. */
+  domainValues?: number[];
+  domainPolicy?: NumericDomainPolicy;
+  xDomain?: NumericDomain;
   /** チャートタイトル */
   title: string;
   /**
@@ -98,6 +112,17 @@ export interface BarChartOptions {
    * その分だけヘッダー領域を広げる（viewBox 幅は変えない）。
    */
   focusNote?: string;
+}
+
+function barDomain(items: BarItem[], options: BarChartOptions): NumericDomain {
+  const values = options.domainValues ?? items.filter(item => !item.isSeparator).map(item => item.value);
+  const domain = resolveChartDomain(values, options.domainPolicy ?? {mode: 'zero'}, options.xDomain);
+  if (!domain) throw new Error('No finite observations for bar chart');
+  if (options.xMin !== undefined) {
+    if (options.xDomain && options.xMin !== options.xDomain[0]) throw new Error('Conflicting bar axis settings');
+    return resolveChartDomain(values, {mode: 'fixed', min: options.xMin, max: domain[1]})!;
+  }
+  return domain;
 }
 
 // ---------- 共通定数 ----------
@@ -278,11 +303,12 @@ function renderColumnsLayout(
 
   // 両カラム共通スケール（全件の最大値を基準にバー長を決める）
   const allValues = [...topItems, ...bottomItems].map((d) => d.value);
-  const globalMax = Math.max(...allValues, 1);
+  const [domainMin, domainMax] = barDomain([...topItems, ...bottomItems], options);
+  if ((options.showBars ?? true) && domainMin < 0) throw new Error('Signed bar data requires the single layout or showBars: false');
   // 桁数も同じ集合から 1 度だけ決める (上位/下位で揃わないと読み比べられない)
   const precision = resolveValuePrecision(allValues);
   const toBarW = (v: number) =>
-    Math.max(0, Math.round((Math.max(0, v) / globalMax) * CARD_BAR_AREA_W * 1000) / 1000);
+    Math.max(0, Math.round(((v - domainMin) / (domainMax - domainMin)) * CARD_BAR_AREA_W * 1000) / 1000);
 
   // focusNote 分だけヘッダー領域を下へ広げる（収まらなければ 2 行に折り返し、その分さらに広げる）
   const FOCUS_NOTE_FONT = 13;
@@ -422,10 +448,11 @@ function renderMobileLayout(
   const topTheme = CARD_THEMES[palette] ?? CARD_THEMES.red;
   const bottomTheme = CARD_THEMES[rightPalette] ?? CARD_THEMES.blue;
   const allValues = [...topItems, ...bottomItems].map((d) => d.value);
-  const globalMax = Math.max(...allValues, 1);
+  const [domainMin, domainMax] = barDomain([...topItems, ...bottomItems], options);
+  if ((options.showBars ?? true) && domainMin < 0) throw new Error('Signed bar data requires the single layout or showBars: false');
   const precision = resolveValuePrecision(allValues);
   const toBarW = (v: number) =>
-    Math.max(0, Math.round((Math.max(0, v) / globalMax) * MOBILE_BAR_AREA_W * 1000) / 1000);
+    Math.max(0, Math.round(((v - domainMin) / (domainMax - domainMin)) * MOBILE_BAR_AREA_W * 1000) / 1000);
   const sectionHeight = (count: number) =>
     MOBILE_HEADER_H + MOBILE_HEADER_ROW_GAP + count * MOBILE_ROW_H + Math.max(0, count - 1) * MOBILE_ROW_GAP;
   const topHeight = sectionHeight(topItems.length);
@@ -552,11 +579,12 @@ function renderPortraitLayout(
   const bottomTheme = CARD_THEMES[rightPalette] ?? CARD_THEMES.blue;
 
   const allValues = [...topItems, ...bottomItems].map((d) => d.value);
-  const globalMax = Math.max(...allValues, 1);
+  const [domainMin, domainMax] = barDomain([...topItems, ...bottomItems], options);
+  if ((options.showBars ?? true) && domainMin < 0) throw new Error('Signed bar data requires the single layout or showBars: false');
   // 桁数も同じ集合から 1 度だけ決める (上位/下位で揃わないと読み比べられない)
   const precision = resolveValuePrecision(allValues);
   const toBarW = (v: number) =>
-    Math.max(0, Math.round((Math.max(0, v) / globalMax) * PORT_BAR_AREA_W * 1000) / 1000);
+    Math.max(0, Math.round(((v - domainMin) / (domainMax - domainMin)) * PORT_BAR_AREA_W * 1000) / 1000);
 
   // 行高は固定（引き伸ばさない）。上位/下位ブロックをタイトル下〜出典上の領域に縦中央寄せ。
   const tN = topItems.length;
@@ -620,7 +648,7 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     ariaLabel = title,
     palette = "red",
     colorFn,
-    xMin = 0,
+
     showAxis = false,
     highlightName,
     focusNote,
@@ -634,12 +662,16 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
   const firstY = 36 + noteExtraH;
 
   const dataItems = items.filter((d) => !d.isSeparator);
-  const maxVal = Math.max(...dataItems.map((d) => d.value), xMin + 1);
+  const [domainMin, domainMax] = barDomain(items, options);
+  const baseline = Math.max(domainMin, Math.min(0, domainMax));
   // 桁数はこの図に載る全値から 1 度だけ決める (値ごとに変えると 60.4 と 44 が混ざる)
   const precision = resolveValuePrecision(dataItems.map((d) => d.value));
-  const { max: scaleMax, step } = niceScale(maxVal - xMin);
+  const ticks = niceTicks(domainMin, domainMax, 8);
 
-  const toBarWidth = (v: number) => ((v - xMin) / scaleMax) * BAR_AREA_W;
+  const valueLabelWidth = Math.max(...dataItems.map(item => measureUnits(formatValueLabel(item.value, precision)) * 12), 0);
+  const availableBarWidth = Math.min(BAR_AREA_W, W - LABEL_X - valueLabelWidth - 12);
+  const toPosition = (v: number) => ((v - domainMin) / (domainMax - domainMin)) * availableBarWidth;
+  const toBarWidth = (v: number) => Math.abs(toPosition(v) - toPosition(baseline));
 
   const getColor = colorFn ?? ((i: number) => colorByIndex(PALETTES[palette], i));
 
@@ -661,9 +693,8 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     gridLines.push(
       `  <line x1="${LABEL_X}" y1="${firstY}" x2="${LABEL_X}" y2="${barsBottom}" class="svg-grid" stroke-width="1"/>`,
     );
-    for (let v = step; v <= scaleMax + step * 0.01; v += step) {
-      const dataVal = xMin + v;
-      const x = (LABEL_X + toBarWidth(dataVal)).toFixed(0);
+    for (const dataVal of ticks) {
+      const x = (LABEL_X + toPosition(dataVal)).toFixed(0);
       gridLines.push(
         `  <line x1="${x}" y1="${firstY}" x2="${x}" y2="${barsBottom}" class="svg-grid" stroke-width="1" stroke-dasharray="4,3"/>`,
         `  <text x="${x}" y="${(barsBottom + 13).toFixed(0)}" text-anchor="middle" font-size="10" class="svg-tick">${formatTick(dataVal, 1)}</text>`,
@@ -687,13 +718,14 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     const w = Math.max(0, Math.round(toBarWidth(d.value)));
     const fill = getColor(idx);
     const midY = y + 13;
-    const valX = LABEL_X + w + 4;
+    const barX = LABEL_X + Math.min(toPosition(baseline), toPosition(d.value));
+    const valX = barX + w + 4;
     const valStr = formatValueLabel(d.value, precision);
     const highlightAttrs = isHighlightedItem(d, highlightName)
       ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
       : "";
     return [
-      `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"${highlightAttrs}/>`,
+      `  <rect x="${barX}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"${highlightAttrs}/>`,
       `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
       `  <text x="${valX}" y="${midY}" font-size="12" class="svg-tick" font-weight="bold">${valStr}</text>`,
     ].join("\n");

@@ -1,13 +1,16 @@
-import React, { useMemo } from "react";
+import { resolveChartDomain, type NumericDomainPolicy } from '@stats47/types';
+import React from "react";
+import { line, area } from "d3-shape";
 import { interpolate, useCurrentFrame } from "remotion";
-import { BRAND, FONT, type ColorScheme } from "@/shared/themes/brand";
+import { BRAND, type ColorScheme } from "@/shared/themes/brand";
 
 interface DataPoint {
   year: number;
-  value: number;
+  value: number | null;
 }
 
 interface SimpleLineChartProps {
+  domainPolicy?: NumericDomainPolicy;
   data: DataPoint[];
   width: number;
   height: number;
@@ -26,6 +29,7 @@ export const SimpleLineChart: React.FC<SimpleLineChartProps> = ({
   colors,
   unit = "",
   animate = true,
+  domainPolicy = {mode:"extent"},
 }) => {
   const frame = useCurrentFrame();
   
@@ -33,35 +37,27 @@ export const SimpleLineChart: React.FC<SimpleLineChartProps> = ({
   const chartW = width - padding.left - padding.right;
   const chartH = height - padding.top - padding.bottom;
 
-  const minVal = Math.min(...data.map(d => d.value));
-  const maxVal = Math.max(...data.map(d => d.value));
+  const domain = resolveChartDomain(data.map(d=>d.value), domainPolicy);
+  const [minVal, maxVal] = domain ?? [0, 1];
   const valueRange = maxVal - minVal || 1;
 
-  const getX = (index: number) => padding.left + (index / (data.length - 1)) * chartW;
+  const years = resolveChartDomain(data.map(d => d.year), {mode: 'extent'});
+  const getX = (index: number) => padding.left + (years ? (data[index].year - years[0]) / (years[1] - years[0]) : 0.5) * chartW;
   const getY = (value: number) => padding.top + chartH - ((value - minVal) / valueRange) * chartH;
 
-  const points = useMemo(() => {
-    return data.map((d, i) => ({
-      x: getX(i),
-      y: getY(d.value),
-    }));
-  }, [data, width, height]);
+  const points = data.map((d, i) => ({ x: getX(i), y: typeof d.value === 'number' && Number.isFinite(d.value) ? getY(d.value) : NaN }));
 
   // アニメーション用の進捗 (0 to 1)
   const progress = animate 
     ? interpolate(frame, [0, 60], [0, 1], { extrapolateRight: "clamp" })
     : 1;
 
-  const linePath = useMemo(() => {
-    if (points.length < 2) return "";
-    return points.reduce((path, p, i) => {
-      if (i === 0) return `M ${p.x} ${p.y}`;
-      // 線を途中で切る（アニメーション用）
-      if (i / (points.length - 1) > progress) return path;
-      return `${path} L ${p.x} ${p.y}`;
-    }, "");
-  }, [points, progress]);
+  const visible = points.slice(0, Math.floor(progress * Math.max(0, points.length - 1)) + 1);
+  const valid = (p: {x:number;y:number}) => Number.isFinite(p.x) && Number.isFinite(p.y);
+  const linePath = line<{x:number;y:number}>().defined(valid).x(p=>p.x).y(p=>p.y)(visible) ?? '';
+  const areaPath = area<{x:number;y:number}>().defined(valid).x(p=>p.x).y0(padding.top + chartH).y1(p=>p.y)(visible) ?? '';
 
+  if (!domain) return null;
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       {/* 軸 */}
@@ -103,7 +99,7 @@ export const SimpleLineChart: React.FC<SimpleLineChartProps> = ({
       {/* 折れ線の下の塗りつぶし */}
       {points.length >= 2 && (
         <path
-          d={`${linePath} L ${getX(Math.floor(progress * (data.length-1)))} ${padding.top + chartH} L ${padding.left} ${padding.top + chartH} Z`}
+          d={areaPath}
           fill="url(#line-gradient)"
         />
       )}
@@ -120,7 +116,7 @@ export const SimpleLineChart: React.FC<SimpleLineChartProps> = ({
 
       {/* データポイントの点 */}
       {points.map((p, i) => {
-        if (i / (points.length - 1) > progress) return null;
+        if (!valid(p) || i / Math.max(1, points.length - 1) > progress) return null;
         return (
           <circle 
             key={i} cx={p.x} cy={p.y} r={6} 

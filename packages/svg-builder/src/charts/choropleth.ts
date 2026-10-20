@@ -1,3 +1,8 @@
+import {
+  resolveColorEncoding,
+  resolveNumericDomain,
+  type NumericColorEncoding,
+} from '@stats47/types';
 /**
  * タイルグリッドコロプレスマップ SVG 生成
  *
@@ -80,6 +85,7 @@ export interface ChoroplethItem {
 }
 
 export interface ChoroplethOptions {
+  encoding?: NumericColorEncoding;
   /** Pre-resolved site map scale. Fills and legend must use this same result. */
   resolvedScale?: {
     domain: [number, number] | null;
@@ -578,7 +584,7 @@ export function generateChoroplethSvg(
   // 色の解決: scheme（D3）指定時は interpolator、無ければ colorStops。reverse で反転。
   const interp = resolveInterp(scheme);
   const colorOf = (t: number): string => {
-    const tt = reverse ? 1 - t : t;
+    const tt = t;
     return interp ? interp(tt) : interpolateColor(tt, colorStops);
   };
 
@@ -592,10 +598,14 @@ export function generateChoroplethSvg(
   // (2026-07-31。既定 formatValue は呼び元が渡さなければこれを使う)
   const fmtValue = formatValue ?? ((v: number) => formatValueLabel(v, resolveValuePrecision(values)));
   if (resolvedScale && !resolvedScale.domain) throw new Error('Resolved map scale has no data');
-  const lo = resolvedScale?.domain?.[0] ?? colorMin ?? Math.min(...values);
-  const hi = resolvedScale?.domain?.[1] ?? colorMax ?? Math.max(...values);
-  const toT = (v: number) => (hi === lo ? 0.5 : (v - lo) / (hi - lo));
-  const fillForValue = (value: number) => resolvedScale ? resolvedScale.colorAtValue(value) : colorOf(toT(value));
+  const extent = resolveNumericDomain(values, {mode: 'extent'});
+  if (!extent) throw new Error('No finite observations for map');
+  if (options.reverse !== undefined && options.encoding?.isReversed !== undefined && options.reverse !== options.encoding.isReversed) throw new Error("Conflicting map reversal settings");
+  const encoding = resolveColorEncoding({ isReversed: reverse, ...options.encoding, ...(colorMin !== undefined || colorMax !== undefined ? {domain: {mode: 'fixed', min: colorMin ?? extent[0], max: colorMax ?? extent[1]} as const} : {}) }, values, colorOf, '#e5e7eb');
+  const activeScale = resolvedScale ?? encoding;
+  const [lo, hi] = activeScale.domain!;
+  const fillForValue = activeScale.colorAtValue;
+
 
   // ── タイル ──
   // 字の大きさは 1 マスタイルで 1 度だけ決め、全タイルで共有する (県ごとに変えない)
@@ -783,24 +793,25 @@ export function generateChoroplethSvg(
 
   // The caller resolves thresholds/centers once; this layer only arranges that legend.
   const resolvedLegend: string[] = [];
-  if (resolvedScale) {
+  const useResolvedLegend = Boolean(resolvedScale || options.encoding);
+  if (useResolvedLegend) {
     const fmt = formatBoundary ?? fmtValue;
-    const continuous = resolvedScale.method === 'continuous';
-    const count = continuous ? 100 : resolvedScale.colors.length;
+    const continuous = activeScale.method === 'continuous';
+    const count = continuous ? 100 : activeScale.colors.length;
     for (let i = 0; i < count; i++) {
-      const fill = continuous ? resolvedScale.colorAtValue(lo + (hi - lo) * i / (count - 1)) : resolvedScale.colors[i];
+      const fill = continuous ? activeScale.colorAtValue(lo + (hi - lo) * i / (count - 1)) : activeScale.colors[i];
       resolvedLegend.push(`<rect x="${legendX + LEGEND_BAR_W * i / count}" y="${LEGEND_Y}" width="${LEGEND_BAR_W / count + 0.1}" height="${LEGEND_BAR_H}" fill="${esc(fill)}"/>`);
     }
     const label = (x: number, y: number, value: number, anchor = 'middle') =>
       `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${FONT_FAMILY}" font-size="9" fill="${CHROME_COLOR}">${esc(fmt(value))}</text>`;
     resolvedLegend.push(label(legendX, LEGEND_Y + 24, lo, 'start'), label(barRight, LEGEND_Y + 24, hi, 'end'));
     if (!continuous) {
-      const breaks = resolvedScale.boundaries.slice(1, -1).map(fmt).join(' / ');
+      const breaks = activeScale.boundaries.slice(1, -1).map(fmt).join(' / ');
       if (breaks) resolvedLegend.push(`<text x="${legendX}" y="${LEGEND_Y + 38}" font-family="${FONT_FAMILY}" font-size="8" fill="${CHROME_COLOR}">境界：${esc(breaks)}</text>`);
     }
     resolvedLegend.push(`<text x="${barRight}" y="${LEGEND_Y - 6}" text-anchor="end" font-family="${FONT_FAMILY}" font-size="10" fill="${CHROME_COLOR}">${esc(unit)}</text>`);
-    if (resolvedScale.midpoint !== undefined) {
-      resolvedLegend.push(`<text x="${legendX}" y="${LEGEND_Y - 6}" font-family="${FONT_FAMILY}" font-size="10" fill="${CHROME_COLOR}">基準：${esc(fmt(resolvedScale.midpoint))}</text>`);
+    if (activeScale.midpoint !== undefined) {
+      resolvedLegend.push(`<text x="${legendX}" y="${LEGEND_Y - 6}" font-family="${FONT_FAMILY}" font-size="10" fill="${CHROME_COLOR}">基準：${esc(fmt(activeScale.midpoint))}</text>`);
     }
   }
 
@@ -811,6 +822,6 @@ ${head.join("\n")}
 ${rankLists.join("\n")}
 ${tiles.filter(Boolean).join("\n")}
 ${highlightOverlay}
-${(resolvedScale ? resolvedLegend : legacyLegend).join("\n")}
+${(useResolvedLegend ? resolvedLegend : legacyLegend).join("\n")}
 </svg>`;
 }

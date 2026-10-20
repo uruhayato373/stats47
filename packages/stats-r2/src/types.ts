@@ -1,3 +1,4 @@
+import type { StatsSchema } from '@stats47/types';
 import type { EntityKind, MetricRecipe } from "@stats47/data-configs";
 
 /**
@@ -36,12 +37,7 @@ export function statsR2Key(
 }
 
 /** prefecture / city / port 共通: 1 観測 1 row */
-export interface SingleEntityRow {
-  areaCode: string;
-  areaName: string;
-  yearCode: string;
-  yearName: string;
-  value: number | null;
+export interface SingleEntityRow extends Pick<StatsSchema, 'areaCode' | 'areaName' | 'yearCode' | 'yearName' | 'value'> {
   unit?: string;
   rank?: number | null;
   /** city only */

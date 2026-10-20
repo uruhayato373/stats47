@@ -49,7 +49,7 @@ export function toCompositionChartData(
         });
       }
       const row = yearMap.get(key)!;
-      row[label] = item.value ?? 0;
+      if (typeof item.value === "number" && Number.isFinite(item.value)) row[label] = item.value;
     }
   });
 

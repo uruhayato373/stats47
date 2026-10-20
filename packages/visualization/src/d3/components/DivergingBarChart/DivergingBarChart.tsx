@@ -1,7 +1,12 @@
 "use client";
 
+import {
+  resolveChartDomain,
+  resolveSymmetricDomain,
+  numericSeriesValues,
+} from '@stats47/types';
 import { cn } from "@stats47/components";
-import { select, scaleBand, scaleLinear, max, axisBottom, axisLeft } from "d3";
+import { select, scaleBand, scaleLinear, axisBottom, axisLeft } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -87,18 +92,10 @@ export function DivergingBarChart({
       .range([marginLeft, width - marginRight])
       .padding(0.15);
 
-    // Calculate max value for symmetric Y domain
-    const maxPositive = max(data, (d) => Number(d[positiveKey]) || 0) ?? 0;
-    const maxNegative = max(data, (d) => Number(d[negativeKey]) || 0) ?? 0;
-    const maxVal = yDomain
-      ? yDomain[1]
-      : Math.max(maxPositive, maxNegative);
-
-    // Y scale: [-maxVal, +maxVal] (symmetric)
-    const y = scaleLinear()
-      .domain([-maxVal, maxVal])
-      .nice()
-      .range([height - marginBottom, marginTop]);
+    const values = [...numericSeriesValues(data, [positiveKey]), ...numericSeriesValues(data, [negativeKey]).map(value => -value)];
+    const domain = yDomain ? resolveChartDomain(values, {mode: 'zero'}, yDomain) : resolveSymmetricDomain(values);
+    if (!domain) return;
+    const y = scaleLinear().domain(domain).range([height - marginBottom, marginTop]);
 
     // --- Positive bars (upward) ---
     svg

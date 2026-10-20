@@ -1,13 +1,13 @@
 {
-  "total": 1617,
+  "total": 1619,
   "staged": false,
   "byStatus": {
-    "both": 1533,
+    "both": 1535,
     "jsonOnly": 0,
     "neither": 84
   },
   "byMethod": {
-    "done": 1533,
+    "done": 1535,
     "manual": 34,
     "ssot-restore": 22,
     "ssot-restore-new": 28
@@ -1272,6 +1272,28 @@
       "slug": "bonito-catch-prefecture",
       "base": "bonito-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-tuna-catch-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-catch-consumption-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",

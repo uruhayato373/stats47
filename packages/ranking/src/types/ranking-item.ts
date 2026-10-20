@@ -25,23 +25,7 @@ export interface RankingTag {
  * 数値表示設定
  * DBカラム: value_display_config (JSON)
  */
-export interface ValueDisplayConfig {
-  /**
-   * 変換係数
-   * 生データを表示用に変換するための乗数（例: 0.001 なら 1000 -> 1 に変換）
-   */
-  conversionFactor?: number;
-  /**
-   * 小数点以下桁数
-   * 表示時の小数点以下の桁数指定
-   */
-  decimalPlaces?: number;
-  /**
-   * 表示用単位
-   * 変換係数を適用した後に表示する単位（例: "千人"）
-   */
-  displayUnit?: string;
-}
+export type ValueDisplayConfig = import('@stats47/types').ValueDisplayConfig;
 
 /**
  * 可視化設定
@@ -52,40 +36,7 @@ export type VisualizationConfig = MetricPresentation;
 /**
  * 正規化表示オプション
  */
-export interface NormalizationOption {
-  visualization?: VisualizationConfig;
-  /**
-   * 正規化の種類
-   * - per_population: 総人口あたり
-   * - per_area:       総面積あたり
-   */
-  type: "per_population" | "per_area";
-
-  /**
-   * UI上の表示ラベル
-   * 例: "人口10万人あたり", "面積1km²あたり"
-   */
-  label: string;
-
-  /**
-   * 変換後の単位
-   * 例: "件/10万人", "件/km²"
-   */
-  unit: string;
-
-  /**
-   * スケール係数
-   * 計算式: (元の値 / 分母の値) * scaleFactor
-   * 例: 10万人あたりにしたい場合は 100000
-   */
-  scaleFactor?: number;
-
-  /**
-   * 表示時の小数点以下桁数
-   */
-  decimalPlaces?: number;
-
-}
+export type NormalizationOption = import('@stats47/types').NormalizationDisplayOption;
 
 /**
  * 計算設定

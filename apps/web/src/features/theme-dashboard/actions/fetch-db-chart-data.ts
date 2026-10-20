@@ -20,7 +20,7 @@ import type {
 } from '@/components/stat-charts/types/visualization';
 
 import { aggregateMetricTimeseries } from '@/lib/aggregate-metric-timeseries';
-import {resolveMetricAxisPolicy} from '@/lib/metric-axis-policy';
+import { resolveMetricAxisPolicy } from '@/lib/metric-axis-policy';
 
 import {
   parseThemeDbChartComponentProps,
@@ -323,7 +323,7 @@ async function fetchR2MixedData(
   const last = chartData.data.at(-1);
   return {
     type: 'mixed',
-    axisPolicies: {left: await resolveMetricAxisPolicy(columnRefs), right: await resolveMetricAxisPolicy(lineRefs)},
+    axisPolicies: {left: await resolveMetricAxisPolicy(columnRefs, undefined, 'bar'), right: await resolveMetricAxisPolicy(lineRefs)},
     data: chartData,
     contract: {
       unit: [chartData.leftUnit, chartData.rightUnit]

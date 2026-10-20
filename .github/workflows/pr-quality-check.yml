@@ -5,10 +5,22 @@ on:
     branches:
       - main
     types: [opened, synchronize, reopened]
+  # PR の先頭が [skip ci] の記録コミットになると pull_request が発火せず必須チェックが付かない。
+  # pr-skip-ci-head-guard.yml がそれを検知してここを develop で起動する (PR の値は inputs で受け取る)。
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'develop→main の PR 番号'
+        required: true
+        type: string
+      base_sha:
+        description: 'PR の base (main) の SHA'
+        required: true
+        type: string
 
 # 同じPRの複数実行を防ぐ（最新のみ実行）
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || inputs.pr_number }}
   cancel-in-progress: true
 
 permissions:
@@ -52,7 +64,7 @@ jobs:
       - name: Classify changed paths
         id: plan
         run: |
-          git diff --name-only -z "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" \
+          git diff --name-only -z "${{ github.event.pull_request.base.sha || inputs.base_sha }}" "${{ github.event.pull_request.head.sha || github.sha }}" \
             | node .claude/scripts/lib/plan-pr-quality.mjs --stdin0 >> "$GITHUB_OUTPUT"
 
   static-gates:
@@ -224,7 +236,7 @@ jobs:
         # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
         run: |
           node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
-          node .claude/scripts/lib/check-web-estat-imports.cjs --base "${{ github.event.pull_request.base.sha }}"
+          node .claude/scripts/lib/check-web-estat-imports.cjs --base "${{ github.event.pull_request.base.sha || inputs.base_sha }}"
         continue-on-error: false
 
       - name: 📱 Static Asset Contract Guard
@@ -280,7 +292,7 @@ jobs:
 
       - name: 🔎 Keyword cooldown and history guard
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || inputs.base_sha }}
         run: |
           git fetch --no-tags origin "$BASE_SHA" --depth=1
           node .claude/scripts/search-growth/check-keyword-state.mjs --base "$BASE_SHA"

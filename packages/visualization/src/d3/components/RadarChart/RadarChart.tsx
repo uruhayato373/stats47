@@ -1,5 +1,6 @@
 "use client";
 
+import { resolveChartDomain } from '@stats47/types';
 import { cn } from "@stats47/components";
 import { select, schemeTableau10 } from "d3";
 import { useEffect, useRef } from "react";
@@ -54,9 +55,9 @@ export function RadarChart({
 
     // Calculate max for each axis
     const axisMaxes = axes.map((axis) => {
-      if (axis.max != null) return axis.max;
+
       const vals = data.map((d) => d.values[axis.key] ?? 0);
-      return Math.max(...vals, 1);
+      return resolveChartDomain(vals, {mode: 'zero'}, axis.max === undefined ? undefined : [0, axis.max])?.[1] ?? 1;
     });
 
     // Grid lines

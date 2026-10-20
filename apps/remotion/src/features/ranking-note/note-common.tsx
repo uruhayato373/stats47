@@ -1,3 +1,4 @@
+import { summarizeNumericValues } from '@stats47/types';
 import React, { useEffect, useState } from "react";
 import { continueRender, delayRender, staticFile } from "remotion";
 import * as chromatic from "d3-scale-chromatic";
@@ -71,8 +72,9 @@ export function resolveNoteData(props: NoteImageProps) {
   const resolved = resolveRankingData({ meta: props.meta, allEntries: props.allEntries });
   const entries = [...resolved.entries].sort((a, b) => a.rank - b.rank);
   const values = entries.map((e) => e.value);
-  const mean = props.mean ?? values.reduce((sum, v) => sum + v, 0) / values.length;
-  return { meta: resolved.meta, entries, precision: resolved.precision, mean, min: Math.min(...values), max: Math.max(...values) };
+  const stats = summarizeNumericValues(values);
+  if (!stats || stats.count !== entries.length) throw new Error('Ranking observations must be finite');
+  return {meta: resolved.meta, entries, precision: resolved.precision, mean: props.mean ?? stats.mean, min: stats.min, max: stats.max};
 }
 
 export interface NoteMapLayout {

@@ -43,11 +43,6 @@ export const DashboardBarChart = async ({
   let xDomain: [number, number] | undefined;
 
   try {
-    xDomain = await computeYAxisDomain({
-      yAxisConfig,
-      estatParams,
-      domainType: "zeroMax",
-    });
 
     const responses = await Promise.all(
       estatParams.map((p) => fetchEstatData(areaCode, p))
@@ -58,6 +53,7 @@ export const DashboardBarChart = async ({
       fetchErrorMessage = firstError.error;
     } else {
       const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
+      xDomain = await computeYAxisDomain({yAxisConfig, estatParams, rows: rawDataList.flat(), domainType: chartType === 'stacked-bar' ? 'stackedMax' : 'zeroMax'});
       chartData = toBarChartData(rawDataList, labels, chartType, unitProp);
       if (chartData.data.length === 0) {
         fetchErrorMessage = "データがありません";

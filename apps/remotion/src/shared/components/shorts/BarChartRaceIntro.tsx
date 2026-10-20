@@ -1,7 +1,19 @@
+import { resolveColorEncoding } from '@stats47/types';
 import React, { useMemo } from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { scaleSequential } from "d3-scale";
-import { interpolateBlues, interpolateYlOrRd, interpolateGreens, interpolatePurples, interpolateOranges } from "d3-scale-chromatic";
+import {
+  AbsoluteFill,
+  interpolate,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
+import {
+  interpolateBlues,
+  interpolateYlOrRd,
+  interpolateGreens,
+  interpolatePurples,
+  interpolateOranges,
+} from "d3-scale-chromatic";
 import type { TileGridCell } from "@stats47/visualization";
 import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
@@ -64,10 +76,7 @@ function buildValueMap(items: { name: string; value: number }[]): Map<string, nu
 }
 
 function buildColorScale(values: number[], schemeName: ColorSchemeName = "Blues") {
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  const interpolator = COLOR_SCHEME_INTERPOLATORS[schemeName];
-  return scaleSequential(interpolator).domain([minVal, maxVal]);
+  return resolveColorEncoding({colorSchemeType:'sequential'}, values, COLOR_SCHEME_INTERPOLATORS[schemeName], '#e0e0e0').colorAtValue;
 }
 
 function getContrastTextColor(bgColor: string): string {

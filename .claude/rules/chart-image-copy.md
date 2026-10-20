@@ -1,6 +1,6 @@
 ---
 paths:
-  - "apps/admin/{lib/template-*,lib/server/template-ranking-sample,components/content/image-template-gallery}.*"
+  - "apps/admin/{lib/template-*,lib/server/template-sample,components/content/image-template-gallery}.*"
   - "apps/remotion/src/**"
   - "packages/svg-builder/src/**"
   - ".claude/scripts/{media,note,sns,blog}/**"

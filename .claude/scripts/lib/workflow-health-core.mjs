@@ -33,10 +33,12 @@ export const DEFAULT_MIN_STREAK = 2;
 //   2026-09-19 のページ品質監査 (スクショ検査) は時間切れで cancelled になり、2026-09-20 の週次フル検査は
 //   Issue 化ステップごと落ちたが、どちらも連続 1 回で止まっていて誰にも知らされなかった。
 export const SCHEDULE_CONTRACTS = Object.freeze({
+  // 2026-10-20 オーナー判断で週次 (木曜 JST 18:20) にした。ログインの要る取得元を毎日入り直さない。
   "authenticated-measurement.yml": Object.freeze({
-    firstExpectedAt: "2026-09-21T09:20:00Z",
-    intervalHours: 24,
+    firstExpectedAt: "2026-10-22T09:20:00Z",
+    intervalHours: 168,
     graceHours: 6,
+    minStreak: 1,
   }),
   "page-quality-audit-weekly.yml": Object.freeze({
     firstExpectedAt: "2026-09-26T18:00:00Z",
@@ -53,8 +55,8 @@ export const SCHEDULE_CONTRACTS = Object.freeze({
 });
 
 /** 猶予を過ぎた最新予定枠を返す。createdAtはAPIのcreated_atを正規化した値。 */
-export function evaluateSchedule(workflow, runs, nowMs) {
-  const contract = SCHEDULE_CONTRACTS[workflow];
+export function evaluateSchedule(workflow, runs, nowMs, contracts = SCHEDULE_CONTRACTS) {
+  const contract = contracts[workflow];
   if (!contract || !Number.isFinite(nowMs)) return null;
   const firstMs = Date.parse(contract.firstExpectedAt);
   const intervalMs = contract.intervalHours * 3600000;
@@ -113,7 +115,8 @@ function durationMinutes(run) {
  * 返り値の failureStreak は「直近から数えた連続失敗数 (neutral は読み飛ばす)」。
  */
 export function evaluateWorkflow(workflow, runs, options = {}) {
-  const minStreak = SCHEDULE_CONTRACTS[workflow]?.minStreak ?? options.minStreak ?? DEFAULT_MIN_STREAK;
+  const contracts = options.contracts ?? SCHEDULE_CONTRACTS;
+  const minStreak = contracts[workflow]?.minStreak ?? options.minStreak ?? DEFAULT_MIN_STREAK;
   const nowMs = options.nowMs ?? null;
   // event省略は既存のschedule専用callerとの互換。明示されたpush/dispatchは除外。
   const scheduledRuns = runs.filter((run) => run.event === undefined || run.event === "schedule");
@@ -144,7 +147,7 @@ export function evaluateWorkflow(workflow, runs, options = {}) {
       : null;
 
   // 初回予定・周期が確定したworkflowだけ、未発火/古いrunも検知する。
-  const schedule = evaluateSchedule(workflow, scheduledRuns, nowMs);
+  const schedule = evaluateSchedule(workflow, scheduledRuns, nowMs, contracts);
   const unhealthy = (scheduledRuns.length > 0 && failureStreak >= minStreak) || Boolean(schedule?.code);
 
   return {

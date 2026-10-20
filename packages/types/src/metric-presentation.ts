@@ -1,20 +1,18 @@
+import {
+  assertColorClassification,
+  type ColorClassification,
+} from './color-classification';
 import type { CanonicalColorScheme } from './color-scheme';
 import { COLOR_SCHEME_CATALOG } from './color-scheme';
+export type { ColorClassification } from './color-classification';
 
-/** Authored limits use observation units, before display conversion. */
-export type NumericDomainPolicy =
-  | { mode: 'extent'; padding?: number }
-  | { mode: 'zero'; padding?: number }
-  | { mode: 'fixed'; min: number; max: number };
-
-/** Truncated bar axes must expose their bounds and the omitted zero baseline. */
-export type BarDomainPolicy = NumericDomainPolicy;
-export const DEFAULT_BAR_DOMAIN = { mode: 'extent' } as const satisfies BarDomainPolicy;
-
-export type ColorClassification =
-  | { method: 'continuous' }
-  | { method: 'equal-interval' | 'quantile'; classes: number }
-  | { method: 'threshold'; thresholds: number[] };
+import {
+  DEFAULT_BAR_DOMAIN,
+  isNumericDomainPolicy,
+  type NumericDomainPolicy,
+  type BarDomainPolicy,
+} from './numeric-domain';
+export * from './numeric-domain';
 
 /** Shared by authored metrics and their generated R2 presentation metadata. */
 export interface MetricPresentation {
@@ -58,26 +56,7 @@ export function assertMetricPresentation(
     )
   )
     throw new Error('Unknown metric presentation field');
-  const domain = (v: unknown) => {
-    if (!record(v)) return false;
-    if (v.mode === 'fixed')
-      return (
-        typeof v.min === 'number' &&
-        typeof v.max === 'number' &&
-        Number.isFinite(v.min) &&
-        Number.isFinite(v.max) &&
-        v.min < v.max &&
-        Object.keys(v).every((k) => ['mode', 'min', 'max'].includes(k))
-      );
-    return (
-      ['extent', 'zero'].includes(String(v.mode)) &&
-      (v.padding === undefined ||
-        (typeof v.padding === 'number' &&
-          Number.isFinite(v.padding) &&
-          v.padding >= 0)) &&
-      Object.keys(v).every((k) => ['mode', 'padding'].includes(k))
-    );
-  };
+
   const scheme = COLOR_SCHEME_CATALOG.find(
     (s) => s.canonical === value.colorScheme
   );
@@ -88,48 +67,16 @@ export function assertMetricPresentation(
   )
     throw new Error('Metric color scheme/type mismatch');
   if (
-    !domain(value.trendDomain) ||
-    !domain(value.comparisonDomain) ||
-    !domain(value.domain)
+    !isNumericDomainPolicy(value.trendDomain) ||
+    !isNumericDomainPolicy(value.comparisonDomain) ||
+    !isNumericDomainPolicy(value.domain)
   )
     throw new Error('Invalid metric numeric domain');
   if (value.barDomain !== undefined) {
-    if (!domain(value.barDomain))
+    if (!isNumericDomainPolicy(value.barDomain))
       throw new Error('Invalid metric bar domain');
   }
-  const classification = value.classification;
-  if (!record(classification)) throw new Error('Metric classification missing');
-  const method = classification.method;
-  if (method === 'continuous') {
-    if (Object.keys(classification).length !== 1)
-      throw new Error('Invalid continuous classification');
-  } else if (method === 'equal-interval' || method === 'quantile') {
-    if (
-      !Number.isInteger(classification.classes) ||
-      Number(classification.classes) < 2 ||
-      Number(classification.classes) > 9 ||
-      Object.keys(classification).some(
-        (k) => !['method', 'classes'].includes(k)
-      )
-    )
-      throw new Error('Metric classes must be 2–9');
-  } else if (method === 'threshold') {
-    const t = classification.thresholds;
-    if (
-      !Array.isArray(t) ||
-      !t.length ||
-      t.some(
-        (v, i) =>
-          typeof v !== 'number' ||
-          !Number.isFinite(v) ||
-          (i > 0 && v <= t[i - 1])
-      ) ||
-      Object.keys(classification).some(
-        (k) => !['method', 'thresholds'].includes(k)
-      )
-    )
-      throw new Error('Metric thresholds must increase');
-  } else throw new Error('Unknown metric classification');
+  assertColorClassification(value.classification);
   if (
     value.colorSchemeType === 'sequential' &&
     ['divergingMidpoint', 'divergingMidpointValue', 'isSymmetrized'].some(
@@ -189,7 +136,14 @@ export function presentationForNormalizedValues(
     domain: dynamic(presentation.domain),
     comparisonDomain: dynamic(presentation.comparisonDomain),
     trendDomain: dynamic(presentation.trendDomain),
-    ...(presentation.barDomain ? { barDomain: presentation.barDomain.mode === 'fixed' ? DEFAULT_BAR_DOMAIN : presentation.barDomain } : {}),
+    ...(presentation.barDomain
+      ? {
+          barDomain:
+            presentation.barDomain.mode === 'fixed'
+              ? DEFAULT_BAR_DOMAIN
+              : presentation.barDomain,
+        }
+      : {}),
     classification:
       presentation.classification.method === 'threshold'
         ? { method: 'equal-interval', classes: 5 }
@@ -202,64 +156,38 @@ export function presentationForNormalizedValues(
   };
 }
 
-/** Shared bar-axis policy; reject clipping instead of changing authored fixed limits. */
-export function resolveBarDomain(
-  values: readonly (number | null | undefined)[],
-  policy: BarDomainPolicy = DEFAULT_BAR_DOMAIN
-): [number, number] | null {
-  const domain = resolveNumericDomain(values, policy);
-  if (!domain) return null;
-  const stats = summarizeNumericValues(values)!;
-  if (stats.min < domain[0] || stats.max > domain[1]) throw new Error('Bar domain excludes observations');
-  return domain;
-}
-
-/** Finite, present observations only; national aggregates belong to a separate series. */
-export function summarizeNumericValues(
-  values: readonly (number | null | undefined)[]
-) {
-  const sorted = values
-    .filter((v): v is number => typeof v === 'number' && Number.isFinite(v))
-    .sort((a, b) => a - b);
-  if (sorted.length === 0) return null;
-  const count = sorted.length;
-  const min = sorted[0];
-  const max = sorted[count - 1];
-  const mean = sorted.reduce((sum, value) => sum + value, 0) / count;
-  const middle = Math.floor(count / 2);
-  const median =
-    count % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
-  return { count, min, max, mean, median, sorted };
-}
-
-export function resolveNumericDomain(
-  values: readonly (number | null | undefined)[],
-  policy: NumericDomainPolicy
-): [number, number] | null {
-  const stats = summarizeNumericValues(values);
-  if (!stats) return null;
-  if (policy.mode === 'fixed') {
-    if (
-      !Number.isFinite(policy.min) ||
-      !Number.isFinite(policy.max) ||
-      policy.min >= policy.max
-    )
-      throw new Error('Invalid fixed numeric domain');
-    return [policy.min, policy.max];
-  }
-  let min = policy.mode === 'zero' ? Math.min(0, stats.min) : stats.min;
-  let max = policy.mode === 'zero' ? Math.max(0, stats.max) : stats.max;
-  if (policy.mode === 'zero' && min === 0 && max === 0) return [0, 1];
-  const span = max - min || Math.max(Math.abs(min) * 0.02, 1);
-  if (min === max) {
-    min -= span / 2;
-    max += span / 2;
-  }
-  const padding = (policy.padding ?? 0) * span;
-  if (!Number.isFinite(padding) || padding < 0)
-    throw new Error('Invalid numeric domain padding');
-  return [
-    policy.mode === 'zero' && min === 0 ? 0 : min - padding,
-    policy.mode === 'zero' && max === 0 ? 0 : max + padding,
-  ];
+/** Convert presentation limits once when a renderer receives display-scaled observations. */
+export function scaleMetricPresentation(
+  presentation: MetricPresentation,
+  factor: number
+): MetricPresentation {
+  if (!Number.isFinite(factor) || factor <= 0)
+    throw new Error('Display factor must be positive and finite');
+  const scale = (policy: NumericDomainPolicy): NumericDomainPolicy =>
+    policy.mode === 'fixed'
+      ? { ...policy, min: policy.min * factor, max: policy.max * factor }
+      : policy;
+  return {
+    ...presentation,
+    domain: scale(presentation.domain),
+    trendDomain: scale(presentation.trendDomain),
+    comparisonDomain: scale(presentation.comparisonDomain),
+    ...(presentation.barDomain
+      ? { barDomain: scale(presentation.barDomain) }
+      : {}),
+    classification:
+      presentation.classification.method === 'threshold'
+        ? {
+            method: 'threshold',
+            thresholds: presentation.classification.thresholds.map(
+              (value) => value * factor
+            ),
+          }
+        : presentation.classification,
+    ...(presentation.divergingMidpointValue === undefined
+      ? {}
+      : {
+          divergingMidpointValue: presentation.divergingMidpointValue * factor,
+        }),
+  };
 }

@@ -1,3 +1,4 @@
+import type { RadarAxisIdentity } from '@stats47/types';
 /**
  * レーダーチャート SVG 生成
  *
@@ -10,9 +11,8 @@ import { FONT_FAMILY, PALETTES, type PaletteName } from '../shared/color';
 import { px } from '../shared/layout';
 import { svgThemeStyle } from '../shared/theme';
 
-export interface RadarAxis {
-  key: string;
-  label: string;
+export interface RadarAxis extends RadarAxisIdentity {
+
 }
 
 export interface RadarSeries {

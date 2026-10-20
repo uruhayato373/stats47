@@ -1,3 +1,4 @@
+import { resolveChartDomain } from '@stats47/types';
 import React from "react";
 import { AbsoluteFill } from "remotion";
 
@@ -55,7 +56,9 @@ export const RankingChartX: React.FC<RankingChartXProps> = ({
 
   // 左右共通の最大値スケール（格差を視覚的に伝える）
   const allEntries = [...topEntries.slice(0, 5), ...bottomEntries.slice(0, 5)];
-  const maxValue = Math.max(...allEntries.map((e) => e.value), 1);
+  const domain = resolveChartDomain(allEntries.map(entry => entry.value), meta.presentation?.barDomain ?? {mode:'extent'});
+  if (!domain) return null;
+  const [minValue, maxValue] = domain;
 
   return (
     <AbsoluteFill
@@ -136,6 +139,7 @@ export const RankingChartX: React.FC<RankingChartXProps> = ({
           label="上位 5 県"
           entries={topEntries.slice(0, 5)}
           accentColor={BRAND.primary}
+          minValue={minValue}
           maxValue={maxValue}
           unit={meta.unit}
           precision={precision}
@@ -146,6 +150,7 @@ export const RankingChartX: React.FC<RankingChartXProps> = ({
           label="下位 5 県"
           entries={bottomEntries.slice(0, 5)}
           accentColor={BRAND.danger}
+          minValue={minValue}
           maxValue={maxValue}
           unit={meta.unit}
           precision={precision}
@@ -200,6 +205,7 @@ interface BarGroupProps {
   label: string;
   entries: RankingEntry[];
   accentColor: string;
+  minValue: number;
   maxValue: number;
   unit: string;
   precision: number;
@@ -211,6 +217,7 @@ const BarGroup: React.FC<BarGroupProps> = ({
   label,
   entries,
   accentColor,
+  minValue,
   maxValue,
   unit,
   precision,
@@ -251,7 +258,8 @@ const BarGroup: React.FC<BarGroupProps> = ({
         key={entry.areaCode}
         entry={entry}
         accentColor={accentColor}
-        maxValue={maxValue}
+        minValue={minValue}
+          maxValue={maxValue}
         unit={unit}
         precision={precision}
         isDark={isDark}
@@ -265,6 +273,7 @@ const BarGroup: React.FC<BarGroupProps> = ({
 interface BarRowProps {
   entry: RankingEntry;
   accentColor: string;
+  minValue: number;
   maxValue: number;
   unit: string;
   precision: number;
@@ -276,6 +285,7 @@ interface BarRowProps {
 const BarRow: React.FC<BarRowProps> = ({
   entry,
   accentColor,
+  minValue,
   maxValue,
   unit,
   precision,
@@ -283,7 +293,7 @@ const BarRow: React.FC<BarRowProps> = ({
   colors,
   isLast,
 }) => {
-  const barPct = (entry.value / maxValue) * 100;
+  const barPct = ((entry.value - minValue) / (maxValue - minValue)) * 100;
   const dividerColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
   const trackColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)";
 

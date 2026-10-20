@@ -20,6 +20,8 @@
     </array>
     <key>StartCalendarInterval</key>
     <dict>
+        <key>Weekday</key>
+        <integer>4</integer>
         <key>Hour</key>
         <integer>17</integer>
         <key>Minute</key>
@@ -32,7 +34,7 @@
     <key>StandardErrorPath</key>
     <string>/Users/minamidaisuke/Library/Logs/stats47/measurement-session-refresh.launchd.err</string>
     <key>RunAtLoad</key>
-    <true/>
+    <false/>
     <key>ProcessType</key>
     <string>Background</string>
 </dict>

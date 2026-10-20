@@ -17,6 +17,8 @@ paths:
 
 ## 1. アーキテクチャ概要（3層構造）
 
+軸・配色・観測値の共有契約と数値計算は [packages/types/README.md](../../packages/types/README.md)。D3/SVG/Remotion はその解決結果から描画し、固定範囲を再計算・再丸めしない。
+
 ```
 Layer 1: D3プリミティブ
   packages/visualization/src/d3/components/  ← 軸・描画のみ。データを知らない

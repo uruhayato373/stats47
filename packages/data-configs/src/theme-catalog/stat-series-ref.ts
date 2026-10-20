@@ -1,3 +1,4 @@
+import { isYAxisConfig } from '@stats47/types';
 /** Typed metric-ID series references, shared by catalog validation and R2 readers. */
 import { isChartColorRole, type ChartColorRole } from "./chart-color-role";
 import { parseFaqMarkdown } from "./faq-markdown";
@@ -33,10 +34,7 @@ export interface LineChartComponentProps {
   labels?: string[];
   seriesColors?: string[];
   showLatestValues?: boolean;
-  yAxisConfig?: {
-    mode: "auto" | "sync" | "fixed";
-    domain?: [number, number];
-  };
+  yAxisConfig?: import('@stats47/types').YAxisConfig;
 }
 
 export interface MixedChartComponentProps {
@@ -171,18 +169,6 @@ function isStringArray(v: unknown): v is string[] {
   return Array.isArray(v) && v.every(nonEmptyString);
 }
 
-function isYAxisConfig(v: unknown): boolean {
-  if (!isRecord(v) || !hasOnlyKeys(v, ["mode", "domain"])) return false;
-  if (v.mode !== "auto" && v.mode !== "sync" && v.mode !== "fixed") return false;
-  if (v.domain === undefined) return v.mode !== "fixed";
-  return (
-    v.mode === "fixed" &&
-    Array.isArray(v.domain) &&
-    v.domain.length === 2 &&
-    v.domain.every((value) => typeof value === "number" && Number.isFinite(value)) &&
-    v.domain[0] < v.domain[1]
-  );
-}
 
 function isRankingLinks(v: unknown): boolean {
   return (

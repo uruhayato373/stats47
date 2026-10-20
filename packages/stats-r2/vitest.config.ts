@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from "vitest/config";
 
 /**
@@ -11,6 +12,7 @@ import { defineConfig } from "vitest/config";
  * (meta を拡張したのに読み側を直し忘れる) を機械検知できない。
  */
 export default defineConfig({
+  resolve: { alias: { '@stats47/types': fileURLToPath(new URL('../types/src/index.ts', import.meta.url)) } },
   test: {
     name: "@stats47/stats-r2",
     globals: true,

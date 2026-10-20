@@ -108,6 +108,7 @@
 - [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=data/note/note-published-urls.json
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [feedback_ga4_journey_referrer_over_navclick.md](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
+- [feedback_measurement_weekly_recorded_first.md](feedback_measurement_weekly_recorded_first.md) — ログインが要る計測は木曜の週次だけが取得。セッションではブラウザで取りに行かず記録から判断し、古ければ判定不能と書く (2026-10-20)
 - [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。2026-10-10から金曜05:00に前週を計測→12:00無人triage(ゲート付き)→18:00週次Issue→土曜にレビューと来週の計画。schedule/取得段はmain定義で動く。無人Claudeは.claude/を書けない→提案JSONを決定的適用
 - [project_review_cadence_wiring.md](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。週次は土曜期限、正本review-wiring.json・判定review-cadence.mjsを各所が共有。月次の申し送りは「→ 振り分け:」必須
 - [project_r2_s3_token_expired_2026_05_29.md](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)

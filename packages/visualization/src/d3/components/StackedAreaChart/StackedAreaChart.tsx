@@ -1,7 +1,20 @@
 "use client";
 
+import { resolveChartDomain, stackedNumericValues } from '@stats47/types';
+
 import { cn } from "@stats47/components";
-import { select, scalePoint, stack, stackOrderNone, stackOffsetNone, max, scaleLinear, area, curveMonotoneX, axisBottom, axisLeft } from "d3";
+import {
+  select,
+  scalePoint,
+  stack,
+  stackOrderNone,
+  stackOffsetDiverging,
+  scaleLinear,
+  area,
+  curveMonotoneX,
+  axisBottom,
+  axisLeft,
+} from "d3";
 import type { SeriesPoint } from "d3";
 import { useEffect, useRef } from "react";
 import {
@@ -108,6 +121,8 @@ export function StackedAreaChart({
     let processedData: StackedAreaDataNode[];
     if (normalize) {
       processedData = data.map((d) => {
+        if (!keys.every(key => typeof d[key] === "number" && Number.isFinite(d[key]))) return { ...d };
+        if (keys.some(key => Number(d[key]) < 0)) throw new Error("Normalized composition requires nonnegative values");
         const total = keys.reduce(
           (sum, k) => sum + (Number(d[k]) || 0),
           0
@@ -130,19 +145,14 @@ export function StackedAreaChart({
       .keys(keys)
       .value((d, key) => Number(d[key]) || 0)
       .order(stackOrderNone)
-      .offset(stackOffsetNone);
+      .offset(stackOffsetDiverging);
 
     const stackedData = stackGen(processedData);
 
     // Y scale
-    const yMax = normalize
-      ? 100
-      : max(stackedData, (layer) => max(layer, (d) => d[1])) ?? 0;
-    const computedDomain: [number, number] = [0, yMax];
-    const y = scaleLinear()
-      .domain(!normalize && yDomainProp ? yDomainProp : computedDomain)
-      .nice()
-      .range([height - marginBottom, marginTop]);
+    const domain = resolveChartDomain(stackedNumericValues(processedData, keys), normalize ? {mode: 'fixed', min: 0, max: 100} : {mode: 'zero'}, normalize ? undefined : yDomainProp);
+    if (!domain) return;
+    const y = scaleLinear().domain(domain).range([height - marginBottom, marginTop]);
 
     // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     const yTicks = y.ticks(innerHeight / 40);
@@ -160,6 +170,7 @@ export function StackedAreaChart({
 
     // Area generator
     const areaFn = area<SeriesPoint<StackedAreaDataNode>>()
+      .defined((d) => keys.every(key => typeof d.data[key] === "number" && Number.isFinite(d.data[key])))
       .x((d) => x(String(d.data[categoryKey] ?? "")) ?? 0)
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]))
@@ -206,7 +217,7 @@ export function StackedAreaChart({
         const categoryLabel =
           (d.label as string) ?? String(d[categoryKey]);
         const total = keys.reduce((sum, k) => sum + (Number(d[k]) || 0), 0);
-        const items = series.map((s) => {
+        const items = series.filter(s => typeof d[s.key] === "number" && Number.isFinite(d[s.key])).map((s) => {
           const val = Number(d[s.key]) || 0;
           const pct = total > 0 ? ((val / total) * 100).toFixed(1) : "0.0";
           return {

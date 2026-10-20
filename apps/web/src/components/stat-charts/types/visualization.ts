@@ -10,11 +10,7 @@ export interface BarChartData {
   /** データ配列 */
   data: Array<Record<string, string | number>>;
   /** 系列設定 */
-  series: Array<{
-    dataKey: string;
-    name: string;
-    color: string;
-  }>;
+  series: Array<import('@stats47/types').ChartSeriesData>;
   /** 単位（任意） */
   unit?: string;
 }
@@ -53,17 +49,9 @@ export interface MixedChartData {
   /** データ配列 */
   data: Array<Record<string, string | number>>;
   /** 棒グラフ系列（左Y軸） */
-  columns: Array<{
-    dataKey: string;
-    name: string;
-    color: string;
-  }>;
+  columns: Array<import('@stats47/types').ChartSeriesData>;
   /** 折れ線系列（右Y軸） */
-  lines: Array<{
-    dataKey: string;
-    name: string;
-    color: string;
-  }>;
+  lines: Array<import('@stats47/types').ChartSeriesData>;
   /** 左Y軸の単位 */
   leftUnit?: string;
   /** 右Y軸の単位 */
@@ -71,11 +59,7 @@ export interface MixedChartData {
 }
 
 /** Treemap/Sunburst 用階層データ（D3形式・HierarchyDataNode 互換） */
-export interface HierarchyData {
-  name: string;
-  value?: number;
-  children?: HierarchyData[];
-}
+export type HierarchyData = import('@stats47/types').HierarchyDataNode;
 
 /** KPI カード用データ（値 + 前年比） */
 export interface KpiCardData {

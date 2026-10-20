@@ -1,4 +1,9 @@
 #!/usr/bin/env tsx
+import {
+  assertMetricPresentation,
+  type MetricPresentation,
+  type RankingDisplayMeta,
+} from '@stats47/types';
 /**
  * SNS 画像・動画 一括生成
  *
@@ -63,15 +68,11 @@ const targetKey = keyIdx !== -1 ? args[keyIdx + 1] : undefined;
 // visualization 読み込み（R2 ranking item.json の .item.visualization）
 // ---------------------------------------------------------
 
-interface VizConfig {
-  colorScheme: string;
-  colorSchemeType?: "sequential" | "diverging";
-  divergingMidpointValue?: number;
-}
+type VizConfig = MetricPresentation;
 
 /**
  * R2 ranking item.json (`.item.visualization`) からカラースキーム設定を読む。
- * D1 metrics.visualization_config_json と同じ 3 フィールドを抽出する。
+ * 指標の軸・配色契約を省略せず渡す。
  * item.json が無い / visualization が無い / colorScheme 未設定なら undefined
  * （= 呼び出し側はデフォルトカラースキームにフォールバック）。
  */
@@ -83,26 +84,11 @@ async function loadVizConfig(rankingKey: string): Promise<VizConfig | undefined>
   } catch {
     return undefined;
   }
-  try {
-    const parsed = JSON.parse(raw) as {
-      item?: {
-        visualization?: {
-          colorScheme?: string;
-          colorSchemeType?: string;
-          divergingMidpointValue?: number;
-        };
-      };
-    };
-    const vc = parsed.item?.visualization;
-    if (!vc?.colorScheme) return undefined;
-    return {
-      colorScheme: vc.colorScheme,
-      colorSchemeType: vc.colorSchemeType as VizConfig["colorSchemeType"],
-      divergingMidpointValue: vc.divergingMidpointValue,
-    };
-  } catch {
-    return undefined;
-  }
+  const parsed = JSON.parse(raw) as { item?: { visualization?: unknown } };
+  const vc = parsed.item?.visualization;
+  if (vc === undefined) return undefined;
+  assertMetricPresentation(vc);
+  return vc;
 }
 
 // ---------------------------------------------------------
@@ -136,14 +122,7 @@ interface RankingItemMeta {
 
 interface SnsProps {
   theme: "light" | "dark";
-  meta: {
-    title: string;
-    subtitle?: string;
-    unit: string;
-    yearName: string;
-    demographicAttr?: string;
-    normalizationBasis?: string;
-  };
+  meta: RankingDisplayMeta & {yearName: string};
   allEntries: SnsData["data"];
   hookText?: string;
   displayTitle?: string;
@@ -182,7 +161,7 @@ async function loadProps(
       // なくても続行
     }
 
-    const meta = {
+    const meta: SnsProps["meta"] = {
       title: itemMeta.title || dataJson.categoryName,
       subtitle: itemMeta.subtitle || undefined,
       unit: itemMeta.unit || dataJson.unit,
@@ -204,6 +183,7 @@ async function loadProps(
     // R2 ranking item.json の visualization からカラースキームを取得
     const rankingKey = path.basename(rankingDir);
     const vizConfig = await loadVizConfig(rankingKey);
+    meta.presentation = vizConfig;
     const colorScheme = vizConfig?.colorScheme;
     const colorSchemeType = vizConfig?.colorSchemeType;
     const divergingMidpointValue = vizConfig?.divergingMidpointValue;

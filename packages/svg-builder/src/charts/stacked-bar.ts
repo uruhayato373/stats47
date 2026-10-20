@@ -1,3 +1,8 @@
+import {
+  resolveChartDomain,
+  stackedNumericValues,
+  type NumericDomainPolicy,
+} from '@stats47/types';
 /**
  * 積み上げ棒グラフ SVG 生成（垂直・水平、100%正規化対応）
  *
@@ -29,6 +34,7 @@
 import { FONT_FAMILY, SERIES_COLORS as STACKED_COLORS } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
+import { layoutLegendRows, planCategoryTicks, rotatedLabelDrop, textWidth } from "../shared/text-metrics";
 import { svgThemeStyle } from "../shared/theme";
 import {
   StatsSchema,
@@ -38,6 +44,7 @@ import {
 } from "../shared/stats-schema";
 
 export interface StackedBarOptions {
+  domainPolicy?: NumericDomainPolicy;
   /** チャートタイトル */
   title: string;
   /** サブタイトル（年次・出典など） */
@@ -58,6 +65,9 @@ export interface StackedBarOptions {
 
 export function generateStackedBarSvg(data: StatsSchema[], options: StackedBarOptions): string {
   const { horizontal = false, normalized = false } = options;
+  const finiteValues = data.flatMap(row => typeof row.value === "number" && Number.isFinite(row.value) ? [row.value] : []);
+  if (!finiteValues.length) throw new Error("No finite observations for stacked chart");
+  if (normalized && finiteValues.some(value => value < 0)) throw new Error("Normalized composition requires nonnegative values");
   return horizontal
     ? generateHorizontal(data, options, normalized)
     : generateVertical(data, options, normalized);
@@ -77,41 +87,26 @@ function generateVertical(
   const valueMap = buildValueMap(data, xKey, seriesKey);
 
   const W = 680; // §5 積み上げ棒標準幅
-  const LEGEND_H = Math.ceil(series.length / 3) * 22 + 12;
-  const H = 380 + LEGEND_H; // 高さは §5 可変（凡例段数で変動）
-  const plot = makePlotArea(W, H, { top: 58, right: 24, bottom: 58 + LEGEND_H, left: 55 });
+  const legend = layoutLegendRows(series.map((s, i) => ({ label: s.name, color: STACKED_COLORS[i % STACKED_COLORS.length] })), { left: 55, availW: W - 55 - 24, fontSize: 9, swatchW: 12, gap: 16 });
+  const ticks = planCategoryTicks(xItems.map(x => x.name), (W - 55 - 24) / xItems.length, 9, { angle: 45 });
+  const labelDrop = ticks.rotate ? rotatedLabelDrop(Math.max(...xItems.map(x => textWidth(x.name, 9))), 9, 45) : 9;
+  const bottom = 14 + labelDrop + 16 + legend.rows * 22;
+  const H = 322 + bottom;
+  const plot = makePlotArea(W, H, { top: 58, right: 24, bottom, left: 55 });
 
   // 値の計算（正規化 or 生値）
   function getValues(xCode: string): number[] {
     return series.map((s) => valueMap.get(xCode)?.get(s.code) ?? 0);
   }
 
-  // Y 軸範囲（正値の合計 and 負値の合計を考慮）
-  let globalYMax = 0;
-  let globalYMin = 0;
-  for (const x of xItems) {
-    const vals = getValues(x.code);
-    let posSum = 0;
-    let negSum = 0;
-    for (const v of vals) {
-      if (v >= 0) posSum += v;
-      else negSum += v;
-    }
-    if (normalized) {
-      globalYMax = 100;
-      globalYMin = 0;
-    } else {
-      globalYMax = Math.max(globalYMax, posSum);
-      globalYMin = Math.min(globalYMin, negSum);
-    }
-  }
-
-  const yTicks = niceTicks(globalYMin, globalYMax, 5);
-  const yScaleLo = yTicks[0];
-  const yScaleHi = yTicks[yTicks.length - 1];
+  const domainRows = xItems.map(x => Object.fromEntries(getValues(x.code).map((value, i) => [String(i), value])));
+  const domain = resolveChartDomain(normalized ? [0, 100] : stackedNumericValues(domainRows, series.map((_, i) => String(i))), normalized ? {mode: 'fixed', min: 0, max: 100} : options.domainPolicy ?? {mode: 'zero'});
+  if (!domain) throw new Error('No finite observations for stacked chart');
+  const [yScaleLo, yScaleHi] = domain;
+  const yTicks = niceTicks(yScaleLo, yScaleHi, 5);
   const toSvgY = linearScale(yScaleLo, yScaleHi, plot.bottom, plot.top);
 
-  const barW = Math.min(60, plot.width / xItems.length - 12);
+  const barW = Math.min(60, plot.width / xItems.length * 0.75);
   const groupW = plot.width / xItems.length;
 
   // Y グリッド
@@ -126,7 +121,7 @@ function generateVertical(
   // ゼロライン
   const zeroY = toSvgY(0);
   const zeroLine =
-    globalYMin < 0
+    yScaleLo < 0
       ? `  <line x1="${px(plot.left)}" y1="${px(zeroY)}" x2="${px(plot.right)}" y2="${px(zeroY)}" stroke="#6b7280" stroke-width="1.5"/>`
       : "";
 
@@ -136,12 +131,14 @@ function generateVertical(
 
   xItems.forEach((x, xi) => {
     const cx = plot.left + groupW * xi + groupW / 2;
-    xLabels.push(
-      `  <text x="${cx.toFixed(1)}" y="${(plot.bottom + 14).toFixed(1)}" text-anchor="middle" font-size="9" class="svg-tick">${x.name}</text>`,
-    );
+    if (ticks.indices.includes(xi)) {
+      const y = plot.bottom + 14;
+      const transform = ticks.rotate ? ` transform="rotate(-45,${px(cx)},${px(y)})"` : "";
+      xLabels.push(`  <text x="${px(cx)}" y="${px(y)}" text-anchor="${ticks.rotate ? "end" : "middle"}" font-size="9" class="svg-tick"${transform}>${x.name}</text>`);
+    }
 
     const rawVals = getValues(x.code);
-    let totalPos = normalized ? rawVals.filter((v) => v > 0).reduce((a, b) => a + b, 0) : 1;
+    const totalPos = normalized ? rawVals.filter((v) => v > 0).reduce((a, b) => a + b, 0) : 1;
 
     let posTop = zeroY;
     let negBottom = zeroY;
@@ -152,7 +149,7 @@ function generateVertical(
 
     series.forEach((s, si) => {
       const raw = valueMap.get(x.code)?.get(s.code) ?? 0;
-      const v = normalized ? (raw / totalPos) * 100 : raw;
+      const v = normalized ? (totalPos ? raw / totalPos : 0) * 100 : raw;
       if (v === 0) return;
 
       const color = STACKED_COLORS[si % STACKED_COLORS.length];
@@ -164,7 +161,7 @@ function generateVertical(
         bars.push(
           `  <rect x="${barLeft.toFixed(1)}" y="${top.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}" fill-opacity="0.85"/>`,
         );
-        if (h > 12) {
+        if (h > 12 && textWidth(segmentLabel(raw, v), 7.5) + 4 <= barW) {
           bars.push(
             `  <text x="${cx.toFixed(1)}" y="${(top + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${segmentLabel(raw, v)}</text>`,
           );
@@ -178,7 +175,7 @@ function generateVertical(
         bars.push(
           `  <rect x="${barLeft.toFixed(1)}" y="${negBottom.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}" fill-opacity="0.85"/>`,
         );
-        if (h > 12) {
+        if (h > 12 && textWidth(segmentLabel(raw, v), 7.5) + 4 <= barW) {
           bars.push(
             `  <text x="${cx.toFixed(1)}" y="${(negBottom + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${segmentLabel(raw, v)}</text>`,
           );
@@ -188,18 +185,12 @@ function generateVertical(
     });
   });
 
-  // 凡例（下部）
-  const legendY = plot.bottom + 32;
-  const legendItems = series.map((s, si) => {
-    const col = si % 3;
-    const row = Math.floor(si / 3);
-    const lx = plot.left + col * (plot.width / 3);
+  // 文字幅で折り返し、回転した軸ラベルの下に置く。
+  const legendY = plot.bottom + 14 + labelDrop + 12;
+  const legendItems = legend.items.map(({ x: lx, row, label, color }) => {
     const ly = legendY + row * 22;
-    const color = STACKED_COLORS[si % STACKED_COLORS.length];
-    return [
-      `  <rect x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>`,
-      `  <text x="${(lx + 16).toFixed(1)}" y="${(ly + 8.5).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
-    ].join("\n");
+    return `  <rect x="${px(lx)}" y="${px(ly)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>
+  <text x="${px(lx + 16)}" y="${px(ly + 8.5)}" font-size="9" class="svg-axis">${label}</text>`;
   });
 
   const unitLabel = unit
@@ -258,22 +249,27 @@ function generateHorizontal(
   const BAR_H = 32;
   const BAR_GAP = 10;
   const LABEL_W = 80;
-  const LEGEND_H = 36;
   const MARGIN_TOP = 58;
-  const MARGIN_BOTTOM = 16 + LEGEND_H;
-  const H = MARGIN_TOP + xItems.length * (BAR_H + BAR_GAP) - BAR_GAP + MARGIN_BOTTOM;
   const W = 680; // §5 積み上げ棒標準幅
   const plotLeft = LABEL_W + 4;
   const plotRight = W - 20;
   const plotWidth = plotRight - plotLeft;
 
+  const legend = layoutLegendRows(series.map((s, i) => ({ label: s.name, color: STACKED_COLORS[i % STACKED_COLORS.length] })), { left: plotLeft, availW: plotWidth, fontSize: 9, swatchW: 12, gap: 16 });
+  const H = MARGIN_TOP + xItems.length * (BAR_H + BAR_GAP) - BAR_GAP + 32 + legend.rows * 22;
+
+  const horizontalRows = xItems.map(x => Object.fromEntries(series.map(s => [s.code, valueMap.get(x.code)?.get(s.code)])));
+  if (data.some(row => row.value !== null && row.value < 0)) throw new Error('Horizontal composition requires nonnegative values');
+  const compositionPolicy = {mode: 'fixed', min: 0, max: 100} as const;
+  if (options.domainPolicy && (options.domainPolicy.mode !== 'fixed' || options.domainPolicy.min !== 0 || options.domainPolicy.max !== 100)) throw new Error('Horizontal composition requires domain 0–100');
+  resolveChartDomain(normalized ? [0,100] : stackedNumericValues(horizontalRows, series.map(s=>s.code)), compositionPolicy);
   const bars: string[] = [];
   const rowLabels: string[] = [];
 
   xItems.forEach((x, xi) => {
     const rawVals = series.map((s) => valueMap.get(x.code)?.get(s.code) ?? 0);
     const total = normalized ? rawVals.reduce((a, b) => a + b, 0) : 100;
-    const vals = normalized ? rawVals.map((v) => (v / total) * 100) : rawVals;
+    const vals = normalized ? rawVals.map((v) => (total ? v / total : 0) * 100) : rawVals;
 
     const barTop = MARGIN_TOP + xi * (BAR_H + BAR_GAP);
     rowLabels.push(
@@ -314,15 +310,11 @@ function generateHorizontal(
     ].join("\n");
   });
 
-  // 凡例
   const legendY = MARGIN_TOP + xItems.length * (BAR_H + BAR_GAP) - BAR_GAP + 24;
-  const legendItems = series.map((s, si) => {
-    const lx = plotLeft + si * (plotWidth / series.length);
-    const color = STACKED_COLORS[si % STACKED_COLORS.length];
-    return [
-      `  <rect x="${lx.toFixed(1)}" y="${legendY.toFixed(1)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>`,
-      `  <text x="${(lx + 16).toFixed(1)}" y="${(legendY + 8.5).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
-    ].join("\n");
+  const legendItems = legend.items.map(({ x: lx, row, label, color }) => {
+    const ly = legendY + row * 22;
+    return `  <rect x="${px(lx)}" y="${px(ly)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>
+  <text x="${px(lx + 16)}" y="${px(ly + 8.5)}" font-size="9" class="svg-axis">${label}</text>`;
   });
 
   const unitNote = unit

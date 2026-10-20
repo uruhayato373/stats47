@@ -1,3 +1,4 @@
+import { summarizeNumericValues } from '@stats47/types';
 /** Opt-in article prototypes. Fixed values; separate from the canonical Web/SNS renderers. */
 import { FONT_FAMILY, SCATTER_COLORS } from '../shared/color';
 import { paddedRange, linearScale, niceTicks, formatTick } from '../shared/axis';
@@ -52,7 +53,7 @@ export function generateMobileScatterSvg(points: ScatterPoint[], options: Mobile
     throw Error('Select up to two existing prefectures.');
   const plot = { left: 92, right: 604, top: 200, bottom: 712 };
   const xr = paddedRange(points.map(p => p.x)), yr = paddedRange(points.map(p => p.y), 0.08);
-  if (xr.lo === xr.hi || yr.lo === yr.hi) throw Error('A scatter comparison needs variation on both axes.');
+  if (summarizeNumericValues(points.map(p => p.x))!.min === summarizeNumericValues(points.map(p => p.x))!.max || summarizeNumericValues(points.map(p => p.y))!.min === summarizeNumericValues(points.map(p => p.y))!.max) throw Error('A scatter comparison needs variation on both axes.');
   const sx = linearScale(xr.lo, xr.hi, plot.left, plot.right), sy = linearScale(yr.lo, yr.hi, plot.bottom, plot.top);
   const content: string[] = [];
   lines(options.yLabel, 23, 2).forEach((s, i) => content.push(text(24, 155 + i * 30, s)));

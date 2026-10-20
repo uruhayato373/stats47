@@ -1,10 +1,26 @@
 "use client";
 
+import { resolveChartDomain, stackedNumericValues } from '@stats47/types';
+
 import { cn } from "@stats47/components";
 
-import { schemeTableau10, select, stack, scaleBand, scaleLinear, max, scaleOrdinal, axisBottom, axisLeft } from "d3";
+import {
+  schemeTableau10,
+  select,
+  stack,
+  stackOffsetDiverging,
+  scaleBand,
+  scaleLinear,
+  scaleOrdinal,
+  axisBottom,
+  axisLeft,
+} from "d3";
 import { useEffect, useRef } from "react";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+} from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ColumnChartProps } from "./types";
@@ -15,6 +31,7 @@ import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
  */
 export function ColumnChart({
   data,
+  yDomain,
   indexBy,
   keys,
   width = 800,
@@ -52,8 +69,8 @@ export function ColumnChart({
     svg.selectAll("*").remove();
 
     // --- スタック計算 ---
-    const series = stack<any>()
-      .keys(keys)(data);
+    const series = stack<ColumnChartProps["data"][number]>()
+      .keys(keys).value((row, key) => typeof row[key] === "number" && Number.isFinite(row[key]) ? Number(row[key]) : 0).offset(stackOffsetDiverging)(data);
 
     // --- スケール設定 ---
     const x = scaleBand()
@@ -61,8 +78,10 @@ export function ColumnChart({
       .range([marginLeft, width - marginRight])
       .padding(0.1);
 
+    const domain = resolveChartDomain(stackedNumericValues(data, keys), {mode: 'zero'}, yDomain);
+    if (!domain) return;
     const y = scaleLinear()
-      .domain([0, max(series, (d) => max(d, (d) => d[1])) ?? 0])
+      .domain(domain)
       .rangeRound([height - marginBottom, marginTop]);
 
     const color = scaleOrdinal<string>().domain(keys).range(colors);
@@ -76,16 +95,16 @@ export function ColumnChart({
       .join("g")
       .attr("fill", (d) => color(d.key))
       .selectAll("rect")
-      .data((d) => d)
+      .data((d) => d.filter(v => typeof v.data[d.key] === "number" && Number.isFinite(v.data[d.key])).map(v => Object.assign(v, {key:d.key})))
       .join("rect")
-      .attr("x", (d: any) => x(d.data[indexBy])!)
-      .attr("y", (d) => y(d[1]))
-      .attr("height", (d) => y(d[0]) - y(d[1]))
+      .attr("x", (d) => x(String(d.data[indexBy]))!)
+      .attr("y", (d) => Math.min(y(d[0]), y(d[1])))
+      .attr("height", (d) => Math.abs(y(d[0]) - y(d[1])))
       .attr("width", x.bandwidth())
       .style("cursor", "pointer")
-      .on("mouseenter", (event, d: any) => {
+      .on("mouseenter", (event, d) => {
         showTooltip(event, String(d.data[indexBy]), {
-          value: d[1] - d[0],
+          value: Number(d.data[d.key]),
           unit,
           metricTitle: d.key ?? keys[0],
         });
@@ -115,7 +134,7 @@ export function ColumnChart({
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
     fitSvgViewBox(svgRef.current, width, height);
-  }, [data, indexBy, keys, width, height, yAxisFormatter, colors, marginTop, marginBottom, marginLeft, marginRight, baseFontSize, innerHeight, unit, showTooltip, hideTooltip, updateTooltipPosition]);
+  }, [data, yDomain, indexBy, keys, width, height, yAxisFormatter, colors, marginTop, marginBottom, marginLeft, marginRight, baseFontSize, innerHeight, unit, showTooltip, hideTooltip, updateTooltipPosition]);
 
   return (
     <div

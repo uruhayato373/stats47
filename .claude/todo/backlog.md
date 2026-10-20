@@ -296,6 +296,7 @@ updated: 2026-10-19
   3. KDP: `.local/authenticated-measurement/kdp.autologin-failed` を消し、`node .claude/scripts/measurement/refresh-session.mjs kdp --headed` でログインし直す (2 段階認証はオーナー)。
 - **次 (Claude・上の 1〜2 の後)**: clone を origin/develop に揃えてから、clone で `node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 afb gsc` を実行し、afb と GSC が pass することを確かめる。そのうえで `scripts/scheduled/measurement-session-refresh.sh` の最後の行を `measurement-collect-local.sh` を呼ぶ形に戻し、`measurement.test.mjs` の wrapper の検査も合わせる。
 - **次 (2 日続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
+- **2026-10-20 オーナー判断 (週次化)**: 認証付き計測は毎日ではなく**毎週木曜** (CI 18:20 JST、Mac のログイン維持 17:30) に取る。セッション中のエージェントは記録から判断し、ブラウザで取りに行かない (`.claude/rules/recorded-measurement-first.md`)。これに合わせて、この先の手順を次のように読み替える: ① GSC の Chrome ログインは出発前の必須作業から外す (API の検索実績は取れ、止まるのは除外理由の内訳だけ。帰ってから週次の作業で入る) ② KDP は再ログインの代わりに TOTP の秘密鍵 `stats47-measurement-kdp-totp` をキーチェーンに登録する (未登録・2026-10-20 確認。ID/PW は登録済み) と `kdp.autologin-failed` の削除で、自動で入り直せるようにする ③ 「2 日続けて全取得元 pass」は「2 週続けて (木曜の 2 回)」と読む ④ KDP の書籍別の日次注文は「昨日」タブなので週 1 日分しか残らない。「過去 7 日間」タブへの切り替えはログインした画面で確かめてから行う (売上は月次ロイヤリティの累計で取るので欠けない)。
 - **注意**: 切り替えた日に afb や GSC が失敗すると、CI の予備は「その日は取得済み」で省略するので、その日の分が欠ける。1〜2 が済む前に切り替えない。
 - **完了条件**: Mac の定期実行で 2 日続けて全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
 
@@ -1565,6 +1566,8 @@ updated: 2026-10-19
 - **10-16 の追加観測・実行候補**: `data/seo/latest-report.json` の pendingPublication 8件は、参照先proposalが全件 `implementation-needed`（09-18〜10-06選定）。実装済み・公開承認済みとは扱わない。既存7ページと重なる道の駅・高校2年男子身長・公衆電話を先に照合し、重複提案をまとめて各1件の実装担当・対象・完了gateへ落とす。CTR比較は元summaryを継承した実期間で行う。残りは需要と既存作業の重複を確認して採否を決め、一括実装・一括公開しない。
 
 - **2026-10-20 ① のランキング 2 件を git で変更 (未反映)**: オーナーの「できることから進めて」で、上の表の title 案を適用した。公開中の R2 values で数値を確認 (公衆電話 2024 年 47 県合計 96,126・1 位東京 10,717・最下位徳島 509・1975〜2024 年。出生率 2023 年 1 位沖縄 1.60・最下位東京 0.99・1980〜2023 年)、本番の両ページに推移と地図があることも確認。`data/metrics/public-phone-count.ts` を「公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図」、`total-fertility-rate.ts` を「合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図」に変え、description も同じ切り口にした (data-configs のテスト 1,181 件 pass)。**本番反映は次の develop→main マージと `sync-snapshots` の後**。反映した日に本番 title を curl で確かめ、`search-growth:approve` で `ctr-opportunity::/ranking/public-phone-count` と `ctr-opportunity::/ranking/total-fertility-rate` に反映日を記録する (週 2 件の上限・人が承認)。**未着手**: 公衆電話ブログの title 変更は、公開済み記事を送り箱へ戻して `publish-blog.yml` を起動する本番公開なのでオーナー確認待ち。title 案の「ピーク93.5万台」は本文の数値と照合してから使う。出生率の ranking→blog リンクは、推薦が同点を記事 ID のアルファベット順で切るため明示の関係でも上がらない (`RELATED-ARTICLES-TIEBREAK-01` へ分離)。
+- **2026-10-20 第 2 弾 4 本の seoTitle を R2 で変更 (オーナー承認「案のまま公開」)**: 表示順の次の候補から、本文と公開データで照合して作った案を適用した (`push-article-md-r2.ts --src .local/blog-title-ctr2/out`、`sync-snapshots only=blog` run 39353998079 success、all.json で確認)。住みやすい県「住みやすい県ランキング｜1位福井79.9点・2位富山、8つの指標で47都道府県を採点」(seoTitle を新設。図のデータ不一致は `LIVABLE-COMPOSITE-CHART-DATA-01`)、自動車「自動車産業 都道府県ランキング｜輸送用機械の出荷額1位愛知17.4兆円、2位静岡の4.3倍 (2020)」(旧 title の「2026」はデータ年でなかった。出典の e-Stat 表 0003448099 の期間が 2020)、米「東北・北陸で米作りが盛んな理由｜上位10県で全国776万tの53%、1位新潟 (2019)」(R2 で上位 10 県 53.3%)、降水「降水日数が多い都道府県ランキング｜1位富山182日、年間降水量は静岡3,753mmが1位 (2024)」。カツオ (`bonito-catch-prefecture`) は title ではなく本文が 2015 年のままだったので、送り箱で止まっていた 2023 年版 (critic PASS 10-08) を記事固有の背景を作って公開した (run 39347116656)。本番反映は次のデプロイ。search-growth の承認は W44 以降の枠で行う。
+- **2026-10-20 本番反映と search-growth の記録**: PR #1161 のマージ (2026-10-19T20:34Z) とデプロイ (success) の後、本番 6 ページの `<title>` が新しい案になったことを curl で確認した。search-growth で `ctr-opportunity::/ranking/public-phone-count` と `striking-distance::/ranking/total-fertility-rate` (出生率は ctr-opportunity の候補が無いのでこちら) を承認した (週 2026-W43、週 2 件の枠を使い切り)。計測日は反映日 2026-10-20 から 14 日 = 11-03、28 日 = 11-17、56 日 = 12-15 (`npm run search-growth:measure -- --candidate <ID>`)。ブログ 4 本の承認は翌週 (W44) 以降の枠で行う。**improvements.md への効果観測の登録は排他 writer の improvement-triage が 10-24 の W42 レビューで行う** (対象 6 ページ・反映日・計測日を渡す)。
 - **2026-10-20 ブログ 4 本の seoTitle を R2 で変更 (オーナー承認「すべて」)**: 本文の数値と公開データで照合してから、`seoTitle` の 1 行だけを書き換えた (本文は不変を差分で確認)。`push-article-md-r2.ts --src .local/blog-title-ctr/out` で R2 の article.md を上書きし、`sync-snapshots only=blog` (run 39307859673 success) で `app/blog/all.json` に反映した。公衆電話「公衆電話はなぜ減った? ピーク93.5万台→9.6万台、都市に残り地方で消える理由｜47都道府県2024」(R2 観測値で 1984 年 935,000・2024 年 96,126)、道の駅「道の駅が多い県ランキング｜1位北海道128か所・最下位東京1か所 47都道府県【2026年】」、身長「高校2年生男子の平均身長 都道府県ランキング｜1位新潟・福井171cm、最下位沖縄167.6cm【2023年度】」、健康寿命「健康寿命 都道府県ランキング【最新・2022年】男性1位静岡73.75年・最下位岩手70.93年」(厚生労働省が 2022 年値を 2024-12-24 に公表、時事通信で確認)。ブログは SSG なので**本番の title は PR #1161 のマージ後のデプロイで変わる**。反映日に本番の `<title>` を確かめ、ランキング 2 件と合わせて変更日を記録し、28 日後に同じ窓で CTR を比べる。search-growth の承認は週 2 件までなので、ランキング 2 件を先に記録し、ブログ 4 本は次週以降に記録する。
 - **2026-10-19 オーナー判断 (優先度の引き上げ)**: アフィリエイトの新規展開を保留し (`MONETIZE-BROAD-ROLLOUT-01`)、このカードを 10-21 からの出張中に進めるリモート作業の先頭にする。実行順: ① 公衆電話・出生率の title 案 (上の表) のオーナー確認 → 3 ページを変える ② 道の駅・高校 2 年男子身長・健康寿命の 3 ページを 1 ページずつ変える ③ 197 本を表示の多い順に `/search-growth` へ渡す (週 2 件の承認上限を守り、一括変更はしない)。title の変更は git の定義 (metric の seoTitle・記事 frontmatter) を直すだけなので、デプロイが要るものはまとめて 1 回にする。
 - **2026-10-19 確認 (W43 Could 2)**: ① (食い合いの確認) は 10-08 に済んでいた。「10,717.00個」の修正は main に入り (`origin/main` の config は `decimalPlaces: 0`)、本番 `/ranking/public-phone-count` の HTML は「10,717.00」0 件・「10,717個」27 か所で定着した。**残りは役割分けの title 案 (上の表) のオーナー確認**。承認後に公衆電話の ranking (metric の seoTitle・seoDescription)・blog (記事 frontmatter と ranking へのリンク)、出生率の ranking (seoTitle と blog へのリンク) を変え、変えた日を記録して 4 週後に同じ 28 日窓で CTR を比べる。
@@ -1575,8 +1578,25 @@ updated: 2026-10-19
 - **原因**: `packages/data-configs/src/content/navigation.ts` の推薦は、ランキングから見た記事をすべて `explains` (priority 100) + 一致 key 数 (この場合はどれも 1) で採点し、同点を `a.id.localeCompare(b.id)` で切る。ランキング側に tagIds が無いのでタグでも差がつかない。`data/content/navigation.json` の `links` に明示の関係を足しても同じ 101 点になり、順位は上がらない。
 - **影響範囲 (未計測)**: `rankingKeys` が同じ公開記事を 4 本以上持つランキングすべて。件数は `data/content/pages/blog.json` の rankingKeys を数えて出す。
 - **次**: ① 影響するランキングの数と、そのページの GSC 表示を出す ② 同点の切り方を決める (候補: 編集者が `navigation.json` の `links` で明示した関係に加点する、記事の `rankingKeys` の先頭 = 主題の指標なら加点する)。モデルの推測で記事の主題を決めない ③ `navigation.test.ts` に「主題の記事が上位に来る」テストを足す。
+- **2026-10-20 実装 (未デプロイ)**: 影響は全 2,460 ランキングのうち、指標を共有する公開記事が 4 本以上ある 194 ページ (GSC 2026-W41 の表示 36,671)。同点を「一致数 ÷ 記事が使う指標数」(その指標にどれだけ絞った記事か) の高い順で切り、それでも同じなら ID 順にした (`navigation.ts`、テスト `navigation.test.ts` に 1 件追加・戻すと落ちることを確認、data-configs 1,182 件 pass)。全公開ページ 26,172 件 (元ページ × blog/ranking/theme) の上位 3 本を変更前後で比べ、変わったのは 1,416 件 (ranking→blog 284・blog→blog 294・area-theme→blog 752 ほか)。例: 納豆は福島・茨城の食文化記事 → 納豆の東西差・マヨネーズ・納豆と体重の相関、マグロは愛知・青森・千葉の食文化記事 → マグロの記事 3 本。area-theme の変化の大半は同じ記事の並び替えで、県ページ (area) は元から 47 県で同じ推薦だった。**未達**: 出生率のランキングには `total-fertility-rate` の記事が入ったが、`fertility-rate-prefecture-gap` (指標 2 つ) は指標 1 つの `cc-estat-07-birthrate-line` (Claude Code の連載) に負けて入らない。直すなら、編集者が `data/content/navigation.json` の `links` で明示した関係に加点する案を次に検討する。本番反映は次のデプロイ (他の変更とまとめて 1 回)。
 - **停止条件**: 全ランキングの推薦が変わるので、変更前後の上位 3 本の差分を全件出してから本番に出す。デプロイは他の変更とまとめて 1 回。
 - **完了条件**: `/ranking/total-fertility-rate` の関連記事に `fertility-rate-prefecture-gap` が入り、差分一覧で意図しない入れ替わりが無いことを確かめた。
+
+
+### [REMOVE-WORKTREE-TEST-MAC-PATH-01] worktree 削除のテストが Mac で落ちる (/var と /private/var の表記ずれ)
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/remove-worktree.test.mjs] [起票:2026-10-20] [領域:管理]
+
+- **事象 (2026-10-20 Mac 実測)**: `remove-worktree.test.mjs` の「登録済み worktree を丸ごと削除する (正常系)」が `... は登録済み worktree ではない (known: /private/var/folders/...)` で落ちる。変更を退避した状態でも再現するので既存の不具合。
+- **原因 (仮説)**: macOS の一時ディレクトリは `/var` が `/private/var` への symlink で、テストが渡すパス (`/var/...`) と `git worktree list` が返すパス (`/private/var/...`) を文字列のまま比べている。検証: 比較の前に両方を `fs.realpathSync` で正規化して再実行する。
+- **完了条件**: Mac と Linux (CI) でこのテストが pass する。正規化は比較だけに使い、削除対象のパスの決め方は変えない。
+
+
+### [LIVABLE-COMPOSITE-CHART-DATA-01] 住みやすい県ランキングの総合スコアの図に、1 人当たり県民所得のデータが紐づいている
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **事象 (2026-10-20 実測)**: `/blog/livable-prefecture-composite-ranking` (GSC 2026-W41 で 8,214 表示・順位 6.7) の図 `data/composite-ranking` は、本文では 8 指標の総合スコア (1 位福井 79.9 点・2 位富山 78.0 点) を示すのに、R2 の `composite-ranking.json` と `.source.json` は `per-capita-kenmin-shotoku-h27` (1 人当たり県民所得 2020 年、1 位東京 5,214 千円) を指している。図の中身が本文と違うか、系譜の後付け (backfill) で取り違えた可能性がある。
+- **次**: ① 公開中の `composite-ranking.svg` の表示値を見て、図そのものが所得なのか総合スコアなのかを確かめる ② 総合スコアなら、本文の採点方法 (8 指標のパーセンタイル平均) から `kind: calculated` の source.json と data json を作り直す。所得なら図を総合スコアに作り直す。値は本文の採点表と一致させる。
+- **完了条件**: 図・data json・source.json・本文の 1 位〜3 位が一致し、`quality-gate.mjs` が pass。title 変更 (`SEO-CTR-CANDIDATES-01` の候補) とは別に直す。
 
 
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
@@ -3087,11 +3107,11 @@ updated: 2026-10-19
 - **途中成果**: リモートのブランチ `wip/ui-chart-text-loop-01` (commit `f8344bf3c`、35 ファイル。2026-09-25 時点の develop の上に
   stash を衝突なしで適用したもの。develop へは未取り込み)。**検証済み**: ①の検出を本番の代表URL 12 件 × 412/1440px で実行し、
   `/areas/13000` の縦軸切れを検出・他 11 ページは 0 件 / 検出とカード手順のテスト (壊すと落ちることも確認)。
-  **未完・未検証**: `findChartTextIssues` (途中)・`line.ts` の修正 (未着手)・D3 14 部品への `fitSvgViewBox` 適用
+  **未完・未検証**: D3 14 部品への `fitSvgViewBox` 適用
   (テスト・型チェック未実施)・`check-svg-text.ts` と `plan-svg-text-fix.ts` のテスト。
-- **次 (実行順)**: ①`wip/ui-chart-text-loop-01` を develop へ追従させて (`git merge develop`) 型チェック ②`findChartTextIssues` を完成させ、欠陥ごとの合成 SVG で感度テスト
+- **次 (実行順)**: ①`wip/ui-chart-text-loop-01` を develop へ追従させて (`git merge develop`) 型チェック ②生成器の通常テスト (`packages/svg-builder/src/charts/__tests__/text-layout.gate.test.ts`) を維持したまま旧WIPとの差分を整理
   ③公開済み記事 SVG の該当件数を実測し、公開前 gate (`quality-gate.mjs`) を error にするか件数固定の baseline にするか決める
-  ④`line.ts` を直してビール SVG を作り直す ⑤D3 の共通処理を型チェック・テストし、localhost の `/areas/13000` で
+  ④修正済みの `line.ts` でビール SVG を作り直し、公開中の画像との差分を確認する ⑤D3 の共通処理を型チェック・テストし、localhost の `/areas/13000` で
   `chart_text_issues` が 0 になることを確かめる ⑥残りのテスト ⑦週次監査を 1 回手動で流し、カードに手順が載ることを確かめる。
 - **関係するカード**: `AREA-DATABOOK-CHART-FIX-01` ② (狭い画面の文字サイズ・軸単位) は同じ D3 部品を触るので、こちらの WIP ブランチを先に
   取り込ませる。`NAV-CLICK-COVERAGE-01` P3 と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も週次監査の同じファイル群に指標を足すので並行実装しない。

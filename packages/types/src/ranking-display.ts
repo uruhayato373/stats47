@@ -1,3 +1,4 @@
+import type { MetricPresentation } from './metric-presentation';
 /**
  * ランキング表示用の共有型定義
  *
@@ -15,6 +16,9 @@ export interface RankingDisplayEntry {
 
 /** ランキング項目のメタデータ */
 export interface RankingDisplayMeta {
+  /** 指標snapshotと同じ原単位の表示方針。旧保存入力では省略可。
+   * 削除条件: 保存済みSNS入力と全producerを移行した時点で optional を外す。 */
+  presentation?: MetricPresentation;
   title: string;
   subtitle?: string;
   unit: string;

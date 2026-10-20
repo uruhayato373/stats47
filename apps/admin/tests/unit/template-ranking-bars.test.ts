@@ -55,7 +55,7 @@ describe('ranking bar basic form', () => {
       barDomain: { mode: 'zero' },
     });
     expect(svg).toContain('data-domain-min="0"');
-    expect(svg).toContain('data-domain-max="40"');
+    expect(svg).toContain('data-domain-max="36"');
     expect(svg).not.toContain('data-axis-break');
     expect(svg).not.toContain('0省略');
   });

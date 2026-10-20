@@ -1,5 +1,6 @@
 "use client";
 
+import { resolveChartDomain } from '@stats47/types';
 import { cn } from "@stats47/components";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { select, scaleLinear, scaleBand, axisTop } from "d3";
@@ -71,12 +72,10 @@ export function HorizontalDivergingBarChart({
 
     // X スケール（値軸）
     const values = sorted.map((d) => d.value);
-    const minVal = Math.min(baseline, ...values);
-    const maxVal = Math.max(baseline, ...values);
-    const padding = (maxVal - minVal) * 0.15 || 2;
-
+    const domain = resolveChartDomain([...values, baseline], {mode: 'extent', padding: 0.15});
+    if (!domain) return;
     const x = scaleLinear()
-      .domain([minVal - padding, maxVal + padding])
+      .domain(domain)
       .range([0, innerWidth]);
 
     // Y スケール（カテゴリ軸）
