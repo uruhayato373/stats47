@@ -1589,6 +1589,14 @@ updated: 2026-10-19
 - **完了条件**: Mac と Linux (CI) でこのテストが pass する。正規化は比較だけに使い、削除対象のパスの決め方は変えない。
 
 
+### [LIVABLE-COMPOSITE-CHART-DATA-01] 住みやすい県ランキングの総合スコアの図に、1 人当たり県民所得のデータが紐づいている
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **事象 (2026-10-20 実測)**: `/blog/livable-prefecture-composite-ranking` (GSC 2026-W41 で 8,214 表示・順位 6.7) の図 `data/composite-ranking` は、本文では 8 指標の総合スコア (1 位福井 79.9 点・2 位富山 78.0 点) を示すのに、R2 の `composite-ranking.json` と `.source.json` は `per-capita-kenmin-shotoku-h27` (1 人当たり県民所得 2020 年、1 位東京 5,214 千円) を指している。図の中身が本文と違うか、系譜の後付け (backfill) で取り違えた可能性がある。
+- **次**: ① 公開中の `composite-ranking.svg` の表示値を見て、図そのものが所得なのか総合スコアなのかを確かめる ② 総合スコアなら、本文の採点方法 (8 指標のパーセンタイル平均) から `kind: calculated` の source.json と data json を作り直す。所得なら図を総合スコアに作り直す。値は本文の採点表と一致させる。
+- **完了条件**: 図・data json・source.json・本文の 1 位〜3 位が一致し、`quality-gate.mjs` が pass。title 変更 (`SEO-CTR-CANDIDATES-01` の候補) とは別に直す。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
