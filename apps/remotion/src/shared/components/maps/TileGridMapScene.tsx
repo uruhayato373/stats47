@@ -1,11 +1,26 @@
+import { resolveColorEncoding, type MetricPresentation } from '@stats47/types';
 import React, { useMemo } from "react";
-import { AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { scaleDiverging, scaleSequential } from "d3-scale";
+import {
+  AbsoluteFill,
+  OffthreadVideo,
+  Sequence,
+  interpolate,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import * as chromatic from "d3-scale-chromatic";
 import type { TileGridCell } from "@stats47/visualization";
 import { formatValueWithPrecision } from "@stats47/utils";
 
-import { BRAND, COLOR_SCHEMES, FONT, RADIUS, type ColorScheme, type ThemeName } from "@/shared/themes/brand";
+import {
+  BRAND,
+  COLOR_SCHEMES,
+  FONT,
+  RADIUS,
+  type ColorScheme,
+  type ThemeName,
+} from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
 import { SITE } from "@stats47/types";
@@ -99,19 +114,10 @@ function buildColorScale(
   scheme = "interpolateBlues",
   schemeType: "sequential" | "diverging" = "sequential",
   midpointValue?: number,
+  presentation?: MetricPresentation,
 ) {
   const values = entries.map((e) => e.value);
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  const interpolator = getInterpolator(scheme);
-  if (schemeType === "diverging") {
-    const colorScale = scaleDiverging(interpolator).domain([minVal, midpointValue ?? (minVal + maxVal) / 2, maxVal]);
-    return (value: number) => colorScale(value);
-  }
-  // sequential: t=0 でもほぼ白にならないよう範囲を 0.25〜1.0 に制限
-  const wrappedInterpolator = (t: number) => interpolator(0.25 + t * 0.75);
-  const colorScale = scaleSequential(wrappedInterpolator).domain([minVal, maxVal]);
-  return (value: number) => colorScale(value);
+  return resolveColorEncoding(presentation ?? {colorSchemeType:schemeType, divergingMidpoint:midpointValue ?? 'zero'}, values, getInterpolator(presentation?.colorScheme ?? scheme), '#e0e0e0').colorAtValue;
 }
 
 /**
@@ -370,8 +376,8 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
 
   // 値ベースのカラースケール（コロプレス地図と同じ d3 連続カラースケール）
   const getColor = useMemo(
-    () => buildColorScale(entries, colorScheme, colorSchemeType, divergingMidpointValue),
-    [entries, colorScheme, colorSchemeType, divergingMidpointValue],
+    () => buildColorScale(entries, colorScheme, colorSchemeType, divergingMidpointValue, meta.presentation),
+    [entries, colorScheme, colorSchemeType, divergingMidpointValue, meta.presentation],
   );
 
   // entries を rank 降順（47→1）に並べたリスト（プログレッシブ用）

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@stats47/types": ["../../packages/types/src"]
     },
     "jsx": "react-jsx",
     "types": ["vitest/globals", "node"]

@@ -1,11 +1,9 @@
+import type { RadarAxisIdentity } from '@stats47/types';
 import type { BaseD3ChartProps } from "../../types/base";
 
 /** レーダーチャートの軸定義 */
-export interface RadarAxis {
-  /** 軸のキー（データから値を取得するキー） */
-  key: string;
-  /** 軸の表示ラベル */
-  label: string;
+export interface RadarAxis extends RadarAxisIdentity {
+
   /** 軸の最大値（省略時は全データから自動算出） */
   max?: number;
 }

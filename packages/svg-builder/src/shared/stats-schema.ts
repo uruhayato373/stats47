@@ -1,8 +1,8 @@
 /**
  * svg-builder 向け StatsSchema 型定義・データ抽出・型変換ユーティリティ
  *
- * packages/types の StatsSchema と同一構造を持つ。
- * svg-builder は依存パッケージを増やさないため、ここで再定義する。
+ * packages/types の StatsSchema を共有する。
+ * 観測行の契約は描画側で再定義しない。
  *
  * ## StatsSchema → 各チャート型への変換
  *
@@ -18,15 +18,8 @@
  * ```
  */
 
-export interface StatsSchema {
-  metricKey: string;
-  areaCode: string;
-  areaName: string;
-  yearCode: string;
-  yearName: string;
-  value: number | null;
-  unit: string;
-}
+import type { StatsSchema } from '@stats47/types';
+export type { StatsSchema } from '@stats47/types';
 
 /** StatsSchema の次元キー（メトリクスキーはファセット軸として使わないため除外） */
 export type DimensionKey = "areaCode" | "yearCode";
@@ -62,7 +55,7 @@ export function buildValueMap(
 ): Map<string, Map<string, number>> {
   const map = new Map<string, Map<string, number>>();
   for (const d of data) {
-    if (d.value === null) continue;
+    if (d.value === null || !Number.isFinite(d.value)) continue;
     if (!map.has(d[xKey])) map.set(d[xKey], new Map());
     map.get(d[xKey])!.set(d[seriesKey], d.value);
   }

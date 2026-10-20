@@ -391,33 +391,50 @@
                     ]
                   },
                   "yAxisConfig": {
-                    "type": "object",
-                    "properties": {
-                      "mode": {
-                        "enum": [
-                          "auto",
-                          "sync",
-                          "fixed"
-                        ]
-                      },
-                      "domain": {
-                        "type": "array",
-                        "items": [
-                          {
-                            "type": "number"
-                          },
-                          {
-                            "type": "number"
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "enum": [
+                              "auto",
+                              "sync"
+                            ]
                           }
+                        },
+                        "required": [
+                          "mode"
                         ],
-                        "minItems": 2,
-                        "maxItems": 2
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "fixed"
+                          },
+                          "domain": {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "domain"
+                        ],
+                        "additionalProperties": false
                       }
-                    },
-                    "required": [
-                      "mode"
-                    ],
-                    "additionalProperties": false
+                    ]
                   }
                 },
                 "required": [

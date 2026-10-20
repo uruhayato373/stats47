@@ -1,49 +1,15 @@
-/* eslint-disable import/order */
-/**
- * 順序カラースケールを生成
- *
- * 連続値を単一の色相でグラデーション表示するカラースケールを生成します。
- */
-
-import type { SequentialColorScaleOptions } from "../../types";
+import { resolveColorEncoding } from '@stats47/types';
 import { resolveColorInterpolator } from './create-color-schemes';
-import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from '../../constants/map-constants';
+import type { SequentialColorScaleOptions } from '../../types';
 
-/**
- * 順序カラースケールを生成
- *
- * @param options - 順序カラースケールのオプション
- * @returns 値から色への変換関数
- */
-export async function createSequentialColorScale(
-  options: SequentialColorScaleOptions
-): Promise<(value: number) => string> {
-  const {
-    data,
-    colorScheme = "interpolateBlues",
-    isReversed = false,
-    minValueType = 'data-min',
-    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
-    d3: providedD3,
-  } = options;
-
-  const d3Module = providedD3 || (await import("d3"));
-  const d3 = d3Module;
-
-  if (!data || data.length === 0) {
-    return () => noDataColor;
-  }
-
-  const base = resolveColorInterpolator(d3, colorScheme);
-  const interpolator = (t: number) => {
-    return isReversed ? base(1 - t) : base(t);
-  };
-
-  const values = data.map((d) => d.value);
-  const dataMinValue = d3.min(values) ?? 0;
-  const maxValue = d3.max(values) ?? 0;
-  const minValue = minValueType === 'zero' ? 0 : dataMinValue;
-  const scale = d3.scaleSequential(interpolator).domain(options.resolvedDomain ?? [minValue, maxValue]).clamp(true);
-
-  return (value: number) => scale(value);
+export async function createSequentialColorScale(options: SequentialColorScaleOptions): Promise<(value: number) => string> {
+  const d3 = options.d3 ?? await import('d3');
+  const domain = options.resolvedDomain;
+  const interpolate = resolveColorInterpolator(d3, options.colorScheme ?? 'interpolateBlues');
+  return resolveColorEncoding({
+    ...options,
+    colorSchemeType: 'sequential',
+    ...(domain ? {domain: {mode: 'fixed', min: domain[0], max: domain[1]} as const} : {}),
+  }, options.data.map(point => point.value), interpolate, options.noDataColor ?? DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor).colorAtValue;
 }

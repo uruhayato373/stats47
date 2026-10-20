@@ -86,6 +86,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@data": path.resolve(__dirname, "./data"),
+      "@stats47/types": path.resolve(__dirname, "../../packages/types/src/index.ts"),
       // monorepo内部パッケージのエイリアス
       "@stats47/components": path.resolve(
         __dirname,

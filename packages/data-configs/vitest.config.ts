@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from "vitest/config";
 
 import criticalCoverage from "../../.claude/config/critical-module-coverage.json";
@@ -16,6 +17,7 @@ const criticalThresholds = Object.fromEntries(
  * include は `__tests__/` 配下と `src` 直下併置の両形式を拾う (既存テストが後者のため)。
  */
 export default defineConfig({
+  resolve: { alias: { '@stats47/types': fileURLToPath(new URL('../types/src/index.ts', import.meta.url)) } },
   test: {
     name: "@stats47/data-configs",
     globals: true,

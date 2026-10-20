@@ -50,7 +50,8 @@ export function toStackedBarChartData(
         });
       }
       const row = yearMap.get(key)!;
-      row[label] = ((row[label] as number) ?? 0) + (item.value ?? 0);
+      if (typeof item.value === "number" && Number.isFinite(item.value))
+        row[label] = ((row[label] as number) ?? 0) + item.value;
     });
   });
 
@@ -88,11 +89,11 @@ function toSimpleBarChartData(
 
       const latestYear = years[0];
       const item = rawData.find((d) => d.yearCode === latestYear.yearCode);
-      if (!item) return null;
+      if (!item || typeof item.value !== "number" || !Number.isFinite(item.value)) return null;
 
       return {
         name: label,
-        value: item.value ?? 0,
+        value: item.value,
         unit: item.unit ?? "",
         date: latestYear.yearName || latestYear.yearCode,
       };

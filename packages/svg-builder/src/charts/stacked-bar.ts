@@ -1,3 +1,8 @@
+import {
+  resolveChartDomain,
+  stackedNumericValues,
+  type NumericDomainPolicy,
+} from '@stats47/types';
 /**
  * 積み上げ棒グラフ SVG 生成（垂直・水平、100%正規化対応）
  *
@@ -38,6 +43,7 @@ import {
 } from "../shared/stats-schema";
 
 export interface StackedBarOptions {
+  domainPolicy?: NumericDomainPolicy;
   /** チャートタイトル */
   title: string;
   /** サブタイトル（年次・出典など） */
@@ -58,6 +64,9 @@ export interface StackedBarOptions {
 
 export function generateStackedBarSvg(data: StatsSchema[], options: StackedBarOptions): string {
   const { horizontal = false, normalized = false } = options;
+  const finiteValues = data.flatMap(row => typeof row.value === "number" && Number.isFinite(row.value) ? [row.value] : []);
+  if (!finiteValues.length) throw new Error("No finite observations for stacked chart");
+  if (normalized && finiteValues.some(value => value < 0)) throw new Error("Normalized composition requires nonnegative values");
   return horizontal
     ? generateHorizontal(data, options, normalized)
     : generateVertical(data, options, normalized);
@@ -86,29 +95,11 @@ function generateVertical(
     return series.map((s) => valueMap.get(xCode)?.get(s.code) ?? 0);
   }
 
-  // Y 軸範囲（正値の合計 and 負値の合計を考慮）
-  let globalYMax = 0;
-  let globalYMin = 0;
-  for (const x of xItems) {
-    const vals = getValues(x.code);
-    let posSum = 0;
-    let negSum = 0;
-    for (const v of vals) {
-      if (v >= 0) posSum += v;
-      else negSum += v;
-    }
-    if (normalized) {
-      globalYMax = 100;
-      globalYMin = 0;
-    } else {
-      globalYMax = Math.max(globalYMax, posSum);
-      globalYMin = Math.min(globalYMin, negSum);
-    }
-  }
-
-  const yTicks = niceTicks(globalYMin, globalYMax, 5);
-  const yScaleLo = yTicks[0];
-  const yScaleHi = yTicks[yTicks.length - 1];
+  const domainRows = xItems.map(x => Object.fromEntries(getValues(x.code).map((value, i) => [String(i), value])));
+  const domain = resolveChartDomain(normalized ? [0, 100] : stackedNumericValues(domainRows, series.map((_, i) => String(i))), normalized ? {mode: 'fixed', min: 0, max: 100} : options.domainPolicy ?? {mode: 'zero'});
+  if (!domain) throw new Error('No finite observations for stacked chart');
+  const [yScaleLo, yScaleHi] = domain;
+  const yTicks = niceTicks(yScaleLo, yScaleHi, 5);
   const toSvgY = linearScale(yScaleLo, yScaleHi, plot.bottom, plot.top);
 
   const barW = Math.min(60, plot.width / xItems.length - 12);
@@ -126,7 +117,7 @@ function generateVertical(
   // ゼロライン
   const zeroY = toSvgY(0);
   const zeroLine =
-    globalYMin < 0
+    yScaleLo < 0
       ? `  <line x1="${px(plot.left)}" y1="${px(zeroY)}" x2="${px(plot.right)}" y2="${px(zeroY)}" stroke="#6b7280" stroke-width="1.5"/>`
       : "";
 
@@ -152,7 +143,7 @@ function generateVertical(
 
     series.forEach((s, si) => {
       const raw = valueMap.get(x.code)?.get(s.code) ?? 0;
-      const v = normalized ? (raw / totalPos) * 100 : raw;
+      const v = normalized ? (totalPos ? raw / totalPos : 0) * 100 : raw;
       if (v === 0) return;
 
       const color = STACKED_COLORS[si % STACKED_COLORS.length];
@@ -267,13 +258,18 @@ function generateHorizontal(
   const plotRight = W - 20;
   const plotWidth = plotRight - plotLeft;
 
+  const horizontalRows = xItems.map(x => Object.fromEntries(series.map(s => [s.code, valueMap.get(x.code)?.get(s.code)])));
+  if (data.some(row => row.value !== null && row.value < 0)) throw new Error('Horizontal composition requires nonnegative values');
+  const compositionPolicy = {mode: 'fixed', min: 0, max: 100} as const;
+  if (options.domainPolicy && (options.domainPolicy.mode !== 'fixed' || options.domainPolicy.min !== 0 || options.domainPolicy.max !== 100)) throw new Error('Horizontal composition requires domain 0–100');
+  resolveChartDomain(normalized ? [0,100] : stackedNumericValues(horizontalRows, series.map(s=>s.code)), compositionPolicy);
   const bars: string[] = [];
   const rowLabels: string[] = [];
 
   xItems.forEach((x, xi) => {
     const rawVals = series.map((s) => valueMap.get(x.code)?.get(s.code) ?? 0);
     const total = normalized ? rawVals.reduce((a, b) => a + b, 0) : 100;
-    const vals = normalized ? rawVals.map((v) => (v / total) * 100) : rawVals;
+    const vals = normalized ? rawVals.map((v) => (total ? v / total : 0) * 100) : rawVals;
 
     const barTop = MARGIN_TOP + xi * (BAR_H + BAR_GAP);
     rowLabels.push(

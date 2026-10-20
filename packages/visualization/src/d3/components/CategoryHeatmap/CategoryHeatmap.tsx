@@ -1,5 +1,6 @@
 "use client";
 
+import { resolveColorEncoding } from '@stats47/types';
 import { cn } from "@stats47/components";
 import { select, scaleBand, interpolateRgb } from "d3";
 import { useEffect, useRef } from "react";
@@ -66,20 +67,21 @@ export function CategoryHeatmap({
 
     // 色スケール（基準値を中心にした diverging）
     const values = data.map((d) => d.value);
-    const maxDeviation = Math.max(
-      Math.abs(Math.min(...values) - baseline),
-      Math.abs(Math.max(...values) - baseline)
-    ) || 1;
-
-    const getColor = (value: number): string => {
-      const deviation = value - baseline;
-      const t = deviation / maxDeviation; // -1 to +1
-      if (Math.abs(t) < 0.05) return "hsl(var(--muted))";
-      if (t > 0) {
-        return interpolateRgb("#dbeafe", positiveColor)(Math.abs(t));
-      }
-      return interpolateRgb("#ffedd5", negativeColor)(Math.abs(t));
-    };
+    const colorScale = resolveColorEncoding(
+      { colorSchemeType: 'diverging', divergingMidpoint: baseline, isSymmetrized: true },
+      values,
+      (position) => {
+        const t = position * 2 - 1;
+        if (Math.abs(t) < 0.05) return 'hsl(var(--muted))';
+        return t > 0
+          ? interpolateRgb('#dbeafe', positiveColor)(t)
+          : interpolateRgb('#ffedd5', negativeColor)(-t);
+      },
+      'hsl(var(--muted))',
+    );
+    if (!colorScale.domain) return;
+    const getColor = colorScale.colorAtValue;
+    const maxDeviation = colorScale.domain[1] - baseline;
 
     const g = svg
       .append("g")

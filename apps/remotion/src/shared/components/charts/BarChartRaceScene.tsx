@@ -1,10 +1,18 @@
+import { resolveChartDomain } from '@stats47/types';
 import React, { useMemo } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { schemeTableau10 } from "d3-scale-chromatic";
 import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
 
-import { BRAND, COLOR_SCHEMES, FONT, RANK_COLORS, SPACING, type ThemeName } from "@/shared";
+import {
+  BRAND,
+  COLOR_SCHEMES,
+  FONT,
+  RANK_COLORS,
+  SPACING,
+  type ThemeName,
+} from "@/shared";
 import {
   interpolateRaceFrame,
   type EventLabel,
@@ -96,13 +104,10 @@ export const BarChartRaceScene: React.FC<BarChartRaceSceneProps> = ({
 
   // 全フレームの最大値を事前計算（x軸を固定するため）
   const globalMax = useMemo(() => {
-    let max = 1;
-    for (const f of frames) {
-      for (const item of f.items) {
-        if (item.value > max) max = item.value;
-      }
-    }
-    return max;
+    const domain = resolveChartDomain(frames.flatMap(frame => frame.items.map(item => item.value)), {mode:'zero'});
+    if (!domain) throw new Error('No finite race observations');
+    if (domain[0] < 0) throw new Error('Race bars require nonnegative observations');
+    return domain[1];
   }, [frames]);
 
   // 小数点以下の桁数を自動検出（全フレームの全値から最大桁数を取得）

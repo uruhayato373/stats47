@@ -3,7 +3,12 @@ import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types'
 import { logger } from '@stats47/logger';
 import { readRankingItemFromR2 } from '@stats47/ranking/server';
 import { readStatsValues } from '@stats47/stats-r2/readers';
-import { isOk, type StatsSchema } from '@stats47/types';
+import {
+  isOk,
+  stackedNumericValues,
+  resolveChartDomain,
+  type StatsSchema,
+} from '@stats47/types';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
@@ -147,28 +152,13 @@ export const RankingChartDashboard = async ({
     const barData = toBarChartData(rawDataList, names, barType);
     const policy = await resolveMetricAxisPolicy(
       resolved.map((item) => ({ metricKey: item.key })),
-      yAxisConfig
+      yAxisConfig,
+      'bar'
     );
     const keys = barData.series.map((series) => series.dataKey);
-    const domainRows =
-      barType === 'stacked-bar'
-        ? barData.data.map((row) => ({
-            positive: keys.reduce(
-              (sum, key) => sum + Math.max(0, Number(row[key] ?? 0)),
-              0
-            ),
-            negative: keys.reduce(
-              (sum, key) => sum + Math.min(0, Number(row[key] ?? 0)),
-              0
-            ),
-          }))
-        : barData.data;
-    const domain = metricSeriesDomain(
-      domainRows,
-      barType === 'stacked-bar' ? ['positive', 'negative'] : keys,
-      policy,
-      true
-    );
+    const domain = barType === 'stacked-bar'
+      ? resolveChartDomain(stackedNumericValues(barData.data, keys), policy.mode === 'fixed' ? policy : {...policy, mode: 'zero'}) ?? undefined
+      : metricSeriesDomain(barData.data, keys, policy);
     return (
       <ChartPanel title={title} footer={footer}>
         <BarChartClient

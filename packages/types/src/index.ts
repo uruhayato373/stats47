@@ -138,3 +138,12 @@ export {
 export { EXPANDED_THEME_SETS } from './indicator-sets/expanded';
 
 export * from "./metric-presentation";
+export * from './chart-data';
+export * from './value-display';
+
+export * from './color-encoding';
+export * from './yoy-series';
+export * from './rounded-axis';
+export * from './numeric-ticks';
+
+export * from './observation-domain';

@@ -1,7 +1,7 @@
+import { resolveColorEncoding } from '@stats47/types';
 import React, { useMemo } from "react";
 import { AbsoluteFill } from "remotion";
 import { TILE_GRID_LAYOUT } from "@stats47/visualization";
-import { scaleDiverging, scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
 
 import {
@@ -113,17 +113,9 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
   const getColor = useMemo(() => {
     if (!allEntries || allEntries.length === 0) return null;
     const values = allEntries.map((e) => e.value);
-    const minVal = Math.min(...values);
-    const maxVal = Math.max(...values);
-    const interpolator = getInterpolator(colorScheme);
-    const wrappedInterpolator = colorSchemeType === "diverging"
-      ? interpolator
-      : (t: number) => interpolator(0.25 + t * 0.75);
-    const scale = colorSchemeType === "diverging"
-      ? scaleDiverging(wrappedInterpolator).domain([minVal, divergingMidpointValue ?? (minVal + maxVal) / 2, maxVal])
-      : scaleSequential(wrappedInterpolator).domain([minVal, maxVal]);
-    return (value: number) => scale(value);
-  }, [allEntries, colorScheme, colorSchemeType, divergingMidpointValue]);
+    const config = meta.presentation ?? {colorSchemeType, divergingMidpoint: divergingMidpointValue ?? 'zero'};
+    return resolveColorEncoding(config, values, getInterpolator(meta.presentation?.colorScheme ?? colorScheme), '#e0e0e0').colorAtValue;
+  }, [allEntries, colorScheme, colorSchemeType, divergingMidpointValue, meta.presentation]);
 
   return (
     <AbsoluteFill

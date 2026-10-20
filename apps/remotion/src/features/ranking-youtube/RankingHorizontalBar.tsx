@@ -1,3 +1,4 @@
+import { resolveChartDomain } from '@stats47/types';
 import React, { useMemo } from "react";
 import {
   AbsoluteFill,
@@ -351,7 +352,7 @@ const HorizontalBarBody: React.FC<{
   );
 
   const maxValue = useMemo(
-    () => Math.max(...entries.map((e) => e.value)),
+    () => resolveChartDomain(entries.map(e => e.value), {mode:'zero'})?.[1] ?? 1,
     [entries]
   );
 

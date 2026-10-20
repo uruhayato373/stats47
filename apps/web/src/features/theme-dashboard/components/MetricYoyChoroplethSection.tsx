@@ -2,27 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { TimelineChoroplethMap, type TimelineChoroplethFrame } from "@stats47/visualization/d3/TimelineChoroplethMap";
+import {
+  TimelineChoroplethMap,
+  type TimelineChoroplethFrame,
+} from "@stats47/visualization/d3/TimelineChoroplethMap";
 
 import { SurfaceCard, SurfaceSection } from "@/components/surface";
 
+import type { YoyTimeseries } from '@stats47/types';
 import type { Topology } from "topojson-specification";
 
 import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
 
-interface YoyRecord {
-  areaCode: string;
-  areaName: string;
-  ratio: number;
-}
-
-interface YoyTimeseries {
-  yearRange: [number, number];
-  movingAverageWindow: number;
-  maxAbs: number;
-  prefectureCodes: string[];
-  frames: Array<{ year: number; yoy: YoyRecord[] }>;
-}
 
 interface MetricYoyChoroplethSectionProps {
   /** YoY タイムシリーズ JSON への URL */

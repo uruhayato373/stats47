@@ -1,5 +1,5 @@
+import { resolveColorEncoding, type NumericColorEncoding } from '@stats47/types';
 import { geoArea, geoCentroid, geoMercator, geoPath } from "d3-geo";
-import { scaleDiverging, scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
@@ -23,6 +23,7 @@ export interface ChoroplethDataItem {
 }
 
 export interface ChoroplethOptions {
+  encoding?: NumericColorEncoding;
   width?: number;
   height?: number;
   /** D3 interpolator 名 (default: "interpolateBlues") */
@@ -227,12 +228,8 @@ export function computeChoroplethPaths(
 
   // カラースケール
   const values = data.map((d) => d.value);
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
   const interpolator = getInterpolator(colorScheme);
-  const colorScale = colorSchemeType === "diverging"
-    ? scaleDiverging(interpolator).domain([minVal, divergingMidpointValue ?? (minVal + maxVal) / 2, maxVal])
-    : scaleSequential(interpolator).domain([minVal, maxVal]);
+  const colorScale = resolveColorEncoding(options.encoding ?? {colorSchemeType, divergingMidpoint: divergingMidpointValue ?? 'zero'}, values, interpolator, noDataColor).colorAtValue;
 
   // 投影
   const projection = geoMercator()

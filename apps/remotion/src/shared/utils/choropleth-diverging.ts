@@ -1,10 +1,17 @@
+import {
+  resolveColorEncoding,
+  resolveSymmetricDomain,
+  summarizeNumericValues,
+} from '@stats47/types';
 import { geoMercator, geoPath } from "d3-geo";
-import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
-import type { CityPathInfo, PopulationRecord } from "../../features/population-choropleth/types";
+import type {
+  CityPathInfo,
+  PopulationRecord,
+} from "../../features/population-choropleth/types";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 
 export interface DivergingChoroplethOptions {
@@ -65,17 +72,7 @@ export function computeDivergingChoroplethPaths(
 
   // Diverging カラースケール（対称化）
   const ratios = data.map((d) => d.ratio);
-  const minRatio = Math.min(...ratios);
-  const maxRatio = Math.max(...ratios);
-  const maxAbs = Math.max(Math.abs(minRatio - 1), Math.abs(maxRatio - 1));
-
-  // RdBu: 0=赤, 0.5=白, 1=青
-  // ratio < 1 (減少) → 赤, ratio > 1 (増加) → 青
-  const colorScale = scaleDiverging(interpolateRdBu).domain([
-    1 - maxAbs,
-    1,
-    1 + maxAbs,
-  ]);
+  const colorScale = resolveColorEncoding({colorSchemeType:'diverging',divergingMidpoint:1,isSymmetrized:true}, ratios, interpolateRdBu, noDataColor).colorAtValue;
 
   // 投影
   const projection = geoMercator().fitExtent(
@@ -113,17 +110,17 @@ export function computeSharedDomain(
   ...datasets: PopulationRecord[][]
 ): { min: number; max: number; maxAbs: number } {
   const allRatios = datasets.flatMap((d) => d.map((r) => r.ratio));
-  const min = Math.min(...allRatios);
-  const max = Math.max(...allRatios);
-  const maxAbs = Math.max(Math.abs(min - 1), Math.abs(max - 1));
-  return { min, max, maxAbs };
+  const stats = summarizeNumericValues(allRatios);
+  const domain = resolveSymmetricDomain(allRatios, 1);
+  if (!stats || !domain) throw new Error('No finite ratio observations');
+  return {min:stats.min, max:stats.max, maxAbs:domain[1]-1};
 }
 
 /**
  * 共通ドメインを使ったカラースケール生成
  */
 export function createSharedColorScale(maxAbs: number) {
-  return scaleDiverging(interpolateRdBu).domain([1 - maxAbs, 1, 1 + maxAbs]);
+  return resolveColorEncoding({colorSchemeType:'diverging',divergingMidpoint:1,isSymmetrized:true}, [1-maxAbs,1+maxAbs], interpolateRdBu, '#e0e0e0').colorAtValue;
 }
 
 /**

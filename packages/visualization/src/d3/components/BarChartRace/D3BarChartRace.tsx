@@ -1,13 +1,29 @@
 "use client";
 
+import { resolveChartDomain } from '@stats47/types';
 import { cn } from "@stats47/components";
 
 import { Button } from "@stats47/components";
 import { getMaxDecimalPlaces, formatValueWithPrecision } from "@stats47/utils";
-import { select, scaleLinear, scaleBand, scaleOrdinal, schemeTableau10, range, max, easeLinear, interpolateNumber, interval, Timer } from "d3";
+import {
+  select,
+  scaleLinear,
+  scaleBand,
+  scaleOrdinal,
+  schemeTableau10,
+  range,
+  easeLinear,
+  interpolateNumber,
+  interval,
+  Timer,
+} from "d3";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+} from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { BarChartRaceProps, RankedBarItem } from "./types";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
@@ -109,7 +125,9 @@ export function BarChartRace({
 
         // 値ラベルの最大文字幅を事前計算し、バー領域から除外する
         const allValues = data.flatMap((f) => f.items.map((i) => i.value));
-        const maxVal = max(allValues) ?? 1;
+        const domain = resolveChartDomain(allValues, {mode: 'zero'});
+        if (!domain) return;
+        const maxVal = domain[1];
         const maxLabelText = formatValue(maxVal);
         // 一時的な <text> で実測
         const tempText = svg.append("text")
@@ -118,8 +136,8 @@ export function BarChartRace({
         const labelWidth = (tempText.node()?.getComputedTextLength() ?? maxLabelText.length * axisFontSize * 0.6) + 12; // 12 = gap (6px) + 余白
         tempText.remove();
 
-        const globalMax = maxVal;
-        const x = scaleLinear([0, globalMax], [marginLeft, viewWidth - marginRight - labelWidth]);
+
+        const x = scaleLinear(domain, [marginLeft, viewWidth - marginRight - labelWidth]);
         const barsTop = marginTop;
         const barsBottom = barsTop + innerHeight * 0.9;
         const y = scaleBand()

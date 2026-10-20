@@ -1,10 +1,15 @@
+import { resolveChartDomain } from '@stats47/types';
 import React from 'react';
 import { formatNumber } from '@stats47/utils';
 import { scaleLinear } from 'd3-scale';
 
 import { IG_FONT, IG_SERIES, IgSeriesCard, IgSeriesFrame } from '@/features/ig-series';
 
-import { combinedSourceLabel, formatR, type ResolvedCorrelationCarousel } from './correlation';
+import {
+  combinedSourceLabel,
+  formatR,
+  type ResolvedCorrelationCarousel,
+} from './correlation';
 
 interface CorrelationScatterSlideProps {
   resolved: ResolvedCorrelationCarousel;
@@ -28,10 +33,9 @@ interface Domain {
 
 /** データの最小/最大に8%の余白を足す (0除算対策で範囲0のときは±1) */
 function domainWithPadding(values: number[]): Domain {
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  const pad = (max - min) * 0.08 || 1;
-  return { min: min - pad, max: max + pad };
+  const domain = resolveChartDomain(values, {mode:'extent',padding:0.08});
+  if (!domain) throw new Error('No finite correlation observations');
+  return {min:domain[0], max:domain[1]};
 }
 
 /** 2/5枚目: 47都道府県の散布図。軸ラベル・単位・年、r と人口の影響を除いた r を表示する */
@@ -40,9 +44,9 @@ export const CorrelationScatterSlide: React.FC<CorrelationScatterSlideProps> = (
   const palette = IG_SERIES[SERIES];
   const xDomain = domainWithPadding(spec.points.map((p) => p.x));
   const yDomain = domainWithPadding(spec.points.map((p) => p.y));
-  const xScale = scaleLinear().domain([xDomain.min, xDomain.max]).nice(4)
+  const xScale = scaleLinear().domain([xDomain.min, xDomain.max])
     .range([PLOT_MARGIN.left, PLOT_W - PLOT_MARGIN.right]);
-  const yScale = scaleLinear().domain([yDomain.min, yDomain.max]).nice(4)
+  const yScale = scaleLinear().domain([yDomain.min, yDomain.max])
     .range([PLOT_H - PLOT_MARGIN.bottom, PLOT_MARGIN.top]);
 
   return (

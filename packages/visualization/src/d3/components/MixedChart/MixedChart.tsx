@@ -1,7 +1,18 @@
 "use client";
 
+import { resolveChartDomain } from '@stats47/types';
+
 import { cn } from "@stats47/components";
-import { schemeTableau10, select, scaleBand, scaleLinear, line, axisBottom, axisLeft, axisRight } from "d3";
+import {
+  schemeTableau10,
+  select,
+  scaleBand,
+  scaleLinear,
+  line,
+  axisBottom,
+  axisLeft,
+  axisRight,
+} from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -110,8 +121,10 @@ export function MixedChart({
     const colValues = data.flatMap((d) =>
       colKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
+    const leftDomain = resolveChartDomain(colValues, {mode: 'zero'}, leftYDomain);
+    if (!leftDomain) return;
     const yLeft = scaleLinear()
-      .domain(leftYDomain ?? [Math.min(0, ...colValues), Math.max(0, ...colValues)])
+      .domain(leftDomain)
       .range([height - marginBottom, marginTop]);
 
     // 右Y軸: 折れ線用
@@ -119,12 +132,14 @@ export function MixedChart({
     const lineValues = data.flatMap((d) =>
       lineKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
+    const rightDomain = resolveChartDomain(lineValues, {mode: 'extent'}, rightYDomain);
+    if (!rightDomain) return;
     const yRight = scaleLinear()
-      .domain(rightYDomain ?? [Math.min(0, ...lineValues), Math.max(0, ...lineValues)])
+      .domain(rightDomain)
       .range([height - marginBottom, marginTop]);
 
-    if (!leftYDomain) yLeft.nice();
-    if (!rightYDomain) yRight.nice();
+
+
 
     // 左軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart / LineChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
@@ -141,6 +156,7 @@ export function MixedChart({
       .range([plotLeft, width - marginRight])
       .padding(0.2);
 
+    const baseline = Math.max(leftDomain[0], Math.min(0, leftDomain[1]));
     // --- 棒グラフ描画 ---
     const barWidth = x.bandwidth() / Math.max(columns.length, 1);
     columns.forEach((col, colIdx) => {
@@ -150,9 +166,9 @@ export function MixedChart({
         .data(data.filter((d) => d[col.dataKey] != null))
         .join("rect")
         .attr("x", (d) => (x(String(d[categoryKey])) ?? 0) + barWidth * colIdx)
-        .attr("y", (d) => Math.min(yLeft(0), yLeft(Number(d[col.dataKey]))))
+        .attr("y", (d) => Math.min(yLeft(baseline), yLeft(Number(d[col.dataKey]))))
         .attr("width", barWidth)
-        .attr("height", (d) => Math.abs(yLeft(0) - yLeft(Number(d[col.dataKey]))))
+        .attr("height", (d) => Math.abs(yLeft(baseline) - yLeft(Number(d[col.dataKey]))))
         .attr("fill", col.color)
         .attr("opacity", 0.8)
         .style("cursor", "pointer")
@@ -173,15 +189,16 @@ export function MixedChart({
       (x(String(d[categoryKey])) ?? 0) + x.bandwidth() / 2;
 
     lines.forEach((s) => {
-      const filtered = data.filter((d) => d[s.dataKey] != null);
+      const filtered = data.filter((d) => typeof d[s.dataKey] === "number" && Number.isFinite(d[s.dataKey]));
 
       const lineFn = line<(typeof filtered)[number]>()
+        .defined(d => typeof d[s.dataKey] === "number" && Number.isFinite(d[s.dataKey]))
         .x((d) => xCenter(d))
         .y((d) => yRight(Number(d[s.dataKey])));
 
       svg
         .append("path")
-        .datum(filtered)
+        .datum(data)
         .attr("fill", "none")
         .attr("stroke", s.color)
         .attr("stroke-width", 2)

@@ -126,13 +126,13 @@ describe("toCompositionChartData", () => {
     expect(result.trendData.map((d) => d.category)).toEqual(["2020", "2021", "2022"]);
   });
 
-  it("value が null の場合に 0 として扱う", () => {
+  it("value が null の場合は欠測を維持する", () => {
     const rawDataList: StatsSchema[][] = [
       [{ ...baseRow, yearCode: "2020", value: null as unknown as number }],
     ];
 
     const result = toCompositionChartData(rawDataList, ["テスト"], ["#000"]);
 
-    expect(result.trendData[0]["テスト"]).toBe(0);
+    expect(result.trendData[0]["テスト"]).toBeUndefined();
   });
 });

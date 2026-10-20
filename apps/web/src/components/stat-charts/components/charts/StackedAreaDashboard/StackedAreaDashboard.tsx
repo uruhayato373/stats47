@@ -27,13 +27,6 @@ export const StackedAreaDashboard = async ({
   let yDomain: [number, number] | undefined = sharedYDomain;
 
   try {
-    if (!yDomain && !normalize) {
-      yDomain = await computeYAxisDomain({
-        yAxisConfig,
-        estatParams,
-        domainType: "stackedMax",
-      });
-    }
 
     const responses = await Promise.all(
       estatParams.map((p) => fetchEstatData(areaCode, p))
@@ -44,6 +37,7 @@ export const StackedAreaDashboard = async ({
       fetchErrorMessage = firstError.error;
     } else {
       const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
+      if (!yDomain && !normalize) yDomain = await computeYAxisDomain({yAxisConfig, estatParams: estatParams, rows: rawDataList.flat(), domainType: 'stackedMax'});
       const hasAnyData = rawDataList.some((d) => d.length > 0);
       if (!hasAnyData) {
         fetchErrorMessage = "データがありません";

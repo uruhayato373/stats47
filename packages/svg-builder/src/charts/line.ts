@@ -1,3 +1,8 @@
+import {
+  resolveChartDomain,
+  type NumericDomain,
+  type NumericDomainPolicy,
+} from '@stats47/types';
 /**
  * 多系列折れ線グラフ SVG 生成
  *
@@ -27,6 +32,8 @@ import {
 } from "../shared/stats-schema";
 
 export interface LineChartOptions {
+  domainPolicy?: NumericDomainPolicy;
+  yDomain?: NumericDomain;
   /** チャートタイトル */
   title: string;
   /** サブタイトル（年次・出典など） */
@@ -59,7 +66,7 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     xLabel,
     yLabel,
     unit,
-    yMin = 0,
+    yMin,
     legendPosition = "bottom",
   } = options;
 
@@ -76,21 +83,10 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
 
   // Y 軸範囲
   const allValues = data.map((d) => d.value).filter((v): v is number => v !== null);
-  const yLo = Math.min(yMin, Math.min(...allValues));
-  const yHi = Math.max(...allValues);
-  const yTicks = niceTicks(yLo, yHi, 5);
-  // niceTicks がデータ最大値未満で止まる場合は次の目盛りを追加する
-  while (yTicks[yTicks.length - 1] < yHi) {
-    const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : yHi;
-    yTicks.push(parseFloat((yTicks[yTicks.length - 1] + step).toFixed(10)));
-  }
-  // 負の値: niceTicks は lo を切り上げて始まるため、最小値が最下段の目盛りより下に出る
-  while (yTicks[0] > yLo) {
-    const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : Math.abs(yLo);
-    yTicks.unshift(parseFloat((yTicks[0] - step).toFixed(10)));
-  }
-  const yScaleLo = yTicks[0];
-  const yScaleHi = yTicks[yTicks.length - 1];
+  const domain = resolveChartDomain(allValues, options.domainPolicy ?? {mode: 'extent'}, options.yDomain);
+  if (!domain) throw new Error('No finite observations for line chart');
+  const [yScaleLo, yScaleHi] = yMin === undefined ? domain : resolveChartDomain(allValues, {mode: 'fixed', min: yMin, max: domain[1]})!;
+  const yTicks = niceTicks(yScaleLo, yScaleHi, 5);
 
   const toSvgX = (i: number): number =>
     xItems.length > 1
@@ -130,16 +126,19 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   series.forEach((s, si) => {
     const color = LINE_COLORS[si % LINE_COLORS.length];
     const points: Array<[number, number]> = [];
+    const segments: Array<Array<[number, number]>> = [];
+    let segment: Array<[number, number]> = [];
     for (let i = 0; i < xItems.length; i++) {
       const v = valueMap.get(xItems[i].code)?.get(s.code);
-      if (v !== undefined) points.push([toSvgX(i), toSvgY(v)]);
+      if (v !== undefined && Number.isFinite(v)) {const point: [number, number] = [toSvgX(i), toSvgY(v)]; points.push(point); segment.push(point);}
+      else if (segment.length) {segments.push(segment); segment = [];}
     }
-    if (points.length < 2) return;
-
-    const polyPts = points.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-    seriesElements.push(
-      `  <polyline points="${polyPts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`,
-    );
+    if (segment.length) segments.push(segment);
+    for (const run of segments) {
+      if (run.length < 2) continue;
+      const polyPts = run.map(([x, y]) => x.toFixed(1) + ',' + y.toFixed(1)).join(' ');
+      seriesElements.push('  <polyline points="' + polyPts + '" fill="none" stroke="' + color + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>');
+    }
     points.forEach(([x, y]) => {
       seriesElements.push(
         `  <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="${color}" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>`,

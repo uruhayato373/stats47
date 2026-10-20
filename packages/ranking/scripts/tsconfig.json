@@ -5,8 +5,8 @@
   // 日次同期が毎日 11 分走ってから ReferenceError で全損していた (2026-08-13 是正)。
   // 契約: .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs
   "extends": "../tsconfig.json",
-  // rootDir を親 (src) のままにすると scripts/ が「rootDir 外」で TS6059 になる
-  "compilerOptions": { "noEmit": true, "declaration": false, "composite": false, "rootDir": ".." },
+  // 共通 package のソースも同じ型検査に含める（この設定は noEmit 専用）。
+  "compilerOptions": { "noEmit": true, "declaration": false, "composite": false, "rootDir": "../../.." },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

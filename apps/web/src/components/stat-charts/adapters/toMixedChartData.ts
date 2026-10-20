@@ -37,7 +37,7 @@ export function toMixedChartData(
             yearCode: item.yearCode,
           });
         }
-        yearMap.get(key)![label] = item.value ?? 0;
+        if (typeof item.value === "number" && Number.isFinite(item.value)) yearMap.get(key)![label] = item.value;
       });
     });
   };

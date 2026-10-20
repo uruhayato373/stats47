@@ -1,9 +1,29 @@
 "use client";
 
-import { schemeTableau10, scaleBand, scaleLinear, scaleOrdinal, axisTop, axisLeft, max, stack, select } from "d3";
+import {
+  schemeTableau10,
+  scaleBand,
+  scaleLinear,
+  scaleOrdinal,
+  axisTop,
+  axisLeft,
+  stack,
+  stackOffsetDiverging,
+  select,
+} from "d3";
 import { useEffect, useRef } from "react";
+import {
+  resolveChartDomain,
+  numericSeriesValues,
+  stackedNumericValues,
+} from '@stats47/types';
+
 import { cn } from "@stats47/components";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+} from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
@@ -94,9 +114,10 @@ export function BarChart({
                 .range([0, y0.bandwidth()])
                 .padding(0.05);
 
-            const computedMax = max(data, d => max(keys, k => Number(d[k]) || 0)) ?? 0;
+            const domain = resolveChartDomain(numericSeriesValues(data, keys), {mode: "zero"}, xDomainProp);
+            if (!domain) return;
             const x = scaleLinear()
-                .domain(xDomainProp ?? [0, computedMax])
+                .domain(domain)
                 .range([marginLeft, width - marginRight]);
             const color = scaleOrdinal<string>().domain(keys).range(colors);
 
@@ -111,11 +132,11 @@ export function BarChart({
                 .join("g")
                 .attr("transform", d => `translate(0,${y0(String(d[indexBy]))})`)
                 .selectAll("rect")
-                .data(d => keys.map(k => ({ key: k, value: Number(d[k]) || 0, category: String(d[indexBy]) })))
+                .data(d => keys.filter(k => typeof d[k] === "number" && Number.isFinite(d[k])).map(k => ({ key: k, value: Number(d[k]), category: String(d[indexBy]) })))
                 .join("rect")
-                .attr("x", marginLeft)
+                .attr("x", d => Math.min(x(Math.max(domain[0], Math.min(0, domain[1]))), x(Number(d.value))))
                 .attr("y", d => y1(d.key)!)
-                .attr("width", d => Math.max(0, x(d.value) - marginLeft))
+                .attr("width", d => Math.abs(x(d.value) - x(Math.max(domain[0], Math.min(0, domain[1])))))
                 .attr("height", y1.bandwidth())
                 .attr("fill", d => color(d.key))
                 .attr("class", "transition-opacity duration-200 hover:opacity-80")
@@ -152,10 +173,11 @@ export function BarChart({
 
         } else if (hasKeys && keys) {
             // --- 積み上げ棒グラフ ---
-            const series = stack<ChartDataNode>().keys(keys)(data);
-            const computedMax = max(series, d => max(d, d => d[1])) ?? 0;
+            const series = stack<ChartDataNode>().keys(keys).value((row, key) => typeof row[key] === "number" && Number.isFinite(row[key]) ? Number(row[key]) : 0).offset(stackOffsetDiverging)(data);
+            const domain = resolveChartDomain(stackedNumericValues(data, keys), {mode: "zero"}, xDomainProp);
+            if (!domain) return;
             const x = scaleLinear()
-                .domain(xDomainProp ?? [0, computedMax])
+                .domain(domain)
                 .range([marginLeft, width - marginRight]);
             const color = scaleOrdinal<string>().domain(keys).range(colors);
 
@@ -170,7 +192,7 @@ export function BarChart({
                 .join("g")
                 .attr("fill", d => color(d.key))
                 .selectAll("rect")
-                .data(d => d.map(v => Object.assign(v, { key: d.key })))
+                .data(d => d.filter(v => typeof v.data[d.key] === "number" && Number.isFinite(v.data[d.key])).map(v => Object.assign(v, { key: d.key })))
                 .join("rect")
                 .attr("x", d => x(d[0]))
                 .attr("y", d => y0(d.data[indexBy] as string)!)
@@ -180,7 +202,7 @@ export function BarChart({
                 .style("cursor", "pointer")
                 .on("mouseenter", (event, d: { data: ChartDataNode; key: string; 0: number; 1: number }) => {
                     showTooltip(event, d.data[indexBy] as string, {
-                        value: d[1] - d[0],
+                        value: Number(d.data[d.key]),
                         unit,
                         metricTitle: d.key,
                     });
@@ -219,9 +241,10 @@ export function BarChart({
             // Legend is rendered as HTML below the SVG
         } else {
             // --- 単一系列の横棒グラフ（Observable Horizontal Bar Chart パターン） ---
-            const xMax = max(data, d => Number(d[valueKey])) ?? 0;
+            const domain = resolveChartDomain(numericSeriesValues(data, [valueKey]), {mode: "zero"}, xDomainProp);
+            if (!domain) return;
             const x = scaleLinear()
-                .domain(xDomainProp ?? [0, xMax])
+                .domain(domain)
                 .range([marginLeft, width - marginRight]);
             const barColor = (colors[0] as string) ?? "#888";
 
@@ -232,11 +255,11 @@ export function BarChart({
 
             g.append("g")
                 .selectAll("rect")
-                .data(data)
+                .data(data.filter(d => typeof d[valueKey] === "number" && Number.isFinite(d[valueKey])))
                 .join("rect")
-                .attr("x", marginLeft)
+                .attr("x", d => Math.min(x(Math.max(domain[0], Math.min(0, domain[1]))), x(Number(d[valueKey]))))
                 .attr("y", d => y0(String(d[indexBy]))!)
-                .attr("width", d => x(Number(d[valueKey])) - marginLeft)
+                .attr("width", d => Math.abs(x(Number(d[valueKey])) - x(Math.max(domain[0], Math.min(0, domain[1])))))
                 .attr("height", y0.bandwidth())
                 .attr("fill", barColor)
                 .attr("class", "transition-opacity duration-200 hover:opacity-80")

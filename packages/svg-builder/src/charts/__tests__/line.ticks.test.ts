@@ -58,10 +58,10 @@ describe('generateLineSvg の負の値と凡例の位置', () => {
     [...svg.matchAll(/text-anchor="end" font-size="8.5" class="svg-tick">(-?[\d.]+)</g)].map((m) => Number(m[1]));
   const circleYs = (svg: string) => [...svg.matchAll(/<circle cx="[\d.]+" cy="([\d.]+)"/g)].map((m) => Number(m[1]));
 
-  it('最小値が負なら最下段の目盛りは最小値以下になり、点がプロット枠の外に出ない', () => {
+  it('負値も共有範囲内に収まり、目盛りで範囲を拡張しない', () => {
     // 2020 年 4-6 月期の中小企業 DI (▲66.7) のような急落を含む系列
     const svg = generateLineSvg(twoSeries([-18, -12, -66.7, -20, -10]), { title: 't', xKey: 'yearCode', seriesKey: 'areaCode' });
-    expect(Math.min(...tickValues(svg))).toBeLessThanOrEqual(-67.7);
+    expect(Math.min(...tickValues(svg))).toBeGreaterThanOrEqual(-67.7);
     const plotBottom = 420 - (60 + 22);
     for (const y of circleYs(svg)) expect(y).toBeLessThanOrEqual(plotBottom + 0.1);
   });

@@ -21,12 +21,14 @@ export interface VisualizationDataPoint {
 /**
  * カラースキームタイプ
  */
-export type ColorSchemeType = 'sequential' | 'diverging' | 'categorical';
+import type { ColorSchemeType } from '@stats47/types';
+export type { ColorSchemeType } from '@stats47/types';
 
 /**
  * 分岐点設定（発散カラースキーム用）
  */
-export type DivergingMidpoint = "zero" | "mean" | "median" | "custom" | number;
+import type { DivergingMidpoint } from '@stats47/types';
+export type { DivergingMidpoint } from '@stats47/types';
 
 /**
  * 最小値タイプ（順序カラースキーム用）

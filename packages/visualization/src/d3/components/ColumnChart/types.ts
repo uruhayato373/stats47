@@ -19,6 +19,8 @@ export interface ColumnChartProps extends BaseD3ChartProps, MarginProps {
   /**
    * Y軸のフォーマッター
    */
+  /** Pre-resolved range from the metric policy. */
+  yDomain?: [number, number];
   yAxisFormatter?: (d: number) => string;
   /**
    * ツールチップのフォーマッター

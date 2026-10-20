@@ -4,7 +4,10 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { assertR2WriteAllowed } from '../../../packages/r2-storage/src/scripts/_assert-ci-write';
-import { RANKING_SAMPLE_SOURCE, rankingInputFromStats } from '../lib/template-ranking-data';
+import {
+  RANKING_SAMPLE_SOURCE,
+  rankingInputFromStats,
+} from '../lib/template-ranking-data';
 import { renderRankingBars } from '../lib/template-ranking-bars';
 import { renderRankingTable } from '../lib/template-ranking-table';
 import { renderRankingTileMap } from '../lib/template-ranking-tile-map';
@@ -27,7 +30,16 @@ async function main() {
     'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
     'apps/admin/lib/template-ranking-table.ts', 'apps/admin/lib/template-ranking-tile-map.ts',
   ];
-  const sources = sourceFiles.map((file) => ({ path: file, source: fs.readFileSync(path.join(root, file), 'utf8') }));
+  sourceFiles.push(
+    'packages/types/src/metric-presentation.ts', 'packages/types/src/numeric-domain.ts',
+    'packages/types/src/color-classification.ts', 'packages/types/src/numeric-ticks.ts', 'packages/types/src/color-encoding.ts',
+    'packages/types/src/color-scheme.ts', `${datasetDir('metrics.definitions')}/defaults/presentation.ts`,
+    'packages/svg-builder/src/shared/axis.ts', 'packages/svg-builder/src/charts/choropleth.ts',
+    'packages/visualization/src/d3/utils/color-scale/resolve-choropleth-scale.ts',
+    'packages/visualization/src/d3/utils/color-scale/create-color-schemes.ts',
+    `${datasetDir('metrics.definitions')}/maximum-temperature.ts`, 'apps/web/src/features/ogp/brand.ts'
+  );
+  const sources = [...new Set(sourceFiles)].map((file) => ({ path: file, source: fs.readFileSync(path.join(root, file), 'utf8') }));
   const sourceReference = trend ? TREND_SAMPLE_SOURCE : RANKING_SAMPLE_SOURCE;
   const snapshot = await readVerified(sourceReference);
   const raw = JSON.parse(snapshot.toString('utf8'));

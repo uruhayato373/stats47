@@ -6,7 +6,8 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@stats47/types": ["../../packages/types/src"]
     }
   },
   "include": ["src"]

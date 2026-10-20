@@ -7,7 +7,8 @@ describe('theme domains from metric presentation', () => {
   it('preserves a single metric policy and uses the shared policy for several metrics', () => {
     const policy = { mode: 'fixed', min: 50, max: 100 } as const;
     expect(selectMetricDomainPolicy([policy])).toEqual(policy);
-    expect(selectMetricDomainPolicy([policy, { mode: 'zero' }])).toEqual({ mode: 'extent', padding: 0.08 });
+    expect(() => selectMetricDomainPolicy([policy, { mode: 'zero' }])).toThrow('Conflicting axis policies');
+    expect(selectMetricDomainPolicy([policy, {...policy}])).toEqual(policy);
   });
 
   it('measures only the displayed series and keeps negative observations', () => {
