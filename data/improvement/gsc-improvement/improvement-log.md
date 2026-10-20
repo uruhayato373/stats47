@@ -868,3 +868,32 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - 本番200・自己canonical・index可と、県ごとの本文・数値をPlaywrightで確認。最新日次Inspection（10-16）は4件ともNEUTRAL、直前のGSC画面も未登録soft404で、登録済みURLへの再送はしていない。
 - 栃木local-finance、静岡/茨城/福井labor-wagesは各1回の通常リクエストで「URLを優先クロールキューに追加」を確認。前日11件と合わせ15/15受付、未送信0件。gsc-4のみPAUSEDへ変更。専用Chrome・一時profile・google-admin lockは終了時に清掃。
 - 受理は登録完了ではない。10-23に修正後lastCrawlTime・登録を確認し、カードは進行中のまま。effect判定なし。証拠: `data/gsc/ui-audits/2026-10-16-remediation.json#release`。
+
+
+### [SEO-TITLE-CTR-EFFECT-01] 検索 title を変えた 10 ページの効果観測を登録 (2026-10-20)
+
+- **デプロイ日**: 2026-10-20 (JST)。ranking 2 本 (`/ranking/public-phone-count`・`/ranking/total-fertility-rate`) と blog 4 本 (公衆電話・道の駅・高校2年男子身長・健康寿命) は PR #1161 (2026-10-19T20:34Z)。blog 4 本 (住みやすい県・自動車産業・米作・降水) は PR #1162 (2026-10-20T04:57Z)。変更内容の経緯は backlog `SEO-CTR-CANDIDATES-01` の 2026-10-20 の 3 つの記録。
+- **本番確認**: 2026-10-20 に Googlebot UA で `curl -s -A 'Mozilla/5.0 (compatible; Googlebot/2.1)' https://stats47.jp<path> | grep -oE '<title>[^<]+</title>'` を 10 ページ全件に実行し、全件が新案の title だった。
+- **baseline (GSC 2026-W41 rolling28d 2026-09-11〜10-08、`data/gsc/snapshots/2026-W41/pages.csv` の fragment 無し行)**:
+
+  | path | clicks | imp | CTR | position |
+  |---|---|---|---|---|
+  | /ranking/public-phone-count | 18 | 6,622 | 0.27% | 6.47 |
+  | /ranking/total-fertility-rate | 0 | 99 | 0.00% | 12.62 |
+  | /blog/public-phone-count | 13 | 4,682 | 0.28% | 7.93 |
+  | /blog/roadside-station-count-prefecture-gap | 17 | 8,407 | 0.20% | 8.65 |
+  | /blog/avg-height-high-school-2nd-male | 37 | 5,764 | 0.64% | 7.51 |
+  | /blog/health-life-expectancy-structure | 42 | 3,374 | 1.24% | 6.48 |
+  | /blog/livable-prefecture-composite-ranking | 187 | 8,214 | 2.28% | 6.67 |
+  | /blog/automotive-industry-transformation-map | 214 | 6,428 | 3.33% | 5.43 |
+  | /blog/rice-harvest-volume-prefecture-gap | 105 | 6,091 | 1.72% | 6.90 |
+  | /blog/precipitation-snow-regional-gap | 68 | 5,367 | 1.27% | 6.89 |
+  | 合計 | 701 | 55,048 | 1.27% | — |
+
+  `[gsc-page:]` は前方一致なので、`/ranking/public-phone-count-per-1000` (2 click / 431 imp)、`/blog/public-phone-count-gap` (1 / 17)、`/blog/avg-height-high-school-2nd-male-vs-*` 3 本 (5 / 153) が集計に混ざる (計 8 click / 601 imp、合計の約 1%)。before と after の両方に入るので比較は崩れないが、ページ別の値には含めていない。
+- **対照群**: 同ファイルで `#`・`?` を含まない行のうち impressions 500 以上・position 4〜15、上の 10 ページを除いた 123 ページ = 6,051 clicks / 161,200 imp / CTR 3.75% (blog 73 ページ 3,445 / 99,861、ranking 46 ページ 2,211 / 56,036)。抽出: `data/gsc/snapshots/2026-W41/pages.csv` を読み、上の条件で絞る。観測時は同じ 123 URL を after 窓で集計し、search-growth で title を変えた URL (承認日が窓内) を除く。
+- **想定効果**: 置かない [根拠が無い]。このログ内の前例は上向きでない: BLOG-WAVE-2026-05-25-auto は W21→W26 で clicks 127→94 (effect/none)、BLOG-CTR-05 は W22→W26 で 59→11 (effect/none、[仮説] query mix の変化)。一方、`SEO-TITLE-FIX-01` (/areas/ 群) は clicks 4→50 で effect/partial だが index 化との交絡があり単独寄与は分離できない。`PV-100K-LEVERS-01` の「CTR 2.4→4.0%」は目標値で、実測に基づく予測ではない。`[target:]` が無いので閾値エンジンは `insufficient-target` で effect/pending に留める。
+- **検証コマンド**: ページごとに `node .claude/scripts/metrics/gsc-query.mjs --start 2026-10-21 --end 2026-11-17 --dims page --filter 'page*=<path>'` (取得は 2026-11-21 以降)。search-growth 側は `npm run search-growth:measure -- --candidate <ID>`。
+- **観測期限と判定手順**: 2026-11-24。before (09-11〜10-08) と after (10-21〜11-17) はともに 28 日。10 ページ合計とページ別の CTR・position を対照群と並べ (差の差)、position が ±1 位を超えたページは CTR 比較から外す。`/ranking/total-fertility-rate` は baseline 99 imp で標本不足のため count のみ。clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ title を戻す案を backlog へ。想定値が無いので effect/full・effect/partial は付けず、結果を本ログに実測として残して行を削除する。
+- **search-growth 台帳**: 承認済み 2 件 (`ctr-opportunity::/ranking/public-phone-count`・`striking-distance::/ranking/total-fertility-rate`) の計測日は 2026-11-03 (14 日)・11-17 (28 日)・12-15 (56 日)。blog 8 本の承認は W44 以降の枠 (週 2 件上限)。
+- **未確定 / 仮説**: [仮説] Google が検索結果に別の title を表示している。検証: 検索 3 クエリ (道の駅が多い県 / 公衆電話 なぜ減った / 高校2年生 平均身長) の実表示 title を取得日付きで記録する。検証期日: 2026-11-24。期日後の判定: 表示 title が新案と一致していて CTR が動かなければ title の切り口が原因、不一致なら description と H1 を揃える案を `SEO-CTR-CANDIDATES-01` へ。
