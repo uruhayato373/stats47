@@ -1607,6 +1607,14 @@ updated: 2026-10-19
 - **完了条件**: 完全一致で照合できるようになり、`.claude/scripts/metrics/__tests__/gsc-improvements-adapter.test.mjs` に前方一致で混ざらないことのテストがある。
 
 
+### [MANUFACTURING-ZONE-CHART-LINEAGE-01] 製造業の記事の工業地帯の図に元データが無く、京浜工業地帯の 57.7 兆円が公開値から再現できない
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
+
+- **事象 (2026-10-20 実測)**: `/blog/manufacturing-aichi-dominance` の図 `data/industrial-zone-ranking` は、R2 に `.json` が無く (404)、`.source.json` は `derived r2:app/ranking/manufacturing-shipment-amount/values.json` だけで工業地帯の範囲を持たない。本文の「中京工業地帯 (岐阜・愛知・三重) 77.1 兆円」は公開値 2023 年の合計と一致するが、「京浜工業地帯 57.7 兆円」は東京+神奈川 27 兆円・+埼玉 42 兆円のどちらとも合わない。検索語「工業地帯 ランキング」(28 日 161 表示) で入る記事。
+- **次**: ① 各工業地帯・工業地域の範囲 (どの都府県を含めるか) を出典つきで決め、`kind: calculated` の source.json (inputs と formula) と data json を作る ② 京浜の値を本文と図で直す ③ 他の工業地帯の値も同じ式で照合する。
+- **完了条件**: 図・data json・source.json・本文の値が公開値の合計と一致し、`quality-gate.mjs` が pass。
+
+
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
