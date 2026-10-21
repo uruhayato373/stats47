@@ -21,7 +21,7 @@ export const femalePartTimeHourlyWagePre2019: MetricConfig = {
     "from": 1985,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

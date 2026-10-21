@@ -22,7 +22,7 @@ export const largeRetailStoreCountPer100kAlt: MetricConfig = {
     "from": 2021,
     "to": 2021,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

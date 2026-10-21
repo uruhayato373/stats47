@@ -24,7 +24,7 @@ export const voterTurnoutGovernor: MetricConfig = {
       2019,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -18,7 +18,7 @@ export const smallScaleFarmHouseholds: MetricConfig = {
     "prefecture",
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

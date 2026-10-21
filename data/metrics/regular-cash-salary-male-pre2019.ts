@@ -65,7 +65,7 @@ export const regularCashSalaryMalePre2019: MetricConfig = {
       2019,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

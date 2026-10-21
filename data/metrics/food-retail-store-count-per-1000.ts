@@ -29,7 +29,7 @@ export const foodRetailStoreCountPer1000: MetricConfig = {
       2006,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

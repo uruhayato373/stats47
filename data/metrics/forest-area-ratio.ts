@@ -27,7 +27,7 @@ export const forestAreaRatio: MetricConfig = {
       2019,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

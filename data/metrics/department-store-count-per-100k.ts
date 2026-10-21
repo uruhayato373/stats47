@@ -30,7 +30,7 @@ export const departmentStoreCountPer100k: MetricConfig = {
       2006,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",
