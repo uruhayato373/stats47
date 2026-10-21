@@ -21,14 +21,15 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 
-import { buildGroundTruth, checkValueClaims } from "../article-factual-check.mjs";
+import { buildGroundTruth, checkRankClaims, checkValueClaims } from "../article-factual-check.mjs";
 
 /** flat 配列 (blog-data-schema §1 の統一 schema) で ground truth を作る。 */
-function withGroundTruth(rows, fn) {
+function withGroundTruth(rows, fn, sourceMeta = null) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fc-detect-"));
   const dataDir = path.join(dir, "data");
   fs.mkdirSync(dataDir);
   fs.writeFileSync(path.join(dataDir, "probe.json"), JSON.stringify(rows));
+  if (sourceMeta) fs.writeFileSync(path.join(dataDir, "probe.source.json"), JSON.stringify(sourceMeta));
   try {
     return fn(buildGroundTruth(dataDir));
   } finally {
@@ -159,6 +160,52 @@ describe("分母つき指標", () => {
       // data は「1人当たり県民所得」。本文が実数の県民所得総額を語っても比較しない。
       const w = checkValueClaims("東京都の県民所得は72,000,000円です。", gt);
       assert.equal(w.length, 0, `実数と1人当たりを比較している: ${w.join(" | ")}`);
+    });
+  });
+});
+
+// FACTUAL-CHECK-CROSS-METRIC-RANK-01: 別の指標・別の年・別の地名の数値を主指標の data と照合しない (2026-10-08 の 3 例)
+const BONITO_ROWS = [
+  { areaName: "静岡県", rank: 1, value: 60000, label: "カツオ漁獲量", unit: "t" },
+  { areaName: "福島県", rank: 12, value: 3000, label: "カツオ漁獲量", unit: "t" },
+  { areaName: "北海道", rank: 20, value: 100, label: "カツオ漁獲量", unit: "t" },
+];
+
+describe("別指標・別年・別地名の数値を主指標と照合しない", () => {
+  it("★同じ文に data に無い指標名 (購入数量) があれば、その順位を漁獲量と照合しない", () => {
+    withGroundTruth(BONITO_ROWS, (gt) => {
+      const r = checkRankClaims("カツオの購入数量では、福島県が3位に入る。", gt);
+      assert.equal(r.length, 0, `別指標の順位を照合している: ${r.join(" | ")}`);
+    });
+  });
+
+  it("★主指標の順位の誤りは従来どおり検出する", () => {
+    withGroundTruth(BONITO_ROWS, (gt) => {
+      assert.ok(checkRankClaims("カツオ漁獲量では、福島県が3位に入る。", gt).length > 0, "指標名つきの誤りを見逃している");
+      assert.ok(checkRankClaims("福島県は3位である。", gt).length > 0, "指標名なしの誤りを見逃している");
+    });
+  });
+
+  it("★data と違う年の順位は照合せず、data の年の順位の誤りは検出する", () => {
+    withGroundTruth(
+      BONITO_ROWS,
+      (gt) => {
+        assert.equal(checkRankClaims("北海道のスケトウダラ 1972 年は 2 位だった。", gt).length, 0, "別の年の順位を照合している");
+        assert.ok(checkRankClaims("北海道は2023年に2位だった。", gt).length > 0, "data の年の誤りを見逃している");
+      },
+      { kind: "ranking", rankingKey: "bonito-catch", year: "2023", label: "カツオ漁獲量", unit: "t" },
+    );
+  });
+
+  it("★値は直前の地名と組にする (宮崎市の値と宇都宮市の値を取り違えない)", () => {
+    const rows = [
+      { areaName: "宮崎県", rank: 1, value: 3517, label: "冷凍ギョーザ支出額", unit: "円" },
+      { areaName: "栃木県", rank: 2, value: 2801, label: "冷凍ギョーザ支出額", unit: "円" },
+    ];
+    withGroundTruth(rows, (gt) => {
+      const w = checkValueClaims("1位は宮崎市の3,517円、宇都宮市の2,801円が続く。", gt);
+      assert.equal(w.length, 0, `別の地名の値を組にしている: ${w.join(" | ")}`);
+      assert.ok(checkValueClaims("宮崎県は9,999円だった。", gt).length > 0, "値の誤りを見逃している");
     });
   });
 });

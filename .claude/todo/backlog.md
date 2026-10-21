@@ -1575,6 +1575,7 @@ updated: 2026-10-19
 ### [FACTUAL-CHECK-CROSS-METRIC-RANK-01] 別指標を併記した段落で、factual-check が順位を主指標の data に誤って照合する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `article-factual-check.mjs` を 3 点直した。① 順位も値と同じく、同じ文に data に無い指標名 (「カツオの購入数量では」) があれば照合しない (`mentionsForeignMetric` を `checkRankClaims` でも使う) ② `.source.json` の `year` を各 fact に付け、本文が data と違う年の順位 (「1972 年は 2 位」) を語るときは照合しない (年が分からない data では従来どおり照合) ③ 県名と数値の間に読点で区切った別の値があれば、その数値は列挙の次の地名のものとして組にしない (「宮崎市の3,517円、宇都宮市の2,801円」)。3 例を再現するテストを先に足して赤を確認し、主指標の順位と値の誤り (指標名あり・なし・data の年) は従来どおり検出するテストも足した (24/24)。outbox 12 記事の RANK/VALUE_MISMATCH は修正前後とも 0 件。
 - **事実 (2026-10-08、bonito-catch-prefecture に購入数量の段落を足したとき)**: 「福島県…3位」(購入数量の順位) が漁獲量の data と照合され RANK_MISMATCH になった。書き手が言い回しを変えて回避した。
 - **次**: `.claude/scripts/lib/article-factual-check.mjs` の県名と順位の紐づけで、同じ文に別指標名 (data の label と違う指標名) があるときは照合を見送るか、その指標の data と照合する。誤検知のテストと、従来の検出が残るテストを両方足す。
 - **同じ根の値の誤照合 (2026-10-08、blog-critic が報告)**: `frozen-gyoza-spending-prefecture-gap` の「宮崎市の3,517円、宇都宮市の2,801円」で、宮崎と 2,801 円を組にした VALUE_MISMATCH (warning) が出た。値は直前の地名と組にする。

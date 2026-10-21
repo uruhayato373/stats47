@@ -104,7 +104,7 @@ function extractUnit(item) {
   return null;
 }
 
-/** `<base>.json` に対応する `<base>.source.json` の {label, unit} を読む (無ければ空) */
+/** `<base>.json` に対応する `<base>.source.json` の {label, unit, year} を読む (無ければ空) */
 function readSourceMeta(dataDir, jsonFile) {
   const sourcePath = path.join(dataDir, jsonFile.replace(/\.json$/, ".source.json"));
   if (!fs.existsSync(sourcePath)) return {};
@@ -113,6 +113,7 @@ function readSourceMeta(dataDir, jsonFile) {
     return {
       label: typeof meta.label === "string" ? meta.label : null,
       unit: typeof meta.unit === "string" ? meta.unit : null,
+      year: typeof meta.year === "string" || typeof meta.year === "number" ? String(meta.year) : null,
     };
   } catch {
     return {};
@@ -234,6 +235,12 @@ export function buildGroundTruth(dataDir) {
       // これを既定 label にすると「本文が別指標を語っているか」を判定できるようになる。
       const meta = readSourceMeta(dataDir, file);
       walkAndIndex(json, idx, file, meta.label || "", meta.unit || null);
+      // data の年を各 fact に付ける。本文が別の年の順位を語っているかの判定に使う (無ければ判定しない)
+      if (meta.year) {
+        for (const facts of Object.values(idx)) {
+          for (const f of facts) if (f.source === file && f.year === undefined) f.year = meta.year;
+        }
+      }
     } catch {
       // skip malformed JSON
     }
@@ -316,6 +323,7 @@ function isCitingUnknownRanking(matchText, gt) {
 export function checkRankClaims(content, gt) {
   const blockers = [];
   if (Object.keys(gt).length === 0) return blockers;
+  const knownLabels = collectKnownLabels(gt);
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
   const rankRe = new RegExp(
@@ -341,6 +349,14 @@ export function checkRankClaims(content, gt) {
       PER_CAPITA_SKIP.test(trailingContext)
     ) continue;
     if (isCitingUnknownRanking(m[0], gt)) continue;
+    // 同じ文で data に無い指標 (「カツオの購入数量では」) を語っている順位は照合できない (FACTUAL-CHECK-CROSS-METRIC-RANK-01)
+    const rankSentenceStart = Math.max(
+      body.lastIndexOf("。", m.index - 1) + 1,
+      body.lastIndexOf("\n", m.index - 1) + 1,
+      m.index - 200,
+    );
+    const rankContext = body.slice(rankSentenceStart, m.index) + m[0].slice(0, m[0].lastIndexOf(m[2]));
+    if (mentionsForeignMetric(rankContext, knownLabels)) continue;
 
     const key = `${pref}:${claimedRank}`;
     if (seenClaims.has(key)) continue;
@@ -350,6 +366,10 @@ export function checkRankClaims(content, gt) {
     if (!facts || facts.length === 0) continue;
     const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
     if (ranks.length === 0) continue;
+    // data の年が分かっていて、本文がそれと違う年の順位を語っているなら照合しない (「1972 年は 2 位」)
+    const claimYear = m[0].match(/((?:19|20)\d{2})\s*年/)?.[1];
+    const dataYears = facts.map((f) => f.year).filter(Boolean);
+    if (claimYear && dataYears.length > 0 && !dataYears.includes(claimYear)) continue;
 
     if (!ranks.includes(claimedRank)) {
       const actualList = facts
@@ -635,6 +655,9 @@ export function checkValueClaims(content, gt) {
     // 県名から数値までに句点・改行があれば別の文 → 紐づけない
     const between = body.slice(anchor.end, nm.index);
     if (/[。\n]/.test(between)) continue;
+    // 県名と数値の間に読点で区切った別の値があれば、この数値は列挙の次の地名のもの
+    // (「宮崎市の3,517円、宇都宮市の2,801円」)。「1人当たり」のような指標名の中の数は区切りを伴わないので対象外
+    if (new RegExp(`\\d[\\d,]*(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?\\s*${UNIT_TAIL}\\s*[、，,]`).test(between)) continue;
 
     // 旧実装の m[0] 相当 (県名 〜 単位まで) を組み立てる。以降の判定はこれを使う
     const m = {
