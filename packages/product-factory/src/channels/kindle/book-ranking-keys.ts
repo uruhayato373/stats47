@@ -49,7 +49,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "day-time-population-ratio", // 昼夜間人口比率 — 本文 1724字 / [insights,regionalAnalysis,faq]
     "unmarried-ratio-female-25-29", // 未婚者割合 — 本文 1719字 / [insights,regionalAnalysis,faq]
     "household-ratio-with-65plus", // 65歳以上の世帯員のいる世帯割合 — 本文 1709字 / [insights,regionalAnalysis,faq]
-    "daytime-population-ratio", // 昼夜間人口比率 — 本文 1701字 / [insights,regionalAnalysis,faq]
     "maternal-mortality-rate-per-100k-births", // 妊娠等による死亡率 — 本文 1694字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-02": [
