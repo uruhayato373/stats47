@@ -1568,6 +1568,7 @@ updated: 2026-10-19
 ### [BLOG-DATA-MISSING-AS-ZERO-01] ブログの図のデータで、R2 に行の無い県 (欠損) と値 0 が区別できない
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 原因は 2 か所だった。`fetch-ranking-data-r2.mjs` が読む `app/ranking` は値の無い県を既に除いている (カツオ 2023 年は 34 行・無い 5 県は行なし・0 の 4 県は観測値) が、`build-article-data-from-r2.mjs` は `app/stats` の `value: null` 行をそのまま data に入れ、`generate-article-charts.ts` の棒グラフが `?? 0` で 0 として下位に並べていた。共通の `lib/blog-observed-values.mjs` (`observedOnly`: 値が有限数の行だけ残し、観測された 0 は残す) を足して両方で使う (テスト 1 件)。公開済みの data JSON 2,433 件を S3 で全件読み、値の欠けを持つのは 3 件 2 記事: `bonito-catch-zero-prefectures-gap/bonito-status-by-year` (status 付きの意図的な欠けで SVG なし) と `marriage-divorce-okinawa` の婚姻率・離婚率 (本文が順位を書かない県を null にした抽出。公開 SVG に該当県は描かれていない)。0 として描いた公開図は 0 件なので是正キューへの追加はなし。2026-10-08 の bonito の 0 埋め (39 行) を作った経路は特定できていない。
 - **事実 (2026-10-08、blog-critic が報告)**: `bonito-catch-prefecture` の `bonito-ranking.json` は 39 行のうち 9 行が R2 に行の無い県で、0 として入っていた。本文はそれを「漁獲ゼロ 13 県」と数え、回遊路の外という因果を付けていた (記事側は同日の改稿で直す)。
 - **次**: `.claude/scripts/blog/fetch-ranking-data-r2.mjs` が欠損県をどう扱うかを読み、欠損は行を作らないか `missing: true` を残す。公開済み記事の data JSON で同じ埋め方がされた図を数え、該当記事を是正キューに載せる。
 - **完了条件**: 取得スクリプトが欠損を 0 にしないことをテストで固定し、公開済み記事の該当件数が記録されている。

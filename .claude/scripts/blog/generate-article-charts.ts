@@ -44,6 +44,7 @@ import {
   extractInlineSvgs,
 } from '../lib/svg-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { observedOnly } from '../lib/blog-observed-values.mjs';
 import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
 // Layer 1 共有ライブラリ (SSoT)。CLI 内インライン生成を廃し svg-builder に一本化。
 // tsx 実行のため TS ソースを直接 import する (このスクリプトは tsx で起動する)。
@@ -220,7 +221,8 @@ function genBarChartSvg(
   data: any,
   layoutOverride?: 'columns' | 'mobile' | 'portrait' | 'single'
 ) {
-  const items = Array.isArray(data) ? data : data.data || [];
+  // 値の無い県を 0 として下位に並べない (blog-observed-values.mjs)
+  const items = observedOnly(Array.isArray(data) ? data : data.data || []);
   if (!items.length) return `<!-- empty data -->`;
   const title =
     (Array.isArray(data) ? null : data.title) ?? '都道府県別ランキング';

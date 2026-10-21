@@ -19,6 +19,7 @@ import fs from "fs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import path from "path";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { observedOnly } from "../lib/blog-observed-values.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const R2_PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -50,8 +51,8 @@ async function buildForMetric(slug, metricKey) {
   const year = latestYear(rows);
 
   // prefecture-rankings: 最新年の 47 県
-  const latest = rows
-    .filter((r) => r.yearCode === year)
+  // 値の無い県 (value: null) は行を作らない。0 と区別できなくなるため (blog-observed-values.mjs)
+  const latest = observedOnly(rows.filter((r) => r.yearCode === year))
     .map((r) => ({
       areaName: r.areaName,
       rank: typeof r.rank === "number" ? r.rank : null,
