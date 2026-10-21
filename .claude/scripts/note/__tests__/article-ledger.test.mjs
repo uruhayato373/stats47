@@ -12,3 +12,11 @@ test('paid articles cannot be stored in the public bucket and keys must be uniqu
   assert.throws(() => validateArticleLedger(ledger(article({ isPaid: true, priceJpy: 300 })), magazines), /schema/);
   assert.throws(() => validateArticleLedger(ledger(article(), article()), magazines), /duplicate key/);
 });
+
+test('one note article (URL) cannot be recorded twice, while repeated titles on separate URLs stay allowed', () => {
+  const url = 'https://note.com/stats47/n/n0000000000a1';
+  const published = (key, noteUrl) => article({ key, r2Path: `note/stats47-note/${key}`, status: 'published', noteUrl });
+  assert.throws(() => validateArticleLedger(ledger(published('a-one', url), published('a-two', url)), magazines), /share noteUrl/);
+  assert.doesNotThrow(() => validateArticleLedger(
+    ledger(published('a-one', url), published('a-two', 'https://note.com/stats47/n/n0000000000b2')), magazines));
+});
