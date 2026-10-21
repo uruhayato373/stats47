@@ -11,6 +11,7 @@ vi.mock("@stats47/ranking/server", () => ({
   getRankingDownloadSeries: vi.fn(),
   buildSingleSeriesCsv: vi.fn(() => "year,value\n2024,123\n"),
   buildAllBasesCsv: vi.fn(() => "year,original\n2024,123\n"),
+  readRankingItemFromR2: vi.fn(async () => ({ success: true, data: null })),
 }));
 
 const values = [{ metricKey: "total-population", areaCode: "01000", areaName: "北海道", yearCode: "2024", yearName: "2024年", value: 123, unit: "人", rank: 1 }];

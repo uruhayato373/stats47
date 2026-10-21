@@ -108,7 +108,17 @@ describe("RankedKpiGrid", () => {
         databook={withYear}
       />,
     );
-    expect(withAvg).toMatch(/2023年 ・ 全国平均 2,600,000/);
+    // 何の平均かを書く。欄の無い旧版は 47 都道府県の単純平均として表示する (AREA-NATIONAL-AVG-SIMPLE-MEAN-01)
+    expect(withAvg).toMatch(/2023年 ・ 47都道府県平均 2,600,000/);
+    const official = {
+      metrics: {
+        population: { value: 1_157_000, rank: 31, year: "2023年", unit: "人", nationalAvg: 2_660_000, nationalAvgKind: "national" },
+      },
+    } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"];
+    const withNational = renderToStaticMarkup(
+      <RankedKpiGrid metrics={[{ ...metric("population", "人口"), compareNationalAvg: true }]} databook={official} />,
+    );
+    expect(withNational).toMatch(/2023年 ・ 全国 2,660,000/);
   });
 });
 
