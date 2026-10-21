@@ -560,6 +560,7 @@ updated: 2026-10-19
 ### [CRITIC-VERDICT-RULE-01] critic の REVISE 判定の基準を、共通プロトコルと note-critic の定義で揃える
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-18] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 4 つの定義を照合すると、共通プロトコル・blog-critic・ranking-content-critic は「BLOCK が 1 件でもあれば REVISE」で、note-critic だけが「blocker か major」だった。オーナーの包括指示 (同日「推奨案でやり切って」) に従い多数側へ揃え、note-critic の重大度を `BLOCK/MAJOR/MINOR` に改め「BLOCK が 1 件でもあれば `verdict: REVISE`、無ければ `PASS`。MAJOR は判定を変えないが、author は公開前に直す」とした。blog-critic の文も同じ文言にした。重大度ラベルを読むスクリプトは無いことを grep で確認。codex mirror 再生成・整合検査 0 件。
 - **経緯**: 2026-10-18 の note-critic レビューで指摘。`.claude/rules/critic-review-protocol.md` は「BLOCK が 1 件でもあれば REVISE」、`.claude/agents/note-critic.md` は「blocker か major があれば REVISE」と書いており、同じ指摘で判定が変わりうる。今回は note-critic.md に従って major で REVISE になった。
 - **次**: どちらを正にするか決めて片方を直す (major を公開前に直させたいなら protocol 側を直す)。blog-critic・ranking-content-critic の定義も同じ基準か確かめる。
 - **完了条件**: 3 つの critic と共通プロトコルの REVISE 条件が同じ文言になった。

@@ -80,18 +80,18 @@ date: YYYY-MM-DD
 <読者価値の総括 (2-3文)>
 
 ## 指摘
-- [blocker|major|minor] <具体的指摘と修正案>
+- [BLOCK|MAJOR|MINOR] <具体的指摘と修正案>
 
 ## 判定理由
 <PASS/REVISE の根拠>
 ```
 
-**重大度の基準**:
-- `blocker`: 公開不可（データ誤り・誤解を招く主張・タイトルと本文の乖離）
-- `major`: 公開前に修正推奨（冗長・構造的問題・読者価値の欠如）
-- `minor`: 公開後でも対応可（表現改善・細部の整合）
+**重大度の基準** (判定の規則は `.claude/rules/critic-review-protocol.md`「判定フォーマット」と同じ):
+- `BLOCK`: 公開不可（データ誤り・誤解を招く主張・タイトルと本文の乖離）
+- `MAJOR`: 公開前に修正推奨（冗長・構造的問題・読者価値の欠如）
+- `MINOR`: 公開後でも対応可（表現改善・細部の整合）
 
-`verdict: PASS` は blocker/major がゼロのときのみ。minor のみなら PASS でよい。
+BLOCK が 1 件でもあれば `verdict: REVISE`、無ければ `PASS`。MAJOR は判定を変えないが、author は公開前に直す。
 
 ## 実行手順
 
