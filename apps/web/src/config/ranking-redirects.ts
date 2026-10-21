@@ -14,4 +14,6 @@ export const RANKING_SLUG_REDIRECTS: Readonly<Record<string, string>> = {
   'ssdse-c-lb121101': 'soba-udon-dining-consumption-expenditure',
   'ssdse-d-md22': 'hobby-participation-rate-diy',
   'per-capita-kenmin-shotoku-h27': 'per-capita-prefectural-income-h27',
+  // 国勢調査 2020 単年の重複キー。2020 年の 47 県の値は社会・人口統計体系の系列と一致し、そちらは 2000〜2020 年と市区町村の値を持つ (METRIC-DAYTIME-RATIO-DUP-01)
+  'daytime-population-ratio': 'day-time-population-ratio',
 };

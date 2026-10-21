@@ -4563,6 +4563,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `day-time-population-ratio` (社会・人口統計体系・2000〜2020 年の 5 年・市区町村の値あり・人口動態テーマと市区町村カタログが参照) を正にし、`daytime-population-ratio` (国勢調査 2020 年の 1 年だけ) を統合した。2020 年の 47 県の値は両者で全件一致 (±0.05) を R2 で確かめた。後者は GSC W41 で週 302 表示あるので消さずに 301 (`RANKING_SLUG_REDIRECTS`) で前者へ送り、config を `isActive: false` にした。KNOWN・sitemap・ranking-prominence・content の ID 索引・survey taxonomy を作り直し、taxonomy の下限は理由と対象キー付きの `rankingBaselineFollowUps` で 2372→2371 に下げて回帰テストで連鎖を固定した。preflight:pr・ranking の survey テスト 67 件・web 全テスト (環境由来の 1 件を除く) 通過。相関 snapshot は次の再計算で片方だけになる。本番は未デプロイ。
 - **観測 (2026-10-09)**: 両方が相関 snapshot に別行で出る。ブログでは day-time-population-ratio を使った。どちらを正とし、もう一方を統合 (301) するかを決める。
 - **完了条件**: 片方に統合され、相関・テーマ・ブログの参照が 1 つのキーにそろっている。
 
