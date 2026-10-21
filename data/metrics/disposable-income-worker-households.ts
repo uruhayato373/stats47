@@ -22,7 +22,7 @@ export const disposableIncomeWorkerHouseholds: MetricConfig = {
     "from": 1975,
     "to": 2025,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -22,7 +22,7 @@ export const cpiChangeRateExclFoodEnergy: MetricConfig = {
     "from": 2015,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateRdBu",

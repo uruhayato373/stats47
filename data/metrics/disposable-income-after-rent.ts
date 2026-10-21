@@ -26,7 +26,7 @@ export const disposableIncomeAfterRent: MetricConfig = {
     from: 2007,
     to: 2024,
   },
-  yearFormat: 'fiscal',
+  yearFormat: 'calendar',
   display: {
     conversionFactor: 1,
     decimalPlaces: 0,

@@ -20,7 +20,7 @@ export const stereoCdMdRadioOwnershipMultiPersonHouseholdsPer1000: MetricConfig 
     "from": 2009,
     "to": 2009,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

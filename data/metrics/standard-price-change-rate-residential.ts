@@ -21,7 +21,7 @@ export const standardPriceChangeRateResidential: MetricConfig = {
     "from": 1976,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateRdBu",

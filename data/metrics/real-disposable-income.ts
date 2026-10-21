@@ -26,7 +26,7 @@ export const realDisposableIncome: MetricConfig = {
     from: 2013,
     to: 2024,
   },
-  yearFormat: 'fiscal',
+  yearFormat: 'calendar',
   display: {
     conversionFactor: 1,
     decimalPlaces: 0,

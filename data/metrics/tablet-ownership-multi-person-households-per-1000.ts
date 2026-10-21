@@ -21,7 +21,7 @@ export const tabletOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
     "from": 2014,
     "to": 2014,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

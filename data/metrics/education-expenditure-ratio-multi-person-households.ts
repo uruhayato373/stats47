@@ -21,7 +21,7 @@ export const educationExpenditureRatioMultiPersonHouseholds: MetricConfig = {
     "from": 2000,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

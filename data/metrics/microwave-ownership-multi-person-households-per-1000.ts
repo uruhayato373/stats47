@@ -29,7 +29,7 @@ export const microwaveOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
       2014,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",
