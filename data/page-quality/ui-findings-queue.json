@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T02:12:12.888Z",
+  "generatedAt": "2026-10-21T02:13:12.980Z",
   "auditAt": "2026-10-17T20:07:33.963Z",
   "findings": [
     {
@@ -214,14 +214,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[desktop-1440/low] デスクトップ 1 枚目、「カテゴリ別のランキング」の各カテゴリ内の項目リスト: 「国立公園面積」と「国定公園面積」、「総面積（北方地域及び竹島を除く）」など似た名前の項目が連続し、単位や年の情報が無く違いが分からない。 → 各項目に単位や対象年を添えるか、似た項目は説明を足して区別できるようにする。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-18",
       "last_seen": "2026-10-18",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-10-21",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "国立公園面積・国定公園面積などは公式の別指標で名前どおり区別できる。/ranking の一覧は 101 件の導線で、単位と年は各ページにある。全項目に単位・年を足すと一覧が読みにくくなるので足さない (2026-10-21 本番で確認)"
     },
     {
       "key": "agent|ranking--long-title",

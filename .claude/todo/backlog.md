@@ -586,6 +586,7 @@ updated: 2026-10-19
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 本番の `/ranking` を確認した。指摘の項目 (国立公園面積・国定公園面積・総面積（北方地域及び竹島を除く）) は公式の別指標で、名前どおりに区別できる。一覧は 101 件の導線で単位と年は各ページにあり、全項目に足すと読みにくくなるので by-design とした (`--mark-by-design`、理由は queue の note)。
 - **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 - **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
 - **対象**:
