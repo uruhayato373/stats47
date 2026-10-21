@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const compulsoryEducationSchoolCountPer100k614: MetricConfig = {
   "key": "compulsory-education-school-count-per-100k-6-14",
   "title": "義務教育学校数",
+  "subtitle": "6～14歳人口10万人当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

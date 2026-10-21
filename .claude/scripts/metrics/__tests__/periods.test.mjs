@@ -143,3 +143,26 @@ test("isoWeekOf: 週境界 (月曜開始)", () => {
   assert.equal(isoWeekOf("2026-07-26"), "2026-W30"); // 日曜は同週
   assert.equal(isoWeekOf("2026-07-27"), "2026-W31"); // 月曜から次週
 });
+
+// SCRIPT-ISO-WEEK-UNIFY-01 (2026-10-21): 週のラベルを作る関数は、どこから呼んでも JST の暦日で数える。
+// 以前は UTC や実行マシンの時刻で数える実装が混ざり、月曜 0〜9 時 (JST) に前の週を返していた (CI は UTC)。
+test("週のラベルを作る関数は、どれも JST の暦日で数える (月曜の朝に前の週を返さない)", async () => {
+  const { toIsoWeek } = await import("../lib/auth.mjs");
+  const { isoWeek } = await import("../../model-usage/usage-core.mjs");
+  const { isoWeekOfDate } = await import("../../search-growth/lib/triage.mjs");
+  const { currentIsoWeek } = await import("../../search-growth/lib/state.mjs");
+  const effect = await import("../../lib/effect-verdict/iso-week.mjs");
+  const cases = [
+    ["2026-10-18T16:30:00Z", "2026-W43"], // 月曜 01:30 JST (UTC ではまだ日曜)
+    ["2026-10-18T14:30:00Z", "2026-W42"], // 日曜 23:30 JST
+    ["2026-12-31T20:00:00Z", "2026-W53"], // 2027-01-01 05:00 JST。2026 年は 53 週ある
+  ];
+  for (const [iso, week] of cases) {
+    const d = new Date(iso);
+    assert.equal(isoWeekOf(jstDateOf(d)), week, `正本 ${iso}`);
+    for (const [name, got] of [["auth.toIsoWeek", toIsoWeek(d)], ["usage-core.isoWeek", isoWeek(iso)], ["triage.isoWeekOfDate", isoWeekOfDate(iso)],
+      ["state.currentIsoWeek", currentIsoWeek(d)], ["effect-verdict.isoWeekOf", effect.isoWeekOf(d)]]) {
+      assert.equal(got, week, `${name} ${iso}`);
+    }
+  }
+});

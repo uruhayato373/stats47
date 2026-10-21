@@ -37,15 +37,26 @@ test('only GSC rows that name their pages become subjects; prose is never parsed
   assert.deepEqual(extractGscPages('[gsc-page: /a] と [gsc-page: /b] と [gsc-page: /a]'), ['/a', '/b']);
 });
 
-test('page matching is a path prefix that includes #fragment rows, like the blog-wave adapter', () => {
-  // GSC は見出しアンカー付き URL を別行で返す。同じページの表示なので合計に含める
-  assert.deepEqual(sumPages(pages['2026-W30'], ['/themes/local-finance']), { clicks: 45, impressions: 1050 });
+test('page matching is exact and includes #fragment rows, but not pages that merely share the prefix', () => {
+  // GSC は見出しアンカー付き URL を別行で返す。同じページの表示なので合計に含める。
+  // /themes/local-finance-other は別ページなので含めない (前方一致だった頃は 5 click / 50 imp が混ざっていた)
+  assert.deepEqual(sumPages(pages['2026-W30'], ['/themes/local-finance']), { clicks: 40, impressions: 1000 });
   assert.deepEqual(sumPages(pages['2026-W30'], ['/themes/local-finance#']), { clicks: 0, impressions: 0 });
+});
+
+test('a marker ending in / covers the whole directory; a page path never pulls in its -vs- siblings', () => {
+  const rows = [
+    { page: 'https://stats47.jp/blog/avg-height-high-school-2nd-male', clicks: '10', impressions: '100' },
+    { page: 'https://stats47.jp/blog/avg-height-high-school-2nd-male-vs-female', clicks: '8', impressions: '601' },
+    { page: 'https://stats47.jp/ranking/x', clicks: '1', impressions: '1' },
+  ];
+  assert.deepEqual(sumPages(rows, ['/blog/avg-height-high-school-2nd-male']), { clicks: 10, impressions: 100 });
+  assert.deepEqual(sumPages(rows, ['/blog/']), { clicks: 18, impressions: 701 });
 });
 
 test('a marked subject reaches a confirmed label when the target is met (fixed clock)', () => {
   const adapter = adapterFor([entry('A-01', '[gsc-page: /themes/local-finance/] デプロイ済 2026-08-01 [target: +60 clicks]')]);
-  // 末尾スラッシュ付きは一致しない (前方一致なので /themes/local-finance/ は /themes/local-finance に当たらない)
+  // 末尾スラッシュ付きは配下を指す目印なので、/themes/local-finance そのものには当たらない
   assert.equal(adapter.measure(adapter.listSubjects()[0], '2026-W36').value, 0);
 
   const ok = adapterFor([entry('A-01', '[gsc-page: /themes/local-finance] デプロイ済 2026-08-01 [target: +60 clicks]')]);

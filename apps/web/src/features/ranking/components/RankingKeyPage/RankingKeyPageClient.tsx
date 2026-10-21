@@ -15,14 +15,6 @@ import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 
 import type { AreaType } from "@/features/area";
-import {
-    RankingYearSelector,
-    AreaTypeToggle,
-    RankingHeaderPanel,
-    RankingHeaderControls,
-    RankingHeaderStats,
-    classifyRankingSubtitle,
-} from "@/features/ranking";
 
 import {
     ADSENSE_DISPLAY_ENABLED,
@@ -30,7 +22,17 @@ import {
     RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
 
+import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
+import { AreaTypeToggle } from "../AreaTypeToggle";
+import {
+    RankingHeaderPanel,
+    RankingHeaderControls,
+    RankingHeaderStats,
+} from "../RankingHeader";
+import { RankingYearSelector } from "../RankingPageHeader/RankingYearSelector";
+
+
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";

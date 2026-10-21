@@ -1,3 +1,5 @@
+// @ts-nocheck — 型検査の範囲外 (SCRIPT-LIB-CHECKJS-01 の範囲は lib・measurement・metrics/lib)。kdp-flow.mjs 経由で
+// tsconfig.checkjs.json の program に入るが、ブラウザ内のコールバックの DOM 型を付けるのは kdp へ範囲を広げるときに行う。
 /**
  * kdp-form.mjs — KDP 出品フォーム (3ステップ: Details → Content → Pricing) のベストエフォート充填。
  *

@@ -131,3 +131,21 @@ describe('Windows development R2 gateway contract', () => {
     expect(nextConfig).not.toContain('next-devtools-stub.ts');
   });
 });
+
+describe('development bundler contract', () => {
+  // webpack の dev はランキング詳細の初回表示に 63 秒かかり、8GB の Mac でメモリ再起動していた (2026-10-21)。
+  it('starts next dev with Turbopack unless WEB_DEV_BUNDLER=webpack is set', () => {
+    const supervisor = read('scripts/dev-server.ts');
+
+    expect(supervisor).toContain("process.env.WEB_DEV_BUNDLER === 'webpack' ? [] : ['--turbopack']");
+    expect(supervisor).toContain('...bundlerArgs()');
+  });
+
+  it('passes WEB_DEV_BUNDLER through turbo strict env mode', () => {
+    const turbo = JSON.parse(readFileSync(path.join(WEB_ROOT, '..', '..', 'turbo.json'), 'utf8')) as {
+      globalPassThroughEnv: string[];
+    };
+
+    expect(turbo.globalPassThroughEnv).toContain('WEB_DEV_BUNDLER');
+  });
+});

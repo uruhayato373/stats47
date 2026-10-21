@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "key": "household-head-income-worker-households-per-month",
   "title": "世帯主収入",
+  "subtitle": "1世帯当たり1か月間",
   "unit": "千円",
   "category": "economy",
   "source": {
@@ -20,7 +21,7 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
     "from": 1975,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

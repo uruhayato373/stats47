@@ -37,7 +37,7 @@ export const numberOfCommercialEmployeesWholesaleRetail: MetricConfig = {
       2021,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

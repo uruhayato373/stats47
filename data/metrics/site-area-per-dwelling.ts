@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const siteAreaPerDwelling: MetricConfig = {
   "key": "site-area-per-dwelling",
   "title": "住宅の敷地面積",
+  "subtitle": "1住宅当たり",
   "unit": "ｍ2",
   "category": "construction",
   "source": {

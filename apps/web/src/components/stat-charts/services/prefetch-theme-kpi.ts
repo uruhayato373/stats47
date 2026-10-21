@@ -1,8 +1,7 @@
 import {
   parseStatSeriesRefs,
   validateChartProps,
-  type StatSeriesRef,
-} from "@stats47/data-configs/theme-catalog";
+} from "@stats47/data-configs/theme-catalog/registry-checks";
 import { logger } from "@stats47/logger";
 import { readJapanSeries, readStatsValues } from "@stats47/stats-r2/readers";
 import { resolveValuePrecision } from "@stats47/utils";
@@ -13,6 +12,7 @@ import { toKpiCardData } from "../adapters";
 
 import type { KpiCardClientProps } from "../components";
 import type { PageComponent } from "./load-page-components";
+import type { StatSeriesRef } from "@stats47/data-configs/theme-catalog";
 import type { StatsSchema } from "@stats47/types";
 
 /**

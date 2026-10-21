@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nationalHealthInsuranceMedicalExpensePerPerson: MetricConfig = {
   "key": "national-health-insurance-medical-expense-per-person",
   "title": "国民健康保険診療費",
+  "subtitle": "被保険者1人当たり",
   "unit": "円",
   "category": "socialsecurity",
   "source": {

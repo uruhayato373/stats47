@@ -6886,6 +6886,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:census-household-change-rate-5y",
           "kind": "ranking"
         }
@@ -6927,6 +6931,10 @@
         {
           "pageId": "municipality-ranking:census-population-change-5y",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:census-population-change-5y",
@@ -6982,6 +6990,10 @@
         {
           "pageId": "municipality-ranking:census-population-change-rate-5y",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:census-population-change-rate-5y",

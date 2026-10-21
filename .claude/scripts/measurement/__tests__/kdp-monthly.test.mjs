@@ -241,7 +241,7 @@ test('record job adds monthly KDP rows once, keeps manual rows, and flags confli
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
-test('authenticated workflow commits the sales ledger written by the record job', () => {
-  const workflow = readFileSync('.github/workflows/authenticated-measurement.yml', 'utf8');
+test('the Mac collection commits the sales ledger written by the summary', () => {
+  const workflow = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
   assert.match(workflow, /git add data\/authenticated\/latest\.json data\/authenticated\/revenue-history\.json data\/products\/sales-ledger\.json/);
 });

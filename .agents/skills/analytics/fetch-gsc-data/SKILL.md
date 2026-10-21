@@ -37,7 +37,7 @@ $ARGUMENTS — [期間] [ディメンション] [フィルタ] [snapshot YYYY-Ww
 
 ## 前提
 
-- サービスアカウント鍵: `stats47-*.json`（リポジトリルートに `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json` のいずれかが存在、gitignore 済み）
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
 - サービスアカウント: 鍵ファイル内の `client_email` を参照（Mac: `ststs47-mac@stats47.iam.gserviceaccount.com`、Windows: `stats47-windows@stats47.iam.gserviceaccount.com`）
 - サイト: `sc-domain:stats47.jp`（Search Console にドメインプロパティとして登録済み・サービスアカウントにアクセス権付与済み）
 - npm パッケージ: `googleapis`（未インストールの場合は `npm install -D googleapis` を実行）
@@ -63,26 +63,14 @@ npm install -D googleapis
 
 ### Step 2: データ取得スクリプト実行（ad hoc モード）
 
-以下の Node.js スクリプトをインラインで実行する（一時ファイル不要、`node -e` で直接実行）。
+ページ×検索語などの単発の照会は、まず `node .claude/scripts/metrics/gsc-query.mjs --start <startDate> --end <endDate> --dims <dim1>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで次を実行する。認証とクライアントは共通モジュール `.claude/scripts/lib/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない)。
 
 ```javascript
-const { google } = require('googleapis');
-const path = require('path');
-const fs = require('fs');
-
-// 存在する鍵ファイルを自動検出
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(__dirname, f)).find(f => fs.existsSync(f));
-if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません: ' + KEY_CANDIDATES.join(' / '));
+const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 
 async function main() {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: KEY_FILE,
-    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
-  });
-
-  const searchconsole = google.searchconsole({ version: 'v1', auth });
+  const searchconsole = createSearchConsoleClient();
 
   const res = await searchconsole.searchanalytics.query({
     siteUrl: SITE_URL,
@@ -169,13 +157,10 @@ main();
 プロジェクトルートで以下を `node -e` で実行する:
 
 ```javascript
-const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
+const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
 
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(f)).find(f => fs.existsSync(f));
-if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません');
 const SITE_URL = 'sc-domain:stats47.jp';
 
 // 期間 (last28d): GSC は 2 日遅延
@@ -226,11 +211,7 @@ function normalize(rows, dimName) {
 }
 
 async function main() {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: KEY_FILE,
-    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
-  });
-  const searchconsole = google.searchconsole({ version: 'v1', auth });
+  const searchconsole = createSearchConsoleClient();
 
   const jobs = [
     { name: 'queries', dim: 'query', file: 'queries.csv' },
@@ -328,7 +309,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ## よく使うパターン
 
-市区町村ページ (`PHASE_1_SSG_CITIES`) の登録状況を 50 件抜き取りで確かめる (URL Inspection API・`MUNICIPALITY-SCOPE-SEPARATION-01`。結果は `/tmp/cities-inspection-sample-<日付>.csv`):
+市区町村ページ (公開対象 1,741 件。`data/content/pages/city.json` の published) の登録状況を 50 件抜き取りで確かめる (URL Inspection API・`MUNICIPALITY-SCOPE-SEPARATION-01`。結果は `/tmp/cities-inspection-sample-<日付>.csv`):
 `node .claude/scripts/gsc/inspect-cities-sample.cjs`
 
 ```bash

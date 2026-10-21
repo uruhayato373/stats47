@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const intellectualDisabilitySupportFacilityCountPer1m: MetricConfig = {
   "key": "intellectual-disability-support-facility-count-per-1m",
   "title": "知的障害者援護施設数",
+  "subtitle": "人口100万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {
@@ -36,7 +37,7 @@ export const intellectualDisabilitySupportFacilityCountPer1m: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

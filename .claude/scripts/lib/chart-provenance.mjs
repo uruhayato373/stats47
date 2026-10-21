@@ -270,13 +270,14 @@ export const CHART_SOURCE_KIND_SPECS = {
 };
 
 /**
- * @param {unknown} sourceData
+ * @param {any} sourceData 解析前の source.json (形は下で検査する)
  * @returns {{
  *   verdict: "valid"|"out-of-scope"|"invalid",
  *   code: string|null,
  *   detail: string,
  *   kind: string|null,
- *   rankingKeys: string[]
+ *   rankingKeys: string[],
+ *   metricKeys: string[]
  * }}
  */
 export function inspectChartSourceManifest(sourceData) {

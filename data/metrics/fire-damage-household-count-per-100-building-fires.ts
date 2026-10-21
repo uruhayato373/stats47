@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDamageHouseholdCountPer100BuildingFires: MetricConfig = {
   "key": "fire-damage-household-count-per-100-building-fires",
   "title": "火災り災世帯数",
+  "subtitle": "建物火災100件当たり",
   "unit": "世帯",
   "category": "population",
   "source": {
@@ -34,7 +35,7 @@ export const fireDamageHouseholdCountPer100BuildingFires: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

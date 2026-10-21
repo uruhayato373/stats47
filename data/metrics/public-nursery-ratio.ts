@@ -20,7 +20,7 @@ export const publicNurseryRatio: MetricConfig = {
     "from": 1975,
     "to": 2020,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

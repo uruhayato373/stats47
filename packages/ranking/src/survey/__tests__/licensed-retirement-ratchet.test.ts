@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import ratchet from '../../../../../.claude/config/survey-taxonomy-ratchet.json';
 import { GONE_RANKING_KEYS } from '../../config/gone-ranking-keys';
+import { RANKING_SLUG_REDIRECTS } from '../../../../../apps/web/src/config/ranking-redirects';
 import { resolveSurveyTaxonomy } from '../survey-taxonomy';
 
 describe('approved KSJ retirement taxonomy baseline', () => {
@@ -32,5 +33,24 @@ describe('approved KSJ retirement taxonomy baseline', () => {
     expect(ratchet.ranking.minActiveResolved).toBeGreaterThanOrEqual(resolved);
     expect(ratchet.ranking.minActiveCoveragePct)
       .toBeGreaterThanOrEqual(Number((100 * resolved / active).toFixed(2)));
+  });
+});
+
+describe('ranking taxonomy follow-up retirements', () => {
+  const followUps = ratchet.rankingBaselineFollowUps;
+
+  it('lowers the floor only by the retired keys, each inactive and redirected to an active ranking', () => {
+    let floor = followUps[0].previousMinActiveResolved;
+    for (const step of followUps) {
+      expect(step.previousMinActiveResolved).toBe(floor);
+      for (const key of step.retiredResolvedKeys) {
+        expect(METRICS_REGISTRY[key].isActive).toBe(false);
+        const target = (step.redirectTo as Record<string, string>)[key];
+        expect(RANKING_SLUG_REDIRECTS[key]).toBe(target);
+        expect(METRICS_REGISTRY[target].isActive).toBe(true);
+      }
+      floor -= step.retiredResolvedKeys.length;
+    }
+    expect(ratchet.ranking.minActiveResolved).toBe(floor);
   });
 });

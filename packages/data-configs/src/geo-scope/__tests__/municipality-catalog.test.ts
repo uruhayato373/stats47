@@ -91,7 +91,8 @@ describe('municipality geo scope and catalog', () => {
     // 除外13 = cities.json不在4 + 値重複7 + データ品質監査未了2 (理由はcatalogのunsupported/unknownに記録)。
     // 2026-09-16 以降に足された city entity 付き config (火災 2・自動車保険 2 等) は catalog 未登録 = unknown で、
     // 公開集合 171 には入らない (公開時に catalog へ published を書く)。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(171);
+    // 2026-10-21: 令和7年国勢調査の5年間の増減 3 件を監査して published に足した (171 → 174)。
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(174);
     for (const key of [
       'total-population',
       'fiscal-strength-index',

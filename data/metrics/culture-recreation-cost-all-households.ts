@@ -19,7 +19,7 @@ export const cultureRecreationCostAllHouseholds: MetricConfig = {
     "city"
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolatePurples",

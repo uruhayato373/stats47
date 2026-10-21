@@ -4,6 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const foodExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "key": "food-expenditure-ratio-multi-person-households",
   "title": "食料費割合",
+  "subtitle": "二人以上の世帯（社会・人口統計体系の指標）",
+  "description": "二人以上の世帯の消費支出に占める食料費の割合。社会・人口統計体系の指標「#L02411 食料費割合（二人以上の世帯）」をそのまま使う。",
+  "note": "同じ考え方の「エンゲル係数」(engel-coefficient、家計調査 年次表 0003348239 の県庁所在市・二人以上世帯の食料費÷消費支出) とは値が一致しない。2024年の47県の単純平均は本指標27.79％・エンゲル係数29.45％で、県ごとにも1.4〜2.3ポイントの差がある (2026-10-21 R2 の配信値で確認)。差の原因 (算定に使う期間・地域の範囲) は社会・人口統計体系の算定方法で未確認。記事ではどちらの系列かを書き、混ぜて比べない。",
   "unit": "％",
   "category": "economy",
   "source": {
@@ -20,7 +23,7 @@ export const foodExpenditureRatioMultiPersonHouseholds: MetricConfig = {
     "from": 2000,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

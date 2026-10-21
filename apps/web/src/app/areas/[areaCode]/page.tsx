@@ -38,7 +38,7 @@ import {
   generateAreaProfileBreadcrumbStructuredData,
   generateAreaProfileStructuredData,
 } from '@/features/area-profile';
-import { AreaGeoInsightsSection } from '@/features/geo-analysis';
+import { AreaGeoInsightsSection } from '@/features/geo-analysis/area';
 import { AREA_THEMES } from '@/features/theme-dashboard/listing.server';
 
 import { ADSENSE_DISPLAY_ENABLED, HUB_INCONTENT } from '@/lib/google-adsense';

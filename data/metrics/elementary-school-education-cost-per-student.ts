@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const elementarySchoolEducationCostPerStudent: MetricConfig = {
   "key": "elementary-school-education-cost-per-student",
   "title": "小学校教育費",
+  "subtitle": "児童1人当たり",
   "unit": "円",
   "category": "educationsports",
   "source": {

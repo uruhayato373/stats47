@@ -155,9 +155,7 @@ Claudeは描画せず、記事のコピー・題材・根拠を準備し、Codex
 ## 教材 (参考文献) の企画の受け取り
 
 note 記事の企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel note`)。
-各企画には同じ指標を使う公開物が候補として付く。問いが同じ公開物があれば `record --status done --target <ページID>`、
-新しく作るなら作ったあとに `done`、作らないと決めたら `record --status declined --reason <理由>` を記録する (`--by` に自分の名前)。
-企画は書籍の問いの手掛かりで、数値・本文は一次資料と R2 で取り直す。正典は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+記録の付け方 (候補との結び方・done・declined) と、数値を一次資料と R2 で取り直す決まりは `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
 記事にする手順 (R2 の観測値からの下ごしらえ・問いへの答えの執筆・数値照合の検査・R2 への保存) は `/expand-reference-notes`。
 
 ## Output Contract
@@ -177,8 +175,6 @@ note 記事の企画・制作の前に、教材の分析企画のうち自分の
 例外: **Template C** (report) を使う場面
 - 記事の構成案・edit 提案の一括レビュー
 
-## 記録から判断する (2026-10-20)
+## 記録から判断する
 
-管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
-セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
-例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。
+ログインが要る計測値は週次の記録から読み、ブラウザで取りに行かない。正典 (記録の置き場・古いときの扱い・例外) は `.claude/rules/recorded-measurement-first.md`。

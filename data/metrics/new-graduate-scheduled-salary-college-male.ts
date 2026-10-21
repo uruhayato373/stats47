@@ -24,7 +24,7 @@ export const newGraduateScheduledSalaryCollegeMale: MetricConfig = {
       2024,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

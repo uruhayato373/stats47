@@ -383,6 +383,21 @@ export function buildHook(titleX: string, titleY: string, r: number): string {
     : `${titleX}が多い県ほど、${titleY}は少ない？`;
 }
 
+/** 因果を否定する固定文言。4 枚目の画像 (buildCautionLine) とキャプションで共有する。 */
+export const CAUSATION_DISCLAIMER = "相関は因果関係を示しません。";
+
 export function buildCautionLine(rPopulationAdjusted: number): string {
-  return `相関は因果関係を示しません。人口の影響を除くと r=${formatR(rPopulationAdjusted)}`;
+  return `${CAUSATION_DISCLAIMER}人口の影響を除くと r=${formatR(rPopulationAdjusted)}`;
+}
+
+/**
+ * キャプションの相関の段。人口調整後の r は r の行に書くので、注意書きでは繰り返さない
+ * (2026-10-21: 画像用の buildCautionLine をそのまま入れていたため IG 1097・1105 で同じ値が 2 回出た)。
+ */
+export function buildCaptionCorrelationLines(r: number, rPopulationAdjusted: number): string[] {
+  return [
+    `相関係数 r=${formatR(r)}（人口の影響を除くと r=${formatR(rPopulationAdjusted)}）`,
+    "",
+    CAUSATION_DISCLAIMER,
+  ];
 }

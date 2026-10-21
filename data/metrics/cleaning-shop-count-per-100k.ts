@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const cleaningShopCountPer100k: MetricConfig = {
   "key": "cleaning-shop-count-per-100k",
   "title": "クリーニング所数",
+  "subtitle": "人口10万人当たり",
   "unit": "所",
   "category": "commercial",
   "source": {

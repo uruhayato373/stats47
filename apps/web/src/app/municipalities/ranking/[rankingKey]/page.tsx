@@ -16,9 +16,10 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
-  readMunicipalityRankingItem,
-  readMunicipalityRankingValues,
-} from '@stats47/ranking/server';
+  buildMunicipalityListNames,
+  buildMunicipalityRankingMeta,
+  municipalityRankingDisplayTitle,
+} from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
 import { ChevronDown } from 'lucide-react';
 
@@ -32,17 +33,19 @@ import { SectionHeader } from '@/components/section';
 import { NativeAffiliateRow } from '@/features/ads';
 import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
   buildMunicipalityDatasetStructuredData,
   filterMunicipalityRanking,
-  municipalityLeafName,
 } from '@/features/municipalities';
-import { MunicipalityRankingMapSection } from '@/features/municipalities/server';
+import {
+  MunicipalityRankingMapSection,
+  readMunicipalityRanking,
+} from '@/features/municipalities/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
-import { UrlPolicy } from '@/lib/url-policy';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
@@ -55,15 +58,6 @@ interface Params {
 type SearchParams = Record<string, string | string[] | undefined>;
 
 export const dynamic = 'force-dynamic';
-
-// subtitle は generator が「published 集合内で title が衝突するときだけ」焼き込む。
-// 在るときは title と併記しないと同一 <title> のページが複数できる (事業所数×業種 等)。
-function municipalityRankingDisplayTitle(item: {
-  title: string;
-  subtitle?: string;
-}): string {
-  return item.subtitle ? `${item.title}（${item.subtitle}）` : item.title;
-}
 
 function first(value: string | string[] | undefined): string {
   return Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
@@ -90,11 +84,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { rankingKey } = await params;
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) return {};
-  const item = await readMunicipalityRankingItem(rankingKey);
-  if (!item) return {};
-  const displayTitle = municipalityRankingDisplayTitle(item);
-  const title = `${displayTitle} 市区町村ランキング【${item.latestYear.yearName}】`;
-  const description = `${displayTitle}を${item.valueCount.toLocaleString('ja-JP')}市区町村で比較。自治体名検索と都道府県絞り込みに対応しています。`;
+  const { item, values } = await readMunicipalityRanking(rankingKey);
+  if (!item || !values) return {};
+  const { title, description } = buildMunicipalityRankingMeta(item, values);
   return {
     title,
     description,
@@ -120,9 +112,8 @@ export default async function MunicipalityRankingPage({
     const category = getMetricConfig(rankingKey)?.category;
     return category ? CATEGORY_AFFILIATE_MAP[category] : undefined;
   })();
-  const [item, snapshot, nativeBanners] = await Promise.all([
-    readMunicipalityRankingItem(rankingKey),
-    readMunicipalityRankingValues(rankingKey),
+  const [{ item, values: snapshot }, nativeBanners] = await Promise.all([
+    readMunicipalityRanking(rankingKey),
     affiliateVertical
       ? resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
       : Promise.resolve([]),
@@ -170,6 +161,8 @@ export default async function MunicipalityRankingPage({
   const precision = distribution?.precision ?? 0;
   const formatValue = (value: number) =>
     formatValueWithPrecision(value, precision);
+  // 同じ名前の自治体 (府中市・伊達市など) だけ県名を添える
+  const listName = buildMunicipalityListNames(snapshot.values.map((row) => row.areaName));
   const structuredData = buildMunicipalityDatasetStructuredData({
     item,
     snapshot,
@@ -344,35 +337,25 @@ export default async function MunicipalityRankingPage({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filtered.rows.map((row) => {
-              const profileHref = `/areas/${row.prefectureCode}/cities/${row.areaCode}`;
-              const hasProfile = UrlPolicy.city.isIndexable(
-                row.prefectureCode,
-                row.areaCode
-              );
-              return (
-                <TableRow key={row.areaCode}>
-                  <TableCell className="tabular-nums text-muted-foreground">
-                    {row.rank}位
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {hasProfile ? (
-                      <Link
-                        href={profileHref}
-                        className="text-primary hover:underline"
-                      >
-                        {municipalityLeafName(row.areaName)}
-                      </Link>
-                    ) : (
-                      municipalityLeafName(row.areaName)
-                    )}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {formatValue(row.value)} {formatUnitForDisplay(snapshot.unit)}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {filtered.rows.map((row) => (
+              <TableRow key={row.areaCode}>
+                <TableCell className="tabular-nums text-muted-foreground">
+                  {row.rank}位
+                </TableCell>
+                <TableCell className="font-medium">
+                  {/* 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする */}
+                  <Link
+                    href={`/areas/${row.prefectureCode}/cities/${row.areaCode}`}
+                    className="text-primary hover:underline"
+                  >
+                    {listName(row.areaName)}
+                  </Link>
+                </TableCell>
+                <TableCell className="text-right tabular-nums">
+                  {formatValue(row.value)} {formatUnitForDisplay(snapshot.unit)}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         {filtered.rows.length === 0 && (
@@ -430,6 +413,16 @@ export default async function MunicipalityRankingPage({
         </div>
       )}
 
+      <div className="mt-8">
+        <RelatedContentNavigation
+          title="同じ指標のランキング・記事・テーマ"
+          sourceId={`municipality-ranking:${item.rankingKey}`}
+          kinds={['ranking', 'blog', 'municipality-theme']}
+          limit={4}
+          surface="municipality_related"
+        />
+      </div>
+
       {/* 市区町村 snapshot に焼き込まれた出典 (都道府県 metric の統計表とは別の表を使う指標がある) */}
       <DataSourceList
         sources={[{ label: item.source.name, url: item.source.url, tables: [] }]}
@@ -437,7 +430,7 @@ export default async function MunicipalityRankingPage({
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
         <p>
-          比較対象は市・町・村です。政令指定都市の行政区と「特別区部」の集約行を除外し、欠測値や比率を定義できない値は順位へ入れていません。
+          比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>
       </footer>
     </PageShell>

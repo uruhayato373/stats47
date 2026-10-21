@@ -37,7 +37,7 @@ export async function readVault(key) {
   const Key = objectKey(key);
   try {
     const response = await client().send(new GetObjectCommand({ Bucket: BUCKET, Key }));
-    return JSON.parse(decrypt(Buffer.from(await response.Body.transformToByteArray()), encryptionKey(), Key));
+    return JSON.parse(/** @type {any} */ (decrypt(Buffer.from(await response.Body.transformToByteArray()), encryptionKey(), Key)));
   } catch (error) {
     if (error.name === 'NoSuchKey' || error.$metadata?.httpStatusCode === 404) return null;
     throw error;

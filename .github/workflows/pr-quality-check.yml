@@ -263,8 +263,10 @@ jobs:
       - name: 🧾 SNS Post Trace Contract
         # 投稿台帳 data/sns/posts.json の 1 id から台本・状態・承認・外部 ID・素材・観測値をたどれること。
         # カットオーバー以降の投稿は承認必須。契約: .claude/rules/sns-content-standards.md §3
+        # sns:test は .claude/scripts/sns/__tests__ の全テスト (TS はルートの vitest workspace に入らないので node --test で回す)
         run: |
           npm run sns:trace:test
+          npm run sns:test
           node .claude/scripts/sns/check-post-trace.mjs
         continue-on-error: false
 
@@ -473,6 +475,12 @@ jobs:
         run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs .claude/scripts/metrics/__tests__/metrics-reader-ga4.test.mjs
         continue-on-error: false
 
+      - name: 🔑 Google API client contract
+        # 認証とクライアント生成は google-client.cjs だけが持ち、読み取りの POST は再試行・書き込みは 1 回だけ送る契約を固定する
+        # (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。共通クライアントへ置き換えた計測スクリプトの単体テストも同じ step で回す。
+        run: node --test .claude/scripts/lib/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs .claude/scripts/ads/__tests__/fetch-affiliate-ga4.test.cjs
+        continue-on-error: false
+
       - name: 🔁 Workflow Commit-back Contract Gate
         # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
         # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、
@@ -672,7 +680,7 @@ jobs:
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
-        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
+        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/scripts-checkjs-scope.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
         continue-on-error: false
 
   catalog-gates:
@@ -1188,6 +1196,7 @@ jobs:
         run: |
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
           npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx packages/ranking/src/scripts/generate-city-databooks.ts --source-base https://storage.stats47.jp --input-root .local/r2 --output-root .local/r2
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
           npm run metrics:verify-snapshots
 

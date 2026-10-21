@@ -364,7 +364,9 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {Array<object>|null} input.affiliateRows data/affiliate/ga4-affiliate-history.csv
  * @param {object|null} input.operations buildOperations の結果
  * @param {object|null} input.authenticated data/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
- * @param {Array<{id:string, kpis:string[]|null}>} input.improvementRows strategy-lanes.parseImprovementRows
+ * @param {object|null} [input.dataQuality] summarizeDataQuality の結果 (ranking/integrity-audit.json)
+ * @param {object|null} [input.paidPurchases] summarizePaidPurchases の結果
+ * @param {Array<{id:string, kpis:string[]|null, hasTarget?:boolean}>} input.improvementRows strategy-lanes.parseImprovementRows
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */

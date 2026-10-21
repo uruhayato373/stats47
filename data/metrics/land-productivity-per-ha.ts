@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const landProductivityPerHa: MetricConfig = {
   "key": "land-productivity-per-ha",
   "title": "土地生産性",
+  "subtitle": "耕地面積1ヘクタール当たり",
   "unit": "万円",
   "category": "landweather",
   "source": {

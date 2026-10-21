@@ -100,6 +100,7 @@
     "note:cover-production": "node --import tsx .claude/scripts/note/cover-production.ts",
     "note:cover-production:test": "node --test .claude/scripts/note/__tests__/cover-production.test.mjs .claude/scripts/note/__tests__/cover-category-contract.test.mjs",
     "note:assets:validate": "node .claude/scripts/note/cover-assets.mjs validate && npm run note:cover-production -- validate",
+    "sns:test": "node --import tsx --test .claude/scripts/sns/__tests__/*.test.ts .claude/scripts/sns/__tests__/*.test.mjs .claude/scripts/sns/__tests__/*.test.cjs",
     "sns:trace:check": "node .claude/scripts/sns/check-post-trace.mjs",
     "sns:trace:test": "node --test .claude/scripts/sns/__tests__/post-trace-core.test.mjs .claude/scripts/lib/__tests__/sns-posts-store.test.cjs",
     "note:assets:test": "node --test .claude/scripts/note/__tests__/cover-assets.test.mjs .claude/scripts/note/__tests__/question-cover-data.test.mjs .claude/scripts/note/__tests__/cover-production.test.mjs .claude/scripts/note/__tests__/cover-category-contract.test.mjs .claude/scripts/note/__tests__/cover-generation-guards.test.mjs",
@@ -126,7 +127,7 @@
     "check-domains": "node .claude/scripts/lib/check-domains.cjs",
     "check-datasets": "node .claude/scripts/lib/check-datasets.mjs",
     "type-check": "cross-env NODE_OPTIONS=--max-old-space-size=4096 turbo run type-check && npm run type-check:scripts",
-    "type-check:scripts": "node .claude/scripts/lib/sync-codex-mirror.cjs --check && node .claude/scripts/lib/type-check-scripts.mjs apps/web/scripts/tsconfig.json packages/database/scripts/tsconfig.json packages/ranking/scripts/tsconfig.json apps/remotion/scripts/tsconfig.json .claude/skills/ads/scout-asp/scripts/tsconfig.json .claude/skills/note/post-note-ranking/scripts/tsconfig.json packages/product-factory/scripts/tsconfig.json .claude/scripts/tsconfig.json",
+    "type-check:scripts": "node .claude/scripts/lib/sync-codex-mirror.cjs --check && node .claude/scripts/lib/type-check-scripts.mjs apps/web/scripts/tsconfig.json packages/database/scripts/tsconfig.json packages/ranking/scripts/tsconfig.json apps/remotion/scripts/tsconfig.json .claude/skills/ads/scout-asp/scripts/tsconfig.json .claude/skills/note/post-note-ranking/scripts/tsconfig.json packages/product-factory/scripts/tsconfig.json .claude/scripts/tsconfig.json .claude/scripts/tsconfig.checkjs.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "knip": "knip",
     "knip:report": "knip --reporter json > knip-report-all.json",
@@ -247,7 +248,8 @@
     "googleapis": "^171.4.0",
     "knip": "^6.39.0",
     "prettier": "^3.4.2",
-    "turbo": "^2.10.12"
+    "turbo": "^2.10.12",
+    "vite": "^8.2.4"
   },
   "workspaces": [
     "apps/*",
@@ -278,6 +280,7 @@
     "typescript": "5.9.3",
     "undici": "7.29.1",
     "uuid": "11.1.1",
+    "vite": "$vite",
     "workerd": "1.20260825.1",
     "ws": "8.21.3"
   },

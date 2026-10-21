@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDepartmentWaterCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-water-count-per-100-thousand-people",
   "title": "消防水利数",
+  "subtitle": "人口10万人当たり",
   "unit": "所",
   "category": "safetyenvironment",
   "source": {

@@ -33,13 +33,6 @@ export const DEFAULT_MIN_STREAK = 2;
 //   2026-09-19 のページ品質監査 (スクショ検査) は時間切れで cancelled になり、2026-09-20 の週次フル検査は
 //   Issue 化ステップごと落ちたが、どちらも連続 1 回で止まっていて誰にも知らされなかった。
 export const SCHEDULE_CONTRACTS = Object.freeze({
-  // 2026-10-20 オーナー判断で週次にした。本取得は木曜 17:30 の Mac で、これはその予備 (木曜 JST 20:20)。
-  "authenticated-measurement.yml": Object.freeze({
-    firstExpectedAt: "2026-10-22T11:20:00Z",
-    intervalHours: 168,
-    graceHours: 6,
-    minStreak: 1,
-  }),
   "page-quality-audit-weekly.yml": Object.freeze({
     firstExpectedAt: "2026-09-26T18:00:00Z",
     intervalHours: 168,
@@ -199,4 +192,31 @@ export function formatReport(summary, options = {}) {
     }
   }
   return lines.join("\n");
+}
+
+/**
+ * 待機中に後続の run へ取り消された手動起動を見つける (CI-R2-WRITE-PENDING-REPLACED-01)。
+ *
+ * `concurrency: r2-write` (`cancel-in-progress: false`) の workflow は待機を 1 本しか持てず、後から来た run が
+ * 待機中の run を取り消す。取り消された run はジョブ 0 件のまま `cancelled` になり、起動した側には失敗に見えない
+ * (2026-10-08〜09 に 2 回、反映漏れが残った)。後から同じ workflow の手動起動が成功していれば取り戻したとみなす。
+ *
+ * @param {Array<{workflow: string, runs: Array<{id:number, event:string, conclusion:string|null, createdAt:string, jobCount:number|null}>}>} entries
+ * @param {{ nowMs: number, windowHours?: number }} options
+ */
+export function findSupersededDispatches(entries, { nowMs, windowHours = 48 }) {
+  const since = nowMs - windowHours * 3600 * 1000;
+  const found = [];
+  for (const { workflow, runs } of entries) {
+    const dispatches = runs.filter((r) => r.event === "workflow_dispatch");
+    for (const r of dispatches) {
+      if (r.conclusion !== "cancelled" || r.jobCount !== 0) continue;
+      if (Date.parse(r.createdAt) < since) continue;
+      const recovered = dispatches.some(
+        (later) => later.conclusion === "success" && Date.parse(later.createdAt) > Date.parse(r.createdAt),
+      );
+      if (!recovered) found.push({ workflow, runId: r.id, createdAt: r.createdAt });
+    }
+  }
+  return found;
 }

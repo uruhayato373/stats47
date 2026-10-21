@@ -20,6 +20,21 @@
       "import": "./src/provenance/data-source-entry.ts",
       "require": "./src/provenance/data-source-entry.ts"
     },
+    "./recipe": {
+      "types": "./src/recipe.ts",
+      "import": "./src/recipe.ts",
+      "require": "./src/recipe.ts"
+    },
+    "./provenance": {
+      "types": "./src/provenance/resolve-metric-provenance.ts",
+      "import": "./src/provenance/resolve-metric-provenance.ts",
+      "require": "./src/provenance/resolve-metric-provenance.ts"
+    },
+    "./source-name-to-survey": {
+      "types": "./src/ssds/source-name-to-survey.ts",
+      "import": "./src/ssds/source-name-to-survey.ts",
+      "require": "./src/ssds/source-name-to-survey.ts"
+    },
     "./topics": {
       "types": "./src/topics/index.ts",
       "import": "./src/topics/index.ts",
@@ -39,6 +54,11 @@
       "types": "./src/theme-catalog/index.ts",
       "import": "./src/theme-catalog/index.ts",
       "require": "./src/theme-catalog/index.ts"
+    },
+    "./theme-catalog/registry-checks": {
+      "types": "./src/theme-catalog/registry-checks.ts",
+      "import": "./src/theme-catalog/registry-checks.ts",
+      "require": "./src/theme-catalog/registry-checks.ts"
     },
     "./theme-catalog/types": {
       "types": "./src/theme-catalog/types.ts",
@@ -69,6 +89,11 @@
       "types": "./src/prominence/ranking-prominence.generated.ts",
       "import": "./src/prominence/ranking-prominence.generated.ts",
       "require": "./src/prominence/ranking-prominence.generated.ts"
+    },
+    "./display-semantics": {
+      "types": "./src/display-semantics/index.ts",
+      "import": "./src/display-semantics/index.ts",
+      "require": "./src/display-semantics/index.ts"
     },
     "./geo-scope": {
       "types": "./src/geo-scope/index.ts",

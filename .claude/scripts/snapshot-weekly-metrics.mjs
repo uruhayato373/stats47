@@ -22,6 +22,7 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { assertDatasetShape } from "./lib/dataset-shape.mjs";
 import { join } from "node:path";
 import {
   fetchWeeklyNsmMetrics,
@@ -96,6 +97,7 @@ async function main() {
   };
 
   mkdirSync(OUT_DIR, { recursive: true });
+  assertDatasetShape("business.nsm-weekly", snapshot); // 形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
   writeFileSync(outPath, JSON.stringify(snapshot, null, 2) + "\n", "utf-8");
   console.log(`[snapshot] ✓ ${outPath} に保存`);
 

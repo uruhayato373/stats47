@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const pollutionComplaintsReceivedPer100k: MetricConfig = {
   "key": "pollution-complaints-received-per-100k",
   "title": "公害苦情受付件数",
+  "subtitle": "人口10万人当たり",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

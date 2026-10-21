@@ -12,7 +12,8 @@ export const ADSENSE_BASELINE = Object.freeze({
   reviewDate: '2026-11-13',
 });
 
-/** @returns {{kind:'baseline-observation'}|{kind:'effect-experiment'}} */
+/** @param {{ domainId?: string, subjectId?: string, id?: string }} subject
+ * @returns {typeof ADSENSE_BASELINE | {kind:'effect-experiment'}} */
 export function assessmentForSubject({ domainId, subjectId, id }) {
   return domainId === ADSENSE_BASELINE.domainId && (subjectId ?? id) === ADSENSE_BASELINE.subjectId
     ? ADSENSE_BASELINE : { kind: 'effect-experiment' };

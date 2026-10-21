@@ -34,7 +34,6 @@ import { fetchBuffer, makeWorkDir, writeStatsValues, roundTo, PREF_NAMES } from 
 const PDF_URL = "https://www.mhlw.go.jp/content/001675215.pdf";
 const PDF_SHA256 = "ff87172adb1246c45e90cac29f24068d7f9fc59f1528138d2c5697e02126cbd1";
 const YEAR_CODE = "2024";
-const YEAR_NAME = "2024年10〜11月";
 
 /** pdftotext -layout の 1 ページ分から「県名 + 数値列」の行を取る。 */
 function parseRows(pageText, nTokens) {
@@ -117,7 +116,8 @@ async function main() {
   ];
   for (const o of out) {
     const rows = o.series.prefs.map((p) => ({ areaName: p.name, yearCode: YEAR_CODE, value: roundTo(p.mean, o.decimals) }));
-    writeStatsValues({ metricKey: o.key, unit: o.unit, rows, yearName: () => YEAR_NAME });
+    // 調査期間 (10〜11月) は指標の note に書き、yearName は他の指標と同じ「2024年」にする (MANUAL-METRIC-YEARNAME-01)
+    writeStatsValues({ metricKey: o.key, unit: o.unit, rows });
     console.log(`[info] ${o.key}: 全国(表) ${o.series.national} / pdfPage ${o.page}`);
   }
 }

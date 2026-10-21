@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const publicGymnasiumCountPerMillion: MetricConfig = {
   "key": "public-gymnasium-count-per-million",
   "title": "体育館数",
+  "subtitle": "人口100万人当たり",
   "unit": "施設",
   "category": "educationsports",
   "source": {
@@ -48,7 +49,7 @@ export const publicGymnasiumCountPerMillion: MetricConfig = {
       2021,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

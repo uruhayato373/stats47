@@ -52,6 +52,7 @@ const BARE_RE = /`([A-Za-z0-9._\-]+\.(?:ts|tsx|mjs|cjs|js|yml|yaml|json|sh|md))`
 /**
  * backlog 本文から「カード ID → 名指ししているファイル path」を作る (pure)。
  * @param {string} markdown
+ * @param {(bare: string) => string|null} [resolveBare] ファイル名だけの参照をリポジトリ相対 path に解決する
  * @returns {Map<string, Set<string>>}
  */
 function buildCardPathIndex(markdown, resolveBare = () => null) {

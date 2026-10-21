@@ -8,6 +8,7 @@
  * `buildJapanSeriesRows` が実際に ≥1 件の有効な年を返すかで判定する。
  *
  * 入力: packages/data-configs/scripts/classify-japan-candidates.ts の出力 (JSON, stdin または --input)。
+ *   official-candidate と unknown-no-audit-entry (live audit に全国行の証拠が無い e-Stat 指標) を検証する。
  * 出力: 検証済み分類 (verified-official / verified-unsupported / fetch-error) の JSON を stdout へ。
  *
  * ★write はしない (検証専用)。artifact の実書き込みは検証 OK 分だけ別途 `--write` runner で行う。
@@ -17,6 +18,8 @@
  *   npx tsx packages/stats-r2/src/scripts/verify-japan-candidates.ts --input <classification.json>
  */
 import { readFileSync } from "node:fs";
+
+import { VERIFY_TARGET_CLASSIFICATIONS } from "@stats47/data-configs/geo-scope";
 
 import { generateOneMetric } from "./generate-japan-series";
 
@@ -51,7 +54,9 @@ async function main() {
     process.exit(1);
   }
   const file = JSON.parse(readFileSync(args.input, "utf8")) as ClassificationFile;
-  const candidates = file.results.filter((r) => r.classification === "official-candidate");
+  // 行の存在が分かっている候補に加え、live audit に証拠が無い e-Stat 指標も実取得で判定する
+  const targetClasses = new Set<string>(VERIFY_TARGET_CLASSIFICATIONS);
+  const candidates = file.results.filter((r) => targetClasses.has(r.classification));
   const targets = args.limit ? candidates.slice(0, args.limit) : candidates;
 
   console.error(`[verify] ${targets.length} / ${candidates.length} 候補を値レベル検証します`);

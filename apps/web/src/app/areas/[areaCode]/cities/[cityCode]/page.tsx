@@ -1,18 +1,17 @@
 import { notFound } from "next/navigation";
 
-import { selectCityHighlights } from "@stats47/area-profile";
+import { buildCityPageMeta } from "@stats47/ranking";
 
-import Link from "@/components/atoms/SiteLink";
 import { PageHeader, PageShell } from "@/components/layout";
-import { SurfaceSection } from "@/components/surface";
 
 import {
-  AreaHighlightList,
   CityBreadcrumbs,
+  CityDatabookView,
   CityPageFooter,
   getCityRouteContext,
 } from "@/features/area-profile";
-import { readCityProfile } from "@/features/area-profile/server";
+import { readCityDatabook } from "@/features/area-profile/server";
+import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
 
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
@@ -23,9 +22,15 @@ interface PageProps {
   params: Promise<{ areaCode: string; cityCode: string }>;
 }
 
-/** 「特徴」一覧の件数。title / description は先頭 METADATA_HIGHLIGHTS 件。 */
-const CITY_HIGHLIGHTS_LIMIT = 12;
-const METADATA_HIGHLIGHTS = 3;
+/**
+ * データブックは公開対象の市区町村にだけある。対象外 (政令指定都市の行政区・「特別区部」の集約行) は
+ * R2 を読まずに索引から外す。
+ */
+async function readDatabook(areaCode: string, cityCode: string) {
+  return UrlPolicy.city.isIndexable(areaCode, cityCode)
+    ? readCityDatabook(areaCode, cityCode)
+    : null;
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { areaCode, cityCode } = await params;
@@ -34,27 +39,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "市区町村が見つかりません", robots: "noindex, follow" };
   }
 
-  const profile = await readCityProfile(areaCode, cityCode);
-  const validStrengths = selectCityHighlights(profile?.strengths, { limit: METADATA_HIGHLIGHTS });
-  const topStrength = validStrengths[0];
-
-  const title = topStrength
-    ? `${context.city.areaName}の統計データ｜${context.pref.areaName}｜${topStrength.indicator} 県内${topStrength.rank}位`
-    : `${context.city.areaName}の統計データ｜${context.pref.areaName}`;
-
-  const descriptionHighlights = validStrengths
-    .map((s) => `${s.indicator} 県内${s.rank}位`)
-    .join("、");
-  const description = descriptionHighlights
-    ? `${context.city.areaName}（${context.pref.areaName}）の統計プロファイル。${descriptionHighlights}。県内ランキングで主要指標を比較できます。`
-    : `${context.city.areaName}（${context.pref.areaName}）の統計データをチャートで可視化。`;
+  const databook = await readDatabook(areaCode, cityCode);
+  const { title, description } = databook
+    ? buildCityPageMeta(databook, context.pref.areaName)
+    : {
+        title: `${context.cityShortName}（${context.pref.areaName}）の統計データ`,
+        description: `${context.city.areaName}の統計データ。`,
+      };
 
   return {
     title,
     description,
-    robots: UrlPolicy.city.isIndexable(areaCode, cityCode)
-      ? "index, follow"
-      : "noindex, follow",
+    robots: databook ? "index, follow" : "noindex, follow",
     alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}` },
     // 親県の静的 R2 OGP を明示。未指定だと最寄りの areas/[areaCode]/opengraph-image (ランタイム) に
     // 落ち Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
@@ -72,12 +68,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
  * オンデマンド ISR（24時間）。
  *
  * generateStaticParams は付けない。付けると対象市区町村が `●` SSG 化され、ビルド時に R2 から
- * city profile を読めず notFound として prerender される。この OpenNext 構成では ISR 再生成が
+ * データブックを読めず notFound として prerender される。この OpenNext 構成では ISR 再生成が
  * 効かず「市区町村が見つかりません」が永久固着する（2026-06-22 障害）。generateStaticParams なし =
  * `ƒ`（オンデマンド）でランタイムに R2 を読んで描画する（ranking / areas と同方式）。
  * 詳細: .claude/rules/nextjs-ssg-preservation.md
  */
 export const revalidate = 86400;
+
+/** 関連記事を探すときに使う指標の数 (見出しの指標と、データブックの先頭の分野)。 */
+const RELATED_METRIC_LIMIT = 12;
 
 export default async function CityPage({ params }: PageProps) {
   const { areaCode, cityCode } = await params;
@@ -86,55 +85,51 @@ export default async function CityPage({ params }: PageProps) {
     notFound();
   }
 
-  const profile = await readCityProfile(areaCode, cityCode);
-  const validStrengths = selectCityHighlights(profile?.strengths, { limit: CITY_HIGHLIGHTS_LIMIT });
+  const databook = await readDatabook(areaCode, cityCode);
+  const meta = databook ? buildCityPageMeta(databook, context.pref.areaName) : null;
+  const relatedMetricKeys = databook
+    ? [...new Set([...databook.headlineKeys, ...databook.sections.flatMap((section) => section.metricKeys)])].slice(
+        0,
+        RELATED_METRIC_LIMIT,
+      )
+    : [];
 
   return (
     <PageShell>
       <CityBreadcrumbs
         areaCode={areaCode}
         prefName={context.pref.areaName}
-        cityName={context.city.areaName}
+        cityName={context.cityShortName}
       />
       <PageHeader
-        title={`${context.city.areaName}の統計データ`}
-        description={`${context.pref.areaName}の市区町村`}
+        eyebrow={context.pref.areaName}
+        title={`${context.cityShortName}の${databook ? "人口・" : ""}統計データ`}
+        description={meta?.description ?? `${context.pref.areaName}の市区町村`}
       />
 
       <main className="min-w-0 space-y-10">
-        <p className="text-sm">
-          <Link
-            href={`/municipalities/ranking/elderly-population-ratio?q=${encodeURIComponent(context.city.areaName)}`}
-            className="font-medium text-primary hover:underline"
-          >
-            {context.cityShortName}を全国の市区町村ランキングで見る →
-          </Link>
-        </p>
-        {validStrengths.length > 0 ? (
-          <SurfaceSection className="p-6">
-            <h2 className="text-lg font-bold text-foreground">
-              {context.cityShortName}の特徴 (県内ランキング上位)
-            </h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {context.pref.areaName}内で {context.cityShortName} の順位が上位の指標 (値が 0 の指標は除く)
-            </p>
-            <div className="mt-4">
-              {/* 市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}
-              <AreaHighlightList
-                rankScope="県内順位"
-                items={validStrengths.map((s) => ({
-                  rankingKey: s.rankingKey,
-                  label: s.indicator,
-                  rank: s.rank,
-                  value: s.value,
-                  unit: s.unit,
-                  year: s.year,
-                  tone: "neutral",
-                }))}
-              />
-            </div>
-          </SurfaceSection>
-        ) : null}
+        {databook ? (
+          <CityDatabookView
+            databook={databook}
+            cityShortName={context.cityShortName}
+            prefName={context.pref.areaName}
+          />
+        ) : (
+          <p role="status" className="border border-border bg-muted/20 p-5 text-sm text-muted-foreground">
+            この地域の統計データは、市区町村の一覧から各市区町村のページでご覧ください。
+          </p>
+        )}
+
+        {databook && (
+          <RelatedContentNavigation
+            title="この市区町村のデータを読み解く記事"
+            sourceId={`city:${areaCode}:${cityCode}`}
+            kinds={["blog"]}
+            rankingKeys={relatedMetricKeys}
+            limit={3}
+            surface="municipality_related"
+          />
+        )}
 
         <CityPageFooter
           areaCode={areaCode}

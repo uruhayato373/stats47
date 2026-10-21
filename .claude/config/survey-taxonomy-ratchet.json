@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 2372,
+    "minActiveResolved": 2371,
     "minActiveCoveragePct": 100
   },
   "rankingBaselineAdjustment": {
@@ -26,6 +26,15 @@
       "fishing-port-count-ksj"
     ]
   },
+  "rankingBaselineFollowUps": [
+    {
+      "date": "2026-10-21",
+      "reason": "Retired the 2020-only census duplicate of the day-time population ratio with a 301 to day-time-population-ratio, whose 47 values for 2020 are identical and which also carries 2000-2020 and municipal values (METRIC-DAYTIME-RATIO-DUP-01)",
+      "previousMinActiveResolved": 2372,
+      "retiredResolvedKeys": ["daytime-population-ratio"],
+      "redirectTo": { "daytime-population-ratio": "day-time-population-ratio" }
+    }
+  ],
   "theme": {
     "minResolvedMetricGroups": 457,
     "minMetricGroupCoveragePct": 100,

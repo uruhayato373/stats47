@@ -43,23 +43,13 @@ node -e "require('googleapis')" 2>/dev/null && echo OK || npm install -D googlea
 
 ```bash
 node -e "$(cat <<'JS'
-const { google } = require('googleapis');
-const path = require('path');
-const fs = require('fs');
-
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(process.cwd(), f)).find(f => fs.existsSync(f));
-if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません');
+const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 const TARGET = process.argv[1];
 if (!TARGET) throw new Error('URL 引数が必須: /inspect-url <url>');
 
 (async () => {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: KEY_FILE,
-    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
-  });
-  const searchconsole = google.searchconsole({ version: 'v1', auth });
+  const searchconsole = createSearchConsoleClient();
 
   const { data } = await searchconsole.urlInspection.index.inspect({
     requestBody: {

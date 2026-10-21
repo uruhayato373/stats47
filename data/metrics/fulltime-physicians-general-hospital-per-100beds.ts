@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fulltimePhysiciansGeneralHospitalPer100beds: MetricConfig = {
   "key": "fulltime-physicians-general-hospital-per-100beds",
   "title": "一般病院常勤医師数",
+  "subtitle": "100病床当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

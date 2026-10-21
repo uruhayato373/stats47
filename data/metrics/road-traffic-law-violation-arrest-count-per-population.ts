@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const roadTrafficLawViolationArrestCountPerPopulation: MetricConfig = {
   "key": "road-traffic-law-violation-arrest-count-per-population",
   "title": "道路交通法違反検挙件数",
+  "subtitle": "人口千人当たり",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {
@@ -20,7 +21,7 @@ export const roadTrafficLawViolationArrestCountPerPopulation: MetricConfig = {
     "from": 1975,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

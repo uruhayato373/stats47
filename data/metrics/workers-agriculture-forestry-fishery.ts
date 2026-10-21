@@ -19,7 +19,7 @@ export const workersAgricultureForestryFishery: MetricConfig = {
     "city"
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolatePurples",

@@ -12,6 +12,7 @@
  * CI は /tmp へ退避したものを渡し、ここでは登録済みパラメータ名だけを使う。
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
@@ -212,6 +213,8 @@ function main() {
   };
 
   mkdirSync(outDir, { recursive: true });
+  // セッションが判断に使う記録なので、形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
+  assertDatasetShape("business.measurement-cycle", state);
   writeFileSync(join(outDir, "latest.json"), JSON.stringify(state, null, 2) + "\n");
   writeFileSync(join(outDir, "LATEST.md"), `# 計測→記録→改善サイクル — ${week}\n\n${renderCycleMarkdown(state)}\n`);
 

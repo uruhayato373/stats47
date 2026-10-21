@@ -68,6 +68,16 @@ async function waitForGateway(url: string, child: ChildProcess): Promise<void> {
   throw new Error('R2開発ゲートウェイの起動がタイムアウトしました');
 }
 
+/**
+ * 開発サーバーは Turbopack で動かす。webpack ではキャッシュなしの初回表示がランキング詳細で 63 秒、
+ * 8GB の Mac で 4 種類のページを開くとメモリ上限で再起動していた。Turbopack では同じ条件で各ページ 22 秒以内、
+ * 10 種類のルートを開いても再起動しなかった (2026-10-21 実測)。本番ビルドは webpack のままなので、
+ * webpack 固有の挙動を確かめたいときは `WEB_DEV_BUNDLER=webpack` で従来どおり起動する。
+ */
+function bundlerArgs(): string[] {
+  return process.env.WEB_DEV_BUNDLER === 'webpack' ? [] : ['--turbopack'];
+}
+
 function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
   const require = createRequire(import.meta.url);
   const nextBin = require.resolve('next/dist/bin/next');
@@ -82,7 +92,7 @@ function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
   const hostArgs = process.env.WEB_DEV_HOST
     ? ['--hostname', process.env.WEB_DEV_HOST]
     : [];
-  return spawn(process.execPath, [nextBin, 'dev', '--port', String(nextPort), ...hostArgs], {
+  return spawn(process.execPath, [nextBin, 'dev', '--port', String(nextPort), ...bundlerArgs(), ...hostArgs], {
     cwd: APP_ROOT,
     env,
     stdio: 'inherit',

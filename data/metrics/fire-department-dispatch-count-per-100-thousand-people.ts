@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDepartmentDispatchCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-dispatch-count-per-100-thousand-people",
   "title": "消防機関出動回数",
+  "subtitle": "人口10万人当たり",
   "unit": "回",
   "category": "safetyenvironment",
   "source": {
@@ -29,7 +30,7 @@ export const fireDepartmentDispatchCountPer100ThousandPeople: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

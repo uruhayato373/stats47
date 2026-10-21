@@ -36,7 +36,8 @@
         "geo",
         "sharedMetric",
         "tag",
-        "themeContext"
+        "themeContext",
+        "sameMetric"
       ],
       "additionalProperties": false,
       "properties": {
@@ -165,6 +166,24 @@
               "minLength": 1
             }
           }
+        },
+        "sameMetric": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         }
       }
     },
@@ -200,7 +219,8 @@
               "geo",
               "sharedMetric",
               "tag",
-              "themeContext"
+              "themeContext",
+              "sameMetric"
             ]
           }
         }

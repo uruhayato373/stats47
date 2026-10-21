@@ -15,6 +15,7 @@
  *
  * 保存するのは集計値だけで、prompt・本文・agent への依頼文は持たない。
  */
+import { isoWeekOf, jstDateOf } from '../metrics/lib/periods.mjs';
 
 export const TOKEN_KEYS = ['input', 'output', 'cacheWrite5m', 'cacheWrite1h', 'cacheRead'];
 
@@ -54,16 +55,10 @@ export function costOf(tokens, model, pricing) {
   return TOKEN_KEYS.reduce((sum, k) => sum + (tokens[k] ?? 0) * (p[k] ?? 0), 0) / 1e6;
 }
 
-/** ISO 日時 → ISO 週 (`2026-W40`)。週次の窓を他の計測 state と揃える */
+/** ISO 日時 → ISO 週 (`2026-W40`)。週次の窓を他の計測 state と揃える。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01) */
 export function isoWeek(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return null;
-  const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-  const day = t.getUTCDay() || 7;
-  t.setUTCDate(t.getUTCDate() + 4 - day);
-  const year = t.getUTCFullYear();
-  const week = Math.ceil(((t - Date.UTC(year, 0, 1)) / 86400000 + 1) / 7);
-  return `${year}-W${String(week).padStart(2, '0')}`;
+  const ms = Date.parse(iso);
+  return Number.isNaN(ms) ? null : isoWeekOf(jstDateOf(ms));
 }
 
 /**

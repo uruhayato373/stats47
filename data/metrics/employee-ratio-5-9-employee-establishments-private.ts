@@ -25,7 +25,7 @@ export const employeeRatio59EmployeeEstablishmentsPrivate: MetricConfig = {
       2021,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

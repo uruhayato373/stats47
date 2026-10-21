@@ -4600,6 +4600,46 @@
       "rankingKeys": []
     },
     {
+      "id": "sns:1025",
+      "kind": "sns",
+      "key": "1025",
+      "title": "この1年で国内旅行をした人が多い県は？",
+      "href": "https://www.threads.com/@stats47jp/post/DeqFOw9gLQg",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-domestic"
+      ]
+    },
+    {
+      "id": "sns:1026",
+      "kind": "sns",
+      "key": "1026",
+      "title": "京都の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/DeqzBbbk2KN",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1027",
+      "kind": "sns",
+      "key": "1027",
+      "title": "105局・83局・52局。",
+      "href": "https://www.threads.com/@stats47jp/post/DesrzIxDREx",
+      "published": true,
+      "rankingKeys": [
+        "post-office-count-per-100km2"
+      ]
+    },
+    {
+      "id": "sns:1028",
+      "kind": "sns",
+      "key": "1028",
+      "title": "あなたの知る大阪は、データでも同じ姿ですか？",
+      "href": "https://www.threads.com/@stats47jp/post/DetaGosiDIs",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:104",
       "kind": "sns",
       "key": "104",
@@ -4967,6 +5007,33 @@
       "key": "1092",
       "title": "【都道府県データ】石川県、全国で何位？",
       "href": "https://www.instagram.com/p/DemPAAgG6MN/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1094",
+      "kind": "sns",
+      "key": "1094",
+      "title": "【都道府県クイズ】かつお節をいちばん多く買う県は？",
+      "href": "https://www.instagram.com/p/DervKb2lO3K/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1095",
+      "kind": "sns",
+      "key": "1095",
+      "title": "【都道府県データ】宮崎県、全国で何位？",
+      "href": "https://www.instagram.com/p/DeuGa1zGqbw/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1096",
+      "kind": "sns",
+      "key": "1096",
+      "title": "コーヒーを最も多く買う県、18年で1位になったのは9府県。",
+      "href": "https://www.instagram.com/reel/Dev9cQrDsTg/",
       "published": true,
       "rankingKeys": []
     },
@@ -12777,6 +12844,16 @@
     {
       "from": "sns:1023",
       "to": "ranking:residential-land-price-change-rate",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1025",
+      "to": "ranking:travel-participation-rate-domestic",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1027",
+      "to": "ranking:post-office-count-per-100km2",
       "relation": "uses"
     },
     {

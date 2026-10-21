@@ -459,10 +459,6 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "population-density-per-km2-inhabitable-area",
         shortLabel: "可住地面積１km2当たり人口密度",
       },
-      {
-        metricKey: "day-time-population-ratio",
-        shortLabel: "昼夜間人口比率",
-      },
     ],
   },
   railway: {

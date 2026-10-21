@@ -3,6 +3,7 @@
 import { spawnSync } from "node:child_process";
 import path from 'node:path';
 
+/** @type {Array<[string, string[]]>} */
 const commands = [
   ["npm", ["run", "evidence:resolve", "--", "--check"]],
   ["npm", ["run", "evidence:validate"]],

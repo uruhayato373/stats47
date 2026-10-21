@@ -10,8 +10,10 @@ import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import { readRankingItemFromR2, listRankingValues } from "@stats47/ranking/server";
 import { logger } from "@stats47/logger/server";
 import { writeR2Staging } from "@stats47/r2-storage/server";
+import { readJapanSeries } from "@stats47/stats-r2/readers";
 
 import { assertAreaHighlightsHealthy } from "../highlights/check-area-highlights";
+import { resolveNationalComparison } from "./national-comparison";
 import {
   buildQualifiedLabel,
   buildSubtitleQualifier,
@@ -74,12 +76,11 @@ export async function buildAreaDatabookSnapshots(
       continue;
     }
 
-    // 全国平均は全 47 県で算出する (area フィルタ前の全数)。
+    // 全国との対比値: 同じ年の公式の全国値、無ければ 47 県 (area フィルタ前の全数) の単純平均
     const nums = valuesResult.data
       .map((rv) => rv.value)
       .filter((v): v is number => v !== null);
-    const nationalAvg =
-      nums.length > 0 ? nums.reduce((sum, v) => sum + v, 0) / nums.length : 0;
+    const national = resolveNationalComparison(nums, await readJapanSeries(key), yearCode);
 
     const ranked = valuesResult.data
       .filter((rv) => rv.value !== null && rv.rank >= 1)
@@ -95,7 +96,8 @@ export async function buildAreaDatabookSnapshots(
         rank: rv.rank,
         year: item.latestYear!.yearName,
         unit: item.unit,
-        nationalAvg,
+        nationalAvg: national.value,
+        nationalAvgKind: national.kind,
         ...(highlightBase
           ? { highlight: { ...highlightBase, margin: computeMargin(ranked, rv.rank) } }
           : {}),

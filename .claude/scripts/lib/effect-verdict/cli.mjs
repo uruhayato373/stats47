@@ -90,6 +90,12 @@ export function runAdapter(adapter, thresholds = DEFAULT_THRESHOLDS) {
           ...(!Number.isFinite(target) || target === 0
             ? [{ code: "insufficient-target", detail: "想定効果値が未登録" }] : []),
         ],
+        // 計測していないので根拠データは空。verdict JSON はどの経路でも同じ欄を持つ (EFFECT-VERDICT-CLI-TEST-SOURCES-01)
+        before: null,
+        after: null,
+        delta: null,
+        attainment: null,
+        sources: [],
         window,
         skipped: true,
       });

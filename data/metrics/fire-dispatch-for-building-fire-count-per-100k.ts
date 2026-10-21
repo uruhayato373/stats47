@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
   "key": "fire-dispatch-for-building-fire-count-per-100k",
   "title": "火災のための消防機関出動回数",
+  "subtitle": "人口10万人当たり",
   "unit": "回",
   "category": "safetyenvironment",
   "source": {
@@ -20,7 +21,7 @@ export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
     "from": 1975,
     "to": 2021,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

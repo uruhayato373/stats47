@@ -59,17 +59,39 @@ export function resolveMetricRecipe(metricKey) {
   return JSON.parse(raw);
 }
 
+/** 指標定義の yearFormat (calendar / fiscal / plain / 未宣言)。config が無ければ例外 (書き出しを止める)。 */
+export function resolveMetricYearFormat(metricKey) {
+  const helper = path.join(PROJECT_ROOT, ".claude/scripts/data/lib/print-metric-year-format.ts");
+  const raw = execFileSync(process.execPath, ["--import", "tsx", helper, metricKey], {
+    cwd: PROJECT_ROOT,
+    encoding: "utf8",
+  });
+  return JSON.parse(raw).yearFormat;
+}
+
 /**
- * @param {{metricKey:string, unit:string, yearName?:(y:string)=>string,
+ * e-Stat 経由の指標と同じ「YYYY年」「YYYY年度」の表記を作る。data-refresh の検査は配信値の yearName を
+ * `yearCode + 年/年度` と照合するので、年だけ (「2022」) にしない (MANUAL-METRIC-YEARNAME-01)。
+ * @param {string|null|undefined} yearFormat
+ * @returns {(y: string) => string}
+ */
+export function yearNameFor(yearFormat) {
+  return yearFormat === "fiscal" ? (y) => `${y}年度` : (y) => `${y}年`;
+}
+
+/**
+ * @param {{metricKey:string, unit:string, yearName?:(y:string)=>string, yearFormat?:string|null,
  *          rows:{areaName:string, yearCode:string, value:number}[], expectedAreas?:number,
  *          recipe?:{configHash:string}, outDir?:string}} p
- *   recipe / outDir はテスト用。省略時は正典から recipe を作り、`.local/r2/app/stats` へ書く。
+ *   recipe / outDir / yearFormat はテスト用。省略時は正典から recipe と yearFormat を引き、`.local/r2/app/stats` へ書く。
+ *   yearName を渡さなければ yearFormat から「YYYY年」「YYYY年度」を作る。
  */
 export function writeStatsValues({
   metricKey,
   unit,
   rows,
-  yearName = (y) => y,
+  yearFormat,
+  yearName = yearNameFor(yearFormat === undefined ? resolveMetricYearFormat(metricKey) : yearFormat),
   expectedAreas = 47,
   recipe = resolveMetricRecipe(metricKey),
   outDir = path.join(PROJECT_ROOT, ".local/r2/app/stats"),

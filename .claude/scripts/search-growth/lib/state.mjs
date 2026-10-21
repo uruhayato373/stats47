@@ -3,6 +3,7 @@
  * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  * raw snapshot は既存配置を尊重し、ここには normalized/derived のみ置く。
  */
+import { isoWeekOf, jstDateOf } from '../../metrics/lib/periods.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { PROJECT_ROOT } from "./sources.mjs";
@@ -34,12 +35,7 @@ export function writeJson(p, obj) {
 
 /** 現在の ISO 週 "YYYY-Www"。 */
 export function currentIsoWeek(now = new Date()) {
-  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-  const dow = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dow);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const wk = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(wk).padStart(2, "0")}`;
+  return isoWeekOf(jstDateOf(now)); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 /** CLI arg 取得 (簡易)。 */

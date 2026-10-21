@@ -232,8 +232,7 @@
         "population-growth-rate",
         "natural-increase-rate",
         "social-increase-rate",
-        "population-density-per-km2-inhabitable-area",
-        "day-time-population-ratio"
+        "population-density-per-km2-inhabitable-area"
       ],
       "published": true
     },

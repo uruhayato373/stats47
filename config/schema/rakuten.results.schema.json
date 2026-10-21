@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "楽天アフィリエイトの成果",
+  "description": "data/affiliate/rakuten-results.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "records": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "amountYen": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "clicks": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "confirmedYen": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "estimatedYen": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "month": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "observedAt": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "orders": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "source": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "month",
+          "source"
+        ]
+      }
+    },
+    "schemaVersion": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  },
+  "required": [
+    "records",
+    "schemaVersion"
+  ]
+}

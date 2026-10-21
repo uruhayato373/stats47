@@ -3663,7 +3663,7 @@
       "key": "daytime-population-ratio",
       "title": "昼夜間人口比率",
       "href": "/ranking/daytime-population-ratio",
-      "published": true
+      "published": false
     },
     {
       "id": "ranking:death-accident",

@@ -1,3 +1,4 @@
+// @ts-nocheck — 自動生成の鏡。型は正典 packages/data-configs/src/unit/unit-semantics.ts が検査する。
 /**
  * 単位セマンティクスの鏡 (素の node 用)。
  *

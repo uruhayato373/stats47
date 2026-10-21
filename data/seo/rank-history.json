@@ -180,6 +180,11 @@
       "date": "2026-10-20",
       "file": "data/seo/rank-history/2026-10-20.json",
       "sha256": "3abca0706b211673521f7d23d233aa2d224e281373eafbce87a23150dd1b97a0"
+    },
+    {
+      "date": "2026-10-21",
+      "file": "data/seo/rank-history/2026-10-21.json",
+      "sha256": "315384c7a6e449b0f8ad6a36d5546d5f129aa7e5a156c73eb008cf43479e25fd"
     }
   ]
 }

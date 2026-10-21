@@ -6,7 +6,7 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 # affiliate-dashboard-refresh.yml が 1 時間前に実行)。
 #
 # クラウド / web 実行環境には GA4 鍵が無いため、実測は CI で行う (既存 metrics workflow と同じ
-# GOOGLE_SERVICE_ACCOUNT_KEY_JSON シークレットを stats47-*.json に復元して実行)。
+# GOOGLE_SERVICE_ACCOUNT_KEY_JSON シークレットを env で渡し、google-client.cjs がメモリで読む)。
 #
 # 失敗を隠さない: GA4 取得に失敗しても集約 state は生成し、measurementGate=blocked として記録したうえで、
 # 最後の「🚦 計測ゲート」step で run 自体を失敗させる (緑のまま観測が止まる事故を 2026-09 に起こしたため)。
@@ -84,8 +84,6 @@ jobs:
           if [ -z "${GOOGLE_SERVICE_ACCOUNT_KEY_JSON:-}" ]; then
             echo "::error::GOOGLE_SERVICE_ACCOUNT_KEY_JSON secret 未設定"; exit 1
           fi
-          echo "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" > stats47-f6b5dae19196.json
-          chmod 600 stats47-f6b5dae19196.json
           START_DATE="${{ github.event.inputs.start_date || '' }}"
           END_DATE="${{ github.event.inputs.end_date || '' }}"
           if [ -n "$START_DATE" ] || [ -n "$END_DATE" ]; then
@@ -105,10 +103,6 @@ jobs:
           [ -f "$SNAPSHOT_FILE" ] || { echo "::error::snapshot が無い: $SNAPSHOT_FILE"; exit 1; }
           echo "snapshot_file=$SNAPSHOT_FILE" >> "$GITHUB_OUTPUT"
           echo "snapshot_date=$SNAPSHOT_DATE" >> "$GITHUB_OUTPUT"
-
-      - name: 🔐 Cleanup GA4 key
-        if: always()
-        run: rm -f stats47-f6b5dae19196.json
 
       # 生 snapshot は R2 state/ が正典。index.json は公開 R2 が list できない代わりの object 一覧。
       - name: 📤 Publish raw snapshot to R2 state/ads/ga4-affiliate/
@@ -222,7 +216,7 @@ jobs:
         run: |
           # ASP ごとに独立して取り出す。1 つの認証切れで他の ASP と週次集計全体を止めない
           # (2026-09-21 は A8、2026-09-26 以降はもしもの認証切れで operations が丸ごと落ちる形だった)。
-          # 認証切れの通知は authenticated-measurement.yml の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
+          # 認証切れの通知は Mac の measurement-collect-local.sh の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
           # portfolio / 週次 NSM は観測日から鮮度を判定する。
           for SOURCE in a8 rakuten; do
             node .claude/scripts/measurement/restore.mjs "$SOURCE" --if-activated \

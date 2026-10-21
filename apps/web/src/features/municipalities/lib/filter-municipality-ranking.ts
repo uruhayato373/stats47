@@ -43,7 +43,3 @@ export function filterMunicipalityRanking(
     pageSize,
   };
 }
-
-export function municipalityLeafName(areaName: string): string {
-  return areaName.trim().split(/\s+/).at(-1) ?? areaName;
-}

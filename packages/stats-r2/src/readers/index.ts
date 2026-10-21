@@ -113,7 +113,7 @@ function createStatsReader<T>(
       return typeof meta?.generatedAt === "string" ? meta.generatedAt : undefined;
     },
     // 全metricの派生snapshot生成では公開R2を短時間に多数読む。単発の10秒timeoutで
-    // latestYearをnullへ焼き直したりcity-profile全体を止めないよう、transport/timeoutだけ再試行する。
+    // latestYearをnullへ焼き直したり派生snapshotの生成全体を止めないよう、transport/timeoutだけ再試行する。
     timeoutMs: 30_000,
     maxAttempts: 3,
   });

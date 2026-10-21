@@ -4,10 +4,11 @@ import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
   listMunicipalityMetricAvailability,
+  validateCityDatabookLayout,
   validateMunicipalityCatalogs,
 } from '../src/geo-scope';
 
-const errors = validateMunicipalityCatalogs();
+const errors = [...validateMunicipalityCatalogs(), ...validateCityDatabookLayout()];
 const entityPolicy = buildMunicipalityEntityPolicy();
 const availability = listMunicipalityMetricAvailability();
 

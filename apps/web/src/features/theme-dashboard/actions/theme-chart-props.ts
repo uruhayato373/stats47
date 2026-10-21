@@ -1,6 +1,6 @@
 /** Shared chart props and parsers from the metric-ID contract. */
+export { parseThemeDbChartComponentProps } from "@stats47/data-configs/theme-catalog/registry-checks";
 export {
-  parseThemeDbChartComponentProps,
   type CompositionChartComponentProps,
   type CpiChartComponentProps,
   type DonutChartComponentProps,

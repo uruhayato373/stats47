@@ -43,10 +43,14 @@ function isRoute(pathname: string, root: string): boolean {
   return pathname === root || pathname.startsWith(`${root}/`);
 }
 
+/** 市区町村ページは URL が /areas の下にあるが、見ているのは市区町村の空間 (2026-09-25 UI 点検の指摘)。 */
+const CITY_PAGE_PATH = /^\/areas\/\d{5}\/cities(?:\/|$)/;
+
 /**
  * 現在地に対応するヘッダー項目を1つだけ返す。
  * カテゴリをランキングの別名として扱わず、各URL空間を排他的に判定する。
  */
 export function getActiveHeaderNav(pathname: string): HeaderNavKey | null {
+  if (CITY_PAGE_PATH.test(pathname)) return 'municipalities';
   return ROUTES.find(({ root }) => isRoute(pathname, root))?.key ?? null;
 }

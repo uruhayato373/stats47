@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "period": {
-    "periodStart": "2026-10-11",
-    "periodEnd": "2026-10-17",
+    "periodStart": "2026-10-12",
+    "periodEnd": "2026-10-18",
     "windowDays": 7
   },
-  "inputHash": "1a58772fb140ead24ba360f91f1dc13e2da4b1536fc4290d2bf195b0f50b70a7",
+  "inputHash": "412d11644017d0404bd599a3ac417d276c17b66363fbb7eab2b6644ba4fa7c13",
   "movements": [
     {
       "keyword": "徳島県",
@@ -45,6 +45,15 @@
       "change": -55
     },
     {
+      "keyword": "高校教師年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 10.666666666666666,
+      "after": 63,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": -52.333333333333336
+    },
+    {
       "keyword": "餃子 消費 量 ランキング",
       "targetPath": "/ranking/gyoza-frozen-consumption-expenditure",
       "before": 58,
@@ -63,15 +72,6 @@
       "change": -49
     },
     {
-      "keyword": "高校教師年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 16.4,
-      "after": 63,
-      "beforeImpressions": 5,
-      "impressions": 1,
-      "change": -46.6
-    },
-    {
       "keyword": "高知県 廃業",
       "targetPath": "/areas/39000/business-demography",
       "before": 12.666666666666666,
@@ -81,15 +81,6 @@
       "change": -44.333333333333336
     },
     {
-      "keyword": "出生率 都道府県",
-      "targetPath": "/ranking/total-fertility-rate",
-      "before": 48,
-      "after": 5,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 43
-    },
-    {
       "keyword": "要介護認定 一 番 多いのは",
       "targetPath": "/ranking/long-term-care-certified-persons",
       "before": 64,
@@ -97,6 +88,15 @@
       "beforeImpressions": 1,
       "impressions": 2,
       "change": 41
+    },
+    {
+      "keyword": "小学校 児童",
+      "targetPath": "/ranking/elementary-school-children-count",
+      "before": 46,
+      "after": 10,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 36
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "介護サービス施設・事業所調査",
-    "targetPath": "/survey/care-service-facility-survey",
-    "rank": 9.209486166007904,
-    "impressions": 253,
+    "keyword": "中2男子 平均身長",
+    "targetPath": "/blog/middle-school-height-east-west-puzzle",
+    "rank": 9.464,
+    "impressions": 250,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
-    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
+    "editableFile": null
   },
   "observing": [
     {

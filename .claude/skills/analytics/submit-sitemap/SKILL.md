@@ -17,7 +17,7 @@ Google Search Console `webmasters.sitemaps.submit` API を叩いて sitemap.xml 
 
 ## 前提
 
-- サービスアカウント鍵: `stats47-f6b5dae19196.json`（リポジトリルート、git ignore 済み）
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-*.json`（git ignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
 - サイト: `sc-domain:stats47.jp`（GSC でドメインプロパティ登録済み）
 - npm パッケージ: `googleapis`（既に `/fetch-gsc-data` で使用中のため通常インストール済）
 
@@ -45,22 +45,13 @@ node -e "require('googleapis')" 2>/dev/null && echo OK || npm install -D googlea
 
 ```bash
 node -e "$(cat <<'JS'
-const { google } = require('googleapis');
-const path = require('path');
-const fs = require('fs');
-
-const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(process.cwd(), f)).find(f => fs.existsSync(f));
-if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません');
+const { createSearchConsoleWriteClient } = require('./.claude/scripts/lib/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 const SITEMAP = process.argv[1] || 'https://stats47.jp/sitemap.xml';
 
 (async () => {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: KEY_FILE,
-    scopes: ['https://www.googleapis.com/auth/webmasters'],
-  });
-  const searchconsole = google.searchconsole({ version: 'v1', auth });
+  // 書き込み用クライアント (webmasters スコープ)。送信 (PUT) は一時的な失敗でも再送しない
+  const searchconsole = createSearchConsoleWriteClient();
 
   await searchconsole.sitemaps.submit({
     siteUrl: SITE_URL,

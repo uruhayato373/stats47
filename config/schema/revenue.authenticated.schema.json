@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "認証付き計測の最新の成否",
+  "description": "data/authenticated/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "generatedAt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "runId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "salesLedger": {},
+    "schemaVersion": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "sources": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "activated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "capability": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "code": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "collectionAttempted": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "evidence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "bytes": {},
+              "sha256": {}
+            }
+          },
+          "inventoryAvailable": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "knownIncomplete": {},
+          "metricsAvailable": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "observedAt": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "quality": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "expectedRows": {},
+              "missingRows": {},
+              "observedRows": {},
+              "paginationComplete": {},
+              "revenue": {},
+              "revenueEvidenceAvailable": {},
+              "revenueStatus": {},
+              "totalsMatched": {}
+            }
+          },
+          "recovery": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "blockedSince": {},
+              "state": {}
+            }
+          },
+          "relogin": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "remaining": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "runAttempt": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "runId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      }
+    },
+    "status": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  },
+  "required": [
+    "generatedAt",
+    "runId",
+    "salesLedger",
+    "schemaVersion",
+    "sources",
+    "status"
+  ]
+}

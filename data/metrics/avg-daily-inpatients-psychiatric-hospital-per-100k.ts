@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const avgDailyInpatientsPsychiatricHospitalPer100k: MetricConfig = {
   "key": "avg-daily-inpatients-psychiatric-hospital-per-100k",
   "title": "精神科病院の1日平均在院患者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +21,7 @@ export const avgDailyInpatientsPsychiatricHospitalPer100k: MetricConfig = {
     "from": 1975,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

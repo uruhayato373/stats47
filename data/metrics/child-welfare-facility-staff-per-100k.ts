@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const childWelfareFacilityStaffPer100k: MetricConfig = {
   "key": "child-welfare-facility-staff-per-100k",
   "title": "児童福祉施設等従事者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {
@@ -20,7 +21,7 @@ export const childWelfareFacilityStaffPer100k: MetricConfig = {
     "from": 2002,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

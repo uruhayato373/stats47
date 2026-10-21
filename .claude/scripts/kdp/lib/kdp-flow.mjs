@@ -1,3 +1,5 @@
+// @ts-nocheck — 型検査の範囲外 (SCRIPT-LIB-CHECKJS-01 の範囲は lib・measurement・metrics/lib)。measurement/marketplace-status.mjs が
+// import するので tsconfig.checkjs.json の program に入るが、ブラウザ内のコールバックの DOM 型を付けるのは kdp へ範囲を広げるときに行う。
 /**
  * kdp-flow.mjs — KDP 出品の**書籍単位フロー** (verify / ensure / publish)。
  *

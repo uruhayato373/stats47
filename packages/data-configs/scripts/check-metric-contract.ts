@@ -10,7 +10,8 @@ import {
 import { resolve } from 'node:path';
 import { COLOR_SCHEME_CATALOG } from '@stats47/types';
 import { METRICS_REGISTRY } from '../src/registry';
-import { listThemeCatalogs, validateChartProps } from '../src/theme-catalog';
+import { listThemeCatalogs } from '../src/theme-catalog';
+import { validateChartProps } from '../src/theme-catalog/registered-series-ref';
 import {
   metricDependencies,
   metricSourceReferences,

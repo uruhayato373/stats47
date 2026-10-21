@@ -14,15 +14,15 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { google } from "googleapis";
-import { PROJECT_ROOT, resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
+import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
+import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../lib/google-client.cjs";
 import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
 import { auditAdSenseAccount, auditAdUnits, expectedAdSenseAccount } from "./audit-adsense.mjs";
 import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";
 import { parseDimensionLedger, requiredDimensionParams, reconcileDimensions } from "./dimension-ledger.mjs";
 
-export const GA4_READ_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
-export const GA4_EDIT_SCOPE = "https://www.googleapis.com/auth/analytics.edit";
+export const GA4_READ_SCOPE = SCOPES.GA4_READ;
+export const GA4_EDIT_SCOPE = SCOPES.GA4_EDIT;
 export const LEDGER_PATH = path.join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md");
 
 /** env から GA4 property ID を取る。CI で hard-coded fallback を使わない (未設定は null)。 */
@@ -37,17 +37,11 @@ function sanitizeErr(e) {
 
 /** read 用 analytics admin client を作る。credential 不足なら null。 */
 function ga4ReadClients() {
-  let keyFile;
   try {
-    keyFile = resolveServiceAccountKeyFile();
+    return createAnalyticsAdminReadClients();
   } catch {
     return null;
   }
-  const auth = new google.auth.GoogleAuth({ keyFile, scopes: [GA4_READ_SCOPE] });
-  return {
-    beta: google.analyticsadmin({ version: "v1beta", auth }),
-    alpha: google.analyticsadmin({ version: "v1alpha", auth }),
-  };
 }
 
 /**
@@ -56,25 +50,14 @@ function ga4ReadClients() {
  * 2026-09-26 オーナー判断: どの workflow・PC からでも GA4 設定を変えられるよう、通常の SA にも GA4 編集者を付ける。
  * 誤操作の歯止めは plan token + --confirm-site + --commit + --approve (requireCommit) が担う。
  * 鍵が GA4 編集者でなければ create が権限エラーで失敗する (fail closed)。
+ * 作成は再試行しない (google-client.cjs の書き込み用クライアント)。鍵が無い・壊れているときは null。
  */
 export function adminEditClient() {
-  const json = process.env.GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON;
-  if (json) {
-    try {
-      const auth = new google.auth.GoogleAuth({ credentials: JSON.parse(json), scopes: [GA4_EDIT_SCOPE] });
-      return google.analyticsadmin({ version: "v1beta", auth });
-    } catch {
-      return null;
-    }
-  }
-  let keyFile;
   try {
-    keyFile = resolveServiceAccountKeyFile();
+    return createAnalyticsAdminEditClient();
   } catch {
     return null;
   }
-  const auth = new google.auth.GoogleAuth({ keyFile, scopes: [GA4_EDIT_SCOPE] });
-  return google.analyticsadmin({ version: "v1beta", auth });
 }
 
 /** nextPageToken を辿って全件取得する汎用 (I/O)。 */

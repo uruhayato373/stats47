@@ -5,6 +5,7 @@ export * from './ranking-stats';
 export * from './ranking-thumbnail';
 export * from './ranking-value';
 export * from './municipality-snapshot';
+export * from './city-databook';
 export {
   rankingDownloadKeyPath,
   rankingNationalTrendPath,

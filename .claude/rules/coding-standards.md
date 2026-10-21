@@ -127,8 +127,13 @@ const count = await fetchCount();
   ファイルシステムから `scripts` ディレクトリを列挙して**全件の被覆を要求する**ので、
   新しいディレクトリは配線するまでテストが落ちる。免除は理由付きで `KNOWN_UNCOVERED` に
   書き、件数は縮小専用。
-- 未被覆として残しているのは `.claude/scripts` のみ (TS 41 ファイル・error 71 件。
-  素 JS の `lib/*.mjs` core を import する設計なので型付け方針から要る)。
+- `.claude/scripts` の TS は `.claude/scripts/tsconfig.json` (strict・JS は検査しない) が検査する。
+  JS の共通部品 (`lib/`・`measurement/`・`metrics/lib/`) は `.claude/scripts/tsconfig.checkjs.json`
+  (checkJs・strict なし) が検査する (2026-10-21 SCRIPT-LIB-CHECKJS-01)。範囲は広げるだけで縮めない
+  (`scripts-checkjs-scope.test.cjs` が glob の削除と範囲内の `// @ts-nocheck` を止める)。型エラーは JSDoc の
+  型注釈で直し、挙動を変えない。ファイルごとの `// @ts-check` は付けない — 付けると、そのファイルを import する
+  strict の TS 側の検査でも strict で検査され、この入口の設定と食い違う。範囲内のファイルが import する JS も
+  同じ検査に入るので、範囲外を型検査の外に置くときは理由を書いた `// @ts-nocheck` を先頭に付ける (例: kdp)。
 
 実例 (2026-08-04〜08-13): `sync-rakuten-catalog.ts` の import 漏れ
 (`searchFurusatoItems`) が 9 日間検出されず、日次同期が毎日 11 分走ってから

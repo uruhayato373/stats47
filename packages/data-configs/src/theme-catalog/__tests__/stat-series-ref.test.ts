@@ -6,9 +6,13 @@ import { buildPopulationPyramidSeriesRefs } from "../population-pyramid-deps";
 import {
   parseStatSeriesRefs,
   parseThemeDbChartComponentProps,
-  type StatSeriesRef,
   validateChartProps,
   validateStatSeriesRefAlignment,
+} from "../registered-series-ref";
+import {
+  parseStatSeriesRefsWith,
+  SKIP_METRIC_REGISTRATION_CHECK,
+  type StatSeriesRef,
 } from "../stat-series-ref";
 import { CATALOG_COMPONENT_TYPES } from "../types";
 
@@ -151,6 +155,10 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
 
   it("★StatSeriesRef の未登録 metricKey を拒否する", () => {
     expect(parseStatSeriesRefs([{ metricKey: "not-in-metrics-registry" }])).toBeNull();
+    // ブラウザ側の解析は registry を読まず形だけを見る (登録の確認はカタログ検査とサーバーで済ませる)
+    expect(parseStatSeriesRefsWith([{ metricKey: "not-in-metrics-registry" }], SKIP_METRIC_REGISTRATION_CHECK)).toEqual([
+      { metricKey: "not-in-metrics-registry" },
+    ]);
   });
 
   it.each([

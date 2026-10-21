@@ -21,7 +21,7 @@ export const unemploymentRateMan: MetricConfig = {
     "from": 2020,
     "to": 2020,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

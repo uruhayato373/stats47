@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T09:02:27.274Z",
+  "generatedAt": "2026-10-21T03:09:57.022Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2603,
-    "activeMetrics": 2460,
+    "activeMetrics": 2459,
     "applicableMetrics": 2514,
-    "activeApplicableMetrics": 2372,
+    "activeApplicableMetrics": 2371,
     "notApplicable": 89,
     "activeNotApplicable": 88,
     "resolved": 2514,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2372,
+    "activeResolved": 2371,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -119,7 +119,7 @@
       "boj-statistics": 5,
       "buried-cultural-property-statistics": 1,
       "care-service-facility-survey": 7,
-      "census": 313,
+      "census": 312,
       "childcare-related-status-report": 2,
       "city-planning-survey": 8,
       "closed-school-facility-survey": 1,
@@ -754,10 +754,10 @@
   },
   "blog": {
     "articles": 608,
-    "charts": 1615,
-    "applicableCharts": 1489,
+    "charts": 1617,
+    "applicableCharts": 1491,
     "byStatus": {
-      "resolved": 1489,
+      "resolved": 1491,
       "unresolved": 0,
       "not-applicable": 126,
       "missing-lineage": 0
@@ -2270,7 +2270,7 @@
     },
     {
       "surveyId": "census",
-      "rankingCount": 313,
+      "rankingCount": 312,
       "themeKeys": [
         "aging-society",
         "childcare-services",

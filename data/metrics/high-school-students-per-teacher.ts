@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const highSchoolStudentsPerTeacher: MetricConfig = {
   "key": "high-school-students-per-teacher",
   "title": "高等学校生徒数",
+  "subtitle": "教員1人当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {

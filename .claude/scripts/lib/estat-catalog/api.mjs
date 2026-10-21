@@ -29,6 +29,7 @@ export function getAppId() {
   return appId;
 }
 
+/** @returns {any} Node の fetch (undici) が受け付ける dispatcher は DOM の RequestInit の型に無いので any で返す */
 function fetchOpts() {
   const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
   return proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
@@ -80,6 +81,8 @@ export async function fetchStatsListPage(collectArea, startPosition, appId = get
 
 /**
  * getStatsList を全ページ収集する。1 ページごとに onPage を呼ぶ (呼び出し側で delay を挟める)。
+ * @param {string|number} collectArea
+ * @param {{ delayMs?: number, onPage?: (info: any) => unknown }} [options]
  * @returns {Promise<object[]>} 生の TABLE_INF 行の配列 (未正規化)
  */
 export async function listAllTables(collectArea, { delayMs = 300, onPage } = {}) {

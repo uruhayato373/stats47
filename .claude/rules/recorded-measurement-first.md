@@ -23,7 +23,7 @@ paths:
 
 | 取得 | 周期 | 入口 |
 |---|---|---|
-| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週木曜 JST 17:30 | Mac の `measurement-session-refresh.sh` がログインを保ち、`measurement-collect-local.sh` が取得して develop へ記録する。CI の `authenticated-measurement.yml` (20:20) は予備で、Mac が取れなかった取得元だけを取る (2026-10-20 に Mac の取得へ切り替え。`MEASUREMENT-MAC-DIRECT-01`) |
+| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週木曜 JST 17:30 | Mac の `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
 | 週次の計測→記録→改善サイクル | 毎週金曜 JST 05:00 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要) |
 
 認証付き計測は木曜に取り、金曜朝の週次サイクルがそれを読む。記録は次の取得まで 8 日間「今の値」として使う

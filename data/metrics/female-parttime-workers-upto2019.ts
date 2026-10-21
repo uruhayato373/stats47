@@ -21,7 +21,7 @@ export const femaleParttimeWorkersUpto2019: MetricConfig = {
     "from": 1975,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

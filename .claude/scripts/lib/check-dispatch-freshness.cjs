@@ -138,7 +138,7 @@ function relevantPrefixesForWorkflow(workflowSource) {
  * @param {boolean} params.mainPinned  dispatch 先が main を checkout するか
  * @param {string[]} params.divergedPaths  origin/main...origin/develop の差分パス
  * @param {string} [params.workflowSource] workflow YAML。未指定・抽出不能なら広い判定へ戻す
- * @returns {{ok: boolean, code?: string, workflow: string, blockingPaths: string[], message?: string}}
+ * @returns {{ok: boolean, code?: string, workflow: string, blockingPaths: string[], message?: string, acknowledged?: string}}
  */
 function evaluateRequest({ request, mainPinned, divergedPaths, workflowSource }) {
   const workflow = String(request?.workflow ?? '(unknown)');

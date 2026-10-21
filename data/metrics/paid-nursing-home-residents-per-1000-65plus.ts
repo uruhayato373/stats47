@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const paidNursingHomeResidentsPer100065plus: MetricConfig = {
   "key": "paid-nursing-home-residents-per-1000-65plus",
   "title": "有料老人ホーム在所者数",
+  "subtitle": "65歳以上人口千人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +21,7 @@ export const paidNursingHomeResidentsPer100065plus: MetricConfig = {
     "from": 1975,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

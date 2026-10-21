@@ -54,6 +54,14 @@ type RankingDataRow = RankingValue & {
   deviationValue: number | null;
 };
 
+/**
+ * 列幅 (px)。合計はランキングページ右カラムの表の枠 (1280・1440px で実測 380px) に収める。
+ * 都道府県が 150px だった頃は合計 410px で、右端の「偏差値」が切れていた (UI-FIX-RANKING-OLD-2YEARS-20261018)。
+ * 最も長い県名 (4 文字) は 52px + 左右の余白 16px で、100px に収まる。
+ */
+export const RANKING_TABLE_COLUMN_WIDTHS = { rank: 60, areaName: 100, value: 120, deviationValue: 80 } as const;
+export const RANKING_TABLE_FRAME_WIDTH = 380;
+
 export function RankingDataTable({
   rankingValues,
   rankingItem,
@@ -113,7 +121,7 @@ export function RankingDataTable({
       {
         accessorKey: "rank",
         header: "順位",
-        meta: { width: "60px" },
+        meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.rank}px` },
         cell: ({ row }) => (
           <div className="text-center font-medium">{row.getValue("rank")}</div>
         ),
@@ -121,7 +129,7 @@ export function RankingDataTable({
       {
         accessorKey: "areaName",
         header: "都道府県",
-        meta: { width: "150px" },
+        meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.areaName}px` },
         cell: ({ row }) => {
           const { areaCode, areaName } = row.original;
           if (PREFECTURE_CODE_PATTERN.test(areaCode)) {
@@ -142,7 +150,7 @@ export function RankingDataTable({
       {
         accessorKey: "value",
         header: () => <div className="text-right">値</div>,
-        meta: { width: "120px" },
+        meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.value}px` },
         cell: ({ row }) => {
           const unit = formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
           return (
@@ -158,7 +166,7 @@ export function RankingDataTable({
       {
         accessorKey: "deviationValue",
         header: "偏差値",
-        meta: { width: "80px" },
+        meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.deviationValue}px` },
         cell: ({ row }) => {
           const val = row.getValue<number | null>("deviationValue");
           return (

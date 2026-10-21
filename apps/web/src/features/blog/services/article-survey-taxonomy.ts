@@ -14,7 +14,7 @@ import {
   resolveGeoItemDataSources,
   resolveMetricDataSources,
   resolveSurveyTaxonomy,
-} from "@stats47/ranking";
+} from "@stats47/ranking/survey";
 
 import { blogR2Key } from "../r2-key";
 

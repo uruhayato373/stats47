@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const youthEducationFacilityCountPerMillion: MetricConfig = {
   "key": "youth-education-facility-count-per-million",
   "title": "青少年教育施設数",
+  "subtitle": "人口100万人当たり",
   "unit": "所",
   "category": "educationsports",
   "source": {
@@ -43,7 +44,7 @@ export const youthEducationFacilityCountPerMillion: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

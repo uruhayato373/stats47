@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig = {
   "key": "consumption-expenditure-multi-person-households-per-month",
   "title": "消費支出",
-  "subtitle": "二人以上の世帯・1か月平均",
+  "subtitle": "1世帯当たり1か月間・二人以上の世帯・1か月平均",
   "unit": "千円",
   "category": "economy",
   "source": {
@@ -21,7 +21,7 @@ export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig =
     "from": 2000,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

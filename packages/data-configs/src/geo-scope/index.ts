@@ -54,6 +54,14 @@ export type {
   MunicipalityMetricAvailability,
   MunicipalityThemeCatalog,
 } from './municipality-catalog';
+export { buildMunicipalityRankingSubtitles } from './municipality-ranking-titles';
+export {
+  CITY_DATABOOK_LAYOUT,
+  CITY_DATABOOK_POPULATION_METRIC_KEY,
+  listCityDatabookThemes,
+  validateCityDatabookLayout,
+} from './city-databook-layout';
+export type { CityDatabookLayout, CityDatabookTheme } from './city-databook-layout';
 export { toGeoScopeStorageEntityKind } from './storage-adapter';
 export type { GeoScopeStorageEntityKind } from './storage-adapter';
 export type {
@@ -63,3 +71,9 @@ export type {
   WorldDataProvider,
   WorldDataProviderEvaluation,
 } from './world-types';
+export {
+  VERIFY_TARGET_CLASSIFICATIONS,
+  classifyEstatRequest,
+  indexNationalEvidence,
+} from './japan-candidate-classify';
+export type { JapanCandidateClassification, LiveAuditEntry } from './japan-candidate-classify';

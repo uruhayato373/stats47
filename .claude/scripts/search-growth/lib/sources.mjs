@@ -16,7 +16,7 @@ import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mj
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { addDays } from '../../metrics/lib/periods.mjs';
+import { addDays, isoWeekRange } from '../../metrics/lib/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -57,18 +57,7 @@ function splitCsvLine(line) {
 
 /** ISO 週文字列 "2026-W29" の日曜 (週末) の ISO date を返す。データ鮮度の基準。 */
 function isoWeekEndDate(week) {
-  const m = /^(\d{4})-W(\d{2})$/.exec(week);
-  if (!m) return null;
-  const year = Number(m[1]);
-  const wk = Number(m[2]);
-  // ISO: 第1週は最初の木曜を含む週。1/4 を含む週の月曜から算出。
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  const jan4Dow = jan4.getUTCDay() || 7; // 月=1..日=7
-  const week1Mon = new Date(jan4);
-  week1Mon.setUTCDate(jan4.getUTCDate() - (jan4Dow - 1));
-  const sunday = new Date(week1Mon);
-  sunday.setUTCDate(week1Mon.getUTCDate() + (wk - 1) * 7 + 6);
-  return sunday.toISOString().slice(0, 10);
+  try { return isoWeekRange(week).sunday; } catch { return null; } // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 function latestWeekDir(dir) {
@@ -422,6 +411,7 @@ const CRUX = { name: "crux", staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.crux, 
 const HTTP_LIVE = {
   name: "http", staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.http, liveOnly: true, liveNoSecret: true,
   api: "production HTTP probe (Googlebot/normal UA)",
+  /** @param {{ root?: string, now?: string, urls?: string[], sampleSize?: number }} [options] */
   async liveCollect({ root = PROJECT_ROOT, now = new Date().toISOString(), urls, sampleSize = 20 } = {}) {
     const { probeUrls } = await import("./live-http.mjs");
     const list = urls ?? defaultProbeUrls(root, sampleSize);

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const roomAirconOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "room-aircon-ownership-multi-person-households-per-1000",
   "title": "ルームエアコン所有数量",
+  "subtitle": "千世帯当たり",
   "unit": "台",
   "category": "ict",
   "source": {
@@ -35,7 +36,7 @@ export const roomAirconOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

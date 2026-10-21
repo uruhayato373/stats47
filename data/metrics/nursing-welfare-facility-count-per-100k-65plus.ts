@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nursingWelfareFacilityCountPer100k65plus: MetricConfig = {
   "key": "nursing-welfare-facility-count-per-100k-65plus",
   "title": "介護老人福祉施設数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {
@@ -36,7 +37,7 @@ export const nursingWelfareFacilityCountPer100k65plus: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

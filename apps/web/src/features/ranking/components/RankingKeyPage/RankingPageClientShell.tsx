@@ -1,4 +1,4 @@
-import { resolveRankingItemDataSources } from "@stats47/ranking";
+import { resolveRankingItemDataSources } from "@stats47/ranking/survey";
 
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 

@@ -15,7 +15,7 @@ import {
   ThemeGeoLandslideExposureSection,
   ThemeGeoStationAccessSection,
   ThemeGeoPublicFacilityAccessSection,
-} from '@/features/geo-analysis';
+} from '@/features/geo-analysis/embedded';
 import { ThemeGraduationPathsSection } from '@/features/graduation-paths';
 import { ThemeHighwayTimelineSection } from '@/features/highway-history';
 import { ThemeIndustrySpecializationSection } from '@/features/industry-specialization';

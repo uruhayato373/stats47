@@ -39,7 +39,7 @@ export function buildRows(foreign, japanese) {
     areaCode: PREF_AREA_CODES[index],
     areaName,
     yearCode: "2025",
-    yearName: "2025",
+    yearName: "2025年度",
     value: foreign.get(areaName) + japanese.get(areaName),
     unit: "人",
   }));
@@ -51,7 +51,7 @@ export function verifyRows(rows, foreign, japanese, expectedTotals = EXPECTED_TO
   for (const row of rows) {
     if (!PREFECTURES.includes(row.areaName)) throw new Error(`未知の都道府県: ${row.areaName}`);
     if (!Number.isInteger(row.value) || row.value < 0) throw new Error(`${row.areaName}: 値は0以上の整数が必要です`);
-    if (row.yearCode !== "2025" || row.yearName !== "2025" || row.unit !== "人") {
+    if (row.yearCode !== "2025" || row.yearName !== "2025年度" || row.unit !== "人") {
       throw new Error(`${row.areaName}: 年・単位契約が不正です`);
     }
   }

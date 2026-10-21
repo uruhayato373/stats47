@@ -9,20 +9,10 @@
  * `resolveSourceProvenance` / source-name 辞書) を使い、別の対応表を持たない。
  * 正典: `.claude/rules/survey-linkage-standards.md` §2
  */
-import {
-  buildEstatTableUrl,
-  isSsdsStatsDataId,
-  mergeDataSourceEntries,
-  resolveAttribution,
-  resolveProvenanceByParams,
-  resolveSourceProvenance,
-  resolveSurveyIdBySourceName,
-  type DataSourceEntry,
-  type MetricConfig,
-  type MetricRegistry,
-  type ProvenanceSurvey,
-  type SourceAttribution,
-} from '@stats47/data-configs';
+import { buildEstatTableUrl, mergeDataSourceEntries } from '@stats47/data-configs/data-source';
+import { isSsdsStatsDataId, resolveAttribution, resolveProvenanceByParams, resolveSourceProvenance } from '@stats47/data-configs/provenance';
+import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
+import type { DataSourceEntry, MetricConfig, MetricRegistry, ProvenanceSurvey, SourceAttribution } from '@stats47/data-configs';
 
 import surveysMaster from '../data/surveys.json';
 import type { SourceProvenance } from '../types/ranking-item';
@@ -188,9 +178,18 @@ export function resolveRankingItemDataSources(input: {
   if (statsDataId) {
     const cdCat01 =
       nonEmpty(config?.recipe.estatParams?.cdCat01);
-    return mergeDataSourceEntries(
-      estatEntries(statsDataId, cdCat01, config?.source?.name)
-    );
+    // 一部の年を補助の出典 (supplementalSources) から取る指標は、その表も「どの年の値か」を添えて並べる。
+    // 主の出典だけを出すと、補助の年の値の出典を読者が取り違える (METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01)
+    const supplements = (config?.recipe.ops?.supplements ?? []).flatMap((supplement) => {
+      const supplementId = nonEmpty(supplement.estatParams?.statsDataId);
+      if (!supplementId) return [];
+      const years = supplement.years.map((year) => `${year}年`).join('・');
+      return estatEntries(supplementId, nonEmpty(supplement.estatParams?.cdCat01), `統計表（${years}の値）`);
+    });
+    return mergeDataSourceEntries([
+      ...estatEntries(statsDataId, cdCat01, config?.source?.name),
+      ...supplements,
+    ]);
   }
   const source = isRecord(config?.source)
     ? { name: nonEmpty(config.source.name), url: httpUrl(config.source.url) }

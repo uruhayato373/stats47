@@ -14,6 +14,7 @@ import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS,
 import { DOMAINS } from "../../../../config/paths.mjs";
 import { checkDatasets, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
+import { assertDatasetShape } from "../dataset-shape.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
 const domainIds = new Set(JSON.parse(readFileSync(resolve(ROOT, DOMAINS), "utf8")).domains.map((x) => x.id));
@@ -249,7 +250,35 @@ test("config / ledger の JSON は schema の宣言・実在・形の一致が�
   assert.match(run([row("bad", "data/c.json", "series", { schema: "s/x.json" })], ["data/c.json"])[0], /\*\.schema\.json を指す/);
 });
 
-test("実リポジトリの config / ledger の JSON はすべて schema を持ち、形が合う", () => {
+// 意図 (2026-10-20 RECORD-SCHEMA-CONTRACT-01): セッションは管理画面を開かず記録から判断するので、判断に使う
+// state・series の記録も形の契約を持つ。schema を宣言した行は kind を問わず検証し、形が崩れたら止める。
+test("state・series でも schema を宣言した行は当たるファイルを検証する", () => {
+  const schema = { type: "object", required: ["sources"], properties: { sources: { type: "array", items: { type: "object", required: ["source"] } } } };
+  const store = { "s/r.schema.json": schema, "data/ok.json": { sources: [{ source: "a8" }] }, "data/broken.json": { sources: [{ status: "pass" }] } };
+  const run = (datasets, files) => checkSchemas({ datasets, files, readJson: (p) => store[p], exists: (p) => p in store });
+  const row = (id, path, kind) => ({ id, path, kind, domain: "site", target: "data", description: id, schema: "s/r.schema.json" });
+  for (const kind of ["state", "series"]) {
+    assert.deepEqual(run([row("ok", "data/ok.json", kind)], ["data/ok.json"]), [], kind);
+    assert.match(run([row("broken", "data/broken.json", kind)], ["data/broken.json"])[0] ?? "", /schema に合わない/, kind);
+  }
+});
+
+test("書き手は形が崩れた記録を書かずに止まる (assertDatasetShape)", () => {
+  const latest = JSON.parse(readFileSync(resolve(ROOT, "data/measurement-cycle/latest.json"), "utf8"));
+  assertDatasetShape("business.measurement-cycle", latest);
+  const { week: _week, ...withoutWeek } = latest;
+  assert.throws(() => assertDatasetShape("business.measurement-cycle", withoutWeek), /dataset_shape_mismatch/);
+  assert.throws(() => assertDatasetShape("business.measurement-cycle", { ...latest, sources: "broken" }), /dataset_shape_mismatch/);
+  assert.throws(() => assertDatasetShape("gsc.latest", {}), /dataset_schema_missing/);
+});
+
+test("判断に使う記録の行は schema を宣言している", () => {
+  for (const id of ["revenue.authenticated", "revenue.authenticated-history", "business.measurement-cycle", "business.nsm-weekly", "a8.results", "rakuten.results"]) {
+    assert.match(DATASETS.find((d) => d.id === id)?.schema ?? "", /^config\/schema\/.+\.schema\.json$/, id);
+  }
+});
+
+test("実リポジトリの config / ledger の JSON と schema を宣言した記録はすべて形が合う", () => {
   const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).split("\0").filter(Boolean);
   const errors = checkSchemas({
     datasets: DATASETS,

@@ -94,14 +94,8 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         continue-on-error: true
-        run: |
-          # metrics-reader.mjs はリポジトリルートのキーファイルを直接読むため env から書き出す
-          if [ -n "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" ]; then
-            echo "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" > stats47-f6b5dae19196.json
-            chmod 600 stats47-f6b5dae19196.json
-          fi
-          node .claude/scripts/snapshot-weekly-metrics.mjs ${{ steps.week.outputs.week }} --force
-          rm -f stats47-f6b5dae19196.json
+        # metrics-reader.mjs は google-client.cjs 経由で env の鍵をメモリで読む (鍵ファイルを書き出さない)
+        run: node .claude/scripts/snapshot-weekly-metrics.mjs ${{ steps.week.outputs.week }} --force
 
       - name: 📄 Write GitHub Step Summary
         if: always()

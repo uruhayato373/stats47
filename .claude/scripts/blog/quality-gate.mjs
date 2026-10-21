@@ -406,7 +406,9 @@ if (markdownTables > 0) {
 // 表現の正典統一 (2026-06-02 追加): chart-placeholder 未描画 / インライン svg / 記事内関連セクション禁止。
 // チャートは「生成画像 ![](data/*.svg)」に統一。関連ランキング/関連記事はページ側コンポーネントが正典。
 checks.chartPlaceholder = /<chart-placeholder/.test(content);
-checks.inlineSvg = /<svg[\s>]/.test(content);
+// 手順解説の記事はコード例に <svg> を書く。コードブロックとインラインコードの中は描画されないので数えない
+// (BLOG-TUTORIAL-GATE-GAPS-01: 検出を避けるために <svg{...rootProps}> のような不自然な書き方をさせていた)
+checks.inlineSvg = /<svg[\s>]/.test(content.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, ''));
 checks.inArticleRelated = /^#{2,3}\s*関連(ランキング|記事)/m.test(content);
 if (checks.chartPlaceholder) {
   blockers.push(

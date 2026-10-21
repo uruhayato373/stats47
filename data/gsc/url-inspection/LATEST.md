@@ -1,4 +1,4 @@
-# GSC URL Inspection — 2026-10-20
+# GSC URL Inspection — 2026-10-21
 
 **対象 URL 数**: 500
 
@@ -6,19 +6,20 @@
 
 | Verdict | 件数 | 前日比 |
 |---|---|---|
-| ERROR | 1 | +1 |
-| NEUTRAL | 286 | +7 |
-| PASS | 213 | -8 |
+| ERROR | 0 | -1 |
+| NEUTRAL | 258 | -28 |
+| PASS | 242 | +29 |
 
 ## CoverageState 内訳
 
 | CoverageState | 件数 | 前日比 |
 |---|---|---|
-| Internal error encountered. | 1 | +1 |
-| URL が Google に認識されていません | 46 | +2 |
+| Internal error encountered. | 0 | -1 |
+| URL が Google に認識されていません | 58 | +12 |
 | noindex タグによって除外されました | 2 | ±0 |
-| 検出 - インデックス未登録 | 207 | +5 |
-| 見つかりませんでした（404） | 31 | ±0 |
-| 送信して登録されました | 213 | -8 |
+| サーバーエラー（5xx） | 13 | +13 |
+| 検出 - インデックス未登録 | 149 | -58 |
+| 見つかりませんでした（404） | 36 | +5 |
+| 送信して登録されました | 242 | +29 |
 
-_詳細 CSV: `data/gsc/url-inspection/2026-10-20.csv`_
+_詳細 CSV: `data/gsc/url-inspection/2026-10-21.csv`_

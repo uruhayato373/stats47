@@ -5,6 +5,7 @@
  * 同じ計算が別実装で 3 つあったのを 1 箇所に集約する。snapshot ディレクトリ名・
  * history.csv の `week` 列がこの形式なので、比較と差分はここだけで行う。
  */
+import { isoWeekOf as periodsIsoWeekOf, isoWeekRange, jstDateOf } from "../../metrics/lib/periods.mjs";
 
 const WEEK_RE = /^(\d{4})-W(\d{2})$/;
 
@@ -14,17 +15,12 @@ const WEEK_RE = /^(\d{4})-W(\d{2})$/;
  * @returns {string} 例 "2026-W31"
  */
 export function isoWeekOf(input) {
-  const src = input instanceof Date ? input : new Date(`${String(input).slice(0, 10)}T00:00:00Z`);
-  if (Number.isNaN(src.getTime())) throw new Error(`isoWeekOf: 日付として解釈できない: ${input}`);
-  // その週の木曜に寄せる (ISO 週は「木曜が属する年」の週番号)
-  const d = new Date(Date.UTC(src.getUTCFullYear(), src.getUTCMonth(), src.getUTCDate()));
-  const dayNum = (d.getUTCDay() + 6) % 7; // Mon=0 .. Sun=6
-  d.setUTCDate(d.getUTCDate() - dayNum + 3);
-  const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
-  const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
-  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
-  const week = 1 + Math.round((d - firstThursday) / (7 * 24 * 3600 * 1000));
-  return `${d.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+  // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)。Date は JST の暦日に直してから数える
+  const label = input instanceof Date ? (Number.isNaN(input.getTime()) ? "" : jstDateOf(input)) : String(input).slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(label) || Number.isNaN(Date.parse(`${label}T00:00:00Z`))) {
+    throw new Error(`isoWeekOf: 日付として解釈できない: ${input}`);
+  }
+  return periodsIsoWeekOf(label);
 }
 
 /** ISO 週文字列か。 */
@@ -64,15 +60,6 @@ export function weekDiff(before, after) {
  * (鮮度ガードの入力。snapshot ファイルの mtime は git checkout で変わるため使わない)。
  */
 export function isoWeekEnd(week) {
-  const m = WEEK_RE.exec(week ?? "");
-  if (!m) throw new Error(`isoWeekEnd: ISO 週ではない: ${week}`);
-  const year = Number(m[1]);
-  const wk = Number(m[2]);
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  const jan4Dow = jan4.getUTCDay() || 7; // 1=Mon .. 7=Sun
-  const week1Monday = new Date(jan4);
-  week1Monday.setUTCDate(jan4.getUTCDate() + (1 - jan4Dow));
-  const sunday = new Date(week1Monday);
-  sunday.setUTCDate(week1Monday.getUTCDate() + (wk - 1) * 7 + 6);
-  return sunday.toISOString().slice(0, 10);
+  if (!WEEK_RE.test(week ?? "")) throw new Error(`isoWeekEnd: ISO 週ではない: ${week}`);
+  return isoWeekRange(week).sunday;
 }

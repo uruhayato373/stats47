@@ -53,7 +53,7 @@ import {
 import {
   validateChartProps,
   validateStatSeriesRefAlignment,
-} from '../src/theme-catalog/stat-series-ref';
+} from '../src/theme-catalog/registered-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
 import { metricYearCount } from '../src/theme-catalog/selection-viewpoints';
 import { isGenericChartDescription } from '../src/theme-catalog/transform';

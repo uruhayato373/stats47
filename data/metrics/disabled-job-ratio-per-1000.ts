@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const disabledJobRatioPer1000: MetricConfig = {
   "key": "disabled-job-ratio-per-1000",
   "title": "就職者に占める身体障害者の比率",
+  "subtitle": "就職件数千件当たり",
   "unit": "就職件数千対",
   "category": "laborwage",
   "source": {

@@ -12,10 +12,7 @@ import {
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import {
-  getSurveyTaxonomyEntries,
-  resolveThemeSurveyTaxonomy,
-} from '@stats47/ranking';
+import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
@@ -40,6 +37,7 @@ import {
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
+import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { getAreaThemeHighlights } from '../lib/area-theme-highlights';
 import {
   generateThemeBreadcrumbStructuredData,
@@ -180,6 +178,7 @@ export async function ThemePageLayout({
       <PageShell
         leftRail={
           <ThemeSideNav
+            themes={THEME_SWITCHER_THEMES}
             currentThemeKey={theme.themeKey}
             areaContext={
               areaContext ? { areaCode: areaContext.areaCode } : undefined
@@ -267,6 +266,7 @@ export async function ThemePageLayout({
           >
             <div className="min-w-0">
               <ThemeSwitcher
+                themes={THEME_SWITCHER_THEMES}
                 currentThemeKey={theme.themeKey}
                 areaContext={
                   areaContext ? { areaCode: areaContext.areaCode } : undefined

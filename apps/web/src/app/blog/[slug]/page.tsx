@@ -177,7 +177,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const articleRankingKeys = await getRankingKeysForArticle(slug);
     const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 3});
-    const dataNavigation = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['ranking', 'geo', 'theme'], rankingKeys: articleRankingKeys, limit: 3});
+    const dataNavigation = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['ranking', 'municipality-ranking', 'geo', 'theme'], rankingKeys: articleRankingKeys, limit: 3});
     const railThemes = (await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['theme'], rankingKeys: articleRankingKeys, limit: 3}))
         .filter(theme => !dataNavigation.some(item => item.id === theme.id))
         .map(theme => ({themeKey: theme.key, title: theme.title}));

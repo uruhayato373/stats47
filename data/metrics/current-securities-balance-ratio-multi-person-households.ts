@@ -20,7 +20,7 @@ export const currentSecuritiesBalanceRatioMultiPersonHouseholds: MetricConfig = 
     "from": 2019,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

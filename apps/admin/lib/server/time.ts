@@ -1,3 +1,4 @@
+import { isoWeekOf, isoWeekRange } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
 import "server-only";
 
 /**
@@ -14,10 +15,7 @@ export function jstDateStr(d: Date = jstNow()): string {
 
 /** JST 基準の今週月曜 (YYYY-MM-DD)。 */
 export function weekStartJst(): string {
-  const d = jstNow();
-  const dow = d.getUTCDay() || 7; // Mon=1..Sun=7
-  d.setUTCDate(d.getUTCDate() - (dow - 1));
-  return d.toISOString().slice(0, 10);
+  return isoWeekRange(isoWeekOf(jstDateStr())).monday; // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 /** JST 基準の今月 1 日 (YYYY-MM-DD)。 */

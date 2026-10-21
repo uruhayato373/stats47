@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const seniorWelfareCenterCountPer100k65plus: MetricConfig = {
   "key": "senior-welfare-center-count-per-100k-65plus",
   "title": "老人福祉センター数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +21,7 @@ export const seniorWelfareCenterCountPer100k65plus: MetricConfig = {
     "from": 1975,
     "to": 2017,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

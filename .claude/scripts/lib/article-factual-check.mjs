@@ -104,7 +104,7 @@ function extractUnit(item) {
   return null;
 }
 
-/** `<base>.json` に対応する `<base>.source.json` の {label, unit} を読む (無ければ空) */
+/** `<base>.json` に対応する `<base>.source.json` の {label, unit, year} を読む (無ければ空) */
 function readSourceMeta(dataDir, jsonFile) {
   const sourcePath = path.join(dataDir, jsonFile.replace(/\.json$/, ".source.json"));
   if (!fs.existsSync(sourcePath)) return {};
@@ -113,6 +113,7 @@ function readSourceMeta(dataDir, jsonFile) {
     return {
       label: typeof meta.label === "string" ? meta.label : null,
       unit: typeof meta.unit === "string" ? meta.unit : null,
+      year: typeof meta.year === "string" || typeof meta.year === "number" ? String(meta.year) : null,
     };
   } catch {
     return {};
@@ -234,6 +235,12 @@ export function buildGroundTruth(dataDir) {
       // これを既定 label にすると「本文が別指標を語っているか」を判定できるようになる。
       const meta = readSourceMeta(dataDir, file);
       walkAndIndex(json, idx, file, meta.label || "", meta.unit || null);
+      // data の年を各 fact に付ける。本文が別の年の順位を語っているかの判定に使う (無ければ判定しない)
+      if (meta.year) {
+        for (const facts of Object.values(idx)) {
+          for (const f of facts) if (f.source === file && f.year === undefined) f.year = meta.year;
+        }
+      }
     } catch {
       // skip malformed JSON
     }
@@ -316,6 +323,7 @@ function isCitingUnknownRanking(matchText, gt) {
 export function checkRankClaims(content, gt) {
   const blockers = [];
   if (Object.keys(gt).length === 0) return blockers;
+  const knownLabels = collectKnownLabels(gt);
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
   const rankRe = new RegExp(
@@ -341,6 +349,14 @@ export function checkRankClaims(content, gt) {
       PER_CAPITA_SKIP.test(trailingContext)
     ) continue;
     if (isCitingUnknownRanking(m[0], gt)) continue;
+    // 同じ文で data に無い指標 (「カツオの購入数量では」) を語っている順位は照合できない (FACTUAL-CHECK-CROSS-METRIC-RANK-01)
+    const rankSentenceStart = Math.max(
+      body.lastIndexOf("。", m.index - 1) + 1,
+      body.lastIndexOf("\n", m.index - 1) + 1,
+      m.index - 200,
+    );
+    const rankContext = body.slice(rankSentenceStart, m.index) + m[0].slice(0, m[0].lastIndexOf(m[2]));
+    if (mentionsForeignMetric(rankContext, knownLabels)) continue;
 
     const key = `${pref}:${claimedRank}`;
     if (seenClaims.has(key)) continue;
@@ -350,6 +366,10 @@ export function checkRankClaims(content, gt) {
     if (!facts || facts.length === 0) continue;
     const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
     if (ranks.length === 0) continue;
+    // data の年が分かっていて、本文がそれと違う年の順位を語っているなら照合しない (「1972 年は 2 位」)
+    const claimYear = m[0].match(/((?:19|20)\d{2})\s*年/)?.[1];
+    const dataYears = facts.map((f) => f.year).filter(Boolean);
+    if (claimYear && dataYears.length > 0 && !dataYears.includes(claimYear)) continue;
 
     if (!ranks.includes(claimedRank)) {
       const actualList = facts
@@ -591,6 +611,29 @@ function mentionsForeignMetric(lead, knownLabels) {
   });
 }
 
+const APPROX_BEFORE_RE = /(約|およそ|おおよそ|ほぼ|概ね|おおむね)\s*$/;
+
+/**
+ * 本文の数値が言い切っている精度から許容幅を返す (最後の 0 でない桁の半分 × 桁の接頭辞)。
+ * 例: 「4,790」→ 5 / 「5,000」→ 500 / 「3.8」→ 0.05 / 「468万」→ 5,000。
+ * 複数のスケールを跨ぐ表記 (「4万5,897」) は最後の部分の精度を使う。数値が読めなければ null。
+ */
+export function claimTolerance(numeralRaw) {
+  const parts = [...String(numeralRaw).matchAll(/([\d,]+(?:\.\d+)?)\s*(百万|兆|億|万|千)?/g)];
+  const last = parts[parts.length - 1];
+  if (!last) return null;
+  const digits = last[1].replace(/,/g, "");
+  const scale = last[2] ? JA_SCALE[last[2]] ?? 1 : 1;
+  const [intPart, frac = ""] = digits.split(".");
+  let unit;
+  if (frac.length > 0) unit = 10 ** -frac.length;
+  else {
+    const trailingZeros = intPart.length - intPart.replace(/0+$/, "").length;
+    unit = intPart.replace(/0+$/, "") === "" ? 1 : 10 ** trailingZeros;
+  }
+  return (unit / 2) * scale;
+}
+
 export function checkValueClaims(content, gt) {
   const warnings = [];
   if (Object.keys(gt).length === 0) return warnings;
@@ -635,6 +678,9 @@ export function checkValueClaims(content, gt) {
     // 県名から数値までに句点・改行があれば別の文 → 紐づけない
     const between = body.slice(anchor.end, nm.index);
     if (/[。\n]/.test(between)) continue;
+    // 県名と数値の間に読点で区切った別の値があれば、この数値は列挙の次の地名のもの
+    // (「宮崎市の3,517円、宇都宮市の2,801円」)。「1人当たり」のような指標名の中の数は区切りを伴わないので対象外
+    if (new RegExp(`\\d[\\d,]*(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?\\s*${UNIT_TAIL}\\s*[、，,]`).test(between)) continue;
 
     // 旧実装の m[0] 相当 (県名 〜 単位まで) を組み立てる。以降の判定はこれを使う
     const m = {
@@ -714,9 +760,14 @@ export function checkValueClaims(content, gt) {
     });
     if (comparable.length === 0) continue; // 安全側: 比較できないなら skip
 
+    // 許容幅は本文が書いた精度から決める。「4,790戸」は十の位まで言い切っているので ±5、「468万人」は ±0.5万。
+    // 「約」などで丸めを断っているときと、精度が読めない書き方は従来の ±5% (BLOG-TUTORIAL-GATE-GAPS-01:
+    // ±5% だと 4,970戸 → 4,790戸 の書き誤りが一致扱いになっていた)
+    const tolerance = APPROX_BEFORE_RE.test(body.slice(Math.max(0, nm.index - 8), nm.index)) ? null : claimTolerance(numeralRaw);
     const matched = comparable.some((f) => {
       const base = factBaseValue(f);
       if (base === null || base === 0) return base === claimBase;
+      if (tolerance !== null) return Math.abs(claimBase - base) <= tolerance + Math.abs(base) * 1e-9;
       const ratio = claimBase / base;
       return ratio >= 0.95 && ratio <= 1.05; // ±5%
     });
@@ -732,7 +783,7 @@ export function checkValueClaims(content, gt) {
       const base = factBaseValue(f);
       if (base === null || base === 0) continue;
       const r = claimBase > base ? claimBase / base : base / claimBase;
-      if (r >= MISMATCH_RATIO && (grossest === null || r > grossest.r)) {
+      if ((tolerance !== null || r >= MISMATCH_RATIO) && (grossest === null || r > grossest.r)) {
         grossest = { r, f };
       }
     }

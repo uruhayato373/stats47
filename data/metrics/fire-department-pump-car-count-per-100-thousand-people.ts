@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDepartmentPumpCarCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-pump-car-count-per-100-thousand-people",
   "title": "消防ポンプ自動車等現有数",
+  "subtitle": "人口10万人当たり",
   "unit": "台",
   "category": "safetyenvironment",
   "source": {

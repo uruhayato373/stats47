@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const secondaryEducationSchoolCountPer100k1217: MetricConfig = {
   "key": "secondary-education-school-count-per-100k-12-17",
   "title": "中等教育学校数",
+  "subtitle": "12～17歳人口10万人当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

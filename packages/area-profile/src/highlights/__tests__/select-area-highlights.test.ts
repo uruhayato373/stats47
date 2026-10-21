@@ -168,19 +168,50 @@ describe("焼き込み・市区町村の補助関数", () => {
     expect(keys).toEqual(["a", "m", "f"]);
   });
 
-  it("selectCityHighlights は県内 5 位以内を順位順に、同じ表示名を 1 件にして返す", () => {
-    const item = (rankingKey: string, rank: number, indicator = rankingKey) => ({
-      rankingKey, rank, indicator, year: "2020年度", value: 1, unit: "人",
-    });
-    const picked = selectCityHighlights([item("c", 6), item("b", 2), item("a", 1), item("a2", 3, "a")], { limit: 5 });
-    expect(picked.map((p) => p.rankingKey)).toEqual(["a", "b"]);
+  const cityMetric = (
+    rankingKey: string,
+    prefectureRank: number,
+    overrides: Partial<{ label: string; value: number; yearCode: string; nationalRank: number; basis: "rate" | "total" | "unknown" }> = {},
+  ) => ({
+    rankingKey,
+    label: rankingKey,
+    yearCode: "2020",
+    value: 1,
+    prefectureRank,
+    nationalRank: prefectureRank * 10,
+    basis: "rate" as const,
+    ...overrides,
+  });
+
+  it("selectCityHighlights は県内 5 位以内を県内順位・全国順位の順に、同じ表示名を 1 件にして返す", () => {
+    const picked = selectCityHighlights(
+      [
+        cityMetric("c", 6),
+        cityMetric("b", 2),
+        cityMetric("a", 1, { nationalRank: 50 }),
+        cityMetric("a0", 1, { nationalRank: 3 }),
+        cityMetric("a2", 3, { label: "a" }),
+      ],
+      { limit: 5 },
+    );
+    expect(picked.map((p) => p.rankingKey)).toEqual(["a0", "a", "b"]);
   });
 
   it("selectCityHighlights は値が 0 の指標 (同率 0 で付いた上位順位) を特徴に出さない", () => {
-    const item = (rankingKey: string, rank: number, value: number) => ({
-      rankingKey, rank, indicator: rankingKey, year: "2020年度", value, unit: "施設",
-    });
-    const picked = selectCityHighlights([item("zero", 1, 0), item("real", 2, 3)], { limit: 5 });
+    const picked = selectCityHighlights([cityMetric("zero", 1, { value: 0 }), cityMetric("real", 2)], { limit: 5 });
     expect(picked.map((p) => p.rankingKey)).toEqual(["real"]);
+  });
+
+  it("selectCityHighlights は総数の指標・古い年・看板に見える指標を特徴に出さない", () => {
+    const picked = selectCityHighlights(
+      [
+        cityMetric("population", 1, { basis: "total" }),
+        cityMetric("old", 1, { yearCode: "2015" }),
+        cityMetric("suicide-rate", 1),
+        cityMetric("kept", 4),
+      ],
+      { limit: 5 },
+    );
+    expect(picked.map((p) => p.rankingKey)).toEqual(["kept"]);
   });
 });

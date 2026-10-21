@@ -220,7 +220,7 @@ function deviceLine(kind, bw, aw) {
  * AdSense 施策の adapter。判定対象指標は週次 earnings（imp は標本ガードの入力）。
  * 契約: { domainId, listSubjects, resolveWindow, measure, targetOf, sourcesOf,
  *         confoundersOf, logPath, headerPrefix, pastEffectKeys, reproduceCommand }
- * @param {{minWeeks?:number, includeAll?:boolean}} [opts]
+ * @param {{minWeeks?:number, includeAll?:boolean, now?:string}} [opts]
  */
 export function createAdsenseAdapter(opts = {}) {
   const win = opts.minWeeks ?? DEFAULT_THRESHOLDS.window.minWeeks;

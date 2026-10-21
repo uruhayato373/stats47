@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const emergencyHospitalGeneralClinicCountPer100k: MetricConfig = {
   "key": "emergency-hospital-general-clinic-count-per-100k",
   "title": "救急告示病院・一般診療所数",
+  "subtitle": "人口10万人当たり",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {
@@ -19,7 +20,7 @@ export const emergencyHospitalGeneralClinicCountPer100k: MetricConfig = {
   // 3 年ごとの調査で 2021 年のデータは存在しない (実測: …2017/2020/2023)。
   // from/to を 2021 に固定していたため取得 1008 行が全てフィルタ落ちして 0 件だった。
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

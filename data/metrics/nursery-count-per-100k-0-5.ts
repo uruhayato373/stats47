@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nurseryCountPer100k05: MetricConfig = {
   "key": "nursery-count-per-100k-0-5",
   "title": "保育所等数",
+  "subtitle": "0～5歳人口10万人当たり",
   "unit": "所",
   "category": "educationsports",
   "source": {
@@ -46,7 +47,7 @@ export const nurseryCountPer100k05: MetricConfig = {
       2020,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

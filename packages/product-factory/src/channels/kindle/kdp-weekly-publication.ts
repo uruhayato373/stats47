@@ -1,3 +1,4 @@
+import { isoWeekOf, jstDateOf } from "../../../../../.claude/scripts/metrics/lib/periods.mjs";
 import type { SalesObservation } from "../../sales/types";
 import { KDP_PUBLICATION_PLAN } from "./kdp-publishing-policy";
 
@@ -165,13 +166,8 @@ function scheduledAction(week: string): string {
 
 function isSameIsoWeek(timestamp: string | null | undefined, week: string): boolean {
   if (!timestamp) return false;
-  const date = new Date(timestamp);
-  if (Number.isNaN(date.getTime())) return false;
-  const day = date.getUTCDay() || 7;
-  date.setUTCDate(date.getUTCDate() + 4 - day);
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  const number = Math.ceil(((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
-  return `${date.getUTCFullYear()}-W${String(number).padStart(2, "0")}` === week;
+  const ms = Date.parse(timestamp);
+  return !Number.isNaN(ms) && isoWeekOf(jstDateOf(ms)) === week; // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 function result(

@@ -39,6 +39,11 @@
       "types": "./src/mlit-ksj/index.ts",
       "import": "./src/mlit-ksj/index.ts",
       "require": "./src/mlit-ksj/index.ts"
+    },
+    "./mlit-ksj/catalog": {
+      "types": "./src/mlit-ksj/catalog.ts",
+      "import": "./src/mlit-ksj/catalog.ts",
+      "require": "./src/mlit-ksj/catalog.ts"
     }
   },
   "scripts": {

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
   "key": "nursery-children-per-nursery-teacher",
   "title": "保育所等在所児数",
+  "subtitle": "保育士1人当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {
@@ -45,7 +46,7 @@ export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

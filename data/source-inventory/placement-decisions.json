@@ -242,6 +242,14 @@
     },
     {
       "channel": "japan",
+      "metricKey": "day-time-population-ratio",
+      "status": "rejected",
+      "reason": "日本全体では昼間人口と夜間人口が同じになり、全国値は常に 100 で全国時系列として意味を持たない (app/japan/day-time-population-ratio/series.json で確認。JAPAN-METRIC-UNIT-AND-RATIO-01)",
+      "decidedAt": "2026-10-21",
+      "decidedBy": "Claude Code (オーナーの包括指示「推奨案でやり切って」2026-10-21)"
+    },
+    {
+      "channel": "japan",
       "metricKey": "total-fertility-rate",
       "status": "blocked",
       "reason": "config の単位「人」と e-Stat の単位「‐」が合わず、生成器が受け付けない (単位の修正が先)",

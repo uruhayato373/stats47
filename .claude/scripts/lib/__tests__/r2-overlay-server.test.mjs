@@ -68,6 +68,8 @@ test("generated metric metadata overrides remote metadata while observations rem
   fs.writeFileSync(path.join(itemDir, "item.json"), '{"presentation":"current"}');
   fs.mkdirSync(path.join(dir, 'app/home'), {recursive:true});
   fs.writeFileSync(path.join(dir, 'app/home/featured.json'), '{"presentation":"home-current"}');
+  fs.mkdirSync(path.join(dir, 'app/areas/13000/cities/13101'), {recursive:true});
+  fs.writeFileSync(path.join(dir, 'app/areas/13000/cities/13101/databook.json'), '{"databook":"current"}');
   fs.mkdirSync(path.join(dir, "app/stats/total-population"), {recursive:true});
   fs.writeFileSync(path.join(dir, "app/stats/total-population/values.json"), '{"not":"authoritative"}');
   const upstream = http.createServer((_req,res) => {res.writeHead(200);res.end('{"from":"upstream"}');});
@@ -79,6 +81,8 @@ test("generated metric metadata overrides remote metadata while observations rem
     assert.equal(await local.text(), '{"presentation":"current"}');
     const home = await fetch('http://127.0.0.1:'+port+'/app/home/featured.json');
     assert.equal(await home.text(), '{"presentation":"home-current"}');
+    const databook = await fetch('http://127.0.0.1:'+port+'/app/areas/13000/cities/13101/databook.json');
+    assert.equal(await databook.text(), '{"databook":"current"}');
     const head = await fetch('http://127.0.0.1:'+port+'/app/ranking/total-population/item.json', {method:'HEAD'});
     assert.equal(head.status, 200);assert.equal(await head.text(), '');
     const data = await fetch('http://127.0.0.1:'+port+'/app/stats/total-population/values.json');

@@ -8490,10 +8490,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:day-time-population-ratio",
           "kind": "municipality-ranking"
         },
@@ -8521,7 +8517,7 @@
     },
     {
       "metricKey": "daytime-population-ratio",
-      "pageId": "ranking:daytime-population-ratio",
+      "pageId": null,
       "title": "昼夜間人口比率",
       "sources": [
         {

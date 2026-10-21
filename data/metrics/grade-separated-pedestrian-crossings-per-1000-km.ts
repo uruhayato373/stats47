@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const gradeSeparatedPedestrianCrossingsPer1000Km: MetricConfig = {
   "key": "grade-separated-pedestrian-crossings-per-1000-km",
   "title": "立体横断施設数",
+  "subtitle": "道路実延長千km当たり",
   "unit": "所",
   "category": "infrastructure",
   "source": {

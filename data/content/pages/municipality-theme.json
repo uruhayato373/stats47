@@ -141,6 +141,7 @@
       "href": "/municipalities/themes/households",
       "rankingKeys": [
         "households",
+        "census-household-change-rate-5y",
         "single-person-households",
         "nuclear-family-household-count",
         "nuclear-family-households-ratio",
@@ -315,7 +316,9 @@
         "day-time-population-ratio",
         "ratio-never-married-15-plus",
         "households",
-        "moving-in-excess-rate"
+        "moving-in-excess-rate",
+        "census-population-change-rate-5y",
+        "census-population-change-5y"
       ],
       "published": true
     },

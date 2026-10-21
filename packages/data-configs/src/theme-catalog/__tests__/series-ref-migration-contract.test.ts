@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { getMetricConfig } from "../../registry";
 import { requestKey } from "../../source-coordinate";
 import { THEME_CATALOGS } from "../index";
-import { parseStatSeriesRefs } from "../stat-series-ref";
+import { parseStatSeriesRefs } from "../registered-series-ref";
 
 import migrationContract from "./fixtures/series-ref-migration-contract.json";
 import catalogBaseline from "../../../../../.claude/config/theme-catalog-baseline.json";

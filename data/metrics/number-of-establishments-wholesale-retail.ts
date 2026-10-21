@@ -24,7 +24,7 @@ export const numberOfEstablishmentsWholesaleRetail: MetricConfig = {
       2014,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

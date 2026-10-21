@@ -39,7 +39,8 @@ for (const key of ['MEASUREMENT_VAULT_KEY', 'R2_S3_ENDPOINT', 'R2_ACCESS_KEY_ID'
 // summarize.mjs は実行番号で今回の結果だけを選ぶ (CI の GITHUB_RUN_ID と同じ役割)。
 const runId = String(Date.now());
 // 保管庫への書き込みは CI と Mac の定期実行だけに許す (vault.mjs)
-const env = { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1', MEASUREMENT_VAULT_WRITER: 'mac' };
+// MEASUREMENT_SOURCES: 一部の取得元だけを取り直したとき、取らなかった取得元の記録を消さない (summarize.mjs)
+const env = { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1', MEASUREMENT_VAULT_WRITER: 'mac', MEASUREMENT_SOURCES: names.join(',') };
 const publicDir = join(ROOT, '.local/authenticated-ci-public');
 rmSync(publicDir, { recursive: true, force: true });
 

@@ -6,9 +6,11 @@ import Link from '@/components/atoms/SiteLink';
 
 import type { HighlightTone } from '@stats47/area-profile';
 
-/** 一覧の 1 行。県は選定関数の AreaHighlight、市区町村は profile.json の strengths を渡す。 */
+/** 一覧の 1 行。県は選定関数の AreaHighlight、市区町村はデータブックの指標を渡す。 */
 export interface AreaHighlightListItem {
   rankingKey: string;
+  /** リンク先。既定は都道府県ランキング (`/ranking/<key>`)。 */
+  href?: string;
   label: string;
   rank: number;
   value: number;
@@ -18,6 +20,8 @@ export interface AreaHighlightListItem {
   tone: HighlightTone;
   /** 家計調査など、値の範囲の注記 (例: 県庁所在市の値) */
   note?: string;
+  /** 年の後ろに続ける補足 (例: 全国の順位) */
+  detail?: string;
 }
 
 interface AreaHighlightListProps {
@@ -41,7 +45,7 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
           <span className="sr-only">{rankScope}</span>
           <div className="min-w-0 flex-1">
             <Link
-              href={`/ranking/${item.rankingKey}`}
+              href={item.href ?? `/ranking/${item.rankingKey}`}
               data-nav-label={item.rankingKey}
               className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
             >
@@ -50,6 +54,7 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
             <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
               {item.value.toLocaleString('ja-JP')}
               {formatUnitForDisplay(item.unit)}（{item.year}）
+              {item.detail ? ` ・ ${item.detail}` : ''}
               {item.note ? ` ※${item.note}` : ''}
             </p>
           </div>

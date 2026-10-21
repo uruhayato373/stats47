@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  buildCaptionCorrelationLines,
   buildCautionLine,
   buildHook,
   computeFittedLineHighlights,
@@ -316,4 +317,13 @@ test("buildCautionLine は因果関係を否定する固定文言と人口調整
   const line = buildCautionLine(0.512);
   assert.match(line, /相関は因果関係を示しません/);
   assert.match(line, /r=0\.51/);
+});
+
+test("キャプションの相関の段は人口調整後 r を 1 回だけ書く (画像用の注意書きを流用しない)", () => {
+  const caption = buildCaptionCorrelationLines(0.77, 0.724).join("\n");
+  assert.equal(caption.split("人口の影響を除くと").length - 1, 1);
+  assert.equal(caption.split("r=0.72").length - 1, 1);
+  assert.match(caption, /相関は因果関係を示しません。$/);
+  // 4 枚目の画像の文言は人口調整後 r を含んだまま
+  assert.match(buildCautionLine(0.724), /^相関は因果関係を示しません。人口の影響を除くと r=0\.72$/);
 });

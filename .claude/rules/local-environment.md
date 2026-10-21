@@ -364,6 +364,9 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 - ルート `npm run dev`（`turbo run dev`）は **23 パッケージすべての dev を起動**し、出力が混ざって "Ready" を検出しづらく、port 3000 を listen する前に体感で固まる。web 単体なら数秒で起動する（2026-06-20 に同じ取り違えで時間を浪費した）。
 - dev サーバーは**常駐プロセス**。エージェントが起動するときは `run_in_background: true` で起動し、**出力ファイルを polling して `✓ Ready` を確認**する。前面 `sleep` での固定待ちは禁止（タイムアウト・取りこぼしの元）。
 - 表示が更新されないときは「キャッシュ」を疑う前に **dev サーバーが listen しているか**を先に確認する（`lsof -i :3000` / `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/`）。
+- **dev は Turbopack、本番ビルドは webpack (2026-10-21〜)**。`scripts/dev-server.ts` が `next dev --turbopack` で起動する。8GB の Mac での実測は次のとおり。webpack の dev はキャッシュなしの初回表示がランキング詳細で 63 秒かかり、4 種類のページでメモリ上限による再起動が起きた。Turbopack は各ページ 22 秒以内で、10 種類のルートを開いても再起動しなかった。主要 9 種類のページで hydration エラーが無いことも確かめた。webpack 固有の挙動 (本番ビルドとの差) を確かめたいときだけ `WEB_DEV_BUNDLER=webpack npm run dev:web` で起動する (turbo の passThrough に宣言済み)。起動時の「Webpack is configured while Turbopack is not」は、本番向けの webpack 設定に対する無害な警告。
+- **`"use server"` のファイルは async 関数だけを export する**。型の再 export (`export type { … } from`) を置くと、Turbopack はそのページを 500 にする (webpack は通していた)。型は元のモジュールから import する。
+- **dev が遅い・メモリで再起動するときは、R2 より先に入口 (barrel) 経由でブラウザ向けに入る重い依存を疑う**。全指標 registry・全テーマ定義・GIS 原典処理が実例。境界テスト `apps/web/src/__tests__/client-bundle-boundary.test.ts` と `packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts` が逆戻りを止める。
 
 ## 検証コマンドの粒度
 

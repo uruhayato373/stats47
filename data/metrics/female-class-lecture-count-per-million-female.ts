@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const femaleClassLectureCountPerMillionFemale: MetricConfig = {
   "key": "female-class-lecture-count-per-million-female",
   "title": "女性学級・講座数",
+  "subtitle": "女性人口100万人当たり",
   "unit": "学級･講座",
   "category": "educationsports",
   "source": {

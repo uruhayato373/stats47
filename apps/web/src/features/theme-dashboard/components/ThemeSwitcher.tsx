@@ -15,12 +15,18 @@ import Link from '@/components/atoms/SiteLink';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
-import { ALL_THEMES } from '../config/all-themes';
-import { isAreaTheme } from '../config/area-theme-slugs';
-import { themeHref } from '../config/theme-urls';
+import { themeHref } from '../config/theme-href';
 import { THEME_PREFECTURE_SET_VALUE } from '../lib/theme-prefecture-preference';
 
 import { useThemePrefecture } from './ThemePrefectureContext';
+
+/** サーバーが ALL_THEMES から作って渡すテーマ一覧の 1 件 (`config/theme-switcher-themes.ts`)。 */
+export interface ThemeSwitcherTheme {
+  themeKey: string;
+  title: string;
+  /** 都道府県ページ (`/areas/<code>/<theme>`) を持つテーマか。 */
+  isAreaTheme: boolean;
+}
 
 export interface ThemeSwitcherOption {
   themeKey: string;
@@ -29,7 +35,7 @@ export interface ThemeSwitcherOption {
 }
 
 /**
- * テーマ切替セレクターの選択肢を `ALL_THEMES`（SSOT）から導出する。
+ * テーマ切替セレクターの選択肢を、サーバーが `ALL_THEMES`（SSOT）から作った一覧から導出する。
  *
  * - 通常テーマ: canonical は `/themes/{themeKey}` のまま、Provider 配下では現在の
  *   `?pref=<5桁コード|all>` をリンクへ付けて選択と prefetch 結果を一致させる。
@@ -38,12 +44,13 @@ export interface ThemeSwitcherOption {
  *   存在しない / 410 対象の URL を生成しない。
  */
 export function buildThemeSwitcherOptions(
+  allThemes: readonly ThemeSwitcherTheme[],
   areaContext?: { areaCode: string },
   selectedPrefectureCode?: string | null
 ): ThemeSwitcherOption[] {
   const themes = areaContext
-    ? ALL_THEMES.filter((t) => isAreaTheme(t.themeKey))
-    : ALL_THEMES;
+    ? allThemes.filter((t) => t.isAreaTheme)
+    : allThemes;
   return themes.map((t) => {
     const href = areaContext
       ? `/areas/${areaContext.areaCode}/${t.themeKey}`
@@ -68,6 +75,8 @@ interface Props {
   areaContext?: { areaCode: string };
   /** 狭幅ツールバー内で使う、短いラベル + 全幅 Select の表示。 */
   compact?: boolean;
+  /** テーマ一覧。サーバーで `THEME_SWITCHER_THEMES` を渡す。 */
+  themes: readonly ThemeSwitcherTheme[];
 }
 
 /**
@@ -88,10 +97,12 @@ export function ThemeSwitcher({
   currentThemeKey,
   areaContext,
   compact = false,
+  themes,
 }: Props) {
   const router = useRouter();
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
+    themes,
     areaContext,
     hasProvider ? selectedPrefectureCode : undefined
   );

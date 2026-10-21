@@ -21,7 +21,7 @@ export const maleParttimeWorkers: MetricConfig = {
     "from": 2020,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

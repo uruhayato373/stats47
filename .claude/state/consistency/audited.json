@@ -1,8 +1,11 @@
 {
-  "hash": "80bd946bab3d92289e7de268dcc9bdbc61087f66edbde108eed2d860ca7fbb5f",
-  "audited_at": "2026-10-19T12:33:08",
+  "hash": "1348838941b526990af40f790d7ef514c34e5c820f65d4d727aad79c81bd0eec",
+  "audited_at": "2026-10-21T01:49:53",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/collect-local.mjs"
+    ".claude/agents/improvement-triage.md",
+    ".claude/scripts/lib/effect-verdict/cli.mjs",
+    ".claude/scripts/lib/remove-worktree.mjs",
+    ".claude/scripts/metrics/__tests__/gsc-improvements-adapter.test.mjs",
+    ".claude/scripts/metrics/lib/gsc-improvements-adapter.mjs"
   ]
 }

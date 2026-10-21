@@ -12,6 +12,7 @@ export { RelatedAreas } from './components/RelatedAreas';
 export { CitiesNavCard } from './components/CitiesNavCard';
 export { CityBreadcrumbs } from './components/CityBreadcrumbs';
 export { CityPageFooter } from './components/CityPageFooter';
+export { CityDatabookView } from './components/CityDatabookView';
 export { AreaRelatedRankingsCard } from './components/AreaRelatedRankingsCard';
 export { AreaRelatedBlogArticles } from './components/AreaRelatedBlogArticles';
 export { AreaHighlightList, type AreaHighlightListItem } from './components/AreaHighlightList';

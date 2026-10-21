@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const currentLiabilitiesBalanceMultiPersonHouseholdsPerHousehold: MetricConfig = {
   "key": "current-liabilities-balance-multi-person-households-per-household",
   "title": "負債現在高",
+  "subtitle": "1世帯当たり",
   "unit": "千円",
   "category": "economy",
   "source": {
@@ -20,7 +21,7 @@ export const currentLiabilitiesBalanceMultiPersonHouseholdsPerHousehold: MetricC
     "from": 2019,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

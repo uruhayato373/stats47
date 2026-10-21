@@ -10,26 +10,19 @@
  *
  * フィルタ記法は lib/gsc-query.mjs。GSC は取得遅延が約 3 日あるので、期間は週次 snapshot と同じ
  * lib/periods.mjs の窓 (例: rolling28d) に合わせると比較できる。
- * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env (メモリで渡す・一時ファイルに書かない) または stats47-*.json。
+ * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env をメモリで渡す・一時ファイルに書かない、または stats47-*.json)。
  */
-import { google } from "googleapis";
-import { resolveServiceAccountKeyFile, toCsv } from "./lib/auth.mjs";
+import { toCsv } from "./lib/auth.mjs";
 import { buildGscQuery } from "./lib/gsc-query.mjs";
 import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { createSearchConsoleClient } from "../lib/google-client.cjs";
 
 const SITE_URL = GSC_PROPERTY;
-const SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"];
 const METRICS = ["clicks", "impressions", "ctr", "position"];
-
-function createAuth() {
-  const json = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
-  if (json) return new google.auth.GoogleAuth({ credentials: JSON.parse(json), scopes: SCOPES });
-  return new google.auth.GoogleAuth({ keyFile: resolveServiceAccountKeyFile(), scopes: SCOPES });
-}
 
 async function main() {
   const { request, format } = buildGscQuery(process.argv.slice(2));
-  const searchconsole = google.searchconsole({ version: "v1", auth: createAuth() });
+  const searchconsole = createSearchConsoleClient();
   const { data } = await searchconsole.searchanalytics.query({ siteUrl: SITE_URL, requestBody: request });
   const rows = (data.rows ?? []).map((row) => ({
     ...Object.fromEntries(request.dimensions.map((d, i) => [d, row.keys?.[i] ?? ""])),

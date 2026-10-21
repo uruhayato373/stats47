@@ -1,58 +1,21 @@
 /**
- * Google API 認証ヘルパー
+ * 計測スクリプトの共通ヘルパー (リポジトリルート・週の引数・CSV)。
  *
- * CI: GOOGLE_SERVICE_ACCOUNT_KEY_JSON 環境変数に鍵 JSON を丸ごと格納
- * Local: リポジトリルートに stats47-*.json を配置（既存の skill 運用）
- *
- * どちらでも KeyFile として機能する keyFile path を返す。
+ * Google API の認証とクライアント生成は ../../lib/google-client.cjs が持つ (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。
  */
 
-import { writeFileSync, existsSync, mkdirSync } from "node:fs";
-import { join, resolve } from "node:path";
-import { tmpdir } from "node:os";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { isoWeekOf, isoWeekRange, jstDateOf } from "./periods.mjs";
 
 export const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..");
 
-const LOCAL_KEY_CANDIDATES = [
-  "stats47-f6b5dae19196.json",
-  "stats47-31b18ee67144.json",
-];
-
 /**
- * サービスアカウント鍵ファイルのパスを解決。
- * - 環境変数 GOOGLE_SERVICE_ACCOUNT_KEY_JSON があれば tmp に書き出してパスを返す
- * - なければローカルの候補を探す
- */
-export function resolveServiceAccountKeyFile() {
-  const jsonEnv = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
-  if (jsonEnv) {
-    const dir = join(tmpdir(), "stats47-sa");
-    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    const path = join(dir, "service-account.json");
-    writeFileSync(path, jsonEnv, { mode: 0o600 });
-    return path;
-  }
-  for (const name of LOCAL_KEY_CANDIDATES) {
-    const path = join(PROJECT_ROOT, name);
-    if (existsSync(path)) return path;
-  }
-  throw new Error(
-    `Service account key not found. Set GOOGLE_SERVICE_ACCOUNT_KEY_JSON env or place one of ${LOCAL_KEY_CANDIDATES.join(", ")} at ${PROJECT_ROOT}`
-  );
-}
-
-/**
- * ISO 週番号 (YYYY-Www) を算出する。
+ * ISO 週番号 (YYYY-Www) を JST の暦日で算出する。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
  * @param {Date} date
  */
 export function toIsoWeek(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+  return isoWeekOf(jstDateOf(date));
 }
 
 /**
@@ -91,24 +54,6 @@ export function toCsv(rows, headers) {
  * @returns {{ startDate: string, endDate: string }} YYYY-MM-DD 形式
  */
 export function isoWeekToDateRange(week) {
-  const [year, weekNum] = week.split("-W").map(Number);
-  // Jan 4 は常に week 1 に含まれる (ISO 8601)
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  // week 1 の月曜日
-  const week1Mon = new Date(jan4);
-  week1Mon.setUTCDate(jan4.getUTCDate() - (jan4.getUTCDay() || 7) + 1);
-  // 対象週の月曜日
-  const monday = new Date(week1Mon);
-  monday.setUTCDate(week1Mon.getUTCDate() + (weekNum - 1) * 7);
-  // 対象週の日曜日
-  const sunday = new Date(monday);
-  sunday.setUTCDate(monday.getUTCDate() + 6);
-  return { startDate: fmtDate(monday), endDate: fmtDate(sunday) };
-}
-
-/**
- * YYYY-MM-DD へフォーマット
- */
-export function fmtDate(d) {
-  return d.toISOString().slice(0, 10);
+  const { monday, sunday } = isoWeekRange(week);
+  return { startDate: monday, endDate: sunday };
 }

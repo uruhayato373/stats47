@@ -19,6 +19,10 @@ function leafName(cityName: string): string {
   return segments[segments.length - 1] ?? cityName;
 }
 
+function isSpecialWardsAggregate(city: City): boolean {
+  return city.cityCode === '13100' && leafName(city.cityName) === '特別区部';
+}
+
 function resolvePublishableKind(city: City): MunicipalityKind | null {
   const name = leafName(city.cityName);
   if (name.endsWith('市')) return 'city';
@@ -71,6 +75,17 @@ export function buildMunicipalityEntityPolicy(
           `administrative ward parent prefecture mismatch: ${city.cityCode} -> ${parent.prefCode}`
         );
       }
+      // 東京23区は政令市の行政区と同じく「特別区部」の下 (level=3) に置かれているが、
+      // 特別区は基礎自治体なので公開対象にする (MUNI-PAGE-QUALITY-01)。
+      if (isSpecialWardsAggregate(parent)) {
+        return {
+          code: city.cityCode,
+          name: city.cityName,
+          prefectureCode: parent.prefCode,
+          disposition: 'publishable',
+          kind: 'special-ward',
+        };
+      }
       return {
         code: city.cityCode,
         name: city.cityName,
@@ -93,7 +108,7 @@ export function buildMunicipalityEntityPolicy(
       );
     }
 
-    if (city.cityCode === '13100' && leafName(city.cityName) === '特別区部') {
+    if (isSpecialWardsAggregate(city)) {
       return {
         code: city.cityCode,
         name: city.cityName,

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const housingSiteValuePer33m2: MetricConfig = {
   "key": "housing-site-value-per-3-3m2",
   "title": "住宅敷地価額",
+  "subtitle": "公庫貸付分、3.3m2当たり",
   "unit": "千円",
   "category": "construction",
   "source": {

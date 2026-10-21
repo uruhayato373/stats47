@@ -497,3 +497,25 @@ test("mirror はログ・コード・指示の実体を共有し、誤リンク�
   assert.equal(invoke().status, 0);
   assert.equal(fs.readFileSync(target, "utf8"), "after");
 });
+
+test("E13: 4 体以上の agent に同じ方針の行を写すと止め、正典 rule への 1 行参照は通す", (t) => {
+  const copied = "セッション中にブラウザで取りに行かない。記録が古いときは判定不能と最終観測日を書いて止める。";
+  const ref = "正典 (記録の置き場・古いときの扱い・例外) は `.claude/rules/recorded-measurement-first.md`。";
+  const agent = (name, line) => VALID_AGENT.replace("name: worker", `name: ${name}`) + `\n## 記録から判断する\n\n${line}\n`;
+  const names = ["a1", "a2", "a3", "a4"];
+
+  const copiedRoot = fixture(Object.fromEntries(names.map((n) => [`.claude/agents/${n}.md`, agent(n, copied)])));
+  t.after(() => fs.rmSync(copiedRoot, { recursive: true }));
+  const copiedResult = run(copiedRoot);
+  assert.equal(copiedResult.status, 1);
+  assert.match(copiedResult.stdout, /\[E13\]/);
+
+  const refRoot = fixture(Object.fromEntries(names.map((n) => [`.claude/agents/${n}.md`, agent(n, ref)])));
+  t.after(() => fs.rmSync(refRoot, { recursive: true }));
+  assert.doesNotMatch(run(refRoot).stdout, /\[E13\]/);
+
+  // 3 体までは agent 固有の言い回しが偶然重なることがあるので止めない
+  const fewRoot = fixture(Object.fromEntries(names.slice(0, 3).map((n) => [`.claude/agents/${n}.md`, agent(n, copied)])));
+  t.after(() => fs.rmSync(fewRoot, { recursive: true }));
+  assert.doesNotMatch(run(fewRoot).stdout, /\[E13\]/);
+});

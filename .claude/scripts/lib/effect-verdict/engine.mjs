@@ -47,7 +47,7 @@ export const GUARD_CODES = Object.freeze([
  * @param {string} [input.now] ISO 日時 (鮮度判定の基準。テストで固定する)
  * @param {object} [thresholds]
  * @returns {{label:string, reason:string, guards:Array<{code:string,detail:string}>,
- *   attainment:number|null, evidence:object, thresholdsVersion:string}}
+ *   attainment:number|null, evidence:object, boundaries?:object, thresholdsVersion:string}}
  */
 export function decideVerdict(input, thresholds = DEFAULT_THRESHOLDS) {
   const t = thresholds;
@@ -256,7 +256,7 @@ export function extractTarget(text) {
  * 判定・根拠データ・閾値 SSOT・ガード・再現コマンドを必ず全部出す。
  * すべて実測値と閾値の引用なので NG ワード表と矛盾しない。
  * @param {object} v decideVerdict の戻り値
- * @param {{subjectId:string, metricLabel?:string, reproduceCommand:string}} p
+ * @param {{subjectId:string, metricLabel?:string, reproduceCommand:string, decidedAt?:string|null}} p
  */
 export function formatVerdictSection(v, { subjectId, metricLabel = "指標", reproduceCommand, decidedAt = null }) {
   const e = v.evidence;

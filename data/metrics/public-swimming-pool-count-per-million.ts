@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const publicSwimmingPoolCountPerMillion: MetricConfig = {
   "key": "public-swimming-pool-count-per-million",
   "title": "水泳プール数",
-  "subtitle": "屋内・屋外",
+  "subtitle": "人口100万人当たり・屋内・屋外",
   "unit": "施設",
   "category": "educationsports",
   "source": {
@@ -55,7 +55,7 @@ export const publicSwimmingPoolCountPerMillion: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

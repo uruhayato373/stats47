@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const kindergartenCountPer100k35: MetricConfig = {
   "key": "kindergarten-count-per-100k-3-5",
   "title": "幼稚園数",
+  "subtitle": "3～5歳人口10万人当たり",
   "unit": "園",
   "category": "educationsports",
   "source": {

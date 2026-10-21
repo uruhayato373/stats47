@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const householdHeadAnnualIncomePerHousehold: MetricConfig = {
   "key": "household-head-annual-income-per-household",
   "title": "年間世帯主収入",
+  "subtitle": "1世帯当たり",
   "unit": "千円",
   "category": "population",
   "source": {
@@ -20,7 +21,7 @@ export const householdHeadAnnualIncomePerHousehold: MetricConfig = {
     "from": 2019,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

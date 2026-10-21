@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const standardizedMortalityRatePer1000: MetricConfig = {
   "key": "standardized-mortality-rate-per-1000",
   "title": "標準化死亡率",
+  "subtitle": "人口千人当たり",
   "unit": "人口千対",
   "category": "population",
   "source": {
@@ -37,7 +38,7 @@ export const standardizedMortalityRatePer1000: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

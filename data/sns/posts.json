@@ -31067,9 +31067,9 @@
     },
     {
       "id": 1027,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.198Z",
-      "updated_at": "2026-10-12T01:23:00.612Z",
+      "updated_at": "2026-10-20T18:49:35.638Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31096,13 +31096,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/post-office-count-per-100km2/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DesrzIxDREx",
+      "posted_at": "2026-10-20T01:45:49.000Z"
     },
     {
       "id": 1028,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.203Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-20T18:49:35.670Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31129,7 +31131,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/27000/x/stills/27000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DetaGosiDIs",
+      "posted_at": "2026-10-20T08:30:26.000Z"
     },
     {
       "id": 1029,
@@ -33884,7 +33888,7 @@
     },
     {
       "id": 1095,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33893,17 +33897,20 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:55.821Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-20T14:57:52.622Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
       "content_key": "45000",
       "caption": "【都道府県データ】宮崎県、全国で何位？\n\n全国トップクラス:\n年平均気温 3位（19.3℃・2024年）\n認定こども園数 4位（456.8園・2024年）\n農業産出額 7位（372500百万円・2024年）\n粗出生率 10位（6.24人口千対・2023年）\n\n全国では下位:\n1人当たり県民所得（H27年基準） 46位（2409千円・2021年）\n平均初婚年齢（夫）（夫の年齢） 46位（30歳・2023年）\n女性所定内給与額 45位（215.7千円・2022年）\n製造品出荷額等（総額） 41位（1836509百万円・2023年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n出典: 社会・人口統計体系（2024年）、生産農業所得統計（2024年）、人口動態統計（2023年）、社会・人口統計体系（2021年）、賃金構造基本統計調査（2022年）、社会・人口統計体系（2023年）\n\n#都道府県データ #統計 #地方創生 #ランキング #都道府県あるある #暮らし #地域比較 #日本 #データで見る日本 #宮崎県",
-      "scheduled_at": "2026-10-20T10:00:00.000Z"
+      "scheduled_at": "2026-10-20T10:00:00.000Z",
+      "posted_at": "2026-10-20T14:57:52.611Z",
+      "post_url": "https://www.instagram.com/p/DeuGa1zGqbw/",
+      "external_id": "18037899263656975"
     },
     {
       "id": 1096,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33912,13 +33919,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.127Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-21T08:18:11.964Z",
       "platform": "instagram",
       "post_type": "reel",
       "domain": "bar-chart-race",
       "content_key": "coffee-consumption-quantity",
       "caption": "コーヒーを最も多く買う県、18年で1位になったのは9府県。\n\n都道府県別「コーヒー消費量」の推移（2007年→2024年）をバーチャートレースで振り返ります。\n\n1位になった回数は京都府が6回、鳥取県が4回。2024年は鳥取県が3,293gで1位、2位の石川県（3,272g）との差はわずか21gでした。\n\n【2024年 TOP3】\n1位 鳥取県 3,293g\n2位 石川県 3,272g\n3位 兵庫県 3,043g\n\n※家計調査は県庁所在市の二人以上世帯の年間購入量です\n全47都道府県の最新ランキングはプロフィールのリンクから👆\n保存しておくと後で見返せます📌\n\nデータ: 総務省「家計調査」\n\n#都道府県ランキング #コーヒー #家計調査 #バーチャートレース #統計 #雑学 #カフェ #stats47",
-      "scheduled_at": "2026-10-21T03:00:00.000Z"
+      "scheduled_at": "2026-10-21T03:00:00.000Z",
+      "posted_at": "2026-10-21T08:18:11.952Z",
+      "post_url": "https://www.instagram.com/reel/Dev9cQrDsTg/",
+      "external_id": "18118028683772477"
     },
     {
       "id": 1097,
@@ -33931,12 +33941,12 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.308Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-21T00:45:11.677Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "fish-pickled-consumption-expenditure--average-temperature",
-      "caption": "【データの相関】魚介の漬物消費支出額 × 年平均気温\n\n寒い県ほど、魚の漬物にお金を使う？\n\n縦軸: 年平均気温（℃・2024年）出典: 社会・人口統計体系\n横軸: 魚介の漬物消費支出額（円・2024年）出典: 家計調査\n\n相関係数 r=-0.68（人口の影響を除くと r=-0.69）\n\n相関は因果関係を示しません。人口の影響を除くと r=-0.69\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #economy #landweather",
+      "caption": "【データの相関】魚介の漬物消費支出額 × 年平均気温\n\n寒い県ほど、魚の漬物にお金を使う？\n\n縦軸: 年平均気温（℃・2024年）出典: 社会・人口統計体系\n横軸: 魚介の漬物消費支出額（円・2024年）出典: 家計調査\n\n相関係数 r=-0.68（人口の影響を除くと r=-0.69）\n\n相関は因果関係を示しません。\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #economy #landweather",
       "scheduled_at": "2026-10-21T10:00:00.000Z"
     },
     {
@@ -34084,12 +34094,12 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:59.252Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-21T01:24:14.949Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "actual-income-worker-households-per-month--accommodation-consumption-expenditure",
-      "caption": "【データの相関】実収入 × 宿泊料消費支出額\n\n収入の多い県ほど、宿泊にお金を使う？\n\n縦軸: 宿泊料消費支出額（円・2024年）出典: 家計調査\n横軸: 実収入（千円・2024年）出典: 社会・人口統計体系\n\n相関係数 r=0.77（人口の影響を除くと r=0.72）\n\n相関は因果関係を示しません。人口の影響を除くと r=0.72\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #administrativefinancial #economy",
+      "caption": "【データの相関】実収入 × 宿泊料消費支出額\n\n収入の多い県ほど、宿泊にお金を使う？\n\n縦軸: 宿泊料消費支出額（円・2024年）出典: 家計調査\n横軸: 実収入（千円・2024年）出典: 社会・人口統計体系\n\n相関係数 r=0.77（人口の影響を除くと r=0.72）\n\n相関は因果関係を示しません。\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #administrativefinancial #economy",
       "scheduled_at": "2026-10-28T10:00:00.000Z"
     },
     {

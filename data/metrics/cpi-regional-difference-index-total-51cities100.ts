@@ -21,7 +21,7 @@ export const cpiRegionalDifferenceIndexTotal51cities100: MetricConfig = {
     "from": 2010,
     "to": 2013,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateRdBu",

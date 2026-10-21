@@ -1,0 +1,783 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "週次の計測→記録→改善サイクルのまとめ",
+  "description": "data/measurement-cycle/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "asOf": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "dimensionGaps": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "absentParams": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "groups": {
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      }
+    },
+    "engine": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "byDomain": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "adsense": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "byLabel": {},
+                "subjects": {}
+              }
+            }
+          }
+        },
+        "gsc": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "active": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "judgeable": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "missing": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "outOfScope": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            }
+          }
+        },
+        "verdictsWeek": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "generatedAt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "improvements": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "active": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "overdue": {
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      }
+    },
+    "journey": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "blogToRanking": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "fromPageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "pageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "rate": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "themesToBlog": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "fromPageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "pageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "rate": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "themesToRanking": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "fromPageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "pageViews": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "rate": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "topCrossSection": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "from": {},
+              "pageViews": {},
+              "to": {}
+            }
+          }
+        }
+      }
+    },
+    "kpiTree": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "compareWeek": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "focusWithoutImprovements": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "improvements": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "active": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "maxActive": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "noTarget": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "unlinked": {
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          }
+        },
+        "nodes": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "cadence": {},
+              "focus": {},
+              "id": {},
+              "improvements": {},
+              "label": {},
+              "measurementStatus": {},
+              "note": {},
+              "previous": {},
+              "source": {},
+              "status": {},
+              "target": {},
+              "tier": {},
+              "unit": {},
+              "value": {}
+            },
+            "required": [
+              "id",
+              "source"
+            ]
+          }
+        }
+      }
+    },
+    "navCoverage": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "coverage": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "internalTransitions": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "labeledClicks": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "navClicks": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "topUnlabeled": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "clicks": {},
+              "label": {}
+            }
+          }
+        },
+        "unlabeledShare": {
+          "type": [
+            "null",
+            "number"
+          ]
+        }
+      }
+    },
+    "operations": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "cloudflare": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "daysInWindow": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "latestDate": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "r2ClassAOps": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "r2ClassBOps": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "r2EgressMb": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "r2StorageGb": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "violationTitles": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "violationsBySeverity": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "info": {},
+                "warning": {}
+              }
+            },
+            "workersErrorRate": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "workersRequests": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "improvements": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "cloudflare": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "psi": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "sns": {
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          }
+        },
+        "psi": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "daysInWindow": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "latestDate": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "measurementFailures": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "mobileMedianScore": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "urlsMeasured": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "urlsWithErrors": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "worstMobile": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            }
+          }
+        },
+        "sns": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "latestDate": {},
+            "platforms": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {}
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "topPosts": {
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemaVersion": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "sources": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "customDimensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "detail": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        },
+        "effectVerdicts": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "detail": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        },
+        "ga4": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "detail": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodEnd": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodStart": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        },
+        "ga4Settings": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "detail": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "warnings": {
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          }
+        },
+        "improvements": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "detail": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "week": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "workContext": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "baseline": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "desktopShare": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "sessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "workdayHoursShare": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "qualifyingSessions": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "top": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "avgEngagementSec": {},
+              "desktopShare": {},
+              "landingPage": {},
+              "sessions": {},
+              "workdayHoursShare": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "asOf",
+    "dimensionGaps",
+    "engine",
+    "generatedAt",
+    "improvements",
+    "journey",
+    "kpiTree",
+    "navCoverage",
+    "operations",
+    "schemaVersion",
+    "sources",
+    "week",
+    "workContext"
+  ]
+}

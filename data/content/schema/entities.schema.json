@@ -68,7 +68,8 @@
             "geo",
             "sharedMetric",
             "tag",
-            "themeContext"
+            "themeContext",
+            "sameMetric"
           ]
         }
       }

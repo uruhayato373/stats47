@@ -189,7 +189,7 @@ async function main() {
       areaCode: code,
       areaName: name,
       yearCode: "2025",
-      yearName: "2025",
+      yearName: "2025年",
       value,
       unit: "軒",
     };

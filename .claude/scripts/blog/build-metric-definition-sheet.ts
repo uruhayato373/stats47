@@ -41,8 +41,20 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
  */
 function surveyLabel(c: MetricConfig): string {
   const { originalSurveys } = resolveSurveyLinkage(c, METRICS_REGISTRY);
-  if (originalSurveys.length) return originalSurveys.map((s) => s.name).join(" / ");
-  return c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
+  const main = originalSurveys.length
+    ? originalSurveys.map((s) => s.name).join(" / ")
+    : c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
+  return main + supplementalLabel(c);
+}
+
+/** 補助の出典から取る年を添える。記事がその年の値の出典を主の出典と取り違えないため (METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01) */
+export function supplementalLabel(c: Pick<MetricConfig, "supplementalSources">): string {
+  const parts = (c.supplementalSources ?? []).map((s) => {
+    const src = s.source as { displayName?: string; statsDataId?: string };
+    const table = src.statsDataId ? ` 表${src.statsDataId}` : "";
+    return `${s.years.map((y) => `${y}年`).join("・")}は${src.displayName ?? "補助の出典"}${table}`;
+  });
+  return parts.length ? ` (${parts.join(" / ")})` : "";
 }
 
 function argAll(name: string): string[] {
@@ -94,11 +106,22 @@ function yearType(c: MetricConfig): string {
   return "未宣言 (config に yearFormat 無し。出典で確認)";
 }
 
+const NEGATION_AFTER = /^.{0,2}(ではな|でな|を除|を含まない|は含まない)/;
+
+/** 語が 1 回でも否定されずに出てくるか (直後 2 文字以内に否定が続く出現は数えない)。 */
+export function mentionsAffirmatively(text: string, word: string): boolean {
+  for (let i = text.indexOf(word); i !== -1; i = text.indexOf(word, i + 1)) {
+    if (!NEGATION_AFTER.test(text.slice(i + word.length, i + word.length + 8))) return true;
+  }
+  return false;
+}
+
 function scope(c: MetricConfig): string {
   const text = `${c.subtitle ?? ""} ${c.description ?? ""} ${c.note ?? ""}`;
   const hits = new Set<string>();
   for (const w of ["二人以上の世帯", "二人以上世帯", "勤労者世帯", "単身世帯", "総世帯", "都道府県庁所在市", "県庁所在市", "事業所", "企業", "一般労働者", "男女計", "人口10万人当たり", "人口千人当たり", "1世帯当たり", "1人当たり", "全国=100", "指数", "構成比", "割合"]) {
-    if (text.includes(w)) hits.add(w);
+    // 「法人企業数ではなく」のように否定して書いた語は対象に数えない (METRIC-DAIRY-CONFIG-01)
+    if (mentionsAffirmatively(text, w)) hits.add(w);
   }
   const calc = c.calculation;
   if (calc?.isCalculated && calc.type === "ratio") {

@@ -14,6 +14,10 @@
       "priority": 100,
       "label": "この記事で使ったデータ"
     },
+    "sameMetric": {
+      "priority": 105,
+      "label": "同じ指標を別の地域単位で比べる"
+    },
     "geo": {
       "priority": 95,
       "label": "地図と途中計算で確かめる"
@@ -51,7 +55,10 @@
     "ict": "tag:t-f415bf7b07a9"
   },
   "excludedArticleTagIdsByKind": {
-    "area": ["tag:t-a8cd52d0d273", "tag:t-4fa06acf0d1d"]
+    "area": [
+      "tag:t-a8cd52d0d273",
+      "tag:t-4fa06acf0d1d"
+    ]
   },
   "links": []
 }

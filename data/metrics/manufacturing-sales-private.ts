@@ -26,7 +26,7 @@ export const manufacturingSalesPrivate: MetricConfig = {
     "from": 2020,
     "to": 2020,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "calculation": {
     "normalizationOptions": [
       {

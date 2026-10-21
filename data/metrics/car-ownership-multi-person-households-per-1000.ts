@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const carOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "car-ownership-multi-person-households-per-1000",
   "title": "自動車所有数量",
+  "subtitle": "千世帯当たり",
   "unit": "台",
   "category": "ict",
   "source": {
@@ -28,7 +29,7 @@ export const carOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
       2014,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

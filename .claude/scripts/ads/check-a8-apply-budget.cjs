@@ -63,12 +63,9 @@ function jstDate(raw) {
 
 /** dateStr を含む週の月曜 (JST)。 */
 function isoWeekStart(dateStr) {
-  // 正午 JST を基準にする (00:00 JST は前日 15:00 UTC で getUTCDay が前日にずれるため)。
-  const noon = new Date(`${dateStr}T12:00:00+09:00`);
-  const dow = (noon.getUTCDay() + 6) % 7; // 月=0 ... 日=6
-  const monday = new Date(noon.getTime() - dow * 24 * 60 * 60 * 1000);
-  const jst = new Date(monday.getTime() + 9 * 60 * 60 * 1000);
-  return jst.toISOString().slice(0, 10);
+  // dateStr は JST の日付。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const { isoWeekOf, isoWeekRange } = require("../metrics/lib/periods.mjs");
+  return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 
 function weekAppliedCount(catalog, dateStr) {

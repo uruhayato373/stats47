@@ -1,0 +1,903 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "週次収益 (NSM) の snapshot",
+  "description": "data/nsm/weekly-snapshots/<週>.json の形状契約。全週のファイルから推論した。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "type": "object",
+  "properties": {
+    "anchor": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "finalized7d": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "ga4": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "generatedAt": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "isFinalized": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "kpis": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "activeUsers": {},
+                "engagedSessions": {},
+                "sessions": {}
+              }
+            },
+            "limitations": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "periodEnd": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodStart": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "pollution": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "jpSessions": {},
+                "pollutedPct": {},
+                "pollutedSessions": {},
+                "rawSessions": {}
+              }
+            },
+            "source": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "windowDays": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "gsc": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "coverage": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "expectedCount": {},
+                "missingDates": {},
+                "presentCount": {},
+                "status": {}
+              }
+            },
+            "generatedAt": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "insufficientReason": {},
+            "isFinalized": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "kpis": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "clicks": {},
+                "ctr": {},
+                "impressions": {},
+                "position": {}
+              }
+            },
+            "limitations": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "periodEnd": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodStart": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "source": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "windowDays": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ga4": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "channels": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "channel": {},
+              "prevEngagedSessions": {},
+              "prevSessions": {},
+              "prevUsers": {},
+              "thisEngagedSessions": {},
+              "thisEngagementRate": {},
+              "thisSessions": {},
+              "thisUsers": {},
+              "userDelta": {},
+              "userDeltaPct": {}
+            },
+            "required": [
+              "channel"
+            ]
+          }
+        },
+        "organic": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "channel": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "prevEngagedSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevUsers": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisEngagedSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisEngagementRate": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisUsers": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "userDelta": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "userDeltaPct": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "pollution": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "jpSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "pollutedPct": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "pollutedSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "rawSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "slice": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "total": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "engagedSessionDelta": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "engagedSessionDeltaPct": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevEngagedSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevUsers": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisEngagedSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisSessions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisUsers": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "userDelta": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "userDeltaPct": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "gsc": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "coverage": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "finalized7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "expectedCount": {},
+                "missingDates": {},
+                "presentCount": {},
+                "status": {}
+              }
+            },
+            "previous7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "expectedCount": {},
+                "missingDates": {},
+                "presentCount": {},
+                "status": {}
+              }
+            }
+          }
+        },
+        "insufficientReason": {},
+        "kpiComplete": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "topQueries": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "clicks": {},
+              "ctr": {},
+              "impressions": {},
+              "position": {},
+              "query": {}
+            }
+          }
+        },
+        "total": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "clickDelta": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "clickDeltaPct": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "impressionDelta": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevClicks": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevCtr": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevImpressions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "prevPosition": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisClicks": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisCtr": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisImpressions": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "thisPosition": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "previous7d": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "ga4": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "generatedAt": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "isFinalized": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "kpis": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "activeUsers": {},
+                "engagedSessions": {},
+                "sessions": {}
+              }
+            },
+            "limitations": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "periodEnd": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodStart": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "source": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "windowDays": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "gsc": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "coverage": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "expectedCount": {},
+                "missingDates": {},
+                "presentCount": {},
+                "status": {}
+              }
+            },
+            "generatedAt": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "isFinalized": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "kpis": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "clicks": {},
+                "ctr": {},
+                "impressions": {},
+                "position": {}
+              }
+            },
+            "limitations": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {}
+            },
+            "periodEnd": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "periodStart": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "source": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "status": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "windowDays": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "psi": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "reason": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "skipped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "ranges": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "anchor": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "delayDays": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "adsense": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "ga4": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "gsc": {
+              "type": [
+                "null",
+                "number"
+              ]
+            }
+          }
+        },
+        "ga4": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "finalized7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "periodEnd": {},
+                "periodStart": {},
+                "windowDays": {}
+              }
+            },
+            "prev": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "end": {},
+                "start": {}
+              }
+            },
+            "previous7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "periodEnd": {},
+                "periodStart": {},
+                "windowDays": {}
+              }
+            },
+            "this": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "end": {},
+                "start": {}
+              }
+            }
+          }
+        },
+        "gsc": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "finalized7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "periodEnd": {},
+                "periodStart": {},
+                "windowDays": {}
+              }
+            },
+            "prev": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "end": {},
+                "start": {}
+              }
+            },
+            "previous7d": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "periodEnd": {},
+                "periodStart": {},
+                "windowDays": {}
+              }
+            },
+            "this": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "end": {},
+                "start": {}
+              }
+            }
+          }
+        },
+        "weekId": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "schemaVersion": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "week": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "weekId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "week_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "year": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  },
+  "required": [
+    "ga4",
+    "generated_at",
+    "gsc",
+    "notes",
+    "psi",
+    "ranges",
+    "week",
+    "week_id",
+    "year"
+  ]
+}

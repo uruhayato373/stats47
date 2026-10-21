@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const certifiedChildcareCenterEducationCostPerStudent: MetricConfig = {
   "key": "certified-childcare-center-education-cost-per-student",
   "title": "幼保連携型認定こども園教育費",
+  "subtitle": "在園者1人当たり",
   "unit": "円",
   "category": "educationsports",
   "source": {

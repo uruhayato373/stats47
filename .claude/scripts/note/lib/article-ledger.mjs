@@ -27,10 +27,18 @@ export function readMagazineLedger(root = LEDGER_ROOT) {
 export function validateArticleLedger(ledger, magazines) {
   if (!validateArticleShape(ledger)) throw Error(`note articles schema: ${ajv.errorsText(validateArticleShape.errors)}`);
   const seen = new Set();
+  // 同じ題名は許す: note 上に同じ原稿が別 URL で複数回公開された記事があり (2026-10-21 実測 21 組)、
+  // 実在する投稿の記録を消せないため。1 つの note 記事 (URL) を 2 行で持つことは禁止する
+  const seenUrls = new Map();
   const magazineKeys = new Set(magazines.magazines.map((m) => m.key));
   for (const article of ledger.articles) {
     if (seen.has(article.key)) throw Error(`note articles: duplicate key ${article.key}`);
     seen.add(article.key);
+    if (article.noteUrl) {
+      const other = seenUrls.get(article.noteUrl);
+      if (other) throw Error(`note articles: ${article.key} and ${other} share noteUrl ${article.noteUrl}`);
+      seenUrls.set(article.noteUrl, article.key);
+    }
     if (article.magazine !== null && !magazineKeys.has(article.magazine))
       throw Error(`note articles: ${article.key} refers to unknown magazine ${article.magazine}`);
   }

@@ -16,7 +16,6 @@ export * from "./evidence-lenses";
 export * from "./population-pyramid-deps";
 export * from "./chart-color-role";
 export * from "./stat-series-ref";
-export * from "./chart-dependencies";
 export * from "./faq-markdown";
 export * from "./theme-metric-content";
 export * from "./catalog-sections";

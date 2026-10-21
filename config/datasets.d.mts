@@ -7,6 +7,10 @@ export interface Dataset {
   description: string;
   retain?: string;
   planned?: boolean;
+  /** 形状契約 (JSON Schema) のパス */
+  schema?: string;
+  /** 正本を置く private R2 の prefix */
+  r2State?: string;
 }
 export declare const KINDS: Record<string, string>;
 export declare const TARGETS: Record<string, { dir: string; label: string }>;

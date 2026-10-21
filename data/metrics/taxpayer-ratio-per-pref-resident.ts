@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const taxpayerRatioPerPrefResident: MetricConfig = {
   "key": "taxpayer-ratio-per-pref-resident",
   "title": "納税義務者割合",
+  "subtitle": "都道府県民1人当たり",
   "description": "個人の市町村民税所得割の納税義務者数を総人口で割り、100倍した割合。",
   "note": "分母は就業者や成人人口ではなく、子どもを含む総人口。所得割の納税義務者だけを数えるため、何らかの税を納める住民全体の割合ではない。",
   "unit": "％",

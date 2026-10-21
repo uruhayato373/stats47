@@ -9,7 +9,7 @@
  *   - overview/daily/devices/units/formats-platforms/placements-platforms/
  *     bid-types-platforms/traffic-sources/countries/pages.csv
  *   - manifest.json … job 別の期間 metadata・status・limitations
- * 認証: OAuth 2.0 (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN)
+ * 認証: OAuth 2.0 (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN。クライアント生成は ../lib/google-client.cjs)
  * AdSense account: env GOOGLE_ADSENSE_ACCOUNT_ID (例 pub-7995274743017484)
  *
  * 期間契約 (periods.mjs /
@@ -22,11 +22,11 @@
  * 401 invalid_grant を検知した場合は refresh token の再発行が必要。
  */
 
-import { google } from "googleapis";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
+import { createAdsenseClient } from "../lib/google-client.cjs";
 import { resolvePeriods, addDays, expectedDates, assessDailyCoverage } from "./lib/periods.mjs";
 import {
   REPORT_JOBS,
@@ -171,9 +171,7 @@ async function main() {
   const refreshToken = requireEnv("GOOGLE_ADSENSE_REFRESH_TOKEN");
   const accountId = requireEnv("GOOGLE_ADSENSE_ACCOUNT_ID");
 
-  const oauth2Client = new google.auth.OAuth2(clientId, clientSecret);
-  oauth2Client.setCredentials({ refresh_token: refreshToken });
-  const adsense = google.adsense({ version: "v2", auth: oauth2Client });
+  const adsense = createAdsenseClient({ clientId, clientSecret, refreshToken });
   const account = `accounts/${accountId}`;
 
   mkdirSync(outDir, { recursive: true });

@@ -69,7 +69,7 @@ export function isoWeekOf(dateStr) {
   const dayNum = d.getUTCDay() || 7;
   d.setUTCDate(d.getUTCDate() + 4 - dayNum);
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil(((d - yearStart) / DAY_MS + 1) / 7);
+  const weekNo = Math.ceil(((d.getTime() - yearStart.getTime()) / DAY_MS + 1) / 7);
   return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
 }
 
@@ -89,7 +89,7 @@ export function isoWeekRange(week) {
   const sunday = new Date(monday);
   sunday.setUTCDate(monday.getUTCDate() + 6);
   const mondayStr = fmt(monday);
-  // 存在しない週 (例 2026-W53) を弾く: 月曜の ISO 週が一致しなければ不正
+  // 存在しない週 (例 2025-W53。2026 年は 53 週ある) を弾く: 月曜の ISO 週が一致しなければ不正
   if (isoWeekOf(mondayStr) !== `${year}-W${String(wk).padStart(2, "0")}`) {
     throw new Error(`ISO week does not exist: ${week}`);
   }

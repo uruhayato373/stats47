@@ -13,14 +13,9 @@
  * 関連: docs/01_技術設計/02_データアーキテクチャ.md (metrics = Reference/再生成),
  *       コミット 67168f54 が残した follow-up の完成。
  */
-import {
-  buildRecipe,
-  resolveAttribution,
-  resolveMetricProvenance,
-  type MetricConfig,
-  type MetricRegistry,
-  type ProvenanceSurvey,
-} from "@stats47/data-configs";
+import { resolveAttribution, resolveMetricProvenance } from "@stats47/data-configs/provenance";
+import { buildRecipe } from "@stats47/data-configs/recipe";
+import type { MetricConfig, MetricRegistry, ProvenanceSurvey } from "@stats47/data-configs";
 import {
   resolveRankingReaderLabel,
   resolveRankingHook,

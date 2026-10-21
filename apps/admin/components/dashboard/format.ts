@@ -2,6 +2,7 @@
  * dashboard 表示用の純粋フォーマッタ群 (旧 dashboard.html の esc/num/spark/wow/overdue/dueKey を移植)。
  * DOM に依存しないので JSX から直接呼べる。
  */
+import { isoWeekRange } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
 
 export function num(n: number | null | undefined): string {
   return (n ?? 0).toLocaleString("ja-JP");
@@ -66,14 +67,8 @@ export function statusBadgeClass(status: string): string {
 export function dueKey(due: string | null | undefined): string {
   const s = String(due ?? "").trim();
   if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
-  const w = s.match(/^(\d{4})-W(\d{2})$/);
-  if (w) {
-    const year = Number(w[1]);
-    const week = Number(w[2]);
-    const jan4 = new Date(Date.UTC(year, 0, 4));
-    const mon = new Date(jan4);
-    mon.setUTCDate(jan4.getUTCDate() - (jan4.getUTCDay() || 7) + 1 + (week - 1) * 7);
-    return mon.toISOString().slice(0, 10);
+  if (/^\d{4}-W\d{2}$/.test(s)) {
+    try { return isoWeekRange(s).monday; } catch { return "9999-12-31"; } // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
   }
   return "9999-12-31";
 }

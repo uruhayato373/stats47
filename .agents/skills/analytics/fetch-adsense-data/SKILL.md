@@ -93,16 +93,12 @@ node -e "require('dotenv')" 2>/dev/null && echo "OK" || npm install -D dotenv
 ### Step 2: データ取得スクリプト実行（ad hoc モード）
 
 ```javascript
-const { google } = require('googleapis');
 require('dotenv').config({ path: '.env.local' });
+// 認証とクライアントは共通モジュールが作る (プロジェクトルートで実行)
+const { createAdsenseClient } = require('./.claude/scripts/lib/google-client.cjs');
 
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_ADSENSE_CLIENT_ID,
-  process.env.GOOGLE_ADSENSE_CLIENT_SECRET
-);
-oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_ADSENSE_REFRESH_TOKEN });
-
-const adsense = google.adsense({ version: 'v2', auth: oauth2Client });
+const adsense = createAdsenseClient();
+if (!adsense) throw new Error('GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN が無い');
 const ACCOUNT = `accounts/${process.env.GOOGLE_ADSENSE_ACCOUNT_ID}`;
 
 async function main() {

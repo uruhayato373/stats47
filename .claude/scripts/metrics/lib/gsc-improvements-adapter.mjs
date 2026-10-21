@@ -3,7 +3,7 @@
  *
  * ブログ wave (measure-gsc-impact.mjs) 以外の GSC 施策は、これまで機械判定の対象外で、
  * 毎回人が GSC を見て判断していた。行に次の 3 つが揃った施策だけを subject にする (散文から推測しない):
- *   - `[gsc-page: /path]`       対象ページのパス前方一致 (複数可)。フラグメントは除いて照合する
+ *   - `[gsc-page: /path]`       対象ページのパス完全一致 (複数可)。`/blog/` のように `/` で終えるとその配下すべて。フラグメントは除いて照合する
  *   - `デプロイ済 YYYY-MM-DD`     engine.extractDeployDate の既存書式。before 窓の基準
  *   - `[target: +N clicks]`      engine.extractTarget の既存書式。無ければ insufficient-target で pending
  * 計測値は週次 GSC snapshot (rolling28d の pages.csv) の clicks 合計、impressions は標本ガードの入力。
@@ -33,12 +33,20 @@ function pathnameOf(url) {
   try { return new URL(url).pathname; } catch { return String(url).split(/[?#]/)[0]; }
 }
 
-/** pages.csv の行群から、prefix のどれかに前方一致するページの clicks / impressions を合計する。 */
+/**
+ * 目印のパスにページが当たるか。完全一致が既定で、`/` で終わる目印だけ配下を前方一致で含める。
+ * 前方一致を既定にすると `/blog/x` に `/blog/x-vs-y` の実績が混ざる (2026-10-20 EFFECT-GSC-PAGE-PREFIX-MATCH-01)。
+ */
+export function pageMatches(pagePath, marker) {
+  return marker.endsWith("/") ? pagePath.startsWith(marker) : pagePath === marker;
+}
+
+/** pages.csv の行群から、目印のどれかに当たるページの clicks / impressions を合計する。 */
 export function sumPages(rows, prefixes) {
   let clicks = 0, impressions = 0;
   for (const row of rows) {
     const path = pathnameOf(row.page);
-    if (!prefixes.some((p) => path.startsWith(p))) continue;
+    if (!prefixes.some((p) => pageMatches(path, p))) continue;
     clicks += Number(row.clicks) || 0;
     impressions += Number(row.impressions) || 0;
   }

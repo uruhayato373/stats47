@@ -1,4 +1,4 @@
-import { GIS_DATASETS_BY_ID } from '@stats47/gis/mlit-ksj';
+import { GIS_DATASETS_BY_ID } from '@stats47/gis/mlit-ksj/catalog';
 
 import { ContentDisclosure } from '@/components/content';
 

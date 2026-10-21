@@ -1,4 +1,4 @@
-import type { RankingValue } from "../types";
+import type { RankingItem, RankingValue } from "../types";
 
 /**
  * 都道府県 × 年度の値を CSV 文字列に整形する。
@@ -11,7 +11,7 @@ import type { RankingValue } from "../types";
  *
  * UTF-8 + BOM 付与で Excel の文字化けを防ぐ。
  */
-export function buildSingleSeriesCsv(values: RankingValue[]): string {
+export function buildSingleSeriesCsv(values: RankingValue[], citation?: CsvCitation): string {
   const BOM = "﻿";
 
   const yearsMap = new Map<string, string>();
@@ -47,7 +47,7 @@ export function buildSingleSeriesCsv(values: RankingValue[]): string {
     return [area.areaCode, area.areaName, ...yearValues];
   });
 
-  return BOM + [header, ...rows].map(toCsvLine).join("\n");
+  return BOM + [header, ...rows].map(toCsvLine).join("\n") + citationFooter(citation);
 }
 
 interface BasisSeries {
@@ -68,7 +68,7 @@ interface BasisSeries {
  *   面積100km²あたり_2024年,...
  * ```
  */
-export function buildAllBasesCsv(seriesList: BasisSeries[]): string {
+export function buildAllBasesCsv(seriesList: BasisSeries[], citation?: CsvCitation): string {
   const BOM = "﻿";
 
   // 全系列を通じた year コード → year ラベル
@@ -119,7 +119,50 @@ export function buildAllBasesCsv(seriesList: BasisSeries[]): string {
     return row;
   });
 
-  return BOM + [header, ...rows].map(toCsvLine).join("\n");
+  return BOM + [header, ...rows].map(toCsvLine).join("\n") + citationFooter(citation);
+}
+
+/**
+ * CSV の末尾に置く出典と加工の表記。e-Stat 利用規約の表記例 (https://www.e-stat.go.jp/terms-of-use) に沿い、
+ * 出典・加工したこと・掲載ページ・作成日を残す (DOWNLOAD-CSV-CITATION-01: 卒論・レポートで引用する読者が最多)。
+ * 先頭行は列見出しのまま保つため、表の後に空行を挟んで置く。
+ */
+export interface CsvCitation {
+  readonly title?: string | null;
+  readonly attribution?: RankingItem["attribution"];
+  readonly source?: RankingItem["source"] | null;
+  readonly dataSourceId?: string | null;
+  readonly pageUrl: string;
+  /** YYYY-MM-DD */
+  readonly createdOn: string;
+}
+
+function sourceText(c: CsvCitation): string | null {
+  const surveys = (c.attribution?.originalSurveys ?? []).map((s) => s.name).join("・");
+  const compilation = c.attribution?.compilation;
+  if (compilation) {
+    const name = compilation.url ? `${compilation.name}（${compilation.url}）` : compilation.name;
+    return surveys ? `${name}（原典: ${surveys}）` : name;
+  }
+  if (surveys) return surveys;
+  if (c.source?.name) return c.source.url ? `${c.source.name}（${c.source.url}）` : c.source.name;
+  return null;
+}
+
+export function buildCsvCitationRows(c: CsvCitation): string[][] {
+  const rows: string[][] = [];
+  if (c.title) rows.push(["指標", c.title]);
+  rows.push(["出典", sourceText(c) ?? "掲載ページの出典欄を参照"]);
+  if (c.dataSourceId === "estat") rows.push(["統計の取得元", "政府統計の総合窓口(e-Stat)（https://www.e-stat.go.jp/）"]);
+  rows.push(["加工", "上記の統計を stats47（https://stats47.jp/）が加工して作成。人口・面積当たりの値は stats47 が算出"]);
+  rows.push(["掲載ページ", c.pageUrl]);
+  rows.push(["作成日", c.createdOn]);
+  return rows;
+}
+
+function citationFooter(citation: CsvCitation | undefined): string {
+  if (!citation) return "";
+  return "\n\n" + buildCsvCitationRows(citation).map(toCsvLine).join("\n");
 }
 
 function escapeCsvCell(val: string | number): string {

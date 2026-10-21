@@ -129,6 +129,27 @@ const SITE_IDENTITY_ALLOWED = new Map([
   ["apps/web/scripts/generate-geo-source-thumbnails.ts", "画像生成器の rendererSources に含まれ、編集すると描画ハッシュが変わって既存画像が全て再生成対象になる"],
 ]);
 
+// ISO 週・週の月曜の自前計算 (2026-10-21 SCRIPT-ISO-WEEK-UNIFY-01)。正本は .claude/scripts/metrics/lib/periods.mjs
+// (JST の暦日で数える isoWeekOf / isoWeekRange / jstDateOf)。22 ファイル 27 か所の自前実装が UTC・実行マシンの時刻・JST で
+// まちまちに数え、月曜 0〜9 時 (JST) に前の週を返していたのを寄せた後の再発止め。1 月 4 日を基準にする計算・日曜を 7 とする計算・
+// 月曜を 0 とする計算のどれかを、正本の外のコードに書いたら止める。週以外の用途で要るときは理由を書いて ISO_WEEK_ALLOWED に足す。
+const ISO_WEEK_LOCAL_RE = /Date\.UTC\([^,()]+,\s*0,\s*4\)|get(?:UTC)?Day\(\)\s*\|\|\s*7|\(\s*[\w.]+\.get(?:UTC)?Day\(\)\s*\+\s*6\s*\)\s*%\s*7/;
+const ISO_WEEK_ALLOWED = new Map([
+  [".claude/scripts/metrics/lib/periods.mjs", "ISO 週・JST の暦日の正本"],
+]);
+
+// Google API の認証・クライアント生成の自前実装 (2026-10-21 SCRIPT-GOOGLE-CLIENT-UNIFY-01)。正本は .claude/scripts/lib/google-client.cjs
+// (鍵の探し方・スコープ・読み取りの POST だけを再試行する設定を 1 か所で決める)。15 ファイルが鍵の探し方 4 通り・自前の再試行なしで
+// ばらばらに組んでいたのを寄せた後の再発止め。GoogleAuth / OAuth2 / JWT を正本の外で作ったら止める。
+const GOOGLE_AUTH_LOCAL_RE = /\bgoogle\.auth\.(?:GoogleAuth|OAuth2|JWT|fromJSON)\b|\bnew\s+(?:GoogleAuth|OAuth2Client|JWT)\s*\(/;
+// スキル・エージェントの手順書のコード例も止める (SKILL-GOOGLE-SNIPPET-UNIFY-01)。写して実行するたびに自前の認証が生まれるため。
+// 正本の .claude だけを見る。Codex 用の写し (.agents/skills・.codex/agents) は sync-codex-mirror.cjs --check が同一を保証する。
+const GOOGLE_AUTH_DOC_RE = /^\.claude\/(?:skills|agents)\/.*\.md$/;
+const GOOGLE_AUTH_ALLOWED = new Map([
+  [".claude/scripts/lib/google-client.cjs", "Google API の認証とクライアント生成の正本"],
+  [".claude/scripts/adsense/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
+]);
+
 function inspect(file) {
   const results = [];
   const relative = rel(file);
@@ -211,6 +232,16 @@ function inspect(file) {
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
         /\bwrangler\s+d1\b|\bgetDrizzle\s*\(|@stats47\/database\/server/.test(line))
       results.push(finding("D1_RUNTIME_RETURN", file, number, "廃止済みの永続D1 runtime操作候補", line));
+
+    if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !ISO_WEEK_ALLOWED.has(relative) &&
+        !/^\s*(?:\/\/|\/\*|\*)/.test(line) && ISO_WEEK_LOCAL_RE.test(line))
+      results.push(finding("ISO_WEEK_LOCAL", file, number,
+        "ISO 週・週の月曜の自前計算。.claude/scripts/metrics/lib/periods.mjs の isoWeekOf / isoWeekRange / jstDateOf を使う", line));
+
+    if (!isTest && (/\.[cm]?[jt]sx?$/.test(relative) || GOOGLE_AUTH_DOC_RE.test(relative)) && !GOOGLE_AUTH_ALLOWED.has(relative) &&
+        !/^\s*(?:\/\/|\/\*|\*)/.test(line) && GOOGLE_AUTH_LOCAL_RE.test(line))
+      results.push(finding("GOOGLE_AUTH_LOCAL", file, number,
+        "Google API の認証の自前実装。.claude/scripts/lib/google-client.cjs の create*Client を使う", line));
 
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))

@@ -73,10 +73,9 @@ function appliedDates(catalog, aspName) {
 
 /** その日を含む週の月曜 (JST 基準の日付文字列で計算する)。 */
 function isoWeekStart(dateStr) {
-  const d = new Date(`${dateStr}T00:00:00Z`);
-  const dow = (d.getUTCDay() + 6) % 7; // 月曜=0
-  d.setUTCDate(d.getUTCDate() - dow);
-  return d.toISOString().slice(0, 10);
+  // dateStr は JST の日付。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const { isoWeekOf, isoWeekRange } = require("../metrics/lib/periods.mjs");
+  return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 
 function applyBudget(catalog, aspName, dateStr, max) {

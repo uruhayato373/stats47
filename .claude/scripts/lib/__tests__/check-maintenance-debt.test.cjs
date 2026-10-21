@@ -143,6 +143,62 @@ test("パス付き URL・コメント・テストファイルのサイト識別�
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
 });
+// SCRIPT-ISO-WEEK-UNIFY-01: 週の計算は periods.mjs (JST) だけが持つ。自前で書くと UTC やマシンの時刻で数えて月曜の朝に前の週を返す。
+test("ISO 週・週の月曜の自前計算を ISO_WEEK_LOCAL として検出する", (t) => {
+  const root = fixture([
+    "const jan4 = new Date(Date.UTC(year, 0, 4));",
+    "const day = d.getUTCDay() || 7;",
+    "const dow = (d.getUTCDay() + 6) % 7;",
+    "const today = new Date().getDay();",
+  ].join("\n") + "\n");
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "ISO_WEEK_LOCAL");
+  assert.deepEqual(found.map((item) => item.line), [1, 2, 3], "曜日を読むだけの行は止めない");
+});
+test("正本の periods.mjs・コメント・テストの週の計算は検出しない", (t) => {
+  const root = fixture("// 旧実装は d.getUTCDay() || 7 で数えていた\n");
+  fs.mkdirSync(path.join(root, ".claude/scripts/metrics/lib/__tests__"), { recursive: true });
+  fs.writeFileSync(path.join(root, ".claude/scripts/metrics/lib/periods.mjs"), "const dayNum = d.getUTCDay() || 7;\n");
+  fs.writeFileSync(path.join(root, ".claude/scripts/metrics/lib/__tests__/periods.test.mjs"), "const jan4 = new Date(Date.UTC(y, 0, 4));\n");
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+// SCRIPT-GOOGLE-CLIENT-UNIFY-01: Google API の認証は google-client.cjs だけが持つ。自前で組むと鍵の探し方と再試行がずれる。
+test("Google API の認証の自前実装を GOOGLE_AUTH_LOCAL として検出する", (t) => {
+  const root = fixture([
+    "const auth = new google.auth.GoogleAuth({ keyFile, scopes });",
+    "const oauth = new google.auth.OAuth2(id, secret);",
+    "const jwt = new JWT({ email, key });",
+    "const client = createGa4DataClient();",
+    "// 旧実装は new google.auth.GoogleAuth で組んでいた",
+  ].join("\n") + "\n");
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "GOOGLE_AUTH_LOCAL");
+  assert.deepEqual(found.map((item) => item.line), [1, 2, 3], "共通モジュールの呼び出しとコメントは止めない");
+});
+test("スキル・エージェントの手順書 (.claude) のコード例の自前認証も検出し、他の文書は見ない", (t) => {
+  const root = fixture("export const ok = 1;\n");
+  const snippet = "```javascript\nconst auth = new google.auth.GoogleAuth({ keyFile, scopes });\n```\n";
+  for (const file of [".claude/skills/analytics/x/SKILL.md", ".claude/agents/x.md", ".claude/rules/x.md"]) {
+    fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), snippet);
+  }
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const files = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "GOOGLE_AUTH_LOCAL").map((item) => item.file).sort();
+  assert.deepEqual(files, [".claude/agents/x.md", ".claude/skills/analytics/x/SKILL.md"]);
+});
+test("正本の google-client.cjs・トークン発行ツール・テストの認証は検出しない", (t) => {
+  const root = fixture("export const ok = 1;\n");
+  for (const file of [".claude/scripts/lib/google-client.cjs", ".claude/scripts/adsense/oauth-setup.js", ".claude/scripts/lib/__tests__/google-client.test.cjs"]) {
+    fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), "const auth = new google.auth.GoogleAuth({ credentials, scopes });\n");
+  }
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
 test("チェッカーが変わったらローカルの stat キャッシュを使わない (新ルールが未変更ファイルにも当たる)", (t) => {
   const root = fixture(`const R2 = "${SITE_R2}";\n`);
   const cache = path.join(root, ".local/maintenance-debt-cache.json");

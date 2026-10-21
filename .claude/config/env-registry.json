@@ -1373,6 +1373,13 @@
       ]
     },
     {
+      "name": "WEB_DEV_BUNDLER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "WEB_DEV_HOST",
       "visibility": "server",
       "contexts": [
@@ -1389,13 +1396,6 @@
     },
     {
       "name": "XXX",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "EVENT",
       "visibility": "server",
       "contexts": [
         "process"

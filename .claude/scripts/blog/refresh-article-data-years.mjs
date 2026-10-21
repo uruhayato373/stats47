@@ -36,6 +36,7 @@ import {
   planChartRefresh,
   rebuildChartData,
   rebuildSource,
+  findStaleSourceFields,
 } from "./lib/refresh-chart-year.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -155,7 +156,12 @@ async function main() {
   const yearCount = (year) => markdown.split(`${year}年`).length - 1;
   for (const chart of refreshed) {
     const { data, notes } = rebuildChartData(chart.data, chart.partition, chart);
-    chart.notes = [...notes, `本文: ${chart.fromYear}年 ${yearCount(chart.fromYear)} 回 / ${chart.toYear}年 ${yearCount(chart.toYear)} 回`];
+    const staleFields = findStaleSourceFields(rebuildSource(chart.source, chart, fetchedAt), chart.fromYear);
+    chart.notes = [
+      ...notes,
+      ...(staleFields.length > 0 ? [`手作業: source.json の ${staleFields.join("・")} に ${chart.fromYear} 年の値が残る`] : []),
+      `本文: ${chart.fromYear}年 ${yearCount(chart.fromYear)} 回 / ${chart.toYear}年 ${yearCount(chart.toYear)} 回`,
+    ];
     if (!APPLY) continue;
     fs.writeFileSync(path.join(dataDir, `${chart.base}.json`), `${JSON.stringify(data, null, 2)}\n`);
     fs.writeFileSync(

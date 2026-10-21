@@ -14,6 +14,7 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { KNOWN_RANKING_KEYS } from "../src/config/known-ranking-keys";
 import { readRankingItemByKeyFromR2 } from "../src/repositories/ranking-item";
 import { calculateRankingValues } from "../src/services/calculate-ranking-values";
+import { decimalsOf, rankAtServedPrecision } from "../src/utils/rank-at-served-precision";
 import type { RankingItem } from "../src/types";
 
 interface ServedValue {
@@ -66,6 +67,11 @@ async function main() {
     }
 
     const servedByArea = new Map(servedValues.map((v) => [v.areaCode, v]));
+    // 配信値は表示桁に丸めた値で順位を付けるので、再計算も同じ桁に丸めてから順位を比べる
+    const atServedPrecision = rankAtServedPrecision(
+      computed.filter((c): c is typeof c & { value: number } => c.value !== null),
+      decimalsOf(servedValues.map((v) => v.value)),
+    );
     let rankDiff = 0;
     let valueDiff = 0;
     let nullValues = 0;
@@ -73,7 +79,7 @@ async function main() {
     for (const c of computed) {
       const s = servedByArea.get(c.areaCode);
       if (!s) continue;
-      if (c.rank !== s.rank) rankDiff++;
+      if ((atServedPrecision.get(c.areaCode)?.rank ?? c.rank) !== s.rank) rankDiff++;
       // ★null は比較から外して数える。JS の `null - x` は null を 0 に強制するので、
       //   そのまま計算すると差分が常に 100% になり、さらに `s.value / null` が
       //   Infinity になって「×Infinity 倍ずれ」という無意味な報告が出る。
@@ -82,7 +88,8 @@ async function main() {
         continue;
       }
       const denom = Math.max(Math.abs(s.value), 1e-9);
-      if (Math.abs(c.value - s.value) / denom > REL_TOL) {
+      const cValue = atServedPrecision.get(c.areaCode)?.value ?? c.value;
+      if (Math.abs(cValue - s.value) / denom > REL_TOL) {
         valueDiff++;
         if (c.value !== 0) sampleRatio = s.value / c.value;
       }

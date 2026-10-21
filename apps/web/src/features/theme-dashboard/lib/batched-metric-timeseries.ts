@@ -1,7 +1,8 @@
+import type { MetricTimeseriesResult } from '@/lib/aggregate-metric-timeseries';
+
 import {
   fetchMetricTimeseriesBatchAction,
   type MetricTimeseriesRequest,
-  type MetricTimeseriesResult,
 } from '../actions/fetch-metric-timeseries';
 
 import { createActionBatcher } from './action-batcher';

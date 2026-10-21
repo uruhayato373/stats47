@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**726 件** (最終更新: 2026-10-19)
+**729 件** (最終更新: 2026-10-20)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-20 | 📸 Instagram | area-carousel/45000 | 【都道府県データ】宮崎県、全国で何位？  全国トップクラス: 年平均気温 3位（19.3℃・2024年） 認定こども園数… | [🔗](https://www.instagram.com/p/DeuGa1zGqbw/) |
+| 2026-10-20 | 🧵 Threads | area/area-27000-profile | あなたの知る大阪は、データでも同じ姿ですか？ イチョウや吹田慈姑から、人口・経済・暮らしまで横断できます。 続きは👇 … | [🔗](https://www.threads.com/@stats47jp/post/DetaGosiDIs) |
+| 2026-10-20 | 🧵 Threads | ranking/post-office-count-per-100km2 | 105局・83局・52局。  100㎢あたりの郵便局数、上位3都府県は東京・大阪・神奈川。 最も少ない北海道は6.6局で… | [🔗](https://www.threads.com/@stats47jp/post/DesrzIxDREx) |
 | 2026-10-19 | 📸 Instagram | ranking-quiz/katsuobushi-consumption-quantity | 【都道府県クイズ】かつお節をいちばん多く買う県は？  A 鹿児島県 B 高知県 C 沖縄県  ヒントは2枚目、答えは3枚… | [🔗](https://www.instagram.com/p/DervKb2lO3K/) |
 | 2026-10-19 | 🧵 Threads | area/area-26000-profile | 京都の「らしさ」をデータでたどる。 県花しだれ桜（嵯峨ぎく・なでしこは府の草花）、丹後とり貝と玉露、統計ランキングを1ペ… | [🔗](https://www.threads.com/@stats47jp/post/DeqzBbbk2KN) |
 | 2026-10-19 | 🧵 Threads | ranking/travel-participation-rate-domestic | この1年で国内旅行をした人が多い県は？  1位東京41.7％、2位愛知39.9％、3位神奈川38.1％。 最も低い徳島は… | [🔗](https://www.threads.com/@stats47jp/post/DeqFOw9gLQg) |

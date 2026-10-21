@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const youthClassLectureCountPerMillion: MetricConfig = {
   "key": "youth-class-lecture-count-per-million",
   "title": "青少年学級・講座数",
+  "subtitle": "人口100万人当たり",
   "unit": "学級･講座",
   "category": "educationsports",
   "source": {

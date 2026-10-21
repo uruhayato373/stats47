@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const juvenileTheftOffenderArrestsPer10001419: MetricConfig = {
   "key": "juvenile-theft-offender-arrests-per-1000-14-19",
   "title": "少年窃盗犯検挙人員",
+  "subtitle": "14～19歳人口千人当たり",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {
@@ -34,7 +35,7 @@ export const juvenileTheftOffenderArrestsPer10001419: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

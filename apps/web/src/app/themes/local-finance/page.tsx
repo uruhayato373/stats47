@@ -24,6 +24,7 @@ import {
   ThemeIndicatorCatalogSection,
   ThemeSideNav,
   ThemeSwitcher,
+  THEME_SWITCHER_THEMES,
   ThemeDashboardClient,
   loadThemeData,
 } from '@/features/theme-dashboard/server';
@@ -121,14 +122,14 @@ export default async function LocalFinanceThemePage({
     >
       <PageShell
         leftRail={
-          <ThemeSideNav currentThemeKey="local-finance" pageLinks={pageLinks} />
+          <ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" pageLinks={pageLinks} />
         }
         leftRailNarrowBehavior="hide"
       >
         <ThemeAreaHeader themeTitle="地方財政" />
         {/* Regional selection shares the URL / Cookie provider with the other themes. */}
         <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
-          <ThemeSwitcher currentThemeKey="local-finance" />
+          <ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" />
           <div className="my-3">
             <PrefectureSelect className="w-full" />
           </div>

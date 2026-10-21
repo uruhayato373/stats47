@@ -71,7 +71,7 @@ try {
       if (!path) throw new Error('session_missing');
       seed = readFileSync(path, 'utf8');
     } else seed = process.env.MEASUREMENT_SESSION;
-    if (seed) bundle = JSON.parse(gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 }));
+    if (seed) bundle = JSON.parse(/** @type {any} */ (gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 })));
     if (!local) {
       const remote = await readVault(`${name}/session`);
       bundle = selectSessionBundle(bundle, remote);
@@ -130,12 +130,12 @@ try {
   if (name === 'a8') {
     const yesterday = new Date(Date.now() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
     await command('.claude/scripts/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
-    const marker = JSON.parse(readFileSync(join(ROOT, datasetPath("a8.ui-last-run"))));
+    const marker = JSON.parse(/** @type {any} */ (readFileSync(join(ROOT, datasetPath("a8.ui-last-run")))));
     if (marker.status !== 'ok' || marker.downloadedUnits !== 1 || marker.collectedAt < now) throw new Error('collection_incomplete');
     await command('.claude/scripts/ads/normalize-a8-csv.mjs', ['--run', marker.lastRun]);
     const normalized = join(ROOT, '.local/a8-ui', marker.lastRun, 'normalized');
     for (const file of readdirSync(normalized).filter(f => f.endsWith('.rejects.json'))) {
-      if (JSON.parse(readFileSync(join(normalized, file))).length) throw new Error('reject_rows');
+      if (JSON.parse(/** @type {any} */ (readFileSync(join(normalized, file)))).length) throw new Error('reject_rows');
     }
     capture(`.local/a8-ui/${marker.lastRun}`);
     for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`${datasetDir("affiliate.audits")}/${file}`);
@@ -146,8 +146,8 @@ try {
     await command('.claude/scripts/note/audit-note-covers.mjs', [], 360000, [1]);
     await command('.claude/scripts/note/fetch-note-metrics.mjs', ['--output-dir', join(work, 'note')], 360000, [2]);
     capture(`.local/authenticated-measurement/${name}-${runId}/note`);
-    const snapshot = JSON.parse(readFileSync(join(work, 'note/latest.json')));
-    const cover = JSON.parse(readFileSync(join(work, 'note/cover-metrics-latest.json')));
+    const snapshot = JSON.parse(/** @type {any} */ (readFileSync(join(work, 'note/latest.json'))));
+    const cover = JSON.parse(/** @type {any} */ (readFileSync(join(work, 'note/cover-metrics-latest.json'))));
     result.quality = { expectedRows: snapshot.coverage?.catalogPublished ?? null, observedRows: snapshot.coverage?.observed ?? null,
       missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
       paginationComplete: snapshot.coverage?.paginationComplete === true };
@@ -214,7 +214,7 @@ try {
   }
   if (!local) {
     if (existsSync(join(work, 'refreshed.json'))) {
-      await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(readFileSync(join(work, 'refreshed.json')))) });
+      await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(/** @type {any} */ (readFileSync(join(work, 'refreshed.json'))))) });
     }
   }
   result.status = 'pass';
@@ -241,7 +241,7 @@ try {
 if (!local) {
   // A complete account assertion can refresh authentication even when a report has missing rows.
   if (bundle && existsSync(join(work, 'refreshed.json.verified')) && existsSync(join(work, 'refreshed.json'))) {
-    try { await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(readFileSync(join(work, 'refreshed.json')))) }); }
+    try { await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(/** @type {any} */ (readFileSync(join(work, 'refreshed.json'))))) }); }
     catch { result.status = 'failed'; result.code = 'storage_error'; }
   }
 }

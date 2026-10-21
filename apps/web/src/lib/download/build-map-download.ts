@@ -22,6 +22,8 @@ const COORDINATE_DIGITS = 5;
 
 interface MapDownloadMeta {
   readonly rankingKey: string;
+  /** ランキングの表示名。マイマップのレイヤ名になるので、無いときだけ rankingKey を使う */
+  readonly title?: string | null;
   readonly pageUrl: string;
 }
 
@@ -120,6 +122,7 @@ export function buildMapGeoJson({ features, values, meta }: MapDownloadInput): F
           year: yearName,
           fill: cls === null ? NO_DATA_HEX : CLASS_COLORS_HEX[cls],
           rankingKey: meta.rankingKey,
+          title: meta.title ?? null,
           source: meta.pageUrl,
           boundarySource: MAP_BOUNDARY_ATTRIBUTION,
         },
@@ -161,6 +164,6 @@ export function buildMapKml(input: MapDownloadInput): string {
       return `<Placemark><name>${escapeXml(p.prefName)}</name><description>${escapeXml(describe(v, yearName, input.meta, precision))}</description><styleUrl>#c${styleIndex}</styleUrl><MultiGeometry>${polygons}</MultiGeometry></Placemark>`;
     })
     .join("");
-  const docName = `${input.meta.rankingKey}${yearName ? `（${yearName}）` : ""}`;
+  const docName = `${input.meta.title || input.meta.rankingKey}${yearName ? `（${yearName}）` : ""}`;
   return `<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>${escapeXml(docName)}</name><description>${escapeXml(`stats47 のランキングを都道府県の地図にしたものです。\n${input.meta.pageUrl}\n${MAP_BOUNDARY_ATTRIBUTION}`)}</description>${styles}${placemarks}</Document></kml>`;
 }

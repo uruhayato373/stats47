@@ -3,10 +3,19 @@ import { isYAxisConfig } from '@stats47/types';
 import { isChartColorRole, type ChartColorRole } from "./chart-color-role";
 import { parseFaqMarkdown } from "./faq-markdown";
 import type { CatalogComponentType } from "./types";
-import { getMetricConfig } from "../registry";
 
 // ChartColorRole の SSOT は chart-color-role.ts (resolver と parity テストの単一ソース)。
 // 再 export はしない (index が chart-color-role から出すので二重 export を避ける)。
+
+/**
+ * metricKey が登録済みかを判定する関数。この module は全指標の registry を import しない
+ * (ブラウザ向けの部品が型や解析だけを読むたびに指標定義 2,600 件超を巻き込むため)。
+ * registry で確かめる版は `./registered-series-ref` にある。
+ */
+export type MetricKeyCheck = (metricKey: string) => boolean;
+
+/** ブラウザ側の解析用。登録の確認はカタログ検査とサーバー側の解析で済ませてある。 */
+export const SKIP_METRIC_REGISTRATION_CHECK: MetricKeyCheck = () => true;
 
 /** 地域選択。既定は都道府県、`national` で全国系列。 */
 export type AreaSelection = "prefecture" | "national";
@@ -98,8 +107,8 @@ function nonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.length > 0;
 }
 
-function isStatSeriesRef(v: unknown): v is StatSeriesRef {
-  if (!isRecord(v) || !nonEmptyString(v.metricKey) || !getMetricConfig(v.metricKey)) return false;
+function isStatSeriesRef(v: unknown, isKnownMetric: MetricKeyCheck): v is StatSeriesRef {
+  if (!isRecord(v) || !nonEmptyString(v.metricKey) || !isKnownMetric(v.metricKey)) return false;
   if (!hasOnlyKeys(v, ["metricKey", "year", "area", "label", "colorRole"])) return false;
   if (v.year !== undefined && (typeof v.year !== "string" || !/^\d{4}$/.test(v.year))) {
     return false;
@@ -113,52 +122,11 @@ function isStatSeriesRef(v: unknown): v is StatSeriesRef {
 }
 
 /** runtime / validator が共有する seriesRefs parser。無効・空配列は null。 */
-export function parseStatSeriesRefs(v: unknown): StatSeriesRef[] | null {
-  if (!Array.isArray(v) || v.length === 0 || !v.every(isStatSeriesRef)) return null;
+export function parseStatSeriesRefsWith(v: unknown, isKnownMetric: MetricKeyCheck): StatSeriesRef[] | null {
+  if (!Array.isArray(v) || v.length === 0 || !v.every((item) => isStatSeriesRef(item, isKnownMetric))) return null;
   return v;
 }
 
-/**
- * seriesRefs と relatedRankingKeys / ThemeCatalog.metrics shortLabel の対応を検証する。
- * recipe は metricKey の先で MetricConfig が一元管理し、表示名も同テーマの指標ラベルを再利用する。
- */
-export function validateStatSeriesRefAlignment(
-  props: Record<string, unknown>,
-  relatedRankingKeys: readonly string[],
-  metricLabels: ReadonlyMap<string, string>,
-): string[] {
-  if (props.seriesRefs === undefined) return [];
-  const refs = parseStatSeriesRefs(props.seriesRefs);
-  if (!refs) return ["seriesRefs は1件以上の有効な StatSeriesRef 配列にする"];
-
-  // 非公開の theme-only metric はデータ取得SSOTであり、/ranking へのナビゲーション対象ではない。
-  // 1件でも含む複合chartは relatedRankingKeys と1:1にせず、公開済みの代表指標へ案内する。
-  // 「表示不要のmetricを無理にランキング化しない」という ThemeCatalog 契約を優先する。
-  if (refs.some((ref) => getMetricConfig(ref.metricKey)?.isActive === false)) return [];
-
-  const errors: string[] = [];
-  if (refs.length !== relatedRankingKeys.length) {
-    errors.push(
-      `seriesRefs (${refs.length}) と relatedRankingKeys (${relatedRankingKeys.length}) の要素数が不一致`,
-    );
-  }
-  for (let index = 0; index < refs.length; index += 1) {
-    const ref = refs[index];
-    const relatedKey = relatedRankingKeys[index];
-    if (ref.metricKey !== relatedKey) {
-      errors.push(
-        `系列${index + 1}: metricKey "${ref.metricKey}" と relatedRankingKeys "${String(relatedKey)}" が不一致`,
-      );
-    }
-    const expectedLabel = metricLabels.get(ref.metricKey);
-    if (ref.label !== undefined && expectedLabel !== undefined && ref.label !== expectedLabel) {
-      errors.push(
-        `系列${index + 1}: label "${ref.label}" は ThemeCatalog.metrics の shortLabel "${expectedLabel}" と一致させる`,
-      );
-    }
-  }
-  return errors;
-}
 
 function hasOnlyKeys(value: Record<string, unknown>, allowed: readonly string[]): boolean {
   const allowedSet = new Set(allowed);
@@ -225,11 +193,15 @@ function validateGeneratedProps(props: Record<string, unknown>): string[] {
  * componentType ごとに componentProps の必須フィールドを検証する (errors[] を返す)。
  * exhaustive switch。未知の componentType は skip せず error にする (依存の取りこぼしを防ぐ)。
  */
-export function validateChartProps(componentType: string, props: Record<string, unknown>): string[] {
+export function validateChartPropsWith(
+  componentType: string,
+  props: Record<string, unknown>,
+  isKnownMetric: MetricKeyCheck,
+): string[] {
   const errors: string[] = [];
   let allowed: string[] = [];
   const need = (valid: boolean, message: string) => { if (!valid) errors.push(componentType + ': ' + message); };
-  const refs = (key: string) => need(parseStatSeriesRefs(props[key]) !== null, key + ' は登録済み metricKey の非空配列');
+  const refs = (key: string) => need(parseStatSeriesRefsWith(props[key], isKnownMetric) !== null, key + ' は登録済み metricKey の非空配列');
   switch (componentType as CatalogComponentType) {
     case 'line-chart':
       allowed = ['seriesRefs', 'labels', 'seriesColors', 'showLatestValues', 'yAxisConfig'];refs('seriesRefs');
@@ -246,9 +218,9 @@ export function validateChartProps(componentType: string, props: Record<string, 
       if (props.topN !== undefined) need(Number.isInteger(props.topN) && Number(props.topN) > 0, 'topN は正の整数');break;
     case 'cpi-profile': case 'cpi-heatmap': allowed = ['seriesRefs', 'year'];refs('seriesRefs');
       if (props.year !== undefined) need(typeof props.year === 'string' && /^\d{4}$/.test(props.year), 'year は4桁年');break;
-    case 'pyramid-chart': allowed = ['seriesRefs'];need(parseStatSeriesRefs(props.seriesRefs)?.length === 34, '年齢×性別metric34件が必要');break;
+    case 'pyramid-chart': allowed = ['seriesRefs'];need(parseStatSeriesRefsWith(props.seriesRefs, isKnownMetric)?.length === 34, '年齢×性別metric34件が必要');break;
     case 'kpi-card': allowed = ['seriesRefs', 'unit'];
-      if (props.seriesRefs !== undefined) need(parseStatSeriesRefs(props.seriesRefs)?.length === 1, 'metric1件が必要');break;
+      if (props.seriesRefs !== undefined) need(parseStatSeriesRefsWith(props.seriesRefs, isKnownMetric)?.length === 1, 'metric1件が必要');break;
     case 'markdown-section':
       allowed = ['markdown', 'displayMode', 'subtitle', 'sources'];need(nonEmptyString(props.markdown), '本文が必要');
       if (props.displayMode !== undefined) need(props.displayMode === 'prose' || props.displayMode === 'faq', 'displayMode が不正');
@@ -263,11 +235,12 @@ export function validateChartProps(componentType: string, props: Record<string, 
 }
 
 /** catalog validator と runtime が同じ schema を使う唯一の parser。 */
-export function parseThemeDbChartComponentProps(
+export function parseThemeDbChartComponentPropsWith(
   componentType: string,
   props: Record<string, unknown>,
+  isKnownMetric: MetricKeyCheck,
 ): ThemeDbChartComponentProps | null {
-  if (validateChartProps(componentType, props).length > 0) return null;
+  if (validateChartPropsWith(componentType, props, isKnownMetric).length > 0) return null;
   switch (componentType) {
     case "line-chart":
       return { componentType, props: props as unknown as LineChartComponentProps };

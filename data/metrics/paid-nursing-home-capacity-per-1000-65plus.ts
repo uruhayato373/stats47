@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const paidNursingHomeCapacityPer100065plus: MetricConfig = {
   "key": "paid-nursing-home-capacity-per-1000-65plus",
   "title": "有料老人ホーム定員数",
+  "subtitle": "65歳以上人口千人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -58,7 +59,7 @@ export const paidNursingHomeCapacityPer100065plus: MetricConfig = {
       "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
     },
   ],
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

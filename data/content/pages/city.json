@@ -5271,7 +5271,7 @@
       "key": "13100",
       "title": "東京都 特別区部",
       "href": "/areas/13000/cities/13100",
-      "published": true
+      "published": false
     },
     {
       "id": "city:13000:13101",
@@ -5279,7 +5279,7 @@
       "key": "13101",
       "title": "東京都 千代田区",
       "href": "/areas/13000/cities/13101",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13102",
@@ -5287,7 +5287,7 @@
       "key": "13102",
       "title": "東京都 中央区",
       "href": "/areas/13000/cities/13102",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13103",
@@ -5295,7 +5295,7 @@
       "key": "13103",
       "title": "東京都 港区",
       "href": "/areas/13000/cities/13103",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13104",
@@ -5303,7 +5303,7 @@
       "key": "13104",
       "title": "東京都 新宿区",
       "href": "/areas/13000/cities/13104",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13105",
@@ -5311,7 +5311,7 @@
       "key": "13105",
       "title": "東京都 文京区",
       "href": "/areas/13000/cities/13105",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13106",
@@ -5319,7 +5319,7 @@
       "key": "13106",
       "title": "東京都 台東区",
       "href": "/areas/13000/cities/13106",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13107",
@@ -5327,7 +5327,7 @@
       "key": "13107",
       "title": "東京都 墨田区",
       "href": "/areas/13000/cities/13107",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13108",
@@ -5335,7 +5335,7 @@
       "key": "13108",
       "title": "東京都 江東区",
       "href": "/areas/13000/cities/13108",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13109",
@@ -5343,7 +5343,7 @@
       "key": "13109",
       "title": "東京都 品川区",
       "href": "/areas/13000/cities/13109",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13110",
@@ -5351,7 +5351,7 @@
       "key": "13110",
       "title": "東京都 目黒区",
       "href": "/areas/13000/cities/13110",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13111",
@@ -5359,7 +5359,7 @@
       "key": "13111",
       "title": "東京都 大田区",
       "href": "/areas/13000/cities/13111",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13112",
@@ -5367,7 +5367,7 @@
       "key": "13112",
       "title": "東京都 世田谷区",
       "href": "/areas/13000/cities/13112",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13113",
@@ -5375,7 +5375,7 @@
       "key": "13113",
       "title": "東京都 渋谷区",
       "href": "/areas/13000/cities/13113",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13114",
@@ -5383,7 +5383,7 @@
       "key": "13114",
       "title": "東京都 中野区",
       "href": "/areas/13000/cities/13114",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13115",
@@ -5391,7 +5391,7 @@
       "key": "13115",
       "title": "東京都 杉並区",
       "href": "/areas/13000/cities/13115",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13116",
@@ -5399,7 +5399,7 @@
       "key": "13116",
       "title": "東京都 豊島区",
       "href": "/areas/13000/cities/13116",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13117",
@@ -5407,7 +5407,7 @@
       "key": "13117",
       "title": "東京都 北区",
       "href": "/areas/13000/cities/13117",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13118",
@@ -5415,7 +5415,7 @@
       "key": "13118",
       "title": "東京都 荒川区",
       "href": "/areas/13000/cities/13118",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13119",
@@ -5423,7 +5423,7 @@
       "key": "13119",
       "title": "東京都 板橋区",
       "href": "/areas/13000/cities/13119",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13120",
@@ -5431,7 +5431,7 @@
       "key": "13120",
       "title": "東京都 練馬区",
       "href": "/areas/13000/cities/13120",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13121",
@@ -5439,7 +5439,7 @@
       "key": "13121",
       "title": "東京都 足立区",
       "href": "/areas/13000/cities/13121",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13122",
@@ -5447,7 +5447,7 @@
       "key": "13122",
       "title": "東京都 葛飾区",
       "href": "/areas/13000/cities/13122",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13123",
@@ -5455,7 +5455,7 @@
       "key": "13123",
       "title": "東京都 江戸川区",
       "href": "/areas/13000/cities/13123",
-      "published": false
+      "published": true
     },
     {
       "id": "city:13000:13201",

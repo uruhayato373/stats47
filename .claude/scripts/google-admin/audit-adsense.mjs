@@ -20,7 +20,7 @@
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { google } from "googleapis";
+import { createAdsenseClient } from "../lib/google-client.cjs";
 // PROJECT_ROOT は auth.mjs から取る (browser-context.mjs 経由だと playwright を巻き込み、
 // API-only の read 経路が browser 依存になるため)。
 import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
@@ -101,15 +101,9 @@ export function deriveDesiredAdUnits(codeSlots) {
     .map((s) => ({ adUnitName: s.adUnitName, format: s.format ?? null, exportName: s.exportName }));
 }
 
-/** OAuth クライアントを作る。env 不足なら null。 */
+/** OAuth クライアントを作る。env 不足なら null。.env.local の自己ロード後に呼ぶ。 */
 function adsenseClient() {
-  const clientId = process.env.GOOGLE_ADSENSE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_ADSENSE_CLIENT_SECRET;
-  const refreshToken = process.env.GOOGLE_ADSENSE_REFRESH_TOKEN;
-  if (!clientId || !clientSecret || !refreshToken) return null;
-  const oauth2Client = new google.auth.OAuth2(clientId, clientSecret);
-  oauth2Client.setCredentials({ refresh_token: refreshToken });
-  return google.adsense({ version: "v2", auth: oauth2Client });
+  return createAdsenseClient();
 }
 
 /** AdSense account を API で照合する。 */

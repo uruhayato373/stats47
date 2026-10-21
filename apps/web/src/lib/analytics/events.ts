@@ -429,7 +429,11 @@ export type NavSurface =
   | 'category_ranking_list'
   | 'geo_source_list'
   // 雑学ランキング末尾の「作り方」の 1 行 → 無料の連載 (2026-10-19 値追加・RANKING-MAKING-OF-LINK-01。登録済み dimension の値追加)
-  | 'ranking_making_of';
+  | 'ranking_making_of'
+  // 市区町村の回遊 (2026-10-21 値追加・MUNI-PAGE-QUALITY-01。登録済み dimension の値追加):
+  // 市区町村ページ・市区町村ランキングの関連コンテンツ / 都道府県ランキングから同じ指標の市区町村ランキングへ
+  | 'municipality_related'
+  | 'ranking_municipality';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。

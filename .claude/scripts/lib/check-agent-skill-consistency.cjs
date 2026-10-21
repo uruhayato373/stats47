@@ -21,6 +21,7 @@
  *   [E11] SNSチャネル方針 (YouTube master-first pilot / TikTok撤退) と生成経路が整合するか
  *   [E12] Codex が読む生成物 (.agents/skills / .codex/agents) が .claude の SSOT と一致するか
  *         (再生成: node .claude/scripts/lib/sync-codex-mirror.cjs)
+ *   [E13] 横断の方針を 4 体以上の agent 本文へ同文で写していないか (正典 rule への 1 行参照にする)
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
  *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
@@ -296,6 +297,7 @@ function checkBannedPromptPatterns(findings, scope) {
     ...walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]),
   ];
   if (scope) files = files.filter((f) => scope.has(rel(f)));
+  /** @type {Array<[string, RegExp]>} */
   const patterns = [
     ["自己検証", /自己検証/],
     ["ダブルチェック", /ダブルチェック/],
@@ -316,6 +318,51 @@ function checkBannedPromptPatterns(findings, scope) {
         });
       }
     }
+  }
+}
+
+// 横断の方針を agent 本文へ写すと、正典の rule が変わったとき写しだけが古いまま残る
+// (2026-10-21 AGENT-THIN-CROSSCUT-01: 10 体・8 体に同文の段落があった)。
+// 同じ行が多数の agent にあれば写しとみなし、rule への 1 行参照に置き換えさせる。
+const CROSSCUT_MIN_CHARS = 40;
+const CROSSCUT_MIN_AGENTS = 4;
+const RULE_REF_RE = /\.claude\/rules\/[\w.-]+\.md/;
+
+function checkCrosscutCopies(findings, scope) {
+  const agentFiles = walk(path.join(ROOT, ".claude/agents"), [".md"]).filter(
+    (f) => path.basename(f) !== "README.md"
+  );
+  /** @type {Map<string, Set<string>>} */
+  const owners = new Map();
+  for (const file of agentFiles) {
+    const text = readSafe(file);
+    const fm = extractFrontmatter(text);
+    const body = fm ? text.slice(fm.length + 8) : text;
+    let inFence = false;
+    for (const raw of body.split("\n")) {
+      if (/^\s*```/.test(raw)) {
+        inFence = !inFence;
+        continue;
+      }
+      if (inFence) continue;
+      const line = raw.trim().replace(/^(?:[-*]|\d+\.)\s+/, "").replace(/\s+/g, " ");
+      if (line.length < CROSSCUT_MIN_CHARS || line.startsWith("#") || line.startsWith("|")) continue;
+      // 正典 rule を指す 1 行参照は共有してよい (それが写しの置き換え先)
+      if (RULE_REF_RE.test(line)) continue;
+      if (!owners.has(line)) owners.set(line, new Set());
+      owners.get(line).add(rel(file));
+    }
+  }
+  for (const [line, files] of owners) {
+    if (files.size < CROSSCUT_MIN_AGENTS) continue;
+    const reported = [...files].filter((f) => !scope || scope.has(f));
+    if (reported.length === 0) continue;
+    findings.push({
+      level: "error",
+      code: "E13",
+      file: reported[0],
+      msg: `${files.size} 体の agent に同じ行がある (横断方針の写し)。正典の rule へ 1 行で参照する: 「${line.slice(0, 60)}」 (${[...files].map((f) => path.basename(f, ".md")).join(", ")})`,
+    });
   }
 }
 
@@ -843,12 +890,14 @@ function readMarker() {
 }
 
 // ── モード分岐 ──────────────────────────────────────────────────
+/** @param {{ orphan?: boolean, scope?: Set<string> }} opts scope は今回の変更ファイル (無ければ全検査) */
 function runChecks({ orphan, scope }) {
   const findings = [];
   // scope (Set<relpath>) 指定時は agent/SKILL 系をその集合に絞る (gate=今回の変更だけ点検)。
   checkAgentPromptContracts(findings, scope);
   checkSkillPromptContracts(findings, scope);
   checkBannedPromptPatterns(findings, scope);
+  checkCrosscutCopies(findings, scope);
   checkSkillAgentLinks(findings, scope);
   checkSkillScriptRefs(findings, scope);
   checkSkillExternalScriptRefs(findings, scope);

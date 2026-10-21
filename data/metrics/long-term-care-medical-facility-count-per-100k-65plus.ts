@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const longTermCareMedicalFacilityCountPer100k65plus: MetricConfig = {
   "key": "long-term-care-medical-facility-count-per-100k-65plus",
   "title": "介護療養型医療施設数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +21,7 @@ export const longTermCareMedicalFacilityCountPer100k65plus: MetricConfig = {
     "from": 2000,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

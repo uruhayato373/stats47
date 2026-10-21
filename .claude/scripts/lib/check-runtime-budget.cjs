@@ -28,7 +28,7 @@ function main() {
     const start = performance.now();
     const result = spawnSync(check.command[0], check.command.slice(1), { cwd: ROOT, encoding: "utf8", timeout: check.budgetMs * 2 });
     const durationMs = Math.ceil(performance.now() - start);
-    const status = result.error?.code === "ETIMEDOUT" ? "timeout" : result.status !== 0 ? "failed" : durationMs > check.budgetMs ? "over-budget" : "ok";
+    const status = /** @type {NodeJS.ErrnoException | undefined} */ (result.error)?.code === "ETIMEDOUT" ? "timeout" : result.status !== 0 ? "failed" : durationMs > check.budgetMs ? "over-budget" : "ok";
     results.push({ name: check.name, durationMs, budgetMs: check.budgetMs, status });
     if (status === "failed") process.stderr.write(result.stderr || result.stdout || `${check.name} failed\n`);
   }

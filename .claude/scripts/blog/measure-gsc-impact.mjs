@@ -138,7 +138,7 @@ function loadWaves() {
 /**
  * GSC ブログ是正 wave の adapter。
  * 契約: { domainId, listSubjects, resolveWindow, measure, targetOf, logPath, headerPrefix, pastEffectKeys }
- * @param {{minWeeks?:number, afterWeek?:string|null, onlyWave?:string|null}} [opts]
+ * @param {{minWeeks?:number, afterWeek?:string|null, onlyWave?:string|null, closedWaveIds?:Set<string>}} [opts]
  */
 export function createGscBlogWaveAdapter(opts = {}) {
   const minWeeks = opts.minWeeks ?? DEFAULT_THRESHOLDS.window.minWeeks;

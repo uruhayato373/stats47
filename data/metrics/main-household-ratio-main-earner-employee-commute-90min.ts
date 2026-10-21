@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const mainHouseholdRatioMainEarnerEmployeeCommute90min: MetricConfig = {
   "key": "main-household-ratio-main-earner-employee-commute-90min",
   "title": "雇用者世帯の通勤時間",
-  "subtitle": "主世帯・1時間30分以上",
+  "subtitle": "主世帯千世帯当たり・主世帯・1時間30分以上",
   "unit": "主世帯千世帯対",
   "category": "population",
   "source": {

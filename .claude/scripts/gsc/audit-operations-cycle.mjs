@@ -12,6 +12,7 @@
  *   --verdict /tmp/reassessment.json は明示検証用。既定は原本hash・week・契約・日時が
  *   一致するappend-only再評価を採用し、それが無ければ元の週次verdictを読む。
  */
+import { isoWeekRange } from '../metrics/lib/periods.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -113,15 +114,8 @@ function ageDays(observedAt, now) {
 }
 
 function mondayOfIsoWeek(week) {
-  const match = /^(\d{4})-W(\d{2})$/.exec(week ?? '');
-  if (!match) throw new Error(`ISO week ではない: ${week}`);
-  const year = Number(match[1]);
-  const weekNumber = Number(match[2]);
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  const jan4Day = jan4.getUTCDay() || 7;
-  const monday = new Date(jan4);
-  monday.setUTCDate(jan4.getUTCDate() - jan4Day + 1 + (weekNumber - 1) * 7);
-  return monday;
+  if (!/^\d{4}-W\d{2}$/.test(week ?? '')) throw new Error(`ISO week ではない: ${week}`);
+  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 export function addIsoWeeks(week, delta) {

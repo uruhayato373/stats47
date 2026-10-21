@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const publicMultipurposeSportsGroundCountPerMillion: MetricConfig = {
   "key": "public-multipurpose-sports-ground-count-per-million",
   "title": "多目的運動広場数",
+  "subtitle": "人口100万人当たり",
   "unit": "施設",
   "category": "educationsports",
   "source": {
@@ -48,7 +49,7 @@ export const publicMultipurposeSportsGroundCountPerMillion: MetricConfig = {
       2021,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

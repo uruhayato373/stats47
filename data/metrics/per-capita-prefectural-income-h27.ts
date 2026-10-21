@@ -5,6 +5,8 @@ export const perCapitaPrefecturalIncomeH27: MetricConfig = {
   "key": "per-capita-prefectural-income-h27",
   "title": "1人当たり県民所得",
   "subtitle": "H27年基準",
+  "description": "県民経済計算 (内閣府) の県民所得を県の総人口で割った値。県民所得は県の居住者 (個人のほか法人企業・行政機関を含む) に分配された所得で、雇用者報酬・財産所得・企業所得から成る。県内の生産から生まれた所得に、県外から受け取った所得の純額を加える。年度計 (4月〜翌3月)。",
+  "note": "個人の給与や世帯の手取りではない (企業所得を含む)。分母が総人口であることは、内閣府の2021年度の総括表で全県計 417,900,154百万円 ÷ 125,502,290人 = 3,330千円が公表の1人当たり県民所得と一致することで確かめた (2026-10-21)。県内総生産には名目と実質の両方の表があるが、県民所得は一方の系列しか公表されておらず、物価変動を除いた値ではない。平成17年・23年基準の系列とはつながない。出典: e-Stat 統計項目の定義 C 経済基盤 (C122101) https://www.e-stat.go.jp/koumoku/koumoku_teigi/C / 内閣府 県民経済計算 https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2021.html",
   "unit": "千円",
   "category": "economy",
   "source": {

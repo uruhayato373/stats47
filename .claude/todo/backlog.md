@@ -74,6 +74,12 @@ updated: 2026-10-19
   - W41 に years を広げた 2 指標 (`average-height-primary-school-fifth-grade-male`・`national-treasury-disbursement-prefecture`) は dryRun 合格済み (run 37315946937) で、R2 は未反映 (10-19 の公開 values は小 5 男子身長が 2023 の 1 年だけ)。2026-10-19 にオーナー承認のうえ data-refresh run 39192011125 (success) で反映した。公開 values は小 5 男子身長が 1975〜2023 の 47 年分、国庫支出金が 1975〜2022 の 48 年分で、どちらも recipe 付き。
 
 - **2026-10-19 ③ W43 Could 1 (需要順の次の 2 指標)**: `designated-difficult-disease` (GSC 表示 892) は衛生行政報告例の 1 年度 1 表の作りで、設定は 2020 年度の表 `0004026904` だけを指していた。e-Stat の getStatsList (調査コード 00450027、全 585 表) では都道府県別の最新は 2021 年度の `0004048079` (2026-03-25 公開) で、2022 年度以降の表はまだ無い。**処置: 基準 2 (更新)**。設定を `0004048079`・2021 年度へ切り替えた (cat01=100 総数・地域軸 68 は同じ。年度ごとの表を 1 指標でつなぐ仕組みは無いので 2020 年度は配信から外れる)。`metrics:build-index`・`metrics:check`・`validate:config`・`validate:years` は通過。data-refresh の dryRun は合格 (run 39205519663: ok=1・47 都道府県・shape=0)。2026-10-19 にオーナー承認のうえ data-refresh run 39206759769 (success・ok=1) で R2 へ反映した。公開 `app/stats/designated-difficult-disease/values.json` は 2021 年度・47 県・recipe 付き、配信用 `app/ranking/.../values.json` も 2021 年度 47 県、item の latestYear は 2021 年度、本番ページは Googlebot UA で 200。`physical-disability-certificates-issued` (825) は SSDS `J1200` の収録範囲 1975〜2023 (kiso_ken.xlsx 2026-06-30 更新分) と公開値 49 年分が一致し、**処置なし (推定周期による誤検出)**。原典の福祉行政報告例に 2024 年度分が出ているかは未確認 (出ていれば `DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` と同じく取得元の切り替え候補)。
+- **2026-10-21 ③ 需要順の次の 5 指標 (データの更新は 0 件)**: キュー (`data/data-quality/checks/queue.json`、10-17) の「2 更新」から処置済みの 10 指標を除いた次の 5 指標。e-Stat の項目ごとの実在年は実在年の台帳 (`data/estat/availability/`、CI が 2026-10-07 に取得) で、公式の最新は各省の公表ページ (2026-10-21 取得) で確かめた。この PC には e-Stat API の資格情報が無いので、表の有無は e-Stat の公開ページで確かめた。
+  - `psychiatric-bed-count` (752): 基準 2 に当たるが今は更新できない。原典の医療施設（動態）調査は令和7年の概況を 2026-09-29 に公表済みだが、取得元の SSDS は医療施設調査の 6 項目すべてで 2023 年止まり。原典の 2024 年の表の分類をこの PC から確かめられないので、6 指標まとめて `DATA-MEDICAL-FACILITY-SOURCE-01` へ切り出した。
+  - `flood-affected-rivers` (741): 年カバレッジ監査の要拡張 (設定 5 年 → 実在 9 年) は、足りない 4 年が 44〜46 県しか値の無い年で、47 県そろう年だけを入れる今の作りでは足さない (処置なし)。e-Stat のデータベースは 2014 年まで、公式は令和5年まで公表済みなので、9 指標まとめて `DATA-FLOOD-STATS-FILES-01` へ切り出した。
+  - `fishery-species-catch-mackerel` (685)・`fishery-species-catch-pacific-saury` (595): 令和6年の確報は 2026-02-27 に Excel ファイルだけで公表され、e-Stat のデータベースの表はまだ無い (2024 年は 0 件。2023 年は 99 表)。今の取得の仕組みでは足せないので、12 魚種まとめて `FISHERY-2024-DB-01` (再開条件付き) へ。
+  - `road-expressway-length` (583): 基準 2 に当たるが今は更新できない。道路統計年報の最新は 2025 年版 (令和6年3月31日時点、`https://www.mlit.go.jp/road/ir/ir-data/tokei-nen/index.html`)。統計局の項目一覧 (`kiso_ken.xlsx`、2026-06-30 更新、SHA-256 `febebbc7…0358`。オーナーの許可を得て 2026-10-21 に取得) は資料源と対象年度 (2005〜2023) だけで時点の定義を持たないので、開通日の分かる区間で決めた。新東名の伊勢原大山 IC〜新秦野 IC (約 13 km、2022-04-16 開通、NEXCO中日本 `news_release/5365`) は神奈川県の「2023 年度」に +12.8 km、中部横断道の南部 IC〜下部温泉早川 IC (約 13.2 km、2021-08-29 開通、同 `news_release/5181`) は山梨県の「2022 年度」に +12.2 km として現れる。どちらも開通の翌年度の値に入るので、配信の「2023 年度」は 2023 年 3 月 31 日時点 (道路統計年報 2024 年版) で、公式の最新より 1 年古い。同じ道路統計年報の 10 指標がすべて 2023 年度で止まっているので、`DATA-ROAD-LENGTH-SOURCE-01` へ切り出した (年の表記の誤読の問題も同じカードに書いた)。
+  - 指標の設定と R2 は変えていないので、dryRun と R2 反映は無い。
 ### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
@@ -134,17 +140,16 @@ updated: 2026-10-19
 - **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
 - **2026-10-19 夜**: オーナーの準備 (afb の API キー・GSC のログイン) を後日に回したので、定期実行は CI の起動に戻した。切り替えの手順と残りは `MEASUREMENT-MAC-DIRECT-01`。
 
-### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を木曜の Mac の取得へ切り替え、2 週続けて全取得元 pass したら CI と Secrets を撤去する
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-10-19] [期日:2026-11-05] [領域:管理]
+### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を木曜の Mac の取得だけにし、残っている CI 専用のコードと Secrets を撤去する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run measurement:test] [起票:2026-10-19] [期日:2026-11-05] [領域:管理]
 
-- **方針 (2026-10-20 オーナー判断)**: ログインが要る計測 (A8・楽天・note・KDP・GSC の画面) は、毎週木曜の夕方に Mac が取得して記録する。セッションのエージェントは記録から判断し、ブラウザで取りに行かない (`.claude/rules/recorded-measurement-first.md`。読むための操作は hook が止める)。切り替えは 10-22 (木) から。CI の取得は予備として残す。
-- **構成 (2026-10-20 実装)**: 木曜 17:30 の launchd `com.stats47.measurement-session-refresh` → `scripts/scheduled/measurement-session-refresh.sh` がログインを保つ (a8・kdp・note・rakuten。`--publish` で CI の予備にも渡す) → `measurement-collect-local.sh` が専用 clone `~/stats47-measurement` で `collect-local.mjs` を動かし、要約を develop へ push する。CI の `authenticated-measurement.yml` は木曜 20:20 JST に、Mac の記録が 12 時間以内なら Mac が pass しなかった取得元だけを取り直す (`summarize.mjs` は取りに行かなかった取得元の行を残す)。記録は 8 日間「今の値」として使う (`sources.mjs` の `MEASUREMENT_MAX_AGE_MS`。2 日のままだと日曜・月曜のアフィリエイト週次が木曜の記録を拒んでいた)。
-- **次 (Claude)**: 10-22 (木) の夜に、`~/Library/Logs/stats47/measurement-collect-local.log`・develop の「(Mac)」の記録コミット・`data/authenticated/latest.json` の各取得元・20:20 の CI が省略か予備か、を確かめる。CI 側の変更 (cron・予備の判定) は main の定義で動くので、10-22 17:00 JST までに develop→main をマージしてあることが前提 (オーナー確認のうえ)。
-- **次 (オーナー・帰国後)**: ① GSC: `node .claude/scripts/google-admin/cli.mjs login` で開く専用の Chrome で stats47 の Google アカウントにログインし、⌘Q で終了する (Google は 2 段階認証のため自動ログインしない) ② KDP: TOTP の秘密鍵 `stats47-measurement-kdp-totp` をキーチェーンに登録し (任意)、`.local/authenticated-measurement/kdp.autologin-failed` を消して `node .claude/scripts/measurement/refresh-session.mjs kdp --headed` で入り直す ③ note: Mac の `note.autologin-failed` (10-17 から) を消して `refresh-session.mjs note --headed` で入り直す。
-- **次 (2 週続けて全取得元 pass の後)**: `authenticated-measurement.yml`・`bootstrap-session.mjs --publish`・CI 再ログイン (`refresh-session.mjs --ci`・`auth-recovery.mjs` の停止)・保管庫のセッション (`<取得元>/session`) を撤去し、`workflow-health-daily.yml` の `catch-up.mjs --dispatch` を通知だけにする。`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」と自動化一覧も書き換える。GitHub Secrets (`MEASUREMENT_SESSION_*`・`STATS47_AUTH_*`・`AFB_API_KEY`) の削除はオーナー承認後。
-- **引き継いだ事実 (旧 `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`)**: KDP の Reports は CI の入り直しで `login_failed` になる世代があり、そのときは本人の再認証が要る。note は短い集計期間で 1 記事が一覧に出ない欠けを、条件付きで既知の欠けとして pass にしている (`note-inventory.mjs` の `acceptedNoteGap`。値は null のまま)。KDP の速報売上・KENP は確定ロイヤリティや週次の純収益に入れない。
-- **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログ・artifact に出さない。
-- **完了条件**: Mac の定期実行で 2 週続けて (木曜 2 回) 全取得元が pass し、CI の認証付き計測ワークフローと Secrets 依存が撤去されている。
+- **方針 (2026-10-20 オーナー判断)**: ログインが要る計測 (A8・楽天・note・KDP・GSC の画面) は、毎週木曜に Mac がその場でログインして取得し、記録する。ログインは週 1 回 Mac が行えば足りるので、CI にもセッションを持たせず、普段からセッションを保つこともしない。セッションのエージェントは記録から判断する (`.claude/rules/recorded-measurement-first.md`。読むための操作は hook が止める)。セッションが切れて 2 段階認証が要る週は、その取得元を判定不能にして次の木曜を待つ。
+- **2026-10-20 実施**: CI の `authenticated-measurement.yml` を無効化 (`gh workflow disable`) のうえ削除し、補完起動 (`catch-up.mjs`・`workflow-health-daily.yml` の段) と監視の契約を外した。木曜 17:30 の `measurement-session-refresh.sh` は CI へセッションを渡さず (`--publish` を外した)、`measurement-collect-local.sh` で取得して develop へ記録する。記録は 8 日間「今の値」として使う (`MEASUREMENT_MAX_AGE_MS`)。同夜に GSC・KDP・note のログインをし直した (KDP・note は `status: ok`)。
+- **次 (Claude)**: ① 10-22 (木) の夜に、`~/Library/Logs/stats47/measurement-collect-local.log`・develop の「(Mac)」の記録コミット・`data/authenticated/latest.json` の各取得元を確かめる ② 初回が通ったら、CI 専用のコードを削除する: `collect.mjs` の CI 分岐 (`MEASUREMENT_SESSION`・`STATS47_AUTH_*`・`ciLogin`・保管庫の `<取得元>/session` と `auth-recovery` の書き込み)、`refresh-session.mjs` の `--ci`・`--publish`、`bootstrap-session.mjs --publish`、`set-ci-secret.mjs`、`auth-recovery.mjs`、`.claude/config/auth-credentials.json` の `ciCredential`・`ciStored` と管理画面 `/ops/auth` の CI 欄、`package.json` の `auth:ci-secret`、`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」の旧仕様。取得のコードを Mac と共有しているので、初回の実測の前には触らない。
+- **2026-10-20 Secrets 削除済み (オーナー承認)**: `MEASUREMENT_SESSION_*` 8 件・`STATS47_AUTH_*` 18 件・`AFB_API_KEY` を削除した。保管庫の鍵 `MEASUREMENT_VAULT_KEY` は週次のワークフロー (`affiliate-ga4-weekly.yml`・`fetch-metrics-weekly.yml` の restore) が使うので残した。管理画面 `/ops/auth` の CI 欄は、上の ② で外すまで「未登録」と出る。
+- **引き継いだ事実 (旧 `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`)**: KDP の Reports は 2 段階認証を求めることがあり、そのときは本人の入力が要る (`refresh-session.mjs kdp --wait-human`)。note は短い集計期間で 1 記事が一覧に出ない欠けを、条件付きで既知の欠けとして pass にしている (`note-inventory.mjs` の `acceptedNoteGap`。値は null のまま)。KDP の速報売上・KENP は確定ロイヤリティや週次の純収益に入れない。
+- **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
+- **完了条件**: 木曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -303,12 +308,15 @@ updated: 2026-10-19
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-20] [領域:管理]
 
 - **背景 (2026-10-20)**: セッションは管理画面を開かず、記録から判断する方針にした (`.claude/rules/recorded-measurement-first.md`)。これで記録が計測スクリプトとエージェントの境界になった。ところが `config/datasets.mjs` が schema を義務にしているのは kind が config・ledger の行だけで、判断に使う `data/authenticated/{latest,revenue-history}.json`・`data/measurement-cycle/latest.json`・`data/affiliate/{a8,rakuten}-results.json`・`data/nsm/weekly-snapshots/*.json` (kind は state・series) には形の契約が無い。書き手の変更で形が崩れても、読む側は気づかずに誤る。後続の `SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で書き手を作り直すときに、壊していないかを判定する基準にもなる。
-- **次**: ① 上の 6 データセットの schema を `config/schema/<台帳の id>.schema.json` に置く (既存の 27 本と同じく実データから推論し、必須はルートの項目と識別子に絞る) ② `.claude/scripts/lib/check-datasets.mjs` を「schema を宣言した行は kind を問わず検証する」に広げる ③ 書き手 (`measurement/summarize.mjs`・`metrics/build-measurement-cycle.mjs`・NSM の snapshot の書き出し・A8 と楽天の成果の書き出し) が、書く前に同じ ajv で検証し、合わなければ書かずに失敗する。
+- **2026-10-20 済**: ① 6 データセットの schema を `config/schema/{revenue.authenticated,revenue.authenticated-history,business.measurement-cycle,business.nsm-weekly,a8.results,rakuten.results}.schema.json` に置いた (実データから推論。NSM は全 25 週から)。形の違うファイルを 1 行にまとめていた `revenue.authenticated`・`business.measurement-cycle` はファイルごとの行に分けた (`datasetDir` の値は変わらない) ② `check-datasets.mjs` が schema を宣言した行を kind を問わず検証する ③ 金曜に動く書き手 (`build-measurement-cycle.mjs`・`snapshot-weekly-metrics.mjs`) が `assertDatasetShape` で書く前に検証する (W41 の実データで通ることを確認)。
+- **次**: 木曜の取得の経路にある書き手 (`measurement/summarize.mjs` の latest・revenue-history、A8 の成果を書く `normalize-a8-csv.mjs`、`ads/record-rakuten-results.mjs`) にも書く前の検証を入れる。10-22 の Mac の初回取得を変えないため、初回が通ったあとに行う。
 - **停止条件**: 記録の形そのものは変えない (schema は今の形を固定するだけ)。
 - **完了条件**: 6 データセットの行に schema があり、`npm run check-datasets` がそれを検証し、書き手が検証してから書いている。
 
 ### [SCRIPT-ISO-WEEK-UNIFY-01] ISO 週の計算 16 か所を 1 関数にまとめ、新しい自前の実装を検査で止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: 22 ファイル 27 か所の自前実装を調べ、数え方 (週の始まり・年またぎ) はすべて正しく、違いは入力の時刻を日付に直すタイムゾーンだけと実測した (UTC・実行マシンの時刻で数える 7 か所が、月曜 0〜9 時 JST に前の週を返していた。定期実行はこの時間帯に無い)。正本を `.claude/scripts/metrics/lib/periods.mjs` (JST の暦日で数える `isoWeekOf`・`isoWeekRange`・`jstDateOf`) にし、23 ファイルを呼び出しに置き換えた (関数名と返す形は不変。存在しない週は止める)。TS から読むための `periods.d.mts` を足した。`check-maintenance-debt.cjs` の `ISO_WEEK_LOCAL` が、1 月 4 日基準・日曜=7・月曜=0 の計算を正本の外に書くと止める。意図のテストは `metrics/__tests__/periods.test.mjs` (旧実装に戻すと落ちることを確認)。
 
 - **背景**: `SSOT-CONSOLIDATION-REST-01` ③ の調べで、スクリプトの ISO 週の計算が 16 ファイルにあり、月曜始まり・日曜締め・UTC・JST が混在している。計測を週次 (木曜に取得 → 金曜に集計 → 土曜にレビュー) に一本化したので、週の区切りがファイルごとに違うと、段ごとに別の週を見る誤りになりうる (実害はまだ確認していない)。
 - **次**: ① 16 か所の定義 (週の始まり・タイムゾーン・年またぎ) を表にする ② 意図が同じものを `.claude/scripts/lib` の 1 関数へ寄せ、意図が違うものは引数で選べるようにする ③ `check-maintenance-debt.cjs` に自前の ISO 週計算を止める規則を足す (baseline は縮小専用)。
@@ -320,13 +328,27 @@ updated: 2026-10-19
 ### [SCRIPT-GOOGLE-CLIENT-UNIFY-01] Google API の認証とクライアントの自前実装 15 ファイルを 1 か所にまとめる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 数え直すと自前で認証を組むファイルは 16 本 (トークン発行用の対話式ツール `adsense/oauth-setup.js` を含む) で、鍵の探し方は 4 通り (1 本は実行ディレクトリ基準、3 本は env を読まず CI が鍵を直下へ書き出す運用に依存)、自前の再試行は 0 本だった。googleapis の既定の再試行は 408・429・5xx を 3 回までだが対象は GET 等だけで POST を含まず (googleapis-common 8.0.3 / gaxios 7.1.3 のコードで確認)、GA4 の runReport・GSC の検索実績・URL 検査は一時的な失敗 1 回で欠損していた。正本を `.claude/scripts/lib/google-client.cjs` にし (鍵は env をメモリで渡し、無ければリポジトリ直下の `stats47-*.json` をファイル位置基準で読む。一時ファイルに書かない)、読み取り用クライアントは POST も再試行、GA4 Admin の書き込み用は GET 系だけを再試行する (作成は 1 回だけ送る)。15 本を置き換え、`metrics/lib/auth.mjs` の鍵の一時ファイル書き出しと、CI 2 本 (`fetch-metrics-weekly.yml`・`affiliate-ga4-weekly.yml`) の鍵ファイル書き出しを外した。`check-maintenance-debt.cjs` の `GOOGLE_AUTH_LOCAL` が正本の外の GoogleAuth・OAuth2・JWT を止める (例外は `oauth-setup.js` だけ)。検証: 置き換え前後で 12 本を同じ固定期間で read-only 実行し、時刻の項目を除いて出力が一致した (URL 検査 1 件だけ Google 側の状態が実行の間に変わり、旧方式と新方式で続けて照会して同じ応答を確認)。AdSense の 2 本はローカルに OAuth の資格情報が無く実行できず、テストだけで確認した。意図のテスト `lib/__tests__/google-client.test.cjs` (ローカルの HTTP サーバーへの実要求。再試行の設定を壊すと落ちることを確認) を PR CI の Contract Tests に配線。手順書の雛形は `SKILL-GOOGLE-SNIPPET-UNIFY-01` へ分けた。
+
 - **背景 (2026-10-20 実測)**: `new GoogleAuth`・`google.auth.*`・`JWT(` を自前で書くスクリプトが 15 ファイル (metrics・gsc・google-admin・ads・note・sns・search-growth・lib) あり、GA4 の `runReport` を呼ぶファイルは 12。認証方式・スコープ・再試行がファイルごとに違い、資格情報の扱いを変えるたびに 15 か所を直すことになる。
 - **次**: `RECORD-SCHEMA-CONTRACT-01`・`SCRIPT-ISO-WEEK-UNIFY-01` の後に、`.claude/scripts/metrics/lib/gsc-query.mjs`・`ga4-query.mjs` を土台にして、認証とクライアントの生成を `.claude/scripts/lib` の 1 モジュールへ寄せる。呼び出し側は 1 ファイルずつ置き換える。
 - **停止条件**: 取得する値と記録の形を変えない。置き換えるたびに、既存のテストと 1 回の read-only 実行で同じ結果になることを確かめる。
 - **完了条件**: Google API の認証を書くのが共通モジュールだけになり、新しい自前の実装を検査が止める。
 
+### [SKILL-GOOGLE-SNIPPET-UNIFY-01] スキル手順書の Google API 認証の雛形を共通モジュールの呼び出しへ置き換える
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: 手順書 6 本 8 か所の雛形 (`fetch-gsc-data` 2・`fetch-ga4-data` 2・`inspect-url`・`submit-sitemap`・`fetch-adsense-data`・`blog/discover-trends/sources/gsc.md`) を `.claude/scripts/lib/google-client.cjs` の呼び出しに置き換え、単発の照会は `metrics/gsc-query.mjs`・`ga4-query.mjs` を先に案内した。sitemap の送信は書き込みスコープが要るので、共通モジュールに `createSearchConsoleWriteClient` (webmasters。送信の PUT は再送しない) を足し、テストで固定した。Codex 用の写し `.agents/skills/` は `sync-codex-mirror.cjs` で再生成した (5 ファイル)。`check-maintenance-debt.cjs` の `GOOGLE_AUTH_LOCAL` を `.claude/skills`・`.claude/agents` の Markdown にも広げた (写しは `--check` が同一を保証)。古い雛形を一時的に戻すと検出し、今は 0 件であることを確かめた。検証: 手順書から取り出した雛形を読み取りだけ実行し、GSC の検索実績・GA4・トレンド用の照会・URL 検査が実データを返した。AdSense はこの Mac に資格情報が無く、雛形どおりのエラーで止まることだけ確かめた。sitemap の送信は停止条件どおり実行せず、構文の検査だけ行った。
+
+- **背景 (2026-10-21 実測)**: `SCRIPT-GOOGLE-CLIENT-UNIFY-01` でスクリプトの認証を `.claude/scripts/lib/google-client.cjs` に寄せたが、スキル手順書に鍵ファイル名を複製して `google.auth.GoogleAuth` / `OAuth2` を組む `node -e` の雛形が残っている (`.claude/skills/analytics/{fetch-gsc-data,fetch-ga4-data}/SKILL.md` に各 2、`{inspect-url,submit-sitemap,fetch-adsense-data}/SKILL.md` に各 1、`blog/discover-trends/sources/gsc.md` に 1、Codex 用の写し `.agents/skills/` に同じものが 7)。写して実行するたびに、再試行の無い自前の認証が生まれる。雛形は使い捨てでリポジトリに残らないので `check-maintenance-debt.cjs` の `GOOGLE_AUTH_LOCAL` (コードだけを見る) には掛からない。
+- **次**: ① 読み取りの雛形を `createSearchConsoleClient()` / `createGa4DataClient()` / `createAdsenseClient()` の呼び出しに置き換え、ページ×検索語などの照会は `metrics/gsc-query.mjs`・`ga4-query.mjs` を案内する ② `submit-sitemap` は書き込みスコープ (`webmasters`) で sitemap を送信するので、共通モジュールに書き込み用の Search Console クライアント (変更は再試行しない) を足すか、雛形を残して理由を書くかを決める ③ `.agents/` の写しを同期の手順で更新する ④ 手順書に自前の認証が戻らないよう、検査の対象を Markdown のコード例へ広げるかを決める。
+- **停止条件**: sitemap の送信など外部へ書き込む雛形は、置き換え後に実行して確かめない (送信はオーナーの承認が要る)。
+- **完了条件**: スキル手順書の Google API の雛形が共通モジュールを使い、例外には理由が書かれている。
+
 ### [SCRIPT-LIB-CHECKJS-01] スクリプトの共通部品に型検査 (@ts-check と、範囲を絞った tsc --checkJs) をかける
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: `.claude/scripts/tsconfig.checkjs.json` (checkJs・strict なし) で `lib/`・`measurement/`・`metrics/lib/` の JS を型検査し、`npm run type-check:scripts` (root の type-check・pre-commit・CI の type-check job) に足した。最初の実測は 194 件 (strict にすると範囲内だけで 283 件。2026-10-21 実測) で、すべて挙動を変えずに直した。多かったのは、実装より狭い JSDoc (実装が読む引数のプロパティや返す項目が書かれていない) と、成功時と失敗時で形が混ざる値の受け取りで、どちらも型注釈で直した。`periods.d.mts` と `config/datasets.d.mts` には実装の export と項目の不足を足した (TS 側も読む宣言。全パッケージの `npm run type-check` は 25/25 で通過)。木曜の取得の経路 (`measurement/collect.mjs`・`vault.mjs`) は、10-22 の初回取得を変えないよう型注釈のコメントだけで直し、実行される呼び出しは変えていない。範囲外だが import で検査に入る kdp の 2 ファイル (ブラウザ内の DOM 操作) と、自動生成の単位の写し (生成器の見出しで) には、理由を書いた `// @ts-nocheck` を付けた。カードの題にある `// @ts-check` はファイルに付けない (付けると、import する strict の TS 側の検査でも strict で検査されるため。規約は `.claude/rules/coding-standards.md`)。範囲が縮まないことは `lib/__tests__/scripts-checkjs-scope.test.cjs` が固定し (glob の削除・範囲内の `@ts-nocheck` を止める)、PR CI の Preflight Aggregator Contract に配線した。存在しないプロパティの参照・glob の削除・範囲内の `@ts-nocheck` の 3 通りの壊れを入れて、それぞれ落ちることを確認した。関連テストは JS 538 件で失敗 0 (effect-verdict の既存の失敗 1 件は `EFFECT-VERDICT-CLI-TEST-SOURCES-01` のもので増えていない)。
 
 - **背景 (2026-10-20 実測)**: サイト本体 (apps・packages) の tsconfig 25 個はすべて strict だが、`.claude/scripts` は 753 ファイル中 641 が型の無い JS (mjs 539・cjs 101) で、`@ts-check` は 0。計測・記録・改善を回す部品が型の外にある。
 - **次**: 全部を TS に書き換えることはしない。共通部品 (`.claude/scripts/lib`・`measurement`・`metrics/lib` と、`SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で寄せた関数) に `// @ts-check` と JSDoc を付け、この範囲だけを対象にする tsconfig (allowJs・checkJs・noEmit) を作って `npm run type-check` に足す。重複を減らしてから型を付けるので、上の 2 枚の後に行う。
@@ -336,6 +358,7 @@ updated: 2026-10-19
 ### [AGENT-THIN-CROSSCUT-01] 全体に効く規約をエージェントの本文から paths 付き rules へ移し、本文を役割・入出力・担当に絞る
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 本文を見出し単位で全 agent 横断に照合し、写しは 2 群だけだった (「記録から判断する」10 体、「教材の企画の受け取り」の共通 3 行 8 体。Output Contract・担当範囲は体ごとに中身が違う)。前者は `recorded-measurement-first.md`、後者は `reference-source-standards.md` §5 への 1 行参照に置き換え (企画の受け取りの体固有の 1 行目は残した)、§5 の `paths:` に 8 体を足した。写し直しは `check-agent-skill-consistency.cjs` の E13 (40 字以上の同じ行が 4 体以上。rule 参照の行は除く) が止める。HEAD の本文に当てると 4 行を検出し、現在は 0。スキル 4 本は固有の言い回し + rule 参照で、写しではなかった。検証: 整合検査 0 件・同テスト 21/21・codex mirror 一致・docs:check error 0・checkJs tsc 0・debt ratchet +0。
 - **背景 (2026-10-20)**: 「記録から判断する」方針を 1 つ足すのに、エージェント 10 体とスキル 4 本を書き換えた。全体に効く規約がエージェントの本文に書き写されているので、規約を 1 つ変えるたびに多くのファイルを直すことになり、写し漏れは矛盾になる (同日の調査で、6 体の本文の手順が、後から足した記録の節と食い違っていた)。
 - **次**: ① 複数のエージェントに同じ文言で載っている節を一覧にする (`.claude/scripts/lib/check-agent-skill-consistency.cjs` の走査を流用) ② それを paths 付き rules か hook へ移し、本文には参照の 1 行だけを残す ③ 同じ節を本文へ写し直すことを整合検査で止める。スクリプトの入口が固まった後に書き直すほうが 1 回で済むので、`SCRIPT-LIB-CHECKJS-01` の後に行う。
 - **停止条件**: 担当範囲 (owner) と排他の書き手の記述は動かさない。系統は残す (2026-10-11 オーナー判断)。
@@ -499,10 +522,20 @@ updated: 2026-10-19
 ### [IG-CAPTION-DUP-1021-01] 10-21 予約の Instagram 相関投稿のキャプションで同じ相関係数を 2 回書いている
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-18] [期日:2026-10-20] [領域:SNS]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: オーナー承認 (同日チャット) のうえ、後半を「相関は因果関係を示しません。」だけにした文を R2 `stats47` の `sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/caption.txt` に書き (09:3x JST)、公開 URL の読み直しで書いた内容と一致・`r=-0.69` が 1 回だけを確認した (公開 URL は `max-age=0`・`DYNAMIC` でキャッシュされない)。投稿台帳 1097 の caption も store 経由で同じ文にした (承認・status・予約時刻は不変。承認は本文のハッシュに結び付いていない)。#1145 は次の予約画像確認で閉じる。同じ重複が生成元にあり 10-28 の 1105 にも出ているので `IG-CAPTION-DUP-GENERATOR-01` へ分けた。
 - **事象**: 予約投稿の週次確認 #1145 (2026-10-17)。2026-10-21 19:00 の `fish-pickled-consumption-expenditure--average-temperature` のキャプションで「人口の影響を除くと r=-0.69」が冒頭の括弧書きと後半の注意書きの 2 箇所に出る。
 - **次**: 後半を「相関は因果関係を示しません。」だけにした文案をオーナーに見せ、承認を得てから R2 の `caption.txt` と投稿台帳の caption を同じ文に差し替える (予約済みの投稿本文の変更なので承認を挟む)。
 - **完了条件**: 10-21 19:00 より前にキャプションの重複が消え、次の予約画像確認で #1145 が閉じる。
 
+
+### [IG-CAPTION-DUP-GENERATOR-01] 相関カルーセルのキャプション生成が偏相関を 2 回書く。生成元を直し、10-28 予約の 1105 を差し替える
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-21] [期日:2026-10-27] [領域:SNS]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: ② オーナー承認 (同日チャット) のうえ、1105 の後半を「相関は因果関係を示しません。」だけにした文を R2 `stats47` の `sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/caption.txt` に書き、公開 URL の読み直しで一致・`r=0.72` が 1 回だけを確認した。書く前に R2 が案の作成時から変わっていないことも照合した。台帳 1105 の caption も store 経由で同じ文にした (承認・status・予約時刻 10-28 19:00 は不変)。未投稿の相関カルーセルに重複の残りは無い (1133・1134 は手書きで重複なし)。
+- **2026-10-21 ① 済**: キャプションの相関の段を `correlation-carousel-core.ts` の `buildCaptionCorrelationLines` (注意書きは固定文言 `CAUSATION_DISCLAIMER` だけ) に移し、`render-ig-carousel.ts` から呼ぶ。4 枚目の画像の `buildCautionLine` は不変。テスト 26/26 (旧文言に戻すと新テストが落ちることを確認)・`.claude/scripts` の tsc 0。残りは ② の 1105 (オーナー承認待ち)。
+- **事象 (2026-10-21 実測)**: `.claude/scripts/sns/render-ig-carousel.ts` の `buildCorrelationCaption` が「相関係数 r=…（人口の影響を除くと r=…）」の行と、`spec.caution` (`correlation-carousel-core.ts` が「相関は因果関係を示しません。人口の影響を除くと r=…」を作る。4 枚目の画像の文言) の両方をキャプションに入れる。未投稿の相関カルーセルでは 2026-10-28 19:00 の 1105 (`actual-income-worker-households-per-month--accommodation-consumption-expenditure`) が「人口の影響を除くと r=0.72」を 2 回含む (1133・1134 は手書きの caption で重複なし)。
+- **次**: ① キャプションでは `spec.caution` の代わりに「相関は因果関係を示しません。」を出す (4 枚目の画像の文言は変えない)。テストで偏相関の値がキャプションに 1 回だけ出ることを固定する ② 1105 の後半を同じ文にした案をオーナーに見せ、承認後に R2 の `caption.txt` と台帳を差し替える (予約済みの本文変更なので承認を挟む)。
+- **完了条件**: 生成したキャプションで偏相関が 1 回だけになり、1105 の R2 と台帳の caption が重複なしで一致している (10-28 19:00 より前)。
 
 ### [NOTE-HOWTO-OWNER-CHECK-01] 別PCでマイマップとExcelの表示を確かめ、H-01・#9・#11 の画像を撮る
 タグ: [SNS・マーケ] [種類:制作] [実行:別環境] [起票:2026-10-18] [期日:2026-10-25] [領域:商品]
@@ -520,6 +553,7 @@ updated: 2026-10-19
 ### [KML-DOCUMENT-NAME-01] 地図用 KML の文書名を指標キーではなく日本語の指標名にする
 タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: ダウンロード route が `readRankingItemFromR2` で item.json を 1 件だけ読み、KML の文書名と GeoJSON の各地物の `title` に表示名を使う (読めなければ従来どおり指標キー)。route テストで「<Document><name>総人口（2025年）</name>」と GeoJSON の title を固定。本番は未デプロイ。
 - **経緯**: 2026-10-18 の note-critic レビューで指摘。本番の KML の `<Document><name>` が「total-population（2025年）」のように指標キーのままで、Google マイマップに読み込むとレイヤ名が英語になる。`apps/web/src/lib/download/build-map-download.ts` の `buildMapKml` が `meta.rankingKey` を名前に使っているため。
 - **次**: ダウンロード route でランキングの表示名を取得して `meta` に渡し、文書名と GeoJSON の properties に使う (route の読み込みが重くならない取得方法を選ぶ)。
 - **完了条件**: 総人口の KML の文書名が「総人口（2025年）」になり、route テストで固定した。
@@ -527,6 +561,7 @@ updated: 2026-10-19
 ### [CRITIC-VERDICT-RULE-01] critic の REVISE 判定の基準を、共通プロトコルと note-critic の定義で揃える
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-18] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 4 つの定義を照合すると、共通プロトコル・blog-critic・ranking-content-critic は「BLOCK が 1 件でもあれば REVISE」で、note-critic だけが「blocker か major」だった。オーナーの包括指示 (同日「推奨案でやり切って」) に従い多数側へ揃え、note-critic の重大度を `BLOCK/MAJOR/MINOR` に改め「BLOCK が 1 件でもあれば `verdict: REVISE`、無ければ `PASS`。MAJOR は判定を変えないが、author は公開前に直す」とした。blog-critic の文も同じ文言にした。重大度ラベルを読むスクリプトは無いことを grep で確認。codex mirror 再生成・整合検査 0 件。
 - **経緯**: 2026-10-18 の note-critic レビューで指摘。`.claude/rules/critic-review-protocol.md` は「BLOCK が 1 件でもあれば REVISE」、`.claude/agents/note-critic.md` は「blocker か major があれば REVISE」と書いており、同じ指摘で判定が変わりうる。今回は note-critic.md に従って major で REVISE になった。
 - **次**: どちらを正にするか決めて片方を直す (major を公開前に直させたいなら protocol 側を直す)。blog-critic・ranking-content-critic の定義も同じ基準か確かめる。
 - **完了条件**: 3 つの critic と共通プロトコルの REVISE 条件が同じ文言になった。
@@ -535,6 +570,7 @@ updated: 2026-10-19
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-OLD-2YEARS-20261018.txt] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 本番 (`/ranking/national-pension-full-exemption-rate`) を 1280・1440px で測ると、順位表の列幅の合計 410px (順位 60・都道府県 150・値 120・偏差値 80) が右カラムの枠 380px を超えていた (1024px は枠 554px で収まる)。最も長い県名は 52px なので都道府県を 100px にし、列幅を `RANKING_TABLE_COLUMN_WIDTHS` に出して合計が枠 380px 以下であることをテストで固定した。本番ページに同じ幅を当てると表 380px・最右セルの右端が枠と一致した。design-system:check 通過。見出し近くに年が無い指摘は全ランキングの見出しに関わるので `RANKING-HEADING-YEAR-DECISION-01` へ回し、`--mark-owner` を付けた。未デプロイ。
 - **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-OLD-2YEARS-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 - **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--old-2years-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--old-2years-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
 - **対象**:
@@ -550,6 +586,7 @@ updated: 2026-10-19
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 本番の `/ranking` を確認した。指摘の項目 (国立公園面積・国定公園面積・総面積（北方地域及び竹島を除く）) は公式の別指標で、名前どおりに区別できる。一覧は 101 件の導線で単位と年は各ページにあり、全項目に足すと読みにくくなるので by-design とした (`--mark-by-design`、理由は queue の note)。
 - **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-INDEX-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 - **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--index-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
 - **対象**:
@@ -564,6 +601,7 @@ updated: 2026-10-19
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `GeoSpatialEvidenceExplorer` の各段階で、地図をタブの直下に置き、凡例の説明文と距離帯の凡例を地図の後ろへ移した (凡例そのものは残す)。本番 `/geo/population-land-price` の 375×812 で同じ並べ替えを当てると地図の上端が 765px → 640px になり、最初の画面に地図が 47px → 172px 入る。geo-analysis のテスト 153 件・design-system:check・web の型検査が通過。`--mark-fixed` 済み。未デプロイ。
 - **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 - **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
 - **対象**:
@@ -577,10 +615,88 @@ updated: 2026-10-19
 ### [DEV-R2-SNAPSHOT-TIMEOUT-01] ローカルの dev:web で R2 snapshot の読み込みが 10 秒で打ち切られ、ページ表示に数分かかる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-17] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 完了条件「ランキングページが localhost で 30 秒以内に表示される」を満たした。`npm run dev:web` を Turbopack で起動するようにした (`apps/web/scripts/dev-server.ts`。`WEB_DEV_BUNDLER=webpack` で従来の webpack に戻せ、turbo の passThrough に宣言済み・契約テストあり)。8GB の Mac でキャッシュなしから実測すると、ランキング詳細 7.6 秒・テーマ詳細 21.6 秒・県ページ 7.8 秒・Geo 8.2 秒・トップ 5.8 秒・ブログ 8.0 秒・カテゴリ 10.4 秒・県別テーマ 19.0 秒で、10 種類のルートを開いてもメモリ再起動は起きなかった (webpack は同じ条件でランキング詳細 63 秒、4 種類で再起動)。主要 9 種類のページを新しいタブで開き、hydration エラーが 0 件であることを確かめた。一度見えた不一致は、サーバーアクションのファイルを編集した直後の差分再コンパイル中に読み込んだときだけで、キャッシュなしの起動では再現しなかった。Turbopack が 500 にした `"use server"` ファイルの型の再 export は外した。本番ビルドは webpack のまま。規約は `.claude/rules/local-environment.md`「dev サーバー起動」に追記。
+- **2026-10-21 経過**: (続き) ランキング詳細のモジュールが多い原因を webpack のモジュール一覧で実測した。ブラウザ向けバンドルに指標定義 2,648 件・data-configs 155・テーマ定義 56 が入っていた。経路は、クライアント部品 → `@stats47/ranking` の入口 → builder・調査分類 → data-configs の入口 → registry。ranking の入口から builder と調査分類を外し (builder は `@stats47/ranking/server`、調査分類は新しい `@stats47/ranking/survey`)、ranking 内の 4 ファイルは data-configs の新しい小さな公開口 (`recipe`・`provenance`・`source-name-to-survey`) から読むようにした。web の 6 ファイルの import を付け替えた。本番は ranking の `sideEffects: false` で使われない再 export が落ちるので、効くのは主に開発ビルド。逆戻りはテスト `packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts` が止める (入口へ再 export を戻すと落ちることを確認)。**実測 (8GB の Mac)**: ランキング詳細は 20,133 → 14,297 モジュール、ブラウザ向けの指標定義は 0 件。コンパイルキャッシュありで初回 40〜65 秒 → 17 秒、2 回目 1 秒。キャッシュなしの完全な初回は 222 秒 → 63.5 秒 (コンパイル 46.9 秒)。**残り**: キャッシュなしの初回は 30 秒を超える。県ページは 20,399 モジュールのままで、開いた後にメモリ再起動が起きる → `DEV-HEAVY-CLIENT-GRAPH-01`。
+- **2026-10-21 経過**: 原因は R2 ではなく next dev の初回コンパイルとメモリだった。① 公開 URL を curl で直接叩くと app/affiliate-ads/all.json (254KB) は 0.1 秒、アプリと同じ経路 (S3 API) で単発 0.14 秒・30 本同時 0.2 秒で、ネットワークは遅くない。② Mac (8GB) で dev:web を起動すると /ranking/[rankingKey] の初回コンパイルが 171.5 秒 (20,133 モジュール。トップは約 1 万) かかり、その間に blog snapshot の読み込み 3 件が 10 秒の上限で SnapshotTimeoutError になった (R2 は返せているのに、コンパイル中で完了処理が遅れる)。コンパイル直後に Next が「メモリ上限に近い」として自分で再起動し、コンパイル結果を失っていた。Next は上限が未指定なら搭載メモリの半分 (8GB で 4096MB) を自分で付け、使用量が 8 割を超えると再起動する (node_modules/next/dist/server/lib/start-server.js・cli/next-dev.js で確認)。**直したこと**: snapshot の取得上限を NODE_ENV=development のときだけ 60 秒にした (本番は 10 秒のまま。テスト 2 件、開発側の変更を戻すと落ちることを確認)。**実測 (ディスクのコンパイルキャッシュあり)**: ランキング詳細の初回表示は 40 秒 (コンパイル 27.8 秒)、2 回目は 2 秒。県ページは初回 35 秒。2 ページ目のコンパイル後にメモリ再起動が再発した。**残り**: 初回 30 秒以内の完了条件は未達。ランキング詳細・県ページが約 2 万モジュールになる原因の一つは指標定義を全部 import する registry (2,644 ファイル) で、ホームは切り離し済み (featured.server.ts のコメント)。ランキング詳細から全件 registry を外せるかが次の一手。
 - **観測 (2026-10-17・Mac)**: `npm run dev:web` で `app/affiliate-ads/all.json` の読み込みが `SnapshotTimeoutError: ... timed out after 10000ms` を繰り返し、`GET /` が 539,984ms、`/ranking/total-population` は 540 秒で応答なし。同じサーバーで `/api/ranking/total-population/download?format=kml` は 5.6 秒で返った。ブログの商品導線とダウンロード部品の画面確認がこのため 2 回止まった (部品は描画テストで代替)。
 - **次**: ① 同じ時刻に R2 の公開 URL を curl で直接叩き、ネットワークの遅さかアプリ側の多重読み込みかを切り分ける ② ログでは同じ key の読み込みが 1 秒に十数回並んでいるので、ページ内での重複取得 (リクエストごとの dedupe の有無) を確かめる。
 - **完了条件**: 原因を特定し、ランキングページが localhost で 30 秒以内に表示される。
 
+
+### [DEV-HEAVY-CLIENT-GRAPH-01] テーマ・Geo・県ページのブラウザ向けに、全指標 registry と GIS 処理ライブラリが入る経路を断つ
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: ブラウザ向けの部品 262 件のうち registry に届くものを 37 件 → 0 件にし、県ページから GIS 原典処理 (unzipper・shapefile・proj4・topojson) への経路をなくした。① `stat-series-ref.ts` から registry を外し、指標の登録確認は判定関数を受け取る `*With` 版に分けた。registry で確かめる版 (`parseStatSeriesRefs` など同じ名前・同じ引数) は新しい公開口 `@stats47/data-configs/theme-catalog/registry-checks` に移し、カタログ検査・サーバー側の処理・テストはそちらを使う。ブラウザ側 (`theme-chart-result.ts`) は `SKIP_METRIC_REGISTRATION_CHECK` を明示して形だけを確かめる。② `@stats47/gis/mlit-ksj/catalog` (データセット一覧とライセンス方針だけ) を作り、web の 7 ファイルを付け替えた。③ 県ページ用 `features/geo-analysis/area.ts`・テーマ用 `embedded.ts`・他機能用 `features/ranking/widgets.ts` の最小の入口を作り、ランキング機能内の 3 ファイルは規約 DR-AUDIT-07 どおり相対 import にした。④ `"use server"` のファイルから型の再 export を外した (Next.js の規則。Turbopack は 500 にする)。逆戻りは `apps/web/src/__tests__/client-bundle-boundary.test.ts` が止める (入口へ重い部品を戻すと落ちることを確認)。**実測 (8GB の Mac・webpack の dev)**: 県ページ 20,399 → 14,264 モジュール、テーマ詳細 15,676、/geo 7,401。メモリ再起動はページ 2 種類目の後 → 4 種類目の後になった。全テスト (web・data-configs・ranking・gis・admin)・全 workspace の型検査・preflight:pr 通過。**採らなかったもの**: `optimizePackageImports` を `@stats47/*` に広げる案は 1〜3% しか減らず不採用。Turbopack (`next dev --turbopack`) はキャッシュなしでもランキング詳細 7.4 秒・県ページ 6.6 秒・17 種類のルートで再起動なしと大幅に速いが、テーマ詳細で webpack に無い hydration の不一致 (useId のずれ) が出るので既定にしていない (本番は webpack で、画面確認を誤らせる)。
+- **2026-10-21 追記 (本番ビルドで確認)**: 手順①を本番ビルド (`next build`・ローカル) で確かめた。ブラウザ向けの JS に指標定義 (`statsDataId`・指標の設定) と GIS 原典処理は入っていなかった。代わりに、テーマ切替 (`ThemeSwitcher`) が選択肢の名前のためだけに全テーマの設定 `ALL_THEMES` を読み、全テーマの指標定義 324KB のチャンクがテーマ系の 3 ルートに入っていた。サーバーで `{themeKey, title, isAreaTheme}` だけの一覧 (`config/theme-switcher-themes.ts`) を作って props で渡すようにし、`themeHref` を `config/theme-href.ts` に分けた。再ビルドでこのチャンクが消えたことを確認した (ビルドは静的生成まで成功)。境界テストに `ThemeSwitcher`・`ThemeSideNav` から `all-themes` に届かないことを足した。
+- **実測 (2026-10-21・8GB の Mac・dev:web)**: 県ページ `/areas/[areaCode]` のコンパイルは 20,399 モジュールで、開いた後に Next が「メモリ上限に近い」として再起動する。TypeScript のモジュール解決で値の import をたどると、registry (指標定義 2,643 件) に届くクライアント部品が 37 件残る。経路はほぼすべて `data-configs/src/theme-catalog/index.ts` → `stat-series-ref.ts` (`getMetricConfig` で指標の実在を確かめる) で、テーマ・Geo の部品が型や出典定数を読むだけで入る。ブラウザで動く `theme-chart-result.ts` も `parseStatSeriesRefs` 経由で registry を呼ぶ。県ページはさらに unzipper・shapefile・proj4・topojson-server (GIS の原典処理用) に届く。
+- **次**: ① 本番ビルドでテーマページの初回 JS に registry が入っているかを確かめる (data-configs は `sideEffects` を宣言していないので、開発ビルドだけの問題とは限らない) ② `stat-series-ref` の検証を registry に依存しない形にするか、検証を別の公開口へ分ける ③ 県ページで GIS 処理ライブラリを読む経路を特定して断つ。ランキング詳細と同じく `client-entry-registry-boundary.test.ts` 型の境界テストで固定する。
+- **完了条件**: テーマ・県ページのクライアント部品から registry と GIS 処理ライブラリに届く経路が 0 件で、県ページを開いた後にメモリ再起動が起きない。
+
+
+- **2026-10-21 残りの分離**: 全 `"use client"` ファイルの定期検査は `CLIENT-GRAPH-AUDIT-01`、`"use server"` ファイルの export 検査は `USE-SERVER-EXPORT-LINT-01`、サーバー側の入口とページ別 JS の大きさは `DEV-SERVER-BARREL-01`、Windows での Turbopack の確認は `TURBOPACK-DEV-WINDOWS-01`。
+### [SSDS-YEARFORMAT-SOURCE-01] SSDS の指標生成器が年の区切りを一律「年度」で書くのをやめ、出典の期間から決めて検査で止める
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-21] [領域:データ]
+
+- **根本原因 (2026-10-21 確認)**: `.claude/scripts/estat/gen-ssds-configs.mjs` が社会・人口統計体系 (SSDS) の全指標に `yearFormat: "fiscal"` を固定で書いている (79 行目)。このため国勢調査 (10月1日時点)・家計調査 (暦年平均)・犯罪統計 (暦年計) などが「2020年度」と表示されていた。同日に 410 件を出典の期間に合わせて直したが (`METRIC-YEARFORMAT-KAKEI-01`)、生成器を直さない限り新しい指標で再発する。
+- **判定の手順 (同日に使った方法・再現用)**: ① e-Stat「統計項目の定義」`https://www.e-stat.go.jp/koumoku/koumoku_teigi/<A〜M>` の HTML を `<hr>` で区切り、各表 (見出し行に「時点又は期間」) の 1 列目の項目符号と 4 列目の期間、節末尾の「調査名又は報告書名」を取る (13 分野で 2,596 項目)。② 「指標計算式」`https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/<A〜M>` の `<tr id>` から指標コード (`#L01201` 等) と計算式 (`L3110` 等の基礎項目、781 指標) を取る。③ 指標の基礎項目がすべて「暦年計・暦年平均・暦年・12月末/31日・10月1日」か、e-Stat の統計表一覧 API (getStatsList) の表題で「平成N年◯◯」と年で呼ばれる調査 (賃金構造基本統計調査・経済センサス・経済構造実態調査・事業所・企業統計調査・国民生活基礎調査・農林業センサス・漁業センサス・社会生活基本調査) なら calendar。年度計・年度間・3月31日などを含めば fiscal。それ以外は判定しない。同日の作業用スクリプトは一時領域にしか無いので、この手順で作り直す。
+- **次**: ① 上の判定を `.claude/scripts/estat/` に純関数 + テストとして置き、定義ページの控えを `data/estat/` に保存する (台帳 `config/datasets.mjs` に 1 行足す)。② `gen-ssds-configs.mjs` が判定結果で `yearFormat` を書き、判定できない指標は生成を止めるか人の確認を求める。③ `validate:config` か専用の検査で、SSDS の指標の `yearFormat` が判定と食い違えば error にする (判定できない指標は理由付きの allowlist、縮小専用)。誤りを 1 件注入して発火することを確かめる。
+- **完了条件**: 生成器が出典の期間から年の区切りを決め、既存 SSDS 指標の食い違いを検査が止め、注入した誤りで検査が落ちる。
+
+### [YEARFORMAT-REFLECT-01] 年表記を直した 410 指標を R2 と記事・AI 解説・書籍へ反映する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **背景**: 2026-10-21 に 410 指標の `yearFormat` を fiscal → calendar に直した (develop のコミット `06316dc21`・`a21c4586a`・`5e72aa59a`。家計・物価・地価 68、SSDS の他分野 221 と 121)。サイトの年表記 (R2 の `yearName`「2020年度」→「2020年」) が変わるのは、develop→main のマージ後に配信値を作り直したときだけ (`sync-snapshots` は main のコードで動く)。
+- **次**: ① main へマージした後、変わった指標の `ranking-values` を作り直す (`gh workflow run sync-snapshots.yml --ref main -f only=ranking-values -f ranking_keys=<最大50件>` を分けて実行するか、月次の data-refresh を待つ)。数件を curl で読み、`yearName` が「年」で終わることを確かめる。② 公開済みのブログ・ランキングの AI 解説 (`app/ranking/<key>/ai-content.json`)・note・Kindle の本文で、これらの指標に「◯年度」と書いた箇所を洗い出し、出典の期間に合わせて直す (ブログは公開記事の差し替えになるのでまとめて 1 回)。
+- **完了条件**: 410 指標の R2 の `yearName` が「年」で終わり、本文の「年度」表記の食い違いが 0 件か、直さない理由が記録されている。
+
+### [CLIENT-GRAPH-AUDIT-01] ブラウザ向けの全部品について、重い依存に届かないことを定期に検査する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **背景**: 2026-10-21 に、入口 (barrel) 経由で全指標 registry・全テーマ定義・GIS の原典処理がブラウザ向けに入っていたのを直した (`DEV-HEAVY-CLIENT-GRAPH-01`)。逆戻りを止める境界テスト (`apps/web/src/__tests__/client-bundle-boundary.test.ts`・`packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts`) は、列挙した入口しか見ない。新しい入口や部品から同じ経路ができても気づけない。同日の調査では、全 `"use client"` ファイル 262 件から値の import をたどる一時スクリプト (TypeScript の `resolveModuleName`、型だけの import と `"use server"` のファイルは辿らない) で 37 件の経路を見つけた。全件で約 1 分かかる。
+- **次**: ① この全件検査を `.claude/scripts/` に置き、registry・`all-themes`・GIS 原典処理 (unzipper・shapefile・proj4・topojson-server・topojson-simplify) に届く `"use client"` ファイルを数える。② 週次の `quality-suite-weekly.yml` か preflight (時間次第) に配線し、0 件からの増加で落とす。③ 誤りを 1 件注入して発火を確かめる。
+- **完了条件**: 全 `"use client"` ファイルを対象に定期検査が走り、注入した経路で落ちる。
+
+### [USE-SERVER-EXPORT-LINT-01] `"use server"` のファイルが async 関数以外を export したら検査で止める
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-21] [領域:サイト]
+
+- **背景**: 2026-10-21、`features/theme-dashboard/actions/fetch-metric-timeseries.ts` (`"use server"`) が型を再 export (`export type { … } from`) しており、開発サーバーを Turbopack にするとテーマ詳細が 500 になった (webpack は通していた)。Next.js の規則は「サーバーアクションのファイルは async 関数だけを export する」。同日に該当の 1 件は直したが、`export interface` / `export type` を持つ `"use server"` ファイルが他に 4 件ある (`theme-dashboard/actions/{fetch-theme-chart-results,fetch-population-pyramid,fetch-db-chart-data}.ts`・`depopulation-medical/actions/fetch-base.ts`。Turbopack では表示できているが規則とは食い違う)。
+- **次**: `"use server"` のファイルで、async 関数以外の値の export と型の再 export を ESLint か専用の検査で止める。既存の `export interface` は型ファイルへ移すか、検査の対象外にする理由を決める。違反を 1 件注入して発火を確かめる。
+- **完了条件**: 検査が develop-quality-gate か pre-commit で走り、型の再 export を注入すると落ちる。
+
+### [TURBOPACK-DEV-WINDOWS-01] 会社の Windows PC で開発サーバーが Turbopack で動くことを確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:windows] [起票:2026-10-21] [領域:管理]
+
+- **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。確かめたのは自宅の Mac だけ。会社 PC は i-FILTER の TLS 傍受があり、R2 を読むために dev-server が Windows の R2 gateway を起動して `R2_PUBLIC_FETCH_URL` を差し替える (`.claude/rules/local-environment.md`)。この経路と Turbopack の組み合わせは未確認。
+- **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
+- **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
+
+### [SMOKE-SCRIPT-BASH3-01] ルートのスモーク検査が Mac の bash 3 で動かないのに「passed」と出る
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-21] [領域:管理]
+
+- **事象 (2026-10-21)**: Mac で `bash .github/scripts/smoke-test-routes.sh http://localhost:3001` を実行すると、41 行目の `declare -A` が bash 3.2 で失敗し、157 行目でも構文エラーが出た。それでも最後は「Smoke test passed: 2/2 representative routes OK.」で終了コード 0 になった。CI (Linux の bash 5) では正しく動くが、手元で使うと検査していないのに合格と表示される。
+- **次**: 先頭で bash 4 以上を要求して止める (`BASH_VERSINFO`) か、連想配列を使わない書き方にする。途中の構文エラーで合格を出さないよう `set -e` 相当か件数の照合を入れる。
+- **完了条件**: Mac の bash 3 で実行すると明示的に失敗するか正しく検査し、合格の件数が検査した URL の数と一致する。
+
+### [LOCAL-RELEASE-BUILD-R2-TIMEOUT-01] ローカルの本番ビルドが静的生成で R2 の読み込み 10 秒制限に引っかかって落ちることがある
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **事象 (2026-10-21・8GB の Mac)**: `NEXT_DIST_DIR=.local/next-release next build` の 1 回目が、1,633 ページの静的生成中に `/tag/再生可能エネルギー` で `blog snapshot read timed out after 10000ms` となり失敗した。同じコードの 2 回目は成功した。ローカルのビルドは `.env.development` の公開 R2 URL を読むので、多数のページが同時に同じ snapshot を読んで制限を超えると考えられる ([仮説]。検証: 静的生成中の同時 fetch 数を数える)。`npm run check:release-local` の結果が不安定になる。CI のビルドは R2 を読まないので起きない。
+- **次**: ① 静的生成中に同じ key を何回読んでいるかを数える。② 1 回のビルドの中で同じ snapshot の読み込みをまとめるか、ビルド中だけ制限時間を延ばすかを決める (本番の実行時は 10 秒のまま)。
+- **完了条件**: ローカルの本番ビルドを 3 回続けて実行し、R2 のタイムアウトで落ちない。
+
+### [ESLINT-COMPAT-TEST-LOCAL-01] `eslint-dependency-compatibility.test.ts` が Mac でだけ毎回落ちる原因を調べる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **事象**: `apps/web` の vitest 全件で、`src/__tests__/eslint-dependency-compatibility.test.ts` の「handles a deeply nested brace pattern without exhausting the call stack」だけが Mac で毎回落ちる (2026-10-21 に 6 回実行して 6 回とも同じ。CI の Unit Tests (web) では通る)。全件の結果を読むたびに「既知の 1 件」を除いて判断する必要があり、新しい失敗を見落とす原因になる。
+- **次**: 失敗の出力を読み、Node のスタックサイズ・Node の版・依存の解決先 (Mac と CI) の違いを切り分ける。環境由来なら、テストが前提とする条件を明示して満たさない環境では理由付きで skip するか、条件をそろえる。
+- **完了条件**: Mac で web の vitest 全件が 0 件の失敗で終わるか、skip の理由がテストに書かれている。
+
+### [DEV-SERVER-BARREL-01] サーバー側の入口経由の重い依存と、本番のページ別 JS の大きさを減らす
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **実測 (2026-10-21)**: ① トップページのサーバー側は、`features/blog/server.ts` (調査分類) と `features/area-profile` の入口を経由して全指標 registry を読む。ほぼ全ページのサーバー側で一度はコンパイルされるので開発時の負担は 1 回だが、入口を細かくすれば減る。② `@stats47/data-configs` は package.json に `sideEffects` を宣言していない。本番ビルドで使わない再 export を落とせない可能性がある。③ 本番ビルドのページ別のブラウザ向け JS (非圧縮・共有分を含む) は、テーマ詳細 1,758KB・Geo 分析 1,405KB・ランキング詳細 1,073KB・トップ 965KB・県ページ 962KB。
+- **次**: ③ を `@next/bundle-analyzer` (next.config に配線済み) で開き、大きい依存を上から確かめる。② は `sideEffects: false` を宣言した場合に本番の JS が減るかと、壊れないか (CSS・副作用のあるモジュール) を比べてから決める。① は効果を数えてから着手する。
+- **完了条件**: ページ別 JS の大きい順の内訳が記録され、減らせるものを減らしたか、減らさない理由が書かれている。
 ### [PRODUCT-FUNNEL-DEPLOY-01] ブログ・ダウンロードの商品導線と地図用ダウンロードを本番に出し、4 週のクリックを測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
@@ -616,6 +732,7 @@ updated: 2026-10-19
 ### [DOWNLOAD-CSV-CITATION-01] ランキング CSV に e-Stat 準拠の出典と「加工して作成」の表記が入っているかを確かめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-17] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 確認の結果、CSV に出典も加工の表記も無かった。`build-download-csv.ts` に `CsvCitation` を足し、表の後に空行を挟んで「指標・出典 (編纂元と原典)・統計の取得元 (e-Stat のとき)・加工・掲載ページ・作成日」を出す (先頭行は列見出しのまま)。route は item.json の `attribution`・`source` から渡す。実データで total-population・annual-sunshine-duration (SSDS) と architect-annual-income (賃金構造基本統計調査) の 3 指標の CSV を生成し、表記が入ることを確認した。単体テスト 3 件・route テスト 1 件。本番は未デプロイ。府省名は item.json に無いので一次統計の出典は調査名だけになる。
 - **経緯**: 2026-10-17 の学生ペルソナ調査 (AI シミュレーション + Web 検索)。CSV をダウンロードする人の用途は学習が最多 (2026-W41 `data/ga4/snapshots/2026-W41/download-purpose.csv`: 学習 33・仕事 19・個人 10)。卒論・レポートでは出典の書き方と加工の表記が詰まる点で、e-Stat の利用規約 (https://www.e-stat.go.jp/terms-of-use) が表記の例を示している。CSV の出典行の有無はまだ確認していない。
 - **次**: ① ダウンロード route が出力する CSV を 3 指標ぶん取得し、調査名・表名・年次・取得日・加工の表記があるかを確認する ② 無ければ provenance から出典行を足す。
 - **完了条件**: 代表 3 指標の CSV に出典と加工の表記が入っていることを、出力の実物で確認した。
@@ -623,6 +740,7 @@ updated: 2026-10-19
 ### [NOTE-LEDGER-DUPLICATE-ENTRIES-01] note 記事台帳の重複エントリを解消し、一意性を検査に入れる
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-17] [領域:商品]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 台帳 502 件を照合すると、同じ題名は 21 組あるが、noteUrl が重なる行は 0 件だった。公開済みどうしの 8 組 (最高気温 4 本・大学数 2 本・fetch-estat 2 本・前年比較 2 本・koumuin の 3 組) は note 上で別 URL に公開された実在の投稿で、台帳の二重登録ではない。残り 13 組は下書きと公開済みの組で `NOTE-CATALOG-DUPLICATE-DRAFTS-01` の範囲。実在の投稿の記録は消せないので統合はせず、`validateArticleLedger` に「1 つの note 記事 (URL) を 2 行で持たない」検査を足した (同じ題名は許す。テストで固定、実台帳で通過)。note 上の重複公開をどうするかは `NOTE-PUBLISHED-DUPLICATES-DECISION-01` へ分けた。
 - **経緯**: 2026-10-17 の自治体ペルソナ調査の過程で、`data/note/articles.json` に同じ記事が 2 件ずつある箇所が見つかった (「e-Stat 統計の前年比較・5 年トレンド・増減ランキングを自動化する」「47 都道府県データを 1 コマンドで取得する」が各 2 件、「公務員が副業せずに Claude Code スキルで評価される 5 つの場」が draft と published の 2 件)。`NOTE-LEDGER-FOLLOWUP-01` と同じ台帳だが、一意性の検査はそのカードの範囲に無い。
 - **次**: ① 重複の組を列挙し、note の公開 URL・R2 の本文のどちらが正かを確かめて 1 件に統合する ② タイトルまたは note ID の重複を拒否する検査を、台帳の validator に足す。
 - **完了条件**: 台帳に同一記事の重複が 0 件で、重複を入れると validator が失敗することをテストで固定した。
@@ -918,6 +1036,7 @@ updated: 2026-10-19
 ### [METRIC-DENOMINATOR-LABEL-01] 人口当たりなどの指標で、表示名と単位から分母が落ちている (博物館数 = 人口100万人当たりなのに「博物館数」「館」)
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-13] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 有効な e-Stat 指標で、e-Stat の項目名 (`data/estat/meta` の控え、無ければ getMetaInfo) の末尾の括弧に「当たり」があり、title・subtitle に分母が無いものを `denominatorFromName` (note の生成器と同じ) で数えると 143 件 (人口10万人当たり 23・人口100万人当たり 10・人口千人当たり 10・65歳以上人口10万人当たり 9・千世帯当たり 8 ほか。1 件当たり・1 住宅当たりなども含む)。単位は素のまま (`unit-semantics-standards.md` §4)、分母は subtitle に書いた: subtitle の無い 131 件は分母だけ、既にある 12 件は「分母・既存の subtitle」(同じ title の区別子を残すため)。分母は推測せず項目名からだけ取った。生成物 `ranking-prominence.generated.ts` も再生成。validate:config・metrics:check・content:check・display-semantics・preflight:pr 通過。R2 の item.json・県データブックは次の sync で反映される。
 - **事実 (2026-10-13)**: キーに `per-million`・`per-100k`・`per-1000` などを持つ指標のうち約 90 件は、`data/metrics/<key>.ts` の `title`・`subtitle` に分母が無い。
   例: `museum-count-per-million` は e-Stat の項目名が「博物館数（人口100万人当たり）」なのに、title「博物館数」・unit「館」。R2 の `item.json`、県データブック (`databook.json` の highlight.label)、
   SNS のタイル画像 (`quick-still.ts` は item の title を描く) が実数のように読める。`certified-childcare-center-count-per-100k-0-5` (認定こども園数 687.1 園) も同じ。
@@ -965,6 +1084,7 @@ updated: 2026-10-19
 ### [SNS-SCRIPT-TS-TESTS-WIRING-01] SNS スクリプトの TS テスト 10 本と素材照合テストを CI で実行する
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:node --import tsx --test .claude/scripts/sns/__tests__/*.test.ts] [起票:2026-10-13] [領域:SNS]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `package.json` に `sns:test` (`node --import tsx --test` で `.claude/scripts/sns/__tests__/*.test.{ts,mjs,cjs}` の全件) を足し、`pr-quality-check.yml` の「SNS Post Trace Contract」step から呼ぶ。手元で 106/106 合格、`tile-change.test.ts` に失敗するテストを 1 件足すと exit 1 になることを確認した。PR CI での実行は次の develop→main PR で確かめる。
 - **事実 (2026-10-13)**: `.claude/scripts/sns/__tests__/` の `*.test.ts` 10 本 (今回コミットした `data-card-input` / `all47-svg` / `tile-change` を含む) と
   `material-reconciliation.test.mjs` は、どの npm script・workflow からも実行されていない。ルートの vitest workspace も `.claude/scripts` を含まない。
   CI で走るのは `post-trace-core.test.mjs` と `x-direct-ledger.test.cjs` だけ。手元では `node --import tsx --test` で 20 件、`node --test` で 14 件が合格した。
@@ -1245,10 +1365,16 @@ updated: 2026-10-19
 - **事象**: dependabot は `apps/web` などの package.json だけを上げ、ルートの `overrides` (next 15.5.24・sharp 0.35.4) は古いまま残った。next が 2 つの版で入り、PR #1119 の本番ビルドの /404 事前描画が `<Html> should not be imported outside of pages/_document` で落ちた (2026-10-10。overrides を揃えて解消)。CI の Build Check が本番前に止めたが、ビルド 5 分と CI 往復 1 回を使った。
 - **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
 - **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
+- **追加の観測 (2026-10-21・PR #1165 の Security Scan)**: vite の脆弱性 (8.2.0〜8.2.3) を直すためにルートの `overrides` へ `"vite": "8.2.4"` を足しても、
+  `npm install` は lock の 8.2.2 を残し、`npm ls vite` が `invalid` を出すだけで exit 0 だった。lock から vite の項目を消して入れ直すと、vite と依存 7 件が
+  lock から消えた (誤り。戻した)。`npm update vite` は npm 自体のエラー (`Cannot read properties of null (reading 'edgesOut')`)。
+  通ったのは「ルートの devDependencies に `vite@^8.2.4`、overrides は `"vite": "$vite"`」(commit `ef8df73aa`)。検査の (c) として
+  「`npm ls --all` に `invalid` が無い (override と lock の版が一致する)」を足す。
 
 ### [RANKING-RATIO-RANK-MISMATCH-01] 比率指標 4 件で配信中の順位が再計算と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 配信値は正しく、監査側の比べ方が原因だった。配信の values.json は表示桁 (小数 1 桁) に丸めた値で順位を付けるので丸めて同じ値の県は同順位になるが、`verify-calculated-rankings.ts` は丸める前の値で付けた順位と比べていた。4 件の rankDiff (廃業率 30・開業率 26・エンゲル係数 13・情報通信係数 27) は、それぞれの配信値の同値の数とちょうど一致し、配信値と同じ桁に丸めて順位を付け直すと 4 件とも順位・値が完全一致した。`packages/ranking/src/utils/rank-at-served-precision.ts` (丸めてから同順位込みで順位を付け直す。向きは再計算の順位から読む・テスト 2 件) を足して監査が使うようにし、実データで「rank 一致 6/6」・「定数倍ずれ」の誤報 0 件を確認した。R2 の再生成は不要。次の週次監査 (main に入った後) で Issue #679 のこの項目が消える。
 - **事象**: ランキング整合性の週次監査 #679 (2026-10-03) で、`business-closure-rate` (順位差 30)・`business-opening-rate` (26)・`engel-coefficient` (13)・`information-communication-coefficient` (27) の 4 件が、R2 の values と再計算で順位が一致しない (件数は一致)。監査は「DB レス回帰の疑い」と出している。
 - **次**: 4 件の values.json の rank と `calculateRankingValues` の結果を並べ、どちらが正しいか (昇順・降順の向き、同率の扱い、元データの年) を確かめてから再生成する。
 - **完了条件**: 次の週次監査で rank 不一致が 0 件。
@@ -1310,6 +1436,7 @@ updated: 2026-10-19
 ### [NSM-GUARD-EMPTY-CSV-01] 週次収益 (NSM) のガードが GA4 の CSV 0 行で失敗した原因を確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
 
+- **2026-10-21 経過**: `fetch-metrics-weekly.yml` の run 一覧 (`gh run list --workflow fetch-metrics-weekly.yml`) では、失敗は 10-04 の 37213549127 だけで、次の 10-16 07:53 JST の 38820105627 は成功し、ガードが全 PASS で #1065 は自動クローズされた。成功はまだ 1 週なので、次の週次実行 (10-23 頃) の成功を見てから閉じる。0 行の原因は再現しないため未特定。10-09 の週は schedule の run 自体が一覧に無い (別件として確認が要る)。
 - **事象**: #1065 (2026-10-04)。ガードの実行 (run 37213549127) で `overview.csv`・`daily.csv`・`devices.csv`・`units.csv` がすべて 0 行 (error)。前の 2 回 (09-20・09-27) は成功している。
 - **次**: 10-11 の実行結果を確かめる。成功していれば一時的な取得失敗として #1065 に記録して閉じ、続いていれば GA4 の取得 (認証・プロパティ・期間) を調べる。
 - **完了条件**: 週次収益の計測が 2 週続けて成功し、#1065 が閉じている。
@@ -1400,6 +1527,7 @@ updated: 2026-10-19
 ### [BLOG-REFRESH-STALE-SOURCE-FIELDS-01] 図の年の取り直しで source.json の coverage と補足値が古い年のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 補足の集計値 (coverage・相関など) は図の data から作り直せないので、自動で直さず列挙する方にした。`lib/refresh-chart-year.mjs` に `findStaleSourceFields` (取り直し後の source.json で、作り直した year・refreshedFromYear・fetchedAt 以外に元の年が残る欄を、入れ子のパスで返す。4 桁の年を数字の境界で判定) を足し、`refresh-article-data-years.mjs` が「手作業: source.json の coverage・supplementary.tunaCorrelation.year に 2015 年の値が残る」を表の補足に出す。テスト 2 件 (bonito の形・残りなし)。
 - **事象 (2026-10-08)**: `refresh-article-data-years.mjs --apply` で `bonito-catch-prefecture` の図を 2023 年にしたあと、`bonito-ranking.source.json` の
   `coverage` と `supplementary.tunaCorrelation` が 2015 年の値のまま残った (article-writer が手で直した)。ほかの記事でも取り直し後に古い値が残りうる。
 - **次**: スクリプトが年に依存する source.json の項目を作り直すか、作り直せない項目があれば「手作業」に出して知らせる。
@@ -1522,6 +1650,7 @@ updated: 2026-10-19
 ### [FISHERY-BONITO-CONFIG-01] カツオ漁獲量の指標の注記と実データの件数・集計基準が合わない
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: e-Stat 0003238633 (cdCat01=0250) を照会すると、2015 年の 9 県は岩手・茨城・兵庫・鳥取・香川が秘匿 (x)、秋田・大阪・岡山・広島が事実のないもの (-) で、R2 はどちらも値なしにしていた (取り込みの欠落ではない)。対象県数は description の「39都道府県」が e-Stat と一致する (カード起票時の「40」は既に直っていた)。集計基準は農林水産省「海面漁業生産統計調査 調査の概要」に「集計値は、海面漁業経営体の所在地に計上している」(属人統計) とあるのを確かめ、config に `note` として、属人の集計基準・累年表での記号の扱い・2015 年の 9 県の内訳を出典 URL と確認日付きで書いた。validate:config・metrics:check 通過。
 - **事実 (2026-10-08、article-writer と blog-critic が報告)**: `data/metrics/fishery-species-catch-bonito.ts` は「内陸 8 県のみ対象外・40 都道府県」と書くが、R2 の 2015 年は 30 行で、岩手・秋田・茨城・大阪・兵庫・鳥取・岡山・広島・香川の 9 県に行が無い (茨城は 2014 年 2,756 トン、鳥取は 2012 年 9,336 トン)。集計が漁業経営体の所在地 (属人統計) であることも config に無い。
 - **次**: e-Stat 表 0003238633 で 9 県の 2015 年の記号 (秘匿・該当なし) を確かめ、config の note を実データと集計基準に合わせる。秘匿なら note に書き、取り込みの欠落なら再取り込みする。
 - **完了条件**: note の対象県数と集計基準が e-Stat と一致し、9 県の扱いが記録されている。
@@ -1529,6 +1658,7 @@ updated: 2026-10-19
 ### [BLOG-DATA-MISSING-AS-ZERO-01] ブログの図のデータで、R2 に行の無い県 (欠損) と値 0 が区別できない
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 原因は 2 か所だった。`fetch-ranking-data-r2.mjs` が読む `app/ranking` は値の無い県を既に除いている (カツオ 2023 年は 34 行・無い 5 県は行なし・0 の 4 県は観測値) が、`build-article-data-from-r2.mjs` は `app/stats` の `value: null` 行をそのまま data に入れ、`generate-article-charts.ts` の棒グラフが `?? 0` で 0 として下位に並べていた。共通の `lib/blog-observed-values.mjs` (`observedOnly`: 値が有限数の行だけ残し、観測された 0 は残す) を足して両方で使う (テスト 1 件)。公開済みの data JSON 2,433 件を S3 で全件読み、値の欠けを持つのは 3 件 2 記事: `bonito-catch-zero-prefectures-gap/bonito-status-by-year` (status 付きの意図的な欠けで SVG なし) と `marriage-divorce-okinawa` の婚姻率・離婚率 (本文が順位を書かない県を null にした抽出。公開 SVG に該当県は描かれていない)。0 として描いた公開図は 0 件なので是正キューへの追加はなし。2026-10-08 の bonito の 0 埋め (39 行) を作った経路は特定できていない。
 - **事実 (2026-10-08、blog-critic が報告)**: `bonito-catch-prefecture` の `bonito-ranking.json` は 39 行のうち 9 行が R2 に行の無い県で、0 として入っていた。本文はそれを「漁獲ゼロ 13 県」と数え、回遊路の外という因果を付けていた (記事側は同日の改稿で直す)。
 - **次**: `.claude/scripts/blog/fetch-ranking-data-r2.mjs` が欠損県をどう扱うかを読み、欠損は行を作らないか `missing: true` を残す。公開済み記事の data JSON で同じ埋め方がされた図を数え、該当記事を是正キューに載せる。
 - **完了条件**: 取得スクリプトが欠損を 0 にしないことをテストで固定し、公開済み記事の該当件数が記録されている。
@@ -1536,6 +1666,7 @@ updated: 2026-10-19
 ### [FACTUAL-CHECK-CROSS-METRIC-RANK-01] 別指標を併記した段落で、factual-check が順位を主指標の data に誤って照合する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `article-factual-check.mjs` を 3 点直した。① 順位も値と同じく、同じ文に data に無い指標名 (「カツオの購入数量では」) があれば照合しない (`mentionsForeignMetric` を `checkRankClaims` でも使う) ② `.source.json` の `year` を各 fact に付け、本文が data と違う年の順位 (「1972 年は 2 位」) を語るときは照合しない (年が分からない data では従来どおり照合) ③ 県名と数値の間に読点で区切った別の値があれば、その数値は列挙の次の地名のものとして組にしない (「宮崎市の3,517円、宇都宮市の2,801円」)。3 例を再現するテストを先に足して赤を確認し、主指標の順位と値の誤り (指標名あり・なし・data の年) は従来どおり検出するテストも足した (24/24)。outbox 12 記事の RANK/VALUE_MISMATCH は修正前後とも 0 件。
 - **事実 (2026-10-08、bonito-catch-prefecture に購入数量の段落を足したとき)**: 「福島県…3位」(購入数量の順位) が漁獲量の data と照合され RANK_MISMATCH になった。書き手が言い回しを変えて回避した。
 - **次**: `.claude/scripts/lib/article-factual-check.mjs` の県名と順位の紐づけで、同じ文に別指標名 (data の label と違う指標名) があるときは照合を見送るか、その指標の data と照合する。誤検知のテストと、従来の検出が残るテストを両方足す。
 - **同じ根の値の誤照合 (2026-10-08、blog-critic が報告)**: `frozen-gyoza-spending-prefecture-gap` の「宮崎市の3,517円、宇都宮市の2,801円」で、宮崎と 2,801 円を組にした VALUE_MISMATCH (warning) が出た。値は直前の地名と組にする。
@@ -1643,6 +1774,8 @@ updated: 2026-10-19
 ### [REMOVE-WORKTREE-TEST-MAC-PATH-01] worktree 削除のテストが Mac で落ちる (/var と /private/var の表記ずれ)
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/remove-worktree.test.mjs] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 登録の照合だけを `fs.realpathSync` で正規化したパスで行う (`canonical`・`isRegistered`)。削除対象・リンク検査は正規化前のパスのままなので、worktree を指す symlink は従来どおり止まる。Mac で `remove-worktree.test.mjs` 5/5 (修正前は正常系が落ちていた)。Linux (CI) は realpath が同じ値を返すので挙動不変。
+
 - **事象 (2026-10-20 Mac 実測)**: `remove-worktree.test.mjs` の「登録済み worktree を丸ごと削除する (正常系)」が `... は登録済み worktree ではない (known: /private/var/folders/...)` で落ちる。変更を退避した状態でも再現するので既存の不具合。
 - **原因 (仮説)**: macOS の一時ディレクトリは `/var` が `/private/var` への symlink で、テストが渡すパス (`/var/...`) と `git worktree list` が返すパス (`/private/var/...`) を文字列のまま比べている。検証: 比較の前に両方を `fs.realpathSync` で正規化して再実行する。
 - **完了条件**: Mac と Linux (CI) でこのテストが pass する。正規化は比較だけに使い、削除対象のパスの決め方は変えない。
@@ -1658,6 +1791,8 @@ updated: 2026-10-19
 
 ### [EFFECT-GSC-PAGE-PREFIX-MATCH-01] 効果判定の `[gsc-page:]` が前方一致で、別のページの実績が混ざる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: `[gsc-page:]` の照合を完全一致にし (`pageMatches`)、`/` で終わる目印だけ配下を前方一致で含める。active の目印 10 件はすべてページのパスで `/` 終わりは 0 件なので、意味は狭まるだけ。テストの fixture は前方一致の誤りを期待値に含めていた (`local-finance-other` の 5 click) ので正しい値に直し、`-vs-` の兄弟ページが混ざらないテストを足した。improvement-triage.md の記法説明も更新。metrics テスト 174/174。
 
 - **事象 (2026-10-20、improvement-triage の報告)**: `SEO-TITLE-CTR-EFFECT-01` の対象 `/blog/avg-height-high-school-2nd-male` に、`/blog/avg-height-high-school-2nd-male-vs-*` の実績 (W41 で 8 click / 601 imp、対象全体の約 1%) が混ざる。
 - **次**: `[gsc-page:]` を読む `.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs` (と `measurement-cycle.mjs`) の照合を完全一致にするか、完全一致の記法を足す。既存の行で前方一致を前提にしているものが無いかを先に数える。
@@ -1890,6 +2025,7 @@ updated: 2026-10-19
 ### [METRIC-DAIRY-CONFIG-01] 乳用牛の 2 指標で、調査時点と対象の表示が欠けている・食い違っている点を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 定義シートを出すと、`dairy-cattle-holdings` の対象欄「企業」は note の「法人企業数ではなく」を語の部分一致で拾ったもので、シートの抽出側の誤りだった。`build-metric-definition-sheet.ts` に `mentionsAffirmatively` (直後 2 文字以内に否定が続く出現は数えない) を足し (テスト 1 件)、対象欄の誤表示を消した。`dairy-cattle-count` には description・note (2025年2月1日現在・戸数とは数える対象が違う・丸め) と `surveyId: "livestock-statistics"` を足し、定義シートに調査時点と調査が出ることを確認した。validate:config・metrics:check・preflight:pr 通過。R2 の item.json は次の sync で反映される。
 - **事象**: `dairy-cattle-count` の metric config に description と note が無く、調査時点 (2 月 1 日現在) が読者向けの定義に出ない (2026-10-07 に config で確認)。同じ畜産統計の肉用牛・豚・採卵鶏・乳用牛飼養戸数の config には `surveyId: "livestock-statistics"` があるのに、`dairy-cattle-count` だけに無く、定義シートの「調査」が空欄になる。critic によると、指標の定義シートで `dairy-cattle-holdings` の対象欄が「企業」と出る。一方、config の note は「飼養戸数は法人企業数ではなく」と書いていて、両者が食い違う (critic の報告。定義シートの出力は未確認)。
 - **次**: `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts` で 2 指標の定義シートを出し、対象欄の値の出どころを特定して直す。`dairy-cattle-count` には `dairy-cattle-holdings` と同じ形で description と note を書く。
 - **完了条件**: 2 指標の定義シートで、調査時点が出ていて、対象欄と note が食い違わない。`npm run validate:config --workspace=@stats47/data-configs` が通る。
@@ -1904,6 +2040,7 @@ updated: 2026-10-19
 ### [METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01] 補助の出典から取った年の値でも、指標の出典表示が主の出典のままになる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `supplementalSources` を持つ指標は 28 件。ランキングページの出典欄 (`resolveRankingItemDataSources`) は item.json の `recipe.ops.supplements` を見ずに主の出典だけを出していたので、補助の表も「統計表（2025年の値）」のように年付きで並べるようにした (国勢調査など調査名は統計表 ID から解決)。どの年を表示していても補助の年の出典が見える。指標の定義シートも調査欄に「(2025年は国勢調査 表0004065933)」を添える。テスト: ranking の survey 68 件 (ratio-65-plus で 2025 年の表が出る)・定義シート 2 件・web 全件 (環境由来の 1 件を除く) 通過。本番は未デプロイ。
 - **事象 (2026-10-07、vacant-housing-vs-aging の critic が報告)**: `data/metrics/ratio-65-plus.ts` は 2025 年の値を `supplementalSources` (国勢調査、統計表 0004065933) から取るが、指標の出典表示は主の source (社会・人口統計体系) のままで、ブログの記事が 2025 年の値の出典を誤って書きやすい。ランキングページの出典表示が年ごとに切り替わるかは未確認。
 - **次**: `supplementalSources` を持つ指標を数え、ランキングページと指標の定義シートが、表示中の年の出典を出しているかを確かめる。出していなければ、年に応じて出典を選ぶ。
 - **完了条件**: 補助の出典から取った年を表示すると、その年の出典 (調査名と統計表 ID) が出ることをテストで固定している。
@@ -1911,6 +2048,7 @@ updated: 2026-10-19
 ### [METRIC-FARM-INCOME-DEFS-01] 農家総所得の指標で、対象・分母・調査が定義に出ず、意味の無い正規化が選べる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
 
+- **2026-10-21 経過**: e-Stat「統計項目の定義 L 家計」(https://www.e-stat.go.jp/koumoku/koumoku_teigi/L) で、農家総所得 (L2100) =「農業所得と農外所得に年金・被贈等の収入を加算したもの」、農業所得 = 農業粗収益−農業経営費、農外所得 = 農外収入−農外支出、出典は農林水産省「農業経営統計調査」、単位は千円・年計、収集は 1975〜2003 年で中止、を確認した。3 指標に description・note (出典 URL 付き)・`surveyId: "agriculture-management-survey"` を足し、農家総所得の正規化の選択肢を外した。定義シートに調査が出ることを確認、preflight:pr 通過。**残り 2 点**: ① 1 戸当たりかは値の大きさから読めるが e-Stat の定義に明記が無く、2 つの割合の分母 (農家総所得か) も指標の算式を確認できない (e-Stat の指標定義ページは 404) ので、note に未確認と書き対象欄は空のまま。② e-Stat は期間を「年計」と書いており、config の yearFormat: fiscal と seoTitle の「年度」化のどちらが正しいか決まらない。`METRIC-YEARFORMAT-KAKEI-01` と同じく出典の年の区切りを確かめてから直す。
 - **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `data/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
 - **追記 (2026-10-07)**: 同じ表 0000010212 の農業所得割合 (#L0110101)・農外所得割合 (#L0110102) の config も対象・分母・調査が定義シートに出ない (sixth-industry-direct-sales の fix writer が報告)。e-Stat の控え `data/estat/meta/0000010212.json` の項目名は「#L01100_農家総所得」で、1 戸あたりかどうかの表記が無い。記事は「分母は未確認」と書いて公開する。3 指標をまとめて直す。
 - **追記 (2026-10-07)**: 再審の critic によると、北海道の 2003 年度は農業所得割合 46% と農外所得割合 15.1% を足して 61.1% で、2 つの割合の分母が農家総所得とは限らない (残りは年金などの可能性)。分母を確かめるときに合わせて見る。
@@ -1920,6 +2058,7 @@ updated: 2026-10-19
 ### [BLOG-TUTORIAL-GATE-GAPS-01] 手順解説記事 (cc-estat 連載) で quality-gate が誤って数える・照合できない 3 か所を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
 
+- **2026-10-21 経過**: ① `quality-gate.mjs` のインライン svg 判定はコードブロックとインラインコードを除くようにした (テストで両方向を固定)。公開 616 記事を R2 から読んで旧・新の判定を比べ、どちらも 0 件 (誤検知も見逃しも増えない)。③ 注入を再現すると、値の一致判定が ±5% なので「4,970戸 → 4,790戸」(3.6%) が一致扱いだった。本文が書いた精度 (最後の 0 でない桁の半分 × 万などの接頭辞) で照合するようにし、「約」などで丸めを断っているときは従来の ±5% のまま (`claimTolerance`・テスト 3 件)。公開 608 記事の監査 (`audit-published-blog.mjs`) で VALUE_MISMATCH は 0 件のままで、日次の値ラチェットに影響しない。②は `blog-svg-chart-standards.md` §6-5 に描画スクリプトの置き場 (`.claude/scripts/blog/article-renderers/<slug>/`) と restore の書き方を足した。**残り**: cc-estat-04 の 2 枚を repo のスクリプトから作り直す (公開記事の図の差し替えになる)、④ 範囲の順位の誤検知、⑤ 県名の直後の派生値、⑥ タイトルの「N位」NG パターンの名前と判定のずれ、⑦「N位の県」と割合の検出漏れ。「倍」は単位として照合していない (比率の言い換えが多いため、別途判断)。
 - **事象 (2026-10-07 の書き直しで writer・critic が報告)**:
   1. `quality-gate.mjs` の inline SVG 検出 (`/<svg[\s>]/`) がコードブロックの中も数える。D3 の手順記事が、検出を避けるために `<svg{...rootProps}>` や `const Svg = "svg"` という不自然な書き方をしている (cc-estat-04-aging-heatmap・cc-estat-13-agri-sankey)。`generate-article-charts --validate` も同じ理由でエラーを 4 件出す
   2. 記事のサンプルコードを描画した図 (svg-builder の対象外・source の kind は derived) の扱いが `blog-svg-chart-standards.md` に無い。cc-estat-04 の 2 枚は作業用の一時スクリプトで描いたもので、描画スクリプトがリポジトリに無く、作り直せない。svg-builder にサンキー型が無いので、cc-estat-13 (サンキーの手順記事) も完成図を載せられず、積み上げ棒で代用している
@@ -1942,6 +2081,7 @@ updated: 2026-10-19
 ### [METRIC-HOUSEHOLD-DEFS-01] 家計調査系の 2 指標で、注記がデータと食い違う・同じ名前の値が 2 系統ある点を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 1: R2 の配信値で `information-communication-coefficient` の 47 都市の単純平均は 2020 年 5.40％ → 2024 年 4.18％ と下がっており、note の「全国的に上昇傾向」は誤りだった。実測の推移に書き換えた。2: `food-expenditure-ratio-multi-person-households` は社会・人口統計体系の指標「#L02411 食料費割合（二人以上の世帯）」(e-Stat 控えで確認) で、`engel-coefficient` は家計調査 年次表 0003348239 の県庁所在市・二人以上世帯の食料費÷消費支出。2024 年の 47 県平均は 27.79％ と 29.45％ で差を R2 で確認した。前者に subtitle・description・note、後者の note にも食い違いと「混ぜて比べない」を書き、定義シートで違いが読めることを確認した。差の原因 (社会・人口統計体系の算定方法) は確かめられていないので note に未確認と明記した。前者の yearFormat (fiscal) が正しいかは `METRIC-YEARFORMAT-KAKEI-01` の範囲。
 - **事象 (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告)**:
   1. `information-communication-coefficient` の note に「全国的に上昇傾向」とあるが、writer の実測では R2 の 47 県の単純平均が 2020 年 5.40% から 2024 年 4.18% へ下がっている (note の文言は config で確認、R2 の推移は writer の実測で未再確認)
   2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる。critic の確認では 17 県すべてで 1.4〜2.3 ポイントの系統差があり、47 県の単純平均も 29.5% と 27.8% で違う。総務省の公表値と照合し、どちらがどの定義 (分母・世帯の範囲) かを確かめる
@@ -2979,6 +3119,8 @@ updated: 2026-10-19
   - 低: 補足行が「東京都 東京都 千代田区」と県名を重ねる。ヘッダーの現在地が「都道府県」になる。
   - 撮影時に `/areas/29000/cities/29363` が 390 / 640px で一時的な HTTP 503 (再取得では 200。`CF-CPU-SURGE-01` の観測に追記)。
 - **完了条件**: 強みの選定から値 0・分母なしを除き、人口当たりの指標で選ぶ。23 区を個別に並べる。代表 3 市区町村の撮影で上記が解消している。
+- **済 (2026-10-21・develop、未デプロイ)**: 市区町村ページを市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`、174 指標の値・年・県内順位・全国順位) に置き換え、旧 `profile.json` の生成と読み込みを撤去した。特徴は率の指標・値 0 除外・2019 年以降 (`selectCityHighlights`)。見出しに人口・高齢化率など 6 指標、title は人口・前回比・都内/道内/府内/県内の順位 (`buildCityPageMeta`)。東京 23 区を公開対象にし (entity policy)、県内の一覧・索引・sitemap を同じ集合 1,741 件にそろえた。市区町村ランキングは全行リンク・同名の自治体に県名、ヘッダーの現在地は「市区町村」、パンくずの県名の重複を解消。localhost (公開 R2 + ローカル生成物のオーバーレイ) で坂出市・千代田区・札幌市・特別区部 (noindex) と市区町村ランキング・都道府県ランキング・ブログのデータ欄を確認した。計測の基準値は `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01`。
+- **残り**: ① 県内の市区町村一覧 (`CitiesNavCard`) が固定の高さで切れ、スクロールできると分からない。② 本番デプロイ後に代表 3 市区町村 (坂出市・千代田区・札幌市) を 390 / 1280px で撮影して完了条件を確かめる。③ 配信をやめた市区町村の `profile.json` (R2 `app/areas/<県>/cities/<市区町村>/profile.json`) は読み手 0。削除は `r2-maintenance.yml` の allowlist 経由で、オーナーの承認後。
 
 ### [UNIT-NOTATION-FORMAT-01] 単位と数値の表記がページごとに不揃い
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -3423,6 +3565,8 @@ updated: 2026-10-19
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17] [領域:データ]
 
+- **2026-10-21 分離**: 生成器 `gen-ssds-configs.mjs` が SSDS の全指標に `yearFormat: "fiscal"` を固定で書いていたのが根本原因。生成器の修正と食い違いの検査 (再発防止) は `SSDS-YEARFORMAT-SOURCE-01`、直した 410 指標の R2・本文への反映は `YEARFORMAT-REFLECT-01` で扱う。このカードに残るのは、期間から決まらない 87 件と農業経営統計調査の 5 件の判定。
+- **2026-10-21 経過**: 社会・人口統計体系の家計 (0000010112 / 0000010212) 由来で yearFormat が fiscal だった 73 指標を、e-Stat の「統計項目の定義 L 家計」(https://www.e-stat.go.jp/koumoku/koumoku_teigi/L)・「C 経済基盤」(同 /C)・「指標計算式 L」(https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/L) で 1 件ずつ基礎項目の「時点又は期間」へたどった (2026-10-21 取得)。家計調査 (暦年平均) 25 件 (計算型 2 件を含む)、全国家計構造調査 (10月末日・年間収入は調査前年11月〜調査年10月) 9 件、全国消費実態調査 (11月30日・10月31日) 12 件、消費者物価指数と地域差指数 (暦年平均) 19 件、都道府県地価調査 (7月1日) 3 件の計 68 件は、どれも年度 (4月〜翌3月) ではないので calendar にした (seoTitle に「年度」を含むものは無かった)。validate:config・metrics:check・preflight:pr 通過、web の vitest 全件は環境由来の 1 件以外通過。定義シート (real-disposable-income-reversal) で家計の 3 指標と地域差指数が「暦年」と出ることを確認した。サイトの yearName (「2024年度」→「2024年」) は次の data-refresh で R2 に入る (R2 は未反映)。**残り**: ① 農業経営統計調査の 5 指標 (農家総所得・農業所得割合・農外所得割合・農家世帯の家計費・農家世帯の平均消費性向) は期間が「年計」で暦年か年度か定義から決まらないので fiscal のまま。② (済) per-capita-prefectural-income-h27 に description・note を足した。e-Stat の定義 (C122101、年度計) と、内閣府 県民経済計算 2021 年度の総括表で全県計 417,900,154 百万円 ÷ 125,502,290 人 = 3,330 千円が公表の 1 人当たり県民所得と一致することで、分母が総人口だと確かめた。③ (一部済) 家計以外の範囲: 社会・人口統計体系の全分野 (A〜M) の「統計項目の定義」と「指標計算式」を取り込み、yearFormat が fiscal の 960 指標を基礎項目の「時点又は期間」へたどった。暦年計・暦年平均・暦年・12月末/31日・10月1日、または社会生活基本調査 (年の名で呼ぶ調査) のどれかだけから成る 221 件を calendar にした (国勢調査・人口推計 71、社会福祉施設等調査 39、医療施設調査 30、犯罪統計 28、病院報告 20、社会教育調査 20、火災年報 15 など)。年度計・年度間・3月31日など年度の項目を含む 450 件は fiscal のままで正しい。期間が 5月1日 (学校基本調査は「令和N年度」と呼ぶ)・調査日・年計・4月1日などで決まらない 289 件は触っていない (次に残る範囲)。 **続き (同日)**: 残り 289 件のうち、期間 (調査日・6月・2月1日・選挙期日など) からは決まらない項目を、調査の呼び方で判定した。e-Stat の統計表一覧 API (getStatsList) の表題で、賃金構造基本統計調査・経済センサス (基礎・活動)・経済構造実態調査・事業所・企業統計調査・国民生活基礎調査・農林業センサス・漁業センサスは「平成21年◯◯」と年で呼ばれていることを確かめ、これらと選挙 (選挙期日) だけから成る 121 件を calendar にした (製造業 2 件の note の「2020年度以降」も直した)。学校基本調査・学校保健統計調査・建設工事施工統計調査は表題が「年度」なので、これらの 81 件は fiscal のままで正しい。**残り 87 件**: e-Stat に表題が無く呼び方を確かめられない調査 (地方公共団体定員管理調査・市町村税課税状況等の調・固定資産の価格等の概要調書・公共施設状況調・消防年報・耕地及び作付面積統計・住民基本台帳人口要覧など) と農業経営統計調査、定義ページに項目が無い 17 件 (行政投資など)。fiscal のまま触っていない。製造業 2 件の note の「2020年度以降」を「2020年以降」に直した。宿泊旅行統計調査 (暦年計) の 4 件は calendar に入った。住宅・土地統計調査の項目で fiscal だったのは、年度計の建築着工統計と組み合わせた new-housing-construction-ratio の 1 件だけで、年度のまま。
 - **owner**: survey-curator (surveyId) / data-ingester (yearFormat)
 - **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。 `per-capita-prefectural-income-h27` は description と note も無く、定義シートの対象欄が「config に対象の記述なし」になる (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告。県民所得の構成・分母・名目か実質かが読者向けの定義に出ない)。
 - **追記 (2026-10-07)**: real-disposable-income-reversal の critic が、`consumer-price-difference-index-overall` (消費者物価地域差指数) と家計の 3 指標の yearFormat が fiscal のままで、記事の年の書き方が揃わないことを再度報告した。
@@ -4193,6 +4337,35 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
+### [DATA-MEDICAL-FACILITY-SOURCE-01] 医療施設調査の 6 指標を原典の e-Stat の表から取り、2024 年以降を足す
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **経緯**: `DATA-QUALITY-LOOP-01` ③ (2026-10-21) で切り出した。`psychiatric-bed-count` (GSC 表示 752) を含む 6 指標 (`psychiatric-bed-count`・`psychiatric-hospital-count`・`general-hospital-count`・`general-hospital-bed-count`・`general-clinic-count`・`dental-clinic-count`) は社会・人口統計体系 (SSDS) の医療施設調査の 6 項目 (`I510110`・`I510120`・`I5102`・`I5103`・`I521110`・`I521130`) から取っている。e-Stat の実在年の台帳 (`data/estat/availability/tables/0000010109.json`、CI が 2026-10-07 に取得) では 6 項目とも 2023 年で止まっている。原典の医療施設（動態）調査は令和7年 (2025) の概況を 2026-09-29 に公表済みで、令和6年分も公表されている (`https://www.mhlw.go.jp/toukei/list/79-1a.html`、2026-10-21 取得)。SSDS が 2024 年以降を取り込んでいないため、配信は公式の最新から 2 年遅れている。
+- **次**: ① e-Stat の医療施設調査 (政府統計コード 00450021) の 2024 年の表 (候補: 「第4表 病院の病床数，年次・都道府県別」`0004048403`、2026-03-11 公開) の分類コードを e-Stat API の getMetaInfo で調べ、6 指標それぞれの項目と時点が SSDS と同じかを確かめる。この PC には e-Stat API の資格情報が無く (取得は CI 専用)、全国集計の表はローカルの表カタログにも分類が無いので、CI で任意の表のメタ情報を取る経路を作るか、資格情報のある端末で行う ② 一致したら 2024 年以降を `supplementalSources` で足す (漁業の指標と同じ形) ③ SSDS と重なる 2023 年は値の一致を検査する ④ data-refresh の dryRun → オーナー承認 → R2 反映。
+- **停止条件**: 項目の定義や時点が SSDS と合わない年は足さない。R2 への反映はオーナー承認後。
+- **完了条件**: 6 指標が公式の最新年まで 47 県そろって R2 に入り、ランキングページの最新年が更新されている。
+
+### [DATA-FLOOD-STATS-FILES-01] 水害統計の 9 指標に 2015 年以降を足すかを決める (e-Stat のデータベースは 2014 年まで)
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **経緯**: `DATA-QUALITY-LOOP-01` ③ (2026-10-21) で切り出した。`flood-affected-rivers` (GSC 表示 741) を含む水害統計の 9 指標は、e-Stat の「都道府県別水害被害（表－2）」`0003155647` から取っている。この表は 2006〜2014 年分しかなく (実在年の台帳、CI が 2026-10-07 に取得)、水害統計の e-Stat データベースの更新は 2022-10-04 が最後である (e-Stat のデータベース検索、2026-10-21)。国土交通省は令和5年水害統計まで公表している (令和6年分は公表が遅れていると明記。`https://www.mlit.go.jp/river/toukei_chousa/kasen/suigaitoukei/index.html`、2026-10-21 取得)。ランキングページは 2014 年の値を出している。
+- 年カバレッジ監査は `flood-affected-rivers` を「設定 5 年 → e-Stat 実在 9 年」の要拡張候補にしている。ただし足りない 4 年 (2007・2009・2010・2013) は 44〜46 県しか値の無い年で、9 指標とも 47 県そろう年だけを設定に入れている。値の無い県は被害が無かった可能性があるが、0 として扱ってよいかは確かめていない。
+- **次**: ① 2015〜2023 年の都道府県別の値が、どこに (e-Stat のファイル・国交省のページ) どの形で出ているかを確かめる ② 取り込むなら、取得元の切り替え (`fetcherKey: "manual"` か新しい取得経路) と provenance を先に設計する (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` と同じ進め方) ③ 公表の「-」が被害なし (0) を意味するかを調査の注記で確かめ、47 県そろわない年の扱いを決める。
+- **停止条件**: 「-」の意味を確かめずに 0 で埋めない。R2 への反映はオーナー承認後。
+- **完了条件**: 取り込むか見送るかを決め、取り込む場合は 9 指標が公式の最新年まで R2 に入っている。
+
+### [DATA-ROAD-LENGTH-SOURCE-01] 道路統計年報の 10 指標を最新の年報まで取り、年の表記を時点に合わせる
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **経緯**: `DATA-QUALITY-LOOP-01` ③ (2026-10-21) で切り出した。道路実延長 7 指標 (`road-total-length`・`road-total-length-with-expressway`・`road-national-route-length`・`road-prefectural-route-length`・`road-general-prefectural-length`・`road-municipal-length`・`road-expressway-length`) と舗装道路 3 指標 (`paved-road-total-length`・`paved-road-main-length`・`paved-road-municipal-length`) は社会・人口統計体系 (SSDS) の `H71xx` から取り、すべて「2023 年度」で止まっている (`kiso_ken.xlsx` 2026-06-30 更新分の対象年度も 2023 まで)。開通日の分かる 2 区間の増え方から、SSDS の「2023 年度」は 2023 年 3 月 31 日時点 (道路統計年報 2024 年版) と分かった (根拠は `DATA-QUALITY-LOOP-01` の 2026-10-21 の記録)。国土交通省の最新は 2025 年版 (2024 年 3 月 31 日時点) で、配信は 1 年古い。
+- **年の表記**: 配信は「2023 年度」と表示し、`road-total-length-with-expressway` は「3月31日現在」と注記している。この 2 つを合わせて読むと 2024 年 3 月 31 日の値に見えるが、実際は 2023 年 3 月 31 日の値である。
+- **次**: ① 道路統計年報 2025 年版 (表 2 道路現況総括表・表 3 道路実延長内訳の総括表など。国交省のページは xlsx だけ) から 2024 年 3 月 31 日時点の都道府県別の値を取り込むか、SSDS の次の更新を待つかを決める。取り込むなら取得元の切り替えと provenance を先に設計し (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` と同じ進め方)、SSDS と重なる年は値の一致を検査する ② 年の表記を時点に合わせるか (例: 「2023 年 3 月 31 日現在」)、注記を直すかをオーナーが決める。10 指標と SEO タイトルに効くので一括で行う。
+- **停止条件**: 年の表記は、オーナーが決めるまで変えない。R2 への反映はオーナー承認後。
+- **完了条件**: 10 指標が最新の年報の時点まで R2 に入るか、待つと決めて理由が書かれている。年の表記が時点と食い違わない。
+
 ### [DATA-LAYOUT-MOVE-01] 置き場を data/<取得元>/ へ移した後、定期実行が新しい置き場へ書くことを確かめる
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [進行中] [領域:管理]
@@ -4361,6 +4534,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run -s validate:config --workspace=@stats47/data-configs] [起票:2026-10-08] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: オーナー承認 (同日チャット) のうえ、手動取得の 13 スクリプトを再実行して `.local/r2/app/stats` に書き、公開 R2 と 1 ファイルずつ照合した: R2 にある 31 件で値・単位・順位・県名・meta (recipe の configHash 含む) が全件一致し、違いは 29 件の yearName だけ (例: 2022→2022年度・2024年10〜11月→2024年)。その 29 key だけを `push-exact-r2-assets.ts --key` で反映し (dry-run で 29 件のみを確認してから)、読み戻して一致を確認した。続けて `sync-snapshots` を `only=ranking-values` と同じ 29 key で起動し (run 39543006825・success)、`app/ranking/<key>/values.json` の yearName が全 29 件で「YYYY年 / YYYY年度」になったことを確認した。`students-requiring-japanese-instruction` は R2 に未公開の指標なので対象外 (新規公開になるため)。ランキングページは R2 を読むオンデマンド ISR なので、キャッシュの切れ目 (最長 1 日) で表示が切り替わる。
+- **経過 (コード)**: 共通の書き手 `stats-values-writer.mjs` の yearName の既定を、指標の yearFormat から「YYYY年」(calendar・未宣言)・「YYYY年度」(fiscal) を作る `yearNameFor` に変えた (yearFormat は新しい境界 `print-metric-year-format.ts` で正典から引く。テスト 1 件)。書き手を通らない 3 本 (中体連・パチンコ店密度・日本語指導) の固定の "2025" も年 / 年度付きに直し、国民健康・栄養調査は調査期間 (10〜11月) が既に note にあるので既定の「2024年」にした。他の手動スクリプトに年だけの yearName は無い (`yearName: "YYYY"` などの書き方で検索)。data のテスト 12 件・型検査通過。**残り**: 手動取得の全スクリプトを再実行して R2 の values.json を書き直す (R2 への書き込みなのでオーナー承認待ち。値が変わらないことを再実行前後で照合する)。
 - **事象 (2026-10-08 実測)**: e-Stat 経由の指標は `app/stats/<key>/values.json` の `yearName` が「2024年」だが、手動取得 (`fetcherKey: manual`) の指標は「2022」のように年だけになっている。今回の新規 20 本に加え、既存の中体連 10 本・遊技店密度も同じ。国民健康・栄養調査の 3 本は「2024年10〜11月」で、これも形が違う。data-refresh の検査は ranking 配信値の `yearName` を `yearCode + 年/年度` と照合しているので、手動取得の指標をその経路に載せると失敗する。
 - **原因**: 共通部品 `.claude/scripts/data/lib/stats-values-writer.mjs` の `writeStatsValues` が `yearName` の既定を `(y) => y` にしている。指標定義の `yearFormat` (calendar / fiscal) を見ていない。
 - **次**: writer が `yearFormat` から「年」「年度」を付けるようにし、手動取得の全スクリプトを再実行して R2 を更新する。調査期間を示したい表記 (10〜11月) は `note` に移す。
@@ -4408,6 +4583,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 起動側の手順を全部直す代わりに、必ず気づく側を選んだ (起動は skill・agent・proxy に散っていて共通の入口が無いため)。`workflow-health-core.mjs` に `findSupersededDispatches` (r2-write の手動起動で、`cancelled` かつジョブ 0 件、直近 48 時間、後に同じ workflow の手動起動の成功が無いもの) を足し、`audit-superseded-dispatches.mjs` が `group: r2-write` の 18 workflow を見る。`workflow-health-daily.yml` の新しい step が結果を cron ヘルスの Issue (`ci-health-alert`) に載せ、残っている間は Issue を閉じない。テスト 1 件 (拾う・後の成功・ジョブあり・窓の外・schedule)。実データで直近 400 時間に当てると、10-08 の `generate-ogp-images` run 37738579394 (ranking-cards) を検出した。10-09 の sync-snapshots の分は後の成功で取り戻し済みとして出ない。自動の再起動はしない (取り消された run の入力を API から取れないため)。main へ入ってから効く。
 - **事象 (2026-10-08〜09 に 2 回)**: `concurrency: group: r2-write` (`cancel-in-progress: false`) の workflow は、実行中 1 本のほかに待機を 1 本しか持てず、
   後から来た run が待機中の run を取り消す。手動で起動した run がジョブ 0 件で cancelled になった: generate-ogp-images の ranking-cards
   (run 37738579394、後発は他セッションの sync-snapshots)、sync-snapshots ranking-items (run 37770625093、後発は blog-auto-publish)。
@@ -4440,6 +4616,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 判定を `packages/data-configs/src/geo-scope/japan-candidate-classify.ts` の純粋関数へ移し、params と hasNational を持つ旧形式の e-Stat 監査行だけを全国行の証拠として索引する (R2 監査行は飛ばす)。証拠の無い e-Stat 指標は `unknown-no-audit-entry` とし、`verify-japan-candidates.ts` がそれも実 e-Stat 取得で判定する (`VERIFY_TARGET_CLASSIFICATIONS`)。実行: 963 件 (非 e-Stat 355・証拠なし 608) を exit 0 で出力し、verify `--limit 1` で ratio-65-plus を verified-official と判定。テスト 2 件 (`__tests__/japan-candidate-classify.test.ts`)・data-configs / stats-r2 の型検査 0。
 - **観測 (2026-10-09)**: `npx tsx packages/data-configs/scripts/classify-japan-candidates.ts` が `r.params` で TypeError。
   `data/themes/charts/live-audit.json` (2026-10-05 監査) が kind/metricKey だけの R2 監査の形になり、params / hasNational を持たないため。
   今回は全国行の存在確認を `verify-japan-candidates.ts` の e-Stat 応答で代用した。
@@ -4449,6 +4626,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: compareNationalAvg を付けた指標はテンプレートに 2 つ (1人当たり県民所得・有効求人倍率) で、どちらも単純平均が全国値と違っていた (2022 年度の有効求人倍率は全国 1.31・単純平均 1.39、2021 年度の 1 人当たり県民所得は全国 3,330 千円・単純平均 2,996 千円。R2 の `app/japan/<key>/series.json` と `app/stats` から実測)。exporter が同じ年の公式の全国値を使い (`national-comparison.ts` の `resolveNationalComparison`。都道府県の合計から作った全国値は平均ではないので使わない)、無ければ単純平均を `nationalAvgKind: "prefecture-mean"` として焼き、画面 (`RankedKpiGrid`) は「全国」/「47都道府県平均」と書き分ける。テスト 3 件、型検査 0、area-databook-standards.md の記述も更新。R2 の databook.json は main へ入ったあとの再生成で切り替わる (それまでは旧版で、欄が無いので「47都道府県平均」と表示される)。
 - **観測 (2026-10-09・反証レビュー)**: `packages/area-profile/src/exporters/area-databook-snapshot.ts` 80-82 行は nationalAvg を 47 県の単純平均で出す。
   物価地域差指数 (全国=100) に compareNationalAvg を付けると「全国平均 99.0」(住居は 93.1) と出る。今回の採用分では外したが、
   既存の compareNationalAvg 付き指標にも、全国値が県の平均と違う率の指標が含まれていないかは未確認。
@@ -4459,6 +4637,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 経過**: 昼夜間人口比率は R2 の全国値 5 年分がすべて 100 で全国時系列として意味を持たないので、`japan-catalog.ts` から外し `placement-decisions.json` に rejected で記録した (市区町村のカタログには残す)。content:sync・metrics:build-index で ID 索引と指標の使用先を作り直し、preflight:pr 通過。**残り**: 合計特殊出生率は e-Stat の単位が「‐」(単位なし) で、全国時系列の生成器はプレースホルダの単位を安全側で拒否する設計 (`build-japan-series.ts`)。直すには表示単位を決める必要がある (「人」のまま生成器に単位なしとの対応を宣言するか、単位を表示しない形にするか)。オーナーの判断待ち。R2 に残る `app/japan/day-time-population-ratio/series.json` はページから参照されなくなる (削除は R2 の保持ポリシーの手順で別に行う)。
 - **観測 (2026-10-09・ワークフローの検証)**: /japan に載っている `day-time-population-ratio` は全国では常に 100 (`app/japan/day-time-population-ratio/series.json`)。
   `data/metrics/total-fertility-rate.ts` の unit が「人」だが e-Stat の単位は「‐」で、/japan の生成器が単位不一致で拒否する。
 - **次**: 昼夜間人口比率を /japan から外すか判断する。合計特殊出生率の unit を出典の定義に合わせて直し、/japan に載せ直す (placement-decisions.ts の blocked 行を消す)。
@@ -4477,6 +4656,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `day-time-population-ratio` (社会・人口統計体系・2000〜2020 年の 5 年・市区町村の値あり・人口動態テーマと市区町村カタログが参照) を正にし、`daytime-population-ratio` (国勢調査 2020 年の 1 年だけ) を統合した。2020 年の 47 県の値は両者で全件一致 (±0.05) を R2 で確かめた。後者は GSC W41 で週 302 表示あるので消さずに 301 (`RANKING_SLUG_REDIRECTS`) で前者へ送り、config を `isActive: false` にした。KNOWN・sitemap・ranking-prominence・content の ID 索引・survey taxonomy を作り直し、taxonomy の下限は理由と対象キー付きの `rankingBaselineFollowUps` で 2372→2371 に下げて回帰テストで連鎖を固定した。preflight:pr・ranking の survey テスト 67 件・web 全テスト (環境由来の 1 件を除く) 通過。相関 snapshot は次の再計算で片方だけになる。本番は未デプロイ。
 - **観測 (2026-10-09)**: 両方が相関 snapshot に別行で出る。ブログでは day-time-population-ratio を使った。どちらを正とし、もう一方を統合 (301) するかを決める。
 - **完了条件**: 片方に統合され、相関・テーマ・ブログの参照が 1 つのキーにそろっている。
 
@@ -4633,6 +4813,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
   3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
+- **2026-10-21 追加 (develop、未デプロイ)**: 令和7年国勢調査の 5 年間の増減 3 件 (`census-population-change-rate-5y` /
+  `census-population-change-5y` / `census-household-change-rate-5y`) を R2 cities.json で監査して published に足した (171 → 174)。
+  人口テーマと世帯テーマにも入れたので、市区町村データブックにも出る。未公開の unknown は残り 10 件
+  (火災 2・自動車保険 2・家計の費目 4 は cities.json 不在または監査未了、industrial-land-price・major-lake-area)。
 - **計測**: 公開 28 日後 (2026-09-29 目安) に GSC/GA4 で市区町村面の実測。pilot の 9/21 判定は
   confounded (doc 44 記録済み)
 - **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01` (公開 key が 10 を超えたため trigger 1 は成立。
@@ -4847,7 +5031,38 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 
 追跡すべきものを除外していないか、除外すべきもの（生成物・秘密・大きいバイナリ）を追跡していないかを点検する。git の外の側は `npm run check-local-data`（LOCAL-DATA.md）で申告済みなので、ここでは追跡されている側を見る。（出典: obsidian の TODO マスタ ^t-0024・2026-09-28 のメモを3リポへ展開・2026-10-19）
 
+### [EFFECT-VERDICT-CLI-TEST-SOURCES-01] effect-verdict の CLI テストが実データの判定 1 件で sources 欠落により落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs] [起票:2026-10-21] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: `sources` が無かったのは before/after 週を解決できず skip する経路 (`cli.mjs` の `skipped: true`)。計測していないので `sources: []` と `before/after/delta/attainment: null` を書くようにし、verdict JSON がどの経路でも同じ欄を持つ。`effect-verdict.test.mjs` 40/40。テストは実データ依存のままだが、欄の有無は経路で決まるので実データの変化で再発しない。
+
+- **事象 (2026-10-21 確認)**: `effect-verdict.test.mjs` の「CLI: verdict JSON を書き、summary と thresholdsVersion を含む」が、`cli.mjs --week 2026-W31` を実データで動かした出力の判定のうち 1 件に `sources` が無いため落ちる。SCRIPT-ISO-WEEK-UNIFY-01 の変更を外した状態でも同じく落ちるので、その変更が原因ではない。
+- **次**: どの施策の判定が `sources` を持たないかを出力から特定し、engine がその経路でも `sources` (空配列でも) を書くようにする。テストが実データに依存して落ちる形でよいかも併せて決める。
+- **完了条件**: 上のテストが通り、判定の JSON はどの経路でも `sources` を持つ。
+
+### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **根拠**: GSC 2026-W41 (rolling28d) で市区町村ランキングは 448 clicks / 4,686 imp・CTR 9.56% だが、市区町村ランキング ↔ ブログの
+  サイト内移動は週 3 件 / 1 件しかない。「◯◯市 人口」の検索語は 1,840 imp・CTR 0.11% (`MUNI-PAGE-SEO-01`)。
+  記事が市区町村の指標を使えば、記事のデータ欄・市区町村ランキング・市区町村ページの関連記事に自動で載る (回遊は `sameMetric` / `explains`)。
+- **題材の候補 (データは公開済み)**: ① 2020→2025 年に人口が最も減った・増えた市区町村 (珠洲市 -34.6%・輪島市 -28.3%・大熊町 +81.0%。
+  `census-population-change-rate-5y`) ② 東京 23 区の比較 (課税所得・転入超過・高齢化。23 区の公開は 2026-10-21) ③ 市区町村の財政力と
+  地方債 (`fiscal-strength-index` ほか地方財政テーマの 19 指標)。
+- **次**: 型は `blog-quality-standards.md` のアーキタイプから選び、article-writer → blog-critic (PASS 必須) で 1 本目を作る。
+  記事の `rankingRefs` に市区町村ランキングと同じ key を入れる (回遊の結線はこれだけで足りる)。
+- **禁止・承認境界**: `contents/blog/` を develop へ push すると自動公開が走るので、原稿は別ブランチに置き、公開はオーナーの承認後。
+- **完了条件**: 1 本目が公開され、市区町村ランキングの「同じ指標のランキング・記事・テーマ」に出ることを本番で確かめる。
+
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [FISHERY-2024-DB-01] 漁獲量の 12 指標に 2024 年を足す (e-Stat に 2024 年のデータベースの表が出たら)
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **経緯**: `DATA-QUALITY-LOOP-01` ③ (2026-10-21) で、`fishery-species-catch-mackerel` (GSC 表示 685) と `fishery-species-catch-pacific-saury` (595) の配信の最新は 2023 年だった。農水省は令和6年 (2024) の確報を e-Stat に 2026-02-27 に公表したが、Excel ファイルだけである (表 2-2「大海区都道府県振興局別統計 魚種別漁獲量」`stat_infid=000040415922`)。e-Stat のデータベース検索では 2024 年の表は 0 件だった (2026-10-21。2023 年は 99 表あり、2-2 表 `0004043248` は 2025-10-17 公開)。12 魚種の指標 (`fishery-species-catch-*`) は、2023 年をこの 2-2 表から `supplementalSources` で補っている。
+- **trigger**: e-Stat のデータベース検索 (`https://www.e-stat.go.jp/stat-search/database?page=1&toukei=00500216&layout=dataset&year=20240`) に 2024 年の 2-2 表が出たとき。
+- **次**: 2023 年と同じ形で 12 指標の `supplementalSources` に 2024 年を足す (分類コードと地域軸は表のメタ情報で確かめる) → data-refresh の dryRun → オーナー承認 → R2 反映。`FISHERY-SPECIES-REFRESH-01` のブログも取り直しの対象になる。
+- **完了条件**: 12 指標の最新年が 2024 年になり、海のある 39 都道府県の値がそろっている。
 
 ### [WEB-ANY-RATCHET-01] apps・packages の `any` を増やさない検査を入れる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:サイト]
@@ -4865,6 +5080,21 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **停止条件・完了条件**: 今は制作・レンダリング・投稿を行わない。候補の3媒体比較・確認ができれば制作準備完了とし、投稿・予約は別途ユーザーの明示指示を得る。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [RANKING-HEADING-YEAR-DECISION-01] ランキングページの見出しの近くに最新年を出すか決める
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **事実 (2026-10-21、週次 UI 検査 `agent|ranking--old-2years` の指摘)**: `/ranking/national-pension-full-exemption-rate` はデータが 2005〜2006 年度と古いのに、見出し (h1「国民年金保険料全額免除割合」) の近くに年が無い。年は上部のカードの小見出し (「2006年度」) と年の切り替えにだけある。同じ指摘の表の右端が切れる件は `RankingDataTable` の列幅で直した (未デプロイ)。
+- **決めること**: 全ランキング (約 2,400 ページ) の見出しの隣か直下に「最新 2006年度」のような年を出すか。出すなら、古いデータ (最新年が 10 年以上前など) だけ目立たせるかも決める。見出しの文言は SEO のタイトルにも関わるので、h1 自体は変えずに横へ添える案を推す。
+- **完了条件**: 方針が決まり、出す場合は実装して `ui-findings.ts --mark-fixed agent|ranking--old-2years` を付ける。
+
+### [NOTE-PUBLISHED-DUPLICATES-DECISION-01] note 上で同じ記事が別 URL に複数回公開されている 8 組をどうするか決める
+タグ: [SNS・マーケ] [種類:意思決定] [実行:ユーザー] [起票:2026-10-21] [領域:商品]
+
+- **事実 (2026-10-21、`data/note/articles.json` の照合)**: 題名が同じで別の noteUrl を持つ公開済み記事が 8 組ある。「【2024年版】都道府県「最高気温」ランキング」は 4 本 (`a-maximum-temperature`・`recovered-n6f8a367906d1`・`recovered-n863f429319ca`・`recovered-nb2d65c42c28b`)、「大学数」ランキング・「47 都道府県データを 1 コマンドで取得する」・「e-Stat 統計の前年比較…」(有料) が各 2 本、koumuin の「災害時の SNS 発信文…」(有料)・「苦情メール返信案…」(有料)・「住民問い合わせ FAQ…」が各 2 本。台帳は実在の投稿どおりで誤りではない。
+- **決めること**: 重複をそのまま残すか、片方を非公開にして残す方へ導線をまとめるか。有料の 3 組は購入者がいる可能性があるので、非公開にする前に購入の有無を記録 (`data/authenticated/revenue-history.json`) で確かめる。
+- **停止条件**: note 上の記事の削除・非公開化はオーナーの判断と操作だけで行う (Claude はしない)。
+- **完了条件**: 8 組の扱いが決まり、決めた操作の後に台帳の status が実際の公開状態と一致している。
 
 ### [DOWNLOAD-EXCEL-FORMAT-01] ランキングのダウンロードに Excel 形式を足すかを決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-17] [領域:商品]

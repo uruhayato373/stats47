@@ -7,7 +7,7 @@
  * /affiliate-improvement の observe モードのデータ源。
  *
  * 前提 (★クラウド実行環境では鍵が無いため未テスト。ローカル / CI で実行):
- *   1. GA4 サービスアカウント鍵 stats47-*.json がリポジトリルートに存在 (gitignored)
+ *   1. GA4 サービスアカウント鍵 (env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。../lib/google-client.cjs が読む)
  *   2. GA4 管理画面で カスタムディメンション `affiliate_category` / `link_position`
  *      (イベントスコープ) を登録済み。未登録なら eventName 単位の総数のみ取得しフォールバック。
  *
@@ -24,7 +24,6 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { google } = require("googleapis");
 const {
   CLICK_EVENT,
   IMPRESSION_EVENT,
@@ -34,11 +33,11 @@ const {
   shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
 const { GA4_PROPERTY_ID } = require("../lib/site-config.cjs");
+const { createGa4DataClient } = require("../lib/google-client.cjs");
 const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
-const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 // ★ 2026-07-28 に impression イベントを `ad_impression` → `affiliate_impression` へ改名した。
 //   旧名は GA4 の AdSense 連携が自動生成する名前と同じで、取得しても AdSense 分しか返らず
 //   CTR の分母にならなかった (直近 7 日 3,346 件が全件 AdSense 由来・残余ゼロ)。
@@ -50,16 +49,6 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const PLACEMENT_DIMENSIONS = [
   "eventName", "pagePath", "deviceCategory", "customEvent:ad_id", "customEvent:link_position",
 ];
-
-function resolveKey() {
-  for (const name of KEY_CANDIDATES) {
-    const p = path.join(PROJECT_ROOT, name);
-    if (fs.existsSync(p)) return p;
-  }
-  throw new Error(
-    `GA4 鍵が見つかりません (${KEY_CANDIDATES.join(" / ")})。ローカル / CI で実行してください。`,
-  );
-}
 
 function assertDate(value, label) {
   if (!DATE_PATTERN.test(value)) throw new Error(`${label} は YYYY-MM-DD で指定してください: ${value}`);
@@ -242,11 +231,7 @@ async function collectReports(analyticsdata, dateRange) {
 }
 
 async function main() {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: resolveKey(),
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-  });
-  const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
+  const analyticsdata = createGa4DataClient();
 
   const window = parseFetchWindow(process.argv.slice(2));
   const reports = await collectReports(analyticsdata, window);

@@ -13,7 +13,7 @@
  *   - overview-clean.csv … Japan-only カレンダー週 (GA4-PIPELINE-02 後方互換系列・history.csv 用)
  *   - daily-clean.csv … Japan-only 日別 14 日 (確定7日 KPI の coverage 判定用)
  *   - summary.json … jpFinalized7d/jpPrevious7d KPI + raw pollution (期間 metadata 付き)
- * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json
+ * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)
  * GA4 Property: env GA4_PROPERTY_ID（未設定時は 463218070）
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
@@ -23,12 +23,10 @@
  *   (check-period-contract.mjs が後段で検出する)。全滅は exit 1。
  */
 
-import { google } from "googleapis";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import {
   PROJECT_ROOT,
-  resolveServiceAccountKeyFile,
   parseWeekArg,
   isoWeekToDateRange,
   toCsv,
@@ -47,10 +45,10 @@ import {
   measurementRow,
 } from "./lib/journey-ga4-reports.mjs";
 import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { createGa4DataClient } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const DEFAULT_PROPERTY_ID = GA4_PROPERTY_ID;
-const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
 
 const JAPAN_FILTER = {
   filter: {
@@ -129,7 +127,7 @@ function ga4DateToIso(v) {
 
 async function main() {
   const week = parseWeekArg();
-  const keyFile = resolveServiceAccountKeyFile();
+  const analyticsdata = createGa4DataClient();
   const propertyId = process.env.GA4_PROPERTY_ID || DEFAULT_PROPERTY_ID;
   const property = `properties/${propertyId}`;
 
@@ -139,9 +137,6 @@ async function main() {
 
   const outDir = join(PROJECT_ROOT, datasetDir("ga4.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
-
-  const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });
-  const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
   const summaryLines = [];
   const errors = [];

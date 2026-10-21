@@ -95,7 +95,7 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 書かれていない施策は `insufficient-target` で永久に `effect/pending` に留まるので、
 効果を自動確定させたい施策には本 agent が想定値を明記する (根拠 = 過去事例か計算式が行か詳細ログにあるときだけ)。
 
-GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス前方一致・複数可) と
+GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス完全一致・複数可。`/` で終えると配下すべて) と
 `デプロイ済 YYYY-MM-DD` も揃うと `gsc-improvement` adapter
 (`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
 欠けている目印は `data/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
@@ -124,8 +124,6 @@ GA4 施策 (Metric に ga4) は `[ga4-page: /path]` と `デプロイ済 YYYY-MM
 例外: **Template C** (report) を使う場面
 - improvements.md 全面再構成時 (重複 / 矛盾の検出と整理方針)
 
-## 記録から判断する (2026-10-20)
+## 記録から判断する
 
-管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
-セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
-例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。
+ログインが要る計測値は週次の記録から読み、ブラウザで取りに行かない。正典 (記録の置き場・古いときの扱い・例外) は `.claude/rules/recorded-measurement-first.md`。

@@ -22,7 +22,7 @@ export const projectedPopulation2025: MetricConfig = {
     "from": 2023,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

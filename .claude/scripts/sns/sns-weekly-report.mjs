@@ -15,6 +15,7 @@
  *   node .claude/scripts/sns/sns-weekly-report.mjs --dry-run
  */
 
+import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../metrics/lib/periods.mjs";
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
@@ -31,33 +32,11 @@ const DRY_RUN = args.includes("--dry-run");
 const WEEK_ARG = args.find((a) => /^\d{4}-W\d{2}$/.test(a));
 
 function isoWeekToDates(weekId) {
-  const m = /^(\d{4})-W(\d{2})$/.exec(weekId);
-  if (!m) throw new Error(`Invalid week id: ${weekId}`);
-  const year = parseInt(m[1], 10);
-  const week = parseInt(m[2], 10);
-  const jan4 = new Date(Date.UTC(year, 0, 4));
-  const dayOfWeek = jan4.getUTCDay() || 7;
-  const week1Mon = new Date(jan4);
-  week1Mon.setUTCDate(jan4.getUTCDate() - dayOfWeek + 1);
-  const monday = new Date(week1Mon);
-  monday.setUTCDate(monday.getUTCDate() + (week - 1) * 7);
-  const sunday = new Date(monday);
-  sunday.setUTCDate(monday.getUTCDate() + 6);
-  return {
-    monday: monday.toISOString().slice(0, 10),
-    sunday: sunday.toISOString().slice(0, 10),
-  };
+  return isoWeekRange(weekId); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 function getPreviousWeekId() {
-  const today = new Date();
-  today.setUTCDate(today.getUTCDate() - 7);
-  const d = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNum = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+  return isoWeekOf(jstDateOf(Date.now() - 7 * 86400000));
 }
 
 function summarize(rows) {
@@ -160,8 +139,7 @@ function buildTopPostsSection(rows) {
 function main() {
   const weekId = WEEK_ARG || getPreviousWeekId();
   const range = isoWeekToDates(weekId);
-  const prevWeekNum = parseInt(weekId.slice(6), 10) - 1;
-  const prevWeekId = `${weekId.slice(0, 4)}-W${String(prevWeekNum).padStart(2, "0")}`;
+  const prevWeekId = isoWeekOf(addDays(range.monday, -7));
   const prevRange = isoWeekToDates(prevWeekId);
 
   const currentRows = store.readByRange(range.monday, range.sunday);

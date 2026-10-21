@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const longAbsenceMiddleSchoolIllnessPer1000: MetricConfig = {
   "key": "long-absence-middle-school-illness-per-1000",
   "title": "病気による中学校長期欠席生徒比率",
+  "subtitle": "生徒千人当たり",
   "unit": "生徒千対",
   "category": "educationsports",
   "source": {

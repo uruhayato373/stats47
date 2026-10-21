@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const seniorRecreationHomeCountPer100k65plus: MetricConfig = {
   "key": "senior-recreation-home-count-per-100k-65plus",
   "title": "老人憩の家数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +21,7 @@ export const seniorRecreationHomeCountPer100k65plus: MetricConfig = {
     "from": 1975,
     "to": 2009,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",
