@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import {
+  findStaleSourceFields,
   findYearMentions,
   latestPartition,
   planChartRefresh,
@@ -118,5 +119,24 @@ describe("rebuildSource / findYearMentions", () => {
     const md = "---\ntitle: 2018年の乳牛\n---\n\n北海道が1位です。\n2018年は800頭でした。";
     assert.deepEqual(findYearMentions(md, ["2018", "2018"]).map((m) => m.line), [2, 6]);
     assert.deepEqual(findYearMentions(md, []), []);
+  });
+});
+
+describe("findStaleSourceFields", () => {
+  it("取り直し後の source.json に元の年が残る欄を列挙し、作り直した年の欄は数えない", () => {
+    const source = {
+      kind: "ranking",
+      rankingKey: "fishery-species-catch-bonito",
+      year: "2023",
+      refreshedFromYear: "2015",
+      fetchedAt: "2026-10-21T00:00:00.000Z",
+      coverage: "2015年は 39 県",
+      supplementary: { tunaCorrelation: { year: 2015, r: 0.8 }, note: "20150 件は対象外" },
+    };
+    assert.deepEqual(findStaleSourceFields(source, "2015"), ["coverage", "supplementary.tunaCorrelation.year"]);
+  });
+
+  it("元の年が残っていなければ空", () => {
+    assert.deepEqual(findStaleSourceFields({ kind: "ranking", year: "2023", refreshedFromYear: "2015" }, "2015"), []);
   });
 });

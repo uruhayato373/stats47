@@ -112,6 +112,34 @@ export function rebuildSource(source, { fromYear, toYear }, fetchedAt) {
   };
 }
 
+/** 年を作り直す欄。ほかの欄に元の年が残っていれば、作り直せないので手作業に回す。 */
+const REBUILT_SOURCE_FIELDS = new Set(["year", "refreshedFromYear", "fetchedAt"]);
+
+/**
+ * 取り直したあとの source.json で、元の年の値が残っている欄 (例: `coverage`・`supplementary.tunaCorrelation`)。
+ * 補足の集計値は図の data から作れないので自動では直さず、ここで列挙して手作業に出す
+ * (2026-10-08 に bonito-catch-prefecture で 2015 年の値が残った。BLOG-REFRESH-STALE-SOURCE-FIELDS-01)。
+ */
+export function findStaleSourceFields(source, fromYear) {
+  const year = String(fromYear);
+  const pattern = new RegExp(`(?<!\\d)${year}(?!\\d)`);
+  const stale = [];
+  const walk = (node, at) => {
+    if (typeof node === "string" ? pattern.test(node) : typeof node === "number" && String(node) === year) {
+      stale.push(at);
+      return;
+    }
+    if (node && typeof node === "object") {
+      for (const [key, value] of Object.entries(node)) {
+        if (!at && REBUILT_SOURCE_FIELDS.has(key)) continue;
+        walk(value, at ? `${at}.${key}` : key);
+      }
+    }
+  };
+  walk(source, "");
+  return stale;
+}
+
 /** 本文 (frontmatter を含む) のうち、古い年を書いた行。書き直す箇所の目印にする。 */
 export function findYearMentions(markdown, years) {
   const targets = [...new Set(years)].map((year) => `${year}年`);

@@ -1439,6 +1439,7 @@ updated: 2026-10-19
 ### [BLOG-REFRESH-STALE-SOURCE-FIELDS-01] 図の年の取り直しで source.json の coverage と補足値が古い年のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 補足の集計値 (coverage・相関など) は図の data から作り直せないので、自動で直さず列挙する方にした。`lib/refresh-chart-year.mjs` に `findStaleSourceFields` (取り直し後の source.json で、作り直した year・refreshedFromYear・fetchedAt 以外に元の年が残る欄を、入れ子のパスで返す。4 桁の年を数字の境界で判定) を足し、`refresh-article-data-years.mjs` が「手作業: source.json の coverage・supplementary.tunaCorrelation.year に 2015 年の値が残る」を表の補足に出す。テスト 2 件 (bonito の形・残りなし)。
 - **事象 (2026-10-08)**: `refresh-article-data-years.mjs --apply` で `bonito-catch-prefecture` の図を 2023 年にしたあと、`bonito-ranking.source.json` の
   `coverage` と `supplementary.tunaCorrelation` が 2015 年の値のまま残った (article-writer が手で直した)。ほかの記事でも取り直し後に古い値が残りうる。
 - **次**: スクリプトが年に依存する source.json の項目を作り直すか、作り直せない項目があれば「手作業」に出して知らせる。
