@@ -1365,6 +1365,11 @@ updated: 2026-10-19
 - **事象**: dependabot は `apps/web` などの package.json だけを上げ、ルートの `overrides` (next 15.5.24・sharp 0.35.4) は古いまま残った。next が 2 つの版で入り、PR #1119 の本番ビルドの /404 事前描画が `<Html> should not be imported outside of pages/_document` で落ちた (2026-10-10。overrides を揃えて解消)。CI の Build Check が本番前に止めたが、ビルド 5 分と CI 往復 1 回を使った。
 - **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
 - **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
+- **追加の観測 (2026-10-21・PR #1165 の Security Scan)**: vite の脆弱性 (8.2.0〜8.2.3) を直すためにルートの `overrides` へ `"vite": "8.2.4"` を足しても、
+  `npm install` は lock の 8.2.2 を残し、`npm ls vite` が `invalid` を出すだけで exit 0 だった。lock から vite の項目を消して入れ直すと、vite と依存 7 件が
+  lock から消えた (誤り。戻した)。`npm update vite` は npm 自体のエラー (`Cannot read properties of null (reading 'edgesOut')`)。
+  通ったのは「ルートの devDependencies に `vite@^8.2.4`、overrides は `"vite": "$vite"`」(commit `ef8df73aa`)。検査の (c) として
+  「`npm ls --all` に `invalid` が無い (override と lock の版が一致する)」を足す。
 
 ### [RANKING-RATIO-RANK-MISMATCH-01] 比率指標 4 件で配信中の順位が再計算と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
