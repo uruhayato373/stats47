@@ -33932,7 +33932,7 @@
     },
     {
       "id": 1097,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33941,13 +33941,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.308Z",
-      "updated_at": "2026-10-21T00:45:11.677Z",
+      "updated_at": "2026-10-21T15:05:25.192Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "fish-pickled-consumption-expenditure--average-temperature",
       "caption": "【データの相関】魚介の漬物消費支出額 × 年平均気温\n\n寒い県ほど、魚の漬物にお金を使う？\n\n縦軸: 年平均気温（℃・2024年）出典: 社会・人口統計体系\n横軸: 魚介の漬物消費支出額（円・2024年）出典: 家計調査\n\n相関係数 r=-0.68（人口の影響を除くと r=-0.69）\n\n相関は因果関係を示しません。\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #economy #landweather",
-      "scheduled_at": "2026-10-21T10:00:00.000Z"
+      "scheduled_at": "2026-10-21T10:00:00.000Z",
+      "posted_at": "2026-10-21T15:05:25.184Z",
+      "post_url": "https://www.instagram.com/p/DewsE6nlF61/",
+      "external_id": "18096894491128015"
     },
     {
       "id": 1098,
