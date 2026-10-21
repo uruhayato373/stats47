@@ -632,6 +632,71 @@ updated: 2026-10-19
 - **次**: ① 本番ビルドでテーマページの初回 JS に registry が入っているかを確かめる (data-configs は `sideEffects` を宣言していないので、開発ビルドだけの問題とは限らない) ② `stat-series-ref` の検証を registry に依存しない形にするか、検証を別の公開口へ分ける ③ 県ページで GIS 処理ライブラリを読む経路を特定して断つ。ランキング詳細と同じく `client-entry-registry-boundary.test.ts` 型の境界テストで固定する。
 - **完了条件**: テーマ・県ページのクライアント部品から registry と GIS 処理ライブラリに届く経路が 0 件で、県ページを開いた後にメモリ再起動が起きない。
 
+
+- **2026-10-21 残りの分離**: 全 `"use client"` ファイルの定期検査は `CLIENT-GRAPH-AUDIT-01`、`"use server"` ファイルの export 検査は `USE-SERVER-EXPORT-LINT-01`、サーバー側の入口とページ別 JS の大きさは `DEV-SERVER-BARREL-01`、Windows での Turbopack の確認は `TURBOPACK-DEV-WINDOWS-01`。
+### [SSDS-YEARFORMAT-SOURCE-01] SSDS の指標生成器が年の区切りを一律「年度」で書くのをやめ、出典の期間から決めて検査で止める
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-21] [領域:データ]
+
+- **根本原因 (2026-10-21 確認)**: `.claude/scripts/estat/gen-ssds-configs.mjs` が社会・人口統計体系 (SSDS) の全指標に `yearFormat: "fiscal"` を固定で書いている (79 行目)。このため国勢調査 (10月1日時点)・家計調査 (暦年平均)・犯罪統計 (暦年計) などが「2020年度」と表示されていた。同日に 410 件を出典の期間に合わせて直したが (`METRIC-YEARFORMAT-KAKEI-01`)、生成器を直さない限り新しい指標で再発する。
+- **判定の手順 (同日に使った方法・再現用)**: ① e-Stat「統計項目の定義」`https://www.e-stat.go.jp/koumoku/koumoku_teigi/<A〜M>` の HTML を `<hr>` で区切り、各表 (見出し行に「時点又は期間」) の 1 列目の項目符号と 4 列目の期間、節末尾の「調査名又は報告書名」を取る (13 分野で 2,596 項目)。② 「指標計算式」`https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/<A〜M>` の `<tr id>` から指標コード (`#L01201` 等) と計算式 (`L3110` 等の基礎項目、781 指標) を取る。③ 指標の基礎項目がすべて「暦年計・暦年平均・暦年・12月末/31日・10月1日」か、e-Stat の統計表一覧 API (getStatsList) の表題で「平成N年◯◯」と年で呼ばれる調査 (賃金構造基本統計調査・経済センサス・経済構造実態調査・事業所・企業統計調査・国民生活基礎調査・農林業センサス・漁業センサス・社会生活基本調査) なら calendar。年度計・年度間・3月31日などを含めば fiscal。それ以外は判定しない。同日の作業用スクリプトは一時領域にしか無いので、この手順で作り直す。
+- **次**: ① 上の判定を `.claude/scripts/estat/` に純関数 + テストとして置き、定義ページの控えを `data/estat/` に保存する (台帳 `config/datasets.mjs` に 1 行足す)。② `gen-ssds-configs.mjs` が判定結果で `yearFormat` を書き、判定できない指標は生成を止めるか人の確認を求める。③ `validate:config` か専用の検査で、SSDS の指標の `yearFormat` が判定と食い違えば error にする (判定できない指標は理由付きの allowlist、縮小専用)。誤りを 1 件注入して発火することを確かめる。
+- **完了条件**: 生成器が出典の期間から年の区切りを決め、既存 SSDS 指標の食い違いを検査が止め、注入した誤りで検査が落ちる。
+
+### [YEARFORMAT-REFLECT-01] 年表記を直した 410 指標を R2 と記事・AI 解説・書籍へ反映する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
+
+- **背景**: 2026-10-21 に 410 指標の `yearFormat` を fiscal → calendar に直した (develop のコミット `06316dc21`・`a21c4586a`・`5e72aa59a`。家計・物価・地価 68、SSDS の他分野 221 と 121)。サイトの年表記 (R2 の `yearName`「2020年度」→「2020年」) が変わるのは、develop→main のマージ後に配信値を作り直したときだけ (`sync-snapshots` は main のコードで動く)。
+- **次**: ① main へマージした後、変わった指標の `ranking-values` を作り直す (`gh workflow run sync-snapshots.yml --ref main -f only=ranking-values -f ranking_keys=<最大50件>` を分けて実行するか、月次の data-refresh を待つ)。数件を curl で読み、`yearName` が「年」で終わることを確かめる。② 公開済みのブログ・ランキングの AI 解説 (`app/ranking/<key>/ai-content.json`)・note・Kindle の本文で、これらの指標に「◯年度」と書いた箇所を洗い出し、出典の期間に合わせて直す (ブログは公開記事の差し替えになるのでまとめて 1 回)。
+- **完了条件**: 410 指標の R2 の `yearName` が「年」で終わり、本文の「年度」表記の食い違いが 0 件か、直さない理由が記録されている。
+
+### [CLIENT-GRAPH-AUDIT-01] ブラウザ向けの全部品について、重い依存に届かないことを定期に検査する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **背景**: 2026-10-21 に、入口 (barrel) 経由で全指標 registry・全テーマ定義・GIS の原典処理がブラウザ向けに入っていたのを直した (`DEV-HEAVY-CLIENT-GRAPH-01`)。逆戻りを止める境界テスト (`apps/web/src/__tests__/client-bundle-boundary.test.ts`・`packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts`) は、列挙した入口しか見ない。新しい入口や部品から同じ経路ができても気づけない。同日の調査では、全 `"use client"` ファイル 262 件から値の import をたどる一時スクリプト (TypeScript の `resolveModuleName`、型だけの import と `"use server"` のファイルは辿らない) で 37 件の経路を見つけた。全件で約 1 分かかる。
+- **次**: ① この全件検査を `.claude/scripts/` に置き、registry・`all-themes`・GIS 原典処理 (unzipper・shapefile・proj4・topojson-server・topojson-simplify) に届く `"use client"` ファイルを数える。② 週次の `quality-suite-weekly.yml` か preflight (時間次第) に配線し、0 件からの増加で落とす。③ 誤りを 1 件注入して発火を確かめる。
+- **完了条件**: 全 `"use client"` ファイルを対象に定期検査が走り、注入した経路で落ちる。
+
+### [USE-SERVER-EXPORT-LINT-01] `"use server"` のファイルが async 関数以外を export したら検査で止める
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-21] [領域:サイト]
+
+- **背景**: 2026-10-21、`features/theme-dashboard/actions/fetch-metric-timeseries.ts` (`"use server"`) が型を再 export (`export type { … } from`) しており、開発サーバーを Turbopack にするとテーマ詳細が 500 になった (webpack は通していた)。Next.js の規則は「サーバーアクションのファイルは async 関数だけを export する」。同日に該当の 1 件は直したが、`export interface` / `export type` を持つ `"use server"` ファイルが他に 4 件ある (`theme-dashboard/actions/{fetch-theme-chart-results,fetch-population-pyramid,fetch-db-chart-data}.ts`・`depopulation-medical/actions/fetch-base.ts`。Turbopack では表示できているが規則とは食い違う)。
+- **次**: `"use server"` のファイルで、async 関数以外の値の export と型の再 export を ESLint か専用の検査で止める。既存の `export interface` は型ファイルへ移すか、検査の対象外にする理由を決める。違反を 1 件注入して発火を確かめる。
+- **完了条件**: 検査が develop-quality-gate か pre-commit で走り、型の再 export を注入すると落ちる。
+
+### [TURBOPACK-DEV-WINDOWS-01] 会社の Windows PC で開発サーバーが Turbopack で動くことを確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:windows] [起票:2026-10-21] [領域:管理]
+
+- **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。確かめたのは自宅の Mac だけ。会社 PC は i-FILTER の TLS 傍受があり、R2 を読むために dev-server が Windows の R2 gateway を起動して `R2_PUBLIC_FETCH_URL` を差し替える (`.claude/rules/local-environment.md`)。この経路と Turbopack の組み合わせは未確認。
+- **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
+- **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
+
+### [SMOKE-SCRIPT-BASH3-01] ルートのスモーク検査が Mac の bash 3 で動かないのに「passed」と出る
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-21] [領域:管理]
+
+- **事象 (2026-10-21)**: Mac で `bash .github/scripts/smoke-test-routes.sh http://localhost:3001` を実行すると、41 行目の `declare -A` が bash 3.2 で失敗し、157 行目でも構文エラーが出た。それでも最後は「Smoke test passed: 2/2 representative routes OK.」で終了コード 0 になった。CI (Linux の bash 5) では正しく動くが、手元で使うと検査していないのに合格と表示される。
+- **次**: 先頭で bash 4 以上を要求して止める (`BASH_VERSINFO`) か、連想配列を使わない書き方にする。途中の構文エラーで合格を出さないよう `set -e` 相当か件数の照合を入れる。
+- **完了条件**: Mac の bash 3 で実行すると明示的に失敗するか正しく検査し、合格の件数が検査した URL の数と一致する。
+
+### [LOCAL-RELEASE-BUILD-R2-TIMEOUT-01] ローカルの本番ビルドが静的生成で R2 の読み込み 10 秒制限に引っかかって落ちることがある
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **事象 (2026-10-21・8GB の Mac)**: `NEXT_DIST_DIR=.local/next-release next build` の 1 回目が、1,633 ページの静的生成中に `/tag/再生可能エネルギー` で `blog snapshot read timed out after 10000ms` となり失敗した。同じコードの 2 回目は成功した。ローカルのビルドは `.env.development` の公開 R2 URL を読むので、多数のページが同時に同じ snapshot を読んで制限を超えると考えられる ([仮説]。検証: 静的生成中の同時 fetch 数を数える)。`npm run check:release-local` の結果が不安定になる。CI のビルドは R2 を読まないので起きない。
+- **次**: ① 静的生成中に同じ key を何回読んでいるかを数える。② 1 回のビルドの中で同じ snapshot の読み込みをまとめるか、ビルド中だけ制限時間を延ばすかを決める (本番の実行時は 10 秒のまま)。
+- **完了条件**: ローカルの本番ビルドを 3 回続けて実行し、R2 のタイムアウトで落ちない。
+
+### [ESLINT-COMPAT-TEST-LOCAL-01] `eslint-dependency-compatibility.test.ts` が Mac でだけ毎回落ちる原因を調べる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
+
+- **事象**: `apps/web` の vitest 全件で、`src/__tests__/eslint-dependency-compatibility.test.ts` の「handles a deeply nested brace pattern without exhausting the call stack」だけが Mac で毎回落ちる (2026-10-21 に 6 回実行して 6 回とも同じ。CI の Unit Tests (web) では通る)。全件の結果を読むたびに「既知の 1 件」を除いて判断する必要があり、新しい失敗を見落とす原因になる。
+- **次**: 失敗の出力を読み、Node のスタックサイズ・Node の版・依存の解決先 (Mac と CI) の違いを切り分ける。環境由来なら、テストが前提とする条件を明示して満たさない環境では理由付きで skip するか、条件をそろえる。
+- **完了条件**: Mac で web の vitest 全件が 0 件の失敗で終わるか、skip の理由がテストに書かれている。
+
+### [DEV-SERVER-BARREL-01] サーバー側の入口経由の重い依存と、本番のページ別 JS の大きさを減らす
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **実測 (2026-10-21)**: ① トップページのサーバー側は、`features/blog/server.ts` (調査分類) と `features/area-profile` の入口を経由して全指標 registry を読む。ほぼ全ページのサーバー側で一度はコンパイルされるので開発時の負担は 1 回だが、入口を細かくすれば減る。② `@stats47/data-configs` は package.json に `sideEffects` を宣言していない。本番ビルドで使わない再 export を落とせない可能性がある。③ 本番ビルドのページ別のブラウザ向け JS (非圧縮・共有分を含む) は、テーマ詳細 1,758KB・Geo 分析 1,405KB・ランキング詳細 1,073KB・トップ 965KB・県ページ 962KB。
+- **次**: ③ を `@next/bundle-analyzer` (next.config に配線済み) で開き、大きい依存を上から確かめる。② は `sideEffects: false` を宣言した場合に本番の JS が減るかと、壊れないか (CSS・副作用のあるモジュール) を比べてから決める。① は効果を数えてから着手する。
+- **完了条件**: ページ別 JS の大きい順の内訳が記録され、減らせるものを減らしたか、減らさない理由が書かれている。
 ### [PRODUCT-FUNNEL-DEPLOY-01] ブログ・ダウンロードの商品導線と地図用ダウンロードを本番に出し、4 週のクリックを測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
@@ -3493,6 +3558,7 @@ updated: 2026-10-19
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17] [領域:データ]
 
+- **2026-10-21 分離**: 生成器 `gen-ssds-configs.mjs` が SSDS の全指標に `yearFormat: "fiscal"` を固定で書いていたのが根本原因。生成器の修正と食い違いの検査 (再発防止) は `SSDS-YEARFORMAT-SOURCE-01`、直した 410 指標の R2・本文への反映は `YEARFORMAT-REFLECT-01` で扱う。このカードに残るのは、期間から決まらない 87 件と農業経営統計調査の 5 件の判定。
 - **2026-10-21 経過**: 社会・人口統計体系の家計 (0000010112 / 0000010212) 由来で yearFormat が fiscal だった 73 指標を、e-Stat の「統計項目の定義 L 家計」(https://www.e-stat.go.jp/koumoku/koumoku_teigi/L)・「C 経済基盤」(同 /C)・「指標計算式 L」(https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/L) で 1 件ずつ基礎項目の「時点又は期間」へたどった (2026-10-21 取得)。家計調査 (暦年平均) 25 件 (計算型 2 件を含む)、全国家計構造調査 (10月末日・年間収入は調査前年11月〜調査年10月) 9 件、全国消費実態調査 (11月30日・10月31日) 12 件、消費者物価指数と地域差指数 (暦年平均) 19 件、都道府県地価調査 (7月1日) 3 件の計 68 件は、どれも年度 (4月〜翌3月) ではないので calendar にした (seoTitle に「年度」を含むものは無かった)。validate:config・metrics:check・preflight:pr 通過、web の vitest 全件は環境由来の 1 件以外通過。定義シート (real-disposable-income-reversal) で家計の 3 指標と地域差指数が「暦年」と出ることを確認した。サイトの yearName (「2024年度」→「2024年」) は次の data-refresh で R2 に入る (R2 は未反映)。**残り**: ① 農業経営統計調査の 5 指標 (農家総所得・農業所得割合・農外所得割合・農家世帯の家計費・農家世帯の平均消費性向) は期間が「年計」で暦年か年度か定義から決まらないので fiscal のまま。② (済) per-capita-prefectural-income-h27 に description・note を足した。e-Stat の定義 (C122101、年度計) と、内閣府 県民経済計算 2021 年度の総括表で全県計 417,900,154 百万円 ÷ 125,502,290 人 = 3,330 千円が公表の 1 人当たり県民所得と一致することで、分母が総人口だと確かめた。③ (一部済) 家計以外の範囲: 社会・人口統計体系の全分野 (A〜M) の「統計項目の定義」と「指標計算式」を取り込み、yearFormat が fiscal の 960 指標を基礎項目の「時点又は期間」へたどった。暦年計・暦年平均・暦年・12月末/31日・10月1日、または社会生活基本調査 (年の名で呼ぶ調査) のどれかだけから成る 221 件を calendar にした (国勢調査・人口推計 71、社会福祉施設等調査 39、医療施設調査 30、犯罪統計 28、病院報告 20、社会教育調査 20、火災年報 15 など)。年度計・年度間・3月31日など年度の項目を含む 450 件は fiscal のままで正しい。期間が 5月1日 (学校基本調査は「令和N年度」と呼ぶ)・調査日・年計・4月1日などで決まらない 289 件は触っていない (次に残る範囲)。 **続き (同日)**: 残り 289 件のうち、期間 (調査日・6月・2月1日・選挙期日など) からは決まらない項目を、調査の呼び方で判定した。e-Stat の統計表一覧 API (getStatsList) の表題で、賃金構造基本統計調査・経済センサス (基礎・活動)・経済構造実態調査・事業所・企業統計調査・国民生活基礎調査・農林業センサス・漁業センサスは「平成21年◯◯」と年で呼ばれていることを確かめ、これらと選挙 (選挙期日) だけから成る 121 件を calendar にした (製造業 2 件の note の「2020年度以降」も直した)。学校基本調査・学校保健統計調査・建設工事施工統計調査は表題が「年度」なので、これらの 81 件は fiscal のままで正しい。**残り 87 件**: e-Stat に表題が無く呼び方を確かめられない調査 (地方公共団体定員管理調査・市町村税課税状況等の調・固定資産の価格等の概要調書・公共施設状況調・消防年報・耕地及び作付面積統計・住民基本台帳人口要覧など) と農業経営統計調査、定義ページに項目が無い 17 件 (行政投資など)。fiscal のまま触っていない。製造業 2 件の note の「2020年度以降」を「2020年以降」に直した。宿泊旅行統計調査 (暦年計) の 4 件は calendar に入った。住宅・土地統計調査の項目で fiscal だったのは、年度計の建築着工統計と組み合わせた new-housing-construction-ratio の 1 件だけで、年度のまま。
 - **owner**: survey-curator (surveyId) / data-ingester (yearFormat)
 - **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。 `per-capita-prefectural-income-h27` は description と note も無く、定義シートの対象欄が「config に対象の記述なし」になる (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告。県民所得の構成・分母・名目か実質かが読者向けの定義に出ない)。
