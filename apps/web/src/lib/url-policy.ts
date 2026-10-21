@@ -22,7 +22,7 @@ import {
   KNOWN_MUNICIPALITY_THEME_SLUGS,
 } from '@stats47/data-configs/geo-scope';
 
-import { PHASE_1_SSG_CITIES } from '@/features/area-profile/constants/stage-1-cities';
+import { isPublishableCity } from '@/features/area-profile/constants/publishable-cities';
 
 import { GONE_BLOG_SLUGS } from '@/config/gone-blog-slugs';
 import { GONE_RANKING_KEYS } from '@/config/gone-ranking-keys';
@@ -73,9 +73,6 @@ const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES
 );
 
-const INDEXABLE_CITY_PATHS_SET = new Set(
-  PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => `${areaCode}:${cityCode}`)
-);
 const KNOWN_PUBLISHED_BLOG_SLUGS = new Set(
   SITEMAP_BLOG_ENTRIES.map(({ slug }) => slug)
 );
@@ -115,9 +112,8 @@ export const UrlPolicy = {
   city: {
     isKnownUnderPrefecture: (areaCode: string, cityCode: string): boolean =>
       prefectureCodeForCity(cityCode) === areaCode,
-    /** sitemap に提出する実コンテンツ整備済みの市区町村。 */
-    isIndexable: (areaCode: string, cityCode: string): boolean =>
-      INDEXABLE_CITY_PATHS_SET.has(`${areaCode}:${cityCode}`),
+    /** 索引・sitemap の対象 (市区町村の対象集合。データブックを持つ市区町村)。 */
+    isIndexable: isPublishableCity,
   },
   /**
    * city-category (/areas/{pref}/cities/{city}/{category})。

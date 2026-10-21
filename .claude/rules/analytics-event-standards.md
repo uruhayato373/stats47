@@ -335,6 +335,12 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 無料の連載 `/blog/cc-estat-01-setup` への 1 行 (`RankingMakingOfLink`) を置き、`ranking_making_of` で数える (`nav_label` = `cc-estat-01-setup`)。
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
 >
+> **nav_surface の値追加 (2026-10-21・市区町村の回遊、MUNI-PAGE-QUALITY-01、未デプロイ)**: 都道府県ランキングの右レール
+> 「この指標を市区町村で見る」(`RelatedContentNavigation`、関係 `sameMetric`) に `ranking_municipality`、市区町村ランキングの
+> 「同じ指標のランキング・記事・テーマ」と市区町村ページの「この市区町村のデータを読み解く記事」に `municipality_related` を付けた。
+> 市区町村ページの見出しの指標・分野別の表は県データブックと同じ `area_databook`、特徴は `area_highlights` を使う (ページの path で県と分かれる)。
+> 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

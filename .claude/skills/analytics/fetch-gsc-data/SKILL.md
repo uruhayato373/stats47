@@ -309,7 +309,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ## よく使うパターン
 
-市区町村ページ (`PHASE_1_SSG_CITIES`) の登録状況を 50 件抜き取りで確かめる (URL Inspection API・`MUNICIPALITY-SCOPE-SEPARATION-01`。結果は `/tmp/cities-inspection-sample-<日付>.csv`):
+市区町村ページ (公開対象 1,741 件。`data/content/pages/city.json` の published) の登録状況を 50 件抜き取りで確かめる (URL Inspection API・`MUNICIPALITY-SCOPE-SEPARATION-01`。結果は `/tmp/cities-inspection-sample-<日付>.csv`):
 `node .claude/scripts/gsc/inspect-cities-sample.cjs`
 
 ```bash

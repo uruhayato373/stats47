@@ -27,4 +27,3 @@ export type {
   DatabookHighlightMeta,
   DatabookMetricValue,
 } from "./types/databook-snapshot";
-export { cityProfileKeyPath, type CityProfileData } from "./types/city-profile";

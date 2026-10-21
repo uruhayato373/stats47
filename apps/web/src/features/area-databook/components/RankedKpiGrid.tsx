@@ -1,13 +1,8 @@
-
-
-import { cn } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
-import Link from "@/components/atoms/SiteLink";
-import { getSurfaceCardClassName } from "@/components/surface";
+import { rankToneByPosition } from "@/components/atoms/RankBadge";
 
-import { navSurfaceProps } from "@/lib/analytics/events";
+import { RankedValueGrid } from "./RankedValueGrid";
 
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
 import type { DatabookMetricRef } from "@stats47/data-configs";
@@ -18,40 +13,12 @@ interface Props {
   columns?: 2 | 3 | 4;
 }
 
-function formatValue(value: number): string {
-  // 小数を持つ指標 (割合・倍率) は 1 桁まで、整数系は桁区切り。
+/** 都道府県の数。全国順位のチップはこの範囲の順位にだけ付ける。 */
+const PREFECTURE_COUNT = 47;
+
+function formatAverage(value: number): string {
   if (Number.isInteger(value)) return value.toLocaleString("ja-JP");
   return value.toLocaleString("ja-JP", { maximumFractionDigits: 1 });
-}
-
-const COLS: Record<number, string> = {
-  1: "grid-cols-1",
-  2: "@sm:grid-cols-2",
-  3: "@sm:grid-cols-2 @md:grid-cols-3",
-  4: "@sm:grid-cols-2 @md:grid-cols-4",
-};
-
-/** 各段数で最終行の空きマスを埋めるのに要る数 (1 段表示では空きが出ない)。 */
-function trailingGaps(count: number, columns: number): number {
-  return (columns - (count % columns)) % columns;
-}
-
-/**
- * 最終行の空きマス用の埋め草。グリッドは gap-px + bg-border で罫線を描くため、空きマスは
- * そのまま灰色の箱に見える (2026-09-24 週次 UI 検査)。段数はコンテナ幅で 2 / 3 / 4 に
- * 変わるので、段数ごとに必要な数だけを表示する。
- */
-function fillerClassNames(count: number, columns: 2 | 3 | 4): string[] {
-  const gaps2 = trailingGaps(count, 2);
-  const gapsWide = columns === 2 ? gaps2 : trailingGaps(count, columns);
-  const total = Math.max(gaps2, gapsWide);
-  return Array.from({ length: total }, (_, i) =>
-    cn(
-      "hidden bg-card",
-      i < gaps2 ? "@sm:block" : "@sm:hidden",
-      columns !== 2 && (i < gapsWide ? "@md:block" : "@md:hidden"),
-    ),
-  );
 }
 
 /**
@@ -64,84 +31,43 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
   const visible = databook
     ? metrics.filter((m) => databook.metrics[m.rankingKey])
     : metrics;
-  if (visible.length === 0) return null;
   const hasCapitalCityValue = visible.some((m) => m.capitalCityValue);
-  const effectiveColumns = Math.min(columns, visible.length) as 1 | 2 | 3 | 4;
-  const fillers =
-    effectiveColumns >= 2
-      ? fillerClassNames(visible.length, effectiveColumns as 2 | 3 | 4)
-      : [];
 
   return (
-    <div className="@container">
-      <dl
-        className={getSurfaceCardClassName({
-          className: cn(
-            "grid grid-cols-1 gap-px overflow-hidden bg-border p-0",
-            COLS[effectiveColumns],
+    <RankedValueGrid
+      columns={columns}
+      navSurface="area_databook"
+      footnote={hasCapitalCityValue ? "※ は県庁所在市の値（家計調査）" : undefined}
+      items={visible.map((m) => {
+        const v = databook?.metrics[m.rankingKey];
+        return {
+          key: m.rankingKey,
+          href: `/ranking/${m.rankingKey}`,
+          label: (
+            <>
+              {m.shortLabel}
+              {m.capitalCityValue && <span className="text-[10px]">※</span>}
+            </>
           ),
-        })}
-      >
-        {visible.map((m) => {
-          const v = databook?.metrics[m.rankingKey];
-          return (
-            <div
-              key={m.rankingKey}
-              className="group flex min-h-16 flex-col justify-between bg-card px-3 py-2.5"
-            >
-              <dt className="text-xs font-medium leading-snug text-muted-foreground group-hover:text-foreground">
-                <Link
-                  {...navSurfaceProps("area_databook")}
-                  href={`/ranking/${m.rankingKey}`}
-                  className="hover:text-primary hover:underline"
-                >
-                  {m.shortLabel}
-                  {m.capitalCityValue && <span className="text-[10px]">※</span>}
-                </Link>
-              </dt>
-              <dd className="mt-1 flex items-end justify-between gap-2">
-                <span className="min-w-0">
-                  {v ? (
-                    <>
-                      <span className="text-base font-bold tabular-nums text-foreground">
-                        {formatValue(v.value)}
-                      </span>
-                      <span className="ml-1 text-[11px] text-muted-foreground">{formatUnitForDisplay(v.unit)}</span>
-                    </>
-                  ) : (
-                    <span className="text-sm text-muted-foreground">—</span>
-                  )}
-                </span>
-                {v && v.rank >= 1 && v.rank <= 47 && (
-                  <RankBadge rank={v.rank} tone={rankToneByPosition(v.rank)} />
-                )}
-              </dd>
-              {/* 値だけではいつの値か分からないので年を必ず添える (2026-09-25) */}
-              {v && (
-                <dd className="mt-0.5 text-[11px] tabular-nums text-muted-foreground">
-                  {v.year}
-                  {m.compareNationalAvg && (
-                    <>
-                      {/* 単純平均を「全国平均」と書かない (率の指標では全国の値と違う。AREA-NATIONAL-AVG-SIMPLE-MEAN-01) */}
-                      {v.nationalAvgKind === "national" ? " ・ 全国 " : " ・ 47都道府県平均 "}
-                      {formatValue(v.nationalAvg)}
-                      {formatUnitForDisplay(v.unit)}
-                    </>
-                  )}
-                </dd>
-              )}
-            </div>
-          );
-        })}
-        {fillers.map((className, i) => (
-          <div key={`filler-${i}`} aria-hidden="true" className={className} />
-        ))}
-      </dl>
-      {hasCapitalCityValue && (
-        <p className="mt-1.5 text-[10px] text-muted-foreground">
-          ※ は県庁所在市の値（家計調査）
-        </p>
-      )}
-    </div>
+          value: v && {
+            value: v.value,
+            unit: v.unit,
+            year: v.year,
+            badge:
+              v.rank >= 1 && v.rank <= PREFECTURE_COUNT
+                ? { rank: v.rank, tone: rankToneByPosition(v.rank) }
+                : undefined,
+            detail: m.compareNationalAvg && (
+              <>
+                {/* 単純平均を「全国平均」と書かない (率の指標では全国の値と違う。AREA-NATIONAL-AVG-SIMPLE-MEAN-01) */}
+                {v.nationalAvgKind === "national" ? " ・ 全国 " : " ・ 47都道府県平均 "}
+                {formatAverage(v.nationalAvg)}
+                {formatUnitForDisplay(v.unit)}
+              </>
+            ),
+          },
+        };
+      })}
+    />
   );
 }

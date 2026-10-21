@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  filterMunicipalityRanking,
-  municipalityLeafName,
-} from '../filter-municipality-ranking';
+import { filterMunicipalityRanking } from '../filter-municipality-ranking';
 
 const values = Array.from({ length: 120 }, (_, index) => ({
   areaCode: String(10000 + index),
@@ -34,9 +31,5 @@ describe('filterMunicipalityRanking', () => {
     });
     expect(result.page).toBe(3);
     expect(result.rows).toHaveLength(20);
-  });
-
-  it('表示名から都道府県接頭辞を除く', () => {
-    expect(municipalityLeafName('北海道 札幌市')).toBe('札幌市');
   });
 });

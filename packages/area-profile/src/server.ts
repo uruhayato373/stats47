@@ -18,9 +18,8 @@ export { extractStrengthsAndWeaknesses } from "./utils";
 
 // 完全DBレス (Phase F): D1 area_profiles の repository / run-batch service は削除済。
 // 県の profile.json は読み手 0 になったため生成ごと廃止 (AREA-PROFILE-JSON-RETIRE-01)。県は databook.json を使う。
-export { exportCityProfileSnapshot } from "./exporters/city-profile-snapshot";
-export { readCityProfileFromR2 } from "./repositories/read-city-profile-snapshot";
-export { cityProfileKeyPath, type CityProfileData } from "./types/city-profile";
+// 市区町村の profile.json も 2026-10-21 に廃止した。市区町村ページは @stats47/ranking の
+// 市区町村データブック (app/areas/<県>/cities/<市区町村>/databook.json) を読む。
 
 // 県データブック (Phase 2): template 参照指標の値+全国順位を焼き込む snapshot。
 export { readAreaDatabookFromR2 } from "./repositories/read-area-databook-snapshot";

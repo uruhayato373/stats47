@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { assertMetricPresentation } from '@stats47/types';
 
+import type { CityDatabookSnapshot } from '../../types/city-databook';
 import type {
   MunicipalityRankingItemSnapshot,
   MunicipalityRankingValuesSnapshot,
@@ -84,6 +85,51 @@ export function parseMunicipalityRankingValuesSnapshot(
   const parsed = MunicipalityRankingValuesSnapshotSchema.parse(value);
   if (parsed.count !== parsed.values.length) {
     throw new Error('municipality ranking count does not match values length');
+  }
+  return parsed;
+}
+
+const CityDatabookMetricSchema = z
+  .object({
+    rankingKey: z.string().min(1),
+    label: z.string().min(1),
+    value: z.number().finite(),
+    unit: z.string(),
+    yearCode: z.string().regex(/^\d{4}$/),
+    yearName: z.string().min(1),
+    nationalRank: z.number().int().positive(),
+    nationalCount: z.number().int().positive(),
+    prefectureRank: z.number().int().positive(),
+    prefectureCount: z.number().int().positive(),
+    basis: z.enum(['rate', 'total', 'unknown']),
+  })
+  .strict();
+
+export const CityDatabookSnapshotSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    areaCode: z.string().regex(/^\d{5}$/),
+    areaName: z.string().min(1),
+    prefectureCode: z.string().regex(/^\d{2}000$/),
+    headlineKeys: z.array(z.string().min(1)),
+    previousPopulation: z
+      .object({ value: z.number().finite(), yearCode: z.string().regex(/^\d{4}$/), yearName: z.string().min(1) })
+      .strict()
+      .nullable(),
+    sections: z.array(
+      z.object({ themeSlug: z.string().min(1), title: z.string().min(1), metricKeys: z.array(z.string().min(1)).min(1) }).strict()
+    ),
+    metrics: z.record(z.string(), CityDatabookMetricSchema),
+  })
+  .strict();
+
+/** 見出し・節が指す指標が metrics にあることまで確かめる (欠けたまま描画すると空の行が出る)。 */
+export function parseCityDatabookSnapshot(value: unknown): CityDatabookSnapshot {
+  const parsed = CityDatabookSnapshotSchema.parse(value);
+  const referenced = [...parsed.headlineKeys, ...parsed.sections.flatMap((section) => section.metricKeys)];
+  const missing = referenced.filter((key) => !parsed.metrics[key]);
+  if (missing.length > 0) {
+    throw new Error(`city databook references missing metrics: ${missing.join(', ')}`);
   }
   return parsed;
 }

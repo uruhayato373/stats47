@@ -12,6 +12,7 @@ describe('getActiveHeaderNav', () => {
     ['/areas/13000', 'areas'],
     ['/municipalities', 'municipalities'],
     ['/municipalities/ranking/example', 'municipalities'],
+    ['/areas/37000/cities/37203', 'municipalities'],
     ['/themes', 'themes'],
     ['/themes/population-dynamics', 'themes'],
     ['/geo', 'geo'],

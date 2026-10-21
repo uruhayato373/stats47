@@ -1,6 +1,8 @@
 ---
 paths:
   - "packages/data-configs/src/area-databook/**"
+  - "packages/data-configs/src/geo-scope/city-databook-layout.ts"
+  - "packages/ranking/src/municipalities/**"
   - "apps/web/src/features/{area-databook,area,area-profile}/**"
   - ".claude/skills/area/**"
   - ".claude/agents/{area-curator,area-databook-designer,chart-component-builder}.md"
@@ -88,6 +90,24 @@ SNS 地域カルーセルは、**同じ選定関数 `selectAreaHighlights` / `se
   非公開指標があれば止まる。R2 を書かずに確かめるのは `npm run check:highlights --workspace=@stats47/area-profile`。
   テンプレから指標を外すときもこのコマンドで 47 県が埋まることを確認する。
 - 県の profile.json は当面生成を続けるが Web の読み手は 0 (廃止は別判断)。
+
+### 2.2 市区町村データブック (MUNI-PAGE-QUALITY-01・2026-10-21)
+
+`/areas/<県>/cities/<市区町村>` は `app/areas/<県>/cities/<市区町村>/databook.json` の 1 read で描く。
+県のテンプレ (AREA_DATABOOK_TEMPLATE) とは別系統で、**新しい分類を作らない**。
+
+- **節 = 市区町村テーマ** (`MUNICIPALITY_THEME_CATALOGS`)。並びと見出しの指標は `CITY_DATABOOK_LAYOUT`
+  (`packages/data-configs/src/geo-scope/city-databook-layout.ts`) だけが決める。先頭の見出しは人口
+  (`CITY_DATABOOK_POPULATION_METRIC_KEY`) で、title・説明文 (`buildCityPageMeta`) が使う。節見出しはテーマ名から
+  「市区町村の」を除いたもの (`listCityDatabookThemes`)。テーマ名はこの形を守る (`validateCityDatabookLayout` が検査)。
+- **値と全国順位は市区町村ランキングの配信値をそのまま写す**。県内順位だけを生成時に数える (`buildCityDatabooks`)。
+  ページと市区町村ランキングで順位が食い違わない。指標の表示名は `municipalityRankingDisplayTitle` (同名 title の限定子は
+  `buildMunicipalityRankingSubtitles`)。
+- **対象 = 市区町村の対象集合** (`buildMunicipalityEntityPolicy` の publishable。東京 23 区を含む)。索引・sitemap・
+  県内の市区町村一覧も同じ集合 (`PUBLISHABLE_CITIES`)。人口の値が無い対象があれば生成器が止まる。
+- **特徴** は `selectCityHighlights` (率の指標・県内 5 位以内・値 0 除外・2019 年以降)。
+- **生成**: `generate-city-databooks.ts`。deploy は市区町村ランキング生成の直後、sync-snapshots は `city-databook` task。
+  生成時刻を持たない。検査は `npm run validate:municipalities` (配置) と schema (`parseCityDatabookSnapshot`)。
 
 ---
 

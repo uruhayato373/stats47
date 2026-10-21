@@ -58,10 +58,12 @@ declare -a TASKS=(
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
   "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published"
+  # ★city-databook は municipality-ranking の直後。.local/r2 にこの run で作った市区町村ランキングがあれば
+  #   それを、無ければ配信中の版を束ねる (どちらも反映後の R2 と同じ値になる)。
+  "city-databook|packages/ranking/src/scripts/generate-city-databooks.ts"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
-  "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
   "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
@@ -202,6 +204,8 @@ if [ "$DRY_RUN" = "0" ]; then
     # municipality ranking は専用 URL namespace のため prefix を安全に限定できる。
     if [ "$ONLY" = "municipality-ranking" ]; then
       PUSH_ARGS+=(--prefix app/municipalities)
+    elif [ "$ONLY" = "city-databook" ]; then
+      PUSH_ARGS+=(--prefix app/areas)
     elif [ "$ONLY" = "blog" ]; then
       PUSH_ARGS+=(--prefix app/blog)
     elif [ "$ONLY" = "ranking-items" ] && [ ${#FAILED[@]} -eq 0 ]; then

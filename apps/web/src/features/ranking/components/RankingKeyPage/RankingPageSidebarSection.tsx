@@ -101,6 +101,15 @@ export function RankingPageSidebarSection({
       )}
       {areaType === "prefecture" && (
         <RelatedContentNavigation
+          title="この指標を市区町村で見る"
+          sourceId={`ranking:${rankingKey}`}
+          kinds={['municipality-ranking']}
+          limit={1}
+          surface="ranking_municipality"
+        />
+      )}
+      {areaType === "prefecture" && (
+        <RelatedContentNavigation
           title="この指標の地域分析"
           sourceId={`ranking:${rankingKey}`}
           kinds={['geo']}

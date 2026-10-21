@@ -13,4 +13,4 @@ import "server-only";
 
 // サーバーコンポーネント
 export { AreaDashboardSection } from "./components/AreaDashboardSection";
-export { readCityProfile } from "./services/read-city-profile";
+export { readCityDatabook } from "./services/read-city-databook";

@@ -25,7 +25,7 @@ import {
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
 
-import { PHASE_1_SSG_CITIES } from '@/features/area-profile/constants/stage-1-cities';
+import { PUBLISHABLE_CITIES } from '@/features/area-profile/constants/publishable-cities';
 import {
   listLatestArticles,
   listAllTagsWithCount,
@@ -269,21 +269,17 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 function getCityPages(): MetadataRoute.Sitemap {
-  // sitemap は実コンテンツ (profile.json) を持つ PHASE_1_SSG_CITIES (≈360 市) の
-  // profile URL だけを出力する。
+  // 市区町村の対象集合 (データブックを持つ市区町村) を提出する。UrlPolicy.city.isIndexable と同じ集合。
   //
-  // 旧実装は level="2" の全 1,719 市を出力していたが、実コンテンツがあるのは
-  // PHASE_1_SSG_CITIES のみで、残り ~1,360 市は薄いプレースホルダーが Google にクロール
-  // され「クロール済み - インデックス未登録」が大量発生していた (city indexed 率 ≈0.6%)。
-  // sitemap とコンテンツ実体を一致させ、薄いページの提出を止めてクロール予算を温存する。
-  // 既に index されている少数ページは noindex 化していないため deindex は起きない (提出を止めるだけ)。
-  // Stage 2/3 拡張時は PHASE_1_SSG_CITIES に追記する (stage-1-cities.ts)。
+  // 2026-10-21 までは手書きの 364 市 (PHASE_1_SSG_CITIES) だけを出していた。残りのページは中身が薄く、
+  // 提出すると「クロール済み - インデックス未登録」が大量に出たため (city indexed 率 ≈0.6%)。
+  // いまはどの市区町村も人口・財政・産業など約 170 指標のデータブックを持つので、全件を提出する。
   //
   // 旧 population/economy URL は全主要チャートが空のまま 200 を返し、GSC の
   // soft 404 / crawled-not-indexed を生んだため提出しない。middleware が profile へ301する。
-  // profile の正確な更新日時はこのgit定数から決定できないため、虚偽の lastmod は出さない。
-  return PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => ({
-    url: `${BASE_URL}/areas/${areaCode}/cities/${cityCode}`,
+  // ページの正確な更新日時はこのgit定数から決定できないため、虚偽の lastmod は出さない。
+  return PUBLISHABLE_CITIES.map(({ prefectureCode, code }) => ({
+    url: `${BASE_URL}/areas/${prefectureCode}/cities/${code}`,
     changeFrequency: 'monthly',
     priority: 0.5,
   }));

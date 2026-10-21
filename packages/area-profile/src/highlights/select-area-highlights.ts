@@ -42,7 +42,7 @@ export const MIN_HIGHLIGHT_YEAR = 2019;
  * それだけを数える (2026-09-27)。
  */
 const MAX_KAKEI_PER_GROUP = 2;
-/** 市区町村: 県内順位でこの位以内を「特徴」とする (市区町村の profile.json の生成と共有)。 */
+/** 市区町村: 県内順位でこの位以内を「特徴」とする。 */
 export const CITY_TOP_BAND = 5;
 
 /**
@@ -364,35 +364,54 @@ export function selectAreaHighlights(
 /* 市区町村                                                            */
 /* ------------------------------------------------------------------ */
 
-/** 市区町村 profile.json の 1 件 (県内順位)。 */
+/** 市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`) の 1 指標のうち、選定に使う欄。 */
 export interface CityHighlightSource {
-  indicator: string;
   rankingKey: string;
-  year: string;
-  rank: number;
+  label: string;
+  yearCode: string;
   value: number;
-  unit: string;
+  prefectureRank: number;
+  nationalRank: number;
+  /** 指標の性質 (display-semantics の語彙)。 */
+  basis: "rate" | "total" | "unknown";
 }
 
 /**
- * 市区町村の「特徴」(県内 CITY_TOP_BAND 位以内) を選ぶ。市区町村は databook が無いため
- * 候補は profile.json の strengths。順位の極端さ → rankingKey の順で並べ、同じ表示名は 1 件にする。
+ * 市区町村の「特徴」(県内 CITY_TOP_BAND 位以内) を選ぶ。候補は市区町村データブックの指標。
+ * 県内順位 → 全国順位 → rankingKey の順で並べ、同じ表示名は 1 件にする。
  * 市区町村の指標は極性の焼き込みが無いので tone は付けない (呼び出し側で neutral に描く)。
- * 値が 0 の指標は除く。小さな町村では「0 施設」が同率で上位の順位を得るため、特徴に見えてしまう
- * (2026-10-04 週次 UI 検査: 田原本町で「0人」「0施設」が 3〜5 位として並んだ)。
+ *
+ * - 率の指標だけを使う。総数の指標は人口の多い市が全部で上位になり、どの市も「人口が多い」としか言えない
+ *   (2026-10-21: 横浜市は総数の指標のほとんどで県内 1 位)
+ * - 値が 0 の指標は除く。小さな町村では「0 施設」が同率で上位の順位を得るため、特徴に見えてしまう
+ *   (2026-10-04 週次 UI 検査: 田原本町で「0人」「0施設」が 3〜5 位として並んだ)
+ * - 県と同じく、MIN_HIGHLIGHT_YEAR より古い年と HIGHLIGHT_EXCLUDED_KEY_PATTERN の指標は使わない
  */
 export function selectCityHighlights<T extends CityHighlightSource>(
-  strengths: readonly T[] | null | undefined,
+  metrics: readonly T[],
   options: { limit: number },
 ): T[] {
   const seen = new Set<string>();
   const picked: T[] = [];
-  const ordered = [...(strengths ?? [])]
-    .filter((s) => s.rank >= 1 && s.rank <= CITY_TOP_BAND && s.value !== 0)
-    .sort((a, b) => a.rank - b.rank || a.rankingKey.localeCompare(b.rankingKey));
+  const ordered = metrics
+    .filter(
+      (m) =>
+        m.basis === "rate" &&
+        m.prefectureRank >= 1 &&
+        m.prefectureRank <= CITY_TOP_BAND &&
+        m.value !== 0 &&
+        Number(m.yearCode) >= MIN_HIGHLIGHT_YEAR &&
+        !HIGHLIGHT_EXCLUDED_KEY_PATTERN.test(m.rankingKey),
+    )
+    .sort(
+      (a, b) =>
+        a.prefectureRank - b.prefectureRank ||
+        a.nationalRank - b.nationalRank ||
+        a.rankingKey.localeCompare(b.rankingKey),
+    );
   for (const item of ordered) {
     if (picked.length >= options.limit) break;
-    const label = item.indicator.trim();
+    const label = item.label.trim();
     if (seen.has(label)) continue;
     seen.add(label);
     picked.push(item);

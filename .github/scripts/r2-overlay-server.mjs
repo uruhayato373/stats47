@@ -44,9 +44,9 @@ export function localPageComponentsFile(urlPath, localDir = LOCAL_DIR) {
   return fs.existsSync(target) ? target : null;
 }
 
-/** Only generated metric metadata is overlaid; observation data still comes from R2. */
+/** Only generated metric metadata (and the city databooks built from it) is overlaid; observation data still comes from R2. */
 export function localMetricSnapshotFile(urlPath, snapshotDir = LOCAL_SNAPSHOT_DIR) {
-  if (!/^\/app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json)$/.test(urlPath)) return null;
+  if (!/^\/app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json|areas\/[0-9]{5}\/cities\/[0-9]{5}\/databook\.json)$/.test(urlPath)) return null;
   const target = path.resolve(snapshotDir, ...urlPath.slice(1).split('/'));
   if (!target.startsWith(path.resolve(snapshotDir) + path.sep)) return null;
   return fs.existsSync(target) ? target : null;

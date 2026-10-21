@@ -9,7 +9,7 @@ import {
 import type { City } from '../../types/city';
 
 describe('municipality entity policy', () => {
-  it('実在マスタから自治体1,718件を公開可能とし、行政区と特別区集約を除外する', () => {
+  it('実在マスタから自治体1,741件 (東京23区を含む) を公開可能とし、政令市の行政区と特別区集約を除外する', () => {
     const policy = buildMunicipalityEntityPolicy();
     const publishable = listPublishableMunicipalities(policy);
     const administrativeWards = policy.entities.filter(
@@ -20,8 +20,9 @@ describe('municipality entity policy', () => {
     );
 
     expect(policy.entities).toHaveLength(1913);
-    expect(publishable).toHaveLength(1718);
-    expect(administrativeWards).toHaveLength(194);
+    expect(publishable).toHaveLength(1741);
+    expect(publishable.filter((entity) => entity.kind === 'special-ward')).toHaveLength(23);
+    expect(administrativeWards).toHaveLength(171);
     expect(specialWardsAggregate.map((entity) => entity.code)).toEqual([
       '13100',
     ]);
@@ -41,6 +42,15 @@ describe('municipality entity policy', () => {
       kind: 'administrative-ward',
       prefectureCode: '01000',
       parentMunicipalityCode: '01100',
+    });
+  });
+
+  it('特別区部の下 (level=3) にある東京23区は特別区として公開し、都の県コードを持たせる', () => {
+    const policy = buildMunicipalityEntityPolicy();
+    expect(policy.entities.find((entity) => entity.code === '13101')).toMatchObject({
+      disposition: 'publishable',
+      kind: 'special-ward',
+      prefectureCode: '13000',
     });
   });
 

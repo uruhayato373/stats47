@@ -14,7 +14,7 @@ import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { ok } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
-import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
+import { PUBLISHABLE_CITIES } from "@/features/area-profile/constants/publishable-cities";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
@@ -101,7 +101,7 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
   it('cities: 実コンテンツを持つprofileだけを提出し、空のカテゴリURLを含めない', async () => {
     const entries = await sitemap({ id: SEGMENT_ID.cities });
 
-    expect(entries).toHaveLength(PHASE_1_SSG_CITIES.length);
+    expect(entries).toHaveLength(PUBLISHABLE_CITIES.length);
     expect(
       entries.every((entry) =>
         /^https:\/\/stats47\.jp\/areas\/\d{5}\/cities\/\d{5}$/.test(entry.url)

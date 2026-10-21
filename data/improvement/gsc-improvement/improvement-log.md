@@ -897,3 +897,22 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **観測期限と判定手順**: 2026-11-24。before (09-11〜10-08) と after (10-21〜11-17) はともに 28 日。10 ページ合計とページ別の CTR・position を対照群と並べ (差の差)、position が ±1 位を超えたページは CTR 比較から外す。`/ranking/total-fertility-rate` は baseline 99 imp で標本不足のため count のみ。clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ title を戻す案を backlog へ。想定値が無いので effect/full・effect/partial は付けず、結果を本ログに実測として残して行を削除する。
 - **search-growth 台帳**: 承認済み 2 件 (`ctr-opportunity::/ranking/public-phone-count`・`striking-distance::/ranking/total-fertility-rate`) の計測日は 2026-11-03 (14 日)・11-17 (28 日)・12-15 (56 日)。blog 8 本の承認は W44 以降の枠 (週 2 件上限)。
 - **未確定 / 仮説**: [仮説] Google が検索結果に別の title を表示している。検証: 検索 3 クエリ (道の駅が多い県 / 公衆電話 なぜ減った / 高校2年生 平均身長) の実表示 title を取得日付きで記録する。検証期日: 2026-11-24。期日後の判定: 表示 title が新案と一致していて CTR が動かなければ title の切り口が原因、不一致なら description と H1 を揃える案を `SEO-CTR-CANDIDATES-01` へ。
+
+### [MUNI-PAGE-SEO-01] 市区町村ページのデータブック化・title の人口化・索引対象の全市区町村化 (2026-10-21 実装・未デプロイ)
+
+- **デプロイ日**: 未デプロイ。develop に積んだ (本番反映はオーナーの指示待ち)。デプロイした日をここに書き、観測窓をその日から数える。
+- **変えたこと**: (1) 市区町村ページの title・説明文を人口・前回比・県内順位から作る (`buildCityPageMeta`。例「千代田区（東京都）の人口・統計データ｜6.6万人（2025年）・県内47位」)。(2) 本文を市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`、約 170 指標・県内順位・全国順位) に置き換え、旧 `profile.json` を廃止。(3) 索引・sitemap の対象を手書きの 364 市から市区町村の対象集合 1,741 件 (東京 23 区を含む) へ。(4) 市区町村ランキングの title を「1 位の自治体と値」入りに、全行を市区町村ページへリンク。(5) 都道府県ランキング → 同じ指標の市区町村ランキング、市区町村ランキング → 都道府県ランキング・記事・市区町村テーマ、市区町村ページ → 記事の回遊 (`sameMetric` ほか。nav_surface `ranking_municipality` / `municipality_related`)。
+- **baseline (GSC 2026-W41 rolling28d 2026-09-11〜10-08、`data/gsc/snapshots/2026-W41/{pages,queries}.csv`)**:
+
+  | 対象 | 件数 | clicks | imp | CTR | position (imp 加重) |
+  |---|---|---|---|---|---|
+  | 市区町村ページ `/areas/<県>/cities/<市区町村>` (fragment・query 無し) | 373 URL | 13 | 2,214 | 0.59% | 16.1 |
+  | 市区町村ランキング `/municipalities/ranking/<key>` | 65 URL | 448 | 4,686 | 9.56% | 8.6 |
+  | 「◯◯市/町/村/区 人口」の検索語 (`(市\|町\|村\|区)\s*人口`) | 341 語 | 2 | 1,840 | 0.11% | 13.7 |
+
+  上位の検索語は「坂出市 人口」213 imp・「岩国市 人口」189 imp (どちらも position 10 前後、clicks 0〜1)。
+- **対照群**: 同じ pages.csv で fragment・query 無し、position 9〜20、imp 200 以上、市区町村系 (`/cities/`・`/municipalities/`) を除く 19 URL = 168 clicks / 11,870 imp / CTR 1.42%。抽出は上と同じ csv を読み条件で絞る。
+- **想定効果 (計算式)**: 「◯◯市 人口」の検索語群の CTR が対照群の 1.42% まで上がった場合、1,840 imp × (1.42% − 0.11%) ≈ +24 clicks / 28 日。索引対象の拡大 (364 → 1,741 件) による表示回数の増加は根拠となる前例が無いので数値を置かない。閾値エンジンはページ単位で測り、この検索語群を集計しないので `[target:]` は付けず、手動判定にする。
+- **検証コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start <デプロイ日> --end <デプロイ日+27> --dims query --filter 'query~=(市|町|村|区) ?人口'` と `--dims page --filter 'page*=/areas/'` / `'page*=/municipalities/ranking/'`。本番の title は `curl -s -A 'Mozilla/5.0 (compatible; Googlebot/2.1)' https://stats47.jp/areas/37000/cities/37203 | grep -oE '<title>[^<]+</title>'`。索引は `node .claude/scripts/gsc/inspect-cities-sample.cjs` (公開対象から 50 件抜き取り)。
+- **観測期限と判定手順**: デプロイ日 + 31 日 (28 日窓 + 取得遅延 3 日)。before と after の 28 日窓で、上の 3 群と対照群を並べる (差の差)。検索語群の CTR が対照群との差を半分以上縮めていれば title の効果ありとして記録する。市区町村ページの clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ、title の形を戻す案を backlog `MUNI-PAGE-QUALITY-01` へ。
+- **未確定 / 仮説**: [仮説] 「◯◯市 人口」の検索で表示されているのは市区町村ページではなく市区町村ランキングやブログ。W41 の city ページ上位 (imp 順) に坂出市・岩国市が無いことが根拠。検証コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-11 --end 2026-10-08 --dims query,page --filter 'query~=坂出市 ?人口'`。検証期日: 次の木曜計測 (2026-10-29) の後。期日後の判定: ランキングやブログに当たっていれば、データブック化後に市区町村ページへ表示が移るかを after 窓で確かめる。

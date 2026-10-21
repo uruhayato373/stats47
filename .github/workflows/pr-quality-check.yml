@@ -1196,6 +1196,7 @@ jobs:
         run: |
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
           npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx packages/ranking/src/scripts/generate-city-databooks.ts --source-base https://storage.stats47.jp --input-root .local/r2 --output-root .local/r2
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
           npm run metrics:verify-snapshots
 

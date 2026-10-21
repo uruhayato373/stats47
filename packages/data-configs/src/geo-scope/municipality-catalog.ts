@@ -83,6 +83,26 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
     // e-Stat #A05307 (無印=外国人含む総数) を実メタで確認済み。負値は転出超過の実値
     // (2020最小 浪江町 -14.98%) のため下限は設けない。
   },
+  // ---- 令和7年国勢調査の5年間の増減 (2026-10-21 MUNI-PAGE-QUALITY-01) ----
+  // 2025年確定値 (2026-09-29公表) と、2025年の境域に組み替えた2020年の比較。R2 cities.json を監査:
+  // 1,913 区域 (政令市の区・特別区部の集約行を含み、entity policy が除く)。双葉町は2020年の人口が0で率を定義
+  // できず欠測 (除外される)。負の極値は珠洲市 -34.6%・輪島市 -28.3% (能登半島地震)、正の極値は大熊町 +81.0%
+  // (帰還) でいずれも実値のため上下限を設けない。「◯◯市 人口」の検索 (W41 1,840 imp) が知りたい人口の推移を出す。
+  'census-population-change-rate-5y': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+  },
+  'census-population-change-5y': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+  },
+  'census-household-change-rate-5y': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+  },
   // ---- 第1拡充バッチここまで ----
   // ---- 第2バッチ: 全量公開 (2026-09-01 オーナー指示「公開できるものは全て公開したい」) ----
   // 根拠: expansion-survey (値分布まで機械監査済み)。除外は下の unsupported/unknown 群に理由付きで記録。
@@ -995,6 +1015,8 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
       'ratio-never-married-15-plus',
       'households',
       'moving-in-excess-rate',
+      'census-population-change-rate-5y',
+      'census-population-change-5y',
     ],
     defaultMetricKey: 'total-population',
     entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
@@ -1005,6 +1027,7 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
     title: '市区町村の世帯構成',
     metricKeys: [
       'households',
+      'census-household-change-rate-5y',
       'single-person-households',
       'nuclear-family-household-count',
       'nuclear-family-households-ratio',

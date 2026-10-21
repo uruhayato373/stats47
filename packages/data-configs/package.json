@@ -90,6 +90,11 @@
       "import": "./src/prominence/ranking-prominence.generated.ts",
       "require": "./src/prominence/ranking-prominence.generated.ts"
     },
+    "./display-semantics": {
+      "types": "./src/display-semantics/index.ts",
+      "import": "./src/display-semantics/index.ts",
+      "require": "./src/display-semantics/index.ts"
+    },
     "./geo-scope": {
       "types": "./src/geo-scope/index.ts",
       "import": "./src/geo-scope/index.ts",

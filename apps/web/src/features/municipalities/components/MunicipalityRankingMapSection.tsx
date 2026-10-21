@@ -1,13 +1,12 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
-
+import { municipalityLeafName } from '@stats47/ranking';
 
 import { SectionHeader } from '@/components/section';
 
 import { UrlPolicy } from '@/lib/url-policy';
 
-import { municipalityLeafName } from '../lib/filter-municipality-ranking';
 
 import { MunicipalityCityMapClient } from './MunicipalityCityMapClient';
 

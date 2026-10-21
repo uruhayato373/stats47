@@ -53,6 +53,26 @@ describe('content identity and navigation', () => {
     const multi = selectContentRecommendations([page('blog:src', 'blog', ['natto', 'tuna']), both, focused], [], { sourceId: 'blog:src', kinds: ['blog'] });
     expect(multi[0]?.id).toBe('blog:natto-and-tuna');
   });
+  it('都道府県と市区町村の同じ指標を結び、市区町村ランキングにも記事とテーマを出す', () => {
+    const prefecture = page('ranking:households', 'ranking');
+    const municipality = page('municipality-ranking:households', 'municipality-ranking');
+    const theme = page('municipality-theme:households', 'municipality-theme', ['households']);
+    const article = page('blog:households-story', 'blog', ['households']);
+    const pages = [prefecture, municipality, theme, article];
+    const toMunicipality = selectContentRecommendations(pages, [], { sourceId: prefecture.id, kinds: ['municipality-ranking'] });
+    expect(toMunicipality.map(row => [row.id, row.relation])).toEqual([['municipality-ranking:households', 'sameMetric']]);
+    const fromMunicipality = selectContentRecommendations(pages, [], { sourceId: municipality.id, kinds: ['ranking', 'blog', 'municipality-theme'], limit: 3 });
+    expect(fromMunicipality.map(row => [row.id, row.relation])).toEqual([
+      ['ranking:households', 'sameMetric'],
+      ['blog:households-story', 'explains'],
+      ['municipality-theme:households', 'contains'],
+    ]);
+  });
+  it('同点は呼び出し側が並べた種別の順に出す (記事のデータ欄で都道府県版を市区町村版より先に)', () => {
+    const pages = [page('blog:src', 'blog', ['households']), page('municipality-ranking:households', 'municipality-ranking'), page('ranking:households', 'ranking')];
+    const selected = selectContentRecommendations(pages, [], { sourceId: 'blog:src', kinds: ['ranking', 'municipality-ranking'] });
+    expect(selected.map(row => [row.id, row.relation])).toEqual([['ranking:households', 'uses'], ['municipality-ranking:households', 'uses']]);
+  });
   it('同順位は不変IDで並び、件数上限と候補が空の状態を守る', () => {
     const pages = [page('ranking:sunshine','ranking'),page('blog:z','blog',['sunshine']),page('blog:a','blog',['sunshine'])];
     expect(selectContentRecommendations(pages,[],{sourceId:'ranking:sunshine',kinds:['blog'],limit:1})[0]?.id).toBe('blog:a');

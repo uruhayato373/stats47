@@ -23,10 +23,13 @@ import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   JAPAN_CATALOGS,
   MUNICIPALITY_THEME_CATALOGS,
+  buildMunicipalityRankingSubtitles,
 } from '@stats47/data-configs/geo-scope';
 import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
 import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
+import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from '@stats47/area';
+import { municipalityRankingDisplayTitle } from '@stats47/ranking';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
 import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
@@ -99,6 +102,8 @@ async function run() {
       published: true,
     });
   }
+  // 都道府県版と同じ title だと記事のデータ欄で 2 つが同じ名前に見えるので、市区町村版と分かる名前にする
+  const municipalitySubtitles = buildMunicipalityRankingSubtitles();
   for (const metric of Object.values(METRICS_REGISTRY)) {
     add({
       id: `ranking:${metric.key}`,
@@ -114,7 +119,7 @@ async function run() {
         id: `municipality-ranking:${metric.key}`,
         kind: 'municipality-ranking',
         key: metric.key,
-        title: metric.title,
+        title: `${municipalityRankingDisplayTitle({ title: metric.title, subtitle: municipalitySubtitles.get(metric.key) })}の市区町村ランキング`,
         href: `/municipalities/ranking/${metric.key}`,
         published: KNOWN_MUNICIPALITY_RANKING_KEYS.has(metric.key),
       });
@@ -158,6 +163,10 @@ async function run() {
         rankingKeys: theme.rankingKeys,
       });
   }
+  // 市区町村ページの公開対象は市区町村の対象集合 (東京 23 区を含み、政令市の行政区と特別区部の集約行を除く)
+  const publishableCityCodes = new Set(
+    listPublishableMunicipalities(buildMunicipalityEntityPolicy()).map(entity => entity.code),
+  );
   for (const city of cities) {
     const prefCode = city.cityCode.slice(0, 2) + '000';
     add({
@@ -166,7 +175,7 @@ async function run() {
       key: city.cityCode,
       title: city.cityName,
       href: `/areas/${prefCode}/cities/${city.cityCode}`,
-      published: city.level !== '3',
+      published: publishableCityCodes.has(city.cityCode),
     });
   }
   for (const theme of Object.values(JAPAN_CATALOGS))

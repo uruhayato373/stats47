@@ -10,6 +10,10 @@ export {
   type MunicipalityDistribution,
   type MunicipalityDistributionBin,
 } from "./municipalities/bin-municipality-values";
+// 市区町村の名前・データブック・title (純粋関数。指標 registry を読まない)
+export * from "./municipalities/municipality-names";
+export * from "./municipalities/municipality-page-meta";
+export * from "./municipalities/build-city-databooks";
 // home/featured.json 派生の pure helper (R2 非依存)。exporter と apps/web の dev 補完が共用する
 export {
   bakeHomeFeaturedItem,

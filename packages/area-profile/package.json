@@ -18,7 +18,6 @@
   },
   "scripts": {
     "export:snapshot": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/export-snapshot.ts",
-    "export:city": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/export-city-snapshot.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",

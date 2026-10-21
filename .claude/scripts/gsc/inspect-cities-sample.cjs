@@ -2,7 +2,7 @@
 /**
  * inspect-cities-sample.cjs
  *
- * cities pages (PHASE_1_SSG_CITIES 360 件) からサンプル 50 件を抽出して
+ * 公開中の市区町村ページ (data/content/pages/city.json の published。市区町村の対象集合) からサンプル 50 件を抽出して
  * URL Inspection API で indexed 状況を診断する。
  *
  * 出力:
@@ -21,6 +21,7 @@ const fs = require("fs");
 const path = require("path");
 const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
 const { createSearchConsoleClient } = require("../lib/google-client.cjs");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const SITE_URL = GSC_PROPERTY;
@@ -30,24 +31,19 @@ const REQUEST_INTERVAL_MS = 400;
 
 // ---------- sample selection ----------
 function loadSampleCities() {
-  // stage-1-cities.ts から PHASE_1_SSG_CITIES を読む (TS なので簡易 regex parse)
-  const tsPath = path.join(
-    PROJECT_ROOT,
-    "apps/web/src/features/area-profile/constants/stage-1-cities.ts"
-  );
-  if (!fs.existsSync(tsPath)) {
-    console.error(`[error] stage-1-cities.ts not found: ${tsPath}`);
+  // 公開対象はコンテンツ索引 (sync-content-catalog.ts が市区町村の対象集合から生成) を読む
+  const catalogPath = path.join(PROJECT_ROOT, datasetDir("content.pages"), "city.json");
+  if (!fs.existsSync(catalogPath)) {
+    console.error(`[error] city catalog not found: ${catalogPath}`);
     process.exit(1);
   }
-  const text = fs.readFileSync(tsPath, "utf8");
-  // pattern: { areaCode: "01000", cityCode: "01100" }
-  const re = /areaCode:\s*"(\d+)"\s*,\s*cityCode:\s*"(\d+)"/g;
-  const all = [];
-  let m;
-  while ((m = re.exec(text)) !== null) {
-    all.push({ areaCode: m[1], cityCode: m[2] });
-  }
-  console.log(`[info] PHASE_1_SSG_CITIES total entries: ${all.length}`);
+  const all = JSON.parse(fs.readFileSync(catalogPath, "utf8"))
+    .pages.filter((page) => page.published)
+    .map((page) => {
+      const [, areaCode, cityCode] = page.id.split(":");
+      return { areaCode, cityCode };
+    });
+  console.log(`[info] publishable city pages: ${all.length}`);
 
   // 均等にサンプルする: every n-th entry to hit different prefectures
   const step = Math.max(1, Math.floor(all.length / SAMPLE_SIZE));
