@@ -89,8 +89,6 @@ model: opus
 例外: **Template C** (report) を使う場面
 - 週次 PDCA / 批判的レビュー / NSM 実験総括 — このエージェントは Template C 中心 (定性分析が本質)
 
-## 記録から判断する (2026-10-20)
+## 記録から判断する
 
-管理画面の数字・提携の状態・売上は、週次の定期実行が記録したデータ (`data/authenticated/`・`data/affiliate/` ほか) から判断する。
-セッション中にブラウザで取りに行かない。記録が古い・欠けているときは「判定不能」と最終観測日を書いて進める。
-例外 (オーナーの明示依頼・外部への変更そのもの・失敗した取得元の復旧) と記録の置き場は `.claude/rules/recorded-measurement-first.md`。
+ログインが要る計測値は週次の記録から読み、ブラウザで取りに行かない。正典 (記録の置き場・古いときの扱い・例外) は `.claude/rules/recorded-measurement-first.md`。
