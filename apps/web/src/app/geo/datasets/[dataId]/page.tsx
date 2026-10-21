@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { findGeoSourcePage } from '@stats47/data-configs/business-plan';
-import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
+import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';

@@ -10,10 +10,8 @@
 import { resolveProvenanceByParams } from '@stats47/data-configs/provenance';
 import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
 import type { MetricRegistry, ProvenanceSurvey } from '@stats47/data-configs';
-import {
-  collectChartDependencies,
-  type ThemeCatalog,
-} from '@stats47/data-configs/theme-catalog';
+import type { ThemeCatalog } from '@stats47/data-configs/theme-catalog';
+import { collectChartDependencies } from '@stats47/data-configs/theme-catalog/registry-checks';
 
 import surveysMaster from '../data/surveys.json';
 import { resolveSurveyLinkage } from '../builders/build-ranking-item-from-metric';

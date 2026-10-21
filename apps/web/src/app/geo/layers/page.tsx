@@ -1,5 +1,5 @@
 
-import { GIS_DATASETS } from '@stats47/gis/mlit-ksj';
+import { GIS_DATASETS } from '@stats47/gis/mlit-ksj/catalog';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';

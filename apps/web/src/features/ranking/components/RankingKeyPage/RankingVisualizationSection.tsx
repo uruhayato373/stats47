@@ -12,12 +12,12 @@ import {
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
 import type { AreaType } from "@/features/area";
-import {
-    RankingDataTable,
-    RankingMapChartClient,
-} from "@/features/ranking";
 
 import { trackUiInteraction } from "@/lib/analytics/events";
+
+import { RankingDataTable } from "../RankingDataTable";
+import { RankingMapChartClient } from "../RankingMapChart/RankingMapChartClient";
+
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 

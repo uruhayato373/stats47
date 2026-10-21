@@ -18,7 +18,7 @@ import {
   KNOWN_MUNICIPALITY_THEME_SLUGS,
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
-import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
+import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
 import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,

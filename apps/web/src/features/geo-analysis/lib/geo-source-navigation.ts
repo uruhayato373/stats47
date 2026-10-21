@@ -1,4 +1,4 @@
-import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
+import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
 
 import type { GeoSourceCatalog } from './geo-source-catalog';
 

@@ -15,12 +15,6 @@ import {
 import { themeYearLabel } from '../lib/theme-year-label';
 
 
-export type {
-  MetricTimeseriesPoint,
-  MetricTimeseriesResult,
-  MetricTimeseriesSource,
-} from '@/lib/aggregate-metric-timeseries';
-
 /**
  * 指標の時系列データを取得する Server Action
  *

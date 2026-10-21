@@ -26,7 +26,7 @@ import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-re
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
 
-import { RankingYearSelector } from "@/features/ranking";
+import { RankingYearSelector } from "@/features/ranking/widgets";
 
 import { trackUiInteraction } from "@/lib/analytics/events";
 

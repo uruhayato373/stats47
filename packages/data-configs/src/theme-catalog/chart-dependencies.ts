@@ -1,4 +1,5 @@
-import { parseStatSeriesRefs, validateChartProps, type StatSeriesRef } from './stat-series-ref';
+import type { StatSeriesRef } from './stat-series-ref';
+import { parseStatSeriesRefs, validateChartProps } from './registered-series-ref';
 import type { CatalogChart, CatalogComponentType } from './types';
 import { getMetricConfig } from '../registry';
 import { buildRecipe } from '../recipe';

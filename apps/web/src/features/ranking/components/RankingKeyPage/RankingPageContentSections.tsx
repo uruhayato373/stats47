@@ -3,10 +3,6 @@
 import type { ReactNode } from "react";
 
 import type { AreaType } from "@/features/area";
-import {
-    DataUsageCard,
-    RankingDefinitionCard,
-} from "@/features/ranking";
 
 import {
     ADSENSE_DISPLAY_ENABLED,
@@ -14,6 +10,10 @@ import {
     RANKING_PAGE_FOOTER,
     RANKING_INCONTENT_MOBILE,
 } from "@/lib/google-adsense";
+
+import { DataUsageCard } from "../DataUsageCard";
+import { RankingDefinitionCard } from "../RankingDefinitionCard";
+
 
 import type { RankingItem } from "@stats47/ranking";
 

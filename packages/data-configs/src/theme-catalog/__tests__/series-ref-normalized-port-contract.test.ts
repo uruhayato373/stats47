@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
-import { parseStatSeriesRefs } from "../stat-series-ref";
+import { parseStatSeriesRefs } from "../registered-series-ref";
 import { THEME_CATALOGS } from "..";
 
 const PORTS_CATALOG = THEME_CATALOGS["ports"];

@@ -1,5 +1,8 @@
 import { NATIONAL_AREA_CODE } from "@stats47/area";
-import { parseStatSeriesRefs } from "@stats47/data-configs/theme-catalog";
+import {
+  parseStatSeriesRefsWith,
+  SKIP_METRIC_REGISTRATION_CHECK,
+} from "@stats47/data-configs/theme-catalog";
 
 import type { PageComponent } from "@/components/stat-charts";
 
@@ -50,7 +53,7 @@ export async function loadThemeChartResult(chart: PageComponent, prefCode: strin
     }
 
     if (chart.componentType === "pyramid-chart") {
-      const seriesRefs = parseStatSeriesRefs(chart.componentProps.seriesRefs);
+      const seriesRefs = parseStatSeriesRefsWith(chart.componentProps.seriesRefs, SKIP_METRIC_REGISTRATION_CHECK);
       if (!seriesRefs) return { state: "no-data" };
       const data = await fetchPopulationPyramidAction(prefCode, seriesRefs);
       return data

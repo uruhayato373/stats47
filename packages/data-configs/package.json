@@ -55,6 +55,11 @@
       "import": "./src/theme-catalog/index.ts",
       "require": "./src/theme-catalog/index.ts"
     },
+    "./theme-catalog/registry-checks": {
+      "types": "./src/theme-catalog/registry-checks.ts",
+      "import": "./src/theme-catalog/registry-checks.ts",
+      "require": "./src/theme-catalog/registry-checks.ts"
+    },
     "./theme-catalog/types": {
       "types": "./src/theme-catalog/types.ts",
       "import": "./src/theme-catalog/types.ts",

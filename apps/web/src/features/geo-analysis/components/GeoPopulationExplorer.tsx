@@ -21,7 +21,7 @@ import {
 
 import { SurfaceSection } from '@/components/surface';
 
-import { RankingMapChartClient } from '@/features/ranking';
+import { RankingMapChartClient } from '@/features/ranking/widgets';
 
 import {
   trackGeoCompareAdd,

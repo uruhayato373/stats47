@@ -5,7 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
-import { THEME_CATALOGS, collectChartDependencies } from "../../../packages/data-configs/src/theme-catalog/index";
+import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
+import { collectChartDependencies } from "../../../packages/data-configs/src/theme-catalog/registry-checks";
 import { getMetricConfig } from "../../../packages/data-configs/src/registry";
 import { buildRecipe } from "../../../packages/data-configs/src/recipe";
 import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "./theme-quality-core.mjs";

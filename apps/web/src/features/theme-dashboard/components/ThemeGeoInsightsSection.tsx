@@ -12,7 +12,7 @@ import {
   isGeoCrossAnalysisSlug,
   loadGeoAnalysisSnapshot,
   GEO_CROSS_ANALYSIS_CONFIGS,
-} from '@/features/geo-analysis';
+} from '@/features/geo-analysis/embedded';
 
 interface Props {
   themeKey: string;
