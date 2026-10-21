@@ -127,7 +127,7 @@ jobs:
       - name: 🛠️ Process backlog entries with Claude Code
         id: claude
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
-        uses: anthropics/claude-code-base-action@0adbfaf05435b2e2b7150cb122ba44727b98bf12 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: "20.x"
         with:
