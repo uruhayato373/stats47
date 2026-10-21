@@ -3128,8 +3128,9 @@ updated: 2026-10-19
   - 低: 補足行が「東京都 東京都 千代田区」と県名を重ねる。ヘッダーの現在地が「都道府県」になる。
   - 撮影時に `/areas/29000/cities/29363` が 390 / 640px で一時的な HTTP 503 (再取得では 200。`CF-CPU-SURGE-01` の観測に追記)。
 - **完了条件**: 強みの選定から値 0・分母なしを除き、人口当たりの指標で選ぶ。23 区を個別に並べる。代表 3 市区町村の撮影で上記が解消している。
-- **済 (2026-10-21・develop、未デプロイ)**: 市区町村ページを市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`、174 指標の値・年・県内順位・全国順位) に置き換え、旧 `profile.json` の生成と読み込みを撤去した。特徴は率の指標・値 0 除外・2019 年以降 (`selectCityHighlights`)。見出しに人口・高齢化率など 6 指標、title は人口・前回比・都内/道内/府内/県内の順位 (`buildCityPageMeta`)。東京 23 区を公開対象にし (entity policy)、県内の一覧・索引・sitemap を同じ集合 1,741 件にそろえた。市区町村ランキングは全行リンク・同名の自治体に県名、ヘッダーの現在地は「市区町村」、パンくずの県名の重複を解消。localhost (公開 R2 + ローカル生成物のオーバーレイ) で坂出市・千代田区・札幌市・特別区部 (noindex) と市区町村ランキング・都道府県ランキング・ブログのデータ欄を確認した。計測の基準値は `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01`。
-- **残り**: ① 県内の市区町村一覧 (`CitiesNavCard`) が固定の高さで切れ、スクロールできると分からない。② 本番デプロイ後に代表 3 市区町村 (坂出市・千代田区・札幌市) を 390 / 1280px で撮影して完了条件を確かめる。③ 配信をやめた市区町村の `profile.json` (R2 `app/areas/<県>/cities/<市区町村>/profile.json`) は読み手 0。削除は `r2-maintenance.yml` の allowlist 経由で、オーナーの承認後。
+- **済 (2026-10-21・本番反映済み。PR #1165 + #1166)**: 市区町村ページを市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`、174 指標の値・年・県内順位・全国順位) に置き換え、旧 `profile.json` の生成と読み込みを撤去した。特徴は率の指標・値 0 除外・2019 年以降 (`selectCityHighlights`)。見出しに人口・高齢化率など 6 指標、title は人口・前回比・都内/道内/府内/県内の順位 (`buildCityPageMeta`)。東京 23 区を公開対象にし (entity policy)、県内の一覧・索引・sitemap を同じ集合 1,741 件にそろえた。市区町村ランキングは全行リンク・同名の自治体に県名、ヘッダーの現在地は「市区町村」、パンくずの県名の重複を解消。localhost (公開 R2 + ローカル生成物のオーバーレイ) で坂出市・千代田区・札幌市・特別区部 (noindex) と市区町村ランキング・都道府県ランキング・ブログのデータ欄を確認した。計測の基準値は `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01`。
+- **本番確認 (2026-10-21)**: 坂出市 (1280px)・千代田区 (390px)・札幌市 (390px) を撮影・DOM 検査し、強みの値 0・分母なし・年度なし・23 区の欠落・ランキングのリンク欠落・同名自治体・県名の重複・ヘッダーの現在地がすべて解消していることを確かめた (横はみ出しなし)。
+- **残り**: ① 県内の市区町村一覧 (`CitiesNavCard`) が固定の高さで切れ、スクロールできると分からない (札幌市の北海道 179 件で顕著)。② 配信をやめた市区町村の `profile.json` (R2 `app/areas/<県>/cities/<市区町村>/profile.json`) は読み手 0。削除は `r2-maintenance.yml` の allowlist 経由で、オーナーの承認後。
 
 ### [UNIT-NOTATION-FORMAT-01] 単位と数値の表記がページごとに不揃い
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -4822,7 +4823,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
   3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
-- **2026-10-21 追加 (develop、未デプロイ)**: 令和7年国勢調査の 5 年間の増減 3 件 (`census-population-change-rate-5y` /
+- **2026-10-21 追加 (本番反映済み)**: 令和7年国勢調査の 5 年間の増減 3 件 (`census-population-change-rate-5y` /
   `census-population-change-5y` / `census-household-change-rate-5y`) を R2 cities.json で監査して published に足した (171 → 174)。
   人口テーマと世帯テーマにも入れたので、市区町村データブックにも出る。未公開の unknown は残り 10 件
   (火災 2・自動車保険 2・家計の費目 4 は cities.json 不在または監査未了、industrial-land-price・major-lake-area)。
