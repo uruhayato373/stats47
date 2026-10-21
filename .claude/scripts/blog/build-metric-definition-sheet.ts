@@ -41,8 +41,20 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
  */
 function surveyLabel(c: MetricConfig): string {
   const { originalSurveys } = resolveSurveyLinkage(c, METRICS_REGISTRY);
-  if (originalSurveys.length) return originalSurveys.map((s) => s.name).join(" / ");
-  return c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
+  const main = originalSurveys.length
+    ? originalSurveys.map((s) => s.name).join(" / ")
+    : c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
+  return main + supplementalLabel(c);
+}
+
+/** 補助の出典から取る年を添える。記事がその年の値の出典を主の出典と取り違えないため (METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01) */
+export function supplementalLabel(c: Pick<MetricConfig, "supplementalSources">): string {
+  const parts = (c.supplementalSources ?? []).map((s) => {
+    const src = s.source as { displayName?: string; statsDataId?: string };
+    const table = src.statsDataId ? ` 表${src.statsDataId}` : "";
+    return `${s.years.map((y) => `${y}年`).join("・")}は${src.displayName ?? "補助の出典"}${table}`;
+  });
+  return parts.length ? ` (${parts.join(" / ")})` : "";
 }
 
 function argAll(name: string): string[] {

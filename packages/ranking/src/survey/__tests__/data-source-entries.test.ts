@@ -124,6 +124,15 @@ describe('resolveRankingItemDataSources', () => {
     });
     expect(entries[0].tables).toEqual([{ label: '統計表', url: `${ESTAT}0000010101` }]);
   });
+
+  it('一部の年を補助の出典から取る指標は、その表を年付きで並べる (主の出典だけにしない)', () => {
+    const entries = resolveRankingItemDataSources({
+      sourceConfig: { recipe: buildRecipe(METRICS_REGISTRY['ratio-65-plus']) },
+    });
+    const tables = entries.flatMap((entry) => entry.tables);
+    expect(tables).toContainEqual({ label: '統計表（2025年の値）', url: `${ESTAT}0004065933` });
+    expect(tables.some((table) => table.url === `${ESTAT}0000010201`)).toBe(true);
+  });
 });
 
 describe('geo item の出典', () => {
