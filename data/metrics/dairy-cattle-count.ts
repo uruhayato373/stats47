@@ -5,6 +5,8 @@ export const dairyCattleCount: MetricConfig = {
   "key": "dairy-cattle-count",
   "title": "乳用牛飼養頭数",
   "subtitle": "乳用牛（めす）の飼養頭数合計",
+  "description": "搾乳を目的とする乳用牛（めす）の都道府県別飼養頭数。牛個体識別全国データベース等を用いた畜産統計の集計。",
+  "note": "2025年2月1日現在。乳用牛飼養戸数とは数える対象 (頭と飼養者) が違う。丸めにより全国値と47県合計は一致しない場合がある。",
   "unit": "頭",
   "category": "agriculture",
   "source": {
@@ -59,5 +61,6 @@ export const dairyCattleCount: MetricConfig = {
   },
   "seoTitle": "乳用牛飼養頭数 都道府県ランキング【2025年】｜1位北海道（816,800頭）",
   "seoDescription": "2025年の乳用牛飼養頭数を都道府県別に比較。1位は北海道（816,800頭）、最下位は和歌山県（510頭）、最大と最小の差は1601.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "surveyId": "livestock-statistics",
   "isActive": true,
 };

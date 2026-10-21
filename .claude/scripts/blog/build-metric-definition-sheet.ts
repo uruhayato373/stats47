@@ -94,11 +94,22 @@ function yearType(c: MetricConfig): string {
   return "未宣言 (config に yearFormat 無し。出典で確認)";
 }
 
+const NEGATION_AFTER = /^.{0,2}(ではな|でな|を除|を含まない|は含まない)/;
+
+/** 語が 1 回でも否定されずに出てくるか (直後 2 文字以内に否定が続く出現は数えない)。 */
+export function mentionsAffirmatively(text: string, word: string): boolean {
+  for (let i = text.indexOf(word); i !== -1; i = text.indexOf(word, i + 1)) {
+    if (!NEGATION_AFTER.test(text.slice(i + word.length, i + word.length + 8))) return true;
+  }
+  return false;
+}
+
 function scope(c: MetricConfig): string {
   const text = `${c.subtitle ?? ""} ${c.description ?? ""} ${c.note ?? ""}`;
   const hits = new Set<string>();
   for (const w of ["二人以上の世帯", "二人以上世帯", "勤労者世帯", "単身世帯", "総世帯", "都道府県庁所在市", "県庁所在市", "事業所", "企業", "一般労働者", "男女計", "人口10万人当たり", "人口千人当たり", "1世帯当たり", "1人当たり", "全国=100", "指数", "構成比", "割合"]) {
-    if (text.includes(w)) hits.add(w);
+    // 「法人企業数ではなく」のように否定して書いた語は対象に数えない (METRIC-DAIRY-CONFIG-01)
+    if (mentionsAffirmatively(text, w)) hits.add(w);
   }
   const calc = c.calculation;
   if (calc?.isCalculated && calc.type === "ratio") {
