@@ -4,7 +4,9 @@ import {
   buildAllBasesCsv,
   buildSingleSeriesCsv,
   getRankingDownloadSeries,
+  readRankingItemFromR2,
 } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 import { readPrefectureFeatures } from "@stats47/visualization/server";
 
 import { DOWNLOAD_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
@@ -40,6 +42,9 @@ const ALLOWED_BASES = new Set([
 const ALLOWED_ENCODINGS = new Set(["utf8", "sjis"] as const);
 // robots.txt はこの公開配布ルートだけ取得を許可する。検索結果は説明のあるランキングページへ。
 const DOWNLOAD_ERROR_HEADERS = { ...NO_STORE_CACHE_HEADERS, "X-Robots-Tag": "noindex" };
+
+/** CSV の作成日を日本時間の暦日で書くためのずれ */
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
 
 type Format = "csv" | "json" | "kml" | "geojson";
 const MAP_FORMATS = new Set<Format>(["kml", "geojson"]);
@@ -121,13 +126,19 @@ export async function GET(
     );
   }
 
+  // 表示名と出典を item.json 1 件から取る。地図は文書名 (マイマップのレイヤ名)、CSV は末尾の出典表記に使う。
+  // 読めなければ地図はキーのまま、CSV は「掲載ページの出典欄を参照」で出す (ダウンロード自体は止めない)
+  const itemResult = await readRankingItemFromR2(rankingKey, "prefecture");
+  const item = isOk(itemResult) ? itemResult.data : null;
+  const pageUrl = `${req.nextUrl.origin}/ranking/${encodeURIComponent(rankingKey)}`;
+
   // 本文生成
   let bodyText: string;
   if (MAP_FORMATS.has(formatParam)) {
     const mapInput = {
       features: readPrefectureFeatures(),
       values: series[0].values,
-      meta: { rankingKey, pageUrl: `${req.nextUrl.origin}/ranking/${encodeURIComponent(rankingKey)}` },
+      meta: { rankingKey, title: item?.title ?? null, pageUrl },
     };
     bodyText = formatParam === "kml" ? buildMapKml(mapInput) : JSON.stringify(buildMapGeoJson(mapInput));
   } else if (formatParam === "json") {
@@ -135,10 +146,19 @@ export async function GET(
       basisParam === "all-bases"
         ? JSON.stringify(Object.fromEntries(series.map((s) => [s.basisKey, s.values])))
         : JSON.stringify(series[0].values);
-  } else if (basisParam === "all-bases") {
-    bodyText = buildAllBasesCsv(series);
   } else {
-    bodyText = buildSingleSeriesCsv(series[0].values);
+    const citation = {
+      title: item?.title ?? null,
+      attribution: item?.attribution ?? null,
+      source: item?.source ?? null,
+      dataSourceId: item?.dataSourceId ?? null,
+      pageUrl,
+      createdOn: new Date(Date.now() + JST_OFFSET_MS).toISOString().slice(0, 10),
+    };
+    bodyText =
+      basisParam === "all-bases"
+        ? buildAllBasesCsv(series, citation)
+        : buildSingleSeriesCsv(series[0].values, citation);
   }
 
   // 出力 body: UTF-8 / JSON は string をそのまま渡す (BodyInit)。

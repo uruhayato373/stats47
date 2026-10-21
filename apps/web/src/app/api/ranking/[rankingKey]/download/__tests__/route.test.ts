@@ -9,8 +9,10 @@ const values = [
 
 vi.mock("@stats47/ranking/server", () => ({
   getRankingDownloadSeries: vi.fn(async () => [{ basisKey: "original", basisLabel: "総数", values }]),
-  buildSingleSeriesCsv: vi.fn(() => "﻿都道府県コード,都道府県名,2025年\n13000,東京都,100"),
+  buildSingleSeriesCsv: vi.fn((_values: unknown, citation?: { title?: string; pageUrl: string }) =>
+    `﻿都道府県コード,都道府県名,2025年\n13000,東京都,100\n\n指標,${citation?.title ?? ""}\n掲載ページ,${citation?.pageUrl ?? ""}`),
   buildAllBasesCsv: vi.fn(() => ""),
+  readRankingItemFromR2: vi.fn(async () => ({ success: true, data: { rankingKey: "total-population", title: "総人口" } })),
 }));
 
 vi.mock("@stats47/visualization/server", () => ({
@@ -47,6 +49,21 @@ describe("GET /api/ranking/[rankingKey]/download", () => {
     const body = await res.text();
     expect(body.match(/<Placemark>/g)).toHaveLength(2);
     expect(body).toContain("https://stats47.jp/ranking/total-population");
+    // マイマップのレイヤ名になる文書名は指標キーではなく表示名 (KML-DOCUMENT-NAME-01)
+    expect(body).toContain("<Document><name>総人口（2025年）</name>");
+  });
+
+  it("GeoJSON の各地物に表示名を持たせる", async () => {
+    const res = await call("format=geojson&basis=original");
+    const json = await res.json();
+    expect(json.features[0].properties.title).toBe("総人口");
+  });
+
+  it("CSV には item.json の表示名と掲載ページを出典表記として渡す (DOWNLOAD-CSV-CITATION-01)", async () => {
+    const res = await call("format=csv&basis=original&encoding=utf8");
+    const body = await res.text();
+    expect(body).toContain("指標,総人口");
+    expect(body).toContain("掲載ページ,https://stats47.jp/ranking/total-population");
   });
 
   it("地図形式は全基準まとめ (all-bases) を受け付けない", async () => {

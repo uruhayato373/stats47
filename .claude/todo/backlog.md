@@ -553,6 +553,7 @@ updated: 2026-10-19
 ### [KML-DOCUMENT-NAME-01] 地図用 KML の文書名を指標キーではなく日本語の指標名にする
 タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: ダウンロード route が `readRankingItemFromR2` で item.json を 1 件だけ読み、KML の文書名と GeoJSON の各地物の `title` に表示名を使う (読めなければ従来どおり指標キー)。route テストで「<Document><name>総人口（2025年）</name>」と GeoJSON の title を固定。本番は未デプロイ。
 - **経緯**: 2026-10-18 の note-critic レビューで指摘。本番の KML の `<Document><name>` が「total-population（2025年）」のように指標キーのままで、Google マイマップに読み込むとレイヤ名が英語になる。`apps/web/src/lib/download/build-map-download.ts` の `buildMapKml` が `meta.rankingKey` を名前に使っているため。
 - **次**: ダウンロード route でランキングの表示名を取得して `meta` に渡し、文書名と GeoJSON の properties に使う (route の読み込みが重くならない取得方法を選ぶ)。
 - **完了条件**: 総人口の KML の文書名が「総人口（2025年）」になり、route テストで固定した。
@@ -650,6 +651,7 @@ updated: 2026-10-19
 ### [DOWNLOAD-CSV-CITATION-01] ランキング CSV に e-Stat 準拠の出典と「加工して作成」の表記が入っているかを確かめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-17] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 確認の結果、CSV に出典も加工の表記も無かった。`build-download-csv.ts` に `CsvCitation` を足し、表の後に空行を挟んで「指標・出典 (編纂元と原典)・統計の取得元 (e-Stat のとき)・加工・掲載ページ・作成日」を出す (先頭行は列見出しのまま)。route は item.json の `attribution`・`source` から渡す。実データで total-population・annual-sunshine-duration (SSDS) と architect-annual-income (賃金構造基本統計調査) の 3 指標の CSV を生成し、表記が入ることを確認した。単体テスト 3 件・route テスト 1 件。本番は未デプロイ。府省名は item.json に無いので一次統計の出典は調査名だけになる。
 - **経緯**: 2026-10-17 の学生ペルソナ調査 (AI シミュレーション + Web 検索)。CSV をダウンロードする人の用途は学習が最多 (2026-W41 `data/ga4/snapshots/2026-W41/download-purpose.csv`: 学習 33・仕事 19・個人 10)。卒論・レポートでは出典の書き方と加工の表記が詰まる点で、e-Stat の利用規約 (https://www.e-stat.go.jp/terms-of-use) が表記の例を示している。CSV の出典行の有無はまだ確認していない。
 - **次**: ① ダウンロード route が出力する CSV を 3 指標ぶん取得し、調査名・表名・年次・取得日・加工の表記があるかを確認する ② 無ければ provenance から出典行を足す。
 - **完了条件**: 代表 3 指標の CSV に出典と加工の表記が入っていることを、出力の実物で確認した。
