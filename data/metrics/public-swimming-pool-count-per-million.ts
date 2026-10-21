@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const publicSwimmingPoolCountPerMillion: MetricConfig = {
   "key": "public-swimming-pool-count-per-million",
   "title": "水泳プール数",
-  "subtitle": "屋内・屋外",
+  "subtitle": "人口100万人当たり・屋内・屋外",
   "unit": "施設",
   "category": "educationsports",
   "source": {

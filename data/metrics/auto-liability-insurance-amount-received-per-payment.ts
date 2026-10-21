@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const autoLiabilityInsuranceAmountReceivedPerPayment: MetricConfig = {
   "key": "auto-liability-insurance-amount-received-per-payment",
   "title": "自動車損害賠償責任保険受取保険金額",
+  "subtitle": "支払件数1件当たり",
   "unit": "万円",
   "category": "economy",
   "source": {

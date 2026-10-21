@@ -100,6 +100,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "crude-birth-rate",
         "title": "粗出生率",
         "readerLabel": "粗出生率",
+        "subtitle": "人口千人当たり",
         "hook": "粗出生率が最も高い県は？"
       },
       {
@@ -608,6 +609,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
         "title": "消防ポンプ自動車等現有数",
         "readerLabel": "消防ポンプ自動車等現有数",
+        "subtitle": "人口10万人当たり",
         "hook": "消防ポンプ自動車等現有数が最も多い県は？"
       },
       {

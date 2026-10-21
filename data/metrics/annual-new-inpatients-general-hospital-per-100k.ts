@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const annualNewInpatientsGeneralHospitalPer100k: MetricConfig = {
   "key": "annual-new-inpatients-general-hospital-per-100k",
   "title": "一般病院年間新入院患者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

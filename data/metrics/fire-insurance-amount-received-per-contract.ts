@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireInsuranceAmountReceivedPerContract: MetricConfig = {
   "key": "fire-insurance-amount-received-per-contract",
   "title": "火災保険受取保険金額",
+  "subtitle": "保有契約1件当たり",
   "unit": "万円",
   "category": "construction",
   "source": {

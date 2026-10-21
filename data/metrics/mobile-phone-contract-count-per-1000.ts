@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const mobilePhoneContractCountPer1000: MetricConfig = {
   "key": "mobile-phone-contract-count-per-1000",
   "title": "携帯電話契約数",
+  "subtitle": "人口千人当たり",
   "unit": "契約",
   "category": "ict",
   "source": {

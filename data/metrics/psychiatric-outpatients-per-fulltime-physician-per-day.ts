@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const psychiatricOutpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "key": "psychiatric-outpatients-per-fulltime-physician-per-day",
   "title": "精神科病院外来患者数",
+  "subtitle": "常勤医師1人1日当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

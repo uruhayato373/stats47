@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const childWelfareFacilityCountPer100k: MetricConfig = {
   "key": "child-welfare-facility-count-per-100k",
   "title": "児童福祉施設等数",
+  "subtitle": "人口10万人当たり",
   "unit": "所",
   "category": "educationsports",
   "source": {

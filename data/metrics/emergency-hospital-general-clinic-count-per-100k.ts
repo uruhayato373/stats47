@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const emergencyHospitalGeneralClinicCountPer100k: MetricConfig = {
   "key": "emergency-hospital-general-clinic-count-per-100k",
   "title": "救急告示病院・一般診療所数",
+  "subtitle": "人口10万人当たり",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

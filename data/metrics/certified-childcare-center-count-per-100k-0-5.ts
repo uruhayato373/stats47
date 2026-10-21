@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const certifiedChildcareCenterCountPer100k05: MetricConfig = {
   "key": "certified-childcare-center-count-per-100k-0-5",
   "title": "認定こども園数",
+  "subtitle": "0～5歳人口10万人当たり",
   "unit": "園",
   "category": "educationsports",
   "source": {

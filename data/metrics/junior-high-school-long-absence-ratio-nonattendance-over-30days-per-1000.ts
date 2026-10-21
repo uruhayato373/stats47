@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const juniorHighSchoolLongAbsenceRatioNonattendanceOver30daysPer1000: MetricConfig = {
   "key": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
   "title": "不登校による中学校長期欠席生徒比率",
+  "subtitle": "生徒千人当たり",
   "unit": "生徒千対",
   "category": "educationsports",
   "source": {

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const publicRentalHousingRentPer33m2: MetricConfig = {
   "key": "public-rental-housing-rent-per-3-3m2",
   "title": "公営賃貸住宅の家賃",
+  "subtitle": "1か月3.3m2当たり",
   "unit": "円",
   "category": "construction",
   "source": {

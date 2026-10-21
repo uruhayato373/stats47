@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nationalHealthInsuranceEnrolleesPer1000: MetricConfig = {
   "key": "national-health-insurance-enrollees-per-1000",
   "title": "国民健康保険被保険者数",
+  "subtitle": "人口千人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

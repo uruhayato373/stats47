@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const maternalHealthGuidancePer100Births: MetricConfig = {
   "key": "maternal-health-guidance-per-100-births",
   "title": "妊産婦保健指導数",
+  "subtitle": "出産数100当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

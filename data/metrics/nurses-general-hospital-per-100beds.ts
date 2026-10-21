@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nursesGeneralHospitalPer100beds: MetricConfig = {
   "key": "nurses-general-hospital-per-100beds",
   "title": "一般病院看護師・准看護師数",
+  "subtitle": "100病床当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

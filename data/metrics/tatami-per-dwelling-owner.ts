@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const tatamiPerDwellingOwner: MetricConfig = {
   "key": "tatami-per-dwelling-owner",
   "title": "持ち家住宅の居住室の畳数",
+  "subtitle": "1住宅当たり",
   "unit": "畳",
   "category": "construction",
   "source": {

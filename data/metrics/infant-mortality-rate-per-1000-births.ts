@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const infantMortalityRatePer1000Births: MetricConfig = {
   "key": "infant-mortality-rate-per-1000-births",
   "title": "乳児死亡率",
+  "subtitle": "出生数千当たり",
   "unit": "出生千対",
   "category": "population",
   "source": {

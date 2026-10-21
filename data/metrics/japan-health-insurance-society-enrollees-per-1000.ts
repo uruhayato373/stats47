@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const japanHealthInsuranceSocietyEnrolleesPer1000: MetricConfig = {
   "key": "japan-health-insurance-society-enrollees-per-1000",
   "title": "全国保険協会管掌健康保険加入者数",
+  "subtitle": "人口千人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

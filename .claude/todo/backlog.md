@@ -958,6 +958,7 @@ updated: 2026-10-19
 ### [METRIC-DENOMINATOR-LABEL-01] 人口当たりなどの指標で、表示名と単位から分母が落ちている (博物館数 = 人口100万人当たりなのに「博物館数」「館」)
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-13] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 有効な e-Stat 指標で、e-Stat の項目名 (`data/estat/meta` の控え、無ければ getMetaInfo) の末尾の括弧に「当たり」があり、title・subtitle に分母が無いものを `denominatorFromName` (note の生成器と同じ) で数えると 143 件 (人口10万人当たり 23・人口100万人当たり 10・人口千人当たり 10・65歳以上人口10万人当たり 9・千世帯当たり 8 ほか。1 件当たり・1 住宅当たりなども含む)。単位は素のまま (`unit-semantics-standards.md` §4)、分母は subtitle に書いた: subtitle の無い 131 件は分母だけ、既にある 12 件は「分母・既存の subtitle」(同じ title の区別子を残すため)。分母は推測せず項目名からだけ取った。生成物 `ranking-prominence.generated.ts` も再生成。validate:config・metrics:check・content:check・display-semantics・preflight:pr 通過。R2 の item.json・県データブックは次の sync で反映される。
 - **事実 (2026-10-13)**: キーに `per-million`・`per-100k`・`per-1000` などを持つ指標のうち約 90 件は、`data/metrics/<key>.ts` の `title`・`subtitle` に分母が無い。
   例: `museum-count-per-million` は e-Stat の項目名が「博物館数（人口100万人当たり）」なのに、title「博物館数」・unit「館」。R2 の `item.json`、県データブック (`databook.json` の highlight.label)、
   SNS のタイル画像 (`quick-still.ts` は item の title を描く) が実数のように読める。`certified-childcare-center-count-per-100k-0-5` (認定こども園数 687.1 園) も同じ。

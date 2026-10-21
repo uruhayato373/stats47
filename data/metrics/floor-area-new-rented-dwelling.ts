@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const floorAreaNewRentedDwelling: MetricConfig = {
   "key": "floor-area-new-rented-dwelling",
   "title": "着工新設貸家住宅の床面積",
+  "subtitle": "1住宅当たり",
   "unit": "ｍ2",
   "category": "construction",
   "source": {

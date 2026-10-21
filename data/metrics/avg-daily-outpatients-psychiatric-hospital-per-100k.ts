@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const avgDailyOutpatientsPsychiatricHospitalPer100k: MetricConfig = {
   "key": "avg-daily-outpatients-psychiatric-hospital-per-100k",
   "title": "精神科病院の1日平均外来患者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

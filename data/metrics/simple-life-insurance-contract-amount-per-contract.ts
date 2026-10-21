@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const simpleLifeInsuranceContractAmountPerContract: MetricConfig = {
   "key": "simple-life-insurance-contract-amount-per-contract",
   "title": "簡易生命保険保有契約保険金額",
+  "subtitle": "保有契約1件当たり",
   "unit": "万円",
   "category": "economy",
   "source": {

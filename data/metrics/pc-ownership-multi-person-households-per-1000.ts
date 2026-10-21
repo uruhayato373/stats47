@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const pcOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "pc-ownership-multi-person-households-per-1000",
   "title": "パソコン所有数量",
+  "subtitle": "千世帯当たり",
   "unit": "台",
   "category": "ict",
   "source": {

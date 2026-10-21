@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nursingWelfareFacilityCountPer100k65plus: MetricConfig = {
   "key": "nursing-welfare-facility-count-per-100k-65plus",
   "title": "介護老人福祉施設数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {

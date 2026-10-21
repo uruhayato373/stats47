@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const museumCountPerMillion: MetricConfig = {
   "key": "museum-count-per-million",
   "title": "博物館数",
+  "subtitle": "人口100万人当たり",
   "unit": "館",
   "category": "educationsports",
   "source": {

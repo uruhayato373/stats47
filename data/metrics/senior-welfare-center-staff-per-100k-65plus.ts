@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const seniorWelfareCenterStaffPer100k65plus: MetricConfig = {
   "key": "senior-welfare-center-staff-per-100k-65plus",
   "title": "老人福祉センター従事者数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

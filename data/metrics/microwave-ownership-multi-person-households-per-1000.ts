@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const microwaveOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "microwave-ownership-multi-person-households-per-1000",
   "title": "電子レンジ所有数量",
+  "subtitle": "千世帯当たり",
   "unit": "台",
   "category": "economy",
   "source": {

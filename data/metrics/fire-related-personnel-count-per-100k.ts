@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireRelatedPersonnelCountPer100k: MetricConfig = {
   "key": "fire-related-personnel-count-per-100k",
   "title": "消防関係人員数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

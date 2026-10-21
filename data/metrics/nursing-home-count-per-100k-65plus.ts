@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nursingHomeCountPer100k65plus: MetricConfig = {
   "key": "nursing-home-count-per-100k-65plus",
   "title": "老人ホーム数",
+  "subtitle": "65歳以上人口10万人当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {

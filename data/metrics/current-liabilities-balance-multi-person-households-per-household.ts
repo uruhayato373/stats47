@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const currentLiabilitiesBalanceMultiPersonHouseholdsPerHousehold: MetricConfig = {
   "key": "current-liabilities-balance-multi-person-households-per-household",
   "title": "負債現在高",
+  "subtitle": "1世帯当たり",
   "unit": "千円",
   "category": "economy",
   "source": {

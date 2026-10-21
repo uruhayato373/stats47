@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaNationalTaxCollected: MetricConfig = {
   "key": "per-capita-national-tax-collected",
   "title": "国税徴収決定済額",
+  "subtitle": "人口1人当たり",
   "unit": "千円",
   "category": "economy",
   "source": {

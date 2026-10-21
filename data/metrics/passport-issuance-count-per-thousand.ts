@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const passportIssuanceCountPerThousand: MetricConfig = {
   "key": "passport-issuance-count-per-thousand",
   "title": "一般旅券発行件数",
+  "subtitle": "人口千人当たり",
   "unit": "件",
   "category": "commercial",
   "source": {

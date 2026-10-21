@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
   "key": "nursery-children-per-nursery-teacher",
   "title": "保育所等在所児数",
+  "subtitle": "保育士1人当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {

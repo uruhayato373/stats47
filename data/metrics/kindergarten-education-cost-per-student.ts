@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const kindergartenEducationCostPerStudent: MetricConfig = {
   "key": "kindergarten-education-cost-per-student",
   "title": "幼稚園教育費",
+  "subtitle": "在園者1人当たり",
   "unit": "円",
   "category": "educationsports",
   "source": {
