@@ -44,7 +44,6 @@ describe("right rail scroll contract", () => {
   // AreaProfileSidebar は未使用 (どのページからも import されていなかった) だったため、
   // rail UI 契約統一 (RailStack/RailCard 移行) と同時に削除した (features/area-profile/index.ts
   // からも export を除去)。この面の「独立スクロールを作らない」契約は上 2 テスト
-  // (ArticleShell / RightRailWidgets) が引き続き守る。CitiesNavCard 等の一覧グリッドが持つ
-  // `max-h-72` + `overflow-y-auto` は都道府県内市区町村グリッドの意図的な折りたたみ表示であり、
-  // ここで禁止している「レール全体を覆う独立スクロール」とは別物のため対象外とする。
+  // (ArticleShell / RightRailWidgets) が引き続き守る。CitiesNavCard は固定の高さのスクロールを
+  // やめ、先頭だけ並べて残りを <details> で開く形にした (続きがあると気づけなかったため)。
 });
