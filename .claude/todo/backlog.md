@@ -1002,6 +1002,7 @@ updated: 2026-10-19
 ### [SNS-SCRIPT-TS-TESTS-WIRING-01] SNS スクリプトの TS テスト 10 本と素材照合テストを CI で実行する
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:node --import tsx --test .claude/scripts/sns/__tests__/*.test.ts] [起票:2026-10-13] [領域:SNS]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `package.json` に `sns:test` (`node --import tsx --test` で `.claude/scripts/sns/__tests__/*.test.{ts,mjs,cjs}` の全件) を足し、`pr-quality-check.yml` の「SNS Post Trace Contract」step から呼ぶ。手元で 106/106 合格、`tile-change.test.ts` に失敗するテストを 1 件足すと exit 1 になることを確認した。PR CI での実行は次の develop→main PR で確かめる。
 - **事実 (2026-10-13)**: `.claude/scripts/sns/__tests__/` の `*.test.ts` 10 本 (今回コミットした `data-card-input` / `all47-svg` / `tile-change` を含む) と
   `material-reconciliation.test.mjs` は、どの npm script・workflow からも実行されていない。ルートの vitest workspace も `.claude/scripts` を含まない。
   CI で走るのは `post-trace-core.test.mjs` と `x-direct-ledger.test.cjs` だけ。手元では `node --import tsx --test` で 20 件、`node --test` で 14 件が合格した。

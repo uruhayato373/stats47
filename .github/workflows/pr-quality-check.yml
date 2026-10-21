@@ -263,8 +263,10 @@ jobs:
       - name: 🧾 SNS Post Trace Contract
         # 投稿台帳 data/sns/posts.json の 1 id から台本・状態・承認・外部 ID・素材・観測値をたどれること。
         # カットオーバー以降の投稿は承認必須。契約: .claude/rules/sns-content-standards.md §3
+        # sns:test は .claude/scripts/sns/__tests__ の全テスト (TS はルートの vitest workspace に入らないので node --test で回す)
         run: |
           npm run sns:trace:test
+          npm run sns:test
           node .claude/scripts/sns/check-post-trace.mjs
         continue-on-error: false
 
