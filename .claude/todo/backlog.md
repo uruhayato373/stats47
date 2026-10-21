@@ -4444,6 +4444,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run -s validate:config --workspace=@stats47/data-configs] [起票:2026-10-08] [領域:データ]
 
+- **2026-10-21 経過 (コードは済み・R2 は未反映)**: 共通の書き手 `stats-values-writer.mjs` の yearName の既定を、指標の yearFormat から「YYYY年」(calendar・未宣言)・「YYYY年度」(fiscal) を作る `yearNameFor` に変えた (yearFormat は新しい境界 `print-metric-year-format.ts` で正典から引く。テスト 1 件)。書き手を通らない 3 本 (中体連・パチンコ店密度・日本語指導) の固定の "2025" も年 / 年度付きに直し、国民健康・栄養調査は調査期間 (10〜11月) が既に note にあるので既定の「2024年」にした。他の手動スクリプトに年だけの yearName は無い (`yearName: "YYYY"` などの書き方で検索)。data のテスト 12 件・型検査通過。**残り**: 手動取得の全スクリプトを再実行して R2 の values.json を書き直す (R2 への書き込みなのでオーナー承認待ち。値が変わらないことを再実行前後で照合する)。
 - **事象 (2026-10-08 実測)**: e-Stat 経由の指標は `app/stats/<key>/values.json` の `yearName` が「2024年」だが、手動取得 (`fetcherKey: manual`) の指標は「2022」のように年だけになっている。今回の新規 20 本に加え、既存の中体連 10 本・遊技店密度も同じ。国民健康・栄養調査の 3 本は「2024年10〜11月」で、これも形が違う。data-refresh の検査は ranking 配信値の `yearName` を `yearCode + 年/年度` と照合しているので、手動取得の指標をその経路に載せると失敗する。
 - **原因**: 共通部品 `.claude/scripts/data/lib/stats-values-writer.mjs` の `writeStatsValues` が `yearName` の既定を `(y) => y` にしている。指標定義の `yearFormat` (calendar / fiscal) を見ていない。
 - **次**: writer が `yearFormat` から「年」「年度」を付けるようにし、手動取得の全スクリプトを再実行して R2 を更新する。調査期間を示したい表記 (10〜11月) は `note` に移す。

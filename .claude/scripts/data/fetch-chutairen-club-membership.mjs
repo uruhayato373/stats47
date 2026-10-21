@@ -177,7 +177,7 @@ async function main() {
       const members = mv + fv;
       const denom = denomByCode[code];
       const value = Math.round((members / (denom / 100)) * 100) / 100;
-      return { areaCode: code, areaName: name, yearCode: "2025", yearName: "2025", value, unit: "人" };
+      return { areaCode: code, areaName: name, yearCode: "2025", yearName: "2025年度", value, unit: "人" };
     });
 
     // rank 付与 (降順)

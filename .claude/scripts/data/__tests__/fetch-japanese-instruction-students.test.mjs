@@ -38,7 +38,7 @@ test("外国籍と日本国籍を同じ県コードで合算する", () => {
     areaCode: "01000",
     areaName: "北海道",
     yearCode: "2025",
-    yearName: "2025",
+    yearName: "2025年度",
     value: 20,
     unit: "人",
   });
