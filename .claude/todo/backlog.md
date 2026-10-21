@@ -1995,6 +1995,7 @@ updated: 2026-10-19
 ### [METRIC-HOUSEHOLD-DEFS-01] 家計調査系の 2 指標で、注記がデータと食い違う・同じ名前の値が 2 系統ある点を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 1: R2 の配信値で `information-communication-coefficient` の 47 都市の単純平均は 2020 年 5.40％ → 2024 年 4.18％ と下がっており、note の「全国的に上昇傾向」は誤りだった。実測の推移に書き換えた。2: `food-expenditure-ratio-multi-person-households` は社会・人口統計体系の指標「#L02411 食料費割合（二人以上の世帯）」(e-Stat 控えで確認) で、`engel-coefficient` は家計調査 年次表 0003348239 の県庁所在市・二人以上世帯の食料費÷消費支出。2024 年の 47 県平均は 27.79％ と 29.45％ で差を R2 で確認した。前者に subtitle・description・note、後者の note にも食い違いと「混ぜて比べない」を書き、定義シートで違いが読めることを確認した。差の原因 (社会・人口統計体系の算定方法) は確かめられていないので note に未確認と明記した。前者の yearFormat (fiscal) が正しいかは `METRIC-YEARFORMAT-KAKEI-01` の範囲。
 - **事象 (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告)**:
   1. `information-communication-coefficient` の note に「全国的に上昇傾向」とあるが、writer の実測では R2 の 47 県の単純平均が 2020 年 5.40% から 2024 年 4.18% へ下がっている (note の文言は config で確認、R2 の推移は writer の実測で未再確認)
   2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる。critic の確認では 17 県すべてで 1.4〜2.3 ポイントの系統差があり、47 県の単純平均も 29.5% と 27.8% で違う。総務省の公表値と照合し、どちらがどの定義 (分母・世帯の範囲) かを確かめる
