@@ -158,3 +158,4 @@
 - [note editor autosave drafts](feedback_note_editor_autosave_drafts.md) — noteエディタは操作を自動保存して下書きを作る。選択確認前にDeleteしない・編集途中で長く待たない。大量操作で公開APIが403
 - [coconala edit needs v2 delivery](feedback_coconala_edit_needs_v2_delivery.md) — ココナラ P-* の --commit 編集は納品版 v2 が .local にある PC でしか通らない。Mac 再生成はハッシュ不一致
 - [windows npm install rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
+- [run full web tests before push](feedback_run_full_web_tests_before_push.md) — web の部品・route を変えたら apps/web の vitest 全件を push 前に。部分実行で既存テスト 2 件を見落とし develop を赤にした (2026-10-21)
