@@ -35,11 +35,49 @@ export interface FetchedValues {
   readonly values: readonly { code5: string; value: number | null }[];
 }
 
+const FETCH_ATTEMPTS = 3;
+const RETRY_BASE_DELAY_MS = 500;
+
+/** 4xx など、取り直しても結果が変わらない失敗。再試行しない */
+class PermanentFetchError extends Error {}
+
+/**
+ * values.json を取る。接続の失敗と 5xx だけを間隔を空けて再試行する。
+ *
+ * パックの固定データは 2,000 件超を 1 本ずつ取り、取れなかった指標は理由付きで飛ばす。再試行が無いと 1 回の瞬断で
+ * 指標が 1 つ減り、件数を固定したテストが落ちた (2026-10-21 の develop-quality-gate run 39594085606 で P-12 が
+ * 2,073 → 2,072。直後の手元の作り直しは 2 回とも 2,073)。4xx は元データが無いので、すぐ失敗にする。
+ */
+async function fetchValuesPayload(
+  url: string,
+  rankingKey: string,
+  deps: { fetchImpl?: typeof fetch; sleep?: (ms: number) => Promise<void> },
+): Promise<RankingValuesPayload> {
+  const fetchImpl = deps.fetchImpl ?? fetch;
+  const sleep = deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
+  let lastError: unknown;
+  for (let attempt = 0; attempt < FETCH_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetchImpl(url);
+      if (res.ok) return (await res.json()) as RankingValuesPayload;
+      const message = `R2 fetch 失敗 (${res.status}): ${rankingKey}`;
+      if (res.status < 500) throw new PermanentFetchError(message);
+      lastError = new Error(message);
+    } catch (error) {
+      if (error instanceof PermanentFetchError) throw error;
+      lastError = error;
+    }
+    if (attempt < FETCH_ATTEMPTS - 1) await sleep(RETRY_BASE_DELAY_MS * 2 ** attempt);
+  }
+  throw lastError;
+}
+
 /** app/ranking/<key>/values.json から最新の 47 県フル partition を取得する。 */
-export async function fetchRankingValues(rankingKey: string): Promise<FetchedValues> {
-  const res = await fetch(`${R2_BASE}/app/ranking/${rankingKey}/values.json`);
-  if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): ${rankingKey}`);
-  const payload = (await res.json()) as RankingValuesPayload;
+export async function fetchRankingValues(
+  rankingKey: string,
+  deps: { fetchImpl?: typeof fetch; sleep?: (ms: number) => Promise<void> } = {},
+): Promise<FetchedValues> {
+  const payload = await fetchValuesPayload(`${R2_BASE}/app/ranking/${rankingKey}/values.json`, rankingKey, deps);
   const full = payload.partitions
     .filter((p) => p.values.length >= 47)
     .slice()

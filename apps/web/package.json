@@ -34,7 +34,7 @@
     "prebuild": "npx cross-env NODE_ENV=development NODE_OPTIONS=\"--conditions react-server\" npx tsx scripts/generate-search-index.ts",
     "workers:clean": "rimraf .next .open-next",
     "workers:prebuild": "npm run workers:clean",
-    "workers:build": "npm run workers:prebuild && npx cross-env CLOUDFLARE_WORKERS=true npx tsx scripts/validate-env.ts && npx cross-env CLOUDFLARE_WORKERS=true opennextjs-cloudflare build --workers-runtime",
+    "workers:build": "npm run workers:prebuild && npx cross-env CLOUDFLARE_WORKERS=true npx tsx scripts/validate-env.ts && npx cross-env CLOUDFLARE_WORKERS=true opennextjs-cloudflare build --workers-runtime --dangerouslyUseUnsupportedNextVersion",
     "workers:preview": "opennextjs-cloudflare preview",
     "workers:populate-cache:production": "opennextjs-cloudflare populateCache remote --env production",
     "workers:deploy:production": "npm run workers:populate-cache:production && wrangler deploy --env production",

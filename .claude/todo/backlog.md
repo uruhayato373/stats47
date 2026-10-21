@@ -325,6 +325,15 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [KABEUCHI-AGENT-01] サイトと収益化をエージェント相手に「公開壁打ち」できる型を作り、1回目をやる
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:戦略]
+
+- **やりたいこと**: 運営者が相談者になり、エージェントを壁打ち相手（発想を広げる役）にして、stats47 のサイトと収益化の悩みに1時間で「その手があったか」を出してもらう。参考は GO 三浦崇宏×SHOGUN BURGER の公開壁打ち（The Solutions・2026-10-20 配信 https://pody.jp/player/IYyZ3oo32EztDR6WbOCS/YHBVBosHdRX59xygXsiM）
+- **型（案）**: ① 悩みを2つまで聞く → ② 前提を読む（GA4・GSC・販売実績・共通事業方針・既存の戦略文書）→ ③ 第一印象を先に言う → ④ 質問で3〜4往復掘る → ⑤ 勝ち筋を4〜6個、すぐ試せる順に出す（各案に「読者の課題／HARM／支払う理由／需要の証拠か未検証／次の検証」）→ ⑥ 記録し、やると決めた案をカード起票
+- **相手役（案）**: 発想を広げる役のほかに、収益の一手を断定する役・「それにお金払う？」と突っ込む読者役を並べるパネル形式も試す
+- **完了条件**: 1回目を実施して記録が残り、型をスキル化するか（毎回呼べる形にするか）を決めている
+- doboku-note にも同じカードを起票済み（同時に回す）
+
 ### [SCRIPT-GOOGLE-CLIENT-UNIFY-01] Google API の認証とクライアントの自前実装 15 ファイルを 1 か所にまとめる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
@@ -5039,6 +5048,20 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **事象 (2026-10-21 確認)**: `effect-verdict.test.mjs` の「CLI: verdict JSON を書き、summary と thresholdsVersion を含む」が、`cli.mjs --week 2026-W31` を実データで動かした出力の判定のうち 1 件に `sources` が無いため落ちる。SCRIPT-ISO-WEEK-UNIFY-01 の変更を外した状態でも同じく落ちるので、その変更が原因ではない。
 - **次**: どの施策の判定が `sources` を持たないかを出力から特定し、engine がその経路でも `sources` (空配列でも) を書くようにする。テストが実データに依存して落ちる形でよいかも併せて決める。
 - **完了条件**: 上のテストが通り、判定の JSON はどの経路でも `sources` を持つ。
+
+### [NEXT16-MIGRATION-01] Next.js 15 のサポート期間が 2026-10-21 に切れた。16 へ上げてビルドの例外フラグを外す
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [期日:2026-11-30] [領域:サイト]
+
+- **事象**: 2026-10-21 の本番デプロイ (run 39589689158) が Build の段で止まった。OpenNext 1.20.2 は Next.js の公開日表
+  (`node_modules/@opennextjs/aws/dist/build/helper.js` の `NEXT_RELEASE_DATES`、15 = 2024-10-21) から 2 年を過ぎた版を拒否し、
+  `Next.js version 15.5.27 is not supported by the Next.js team` で exit 1 にする。出典: https://nextjs.org/support-policy (2026-10-21 確認)。
+  同じ run の指標スナップショットの R2 反映は先に成功していた (旧版のアプリのまま主要 9 ページ 200 を確認)。
+- **応急処置 (2026-10-21)**: `apps/web/package.json` の `workers:build` に `--dangerouslyUseUnsupportedNextVersion` を付けた。
+  判定を警告にして続けるだけで、実行中の版 (15.5.27) は変わらない。Next.js 15 に今後の修正が出ない前提で扱う。
+- **次**: Next.js 16 の移行ガイド (https://nextjs.org/docs/app/guides/upgrading/version-16) を読み、`apps/web` の影響範囲
+  (middleware・設定・OpenNext の対応版) を洗ってから上げる。`.claude/rules/nextjs-ssg-preservation.md` の検査
+  (prerender の notFound 走査・スモークテスト) を通す。
+- **完了条件**: next 16.x で本番デプロイが通り、`workers:build` からフラグを外した版で再デプロイが通る。
 
 ### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
