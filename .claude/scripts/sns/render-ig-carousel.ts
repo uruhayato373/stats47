@@ -39,11 +39,11 @@ import {
 import {
   CORRELATION_CAROUSEL_SLIDES,
   combinedSourceLabel,
-  formatR,
   resolveCorrelationCarousel,
   type CorrelationCarouselSlide,
   type CorrelationCarouselSpec,
 } from "../../../apps/remotion/src/features/correlation-instagram/correlation.ts";
+import { buildCaptionCorrelationLines } from "./lib/correlation-carousel-core.ts";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const REMOTION_DIR = join(PROJECT_ROOT, "apps/remotion");
@@ -146,9 +146,7 @@ function buildCorrelationCaption(spec: CorrelationCarouselSpec): string {
     `縦軸: ${spec.y.label}（${spec.y.unit}・${spec.y.year}年）出典: ${spec.y.source}`,
     `横軸: ${spec.x.label}（${spec.x.unit}・${spec.x.year}年）出典: ${spec.x.source}`,
     "",
-    `相関係数 r=${formatR(spec.r)}（人口の影響を除くと r=${formatR(spec.rPopulationAdjusted)}）`,
-    "",
-    spec.caution,
+    ...buildCaptionCorrelationLines(spec.r, spec.rPopulationAdjusted),
     "",
     "保存して後で見返してね📌",
     "プロフィールのリンクから全47都道府県のデータが見られます",
