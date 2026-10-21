@@ -354,9 +354,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Next.js 16ではTurbopackがデフォルトのため、webpack設定がある場合はturbopack設定が必要
-  // package.jsonのスクリプトで--webpackフラグを使用してwebpackを明示的に指定
-  // turbopack設定は不要（webpackを使用するため）
+  // 開発サーバー (scripts/dev-server.ts) は Turbopack、本番ビルドは webpack。上の webpack() は本番 (Workers) 向けの
+  // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Turbopack が起動時に出す
+  // 「Webpack is configured while Turbopack is not」の警告はこのため無害 (空の turbopack 設定では消えない)。
 };
 
 export default withBundleAnalyzer(nextConfig);
