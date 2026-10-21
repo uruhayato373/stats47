@@ -7,11 +7,14 @@ import { describe, expect, it } from "vitest";
  * ブラウザ向けの部品や、他ページへ埋め込む部品が読む入口から、重い依存へ値の import がつながらないことを固定する。
  * 2026-10-21 に 8GB の Mac で、ランキング詳細の初回コンパイルが 171 秒・県ページが 20,399 モジュールになっていた。
  * 原因は入口 (barrel) 経由で全指標 registry (2,600 件超) と GIS の原典処理 (unzipper など) が入ることだった。
+ * テーマ切替は全テーマの指標定義 (all-themes) をブラウザへ持ち込んでいた。
  * 型だけの import はビルドで消えるので数えない。"use server" のファイルはブラウザへ入らないので辿らない。
  */
 const WEB_ROOT = path.resolve(__dirname, "../..");
 const REPO_ROOT = path.resolve(WEB_ROOT, "../..");
 const REGISTRY = path.join("packages", "data-configs", "src", "registry.ts");
+// 全テーマの指標定義。本番ビルドで 324KB のチャンクになり、テーマ切替が読むと各テーマページへ入っていた。
+const ALL_THEMES = path.join("theme-dashboard", "config", "all-themes.ts");
 const GIS_PROCESSING_PACKAGES = new Set(["unzipper", "shapefile", "proj4", "topojson-server", "topojson-simplify"]);
 
 const parsed = ts.parseJsonConfigFileContent(
@@ -64,7 +67,7 @@ function findHeavyDependency(entry: string): string[] | null {
       if (seen.has(resolved)) continue;
       seen.add(resolved);
       parent.set(resolved, file);
-      if (resolved.endsWith(REGISTRY)) return chainTo(file, path.relative(REPO_ROOT, resolved));
+      if (resolved.endsWith(REGISTRY) || resolved.endsWith(ALL_THEMES)) return chainTo(file, path.relative(REPO_ROOT, resolved));
       queue.push(resolved);
     }
   }
@@ -76,10 +79,12 @@ const LIGHT_ENTRIES = [
   "apps/web/src/features/geo-analysis/area.ts",
   "apps/web/src/features/geo-analysis/embedded.ts",
   "apps/web/src/features/ranking/widgets.ts",
+  "apps/web/src/features/theme-dashboard/components/ThemeSwitcher.tsx",
+  "apps/web/src/features/theme-dashboard/components/ThemeSideNav.tsx",
 ];
 
 describe("ブラウザ向け・埋め込み用の入口", () => {
-  it.each(LIGHT_ENTRIES)("%s から全指標 registry と GIS 原典処理に届かない", (entry) => {
+  it.each(LIGHT_ENTRIES)("%s から全指標 registry・全テーマ定義・GIS 原典処理に届かない", (entry) => {
     expect(findHeavyDependency(entry)).toBeNull();
   }, 60_000);
 

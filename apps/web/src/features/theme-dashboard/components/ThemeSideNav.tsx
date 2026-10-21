@@ -14,7 +14,7 @@ import { PREFECTURE_SET_LABEL } from '../types';
 
 import { PrefectureSelect } from './PrefectureSelect';
 import { useThemePrefecture } from './ThemePrefectureContext';
-import { buildThemeSwitcherOptions } from './ThemeSwitcher';
+import { buildThemeSwitcherOptions, type ThemeSwitcherTheme } from './ThemeSwitcher';
 
 export interface ThemeNavMetric {
   rankingKey: string;
@@ -38,6 +38,8 @@ interface Props {
   pageLinks?: Array<{ href: string; label: string }>;
   metrics?: ThemeNavMetric[];
   surveys?: ThemeNavSurvey[];
+  /** テーマ一覧。サーバーで `THEME_SWITCHER_THEMES` を渡す。 */
+  themes: readonly ThemeSwitcherTheme[];
 }
 
 /**
@@ -54,12 +56,14 @@ export function ThemeSideNav({
   pageLinks = [],
   metrics = [],
   surveys = [],
+  themes,
 }: Props) {
   return (
     <RailStack>
       <ThemeGroupNavigation
         currentThemeKey={currentThemeKey}
         areaContext={areaContext}
+        themes={themes}
       />
 
       {(showScope || showRegion) && (
@@ -146,9 +150,11 @@ export function ThemeSideNav({
 function ThemeGroupNavigation({
   currentThemeKey,
   areaContext,
-}: Pick<Props, 'currentThemeKey' | 'areaContext'>) {
+  themes,
+}: Pick<Props, 'currentThemeKey' | 'areaContext' | 'themes'>) {
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
+    themes,
     areaContext,
     hasProvider ? selectedPrefectureCode : undefined
   );

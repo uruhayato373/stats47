@@ -5,10 +5,13 @@ import {
   waitFor,
   within,
 } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
+import { THEME_SWITCHER_THEMES } from '../../config/theme-switcher-themes';
 import { ThemePrefectureProvider } from '../ThemePrefectureContext';
 import { ThemeSideNav } from '../ThemeSideNav';
+
+vi.mock('server-only', () => ({}));
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<ThemePrefectureProvider>{ui}</ThemePrefectureProvider>);
@@ -16,7 +19,7 @@ function renderWithProvider(ui: React.ReactElement) {
 
 describe('ThemeSideNav — テーマナビ', () => {
   it('デスクトップはグループ別リストを表示し、現在テーマを明示する', () => {
-    renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
+    renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
     const themeNav = screen.getByRole('navigation', {
       name: 'テーマを切り替える',
@@ -41,7 +44,7 @@ describe('ThemeSideNav — テーマナビ', () => {
 
   it('左レールから「このページ」を除き、全指標・出典調査を役割別に表示する', () => {
     renderWithProvider(
-      <ThemeSideNav
+      <ThemeSideNav themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
         metrics={[{ rankingKey: 'total-population', label: '総人口' }]}
         surveys={[{ id: 'population-census', name: '国勢調査' }]}
@@ -79,7 +82,7 @@ describe('ThemeSideNav — テーマナビ', () => {
 
   it('areaContextのテーマリンクは都道府県文脈を維持し、Type Bを除外する', () => {
     render(
-      <ThemeSideNav
+      <ThemeSideNav themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
         areaContext={{ areaCode: '13000' }}
         showRegion={false}
@@ -98,7 +101,7 @@ describe('ThemeSideNav — テーマナビ', () => {
   });
 
   it('関連調査がなくても調査ハブへの導線を残す', () => {
-    render(<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />);
+    render(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" showRegion={false} />);
 
     expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
       'href',
@@ -109,7 +112,7 @@ describe('ThemeSideNav — テーマナビ', () => {
 
 describe('ThemeSideNav — 地域ブロック', () => {
   it('比較単位と表示する都道府県を分けて表示する', () => {
-    renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
+    renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
     expect(
       screen.getByRole('navigation', { name: '統計の地域単位' })
     ).toHaveTextContent('比較単位');
@@ -126,7 +129,7 @@ describe('ThemeSideNav — 地域ブロック', () => {
   });
 
   it('showRegion=falseでは都道府県選択だけを隠し、比較単位は残す', () => {
-    render(<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />);
+    render(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" showRegion={false} />);
     expect(screen.queryByLabelText('都道府県を選択')).toBeNull();
     expect(
       screen.getByRole('navigation', { name: '統計の地域単位' })
@@ -138,7 +141,7 @@ describe('ThemeSideNav — 地域ブロック', () => {
 
   it('showScope=falseでは比較単位だけを隠し、都道府県選択は残す', () => {
     renderWithProvider(
-      <ThemeSideNav
+      <ThemeSideNav themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
         showScope={false}
       />
@@ -150,7 +153,7 @@ describe('ThemeSideNav — 地域ブロック', () => {
   });
 
   it('県を選ぶと47都道府県へ戻す操作を表示する', async () => {
-    renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
+    renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
     fireEvent.click(screen.getByLabelText('都道府県を選択'));
     fireEvent.click(await screen.findByRole('option', { name: '大阪府' }));

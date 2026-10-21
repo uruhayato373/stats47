@@ -8,11 +8,14 @@ import {
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ALL_THEMES } from '../../config/all-themes';
+import { THEME_SWITCHER_THEMES } from '../../config/theme-switcher-themes';
 import { ThemePrefectureProvider } from '../ThemePrefectureContext';
 import { ThemeSwitcher, buildThemeSwitcherOptions } from '../ThemeSwitcher';
 
 // router.push を安定した spy にするため next/navigation をこのファイルで上書きする
 // (test.setup.tsx のグローバルモックは呼び出しごとに新しい push を返すため assert できない)。
+vi.mock('server-only', () => ({}));
+
 const { pushMock } = vi.hoisted(() => ({ pushMock: vi.fn() }));
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -35,7 +38,7 @@ beforeEach(() => {
 
 describe('buildThemeSwitcherOptions', () => {
   it('全国 (areaContext なし): 全テーマを /themes/{key} で返す', () => {
-    const opts = buildThemeSwitcherOptions();
+    const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES);
     expect(opts.length).toBe(ALL_THEMES.length);
     for (const o of opts) {
       expect(o.href).toBe(`/themes/${o.themeKey}`);
@@ -44,14 +47,14 @@ describe('buildThemeSwitcherOptions', () => {
   });
 
   it('areaContext: 都道府県文脈を維持し /areas/{code}/{key} を返す', () => {
-    const opts = buildThemeSwitcherOptions({ areaCode: '13000' });
+    const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, { areaCode: '13000' });
     for (const o of opts) {
       expect(o.href).toBe(`/areas/13000/${o.themeKey}`);
     }
   });
 
   it('areaContext: 都道府県ページで 410 になる Type B テーマを除外する', () => {
-    const keys = buildThemeSwitcherOptions({ areaCode: '13000' }).map(
+    const keys = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, { areaCode: '13000' }).map(
       (o) => o.themeKey
     );
     for (const b of TYPE_B) {
@@ -63,14 +66,14 @@ describe('buildThemeSwitcherOptions', () => {
   });
 
   it('通常テーマ間のリンクへ選択中の都道府県を引き継ぐ', () => {
-    const opts = buildThemeSwitcherOptions(undefined, '28000');
+    const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, undefined, '28000');
     expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe(
       '/themes/tourism?pref=28000'
     );
   });
 
   it('47都道府県の明示選択もテーマ間リンクへ引き継ぐ', () => {
-    const opts = buildThemeSwitcherOptions(undefined, null);
+    const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, undefined, null);
     expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe(
       '/themes/tourism?pref=all'
     );
@@ -79,12 +82,12 @@ describe('buildThemeSwitcherOptions', () => {
 
 describe('ThemeSwitcher', () => {
   it('aria-label で「テーマを切り替える」目的が分かる (アクセシブル)', () => {
-    render(<ThemeSwitcher currentThemeKey="population-dynamics" />);
+    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
     expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
   });
 
   it('compact 表示では短いラベルを使う', () => {
-    render(<ThemeSwitcher currentThemeKey="population-dynamics" compact />);
+    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" compact />);
     expect(screen.getByText('テーマ')).toBeInTheDocument();
     expect(screen.queryByText('テーマを切り替える')).toBeNull();
     expect(screen.getByRole('link', { name: 'テーマ一覧' })).toHaveAttribute(
@@ -95,13 +98,13 @@ describe('ThemeSwitcher', () => {
 
   it('現在のテーマがセレクターの現在値として表示される', () => {
     const current = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
-    render(<ThemeSwitcher currentThemeKey="tourism" />);
+    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="tourism" />);
     // Radix Select のトリガーは選択中アイテムのテキスト (= 現テーマ名) を表示する
     expect(screen.getByRole('combobox')).toHaveTextContent(current.title);
   });
 
   it('別テーマを選択すると /themes/{key} へ遷移する (全国)', async () => {
-    render(<ThemeSwitcher currentThemeKey="population-dynamics" />);
+    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
 
     fireEvent.click(screen.getByRole('combobox'));
@@ -116,7 +119,7 @@ describe('ThemeSwitcher', () => {
   it('Provider 配下では選択中の都道府県を保って別テーマへ遷移する', async () => {
     render(
       <ThemePrefectureProvider initialAreaCode="28000" initialAreaName="兵庫県">
-        <ThemeSwitcher currentThemeKey="population-dynamics" />
+        <ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />
       </ThemePrefectureProvider>
     );
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
@@ -131,7 +134,7 @@ describe('ThemeSwitcher', () => {
 
   it('areaContext: 別テーマを選択すると都道府県文脈を維持した /areas/{code}/{key} へ遷移する', async () => {
     render(
-      <ThemeSwitcher
+      <ThemeSwitcher themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
         areaContext={{ areaCode: '13000' }}
       />

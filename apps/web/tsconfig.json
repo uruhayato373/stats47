@@ -118,7 +118,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/types/jsdom.d.ts",
-    "src/types/vitest.d.ts"
+    "src/types/vitest.d.ts",
+    ".local/next-release/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
