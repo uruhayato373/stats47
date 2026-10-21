@@ -122,7 +122,8 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                   {v.year}
                   {m.compareNationalAvg && (
                     <>
-                      {" ・ 全国平均 "}
+                      {/* 単純平均を「全国平均」と書かない (率の指標では全国の値と違う。AREA-NATIONAL-AVG-SIMPLE-MEAN-01) */}
+                      {v.nationalAvgKind === "national" ? " ・ 全国 " : " ・ 47都道府県平均 "}
                       {formatValue(v.nationalAvg)}
                       {formatUnitForDisplay(v.unit)}
                     </>

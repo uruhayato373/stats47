@@ -47,8 +47,13 @@ export interface DatabookMetricValue {
   year: string;
   /** 単位 */
   unit: string;
-  /** 全国平均 (全 47 県の非 null 値の平均)。compareNationalAvg 指標の対比用 */
+  /** 全国との対比値 (compareNationalAvg 指標用)。何の値かは nationalAvgKind が示す */
   nationalAvg: number;
+  /**
+   * national = 同じ年の公式の全国値 / prefecture-mean = 47 都道府県の単純平均。
+   * 欠けている (この欄の追加前に作った) 版は単純平均として扱う。
+   */
+  nationalAvgKind?: "national" | "prefecture-mean";
   /** 県の「特徴」の候補メタ。schemaVersion 2 以降・候補指標のみ */
   highlight?: DatabookHighlightMeta;
 }
@@ -115,6 +120,9 @@ export function parseAreaDatabookSnapshot(value: unknown): AreaDatabookSnapshot 
     }
     if (typeof metric.year !== "string" || typeof metric.unit !== "string") {
       throw new Error(`metrics.${key} year and unit must be strings`);
+    }
+    if (metric.nationalAvgKind !== undefined && metric.nationalAvgKind !== "national" && metric.nationalAvgKind !== "prefecture-mean") {
+      throw new Error(`metrics.${key}.nationalAvgKind is invalid`);
     }
     if (metric.highlight !== undefined) parseHighlightMeta(key, metric.highlight);
     return [key, metric as unknown as DatabookMetricValue];

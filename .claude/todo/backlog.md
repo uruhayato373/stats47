@@ -4529,6 +4529,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: compareNationalAvg を付けた指標はテンプレートに 2 つ (1人当たり県民所得・有効求人倍率) で、どちらも単純平均が全国値と違っていた (2022 年度の有効求人倍率は全国 1.31・単純平均 1.39、2021 年度の 1 人当たり県民所得は全国 3,330 千円・単純平均 2,996 千円。R2 の `app/japan/<key>/series.json` と `app/stats` から実測)。exporter が同じ年の公式の全国値を使い (`national-comparison.ts` の `resolveNationalComparison`。都道府県の合計から作った全国値は平均ではないので使わない)、無ければ単純平均を `nationalAvgKind: "prefecture-mean"` として焼き、画面 (`RankedKpiGrid`) は「全国」/「47都道府県平均」と書き分ける。テスト 3 件、型検査 0、area-databook-standards.md の記述も更新。R2 の databook.json は main へ入ったあとの再生成で切り替わる (それまでは旧版で、欄が無いので「47都道府県平均」と表示される)。
 - **観測 (2026-10-09・反証レビュー)**: `packages/area-profile/src/exporters/area-databook-snapshot.ts` 80-82 行は nationalAvg を 47 県の単純平均で出す。
   物価地域差指数 (全国=100) に compareNationalAvg を付けると「全国平均 99.0」(住居は 93.1) と出る。今回の採用分では外したが、
   既存の compareNationalAvg 付き指標にも、全国値が県の平均と違う率の指標が含まれていないかは未確認。

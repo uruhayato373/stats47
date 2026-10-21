@@ -45,7 +45,7 @@ source bundle manifestは
 | **SSOT: 編集** | `packages/data-configs/src/area-databook/editorial/<code>.ts` + `editorial/index.ts` (`AREA_EDITORIALS`) | 県別の特産品・県シンボル。area-curator が単一オーナー |
 | 型 | `packages/data-configs/src/area-databook/types.ts` | `AreaDatabookTemplate` / `DatabookSection` / `DatabookBlock` / `AreaEditorial` 等 |
 | **生成物** (手編集禁止) | `apps/web/scripts/data/page-components/area/<code>.json` | chart ブロックのみを PageComponent 行に codegen (47 県同一・byte 一致) |
-| **派生** (焼き込み) | R2 `app/areas/<code>/databook.json` | ranked-kpi の値+全国順位+全国平均+年次、農業 top10。exporter が R2 values.json から生成 |
+| **派生** (焼き込み) | R2 `app/areas/<code>/databook.json` | ranked-kpi の値+全国順位+全国との対比値+年次、農業 top10。exporter が R2 values.json から生成。対比値は同じ年の公式の全国値 (`app/japan/<key>/series.json`) を使い、無ければ 47 都道府県の単純平均を「47都道府県平均」と表示する (`nationalAvgKind`) |
 | 特産品イラスト | R2 `app/areas/<code>/specialty/<slug>.webp` | **Codex セッション (OpenAI 画像) で生成** (2026-07-18 に Gemini から変更・§5)。欠損時はイニシャル代替タイルに degrade |
 
 ```
