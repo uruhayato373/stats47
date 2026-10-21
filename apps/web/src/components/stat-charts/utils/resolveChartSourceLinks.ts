@@ -1,5 +1,5 @@
 import { METRICS_REGISTRY } from '@stats47/data-configs';
-import { resolveSurveyTaxonomy } from '@stats47/ranking';
+import { resolveSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import type { ChartFooterLink } from '@/components/charts/ChartFooter';
 

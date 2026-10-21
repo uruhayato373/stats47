@@ -1,4 +1,5 @@
-import { parseRecipe, type EstatQueryParams, type MetricRecipe } from "@stats47/data-configs";
+import { parseRecipe } from "@stats47/data-configs/recipe";
+import type { EstatQueryParams, MetricRecipe } from "@stats47/data-configs";
 import type { RankingItem } from "../types";
 type SourceConfigLike = RankingItem["sourceConfig"];
 /** The compiled recipe is the only source of query coordinates and declared operations. */

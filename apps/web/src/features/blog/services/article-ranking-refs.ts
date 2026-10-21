@@ -2,7 +2,7 @@ import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
-import { extractBlogChartSourceReferences } from "@stats47/ranking";
+import { extractBlogChartSourceReferences } from "@stats47/ranking/survey";
 
 import { blogR2Key } from "../r2-key";
 

@@ -615,10 +615,19 @@ updated: 2026-10-19
 ### [DEV-R2-SNAPSHOT-TIMEOUT-01] ローカルの dev:web で R2 snapshot の読み込みが 10 秒で打ち切られ、ページ表示に数分かかる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-17] [領域:サイト]
 
+- **2026-10-21 経過**: (続き) ランキング詳細のモジュールが多い原因を webpack のモジュール一覧で実測した。ブラウザ向けバンドルに指標定義 2,648 件・data-configs 155・テーマ定義 56 が入っていた。経路は、クライアント部品 → `@stats47/ranking` の入口 → builder・調査分類 → data-configs の入口 → registry。ranking の入口から builder と調査分類を外し (builder は `@stats47/ranking/server`、調査分類は新しい `@stats47/ranking/survey`)、ranking 内の 4 ファイルは data-configs の新しい小さな公開口 (`recipe`・`provenance`・`source-name-to-survey`) から読むようにした。web の 6 ファイルの import を付け替えた。本番は ranking の `sideEffects: false` で使われない再 export が落ちるので、効くのは主に開発ビルド。逆戻りはテスト `packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts` が止める (入口へ再 export を戻すと落ちることを確認)。**実測 (8GB の Mac)**: ランキング詳細は 20,133 → 14,297 モジュール、ブラウザ向けの指標定義は 0 件。コンパイルキャッシュありで初回 40〜65 秒 → 17 秒、2 回目 1 秒。キャッシュなしの完全な初回は 222 秒 → 63.5 秒 (コンパイル 46.9 秒)。**残り**: キャッシュなしの初回は 30 秒を超える。県ページは 20,399 モジュールのままで、開いた後にメモリ再起動が起きる → `DEV-HEAVY-CLIENT-GRAPH-01`。
 - **2026-10-21 経過**: 原因は R2 ではなく next dev の初回コンパイルとメモリだった。① 公開 URL を curl で直接叩くと app/affiliate-ads/all.json (254KB) は 0.1 秒、アプリと同じ経路 (S3 API) で単発 0.14 秒・30 本同時 0.2 秒で、ネットワークは遅くない。② Mac (8GB) で dev:web を起動すると /ranking/[rankingKey] の初回コンパイルが 171.5 秒 (20,133 モジュール。トップは約 1 万) かかり、その間に blog snapshot の読み込み 3 件が 10 秒の上限で SnapshotTimeoutError になった (R2 は返せているのに、コンパイル中で完了処理が遅れる)。コンパイル直後に Next が「メモリ上限に近い」として自分で再起動し、コンパイル結果を失っていた。Next は上限が未指定なら搭載メモリの半分 (8GB で 4096MB) を自分で付け、使用量が 8 割を超えると再起動する (node_modules/next/dist/server/lib/start-server.js・cli/next-dev.js で確認)。**直したこと**: snapshot の取得上限を NODE_ENV=development のときだけ 60 秒にした (本番は 10 秒のまま。テスト 2 件、開発側の変更を戻すと落ちることを確認)。**実測 (ディスクのコンパイルキャッシュあり)**: ランキング詳細の初回表示は 40 秒 (コンパイル 27.8 秒)、2 回目は 2 秒。県ページは初回 35 秒。2 ページ目のコンパイル後にメモリ再起動が再発した。**残り**: 初回 30 秒以内の完了条件は未達。ランキング詳細・県ページが約 2 万モジュールになる原因の一つは指標定義を全部 import する registry (2,644 ファイル) で、ホームは切り離し済み (featured.server.ts のコメント)。ランキング詳細から全件 registry を外せるかが次の一手。
 - **観測 (2026-10-17・Mac)**: `npm run dev:web` で `app/affiliate-ads/all.json` の読み込みが `SnapshotTimeoutError: ... timed out after 10000ms` を繰り返し、`GET /` が 539,984ms、`/ranking/total-population` は 540 秒で応答なし。同じサーバーで `/api/ranking/total-population/download?format=kml` は 5.6 秒で返った。ブログの商品導線とダウンロード部品の画面確認がこのため 2 回止まった (部品は描画テストで代替)。
 - **次**: ① 同じ時刻に R2 の公開 URL を curl で直接叩き、ネットワークの遅さかアプリ側の多重読み込みかを切り分ける ② ログでは同じ key の読み込みが 1 秒に十数回並んでいるので、ページ内での重複取得 (リクエストごとの dedupe の有無) を確かめる。
 - **完了条件**: 原因を特定し、ランキングページが localhost で 30 秒以内に表示される。
+
+
+### [DEV-HEAVY-CLIENT-GRAPH-01] テーマ・Geo・県ページのブラウザ向けに、全指標 registry と GIS 処理ライブラリが入る経路を断つ
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
+
+- **実測 (2026-10-21・8GB の Mac・dev:web)**: 県ページ `/areas/[areaCode]` のコンパイルは 20,399 モジュールで、開いた後に Next が「メモリ上限に近い」として再起動する。TypeScript のモジュール解決で値の import をたどると、registry (指標定義 2,643 件) に届くクライアント部品が 37 件残る。経路はほぼすべて `data-configs/src/theme-catalog/index.ts` → `stat-series-ref.ts` (`getMetricConfig` で指標の実在を確かめる) で、テーマ・Geo の部品が型や出典定数を読むだけで入る。ブラウザで動く `theme-chart-result.ts` も `parseStatSeriesRefs` 経由で registry を呼ぶ。県ページはさらに unzipper・shapefile・proj4・topojson-server (GIS の原典処理用) に届く。
+- **次**: ① 本番ビルドでテーマページの初回 JS に registry が入っているかを確かめる (data-configs は `sideEffects` を宣言していないので、開発ビルドだけの問題とは限らない) ② `stat-series-ref` の検証を registry に依存しない形にするか、検証を別の公開口へ分ける ③ 県ページで GIS 処理ライブラリを読む経路を特定して断つ。ランキング詳細と同じく `client-entry-registry-boundary.test.ts` 型の境界テストで固定する。
+- **完了条件**: テーマ・県ページのクライアント部品から registry と GIS 処理ライブラリに届く経路が 0 件で、県ページを開いた後にメモリ再起動が起きない。
 
 ### [PRODUCT-FUNNEL-DEPLOY-01] ブログ・ダウンロードの商品導線と地図用ダウンロードを本番に出し、4 週のクリックを測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]

@@ -9,20 +9,10 @@
  * `resolveSourceProvenance` / source-name 辞書) を使い、別の対応表を持たない。
  * 正典: `.claude/rules/survey-linkage-standards.md` §2
  */
-import {
-  buildEstatTableUrl,
-  isSsdsStatsDataId,
-  mergeDataSourceEntries,
-  resolveAttribution,
-  resolveProvenanceByParams,
-  resolveSourceProvenance,
-  resolveSurveyIdBySourceName,
-  type DataSourceEntry,
-  type MetricConfig,
-  type MetricRegistry,
-  type ProvenanceSurvey,
-  type SourceAttribution,
-} from '@stats47/data-configs';
+import { buildEstatTableUrl, mergeDataSourceEntries } from '@stats47/data-configs/data-source';
+import { isSsdsStatsDataId, resolveAttribution, resolveProvenanceByParams, resolveSourceProvenance } from '@stats47/data-configs/provenance';
+import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
+import type { DataSourceEntry, MetricConfig, MetricRegistry, ProvenanceSurvey, SourceAttribution } from '@stats47/data-configs';
 
 import surveysMaster from '../data/surveys.json';
 import type { SourceProvenance } from '../types/ranking-item';

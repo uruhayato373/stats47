@@ -7,12 +7,9 @@
  *
  * 正典: `.claude/rules/survey-linkage-standards.md`
  */
-import {
-  resolveProvenanceByParams,
-  resolveSurveyIdBySourceName,
-  type MetricRegistry,
-  type ProvenanceSurvey,
-} from '@stats47/data-configs';
+import { resolveProvenanceByParams } from '@stats47/data-configs/provenance';
+import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
+import type { MetricRegistry, ProvenanceSurvey } from '@stats47/data-configs';
 import {
   collectChartDependencies,
   type ThemeCatalog,

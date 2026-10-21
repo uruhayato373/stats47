@@ -9,12 +9,12 @@ import { notFound } from 'next/navigation';
 
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
-import { resolveThemeSurveyTaxonomy } from '@stats47/ranking';
 import {
   readRankingItemsBySurveyFromR2,
   readRankingValuesFromR2,
   readSurveyByIdFromR2,
 } from '@stats47/ranking/server';
+import { resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 import { isOk } from '@stats47/types';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';

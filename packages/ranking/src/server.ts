@@ -16,3 +16,10 @@ export * from './services/get-ranking-download-series';
 export * from './types';
 export type { RankingItemWithTags } from './types/ranking-item-with-tags';
 export * from './utils';
+export {
+  buildRankingItemFromMetric,
+  resolveSurveyLinkage,
+  yearNameOf,
+  type BuildContext,
+  type ValuesContext,
+} from './builders/build-ranking-item-from-metric';

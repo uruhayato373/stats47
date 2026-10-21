@@ -12,10 +12,7 @@ import {
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import {
-  getSurveyTaxonomyEntries,
-  resolveThemeSurveyTaxonomy,
-} from '@stats47/ranking';
+import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';

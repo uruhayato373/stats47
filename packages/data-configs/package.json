@@ -20,6 +20,21 @@
       "import": "./src/provenance/data-source-entry.ts",
       "require": "./src/provenance/data-source-entry.ts"
     },
+    "./recipe": {
+      "types": "./src/recipe.ts",
+      "import": "./src/recipe.ts",
+      "require": "./src/recipe.ts"
+    },
+    "./provenance": {
+      "types": "./src/provenance/resolve-metric-provenance.ts",
+      "import": "./src/provenance/resolve-metric-provenance.ts",
+      "require": "./src/provenance/resolve-metric-provenance.ts"
+    },
+    "./source-name-to-survey": {
+      "types": "./src/ssds/source-name-to-survey.ts",
+      "import": "./src/ssds/source-name-to-survey.ts",
+      "require": "./src/ssds/source-name-to-survey.ts"
+    },
     "./topics": {
       "types": "./src/topics/index.ts",
       "import": "./src/topics/index.ts",

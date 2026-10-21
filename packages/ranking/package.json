@@ -21,6 +21,11 @@
       "import": "./src/server.ts",
       "require": "./src/server.ts"
     },
+    "./survey": {
+      "types": "./src/survey/index.ts",
+      "import": "./src/survey/index.ts",
+      "require": "./src/survey/index.ts"
+    },
     "./utils": {
       "types": "./src/utils/index.ts",
       "import": "./src/utils/index.ts",
