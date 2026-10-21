@@ -102,6 +102,22 @@ jobs:
           { echo '### アフィリエイトportfolioの鮮度'; echo '```'; cat /tmp/affiliate-portfolio-freshness.txt; echo '```'; } \
             >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 🔁 待機中に取り消された R2 書き込みの手動起動
+        id: superseded
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -o pipefail
+          # concurrency r2-write の待機は 1 本だけで、後発がジョブ 0 件のまま取り消す (CI-R2-WRITE-PENDING-REPLACED-01)
+          if node .claude/scripts/ci/audit-superseded-dispatches.mjs | tee /tmp/superseded-dispatches.txt; then
+            echo "clean=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "clean=false" >> "$GITHUB_OUTPUT"
+          fi
+          { echo '### 取り消された手動起動'; echo '```'; cat /tmp/superseded-dispatches.txt; echo '```'; } \
+            >> "$GITHUB_STEP_SUMMARY"
+
       - name: 認証付き計測の停止・古い成功を検出
         id: authenticated
         if: always() # earlier audit/artifact failures must not disable this independent check
@@ -127,7 +143,7 @@ jobs:
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
       - name: 🚨 連続失敗を Issue にする
-        if: always() && (steps.audit.outputs.healthy != 'true' || steps.freshness.outputs.fresh != 'true' || steps.affiliate_portfolio.outputs.fresh != 'true' || steps.authenticated.outputs.fresh != 'true')
+        if: always() && (steps.audit.outputs.healthy != 'true' || steps.freshness.outputs.fresh != 'true' || steps.affiliate_portfolio.outputs.fresh != 'true' || steps.authenticated.outputs.fresh != 'true' || steps.superseded.outputs.clean != 'true')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -152,6 +168,10 @@ jobs:
             if [ -f /tmp/authenticated-health.txt ]; then cat /tmp/authenticated-health.txt; else echo 'authenticated measurement audit did not complete'; fi
             echo '```'
             echo
+            echo '```'
+            if [ -f /tmp/superseded-dispatches.txt ]; then cat /tmp/superseded-dispatches.txt; else echo 'superseded dispatch audit did not complete'; fi
+            echo '```'
+            echo
             echo "## 見かた"
             echo "- **連続失敗 N 回** は直近の schedule run を新しい順に数えたもの (短時間の cancelled は無視)"
             echo "- **最終成功から N 日** が大きいほど、その間ずっと配信データや生成物が更新されていない"
@@ -173,7 +193,7 @@ jobs:
           exit 1
 
       - name: ✅ 復旧したら Issue を閉じる
-        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true' && steps.authenticated.outputs.fresh == 'true'
+        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true' && steps.authenticated.outputs.fresh == 'true' && steps.superseded.outputs.clean == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

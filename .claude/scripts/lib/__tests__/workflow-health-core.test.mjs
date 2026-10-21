@@ -389,3 +389,19 @@ test('R2鮮度監査がaffiliate GA4 latestを公開read pathから監視する'
   assert.ok(target, 'affiliate GA4 latestがR2鮮度監査から漏れている');
   assert.equal(target.maxAgeDays, 10);
 });
+
+test('findSupersededDispatches: ジョブ 0 件で取り消された手動起動を拾い、後の成功・ジョブあり・窓の外・schedule は拾わない', async () => {
+  const { findSupersededDispatches } = await import('../workflow-health-core.mjs');
+  const d = (id, conclusion, createdAt, jobCount, event = 'workflow_dispatch') => ({ id, event, conclusion, createdAt, jobCount });
+  const found = findSupersededDispatches(
+    [
+      { workflow: 'sync-snapshots.yml', runs: [d(1, 'cancelled', '2026-08-12T10:00:00Z', 0)] },
+      { workflow: 'generate-ogp-images.yml', runs: [d(2, 'success', '2026-08-12T12:00:00Z', null), d(3, 'cancelled', '2026-08-12T10:00:00Z', 0)] },
+      { workflow: 'data-refresh.yml', runs: [d(4, 'cancelled', '2026-08-12T10:00:00Z', 3)] },
+      { workflow: 'publish-blog.yml', runs: [d(5, 'cancelled', '2026-08-09T10:00:00Z', 0)] },
+      { workflow: 'r2-isr-gc.yml', runs: [d(6, 'cancelled', '2026-08-12T10:00:00Z', 0, 'schedule')] },
+    ],
+    { nowMs: NOW },
+  );
+  assert.deepEqual(found, [{ workflow: 'sync-snapshots.yml', runId: 1, createdAt: '2026-08-12T10:00:00Z' }]);
+});

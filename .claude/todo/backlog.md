@@ -4483,6 +4483,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 起動側の手順を全部直す代わりに、必ず気づく側を選んだ (起動は skill・agent・proxy に散っていて共通の入口が無いため)。`workflow-health-core.mjs` に `findSupersededDispatches` (r2-write の手動起動で、`cancelled` かつジョブ 0 件、直近 48 時間、後に同じ workflow の手動起動の成功が無いもの) を足し、`audit-superseded-dispatches.mjs` が `group: r2-write` の 18 workflow を見る。`workflow-health-daily.yml` の新しい step が結果を cron ヘルスの Issue (`ci-health-alert`) に載せ、残っている間は Issue を閉じない。テスト 1 件 (拾う・後の成功・ジョブあり・窓の外・schedule)。実データで直近 400 時間に当てると、10-08 の `generate-ogp-images` run 37738579394 (ranking-cards) を検出した。10-09 の sync-snapshots の分は後の成功で取り戻し済みとして出ない。自動の再起動はしない (取り消された run の入力を API から取れないため)。main へ入ってから効く。
 - **事象 (2026-10-08〜09 に 2 回)**: `concurrency: group: r2-write` (`cancel-in-progress: false`) の workflow は、実行中 1 本のほかに待機を 1 本しか持てず、
   後から来た run が待機中の run を取り消す。手動で起動した run がジョブ 0 件で cancelled になった: generate-ogp-images の ranking-cards
   (run 37738579394、後発は他セッションの sync-snapshots)、sync-snapshots ranking-items (run 37770625093、後発は blog-auto-publish)。
