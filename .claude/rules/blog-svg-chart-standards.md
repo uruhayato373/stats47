@@ -424,6 +424,20 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 
 ---
 
+## 6-5. 手順解説記事のサンプルコードで描いた図 (2026-10-21)
+
+Claude Code 連載のような手順解説記事は、記事のサンプルコード (D3・サンキー等) で描いた図を載せることがある。
+svg-builder の対象外なので §6 のカタログ別 gate には掛けない (source.json の kind は `derived`)。代わりに次を守る。
+
+- **描画スクリプトを repo に置く。** `.claude/scripts/blog/article-renderers/<slug>/<base>.ts` に、data JSON を入力に SVG を書き出すスクリプトを置き、
+  source.json の `restore` にその実行コマンドを書く。作業用の一時スクリプトだけで描かない (作り直せない図になる)。
+- **入力の data JSON と 3 点セットは他の図と同じ** (`blog-data-schema.md` §1.5)。図の値は data JSON にあるものだけを描く。
+- **コード例の `<svg>` はインライン svg に数えない。** `quality-gate.mjs` はコードブロックとインラインコードを除いて判定する。
+  検出を避けるために `<svg{...props}>` のような不自然な書き方をしない。
+
+実例: cc-estat-04-aging-heatmap の 2 枚は一時スクリプトで描かれ、スクリプトが残っていない (2026-10-07)。
+作り直すときは上の置き場に描画スクリプトを書いてから描く (BLOG-TUTORIAL-GATE-GAPS-01)。
+
 ## 7. 禁止パターン
 
 ```typescript

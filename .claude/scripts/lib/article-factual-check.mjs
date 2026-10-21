@@ -611,6 +611,29 @@ function mentionsForeignMetric(lead, knownLabels) {
   });
 }
 
+const APPROX_BEFORE_RE = /(約|およそ|おおよそ|ほぼ|概ね|おおむね)\s*$/;
+
+/**
+ * 本文の数値が言い切っている精度から許容幅を返す (最後の 0 でない桁の半分 × 桁の接頭辞)。
+ * 例: 「4,790」→ 5 / 「5,000」→ 500 / 「3.8」→ 0.05 / 「468万」→ 5,000。
+ * 複数のスケールを跨ぐ表記 (「4万5,897」) は最後の部分の精度を使う。数値が読めなければ null。
+ */
+export function claimTolerance(numeralRaw) {
+  const parts = [...String(numeralRaw).matchAll(/([\d,]+(?:\.\d+)?)\s*(百万|兆|億|万|千)?/g)];
+  const last = parts[parts.length - 1];
+  if (!last) return null;
+  const digits = last[1].replace(/,/g, "");
+  const scale = last[2] ? JA_SCALE[last[2]] ?? 1 : 1;
+  const [intPart, frac = ""] = digits.split(".");
+  let unit;
+  if (frac.length > 0) unit = 10 ** -frac.length;
+  else {
+    const trailingZeros = intPart.length - intPart.replace(/0+$/, "").length;
+    unit = intPart.replace(/0+$/, "") === "" ? 1 : 10 ** trailingZeros;
+  }
+  return (unit / 2) * scale;
+}
+
 export function checkValueClaims(content, gt) {
   const warnings = [];
   if (Object.keys(gt).length === 0) return warnings;
@@ -737,9 +760,14 @@ export function checkValueClaims(content, gt) {
     });
     if (comparable.length === 0) continue; // 安全側: 比較できないなら skip
 
+    // 許容幅は本文が書いた精度から決める。「4,790戸」は十の位まで言い切っているので ±5、「468万人」は ±0.5万。
+    // 「約」などで丸めを断っているときと、精度が読めない書き方は従来の ±5% (BLOG-TUTORIAL-GATE-GAPS-01:
+    // ±5% だと 4,970戸 → 4,790戸 の書き誤りが一致扱いになっていた)
+    const tolerance = APPROX_BEFORE_RE.test(body.slice(Math.max(0, nm.index - 8), nm.index)) ? null : claimTolerance(numeralRaw);
     const matched = comparable.some((f) => {
       const base = factBaseValue(f);
       if (base === null || base === 0) return base === claimBase;
+      if (tolerance !== null) return Math.abs(claimBase - base) <= tolerance + Math.abs(base) * 1e-9;
       const ratio = claimBase / base;
       return ratio >= 0.95 && ratio <= 1.05; // ±5%
     });
@@ -755,7 +783,7 @@ export function checkValueClaims(content, gt) {
       const base = factBaseValue(f);
       if (base === null || base === 0) continue;
       const r = claimBase > base ? claimBase / base : base / claimBase;
-      if (r >= MISMATCH_RATIO && (grossest === null || r > grossest.r)) {
+      if ((tolerance !== null || r >= MISMATCH_RATIO) && (grossest === null || r > grossest.r)) {
         grossest = { r, f };
       }
     }

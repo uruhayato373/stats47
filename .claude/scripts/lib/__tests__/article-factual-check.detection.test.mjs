@@ -209,3 +209,31 @@ describe("別指標・別年・別地名の数値を主指標と照合しない"
     });
   });
 });
+
+// BLOG-TUTORIAL-GATE-GAPS-01: ±5% では「4,970戸 → 4,790戸」の書き誤りが一致扱いだった
+describe("本文が書いた精度で照合する", () => {
+  const FARM_ROWS = [{ areaName: "北海道", rank: 1, value: 4970, label: "乳用牛飼養戸数", unit: "戸" }];
+
+  it("★言い切った桁が違えば 5% 未満の差でも検出する", () => {
+    withGroundTruth(FARM_ROWS, (gt) => {
+      assert.ok(checkValueClaims("北海道の乳用牛飼養戸数は4,790戸です。", gt).length > 0, "3.6% の書き誤りを見逃している");
+    });
+  });
+
+  it("丸めた書き方 (5,000戸・約4,900戸) と正しい値は止めない", () => {
+    withGroundTruth(FARM_ROWS, (gt) => {
+      for (const body of ["北海道の乳用牛飼養戸数は4,970戸です。", "北海道は5,000戸で1位です。", "北海道は約4,900戸で1位です。"]) {
+        assert.equal(checkValueClaims(body, gt).length, 0, `誤検出: ${body}`);
+      }
+    });
+  });
+
+  it("許容幅は最後の 0 でない桁の半分 × 桁の接頭辞", async () => {
+    const { claimTolerance } = await import("../article-factual-check.mjs");
+    assert.equal(claimTolerance("4,790"), 5);
+    assert.equal(claimTolerance("5,000"), 500);
+    assert.equal(claimTolerance("3.8"), 0.05);
+    assert.equal(claimTolerance("468万"), 5000);
+    assert.equal(claimTolerance("4万5,897"), 0.5);
+  });
+});

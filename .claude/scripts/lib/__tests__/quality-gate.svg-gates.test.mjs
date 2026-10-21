@@ -417,5 +417,19 @@ test('年次・単位・出典の括弧は paren gate を発火させない', (d
   );
 });
 
+test('コードブロック・インラインコードの <svg> はインライン svg と数えず、本文の <svg> は止める', (dirs) => {
+  const inCode = newBlockers((f) => {
+    f.article = f.article.replace(
+      '## 地域差の背景',
+      '## 地域差の背景\n\n```tsx\nreturn <svg width={640} height={400}>{bars}</svg>;\n```\n\n`<svg>` 要素の幅を決めます。'
+    );
+  }, dirs);
+  assert.ok(!inCode.some((x) => x.includes('インライン <svg>')), `誤検出: ${inCode.join(' / ')}`);
+  const inBody = newBlockers((f) => {
+    f.article = f.article.replace('## 地域差の背景', '## 地域差の背景\n\n<svg viewBox="0 0 10 10"></svg>');
+  }, dirs);
+  assert.ok(inBody.some((x) => x.includes('インライン <svg>')), `見逃し: ${inBody.join(' / ')}`);
+});
+
 console.log(`\n[quality-gate svg/paren gates test] pass=${pass} fail=${fail}`);
 process.exit(fail === 0 ? 0 : 1);

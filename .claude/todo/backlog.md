@@ -1975,6 +1975,7 @@ updated: 2026-10-19
 ### [BLOG-TUTORIAL-GATE-GAPS-01] 手順解説記事 (cc-estat 連載) で quality-gate が誤って数える・照合できない 3 か所を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
 
+- **2026-10-21 経過**: ① `quality-gate.mjs` のインライン svg 判定はコードブロックとインラインコードを除くようにした (テストで両方向を固定)。公開 616 記事を R2 から読んで旧・新の判定を比べ、どちらも 0 件 (誤検知も見逃しも増えない)。③ 注入を再現すると、値の一致判定が ±5% なので「4,970戸 → 4,790戸」(3.6%) が一致扱いだった。本文が書いた精度 (最後の 0 でない桁の半分 × 万などの接頭辞) で照合するようにし、「約」などで丸めを断っているときは従来の ±5% のまま (`claimTolerance`・テスト 3 件)。公開 608 記事の監査 (`audit-published-blog.mjs`) で VALUE_MISMATCH は 0 件のままで、日次の値ラチェットに影響しない。②は `blog-svg-chart-standards.md` §6-5 に描画スクリプトの置き場 (`.claude/scripts/blog/article-renderers/<slug>/`) と restore の書き方を足した。**残り**: cc-estat-04 の 2 枚を repo のスクリプトから作り直す (公開記事の図の差し替えになる)、④ 範囲の順位の誤検知、⑤ 県名の直後の派生値、⑥ タイトルの「N位」NG パターンの名前と判定のずれ、⑦「N位の県」と割合の検出漏れ。「倍」は単位として照合していない (比率の言い換えが多いため、別途判断)。
 - **事象 (2026-10-07 の書き直しで writer・critic が報告)**:
   1. `quality-gate.mjs` の inline SVG 検出 (`/<svg[\s>]/`) がコードブロックの中も数える。D3 の手順記事が、検出を避けるために `<svg{...rootProps}>` や `const Svg = "svg"` という不自然な書き方をしている (cc-estat-04-aging-heatmap・cc-estat-13-agri-sankey)。`generate-article-charts --validate` も同じ理由でエラーを 4 件出す
   2. 記事のサンプルコードを描画した図 (svg-builder の対象外・source の kind は derived) の扱いが `blog-svg-chart-standards.md` に無い。cc-estat-04 の 2 枚は作業用の一時スクリプトで描いたもので、描画スクリプトがリポジトリに無く、作り直せない。svg-builder にサンキー型が無いので、cc-estat-13 (サンキーの手順記事) も完成図を載せられず、積み上げ棒で代用している
