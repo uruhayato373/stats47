@@ -5040,6 +5040,20 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **次**: どの施策の判定が `sources` を持たないかを出力から特定し、engine がその経路でも `sources` (空配列でも) を書くようにする。テストが実データに依存して落ちる形でよいかも併せて決める。
 - **完了条件**: 上のテストが通り、判定の JSON はどの経路でも `sources` を持つ。
 
+### [NEXT16-MIGRATION-01] Next.js 15 のサポート期間が 2026-10-21 に切れた。16 へ上げてビルドの例外フラグを外す
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-21] [期日:2026-11-30] [領域:サイト]
+
+- **事象**: 2026-10-21 の本番デプロイ (run 39589689158) が Build の段で止まった。OpenNext 1.20.2 は Next.js の公開日表
+  (`node_modules/@opennextjs/aws/dist/build/helper.js` の `NEXT_RELEASE_DATES`、15 = 2024-10-21) から 2 年を過ぎた版を拒否し、
+  `Next.js version 15.5.27 is not supported by the Next.js team` で exit 1 にする。出典: https://nextjs.org/support-policy (2026-10-21 確認)。
+  同じ run の指標スナップショットの R2 反映は先に成功していた (旧版のアプリのまま主要 9 ページ 200 を確認)。
+- **応急処置 (2026-10-21)**: `apps/web/package.json` の `workers:build` に `--dangerouslyUseUnsupportedNextVersion` を付けた。
+  判定を警告にして続けるだけで、実行中の版 (15.5.27) は変わらない。Next.js 15 に今後の修正が出ない前提で扱う。
+- **次**: Next.js 16 の移行ガイド (https://nextjs.org/docs/app/guides/upgrading/version-16) を読み、`apps/web` の影響範囲
+  (middleware・設定・OpenNext の対応版) を洗ってから上げる。`.claude/rules/nextjs-ssg-preservation.md` の検査
+  (prerender の notFound 走査・スモークテスト) を通す。
+- **完了条件**: next 16.x で本番デプロイが通り、`workers:build` からフラグを外した版で再デプロイが通る。
+
 ### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
 
