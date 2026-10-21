@@ -531,6 +531,7 @@ updated: 2026-10-19
 ### [IG-CAPTION-DUP-GENERATOR-01] 相関カルーセルのキャプション生成が偏相関を 2 回書く。生成元を直し、10-28 予約の 1105 を差し替える
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [起票:2026-10-21] [期日:2026-10-27] [領域:SNS]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: ② オーナー承認 (同日チャット) のうえ、1105 の後半を「相関は因果関係を示しません。」だけにした文を R2 `stats47` の `sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/caption.txt` に書き、公開 URL の読み直しで一致・`r=0.72` が 1 回だけを確認した。書く前に R2 が案の作成時から変わっていないことも照合した。台帳 1105 の caption も store 経由で同じ文にした (承認・status・予約時刻 10-28 19:00 は不変)。未投稿の相関カルーセルに重複の残りは無い (1133・1134 は手書きで重複なし)。
 - **2026-10-21 ① 済**: キャプションの相関の段を `correlation-carousel-core.ts` の `buildCaptionCorrelationLines` (注意書きは固定文言 `CAUSATION_DISCLAIMER` だけ) に移し、`render-ig-carousel.ts` から呼ぶ。4 枚目の画像の `buildCautionLine` は不変。テスト 26/26 (旧文言に戻すと新テストが落ちることを確認)・`.claude/scripts` の tsc 0。残りは ② の 1105 (オーナー承認待ち)。
 - **事象 (2026-10-21 実測)**: `.claude/scripts/sns/render-ig-carousel.ts` の `buildCorrelationCaption` が「相関係数 r=…（人口の影響を除くと r=…）」の行と、`spec.caution` (`correlation-carousel-core.ts` が「相関は因果関係を示しません。人口の影響を除くと r=…」を作る。4 枚目の画像の文言) の両方をキャプションに入れる。未投稿の相関カルーセルでは 2026-10-28 19:00 の 1105 (`actual-income-worker-households-per-month--accommodation-consumption-expenditure`) が「人口の影響を除くと r=0.72」を 2 回含む (1133・1134 は手書きの caption で重複なし)。
 - **次**: ① キャプションでは `spec.caution` の代わりに「相関は因果関係を示しません。」を出す (4 枚目の画像の文言は変えない)。テストで偏相関の値がキャプションに 1 回だけ出ることを固定する ② 1105 の後半を同じ文にした案をオーナーに見せ、承認後に R2 の `caption.txt` と台帳を差し替える (予約済みの本文変更なので承認を挟む)。
