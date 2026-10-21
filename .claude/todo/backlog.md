@@ -4544,6 +4544,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 経過**: 昼夜間人口比率は R2 の全国値 5 年分がすべて 100 で全国時系列として意味を持たないので、`japan-catalog.ts` から外し `placement-decisions.json` に rejected で記録した (市区町村のカタログには残す)。content:sync・metrics:build-index で ID 索引と指標の使用先を作り直し、preflight:pr 通過。**残り**: 合計特殊出生率は e-Stat の単位が「‐」(単位なし) で、全国時系列の生成器はプレースホルダの単位を安全側で拒否する設計 (`build-japan-series.ts`)。直すには表示単位を決める必要がある (「人」のまま生成器に単位なしとの対応を宣言するか、単位を表示しない形にするか)。オーナーの判断待ち。R2 に残る `app/japan/day-time-population-ratio/series.json` はページから参照されなくなる (削除は R2 の保持ポリシーの手順で別に行う)。
 - **観測 (2026-10-09・ワークフローの検証)**: /japan に載っている `day-time-population-ratio` は全国では常に 100 (`app/japan/day-time-population-ratio/series.json`)。
   `data/metrics/total-fertility-rate.ts` の unit が「人」だが e-Stat の単位は「‐」で、/japan の生成器が単位不一致で拒否する。
 - **次**: 昼夜間人口比率を /japan から外すか判断する。合計特殊出生率の unit を出典の定義に合わせて直し、/japan に載せ直す (placement-decisions.ts の blocked 行を消す)。
