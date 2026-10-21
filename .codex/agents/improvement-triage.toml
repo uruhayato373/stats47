@@ -91,7 +91,7 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 書かれていない施策は `insufficient-target` で永久に `effect/pending` に留まるので、
 効果を自動確定させたい施策には本 agent が想定値を明記する (根拠 = 過去事例か計算式が行か詳細ログにあるときだけ)。
 
-GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス前方一致・複数可) と
+GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス完全一致・複数可。`/` で終えると配下すべて) と
 `デプロイ済 YYYY-MM-DD` も揃うと `gsc-improvement` adapter
 (`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
 欠けている目印は `data/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。

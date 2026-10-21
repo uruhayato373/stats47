@@ -63,3 +63,9 @@ export type {
   WorldDataProvider,
   WorldDataProviderEvaluation,
 } from './world-types';
+export {
+  VERIFY_TARGET_CLASSIFICATIONS,
+  classifyEstatRequest,
+  indexNationalEvidence,
+} from './japan-candidate-classify';
+export type { JapanCandidateClassification, LiveAuditEntry } from './japan-candidate-classify';

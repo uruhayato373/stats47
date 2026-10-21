@@ -1677,6 +1677,8 @@ updated: 2026-10-19
 ### [REMOVE-WORKTREE-TEST-MAC-PATH-01] worktree 削除のテストが Mac で落ちる (/var と /private/var の表記ずれ)
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/remove-worktree.test.mjs] [起票:2026-10-20] [領域:管理]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 登録の照合だけを `fs.realpathSync` で正規化したパスで行う (`canonical`・`isRegistered`)。削除対象・リンク検査は正規化前のパスのままなので、worktree を指す symlink は従来どおり止まる。Mac で `remove-worktree.test.mjs` 5/5 (修正前は正常系が落ちていた)。Linux (CI) は realpath が同じ値を返すので挙動不変。
+
 - **事象 (2026-10-20 Mac 実測)**: `remove-worktree.test.mjs` の「登録済み worktree を丸ごと削除する (正常系)」が `... は登録済み worktree ではない (known: /private/var/folders/...)` で落ちる。変更を退避した状態でも再現するので既存の不具合。
 - **原因 (仮説)**: macOS の一時ディレクトリは `/var` が `/private/var` への symlink で、テストが渡すパス (`/var/...`) と `git worktree list` が返すパス (`/private/var/...`) を文字列のまま比べている。検証: 比較の前に両方を `fs.realpathSync` で正規化して再実行する。
 - **完了条件**: Mac と Linux (CI) でこのテストが pass する。正規化は比較だけに使い、削除対象のパスの決め方は変えない。
@@ -1692,6 +1694,8 @@ updated: 2026-10-19
 
 ### [EFFECT-GSC-PAGE-PREFIX-MATCH-01] 効果判定の `[gsc-page:]` が前方一致で、別のページの実績が混ざる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: `[gsc-page:]` の照合を完全一致にし (`pageMatches`)、`/` で終わる目印だけ配下を前方一致で含める。active の目印 10 件はすべてページのパスで `/` 終わりは 0 件なので、意味は狭まるだけ。テストの fixture は前方一致の誤りを期待値に含めていた (`local-finance-other` の 5 click) ので正しい値に直し、`-vs-` の兄弟ページが混ざらないテストを足した。improvement-triage.md の記法説明も更新。metrics テスト 174/174。
 
 - **事象 (2026-10-20、improvement-triage の報告)**: `SEO-TITLE-CTR-EFFECT-01` の対象 `/blog/avg-height-high-school-2nd-male` に、`/blog/avg-height-high-school-2nd-male-vs-*` の実績 (W41 で 8 click / 601 imp、対象全体の約 1%) が混ざる。
 - **次**: `[gsc-page:]` を読む `.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs` (と `measurement-cycle.mjs`) の照合を完全一致にするか、完全一致の記法を足す。既存の行で前方一致を前提にしているものが無いかを先に数える。
@@ -4503,6 +4507,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: 判定を `packages/data-configs/src/geo-scope/japan-candidate-classify.ts` の純粋関数へ移し、params と hasNational を持つ旧形式の e-Stat 監査行だけを全国行の証拠として索引する (R2 監査行は飛ばす)。証拠の無い e-Stat 指標は `unknown-no-audit-entry` とし、`verify-japan-candidates.ts` がそれも実 e-Stat 取得で判定する (`VERIFY_TARGET_CLASSIFICATIONS`)。実行: 963 件 (非 e-Stat 355・証拠なし 608) を exit 0 で出力し、verify `--limit 1` で ratio-65-plus を verified-official と判定。テスト 2 件 (`__tests__/japan-candidate-classify.test.ts`)・data-configs / stats-r2 の型検査 0。
 - **観測 (2026-10-09)**: `npx tsx packages/data-configs/scripts/classify-japan-candidates.ts` が `r.params` で TypeError。
   `data/themes/charts/live-audit.json` (2026-10-05 監査) が kind/metricKey だけの R2 監査の形になり、params / hasNational を持たないため。
   今回は全国行の存在確認を `verify-japan-candidates.ts` の e-Stat 応答で代用した。
@@ -4912,6 +4917,8 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 
 ### [EFFECT-VERDICT-CLI-TEST-SOURCES-01] effect-verdict の CLI テストが実データの判定 1 件で sources 欠落により落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs] [起票:2026-10-21] [領域:管理]
+
+- **2026-10-21 完了 (行削除は backlog-loop)**: `sources` が無かったのは before/after 週を解決できず skip する経路 (`cli.mjs` の `skipped: true`)。計測していないので `sources: []` と `before/after/delta/attainment: null` を書くようにし、verdict JSON がどの経路でも同じ欄を持つ。`effect-verdict.test.mjs` 40/40。テストは実データ依存のままだが、欄の有無は経路で決まるので実データの変化で再発しない。
 
 - **事象 (2026-10-21 確認)**: `effect-verdict.test.mjs` の「CLI: verdict JSON を書き、summary と thresholdsVersion を含む」が、`cli.mjs --week 2026-W31` を実データで動かした出力の判定のうち 1 件に `sources` が無いため落ちる。SCRIPT-ISO-WEEK-UNIFY-01 の変更を外した状態でも同じく落ちるので、その変更が原因ではない。
 - **次**: どの施策の判定が `sources` を持たないかを出力から特定し、engine がその経路でも `sources` (空配列でも) を書くようにする。テストが実データに依存して落ちる形でよいかも併せて決める。

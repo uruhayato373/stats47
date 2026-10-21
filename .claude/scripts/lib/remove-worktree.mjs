@@ -32,16 +32,31 @@ export function listWorktreePaths(root = ROOT) {
   return [...output.matchAll(/^worktree (.+)$/gm)].map((m) => path.resolve(m[1]));
 }
 
+// 比較専用の正規化。macOS の一時ディレクトリは /var → /private/var の symlink で、git は実パスを返す
+// (2026-10-20 REMOVE-WORKTREE-TEST-MAC-PATH-01)。削除対象とリンク検査には正規化前のパスを使う。
+function canonical(p) {
+  try {
+    return fs.realpathSync(p);
+  } catch {
+    return path.resolve(p);
+  }
+}
+
+function isRegistered(root, resolved) {
+  return listWorktreePaths(root).map(canonical).includes(canonical(resolved));
+}
+
 export function removeWorktree(target, { force = false, root = ROOT } = {}) {
   const resolved = path.resolve(target);
-  const known = listWorktreePaths(root);
-  if (!known.includes(resolved)) {
+  const known = listWorktreePaths(root).map(canonical);
+  const key = canonical(resolved);
+  if (!known.includes(key)) {
     throw new Error(`${resolved} は登録済み worktree ではない (known: ${known.join(", ")})`);
   }
-  if (known[0] === resolved || path.resolve(root) === resolved) {
+  if (known[0] === key || canonical(root) === key) {
     throw new Error("メインの working tree は削除できない");
   }
-  if (known.some((entry) => entry !== resolved && entry.startsWith(resolved + path.sep))) {
+  if (known.some((entry) => entry !== key && entry.startsWith(key + path.sep))) {
     throw new Error("他の登録済み worktree を内包するディレクトリは削除できない");
   }
   if (fs.lstatSync(resolved).isSymbolicLink()) {
@@ -56,11 +71,11 @@ export function removeWorktree(target, { force = false, root = ROOT } = {}) {
     // (worktree の登録解除自体が失敗した場合はここで投げ直す)
     // dirty / locked / 権限エラーで登録が残るなら、Gitの拒否を尊重する。
     // 存在確認だけではdirty worktreeの未保存変更まで強制削除してしまう。
-    if (listWorktreePaths(root).includes(resolved) || !fs.existsSync(resolved)) throw error;
+    if (isRegistered(root, resolved) || !fs.existsSync(resolved)) throw error;
   }
   let residual = false;
   if (fs.existsSync(resolved)) {
-    if (listWorktreePaths(root).includes(resolved) || fs.lstatSync(resolved).isSymbolicLink()) {
+    if (isRegistered(root, resolved) || fs.lstatSync(resolved).isSymbolicLink()) {
       throw new Error("登録またはリンクが残るため後処理を停止しました");
     }
     residual = true;

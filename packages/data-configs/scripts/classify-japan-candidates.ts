@@ -22,6 +22,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { requestKey } from "../src/source-coordinate";
+import {
+  classifyEstatRequest,
+  indexNationalEvidence,
+  type JapanCandidateClassification,
+  type LiveAuditEntry,
+} from "../src/geo-scope/japan-candidate-classify";
 import { THEME_CATALOGS } from "../src/theme-catalog/index";
 import { getMetricConfig } from "../src/registry";
 
@@ -35,30 +41,12 @@ const LIVE_AUDIT_PATH = path.join(
   `${datasetDir("themes.chart-audit")}/live-audit.json`,
 );
 
-interface LiveAuditResult {
-  theme: string;
-  componentKey: string;
-  componentType: string;
-  params: Record<string, string>;
-  status: string;
-  rows: number;
-  hasNational: boolean;
-  tableTitle?: string;
-}
-
 interface LiveAudit {
   auditedAt: string;
-  distinctExpected: number;
-  audited: number;
-  coverageOk: boolean;
-  results: LiveAuditResult[];
+  results: LiveAuditEntry[];
 }
 
-type Classification =
-  | "official-candidate"
-  | "unsupported"
-  | "unknown-non-estat"
-  | "unknown-no-audit-entry";
+type Classification = JapanCandidateClassification;
 
 interface MetricClassification {
   themeKey: string;
@@ -110,18 +98,8 @@ function deriveEstatRequestKey(
 
 function classifyAll(): MetricClassification[] {
   const audit = loadLiveAudit();
-  // live-audit.json の results は params (statsDataId + filters) を直接持つので、
-  // requestKey() と同じロジックでキーを再構築して突合する。
-  const auditByKey = new Map<string, LiveAuditResult>();
-  for (const r of audit.results) {
-    const { statsDataId, ...rest } = r.params;
-    const filters: Record<string, string> = {};
-    for (const [k, v] of Object.entries(rest)) {
-      if (typeof v === "string") filters[k] = v;
-    }
-    const key = requestKey({ statsDataId, filters });
-    if (!auditByKey.has(key)) auditByKey.set(key, r);
-  }
+  // 旧形式の e-Stat 監査行 (params + hasNational) だけが全国行の証拠になる。R2 監査行は索引しない
+  const nationalByKey = indexNationalEvidence(audit.results);
 
   const out: MetricClassification[] = [];
   for (const [themeKey, catalog] of Object.entries(THEME_CATALOGS)) {
@@ -154,31 +132,16 @@ function classifyAll(): MetricClassification[] {
         });
         continue;
       }
-      const found = auditByKey.get(derived.key);
-      if (!found) {
-        out.push({
-          themeKey,
-          metricKey: metric.rankingKey,
-          role: metric.role,
-          requestKey: derived.key,
-          classification: "unknown-no-audit-entry",
-          hasNational: null,
-          auditedAt: null,
-          reason: "not present in live-audit.json (never audited, or chart doesn't reference this exact request)",
-        });
-        continue;
-      }
+      const judged = classifyEstatRequest(derived.key, nationalByKey);
       out.push({
         themeKey,
         metricKey: metric.rankingKey,
         role: metric.role,
         requestKey: derived.key,
-        classification: found.hasNational ? "official-candidate" : "unsupported",
-        hasNational: found.hasNational,
-        auditedAt: audit.auditedAt,
-        reason: found.hasNational
-          ? "00000 row exists (live-audit); VALUE-LEVEL verification still required before Japan catalog adoption"
-          : "00000 row does not exist in this table (structurally unsupported)",
+        classification: judged.classification,
+        hasNational: judged.hasNational,
+        auditedAt: judged.hasNational === null ? null : audit.auditedAt,
+        reason: judged.reason,
       });
     }
   }
