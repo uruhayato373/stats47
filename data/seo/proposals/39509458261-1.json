@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "39509458261-1",
+  "status": "implementation-needed",
+  "keyword": "中2男子 平均身長",
+  "targetPath": "/blog/middle-school-height-east-west-puzzle",
+  "needs": "中学2年(13〜14歳)の男子が全国で平均何cmなのか、自分や子どもの身長が平均と比べてどうかを知りたい人が検索している。都道府県差よりも先に全国平均値と年度・出典を確認したいと考えられる。",
+  "gap": "公開本文には全国平均161.06cmがあるが、title・descriptionは都道府県ランキングと「なぜ東北が高いか」が中心で、検索語に直結する全国平均が出ていない。年別推移や成長の目安もない。250表示・0クリックで平均9.5位のため、この点が効いている可能性がある。ただし、記事のソースファイルがこのリポジトリ内で見つからず、editableFileもnullで、自動置換の対象を特定できなかった。",
+  "done": "残る実装は次のとおり。(1)この記事のソース(contents/blogなど)の場所を特定する。(2)seoTitleとseoDescriptionの先頭に「中2男子の全国平均161.06cm(2023年度、学校保健統計)」を入れる。数値は文部科学省 学校保健統計調査(e-Stat)の13歳・14歳区分と本文の定義が一致することを確認してから使う。(3)完了条件は、公開titleに全国平均と年度が入り、本文の数値と一致すること。",
+  "method": "title",
+  "competitors": [
+    {
+      "url": "https://www.pref.mie.lg.jp/DATABOX/26751003262.htm",
+      "findings": "三重県の統計ページ。13歳男子(中学2年)の県平均159.8cmと全国平均160.0cmを比べる表とグラフがある。年度は平成15年度で古い。対象は5〜17歳の男女。検索語への回答は全国平均との差を直接示す形だが、データが古く、都道府県の順位や要因の解説はない。"
+    },
+    {
+      "url": "https://stats47.jp/blog/middle-school-height-east-west-puzzle",
+      "findings": "対象ページ。2023年度の中2男子の全国平均161.06cmを本文冒頭の全体像に載せ、秋田163.6cmから高知159.7cmまでの3.9cm差と、栄養・遺伝・気候の仮説を扱う。47都道府県の完全な表は本文になく、年別推移や成長曲線もない。title・descriptionに全国平均が出ていない。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/blog/middle-school-height-east-west-puzzle",
+      "status": 200,
+      "fetchedAt": "2026-10-20T22:38:56.687Z",
+      "inputHash": "87abc35a576c90149618495f63500ca59b5213b4fae1b27896215119d8a0ce76",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "3482ef507e110e1cd7bea4aab5ad89610d9b2344edb34e47e386db70ff54a4c6",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "7cc166d964b9bfbbfa79aefa13e8edb2124467b9c050adefbe9204a93e8c2f05"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "中2男子 平均身長"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/middle-school-height-east-west-puzzle"
+      },
+      {
+        "name": "WebSearch",
+        "target": "中学2年生 男子 平均身長 全国 13歳 14歳 学校保健統計 2025"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.pref.mie.lg.jp/DATABOX/26751003262.htm"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.pref.nagano.lg.jp/kyoiku/hokenko/gyose/zenpan/tokei/hokentokei/documents/r1_1.pdf"
+      }
+    ]
+  },
+  "selectedAt": "2026-10-21",
+  "inputHash": "87abc35a576c90149618495f63500ca59b5213b4fae1b27896215119d8a0ce76",
+  "methods": [],
+  "files": []
+}
