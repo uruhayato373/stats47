@@ -27,7 +27,7 @@ export const internetUsageRate10plus: MetricConfig = {
     "from": 2001,
     "to": 2006,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -70,7 +70,7 @@ export const drugEnforcementArrestCount: MetricConfig = {
       2023,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

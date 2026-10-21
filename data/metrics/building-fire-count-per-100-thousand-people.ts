@@ -23,7 +23,7 @@ export const buildingFireCountPer100ThousandPeople: MetricConfig = {
     "from": 1975,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

@@ -52,7 +52,7 @@ export const charcoalProduction: MetricConfig = {
       2007,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

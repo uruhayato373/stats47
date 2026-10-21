@@ -21,7 +21,7 @@ export const publicRentalHousingRentPer33m2: MetricConfig = {
     "from": 1975,
     "to": 2014,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

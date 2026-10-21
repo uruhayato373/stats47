@@ -21,7 +21,7 @@ export const intellectualCrimePer100k: MetricConfig = {
     "from": 2005,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

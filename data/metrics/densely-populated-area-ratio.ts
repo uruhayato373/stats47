@@ -30,7 +30,7 @@ export const denselyPopulatedAreaRatio: MetricConfig = {
       2020,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

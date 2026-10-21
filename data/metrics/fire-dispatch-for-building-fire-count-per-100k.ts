@@ -21,7 +21,7 @@ export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
     "from": 1975,
     "to": 2021,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

@@ -23,7 +23,7 @@ export const moversIn: MetricConfig = {
     "from": 2014,
     "to": 2025,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -21,7 +21,7 @@ export const buildingFireCountPer100k: MetricConfig = {
     "from": 2022,
     "to": 2022,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

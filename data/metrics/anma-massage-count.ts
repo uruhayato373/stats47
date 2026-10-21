@@ -47,7 +47,7 @@ export const anmaMassageCount: MetricConfig = {
       2022,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

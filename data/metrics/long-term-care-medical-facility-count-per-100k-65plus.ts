@@ -21,7 +21,7 @@ export const longTermCareMedicalFacilityCountPer100k65plus: MetricConfig = {
     "from": 2000,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

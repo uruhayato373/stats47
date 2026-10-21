@@ -21,7 +21,7 @@ export const seniorRecreationHomeStaffPer100k65plus: MetricConfig = {
     "from": 2002,
     "to": 2009,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -20,7 +20,7 @@ export const fisheryOutputValue: MetricConfig = {
     "from": 1975,
     "to": 2016,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

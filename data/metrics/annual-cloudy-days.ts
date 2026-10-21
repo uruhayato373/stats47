@@ -52,7 +52,7 @@ export const annualCloudyDays: MetricConfig = {
       2007,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateOranges",

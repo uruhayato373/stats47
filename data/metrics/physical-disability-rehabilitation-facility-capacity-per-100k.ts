@@ -21,7 +21,7 @@ export const physicalDisabilityRehabilitationFacilityCapacityPer100k: MetricConf
     "from": 1975,
     "to": 2011,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

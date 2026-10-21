@@ -47,7 +47,7 @@ export const nurseryCountPer100k05: MetricConfig = {
       2020,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

@@ -23,7 +23,7 @@ export const volunteerActivityInternationalCooperation15plus: MetricConfig = {
   },
   entities: ["prefecture"],
   years: { years: [2006] },
-  yearFormat: "fiscal",
+  yearFormat: "calendar",
   visualization: {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

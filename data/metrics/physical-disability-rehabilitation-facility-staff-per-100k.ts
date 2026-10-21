@@ -21,7 +21,7 @@ export const physicalDisabilityRehabilitationFacilityStaffPer100k: MetricConfig 
     "from": 2002,
     "to": 2011,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

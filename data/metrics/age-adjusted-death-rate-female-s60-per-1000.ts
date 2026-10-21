@@ -21,7 +21,7 @@ export const ageAdjustedDeathRateFemaleS60Per1000: MetricConfig = {
     "from": 2015,
     "to": 2015,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",
