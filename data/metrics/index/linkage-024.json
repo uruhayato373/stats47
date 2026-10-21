@@ -306,10 +306,7 @@
         "configHash": "293ae194476d486f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:sixth-industry-direct-sales",

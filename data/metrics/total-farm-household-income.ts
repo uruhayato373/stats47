@@ -4,6 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const totalFarmHouseholdIncome: MetricConfig = {
   "key": "total-farm-household-income",
   "title": "農家総所得",
+  "description": "農業所得 (農業粗収益−農業経営費) と農外所得 (農外収入−農外支出) に、年金・被贈等の収入を加えた所得。農林水産省「農業経営統計調査」の値で、e-Stat の項目定義どおり。",
+  "note": "調査対象の農家 1 戸当たりの平均と読める値 (数百万〜千数百万円) だが、e-Stat の項目定義に 1 戸当たりの明記は無い。基礎データは 1975〜2003 年で収集が中止されている。出典: e-Stat「統計項目の定義 L 家計」https://www.e-stat.go.jp/koumoku/koumoku_teigi/L (2026-10-21 確認)",
   "unit": "千円",
   "category": "agriculture",
   "source": {
@@ -59,24 +61,11 @@ export const totalFarmHouseholdIncome: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1 戸当たりの所得なので人口・面積当たりへの換算は意味が無い (METRIC-FARM-INCOME-DEFS-01)
+    "normalizationOptions": [],
   },
   "seoTitle": "農家総所得ランキング都道府県【2003年】｜1位大阪府（12,836千円）",
   "seoDescription": "2003年の農家総所得の都道府県別ランキング。1位大阪府（12,836千円）、最下位沖縄県（4,457千円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
+  "surveyId": "agriculture-management-survey",
   "isActive": true,
 };
