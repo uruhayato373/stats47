@@ -132,6 +132,36 @@ describe("createSnapshotReader runtime contract", () => {
     expect(fetchText).toHaveBeenCalledTimes(2);
   });
 
+  it("next devでは既定の取得上限を本番より長くする", async () => {
+    vi.useFakeTimers();
+    vi.stubEnv("NODE_ENV", "development");
+    try {
+      const pending = reader(() => new Promise<string | null>(() => undefined)).readResult();
+      let settled = false;
+      void pending.then(() => { settled = true; });
+      await vi.advanceTimersByTimeAsync(10_001);
+      expect(settled).toBe(false);
+      await vi.advanceTimersByTimeAsync(50_000);
+      expect(await pending).toMatchObject({ status: "source-unavailable", reason: "timeout" });
+    } finally {
+      vi.unstubAllEnvs();
+      vi.useRealTimers();
+    }
+  });
+
+  it("本番では既定の取得上限を10秒に保つ", async () => {
+    vi.useFakeTimers();
+    vi.stubEnv("NODE_ENV", "production");
+    try {
+      const pending = reader(() => new Promise<string | null>(() => undefined)).readResult();
+      await vi.advanceTimersByTimeAsync(10_001);
+      expect(await pending).toMatchObject({ status: "source-unavailable", reason: "timeout" });
+    } finally {
+      vi.unstubAllEnvs();
+      vi.useRealTimers();
+    }
+  });
+
   it("timeoutをretry上限後source-unavailableにする", async () => {
     const never = () => new Promise<string | null>(() => undefined);
     const result = await reader(never, {

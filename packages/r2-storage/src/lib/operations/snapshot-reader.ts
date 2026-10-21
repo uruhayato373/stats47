@@ -5,6 +5,13 @@ import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 
 const DEFAULT_STALE_AFTER_DAYS = 30;
 const DEFAULT_TIMEOUT_MS = 10_000;
+// next dev では初回コンパイル (ランキング詳細は約 2 万モジュール) の間に読み込みの完了処理が遅れ、
+// R2 自体は 0.1 秒で返すのに 10 秒を超えて「取得失敗」と扱われていた (2026-10-21 実測)。
+const DEVELOPMENT_TIMEOUT_MS = 60_000;
+
+function defaultTimeoutMs(): number {
+  return process.env.NODE_ENV === "development" ? DEVELOPMENT_TIMEOUT_MS : DEFAULT_TIMEOUT_MS;
+}
 const DEFAULT_MAX_ATTEMPTS = 1;
 
 type SnapshotFetcher = (key: string) => Promise<string | null>;
@@ -54,7 +61,7 @@ export interface SnapshotReaderOptions<TSnapshot, TData> {
   readonly generatedAt?: (snapshot: TSnapshot) => string | undefined;
   /** stale 警告の閾値日数（既定 30） */
   readonly staleAfterDays?: number;
-  /** 1回の取得上限（既定10秒） */
+  /** 1回の取得上限（既定10秒。next dev では60秒） */
   readonly timeoutMs?: number;
   /** transport error / timeoutだけを再試行する回数（既定1回） */
   readonly maxAttempts?: number;
@@ -97,7 +104,7 @@ export function createSnapshotReader<TSnapshot, TData>(
     fallback,
     generatedAt = defaultGeneratedAt,
     staleAfterDays = DEFAULT_STALE_AFTER_DAYS,
-    timeoutMs = DEFAULT_TIMEOUT_MS,
+    timeoutMs = defaultTimeoutMs(),
     maxAttempts = DEFAULT_MAX_ATTEMPTS,
     fetchText = fetchFromR2AsString,
     now = () => new Date(),
