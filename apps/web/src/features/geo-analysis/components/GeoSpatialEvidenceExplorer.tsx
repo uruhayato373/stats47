@@ -298,32 +298,7 @@ function GeoSpatialEvidenceExplorerState({
           : (['population', 'overlap'] as const)
         ).map((stage) => (
           <TabsContent key={stage} value={stage} className="mt-4">
-            <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
-              {stage === 'population'
-                ? slug === 'population-low-elevation' ? LOW_ELEVATION_POPULATION_LEGEND : landslide ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。' : slug === 'population-snow-designation' ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。灰色の輪郭は指定境界を横切る格子です。' : POPULATION_LEGEND
-                : stage === 'facilities'
-                  ? landslide ? '行政施設と公的集会施設の原典地点を全件表示します。施設の種類と指定区域への包含をタップして確認できます。' : '選択県の原典施設を全件表示します。施設群を切り替えて確認できます。白い点は2022年4月の施設地点です。'
-                  : config.overlapLegend}
-            </p>
-            {publicFacility && stage === 'overlap' ? (
-              <ul
-                aria-label="距離帯の凡例"
-                className="mb-3 flex flex-wrap gap-3 text-xs"
-              >
-                {PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
-                  <li key={label} className="flex items-center gap-1">
-                    <span
-                      aria-hidden="true"
-                      className="inline-block h-3 w-3"
-                      style={{
-                        backgroundColor: PUBLIC_FACILITY_BAND_COLORS[band],
-                      }}
-                    />
-                    {label}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            {/* 地図をタブの直下に置き、凡例の説明は地図の後ろに回す。スマホの最初の画面に地図が入らなかった (UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018) */}
             {detail && !loading ? (
               detail.slug === 'population-landslide-exposure' ? (
                 detail.status === 'available' ? <LandslideMap detail={detail} view={stage} manifest={manifest} /> : <p role="status">{detail.reason} 欠測は0として扱いません。</p>
@@ -343,6 +318,32 @@ function GeoSpatialEvidenceExplorerState({
               ) : (
                 <SpatialMap detail={detail} view={stage} />
               )
+            ) : null}
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {stage === 'population'
+                ? slug === 'population-low-elevation' ? LOW_ELEVATION_POPULATION_LEGEND : landslide ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。' : slug === 'population-snow-designation' ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。灰色の輪郭は指定境界を横切る格子です。' : POPULATION_LEGEND
+                : stage === 'facilities'
+                  ? landslide ? '行政施設と公的集会施設の原典地点を全件表示します。施設の種類と指定区域への包含をタップして確認できます。' : '選択県の原典施設を全件表示します。施設群を切り替えて確認できます。白い点は2022年4月の施設地点です。'
+                  : config.overlapLegend}
+            </p>
+            {publicFacility && stage === 'overlap' ? (
+              <ul
+                aria-label="距離帯の凡例"
+                className="mt-2 flex flex-wrap gap-3 text-xs"
+              >
+                {PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
+                  <li key={label} className="flex items-center gap-1">
+                    <span
+                      aria-hidden="true"
+                      className="inline-block h-3 w-3"
+                      style={{
+                        backgroundColor: PUBLIC_FACILITY_BAND_COLORS[band],
+                      }}
+                    />
+                    {label}
+                  </li>
+                ))}
+              </ul>
             ) : null}
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
               {config.mapLimit}{' '}

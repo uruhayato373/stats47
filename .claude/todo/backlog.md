@@ -601,6 +601,7 @@ updated: 2026-10-19
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt] [起票:2026-10-18] [領域:サイト]
 
+- **2026-10-21 完了 (行削除は backlog-loop)**: `GeoSpatialEvidenceExplorer` の各段階で、地図をタブの直下に置き、凡例の説明文と距離帯の凡例を地図の後ろへ移した (凡例そのものは残す)。本番 `/geo/population-land-price` の 375×812 で同じ並べ替えを当てると地図の上端が 765px → 640px になり、最初の画面に地図が 47px → 172px 入る。geo-analysis のテスト 153 件・design-system:check・web の型検査が通過。`--mark-fixed` 済み。未デプロイ。
 - **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261018.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 - **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
 - **対象**:

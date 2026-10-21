@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T02:13:12.980Z",
+  "generatedAt": "2026-10-21T02:15:04.486Z",
   "auditAt": "2026-10-17T20:07:33.963Z",
   "findings": [
     {
@@ -61,14 +61,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 1 枚目の下部、「人口の分布と変化」「住宅地点と人口の重なり」の切替の下: 1 枚目の画面では切替タブの下に地図が無く、凡例の説明文とボタンだけが並ぶ。地図は 2 枚目まで下がらないと現れず、最初の画面で何を見るページなのか分かりにくい。 → 地図をタブの直下に置き、凡例の長い説明は地図の後ろに回す。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-18",
       "last_seen": "2026-10-18",
-      "fixed_at": null,
+      "fixed_at": "2026-10-21T02:15:04.477Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "GeoSpatialEvidenceExplorer で地図をタブの直下に置き、凡例の説明・距離帯の凡例を地図の後ろへ移した。本番の 375x812 で同じ並べ替えを当てると地図の上端が 765px→640px (最初の画面に地図が 172px 入る)。未デプロイ"
     },
     {
       "key": "agent|home",
