@@ -5642,6 +5642,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:debt-service-by-nature-municipal",
           "kind": "ranking"
         }
@@ -5676,6 +5680,10 @@
         {
           "pageId": "municipality-ranking:debt-service-by-purpose-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:debt-service-by-purpose-municipal",
@@ -7990,6 +7998,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dentists-medical-facilities",
           "kind": "ranking"
         }
@@ -9530,6 +9542,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:detached-houses",
           "kind": "ranking"
         }
@@ -9566,6 +9582,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:detached-houses-non-wooden",
           "kind": "ranking"
         }
@@ -9600,6 +9620,10 @@
         {
           "pageId": "municipality-ranking:detached-houses-wooden",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:detached-houses-wooden",
@@ -10126,6 +10150,10 @@
         {
           "pageId": "municipality-ranking:disability-support-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:disability-support-facility-count",
@@ -10918,6 +10946,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:disaster-recovery-expense-municipal",
           "kind": "ranking"
         }
@@ -11180,6 +11212,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:disaster-recovery-project-expense-municipal",
           "kind": "ranking"
         }
@@ -11249,6 +11285,10 @@
         {
           "pageId": "municipality-ranking:disaster-relief-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:disaster-relief-expense-municipal",
@@ -11553,6 +11593,10 @@
         {
           "pageId": "municipality-ranking:dispatched-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dispatched-workers",

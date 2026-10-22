@@ -1071,6 +1071,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:wholesale-employees",
           "kind": "ranking"
         }
@@ -1105,6 +1109,10 @@
         {
           "pageId": "municipality-ranking:wholesale-private-employees",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:wholesale-private-employees",
@@ -1143,6 +1151,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:wholesale-private-establishments",
           "kind": "ranking"
         }
@@ -1177,6 +1189,10 @@
         {
           "pageId": "municipality-ranking:wholesale-retail-private-employees",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:wholesale-retail-private-employees",
@@ -1215,6 +1231,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:wholesale-retail-private-establishments",
           "kind": "ranking"
         }
@@ -1251,6 +1271,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:wholesale-retail-private-net-value-added",
           "kind": "ranking"
         }
@@ -1285,6 +1309,10 @@
         {
           "pageId": "municipality-ranking:wholesale-retail-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:wholesale-retail-private-sales",
@@ -3047,6 +3075,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:wooden-dwellings",
           "kind": "ranking"
         }
@@ -3081,6 +3113,10 @@
         {
           "pageId": "municipality-ranking:wooden-dwellings-non-fireproof",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:wooden-dwellings-non-fireproof",
@@ -4125,6 +4161,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-by-place-of-work",
           "kind": "ranking"
         }
@@ -4197,6 +4237,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-in-other-municipality-same-prefecture",
           "kind": "ranking"
         }
@@ -4231,6 +4275,10 @@
         {
           "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture-female",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:workers-in-other-municipality-same-prefecture-female",
@@ -4269,6 +4317,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-in-other-municipality-same-prefecture-male",
           "kind": "ranking"
         }
@@ -4303,6 +4355,10 @@
         {
           "pageId": "municipality-ranking:workers-in-other-prefecture",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:workers-in-other-prefecture",
@@ -4341,6 +4397,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-in-other-prefecture-female",
           "kind": "ranking"
         }
@@ -4375,6 +4435,10 @@
         {
           "pageId": "municipality-ranking:workers-in-other-prefecture-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:workers-in-other-prefecture-male",
@@ -4413,6 +4477,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-in-own-municipality",
           "kind": "ranking"
         }
@@ -4447,6 +4515,10 @@
         {
           "pageId": "municipality-ranking:workers-in-own-municipality-female",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:workers-in-own-municipality-female",
@@ -4485,6 +4557,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:workers-in-own-municipality-male",
           "kind": "ranking"
         }
@@ -4519,6 +4595,10 @@
         {
           "pageId": "municipality-ranking:workers-living-in-other-prefecture",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:workers-living-in-other-prefecture",

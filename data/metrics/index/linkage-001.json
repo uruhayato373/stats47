@@ -454,6 +454,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:assembly-expense-municipal",
           "kind": "ranking"
         }
@@ -523,6 +527,10 @@
         {
           "pageId": "municipality-ranking:assessed-residential-land-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:land-area",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:assessed-residential-land-area",
@@ -1642,6 +1650,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:autolock-apartment-main-households",
           "kind": "ranking"
         }
@@ -1676,6 +1688,10 @@
         {
           "pageId": "municipality-ranking:autolock-apartment-ordinary-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:autolock-apartment-ordinary-households",
@@ -1761,6 +1777,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:automobile-acquisition-tax-grant-municipal",
           "kind": "ranking"
         }
@@ -1795,6 +1815,10 @@
         {
           "pageId": "municipality-ranking:automobile-environmental-tax-grant-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:automobile-environmental-tax-grant-municipal",

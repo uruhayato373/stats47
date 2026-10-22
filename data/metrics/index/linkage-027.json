@@ -2456,6 +2456,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:steel-frame-dwellings",
           "kind": "ranking"
         }
@@ -4513,6 +4517,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:subsidies-expense-municipal",
           "kind": "ranking"
         }
@@ -4582,6 +4590,10 @@
         {
           "pageId": "municipality-ranking:subsistence-farm-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:agriculture-forestry",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:subsistence-farm-households",
@@ -7414,6 +7426,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:tatami-per-dwelling",
           "kind": "ranking"
         }
@@ -7464,6 +7480,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:tatami-per-dwelling-owner",
           "kind": "ranking"
         }
@@ -7510,6 +7530,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:tatami-per-dwelling-rented",
           "kind": "ranking"
         }
@@ -7544,6 +7568,10 @@
         {
           "pageId": "municipality-ranking:tatami-per-main-household",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:tatami-per-main-household",
@@ -7582,6 +7610,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:tatami-per-main-household-owner",
           "kind": "ranking"
         }
@@ -7618,6 +7650,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:tatami-per-main-household-rented",
           "kind": "ranking"
         }
@@ -7652,6 +7688,10 @@
         {
           "pageId": "municipality-ranking:tatami-per-ordinary-household",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:tatami-per-ordinary-household",
@@ -7832,6 +7872,10 @@
         {
           "pageId": "municipality-ranking:taxable-income-total",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:taxable-income-total",

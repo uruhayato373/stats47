@@ -31,6 +31,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:general-households-in-dwellings",
           "kind": "ranking"
         }
@@ -67,6 +71,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:general-households-outside-dwellings",
           "kind": "ranking"
         }
@@ -101,6 +109,10 @@
         {
           "pageId": "municipality-ranking:general-merchandise-store-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:general-merchandise-store-count",
@@ -681,6 +693,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:general-revenue-municipal",
           "kind": "ranking"
         }
@@ -777,6 +793,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:geriatric-health-facility-capacity",
           "kind": "ranking"
         }
@@ -811,6 +831,10 @@
         {
           "pageId": "municipality-ranking:geriatric-health-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:geriatric-health-facility-count",
@@ -1504,6 +1528,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:golf-course-tax-grant-municipal",
           "kind": "ranking"
         }
@@ -2052,6 +2080,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:goods-services-expense-municipal",
           "kind": "ranking"
         }
@@ -2537,6 +2569,10 @@
         {
           "pageId": "municipality-ranking:grassland-area-non-forest",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:agriculture-forestry",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:grassland-area-non-forest",

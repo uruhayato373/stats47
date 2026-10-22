@@ -31,6 +31,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:total-population-male-city",
           "kind": "ranking"
         }
@@ -521,6 +525,10 @@
         {
           "pageId": "municipality-ranking:total-revenue-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:total-revenue-municipal",
@@ -3132,6 +3140,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:traffic-safety-grant-municipal",
           "kind": "ranking"
         }
@@ -3356,6 +3368,10 @@
         {
           "pageId": "municipality-ranking:transfers-in-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:transfers-in-municipal",
@@ -3663,6 +3679,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:transport-postal-private-employees",
           "kind": "ranking"
         }
@@ -3697,6 +3717,10 @@
         {
           "pageId": "municipality-ranking:transport-postal-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:transport-postal-private-establishments",
@@ -3735,6 +3759,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:transport-postal-private-net-value-added",
           "kind": "ranking"
         }
@@ -3769,6 +3797,10 @@
         {
           "pageId": "municipality-ranking:transport-postal-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:transport-postal-private-sales",
@@ -8703,6 +8735,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:two-wheeled-light-vehicle-count",
           "kind": "ranking"
         }
@@ -8819,6 +8855,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:unemployed-persons",
           "kind": "ranking"
         }
@@ -8855,6 +8895,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:unemployed-persons-female",
           "kind": "ranking"
         }
@@ -8889,6 +8933,10 @@
         {
           "pageId": "municipality-ranking:unemployed-persons-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:unemployed-persons-male",

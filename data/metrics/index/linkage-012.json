@@ -4486,6 +4486,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:households-with-non-relatives",
           "kind": "ranking"
         }
@@ -5543,6 +5547,10 @@
         {
           "pageId": "municipality-ranking:housing-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:housing-expense-municipal",
@@ -8085,6 +8093,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:induced-housing-standard-households",
           "kind": "ranking"
         }
@@ -8119,6 +8131,10 @@
         {
           "pageId": "municipality-ranking:industrial-and-quasi-industrial-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:industrial-and-quasi-industrial-area",
@@ -8187,6 +8203,10 @@
         {
           "pageId": "municipality-ranking:industrial-district-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:industrial-district-area",
@@ -9494,6 +9514,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:inflow-population-from-other-prefectures",
           "kind": "ranking"
         }
@@ -9564,6 +9588,10 @@
         {
           "pageId": "municipality-ranking:inflow-population-within-prefecture",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:inflow-population-within-prefecture",
@@ -9747,6 +9775,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:information-communication-private-net-value-added",
           "kind": "ranking"
         }
@@ -9781,6 +9813,10 @@
         {
           "pageId": "municipality-ranking:information-communication-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:information-communication-private-sales",
@@ -10005,6 +10041,10 @@
         {
           "pageId": "municipality-ranking:information-private-employees",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:information-private-employees",
@@ -10235,6 +10275,10 @@
         {
           "pageId": "municipality-ranking:information-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:information-private-establishments",
@@ -11442,6 +11486,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:institutional-household-members",
           "kind": "ranking"
         }
@@ -11478,6 +11526,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:institutional-households",
           "kind": "ranking"
         }
@@ -11512,6 +11564,10 @@
         {
           "pageId": "municipality-ranking:integrated-ece-center-enrolled-children",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:integrated-ece-center-enrolled-children",
@@ -12702,6 +12758,10 @@
         {
           "pageId": "municipality-ranking:interest-tax-grant-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:interest-tax-grant-municipal",
@@ -13995,6 +14055,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:investment-expenditure-municipal",
           "kind": "ranking"
         }
@@ -14290,6 +14354,10 @@
         {
           "pageId": "municipality-ranking:investments-and-capital-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:investments-and-capital-municipal",

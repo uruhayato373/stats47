@@ -2112,6 +2112,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:regular-employees",
           "kind": "ranking"
         }
@@ -2148,6 +2152,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:reinforced-concrete-dwellings",
           "kind": "ranking"
         }
@@ -2182,6 +2190,10 @@
         {
           "pageId": "municipality-ranking:relatives-only-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:relatives-only-households",
@@ -2953,6 +2965,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:rent-per-tatami-exclusive-dwellings",
           "kind": "ranking"
         }
@@ -3029,6 +3045,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:rental-housing-floor-area-starts",
           "kind": "ranking"
         }
@@ -3063,6 +3083,10 @@
         {
           "pageId": "municipality-ranking:rented-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:rented-dwellings",
@@ -3415,6 +3439,10 @@
         {
           "pageId": "municipality-ranking:reserve-fund-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:reserve-fund-expense-municipal",
@@ -3939,6 +3967,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:resident-registry-households-japanese",
           "kind": "ranking"
         }
@@ -3973,6 +4005,10 @@
         {
           "pageId": "municipality-ranking:resident-registry-population-japanese",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:resident-registry-population-japanese",
@@ -4011,6 +4047,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:resident-registry-population-japanese-female",
           "kind": "ranking"
         }
@@ -4047,6 +4087,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:resident-registry-population-japanese-male",
           "kind": "ranking"
         }
@@ -4081,6 +4125,10 @@
         {
           "pageId": "municipality-ranking:resident-registry-population-total",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:resident-registry-population-total",
@@ -4257,6 +4305,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:residential-district-area",
           "kind": "ranking"
         }
@@ -4291,6 +4343,10 @@
         {
           "pageId": "municipality-ranking:residential-floor-area-starts",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:residential-floor-area-starts",
@@ -5650,6 +5706,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:restaurant-count",
           "kind": "ranking"
         }
@@ -5995,6 +6055,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:retail-annual-sales",
           "kind": "ranking"
         }
@@ -6219,6 +6283,10 @@
         {
           "pageId": "municipality-ranking:retail-employees",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:retail-employees",
@@ -6497,6 +6565,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:retail-floor-space",
           "kind": "ranking"
         }
@@ -6567,6 +6639,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:retail-private-employees",
           "kind": "ranking"
         }
@@ -6601,6 +6677,10 @@
         {
           "pageId": "municipality-ranking:retail-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:retail-private-establishments",
@@ -8347,6 +8427,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:road-bridge-expense-municipal",
           "kind": "ranking"
         }
@@ -9458,6 +9542,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:rooms-per-dwelling",
           "kind": "ranking"
         }
@@ -9502,6 +9590,10 @@
         {
           "pageId": "municipality-ranking:rooms-per-dwelling-owner",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:rooms-per-dwelling-owner",

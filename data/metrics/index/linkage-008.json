@@ -31,6 +31,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:finance-insurance-private-employees",
           "kind": "ranking"
         }
@@ -65,6 +69,10 @@
         {
           "pageId": "municipality-ranking:finance-insurance-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:finance-insurance-private-establishments",
@@ -103,6 +111,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:finance-insurance-private-net-value-added",
           "kind": "ranking"
         }
@@ -137,6 +149,10 @@
         {
           "pageId": "municipality-ranking:finance-insurance-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:finance-insurance-private-sales",
@@ -3218,6 +3234,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:fire-service-expense-municipal",
           "kind": "ranking"
         }
@@ -3323,6 +3343,10 @@
         {
           "pageId": "municipality-ranking:fireproof-wooden-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:fireproof-wooden-dwellings",
@@ -4076,6 +4100,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:fisheries-private-employees",
           "kind": "ranking"
         }
@@ -4110,6 +4138,10 @@
         {
           "pageId": "municipality-ranking:fisheries-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:fisheries-private-establishments",
@@ -10077,6 +10109,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:fixed-asset-tax-municipal",
           "kind": "ranking"
         }
@@ -11333,6 +11369,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:floor-area-per-dwelling-owner",
           "kind": "ranking"
         },
@@ -11568,6 +11608,10 @@
         {
           "pageId": "municipality-ranking:floor-area-per-dwelling-rented",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:floor-area-per-dwelling-rented",

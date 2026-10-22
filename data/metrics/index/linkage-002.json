@@ -3160,6 +3160,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:broadcast-reception-contracts",
           "kind": "ranking"
         }
@@ -7668,6 +7672,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:care-home-yogo-capacity",
           "kind": "ranking"
         }
@@ -7704,6 +7712,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:care-home-yogo-count",
           "kind": "ranking"
         }
@@ -7738,6 +7750,10 @@
         {
           "pageId": "municipality-ranking:care-home-yogo-residents",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:care-home-yogo-residents",
@@ -8879,6 +8895,10 @@
         {
           "pageId": "municipality-ranking:carryover-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:carryover-municipal",
@@ -10881,6 +10901,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:child-welfare-expense-municipal",
           "kind": "ranking"
         }
@@ -11141,6 +11165,10 @@
         {
           "pageId": "municipality-ranking:child-welfare-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:child-welfare-facility-count",

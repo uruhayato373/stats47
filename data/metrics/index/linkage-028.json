@@ -610,6 +610,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:temporary-occupant-dwellings",
           "kind": "ranking"
         }
@@ -989,6 +993,10 @@
         {
           "pageId": "municipality-ranking:tertiary-industry-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:tertiary-industry-workers",
@@ -3393,6 +3401,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:three-wheeled-light-vehicle-count",
           "kind": "ranking"
         }
@@ -4619,6 +4631,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:total-dwellings",
           "kind": "ranking"
         }
@@ -4653,6 +4669,10 @@
         {
           "pageId": "municipality-ranking:total-expenditure-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:total-expenditure-municipal",
@@ -5460,6 +5480,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:total-household-members-housing-survey",
           "kind": "ranking"
         }
@@ -5494,6 +5518,10 @@
         {
           "pageId": "municipality-ranking:total-households-housing-survey",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:total-households-housing-survey",
@@ -7861,6 +7889,10 @@
         {
           "pageId": "municipality-ranking:total-population-female-city",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:total-population-female-city",

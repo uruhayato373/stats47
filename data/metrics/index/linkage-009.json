@@ -283,6 +283,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:food-store-count",
           "kind": "ranking"
         }
@@ -317,6 +321,10 @@
         {
           "pageId": "municipality-ranking:for-sale-housing-floor-area-starts",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:for-sale-housing-floor-area-starts",
@@ -12132,6 +12140,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:general-affairs-expense-municipal",
           "kind": "ranking"
         }
@@ -14109,6 +14121,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:general-household-members-in-dwellings",
           "kind": "ranking"
         }
@@ -14143,6 +14159,10 @@
         {
           "pageId": "municipality-ranking:general-household-members-outside-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:general-household-members-outside-dwellings",

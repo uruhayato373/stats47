@@ -1,6 +1,11 @@
 import { STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY } from '@stats47/area';
 
 import { METRICS_REGISTRY } from '../registry';
+import {
+  SSDS_EXPANSION_NEW_THEMES,
+  SSDS_EXPANSION_POSITIVE_ONLY_KEYS,
+  SSDS_EXPANSION_THEME_METRICS,
+} from './municipality-ssds-expansion';
 
 export type MunicipalityMetricAvailability =
   | {
@@ -994,9 +999,29 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
     status: 'unknown',
     reason: 'WP0でcities.json artifact不在。未取得と非対応を区別できないため',
   },
+  // 2026-10-22 社会・人口統計体系の未使用コードの公開判断 (判定の記録は municipality-ssds-expansion.ts)
+  ...ssdsExpansionAvailability(),
 };
 
-export const MUNICIPALITY_THEME_CATALOGS: Readonly<
+function ssdsExpansionAvailability(): Record<string, MunicipalityMetricAvailability> {
+  const positiveOnly = new Set(SSDS_EXPANSION_POSITIVE_ONLY_KEYS);
+  return Object.fromEntries(
+    Object.values(SSDS_EXPANSION_THEME_METRICS)
+      .flat()
+      .map((metricKey) => [
+        metricKey,
+        {
+          status: 'published',
+          entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+          comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+          // 0 の割合が 50% 以上 (施設・区域が無い自治体の 0) は 0 を除いて順位を付ける
+          ...(positiveOnly.has(metricKey) ? { valuePolicy: { minExclusive: 0 } } : {}),
+        } satisfies MunicipalityMetricAvailability,
+      ])
+  );
+}
+
+const BASE_MUNICIPALITY_THEME_CATALOGS: Readonly<
   Record<string, MunicipalityThemeCatalog>
 > = {
   'aging-society': {
@@ -1347,6 +1372,34 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
     status: 'active',
   },
 };
+
+/** 既存テーマに社会・人口統計体系の拡充分 (municipality-ssds-expansion.ts) を足し、新設テーマを加えたもの。 */
+export const MUNICIPALITY_THEME_CATALOGS: Readonly<
+  Record<string, MunicipalityThemeCatalog>
+> = withSsdsExpansionThemes(BASE_MUNICIPALITY_THEME_CATALOGS);
+
+function withSsdsExpansionThemes(
+  base: Readonly<Record<string, MunicipalityThemeCatalog>>
+): Record<string, MunicipalityThemeCatalog> {
+  const themes: Record<string, MunicipalityThemeCatalog> = { ...base };
+  for (const [slug, { title, defaultMetricKey }] of Object.entries(SSDS_EXPANSION_NEW_THEMES)) {
+    if (themes[slug]) throw new Error(`SSDS expansion theme already exists: ${slug}`);
+    themes[slug] = {
+      slug,
+      title,
+      metricKeys: [],
+      defaultMetricKey,
+      entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+      status: 'active',
+    };
+  }
+  for (const [slug, metricKeys] of Object.entries(SSDS_EXPANSION_THEME_METRICS)) {
+    const theme = themes[slug];
+    if (!theme) throw new Error(`SSDS expansion references unknown municipality theme: ${slug}`);
+    themes[slug] = { ...theme, metricKeys: [...theme.metricKeys, ...metricKeys] };
+  }
+  return themes;
+}
 
 export function getMunicipalityMetricAvailability(
   metricKey: string

@@ -1353,6 +1353,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:donations-received-municipal",
           "kind": "ranking"
         }
@@ -1387,6 +1391,10 @@
         {
           "pageId": "municipality-ranking:double-glazed-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:double-glazed-dwellings",
@@ -2776,6 +2784,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-built-1970-or-earlier",
           "kind": "ranking"
         }
@@ -2810,6 +2822,10 @@
         {
           "pageId": "municipality-ranking:dwellings-built-1971-1980",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-built-1971-1980",
@@ -2848,6 +2864,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-built-1981-1990",
           "kind": "ranking"
         }
@@ -2882,6 +2902,10 @@
         {
           "pageId": "municipality-ranking:dwellings-built-1991-2000",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-built-1991-2000",
@@ -2920,6 +2944,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-built-2001-2005",
           "kind": "ranking"
         }
@@ -2954,6 +2982,10 @@
         {
           "pageId": "municipality-ranking:dwellings-built-2006-2010",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-built-2006-2010",
@@ -2992,6 +3024,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-built-2011-2015",
           "kind": "ranking"
         }
@@ -3026,6 +3062,10 @@
         {
           "pageId": "municipality-ranking:dwellings-built-2016-2018-sep",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-built-2016-2018-sep",
@@ -3064,6 +3104,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-built-2016-2020",
           "kind": "ranking"
         }
@@ -3098,6 +3142,10 @@
         {
           "pageId": "municipality-ranking:dwellings-built-2021-2023-sep",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-built-2021-2023-sep",
@@ -3136,6 +3184,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-tatami-12-18",
           "kind": "ranking"
         }
@@ -3170,6 +3222,10 @@
         {
           "pageId": "municipality-ranking:dwellings-tatami-18-24",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-tatami-18-24",
@@ -3208,6 +3264,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-tatami-24-30",
           "kind": "ranking"
         }
@@ -3242,6 +3302,10 @@
         {
           "pageId": "municipality-ranking:dwellings-tatami-30-36",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-tatami-30-36",
@@ -3280,6 +3344,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-tatami-36-48",
           "kind": "ranking"
         }
@@ -3314,6 +3382,10 @@
         {
           "pageId": "municipality-ranking:dwellings-tatami-48-plus",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-tatami-48-plus",
@@ -3352,6 +3424,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-tatami-6-12",
           "kind": "ranking"
         }
@@ -3388,6 +3464,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:dwellings-tatami-under-6",
           "kind": "ranking"
         }
@@ -3422,6 +3502,10 @@
         {
           "pageId": "municipality-ranking:dwellings-under-construction",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:dwellings-under-construction",
@@ -4204,6 +4288,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:education-attainment-elementary-junior-high",
           "kind": "ranking"
         }
@@ -4238,6 +4326,10 @@
         {
           "pageId": "municipality-ranking:education-attainment-graduates-total",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:education-attainment-graduates-total",
@@ -4276,6 +4368,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:education-attainment-high-school",
           "kind": "ranking"
         }
@@ -4312,6 +4408,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:education-attainment-junior-college",
           "kind": "ranking"
         }
@@ -4346,6 +4446,10 @@
         {
           "pageId": "municipality-ranking:education-attainment-university",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:education-attainment-university",
@@ -5027,6 +5131,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:education-learning-support-private-employees",
           "kind": "ranking"
         }
@@ -5061,6 +5169,10 @@
         {
           "pageId": "municipality-ranking:education-learning-support-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:education-learning-support-private-establishments",
@@ -5099,6 +5211,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:education-learning-support-private-net-value-added",
           "kind": "ranking"
         }
@@ -5133,6 +5249,10 @@
         {
           "pageId": "municipality-ranking:education-learning-support-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:education-learning-support-private-sales",
@@ -5383,6 +5503,10 @@
         {
           "pageId": "municipality-ranking:elderly-couple-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:aging-society",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:elderly-couple-households",
@@ -6040,6 +6164,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elderly-equipment-dwellings",
           "kind": "ranking"
         }
@@ -6074,6 +6202,10 @@
         {
           "pageId": "municipality-ranking:elderly-friendly-apartment-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:elderly-friendly-apartment-dwellings",
@@ -6521,6 +6653,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:aging-society",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elderly-single-households",
           "kind": "ranking"
         }
@@ -6557,6 +6693,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:aging-society",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elderly-single-households-female",
           "kind": "ranking"
         }
@@ -6591,6 +6731,10 @@
         {
           "pageId": "municipality-ranking:elderly-single-households-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:aging-society",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:elderly-single-households-male",
@@ -6700,6 +6844,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elderly-welfare-expense-municipal",
           "kind": "ranking"
         }
@@ -6766,6 +6914,10 @@
         {
           "pageId": "municipality-ranking:elderly-welfare-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:elderly-welfare-facility-count",

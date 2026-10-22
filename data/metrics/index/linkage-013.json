@@ -678,6 +678,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:japanese-population-female",
           "kind": "ranking"
         }
@@ -712,6 +716,10 @@
         {
           "pageId": "municipality-ranking:japanese-population-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:japanese-population-male",
@@ -4517,6 +4525,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:junior-high-school-expense-municipal",
           "kind": "ranking"
         }
@@ -7254,6 +7266,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:kindergarten-count-city",
           "kind": "ranking"
         }
@@ -7580,6 +7596,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:kindergarten-enrollment-city",
           "kind": "ranking"
         }
@@ -7614,6 +7634,10 @@
         {
           "pageId": "municipality-ranking:kindergarten-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:kindergarten-expense-municipal",
@@ -8884,6 +8908,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:labor-expense-municipal",
           "kind": "ranking"
         }
@@ -8955,6 +8983,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:labor-force-population-city",
           "kind": "ranking"
         }
@@ -8991,6 +9023,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:labor-force-population-female",
           "kind": "ranking"
         }
@@ -9025,6 +9061,10 @@
         {
           "pageId": "municipality-ranking:labor-force-population-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:labor-force-population-male",

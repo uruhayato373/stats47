@@ -4821,7 +4821,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
     副産物: moving-in-excess-rate の subtitle 誤り是正 + SSDS 系 10 config の displayName/url 補記
 - **残り (次の拡充はここから)**:
   1. ~~品質監査未了 2 件 (industrial-land-price / major-lake-area) の要否判断~~ **済 (2026-10-22)**: R2 cities.json の実測で、`major-lake-area` は 2024 年の 0 (湖が無い) を除いた 117 自治体の順位として公開 (`valuePolicy: {minExclusive: 0}`・テーマ「土地・面積」に追加、174 → 175)。`industrial-land-price` は 2005 年のみ・値ありは 22% のため unsupported に確定。
-  2. **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
+  2. ~~**SSDS 未使用 733 指標**~~ **済 (2026-10-22)**: 733 コードを e-Stat 実測で判定 (最新年 2015 以降・値のある市区町村 800 以上・0 の割合 90% 未満・公開済みと値が一致しない) し、542 件を公開 (新規の市区町村専用 530 + 県の指標に市区町村を足した 12。175 → 717)。テーマを 10 件新設 (19 → 29)、市区町村ページのデータブックには基本の 24 件だけを足した。判定の記録は `packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts`。以下は当時のメモ。
+     **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
   3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
@@ -4833,6 +4834,13 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   confounded (doc 44 記録済み)
 - **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01` (公開 key が 10 を超えたため trigger 1 は成立。
   trigger 2=解説スロット・3=オーナー承認 は未成立)
+
+### [CITY-PAGE-WEIGHT-01] 市区町村数の多い県の市区町村ページが HTML の重さの警告 (900KB) を超える
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:サイト]
+
+- **証拠**: 2026-10-22 の本番で札幌市 (`/areas/01000/cities/01100`) の HTML は 855,840 bytes (gzip 57,670)。予算は `page-quality-budgets.json` の `html_bytes` 900,000 (warning)。同日の市区町村指標の拡充でデータブックに 24 指標を足し、同じページの dev 出力は 5,389,215 → 5,864,251 bytes (+8.8%・表の行 192 → 223) になった。本番も同じ割合なら約 93 万 bytes で警告を超える (デプロイ後の週次ページ品質監査で実測する)。
+- **次**: ① デプロイ後の `page-quality` 週次で札幌市・北海道の市町村の `html_bytes` を実測する。② 超えていれば、重さの内訳 (県内の市区町村一覧 179 件・データブックの表・RSC の写し) を測って大きいものから削る。データブックの表を節ごとに先頭数行 + 「すべて見る」にしても HTML は減らないので、削るなら RSC の重複か一覧の出し方を見る。
+- **完了条件**: 北海道の市町村ページの `html_bytes` が 900KB 未満。
 
 ### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
 

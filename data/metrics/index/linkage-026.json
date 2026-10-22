@@ -619,6 +619,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:shop-combined-dwellings",
           "kind": "ranking"
         }
@@ -2014,6 +2018,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:single-father-households-1-child",
           "kind": "ranking"
         }
@@ -2050,6 +2058,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:single-father-households-2-children",
           "kind": "ranking"
         }
@@ -2084,6 +2096,10 @@
         {
           "pageId": "municipality-ranking:single-father-households-3plus-children",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:single-father-households-3plus-children",
@@ -3070,6 +3086,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-1-child",
           "kind": "ranking"
         }
@@ -3106,6 +3126,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-2-children",
           "kind": "ranking"
         }
@@ -3140,6 +3164,10 @@
         {
           "pageId": "municipality-ranking:single-mother-households-3plus-children",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:single-mother-households-3plus-children",
@@ -7383,6 +7411,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:social-education-expense-municipal",
           "kind": "ranking"
         }
@@ -8028,6 +8060,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:social-welfare-expense-municipal",
           "kind": "ranking"
         }
@@ -8668,6 +8704,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:solar-water-heater-dwellings",
           "kind": "ranking"
         }
@@ -9204,6 +9244,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:special-nursing-home-capacity",
           "kind": "ranking"
         }
@@ -9238,6 +9282,10 @@
         {
           "pageId": "municipality-ranking:special-nursing-home-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:special-nursing-home-count",
@@ -9882,6 +9930,10 @@
         {
           "pageId": "municipality-ranking:specified-small-moped-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:specified-small-moped-count",

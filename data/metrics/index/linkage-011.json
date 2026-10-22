@@ -1387,6 +1387,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:health-physical-education-expense-municipal",
           "kind": "ranking"
         }
@@ -4094,6 +4098,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:high-school-expense-municipal",
           "kind": "ranking"
         }
@@ -4489,6 +4497,10 @@
         {
           "pageId": "municipality-ranking:high-school-students",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:high-school-students",
@@ -12471,6 +12483,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:hospital-bed-count-city",
           "kind": "ranking"
         }
@@ -12505,6 +12521,10 @@
         {
           "pageId": "municipality-ranking:hospital-count-city",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:hospital-count-city",
@@ -12573,6 +12593,10 @@
         {
           "pageId": "municipality-ranking:hospitals-with-long-term-care-beds",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:hospitals-with-long-term-care-beds",
@@ -12763,6 +12787,10 @@
         {
           "pageId": "municipality-ranking:household-members-outside-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:household-members-outside-dwellings",

@@ -235,6 +235,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:unoccupied-dwellings",
           "kind": "ranking"
         }
@@ -269,6 +273,10 @@
         {
           "pageId": "municipality-ranking:ur-corporation-rented-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:ur-corporation-rented-dwellings",
@@ -1123,6 +1131,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:urbanization-area",
           "kind": "ranking"
         }
@@ -1157,6 +1169,10 @@
         {
           "pageId": "municipality-ranking:urbanization-control-area-city",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:urbanization-control-area-city",
@@ -1421,6 +1437,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:usage-fees-municipal",
           "kind": "ranking"
         }
@@ -1490,6 +1510,10 @@
         {
           "pageId": "municipality-ranking:use-district-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:use-district-area",
@@ -1605,6 +1629,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:utilities-private-employees",
           "kind": "ranking"
         }
@@ -1639,6 +1667,10 @@
         {
           "pageId": "municipality-ranking:utilities-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:utilities-private-establishments",
@@ -1677,6 +1709,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:utilities-private-net-value-added",
           "kind": "ranking"
         }
@@ -1711,6 +1747,10 @@
         {
           "pageId": "municipality-ranking:vacant-houses-city",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:vacant-houses-city",
@@ -5929,6 +5969,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:waste-direct-recycling",
           "kind": "ranking"
         }
@@ -5963,6 +6007,10 @@
         {
           "pageId": "municipality-ranking:waste-generated-direct-delivery",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:waste-generated-direct-delivery",
@@ -6001,6 +6049,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:waste-generated-group-collection",
           "kind": "ranking"
         }
@@ -6035,6 +6087,10 @@
         {
           "pageId": "municipality-ranking:waste-generated-planned-collection",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:waste-generated-planned-collection",
@@ -6073,6 +6129,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:waste-per-capita-per-day",
           "kind": "ranking"
         }
@@ -6107,6 +6167,10 @@
         {
           "pageId": "municipality-ranking:waste-recycled-after-processing",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:waste-recycled-after-processing",
@@ -6348,6 +6412,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:waste-recycling-rate",
           "kind": "ranking"
         },
@@ -6388,6 +6456,10 @@
         {
           "pageId": "municipality-ranking:waste-treated-total",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:waste-treated-total",

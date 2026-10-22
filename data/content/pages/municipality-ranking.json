@@ -13,33 +13,33 @@
       "id": "municipality-ranking:accommodation-food-services-private-employees",
       "kind": "municipality-ranking",
       "key": "accommodation-food-services-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・宿泊業、飲食サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/accommodation-food-services-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:accommodation-food-services-private-establishments",
       "kind": "municipality-ranking",
       "key": "accommodation-food-services-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・宿泊業、飲食サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/accommodation-food-services-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:accommodation-food-services-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "accommodation-food-services-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・宿泊業、飲食サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/accommodation-food-services-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:accommodation-food-services-private-sales",
       "kind": "municipality-ranking",
       "key": "accommodation-food-services-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・宿泊業、飲食サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/accommodation-food-services-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agricultural-output",
@@ -55,55 +55,55 @@
       "key": "agriculture-forestry-fisheries-expense-municipal",
       "title": "農林水産業費の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-fisheries-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-fisheries-private-employees",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-fisheries-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・農林漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-fisheries-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-fisheries-private-establishments",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-fisheries-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・農林漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-fisheries-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-fisheries-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-fisheries-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・農林漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-fisheries-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-fisheries-private-sales",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-fisheries-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・農林漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-fisheries-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-private-employees",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・農業、林業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:agriculture-forestry-private-establishments",
       "kind": "municipality-ranking",
       "key": "agriculture-forestry-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・農業、林業）の市区町村ランキング",
       "href": "/municipalities/ranking/agriculture-forestry-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:annual-sales-amount",
@@ -133,25 +133,25 @@
       "id": "municipality-ranking:apartment-dwellings",
       "kind": "municipality-ranking",
       "key": "apartment-dwellings",
-      "title": "共同住宅数の市区町村ランキング",
+      "title": "共同住宅数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/apartment-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:apartment-dwellings-non-wooden",
       "kind": "municipality-ranking",
       "key": "apartment-dwellings-non-wooden",
-      "title": "共同住宅数の市区町村ランキング",
+      "title": "共同住宅数（非木造）の市区町村ランキング",
       "href": "/municipalities/ranking/apartment-dwellings-non-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:apartment-dwellings-wooden",
       "kind": "municipality-ranking",
       "key": "apartment-dwellings-wooden",
-      "title": "共同住宅数の市区町村ランキング",
+      "title": "共同住宅数（木造）の市区町村ランキング",
       "href": "/municipalities/ranking/apartment-dwellings-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:apparel-store-count",
@@ -159,7 +159,7 @@
       "key": "apparel-store-count",
       "title": "織物・衣服・身の回り品小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/apparel-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:assembly-expense-municipal",
@@ -167,15 +167,15 @@
       "key": "assembly-expense-municipal",
       "title": "議会費の市区町村ランキング",
       "href": "/municipalities/ranking/assembly-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:assessed-residential-land-area",
       "kind": "municipality-ranking",
       "key": "assessed-residential-land-area",
-      "title": "評価総地積の市区町村ランキング",
+      "title": "評価総地積（宅地）の市区町村ランキング",
       "href": "/municipalities/ranking/assessed-residential-land-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:auto-insurance-penetration-bodily-injury-actual",
@@ -197,17 +197,17 @@
       "id": "municipality-ranking:autolock-apartment-main-households",
       "kind": "municipality-ranking",
       "key": "autolock-apartment-main-households",
-      "title": "オートロック式共同住宅に住む世帯数の市区町村ランキング",
+      "title": "オートロック式共同住宅に住む世帯数（主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/autolock-apartment-main-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:autolock-apartment-ordinary-households",
       "kind": "municipality-ranking",
       "key": "autolock-apartment-ordinary-households",
-      "title": "オートロック式共同住宅に住む世帯数の市区町村ランキング",
+      "title": "オートロック式共同住宅に住む世帯数（普通世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/autolock-apartment-ordinary-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:automobile-acquisition-tax-grant-municipal",
@@ -215,7 +215,7 @@
       "key": "automobile-acquisition-tax-grant-municipal",
       "title": "自動車取得税交付金の市区町村ランキング",
       "href": "/municipalities/ranking/automobile-acquisition-tax-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:automobile-environmental-tax-grant-municipal",
@@ -223,7 +223,7 @@
       "key": "automobile-environmental-tax-grant-municipal",
       "title": "自動車税環境性能割交付金の市区町村ランキング",
       "href": "/municipalities/ranking/automobile-environmental-tax-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:births",
@@ -239,7 +239,7 @@
       "key": "broadcast-reception-contracts",
       "title": "テレビ放送受信契約数の市区町村ランキング",
       "href": "/municipalities/ranking/broadcast-reception-contracts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:care-home-yogo-capacity",
@@ -247,7 +247,7 @@
       "key": "care-home-yogo-capacity",
       "title": "養護老人ホーム定員数の市区町村ランキング",
       "href": "/municipalities/ranking/care-home-yogo-capacity",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:care-home-yogo-count",
@@ -255,7 +255,7 @@
       "key": "care-home-yogo-count",
       "title": "養護老人ホーム数の市区町村ランキング",
       "href": "/municipalities/ranking/care-home-yogo-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:care-home-yogo-residents",
@@ -263,7 +263,7 @@
       "key": "care-home-yogo-residents",
       "title": "養護老人ホーム在所者数の市区町村ランキング",
       "href": "/municipalities/ranking/care-home-yogo-residents",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:carryover-municipal",
@@ -271,7 +271,7 @@
       "key": "carryover-municipal",
       "title": "繰越金の市区町村ランキング",
       "href": "/municipalities/ranking/carryover-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:census-household-change-rate-5y",
@@ -303,7 +303,7 @@
       "key": "child-welfare-expense-municipal",
       "title": "児童福祉費の市区町村ランキング",
       "href": "/municipalities/ranking/child-welfare-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:child-welfare-facility-count",
@@ -311,7 +311,7 @@
       "key": "child-welfare-facility-count",
       "title": "児童福祉施設等数の市区町村ランキング",
       "href": "/municipalities/ranking/child-welfare-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:city-planning-expense-municipal",
@@ -319,7 +319,7 @@
       "key": "city-planning-expense-municipal",
       "title": "都市計画費の市区町村ランキング",
       "href": "/municipalities/ranking/city-planning-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:civil-engineering-expense-municipal",
@@ -335,7 +335,7 @@
       "key": "cleaning-expense-municipal",
       "title": "清掃費の市区町村ランキング",
       "href": "/municipalities/ranking/cleaning-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:clinic-bed-count",
@@ -343,7 +343,7 @@
       "key": "clinic-bed-count",
       "title": "一般診療所病床数の市区町村ランキング",
       "href": "/municipalities/ranking/clinic-bed-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:clinics-with-beds",
@@ -351,7 +351,7 @@
       "key": "clinics-with-beds",
       "title": "有床一般診療所数の市区町村ランキング",
       "href": "/municipalities/ranking/clinics-with-beds",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:cohabiting-household-members",
@@ -359,7 +359,7 @@
       "key": "cohabiting-household-members",
       "title": "住宅に同居の普通世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/cohabiting-household-members",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commerce-industry-expense-municipal",
@@ -367,7 +367,7 @@
       "key": "commerce-industry-expense-municipal",
       "title": "商工費の市区町村ランキング",
       "href": "/municipalities/ranking/commerce-industry-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commercial-and-neighborhood-commercial-area",
@@ -375,7 +375,7 @@
       "key": "commercial-and-neighborhood-commercial-area",
       "title": "商業・近隣商業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/commercial-and-neighborhood-commercial-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commercial-district-area",
@@ -383,7 +383,7 @@
       "key": "commercial-district-area",
       "title": "商業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/commercial-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commercial-establishments",
@@ -391,7 +391,7 @@
       "key": "commercial-establishments",
       "title": "商業事業所数の市区町村ランキング",
       "href": "/municipalities/ranking/commercial-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commercial-farm-households",
@@ -399,7 +399,7 @@
       "key": "commercial-farm-households",
       "title": "販売農家数の市区町村ランキング",
       "href": "/municipalities/ranking/commercial-farm-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commute-by-bicycle",
@@ -469,25 +469,25 @@
       "id": "municipality-ranking:commuters-by-company-school-bus",
       "kind": "municipality-ranking",
       "key": "commuters-by-company-school-bus",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（勤め先・学校のバス）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-by-company-school-bus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-by-other-means",
       "kind": "municipality-ranking",
       "key": "commuters-by-other-means",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（その他の交通手段）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-by-other-means",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-by-taxi",
       "kind": "municipality-ranking",
       "key": "commuters-by-taxi",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（ハイヤー・タクシー）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-by-taxi",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-from-other-municipalities",
@@ -495,31 +495,31 @@
       "key": "commuters-from-other-municipalities",
       "title": "他市区町村からの通勤者数の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-from-other-municipalities",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-to-other-municipalities",
       "kind": "municipality-ranking",
       "key": "commuters-to-other-municipalities",
-      "title": "他市区町村への通勤者数の市区町村ランキング",
+      "title": "他市区町村への通勤者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-to-other-municipalities",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-to-other-municipalities-female",
       "kind": "municipality-ranking",
       "key": "commuters-to-other-municipalities-female",
-      "title": "他市区町村への通勤者数の市区町村ランキング",
+      "title": "他市区町村への通勤者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-to-other-municipalities-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-to-other-municipalities-male",
       "kind": "municipality-ranking",
       "key": "commuters-to-other-municipalities-male",
-      "title": "他市区町村への通勤者数の市区町村ランキング",
+      "title": "他市区町村への通勤者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-to-other-municipalities-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-to-other-municipality-same-prefecture",
@@ -527,7 +527,7 @@
       "key": "commuters-to-other-municipality-same-prefecture",
       "title": "県内他市区町村への通勤・通学者数の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-to-other-municipality-same-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-to-other-prefecture",
@@ -535,13 +535,13 @@
       "key": "commuters-to-other-prefecture",
       "title": "他県への通勤・通学者数の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-to-other-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-total",
       "kind": "municipality-ranking",
       "key": "commuters-total",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-total",
       "published": true
     },
@@ -549,17 +549,17 @@
       "id": "municipality-ranking:commuters-using-three-plus-modes",
       "kind": "municipality-ranking",
       "key": "commuters-using-three-plus-modes",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（利用交通手段が3種類以上）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-using-three-plus-modes",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-using-two-modes",
       "kind": "municipality-ranking",
       "key": "commuters-using-two-modes",
-      "title": "自宅外通勤・通学者数の市区町村ランキング",
+      "title": "自宅外通勤・通学者数（利用交通手段が2種類）の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-using-two-modes",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:commuters-within-own-municipality",
@@ -567,7 +567,7 @@
       "key": "commuters-within-own-municipality",
       "title": "自市区町村内通勤・通学者数の市区町村ランキング",
       "href": "/municipalities/ranking/commuters-within-own-municipality",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:company-executives",
@@ -575,39 +575,39 @@
       "key": "company-executives",
       "title": "役員数の市区町村ランキング",
       "href": "/municipalities/ranking/company-executives",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:compound-services-private-employees",
       "kind": "municipality-ranking",
       "key": "compound-services-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・複合サービス事業）の市区町村ランキング",
       "href": "/municipalities/ranking/compound-services-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:compound-services-private-establishments",
       "kind": "municipality-ranking",
       "key": "compound-services-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・複合サービス事業）の市区町村ランキング",
       "href": "/municipalities/ranking/compound-services-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:compound-services-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "compound-services-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・複合サービス事業）の市区町村ランキング",
       "href": "/municipalities/ranking/compound-services-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:compound-services-private-sales",
       "kind": "municipality-ranking",
       "key": "compound-services-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・複合サービス事業）の市区町村ランキング",
       "href": "/municipalities/ranking/compound-services-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:consolidated-real-deficit-ratio-municipal",
@@ -623,31 +623,31 @@
       "key": "construction-private-employees",
       "title": "建設業従業者数（民営）の市区町村ランキング",
       "href": "/municipalities/ranking/construction-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:construction-private-establishments",
       "kind": "municipality-ranking",
       "key": "construction-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・建設業）の市区町村ランキング",
       "href": "/municipalities/ranking/construction-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:construction-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "construction-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・建設業）の市区町村ランキング",
       "href": "/municipalities/ranking/construction-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:construction-private-sales",
       "kind": "municipality-ranking",
       "key": "construction-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・建設業）の市区町村ランキング",
       "href": "/municipalities/ranking/construction-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:contributions-and-charges-municipal",
@@ -655,7 +655,7 @@
       "key": "contributions-and-charges-municipal",
       "title": "分担金及び負担金の市区町村ランキング",
       "href": "/municipalities/ranking/contributions-and-charges-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:crime-rate-per-1k",
@@ -725,17 +725,17 @@
       "id": "municipality-ranking:debt-service-by-nature-municipal",
       "kind": "municipality-ranking",
       "key": "debt-service-by-nature-municipal",
-      "title": "公債費の市区町村ランキング",
+      "title": "公債費（市町村財政・性質別）の市区町村ランキング",
       "href": "/municipalities/ranking/debt-service-by-nature-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:debt-service-by-purpose-municipal",
       "kind": "municipality-ranking",
       "key": "debt-service-by-purpose-municipal",
-      "title": "公債費の市区町村ランキング",
+      "title": "公債費（市町村財政・目的別）の市区町村ランキング",
       "href": "/municipalities/ranking/debt-service-by-purpose-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:densely-inhabited-district-population",
@@ -791,7 +791,7 @@
       "key": "dentists-medical-facilities",
       "title": "医療施設歯科医師数の市区町村ランキング",
       "href": "/municipalities/ranking/dentists-medical-facilities",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:department-store-count-per-100k",
@@ -829,25 +829,25 @@
       "id": "municipality-ranking:detached-houses",
       "kind": "municipality-ranking",
       "key": "detached-houses",
-      "title": "一戸建住宅数の市区町村ランキング",
+      "title": "一戸建住宅数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/detached-houses",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:detached-houses-non-wooden",
       "kind": "municipality-ranking",
       "key": "detached-houses-non-wooden",
-      "title": "一戸建住宅数の市区町村ランキング",
+      "title": "一戸建住宅数（非木造）の市区町村ランキング",
       "href": "/municipalities/ranking/detached-houses-non-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:detached-houses-wooden",
       "kind": "municipality-ranking",
       "key": "detached-houses-wooden",
-      "title": "一戸建住宅数の市区町村ランキング",
+      "title": "一戸建住宅数（木造）の市区町村ランキング",
       "href": "/municipalities/ranking/detached-houses-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:disability-support-facility-count",
@@ -855,7 +855,7 @@
       "key": "disability-support-facility-count",
       "title": "障害者支援施設等数の市区町村ランキング",
       "href": "/municipalities/ranking/disability-support-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:disaster-recovery-expense-municipal",
@@ -863,7 +863,7 @@
       "key": "disaster-recovery-expense-municipal",
       "title": "災害復旧費の市区町村ランキング",
       "href": "/municipalities/ranking/disaster-recovery-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:disaster-recovery-project-expense-municipal",
@@ -871,7 +871,7 @@
       "key": "disaster-recovery-project-expense-municipal",
       "title": "災害復旧事業費の市区町村ランキング",
       "href": "/municipalities/ranking/disaster-recovery-project-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:disaster-relief-expense-municipal",
@@ -879,15 +879,15 @@
       "key": "disaster-relief-expense-municipal",
       "title": "災害救助費の市区町村ランキング",
       "href": "/municipalities/ranking/disaster-relief-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dispatched-workers",
       "kind": "municipality-ranking",
       "key": "dispatched-workers",
-      "title": "雇用者数の市区町村ランキング",
+      "title": "雇用者数（派遣社員）の市区町村ランキング",
       "href": "/municipalities/ranking/dispatched-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:divorces",
@@ -903,7 +903,7 @@
       "key": "donations-received-municipal",
       "title": "寄附金の市区町村ランキング",
       "href": "/municipalities/ranking/donations-received-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:double-glazed-dwellings",
@@ -911,7 +911,7 @@
       "key": "double-glazed-dwellings",
       "title": "二重サッシ・複層ガラスの窓のある住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/double-glazed-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwelling-per-floor-area",
@@ -925,145 +925,145 @@
       "id": "municipality-ranking:dwellings-built-1970-or-earlier",
       "kind": "municipality-ranking",
       "key": "dwellings-built-1970-or-earlier",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（1970年以前）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-1970-or-earlier",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-1971-1980",
       "kind": "municipality-ranking",
       "key": "dwellings-built-1971-1980",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（1971～1980年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-1971-1980",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-1981-1990",
       "kind": "municipality-ranking",
       "key": "dwellings-built-1981-1990",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（1981～1990年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-1981-1990",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-1991-2000",
       "kind": "municipality-ranking",
       "key": "dwellings-built-1991-2000",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（1991～2000年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-1991-2000",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2001-2005",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2001-2005",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2001～2005年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2001-2005",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2006-2010",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2006-2010",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2006～2010年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2006-2010",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2011-2015",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2011-2015",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2011～2015年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2011-2015",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2016-2018-sep",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2016-2018-sep",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2016～2018年9月）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2016-2018-sep",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2016-2020",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2016-2020",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2016～2020年）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2016-2020",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-built-2021-2023-sep",
       "kind": "municipality-ranking",
       "key": "dwellings-built-2021-2023-sep",
-      "title": "建築時期別住宅数の市区町村ランキング",
+      "title": "建築時期別住宅数（2021～2023年9月）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-built-2021-2023-sep",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-12-18",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-12-18",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（12.0～17.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-12-18",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-18-24",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-18-24",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（18.0～23.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-18-24",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-24-30",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-24-30",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（24.0～29.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-24-30",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-30-36",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-30-36",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（30.0～35.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-30-36",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-36-48",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-36-48",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（36.0～47.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-36-48",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-48-plus",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-48-plus",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（48.0畳以上）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-48-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-6-12",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-6-12",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（6.0～11.9畳）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-6-12",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-tatami-under-6",
       "kind": "municipality-ranking",
       "key": "dwellings-tatami-under-6",
-      "title": "居住室の畳数別住宅数の市区町村ランキング",
+      "title": "居住室の畳数別住宅数（5.9畳以下）の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-tatami-under-6",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:dwellings-under-construction",
@@ -1071,7 +1071,7 @@
       "key": "dwellings-under-construction",
       "title": "建築中住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/dwellings-under-construction",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:earthquake-retrofit-housing",
@@ -1085,41 +1085,41 @@
       "id": "municipality-ranking:education-attainment-elementary-junior-high",
       "kind": "municipality-ranking",
       "key": "education-attainment-elementary-junior-high",
-      "title": "最終学歴人口の市区町村ランキング",
+      "title": "最終学歴人口（小学校・中学校）の市区町村ランキング",
       "href": "/municipalities/ranking/education-attainment-elementary-junior-high",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-attainment-graduates-total",
       "kind": "municipality-ranking",
       "key": "education-attainment-graduates-total",
-      "title": "最終学歴人口の市区町村ランキング",
+      "title": "最終学歴人口（卒業者総数）の市区町村ランキング",
       "href": "/municipalities/ranking/education-attainment-graduates-total",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-attainment-high-school",
       "kind": "municipality-ranking",
       "key": "education-attainment-high-school",
-      "title": "最終学歴人口の市区町村ランキング",
+      "title": "最終学歴人口（高校・旧中）の市区町村ランキング",
       "href": "/municipalities/ranking/education-attainment-high-school",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-attainment-junior-college",
       "kind": "municipality-ranking",
       "key": "education-attainment-junior-college",
-      "title": "最終学歴人口の市区町村ランキング",
+      "title": "最終学歴人口（短大・高専）の市区町村ランキング",
       "href": "/municipalities/ranking/education-attainment-junior-college",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-attainment-university",
       "kind": "municipality-ranking",
       "key": "education-attainment-university",
-      "title": "最終学歴人口の市区町村ランキング",
+      "title": "最終学歴人口（大学・大学院）の市区町村ランキング",
       "href": "/municipalities/ranking/education-attainment-university",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-cost-all-households",
@@ -1141,33 +1141,33 @@
       "id": "municipality-ranking:education-learning-support-private-employees",
       "kind": "municipality-ranking",
       "key": "education-learning-support-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・教育、学習支援業）の市区町村ランキング",
       "href": "/municipalities/ranking/education-learning-support-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-learning-support-private-establishments",
       "kind": "municipality-ranking",
       "key": "education-learning-support-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・教育、学習支援業）の市区町村ランキング",
       "href": "/municipalities/ranking/education-learning-support-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-learning-support-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "education-learning-support-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・教育、学習支援業）の市区町村ランキング",
       "href": "/municipalities/ranking/education-learning-support-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:education-learning-support-private-sales",
       "kind": "municipality-ranking",
       "key": "education-learning-support-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・教育、学習支援業）の市区町村ランキング",
       "href": "/municipalities/ranking/education-learning-support-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-couple-households",
@@ -1175,7 +1175,7 @@
       "key": "elderly-couple-households",
       "title": "高齢夫婦のみの世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-couple-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-couple-only-household-ratio",
@@ -1191,7 +1191,7 @@
       "key": "elderly-equipment-dwellings",
       "title": "高齢者等用設備住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-equipment-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-friendly-apartment-dwellings",
@@ -1199,7 +1199,7 @@
       "key": "elderly-friendly-apartment-dwellings",
       "title": "高齢者対応型共同住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-friendly-apartment-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-population-ratio",
@@ -1213,25 +1213,25 @@
       "id": "municipality-ranking:elderly-single-households",
       "kind": "municipality-ranking",
       "key": "elderly-single-households",
-      "title": "65歳以上世帯員の単独世帯数の市区町村ランキング",
+      "title": "65歳以上世帯員の単独世帯数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-single-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-single-households-female",
       "kind": "municipality-ranking",
       "key": "elderly-single-households-female",
-      "title": "65歳以上世帯員の単独世帯数の市区町村ランキング",
+      "title": "65歳以上世帯員の単独世帯数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-single-households-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-single-households-male",
       "kind": "municipality-ranking",
       "key": "elderly-single-households-male",
-      "title": "65歳以上世帯員の単独世帯数の市区町村ランキング",
+      "title": "65歳以上世帯員の単独世帯数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-single-households-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-welfare-expense-municipal",
@@ -1239,7 +1239,7 @@
       "key": "elderly-welfare-expense-municipal",
       "title": "老人福祉費の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-welfare-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-welfare-facility-count",
@@ -1247,7 +1247,7 @@
       "key": "elderly-welfare-facility-count",
       "title": "老人福祉施設数の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-welfare-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-workers-ratio",
@@ -1287,7 +1287,7 @@
       "key": "elementary-school-expense-municipal",
       "title": "小学校費の市区町村ランキング",
       "href": "/municipalities/ranking/elementary-school-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elementary-school-teachers",
@@ -1333,113 +1333,113 @@
       "id": "municipality-ranking:employed-persons",
       "kind": "municipality-ranking",
       "key": "employed-persons",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-65plus",
       "kind": "municipality-ranking",
       "key": "employed-persons-65plus",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（65歳以上）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-65plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-female",
       "kind": "municipality-ranking",
       "key": "employed-persons-female",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-mainly-working",
       "kind": "municipality-ranking",
       "key": "employed-persons-mainly-working",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（主に仕事）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-mainly-working",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-male",
       "kind": "municipality-ranking",
       "key": "employed-persons-male",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-on-leave",
       "kind": "municipality-ranking",
       "key": "employed-persons-on-leave",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（休業者）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-on-leave",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-while-studying",
       "kind": "municipality-ranking",
       "key": "employed-persons-while-studying",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（通学のかたわら仕事）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-while-studying",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-persons-with-housework",
       "kind": "municipality-ranking",
       "key": "employed-persons-with-housework",
-      "title": "就業者数の市区町村ランキング",
+      "title": "就業者数（家事のほか仕事）の市区町村ランキング",
       "href": "/municipalities/ranking/employed-persons-with-housework",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employee-head-households",
       "kind": "municipality-ranking",
       "key": "employee-head-households",
-      "title": "家計を主に支える者が雇用者である世帯数の市区町村ランキング",
+      "title": "家計を主に支える者が雇用者である世帯数（普通世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/employee-head-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employee-head-households-commute-30-60min",
       "kind": "municipality-ranking",
       "key": "employee-head-households-commute-30-60min",
-      "title": "家計を主に支える者が雇用者である世帯数の市区町村ランキング",
+      "title": "家計を主に支える者が雇用者である世帯数（通勤30～60分未満）の市区町村ランキング",
       "href": "/municipalities/ranking/employee-head-households-commute-30-60min",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employee-head-households-commute-60-90min",
       "kind": "municipality-ranking",
       "key": "employee-head-households-commute-60-90min",
-      "title": "家計を主に支える者が雇用者である世帯数の市区町村ランキング",
+      "title": "家計を主に支える者が雇用者である世帯数（通勤60～90分未満）の市区町村ランキング",
       "href": "/municipalities/ranking/employee-head-households-commute-60-90min",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employee-head-households-commute-90min-plus",
       "kind": "municipality-ranking",
       "key": "employee-head-households-commute-90min-plus",
-      "title": "家計を主に支える者が雇用者である世帯数の市区町村ランキング",
+      "title": "家計を主に支える者が雇用者である世帯数（通勤90分以上）の市区町村ランキング",
       "href": "/municipalities/ranking/employee-head-households-commute-90min-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employee-head-households-commute-under-30min",
       "kind": "municipality-ranking",
       "key": "employee-head-households-commute-under-30min",
-      "title": "家計を主に支える者が雇用者である世帯数の市区町村ランキング",
+      "title": "家計を主に支える者が雇用者である世帯数（通勤30分未満）の市区町村ランキング",
       "href": "/municipalities/ranking/employee-head-households-commute-under-30min",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employees-census",
       "kind": "municipality-ranking",
       "key": "employees-census",
-      "title": "雇用者数の市区町村ランキング",
+      "title": "雇用者数（国勢調査）の市区町村ランキング",
       "href": "/municipalities/ranking/employees-census",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employer-housing-floor-area-starts",
@@ -1447,7 +1447,7 @@
       "key": "employer-housing-floor-area-starts",
       "title": "着工新設給与住宅床面積の市区町村ランキング",
       "href": "/municipalities/ranking/employer-housing-floor-area-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employer-housing-starts",
@@ -1455,7 +1455,7 @@
       "key": "employer-housing-starts",
       "title": "着工新設給与住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/employer-housing-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employer-provided-dwellings",
@@ -1463,7 +1463,7 @@
       "key": "employer-provided-dwellings",
       "title": "給与住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/employer-provided-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employers-with-employees",
@@ -1471,7 +1471,7 @@
       "key": "employers-with-employees",
       "title": "雇人のある業主数の市区町村ランキング",
       "href": "/municipalities/ranking/employers-with-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:exclusive-industrial-district-area",
@@ -1479,7 +1479,7 @@
       "key": "exclusive-industrial-district-area",
       "title": "工業専用地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/exclusive-industrial-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:exclusive-residential-district-area",
@@ -1487,7 +1487,7 @@
       "key": "exclusive-residential-district-area",
       "title": "住居専用地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/exclusive-residential-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:exclusive-residential-dwellings",
@@ -1495,7 +1495,7 @@
       "key": "exclusive-residential-dwellings",
       "title": "専用住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/exclusive-residential-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:family-workers",
@@ -1503,39 +1503,39 @@
       "key": "family-workers",
       "title": "家族従業者数の市区町村ランキング",
       "href": "/municipalities/ranking/family-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:finance-insurance-private-employees",
       "kind": "municipality-ranking",
       "key": "finance-insurance-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・金融業、保険業）の市区町村ランキング",
       "href": "/municipalities/ranking/finance-insurance-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:finance-insurance-private-establishments",
       "kind": "municipality-ranking",
       "key": "finance-insurance-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・金融業、保険業）の市区町村ランキング",
       "href": "/municipalities/ranking/finance-insurance-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:finance-insurance-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "finance-insurance-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・金融業、保険業）の市区町村ランキング",
       "href": "/municipalities/ranking/finance-insurance-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:finance-insurance-private-sales",
       "kind": "municipality-ranking",
       "key": "finance-insurance-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・金融業、保険業）の市区町村ランキング",
       "href": "/municipalities/ranking/finance-insurance-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:fire-affected-persons-count",
@@ -1559,7 +1559,7 @@
       "key": "fire-service-expense-municipal",
       "title": "消防費の市区町村ランキング",
       "href": "/municipalities/ranking/fire-service-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:fireproof-wooden-dwellings",
@@ -1567,7 +1567,7 @@
       "key": "fireproof-wooden-dwellings",
       "title": "防火木造住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/fireproof-wooden-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:fiscal-strength-index",
@@ -1581,17 +1581,17 @@
       "id": "municipality-ranking:fisheries-private-employees",
       "kind": "municipality-ranking",
       "key": "fisheries-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/fisheries-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:fisheries-private-establishments",
       "kind": "municipality-ranking",
       "key": "fisheries-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/fisheries-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:fixed-asset-tax-municipal",
@@ -1599,7 +1599,7 @@
       "key": "fixed-asset-tax-municipal",
       "title": "固定資産税の市区町村ランキング",
       "href": "/municipalities/ranking/fixed-asset-tax-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:floor-area-per-dwelling-owner",
@@ -1607,7 +1607,7 @@
       "key": "floor-area-per-dwelling-owner",
       "title": "持ち家住宅の延べ面積の市区町村ランキング",
       "href": "/municipalities/ranking/floor-area-per-dwelling-owner",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:floor-area-per-dwelling-rented",
@@ -1615,7 +1615,7 @@
       "key": "floor-area-per-dwelling-rented",
       "title": "借家住宅の延べ面積の市区町村ランキング",
       "href": "/municipalities/ranking/floor-area-per-dwelling-rented",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:food-store-count",
@@ -1623,7 +1623,7 @@
       "key": "food-store-count",
       "title": "飲食料品小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/food-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:for-sale-housing-floor-area-starts",
@@ -1631,7 +1631,7 @@
       "key": "for-sale-housing-floor-area-starts",
       "title": "着工新設分譲住宅床面積の市区町村ランキング",
       "href": "/municipalities/ranking/for-sale-housing-floor-area-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:foreign-population-per-100k",
@@ -1711,7 +1711,7 @@
       "key": "general-affairs-expense-municipal",
       "title": "総務費の市区町村ランキング",
       "href": "/municipalities/ranking/general-affairs-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-clinic-count",
@@ -1783,7 +1783,7 @@
       "key": "general-household-members-in-dwellings",
       "title": "住宅に住む一般世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/general-household-members-in-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-household-members-outside-dwellings",
@@ -1791,7 +1791,7 @@
       "key": "general-household-members-outside-dwellings",
       "title": "住宅以外に住む一般世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/general-household-members-outside-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-households-in-dwellings",
@@ -1799,7 +1799,7 @@
       "key": "general-households-in-dwellings",
       "title": "住宅に住む一般世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/general-households-in-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-households-outside-dwellings",
@@ -1807,7 +1807,7 @@
       "key": "general-households-outside-dwellings",
       "title": "住宅以外に住む一般世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/general-households-outside-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-merchandise-store-count",
@@ -1815,7 +1815,7 @@
       "key": "general-merchandise-store-count",
       "title": "各種商品小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/general-merchandise-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:general-revenue-municipal",
@@ -1823,7 +1823,7 @@
       "key": "general-revenue-municipal",
       "title": "一般財源の市区町村ランキング",
       "href": "/municipalities/ranking/general-revenue-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:geriatric-health-facility-capacity",
@@ -1831,7 +1831,7 @@
       "key": "geriatric-health-facility-capacity",
       "title": "介護老人保健施設定員数の市区町村ランキング",
       "href": "/municipalities/ranking/geriatric-health-facility-capacity",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:geriatric-health-facility-count",
@@ -1839,7 +1839,7 @@
       "key": "geriatric-health-facility-count",
       "title": "介護老人保健施設数の市区町村ランキング",
       "href": "/municipalities/ranking/geriatric-health-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:golf-course-tax-grant-municipal",
@@ -1847,7 +1847,7 @@
       "key": "golf-course-tax-grant-municipal",
       "title": "ゴルフ場利用税交付金の市区町村ランキング",
       "href": "/municipalities/ranking/golf-course-tax-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:goods-services-expense-municipal",
@@ -1855,7 +1855,7 @@
       "key": "goods-services-expense-municipal",
       "title": "物件費の市区町村ランキング",
       "href": "/municipalities/ranking/goods-services-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:grassland-area-non-forest",
@@ -1863,7 +1863,7 @@
       "key": "grassland-area-non-forest",
       "title": "森林以外の草生地面積の市区町村ランキング",
       "href": "/municipalities/ranking/grassland-area-non-forest",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:habitable-area",
@@ -1887,7 +1887,7 @@
       "key": "health-physical-education-expense-municipal",
       "title": "保健体育費の市区町村ランキング",
       "href": "/municipalities/ranking/health-physical-education-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:healthcare-cost-all-households",
@@ -1919,7 +1919,7 @@
       "key": "high-school-expense-municipal",
       "title": "高等学校費の市区町村ランキング",
       "href": "/municipalities/ranking/high-school-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:high-school-students",
@@ -1927,7 +1927,7 @@
       "key": "high-school-students",
       "title": "高等学校生徒数の市区町村ランキング",
       "href": "/municipalities/ranking/high-school-students",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:hospital-bed-count-city",
@@ -1935,7 +1935,7 @@
       "key": "hospital-bed-count-city",
       "title": "病院病床数の市区町村ランキング",
       "href": "/municipalities/ranking/hospital-bed-count-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:hospital-count-city",
@@ -1943,7 +1943,7 @@
       "key": "hospital-count-city",
       "title": "病院数の市区町村ランキング",
       "href": "/municipalities/ranking/hospital-count-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:hospitals-with-long-term-care-beds",
@@ -1951,7 +1951,7 @@
       "key": "hospitals-with-long-term-care-beds",
       "title": "療養病床を有する病院数の市区町村ランキング",
       "href": "/municipalities/ranking/hospitals-with-long-term-care-beds",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:household-members-outside-dwellings",
@@ -1959,7 +1959,7 @@
       "key": "household-members-outside-dwellings",
       "title": "住宅以外の建物に居住の世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/household-members-outside-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:households",
@@ -1975,7 +1975,7 @@
       "key": "households-with-non-relatives",
       "title": "非親族を含む世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/households-with-non-relatives",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:housing-cost-all-households",
@@ -1991,7 +1991,7 @@
       "key": "housing-expense-municipal",
       "title": "住宅費の市区町村ランキング",
       "href": "/municipalities/ranking/housing-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:housing-floor-area",
@@ -2007,7 +2007,7 @@
       "key": "induced-housing-standard-households",
       "title": "誘導居住面積水準以上の主世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/induced-housing-standard-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:industrial-and-quasi-industrial-area",
@@ -2015,7 +2015,7 @@
       "key": "industrial-and-quasi-industrial-area",
       "title": "工業・準工業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/industrial-and-quasi-industrial-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:industrial-district-area",
@@ -2023,7 +2023,7 @@
       "key": "industrial-district-area",
       "title": "工業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/industrial-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:industrial-land-price",
@@ -2037,33 +2037,33 @@
       "id": "municipality-ranking:inflow-population-from-other-prefectures",
       "kind": "municipality-ranking",
       "key": "inflow-population-from-other-prefectures",
-      "title": "流入人口の市区町村ランキング",
+      "title": "流入人口（他県に常住）の市区町村ランキング",
       "href": "/municipalities/ranking/inflow-population-from-other-prefectures",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:inflow-population-within-prefecture",
       "kind": "municipality-ranking",
       "key": "inflow-population-within-prefecture",
-      "title": "流入人口の市区町村ランキング",
+      "title": "流入人口（県内他市区町村に常住）の市区町村ランキング",
       "href": "/municipalities/ranking/inflow-population-within-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:information-communication-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "information-communication-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・情報通信業）の市区町村ランキング",
       "href": "/municipalities/ranking/information-communication-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:information-communication-private-sales",
       "kind": "municipality-ranking",
       "key": "information-communication-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・情報通信業）の市区町村ランキング",
       "href": "/municipalities/ranking/information-communication-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:information-private-employees",
@@ -2071,7 +2071,7 @@
       "key": "information-private-employees",
       "title": "情報通信業従業者数（民営）の市区町村ランキング",
       "href": "/municipalities/ranking/information-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:information-private-establishments",
@@ -2079,7 +2079,7 @@
       "key": "information-private-establishments",
       "title": "情報通信業事業所数（民営）の市区町村ランキング",
       "href": "/municipalities/ranking/information-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:institutional-household-members",
@@ -2087,7 +2087,7 @@
       "key": "institutional-household-members",
       "title": "施設等の世帯人員数の市区町村ランキング",
       "href": "/municipalities/ranking/institutional-household-members",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:institutional-households",
@@ -2095,15 +2095,15 @@
       "key": "institutional-households",
       "title": "施設等の世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/institutional-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:integrated-ece-center-enrolled-children",
       "kind": "municipality-ranking",
       "key": "integrated-ece-center-enrolled-children",
-      "title": "認定こども園在所児数の市区町村ランキング",
+      "title": "認定こども園在所児数（幼保連携型）の市区町村ランキング",
       "href": "/municipalities/ranking/integrated-ece-center-enrolled-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:integrated-kindergarten-enrollment",
@@ -2135,7 +2135,7 @@
       "key": "interest-tax-grant-municipal",
       "title": "利子割交付金の市区町村ランキング",
       "href": "/municipalities/ranking/interest-tax-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:investment-expenditure-municipal",
@@ -2143,7 +2143,7 @@
       "key": "investment-expenditure-municipal",
       "title": "投資的経費の市区町村ランキング",
       "href": "/municipalities/ranking/investment-expenditure-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:investments-and-capital-municipal",
@@ -2151,7 +2151,7 @@
       "key": "investments-and-capital-municipal",
       "title": "投資及び出資金の市区町村ランキング",
       "href": "/municipalities/ranking/investments-and-capital-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:japanese-movers-in",
@@ -2183,7 +2183,7 @@
       "key": "japanese-population-female",
       "title": "女性の日本人人口の市区町村ランキング",
       "href": "/municipalities/ranking/japanese-population-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:japanese-population-male",
@@ -2191,7 +2191,7 @@
       "key": "japanese-population-male",
       "title": "男性の日本人人口の市区町村ランキング",
       "href": "/municipalities/ranking/japanese-population-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:junior-high-school-count",
@@ -2215,7 +2215,7 @@
       "key": "junior-high-school-expense-municipal",
       "title": "中学校費の市区町村ランキング",
       "href": "/municipalities/ranking/junior-high-school-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:junior-high-school-students-count",
@@ -2247,7 +2247,7 @@
       "key": "kindergarten-count-city",
       "title": "幼稚園数の市区町村ランキング",
       "href": "/municipalities/ranking/kindergarten-count-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:kindergarten-enrollment-city",
@@ -2255,7 +2255,7 @@
       "key": "kindergarten-enrollment-city",
       "title": "幼稚園在園者数の市区町村ランキング",
       "href": "/municipalities/ranking/kindergarten-enrollment-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:kindergarten-expense-municipal",
@@ -2263,7 +2263,7 @@
       "key": "kindergarten-expense-municipal",
       "title": "幼稚園費の市区町村ランキング",
       "href": "/municipalities/ranking/kindergarten-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:labor-expense-municipal",
@@ -2271,45 +2271,45 @@
       "key": "labor-expense-municipal",
       "title": "労働費の市区町村ランキング",
       "href": "/municipalities/ranking/labor-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:labor-force-population-city",
       "kind": "municipality-ranking",
       "key": "labor-force-population-city",
-      "title": "労働力人口の市区町村ランキング",
+      "title": "労働力人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/labor-force-population-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:labor-force-population-female",
       "kind": "municipality-ranking",
       "key": "labor-force-population-female",
-      "title": "労働力人口の市区町村ランキング",
+      "title": "労働力人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/labor-force-population-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:labor-force-population-male",
       "kind": "municipality-ranking",
       "key": "labor-force-population-male",
-      "title": "労働力人口の市区町村ランキング",
+      "title": "労働力人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/labor-force-population-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:large-retail-store-count",
       "kind": "municipality-ranking",
       "key": "large-retail-store-count",
-      "title": "大型小売店数の市区町村ランキング",
+      "title": "大型小売店数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/large-retail-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:large-retail-store-count-per-100k",
       "kind": "municipality-ranking",
       "key": "large-retail-store-count-per-100k",
-      "title": "大型小売店数の市区町村ランキング",
+      "title": "大型小売店数（人口10万人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/large-retail-store-count-per-100k",
       "published": true
     },
@@ -2333,15 +2333,15 @@
       "id": "municipality-ranking:library-count-city",
       "kind": "municipality-ranking",
       "key": "library-count-city",
-      "title": "図書館数の市区町村ランキング",
+      "title": "図書館数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/library-count-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:library-count-per-million",
       "kind": "municipality-ranking",
       "key": "library-count-per-million",
-      "title": "図書館数の市区町村ランキング",
+      "title": "図書館数（人口100万人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/library-count-per-million",
       "published": true
     },
@@ -2349,17 +2349,17 @@
       "id": "municipality-ranking:life-expectancy-at-birth-female",
       "kind": "municipality-ranking",
       "key": "life-expectancy-at-birth-female",
-      "title": "平均余命の市区町村ランキング",
+      "title": "平均余命（0歳・女）の市区町村ランキング",
       "href": "/municipalities/ranking/life-expectancy-at-birth-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:life-expectancy-at-birth-male",
       "kind": "municipality-ranking",
       "key": "life-expectancy-at-birth-male",
-      "title": "平均余命の市区町村ランキング",
+      "title": "平均余命（0歳・男）の市区町村ランキング",
       "href": "/municipalities/ranking/life-expectancy-at-birth-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:light-and-small-special-vehicle-count",
@@ -2367,7 +2367,7 @@
       "key": "light-and-small-special-vehicle-count",
       "title": "軽自動車及び小型特殊自動車台数の市区町村ランキング",
       "href": "/municipalities/ranking/light-and-small-special-vehicle-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:loans-expense-municipal",
@@ -2375,7 +2375,7 @@
       "key": "loans-expense-municipal",
       "title": "貸付金の市区町村ランキング",
       "href": "/municipalities/ranking/loans-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-allocation-tax-municipal",
@@ -2383,7 +2383,7 @@
       "key": "local-allocation-tax-municipal",
       "title": "地方交付税の市区町村ランキング",
       "href": "/municipalities/ranking/local-allocation-tax-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-bond-balance-municipal",
@@ -2391,7 +2391,7 @@
       "key": "local-bond-balance-municipal",
       "title": "地方債現在高の市区町村ランキング",
       "href": "/municipalities/ranking/local-bond-balance-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-consumption-tax-grant-municipal",
@@ -2399,7 +2399,7 @@
       "key": "local-consumption-tax-grant-municipal",
       "title": "地方消費税交付金の市区町村ランキング",
       "href": "/municipalities/ranking/local-consumption-tax-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-special-grant-municipal",
@@ -2407,7 +2407,7 @@
       "key": "local-special-grant-municipal",
       "title": "地方特例交付金の市区町村ランキング",
       "href": "/municipalities/ranking/local-special-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-tax-revenue-municipal",
@@ -2415,7 +2415,7 @@
       "key": "local-tax-revenue-municipal",
       "title": "地方税の市区町村ランキング",
       "href": "/municipalities/ranking/local-tax-revenue-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:local-transfer-tax-municipal",
@@ -2423,7 +2423,7 @@
       "key": "local-transfer-tax-municipal",
       "title": "地方譲与税の市区町村ランキング",
       "href": "/municipalities/ranking/local-transfer-tax-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:low-cost-care-home-capacity",
@@ -2431,7 +2431,7 @@
       "key": "low-cost-care-home-capacity",
       "title": "軽費老人ホーム定員数の市区町村ランキング",
       "href": "/municipalities/ranking/low-cost-care-home-capacity",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:low-cost-care-home-count",
@@ -2439,7 +2439,7 @@
       "key": "low-cost-care-home-count",
       "title": "軽費老人ホーム数の市区町村ランキング",
       "href": "/municipalities/ranking/low-cost-care-home-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:low-cost-care-home-residents",
@@ -2447,7 +2447,7 @@
       "key": "low-cost-care-home-residents",
       "title": "軽費老人ホーム在所者数の市区町村ランキング",
       "href": "/municipalities/ranking/low-cost-care-home-residents",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:machinery-store-count",
@@ -2455,23 +2455,23 @@
       "key": "machinery-store-count",
       "title": "機械器具小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/machinery-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:main-household-members-census",
       "kind": "municipality-ranking",
       "key": "main-household-members-census",
-      "title": "主世帯人員の市区町村ランキング",
+      "title": "主世帯人員（一般世帯・国勢調査）の市区町村ランキング",
       "href": "/municipalities/ranking/main-household-members-census",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:main-household-members-housing-survey",
       "kind": "municipality-ranking",
       "key": "main-household-members-housing-survey",
-      "title": "主世帯人員の市区町村ランキング",
+      "title": "主世帯人員（住宅・土地統計調査）の市区町村ランキング",
       "href": "/municipalities/ranking/main-household-members-housing-survey",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:main-households-census",
@@ -2479,7 +2479,7 @@
       "key": "main-households-census",
       "title": "主世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/main-households-census",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:main-households-with-65plus",
@@ -2487,7 +2487,7 @@
       "key": "main-households-with-65plus",
       "title": "65歳以上の世帯員のいる主世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/main-households-with-65plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:maintenance-repair-expense-municipal",
@@ -2495,7 +2495,7 @@
       "key": "maintenance-repair-expense-municipal",
       "title": "維持補修費の市区町村ランキング",
       "href": "/municipalities/ranking/maintenance-repair-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:major-lake-area",
@@ -2533,17 +2533,17 @@
       "id": "municipality-ranking:manufacturing-private-employees",
       "kind": "municipality-ranking",
       "key": "manufacturing-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・製造業）の市区町村ランキング",
       "href": "/municipalities/ranking/manufacturing-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:manufacturing-private-establishments",
       "kind": "municipality-ranking",
       "key": "manufacturing-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・製造業）の市区町村ランキング",
       "href": "/municipalities/ranking/manufacturing-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:manufacturing-sales-private",
@@ -2583,39 +2583,39 @@
       "key": "median-age",
       "title": "年齢中位数の市区町村ランキング",
       "href": "/municipalities/ranking/median-age",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:medical-welfare-private-employees",
       "kind": "municipality-ranking",
       "key": "medical-welfare-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・医療、福祉）の市区町村ランキング",
       "href": "/municipalities/ranking/medical-welfare-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:medical-welfare-private-establishments",
       "kind": "municipality-ranking",
       "key": "medical-welfare-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・医療、福祉）の市区町村ランキング",
       "href": "/municipalities/ranking/medical-welfare-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:medical-welfare-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "medical-welfare-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・医療、福祉）の市区町村ランキング",
       "href": "/municipalities/ranking/medical-welfare-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:medical-welfare-private-sales",
       "kind": "municipality-ranking",
       "key": "medical-welfare-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・医療、福祉）の市区町村ランキング",
       "href": "/municipalities/ranking/medical-welfare-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:minicar-count",
@@ -2623,7 +2623,7 @@
       "key": "minicar-count",
       "title": "ミニカー台数の市区町村ランキング",
       "href": "/municipalities/ranking/minicar-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:minimum-housing-standard-households",
@@ -2631,39 +2631,39 @@
       "key": "minimum-housing-standard-households",
       "title": "最低居住面積水準以上の主世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/minimum-housing-standard-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:mining-private-employees",
       "kind": "municipality-ranking",
       "key": "mining-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・鉱業、採石業、砂利採取業）の市区町村ランキング",
       "href": "/municipalities/ranking/mining-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:mining-private-establishments",
       "kind": "municipality-ranking",
       "key": "mining-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・鉱業、採石業、砂利採取業）の市区町村ランキング",
       "href": "/municipalities/ranking/mining-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:mining-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "mining-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・鉱業、採石業、砂利採取業）の市区町村ランキング",
       "href": "/municipalities/ranking/mining-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:mining-private-sales",
       "kind": "municipality-ranking",
       "key": "mining-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・鉱業、採石業、砂利採取業）の市区町村ランキング",
       "href": "/municipalities/ranking/mining-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:miscellaneous-revenue-municipal",
@@ -2671,7 +2671,7 @@
       "key": "miscellaneous-revenue-municipal",
       "title": "諸収入の市区町村ランキング",
       "href": "/municipalities/ranking/miscellaneous-revenue-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:moped-count",
@@ -2687,7 +2687,7 @@
       "key": "moped-count-50-90cc",
       "title": "50cc超90cc以下の原動機付自転車台数の市区町村ランキング",
       "href": "/municipalities/ranking/moped-count-50-90cc",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:moped-count-50cc-or-less",
@@ -2695,7 +2695,7 @@
       "key": "moped-count-50cc-or-less",
       "title": "50cc以下の原動機付自転車台数の市区町村ランキング",
       "href": "/municipalities/ranking/moped-count-50cc-or-less",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:moped-count-over-90cc",
@@ -2703,7 +2703,7 @@
       "key": "moped-count-over-90cc",
       "title": "90cc超の原動機付自転車台数の市区町村ランキング",
       "href": "/municipalities/ranking/moped-count-over-90cc",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:motorcycle-count",
@@ -2807,7 +2807,7 @@
       "key": "municipal-tax-assessed",
       "title": "市町村税徴収決定済額の市区町村ランキング",
       "href": "/municipalities/ranking/municipal-tax-assessed",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:municipal-tax-collected",
@@ -2815,7 +2815,7 @@
       "key": "municipal-tax-collected",
       "title": "市町村税収納済額の市区町村ランキング",
       "href": "/municipalities/ranking/municipal-tax-collected",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:national-health-insurance-benefits",
@@ -2831,7 +2831,7 @@
       "key": "national-treasury-disbursements-municipal",
       "title": "国庫支出金の市区町村ランキング",
       "href": "/municipalities/ranking/national-treasury-disbursements-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:neighborhood-commercial-district-area",
@@ -2839,7 +2839,7 @@
       "key": "neighborhood-commercial-district-area",
       "title": "近隣商業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/neighborhood-commercial-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:new-condo-starts",
@@ -2887,7 +2887,7 @@
       "key": "nhi-insured-persons",
       "title": "国民健康保険被保険者数の市区町村ランキング",
       "href": "/municipalities/ranking/nhi-insured-persons",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:night-soil-treatment-volume",
@@ -2895,31 +2895,31 @@
       "key": "night-soil-treatment-volume",
       "title": "し尿処理量の市区町村ランキング",
       "href": "/municipalities/ranking/night-soil-treatment-volume",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-agriculture-excl-public-private-employees",
       "kind": "municipality-ranking",
       "key": "non-agriculture-excl-public-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・非農林漁業（公務を除く））の市区町村ランキング",
       "href": "/municipalities/ranking/non-agriculture-excl-public-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-agriculture-excl-public-private-establishments",
       "kind": "municipality-ranking",
       "key": "non-agriculture-excl-public-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・非農林漁業（公務を除く））の市区町村ランキング",
       "href": "/municipalities/ranking/non-agriculture-excl-public-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-agriculture-excl-public-private-sales",
       "kind": "municipality-ranking",
       "key": "non-agriculture-excl-public-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・非農林漁業（公務を除く））の市区町村ランキング",
       "href": "/municipalities/ranking/non-agriculture-excl-public-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-flush-toilet-population-city",
@@ -2927,55 +2927,55 @@
       "key": "non-flush-toilet-population-city",
       "title": "非水洗化人口の市区町村ランキング",
       "href": "/municipalities/ranking/non-flush-toilet-population-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-housework",
       "kind": "municipality-ranking",
       "key": "non-labor-force-housework",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（家事）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-housework",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-other",
       "kind": "municipality-ranking",
       "key": "non-labor-force-other",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（その他）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-other",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-population",
       "kind": "municipality-ranking",
       "key": "non-labor-force-population",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-population",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-population-female",
       "kind": "municipality-ranking",
       "key": "non-labor-force-population-female",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-population-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-population-male",
       "kind": "municipality-ranking",
       "key": "non-labor-force-population-male",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-population-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-labor-force-studying",
       "kind": "municipality-ranking",
       "key": "non-labor-force-studying",
-      "title": "非労働力人口の市区町村ランキング",
+      "title": "非労働力人口（通学）の市区町村ランキング",
       "href": "/municipalities/ranking/non-labor-force-studying",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-nuclear-family-households",
@@ -2983,7 +2983,7 @@
       "key": "non-nuclear-family-households",
       "title": "核家族以外の世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/non-nuclear-family-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-store-retailer-count",
@@ -2991,7 +2991,7 @@
       "key": "non-store-retailer-count",
       "title": "無店舗小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/non-store-retailer-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:non-wooden-dwellings",
@@ -2999,7 +2999,7 @@
       "key": "non-wooden-dwellings",
       "title": "非木造住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/non-wooden-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:nuclear-family-household-count",
@@ -3023,7 +3023,7 @@
       "key": "nuclear-family-households-with-65plus",
       "title": "65歳以上の世帯員のいる核家族世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/nuclear-family-households-with-65plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:number-of-commercial-employees-wholesale-retail",
@@ -3159,7 +3159,7 @@
       "key": "nursery-enrolled-children",
       "title": "保育所等在所児数の市区町村ランキング",
       "href": "/municipalities/ranking/nursery-enrolled-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:nursery-facility-count",
@@ -3167,15 +3167,15 @@
       "key": "nursery-facility-count",
       "title": "保育所等数の市区町村ランキング",
       "href": "/municipalities/ranking/nursery-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:nursery-type-ece-center-enrolled-children",
       "kind": "municipality-ranking",
       "key": "nursery-type-ece-center-enrolled-children",
-      "title": "認定こども園在所児数の市区町村ランキング",
+      "title": "認定こども園在所児数（保育所型）の市区町村ランキング",
       "href": "/municipalities/ranking/nursery-type-ece-center-enrolled-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:nursing-welfare-facilities-basic-tabulation-6510-per",
@@ -3197,7 +3197,7 @@
       "id": "municipality-ranking:nursing-welfare-facility-count-per-100k-65plus",
       "kind": "municipality-ranking",
       "key": "nursing-welfare-facility-count-per-100k-65plus",
-      "title": "介護老人福祉施設数の市区町村ランキング",
+      "title": "介護老人福祉施設数（65歳以上人口10万人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/nursing-welfare-facility-count-per-100k-65plus",
       "published": true
     },
@@ -3205,145 +3205,145 @@
       "id": "municipality-ranking:occupation-agriculture-forestry-fishery-employee-workers",
       "kind": "municipality-ranking",
       "key": "occupation-agriculture-forestry-fishery-employee-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（農林漁業雇用者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-agriculture-forestry-fishery-employee-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-agriculture-forestry-fishery-workers",
       "kind": "municipality-ranking",
       "key": "occupation-agriculture-forestry-fishery-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（農林漁業者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-agriculture-forestry-fishery-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-clerical-workers",
       "kind": "municipality-ranking",
       "key": "occupation-clerical-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（事務職）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-clerical-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-company-executive-workers",
       "kind": "municipality-ranking",
       "key": "occupation-company-executive-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（会社団体役員）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-company-executive-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-engineer-workers",
       "kind": "municipality-ranking",
       "key": "occupation-engineer-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（技術者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-engineer-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-factory-owner-workers",
       "kind": "municipality-ranking",
       "key": "occupation-factory-owner-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（工場主）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-factory-owner-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-home-based-piecework-workers",
       "kind": "municipality-ranking",
       "key": "occupation-home-based-piecework-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（内職者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-home-based-piecework-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-manager-workers",
       "kind": "municipality-ranking",
       "key": "occupation-manager-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（管理職）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-manager-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-manual-labor-workers",
       "kind": "municipality-ranking",
       "key": "occupation-manual-labor-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（労務作業者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-manual-labor-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-personal-service-workers",
       "kind": "municipality-ranking",
       "key": "occupation-personal-service-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（個人サービス人）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-personal-service-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-professional-workers",
       "kind": "municipality-ranking",
       "key": "occupation-professional-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（専門職業者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-professional-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-sales-workers",
       "kind": "municipality-ranking",
       "key": "occupation-sales-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（販売人）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-sales-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-security-workers",
       "kind": "municipality-ranking",
       "key": "occupation-security-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（保安職）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-security-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-service-business-owner-workers",
       "kind": "municipality-ranking",
       "key": "occupation-service-business-owner-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（サービス・その他の事業主）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-service-business-owner-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-shop-owner-workers",
       "kind": "municipality-ranking",
       "key": "occupation-shop-owner-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（商店主）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-shop-owner-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-skilled-workers",
       "kind": "municipality-ranking",
       "key": "occupation-skilled-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（技能者）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-skilled-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-teacher-clergy-workers",
       "kind": "municipality-ranking",
       "key": "occupation-teacher-clergy-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（教員・宗教家）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-teacher-clergy-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupation-writer-artist-entertainer-workers",
       "kind": "municipality-ranking",
       "key": "occupation-writer-artist-entertainer-workers",
-      "title": "職業別就業者数の市区町村ランキング",
+      "title": "職業別就業者数（文筆家・芸術家・芸能家）の市区町村ランキング",
       "href": "/municipalities/ranking/occupation-writer-artist-entertainer-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:occupied-dwellings",
@@ -3351,7 +3351,7 @@
       "key": "occupied-dwellings",
       "title": "居住世帯あり住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/occupied-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ordinary-construction-expense-municipal",
@@ -3359,7 +3359,7 @@
       "key": "ordinary-construction-expense-municipal",
       "title": "普通建設事業費の市区町村ランキング",
       "href": "/municipalities/ranking/ordinary-construction-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ordinary-household-members",
@@ -3367,7 +3367,7 @@
       "key": "ordinary-household-members",
       "title": "普通世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/ordinary-household-members",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ordinary-household-members-outside-dwellings",
@@ -3375,7 +3375,7 @@
       "key": "ordinary-household-members-outside-dwellings",
       "title": "住宅以外の建物に居住の普通世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/ordinary-household-members-outside-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ordinary-households",
@@ -3383,7 +3383,7 @@
       "key": "ordinary-households",
       "title": "普通世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/ordinary-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-building-type-dwellings",
@@ -3391,7 +3391,7 @@
       "key": "other-building-type-dwellings",
       "title": "その他の建て方住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/other-building-type-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-retail-store-count",
@@ -3399,39 +3399,39 @@
       "key": "other-retail-store-count",
       "title": "その他の小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/other-retail-store-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-services-private-employees",
       "kind": "municipality-ranking",
       "key": "other-services-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・サービス業（他に分類されないもの））の市区町村ランキング",
       "href": "/municipalities/ranking/other-services-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-services-private-establishments",
       "kind": "municipality-ranking",
       "key": "other-services-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・サービス業（他に分類されないもの））の市区町村ランキング",
       "href": "/municipalities/ranking/other-services-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-services-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "other-services-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・サービス業（他に分類されないもの））の市区町村ランキング",
       "href": "/municipalities/ranking/other-services-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-services-private-sales",
       "kind": "municipality-ranking",
       "key": "other-services-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・サービス業（他に分類されないもの））の市区町村ランキング",
       "href": "/municipalities/ranking/other-services-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-social-welfare-facility-count",
@@ -3439,7 +3439,7 @@
       "key": "other-social-welfare-facility-count",
       "title": "その他の社会福祉施設等数の市区町村ランキング",
       "href": "/municipalities/ranking/other-social-welfare-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:other-structure-dwellings",
@@ -3447,7 +3447,7 @@
       "key": "other-structure-dwellings",
       "title": "その他の構造住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/other-structure-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:outflow-commuter-student-population",
@@ -3463,7 +3463,7 @@
       "key": "outflow-population-within-prefecture",
       "title": "県内他市区町村への流出人口の市区町村ランキング",
       "href": "/municipalities/ranking/outflow-population-within-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:own-source-revenue-municipal",
@@ -3471,7 +3471,7 @@
       "key": "own-source-revenue-municipal",
       "title": "自主財源額の市区町村ランキング",
       "href": "/municipalities/ranking/own-source-revenue-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:owner-and-for-sale-housing-starts",
@@ -3479,7 +3479,7 @@
       "key": "owner-and-for-sale-housing-starts",
       "title": "着工新設持家・分譲住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/owner-and-for-sale-housing-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:owner-housing-floor-area-starts",
@@ -3487,7 +3487,7 @@
       "key": "owner-housing-floor-area-starts",
       "title": "着工新設持家床面積の市区町村ランキング",
       "href": "/municipalities/ranking/owner-housing-floor-area-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:owner-occupied-dwellings",
@@ -3495,7 +3495,7 @@
       "key": "owner-occupied-dwellings",
       "title": "持ち家数の市区町村ランキング",
       "href": "/municipalities/ranking/owner-occupied-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:owner-occupied-housing-ratio",
@@ -3511,7 +3511,7 @@
       "key": "paid-nursing-home-capacity",
       "title": "有料老人ホーム定員数の市区町村ランキング",
       "href": "/municipalities/ranking/paid-nursing-home-capacity",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:paid-nursing-home-count",
@@ -3519,7 +3519,7 @@
       "key": "paid-nursing-home-count",
       "title": "有料老人ホーム数の市区町村ランキング",
       "href": "/municipalities/ranking/paid-nursing-home-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:paid-nursing-home-residents",
@@ -3527,15 +3527,15 @@
       "key": "paid-nursing-home-residents",
       "title": "有料老人ホーム在所者数の市区町村ランキング",
       "href": "/municipalities/ranking/paid-nursing-home-residents",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:part-time-workers",
       "kind": "municipality-ranking",
       "key": "part-time-workers",
-      "title": "雇用者数の市区町村ランキング",
+      "title": "雇用者数（パート・アルバイト・その他）の市区町村ランキング",
       "href": "/municipalities/ranking/part-time-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:penal-code-offenses-recognized-per-1000",
@@ -3557,7 +3557,7 @@
       "id": "municipality-ranking:per-taxpayer-taxable-income",
       "kind": "municipality-ranking",
       "key": "per-taxpayer-taxable-income",
-      "title": "課税対象所得の市区町村ランキング",
+      "title": "課税対象所得（所得割の納税義務者1人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/per-taxpayer-taxable-income",
       "published": true
     },
@@ -3565,33 +3565,33 @@
       "id": "municipality-ranking:personal-services-entertainment-private-employees",
       "kind": "municipality-ranking",
       "key": "personal-services-entertainment-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・生活関連サービス業、娯楽業）の市区町村ランキング",
       "href": "/municipalities/ranking/personal-services-entertainment-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:personal-services-entertainment-private-establishments",
       "kind": "municipality-ranking",
       "key": "personal-services-entertainment-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・生活関連サービス業、娯楽業）の市区町村ランキング",
       "href": "/municipalities/ranking/personal-services-entertainment-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:personal-services-entertainment-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "personal-services-entertainment-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・生活関連サービス業、娯楽業）の市区町村ランキング",
       "href": "/municipalities/ranking/personal-services-entertainment-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:personal-services-entertainment-private-sales",
       "kind": "municipality-ranking",
       "key": "personal-services-entertainment-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・生活関連サービス業、娯楽業）の市区町村ランキング",
       "href": "/municipalities/ranking/personal-services-entertainment-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:personnel-expense-municipal",
@@ -3599,7 +3599,7 @@
       "key": "personnel-expense-municipal",
       "title": "人件費の市区町村ランキング",
       "href": "/municipalities/ranking/personnel-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:pharmacist-count",
@@ -3615,7 +3615,7 @@
       "key": "pharmacists-pharmacies-medical-facilities",
       "title": "薬局・医療施設薬剤師数の市区町村ランキング",
       "href": "/municipalities/ranking/pharmacists-pharmacies-medical-facilities",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:physical-disability-participation-facility-count",
@@ -3623,7 +3623,7 @@
       "key": "physical-disability-participation-facility-count",
       "title": "身体障害者社会参加支援施設数の市区町村ランキング",
       "href": "/municipalities/ranking/physical-disability-participation-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:physical-disability-rehabilitation-facility-capacity",
@@ -3655,559 +3655,559 @@
       "key": "physicians-medical-facilities",
       "title": "医療施設医師数の市区町村ランキング",
       "href": "/municipalities/ranking/physicians-medical-facilities",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-15",
       "kind": "municipality-ranking",
       "key": "population-aged-0-15",
-      "title": "0～15歳人口の市区町村ランキング",
+      "title": "0～15歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-15",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-15-female",
       "kind": "municipality-ranking",
       "key": "population-aged-0-15-female",
-      "title": "0～15歳人口の市区町村ランキング",
+      "title": "0～15歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-15-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-15-male",
       "kind": "municipality-ranking",
       "key": "population-aged-0-15-male",
-      "title": "0～15歳人口の市区町村ランキング",
+      "title": "0～15歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-15-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-17",
       "kind": "municipality-ranking",
       "key": "population-aged-0-17",
-      "title": "0～17歳人口の市区町村ランキング",
+      "title": "0～17歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-17",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-17-female",
       "kind": "municipality-ranking",
       "key": "population-aged-0-17-female",
-      "title": "0～17歳人口の市区町村ランキング",
+      "title": "0～17歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-17-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-17-male",
       "kind": "municipality-ranking",
       "key": "population-aged-0-17-male",
-      "title": "0～17歳人口の市区町村ランキング",
+      "title": "0～17歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-17-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-3",
       "kind": "municipality-ranking",
       "key": "population-aged-0-3",
-      "title": "0～3歳人口の市区町村ランキング",
+      "title": "0～3歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-3",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-3-female",
       "kind": "municipality-ranking",
       "key": "population-aged-0-3-female",
-      "title": "0～3歳人口の市区町村ランキング",
+      "title": "0～3歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-3-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-3-male",
       "kind": "municipality-ranking",
       "key": "population-aged-0-3-male",
-      "title": "0～3歳人口の市区町村ランキング",
+      "title": "0～3歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-3-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-5",
       "kind": "municipality-ranking",
       "key": "population-aged-0-5",
-      "title": "0～5歳人口の市区町村ランキング",
+      "title": "0～5歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-5",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-5-female",
       "kind": "municipality-ranking",
       "key": "population-aged-0-5-female",
-      "title": "0～5歳人口の市区町村ランキング",
+      "title": "0～5歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-5-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-0-5-male",
       "kind": "municipality-ranking",
       "key": "population-aged-0-5-male",
-      "title": "0～5歳人口の市区町村ランキング",
+      "title": "0～5歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-0-5-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-10-13",
       "kind": "municipality-ranking",
       "key": "population-aged-10-13",
-      "title": "10～13歳人口の市区町村ランキング",
+      "title": "10～13歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-10-13",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-10-13-female",
       "kind": "municipality-ranking",
       "key": "population-aged-10-13-female",
-      "title": "10～13歳人口の市区町村ランキング",
+      "title": "10～13歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-10-13-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-10-13-male",
       "kind": "municipality-ranking",
       "key": "population-aged-10-13-male",
-      "title": "10～13歳人口の市区町村ランキング",
+      "title": "10～13歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-10-13-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-12-14",
       "kind": "municipality-ranking",
       "key": "population-aged-12-14",
-      "title": "12～14歳人口の市区町村ランキング",
+      "title": "12～14歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-12-14",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-12-14-female",
       "kind": "municipality-ranking",
       "key": "population-aged-12-14-female",
-      "title": "12～14歳人口の市区町村ランキング",
+      "title": "12～14歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-12-14-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-12-14-male",
       "kind": "municipality-ranking",
       "key": "population-aged-12-14-male",
-      "title": "12～14歳人口の市区町村ランキング",
+      "title": "12～14歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-12-14-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-14-19",
       "kind": "municipality-ranking",
       "key": "population-aged-14-19",
-      "title": "14～19歳人口の市区町村ランキング",
+      "title": "14～19歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-14-19",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-14-19-female",
       "kind": "municipality-ranking",
       "key": "population-aged-14-19-female",
-      "title": "14～19歳人口の市区町村ランキング",
+      "title": "14～19歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-14-19-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-14-19-male",
       "kind": "municipality-ranking",
       "key": "population-aged-14-19-male",
-      "title": "14～19歳人口の市区町村ランキング",
+      "title": "14～19歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-14-19-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-17",
       "kind": "municipality-ranking",
       "key": "population-aged-15-17",
-      "title": "15～17歳人口の市区町村ランキング",
+      "title": "15～17歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-17",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-17-female",
       "kind": "municipality-ranking",
       "key": "population-aged-15-17-female",
-      "title": "15～17歳人口の市区町村ランキング",
+      "title": "15～17歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-17-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-17-male",
       "kind": "municipality-ranking",
       "key": "population-aged-15-17-male",
-      "title": "15～17歳人口の市区町村ランキング",
+      "title": "15～17歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-17-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-64",
       "kind": "municipality-ranking",
       "key": "population-aged-15-64",
-      "title": "15～64歳人口の市区町村ランキング",
+      "title": "15～64歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-64",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-64-female",
       "kind": "municipality-ranking",
       "key": "population-aged-15-64-female",
-      "title": "15～64歳人口の市区町村ランキング",
+      "title": "15～64歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-64-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-64-male",
       "kind": "municipality-ranking",
       "key": "population-aged-15-64-male",
-      "title": "15～64歳人口の市区町村ランキング",
+      "title": "15～64歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-64-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-15-plus",
-      "title": "15歳以上人口の市区町村ランキング",
+      "title": "15歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-15-plus-female",
-      "title": "15歳以上人口の市区町村ランキング",
+      "title": "15歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-15-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-15-plus-male",
-      "title": "15歳以上人口の市区町村ランキング",
+      "title": "15歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-15-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3",
       "kind": "municipality-ranking",
       "key": "population-aged-3",
-      "title": "3歳人口の市区町村ランキング",
+      "title": "3歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3-5",
       "kind": "municipality-ranking",
       "key": "population-aged-3-5",
-      "title": "3～5歳人口の市区町村ランキング",
+      "title": "3～5歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3-5",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3-5-female",
       "kind": "municipality-ranking",
       "key": "population-aged-3-5-female",
-      "title": "3～5歳人口の市区町村ランキング",
+      "title": "3～5歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3-5-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3-5-male",
       "kind": "municipality-ranking",
       "key": "population-aged-3-5-male",
-      "title": "3～5歳人口の市区町村ランキング",
+      "title": "3～5歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3-5-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3-female",
       "kind": "municipality-ranking",
       "key": "population-aged-3-female",
-      "title": "3歳人口の市区町村ランキング",
+      "title": "3歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-3-male",
       "kind": "municipality-ranking",
       "key": "population-aged-3-male",
-      "title": "3歳人口の市区町村ランキング",
+      "title": "3歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-3-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-4",
       "kind": "municipality-ranking",
       "key": "population-aged-4",
-      "title": "4歳人口の市区町村ランキング",
+      "title": "4歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-4",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-4-female",
       "kind": "municipality-ranking",
       "key": "population-aged-4-female",
-      "title": "4歳人口の市区町村ランキング",
+      "title": "4歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-4-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-4-male",
       "kind": "municipality-ranking",
       "key": "population-aged-4-male",
-      "title": "4歳人口の市区町村ランキング",
+      "title": "4歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-4-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-40-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-40-plus",
-      "title": "40歳以上人口の市区町村ランキング",
+      "title": "40歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-40-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-40-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-40-plus-female",
-      "title": "40歳以上人口の市区町村ランキング",
+      "title": "40歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-40-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-40-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-40-plus-male",
-      "title": "40歳以上人口の市区町村ランキング",
+      "title": "40歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-40-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-5",
       "kind": "municipality-ranking",
       "key": "population-aged-5",
-      "title": "5歳人口の市区町村ランキング",
+      "title": "5歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-5",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-5-female",
       "kind": "municipality-ranking",
       "key": "population-aged-5-female",
-      "title": "5歳人口の市区町村ランキング",
+      "title": "5歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-5-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-5-male",
       "kind": "municipality-ranking",
       "key": "population-aged-5-male",
-      "title": "5歳人口の市区町村ランキング",
+      "title": "5歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-5-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-6-11",
       "kind": "municipality-ranking",
       "key": "population-aged-6-11",
-      "title": "6～11歳人口の市区町村ランキング",
+      "title": "6～11歳人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-6-11",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-6-11-female",
       "kind": "municipality-ranking",
       "key": "population-aged-6-11-female",
-      "title": "6～11歳人口の市区町村ランキング",
+      "title": "6～11歳人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-6-11-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-6-11-male",
       "kind": "municipality-ranking",
       "key": "population-aged-6-11-male",
-      "title": "6～11歳人口の市区町村ランキング",
+      "title": "6～11歳人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-6-11-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-60-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-60-plus",
-      "title": "60歳以上人口の市区町村ランキング",
+      "title": "60歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-60-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-60-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-60-plus-female",
-      "title": "60歳以上人口の市区町村ランキング",
+      "title": "60歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-60-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-60-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-60-plus-male",
-      "title": "60歳以上人口の市区町村ランキング",
+      "title": "60歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-60-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-65-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-65-plus",
-      "title": "65歳以上人口の市区町村ランキング",
+      "title": "65歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-65-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-65-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-65-plus-female",
-      "title": "65歳以上人口の市区町村ランキング",
+      "title": "65歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-65-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-65-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-65-plus-male",
-      "title": "65歳以上人口の市区町村ランキング",
+      "title": "65歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-65-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-70-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-70-plus",
-      "title": "70歳以上人口の市区町村ランキング",
+      "title": "70歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-70-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-70-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-70-plus-female",
-      "title": "70歳以上人口の市区町村ランキング",
+      "title": "70歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-70-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-70-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-70-plus-male",
-      "title": "70歳以上人口の市区町村ランキング",
+      "title": "70歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-70-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-75-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-75-plus",
-      "title": "75歳以上人口の市区町村ランキング",
+      "title": "75歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-75-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-75-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-75-plus-female",
-      "title": "75歳以上人口の市区町村ランキング",
+      "title": "75歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-75-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-75-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-75-plus-male",
-      "title": "75歳以上人口の市区町村ランキング",
+      "title": "75歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-75-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-80-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-80-plus",
-      "title": "80歳以上人口の市区町村ランキング",
+      "title": "80歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-80-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-80-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-80-plus-female",
-      "title": "80歳以上人口の市区町村ランキング",
+      "title": "80歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-80-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-80-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-80-plus-male",
-      "title": "80歳以上人口の市区町村ランキング",
+      "title": "80歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-80-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-85-plus",
       "kind": "municipality-ranking",
       "key": "population-aged-85-plus",
-      "title": "85歳以上人口の市区町村ランキング",
+      "title": "85歳以上人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-85-plus",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-85-plus-female",
       "kind": "municipality-ranking",
       "key": "population-aged-85-plus-female",
-      "title": "85歳以上人口の市区町村ランキング",
+      "title": "85歳以上人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-85-plus-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-85-plus-male",
       "kind": "municipality-ranking",
       "key": "population-aged-85-plus-male",
-      "title": "85歳以上人口の市区町村ランキング",
+      "title": "85歳以上人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-85-plus-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-under-15",
       "kind": "municipality-ranking",
       "key": "population-aged-under-15",
-      "title": "15歳未満人口の市区町村ランキング",
+      "title": "15歳未満人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-under-15",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-under-15-female",
       "kind": "municipality-ranking",
       "key": "population-aged-under-15-female",
-      "title": "15歳未満人口の市区町村ランキング",
+      "title": "15歳未満人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-under-15-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-aged-under-15-male",
       "kind": "municipality-ranking",
       "key": "population-aged-under-15-male",
-      "title": "15歳未満人口の市区町村ランキング",
+      "title": "15歳未満人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/population-aged-under-15-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-density-habitable",
@@ -4239,7 +4239,7 @@
       "key": "population-not-working-or-studying",
       "title": "従業も通学もしていない人口の市区町村ランキング",
       "href": "/municipalities/ranking/population-not-working-or-studying",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:population-working-studying-in-own-municipality",
@@ -4247,7 +4247,7 @@
       "key": "population-working-studying-in-own-municipality",
       "title": "自市区町村で従業・通学している人口の市区町村ランキング",
       "href": "/municipalities/ranking/population-working-studying-in-own-municipality",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:prefectural-disbursements-municipal",
@@ -4255,7 +4255,7 @@
       "key": "prefectural-disbursements-municipal",
       "title": "県支出金の市区町村ランキング",
       "href": "/municipalities/ranking/prefectural-disbursements-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:primary-industry-workers",
@@ -4263,167 +4263,167 @@
       "key": "primary-industry-workers",
       "title": "第1次産業就業者数の市区町村ランキング",
       "href": "/municipalities/ranking/primary-industry-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees",
       "kind": "municipality-ranking",
       "key": "private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-company",
       "kind": "municipality-ranking",
       "key": "private-employees-company",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・会社事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-company",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-corporate",
       "kind": "municipality-ranking",
       "key": "private-employees-corporate",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・法人事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-corporate",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-individual",
       "kind": "municipality-ranking",
       "key": "private-employees-individual",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・個人事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-individual",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-non-company-corporation",
       "kind": "municipality-ranking",
       "key": "private-employees-non-company-corporation",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・会社以外の法人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-non-company-corporation",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-size-1-4",
       "kind": "municipality-ranking",
       "key": "private-employees-size-1-4",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・従業者1～4人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-size-1-4",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-size-10-29",
       "kind": "municipality-ranking",
       "key": "private-employees-size-10-29",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・従業者10～29人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-size-10-29",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-size-30-49",
       "kind": "municipality-ranking",
       "key": "private-employees-size-30-49",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・従業者30～49人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-size-30-49",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-size-5-9",
       "kind": "municipality-ranking",
       "key": "private-employees-size-5-9",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・従業者5～9人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-size-5-9",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-employees-size-50-99",
       "kind": "municipality-ranking",
       "key": "private-employees-size-50-99",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・従業者50～99人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-employees-size-50-99",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments",
       "kind": "municipality-ranking",
       "key": "private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-company",
       "kind": "municipality-ranking",
       "key": "private-establishments-company",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・会社事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-company",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-corporate",
       "kind": "municipality-ranking",
       "key": "private-establishments-corporate",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・法人事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-corporate",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-individual",
       "kind": "municipality-ranking",
       "key": "private-establishments-individual",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・個人事業所）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-individual",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-non-company-corporation",
       "kind": "municipality-ranking",
       "key": "private-establishments-non-company-corporation",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・会社以外の法人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-non-company-corporation",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-size-1-4",
       "kind": "municipality-ranking",
       "key": "private-establishments-size-1-4",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・従業者1～4人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-size-1-4",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-size-10-29",
       "kind": "municipality-ranking",
       "key": "private-establishments-size-10-29",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・従業者10～29人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-size-10-29",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-size-30-49",
       "kind": "municipality-ranking",
       "key": "private-establishments-size-30-49",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・従業者30～49人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-size-30-49",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-size-5-9",
       "kind": "municipality-ranking",
       "key": "private-establishments-size-5-9",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・従業者5～9人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-size-5-9",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-establishments-size-50-99",
       "kind": "municipality-ranking",
       "key": "private-establishments-size-50-99",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・従業者50～99人）の市区町村ランキング",
       "href": "/municipalities/ranking/private-establishments-size-50-99",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:private-rented-dwellings",
@@ -4431,7 +4431,7 @@
       "key": "private-rented-dwellings",
       "title": "民営借家数の市区町村ランキング",
       "href": "/municipalities/ranking/private-rented-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:production-age-population-ratio",
@@ -4445,33 +4445,33 @@
       "id": "municipality-ranking:professional-services-private-employees",
       "kind": "municipality-ranking",
       "key": "professional-services-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・学術研究、専門・技術サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/professional-services-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:professional-services-private-establishments",
       "kind": "municipality-ranking",
       "key": "professional-services-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・学術研究、専門・技術サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/professional-services-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:professional-services-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "professional-services-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・学術研究、専門・技術サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/professional-services-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:professional-services-private-sales",
       "kind": "municipality-ranking",
       "key": "professional-services-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・学術研究、専門・技術サービス業）の市区町村ランキング",
       "href": "/municipalities/ranking/professional-services-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2020",
@@ -4493,9 +4493,9 @@
       "id": "municipality-ranking:projected-population-2025-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2025-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2025年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2025-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2030",
@@ -4509,9 +4509,9 @@
       "id": "municipality-ranking:projected-population-2030-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2030-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2030年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2030-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2035",
@@ -4525,9 +4525,9 @@
       "id": "municipality-ranking:projected-population-2035-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2035-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2035年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2035-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2040",
@@ -4541,9 +4541,9 @@
       "id": "municipality-ranking:projected-population-2040-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2040-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2040年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2040-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2045",
@@ -4557,9 +4557,9 @@
       "id": "municipality-ranking:projected-population-2045-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2045-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2045年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2045-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:projected-population-2050",
@@ -4573,9 +4573,9 @@
       "id": "municipality-ranking:projected-population-2050-city",
       "kind": "municipality-ranking",
       "key": "projected-population-2050-city",
-      "title": "将来推計人口の市区町村ランキング",
+      "title": "将来推計人口（2050年）の市区町村ランキング",
       "href": "/municipalities/ranking/projected-population-2050-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:property-income-municipal",
@@ -4583,7 +4583,7 @@
       "key": "property-income-municipal",
       "title": "財産収入の市区町村ランキング",
       "href": "/municipalities/ranking/property-income-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:protective-facility-count",
@@ -4591,7 +4591,7 @@
       "key": "protective-facility-count",
       "title": "保護施設数の市区町村ランキング",
       "href": "/municipalities/ranking/protective-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:psychiatric-hospital-count",
@@ -4615,21 +4615,21 @@
       "key": "public-assistance-purpose-expense-municipal",
       "title": "生活保護費の市区町村ランキング",
       "href": "/municipalities/ranking/public-assistance-purpose-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-hall-count-city",
       "kind": "municipality-ranking",
       "key": "public-hall-count-city",
-      "title": "公民館数の市区町村ランキング",
+      "title": "公民館数（市区町村）の市区町村ランキング",
       "href": "/municipalities/ranking/public-hall-count-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-hall-count-per-million",
       "kind": "municipality-ranking",
       "key": "public-hall-count-per-million",
-      "title": "公民館数の市区町村ランキング",
+      "title": "公民館数（人口100万人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/public-hall-count-per-million",
       "published": true
     },
@@ -4639,7 +4639,7 @@
       "key": "public-health-expense-municipal",
       "title": "保健衛生費の市区町村ランキング",
       "href": "/municipalities/ranking/public-health-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-nursery-enrolled-children",
@@ -4647,7 +4647,7 @@
       "key": "public-nursery-enrolled-children",
       "title": "公営保育所等在所児数の市区町村ランキング",
       "href": "/municipalities/ranking/public-nursery-enrolled-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-nursery-facility-count",
@@ -4655,7 +4655,7 @@
       "key": "public-nursery-facility-count",
       "title": "公営保育所等数の市区町村ランキング",
       "href": "/municipalities/ranking/public-nursery-facility-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-rented-dwellings",
@@ -4663,7 +4663,7 @@
       "key": "public-rented-dwellings",
       "title": "公営の借家数の市区町村ランキング",
       "href": "/municipalities/ranking/public-rented-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-ur-corporation-rented-dwellings",
@@ -4671,7 +4671,7 @@
       "key": "public-ur-corporation-rented-dwellings",
       "title": "公的借家数の市区町村ランキング",
       "href": "/municipalities/ranking/public-ur-corporation-rented-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:quasi-household-members",
@@ -4679,7 +4679,7 @@
       "key": "quasi-household-members",
       "title": "準世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/quasi-household-members",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:quasi-households",
@@ -4687,7 +4687,7 @@
       "key": "quasi-households",
       "title": "準世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/quasi-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:quasi-industrial-district-area",
@@ -4695,7 +4695,7 @@
       "key": "quasi-industrial-district-area",
       "title": "準工業地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/quasi-industrial-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ratio-65-plus",
@@ -4733,33 +4733,33 @@
       "id": "municipality-ranking:real-estate-leasing-private-employees",
       "kind": "municipality-ranking",
       "key": "real-estate-leasing-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・不動産業、物品賃貸業）の市区町村ランキング",
       "href": "/municipalities/ranking/real-estate-leasing-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:real-estate-leasing-private-establishments",
       "kind": "municipality-ranking",
       "key": "real-estate-leasing-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・不動産業、物品賃貸業）の市区町村ランキング",
       "href": "/municipalities/ranking/real-estate-leasing-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:real-estate-leasing-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "real-estate-leasing-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・不動産業、物品賃貸業）の市区町村ランキング",
       "href": "/municipalities/ranking/real-estate-leasing-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:real-estate-leasing-private-sales",
       "kind": "municipality-ranking",
       "key": "real-estate-leasing-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・不動産業、物品賃貸業）の市区町村ランキング",
       "href": "/municipalities/ranking/real-estate-leasing-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:real-public-debt-service-ratio-city",
@@ -4773,9 +4773,9 @@
       "id": "municipality-ranking:regular-employees",
       "kind": "municipality-ranking",
       "key": "regular-employees",
-      "title": "雇用者数の市区町村ランキング",
+      "title": "雇用者数（正規の職員・従業員）の市区町村ランキング",
       "href": "/municipalities/ranking/regular-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:reinforced-concrete-dwellings",
@@ -4783,7 +4783,7 @@
       "key": "reinforced-concrete-dwellings",
       "title": "鉄筋・鉄骨コンクリート造住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/reinforced-concrete-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:relatives-only-households",
@@ -4791,7 +4791,7 @@
       "key": "relatives-only-households",
       "title": "親族のみの世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/relatives-only-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rent-per-tatami-exclusive-dwellings",
@@ -4799,7 +4799,7 @@
       "key": "rent-per-tatami-exclusive-dwellings",
       "title": "専用住宅の1畳当たり家賃の市区町村ランキング",
       "href": "/municipalities/ranking/rent-per-tatami-exclusive-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rental-housing-floor-area-starts",
@@ -4807,7 +4807,7 @@
       "key": "rental-housing-floor-area-starts",
       "title": "着工新設貸家床面積の市区町村ランキング",
       "href": "/municipalities/ranking/rental-housing-floor-area-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rented-dwellings",
@@ -4815,7 +4815,7 @@
       "key": "rented-dwellings",
       "title": "借家数の市区町村ランキング",
       "href": "/municipalities/ranking/rented-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:reserve-fund-expense-municipal",
@@ -4823,7 +4823,7 @@
       "key": "reserve-fund-expense-municipal",
       "title": "積立金の市区町村ランキング",
       "href": "/municipalities/ranking/reserve-fund-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:resident-registry-households-japanese",
@@ -4831,31 +4831,31 @@
       "key": "resident-registry-households-japanese",
       "title": "住民基本台帳世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/resident-registry-households-japanese",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:resident-registry-population-japanese",
       "kind": "municipality-ranking",
       "key": "resident-registry-population-japanese",
-      "title": "住民基本台帳の日本人人口の市区町村ランキング",
+      "title": "住民基本台帳の日本人人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/resident-registry-population-japanese",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:resident-registry-population-japanese-female",
       "kind": "municipality-ranking",
       "key": "resident-registry-population-japanese-female",
-      "title": "住民基本台帳の日本人人口の市区町村ランキング",
+      "title": "住民基本台帳の日本人人口（女）の市区町村ランキング",
       "href": "/municipalities/ranking/resident-registry-population-japanese-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:resident-registry-population-japanese-male",
       "kind": "municipality-ranking",
       "key": "resident-registry-population-japanese-male",
-      "title": "住民基本台帳の日本人人口の市区町村ランキング",
+      "title": "住民基本台帳の日本人人口（男）の市区町村ランキング",
       "href": "/municipalities/ranking/resident-registry-population-japanese-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:resident-registry-population-total",
@@ -4863,7 +4863,7 @@
       "key": "resident-registry-population-total",
       "title": "住民基本台帳の総人口の市区町村ランキング",
       "href": "/municipalities/ranking/resident-registry-population-total",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:residential-district-area",
@@ -4871,7 +4871,7 @@
       "key": "residential-district-area",
       "title": "住居地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/residential-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:residential-floor-area-starts",
@@ -4879,21 +4879,21 @@
       "key": "residential-floor-area-starts",
       "title": "着工居住用建築物床面積の市区町村ランキング",
       "href": "/municipalities/ranking/residential-floor-area-starts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:restaurant-count",
       "kind": "municipality-ranking",
       "key": "restaurant-count",
-      "title": "飲食店数の市区町村ランキング",
+      "title": "飲食店数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/restaurant-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:restaurant-count-per-1000",
       "kind": "municipality-ranking",
       "key": "restaurant-count-per-1000",
-      "title": "飲食店数の市区町村ランキング",
+      "title": "飲食店数（1000人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/restaurant-count-per-1000",
       "published": true
     },
@@ -4919,7 +4919,7 @@
       "key": "retail-annual-sales",
       "title": "年間商品販売額の市区町村ランキング",
       "href": "/municipalities/ranking/retail-annual-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:retail-employees",
@@ -4927,7 +4927,7 @@
       "key": "retail-employees",
       "title": "小売業従業者数の市区町村ランキング",
       "href": "/municipalities/ranking/retail-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:retail-floor-space",
@@ -4935,23 +4935,23 @@
       "key": "retail-floor-space",
       "title": "売場面積の市区町村ランキング",
       "href": "/municipalities/ranking/retail-floor-space",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:retail-private-employees",
       "kind": "municipality-ranking",
       "key": "retail-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/retail-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:retail-private-establishments",
       "kind": "municipality-ranking",
       "key": "retail-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/retail-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:retail-store-count",
@@ -4999,93 +4999,93 @@
       "key": "road-bridge-expense-municipal",
       "title": "道路橋りょう費の市区町村ランキング",
       "href": "/municipalities/ranking/road-bridge-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-dwelling",
       "kind": "municipality-ranking",
       "key": "rooms-per-dwelling",
-      "title": "居住室数の市区町村ランキング",
+      "title": "居住室数（1住宅当たり・総数）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-dwelling",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-dwelling-owner",
       "kind": "municipality-ranking",
       "key": "rooms-per-dwelling-owner",
-      "title": "居住室数の市区町村ランキング",
+      "title": "居住室数（持ち家）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-dwelling-owner",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-dwelling-rented",
       "kind": "municipality-ranking",
       "key": "rooms-per-dwelling-rented",
-      "title": "居住室数の市区町村ランキング",
+      "title": "居住室数（借家）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-dwelling-rented",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-main-household",
       "kind": "municipality-ranking",
       "key": "rooms-per-main-household",
-      "title": "1世帯当たり居住室数の市区町村ランキング",
+      "title": "1世帯当たり居住室数（主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-main-household",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-main-household-owner",
       "kind": "municipality-ranking",
       "key": "rooms-per-main-household-owner",
-      "title": "1世帯当たり居住室数の市区町村ランキング",
+      "title": "1世帯当たり居住室数（持ち家・主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-main-household-owner",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-main-household-rented",
       "kind": "municipality-ranking",
       "key": "rooms-per-main-household-rented",
-      "title": "1世帯当たり居住室数の市区町村ランキング",
+      "title": "1世帯当たり居住室数（借家・主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-main-household-rented",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:rooms-per-ordinary-household",
       "kind": "municipality-ranking",
       "key": "rooms-per-ordinary-household",
-      "title": "1世帯当たり居住室数の市区町村ランキング",
+      "title": "1世帯当たり居住室数（普通世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/rooms-per-ordinary-household",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:row-houses",
       "kind": "municipality-ranking",
       "key": "row-houses",
-      "title": "長屋建住宅数の市区町村ランキング",
+      "title": "長屋建住宅数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/row-houses",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:row-houses-non-wooden",
       "kind": "municipality-ranking",
       "key": "row-houses-non-wooden",
-      "title": "長屋建住宅数の市区町村ランキング",
+      "title": "長屋建住宅数（非木造）の市区町村ランキング",
       "href": "/municipalities/ranking/row-houses-non-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:row-houses-wooden",
       "kind": "municipality-ranking",
       "key": "row-houses-wooden",
-      "title": "長屋建住宅数の市区町村ランキング",
+      "title": "長屋建住宅数（木造）の市区町村ランキング",
       "href": "/municipalities/ranking/row-houses-wooden",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:sales-amount-private",
       "kind": "municipality-ranking",
       "key": "sales-amount-private",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（個人事業所（商業統計））の市区町村ランキング",
       "href": "/municipalities/ranking/sales-amount-private",
       "published": true
     },
@@ -5103,7 +5103,7 @@
       "key": "sanitation-total-population",
       "title": "し尿処理の対象人口の市区町村ランキング",
       "href": "/municipalities/ranking/sanitation-total-population",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:satellite-broadcast-reception-contracts",
@@ -5111,7 +5111,7 @@
       "key": "satellite-broadcast-reception-contracts",
       "title": "衛星放送受信契約数の市区町村ランキング",
       "href": "/municipalities/ranking/satellite-broadcast-reception-contracts",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:secondary-employed-people-ratio-tertiary",
@@ -5127,23 +5127,23 @@
       "key": "secondary-industry-workers",
       "title": "第2次産業就業者数の市区町村ランキング",
       "href": "/municipalities/ranking/secondary-industry-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:seismic-retrofit-owner-houses-since-2014",
       "kind": "municipality-ranking",
       "key": "seismic-retrofit-owner-houses-since-2014",
-      "title": "耐震改修工事をした持ち家数の市区町村ランキング",
+      "title": "耐震改修工事をした持ち家数（2014年以降）の市区町村ランキング",
       "href": "/municipalities/ranking/seismic-retrofit-owner-houses-since-2014",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:seismic-retrofit-owner-houses-since-2019",
       "kind": "municipality-ranking",
       "key": "seismic-retrofit-owner-houses-since-2019",
-      "title": "耐震改修工事をした持ち家数の市区町村ランキング",
+      "title": "耐震改修工事をした持ち家数（2019年以降）の市区町村ランキング",
       "href": "/municipalities/ranking/seismic-retrofit-owner-houses-since-2019",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:self-employed-and-family-workers",
@@ -5151,7 +5151,7 @@
       "key": "self-employed-and-family-workers",
       "title": "自営業主及び家族従業者数の市区町村ランキング",
       "href": "/municipalities/ranking/self-employed-and-family-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:self-employed-without-employees",
@@ -5159,7 +5159,7 @@
       "key": "self-employed-without-employees",
       "title": "雇人のない業主数の市区町村ランキング",
       "href": "/municipalities/ranking/self-employed-without-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:senior-welfare-center-count",
@@ -5167,7 +5167,7 @@
       "key": "senior-welfare-center-count",
       "title": "老人福祉センター数の市区町村ランキング",
       "href": "/municipalities/ranking/senior-welfare-center-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:septic-tank-flush-rate",
@@ -5175,7 +5175,7 @@
       "key": "septic-tank-flush-rate",
       "title": "水洗化率の市区町村ランキング",
       "href": "/municipalities/ranking/septic-tank-flush-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:shop-combined-dwellings",
@@ -5183,7 +5183,7 @@
       "key": "shop-combined-dwellings",
       "title": "店舗その他の併用住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/shop-combined-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-father-households",
@@ -5199,7 +5199,7 @@
       "key": "single-father-households-1-child",
       "title": "子供が1人の父子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-father-households-1-child",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-father-households-2-children",
@@ -5207,7 +5207,7 @@
       "key": "single-father-households-2-children",
       "title": "子供が2人の父子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-father-households-2-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-father-households-3plus-children",
@@ -5215,7 +5215,7 @@
       "key": "single-father-households-3plus-children",
       "title": "子供が3人以上の父子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-father-households-3plus-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-mother-households",
@@ -5231,7 +5231,7 @@
       "key": "single-mother-households-1-child",
       "title": "子供が1人の母子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-mother-households-1-child",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-mother-households-2-children",
@@ -5239,7 +5239,7 @@
       "key": "single-mother-households-2-children",
       "title": "子供が2人の母子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-mother-households-2-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-mother-households-3plus-children",
@@ -5247,7 +5247,7 @@
       "key": "single-mother-households-3plus-children",
       "title": "子供が3人以上の母子世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/single-mother-households-3plus-children",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:single-person-household-old-population-ratio",
@@ -5271,7 +5271,7 @@
       "key": "social-education-expense-municipal",
       "title": "社会教育費の市区町村ランキング",
       "href": "/municipalities/ranking/social-education-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:social-welfare-expense-municipal",
@@ -5279,7 +5279,7 @@
       "key": "social-welfare-expense-municipal",
       "title": "社会福祉費の市区町村ランキング",
       "href": "/municipalities/ranking/social-welfare-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:solar-power-housing",
@@ -5295,7 +5295,7 @@
       "key": "solar-water-heater-dwellings",
       "title": "太陽熱温水機器等のある住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/solar-water-heater-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:special-nursing-home-capacity",
@@ -5303,15 +5303,15 @@
       "key": "special-nursing-home-capacity",
       "title": "介護老人福祉施設定員数の市区町村ランキング",
       "href": "/municipalities/ranking/special-nursing-home-capacity",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:special-nursing-home-count",
       "kind": "municipality-ranking",
       "key": "special-nursing-home-count",
-      "title": "介護老人福祉施設数の市区町村ランキング",
+      "title": "介護老人福祉施設数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/special-nursing-home-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:specified-small-moped-count",
@@ -5319,7 +5319,7 @@
       "key": "specified-small-moped-count",
       "title": "特定小型原動機付自転車台数の市区町村ランキング",
       "href": "/municipalities/ranking/specified-small-moped-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:standard-financial-scale-municipal",
@@ -5351,7 +5351,7 @@
       "key": "steel-frame-dwellings",
       "title": "鉄骨造住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/steel-frame-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:subsidies-expense-municipal",
@@ -5359,7 +5359,7 @@
       "key": "subsidies-expense-municipal",
       "title": "補助費等の市区町村ランキング",
       "href": "/municipalities/ranking/subsidies-expense-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:subsistence-farm-households",
@@ -5367,7 +5367,7 @@
       "key": "subsistence-farm-households",
       "title": "自給的農家数の市区町村ランキング",
       "href": "/municipalities/ranking/subsistence-farm-households",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-dwelling",
@@ -5375,7 +5375,7 @@
       "key": "tatami-per-dwelling",
       "title": "1住宅当たり居住室の畳数の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-dwelling",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-dwelling-owner",
@@ -5383,7 +5383,7 @@
       "key": "tatami-per-dwelling-owner",
       "title": "持ち家住宅の居住室の畳数の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-dwelling-owner",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-dwelling-rented",
@@ -5391,47 +5391,47 @@
       "key": "tatami-per-dwelling-rented",
       "title": "借家住宅の居住室の畳数の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-dwelling-rented",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-main-household",
       "kind": "municipality-ranking",
       "key": "tatami-per-main-household",
-      "title": "1世帯当たり畳数の市区町村ランキング",
+      "title": "1世帯当たり畳数（主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-main-household",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-main-household-owner",
       "kind": "municipality-ranking",
       "key": "tatami-per-main-household-owner",
-      "title": "1世帯当たり畳数の市区町村ランキング",
+      "title": "1世帯当たり畳数（持ち家・主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-main-household-owner",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-main-household-rented",
       "kind": "municipality-ranking",
       "key": "tatami-per-main-household-rented",
-      "title": "1世帯当たり畳数の市区町村ランキング",
+      "title": "1世帯当たり畳数（借家・主世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-main-household-rented",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tatami-per-ordinary-household",
       "kind": "municipality-ranking",
       "key": "tatami-per-ordinary-household",
-      "title": "1世帯当たり畳数の市区町村ランキング",
+      "title": "1世帯当たり畳数（普通世帯）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-ordinary-household",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:taxable-income-total",
       "kind": "municipality-ranking",
       "key": "taxable-income-total",
-      "title": "課税対象所得の市区町村ランキング",
+      "title": "課税対象所得（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/taxable-income-total",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:taxpayer-count-equal",
@@ -5455,7 +5455,7 @@
       "key": "temporary-occupant-dwellings",
       "title": "一時現在者のみ住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/temporary-occupant-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:tertiary-industry-workers",
@@ -5463,15 +5463,15 @@
       "key": "tertiary-industry-workers",
       "title": "第3次産業就業者数の市区町村ランキング",
       "href": "/municipalities/ranking/tertiary-industry-workers",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:three-wheeled-light-vehicle-count",
       "kind": "municipality-ranking",
       "key": "three-wheeled-light-vehicle-count",
-      "title": "軽自動車台数の市区町村ランキング",
+      "title": "軽自動車台数（三輪車）の市区町村ランキング",
       "href": "/municipalities/ranking/three-wheeled-light-vehicle-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-area-excluding-northern-territories-and-takeshima",
@@ -5493,7 +5493,7 @@
       "id": "municipality-ranking:total-assessed-land-area",
       "kind": "municipality-ranking",
       "key": "total-assessed-land-area",
-      "title": "評価総地積の市区町村ランキング",
+      "title": "評価総地積（課税対象土地）の市区町村ランキング",
       "href": "/municipalities/ranking/total-assessed-land-area",
       "published": true
     },
@@ -5503,7 +5503,7 @@
       "key": "total-dwellings",
       "title": "総住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/total-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-expenditure-municipal",
@@ -5511,7 +5511,7 @@
       "key": "total-expenditure-municipal",
       "title": "歳出決算総額の市区町村ランキング",
       "href": "/municipalities/ranking/total-expenditure-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-household-members-housing-survey",
@@ -5519,7 +5519,7 @@
       "key": "total-household-members-housing-survey",
       "title": "総世帯人員の市区町村ランキング",
       "href": "/municipalities/ranking/total-household-members-housing-survey",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-households-housing-survey",
@@ -5527,13 +5527,13 @@
       "key": "total-households-housing-survey",
       "title": "総世帯数の市区町村ランキング",
       "href": "/municipalities/ranking/total-households-housing-survey",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-population",
       "kind": "municipality-ranking",
       "key": "total-population",
-      "title": "総人口の市区町村ランキング",
+      "title": "総人口（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/total-population",
       "published": true
     },
@@ -5541,17 +5541,17 @@
       "id": "municipality-ranking:total-population-female-city",
       "kind": "municipality-ranking",
       "key": "total-population-female-city",
-      "title": "総人口の市区町村ランキング",
+      "title": "総人口（女・市区町村）の市区町村ランキング",
       "href": "/municipalities/ranking/total-population-female-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-population-male-city",
       "kind": "municipality-ranking",
       "key": "total-population-male-city",
-      "title": "総人口の市区町村ランキング",
+      "title": "総人口（男・市区町村）の市区町村ランキング",
       "href": "/municipalities/ranking/total-population-male-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:total-revenue-municipal",
@@ -5559,7 +5559,7 @@
       "key": "total-revenue-municipal",
       "title": "歳入決算総額の市区町村ランキング",
       "href": "/municipalities/ranking/total-revenue-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:traffic-accident-count",
@@ -5591,7 +5591,7 @@
       "key": "traffic-safety-grant-municipal",
       "title": "交通安全対策特別交付金の市区町村ランキング",
       "href": "/municipalities/ranking/traffic-safety-grant-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:transfers-in-municipal",
@@ -5599,71 +5599,71 @@
       "key": "transfers-in-municipal",
       "title": "繰入金の市区町村ランキング",
       "href": "/municipalities/ranking/transfers-in-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:transport-postal-private-employees",
       "kind": "municipality-ranking",
       "key": "transport-postal-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・運輸業、郵便業）の市区町村ランキング",
       "href": "/municipalities/ranking/transport-postal-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:transport-postal-private-establishments",
       "kind": "municipality-ranking",
       "key": "transport-postal-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・運輸業、郵便業）の市区町村ランキング",
       "href": "/municipalities/ranking/transport-postal-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:transport-postal-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "transport-postal-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・運輸業、郵便業）の市区町村ランキング",
       "href": "/municipalities/ranking/transport-postal-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:transport-postal-private-sales",
       "kind": "municipality-ranking",
       "key": "transport-postal-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・運輸業、郵便業）の市区町村ランキング",
       "href": "/municipalities/ranking/transport-postal-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:two-wheeled-light-vehicle-count",
       "kind": "municipality-ranking",
       "key": "two-wheeled-light-vehicle-count",
-      "title": "軽自動車台数の市区町村ランキング",
+      "title": "軽自動車台数（二輪車）の市区町村ランキング",
       "href": "/municipalities/ranking/two-wheeled-light-vehicle-count",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:unemployed-persons",
       "kind": "municipality-ranking",
       "key": "unemployed-persons",
-      "title": "完全失業者数の市区町村ランキング",
+      "title": "完全失業者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/unemployed-persons",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:unemployed-persons-female",
       "kind": "municipality-ranking",
       "key": "unemployed-persons-female",
-      "title": "完全失業者数の市区町村ランキング",
+      "title": "完全失業者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/unemployed-persons-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:unemployed-persons-male",
       "kind": "municipality-ranking",
       "key": "unemployed-persons-male",
-      "title": "完全失業者数の市区町村ランキング",
+      "title": "完全失業者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/unemployed-persons-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:unemployment-rate",
@@ -5679,7 +5679,7 @@
       "key": "unoccupied-dwellings",
       "title": "居住世帯なし住宅数の市区町村ランキング",
       "href": "/municipalities/ranking/unoccupied-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:ur-corporation-rented-dwellings",
@@ -5687,7 +5687,7 @@
       "key": "ur-corporation-rented-dwellings",
       "title": "UR・公社の借家数の市区町村ランキング",
       "href": "/municipalities/ranking/ur-corporation-rented-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:urban-planning-area",
@@ -5703,7 +5703,7 @@
       "key": "urbanization-area",
       "title": "市街化区域面積の市区町村ランキング",
       "href": "/municipalities/ranking/urbanization-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:urbanization-control-area-city",
@@ -5711,7 +5711,7 @@
       "key": "urbanization-control-area-city",
       "title": "市街化調整区域面積の市区町村ランキング",
       "href": "/municipalities/ranking/urbanization-control-area-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:usage-fees-municipal",
@@ -5719,7 +5719,7 @@
       "key": "usage-fees-municipal",
       "title": "使用料の市区町村ランキング",
       "href": "/municipalities/ranking/usage-fees-municipal",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:use-district-area",
@@ -5727,31 +5727,31 @@
       "key": "use-district-area",
       "title": "用途地域面積の市区町村ランキング",
       "href": "/municipalities/ranking/use-district-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:utilities-private-employees",
       "kind": "municipality-ranking",
       "key": "utilities-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・電気・ガス・熱供給・水道業）の市区町村ランキング",
       "href": "/municipalities/ranking/utilities-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:utilities-private-establishments",
       "kind": "municipality-ranking",
       "key": "utilities-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・電気・ガス・熱供給・水道業）の市区町村ランキング",
       "href": "/municipalities/ranking/utilities-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:utilities-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "utilities-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・電気・ガス・熱供給・水道業）の市区町村ランキング",
       "href": "/municipalities/ranking/utilities-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:vacant-houses-city",
@@ -5759,7 +5759,7 @@
       "key": "vacant-houses-city",
       "title": "空き家数の市区町村ランキング",
       "href": "/municipalities/ranking/vacant-houses-city",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:vacant-housing-ratio",
@@ -5773,9 +5773,9 @@
       "id": "municipality-ranking:waste-direct-recycling",
       "kind": "municipality-ranking",
       "key": "waste-direct-recycling",
-      "title": "ごみ処理量の市区町村ランキング",
+      "title": "ごみ処理量（直接資源化）の市区町村ランキング",
       "href": "/municipalities/ranking/waste-direct-recycling",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-generated-direct-delivery",
@@ -5783,7 +5783,7 @@
       "key": "waste-generated-direct-delivery",
       "title": "ごみの直接搬入量の市区町村ランキング",
       "href": "/municipalities/ranking/waste-generated-direct-delivery",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-generated-group-collection",
@@ -5791,7 +5791,7 @@
       "key": "waste-generated-group-collection",
       "title": "ごみの集団回収量の市区町村ランキング",
       "href": "/municipalities/ranking/waste-generated-group-collection",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-generated-planned-collection",
@@ -5799,7 +5799,7 @@
       "key": "waste-generated-planned-collection",
       "title": "ごみの計画収集量の市区町村ランキング",
       "href": "/municipalities/ranking/waste-generated-planned-collection",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-per-capita-per-day",
@@ -5807,7 +5807,7 @@
       "key": "waste-per-capita-per-day",
       "title": "1人1日当たりのごみ排出量の市区町村ランキング",
       "href": "/municipalities/ranking/waste-per-capita-per-day",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-recycled-after-processing",
@@ -5815,7 +5815,7 @@
       "key": "waste-recycled-after-processing",
       "title": "中間処理後再生利用量の市区町村ランキング",
       "href": "/municipalities/ranking/waste-recycled-after-processing",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-recycling-rate",
@@ -5823,15 +5823,15 @@
       "key": "waste-recycling-rate",
       "title": "ごみのリサイクル率の市区町村ランキング",
       "href": "/municipalities/ranking/waste-recycling-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:waste-treated-total",
       "kind": "municipality-ranking",
       "key": "waste-treated-total",
-      "title": "ごみ処理量の市区町村ランキング",
+      "title": "ごみ処理量（総量）の市区町村ランキング",
       "href": "/municipalities/ranking/waste-treated-total",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:welfare-expense-municipal",
@@ -5855,71 +5855,71 @@
       "key": "wholesale-employees",
       "title": "卸売業従業者数の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-private-employees",
       "kind": "municipality-ranking",
       "key": "wholesale-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・卸売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-private-establishments",
       "kind": "municipality-ranking",
       "key": "wholesale-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・卸売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-retail-private-employees",
       "kind": "municipality-ranking",
       "key": "wholesale-retail-private-employees",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（民営・卸売業、小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-retail-private-employees",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-retail-private-establishments",
       "kind": "municipality-ranking",
       "key": "wholesale-retail-private-establishments",
-      "title": "事業所数の市区町村ランキング",
+      "title": "事業所数（民営・卸売業、小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-retail-private-establishments",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-retail-private-net-value-added",
       "kind": "municipality-ranking",
       "key": "wholesale-retail-private-net-value-added",
-      "title": "業種別の純付加価値額の市区町村ランキング",
+      "title": "業種別の純付加価値額（民営・卸売業、小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-retail-private-net-value-added",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wholesale-retail-private-sales",
       "kind": "municipality-ranking",
       "key": "wholesale-retail-private-sales",
-      "title": "売上金額の市区町村ランキング",
+      "title": "売上金額（民営・卸売業、小売業）の市区町村ランキング",
       "href": "/municipalities/ranking/wholesale-retail-private-sales",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wooden-dwellings",
       "kind": "municipality-ranking",
       "key": "wooden-dwellings",
-      "title": "木造住宅数の市区町村ランキング",
+      "title": "木造住宅数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/wooden-dwellings",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:wooden-dwellings-non-fireproof",
       "kind": "municipality-ranking",
       "key": "wooden-dwellings-non-fireproof",
-      "title": "木造住宅数の市区町村ランキング",
+      "title": "木造住宅数（防火木造を除く）の市区町村ランキング",
       "href": "/municipalities/ranking/wooden-dwellings-non-fireproof",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:woodland-area",
@@ -5933,7 +5933,7 @@
       "id": "municipality-ranking:workers-agriculture-forestry-fishery",
       "kind": "municipality-ranking",
       "key": "workers-agriculture-forestry-fishery",
-      "title": "従業者数の市区町村ランキング",
+      "title": "従業者数（農林漁業）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-agriculture-forestry-fishery",
       "published": true
     },
@@ -5943,79 +5943,79 @@
       "key": "workers-by-place-of-work",
       "title": "従業地による就業者数の市区町村ランキング",
       "href": "/municipalities/ranking/workers-by-place-of-work",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-municipality-same-prefecture",
       "kind": "municipality-ranking",
       "key": "workers-in-other-municipality-same-prefecture",
-      "title": "県内他市区町村で従業している就業者数の市区町村ランキング",
+      "title": "県内他市区町村で従業している就業者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-municipality-same-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-municipality-same-prefecture-female",
       "kind": "municipality-ranking",
       "key": "workers-in-other-municipality-same-prefecture-female",
-      "title": "県内他市区町村で従業している就業者数の市区町村ランキング",
+      "title": "県内他市区町村で従業している就業者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-municipality-same-prefecture-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-municipality-same-prefecture-male",
       "kind": "municipality-ranking",
       "key": "workers-in-other-municipality-same-prefecture-male",
-      "title": "県内他市区町村で従業している就業者数の市区町村ランキング",
+      "title": "県内他市区町村で従業している就業者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-municipality-same-prefecture-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-prefecture",
       "kind": "municipality-ranking",
       "key": "workers-in-other-prefecture",
-      "title": "他県で従業している就業者数の市区町村ランキング",
+      "title": "他県で従業している就業者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-prefecture-female",
       "kind": "municipality-ranking",
       "key": "workers-in-other-prefecture-female",
-      "title": "他県で従業している就業者数の市区町村ランキング",
+      "title": "他県で従業している就業者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-prefecture-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-other-prefecture-male",
       "kind": "municipality-ranking",
       "key": "workers-in-other-prefecture-male",
-      "title": "他県で従業している就業者数の市区町村ランキング",
+      "title": "他県で従業している就業者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-other-prefecture-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-own-municipality",
       "kind": "municipality-ranking",
       "key": "workers-in-own-municipality",
-      "title": "自市区町村で従業している就業者数の市区町村ランキング",
+      "title": "自市区町村で従業している就業者数（総数）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-own-municipality",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-own-municipality-female",
       "kind": "municipality-ranking",
       "key": "workers-in-own-municipality-female",
-      "title": "自市区町村で従業している就業者数の市区町村ランキング",
+      "title": "自市区町村で従業している就業者数（女）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-own-municipality-female",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-in-own-municipality-male",
       "kind": "municipality-ranking",
       "key": "workers-in-own-municipality-male",
-      "title": "自市区町村で従業している就業者数の市区町村ランキング",
+      "title": "自市区町村で従業している就業者数（男）の市区町村ランキング",
       "href": "/municipalities/ranking/workers-in-own-municipality-male",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:workers-living-in-other-prefecture",
@@ -6023,7 +6023,7 @@
       "key": "workers-living-in-other-prefecture",
       "title": "他県に常住している就業者数の市区町村ランキング",
       "href": "/municipalities/ranking/workers-living-in-other-prefecture",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:young-population-ratio",

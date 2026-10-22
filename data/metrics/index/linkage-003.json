@@ -2249,6 +2249,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:city-planning-expense-municipal",
           "kind": "ranking"
         }
@@ -2674,6 +2678,10 @@
         {
           "pageId": "municipality-ranking:cleaning-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:cleaning-expense-municipal",
@@ -3258,6 +3266,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:clinic-bed-count",
           "kind": "ranking"
         }
@@ -3292,6 +3304,10 @@
         {
           "pageId": "municipality-ranking:clinics-with-beds",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:clinics-with-beds",
@@ -4604,6 +4620,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:cohabiting-household-members",
           "kind": "ranking"
         }
@@ -4716,6 +4736,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commerce-industry-expense-municipal",
           "kind": "ranking"
         }
@@ -4785,6 +4809,10 @@
         {
           "pageId": "municipality-ranking:commercial-and-neighborhood-commercial-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commercial-and-neighborhood-commercial-area",
@@ -4859,6 +4887,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commercial-district-area",
           "kind": "ranking"
         }
@@ -4895,6 +4927,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commercial-establishments",
           "kind": "ranking"
         }
@@ -4929,6 +4965,10 @@
         {
           "pageId": "municipality-ranking:commercial-farm-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:agriculture-forestry",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commercial-farm-households",
@@ -6792,6 +6832,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-by-company-school-bus",
           "kind": "ranking"
         }
@@ -6826,6 +6870,10 @@
         {
           "pageId": "municipality-ranking:commuters-by-other-means",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commuters-by-other-means",
@@ -6864,6 +6912,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-by-taxi",
           "kind": "ranking"
         }
@@ -6898,6 +6950,10 @@
         {
           "pageId": "municipality-ranking:commuters-from-other-municipalities",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commuters-from-other-municipalities",
@@ -6936,6 +6992,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-to-other-municipalities",
           "kind": "ranking"
         }
@@ -6970,6 +7030,10 @@
         {
           "pageId": "municipality-ranking:commuters-to-other-municipalities-female",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commuters-to-other-municipalities-female",
@@ -7008,6 +7072,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-to-other-municipalities-male",
           "kind": "ranking"
         }
@@ -7044,6 +7112,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-to-other-municipality-same-prefecture",
           "kind": "ranking"
         }
@@ -7078,6 +7150,10 @@
         {
           "pageId": "municipality-ranking:commuters-to-other-prefecture",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commuters-to-other-prefecture",
@@ -7353,6 +7429,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-using-three-plus-modes",
           "kind": "ranking"
         }
@@ -7387,6 +7467,10 @@
         {
           "pageId": "municipality-ranking:commuters-using-two-modes",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:commuters-using-two-modes",
@@ -7425,6 +7509,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:commuters-within-own-municipality",
           "kind": "ranking"
         }
@@ -7459,6 +7547,10 @@
         {
           "pageId": "municipality-ranking:company-executives",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:company-executives",
@@ -7641,6 +7733,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:compound-services-private-employees",
           "kind": "ranking"
         }
@@ -7675,6 +7771,10 @@
         {
           "pageId": "municipality-ranking:compound-services-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:compound-services-private-establishments",
@@ -7713,6 +7813,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:compound-services-private-net-value-added",
           "kind": "ranking"
         }
@@ -7747,6 +7851,10 @@
         {
           "pageId": "municipality-ranking:compound-services-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:compound-services-private-sales",

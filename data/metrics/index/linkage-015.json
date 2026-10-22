@@ -5819,6 +5819,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:median-age",
           "kind": "ranking"
         }
@@ -7254,6 +7258,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:medical-welfare-private-employees",
           "kind": "ranking"
         }
@@ -7288,6 +7296,10 @@
         {
           "pageId": "municipality-ranking:medical-welfare-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:medical-welfare-private-establishments",
@@ -7326,6 +7338,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:medical-welfare-private-net-value-added",
           "kind": "ranking"
         }
@@ -7360,6 +7376,10 @@
         {
           "pageId": "municipality-ranking:medical-welfare-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:medical-welfare-private-sales",
@@ -9662,6 +9682,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:minicar-count",
           "kind": "ranking"
         }
@@ -9696,6 +9720,10 @@
         {
           "pageId": "municipality-ranking:minimum-housing-standard-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:minimum-housing-standard-households",
@@ -10176,6 +10204,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:mining-private-employees",
           "kind": "ranking"
         }
@@ -10210,6 +10242,10 @@
         {
           "pageId": "municipality-ranking:mining-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:mining-private-establishments",
@@ -10248,6 +10284,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:mining-private-net-value-added",
           "kind": "ranking"
         }
@@ -10282,6 +10322,10 @@
         {
           "pageId": "municipality-ranking:mining-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:mining-private-sales",
@@ -10353,6 +10397,10 @@
         {
           "pageId": "municipality-ranking:miscellaneous-revenue-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:miscellaneous-revenue-municipal",

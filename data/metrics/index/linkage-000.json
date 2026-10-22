@@ -887,6 +887,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:accommodation-food-services-private-employees",
           "kind": "ranking"
         }
@@ -921,6 +925,10 @@
         {
           "pageId": "municipality-ranking:accommodation-food-services-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:accommodation-food-services-private-establishments",
@@ -959,6 +967,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:accommodation-food-services-private-net-value-added",
           "kind": "ranking"
         }
@@ -993,6 +1005,10 @@
         {
           "pageId": "municipality-ranking:accommodation-food-services-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:accommodation-food-services-private-sales",
@@ -4530,6 +4546,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:agriculture-forestry-fisheries-expense-municipal",
           "kind": "ranking"
         }
@@ -4605,6 +4625,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:agriculture-forestry-fisheries-private-employees",
           "kind": "ranking"
         }
@@ -4639,6 +4663,10 @@
         {
           "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:agriculture-forestry-fisheries-private-establishments",
@@ -4677,6 +4705,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:agriculture-forestry-fisheries-private-net-value-added",
           "kind": "ranking"
         }
@@ -4711,6 +4743,10 @@
         {
           "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:agriculture-forestry-fisheries-private-sales",
@@ -4749,6 +4785,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:agriculture-forestry-private-employees",
           "kind": "ranking"
         }
@@ -4783,6 +4823,10 @@
         {
           "pageId": "municipality-ranking:agriculture-forestry-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:agriculture-forestry-private-establishments",
@@ -12605,6 +12649,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:apartment-dwellings",
           "kind": "ranking"
         }
@@ -12641,6 +12689,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:apartment-dwellings-non-wooden",
           "kind": "ranking"
         }
@@ -12675,6 +12727,10 @@
         {
           "pageId": "municipality-ranking:apartment-dwellings-wooden",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:apartment-dwellings-wooden",
@@ -12810,6 +12866,10 @@
         {
           "pageId": "municipality-ranking:apparel-store-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:apparel-store-count",

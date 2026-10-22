@@ -31,6 +31,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:large-retail-store-count",
           "kind": "ranking"
         }
@@ -2687,6 +2691,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:library-count-city",
           "kind": "ranking"
         }
@@ -4765,6 +4773,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:vital-statistics",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:life-expectancy-at-birth-female",
           "kind": "ranking"
         }
@@ -4801,6 +4813,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:vital-statistics",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:life-expectancy-at-birth-male",
           "kind": "ranking"
         }
@@ -4835,6 +4851,10 @@
         {
           "pageId": "municipality-ranking:light-and-small-special-vehicle-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:light-and-small-special-vehicle-count",
@@ -5102,6 +5122,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:loans-expense-municipal",
           "kind": "ranking"
         }
@@ -5136,6 +5160,10 @@
         {
           "pageId": "municipality-ranking:local-allocation-tax-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:local-allocation-tax-municipal",
@@ -5506,6 +5534,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:local-bond-balance-municipal",
           "kind": "ranking"
         }
@@ -5575,6 +5607,10 @@
         {
           "pageId": "municipality-ranking:local-consumption-tax-grant-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:local-consumption-tax-grant-municipal",
@@ -5758,6 +5794,10 @@
         {
           "pageId": "municipality-ranking:local-special-grant-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:local-special-grant-municipal",
@@ -6112,6 +6152,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:local-tax-revenue-municipal",
           "kind": "ranking"
         }
@@ -6146,6 +6190,10 @@
         {
           "pageId": "municipality-ranking:local-transfer-tax-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:local-transfer-tax-municipal",
@@ -7045,6 +7093,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:low-cost-care-home-capacity",
           "kind": "ranking"
         }
@@ -7081,6 +7133,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:low-cost-care-home-count",
           "kind": "ranking"
         }
@@ -7115,6 +7171,10 @@
         {
           "pageId": "municipality-ranking:low-cost-care-home-residents",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:low-cost-care-home-residents",
@@ -7405,6 +7465,10 @@
         {
           "pageId": "municipality-ranking:machinery-store-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:machinery-store-count",
@@ -7836,6 +7900,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:main-household-members-census",
           "kind": "ranking"
         }
@@ -7870,6 +7938,10 @@
         {
           "pageId": "municipality-ranking:main-household-members-housing-survey",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:main-household-members-housing-survey",
@@ -7944,6 +8016,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:main-households-census",
           "kind": "ranking"
         }
@@ -7978,6 +8054,10 @@
         {
           "pageId": "municipality-ranking:main-households-with-65plus",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:main-households-with-65plus",
@@ -8103,6 +8183,10 @@
         {
           "pageId": "municipality-ranking:maintenance-repair-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:maintenance-repair-expense-municipal",
@@ -11066,6 +11150,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:manufacturing-private-employees",
           "kind": "ranking"
         }
@@ -11100,6 +11188,10 @@
         {
           "pageId": "municipality-ranking:manufacturing-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:manufacturing-private-establishments",

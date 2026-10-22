@@ -786,6 +786,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elementary-school-expense-municipal",
           "kind": "ranking"
         }
@@ -3804,6 +3808,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employed-persons",
           "kind": "ranking"
         }
@@ -3838,6 +3846,10 @@
         {
           "pageId": "municipality-ranking:employed-persons-65plus",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employed-persons-65plus",
@@ -3876,6 +3888,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employed-persons-female",
           "kind": "ranking"
         }
@@ -3910,6 +3926,10 @@
         {
           "pageId": "municipality-ranking:employed-persons-mainly-working",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employed-persons-mainly-working",
@@ -3948,6 +3968,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employed-persons-male",
           "kind": "ranking"
         }
@@ -3982,6 +4006,10 @@
         {
           "pageId": "municipality-ranking:employed-persons-on-leave",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employed-persons-on-leave",
@@ -4020,6 +4048,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employed-persons-while-studying",
           "kind": "ranking"
         }
@@ -4054,6 +4086,10 @@
         {
           "pageId": "municipality-ranking:employed-persons-with-housework",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employed-persons-with-housework",
@@ -4124,6 +4160,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employee-head-households",
           "kind": "ranking"
         }
@@ -4158,6 +4198,10 @@
         {
           "pageId": "municipality-ranking:employee-head-households-commute-30-60min",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employee-head-households-commute-30-60min",
@@ -4196,6 +4240,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employee-head-households-commute-60-90min",
           "kind": "ranking"
         }
@@ -4232,6 +4280,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employee-head-households-commute-90min-plus",
           "kind": "ranking"
         }
@@ -4266,6 +4318,10 @@
         {
           "pageId": "municipality-ranking:employee-head-households-commute-under-30min",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employee-head-households-commute-under-30min",
@@ -4690,6 +4746,10 @@
         {
           "pageId": "municipality-ranking:employees-census",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employees-census",
@@ -5235,6 +5295,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employer-housing-floor-area-starts",
           "kind": "ranking"
         }
@@ -5269,6 +5333,10 @@
         {
           "pageId": "municipality-ranking:employer-housing-starts",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employer-housing-starts",
@@ -5307,6 +5375,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:employer-provided-dwellings",
           "kind": "ranking"
         }
@@ -5341,6 +5413,10 @@
         {
           "pageId": "municipality-ranking:employers-with-employees",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:employers-with-employees",
@@ -7698,6 +7774,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:exclusive-industrial-district-area",
           "kind": "ranking"
         }
@@ -7734,6 +7814,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:exclusive-residential-district-area",
           "kind": "ranking"
         }
@@ -7768,6 +7852,10 @@
         {
           "pageId": "municipality-ranking:exclusive-residential-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:exclusive-residential-dwellings",
@@ -8324,6 +8412,10 @@
         {
           "pageId": "municipality-ranking:family-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:family-workers",

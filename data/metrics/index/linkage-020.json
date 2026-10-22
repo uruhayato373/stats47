@@ -2336,6 +2336,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:personal-services-entertainment-private-employees",
           "kind": "ranking"
         }
@@ -2370,6 +2374,10 @@
         {
           "pageId": "municipality-ranking:personal-services-entertainment-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:personal-services-entertainment-private-establishments",
@@ -2408,6 +2416,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:personal-services-entertainment-private-net-value-added",
           "kind": "ranking"
         }
@@ -2442,6 +2454,10 @@
         {
           "pageId": "municipality-ranking:personal-services-entertainment-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:personal-services-entertainment-private-sales",
@@ -2712,6 +2728,10 @@
         {
           "pageId": "municipality-ranking:personnel-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:personnel-expense-municipal",
@@ -3533,6 +3553,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:pharmacists-pharmacies-medical-facilities",
           "kind": "ranking"
         }
@@ -4207,6 +4231,10 @@
         {
           "pageId": "municipality-ranking:physical-disability-participation-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:physical-disability-participation-facility-count",
@@ -5342,6 +5370,10 @@
         {
           "pageId": "municipality-ranking:physicians-medical-facilities",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:physicians-medical-facilities",
@@ -8282,6 +8314,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-15",
           "kind": "ranking"
         }
@@ -8316,6 +8352,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-15-female",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-15-female",
@@ -8354,6 +8394,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-15-male",
           "kind": "ranking"
         }
@@ -8388,6 +8432,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-17",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-17",
@@ -8426,6 +8474,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-17-female",
           "kind": "ranking"
         }
@@ -8460,6 +8512,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-17-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-17-male",
@@ -8498,6 +8554,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-3",
           "kind": "ranking"
         }
@@ -8532,6 +8592,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-3-female",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-3-female",
@@ -8570,6 +8634,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-3-male",
           "kind": "ranking"
         }
@@ -8604,6 +8672,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-5",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-5",
@@ -8642,6 +8714,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-0-5-female",
           "kind": "ranking"
         }
@@ -8676,6 +8752,10 @@
         {
           "pageId": "municipality-ranking:population-aged-0-5-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-0-5-male",
@@ -8714,6 +8794,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-10-13",
           "kind": "ranking"
         }
@@ -8750,6 +8834,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:population-aged-10-13-female",
           "kind": "ranking"
         }
@@ -8784,6 +8872,10 @@
         {
           "pageId": "municipality-ranking:population-aged-10-13-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:age-structure-by-sex",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:population-aged-10-13-male",

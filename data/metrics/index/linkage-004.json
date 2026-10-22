@@ -1873,6 +1873,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:construction-private-employees",
           "kind": "ranking"
         },
@@ -1915,6 +1919,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:construction-private-establishments",
           "kind": "ranking"
         }
@@ -1951,6 +1959,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:construction-private-net-value-added",
           "kind": "ranking"
         }
@@ -1985,6 +1997,10 @@
         {
           "pageId": "municipality-ranking:construction-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:construction-private-sales",
@@ -7050,6 +7066,10 @@
         {
           "pageId": "municipality-ranking:contributions-and-charges-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:contributions-and-charges-municipal",

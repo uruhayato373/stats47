@@ -1450,6 +1450,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:moped-count-50-90cc",
           "kind": "ranking"
         }
@@ -1486,6 +1490,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:moped-count-50cc-or-less",
           "kind": "ranking"
         }
@@ -1520,6 +1528,10 @@
         {
           "pageId": "municipality-ranking:moped-count-over-90cc",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:moped-count-over-90cc",
@@ -3450,6 +3462,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:municipal-tax-assessed",
           "kind": "ranking"
         }
@@ -3484,6 +3500,10 @@
         {
           "pageId": "municipality-ranking:municipal-tax-collected",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:municipal-tax-collected",
@@ -6348,6 +6368,10 @@
         {
           "pageId": "municipality-ranking:national-treasury-disbursements-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:national-treasury-disbursements-municipal",
@@ -9646,6 +9670,10 @@
         {
           "pageId": "municipality-ranking:neighborhood-commercial-district-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:neighborhood-commercial-district-area",

@@ -13,6 +13,10 @@ import {
   validateMunicipalityCatalogs,
 } from '..';
 import { METRICS_REGISTRY } from '../../registry';
+import {
+  SSDS_EXPANSION_POSITIVE_ONLY_KEYS,
+  SSDS_EXPANSION_THEME_METRICS,
+} from '../municipality-ssds-expansion';
 
 describe('municipality geo scope and catalog', () => {
   it('municipality-setと個別municipalityだけを自治体scopeと判定する', () => {
@@ -93,7 +97,9 @@ describe('municipality geo scope and catalog', () => {
     // 公開集合 171 には入らない (公開時に catalog へ published を書く)。
     // 2026-10-21: 令和7年国勢調査の5年間の増減 3 件を監査して published に足した (171 → 174)。
     // 2026-10-22: 主要湖沼面積を 0 (湖が無い) を除いて公開、工業地地価は 2005 年のみのため非公開に確定 (174 → 175)。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(175);
+    // 2026-10-22: 社会・人口統計体系の未使用コード 733 を e-Stat 実測で判定し 542 件を公開 (175 → 717)。
+    // 判定の記録と件数の内訳は municipality-ssds-expansion.ts。
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(717);
     for (const key of [
       'total-population',
       'fiscal-strength-index',
@@ -116,7 +122,8 @@ describe('municipality geo scope and catalog', () => {
     ]) {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(false);
     }
-    expect(KNOWN_MUNICIPALITY_THEME_SLUGS.size).toBe(19);
+    // 2026-10-22: 拡充分を受けるテーマを 10 件新設 (19 → 29)
+    expect(KNOWN_MUNICIPALITY_THEME_SLUGS.size).toBe(29);
     for (const slug of ['aging-society', 'population', 'local-finance', 'establishments']) {
       expect(KNOWN_MUNICIPALITY_THEME_SLUGS.has(slug)).toBe(true);
     }
@@ -149,6 +156,7 @@ describe('municipality geo scope and catalog', () => {
       {
         'aging-society': {
           ...MUNICIPALITY_THEME_CATALOGS['aging-society'],
+          metricKeys: ['elderly-population-ratio'],
           status: 'active',
         },
       },
@@ -159,5 +167,29 @@ describe('municipality geo scope and catalog', () => {
 
   it('catalogの実在・active・city・policy整合にerrorがない', () => {
     expect(validateMunicipalityCatalogs()).toEqual([]);
+  });
+});
+
+describe('社会・人口統計体系の拡充 (2026-10-22)', () => {
+  it('拡充の指標は既存の判定と重ならず、すべて公開・テーマ所属・市区町村対応になる', () => {
+    const expansionKeys = Object.values(SSDS_EXPANSION_THEME_METRICS).flat();
+    expect(new Set(expansionKeys).size).toBe(expansionKeys.length);
+    expect(expansionKeys).toHaveLength(542);
+    for (const key of expansionKeys) {
+      expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(true);
+    }
+  });
+
+  it('0 の多い指標だけが 0 を除いて順位を付ける', () => {
+    for (const key of SSDS_EXPANSION_POSITIVE_ONLY_KEYS) {
+      expect(getMunicipalityMetricAvailability(key)).toMatchObject({ valuePolicy: { minExclusive: 0 } });
+    }
+    expect(getMunicipalityMetricAvailability('private-establishments')).not.toHaveProperty('valuePolicy');
+  });
+
+  it('テーマページの重さの予算を守るため、1 テーマの指標は 60 件以下', () => {
+    for (const theme of Object.values(MUNICIPALITY_THEME_CATALOGS)) {
+      expect(theme.metricKeys.length, theme.slug).toBeLessThanOrEqual(60);
+    }
   });
 });

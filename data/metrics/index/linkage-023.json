@@ -774,6 +774,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:public-assistance-purpose-expense-municipal",
           "kind": "ranking"
         }
@@ -1918,6 +1922,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:education",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:public-hall-count-city",
           "kind": "ranking"
         }
@@ -2190,6 +2198,10 @@
         {
           "pageId": "municipality-ranking:public-health-expense-municipal",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:public-health-expense-municipal",
@@ -2916,6 +2928,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:public-nursery-enrolled-children",
           "kind": "ranking"
         }
@@ -2950,6 +2966,10 @@
         {
           "pageId": "municipality-ranking:public-nursery-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:public-nursery-facility-count",
@@ -3247,6 +3267,10 @@
         {
           "pageId": "municipality-ranking:public-rented-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:public-rented-dwellings",
@@ -3806,6 +3830,10 @@
         {
           "pageId": "municipality-ranking:public-ur-corporation-rented-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:public-ur-corporation-rented-dwellings",
@@ -5363,6 +5391,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:quasi-household-members",
           "kind": "ranking"
         }
@@ -5399,6 +5431,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:quasi-households",
           "kind": "ranking"
         }
@@ -5433,6 +5469,10 @@
         {
           "pageId": "municipality-ranking:quasi-industrial-district-area",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:urban-structure",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:quasi-industrial-district-area",
@@ -7853,6 +7893,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:real-estate-leasing-private-employees",
           "kind": "ranking"
         }
@@ -7887,6 +7931,10 @@
         {
           "pageId": "municipality-ranking:real-estate-leasing-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:real-estate-leasing-private-establishments",
@@ -7925,6 +7973,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:real-estate-leasing-private-net-value-added",
           "kind": "ranking"
         }
@@ -7959,6 +8011,10 @@
         {
           "pageId": "municipality-ranking:real-estate-leasing-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:real-estate-leasing-private-sales",

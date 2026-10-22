@@ -111,6 +111,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:other-retail-store-count",
           "kind": "ranking"
         }
@@ -427,6 +431,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:other-services-private-employees",
           "kind": "ranking"
         }
@@ -461,6 +469,10 @@
         {
           "pageId": "municipality-ranking:other-services-private-establishments",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:other-services-private-establishments",
@@ -499,6 +511,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:other-services-private-net-value-added",
           "kind": "ranking"
         }
@@ -533,6 +549,10 @@
         {
           "pageId": "municipality-ranking:other-services-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:other-services-private-sales",
@@ -649,6 +669,10 @@
         {
           "pageId": "municipality-ranking:other-social-welfare-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:other-social-welfare-facility-count",
@@ -929,6 +953,10 @@
         {
           "pageId": "municipality-ranking:other-structure-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:other-structure-dwellings",
@@ -1730,6 +1758,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commuting",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:outflow-population-within-prefecture",
           "kind": "ranking"
         }
@@ -2446,6 +2478,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-revenue",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:own-source-revenue-municipal",
           "kind": "ranking"
         }
@@ -2480,6 +2516,10 @@
         {
           "pageId": "municipality-ranking:owner-and-for-sale-housing-starts",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:owner-and-for-sale-housing-starts",
@@ -2518,6 +2558,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-size-age",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:owner-housing-floor-area-starts",
           "kind": "ranking"
         }
@@ -2552,6 +2596,10 @@
         {
           "pageId": "municipality-ranking:owner-occupied-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:owner-occupied-dwellings",
@@ -3422,6 +3470,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:paid-nursing-home-capacity",
           "kind": "ranking"
         }
@@ -3493,6 +3545,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:paid-nursing-home-count",
           "kind": "ranking"
         }
@@ -3562,6 +3618,10 @@
         {
           "pageId": "municipality-ranking:paid-nursing-home-residents",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:paid-nursing-home-residents",
@@ -3705,6 +3765,10 @@
         {
           "pageId": "municipality-ranking:part-time-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:part-time-workers",

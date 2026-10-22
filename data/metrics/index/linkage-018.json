@@ -31,6 +31,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-professional-workers",
           "kind": "ranking"
         }
@@ -65,6 +69,10 @@
         {
           "pageId": "municipality-ranking:occupation-sales-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-sales-workers",
@@ -103,6 +111,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-security-workers",
           "kind": "ranking"
         }
@@ -137,6 +149,10 @@
         {
           "pageId": "municipality-ranking:occupation-service-business-owner-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-service-business-owner-workers",
@@ -175,6 +191,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-shop-owner-workers",
           "kind": "ranking"
         }
@@ -209,6 +229,10 @@
         {
           "pageId": "municipality-ranking:occupation-skilled-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-skilled-workers",
@@ -247,6 +271,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-teacher-clergy-workers",
           "kind": "ranking"
         }
@@ -281,6 +309,10 @@
         {
           "pageId": "municipality-ranking:occupation-writer-artist-entertainer-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-writer-artist-entertainer-workers",
@@ -354,6 +386,10 @@
         {
           "pageId": "municipality-ranking:occupied-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupied-dwellings",
@@ -1474,6 +1510,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:ordinary-construction-expense-municipal",
           "kind": "ranking"
         }
@@ -1739,6 +1779,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:ordinary-household-members",
           "kind": "ranking"
         }
@@ -1775,6 +1819,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:ordinary-household-members-outside-dwellings",
           "kind": "ranking"
         }
@@ -1809,6 +1857,10 @@
         {
           "pageId": "municipality-ranking:ordinary-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing-households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:ordinary-households",
@@ -2833,6 +2885,10 @@
         {
           "pageId": "municipality-ranking:other-building-type-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:other-building-type-dwellings",

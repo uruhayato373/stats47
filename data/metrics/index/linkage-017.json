@@ -936,6 +936,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:medical-welfare",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:nhi-insured-persons",
           "kind": "ranking"
         }
@@ -1238,6 +1242,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:night-soil-treatment-volume",
           "kind": "ranking"
         }
@@ -1342,6 +1350,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-agriculture-excl-public-private-employees",
           "kind": "ranking"
         }
@@ -1378,6 +1390,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-agriculture-excl-public-private-establishments",
           "kind": "ranking"
         }
@@ -1412,6 +1428,10 @@
         {
           "pageId": "municipality-ranking:non-agriculture-excl-public-private-sales",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-agriculture-excl-public-private-sales",
@@ -1570,6 +1590,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:safety-environment",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-flush-toilet-population-city",
           "kind": "ranking"
         }
@@ -1604,6 +1628,10 @@
         {
           "pageId": "municipality-ranking:non-labor-force-housework",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-labor-force-housework",
@@ -1642,6 +1670,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-labor-force-other",
           "kind": "ranking"
         }
@@ -1676,6 +1708,10 @@
         {
           "pageId": "municipality-ranking:non-labor-force-population",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-labor-force-population",
@@ -1714,6 +1750,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-labor-force-population-female",
           "kind": "ranking"
         }
@@ -1748,6 +1788,10 @@
         {
           "pageId": "municipality-ranking:non-labor-force-population-male",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-labor-force-population-male",
@@ -1786,6 +1830,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:labor",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-labor-force-studying",
           "kind": "ranking"
         }
@@ -1820,6 +1868,10 @@
         {
           "pageId": "municipality-ranking:non-nuclear-family-households",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-nuclear-family-households",
@@ -2104,6 +2156,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:non-store-retailer-count",
           "kind": "ranking"
         }
@@ -2138,6 +2194,10 @@
         {
           "pageId": "municipality-ranking:non-wooden-dwellings",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:non-wooden-dwellings",
@@ -4183,6 +4243,10 @@
         {
           "pageId": "municipality-ranking:nuclear-family-households-with-65plus",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:households",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:nuclear-family-households-with-65plus",
@@ -7493,6 +7557,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:nursery-enrolled-children",
           "kind": "ranking"
         }
@@ -7527,6 +7595,10 @@
         {
           "pageId": "municipality-ranking:nursery-facility-count",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:nursery-facility-count",
@@ -7804,6 +7876,10 @@
         {
           "pageId": "municipality-ranking:nursery-type-ece-center-enrolled-children",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:welfare-facilities",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:nursery-type-ece-center-enrolled-children",
@@ -10166,6 +10242,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-agriculture-forestry-fishery-employee-workers",
           "kind": "ranking"
         }
@@ -10200,6 +10280,10 @@
         {
           "pageId": "municipality-ranking:occupation-agriculture-forestry-fishery-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-agriculture-forestry-fishery-workers",
@@ -10238,6 +10322,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-clerical-workers",
           "kind": "ranking"
         }
@@ -10272,6 +10360,10 @@
         {
           "pageId": "municipality-ranking:occupation-company-executive-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-company-executive-workers",
@@ -10310,6 +10402,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-engineer-workers",
           "kind": "ranking"
         }
@@ -10344,6 +10440,10 @@
         {
           "pageId": "municipality-ranking:occupation-factory-owner-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-factory-owner-workers",
@@ -10382,6 +10482,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-home-based-piecework-workers",
           "kind": "ranking"
         }
@@ -10416,6 +10520,10 @@
         {
           "pageId": "municipality-ranking:occupation-manager-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-manager-workers",
@@ -10454,6 +10562,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:occupation-manual-labor-workers",
           "kind": "ranking"
         }
@@ -10488,6 +10600,10 @@
         {
           "pageId": "municipality-ranking:occupation-personal-service-workers",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:occupation-personal-service-workers",
