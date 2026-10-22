@@ -1724,6 +1724,7 @@ updated: 2026-10-19
 - **残り**: R2 に残る `foreign-population-per-100k` と `population-density-habitable` の都道府県 `item.json` (2026-08-26 生成) は、もうどこからも読まれない。R2 の削除はオーナーの承認が要る (削除の入口は `r2-maintenance.yml` の `RETENTION_TARGETS` に対象を足す形)。
 - **2026-10-09 観測 (範囲は 2 指標ではなく 19 指標)**: 市区町村専用で公開中の 19 指標すべてに、都道府県用の古い `app/ranking/<key>/item.json` が R2 に残る (`crime-rate-per-1k` `current-balance-ratio-city` `elderly-population-ratio` `fiscal-strength-index` `foreign-population-per-100k` `future-burden-ratio-city` `general-hospital-per-100k` `housing-floor-area` `industrial-land-price` `manufacturing-net-value-added-private` `manufacturing-sales-private` `manufacturing-shipment` `per-taxpayer-income` `population-density-habitable` `real-balance-ratio-city` `real-public-debt-service-ratio-city` `retail-stores-per` `total-area-prefecture-ratio` `traffic-accident-per-100k`)。`generate-ranking-items.ts` は都道府県の指標しか書かず、`fiscal-strength-index` の item は 2026-05-24 のまま「（2.1‐）」と「‐/10万人」を持つ。本番の `/ranking/<key>` は 410、市区町村のページ `/municipalities/ranking/<key>` には出ない (curl で確認)。消すなら 19 件まとめて判断する。
 - **完了条件**: 承認のうえで 2 つの `app/ranking/<key>/item.json` が R2 から消えている。消さないと決めた場合はこのカードを消す。
+- **済 (2026-10-22・オーナー承認)**: 19 指標すべての都道府県用 `item.json` を R2 から削除した (`r2-maintenance.yml` run 39695682844、target `retired-municipality-only-ranking-items-20261022`、残存 0)。`fiscal-strength-index` の item.json は 404、`/municipalities/ranking/fiscal-strength-index` は 200。同じ prefix の `ogp/`・`thumbnail-*`・`values.json` (5 件) は今回の対象外で残る。カードは完了。
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
 
@@ -3131,7 +3132,7 @@ updated: 2026-10-19
 - **済 (2026-10-21・本番反映済み。PR #1165 + #1166)**: 市区町村ページを市区町村データブック (`app/areas/<県>/cities/<市区町村>/databook.json`、174 指標の値・年・県内順位・全国順位) に置き換え、旧 `profile.json` の生成と読み込みを撤去した。特徴は率の指標・値 0 除外・2019 年以降 (`selectCityHighlights`)。見出しに人口・高齢化率など 6 指標、title は人口・前回比・都内/道内/府内/県内の順位 (`buildCityPageMeta`)。東京 23 区を公開対象にし (entity policy)、県内の一覧・索引・sitemap を同じ集合 1,741 件にそろえた。市区町村ランキングは全行リンク・同名の自治体に県名、ヘッダーの現在地は「市区町村」、パンくずの県名の重複を解消。localhost (公開 R2 + ローカル生成物のオーバーレイ) で坂出市・千代田区・札幌市・特別区部 (noindex) と市区町村ランキング・都道府県ランキング・ブログのデータ欄を確認した。計測の基準値は `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01`。
 - **本番確認 (2026-10-21)**: 坂出市 (1280px)・千代田区 (390px)・札幌市 (390px) を撮影・DOM 検査し、強みの値 0・分母なし・年度なし・23 区の欠落・ランキングのリンク欠落・同名自治体・県名の重複・ヘッダーの現在地がすべて解消していることを確かめた (横はみ出しなし)。
 - **済 (2026-10-22・develop 反映、本番未デプロイ)**: 県内の市区町村一覧 (`CitiesNavCard`) の固定の高さのスクロールをやめ、先頭 40 件を並べて残りを「すべて見る（残り N 件）」(`<details>`) で開く形にした。リンクは閉じていても全件を初期 HTML に持ち、現在の市区町村が残り側にあるときは最初から開く。localhost で札幌市 (1280px・閉じた状態と展開)・羅臼町 (375px・最初から開く) を確認、横はみ出しなし。テスト `CitiesNavCard.test.tsx`。
-- **残り**: ② 配信をやめた市区町村の `profile.json` (R2 `app/areas/<県>/cities/<市区町村>/profile.json`) は読み手 0。削除は `r2-maintenance.yml` の allowlist 経由で、オーナーの承認後。
+- **済 (2026-10-22・オーナー承認)**: 配信をやめた市区町村の `profile.json` 1,399 件を R2 から削除した (`r2-maintenance.yml` run 39695673440、target `retired-city-profile-20261022`、key・サイズ・ETag 一致後に削除し残存 0)。札幌市の profile.json は 404、databook.json とページは 200。残りは無いのでカードは完了。
 
 ### [UNIT-NOTATION-FORMAT-01] 単位と数値の表記がページごとに不揃い
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
