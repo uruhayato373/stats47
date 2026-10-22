@@ -1,1 +1,5 @@
-export { StatisticsScopeNav, type StatisticsScope } from './StatisticsScopeNav';
+export {
+  StatisticsScopeNav,
+  type StatisticsScope,
+  type StatisticsScopeHrefs,
+} from './StatisticsScopeNav';

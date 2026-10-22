@@ -13,7 +13,10 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { getMetricConfig } from '@stats47/data-configs';
-import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
+import {
+  KNOWN_MUNICIPALITY_RANKING_KEYS,
+  scopeHrefsForMunicipalityRanking,
+} from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   buildMunicipalityListNames,
@@ -47,6 +50,7 @@ import {
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import type { Metadata } from 'next';
@@ -188,7 +192,10 @@ export default async function MunicipalityRankingPage({
           { label: municipalityRankingDisplayTitle(item) },
         ]}
       />
-      <StatisticsScopeNav current="municipalities" />
+      <StatisticsScopeNav
+        current="municipalities"
+        hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
+      />
       <PageHeader
         eyebrow="市区町村ランキング"
         title={municipalityRankingDisplayTitle(item)}

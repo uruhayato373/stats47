@@ -4,6 +4,7 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { buildEstatTableUrl } from '@stats47/data-configs/data-source';
 import {
   getJapanCatalogTheme,
+  scopeHrefsForJapanTheme,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { readJapanSeries } from '@stats47/stats-r2/readers';
@@ -121,7 +122,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
           { label: theme.title },
         ]}
       />
-      <StatisticsScopeNav current="japan" />
+      <StatisticsScopeNav current="japan" hrefs={scopeHrefsForJapanTheme(theme.themeSlug)} />
       <PageHeader
         eyebrow="日本"
         title={theme.title}

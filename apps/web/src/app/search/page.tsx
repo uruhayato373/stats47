@@ -57,7 +57,9 @@ export default async function SearchPage({ searchParams }: PageProps) {
     await searchParams;
 
   const parsedType =
-    type === "blog" || type === "ranking" ? (type as ContentType) : undefined;
+    type === "blog" || type === "ranking" || type === "municipality-ranking"
+      ? (type as ContentType)
+      : undefined;
   const parsedTags = tags
     ? tags.split(",").filter(Boolean)
     : undefined;

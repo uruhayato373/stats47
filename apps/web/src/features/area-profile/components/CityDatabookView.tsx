@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@stats47/components/atoms/ui/table";
+import { listCityDatabookThemes } from "@stats47/data-configs/geo-scope";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   prefectureInsideLabel,
@@ -33,6 +34,16 @@ interface Props {
 /** 「特徴」一覧の件数。 */
 const CITY_HIGHLIGHTS_LIMIT = 8;
 
+/**
+ * 表の行ごとに同じ class を繰り返さず、表に 1 回だけ書く (市区町村ページは 200 行を超え、HTML と RSC の
+ * 両方に class が載るため。2026-10-22 に札幌市のページが 954KB でページの重さの予算 900KB を超えた)。
+ * 2 列目以降は右寄せの数値、`<small>` は補足、1 列目のリンクは指標名。
+ */
+const DATABOOK_TABLE_CLASS =
+  "[&_td+td]:whitespace-nowrap [&_td+td]:text-right [&_td+td]:tabular-nums " +
+  "[&_small]:text-[11px] [&_small]:text-muted-foreground " +
+  "[&_td>a]:font-medium [&_td>a]:text-foreground [&_td>a:hover]:text-primary [&_td>a:hover]:underline";
+
 /** 市区町村の指標は全国の市区町村ランキングへつなぐ (県内の位置は表の県内順位で読める)。 */
 function metricHref(metric: CityDatabookMetric): string {
   return `/municipalities/ranking/${metric.rankingKey}`;
@@ -54,6 +65,9 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
   const metrics = databook.metrics;
   const headline = databook.headlineKeys.flatMap((key) => (metrics[key] ? [metrics[key]] : []));
   const highlights = selectCityHighlights(Object.values(metrics), { limit: CITY_HIGHLIGHTS_LIMIT });
+  // データブックに節の無い市区町村テーマ (載せる指標を絞った拡充分のテーマなど) へも行けるようにする
+  const shownThemes = new Set(databook.sections.map((section) => section.themeSlug));
+  const otherThemes = listCityDatabookThemes().filter((theme) => !shownThemes.has(theme.slug));
   const prefectureCount = headline[0]?.prefectureCount;
   const inside = prefectureInsideLabel(prefName);
 
@@ -142,7 +156,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                 }
               />
               <div className="overflow-x-auto border border-border">
-                <Table>
+                <Table className={DATABOOK_TABLE_CLASS}>
                   <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
                     <TableRow>
                       <TableHead>指標</TableHead>
@@ -157,30 +171,22 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                       return (
                         <TableRow key={key}>
                           <TableCell className="min-w-40">
-                            <Link
-                              href={metricHref(metric)}
-                              data-nav-label={key}
-                              className="font-medium text-foreground hover:text-primary hover:underline"
-                            >
+                            <Link href={metricHref(metric)} data-nav-label={key}>
                               {metric.label}
                             </Link>
-                            <span className="block text-[11px] text-muted-foreground">{metric.yearName}</span>
+                            <small className="block">{metric.yearName}</small>
                           </TableCell>
-                          <TableCell className="whitespace-nowrap text-right tabular-nums">
+                          <TableCell>
                             {formatValue(metric.value)}
-                            <span className="ml-0.5 text-[11px] text-muted-foreground">
-                              {formatUnitForDisplay(metric.unit)}
-                            </span>
+                            <small className="ml-0.5">{formatUnitForDisplay(metric.unit)}</small>
                           </TableCell>
-                          <TableCell className="whitespace-nowrap text-right tabular-nums">
-                            {metric.prefectureRank}位
-                            <span className="text-[11px] text-muted-foreground">/{metric.prefectureCount}</span>
+                          <TableCell>
+                            {`${metric.prefectureRank}位`}
+                            <small>{`/${metric.prefectureCount}`}</small>
                           </TableCell>
-                          <TableCell className="whitespace-nowrap text-right tabular-nums">
-                            {metric.nationalRank.toLocaleString("ja-JP")}位
-                            <span className="text-[11px] text-muted-foreground">
-                              /{metric.nationalCount.toLocaleString("ja-JP")}
-                            </span>
+                          <TableCell>
+                            {`${metric.nationalRank.toLocaleString("ja-JP")}位`}
+                            <small>{`/${metric.nationalCount.toLocaleString("ja-JP")}`}</small>
                           </TableCell>
                         </TableRow>
                       );
@@ -191,6 +197,25 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             </section>
           ))}
         </div>
+        {otherThemes.length > 0 && (
+          <nav aria-label="ほかの分野" className="mt-6 text-sm" {...navSurfaceProps("area_databook")}>
+            <p className="text-muted-foreground">
+              この表に載せていない分野も、市区町村どうしで比べられます。
+            </p>
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              {otherThemes.map((theme) => (
+                <Link
+                  key={theme.slug}
+                  href={`/municipalities/themes/${theme.slug}`}
+                  data-nav-label={`theme:${theme.slug}`}
+                  className="text-primary hover:underline"
+                >
+                  {theme.title} ›
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </section>
     </>
   );

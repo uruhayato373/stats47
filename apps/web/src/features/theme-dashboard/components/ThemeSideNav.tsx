@@ -2,7 +2,7 @@
 
 import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
-import { StatisticsScopeNav } from '@/components/navigation';
+import { StatisticsScopeNav, type StatisticsScopeHrefs } from '@/components/navigation';
 import { RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { RailCard, RailNavRow } from '@/components/surface';
@@ -35,6 +35,8 @@ interface Props {
   showRegion?: boolean;
   /** エリア文脈など、地理スコープを切り替えないページでは false。 */
   showScope?: boolean;
+  /** 市区町村・日本の同じ主題のページ (サーバーで `scopeHrefsForPrefectureTheme` を渡す)。 */
+  scopeHrefs?: StatisticsScopeHrefs;
   pageLinks?: Array<{ href: string; label: string }>;
   metrics?: ThemeNavMetric[];
   surveys?: ThemeNavSurvey[];
@@ -53,6 +55,7 @@ export function ThemeSideNav({
   areaContext,
   showRegion = true,
   showScope = true,
+  scopeHrefs,
   pageLinks = [],
   metrics = [],
   surveys = [],
@@ -67,7 +70,7 @@ export function ThemeSideNav({
       />
 
       {(showScope || showRegion) && (
-        <RegionBlock showScope={showScope} showPrefectureSelect={showRegion} />
+        <RegionBlock showScope={showScope} showPrefectureSelect={showRegion} scopeHrefs={scopeHrefs} />
       )}
 
       {pageLinks.length > 0 && (
@@ -227,13 +230,15 @@ function ThemeGroupNavigation({
 function RegionBlock({
   showScope,
   showPrefectureSelect,
+  scopeHrefs,
 }: {
   showScope: boolean;
   showPrefectureSelect: boolean;
+  scopeHrefs?: StatisticsScopeHrefs;
 }) {
   return (
     <RailCard title="地域">
-      {showScope && <StatisticsScopeNav current="prefectures" variant="rail" />}
+      {showScope && <StatisticsScopeNav current="prefectures" variant="rail" hrefs={scopeHrefs} />}
       {showPrefectureSelect && <PrefectureControl hasScope={showScope} />}
     </RailCard>
   );

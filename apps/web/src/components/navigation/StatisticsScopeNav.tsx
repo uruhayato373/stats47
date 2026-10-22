@@ -5,11 +5,16 @@ import Link from '@/components/atoms/SiteLink';
 
 export type StatisticsScope = 'prefectures' | 'municipalities' | 'japan';
 
+/** 主語ごとのリンク先の上書き。同じ主題のページがある主語だけを渡す (無ければ各主語の一覧へ)。 */
+export type StatisticsScopeHrefs = Partial<Record<StatisticsScope, string>>;
+
 interface StatisticsScopeNavProps {
   current: StatisticsScope;
   /** 横タブ（本文上部）または縦リスト（左レール）。リンク定義は共通。 */
   variant?: 'horizontal' | 'rail';
   className?: string;
+  /** 同じ主題のページへのリンク先 (`scopeHrefsFor*Theme` の結果をサーバーで渡す)。 */
+  hrefs?: StatisticsScopeHrefs;
 }
 
 const ITEMS = [
@@ -27,6 +32,7 @@ export function StatisticsScopeNav({
   current,
   variant = 'horizontal',
   className,
+  hrefs,
 }: StatisticsScopeNavProps) {
   const isRail = variant === 'rail';
 
@@ -48,7 +54,7 @@ export function StatisticsScopeNav({
         {ITEMS.map((item) => (
           <Link
             key={item.key}
-            href={item.href}
+            href={(item.key !== current && hrefs?.[item.key]) || item.href}
             aria-current={item.key === current ? 'page' : undefined}
             className={cn(
               'text-sm transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',

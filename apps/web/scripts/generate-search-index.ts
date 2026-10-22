@@ -20,6 +20,7 @@ import MiniSearch from "minisearch";
 import path from "path";
 
 import { getCategoryName, getMetricConfig, listCategories } from "@stats47/data-configs";
+import { KNOWN_MUNICIPALITY_RANKING_KEYS } from "@stats47/data-configs/geo-scope";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import type { RankingItem } from "@stats47/ranking/types";
 
@@ -29,6 +30,7 @@ import {
 } from "../src/features/blog/types/snapshot";
 import { tokenize } from "../src/features/search/lib/tokenize";
 import type { ContentType, SearchDocument } from "../src/features/search/types/search.types";
+import { buildMunicipalitySearchDocuments } from "./lib/municipality-search-documents";
 import {
   assertCompleteSearchIndexSources,
   configureSearchIndexR2Environment,
@@ -144,6 +146,15 @@ async function main() {
 
   const rankingCount = documents.length;
 
+  // 1b. 市区町村ランキング (公開集合 + git TS の指標設定。R2 は読まない)
+  const municipalityDocuments = buildMunicipalitySearchDocuments(
+    KNOWN_MUNICIPALITY_RANKING_KEYS,
+    getMetricConfig,
+    getCategoryName,
+  );
+  documents.push(...municipalityDocuments);
+  console.log(`市区町村ランキング: ${municipalityDocuments.length}件`);
+
   // 2. ブログ記事（R2 app/blog/all.json）
   try {
     const snapshot = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
@@ -167,12 +178,12 @@ async function main() {
         updatedAt: a.updatedAt ? new Date(a.updatedAt).toISOString() : undefined,
       });
     }
-    console.log(`ブログ: ${documents.length - rankingCount}件`);
+    console.log(`ブログ: ${documents.length - rankingCount - municipalityDocuments.length}件`);
   } catch (error) {
     console.warn("ブログ記事の取得に失敗:", error);
   }
 
-  const blogCount = documents.length - rankingCount;
+  const blogCount = documents.length - rankingCount - municipalityDocuments.length;
   assertCompleteSearchIndexSources({ rankingCount, blogCount });
 
   // MiniSearch に追加

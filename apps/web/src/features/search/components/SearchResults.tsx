@@ -17,16 +17,19 @@ interface SearchResultsProps {
 const typeIcons: Record<ContentType, React.ReactNode> = {
     blog: <FileText className="h-4 w-4" />,
     ranking: <BarChart3 className="h-4 w-4" />,
+    "municipality-ranking": <BarChart3 className="h-4 w-4" />,
 };
 
 const typeBadgeVariants: Record<ContentType, "default" | "secondary" | "outline"> = {
     blog: "secondary",
     ranking: "outline",
+    "municipality-ranking": "outline",
 };
 
 const typeLabels: Record<ContentType, string> = {
     blog: "ブログ",
     ranking: "ランキング",
+    "municipality-ranking": "市区町村ランキング",
 };
 
 export function SearchResults({ results, query }: SearchResultsProps) {
@@ -65,7 +68,7 @@ export function SearchResults({ results, query }: SearchResultsProps) {
                             trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
                         }
                     >
-                        {result.type === "ranking" ? (
+                        {result.type !== "blog" ? (
                             <RankingResultCard result={result} />
                         ) : (
                             <BlogResultCard result={result} />

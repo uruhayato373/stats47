@@ -44,6 +44,7 @@ const contentTypeLabels: Record<ContentType | "all", string> = {
     all: "すべて",
     blog: "ブログ記事",
     ranking: "ランキング",
+    "municipality-ranking": "市区町村ランキング",
 };
 
 const months = Array.from({ length: 12 }, (_, i) => String(i + 1));

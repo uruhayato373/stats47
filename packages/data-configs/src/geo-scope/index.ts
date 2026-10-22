@@ -62,6 +62,15 @@ export {
   validateCityDatabookLayout,
 } from './city-databook-layout';
 export type { CityDatabookLayout, CityDatabookTheme } from './city-databook-layout';
+export {
+  MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
+  PREFECTURE_THEME_FOR_MUNICIPALITY_THEME,
+  scopeHrefsForJapanTheme,
+  scopeHrefsForMunicipalityRanking,
+  scopeHrefsForMunicipalityTheme,
+  scopeHrefsForPrefectureTheme,
+} from './scope-theme-links';
+export type { StatisticsScopeHrefs } from './scope-theme-links';
 export { toGeoScopeStorageEntityKind } from './storage-adapter';
 export type { GeoScopeStorageEntityKind } from './storage-adapter';
 export type {

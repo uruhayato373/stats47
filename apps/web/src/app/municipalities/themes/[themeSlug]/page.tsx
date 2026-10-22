@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import {
   KNOWN_MUNICIPALITY_THEME_SLUGS,
   MUNICIPALITY_THEME_CATALOGS,
+  scopeHrefsForMunicipalityTheme,
 } from '@stats47/data-configs/geo-scope';
 import { readMunicipalityRankingItem } from '@stats47/ranking/server';
 import { ChartNoAxesColumnIncreasing } from 'lucide-react';
@@ -74,7 +75,10 @@ export default async function MunicipalityThemePage({
           { label: theme.title },
         ]}
       />
-      <StatisticsScopeNav current="municipalities" />
+      <StatisticsScopeNav
+        current="municipalities"
+        hrefs={scopeHrefsForMunicipalityTheme(theme.slug)}
+      />
       <PageHeader
         eyebrow="市区町村テーマ"
         title={theme.title}

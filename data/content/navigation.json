@@ -60,5 +60,46 @@
       "tag:t-4fa06acf0d1d"
     ]
   },
-  "links": []
+  "links": [
+    {
+      "from": "municipality-ranking:public-hall-count-city",
+      "to": "ranking:public-hall-count",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "ranking:public-hall-count",
+      "to": "municipality-ranking:public-hall-count-city",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "municipality-ranking:hospital-bed-count-city",
+      "to": "ranking:hospital-bed-count",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "ranking:hospital-bed-count",
+      "to": "municipality-ranking:hospital-bed-count-city",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "municipality-ranking:life-expectancy-at-birth-male",
+      "to": "ranking:life-expectancy-0-male",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "ranking:life-expectancy-0-male",
+      "to": "municipality-ranking:life-expectancy-at-birth-male",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "municipality-ranking:life-expectancy-at-birth-female",
+      "to": "ranking:life-expectancy-0-female",
+      "relation": "sameMetric"
+    },
+    {
+      "from": "ranking:life-expectancy-0-female",
+      "to": "municipality-ranking:life-expectancy-at-birth-female",
+      "relation": "sameMetric"
+    }
+  ]
 }

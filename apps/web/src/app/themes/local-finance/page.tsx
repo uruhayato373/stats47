@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import { to5DigitPrefCode } from '@stats47/area';
+import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
 import Link from '@/components/atoms/SiteLink';
@@ -122,7 +123,12 @@ export default async function LocalFinanceThemePage({
     >
       <PageShell
         leftRail={
-          <ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" pageLinks={pageLinks} />
+          <ThemeSideNav
+            themes={THEME_SWITCHER_THEMES}
+            currentThemeKey="local-finance"
+            pageLinks={pageLinks}
+            scopeHrefs={scopeHrefsForPrefectureTheme('local-finance')}
+          />
         }
         leftRailNarrowBehavior="hide"
       >
@@ -157,15 +163,22 @@ export default async function LocalFinanceThemePage({
               調査一覧へ
             </Link>
           </nav>
-          <StatisticsScopeNav current="prefectures" />
+          <StatisticsScopeNav
+            current="prefectures"
+            hrefs={scopeHrefsForPrefectureTheme('local-finance')}
+          />
         </div>
-        <nav aria-label="関連する統計範囲" className="mb-4 text-sm">
-          <Link
-            href="/municipalities"
-            className="font-medium text-primary hover:underline"
-          >
-            市区町村の地方財政は、市区町村統計で管理しています →
-          </Link>
+        <nav aria-label="関連する統計範囲" className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+          <span className="text-muted-foreground">市区町村の財政:</span>
+          {[
+            { href: '/municipalities/themes/local-finance', label: '財政指標' },
+            { href: '/municipalities/themes/municipal-revenue', label: '歳入' },
+            { href: '/municipalities/themes/municipal-expenditure', label: '歳出' },
+          ].map((link) => (
+            <Link key={link.href} href={link.href} className="font-medium text-primary hover:underline">
+              {link.label} →
+            </Link>
+          ))}
         </nav>
         <LocalFinanceThemeClient
           cards={cards}
