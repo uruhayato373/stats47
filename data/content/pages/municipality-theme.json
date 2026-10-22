@@ -202,7 +202,8 @@
         "total-area-prefecture-ratio",
         "habitable-area",
         "habitable-area-ratio",
-        "total-assessed-land-area"
+        "total-assessed-land-area",
+        "major-lake-area"
       ],
       "published": true
     },

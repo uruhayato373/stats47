@@ -4820,7 +4820,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
     同名 title の系列は item snapshot の `subtitle` でページ title を区別 (generator が衝突未解決を throw)。
     副産物: moving-in-excess-rate の subtitle 誤り是正 + SSDS 系 10 config の displayName/url 補記
 - **残り (次の拡充はここから)**:
-  1. 品質監査未了 2 件 (industrial-land-price / major-lake-area) の要否判断
+  1. ~~品質監査未了 2 件 (industrial-land-price / major-lake-area) の要否判断~~ **済 (2026-10-22)**: R2 cities.json の実測で、`major-lake-area` は 2024 年の 0 (湖が無い) を除いた 117 自治体の順位として公開 (`valuePolicy: {minExclusive: 0}`・テーマ「土地・面積」に追加、174 → 175)。`industrial-land-price` は 2005 年のみ・値ありは 22% のため unsupported に確定。
   2. **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
