@@ -4842,6 +4842,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **本番実測 (2026-10-22・デプロイ run 39743772903 の後)**: 札幌市 953,744 bytes (+11.4%・警告超え)、千代田区 815,369 bytes。
 - **次**: ① 週次の `page-quality` で北海道など市区町村数の多い県の市町村ページの `html_bytes` 分布を見る。② 重さの内訳 (県内の市区町村一覧 179 件・データブックの表・RSC の写し) を測って大きいものから削る。データブックの表を節ごとに先頭数行 + 「すべて見る」にしても HTML は減らないので、削るなら RSC の重複か一覧の出し方を見る。
 - **完了条件**: 北海道の市町村ページの `html_bytes` が 900KB 未満。
+- **済 (2026-10-22・デプロイ run 39763716073 の後)**: データブックの表の各セルのクラスを表の子孫セレクタへまとめ (1 行 1,154 → 781 bytes)、本番の札幌市 `/areas/01000/cities/01100` は 953,744 → 817,878 bytes、千代田区は 815,369 → 688,628 bytes (curl で実測)。北海道の他の市町村は札幌市より軽い (表の行数は同じで県内の市区町村一覧も同じ)。カードは完了。
 
 ### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
 
@@ -4863,7 +4864,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: pilot key 1 件で生成 → 専用監査 blocker 0 → critic PASS → ページ描画まで通し、
   誤値を注入して監査が発火することを実測する
 - **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
-- **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番表示はデプロイ後に確かめる。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
+- **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番 (デプロイ run 39763716073 の後) で `ai-content.json` は 200、ページに「データの考察」と FAQPage が出て、解説の無い指標 (`elderly-population-ratio`) には出ないことを確認した。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
 
 ### [MUNI-AI-CONTENT-EXPAND-01] 市区町村ランキングの解説を需要のある指標へ広げ、監査の穴を 2 つ塞ぐ
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:データ]
