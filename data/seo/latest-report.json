@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "period": {
-    "periodStart": "2026-10-12",
-    "periodEnd": "2026-10-18",
+    "periodStart": "2026-10-13",
+    "periodEnd": "2026-10-19",
     "windowDays": 7
   },
-  "inputHash": "412d11644017d0404bd599a3ac417d276c17b66363fbb7eab2b6644ba4fa7c13",
+  "inputHash": "49769b523b468f73326e2f23ed4f467a9403f23f30520adbd109deb24e623bfc",
   "movements": [
     {
       "keyword": "徳島県",
@@ -36,15 +36,6 @@
       "change": -55
     },
     {
-      "keyword": "財政力指数",
-      "targetPath": "/blog/fiscal-self-reliance-gap",
-      "before": 5,
-      "after": 60,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -55
-    },
-    {
       "keyword": "高校教師年収",
       "targetPath": "/ranking/high-school-teacher-annual-income",
       "before": 10.666666666666666,
@@ -57,28 +48,19 @@
       "keyword": "餃子 消費 量 ランキング",
       "targetPath": "/ranking/gyoza-frozen-consumption-expenditure",
       "before": 58,
-      "after": 7,
+      "after": 7.2,
       "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 51
-    },
-    {
-      "keyword": "北海道 人口",
-      "targetPath": "/areas/01000/cities/01100/population",
-      "before": 49,
-      "after": 98,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -49
+      "impressions": 5,
+      "change": 50.8
     },
     {
       "keyword": "高知県 廃業",
       "targetPath": "/areas/39000/business-demography",
-      "before": 12.666666666666666,
+      "before": 12.5,
       "after": 57,
-      "beforeImpressions": 3,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": -44.333333333333336
+      "change": -44.5
     },
     {
       "keyword": "要介護認定 一 番 多いのは",
@@ -97,6 +79,24 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 36
+    },
+    {
+      "keyword": "大学進学率 都道府県別",
+      "targetPath": "/blog/university-advancement-capacity",
+      "before": 4,
+      "after": 38,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -34
+    },
+    {
+      "keyword": "北海道 人口",
+      "targetPath": "/areas/01000/cities/01100/population",
+      "before": 49,
+      "after": 78.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": -29.5
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "中2男子 平均身長",
-    "targetPath": "/blog/middle-school-height-east-west-puzzle",
-    "rank": 9.464,
-    "impressions": 250,
+    "keyword": "介護サービス施設・事業所調査",
+    "targetPath": "/survey/care-service-facility-survey",
+    "rank": 9.345549738219896,
+    "impressions": 191,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
   },
   "observing": [
     {
@@ -162,6 +162,11 @@
       "keyword": "山形県 コンビニ 店舗数",
       "targetPath": "/blog/convenience-store-density-map",
       "proposalId": "37430485332-1"
+    },
+    {
+      "keyword": "中2男子 平均身長",
+      "targetPath": "/blog/middle-school-height-east-west-puzzle",
+      "proposalId": "39509458261-1"
     }
   ]
 }

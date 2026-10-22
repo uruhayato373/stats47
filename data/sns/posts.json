@@ -31137,9 +31137,9 @@
     },
     {
       "id": 1029,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.209Z",
-      "updated_at": "2026-10-12T01:23:00.959Z",
+      "updated_at": "2026-10-21T19:01:46.567Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31166,13 +31166,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/average-age-of-first-marriage-wife/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DevSS7PDjcV",
+      "posted_at": "2026-10-21T02:00:42.000Z"
     },
     {
       "id": 1030,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.215Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-21T19:01:46.617Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31189,7 +31191,9 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "post_url": "https://www.threads.com/@stats47jp/post/DewAkRUiHtG",
+      "posted_at": "2026-10-21T08:45:01.000Z"
     },
     {
       "id": 1031,
@@ -33932,7 +33936,7 @@
     },
     {
       "id": 1097,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -33941,13 +33945,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.308Z",
-      "updated_at": "2026-10-21T00:45:11.677Z",
+      "updated_at": "2026-10-21T15:05:25.192Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "fish-pickled-consumption-expenditure--average-temperature",
       "caption": "【データの相関】魚介の漬物消費支出額 × 年平均気温\n\n寒い県ほど、魚の漬物にお金を使う？\n\n縦軸: 年平均気温（℃・2024年）出典: 社会・人口統計体系\n横軸: 魚介の漬物消費支出額（円・2024年）出典: 家計調査\n\n相関係数 r=-0.68（人口の影響を除くと r=-0.69）\n\n相関は因果関係を示しません。\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #economy #landweather",
-      "scheduled_at": "2026-10-21T10:00:00.000Z"
+      "scheduled_at": "2026-10-21T10:00:00.000Z",
+      "posted_at": "2026-10-21T15:05:25.184Z",
+      "post_url": "https://www.instagram.com/p/DewsE6nlF61/",
+      "external_id": "18096894491128015"
     },
     {
       "id": 1098,

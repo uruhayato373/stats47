@@ -3,10 +3,14 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**729 件** (最終更新: 2026-10-20)
+**733 件** (最終更新: 2026-10-21)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-21 | 📸 Instagram | correlation-carousel/fish-pickled-consumption-expenditure--average-temperature | 【データの相関】魚介の漬物消費支出額 × 年平均気温  寒い県ほど、魚の漬物にお金を使う？  縦軸: 年平均気温（℃・2… | [🔗](https://www.instagram.com/p/DewsE6nlF61/) |
+| 2026-10-21 | 🧵 Threads | area/area-28000-profile | 兵庫を数字と地域文化の両方から見る。 県鳥コウノトリ、特産日本酒（灘五郷）、全国順位をまとめた県別ページです。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DewAkRUiHtG) |
+| 2026-10-21 | 📸 Instagram | bar-chart-race/coffee-consumption-quantity | コーヒーを最も多く買う県、18年で1位になったのは9府県。  都道府県別「コーヒー消費量」の推移（2007年→2024年… | [🔗](https://www.instagram.com/reel/Dev9cQrDsTg/) |
+| 2026-10-21 | 🧵 Threads | ranking/average-age-of-first-marriage-wife | 30.7歳・30.3歳・30.1歳。  妻の平均初婚年齢、上位は東京・神奈川・埼玉と首都圏。 最も若い島根は28.9歳で… | [🔗](https://www.threads.com/@stats47jp/post/DevSS7PDjcV) |
 | 2026-10-20 | 📸 Instagram | area-carousel/45000 | 【都道府県データ】宮崎県、全国で何位？  全国トップクラス: 年平均気温 3位（19.3℃・2024年） 認定こども園数… | [🔗](https://www.instagram.com/p/DeuGa1zGqbw/) |
 | 2026-10-20 | 🧵 Threads | area/area-27000-profile | あなたの知る大阪は、データでも同じ姿ですか？ イチョウや吹田慈姑から、人口・経済・暮らしまで横断できます。 続きは👇 … | [🔗](https://www.threads.com/@stats47jp/post/DetaGosiDIs) |
 | 2026-10-20 | 🧵 Threads | ranking/post-office-count-per-100km2 | 105局・83局・52局。  100㎢あたりの郵便局数、上位3都府県は東京・大阪・神奈川。 最も少ない北海道は6.6局で… | [🔗](https://www.threads.com/@stats47jp/post/DesrzIxDREx) |

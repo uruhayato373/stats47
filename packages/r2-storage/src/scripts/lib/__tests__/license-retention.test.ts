@@ -21,9 +21,9 @@ describe('approved license remediation deletion boundary', () => {
     expect(() => assertUnchangedRetentionInventory(expected, objects)).toThrow();
   });
   it('pins the approved raw, retired rankings, obsolete sidecars and three blogs only', () => {
-    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3, 1]);
+    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3, 1, 1399, 19]);
     expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.reduce((sum, object) => sum + object.bytes, 0)))
-      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052, 15317]);
+      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052, 15317, 1044374, 36317]);
     const rawIds = new Set(LICENSE_RETENTION_TARGETS[0].objects.map((object) => object.key.split('/')[2]));
     expect([...rawIds].sort()).toEqual(['C02', 'C09', 'C23', 'P03', 'P12', 'P13', 'P17', 'P18', 'P35', 'W01', 'W05']);
     const retired = ['dam-count', 'hydroelectric-power-plant-count', 'thermal-power-plant-count',
@@ -68,5 +68,15 @@ describe('approved license remediation deletion boundary', () => {
     expect(added.prefixes).toEqual(['app/ranking/biomass-power-station-count/ai-content.json']);
     expect(added.objects).toEqual([{ key: added.prefixes[0], bytes: 15317, etag: '"fa40218b7e3a98e332015dcd52371ad8"' }]);
     expect(LICENSE_RETENTION_TARGETS[1].objects.some((object) => object.key === added.prefixes[0])).toBe(false);
+  });
+  it('pins retired city profiles and municipality-only prefecture items to exact file keys', () => {
+    const [profiles, items] = LICENSE_RETENTION_TARGETS.slice(7);
+    expect(profiles.id).toBe('retired-city-profile-20261022');
+    expect(items.id).toBe('retired-municipality-only-ranking-items-20261022');
+    // ファイル単位の key だけ。databook.json や他の配信ファイルを prefix で巻き込まない
+    for (const prefix of profiles.prefixes) expect(prefix).toMatch(/^app\/areas\/\d{5}\/cities\/\d{5}\/profile\.json$/);
+    for (const prefix of items.prefixes) expect(prefix).toMatch(/^app\/ranking\/[a-z0-9-]+\/item\.json$/);
+    expect(profiles.prefixes).toEqual(profiles.objects.map((object) => object.key));
+    expect(items.prefixes).toEqual(items.objects.map((object) => object.key));
   });
 });

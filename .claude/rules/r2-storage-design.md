@@ -193,6 +193,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | 承認済み旧KSJランキングの終了・新版移行 | `license-retention-20260905.json` のexact keyのみ。raw・終了9本・新版2本の不要正規化を別targetに固定 | `r2-maintenance.yml`で承認済みrevisionを指定。削除前に全対象のkey/size/ETag一致、削除後に残存0を要求 |
 | 承認済み旧KSJ数値使用ブログ3本の終了 | 同manifestの`license-remediation-retired-blogs-20260906`。専有53件のみ、共有一覧は削除禁止 | 410配信と共有一覧の3slug除去後、退避原本とのkey/size/ETag一致を条件に削除 |
 | 港湾調査の対象港数2025への置換に伴う旧世帯補正値の終了 | 同manifestの`license-remediation-obsolete-port-normalization-20260906`。固定1件のみ | 新2025年664港の配信と退避原本のkey/size/ETag一致確認後に削除 |
+| 配信をやめた市区町村 `profile.json` と、市区町村専用 19 指標の都道府県用 `item.json` (2026-10-22 オーナー承認) | 同manifestの`retired-city-profile-20261022` (1,399件)・`retired-municipality-only-ranking-items-20261022` (19件)。ファイル単位のexact keyのみ | 市区町村ページのdatabook化 (2026-10-21) 後に読み手0。`r2-maintenance.yml`でdry-run→実削除、残存0を要求 |
 
 **削除の唯一の入口は `.github/workflows/r2-maintenance.yml`** (`mode: du` / `retention-prefixes` /
 `isr-generations`、既定 `dry_run: true`)。任意 prefix を削除できる `delete-r2-prefix.ts` は緊急時のみで、
