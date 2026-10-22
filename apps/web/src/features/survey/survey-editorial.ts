@@ -775,8 +775,8 @@ const SURVEY_EDITORIAL_CONTENT = {
         rankingKey: 'vacant-housing-rate',
       },
       {
-        question: '1住宅当たりの延べ面積が広い都道府県は？',
-        rankingKey: 'housing-floor-area',
+        question: '持ち家1住宅当たりの延べ面積が広い都道府県は？',
+        rankingKey: 'floor-area-per-dwelling-owner',
       },
       {
         question: '耐震改修を行った住宅の割合が高い都道府県は？',
@@ -895,7 +895,7 @@ const SURVEY_EDITORIAL_CONTENT = {
     readerQuestions: [
       {
         question: '人口千人当たりの刑法犯認知件数が多い都道府県は？',
-        rankingKey: 'crime-rate-per-1k',
+        rankingKey: 'penal-code-offenses-recognized-per-1000',
       },
       {
         question: '刑法犯の検挙率が高い都道府県は？',
@@ -1771,10 +1771,6 @@ const SURVEY_EDITORIAL_CONTENT = {
       '用途別に異なる地価動向の地域差',
     ],
     readerQuestions: [
-      {
-        question: '工業地の標準価格が高い都道府県は？',
-        rankingKey: 'industrial-land-price',
-      },
       {
         question: '住宅地の地価上昇率が高い都道府県は？',
         rankingKey: 'standard-price-change-rate-residential',

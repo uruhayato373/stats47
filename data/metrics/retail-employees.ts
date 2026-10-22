@@ -16,7 +16,7 @@ export const retailEmployees: MetricConfig = {
     displayName: '社会・人口統計体系',
     url: 'https://www.e-stat.go.jp/dbview?sid=0000010103',
   },
-  entities: ['prefecture'],
+  entities: ['prefecture', 'city'],
   visualization: {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

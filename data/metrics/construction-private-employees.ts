@@ -16,7 +16,8 @@ export const constructionPrivateEmployees: MetricConfig = {
     "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C"
   },
   "entities": [
-    "prefecture"
+    "prefecture",
+    "city",
   ],
   "years": {
     "years": [

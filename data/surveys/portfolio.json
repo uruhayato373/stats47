@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18",
+  "generatedAt": "2026-10-22",
   "linkage": {
-    "auditedAt": "2026-10-18",
+    "auditedAt": "2026-10-22",
     "metrics": 2603,
     "resolved": 2514,
     "unresolved": 0,
@@ -663,7 +663,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "measuring",
       "itemCount": 366,
-      "activeItemCount": 313,
+      "activeItemCount": 312,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -710,7 +710,7 @@
       ],
       "lastReviewedAt": "2026-07-11",
       "nextReviewAt": "2026-08-09",
-      "liveItemCount": 313
+      "liveItemCount": 312
     },
     {
       "surveyId": "childcare-related-status-report",
@@ -5911,7 +5911,7 @@
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": true,
-      "readerQuestionCount": 4,
+      "readerQuestionCount": 3,
       "relatedArticleCount": null,
       "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
       "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
