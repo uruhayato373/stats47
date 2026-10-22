@@ -5,7 +5,7 @@
 /**
  * コンテンツタイプ
  */
-export type ContentType = "blog" | "ranking";
+export type ContentType = "blog" | "ranking" | "municipality-ranking";
 
 /**
  * MiniSearch インデックス用ドキュメント型

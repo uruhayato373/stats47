@@ -300,6 +300,8 @@ export const DATASETS = [
   d("business.goals", "data/goals/{**}", "state", "strategy", "data", "/goal の目標とサイクル"),
   d("ai-content.remediation", "data/ai-content/remediation/{name}", "state", "data", "data", "ランキング AI 解説の是正キュー・生成失敗・進捗"),
   d("municipalities.expansion", "data/municipalities/{name}", "state", "data", "data", "市区町村データの拡充調査と棚卸し"),
+  d("municipalities.ai-content", "data/municipalities/ai-content/{name}.json", "config", "data", "data", "市区町村ランキングの解説の本文 (1 指標 1 ファイル。デプロイ時に配信値で監査して通ったものだけ R2 へ)", { schema: "data/municipalities/schema/ai-content.schema.json" }),
+  d("municipalities.ai-content-schema", "data/municipalities/schema/ai-content.schema.json", "config", "data", "data", "上の解説の JSON Schema"),
   d("note.draft-index", "data/note/note-draft-index.json", "state", "product", "data", "note 下書きの索引"),
   d("note.published-urls", "data/note/note-published-urls.json", "ledger", "product", "data", "note の公開 URL 台帳", { schema: "config/schema/note.published-urls.schema.json" }),
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),

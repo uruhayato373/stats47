@@ -917,3 +917,21 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **検証コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-10-22 --end 2026-11-18 --dims query --filter 'query~=(市|町|村|区) ?人口'` と `--dims page --filter 'page*=/areas/'` / `'page*=/municipalities/ranking/'`。本番の title は `curl -s -A 'Mozilla/5.0 (compatible; Googlebot/2.1)' https://stats47.jp/areas/37000/cities/37203 | grep -oE '<title>[^<]+</title>'`。索引は `node .claude/scripts/gsc/inspect-cities-sample.cjs` (公開対象から 50 件抜き取り)。
 - **観測期限と判定手順**: 2026-11-21 (after 窓 2026-10-22〜11-18 の 28 日 + 取得遅延 3 日)。active 施策の一覧 (`.claude/todo/improvements.md`) への登録は improvement-triage が行う。before と after の 28 日窓で、上の 3 群と対照群を並べる (差の差)。検索語群の CTR が対照群との差を半分以上縮めていれば title の効果ありとして記録する。市区町村ページの clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ、title の形を戻す案を backlog `MUNI-PAGE-QUALITY-01` へ。
 - **未確定 / 仮説**: [仮説] 「◯◯市 人口」の検索で表示されているのは市区町村ページではなく市区町村ランキングやブログ。W41 の city ページ上位 (imp 順) に坂出市・岩国市が無いことが根拠。検証コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-11 --end 2026-10-08 --dims query,page --filter 'query~=坂出市 ?人口'`。検証期日: 次の木曜計測 (2026-10-29) の後。期日後の判定: ランキングやブログに当たっていれば、データブック化後に市区町村ページへ表示が移るかを after 窓で確かめる。
+
+### [MUNI-SSDS-EXPANSION-01] 市区町村ランキング 541 件・市区町村テーマ 10 件の追加と回遊の配線 (2026-10-22 デプロイ)
+
+- **デプロイ日**: 2026-10-22 (JST)。PR #1169 (main a2d744dd5) の deploy run 39743772903。回遊の追加 (検索・主語の切り替え・市区町村ページのほかの分野・同じ指標の 4 組) は同日の後続 PR。
+- **変えたこと**: 社会・人口統計体系の未使用コード 733 件を e-Stat 実測で判定し、市区町村ランキングを 175 → 716 件、市区町村テーマを 19 → 29 件にした (判定の記録 `packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts`)。sitemap の municipalities セグメント (`/sitemap/10.xml`) の市区町村ランキングは 716 URL。市区町村ページのデータブックに 24 指標を追加。
+- **本番確認 (2026-10-22)**: 新規ランキング 40 件の抜き取りが Googlebot UA で全件 200。新テーマ 10 件・`/municipalities` (29 テーマへのリンク) が 200。
+- **baseline (GSC 2026-W41 rolling28d 2026-09-11〜10-08、`data/gsc/snapshots/2026-W41/pages.csv`。fragment・query 無し)**:
+
+  | 対象 | URL | clicks | imp | CTR | position (imp 加重) |
+  |---|---|---|---|---|---|
+  | 市区町村ランキング `/municipalities/ranking/<key>` (既存 175 件のうち表示のあったもの) | 65 | 448 | 4,686 | 9.56% | 8.6 |
+  | 市区町村テーマ `/municipalities/themes/<slug>` | 10 | 7 | 434 | 1.61% | 9.2 |
+
+  新規 541 件・新テーマ 10 件は公開前なので 0。
+- **想定効果 (計算式・[仮説])**: 既存 175 件のうち 28 日で表示が付いたのは 65 件 (37%)・1 件あたり 72 imp。新規 541 件が同じ割合と水準なら 541 × 0.37 × 72 ≈ +14,400 imp / 28 日。新規は人口や財政のような需要の大きい指標が少ない (実数の細目が多い) ので、上限の目安として扱う。
+- **検証コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-10-23 --end 2026-11-19 --dims page --filter 'page*=/municipalities/'`。新規分は `municipality-ssds-expansion.ts` の key に当たる URL だけを数える。索引は `node .claude/scripts/gsc/url-inspection-daily.cjs` の抜き取りで `/municipalities/ranking/` の新規 key を見る。
+- **観測期限と判定手順**: 2026-11-22 (after 窓 2026-10-23〜11-19 の 28 日 + 取得遅延 3 日)。新規 541 件の imp の合計と表示が付いた URL の割合を出し、上の計算式と比べる。既存 175 件の clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で、対照の都道府県ランキングが同方向に動いていなければ、薄いページの増加による共食いを疑い、表示の付かなかった新規 key の noindex を検討する (backlog `MUNI-RANKING-EXPANSION-01`)。active 施策の一覧への登録は improvement-triage が行う。
+- **未確定 / 仮説**: [仮説] 実数の細目 (業種別・年齢別・住宅の細目) は検索需要が小さく、表示の大半は財政・人口・空き家・福祉施設に集まる。検証コマンドは上と同じ。検証期日: 2026-11-22。期日後の判定: テーマ別の imp の分布を出し、表示の付いたテーマから順にブログ連載 (`BLOG-MUNI-SERIES-01`) の題材にする。

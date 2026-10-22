@@ -61,7 +61,7 @@ jobs:
             import path from "node:path";
             import {createHash} from "node:crypto";
             const root = ".local/r2";
-            const allowed = /^app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json|areas\/[0-9]{5}\/cities\/[0-9]{5}\/databook\.json|categories\/(?:all\.json|[a-z0-9-]+\/items\.json)|survey\/(?:all\.json|[a-z0-9-]+\/items\.json)|page-components\/[a-z0-9/-]+\.json)$/;
+            const allowed = /^app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values|ai-content)\.json|areas\/[0-9]{5}\/cities\/[0-9]{5}\/databook\.json|categories\/(?:all\.json|[a-z0-9-]+\/items\.json)|survey\/(?:all\.json|[a-z0-9-]+\/items\.json)|page-components\/[a-z0-9/-]+\.json)$/;
             const files = fs.readdirSync(root, {recursive:true}).map(key => String(key).split(path.sep).join("/")).filter(key => allowed.test(key)).sort().map(key => {
               const body = fs.readFileSync(path.join(root, key));
               JSON.parse(body.toString("utf8"));

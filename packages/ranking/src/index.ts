@@ -11,6 +11,7 @@ export {
   type MunicipalityDistributionBin,
 } from "./municipalities/bin-municipality-values";
 // 市区町村の名前・データブック・title (純粋関数。指標 registry を読まない)
+export * from "./municipalities/municipality-ai-content";
 export * from "./municipalities/municipality-names";
 export * from "./municipalities/municipality-page-meta";
 export * from "./municipalities/build-city-databooks";

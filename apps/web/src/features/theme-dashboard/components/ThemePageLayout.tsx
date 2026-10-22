@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
@@ -184,6 +185,7 @@ export async function ThemePageLayout({
               areaContext ? { areaCode: areaContext.areaCode } : undefined
             }
             showScope={!areaContext}
+            scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
             pageLinks={pageLinks}
             metrics={themeMetrics}
             surveys={themeSurveys}
@@ -249,7 +251,10 @@ export async function ThemePageLayout({
 
           {!areaContext && (
             <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
-              <StatisticsScopeNav current="prefectures" />
+              <StatisticsScopeNav
+                current="prefectures"
+                hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+              />
             </div>
           )}
 

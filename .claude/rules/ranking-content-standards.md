@@ -29,7 +29,7 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 | 面 | 配信 namespace | ai-content |
 |---|---|---|
 | 都道府県 `/ranking/<key>` | `app/ranking/<key>/` | **本パイプラインの対象** |
-| 市区町村 `/municipalities/ranking/<key>` | `app/municipalities/ranking/<key>/` | 対象外 (backlog `MUNI-AI-CONTENT-01`) |
+| 市区町村 `/municipalities/ranking/<key>` | `app/municipalities/ranking/<key>/` | 本パイプラインの対象外。別契約 (下の「市区町村の解説」) |
 | 全国 `/japan/<themeSlug>` | `app/japan/<metric>/series.json` | 対象外 (backlog `JAPAN-COMMENTARY-01`) |
 
 パイプライン内の「47 件」「7 地方区分」「`prefectureCommentary`」「thin 閾値 40 県」
@@ -40,7 +40,7 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 - **市区町村** (1,717 自治体) では「47 件ちょうど」「40 県未満は thin」「7 地方ブロック」の
   どれも成立せず、全自治体の個別解説も量的に成立しない。必要なのは別スキーマ
   (上位/下位要約・県別分布・母集団と除外自治体の説明) と、`cities.json` 由来の values と
-  突合する**専用監査**である。解禁条件と設計要点は `MUNI-AI-CONTENT-01` に固定した
+  突合する**専用監査**である (2026-10-22 に別契約で新設。下の「市区町村の解説」)
 - **全国** はそもそもランキングではない (`series.json` = 公式全国値の時系列。doc 43 は
   「`/themes` と同じコンテンツの URL 違いにしない」を明記)。要るとすれば時系列解説という
   第三のコンテンツ型で、本パイプラインの派生では作らない
@@ -52,6 +52,19 @@ author / critic の分離、outbox → develop push → CI 再検証の公開機
 
 機械側の可視化: `build-ai-content-queue.mjs` が LATEST.md 冒頭に市区町村の公開 key 数と
 「対象外」を明示する (key が増えても黙って見えない状態を防ぐ)。
+
+### 市区町村の解説 (別契約・2026-10-22 試験 1 指標)
+
+- **本文**: git の `data/municipalities/ai-content/<key>.json` (JSON Schema `data/municipalities/schema/ai-content.schema.json`)。
+  欄は summary (上位・下位の要約) / prefectureDistribution (上位・下位 100 自治体の県ごとの数) / population (対象集合と除外・欠測) / faq 3〜5 問。
+- **事実**: `buildMunicipalityAiFacts` (`packages/ranking/src/municipalities/municipality-ai-content.ts`) が values.json だけから作る。
+  本文に書いてよい数は、事実・指標の定義文 (title/subtitle/description/unit)・本文に名前の出る自治体の値と順位だけ。
+- **監査と公開**: デプロイと sync-snapshots の市区町村ランキング生成 (`generate-municipality-ranking.ts`) が、その回の配信値で
+  `auditMunicipalityAiContent` を通したときだけ `app/municipalities/ranking/<key>/ai-content.json` を書く (blocker があれば書かずにログへ。
+  ランキング生成は止めない)。書いた解説は values.json の generatedAt を持ち、ページは一致するときだけ描く (値が改訂された回に古い解説を出さない)。
+  `basedOn` の年か件数が配信値と違えば書き直すまで出ない。
+- **書く手順**: 事実を見て本文を書く → `npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --key <key> --source-base https://storage.stats47.jp --output-root <一時dir>` で
+  `"aiContent": "written"` を確認 → critic (ranking-content-critic に別契約である旨を渡す) が PASS → develop へ。
 
 ## 層別処方の原則 (全ページ一律にしない)
 
