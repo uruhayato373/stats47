@@ -1137,7 +1137,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -1152,7 +1152,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/abandoned-cultivated-land-area/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18070845542535108"
     },
     {
       "id": 68,
@@ -1325,7 +1326,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -1340,7 +1341,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/active-job-opening-ratio/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "17974058283006390"
     },
     {
       "id": 73,
@@ -1512,7 +1514,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -1527,7 +1529,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/actual-income-worker-households-per-month/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18091210375976881"
     },
     {
       "id": 78,
@@ -1878,7 +1881,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -1893,7 +1896,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/avg-savings-rate-worker-households/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18077596631040028"
     },
     {
       "id": 88,
@@ -2253,7 +2257,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -2268,7 +2272,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/consumer-price-difference-index-overall/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "17842567665674838"
     },
     {
       "id": 99,
@@ -2699,7 +2704,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:10.488Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -2724,7 +2729,8 @@
             "key": "sns-assets/instagram/114/image-1/affbe5f3c2c7a6bbd4acf1e42ac2db4f22854476e2a8f427d3f63e691aeda8b7.png"
           }
         }
-      ]
+      ],
+      "external_id": "17858071686634246"
     },
     {
       "id": 115,
@@ -3242,7 +3248,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:11.044Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -3267,7 +3273,8 @@
             "key": "sns-assets/instagram/142/image-1/71166ccb49da8a43f5d18028c5c50e49722d19c4de4e8eadb8827ba5a40f11d1.png"
           }
         }
-      ]
+      ],
+      "external_id": "18095398835333928"
     },
     {
       "id": 145,
@@ -3510,7 +3517,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:12.065Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -3535,7 +3542,8 @@
             "key": "sns-assets/instagram/151/image-1/4a43bd20eed6ad8940764fe87ca04e94d849d338846b94ce453e5c2279b15320.png"
           }
         }
-      ]
+      ],
+      "external_id": "18086191700231266"
     },
     {
       "id": 152,
@@ -3629,7 +3637,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:11.497Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -3654,7 +3662,8 @@
             "key": "sns-assets/instagram/154/image-1/921d5c2f221f0404a13796650cae37c9fde18f900085b0c382a675df3e707a55.png"
           }
         }
-      ]
+      ],
+      "external_id": "18107889896486918"
     },
     {
       "id": 159,
@@ -5022,7 +5031,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:18.220Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -5047,7 +5056,8 @@
             "key": "sns-assets/instagram/228/image-1/7e5925c6595b58fef1e71cea80ec3caa641fa2edd3d71d9ed9e55ef4af0e930e.png"
           }
         }
-      ]
+      ],
+      "external_id": "18097074503132709"
     },
     {
       "id": 231,
@@ -5485,7 +5495,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -5500,7 +5510,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/social-increase-rate/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18072581219188862"
     },
     {
       "id": 252,
@@ -6769,7 +6780,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-16T00:57:16.870Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -6794,7 +6805,8 @@
             "key": "sns-assets/instagram/288/image-1/96c0c393fd1be0212a6fe312144ed858a30cc528947d9777cc734d3240ab1055.png"
           }
         }
-      ]
+      ],
+      "external_id": "18316370725254998"
     },
     {
       "id": 289,
@@ -7522,7 +7534,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -7537,7 +7549,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/vacant-housing-ratio/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18108603652703193"
     },
     {
       "id": 321,
@@ -7701,7 +7714,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -7716,7 +7729,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/active-job-opening-ratio/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18313337509187495"
     },
     {
       "id": 329,
@@ -10983,7 +10997,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -10998,7 +11012,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/total-population/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18315470572253509"
     },
     {
       "id": 417,
@@ -11712,7 +11727,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-04-24T23:22:39.021Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -11727,7 +11742,8 @@
           "state": "missing",
           "reason": "カルーセルの slides が予約表に無い"
         }
-      ]
+      ],
+      "external_id": "18130388647571885"
     },
     {
       "id": 465,
@@ -11751,7 +11767,7 @@
       "bookmarks": null,
       "metrics_updated_at": "2026-05-10T00:35:11.435Z",
       "created_at": "2026-04-26T03:09:48.573Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -11766,7 +11782,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/fiscal-strength-index-prefecture/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18112772890839700"
     },
     {
       "id": 466,
@@ -11821,7 +11838,7 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-10T01:23:29.510Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -11836,7 +11853,8 @@
           "state": "missing",
           "reason": "カルーセルの slides が予約表に無い"
         }
-      ]
+      ],
+      "external_id": "17896359579446195"
     },
     {
       "id": 468,
@@ -12115,7 +12133,7 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17T02:35:03.836Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -12130,7 +12148,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/ranking/starting-salary-university/instagram/stills/slide-1-cover-1080x1350.png)"
         }
-      ]
+      ],
+      "external_id": "18103248718992816"
     },
     {
       "id": 480,
@@ -12232,7 +12251,7 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-24T10:59:24.997Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -12247,7 +12266,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/highway-history/japan-58years/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18101895341092805"
     },
     {
       "id": 511,
@@ -12271,7 +12291,7 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-25T12:15:31.338Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "thumbnail_path": null,
       "deleted_at": null,
       "template": null,
@@ -12286,7 +12306,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/port/cargo-total/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18127929700542935"
     },
     {
       "id": 512,
@@ -14711,7 +14732,7 @@
       "replies": null,
       "bookmarks": null,
       "created_at": "2026-06-07",
-      "updated_at": "2026-10-16T00:57:17.946Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "approval": {
         "state": "unrecorded"
       },
@@ -14732,7 +14753,8 @@
             "key": "sns-assets/instagram/575/image-1/29740f7cad4cf9511c909897d4c957f30110bdfa4daf776da76135e62bd068f6.png"
           }
         }
-      ]
+      ],
+      "external_id": "18011314490884033"
     },
     {
       "id": 576,
@@ -14778,7 +14800,7 @@
       "replies": null,
       "bookmarks": null,
       "created_at": "2026-06-07",
-      "updated_at": "2026-10-16T00:57:17.320Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "approval": {
         "state": "unrecorded"
       },
@@ -14799,7 +14821,8 @@
             "key": "sns-assets/instagram/576/image-1/29740f7cad4cf9511c909897d4c957f30110bdfa4daf776da76135e62bd068f6.png"
           }
         }
-      ]
+      ],
+      "external_id": "18449119327187568"
     },
     {
       "id": 577,
@@ -14845,7 +14868,7 @@
       "replies": null,
       "bookmarks": null,
       "created_at": "2026-06-07",
-      "updated_at": "2026-10-16T00:57:22.202Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "approval": {
         "state": "unrecorded"
       },
@@ -14866,7 +14889,8 @@
             "key": "sns-assets/instagram/577/image-1/29740f7cad4cf9511c909897d4c957f30110bdfa4daf776da76135e62bd068f6.png"
           }
         }
-      ]
+      ],
+      "external_id": "18211227661339767"
     },
     {
       "id": 578,
@@ -14912,7 +14936,7 @@
       "replies": null,
       "bookmarks": null,
       "created_at": "2026-06-07",
-      "updated_at": "2026-10-16T00:57:22.921Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "approval": {
         "state": "unrecorded"
       },
@@ -14933,7 +14957,8 @@
             "key": "sns-assets/instagram/578/image-1/29740f7cad4cf9511c909897d4c957f30110bdfa4daf776da76135e62bd068f6.png"
           }
         }
-      ]
+      ],
+      "external_id": "18083333237413277"
     },
     {
       "id": 579,
@@ -14979,7 +15004,7 @@
       "replies": null,
       "bookmarks": null,
       "created_at": "2026-06-07",
-      "updated_at": "2026-10-16T00:57:22.041Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "approval": {
         "state": "unrecorded"
       },
@@ -15000,7 +15025,8 @@
             "key": "sns-assets/instagram/579/image-1/29740f7cad4cf9511c909897d4c957f30110bdfa4daf776da76135e62bd068f6.png"
           }
         }
-      ]
+      ],
+      "external_id": "18558080491071222"
     },
     {
       "id": 580,
@@ -19648,7 +19674,7 @@
       "id": 707,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.649Z",
-      "updated_at": "2026-10-16T00:57:44.492Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19675,13 +19701,14 @@
             "key": "sns-assets/instagram/707/image-1/f0be28b8171a2d02a7e89feb3436b8f5dbc8ae51f3287ddac18a3f62c58ec47d.png"
           }
         }
-      ]
+      ],
+      "external_id": "17883454416563143"
     },
     {
       "id": 708,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.719Z",
-      "updated_at": "2026-10-16T00:57:42.391Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19708,13 +19735,14 @@
             "key": "sns-assets/instagram/708/image-1/013c39d22a349ad6611eab5a6749113c97eed7a9287e6abb397c3fb6005fda7b.png"
           }
         }
-      ]
+      ],
+      "external_id": "18177615250400629"
     },
     {
       "id": 709,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.736Z",
-      "updated_at": "2026-10-16T00:57:45.115Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19741,13 +19769,14 @@
             "key": "sns-assets/instagram/709/image-1/04fd071e05f92fe6a80c7b12fca07da2ff87139b71889d6ee7a86be8ca7aca43.png"
           }
         }
-      ]
+      ],
+      "external_id": "17976343755040532"
     },
     {
       "id": 710,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.753Z",
-      "updated_at": "2026-10-16T00:57:44.352Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19774,13 +19803,14 @@
             "key": "sns-assets/instagram/710/image-1/82b6f91a73ba42438100b8ba4f10866667429044570c1cdcd0ebb44311832d46.png"
           }
         }
-      ]
+      ],
+      "external_id": "18589828519013451"
     },
     {
       "id": 711,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.768Z",
-      "updated_at": "2026-10-16T00:57:47.634Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19807,13 +19837,14 @@
             "key": "sns-assets/instagram/711/image-1/598ea49013e25f8013270761f72c4381c398082a64546fe0b455535d273651ec.png"
           }
         }
-      ]
+      ],
+      "external_id": "18104830555974036"
     },
     {
       "id": 712,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.782Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -19830,13 +19861,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/criminal-arrest-rate/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17992353881989057"
     },
     {
       "id": 713,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.805Z",
-      "updated_at": "2026-10-16T00:57:49.679Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19863,13 +19895,14 @@
             "key": "sns-assets/instagram/713/image-1/a9b994e04e2a67b875e052369ae3e9be57b212c6d48cd5373528f00aaa90149e.png"
           }
         }
-      ]
+      ],
+      "external_id": "18122139061731099"
     },
     {
       "id": 714,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.820Z",
-      "updated_at": "2026-10-16T00:57:51.247Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19896,13 +19929,14 @@
             "key": "sns-assets/instagram/714/image-1/5024d8d1fa640205a5c46b7a2993a69978f328f19590e57bf5e42e3724321131.png"
           }
         }
-      ]
+      ],
+      "external_id": "18073140179670273"
     },
     {
       "id": 715,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.835Z",
-      "updated_at": "2026-10-16T00:57:51.685Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19929,13 +19963,14 @@
             "key": "sns-assets/instagram/715/image-1/2beebec82ef278bfa2b9b6a9bf3202c033ae961dfbe2b79cec5c273a6dff0871.png"
           }
         }
-      ]
+      ],
+      "external_id": "18021002309835733"
     },
     {
       "id": 716,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.848Z",
-      "updated_at": "2026-10-16T00:57:53.164Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -19962,13 +19997,14 @@
             "key": "sns-assets/instagram/716/image-1/2f7ba9ea203830863b171b3b709ded181a36c73e930eb258ac2c5bb256cca205.png"
           }
         }
-      ]
+      ],
+      "external_id": "17898939621444235"
     },
     {
       "id": 717,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.868Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -19985,13 +20021,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/local-tax-ratio-pref-finance/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18106296358766918"
     },
     {
       "id": 718,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.881Z",
-      "updated_at": "2026-10-16T00:57:55.718Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20018,13 +20055,14 @@
             "key": "sns-assets/instagram/718/image-1/93a2beaea2019119fce6defd1af886cdfa99c2c225e67b6585aac8d92896883a.png"
           }
         }
-      ]
+      ],
+      "external_id": "17979576551851808"
     },
     {
       "id": 719,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.897Z",
-      "updated_at": "2026-10-16T00:57:56.099Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20051,13 +20089,14 @@
             "key": "sns-assets/instagram/719/image-1/e54fda4fc3906d65c4e67c543bf06882b0f6de8687d20d3f501de89f3012f842.png"
           }
         }
-      ]
+      ],
+      "external_id": "18124625110723434"
     },
     {
       "id": 720,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.911Z",
-      "updated_at": "2026-10-16T00:57:56.847Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20084,13 +20123,14 @@
             "key": "sns-assets/instagram/720/image-1/538b67ce261b269e924ee84afd7127ba2132567093a0ff09335ce0bdcc96526e.png"
           }
         }
-      ]
+      ],
+      "external_id": "18060505421707238"
     },
     {
       "id": 721,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.935Z",
-      "updated_at": "2026-10-16T00:57:58.876Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20117,13 +20157,14 @@
             "key": "sns-assets/instagram/721/image-1/8325b058350a712ad2e6810285bdc6b67ef7a7344f047164cad58a6468b39982.png"
           }
         }
-      ]
+      ],
+      "external_id": "18113197627864742"
     },
     {
       "id": 722,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.948Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20140,13 +20181,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/traffic-accident-deaths-per-100k/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18103752823807546"
     },
     {
       "id": 723,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.960Z",
-      "updated_at": "2026-10-16T00:58:00.801Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20173,13 +20215,14 @@
             "key": "sns-assets/instagram/723/image-1/187852bff3cddc69aa6bd50021ab5c002085531e682f9f4b9bf34ca2d2db4bc7.png"
           }
         }
-      ]
+      ],
+      "external_id": "18007202405736680"
     },
     {
       "id": 724,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.973Z",
-      "updated_at": "2026-10-16T00:58:00.353Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20206,13 +20249,14 @@
             "key": "sns-assets/instagram/724/image-1/a0af388c8e54d84203ecde484476d533dcdf6d677611e26fa1e93df45caa9cb9.png"
           }
         }
-      ]
+      ],
+      "external_id": "18101223410036488"
     },
     {
       "id": 725,
       "status": "posted",
       "created_at": "2026-08-03T09:30:40.996Z",
-      "updated_at": "2026-10-16T00:58:02.401Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20239,13 +20283,14 @@
             "key": "sns-assets/instagram/725/image-1/8ac478bb143eb519dc81dcc095d8ce00460dbe3ea184b3958ccfc9e9ecf14277.png"
           }
         }
-      ]
+      ],
+      "external_id": "17914915836392365"
     },
     {
       "id": 726,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.010Z",
-      "updated_at": "2026-10-16T00:58:04.072Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20272,13 +20317,14 @@
             "key": "sns-assets/instagram/726/image-1/68b1840b598168d84d14e96f3af764fef64985610cbc2c6b51e9f07d0eb2b0b3.png"
           }
         }
-      ]
+      ],
+      "external_id": "17891791497524154"
     },
     {
       "id": 727,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.023Z",
-      "updated_at": "2026-10-16T00:58:05.720Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20305,13 +20351,14 @@
             "key": "sns-assets/instagram/727/image-1/cbf7b1f74adef8d946431700d0020adacbd631e15a4c89fd478d62ac11ce874a.png"
           }
         }
-      ]
+      ],
+      "external_id": "18115196533847636"
     },
     {
       "id": 728,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.036Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20328,13 +20375,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/barber-beauty-salon-count/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18069152726511975"
     },
     {
       "id": 729,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.048Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20351,13 +20399,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/net-increase-rate-deposits-worker-households/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18565464394065898"
     },
     {
       "id": 730,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.063Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20374,13 +20423,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/pharmacy-count/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18087216206435510"
     },
     {
       "id": 731,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.075Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20397,13 +20447,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/theft-offenses-recognized/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17890545009571587"
     },
     {
       "id": 732,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.088Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20420,13 +20471,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/monthly-average-actual-working-hours-male-pre2019/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18117980668857917"
     },
     {
       "id": 733,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.101Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20443,13 +20495,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/public-bath-count/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18123772114742508"
     },
     {
       "id": 734,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.117Z",
-      "updated_at": "2026-10-16T00:58:06.586Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20476,13 +20529,14 @@
             "key": "sns-assets/instagram/734/image-1/bfcce75ef0b7f07cdc0f1d7bebcb0baef4b50ea5eb7622457f09c324c55dc3be.png"
           }
         }
-      ]
+      ],
+      "external_id": "18108010252821269"
     },
     {
       "id": 735,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.130Z",
-      "updated_at": "2026-10-16T00:58:09.271Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20509,13 +20563,14 @@
             "key": "sns-assets/instagram/735/image-1/ab0b9383da977f7ead80c10f1670ce6914626b0cce4b4139d8b764c27149618b.png"
           }
         }
-      ]
+      ],
+      "external_id": "17855271303694850"
     },
     {
       "id": 736,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.144Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20532,13 +20587,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/cpi-change-rate-total/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18188384026383622"
     },
     {
       "id": 737,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.157Z",
-      "updated_at": "2026-10-16T00:58:09.485Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20565,13 +20621,14 @@
             "key": "sns-assets/instagram/737/image-1/2881b71e8e9f163d157192c1fe31f20924c015af73a562331ac6e9b0ae03149b.png"
           }
         }
-      ]
+      ],
+      "external_id": "17983801943855764"
     },
     {
       "id": 738,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.172Z",
-      "updated_at": "2026-10-16T00:58:12.260Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20598,13 +20655,14 @@
             "key": "sns-assets/instagram/738/image-1/75b467a6a5ee71edca6407214f714163d3da4a709d467db15f8adf60f357daeb.png"
           }
         }
-      ]
+      ],
+      "external_id": "17904057276462966"
     },
     {
       "id": 739,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.184Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20621,13 +20679,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/total-outpatients/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18119625442799979"
     },
     {
       "id": 740,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.197Z",
-      "updated_at": "2026-10-16T00:58:16.646Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20654,13 +20713,14 @@
             "key": "sns-assets/instagram/740/image-1/8d0e4e485a35eed0c8443511f8867f5335643cc1e08b0567f5de5ab424531bb7.png"
           }
         }
-      ]
+      ],
+      "external_id": "18074804321702091"
     },
     {
       "id": 741,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.214Z",
-      "updated_at": "2026-10-16T00:58:14.257Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20687,13 +20747,14 @@
             "key": "sns-assets/instagram/741/image-1/a873cbd70e4d244760c4076582c8cbb19a790e3d5512120785964a0e93026dd2.png"
           }
         }
-      ]
+      ],
+      "external_id": "18088315748441357"
     },
     {
       "id": 742,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.228Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20710,13 +20771,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/serious-crime-per-100k/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18068324375719097"
     },
     {
       "id": 743,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.241Z",
-      "updated_at": "2026-10-16T00:58:15.306Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20743,13 +20805,14 @@
             "key": "sns-assets/instagram/743/image-1/5675188c7df26bcbaa198470feb006f6cee16c97011cc6bc8840e35d987cf99a.png"
           }
         }
-      ]
+      ],
+      "external_id": "18109296836004451"
     },
     {
       "id": 744,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.253Z",
-      "updated_at": "2026-10-16T00:58:21.824Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20776,13 +20839,14 @@
             "key": "sns-assets/instagram/744/image-1/b61d8d6695f783f7d18fa2092c40bc8203ffe4af3c4ee6ba87dae373714ebdec.png"
           }
         }
-      ]
+      ],
+      "external_id": "17896103232551992"
     },
     {
       "id": 745,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.266Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20799,13 +20863,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/habitable-area-ratio/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18099668420225077"
     },
     {
       "id": 746,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.279Z",
-      "updated_at": "2026-10-16T00:58:18.787Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20832,13 +20897,14 @@
             "key": "sns-assets/instagram/746/image-1/ca508ba863fd2013185f25d5764abcc3091e203b0b7d5d137926827aca91239a.png"
           }
         }
-      ]
+      ],
+      "external_id": "18108513797060149"
     },
     {
       "id": 747,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.295Z",
-      "updated_at": "2026-10-16T00:58:20.330Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20865,13 +20931,14 @@
             "key": "sns-assets/instagram/747/image-1/ec3e1604ba30b2a72d6f5d44fea08a26d231d8f4fdf92aedbbe39fe7f7027620.png"
           }
         }
-      ]
+      ],
+      "external_id": "18113332799510903"
     },
     {
       "id": 748,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.308Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20888,7 +20955,8 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/japanese-entries/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17971016534918418"
     },
     {
       "id": 749,
@@ -20910,7 +20978,7 @@
       "id": 750,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.338Z",
-      "updated_at": "2026-10-16T00:58:20.887Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20937,13 +21005,14 @@
             "key": "sns-assets/instagram/750/image-1/95c4ce299efdfcba6706e5b3604dfaa9ad197ceddd8309c7df5ccf527b680fcd.png"
           }
         }
-      ]
+      ],
+      "external_id": "18087460316138743"
     },
     {
       "id": 751,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.352Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -20960,13 +21029,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/postal-savings-balance-per-capita/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17946321558249943"
     },
     {
       "id": 752,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.366Z",
-      "updated_at": "2026-10-16T00:58:24.163Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -20993,13 +21063,14 @@
             "key": "sns-assets/instagram/752/image-1/2721eb7ecfc4c3c4b9706ddcf2887471d7de5d19ad6ec18cad3cb45478a86400.png"
           }
         }
-      ]
+      ],
+      "external_id": "17938111326299384"
     },
     {
       "id": 753,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.379Z",
-      "updated_at": "2026-10-16T00:58:26.382Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21026,13 +21097,14 @@
             "key": "sns-assets/instagram/753/image-1/ed6a81a407dd2e244e1be1e97edc3b2ac0ff8ecf6aa9c0793b5d79901a37e9b1.png"
           }
         }
-      ]
+      ],
+      "external_id": "18608161570061184"
     },
     {
       "id": 754,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.393Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21049,13 +21121,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/paid-nursing-home-residents-per-1000-65plus/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18115259915309973"
     },
     {
       "id": 755,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.407Z",
-      "updated_at": "2026-10-16T00:58:27.136Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21082,13 +21155,14 @@
             "key": "sns-assets/instagram/755/image-1/45d71ec11e32525e85019348bec2b6966cf20a0e5b76d5f87562f018cf3dd713.png"
           }
         }
-      ]
+      ],
+      "external_id": "18103774742597797"
     },
     {
       "id": 756,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.419Z",
-      "updated_at": "2026-10-16T00:58:27.824Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21115,13 +21189,14 @@
             "key": "sns-assets/instagram/756/image-1/0ebf08c62f12a0e2cac17735861a668c9e2bb5f18bf17208d8e6a8b3a298321f.png"
           }
         }
-      ]
+      ],
+      "external_id": "17874314706536294"
     },
     {
       "id": 757,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.432Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21138,13 +21213,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/building-fire-count/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17920782441183248"
     },
     {
       "id": 758,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.445Z",
-      "updated_at": "2026-10-16T00:58:33.576Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21171,13 +21247,14 @@
             "key": "sns-assets/instagram/758/image-1/416d1df700533bca1b49525525f966a96a738224956dcf6ac47ed5e42fd73f92.png"
           }
         }
-      ]
+      ],
+      "external_id": "17929204293361153"
     },
     {
       "id": 759,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.459Z",
-      "updated_at": "2026-10-16T00:58:31.711Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21204,13 +21281,14 @@
             "key": "sns-assets/instagram/759/image-1/2213be7be2065e43f335c4c9832fd03c1e0db02d14672bbf2a8ce784a7a3dc75.png"
           }
         }
-      ]
+      ],
+      "external_id": "17950988811012103"
     },
     {
       "id": 760,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.472Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21227,13 +21305,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/lowest-temperature/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18129122116640790"
     },
     {
       "id": 761,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.485Z",
-      "updated_at": "2026-10-16T00:58:31.609Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21260,13 +21339,14 @@
             "key": "sns-assets/instagram/761/image-1/9e59f903952777d852725398d8bf99c4b3bfebacfecef97f49c797fea8031812.png"
           }
         }
-      ]
+      ],
+      "external_id": "18599645305024021"
     },
     {
       "id": 762,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.497Z",
-      "updated_at": "2026-10-16T00:58:33.409Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21293,13 +21373,14 @@
             "key": "sns-assets/instagram/762/image-1/609709670098a3f06a5eae17e3fd9aa1694c7651632e1907174912a104890dc5.png"
           }
         }
-      ]
+      ],
+      "external_id": "18152140597512723"
     },
     {
       "id": 763,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.510Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21316,13 +21397,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/number-of-simple-lodging-facilities/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17889537714410166"
     },
     {
       "id": 764,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.525Z",
-      "updated_at": "2026-10-16T00:58:36.752Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21349,13 +21431,14 @@
             "key": "sns-assets/instagram/764/image-1/1a208891d0432db82b31cadf1676e55de541f406753766ce46984755061eac46.png"
           }
         }
-      ]
+      ],
+      "external_id": "18023734715846843"
     },
     {
       "id": 765,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.540Z",
-      "updated_at": "2026-10-16T00:58:35.914Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21382,13 +21465,14 @@
             "key": "sns-assets/instagram/765/image-1/b0888c82fbd39c4d205c46cce00553c979ee503874888e5cc78f0a14d09e1ca0.png"
           }
         }
-      ]
+      ],
+      "external_id": "18324415909275774"
     },
     {
       "id": 766,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.553Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21405,13 +21489,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/private-life-insurance-contracts-per-1000/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18093816851621624"
     },
     {
       "id": 767,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.565Z",
-      "updated_at": "2026-10-16T00:58:38.930Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21438,13 +21523,14 @@
             "key": "sns-assets/instagram/767/image-1/0b34a3a7ce173bf45b21ee102eb3239c5476ed4e15da9666fc227e2155dd56fe.png"
           }
         }
-      ]
+      ],
+      "external_id": "17879502996615742"
     },
     {
       "id": 768,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.580Z",
-      "updated_at": "2026-10-16T00:58:38.516Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21471,13 +21557,14 @@
             "key": "sns-assets/instagram/768/image-1/36af330148db91d205e6785a2147001beaaba4c26af506bc8b38220efe4ab8b0.png"
           }
         }
-      ]
+      ],
+      "external_id": "18210785470350865"
     },
     {
       "id": 769,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.592Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21494,13 +21581,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/junior-college-count/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18026712362669844"
     },
     {
       "id": 770,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.605Z",
-      "updated_at": "2026-10-16T00:58:40.906Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21527,13 +21615,14 @@
             "key": "sns-assets/instagram/770/image-1/997197281bda086b95e6a89e2682ea742b2de6b05baf4b5cfc5d8f819aac3075.png"
           }
         }
-      ]
+      ],
+      "external_id": "17892175512583774"
     },
     {
       "id": 771,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.617Z",
-      "updated_at": "2026-10-16T00:58:42.134Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21560,13 +21649,14 @@
             "key": "sns-assets/instagram/771/image-1/22fa04abd53003d0a6cdaae1baeb1dc371e446f3f00302df2e1e645f72919ab9.png"
           }
         }
-      ]
+      ],
+      "external_id": "17977172151111554"
     },
     {
       "id": 772,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.632Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21583,13 +21673,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/local-allocation-tax-ratio-pref-finance/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18153203653499811"
     },
     {
       "id": 773,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.644Z",
-      "updated_at": "2026-10-16T00:58:43.767Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21616,13 +21707,14 @@
             "key": "sns-assets/instagram/773/image-1/056f38908f52c241cc61449343bcac53ea135bcc200a9adf3576ff49930bf4ca.png"
           }
         }
-      ]
+      ],
+      "external_id": "18425484130180724"
     },
     {
       "id": 774,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.658Z",
-      "updated_at": "2026-10-16T00:58:44.387Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21649,13 +21741,14 @@
             "key": "sns-assets/instagram/774/image-1/e21369e0ca53f7bde5cde6b59b8558002ce4fa8f52d64baa2f29e88cdd6efa77.png"
           }
         }
-      ]
+      ],
+      "external_id": "18219953767335863"
     },
     {
       "id": 775,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.671Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21672,13 +21765,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/urban-park-area-per-person/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "17898939780510102"
     },
     {
       "id": 776,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.685Z",
-      "updated_at": "2026-10-16T00:58:46.135Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21705,13 +21799,14 @@
             "key": "sns-assets/instagram/776/image-1/76d54c6b5d4c7c659d816c127e3892550ad78dca686efe73194c35b8605ac3b4.png"
           }
         }
-      ]
+      ],
+      "external_id": "17977539804064789"
     },
     {
       "id": 777,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.698Z",
-      "updated_at": "2026-10-16T00:58:46.262Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21738,13 +21833,14 @@
             "key": "sns-assets/instagram/777/image-1/7537367ff3c6b78c291357dc2584042a325acef6eef62731327a337fe6d5f475.png"
           }
         }
-      ]
+      ],
+      "external_id": "17955583890192562"
     },
     {
       "id": 778,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.711Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -21761,13 +21857,14 @@
           "state": "missing",
           "reason": "R2 に無い (sns/bar-chart-race/municipal-road-paving-rate/instagram/reel.mp4)"
         }
-      ]
+      ],
+      "external_id": "18345342865217202"
     },
     {
       "id": 779,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.725Z",
-      "updated_at": "2026-10-16T00:58:48.315Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21794,13 +21891,14 @@
             "key": "sns-assets/instagram/779/image-1/f3c62ab9949412717c90201b5593d739733962d3063d124cb789823c6f0fff0a.png"
           }
         }
-      ]
+      ],
+      "external_id": "18099908318248893"
     },
     {
       "id": 780,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.740Z",
-      "updated_at": "2026-10-16T00:58:50.407Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21827,13 +21925,14 @@
             "key": "sns-assets/instagram/780/image-1/fb1dd8912ec3e5ee4745f43b2e7fea0ebd9c6f2495f2af612f981f8a74bfb2e5.png"
           }
         }
-      ]
+      ],
+      "external_id": "17891561061598769"
     },
     {
       "id": 781,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.753Z",
-      "updated_at": "2026-10-16T00:58:52.246Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21860,13 +21959,14 @@
             "key": "sns-assets/instagram/781/image-1/06b6dcb5ac851a35e5e154d942a23040cc7009d752cdeee45a031cde97fb1479.png"
           }
         }
-      ]
+      ],
+      "external_id": "18136557979515790"
     },
     {
       "id": 782,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.766Z",
-      "updated_at": "2026-10-16T00:58:52.854Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21893,13 +21993,14 @@
             "key": "sns-assets/instagram/782/image-1/671e73b6449f7e65de491d5e0599519ebf1719a456717acbd8b62632c0838078.png"
           }
         }
-      ]
+      ],
+      "external_id": "17928975588364255"
     },
     {
       "id": 783,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.779Z",
-      "updated_at": "2026-10-16T00:58:55.644Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21926,13 +22027,14 @@
             "key": "sns-assets/instagram/783/image-1/1ce70a7d883d0c8d35008b703b637e59e111edb930bd5ef67ddad47bf72a24f2.png"
           }
         }
-      ]
+      ],
+      "external_id": "18098892293068460"
     },
     {
       "id": 784,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.793Z",
-      "updated_at": "2026-10-16T00:58:57.856Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21959,13 +22061,14 @@
             "key": "sns-assets/instagram/784/image-1/c645da40379ebb3342ef3ffcfb0362f8635929abcb78f5d98e32b39cf9fc7d07.png"
           }
         }
-      ]
+      ],
+      "external_id": "18102140122929892"
     },
     {
       "id": 785,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.806Z",
-      "updated_at": "2026-10-16T00:59:00.346Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -21992,13 +22095,14 @@
             "key": "sns-assets/instagram/785/image-1/b9ff95bc3541a215edfaab90bdfbd3891671112d403a8587b697ac409525e7da.png"
           }
         }
-      ]
+      ],
+      "external_id": "17889194463666535"
     },
     {
       "id": 786,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.819Z",
-      "updated_at": "2026-10-16T00:59:01.131Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22025,13 +22129,14 @@
             "key": "sns-assets/instagram/786/image-1/359a8bcb557bc27890756b0217ae4541ce289f2e74660baf063b9823a6a23634.png"
           }
         }
-      ]
+      ],
+      "external_id": "18219864103328531"
     },
     {
       "id": 787,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.832Z",
-      "updated_at": "2026-10-16T00:59:02.847Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22058,13 +22163,14 @@
             "key": "sns-assets/instagram/787/image-1/e8e8400911c0387a1587e52093e54eb381c83b3b01e69ef3e7ca6c2e39e7d7ad.png"
           }
         }
-      ]
+      ],
+      "external_id": "17926029150388636"
     },
     {
       "id": 788,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.846Z",
-      "updated_at": "2026-10-16T00:59:04.555Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22091,13 +22197,14 @@
             "key": "sns-assets/instagram/788/image-1/8cd56f27225ddb398a7e04df2c7a37c84ce56cdfffae8ddac78aee7a6d0885dd.png"
           }
         }
-      ]
+      ],
+      "external_id": "18127664659725620"
     },
     {
       "id": 789,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.859Z",
-      "updated_at": "2026-10-16T00:59:05.708Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22124,13 +22231,14 @@
             "key": "sns-assets/instagram/789/image-1/a70f8a384e74cbacb516bdf9ff71f4cc006946b82ad1115bf909b4d7a93cecdb.png"
           }
         }
-      ]
+      ],
+      "external_id": "18122961250766208"
     },
     {
       "id": 790,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.873Z",
-      "updated_at": "2026-10-16T00:59:06.654Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22157,13 +22265,14 @@
             "key": "sns-assets/instagram/790/image-1/c57a9d3af3391df3f15e0936ec519b9cfb5f776fb8658f85e944e465866666c9.png"
           }
         }
-      ]
+      ],
+      "external_id": "18088965854563615"
     },
     {
       "id": 791,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.886Z",
-      "updated_at": "2026-10-16T00:59:09.054Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22190,13 +22299,14 @@
             "key": "sns-assets/instagram/791/image-1/bfa902a743ead629b2bbce2912b7ab875754e82c7cf09d536784b31a1594b7bf.png"
           }
         }
-      ]
+      ],
+      "external_id": "18137538442581051"
     },
     {
       "id": 792,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.901Z",
-      "updated_at": "2026-10-16T00:59:11.849Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22223,13 +22333,14 @@
             "key": "sns-assets/instagram/792/image-1/4e5889bcbcd620ac887236c113eb8480ce5de1f03d1928beb29d34be02ac6257.png"
           }
         }
-      ]
+      ],
+      "external_id": "18463614616117951"
     },
     {
       "id": 793,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.915Z",
-      "updated_at": "2026-10-16T00:59:11.175Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22256,13 +22367,14 @@
             "key": "sns-assets/instagram/793/image-1/ea35b2b979c5d4d6dc1cb8318d71dcd646f1ba7f2971af609851ba573b30db2d.png"
           }
         }
-      ]
+      ],
+      "external_id": "17959946154169568"
     },
     {
       "id": 794,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.928Z",
-      "updated_at": "2026-10-16T00:59:12.487Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22289,13 +22401,14 @@
             "key": "sns-assets/instagram/794/image-1/410b0c6e3d25e4eef392225e2bdac1490ca435ddad90b0493329643f57eca001.png"
           }
         }
-      ]
+      ],
+      "external_id": "18125871193739524"
     },
     {
       "id": 795,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.941Z",
-      "updated_at": "2026-10-16T00:59:14.061Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22322,7 +22435,8 @@
             "key": "sns-assets/instagram/795/image-1/65a48d0c91dfb9269097da04db235dfb3a332b7e4695002cda301a2ea39c6184.png"
           }
         }
-      ]
+      ],
+      "external_id": "18202245214370648"
     },
     {
       "id": 796,
@@ -22344,7 +22458,7 @@
       "id": 797,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.971Z",
-      "updated_at": "2026-10-16T00:59:16.008Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22371,13 +22485,14 @@
             "key": "sns-assets/instagram/797/image-1/0916c45eb21a7fdd7891be42f05d06d588ab969701538cf69f185c79c6ed4469.png"
           }
         }
-      ]
+      ],
+      "external_id": "18202949764366443"
     },
     {
       "id": 798,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.984Z",
-      "updated_at": "2026-10-16T00:59:16.304Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22404,13 +22519,14 @@
             "key": "sns-assets/instagram/798/image-1/93fbb90c0b01651ef72956e82b18fa9feffcfae778f2920a995fc854c5e41a5a.png"
           }
         }
-      ]
+      ],
+      "external_id": "18070921784447637"
     },
     {
       "id": 799,
       "status": "posted",
       "created_at": "2026-08-03T09:30:41.997Z",
-      "updated_at": "2026-10-16T00:59:16.982Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22437,7 +22553,8 @@
             "key": "sns-assets/instagram/799/image-1/b4fc301618f3b975b8b88d58092056a7b3731f1d50834ce4e01c4c00fd495b38.png"
           }
         }
-      ]
+      ],
+      "external_id": "18177070924419168"
     },
     {
       "id": 800,
@@ -22459,7 +22576,7 @@
       "id": 801,
       "status": "posted",
       "created_at": "2026-08-03T13:16:40.025Z",
-      "updated_at": "2026-10-16T00:59:19.342Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22486,13 +22603,14 @@
             "key": "sns-assets/instagram/801/image-1/0eb9a548a482041281b702d04c1a9649a23de881778431e82caff14c2595e1be.png"
           }
         }
-      ]
+      ],
+      "external_id": "18083759579667181"
     },
     {
       "id": 802,
       "status": "posted",
       "created_at": "2026-08-04T00:14:54.520Z",
-      "updated_at": "2026-10-16T00:59:22.963Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22519,13 +22637,14 @@
             "key": "sns-assets/instagram/802/image-1/2e55f38d2f811a491a80e18a23a17b7215c8726f1f9c0aca3464f30a052f19c5.png"
           }
         }
-      ]
+      ],
+      "external_id": "17948078844253355"
     },
     {
       "id": 803,
       "status": "posted",
       "created_at": "2026-08-04T05:46:19.989Z",
-      "updated_at": "2026-10-16T00:59:20.576Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22552,13 +22671,14 @@
             "key": "sns-assets/instagram/803/image-1/f5edabb0a0ade7f143bedb3c86e8b58bb7e6759224af307e13382fe3de661a32.png"
           }
         }
-      ]
+      ],
+      "external_id": "18101233709055259"
     },
     {
       "id": 804,
       "status": "posted",
       "created_at": "2026-08-04T12:09:50.392Z",
-      "updated_at": "2026-10-16T00:59:21.164Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22585,13 +22705,14 @@
             "key": "sns-assets/instagram/804/image-1/a9abc8338881b29d0684603c0bbc18dba458ddb6e994177c0a75ba8cee7ce268.png"
           }
         }
-      ]
+      ],
+      "external_id": "18068782358466415"
     },
     {
       "id": 805,
       "status": "posted",
       "created_at": "2026-08-05T00:12:39.734Z",
-      "updated_at": "2026-10-16T00:59:24.706Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22618,13 +22739,14 @@
             "key": "sns-assets/instagram/805/image-1/0172f6c6e881c919a1de4b28612c01432b411fcf2f723860966028b1da5192ca.png"
           }
         }
-      ]
+      ],
+      "external_id": "18107060782860913"
     },
     {
       "id": 806,
       "status": "posted",
       "created_at": "2026-08-05T05:45:44.983Z",
-      "updated_at": "2026-10-16T00:59:25.332Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22651,13 +22773,14 @@
             "key": "sns-assets/instagram/806/image-1/417ba6879216041cb9bfd120664c33ccfa03db0c4f8eeb87103129f676a1167f.png"
           }
         }
-      ]
+      ],
+      "external_id": "18090793847425772"
     },
     {
       "id": 807,
       "status": "posted",
       "created_at": "2026-08-05T12:07:48.497Z",
-      "updated_at": "2026-10-16T00:59:26.644Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22684,13 +22807,14 @@
             "key": "sns-assets/instagram/807/image-1/2d0b86ea30ef8b4d82f92cb23aa9d43a29db9ab1456910826d6757d29a26f126.png"
           }
         }
-      ]
+      ],
+      "external_id": "18172728256428665"
     },
     {
       "id": 808,
       "status": "posted",
       "created_at": "2026-08-06T00:07:50.635Z",
-      "updated_at": "2026-10-16T00:59:27.216Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22717,13 +22841,14 @@
             "key": "sns-assets/instagram/808/image-1/c6fb7d577c7dc67e1da999c8318e697b5844a8b95951a0b3db792c0a379cd8c4.png"
           }
         }
-      ]
+      ],
+      "external_id": "18132466042537967"
     },
     {
       "id": 809,
       "status": "posted",
       "created_at": "2026-08-06T05:48:33.338Z",
-      "updated_at": "2026-10-16T00:59:29.516Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22750,13 +22875,14 @@
             "key": "sns-assets/instagram/809/image-1/f1e153907fcac68580d8a73da4e5238011509ffcc15c1315e42ed72056236f2c.png"
           }
         }
-      ]
+      ],
+      "external_id": "18076631687345068"
     },
     {
       "id": 810,
       "status": "posted",
       "created_at": "2026-08-06T12:10:32.563Z",
-      "updated_at": "2026-10-16T00:59:29.834Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22783,13 +22909,14 @@
             "key": "sns-assets/instagram/810/image-1/375f5825dbb931d3a76ea361eca572fcfbbeb2027c0297d4b602a7e4406438c2.png"
           }
         }
-      ]
+      ],
+      "external_id": "18022054880897784"
     },
     {
       "id": 811,
       "status": "posted",
       "created_at": "2026-08-07T01:43:23.678Z",
-      "updated_at": "2026-10-16T00:59:31.251Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22816,13 +22943,14 @@
             "key": "sns-assets/instagram/811/image-1/c784bcd878c7220b7f2fd4f0d90260707022359373fbb8fb6e58863d12d744d4.png"
           }
         }
-      ]
+      ],
+      "external_id": "17936375436344795"
     },
     {
       "id": 812,
       "status": "posted",
       "created_at": "2026-08-07T04:54:27.211Z",
-      "updated_at": "2026-10-16T00:59:32.825Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22849,13 +22977,14 @@
             "key": "sns-assets/instagram/812/image-1/4ce29e10af8fcf7f3be78f5d3d834cacdbb04469658c6ecb8c823090065921fb.png"
           }
         }
-      ]
+      ],
+      "external_id": "18122838577835352"
     },
     {
       "id": 813,
       "status": "posted",
       "created_at": "2026-08-07T11:02:29.617Z",
-      "updated_at": "2026-10-16T00:59:34.133Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22882,13 +23011,14 @@
             "key": "sns-assets/instagram/813/image-1/2fda07e20c5fd61c6b5572ac67cf2cbed1f045009342385936a9049d9e35df7f.png"
           }
         }
-      ]
+      ],
+      "external_id": "18121255714781165"
     },
     {
       "id": 814,
       "status": "posted",
       "created_at": "2026-08-07T23:42:15.049Z",
-      "updated_at": "2026-10-16T00:59:34.746Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22915,13 +23045,14 @@
             "key": "sns-assets/instagram/814/image-1/ea13313f0bca7821b49c3a01a4d23e3e6e1c84db797737e32e6ec2cf7c8af243.png"
           }
         }
-      ]
+      ],
+      "external_id": "18110889766991708"
     },
     {
       "id": 815,
       "status": "posted",
       "created_at": "2026-08-08T04:10:53.898Z",
-      "updated_at": "2026-10-16T00:59:36.843Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22948,13 +23079,14 @@
             "key": "sns-assets/instagram/815/image-1/c97192b08f14c60c4a51967fb4cd8a38931699a4a384d8eb6566d147838d94aa.png"
           }
         }
-      ]
+      ],
+      "external_id": "17902586610496701"
     },
     {
       "id": 816,
       "status": "posted",
       "created_at": "2026-08-08T10:44:36.233Z",
-      "updated_at": "2026-10-16T00:59:37.232Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -22981,13 +23113,14 @@
             "key": "sns-assets/instagram/816/image-1/363d8b476c45565de7ac4f17a7d6f01448b58e21d7a21df3ddefd0c6276c2f01.png"
           }
         }
-      ]
+      ],
+      "external_id": "17895178641592262"
     },
     {
       "id": 817,
       "status": "posted",
       "created_at": "2026-08-08T23:38:10.985Z",
-      "updated_at": "2026-10-16T00:59:38.956Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23014,13 +23147,14 @@
             "key": "sns-assets/instagram/817/image-1/f0a9b0c78c254cdd4bb9d436c24c5c5397597261a6d1f371bc796df55d77bc59.png"
           }
         }
-      ]
+      ],
+      "external_id": "18096559358367014"
     },
     {
       "id": 818,
       "status": "posted",
       "created_at": "2026-08-09T04:17:30.151Z",
-      "updated_at": "2026-10-16T00:59:39.495Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23047,13 +23181,14 @@
             "key": "sns-assets/instagram/818/image-1/36f32850a9813054911a3a2d076dc0d5fa2ca41c64381963e2ee1e6c199d6d0b.png"
           }
         }
-      ]
+      ],
+      "external_id": "18079833644695884"
     },
     {
       "id": 819,
       "status": "posted",
       "created_at": "2026-08-09T10:46:18.540Z",
-      "updated_at": "2026-10-16T00:59:41.222Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23080,13 +23215,14 @@
             "key": "sns-assets/instagram/819/image-1/6e8e4381f7444b53ae72c3a079d56c8d0dd48e3cc0da8885e3e0c1736f6351f8.png"
           }
         }
-      ]
+      ],
+      "external_id": "18125943095494106"
     },
     {
       "id": 820,
       "status": "posted",
       "created_at": "2026-08-09T23:40:57.823Z",
-      "updated_at": "2026-10-16T00:59:42.242Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23113,13 +23249,14 @@
             "key": "sns-assets/instagram/820/image-1/e1034b188dba0d3022512fb02ae3199b8ef837cdebe77f67e0de0a3901070f6b.png"
           }
         }
-      ]
+      ],
+      "external_id": "17918895342423154"
     },
     {
       "id": 821,
       "status": "posted",
       "created_at": "2026-08-10T04:37:40.083Z",
-      "updated_at": "2026-10-16T00:59:42.634Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23146,13 +23283,14 @@
             "key": "sns-assets/instagram/821/image-1/3f44eca3809635c18f3eecb304af8b2acd27d24b77622613da3d4c6fa7ab6f4f.png"
           }
         }
-      ]
+      ],
+      "external_id": "17860134171677181"
     },
     {
       "id": 822,
       "status": "posted",
       "created_at": "2026-08-10T11:16:47.595Z",
-      "updated_at": "2026-10-16T00:59:44.244Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
@@ -23179,7 +23317,8 @@
             "key": "sns-assets/instagram/822/image-1/600a5ead55949d9f639548f1fb2f0b6e937c0acd177c40bd8396e960680b75a2.png"
           }
         }
-      ]
+      ],
+      "external_id": "18232700281318579"
     },
     {
       "id": 823,
@@ -27270,7 +27409,7 @@
       "id": 923,
       "status": "posted",
       "created_at": "2026-09-23T05:19:49.779Z",
-      "updated_at": "2026-10-16T01:00:25.770Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -27364,7 +27503,8 @@
             "key": "sns-assets/instagram/923/slide-5/8df143ad30996b57da61326ecc8dc7f4f95d6daba16606ac2f5547a6d9c7f179.png"
           }
         }
-      ]
+      ],
+      "external_id": "18106570886182257"
     },
     {
       "id": 924,
@@ -31902,7 +32042,7 @@
       "id": 1054,
       "status": "posted",
       "created_at": "2026-09-25T15:10:00.300Z",
-      "updated_at": "2026-10-16T01:00:58.079Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -31977,13 +32117,14 @@
             "key": "sns-assets/instagram/1054/slide-4/794dae66294668aa5a3cd4ce71ec8f375d33d58d6a49975481617d7f91531b42.png"
           }
         }
-      ]
+      ],
+      "external_id": "17957688237250615"
     },
     {
       "id": 1055,
       "status": "posted",
       "created_at": "2026-09-26T14:22:26.804Z",
-      "updated_at": "2026-10-16T01:01:06.977Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -32074,13 +32215,14 @@
             "key": "sns-assets/instagram/1055/slide-5/02aa5744bff925f363296217554e73576168bf265e5757f77b4d81774e6297ae.png"
           }
         }
-      ]
+      ],
+      "external_id": "18113162807016203"
     },
     {
       "id": 1056,
       "status": "posted",
       "created_at": "2026-09-27T15:06:46.860Z",
-      "updated_at": "2026-10-16T01:01:16.461Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
@@ -32155,13 +32297,14 @@
             "key": "sns-assets/instagram/1056/slide-4/73fa7df73704a5dc7cc02c5994234d91af7d696bd24cf391b7337e1968e65916.png"
           }
         }
-      ]
+      ],
+      "external_id": "18095677292421474"
     },
     {
       "id": 1057,
       "status": "posted",
       "created_at": "2026-09-28T18:06:29.754Z",
-      "updated_at": "2026-10-16T01:01:19.919Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -32252,13 +32395,14 @@
             "key": "sns-assets/instagram/1057/slide-5/45b5012eb237b9215161c64292a4f7bbdb0bb552bd263b2de6cc19f2e1d4cda4.png"
           }
         }
-      ]
+      ],
+      "external_id": "18150923302486393"
     },
     {
       "id": 1058,
       "status": "posted",
       "created_at": "2026-09-29T16:28:41.963Z",
-      "updated_at": "2026-10-16T01:01:25.493Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -32349,7 +32493,8 @@
             "key": "sns-assets/instagram/1058/slide-5/ec3f9d785a73c08f569de8211d17305f9971e72fd57f4a5061e074b3a46b51e3.png"
           }
         }
-      ]
+      ],
+      "external_id": "17948075268335325"
     },
     {
       "id": 1059,
@@ -32577,7 +32722,7 @@
       "id": 1065,
       "status": "posted",
       "created_at": "2026-09-30T09:21:38.316Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking-quiz-reel",
@@ -32598,13 +32743,14 @@
           "mime": "video/mp4",
           "source": "sns/ranking-quiz-reel/squid-consumption-expenditure/instagram/reel.mp4"
         }
-      ]
+      ],
+      "external_id": "17967510512964167"
     },
     {
       "id": 1066,
       "status": "posted",
       "created_at": "2026-09-30T16:22:47.636Z",
-      "updated_at": "2026-10-16T01:01:32.674Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
@@ -32695,13 +32841,14 @@
             "key": "sns-assets/instagram/1066/slide-5/c62771d978c6d97ac6bb1c54635d78ff7a342ff394428864aff75ff21c4fcd15.png"
           }
         }
-      ]
+      ],
+      "external_id": "18092255687375575"
     },
     {
       "id": 1067,
       "status": "posted",
       "created_at": "2026-10-01T17:00:37.262Z",
-      "updated_at": "2026-10-16T01:01:37.119Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -32792,13 +32939,14 @@
             "key": "sns-assets/instagram/1067/slide-5/e5838eb69e367239f335bdb920f48eba724efeee6fdd5df3ad43008a9dbc647f.png"
           }
         }
-      ]
+      ],
+      "external_id": "18109074155266434"
     },
     {
       "id": 1068,
       "status": "posted",
       "created_at": "2026-10-03T01:52:50.110Z",
-      "updated_at": "2026-10-16T01:01:42.389Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -32873,13 +33021,14 @@
             "key": "sns-assets/instagram/1068/slide-4/97a83d083f36de9ab20068056757fdc229e4ef951f78d123369e0d38e25cdc7c.png"
           }
         }
-      ]
+      ],
+      "external_id": "18118326811984952"
     },
     {
       "id": 1069,
       "status": "posted",
       "created_at": "2026-10-03T14:41:22.781Z",
-      "updated_at": "2026-10-16T01:01:47.164Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -32970,13 +33119,14 @@
             "key": "sns-assets/instagram/1069/slide-5/1760857ca0d9b630a8dc4c17f7a6e0210b8db1a0634eecb8c5b41b33527ef365.png"
           }
         }
-      ]
+      ],
+      "external_id": "18114175571035711"
     },
     {
       "id": 1070,
       "status": "posted",
       "created_at": "2026-10-04T15:17:49.622Z",
-      "updated_at": "2026-10-16T01:01:50.823Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
@@ -33051,13 +33201,14 @@
             "key": "sns-assets/instagram/1070/slide-4/aa75b542e3527a047ae9c9a81520ca40d9531a92f2a016e72fbd8b5cf98a3d69.png"
           }
         }
-      ]
+      ],
+      "external_id": "17943321441088370"
     },
     {
       "id": 1071,
       "status": "posted",
       "created_at": "2026-10-05T10:03:23.715Z",
-      "updated_at": "2026-10-16T01:01:56.779Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -33148,13 +33299,14 @@
             "key": "sns-assets/instagram/1071/slide-5/19b204ca8596d09312b4f1512ba13f47ec37238c43be8f4e9fa02f09ec0343a4.png"
           }
         }
-      ]
+      ],
+      "external_id": "18379605673224093"
     },
     {
       "id": 1072,
       "status": "posted",
       "created_at": "2026-10-06T21:27:39.276Z",
-      "updated_at": "2026-10-16T01:02:02.728Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -33245,13 +33397,14 @@
             "key": "sns-assets/instagram/1072/slide-5/4c20ec2d340eb9f5a0b62e0de32d4444168717016dcac138df6ae43028050020.png"
           }
         }
-      ]
+      ],
+      "external_id": "18095328497655139"
     },
     {
       "id": 1073,
       "status": "posted",
       "created_at": "2026-10-07T09:53:23.252Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "bar-chart-race",
@@ -33272,13 +33425,14 @@
           "mime": "video/mp4",
           "source": "sns/bar-chart-race/marriages/instagram/reel.mp4"
         }
-      ]
+      ],
+      "external_id": "18637253488052198"
     },
     {
       "id": 1074,
       "status": "posted",
       "created_at": "2026-10-07T17:24:00.910Z",
-      "updated_at": "2026-10-16T01:02:07.869Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
@@ -33369,13 +33523,14 @@
             "key": "sns-assets/instagram/1074/slide-5/f0c2f883da0316a00bfc9bd847ac6beadc712d8a0dd1661e00f4b17cbc6fedf8.png"
           }
         }
-      ]
+      ],
+      "external_id": "18175596697455020"
     },
     {
       "id": 1075,
       "status": "posted",
       "created_at": "2026-10-08T10:04:28.243Z",
-      "updated_at": "2026-10-16T01:02:14.991Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -33466,7 +33621,8 @@
             "key": "sns-assets/instagram/1075/slide-5/563d35b9bfd4e186e6a98c5dce552dbc4849d6cb25635b783730a671ed37b969.png"
           }
         }
-      ]
+      ],
+      "external_id": "17987006280026864"
     },
     {
       "id": 1076,
@@ -33644,7 +33800,7 @@
         "note": "承認の記録より前に IG cron が投稿 (2026-10-09)"
       },
       "created_at": "2026-10-09T03:56:52.465Z",
-      "updated_at": "2026-10-09T10:07:02.946Z",
+      "updated_at": "2026-10-22T23:34:45.783Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -33652,7 +33808,8 @@
       "caption": "【県どうしの比較】愛知県 vs 福岡県\n\n製造品出荷額等（総額）: 愛知県が大きい（2023年・出典: 社会・人口統計体系）\n製造業事業所数: 愛知県が大きい（2024年・出典: 社会・人口統計体系）\n乳用牛飼養頭数（乳用牛・めすの飼養頭数合計）: 愛知県が大きい（2025年・出典: 畜産統計調査）\n男性所定内給与額: 愛知県が大きい（2022年・出典: 賃金構造基本統計調査）\n粗出生率: 福岡県が大きい（2023年・出典: 人口動態統計）\n平均余命（男性 0歳時点・平均寿命）: 愛知県が大きい（2020年・出典: 人口動態統計）\n\n数値が大きかったのは 愛知県 5項目 / 福岡県 1項目\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県比較 #愛知県 #福岡県 #都道府県ランキング #統計 #暮らし #地域比較 #雑学 #stats47",
       "scheduled_at": "2026-10-09T10:00:00.000Z",
       "post_url": "https://www.instagram.com/p/DeRQY84G5tI/",
-      "posted_at": "2026-10-09T10:07:02Z"
+      "posted_at": "2026-10-09T10:07:02Z",
+      "external_id": "18099734702638689"
     },
     {
       "id": 1084,
