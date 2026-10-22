@@ -4922,14 +4922,6 @@
       "published": true
     },
     {
-      "id": "municipality-ranking:retail-employees",
-      "kind": "municipality-ranking",
-      "key": "retail-employees",
-      "title": "小売業従業者数の市区町村ランキング",
-      "href": "/municipalities/ranking/retail-employees",
-      "published": true
-    },
-    {
       "id": "municipality-ranking:retail-floor-space",
       "kind": "municipality-ranking",
       "key": "retail-floor-space",

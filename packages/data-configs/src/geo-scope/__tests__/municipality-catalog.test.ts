@@ -97,9 +97,9 @@ describe('municipality geo scope and catalog', () => {
     // 公開集合 171 には入らない (公開時に catalog へ published を書く)。
     // 2026-10-21: 令和7年国勢調査の5年間の増減 3 件を監査して published に足した (171 → 174)。
     // 2026-10-22: 主要湖沼面積を 0 (湖が無い) を除いて公開、工業地地価は 2005 年のみのため非公開に確定 (174 → 175)。
-    // 2026-10-22: 社会・人口統計体系の未使用コード 733 を e-Stat 実測で判定し 542 件を公開 (175 → 717)。
+    // 2026-10-22: 社会・人口統計体系の未使用コード 733 を e-Stat 実測で判定し 541 件を公開 (175 → 716)。
     // 判定の記録と件数の内訳は municipality-ssds-expansion.ts。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(717);
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(716);
     for (const key of [
       'total-population',
       'fiscal-strength-index',
@@ -174,7 +174,7 @@ describe('社会・人口統計体系の拡充 (2026-10-22)', () => {
   it('拡充の指標は既存の判定と重ならず、すべて公開・テーマ所属・市区町村対応になる', () => {
     const expansionKeys = Object.values(SSDS_EXPANSION_THEME_METRICS).flat();
     expect(new Set(expansionKeys).size).toBe(expansionKeys.length);
-    expect(expansionKeys).toHaveLength(542);
+    expect(expansionKeys).toHaveLength(541);
     for (const key of expansionKeys) {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(true);
     }

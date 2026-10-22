@@ -4821,7 +4821,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
     副産物: moving-in-excess-rate の subtitle 誤り是正 + SSDS 系 10 config の displayName/url 補記
 - **残り (次の拡充はここから)**:
   1. ~~品質監査未了 2 件 (industrial-land-price / major-lake-area) の要否判断~~ **済 (2026-10-22)**: R2 cities.json の実測で、`major-lake-area` は 2024 年の 0 (湖が無い) を除いた 117 自治体の順位として公開 (`valuePolicy: {minExclusive: 0}`・テーマ「土地・面積」に追加、174 → 175)。`industrial-land-price` は 2005 年のみ・値ありは 22% のため unsupported に確定。
-  2. ~~**SSDS 未使用 733 指標**~~ **済 (2026-10-22)**: 733 コードを e-Stat 実測で判定 (最新年 2015 以降・値のある市区町村 800 以上・0 の割合 90% 未満・公開済みと値が一致しない) し、542 件を公開 (新規の市区町村専用 530 + 県の指標に市区町村を足した 12。175 → 717)。テーマを 10 件新設 (19 → 29)、市区町村ページのデータブックには基本の 24 件だけを足した。判定の記録は `packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts`。以下は当時のメモ。
+  2. ~~**SSDS 未使用 733 指標**~~ **済 (2026-10-22)**: 733 コードを e-Stat 実測で判定 (最新年 2015 以降・値のある市区町村 800 以上・0 の割合 90% 未満・公開済みと値が一致しない) し、541 件を公開 (新規の市区町村専用 530 + 県の指標に市区町村を足した 11。175 → 716)。テーマを 10 件新設 (19 → 29)、市区町村ページのデータブックには基本の 24 件だけを足した。判定の記録は `packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts`。以下は当時のメモ。
      **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業

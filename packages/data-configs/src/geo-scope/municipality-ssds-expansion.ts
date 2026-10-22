@@ -3,7 +3,8 @@
  * (MUNI-RANKING-EXPANSION-01)。人が判断した結果の記録で、`municipality-catalog.ts` が読む。
  *
  * 判定 (e-Stat 実測・未使用 733 コード): 最新年 2015 以降・値のある市区町村 800 以上・0 の割合 90% 未満・
- * 公開済みの市区町村指標と値が一致しない。通った 542 件 (新規の市区町村専用 530 + 県の指標に市区町村を足した 12)。
+ * 公開済みの市区町村指標と値が一致しない。通った 541 件 (新規の市区町村専用 530 + 県の指標に市区町村を足した 11)。
+ * retail-employees はテーマ専用の取り込み (ingest-retail-employees.mjs) が県だけを前提にするため対象外。
  * 0 の割合が 50% 以上の指標は、0 (その施設・区域が無い) を除いて順位を付ける (主要湖沼面積と同じ扱い)。
  */
 
@@ -294,7 +295,6 @@ export const SSDS_EXPANSION_THEME_METRICS: Readonly<Record<string, readonly stri
     'retail-annual-sales',
     'commercial-establishments',
     'wholesale-employees',
-    'retail-employees',
     'general-merchandise-store-count',
     'apparel-store-count',
     'food-store-count',

@@ -6281,14 +6281,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "municipality-ranking:retail-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:commerce",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:retail-employees",
           "kind": "ranking"
         },

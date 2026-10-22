@@ -84,7 +84,7 @@ const SSDS_EXPANSION_KEYS = new Set(Object.values(SSDS_EXPANSION_THEME_METRICS).
 const SSDS_EXPANSION_PICKS = new Set(SSDS_EXPANSION_DATABOOK_PICKS);
 
 /**
- * データブックに載せる指標か。社会・人口統計体系の拡充分 (2026-10-22・542 件) は選んだものだけを載せる。
+ * データブックに載せる指標か。社会・人口統計体系の拡充分 (2026-10-22・541 件) は選んだものだけを載せる。
  * 全件を載せると 1 ページの HTML が 2MB を超え、ページの重さの予算 (900KB) を外れる。残りはテーマページから見る。
  */
 export function isCityDatabookMetric(metricKey: string): boolean {
