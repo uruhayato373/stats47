@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -14,14 +14,25 @@ import {
 
 import { buildMunicipalityRankingSnapshots } from '../municipalities/build-municipality-snapshots';
 import {
+  auditMunicipalityAiContent,
+  municipalityRankingAiContentKeyPath,
+  parseMunicipalityAiContent,
+} from '../municipalities/municipality-ai-content';
+import {
   municipalityRankingItemKeyPath,
   municipalityRankingValuesKeyPath,
 } from '../types/municipality-snapshot';
 
 import type { MunicipalityStatsRow } from '../municipalities/build-municipality-snapshots';
+import type { MunicipalityAiContentSnapshot } from '../municipalities/municipality-ai-content';
+import type {
+  MunicipalityRankingItemSnapshot,
+  MunicipalityRankingValuesSnapshot,
+} from '../types/municipality-snapshot';
 
 const REPO_ROOT = fileURLToPath(new URL('../../../..', import.meta.url));
 const MAX_VALUES_BYTES = 512 * 1024;
+const AI_CONTENT_DIR = path.join(REPO_ROOT, 'data', 'municipalities', 'ai-content');
 
 interface StatsPayload {
   metricKey: string;
@@ -82,6 +93,36 @@ async function writeSnapshot(
   const target = path.join(root, ...key.split('/'));
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, body, 'utf8');
+}
+
+/**
+ * 解説 (MUNI-AI-CONTENT-01) を git の data/municipalities/ai-content/<key>.json から読み、この回の配信値で監査して
+ * 通ったときだけ書く。監査に落ちてもランキングの生成は止めない (解説を出さないだけ。理由をログに残す)。
+ * 書いた解説は values.json の generatedAt を持ち、ページは一致するときだけ表示する。
+ */
+async function writeAuditedAiContent(
+  outputRoot: string,
+  item: MunicipalityRankingItemSnapshot,
+  values: MunicipalityRankingValuesSnapshot,
+  metricText: readonly string[]
+): Promise<'none' | 'written' | 'blocked'> {
+  let raw: string;
+  try {
+    raw = await readFile(path.join(AI_CONTENT_DIR, `${values.rankingKey}.json`), 'utf8');
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return 'none';
+    throw error;
+  }
+  const content = parseMunicipalityAiContent(JSON.parse(raw));
+  const audit = auditMunicipalityAiContent(content, item, values, metricText);
+  for (const warning of audit.warnings) console.warn(`⚠️ ai-content ${values.rankingKey}: ${warning}`);
+  if (audit.blockers.length > 0) {
+    console.warn(`⛔ ai-content ${values.rankingKey} は公開しない:\n  ${audit.blockers.join('\n  ')}`);
+    return 'blocked';
+  }
+  const snapshot: MunicipalityAiContentSnapshot = { ...content, valuesGeneratedAt: values.generatedAt };
+  await writeSnapshot(outputRoot, municipalityRankingAiContentKeyPath(values.rankingKey), JSON.stringify(snapshot));
+  return 'written';
 }
 
 async function generateForKey(
@@ -181,6 +222,12 @@ async function generateForKey(
     municipalityRankingValuesKeyPath(rankingKey),
     valuesBody
   );
+  const aiContent = await writeAuditedAiContent(outputRoot, snapshots.item, snapshots.values, [
+    metric.title,
+    subtitleByKey.get(rankingKey) ?? '',
+    metric.description ?? '',
+    metric.unit,
+  ]);
 
   console.log(
     JSON.stringify(
@@ -193,6 +240,7 @@ async function generateForKey(
         excludedEntityCount: snapshots.item.excludedEntityCount,
         itemBytes: Buffer.byteLength(itemBody),
         valuesBytes: Buffer.byteLength(valuesBody),
+        aiContent,
       },
       null,
       2

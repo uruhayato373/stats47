@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "市区町村ランキングの解説",
+  "description": "data/municipalities/ai-content/<rankingKey>.json の形状契約 (MUNI-AI-CONTENT-01)。数値の裏付けと長さはデプロイ時の監査 (packages/ranking/src/municipalities/municipality-ai-content.ts) が配信値と照合する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "rankingKey", "basedOn", "summary", "prefectureDistribution", "population", "faq"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "rankingKey": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "basedOn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["yearCode", "valueCount"],
+      "properties": {
+        "yearCode": { "type": "string", "pattern": "^[0-9]{4}$" },
+        "valueCount": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "summary": { "type": "string", "minLength": 120, "maxLength": 500 },
+    "prefectureDistribution": { "type": "string", "minLength": 80, "maxLength": 400 },
+    "population": { "type": "string", "minLength": 60, "maxLength": 300 },
+    "faq": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "answer"],
+        "properties": {
+          "question": { "type": "string", "minLength": 1 },
+          "answer": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

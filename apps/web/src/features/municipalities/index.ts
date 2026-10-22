@@ -1,3 +1,4 @@
+export * from './components/MunicipalityRankingCommentary';
 export * from './components/MunicipalityRankingViewTracker';
 export * from './components/TrackedMunicipalityThemeLink';
 export * from './lib/bin-municipality-values';
