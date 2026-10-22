@@ -807,7 +807,7 @@
       "key": "major-lake-area",
       "title": "主要湖沼面積の市区町村ランキング",
       "href": "/municipalities/ranking/major-lake-area",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:manufacturing-employees",

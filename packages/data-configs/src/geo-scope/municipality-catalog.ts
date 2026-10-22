@@ -964,12 +964,19 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
     reason: 'elderly-population-ratio (公開済み) と同一指標。二重公開しない',
   },
   'industrial-land-price': {
-    status: 'unknown',
-    reason: '欠損率78%・最新2005年。公開価値の監査が未了',
+    // 2026-10-22 監査 (R2 cities.json 実測): 年は 2005 のみ、1,912 行中 値ありは 426 (22%)。
+    // 20 年前の値を 2 割の自治体だけで順位にしても読者の答えにならないため公開しない。
+    status: 'unsupported',
+    reason: '2005年のみ・値ありは1,912行中426 (22%)。古く欠損が多く順位として成立しない',
   },
   'major-lake-area': {
-    status: 'unknown',
-    reason: 'ゼロ率94% (主要湖沼が無い自治体の0埋め)。順位として成立するかの監査が未了',
+    // 2026-10-22 監査 (R2 cities.json 実測): 2024 年は 1,913 行中 0 が 1,793、正の値が 120。
+    // 0 は「主要湖沼が無い」で欠損ではない。湖のある自治体だけの順位 (琵琶湖の高島市・長浜市、
+    // 宍道湖の松江市、摩周湖の弟子屈町など) は成立するので、0 を除いて公開する。
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    valuePolicy: {minExclusive: 0},
   },
   'culture-recreation-cost-all-households': {
     status: 'unknown',
@@ -1333,6 +1340,7 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
       'habitable-area',
       'habitable-area-ratio',
       'total-assessed-land-area',
+      'major-lake-area',
     ],
     defaultMetricKey: 'habitable-area-ratio',
     entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,

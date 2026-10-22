@@ -92,7 +92,8 @@ describe('municipality geo scope and catalog', () => {
     // 2026-09-16 以降に足された city entity 付き config (火災 2・自動車保険 2 等) は catalog 未登録 = unknown で、
     // 公開集合 171 には入らない (公開時に catalog へ published を書く)。
     // 2026-10-21: 令和7年国勢調査の5年間の増減 3 件を監査して published に足した (171 → 174)。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(174);
+    // 2026-10-22: 主要湖沼面積を 0 (湖が無い) を除いて公開、工業地地価は 2005 年のみのため非公開に確定 (174 → 175)。
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(175);
     for (const key of [
       'total-population',
       'fiscal-strength-index',
@@ -100,6 +101,7 @@ describe('municipality geo scope and catalog', () => {
       'vacant-housing-ratio',
       'moving-in-excess-rate-japanese',
       'agricultural-output',
+      'major-lake-area',
     ]) {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(true);
     }
@@ -110,7 +112,6 @@ describe('municipality geo scope and catalog', () => {
       'retail-store-count-alt',
       'penal-code-offenses-recognized-per-1000',
       'industrial-land-price',
-      'major-lake-area',
       'culture-recreation-cost-all-households',
     ]) {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(false);
