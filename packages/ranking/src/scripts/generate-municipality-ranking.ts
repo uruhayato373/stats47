@@ -33,6 +33,11 @@ import type {
 const REPO_ROOT = fileURLToPath(new URL('../../../..', import.meta.url));
 const MAX_VALUES_BYTES = 512 * 1024;
 const AI_CONTENT_DIR = path.join(REPO_ROOT, 'data', 'municipalities', 'ai-content');
+/**
+ * 同時に生成する key の数。直列だと公開中の 716 key で 7〜11 分かかり (1 key 0.6〜0.9 秒・ほぼ R2 からの取得待ち)、
+ * PR CI の build job (15 分) を使い切って打ち切られた (2026-10-22 PR #1170)。
+ */
+const DEFAULT_CONCURRENCY = 8;
 
 interface StatsPayload {
   metricKey: string;
@@ -264,9 +269,23 @@ async function main(): Promise<void> {
     ? [...KNOWN_MUNICIPALITY_RANKING_KEYS].sort()
     : [argValue('--key') ?? 'elderly-population-ratio'];
   const subtitleByKey = buildMunicipalityRankingSubtitles();
-  for (const rankingKey of keys) {
-    await generateForKey(rankingKey, r2Base, outputRoot, subtitleByKey);
-  }
+  const concurrency = Math.max(1, Number(argValue('--concurrency') ?? DEFAULT_CONCURRENCY) || DEFAULT_CONCURRENCY);
+  // 1 key が失敗したら、ほかの worker は手元の key を終えたところで止まる (部分成功で push させない)
+  let cursor = 0;
+  let failed = false;
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, keys.length) }, async () => {
+      while (!failed && cursor < keys.length) {
+        const rankingKey = keys[cursor++];
+        try {
+          await generateForKey(rankingKey, r2Base, outputRoot, subtitleByKey);
+        } catch (error) {
+          failed = true;
+          throw error;
+        }
+      }
+    })
+  );
 }
 
 // 直接実行時のみ main を走らせる (fetchCitiesPayload を import してテストできるようにするため)
