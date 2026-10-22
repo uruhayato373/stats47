@@ -782,8 +782,11 @@ export function isIngestableCityCode(code: string, currentCities: ReadonlyMap<st
  *      完全になるため。オリジナル(00000201CC,1917件)は master に無い 4 件が join 漏れになる。
  *      値は同一: C3109 0000020203→札幌519, #A05307 0000010201→0000020301 で確認済)
  *   - CC=12(家計)/13(生活時間) は city 表が存在しない → null
+ *   - source が初めから市区町村表 (00000202CC / 00000203CC) の市区町村専用 metric はその表を使う
+ *     (以前は null を返し、current-balance-ratio-city 等が取り込みで city=skip になっていた)
  */
-function prefToCityStatsDataId(prefId: string): string | null {
+export function prefToCityStatsDataId(prefId: string): string | null {
+  if (/^000002(02|03)\d{2}$/.test(prefId)) return prefId;
   const m = /^0000010([12])(\d{2})$/.exec(prefId);
   if (!m) return null;
   const series = m[1]; // "1"=基礎データ, "2"=社会生活統計指標

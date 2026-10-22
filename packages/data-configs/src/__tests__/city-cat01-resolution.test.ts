@@ -13,6 +13,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  prefToCityStatsDataId,
   resolveCat01ByName,
   stripCatCodePrefix,
 } from "../../scripts/page-data-batch";
@@ -81,5 +82,24 @@ describe("resolveCat01ByName", () => {
   it("空の一覧でも落ちない", () => {
     expect(resolveCat01ByName([], [], "#A03503")).toBeNull();
     expect(resolveCat01ByName(PREF, [], "#A03503")).toBeNull();
+  });
+});
+
+describe("prefToCityStatsDataId", () => {
+  it("県の基礎データ・社会生活統計指標の表を、廃置分合処理済の市区町村表へ写す", () => {
+    expect(prefToCityStatsDataId("0000010101")).toBe("0000020201");
+    expect(prefToCityStatsDataId("0000010211")).toBe("0000020311");
+  });
+
+  it("source が初めから市区町村表の市区町村専用 metric は、その表で取り込む", () => {
+    // 以前は null を返し、current-balance-ratio-city (0000020204) 等が city=skip になっていた
+    expect(prefToCityStatsDataId("0000020204")).toBe("0000020204");
+    expect(prefToCityStatsDataId("0000020304")).toBe("0000020304");
+  });
+
+  it("市区町村表の無い家計・生活時間と、社会・人口統計体系以外の表は null", () => {
+    expect(prefToCityStatsDataId("0000010112")).toBeNull();
+    expect(prefToCityStatsDataId("0000010213")).toBeNull();
+    expect(prefToCityStatsDataId("0004065882")).toBeNull();
   });
 });

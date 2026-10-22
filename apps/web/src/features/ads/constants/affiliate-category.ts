@@ -252,6 +252,17 @@ export const MUNICIPALITY_THEME_AFFILIATE_MAP: Record<string, AffiliateVertical>
   "safety-environment":   "mobility",
   "agriculture-forestry": "furusato",
   "land-area":            "housing",
+  // 2026-10-22 社会・人口統計体系の拡充で新設したテーマ。寄せ先は同じ主題の既存テーマに揃える
+  "age-structure":         "population",
+  "age-structure-by-sex":  "population",
+  "occupations":           "labor",
+  "employees":             "economy",
+  "business-sales":        "economy",
+  "municipal-revenue":     "furusato",
+  "municipal-expenditure": "furusato",
+  "welfare-facilities":    "health",
+  "housing-size-age":      "housing",
+  "housing-households":    "housing",
 };
 
 /**

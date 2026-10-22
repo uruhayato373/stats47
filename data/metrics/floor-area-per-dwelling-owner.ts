@@ -15,8 +15,16 @@ export const floorAreaPerDwellingOwner: MetricConfig = {
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
+  "citySource": {
+    "kind": "estat",
+    "statsDataId": "0000020208",
+    "cdCat01": "H213010",
+    "displayName": "社会・人口統計体系（市区町村データ・廃置分合処理済）",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
   "entities": [
-    "prefecture"
+    "prefecture",
+    "city",
   ],
   "years": {
     "years": [

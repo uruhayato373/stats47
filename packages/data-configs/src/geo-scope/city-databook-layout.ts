@@ -4,6 +4,10 @@ import {
 } from './municipality-catalog';
 
 import type { MunicipalityThemeCatalog } from './municipality-catalog';
+import {
+  SSDS_EXPANSION_DATABOOK_PICKS,
+  SSDS_EXPANSION_THEME_METRICS,
+} from './municipality-ssds-expansion';
 
 /**
  * 市区町村ページ (`/areas/<県>/cities/<市区町村>`) の「データブック」の配置。
@@ -35,6 +39,8 @@ export const CITY_DATABOOK_LAYOUT: CityDatabookLayout = {
   ],
   sectionOrder: [
     'population',
+    'age-structure',
+    'age-structure-by-sex',
     'households',
     'migration',
     'vital-statistics',
@@ -42,15 +48,23 @@ export const CITY_DATABOOK_LAYOUT: CityDatabookLayout = {
     'foreign-residents',
     'urban-structure',
     'local-finance',
+    'municipal-revenue',
+    'municipal-expenditure',
     'labor',
+    'occupations',
     'commuting',
     'commerce',
     'establishments',
+    'employees',
+    'business-sales',
     'manufacturing',
     'agriculture-forestry',
     'medical-welfare',
+    'welfare-facilities',
     'education',
     'housing',
+    'housing-size-age',
+    'housing-households',
     'safety-environment',
     'land-area',
   ],
@@ -66,6 +80,17 @@ export interface CityDatabookTheme {
   metricKeys: readonly string[];
 }
 
+const SSDS_EXPANSION_KEYS = new Set(Object.values(SSDS_EXPANSION_THEME_METRICS).flat());
+const SSDS_EXPANSION_PICKS = new Set(SSDS_EXPANSION_DATABOOK_PICKS);
+
+/**
+ * データブックに載せる指標か。社会・人口統計体系の拡充分 (2026-10-22・541 件) は選んだものだけを載せる。
+ * 全件を載せると 1 ページの HTML が 2MB を超え、ページの重さの予算 (900KB) を外れる。残りはテーマページから見る。
+ */
+export function isCityDatabookMetric(metricKey: string): boolean {
+  return !SSDS_EXPANSION_KEYS.has(metricKey) || SSDS_EXPANSION_PICKS.has(metricKey);
+}
+
 /** 節の並び順に市区町村テーマを並べる。データブックの生成とページが同じ並びを使う。 */
 export function listCityDatabookThemes(
   layout: CityDatabookLayout = CITY_DATABOOK_LAYOUT,
@@ -77,7 +102,7 @@ export function listCityDatabookThemes(
     return {
       slug,
       title: theme.title.slice(MUNICIPALITY_THEME_TITLE_PREFIX.length),
-      metricKeys: theme.metricKeys,
+      metricKeys: theme.metricKeys.filter(isCityDatabookMetric),
     };
   });
 }

@@ -274,12 +274,12 @@
     {
       "key": "municipality-ranking",
       "kind": "municipality-ranking",
-      "count": 212
+      "count": 753
     },
     {
       "key": "municipality-theme",
       "kind": "municipality-theme",
-      "count": 19
+      "count": 29
     },
     {
       "key": "page",
@@ -294,7 +294,7 @@
     {
       "key": "ranking",
       "kind": "ranking",
-      "count": 2643
+      "count": 3173
     },
     {
       "key": "survey",

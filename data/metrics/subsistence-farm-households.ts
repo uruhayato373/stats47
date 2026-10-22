@@ -1,0 +1,37 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const subsistenceFarmHouseholds: MetricConfig = {
+  "key": "subsistence-farm-households",
+  "title": "自給的農家数",
+  "unit": "戸",
+  "category": "agriculture",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000020203",
+    "cdCat01": "C310202",
+    "displayName": "社会・人口統計体系（市区町村データ・廃置分合処理済）",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "city",
+  ],
+  "years": {
+    "from": 1999,
+    "to": 2019,
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateGreens",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "isActive": true,
+};

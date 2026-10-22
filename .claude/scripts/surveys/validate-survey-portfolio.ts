@@ -129,6 +129,9 @@ function activeRankingKeysBySurvey(): Map<string, Set<string>> {
   const result = new Map<string, Set<string>>();
   for (const metric of Object.values(METRICS_REGISTRY)) {
     if (metric.isActive === false) continue;
+    // 調査ページ (/survey/<key>) は都道府県のランキングだけを並べ、readerQuestions もその中から表示する。
+    // 市区町村専用の指標を在庫に数えると、表示できない問いを要求してしまう。
+    if (!metric.entities.includes("prefecture")) continue;
     const resolution = resolveSurveyTaxonomy({ metricKeys: [metric.key] }, METRICS_REGISTRY);
     for (const survey of resolution.surveys) {
       const keys = result.get(survey.id) ?? new Set<string>();

@@ -858,6 +858,166 @@
       ]
     },
     {
+      "metricKey": "accommodation-food-services-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220847"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220847"
+        },
+        "derived": false,
+        "configHash": "2643f45eab81ac7d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:accommodation-food-services-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:accommodation-food-services-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "accommodation-food-services-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210847"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210847"
+        },
+        "derived": false,
+        "configHash": "bf8188f95a51a8b2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:accommodation-food-services-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:accommodation-food-services-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "accommodation-food-services-private-net-value-added",
+      "pageId": null,
+      "title": "業種別の純付加価値額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C620117"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C620117"
+        },
+        "derived": false,
+        "configHash": "6c9be610998d9dbb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:accommodation-food-services-private-net-value-added",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:accommodation-food-services-private-net-value-added",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "accommodation-food-services-private-sales",
+      "pageId": null,
+      "title": "売上金額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C610117"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C610117"
+        },
+        "derived": false,
+        "configHash": "7d550d8f9394cb9c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:accommodation-food-services-private-sales",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:accommodation-food-services-private-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "accountant-annual-income",
       "pageId": "ranking:accountant-annual-income",
       "title": "公認会計士・税理士の平均年収",
@@ -4357,6 +4517,46 @@
       "themes": []
     },
     {
+      "metricKey": "agriculture-forestry-fisheries-expense-municipal",
+      "pageId": null,
+      "title": "農林水産業費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320306"
+        },
+        "derived": false,
+        "configHash": "4a2ba495ec060102"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-fisheries-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-fisheries-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "agriculture-forestry-fisheries-expenses-prefecture",
       "pageId": "ranking:agriculture-forestry-fisheries-expenses-prefecture",
       "title": "農林水産業費",
@@ -4390,6 +4590,246 @@
         },
         {
           "pageId": "ranking:agriculture-forestry-fisheries-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-fisheries-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220831"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220831"
+        },
+        "derived": false,
+        "configHash": "e29fb565243c5c7e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-fisheries-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-fisheries-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210831"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210831"
+        },
+        "derived": false,
+        "configHash": "6d20e81e513e3fb9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-fisheries-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-fisheries-private-net-value-added",
+      "pageId": null,
+      "title": "業種別の純付加価値額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C620101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C620101"
+        },
+        "derived": false,
+        "configHash": "d7ca4cf58b71d3d6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-net-value-added",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-fisheries-private-net-value-added",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-fisheries-private-sales",
+      "pageId": null,
+      "title": "売上金額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C610101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C610101"
+        },
+        "derived": false,
+        "configHash": "ec1c376a7a172591"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-fisheries-private-sales",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-sales",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-fisheries-private-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220832"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220832"
+        },
+        "derived": false,
+        "configHash": "a9332e1a1161e1c5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:employees",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "agriculture-forestry-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210832"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210832"
+        },
+        "derived": false,
+        "configHash": "7a921bf91d5c107a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:agriculture-forestry-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:establishments",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:agriculture-forestry-private-establishments",
           "kind": "ranking"
         }
       ],
@@ -12180,6 +12620,126 @@
       ]
     },
     {
+      "metricKey": "apartment-dwellings",
+      "pageId": null,
+      "title": "共同住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H1403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H1403"
+        },
+        "derived": false,
+        "configHash": "67866e2b049503e8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:apartment-dwellings",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:apartment-dwellings",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "apartment-dwellings-non-wooden",
+      "pageId": null,
+      "title": "共同住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H140302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H140302"
+        },
+        "derived": false,
+        "configHash": "b191d8ed52246b06"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:apartment-dwellings-non-wooden",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:apartment-dwellings-non-wooden",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "apartment-dwellings-wooden",
+      "pageId": null,
+      "title": "共同住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H140301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H140301"
+        },
+        "derived": false,
+        "configHash": "e15ec4b673936e6d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:apartment-dwellings-wooden",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:apartment-dwellings-wooden",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "apartment-ratio",
       "pageId": "ranking:apartment-ratio",
       "title": "共同住宅比率",
@@ -12273,6 +12833,46 @@
       "consumers": [
         {
           "pageId": "ranking:apparel-retail-store-count-per-1000-alt",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "apparel-store-count",
+      "pageId": null,
+      "title": "織物・衣服・身の回り品小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H613002"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H613002"
+        },
+        "derived": false,
+        "configHash": "f73a8f5b055be1c8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:apparel-store-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:commerce",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:apparel-store-count",
           "kind": "ranking"
         }
       ],
@@ -13557,2328 +14157,6 @@
       "themes": [
         "education-culture"
       ]
-    },
-    {
-      "metricKey": "artificial-forest-area",
-      "pageId": "ranking:artificial-forest-area",
-      "title": "人工造林面積",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010102",
-          "filters": {
-            "cdCat01": "B1303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010102",
-          "cdCat01": "B1303"
-        },
-        "derived": false,
-        "configHash": "47cb299cd989347f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:forestry-timber",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:natural-environment",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:forest-coverage-woodland-economy",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:artificial-forest-area",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:forestry-timber",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:natural-environment",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "forestry-timber",
-        "natural-environment"
-      ]
-    },
-    {
-      "metricKey": "assembly-expenses-prefecture",
-      "pageId": "ranking:assembly-expenses-prefecture",
-      "title": "議会費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310301"
-        },
-        "derived": false,
-        "configHash": "c1330501b426ec06"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:assembly-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "assistance-expenditure-ratio-pref-finance",
-      "pageId": "ranking:assistance-expenditure-ratio-pref-finance",
-      "title": "扶助費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0320201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0320201"
-        },
-        "derived": false,
-        "configHash": "6d1450fdff42ce42"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:assistance-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-finance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-finance"
-      ]
-    },
-    {
-      "metricKey": "assistance-expenses-prefecture",
-      "pageId": "ranking:assistance-expenses-prefecture",
-      "title": "扶助費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310404"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310404"
-        },
-        "derived": false,
-        "configHash": "805c39a79dc08ed8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:assistance-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "associate-professor-annual-income",
-      "pageId": "ranking:associate-professor-annual-income",
-      "title": "大学准教授の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1197"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1197"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "a087939306f50064"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:associate-professor-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "athletics-stadium-count-public",
-      "pageId": "ranking:athletics-stadium-count-public",
-      "title": "陸上競技場数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040451156&fileKind=0"
-        },
-        "fetcherKey": "manual",
-        "configHash": "e823f2c2d8b8e2ed"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:athletics-stadium-count-public",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:sports-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "sports-participation"
-      ]
-    },
-    {
-      "metricKey": "auto-insurance-penetration-bodily-injury-actual",
-      "pageId": "ranking:auto-insurance-penetration-bodily-injury-actual",
-      "title": "自動車保険普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K330505"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K330505"
-        },
-        "derived": false,
-        "configHash": "7aee708444d464ef"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:auto-insurance-penetration-bodily-injury-actual",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:auto-insurance-penetration-bodily-injury-actual",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "auto-insurance-penetration-bodily-injury-fixed",
-      "pageId": "ranking:auto-insurance-penetration-bodily-injury-fixed",
-      "title": "自動車保険普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K330506"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K330506"
-        },
-        "derived": false,
-        "configHash": "233ac44fc6eabac0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:auto-insurance-penetration-bodily-injury-fixed",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:auto-insurance-penetration-bodily-injury-fixed",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "auto-liability-insurance-amount-received-per-payment",
-      "pageId": "ranking:auto-liability-insurance-amount-received-per-payment",
-      "title": "自動車損害賠償責任保険受取保険金額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K10403"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K10403"
-        },
-        "derived": false,
-        "configHash": "5c303a84ac9648f7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:auto-liability-insurance-amount-received-per-payment",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "auto-mechanic-annual-income",
-      "pageId": "ranking:auto-mechanic-annual-income",
-      "title": "自動車整備・修理従事者の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1553"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1553"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "f755322f86f80058"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:auto-mechanic-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "autolock-apartment-rate",
-      "pageId": "ranking:autolock-apartment-rate",
-      "title": "オートロック付共同住宅率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021535",
-          "filters": {
-            "cdCat02": "00",
-            "cdCat03": "0",
-            "cdCat04": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021535",
-          "cdCat02": "00",
-          "cdCat03": "0",
-          "cdCat04": "0"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat01",
-            "numeratorCodes": [
-              "1"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "9aeb95269e742f1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:autolock-apartment-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "average-age-of-first-marriage-husband",
-      "pageId": "ranking:average-age-of-first-marriage-husband",
-      "title": "平均初婚年齢（夫）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A9111"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A9111"
-        },
-        "derived": false,
-        "configHash": "3996957129cd4362"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:marriage-divorce-okinawa",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:average-age-of-first-marriage-husband",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "average-age-of-first-marriage-wife",
-      "pageId": "ranking:average-age-of-first-marriage-wife",
-      "title": "平均初婚年齢（妻）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A9112"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A9112"
-        },
-        "derived": false,
-        "configHash": "db980fb2855cb601"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:fertility-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:marriage-divorce-okinawa",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:marriage-unmarried-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:average-age-of-first-marriage-wife",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "average-broadcast-media-consumption-time-employed-man",
-      "pageId": "ranking:average-broadcast-media-consumption-time-employed-man",
-      "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0330101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0330101"
-        },
-        "derived": false,
-        "configHash": "8f35e83c80494b77"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:ict-digital-divide-composite-analysis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ict-media-consumption-gender-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:average-broadcast-media-consumption-time-employed-man",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "average-broadcast-media-consumption-time-employed-woman",
-      "pageId": "ranking:average-broadcast-media-consumption-time-employed-woman",
-      "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0330201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0330201"
-        },
-        "derived": false,
-        "configHash": "e5f756677e2a6248"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:ict-media-consumption-gender-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:average-broadcast-media-consumption-time-employed-woman",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }
