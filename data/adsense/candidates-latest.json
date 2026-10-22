@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W34",
-  "generatedAt": "2026-08-23T11:15:28.806Z",
+  "week": "2026-W42",
+  "generatedAt": "2026-10-22T23:00:30.899Z",
   "period": {
-    "periodStart": "2026-08-16",
-    "periodEnd": "2026-08-22",
+    "periodStart": "2026-10-11",
+    "periodEnd": "2026-10-17",
     "windowDays": 7
   },
-  "previousWeek": "2026-W33",
+  "previousWeek": "2026-W34",
   "limits": {
     "maxCandidates": 3,
     "activeWipLimit": 2,
@@ -16,34 +16,131 @@
   "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない)。採用は人間承認で最大1件/週",
   "candidates": [
     {
-      "id": "measurement-gap::daily",
-      "rule": "measurement-gap",
-      "key": "daily",
-      "score": 101,
+      "id": "format-low-yield::ON_PAGE@HighEndMobile",
+      "rule": "format-low-yield",
+      "key": "ON_PAGE@HighEndMobile",
+      "score": 12.3333,
       "evidence": [
         {
-          "metric": "job:daily",
-          "status": "partial"
+          "metric": "imp_rpm",
+          "current": 21,
+          "deviceMedian": 259
+        },
+        {
+          "metric": "viewability",
+          "previous": 0.1447,
+          "current": 0.2948
+        },
+        {
+          "metric": "ctr",
+          "previous": 0.0132,
+          "current": 0.0032
+        },
+        {
+          "metric": "impressions",
+          "current": 2197
         }
       ],
       "sample": {
-        "jobs": 1
+        "impressions": 2197
       },
-      "confidence": 0.95,
-      "expectedLever": "report job の取得是正 (creds / API 互換 / retry)",
-      "guardrail": "—",
-      "rollback": "—",
-      "earliestDecisionDate": "2026-09-05",
+      "confidence": 0.6,
+      "expectedLever": "低収益 format の整理提案 (Auto ads 変更は allowlist 外・提案のみ)",
+      "guardrail": "収益 guardrail。UX (INTERSTITIAL 頻度) を悪化させない",
+      "rollback": "AdSense 管理画面設定を元に戻す (人間操作)",
+      "earliestDecisionDate": "2026-10-31",
       "judgment": {
-        "day14": "2026-09-05",
-        "day28": "2026-09-19",
-        "day56": "2026-10-17"
+        "day14": "2026-10-31",
+        "day28": "2026-11-14",
+        "day56": "2026-12-12"
       },
       "pastEffect": null,
-      "confounders": [],
-      "notes": [
-        "privacy-threshold は gap に数えない (仕様上の制約)"
+      "confounders": [
+        "format 間の在庫シフト"
       ],
+      "notes": [],
+      "externalActionFlag": false
+    },
+    {
+      "id": "placement-low-viewability::MANUAL@HighEndMobile",
+      "rule": "placement-low-viewability",
+      "key": "MANUAL@HighEndMobile",
+      "score": 2.2717,
+      "evidence": [
+        {
+          "metric": "viewability",
+          "current": 0.2948,
+          "threshold": 0.5
+        },
+        {
+          "metric": "impressions",
+          "current": 2197
+        },
+        {
+          "metric": "weeks_below",
+          "current": 2
+        }
+      ],
+      "sample": {
+        "impressions": 2197,
+        "weeks": 2
+      },
+      "confidence": 0.75,
+      "expectedLever": "低 viewability 1 枠のみ移設または非表示",
+      "guardrail": "収益・他枠の viewability を悪化させない。同時に複数枠を変えない",
+      "rollback": "枠設定の revert",
+      "earliestDecisionDate": "2026-10-31",
+      "judgment": {
+        "day14": "2026-10-31",
+        "day28": "2026-11-14",
+        "day56": "2026-12-12"
+      },
+      "pastEffect": null,
+      "confounders": [
+        "lazy-load 距離との交絡"
+      ],
+      "notes": [],
+      "externalActionFlag": false
+    },
+    {
+      "id": "placement-low-viewability::MANUAL@Desktop",
+      "rule": "placement-low-viewability",
+      "key": "MANUAL@Desktop",
+      "score": 0.9561,
+      "evidence": [
+        {
+          "metric": "viewability",
+          "current": 0.4548,
+          "threshold": 0.5
+        },
+        {
+          "metric": "impressions",
+          "current": 5041
+        },
+        {
+          "metric": "weeks_below",
+          "current": 2
+        }
+      ],
+      "sample": {
+        "impressions": 5041,
+        "weeks": 2
+      },
+      "confidence": 0.75,
+      "expectedLever": "低 viewability 1 枠のみ移設または非表示",
+      "guardrail": "収益・他枠の viewability を悪化させない。同時に複数枠を変えない",
+      "rollback": "枠設定の revert",
+      "earliestDecisionDate": "2026-10-31",
+      "judgment": {
+        "day14": "2026-10-31",
+        "day28": "2026-11-14",
+        "day56": "2026-12-12"
+      },
+      "pastEffect": null,
+      "confounders": [
+        "lazy-load 距離との交絡"
+      ],
+      "notes": [],
       "externalActionFlag": false
     }
   ]

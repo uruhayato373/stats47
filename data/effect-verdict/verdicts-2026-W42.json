@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W42",
+  "decidedAt": "2026-10-22T23:00:25.740Z",
+  "assessmentContractVersion": 1,
+  "thresholdsVersion": "1.0.0",
+  "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
+  "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
+  "summary": {
+    "total": 2,
+    "byLabel": {
+      "effect/pending": 2
+    },
+    "byGuard": {
+      "insufficient-window": 2,
+      "insufficient-target": 1
+    }
+  },
+  "verdicts": [
+    {
+      "domainId": "adsense",
+      "subjectId": "ADSENSE-PLACEMENT-01",
+      "assessment": {
+        "kind": "baseline-observation",
+        "subjectId": "ADSENSE-PLACEMENT-01",
+        "domainId": "adsense",
+        "accountId": "pub-9055416085403520",
+        "deployWeek": "2026-W41",
+        "firstWeek": "2026-W42",
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "observation": {
+        "status": "pending",
+        "observedWeeks": [
+          "2026-W42"
+        ],
+        "missingWeeks": [
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "overdue": false
+      },
+      "label": "effect/pending",
+      "reason": "baseline pending: 1/4週 / review 2026-11-13",
+      "guards": [
+        {
+          "code": "insufficient-window",
+          "detail": "baseline未取得: 2026-W43, 2026-W44, 2026-W45"
+        }
+      ],
+      "target": null,
+      "before": null,
+      "after": null,
+      "delta": null,
+      "attainment": null,
+      "sources": [
+        {
+          "name": "adsense:data/adsense/history.csv",
+          "accountId": "pub-9055416085403520",
+          "firstWeek": "2026-W42",
+          "identityBasis": "restart-cohort; explicit accountId checked when available"
+        }
+      ],
+      "window": {
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "reproduceCommand": "node .claude/scripts/metrics/measure-adsense-impact.mjs --deployed 2026-10-11 --label ADSENSE-PLACEMENT-01",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-improvement",
+      "subjectId": "SEO-TITLE-CTR-EFFECT-01",
+      "label": "effect/pending",
+      "reason": "before/after 週が解決できない (snapshot 不足)",
+      "assessment": {
+        "kind": "effect-experiment"
+      },
+      "target": null,
+      "guards": [
+        {
+          "code": "insufficient-window",
+          "detail": "計測窓が確定できない"
+        },
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値が未登録"
+        }
+      ],
+      "before": null,
+      "after": null,
+      "delta": null,
+      "attainment": null,
+      "sources": [],
+      "window": {
+        "beforeWeek": "2026-W42",
+        "afterWeek": "2026-W42",
+        "elapsedWeeks": -1,
+        "notDue": true
+      },
+      "skipped": true
+    }
+  ]
+}
