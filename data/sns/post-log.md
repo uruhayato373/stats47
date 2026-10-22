@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**733 件** (最終更新: 2026-10-21)
+**736 件** (最終更新: 2026-10-22)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-22 | 📸 Instagram | ranking-quiz/whisky-consumption-expenditure | 【都道府県クイズ】ウイスキーにいちばんお金を使う県は？  A 北海道 B 愛知県 C 秋田県  ヒントは2枚目、答えは3… | [🔗](https://www.instagram.com/p/DezQ90RFY8G/) |
+| 2026-10-22 | 🧵 Threads | area/area-29000-profile | 旅先では見えにくい奈良の輪郭。 県木スギと特産古都華（いちご）、暮らしの統計を同じページで確認できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeyilomCHpX) |
+| 2026-10-22 | 🧵 Threads | ranking/private-auto-insurance-penetration-rate-vehicle | 車両保険に入っている車の割合が最も高い県は？  1位愛知59.4％、2位岐阜59％、3位三重51.9％と東海が上位。 最… | [🔗](https://www.threads.com/@stats47jp/post/Dex0xYyiguH) |
 | 2026-10-21 | 📸 Instagram | correlation-carousel/fish-pickled-consumption-expenditure--average-temperature | 【データの相関】魚介の漬物消費支出額 × 年平均気温  寒い県ほど、魚の漬物にお金を使う？  縦軸: 年平均気温（℃・2… | [🔗](https://www.instagram.com/p/DewsE6nlF61/) |
 | 2026-10-21 | 🧵 Threads | area/area-28000-profile | 兵庫を数字と地域文化の両方から見る。 県鳥コウノトリ、特産日本酒（灘五郷）、全国順位をまとめた県別ページです。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DewAkRUiHtG) |
 | 2026-10-21 | 📸 Instagram | bar-chart-race/coffee-consumption-quantity | コーヒーを最も多く買う県、18年で1位になったのは9府県。  都道府県別「コーヒー消費量」の推移（2007年→2024年… | [🔗](https://www.instagram.com/reel/Dev9cQrDsTg/) |
