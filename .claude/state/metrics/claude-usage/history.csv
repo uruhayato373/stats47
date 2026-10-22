@@ -98,3 +98,4 @@ date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_w
 2026-10-19,seo-keyword-cycle,39244701545,1,1,17,59692,0.3289585,12,5025,57799,211080,result,0,claude-sonnet-5-5,high
 2026-10-20,seo-keyword-cycle,39377878078,1,1,15,49704,0.30122250000000006,10,4282,55224,151700,result,0,claude-sonnet-5-5,high
 2026-10-20,seo-keyword-cycle,39509458261,1,1,15,43445,0.2354864,16,2945,38500,247345,result,0,claude-sonnet-5-5,high
+2026-10-22,seo-keyword-cycle,39731955718,1,1,14,60495,0.30889829999999996,10,4356,55821,156797,result,0,claude-sonnet-5-5,high
