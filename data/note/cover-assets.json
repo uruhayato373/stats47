@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T13:48:27.889Z",
+  "updatedAt": "2026-10-23T14:16:49.824Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43036,15 +43036,60 @@
               "bytes": 6571
             }
           }
+        },
+        {
+          "sha256": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n08eb33492a93/revisions/43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae.png"
+          },
+          "bytes": 1867432,
+          "id": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-9e924449d919",
+          "createdAt": "2026-10-23T14:07:16.494Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:20.071Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n08eb33492a93/inputs/4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf.json"
+              },
+              "bytes": 8749
+            },
+            "production": {
+              "id": "NCI-00383",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "9e924449d919a6768445f17f7c4813f69858e982c39df34659bcc4e2e3187810"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e",
-      "approvedRevisionId": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e",
+      "candidateRevisionId": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
+      "approvedRevisionId": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191199/rectangle_large_type_2_8bbbb6c0abf7563c88d5f332e4b8a6f3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.379Z",
-        "revisionId": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e"
+        "url": "https://assets.st-note.com/production/uploads/images/327664614/rectangle_large_type_2_ea30b3a4dda132bce2a0682d2d89a74e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:44.814Z",
+        "revisionId": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -43053,7 +43098,12 @@
         "id": "NCI-00383",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "コーラス・声楽\n1位は神奈川県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の合唱ホールと無文字の楽譜用白紙を描く。歌手・人物・顔は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n08eb33492a93 2026-10-23公開API本文照合。記事題名「【2021年版】コーラス・声楽をした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の「神奈川県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -43123,15 +43173,60 @@
               "bytes": 6508
             }
           }
+        },
+        {
+          "sha256": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0b7373c9648a/revisions/31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27.png"
+          },
+          "bytes": 1804424,
+          "id": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-37ef97418de7",
+          "createdAt": "2026-10-23T14:07:53.571Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:42.676Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n0b7373c9648a/inputs/82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa.json"
+              },
+              "bytes": 8716
+            },
+            "production": {
+              "id": "NCI-00384",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "37ef97418de764008291163e71693ddde8ebb7d94690bf2bbf74b0dac6fb2cfe"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a",
-      "approvedRevisionId": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a",
+      "candidateRevisionId": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
+      "approvedRevisionId": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191235/rectangle_large_type_2_c50c3b462b2e8f888f9635ae2a0541c8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.510Z",
-        "revisionId": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a"
+        "url": "https://assets.st-note.com/production/uploads/images/327664781/rectangle_large_type_2_c648ddcd6697abe54e6961d99ac1a2d2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:44.548Z",
+        "revisionId": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -43140,7 +43235,12 @@
         "id": "NCI-00384",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "サッカーをした人\n1位は愛知県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のサッカー場と無文字のサッカーボールを描く。選手・人は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n0b7373c9648a 2026-10-23公開API本文照合。記事題名「【2021年版】サッカーをした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -45389,15 +45489,60 @@
               "bytes": 6595
             }
           }
+        },
+        {
+          "sha256": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n250b7aab145f/revisions/e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb.png"
+          },
+          "bytes": 1761178,
+          "id": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-672dfac5d00e",
+          "createdAt": "2026-10-23T14:08:10.046Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:53.823Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n250b7aab145f/inputs/25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911.json"
+              },
+              "bytes": 8830
+            },
+            "production": {
+              "id": "NCI-00396",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "672dfac5d00e7b197eee38eae14bc6e893f0985322ede1e59fc45b10159ac1a4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08",
-      "approvedRevisionId": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08",
+      "candidateRevisionId": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
+      "approvedRevisionId": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191305/rectangle_large_type_2_aa1426cde495bb3dbf4bbbe60a6688e5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.611Z",
-        "revisionId": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08"
+        "url": "https://assets.st-note.com/production/uploads/images/327664903/rectangle_large_type_2_8ccfb30cbcc7d2ab6e1e67dee24c6487.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:45.179Z",
+        "revisionId": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -45406,7 +45551,12 @@
         "id": "NCI-00396",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "スキー・スノーボード\n1位は北海道",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の雪山に置いたスキー板とスノーボードを描く。スキーヤー・人物・動物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n250b7aab145f 2026-10-23公開API本文照合。記事題名「【2021年版】スキー・スノーボードをした人が多い県は？ 1位は北海道｜都道府県ランキング」。本文中の「北海道」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -49941,15 +50091,60 @@
               "bytes": 6491
             }
           }
+        },
+        {
+          "sha256": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ddcfb6bf233/revisions/b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a.png"
+          },
+          "bytes": 1799482,
+          "id": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-bc3d12873c84",
+          "createdAt": "2026-10-23T14:08:18.502Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:59.146Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n5ddcfb6bf233/inputs/677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf.json"
+              },
+              "bytes": 8668
+            },
+            "production": {
+              "id": "NCI-00427",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "bc3d12873c8402573780abf80bb9bf5814cbf59914a6e2d4f8e0ca3f0408ddf6"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1",
-      "approvedRevisionId": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1",
+      "candidateRevisionId": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
+      "approvedRevisionId": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191945/rectangle_large_type_2_6d5ecdd7a1b60c2b7621c5f1b8feec18.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.625Z",
-        "revisionId": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1"
+        "url": "https://assets.st-note.com/production/uploads/images/327665027/rectangle_large_type_2_3123f4f67db12f36534dc3779970a434.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:45.724Z",
+        "revisionId": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -49958,7 +50153,12 @@
         "id": "NCI-00427",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "書道をした人\n1位は佐賀県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の白紙と筆、墨のすずりを描く。人・手・書かれた漢字は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n5ddcfb6bf233 2026-10-23公開API本文照合。記事題名「【2021年版】書道をした人が多い県は？ 1位は佐賀県｜都道府県ランキング」。本文中の「佐賀県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -51411,15 +51611,60 @@
               "bytes": 6657
             }
           }
+        },
+        {
+          "sha256": "3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n7ea3a816d39b/revisions/3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f.png"
+          },
+          "bytes": 1804262,
+          "id": "3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-c23908990bba",
+          "createdAt": "2026-10-23T14:08:01.811Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1175532a06602eda335f8f3c29483326a75b42b8cfcd172d78e12ebc2d06a1f7"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:48.804Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1175532a06602eda335f8f3c29483326a75b42b8cfcd172d78e12ebc2d06a1f7",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n7ea3a816d39b/inputs/1175532a06602eda335f8f3c29483326a75b42b8cfcd172d78e12ebc2d06a1f7.json"
+              },
+              "bytes": 8810
+            },
+            "production": {
+              "id": "NCI-00436",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "c23908990bba163fa7dd5865b6cbdf7cf16f02f18c36b9381b098228c4a138ea"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "31a9698aea316d07964c0e35903b6e4ee61f9454989d8372c97f376f9c70f0c2",
-      "approvedRevisionId": "31a9698aea316d07964c0e35903b6e4ee61f9454989d8372c97f376f9c70f0c2",
+      "candidateRevisionId": "3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f",
+      "approvedRevisionId": "3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192120/rectangle_large_type_2_812e347fc2910ff058109a814640095e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.628Z",
-        "revisionId": "31a9698aea316d07964c0e35903b6e4ee61f9454989d8372c97f376f9c70f0c2"
+        "url": "https://assets.st-note.com/production/uploads/images/327665188/rectangle_large_type_2_daa90deb41539157577b5d9256fb8b0d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:47.219Z",
+        "revisionId": "3699c874ce2a3968b6786c8bb86d845de1f5a8f2d136a81e06e68187e817279f"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -51428,7 +51673,12 @@
         "id": "NCI-00436",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "旅行・行楽をした人\n1位は埼玉県",
+          "subline": "2001年・15歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の国内旅行を連想する駅のホームと無地の旅行かばんを描く。人物・地図は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n7ea3a816d39b 2026-10-23公開API本文照合。記事題名「【2001年版・15歳以上】旅行・行楽をした人が多い県は？ 1位は埼玉県｜都道府県ランキング」。本文中の「埼玉県」「2001」「15歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -52152,15 +52402,60 @@
               "bytes": 6465
             }
           }
+        },
+        {
+          "sha256": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n88d2a55a9e36/revisions/05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1.png"
+          },
+          "bytes": 1656092,
+          "id": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d618d8ec37e0",
+          "createdAt": "2026-10-23T14:08:37.549Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:10:19.879Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n88d2a55a9e36/inputs/0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49.json"
+              },
+              "bytes": 8710
+            },
+            "production": {
+              "id": "NCI-00441",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d618d8ec37e00fa2b9d5efaf32ca6769cf648d8bddf2fcbc6cdd3ae2c0f3de16"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c",
-      "approvedRevisionId": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c",
+      "candidateRevisionId": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
+      "approvedRevisionId": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192237/rectangle_large_type_2_2316ceb16540ab15e3175809e0ed384e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.723Z",
-        "revisionId": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c"
+        "url": "https://assets.st-note.com/production/uploads/images/327665341/rectangle_large_type_2_f735fca8c139559b61ca0774b2095ba6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:47.160Z",
+        "revisionId": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -52169,7 +52464,12 @@
         "id": "NCI-00441",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "柔道をした人\n1位は山口県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の柔道場の畳と畳の上に丁寧に畳んだ無地の柔道着を描く。柔道家・人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n88d2a55a9e36 2026-10-23公開API本文照合。記事題名「【2021年版】柔道をした人が多い県は？ 1位は山口県｜都道府県ランキング」。本文中の「山口県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -52239,15 +52539,60 @@
               "bytes": 6529
             }
           }
+        },
+        {
+          "sha256": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n8df3cf170cf4/revisions/47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a.png"
+          },
+          "bytes": 1860112,
+          "id": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-695eaf2aad05",
+          "createdAt": "2026-10-23T14:07:26.381Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:25.871Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n8df3cf170cf4/inputs/3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4.json"
+              },
+              "bytes": 8782
+            },
+            "production": {
+              "id": "NCI-00442",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "695eaf2aad05cbf097f9bd59d11871aa1f57e9f1d3e496e328a7f2c9f438cfda"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e",
-      "approvedRevisionId": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e",
+      "candidateRevisionId": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
+      "approvedRevisionId": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192302/rectangle_large_type_2_af0f480b9151589e464157dcd32bb89d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.490Z",
-        "revisionId": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e"
+        "url": "https://assets.st-note.com/production/uploads/images/327665463/rectangle_large_type_2_e6a4f439fa70e0aef5f688a068024af0.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:47.345Z",
+        "revisionId": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -52256,7 +52601,12 @@
         "id": "NCI-00442",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ソフトボールをした人\n1位は山口県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のソフトボールとグローブ、無人のグラウンドを描く。選手・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n8df3cf170cf4 2026-10-23公開API本文照合。記事題名「【2021年版】ソフトボールをした人が多い県は？ 1位は山口県｜都道府県ランキング」。本文中の「山口県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -53497,15 +53847,60 @@
               "bytes": 6522
             }
           }
+        },
+        {
+          "sha256": "4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-na21015ac366d/revisions/4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0.png"
+          },
+          "bytes": 1966395,
+          "id": "4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-3ceb9c6928a3",
+          "createdAt": "2026-10-23T14:08:27.568Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cd12e14638027d22ef99f54559bd6649cce80a89bb1fcbc0c3c845eebf90384a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:10:10.076Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cd12e14638027d22ef99f54559bd6649cce80a89bb1fcbc0c3c845eebf90384a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-na21015ac366d/inputs/cd12e14638027d22ef99f54559bd6649cce80a89bb1fcbc0c3c845eebf90384a.json"
+              },
+              "bytes": 8800
+            },
+            "production": {
+              "id": "NCI-00450",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "3ceb9c6928a322b8d9f4ec5955103724e4267309b1e7f07212b5b457b6ecb9e7"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c082440b11cb26a376a97eaee9ab303db5ec0493b8a60b2821653ae0101915da",
-      "approvedRevisionId": "c082440b11cb26a376a97eaee9ab303db5ec0493b8a60b2821653ae0101915da",
+      "candidateRevisionId": "4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0",
+      "approvedRevisionId": "4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192483/rectangle_large_type_2_7a427ef76f4c692f359008c7fcc38933.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.636Z",
-        "revisionId": "c082440b11cb26a376a97eaee9ab303db5ec0493b8a60b2821653ae0101915da"
+        "url": "https://assets.st-note.com/production/uploads/images/327665618/rectangle_large_type_2_5796b1aef8cb2c75e700469644ccdeca.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:48.530Z",
+        "revisionId": "4bb9ddce7ffcb2b7eb7952c38d2fe534213a6f5609bcc7d3977f211cbbdb7ef0"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -53514,7 +53909,12 @@
         "id": "NCI-00450",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "剣道をした人\n山形県・長野県が同率1位",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の剣道場に置かれた無地の竹刀と防具を描く。剣士・人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na21015ac366d 2026-10-23公開API本文照合。記事題名「【2021年版】剣道をした人が多い県は？ 1位は山形県・長野県｜都道府県ランキング」。本文中の「山形県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -53721,15 +54121,60 @@
               "bytes": 6512
             }
           }
+        },
+        {
+          "sha256": "8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-na2720854b1d9/revisions/8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af.png"
+          },
+          "bytes": 1945356,
+          "id": "8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-a5828f013db4",
+          "createdAt": "2026-10-23T14:07:44.700Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2ae314cb44abef8585796fcc101f3a8d27c309096d3beb8cf4d126c4d8b7d401"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:36.628Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2ae314cb44abef8585796fcc101f3a8d27c309096d3beb8cf4d126c4d8b7d401",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-na2720854b1d9/inputs/2ae314cb44abef8585796fcc101f3a8d27c309096d3beb8cf4d126c4d8b7d401.json"
+              },
+              "bytes": 8722
+            },
+            "production": {
+              "id": "NCI-00452",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "a5828f013db4a4cfff649295de64623b18edc6719b24fe6b5bbfa0f49e3b2910"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d41338f808a0fba9cb3061ce40e9eb08c575d950589ca67f561045147f3e716d",
-      "approvedRevisionId": "d41338f808a0fba9cb3061ce40e9eb08c575d950589ca67f561045147f3e716d",
+      "candidateRevisionId": "8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af",
+      "approvedRevisionId": "8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192550/rectangle_large_type_2_b482dd49aa1cff8299a9654ea0979b53.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.491Z",
-        "revisionId": "d41338f808a0fba9cb3061ce40e9eb08c575d950589ca67f561045147f3e716d"
+        "url": "https://assets.st-note.com/production/uploads/images/327665756/rectangle_large_type_2_1125e0100c2ad48d0398150c0b40d20b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:49.354Z",
+        "revisionId": "8be2ddbd4945da0a30003ba467fc7fd8926322d715d272a38454356b7a65c1af"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -53738,7 +54183,12 @@
         "id": "NCI-00452",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "キャンプをした人\n1位は北海道",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のキャンプ場に無地のテントとランタンを描く。人物・動物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na2720854b1d9 2026-10-23公開API本文照合。記事題名「【2021年版】キャンプをした人が多い県は？ 1位は北海道｜都道府県ランキング」。本文中の「北海道」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -56025,15 +56475,60 @@
               "bytes": 6614
             }
           }
+        },
+        {
+          "sha256": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nda04ec118c93/revisions/bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea.png"
+          },
+          "bytes": 1804469,
+          "id": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-cc26bcb935cf",
+          "createdAt": "2026-10-23T14:07:34.881Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:09:31.337Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nda04ec118c93/inputs/80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442.json"
+              },
+              "bytes": 8764
+            },
+            "production": {
+              "id": "NCI-00468",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "cc26bcb935cf946014dc75b324970ac1aa8566db44ef01802710f64aebebc92c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1",
-      "approvedRevisionId": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1",
+      "candidateRevisionId": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
+      "approvedRevisionId": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193036/rectangle_large_type_2_077d5258b9e485f455a2a8c5734e2c32.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.484Z",
-        "revisionId": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1"
+        "url": "https://assets.st-note.com/production/uploads/images/327665916/rectangle_large_type_2_c20ed6044f288969781fff5ffdc5bd11.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:16:49.795Z",
+        "revisionId": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -56042,7 +56537,12 @@
         "id": "NCI-00468",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "日帰りの行楽\n1位は愛知県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に日帰りの行楽を連想する無人の公園と無地の小さなデイバッグを描く。宿泊施設、人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nda04ec118c93 2026-10-23公開API本文照合。記事題名「【2021年版】行楽（日帰り）をした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
