@@ -303,6 +303,7 @@ updated: 2026-10-19
 - **次**: CSS のハッシュが変わる次のデプロイで、reset step のログが新しいハッシュを確認してから全パージしたこと、route smoke の
   `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す (ほかの検査を緩めない)。
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
+- **2026-10-23 本番確認 (行削除は backlog-loop)**: main の `deploy-workers.yml` に `reset-worker-cache-after-deploy` があり、デプロイ run 39903739430 で「Reset Workers Cache after deploy」「Warm cache」とも success。カードは完了。
 
 ### [RECORD-SCHEMA-CONTRACT-01] 判断に使う記録に形の契約 (JSON Schema) と、書き込む前の検査を入れる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-20] [領域:管理]
@@ -745,6 +746,7 @@ updated: 2026-10-19
 - **経緯**: 2026-10-17 の学生ペルソナ調査 (AI シミュレーション + Web 検索)。CSV をダウンロードする人の用途は学習が最多 (2026-W41 `data/ga4/snapshots/2026-W41/download-purpose.csv`: 学習 33・仕事 19・個人 10)。卒論・レポートでは出典の書き方と加工の表記が詰まる点で、e-Stat の利用規約 (https://www.e-stat.go.jp/terms-of-use) が表記の例を示している。CSV の出典行の有無はまだ確認していない。
 - **次**: ① ダウンロード route が出力する CSV を 3 指標ぶん取得し、調査名・表名・年次・取得日・加工の表記があるかを確認する ② 無ければ provenance から出典行を足す。
 - **完了条件**: 代表 3 指標の CSV に出典と加工の表記が入っていることを、出力の実物で確認した。
+- **2026-10-23 本番確認**: `https://stats47.jp/api/ranking/total-population/download?format=csv` の末尾に指標・出典 (社会・人口統計体系と原典)・統計の取得元 (e-Stat)・加工・掲載ページ・作成日が入っている。
 
 ### [NOTE-LEDGER-DUPLICATE-ENTRIES-01] note 記事台帳の重複エントリを解消し、一意性を検査に入れる
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-17] [領域:商品]
@@ -1396,6 +1398,7 @@ updated: 2026-10-19
 - **事象**: リンク監査 #752 (2026-10-03) でブログ本文に HTTP 410 のリンクが 5 件 (`/ranking/elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`・`prefectural-income-per-capita`・`tourism-resource-count`、各 1 記事)。
 - **手順**: #752 本文の是正手順どおり、`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (無ければ `to: null`) を足し、`fix-broken-internal-links.mjs --apply` で置き換えて公開する。
 - **完了条件**: 次の週次リンク監査で 410 が 0 件になり #752 が自動で閉じる。
+- **2026-10-23 確認**: #752 (10-17) の 410 は 3 件 (`elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`、いずれも市区町村専用の指標) に減っていて、参照元の 3 記事 (R2 の article.md と本番 HTML) にはもうリンクが無い。次の週次リンク監査 (日曜) で #752 が閉じるかを見る。
 
 ### [OGP-NOTE-COVER-MISSING-01] OGP 監査で note カバー画像 103 件が欠落のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
@@ -1403,6 +1406,7 @@ updated: 2026-10-19
 - **事象**: OGP 画像の週次監査 #814 (2026-10-03) で、自動修復後も note-cover が 103 件 missing (例: 12-fiscal-peer-comparison ほか公務員シリーズ)。note カバーの正本は 2026-10-02 に `data/note/cover-assets.json` へ移っており (`note-image-assets.md`)、監査が旧経路の画像を探している可能性がある。
 - **次**: [仮説] 監査の参照先が旧経路のまま。検証: `ogp-image-audit` が note-cover をどこで探すかを読み、`cover-assets.json` の版と突き合わせる。監査側の誤りなら監査を直し、実際の欠落なら `note:assets` の手順で補う。
 - **完了条件**: 次の週次 OGP 監査で note-cover の missing が 0 件。
+- **2026-10-23 確認**: 最新の #814 (10-18) に note-cover の欠落は出ていない (解消)。代わりに ranking の OGP 456 件・カード 956 件が「更新必要」のまま残る。週次の自動修復は 1 回 500 件が上限で追いつかず、`ogp-image-audit-weekly.yml` は 10-10・10-17・10-18 と失敗していた。2026-10-23 に `max_generate=1000` で手動起動した (run 39906938780)。**次**: この run の結果で更新必要が 0 になったかを確かめ、0 なら #814 が閉じる。残れば同じ入力でもう一度動かす。
 
 ### [NOTE-COVER-DELIVERY-VERIFY-01] 文字込み生成カバーの配信検証をnote側の減色に対応させる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-14] [領域:商品]
@@ -1459,6 +1463,7 @@ updated: 2026-10-19
 - **事象**: テーマ品質監査 #1069 (2026-10-05) で `/themes/consumer-prices` (幅 1440) が HTTP 503・h1 の待機タイムアウト・チャート 2 つ欠落 (theme-cpi-heatmap・theme-cpi-profile)。
 - **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
 - **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
+- **2026-10-23 確認**: `/themes/consumer-prices` は Googlebot UA で 3 回とも 200 (3.6〜6.8 秒)。チャートの live 監査は 10-21〜23 success で、CPI の R2 は 47 県・13 年分ある。次のテーマ品質監査で #1069 が閉じるかを見る。
 
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
@@ -1800,7 +1805,7 @@ updated: 2026-10-19
 - **事象 (2026-10-20 実測)**: `/blog/livable-prefecture-composite-ranking` (GSC 2026-W41 で 8,214 表示・順位 6.7) の図 `data/composite-ranking` は、本文では 8 指標の総合スコア (1 位福井 79.9 点・2 位富山 78.0 点) を示すのに、R2 の `composite-ranking.json` と `.source.json` は `per-capita-kenmin-shotoku-h27` (1 人当たり県民所得 2020 年、1 位東京 5,214 千円) を指している。図の中身が本文と違うか、系譜の後付け (backfill) で取り違えた可能性がある。
 - **次**: ① 公開中の `composite-ranking.svg` の表示値を見て、図そのものが所得なのか総合スコアなのかを確かめる ② 総合スコアなら、本文の採点方法 (8 指標のパーセンタイル平均) から `kind: calculated` の source.json と data json を作り直す。所得なら図を総合スコアに作り直す。値は本文の採点表と一致させる。
 - **完了条件**: 図・data json・source.json・本文の 1 位〜3 位が一致し、`quality-gate.mjs` が pass。title 変更 (`SEO-CTR-CANDIDATES-01` の候補) とは別に直す。
-
+- **2026-10-23 作業中**: article-writer が改稿中 (`MANUFACTURING-ZONE-CHART-LINEAGE-01` と同じ担当)。下書きは worktree `.claude/worktrees/agent-a29552f5a28826a8e` の `contents/blog/<slug>/` (未コミット)。critic PASS と quality-gate blocker 0 を確かめてから、本 worktree の contents/blog へ移して develop へ push し、本番反映のデプロイを行う (改稿は prerender なので R2 だけでは出ない)。
 
 ### [EFFECT-GSC-PAGE-PREFIX-MATCH-01] 効果判定の `[gsc-page:]` が前方一致で、別のページの実績が混ざる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:管理]
@@ -1818,7 +1823,7 @@ updated: 2026-10-19
 - **事象 (2026-10-20 実測)**: `/blog/manufacturing-aichi-dominance` の図 `data/industrial-zone-ranking` は、R2 に `.json` が無く (404)、`.source.json` は `derived r2:app/ranking/manufacturing-shipment-amount/values.json` だけで工業地帯の範囲を持たない。本文の「中京工業地帯 (岐阜・愛知・三重) 77.1 兆円」は公開値 2023 年の合計と一致するが、「京浜工業地帯 57.7 兆円」は東京+神奈川 27 兆円・+埼玉 42 兆円のどちらとも合わない。検索語「工業地帯 ランキング」(28 日 161 表示) で入る記事。
 - **次**: ① 各工業地帯・工業地域の範囲 (どの都府県を含めるか) を出典つきで決め、`kind: calculated` の source.json (inputs と formula) と data json を作る ② 京浜の値を本文と図で直す ③ 他の工業地帯の値も同じ式で照合する。
 - **完了条件**: 図・data json・source.json・本文の値が公開値の合計と一致し、`quality-gate.mjs` が pass。
-
+- **2026-10-23 作業中**: `LIVABLE-COMPOSITE-CHART-DATA-01` と同じ担当・同じ worktree (`.claude/worktrees/agent-a29552f5a28826a8e`) で改稿中。
 
 ### [CONTENT-FOOD-TRIVIA-01] 検索クリックの 31% を占める食の消費量の雑学で、需要がありまだ無い品目のランキング・ブログを足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:サイト]
@@ -1874,6 +1879,7 @@ updated: 2026-10-19
   | 切り口が違うので残す候補 (相関・閾値・地図) | `fertility-fiscal-nexus` / `udon-soba-food-culture-prefecture-map` / `inpatient-rate-aging-burden` / `minimum-wage-1000yen-prefecture` と `minimum-wage-increase-rate-prefecture-gap` / `tuna-consumption-medical-expense-correlation` / `vacant-housing-aging-correlation` / `black-tea-income-gap` |
 - **停止条件**: 主題が同じでも切り口が違う記事 (相関・地域別・県別シリーズ) はまとめない。301 は 1 組ずつ本番で確かめる。
 - **完了条件**: 重複の組の一覧と、それぞれの処置 (301・残す理由) が記録され、301 が本番で効いている。
+- **2026-10-23 確認 (行削除は backlog-loop)**: 3 組とも 2026-10-08〜09 に統合済み。本番で統合元 3 本は 301 で残す側へ移り、残す側は 200。`app/blog/all.json` に統合元は無い。上の「実行順 (案・未適用)」は古い記述。残る比較は `fertility-rate-prefecture-gap` と `total-fertility-rate` の組だけ。
 
 ### [SNS-REFERRAL-MEASURE-01] X・Instagram・Threads からサイトへの送客を流入元別に毎月測り、SNS 領域の構えを判断する材料にする
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:SNS]
@@ -2138,7 +2144,7 @@ updated: 2026-10-19
 - **事象**: stats47 の配信先は Cloudflare Workers (OpenNext) だが、`cc-estat-18-cache-r2` と `cc-estat-19-skill-pipeline` の本文に「Cloudflare Pages」の表記が残っている (2026-10-07、連載の最終回 cc-estat-20 を書き直した writer が報告)。cc-estat-19 のトークン作成例には、使っていない D1 の Edit 権限も含まれている (cc-estat-20 の critic が報告)。cc-estat-18 の `wrangler r2 object put` の例には `--remote` が無く、wrangler 4.148.0 ではローカルに書いてしまう。`remote = true` のときは `preview_bucket_name` を外す注意も要る (cc-estat-20 の writer がローカルで再現)。cc-estat-20 も本文は Workers に直したが、タグは未登録の `CloudflareWorkers` にすると 410 になるため `CloudflarePages` のままにしてある。記事の tags の `CloudflarePages` を `CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成が要る (未登録のタグは 410 になる)。
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
-
+- **2026-10-23 作業中**: article-writer が改稿中 (`BLOG-TEXT-CHART-CONFLICT-20261006` の 3 記事と同じ担当)。下書きは worktree `.claude/worktrees/agent-a156c49e07097336b` の `contents/blog/<slug>/` (未コミット)。critic PASS を確かめてから push・デプロイする。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
@@ -2196,6 +2202,7 @@ updated: 2026-10-19
 - **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
 - **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
 - **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
+- **2026-10-23 作業中**: `BLOG-CC-ESTAT-WORKERS-01` と同じ担当・同じ worktree (`.claude/worktrees/agent-a156c49e07097336b`) で 3 記事を改稿中。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
@@ -3099,6 +3106,7 @@ updated: 2026-10-19
   丸める前の値で合計を示すための精度なので、読者向けの表示を丸めるかは `geo-analysis-standards.md` と合わせて決める。
   ② 内部用語 (coverage・SHICODE・ファイル名) の言い換え。③ 凡例の色見本・「灰色は 0 人」と「空白は 0 と断定できない」の矛盾。
   ④ `/geo/datasets/A03` の初期表示が中部圏だけ。⑤ `/geo` の地図プレビューの駅名の重なり。⑥ 1440px で地図が読み込み中のまま。
+- **2026-10-23 本番の再確認**: 残る内部用語は、`/areas/<県>/landslide-exposure` の計算方法の文 (`SHICODE`・`A33-25`・`P05-22` などの原典 ID)、`/geo/population-land-price`・`/geo/population-flood-risk` の「coverage」、`/geo/datasets/A03` のファイル名 (topojson)、`/geo/layers/population-mesh` の「灰色は」の注記。原典 ID は Geo 分析の定義データ (R2 の analysis snapshot の method 文) にあり、`geo-analysis-standards.md` の「入力を辿れる」要件と合わせて読者向けの言い方を決める必要がある。
 
 ### [CHART-AXIS-READABILITY-01] グラフの軸・凡例・ラベルがスマホで読めない、欠ける、単位が無い
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -4648,6 +4656,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   既存の compareNationalAvg 付き指標にも、全国値が県の平均と違う率の指標が含まれていないかは未確認。
 - **次**: 全国値 (00000) がある指標はそれを使い、無い指標は表示しないか「47 県の平均」と書く。既存の compareNationalAvg 付き指標を棚卸しする。
 - **完了条件**: 全国平均として出る値が全国値と一致するか、47 県の平均であることが画面に書かれている。
+- **2026-10-23 本番確認**: R2 `app/areas/13000/databook.json` に `nationalAvgKind` が national 30 件・prefecture-mean 71 件で焼かれている。
 
 ### [JAPAN-METRIC-UNIT-AND-RATIO-01] /japan で意味を持たない昼夜間人口比率と、合計特殊出生率の単位「人」を直す
 
