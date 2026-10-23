@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-10-20
- * 件数: blog 607 / tag 69 / survey 149
+ * 最終生成日: 2026-10-23
+ * 件数: blog 608 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -379,6 +379,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "municipalities-without-general-hospitals", lastModified: "2026-07-16" },
   { slug: "municipalities-without-schools", lastModified: "2026-07-16" },
   { slug: "municipality-count-prefecture-gap", lastModified: "2026-08-29" },
+  { slug: "municipality-population-change-census-2025", lastModified: "2026-10-23" },
   { slug: "municipality-population-decline-tiers", lastModified: "2026-07-16" },
   { slug: "musical-instrument-expenditure-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "nagano-food-culture", lastModified: "2026-07-10" },
@@ -645,7 +646,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "エンゲル係数", lastModified: "2026-09-05" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
-  { tagKey: "人口減少", lastModified: "2026-09-30" },
+  { tagKey: "人口減少", lastModified: "2026-10-23" },
   { tagKey: "住宅", lastModified: "2026-08-29" },
   { tagKey: "健康", lastModified: "2026-08-28" },
   { tagKey: "共働き", lastModified: "2026-08-28" },
@@ -654,7 +655,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "北海道", lastModified: "2026-10-09" },
   { tagKey: "医療", lastModified: "2026-08-29" },
   { tagKey: "医療費", lastModified: "2026-09-05" },
-  { tagKey: "国勢調査", lastModified: "2026-09-30" },
+  { tagKey: "国勢調査", lastModified: "2026-10-23" },
   { tagKey: "地名", lastModified: "2026-07-17" },
   { tagKey: "地域差", lastModified: "2026-07-10" },
   { tagKey: "地域格差", lastModified: "2026-07-12" },
@@ -663,12 +664,13 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "家計", lastModified: "2026-08-29" },
   { tagKey: "家計調査", lastModified: "2026-09-06" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
-  { tagKey: "市区町村", lastModified: "2026-09-30" },
+  { tagKey: "市区町村", lastModified: "2026-10-23" },
   { tagKey: "年収", lastModified: "2026-09-05" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
   { tagKey: "教育", lastModified: "2026-09-05" },
   { tagKey: "教育格差", lastModified: "2026-09-05" },
   { tagKey: "教育費", lastModified: "2026-08-28" },
+  { tagKey: "東京都", lastModified: "2026-10-23" },
   { tagKey: "東北", lastModified: "2026-07-12" },
   { tagKey: "格差", lastModified: "2026-09-05" },
   { tagKey: "消費", lastModified: "2026-09-05" },

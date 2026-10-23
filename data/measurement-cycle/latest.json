@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W41",
-  "asOf": "2026-10-11",
-  "generatedAt": "2026-10-16T23:47:39.752Z",
+  "week": "2026-W42",
+  "asOf": "2026-10-18",
+  "generatedAt": "2026-10-22T23:00:30.554Z",
   "sources": {
     "ga4": {
       "status": "ok",
-      "periodStart": "2026-09-13",
-      "periodEnd": "2026-10-10",
+      "periodStart": "2026-09-20",
+      "periodEnd": "2026-10-17",
       "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
     },
     "customDimensions": {
@@ -21,15 +21,15 @@
     },
     "improvements": {
       "status": "ok",
-      "detail": "active 8 件"
+      "detail": "active 10 件"
     },
     "effectVerdicts": {
       "status": "ok",
-      "detail": "verdicts-2026-W41.json"
+      "detail": "verdicts-2026-W42.json"
     }
   },
   "kpiTree": {
-    "compareWeek": "2026-W37",
+    "compareWeek": "2026-W38",
     "nodes": [
       {
         "id": "weekly-revenue",
@@ -58,7 +58,7 @@
         "status": "unmeasurable",
         "value": null,
         "previous": null,
-        "note": "ココナラ 判定不能（最終観測 2026-10-01 が週より前） / KDP 判定不能（日別の観測 0/7 日） / note 判定不能（最終観測 2026-09-30 が週より前）",
+        "note": "KDP 判定不能（日別の観測 1/7 日） / note 判定不能（2026-09 の締め額が読めない）",
         "improvements": [
           "NOTE-KAKEI-REDESIGN-EFFECT-01",
           "NOTE-CIRCULATION-PILOT-01"
@@ -79,9 +79,10 @@
         },
         "focus": true,
         "status": "ok",
-        "value": "12263",
-        "previous": "7503",
+        "value": "13207",
+        "previous": "8810",
         "improvements": [
+          "SEO-TITLE-CTR-EFFECT-01",
           "THEME-EXPANSION-EFFECT-01"
         ]
       },
@@ -100,8 +101,8 @@
         },
         "focus": false,
         "status": "ok",
-        "value": "44662",
-        "previous": "36760",
+        "value": "44550",
+        "previous": "40807",
         "improvements": []
       },
       {
@@ -116,7 +117,7 @@
         "status": "pending",
         "value": null,
         "previous": null,
-        "note": "再開 (2026-10-11) 前の週 2026-W38・2026-W39・2026-W40・2026-W41 を含む。再開後 4 週は 2026-W42 から数える。停止前 W30〜W33 は ¥22 (自動広告込み)",
+        "note": "再開 (2026-10-11) 前の週 2026-W39・2026-W40・2026-W41 を含む。再開後 4 週は 2026-W42 から数える。停止前 W30〜W33 は ¥22 (自動広告込み)",
         "improvements": [
           "ADSENSE-PLACEMENT-01"
         ]
@@ -131,10 +132,11 @@
         "source": "GA4 internal-transitions.csv (referrer 集計)",
         "focus": false,
         "status": "ok",
-        "value": "8.6%",
-        "previous": null,
+        "value": "9.3%",
+        "previous": "7.6%",
         "improvements": [
-          "BLOG-SRCLINK-01"
+          "BLOG-SRCLINK-01",
+          "RELATED-ARTICLES-EFFECT-01"
         ]
       },
       {
@@ -147,9 +149,9 @@
         "source": "GA4 ga4-affiliate-history.csv + ASP 確定成果",
         "focus": false,
         "status": "partial",
-        "value": "GA4 7日 imp 4465・click 4",
+        "value": "GA4 7日 imp 3541・click 4",
         "previous": null,
-        "note": "最終観測 2026-10-10。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
+        "note": "最終観測 2026-10-17。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
         "improvements": [
           "AFF-RESOLUTION-EFFECT-01",
           "AFF-IMPRESSION-ROUTING-01"
@@ -165,8 +167,8 @@
         "source": "GA4 landing-context.csv",
         "focus": false,
         "status": "ok",
-        "value": "3828",
-        "previous": null,
+        "value": "4250",
+        "previous": "3200",
         "improvements": []
       },
       {
@@ -179,9 +181,9 @@
         "source": "data/ranking/integrity-audit.json",
         "focus": true,
         "status": "ok",
-        "value": "99.1% (2435/2456)",
-        "previous": null,
-        "note": "監査 2026-10-10・不合格 recipe.unbaked 21",
+        "value": "99.2% (2439/2460)",
+        "previous": "99.5%",
+        "note": "監査 2026-10-17・不合格 recipe.unbaked 21",
         "improvements": []
       },
       {
@@ -194,7 +196,7 @@
         "source": "data/{psi,cloudflare}/history.csv",
         "focus": true,
         "status": "ok",
-        "value": "PSI モバイル中央値 75・Workers error 0.1%",
+        "value": "PSI モバイル中央値 74・Workers error 0.1%",
         "previous": null,
         "improvements": []
       },
@@ -208,7 +210,7 @@
         "source": "data/cloudflare/ + claude-usage/history.csv",
         "focus": true,
         "status": "ok",
-        "value": "閾値違反 24 件・R2 保存 34.152 GB",
+        "value": "閾値違反 21 件・R2 保存 35.159 GB",
         "previous": null,
         "improvements": []
       },
@@ -222,24 +224,26 @@
         "source": "data/measurement-cycle/latest.json",
         "focus": true,
         "status": "degraded",
-        "value": "10/14",
+        "value": "8/11",
         "previous": null,
-        "note": "欠測・古い・認証切れ: sns, a8(collection_failed), kdp(auth_required), coconala(auth_required)",
+        "note": "欠測・古い・認証切れ: sns, gsc(auth_required), kdp(auth_required)",
         "improvements": [
           "MEASUREMENT-AUTH-RESTORE-01"
         ]
       }
     ],
     "improvements": {
-      "active": 8,
+      "active": 10,
       "maxActive": 10,
       "unlinked": [],
       "noTarget": [
         "AFF-IMPRESSION-ROUTING-01",
         "ADSENSE-PLACEMENT-01",
+        "SEO-TITLE-CTR-EFFECT-01",
         "BLOG-SRCLINK-01",
         "THEME-EXPANSION-EFFECT-01",
-        "NOTE-CIRCULATION-PILOT-01"
+        "NOTE-CIRCULATION-PILOT-01",
+        "RELATED-ARTICLES-EFFECT-01"
       ]
     },
     "focusWithoutImprovements": [
@@ -249,9 +253,15 @@
     ]
   },
   "engine": {
-    "verdictsWeek": "2026-W41",
+    "verdictsWeek": "2026-W42",
     "byDomain": {
       "adsense": {
+        "subjects": 1,
+        "byLabel": {
+          "effect/pending": 1
+        }
+      },
+      "gsc-improvement": {
         "subjects": 1,
         "byLabel": {
           "effect/pending": 1
@@ -259,9 +269,16 @@
       }
     },
     "gsc": {
-      "active": 0,
+      "active": 1,
       "judgeable": 0,
-      "missing": [],
+      "missing": [
+        {
+          "id": "SEO-TITLE-CTR-EFFECT-01",
+          "missing": [
+            "[target: +N clicks]"
+          ]
+        }
+      ],
       "outOfScope": [
         "THEME-EXPANSION-EFFECT-01"
       ]
@@ -270,49 +287,48 @@
   "operations": {
     "psi": {
       "status": "ok",
-      "latestDate": "2026-10-11",
+      "latestDate": "2026-10-18",
       "daysInWindow": 7,
-      "mobileMedianScore": 75,
-      "urlsWithErrors": 28,
+      "mobileMedianScore": 74,
+      "urlsWithErrors": 31,
       "urlsMeasured": 38,
       "measurementFailures": 0,
       "worstMobile": [
         {
+          "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+          "score": 51,
+          "lcpMs": 10061
+        },
+        {
           "url": "https://stats47.jp/themes/population-dynamics",
-          "score": 40,
-          "lcpMs": 8551
+          "score": 60,
+          "lcpMs": 3601
         },
         {
-          "url": "https://stats47.jp/ranking/total-population",
-          "score": 54,
+          "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+          "score": 60,
           "lcpMs": 4801
-        },
-        {
-          "url": "https://stats47.jp/",
-          "score": 57,
-          "lcpMs": 5950
         }
       ]
     },
     "cloudflare": {
       "status": "ok",
-      "latestDate": "2026-10-11",
+      "latestDate": "2026-10-18",
       "daysInWindow": 7,
-      "workersRequests": 712041,
-      "workersErrorRate": 0.0012,
-      "r2ClassAOps": 345490,
-      "r2ClassBOps": 6107438,
-      "r2EgressMb": 953854,
-      "r2StorageGb": 34.152,
+      "workersRequests": 701115,
+      "workersErrorRate": 0.0009,
+      "r2ClassAOps": 104639,
+      "r2ClassBOps": 4473056,
+      "r2EgressMb": 797182,
+      "r2StorageGb": 35.159,
       "violationsBySeverity": {
-        "warning": 17,
+        "warning": 14,
         "info": 7
       },
       "violationTitles": [
         "R2 account storage > 18GB",
         "stats47 bucket storage > 12.5GB",
-        "R2 egress > 5GB/日",
-        "R2 Class B ops > 1M/日"
+        "R2 egress > 5GB/日"
       ]
     },
     "sns": {
@@ -329,167 +345,167 @@
   },
   "journey": {
     "blogToRanking": {
-      "pageViews": 893,
-      "fromPageViews": 10428,
-      "rate": 0.0856
+      "pageViews": 946,
+      "fromPageViews": 10220,
+      "rate": 0.0926
     },
     "themesToRanking": {
-      "pageViews": 104,
-      "fromPageViews": 816,
-      "rate": 0.1275
+      "pageViews": 106,
+      "fromPageViews": 687,
+      "rate": 0.1543
     },
     "themesToBlog": {
-      "pageViews": 6,
-      "fromPageViews": 816,
-      "rate": 0.0074
+      "pageViews": 11,
+      "fromPageViews": 687,
+      "rate": 0.016
     },
     "topCrossSection": [
       {
         "from": "blog",
         "to": "ranking",
-        "pageViews": 893
+        "pageViews": 946
       },
       {
         "from": "ranking",
         "to": "category",
-        "pageViews": 735
+        "pageViews": 795
       },
       {
         "from": "category",
         "to": "ranking",
-        "pageViews": 672
+        "pageViews": 723
       },
       {
         "from": "ranking",
         "to": "blog",
-        "pageViews": 520
-      },
-      {
-        "from": "areas",
-        "to": "ranking",
-        "pageViews": 468
+        "pageViews": 605
       },
       {
         "from": "ranking",
         "to": "areas",
-        "pageViews": 459
+        "pageViews": 559
+      },
+      {
+        "from": "areas",
+        "to": "ranking",
+        "pageViews": 539
       },
       {
         "from": "search",
         "to": "ranking",
-        "pageViews": 330
+        "pageViews": 398
       },
       {
         "from": "ranking",
         "to": "search",
-        "pageViews": 255
+        "pageViews": 314
       }
     ]
   },
   "navCoverage": {
-    "internalTransitions": 15759,
-    "navClicks": 7937,
-    "labeledClicks": 3659,
-    "coverage": 0.2322,
-    "unlabeledShare": 0.539,
+    "internalTransitions": 17163,
+    "navClicks": 11109,
+    "labeledClicks": 4530,
+    "coverage": 0.2639,
+    "unlabeledShare": 0.5922,
     "topUnlabeled": [
       {
         "label": "ranking",
-        "clicks": 1495
-      },
-      {
-        "label": "geo",
-        "clicks": 599
+        "clicks": 2193
       },
       {
         "label": "municipalities",
-        "clicks": 573
+        "clicks": 1143
+      },
+      {
+        "label": "geo",
+        "clicks": 957
       },
       {
         "label": "areas",
-        "clicks": 509
+        "clicks": 688
       },
       {
         "label": "api",
-        "clicks": 285
-      },
-      {
-        "label": "themes",
-        "clicks": 209
+        "clicks": 373
       },
       {
         "label": "home",
-        "clicks": 186
+        "clicks": 298
+      },
+      {
+        "label": "themes",
+        "clicks": 291
       },
       {
         "label": "category",
-        "clicks": 169
+        "clicks": 256
       }
     ]
   },
   "workContext": {
     "baseline": {
-      "sessions": 15050,
-      "desktopShare": 0.46,
-      "workdayHoursShare": 0.451
+      "sessions": 15703,
+      "desktopShare": 0.47,
+      "workdayHoursShare": 0.462
     },
-    "qualifyingSessions": 3828,
+    "qualifyingSessions": 4250,
     "top": [
       {
-        "landingPage": "/",
-        "sessions": 387,
-        "desktopShare": 0.729,
-        "workdayHoursShare": 0.553,
-        "avgEngagementSec": 101.4
+        "landingPage": "/blog/automotive-industry-transformation-map",
+        "sessions": 386,
+        "desktopShare": 0.756,
+        "workdayHoursShare": 0.701,
+        "avgEngagementSec": 63.3
       },
       {
-        "landingPage": "/blog/automotive-industry-transformation-map",
-        "sessions": 308,
-        "desktopShare": 0.715,
-        "workdayHoursShare": 0.627,
-        "avgEngagementSec": 69.2
+        "landingPage": "/",
+        "sessions": 415,
+        "desktopShare": 0.742,
+        "workdayHoursShare": 0.551,
+        "avgEngagementSec": 126.5
       },
       {
         "landingPage": "/blog/livable-prefecture-composite-ranking",
-        "sessions": 331,
-        "desktopShare": 0.48,
-        "workdayHoursShare": 0.49,
-        "avgEngagementSec": 51.3
+        "sessions": 321,
+        "desktopShare": 0.483,
+        "workdayHoursShare": 0.47,
+        "avgEngagementSec": 54.1
       },
       {
         "landingPage": "/blog/health-life-expectancy-structure",
-        "sessions": 197,
-        "desktopShare": 0.751,
-        "workdayHoursShare": 0.51,
-        "avgEngagementSec": 64.5
-      },
-      {
-        "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
-        "sessions": 132,
-        "desktopShare": 0.697,
-        "workdayHoursShare": 0.781,
-        "avgEngagementSec": 94
-      },
-      {
-        "landingPage": "/ranking",
-        "sessions": 103,
-        "desktopShare": 0.942,
-        "workdayHoursShare": 0.67,
-        "avgEngagementSec": 156.4
+        "sessions": 167,
+        "desktopShare": 0.713,
+        "workdayHoursShare": 0.549,
+        "avgEngagementSec": 59.5
       },
       {
         "landingPage": "/ranking/rice-consumption-quantity",
-        "sessions": 128,
-        "desktopShare": 0.75,
-        "workdayHoursShare": 0.655,
-        "avgEngagementSec": 89.2
+        "sessions": 126,
+        "desktopShare": 0.762,
+        "workdayHoursShare": 0.671,
+        "avgEngagementSec": 78.8
       },
       {
-        "landingPage": "/blog/alcohol-prefecture-map",
-        "sessions": 190,
-        "desktopShare": 0.5,
-        "workdayHoursShare": 0.502,
-        "avgEngagementSec": 66.3
+        "landingPage": "/ranking",
+        "sessions": 95,
+        "desktopShare": 0.958,
+        "workdayHoursShare": 0.644,
+        "avgEngagementSec": 142.7
+      },
+      {
+        "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
+        "sessions": 112,
+        "desktopShare": 0.759,
+        "workdayHoursShare": 0.683,
+        "avgEngagementSec": 81.2
+      },
+      {
+        "landingPage": "/ranking/specific-health-checkup-participation-rate",
+        "sessions": 108,
+        "desktopShare": 0.685,
+        "workdayHoursShare": 0.655,
+        "avgEngagementSec": 59
       }
     ]
   },
@@ -498,7 +514,22 @@
     "groups": []
   },
   "improvements": {
-    "active": 8,
-    "overdue": []
+    "active": 10,
+    "overdue": [
+      {
+        "id": "NOTE-KAKEI-REDESIGN-EFFECT-01",
+        "status": "pending",
+        "due": "2026-10-13",
+        "metric": "content",
+        "owner": "claude"
+      },
+      {
+        "id": "THEME-EXPANSION-EFFECT-01",
+        "status": "effect/pending",
+        "due": "2026-10-17",
+        "metric": "ga4/gsc/theme-quality",
+        "owner": "theme-portfolio-manager"
+      }
+    ]
   }
 }

@@ -835,6 +835,7 @@ updated: 2026-10-19
 - **GSC案24 / P2（本番HTTP確認済み・Google検証中）**: robotsブロック済み登録584件のうち576件は公開CSV/JSON、8件はOGP。公開ダウンロードに限定してcrawlを許可しX-Robots-Tag:noindexを読ませる。公開画像と廃止URLのHTTP応答も読めるようにする。
 - **owner / 入力**: gsc-analyst・site-ux-manager。対象・内容確認・ローカル検証は `data/gsc/ui-audits/2026-10-16-remediation.json`。変更はrobots.ts・download route・middleware、恒久方針はcoding-standards.md。
 - **次 / 順序**: PR #1139をmainへ反映し、本番31 URLは全件期待どおり。デプロイ・purge・post-deploy smokeの最終結果は `data/gsc/ui-audits/2026-10-16-remediation.json` のreleaseを参照。GSCのrobots.txt再取得リクエストは受理済み、584件の警告は10-16に「検証: 開始」。10-23にGoogleの再取得とnoindex/404/410による除外を確認する。Google側の検証完了前にカードを閉じない。
+- **観測 (2026-10-22 GSC通知)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」の検証結果が「修正できませんでした」(一部のページが引き続き影響を受けている) で届いた (Message type WNC-10031170)。残ったURLと件数はGSCのインデックス登録レポートで確かめ、584件のうちどの種類 (公開CSV/JSON・OGP) が残ったか、Googleがnoindex/404/410を取得済みかを切り分けてから、修正か再検証かを決める。
 - **停止条件**: API全体は開放しない。ダウンロード/画像機能を壊さない。Googleがnoindex/404/410を取得する前に解消としない。ローカル実装を本番反映済みとしない。
 - **完了条件**: 本番で意図したHTTP/robotsが配信され、対象URLのGoogle再取得でダウンロードの検索除外・廃止画像の除外が確認できる。正常画像は取得可能。noindex対象増加は意図した除外として評価する。
 
@@ -4842,6 +4843,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **本番実測 (2026-10-22・デプロイ run 39743772903 の後)**: 札幌市 953,744 bytes (+11.4%・警告超え)、千代田区 815,369 bytes。
 - **次**: ① 週次の `page-quality` で北海道など市区町村数の多い県の市町村ページの `html_bytes` 分布を見る。② 重さの内訳 (県内の市区町村一覧 179 件・データブックの表・RSC の写し) を測って大きいものから削る。データブックの表を節ごとに先頭数行 + 「すべて見る」にしても HTML は減らないので、削るなら RSC の重複か一覧の出し方を見る。
 - **完了条件**: 北海道の市町村ページの `html_bytes` が 900KB 未満。
+- **済 (2026-10-22・デプロイ run 39763716073 の後)**: データブックの表の各セルのクラスを表の子孫セレクタへまとめ (1 行 1,154 → 781 bytes)、本番の札幌市 `/areas/01000/cities/01100` は 953,744 → 817,878 bytes、千代田区は 815,369 → 688,628 bytes (curl で実測)。北海道の他の市町村は札幌市より軽い (表の行数は同じで県内の市区町村一覧も同じ)。カードは完了。
 
 ### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
 
@@ -4863,7 +4865,21 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: pilot key 1 件で生成 → 専用監査 blocker 0 → critic PASS → ページ描画まで通し、
   誤値を注入して監査が発火することを実測する
 - **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
-- **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番表示はデプロイ後に確かめる。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
+- **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番 (デプロイ run 39763716073 の後) で `ai-content.json` は 200、ページに「データの考察」と FAQPage が出て、解説の無い指標 (`elderly-population-ratio`) には出ないことを確認した。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
+
+### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]
+
+- **証拠**: 2026-10-23 公開の `municipality-population-change-census-2025` で、市区町村の図の `<source-link>` は `/ranking/<key>` (都道府県版) にしか張れず、市区町村ランキング `/municipalities/ranking/<key>` へは「あわせて見る」のテキストリンクで代用した。カードの部品 (RankingLinkCard) が `/ranking/` だけを受け付け、構造の検査 (`article-structure-lint.mjs`) も `/municipalities/ranking/` を数えない。
+- **次**: カードの部品と検査の両方で `/municipalities/ranking/<key>` を受け付けるか決める。受け付けるなら同じ記事のカードを市区町村版へ差し替える。
+- **完了条件**: 市区町村の図の直下に市区町村ランキングのカードを置いた記事が quality-gate を通り、本番でカードが市区町村ランキングへ移る。
+
+### [BLOG-TAG-GATE-01] 未登録のタグを持つ記事が quality-gate を通り、公開の段で止まる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-23] [領域:サイト]
+
+- **証拠**: 2026-10-23 に `municipality-population-change-census-2025` (タグ「東京23区」) が quality-gate を blocker 0 で通ったが、`blog-auto-publish.yml` run 39898347149 の「Regenerate blog index」で `未登録タグ: …: 東京23区。content.tagsのID台帳へ登録してください。` と落ちた。登録済みの「東京都」へ替えて再 push した。
+- **次**: quality-gate で frontmatter の tags を `data/content/tags.json` と照らし、未登録を blocker にする (公開の段と同じ判定を使う)。
+- **完了条件**: 未登録タグの記事で quality-gate が blocker を出すことをテストで固定する。
 
 ### [MUNI-AI-CONTENT-EXPAND-01] 市区町村ランキングの解説を需要のある指標へ広げ、監査の穴を 2 つ塞ぐ
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:データ]
@@ -5098,7 +5114,122 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **禁止・承認境界**: `contents/blog/` を develop へ push すると自動公開が走るので、原稿は別ブランチに置き、公開はオーナーの承認後。
 - **完了条件**: 1 本目が公開され、市区町村ランキングの「同じ指標のランキング・記事・テーマ」に出ることを本番で確かめる。
 
+### [CITY-UNIT-DENOMINATOR-01] 市区町村ページ・ランキングで、分母が subtitle にしか無い指標が件数のように見える
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-23] [領域:データ]
+
+- **証拠**: 市区町村の表示名 (`municipalityRankingDisplayTitle`) は、同名の指標と衝突するときだけ subtitle を付ける。そのため分母が subtitle にしか書かれていない
+  指標は、市区町村データブックの表・見出し・特徴と市区町村ランキングの title で分母の無い値になる。2026-10-21 の localhost で札幌市の特徴に
+  「人口集中地区人口密度 7,993.8人（2020年）」が出た (unit は「人」、subtitle が「人口集中地区面積1km²当たり」)。2026-10-23 に公開中の 716 件を
+  機械的に抽出すると 7 件が当たった: `department-store-count-per-100k` (百貨店数・店・人口10万人当たり)、`densely-inhabited-district-population-density`、
+  `population-density-per-km2-inhabitable-area` (どちらも unit「人」)、持ち家・借家の畳数と延べ面積 4 件 (1住宅当たり)。抽出は語の一致によるもので、全件とは言えない。
+  財政力指数は unit「指数」がそのまま付き「0.81指数」と表示される。
+- **次**: 分母の持たせ方を 1 つに決める。(a) subtitle が分母を持つときは表示名に必ず付ける、(b) unit に分母を入れる (`packages/data-configs/src/unit/` の
+  正典で「人/km²」などを解釈できる形)。全件の洗い出しは語の一致ではなく `parseUnit` の `hasDenominator` と subtitle の組で行う
+  (`.claude/rules/unit-semantics-standards.md`・`feedback_ssds_denominator_evidence`)。「指数」のような無次元の unit を値の後ろに付けるかも同じ規則で決める。
+- **完了条件**: 上の 7 件を含め、分母を持つ指標が市区町村ページ・市区町村ランキングの title で分母付きに表示され、検査がその規則を固定している。
+
+### [DEPLOY-R2-AHEAD-OF-APP-01] 本番デプロイの Build が落ちても、R2 の指標スナップショットだけが先に新しくなる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]
+
+- **証拠**: 2026-10-21 の deploy run 39589689158 で、「Generate and verify metric release snapshots」と「Publish verified metric snapshots before app build」は成功し、
+  その後の Build が OpenNext の Next.js サポート期限の判定で失敗した (`NEXT16-MIGRATION-01`)。次のデプロイ (run 39596982885) までの約 1 時間、本番は旧版のアプリが
+  新しいスナップショット (市区町村ランキングに東京 23 区を追加・データブック 1,741 件) を読んでいた。今回は互換だった (主要 9 ページ 200 を実測) が、
+  スナップショットの形を変える変更で Build が落ちると、旧版のアプリが新しい形を読んで本番が壊れる。
+- **次**: `deploy-workers.yml` が R2 反映を Build より前に置いている理由 (Build が新しいスナップショットを読むか) を確かめる。読まないなら反映を Build の成功後・
+  wrangler deploy の前へ移す。読むなら、Build が日付や版だけで落ちる条件 (OpenNext の版判定など) を R2 反映の前に検査する段を足す。
+- **完了条件**: Build が失敗する条件を再現した run (または workflow の契約テスト) で、R2 反映が走らないことを確かめる。二相を許すなら理由を
+  `.claude/rules/branch-workflow.md` の「R2 反映は main のコードで動く」節に書く。
+
+### [NEXT-SUPPORT-WINDOW-GUARD-01] フレームワークのサポート期限で本番ビルドが日付だけで止まるのを、事前に知らせる
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: OpenNext は `node_modules/@opennextjs/aws/dist/build/helper.js` の `NEXT_RELEASE_DATES` から公開後 2 年を過ぎた Next.js の major を拒否する。
+  コードを変えていないのに、2026-10-21 00:00 UTC から本番デプロイが止まった (deploy run 39589689158)。同じ規則では Next.js 16 は 2027-10-21 に止まる。
+- **次**: 週次の既存 workflow (例: `agent-consistency-weekly.yml`) に、導入中の Next.js の major とこの表からサポート終了までの日数を出す検査を足し、
+  60 日を切ったら起票する。`apps/web/package.json` に `--dangerouslyUseUnsupportedNextVersion` が残っている間も毎週知らせる (外し忘れを防ぐ)。
+- **完了条件**: 終了日を手前に動かした fixture で検査が警告を出し、現在の develop では「残り N 日」だけを出すテストがある。関連: `NEXT16-MIGRATION-01`。
+
+### [E2E-FAILURE-EVIDENCE-01] 代表 E2E が落ちても、サーバーの例外と R2 の取得失敗が残らない
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: 2026-10-21 の PR #1166 (run 39591998395、head adc2be97e) で、`/ranking/total-population` が HTTP 200 のあと
+  エラー境界 (`app/ranking/error.tsx`「データの取得中にエラーが発生しました」) を出して落ちた。同じコードの前後の run は通り、本番も正常で、原因は特定できなかった。
+  ジョブのログにサーバーの例外は無い。`apps/web/playwright.config.ts` の webServer は stdout を指定しておらず、Playwright 1.62.1 の既定は stdout を捨てる
+  (`node_modules/playwright/types/test.d.ts`「Default to "ignore"」)。R2 オーバーレイのログ (`/tmp/pr-e2e-r2-overlay.log`) は起動に失敗したときしか出力しない。
+- **次**: webServer の `stdout: "pipe"` か、サーバーの出力をファイルへ書いて、失敗時にオーバーレイのログと一緒に artifact へ上げる (`pr-quality-check.yml` の Representative E2E)。
+- **完了条件**: わざと落とした E2E の run で、サーバーの例外とオーバーレイの upstream error が artifact から読める。
+
+### [PACK-SNAPSHOT-SKIP-GUARD-01] product-factory のテスト前処理が取得失敗を黙って飛ばし、件数を固定したテストが揺れる
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-23] [領域:商品]
+
+- **証拠**: 2026-10-21 の develop-quality-gate run 39594085606 で P-12 の指標数が 2,073 ではなく 2,072 になり 2 件のテストが落ちた。直後に手元で 2 回組み直すと
+  どちらも 2,073 だった。前処理 (`tests/setup/pack-snapshots.global.ts` → `buildPackSnapshots`) は 2,154 件を公開 R2 から取り、取れなかった指標を理由付きで
+  飛ばすが、件数も理由も出力しない。`fetchRankingValues` に接続失敗と 5xx の再試行を足した (commit 952f0a384) が、3 回失敗すれば同じことが起きる。
+  また前処理は手元に既にあるパックを作り直さないので、手元のテストは古いデータで通り続ける。
+- **次**: 飛ばした理由を「データの理由」(47 県そろいの年が無い・出典変更の要確認・registry 未登録・全県 null) と「取得の理由」(R2 fetch 失敗・接続失敗) に分け、
+  取得の理由が 1 件でもあれば前処理を失敗させる。飛ばした件数を出力する。手元のパックには作成日を持たせ、一定日数より古ければ作り直すか警告する。
+- **完了条件**: fetch を失敗させる fixture で前処理が止まり、データの理由だけのときは今までどおり通るテストがある。
+
+### [AGENT-COMMIT-HOOK-BYPASS-01] pre-commit の文書検査を通らない backlog の commit が develop に入り、リリース PR を止めた
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: commit adc2be97e (2026-10-21 11:26 UTC、author Claude) が `KABEUCHI-AGENT-01` をカテゴリ「戦略」(語彙外・DG057 error) で足した。
+  pre-commit は `.claude/todo/` の変更で `npm run docs:check` を走らせる (`apps/web/scripts/pre-commit-checks.sh` 89〜92 行) ので、この commit は pre-commit を通っていない
+  (`--no-verify` か、hook の無い環境か は未特定)。develop-quality-gate は push 後に止めたが、リリース PR #1166 の Catalog Gates と Contract Tests が落ち、
+  別セッションが 9294f4071 で直すまでデプロイが止まった。
+- **次**: その commit を作ったセッションの環境を特定する (worktree・クラウド・Codex のどれか、hook が効く設定か)。塞ぎ方は、push 前に `.claude/todo` の差分へ
+  docs governance を掛ける pre-push hook か、エージェントの規約での `--no-verify` 禁止の明文化 (現状は一部の skill にしか無い)。
+- **完了条件**: DG057 を含む backlog の変更を push しようとすると push 前に止まることを実測する。または bypass した経路を特定して塞いだ記録がある。
+
+### [LOCAL-DEPS-STALE-WARN-01] 手元の node_modules が lockfile より古いと、手元だけテストが落ちて原因を取り違える
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run preflight] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: 2026-10-21 の Mac で `node_modules/.package-lock.json` (10-13) が `package-lock.json` (10-20・braces を外した更新) より古く、
+  `apps/web/src/__tests__/eslint-dependency-compatibility.test.ts` が手元だけ落ちた (CI は `npm ci` で通る)。`npm install` で揃えると通った。
+  同じ型の食い違いは Windows PC でも記録がある (`@babel/core` 不在で pre-commit の lint が落ちた。このファイル内の環境メモ)。
+- **次**: `npm run preflight` に、`node_modules/.package-lock.json` と `package-lock.json` の依存の版を比べ、食い違えば「npm install が要る」と出す検査を足す
+  (install は自動で走らせない。`.claude/rules/local-environment.md` の install の排他に従う)。
+- **完了条件**: lock を 1 件ずらした fixture で警告が出て、揃っていれば何も出ないテストがある。
+
+### [METRIC-RELEASE-PATHS-SSOT-01] 指標リリースの対象パスが、デプロイと PR のオーバーレイで別々の正規表現に書かれている
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: `.github/workflows/deploy-workers.yml` の `allowed` (exact manifest に入れる R2 キー) と `.github/scripts/r2-overlay-server.mjs` の `localMetricSnapshotFile`
+  (PR の E2E とローカル確認で手元の生成物を返すキー) が、同じ種類の生成物を別々の正規表現で持つ。2026-10-21 に市区町村データブックを足したとき、両方を手で直した
+  (commit 436f46b43)。すでに範囲が違い (デプロイは categories・survey・page-components を含み、オーバーレイは page-components を別の経路で返し categories・survey を返さない)、
+  違いの理由はどこにも書かれていない。二重管理はいずれずれる (`feedback_hand_synced_duplication`)。
+- **次**: リリース対象のパスの定義を 1 つのモジュールに置き、デプロイの inline script とオーバーレイの両方がそれを import する。オーバーレイで返さない種類は理由と一緒に定義に書く。
+- **完了条件**: 定義からパスを 1 種類消すとデプロイ側とオーバーレイ側の両方のテストが落ちる。
+
+### [AGENT-SESSION-ID-MISSING-01] agent:session の登録が、デスクトップアプリの Claude セッションでは ID が無くて使えない
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: 2026-10-21 に `npm run agent:session -- --register --agent claude --task DEPS-VITE-AUDIT --note ...` が
+  「--session または CODEX_THREAD_ID / CLAUDE_SESSION_ID が必要です」で失敗した。`.claude/hooks/session-guard.js` 150 行は `CLAUDE_SESSION_ID` を読むが、
+  デスクトップアプリのセッションの環境にあるのは `CLAUDE_CODE_SESSION_ID` (2026-10-23 に変数名だけ確認)。CLAUDE.md は編集前の登録を求め、install の排他もこの登録に頼るので、
+  登録できないと並行セッションの検知が効かない。
+- **次**: `CLAUDE_CODE_SESSION_ID` も読む (Codex の `CODEX_THREAD_ID` と同じ扱い)。どちらも無いときの案内に `--session <任意の固定 ID>` を出す。
+- **完了条件**: `CLAUDE_CODE_SESSION_ID` だけがある環境で `--register` が通り、`--status` に載ることをテストで固定する。
+
+### [MUNI-PAGE-SEO-REGISTER-01] 市区町村ページの効果観測 MUNI-PAGE-SEO-01 を active 施策の一覧に登録する
+タグ: [インフラ・計測] [種類:改善] [実行:機械] [起票:2026-10-23] [期日:2026-10-30] [領域:サイト]
+
+- **事象**: 改善ログ `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01` (2026-10-21 デプロイ・after 窓 2026-10-22〜11-18・判定 2026-11-21) が、
+  2026-10-23 時点で `.claude/todo/improvements.md` に無い。improvements.md は improvement-triage の排他 writer なので、このセッションでは書いていない。
+- **次**: improvement-triage が `[kpi: id]` と観測期限付きで行を足す (想定効果はログの計算式。閾値エンジンが集計しない検索語群なので `[target:]` は付けない旨をログに書いてある)。
+- **完了条件**: improvements.md に `MUNI-PAGE-SEO-01` の行があり、docs:check の DG079 を通る。
+
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [VITE-CONFIG-ESM-WARN-01] vitest.config.ts が CommonJS として読まれ、Vite の次の major で読めなくなる警告が出ている
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
+
+- **証拠**: 2026-10-21 の develop-quality-gate run 39594085606 の package テストで、各 package の `vitest.config.ts` について
+  「Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1)」が出た (vite 8.2.4)。
+- **再開条件**: Vite の次の major (native config loader が既定になる版) が出たとき。それまでは警告だけで動作は変わらない。
+- **次**: 設定ファイルを `.mts` にするか、package に `"type": "module"` を足すかを決め、全 package の vitest を同じ形にそろえる。
+- **完了条件**: package テストのログからこの警告が消える。
 
 ### [FISHERY-2024-DB-01] 漁獲量の 12 指標に 2024 年を足す (e-Stat に 2024 年のデータベースの表が出たら)
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
