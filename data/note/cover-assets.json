@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T04:03:25.411Z",
+  "updatedAt": "2026-10-23T04:16:48.133Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -14416,15 +14416,60 @@
               "planSha256": "d53cdb2f3e19c92faacd6aeca3fa33989cf1b54d21747299d43e594c9f445aed"
             }
           }
+        },
+        {
+          "sha256": "0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-female/revisions/0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42.png"
+          },
+          "bytes": 1815171,
+          "id": "0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-ffe6bcc9f328",
+          "createdAt": "2026-10-23T04:15:36.915Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "38f7c7722d651cfbf321ab817639d11c9794213d71413cc1c6a4faa5181ba18a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定6文言を照合。2019年・大卒女性・東京都1位は本文に一致し、バッグと無文字社員証、人物なし、文字切れなしを確認。",
+            "reviewedAt": "2026-10-23T04:15:53.449Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "38f7c7722d651cfbf321ab817639d11c9794213d71413cc1c6a4faa5181ba18a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-female/inputs/38f7c7722d651cfbf321ab817639d11c9794213d71413cc1c6a4faa5181ba18a.json"
+              },
+              "bytes": 9136
+            },
+            "production": {
+              "id": "NCI-00497",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "ffe6bcc9f3281763eb2404caa6912c3fb69279e480c038f53c59c0e9b8faa24a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
-      "approvedRevisionId": "a3f98dfa28771128fa13f05c65e85e1a46676b389bdc04c03b0a102784aaa332",
+      "candidateRevisionId": "0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42",
+      "approvedRevisionId": "0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324726375/rectangle_large_type_2_1f290e311e389e2470adbe5bd135a255.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:13.446Z",
-        "revisionId": null
+        "url": "https://assets.st-note.com/production/uploads/images/327482528/rectangle_large_type_2_0cea7e9c2fc538fe91458ad691351914.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T04:16:48.099Z",
+        "revisionId": "0333f94c628df974dab0061b9e6ce0a30570e1101dfb1f1fefbf80b4858aad42"
       },
       "missingVersions": [],
       "production": {
@@ -14487,15 +14532,60 @@
               "planSha256": "f931c46a9356a68c12ac6e0fe0f65b1765e54cb2388e7866ca57263bd218519c"
             }
           }
+        },
+        {
+          "sha256": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-new-graduate-starting-salary-university-male/revisions/d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86.png"
+          },
+          "bytes": 1892770,
+          "id": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-7a4f94d97308",
+          "createdAt": "2026-10-23T04:13:09.259Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8cb8ed5a4a4a44a40fa56da429ce941314d4c3662c2f795badb838364b73276b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定6文言を照合。2019年・大卒男性・東京都1位は本文に一致し、バッグと無文字社員証、人物なし、文字切れなしを確認。",
+            "reviewedAt": "2026-10-23T04:13:28.637Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8cb8ed5a4a4a44a40fa56da429ce941314d4c3662c2f795badb838364b73276b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-new-graduate-starting-salary-university-male/inputs/8cb8ed5a4a4a44a40fa56da429ce941314d4c3662c2f795badb838364b73276b.json"
+              },
+              "bytes": 9141
+            },
+            "production": {
+              "id": "NCI-00498",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "7a4f94d9730853472c36eea8712aa4aeb6deeb0d57bb3250b7bf1cf94f9bf35a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
-      "approvedRevisionId": "832bf3f474e95ba1f1ca6310e3ec63d7cf30b6ca42792973bc6ceacb1735452c",
+      "candidateRevisionId": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86",
+      "approvedRevisionId": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324724934/rectangle_large_type_2_09f81774172a72f7abdb74b2f8325af2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:13.530Z",
-        "revisionId": null
+        "url": "https://assets.st-note.com/production/uploads/images/327481889/rectangle_large_type_2_98a7326b20ed454c6f5e76a4b27af46c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T04:14:23.341Z",
+        "revisionId": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86"
       },
       "missingVersions": [],
       "production": {
@@ -44096,15 +44186,60 @@
               "bytes": 6690
             }
           }
+        },
+        {
+          "sha256": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n578b6e871067/revisions/33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266.png"
+          },
+          "bytes": 1733735,
+          "id": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-fef11fd625e4",
+          "createdAt": "2026-10-23T04:09:20.970Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定の6文言を照合。対象年・年齢・1位は本文と一致し、ノートの題材、人物なし、文字切れなしを確認。",
+            "reviewedAt": "2026-10-23T04:09:44.871Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n578b6e871067/inputs/0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2.json"
+              },
+              "bytes": 8787
+            },
+            "production": {
+              "id": "NCI-00421",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "fef11fd625e4fd3b55652b5ddfa86d3f6181d597b2a2c3ea4157552d055ea73c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01",
-      "approvedRevisionId": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01",
+      "candidateRevisionId": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
+      "approvedRevisionId": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191821/rectangle_large_type_2_1cb8bf71a931028278fc53c9d8f804e2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:20.901Z",
-        "revisionId": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01"
+        "url": "https://assets.st-note.com/production/uploads/images/327480969/rectangle_large_type_2_645a29fcdc97b0e29f573328d74c8a8b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T04:10:52.313Z",
+        "revisionId": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -44113,7 +44248,12 @@
         "id": "NCI-00421",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ビジネスを学ぶ人\n多い県は？",
+          "subline": "1位は東京都\n2021年・10歳以上",
+          "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地の学習ノートを1点だけ大きく描く。ノートは開き、ページには文字や数字を入れず、少数の薄い罫線だけにする。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、架空の地図・ランキング図・棒グラフ・表彰台・メダル、指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/n578b6e871067/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間に商業実務・ビジネス関係の学習を行った10歳以上の人の割合。本文は1位東京都29.2％、47位青森県12.7％と記載。カバーには企業研修や都市部の原因推測を加えず、対象年・年齢・1位だけを示す。"
+        }
       }
     },
     {

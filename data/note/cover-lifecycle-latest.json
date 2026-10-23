@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T04:03:25.434Z",
+  "generatedAt": "2026-10-23T04:16:48.159Z",
   "status": "pass",
   "articles": [
     {
-      "key": "recovered-n04c2737daf2c",
+      "key": "a-new-graduate-starting-salary-university-female",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327479149/rectangle_large_type_2_82efb4924f33ccede4f9175df161f3e0.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T04:03:25.387Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327482528/rectangle_large_type_2_0cea7e9c2fc538fe91458ad691351914.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T04:16:48.099Z"
     }
   ]
 }
