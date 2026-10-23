@@ -1158,6 +1158,7 @@ updated: 2026-10-19
 - **次**: 各件で、公開済み記事と本文まで同じか (公開済み側が同じ原稿の投稿か) を確かめ、同じなら下書き側をカタログから外すか公開済み記事へ統合する。本文が新しい版なら、公開済み記事の更新として扱う。
 - **停止条件**: note 上の記事の削除・非公開化はしない (オーナー判断)。
 - **完了条件**: 公開済み記事と同じ題名の下書きがカタログに 0 件。
+- **2026-10-23 の確認**: 14 組の本文を `note:article checkout` で取り出して比べると、公開版はどれも下書きより長い (1.1〜1.8 倍・文字の一致率 0.40〜0.94)。下書きは公開前の古い版で、下書き側を外してよい。ただし台帳から 14 行を外すと、`generate-note-catalog.ts --apply` の `cover-production seed` が `cover catalog mismatch: 22-monthly-routine-skills` で止まる (カバー台帳 `data/note/cover-assets.json` にこの 14 件の記録がある)。外すときは、この 14 件のカバー記録の扱い (公開版のカバーへ寄せるか消すか) を決めて同じ変更で直す。変更は戻した。
 
 ### [AI-CONTENT-GEMINI-KEY-01] Gemini 日次のキーが無料枠で通るかを確かめ、通れば定期実行を戻す
 タグ: [コンテンツ品質] [種類:不具合] [実行:ユーザー] [起票:2026-10-11] [領域:データ]
@@ -4880,6 +4881,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **証拠**: 2026-10-23 に `municipality-population-change-census-2025` (タグ「東京23区」) が quality-gate を blocker 0 で通ったが、`blog-auto-publish.yml` run 39898347149 の「Regenerate blog index」で `未登録タグ: …: 東京23区。content.tagsのID台帳へ登録してください。` と落ちた。登録済みの「東京都」へ替えて再 push した。
 - **次**: quality-gate で frontmatter の tags を `data/content/tags.json` と照らし、未登録を blocker にする (公開の段と同じ判定を使う)。
 - **完了条件**: 未登録タグの記事で quality-gate が blocker を出すことをテストで固定する。
+- **2026-10-23 完了 (行削除は backlog-loop)**: `.claude/scripts/lib/blog-tag-lint.mjs` (タグ台帳 `content.tags` の id・key・label・aliases と照らす。公開の段の `resolveContentTag` と同じ判定) を足し、`quality-gate.mjs` が未登録タグを `UNREGISTERED_TAG` の blocker にする。テスト 4 件。実記事で「東京都」は通り、「東京23区」に戻すと blocker になることを確認した。
 
 ### [MUNI-AI-CONTENT-EXPAND-01] 市区町村ランキングの解説を需要のある指標へ広げ、監査の穴を 2 つ塞ぐ
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:データ]
