@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T12:19:11.572Z",
+  "updatedAt": "2026-10-23T12:47:31.391Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -42899,15 +42899,60 @@
               "bytes": 6546
             }
           }
+        },
+        {
+          "sha256": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0654ddf27920/revisions/bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b.png"
+          },
+          "bytes": 2005333,
+          "id": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-3edbc8171a74",
+          "createdAt": "2026-10-23T12:37:55.040Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:50.369Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n0654ddf27920/inputs/8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2.json"
+              },
+              "bytes": 8613
+            },
+            "production": {
+              "id": "NCI-00382",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "3edbc8171a74ee7631d273f1487fe88ee486cf84802eeba4ee8c20674025758e"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186",
-      "approvedRevisionId": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186",
+      "candidateRevisionId": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
+      "approvedRevisionId": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191163/rectangle_large_type_2_63901ad09e07e7f133df9280a409c572.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.769Z",
-        "revisionId": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186"
+        "url": "https://assets.st-note.com/production/uploads/images/327636271/rectangle_large_type_2_5302fb713b5edc1b02d452440bbc0c85.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:25.734Z",
+        "revisionId": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -42916,7 +42961,12 @@
         "id": "NCI-00382",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "カラオケをした人\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のマイク1本と無人のカラオケ室を描く。画面に歌詞や人物を描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n0654ddf27920 2026-10-23公開API本文照合。記事題名「【2021年版】カラオケをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -44342,15 +44392,60 @@
               "planSha256": "bbacd349223628260cf17e979fdf92c3985af3ab35b91de8607f8126faaa16a0"
             }
           }
+        },
+        {
+          "sha256": "289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n1b943c7d414d/revisions/289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a.png"
+          },
+          "bytes": 1761879,
+          "id": "289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-4286bcf1a036",
+          "createdAt": "2026-10-23T12:37:46.455Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a2d11a12f3e1f62edbe6bf2f8cb5e9d370218723a33587fa20dc67584a61addc"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:44.971Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a2d11a12f3e1f62edbe6bf2f8cb5e9d370218723a33587fa20dc67584a61addc",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n1b943c7d414d/inputs/a2d11a12f3e1f62edbe6bf2f8cb5e9d370218723a33587fa20dc67584a61addc.json"
+              },
+              "bytes": 8849
+            },
+            "production": {
+              "id": "NCI-00391",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "4286bcf1a03604282074b7297d745831158da5307c647f95227d369083cb2f7f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "bb75d7570b24228208e6f229e692fa538668e3c6c8ba3f3903bf377d1828650d",
-      "approvedRevisionId": "bb75d7570b24228208e6f229e692fa538668e3c6c8ba3f3903bf377d1828650d",
+      "candidateRevisionId": "289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a",
+      "approvedRevisionId": "289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324640930/rectangle_large_type_2_08901a388f5a4bd759da1d103c0a4682.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.725Z",
-        "revisionId": "bb75d7570b24228208e6f229e692fa538668e3c6c8ba3f3903bf377d1828650d"
+        "url": "https://assets.st-note.com/production/uploads/images/327636397/rectangle_large_type_2_c801eccdf8755c89ef6604a49f7eab6d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:31.362Z",
+        "revisionId": "289ff2e2de123fb0722f536cf1db7dcf93cf11bac6a3ea2cf228ffa2f219ef6a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -44360,10 +44455,10 @@
         "policyId": "NCP-004",
         "policyVersion": 3,
         "brief": {
-          "headline": "薬局の多さは\n地域で違う？",
-          "subline": "佐賀県と沖縄県\n2023年・人口10万人あたり",
-          "subject": "比較型の二つの小模型を対にする構図。紫と黄色、淡いクリーム。左に主見出し2行、右に同じ大きさの無人の小さな薬局店舗模型を2棟、隣り合わせで並べる。片方は紫、片方は黄色のひさし。どちらも単純な緑色の十字記号だけを看板に使い、文字や実在の薬局ブランドはなし。模型数は実測薬局数を表さず、建物の大小で優劣や医療の良さを示さない。補足2行は下部の全幅帯で大きく、第二行を小さくしない。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
-          "evidence": "https://note.com/stats47/n/n1b943c7d414d 2026-10-15公開本文確認。2023年の人口10万人当たり薬局数、佐賀64.5所と沖縄39.4所を比較。総数や個人の受療しやすさとは区別し、カバーに医療の良否・原因・実数・倍率を載せない。店舗模型は概念の対比で分布図ではない。"
+          "headline": "人口10万人あたり薬局数\n1位は佐賀県",
+          "subline": "2023年度・施設数",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の小さな薬局の外観模型と無地の薬棚を描く。薬剤師・患者、薬名、効果効能、医療記号は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n1b943c7d414d 2026-10-23公開API本文照合。記事題名「【2023年版】都道府県「薬局数」ランキング｜1位は意外にも佐賀県」。本文中の「佐賀県」「2023」「人口10万人」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
         }
       }
     },
@@ -45505,15 +45600,60 @@
               "bytes": 6801
             }
           }
+        },
+        {
+          "sha256": "8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n285e0ba282d0/revisions/8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a.png"
+          },
+          "bytes": 1899640,
+          "id": "8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-9569e865caf9",
+          "createdAt": "2026-10-23T12:37:20.774Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2486dff56d4727e02089502d937a7596614e6e35b80eb4426eea671c2e8e95dc"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:26.917Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2486dff56d4727e02089502d937a7596614e6e35b80eb4426eea671c2e8e95dc",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n285e0ba282d0/inputs/2486dff56d4727e02089502d937a7596614e6e35b80eb4426eea671c2e8e95dc.json"
+              },
+              "bytes": 8751
+            },
+            "production": {
+              "id": "NCI-00399",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "9569e865caf901ac5bba84fe505f731018e7f7ab4514f8168c7cdd2573fe3b54"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "890faff6440958ef6e958d61254092245477b33e3af09c641d2dc0c2cf3d4688",
-      "approvedRevisionId": "890faff6440958ef6e958d61254092245477b33e3af09c641d2dc0c2cf3d4688",
+      "candidateRevisionId": "8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a",
+      "approvedRevisionId": "8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191393/rectangle_large_type_2_348a5e8b77c02be210fa6b87ad9d7a33.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.598Z",
-        "revisionId": "890faff6440958ef6e958d61254092245477b33e3af09c641d2dc0c2cf3d4688"
+        "url": "https://assets.st-note.com/production/uploads/images/327636565/rectangle_large_type_2_1576c7a96fa545c56596e78611563366.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:25.603Z",
+        "revisionId": "8553840049cc6c63d39f2722bd61498584db6e7b24d592665491f951edde389a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -45522,7 +45662,12 @@
         "id": "NCI-00399",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "CD・スマホで音楽鑑賞\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のCDと画面が無地のスマートフォン、ヘッドホンを描く。ライブ会場は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n285e0ba282d0 2026-10-23公開API本文照合。記事題名「【2021年版】CD・スマートフォンなどによる音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -47566,15 +47711,60 @@
               "bytes": 6556
             }
           }
+        },
+        {
+          "sha256": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4d38db115f82/revisions/85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8.png"
+          },
+          "bytes": 1818887,
+          "id": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-7fd9b0bf37ab",
+          "createdAt": "2026-10-23T12:37:37.444Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:37.458Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n4d38db115f82/inputs/6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2.json"
+              },
+              "bytes": 8593
+            },
+            "production": {
+              "id": "NCI-00413",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "7fd9b0bf37abb06c68999fd1653000097adab777e7806f15fac8e07610736a1c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c",
-      "approvedRevisionId": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c",
+      "candidateRevisionId": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
+      "approvedRevisionId": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191601/rectangle_large_type_2_8ab4c0c9a2f4c96eac1718bbabab8c35.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.632Z",
-        "revisionId": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c"
+        "url": "https://assets.st-note.com/production/uploads/images/327636681/rectangle_large_type_2_a794bd48807910956ff00c52fa0fd9de.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:25.437Z",
+        "revisionId": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -47583,7 +47773,12 @@
         "id": "NCI-00413",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "編み物・手芸\n1位は北海道",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の毛糸玉と編み針、途中まで編まれた無地の布を描く。手や人は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n4d38db115f82 2026-10-23公開API本文照合。記事題名「【2021年版】編み物・手芸をした人が多い県は？ 1位は北海道｜都道府県ランキング」。本文中の「北海道」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -48344,15 +48539,60 @@
               "bytes": 6499
             }
           }
+        },
+        {
+          "sha256": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n55cd6de6a733/revisions/84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077.png"
+          },
+          "bytes": 1728051,
+          "id": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-4ebe679118e1",
+          "createdAt": "2026-10-23T12:38:03.454Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:56.382Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n55cd6de6a733/inputs/3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8.json"
+              },
+              "bytes": 8620
+            },
+            "production": {
+              "id": "NCI-00419",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "4ebe679118e1ce5a9f3588826443f2b70b7c742b6348e6ecaf0a756825a45671"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd",
-      "approvedRevisionId": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd",
+      "candidateRevisionId": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
+      "approvedRevisionId": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191785/rectangle_large_type_2_0bf9bda7bdb838b3a544e74a6ca39b1a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.749Z",
-        "revisionId": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd"
+        "url": "https://assets.st-note.com/production/uploads/images/327636943/rectangle_large_type_2_906663f4ccc7494d601d3e0ad97233f8.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:27.962Z",
+        "revisionId": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -48361,7 +48601,12 @@
         "id": "NCI-00419",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "テニスをした人\n1位は神奈川県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のテニスラケットと黄色のボールを描く。選手・手・大会ロゴは描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n55cd6de6a733 2026-10-23公開API本文照合。記事題名「【2021年版】テニスをした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の「神奈川県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -52715,15 +52960,60 @@
               "bytes": 6571
             }
           }
+        },
+        {
+          "sha256": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n9dcb0680cea6/revisions/8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc.png"
+          },
+          "bytes": 1762793,
+          "id": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-986479f6c8fb",
+          "createdAt": "2026-10-23T12:37:04.266Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:14.982Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n9dcb0680cea6/inputs/8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1.json"
+              },
+              "bytes": 8671
+            },
+            "production": {
+              "id": "NCI-00449",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "986479f6c8fb4e0006b93896232d3b3e06aa178a2dc0d3b25046eba9e5318ce4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66",
-      "approvedRevisionId": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66",
+      "candidateRevisionId": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
+      "approvedRevisionId": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192420/rectangle_large_type_2_ac9d782ee7e691db6acd7b11bdf063f7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.499Z",
-        "revisionId": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66"
+        "url": "https://assets.st-note.com/production/uploads/images/327637115/rectangle_large_type_2_d6f669f4c382f679ad17d5ba817a6768.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:27.995Z",
+        "revisionId": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -52732,7 +53022,12 @@
         "id": "NCI-00449",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "絵画・彫刻の制作\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のキャンバスと絵筆、抽象的な形の木彫り用素材を描く。人物像・動物像は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n9dcb0680cea6 2026-10-23公開API本文照合。記事題名「【2021年版】絵画・彫刻の制作をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -52889,15 +53184,60 @@
               "bytes": 6666
             }
           }
+        },
+        {
+          "sha256": "5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-na25ccb15a6cb/revisions/5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8.png"
+          },
+          "bytes": 1760230,
+          "id": "5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-4926c9d2dff9",
+          "createdAt": "2026-10-23T12:36:55.871Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e360ba609b08ab38972857cdb2453ed6591e446f6505a1f9c66d577e8c7be167"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:08.949Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e360ba609b08ab38972857cdb2453ed6591e446f6505a1f9c66d577e8c7be167",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-na25ccb15a6cb/inputs/e360ba609b08ab38972857cdb2453ed6591e446f6505a1f9c66d577e8c7be167.json"
+              },
+              "bytes": 8677
+            },
+            "production": {
+              "id": "NCI-00451",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "4926c9d2dff9247e1317cfcf99e56ad155be508b26c98754cb62cc05d3a9f904"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c0ac433067bb841aca03f0ebf58ac9df08cae7121b1090a479ba6228f52bebbb",
-      "approvedRevisionId": "c0ac433067bb841aca03f0ebf58ac9df08cae7121b1090a479ba6228f52bebbb",
+      "candidateRevisionId": "5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8",
+      "approvedRevisionId": "5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192503/rectangle_large_type_2_f73343a9c1bb86427d776355f60e1fe7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.615Z",
-        "revisionId": "c0ac433067bb841aca03f0ebf58ac9df08cae7121b1090a479ba6228f52bebbb"
+        "url": "https://assets.st-note.com/production/uploads/images/327637211/rectangle_large_type_2_253081ecc117f68ea539c75d3ad865fb.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:28.428Z",
+        "revisionId": "5a72474dcee88e2704ebbed199d5277a18d5eaf1117677193de15904980f96b8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -52906,7 +53246,12 @@
         "id": "NCI-00451",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "写真の撮影・プリント\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のカメラと白紙の写真用紙を描く。写真中の人物や動物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na25ccb15a6cb 2026-10-23公開API本文照合。記事題名「【2021年版】写真の撮影・プリントをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -56229,15 +56574,60 @@
               "bytes": 6559
             }
           }
+        },
+        {
+          "sha256": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne4a6ec30706a/revisions/287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941.png"
+          },
+          "bytes": 1569044,
+          "id": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-ea2106fce172",
+          "createdAt": "2026-10-23T12:37:29.252Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:32.332Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-ne4a6ec30706a/inputs/51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc.json"
+              },
+              "bytes": 8653
+            },
+            "production": {
+              "id": "NCI-00475",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "ea2106fce1724b4824e1e0074cd6bc8a9fa3c1a67b714ff2228eb15eb6a22b85"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da",
-      "approvedRevisionId": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da",
+      "candidateRevisionId": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
+      "approvedRevisionId": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193185/rectangle_large_type_2_1da1b1764994df460bae65aa844ba8d7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.628Z",
-        "revisionId": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da"
+        "url": "https://assets.st-note.com/production/uploads/images/327637369/rectangle_large_type_2_7fc1b39a16d381d3129f26bc2219d0bf.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:30.387Z",
+        "revisionId": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -56246,7 +56636,12 @@
         "id": "NCI-00475",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "マンガを読んだ人\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字・無絵柄のマンガ本を開いた状態で描く。ページ内のキャラクターや台詞は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/ne4a6ec30706a 2026-10-23公開API本文照合。記事題名「【2021年版】マンガを読んだ人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -56817,15 +57212,60 @@
               "bytes": 6574
             }
           }
+        },
+        {
+          "sha256": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nead586305cdb/revisions/ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18.png"
+          },
+          "bytes": 1888992,
+          "id": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-124974849d8c",
+          "createdAt": "2026-10-23T12:37:12.458Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:40:21.164Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nead586305cdb/inputs/7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84.json"
+              },
+              "bytes": 8843
+            },
+            "production": {
+              "id": "NCI-00480",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "124974849d8cec97b7d0d1c0f6fa1099a741b6a11c79e4386cf58e684fd8b234"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1",
-      "approvedRevisionId": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1",
+      "candidateRevisionId": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
+      "approvedRevisionId": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193346/rectangle_large_type_2_f8262f5b5b5d6a956ec6d954a02e13dc.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.487Z",
-        "revisionId": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1"
+        "url": "https://assets.st-note.com/production/uploads/images/327637524/rectangle_large_type_2_fd096a1af30f864acacabf02916ddd8d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:30.097Z",
+        "revisionId": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -56834,7 +57274,12 @@
         "id": "NCI-00480",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "パチンコをした人\n佐賀県・鹿児島県が同率1位",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のパチンコ台の上部と無地の銀色玉を描く。金銭、景品、勝利演出、人物、文字や数字は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nead586305cdb 2026-10-23公開API本文照合。記事題名「【2021年版】パチンコをした人が多い県は？ 1位は鹿児島県｜都道府県ランキング」。本文中の「佐賀県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -57355,15 +57800,60 @@
               "bytes": 6620
             }
           }
+        },
+        {
+          "sha256": "07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf1a5abab3d5e/revisions/07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988.png"
+          },
+          "bytes": 1936664,
+          "id": "07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-b6b814bcba33",
+          "createdAt": "2026-10-23T12:36:47.780Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "27f572966769071ac211c3ae775e9ca33475a89a77676e721a7326f40baaa036"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T12:39:59.187Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "27f572966769071ac211c3ae775e9ca33475a89a77676e721a7326f40baaa036",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nf1a5abab3d5e/inputs/27f572966769071ac211c3ae775e9ca33475a89a77676e721a7326f40baaa036.json"
+              },
+              "bytes": 8719
+            },
+            "production": {
+              "id": "NCI-00485",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "b6b814bcba3357947fc1da034f2cae83b4d9cbb4a2bb62067747741b6ea7c12d"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "b01f0c16598fde08240a9f5d65281d69c3147420a47618620e55e38ccdb730c6",
-      "approvedRevisionId": "b01f0c16598fde08240a9f5d65281d69c3147420a47618620e55e38ccdb730c6",
+      "candidateRevisionId": "07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988",
+      "approvedRevisionId": "07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193498/rectangle_large_type_2_acd9802ef79cb362f7ff18ac9396e25d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:21.459Z",
-        "revisionId": "b01f0c16598fde08240a9f5d65281d69c3147420a47618620e55e38ccdb730c6"
+        "url": "https://assets.st-note.com/production/uploads/images/327637724/rectangle_large_type_2_8c9451eb30eb26c760e6e4153bbf8848.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T12:47:30.393Z",
+        "revisionId": "07a06f806b043ea2300b774a6aaf9dc933c7488ab5d4d524d8492a06ff3c7988"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -57372,7 +57862,12 @@
         "id": "NCI-00485",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ポピュラー音楽鑑賞\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のライブ会場のステージライトと無地の入場券を描く。歌手・観客・楽器の演奏者は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nf1a5abab3d5e 2026-10-23公開API本文照合。記事題名「【2021年版】ポピュラー音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
