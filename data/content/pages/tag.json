@@ -623,7 +623,7 @@
       "key": "EV",
       "title": "EV",
       "href": "/tag/EV",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:electricity",
@@ -2279,7 +2279,7 @@
       "key": "サプライチェーン",
       "title": "サプライチェーン",
       "href": "/tag/%E3%82%B5%E3%83%97%E3%83%A9%E3%82%A4%E3%83%81%E3%82%A7%E3%83%BC%E3%83%B3",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-008245424e90",
@@ -7191,7 +7191,7 @@
       "key": "輸送用機械",
       "title": "輸送用機械",
       "href": "/tag/%E8%BC%B8%E9%80%81%E7%94%A8%E6%A9%9F%E6%A2%B0",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:transportation",

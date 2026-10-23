@@ -4640,6 +4640,66 @@
       "rankingKeys": []
     },
     {
+      "id": "sns:1029",
+      "kind": "sns",
+      "key": "1029",
+      "title": "30.7歳・30.3歳・30.1歳。",
+      "href": "https://www.threads.com/@stats47jp/post/DevSS7PDjcV",
+      "published": true,
+      "rankingKeys": [
+        "average-age-of-first-marriage-wife"
+      ]
+    },
+    {
+      "id": "sns:1030",
+      "kind": "sns",
+      "key": "1030",
+      "title": "兵庫を数字と地域文化の両方から見る。",
+      "href": "https://www.threads.com/@stats47jp/post/DewAkRUiHtG",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1031",
+      "kind": "sns",
+      "key": "1031",
+      "title": "車両保険に入っている車の割合が最も高い県は？",
+      "href": "https://www.threads.com/@stats47jp/post/Dex0xYyiguH",
+      "published": true,
+      "rankingKeys": [
+        "private-auto-insurance-penetration-rate-vehicle"
+      ]
+    },
+    {
+      "id": "sns:1032",
+      "kind": "sns",
+      "key": "1032",
+      "title": "旅先では見えにくい奈良の輪郭。",
+      "href": "https://www.threads.com/@stats47jp/post/DeyilomCHpX",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1033",
+      "kind": "sns",
+      "key": "1033",
+      "title": "うなぎのかば焼き、和歌山と北海道で4.3倍差。",
+      "href": "https://www.threads.com/@stats47jp/post/De0asiFEW-m",
+      "published": true,
+      "rankingKeys": [
+        "grilled-eel-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:1034",
+      "kind": "sns",
+      "key": "1034",
+      "title": "和歌山のデータブックを公開中。",
+      "href": "https://www.threads.com/@stats47jp/post/De1JqU1kwVq",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:104",
       "kind": "sns",
       "key": "104",
@@ -5034,6 +5094,33 @@
       "key": "1096",
       "title": "コーヒーを最も多く買う県、18年で1位になったのは9府県。",
       "href": "https://www.instagram.com/reel/Dev9cQrDsTg/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1097",
+      "kind": "sns",
+      "key": "1097",
+      "title": "【データの相関】魚介の漬物消費支出額 × 年平均気温",
+      "href": "https://www.instagram.com/p/DewsE6nlF61/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1098",
+      "kind": "sns",
+      "key": "1098",
+      "title": "【都道府県クイズ】ウイスキーにいちばんお金を使う県は？",
+      "href": "https://www.instagram.com/p/DezQ90RFY8G/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1099",
+      "kind": "sns",
+      "key": "1099",
+      "title": "【県どうしの比較】京都府 vs 兵庫県",
+      "href": "https://www.instagram.com/p/De10owrILJa/",
       "published": true,
       "rankingKeys": []
     },
@@ -12854,6 +12941,21 @@
     {
       "from": "sns:1027",
       "to": "ranking:post-office-count-per-100km2",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1029",
+      "to": "ranking:average-age-of-first-marriage-wife",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1031",
+      "to": "ranking:private-auto-insurance-penetration-rate-vehicle",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1033",
+      "to": "ranking:grilled-eel-consumption-expenditure",
       "relation": "uses"
     },
     {
