@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**736 件** (最終更新: 2026-10-22)
+**739 件** (最終更新: 2026-10-23)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-23 | 📸 Instagram | compare-carousel/26000-vs-28000 | 【県どうしの比較】京都府 vs 兵庫県  海面漁業漁獲量: 兵庫県が大きい（2023年・出典: 社会・人口統計体系） 交… | [🔗](https://www.instagram.com/p/De10owrILJa/) |
+| 2026-10-23 | 🧵 Threads | area/area-30000-profile | 和歌山のデータブックを公開中。 メジロとみかん、うめ（南高梅）を入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/De1JqU1kwVq) |
+| 2026-10-23 | 🧵 Threads | ranking/grilled-eel-consumption-expenditure | うなぎのかば焼き、和歌山と北海道で4.3倍差。  和歌山 4,776円 北海道 1,108円  2位静岡3,921円、3… | [🔗](https://www.threads.com/@stats47jp/post/De0asiFEW-m) |
 | 2026-10-22 | 📸 Instagram | ranking-quiz/whisky-consumption-expenditure | 【都道府県クイズ】ウイスキーにいちばんお金を使う県は？  A 北海道 B 愛知県 C 秋田県  ヒントは2枚目、答えは3… | [🔗](https://www.instagram.com/p/DezQ90RFY8G/) |
 | 2026-10-22 | 🧵 Threads | area/area-29000-profile | 旅先では見えにくい奈良の輪郭。 県木スギと特産古都華（いちご）、暮らしの統計を同じページで確認できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeyilomCHpX) |
 | 2026-10-22 | 🧵 Threads | ranking/private-auto-insurance-penetration-rate-vehicle | 車両保険に入っている車の割合が最も高い県は？  1位愛知59.4％、2位岐阜59％、3位三重51.9％と東海が上位。 最… | [🔗](https://www.threads.com/@stats47jp/post/Dex0xYyiguH) |
