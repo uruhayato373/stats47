@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T10:21:09.794Z",
+  "updatedAt": "2026-10-23T10:51:58.067Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -6294,15 +6294,60 @@
               "bytes": 7498
             }
           }
+        },
+        {
+          "sha256": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-avg-propensity-to-consume-worker-households/revisions/9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47.png"
+          },
+          "bytes": 1633033,
+          "id": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-158fa718613a",
+          "createdAt": "2026-10-23T10:41:38.809Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:43:53.780Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-avg-propensity-to-consume-worker-households/inputs/d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6.json"
+              },
+              "bytes": 8464
+            },
+            "production": {
+              "id": "NCI-00051",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "158fa718613afcffe2de0739afaeb9bd6451a2a1331e5473dff4609c4cbec6c1"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2",
-      "approvedRevisionId": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2",
+      "candidateRevisionId": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
+      "approvedRevisionId": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190508/rectangle_large_type_2_ecc8e7905766f27a64587d8c271ede61.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.605Z",
-        "revisionId": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2"
+        "url": "https://assets.st-note.com/production/uploads/images/327596236/rectangle_large_type_2_4dd58d49ea20fdf93381f1e5a346d165.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:52.521Z",
+        "revisionId": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6311,7 +6356,12 @@
         "id": "NCI-00051",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "平均消費性向\n高い県は鳥取県",
+          "subline": "2024年・勤労者世帯",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の家計簿を1冊。実際の支出額や貯蓄率を暗示する現金の山、グラフは描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n76446d252957 2026-10-23公開API本文照合。鳥取県は71.5％で1位。勤労者世帯の可処分所得に占める消費支出の割合。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -6381,15 +6431,60 @@
               "bytes": 7628
             }
           }
+        },
+        {
+          "sha256": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/revisions/15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956.png"
+          },
+          "bytes": 1825709,
+          "id": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-a29bb6bed553",
+          "createdAt": "2026-10-23T10:42:15.672Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:14.758Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/inputs/98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd.json"
+              },
+              "bytes": 8536
+            },
+            "production": {
+              "id": "NCI-00052",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "a29bb6bed553c9c58cdd41403affbc589825750fc7340c5a7e9e0db718d102eb"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6",
-      "approvedRevisionId": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6",
+      "candidateRevisionId": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
+      "approvedRevisionId": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190528/rectangle_large_type_2_5d385adb1c2a6d859b7765c7a745ff54.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.855Z",
-        "revisionId": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6"
+        "url": "https://assets.st-note.com/production/uploads/images/327596318/rectangle_large_type_2_ece8c9341064bed86339394318fbcfc2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:52.295Z",
+        "revisionId": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6398,7 +6493,12 @@
         "id": "NCI-00052",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "月間消費支出\n多い県は埼玉県",
+          "subline": "2024年・二人以上世帯",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の買い物かごを1点だけ。財布や現金の山は描かず、家計の豊かさ・苦しさを暗示しない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n89f8035eb53d 2026-10-23公開API本文照合。埼玉県は357.9千円で1位。二人以上世帯が1か月に支出した商品・サービスの平均額。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -6675,15 +6775,60 @@
               "bytes": 7631
             }
           }
+        },
+        {
+          "sha256": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/revisions/ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2.png"
+          },
+          "bytes": 1848653,
+          "id": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-afbc1f200d06",
+          "createdAt": "2026-10-23T10:41:48.249Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:43:58.765Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/inputs/cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b.json"
+              },
+              "bytes": 8642
+            },
+            "production": {
+              "id": "NCI-00054",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "afbc1f200d06a575666a2cf6379dd4f67731e69bc2034fd1cd1086c1336ed961"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36",
-      "approvedRevisionId": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36",
+      "candidateRevisionId": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
+      "approvedRevisionId": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190603/rectangle_large_type_2_5d3043cf9874624c2f0ca845bfec7b57.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.596Z",
-        "revisionId": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36"
+        "url": "https://assets.st-note.com/production/uploads/images/327596635/rectangle_large_type_2_338309ce6450a5d6150e5003ce69380c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:51.846Z",
+        "revisionId": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6692,7 +6837,12 @@
         "id": "NCI-00054",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "1世帯あたり負債\n多い県は神奈川県",
+          "subline": "2019年・二人以上世帯",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に文字・数字のない閉じた家計書類を1点。住宅ローンだけを示す家や住宅模型、現金の山、困窮する人物を描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nbdbde1672cc0 2026-10-23公開API本文照合。神奈川県は9,304千円で1位。二人以上世帯の1世帯あたりの借入金等の残高。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -6762,15 +6912,60 @@
               "bytes": 7519
             }
           }
+        },
+        {
+          "sha256": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-day-time-population/revisions/0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385.png"
+          },
+          "bytes": 1756768,
+          "id": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-ead031c89b47",
+          "createdAt": "2026-10-23T10:41:57.036Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:04.579Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-day-time-population/inputs/76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149.json"
+              },
+              "bytes": 8441
+            },
+            "production": {
+              "id": "NCI-00055",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "ead031c89b47c121c63909a67c33ecfb648398b792effb6fc326ee7b720e4802"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5",
-      "approvedRevisionId": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5",
+      "candidateRevisionId": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
+      "approvedRevisionId": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190611/rectangle_large_type_2_d0338998216991f7556d9a85d0516409.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.787Z",
-        "revisionId": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5"
+        "url": "https://assets.st-note.com/production/uploads/images/327596751/rectangle_large_type_2_123b4bd3d1bb0ed348c4475dfbdfa36a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:51.584Z",
+        "revisionId": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6779,7 +6974,12 @@
         "id": "NCI-00055",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "昼間人口\n多い県は東京都",
+          "subline": "2020年・人数で比較",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に晴れた昼間の簡潔な都市のシルエット。人物や人流・観光客を描かず、通勤通学だけを表す記号も加えない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n7a494830e01d 2026-10-23公開API本文照合。東京都は16,315,279人で1位。常住人口に通勤・通学の流入出を調整した人口総数。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -12047,15 +12247,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-niigata/images/cover-1280x670.png",
             "sourceSha256": "3c187f48107a39e4edbf461b5abd7801e48672869a2f1cfeb89b8cbcd787a59f"
           }
+        },
+        {
+          "sha256": "59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-niigata/revisions/59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9.png"
+          },
+          "bytes": 1586166,
+          "id": "59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-93d03b17477f",
+          "createdAt": "2026-10-23T10:41:26.521Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2d1657ed1ae0cf753705c9f157e5fafb6613d3e32e8916002a27e8cde576355c"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の新潟市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:43:47.533Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2d1657ed1ae0cf753705c9f157e5fafb6613d3e32e8916002a27e8cde576355c",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-niigata/inputs/2d1657ed1ae0cf753705c9f157e5fafb6613d3e32e8916002a27e8cde576355c.json"
+              },
+              "bytes": 12519
+            },
+            "production": {
+              "id": "NCI-00088",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "93d03b17477fe882c54fd834a9fbe7f804975a15a86e3ae28853d9bbacfdc0bb"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
-      "approvedRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
+      "candidateRevisionId": "59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9",
+      "approvedRevisionId": "59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319911136/rectangle_large_type_2_4859c91598047ef2cbc4254b5d07a79f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.418Z",
-        "revisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9"
+        "url": "https://assets.st-note.com/production/uploads/images/327596832/rectangle_large_type_2_335dd806a1818c2dc8fc9f04f4270010.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:54.300Z",
+        "revisionId": "59415347986af1bac0c1dd2bafea618ae679dc2926a7c70bf57dc40ec1be3ac9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -12064,7 +12309,17 @@
         "id": "NCI-00088",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "新潟県の家計\n保健医療に注目",
+          "subline": "新潟市・2024年\n二人以上の世帯",
+          "subject": "添付は新潟県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の救急箱の模型を小さく1点だけ。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。小物は無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/ndd0bb1c14aa4 2026-10-23公開API本文照合。新潟市の2024年・二人以上の世帯の家計調査。保健医療0.81倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は新潟県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は新潟市であり県全域の観測図ではない。",
+          "dataScope": {
+            "place": "新潟市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -14545,15 +14800,60 @@
               "planSha256": "14c9b0154d4ce33974f4647c84eda331776c02cd29b1825ec23feda5692da1fe"
             }
           }
+        },
+        {
+          "sha256": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokushima/revisions/24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0.png"
+          },
+          "bytes": 1549005,
+          "id": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-3559935f2419",
+          "createdAt": "2026-10-23T10:41:15.453Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の徳島市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:43:42.343Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-tokushima/inputs/3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b.json"
+              },
+              "bytes": 12484
+            },
+            "production": {
+              "id": "NCI-00099",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "3559935f24199ac5db4fcb908ada52b6a1084b18c6b622889c10ec8079e6268a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b",
-      "approvedRevisionId": "c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b",
+      "candidateRevisionId": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
+      "approvedRevisionId": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324614789/rectangle_large_type_2_e79b89a30cc55aab787661d8bb151b31.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.139Z",
-        "revisionId": "c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b"
+        "url": "https://assets.st-note.com/production/uploads/images/327597003/rectangle_large_type_2_a7052f2099232206cf1688cf09ae9674.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:58.035Z",
+        "revisionId": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -14565,8 +14865,8 @@
         "brief": {
           "headline": "徳島県の家計\n教育費に注目",
           "subline": "徳島市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、徳島県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の学習用の本一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/ne2abc0fc7530 2026-10-15公開本文確認。公開本文は徳島市の2024年・二人以上の世帯。教育支出は47市単純平均比1.47倍で最大の乖離。学力・教育成果や県全体の値へ読み替えず、倍率や順位はカバーへ載せない。 人物・キャラクターは使わない。 新方針: 地図は徳島県の主域（遠隔離島省略）の地域識別用。家計の観測対象は徳島市であり、県全域の観測図ではない。",
+          "subject": "添付は徳島県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。小物は無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/ne2abc0fc7530 2026-10-23公開API本文照合。徳島市の2024年・二人以上の世帯の家計調査。教育1.47倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は徳島県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は徳島市であり県全域の観測図ではない。",
           "dataScope": {
             "place": "徳島市",
             "year": "2024",
@@ -16583,15 +16883,60 @@
               "bytes": 7662
             }
           }
+        },
+        {
+          "sha256": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-late-elderly-medical-expense-per-insured/revisions/0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98.png"
+          },
+          "bytes": 1645359,
+          "id": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-c381282e705f",
+          "createdAt": "2026-10-23T10:42:41.274Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:28.555Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-late-elderly-medical-expense-per-insured/inputs/1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955.json"
+              },
+              "bytes": 8528
+            },
+            "production": {
+              "id": "NCI-00112",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "c381282e705f924a847d80ce4f5cb3b1d782f353f928cdcbb32def9c1e5d0826"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b",
-      "approvedRevisionId": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b",
+      "candidateRevisionId": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
+      "approvedRevisionId": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190756/rectangle_large_type_2_74fdfda3ce547851d8d36b172d9aa3d2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.934Z",
-        "revisionId": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b"
+        "url": "https://assets.st-note.com/production/uploads/images/327597118/rectangle_large_type_2_6003bc0e7478c88094e6485a9ac92cd5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:54.580Z",
+        "revisionId": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -16600,7 +16945,12 @@
         "id": "NCI-00112",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "後期高齢者医療費\n多い県は福岡県",
+          "subline": "2023年・1人あたり年額",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に文字のない医療用聴診器を1点。人物・患者・医療の質や健康度を暗示する記号は描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/ncd0aea7cd435 2026-10-23公開API本文照合。福岡県は1,195,147円で1位。後期高齢者医療制度の被保険者1人あたり年額。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -17078,15 +17428,60 @@
               "bytes": 7402
             }
           }
+        },
+        {
+          "sha256": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-minimum-wage-by-region/revisions/af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62.png"
+          },
+          "bytes": 1698740,
+          "id": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d7bea093d836",
+          "createdAt": "2026-10-23T10:42:06.559Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:09.848Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-minimum-wage-by-region/inputs/883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8.json"
+              },
+              "bytes": 8555
+            },
+            "production": {
+              "id": "NCI-00114",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d7bea093d83629f18a2a43c33474e01cd0c04c1522ab4418486ee1f9be5fa04f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036",
-      "approvedRevisionId": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036",
+      "candidateRevisionId": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
+      "approvedRevisionId": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190803/rectangle_large_type_2_8415e1beccc7882526d67b5bd16d76d9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.806Z",
-        "revisionId": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036"
+        "url": "https://assets.st-note.com/production/uploads/images/327597247/rectangle_large_type_2_cc4696103bfd4545d52819a55f651ed4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:54.948Z",
+        "revisionId": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -17095,7 +17490,12 @@
         "id": "NCI-00114",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "地域別最低賃金\n高い県は東京都",
+          "subline": "2024年・時給で比較",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字・無数字のシンプルな時計と無地の硬貨を小さく描く。現行の額と誤認させない。人物や職業の優劣を表す絵は描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n2a465fecbdec 2026-10-23公開API本文照合。東京都は1,163円で1位。2024年改定の地域別最低賃金、労働者1時間あたり。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -17397,15 +17797,60 @@
               "bytes": 7492
             }
           }
+        },
+        {
+          "sha256": "a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-number-of-establishments-manufacturing/revisions/a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3.png"
+          },
+          "bytes": 1735020,
+          "id": "a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-31fedb74471c",
+          "createdAt": "2026-10-23T10:42:23.581Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c4e0c27ea227f243b4984b41e99399adacb9ae7340e80163edd37bc82bb2dfbb"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:19.130Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c4e0c27ea227f243b4984b41e99399adacb9ae7340e80163edd37bc82bb2dfbb",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-number-of-establishments-manufacturing/inputs/c4e0c27ea227f243b4984b41e99399adacb9ae7340e80163edd37bc82bb2dfbb.json"
+              },
+              "bytes": 8520
+            },
+            "production": {
+              "id": "NCI-00115",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "31fedb74471c854779aeacae9ef34191f4d1c04ca53a7676af8dd0f2a45e3f24"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ad6654a1922d548a42ae10b954218c7ca5de390ecc6786bf14a5a1057e5484cb",
-      "approvedRevisionId": "ad6654a1922d548a42ae10b954218c7ca5de390ecc6786bf14a5a1057e5484cb",
+      "candidateRevisionId": "a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3",
+      "approvedRevisionId": "a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190846/rectangle_large_type_2_ae56a47b71dab7758082106bb51bece1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.857Z",
-        "revisionId": "ad6654a1922d548a42ae10b954218c7ca5de390ecc6786bf14a5a1057e5484cb"
+        "url": "https://assets.st-note.com/production/uploads/images/327597328/rectangle_large_type_2_cd9f65e1318de88cf05b6b6ff360e213.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:56.231Z",
+        "revisionId": "a32f3eefc60b20496d7c72d98c2d640db61eb2b5a69f84d25c8e8636207309d3"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -17414,7 +17859,12 @@
         "id": "NCI-00115",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "製造業の事業所数\n多い県は東京都",
+          "subline": "2014年・所数で比較",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の小さな工場建屋の模型を1点。煙や労働者、企業数・生産額の棒グラフは描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nf28da95897e0 2026-10-23公開API本文照合。東京都は49,238所で1位。2014年の製造業事業所の数で、企業数・生産額とは異なる。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
@@ -18347,15 +18797,60 @@
               "bytes": 7417
             }
           }
+        },
+        {
+          "sha256": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-fertility-rate/revisions/7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8.png"
+          },
+          "bytes": 1727930,
+          "id": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-f202db4c6471",
+          "createdAt": "2026-10-23T10:42:31.237Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:44:23.948Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-total-fertility-rate/inputs/d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a.json"
+              },
+              "bytes": 8559
+            },
+            "production": {
+              "id": "NCI-00124",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "f202db4c6471c2ab44d43861b135b1ee3a9c2b406d7b45057e946cbe53129ef7"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9",
-      "approvedRevisionId": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9",
+      "candidateRevisionId": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
+      "approvedRevisionId": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191019/rectangle_large_type_2_42ee77a2bf05baa58bd6cf5c2f45d3b5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.920Z",
-        "revisionId": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9"
+        "url": "https://assets.st-note.com/production/uploads/images/327597427/rectangle_large_type_2_8e181d6d153d3dbf1ac4352bfa8f44d3.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:51:57.211Z",
+        "revisionId": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -18364,7 +18859,12 @@
         "id": "NCI-00124",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "合計特殊出生率\n高い県は沖縄県",
+          "subline": "2023年・女性1人あたり",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人で空のベビーベッドを小さく1点。赤ちゃん・人物・顔・手・人口ピラミッドは描かない。出生数の総量と誤認させない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nf4b16d26f6e8 2026-10-23公開API本文照合。沖縄県は1.6で1位。年齢別出生率を合計した指標で出生数の総量ではない。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+        }
       }
     },
     {
