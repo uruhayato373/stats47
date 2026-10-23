@@ -1435,6 +1435,7 @@ updated: 2026-10-19
 - **事象**: #1014 (2026-10-03) で error=3,149・warning=7,885 (6,475 URL)。種類の内訳 (HTML/RSC 肥大・DOM 過剰・リンク重複・広告重複・構造化データ・画像切れ) を誰も振り分けていない。リンク重複は [SITEWIDE-DUPLICATE-LINK-RATIO-01] が扱う。
 - **次**: `/quality/page-audit` か R2 `state/page-quality/latest.json` で error を種類別に数え、既存カードに載るものは振り分け、載らない種類はカードにする。誤検知なら閾値を直す。
 - **完了条件**: error の各種類に行き先 (カード ID か閾値修正) があり、#1014 にその表がコメントされている。
+- **2026-10-23 振り分け (R2 `state/page-quality/latest.json`・2026-10-17 の週次・error 2,901 件)**: `duplicate_link_ratio` 2,836 件 (県ページ 1,457・ランキング 613・ブログ 607・調査 57・Geo 54・テーマ 32 ほか) → `SITEWIDE-DUPLICATE-LINK-RATIO-01`。`html_bytes` の前回比 +30% 超 49 件は土砂災害の Geo 復旧 (`09b6ed756`) で県×土砂災害 47 ページ (約 325KB → 560KB)・`/geo/population-landslide-exposure`・`/themes/landslide-exposure` が増えたもの。絶対値は 900KB 未満で、内容の復旧による一度きりの増加なので閾値は変えず翌週の比較で消える見込み (`rsc_bytes` 1 件・`dom_nodes` 1 件も同じ扱い)。`http_status` 503 の 12 件 (市区町村 11・県×外国人住民 1) は 2026-10-23 に全件 200 で再現せず、監査の巡回中の一時的な失敗 (Workers の CPU は `CF-CPU-SURGE-01`)。`page_errors` 2 件 (`/areas`・`/category/landweather`) と `console_errors` 1 件 (`/geo`) は 2026-10-23 にブラウザで再現せず。#1014 へのコメントは外部への書き込みなので未投稿。
 
 ### [NOTE-PRODUCT-CARD-MISMATCH-01] note 記事の商品カードの題名が実商品の題名と食い違う
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
@@ -2454,6 +2455,7 @@ updated: 2026-10-19
   各 owner が最小1テンプレートで特定 ②修正 ③`page-quality:check`(代表URL)で個別確認
   ④全件は次回週次 `page-quality-audit-weekly.yml` で確認 (毎回全件を手動実行しない)。
 - **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
+- **2026-10-23 原因の切り分け (本番 HTML を cheerio で数えた。指標は `measure-static.ts` の「全 a[href] − 一意の href」÷ 全 a[href])**: error 2,901 件中 2,836 件がこの項目 (`PAGE-QUALITY-ERROR-BACKLOG-01` の振り分け)。header・footer・aside を除いた本文側の比率は、ブログ 0.44 → 0.21・調査 0.22 → 0.06 (共通ナビの重複が主因)、ランキング 0.38 → 0.43・テーマ 0.48 → 0.54 (本文側に重複がある)。本文側の重複の出どころ: ① テーマ `/themes/population-dynamics` は「このテーマの出典調査」「このテーマの全指標」をモバイル用と PC 用の 2 つ HTML に出していて、`/survey/vital-statistics` だけで 12 本 ② ランキング `/ranking/total-population` は出典調査へのリンクが本文の複数箇所 (`/survey/census` 5 本・`/survey/population-estimates` 5 本。出典 3 か所の整理は `RANKING-SOURCE-TRIPLE-01` の判断待ち) と、関連ランキングが nav と section で重なる ③ ブログは共通ナビ (header のカテゴリ・左レール・footer) の重複。**次**: ① はモバイル用と PC 用を 1 つの HTML にまとめる (theme-ui-manager) ② は `RANKING-SOURCE-TRIPLE-01` の判断の後 ③ は共通ナビの重複を指標から外すか (header・footer・aside を数えない) を決める。指標の範囲を変えると検査を緩めることになるので、オーナーの判断が要る。
 - 生データ: `data/page-quality/metrics/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
   管理画面 `/quality/page-audit`。
 
