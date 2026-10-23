@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-10-09
- * 件数: 910
+ * 最終生成日: 2026-10-23
+ * 件数: 907
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -35,7 +35,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "CloudflareR2",
   "D3",
   "DX",
-  "EV",
   "GDP",
   "GIS",
   "GX",
@@ -159,7 +158,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "コーヒー消費支出額",
   "コーヒー消費量",
   "ゴルフ",
-  "サプライチェーン",
   "サンキー",
   "サンマ",
   "サービス業",
@@ -815,7 +813,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "転入超過",
   "転職",
   "軽自動車",
-  "輸送用機械",
   "農地",
   "農外所得",
   "農家所得",

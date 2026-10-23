@@ -4889,6 +4889,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
 - **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番 (デプロイ run 39763716073 の後) で `ai-content.json` は 200、ページに「データの考察」と FAQPage が出て、解説の無い指標 (`elderly-population-ratio`) には出ないことを確認した。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
 
+### [DEPS-ZOD-BODYPARSER-ADVISORY-01] zod と body-parser の high 脆弱性で Security Scan が全 PR で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-24] [領域:サイト]
+
+- **証拠 (2026-10-24・PR #1174 の Security Scan)**: `GHSA-mrhx-c7xc-m3w5` (zod < 4.6.6・2026-10-01 公開・大きすぎる制約付きコレクションの検証でメモリを使い切る) と `GHSA-27r3-jxmh-p828` (body-parser < 2.4.0・2026-10-23 公開・圧縮した本文の後ろのバイトで DoS)。zod 4.4.3 は `apps/remotion` (固定)・`@remotion/{media,studio,studio-server,bundler,cli}`・`@cloudflare/vitest-pool-workers`・`knip` の入れ子。body-parser は root の overrides で 2.3.0 に固定 (express 5.2.1 経由)。Security Scan は main の必須チェック (Code Quality Check の needs) ではないのでマージは止まらない。
+- **上流**: 最新の `@remotion/studio` 4.0.538 は zod 4.5.4、`@cloudflare/vitest-pool-workers` 0.23.0 は zod 4.4.3 を固定していて、まだ修正版を使っていない (2026-10-24 `npm view`)。
+- **試して戻したこと (2026-10-24)**: ① root overrides で上の各パッケージ配下の zod を 4.6.7 にすると、vitest-pool-workers・studio-server の zod が root の zod 3.25.76 へ dedupe されて invalid になった ② body-parser の overrides を 2.4.0 にして lock の該当行を消して入れ直すと、body-parser が lock と node_modules から消えた (express の依存が欠ける)。どちらも元に戻した。
+- **次**: body-parser は express の更新 (express 5 系の body-parser 2.4.0 を取り込む版) か、`npm install body-parser@2.4.0` を明示してから overrides を合わせる手順を試し、`npm ls body-parser` が 2.4.0 で invalid 0 になることを確かめる。zod は上流 (Remotion・workers-sdk) の修正待ちか、apps/remotion だけ 4.6.7 にして Remotion の bundle とスチルのレンダが通るかを試す。runtime 依存の advisory は例外台帳では通らない。
+- **完了条件**: `node .claude/scripts/lib/check-dependency-audit.mjs` が high/critical 0、`npm ls zod body-parser` に invalid が無い、Remotion Bundle と web の build が通る。
+
 ### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]
 
