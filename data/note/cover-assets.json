@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-19T11:33:25.601Z",
+  "updatedAt": "2026-10-23T04:03:25.411Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -38247,15 +38247,60 @@
               "bytes": 6469
             }
           }
+        },
+        {
+          "sha256": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n04c2737daf2c/revisions/b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770.png"
+          },
+          "bytes": 1762415,
+          "id": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-be5e7ba3f997",
+          "createdAt": "2026-10-23T04:02:05.155Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで6行の日本語、2021年・10歳以上、1位東京都を照合。人物なし、ヨガマットが主役で、本文の対象範囲と一致。",
+            "reviewedAt": "2026-10-23T04:02:25.524Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n04c2737daf2c/inputs/94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d.json"
+              },
+              "bytes": 8823
+            },
+            "production": {
+              "id": "NCI-00380",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "be5e7ba3f9978b9c26c34640a4c6f7b8ab081833efc5562ff8b41b9ee46624c2"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8",
-      "approvedRevisionId": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8",
+      "candidateRevisionId": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
+      "approvedRevisionId": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191133/rectangle_large_type_2_28454d04e6416a1b8fff263d35ecd930.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:20.971Z",
-        "revisionId": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8"
+        "url": "https://assets.st-note.com/production/uploads/images/327479149/rectangle_large_type_2_82efb4924f33ccede4f9175df161f3e0.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T04:03:25.387Z",
+        "revisionId": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -38264,7 +38309,12 @@
         "id": "NCI-00380",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ヨガをした人\n多い県は？",
+          "subline": "1位は東京都\n2021年・10歳以上",
+          "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地のヨガマットを1点だけ大きく描く。マットは少し巻いた状態で、端が床に広がりヨガの題材と分かるようにする。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、架空の地図・ランキング図・棒グラフ・表彰台・メダル、指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/n04c2737daf2c/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間にヨガを行った10歳以上の人の割合。本文は1位東京都8.4％、47位青森県2.7％と記載。カバーには根拠のない原因説明やスタジオ利用の断定を載せず、対象年・年齢・1位だけを示す。"
+        }
       }
     },
     {
@@ -46305,15 +46355,60 @@
               "bytes": 6589
             }
           }
+        },
+        {
+          "sha256": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n827191af8c1c/revisions/4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661.png"
+          },
+          "bytes": 1858618,
+          "id": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-61f83ea5e046",
+          "createdAt": "2026-10-23T03:57:45.989Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで6行の日本語、補足の2021年・10歳以上、1位京都府を照合。人物なし、旅行かばんが主役で、本文の対象範囲と一致。",
+            "reviewedAt": "2026-10-23T03:58:17.321Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n827191af8c1c/inputs/73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf.json"
+              },
+              "bytes": 8822
+            },
+            "production": {
+              "id": "NCI-00439",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "61f83ea5e0469d6bf76ce360d28d5c10826ae5bc0e5671d7ea54209d92f16b41"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e",
-      "approvedRevisionId": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e",
+      "candidateRevisionId": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
+      "approvedRevisionId": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192214/rectangle_large_type_2_3e4b2de83108a35e55bc9a8ea4a04d06.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:20.791Z",
-        "revisionId": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e"
+        "url": "https://assets.st-note.com/production/uploads/images/327478160/rectangle_large_type_2_98863c9120d08c4b928b34c18c91a144.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T03:59:30.353Z",
+        "revisionId": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -46322,7 +46417,12 @@
         "id": "NCI-00439",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "海外旅行した人\n多い県は？",
+          "subline": "1位は京都府\n2021年・10歳以上",
+          "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に海外旅行を示す無地の旅行かばんを1点だけ大きく描き、かばんのタグは無文字にする。左側に問いを大きく2行、下に補足を太い帯で2行。架空の地図・ランキング図・棒グラフ・表彰台・メダルを描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化、指定外の文字・数字・ロゴを描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/n827191af8c1c/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間に海外旅行をした10歳以上の人の割合。本文は1位京都府0.7％、47位高知県0.1％と記載。小さい値の同順位が多いため、カバーには倍率や地域差の強調を入れず、対象年・年齢・1位だけを示す。"
+        }
       }
     },
     {
