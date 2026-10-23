@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T17:48:50.809Z",
+  "updatedAt": "2026-10-23T18:20:20.197Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -30802,15 +30802,60 @@
               "bytes": 1354
             }
           }
+        },
+        {
+          "sha256": "f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n0135c75ca76c/revisions/f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e.png"
+          },
+          "bytes": 1734886,
+          "id": "f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-3357f9418a75",
+          "createdAt": "2026-10-23T18:06:12.099Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d374e4162284723ad5584ac14a1ad0d0684f1c90ec03efbf64859ed4510b49bf"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:09:08.462Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d374e4162284723ad5584ac14a1ad0d0684f1c90ec03efbf64859ed4510b49bf",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n0135c75ca76c/inputs/d374e4162284723ad5584ac14a1ad0d0684f1c90ec03efbf64859ed4510b49bf.json"
+              },
+              "bytes": 9001
+            },
+            "production": {
+              "id": "NCI-00299",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "3357f9418a759b296252c015ea7ecb053bf2db74cdbbe4023d87ffdce8de95bd"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a1300644b6a8d6872a009e08d5af761de54bc251ba74db392ef0dfd113363081",
-      "approvedRevisionId": "a1300644b6a8d6872a009e08d5af761de54bc251ba74db392ef0dfd113363081",
+      "candidateRevisionId": "f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e",
+      "approvedRevisionId": "f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277164/rectangle_large_type_2_2887133f2308229dfb828ac4f72dc136.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.184Z",
-        "revisionId": "a1300644b6a8d6872a009e08d5af761de54bc251ba74db392ef0dfd113363081"
+        "url": "https://assets.st-note.com/production/uploads/images/327706407/rectangle_large_type_2_f82f9d8b2046cb94d57c7fd0a8f267cc.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:19:58.992Z",
+        "revisionId": "f47abca3f9da149b3197739db9d42b0514f73e9d0f37b0256827423eede2767e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -30819,7 +30864,12 @@
         "id": "NCI-00299",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "高校2年の平均体重\n青森県と岐阜県",
+          "subline": "2022年度・男女別に比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に目盛りや数値のない体重計の模型と無文字の学校保健調査ファイル。人物・体型の優劣・原因を暗示する絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n0135c75ca76c 2026-10-24公開API本文照合。記事題名「高校2年の体重格差、最大5.6kg！男女とも青森がトップ、岐阜が最下位」。本文中の 2022年度、青森県、岐阜県、64.7kg、59.1kg を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -32310,15 +32360,60 @@
               "bytes": 1355
             }
           }
+        },
+        {
+          "sha256": "cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2d43e8cd6054/revisions/cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9.png"
+          },
+          "bytes": 1748565,
+          "id": "cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-840c572a460d",
+          "createdAt": "2026-10-23T18:06:32.396Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a43536a65421a5b1137b976292ca23148bb00d733aacde1ea3f3eaffaf3a2901"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T18:09:19.218Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a43536a65421a5b1137b976292ca23148bb00d733aacde1ea3f3eaffaf3a2901",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n2d43e8cd6054/inputs/a43536a65421a5b1137b976292ca23148bb00d733aacde1ea3f3eaffaf3a2901.json"
+              },
+              "bytes": 9032
+            },
+            "production": {
+              "id": "NCI-00307",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "840c572a460df0d966f6a3ebbb7ef1adb52e4fcb7f96ebe233e04cc727e8c42f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "83523bb62cb27cb24661acee67f5f88cd1bb23407e05e0e38b4f07b2826e3a06",
-      "approvedRevisionId": "83523bb62cb27cb24661acee67f5f88cd1bb23407e05e0e38b4f07b2826e3a06",
+      "candidateRevisionId": "cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9",
+      "approvedRevisionId": "cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277468/rectangle_large_type_2_e360218bd5bc1a9aad9f09242b43ddb8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.272Z",
-        "revisionId": "83523bb62cb27cb24661acee67f5f88cd1bb23407e05e0e38b4f07b2826e3a06"
+        "url": "https://assets.st-note.com/production/uploads/images/327706421/rectangle_large_type_2_cd7ecf3d14eeb422ca0f7df3e8f552d7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:19:59.825Z",
+        "revisionId": "cac880b266765afbe7c2233e02fb1f6f61e834baba1df15243010ec7f1549be9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -32327,7 +32422,12 @@
         "id": "NCI-00307",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "小学5年の平均体重\n青森県と鹿児島県",
+          "subline": "2022年度・女子の比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に目盛りや数値のない体重計の模型と無文字の学校保健調査ファイル。人物・体型の優劣・原因を暗示する絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n2d43e8cd6054 2026-10-24公開API本文照合。記事題名「小学5年の体重格差、最大1.10倍！男子は青森37.5kg、女子は鹿児島34.2kgが最軽量」。本文中の 2022年度、青森県、鹿児島県、37.5kg、34.2kg を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -33064,15 +33164,60 @@
               "bytes": 1415
             }
           }
+        },
+        {
+          "sha256": "ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n48a11cea7b31/revisions/ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869.png"
+          },
+          "bytes": 1756926,
+          "id": "ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-a5223820d9de",
+          "createdAt": "2026-10-23T18:07:26.260Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8e0923129adbd70509aab4d259f80861923b30683f6f327053a1cc42dcaad6a7"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T18:09:51.467Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8e0923129adbd70509aab4d259f80861923b30683f6f327053a1cc42dcaad6a7",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n48a11cea7b31/inputs/8e0923129adbd70509aab4d259f80861923b30683f6f327053a1cc42dcaad6a7.json"
+              },
+              "bytes": 9122
+            },
+            "production": {
+              "id": "NCI-00311",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "a5223820d9dec6e1295693f22020b556ac07273f3483894914e9908ea6d819f0"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "15e862fffcc208ac52194e7648cf7f212f5f43c50f986181acc83db7e263b477",
-      "approvedRevisionId": "15e862fffcc208ac52194e7648cf7f212f5f43c50f986181acc83db7e263b477",
+      "candidateRevisionId": "ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869",
+      "approvedRevisionId": "ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277629/rectangle_large_type_2_fbd63953e9c7d07d3d6a0c9fd73c03f2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.455Z",
-        "revisionId": "15e862fffcc208ac52194e7648cf7f212f5f43c50f986181acc83db7e263b477"
+        "url": "https://assets.st-note.com/production/uploads/images/327706708/rectangle_large_type_2_a02124aea393ade3d22d4c8963e26ac5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:19:58.604Z",
+        "revisionId": "ae5291b6acd1d0e46e05d31eaf605866c1c6278efd7ab8289b8f38c56d72e869"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -33081,7 +33226,12 @@
         "id": "NCI-00311",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "65歳以上の\n年齢調整死亡率",
+          "subline": "2022年・秋田県と滋賀県",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の統計資料ファイル2冊と無地の計算機。患者・医療従事者・健康状態の優劣・原因を示す絵や架空数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n48a11cea7b31 2026-10-24公開API本文照合。記事題名「【2022年最新】都道府県別「年齢調整死亡率（65歳以上）」ランキング｜秋田と滋賀で1.22倍の格差！あなたの地域は大丈夫？」。本文中の 2022年、年齢調整死亡率、65歳以上、秋田県、滋賀県、44.93、36.72 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -35289,15 +35439,60 @@
               "bytes": 1340
             }
           }
+        },
+        {
+          "sha256": "4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n925aa92c4ee4/revisions/4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385.png"
+          },
+          "bytes": 1792730,
+          "id": "4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-219ea13f58cf",
+          "createdAt": "2026-10-23T18:06:23.593Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e36ccdfa8c9cfb0f48cc89dcecf9f98b79747cf75b4bc168783a18ff47f404e4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T18:09:14.216Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e36ccdfa8c9cfb0f48cc89dcecf9f98b79747cf75b4bc168783a18ff47f404e4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n925aa92c4ee4/inputs/e36ccdfa8c9cfb0f48cc89dcecf9f98b79747cf75b4bc168783a18ff47f404e4.json"
+              },
+              "bytes": 9001
+            },
+            "production": {
+              "id": "NCI-00322",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "219ea13f58cf96d2d5bd67c59e556b950ff37035c9198279739b35399eb7d127"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "b114664523642f3fc2ca492246913de90fc8ba26aa1a3bc0e0ed2c072b7261c9",
-      "approvedRevisionId": "b114664523642f3fc2ca492246913de90fc8ba26aa1a3bc0e0ed2c072b7261c9",
+      "candidateRevisionId": "4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385",
+      "approvedRevisionId": "4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323279157/rectangle_large_type_2_941cc943b32b154b860f91f4b1749c03.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.271Z",
-        "revisionId": "b114664523642f3fc2ca492246913de90fc8ba26aa1a3bc0e0ed2c072b7261c9"
+        "url": "https://assets.st-note.com/production/uploads/images/327706751/rectangle_large_type_2_21af5abbe4193131cf870cd8279c0b96.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:19:59.696Z",
+        "revisionId": "4c0741c348b7a0556046da1b4adcb1f991016e5f4048bf797c769447d9371385"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -35306,7 +35501,12 @@
         "id": "NCI-00322",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "中学2年の平均体重\n青森県と兵庫県",
+          "subline": "2022年度・男子の比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に目盛りや数値のない体重計の模型と無文字の学校保健調査ファイル。人物・体型の優劣・原因を暗示する絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n925aa92c4ee4 2026-10-24公開API本文照合。記事題名「中学2年の体重格差、最大4.3kg！男子は青森53.6kg、女子は愛知46.7kgが最軽量」。本文中の 2022年度、青森県、兵庫県、53.6kg、49.3kg を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -36752,15 +36952,60 @@
               "bytes": 1303
             }
           }
+        },
+        {
+          "sha256": "e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nafcc04dcd988/revisions/e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126.png"
+          },
+          "bytes": 1845651,
+          "id": "e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-e0c496ca73d3",
+          "createdAt": "2026-10-23T18:06:49.090Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "188452f66fe28b0777ec561dd8db84e33abcae0e1398b36d6e5573f04878d41f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T18:09:29.732Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "188452f66fe28b0777ec561dd8db84e33abcae0e1398b36d6e5573f04878d41f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nafcc04dcd988/inputs/188452f66fe28b0777ec561dd8db84e33abcae0e1398b36d6e5573f04878d41f.json"
+              },
+              "bytes": 9072
+            },
+            "production": {
+              "id": "NCI-00329",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "e0c496ca73d33e0d05e4652dc66da0fa56602a67046a9407f2dc295065a75b32"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "18810454d3934f58cdc4032e6c18d0acf5ec939793ce1898618e3e4545b5e2d2",
-      "approvedRevisionId": "18810454d3934f58cdc4032e6c18d0acf5ec939793ce1898618e3e4545b5e2d2",
+      "candidateRevisionId": "e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126",
+      "approvedRevisionId": "e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283762/rectangle_large_type_2_351baaccc0548b7019d88ffec4c8ca4b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.319Z",
-        "revisionId": "18810454d3934f58cdc4032e6c18d0acf5ec939793ce1898618e3e4545b5e2d2"
+        "url": "https://assets.st-note.com/production/uploads/images/327706788/rectangle_large_type_2_ecb0126da1ba984ad6cd7efed98c0409.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:08.194Z",
+        "revisionId": "e2eff6b80d758f0e7806920a7bf47d913cb04234f11518b56ed1ee149508d126"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -36769,7 +37014,12 @@
         "id": "NCI-00329",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "年少人口指数\n沖縄県と東京都",
+          "subline": "2022年・15～64歳人口100人当たり",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の人口統計資料ファイル2冊と抽象的な無地の積み木。高齢者を分母と示す絵や架空の数値・グラフは描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nafcc04dcd988 2026-10-24公開API本文照合。記事題名「都道府県別年少人口指数ランキング2022：沖縄県が27.1で圧倒的1位、東京都との差は1.6倍」。本文中の 年少人口指数、15～64歳、0～14歳、沖縄県、東京都、27.1、16.5 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -37852,15 +38102,60 @@
               "bytes": 1384
             }
           }
+        },
+        {
+          "sha256": "eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nba8bf272cc2b/revisions/eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a.png"
+          },
+          "bytes": 1631380,
+          "id": "eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-7eb1689939e9",
+          "createdAt": "2026-10-23T18:07:15.850Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "62427b2a45438d0b966d45f45b5ee34200dd08dabfd14a60123d50cc7cb30411"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:09:45.971Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "62427b2a45438d0b966d45f45b5ee34200dd08dabfd14a60123d50cc7cb30411",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nba8bf272cc2b/inputs/62427b2a45438d0b966d45f45b5ee34200dd08dabfd14a60123d50cc7cb30411.json"
+              },
+              "bytes": 9109
+            },
+            "production": {
+              "id": "NCI-00334",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "7eb1689939e90561c862ac2f84ec5fad0e0282f0c33cf1fa661c8ecfec2283fa"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d983ffac6eeab1161d3b70232304a78b9721acdfe94383a936ac21342f7fbf46",
-      "approvedRevisionId": "d983ffac6eeab1161d3b70232304a78b9721acdfe94383a936ac21342f7fbf46",
+      "candidateRevisionId": "eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a",
+      "approvedRevisionId": "eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283859/rectangle_large_type_2_8c19c59bf3d4e7173b4111d6b6247657.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.408Z",
-        "revisionId": "d983ffac6eeab1161d3b70232304a78b9721acdfe94383a936ac21342f7fbf46"
+        "url": "https://assets.st-note.com/production/uploads/images/327706848/rectangle_large_type_2_b3babdbcf59d0c1113649550e6cf146a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:10.710Z",
+        "revisionId": "eb536f0644e3c2f7ff077be8aa8a6a1b8b3cf6da78acdaf8ea6e5bdca3d9883a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -37869,7 +38164,12 @@
         "id": "NCI-00334",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "夫の平均初婚年齢\n東京都と山口県",
+          "subline": "2022年・夫で2.5歳差",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の婚姻統計資料ファイル2冊と無地のカレンダー模型。結婚式の人物、男女の固定観念、架空の数値やグラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nba8bf272cc2b 2026-10-24公開API本文照合。記事題名「【格差2.5歳】都道府県「初婚年齢（夫・妻）」ランキング2022：東京と山口の「2.5歳」の差と性別による違い」。本文中の 2022年、初婚年齢、東京都、山口県、32.3歳、29.8歳 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -39772,15 +40072,60 @@
             "sourceUrl": "https://assets.st-note.com/production/uploads/images/323284981/rectangle_large_type_2_3cb8dc4e6a8030db582263a2328d5dea.png?fit=bounds&quality=85&width=1280",
             "sourceSha256": "da4353c78b3f343d853369f02bc432219e5766c2255c0dd65ea2ffebdcb29753"
           }
+        },
+        {
+          "sha256": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-neecba2a1752d/revisions/12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0.png"
+          },
+          "bytes": 1798575,
+          "id": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-1db79b9fcc5d",
+          "createdAt": "2026-10-23T18:06:57.589Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:09:35.162Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-neecba2a1752d/inputs/b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a.json"
+              },
+              "bytes": 9037
+            },
+            "production": {
+              "id": "NCI-00342",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "1db79b9fcc5d641296d1fae40b09b44bb4c89bef1c6c9ac8187be2e1da0dae23"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89",
-      "approvedRevisionId": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89",
+      "candidateRevisionId": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
+      "approvedRevisionId": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285082/rectangle_large_type_2_bc69548a4f897b4ca30790beea6e3a7b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.414Z",
-        "revisionId": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89"
+        "url": "https://assets.st-note.com/production/uploads/images/327706865/rectangle_large_type_2_636087dd121758257fe8a4b250806de5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:16.282Z",
+        "revisionId": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -39789,7 +40134,12 @@
         "id": "NCI-00342",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "有効求人倍率\n福井県と神奈川県",
+          "subline": "2022年度・求人と求職の比",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の求人票ファイル2冊と無地の事務用トレー。人物・就職率や失業率の数値・架空グラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/neecba2a1752d 2026-10-24公開API本文照合。記事題名「有効求人倍率、1位福井県と最下位神奈川県で2.2倍の格差！偏差値で見る雇用環境の地域差」。本文中の 2022年度、有効求人倍率、福井県、神奈川県、1.94倍、0.88倍 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -39962,15 +40312,60 @@
               "bytes": 1299
             }
           }
+        },
+        {
+          "sha256": "04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nef7e875ba364/revisions/04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd.png"
+          },
+          "bytes": 1713548,
+          "id": "04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-64b9d40db737",
+          "createdAt": "2026-10-23T18:06:40.542Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3cc89d33065d66f84e5d39d8ebf6374ccde2631abd70e30a71cdd40e242bf04c"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:09:24.394Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3cc89d33065d66f84e5d39d8ebf6374ccde2631abd70e30a71cdd40e242bf04c",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nef7e875ba364/inputs/3cc89d33065d66f84e5d39d8ebf6374ccde2631abd70e30a71cdd40e242bf04c.json"
+              },
+              "bytes": 9004
+            },
+            "production": {
+              "id": "NCI-00343",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "64b9d40db7374fbf8b5d82be123f11e1407e7622ff763b24b56e646e78e4e87b"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d6ddeca645a1ea8aac4af2c6f644f4f53e617db0d71548f64f1b848b389402d6",
-      "approvedRevisionId": "d6ddeca645a1ea8aac4af2c6f644f4f53e617db0d71548f64f1b848b389402d6",
+      "candidateRevisionId": "04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd",
+      "approvedRevisionId": "04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285294/rectangle_large_type_2_bba9a2e388caa054a5ba526e2b3d2131.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.267Z",
-        "revisionId": "d6ddeca645a1ea8aac4af2c6f644f4f53e617db0d71548f64f1b848b389402d6"
+        "url": "https://assets.st-note.com/production/uploads/images/327706883/rectangle_large_type_2_aaf816207459bb54c6077c8ad04346a6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:08.545Z",
+        "revisionId": "04173b776ea6358b2c0c4ad28cacb258540ee5a3ea67da6ae02a0e6d2fce5fbd"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -39979,7 +40374,12 @@
         "id": "NCI-00343",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "年少人口の割合\n沖縄県と秋田県",
+          "subline": "2024年・総人口に占める0～14歳",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に大きさが異なる無地の積み木2組と無文字の人口統計資料ファイル。人物・地図・架空のグラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nef7e875ba364 2026-10-24公開API本文照合。記事題名「あなたの県は大丈夫？2024年年少人口割合、沖縄と秋田で1.8倍の衝撃格差」。本文中の 年少人口割合、0～14歳、沖縄県、秋田県、15.8%、8.8% を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -58861,15 +59261,60 @@
               "bytes": 1274
             }
           }
+        },
+        {
+          "sha256": "552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ncbed56eb7c3d/revisions/552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725.png"
+          },
+          "bytes": 2021308,
+          "id": "552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-8f61c79f650e",
+          "createdAt": "2026-10-23T18:07:06.805Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "304a0cac7fd4148ebd1ff2aef2d79f0b5ff712c0940a16a506253c2bb34372af"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T18:09:41.224Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "304a0cac7fd4148ebd1ff2aef2d79f0b5ff712c0940a16a506253c2bb34372af",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-ncbed56eb7c3d/inputs/304a0cac7fd4148ebd1ff2aef2d79f0b5ff712c0940a16a506253c2bb34372af.json"
+              },
+              "bytes": 8903
+            },
+            "production": {
+              "id": "NCI-00465",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "8f61c79f650e2be00cbe717367fb61a2377f9123f4a10dcb722cef5d7bb36db3"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "26b3e796134f43f92465a5b1e42e1a15202b7a2a16f973b6132d33871a1eaa38",
-      "approvedRevisionId": "26b3e796134f43f92465a5b1e42e1a15202b7a2a16f973b6132d33871a1eaa38",
+      "candidateRevisionId": "552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725",
+      "approvedRevisionId": "552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323286757/rectangle_large_type_2_c57368c5eabe4f06908b05173c03fed5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.415Z",
-        "revisionId": "26b3e796134f43f92465a5b1e42e1a15202b7a2a16f973b6132d33871a1eaa38"
+        "url": "https://assets.st-note.com/production/uploads/images/327706905/rectangle_large_type_2_05014d6f608055ee08ae1d18d72551d2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:17.339Z",
+        "revisionId": "552881591970bbdf6d4df6ea4cbbe154bb7b1a70a1a831c3b6310f585433b725"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -58878,7 +59323,12 @@
         "id": "NCI-00465",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "総人口\n東京都と鳥取県",
+          "subline": "2023年度・都道府県別",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の人口統計資料ファイル2冊と無地の計数器。人口密度との混同を避け、地図・架空の棒グラフや数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/ncbed56eb7c3d 2026-10-24公開API本文照合。記事題名「都道府県別総人口・人口密度ランキング2023：格差26倍の現実」。本文中の 2023年度、総人口、東京都、鳥取県、1408.6万人、53.7万人 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -62727,15 +63177,60 @@
               "bytes": 1329
             }
           }
+        },
+        {
+          "sha256": "bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf962c6702b93/revisions/bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9.png"
+          },
+          "bytes": 1763135,
+          "id": "bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-2c11f29a106f",
+          "createdAt": "2026-10-23T18:07:34.761Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "0ae6d76e137890b6897113e94bf5dbaf8a044e1a278405a4aec2680d1d00f268"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:09:56.196Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "0ae6d76e137890b6897113e94bf5dbaf8a044e1a278405a4aec2680d1d00f268",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nf962c6702b93/inputs/0ae6d76e137890b6897113e94bf5dbaf8a044e1a278405a4aec2680d1d00f268.json"
+              },
+              "bytes": 9140
+            },
+            "production": {
+              "id": "NCI-00487",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "2c11f29a106fefe73ef6b07a1676fc1461f9b3920e7cc92f801275978a2eaeab"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "6736c4654c63c2eac7317b2c315e61cf622b40c41620e3503e01f59d25d05a0f",
-      "approvedRevisionId": "6736c4654c63c2eac7317b2c315e61cf622b40c41620e3503e01f59d25d05a0f",
+      "candidateRevisionId": "bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9",
+      "approvedRevisionId": "bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323286942/rectangle_large_type_2_a2c2f3b1784267b4da8e39c2beb8bb3c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.552Z",
-        "revisionId": "6736c4654c63c2eac7317b2c315e61cf622b40c41620e3503e01f59d25d05a0f"
+        "url": "https://assets.st-note.com/production/uploads/images/327706934/rectangle_large_type_2_40e2a97aeb814b8903158b1ca06aec0c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:20:20.158Z",
+        "revisionId": "bdc6d749411d8ca738fe706d40003e5ec6a8f01748a9bf0b7f8d7154c92790f9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -62744,7 +63239,12 @@
         "id": "NCI-00487",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "年間日照時間\n埼玉県と青森県",
+          "subline": "2023年度・観測時間で比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の気象観測資料ファイル2冊とシンプルな黄色い太陽の模型。農業への効果や幸福度を断定する記号、地図、架空のグラフや数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nf962c6702b93 2026-10-24公開API本文照合。記事題名「【2023年版】都道府県「年間日照時間」ランキング！1位埼玉と最下位青森に「1.4倍」の差」。本文中の 2023年度、年間日照時間、埼玉県、青森県、2545.5時間、1821.4時間 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
