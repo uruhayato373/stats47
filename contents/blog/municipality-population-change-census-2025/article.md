@@ -11,7 +11,7 @@ tags:
   - 国勢調査
   - 市区町村
   - 人口減少
-  - 東京23区
+  - 東京都
 publishedAt: 2026-10-23
 updatedAt: 2026-10-23
 published: true
