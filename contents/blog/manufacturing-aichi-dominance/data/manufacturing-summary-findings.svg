@@ -1,0 +1,48 @@
+<!-- data-source: manufacturing-summary-findings.json | generated: 2026-10-23T06:09:11.236Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 526" width="960" height="526" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="526" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="108" r="18" fill="#dc2626"/>
+  <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">2023年に出荷額が過去最高の373兆円</tspan></text>
+  <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">従業者数はバブル期の1991年から約3割減。名目の出荷額は1991年を上回る</tspan></text>
+  <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="190" r="18" fill="#dc2626"/>
+  <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="185.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">愛知58兆円で圧倒的1位</tspan></text>
+  <text x="90" y="207.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">2位静岡の約3倍、最下位沖縄（0.5兆円）との差は約115倍</tspan></text>
+  <rect x="40" y="236" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="283" r="18" fill="#dc2626"/>
+  <text x="58" y="289" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="267.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">中京工業地帯が77.1兆円でダントツ</tspan></text>
+  <text x="90" y="289.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">愛知県だけで岐阜・三重を含む中京の約4分の3。区分を狭めても中京・京浜・阪神の順は変わら</tspan><tspan x="90" dy="22">ない</tspan></text>
+  <rect x="40" y="340" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="376" r="18" fill="#dc2626"/>
+  <text x="58" y="382" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="371.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">1人当たり出荷額は大分県が1位</tspan></text>
+  <text x="90" y="393.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">総額1位の愛知は4位、東京は41位。総出荷額とは全く別の顔ぶれ</tspan></text>
+  <rect x="40" y="422" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="458" r="18" fill="#dc2626"/>
+  <text x="58" y="464" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="453.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">2つの物差しで見ると景色が変わる</tspan></text>
+  <text x="90" y="475.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">愛知一強の製造業地図は「どれだけつくるか」と「どれだけ効率的か」で見ると全く違う</tspan></text>
+</svg>
