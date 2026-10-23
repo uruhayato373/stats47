@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T17:18:44.642Z",
+  "updatedAt": "2026-10-23T17:48:50.809Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -31154,15 +31154,60 @@
               "bytes": 1322
             }
           }
+        },
+        {
+          "sha256": "75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n0642ad7f7fdd/revisions/75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c.png"
+          },
+          "bytes": 1893868,
+          "id": "75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-705789721e24",
+          "createdAt": "2026-10-23T17:39:47.830Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "79fafcc4b7c5a0f441c9e1523f0651694b654331ad3cd4942828daef37a26731"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:41:58.993Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "79fafcc4b7c5a0f441c9e1523f0651694b654331ad3cd4942828daef37a26731",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n0642ad7f7fdd/inputs/79fafcc4b7c5a0f441c9e1523f0651694b654331ad3cd4942828daef37a26731.json"
+              },
+              "bytes": 8901
+            },
+            "production": {
+              "id": "NCI-00301",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "705789721e24b1adf4961e9c90099f69d96851b9b64b780e8fff337b0181a968"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4fea806a98170d38ef583459fc313094209aa82d44f4dfed46a9936cec853cf2",
-      "approvedRevisionId": "4fea806a98170d38ef583459fc313094209aa82d44f4dfed46a9936cec853cf2",
+      "candidateRevisionId": "75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c",
+      "approvedRevisionId": "75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277200/rectangle_large_type_2_5bfb10f82416fdb1264682f527323087.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.848Z",
-        "revisionId": "4fea806a98170d38ef583459fc313094209aa82d44f4dfed46a9936cec853cf2"
+        "url": "https://assets.st-note.com/production/uploads/images/327704581/rectangle_large_type_2_f2e48c4efb5673369f0543341946ad7c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:41.775Z",
+        "revisionId": "75bd5eda3b6a10c23e4c14c82a97b1621b0cf41ebe6cb38e55481233f1d20e1c"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -31171,7 +31216,12 @@
         "id": "NCI-00301",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農業所得\n北海道と滋賀県",
+          "subline": "2003年・都道府県別",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の農業経営資料ファイル2冊と収穫箱模型。個人の給与・世帯年収を示す人物や金額を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n0642ad7f7fdd 2026-10-24公開API本文照合。記事題名「農業所得ランキング2003：トップ北海道は最下位滋賀の17倍！驚きの地域格差」。本文中の 2003年、農業所得、北海道、滋賀県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -31858,15 +31908,60 @@
               "bytes": 1363
             }
           }
+        },
+        {
+          "sha256": "e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2406ded99484/revisions/e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20.png"
+          },
+          "bytes": 1810487,
+          "id": "e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-d32d8736afde",
+          "createdAt": "2026-10-23T17:38:22.464Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "42084281d05c6590831fd8f7e3a1170d7ef869357d2c711bab7ad81a799e44cb"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:41:43.456Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "42084281d05c6590831fd8f7e3a1170d7ef869357d2c711bab7ad81a799e44cb",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n2406ded99484/inputs/42084281d05c6590831fd8f7e3a1170d7ef869357d2c711bab7ad81a799e44cb.json"
+              },
+              "bytes": 9169
+            },
+            "production": {
+              "id": "NCI-00305",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "d32d8736afde5ae2f31ad320f2e27a323d807039f28f003b91d140b398db63c9"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "acfb1ecdaa9c16ff030e84a8a78150bf98acbcd506af2d09ca18d28c695ffc79",
-      "approvedRevisionId": "acfb1ecdaa9c16ff030e84a8a78150bf98acbcd506af2d09ca18d28c695ffc79",
+      "candidateRevisionId": "e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20",
+      "approvedRevisionId": "e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277340/rectangle_large_type_2_d1a0124c74eaf2dbc2880638a689ba49.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.756Z",
-        "revisionId": "acfb1ecdaa9c16ff030e84a8a78150bf98acbcd506af2d09ca18d28c695ffc79"
+        "url": "https://assets.st-note.com/production/uploads/images/327704619/rectangle_large_type_2_dcb2dd1d414537918f3984f19fdb50dd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:41.000Z",
+        "revisionId": "e84c9d09e175bee29855c955a407ca3d2ce4ad14bff9b3626490ee4c578faf20"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -31875,7 +31970,12 @@
         "id": "NCI-00305",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "一般行政部門の職員数\n東京都と香川県",
+          "subline": "2023年度・職員の実人数",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の行政職員名簿ファイル2冊と無地の事務用トレー。人や顔、人口当たりの率・行政能力の優劣を暗示する絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n2406ded99484 2026-10-24公開API本文照合。記事題名「【格差7.3倍】都道府県「一般行政部門職員数」ランキング｜東京2万人超、地方は3千人以下」。本文中の 2023年度、一般行政部門職員数、東京都、香川県、20,837人 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -32763,15 +32863,60 @@
               "bytes": 1285
             }
           }
+        },
+        {
+          "sha256": "4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n44bedb732274/revisions/4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1.png"
+          },
+          "bytes": 1695736,
+          "id": "4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-62edd57af541",
+          "createdAt": "2026-10-23T17:38:30.074Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f346e63ef93a161a042fe8e29eb7c261a08ffbec42276daa8b5d1b4339b1146e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T17:41:49.476Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f346e63ef93a161a042fe8e29eb7c261a08ffbec42276daa8b5d1b4339b1146e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n44bedb732274/inputs/f346e63ef93a161a042fe8e29eb7c261a08ffbec42276daa8b5d1b4339b1146e.json"
+              },
+              "bytes": 9073
+            },
+            "production": {
+              "id": "NCI-00310",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "62edd57af541b117bccc1ae0b1b61c6f41b298a66dcf69f45671f5646bad8110"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ae91739ff9dde6fe3b52bd8697c9f6cd1e17b995c8cffff315e9077a6a6651cf",
-      "approvedRevisionId": "ae91739ff9dde6fe3b52bd8697c9f6cd1e17b995c8cffff315e9077a6a6651cf",
+      "candidateRevisionId": "4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1",
+      "approvedRevisionId": "4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277601/rectangle_large_type_2_f9eb1e65f3e02f77b25d7a25c8ffa3bd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.759Z",
-        "revisionId": "ae91739ff9dde6fe3b52bd8697c9f6cd1e17b995c8cffff315e9077a6a6651cf"
+        "url": "https://assets.st-note.com/production/uploads/images/327704649/rectangle_large_type_2_36d79cb8e219c75d9297239a8e487549.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:40.519Z",
+        "revisionId": "4cbb5f2c84b6d818753267c70952e9e11cfa3beb54e5560c99d508c77c7d16f1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -32780,7 +32925,12 @@
         "id": "NCI-00310",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農業産出額\n北海道と東京都",
+          "subline": "2022年・農業生産の総額",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無地の収穫箱と小麦束の模型。農業所得や就業者1人当たり生産性を示す通貨・数値・人物を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n44bedb732274 2026-10-24公開API本文照合。記事題名「都道府県別農業産出額ランキング2022：北海道が圧倒的1位、生産性も全国トップ」。本文中の 2022年、農業産出額、北海道、東京都 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。題名に指標の定義や対象を広く表現した箇所があるため、カバーは本文で確認できる厳密な対象と単位を用いる。"
+        }
       }
     },
     {
@@ -33869,15 +34019,60 @@
               "bytes": 1323
             }
           }
+        },
+        {
+          "sha256": "49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n7290144784d4/revisions/49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b.png"
+          },
+          "bytes": 1793120,
+          "id": "49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-6942a8aa7a7a",
+          "createdAt": "2026-10-23T17:40:26.694Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "56e928a458cf3872c52e98aaaa7ad1c95941b8f7ae33bb422463be3eab1c35ab"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T17:42:17.836Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "56e928a458cf3872c52e98aaaa7ad1c95941b8f7ae33bb422463be3eab1c35ab",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n7290144784d4/inputs/56e928a458cf3872c52e98aaaa7ad1c95941b8f7ae33bb422463be3eab1c35ab.json"
+              },
+              "bytes": 9363
+            },
+            "production": {
+              "id": "NCI-00316",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "6942a8aa7a7a7573ec1b32e2781443e033b3e1bc3207485489d87b76068663a1"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0b004ae84be01646b4d41e8b4d837967933a2a082422679337ceda581fc150d9",
-      "approvedRevisionId": "0b004ae84be01646b4d41e8b4d837967933a2a082422679337ceda581fc150d9",
+      "candidateRevisionId": "49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b",
+      "approvedRevisionId": "49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277801/rectangle_large_type_2_daf8dd849a16a2d18c54b94d1bb7158d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.104Z",
-        "revisionId": "0b004ae84be01646b4d41e8b4d837967933a2a082422679337ceda581fc150d9"
+        "url": "https://assets.st-note.com/production/uploads/images/327704690/rectangle_large_type_2_104ca7b520dd8cade89fef38672b4274.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:40.653Z",
+        "revisionId": "49eb997a5102265ce59f763578a232ceaa8127edfa4ac3261124585f88d7568b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -33886,7 +34081,12 @@
         "id": "NCI-00316",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "火災による死傷者数\n鳥取県と神奈川県",
+          "subline": "2022年・人口10万人当たり",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無地の消防資料ファイル2冊と小さな消火器模型。炎・けが人・死亡者・危険な現場は描かず、火災件数の分母と混同する数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n7290144784d4 2026-10-24公開API本文照合。記事題名「あなたの街は火事に強い？2022年火災死傷者数ランキング、鳥取と神奈川で2.5倍の格差」。本文中の 2022年、人口10万人当たり、火災死傷者数、鳥取県、神奈川県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。題名に指標の定義や対象を広く表現した箇所があるため、カバーは本文で確認できる厳密な対象と単位を用いる。"
+        }
       }
     },
     {
@@ -34084,15 +34284,60 @@
             "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277846/rectangle_large_type_2_c0487310edc64de01e251330104093d4.png?fit=bounds&quality=85&width=1280",
             "sourceSha256": "3e16049d69a707c824ef09afa1e313c61b69c5c4635dfc227036035a065f36a2"
           }
+        },
+        {
+          "sha256": "55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n772ff041af18/revisions/55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28.png"
+          },
+          "bytes": 1772917,
+          "id": "55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-f04a998ecc73",
+          "createdAt": "2026-10-23T17:39:55.250Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "facb70951718da437747bd5bd00f303d5ff996a5df890edc9f0ee47ed34bf2e8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:42:04.490Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "facb70951718da437747bd5bd00f303d5ff996a5df890edc9f0ee47ed34bf2e8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n772ff041af18/inputs/facb70951718da437747bd5bd00f303d5ff996a5df890edc9f0ee47ed34bf2e8.json"
+              },
+              "bytes": 8953
+            },
+            "production": {
+              "id": "NCI-00317",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "f04a998ecc73df0ebf11bfd3ce4938fc70aaf249dc09769d6b058642ba97bc2d"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ef8bcc68d71c804f28453a94672f580c81dc3db608fa141411bd7d0e719b84f5",
-      "approvedRevisionId": "ef8bcc68d71c804f28453a94672f580c81dc3db608fa141411bd7d0e719b84f5",
+      "candidateRevisionId": "55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28",
+      "approvedRevisionId": "55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323278500/rectangle_large_type_2_f7dbdb26c78f311298ae792f4ddcba0d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.892Z",
-        "revisionId": "ef8bcc68d71c804f28453a94672f580c81dc3db608fa141411bd7d0e719b84f5"
+        "url": "https://assets.st-note.com/production/uploads/images/327704714/rectangle_large_type_2_9c975c683f7a7c3694693590a6b5ee5e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:46.353Z",
+        "revisionId": "55e7095f1177a4c0ca8a89c3b19b9dcda7a2fecd170aadd3a13e64b79bc0ec28"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -34101,7 +34346,12 @@
         "id": "NCI-00317",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農家数\n長野県と東京都",
+          "subline": "2019年度・戸数で比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の農業調査ファイル2冊と小さな無地の家型模型。農家の人物、世帯人数、農地面積と混同する絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n772ff041af18 2026-10-24公開API本文照合。記事題名「農家数の都道府県格差は9.4倍！偏差値81.0の長野県と偏差値33.7の東京都の驚きの差」。本文中の 2019年度、農家数、長野県、東京都、戸 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -35542,15 +35792,60 @@
             "sourceUrl": "https://assets.st-note.com/production/uploads/images/323279243/rectangle_large_type_2_9d864f5b4dccd3d19a1e87d3bdb3b074.png?fit=bounds&quality=85&width=1280",
             "sourceSha256": "98fc3e22530ab5ea1133e11d0577c5df6c187af907e4c2cb269780adf64b30e8"
           }
+        },
+        {
+          "sha256": "e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-na16afa534c77/revisions/e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174.png"
+          },
+          "bytes": 1733505,
+          "id": "e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-fa5158c38e2e",
+          "createdAt": "2026-10-23T17:38:05.604Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9a7c783d951b16b0b6cfc4fd779d9e98b18ebcebec079d0de9f9f6c6742f8210"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:41:33.687Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9a7c783d951b16b0b6cfc4fd779d9e98b18ebcebec079d0de9f9f6c6742f8210",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-na16afa534c77/inputs/9a7c783d951b16b0b6cfc4fd779d9e98b18ebcebec079d0de9f9f6c6742f8210.json"
+              },
+              "bytes": 8998
+            },
+            "production": {
+              "id": "NCI-00325",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "fa5158c38e2e7bd46f67bdc231c1831b3f16cf14dcd7423c451db9b4474ad056"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "dd6f8608da4f998c8e76e14285a437334c3c5da45b48145c0fa3e43e937a80fe",
-      "approvedRevisionId": "dd6f8608da4f998c8e76e14285a437334c3c5da45b48145c0fa3e43e937a80fe",
+      "candidateRevisionId": "e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174",
+      "approvedRevisionId": "e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283637/rectangle_large_type_2_440adadcd3869b8c53472d6849b01be3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.650Z",
-        "revisionId": "dd6f8608da4f998c8e76e14285a437334c3c5da45b48145c0fa3e43e937a80fe"
+        "url": "https://assets.st-note.com/production/uploads/images/327704755/rectangle_large_type_2_932f4b71f5c2cd035b15684a418a96f6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:46.905Z",
+        "revisionId": "e340cc8f4c9d85dd1395405a730574c201e145b87ceb4c70c9231e02f27bd174"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -35559,7 +35854,12 @@
         "id": "NCI-00325",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "実質収支比率\n東京都と長崎県",
+          "subline": "2021年度・都道府県財政",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の決算資料ファイル2冊と無地の計算機。財政の健全性や原因を断定する記号、架空の数値、順位台を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na16afa534c77 2026-10-24公開API本文照合。記事題名「【格差41倍】都道府県「実質収支比率」ランキング｜東京8.2％、長崎0.2％の財政格差」。本文中の 2021年度、実質収支比率、東京都、長崎県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -35732,15 +36032,60 @@
               "bytes": 1265
             }
           }
+        },
+        {
+          "sha256": "2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-na76caacd17c3/revisions/2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa.png"
+          },
+          "bytes": 1781102,
+          "id": "2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-b1f309b70aca",
+          "createdAt": "2026-10-23T17:40:08.106Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "6b4f83bea04984994e1f9fc0297bdc173db4367da379dc045ef7d1099ea277b8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:42:11.359Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "6b4f83bea04984994e1f9fc0297bdc173db4367da379dc045ef7d1099ea277b8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-na76caacd17c3/inputs/6b4f83bea04984994e1f9fc0297bdc173db4367da379dc045ef7d1099ea277b8.json"
+              },
+              "bytes": 8974
+            },
+            "production": {
+              "id": "NCI-00326",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "b1f309b70aca5195fed8836f5a3935ba33e67ccee11588ab9d1bf38fcd0c4c30"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "80da8a7f1958915b097667e31db84a27db303f52a82edffe94e59951ccfcaaaf",
-      "approvedRevisionId": "80da8a7f1958915b097667e31db84a27db303f52a82edffe94e59951ccfcaaaf",
+      "candidateRevisionId": "2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa",
+      "approvedRevisionId": "2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283687/rectangle_large_type_2_1faeb0ca3b1c7fcb490c465ca8bdef70.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.012Z",
-        "revisionId": "80da8a7f1958915b097667e31db84a27db303f52a82edffe94e59951ccfcaaaf"
+        "url": "https://assets.st-note.com/production/uploads/images/327704794/rectangle_large_type_2_c0c345bf301904ca97291c746998662a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:45.389Z",
+        "revisionId": "2a1e668af9c32817e3708236f87911987b80f61d4376e72847fc9e38074d31aa"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -35749,7 +36094,12 @@
         "id": "NCI-00326",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "求人の充足率\n長崎県と東京都",
+          "subline": "2021年度・ハローワーク",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の求人票ファイル2冊と無地の事務用トレー。求職者・企業の人物、就職率・失業率を示す数値や架空グラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na76caacd17c3 2026-10-24公開API本文照合。記事題名「充足率の都道府県格差、最大3.7倍！長崎7.0%、東京1.9%の地域差」。本文中の 2021年度、充足率、ハローワーク、長崎県、東京都 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -36592,15 +36942,60 @@
               "bytes": 1326
             }
           }
+        },
+        {
+          "sha256": "f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nb17d039bc1aa/revisions/f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea.png"
+          },
+          "bytes": 1781372,
+          "id": "f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-bb5bb32f07ff",
+          "createdAt": "2026-10-23T17:40:35.707Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d5d2ad8890a8add51fa399ad47d89773d8fb808b41d3ad3b70b91da19326254b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T17:42:22.309Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d5d2ad8890a8add51fa399ad47d89773d8fb808b41d3ad3b70b91da19326254b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nb17d039bc1aa/inputs/d5d2ad8890a8add51fa399ad47d89773d8fb808b41d3ad3b70b91da19326254b.json"
+              },
+              "bytes": 9285
+            },
+            "production": {
+              "id": "NCI-00330",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "bb5bb32f07ff82a21dc721c35a9c5d17248f66da977f9c22a1c3a444e789d60b"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "6ad3b4d3e46346620322f464aba15fc18cb933a6fe322fc79c8b87d74e3b7d8a",
-      "approvedRevisionId": "6ad3b4d3e46346620322f464aba15fc18cb933a6fe322fc79c8b87d74e3b7d8a",
+      "candidateRevisionId": "f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea",
+      "approvedRevisionId": "f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283782/rectangle_large_type_2_84fe3a5354f8afb40dd37446f1a902c1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.137Z",
-        "revisionId": "6ad3b4d3e46346620322f464aba15fc18cb933a6fe322fc79c8b87d74e3b7d8a"
+        "url": "https://assets.st-note.com/production/uploads/images/327704818/rectangle_large_type_2_dd096d1940793f3a8238baded756d500.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:47.266Z",
+        "revisionId": "f603126137a0fd388f536ccd90f70ca4763618b08d5d71be4cf3070923c694ea"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -36609,7 +37004,12 @@
         "id": "NCI-00330",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "建物火災100件当たり\n死傷者数",
+          "subline": "2022年・鳥取県と滋賀県",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無地の消防資料ファイル2冊と小さな消火器模型。炎・けが人・死亡者・危険な現場は描かず、人口10万人当たりと混同する数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nb17d039bc1aa 2026-10-24公開API本文照合。記事題名「火災死傷者数ランキング2022：鳥取と滋賀で約1.9倍の格差！あなたの街の火災リスクは？」。本文中の 2022年、建物火災100件あたり、死傷者、鳥取県、滋賀県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。題名に指標の定義や対象を広く表現した箇所があるため、カバーは本文で確認できる厳密な対象と単位を用いる。"
+        }
       }
     },
     {
@@ -38602,15 +39002,60 @@
               "bytes": 1346
             }
           }
+        },
+        {
+          "sha256": "844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nd54b2958dc0e/revisions/844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274.png"
+          },
+          "bytes": 1844311,
+          "id": "844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-3ddef80962a4",
+          "createdAt": "2026-10-23T17:38:37.985Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "030e4da979fa09bce4ae9004f1785c4dc735e19373c193e9f879985b8e54d2d8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T17:41:54.435Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "030e4da979fa09bce4ae9004f1785c4dc735e19373c193e9f879985b8e54d2d8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nd54b2958dc0e/inputs/030e4da979fa09bce4ae9004f1785c4dc735e19373c193e9f879985b8e54d2d8.json"
+              },
+              "bytes": 9049
+            },
+            "production": {
+              "id": "NCI-00339",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "3ddef80962a4efe95409e986cf64ba6f35075fa1bcb2db48a03dce5c85552f42"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "87e3a508bb12825bc56bea7b4caf9d39e164e4bcf22dcbace2844ad6a2382d7e",
-      "approvedRevisionId": "87e3a508bb12825bc56bea7b4caf9d39e164e4bcf22dcbace2844ad6a2382d7e",
+      "candidateRevisionId": "844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274",
+      "approvedRevisionId": "844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323284013/rectangle_large_type_2_5a9b24abcf4fd803d579a60ba89351b0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.770Z",
-        "revisionId": "87e3a508bb12825bc56bea7b4caf9d39e164e4bcf22dcbace2844ad6a2382d7e"
+        "url": "https://assets.st-note.com/production/uploads/images/327704845/rectangle_large_type_2_dd730f1445921889f48a6c2701440742.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:49.980Z",
+        "revisionId": "844b89a8f5da132981f193789a252b1a90d91d341001c526a067f049d4bd9274"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -38619,7 +39064,12 @@
         "id": "NCI-00339",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農地の転用面積\n北海道と福井県",
+          "subline": "2021年度・面積で比較",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の農地台帳ファイル2冊と無地の土地測量尺。県の地図、土地の売買・開発の良し悪しを示す絵や架空グラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nd54b2958dc0e 2026-10-24公開API本文照合。記事題名「農地の転用面積の都道府県格差は9.8倍！偏差値76.4の北海道と偏差値37.6の福井県の驚きの差」。本文中の 2021年度、農地、転用面積、北海道、福井県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -45232,15 +45682,60 @@
               "bytes": 1300
             }
           }
+        },
+        {
+          "sha256": "aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n16950238dfd8/revisions/aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9.png"
+          },
+          "bytes": 1847674,
+          "id": "aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-c5befbd31514",
+          "createdAt": "2026-10-23T17:38:14.598Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1dba4b916f16bf2a974aaa0d8eac38a47b889dc82bd56227699a100c792a748e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。公開本文で確認した定義・分母・集計対象を明記。",
+            "reviewedAt": "2026-10-23T17:41:38.900Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1dba4b916f16bf2a974aaa0d8eac38a47b889dc82bd56227699a100c792a748e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n16950238dfd8/inputs/1dba4b916f16bf2a974aaa0d8eac38a47b889dc82bd56227699a100c792a748e.json"
+              },
+              "bytes": 9374
+            },
+            "production": {
+              "id": "NCI-00390",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "c5befbd315146ea1d10310225ffaa51b3675b3ac74a278bc038070663fe0a49f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "6941e0733e50cc534cc8d568bc96de074a406edc2acfdd0ecc6b47fe8937a656",
-      "approvedRevisionId": "6941e0733e50cc534cc8d568bc96de074a406edc2acfdd0ecc6b47fe8937a656",
+      "candidateRevisionId": "aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9",
+      "approvedRevisionId": "aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285666/rectangle_large_type_2_5dc102413542027193ba06987da3b6e4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.717Z",
-        "revisionId": "6941e0733e50cc534cc8d568bc96de074a406edc2acfdd0ecc6b47fe8937a656"
+        "url": "https://assets.st-note.com/production/uploads/images/327704866/rectangle_large_type_2_e25652b9f77d21f71ce8affb4f205fdb.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T17:48:50.773Z",
+        "revisionId": "aea8ed3cca5e17e7962a79b197c32496b711f33f98c29070a0409c7357e104f9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -45249,7 +45744,12 @@
         "id": "NCI-00390",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "財政力指数\n東京都と島根県",
+          "subline": "収入額と需要額の比・過去3年平均",
+          "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の財政資料ファイル2冊。財政力の原因、自立度、政策の優劣を断定する記号・数値・グラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n16950238dfd8 2026-10-24公開API本文照合。記事題名「【2022年度】都道府県「財政力指数」ランキング｜唯一の1.0超え東京都、茨城8位の意外」。本文中の 財政力指数、東京都、島根県、基準財政収入額、基準財政需要額 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。題名に指標の定義や対象を広く表現した箇所があるため、カバーは本文で確認できる厳密な対象と単位を用いる。"
+        }
       }
     },
     {
