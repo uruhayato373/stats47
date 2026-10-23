@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T09:54:26.936Z",
+  "updatedAt": "2026-10-23T10:21:09.794Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -6986,15 +6986,60 @@
               "bytes": 7628
             }
           }
+        },
+        {
+          "sha256": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-generation-capacity/revisions/6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558.png"
+          },
+          "bytes": 1565396,
+          "id": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d093135b767a",
+          "createdAt": "2026-10-23T10:12:32.367Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:36.473Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-electricity-generation-capacity/inputs/8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569.json"
+              },
+              "bytes": 8786
+            },
+            "production": {
+              "id": "NCI-00057",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d093135b767a3b13ce2c5017b8d03d78be757083b64fb978df648d72efd15253"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f",
-      "approvedRevisionId": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f",
+      "candidateRevisionId": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
+      "approvedRevisionId": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190683/rectangle_large_type_2_848975a18bdb92e66f20b8af19f4b390.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.665Z",
-        "revisionId": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f"
+        "url": "https://assets.st-note.com/production/uploads/images/327586057/rectangle_large_type_2_847daac40583faf67ffa46ce44acf74a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:02.727Z",
+        "revisionId": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7003,7 +7048,12 @@
         "id": "NCI-00057",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "発電電力量\n多い県は千葉県",
+          "subline": "2023年・MWhで比較",
+          "subject": "1280×670相当の横長完成カバー。右側に文字・数字のないシンプルな発電所の模型を1点。煙や特定電源・送電先を示す図は描かない。電力消費や設備容量と取り違えない。 大きな単一モチーフを描き、人物・顔・手・動物・キャラクター・マスコットは一切描かない。文字は指定全文のみ。上部にカテゴリ名、左に見出し、下に補足を太い帯で配置。幅320pxでも全文読める大きさに。",
+          "evidence": "https://note.com/stats47/n/n5b3dbb6c7cef 2026-10-23公開API本文照合。千葉県80,635,294MWhで1位、埼玉県537,679MWhで47位。2023年の県内発電設備による発電電力量。 カバーは数値・因果を追加せず、対象年・単位・1位だけを示す。"
+        }
       }
     },
     {
@@ -7210,15 +7260,60 @@
               "bytes": 7296
             }
           }
+        },
+        {
+          "sha256": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-general-households/revisions/a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac.png"
+          },
+          "bytes": 1540455,
+          "id": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-8e437019b1a8",
+          "createdAt": "2026-10-23T10:12:24.072Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:31.222Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-general-households/inputs/47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e.json"
+              },
+              "bytes": 8461
+            },
+            "production": {
+              "id": "NCI-00059",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "8e437019b1a834cd32a78f8a901bb1629165d418d0b024858e4412cbbf5c6d2e"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9",
-      "approvedRevisionId": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9",
+      "candidateRevisionId": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
+      "approvedRevisionId": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190730/rectangle_large_type_2_0ea38a3f04d1c129768496cb64323be3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.993Z",
-        "revisionId": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9"
+        "url": "https://assets.st-note.com/production/uploads/images/327586172/rectangle_large_type_2_f21a2ff1fcef22bd8779678fd261e47d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:03.244Z",
+        "revisionId": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7227,7 +7322,12 @@
         "id": "NCI-00059",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "一般世帯数\n多い県は東京都",
+          "subline": "2020年・世帯数で比較",
+          "subject": "1280×670相当の横長完成カバー。右側に文字・数字のないシンプルな家の模型を1点。世帯数の総数を示すので、家族構成や世帯の人数を暗示する人物は描かない。 大きな単一モチーフを描き、人物・顔・手・動物・キャラクター・マスコットは一切描かない。文字は指定全文のみ。上部にカテゴリ名、左に見出し、下に補足を太い帯で配置。幅320pxでも全文読める大きさに。",
+          "evidence": "https://note.com/stats47/n/nd93084c0cb0c 2026-10-23公開API本文照合。東京都722万世帯で1位、鳥取県22万世帯で47位。2020年の一般世帯の総数で、施設等の世帯を除く。 カバーは数値・因果を追加せず、対象年・単位・1位だけを示す。"
+        }
       }
     },
     {
@@ -7313,15 +7413,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-aichi/images/cover-1280x670.png",
             "sourceSha256": "6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351"
           }
+        },
+        {
+          "sha256": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-aichi/revisions/09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8.png"
+          },
+          "bytes": 1523795,
+          "id": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-6fabdc263af0",
+          "createdAt": "2026-10-23T10:12:16.618Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の名古屋市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:26.653Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-aichi/inputs/a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d.json"
+              },
+              "bytes": 12933
+            },
+            "production": {
+              "id": "NCI-00060",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "6fabdc263af093fd6fc2ee500c722aac185ad68862566cf4b0fe6f8be3e9ef89"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
-      "approvedRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
+      "candidateRevisionId": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
+      "approvedRevisionId": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908384/rectangle_large_type_2_21171c7cfbf9a383e56ad5ca6335bd8a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.092Z",
-        "revisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1"
+        "url": "https://assets.st-note.com/production/uploads/images/327586280/rectangle_large_type_2_44ce7f8b296a2877260e936302a12e5a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:03.809Z",
+        "revisionId": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7330,7 +7475,17 @@
         "id": "NCI-00060",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "愛知県の家計\n住まいに注目",
+          "subline": "名古屋市・2024年\n二人以上の世帯",
+          "subject": "添付は愛知県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nda72a0bed2c4 2026-10-23公開API本文照合。名古屋市の2024年・二人以上の世帯の家計調査。住居0.64倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は愛知県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は名古屋市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "名古屋市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7416,15 +7571,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-akita/images/cover-1280x670.png",
             "sourceSha256": "9938dc14443a0c9cd4bdbe60f04f4585b88178733a41217459ff8996327eafdb"
           }
+        },
+        {
+          "sha256": "8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-akita/revisions/8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd.png"
+          },
+          "bytes": 1585909,
+          "id": "8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-8ea66994dca8",
+          "createdAt": "2026-10-23T10:12:06.392Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fbcce91179da8b66cc2e0605755829625aaecfcbe2f7c8b423ebe4328461c1e1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の秋田市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:21.151Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fbcce91179da8b66cc2e0605755829625aaecfcbe2f7c8b423ebe4328461c1e1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-akita/inputs/fbcce91179da8b66cc2e0605755829625aaecfcbe2f7c8b423ebe4328461c1e1.json"
+              },
+              "bytes": 12908
+            },
+            "production": {
+              "id": "NCI-00061",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "8ea66994dca89197711b93ee21443b0a367b07aa7a98ddcab9aa53295ff13766"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
-      "approvedRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
+      "candidateRevisionId": "8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd",
+      "approvedRevisionId": "8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908788/rectangle_large_type_2_1d82c7a164c3cf5bfdb9fe554c5fc99c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.063Z",
-        "revisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650"
+        "url": "https://assets.st-note.com/production/uploads/images/327586406/rectangle_large_type_2_a996f526ca347df365ccf0b1a45b1e09.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:03.556Z",
+        "revisionId": "8b12efdcb63b8faa6b3dca028e798b8159d86473f66a9fef1074feb3b5e05abd"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7433,7 +7633,17 @@
         "id": "NCI-00061",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "秋田県の家計\n教育費に注目",
+          "subline": "秋田市・2024年\n二人以上の世帯",
+          "subject": "添付は秋田県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n5e9502c6507c 2026-10-23公開API本文照合。秋田市の2024年・二人以上の世帯の家計調査。教育0.24倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は秋田県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は秋田市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "秋田市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7519,15 +7729,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-aomori/images/cover-1280x670.png",
             "sourceSha256": "b34ce02d7c6f5a6dfa0e80cfe64e32f8d0d65c5b6849975d134b1e628c3908a3"
           }
+        },
+        {
+          "sha256": "4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-aomori/revisions/4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b.png"
+          },
+          "bytes": 1569508,
+          "id": "4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-eca1ca65e450",
+          "createdAt": "2026-10-23T10:11:54.990Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1b3d68669b433b0740be4beb61260659c5a50a70a0acea40c5bf07aaf4974770"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の青森市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:15.848Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1b3d68669b433b0740be4beb61260659c5a50a70a0acea40c5bf07aaf4974770",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-aomori/inputs/1b3d68669b433b0740be4beb61260659c5a50a70a0acea40c5bf07aaf4974770.json"
+              },
+              "bytes": 12873
+            },
+            "production": {
+              "id": "NCI-00062",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "eca1ca65e4508ec2f0192f980affc6d1ec0b2727862f3ed0742d060a6addcc72"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
-      "approvedRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
+      "candidateRevisionId": "4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b",
+      "approvedRevisionId": "4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908837/rectangle_large_type_2_4eeeccafaba509dd4f2f3b9e555553e7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.114Z",
-        "revisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7"
+        "url": "https://assets.st-note.com/production/uploads/images/327586584/rectangle_large_type_2_5c5f5ba13bd503666e0a97af1f7b3e7b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:06.558Z",
+        "revisionId": "4ec4ef6d3aaf9544f0f704519da7c24ed0b3a87eda8f3422b36bc153cf73e22b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7536,7 +7791,17 @@
         "id": "NCI-00062",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "青森県の家計\n教育費に注目",
+          "subline": "青森市・2024年\n二人以上の世帯",
+          "subject": "添付は青森県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n85831c0c47aa 2026-10-23公開API本文照合。青森市の2024年・二人以上の世帯の家計調査。教育0.35倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は青森県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は青森市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "青森市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7622,15 +7887,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-chiba/images/cover-1280x670.png",
             "sourceSha256": "e136e91bea9d32145ef297625c230797741ff19763ee7ea64709c841db05d1c3"
           }
+        },
+        {
+          "sha256": "025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-chiba/revisions/025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268.png"
+          },
+          "bytes": 1478090,
+          "id": "025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-eac899e983f2",
+          "createdAt": "2026-10-23T10:11:44.544Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "39a44d1dbfcda8d356d36872a7d9efe21447a8a143d577b07c9a7543088c74a2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の千葉市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:10.709Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "39a44d1dbfcda8d356d36872a7d9efe21447a8a143d577b07c9a7543088c74a2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-chiba/inputs/39a44d1dbfcda8d356d36872a7d9efe21447a8a143d577b07c9a7543088c74a2.json"
+              },
+              "bytes": 12892
+            },
+            "production": {
+              "id": "NCI-00063",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "eac899e983f27acdb6782b5573582789801bbddc507aeb2e5c221afa4c58ecaf"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
-      "approvedRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
+      "candidateRevisionId": "025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268",
+      "approvedRevisionId": "025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908865/rectangle_large_type_2_61ec3529e7274b41b32f60b9b98c7ce6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.966Z",
-        "revisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8"
+        "url": "https://assets.st-note.com/production/uploads/images/327586675/rectangle_large_type_2_5a619a8594c83950ecf298fc0d6eae66.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:06.384Z",
+        "revisionId": "025e7ec74003e249dae369db282d23f7728eb09adcdf708cfc6cdfc7e93e1268"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7639,7 +7949,17 @@
         "id": "NCI-00063",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "千葉県の家計\n教育費に注目",
+          "subline": "千葉市・2024年\n二人以上の世帯",
+          "subject": "添付は千葉県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n1d5481680c03 2026-10-23公開API本文照合。千葉市の2024年・二人以上の世帯の家計調査。教育2.00倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は千葉県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は千葉市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "千葉市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7725,15 +8045,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-ehime/images/cover-1280x670.png",
             "sourceSha256": "eb0c9bd6b4333ce7ccd7aa8e1ac86d0a29b93ac82fdcc848b50592ae925067c7"
           }
+        },
+        {
+          "sha256": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-ehime/revisions/23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2.png"
+          },
+          "bytes": 1708543,
+          "id": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-ca193b9ec441",
+          "createdAt": "2026-10-23T10:11:34.611Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の松山市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:14:05.489Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-ehime/inputs/fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1.json"
+              },
+              "bytes": 12942
+            },
+            "production": {
+              "id": "NCI-00064",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "ca193b9ec441d16e9994cf26c94cdb3e28e0eacb2e8859f4a341922b0c97efca"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
-      "approvedRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
+      "candidateRevisionId": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
+      "approvedRevisionId": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908892/rectangle_large_type_2_05d5065394f8026e1168220ef36850ec.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.988Z",
-        "revisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b"
+        "url": "https://assets.st-note.com/production/uploads/images/327586768/rectangle_large_type_2_8eddc27fd759933802aab2d9fed9b172.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:06.343Z",
+        "revisionId": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7742,7 +8107,17 @@
         "id": "NCI-00064",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "愛媛県の家計\n教養娯楽に注目",
+          "subline": "松山市・2024年\n二人以上の世帯",
+          "subject": "添付は愛媛県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の閉じた本の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nb627534c8b66 2026-10-23公開API本文照合。松山市の2024年・二人以上の世帯の家計調査。教養娯楽0.77倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は愛媛県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は松山市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "松山市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7828,15 +8203,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-fukui/images/cover-1280x670.png",
             "sourceSha256": "67e8e8674d0a13aa7d98c0a560e2281ecdc5ccf917a2cec58f76e787f87f9665"
           }
+        },
+        {
+          "sha256": "33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-fukui/revisions/33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03.png"
+          },
+          "bytes": 1478941,
+          "id": "33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-25f620caaac9",
+          "createdAt": "2026-10-23T10:11:25.041Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a668d875aaa8799e08390d0b6fadec614486fc66ec3a4499ad10310da03f36c0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の福井市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:13:56.738Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a668d875aaa8799e08390d0b6fadec614486fc66ec3a4499ad10310da03f36c0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-fukui/inputs/a668d875aaa8799e08390d0b6fadec614486fc66ec3a4499ad10310da03f36c0.json"
+              },
+              "bytes": 12900
+            },
+            "production": {
+              "id": "NCI-00065",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "25f620caaac9d96a433ae8576c756311de1a2dcf3b8cbdc320244930846d5dd8"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
-      "approvedRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
+      "candidateRevisionId": "33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03",
+      "approvedRevisionId": "33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319908916/rectangle_large_type_2_3b1875626df0e9b41a828ca6559e67d2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.872Z",
-        "revisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032"
+        "url": "https://assets.st-note.com/production/uploads/images/327586963/rectangle_large_type_2_ff7ef77bcb92ef9285f223dd082ed40d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:07.072Z",
+        "revisionId": "33cb3c592f27f48b6073873b371efa06ae6c942a0fd704501b65c85f5c2dac03"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7845,7 +8265,17 @@
         "id": "NCI-00065",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "福井県の家計\n住まいに注目",
+          "subline": "福井市・2024年\n二人以上の世帯",
+          "subject": "添付は福井県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n18bb5a58060c 2026-10-23公開API本文照合。福井市の2024年・二人以上の世帯の家計調査。住居1.35倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は福井県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は福井市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "福井市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -7931,15 +8361,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-fukuoka/images/cover-1280x670.png",
             "sourceSha256": "f739b68da03203495ff24535a256f69b8c0b29eaee5c0f0d3204690afa878e3b"
           }
+        },
+        {
+          "sha256": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-fukuoka/revisions/ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b.png"
+          },
+          "bytes": 1592095,
+          "id": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-79c0ed494fbe",
+          "createdAt": "2026-10-23T10:11:15.162Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の福岡市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:13:50.605Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-fukuoka/inputs/5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8.json"
+              },
+              "bytes": 13063
+            },
+            "production": {
+              "id": "NCI-00066",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "79c0ed494fbef8874c6a26d52c3e80081de3df0e78eba2a473c262adb7d8d7a1"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
-      "approvedRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
+      "candidateRevisionId": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
+      "approvedRevisionId": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319909781/rectangle_large_type_2_59d098aec42bcc7c5496b8e50604f282.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.868Z",
-        "revisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47"
+        "url": "https://assets.st-note.com/production/uploads/images/327587121/rectangle_large_type_2_29d276008ac8bad49b8fbfaa092e683c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:09.763Z",
+        "revisionId": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -7948,7 +8423,17 @@
         "id": "NCI-00066",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "福岡県の家計\n交通・通信に注目",
+          "subline": "福岡市・2024年\n二人以上の世帯",
+          "subject": "添付は福岡県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の定期券の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nb7cfd81af156 2026-10-23公開API本文照合。福岡市の2024年・二人以上の世帯の家計調査。交通・通信0.80倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は福岡県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は福岡市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "福岡市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -8034,15 +8519,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-fukushima/images/cover-1280x670.png",
             "sourceSha256": "1698765ed73be08e12403d255bd10161032007cb5850528c5d52e8a7067ed444"
           }
+        },
+        {
+          "sha256": "01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-fukushima/revisions/01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0.png"
+          },
+          "bytes": 1645854,
+          "id": "01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-8c26f1f27398",
+          "createdAt": "2026-10-23T10:11:04.813Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fff1f719cb1e9ac7ae2d94476c13ece35c447fdc73e7ffc53bb4fa46769914fa"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の福島市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T10:13:45.147Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fff1f719cb1e9ac7ae2d94476c13ece35c447fdc73e7ffc53bb4fa46769914fa",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-fukushima/inputs/fff1f719cb1e9ac7ae2d94476c13ece35c447fdc73e7ffc53bb4fa46769914fa.json"
+              },
+              "bytes": 12913
+            },
+            "production": {
+              "id": "NCI-00067",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "8c26f1f2739872c78879a62adc9c82e498cf248ca16b514f236692594824e1ff"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
-      "approvedRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
+      "candidateRevisionId": "01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0",
+      "approvedRevisionId": "01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319909813/rectangle_large_type_2_659d80679f33e445eb8195de114139b4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.834Z",
-        "revisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89"
+        "url": "https://assets.st-note.com/production/uploads/images/327587220/rectangle_large_type_2_24b2e0066b8a381091bd9261491e43fb.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T10:21:09.754Z",
+        "revisionId": "01ae30b91f8e10bc1d93d6b02b0e76ef1b2f0487e688373f0626261fbe854ba0"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -8051,7 +8581,17 @@
         "id": "NCI-00067",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "福島県の家計\n住まいに注目",
+          "subline": "福島市・2024年\n二人以上の世帯",
+          "subject": "添付は福島県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n4c363c356b63 2026-10-23公開API本文照合。福島市の2024年・二人以上の世帯の家計調査。住居0.58倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は福島県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は福島市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "福島市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
