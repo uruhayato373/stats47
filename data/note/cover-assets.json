@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T05:26:12.414Z",
+  "updatedAt": "2026-10-23T05:56:39.467Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -5734,8 +5734,8 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:13.570Z",
-        "revisionId": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b"
+        "observedAt": "2026-10-23T05:56:34.620Z",
+        "revisionId": "43df6a14ec7b80b0c779e7d5756bac7d8bb9bdcbe2cb3df1f68bc3e285741e50"
       },
       "missingVersions": [],
       "production": {
@@ -5817,15 +5817,60 @@
               "bytes": 7530
             }
           }
+        },
+        {
+          "sha256": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-employment-population/revisions/b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930.png"
+          },
+          "bytes": 1780252,
+          "id": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-8afdc2349f57",
+          "createdAt": "2026-10-23T05:45:30.193Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2014年農業就業人口と北海道1位に一致。新候補は対象年を明示。原寸・320pxで文字と農具の題材を確認。",
+            "reviewedAt": "2026-10-23T05:49:42.389Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-agricultural-employment-population/inputs/1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade.json"
+              },
+              "bytes": 7959
+            },
+            "production": {
+              "id": "NCI-00048",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "8afdc2349f57a98d6b379dfb5a7b9703f12e5d6894258aef46c6f5c839d58b85"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9",
-      "approvedRevisionId": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9",
+      "candidateRevisionId": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
+      "approvedRevisionId": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190379/rectangle_large_type_2_8cce23afa0610b619676e6ccba581c73.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.679Z",
-        "revisionId": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9"
+        "url": "https://assets.st-note.com/production/uploads/images/327506895/rectangle_large_type_2_879580fbf97fae1bfd4d37c899310147.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:33.826Z",
+        "revisionId": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5834,7 +5879,12 @@
         "id": "NCI-00048",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農業就業人口\n多い県は？",
+          "subline": "1位は北海道\n2014年のデータ",
+          "subject": "右側に無地の鍬を1本だけ大きく描き、畑は背景として控えめにする。農業従事者の総数を扱い、高齢化や現在の人数を暗示しない。人物・顔・手・動物・キャラクター・地図・グラフ・架空の数値を描かない。",
+          "evidence": "公開本文を確認。2014年の農業就業人口は北海道96,557人で1位、東京都10,986人で47位。農業従事者の総数で、現在の人数ではない。"
+        }
       }
     },
     {
@@ -5904,15 +5954,60 @@
               "bytes": 7482
             }
           }
+        },
+        {
+          "sha256": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-output/revisions/e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de.png"
+          },
+          "bytes": 1911622,
+          "id": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-192de3ffbc98",
+          "createdAt": "2026-10-23T05:45:38.128Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2023年農業産出額と北海道1位に一致。新候補は金額での比較を明記し、生産量との混同を避ける。原寸・320pxで文字と農産物の題材を確認。",
+            "reviewedAt": "2026-10-23T05:50:13.395Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-agricultural-output/inputs/fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642.json"
+              },
+              "bytes": 7936
+            },
+            "production": {
+              "id": "NCI-00049",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "192de3ffbc98b1cba46ba8f8d5c5641ce66ca7564d037226a223ba86e9feb1d7"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
-      "approvedRevisionId": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
+      "candidateRevisionId": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
+      "approvedRevisionId": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190442/rectangle_large_type_2_a03a501cfcc45600643edc5a35dcb57e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.730Z",
-        "revisionId": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57"
+        "url": "https://assets.st-note.com/production/uploads/images/327507018/rectangle_large_type_2_66ceb8af97608b64049924e56e57527b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:34.452Z",
+        "revisionId": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5921,7 +6016,12 @@
         "id": "NCI-00049",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "農業産出額\n多い県は？",
+          "subline": "1位は北海道\n2023年・金額で比較",
+          "subject": "右側に無地の木箱に入った農産物を一組の主役として大きく描く。特定作物だけの産出額に見せない。人物・キャラクター・紙幣・値札・地図・グラフ・ロゴ・指定外の文字を描かない。",
+          "evidence": "公開本文を確認。2023年の農業産出額は農産物の生産量と農家庭先価格で評価した金額。北海道1,347,800百万円が1位、東京都22,000百万円が47位。生産重量や作付面積と混同しない。"
+        }
       }
     },
     {
@@ -6057,15 +6157,60 @@
               "bytes": 7362
             }
           }
+        },
+        {
+          "sha256": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-average-temperature/revisions/ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4.png"
+          },
+          "bytes": 1949494,
+          "id": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-836f075b3e65",
+          "createdAt": "2026-10-23T05:45:47.133Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2024年の年平均気温と沖縄県1位に一致。夏の最高気温ではなく年間平均と明記。原寸・320pxで文字と無数値温度計を確認。",
+            "reviewedAt": "2026-10-23T05:50:31.485Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-average-temperature/inputs/753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0.json"
+              },
+              "bytes": 7892
+            },
+            "production": {
+              "id": "NCI-00050",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "836f075b3e650a4c27015b062d45c04c9362de47a445c07d3acb67a29e4ff513"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8",
-      "approvedRevisionId": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8",
+      "candidateRevisionId": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
+      "approvedRevisionId": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190464/rectangle_large_type_2_3a650ddbdca4b6ab6bfe522a4c0c375d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.731Z",
-        "revisionId": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8"
+        "url": "https://assets.st-note.com/production/uploads/images/327507134/rectangle_large_type_2_3a8dccd64782fe56810ba8a677c69f26.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:34.732Z",
+        "revisionId": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6074,7 +6219,12 @@
         "id": "NCI-00050",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "年平均気温\n高い県は？",
+          "subline": "1位は沖縄県\n2024年のデータ",
+          "subject": "右側に無文字・無数字の温度計を1点だけ大きく描く。具体的な温度値や地点を図示せず、夏の最高気温にも見せない。人物・キャラクター・地図・グラフ・県の輪郭・ロゴ・指定外の文字を描かない。",
+          "evidence": "公開本文を確認。2024年の年平均気温は沖縄県24.4℃で1位、北海道10.5℃で47位。年間平均であり、夏の最高気温や長期平年値ではない。"
+        }
       }
     },
     {
@@ -6699,15 +6849,60 @@
               "bytes": 7569
             }
           }
+        },
+        {
+          "sha256": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-demand/revisions/f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f.png"
+          },
+          "bytes": 1642608,
+          "id": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-891b4503b385",
+          "createdAt": "2026-10-23T05:45:11.239Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2023年の電力需要量と東京都1位に一致。新候補は供給量と混同しない電源プラグの題材。原寸・320pxの文字を確認。",
+            "reviewedAt": "2026-10-23T05:48:53.510Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-electricity-demand/inputs/fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f.json"
+              },
+              "bytes": 7826
+            },
+            "production": {
+              "id": "NCI-00056",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "891b4503b385d786965d110a329c0dbcceda9d3f282209d6967f3d03da490326"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79",
-      "approvedRevisionId": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79",
+      "candidateRevisionId": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
+      "approvedRevisionId": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190646/rectangle_large_type_2_4b9dcbfedb33fe1a80b07f91b4fb15e5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.225Z",
-        "revisionId": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79"
+        "url": "https://assets.st-note.com/production/uploads/images/327507272/rectangle_large_type_2_15b4830ac9ca472b63165394676892c6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:35.978Z",
+        "revisionId": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6716,7 +6911,12 @@
         "id": "NCI-00056",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "電力需要量\n多い県は？",
+          "subline": "1位は東京都\n2023年のデータ",
+          "subject": "右側に無地の電源プラグを1点だけ大きく描く。供給量・発電量や特定施設を示す絵にはしない。人物・キャラクター・地図・グラフ・発電所・会社ロゴ・架空の数値を描かない。",
+          "evidence": "公開本文を確認。2023年の電力需要量は東京都75,521,853MWhで1位、鳥取県3,416,535MWhで47位。発電電力量や人口当たりの量とは区別する。"
+        }
       }
     },
     {
@@ -6873,15 +7073,60 @@
               "bytes": 7702
             }
           }
+        },
+        {
+          "sha256": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-final-energy-consumption-per-capita/revisions/0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d.png"
+          },
+          "bytes": 1823265,
+          "id": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-b8d62a256102",
+          "createdAt": "2026-10-23T05:45:21.340Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2022年・1人当たり最終エネルギー消費量、大分県1位と一致。総量との区別も明瞭。原寸・320pxで文字と無数値メーターを確認。",
+            "reviewedAt": "2026-10-23T05:49:16.435Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-final-energy-consumption-per-capita/inputs/5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288.json"
+              },
+              "bytes": 8045
+            },
+            "production": {
+              "id": "NCI-00058",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "b8d62a25610267a79a60114ffa4672fef217794fc5b028aec2dbc02b9d577973"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
-      "approvedRevisionId": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
+      "candidateRevisionId": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
+      "approvedRevisionId": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190709/rectangle_large_type_2_3a1d46b9d7bbe19b837c4512b93638c6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.191Z",
-        "revisionId": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747"
+        "url": "https://assets.st-note.com/production/uploads/images/327507394/rectangle_large_type_2_31a3b476bd66d9523763853ee231cb89.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:37.280Z",
+        "revisionId": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6890,7 +7135,12 @@
         "id": "NCI-00058",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "1人当たりの\n最終エネルギー消費",
+          "subline": "多い県は大分県\n2022年・GJで比較",
+          "subject": "右側に文字・数字のない簡素なエネルギーメーターを1点だけ大きく描く。特定の燃料・電力だけの消費と誤認させない。人物・キャラクター・地図・グラフ・メーター数値・ロゴを描かない。",
+          "evidence": "公開本文を確認。2022年の1人当たり最終エネルギー消費量は大分県308.84GJで1位、埼玉県63.32GJで47位。県全体の消費総量や電力需要量ではない。"
+        }
       }
     },
     {
@@ -14011,15 +14261,60 @@
               "planSha256": "b1b78bc1d37702695f94ffc06595a94040b52121272e244f77c019e0562e1a95"
             }
           }
+        },
+        {
+          "sha256": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/revisions/4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217.png"
+          },
+          "bytes": 1829446,
+          "id": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-9f9c4882de36",
+          "createdAt": "2026-10-23T05:44:34.906Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文と指標を照合。旧版は世帯数と誤読される表現、新版は通勤90分以上の主世帯割合を明示。原寸・320pxで文字と腕時計を確認。",
+            "reviewedAt": "2026-10-23T05:46:21.579Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/inputs/ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e.json"
+              },
+              "bytes": 8301
+            },
+            "production": {
+              "id": "NCI-00499",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "9f9c4882de360075e9860965fdefdf075d21ccca619800853e0cc67a4c388cf9"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
-      "approvedRevisionId": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "candidateRevisionId": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
+      "approvedRevisionId": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324748693/rectangle_large_type_2_0a4fb923a31e362d7e37893ffb5e20b9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:13.457Z",
-        "revisionId": null
+        "url": "https://assets.st-note.com/production/uploads/images/327507503/rectangle_large_type_2_510196824d2f72bb8b572c9cd0dfba59.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:36.613Z",
+        "revisionId": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217"
       },
       "missingVersions": [],
       "production": {
@@ -14027,10 +14322,10 @@
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": {
-          "headline": "通勤90分以上の\n世帯が多い県は？",
-          "subline": "1位は埼玉県\n2023年のデータ",
-          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に長い通勤を象徴する具体物を1点だけ大きく描く: 無地の通勤定期入れと、その横に置いた文字盤に数字のないシンプルな腕時計。定期入れの中は無文字の色面にする。左側に大きな2行の問い、下に十分大きな補足2行。電車の車両・路線図・駅名標・地図・グラフ・時刻表・数字の入った時計は描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。指定外の文字・数字・ロゴを描かない。",
-          "evidence": "https://storage.stats47.jp/note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min/draft.md 2026-10-15 公開R2の本文を確認。2023年の社会・人口統計体系 (statsDataId 0000010208・項目 H03102) の、家計を主に支える者が雇用者で通勤時間が1時間30分以上の主世帯の割合 (主世帯千世帯あたり) の都道府県ランキングで1位は埼玉県 (33.9)、47位は沖縄県 (2.6)。平均通勤時間ではない。カバーは比較対象・対象年・1位だけを表示し、値や倍率を追加しない。人物・キャラクターなし。"
+          "headline": "通勤90分以上の\n世帯割合は？",
+          "subline": "1位は埼玉県\n2023年・主世帯千世帯対",
+          "subject": "右側に文字や数字のない腕時計を1点だけ大きく描く。人の平均通勤時間ではなく、通勤90分以上の主世帯の割合を扱う。人物・手・顔・キャラクター・交通機関・駅名・路線図・地図・グラフ・架空の数値を描かない。",
+          "evidence": "公開本文と data/metrics/main-household-ratio-main-earner-employee-commute-90min.ts を確認。2023年、家計を主に支える者が雇用者で通勤時間1時間30分以上の主世帯の割合（主世帯千世帯対）。埼玉県33.9が1位、沖縄県2.6が47位。平均通勤時間や世帯実数ではない。"
         }
       }
     },
@@ -15094,15 +15389,60 @@
               "planSha256": "61f885180ff8cd6068c000fa0119a65b3f90087529b72c2e17978847d666b479"
             }
           }
+        },
+        {
+          "sha256": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044.png"
+          },
+          "bytes": 1897949,
+          "id": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-fad4beb4e36e",
+          "createdAt": "2026-10-23T05:44:43.045Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2024年・3.3㎡当たり家賃と一致。旧版にない東京都1位と比較単位を明示。原寸・320pxで文字と賃貸住宅の題材を確認。",
+            "reviewedAt": "2026-10-23T05:48:07.381Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3.json"
+              },
+              "bytes": 8014
+            },
+            "production": {
+              "id": "NCI-00120",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "fad4beb4e36eec4bb1cfccc89ebdbf59d9aef89dbc09613c8c97d68684c28779"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1",
-      "approvedRevisionId": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1",
+      "candidateRevisionId": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
+      "approvedRevisionId": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324640762/rectangle_large_type_2_d2923a6cf536a31f09e720bb894dbdee.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.314Z",
-        "revisionId": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1"
+        "url": "https://assets.st-note.com/production/uploads/images/327507617/rectangle_large_type_2_94c5d3dfdb375c950506394c476740f8.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:39.179Z",
+        "revisionId": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -15112,10 +15452,10 @@
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": {
-          "headline": "家賃が高い県は？",
-          "subline": "2024年・民営賃貸住宅",
-          "subject": "問い型の大きな一物構図。明るい水色と黄色の大胆な丸い色面。左に大きな問い、右に賃貸の集合住宅を表す、正面を向いた無人の低層アパートの紙模型を1棟だけ大きく置く。窓は同じ淡い水色で均一、住人や人影なし。家賃の金額・倍率・順位・面積・契約書・鍵・家主・地図は描かない。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
-          "evidence": "https://note.com/stats47/n/n27d2efa9bcfb 2026-10-15公開本文確認。2024年の民営賃貸住宅家賃の47県比較。記事には東京1位と円表示があるが、カバーでは面積や月額の条件を省いた金額・倍率・順位を載せず、比較する題材と対象年だけを示す。"
+          "headline": "民営賃貸の家賃\n高い県は？",
+          "subline": "1位は東京都\n2024年・3.3㎡当たり",
+          "subject": "右側に無人の汎用低層賃貸アパートを1棟だけ描く。特定地域・物件・不動産会社に見せない。人物・キャラクター・鍵・契約書・地図・グラフ・価格表示・ロゴ・指定外の文字を描かない。",
+          "evidence": "公開本文と指標キーを確認。2024年の民営賃貸住宅家賃は3.3㎡当たりの円額で、東京都9,736円が1位、和歌山県3,442円が47位。月額総家賃や物件単位の価格と混同しない。"
         }
       }
     },
@@ -15256,15 +15596,60 @@
               "planSha256": "e28ffb8329c77f2645b5b7afbe62ea24b399ac8c1e3e0c8b3a1e3a346e9bd8fa"
             }
           }
+        },
+        {
+          "sha256": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-railway-station-count/revisions/5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd.png"
+          },
+          "bytes": 1980372,
+          "id": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-c43767efb4c1",
+          "createdAt": "2026-10-23T05:44:50.883Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2024年の鉄道駅数、東京都1位と一致。旧版より対象と順位が明瞭。原寸・320pxで文字と無人駅舎を確認。",
+            "reviewedAt": "2026-10-23T05:48:34.194Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-railway-station-count/inputs/eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0.json"
+              },
+              "bytes": 7803
+            },
+            "production": {
+              "id": "NCI-00121",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "c43767efb4c113561ba281ff38697c17cfd614599aa2304b421e3932a54b5bb4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c",
-      "approvedRevisionId": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c",
+      "candidateRevisionId": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
+      "approvedRevisionId": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324640806/rectangle_large_type_2_16eaf5d957f8701cb8640d8047444104.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.282Z",
-        "revisionId": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c"
+        "url": "https://assets.st-note.com/production/uploads/images/327507752/rectangle_large_type_2_e61ffa7fb21ddb81900c2abe6ddc6238.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:39.448Z",
+        "revisionId": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -15274,10 +15659,10 @@
         "policyId": "NCP-003",
         "policyVersion": 3,
         "brief": {
-          "headline": "駅が多い県は？",
-          "subline": "2024年・鉄道駅数を比較",
-          "subject": "問い型の斜めの紙カット構図。水色と黄色、紺の太い輪郭。大きな問いを上半分に広く置き、下右に小さな無人の鉄道駅舎とホームを一体のミニチュア1点として大きく描く。レールはごく短い2本だけ。乗客・運転士・車両・人影・時計・駅名板の文字・路線図・地図なし。駅舎の窓は均一な水色。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
-          "evidence": "https://note.com/stats47/n/nadfe03f70c45 2026-10-15公開本文確認。2024年鉄道駅数、東京892駅などの都道府県別集計。駅の総数の比較で、人口当たりやアクセス時間ではない。順位・倍率・実在の駅の外観は創作せず、駅数を比べる問いだけを載せる。"
+          "headline": "鉄道駅の数\n多い県は？",
+          "subline": "1位は東京都\n2024年・駅数で比較",
+          "subject": "右側に無人の汎用鉄道駅舎を1棟だけ大きく描く。駅名標は無文字。人物・顔・手・キャラクター・車両・路線図・地図・時計の数字・ロゴ・指定外の文字を描かない。",
+          "evidence": "公開本文を確認。2024年の鉄道駅数は東京都892駅で1位、沖縄県19駅で47位。人口当たり駅数やアクセス時間ではない。"
         }
       }
     },
@@ -15348,15 +15733,60 @@
               "bytes": 7549
             }
           }
+        },
+        {
+          "sha256": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-road-total-length/revisions/a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69.png"
+          },
+          "bytes": 1810681,
+          "id": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-42ee4377767d",
+          "createdAt": "2026-10-23T05:44:58.355Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2023年・高速道路除外の道路実延長と一致。新候補は対象・1位・年を明示し、道路の題材と文字を原寸・320pxで確認。",
+            "reviewedAt": "2026-10-23T05:47:46.388Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-road-total-length/inputs/9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e.json"
+              },
+              "bytes": 8001
+            },
+            "production": {
+              "id": "NCI-00122",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "42ee4377767d905d5df72c9a230d69a64d53357b81894dfeb7558e4afbe3785f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c",
-      "approvedRevisionId": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c",
+      "candidateRevisionId": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
+      "approvedRevisionId": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190938/rectangle_large_type_2_a723735e591a95af239913f01f10d874.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.237Z",
-        "revisionId": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c"
+        "url": "https://assets.st-note.com/production/uploads/images/327507848/rectangle_large_type_2_76892ceeb14b5c61c5d23b0d381aa300.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:56:38.491Z",
+        "revisionId": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -15365,7 +15795,12 @@
         "id": "NCI-00122",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "道路の実延長\n長い県は？",
+          "subline": "1位は北海道\n2023年・高速道路除く",
+          "subject": "右側に汎用の舗装道路が続く風景を一つの主役として大きく描く。都道府県の形や実在地点に見せない。車両・人物・キャラクター・標識の文字・地図・グラフ・指定外の数値を描かない。",
+          "evidence": "公開本文と data/metrics/road-total-length.ts を確認。2023年の道路実延長は合計（高速道路を除く）で、北海道89,987.8kmが1位、沖縄県8,210.5kmが47位。道路面積や高速道路距離ではない。"
+        }
       }
     },
     {

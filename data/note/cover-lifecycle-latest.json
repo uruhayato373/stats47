@@ -1,38 +1,68 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T05:26:12.433Z",
+  "generatedAt": "2026-10-23T05:56:39.491Z",
   "status": "pass",
   "articles": [
     {
-      "key": "a-convenience-store-sales",
+      "key": "a-agricultural-employment-population",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327498911/rectangle_large_type_2_2cb1371b63a97b173501013906360bb8.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:26:09.136Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327506895/rectangle_large_type_2_879580fbf97fae1bfd4d37c899310147.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:33.826Z"
     },
     {
-      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "key": "a-agricultural-output",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327499018/rectangle_large_type_2_91f50f545b59f3f729711d0226a6f056.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:26:09.179Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507018/rectangle_large_type_2_66ceb8af97608b64049924e56e57527b.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:34.452Z"
     },
     {
-      "key": "a-vacant-housing-rate",
+      "key": "a-active-job-opening-ratio",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327499311/rectangle_large_type_2_53ea81a2d0425f5a38ea76fc630f5b0c.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:26:09.649Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:34.620Z"
     },
     {
-      "key": "a-total-overnight-guests",
+      "key": "a-average-temperature",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327499190/rectangle_large_type_2_eea070d7f84ef5110c03f3ce9fe27580.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:26:10.117Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507134/rectangle_large_type_2_3a8dccd64782fe56810ba8a677c69f26.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:34.732Z"
     },
     {
-      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "key": "a-electricity-demand",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327499771/rectangle_large_type_2_321be7f7a199f6b596bdf85bdbf68d7f.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:26:12.393Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507272/rectangle_large_type_2_15b4830ac9ca472b63165394676892c6.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:35.978Z"
+    },
+    {
+      "key": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507503/rectangle_large_type_2_510196824d2f72bb8b572c9cd0dfba59.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:36.613Z"
+    },
+    {
+      "key": "a-final-energy-consumption-per-capita",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507394/rectangle_large_type_2_31a3b476bd66d9523763853ee231cb89.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:37.280Z"
+    },
+    {
+      "key": "a-road-total-length",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507848/rectangle_large_type_2_76892ceeb14b5c61c5d23b0d381aa300.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:38.491Z"
+    },
+    {
+      "key": "a-private-rental-housing-rent-per-3-3m2",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507617/rectangle_large_type_2_94c5d3dfdb375c950506394c476740f8.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:39.179Z"
+    },
+    {
+      "key": "a-railway-station-count",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327507752/rectangle_large_type_2_e61ffa7fb21ddb81900c2abe6ddc6238.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:56:39.448Z"
     }
   ]
 }
