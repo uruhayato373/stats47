@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T14:16:49.824Z",
+  "updatedAt": "2026-10-23T14:47:02.346Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -45626,15 +45626,60 @@
               "bytes": 6539
             }
           }
+        },
+        {
+          "sha256": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n279776fbbbb1/revisions/d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0.png"
+          },
+          "bytes": 1879552,
+          "id": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-de63a98db193",
+          "createdAt": "2026-10-23T14:37:56.791Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:40:00.744Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n279776fbbbb1/inputs/d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006.json"
+              },
+              "bytes": 8836
+            },
+            "production": {
+              "id": "NCI-00397",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "de63a98db193650666558d3d7c481c295e259e853fe1a8296af4aeca14d1a4a5"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250",
-      "approvedRevisionId": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250",
+      "candidateRevisionId": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
+      "approvedRevisionId": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191343/rectangle_large_type_2_a59038976a69250165e298f763ee7627.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.977Z",
-        "revisionId": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250"
+        "url": "https://assets.st-note.com/production/uploads/images/327673780/rectangle_large_type_2_68f5e3af6858f560b184f25563a4bd0a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:57.253Z",
+        "revisionId": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -45643,7 +45688,12 @@
         "id": "NCI-00397",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "サイクリングをした人\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の整備された自転車道に駐めた無地の自転車を描く。人・動物・地図は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n279776fbbbb1 2026-10-23公開API本文照合。記事題名「【2021年版】サイクリングをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -47258,15 +47308,60 @@
               "bytes": 6596
             }
           }
+        },
+        {
+          "sha256": "f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3a94353f31aa/revisions/f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855.png"
+          },
+          "bytes": 1747226,
+          "id": "f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-3f5428a6fa1e",
+          "createdAt": "2026-10-23T14:37:29.805Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "474c362fa05e3e7c48d5680c854d0dae51aac577dfe45ba6b61e4cc614931978"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:42.985Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "474c362fa05e3e7c48d5680c854d0dae51aac577dfe45ba6b61e4cc614931978",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n3a94353f31aa/inputs/474c362fa05e3e7c48d5680c854d0dae51aac577dfe45ba6b61e4cc614931978.json"
+              },
+              "bytes": 8971
+            },
+            "production": {
+              "id": "NCI-00407",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "3f5428a6fa1e9510711654065735afe37840f9fa3ce9899a13173577d14bdec4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a7759bb10557d2d999de348b5184fa939628d0c101269b440ac9039ed05c32b8",
-      "approvedRevisionId": "a7759bb10557d2d999de348b5184fa939628d0c101269b440ac9039ed05c32b8",
+      "candidateRevisionId": "f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855",
+      "approvedRevisionId": "f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191496/rectangle_large_type_2_b3750e3b4eb121cc9ba6a40f813bd2f6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.891Z",
-        "revisionId": "a7759bb10557d2d999de348b5184fa939628d0c101269b440ac9039ed05c32b8"
+        "url": "https://assets.st-note.com/production/uploads/images/327673935/rectangle_large_type_2_d7cb49d55228513cd3ebb121b03f6162.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:57.369Z",
+        "revisionId": "f3cb75180fdfd37718ca7ecac115cf337a958cfbeebe28140ecd7f92e6415855"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -47275,7 +47370,12 @@
         "id": "NCI-00407",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "グラウンドゴルフ\n1位は鹿児島県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の公園の芝生とグラウンドゴルフ専用の木製クラブ・専用ボール・簡素なホールポストを描く。普通のゴルフ場や人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n3a94353f31aa 2026-10-23公開API本文照合。記事題名「【2021年版】グラウンドゴルフをした人が多い県は？ 1位は鹿児島県｜都道府県ランキング」。本文中の「鹿児島県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -47482,15 +47582,60 @@
               "bytes": 6587
             }
           }
+        },
+        {
+          "sha256": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3e69a23bb946/revisions/771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7.png"
+          },
+          "bytes": 1908479,
+          "id": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-e6dbdb177a9c",
+          "createdAt": "2026-10-23T14:38:15.120Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:40:18.321Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n3e69a23bb946/inputs/e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a.json"
+              },
+              "bytes": 8830
+            },
+            "production": {
+              "id": "NCI-00409",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "e6dbdb177a9ccd4d0daaad6a9af50942bd70cf501500b29e284b82368df2599c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e",
-      "approvedRevisionId": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e",
+      "candidateRevisionId": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
+      "approvedRevisionId": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191544/rectangle_large_type_2_b7aabf1839ec19d694f7a04fa61d39c8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.031Z",
-        "revisionId": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e"
+        "url": "https://assets.st-note.com/production/uploads/images/327674066/rectangle_large_type_2_81cb89699d15aebe10569bed0c7f2f95.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:57.824Z",
+        "revisionId": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -47499,7 +47644,12 @@
         "id": "NCI-00409",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "バスケットボール\n1位は秋田県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の体育館のコートと無地のバスケットボール・ゴールを描く。選手・人・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n3e69a23bb946 2026-10-23公開API本文照合。記事題名「【2021年版】バスケットボールをした人が多い県は？ 1位は秋田県｜都道府県ランキング」。本文中の「秋田県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -50004,15 +50154,60 @@
               "bytes": 6490
             }
           }
+        },
+        {
+          "sha256": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ced125edb74/revisions/a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b.png"
+          },
+          "bytes": 1838412,
+          "id": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-1ff1b1aac189",
+          "createdAt": "2026-10-23T14:37:38.973Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:49.665Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n5ced125edb74/inputs/22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38.json"
+              },
+              "bytes": 8770
+            },
+            "production": {
+              "id": "NCI-00426",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "1ff1b1aac189a1d7616ad5d1efaa578b70dee556e4448072f498fb10bb57e538"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5",
-      "approvedRevisionId": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5",
+      "candidateRevisionId": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
+      "approvedRevisionId": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191905/rectangle_large_type_2_acbd2a213b206bf91bdc6f6ed41bd9c6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.912Z",
-        "revisionId": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5"
+        "url": "https://assets.st-note.com/production/uploads/images/327674252/rectangle_large_type_2_8338bea99450af564d52ba991e41c57b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:57.472Z",
+        "revisionId": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -50021,7 +50216,12 @@
         "id": "NCI-00426",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ゴルフをした人\n1位は愛知県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のゴルフ練習場のティーとゴルフクラブ・白いボールを描く。人物・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n5ced125edb74 2026-10-23公開API本文照合。記事題名「【2021年版】ゴルフをした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -51748,15 +51948,60 @@
               "bytes": 6636
             }
           }
+        },
+        {
+          "sha256": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n7ff099157abd/revisions/65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348.png"
+          },
+          "bytes": 1868029,
+          "id": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-9840bd49fe57",
+          "createdAt": "2026-10-23T14:37:10.052Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:30.822Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n7ff099157abd/inputs/79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6.json"
+              },
+              "bytes": 8914
+            },
+            "production": {
+              "id": "NCI-00437",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "9840bd49fe57defd4f70431cd590be7bb1bca150f7676a92439424dca6f00455"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879",
-      "approvedRevisionId": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879",
+      "candidateRevisionId": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
+      "approvedRevisionId": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192175/rectangle_large_type_2_1f8b04c89d3969d5e959019fa90888f6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.781Z",
-        "revisionId": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879"
+        "url": "https://assets.st-note.com/production/uploads/images/327674373/rectangle_large_type_2_fbcf5f4c437b01179d9cc99b87cb35b3.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:59.425Z",
+        "revisionId": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -51765,7 +52010,12 @@
         "id": "NCI-00437",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ジョギング・マラソン\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のランニングコースに無地のランニングシューズとストップウォッチを描く。人・脚・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n7ff099157abd 2026-10-23公開API本文照合。記事題名「【2021年版】ジョギング・マラソンをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -53106,15 +53356,60 @@
               "bytes": 6520
             }
           }
+        },
+        {
+          "sha256": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n97bd102186c6/revisions/70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e.png"
+          },
+          "bytes": 1865546,
+          "id": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d42325b0fb1a",
+          "createdAt": "2026-10-23T14:38:05.262Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:40:11.843Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n97bd102186c6/inputs/b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d.json"
+              },
+              "bytes": 8818
+            },
+            "production": {
+              "id": "NCI-00445",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d42325b0fb1aec2817a1b35e7352f50865de3f44773d02be1250684e01b9adbc"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692",
-      "approvedRevisionId": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692",
+      "candidateRevisionId": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
+      "approvedRevisionId": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192319/rectangle_large_type_2_5b0295e75c825792de16af44bbd19ebd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.999Z",
-        "revisionId": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692"
+        "url": "https://assets.st-note.com/production/uploads/images/327674504/rectangle_large_type_2_c2e163d38bc4c058016dab0c3ee98f27.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:59.733Z",
+        "revisionId": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -53123,7 +53418,12 @@
         "id": "NCI-00445",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ボウリングをした人\n1位は沖縄県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のボウリングレーンに置かれた無地のボールと白いピンを描く。人・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n97bd102186c6 2026-10-23公開API本文照合。記事題名「【2021年版】ボウリングをした人が多い県は？ 1位は沖縄県｜都道府県ランキング」。本文中の「沖縄県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -54258,15 +54558,60 @@
               "bytes": 6480
             }
           }
+        },
+        {
+          "sha256": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-naa474d085c7b/revisions/f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860.png"
+          },
+          "bytes": 1682472,
+          "id": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-bfb47713f390",
+          "createdAt": "2026-10-23T14:37:48.209Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:54.964Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-naa474d085c7b/inputs/c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528.json"
+              },
+              "bytes": 8740
+            },
+            "production": {
+              "id": "NCI-00453",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "bfb47713f390fdf00c82f35b660adc71e9f8980bce157e6bcd51362d2e1d35bb"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279",
-      "approvedRevisionId": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279",
+      "candidateRevisionId": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
+      "approvedRevisionId": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192581/rectangle_large_type_2_ab767c78ea65ae5b4af1b7663861aaeb.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.982Z",
-        "revisionId": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279"
+        "url": "https://assets.st-note.com/production/uploads/images/327674618/rectangle_large_type_2_88e928f07929a715e47a2ab225f47d66.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:46:59.318Z",
+        "revisionId": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -54275,7 +54620,12 @@
         "id": "NCI-00453",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "つりをした人\n1位は広島県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の海辺に置かれた無地の釣り竿・釣り道具箱を描く。魚・人・手・船は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/naa474d085c7b 2026-10-23公開API本文照合。記事題名「【2021年版】つりをした人が多い県は？ 1位は広島県｜都道府県ランキング」。本文中の「広島県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -54345,15 +54695,60 @@
               "bytes": 6568
             }
           }
+        },
+        {
+          "sha256": "b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nabd65a1c893d/revisions/b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e.png"
+          },
+          "bytes": 1847054,
+          "id": "b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-d309b748f1fd",
+          "createdAt": "2026-10-23T14:36:59.797Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "91ff0199c7f6da05a37186ad03f1fb22f72064db7c24b26274f22a44a23afa77"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:24.944Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "91ff0199c7f6da05a37186ad03f1fb22f72064db7c24b26274f22a44a23afa77",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nabd65a1c893d/inputs/91ff0199c7f6da05a37186ad03f1fb22f72064db7c24b26274f22a44a23afa77.json"
+              },
+              "bytes": 8794
+            },
+            "production": {
+              "id": "NCI-00454",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "d309b748f1fd8dc42484dcfd86d8884ba3112fb84e985d37ba80e22d182ce05c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "225a842b3d3bf69fec4fb932b806c1c3fd0c84d654ffd79c9fbddd15f28e9498",
-      "approvedRevisionId": "225a842b3d3bf69fec4fb932b806c1c3fd0c84d654ffd79c9fbddd15f28e9498",
+      "candidateRevisionId": "b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e",
+      "approvedRevisionId": "b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192610/rectangle_large_type_2_84c059f57c81614bfe5b17231b717e9b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.758Z",
-        "revisionId": "225a842b3d3bf69fec4fb932b806c1c3fd0c84d654ffd79c9fbddd15f28e9498"
+        "url": "https://assets.st-note.com/production/uploads/images/327674746/rectangle_large_type_2_1e6ad6faa4206d42f54e9e69a74d2f29.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:47:00.814Z",
+        "revisionId": "b078a2fc3c80556c8bf56495e264a25c57138f01348dfa1291f6076c70e90b3e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -54362,7 +54757,12 @@
         "id": "NCI-00454",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "美術鑑賞をした人\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の美術館展示室と文字や顔のない抽象画・額縁を描く。人物・彫像の顔は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nabd65a1c893d 2026-10-23公開API本文照合。記事題名「【2021年版】美術鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -55357,15 +55757,60 @@
               "bytes": 6637
             }
           }
+        },
+        {
+          "sha256": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nc0e7474b34e1/revisions/94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710.png"
+          },
+          "bytes": 2023759,
+          "id": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-64f9868ef517",
+          "createdAt": "2026-10-23T14:37:19.640Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:37.149Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nc0e7474b34e1/inputs/3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4.json"
+              },
+              "bytes": 8950
+            },
+            "production": {
+              "id": "NCI-00461",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "64f9868ef51758210e3c5ba2941160662a3508f0fd27c1ff10f14ffde8670ffd"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692",
-      "approvedRevisionId": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692",
+      "candidateRevisionId": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
+      "approvedRevisionId": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192876/rectangle_large_type_2_13c0356506ecafbe62e814ef202e0ed8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.865Z",
-        "revisionId": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692"
+        "url": "https://assets.st-note.com/production/uploads/images/327674865/rectangle_large_type_2_1e1ba3f54ac3f890d88f42a3c577690d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:47:02.315Z",
+        "revisionId": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -55374,7 +55819,12 @@
         "id": "NCI-00461",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "登山・ハイキング\n東京都・兵庫県が同率1位",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の山道に置かれた無地の登山靴とバックパックを描く。人・動物・地図は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nc0e7474b34e1 2026-10-23公開API本文照合。記事題名「【2021年版】登山・ハイキングをした人が多い県は？ 1位は東京都・兵庫県｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -58098,15 +58548,60 @@
               "bytes": 6646
             }
           }
+        },
+        {
+          "sha256": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne62fa955bcff/revisions/3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e.png"
+          },
+          "bytes": 1841426,
+          "id": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-a349c332d2d0",
+          "createdAt": "2026-10-23T14:36:51.702Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T14:39:18.990Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-ne62fa955bcff/inputs/fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb.json"
+              },
+              "bytes": 8822
+            },
+            "production": {
+              "id": "NCI-00477",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "a349c332d2d0c15d5249a20763fbabebec654310951209481a909b0d040a2a11"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f",
-      "approvedRevisionId": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f",
+      "candidateRevisionId": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
+      "approvedRevisionId": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193273/rectangle_large_type_2_9bb7b7db59cce011a88aff5bab0ae7a3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.736Z",
-        "revisionId": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f"
+        "url": "https://assets.st-note.com/production/uploads/images/327675026/rectangle_large_type_2_b5b9881049117ab9e59869663478a552.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T14:47:01.067Z",
+        "revisionId": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -58115,7 +58610,12 @@
         "id": "NCI-00477",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "旅行・行楽をした人\n1位は愛知県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の駅ホームと無地の旅行かばんを描く。人物・地図・宿泊施設は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/ne62fa955bcff 2026-10-23公開API本文照合。記事題名「【2021年版・10歳以上】旅行・行楽をした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
