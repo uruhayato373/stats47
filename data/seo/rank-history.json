@@ -190,6 +190,11 @@
       "date": "2026-10-22",
       "file": "data/seo/rank-history/2026-10-22.json",
       "sha256": "e2d07e87d7f18b467c3d4c495f1485856c7f2bc2ae742c170a3a382b6371312b"
+    },
+    {
+      "date": "2026-10-23",
+      "file": "data/seo/rank-history/2026-10-23.json",
+      "sha256": "b926567dd70d5e303837c9e853566ffbd5948976d735ec8cfb4b276063f88d42"
     }
   ]
 }

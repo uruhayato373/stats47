@@ -35,6 +35,7 @@ import { checkArticleFactual } from '../lib/article-factual-check.mjs';
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
 import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
+import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import {
@@ -392,6 +393,12 @@ checks.internalLinksUnique = linkLint.stats.internalLinksUnique;
 checks.internalLinksBroken = linkLint.stats.internalLinksBroken;
 blockers.push(...linkLint.blockers);
 warnings.push(...linkLint.warnings);
+
+// タグ台帳の実在 (2026-10-23 追加、blog-tag-lint.mjs)。公開の段 (export-blog-snapshot) は未登録タグで落ちるので、
+// gate でも同じ台帳と照らして push 前に止める (BLOG-TAG-GATE-01)。
+const tagLint = lintUnregisteredTags(content);
+checks.unregisteredTags = tagLint.unregistered.length;
+blockers.push(...tagLint.blockers);
 
 // markdown 表の全面禁止 (2026-06-04): データは SVG 図、列挙/手順は箇条書きで表現する。
 // 旧「チャート0 / 上下非対称 / truncated 表」の個別判定は「表禁止」に包含されるため廃止。
