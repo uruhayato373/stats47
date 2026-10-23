@@ -3093,7 +3093,7 @@
       "key": "recovered-n4e1e67f70686",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
       "magazine": "s47-sports-culture",
       "isPaid": false,
       "status": "published",
@@ -3103,12 +3103,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c360eb7d07790e0587ff3707a0af1148155b6c569c1c6ec77e3f11d8ddd23253",
+          "sha256": "d50b2f9919ded8a70d09d3e5f721be6a1ee7d1b78049f991eee28d13419e511b",
           "files": 7,
-          "bytes": 445223,
-          "savedAt": "2026-10-12T22:06:58.110Z"
+          "bytes": 445271,
+          "savedAt": "2026-10-23T18:48:34.371Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-23T18:48:34.371Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-gym-training"
@@ -4730,7 +4730,7 @@
       "key": "recovered-nf5b4ced7a736",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "magazine": "s47-sports-culture",
       "isPaid": false,
       "status": "published",
@@ -4740,15 +4740,15 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9238933331fbbb4abd5d7835333d20efdea4a519b102285617eb53206b447ef8",
+          "sha256": "f2239df5843403e8dba593562f612d8a4765560dab344456c61710c51b8de4c9",
           "files": 6,
           "bytes": 320125,
-          "savedAt": "2026-10-12T22:07:53.373Z"
+          "savedAt": "2026-10-23T18:48:36.644Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-23T18:48:36.644Z"
       },
       "stats47Targets": [
-        "/ranking/volunteer-activity-annual-participation-rate-15plus"
+        "/ranking/volunteer-activity-annual-participation-rate-10plus"
       ]
     },
     {

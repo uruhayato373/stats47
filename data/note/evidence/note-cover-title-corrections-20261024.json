@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "kind": "note-cover-title-correction",
+  "account": "stats47",
+  "verifiedAt": "2026-10-23T18:52:52.356Z",
+  "articles": [
+    {
+      "articleKey": "recovered-n4e1e67f70686",
+      "noteUrl": "https://note.com/stats47/n/n4e1e67f70686",
+      "generatedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "publishedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
+      "bodySha256": "eebc685e4a296b7a0be36ee7074082c85d4d326662128a84c0f4e068e93eaf6e",
+      "preserved": {
+        "body": true,
+        "price": true,
+        "separator": true,
+        "hashtags": true,
+        "publishAt": true,
+        "eyecatch": true
+      },
+      "approvedRevisionId": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+      "publishedRevisionId": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+      "reason": "2021年10歳以上の本文と指標値で両県15.0％の同率首位を確認し公開題名を是正。画像の掲載文言と生成済み版は維持。"
+    },
+    {
+      "articleKey": "recovered-nf5b4ced7a736",
+      "noteUrl": "https://note.com/stats47/n/nf5b4ced7a736",
+      "generatedTitle": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "publishedTitle": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "bodySha256": "320bd4e4ca194e1e06878e3bf230822c1650c073f503d640afd230481da4c9b5",
+      "preserved": {
+        "body": true,
+        "price": true,
+        "separator": true,
+        "hashtags": true,
+        "publishAt": true,
+        "eyecatch": true
+      },
+      "approvedRevisionId": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
+      "publishedRevisionId": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
+      "reason": "公開本文の対象10歳以上・島根25.6％とSSDS指標設定を確認し公開題名を是正。画像の掲載文言と生成済み版は維持。"
+    }
+  ]
+}

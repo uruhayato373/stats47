@@ -87,6 +87,8 @@ export function coverBriefIssues(row, article, policies) {
 export function buildCoverPlan(row, article, policies) {
   const work = row.production;
   if (!work) return null;
+  const correction = work.titleCorrection;
+  if (correction && article.title !== correction.publishedTitle) throw Error('production title correction mismatch');
   const policy = policies.policies.find(p => p.id === work.policyId && p.version === work.policyVersion);
   if (!policy || policy.category !== article.category) throw Error('production policy reference mismatch');
   if (!work.brief) return null;
@@ -99,7 +101,7 @@ export function buildCoverPlan(row, article, policies) {
     .replaceAll('{{SUPPLEMENT_PX_AT_1280}}', String(policy.visualRules.supplementMinPxAt320 * 4)) : policies.completePrompt;
   const data = {
     schemaVersion: 1, renderer: complete ? 'note-imagegen-cover-v1' : 'note-pop-cover-v1', account: 'stats47', productionId: work.id,
-    articleKey: article.key, articleTitle: article.title, noteUrl: article.noteUrl ?? null,
+    articleKey: article.key, articleTitle: correction?.generatedTitle ?? article.title, noteUrl: article.noteUrl ?? null,
     policyId: policy.id, policyVersion: policy.version, policySnapshot: policy,
     ...(complete ? { imagePrompt: `${common}\n\nカテゴリ方針:\n${policy.prompt}${mapReference ? `\n地図参照: 添付の${mapReference.name}の主域輪郭を必ず使う。北が上。離島は省略された地域識別用の輪郭であり、家計の観測対象は${work.brief.dataScope.place}。架空の海岸線や別県の形を作らない。` : ''}\n\n描く題材・構図:\n${work.brief.subject}\n\n掲載する文字（一字ずつ正確に。これ以外の文字を追加しない）:\n${copy.map(line => `「${line}」`).join('\n')}\n上部はカテゴリ名、主見出しは「${work.brief.headline.replaceAll('\n', ' / ')}」。補足の各行も幅320pxで読める大きさに。stats47は署名。` }
       : { backgroundPrompt: `${policies.commonPrompt}\n\n${policy.prompt}\n\n描く題材:\n${work.brief.subject}` }),

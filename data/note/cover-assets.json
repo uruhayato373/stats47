@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T18:20:20.197Z",
+  "updatedAt": "2026-10-23T18:53:01.128Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -37432,15 +37432,60 @@
               "bytes": 1322
             }
           }
+        },
+        {
+          "sha256": "c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nb216c5776aab/revisions/c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4.png"
+          },
+          "bytes": 1845127,
+          "id": "c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-3a96ee56d17a",
+          "createdAt": "2026-10-23T18:34:03.006Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8587a10da6376d08acc3072079b4a800043ef2a75cc02ba8f0ea271af7a073ff"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:34:55.832Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8587a10da6376d08acc3072079b4a800043ef2a75cc02ba8f0ea271af7a073ff",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nb216c5776aab/inputs/8587a10da6376d08acc3072079b4a800043ef2a75cc02ba8f0ea271af7a073ff.json"
+              },
+              "bytes": 9060
+            },
+            "production": {
+              "id": "NCI-00331",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "3a96ee56d17ac4c1ff3c4d070cdb96626b9e01af12e62670bbedcb3856c024e4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "effe5425f038777e8a15aa5d19b1b0b5399865126fc288e0a6700578557c4d12",
-      "approvedRevisionId": "effe5425f038777e8a15aa5d19b1b0b5399865126fc288e0a6700578557c4d12",
+      "candidateRevisionId": "c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4",
+      "approvedRevisionId": "c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283799/rectangle_large_type_2_0555d7b96189b928cc8c3c79d38f3b5e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.533Z",
-        "revisionId": "effe5425f038777e8a15aa5d19b1b0b5399865126fc288e0a6700578557c4d12"
+        "url": "https://assets.st-note.com/production/uploads/images/327708130/rectangle_large_type_2_4f5379557f8ecf17f20582d7e37379fd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:53:01.097Z",
+        "revisionId": "c009f9fd2d966cb1ad62540c413e994b6dfc99ccf49fd97696cb427ca9a46cd4"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -37449,7 +37494,12 @@
         "id": "NCI-00331",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "行政事件の件数\n東京都と3県",
+          "subline": "2022年度・東京都1,186件／3県各8件",
+          "subject": "横長1280×670相当の完成カバー。濃い紫と黄色。右側に行政文書の無文字ファイルと3枚の小さな書類。裁判・法律判断・犯罪を示す記号は使わず、件数比較を中立に表現。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nb216c5776aab 2026-10-24公開API本文照合。記事題名「【格差148倍】都道府県「行政事件」ランキング2022：偏差値110超えの東京と「わずか8件」の3県」。本文中の 1,186、8件、福井県、山梨県、島根県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -44085,15 +44135,60 @@
               "bytes": 995
             }
           }
+        },
+        {
+          "sha256": "804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n03e45e40d3a7/revisions/804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae.png"
+          },
+          "bytes": 1737799,
+          "id": "804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-a59e1feedfcd",
+          "createdAt": "2026-10-23T18:34:15.283Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "713705dff415fe1563b23f427ac609caca8c7c0e89fa6410c57d21812c2d6c92"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:35:03.869Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "713705dff415fe1563b23f427ac609caca8c7c0e89fa6410c57d21812c2d6c92",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n03e45e40d3a7/inputs/713705dff415fe1563b23f427ac609caca8c7c0e89fa6410c57d21812c2d6c92.json"
+              },
+              "bytes": 9495
+            },
+            "production": {
+              "id": "NCI-00379",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "a59e1feedfcdd48ef6f07f483342821bbb56bfbb998180afe6b94ad203baa20a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "57ed2872e881e055f718277e65889e5239296ba46f830c77cf294d3b61b90372",
-      "approvedRevisionId": "57ed2872e881e055f718277e65889e5239296ba46f830c77cf294d3b61b90372",
+      "candidateRevisionId": "804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae",
+      "approvedRevisionId": "804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285540/rectangle_large_type_2_82d8510dc924aeaa9271cc4c8fcd1664.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.552Z",
-        "revisionId": "57ed2872e881e055f718277e65889e5239296ba46f830c77cf294d3b61b90372"
+        "url": "https://assets.st-note.com/production/uploads/images/327708156/rectangle_large_type_2_e1262abec1e066bd4d19f3fc231a44e2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:53:00.979Z",
+        "revisionId": "804af292341bc83bd3cbb4f3f9e10c2b479587dc152a1758e19362bb1234dbae"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -44102,7 +44197,12 @@
         "id": "NCI-00379",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "Google マイマップで\nKMLを使う",
+          "subline": "統計地図を読み込む手順",
+          "subject": "横長1280×670相当の完成カバー。明るい青と黄色。右側に無文字のKMLファイルを示すシンプルな紙アイコンと抽象的な地図レイヤーの四角い重なり。実地図・ロゴ・架空県境を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n03e45e40d3a7 2026-10-24公開API本文照合。記事題名「【保存版】GoogleマップでKMLファイルを利用する方法」。本文中の KML、マイマップ、Google Earth を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        }
       }
     },
     {
@@ -50888,15 +50988,60 @@
               "bytes": 6759
             }
           }
+        },
+        {
+          "sha256": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4e1e67f70686/revisions/a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2.png"
+          },
+          "bytes": 1800416,
+          "id": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-6d0d1b56b5ad",
+          "createdAt": "2026-10-23T18:39:53.668Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:40:44.836Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n4e1e67f70686/inputs/b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945.json"
+              },
+              "bytes": 9072
+            },
+            "production": {
+              "id": "NCI-00415",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "6d0d1b56b5ad0a3cd428d169f4ae181e63d0369099a7f8dd4e4d7b6b566642ac"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
-      "approvedRevisionId": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
+      "candidateRevisionId": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+      "approvedRevisionId": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191643/rectangle_large_type_2_2226c17be50b11e976e1d4fa66579f0b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:22.864Z",
-        "revisionId": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08"
+        "url": "https://assets.st-note.com/production/uploads/images/327708649/rectangle_large_type_2_04e5b70946eef74b89397c7a03b9ec2b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:52:59.193Z",
+        "revisionId": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -50905,7 +51050,17 @@
         "id": "NCI-00415",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "器具トレーニング\n東京都と神奈川県",
+          "subline": "2021年・10歳以上／両県15.0％",
+          "subject": "横長1280×670相当の完成カバー。明るい青とオレンジ。右側にダンベルとトレーニングマシンの無文字シルエットを配置。特定の県の輪郭や順位表彰台は描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n4e1e67f70686 2026-10-24公開API本文照合。記事題名「【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の 東京都と神奈川県、15.0％、10歳以上、1位タイ を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        },
+        "titleCorrection": {
+          "generatedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+          "publishedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
+          "reason": "2021年10歳以上の本文と指標値で両県15.0％の同率首位を確認し公開題名を是正。画像の掲載文言と生成済み版は維持。"
+        }
       }
     },
     {
@@ -62987,15 +63142,60 @@
               "bytes": 6711
             }
           }
+        },
+        {
+          "sha256": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf5b4ced7a736/revisions/753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6.png"
+          },
+          "bytes": 1779213,
+          "id": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-05fd993ea098",
+          "createdAt": "2026-10-23T18:40:24.526Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fce4dd1517d29fadd1d556002a24c760860d0067f31f59507e6d7d5d606c605e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+            "reviewedAt": "2026-10-23T18:40:50.139Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fce4dd1517d29fadd1d556002a24c760860d0067f31f59507e6d7d5d606c605e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nf5b4ced7a736/inputs/fce4dd1517d29fadd1d556002a24c760860d0067f31f59507e6d7d5d606c605e.json"
+              },
+              "bytes": 9002
+            },
+            "production": {
+              "id": "NCI-00486",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "05fd993ea098b45c16b311c6bfb6884d377b8d5dfd630d9e39de53596e3692d4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "58f3eab75d5a9096c70466787589abc9392f664cd7d678094b0771572b2ae323",
-      "approvedRevisionId": "58f3eab75d5a9096c70466787589abc9392f664cd7d678094b0771572b2ae323",
+      "candidateRevisionId": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
+      "approvedRevisionId": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193525/rectangle_large_type_2_31c56c18b9127dd54a56375a5a1d23a9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:20.830Z",
-        "revisionId": "58f3eab75d5a9096c70466787589abc9392f664cd7d678094b0771572b2ae323"
+        "url": "https://assets.st-note.com/production/uploads/images/327708669/rectangle_large_type_2_e2e789a4ede958b5a5b9af0f4f047c1e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T18:52:58.937Z",
+        "revisionId": "753f14738d3bd88533fd4ff1287db13971636dc017d47c7b7b68fbb3b230f5c6"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -63004,7 +63204,17 @@
         "id": "NCI-00486",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ボランティア活動\n島根県が1位",
+          "subline": "2021年・10歳以上／島根県25.6％",
+          "subject": "横長1280×670相当の完成カバー。明るい青とオレンジ。右側に無文字の地域活動ノートとハート形の紙片を配置。特定の活動内容や原因を暗示しない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nf5b4ced7a736 2026-10-24公開API本文照合。記事題名「【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング」。本文中の 10歳以上、25.6％、島根県、15歳以上のランキング を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+        },
+        "titleCorrection": {
+          "generatedTitle": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+          "publishedTitle": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+          "reason": "公開本文の対象10歳以上・島根25.6％とSSDS指標設定を確認し公開題名を是正。画像の掲載文言と生成済み版は維持。"
+        }
       }
     },
     {
