@@ -1,14 +1,38 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T04:16:48.159Z",
+  "generatedAt": "2026-10-23T05:26:12.433Z",
   "status": "pass",
   "articles": [
     {
-      "key": "a-new-graduate-starting-salary-university-female",
+      "key": "a-convenience-store-sales",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327482528/rectangle_large_type_2_0cea7e9c2fc538fe91458ad691351914.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T04:16:48.099Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327498911/rectangle_large_type_2_2cb1371b63a97b173501013906360bb8.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:26:09.136Z"
+    },
+    {
+      "key": "a-overseas-travel-annual-participation-rate-15plus",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327499018/rectangle_large_type_2_91f50f545b59f3f729711d0226a6f056.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:26:09.179Z"
+    },
+    {
+      "key": "a-vacant-housing-rate",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327499311/rectangle_large_type_2_53ea81a2d0425f5a38ea76fc630f5b0c.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:26:09.649Z"
+    },
+    {
+      "key": "a-total-overnight-guests",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327499190/rectangle_large_type_2_eea070d7f84ef5110c03f3ce9fe27580.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:26:10.117Z"
+    },
+    {
+      "key": "a-volunteer-activity-annual-participation-rate-10plus",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327499771/rectangle_large_type_2_321be7f7a199f6b596bdf85bdbf68d7f.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T05:26:12.393Z"
     }
   ]
 }

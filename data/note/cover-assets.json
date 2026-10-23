@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T04:16:48.133Z",
+  "updatedAt": "2026-10-23T05:26:12.414Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -6388,15 +6388,60 @@
               "planSha256": "e240e2037da3e7fb264b5da28416782a61e4c84a444d0521bcd4e8db06e5c3e2"
             }
           }
+        },
+        {
+          "sha256": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-convenience-store-sales/revisions/bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531.png"
+          },
+          "bytes": 1737795,
+          "id": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-94d1b7174356",
+          "createdAt": "2026-10-23T05:18:43.667Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "旧版と新版を比較。2025年のコンビニ年間販売額、東京都1位の表示は本文・指標と一致。無地の店舗で実在チェーンのロゴなし。原寸と幅320pxで文字を確認。",
+            "reviewedAt": "2026-10-23T05:20:12.169Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-convenience-store-sales/inputs/3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9.json"
+              },
+              "bytes": 9291
+            },
+            "production": {
+              "id": "NCI-00053",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "94d1b717435669143672905b4155aaa05e3162c15fbcc4493d9137724b78c571"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6",
-      "approvedRevisionId": "df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6",
+      "candidateRevisionId": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
+      "approvedRevisionId": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324581939/rectangle_large_type_2_2453e9d9eea3b6c70332ea73ac8afe3e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.364Z",
-        "revisionId": "df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6"
+        "url": "https://assets.st-note.com/production/uploads/images/327498911/rectangle_large_type_2_2cb1371b63a97b173501013906360bb8.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:26:09.136Z",
+        "revisionId": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6404,12 +6449,12 @@
       "production": {
         "id": "NCI-00053",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
           "headline": "コンビニ販売額\n多い県は？",
           "subline": "1位は東京都\n2025年のデータ",
           "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に小さな一般的なコンビニ風の店舗を一棟、大きく描く。明るい窓、ガラス扉、無地の黄色いひさし。看板は完全な無地にし、実在チェーンの特徴的な色帯・ロゴ・店名を描かない。窓内の商品は無文字の小さな色面として単純化する。左側に大きな2行の問い、下に十分大きな補足2行。店舗数や一人当たり購入額の図にはしない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。地図・グラフ・表彰台・メダル・値札・レシート文字・指定外の数字やロゴを描かない。",
-          "evidence": "https://note.com/stats47/n/n86ef06aa91dc 2026-10-15公開本文確認。2025年版のコンビニエンスストア販売額ランキングで1位は東京都。店舗数や利用者数、一人当たり支出ではない。カバーは販売額という比較対象・対象年・1位だけを表示し、金額や倍率や期間の断定を追加しない。人物・キャラクターなし。"
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-convenience-store-sales/draft.md の公開本文と data/metrics/convenience-store-sales.ts を2026-10-23に確認。2025年のコンビニエンスストア販売額（年間販売額）の都道府県比較で1位は東京都。本文は東京都155,869百万円、鳥取県3,912百万円と記載。店舗数・利用者数・一人当たり支出ではなく、カバーには金額や倍率を加えない。"
         }
       }
     },
@@ -14829,26 +14874,71 @@
               "planSha256": "286295b01148fa00d6328e57f47f6089eae04e92058d8ad5bb9522cde69f3351"
             }
           }
+        },
+        {
+          "sha256": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/revisions/52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e.png"
+          },
+          "bytes": 1758298,
+          "id": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-83713a5f9ee7",
+          "createdAt": "2026-10-23T05:18:02.582Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "旧版と新版を比較。2001年・15歳以上、東京都1位の文言は本文に一致。旅客機1機で対象を示し、原寸と幅320pxで文字・余白・人物なしを確認。",
+            "reviewedAt": "2026-10-23T05:19:13.186Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/inputs/121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56.json"
+              },
+              "bytes": 8826
+            },
+            "production": {
+              "id": "NCI-00118",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "83713a5f9ee74be741321d2d15234d1675c67ff3658f66c447b287855c445119"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139",
-      "approvedRevisionId": "cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139",
+      "candidateRevisionId": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
+      "approvedRevisionId": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324188155/rectangle_large_type_2_631fe4295e99014c0a1f318168743876.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.443Z",
-        "revisionId": "cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139"
+        "url": "https://assets.st-note.com/production/uploads/images/327499018/rectangle_large_type_2_91f50f545b59f3f729711d0226a6f056.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:26:09.179Z",
+        "revisionId": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e"
       },
       "missingVersions": [],
       "production": {
         "id": "NCI-00118",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
           "headline": "海外旅行に行く人\n多い県は？",
           "subline": "1位は東京都\n2001年・15歳以上",
-          "subject": "大きな旅客機と旅行用スーツケース。水色の空、クリーム色、黄色の帯。紺と青の太い縁取り文字。地図・国旗・空港名・企業ロゴは描かない。人物は不要。現在の順位に見えないよう2001年を大きく。",
-          "evidence": "https://note.com/stats47/n/n70ff6efcb571 本文確認2026-10-14。本文の社会生活基本調査2001年、15歳以上の海外旅行年間行動者率。東京都18.2%で1位。最新ランキングではない。空港や所得を原因と断定する文言はカバーに追加しない。"
+          "subject": "水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に文字やロゴのない旅客機を1機だけ大きく描き、空と雲を背景にする。左側に問いを大きく2行、下に補足を太い帯で2行。2001年が現在の順位に見えないよう対象年を明瞭にする。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・国旗・空港名・航空会社ロゴ・架空のグラフ・表彰台・メダル・指定外の文字と数字を描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-overseas-travel-annual-participation-rate-15plus/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」2001年、過去1年間に海外旅行をした15歳以上の人の割合。東京都18.2％で1位、秋田県5.0％で47位。現在のランキングや空港・所得による原因断定は掲載しない。"
         }
       }
     },
@@ -15589,15 +15679,60 @@
               "planSha256": "6c09499f9c6f8458546b0d400ba0f040413e902c4cf43057339a73181c72d099"
             }
           }
+        },
+        {
+          "sha256": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-overnight-guests/revisions/79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde.png"
+          },
+          "bytes": 1637948,
+          "id": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-bc3ba783e639",
+          "createdAt": "2026-10-23T05:18:32.787Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "旧版と新版を比較。新画像はベッドを主役に統一し、延べ宿泊者数・2024年・人泊・東京都1位を原寸と幅320pxで確認。人物やホテル名なし。",
+            "reviewedAt": "2026-10-23T05:19:51.752Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-total-overnight-guests/inputs/5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f.json"
+              },
+              "bytes": 8784
+            },
+            "production": {
+              "id": "NCI-00125",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "bc3ba783e639fdc7ca8ece186312b41a32aaa3e0832d50a457b06e7db9e93e62"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf",
-      "approvedRevisionId": "dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf",
+      "candidateRevisionId": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
+      "approvedRevisionId": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324582305/rectangle_large_type_2_d2948207ca4a453cd3be15887eb20b69.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.422Z",
-        "revisionId": "dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf"
+        "url": "https://assets.st-note.com/production/uploads/images/327499190/rectangle_large_type_2_eea070d7f84ef5110c03f3ce9fe27580.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:26:10.117Z",
+        "revisionId": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -15605,12 +15740,12 @@
       "production": {
         "id": "NCI-00125",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
           "headline": "延べ宿泊者数\n多い県は？",
           "subline": "1位は東京都\n2024年・人泊で比較",
-          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に明るい架空の宿泊室の整えたベッドを大きく一つ、足元に青い旅行かばんを一つ描く。宿泊という題材の一般的な挿絵に留め、実在のホテルや特定県の風景を描かない。文字は左側の広い明るい面に、2行の大きな見出しと、十分大きな補足2行を置く。「延べ」「人泊」を正確に描く。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切描かない。地図・グラフ・架空のデータ図・表彰台・メダル・ホテル名・部屋番号・時計の数字・商品ロゴ・指定外の文言は描かない。",
-          "evidence": "https://note.com/stats47/n/n4727114e4db6 2026-10-15公開本文確認。2024年の宿泊旅行統計調査、全施設タイプ合計の延べ宿泊者数。1位は東京都91,633,100人泊。旅行者の実人数・施設数・客室稼働率と混同しないため、見出しに「延べ」、補足に「人泊」と明記する。人数や倍率は創作せずカバーに載せない。人物・キャラクターなし。"
+          "subject": "水色と明るい黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に整えられた宿泊室のベッドを1台だけ大きく描き、実在のホテルや特定県の風景にはしない。左側に問いを2行、下に補足を太い帯で2行。「延べ」「人泊」を正確に描く。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・グラフ・表彰台・メダル・ホテル名・部屋番号・時計の数字・商品ロゴ・指定外の文字と数字を描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-total-overnight-guests/draft.md の公開本文を2026-10-23に確認。2024年の宿泊旅行統計調査、全施設タイプ合計の延べ宿泊者数。東京都91,633,100人泊で1位、徳島県1,701,370人泊で47位。旅行者の実人数・施設数・客室稼働率と混同しないため、見出しに「延べ」、補足に「人泊」を明記する。"
         }
       }
     },
@@ -15751,15 +15886,60 @@
               "planSha256": "5a45b8b4a8539e53d4045de6568778e103dc19966bdf4f979e58021c61fa50ee"
             }
           }
+        },
+        {
+          "sha256": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-vacant-housing-rate/revisions/c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2.png"
+          },
+          "bytes": 1783960,
+          "id": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-64b8974628b1",
+          "createdAt": "2026-10-23T05:18:54.411Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "旧版と新版を比較。鍵を除いて中立的な住宅1軒に統一。空き家率・2023年・徳島県1位は本文と一致。原寸と幅320pxで文言、人物なし、余白を確認。",
+            "reviewedAt": "2026-10-23T05:20:31.125Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-vacant-housing-rate/inputs/4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e.json"
+              },
+              "bytes": 8043
+            },
+            "production": {
+              "id": "NCI-00126",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "64b8974628b19a9b8ba80586ce400342619bc0431c272e1f1a88f91efcf781a9"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70",
-      "approvedRevisionId": "8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70",
+      "candidateRevisionId": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
+      "approvedRevisionId": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324582506/rectangle_large_type_2_32bc2299305d8810623362808eebcc36.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.341Z",
-        "revisionId": "8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70"
+        "url": "https://assets.st-note.com/production/uploads/images/327499311/rectangle_large_type_2_53ea81a2d0425f5a38ea76fc630f5b0c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:26:09.649Z",
+        "revisionId": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -15767,12 +15947,12 @@
       "production": {
         "id": "NCI-00126",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
           "headline": "空き家率が\n高い県は？",
           "subline": "1位は徳島県\n2023年のデータ",
-          "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に、閉じた窓と玄関を持つ普通の小さな家を一棟、大きな無文字の鍵を一点。家は特定の県の実景ではなく、空き家率という題材を示す一般的な挿絵。住宅を複数並べて割合を創作せず、廃墟や危険・貧困・地域の衰退を強調しない。左側に大きな2行見出し、その下に大きい補足2行。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。地図、データ図、表彰台、メダル、家の表札、看板の文字、数字は描かない。掲載指定以外の文字は追加しない。",
-          "evidence": "https://note.com/stats47/n/n002bee397931 2026-10-15公開本文確認。2023年の総住宅数に占める空き家の割合で、1位は徳島県21.3%。件数の順位や原因・地域の優劣には置き換えない。カバーには割合の数値を載せず、指標名・年・1位だけを使う。ユーザー方針に合わせ人物・キャラクターなし。"
+          "subject": "右側に窓と玄関が閉じた汎用の戸建て住宅を1軒だけ描く。建物は清潔で中立的な表現。人物・キャラクター・鍵・地図・グラフ・廃墟や衰退を示す演出・住宅ロゴ・追加文字を入れない。",
+          "evidence": "公開済み記事の本文とR2観測値に基づく。2023年の住宅・土地統計調査で、空き家率は総住宅数に占める空き家数の割合。徳島県21.3%が47都道府県中1位、埼玉県9.3%が47位。住宅戸数や空き家の原因、地域の衰退を示す絵にはしない。"
         }
       }
     },
@@ -15888,26 +16068,71 @@
               "planSha256": "a7014981e7f51bd540a8fc2f48854e4bf95f719930ee9952a560d9b81ea5da6a"
             }
           }
+        },
+        {
+          "sha256": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/revisions/b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7.png"
+          },
+          "bytes": 1885678,
+          "id": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-076741a89a0e",
+          "createdAt": "2026-10-23T05:18:20.548Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "旧版の人物表現を解消。新画像は無人の公園と清掃用トングで活動の一例を示す。2021年・10歳以上・参加率1位島根県は本文と一致し、幅320pxでも読める。",
+            "reviewedAt": "2026-10-23T05:19:30.751Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/inputs/54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41.json"
+              },
+              "bytes": 9153
+            },
+            "production": {
+              "id": "NCI-00127",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "076741a89a0e5239325174edff17b608d246585d2725f907ee5d16b3d395848a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53",
-      "approvedRevisionId": "f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53",
+      "candidateRevisionId": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
+      "approvedRevisionId": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324547353/rectangle_large_type_2_5bf2bda1f8aadf4d931b51edf9c499ee.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.436Z",
-        "revisionId": "f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53"
+        "url": "https://assets.st-note.com/production/uploads/images/327499771/rectangle_large_type_2_321be7f7a199f6b596bdf85bdbf68d7f.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T05:26:12.393Z",
+        "revisionId": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7"
       },
       "missingVersions": [],
       "production": {
         "id": "NCI-00127",
         "policyId": "NCP-003",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
           "headline": "ボランティア参加\n多い県は？",
           "subline": "参加率1位は島根県\n2021年・10歳以上",
-          "subject": "水色と明るい黄色。大きなゴミ袋と清掃用のトングを持ち、町の公園を清掃する汎用の人物を右側の主役にする。白いシャツと帽子の穏やかで親しみやすい人物は特定個人の肖像ではない。ゴミ袋・服・帽子は無文字とし、バッジやメダルや表彰台や県境地図やグラフを描かない。活動に参加しない人や県を悪く表現しない。",
-          "evidence": "https://note.com/stats47/n/nc7e84c5ccfa4 2026-10-15公開本文確認。2021年社会生活基本調査、10歳以上のボランティア活動の年間行動者率で1位は島根県。15歳以上の版や参加人数・活動時間の順位と混同しない。"
+          "subject": "水色と明るい黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地の清掃用トングを1本だけ大きく描き、公園の緑を背景にする。ボランティア活動の一例を示す題材であり、清掃活動の参加率という意味に見せない。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・グラフ・表彰台・メダル・指定外の文字と数字を描かない。",
+          "evidence": "https://storage.stats47.jp/note/stats47-note/a-volunteer-activity-annual-participation-rate-10plus/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間にボランティア活動を行った10歳以上の人の割合。島根県25.6％で1位、青森県14.0％で47位。清掃は活動の一例であり、清掃だけの参加率や参加人数ではない。"
         }
       }
     },
