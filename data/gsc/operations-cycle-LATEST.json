@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T02:11:41.917Z",
-  "stage": "plan",
+  "generatedAt": "2026-10-23T23:13:09.336Z",
+  "stage": "review",
   "status": "fail",
-  "measurementWeek": "2026-W41",
+  "measurementWeek": "2026-W42",
   "expectedCompletedWeek": "2026-W42",
-  "expectedPlanWeek": "2026-W43",
+  "expectedPlanWeek": "2026-W44",
   "currentMonth": "2026-10",
   "summary": {
-    "pass": 10,
+    "pass": 9,
     "warn": 1,
     "fail": 1
   },
@@ -16,31 +16,31 @@
     {
       "code": "snapshot-period",
       "level": "pass",
-      "detail": "2026-W41 finalized7d coverage complete",
+      "detail": "2026-W42 finalized7d coverage complete",
       "action": null
     },
     {
       "code": "snapshot-freshness",
-      "level": "fail",
-      "detail": "latest=2026-W41, expected>=2026-W42",
-      "action": "npm run fetch-gsc-snapshot -- 2026-W42"
+      "level": "pass",
+      "detail": "latest=2026-W42, expected>=2026-W42",
+      "action": null
     },
     {
       "code": "effect-verdict",
       "level": "pass",
-      "detail": "2026-W41 verdict 1件 / data\\effect-verdict\\reassessments\\2026-W41\\2026-10-16T23-33-48.231Z.json / decidedAt=2026-10-16T23:33:48.231Z",
+      "detail": "2026-W42 verdict 2件 / data/effect-verdict/verdicts-2026-W42.json / decidedAt=2026-10-22T23:00:25.740Z",
       "action": null
     },
     {
       "code": "effect-target-ratchet",
-      "level": "pass",
-      "detail": "想定効果値欠落0",
-      "action": null
+      "level": "fail",
+      "detail": "新規の想定効果値欠落: SEO-TITLE-CTR-EFFECT-01",
+      "action": "デプロイ前の improvement-log に [target: ±N unit] を登録"
     },
     {
       "code": "baseline-observation",
       "level": "warn",
-      "detail": "ADSENSE-PLACEMENT-01: 0/4週 / missing=2026-W42,2026-W43,2026-W44,2026-W45 / review=2026-11-13",
+      "detail": "ADSENSE-PLACEMENT-01: 1/4週 / missing=2026-W43,2026-W44,2026-W45 / review=2026-11-13",
       "action": null
     },
     {
@@ -52,7 +52,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W42, age=3d",
+      "detail": "week=2026-W43, age=1d",
       "action": null
     },
     {
@@ -64,25 +64,19 @@
     {
       "code": "search-growth-decision",
       "level": "pass",
-      "detail": "2026-W41 の承認/却下 1件（必要 1件以上）",
+      "detail": "2026-W42 の承認/却下 2件（必要 1件以上）",
       "action": null
     },
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-10-19, age=0d",
+      "detail": "latest=2026-10-23, age=1d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
-      "detail": "2026-W41 review の search-growth 節=あり",
-      "action": null
-    },
-    {
-      "code": "weekly-plan",
-      "level": "pass",
-      "detail": "plan=2026-W43, expected=2026-W43",
+      "detail": "2026-W42 review の search-growth 節=あり",
       "action": null
     }
   ]
