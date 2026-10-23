@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "year": "2025",
+  "fetchedAt": "2026-10-22T09:43:40.292Z",
+  "generatedBy": "contents/blog build script (R2 municipalities values.json)",
+  "rankingKey": "census-population-change-rate-5y",
+  "unit": "％",
+  "label": "5年間の人口増減率",
+  "readerLabel": "5年間の人口増減率",
+  "transform": "特別区23区のみを抽出し23区内で順位を付け直し (nationalRank は全国1,740市区町村での順位)",
+  "source": "r2:app/municipalities/ranking/census-population-change-rate-5y/values.json",
+  "upstream": "metric config (data/metrics) → e-Stat 国勢調査 0004065882 → R2 app/municipalities/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/municipalities/ranking/census-population-change-rate-5y/values.json  # areaCode 13101-13123 を抽出"
+}

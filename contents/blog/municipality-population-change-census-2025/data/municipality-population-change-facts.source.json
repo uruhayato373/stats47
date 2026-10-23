@@ -1,0 +1,14 @@
+{
+  "kind": "derived",
+  "year": "2025",
+  "fetchedAt": "2026-10-22T09:43:40.292Z",
+  "source": "r2:app/municipalities/ranking/census-population-change-rate-5y/values.json",
+  "derivedFrom": [
+    "census-population-change-rate-5y",
+    "census-population-change-5y",
+    "total-population"
+  ],
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "本文の集計値(件数・中央値)を同じ市区町村値から数えた根拠で、図ではない",
+  "restore": "R2 の3指標 values.json を同じ areaCode で結合し、件数・中央値を数える"
+}

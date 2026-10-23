@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "year": "2025",
+  "fetchedAt": "2026-10-22T09:43:40.292Z",
+  "generatedBy": "contents/blog build script (R2 municipalities values.json)",
+  "rankingKey": "census-population-change-rate-5y",
+  "unit": "％",
+  "label": "5年間の人口増減率",
+  "readerLabel": "5年間の人口増減率",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/census-population-change-rate-5y/values.json",
+  "upstream": "metric config (data/metrics) → e-Stat 国勢調査 0004065882 → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/census-population-change-rate-5y/values.json"
+}

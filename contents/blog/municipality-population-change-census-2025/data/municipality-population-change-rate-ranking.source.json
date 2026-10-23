@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "year": "2025",
+  "fetchedAt": "2026-10-22T09:43:40.292Z",
+  "generatedBy": "contents/blog build script (R2 municipalities values.json)",
+  "rankingKey": "census-population-change-rate-5y",
+  "unit": "％",
+  "label": "5年間の人口増減率",
+  "readerLabel": "5年間の人口増減率",
+  "transform": "all1740 市区町村 (svg-builder が上位5+下位5を抽出)。2020年人口が0人の福島県双葉町は率を計算できず対象外",
+  "source": "r2:app/municipalities/ranking/census-population-change-rate-5y/values.json",
+  "upstream": "metric config (data/metrics) → e-Stat 国勢調査 0004065882 → R2 app/municipalities/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/municipalities/ranking/census-population-change-rate-5y/values.json  # 値を2桁に丸め、地名を「名称（県）」にして並べる"
+}
