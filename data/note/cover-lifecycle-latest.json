@@ -1,68 +1,68 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T05:56:39.491Z",
+  "generatedAt": "2026-10-23T07:22:36.695Z",
   "status": "pass",
   "articles": [
     {
-      "key": "a-agricultural-employment-population",
+      "key": "a-kakei-wakayama",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327506895/rectangle_large_type_2_879580fbf97fae1bfd4d37c899310147.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:33.826Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531737/rectangle_large_type_2_04591c7ac78c9303255b145d846c5766.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:27.886Z"
     },
     {
-      "key": "a-agricultural-output",
+      "key": "a-kakei-toyama",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507018/rectangle_large_type_2_66ceb8af97608b64049924e56e57527b.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:34.452Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531623/rectangle_large_type_2_b5d4abc3475c6961fc2c22da7bcfd806.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:28.367Z"
     },
     {
-      "key": "a-active-job-opening-ratio",
+      "key": "a-kakei-tokyo",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:34.620Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531484/rectangle_large_type_2_0e3a1546bb7c078fe677e7a86e5e6899.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:28.492Z"
     },
     {
-      "key": "a-average-temperature",
+      "key": "a-kakei-tottori",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507134/rectangle_large_type_2_3a8dccd64782fe56810ba8a677c69f26.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:34.732Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531558/rectangle_large_type_2_c87de91bb6edfa72d273e2ef043f036e.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:28.568Z"
     },
     {
-      "key": "a-electricity-demand",
+      "key": "koumuin-shigoto-kouritsuka-ai",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507272/rectangle_large_type_2_15b4830ac9ca472b63165394676892c6.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:35.978Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327532176/rectangle_large_type_2_6b68bbf56a994dc2504765b95c14aa11.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:31.323Z"
     },
     {
-      "key": "a-main-household-ratio-main-earner-employee-commute-90min",
+      "key": "a-kakei-yamagata",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507503/rectangle_large_type_2_510196824d2f72bb8b572c9cd0dfba59.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:36.613Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531832/rectangle_large_type_2_2dd0c5282706a74b3a3e89261766dfe2.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:33.960Z"
     },
     {
-      "key": "a-final-energy-consumption-per-capita",
+      "key": "a-kakei-yamanashi",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507394/rectangle_large_type_2_31a3b476bd66d9523763853ee231cb89.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:37.280Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327532054/rectangle_large_type_2_282050498a2bd6e1c3b154c79467c830.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:34.561Z"
     },
     {
-      "key": "a-road-total-length",
+      "key": "a-kakei-yamaguchi",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507848/rectangle_large_type_2_76892ceeb14b5c61c5d23b0d381aa300.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:38.491Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327531937/rectangle_large_type_2_6f49ea6b2131606f7f7f3e7e03f099e6.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:34.602Z"
     },
     {
-      "key": "a-private-rental-housing-rent-per-3-3m2",
+      "key": "sunshine-solar-housing",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507617/rectangle_large_type_2_94c5d3dfdb375c950506394c476740f8.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:39.179Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327532379/rectangle_large_type_2_7d4087ab0fcc31af789ff7468b6dbd3e.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:36.493Z"
     },
     {
-      "key": "a-railway-station-count",
+      "key": "pinned-intro",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327507752/rectangle_large_type_2_e61ffa7fb21ddb81900c2abe6ddc6238.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T05:56:39.448Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327532277/rectangle_large_type_2_f53d496422e4543b61f534f311754cc2.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T07:22:36.640Z"
     }
   ]
 }

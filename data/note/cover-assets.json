@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T05:56:39.467Z",
+  "updatedAt": "2026-10-23T07:22:36.669Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -12698,15 +12698,60 @@
               "planSha256": "b29324f3b26810458b215247c6173beb34faade79b36cf25fac609504c3a7418"
             }
           }
+        },
+        {
+          "sha256": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokyo/revisions/35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561.png"
+          },
+          "bytes": 1347469,
+          "id": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-e152ec65bac0",
+          "createdAt": "2026-10-23T07:07:37.711Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "東京都主域の輪郭、東京都区部・2024年・二人以上の世帯、教育費と通学鞄の題材を新旧比較。原寸と幅320pxで文字を確認。",
+            "reviewedAt": "2026-10-23T07:15:43.674Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-tokyo/inputs/32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652.json"
+              },
+              "bytes": 12913
+            },
+            "production": {
+              "id": "NCI-00100",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "e152ec65bac0648d449e8a8f1035c42f977d5627901f4e84f20c658a8df07998"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51",
-      "approvedRevisionId": "cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51",
+      "candidateRevisionId": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
+      "approvedRevisionId": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615293/rectangle_large_type_2_93174f38fa4a99a6a55774a5d19573d7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.063Z",
-        "revisionId": "cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51"
+        "url": "https://assets.st-note.com/production/uploads/images/327531484/rectangle_large_type_2_0e3a1546bb7c078fe677e7a86e5e6899.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:28.492Z",
+        "revisionId": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -12718,8 +12763,8 @@
         "brief": {
           "headline": "東京都の家計\n教育費に注目",
           "subline": "東京都区部・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、東京都の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の通学かばん一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/n9d384a674462 2026-10-15公開本文確認。公開本文は東京の2024年・二人以上の世帯の家計調査。教育は47市単純平均比2.09倍。対象は東京都全体でなく東京都区部（統計センターのデータ利用上の留意点 https://www.nstac.go.jp/files/kaisetsu-E-2024.pdf も確認）。カバーの補足に東京都区部を明記し、倍率・家賃地代の大倍率・県全体への一般化を避ける。 人物・キャラクターは使わない。 新方針: 地図は東京都の主域（遠隔離島省略）の地域識別用。家計の観測対象は東京都区部であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、東京都の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の通学かばん一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/n9d384a674462 2026-10-15公開本文確認。公開本文は東京の2024年・二人以上の世帯の家計調査。教育は47市単純平均比2.09倍。対象は東京都全体でなく東京都区部（統計センターのデータ利用上の留意点 https://www.nstac.go.jp/files/kaisetsu-E-2024.pdf も確認）。カバーの補足に東京都区部を明記し、倍率・家賃地代の大倍率・県全体への一般化を避ける。 人物・キャラクターは使わない。 新方針: 地図は東京都の主域（遠隔離島省略）の地域識別用。家計の観測対象は東京都区部であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "東京都区部",
             "year": "2024",
@@ -12926,15 +12971,60 @@
               "planSha256": "950e4573d8ac7fa6b1c160529dd9fd25c8cdf0b959f9afb7713dd01ceae2c890"
             }
           }
+        },
+        {
+          "sha256": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tottori/revisions/159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60.png"
+          },
+          "bytes": 1402674,
+          "id": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-ce18e84e44f8",
+          "createdAt": "2026-10-23T07:07:27.838Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "鳥取県主域の輪郭、鳥取市・2024年・二人以上の世帯、住まいの題材を新旧比較。原寸と幅320pxで文字を確認。",
+            "reviewedAt": "2026-10-23T07:15:20.049Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-tottori/inputs/754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e.json"
+              },
+              "bytes": 12785
+            },
+            "production": {
+              "id": "NCI-00101",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "ce18e84e44f8f7c4aafc30cb5ed46740274da9fa38d87d58e3297cf4592526e4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1",
-      "approvedRevisionId": "1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1",
+      "candidateRevisionId": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
+      "approvedRevisionId": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615322/rectangle_large_type_2_8f4344c74e474fdd77b2f1aedbc56819.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.057Z",
-        "revisionId": "1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1"
+        "url": "https://assets.st-note.com/production/uploads/images/327531558/rectangle_large_type_2_c87de91bb6edfa72d273e2ef043f036e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:28.568Z",
+        "revisionId": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -12946,8 +13036,8 @@
         "brief": {
           "headline": "鳥取県の家計\n住まいに注目",
           "subline": "鳥取市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、鳥取県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな一般的な小さな家の模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/n24d6b689079d 2026-10-15公開本文確認。公開本文は鳥取市の2024年・二人以上の世帯。住居は47市単純平均比1.41倍で最大の乖離。住宅費と県全体の家賃水準・持ち家比率は別物で、本文でも説明しきれないとしている。倍率・地図・県全体の家賃の断定はカバーへ載せない。 人物・キャラクターは使わない。 新方針: 地図は鳥取県の主域（遠隔離島省略）の地域識別用。家計の観測対象は鳥取市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、鳥取県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな一般的な小さな家の模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/n24d6b689079d 2026-10-15公開本文確認。公開本文は鳥取市の2024年・二人以上の世帯。住居は47市単純平均比1.41倍で最大の乖離。住宅費と県全体の家賃水準・持ち家比率は別物で、本文でも説明しきれないとしている。倍率・地図・県全体の家賃の断定はカバーへ載せない。 人物・キャラクターは使わない。 新方針: 地図は鳥取県の主域（遠隔離島省略）の地域識別用。家計の観測対象は鳥取市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "鳥取市",
             "year": "2024",
@@ -13154,15 +13244,60 @@
               "planSha256": "e54728ad646b140e1e0f6388128fbb39b3e513d03860d2e819740dc298c96609"
             }
           }
+        },
+        {
+          "sha256": "315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-toyama/revisions/315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc.png"
+          },
+          "bytes": 1194839,
+          "id": "315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-dd458e4b0846",
+          "createdAt": "2026-10-23T07:07:17.214Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7902a2456d695373fd5c809e5766a63fe8e617518d745a39a24e2214e920f05e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "富山県主域の輪郭、富山市・2024年・二人以上の世帯、光熱費と湯沸かし器の題材を新旧比較。原寸と幅320pxで文字を確認。",
+            "reviewedAt": "2026-10-23T07:14:50.975Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7902a2456d695373fd5c809e5766a63fe8e617518d745a39a24e2214e920f05e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-toyama/inputs/7902a2456d695373fd5c809e5766a63fe8e617518d745a39a24e2214e920f05e.json"
+              },
+              "bytes": 12810
+            },
+            "production": {
+              "id": "NCI-00102",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "dd458e4b0846d58dd676a4da5228bd1becd3cb72040f4ae81d35bb64e29c7eeb"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "1b9fe92c9bb0195e6c2c34a5b2ebd332b77e876bc02ed86f0526d55090daf9fa",
-      "approvedRevisionId": "1b9fe92c9bb0195e6c2c34a5b2ebd332b77e876bc02ed86f0526d55090daf9fa",
+      "candidateRevisionId": "315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc",
+      "approvedRevisionId": "315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615336/rectangle_large_type_2_0102578ae9a3af1cfac066246897173c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.050Z",
-        "revisionId": "1b9fe92c9bb0195e6c2c34a5b2ebd332b77e876bc02ed86f0526d55090daf9fa"
+        "url": "https://assets.st-note.com/production/uploads/images/327531623/rectangle_large_type_2_b5d4abc3475c6961fc2c22da7bcfd806.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:28.367Z",
+        "revisionId": "315d982b77b6972c907040dc366da299ac05e402917082d39132dae26fa587bc"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -13174,8 +13309,8 @@
         "brief": {
           "headline": "富山県の家計\n光熱費に注目",
           "subline": "富山市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、富山県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の家庭用電気ケトル一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/n13bca568c98a 2026-10-15公開本文確認。公開本文は富山市の2024年・二人以上の世帯。光熱・水道は47市単純平均比1.22倍で支出の多い費目。最大の乖離とされるのは教育0.76倍だが、今回のカバーは本文・題名で扱う光熱費に絞る。最高・最大や原因・倍率をカバーでは主張しない。 人物・キャラクターは使わない。 新方針: 地図は富山県の主域（遠隔離島省略）の地域識別用。家計の観測対象は富山市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、富山県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の家庭用電気ケトル一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/n13bca568c98a 2026-10-15公開本文確認。公開本文は富山市の2024年・二人以上の世帯。光熱・水道は47市単純平均比1.22倍で支出の多い費目。最大の乖離とされるのは教育0.76倍だが、今回のカバーは本文・題名で扱う光熱費に絞る。最高・最大や原因・倍率をカバーでは主張しない。 人物・キャラクターは使わない。 新方針: 地図は富山県の主域（遠隔離島省略）の地域識別用。家計の観測対象は富山市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "富山市",
             "year": "2024",
@@ -13382,15 +13517,60 @@
               "planSha256": "c610817226b9702459fe85d7189be3ed8b807e44f863555353f0a51103af1880"
             }
           }
+        },
+        {
+          "sha256": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-wakayama/revisions/9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717.png"
+          },
+          "bytes": 1239674,
+          "id": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-c0f838528a07",
+          "createdAt": "2026-10-23T07:07:05.952Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "和歌山県主域の輪郭、和歌山市・2024年・二人以上の世帯、教育費の題材を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T07:14:22.048Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-wakayama/inputs/72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64.json"
+              },
+              "bytes": 12825
+            },
+            "production": {
+              "id": "NCI-00103",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "c0f838528a07517c2b419198820dee34b6560673a4b266046e4dd0bcdfa07873"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a",
-      "approvedRevisionId": "b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a",
+      "candidateRevisionId": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
+      "approvedRevisionId": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615370/rectangle_large_type_2_cbf8419fc0226b021218b1860b89aa5e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.000Z",
-        "revisionId": "b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a"
+        "url": "https://assets.st-note.com/production/uploads/images/327531737/rectangle_large_type_2_04591c7ac78c9303255b145d846c5766.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:27.886Z",
+        "revisionId": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -13402,8 +13582,8 @@
         "brief": {
           "headline": "和歌山県の家計\n教育費に注目",
           "subline": "和歌山市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、和歌山県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな白紙の学習ノート一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/ncc56ff8990d0 2026-10-15公開本文確認。公開本文は和歌山市の2024年・二人以上の世帯。教育支出は47市単純平均比0.52倍で最大の乖離。カバーは費目への注目に留め、教育水準の低さや県全体の性質を示さない。しらすの大倍率や未検証の順位は載せない。 人物・キャラクターは使わない。 新方針: 地図は和歌山県の主域（遠隔離島省略）の地域識別用。家計の観測対象は和歌山市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、和歌山県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな白紙の学習ノート一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/ncc56ff8990d0 2026-10-15公開本文確認。公開本文は和歌山市の2024年・二人以上の世帯。教育支出は47市単純平均比0.52倍で最大の乖離。カバーは費目への注目に留め、教育水準の低さや県全体の性質を示さない。しらすの大倍率や未検証の順位は載せない。 人物・キャラクターは使わない。 新方針: 地図は和歌山県の主域（遠隔離島省略）の地域識別用。家計の観測対象は和歌山市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "和歌山市",
             "year": "2024",
@@ -13610,15 +13790,60 @@
               "planSha256": "aec17216db7ff6470225f211ebfd6907a2374fe68e38e43856483822b144e57d"
             }
           }
+        },
+        {
+          "sha256": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamagata/revisions/e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b.png"
+          },
+          "bytes": 1130997,
+          "id": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-6f58a188778e",
+          "createdAt": "2026-10-23T07:06:56.606Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "山形県主域の輪郭と山形市・2024年・二人以上の世帯を新旧比較。光熱費と暖房の題材が本文に一致し、原寸・幅320pxの文字を確認。",
+            "reviewedAt": "2026-10-23T07:13:06.593Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-yamagata/inputs/1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a.json"
+              },
+              "bytes": 12764
+            },
+            "production": {
+              "id": "NCI-00104",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "6f58a188778e16a860162bf74252123e2c5da0ee29ee7258bf356afb0f868d0c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9",
-      "approvedRevisionId": "8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9",
+      "candidateRevisionId": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
+      "approvedRevisionId": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615405/rectangle_large_type_2_5263d8d4006afac45bf7bd05223f46a9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.958Z",
-        "revisionId": "8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9"
+        "url": "https://assets.st-note.com/production/uploads/images/327531832/rectangle_large_type_2_2dd0c5282706a74b3a3e89261766dfe2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:33.960Z",
+        "revisionId": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -13630,8 +13855,8 @@
         "brief": {
           "headline": "山形県の家計\n光熱費に注目",
           "subline": "山形市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、山形県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の家庭用暖房器具一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/na3d645a7d50c 2026-10-15公開本文確認。公開本文は山形市の2024年・二人以上の世帯。光熱・水道は47市単純平均比1.30倍で最大の乖離。個別品目に灯油・カーテンを挙げる。特定の暖房方法や気象条件による因果を断定せず、倍率・順位・県全体の値は示さない。 人物・キャラクターは使わない。 新方針: 地図は山形県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山形市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、山形県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の家庭用暖房器具一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/na3d645a7d50c 2026-10-15公開本文確認。公開本文は山形市の2024年・二人以上の世帯。光熱・水道は47市単純平均比1.30倍で最大の乖離。個別品目に灯油・カーテンを挙げる。特定の暖房方法や気象条件による因果を断定せず、倍率・順位・県全体の値は示さない。 人物・キャラクターは使わない。 新方針: 地図は山形県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山形市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "山形市",
             "year": "2024",
@@ -13838,15 +14063,60 @@
               "planSha256": "2de109ef0a8714568433f4ae3ae0e221f7a5cf55e9bb68b6c1128ac3de1f5b2d"
             }
           }
+        },
+        {
+          "sha256": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamaguchi/revisions/1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194.png"
+          },
+          "bytes": 1272514,
+          "id": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-580908b78707",
+          "createdAt": "2026-10-23T07:06:47.277Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "山口県主域の輪郭、山口市・2024年・二人以上の世帯、教育費の題材を新旧比較。原寸と幅320pxで文字・県形を確認。",
+            "reviewedAt": "2026-10-23T07:13:57.627Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-yamaguchi/inputs/85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731.json"
+              },
+              "bytes": 12763
+            },
+            "production": {
+              "id": "NCI-00105",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "580908b787072904b640a4fd852ac7c20334aa3cf3406a3a6f0382263bdf6576"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944",
-      "approvedRevisionId": "90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944",
+      "candidateRevisionId": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
+      "approvedRevisionId": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615467/rectangle_large_type_2_f1a3a19329a15d8dca694818cba8e392.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.944Z",
-        "revisionId": "90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944"
+        "url": "https://assets.st-note.com/production/uploads/images/327531937/rectangle_large_type_2_6f49ea6b2131606f7f7f3e7e03f099e6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:34.602Z",
+        "revisionId": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -13858,8 +14128,8 @@
         "brief": {
           "headline": "山口県の家計\n教育費に注目",
           "subline": "山口市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、山口県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の学習用の本一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/n88dde65e0774 2026-10-15公開本文確認。公開本文は山口市の2024年・二人以上の世帯。教育支出は47市単純平均比0.70倍で、十大費目の最大の乖離。婚礼費の大倍率や全国最低という表現はカバーに採らず、教育水準・教育意欲や県全体の評価へ置き換えない。 人物・キャラクターは使わない。 新方針: 地図は山口県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山口市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、山口県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の学習用の本一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/n88dde65e0774 2026-10-15公開本文確認。公開本文は山口市の2024年・二人以上の世帯。教育支出は47市単純平均比0.70倍で、十大費目の最大の乖離。婚礼費の大倍率や全国最低という表現はカバーに採らず、教育水準・教育意欲や県全体の評価へ置き換えない。 人物・キャラクターは使わない。 新方針: 地図は山口県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山口市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "山口市",
             "year": "2024",
@@ -14066,15 +14336,60 @@
               "planSha256": "c0778423da05d11054c8b56a875b498b6135ae331b5414fb655307cea8b100b1"
             }
           }
+        },
+        {
+          "sha256": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamanashi/revisions/7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030.png"
+          },
+          "bytes": 1388268,
+          "id": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-c5495b0a32dc",
+          "createdAt": "2026-10-23T07:06:38.194Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "山梨県主域の輪郭、甲府市・2024年・二人以上の世帯、交通費の題材を新旧比較。原寸と幅320pxで文字と県形を確認。",
+            "reviewedAt": "2026-10-23T07:11:26.609Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-yamanashi/inputs/2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012.json"
+              },
+              "bytes": 12794
+            },
+            "production": {
+              "id": "NCI-00106",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "c5495b0a32dc4699a8993db459ec16c2e912dd8f151a8a500605302e21452c89"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de",
-      "approvedRevisionId": "d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de",
+      "candidateRevisionId": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
+      "approvedRevisionId": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324615513/rectangle_large_type_2_5debc6d42ee758b6306c1b4a8d7b9bff.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.953Z",
-        "revisionId": "d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de"
+        "url": "https://assets.st-note.com/production/uploads/images/327532054/rectangle_large_type_2_282050498a2bd6e1c3b154c79467c830.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:34.561Z",
+        "revisionId": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -14086,8 +14401,8 @@
         "brief": {
           "headline": "山梨県の家計\n交通費に注目",
           "subline": "甲府市・2024年\n二人以上の世帯",
-          "subject": "添付画像は編集対象ではなく、山梨県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の小さな乗用車模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。",
-          "evidence": "https://note.com/stats47/n/n3416a225e0c6 2026-10-15公開本文確認。公開本文は甲府市の2024年・二人以上の世帯。十大費目で交通・通信が47県庁所在市単純平均比1.16倍で最大の乖離。個別品目の自動車教習など交通費を取り上げている。県全体へ一般化せず倍率・順位・因果をカバーに載せない。 人物・キャラクターは使わない。 新方針: 地図は山梨県の主域（遠隔離島省略）の地域識別用。家計の観測対象は甲府市であり、県全域の観測図ではない。",
+          "subject": "添付画像は編集対象ではなく、山梨県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の小さな乗用車模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+          "evidence": "https://note.com/stats47/n/n3416a225e0c6 2026-10-15公開本文確認。公開本文は甲府市の2024年・二人以上の世帯。十大費目で交通・通信が47県庁所在市単純平均比1.16倍で最大の乖離。個別品目の自動車教習など交通費を取り上げている。県全体へ一般化せず倍率・順位・因果をカバーに載せない。 人物・キャラクターは使わない。 新方針: 地図は山梨県の主域（遠隔離島省略）の地域識別用。家計の観測対象は甲府市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
           "dataScope": {
             "place": "甲府市",
             "year": "2024",
@@ -27513,26 +27828,71 @@
               "planSha256": "9c486bc0e1246e054aec0ee8c9e99eeae93a78b6004f72a6f6d19f6d041d5d25"
             }
           }
+        },
+        {
+          "sha256": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-shigoto-kouritsuka-ai/revisions/8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20.png"
+          },
+          "bytes": 1846382,
+          "id": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-ff55a4379b37",
+          "createdAt": "2026-10-23T07:06:21.746Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の集計業務とAI補助・人の最終確認に一致。新旧を管理画面で比較し、人物や架空の図表がない白紙資料とPCの候補を原寸・幅320pxで確認。",
+            "reviewedAt": "2026-10-23T07:09:53.630Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/koumuin-shigoto-kouritsuka-ai/inputs/fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f.json"
+              },
+              "bytes": 9224
+            },
+            "production": {
+              "id": "NCI-00291",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "ff55a4379b37d1baac2341d05135b4ac631d90e56fd9f31ee44e842e2511e828"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25",
-      "approvedRevisionId": "a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25",
+      "candidateRevisionId": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
+      "approvedRevisionId": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324192426/rectangle_large_type_2_79099798a712a5f43fe5a98170d67521.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.068Z",
-        "revisionId": "a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25"
+        "url": "https://assets.st-note.com/production/uploads/images/327532176/rectangle_large_type_2_6b68bbf56a994dc2504765b95c14aa11.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:31.323Z",
+        "revisionId": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20"
       },
       "missingVersions": [],
       "production": {
         "id": "NCI-00291",
         "policyId": "NCP-007",
-        "policyVersion": 2,
+        "policyVersion": 4,
         "brief": {
-          "headline": "公務員の事務作業\nAIでどう変わる？",
-          "subline": "統計集計の自動化を例に\n手順の分解と最終確認",
-          "subject": "親しみやすいオフィスの案内役と大きなノートPC。白いシャツの人物が資料を確認している。青と黄色、濃紺の極太文字。ヘルメットや資格バッジを付けない。製品ロゴ・実在UI・架空の効率化数値を描かない。人物は特定個人の肖像ではなく汎用イラスト。",
-          "evidence": "https://note.com/stats47/n/na451784fbbca 本文確認2026-10-14。本文の統計データ取得・整形・可視化・公開の分解と、人による最終確認を主題にする。特定の短縮時間や現在の運用実績をカバーで保証しない。"
+          "headline": "公務員の集計業務\nAIで何が変わる？",
+          "subline": "取得・整形・確認\n人が最後に確かめる",
+          "subject": "右側には無地で暗い画面のノートPCを一点、その手前には完全な白紙のA4用紙を数枚だけ置く。紙には線、マス目、棒、円、記号、数字、文字、グラフを一切描かない。PC画面にも文字・アイコン・UIを一切描かない。業務道具だけで集計の取得・整形・確認を表す。植物など他の題材、人物・顔・手・キャラクター・地図・架空の成果数値も描かない。",
+          "evidence": "https://note.com/stats47/n/na451784fbbca 本文確認2026-10-14。本文の統計データ取得・整形・可視化・公開の分解と、人による最終確認を主題にする。特定の短縮時間や現在の運用実績をカバーで保証しない。 2026-10-23再確認。 2026-10-23再確認。"
         }
       }
     },
@@ -36717,15 +37077,60 @@
               "planSha256": "0edf56c9d58948d3f91aa3fd6da975a933137196219e5db679204d09c8e077ab"
             }
           }
+        },
+        {
+          "sha256": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/revisions/2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1.png"
+          },
+          "bytes": 1733399,
+          "id": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
+          "kind": "candidate",
+          "version": "pop-NCP-001-v4-cacebd65b6a0",
+          "createdAt": "2026-10-23T07:06:29.460Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "元県庁職員による統計サイトの自己紹介に一致。新旧を管理画面で比較し、無人のノートと資料、全掲載文字を原寸・幅320pxで確認。",
+            "reviewedAt": "2026-10-23T07:12:18.058Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/pinned-intro/inputs/532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96.json"
+              },
+              "bytes": 8922
+            },
+            "production": {
+              "id": "NCI-00349",
+              "policyId": "NCP-001",
+              "policyVersion": 4,
+              "planSha256": "cacebd65b6a06281219a1133c0188793160143d3e5e7e1718c73448e2a2d4574"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298",
-      "approvedRevisionId": "5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298",
+      "candidateRevisionId": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
+      "approvedRevisionId": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324562588/rectangle_large_type_2_456cb2e7925f112b5d8853813f5f5551.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:13.428Z",
-        "revisionId": "5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298"
+        "url": "https://assets.st-note.com/production/uploads/images/327532277/rectangle_large_type_2_f53d496422e4543b61f534f311754cc2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:36.640Z",
+        "revisionId": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -36733,12 +37138,12 @@
       "production": {
         "id": "NCI-00349",
         "policyId": "NCP-001",
-        "policyVersion": 3,
+        "policyVersion": 4,
         "brief": {
-          "headline": "統計で見る\n都道府県",
+          "headline": "47都道府県を\n統計で見比べる",
           "subline": "元県庁職員がつくった\n統計サイトの自己紹介",
-          "subject": "明るい青と黄色、クリーム色の紙の手描きの質感。右側に、大きく開いた白紙のノートと青・黄の無文字の資料フォルダーを重ねる。机上の静物だけを描き、背景は抽象的な紙と柔らかい色面で構成する。左側の濃紺の極太2行見出し、下の補足2行、上部カテゴリ、署名の全てを一枚に生成する。人物・顔・人の手・動物・マスコット・キャラクター・地図・日本列島のシルエット・グラフ・数値・ロゴは一切描かない。紙面は完全な白紙。指定以外の文字は足さず、補足も幅320pxで読める大きさにする。",
-          "evidence": "https://note.com/stats47/n/na69997771fe5 2026-10-15公開本文確認。県庁で統計を扱った経験、47都道府県のランキング・地域プロファイル・テーマ別ダッシュボードを紹介する自己紹介記事。変動する指標総数はカバーに載せない。人物は本人の肖像でなく汎用案内役とする。 2026-10-15ユーザー指示で人物・キャラクターを使わず、道具を主役に変更。"
+          "subject": "右側に白紙の見開きノートと無文字の青・黄の資料フォルダーを重ね、やわらかな紙の色面を背景にする。人物・顔・手・キャラクター・地図・日本列島の輪郭・グラフ・実在UI・架空の数値・指定外の文字を描かない。",
+          "evidence": "https://note.com/stats47/n/na69997771fe5 2026-10-15公開本文確認。県庁で統計を扱った経験、47都道府県のランキング・地域プロファイル・テーマ別ダッシュボードを紹介する自己紹介記事。変動する指標総数はカバーに載せない。人物は本人の肖像でなく汎用案内役とする。 2026-10-15ユーザー指示で人物・キャラクターを使わず、道具を主役に変更。 2026-10-23再確認。 2026-10-23再確認。"
         }
       }
     },
@@ -53763,26 +54168,71 @@
               "planSha256": "7e0baa8f684f5bf7ae227f95b7cb2b97ab81d52991967cbe27117ecd3df6dea1"
             }
           }
+        },
+        {
+          "sha256": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/sunshine-solar-housing/revisions/eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0.png"
+          },
+          "bytes": 1911170,
+          "id": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-78c2af7ed64a",
+          "createdAt": "2026-10-23T07:06:13.167Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "本文の2024年日照時間と2023年住宅太陽光普及率に一致。新旧を管理画面で比較し、原寸と幅320pxで全掲載文字・太陽と住宅の題材を確認。",
+            "reviewedAt": "2026-10-23T07:08:37.689Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/sunshine-solar-housing/inputs/fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888.json"
+              },
+              "bytes": 8393
+            },
+            "production": {
+              "id": "NCI-00495",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "78c2af7ed64a7e560b1db4096a37d1777ae4259207299cfdbbc1ab2063cf292a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1",
-      "approvedRevisionId": "94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1",
+      "candidateRevisionId": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
+      "approvedRevisionId": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324532251/rectangle_large_type_2_760d01cc46bbadb1d98365eef0613089.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.014Z",
-        "revisionId": "94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1"
+        "url": "https://assets.st-note.com/production/uploads/images/327532379/rectangle_large_type_2_7d4087ab0fcc31af789ff7468b6dbd3e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T07:22:36.493Z",
+        "revisionId": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0"
       },
       "missingVersions": [],
       "production": {
         "id": "NCI-00495",
         "policyId": "NCP-004",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
-          "headline": "日が照る県ほど\n太陽光は多い？",
-          "subline": "日照時間と住宅の普及率\n2024年と2023年を比較",
-          "subject": "紫と黄色。大きな明るい太陽と、屋根に太陽光パネルが載った一戸建てを右側で対にする。丘と街並みを淡い背景に。発電量の数字、順位、県境地図、グラフを描かない。人物を描かない。太陽は発電実績を保証する表現ではなく題材の挿絵。",
-          "evidence": "https://note.com/stats47/n/n2fffce0e2320 公開本文を2026-10-14確認。年間日照時間2024年と太陽光発電機のある住宅割合2023年。発電量や設備容量ではなく、全住宅に対する普及率。単純な因果や経済効果はカバーで主張しない。"
+          "headline": "日照時間と\n住宅の太陽光普及率",
+          "subline": "順位は一致する？\n2024年と2023年の比較",
+          "subject": "右側に文字のない太陽と、屋根に太陽光パネルのある無人の戸建て住宅を一組で大きく描く。日照時間と住宅の設備普及率を比較する記事。発電量・因果・順位を暗示する図や架空のグラフ、人物、キャラクター、地図、指定外の数字や文字は描かない。",
+          "evidence": "https://note.com/stats47/n/n2fffce0e2320 公開本文を2026-10-14確認。年間日照時間2024年と太陽光発電機のある住宅割合2023年。発電量や設備容量ではなく、全住宅に対する普及率。単純な因果や経済効果はカバーで主張しない。 2026-10-23再確認。 2026-10-23再確認。"
         }
       }
     }
