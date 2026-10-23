@@ -24,15 +24,15 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **2799** / 要対応 pending: **1024**
-- URL Inspection で登録を確認して done にした URL: **132** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
+- 追跡 URL: **2799** / 要対応 pending: **1023**
+- URL Inspection で登録を確認して done にした URL: **133** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 1156 | 1024 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| observe-after-fix | 1156 | 1023 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
 | none | 1643 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1024 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1023 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 
