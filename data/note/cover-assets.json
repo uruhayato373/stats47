@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T10:51:58.067Z",
+  "updatedAt": "2026-10-23T11:21:53.012Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -17336,15 +17336,60 @@
               "planSha256": "fdd12ce883d054e094ac26070e5c81143b4ca9695eb713b1d332dd5cb07aba8d"
             }
           }
+        },
+        {
+          "sha256": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-maximum-temperature/revisions/dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27.png"
+          },
+          "bytes": 1768425,
+          "id": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-334c98e3c4cd",
+          "createdAt": "2026-10-23T11:11:57.550Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:26.635Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-maximum-temperature/inputs/8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6.json"
+              },
+              "bytes": 8765
+            },
+            "production": {
+              "id": "NCI-00113",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "334c98e3c4cd4c9bea18fff65c11d927b85de79f03841e3fcc00929f8b74d259"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb",
-      "approvedRevisionId": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb",
+      "candidateRevisionId": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
+      "approvedRevisionId": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324640161/rectangle_large_type_2_97adb5355a27750aef982c4ffb4eb475.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.052Z",
-        "revisionId": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb"
+        "url": "https://assets.st-note.com/production/uploads/images/327607445/rectangle_large_type_2_eb5a8719d2df3a9ce4b2fb1333468ee0.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:45.722Z",
+        "revisionId": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -17354,10 +17399,10 @@
         "policyId": "NCP-004",
         "policyVersion": 3,
         "brief": {
-          "headline": "熊本と札幌\n暑さを比べる",
+          "headline": "最高気温\n熊本と北海道",
           "subline": "2024年・県庁所在地",
-          "subject": "比較型の左右対になる構図。主見出し2行は左側に大きく。右に同じ大きさの暖かな黄色のうちわ1枚と涼しげな紫色のうちわ1枚を、少し間隔をあけて並べる。紙と絵の具の質感、紫・クリーム・黄色。2つの色は地域比較への入口の挿絵で、統計の色分けではない。実測の大小をうちわの大きさや個数で示さない。温度計・目盛り・気温値・地図・天気の顔なし。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
-          "evidence": "https://note.com/stats47/n/n91e96edf3950 2026-10-15公開本文確認。2024年・県庁所在地の気温比較で熊本市と札幌市を扱う。数値や順位、県全域の暑さ、単純な因果・住みやすさの結論は追加しない。うちわ2枚は対比を示す挿絵で実測グラフではない。"
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に強い日差しを受けた街並みと涼しい街並みを対で見せる。温度計や数値、順位表は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n91e96edf3950 2026-10-23公開API本文照合。記事題名「【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海」。熊本と2024年を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
         }
       }
     },
@@ -18710,15 +18755,60 @@
               "bytes": 7379
             }
           }
+        },
+        {
+          "sha256": "bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-room-utilization-rate/revisions/bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca.png"
+          },
+          "bytes": 1881165,
+          "id": "bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-60a0b30e5580",
+          "createdAt": "2026-10-23T11:10:19.526Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d3f86944f9ccac019c957ee887060ed0e32cbf0acd25636a9277ec2cf5fd8398"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:21.340Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d3f86944f9ccac019c957ee887060ed0e32cbf0acd25636a9277ec2cf5fd8398",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-room-utilization-rate/inputs/d3f86944f9ccac019c957ee887060ed0e32cbf0acd25636a9277ec2cf5fd8398.json"
+              },
+              "bytes": 8524
+            },
+            "production": {
+              "id": "NCI-00123",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "60a0b30e5580c990cad2410bb0a3e31556f3ebfd4dfd1fc9c8e8a8b78f64e59c"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "04925ab6a262872ff58c4e0b55668c1d79ff5a6baa36584031eea1d0dc69cc23",
-      "approvedRevisionId": "04925ab6a262872ff58c4e0b55668c1d79ff5a6baa36584031eea1d0dc69cc23",
+      "candidateRevisionId": "bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca",
+      "approvedRevisionId": "bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320190985/rectangle_large_type_2_6cc060f33a11b385b0067279e8e26757.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:18.964Z",
-        "revisionId": "04925ab6a262872ff58c4e0b55668c1d79ff5a6baa36584031eea1d0dc69cc23"
+        "url": "https://assets.st-note.com/production/uploads/images/327607590/rectangle_large_type_2_b908de29870a94c8bf91147e0d917b29.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:43.016Z",
+        "revisionId": "bb4cc0a0cad662e0a2d364352c745ca1e4d83c851160f33fc0900388f16dfcca"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -18727,7 +18817,12 @@
         "id": "NCI-00123",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "客室稼働率\n高い県は東京都",
+          "subline": "2024年・客室の利用割合",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のホテルの客室扉と空室の扉を同じ大きさで対比。宿泊客や観光地は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/na895280512fc 2026-10-23公開API本文照合。記事題名「【2024年版】客室稼働率が最も高い県は？ 1位は東京都｜都道府県ランキング」。東京都と2024年を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -31512,15 +31607,60 @@
               "bytes": 1082
             }
           }
+        },
+        {
+          "sha256": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2207f3039fd3/revisions/2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628.png"
+          },
+          "bytes": 1719093,
+          "id": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-ff1efaa486fb",
+          "createdAt": "2026-10-23T11:12:57.042Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:15:07.604Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n2207f3039fd3/inputs/9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48.json"
+              },
+              "bytes": 9110
+            },
+            "production": {
+              "id": "NCI-00304",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "ff1efaa486fb40299d5448d9b261aefc34817b69daeab6ff825af1693fbbf33d"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317",
-      "approvedRevisionId": "30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317",
+      "candidateRevisionId": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
+      "approvedRevisionId": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277307/rectangle_large_type_2_762de94a5a14a5ab9ffe5df44ade6a73.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.923Z",
-        "revisionId": "30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317"
+        "url": "https://assets.st-note.com/production/uploads/images/327607736/rectangle_large_type_2_ea559318c0989eb98f085074256fd4dd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:44.586Z",
+        "revisionId": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -31529,7 +31669,12 @@
         "id": "NCI-00304",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "毎月の定型業務\n1コマンドで回す",
+          "subline": ".claude/skillsの作り方",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の手順書と無地のノートPC。操作画面に架空のコードや作業結果を描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n2207f3039fd3 2026-10-23公開API本文照合。記事題名「.claude/skills で「毎月の定型業務」を 1 コマンド化する」。.claude/skillsと定型を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -31814,15 +31959,60 @@
               "bytes": 1067
             }
           }
+        },
+        {
+          "sha256": "47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2c2df066e865/revisions/47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af.png"
+          },
+          "bytes": 1671350,
+          "id": "47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-f2fbdd043b71",
+          "createdAt": "2026-10-23T11:12:23.251Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "05c93212453fc221583f4642b634db1e75c1b122d32fcb094f6b4def6c64c11d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:42.071Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "05c93212453fc221583f4642b634db1e75c1b122d32fcb094f6b4def6c64c11d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n2c2df066e865/inputs/05c93212453fc221583f4642b634db1e75c1b122d32fcb094f6b4def6c64c11d.json"
+              },
+              "bytes": 9095
+            },
+            "production": {
+              "id": "NCI-00306",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "f2fbdd043b714ceb4efbdae16bfa03f6757431b7b4a7dc6d1c4fc12a001010eb"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "8f436f9bf0ef686bc744a1f3c12bd8bf2209910c4bd14b1159ce82c311e13c24",
-      "approvedRevisionId": "8f436f9bf0ef686bc744a1f3c12bd8bf2209910c4bd14b1159ce82c311e13c24",
+      "candidateRevisionId": "47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af",
+      "approvedRevisionId": "47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277414/rectangle_large_type_2_bd12bd1efa0fde31aceb259e6f8a27bd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.782Z",
-        "revisionId": "8f436f9bf0ef686bc744a1f3c12bd8bf2209910c4bd14b1159ce82c311e13c24"
+        "url": "https://assets.st-note.com/production/uploads/images/327607901/rectangle_large_type_2_20a8105ccc80076317b300b2f0619446.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:44.348Z",
+        "revisionId": "47b630f46a42478ee2b7ef3bfc78882238e2f74993e22d7d64566599593cc0af"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -31831,7 +32021,12 @@
         "id": "NCI-00306",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "Claude Code導入\n説明資料を作る",
+          "subline": "上司への提案の組み立て",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の説明資料と無地のノートPC。実在する製品ロゴや承認印は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n2c2df066e865 2026-10-23公開API本文照合。記事題名「上司に Claude Code 導入を承認させた説明資料 (実例加工)」。Claude Codeと説明資料を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -33223,15 +33418,60 @@
               "bytes": 1075
             }
           }
+        },
+        {
+          "sha256": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n68eafab07946/revisions/36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f.png"
+          },
+          "bytes": 1823224,
+          "id": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-437851d05be9",
+          "createdAt": "2026-10-23T11:12:39.532Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:52.606Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n68eafab07946/inputs/124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03.json"
+              },
+              "bytes": 9027
+            },
+            "production": {
+              "id": "NCI-00315",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "437851d05be9ded7f4d87093f6e33e3c472a06a8f61a24b1d6752627da01f9b6"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096",
-      "approvedRevisionId": "4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096",
+      "candidateRevisionId": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
+      "approvedRevisionId": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323277785/rectangle_large_type_2_45db4a8e8a3d81d483a2d38c3c58dcf0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.870Z",
-        "revisionId": "4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096"
+        "url": "https://assets.st-note.com/production/uploads/images/327608067/rectangle_large_type_2_482392c788ec03acd0dee07ebc5ba478.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:46.963Z",
+        "revisionId": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -33240,7 +33480,12 @@
         "id": "NCI-00315",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "複数案件を\n並行して調べる",
+          "subline": "Subagentsの実務手順",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の複数の調査ファイルと無地のノートPC。画面に架空の結果や実績を描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n68eafab07946 2026-10-23公開API本文照合。記事題名「Subagents で「複数案件の並行調査」を回す」。Subagentsと調査を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -34293,15 +34538,60 @@
               "bytes": 1080
             }
           }
+        },
+        {
+          "sha256": "0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n8558c1a6503a/revisions/0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b.png"
+          },
+          "bytes": 1945614,
+          "id": "0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-f754a68219c5",
+          "createdAt": "2026-10-23T11:12:05.637Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b0f7a56f3e2e132d90ad4343ea5ef1cd042cc38fb4cef84e69caa0bcf5f646ce"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:32.135Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b0f7a56f3e2e132d90ad4343ea5ef1cd042cc38fb4cef84e69caa0bcf5f646ce",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-n8558c1a6503a/inputs/b0f7a56f3e2e132d90ad4343ea5ef1cd042cc38fb4cef84e69caa0bcf5f646ce.json"
+              },
+              "bytes": 9180
+            },
+            "production": {
+              "id": "NCI-00321",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "f754a68219c5c3823b773e762b5e1746e98e40cf7ef1f4db48cafcfbbd80f0ce"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "71edb166b96b77fd2f359ca99b634b3219b7b1c07d35a0ddcf7d3f171f965f44",
-      "approvedRevisionId": "71edb166b96b77fd2f359ca99b634b3219b7b1c07d35a0ddcf7d3f171f965f44",
+      "candidateRevisionId": "0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b",
+      "approvedRevisionId": "0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323279143/rectangle_large_type_2_9eff7c9b1167d6daba1196b76246e362.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.666Z",
-        "revisionId": "71edb166b96b77fd2f359ca99b634b3219b7b1c07d35a0ddcf7d3f171f965f44"
+        "url": "https://assets.st-note.com/production/uploads/images/327608201/rectangle_large_type_2_8149a3ef4cc6ecebfb9476de980e3814.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:48.510Z",
+        "revisionId": "0ae5377b84f7a18286f3cb812ca06327e7ce5fb447b66e39ce741524e740941b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -34310,7 +34600,12 @@
         "id": "NCI-00321",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "退職後のキャリア\n経験を整理する",
+          "subline": "AIと公的セクターの経験",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に机上の無地のキャリア棚卸しノートと無地のノートPC。求人票や採用を保証する表現は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n8558c1a6503a 2026-10-23公開API本文照合。記事題名「退職後のキャリア: AI × 公的セクター経験者の市場価値」。退職とAIを本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -35467,15 +35762,60 @@
               "bytes": 1037
             }
           }
+        },
+        {
+          "sha256": "0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-naf942acdbe59/revisions/0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa.png"
+          },
+          "bytes": 1843530,
+          "id": "0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-c732fbca74db",
+          "createdAt": "2026-10-23T11:13:06.087Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "fafdd2e9c85068f86772fba5985a2825b6d7326db07cb43b88b00ab67ad5e673"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:15:16.077Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "fafdd2e9c85068f86772fba5985a2825b6d7326db07cb43b88b00ab67ad5e673",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-naf942acdbe59/inputs/fafdd2e9c85068f86772fba5985a2825b6d7326db07cb43b88b00ab67ad5e673.json"
+              },
+              "bytes": 9141
+            },
+            "production": {
+              "id": "NCI-00328",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "c732fbca74dbc9cbcd9207824be70a78034c6357611ef7896bf0ebb4b2607be4"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "03ea448a048424a1cf53c474041586c293cadda1536cb368278da9a356741a29",
-      "approvedRevisionId": "03ea448a048424a1cf53c474041586c293cadda1536cb368278da9a356741a29",
+      "candidateRevisionId": "0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa",
+      "approvedRevisionId": "0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283728/rectangle_large_type_2_e7816aa5850373b14f5b29c32b10f010.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.943Z",
-        "revisionId": "03ea448a048424a1cf53c474041586c293cadda1536cb368278da9a356741a29"
+        "url": "https://assets.st-note.com/production/uploads/images/327608362/rectangle_large_type_2_e963457545ec9903e9e61b91c8c5a0f0.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:49.503Z",
+        "revisionId": "0bd925cef91734c233e82ea570fb1b07be7cce3a4f2068cabdf7fa9cad2b04fa"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -35484,7 +35824,12 @@
         "id": "NCI-00328",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "災害時のSNS文\n多言語の下書きへ",
+          "subline": "Claude Codeと人の確認",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の多言語下書き文書と無地のノートPC。実際の警報・災害発生を示す画像や公開済みの表現は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/naf942acdbe59 2026-10-23公開API本文照合。記事題名「災害時の SNS 発信文を Claude Code で多言語化」。災害と多言語を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -36797,15 +37142,60 @@
               "bytes": 1046
             }
           }
+        },
+        {
+          "sha256": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nbead1fe772c7/revisions/1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8.png"
+          },
+          "bytes": 1905839,
+          "id": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-61e241832d2c",
+          "createdAt": "2026-10-23T11:12:49.362Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:57.927Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nbead1fe772c7/inputs/88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40.json"
+              },
+              "bytes": 9125
+            },
+            "production": {
+              "id": "NCI-00335",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "61e241832d2c5e9c82a2a7a78ae7cdeeb61260dd50f66e6a0a84de403d0ce44a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04",
-      "approvedRevisionId": "ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04",
+      "candidateRevisionId": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
+      "approvedRevisionId": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283902/rectangle_large_type_2_eb546068768356808dc6a3352307e74a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.882Z",
-        "revisionId": "ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04"
+        "url": "https://assets.st-note.com/production/uploads/images/327608537/rectangle_large_type_2_6125570e598b71b12b857b294a416c91.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:50.175Z",
+        "revisionId": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -36814,7 +37204,12 @@
         "id": "NCI-00335",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "MCP接続を\n架空環境で試す",
+          "subline": "LGWAN想定の実験手順",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に閉じた架空環境を示す無地のノートPCと無地の文書。実在の庁内システムや実接続・承認済みの表示は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nbead1fe772c7 2026-10-23公開API本文照合。記事題名「MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)」。架空とLGWANを本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -36987,15 +37382,60 @@
               "bytes": 1052
             }
           }
+        },
+        {
+          "sha256": "e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-ncab0d7b04228/revisions/e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2.png"
+          },
+          "bytes": 1891907,
+          "id": "e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-684e8df17fc6",
+          "createdAt": "2026-10-23T11:12:14.370Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "184f5aefb8c25c1d7bb8cb3b36162dcc248d5ff31fde288f4f580f741c4b0f20"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:37.116Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "184f5aefb8c25c1d7bb8cb3b36162dcc248d5ff31fde288f4f580f741c4b0f20",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-ncab0d7b04228/inputs/184f5aefb8c25c1d7bb8cb3b36162dcc248d5ff31fde288f4f580f741c4b0f20.json"
+              },
+              "bytes": 9017
+            },
+            "production": {
+              "id": "NCI-00336",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "684e8df17fc6af7ddc093399dfa7a75311e157c9e1ae3d471618e4c61b1b838f"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a3c0f48668d3a90516821ef9571a383ec802f0e7991a6a1aabadd05243e59a0b",
-      "approvedRevisionId": "a3c0f48668d3a90516821ef9571a383ec802f0e7991a6a1aabadd05243e59a0b",
+      "candidateRevisionId": "e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2",
+      "approvedRevisionId": "e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323283947/rectangle_large_type_2_557505c6f81805fba45ff34c72abb777.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.731Z",
-        "revisionId": "a3c0f48668d3a90516821ef9571a383ec802f0e7991a6a1aabadd05243e59a0b"
+        "url": "https://assets.st-note.com/production/uploads/images/327608758/rectangle_large_type_2_93d1b013bdd11b3011a40a5d9e60e8cd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:51.991Z",
+        "revisionId": "e916807ce59204a791e6d62bbd23b6480ddff972b4a59618efbfe7d6232d0af2"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -37004,7 +37444,12 @@
         "id": "NCI-00336",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "AI導入の相談\n上席へのQ&A",
+          "subline": "現場で使う説明の論点",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のQ&A文書と無地のノートPC。架空の承認印や実在の行政様式は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/ncab0d7b04228 2026-10-23公開API本文照合。記事題名「AI 導入を渋る上席への対応 Q&A 集 (現場感あり)」。Q&amp;AとAIを本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {
@@ -39177,15 +39622,60 @@
               "bytes": 1030
             }
           }
+        },
+        {
+          "sha256": "0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nfd3ab8213e1f/revisions/0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473.png"
+          },
+          "bytes": 1846272,
+          "id": "0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-4cdb213288aa",
+          "createdAt": "2026-10-23T11:12:31.009Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "56af183b6b27da7212b8a60046af3f75178d3949859d120f3fb337df4bdfc37f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+            "reviewedAt": "2026-10-23T11:14:47.359Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "56af183b6b27da7212b8a60046af3f75178d3949859d120f3fb337df4bdfc37f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/paid-nfd3ab8213e1f/inputs/56af183b6b27da7212b8a60046af3f75178d3949859d120f3fb337df4bdfc37f.json"
+              },
+              "bytes": 9285
+            },
+            "production": {
+              "id": "NCI-00347",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "4cdb213288aa618879e80a6c93004b528508b0909d4a2832c505e926b662f9aa"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "767add49fc02b4def5b156cdd307b8cf97c5ec10f18d25a8352979a5019b3650",
-      "approvedRevisionId": "767add49fc02b4def5b156cdd307b8cf97c5ec10f18d25a8352979a5019b3650",
+      "candidateRevisionId": "0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473",
+      "approvedRevisionId": "0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285360/rectangle_large_type_2_d4d738e80453e4e46294f22a64fd7038.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:19.808Z",
-        "revisionId": "767add49fc02b4def5b156cdd307b8cf97c5ec10f18d25a8352979a5019b3650"
+        "url": "https://assets.st-note.com/production/uploads/images/327608926/rectangle_large_type_2_6857042516418c73a2e7821f9cf7065f.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T11:21:52.990Z",
+        "revisionId": "0c38b810ee6fd1e3352fc2a251bd5ee8e7836b239d19f6193dda9c0113334473"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -39194,7 +39684,12 @@
         "id": "NCI-00347",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "Excelマクロを\nPythonへ移す",
+          "subline": "Claude Codeで進める手順",
+          "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の表計算シートと無地のコード用ノートPCを同じ大きさで対比。画面に架空のコードや数値を入れない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nfd3ab8213e1f 2026-10-23公開API本文照合。記事題名「既存の Excel マクロを Claude Code で Python 移植する」。ExcelとPythonを本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+        }
       }
     },
     {

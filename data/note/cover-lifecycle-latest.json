@@ -1,68 +1,68 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T10:51:58.093Z",
+  "generatedAt": "2026-10-23T11:21:53.038Z",
   "status": "pass",
   "articles": [
     {
-      "key": "a-day-time-population",
+      "key": "a-room-utilization-rate",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327596751/rectangle_large_type_2_123b4bd3d1bb0ed348c4475dfbdfa36a.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:51.584Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327607590/rectangle_large_type_2_b908de29870a94c8bf91147e0d917b29.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:43.016Z"
     },
     {
-      "key": "a-current-liabilities-balance-multi-person-households-per-household",
+      "key": "paid-n2c2df066e865",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327596635/rectangle_large_type_2_338309ce6450a5d6150e5003ce69380c.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:51.846Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327607901/rectangle_large_type_2_20a8105ccc80076317b300b2f0619446.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:44.348Z"
     },
     {
-      "key": "a-consumption-expenditure-multi-person-households-per-month",
+      "key": "paid-n2207f3039fd3",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327596318/rectangle_large_type_2_ece8c9341064bed86339394318fbcfc2.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:52.295Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327607736/rectangle_large_type_2_ea559318c0989eb98f085074256fd4dd.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:44.586Z"
     },
     {
-      "key": "a-avg-propensity-to-consume-worker-households",
+      "key": "a-maximum-temperature",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327596236/rectangle_large_type_2_4dd58d49ea20fdf93381f1e5a346d165.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:52.521Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327607445/rectangle_large_type_2_eb5a8719d2df3a9ce4b2fb1333468ee0.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:45.722Z"
     },
     {
-      "key": "a-kakei-niigata",
+      "key": "paid-n68eafab07946",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327596832/rectangle_large_type_2_335dd806a1818c2dc8fc9f04f4270010.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:54.300Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608067/rectangle_large_type_2_482392c788ec03acd0dee07ebc5ba478.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:46.963Z"
     },
     {
-      "key": "a-late-elderly-medical-expense-per-insured",
+      "key": "paid-n8558c1a6503a",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327597118/rectangle_large_type_2_6003bc0e7478c88094e6485a9ac92cd5.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:54.580Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608201/rectangle_large_type_2_8149a3ef4cc6ecebfb9476de980e3814.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:48.510Z"
     },
     {
-      "key": "a-minimum-wage-by-region",
+      "key": "paid-naf942acdbe59",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327597247/rectangle_large_type_2_cc4696103bfd4545d52819a55f651ed4.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:54.948Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608362/rectangle_large_type_2_e963457545ec9903e9e61b91c8c5a0f0.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:49.503Z"
     },
     {
-      "key": "a-number-of-establishments-manufacturing",
+      "key": "paid-nbead1fe772c7",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327597328/rectangle_large_type_2_cd9f65e1318de88cf05b6b6ff360e213.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:56.231Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608537/rectangle_large_type_2_6125570e598b71b12b857b294a416c91.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:50.175Z"
     },
     {
-      "key": "a-total-fertility-rate",
+      "key": "paid-ncab0d7b04228",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327597427/rectangle_large_type_2_8e181d6d153d3dbf1ac4352bfa8f44d3.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:57.211Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608758/rectangle_large_type_2_93d1b013bdd11b3011a40a5d9e60e8cd.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:51.991Z"
     },
     {
-      "key": "a-kakei-tokushima",
+      "key": "paid-nfd3ab8213e1f",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327597003/rectangle_large_type_2_a7052f2099232206cf1688cf09ae9674.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T10:51:58.035Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327608926/rectangle_large_type_2_6857042516418c73a2e7821f9cf7065f.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T11:21:52.990Z"
     }
   ]
 }
