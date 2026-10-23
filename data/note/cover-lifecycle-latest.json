@@ -1,68 +1,68 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T12:47:31.415Z",
+  "generatedAt": "2026-10-23T13:18:51.325Z",
   "status": "pass",
   "articles": [
     {
-      "key": "recovered-n4d38db115f82",
+      "key": "recovered-n361a963fb079",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327636681/rectangle_large_type_2_a794bd48807910956ff00c52fa0fd9de.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:25.437Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327646754/rectangle_large_type_2_d66dc95b8eb9ac9584acdc96ff050657.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:44.501Z"
     },
     {
-      "key": "recovered-n285e0ba282d0",
+      "key": "recovered-n1649910097fb",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327636565/rectangle_large_type_2_1576c7a96fa545c56596e78611563366.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:25.603Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327646586/rectangle_large_type_2_7d69bdbc8a904dea42f7fa50b8807ad8.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:44.653Z"
     },
     {
-      "key": "recovered-n0654ddf27920",
+      "key": "recovered-n3e67c2f80ec1",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327636271/rectangle_large_type_2_5302fb713b5edc1b02d452440bbc0c85.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:25.734Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327646871/rectangle_large_type_2_7426070f9016115d0c423e4934709aca.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:45.244Z"
     },
     {
-      "key": "recovered-n55cd6de6a733",
+      "key": "recovered-n583a06d171e1",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327636943/rectangle_large_type_2_906663f4ccc7494d601d3e0ad97233f8.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:27.962Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647200/rectangle_large_type_2_60dcd609952097026e1e4c63738541bf.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:46.589Z"
     },
     {
-      "key": "recovered-n9dcb0680cea6",
+      "key": "recovered-n6305d990f2d2",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327637115/rectangle_large_type_2_d6f669f4c382f679ad17d5ba817a6768.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:27.995Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647357/rectangle_large_type_2_82e721c27905bb6b7f115fcf3592162e.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:46.676Z"
     },
     {
-      "key": "recovered-na25ccb15a6cb",
+      "key": "recovered-n581a1409b2c9",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327637211/rectangle_large_type_2_253081ecc117f68ea539c75d3ad865fb.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:28.428Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647002/rectangle_large_type_2_22efddfc3ee636950f8a76e956a8986f.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:47.227Z"
     },
     {
-      "key": "recovered-nead586305cdb",
+      "key": "recovered-ne5b9d2b01255",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327637524/rectangle_large_type_2_fd096a1af30f864acacabf02916ddd8d.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:30.097Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647797/rectangle_large_type_2_935c555a550286e77bb82b80743928b3.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:48.630Z"
     },
     {
-      "key": "recovered-ne4a6ec30706a",
+      "key": "recovered-nfbdfd99fee1b",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327637369/rectangle_large_type_2_7fc1b39a16d381d3129f26bc2219d0bf.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:30.387Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647927/rectangle_large_type_2_df07d326d9d9fc4a8848d1b8bf76aabe.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:49.728Z"
     },
     {
-      "key": "recovered-nf1a5abab3d5e",
+      "key": "recovered-nb2d65c42c28b",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327637724/rectangle_large_type_2_8c9451eb30eb26c760e6e4153bbf8848.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:30.393Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647487/rectangle_large_type_2_9a22052381c7e754ab52a7f414d0543b.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:49.818Z"
     },
     {
-      "key": "recovered-n1b943c7d414d",
+      "key": "recovered-nd5f8b5072cdb",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327636397/rectangle_large_type_2_c801eccdf8755c89ef6604a49f7eab6d.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T12:47:31.362Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327647630/rectangle_large_type_2_f0e608c68303bb1f2e9144cf56fee992.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T13:18:51.267Z"
     }
   ]
 }
