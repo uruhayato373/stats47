@@ -26,7 +26,7 @@ export function loadRegisteredTagValues(file = path.join(PROJECT_ROOT, datasetPa
 export function frontmatterTags(text) {
   const match = text.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return [];
-  const data = yaml.load(match[1]);
+  const data = /** @type {{ tags?: unknown } | null | undefined} */ (yaml.load(match[1]));
   const tags = data && typeof data === "object" ? data.tags : undefined;
   return Array.isArray(tags) ? tags.map((tag) => String(tag)) : [];
 }
