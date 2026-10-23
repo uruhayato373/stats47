@@ -1,9 +1,0 @@
-{
-  "kind": "authored",
-  "chartType": "findings",
-  "dataFile": "manufacturing-summary-findings.json",
-  "note": "authored 要点テキスト (記事本文由来)。2026-10-23 に本文の改稿 (従業者数の減少幅・工業地帯の区分・産業構成比の節の削除) に合わせて文言を直し、現行の generator (findings-card.ts の heading + text 形式) で再生成した。",
-  "regenerated": true,
-  "upstream": "記事本文 (authored)。SSOT指標ではない。",
-  "generatedBy": "generate-article-charts.ts"
-}
