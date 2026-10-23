@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T14:47:02.346Z",
+  "updatedAt": "2026-10-23T15:15:37.336Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -31005,7 +31005,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324652878/rectangle_large_type_2_dc8c307414299b5aa2b0d53a13247829.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.010Z",
+        "observedAt": "2026-10-23T15:15:16.556Z",
         "revisionId": "c35e7a0e99a1c0f05f3b0a005525b51041fc4566048455c296384d0c61e2b842"
       },
       "missingVersions": [
@@ -33118,7 +33118,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324640858/rectangle_large_type_2_0a29d0c6a03f4d560446a283b988a393.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.891Z",
+        "observedAt": "2026-10-23T15:15:16.832Z",
         "revisionId": "d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837"
       },
       "missingVersions": [
@@ -34037,7 +34037,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324652917/rectangle_large_type_2_93dc654624699e382eb6eff10afb5af3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.954Z",
+        "observedAt": "2026-10-23T15:15:17.774Z",
         "revisionId": "47120581c865fde259f3be5b7c2a2400a0da6b5d0a487d551229cabf61d4d0ca"
       },
       "missingVersions": [
@@ -34238,7 +34238,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324652968/rectangle_large_type_2_dae37e986c20b4e0919f12478fd55eef.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:24.888Z",
+        "observedAt": "2026-10-23T15:15:18.315Z",
         "revisionId": "a89d06079aa1067fc7ed663698f037c000b35142d18a90150573301f46073fd0"
       },
       "missingVersions": [
@@ -39964,7 +39964,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324653049/rectangle_large_type_2_7bb2006cb1d22a40e78dcc526a1aff7a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:25.050Z",
+        "observedAt": "2026-10-23T15:15:21.093Z",
         "revisionId": "550d15f8b485ea7771ea6960f0e7132181666378ee1c54bb453e1ef8ab75802f"
       },
       "missingVersions": [
@@ -41895,7 +41895,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324653122/rectangle_large_type_2_72ece697f31338565848a4702f0fe389.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.335Z",
+        "observedAt": "2026-10-23T15:15:23.426Z",
         "revisionId": "5a0e1fd72322be3b6a2eb28e1a15344179a83cb64a7363371bb6881338887c01"
       },
       "missingVersions": [
@@ -42297,7 +42297,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324640879/rectangle_large_type_2_74e743ea0b2c0808609b523c32a3b4a0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.221Z",
+        "observedAt": "2026-10-23T15:15:26.488Z",
         "revisionId": "c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07"
       },
       "missingVersions": [
@@ -43680,7 +43680,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324653152/rectangle_large_type_2_0a279d494309ea8fc8dfbe689be9a17d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.300Z",
+        "observedAt": "2026-10-23T15:15:22.435Z",
         "revisionId": "5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3"
       },
       "missingVersions": [
@@ -45212,15 +45212,60 @@
               "bytes": 1336
             }
           }
+        },
+        {
+          "sha256": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n21cb13582fe6/revisions/f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7.png"
+          },
+          "bytes": 1794214,
+          "id": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
+          "kind": "candidate",
+          "version": "pop-NCP-004-v3-e8842d03e95e",
+          "createdAt": "2026-10-23T15:08:07.886Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文はりんごの年間支出額で長野1位。数量を示さず、2023年・二人以上の世帯・県庁所在市等の範囲と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+            "reviewedAt": "2026-10-23T15:09:32.535Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n21cb13582fe6/inputs/475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93.json"
+              },
+              "bytes": 9410
+            },
+            "production": {
+              "id": "NCI-00394",
+              "policyId": "NCP-004",
+              "policyVersion": 3,
+              "planSha256": "e8842d03e95e86ea6f5dab45dd22aa18814fac18fd2b708f487d94baed4bbe98"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca",
-      "approvedRevisionId": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca",
+      "candidateRevisionId": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
+      "approvedRevisionId": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/323285777/rectangle_large_type_2_9946ceb99f061328ee01f970468cde17.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.282Z",
-        "revisionId": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca"
+        "url": "https://assets.st-note.com/production/uploads/images/327681858/rectangle_large_type_2_02699a09c2483401f52fcb544212d87e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T15:15:30.446Z",
+        "revisionId": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -45229,7 +45274,12 @@
         "id": "NCI-00394",
         "policyId": "NCP-004",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "りんごの年間支出\n1位は長野県",
+          "subline": "2023年・二人以上の世帯\n県庁所在市等の比較",
+          "subject": "1280×670相当の横長完成カバー。紫と明るい黄色。右側に同じ大きさの無地のりんご2個と無文字の買い物かごを描く。りんごの消費重量ではなく家計の年間支出額を比べる記事。地図・棒グラフ・金額・県の輪郭・人物・顔・手は描かない。2行の補足は下部の広い独立した帯に縦に積み、幅320pxでも読める大きさ。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n21cb13582fe6 2026-10-24公開API本文照合。記事題名「【2023年版】都道府県「りんご消費量」ランキング｜産地・青森を抑えて長野が1位、京都8位の意外」。本文中の 長野県、2023、二人以上、県庁所在市 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -46843,7 +46893,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324641302/rectangle_large_type_2_cfee7467ffa95ecea3c5a0080df8a6ec.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.233Z",
+        "observedAt": "2026-10-23T15:15:28.641Z",
         "revisionId": "52310da06465689dd4828ec4f1beecc6e270429c4fa70cf115368746b9956285"
       },
       "missingVersions": [
@@ -48952,15 +49002,60 @@
               "bytes": 6491
             }
           }
+        },
+        {
+          "sha256": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n523b6fbeabdf/revisions/075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437.png"
+          },
+          "bytes": 1777272,
+          "id": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-33615ca5484d",
+          "createdAt": "2026-10-23T15:07:38.431Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+            "reviewedAt": "2026-10-23T15:09:15.201Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n523b6fbeabdf/inputs/6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403.json"
+              },
+              "bytes": 8466
+            },
+            "production": {
+              "id": "NCI-00418",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "33615ca5484d08641ecca2de5434a405984a280390ec071fc7bfca157a569d6e"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6",
-      "approvedRevisionId": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6",
+      "candidateRevisionId": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
+      "approvedRevisionId": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320191755/rectangle_large_type_2_4695763d34fc1142d9569e1f02adf7c6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.114Z",
-        "revisionId": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6"
+        "url": "https://assets.st-note.com/production/uploads/images/327681987/rectangle_large_type_2_0ba44b4f2d787974d65cad92adc76341.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T15:15:25.922Z",
+        "revisionId": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -48969,7 +49064,12 @@
         "id": "NCI-00418",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "野球をした人\n1位は広島県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバー。無人の野球場に無文字の硬式野球ボールとバットとグローブを描く。選手・人・手・チーム名は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n523b6fbeabdf 2026-10-24公開API本文照合。記事題名「【2021年版】野球をした人が多い県は？ 1位は広島県｜都道府県ランキング」。本文中の 広島県、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -50755,15 +50855,60 @@
               "bytes": 6551
             }
           }
+        },
+        {
+          "sha256": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n67729e8be7c4/revisions/6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c.png"
+          },
+          "bytes": 1913659,
+          "id": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-ede8d32ca4c2",
+          "createdAt": "2026-10-23T15:07:47.720Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+            "reviewedAt": "2026-10-23T15:09:21.641Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-n67729e8be7c4/inputs/b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196.json"
+              },
+              "bytes": 8544
+            },
+            "production": {
+              "id": "NCI-00430",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "ede8d32ca4c2c37f1c4ce37b6cfe34d0197b3b62c222b22d286b1547f8678315"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29",
-      "approvedRevisionId": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29",
+      "candidateRevisionId": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
+      "approvedRevisionId": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320192006/rectangle_large_type_2_37dd55445403c574f720dee5d4b98d72.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.096Z",
-        "revisionId": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29"
+        "url": "https://assets.st-note.com/production/uploads/images/327682148/rectangle_large_type_2_6154d04843a8b4b3f69c8140ccfbaaf7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T15:15:28.643Z",
+        "revisionId": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -50772,7 +50917,12 @@
         "id": "NCI-00430",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "バドミントンをした人\n1位は宮城県",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバー。無人の体育館のバドミントンコートに無地のラケットとシャトルを描く。選手・人・手は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/n67729e8be7c4 2026-10-24公開API本文照合。記事題名「【2021年版】バドミントンをした人が多い県は？ 1位は宮城県｜都道府県ランキング」。本文中の 宮城県、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
@@ -51022,7 +51172,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324653190/rectangle_large_type_2_c7d13d772bfb10f43b9d73bc77c02487.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.153Z",
+        "observedAt": "2026-10-23T15:15:31.713Z",
         "revisionId": "23e2db3c0461280eb3744e975c5af1b9209eef1167dc2a9063c1dae348f1f87e"
       },
       "missingVersions": [
@@ -57672,7 +57822,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/324653252/rectangle_large_type_2_8083941a29124e69153b113add0efc9b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.374Z",
+        "observedAt": "2026-10-23T15:15:37.302Z",
         "revisionId": "3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519"
       },
       "missingVersions": [
@@ -59389,15 +59539,60 @@
               "bytes": 6586
             }
           }
+        },
+        {
+          "sha256": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nefd814b49c5d/revisions/f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42.png"
+          },
+          "bytes": 1811717,
+          "id": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-314487a1e9f1",
+          "createdAt": "2026-10-23T15:07:57.404Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+            "reviewedAt": "2026-10-23T15:09:27.153Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/recovered-nefd814b49c5d/inputs/c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b.json"
+              },
+              "bytes": 8646
+            },
+            "production": {
+              "id": "NCI-00482",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "314487a1e9f14d6dc8cf8bc94dd5141686052b405686e7c35bfb31fd523e6bee"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc",
-      "approvedRevisionId": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc",
+      "candidateRevisionId": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
+      "approvedRevisionId": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/320193383/rectangle_large_type_2_a910327dcbabf8f428b4de617841d1c3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:23.133Z",
-        "revisionId": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc"
+        "url": "https://assets.st-note.com/production/uploads/images/327682278/rectangle_large_type_2_b8bb83d06cbaf0b8fc374646beb66f47.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T15:15:30.555Z",
+        "revisionId": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -59406,7 +59601,12 @@
         "id": "NCI-00482",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "スポーツをした人\n1位は東京都",
+          "subline": "2021年・10歳以上",
+          "subject": "1280×670相当の横長完成カバー。無人の運動施設でランニングシューズ、無地のボール、ラケットを大きさ控えめに描き、複数のスポーツ全般を示す。人物・手・競技者・動物は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+          "evidence": "https://note.com/stats47/n/nefd814b49c5d 2026-10-24公開API本文照合。記事題名「【2021年版】スポーツをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の 東京都、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+        }
       }
     },
     {
