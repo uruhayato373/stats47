@@ -1,68 +1,68 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-23T08:12:45.216Z",
+  "generatedAt": "2026-10-23T09:15:44.304Z",
   "status": "pass",
   "articles": [
     {
-      "key": "a-kakei-okayama",
+      "key": "a-kakei-kyoto",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327545888/rectangle_large_type_2_a1d0ed693e90b61b0d23bb9a9fb44f86.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:36.282Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327565710/rectangle_large_type_2_2d06adac64c7347108b34cc5ca64309e.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:35.914Z"
     },
     {
-      "key": "a-kakei-osaka",
+      "key": "a-kakei-kochi",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546217/rectangle_large_type_2_1fe110c5ce118e0fd437fccb6da41c2b.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:36.309Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327565360/rectangle_large_type_2_39a0c6d91c7d7df2d40cb8a74cc97a71.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:37.396Z"
     },
     {
-      "key": "a-kakei-oita",
+      "key": "a-kakei-kumamoto",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327545781/rectangle_large_type_2_6b3063d40b5c20dc0e9810cdd359bbb4.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:36.355Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327565587/rectangle_large_type_2_8497c31a0e134f153464f8b80cb1ac50.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:37.547Z"
     },
     {
-      "key": "a-kakei-okinawa",
+      "key": "a-kakei-kanagawa",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546114/rectangle_large_type_2_668574aa52eb03f2ca2f96026af6a1c5.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:37.177Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327565251/rectangle_large_type_2_42133021ed9488aa9a75be7c7893d42a.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:39.484Z"
     },
     {
-      "key": "a-kakei-saga",
+      "key": "a-kakei-mie",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546359/rectangle_large_type_2_1cc6b85b0580a22d87d55f90c95cd2da.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:40.157Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327565893/rectangle_large_type_2_5efb2490b48d70ae76837b6614f1bc43.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:39.690Z"
     },
     {
-      "key": "a-kakei-shiga",
+      "key": "a-kakei-miyagi",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546547/rectangle_large_type_2_74a378245542541f17e9b1aa6a1414d6.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:40.510Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327566008/rectangle_large_type_2_e77644abe40a50a9e85c0cb0ab9a4c79.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:40.754Z"
     },
     {
-      "key": "a-kakei-saitama",
+      "key": "a-kakei-miyazaki",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546446/rectangle_large_type_2_6dd5d0772cf324ee01ee431c7120dd02.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:40.975Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327566192/rectangle_large_type_2_76454a1f4e2bef8afc977bffd9739b74.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:41.023Z"
     },
     {
-      "key": "a-kakei-shimane",
+      "key": "a-kakei-nagano",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546638/rectangle_large_type_2_bb066a6eecce07f959a9765f75d74aa8.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:41.952Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327566315/rectangle_large_type_2_c66b3af63a330c8e95a123fa94d7e735.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:42.579Z"
     },
     {
-      "key": "a-kakei-shizuoka",
+      "key": "a-kakei-nagasaki",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546749/rectangle_large_type_2_af09f71354edfa9af724fbfeb56f0484.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:44.925Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327566481/rectangle_large_type_2_4de04a10acf38488ad4af2ae6f0fa714.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:43.105Z"
     },
     {
-      "key": "a-kakei-tochigi",
+      "key": "a-kakei-nara",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/327546843/rectangle_large_type_2_1be791067874a72213088880b462a533.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-23T08:12:45.148Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/327566578/rectangle_large_type_2_b91536bc82aacddf250b989040f85e5e.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-23T09:15:44.236Z"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-23T08:12:45.183Z",
+  "updatedAt": "2026-10-23T09:15:44.270Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -9237,15 +9237,60 @@
               "planSha256": "e50c4149003122d389777b255419a27538698cfae6da5f71ba9e972dc9491c88"
             }
           }
+        },
+        {
+          "sha256": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kanagawa/revisions/dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1.png"
+          },
+          "bytes": 1589491,
+          "id": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-aca6f928a6b5",
+          "createdAt": "2026-10-23T09:01:40.387Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "神奈川県の主域輪郭と横浜市・2024年・二人以上の世帯、教育費と学習用の本を新旧比較。原寸と幅320pxで文字・余白・無人の題材を確認。",
+            "reviewedAt": "2026-10-23T09:04:44.513Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-kanagawa/inputs/74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2.json"
+              },
+              "bytes": 12930
+            },
+            "production": {
+              "id": "NCI-00078",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "aca6f928a6b52c6cb1ceff9e42cf69c2a18d08685196ef5408866431f53f07f0"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b",
-      "approvedRevisionId": "e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b",
+      "candidateRevisionId": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
+      "approvedRevisionId": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324592051/rectangle_large_type_2_1b3f3dc3b744ea0ef6067b018f9cecb4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.713Z",
-        "revisionId": "e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b"
+        "url": "https://assets.st-note.com/production/uploads/images/327565251/rectangle_large_type_2_42133021ed9488aa9a75be7c7893d42a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:39.484Z",
+        "revisionId": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9253,12 +9298,17 @@
       "production": {
         "id": "NCI-00078",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
-          "headline": "横浜市の家計\n教育費に注目",
-          "subline": "家計調査で比べる\n2024年・二人以上の世帯",
-          "subject": "暖かいオレンジとクリーム、淡い黄色。右側の木製机に、大きく開いた白紙の学習用の本と柔らかい光の卓上ランプを一点ずつ。教育への支出を示す生活の静物とし、実在する学校・地域のランドマークを足さない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
-          "evidence": "https://note.com/stats47/n/nd0326279977a 2026-10-15公開本文確認。本文は神奈川県全体ではなく横浜市の家計調査、2024年・二人以上の世帯。47市平均比で教育1.51倍が最大の乖離。カバーは倍率を使わず、教育費という注目点と調査範囲を表示。 人物・キャラクターは使わない。"
+          "headline": "神奈川県の家計\n教育費に注目",
+          "subline": "横浜市・2024年\n二人以上の世帯",
+          "subject": "添付は神奈川県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習用の本を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nd0326279977a 2026-10-23公開API本文照合。横浜市の2024年・二人以上の世帯の家計調査。教育1.51倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は神奈川県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は横浜市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "横浜市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
         }
       }
     },
@@ -9415,15 +9465,60 @@
               "planSha256": "05ee4f6d5c52a43c48143dc9b9fbeeef0c595c18cb942fa6b0ef8f10a03dc0df"
             }
           }
+        },
+        {
+          "sha256": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kochi/revisions/dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5.png"
+          },
+          "bytes": 1475435,
+          "id": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-906d7e1f4664",
+          "createdAt": "2026-10-23T09:01:52.832Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "高知県の主域輪郭と高知市・2024年・二人以上の世帯、住まいと無人の家を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:04:46.731Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-kochi/inputs/5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16.json"
+              },
+              "bytes": 12894
+            },
+            "production": {
+              "id": "NCI-00079",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "906d7e1f466485730fbfe7164143b23545927eb7328e70923fb5d0944616bd40"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f",
-      "approvedRevisionId": "9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f",
+      "candidateRevisionId": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
+      "approvedRevisionId": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324592255/rectangle_large_type_2_2ba6c351d11cb50a94139845a178514a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.627Z",
-        "revisionId": "9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f"
+        "url": "https://assets.st-note.com/production/uploads/images/327565360/rectangle_large_type_2_39a0c6d91c7d7df2d40cb8a74cc97a71.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:37.396Z",
+        "revisionId": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9431,12 +9526,17 @@
       "production": {
         "id": "NCI-00079",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
-          "headline": "高知市の家計\n住まいに注目",
-          "subline": "家計調査で比べる\n2024年・二人以上の世帯",
-          "subject": "暖かいオレンジとクリーム、淡い黄色。右側に一般的な住宅の小さな模型を大きく一棟と、その手前に無文字の家の鍵を一点。住居費を示す静物であり、高知の実在建築や地域の住宅の典型として描かない。古さ・貧困・地域の優劣を連想させる演出をしない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
-          "evidence": "https://note.com/stats47/n/n29417de32c83 2026-10-15公開本文確認。本文は高知市、2024年・二人以上の世帯の支出。47市平均比で住居1.39倍が最大の乖離と記載。県全体や家賃の水準そのものに置き換えず、倍率・因果の断定をカバーへ載せない。 人物・キャラクターは使わない。"
+          "headline": "高知県の家計\n住まいに注目",
+          "subline": "高知市・2024年\n二人以上の世帯",
+          "subject": "添付は高知県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n29417de32c83 2026-10-23公開API本文照合。高知市の2024年・二人以上の世帯の家計調査。住居1.39倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は高知県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は高知市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "高知市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
         }
       }
     },
@@ -9593,15 +9693,60 @@
               "planSha256": "074ae24f26e3117b44a62958b64d1e7a9f9e1be66cb3b97402d1aaa6b3af7ffc"
             }
           }
+        },
+        {
+          "sha256": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kumamoto/revisions/6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765.png"
+          },
+          "bytes": 1601973,
+          "id": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-14418c0640c5",
+          "createdAt": "2026-10-23T09:02:03.825Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "熊本県の主域輪郭と熊本市・2024年・二人以上の世帯、教育費とかばんを新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:04:50.995Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-kumamoto/inputs/f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b.json"
+              },
+              "bytes": 12909
+            },
+            "production": {
+              "id": "NCI-00080",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "14418c0640c599723eb842dd59aebff909aec37f40580940d3a4f0eacb028bc8"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0",
-      "approvedRevisionId": "a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0",
+      "candidateRevisionId": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
+      "approvedRevisionId": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/324592756/rectangle_large_type_2_1e7fb3ee85d6a94c217b7820612af123.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:16.609Z",
-        "revisionId": "a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0"
+        "url": "https://assets.st-note.com/production/uploads/images/327565587/rectangle_large_type_2_8497c31a0e134f153464f8b80cb1ac50.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:37.547Z",
+        "revisionId": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9609,12 +9754,17 @@
       "production": {
         "id": "NCI-00080",
         "policyId": "NCP-002",
-        "policyVersion": 2,
+        "policyVersion": 3,
         "brief": {
-          "headline": "熊本市の家計\n教育費に注目",
-          "subline": "家計調査で比べる\n2024年・二人以上の世帯",
-          "subject": "暖かいオレンジとクリーム、淡い黄色。右側に無地の落ち着いた色の通学かばんと数冊を一つにまとめた無文字の学習ノートを大きく描く。教育への支出という生活の題材を伝え、特定の学校や人物を表現しない。地域の実景や名物を足さない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
-          "evidence": "https://note.com/stats47/n/n7e98a46bf791 2026-10-15公開本文確認。本文は熊本県全体ではなく熊本市の家計調査、2024年・二人以上の世帯。47県庁所在市の単純平均比で教育1.44倍と記載。カバーは倍率を使わず、地域と注目する費目、年と世帯範囲だけを示す。 人物・キャラクターは使わない。"
+          "headline": "熊本県の家計\n教育費に注目",
+          "subline": "熊本市・2024年\n二人以上の世帯",
+          "subject": "添付は熊本県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の青い通学かばんを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n7e98a46bf791 2026-10-23公開API本文照合。熊本市の2024年・二人以上の世帯の家計調査。教育1.44倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は熊本県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は熊本市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "熊本市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
         }
       }
     },
@@ -9701,15 +9851,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-kyoto/images/cover-1280x670.png",
             "sourceSha256": "b376010d971db81184be3ad2c677ac403681ae302d005288077625ea9e3b3752"
           }
+        },
+        {
+          "sha256": "9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kyoto/revisions/9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e.png"
+          },
+          "bytes": 1548867,
+          "id": "9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-fc837b6dd27b",
+          "createdAt": "2026-10-23T09:02:13.721Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cbdf7b9b668f03870838b7ff62656265906a396363a0c4d80a286015282bd675"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "京都府の主域輪郭と京都市・2024年・二人以上の世帯、教育費と無文字ノートを新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:04:55.016Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cbdf7b9b668f03870838b7ff62656265906a396363a0c4d80a286015282bd675",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-kyoto/inputs/cbdf7b9b668f03870838b7ff62656265906a396363a0c4d80a286015282bd675.json"
+              },
+              "bytes": 12900
+            },
+            "production": {
+              "id": "NCI-00081",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "fc837b6dd27b1839aa30fe81414112540743f85e11b6782041b7a6c9d111a1c7"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
-      "approvedRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
+      "candidateRevisionId": "9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e",
+      "approvedRevisionId": "9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910170/rectangle_large_type_2_952e255868fd0829a31e7b0c3e375454.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.633Z",
-        "revisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd"
+        "url": "https://assets.st-note.com/production/uploads/images/327565710/rectangle_large_type_2_2d06adac64c7347108b34cc5ca64309e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:35.914Z",
+        "revisionId": "9d0ffb2c742e1f4cf4c88cf754c29490cba09329b0675965d725de37bc58057e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9718,7 +9913,17 @@
         "id": "NCI-00081",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "京都府の家計\n教育費に注目",
+          "subline": "京都市・2024年\n二人以上の世帯",
+          "subject": "添付は京都府の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n2a18f8e7098c 2026-10-23公開API本文照合。京都市の2024年・二人以上の世帯の家計調査。教育1.40倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は京都府の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は京都市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "京都市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -9804,15 +10009,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-mie/images/cover-1280x670.png",
             "sourceSha256": "724b5ff62223792feaa61ffc73800ea7b2edb8ae261e33e5f7327968ccd250b3"
           }
+        },
+        {
+          "sha256": "1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-mie/revisions/1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b.png"
+          },
+          "bytes": 1743228,
+          "id": "1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-4e5c2da6325a",
+          "createdAt": "2026-10-23T09:02:24.057Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b027d50bf121c1691912f74b62dc2cc85a2d584b5385bd7e0683c3911916080d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "三重県の主域輪郭と津市・2024年・二人以上の世帯、住まいと無人の家を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:04:58.322Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b027d50bf121c1691912f74b62dc2cc85a2d584b5385bd7e0683c3911916080d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-mie/inputs/b027d50bf121c1691912f74b62dc2cc85a2d584b5385bd7e0683c3911916080d.json"
+              },
+              "bytes": 12855
+            },
+            "production": {
+              "id": "NCI-00082",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "4e5c2da6325a83a41fdb84d34c12c44e079e6298dc60acd9b74320eeed85d8c9"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
-      "approvedRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
+      "candidateRevisionId": "1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b",
+      "approvedRevisionId": "1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910199/rectangle_large_type_2_73607d26e0ecee27bd9c9f97a4973879.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.632Z",
-        "revisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8"
+        "url": "https://assets.st-note.com/production/uploads/images/327565893/rectangle_large_type_2_5efb2490b48d70ae76837b6614f1bc43.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:39.690Z",
+        "revisionId": "1d631a59151300c9732ba3d6f32f09ca48184c5af234704218ae9ad41910643b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9821,7 +10071,17 @@
         "id": "NCI-00082",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "三重県の家計\n住まいに注目",
+          "subline": "津市・2024年\n二人以上の世帯",
+          "subject": "添付は三重県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n8113876eaeab 2026-10-23公開API本文照合。津市の2024年・二人以上の世帯の家計調査。住居1.28倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は三重県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は津市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "津市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -9907,15 +10167,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-miyagi/images/cover-1280x670.png",
             "sourceSha256": "cd0bda302bfd21769a8fbaab02dfcf51e87a6faf90a4538e1b3d981ee0aef5ba"
           }
+        },
+        {
+          "sha256": "26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-miyagi/revisions/26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9.png"
+          },
+          "bytes": 1467499,
+          "id": "26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-90ec1aa14234",
+          "createdAt": "2026-10-23T09:02:34.794Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "831beb07f95a8155d9f1582b22f3693c7154af781e7b497ecd7388d00c55d68d"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "宮城県の主域輪郭と仙台市・2024年・二人以上の世帯、住まいと無人の家を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:05:30.701Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "831beb07f95a8155d9f1582b22f3693c7154af781e7b497ecd7388d00c55d68d",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-miyagi/inputs/831beb07f95a8155d9f1582b22f3693c7154af781e7b497ecd7388d00c55d68d.json"
+              },
+              "bytes": 12889
+            },
+            "production": {
+              "id": "NCI-00083",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "90ec1aa14234eff40fc15ed41f0854268df3733df64057b75a8837fb953d13a9"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
-      "approvedRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
+      "candidateRevisionId": "26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9",
+      "approvedRevisionId": "26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910258/rectangle_large_type_2_2737ea570a805fc6c4ebe3b2f9624db4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.606Z",
-        "revisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719"
+        "url": "https://assets.st-note.com/production/uploads/images/327566008/rectangle_large_type_2_e77644abe40a50a9e85c0cb0ab9a4c79.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:40.754Z",
+        "revisionId": "26fda39ae4fb6f74c4d911ebfbfde5f740f83c42b83165d566d05d61b71579f9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -9924,7 +10229,17 @@
         "id": "NCI-00083",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "宮城県の家計\n住まいに注目",
+          "subline": "仙台市・2024年\n二人以上の世帯",
+          "subject": "添付は宮城県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nb479aff3cf05 2026-10-23公開API本文照合。仙台市の2024年・二人以上の世帯の家計調査。住居1.67倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は宮城県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は仙台市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "仙台市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -10010,15 +10325,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-miyazaki/images/cover-1280x670.png",
             "sourceSha256": "985a1c775728b93e5ccf12a70ce8290613a4ce17b3d6a92fbd7bcb2b37d2098e"
           }
+        },
+        {
+          "sha256": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-miyazaki/revisions/70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14.png"
+          },
+          "bytes": 1518279,
+          "id": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-6c8bc2f66340",
+          "createdAt": "2026-10-23T09:02:43.593Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "宮崎県の主域輪郭と宮崎市・2024年・二人以上の世帯、教育費と無文字ノートを新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:05:36.033Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-miyazaki/inputs/3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9.json"
+              },
+              "bytes": 12897
+            },
+            "production": {
+              "id": "NCI-00084",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "6c8bc2f663408cf945a9712574220136dab4c1bce756f9e49ba9a99b947aae74"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
-      "approvedRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
+      "candidateRevisionId": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
+      "approvedRevisionId": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910296/rectangle_large_type_2_320dc00ac06f0efab1f4e3a63207bced.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.539Z",
-        "revisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366"
+        "url": "https://assets.st-note.com/production/uploads/images/327566192/rectangle_large_type_2_76454a1f4e2bef8afc977bffd9739b74.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:41.023Z",
+        "revisionId": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -10027,7 +10387,17 @@
         "id": "NCI-00084",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "宮崎県の家計\n教育費に注目",
+          "subline": "宮崎市・2024年\n二人以上の世帯",
+          "subject": "添付は宮崎県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n7f0be4fef37c 2026-10-23公開API本文照合。宮崎市の2024年・二人以上の世帯の家計調査。教育0.61倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は宮崎県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は宮崎市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "宮崎市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -10113,15 +10483,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nagano/images/cover-1280x670.png",
             "sourceSha256": "a7560765a008fe747f1678da5f1bdf24e2afb500e33fcf22455c911b6472cd22"
           }
+        },
+        {
+          "sha256": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nagano/revisions/82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584.png"
+          },
+          "bytes": 1647180,
+          "id": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-fbe4e36bea8f",
+          "createdAt": "2026-10-23T09:02:54.201Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "長野県の主域輪郭と長野市・2024年・二人以上の世帯、教育費と無人の学習机を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+            "reviewedAt": "2026-10-23T09:05:34.387Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-nagano/inputs/c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc.json"
+              },
+              "bytes": 12879
+            },
+            "production": {
+              "id": "NCI-00085",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "fbe4e36bea8ffd7587bf1a2a36c93225770578d11895f266e9bd713120fca608"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
-      "approvedRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
+      "candidateRevisionId": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
+      "approvedRevisionId": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910309/rectangle_large_type_2_ecd928ea7c87d19ff0187fedbdd633a4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.529Z",
-        "revisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d"
+        "url": "https://assets.st-note.com/production/uploads/images/327566315/rectangle_large_type_2_c66b3af63a330c8e95a123fa94d7e735.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:42.579Z",
+        "revisionId": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -10130,7 +10545,17 @@
         "id": "NCI-00085",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "長野県の家計\n教育費に注目",
+          "subline": "長野市・2024年\n二人以上の世帯",
+          "subject": "添付は長野県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習机を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nb6061a164201 2026-10-23公開API本文照合。長野市の2024年・二人以上の世帯の家計調査。教育0.69倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は長野県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は長野市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "長野市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -10216,15 +10641,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nagasaki/images/cover-1280x670.png",
             "sourceSha256": "1006a7f536d0c8a133a453a5b9eb096d91c985c1c1b835506df16349c944ee2a"
           }
+        },
+        {
+          "sha256": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nagasaki/revisions/ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165.png"
+          },
+          "bytes": 1606593,
+          "id": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-a3cbec40e642",
+          "createdAt": "2026-10-23T09:03:04.867Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "長崎県の主域輪郭と長崎市・2024年・二人以上の世帯、バス代と無人のバスを新旧比較。初稿の車内人影を破棄し、修正版の原寸と幅320pxで全文字を確認。",
+            "reviewedAt": "2026-10-23T09:08:29.553Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-nagasaki/inputs/7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c.json"
+              },
+              "bytes": 13159
+            },
+            "production": {
+              "id": "NCI-00086",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "a3cbec40e642c2b73e4c738a039d6ad851acf3161f741814528d9f092e440745"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
-      "approvedRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
+      "candidateRevisionId": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
+      "approvedRevisionId": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319910348/rectangle_large_type_2_42f12010a78a386a4029cdb8ce8db6ae.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.515Z",
-        "revisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3"
+        "url": "https://assets.st-note.com/production/uploads/images/327566481/rectangle_large_type_2_4de04a10acf38488ad4af2ae6f0fa714.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:43.105Z",
+        "revisionId": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -10233,7 +10703,17 @@
         "id": "NCI-00086",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "長崎県の家計\nバス代に注目",
+          "subline": "長崎市・2024年\n二人以上の世帯",
+          "subject": "添付は長崎県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に完全に無人の小さなバスの模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/nd547ff50cbe6 2026-10-23公開API本文照合。長崎市の2024年・二人以上の世帯の家計調査。本文にバス代3.03倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は長崎県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は長崎市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "長崎市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
@@ -10319,15 +10799,60 @@
             "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nara/images/cover-1280x670.png",
             "sourceSha256": "d93c50b1d34fad23558ed71eac5ad32b38abd4db1b1896b6099115f192834813"
           }
+        },
+        {
+          "sha256": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nara/revisions/ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253.png"
+          },
+          "bytes": 1471422,
+          "id": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
+          "kind": "candidate",
+          "version": "pop-NCP-002-v3-b3c445c7e8f5",
+          "createdAt": "2026-10-23T09:03:15.142Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "奈良県の主域輪郭と奈良市・2024年・二人以上の世帯、教育費と無文字ノートを新旧比較。初稿の署名欠けを破棄し、修正版の原寸と幅320pxで全文字を確認。",
+            "reviewedAt": "2026-10-23T09:07:16.016Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-kakei-nara/inputs/ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3.json"
+              },
+              "bytes": 13068
+            },
+            "production": {
+              "id": "NCI-00087",
+              "policyId": "NCP-002",
+              "policyVersion": 3,
+              "planSha256": "b3c445c7e8f5374b07249e5467188373d16d6609fcf25c427dcb39716211f95d"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
-      "approvedRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
+      "candidateRevisionId": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
+      "approvedRevisionId": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/319911101/rectangle_large_type_2_69f3cb9005c32f68ba47e09ee1566e6a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-19T11:33:17.479Z",
-        "revisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3"
+        "url": "https://assets.st-note.com/production/uploads/images/327566578/rectangle_large_type_2_b91536bc82aacddf250b989040f85e5e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-23T09:15:44.236Z",
+        "revisionId": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -10336,7 +10861,17 @@
         "id": "NCI-00087",
         "policyId": "NCP-002",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "奈良県の家計\n教育費に注目",
+          "subline": "奈良市・2024年\n二人以上の世帯",
+          "subject": "添付は奈良県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+          "evidence": "https://note.com/stats47/n/n366d898d8107 2026-10-23公開API本文照合。奈良市の2024年・二人以上の世帯の家計調査。教育1.74倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は奈良県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は奈良市であり県全域の観測図ではない。人物・キャラクターなし。",
+          "dataScope": {
+            "place": "奈良市",
+            "year": "2024",
+            "households": "二人以上の世帯"
+          }
+        }
       }
     },
     {
