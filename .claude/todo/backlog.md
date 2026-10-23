@@ -2150,7 +2150,7 @@ updated: 2026-10-19
 - **事象**: stats47 の配信先は Cloudflare Workers (OpenNext) だが、`cc-estat-18-cache-r2` と `cc-estat-19-skill-pipeline` の本文に「Cloudflare Pages」の表記が残っている (2026-10-07、連載の最終回 cc-estat-20 を書き直した writer が報告)。cc-estat-19 のトークン作成例には、使っていない D1 の Edit 権限も含まれている (cc-estat-20 の critic が報告)。cc-estat-18 の `wrangler r2 object put` の例には `--remote` が無く、wrangler 4.148.0 ではローカルに書いてしまう。`remote = true` のときは `preview_bucket_name` を外す注意も要る (cc-estat-20 の writer がローカルで再現)。cc-estat-20 も本文は Workers に直したが、タグは未登録の `CloudflareWorkers` にすると 410 になるため `CloudflarePages` のままにしてある。記事の tags の `CloudflarePages` を `CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成が要る (未登録のタグは 410 になる)。
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
-- **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/{cc-estat-18-cache-r2,cc-estat-19-skill-pipeline}/` (未コミット)。Pages → Workers (OpenNext)、`wrangler r2 object put/get` に `--remote`、`preview_bucket_name` と `remote = true` の注意、D1 の権限をトークン例から削除、`claude -p` の起動例、cron の曜日の誤りを直した。2 本とも quality-gate blocker 0・critic PASS (BLOCK・MAJOR 0)。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。**残り**: 最終回 cc-estat-20 のタグが `CloudflarePages` のまま (差し替えには known-tag-keys の再生成が要る)、cc-estat-20 にも次回予告などの食い違いが残っていないか確認する。
+- **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/{cc-estat-18-cache-r2,cc-estat-19-skill-pipeline}/` (未コミット)。Pages → Workers (OpenNext)、`wrangler r2 object put/get` に `--remote`、`preview_bucket_name` と `remote = true` の注意、D1 の権限をトークン例から削除、`claude -p` の起動例、cron の曜日の誤りを直した。2 本とも quality-gate blocker 0・critic PASS (BLOCK・MAJOR 0)。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。**残り**: 最終回 cc-estat-20 のタグが `CloudflarePages` のまま (差し替えには known-tag-keys の再生成が要る)、cc-estat-20 にも次回予告などの食い違いが残っていないか確認する。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
@@ -2208,7 +2208,7 @@ updated: 2026-10-19
 - **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
 - **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
 - **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
-- **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/<slug>/` (未コミット)。3 本とも quality-gate blocker 0・critic PASS。
+- **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/<slug>/` (未コミット)。3 本とも quality-gate blocker 0・critic PASS。
   - alcohol: 2018 年度の都道府県値は一次資料で再現できず、2023 年度の R2 値 (46 都道府県) で図と本文を作り直した。焼酎は 9.5% に直した。全国の酒類別構成比は 2018 年度のまま (年は明記)。
   - birth-death: 東京の自然減・社会増減との取り違えを直し、図を合計特殊出生率に作り直した。critic の MAJOR が 6 件残る (うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認)。公開前に MAJOR を直すかを決める。
   - automotive: 輸送用機械の図 4 枚は e-Stat から取り直せず (app id が CI 専任) 外し、全業種合計の製造品出荷額等で書き直した。**本文に自動車の数値が無く、title「自動車産業の県別勢力図」とずれる** (title を変えると背景画像の作り直しが要るので据え置き)。CI の app id で輸送用機械の県別出荷額を取り直すか、title と背景を作り直すかを決めてから公開する。
