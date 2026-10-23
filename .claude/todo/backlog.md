@@ -4867,6 +4867,20 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
 - **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番 (デプロイ run 39763716073 の後) で `ai-content.json` は 200、ページに「データの考察」と FAQPage が出て、解説の無い指標 (`elderly-population-ratio`) には出ないことを確認した。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
 
+### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]
+
+- **証拠**: 2026-10-23 公開の `municipality-population-change-census-2025` で、市区町村の図の `<source-link>` は `/ranking/<key>` (都道府県版) にしか張れず、市区町村ランキング `/municipalities/ranking/<key>` へは「あわせて見る」のテキストリンクで代用した。カードの部品 (RankingLinkCard) が `/ranking/` だけを受け付け、構造の検査 (`article-structure-lint.mjs`) も `/municipalities/ranking/` を数えない。
+- **次**: カードの部品と検査の両方で `/municipalities/ranking/<key>` を受け付けるか決める。受け付けるなら同じ記事のカードを市区町村版へ差し替える。
+- **完了条件**: 市区町村の図の直下に市区町村ランキングのカードを置いた記事が quality-gate を通り、本番でカードが市区町村ランキングへ移る。
+
+### [BLOG-TAG-GATE-01] 未登録のタグを持つ記事が quality-gate を通り、公開の段で止まる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-23] [領域:サイト]
+
+- **証拠**: 2026-10-23 に `municipality-population-change-census-2025` (タグ「東京23区」) が quality-gate を blocker 0 で通ったが、`blog-auto-publish.yml` run 39898347149 の「Regenerate blog index」で `未登録タグ: …: 東京23区。content.tagsのID台帳へ登録してください。` と落ちた。登録済みの「東京都」へ替えて再 push した。
+- **次**: quality-gate で frontmatter の tags を `data/content/tags.json` と照らし、未登録を blocker にする (公開の段と同じ判定を使う)。
+- **完了条件**: 未登録タグの記事で quality-gate が blocker を出すことをテストで固定する。
+
 ### [MUNI-AI-CONTENT-EXPAND-01] 市区町村ランキングの解説を需要のある指標へ広げ、監査の穴を 2 つ塞ぐ
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:データ]
 
