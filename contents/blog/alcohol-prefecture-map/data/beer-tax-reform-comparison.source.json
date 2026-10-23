@@ -1,0 +1,20 @@
+{
+  "kind": "manual",
+  "sourceName": "国税庁「発泡性酒類の段階的な税率変更に係る品目及び税率適用区分の表示方法の手引き」（令和5年8月）",
+  "source": "https://www.nta.go.jp/taxes/sake/pdf/0023008-027.pdf",
+  "url": "https://www.nta.go.jp/taxes/sake/pdf/0023008-027.pdf",
+  "label": "ビール系飲料の酒税（350ml換算）",
+  "unit": "円",
+  "year": "2020年9月まで・2020年10月・2023年10月・2026年10月",
+  "transform": "手引き掲載の税率（1kl当たり）の350ml換算額をそのまま転記。ビールは220,000円・200,000円・181,000円・155,000円、発泡酒（麦芽比率25%未満）は134,250円で2026年10月に155,000円、新ジャンルは80,000円・108,000円・2023年10月に発泡酒（麦芽比率25%未満）と同じ134,250円・2026年10月に155,000円",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "酒税法の税率表を図示した制度資料で、統計調査を原典としないため",
+  "displaySources": [
+    {
+      "label": "国税庁「発泡性酒類の段階的な税率変更に係る品目及び税率適用区分の表示方法の手引き」（令和5年8月）",
+      "url": "https://www.nta.go.jp/taxes/sake/pdf/0023008-027.pdf"
+    }
+  ],
+  "fetchedAt": "2026-10-23",
+  "restore": "curl -sL -o 0023008-027.pdf https://www.nta.go.jp/taxes/sake/pdf/0023008-027.pdf → pdftotext -layout の税率図（77.00/70.00/63.35/54.25 円ほか）"
+}

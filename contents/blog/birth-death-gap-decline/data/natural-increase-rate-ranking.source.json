@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "natural-increase-rate",
+  "year": "2024",
+  "unit": "‰",
+  "label": "自然増減率",
+  "readerLabel": "自然増減率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/natural-increase-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug birth-death-gap-decline --keys natural-increase-rate --year 2024 --data-name natural-increase-rate-ranking （取得後に chartType:\"bar\" と表示用の title/subtitle/highLabel/lowLabel/palette を付ける）",
+  "fetchedAt": "2026-10-06T07:08:58.918Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

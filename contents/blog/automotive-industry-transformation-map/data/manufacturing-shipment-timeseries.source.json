@@ -1,0 +1,12 @@
+{
+  "kind": "metric",
+  "metricKey": "manufacturing-shipment-amount",
+  "source": "r2:app/stats/manufacturing-shipment-amount/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat 社会・人口統計体系 (0000010103 / C3401) → R2",
+  "label": "製造品出荷額等",
+  "year": "2005-2023",
+  "unit": "兆円",
+  "transform": "2023年の上位5府県を抽出。百万円÷1,000,000を小数1桁に丸め",
+  "fetchedAt": "2026-10-06",
+  "generatedBy": "manual (R2 values.json)"
+}

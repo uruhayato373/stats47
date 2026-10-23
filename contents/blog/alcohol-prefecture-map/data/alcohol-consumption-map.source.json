@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "alcohol-sales-per-adult-total",
+  "year": "2023",
+  "unit": "l",
+  "label": "成人1人あたり酒類販売(消費)数量",
+  "readerLabel": "成人1人あたり酒類販売(消費)数量",
+  "transform": "all46 (choropleth・値は ranking と同一。沖縄県は一次資料の表に無い)",
+  "source": "r2:app/ranking/alcohol-sales-per-adult-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug alcohol-prefecture-map --keys alcohol-sales-per-adult-total --year 2023 --data-name alcohol-consumption-ranking --with-map （出力名 alcohol-consumption-ranking-map を alcohol-consumption-map に改名）",
+  "fetchedAt": "2026-10-23T05:51:19.552Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
