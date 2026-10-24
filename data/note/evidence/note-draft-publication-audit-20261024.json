@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T15:17:36.903Z",
+  "observedAt": "2026-10-24T16:25:46.205Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 10,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 0,
-    "hold-product-sales": 57,
-    "published-verified": 18,
+    "hold-product-sales": 55,
+    "published-verified": 20,
     "merged-existing": 13
   },
   "currentCatalog": {
-    "published": 420,
-    "draft": 69
+    "published": 422,
+    "draft": 67
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -2294,12 +2294,13 @@
       "productionId": "NCI-00362",
       "approvedCoverRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "P-12 v4 archive SHA and private R2 readback verified; manuscript sample map updated to current 2025 population map; imagegen cover approved in admin at 320px",
-        "note.com daily file upload limit active after 10 attachments; publish when limit resets and verify ZIP after paid boundary"
+        "P-12 archive has eight advertised files, verified SHA and private R2 readback; manuscript discloses Office real-device testing is pending",
+        "Published note API verified stats47 account, title, JPY 9800 price, 99 tags and paid separator",
+        "Authenticated article body contains the ZIP once after the paid boundary; public body excludes it; approved cover pixels and body invariants passed"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/nfa7d235eba85",
       "publicationPreparation": {
         "archiveSha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
         "archiveBytes": 20454473,
@@ -2307,7 +2308,36 @@
         "privateR2ReadbackVerified": true,
         "coverApproved": true,
         "bodySavedAt": "2026-10-24T09:57:08.985Z",
-        "status": "ready-awaiting-note-upload-quota"
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T16:17:02.841Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 9800,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328108626/rectangle_large_type_2_a20b7efd70ea5453e06527827d8cc689.png?fit=bounds&quality=85&width=1280",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-a91314940851f6f1.json",
+        "bodyManifestSha256": "cc572e00e7b5595eafcbbd4fae63d081d3cc0431b26bf0e46075ddb3b26e26c7",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-12/v4-20261024-mac-r2/833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379.zip",
+          "sha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
+          "bytes": 20454473,
+          "entries": 8,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
       }
     },
     {
@@ -2319,12 +2349,13 @@
       "productionId": "NCI-00367",
       "approvedCoverRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "P-14 v4 archive SHA and private R2 readback verified; manuscript map sample updated to current 2024 beef expenditure map; imagegen cover approved in admin at 320px",
-        "note.com daily file upload limit active after 10 attachments; publish after reset and verify ZIP after paid boundary"
+        "P-14 archive has seven advertised files, verified SHA and private R2 readback; manuscript discloses Office real-device testing is pending",
+        "Published note API verified stats47 account, title, JPY 5000 price, 99 tags and paid separator",
+        "Authenticated article body contains the ZIP once after the paid boundary; public body excludes it; approved cover pixels and body invariants passed"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n554a047cf5be",
       "publicationPreparation": {
         "archiveSha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
         "archiveBytes": 13129305,
@@ -2332,7 +2363,36 @@
         "privateR2ReadbackVerified": true,
         "coverApproved": true,
         "bodySavedAt": "2026-10-24T12:00:05.203Z",
-        "status": "ready-awaiting-note-upload-quota"
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T16:25:46.205Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-5967013781b32eb0.json",
+        "bodyManifestSha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
+          "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+          "bytes": 13129305,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
       }
     },
     {

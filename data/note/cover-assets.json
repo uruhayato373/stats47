@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T15:17:04.001Z",
+  "updatedAt": "2026-10-24T16:25:58.290Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -42720,7 +42720,7 @@
     },
     {
       "articleKey": "prefecture-all-in-one-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nfa7d235eba85",
       "revisions": [
         {
           "sha256": "2c445fab6e80776e065042aaa1ac2c8a82b8e382e48c67726aa266923a58ed14",
@@ -42844,11 +42844,41 @@
               "planSha256": "421be49e7b6a784dffd39d792f03c1c9886b3b1d6bb93bd8627dec263c9ee54a"
             }
           }
+        },
+        {
+          "sha256": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-all-in-one-pack/revisions/ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d.png"
+          },
+          "bytes": 398698,
+          "id": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T16:13:57.262Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328107046/rectangle_large_type_2_d4ce8094a03256212de666e8621e2d15.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d"
+          }
         }
       ],
       "candidateRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
       "approvedRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328108626/rectangle_large_type_2_a20b7efd70ea5453e06527827d8cc689.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T16:16:27.418Z",
+        "revisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00362",
@@ -43521,7 +43551,7 @@
     },
     {
       "articleKey": "prefecture-household-consumption-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
       "revisions": [
         {
           "sha256": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
@@ -43606,11 +43636,41 @@
               "planSha256": "317776e48ea928689741ef29beefd477aa7819a01dbc4d119e487936ee9620c0"
             }
           }
+        },
+        {
+          "sha256": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-household-consumption-pack/revisions/42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572.png"
+          },
+          "bytes": 413087,
+          "id": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T16:24:15.828Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328108845/rectangle_large_type_2_e231b5f9102ba62bd93dfa364986ce9d.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572"
+          }
         }
       ],
       "candidateRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
       "approvedRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T16:25:58.254Z",
+        "revisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00367",

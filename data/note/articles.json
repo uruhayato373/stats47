@@ -8553,7 +8553,7 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 9800,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-all-in-one-pack",
       "body": {
         "store": "r2-private",
@@ -8561,10 +8561,12 @@
           "sha256": "cc572e00e7b5595eafcbbd4fae63d081d3cc0431b26bf0e46075ddb3b26e26c7",
           "files": 4,
           "bytes": 217090,
-          "savedAt": "2026-10-24T09:57:08.985Z"
+          "savedAt": "2026-10-24T16:17:16.324Z"
         },
-        "verifiedAt": "2026-10-24T09:57:08.985Z"
-      }
+        "verifiedAt": "2026-10-24T16:17:16.324Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "prefecture-free-trial-pack",
@@ -8594,7 +8596,7 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-household-consumption-pack",
       "body": {
         "store": "r2-private",
@@ -8602,10 +8604,12 @@
           "sha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
           "files": 4,
           "bytes": 241703,
-          "savedAt": "2026-10-24T12:00:05.203Z"
+          "savedAt": "2026-10-24T16:25:50.138Z"
         },
-        "verifiedAt": "2026-10-24T12:00:05.203Z"
-      }
+        "verifiedAt": "2026-10-24T16:25:50.138Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "b-ref-inc-a05",

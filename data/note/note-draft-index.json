@@ -320,16 +320,6 @@
       "r2_path": "note/product-sales/ppt-tourism-demand-deck",
       "status": "draft"
     },
-    "prefecture-all-in-one-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-all-in-one-pack",
-      "status": "draft"
-    },
-    "prefecture-household-consumption-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-household-consumption-pack",
-      "status": "draft"
-    },
     "service-business-comparison": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/service-business-comparison",

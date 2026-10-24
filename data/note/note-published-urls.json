@@ -3295,6 +3295,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-all-in-one-pack": {
+      "vertical": "product-sales",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "url": "https://note.com/stats47/n/nfa7d235eba85",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-all-in-one-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 9800
+    },
     "prefecture-disaster-infrastructure-pack": {
       "vertical": "product-sales",
       "title": "防災・交通・インフラを県別に比べる 230指標データ集",
@@ -3337,6 +3349,18 @@
       "is_paid": true,
       "published_at": "2026-10-24",
       "r2_path": "note/product-sales/prefecture-healthcare-nursing-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-household-consumption-pack": {
+      "vertical": "product-sales",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "url": "https://note.com/stats47/n/n554a047cf5be",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-household-consumption-pack",
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",

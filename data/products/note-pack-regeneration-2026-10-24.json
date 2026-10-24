@@ -10,7 +10,7 @@
     "totalBytes": 638847041,
     "officeValidated": 0,
     "publicationReady": 0,
-    "publishedWithDeferredOfficeValidation": 11,
+    "publishedWithDeferredOfficeValidation": 13,
     "noteArchivesPrepared": 13,
     "noteArchivesR2Verified": 13,
     "noteArchiveBytes": 145581718
@@ -317,7 +317,9 @@
         "entries": 8,
         "readbackVerified": true,
         "localPath": ".local/note-product-archives/P-12-v4-20261024-mac-r2.zip"
-      }
+      },
+      "notePublishedUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "notePublishedAt": "2026-10-24T16:12:52.000Z"
     },
     {
       "productId": "P-14",
@@ -340,7 +342,9 @@
         "entries": 7,
         "readbackVerified": true,
         "localPath": ".local/note-product-archives/P-14-v4-20261024-mac-r2.zip"
-      }
+      },
+      "notePublishedUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "notePublishedAt": "2026-10-24T16:23:33.000Z"
     }
   ]
 }

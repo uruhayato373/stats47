@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-24T15:17:04.045Z",
+  "generatedAt": "2026-10-24T16:25:58.344Z",
   "status": "pass",
   "articles": [
     {
-      "key": "prefecture-map-chart-assets-pack",
+      "key": "prefecture-household-consumption-pack",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/328096609/rectangle_large_type_2_d9ab6507430978c166503a1f2248f9ef.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-24T15:17:03.955Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-24T16:25:58.254Z"
     }
   ]
 }
