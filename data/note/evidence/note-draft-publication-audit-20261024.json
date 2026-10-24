@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T04:35:29.474Z",
+  "observedAt": "2026-10-24T04:42:34.223Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -345,14 +345,18 @@
       ],
       "decision": "hold-duplicate-title",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "published article with identical title; live note body has no inline images although text refers to a map",
+        "draft includes 3 chart PNGs; boxplot has clipped and overlapping labels and cannot be uploaded as-is",
+        "reconcile body/figures in existing note before retiring the draft; do not publish duplicate"
       ],
       "publishedUrl": null,
       "duplicateTextComparison": {
         "publishedKey": "recovered-nd5f8b5072cdb",
         "normalizedTwelveCharacterOverlap": 0.962,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
-        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+        "scope": "text only; article claims, figures, paid boundary and live version still require review",
+        "liveCheckedAt": "2026-10-24T04:37:27.067Z",
+        "liveInlineImages": 0
       }
     },
     {
@@ -615,7 +619,8 @@
       ],
       "decision": "hold-duplicate-title",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "published article with identical title; body/version reconciliation required",
+        "draft includes numerical and career-outcome claims presented as reported cases without source evidence; do not update live article or post a duplicate before evidence review"
       ],
       "publishedUrl": null,
       "duplicateTextComparison": {
@@ -1446,10 +1451,13 @@
       "publishedTitleMatches": [],
       "decision": "hold-product-sales",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "existing draft promises customer-data mapping, rankings and PowerPoint work, but the only live GEO-SERVICE-01 listing is a fixed land-price × 2020–2050 population analysis for one prefecture",
+        "live Coconala listing https://coconala.com/services/4387096 displays 受付休止中 on 2026-10-24; publication as an available service would mislead readers",
+        "rewrite against actual offer, reopen listing, review final manuscript and approve a new imagegen cover before posting"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "liveListingCheckedAt": "2026-10-24T04:42:34.223Z",
+      "liveListingStatus": "受付休止中"
     },
     {
       "articleKey": "service-regional-report",
@@ -1526,8 +1534,9 @@
       "publishedTitleMatches": [],
       "decision": "hold-product-sales",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "draft offers seven downloadable samples but has no corresponding downloadable assets or links",
+        "existing published P-13 trial-pack article https://note.com/stats47/n/n584098246188 provides a real ZIP but covers a narrower product; reconcile scope before publication",
+        "review final manuscript and approve a new imagegen cover after promised assets are verified"
       ],
       "publishedUrl": null
     },
