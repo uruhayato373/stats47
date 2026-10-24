@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T05:28:40.442Z",
+  "updatedAt": "2026-10-24T05:39:19.327Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -44020,7 +44020,7 @@
     },
     {
       "articleKey": "prefecture-tourism-lodging-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
       "revisions": [
         {
           "sha256": "6f87e8ed816b0081e4282155acf29d91cd5b78e4056df17ec894ef09d91f3aea",
@@ -44099,17 +44099,97 @@
               "bytes": 1208
             }
           }
+        },
+        {
+          "sha256": "eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-tourism-lodging-pack/revisions/eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77.png"
+          },
+          "bytes": 1970861,
+          "id": "eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-08d65054b4d8",
+          "createdAt": "2026-10-24T05:31:52.441Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "94d632e5096a6497e1c4eb1d9a2e29609244e53933bacc6b94f11265485e7797"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定4文言を確認。誤字・欠字・文字切れ・重なりなし。人物・架空の統計図なし。観光計画の題材が本文に一致。",
+            "reviewedAt": "2026-10-24T05:32:05.887Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "94d632e5096a6497e1c4eb1d9a2e29609244e53933bacc6b94f11265485e7797",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-tourism-lodging-pack/inputs/94d632e5096a6497e1c4eb1d9a2e29609244e53933bacc6b94f11265485e7797.json"
+              },
+              "bytes": 7397
+            },
+            "production": {
+              "id": "NCI-00375",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "08d65054b4d8cde0a6c41c0e2880469045c126b0ffe8e6390e6aadffe8bbcf11"
+            }
+          }
+        },
+        {
+          "sha256": "af21f4200bf3e6c07eef01ce7c1378ba8ef44a55caca80a08a43d8ca970e69c8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-tourism-lodging-pack/revisions/af21f4200bf3e6c07eef01ce7c1378ba8ef44a55caca80a08a43d8ca970e69c8.png"
+          },
+          "bytes": 431096,
+          "id": "af21f4200bf3e6c07eef01ce7c1378ba8ef44a55caca80a08a43d8ca970e69c8",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T05:39:15.888Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327860122/rectangle_large_type_2_12dc8af8294fe9865a47f0c34bcaefc9.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "af21f4200bf3e6c07eef01ce7c1378ba8ef44a55caca80a08a43d8ca970e69c8"
+          }
         }
       ],
-      "candidateRevisionId": "0f54033a45798d0c236a0a870649c0ea197f005ca7cf9c585cd3d0e7a9691392",
-      "approvedRevisionId": "0f54033a45798d0c236a0a870649c0ea197f005ca7cf9c585cd3d0e7a9691392",
-      "published": null,
+      "candidateRevisionId": "eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77",
+      "approvedRevisionId": "eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327860122/rectangle_large_type_2_12dc8af8294fe9865a47f0c34bcaefc9.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T05:39:15.888Z",
+        "revisionId": "af21f4200bf3e6c07eef01ce7c1378ba8ef44a55caca80a08a43d8ca970e69c8"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00375",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "宿泊・交通データ集",
+          "subline": "47都道府県・44指標",
+          "subject": "観光計画を下調べする用途を、無地の旅行案内資料・ノートPC・小さな旅行かばんで描く。紙や画面に文字・数値・グラフ・地図を描かず、実在サービス画面や商品ファイルの中身を再現しない。人物やロゴなし。",
+          "evidence": "P-03 v4-20261024-mac-r2 のデータ集は47都道府県44指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので完成画面を描かない。"
+        }
       }
     },
     {

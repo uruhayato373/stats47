@@ -3319,6 +3319,18 @@
       "status": "r2_ready",
       "price_jpy": 4000
     },
+    "prefecture-tourism-lodging-pack": {
+      "vertical": "product-sales",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "url": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-tourism-lodging-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "recovered-n023501038bd5": {
       "vertical": "stats47-note",
       "title": "なぜ埼玉が「日照時間日本一」なのか — 意外な答えは地形にあった",

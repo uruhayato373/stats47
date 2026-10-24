@@ -8558,18 +8558,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-tourism-lodging-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "8ba6b76c1a9a75503b001e86d980547dca5dbfdbbc0b3b4e1d79fa7badba7416",
+          "sha256": "2f836560fd83bdaa675dca10ea09bff68172ba09d878a621fa8ea8a26c85ee6a",
           "files": 4,
           "bytes": 103827,
-          "savedAt": "2026-10-12T22:05:34.662Z"
+          "savedAt": "2026-10-24T05:39:22.724Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:39:22.724Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-municipal-finance-pack",

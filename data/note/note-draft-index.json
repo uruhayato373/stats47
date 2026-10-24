@@ -430,11 +430,6 @@
       "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
       "status": "draft"
     },
-    "prefecture-tourism-lodging-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-tourism-lodging-pack",
-      "status": "draft"
-    },
     "service-business-comparison": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/service-business-comparison",
