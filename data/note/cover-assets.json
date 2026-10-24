@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T01:43:35.874Z",
+  "updatedAt": "2026-10-24T01:55:17.502Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -19697,7 +19697,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327785564/rectangle_large_type_2_6848aeb153428f250813a7e62192e4c9.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T01:43:32.883Z",
-        "revisionId": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1"
+        "revisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d"
       },
       "missingVersions": [],
       "production": {
@@ -30637,7 +30637,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327779403/rectangle_large_type_2_ef468439c8d16f797e7eb1043c2890e1.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T01:21:39.300Z",
-        "revisionId": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3"
+        "revisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6"
       },
       "missingVersions": [],
       "production": {

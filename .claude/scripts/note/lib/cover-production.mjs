@@ -128,7 +128,12 @@ export function coverProductionView(row, article, policies) {
   const policy = latestCoverPolicy(policies, article.category);
   const plan = buildCoverPlan(row, article, policies);
   const candidate = row.revisions.find(r => r.id === row.candidateRevisionId);
-  const matches = !!plan && candidate?.provenance.production?.planSha256 === plan.planSha256;
+  // A draft has no note URL when its cover is generated. Publishing assigns the URL
+  // without changing the approved image or copy, so retain that frozen plan.
+  const draftPlan = article.noteUrl ? buildCoverPlan(row, { ...article, noteUrl: null }, policies) : null;
+  const candidatePlanSha = candidate?.provenance.production?.planSha256;
+  const matches = !!plan && !!candidatePlanSha && [plan.planSha256, draftPlan?.planSha256]
+    .includes(candidatePlanSha);
   const outdated = !!row.production && (row.production.policyId !== policy.id || row.production.policyVersion !== policy.version);
   const stage = !row.production ? 'unplanned' : !plan ? 'brief' : outdated ? 'stale'
     : !matches ? (candidate?.provenance.production ? 'stale' : 'ready')

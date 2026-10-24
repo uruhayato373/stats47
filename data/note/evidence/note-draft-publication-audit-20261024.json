@@ -349,6 +349,17 @@
         "misplacedFigureCount": 0,
         "eyecatchConfigured": true,
         "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "a-volunteer-activity-annual-participation-rate-15plus",
+        "url": "https://note.com/stats47/n/n5bf048142f66",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/327785564/rectangle_large_type_2_6848aeb153428f250813a7e62192e4c9.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+        "approvedRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+        "sourceSha256": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+        "meanPixelError": 2.7270743936567166,
+        "largeDeltaFraction": 0.006226679104477612,
+        "verifiedAt": "2026-10-24T01:55:17.479Z"
       }
     },
     {
@@ -1785,6 +1796,17 @@
         "embeddedFigureCount": 1,
         "eyecatchConfigured": true,
         "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "h-howto-mymaps-share",
+        "url": "https://note.com/stats47/n/n08d8b24bf9c5",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/327779403/rectangle_large_type_2_ef468439c8d16f797e7eb1043c2890e1.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+        "approvedRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+        "sourceSha256": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+        "meanPixelError": 3.1272819496268656,
+        "largeDeltaFraction": 0.004900497512437811,
+        "verifiedAt": "2026-10-24T01:55:16.082Z"
       }
     },
     {
